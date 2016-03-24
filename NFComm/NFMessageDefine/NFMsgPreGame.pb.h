@@ -29,8 +29,7 @@
 #include "NFMsgBase.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace NFMsg
-{
+namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_NFMsgPreGame_2eproto();
@@ -59,13 +58,12 @@ class ServerHeartBeat;
 class RoleOnlineNotify;
 class RoleOfflineNotify;
 
-enum EServerState
-{
-    EST_CRASH = 0,
-    EST_NARMAL = 1,
-    EST_BUSY = 2,
-    EST_FIRE = 3,
-    EST_MAINTEN = 4
+enum EServerState {
+  EST_CRASH = 0,
+  EST_NARMAL = 1,
+  EST_BUSY = 2,
+  EST_FIRE = 3,
+  EST_MAINTEN = 4
 };
 bool EServerState_IsValid(int value);
 const EServerState EServerState_MIN = EST_CRASH;
@@ -73,21 +71,18 @@ const EServerState EServerState_MAX = EST_MAINTEN;
 const int EServerState_ARRAYSIZE = EServerState_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EServerState_descriptor();
-inline const ::std::string& EServerState_Name(EServerState value)
-{
-    return ::google::protobuf::internal::NameOfEnum(
-               EServerState_descriptor(), value);
+inline const ::std::string& EServerState_Name(EServerState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EServerState_descriptor(), value);
 }
 inline bool EServerState_Parse(
-    const ::std::string& name, EServerState* value)
-{
-    return ::google::protobuf::internal::ParseNamedEnum<EServerState>(
-               EServerState_descriptor(), name, value);
+    const ::std::string& name, EServerState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EServerState>(
+    EServerState_descriptor(), name, value);
 }
-enum ReqServerListType
-{
-    RSLT_WORLD_SERVER = 0,
-    RSLT_GAMES_ERVER = 1
+enum ReqServerListType {
+  RSLT_WORLD_SERVER = 0,
+  RSLT_GAMES_ERVER = 1
 };
 bool ReqServerListType_IsValid(int value);
 const ReqServerListType ReqServerListType_MIN = RSLT_WORLD_SERVER;
@@ -95,2573 +90,2424 @@ const ReqServerListType ReqServerListType_MAX = RSLT_GAMES_ERVER;
 const int ReqServerListType_ARRAYSIZE = ReqServerListType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor();
-inline const ::std::string& ReqServerListType_Name(ReqServerListType value)
-{
-    return ::google::protobuf::internal::NameOfEnum(
-               ReqServerListType_descriptor(), value);
+inline const ::std::string& ReqServerListType_Name(ReqServerListType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqServerListType_descriptor(), value);
 }
 inline bool ReqServerListType_Parse(
-    const ::std::string& name, ReqServerListType* value)
-{
-    return ::google::protobuf::internal::ParseNamedEnum<ReqServerListType>(
-               ReqServerListType_descriptor(), name, value);
+    const ::std::string& name, ReqServerListType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqServerListType>(
+    ReqServerListType_descriptor(), name, value);
 }
 // ===================================================================
 
-class ServerInfoReport : public ::google::protobuf::Message
-{
-public:
-    ServerInfoReport();
-    virtual ~ServerInfoReport();
+class ServerInfoReport : public ::google::protobuf::Message {
+ public:
+  ServerInfoReport();
+  virtual ~ServerInfoReport();
 
-    ServerInfoReport(const ServerInfoReport& from);
+  ServerInfoReport(const ServerInfoReport& from);
 
-    inline ServerInfoReport& operator=(const ServerInfoReport& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ServerInfoReport& operator=(const ServerInfoReport& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ServerInfoReport& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerInfoReport& default_instance();
 
-    void Swap(ServerInfoReport* other);
+  void Swap(ServerInfoReport* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ServerInfoReport* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ServerInfoReport& from);
-    void MergeFrom(const ServerInfoReport& from);
-    void Clear();
-    bool IsInitialized() const;
+  ServerInfoReport* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerInfoReport& from);
+  void MergeFrom(const ServerInfoReport& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 server_id = 1;
-    inline bool has_server_id() const;
-    inline void clear_server_id();
-    static const int kServerIdFieldNumber = 1;
-    inline ::google::protobuf::int32 server_id() const;
-    inline void set_server_id(::google::protobuf::int32 value);
+  // required int32 server_id = 1;
+  inline bool has_server_id() const;
+  inline void clear_server_id();
+  static const int kServerIdFieldNumber = 1;
+  inline ::google::protobuf::int32 server_id() const;
+  inline void set_server_id(::google::protobuf::int32 value);
 
-    // required bytes server_name = 2;
-    inline bool has_server_name() const;
-    inline void clear_server_name();
-    static const int kServerNameFieldNumber = 2;
-    inline const ::std::string& server_name() const;
-    inline void set_server_name(const ::std::string& value);
-    inline void set_server_name(const char* value);
-    inline void set_server_name(const void* value, size_t size);
-    inline ::std::string* mutable_server_name();
-    inline ::std::string* release_server_name();
-    inline void set_allocated_server_name(::std::string* server_name);
+  // required bytes server_name = 2;
+  inline bool has_server_name() const;
+  inline void clear_server_name();
+  static const int kServerNameFieldNumber = 2;
+  inline const ::std::string& server_name() const;
+  inline void set_server_name(const ::std::string& value);
+  inline void set_server_name(const char* value);
+  inline void set_server_name(const void* value, size_t size);
+  inline ::std::string* mutable_server_name();
+  inline ::std::string* release_server_name();
+  inline void set_allocated_server_name(::std::string* server_name);
 
-    // required bytes server_ip = 3;
-    inline bool has_server_ip() const;
-    inline void clear_server_ip();
-    static const int kServerIpFieldNumber = 3;
-    inline const ::std::string& server_ip() const;
-    inline void set_server_ip(const ::std::string& value);
-    inline void set_server_ip(const char* value);
-    inline void set_server_ip(const void* value, size_t size);
-    inline ::std::string* mutable_server_ip();
-    inline ::std::string* release_server_ip();
-    inline void set_allocated_server_ip(::std::string* server_ip);
+  // required bytes server_ip = 3;
+  inline bool has_server_ip() const;
+  inline void clear_server_ip();
+  static const int kServerIpFieldNumber = 3;
+  inline const ::std::string& server_ip() const;
+  inline void set_server_ip(const ::std::string& value);
+  inline void set_server_ip(const char* value);
+  inline void set_server_ip(const void* value, size_t size);
+  inline ::std::string* mutable_server_ip();
+  inline ::std::string* release_server_ip();
+  inline void set_allocated_server_ip(::std::string* server_ip);
 
-    // required int32 server_port = 4;
-    inline bool has_server_port() const;
-    inline void clear_server_port();
-    static const int kServerPortFieldNumber = 4;
-    inline ::google::protobuf::int32 server_port() const;
-    inline void set_server_port(::google::protobuf::int32 value);
+  // required int32 server_port = 4;
+  inline bool has_server_port() const;
+  inline void clear_server_port();
+  static const int kServerPortFieldNumber = 4;
+  inline ::google::protobuf::int32 server_port() const;
+  inline void set_server_port(::google::protobuf::int32 value);
 
-    // required int32 server_max_online = 5;
-    inline bool has_server_max_online() const;
-    inline void clear_server_max_online();
-    static const int kServerMaxOnlineFieldNumber = 5;
-    inline ::google::protobuf::int32 server_max_online() const;
-    inline void set_server_max_online(::google::protobuf::int32 value);
+  // required int32 server_max_online = 5;
+  inline bool has_server_max_online() const;
+  inline void clear_server_max_online();
+  static const int kServerMaxOnlineFieldNumber = 5;
+  inline ::google::protobuf::int32 server_max_online() const;
+  inline void set_server_max_online(::google::protobuf::int32 value);
 
-    // required int32 server_cur_count = 6;
-    inline bool has_server_cur_count() const;
-    inline void clear_server_cur_count();
-    static const int kServerCurCountFieldNumber = 6;
-    inline ::google::protobuf::int32 server_cur_count() const;
-    inline void set_server_cur_count(::google::protobuf::int32 value);
+  // required int32 server_cur_count = 6;
+  inline bool has_server_cur_count() const;
+  inline void clear_server_cur_count();
+  static const int kServerCurCountFieldNumber = 6;
+  inline ::google::protobuf::int32 server_cur_count() const;
+  inline void set_server_cur_count(::google::protobuf::int32 value);
 
-    // required .NFMsg.EServerState server_state = 7;
-    inline bool has_server_state() const;
-    inline void clear_server_state();
-    static const int kServerStateFieldNumber = 7;
-    inline ::NFMsg::EServerState server_state() const;
-    inline void set_server_state(::NFMsg::EServerState value);
+  // required .NFMsg.EServerState server_state = 7;
+  inline bool has_server_state() const;
+  inline void clear_server_state();
+  static const int kServerStateFieldNumber = 7;
+  inline ::NFMsg::EServerState server_state() const;
+  inline void set_server_state(::NFMsg::EServerState value);
 
-    // required int32 server_type = 8;
-    inline bool has_server_type() const;
-    inline void clear_server_type();
-    static const int kServerTypeFieldNumber = 8;
-    inline ::google::protobuf::int32 server_type() const;
-    inline void set_server_type(::google::protobuf::int32 value);
+  // required int32 server_type = 8;
+  inline bool has_server_type() const;
+  inline void clear_server_type();
+  static const int kServerTypeFieldNumber = 8;
+  inline ::google::protobuf::int32 server_type() const;
+  inline void set_server_type(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReport)
-private:
-    inline void set_has_server_id();
-    inline void clear_has_server_id();
-    inline void set_has_server_name();
-    inline void clear_has_server_name();
-    inline void set_has_server_ip();
-    inline void clear_has_server_ip();
-    inline void set_has_server_port();
-    inline void clear_has_server_port();
-    inline void set_has_server_max_online();
-    inline void clear_has_server_max_online();
-    inline void set_has_server_cur_count();
-    inline void clear_has_server_cur_count();
-    inline void set_has_server_state();
-    inline void clear_has_server_state();
-    inline void set_has_server_type();
-    inline void clear_has_server_type();
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReport)
+ private:
+  inline void set_has_server_id();
+  inline void clear_has_server_id();
+  inline void set_has_server_name();
+  inline void clear_has_server_name();
+  inline void set_has_server_ip();
+  inline void clear_has_server_ip();
+  inline void set_has_server_port();
+  inline void clear_has_server_port();
+  inline void set_has_server_max_online();
+  inline void clear_has_server_max_online();
+  inline void set_has_server_cur_count();
+  inline void clear_has_server_cur_count();
+  inline void set_has_server_state();
+  inline void clear_has_server_state();
+  inline void set_has_server_type();
+  inline void clear_has_server_type();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* server_name_;
-    ::google::protobuf::int32 server_id_;
-    ::google::protobuf::int32 server_port_;
-    ::std::string* server_ip_;
-    ::google::protobuf::int32 server_max_online_;
-    ::google::protobuf::int32 server_cur_count_;
-    int server_state_;
-    ::google::protobuf::int32 server_type_;
+  ::std::string* server_name_;
+  ::google::protobuf::int32 server_id_;
+  ::google::protobuf::int32 server_port_;
+  ::std::string* server_ip_;
+  ::google::protobuf::int32 server_max_online_;
+  ::google::protobuf::int32 server_cur_count_;
+  int server_state_;
+  ::google::protobuf::int32 server_type_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ServerInfoReport* default_instance_;
+  void InitAsDefaultInstance();
+  static ServerInfoReport* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ServerInfoReportList : public ::google::protobuf::Message
-{
-public:
-    ServerInfoReportList();
-    virtual ~ServerInfoReportList();
+class ServerInfoReportList : public ::google::protobuf::Message {
+ public:
+  ServerInfoReportList();
+  virtual ~ServerInfoReportList();
 
-    ServerInfoReportList(const ServerInfoReportList& from);
+  ServerInfoReportList(const ServerInfoReportList& from);
 
-    inline ServerInfoReportList& operator=(const ServerInfoReportList& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ServerInfoReportList& operator=(const ServerInfoReportList& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ServerInfoReportList& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerInfoReportList& default_instance();
 
-    void Swap(ServerInfoReportList* other);
+  void Swap(ServerInfoReportList* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ServerInfoReportList* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ServerInfoReportList& from);
-    void MergeFrom(const ServerInfoReportList& from);
-    void Clear();
-    bool IsInitialized() const;
+  ServerInfoReportList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerInfoReportList& from);
+  void MergeFrom(const ServerInfoReportList& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // repeated .NFMsg.ServerInfoReport server_list = 1;
-    inline int server_list_size() const;
-    inline void clear_server_list();
-    static const int kServerListFieldNumber = 1;
-    inline const ::NFMsg::ServerInfoReport& server_list(int index) const;
-    inline ::NFMsg::ServerInfoReport* mutable_server_list(int index);
-    inline ::NFMsg::ServerInfoReport* add_server_list();
-    inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >&
-    server_list() const;
-    inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >*
-    mutable_server_list();
+  // repeated .NFMsg.ServerInfoReport server_list = 1;
+  inline int server_list_size() const;
+  inline void clear_server_list();
+  static const int kServerListFieldNumber = 1;
+  inline const ::NFMsg::ServerInfoReport& server_list(int index) const;
+  inline ::NFMsg::ServerInfoReport* mutable_server_list(int index);
+  inline ::NFMsg::ServerInfoReport* add_server_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >&
+      server_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >*
+      mutable_server_list();
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReportList)
-private:
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReportList)
+ private:
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport > server_list_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport > server_list_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ServerInfoReportList* default_instance_;
+  void InitAsDefaultInstance();
+  static ServerInfoReportList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckEventResult : public ::google::protobuf::Message
-{
-public:
-    AckEventResult();
-    virtual ~AckEventResult();
+class AckEventResult : public ::google::protobuf::Message {
+ public:
+  AckEventResult();
+  virtual ~AckEventResult();
 
-    AckEventResult(const AckEventResult& from);
+  AckEventResult(const AckEventResult& from);
 
-    inline AckEventResult& operator=(const AckEventResult& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline AckEventResult& operator=(const AckEventResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const AckEventResult& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckEventResult& default_instance();
 
-    void Swap(AckEventResult* other);
+  void Swap(AckEventResult* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    AckEventResult* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const AckEventResult& from);
-    void MergeFrom(const AckEventResult& from);
-    void Clear();
-    bool IsInitialized() const;
+  AckEventResult* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckEventResult& from);
+  void MergeFrom(const AckEventResult& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required .NFMsg.EGameEventCode event_code = 1;
-    inline bool has_event_code() const;
-    inline void clear_event_code();
-    static const int kEventCodeFieldNumber = 1;
-    inline ::NFMsg::EGameEventCode event_code() const;
-    inline void set_event_code(::NFMsg::EGameEventCode value);
+  // required .NFMsg.EGameEventCode event_code = 1;
+  inline bool has_event_code() const;
+  inline void clear_event_code();
+  static const int kEventCodeFieldNumber = 1;
+  inline ::NFMsg::EGameEventCode event_code() const;
+  inline void set_event_code(::NFMsg::EGameEventCode value);
 
-    // optional .NFMsg.Ident event_object = 2;
-    inline bool has_event_object() const;
-    inline void clear_event_object();
-    static const int kEventObjectFieldNumber = 2;
-    inline const ::NFMsg::Ident& event_object() const;
-    inline ::NFMsg::Ident* mutable_event_object();
-    inline ::NFMsg::Ident* release_event_object();
-    inline void set_allocated_event_object(::NFMsg::Ident* event_object);
+  // optional .NFMsg.Ident event_object = 2;
+  inline bool has_event_object() const;
+  inline void clear_event_object();
+  static const int kEventObjectFieldNumber = 2;
+  inline const ::NFMsg::Ident& event_object() const;
+  inline ::NFMsg::Ident* mutable_event_object();
+  inline ::NFMsg::Ident* release_event_object();
+  inline void set_allocated_event_object(::NFMsg::Ident* event_object);
 
-    // optional .NFMsg.Ident event_client = 3;
-    inline bool has_event_client() const;
-    inline void clear_event_client();
-    static const int kEventClientFieldNumber = 3;
-    inline const ::NFMsg::Ident& event_client() const;
-    inline ::NFMsg::Ident* mutable_event_client();
-    inline ::NFMsg::Ident* release_event_client();
-    inline void set_allocated_event_client(::NFMsg::Ident* event_client);
+  // optional .NFMsg.Ident event_client = 3;
+  inline bool has_event_client() const;
+  inline void clear_event_client();
+  static const int kEventClientFieldNumber = 3;
+  inline const ::NFMsg::Ident& event_client() const;
+  inline ::NFMsg::Ident* mutable_event_client();
+  inline ::NFMsg::Ident* release_event_client();
+  inline void set_allocated_event_client(::NFMsg::Ident* event_client);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.AckEventResult)
-private:
-    inline void set_has_event_code();
-    inline void clear_has_event_code();
-    inline void set_has_event_object();
-    inline void clear_has_event_object();
-    inline void set_has_event_client();
-    inline void clear_has_event_client();
+  // @@protoc_insertion_point(class_scope:NFMsg.AckEventResult)
+ private:
+  inline void set_has_event_code();
+  inline void clear_has_event_code();
+  inline void set_has_event_object();
+  inline void clear_has_event_object();
+  inline void set_has_event_client();
+  inline void clear_has_event_client();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::NFMsg::Ident* event_object_;
-    ::NFMsg::Ident* event_client_;
-    int event_code_;
+  ::NFMsg::Ident* event_object_;
+  ::NFMsg::Ident* event_client_;
+  int event_code_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static AckEventResult* default_instance_;
+  void InitAsDefaultInstance();
+  static AckEventResult* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqAccountLogin : public ::google::protobuf::Message
-{
-public:
-    ReqAccountLogin();
-    virtual ~ReqAccountLogin();
+class ReqAccountLogin : public ::google::protobuf::Message {
+ public:
+  ReqAccountLogin();
+  virtual ~ReqAccountLogin();
 
-    ReqAccountLogin(const ReqAccountLogin& from);
+  ReqAccountLogin(const ReqAccountLogin& from);
 
-    inline ReqAccountLogin& operator=(const ReqAccountLogin& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqAccountLogin& operator=(const ReqAccountLogin& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqAccountLogin& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAccountLogin& default_instance();
 
-    void Swap(ReqAccountLogin* other);
+  void Swap(ReqAccountLogin* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqAccountLogin* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqAccountLogin& from);
-    void MergeFrom(const ReqAccountLogin& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqAccountLogin* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAccountLogin& from);
+  void MergeFrom(const ReqAccountLogin& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required bytes account = 2;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 2;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required bytes password = 3;
-    inline bool has_password() const;
-    inline void clear_password();
-    static const int kPasswordFieldNumber = 3;
-    inline const ::std::string& password() const;
-    inline void set_password(const ::std::string& value);
-    inline void set_password(const char* value);
-    inline void set_password(const void* value, size_t size);
-    inline ::std::string* mutable_password();
-    inline ::std::string* release_password();
-    inline void set_allocated_password(::std::string* password);
+  // required bytes password = 3;
+  inline bool has_password() const;
+  inline void clear_password();
+  static const int kPasswordFieldNumber = 3;
+  inline const ::std::string& password() const;
+  inline void set_password(const ::std::string& value);
+  inline void set_password(const char* value);
+  inline void set_password(const void* value, size_t size);
+  inline ::std::string* mutable_password();
+  inline ::std::string* release_password();
+  inline void set_allocated_password(::std::string* password);
 
-    // required bytes security_code = 4;
-    inline bool has_security_code() const;
-    inline void clear_security_code();
-    static const int kSecurityCodeFieldNumber = 4;
-    inline const ::std::string& security_code() const;
-    inline void set_security_code(const ::std::string& value);
-    inline void set_security_code(const char* value);
-    inline void set_security_code(const void* value, size_t size);
-    inline ::std::string* mutable_security_code();
-    inline ::std::string* release_security_code();
-    inline void set_allocated_security_code(::std::string* security_code);
+  // required bytes security_code = 4;
+  inline bool has_security_code() const;
+  inline void clear_security_code();
+  static const int kSecurityCodeFieldNumber = 4;
+  inline const ::std::string& security_code() const;
+  inline void set_security_code(const ::std::string& value);
+  inline void set_security_code(const char* value);
+  inline void set_security_code(const void* value, size_t size);
+  inline ::std::string* mutable_security_code();
+  inline ::std::string* release_security_code();
+  inline void set_allocated_security_code(::std::string* security_code);
 
-    // required bytes signBuff = 5;
-    inline bool has_signbuff() const;
-    inline void clear_signbuff();
-    static const int kSignBuffFieldNumber = 5;
-    inline const ::std::string& signbuff() const;
-    inline void set_signbuff(const ::std::string& value);
-    inline void set_signbuff(const char* value);
-    inline void set_signbuff(const void* value, size_t size);
-    inline ::std::string* mutable_signbuff();
-    inline ::std::string* release_signbuff();
-    inline void set_allocated_signbuff(::std::string* signbuff);
+  // required bytes signBuff = 5;
+  inline bool has_signbuff() const;
+  inline void clear_signbuff();
+  static const int kSignBuffFieldNumber = 5;
+  inline const ::std::string& signbuff() const;
+  inline void set_signbuff(const ::std::string& value);
+  inline void set_signbuff(const char* value);
+  inline void set_signbuff(const void* value, size_t size);
+  inline ::std::string* mutable_signbuff();
+  inline ::std::string* release_signbuff();
+  inline void set_allocated_signbuff(::std::string* signbuff);
 
-    // required int32 clientVersion = 6;
-    inline bool has_clientversion() const;
-    inline void clear_clientversion();
-    static const int kClientVersionFieldNumber = 6;
-    inline ::google::protobuf::int32 clientversion() const;
-    inline void set_clientversion(::google::protobuf::int32 value);
+  // required int32 clientVersion = 6;
+  inline bool has_clientversion() const;
+  inline void clear_clientversion();
+  static const int kClientVersionFieldNumber = 6;
+  inline ::google::protobuf::int32 clientversion() const;
+  inline void set_clientversion(::google::protobuf::int32 value);
 
-    // required int32 loginMode = 7;
-    inline bool has_loginmode() const;
-    inline void clear_loginmode();
-    static const int kLoginModeFieldNumber = 7;
-    inline ::google::protobuf::int32 loginmode() const;
-    inline void set_loginmode(::google::protobuf::int32 value);
+  // required int32 loginMode = 7;
+  inline bool has_loginmode() const;
+  inline void clear_loginmode();
+  static const int kLoginModeFieldNumber = 7;
+  inline ::google::protobuf::int32 loginmode() const;
+  inline void set_loginmode(::google::protobuf::int32 value);
 
-    // required int32 clientIP = 8;
-    inline bool has_clientip() const;
-    inline void clear_clientip();
-    static const int kClientIPFieldNumber = 8;
-    inline ::google::protobuf::int32 clientip() const;
-    inline void set_clientip(::google::protobuf::int32 value);
+  // required int32 clientIP = 8;
+  inline bool has_clientip() const;
+  inline void clear_clientip();
+  static const int kClientIPFieldNumber = 8;
+  inline ::google::protobuf::int32 clientip() const;
+  inline void set_clientip(::google::protobuf::int32 value);
 
-    // required int64 clientMAC = 9;
-    inline bool has_clientmac() const;
-    inline void clear_clientmac();
-    static const int kClientMACFieldNumber = 9;
-    inline ::google::protobuf::int64 clientmac() const;
-    inline void set_clientmac(::google::protobuf::int64 value);
+  // required int64 clientMAC = 9;
+  inline bool has_clientmac() const;
+  inline void clear_clientmac();
+  static const int kClientMACFieldNumber = 9;
+  inline ::google::protobuf::int64 clientmac() const;
+  inline void set_clientmac(::google::protobuf::int64 value);
 
-    // required bytes device_info = 10;
-    inline bool has_device_info() const;
-    inline void clear_device_info();
-    static const int kDeviceInfoFieldNumber = 10;
-    inline const ::std::string& device_info() const;
-    inline void set_device_info(const ::std::string& value);
-    inline void set_device_info(const char* value);
-    inline void set_device_info(const void* value, size_t size);
-    inline ::std::string* mutable_device_info();
-    inline ::std::string* release_device_info();
-    inline void set_allocated_device_info(::std::string* device_info);
+  // required bytes device_info = 10;
+  inline bool has_device_info() const;
+  inline void clear_device_info();
+  static const int kDeviceInfoFieldNumber = 10;
+  inline const ::std::string& device_info() const;
+  inline void set_device_info(const ::std::string& value);
+  inline void set_device_info(const char* value);
+  inline void set_device_info(const void* value, size_t size);
+  inline ::std::string* mutable_device_info();
+  inline ::std::string* release_device_info();
+  inline void set_allocated_device_info(::std::string* device_info);
 
-    // required bytes extra_info = 11;
-    inline bool has_extra_info() const;
-    inline void clear_extra_info();
-    static const int kExtraInfoFieldNumber = 11;
-    inline const ::std::string& extra_info() const;
-    inline void set_extra_info(const ::std::string& value);
-    inline void set_extra_info(const char* value);
-    inline void set_extra_info(const void* value, size_t size);
-    inline ::std::string* mutable_extra_info();
-    inline ::std::string* release_extra_info();
-    inline void set_allocated_extra_info(::std::string* extra_info);
+  // required bytes extra_info = 11;
+  inline bool has_extra_info() const;
+  inline void clear_extra_info();
+  static const int kExtraInfoFieldNumber = 11;
+  inline const ::std::string& extra_info() const;
+  inline void set_extra_info(const ::std::string& value);
+  inline void set_extra_info(const char* value);
+  inline void set_extra_info(const void* value, size_t size);
+  inline ::std::string* mutable_extra_info();
+  inline ::std::string* release_extra_info();
+  inline void set_allocated_extra_info(::std::string* extra_info);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqAccountLogin)
-private:
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_password();
-    inline void clear_has_password();
-    inline void set_has_security_code();
-    inline void clear_has_security_code();
-    inline void set_has_signbuff();
-    inline void clear_has_signbuff();
-    inline void set_has_clientversion();
-    inline void clear_has_clientversion();
-    inline void set_has_loginmode();
-    inline void clear_has_loginmode();
-    inline void set_has_clientip();
-    inline void clear_has_clientip();
-    inline void set_has_clientmac();
-    inline void clear_has_clientmac();
-    inline void set_has_device_info();
-    inline void clear_has_device_info();
-    inline void set_has_extra_info();
-    inline void clear_has_extra_info();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAccountLogin)
+ private:
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_password();
+  inline void clear_has_password();
+  inline void set_has_security_code();
+  inline void clear_has_security_code();
+  inline void set_has_signbuff();
+  inline void clear_has_signbuff();
+  inline void set_has_clientversion();
+  inline void clear_has_clientversion();
+  inline void set_has_loginmode();
+  inline void clear_has_loginmode();
+  inline void set_has_clientip();
+  inline void clear_has_clientip();
+  inline void set_has_clientmac();
+  inline void clear_has_clientmac();
+  inline void set_has_device_info();
+  inline void clear_has_device_info();
+  inline void set_has_extra_info();
+  inline void clear_has_extra_info();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::std::string* password_;
-    ::std::string* security_code_;
-    ::std::string* signbuff_;
-    ::google::protobuf::int32 clientversion_;
-    ::google::protobuf::int32 loginmode_;
-    ::google::protobuf::int64 clientmac_;
-    ::std::string* device_info_;
-    ::std::string* extra_info_;
-    ::google::protobuf::int32 clientip_;
+  ::std::string* account_;
+  ::std::string* password_;
+  ::std::string* security_code_;
+  ::std::string* signbuff_;
+  ::google::protobuf::int32 clientversion_;
+  ::google::protobuf::int32 loginmode_;
+  ::google::protobuf::int64 clientmac_;
+  ::std::string* device_info_;
+  ::std::string* extra_info_;
+  ::google::protobuf::int32 clientip_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqAccountLogin* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqAccountLogin* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqAccountLogout : public ::google::protobuf::Message
-{
-public:
-    ReqAccountLogout();
-    virtual ~ReqAccountLogout();
+class ReqAccountLogout : public ::google::protobuf::Message {
+ public:
+  ReqAccountLogout();
+  virtual ~ReqAccountLogout();
 
-    ReqAccountLogout(const ReqAccountLogout& from);
+  ReqAccountLogout(const ReqAccountLogout& from);
 
-    inline ReqAccountLogout& operator=(const ReqAccountLogout& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqAccountLogout& operator=(const ReqAccountLogout& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqAccountLogout& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAccountLogout& default_instance();
 
-    void Swap(ReqAccountLogout* other);
+  void Swap(ReqAccountLogout* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqAccountLogout* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqAccountLogout& from);
-    void MergeFrom(const ReqAccountLogout& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqAccountLogout* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAccountLogout& from);
+  void MergeFrom(const ReqAccountLogout& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required bytes account = 2;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 2;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required bytes extra_info = 3;
-    inline bool has_extra_info() const;
-    inline void clear_extra_info();
-    static const int kExtraInfoFieldNumber = 3;
-    inline const ::std::string& extra_info() const;
-    inline void set_extra_info(const ::std::string& value);
-    inline void set_extra_info(const char* value);
-    inline void set_extra_info(const void* value, size_t size);
-    inline ::std::string* mutable_extra_info();
-    inline ::std::string* release_extra_info();
-    inline void set_allocated_extra_info(::std::string* extra_info);
+  // required bytes extra_info = 3;
+  inline bool has_extra_info() const;
+  inline void clear_extra_info();
+  static const int kExtraInfoFieldNumber = 3;
+  inline const ::std::string& extra_info() const;
+  inline void set_extra_info(const ::std::string& value);
+  inline void set_extra_info(const char* value);
+  inline void set_extra_info(const void* value, size_t size);
+  inline ::std::string* mutable_extra_info();
+  inline ::std::string* release_extra_info();
+  inline void set_allocated_extra_info(::std::string* extra_info);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqAccountLogout)
-private:
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_extra_info();
-    inline void clear_has_extra_info();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAccountLogout)
+ private:
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_extra_info();
+  inline void clear_has_extra_info();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::std::string* extra_info_;
+  ::std::string* account_;
+  ::std::string* extra_info_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqAccountLogout* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqAccountLogout* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ServerInfo : public ::google::protobuf::Message
-{
-public:
-    ServerInfo();
-    virtual ~ServerInfo();
+class ServerInfo : public ::google::protobuf::Message {
+ public:
+  ServerInfo();
+  virtual ~ServerInfo();
 
-    ServerInfo(const ServerInfo& from);
+  ServerInfo(const ServerInfo& from);
 
-    inline ServerInfo& operator=(const ServerInfo& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ServerInfo& operator=(const ServerInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ServerInfo& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerInfo& default_instance();
 
-    void Swap(ServerInfo* other);
+  void Swap(ServerInfo* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ServerInfo* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ServerInfo& from);
-    void MergeFrom(const ServerInfo& from);
-    void Clear();
-    bool IsInitialized() const;
+  ServerInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerInfo& from);
+  void MergeFrom(const ServerInfo& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 server_id = 1;
-    inline bool has_server_id() const;
-    inline void clear_server_id();
-    static const int kServerIdFieldNumber = 1;
-    inline ::google::protobuf::int32 server_id() const;
-    inline void set_server_id(::google::protobuf::int32 value);
+  // required int32 server_id = 1;
+  inline bool has_server_id() const;
+  inline void clear_server_id();
+  static const int kServerIdFieldNumber = 1;
+  inline ::google::protobuf::int32 server_id() const;
+  inline void set_server_id(::google::protobuf::int32 value);
 
-    // required bytes name = 2;
-    inline bool has_name() const;
-    inline void clear_name();
-    static const int kNameFieldNumber = 2;
-    inline const ::std::string& name() const;
-    inline void set_name(const ::std::string& value);
-    inline void set_name(const char* value);
-    inline void set_name(const void* value, size_t size);
-    inline ::std::string* mutable_name();
-    inline ::std::string* release_name();
-    inline void set_allocated_name(::std::string* name);
+  // required bytes name = 2;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 2;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
-    // required int32 wait_count = 3;
-    inline bool has_wait_count() const;
-    inline void clear_wait_count();
-    static const int kWaitCountFieldNumber = 3;
-    inline ::google::protobuf::int32 wait_count() const;
-    inline void set_wait_count(::google::protobuf::int32 value);
+  // required int32 wait_count = 3;
+  inline bool has_wait_count() const;
+  inline void clear_wait_count();
+  static const int kWaitCountFieldNumber = 3;
+  inline ::google::protobuf::int32 wait_count() const;
+  inline void set_wait_count(::google::protobuf::int32 value);
 
-    // required .NFMsg.EServerState status = 4;
-    inline bool has_status() const;
-    inline void clear_status();
-    static const int kStatusFieldNumber = 4;
-    inline ::NFMsg::EServerState status() const;
-    inline void set_status(::NFMsg::EServerState value);
+  // required .NFMsg.EServerState status = 4;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 4;
+  inline ::NFMsg::EServerState status() const;
+  inline void set_status(::NFMsg::EServerState value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ServerInfo)
-private:
-    inline void set_has_server_id();
-    inline void clear_has_server_id();
-    inline void set_has_name();
-    inline void clear_has_name();
-    inline void set_has_wait_count();
-    inline void clear_has_wait_count();
-    inline void set_has_status();
-    inline void clear_has_status();
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerInfo)
+ private:
+  inline void set_has_server_id();
+  inline void clear_has_server_id();
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_wait_count();
+  inline void clear_has_wait_count();
+  inline void set_has_status();
+  inline void clear_has_status();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* name_;
-    ::google::protobuf::int32 server_id_;
-    ::google::protobuf::int32 wait_count_;
-    int status_;
+  ::std::string* name_;
+  ::google::protobuf::int32 server_id_;
+  ::google::protobuf::int32 wait_count_;
+  int status_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ServerInfo* default_instance_;
+  void InitAsDefaultInstance();
+  static ServerInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqServerList : public ::google::protobuf::Message
-{
-public:
-    ReqServerList();
-    virtual ~ReqServerList();
+class ReqServerList : public ::google::protobuf::Message {
+ public:
+  ReqServerList();
+  virtual ~ReqServerList();
 
-    ReqServerList(const ReqServerList& from);
+  ReqServerList(const ReqServerList& from);
 
-    inline ReqServerList& operator=(const ReqServerList& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqServerList& operator=(const ReqServerList& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqServerList& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqServerList& default_instance();
 
-    void Swap(ReqServerList* other);
+  void Swap(ReqServerList* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqServerList* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqServerList& from);
-    void MergeFrom(const ReqServerList& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqServerList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqServerList& from);
+  void MergeFrom(const ReqServerList& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required .NFMsg.ReqServerListType type = 1;
-    inline bool has_type() const;
-    inline void clear_type();
-    static const int kTypeFieldNumber = 1;
-    inline ::NFMsg::ReqServerListType type() const;
-    inline void set_type(::NFMsg::ReqServerListType value);
+  // required .NFMsg.ReqServerListType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::NFMsg::ReqServerListType type() const;
+  inline void set_type(::NFMsg::ReqServerListType value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqServerList)
-private:
-    inline void set_has_type();
-    inline void clear_has_type();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqServerList)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    int type_;
+  int type_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqServerList* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqServerList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckServerList : public ::google::protobuf::Message
-{
-public:
-    AckServerList();
-    virtual ~AckServerList();
+class AckServerList : public ::google::protobuf::Message {
+ public:
+  AckServerList();
+  virtual ~AckServerList();
 
-    AckServerList(const AckServerList& from);
+  AckServerList(const AckServerList& from);
 
-    inline AckServerList& operator=(const AckServerList& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline AckServerList& operator=(const AckServerList& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const AckServerList& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckServerList& default_instance();
 
-    void Swap(AckServerList* other);
+  void Swap(AckServerList* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    AckServerList* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const AckServerList& from);
-    void MergeFrom(const AckServerList& from);
-    void Clear();
-    bool IsInitialized() const;
+  AckServerList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckServerList& from);
+  void MergeFrom(const AckServerList& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required .NFMsg.ReqServerListType type = 1;
-    inline bool has_type() const;
-    inline void clear_type();
-    static const int kTypeFieldNumber = 1;
-    inline ::NFMsg::ReqServerListType type() const;
-    inline void set_type(::NFMsg::ReqServerListType value);
+  // required .NFMsg.ReqServerListType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::NFMsg::ReqServerListType type() const;
+  inline void set_type(::NFMsg::ReqServerListType value);
 
-    // repeated .NFMsg.ServerInfo info = 2;
-    inline int info_size() const;
-    inline void clear_info();
-    static const int kInfoFieldNumber = 2;
-    inline const ::NFMsg::ServerInfo& info(int index) const;
-    inline ::NFMsg::ServerInfo* mutable_info(int index);
-    inline ::NFMsg::ServerInfo* add_info();
-    inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >&
-    info() const;
-    inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >*
-    mutable_info();
+  // repeated .NFMsg.ServerInfo info = 2;
+  inline int info_size() const;
+  inline void clear_info();
+  static const int kInfoFieldNumber = 2;
+  inline const ::NFMsg::ServerInfo& info(int index) const;
+  inline ::NFMsg::ServerInfo* mutable_info(int index);
+  inline ::NFMsg::ServerInfo* add_info();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >&
+      info() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >*
+      mutable_info();
 
-    // @@protoc_insertion_point(class_scope:NFMsg.AckServerList)
-private:
-    inline void set_has_type();
-    inline void clear_has_type();
+  // @@protoc_insertion_point(class_scope:NFMsg.AckServerList)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo > info_;
-    int type_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo > info_;
+  int type_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static AckServerList* default_instance_;
+  void InitAsDefaultInstance();
+  static AckServerList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqConnectWorld : public ::google::protobuf::Message
-{
-public:
-    ReqConnectWorld();
-    virtual ~ReqConnectWorld();
+class ReqConnectWorld : public ::google::protobuf::Message {
+ public:
+  ReqConnectWorld();
+  virtual ~ReqConnectWorld();
 
-    ReqConnectWorld(const ReqConnectWorld& from);
+  ReqConnectWorld(const ReqConnectWorld& from);
 
-    inline ReqConnectWorld& operator=(const ReqConnectWorld& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqConnectWorld& operator=(const ReqConnectWorld& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqConnectWorld& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqConnectWorld& default_instance();
 
-    void Swap(ReqConnectWorld* other);
+  void Swap(ReqConnectWorld* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqConnectWorld* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqConnectWorld& from);
-    void MergeFrom(const ReqConnectWorld& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqConnectWorld* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqConnectWorld& from);
+  void MergeFrom(const ReqConnectWorld& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 world_id = 1;
-    inline bool has_world_id() const;
-    inline void clear_world_id();
-    static const int kWorldIdFieldNumber = 1;
-    inline ::google::protobuf::int32 world_id() const;
-    inline void set_world_id(::google::protobuf::int32 value);
+  // required int32 world_id = 1;
+  inline bool has_world_id() const;
+  inline void clear_world_id();
+  static const int kWorldIdFieldNumber = 1;
+  inline ::google::protobuf::int32 world_id() const;
+  inline void set_world_id(::google::protobuf::int32 value);
 
-    // optional bytes account = 2;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 2;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // optional bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // optional .NFMsg.Ident sender = 3;
-    inline bool has_sender() const;
-    inline void clear_sender();
-    static const int kSenderFieldNumber = 3;
-    inline const ::NFMsg::Ident& sender() const;
-    inline ::NFMsg::Ident* mutable_sender();
-    inline ::NFMsg::Ident* release_sender();
-    inline void set_allocated_sender(::NFMsg::Ident* sender);
+  // optional .NFMsg.Ident sender = 3;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 3;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
-    // optional int32 login_id = 4;
-    inline bool has_login_id() const;
-    inline void clear_login_id();
-    static const int kLoginIdFieldNumber = 4;
-    inline ::google::protobuf::int32 login_id() const;
-    inline void set_login_id(::google::protobuf::int32 value);
+  // optional int32 login_id = 4;
+  inline bool has_login_id() const;
+  inline void clear_login_id();
+  static const int kLoginIdFieldNumber = 4;
+  inline ::google::protobuf::int32 login_id() const;
+  inline void set_login_id(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqConnectWorld)
-private:
-    inline void set_has_world_id();
-    inline void clear_has_world_id();
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_sender();
-    inline void clear_has_sender();
-    inline void set_has_login_id();
-    inline void clear_has_login_id();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqConnectWorld)
+ private:
+  inline void set_has_world_id();
+  inline void clear_has_world_id();
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_sender();
+  inline void clear_has_sender();
+  inline void set_has_login_id();
+  inline void clear_has_login_id();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::google::protobuf::int32 world_id_;
-    ::google::protobuf::int32 login_id_;
-    ::NFMsg::Ident* sender_;
+  ::std::string* account_;
+  ::google::protobuf::int32 world_id_;
+  ::google::protobuf::int32 login_id_;
+  ::NFMsg::Ident* sender_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqConnectWorld* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqConnectWorld* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckConnectWorldResult : public ::google::protobuf::Message
-{
-public:
-    AckConnectWorldResult();
-    virtual ~AckConnectWorldResult();
+class AckConnectWorldResult : public ::google::protobuf::Message {
+ public:
+  AckConnectWorldResult();
+  virtual ~AckConnectWorldResult();
 
-    AckConnectWorldResult(const AckConnectWorldResult& from);
+  AckConnectWorldResult(const AckConnectWorldResult& from);
 
-    inline AckConnectWorldResult& operator=(const AckConnectWorldResult& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline AckConnectWorldResult& operator=(const AckConnectWorldResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const AckConnectWorldResult& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckConnectWorldResult& default_instance();
 
-    void Swap(AckConnectWorldResult* other);
+  void Swap(AckConnectWorldResult* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    AckConnectWorldResult* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const AckConnectWorldResult& from);
-    void MergeFrom(const AckConnectWorldResult& from);
-    void Clear();
-    bool IsInitialized() const;
+  AckConnectWorldResult* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckConnectWorldResult& from);
+  void MergeFrom(const AckConnectWorldResult& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 world_id = 1;
-    inline bool has_world_id() const;
-    inline void clear_world_id();
-    static const int kWorldIdFieldNumber = 1;
-    inline ::google::protobuf::int32 world_id() const;
-    inline void set_world_id(::google::protobuf::int32 value);
+  // required int32 world_id = 1;
+  inline bool has_world_id() const;
+  inline void clear_world_id();
+  static const int kWorldIdFieldNumber = 1;
+  inline ::google::protobuf::int32 world_id() const;
+  inline void set_world_id(::google::protobuf::int32 value);
 
-    // required .NFMsg.Ident sender = 2;
-    inline bool has_sender() const;
-    inline void clear_sender();
-    static const int kSenderFieldNumber = 2;
-    inline const ::NFMsg::Ident& sender() const;
-    inline ::NFMsg::Ident* mutable_sender();
-    inline ::NFMsg::Ident* release_sender();
-    inline void set_allocated_sender(::NFMsg::Ident* sender);
+  // required .NFMsg.Ident sender = 2;
+  inline bool has_sender() const;
+  inline void clear_sender();
+  static const int kSenderFieldNumber = 2;
+  inline const ::NFMsg::Ident& sender() const;
+  inline ::NFMsg::Ident* mutable_sender();
+  inline ::NFMsg::Ident* release_sender();
+  inline void set_allocated_sender(::NFMsg::Ident* sender);
 
-    // required int32 login_id = 3;
-    inline bool has_login_id() const;
-    inline void clear_login_id();
-    static const int kLoginIdFieldNumber = 3;
-    inline ::google::protobuf::int32 login_id() const;
-    inline void set_login_id(::google::protobuf::int32 value);
+  // required int32 login_id = 3;
+  inline bool has_login_id() const;
+  inline void clear_login_id();
+  static const int kLoginIdFieldNumber = 3;
+  inline ::google::protobuf::int32 login_id() const;
+  inline void set_login_id(::google::protobuf::int32 value);
 
-    // required bytes account = 4;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 4;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 4;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 4;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required bytes world_ip = 5;
-    inline bool has_world_ip() const;
-    inline void clear_world_ip();
-    static const int kWorldIpFieldNumber = 5;
-    inline const ::std::string& world_ip() const;
-    inline void set_world_ip(const ::std::string& value);
-    inline void set_world_ip(const char* value);
-    inline void set_world_ip(const void* value, size_t size);
-    inline ::std::string* mutable_world_ip();
-    inline ::std::string* release_world_ip();
-    inline void set_allocated_world_ip(::std::string* world_ip);
+  // required bytes world_ip = 5;
+  inline bool has_world_ip() const;
+  inline void clear_world_ip();
+  static const int kWorldIpFieldNumber = 5;
+  inline const ::std::string& world_ip() const;
+  inline void set_world_ip(const ::std::string& value);
+  inline void set_world_ip(const char* value);
+  inline void set_world_ip(const void* value, size_t size);
+  inline ::std::string* mutable_world_ip();
+  inline ::std::string* release_world_ip();
+  inline void set_allocated_world_ip(::std::string* world_ip);
 
-    // required int32 world_port = 6;
-    inline bool has_world_port() const;
-    inline void clear_world_port();
-    static const int kWorldPortFieldNumber = 6;
-    inline ::google::protobuf::int32 world_port() const;
-    inline void set_world_port(::google::protobuf::int32 value);
+  // required int32 world_port = 6;
+  inline bool has_world_port() const;
+  inline void clear_world_port();
+  static const int kWorldPortFieldNumber = 6;
+  inline ::google::protobuf::int32 world_port() const;
+  inline void set_world_port(::google::protobuf::int32 value);
 
-    // required bytes world_key = 7;
-    inline bool has_world_key() const;
-    inline void clear_world_key();
-    static const int kWorldKeyFieldNumber = 7;
-    inline const ::std::string& world_key() const;
-    inline void set_world_key(const ::std::string& value);
-    inline void set_world_key(const char* value);
-    inline void set_world_key(const void* value, size_t size);
-    inline ::std::string* mutable_world_key();
-    inline ::std::string* release_world_key();
-    inline void set_allocated_world_key(::std::string* world_key);
+  // required bytes world_key = 7;
+  inline bool has_world_key() const;
+  inline void clear_world_key();
+  static const int kWorldKeyFieldNumber = 7;
+  inline const ::std::string& world_key() const;
+  inline void set_world_key(const ::std::string& value);
+  inline void set_world_key(const char* value);
+  inline void set_world_key(const void* value, size_t size);
+  inline ::std::string* mutable_world_key();
+  inline ::std::string* release_world_key();
+  inline void set_allocated_world_key(::std::string* world_key);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.AckConnectWorldResult)
-private:
-    inline void set_has_world_id();
-    inline void clear_has_world_id();
-    inline void set_has_sender();
-    inline void clear_has_sender();
-    inline void set_has_login_id();
-    inline void clear_has_login_id();
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_world_ip();
-    inline void clear_has_world_ip();
-    inline void set_has_world_port();
-    inline void clear_has_world_port();
-    inline void set_has_world_key();
-    inline void clear_has_world_key();
+  // @@protoc_insertion_point(class_scope:NFMsg.AckConnectWorldResult)
+ private:
+  inline void set_has_world_id();
+  inline void clear_has_world_id();
+  inline void set_has_sender();
+  inline void clear_has_sender();
+  inline void set_has_login_id();
+  inline void clear_has_login_id();
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_world_ip();
+  inline void clear_has_world_ip();
+  inline void set_has_world_port();
+  inline void clear_has_world_port();
+  inline void set_has_world_key();
+  inline void clear_has_world_key();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::NFMsg::Ident* sender_;
-    ::google::protobuf::int32 world_id_;
-    ::google::protobuf::int32 login_id_;
-    ::std::string* account_;
-    ::std::string* world_ip_;
-    ::std::string* world_key_;
-    ::google::protobuf::int32 world_port_;
+  ::NFMsg::Ident* sender_;
+  ::google::protobuf::int32 world_id_;
+  ::google::protobuf::int32 login_id_;
+  ::std::string* account_;
+  ::std::string* world_ip_;
+  ::std::string* world_key_;
+  ::google::protobuf::int32 world_port_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static AckConnectWorldResult* default_instance_;
+  void InitAsDefaultInstance();
+  static AckConnectWorldResult* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqSelectServer : public ::google::protobuf::Message
-{
-public:
-    ReqSelectServer();
-    virtual ~ReqSelectServer();
+class ReqSelectServer : public ::google::protobuf::Message {
+ public:
+  ReqSelectServer();
+  virtual ~ReqSelectServer();
 
-    ReqSelectServer(const ReqSelectServer& from);
+  ReqSelectServer(const ReqSelectServer& from);
 
-    inline ReqSelectServer& operator=(const ReqSelectServer& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqSelectServer& operator=(const ReqSelectServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqSelectServer& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSelectServer& default_instance();
 
-    void Swap(ReqSelectServer* other);
+  void Swap(ReqSelectServer* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqSelectServer* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqSelectServer& from);
-    void MergeFrom(const ReqSelectServer& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqSelectServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSelectServer& from);
+  void MergeFrom(const ReqSelectServer& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 world_id = 1;
-    inline bool has_world_id() const;
-    inline void clear_world_id();
-    static const int kWorldIdFieldNumber = 1;
-    inline ::google::protobuf::int32 world_id() const;
-    inline void set_world_id(::google::protobuf::int32 value);
+  // required int32 world_id = 1;
+  inline bool has_world_id() const;
+  inline void clear_world_id();
+  static const int kWorldIdFieldNumber = 1;
+  inline ::google::protobuf::int32 world_id() const;
+  inline void set_world_id(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqSelectServer)
-private:
-    inline void set_has_world_id();
-    inline void clear_has_world_id();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSelectServer)
+ private:
+  inline void set_has_world_id();
+  inline void clear_has_world_id();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::google::protobuf::int32 world_id_;
+  ::google::protobuf::int32 world_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqSelectServer* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqSelectServer* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqKickFromWorld : public ::google::protobuf::Message
-{
-public:
-    ReqKickFromWorld();
-    virtual ~ReqKickFromWorld();
+class ReqKickFromWorld : public ::google::protobuf::Message {
+ public:
+  ReqKickFromWorld();
+  virtual ~ReqKickFromWorld();
 
-    ReqKickFromWorld(const ReqKickFromWorld& from);
+  ReqKickFromWorld(const ReqKickFromWorld& from);
 
-    inline ReqKickFromWorld& operator=(const ReqKickFromWorld& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqKickFromWorld& operator=(const ReqKickFromWorld& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqKickFromWorld& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqKickFromWorld& default_instance();
 
-    void Swap(ReqKickFromWorld* other);
+  void Swap(ReqKickFromWorld* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqKickFromWorld* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqKickFromWorld& from);
-    void MergeFrom(const ReqKickFromWorld& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqKickFromWorld* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqKickFromWorld& from);
+  void MergeFrom(const ReqKickFromWorld& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 world_id = 1;
-    inline bool has_world_id() const;
-    inline void clear_world_id();
-    static const int kWorldIdFieldNumber = 1;
-    inline ::google::protobuf::int32 world_id() const;
-    inline void set_world_id(::google::protobuf::int32 value);
+  // required int32 world_id = 1;
+  inline bool has_world_id() const;
+  inline void clear_world_id();
+  static const int kWorldIdFieldNumber = 1;
+  inline ::google::protobuf::int32 world_id() const;
+  inline void set_world_id(::google::protobuf::int32 value);
 
-    // required bytes account = 2;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 2;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqKickFromWorld)
-private:
-    inline void set_has_world_id();
-    inline void clear_has_world_id();
-    inline void set_has_account();
-    inline void clear_has_account();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqKickFromWorld)
+ private:
+  inline void set_has_world_id();
+  inline void clear_has_world_id();
+  inline void set_has_account();
+  inline void clear_has_account();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::google::protobuf::int32 world_id_;
+  ::std::string* account_;
+  ::google::protobuf::int32 world_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqKickFromWorld* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqKickFromWorld* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqRoleList : public ::google::protobuf::Message
-{
-public:
-    ReqRoleList();
-    virtual ~ReqRoleList();
+class ReqRoleList : public ::google::protobuf::Message {
+ public:
+  ReqRoleList();
+  virtual ~ReqRoleList();
 
-    ReqRoleList(const ReqRoleList& from);
+  ReqRoleList(const ReqRoleList& from);
 
-    inline ReqRoleList& operator=(const ReqRoleList& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqRoleList& operator=(const ReqRoleList& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqRoleList& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqRoleList& default_instance();
 
-    void Swap(ReqRoleList* other);
+  void Swap(ReqRoleList* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqRoleList* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqRoleList& from);
-    void MergeFrom(const ReqRoleList& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqRoleList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqRoleList& from);
+  void MergeFrom(const ReqRoleList& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required int32 game_id = 1;
-    inline bool has_game_id() const;
-    inline void clear_game_id();
-    static const int kGameIdFieldNumber = 1;
-    inline ::google::protobuf::int32 game_id() const;
-    inline void set_game_id(::google::protobuf::int32 value);
+  // required int32 game_id = 1;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 1;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
-    // required bytes account = 2;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 2;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 2;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 2;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqRoleList)
-private:
-    inline void set_has_game_id();
-    inline void clear_has_game_id();
-    inline void set_has_account();
-    inline void clear_has_account();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqRoleList)
+ private:
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
+  inline void set_has_account();
+  inline void clear_has_account();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::google::protobuf::int32 game_id_;
+  ::std::string* account_;
+  ::google::protobuf::int32 game_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqRoleList* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqRoleList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class RoleLiteInfo : public ::google::protobuf::Message
-{
-public:
-    RoleLiteInfo();
-    virtual ~RoleLiteInfo();
+class RoleLiteInfo : public ::google::protobuf::Message {
+ public:
+  RoleLiteInfo();
+  virtual ~RoleLiteInfo();
 
-    RoleLiteInfo(const RoleLiteInfo& from);
+  RoleLiteInfo(const RoleLiteInfo& from);
 
-    inline RoleLiteInfo& operator=(const RoleLiteInfo& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline RoleLiteInfo& operator=(const RoleLiteInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const RoleLiteInfo& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleLiteInfo& default_instance();
 
-    void Swap(RoleLiteInfo* other);
+  void Swap(RoleLiteInfo* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    RoleLiteInfo* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const RoleLiteInfo& from);
-    void MergeFrom(const RoleLiteInfo& from);
-    void Clear();
-    bool IsInitialized() const;
+  RoleLiteInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleLiteInfo& from);
+  void MergeFrom(const RoleLiteInfo& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required .NFMsg.Ident id = 1;
-    inline bool has_id() const;
-    inline void clear_id();
-    static const int kIdFieldNumber = 1;
-    inline const ::NFMsg::Ident& id() const;
-    inline ::NFMsg::Ident* mutable_id();
-    inline ::NFMsg::Ident* release_id();
-    inline void set_allocated_id(::NFMsg::Ident* id);
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
 
-    // required int32 career = 2;
-    inline bool has_career() const;
-    inline void clear_career();
-    static const int kCareerFieldNumber = 2;
-    inline ::google::protobuf::int32 career() const;
-    inline void set_career(::google::protobuf::int32 value);
+  // required int32 career = 2;
+  inline bool has_career() const;
+  inline void clear_career();
+  static const int kCareerFieldNumber = 2;
+  inline ::google::protobuf::int32 career() const;
+  inline void set_career(::google::protobuf::int32 value);
 
-    // required int32 sex = 3;
-    inline bool has_sex() const;
-    inline void clear_sex();
-    static const int kSexFieldNumber = 3;
-    inline ::google::protobuf::int32 sex() const;
-    inline void set_sex(::google::protobuf::int32 value);
+  // required int32 sex = 3;
+  inline bool has_sex() const;
+  inline void clear_sex();
+  static const int kSexFieldNumber = 3;
+  inline ::google::protobuf::int32 sex() const;
+  inline void set_sex(::google::protobuf::int32 value);
 
-    // required int32 race = 4;
-    inline bool has_race() const;
-    inline void clear_race();
-    static const int kRaceFieldNumber = 4;
-    inline ::google::protobuf::int32 race() const;
-    inline void set_race(::google::protobuf::int32 value);
+  // required int32 race = 4;
+  inline bool has_race() const;
+  inline void clear_race();
+  static const int kRaceFieldNumber = 4;
+  inline ::google::protobuf::int32 race() const;
+  inline void set_race(::google::protobuf::int32 value);
 
-    // required bytes noob_name = 5;
-    inline bool has_noob_name() const;
-    inline void clear_noob_name();
-    static const int kNoobNameFieldNumber = 5;
-    inline const ::std::string& noob_name() const;
-    inline void set_noob_name(const ::std::string& value);
-    inline void set_noob_name(const char* value);
-    inline void set_noob_name(const void* value, size_t size);
-    inline ::std::string* mutable_noob_name();
-    inline ::std::string* release_noob_name();
-    inline void set_allocated_noob_name(::std::string* noob_name);
+  // required bytes noob_name = 5;
+  inline bool has_noob_name() const;
+  inline void clear_noob_name();
+  static const int kNoobNameFieldNumber = 5;
+  inline const ::std::string& noob_name() const;
+  inline void set_noob_name(const ::std::string& value);
+  inline void set_noob_name(const char* value);
+  inline void set_noob_name(const void* value, size_t size);
+  inline ::std::string* mutable_noob_name();
+  inline ::std::string* release_noob_name();
+  inline void set_allocated_noob_name(::std::string* noob_name);
 
-    // required int32 game_id = 6;
-    inline bool has_game_id() const;
-    inline void clear_game_id();
-    static const int kGameIdFieldNumber = 6;
-    inline ::google::protobuf::int32 game_id() const;
-    inline void set_game_id(::google::protobuf::int32 value);
+  // required int32 game_id = 6;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 6;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
-    // required int32 role_level = 7;
-    inline bool has_role_level() const;
-    inline void clear_role_level();
-    static const int kRoleLevelFieldNumber = 7;
-    inline ::google::protobuf::int32 role_level() const;
-    inline void set_role_level(::google::protobuf::int32 value);
+  // required int32 role_level = 7;
+  inline bool has_role_level() const;
+  inline void clear_role_level();
+  static const int kRoleLevelFieldNumber = 7;
+  inline ::google::protobuf::int32 role_level() const;
+  inline void set_role_level(::google::protobuf::int32 value);
 
-    // required int32 delete_time = 8;
-    inline bool has_delete_time() const;
-    inline void clear_delete_time();
-    static const int kDeleteTimeFieldNumber = 8;
-    inline ::google::protobuf::int32 delete_time() const;
-    inline void set_delete_time(::google::protobuf::int32 value);
+  // required int32 delete_time = 8;
+  inline bool has_delete_time() const;
+  inline void clear_delete_time();
+  static const int kDeleteTimeFieldNumber = 8;
+  inline ::google::protobuf::int32 delete_time() const;
+  inline void set_delete_time(::google::protobuf::int32 value);
 
-    // required int32 reg_time = 9;
-    inline bool has_reg_time() const;
-    inline void clear_reg_time();
-    static const int kRegTimeFieldNumber = 9;
-    inline ::google::protobuf::int32 reg_time() const;
-    inline void set_reg_time(::google::protobuf::int32 value);
+  // required int32 reg_time = 9;
+  inline bool has_reg_time() const;
+  inline void clear_reg_time();
+  static const int kRegTimeFieldNumber = 9;
+  inline ::google::protobuf::int32 reg_time() const;
+  inline void set_reg_time(::google::protobuf::int32 value);
 
-    // required int32 last_offline_time = 10;
-    inline bool has_last_offline_time() const;
-    inline void clear_last_offline_time();
-    static const int kLastOfflineTimeFieldNumber = 10;
-    inline ::google::protobuf::int32 last_offline_time() const;
-    inline void set_last_offline_time(::google::protobuf::int32 value);
+  // required int32 last_offline_time = 10;
+  inline bool has_last_offline_time() const;
+  inline void clear_last_offline_time();
+  static const int kLastOfflineTimeFieldNumber = 10;
+  inline ::google::protobuf::int32 last_offline_time() const;
+  inline void set_last_offline_time(::google::protobuf::int32 value);
 
-    // required int32 last_offline_ip = 11;
-    inline bool has_last_offline_ip() const;
-    inline void clear_last_offline_ip();
-    static const int kLastOfflineIpFieldNumber = 11;
-    inline ::google::protobuf::int32 last_offline_ip() const;
-    inline void set_last_offline_ip(::google::protobuf::int32 value);
+  // required int32 last_offline_ip = 11;
+  inline bool has_last_offline_ip() const;
+  inline void clear_last_offline_ip();
+  static const int kLastOfflineIpFieldNumber = 11;
+  inline ::google::protobuf::int32 last_offline_ip() const;
+  inline void set_last_offline_ip(::google::protobuf::int32 value);
 
-    // required bytes view_record = 12;
-    inline bool has_view_record() const;
-    inline void clear_view_record();
-    static const int kViewRecordFieldNumber = 12;
-    inline const ::std::string& view_record() const;
-    inline void set_view_record(const ::std::string& value);
-    inline void set_view_record(const char* value);
-    inline void set_view_record(const void* value, size_t size);
-    inline ::std::string* mutable_view_record();
-    inline ::std::string* release_view_record();
-    inline void set_allocated_view_record(::std::string* view_record);
+  // required bytes view_record = 12;
+  inline bool has_view_record() const;
+  inline void clear_view_record();
+  static const int kViewRecordFieldNumber = 12;
+  inline const ::std::string& view_record() const;
+  inline void set_view_record(const ::std::string& value);
+  inline void set_view_record(const char* value);
+  inline void set_view_record(const void* value, size_t size);
+  inline ::std::string* mutable_view_record();
+  inline ::std::string* release_view_record();
+  inline void set_allocated_view_record(::std::string* view_record);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.RoleLiteInfo)
-private:
-    inline void set_has_id();
-    inline void clear_has_id();
-    inline void set_has_career();
-    inline void clear_has_career();
-    inline void set_has_sex();
-    inline void clear_has_sex();
-    inline void set_has_race();
-    inline void clear_has_race();
-    inline void set_has_noob_name();
-    inline void clear_has_noob_name();
-    inline void set_has_game_id();
-    inline void clear_has_game_id();
-    inline void set_has_role_level();
-    inline void clear_has_role_level();
-    inline void set_has_delete_time();
-    inline void clear_has_delete_time();
-    inline void set_has_reg_time();
-    inline void clear_has_reg_time();
-    inline void set_has_last_offline_time();
-    inline void clear_has_last_offline_time();
-    inline void set_has_last_offline_ip();
-    inline void clear_has_last_offline_ip();
-    inline void set_has_view_record();
-    inline void clear_has_view_record();
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleLiteInfo)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_career();
+  inline void clear_has_career();
+  inline void set_has_sex();
+  inline void clear_has_sex();
+  inline void set_has_race();
+  inline void clear_has_race();
+  inline void set_has_noob_name();
+  inline void clear_has_noob_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
+  inline void set_has_role_level();
+  inline void clear_has_role_level();
+  inline void set_has_delete_time();
+  inline void clear_has_delete_time();
+  inline void set_has_reg_time();
+  inline void clear_has_reg_time();
+  inline void set_has_last_offline_time();
+  inline void clear_has_last_offline_time();
+  inline void set_has_last_offline_ip();
+  inline void clear_has_last_offline_ip();
+  inline void set_has_view_record();
+  inline void clear_has_view_record();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::NFMsg::Ident* id_;
-    ::google::protobuf::int32 career_;
-    ::google::protobuf::int32 sex_;
-    ::std::string* noob_name_;
-    ::google::protobuf::int32 race_;
-    ::google::protobuf::int32 game_id_;
-    ::google::protobuf::int32 role_level_;
-    ::google::protobuf::int32 delete_time_;
-    ::google::protobuf::int32 reg_time_;
-    ::google::protobuf::int32 last_offline_time_;
-    ::std::string* view_record_;
-    ::google::protobuf::int32 last_offline_ip_;
+  ::NFMsg::Ident* id_;
+  ::google::protobuf::int32 career_;
+  ::google::protobuf::int32 sex_;
+  ::std::string* noob_name_;
+  ::google::protobuf::int32 race_;
+  ::google::protobuf::int32 game_id_;
+  ::google::protobuf::int32 role_level_;
+  ::google::protobuf::int32 delete_time_;
+  ::google::protobuf::int32 reg_time_;
+  ::google::protobuf::int32 last_offline_time_;
+  ::std::string* view_record_;
+  ::google::protobuf::int32 last_offline_ip_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static RoleLiteInfo* default_instance_;
+  void InitAsDefaultInstance();
+  static RoleLiteInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class AckRoleLiteInfoList : public ::google::protobuf::Message
-{
-public:
-    AckRoleLiteInfoList();
-    virtual ~AckRoleLiteInfoList();
+class AckRoleLiteInfoList : public ::google::protobuf::Message {
+ public:
+  AckRoleLiteInfoList();
+  virtual ~AckRoleLiteInfoList();
 
-    AckRoleLiteInfoList(const AckRoleLiteInfoList& from);
+  AckRoleLiteInfoList(const AckRoleLiteInfoList& from);
 
-    inline AckRoleLiteInfoList& operator=(const AckRoleLiteInfoList& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline AckRoleLiteInfoList& operator=(const AckRoleLiteInfoList& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const AckRoleLiteInfoList& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckRoleLiteInfoList& default_instance();
 
-    void Swap(AckRoleLiteInfoList* other);
+  void Swap(AckRoleLiteInfoList* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    AckRoleLiteInfoList* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const AckRoleLiteInfoList& from);
-    void MergeFrom(const AckRoleLiteInfoList& from);
-    void Clear();
-    bool IsInitialized() const;
+  AckRoleLiteInfoList* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckRoleLiteInfoList& from);
+  void MergeFrom(const AckRoleLiteInfoList& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // repeated .NFMsg.RoleLiteInfo char_data = 1;
-    inline int char_data_size() const;
-    inline void clear_char_data();
-    static const int kCharDataFieldNumber = 1;
-    inline const ::NFMsg::RoleLiteInfo& char_data(int index) const;
-    inline ::NFMsg::RoleLiteInfo* mutable_char_data(int index);
-    inline ::NFMsg::RoleLiteInfo* add_char_data();
-    inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >&
-    char_data() const;
-    inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >*
-    mutable_char_data();
+  // repeated .NFMsg.RoleLiteInfo char_data = 1;
+  inline int char_data_size() const;
+  inline void clear_char_data();
+  static const int kCharDataFieldNumber = 1;
+  inline const ::NFMsg::RoleLiteInfo& char_data(int index) const;
+  inline ::NFMsg::RoleLiteInfo* mutable_char_data(int index);
+  inline ::NFMsg::RoleLiteInfo* add_char_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >&
+      char_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >*
+      mutable_char_data();
 
-    // @@protoc_insertion_point(class_scope:NFMsg.AckRoleLiteInfoList)
-private:
+  // @@protoc_insertion_point(class_scope:NFMsg.AckRoleLiteInfoList)
+ private:
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo > char_data_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo > char_data_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static AckRoleLiteInfoList* default_instance_;
+  void InitAsDefaultInstance();
+  static AckRoleLiteInfoList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqCreateRole : public ::google::protobuf::Message
-{
-public:
-    ReqCreateRole();
-    virtual ~ReqCreateRole();
+class ReqCreateRole : public ::google::protobuf::Message {
+ public:
+  ReqCreateRole();
+  virtual ~ReqCreateRole();
 
-    ReqCreateRole(const ReqCreateRole& from);
+  ReqCreateRole(const ReqCreateRole& from);
 
-    inline ReqCreateRole& operator=(const ReqCreateRole& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqCreateRole& operator=(const ReqCreateRole& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqCreateRole& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCreateRole& default_instance();
 
-    void Swap(ReqCreateRole* other);
+  void Swap(ReqCreateRole* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqCreateRole* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqCreateRole& from);
-    void MergeFrom(const ReqCreateRole& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqCreateRole* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqCreateRole& from);
+  void MergeFrom(const ReqCreateRole& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required bytes account = 1;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 1;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required int32 career = 2;
-    inline bool has_career() const;
-    inline void clear_career();
-    static const int kCareerFieldNumber = 2;
-    inline ::google::protobuf::int32 career() const;
-    inline void set_career(::google::protobuf::int32 value);
+  // required int32 career = 2;
+  inline bool has_career() const;
+  inline void clear_career();
+  static const int kCareerFieldNumber = 2;
+  inline ::google::protobuf::int32 career() const;
+  inline void set_career(::google::protobuf::int32 value);
 
-    // required int32 sex = 3;
-    inline bool has_sex() const;
-    inline void clear_sex();
-    static const int kSexFieldNumber = 3;
-    inline ::google::protobuf::int32 sex() const;
-    inline void set_sex(::google::protobuf::int32 value);
+  // required int32 sex = 3;
+  inline bool has_sex() const;
+  inline void clear_sex();
+  static const int kSexFieldNumber = 3;
+  inline ::google::protobuf::int32 sex() const;
+  inline void set_sex(::google::protobuf::int32 value);
 
-    // required int32 race = 4;
-    inline bool has_race() const;
-    inline void clear_race();
-    static const int kRaceFieldNumber = 4;
-    inline ::google::protobuf::int32 race() const;
-    inline void set_race(::google::protobuf::int32 value);
+  // required int32 race = 4;
+  inline bool has_race() const;
+  inline void clear_race();
+  static const int kRaceFieldNumber = 4;
+  inline ::google::protobuf::int32 race() const;
+  inline void set_race(::google::protobuf::int32 value);
 
-    // required bytes noob_name = 5;
-    inline bool has_noob_name() const;
-    inline void clear_noob_name();
-    static const int kNoobNameFieldNumber = 5;
-    inline const ::std::string& noob_name() const;
-    inline void set_noob_name(const ::std::string& value);
-    inline void set_noob_name(const char* value);
-    inline void set_noob_name(const void* value, size_t size);
-    inline ::std::string* mutable_noob_name();
-    inline ::std::string* release_noob_name();
-    inline void set_allocated_noob_name(::std::string* noob_name);
+  // required bytes noob_name = 5;
+  inline bool has_noob_name() const;
+  inline void clear_noob_name();
+  static const int kNoobNameFieldNumber = 5;
+  inline const ::std::string& noob_name() const;
+  inline void set_noob_name(const ::std::string& value);
+  inline void set_noob_name(const char* value);
+  inline void set_noob_name(const void* value, size_t size);
+  inline ::std::string* mutable_noob_name();
+  inline ::std::string* release_noob_name();
+  inline void set_allocated_noob_name(::std::string* noob_name);
 
-    // required int32 game_id = 6;
-    inline bool has_game_id() const;
-    inline void clear_game_id();
-    static const int kGameIdFieldNumber = 6;
-    inline ::google::protobuf::int32 game_id() const;
-    inline void set_game_id(::google::protobuf::int32 value);
+  // required int32 game_id = 6;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 6;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateRole)
-private:
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_career();
-    inline void clear_has_career();
-    inline void set_has_sex();
-    inline void clear_has_sex();
-    inline void set_has_race();
-    inline void clear_has_race();
-    inline void set_has_noob_name();
-    inline void clear_has_noob_name();
-    inline void set_has_game_id();
-    inline void clear_has_game_id();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCreateRole)
+ private:
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_career();
+  inline void clear_has_career();
+  inline void set_has_sex();
+  inline void clear_has_sex();
+  inline void set_has_race();
+  inline void clear_has_race();
+  inline void set_has_noob_name();
+  inline void clear_has_noob_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::google::protobuf::int32 career_;
-    ::google::protobuf::int32 sex_;
-    ::std::string* noob_name_;
-    ::google::protobuf::int32 race_;
-    ::google::protobuf::int32 game_id_;
+  ::std::string* account_;
+  ::google::protobuf::int32 career_;
+  ::google::protobuf::int32 sex_;
+  ::std::string* noob_name_;
+  ::google::protobuf::int32 race_;
+  ::google::protobuf::int32 game_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqCreateRole* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqCreateRole* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqDeleteRole : public ::google::protobuf::Message
-{
-public:
-    ReqDeleteRole();
-    virtual ~ReqDeleteRole();
+class ReqDeleteRole : public ::google::protobuf::Message {
+ public:
+  ReqDeleteRole();
+  virtual ~ReqDeleteRole();
 
-    ReqDeleteRole(const ReqDeleteRole& from);
+  ReqDeleteRole(const ReqDeleteRole& from);
 
-    inline ReqDeleteRole& operator=(const ReqDeleteRole& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqDeleteRole& operator=(const ReqDeleteRole& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqDeleteRole& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqDeleteRole& default_instance();
 
-    void Swap(ReqDeleteRole* other);
+  void Swap(ReqDeleteRole* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqDeleteRole* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqDeleteRole& from);
-    void MergeFrom(const ReqDeleteRole& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqDeleteRole* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqDeleteRole& from);
+  void MergeFrom(const ReqDeleteRole& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required bytes account = 1;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 1;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required bytes name = 2;
-    inline bool has_name() const;
-    inline void clear_name();
-    static const int kNameFieldNumber = 2;
-    inline const ::std::string& name() const;
-    inline void set_name(const ::std::string& value);
-    inline void set_name(const char* value);
-    inline void set_name(const void* value, size_t size);
-    inline ::std::string* mutable_name();
-    inline ::std::string* release_name();
-    inline void set_allocated_name(::std::string* name);
+  // required bytes name = 2;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 2;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
-    // required int32 game_id = 3;
-    inline bool has_game_id() const;
-    inline void clear_game_id();
-    static const int kGameIdFieldNumber = 3;
-    inline ::google::protobuf::int32 game_id() const;
-    inline void set_game_id(::google::protobuf::int32 value);
+  // required int32 game_id = 3;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 3;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqDeleteRole)
-private:
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_name();
-    inline void clear_has_name();
-    inline void set_has_game_id();
-    inline void clear_has_game_id();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqDeleteRole)
+ private:
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::std::string* name_;
-    ::google::protobuf::int32 game_id_;
+  ::std::string* account_;
+  ::std::string* name_;
+  ::google::protobuf::int32 game_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqDeleteRole* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqDeleteRole* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ReqRecoverRole : public ::google::protobuf::Message
-{
-public:
-    ReqRecoverRole();
-    virtual ~ReqRecoverRole();
+class ReqRecoverRole : public ::google::protobuf::Message {
+ public:
+  ReqRecoverRole();
+  virtual ~ReqRecoverRole();
 
-    ReqRecoverRole(const ReqRecoverRole& from);
+  ReqRecoverRole(const ReqRecoverRole& from);
 
-    inline ReqRecoverRole& operator=(const ReqRecoverRole& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ReqRecoverRole& operator=(const ReqRecoverRole& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ReqRecoverRole& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqRecoverRole& default_instance();
 
-    void Swap(ReqRecoverRole* other);
+  void Swap(ReqRecoverRole* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ReqRecoverRole* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ReqRecoverRole& from);
-    void MergeFrom(const ReqRecoverRole& from);
-    void Clear();
-    bool IsInitialized() const;
+  ReqRecoverRole* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqRecoverRole& from);
+  void MergeFrom(const ReqRecoverRole& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // required bytes account = 1;
-    inline bool has_account() const;
-    inline void clear_account();
-    static const int kAccountFieldNumber = 1;
-    inline const ::std::string& account() const;
-    inline void set_account(const ::std::string& value);
-    inline void set_account(const char* value);
-    inline void set_account(const void* value, size_t size);
-    inline ::std::string* mutable_account();
-    inline ::std::string* release_account();
-    inline void set_allocated_account(::std::string* account);
+  // required bytes account = 1;
+  inline bool has_account() const;
+  inline void clear_account();
+  static const int kAccountFieldNumber = 1;
+  inline const ::std::string& account() const;
+  inline void set_account(const ::std::string& value);
+  inline void set_account(const char* value);
+  inline void set_account(const void* value, size_t size);
+  inline ::std::string* mutable_account();
+  inline ::std::string* release_account();
+  inline void set_allocated_account(::std::string* account);
 
-    // required bytes name = 2;
-    inline bool has_name() const;
-    inline void clear_name();
-    static const int kNameFieldNumber = 2;
-    inline const ::std::string& name() const;
-    inline void set_name(const ::std::string& value);
-    inline void set_name(const char* value);
-    inline void set_name(const void* value, size_t size);
-    inline ::std::string* mutable_name();
-    inline ::std::string* release_name();
-    inline void set_allocated_name(::std::string* name);
+  // required bytes name = 2;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 2;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const void* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
 
-    // required int32 game_id = 3;
-    inline bool has_game_id() const;
-    inline void clear_game_id();
-    static const int kGameIdFieldNumber = 3;
-    inline ::google::protobuf::int32 game_id() const;
-    inline void set_game_id(::google::protobuf::int32 value);
+  // required int32 game_id = 3;
+  inline bool has_game_id() const;
+  inline void clear_game_id();
+  static const int kGameIdFieldNumber = 3;
+  inline ::google::protobuf::int32 game_id() const;
+  inline void set_game_id(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ReqRecoverRole)
-private:
-    inline void set_has_account();
-    inline void clear_has_account();
-    inline void set_has_name();
-    inline void clear_has_name();
-    inline void set_has_game_id();
-    inline void clear_has_game_id();
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqRecoverRole)
+ private:
+  inline void set_has_account();
+  inline void clear_has_account();
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_game_id();
+  inline void clear_has_game_id();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::std::string* account_;
-    ::std::string* name_;
-    ::google::protobuf::int32 game_id_;
+  ::std::string* account_;
+  ::std::string* name_;
+  ::google::protobuf::int32 game_id_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ReqRecoverRole* default_instance_;
+  void InitAsDefaultInstance();
+  static ReqRecoverRole* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class ServerHeartBeat : public ::google::protobuf::Message
-{
-public:
-    ServerHeartBeat();
-    virtual ~ServerHeartBeat();
+class ServerHeartBeat : public ::google::protobuf::Message {
+ public:
+  ServerHeartBeat();
+  virtual ~ServerHeartBeat();
 
-    ServerHeartBeat(const ServerHeartBeat& from);
+  ServerHeartBeat(const ServerHeartBeat& from);
 
-    inline ServerHeartBeat& operator=(const ServerHeartBeat& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline ServerHeartBeat& operator=(const ServerHeartBeat& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const ServerHeartBeat& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerHeartBeat& default_instance();
 
-    void Swap(ServerHeartBeat* other);
+  void Swap(ServerHeartBeat* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    ServerHeartBeat* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const ServerHeartBeat& from);
-    void MergeFrom(const ServerHeartBeat& from);
-    void Clear();
-    bool IsInitialized() const;
+  ServerHeartBeat* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerHeartBeat& from);
+  void MergeFrom(const ServerHeartBeat& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // optional int32 count = 1;
-    inline bool has_count() const;
-    inline void clear_count();
-    static const int kCountFieldNumber = 1;
-    inline ::google::protobuf::int32 count() const;
-    inline void set_count(::google::protobuf::int32 value);
+  // optional int32 count = 1;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 1;
+  inline ::google::protobuf::int32 count() const;
+  inline void set_count(::google::protobuf::int32 value);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.ServerHeartBeat)
-private:
-    inline void set_has_count();
-    inline void clear_has_count();
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerHeartBeat)
+ private:
+  inline void set_has_count();
+  inline void clear_has_count();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::google::protobuf::int32 count_;
+  ::google::protobuf::int32 count_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static ServerHeartBeat* default_instance_;
+  void InitAsDefaultInstance();
+  static ServerHeartBeat* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class RoleOnlineNotify : public ::google::protobuf::Message
-{
-public:
-    RoleOnlineNotify();
-    virtual ~RoleOnlineNotify();
+class RoleOnlineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOnlineNotify();
+  virtual ~RoleOnlineNotify();
 
-    RoleOnlineNotify(const RoleOnlineNotify& from);
+  RoleOnlineNotify(const RoleOnlineNotify& from);
 
-    inline RoleOnlineNotify& operator=(const RoleOnlineNotify& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline RoleOnlineNotify& operator=(const RoleOnlineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const RoleOnlineNotify& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOnlineNotify& default_instance();
 
-    void Swap(RoleOnlineNotify* other);
+  void Swap(RoleOnlineNotify* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    RoleOnlineNotify* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const RoleOnlineNotify& from);
-    void MergeFrom(const RoleOnlineNotify& from);
-    void Clear();
-    bool IsInitialized() const;
+  RoleOnlineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOnlineNotify& from);
+  void MergeFrom(const RoleOnlineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // optional .NFMsg.Ident guild = 1;
-    inline bool has_guild() const;
-    inline void clear_guild();
-    static const int kGuildFieldNumber = 1;
-    inline const ::NFMsg::Ident& guild() const;
-    inline ::NFMsg::Ident* mutable_guild();
-    inline ::NFMsg::Ident* release_guild();
-    inline void set_allocated_guild(::NFMsg::Ident* guild);
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
-private:
-    inline void set_has_guild();
-    inline void clear_has_guild();
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::NFMsg::Ident* guild_;
+  ::NFMsg::Ident* guild_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static RoleOnlineNotify* default_instance_;
+  void InitAsDefaultInstance();
+  static RoleOnlineNotify* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class RoleOfflineNotify : public ::google::protobuf::Message
-{
-public:
-    RoleOfflineNotify();
-    virtual ~RoleOfflineNotify();
+class RoleOfflineNotify : public ::google::protobuf::Message {
+ public:
+  RoleOfflineNotify();
+  virtual ~RoleOfflineNotify();
 
-    RoleOfflineNotify(const RoleOfflineNotify& from);
+  RoleOfflineNotify(const RoleOfflineNotify& from);
 
-    inline RoleOfflineNotify& operator=(const RoleOfflineNotify& from)
-    {
-        CopyFrom(from);
-        return *this;
-    }
+  inline RoleOfflineNotify& operator=(const RoleOfflineNotify& from) {
+    CopyFrom(from);
+    return *this;
+  }
 
-    inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-    {
-        return _unknown_fields_;
-    }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
 
-    inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-    {
-        return &_unknown_fields_;
-    }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
 
-    static const ::google::protobuf::Descriptor* descriptor();
-    static const RoleOfflineNotify& default_instance();
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoleOfflineNotify& default_instance();
 
-    void Swap(RoleOfflineNotify* other);
+  void Swap(RoleOfflineNotify* other);
 
-    // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-    RoleOfflineNotify* New() const;
-    void CopyFrom(const ::google::protobuf::Message& from);
-    void MergeFrom(const ::google::protobuf::Message& from);
-    void CopyFrom(const RoleOfflineNotify& from);
-    void MergeFrom(const RoleOfflineNotify& from);
-    void Clear();
-    bool IsInitialized() const;
+  RoleOfflineNotify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoleOfflineNotify& from);
+  void MergeFrom(const RoleOfflineNotify& from);
+  void Clear();
+  bool IsInitialized() const;
 
-    int ByteSize() const;
-    bool MergePartialFromCodedStream(
-        ::google::protobuf::io::CodedInputStream* input);
-    void SerializeWithCachedSizes(
-        ::google::protobuf::io::CodedOutputStream* output) const;
-    ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-    int GetCachedSize() const
-    {
-        return _cached_size_;
-    }
-private:
-    void SharedCtor();
-    void SharedDtor();
-    void SetCachedSize(int size) const;
-public:
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
 
-    ::google::protobuf::Metadata GetMetadata() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
-    // nested types ----------------------------------------------------
+  // nested types ----------------------------------------------------
 
-    // accessors -------------------------------------------------------
+  // accessors -------------------------------------------------------
 
-    // optional .NFMsg.Ident guild = 1;
-    inline bool has_guild() const;
-    inline void clear_guild();
-    static const int kGuildFieldNumber = 1;
-    inline const ::NFMsg::Ident& guild() const;
-    inline ::NFMsg::Ident* mutable_guild();
-    inline ::NFMsg::Ident* release_guild();
-    inline void set_allocated_guild(::NFMsg::Ident* guild);
+  // optional .NFMsg.Ident guild = 1;
+  inline bool has_guild() const;
+  inline void clear_guild();
+  static const int kGuildFieldNumber = 1;
+  inline const ::NFMsg::Ident& guild() const;
+  inline ::NFMsg::Ident* mutable_guild();
+  inline ::NFMsg::Ident* release_guild();
+  inline void set_allocated_guild(::NFMsg::Ident* guild);
 
-    // @@protoc_insertion_point(class_scope:NFMsg.RoleOfflineNotify)
-private:
-    inline void set_has_guild();
-    inline void clear_has_guild();
+  // @@protoc_insertion_point(class_scope:NFMsg.RoleOfflineNotify)
+ private:
+  inline void set_has_guild();
+  inline void clear_has_guild();
 
-    ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-    ::NFMsg::Ident* guild_;
+  ::NFMsg::Ident* guild_;
 
-    mutable int _cached_size_;
-    ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-    friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
-    friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
-    void InitAsDefaultInstance();
-    static RoleOfflineNotify* default_instance_;
+  void InitAsDefaultInstance();
+  static RoleOfflineNotify* default_instance_;
 };
 // ===================================================================
 
@@ -2671,358 +2517,276 @@ private:
 // ServerInfoReport
 
 // required int32 server_id = 1;
-inline bool ServerInfoReport::has_server_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ServerInfoReport::has_server_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ServerInfoReport::set_has_server_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ServerInfoReport::set_has_server_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ServerInfoReport::clear_has_server_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ServerInfoReport::clear_has_server_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ServerInfoReport::clear_server_id()
-{
-    server_id_ = 0;
-    clear_has_server_id();
+inline void ServerInfoReport::clear_server_id() {
+  server_id_ = 0;
+  clear_has_server_id();
 }
-inline ::google::protobuf::int32 ServerInfoReport::server_id() const
-{
-    return server_id_;
+inline ::google::protobuf::int32 ServerInfoReport::server_id() const {
+  return server_id_;
 }
-inline void ServerInfoReport::set_server_id(::google::protobuf::int32 value)
-{
-    set_has_server_id();
-    server_id_ = value;
+inline void ServerInfoReport::set_server_id(::google::protobuf::int32 value) {
+  set_has_server_id();
+  server_id_ = value;
 }
 
 // required bytes server_name = 2;
-inline bool ServerInfoReport::has_server_name() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ServerInfoReport::has_server_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ServerInfoReport::set_has_server_name()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ServerInfoReport::set_has_server_name() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ServerInfoReport::clear_has_server_name()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ServerInfoReport::clear_has_server_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ServerInfoReport::clear_server_name()
-{
-    if (server_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        server_name_->clear();
-    }
+inline void ServerInfoReport::clear_server_name() {
+  if (server_name_ != &::google::protobuf::internal::kEmptyString) {
+    server_name_->clear();
+  }
+  clear_has_server_name();
+}
+inline const ::std::string& ServerInfoReport::server_name() const {
+  return *server_name_;
+}
+inline void ServerInfoReport::set_server_name(const ::std::string& value) {
+  set_has_server_name();
+  if (server_name_ == &::google::protobuf::internal::kEmptyString) {
+    server_name_ = new ::std::string;
+  }
+  server_name_->assign(value);
+}
+inline void ServerInfoReport::set_server_name(const char* value) {
+  set_has_server_name();
+  if (server_name_ == &::google::protobuf::internal::kEmptyString) {
+    server_name_ = new ::std::string;
+  }
+  server_name_->assign(value);
+}
+inline void ServerInfoReport::set_server_name(const void* value, size_t size) {
+  set_has_server_name();
+  if (server_name_ == &::google::protobuf::internal::kEmptyString) {
+    server_name_ = new ::std::string;
+  }
+  server_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ServerInfoReport::mutable_server_name() {
+  set_has_server_name();
+  if (server_name_ == &::google::protobuf::internal::kEmptyString) {
+    server_name_ = new ::std::string;
+  }
+  return server_name_;
+}
+inline ::std::string* ServerInfoReport::release_server_name() {
+  clear_has_server_name();
+  if (server_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = server_name_;
+    server_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ServerInfoReport::set_allocated_server_name(::std::string* server_name) {
+  if (server_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete server_name_;
+  }
+  if (server_name) {
+    set_has_server_name();
+    server_name_ = server_name;
+  } else {
     clear_has_server_name();
-}
-inline const ::std::string& ServerInfoReport::server_name() const
-{
-    return *server_name_;
-}
-inline void ServerInfoReport::set_server_name(const ::std::string& value)
-{
-    set_has_server_name();
-    if (server_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_name_ = new ::std::string;
-    }
-    server_name_->assign(value);
-}
-inline void ServerInfoReport::set_server_name(const char* value)
-{
-    set_has_server_name();
-    if (server_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_name_ = new ::std::string;
-    }
-    server_name_->assign(value);
-}
-inline void ServerInfoReport::set_server_name(const void* value, size_t size)
-{
-    set_has_server_name();
-    if (server_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_name_ = new ::std::string;
-    }
-    server_name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ServerInfoReport::mutable_server_name()
-{
-    set_has_server_name();
-    if (server_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_name_ = new ::std::string;
-    }
-    return server_name_;
-}
-inline ::std::string* ServerInfoReport::release_server_name()
-{
-    clear_has_server_name();
-    if (server_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = server_name_;
-        server_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ServerInfoReport::set_allocated_server_name(::std::string* server_name)
-{
-    if (server_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete server_name_;
-    }
-    if (server_name)
-    {
-        set_has_server_name();
-        server_name_ = server_name;
-    }
-    else
-    {
-        clear_has_server_name();
-        server_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    server_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes server_ip = 3;
-inline bool ServerInfoReport::has_server_ip() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ServerInfoReport::has_server_ip() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ServerInfoReport::set_has_server_ip()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ServerInfoReport::set_has_server_ip() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ServerInfoReport::clear_has_server_ip()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ServerInfoReport::clear_has_server_ip() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ServerInfoReport::clear_server_ip()
-{
-    if (server_ip_ != &::google::protobuf::internal::kEmptyString)
-    {
-        server_ip_->clear();
-    }
+inline void ServerInfoReport::clear_server_ip() {
+  if (server_ip_ != &::google::protobuf::internal::kEmptyString) {
+    server_ip_->clear();
+  }
+  clear_has_server_ip();
+}
+inline const ::std::string& ServerInfoReport::server_ip() const {
+  return *server_ip_;
+}
+inline void ServerInfoReport::set_server_ip(const ::std::string& value) {
+  set_has_server_ip();
+  if (server_ip_ == &::google::protobuf::internal::kEmptyString) {
+    server_ip_ = new ::std::string;
+  }
+  server_ip_->assign(value);
+}
+inline void ServerInfoReport::set_server_ip(const char* value) {
+  set_has_server_ip();
+  if (server_ip_ == &::google::protobuf::internal::kEmptyString) {
+    server_ip_ = new ::std::string;
+  }
+  server_ip_->assign(value);
+}
+inline void ServerInfoReport::set_server_ip(const void* value, size_t size) {
+  set_has_server_ip();
+  if (server_ip_ == &::google::protobuf::internal::kEmptyString) {
+    server_ip_ = new ::std::string;
+  }
+  server_ip_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ServerInfoReport::mutable_server_ip() {
+  set_has_server_ip();
+  if (server_ip_ == &::google::protobuf::internal::kEmptyString) {
+    server_ip_ = new ::std::string;
+  }
+  return server_ip_;
+}
+inline ::std::string* ServerInfoReport::release_server_ip() {
+  clear_has_server_ip();
+  if (server_ip_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = server_ip_;
+    server_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ServerInfoReport::set_allocated_server_ip(::std::string* server_ip) {
+  if (server_ip_ != &::google::protobuf::internal::kEmptyString) {
+    delete server_ip_;
+  }
+  if (server_ip) {
+    set_has_server_ip();
+    server_ip_ = server_ip;
+  } else {
     clear_has_server_ip();
-}
-inline const ::std::string& ServerInfoReport::server_ip() const
-{
-    return *server_ip_;
-}
-inline void ServerInfoReport::set_server_ip(const ::std::string& value)
-{
-    set_has_server_ip();
-    if (server_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_ip_ = new ::std::string;
-    }
-    server_ip_->assign(value);
-}
-inline void ServerInfoReport::set_server_ip(const char* value)
-{
-    set_has_server_ip();
-    if (server_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_ip_ = new ::std::string;
-    }
-    server_ip_->assign(value);
-}
-inline void ServerInfoReport::set_server_ip(const void* value, size_t size)
-{
-    set_has_server_ip();
-    if (server_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_ip_ = new ::std::string;
-    }
-    server_ip_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ServerInfoReport::mutable_server_ip()
-{
-    set_has_server_ip();
-    if (server_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        server_ip_ = new ::std::string;
-    }
-    return server_ip_;
-}
-inline ::std::string* ServerInfoReport::release_server_ip()
-{
-    clear_has_server_ip();
-    if (server_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = server_ip_;
-        server_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ServerInfoReport::set_allocated_server_ip(::std::string* server_ip)
-{
-    if (server_ip_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete server_ip_;
-    }
-    if (server_ip)
-    {
-        set_has_server_ip();
-        server_ip_ = server_ip;
-    }
-    else
-    {
-        clear_has_server_ip();
-        server_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    server_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 server_port = 4;
-inline bool ServerInfoReport::has_server_port() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool ServerInfoReport::has_server_port() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ServerInfoReport::set_has_server_port()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void ServerInfoReport::set_has_server_port() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ServerInfoReport::clear_has_server_port()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void ServerInfoReport::clear_has_server_port() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ServerInfoReport::clear_server_port()
-{
-    server_port_ = 0;
-    clear_has_server_port();
+inline void ServerInfoReport::clear_server_port() {
+  server_port_ = 0;
+  clear_has_server_port();
 }
-inline ::google::protobuf::int32 ServerInfoReport::server_port() const
-{
-    return server_port_;
+inline ::google::protobuf::int32 ServerInfoReport::server_port() const {
+  return server_port_;
 }
-inline void ServerInfoReport::set_server_port(::google::protobuf::int32 value)
-{
-    set_has_server_port();
-    server_port_ = value;
+inline void ServerInfoReport::set_server_port(::google::protobuf::int32 value) {
+  set_has_server_port();
+  server_port_ = value;
 }
 
 // required int32 server_max_online = 5;
-inline bool ServerInfoReport::has_server_max_online() const
-{
-    return (_has_bits_[0] & 0x00000010u) != 0;
+inline bool ServerInfoReport::has_server_max_online() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ServerInfoReport::set_has_server_max_online()
-{
-    _has_bits_[0] |= 0x00000010u;
+inline void ServerInfoReport::set_has_server_max_online() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void ServerInfoReport::clear_has_server_max_online()
-{
-    _has_bits_[0] &= ~0x00000010u;
+inline void ServerInfoReport::clear_has_server_max_online() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void ServerInfoReport::clear_server_max_online()
-{
-    server_max_online_ = 0;
-    clear_has_server_max_online();
+inline void ServerInfoReport::clear_server_max_online() {
+  server_max_online_ = 0;
+  clear_has_server_max_online();
 }
-inline ::google::protobuf::int32 ServerInfoReport::server_max_online() const
-{
-    return server_max_online_;
+inline ::google::protobuf::int32 ServerInfoReport::server_max_online() const {
+  return server_max_online_;
 }
-inline void ServerInfoReport::set_server_max_online(::google::protobuf::int32 value)
-{
-    set_has_server_max_online();
-    server_max_online_ = value;
+inline void ServerInfoReport::set_server_max_online(::google::protobuf::int32 value) {
+  set_has_server_max_online();
+  server_max_online_ = value;
 }
 
 // required int32 server_cur_count = 6;
-inline bool ServerInfoReport::has_server_cur_count() const
-{
-    return (_has_bits_[0] & 0x00000020u) != 0;
+inline bool ServerInfoReport::has_server_cur_count() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ServerInfoReport::set_has_server_cur_count()
-{
-    _has_bits_[0] |= 0x00000020u;
+inline void ServerInfoReport::set_has_server_cur_count() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void ServerInfoReport::clear_has_server_cur_count()
-{
-    _has_bits_[0] &= ~0x00000020u;
+inline void ServerInfoReport::clear_has_server_cur_count() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void ServerInfoReport::clear_server_cur_count()
-{
-    server_cur_count_ = 0;
-    clear_has_server_cur_count();
+inline void ServerInfoReport::clear_server_cur_count() {
+  server_cur_count_ = 0;
+  clear_has_server_cur_count();
 }
-inline ::google::protobuf::int32 ServerInfoReport::server_cur_count() const
-{
-    return server_cur_count_;
+inline ::google::protobuf::int32 ServerInfoReport::server_cur_count() const {
+  return server_cur_count_;
 }
-inline void ServerInfoReport::set_server_cur_count(::google::protobuf::int32 value)
-{
-    set_has_server_cur_count();
-    server_cur_count_ = value;
+inline void ServerInfoReport::set_server_cur_count(::google::protobuf::int32 value) {
+  set_has_server_cur_count();
+  server_cur_count_ = value;
 }
 
 // required .NFMsg.EServerState server_state = 7;
-inline bool ServerInfoReport::has_server_state() const
-{
-    return (_has_bits_[0] & 0x00000040u) != 0;
+inline bool ServerInfoReport::has_server_state() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void ServerInfoReport::set_has_server_state()
-{
-    _has_bits_[0] |= 0x00000040u;
+inline void ServerInfoReport::set_has_server_state() {
+  _has_bits_[0] |= 0x00000040u;
 }
-inline void ServerInfoReport::clear_has_server_state()
-{
-    _has_bits_[0] &= ~0x00000040u;
+inline void ServerInfoReport::clear_has_server_state() {
+  _has_bits_[0] &= ~0x00000040u;
 }
-inline void ServerInfoReport::clear_server_state()
-{
-    server_state_ = 0;
-    clear_has_server_state();
+inline void ServerInfoReport::clear_server_state() {
+  server_state_ = 0;
+  clear_has_server_state();
 }
-inline ::NFMsg::EServerState ServerInfoReport::server_state() const
-{
-    return static_cast< ::NFMsg::EServerState >(server_state_);
+inline ::NFMsg::EServerState ServerInfoReport::server_state() const {
+  return static_cast< ::NFMsg::EServerState >(server_state_);
 }
-inline void ServerInfoReport::set_server_state(::NFMsg::EServerState value)
-{
-    assert(::NFMsg::EServerState_IsValid(value));
-    set_has_server_state();
-    server_state_ = value;
+inline void ServerInfoReport::set_server_state(::NFMsg::EServerState value) {
+  assert(::NFMsg::EServerState_IsValid(value));
+  set_has_server_state();
+  server_state_ = value;
 }
 
 // required int32 server_type = 8;
-inline bool ServerInfoReport::has_server_type() const
-{
-    return (_has_bits_[0] & 0x00000080u) != 0;
+inline bool ServerInfoReport::has_server_type() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ServerInfoReport::set_has_server_type()
-{
-    _has_bits_[0] |= 0x00000080u;
+inline void ServerInfoReport::set_has_server_type() {
+  _has_bits_[0] |= 0x00000080u;
 }
-inline void ServerInfoReport::clear_has_server_type()
-{
-    _has_bits_[0] &= ~0x00000080u;
+inline void ServerInfoReport::clear_has_server_type() {
+  _has_bits_[0] &= ~0x00000080u;
 }
-inline void ServerInfoReport::clear_server_type()
-{
-    server_type_ = 0;
-    clear_has_server_type();
+inline void ServerInfoReport::clear_server_type() {
+  server_type_ = 0;
+  clear_has_server_type();
 }
-inline ::google::protobuf::int32 ServerInfoReport::server_type() const
-{
-    return server_type_;
+inline ::google::protobuf::int32 ServerInfoReport::server_type() const {
+  return server_type_;
 }
-inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value)
-{
-    set_has_server_type();
-    server_type_ = value;
+inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value) {
+  set_has_server_type();
+  server_type_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -3030,35 +2794,28 @@ inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value)
 // ServerInfoReportList
 
 // repeated .NFMsg.ServerInfoReport server_list = 1;
-inline int ServerInfoReportList::server_list_size() const
-{
-    return server_list_.size();
+inline int ServerInfoReportList::server_list_size() const {
+  return server_list_.size();
 }
-inline void ServerInfoReportList::clear_server_list()
-{
-    server_list_.Clear();
+inline void ServerInfoReportList::clear_server_list() {
+  server_list_.Clear();
 }
-inline const ::NFMsg::ServerInfoReport& ServerInfoReportList::server_list(int index) const
-{
-    return server_list_.Get(index);
+inline const ::NFMsg::ServerInfoReport& ServerInfoReportList::server_list(int index) const {
+  return server_list_.Get(index);
 }
-inline ::NFMsg::ServerInfoReport* ServerInfoReportList::mutable_server_list(int index)
-{
-    return server_list_.Mutable(index);
+inline ::NFMsg::ServerInfoReport* ServerInfoReportList::mutable_server_list(int index) {
+  return server_list_.Mutable(index);
 }
-inline ::NFMsg::ServerInfoReport* ServerInfoReportList::add_server_list()
-{
-    return server_list_.Add();
+inline ::NFMsg::ServerInfoReport* ServerInfoReportList::add_server_list() {
+  return server_list_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >&
-ServerInfoReportList::server_list() const
-{
-    return server_list_;
+ServerInfoReportList::server_list() const {
+  return server_list_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfoReport >*
-ServerInfoReportList::mutable_server_list()
-{
-    return &server_list_;
+ServerInfoReportList::mutable_server_list() {
+  return &server_list_;
 }
 
 // -------------------------------------------------------------------
@@ -3066,142 +2823,102 @@ ServerInfoReportList::mutable_server_list()
 // AckEventResult
 
 // required .NFMsg.EGameEventCode event_code = 1;
-inline bool AckEventResult::has_event_code() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool AckEventResult::has_event_code() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AckEventResult::set_has_event_code()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void AckEventResult::set_has_event_code() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void AckEventResult::clear_has_event_code()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void AckEventResult::clear_has_event_code() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void AckEventResult::clear_event_code()
-{
-    event_code_ = 0;
-    clear_has_event_code();
+inline void AckEventResult::clear_event_code() {
+  event_code_ = 0;
+  clear_has_event_code();
 }
-inline ::NFMsg::EGameEventCode AckEventResult::event_code() const
-{
-    return static_cast< ::NFMsg::EGameEventCode >(event_code_);
+inline ::NFMsg::EGameEventCode AckEventResult::event_code() const {
+  return static_cast< ::NFMsg::EGameEventCode >(event_code_);
 }
-inline void AckEventResult::set_event_code(::NFMsg::EGameEventCode value)
-{
-    assert(::NFMsg::EGameEventCode_IsValid(value));
-    set_has_event_code();
-    event_code_ = value;
+inline void AckEventResult::set_event_code(::NFMsg::EGameEventCode value) {
+  assert(::NFMsg::EGameEventCode_IsValid(value));
+  set_has_event_code();
+  event_code_ = value;
 }
 
 // optional .NFMsg.Ident event_object = 2;
-inline bool AckEventResult::has_event_object() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool AckEventResult::has_event_object() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AckEventResult::set_has_event_object()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void AckEventResult::set_has_event_object() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void AckEventResult::clear_has_event_object()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void AckEventResult::clear_has_event_object() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void AckEventResult::clear_event_object()
-{
-    if (event_object_ != NULL)
-    {
-        event_object_->::NFMsg::Ident::Clear();
-    }
-    clear_has_event_object();
+inline void AckEventResult::clear_event_object() {
+  if (event_object_ != NULL) event_object_->::NFMsg::Ident::Clear();
+  clear_has_event_object();
 }
-inline const ::NFMsg::Ident& AckEventResult::event_object() const
-{
-    return event_object_ != NULL ? *event_object_ : *default_instance_->event_object_;
+inline const ::NFMsg::Ident& AckEventResult::event_object() const {
+  return event_object_ != NULL ? *event_object_ : *default_instance_->event_object_;
 }
-inline ::NFMsg::Ident* AckEventResult::mutable_event_object()
-{
+inline ::NFMsg::Ident* AckEventResult::mutable_event_object() {
+  set_has_event_object();
+  if (event_object_ == NULL) event_object_ = new ::NFMsg::Ident;
+  return event_object_;
+}
+inline ::NFMsg::Ident* AckEventResult::release_event_object() {
+  clear_has_event_object();
+  ::NFMsg::Ident* temp = event_object_;
+  event_object_ = NULL;
+  return temp;
+}
+inline void AckEventResult::set_allocated_event_object(::NFMsg::Ident* event_object) {
+  delete event_object_;
+  event_object_ = event_object;
+  if (event_object) {
     set_has_event_object();
-    if (event_object_ == NULL)
-    {
-        event_object_ = new ::NFMsg::Ident;
-    }
-    return event_object_;
-}
-inline ::NFMsg::Ident* AckEventResult::release_event_object()
-{
+  } else {
     clear_has_event_object();
-    ::NFMsg::Ident* temp = event_object_;
-    event_object_ = NULL;
-    return temp;
-}
-inline void AckEventResult::set_allocated_event_object(::NFMsg::Ident* event_object)
-{
-    delete event_object_;
-    event_object_ = event_object;
-    if (event_object)
-    {
-        set_has_event_object();
-    }
-    else
-    {
-        clear_has_event_object();
-    }
+  }
 }
 
 // optional .NFMsg.Ident event_client = 3;
-inline bool AckEventResult::has_event_client() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool AckEventResult::has_event_client() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AckEventResult::set_has_event_client()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void AckEventResult::set_has_event_client() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void AckEventResult::clear_has_event_client()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void AckEventResult::clear_has_event_client() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void AckEventResult::clear_event_client()
-{
-    if (event_client_ != NULL)
-    {
-        event_client_->::NFMsg::Ident::Clear();
-    }
-    clear_has_event_client();
+inline void AckEventResult::clear_event_client() {
+  if (event_client_ != NULL) event_client_->::NFMsg::Ident::Clear();
+  clear_has_event_client();
 }
-inline const ::NFMsg::Ident& AckEventResult::event_client() const
-{
-    return event_client_ != NULL ? *event_client_ : *default_instance_->event_client_;
+inline const ::NFMsg::Ident& AckEventResult::event_client() const {
+  return event_client_ != NULL ? *event_client_ : *default_instance_->event_client_;
 }
-inline ::NFMsg::Ident* AckEventResult::mutable_event_client()
-{
+inline ::NFMsg::Ident* AckEventResult::mutable_event_client() {
+  set_has_event_client();
+  if (event_client_ == NULL) event_client_ = new ::NFMsg::Ident;
+  return event_client_;
+}
+inline ::NFMsg::Ident* AckEventResult::release_event_client() {
+  clear_has_event_client();
+  ::NFMsg::Ident* temp = event_client_;
+  event_client_ = NULL;
+  return temp;
+}
+inline void AckEventResult::set_allocated_event_client(::NFMsg::Ident* event_client) {
+  delete event_client_;
+  event_client_ = event_client;
+  if (event_client) {
     set_has_event_client();
-    if (event_client_ == NULL)
-    {
-        event_client_ = new ::NFMsg::Ident;
-    }
-    return event_client_;
-}
-inline ::NFMsg::Ident* AckEventResult::release_event_client()
-{
+  } else {
     clear_has_event_client();
-    ::NFMsg::Ident* temp = event_client_;
-    event_client_ = NULL;
-    return temp;
-}
-inline void AckEventResult::set_allocated_event_client(::NFMsg::Ident* event_client)
-{
-    delete event_client_;
-    event_client_ = event_client;
-    if (event_client)
-    {
-        set_has_event_client();
-    }
-    else
-    {
-        clear_has_event_client();
-    }
+  }
 }
 
 // -------------------------------------------------------------------
@@ -3209,673 +2926,511 @@ inline void AckEventResult::set_allocated_event_client(::NFMsg::Ident* event_cli
 // ReqAccountLogin
 
 // required bytes account = 2;
-inline bool ReqAccountLogin::has_account() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqAccountLogin::has_account() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAccountLogin::set_has_account()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqAccountLogin::set_has_account() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAccountLogin::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqAccountLogin::clear_has_account() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqAccountLogin::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqAccountLogin::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqAccountLogin::account() const {
+  return *account_;
+}
+inline void ReqAccountLogin::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqAccountLogin::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqAccountLogin::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqAccountLogin::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqAccountLogin::account() const
-{
-    return *account_;
-}
-inline void ReqAccountLogin::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqAccountLogin::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqAccountLogin::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqAccountLogin::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes password = 3;
-inline bool ReqAccountLogin::has_password() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqAccountLogin::has_password() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqAccountLogin::set_has_password()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqAccountLogin::set_has_password() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqAccountLogin::clear_has_password()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqAccountLogin::clear_has_password() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqAccountLogin::clear_password()
-{
-    if (password_ != &::google::protobuf::internal::kEmptyString)
-    {
-        password_->clear();
-    }
+inline void ReqAccountLogin::clear_password() {
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    password_->clear();
+  }
+  clear_has_password();
+}
+inline const ::std::string& ReqAccountLogin::password() const {
+  return *password_;
+}
+inline void ReqAccountLogin::set_password(const ::std::string& value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void ReqAccountLogin::set_password(const char* value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void ReqAccountLogin::set_password(const void* value, size_t size) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_password() {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  return password_;
+}
+inline ::std::string* ReqAccountLogin::release_password() {
+  clear_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = password_;
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_password(::std::string* password) {
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    delete password_;
+  }
+  if (password) {
+    set_has_password();
+    password_ = password;
+  } else {
     clear_has_password();
-}
-inline const ::std::string& ReqAccountLogin::password() const
-{
-    return *password_;
-}
-inline void ReqAccountLogin::set_password(const ::std::string& value)
-{
-    set_has_password();
-    if (password_ == &::google::protobuf::internal::kEmptyString)
-    {
-        password_ = new ::std::string;
-    }
-    password_->assign(value);
-}
-inline void ReqAccountLogin::set_password(const char* value)
-{
-    set_has_password();
-    if (password_ == &::google::protobuf::internal::kEmptyString)
-    {
-        password_ = new ::std::string;
-    }
-    password_->assign(value);
-}
-inline void ReqAccountLogin::set_password(const void* value, size_t size)
-{
-    set_has_password();
-    if (password_ == &::google::protobuf::internal::kEmptyString)
-    {
-        password_ = new ::std::string;
-    }
-    password_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_password()
-{
-    set_has_password();
-    if (password_ == &::google::protobuf::internal::kEmptyString)
-    {
-        password_ = new ::std::string;
-    }
-    return password_;
-}
-inline ::std::string* ReqAccountLogin::release_password()
-{
-    clear_has_password();
-    if (password_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = password_;
-        password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_password(::std::string* password)
-{
-    if (password_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete password_;
-    }
-    if (password)
-    {
-        set_has_password();
-        password_ = password;
-    }
-    else
-    {
-        clear_has_password();
-        password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes security_code = 4;
-inline bool ReqAccountLogin::has_security_code() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ReqAccountLogin::has_security_code() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqAccountLogin::set_has_security_code()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ReqAccountLogin::set_has_security_code() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqAccountLogin::clear_has_security_code()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ReqAccountLogin::clear_has_security_code() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqAccountLogin::clear_security_code()
-{
-    if (security_code_ != &::google::protobuf::internal::kEmptyString)
-    {
-        security_code_->clear();
-    }
+inline void ReqAccountLogin::clear_security_code() {
+  if (security_code_ != &::google::protobuf::internal::kEmptyString) {
+    security_code_->clear();
+  }
+  clear_has_security_code();
+}
+inline const ::std::string& ReqAccountLogin::security_code() const {
+  return *security_code_;
+}
+inline void ReqAccountLogin::set_security_code(const ::std::string& value) {
+  set_has_security_code();
+  if (security_code_ == &::google::protobuf::internal::kEmptyString) {
+    security_code_ = new ::std::string;
+  }
+  security_code_->assign(value);
+}
+inline void ReqAccountLogin::set_security_code(const char* value) {
+  set_has_security_code();
+  if (security_code_ == &::google::protobuf::internal::kEmptyString) {
+    security_code_ = new ::std::string;
+  }
+  security_code_->assign(value);
+}
+inline void ReqAccountLogin::set_security_code(const void* value, size_t size) {
+  set_has_security_code();
+  if (security_code_ == &::google::protobuf::internal::kEmptyString) {
+    security_code_ = new ::std::string;
+  }
+  security_code_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_security_code() {
+  set_has_security_code();
+  if (security_code_ == &::google::protobuf::internal::kEmptyString) {
+    security_code_ = new ::std::string;
+  }
+  return security_code_;
+}
+inline ::std::string* ReqAccountLogin::release_security_code() {
+  clear_has_security_code();
+  if (security_code_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = security_code_;
+    security_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_security_code(::std::string* security_code) {
+  if (security_code_ != &::google::protobuf::internal::kEmptyString) {
+    delete security_code_;
+  }
+  if (security_code) {
+    set_has_security_code();
+    security_code_ = security_code;
+  } else {
     clear_has_security_code();
-}
-inline const ::std::string& ReqAccountLogin::security_code() const
-{
-    return *security_code_;
-}
-inline void ReqAccountLogin::set_security_code(const ::std::string& value)
-{
-    set_has_security_code();
-    if (security_code_ == &::google::protobuf::internal::kEmptyString)
-    {
-        security_code_ = new ::std::string;
-    }
-    security_code_->assign(value);
-}
-inline void ReqAccountLogin::set_security_code(const char* value)
-{
-    set_has_security_code();
-    if (security_code_ == &::google::protobuf::internal::kEmptyString)
-    {
-        security_code_ = new ::std::string;
-    }
-    security_code_->assign(value);
-}
-inline void ReqAccountLogin::set_security_code(const void* value, size_t size)
-{
-    set_has_security_code();
-    if (security_code_ == &::google::protobuf::internal::kEmptyString)
-    {
-        security_code_ = new ::std::string;
-    }
-    security_code_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_security_code()
-{
-    set_has_security_code();
-    if (security_code_ == &::google::protobuf::internal::kEmptyString)
-    {
-        security_code_ = new ::std::string;
-    }
-    return security_code_;
-}
-inline ::std::string* ReqAccountLogin::release_security_code()
-{
-    clear_has_security_code();
-    if (security_code_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = security_code_;
-        security_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_security_code(::std::string* security_code)
-{
-    if (security_code_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete security_code_;
-    }
-    if (security_code)
-    {
-        set_has_security_code();
-        security_code_ = security_code;
-    }
-    else
-    {
-        clear_has_security_code();
-        security_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    security_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes signBuff = 5;
-inline bool ReqAccountLogin::has_signbuff() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool ReqAccountLogin::has_signbuff() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ReqAccountLogin::set_has_signbuff()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void ReqAccountLogin::set_has_signbuff() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ReqAccountLogin::clear_has_signbuff()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void ReqAccountLogin::clear_has_signbuff() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ReqAccountLogin::clear_signbuff()
-{
-    if (signbuff_ != &::google::protobuf::internal::kEmptyString)
-    {
-        signbuff_->clear();
-    }
+inline void ReqAccountLogin::clear_signbuff() {
+  if (signbuff_ != &::google::protobuf::internal::kEmptyString) {
+    signbuff_->clear();
+  }
+  clear_has_signbuff();
+}
+inline const ::std::string& ReqAccountLogin::signbuff() const {
+  return *signbuff_;
+}
+inline void ReqAccountLogin::set_signbuff(const ::std::string& value) {
+  set_has_signbuff();
+  if (signbuff_ == &::google::protobuf::internal::kEmptyString) {
+    signbuff_ = new ::std::string;
+  }
+  signbuff_->assign(value);
+}
+inline void ReqAccountLogin::set_signbuff(const char* value) {
+  set_has_signbuff();
+  if (signbuff_ == &::google::protobuf::internal::kEmptyString) {
+    signbuff_ = new ::std::string;
+  }
+  signbuff_->assign(value);
+}
+inline void ReqAccountLogin::set_signbuff(const void* value, size_t size) {
+  set_has_signbuff();
+  if (signbuff_ == &::google::protobuf::internal::kEmptyString) {
+    signbuff_ = new ::std::string;
+  }
+  signbuff_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_signbuff() {
+  set_has_signbuff();
+  if (signbuff_ == &::google::protobuf::internal::kEmptyString) {
+    signbuff_ = new ::std::string;
+  }
+  return signbuff_;
+}
+inline ::std::string* ReqAccountLogin::release_signbuff() {
+  clear_has_signbuff();
+  if (signbuff_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = signbuff_;
+    signbuff_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_signbuff(::std::string* signbuff) {
+  if (signbuff_ != &::google::protobuf::internal::kEmptyString) {
+    delete signbuff_;
+  }
+  if (signbuff) {
+    set_has_signbuff();
+    signbuff_ = signbuff;
+  } else {
     clear_has_signbuff();
-}
-inline const ::std::string& ReqAccountLogin::signbuff() const
-{
-    return *signbuff_;
-}
-inline void ReqAccountLogin::set_signbuff(const ::std::string& value)
-{
-    set_has_signbuff();
-    if (signbuff_ == &::google::protobuf::internal::kEmptyString)
-    {
-        signbuff_ = new ::std::string;
-    }
-    signbuff_->assign(value);
-}
-inline void ReqAccountLogin::set_signbuff(const char* value)
-{
-    set_has_signbuff();
-    if (signbuff_ == &::google::protobuf::internal::kEmptyString)
-    {
-        signbuff_ = new ::std::string;
-    }
-    signbuff_->assign(value);
-}
-inline void ReqAccountLogin::set_signbuff(const void* value, size_t size)
-{
-    set_has_signbuff();
-    if (signbuff_ == &::google::protobuf::internal::kEmptyString)
-    {
-        signbuff_ = new ::std::string;
-    }
-    signbuff_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_signbuff()
-{
-    set_has_signbuff();
-    if (signbuff_ == &::google::protobuf::internal::kEmptyString)
-    {
-        signbuff_ = new ::std::string;
-    }
-    return signbuff_;
-}
-inline ::std::string* ReqAccountLogin::release_signbuff()
-{
-    clear_has_signbuff();
-    if (signbuff_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = signbuff_;
-        signbuff_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_signbuff(::std::string* signbuff)
-{
-    if (signbuff_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete signbuff_;
-    }
-    if (signbuff)
-    {
-        set_has_signbuff();
-        signbuff_ = signbuff;
-    }
-    else
-    {
-        clear_has_signbuff();
-        signbuff_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    signbuff_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 clientVersion = 6;
-inline bool ReqAccountLogin::has_clientversion() const
-{
-    return (_has_bits_[0] & 0x00000010u) != 0;
+inline bool ReqAccountLogin::has_clientversion() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ReqAccountLogin::set_has_clientversion()
-{
-    _has_bits_[0] |= 0x00000010u;
+inline void ReqAccountLogin::set_has_clientversion() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void ReqAccountLogin::clear_has_clientversion()
-{
-    _has_bits_[0] &= ~0x00000010u;
+inline void ReqAccountLogin::clear_has_clientversion() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void ReqAccountLogin::clear_clientversion()
-{
-    clientversion_ = 0;
-    clear_has_clientversion();
+inline void ReqAccountLogin::clear_clientversion() {
+  clientversion_ = 0;
+  clear_has_clientversion();
 }
-inline ::google::protobuf::int32 ReqAccountLogin::clientversion() const
-{
-    return clientversion_;
+inline ::google::protobuf::int32 ReqAccountLogin::clientversion() const {
+  return clientversion_;
 }
-inline void ReqAccountLogin::set_clientversion(::google::protobuf::int32 value)
-{
-    set_has_clientversion();
-    clientversion_ = value;
+inline void ReqAccountLogin::set_clientversion(::google::protobuf::int32 value) {
+  set_has_clientversion();
+  clientversion_ = value;
 }
 
 // required int32 loginMode = 7;
-inline bool ReqAccountLogin::has_loginmode() const
-{
-    return (_has_bits_[0] & 0x00000020u) != 0;
+inline bool ReqAccountLogin::has_loginmode() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ReqAccountLogin::set_has_loginmode()
-{
-    _has_bits_[0] |= 0x00000020u;
+inline void ReqAccountLogin::set_has_loginmode() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void ReqAccountLogin::clear_has_loginmode()
-{
-    _has_bits_[0] &= ~0x00000020u;
+inline void ReqAccountLogin::clear_has_loginmode() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void ReqAccountLogin::clear_loginmode()
-{
-    loginmode_ = 0;
-    clear_has_loginmode();
+inline void ReqAccountLogin::clear_loginmode() {
+  loginmode_ = 0;
+  clear_has_loginmode();
 }
-inline ::google::protobuf::int32 ReqAccountLogin::loginmode() const
-{
-    return loginmode_;
+inline ::google::protobuf::int32 ReqAccountLogin::loginmode() const {
+  return loginmode_;
 }
-inline void ReqAccountLogin::set_loginmode(::google::protobuf::int32 value)
-{
-    set_has_loginmode();
-    loginmode_ = value;
+inline void ReqAccountLogin::set_loginmode(::google::protobuf::int32 value) {
+  set_has_loginmode();
+  loginmode_ = value;
 }
 
 // required int32 clientIP = 8;
-inline bool ReqAccountLogin::has_clientip() const
-{
-    return (_has_bits_[0] & 0x00000040u) != 0;
+inline bool ReqAccountLogin::has_clientip() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void ReqAccountLogin::set_has_clientip()
-{
-    _has_bits_[0] |= 0x00000040u;
+inline void ReqAccountLogin::set_has_clientip() {
+  _has_bits_[0] |= 0x00000040u;
 }
-inline void ReqAccountLogin::clear_has_clientip()
-{
-    _has_bits_[0] &= ~0x00000040u;
+inline void ReqAccountLogin::clear_has_clientip() {
+  _has_bits_[0] &= ~0x00000040u;
 }
-inline void ReqAccountLogin::clear_clientip()
-{
-    clientip_ = 0;
-    clear_has_clientip();
+inline void ReqAccountLogin::clear_clientip() {
+  clientip_ = 0;
+  clear_has_clientip();
 }
-inline ::google::protobuf::int32 ReqAccountLogin::clientip() const
-{
-    return clientip_;
+inline ::google::protobuf::int32 ReqAccountLogin::clientip() const {
+  return clientip_;
 }
-inline void ReqAccountLogin::set_clientip(::google::protobuf::int32 value)
-{
-    set_has_clientip();
-    clientip_ = value;
+inline void ReqAccountLogin::set_clientip(::google::protobuf::int32 value) {
+  set_has_clientip();
+  clientip_ = value;
 }
 
 // required int64 clientMAC = 9;
-inline bool ReqAccountLogin::has_clientmac() const
-{
-    return (_has_bits_[0] & 0x00000080u) != 0;
+inline bool ReqAccountLogin::has_clientmac() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ReqAccountLogin::set_has_clientmac()
-{
-    _has_bits_[0] |= 0x00000080u;
+inline void ReqAccountLogin::set_has_clientmac() {
+  _has_bits_[0] |= 0x00000080u;
 }
-inline void ReqAccountLogin::clear_has_clientmac()
-{
-    _has_bits_[0] &= ~0x00000080u;
+inline void ReqAccountLogin::clear_has_clientmac() {
+  _has_bits_[0] &= ~0x00000080u;
 }
-inline void ReqAccountLogin::clear_clientmac()
-{
-    clientmac_ = GOOGLE_LONGLONG(0);
-    clear_has_clientmac();
+inline void ReqAccountLogin::clear_clientmac() {
+  clientmac_ = GOOGLE_LONGLONG(0);
+  clear_has_clientmac();
 }
-inline ::google::protobuf::int64 ReqAccountLogin::clientmac() const
-{
-    return clientmac_;
+inline ::google::protobuf::int64 ReqAccountLogin::clientmac() const {
+  return clientmac_;
 }
-inline void ReqAccountLogin::set_clientmac(::google::protobuf::int64 value)
-{
-    set_has_clientmac();
-    clientmac_ = value;
+inline void ReqAccountLogin::set_clientmac(::google::protobuf::int64 value) {
+  set_has_clientmac();
+  clientmac_ = value;
 }
 
 // required bytes device_info = 10;
-inline bool ReqAccountLogin::has_device_info() const
-{
-    return (_has_bits_[0] & 0x00000100u) != 0;
+inline bool ReqAccountLogin::has_device_info() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void ReqAccountLogin::set_has_device_info()
-{
-    _has_bits_[0] |= 0x00000100u;
+inline void ReqAccountLogin::set_has_device_info() {
+  _has_bits_[0] |= 0x00000100u;
 }
-inline void ReqAccountLogin::clear_has_device_info()
-{
-    _has_bits_[0] &= ~0x00000100u;
+inline void ReqAccountLogin::clear_has_device_info() {
+  _has_bits_[0] &= ~0x00000100u;
 }
-inline void ReqAccountLogin::clear_device_info()
-{
-    if (device_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        device_info_->clear();
-    }
+inline void ReqAccountLogin::clear_device_info() {
+  if (device_info_ != &::google::protobuf::internal::kEmptyString) {
+    device_info_->clear();
+  }
+  clear_has_device_info();
+}
+inline const ::std::string& ReqAccountLogin::device_info() const {
+  return *device_info_;
+}
+inline void ReqAccountLogin::set_device_info(const ::std::string& value) {
+  set_has_device_info();
+  if (device_info_ == &::google::protobuf::internal::kEmptyString) {
+    device_info_ = new ::std::string;
+  }
+  device_info_->assign(value);
+}
+inline void ReqAccountLogin::set_device_info(const char* value) {
+  set_has_device_info();
+  if (device_info_ == &::google::protobuf::internal::kEmptyString) {
+    device_info_ = new ::std::string;
+  }
+  device_info_->assign(value);
+}
+inline void ReqAccountLogin::set_device_info(const void* value, size_t size) {
+  set_has_device_info();
+  if (device_info_ == &::google::protobuf::internal::kEmptyString) {
+    device_info_ = new ::std::string;
+  }
+  device_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_device_info() {
+  set_has_device_info();
+  if (device_info_ == &::google::protobuf::internal::kEmptyString) {
+    device_info_ = new ::std::string;
+  }
+  return device_info_;
+}
+inline ::std::string* ReqAccountLogin::release_device_info() {
+  clear_has_device_info();
+  if (device_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = device_info_;
+    device_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_device_info(::std::string* device_info) {
+  if (device_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete device_info_;
+  }
+  if (device_info) {
+    set_has_device_info();
+    device_info_ = device_info;
+  } else {
     clear_has_device_info();
-}
-inline const ::std::string& ReqAccountLogin::device_info() const
-{
-    return *device_info_;
-}
-inline void ReqAccountLogin::set_device_info(const ::std::string& value)
-{
-    set_has_device_info();
-    if (device_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        device_info_ = new ::std::string;
-    }
-    device_info_->assign(value);
-}
-inline void ReqAccountLogin::set_device_info(const char* value)
-{
-    set_has_device_info();
-    if (device_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        device_info_ = new ::std::string;
-    }
-    device_info_->assign(value);
-}
-inline void ReqAccountLogin::set_device_info(const void* value, size_t size)
-{
-    set_has_device_info();
-    if (device_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        device_info_ = new ::std::string;
-    }
-    device_info_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_device_info()
-{
-    set_has_device_info();
-    if (device_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        device_info_ = new ::std::string;
-    }
-    return device_info_;
-}
-inline ::std::string* ReqAccountLogin::release_device_info()
-{
-    clear_has_device_info();
-    if (device_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = device_info_;
-        device_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_device_info(::std::string* device_info)
-{
-    if (device_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete device_info_;
-    }
-    if (device_info)
-    {
-        set_has_device_info();
-        device_info_ = device_info;
-    }
-    else
-    {
-        clear_has_device_info();
-        device_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    device_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes extra_info = 11;
-inline bool ReqAccountLogin::has_extra_info() const
-{
-    return (_has_bits_[0] & 0x00000200u) != 0;
+inline bool ReqAccountLogin::has_extra_info() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void ReqAccountLogin::set_has_extra_info()
-{
-    _has_bits_[0] |= 0x00000200u;
+inline void ReqAccountLogin::set_has_extra_info() {
+  _has_bits_[0] |= 0x00000200u;
 }
-inline void ReqAccountLogin::clear_has_extra_info()
-{
-    _has_bits_[0] &= ~0x00000200u;
+inline void ReqAccountLogin::clear_has_extra_info() {
+  _has_bits_[0] &= ~0x00000200u;
 }
-inline void ReqAccountLogin::clear_extra_info()
-{
-    if (extra_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_->clear();
-    }
+inline void ReqAccountLogin::clear_extra_info() {
+  if (extra_info_ != &::google::protobuf::internal::kEmptyString) {
+    extra_info_->clear();
+  }
+  clear_has_extra_info();
+}
+inline const ::std::string& ReqAccountLogin::extra_info() const {
+  return *extra_info_;
+}
+inline void ReqAccountLogin::set_extra_info(const ::std::string& value) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(value);
+}
+inline void ReqAccountLogin::set_extra_info(const char* value) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(value);
+}
+inline void ReqAccountLogin::set_extra_info(const void* value, size_t size) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogin::mutable_extra_info() {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  return extra_info_;
+}
+inline ::std::string* ReqAccountLogin::release_extra_info() {
+  clear_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = extra_info_;
+    extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogin::set_allocated_extra_info(::std::string* extra_info) {
+  if (extra_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete extra_info_;
+  }
+  if (extra_info) {
+    set_has_extra_info();
+    extra_info_ = extra_info;
+  } else {
     clear_has_extra_info();
-}
-inline const ::std::string& ReqAccountLogin::extra_info() const
-{
-    return *extra_info_;
-}
-inline void ReqAccountLogin::set_extra_info(const ::std::string& value)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(value);
-}
-inline void ReqAccountLogin::set_extra_info(const char* value)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(value);
-}
-inline void ReqAccountLogin::set_extra_info(const void* value, size_t size)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogin::mutable_extra_info()
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    return extra_info_;
-}
-inline ::std::string* ReqAccountLogin::release_extra_info()
-{
-    clear_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = extra_info_;
-        extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogin::set_allocated_extra_info(::std::string* extra_info)
-{
-    if (extra_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete extra_info_;
-    }
-    if (extra_info)
-    {
-        set_has_extra_info();
-        extra_info_ = extra_info;
-    }
-    else
-    {
-        clear_has_extra_info();
-        extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -3883,189 +3438,143 @@ inline void ReqAccountLogin::set_allocated_extra_info(::std::string* extra_info)
 // ReqAccountLogout
 
 // required bytes account = 2;
-inline bool ReqAccountLogout::has_account() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqAccountLogout::has_account() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAccountLogout::set_has_account()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqAccountLogout::set_has_account() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAccountLogout::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqAccountLogout::clear_has_account() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqAccountLogout::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqAccountLogout::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqAccountLogout::account() const {
+  return *account_;
+}
+inline void ReqAccountLogout::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqAccountLogout::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqAccountLogout::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogout::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqAccountLogout::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogout::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqAccountLogout::account() const
-{
-    return *account_;
-}
-inline void ReqAccountLogout::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqAccountLogout::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqAccountLogout::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogout::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqAccountLogout::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogout::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes extra_info = 3;
-inline bool ReqAccountLogout::has_extra_info() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqAccountLogout::has_extra_info() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqAccountLogout::set_has_extra_info()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqAccountLogout::set_has_extra_info() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqAccountLogout::clear_has_extra_info()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqAccountLogout::clear_has_extra_info() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqAccountLogout::clear_extra_info()
-{
-    if (extra_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_->clear();
-    }
+inline void ReqAccountLogout::clear_extra_info() {
+  if (extra_info_ != &::google::protobuf::internal::kEmptyString) {
+    extra_info_->clear();
+  }
+  clear_has_extra_info();
+}
+inline const ::std::string& ReqAccountLogout::extra_info() const {
+  return *extra_info_;
+}
+inline void ReqAccountLogout::set_extra_info(const ::std::string& value) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(value);
+}
+inline void ReqAccountLogout::set_extra_info(const char* value) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(value);
+}
+inline void ReqAccountLogout::set_extra_info(const void* value, size_t size) {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  extra_info_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAccountLogout::mutable_extra_info() {
+  set_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    extra_info_ = new ::std::string;
+  }
+  return extra_info_;
+}
+inline ::std::string* ReqAccountLogout::release_extra_info() {
+  clear_has_extra_info();
+  if (extra_info_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = extra_info_;
+    extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAccountLogout::set_allocated_extra_info(::std::string* extra_info) {
+  if (extra_info_ != &::google::protobuf::internal::kEmptyString) {
+    delete extra_info_;
+  }
+  if (extra_info) {
+    set_has_extra_info();
+    extra_info_ = extra_info;
+  } else {
     clear_has_extra_info();
-}
-inline const ::std::string& ReqAccountLogout::extra_info() const
-{
-    return *extra_info_;
-}
-inline void ReqAccountLogout::set_extra_info(const ::std::string& value)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(value);
-}
-inline void ReqAccountLogout::set_extra_info(const char* value)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(value);
-}
-inline void ReqAccountLogout::set_extra_info(const void* value, size_t size)
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    extra_info_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqAccountLogout::mutable_extra_info()
-{
-    set_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        extra_info_ = new ::std::string;
-    }
-    return extra_info_;
-}
-inline ::std::string* ReqAccountLogout::release_extra_info()
-{
-    clear_has_extra_info();
-    if (extra_info_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = extra_info_;
-        extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqAccountLogout::set_allocated_extra_info(::std::string* extra_info)
-{
-    if (extra_info_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete extra_info_;
-    }
-    if (extra_info)
-    {
-        set_has_extra_info();
-        extra_info_ = extra_info;
-    }
-    else
-    {
-        clear_has_extra_info();
-        extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -4073,181 +3582,140 @@ inline void ReqAccountLogout::set_allocated_extra_info(::std::string* extra_info
 // ServerInfo
 
 // required int32 server_id = 1;
-inline bool ServerInfo::has_server_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ServerInfo::has_server_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ServerInfo::set_has_server_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ServerInfo::set_has_server_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ServerInfo::clear_has_server_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ServerInfo::clear_has_server_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ServerInfo::clear_server_id()
-{
-    server_id_ = 0;
-    clear_has_server_id();
+inline void ServerInfo::clear_server_id() {
+  server_id_ = 0;
+  clear_has_server_id();
 }
-inline ::google::protobuf::int32 ServerInfo::server_id() const
-{
-    return server_id_;
+inline ::google::protobuf::int32 ServerInfo::server_id() const {
+  return server_id_;
 }
-inline void ServerInfo::set_server_id(::google::protobuf::int32 value)
-{
-    set_has_server_id();
-    server_id_ = value;
+inline void ServerInfo::set_server_id(::google::protobuf::int32 value) {
+  set_has_server_id();
+  server_id_ = value;
 }
 
 // required bytes name = 2;
-inline bool ServerInfo::has_name() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ServerInfo::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ServerInfo::set_has_name()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ServerInfo::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ServerInfo::clear_has_name()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ServerInfo::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ServerInfo::clear_name()
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        name_->clear();
-    }
+inline void ServerInfo::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ServerInfo::name() const {
+  return *name_;
+}
+inline void ServerInfo::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ServerInfo::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ServerInfo::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ServerInfo::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ServerInfo::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ServerInfo::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
     clear_has_name();
-}
-inline const ::std::string& ServerInfo::name() const
-{
-    return *name_;
-}
-inline void ServerInfo::set_name(const ::std::string& value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ServerInfo::set_name(const char* value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ServerInfo::set_name(const void* value, size_t size)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ServerInfo::mutable_name()
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    return name_;
-}
-inline ::std::string* ServerInfo::release_name()
-{
-    clear_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = name_;
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ServerInfo::set_allocated_name(::std::string* name)
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete name_;
-    }
-    if (name)
-    {
-        set_has_name();
-        name_ = name;
-    }
-    else
-    {
-        clear_has_name();
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 wait_count = 3;
-inline bool ServerInfo::has_wait_count() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ServerInfo::has_wait_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ServerInfo::set_has_wait_count()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ServerInfo::set_has_wait_count() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ServerInfo::clear_has_wait_count()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ServerInfo::clear_has_wait_count() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ServerInfo::clear_wait_count()
-{
-    wait_count_ = 0;
-    clear_has_wait_count();
+inline void ServerInfo::clear_wait_count() {
+  wait_count_ = 0;
+  clear_has_wait_count();
 }
-inline ::google::protobuf::int32 ServerInfo::wait_count() const
-{
-    return wait_count_;
+inline ::google::protobuf::int32 ServerInfo::wait_count() const {
+  return wait_count_;
 }
-inline void ServerInfo::set_wait_count(::google::protobuf::int32 value)
-{
-    set_has_wait_count();
-    wait_count_ = value;
+inline void ServerInfo::set_wait_count(::google::protobuf::int32 value) {
+  set_has_wait_count();
+  wait_count_ = value;
 }
 
 // required .NFMsg.EServerState status = 4;
-inline bool ServerInfo::has_status() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool ServerInfo::has_status() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ServerInfo::set_has_status()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void ServerInfo::set_has_status() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ServerInfo::clear_has_status()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void ServerInfo::clear_has_status() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ServerInfo::clear_status()
-{
-    status_ = 0;
-    clear_has_status();
+inline void ServerInfo::clear_status() {
+  status_ = 0;
+  clear_has_status();
 }
-inline ::NFMsg::EServerState ServerInfo::status() const
-{
-    return static_cast< ::NFMsg::EServerState >(status_);
+inline ::NFMsg::EServerState ServerInfo::status() const {
+  return static_cast< ::NFMsg::EServerState >(status_);
 }
-inline void ServerInfo::set_status(::NFMsg::EServerState value)
-{
-    assert(::NFMsg::EServerState_IsValid(value));
-    set_has_status();
-    status_ = value;
+inline void ServerInfo::set_status(::NFMsg::EServerState value) {
+  assert(::NFMsg::EServerState_IsValid(value));
+  set_has_status();
+  status_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -4255,32 +3723,26 @@ inline void ServerInfo::set_status(::NFMsg::EServerState value)
 // ReqServerList
 
 // required .NFMsg.ReqServerListType type = 1;
-inline bool ReqServerList::has_type() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqServerList::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqServerList::set_has_type()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqServerList::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqServerList::clear_has_type()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqServerList::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqServerList::clear_type()
-{
-    type_ = 0;
-    clear_has_type();
+inline void ReqServerList::clear_type() {
+  type_ = 0;
+  clear_has_type();
 }
-inline ::NFMsg::ReqServerListType ReqServerList::type() const
-{
-    return static_cast< ::NFMsg::ReqServerListType >(type_);
+inline ::NFMsg::ReqServerListType ReqServerList::type() const {
+  return static_cast< ::NFMsg::ReqServerListType >(type_);
 }
-inline void ReqServerList::set_type(::NFMsg::ReqServerListType value)
-{
-    assert(::NFMsg::ReqServerListType_IsValid(value));
-    set_has_type();
-    type_ = value;
+inline void ReqServerList::set_type(::NFMsg::ReqServerListType value) {
+  assert(::NFMsg::ReqServerListType_IsValid(value));
+  set_has_type();
+  type_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -4288,64 +3750,51 @@ inline void ReqServerList::set_type(::NFMsg::ReqServerListType value)
 // AckServerList
 
 // required .NFMsg.ReqServerListType type = 1;
-inline bool AckServerList::has_type() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool AckServerList::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AckServerList::set_has_type()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void AckServerList::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void AckServerList::clear_has_type()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void AckServerList::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void AckServerList::clear_type()
-{
-    type_ = 0;
-    clear_has_type();
+inline void AckServerList::clear_type() {
+  type_ = 0;
+  clear_has_type();
 }
-inline ::NFMsg::ReqServerListType AckServerList::type() const
-{
-    return static_cast< ::NFMsg::ReqServerListType >(type_);
+inline ::NFMsg::ReqServerListType AckServerList::type() const {
+  return static_cast< ::NFMsg::ReqServerListType >(type_);
 }
-inline void AckServerList::set_type(::NFMsg::ReqServerListType value)
-{
-    assert(::NFMsg::ReqServerListType_IsValid(value));
-    set_has_type();
-    type_ = value;
+inline void AckServerList::set_type(::NFMsg::ReqServerListType value) {
+  assert(::NFMsg::ReqServerListType_IsValid(value));
+  set_has_type();
+  type_ = value;
 }
 
 // repeated .NFMsg.ServerInfo info = 2;
-inline int AckServerList::info_size() const
-{
-    return info_.size();
+inline int AckServerList::info_size() const {
+  return info_.size();
 }
-inline void AckServerList::clear_info()
-{
-    info_.Clear();
+inline void AckServerList::clear_info() {
+  info_.Clear();
 }
-inline const ::NFMsg::ServerInfo& AckServerList::info(int index) const
-{
-    return info_.Get(index);
+inline const ::NFMsg::ServerInfo& AckServerList::info(int index) const {
+  return info_.Get(index);
 }
-inline ::NFMsg::ServerInfo* AckServerList::mutable_info(int index)
-{
-    return info_.Mutable(index);
+inline ::NFMsg::ServerInfo* AckServerList::mutable_info(int index) {
+  return info_.Mutable(index);
 }
-inline ::NFMsg::ServerInfo* AckServerList::add_info()
-{
-    return info_.Add();
+inline ::NFMsg::ServerInfo* AckServerList::add_info() {
+  return info_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >&
-AckServerList::info() const
-{
-    return info_;
+AckServerList::info() const {
+  return info_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ServerInfo >*
-AckServerList::mutable_info()
-{
-    return &info_;
+AckServerList::mutable_info() {
+  return &info_;
 }
 
 // -------------------------------------------------------------------
@@ -4353,207 +3802,155 @@ AckServerList::mutable_info()
 // ReqConnectWorld
 
 // required int32 world_id = 1;
-inline bool ReqConnectWorld::has_world_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqConnectWorld::has_world_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqConnectWorld::set_has_world_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqConnectWorld::set_has_world_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqConnectWorld::clear_has_world_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqConnectWorld::clear_has_world_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqConnectWorld::clear_world_id()
-{
-    world_id_ = 0;
-    clear_has_world_id();
+inline void ReqConnectWorld::clear_world_id() {
+  world_id_ = 0;
+  clear_has_world_id();
 }
-inline ::google::protobuf::int32 ReqConnectWorld::world_id() const
-{
-    return world_id_;
+inline ::google::protobuf::int32 ReqConnectWorld::world_id() const {
+  return world_id_;
 }
-inline void ReqConnectWorld::set_world_id(::google::protobuf::int32 value)
-{
-    set_has_world_id();
-    world_id_ = value;
+inline void ReqConnectWorld::set_world_id(::google::protobuf::int32 value) {
+  set_has_world_id();
+  world_id_ = value;
 }
 
 // optional bytes account = 2;
-inline bool ReqConnectWorld::has_account() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqConnectWorld::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqConnectWorld::set_has_account()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqConnectWorld::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqConnectWorld::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqConnectWorld::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqConnectWorld::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqConnectWorld::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqConnectWorld::account() const {
+  return *account_;
+}
+inline void ReqConnectWorld::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqConnectWorld::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqConnectWorld::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqConnectWorld::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqConnectWorld::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqConnectWorld::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqConnectWorld::account() const
-{
-    return *account_;
-}
-inline void ReqConnectWorld::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqConnectWorld::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqConnectWorld::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqConnectWorld::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqConnectWorld::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqConnectWorld::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // optional .NFMsg.Ident sender = 3;
-inline bool ReqConnectWorld::has_sender() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ReqConnectWorld::has_sender() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqConnectWorld::set_has_sender()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ReqConnectWorld::set_has_sender() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqConnectWorld::clear_has_sender()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ReqConnectWorld::clear_has_sender() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqConnectWorld::clear_sender()
-{
-    if (sender_ != NULL)
-    {
-        sender_->::NFMsg::Ident::Clear();
-    }
-    clear_has_sender();
+inline void ReqConnectWorld::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline const ::NFMsg::Ident& ReqConnectWorld::sender() const
-{
-    return sender_ != NULL ? *sender_ : *default_instance_->sender_;
+inline const ::NFMsg::Ident& ReqConnectWorld::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline ::NFMsg::Ident* ReqConnectWorld::mutable_sender()
-{
+inline ::NFMsg::Ident* ReqConnectWorld::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* ReqConnectWorld::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void ReqConnectWorld::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
     set_has_sender();
-    if (sender_ == NULL)
-    {
-        sender_ = new ::NFMsg::Ident;
-    }
-    return sender_;
-}
-inline ::NFMsg::Ident* ReqConnectWorld::release_sender()
-{
+  } else {
     clear_has_sender();
-    ::NFMsg::Ident* temp = sender_;
-    sender_ = NULL;
-    return temp;
-}
-inline void ReqConnectWorld::set_allocated_sender(::NFMsg::Ident* sender)
-{
-    delete sender_;
-    sender_ = sender;
-    if (sender)
-    {
-        set_has_sender();
-    }
-    else
-    {
-        clear_has_sender();
-    }
+  }
 }
 
 // optional int32 login_id = 4;
-inline bool ReqConnectWorld::has_login_id() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool ReqConnectWorld::has_login_id() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ReqConnectWorld::set_has_login_id()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void ReqConnectWorld::set_has_login_id() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ReqConnectWorld::clear_has_login_id()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void ReqConnectWorld::clear_has_login_id() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ReqConnectWorld::clear_login_id()
-{
-    login_id_ = 0;
-    clear_has_login_id();
+inline void ReqConnectWorld::clear_login_id() {
+  login_id_ = 0;
+  clear_has_login_id();
 }
-inline ::google::protobuf::int32 ReqConnectWorld::login_id() const
-{
-    return login_id_;
+inline ::google::protobuf::int32 ReqConnectWorld::login_id() const {
+  return login_id_;
 }
-inline void ReqConnectWorld::set_login_id(::google::protobuf::int32 value)
-{
-    set_has_login_id();
-    login_id_ = value;
+inline void ReqConnectWorld::set_login_id(::google::protobuf::int32 value) {
+  set_has_login_id();
+  login_id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -4561,421 +3958,317 @@ inline void ReqConnectWorld::set_login_id(::google::protobuf::int32 value)
 // AckConnectWorldResult
 
 // required int32 world_id = 1;
-inline bool AckConnectWorldResult::has_world_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool AckConnectWorldResult::has_world_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AckConnectWorldResult::set_has_world_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void AckConnectWorldResult::set_has_world_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void AckConnectWorldResult::clear_has_world_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void AckConnectWorldResult::clear_has_world_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void AckConnectWorldResult::clear_world_id()
-{
-    world_id_ = 0;
-    clear_has_world_id();
+inline void AckConnectWorldResult::clear_world_id() {
+  world_id_ = 0;
+  clear_has_world_id();
 }
-inline ::google::protobuf::int32 AckConnectWorldResult::world_id() const
-{
-    return world_id_;
+inline ::google::protobuf::int32 AckConnectWorldResult::world_id() const {
+  return world_id_;
 }
-inline void AckConnectWorldResult::set_world_id(::google::protobuf::int32 value)
-{
-    set_has_world_id();
-    world_id_ = value;
+inline void AckConnectWorldResult::set_world_id(::google::protobuf::int32 value) {
+  set_has_world_id();
+  world_id_ = value;
 }
 
 // required .NFMsg.Ident sender = 2;
-inline bool AckConnectWorldResult::has_sender() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool AckConnectWorldResult::has_sender() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AckConnectWorldResult::set_has_sender()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void AckConnectWorldResult::set_has_sender() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void AckConnectWorldResult::clear_has_sender()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void AckConnectWorldResult::clear_has_sender() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void AckConnectWorldResult::clear_sender()
-{
-    if (sender_ != NULL)
-    {
-        sender_->::NFMsg::Ident::Clear();
-    }
-    clear_has_sender();
+inline void AckConnectWorldResult::clear_sender() {
+  if (sender_ != NULL) sender_->::NFMsg::Ident::Clear();
+  clear_has_sender();
 }
-inline const ::NFMsg::Ident& AckConnectWorldResult::sender() const
-{
-    return sender_ != NULL ? *sender_ : *default_instance_->sender_;
+inline const ::NFMsg::Ident& AckConnectWorldResult::sender() const {
+  return sender_ != NULL ? *sender_ : *default_instance_->sender_;
 }
-inline ::NFMsg::Ident* AckConnectWorldResult::mutable_sender()
-{
+inline ::NFMsg::Ident* AckConnectWorldResult::mutable_sender() {
+  set_has_sender();
+  if (sender_ == NULL) sender_ = new ::NFMsg::Ident;
+  return sender_;
+}
+inline ::NFMsg::Ident* AckConnectWorldResult::release_sender() {
+  clear_has_sender();
+  ::NFMsg::Ident* temp = sender_;
+  sender_ = NULL;
+  return temp;
+}
+inline void AckConnectWorldResult::set_allocated_sender(::NFMsg::Ident* sender) {
+  delete sender_;
+  sender_ = sender;
+  if (sender) {
     set_has_sender();
-    if (sender_ == NULL)
-    {
-        sender_ = new ::NFMsg::Ident;
-    }
-    return sender_;
-}
-inline ::NFMsg::Ident* AckConnectWorldResult::release_sender()
-{
+  } else {
     clear_has_sender();
-    ::NFMsg::Ident* temp = sender_;
-    sender_ = NULL;
-    return temp;
-}
-inline void AckConnectWorldResult::set_allocated_sender(::NFMsg::Ident* sender)
-{
-    delete sender_;
-    sender_ = sender;
-    if (sender)
-    {
-        set_has_sender();
-    }
-    else
-    {
-        clear_has_sender();
-    }
+  }
 }
 
 // required int32 login_id = 3;
-inline bool AckConnectWorldResult::has_login_id() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool AckConnectWorldResult::has_login_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AckConnectWorldResult::set_has_login_id()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void AckConnectWorldResult::set_has_login_id() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void AckConnectWorldResult::clear_has_login_id()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void AckConnectWorldResult::clear_has_login_id() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void AckConnectWorldResult::clear_login_id()
-{
-    login_id_ = 0;
-    clear_has_login_id();
+inline void AckConnectWorldResult::clear_login_id() {
+  login_id_ = 0;
+  clear_has_login_id();
 }
-inline ::google::protobuf::int32 AckConnectWorldResult::login_id() const
-{
-    return login_id_;
+inline ::google::protobuf::int32 AckConnectWorldResult::login_id() const {
+  return login_id_;
 }
-inline void AckConnectWorldResult::set_login_id(::google::protobuf::int32 value)
-{
-    set_has_login_id();
-    login_id_ = value;
+inline void AckConnectWorldResult::set_login_id(::google::protobuf::int32 value) {
+  set_has_login_id();
+  login_id_ = value;
 }
 
 // required bytes account = 4;
-inline bool AckConnectWorldResult::has_account() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool AckConnectWorldResult::has_account() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void AckConnectWorldResult::set_has_account()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void AckConnectWorldResult::set_has_account() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void AckConnectWorldResult::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void AckConnectWorldResult::clear_has_account() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void AckConnectWorldResult::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void AckConnectWorldResult::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& AckConnectWorldResult::account() const {
+  return *account_;
+}
+inline void AckConnectWorldResult::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void AckConnectWorldResult::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void AckConnectWorldResult::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckConnectWorldResult::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* AckConnectWorldResult::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckConnectWorldResult::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& AckConnectWorldResult::account() const
-{
-    return *account_;
-}
-inline void AckConnectWorldResult::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void AckConnectWorldResult::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void AckConnectWorldResult::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AckConnectWorldResult::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* AckConnectWorldResult::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void AckConnectWorldResult::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes world_ip = 5;
-inline bool AckConnectWorldResult::has_world_ip() const
-{
-    return (_has_bits_[0] & 0x00000010u) != 0;
+inline bool AckConnectWorldResult::has_world_ip() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void AckConnectWorldResult::set_has_world_ip()
-{
-    _has_bits_[0] |= 0x00000010u;
+inline void AckConnectWorldResult::set_has_world_ip() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void AckConnectWorldResult::clear_has_world_ip()
-{
-    _has_bits_[0] &= ~0x00000010u;
+inline void AckConnectWorldResult::clear_has_world_ip() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void AckConnectWorldResult::clear_world_ip()
-{
-    if (world_ip_ != &::google::protobuf::internal::kEmptyString)
-    {
-        world_ip_->clear();
-    }
+inline void AckConnectWorldResult::clear_world_ip() {
+  if (world_ip_ != &::google::protobuf::internal::kEmptyString) {
+    world_ip_->clear();
+  }
+  clear_has_world_ip();
+}
+inline const ::std::string& AckConnectWorldResult::world_ip() const {
+  return *world_ip_;
+}
+inline void AckConnectWorldResult::set_world_ip(const ::std::string& value) {
+  set_has_world_ip();
+  if (world_ip_ == &::google::protobuf::internal::kEmptyString) {
+    world_ip_ = new ::std::string;
+  }
+  world_ip_->assign(value);
+}
+inline void AckConnectWorldResult::set_world_ip(const char* value) {
+  set_has_world_ip();
+  if (world_ip_ == &::google::protobuf::internal::kEmptyString) {
+    world_ip_ = new ::std::string;
+  }
+  world_ip_->assign(value);
+}
+inline void AckConnectWorldResult::set_world_ip(const void* value, size_t size) {
+  set_has_world_ip();
+  if (world_ip_ == &::google::protobuf::internal::kEmptyString) {
+    world_ip_ = new ::std::string;
+  }
+  world_ip_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckConnectWorldResult::mutable_world_ip() {
+  set_has_world_ip();
+  if (world_ip_ == &::google::protobuf::internal::kEmptyString) {
+    world_ip_ = new ::std::string;
+  }
+  return world_ip_;
+}
+inline ::std::string* AckConnectWorldResult::release_world_ip() {
+  clear_has_world_ip();
+  if (world_ip_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = world_ip_;
+    world_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckConnectWorldResult::set_allocated_world_ip(::std::string* world_ip) {
+  if (world_ip_ != &::google::protobuf::internal::kEmptyString) {
+    delete world_ip_;
+  }
+  if (world_ip) {
+    set_has_world_ip();
+    world_ip_ = world_ip;
+  } else {
     clear_has_world_ip();
-}
-inline const ::std::string& AckConnectWorldResult::world_ip() const
-{
-    return *world_ip_;
-}
-inline void AckConnectWorldResult::set_world_ip(const ::std::string& value)
-{
-    set_has_world_ip();
-    if (world_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_ip_ = new ::std::string;
-    }
-    world_ip_->assign(value);
-}
-inline void AckConnectWorldResult::set_world_ip(const char* value)
-{
-    set_has_world_ip();
-    if (world_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_ip_ = new ::std::string;
-    }
-    world_ip_->assign(value);
-}
-inline void AckConnectWorldResult::set_world_ip(const void* value, size_t size)
-{
-    set_has_world_ip();
-    if (world_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_ip_ = new ::std::string;
-    }
-    world_ip_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AckConnectWorldResult::mutable_world_ip()
-{
-    set_has_world_ip();
-    if (world_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_ip_ = new ::std::string;
-    }
-    return world_ip_;
-}
-inline ::std::string* AckConnectWorldResult::release_world_ip()
-{
-    clear_has_world_ip();
-    if (world_ip_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = world_ip_;
-        world_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void AckConnectWorldResult::set_allocated_world_ip(::std::string* world_ip)
-{
-    if (world_ip_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete world_ip_;
-    }
-    if (world_ip)
-    {
-        set_has_world_ip();
-        world_ip_ = world_ip;
-    }
-    else
-    {
-        clear_has_world_ip();
-        world_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    world_ip_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 world_port = 6;
-inline bool AckConnectWorldResult::has_world_port() const
-{
-    return (_has_bits_[0] & 0x00000020u) != 0;
+inline bool AckConnectWorldResult::has_world_port() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void AckConnectWorldResult::set_has_world_port()
-{
-    _has_bits_[0] |= 0x00000020u;
+inline void AckConnectWorldResult::set_has_world_port() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void AckConnectWorldResult::clear_has_world_port()
-{
-    _has_bits_[0] &= ~0x00000020u;
+inline void AckConnectWorldResult::clear_has_world_port() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void AckConnectWorldResult::clear_world_port()
-{
-    world_port_ = 0;
-    clear_has_world_port();
+inline void AckConnectWorldResult::clear_world_port() {
+  world_port_ = 0;
+  clear_has_world_port();
 }
-inline ::google::protobuf::int32 AckConnectWorldResult::world_port() const
-{
-    return world_port_;
+inline ::google::protobuf::int32 AckConnectWorldResult::world_port() const {
+  return world_port_;
 }
-inline void AckConnectWorldResult::set_world_port(::google::protobuf::int32 value)
-{
-    set_has_world_port();
-    world_port_ = value;
+inline void AckConnectWorldResult::set_world_port(::google::protobuf::int32 value) {
+  set_has_world_port();
+  world_port_ = value;
 }
 
 // required bytes world_key = 7;
-inline bool AckConnectWorldResult::has_world_key() const
-{
-    return (_has_bits_[0] & 0x00000040u) != 0;
+inline bool AckConnectWorldResult::has_world_key() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void AckConnectWorldResult::set_has_world_key()
-{
-    _has_bits_[0] |= 0x00000040u;
+inline void AckConnectWorldResult::set_has_world_key() {
+  _has_bits_[0] |= 0x00000040u;
 }
-inline void AckConnectWorldResult::clear_has_world_key()
-{
-    _has_bits_[0] &= ~0x00000040u;
+inline void AckConnectWorldResult::clear_has_world_key() {
+  _has_bits_[0] &= ~0x00000040u;
 }
-inline void AckConnectWorldResult::clear_world_key()
-{
-    if (world_key_ != &::google::protobuf::internal::kEmptyString)
-    {
-        world_key_->clear();
-    }
+inline void AckConnectWorldResult::clear_world_key() {
+  if (world_key_ != &::google::protobuf::internal::kEmptyString) {
+    world_key_->clear();
+  }
+  clear_has_world_key();
+}
+inline const ::std::string& AckConnectWorldResult::world_key() const {
+  return *world_key_;
+}
+inline void AckConnectWorldResult::set_world_key(const ::std::string& value) {
+  set_has_world_key();
+  if (world_key_ == &::google::protobuf::internal::kEmptyString) {
+    world_key_ = new ::std::string;
+  }
+  world_key_->assign(value);
+}
+inline void AckConnectWorldResult::set_world_key(const char* value) {
+  set_has_world_key();
+  if (world_key_ == &::google::protobuf::internal::kEmptyString) {
+    world_key_ = new ::std::string;
+  }
+  world_key_->assign(value);
+}
+inline void AckConnectWorldResult::set_world_key(const void* value, size_t size) {
+  set_has_world_key();
+  if (world_key_ == &::google::protobuf::internal::kEmptyString) {
+    world_key_ = new ::std::string;
+  }
+  world_key_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckConnectWorldResult::mutable_world_key() {
+  set_has_world_key();
+  if (world_key_ == &::google::protobuf::internal::kEmptyString) {
+    world_key_ = new ::std::string;
+  }
+  return world_key_;
+}
+inline ::std::string* AckConnectWorldResult::release_world_key() {
+  clear_has_world_key();
+  if (world_key_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = world_key_;
+    world_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckConnectWorldResult::set_allocated_world_key(::std::string* world_key) {
+  if (world_key_ != &::google::protobuf::internal::kEmptyString) {
+    delete world_key_;
+  }
+  if (world_key) {
+    set_has_world_key();
+    world_key_ = world_key;
+  } else {
     clear_has_world_key();
-}
-inline const ::std::string& AckConnectWorldResult::world_key() const
-{
-    return *world_key_;
-}
-inline void AckConnectWorldResult::set_world_key(const ::std::string& value)
-{
-    set_has_world_key();
-    if (world_key_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_key_ = new ::std::string;
-    }
-    world_key_->assign(value);
-}
-inline void AckConnectWorldResult::set_world_key(const char* value)
-{
-    set_has_world_key();
-    if (world_key_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_key_ = new ::std::string;
-    }
-    world_key_->assign(value);
-}
-inline void AckConnectWorldResult::set_world_key(const void* value, size_t size)
-{
-    set_has_world_key();
-    if (world_key_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_key_ = new ::std::string;
-    }
-    world_key_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AckConnectWorldResult::mutable_world_key()
-{
-    set_has_world_key();
-    if (world_key_ == &::google::protobuf::internal::kEmptyString)
-    {
-        world_key_ = new ::std::string;
-    }
-    return world_key_;
-}
-inline ::std::string* AckConnectWorldResult::release_world_key()
-{
-    clear_has_world_key();
-    if (world_key_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = world_key_;
-        world_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void AckConnectWorldResult::set_allocated_world_key(::std::string* world_key)
-{
-    if (world_key_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete world_key_;
-    }
-    if (world_key)
-    {
-        set_has_world_key();
-        world_key_ = world_key;
-    }
-    else
-    {
-        clear_has_world_key();
-        world_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    world_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -4983,31 +4276,25 @@ inline void AckConnectWorldResult::set_allocated_world_key(::std::string* world_
 // ReqSelectServer
 
 // required int32 world_id = 1;
-inline bool ReqSelectServer::has_world_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqSelectServer::has_world_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqSelectServer::set_has_world_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqSelectServer::set_has_world_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqSelectServer::clear_has_world_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqSelectServer::clear_has_world_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqSelectServer::clear_world_id()
-{
-    world_id_ = 0;
-    clear_has_world_id();
+inline void ReqSelectServer::clear_world_id() {
+  world_id_ = 0;
+  clear_has_world_id();
 }
-inline ::google::protobuf::int32 ReqSelectServer::world_id() const
-{
-    return world_id_;
+inline ::google::protobuf::int32 ReqSelectServer::world_id() const {
+  return world_id_;
 }
-inline void ReqSelectServer::set_world_id(::google::protobuf::int32 value)
-{
-    set_has_world_id();
-    world_id_ = value;
+inline void ReqSelectServer::set_world_id(::google::protobuf::int32 value) {
+  set_has_world_id();
+  world_id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -5015,124 +4302,95 @@ inline void ReqSelectServer::set_world_id(::google::protobuf::int32 value)
 // ReqKickFromWorld
 
 // required int32 world_id = 1;
-inline bool ReqKickFromWorld::has_world_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqKickFromWorld::has_world_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqKickFromWorld::set_has_world_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqKickFromWorld::set_has_world_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqKickFromWorld::clear_has_world_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqKickFromWorld::clear_has_world_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqKickFromWorld::clear_world_id()
-{
-    world_id_ = 0;
-    clear_has_world_id();
+inline void ReqKickFromWorld::clear_world_id() {
+  world_id_ = 0;
+  clear_has_world_id();
 }
-inline ::google::protobuf::int32 ReqKickFromWorld::world_id() const
-{
-    return world_id_;
+inline ::google::protobuf::int32 ReqKickFromWorld::world_id() const {
+  return world_id_;
 }
-inline void ReqKickFromWorld::set_world_id(::google::protobuf::int32 value)
-{
-    set_has_world_id();
-    world_id_ = value;
+inline void ReqKickFromWorld::set_world_id(::google::protobuf::int32 value) {
+  set_has_world_id();
+  world_id_ = value;
 }
 
 // required bytes account = 2;
-inline bool ReqKickFromWorld::has_account() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqKickFromWorld::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqKickFromWorld::set_has_account()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqKickFromWorld::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqKickFromWorld::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqKickFromWorld::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqKickFromWorld::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqKickFromWorld::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqKickFromWorld::account() const {
+  return *account_;
+}
+inline void ReqKickFromWorld::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqKickFromWorld::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqKickFromWorld::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqKickFromWorld::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqKickFromWorld::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqKickFromWorld::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqKickFromWorld::account() const
-{
-    return *account_;
-}
-inline void ReqKickFromWorld::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqKickFromWorld::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqKickFromWorld::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqKickFromWorld::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqKickFromWorld::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqKickFromWorld::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -5140,124 +4398,95 @@ inline void ReqKickFromWorld::set_allocated_account(::std::string* account)
 // ReqRoleList
 
 // required int32 game_id = 1;
-inline bool ReqRoleList::has_game_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqRoleList::has_game_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqRoleList::set_has_game_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqRoleList::set_has_game_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqRoleList::clear_has_game_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqRoleList::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqRoleList::clear_game_id()
-{
-    game_id_ = 0;
-    clear_has_game_id();
+inline void ReqRoleList::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 ReqRoleList::game_id() const
-{
-    return game_id_;
+inline ::google::protobuf::int32 ReqRoleList::game_id() const {
+  return game_id_;
 }
-inline void ReqRoleList::set_game_id(::google::protobuf::int32 value)
-{
-    set_has_game_id();
-    game_id_ = value;
+inline void ReqRoleList::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // required bytes account = 2;
-inline bool ReqRoleList::has_account() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqRoleList::has_account() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqRoleList::set_has_account()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqRoleList::set_has_account() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqRoleList::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqRoleList::clear_has_account() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqRoleList::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqRoleList::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqRoleList::account() const {
+  return *account_;
+}
+inline void ReqRoleList::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRoleList::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRoleList::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRoleList::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqRoleList::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRoleList::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqRoleList::account() const
-{
-    return *account_;
-}
-inline void ReqRoleList::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqRoleList::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqRoleList::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqRoleList::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqRoleList::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqRoleList::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -5265,496 +4494,379 @@ inline void ReqRoleList::set_allocated_account(::std::string* account)
 // RoleLiteInfo
 
 // required .NFMsg.Ident id = 1;
-inline bool RoleLiteInfo::has_id() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool RoleLiteInfo::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleLiteInfo::set_has_id()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void RoleLiteInfo::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleLiteInfo::clear_has_id()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void RoleLiteInfo::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void RoleLiteInfo::clear_id()
-{
-    if (id_ != NULL)
-    {
-        id_->::NFMsg::Ident::Clear();
-    }
-    clear_has_id();
+inline void RoleLiteInfo::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
 }
-inline const ::NFMsg::Ident& RoleLiteInfo::id() const
-{
-    return id_ != NULL ? *id_ : *default_instance_->id_;
+inline const ::NFMsg::Ident& RoleLiteInfo::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::NFMsg::Ident* RoleLiteInfo::mutable_id()
-{
+inline ::NFMsg::Ident* RoleLiteInfo::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* RoleLiteInfo::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void RoleLiteInfo::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
     set_has_id();
-    if (id_ == NULL)
-    {
-        id_ = new ::NFMsg::Ident;
-    }
-    return id_;
-}
-inline ::NFMsg::Ident* RoleLiteInfo::release_id()
-{
+  } else {
     clear_has_id();
-    ::NFMsg::Ident* temp = id_;
-    id_ = NULL;
-    return temp;
-}
-inline void RoleLiteInfo::set_allocated_id(::NFMsg::Ident* id)
-{
-    delete id_;
-    id_ = id;
-    if (id)
-    {
-        set_has_id();
-    }
-    else
-    {
-        clear_has_id();
-    }
+  }
 }
 
 // required int32 career = 2;
-inline bool RoleLiteInfo::has_career() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool RoleLiteInfo::has_career() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void RoleLiteInfo::set_has_career()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void RoleLiteInfo::set_has_career() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void RoleLiteInfo::clear_has_career()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void RoleLiteInfo::clear_has_career() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void RoleLiteInfo::clear_career()
-{
-    career_ = 0;
-    clear_has_career();
+inline void RoleLiteInfo::clear_career() {
+  career_ = 0;
+  clear_has_career();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::career() const
-{
-    return career_;
+inline ::google::protobuf::int32 RoleLiteInfo::career() const {
+  return career_;
 }
-inline void RoleLiteInfo::set_career(::google::protobuf::int32 value)
-{
-    set_has_career();
-    career_ = value;
+inline void RoleLiteInfo::set_career(::google::protobuf::int32 value) {
+  set_has_career();
+  career_ = value;
 }
 
 // required int32 sex = 3;
-inline bool RoleLiteInfo::has_sex() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool RoleLiteInfo::has_sex() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void RoleLiteInfo::set_has_sex()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void RoleLiteInfo::set_has_sex() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void RoleLiteInfo::clear_has_sex()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void RoleLiteInfo::clear_has_sex() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void RoleLiteInfo::clear_sex()
-{
-    sex_ = 0;
-    clear_has_sex();
+inline void RoleLiteInfo::clear_sex() {
+  sex_ = 0;
+  clear_has_sex();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::sex() const
-{
-    return sex_;
+inline ::google::protobuf::int32 RoleLiteInfo::sex() const {
+  return sex_;
 }
-inline void RoleLiteInfo::set_sex(::google::protobuf::int32 value)
-{
-    set_has_sex();
-    sex_ = value;
+inline void RoleLiteInfo::set_sex(::google::protobuf::int32 value) {
+  set_has_sex();
+  sex_ = value;
 }
 
 // required int32 race = 4;
-inline bool RoleLiteInfo::has_race() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool RoleLiteInfo::has_race() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void RoleLiteInfo::set_has_race()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void RoleLiteInfo::set_has_race() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void RoleLiteInfo::clear_has_race()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void RoleLiteInfo::clear_has_race() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void RoleLiteInfo::clear_race()
-{
-    race_ = 0;
-    clear_has_race();
+inline void RoleLiteInfo::clear_race() {
+  race_ = 0;
+  clear_has_race();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::race() const
-{
-    return race_;
+inline ::google::protobuf::int32 RoleLiteInfo::race() const {
+  return race_;
 }
-inline void RoleLiteInfo::set_race(::google::protobuf::int32 value)
-{
-    set_has_race();
-    race_ = value;
+inline void RoleLiteInfo::set_race(::google::protobuf::int32 value) {
+  set_has_race();
+  race_ = value;
 }
 
 // required bytes noob_name = 5;
-inline bool RoleLiteInfo::has_noob_name() const
-{
-    return (_has_bits_[0] & 0x00000010u) != 0;
+inline bool RoleLiteInfo::has_noob_name() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void RoleLiteInfo::set_has_noob_name()
-{
-    _has_bits_[0] |= 0x00000010u;
+inline void RoleLiteInfo::set_has_noob_name() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void RoleLiteInfo::clear_has_noob_name()
-{
-    _has_bits_[0] &= ~0x00000010u;
+inline void RoleLiteInfo::clear_has_noob_name() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void RoleLiteInfo::clear_noob_name()
-{
-    if (noob_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_->clear();
-    }
+inline void RoleLiteInfo::clear_noob_name() {
+  if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
+    noob_name_->clear();
+  }
+  clear_has_noob_name();
+}
+inline const ::std::string& RoleLiteInfo::noob_name() const {
+  return *noob_name_;
+}
+inline void RoleLiteInfo::set_noob_name(const ::std::string& value) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(value);
+}
+inline void RoleLiteInfo::set_noob_name(const char* value) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(value);
+}
+inline void RoleLiteInfo::set_noob_name(const void* value, size_t size) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RoleLiteInfo::mutable_noob_name() {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  return noob_name_;
+}
+inline ::std::string* RoleLiteInfo::release_noob_name() {
+  clear_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = noob_name_;
+    noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void RoleLiteInfo::set_allocated_noob_name(::std::string* noob_name) {
+  if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete noob_name_;
+  }
+  if (noob_name) {
+    set_has_noob_name();
+    noob_name_ = noob_name;
+  } else {
     clear_has_noob_name();
-}
-inline const ::std::string& RoleLiteInfo::noob_name() const
-{
-    return *noob_name_;
-}
-inline void RoleLiteInfo::set_noob_name(const ::std::string& value)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(value);
-}
-inline void RoleLiteInfo::set_noob_name(const char* value)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(value);
-}
-inline void RoleLiteInfo::set_noob_name(const void* value, size_t size)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* RoleLiteInfo::mutable_noob_name()
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    return noob_name_;
-}
-inline ::std::string* RoleLiteInfo::release_noob_name()
-{
-    clear_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = noob_name_;
-        noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void RoleLiteInfo::set_allocated_noob_name(::std::string* noob_name)
-{
-    if (noob_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete noob_name_;
-    }
-    if (noob_name)
-    {
-        set_has_noob_name();
-        noob_name_ = noob_name;
-    }
-    else
-    {
-        clear_has_noob_name();
-        noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 game_id = 6;
-inline bool RoleLiteInfo::has_game_id() const
-{
-    return (_has_bits_[0] & 0x00000020u) != 0;
+inline bool RoleLiteInfo::has_game_id() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void RoleLiteInfo::set_has_game_id()
-{
-    _has_bits_[0] |= 0x00000020u;
+inline void RoleLiteInfo::set_has_game_id() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void RoleLiteInfo::clear_has_game_id()
-{
-    _has_bits_[0] &= ~0x00000020u;
+inline void RoleLiteInfo::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void RoleLiteInfo::clear_game_id()
-{
-    game_id_ = 0;
-    clear_has_game_id();
+inline void RoleLiteInfo::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::game_id() const
-{
-    return game_id_;
+inline ::google::protobuf::int32 RoleLiteInfo::game_id() const {
+  return game_id_;
 }
-inline void RoleLiteInfo::set_game_id(::google::protobuf::int32 value)
-{
-    set_has_game_id();
-    game_id_ = value;
+inline void RoleLiteInfo::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // required int32 role_level = 7;
-inline bool RoleLiteInfo::has_role_level() const
-{
-    return (_has_bits_[0] & 0x00000040u) != 0;
+inline bool RoleLiteInfo::has_role_level() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void RoleLiteInfo::set_has_role_level()
-{
-    _has_bits_[0] |= 0x00000040u;
+inline void RoleLiteInfo::set_has_role_level() {
+  _has_bits_[0] |= 0x00000040u;
 }
-inline void RoleLiteInfo::clear_has_role_level()
-{
-    _has_bits_[0] &= ~0x00000040u;
+inline void RoleLiteInfo::clear_has_role_level() {
+  _has_bits_[0] &= ~0x00000040u;
 }
-inline void RoleLiteInfo::clear_role_level()
-{
-    role_level_ = 0;
-    clear_has_role_level();
+inline void RoleLiteInfo::clear_role_level() {
+  role_level_ = 0;
+  clear_has_role_level();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::role_level() const
-{
-    return role_level_;
+inline ::google::protobuf::int32 RoleLiteInfo::role_level() const {
+  return role_level_;
 }
-inline void RoleLiteInfo::set_role_level(::google::protobuf::int32 value)
-{
-    set_has_role_level();
-    role_level_ = value;
+inline void RoleLiteInfo::set_role_level(::google::protobuf::int32 value) {
+  set_has_role_level();
+  role_level_ = value;
 }
 
 // required int32 delete_time = 8;
-inline bool RoleLiteInfo::has_delete_time() const
-{
-    return (_has_bits_[0] & 0x00000080u) != 0;
+inline bool RoleLiteInfo::has_delete_time() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void RoleLiteInfo::set_has_delete_time()
-{
-    _has_bits_[0] |= 0x00000080u;
+inline void RoleLiteInfo::set_has_delete_time() {
+  _has_bits_[0] |= 0x00000080u;
 }
-inline void RoleLiteInfo::clear_has_delete_time()
-{
-    _has_bits_[0] &= ~0x00000080u;
+inline void RoleLiteInfo::clear_has_delete_time() {
+  _has_bits_[0] &= ~0x00000080u;
 }
-inline void RoleLiteInfo::clear_delete_time()
-{
-    delete_time_ = 0;
-    clear_has_delete_time();
+inline void RoleLiteInfo::clear_delete_time() {
+  delete_time_ = 0;
+  clear_has_delete_time();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::delete_time() const
-{
-    return delete_time_;
+inline ::google::protobuf::int32 RoleLiteInfo::delete_time() const {
+  return delete_time_;
 }
-inline void RoleLiteInfo::set_delete_time(::google::protobuf::int32 value)
-{
-    set_has_delete_time();
-    delete_time_ = value;
+inline void RoleLiteInfo::set_delete_time(::google::protobuf::int32 value) {
+  set_has_delete_time();
+  delete_time_ = value;
 }
 
 // required int32 reg_time = 9;
-inline bool RoleLiteInfo::has_reg_time() const
-{
-    return (_has_bits_[0] & 0x00000100u) != 0;
+inline bool RoleLiteInfo::has_reg_time() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void RoleLiteInfo::set_has_reg_time()
-{
-    _has_bits_[0] |= 0x00000100u;
+inline void RoleLiteInfo::set_has_reg_time() {
+  _has_bits_[0] |= 0x00000100u;
 }
-inline void RoleLiteInfo::clear_has_reg_time()
-{
-    _has_bits_[0] &= ~0x00000100u;
+inline void RoleLiteInfo::clear_has_reg_time() {
+  _has_bits_[0] &= ~0x00000100u;
 }
-inline void RoleLiteInfo::clear_reg_time()
-{
-    reg_time_ = 0;
-    clear_has_reg_time();
+inline void RoleLiteInfo::clear_reg_time() {
+  reg_time_ = 0;
+  clear_has_reg_time();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::reg_time() const
-{
-    return reg_time_;
+inline ::google::protobuf::int32 RoleLiteInfo::reg_time() const {
+  return reg_time_;
 }
-inline void RoleLiteInfo::set_reg_time(::google::protobuf::int32 value)
-{
-    set_has_reg_time();
-    reg_time_ = value;
+inline void RoleLiteInfo::set_reg_time(::google::protobuf::int32 value) {
+  set_has_reg_time();
+  reg_time_ = value;
 }
 
 // required int32 last_offline_time = 10;
-inline bool RoleLiteInfo::has_last_offline_time() const
-{
-    return (_has_bits_[0] & 0x00000200u) != 0;
+inline bool RoleLiteInfo::has_last_offline_time() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void RoleLiteInfo::set_has_last_offline_time()
-{
-    _has_bits_[0] |= 0x00000200u;
+inline void RoleLiteInfo::set_has_last_offline_time() {
+  _has_bits_[0] |= 0x00000200u;
 }
-inline void RoleLiteInfo::clear_has_last_offline_time()
-{
-    _has_bits_[0] &= ~0x00000200u;
+inline void RoleLiteInfo::clear_has_last_offline_time() {
+  _has_bits_[0] &= ~0x00000200u;
 }
-inline void RoleLiteInfo::clear_last_offline_time()
-{
-    last_offline_time_ = 0;
-    clear_has_last_offline_time();
+inline void RoleLiteInfo::clear_last_offline_time() {
+  last_offline_time_ = 0;
+  clear_has_last_offline_time();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::last_offline_time() const
-{
-    return last_offline_time_;
+inline ::google::protobuf::int32 RoleLiteInfo::last_offline_time() const {
+  return last_offline_time_;
 }
-inline void RoleLiteInfo::set_last_offline_time(::google::protobuf::int32 value)
-{
-    set_has_last_offline_time();
-    last_offline_time_ = value;
+inline void RoleLiteInfo::set_last_offline_time(::google::protobuf::int32 value) {
+  set_has_last_offline_time();
+  last_offline_time_ = value;
 }
 
 // required int32 last_offline_ip = 11;
-inline bool RoleLiteInfo::has_last_offline_ip() const
-{
-    return (_has_bits_[0] & 0x00000400u) != 0;
+inline bool RoleLiteInfo::has_last_offline_ip() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void RoleLiteInfo::set_has_last_offline_ip()
-{
-    _has_bits_[0] |= 0x00000400u;
+inline void RoleLiteInfo::set_has_last_offline_ip() {
+  _has_bits_[0] |= 0x00000400u;
 }
-inline void RoleLiteInfo::clear_has_last_offline_ip()
-{
-    _has_bits_[0] &= ~0x00000400u;
+inline void RoleLiteInfo::clear_has_last_offline_ip() {
+  _has_bits_[0] &= ~0x00000400u;
 }
-inline void RoleLiteInfo::clear_last_offline_ip()
-{
-    last_offline_ip_ = 0;
-    clear_has_last_offline_ip();
+inline void RoleLiteInfo::clear_last_offline_ip() {
+  last_offline_ip_ = 0;
+  clear_has_last_offline_ip();
 }
-inline ::google::protobuf::int32 RoleLiteInfo::last_offline_ip() const
-{
-    return last_offline_ip_;
+inline ::google::protobuf::int32 RoleLiteInfo::last_offline_ip() const {
+  return last_offline_ip_;
 }
-inline void RoleLiteInfo::set_last_offline_ip(::google::protobuf::int32 value)
-{
-    set_has_last_offline_ip();
-    last_offline_ip_ = value;
+inline void RoleLiteInfo::set_last_offline_ip(::google::protobuf::int32 value) {
+  set_has_last_offline_ip();
+  last_offline_ip_ = value;
 }
 
 // required bytes view_record = 12;
-inline bool RoleLiteInfo::has_view_record() const
-{
-    return (_has_bits_[0] & 0x00000800u) != 0;
+inline bool RoleLiteInfo::has_view_record() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void RoleLiteInfo::set_has_view_record()
-{
-    _has_bits_[0] |= 0x00000800u;
+inline void RoleLiteInfo::set_has_view_record() {
+  _has_bits_[0] |= 0x00000800u;
 }
-inline void RoleLiteInfo::clear_has_view_record()
-{
-    _has_bits_[0] &= ~0x00000800u;
+inline void RoleLiteInfo::clear_has_view_record() {
+  _has_bits_[0] &= ~0x00000800u;
 }
-inline void RoleLiteInfo::clear_view_record()
-{
-    if (view_record_ != &::google::protobuf::internal::kEmptyString)
-    {
-        view_record_->clear();
-    }
+inline void RoleLiteInfo::clear_view_record() {
+  if (view_record_ != &::google::protobuf::internal::kEmptyString) {
+    view_record_->clear();
+  }
+  clear_has_view_record();
+}
+inline const ::std::string& RoleLiteInfo::view_record() const {
+  return *view_record_;
+}
+inline void RoleLiteInfo::set_view_record(const ::std::string& value) {
+  set_has_view_record();
+  if (view_record_ == &::google::protobuf::internal::kEmptyString) {
+    view_record_ = new ::std::string;
+  }
+  view_record_->assign(value);
+}
+inline void RoleLiteInfo::set_view_record(const char* value) {
+  set_has_view_record();
+  if (view_record_ == &::google::protobuf::internal::kEmptyString) {
+    view_record_ = new ::std::string;
+  }
+  view_record_->assign(value);
+}
+inline void RoleLiteInfo::set_view_record(const void* value, size_t size) {
+  set_has_view_record();
+  if (view_record_ == &::google::protobuf::internal::kEmptyString) {
+    view_record_ = new ::std::string;
+  }
+  view_record_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RoleLiteInfo::mutable_view_record() {
+  set_has_view_record();
+  if (view_record_ == &::google::protobuf::internal::kEmptyString) {
+    view_record_ = new ::std::string;
+  }
+  return view_record_;
+}
+inline ::std::string* RoleLiteInfo::release_view_record() {
+  clear_has_view_record();
+  if (view_record_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = view_record_;
+    view_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void RoleLiteInfo::set_allocated_view_record(::std::string* view_record) {
+  if (view_record_ != &::google::protobuf::internal::kEmptyString) {
+    delete view_record_;
+  }
+  if (view_record) {
+    set_has_view_record();
+    view_record_ = view_record;
+  } else {
     clear_has_view_record();
-}
-inline const ::std::string& RoleLiteInfo::view_record() const
-{
-    return *view_record_;
-}
-inline void RoleLiteInfo::set_view_record(const ::std::string& value)
-{
-    set_has_view_record();
-    if (view_record_ == &::google::protobuf::internal::kEmptyString)
-    {
-        view_record_ = new ::std::string;
-    }
-    view_record_->assign(value);
-}
-inline void RoleLiteInfo::set_view_record(const char* value)
-{
-    set_has_view_record();
-    if (view_record_ == &::google::protobuf::internal::kEmptyString)
-    {
-        view_record_ = new ::std::string;
-    }
-    view_record_->assign(value);
-}
-inline void RoleLiteInfo::set_view_record(const void* value, size_t size)
-{
-    set_has_view_record();
-    if (view_record_ == &::google::protobuf::internal::kEmptyString)
-    {
-        view_record_ = new ::std::string;
-    }
-    view_record_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* RoleLiteInfo::mutable_view_record()
-{
-    set_has_view_record();
-    if (view_record_ == &::google::protobuf::internal::kEmptyString)
-    {
-        view_record_ = new ::std::string;
-    }
-    return view_record_;
-}
-inline ::std::string* RoleLiteInfo::release_view_record()
-{
-    clear_has_view_record();
-    if (view_record_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = view_record_;
-        view_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void RoleLiteInfo::set_allocated_view_record(::std::string* view_record)
-{
-    if (view_record_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete view_record_;
-    }
-    if (view_record)
-    {
-        set_has_view_record();
-        view_record_ = view_record;
-    }
-    else
-    {
-        clear_has_view_record();
-        view_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    view_record_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -5762,35 +4874,28 @@ inline void RoleLiteInfo::set_allocated_view_record(::std::string* view_record)
 // AckRoleLiteInfoList
 
 // repeated .NFMsg.RoleLiteInfo char_data = 1;
-inline int AckRoleLiteInfoList::char_data_size() const
-{
-    return char_data_.size();
+inline int AckRoleLiteInfoList::char_data_size() const {
+  return char_data_.size();
 }
-inline void AckRoleLiteInfoList::clear_char_data()
-{
-    char_data_.Clear();
+inline void AckRoleLiteInfoList::clear_char_data() {
+  char_data_.Clear();
 }
-inline const ::NFMsg::RoleLiteInfo& AckRoleLiteInfoList::char_data(int index) const
-{
-    return char_data_.Get(index);
+inline const ::NFMsg::RoleLiteInfo& AckRoleLiteInfoList::char_data(int index) const {
+  return char_data_.Get(index);
 }
-inline ::NFMsg::RoleLiteInfo* AckRoleLiteInfoList::mutable_char_data(int index)
-{
-    return char_data_.Mutable(index);
+inline ::NFMsg::RoleLiteInfo* AckRoleLiteInfoList::mutable_char_data(int index) {
+  return char_data_.Mutable(index);
 }
-inline ::NFMsg::RoleLiteInfo* AckRoleLiteInfoList::add_char_data()
-{
-    return char_data_.Add();
+inline ::NFMsg::RoleLiteInfo* AckRoleLiteInfoList::add_char_data() {
+  return char_data_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >&
-AckRoleLiteInfoList::char_data() const
-{
-    return char_data_;
+AckRoleLiteInfoList::char_data() const {
+  return char_data_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::RoleLiteInfo >*
-AckRoleLiteInfoList::mutable_char_data()
-{
-    return &char_data_;
+AckRoleLiteInfoList::mutable_char_data() {
+  return &char_data_;
 }
 
 // -------------------------------------------------------------------
@@ -5798,301 +4903,231 @@ AckRoleLiteInfoList::mutable_char_data()
 // ReqCreateRole
 
 // required bytes account = 1;
-inline bool ReqCreateRole::has_account() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqCreateRole::has_account() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqCreateRole::set_has_account()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqCreateRole::set_has_account() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqCreateRole::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqCreateRole::clear_has_account() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqCreateRole::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqCreateRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqCreateRole::account() const {
+  return *account_;
+}
+inline void ReqCreateRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqCreateRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqCreateRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCreateRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqCreateRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCreateRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqCreateRole::account() const
-{
-    return *account_;
-}
-inline void ReqCreateRole::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqCreateRole::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqCreateRole::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqCreateRole::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqCreateRole::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqCreateRole::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 career = 2;
-inline bool ReqCreateRole::has_career() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqCreateRole::has_career() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqCreateRole::set_has_career()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqCreateRole::set_has_career() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqCreateRole::clear_has_career()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqCreateRole::clear_has_career() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqCreateRole::clear_career()
-{
-    career_ = 0;
-    clear_has_career();
+inline void ReqCreateRole::clear_career() {
+  career_ = 0;
+  clear_has_career();
 }
-inline ::google::protobuf::int32 ReqCreateRole::career() const
-{
-    return career_;
+inline ::google::protobuf::int32 ReqCreateRole::career() const {
+  return career_;
 }
-inline void ReqCreateRole::set_career(::google::protobuf::int32 value)
-{
-    set_has_career();
-    career_ = value;
+inline void ReqCreateRole::set_career(::google::protobuf::int32 value) {
+  set_has_career();
+  career_ = value;
 }
 
 // required int32 sex = 3;
-inline bool ReqCreateRole::has_sex() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ReqCreateRole::has_sex() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqCreateRole::set_has_sex()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ReqCreateRole::set_has_sex() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqCreateRole::clear_has_sex()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ReqCreateRole::clear_has_sex() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqCreateRole::clear_sex()
-{
-    sex_ = 0;
-    clear_has_sex();
+inline void ReqCreateRole::clear_sex() {
+  sex_ = 0;
+  clear_has_sex();
 }
-inline ::google::protobuf::int32 ReqCreateRole::sex() const
-{
-    return sex_;
+inline ::google::protobuf::int32 ReqCreateRole::sex() const {
+  return sex_;
 }
-inline void ReqCreateRole::set_sex(::google::protobuf::int32 value)
-{
-    set_has_sex();
-    sex_ = value;
+inline void ReqCreateRole::set_sex(::google::protobuf::int32 value) {
+  set_has_sex();
+  sex_ = value;
 }
 
 // required int32 race = 4;
-inline bool ReqCreateRole::has_race() const
-{
-    return (_has_bits_[0] & 0x00000008u) != 0;
+inline bool ReqCreateRole::has_race() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ReqCreateRole::set_has_race()
-{
-    _has_bits_[0] |= 0x00000008u;
+inline void ReqCreateRole::set_has_race() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ReqCreateRole::clear_has_race()
-{
-    _has_bits_[0] &= ~0x00000008u;
+inline void ReqCreateRole::clear_has_race() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ReqCreateRole::clear_race()
-{
-    race_ = 0;
-    clear_has_race();
+inline void ReqCreateRole::clear_race() {
+  race_ = 0;
+  clear_has_race();
 }
-inline ::google::protobuf::int32 ReqCreateRole::race() const
-{
-    return race_;
+inline ::google::protobuf::int32 ReqCreateRole::race() const {
+  return race_;
 }
-inline void ReqCreateRole::set_race(::google::protobuf::int32 value)
-{
-    set_has_race();
-    race_ = value;
+inline void ReqCreateRole::set_race(::google::protobuf::int32 value) {
+  set_has_race();
+  race_ = value;
 }
 
 // required bytes noob_name = 5;
-inline bool ReqCreateRole::has_noob_name() const
-{
-    return (_has_bits_[0] & 0x00000010u) != 0;
+inline bool ReqCreateRole::has_noob_name() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ReqCreateRole::set_has_noob_name()
-{
-    _has_bits_[0] |= 0x00000010u;
+inline void ReqCreateRole::set_has_noob_name() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void ReqCreateRole::clear_has_noob_name()
-{
-    _has_bits_[0] &= ~0x00000010u;
+inline void ReqCreateRole::clear_has_noob_name() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void ReqCreateRole::clear_noob_name()
-{
-    if (noob_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_->clear();
-    }
+inline void ReqCreateRole::clear_noob_name() {
+  if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
+    noob_name_->clear();
+  }
+  clear_has_noob_name();
+}
+inline const ::std::string& ReqCreateRole::noob_name() const {
+  return *noob_name_;
+}
+inline void ReqCreateRole::set_noob_name(const ::std::string& value) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(value);
+}
+inline void ReqCreateRole::set_noob_name(const char* value) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(value);
+}
+inline void ReqCreateRole::set_noob_name(const void* value, size_t size) {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  noob_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqCreateRole::mutable_noob_name() {
+  set_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    noob_name_ = new ::std::string;
+  }
+  return noob_name_;
+}
+inline ::std::string* ReqCreateRole::release_noob_name() {
+  clear_has_noob_name();
+  if (noob_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = noob_name_;
+    noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqCreateRole::set_allocated_noob_name(::std::string* noob_name) {
+  if (noob_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete noob_name_;
+  }
+  if (noob_name) {
+    set_has_noob_name();
+    noob_name_ = noob_name;
+  } else {
     clear_has_noob_name();
-}
-inline const ::std::string& ReqCreateRole::noob_name() const
-{
-    return *noob_name_;
-}
-inline void ReqCreateRole::set_noob_name(const ::std::string& value)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(value);
-}
-inline void ReqCreateRole::set_noob_name(const char* value)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(value);
-}
-inline void ReqCreateRole::set_noob_name(const void* value, size_t size)
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    noob_name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqCreateRole::mutable_noob_name()
-{
-    set_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        noob_name_ = new ::std::string;
-    }
-    return noob_name_;
-}
-inline ::std::string* ReqCreateRole::release_noob_name()
-{
-    clear_has_noob_name();
-    if (noob_name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = noob_name_;
-        noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqCreateRole::set_allocated_noob_name(::std::string* noob_name)
-{
-    if (noob_name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete noob_name_;
-    }
-    if (noob_name)
-    {
-        set_has_noob_name();
-        noob_name_ = noob_name;
-    }
-    else
-    {
-        clear_has_noob_name();
-        noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    noob_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 game_id = 6;
-inline bool ReqCreateRole::has_game_id() const
-{
-    return (_has_bits_[0] & 0x00000020u) != 0;
+inline bool ReqCreateRole::has_game_id() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ReqCreateRole::set_has_game_id()
-{
-    _has_bits_[0] |= 0x00000020u;
+inline void ReqCreateRole::set_has_game_id() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void ReqCreateRole::clear_has_game_id()
-{
-    _has_bits_[0] &= ~0x00000020u;
+inline void ReqCreateRole::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void ReqCreateRole::clear_game_id()
-{
-    game_id_ = 0;
-    clear_has_game_id();
+inline void ReqCreateRole::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 ReqCreateRole::game_id() const
-{
-    return game_id_;
+inline ::google::protobuf::int32 ReqCreateRole::game_id() const {
+  return game_id_;
 }
-inline void ReqCreateRole::set_game_id(::google::protobuf::int32 value)
-{
-    set_has_game_id();
-    game_id_ = value;
+inline void ReqCreateRole::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -6100,217 +5135,165 @@ inline void ReqCreateRole::set_game_id(::google::protobuf::int32 value)
 // ReqDeleteRole
 
 // required bytes account = 1;
-inline bool ReqDeleteRole::has_account() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqDeleteRole::has_account() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqDeleteRole::set_has_account()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqDeleteRole::set_has_account() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqDeleteRole::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqDeleteRole::clear_has_account() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqDeleteRole::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqDeleteRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqDeleteRole::account() const {
+  return *account_;
+}
+inline void ReqDeleteRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqDeleteRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqDeleteRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqDeleteRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqDeleteRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqDeleteRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqDeleteRole::account() const
-{
-    return *account_;
-}
-inline void ReqDeleteRole::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqDeleteRole::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqDeleteRole::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqDeleteRole::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqDeleteRole::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqDeleteRole::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes name = 2;
-inline bool ReqDeleteRole::has_name() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqDeleteRole::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqDeleteRole::set_has_name()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqDeleteRole::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqDeleteRole::clear_has_name()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqDeleteRole::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqDeleteRole::clear_name()
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        name_->clear();
-    }
+inline void ReqDeleteRole::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ReqDeleteRole::name() const {
+  return *name_;
+}
+inline void ReqDeleteRole::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqDeleteRole::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqDeleteRole::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqDeleteRole::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqDeleteRole::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqDeleteRole::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
     clear_has_name();
-}
-inline const ::std::string& ReqDeleteRole::name() const
-{
-    return *name_;
-}
-inline void ReqDeleteRole::set_name(const ::std::string& value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ReqDeleteRole::set_name(const char* value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ReqDeleteRole::set_name(const void* value, size_t size)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqDeleteRole::mutable_name()
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    return name_;
-}
-inline ::std::string* ReqDeleteRole::release_name()
-{
-    clear_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = name_;
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqDeleteRole::set_allocated_name(::std::string* name)
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete name_;
-    }
-    if (name)
-    {
-        set_has_name();
-        name_ = name;
-    }
-    else
-    {
-        clear_has_name();
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 game_id = 3;
-inline bool ReqDeleteRole::has_game_id() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ReqDeleteRole::has_game_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqDeleteRole::set_has_game_id()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ReqDeleteRole::set_has_game_id() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqDeleteRole::clear_has_game_id()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ReqDeleteRole::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqDeleteRole::clear_game_id()
-{
-    game_id_ = 0;
-    clear_has_game_id();
+inline void ReqDeleteRole::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 ReqDeleteRole::game_id() const
-{
-    return game_id_;
+inline ::google::protobuf::int32 ReqDeleteRole::game_id() const {
+  return game_id_;
 }
-inline void ReqDeleteRole::set_game_id(::google::protobuf::int32 value)
-{
-    set_has_game_id();
-    game_id_ = value;
+inline void ReqDeleteRole::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -6318,217 +5301,165 @@ inline void ReqDeleteRole::set_game_id(::google::protobuf::int32 value)
 // ReqRecoverRole
 
 // required bytes account = 1;
-inline bool ReqRecoverRole::has_account() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ReqRecoverRole::has_account() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqRecoverRole::set_has_account()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ReqRecoverRole::set_has_account() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqRecoverRole::clear_has_account()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ReqRecoverRole::clear_has_account() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqRecoverRole::clear_account()
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        account_->clear();
-    }
+inline void ReqRecoverRole::clear_account() {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    account_->clear();
+  }
+  clear_has_account();
+}
+inline const ::std::string& ReqRecoverRole::account() const {
+  return *account_;
+}
+inline void ReqRecoverRole::set_account(const ::std::string& value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRecoverRole::set_account(const char* value) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(value);
+}
+inline void ReqRecoverRole::set_account(const void* value, size_t size) {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  account_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRecoverRole::mutable_account() {
+  set_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    account_ = new ::std::string;
+  }
+  return account_;
+}
+inline ::std::string* ReqRecoverRole::release_account() {
+  clear_has_account();
+  if (account_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = account_;
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRecoverRole::set_allocated_account(::std::string* account) {
+  if (account_ != &::google::protobuf::internal::kEmptyString) {
+    delete account_;
+  }
+  if (account) {
+    set_has_account();
+    account_ = account;
+  } else {
     clear_has_account();
-}
-inline const ::std::string& ReqRecoverRole::account() const
-{
-    return *account_;
-}
-inline void ReqRecoverRole::set_account(const ::std::string& value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqRecoverRole::set_account(const char* value)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(value);
-}
-inline void ReqRecoverRole::set_account(const void* value, size_t size)
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    account_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqRecoverRole::mutable_account()
-{
-    set_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        account_ = new ::std::string;
-    }
-    return account_;
-}
-inline ::std::string* ReqRecoverRole::release_account()
-{
-    clear_has_account();
-    if (account_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = account_;
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqRecoverRole::set_allocated_account(::std::string* account)
-{
-    if (account_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete account_;
-    }
-    if (account)
-    {
-        set_has_account();
-        account_ = account;
-    }
-    else
-    {
-        clear_has_account();
-        account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    account_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required bytes name = 2;
-inline bool ReqRecoverRole::has_name() const
-{
-    return (_has_bits_[0] & 0x00000002u) != 0;
+inline bool ReqRecoverRole::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqRecoverRole::set_has_name()
-{
-    _has_bits_[0] |= 0x00000002u;
+inline void ReqRecoverRole::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqRecoverRole::clear_has_name()
-{
-    _has_bits_[0] &= ~0x00000002u;
+inline void ReqRecoverRole::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqRecoverRole::clear_name()
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        name_->clear();
-    }
+inline void ReqRecoverRole::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ReqRecoverRole::name() const {
+  return *name_;
+}
+inline void ReqRecoverRole::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqRecoverRole::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void ReqRecoverRole::set_name(const void* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqRecoverRole::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* ReqRecoverRole::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqRecoverRole::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
     clear_has_name();
-}
-inline const ::std::string& ReqRecoverRole::name() const
-{
-    return *name_;
-}
-inline void ReqRecoverRole::set_name(const ::std::string& value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ReqRecoverRole::set_name(const char* value)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(value);
-}
-inline void ReqRecoverRole::set_name(const void* value, size_t size)
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ReqRecoverRole::mutable_name()
-{
-    set_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        name_ = new ::std::string;
-    }
-    return name_;
-}
-inline ::std::string* ReqRecoverRole::release_name()
-{
-    clear_has_name();
-    if (name_ == &::google::protobuf::internal::kEmptyString)
-    {
-        return NULL;
-    }
-    else
-    {
-        ::std::string* temp = name_;
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-        return temp;
-    }
-}
-inline void ReqRecoverRole::set_allocated_name(::std::string* name)
-{
-    if (name_ != &::google::protobuf::internal::kEmptyString)
-    {
-        delete name_;
-    }
-    if (name)
-    {
-        set_has_name();
-        name_ = name;
-    }
-    else
-    {
-        clear_has_name();
-        name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    }
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // required int32 game_id = 3;
-inline bool ReqRecoverRole::has_game_id() const
-{
-    return (_has_bits_[0] & 0x00000004u) != 0;
+inline bool ReqRecoverRole::has_game_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqRecoverRole::set_has_game_id()
-{
-    _has_bits_[0] |= 0x00000004u;
+inline void ReqRecoverRole::set_has_game_id() {
+  _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqRecoverRole::clear_has_game_id()
-{
-    _has_bits_[0] &= ~0x00000004u;
+inline void ReqRecoverRole::clear_has_game_id() {
+  _has_bits_[0] &= ~0x00000004u;
 }
-inline void ReqRecoverRole::clear_game_id()
-{
-    game_id_ = 0;
-    clear_has_game_id();
+inline void ReqRecoverRole::clear_game_id() {
+  game_id_ = 0;
+  clear_has_game_id();
 }
-inline ::google::protobuf::int32 ReqRecoverRole::game_id() const
-{
-    return game_id_;
+inline ::google::protobuf::int32 ReqRecoverRole::game_id() const {
+  return game_id_;
 }
-inline void ReqRecoverRole::set_game_id(::google::protobuf::int32 value)
-{
-    set_has_game_id();
-    game_id_ = value;
+inline void ReqRecoverRole::set_game_id(::google::protobuf::int32 value) {
+  set_has_game_id();
+  game_id_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -6536,31 +5467,25 @@ inline void ReqRecoverRole::set_game_id(::google::protobuf::int32 value)
 // ServerHeartBeat
 
 // optional int32 count = 1;
-inline bool ServerHeartBeat::has_count() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool ServerHeartBeat::has_count() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ServerHeartBeat::set_has_count()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void ServerHeartBeat::set_has_count() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ServerHeartBeat::clear_has_count()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void ServerHeartBeat::clear_has_count() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ServerHeartBeat::clear_count()
-{
-    count_ = 0;
-    clear_has_count();
+inline void ServerHeartBeat::clear_count() {
+  count_ = 0;
+  clear_has_count();
 }
-inline ::google::protobuf::int32 ServerHeartBeat::count() const
-{
-    return count_;
+inline ::google::protobuf::int32 ServerHeartBeat::count() const {
+  return count_;
 }
-inline void ServerHeartBeat::set_count(::google::protobuf::int32 value)
-{
-    set_has_count();
-    count_ = value;
+inline void ServerHeartBeat::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -6568,58 +5493,41 @@ inline void ServerHeartBeat::set_count(::google::protobuf::int32 value)
 // RoleOnlineNotify
 
 // optional .NFMsg.Ident guild = 1;
-inline bool RoleOnlineNotify::has_guild() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool RoleOnlineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleOnlineNotify::set_has_guild()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void RoleOnlineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleOnlineNotify::clear_has_guild()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void RoleOnlineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void RoleOnlineNotify::clear_guild()
-{
-    if (guild_ != NULL)
-    {
-        guild_->::NFMsg::Ident::Clear();
-    }
-    clear_has_guild();
+inline void RoleOnlineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
 }
-inline const ::NFMsg::Ident& RoleOnlineNotify::guild() const
-{
-    return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+inline const ::NFMsg::Ident& RoleOnlineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
 }
-inline ::NFMsg::Ident* RoleOnlineNotify::mutable_guild()
-{
+inline ::NFMsg::Ident* RoleOnlineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
     set_has_guild();
-    if (guild_ == NULL)
-    {
-        guild_ = new ::NFMsg::Ident;
-    }
-    return guild_;
-}
-inline ::NFMsg::Ident* RoleOnlineNotify::release_guild()
-{
+  } else {
     clear_has_guild();
-    ::NFMsg::Ident* temp = guild_;
-    guild_ = NULL;
-    return temp;
-}
-inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild)
-{
-    delete guild_;
-    guild_ = guild;
-    if (guild)
-    {
-        set_has_guild();
-    }
-    else
-    {
-        clear_has_guild();
-    }
+  }
 }
 
 // -------------------------------------------------------------------
@@ -6627,58 +5535,41 @@ inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild)
 // RoleOfflineNotify
 
 // optional .NFMsg.Ident guild = 1;
-inline bool RoleOfflineNotify::has_guild() const
-{
-    return (_has_bits_[0] & 0x00000001u) != 0;
+inline bool RoleOfflineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleOfflineNotify::set_has_guild()
-{
-    _has_bits_[0] |= 0x00000001u;
+inline void RoleOfflineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleOfflineNotify::clear_has_guild()
-{
-    _has_bits_[0] &= ~0x00000001u;
+inline void RoleOfflineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void RoleOfflineNotify::clear_guild()
-{
-    if (guild_ != NULL)
-    {
-        guild_->::NFMsg::Ident::Clear();
-    }
-    clear_has_guild();
+inline void RoleOfflineNotify::clear_guild() {
+  if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
+  clear_has_guild();
 }
-inline const ::NFMsg::Ident& RoleOfflineNotify::guild() const
-{
-    return guild_ != NULL ? *guild_ : *default_instance_->guild_;
+inline const ::NFMsg::Ident& RoleOfflineNotify::guild() const {
+  return guild_ != NULL ? *guild_ : *default_instance_->guild_;
 }
-inline ::NFMsg::Ident* RoleOfflineNotify::mutable_guild()
-{
+inline ::NFMsg::Ident* RoleOfflineNotify::mutable_guild() {
+  set_has_guild();
+  if (guild_ == NULL) guild_ = new ::NFMsg::Ident;
+  return guild_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::release_guild() {
+  clear_has_guild();
+  ::NFMsg::Ident* temp = guild_;
+  guild_ = NULL;
+  return temp;
+}
+inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
+  delete guild_;
+  guild_ = guild;
+  if (guild) {
     set_has_guild();
-    if (guild_ == NULL)
-    {
-        guild_ = new ::NFMsg::Ident;
-    }
-    return guild_;
-}
-inline ::NFMsg::Ident* RoleOfflineNotify::release_guild()
-{
+  } else {
     clear_has_guild();
-    ::NFMsg::Ident* temp = guild_;
-    guild_ = NULL;
-    return temp;
-}
-inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild)
-{
-    delete guild_;
-    guild_ = guild;
-    if (guild)
-    {
-        set_has_guild();
-    }
-    else
-    {
-        clear_has_guild();
-    }
+  }
 }
 
 
@@ -6687,20 +5578,16 @@ inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild)
 }  // namespace NFMsg
 
 #ifndef SWIG
-namespace google
-{
-namespace protobuf
-{
+namespace google {
+namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EServerState>()
-{
-    return ::NFMsg::EServerState_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EServerState>() {
+  return ::NFMsg::EServerState_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqServerListType>()
-{
-    return ::NFMsg::ReqServerListType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqServerListType>() {
+  return ::NFMsg::ReqServerListType_descriptor();
 }
 
 }  // namespace google
