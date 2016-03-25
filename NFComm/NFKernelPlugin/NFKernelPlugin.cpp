@@ -35,7 +35,7 @@ const std::string NFKernelPlugin::GetPluginName()
     return GET_CLASS_NAME(NFKernelPlugin)
 }
 
-       void NFKernelPlugin::Install()
+void NFKernelPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCUUIDModule)
     REGISTER_MODULE(pPluginManager, NFCSceneModule)
