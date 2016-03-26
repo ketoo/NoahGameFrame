@@ -881,6 +881,14 @@ namespace NFMsg
       get { return _player_Client_list; }
     }
   
+    private NFMsg.Ident _hash_ident = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"hash_ident", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.Ident hash_ident
+    {
+      get { return _hash_ident; }
+      set { _hash_ident = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
