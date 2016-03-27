@@ -90,18 +90,18 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const int nSockIndex
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(pData->server_id(), pServerData);
+            mGameMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "GameServerRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 
     SynGameToProxy();
@@ -120,10 +120,10 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const int nSockInd
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        mGameMap.RemoveElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        mGameMap.RemoveElement(xData.server_id());
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "GameServerRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
     return 0;
 }
@@ -139,18 +139,19 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const int nSockInde
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+        NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(pData->server_id(), pServerData);
+            mGameMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "GameServerRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
     }
 
     SynGameToProxy();
@@ -169,18 +170,19 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockInde
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData)
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mProxyMap.AddElement(pData->server_id(), pServerData);
+            mProxyMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 
         SynGameToProxy(nSockIndex);
     }
@@ -199,10 +201,11 @@ int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const int nSockIn
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        mGameMap.RemoveElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy UnRegistered");
+        mGameMap.RemoveElement(xData.server_id());
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
     }
 
     return 0;
@@ -219,18 +222,19 @@ int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockInd
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+        NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(pData->server_id(), pServerData);
+            mGameMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
 
         SynGameToProxy(nSockIndex);
     }
