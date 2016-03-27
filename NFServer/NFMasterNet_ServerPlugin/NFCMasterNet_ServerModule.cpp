@@ -30,18 +30,18 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, co
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mWorldMap.AddElement(pData->server_id(), pServerData);
+            mWorldMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "WorldRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "WorldRegistered");
     }
 
 
@@ -61,11 +61,11 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex, 
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        mWorldMap.RemoveElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        mWorldMap.RemoveElement(xData.server_id());
 
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "WorldUnRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "WorldUnRegistered");
     }
 
     SynWorldToLogin();
@@ -84,18 +84,18 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, c
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mWorldMap.AddElement(pData->server_id(), pServerData);
+            mWorldMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "RefreshWorldInfo");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "RefreshWorldInfo");
 
     }
 
@@ -115,18 +115,18 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, co
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mLoginMap.AddElement(pData->server_id(), pServerData);
+            mLoginMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "LoginRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "LoginRegistered");
     }
 
     SynWorldToLogin();
@@ -145,10 +145,11 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex, 
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        mLoginMap.RemoveElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "LoginUnRegistered");
+        mLoginMap.RemoveElement(xData.server_id());
+
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "LoginUnRegistered");
 
     }
 
@@ -167,18 +168,18 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, c
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mLoginMap.AddElement(pData->server_id(), pServerData);
+            mLoginMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
-        *(pServerData->pData) = *pData;
+        *(pServerData->pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "RefreshLoginInfo");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "RefreshLoginInfo");
 
     }
 
