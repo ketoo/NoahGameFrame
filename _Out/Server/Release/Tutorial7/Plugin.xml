@@ -1,7 +1,8 @@
 <XML>
-
-	<Plugin Name="NFUrlPlugin" Main="1"/>
-	<Plugin Name="Tutorial7" Main="1"/>
-	<APPID Name="111" />
-    <ConfigPath Name="../../" />
+	<Plugin Name="NFKernelPlugin" Main="1"/>
+	<Plugin Name="NFConfigPlugin" Main="1"/>
+	<Plugin Name="Tutorial5Plugin" Main="1"/>
+	<Plugin Name="NFLogPlugin" Main="1"/>
+	<APPID Name="555" />
+	<ConfigPath Name="../../" />
 </XML>
