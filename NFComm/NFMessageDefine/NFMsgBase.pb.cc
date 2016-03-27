@@ -613,10 +613,11 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerRecordList));
   MsgBase_descriptor_ = file->message_type(29);
-  static const int MsgBase_offsets_[3] = {
+  static const int MsgBase_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, msg_data_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, player_client_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, hash_ident_),
   };
   MsgBase_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -903,21 +904,22 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
     "st\030\004 \003(\0132\023.NFMsg.RecordString\022/\n\022record_"
     "object_list\030\005 \003(\0132\023.NFMsg.RecordObject\"@"
     "\n\020PlayerRecordList\022,\n\013record_list\030\001 \003(\0132"
-    "\027.NFMsg.PlayerRecordBase\"f\n\007MsgBase\022\037\n\tp"
-    "layer_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010msg_data"
-    "\030\002 \002(\014\022(\n\022player_Client_list\030\003 \003(\0132\014.NFM"
-    "sg.Ident\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002"
-    "(\002\022\t\n\001z\030\003 \002(\002\"\213\003\n\nReqCommand\022 \n\ncontrol_"
-    "id\030\001 \002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002"
-    "(\0162\".NFMsg.ReqCommand.EGameCommandType\022\031"
-    "\n\021command_str_value\030\003 \001(\014\022\031\n\021command_val"
-    "ue_int\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001("
-    "\002\022\031\n\021command_value_str\030\006 \001(\014\022*\n\024command_"
-    "value_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030"
-    "\010 \001(\005\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027"
-    "\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_IT"
-    "EM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD"
-    "_ROLE_EXP\020\003", 3691);
+    "\027.NFMsg.PlayerRecordBase\"\210\001\n\007MsgBase\022\037\n\t"
+    "player_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010msg_dat"
+    "a\030\002 \002(\014\022(\n\022player_Client_list\030\003 \003(\0132\014.NF"
+    "Msg.Ident\022 \n\nhash_ident\030\004 \001(\0132\014.NFMsg.Id"
+    "ent\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n"
+    "\001z\030\003 \002(\002\"\213\003\n\nReqCommand\022 \n\ncontrol_id\030\001 "
+    "\002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002(\0162\"."
+    "NFMsg.ReqCommand.EGameCommandType\022\031\n\021com"
+    "mand_str_value\030\003 \001(\014\022\031\n\021command_value_in"
+    "t\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001(\002\022\031\n\021"
+    "command_value_str\030\006 \001(\014\022*\n\024command_value"
+    "_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030\010 \001(\005"
+    "\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027\n\023EGC"
+    "T_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_ITEM\020\001\022"
+    "\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD_ROLE"
+    "_EXP\020\003", 3726);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
   Ident::default_instance_ = new Ident();
@@ -9388,6 +9390,7 @@ void PlayerRecordList::Swap(PlayerRecordList* other) {
 const int MsgBase::kPlayerIdFieldNumber;
 const int MsgBase::kMsgDataFieldNumber;
 const int MsgBase::kPlayerClientListFieldNumber;
+const int MsgBase::kHashIdentFieldNumber;
 #endif  // !_MSC_VER
 
 MsgBase::MsgBase()
@@ -9397,6 +9400,7 @@ MsgBase::MsgBase()
 
 void MsgBase::InitAsDefaultInstance() {
   player_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  hash_ident_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 MsgBase::MsgBase(const MsgBase& from)
@@ -9409,6 +9413,7 @@ void MsgBase::SharedCtor() {
   _cached_size_ = 0;
   player_id_ = NULL;
   msg_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  hash_ident_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -9422,6 +9427,7 @@ void MsgBase::SharedDtor() {
   }
   if (this != default_instance_) {
     delete player_id_;
+    delete hash_ident_;
   }
 }
 
@@ -9455,6 +9461,9 @@ void MsgBase::Clear() {
       if (msg_data_ != &::google::protobuf::internal::kEmptyString) {
         msg_data_->clear();
       }
+    }
+    if (has_hash_ident()) {
+      if (hash_ident_ != NULL) hash_ident_->::NFMsg::Ident::Clear();
     }
   }
   player_client_list_.Clear();
@@ -9506,6 +9515,20 @@ bool MsgBase::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(26)) goto parse_player_Client_list;
+        if (input->ExpectTag(34)) goto parse_hash_ident;
+        break;
+      }
+
+      // optional .NFMsg.Ident hash_ident = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_hash_ident:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_hash_ident()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -9546,6 +9569,12 @@ void MsgBase::SerializeWithCachedSizes(
       3, this->player_client_list(i), output);
   }
 
+  // optional .NFMsg.Ident hash_ident = 4;
+  if (has_hash_ident()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->hash_ident(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -9575,6 +9604,13 @@ void MsgBase::SerializeWithCachedSizes(
         3, this->player_client_list(i), target);
   }
 
+  // optional .NFMsg.Ident hash_ident = 4;
+  if (has_hash_ident()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->hash_ident(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -9598,6 +9634,13 @@ int MsgBase::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->msg_data());
+    }
+
+    // optional .NFMsg.Ident hash_ident = 4;
+    if (has_hash_ident()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->hash_ident());
     }
 
   }
@@ -9642,6 +9685,9 @@ void MsgBase::MergeFrom(const MsgBase& from) {
     if (from.has_msg_data()) {
       set_msg_data(from.msg_data());
     }
+    if (from.has_hash_ident()) {
+      mutable_hash_ident()->::NFMsg::Ident::MergeFrom(from.hash_ident());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -9667,6 +9713,9 @@ bool MsgBase::IsInitialized() const {
   for (int i = 0; i < player_client_list_size(); i++) {
     if (!this->player_client_list(i).IsInitialized()) return false;
   }
+  if (has_hash_ident()) {
+    if (!this->hash_ident().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -9675,6 +9724,7 @@ void MsgBase::Swap(MsgBase* other) {
     std::swap(player_id_, other->player_id_);
     std::swap(msg_data_, other->msg_data_);
     player_client_list_.Swap(&other->player_client_list_);
+    std::swap(hash_ident_, other->hash_ident_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

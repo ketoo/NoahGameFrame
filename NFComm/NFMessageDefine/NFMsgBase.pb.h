@@ -3259,21 +3259,33 @@ class MsgBase : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_player_client_list();
 
+  // optional .NFMsg.Ident hash_ident = 4;
+  inline bool has_hash_ident() const;
+  inline void clear_hash_ident();
+  static const int kHashIdentFieldNumber = 4;
+  inline const ::NFMsg::Ident& hash_ident() const;
+  inline ::NFMsg::Ident* mutable_hash_ident();
+  inline ::NFMsg::Ident* release_hash_ident();
+  inline void set_allocated_hash_ident(::NFMsg::Ident* hash_ident);
+
   // @@protoc_insertion_point(class_scope:NFMsg.MsgBase)
  private:
   inline void set_has_player_id();
   inline void clear_has_player_id();
   inline void set_has_msg_data();
   inline void clear_has_msg_data();
+  inline void set_has_hash_ident();
+  inline void clear_has_hash_ident();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* player_id_;
   ::std::string* msg_data_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > player_client_list_;
+  ::NFMsg::Ident* hash_ident_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
@@ -6679,6 +6691,44 @@ MsgBase::player_client_list() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
 MsgBase::mutable_player_client_list() {
   return &player_client_list_;
+}
+
+// optional .NFMsg.Ident hash_ident = 4;
+inline bool MsgBase::has_hash_ident() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MsgBase::set_has_hash_ident() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MsgBase::clear_has_hash_ident() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MsgBase::clear_hash_ident() {
+  if (hash_ident_ != NULL) hash_ident_->::NFMsg::Ident::Clear();
+  clear_has_hash_ident();
+}
+inline const ::NFMsg::Ident& MsgBase::hash_ident() const {
+  return hash_ident_ != NULL ? *hash_ident_ : *default_instance_->hash_ident_;
+}
+inline ::NFMsg::Ident* MsgBase::mutable_hash_ident() {
+  set_has_hash_ident();
+  if (hash_ident_ == NULL) hash_ident_ = new ::NFMsg::Ident;
+  return hash_ident_;
+}
+inline ::NFMsg::Ident* MsgBase::release_hash_ident() {
+  clear_has_hash_ident();
+  ::NFMsg::Ident* temp = hash_ident_;
+  hash_ident_ = NULL;
+  return temp;
+}
+inline void MsgBase::set_allocated_hash_ident(::NFMsg::Ident* hash_ident) {
+  delete hash_ident_;
+  hash_ident_ = hash_ident;
+  if (hash_ident) {
+    set_has_hash_ident();
+  } else {
+    clear_has_hash_ident();
+  }
 }
 
 // -------------------------------------------------------------------
