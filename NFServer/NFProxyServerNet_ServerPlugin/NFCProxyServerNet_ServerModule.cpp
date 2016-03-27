@@ -162,11 +162,35 @@ void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, co
             NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
             if (!pNetObject || pNetObject->GetConnectKeyState() <= 0 || pNetObject->GetGameID() <= 0)
             {
-                //没验证key，没选择服务器
+                //state error
                 break;
             }
+			if (xMsg.has_hash_ident())
+			{
+				//special for distributed
+				if (!pNetObject->GetHashIdentID().IsNull())
+				{
+					NFCMachineNode xNode;
+					if (mxConsistentHash.GetSuitNode(pNetObject->GetHashIdentID().ToString(), xNode))
+					{
+						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nSockIndex, nMsgID, msg, nLen);
+					}
+				}
+				else
+				{
+					NFGUID xHashIdent = NFINetModule::PBToNF(xMsg.hash_ident());
 
-            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
+					NFCMachineNode xNode;
+					if (mxConsistentHash.GetSuitNode(xHashIdent.ToString(), xNode))
+					{
+						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nSockIndex, nMsgID, msg, nLen);
+					}
+				}
+			}
+			else
+			{
+				m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
+			}
         }
         break;
     }
@@ -246,10 +270,10 @@ int NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, 
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xMsg.world_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        //选择成功
         NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject)
         {
+			//now this client bind a game server, after this time, all message will be sent to this game server who bind with client
             pNetObject->SetGameID(xMsg.world_id());
 
             NFMsg::AckEventResult xMsg;
@@ -283,7 +307,7 @@ int NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex,
     NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
     if (pNetObject && pNetObject->GetConnectKeyState() > 0)
     {
-        //验证过的帐号才能获取服务器列表
+        //ack all gameserver data
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
