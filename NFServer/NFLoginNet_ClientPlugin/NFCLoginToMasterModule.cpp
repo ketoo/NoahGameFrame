@@ -189,23 +189,22 @@ int NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int n
         return 0;
     }
 
-    int nSize = xMsg.server_list_size();
-    for (int i = 0; i < nSize; ++i)
+    for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
-        NF_SHARE_PTR<NFMsg::ServerInfoReport> pServerData = mWorldMap.GetElement(pData->server_id());
+        NF_SHARE_PTR<NFMsg::ServerInfoReport> pServerData = mWorldMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
-            *pServerData = *pData;
+            *pServerData = xData;
 
-            mWorldMap.AddElement(pData->server_id(), pServerData);
+            mWorldMap.AddElement(xData.server_id(), pServerData);
         }
 
     }
 
-    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSize), "", "WorldInfo");
+    m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xMsg.server_list_size()), "", "WorldInfo");
 
     return 0;
 }
