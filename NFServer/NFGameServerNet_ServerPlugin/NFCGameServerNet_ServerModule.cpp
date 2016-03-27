@@ -1929,18 +1929,18 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSo
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
-            mProxyMap.AddElement(pData->server_id(), pServerData);
+            mProxyMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->xServerData.nFD = nSockIndex;
-        *(pServerData->xServerData.pData) = *pData;
+        *(pServerData->xServerData.pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
     }
 
     return;
@@ -1957,11 +1957,11 @@ void NFCGameServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const int n
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        mProxyMap.RemoveElement(pData->server_id());
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        mProxyMap.RemoveElement(xData.server_id());
 
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy UnRegistered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy UnRegistered");
     }
 
     return;
@@ -1978,18 +1978,18 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
-        NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(pData->server_id());
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
-            mProxyMap.AddElement(pData->server_id(), pServerData);
+            mProxyMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->xServerData.nFD = nSockIndex;
-        *(pServerData->xServerData.pData) = *pData;
+        *(pServerData->xServerData.pData) = xData;
 
-        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Proxy Registered");
+        m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "Proxy Registered");
     }
 
     return;
