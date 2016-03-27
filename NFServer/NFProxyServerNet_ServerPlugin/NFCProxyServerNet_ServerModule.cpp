@@ -346,15 +346,26 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
         return false;
     }
 
+	//broadcast many palyer
     for (int i = 0; i < xMsg.player_client_list_size(); ++i)
     {
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_client_list(i)));
         if (pFD)
         {
+			if (xMsg.has_hash_ident())
+			{
+				NetObject* pNetObject = GetNet()->GetNetObject(*pFD);
+				if (pNetObject)
+				{
+					pNetObject->SetHashIdentID(NFINetModule::PBToNF(xMsg.hash_ident()));
+				}
+			}
+
             GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
     }
 
+	//send message to one player
     if (xMsg.player_client_list_size() <= 0)
     {
         //playerid==ClientID;
@@ -362,6 +373,15 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(PBToNF(xMsg.player_id()));
         if (pFD)
         {
+			if (xMsg.has_hash_ident())
+			{
+				NetObject* pNetObject = GetNet()->GetNetObject(*pFD);
+				if (pNetObject)
+				{
+					pNetObject->SetHashIdentID(NFINetModule::PBToNF(xMsg.hash_ident()));
+				}
+			}
+
             GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
     }
