@@ -212,6 +212,7 @@ message MsgBase
 	required Ident  player_id = 1;//内网需要，外网视情况0(通常不需要，只有在要求别人的数据时才需要)
 	required bytes  msg_data = 2;
 	repeated Ident  player_Client_list = 3;
+	optional Ident  hash_ident = 4;
 }
 
 message Position

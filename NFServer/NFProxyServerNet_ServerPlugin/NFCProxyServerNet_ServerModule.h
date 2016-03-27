@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
+#include "NFComm/NFCore/NFCConsistentHash.hpp"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -36,23 +37,23 @@ public:
 
     virtual bool AfterInit();
 
-	virtual void LogRecive(const char* str){}
-	virtual void LogSend(const char* str){}
+    virtual void LogRecive(const char* str) {}
+    virtual void LogSend(const char* str) {}
 
     virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	//进入游戏成功
-	virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
+    //进入游戏成功
+    virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
 
 protected:
 
-	void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	//连接丢失,删2层(连接对象，帐号对象)
-	void OnClientDisconnect(const int nAddress);
-	//有连接
-	void OnClientConnected(const int nAddress);
+    //连接丢失,删2层(连接对象，帐号对象)
+    void OnClientDisconnect(const int nAddress);
+    //有连接
+    void OnClientConnected(const int nAddress);
 
     int OnConnectKeyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     int OnReqServerListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -64,20 +65,20 @@ protected:
 
 
     //客户端的连接60秒删掉
-    int HB_OnConnectCheckTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var );
+    int HB_OnConnectCheckTime(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
     //////////////////////////////////////////////////////////////////////////
 protected:
 
-	NFMapEx<NFGUID, int> mxClientIdent;
-
+    NFMapEx<NFGUID, int> mxClientIdent;
+	NFCConsistentHash mxConsistentHash;
 protected:
-	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
-	NFIProxyServerToGameModule* m_pProxyServerToGameModule;
-	NFIKernelModule* m_pKernelModule;
+    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
+    NFIProxyServerToGameModule* m_pProxyServerToGameModule;
+    NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-	NFIUUIDModule* m_pUUIDModule;
+    NFIUUIDModule* m_pUUIDModule;
 
 };
 

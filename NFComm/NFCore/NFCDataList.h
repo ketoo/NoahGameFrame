@@ -77,6 +77,7 @@ public:
 protected:
 	void AddStatck();
     void InnerAppendEx(const NFIDataList& src, const int start, const int end);
+	bool ValidIndex(int index) const;
 };
 
 #endif	
