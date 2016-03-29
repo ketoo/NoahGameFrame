@@ -705,6 +705,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_GEM_STONE", Value=7)]
       EIT_GEM_STONE = 7,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_CURRENCY", Value=8)]
+      EIT_CURRENCY = 8,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_WOOD", Value=100)]
       EIT_WOOD = 100,
             

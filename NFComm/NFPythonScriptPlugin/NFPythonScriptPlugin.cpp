@@ -33,7 +33,7 @@ const int NFPythonScriptPlugin::GetPluginVersion()
 
 const std::string NFPythonScriptPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFPythonScriptPlugin)
+    GET_CLASS_NAME(NFPythonScriptPlugin);
 }
 
 void NFPythonScriptPlugin::Install()
