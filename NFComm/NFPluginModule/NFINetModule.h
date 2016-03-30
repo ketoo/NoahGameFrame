@@ -11,14 +11,13 @@
 
 #include <iostream>
 #include <iosfwd>
+#include "NFGUID.h"
 #include "NFILogicModule.h"
+#include "NFIPluginManager.h"
 #include "NFComm/NFNet/NFCNet.h"
+#include "NFComm/NFCore/NFQueue.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#include "NFComm/NFCore/NFQueue.h"
-#include "NFGUID.h"
-#include "NFIPluginManager.h"
-
 
 enum NF_SERVER_TYPES
 {
