@@ -89,8 +89,15 @@ public:
         mxTempNetList.push_back(xInfo);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////
 	//裸数据,发时组包
     void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData)
+    {
+        SendByServerID(nServerID, nMsgID, strData.c_str(), strData.length());
+    }
+
+    //裸数据,发时组包
+    void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
         if (pServer)
@@ -98,7 +105,7 @@ public:
             NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
             if (pNetModule.get())
             {
-                pNetModule->SendMsgWithOutHead(nMsgID, strData, 0);
+                pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0);
             }
         }
     }
@@ -119,7 +126,7 @@ public:
 		}
 	}
 
-	void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL, bool bBroadcast = false)
+	void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData)
 	{
 		NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
 		if (pServer)
@@ -127,25 +134,12 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsgPB(nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
+				pNetModule->SendMsgPB(nMsgID, xData, 0, NFGUID(), NULL);
 			}
 		}
 	}
 
-    void SendByServerID(const int nServerID, const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-    {
-        NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
-        if (pServer)
-        {
-            NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
-            if (pNetModule.get())
-            {
-                pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0);
-            }
-        }
-    }
-
-	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
+	void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData)
 	{
 		NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 		while (pServer)
@@ -153,31 +147,33 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsgPB(nMsgID, xData, 0, nPlayer, pClientIDList);
+				pNetModule->SendMsgPB(nMsgID, xData);
 			}
 
 			pServer = mxServerMap.Next();
 		}
-
 	}
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    void SendBySuit(const std::string& strHashKey, const int nMsgID, const std::string& strData)
+    {
+        uint32_t nCRC32 = NFrame::CRC32(strHashKey);
+        SendBySuit(nCRC32, nMsgID, strData);
+    }
+
+    void SendBySuit(const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
+    {
+        uint32_t nCRC32 = NFrame::CRC32(strHashKey);
+        SendBySuit(nCRC32, nMsgID, strData.c_str(), strData.length());
+    }
 
     void SendBySuit(const int& nHashKey, const int nMsgID, const std::string& strData)
     {
-        if (mxConsistentHash.Size() <= 0)
-        {
-            return;
-        }
-
-        NFCMachineNode xNode;
-        if (!GetServerMachineData(lexical_cast<std::string> (nHashKey), xNode))
-        {
-            return ;
-        }
-
-        SendByServerID(nMsgID, xNode.nMachineID, strData);
+        SendBySuit(nHashKey, nMsgID, strData.c_str(), strData.length());
     }
 
-    void SendBySuit(const int& nHashKey, const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+    void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         if (mxConsistentHash.Size() <= 0)
         {
@@ -190,10 +186,16 @@ public:
             return ;
         }
 
-        SendByServerID(xNode.nMachineID, nSockIndex, nMsgID, msg, nLen);
+        SendByServerID(xNode.nMachineID, nMsgID, msg, nLen);
     }
 
-	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
+    void SendSuitByPB(const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData)
+    {
+        uint32_t nCRC32 = NFrame::CRC32(strHashKey);
+        SendSuitByPB(nCRC32, nMsgID, xData);
+    }
+
+	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData)
 	{
 		if (mxConsistentHash.Size() <= 0)
 		{
@@ -206,20 +208,10 @@ public:
 			return ;
 		}
 
-		SendToServerByPB(xNode.nMachineID, nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
+		SendToServerByPB(xNode.nMachineID, nMsgID, xData);
 	}
 
-	void SendSuitByPB(const uint16_t nMsgID, google::protobuf::Message& xData, const int nSockIndex = 0, const NFGUID nPlayer = NFGUID(), const std::vector<NFGUID>* pClientIDList = NULL)
-	{
-		if (mxConsistentHash.Size() <= 0)
-		{
-			return;
-		}
-
-		const int nHashKey = 0;
-
-		SendSuitByPB(nHashKey, nMsgID, xData, nSockIndex, nPlayer, pClientIDList);
-	}
+    ////////////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID)
 	{
