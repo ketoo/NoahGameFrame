@@ -147,7 +147,7 @@ public:
 			NF_SHARE_PTR<NFINetModule> pNetModule = pServer->mxNetModule;
 			if (pNetModule.get())
 			{
-				pNetModule->SendMsgPB(nMsgID, xData);
+				pNetModule->SendMsgPB(nMsgID, xData, 0);
 			}
 
 			pServer = mxServerMap.Next();
@@ -165,7 +165,7 @@ public:
     void SendBySuit(const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         uint32_t nCRC32 = NFrame::CRC32(strHashKey);
-        SendBySuit(nCRC32, nMsgID, strData.c_str(), strData.length());
+        SendBySuit(nCRC32, nMsgID, msg, nLen);
     }
 
     void SendBySuit(const int& nHashKey, const int nMsgID, const std::string& strData)
