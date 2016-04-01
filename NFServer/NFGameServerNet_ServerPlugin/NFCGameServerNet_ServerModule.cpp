@@ -2113,10 +2113,10 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
         nHasKey = nPlayer.nData64;
     }
 
-    m_pGameServerToWorldModule->SendBySuit(nHasKey, nSockIndex, nMsgID, msg, nLen);
+    m_pGameServerToWorldModule->SendBySuit(nHasKey, nMsgID, msg, nLen);
 }
 
 void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
 {
-    m_pGameServerToWorldModule->SendBySuit(nWorldKey, nSockIndex, nMsgID, msg, nLen);
+    m_pGameServerToWorldModule->SendBySuit(nWorldKey, nMsgID, msg, nLen);
 }
