@@ -198,7 +198,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const i
     xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
     xData.set_account(pNetObject->GetAccount());
 
-    m_pLoginToMasterModule->SendSuitByPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
+    m_pLoginToMasterModule->SendSuitByPB(pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
 
     return 0;
 }
