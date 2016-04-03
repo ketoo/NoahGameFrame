@@ -10,7 +10,7 @@
 #define _NFC_LUA_SCRIPT_MODULE_H_
 
 #include "lua/lua.hpp"
-#include "LuaBridge/LuaBridge.h"
+#include "fflua/fflua.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
