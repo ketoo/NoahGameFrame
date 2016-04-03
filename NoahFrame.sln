@@ -246,6 +246,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf-lite", "Depende
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Theron", "Dependencies\Theron\Theron\Theron.vcxproj", "{8C0827D2-EFA0-427B-96B2-A92158E7812F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFLuaScriptPlugin", "NFComm\NFLuaScriptPlugin\NFLuaScriptPlugin.vcxproj", "{0D7E27F4-11C2-4F1D-8900-CC24297E4397}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -388,6 +390,10 @@ Global
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Debug|x64.Build.0 = Debug|x64
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Release|x64.ActiveCfg = Release|x64
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F}.Release|x64.Build.0 = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.ActiveCfg = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Debug|x64.Build.0 = Debug|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.ActiveCfg = Release|x64
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,5 +439,6 @@ Global
 		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{49EA010D-706F-4BE2-A397-77854B72A040} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{8C0827D2-EFA0-427B-96B2-A92158E7812F} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{0D7E27F4-11C2-4F1D-8900-CC24297E4397} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 	EndGlobalSection
 EndGlobal
