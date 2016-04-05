@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
-
+using namespace ff;
 class NFCLuaScriptModule
     : public NFILuaScriptModule
 {
@@ -23,7 +23,6 @@ public:
     NFCLuaScriptModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-        mpLuaState = NULL;
     }
 
     virtual bool Init();
@@ -51,7 +50,7 @@ protected:
 
 protected:
     bool InstallLua(const std::string& strComponentName);
-    bool Regisger();
+    static bool Regisger(lua_State* ls);
     bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
     bool CheckCompomentStatus(const std::string& strComponentName);
 
@@ -64,7 +63,7 @@ protected:
 
 protected:
     NFMap<std::string, int> mmCompomentStatus;
-    lua_State* mpLuaState;
+	fflua_t fflua;
 };
 
 #endif
