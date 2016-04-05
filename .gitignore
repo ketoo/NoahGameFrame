@@ -31,5 +31,12 @@
 /_Out/Comm/Debug/*.ilk
 /_Out/Comm/Debug/*.bsc
 /_Out/Comm/Debug/*.pdb
+/_Out/Comm/Debug/*.dll
+/_Out/Server/Debug/
+/_Out/Server/NFDataCfg/Ini/
+/_Out/Server/NFDataCfg/Struct/
+/_Out/Server/NFDataCfg/Proto/
+/_Out/Server/Release/
 /Dependencies/libevent
 /Dependencies/curl
+/.vs/
