@@ -1,9 +1,9 @@
-#ifndef _FF_LUA_H_
+ï»¿#ifndef _FF_LUA_H_
 #define _FF_LUA_H_
 
-
+//#ifndef  _WIN32
 #include <stdint.h>
-
+//#endif
 
 #include <stdlib.h>
 #include <lua.hpp>
@@ -11,12 +11,12 @@
 #include <string>
 using namespace std;
 
-#include "fflua/fflua_type.h"
-#include "fflua/fflua_register.h"
+#include "fflua_type.h"
+#include "fflua_register.h"
 
 namespace ff
 {
-//! ±íÊ¾voidÀàĞÍ£¬ÓÉÓÚvoidÀàĞÍ²»ÄÜreturn£¬ÓÃvoid_ignore_tÊÊÅä
+//! è¡¨ç¤ºvoidç±»å‹ï¼Œç”±äºvoidç±»å‹ä¸èƒ½returnï¼Œç”¨void_ignore_té€‚é…
 template<typename T>
 struct void_ignore_t;
 
