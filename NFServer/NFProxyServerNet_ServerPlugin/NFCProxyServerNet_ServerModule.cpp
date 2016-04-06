@@ -480,7 +480,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex,
                 return false;
             }
 
-            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nMsgID, msg, nLen);
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 
