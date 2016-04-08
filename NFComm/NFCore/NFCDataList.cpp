@@ -383,6 +383,30 @@ TDATA_TYPE NFCDataList::Type(const int index) const
     return TDATA_UNKNOWN;
 }
 
+int NFCDataList::TypeInt(const int index) const
+{
+	if (!ValidIndex(index))
+	{
+		return TDATA_UNKNOWN;
+	}
+
+	if (index < STACK_SIZE)
+	{
+		return mvList[index]->GetType();
+	}
+	else
+	{
+		const NF_SHARE_PTR<TData> pData = GetStack(index);
+		if (pData)
+		{
+			return pData->GetType();
+		}
+	}
+
+	return TDATA_UNKNOWN;
+}
+
+
 bool NFCDataList::TypeEx(const int nType, ...) const
 {
     bool bRet = true;

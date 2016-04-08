@@ -173,7 +173,7 @@ void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, co
 					NFCMachineNode xNode;
 					if (mxConsistentHash.GetSuitNode(pNetObject->GetHashIdentID().ToString(), xNode))
 					{
-						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nSockIndex, nMsgID, msg, nLen);
+						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nMsgID, msg, nLen);
 					}
 				}
 				else
@@ -183,13 +183,13 @@ void NFCProxyServerNet_ServerModule::OnReciveClientPack(const int nSockIndex, co
 					NFCMachineNode xNode;
 					if (mxConsistentHash.GetSuitNode(xHashIdent.ToString(), xNode))
 					{
-						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nSockIndex, nMsgID, msg, nLen);
+						m_pProxyServerToGameModule->SendByServerID(xNode.GetDataID(), nMsgID, msg, nLen);
 					}
 				}
 			}
 			else
 			{
-				m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
+				m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nMsgID, msg, nLen);
 			}
         }
         break;
@@ -249,7 +249,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const int nAddress)
                     return;
                 }
 
-                m_pProxyServerToGameModule->SendByServerID(nGameID, nAddress, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg.c_str(), strMsg.length());
+                m_pProxyServerToGameModule->SendByServerID(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
             }
         }
 
@@ -436,7 +436,7 @@ int NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, c
                 return false;
             }
 
-            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg.c_str(), strMsg.length());
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg);
         }
     }
 
@@ -480,7 +480,7 @@ int NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex,
                 return false;
             }
 
-            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, nMsgID, msg, nLen);
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 
@@ -553,7 +553,7 @@ int NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, c
                 return false;
             }
 
-            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), nSockIndex, NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg.c_str(), strMsg.length());
+            m_pProxyServerToGameModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg);
         }
     }
 

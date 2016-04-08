@@ -48,6 +48,7 @@ public:
 
     // 数据类型
     virtual TDATA_TYPE Type(const int index) const;
+	int TypeInt(const int index) const;
     //数据类型检测
     virtual bool TypeEx(const  int nType, ...) const;
 

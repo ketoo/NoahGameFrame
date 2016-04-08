@@ -19,32 +19,32 @@ public:
 };
 
 
-static bool KernelModule_AddPropertyCallBack(NFINT64 kernelAddress, const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
+static bool KernelModule_AddPropertyCallBack(NFINT64 kernelAddress, const NFGUID* self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFILuaScriptModule* pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pKernelModule->GetPluginManager()->FindModule("NFCLuaScriptModule"));
-    return pLuaScriptModule->AddPropertyCallBack(self, strPropertyName, strComponentName, strFunction);
+    return pLuaScriptModule->AddPropertyCallBack(*self, strPropertyName, strComponentName, strFunction);
 }
 
-static bool KernelModule_AddRecordCallBack(NFINT64 kernelAddress, const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction)
+static bool KernelModule_AddRecordCallBack(NFINT64 kernelAddress, const NFGUID* self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFILuaScriptModule* pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pKernelModule->GetPluginManager()->FindModule("NFCLuaScriptModule"));
-    return pLuaScriptModule->AddRecordCallBack(self, strRecordName, strComponentName, strFunction);
+    return pLuaScriptModule->AddRecordCallBack(*self, strRecordName, strComponentName, strFunction);
 }
 
-static bool KernelModule_AddEventCallBack(NFINT64 kernelAddress, const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction)
+static bool KernelModule_AddEventCallBack(NFINT64 kernelAddress, const NFGUID* self, const int nEventID, const std::string& strComponentName, const std::string& strFunction)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFILuaScriptModule* pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pKernelModule->GetPluginManager()->FindModule("NFCLuaScriptModule"));
-    return pLuaScriptModule->AddEventCallBack(self, nEventID, strComponentName, strFunction);
+    return pLuaScriptModule->AddEventCallBack(*self, nEventID, strComponentName, strFunction);
 }
 
-static bool KernelModule_AddHeartBeat(NFINT64 kernelAddress, const NFGUID& self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
+static bool KernelModule_AddHeartBeat(NFINT64 kernelAddress, const NFGUID* self, const std::string& strHeartBeatName, const std::string& strComponentName, const std::string& strFunction, const float fTime, const int nCount)
 {
     NFIKernelModule* pKernelModule = (NFIKernelModule*)kernelAddress;
     NFILuaScriptModule* pLuaScriptModule = dynamic_cast<NFILuaScriptModule*>(pKernelModule->GetPluginManager()->FindModule("NFCLuaScriptModule"));
-    return pLuaScriptModule->AddHeartBeatCallBack(self, strHeartBeatName, strComponentName, strFunction, fTime, nCount);
+    return pLuaScriptModule->AddHeartBeatCallBack(*self, strHeartBeatName, strComponentName, strFunction, fTime, nCount);
 }
 
 

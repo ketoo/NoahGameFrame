@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/03/16
+//    @Date             :    2016/04/05
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -39,40 +39,6 @@ public class BB_Build {
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
 	public static final String Desc = "Desc"; // string
-	// Record
-
-}
-
-public class Block {
-	//Class name
-	public static final String ThisName = "Block";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String Tag = "Tag"; // int
-	public static final String SpriteList = "SpriteList"; // string
-	public static final String SpritePath = "SpritePath"; // string
-	public static final String LeftSide = "LeftSide"; // string
-	public static final String RightSide = "RightSide"; // string
-	public static final String TopSide = "TopSide"; // string
-	public static final String DownSide = "DownSide"; // string
-	public static final String LeftTopSide = "LeftTopSide"; // string
-	public static final String LeftDownSide = "LeftDownSide"; // string
-	public static final String RightTopSide = "RightTopSide"; // string
-	public static final String RightDownSide = "RightDownSide"; // string
-	public static final String LeftTopOutSide = "LeftTopOutSide"; // string
-	public static final String LeftDownOutSide = "LeftDownOutSide"; // string
-	public static final String RightTopOutSide = "RightTopOutSide"; // string
-	public static final String RightDownOutSide = "RightDownOutSide"; // string
-	public static final String GrassList = "GrassList"; // string
-	public static final String JoinList = "JoinList"; // string
-	public static final String CrackList = "CrackList"; // string
-	public static final String TreasureList = "TreasureList"; // string
-	public static final String TreeRootList = "TreeRootList"; // string
 	// Record
 
 }
@@ -257,27 +223,6 @@ public class Equip {
 	public static final String DropPrePath = "DropPrePath"; // string
 	public static final String BuyPrice = "BuyPrice"; // int
 	public static final String SalePrice = "SalePrice"; // int
-	public static final String Icon = "Icon"; // string
-	// Record
-
-}
-
-public class EquipRef {
-	//Class name
-	public static final String ThisName = "EquipRef";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String EQUIP1 = "EQUIP1"; // string
-	public static final String EQUIP2 = "EQUIP2"; // string
-	public static final String EQUIP3 = "EQUIP3"; // string
-	public static final String EQUIP4 = "EQUIP4"; // string
-	public static final String EQUIP5 = "EQUIP5"; // string
-	public static final String EQUIP6 = "EQUIP6"; // string
 	// Record
 
 }
@@ -517,8 +462,6 @@ public class Item {
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Script = "Script"; // string
 	public static final String Extend = "Extend"; // string
-	public static final String Icon = "Icon"; // string
-	public static final String ShowName = "ShowName"; // string
 	// Record
 
 }
@@ -596,10 +539,6 @@ public class NPC {
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
 	public static final String LastAttacker = "LastAttacker"; // object
-	public static final String ShowName = "ShowName"; // string
-	public static final String EquipIDRef = "EquipIDRef"; // string
-	public static final String Icon = "Icon"; // string
-	public static final String ShowCard = "ShowCard"; // string
 	// Record
 
 }
@@ -693,13 +632,11 @@ public class Player {
 	public static final String GameID = "GameID"; // int
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
-	public static final String FightHero = "FightHero"; // object
 	// Record
 	public static final String R_PlayerViewItem = "PlayerViewItem";
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
-	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_CommPropertyValue = "CommPropertyValue";
 	public static final String R_EctypeList = "EctypeList";
 	public static final String R_DropItemList = "DropItemList";
@@ -710,8 +647,6 @@ public class Player {
 	public static final String R_ChatGroup = "ChatGroup";
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
-	public static final String R_FightHeroList = "FightHeroList";
-	public static final String R_TileList = "TileList";
 
 	public enum PlayerViewItem
 	{
@@ -726,34 +661,13 @@ public class Player {
 		GUID		= 0, // GUID -- object
 		ConfigID		= 1, // ConfigID -- string
 		Level		= 2, // Level -- int
-		Exp		= 3, // Exp -- int
-		Star		= 4, // Star -- int
-		Equip1		= 5, // Equip1 -- object
-		Equip2		= 6, // Equip2 -- object
-		Equip3		= 7, // Equip3 -- object
-		Equip4		= 8, // Equip4 -- object
-		Equip5		= 9, // Equip5 -- object
-		Equip6		= 10, // Equip6 -- object
-		Equip7		= 11, // Equip7 -- object
-		Equip8		= 12, // Equip8 -- object
-		Talent1		= 13, // Talent1 -- string
-		Talent2		= 14, // Talent2 -- string
-		Talent3		= 15, // Talent3 -- string
-		Talent4		= 16, // Talent4 -- string
-		Talent5		= 17, // Talent5 -- string
-		Talent6		= 18, // Talent6 -- string
-		Talent7		= 19, // Talent7 -- string
-		Talent8		= 20, // Talent8 -- string
-		Skill1		= 21, // Skill1 -- string
-		Skill2		= 22, // Skill2 -- string
-		Skill3		= 23, // Skill3 -- string
-		Skill4		= 24, // Skill4 -- string
-		Skill5		= 25, // Skill5 -- string
-		SkillLevel1		= 26, // SkillLevel1 -- int
-		SkillLevel2		= 27, // SkillLevel2 -- int
-		SkillLevel3		= 28, // SkillLevel3 -- int
-		SkillLevel4		= 29, // SkillLevel4 -- int
-		SkillLevel5		= 30, // SkillLevel5 -- int
+		Exp		= 3, // Exp -- string
+		Equip1		= 4, // Equip1 -- object
+		Equip2		= 5, // Equip2 -- object
+		Equip3		= 6, // Equip3 -- object
+		Equip4		= 7, // Equip4 -- object
+		Equip5		= 8, // Equip5 -- object
+		Equip6		= 9, // Equip6 -- object
 	};
 
 	public enum BagEquipList
@@ -796,35 +710,6 @@ public class Player {
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- object
-	};
-
-	public enum HeroPropertyValue
-	{
-		HeroGUID		= 0, // HeroGUID -- object
-		Group		= 1, // Group -- int
-		MAXHP		= 2, // MAXHP -- int
-		MAXMP		= 3, // MAXMP -- int
-		MAXSP		= 4, // MAXSP -- int
-		HPREGEN		= 5, // HPREGEN -- int
-		SPREGEN		= 6, // SPREGEN -- int
-		MPREGEN		= 7, // MPREGEN -- int
-		ATK_VALUE		= 8, // ATK_VALUE -- int
-		DEF_VALUE		= 9, // DEF_VALUE -- int
-		MOVE_SPEED		= 10, // MOVE_SPEED -- int
-		ATK_SPEED		= 11, // ATK_SPEED -- int
-		ATK_FIRE		= 12, // ATK_FIRE -- int
-		ATK_LIGHT		= 13, // ATK_LIGHT -- int
-		ATK_ICE		= 14, // ATK_ICE -- int
-		ATK_POISON		= 15, // ATK_POISON -- int
-		DEF_FIRE		= 16, // DEF_FIRE -- int
-		DEF_LIGHT		= 17, // DEF_LIGHT -- int
-		DEF_ICE		= 18, // DEF_ICE -- int
-		DEF_POISON		= 19, // DEF_POISON -- int
-		DIZZY_GATE		= 20, // DIZZY_GATE -- int
-		MOVE_GATE		= 21, // MOVE_GATE -- int
-		SKILL_GATE		= 22, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 24, // MAGIC_GATE -- int
 	};
 
 	public enum CommPropertyValue
@@ -928,20 +813,6 @@ public class Player {
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
-	};
-
-	public enum FightHeroList
-	{
-		HeroGUID		= 0, // HeroGUID -- object
-		FightPos		= 1, // FightPos -- int
-	};
-
-	public enum TileList
-	{
-		TileID		= 0, // TileID -- int
-		X		= 1, // X -- int
-		Y		= 2, // Y -- int
-		TileType		= 3, // TileType -- int
 	};
 
 }
