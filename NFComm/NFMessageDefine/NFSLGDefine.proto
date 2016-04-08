@@ -151,6 +151,7 @@ message ReqAckBuyObjectFormShop//从商店种植建筑
 	required float	x = 2;
 	required float	y = 3;
 	required float	z = 4;
+	required string	Shop_id = 5;
 }
 
 message ReqAckMoveBuildObject//移动建筑

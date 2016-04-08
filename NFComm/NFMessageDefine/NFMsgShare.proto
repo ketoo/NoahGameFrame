@@ -348,6 +348,12 @@ message SetGuildEctypeInfo
 	required Ident		selfid				= 1;//角色ID
 	required GuildEctypeInfo		xectypeinfo		= 2;//工会副本的信息
 }
+
+//EGMI_ReqEnterGuildEctype					= 315; // 
+message ReqEnterGuildEctype
+{	
+	required Ident		selfid				= 1;//角色ID
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 message ChatInfo
@@ -476,6 +482,7 @@ message ReqSetFightHero
 {	
 	required Ident		selfid          = 1;//角色ID
 	required Ident		Heroid			= 2;//
+	required int32		FightPos	    = 3;//
 }
 
 //EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
@@ -487,7 +494,7 @@ message ReqWearEquip
 	
 }
 
-//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
+//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载EGEC_TAKEOFF_EQUIP
 message TakeOffEquip
 {	
 	required Ident		selfid				= 1;//角色ID

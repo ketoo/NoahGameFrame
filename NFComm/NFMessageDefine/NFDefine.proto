@@ -195,6 +195,8 @@ enum EGameMsgID
 	
 	EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
 	
+	EGMI_ReqEnterGuildEctype					= 315; // 
+	
 	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
@@ -257,6 +259,7 @@ enum EGameMsgID
 	EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
 	EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
 	EGMI_ACK_CLONE_RECORD_SORT						= 829;
+
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
@@ -267,6 +270,7 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_STR						= 1005;			// GM命令修改修改表字符串
 	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
 	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
+	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
 	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果
@@ -289,7 +293,10 @@ enum EItemType
 	EIT_STRENGTHEN_STONE	= 5; // 强化石
 	EIT_DEMONIZATION_STONE	= 6; // 附魔石
 	EIT_GEM_STONE			= 7; // 属性宝石
-	EIT_CURRENCY			= 8; // 货币道具不进背包s
+	EIT_CURRENCY			= 8; // 货币道具不进背包
+	EIT_ITEM_REBORN			= 9; // 重生道具(消耗此物品时得到某种待遇)
+	EIT_ITEM_POSITION		= 10;// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
+	
 	
 	EIT_WOOD				= 100; // 木材
 	EIT_STONE				= 101; // 石材
@@ -336,10 +343,8 @@ enum EGameItemSubType
     EGIT_ITEM_PVP_DEFENSE_CARD  = 3;    // PVP防御卡
     EGIT_ITEM_SKILL_CARD        = 4;    // 学习类技能书，普通的技能都是这样学习的
     EGIT_ITEM_GUILD_SKILL_CARD  = 5;    // 工会技能书
-    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝
-    EGIT_ITEM_POSITION          = 7;    // 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
-    EGIT_ITEM_WORLD_HORN        = 8;   // 世界喇叭(使用某个功能的时候消耗此物品)
-    EGIT_ITEM_REBORN            = 9;   // 重生道具(消耗此物品时得到某种待遇)
+    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝    
+    EGIT_ITEM_WORLD_HORN        = 7;   // 世界喇叭(使用某个功能的时候消耗此物品)
 };
 
 //道具时间类型
@@ -402,7 +407,26 @@ enum EBattleType
 	BATTLE_PVE_TEAM      = 1; // 多人打副本
 }
 
+enum EShopType
+{
+	EST_BUILDING 	= 1;//建筑	
+	EST_GOLD		= 2;//金币
+	EST_DIAMOND		= 3;//钻石
+	EST_SP			= 4;//体力
+	EST_EQUIP		= 5;//装备
+	EST_GEM			= 6;//宝石
+	EST_Hero		= 7;//HeroCard
+	EST_Other		= 8;//杂货店
+}
 
+enum EFightPos
+{
+	EFP_MINER1 	= 0;//
+	EFP_HERO1 	= 1;//
+	EFP_MINER2 	= 2;//
+	EFP_HERO2 	= 3;//
+}
+	
 
 
 

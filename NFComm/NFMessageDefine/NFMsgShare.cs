@@ -1241,6 +1241,23 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqEnterGuildEctype")]
+  public partial class ReqEnterGuildEctype : global::ProtoBuf.IExtensible
+  {
+    public ReqEnterGuildEctype() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChatInfo")]
   public partial class ChatInfo : global::ProtoBuf.IExtensible
   {
@@ -1755,6 +1772,13 @@ namespace NFMsg
     {
       get { return _Heroid; }
       set { _Heroid = value; }
+    }
+    private int _FightPos;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"FightPos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int FightPos
+    {
+      get { return _FightPos; }
+      set { _FightPos = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
