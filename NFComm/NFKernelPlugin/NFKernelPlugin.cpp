@@ -45,6 +45,6 @@ void NFKernelPlugin::Install()
 void NFKernelPlugin::Uninstall()
 {
     UNREGISTER_MODULE(pPluginManager, NFCKernelModule)
-	UNREGISTER_MODULE(pPluginManager, NFCSceneModule)
+    UNREGISTER_MODULE(pPluginManager, NFCSceneModule)
     UNREGISTER_MODULE(pPluginManager, NFCUUIDModule)
 }

@@ -38,7 +38,7 @@ const std::string NFGameServerNet_ClientPlugin::GetPluginName()
     return GET_CLASS_NAME(NFGameServerNet_ClientPlugin)
 }
 
-void NFGameServerNet_ClientPlugin::Install()
+       void NFGameServerNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCGameServerToWorldModule)
 

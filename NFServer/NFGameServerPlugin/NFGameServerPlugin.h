@@ -15,7 +15,7 @@
 class NFGameServerPlugin : public NFIPlugin
 {
 public:
-    NFGameServerPlugin( NFIPluginManager* p )
+    NFGameServerPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

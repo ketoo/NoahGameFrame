@@ -10,25 +10,25 @@
 
 bool NFCSceneModule::Init()
 {
-	return true;
+    return true;
 }
 
 bool NFCSceneModule::AfterInit()
 {
-	return true;
+    return true;
 }
 
 bool NFCSceneModule::BeforeShut()
 {
-	return true;
+    return true;
 }
 
 bool NFCSceneModule::Shut()
 {
-	return true;
+    return true;
 }
 
 bool NFCSceneModule::Execute()
 {
-	return true;
+    return true;
 }

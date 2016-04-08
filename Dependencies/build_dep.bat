@@ -39,3 +39,27 @@ rename curl-7.37.1 curl
 rd curl-7.37.1
 
 "..\\Tool\\7z.exe" x curl_libs.zip -Y
+
+copy lib\\Debug\\libmysql.dll ..\\_Out\\Server\\Debug\\NFGameServer1\\ /Y
+copy lib\\Debug\\libmysql.dll ..\\_Out\\Server\\Debug\\NFLoginServer\\ /Y
+copy lib\\Debug\\libmysql.dll ..\\_Out\\Server\\Debug\\NFMasterServer\\ /Y
+copy lib\\Debug\\libmysql.dll ..\\_Out\\Server\\Debug\\NFProxyServer1\\ /Y
+copy lib\\Debug\\libmysql.dll ..\\_Out\\Server\\Debug\\NFWorldServer\\ /Y
+
+copy lib\\Debug\\mysqlpp_d.dll ..\\_Out\\Server\\Debug\\NFGameServer1\\ /Y
+copy lib\\Debug\\mysqlpp_d.dll ..\\_Out\\Server\\Debug\\NFLoginServer\\ /Y
+copy lib\\Debug\\mysqlpp_d.dll ..\\_Out\\Server\\Debug\\NFMasterServer\\ /Y
+copy lib\\Debug\\mysqlpp_d.dll ..\\_Out\\Server\\Debug\\NFProxyServer1\\ /Y
+copy lib\\Debug\\mysqlpp_d.dll ..\\_Out\\Server\\Debug\\NFWorldServer\\ /Y
+
+copy lib\\Release\\libmysql.dll ..\\_Out\\Server\\Release\\NFGameServer1\\ /Y
+copy lib\\Release\\libmysql.dll ..\\_Out\\Server\\Release\\NFLoginServer\\ /Y
+copy lib\\Release\\libmysql.dll ..\\_Out\\Server\\Release\\NFMasterServer\\ /Y
+copy lib\\Release\\libmysql.dll ..\\_Out\\Server\\Release\\NFProxyServer1\\ /Y
+copy lib\\Release\\libmysql.dll ..\\_Out\\Server\\Release\\NFWorldServer\\ /Y
+
+copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFGameServer1\\ /Y
+copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFLoginServer\\ /Y
+copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFMasterServer\\ /Y
+copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFProxyServer1\\ /Y
+copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFWorldServer\\ /Y

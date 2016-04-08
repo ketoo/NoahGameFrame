@@ -13,48 +13,48 @@
 #define  NFMYSQLTRYBEGIN try {
 
 #define  NFMYSQLTRYEND(msg) }\
-catch (mysqlpp::BadQuery er) \
-{ \
-    std::cout << "BadQuery [" << msg << "] Error: " << er.what() << std::endl; \
-    return false; \
-} \
-catch (const mysqlpp::BadConversion& er)  \
-{ \
-    std::cout << "BadConversion [" << msg << "] Error:" << er.what() << " retrieved data size:" << er.retrieved << ", actual size:" << er.actual_size << std::endl; \
-    return false; \
-} \
-catch (const mysqlpp::Exception& er) \
-{ \
-    std::cout << "mysqlpp::Exception [" << msg << "] Error:" << er.what() << std::endl; \
-    return false; \
-}\
-catch ( ... ) \
-{ \
-    std::cout << "std::exception [" <<msg << "] Error:Unknown " << std::endl; \
-    return false; \
-}
+    catch (mysqlpp::BadQuery er) \
+    { \
+        std::cout << "BadQuery [" << msg << "] Error: " << er.what() << std::endl; \
+        return false; \
+    } \
+    catch (const mysqlpp::BadConversion& er)  \
+    { \
+        std::cout << "BadConversion [" << msg << "] Error:" << er.what() << " retrieved data size:" << er.retrieved << ", actual size:" << er.actual_size << std::endl; \
+        return false; \
+    } \
+    catch (const mysqlpp::Exception& er) \
+    { \
+        std::cout << "mysqlpp::Exception [" << msg << "] Error:" << er.what() << std::endl; \
+        return false; \
+    }\
+    catch ( ... ) \
+    { \
+        std::cout << "std::exception [" <<msg << "] Error:Unknown " << std::endl; \
+        return false; \
+    }
 
 #define  NFMYSQLTRYENDNULLRETURN(msg) }\
     catch (mysqlpp::BadQuery er) \
-{ \
-    std::cout << "BadQuery [" << msg << "] Error: " << er.what() << std::endl; \
-    return ; \
-} \
+    { \
+        std::cout << "BadQuery [" << msg << "] Error: " << er.what() << std::endl; \
+        return ; \
+    } \
     catch (const mysqlpp::BadConversion& er)  \
-{ \
-    std::cout << "BadConversion [" << msg << "] Error:" << er.what() << " retrieved data size:" << er.retrieved << ", actual size:" << er.actual_size << std::endl; \
-    return ; \
-} \
+    { \
+        std::cout << "BadConversion [" << msg << "] Error:" << er.what() << " retrieved data size:" << er.retrieved << ", actual size:" << er.actual_size << std::endl; \
+        return ; \
+    } \
     catch (const mysqlpp::Exception& er) \
-{ \
-    std::cout << "mysqlpp::Exception ["<<msg<<"] Error:" << er.what() << std::endl; \
-    return ; \
-}\
+    { \
+        std::cout << "mysqlpp::Exception ["<<msg<<"] Error:" << er.what() << std::endl; \
+        return ; \
+    }\
     catch ( ... ) \
-{ \
-    std::cout << "std::exception [" << msg << "] Error:Unknown " << std::endl; \
-    return ; \
-}
+    { \
+        std::cout << "std::exception [" << msg << "] Error:Unknown " << std::endl; \
+        return ; \
+    }
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -80,12 +80,12 @@ public:
     virtual bool CanReconnect();
     virtual bool Reconnect();
 
-    virtual bool Updata( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
-    virtual bool Query( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
-    virtual bool Select( const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
-    virtual bool Delete( const std::string& strRecordName, const std::string& strKey);
-    virtual bool Exists( const std::string& strRecordName, const std::string& strKey, bool& bExit);
-    virtual bool Keys( const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec);
+    virtual bool Updata(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec);
+    virtual bool Query(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
+    virtual bool Select(const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec);
+    virtual bool Delete(const std::string& strRecordName, const std::string& strKey);
+    virtual bool Exists(const std::string& strRecordName, const std::string& strKey, bool& bExit);
+    virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec);
 
 protected:
     bool IsNeedReconnect();
@@ -93,7 +93,7 @@ protected:
 
 private:
     std::string mstrDBName  ;
-    std::string mstrDBHost  ; 
+    std::string mstrDBHost  ;
     int         mnDBPort    ;
     std::string mstrDBUser  ;
     std::string mstrDBPwd   ;

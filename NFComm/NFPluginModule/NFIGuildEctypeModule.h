@@ -18,9 +18,7 @@ class NFIGuildEctypeModule
     : public NFILogicModule
 {
 public:
-    virtual bool CreateGuilEctype(const NFGUID& self, const NFGUID& guild) = 0;
-    virtual bool DestroyGuildEctype(const NFGUID& self, const NFGUID& guild) = 0;
-    virtual bool ApplyEnterGuilEctype(const NFGUID& self, const NFGUID& guild) = 0;
+
 };
 
 #endif

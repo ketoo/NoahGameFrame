@@ -29,7 +29,7 @@ public:
 
     virtual bool AfterInit();
     virtual bool BeforeShut();
-    
+
     //call script
     virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
     virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);

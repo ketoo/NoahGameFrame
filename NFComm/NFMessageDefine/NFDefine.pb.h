@@ -207,7 +207,6 @@ enum EGameMsgID {
   EGMI_REQ_GUILDECTYPEINFO = 312,
   EGMI_ACK_GUILDECTYPEINFO = 313,
   EGMI_SET_GUILDECTYPEINFO = 314,
-  EGMI_ReqEnterGuildEctype = 315,
   EGEC_REQ_CREATE_CHATGROUP = 400,
   EGEC_ACK_CREATE_CHATGROUP = 401,
   EGEC_REQ_JOIN_CHATGROUP = 402,
@@ -264,7 +263,6 @@ enum EGameMsgID {
   EGMI_REQ_CMD_RECORD_STR = 1005,
   EGMI_REQ_CMD_RECORD_OBJECT = 1006,
   EGMI_REQ_CMD_RECORD_FLOAT = 1007,
-  EGMI_REQ_CMD_NORMAL = 1008,
   EGMI_REQ_BUY_FORM_SHOP = 10000,
   EGMI_ACK_BUY_FORM_SHOP = 10001,
   EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
@@ -298,8 +296,6 @@ enum EItemType {
   EIT_DEMONIZATION_STONE = 6,
   EIT_GEM_STONE = 7,
   EIT_CURRENCY = 8,
-  EIT_ITEM_REBORN = 9,
-  EIT_ITEM_POSITION = 10,
   EIT_WOOD = 100,
   EIT_STONE = 101
 };
@@ -381,11 +377,13 @@ enum EGameItemSubType {
   EGIT_ITEM_SKILL_CARD = 4,
   EGIT_ITEM_GUILD_SKILL_CARD = 5,
   EGIT_ITEM_GUILD_DIAMOND = 6,
-  EGIT_ITEM_WORLD_HORN = 7
+  EGIT_ITEM_POSITION = 7,
+  EGIT_ITEM_WORLD_HORN = 8,
+  EGIT_ITEM_REBORN = 9
 };
 bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_WORLD_HORN;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_REBORN;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
@@ -526,52 +524,6 @@ inline bool EBattleType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
     EBattleType_descriptor(), name, value);
 }
-enum EShopType {
-  EST_BUILDING = 1,
-  EST_GOLD = 2,
-  EST_DIAMOND = 3,
-  EST_SP = 4,
-  EST_EQUIP = 5,
-  EST_GEM = 6,
-  EST_Hero = 7,
-  EST_Other = 8
-};
-bool EShopType_IsValid(int value);
-const EShopType EShopType_MIN = EST_BUILDING;
-const EShopType EShopType_MAX = EST_Other;
-const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
-inline const ::std::string& EShopType_Name(EShopType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EShopType_descriptor(), value);
-}
-inline bool EShopType_Parse(
-    const ::std::string& name, EShopType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
-    EShopType_descriptor(), name, value);
-}
-enum EFightPos {
-  EFP_MINER1 = 0,
-  EFP_HERO1 = 1,
-  EFP_MINER2 = 2,
-  EFP_HERO2 = 3
-};
-bool EFightPos_IsValid(int value);
-const EFightPos EFightPos_MIN = EFP_MINER1;
-const EFightPos EFightPos_MAX = EFP_HERO2;
-const int EFightPos_ARRAYSIZE = EFightPos_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* EFightPos_descriptor();
-inline const ::std::string& EFightPos_Name(EFightPos value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EFightPos_descriptor(), value);
-}
-inline bool EFightPos_Parse(
-    const ::std::string& name, EFightPos* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EFightPos>(
-    EFightPos_descriptor(), name, value);
-}
 // ===================================================================
 
 
@@ -636,14 +588,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
   return ::NFMsg::EBattleType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
-  return ::NFMsg::EShopType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EFightPos>() {
-  return ::NFMsg::EFightPos_descriptor();
 }
 
 }  // namespace google
