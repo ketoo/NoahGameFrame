@@ -97,13 +97,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCWorldGuildBroadcastModule.h" />
-    <ClInclude Include="NFCWorldGuildDataModule.h" />
-    <ClInclude Include="NFCWorldGuildEctypeModule.h" />
-    <ClInclude Include="NFCWorldGuildModule.h" />
-    <ClInclude Include="NFWorldGuildPlugin.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,11 +105,18 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCWorldGuildBroadcastModule.cpp" />
-    <ClCompile Include="NFCWorldGuildDataModule.cpp" />
-    <ClCompile Include="NFCWorldGuildEctypeModule.cpp" />
-    <ClCompile Include="NFCWorldGuildModule.cpp" />
-    <ClCompile Include="NFWorldGuildPlugin.cpp" />
+    <ClCompile Include="NFCGameGuildBroadcastModule.cpp" />
+    <ClCompile Include="NFCGameGuildDataModule.cpp" />
+    <ClCompile Include="NFCGameGuildEctypeModule.cpp" />
+    <ClCompile Include="NFCGameGuildModule.cpp" />
+    <ClCompile Include="NFGameGuildPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCGameGuildBroadcastModule.h" />
+    <ClInclude Include="NFCGameGuildDataModule.h" />
+    <ClInclude Include="NFCGameGuildEctypeModule.h" />
+    <ClInclude Include="NFCGameGuildModule.h" />
+    <ClInclude Include="NFGameGuildPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
