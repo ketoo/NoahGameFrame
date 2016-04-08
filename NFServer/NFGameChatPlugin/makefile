@@ -28,7 +28,7 @@ LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a $(Solut
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFWorldChatPlugin_d.so
+OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFGameChatPlugin_d.so
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
@@ -39,11 +39,11 @@ LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a $(Sol
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFWorldChatPlugin.so
+OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFGameChatPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCWorldChatModule.o $(OBJDIR_DEBUG_X64)/NFWorldChatPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCGameChatModule.o $(OBJDIR_DEBUG_X64)/NFGameChatPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCWorldChatModule.o $(OBJDIR_RELEASE_X64)/NFWorldChatPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCGameChatModule.o $(OBJDIR_RELEASE_X64)/NFGameChatPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
@@ -54,18 +54,18 @@ before_debug_x64:
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Debug/NFWorldChatPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameChatPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
 out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 	$(LD) -shared $(LIBDIR_DEBUG_X64) $(OBJ_DEBUG_X64)  -o $(OUT_DEBUG_X64) $(LDFLAGS_DEBUG_X64) $(LIB_DEBUG_X64)
 
-$(OBJDIR_DEBUG_X64)/NFCWorldChatModule.o: NFCWorldChatModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCWorldChatModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCWorldChatModule.o
+$(OBJDIR_DEBUG_X64)/NFCGameChatModule.o: NFCGameChatModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCGameChatModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCGameChatModule.o
 
-$(OBJDIR_DEBUG_X64)/NFWorldChatPlugin.o: NFWorldChatPlugin.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFWorldChatPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFWorldChatPlugin.o
+$(OBJDIR_DEBUG_X64)/NFGameChatPlugin.o: NFGameChatPlugin.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFGameChatPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFGameChatPlugin.o
 
 $(OBJDIR_DEBUG_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c dllmain.cpp -o $(OBJDIR_DEBUG_X64)/dllmain.o
@@ -80,18 +80,18 @@ before_release_x64:
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Release/NFWorldChatPlugin.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFGameChatPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 
 out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 	$(LD) -shared $(LIBDIR_RELEASE_X64) $(OBJ_RELEASE_X64)  -o $(OUT_RELEASE_X64) $(LDFLAGS_RELEASE_X64) $(LIB_RELEASE_X64)
 
-$(OBJDIR_RELEASE_X64)/NFCWorldChatModule.o: NFCWorldChatModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCWorldChatModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCWorldChatModule.o
+$(OBJDIR_RELEASE_X64)/NFCGameChatModule.o: NFCGameChatModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCGameChatModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCGameChatModule.o
 
-$(OBJDIR_RELEASE_X64)/NFWorldChatPlugin.o: NFWorldChatPlugin.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFWorldChatPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFWorldChatPlugin.o
+$(OBJDIR_RELEASE_X64)/NFGameChatPlugin.o: NFGameChatPlugin.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFGameChatPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFGameChatPlugin.o
 
 $(OBJDIR_RELEASE_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c dllmain.cpp -o $(OBJDIR_RELEASE_X64)/dllmain.o

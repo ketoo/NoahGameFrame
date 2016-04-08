@@ -28,7 +28,7 @@ LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a $(Solut
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFWorldGuildPlugin_d.so
+OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFGameGuildPlugin_d.so
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
@@ -39,11 +39,11 @@ LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a $(Sol
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFWorldGuildPlugin.so
+OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFGameGuildPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCWorldGuildBroadcastModule.o $(OBJDIR_DEBUG_X64)/NFCWorldGuildDataModule.o $(OBJDIR_DEBUG_X64)/NFCWorldGuildModule.o $(OBJDIR_DEBUG_X64)/NFWorldGuildPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCGameGuildBroadcastModule.o $(OBJDIR_DEBUG_X64)/NFCGameGuildDataModule.o $(OBJDIR_DEBUG_X64)/NFCGameGuildModule.o $(OBJDIR_DEBUG_X64)/NFGameGuildPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCWorldGuildBroadcastModule.o $(OBJDIR_RELEASE_X64)/NFCWorldGuildDataModule.o $(OBJDIR_RELEASE_X64)/NFCWorldGuildModule.o $(OBJDIR_RELEASE_X64)/NFWorldGuildPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCGameGuildBroadcastModule.o $(OBJDIR_RELEASE_X64)/NFCGameGuildDataModule.o $(OBJDIR_RELEASE_X64)/NFCGameGuildModule.o $(OBJDIR_RELEASE_X64)/NFGameGuildPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
@@ -54,24 +54,24 @@ before_debug_x64:
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Debug/NFWorldGuildPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFGameGuildPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
 out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 	$(LD) -shared $(LIBDIR_DEBUG_X64) $(OBJ_DEBUG_X64)  -o $(OUT_DEBUG_X64) $(LDFLAGS_DEBUG_X64) $(LIB_DEBUG_X64)
 
-$(OBJDIR_DEBUG_X64)/NFCWorldGuildBroadcastModule.o: NFCWorldGuildBroadcastModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCWorldGuildBroadcastModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCWorldGuildBroadcastModule.o
+$(OBJDIR_DEBUG_X64)/NFCGameGuildBroadcastModule.o: NFCGameGuildBroadcastModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCGameGuildBroadcastModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCGameGuildBroadcastModule.o
 
-$(OBJDIR_DEBUG_X64)/NFCWorldGuildDataModule.o: NFCWorldGuildDataModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCWorldGuildDataModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCWorldGuildDataModule.o
+$(OBJDIR_DEBUG_X64)/NFCGameGuildDataModule.o: NFCGameGuildDataModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCGameGuildDataModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCGameGuildDataModule.o
 
-$(OBJDIR_DEBUG_X64)/NFCWorldGuildModule.o: NFCWorldGuildModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCWorldGuildModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCWorldGuildModule.o
+$(OBJDIR_DEBUG_X64)/NFCGameGuildModule.o: NFCGameGuildModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCGameGuildModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCGameGuildModule.o
 
-$(OBJDIR_DEBUG_X64)/NFWorldGuildPlugin.o: NFWorldGuildPlugin.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFWorldGuildPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFWorldGuildPlugin.o
+$(OBJDIR_DEBUG_X64)/NFGameGuildPlugin.o: NFGameGuildPlugin.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFGameGuildPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFGameGuildPlugin.o
 
 $(OBJDIR_DEBUG_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c dllmain.cpp -o $(OBJDIR_DEBUG_X64)/dllmain.o
@@ -86,24 +86,24 @@ before_release_x64:
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Release/NFWorldGuildPlugin.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFGameGuildPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 
 out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 	$(LD) -shared $(LIBDIR_RELEASE_X64) $(OBJ_RELEASE_X64)  -o $(OUT_RELEASE_X64) $(LDFLAGS_RELEASE_X64) $(LIB_RELEASE_X64)
 
-$(OBJDIR_RELEASE_X64)/NFCWorldGuildBroadcastModule.o: NFCWorldGuildBroadcastModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCWorldGuildBroadcastModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCWorldGuildBroadcastModule.o
+$(OBJDIR_RELEASE_X64)/NFCGameGuildBroadcastModule.o: NFCGameGuildBroadcastModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCGameGuildBroadcastModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCGameGuildBroadcastModule.o
 
-$(OBJDIR_RELEASE_X64)/NFCWorldGuildDataModule.o: NFCWorldGuildDataModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCWorldGuildDataModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCWorldGuildDataModule.o
+$(OBJDIR_RELEASE_X64)/NFCGameGuildDataModule.o: NFCGameGuildDataModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCGameGuildDataModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCGameGuildDataModule.o
 
-$(OBJDIR_RELEASE_X64)/NFCWorldGuildModule.o: NFCWorldGuildModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCWorldGuildModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCWorldGuildModule.o
+$(OBJDIR_RELEASE_X64)/NFCGameGuildModule.o: NFCGameGuildModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCGameGuildModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCGameGuildModule.o
 
-$(OBJDIR_RELEASE_X64)/NFWorldGuildPlugin.o: NFWorldGuildPlugin.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFWorldGuildPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFWorldGuildPlugin.o
+$(OBJDIR_RELEASE_X64)/NFGameGuildPlugin.o: NFGameGuildPlugin.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFGameGuildPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFGameGuildPlugin.o
 
 $(OBJDIR_RELEASE_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c dllmain.cpp -o $(OBJDIR_RELEASE_X64)/dllmain.o
