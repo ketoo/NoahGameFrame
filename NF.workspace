@@ -17,10 +17,11 @@
 		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp" />
+		<Project filename="NFServer/NFGameChatPlugin/NFGameChatPlugin.cbp" />
+		<Project filename="NFServer/NFGameGuildPlugin/NFGameGuildPlugin.cbp" />
 		
 		<Project filename="NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp" />
-		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
-		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
+
 		<Project filename="NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.cbp" />
 		
