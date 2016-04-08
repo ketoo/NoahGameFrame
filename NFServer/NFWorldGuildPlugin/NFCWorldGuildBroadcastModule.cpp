@@ -31,9 +31,9 @@ bool NFCWorldGuildBroadcastModule::Execute()
 bool NFCWorldGuildBroadcastModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pWorldGuildDataModule = dynamic_cast<NFIWorldGuildDataModule*>(pPluginManager->FindModule("NFCWorldGuildDataModule"));
-    m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
-    m_pWorldGuildModule = dynamic_cast<NFIWorldGuildModule*>(pPluginManager->FindModule("NFCWorldGuildModule"));
+    m_pWorldGuildDataModule = pPluginManager->FindModule<NFIWorldGuildDataModule>("NFCWorldGuildDataModule");
+    m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+    m_pWorldGuildModule = pPluginManager->FindModule<NFIWorldGuildModule>("NFCWorldGuildModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pWorldGuildDataModule);
@@ -137,7 +137,7 @@ int NFCWorldGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, con
 
 int NFCWorldGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
 {
-    const std::string& strRecordName = xEventData.strRecordName; 
+    const std::string& strRecordName = xEventData.strRecordName;
     int nOpType = xEventData.nOpType;
     int nRow = xEventData.nRow;
     int nCol = xEventData.nCol;

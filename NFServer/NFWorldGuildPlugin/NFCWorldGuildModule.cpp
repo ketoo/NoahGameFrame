@@ -15,8 +15,8 @@
 
 bool NFCWorldGuildModule::Init()
 {
-	m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 
 	assert(NULL != m_pWorldNet_ServerModule);
 	assert(NULL != m_pLogModule);
@@ -118,7 +118,7 @@ bool NFCWorldGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID 
     {
         nPower = NFMsg::GUILD_POWER_TYPE_PRESIDENT;
     }
-    
+
     int nTitle = 0;
     int nOnlineGameID = 0;
 
@@ -131,7 +131,7 @@ bool NFCWorldGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID 
     {
         return false;
     }
-    
+
     m_pKernelModule->SetPropertyInt(xGuildID, "GuildMemeberCount", nCount+1);
 
 	return true;
@@ -159,7 +159,7 @@ bool NFCWorldGuildModule::LeaveGuild( const NFGUID& self, const NFGUID& xGuildID
     }
 
     const int nRow = varList.Int(0);
-    
+
     return pMemberRecord->Remove(nRow);
 }
 
@@ -298,7 +298,7 @@ bool NFCWorldGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID
             if (varList.GetCount() == 1)
             {
                 const int nRow = varList.Int(0);
-                const int nPower = pMemberRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_Power); 
+                const int nPower = pMemberRecord->GetInt(nRow, NFrame::Guild::GuildMemberList_Power);
                 if (nPower >= NFMsg::GUILD_POWER_TYPE_PRESIDENT)
                 {
                     return true;
@@ -368,7 +368,7 @@ bool NFCWorldGuildModule::MemberOnline( const NFGUID& self, const NFGUID& xGuild
 
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, NFrame::Guild::GuildMemberList_GameID, nGameID);
-    
+
     pMemberRecord->SetInt(nRow, NFrame::Guild::GuildMemberList_Online, 1);
 
     return true;
@@ -514,7 +514,7 @@ void NFCWorldGuildModule::OnSearchGuildProcess(const int nSockIndex, const int n
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqSearchGuild);
 
-	std::vector<NFIWorldGuildDataModule::SearchGuildObject> xList;    
+	std::vector<NFIWorldGuildDataModule::SearchGuildObject> xList;
 	m_pWorldGuildDataModule->SearchGuild(nPlayerID, xMsg.guild_name(), xList);
 
 	NFMsg::AckSearchGuild xAckMsg;
@@ -536,4 +536,4 @@ void NFCWorldGuildModule::OnSearchGuildProcess(const int nSockIndex, const int n
 	}
 
 	m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
-} 
+}
