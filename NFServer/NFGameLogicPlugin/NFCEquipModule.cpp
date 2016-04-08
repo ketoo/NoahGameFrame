@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCEquipModule.h"
-#include "NFComm/Define/NFStringInfo.h"
 #include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 

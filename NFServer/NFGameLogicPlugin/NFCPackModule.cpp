@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPackModule.h"
-#include "NFComm/Define/NFStringInfo.h"
 #include "NFComm/NFCore/NFTimer.h"
 
 const std::string mstrPackTableName[] =

@@ -15,14 +15,14 @@ bool NFCHeroItemConsumeProcessModule::Init()
     m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pHero = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
     
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pItemConsumeManagerModule );
     assert( NULL != m_pPackModule );
     assert( NULL != m_pElementInfoModule );
     assert(NULL != m_pLogModule);
-    assert(NULL != m_pHero);
+    assert(NULL != m_pHeroModule);
 
     return true;
 }
@@ -133,7 +133,7 @@ bool NFCHeroItemConsumeProcessModule::AwardItemProperty(const NFGUID& self, cons
 
     if (nEXP > 0)
     {
-        m_pHero->AddHeroExp(self, xHeroID, nEXP);
+        m_pHeroModule->AddHeroExp(self, xHeroID, nEXP);
     }
 
 //     if (nHP > 0)

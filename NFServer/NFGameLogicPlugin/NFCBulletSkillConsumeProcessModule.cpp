@@ -25,7 +25,7 @@ bool NFCBulletSkillConsumeProcessModule::AfterInit()
     assert( NULL != m_pElementInfoModule );
 
     //子弹类技能
-    m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );
+    //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );
 
     return true;
 }

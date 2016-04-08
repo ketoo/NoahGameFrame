@@ -165,80 +165,80 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
 
 int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
 {
-    if ( var.GetCount() < 3)
-    {
-        return 1;
-    }
+    //if ( var.GetCount() < 3)
+    //{
+    //    return 1;
+    //}
 
-    //EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_SKILL;
-    NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject( var.Object( 0 ) );
-    if ( pObejct == NULL )
-    {
-        return 1;
-    }
+    ////EGameErrorCode errorCode = EGameErrorCode::EGEC_INVALID_SKILL;
+    //NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject( var.Object( 0 ) );
+    //if ( pObejct == NULL )
+    //{
+    //    return 1;
+    //}
 
-    NF_SHARE_PTR<NFIRecord> pRecordSkill = pObejct->GetRecordManager()->GetElement( NFrame::Player::R_SkillTable() );
-    if ( pRecordSkill == NULL )
-    {
-        return 1;
-    }
+    //NF_SHARE_PTR<NFIRecord> pRecordSkill = pObejct->GetRecordManager()->GetElement( NFrame::Player::R_SkillTable() );
+    //if ( pRecordSkill == NULL )
+    //{
+    //    return 1;
+    //}
 
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.String( 2 ) );
-    if ( pPropertyManager == NULL )
-    {
-        return 1;
-    }
+    //NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.String( 2 ) );
+    //if ( pPropertyManager == NULL )
+    //{
+    //    return 1;
+    //}
 
-    NF_SHARE_PTR<NFIProperty> pItemTypeProperty = pPropertyManager->GetElement(NFrame::Skill::SkillType());
-    if ( pItemTypeProperty == NULL )
-    {
-        return 1;
-    }
+    //NF_SHARE_PTR<NFIProperty> pItemTypeProperty = pPropertyManager->GetElement(NFrame::Skill::SkillType());
+    //if ( pItemTypeProperty == NULL )
+    //{
+    //    return 1;
+    //}
 
-    //配置表中真的有这么个技能类别
-    EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
-    NFISkillConsumeProcessModule* pConsumeProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF );
-    if ( pConsumeProcessModule == NULL )
-    {
-        return 1;
-    }
+    ////配置表中真的有这么个技能类别
+    //EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
+    //NFISkillConsumeProcessModule* pConsumeProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF );
+    //if ( pConsumeProcessModule == NULL )
+    //{
+    //    return 1;
+    //}
 
-    NFCDataList valueOther;
-    valueOther.Append( var, 3, var.GetCount() - 3 ); // 被攻击玩家数量 3表示从第几个参数开始是被攻击玩家
-    //     if ( pConsumeProcessModule->ConsumeLegal( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther ) != 0 )
-    //     {
-    //         return 1;
-    //     }
-    // 
-    //     if ( pConsumeProcessModule->ConsumeSelf( var.ObjectVal( 0 ), var.StringVal( 2 ) ) != 0 )
-    //     {
-    //         return 1;
-    //     }
-    // 
-    NFCDataList damageValueList;
-    NFCDataList damageResultList;
-    int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
-    for (int i = 0; i < valueOther.GetCount(); i++)
-    {
-        m_pKernelModule->SetPropertyInt(valueOther.Object(i), NFrame::NPC::HP(), 0);
-        damageValueList.AddInt(0);
-        damageResultList.AddInt(0);
-    }
+    //NFCDataList valueOther;
+    //valueOther.Append( var, 3, var.GetCount() - 3 ); // 被攻击玩家数量 3表示从第几个参数开始是被攻击玩家
+    ////     if ( pConsumeProcessModule->ConsumeLegal( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther ) != 0 )
+    ////     {
+    ////         return 1;
+    ////     }
+    //// 
+    ////     if ( pConsumeProcessModule->ConsumeSelf( var.ObjectVal( 0 ), var.StringVal( 2 ) ) != 0 )
+    ////     {
+    ////         return 1;
+    ////     }
+    //// 
+    //NFCDataList damageValueList;
+    //NFCDataList damageResultList;
+    //int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
+    //for (int i = 0; i < valueOther.GetCount(); i++)
+    //{
+    //    m_pKernelModule->SetPropertyInt(valueOther.Object(i), NFrame::NPC::HP(), 0);
+    //    damageValueList.AddInt(0);
+    //    damageResultList.AddInt(0);
+    //}
 
-    //结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
-    if ( damageValueList.GetCount() == damageResultList.GetCount()
-        && damageValueList.GetCount() == valueOther.GetCount() )
-    {
-        NFCDataList valueResult;
-        valueResult.AddString( var.String( 2 ).c_str() );
-        valueResult.AddInt( valueOther.GetCount() );
-        valueResult.Append( valueOther, 0, valueOther.GetCount() ); //伤害对象
-        valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); //伤害值
-        valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); //击打效果
+    ////结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
+    //if ( damageValueList.GetCount() == damageResultList.GetCount()
+    //    && damageValueList.GetCount() == valueOther.GetCount() )
+    //{
+    //    NFCDataList valueResult;
+    //    valueResult.AddString( var.String( 2 ).c_str() );
+    //    valueResult.AddInt( valueOther.GetCount() );
+    //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); //伤害对象
+    //    valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); //伤害值
+    //    valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); //击打效果
 
-        //现在不需要反馈，杀了就杀了
-        //m_pEventProcessModule->DoEvent( pObejct->Self(), NFED_ON_CLIENT_USE_SKILL_RESULT, valueResult );
-    }
+    //    //现在不需要反馈，杀了就杀了
+    //    //m_pEventProcessModule->DoEvent( pObejct->Self(), NFED_ON_CLIENT_USE_SKILL_RESULT, valueResult );
+    //}
 
     return 0;
 }
@@ -293,16 +293,16 @@ int NFCSkillModule::AddSkill( const NFGUID& self, const std::string& strSkillNam
 
 int NFCSkillModule::ExistSkill( const NFGUID& self, const std::string& strSkillName )
 {
-    NF_SHARE_PTR<NFIRecord> pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
-    if ( pRecord )
-    {
-        NFCDataList varResult;
-        pRecord->FindString( EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str(), varResult );
-        if ( varResult.GetCount() == 1 )
-        {
-            return varResult.Int( 0 );
-        }
-    }
+    //NF_SHARE_PTR<NFIRecord> pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
+    //if ( pRecord )
+    //{
+    //    NFCDataList varResult;
+    //    pRecord->FindString( EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str(), varResult );
+    //    if ( varResult.GetCount() == 1 )
+    //    {
+    //        return varResult.Int( 0 );
+    //    }
+    //}
 
     return -1;
 }

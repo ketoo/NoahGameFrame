@@ -47,7 +47,7 @@ private:
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
     NFIPackModule* m_pPackModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    NFIHeroModule* m_pHero;
+    NFIHeroModule* m_pHeroModule;
 };
 
 #endif

@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFComm/Define/NFSkill_def.h"
 
 class NFISkillConsumeProcessModule
     : public NFILogicModule

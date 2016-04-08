@@ -31,7 +31,7 @@ bool NFCBriefSkillConsumeProcessModule::AfterInit()
 {
 
     //¶ÌÈÐÀà¼¼ÄÜ
-    m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF, this );
+    //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF, this );
 
     return true;
 }
