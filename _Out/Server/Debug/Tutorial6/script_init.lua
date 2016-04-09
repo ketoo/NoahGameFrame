@@ -89,13 +89,17 @@ package.path = '../../NFDataCfg/Ini/Components/?.lua;'
 io.write("Hello Lua\n");
 
 function load_script_file(name)
-	local object = require(name);
-	if nil == object then
-		io.write("load_script_file " .. name .. " successes");
-		return 0;
-	else
-		io.write("load_script_file " .. name .. " failed");
+	if package.loaded[name] then
 		return 1;
+	else
+		local object = require(name);
+		if nil == object then
+			io.write("load_script_file " .. name .. " failed");		
+			return 0;
+		else
+			io.write("load_script_file " .. name .. " successed");
+			return 1;
+		end
 	end
 end
 
