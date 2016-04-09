@@ -17,7 +17,7 @@ bool HelloWorld7::AfterInit()
 
     assert(NULL != m_pUrlClientModule);
 
-    if (!m_pUrlClientModule->StartActorPool(50))
+    if (!m_pUrlClientModule->StartActorPool(10))
     {
         return false;
     }

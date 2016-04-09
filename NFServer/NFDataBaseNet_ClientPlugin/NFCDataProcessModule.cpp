@@ -33,7 +33,7 @@ bool NFCDataProcessModule::Execute()
 bool NFCDataProcessModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pClusterSQLModule = dynamic_cast<NFIClusterModule*>( pPluginManager->FindModule( "NFCMysqlClusterModule" ) );
+    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>( "NFCMysqlClusterModule" );
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
@@ -70,7 +70,7 @@ bool NFCDataProcessModule::AfterInit()
 
     bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
-    if (!m_pAsyClusterSQLModule->StartActorPool(50))
+    if (!m_pAsyClusterSQLModule->StartActorPool(10))
     {
         return false;
     }
