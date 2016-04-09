@@ -117,6 +117,7 @@ bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentNam
 
 bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentName)
 {
+	fflua.call<void>("load_script_file", strComponentName);
 	return true;
 }
 
