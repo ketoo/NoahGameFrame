@@ -14,6 +14,8 @@
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)  try{luacpp::call<void>(lw, strFuncName);} catch (string &err){printf("%s\n", err.c_str());}
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
 
+#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{lw.dofile(strFileName);} catch (string &err){printf("%s\n", err.c_str());}
+
 bool NFCLuaScriptModule::Init()
 {
 	mnTime = pPluginManager->GetNowTime();
@@ -45,24 +47,11 @@ bool NFCLuaScriptModule::Init()
 
 	Regisger();
 
-	try
-	{
-		lw.dofile("script_init.lua");
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		assert(0);
-	}
-
+	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
-
-	std::string sTest = "Test";
-	TRY_RUN_GLOBAL_SCRIPT_FUN1("load_script_file", sTest)
-
+	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
-
 
 	return true;
 }
@@ -89,13 +78,13 @@ bool NFCLuaScriptModule::Shut()
 bool NFCLuaScriptModule::Execute()
 {
 	//10秒钟reload一次
-	if (pPluginManager->GetNowTime()- mnTime > 10)
+	if (pPluginManager->GetNowTime()- mnTime > 5)
 	{
 		mnTime = pPluginManager->GetNowTime();
 
 		TRY_RUN_GLOBAL_SCRIPT_FUN0("Execute");
 
-		TRY_RUN_GLOBAL_SCRIPT_FUN0("reload_script_list")
+		TRY_LOAD_SCRIPT_FLE("script_reload.lua")
 
 	}
 
