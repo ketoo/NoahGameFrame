@@ -55,10 +55,12 @@ bool NFCLuaScriptModule::Init()
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN1("load_script_file", "Test.lua")
+	std::string sTest = "Test";
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("load_script_file", sTest)
 
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
+
 
 	return true;
 }
