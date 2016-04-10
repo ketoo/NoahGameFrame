@@ -115,11 +115,15 @@ end
 
 package.path = '../../NFDataCfg/Ini/Components/?.lua;'
 
-io.write("Hello Lua\n");
+
 
 xPluginManager = nil;
 function init_script_system(pPluginManager)
 	xPluginManager = pPluginManager;
+	
+	io.write("\nHello Lua " .. tostring(pPluginManager) .. "\n\n");
+	io.write();
+	
 end
 
 function load_script_file(name)
