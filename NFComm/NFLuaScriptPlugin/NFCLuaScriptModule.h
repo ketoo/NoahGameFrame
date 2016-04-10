@@ -61,7 +61,6 @@ protected:
     NFILogicClassModule* m_pLogicClassModule;
 
 protected:
-    NFMap<std::string, int> mmCompomentStatus;
 	luacpp::luaWrapper lw;
 };
 
