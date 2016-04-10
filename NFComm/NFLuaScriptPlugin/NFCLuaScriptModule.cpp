@@ -11,8 +11,28 @@
 #include <assert.h>
 
 
+#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)  try{luacpp::call<void>(lw, strFuncName);} catch (string &err){printf("%s\n", err.c_str());}
+#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
+
 bool NFCLuaScriptModule::Init()
 {
+	//std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
+	//while (pClass.get())
+	//{
+	//	std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
+	//	while (pComponent.get())
+	//	{
+	//		if (!CheckCompomentStatus(pComponent->GetComponentName()))
+	//		{
+	//			assert(0);
+	//		}
+
+	//		pComponent = pClass->GetComponentManager()->Next();
+	//	}
+
+	//	pClass = m_pLogicClassModule->Next();
+	//}
+
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -33,36 +53,19 @@ bool NFCLuaScriptModule::Init()
 		assert(0);
 	}
 
-	//std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
-	//while (pClass.get())
-	//{
-	//	std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
-	//	while (pComponent.get())
-	//	{
-	//		if (!CheckCompomentStatus(pComponent->GetComponentName()))
-	//		{
-	//			assert(0);
-	//		}
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
 
-	//		pComponent = pClass->GetComponentManager()->Next();
-	//	}
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("load_script_file", "Test.lua")
 
-	//	pClass = m_pLogicClassModule->Next();
-	//}
-	if (!CheckCompomentStatus("Test"))
-	{
-		assert(0);
-	}
 
-	//call Test:Init()
-	luacpp::call<void>(lw, "Init");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::AfterInit()
 {
-	luacpp::call<void>(lw, "AfterInit");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
 
 	//add all callback
 	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
@@ -108,26 +111,6 @@ int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string
 	DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
 	return 0;
-}
-
-bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName)
-{
-	return true;
-}
-
-bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentName)
-{
-	try
-	{
-		luacpp::call<void>(lw, "load_script_file", strComponentName);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return false;
-	}
-
-	return true;
 }
 
 int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
@@ -287,11 +270,6 @@ bool NFCLuaScriptModule::Regisger()
 
 int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction)
 {
-	if (!CheckCompomentStatus(strComponentName, strFunction))
-	{
-		return 0;
-	}
-
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
