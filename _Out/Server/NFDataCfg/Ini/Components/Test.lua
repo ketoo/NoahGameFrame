@@ -1,4 +1,4 @@
-Test = { pPluginManager = nil }
+Test = {}
 
 
 function Test:Init()
