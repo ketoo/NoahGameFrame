@@ -1,10 +1,24 @@
 Test = { pPluginManager = nil }
 
 
-function Test:Init(kernel, self)
-	io.write("Hello Lua Init!\n");
+function Test:Init()
+	io.write("Lua Init!\n");
+	io.write(tostring(pPluginManager));
 end
 
+function Test:AfterInit()
+	io.write("Lua AfterInit!\n");
+	
+end
+
+function Test:BeforeShut()
+	io.write("Lua BeforeShut!\n");
+end
+
+function Test:Shut()
+	io.write("Lua Shut!\n");
+end
+--[[
 function Test:AfterInit(kernel, self)
 	io.write("Hello Lua AfterInit!\n");
 
@@ -59,15 +73,7 @@ function Test:AfterInit(kernel, self)
 	--Hearback
 	AddHeartBeat(kernel, self, "strHeartBeatName","Test", "HearCallBack", 1, 55);
 end
-
-function Test:BeforeShut(kernel, self)
-	io.write("Hello Lua BeforeShut\n");
-end
-
-function Test:Shut(kernel, self)
-	io.write("Hello Lua Shut\n");
-end
-
+--]]
 
 function Test:MaxPropertyCallBack(kernel, self, propertyName, oldVar, newVar, arg)
 	local nOldVar = oldVar:GetInt();
