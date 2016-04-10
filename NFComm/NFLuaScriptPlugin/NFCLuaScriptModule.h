@@ -9,13 +9,12 @@
 #ifndef _NFC_LUA_SCRIPT_MODULE_H_
 #define _NFC_LUA_SCRIPT_MODULE_H_
 
-#include "lua/lua.hpp"
-#include "fflua/fflua.h"
+#include "luaWrapper/luaWrapper.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
-using namespace ff;
+
 class NFCLuaScriptModule
     : public NFILuaScriptModule
 {
@@ -50,7 +49,7 @@ protected:
 
 protected:
     bool InstallLua(const std::string& strComponentName);
-    static bool Regisger(lua_State* ls);
+    bool Regisger();
     bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
     bool CheckCompomentStatus(const std::string& strComponentName);
 
@@ -63,7 +62,7 @@ protected:
 
 protected:
     NFMap<std::string, int> mmCompomentStatus;
-	fflua_t fflua;
+	luacpp::luaWrapper lw;
 };
 
 #endif
