@@ -54,14 +54,15 @@ bool NFCLuaScriptModule::Init()
 		assert(0);
 	}
 
-	luacpp::call<void>(lw, "Init", (NFINT64)m_pKernelModule);
+	//call Test:Init()
+	luacpp::call<void>(lw, "Init");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::AfterInit()
 {
-	luacpp::call<void>(lw, "AfterInit", (NFINT64)m_pKernelModule);
+	luacpp::call<void>(lw, "AfterInit");
 
 	//add all callback
 	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
