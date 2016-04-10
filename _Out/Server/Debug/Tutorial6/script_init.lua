@@ -83,6 +83,35 @@
 -- n64Var:GetnSerial()
 -- n64Var:SetIdent(nValue)
 -- n64Var:SetnSerial(nValue)
+isTest = false
+local main={}
+
+local array={"a","b","c","d","e","f"}
+
+main.testFunction = function()
+--    cpp_func(1,1)
+    
+--    for i,k in ipairs(array) do
+--    end
+
+    for i=1,10000 do
+        if i == 1 then
+        else
+        end
+    end
+end
+
+main.main = function()
+    print("start time:",os.time())
+    for i=1,10000 do
+        main.testFunction()
+    end
+    print("end   time:",os.time())
+end
+
+if isTest then
+    main.main()
+end
 
 package.path = '../../NFDataCfg/Ini/Components/?.lua;'
 
@@ -94,17 +123,18 @@ function load_script_file(name)
 	else
 		local object = require(name);
 		if nil == object then
-			io.write("load_script_file " .. name .. " failed");		
+			io.write("load_script_file " .. name .. " failed\n");		
 			return 0;
 		else
-			io.write("load_script_file " .. name .. " successed");
+			io.write("load_script_file " .. name .. " successed\n");
 			return 1;
 		end
 	end
+
 end
 
 function reload_script_file( name )
-  io.write("reload_script_file " .. name);
+  io.write("reload_script_file " .. name .."\n");
   
   if package.loaded[name] then
 	package.loaded[name] = nil
@@ -125,3 +155,19 @@ function reload_script_list()
 	
 	io.write("----End reload lua list----\n");
 end
+
+	if package.loaded["Func_Switch"] then
+		return 1;
+	else
+		local object = require("Func_Switch");
+		if nil == object then
+			io.write("Func_Switch " .. "Func_Switch" .. " failed\n");		
+			return 0;
+		else
+			io.write("Func_Switch " .. "Func_Switch" .. " successed\n");
+			return 1;
+		end
+	end
+
+
+
