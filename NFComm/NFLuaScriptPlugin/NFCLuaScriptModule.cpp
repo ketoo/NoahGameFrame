@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+ï»¿// -------------------------------------------------------------------------
 //    @FileName      :    NFCLuaScriptModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
@@ -16,6 +16,8 @@
 
 bool NFCLuaScriptModule::Init()
 {
+	mnTime = pPluginManager->GetNowTime();
+
 	//std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
 	//while (pClass.get())
 	//{
@@ -79,18 +81,31 @@ bool NFCLuaScriptModule::AfterInit()
 
 bool NFCLuaScriptModule::Shut()
 {
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("Shut");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::Execute()
 {
+	//10ç§’é’Ÿreloadä¸€æ¬¡
+	if (pPluginManager->GetNowTime()- mnTime > 10)
+	{
+		mnTime = pPluginManager->GetNowTime();
+
+		TRY_RUN_GLOBAL_SCRIPT_FUN0("Execute");
+
+		TRY_RUN_GLOBAL_SCRIPT_FUN0("reload_script_list")
+
+	}
+
 	return true;
 }
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-	//fflua.~fflua_t();
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("BeforeShut");
+
 	return true;
 }
 
@@ -194,8 +209,8 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 bool NFCLuaScriptModule::Regisger()
 {
 	luacpp::reg_cclass<NFGUID>::_reg(lw, "NFGUID")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
-		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
+		.constructor<void>()//ÃŽÃžÂ²ÃŽÂ¹Â¹Ã”Ã¬
+		//.constructor<const test_class_A&>()//Ã’Â»Â¸Ã¶Â²ÃŽÃŠÃ½Â¹Â¹Ã”Ã¬
 		.method("GetData", &NFGUID::GetData)
 		.method("SetData", &NFGUID::SetData)
 		.method("GetHead", &NFGUID::GetHead)
@@ -204,8 +219,8 @@ bool NFCLuaScriptModule::Regisger()
 	luacpp::reg_cclass<NFIDataList>::_reg(lw, "NFIDataList");
 
 	luacpp::reg_cclass<NFCDataList>::_reg(lw, "NFCDataList")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
-		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
+		.constructor<void>()//ÃŽÃžÂ²ÃŽÂ¹Â¹Ã”Ã¬
+		//.constructor<const test_class_A&>()//Ã’Â»Â¸Ã¶Â²ÃŽÃŠÃ½Â¹Â¹Ã”Ã¬
 		.method("IsEmpty", &NFCDataList::IsEmpty)
 		.method("GetCount", &NFCDataList::GetCount)
 		.method("Type", &NFCDataList::Type)
@@ -223,7 +238,7 @@ bool NFCLuaScriptModule::Regisger()
 		.method("Object", &NFCDataList::Object);
 
 	luacpp::reg_cclass<NFCDataList::TData>::_reg(lw, "TData")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
+		.constructor<void>()//ÃŽÃžÂ²ÃŽÂ¹Â¹Ã”Ã¬
 		.method("GetFloat", &NFCDataList::TData::GetFloat)
 		.method("GetInt", &NFCDataList::TData::GetInt)
 		.method("GetObjectA", &NFCDataList::TData::GetObjectA)
