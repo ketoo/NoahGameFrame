@@ -48,12 +48,9 @@ protected:
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
-    bool InstallLua(const std::string& strComponentName);
     bool Regisger();
     bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
     bool CheckCompomentStatus(const std::string& strComponentName);
-
-    void LuaInit(NFIKernelModule* pKernel, const NFGUID& self, const NFIDataList& arg);
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
