@@ -49,8 +49,6 @@ protected:
 
 protected:
     bool Regisger();
-    bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
-    bool CheckCompomentStatus(const std::string& strComponentName);
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
