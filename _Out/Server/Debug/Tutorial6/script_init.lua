@@ -117,6 +117,11 @@ package.path = '../../NFDataCfg/Ini/Components/?.lua;'
 
 io.write("Hello Lua\n");
 
+xPluginManager = nil;
+function init_script_system(pPluginManager)
+	xPluginManager = pPluginManager;
+end
+
 function load_script_file(name)
 	if package.loaded[name] then
 		return 1;
@@ -129,6 +134,8 @@ function load_script_file(name)
 			io.write("load_script_file " .. name .. " successed\n");
 			return 1;
 		end
+		
+		object.name.pPluginManager = xPluginManager;
 	end
 
 end
@@ -156,18 +163,40 @@ function reload_script_list()
 	io.write("----End reload lua list----\n");
 end
 
-	if package.loaded["Func_Switch"] then
-		return 1;
-	else
-		local object = require("Func_Switch");
-		if nil == object then
-			io.write("Func_Switch " .. "Func_Switch" .. " failed\n");		
-			return 0;
-		else
-			io.write("Func_Switch " .. "Func_Switch" .. " successed\n");
-			return 1;
-		end
-	end
+function Init(...)
+	Test:Init(...)
+end
+
+function AfterInit(...)
+	Test:AfterInit(...)
+end
+
+function BeforeShut(...)
+	Test:BeforeShut(...)
+
+end
+
+function Shut(...)
+	Test:Shut(...)
+end
+
+
+function MaxPropertyCallBack(...)
+	Test:MaxPropertyCallBack(...)
+end
+
+function TaskListCallBack(...)
+	Test:TaskListCallBack(...)
+end
+
+function EventCallBack(...)
+	Test:EventCallBack(...)
+
+end
+
+function HearCallBack(...)
+	Test:HearCallBack(...)
+end
 
 
 
