@@ -1,4 +1,4 @@
-Test = {}
+Test = { pPluginManager = nil }
 
 
 function Test:Init(kernel, self)
