@@ -57,6 +57,7 @@ protected:
 
 protected:
 	luacpp::luaWrapper lw;
+	int64_t mnTime;
 };
 
 #endif
