@@ -137,9 +137,6 @@ public:
     }
 
     virtual void Uninstall() = 0;
-
-protected:
-    NFIPluginManager* pPluginManager;
 };
 
 #endif
