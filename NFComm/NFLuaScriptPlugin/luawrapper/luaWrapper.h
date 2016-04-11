@@ -48,8 +48,46 @@ public:
 	}
 	
 	bool dofile(const char *filename);
-	
+	bool addPackagePath(const std::string& str_)
+	{
+		std::string new_path = "package.path = package.path .. \"";
+		std::string tmp = str_;
+		if (str_.empty())
+		{
+			return false;
+		}
+
+		if (str_[0] != ';')
+		{
+			new_path += ";";
+		}
+
+		new_path += str_;
+		
+		if (str_[str_.length() - 1] != '/')
+		{
+			new_path += "/";
+			tmp += "/";
+		}
+
+		new_path += "?.lua\" ";
+
+		run_string(new_path);
+		filePath.push_back(tmp);
+		return true;
+	}
+
+	void run_string(const std::string& str_)
+	{
+		if (luaL_dostring(lState, str_.c_str()))
+		{
+			std::string err("Add Lua PackagePath failed, ");
+			err = err + str_;
+			throw(err);
+		}		
+	}
 private:
+	std::list<std::string> filePath;
 	lua_State *lState;
 };
 }

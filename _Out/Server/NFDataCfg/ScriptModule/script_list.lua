@@ -1,1 +1,1 @@
-load_script_file("Test")
+load_script_file("TestModule")
