@@ -1,4 +1,4 @@
-package.path = '../../NFDataCfg/Script/?.lua;'
+--package.path = '../../NFDataCfg/Script/?.lua;'
 
 
 pPluginManager = nil;
@@ -48,42 +48,46 @@ end
 
 
 function Init(...)
-	Test:Init(...)
+	TestModule:Init(...)
 end
 
 function AfterInit(...)
-	Test:AfterInit(...)
+	TestModule:AfterInit(...)
 end
 
 function Execute(...)
-	Test:Execute(...)
+	TestModule:Execute(...)
 end
 
 function BeforeShut(...)
-	Test:BeforeShut(...)
+	TestModule:BeforeShut(...)
 
 end
 
 function Shut(...)
-	Test:Shut(...)
+	TestModule:Shut(...)
 end
 
 
 function MaxPropertyCallBack(...)
-	Test:MaxPropertyCallBack(...)
+	TestModule:MaxPropertyCallBack(...)
 end
 
 function TaskListCallBack(...)
-	Test:TaskListCallBack(...)
+	TestModule:TaskListCallBack(...)
 end
 
 function EventCallBack(...)
-	Test:EventCallBack(...)
+	TestModule:EventCallBack(...)
 
 end
 
 function HearCallBack(...)
-	Test:HearCallBack(...)
+	TestModule:HearCallBack(...)
+end
+
+function onClassCommonEvent(...)
+	TestModule:onClassCommonEvent(...)
 end
 
 
