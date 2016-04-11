@@ -11,6 +11,7 @@
 		<Project filename="NFComm/NFNet/NFNet.cbp" />
 		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
 		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
+		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
 		
 		<!-- NF Server -->
 		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
