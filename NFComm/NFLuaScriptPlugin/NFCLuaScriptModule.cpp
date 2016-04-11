@@ -20,23 +20,6 @@ bool NFCLuaScriptModule::Init()
 {
 	mnTime = pPluginManager->GetNowTime();
 
-	//std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
-	//while (pClass.get())
-	//{
-	//	std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
-	//	while (pComponent.get())
-	//	{
-	//		if (!CheckCompomentStatus(pComponent->GetComponentName()))
-	//		{
-	//			assert(0);
-	//		}
-
-	//		pComponent = pClass->GetComponentManager()->Next();
-	//	}
-
-	//	pClass = m_pLogicClassModule->Next();
-	//}
-
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -58,12 +41,12 @@ bool NFCLuaScriptModule::Init()
 
 bool NFCLuaScriptModule::AfterInit()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
-
 	//add all callback
 	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
 	m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
 	m_pKernelModule->ResgisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
+
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
 
 	return true;
 }
