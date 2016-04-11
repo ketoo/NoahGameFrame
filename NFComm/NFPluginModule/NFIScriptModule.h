@@ -164,42 +164,15 @@ public:
 
 	virtual int DoClassCommonEvent(NFILogicClassModule* pLogicClassModule, const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 	{
-		std::string strSerializationName;
-
-		switch (eClassEvent)
+		NF_SHARE_PTR<NFIComponentManager> pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
+		if (pComponentManager.get())
 		{
-		case COE_CREATE_NODATA:
-			strSerializationName = "Init";
-			break;
-
-		case COE_CREATE_HASDATA:
-			strSerializationName = "AfterInit";
-			break;
-
-		case COE_BEFOREDESTROY:
-			strSerializationName = "BeforeShut";
-			break;
-
-		case COE_DESTROY:
-			strSerializationName = "Shut";
-			break;
-
-		default:
-			break;
-		}
-
-		if (!strSerializationName.empty())
-		{
-			NF_SHARE_PTR<NFIComponentManager> pComponentManager = pLogicClassModule->GetClassComponentManager(strClassName);
-			if (pComponentManager.get())
+			NF_SHARE_PTR<NFIComponent> pComponent = pComponentManager->First();
+			while (pComponent.get() && pComponent->Enable())
 			{
-				NF_SHARE_PTR<NFIComponent> pComponent = pComponentManager->First();
-				while (pComponent.get() && pComponent->Enable())
-				{
-					DoClassCommonScript(self, pComponent->GetComponentName(), strSerializationName);
+				DoClassCommonScript(self, pComponent->GetComponentName(), eClassEvent);
 
-					pComponent = pComponentManager->Next();
-				}
+				pComponent = pComponentManager->Next();
 			}
 		}
 
