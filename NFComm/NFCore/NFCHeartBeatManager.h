@@ -21,13 +21,11 @@ public:
     NFCHeartBeatManager()
     {
         mSelf = NFGUID();
-        fLastTotal = 0.0f;
     }
 
     NFCHeartBeatManager(const NFGUID& self)
     {
         mSelf = self;
-        fLastTotal = 0.0f;
     }
 
     virtual ~NFCHeartBeatManager();
@@ -41,7 +39,6 @@ public:
 
 protected:
     NFGUID mSelf;
-    float fLastTotal;
 
     NFList<std::string> mRemoveListEx;
     std::list<NFCHeartBeatElement> mAddListEx;
