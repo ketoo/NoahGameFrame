@@ -1,10 +1,11 @@
-TestModuleModule = {}
+TestModule = {}
 
 io.write("TestModule Init!\n");
 
 function TestModule:Init()
 	io.write("Lua Init!\n");
-	io.write(tostring(pPluginManager));
+	io.write(tostring(pPluginManager).."\n");
+	io.write(tostring(pPluginManager.strName));
 end
 
 function TestModule:AfterInit()
@@ -123,4 +124,8 @@ function TestModule:HearCallBack(kernel, self, strHeartBeat, fTime, nCount, arg)
 
 	local obj = NFCDataList();
 	io.write("Hello Lua HearCallBack :".. strHeartBeat .. "\n");
+end
+
+function TestModule:onClassCommonEvent(kernel, self, strComponent, strClassName, eventID)
+	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. "EventID: " .. tostring(eventID) .. "\n");
 end
