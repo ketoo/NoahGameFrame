@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCLuaScriptModule.cpp" />
+    <ClCompile Include="NFLuaScriptPlugin.cpp" />
+    <ClCompile Include="luawrapper\luaWrapper.cpp">
+      <Filter>LuaWrapper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCLuaScriptModule.h" />
+    <ClInclude Include="NFLuaScriptPlugin.h" />
+    <ClInclude Include="luawrapper\any.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\luaClass.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\luacommon.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\luaFunction.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\luaObject.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\luaWrapper.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\ObjPush.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\PopValue.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\Trait.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\TypeList.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="luawrapper\utility.h">
+      <Filter>LuaWrapper</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="LuaWrapper">
+      <UniqueIdentifier>{d2e2608c-ff05-4ddc-91b9-7c06a3c0eac1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
