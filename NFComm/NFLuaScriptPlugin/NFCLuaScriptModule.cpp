@@ -15,6 +15,7 @@
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
 
 #define TRY_LOAD_SCRIPT_FLE(strFileName)  try{lw.dofile(strFileName);} catch (string &err){printf("%s\n", err.c_str());}
+#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{lw.addPackagePath(strFilePath);} catch (string &err){printf("%s\n", err.c_str());}
 
 bool NFCLuaScriptModule::Init()
 {
@@ -29,7 +30,7 @@ bool NFCLuaScriptModule::Init()
 	assert(NULL != m_pElementInfoModule);
 
 	Regisger();
-
+	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule");
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
 	TRY_LOAD_SCRIPT_FLE("script_list.lua");
@@ -61,7 +62,7 @@ bool NFCLuaScriptModule::Shut()
 bool NFCLuaScriptModule::Execute()
 {
 	//10秒钟reload一次
-	if (pPluginManager->GetNowTime()- mnTime > 5)
+	if (pPluginManager->GetNowTime() - mnTime > 5)
 	{
 		mnTime = pPluginManager->GetNowTime();
 
@@ -187,12 +188,13 @@ bool NFCLuaScriptModule::Regisger()
 		.method("SetData", &NFGUID::SetData)
 		.method("GetHead", &NFGUID::GetHead)
 		.method("SetHead", &NFGUID::SetHead);
+	luacpp::reg_cclass<NFIKernelModule>::_reg(lw, "NFIKernelModule")
+		.property("strName", &NFIKernelModule::strName);
 
 	luacpp::reg_cclass<NFIDataList>::_reg(lw, "NFIDataList");
 
 	luacpp::reg_cclass<NFCDataList>::_reg(lw, "NFCDataList")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
-		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
+		.constructor<void>()
 		.method("IsEmpty", &NFCDataList::IsEmpty)
 		.method("GetCount", &NFCDataList::GetCount)
 		.method("Type", &NFCDataList::Type)
@@ -257,12 +259,12 @@ bool NFCLuaScriptModule::Regisger()
 	return true;
 }
 
-int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction)
+int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent)
 {
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self);
+		luacpp::call<void>(lw, "onClassCommonEvent", (NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
 	}
 	catch (string &err)
 	{
