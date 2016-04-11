@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName      :    NFCLuaScriptModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
@@ -11,13 +11,32 @@
 #include <assert.h>
 
 
+#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)  try{luacpp::call<void>(lw, strFuncName);} catch (string &err){printf("%s\n", err.c_str());}
+#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
+
+#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{lw.dofile(strFileName);} catch (string &err){printf("%s\n", err.c_str());}
+
 bool NFCLuaScriptModule::Init()
 {
-	return true;
-}
+	mnTime = pPluginManager->GetNowTime();
 
-bool NFCLuaScriptModule::AfterInit()
-{
+	//std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
+	//while (pClass.get())
+	//{
+	//	std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
+	//	while (pComponent.get())
+	//	{
+	//		if (!CheckCompomentStatus(pComponent->GetComponentName()))
+	//		{
+	//			assert(0);
+	//		}
+
+	//		pComponent = pClass->GetComponentManager()->Next();
+	//	}
+
+	//	pClass = m_pLogicClassModule->Next();
+	//}
+
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -26,50 +45,56 @@ bool NFCLuaScriptModule::AfterInit()
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pElementInfoModule);
 
-	bool ret = InstallLua("script_init.lua");
-	assert(ret);
+	Regisger();
 
-	std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
-	while (pClass.get())
-	{
-		std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();
-		while (pComponent.get())
-		{
-			if (!CheckCompomentStatus(pComponent->GetComponentName()))
-			{
-				assert(0);
-			}
+	TRY_LOAD_SCRIPT_FLE("script_init.lua");
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
+	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
-			pComponent = pClass->GetComponentManager()->Next();
-		}
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
 
-		pClass = m_pLogicClassModule->Next();
-	}
+	return true;
+}
+
+bool NFCLuaScriptModule::AfterInit()
+{
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
 
 	//add all callback
 	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
 	m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
 	m_pKernelModule->ResgisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
 
-
-	
 	return true;
 }
 
 bool NFCLuaScriptModule::Shut()
 {
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("Shut");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::Execute()
 {
+	//10秒钟reload一次
+	if (pPluginManager->GetNowTime()- mnTime > 5)
+	{
+		mnTime = pPluginManager->GetNowTime();
+
+		TRY_RUN_GLOBAL_SCRIPT_FUN0("Execute");
+
+		TRY_LOAD_SCRIPT_FLE("script_reload.lua")
+
+	}
+
 	return true;
 }
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-	fflua.~fflua_t();
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("BeforeShut");
+
 	return true;
 }
 
@@ -94,41 +119,16 @@ int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string
 	return 0;
 }
 
-bool NFCLuaScriptModule::InstallLua(const std::string& strComponentName)
-{
-	fflua.reg(Regisger);
-	fflua.add_package_path("./");
-	try
-	{
-		fflua.load_file(strComponentName);
-	}
-	catch (...)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName)
-{
-	return true;
-}
-
-bool NFCLuaScriptModule::CheckCompomentStatus(const std::string& strComponentName)
-{
-	return true;
-}
-
 int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
 {
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, &arg);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, &arg);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, arg);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 
@@ -139,11 +139,12 @@ int NFCLuaScriptModule::DoEventScript(const NFGUID& self, const int nEventID, co
 {
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, nEventID, &arg);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, nEventID, &arg);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, nEventID, arg);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 	return 1;
@@ -153,11 +154,12 @@ int NFCLuaScriptModule::DoHeartBeatScript(const NFGUID& self, const std::string&
 {
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strHeartBeat.c_str(), fTime, nCount);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strHeartBeat.c_str(), fTime, nCount);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strHeartBeat.c_str(), fTime, nCount);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 	return 1;
@@ -167,11 +169,12 @@ int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::
 {
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strPropertyName.c_str(), &oldVar, &newVar);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strPropertyName.c_str(), &oldVar, &newVar);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strPropertyName.c_str(), oldVar, newVar);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 	return 1;
@@ -181,91 +184,106 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 {
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strRecordName.c_str(), nOpType, nRow, nCol, &oldVar, &newVar);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strRecordName.c_str(), nOpType, nRow, nCol, &oldVar, &newVar);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 	return 1;
 }
 
-bool NFCLuaScriptModule::Regisger(lua_State* ls)
+bool NFCLuaScriptModule::Regisger()
 {
-	fflua_register_t<NFGUID, ctor()>(ls, "NFGUID")  //! ע�ṹ�캯��
-		.def(&NFGUID::GetData, "GetData")
-		.def(&NFGUID::SetData, "SetData")
-		.def(&NFGUID::GetHead, "GetHead")
-		.def(&NFGUID::SetHead, "SetHead");
+	luacpp::reg_cclass<NFGUID>::_reg(lw, "NFGUID")
+		.constructor<void>()//ÎÞ²Î¹¹Ôì
+		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
+		.method("GetData", &NFGUID::GetData)
+		.method("SetData", &NFGUID::SetData)
+		.method("GetHead", &NFGUID::GetHead)
+		.method("SetHead", &NFGUID::SetHead);
 
-	//! ע����ຯ��, ctor() Ϊ���캯��������
-	fflua_register_t<NFCDataList, ctor()>(ls, "NFCDataList")  //! ע�ṹ�캯��
-		.def(&NFCDataList::IsEmpty, "IsEmpty")
-		.def(&NFCDataList::GetCount, "GetCount")
-		.def(&NFCDataList::TypeInt, "Type")
-		.def(&NFCDataList::AddInt, "AddInt")
-		.def(&NFCDataList::AddFloat, "AddFloat")
-		.def(&NFCDataList::AddString, "AddString")
-		.def(&NFCDataList::AddObject, "AddObject")
-		.def(&NFCDataList::SetInt, "SetInt")
-		.def(&NFCDataList::SetFloat, "SetFloat")
-		.def(&NFCDataList::SetString, "SetString")
-		.def(&NFCDataList::SetObject, "SetObject")
-		.def(&NFCDataList::Int, "Int")
-		.def(&NFCDataList::Float, "Float")
-		.def(&NFCDataList::String, "String")
-		.def(&NFCDataList::Object, "Object");
+	luacpp::reg_cclass<NFIDataList>::_reg(lw, "NFIDataList");
 
+	luacpp::reg_cclass<NFCDataList>::_reg(lw, "NFCDataList")
+		.constructor<void>()//ÎÞ²Î¹¹Ôì
+		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
+		.method("IsEmpty", &NFCDataList::IsEmpty)
+		.method("GetCount", &NFCDataList::GetCount)
+		.method("Type", &NFCDataList::Type)
+		.method("AddInt", &NFCDataList::AddInt)
+		.method("AddFloat", &NFCDataList::AddFloat)
+		.method("AddString", &NFCDataList::AddStringFromChar)
+		.method("AddObject", &NFCDataList::AddObject)
+		.method("SetInt", &NFCDataList::SetInt)
+		.method("SetFloat", &NFCDataList::SetFloat)
+		.method("SetString", &NFCDataList::SetString)
+		.method("SetObject", &NFCDataList::SetObject)
+		.method("Int", &NFCDataList::Int)
+		.method("Float", &NFCDataList::Float)
+		.method("String", &NFCDataList::String)
+		.method("Object", &NFCDataList::Object);
 
-	fflua_register_t<>(ls).def(&KernelModule_DoEvent, "DoEvent");
-	fflua_register_t<>(ls).def(&KernelModule_ExistElement, "ExistElement");
-	fflua_register_t<>(ls).def(&KernelModule_GetElementPropertyInt, "GetElementPropertyInt");
-	fflua_register_t<>(ls).def(&KernelModule_GetElementPropertyFloat, "GetElementPropertyFloat");
-	fflua_register_t<>(ls).def(&KernelModule_GetElementPropertyString, "GetElementPropertyString");
-	fflua_register_t<>(ls).def(&KernelModule_AddPropertyCallBack, "AddPropertyCallBack");
-	fflua_register_t<>(ls).def(&KernelModule_AddRecordCallBack, "AddRecordCallBack");
-	fflua_register_t<>(ls).def(&KernelModule_AddEventCallBack, "AddEventCallBack");
-	fflua_register_t<>(ls).def(&KernelModule_AddHeartBeat, "AddHeartBeat");
-	fflua_register_t<>(ls).def(&KernelModule_FindHeartBeat, "FindHeartBeat");
-	fflua_register_t<>(ls).def(&KernelModule_RemoveHeartBeat, "RemoveHeartBeat");
-	fflua_register_t<>(ls).def(&KernelModule_ExistContainer, "ExistContainer");
-	fflua_register_t<>(ls).def(&KernelModule_SetPropertyInt, "SetPropertyInt");
-	fflua_register_t<>(ls).def(&KernelModule_SetPropertyFloat, "SetPropertyFloat");
-	fflua_register_t<>(ls).def(&KernelModule_SetPropertyString, "SetPropertyString");
-	fflua_register_t<>(ls).def(&KernelModule_SetPropertyObject, "SetPropertyObject");
-	fflua_register_t<>(ls).def(&KernelModule_GetPropertyInt, "GetPropertyInt");
-	fflua_register_t<>(ls).def(&KernelModule_GetPropertyFloat, "GetPropertyFloat");
-	fflua_register_t<>(ls).def(&KernelModule_GetPropertyString, "GetPropertyString");
-	fflua_register_t<>(ls).def(&KernelModule_GetPropertyObject, "GetPropertyObject");
-	fflua_register_t<>(ls).def(&KernelModule_SetRecordInt, "SetRecordInt");
-	fflua_register_t<>(ls).def(&KernelModule_SetRecordFloat, "SetRecordFloat");
-	fflua_register_t<>(ls).def(&KernelModule_SetRecordString, "SetRecordString");
-	fflua_register_t<>(ls).def(&KernelModule_SetRecordObject, "SetRecordObject");
-	fflua_register_t<>(ls).def(&KernelModule_GetRecordInt, "GetRecordInt");
-	fflua_register_t<>(ls).def(&KernelModule_GetRecordFloat, "GetRecordFloat");
-	fflua_register_t<>(ls).def(&KernelModule_GetRecordString, "GetRecordString");
-	fflua_register_t<>(ls).def(&KernelModule_GetRecordObject, "GetRecordObject");
-	fflua_register_t<>(ls).def(&KernelModule_AddRow, "AddRow");
-	//fflua_register_t<>(ls).def(&KernelModule_AddProperty, "AddProperty");
+	luacpp::reg_cclass<NFCDataList::TData>::_reg(lw, "TData")
+		.constructor<void>()//ÎÞ²Î¹¹Ôì
+		.method("GetFloat", &NFCDataList::TData::GetFloat)
+		.method("GetInt", &NFCDataList::TData::GetInt)
+		.method("GetObjectA", &NFCDataList::TData::GetObjectA)
+		.method("GetString", &NFCDataList::TData::GetCharArr)
+		.method("GetType", &NFCDataList::TData::GetType)
+		.method("IsNullValue", &NFCDataList::TData::IsNullValue)
+		.method("SetFloat", &NFCDataList::TData::SetFloat)
+		.method("SetInt", &NFCDataList::TData::SetInt)
+		.method("SetObject", &NFCDataList::TData::SetObject)
+		.method("SetString", &NFCDataList::TData::SetString)
+		.method("StringValEx", &NFCDataList::TData::StringValEx)
+		.property("GetData", &NFCDataList::TData::variantData);
+
+	luacpp::reg_cfun(lw, "DoEvent", &KernelModule_DoEvent);
+	luacpp::reg_cfun(lw, "ExistElement", &KernelModule_ExistElement);
+	luacpp::reg_cfun(lw, "GetElementPropertyInt", &KernelModule_GetElementPropertyInt);
+	luacpp::reg_cfun(lw, "GetElementPropertyFloat", &KernelModule_GetElementPropertyFloat);
+	luacpp::reg_cfun(lw, "GetElementPropertyString", &KernelModule_GetElementPropertyString);
+	luacpp::reg_cfun(lw, "AddPropertyCallBack", &KernelModule_AddPropertyCallBack);
+	luacpp::reg_cfun(lw, "AddRecordCallBack", &KernelModule_AddRecordCallBack);
+	luacpp::reg_cfun(lw, "AddEventCallBack", &KernelModule_AddEventCallBack);
+	luacpp::reg_cfun(lw, "AddHeartBeat", &KernelModule_AddHeartBeat);
+	luacpp::reg_cfun(lw, "FindHeartBeat", &KernelModule_FindHeartBeat);
+	luacpp::reg_cfun(lw, "RemoveHeartBeat", &KernelModule_RemoveHeartBeat);
+	luacpp::reg_cfun(lw, "ExistContainer", &KernelModule_ExistContainer);
+	luacpp::reg_cfun(lw, "SetPropertyInt", &KernelModule_SetPropertyInt);
+	luacpp::reg_cfun(lw, "SetPropertyFloat", &KernelModule_SetPropertyFloat);
+	luacpp::reg_cfun(lw, "SetPropertyString", &KernelModule_SetPropertyString);
+	luacpp::reg_cfun(lw, "SetPropertyObject", &KernelModule_SetPropertyObject);
+	luacpp::reg_cfun(lw, "GetPropertyInt", &KernelModule_GetPropertyInt);
+	luacpp::reg_cfun(lw, "GetPropertyFloat", &KernelModule_GetPropertyFloat);
+	luacpp::reg_cfun(lw, "GetPropertyString", &KernelModule_GetPropertyString);
+	luacpp::reg_cfun(lw, "GetPropertyObject", &KernelModule_GetPropertyObject);
+	luacpp::reg_cfun(lw, "SetRecordInt", &KernelModule_SetRecordInt);
+	luacpp::reg_cfun(lw, "SetRecordFloat", &KernelModule_SetRecordFloat);
+	luacpp::reg_cfun(lw, "SetRecordString", &KernelModule_SetRecordString);
+	luacpp::reg_cfun(lw, "SetRecordObject", &KernelModule_SetRecordObject);
+	luacpp::reg_cfun(lw, "GetRecordInt", &KernelModule_GetRecordInt);
+	luacpp::reg_cfun(lw, "GetRecordFloat", &KernelModule_GetRecordFloat);
+	luacpp::reg_cfun(lw, "GetRecordString", &KernelModule_GetRecordString);
+	luacpp::reg_cfun(lw, "GetRecordObject", &KernelModule_GetRecordObject);
+	luacpp::reg_cfun(lw, "AddRow", &KernelModule_AddRow);
 
 	return true;
 }
 
 int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction)
 {
-	if (!CheckCompomentStatus(strComponentName, strFunction))
-	{
-		return 0;
-	}
-
 	try
 	{
-		fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
+		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
+		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self);
 	}
-	catch (...)
+	catch (string &err)
 	{
-		
+		printf("%s\n", err.c_str());
 		return 0;
 	}
 	return 0;
