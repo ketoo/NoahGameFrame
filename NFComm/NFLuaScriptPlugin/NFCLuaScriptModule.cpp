@@ -264,7 +264,7 @@ int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::strin
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
-		luacpp::call<void>(lw, "onClassCommonEvent", (NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
+		luacpp::call<void>(lw, "OnClassCommonEvent", (NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
 	}
 	catch (string &err)
 	{
