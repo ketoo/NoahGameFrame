@@ -86,8 +86,8 @@ function HearCallBack(...)
 	TestModule:HearCallBack(...)
 end
 
-function onClassCommonEvent(...)
-	TestModule:onClassCommonEvent(...)
+function OnClassCommonEvent(...)
+	TestModule:OnClassCommonEvent(...)
 end
 
 
