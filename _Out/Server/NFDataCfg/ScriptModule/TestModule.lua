@@ -126,6 +126,6 @@ function TestModule:HearCallBack(kernel, self, strHeartBeat, fTime, nCount, arg)
 	io.write("Hello Lua HearCallBack :".. strHeartBeat .. "\n");
 end
 
-function TestModule:onClassCommonEvent(kernel, self, strComponent, strClassName, eventID)
+function TestModule:OnClassCommonEvent(kernel, self, strComponent, strClassName, eventID)
 	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. "EventID: " .. tostring(eventID) .. "\n");
 end
