@@ -9,7 +9,7 @@
 #ifndef _NFC_LUA_SCRIPT_MODULE_H_
 #define _NFC_LUA_SCRIPT_MODULE_H_
 
-#include "luaWrapper/luaWrapper.h"
+#include "NFComm/NFLuaScriptPlugin/luawrapper/luaWrapper.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
