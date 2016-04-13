@@ -6,10 +6,10 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
+#include <assert.h>
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
-#include <assert.h>
-
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)  try{luacpp::call<void>(lw, strFuncName);} catch (string &err){printf("%s\n", err.c_str());}
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
@@ -188,8 +188,9 @@ bool NFCLuaScriptModule::Regisger()
 		.method("SetData", &NFGUID::SetData)
 		.method("GetHead", &NFGUID::GetHead)
 		.method("SetHead", &NFGUID::SetHead);
-	luacpp::reg_cclass<NFIKernelModule>::_reg(lw, "NFIKernelModule")
-		.property("strName", &NFIKernelModule::strName);
+
+//	luacpp::reg_cclass<NFIKernelModule>::_reg(lw, "NFIKernelModule")
+//		.property("strName", &NFIKernelModule::strName);
 
 	luacpp::reg_cclass<NFIDataList>::_reg(lw, "NFIDataList");
 
@@ -215,7 +216,7 @@ bool NFCLuaScriptModule::Regisger()
 		.constructor<void>()//ÎÞ²Î¹¹Ôì
 		.method("GetFloat", &NFCDataList::TData::GetFloat)
 		.method("GetInt", &NFCDataList::TData::GetInt)
-		.method("GetObjectA", &NFCDataList::TData::GetObjectA)
+		.method("GetObject", &NFCDataList::TData::GetObject)
 		.method("GetString", &NFCDataList::TData::GetCharArr)
 		.method("GetType", &NFCDataList::TData::GetType)
 		.method("IsNullValue", &NFCDataList::TData::IsNullValue)
