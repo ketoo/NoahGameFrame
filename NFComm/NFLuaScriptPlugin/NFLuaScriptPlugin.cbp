@@ -85,6 +85,18 @@
 		<Unit filename="NFCLuaScriptModule.h" />
 		<Unit filename="NFLuaScriptPlugin.cpp" />
 		<Unit filename="NFLuaScriptPlugin.h" />
+		<Unit filename="luawrapper\any.h" />
+		<Unit filename="luawrapper\luaClass.h" />
+		<Unit filename="luawrapper\luacommon.h" />
+		<Unit filename="luawrapper\luaFunction.h" />
+		<Unit filename="luawrapper\luaObject.h" />
+		<Unit filename="luawrapper\luaWrapper.h" />
+		<Unit filename="luawrapper\ObjPush.h" />
+		<Unit filename="luawrapper\PopValue.h" />
+		<Unit filename="luawrapper\Trait.h" />
+		<Unit filename="luawrapper\TypeList.h" />
+		<Unit filename="luawrapper\utility.h" />
+	    <Unit filename="luawrapper\luaWrapper.cpp" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
