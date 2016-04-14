@@ -9,12 +9,16 @@
 #ifndef _NFC_LUA_SCRIPT_MODULE_H_
 #define _NFC_LUA_SCRIPT_MODULE_H_
 
-#include "NFComm/NFLuaScriptPlugin/luawrapper/luaWrapper.h"
+//#include "NFComm/NFLuaScriptPlugin/luawrapper/luaWrapper.h"
+#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+#include "Luaintf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
 
+
+using namespace LuaIntf;
 class NFCLuaScriptModule
 	: public NFILuaScriptModule
 {
@@ -56,7 +60,8 @@ protected:
 	NFILogicClassModule* m_pLogicClassModule;
 
 protected:
-	luacpp::luaWrapper lw;
+	//luacpp::luaWrapper lw;
+	LuaContext l;
 	int64_t mnTime;
 };
 
