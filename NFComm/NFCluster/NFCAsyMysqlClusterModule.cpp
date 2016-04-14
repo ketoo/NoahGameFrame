@@ -136,7 +136,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
     {
         case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
         {
-            if (pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+            if (!pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -144,7 +144,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         break;
         case SMysqlParam::EMYSQLOPRTYPE_QUERY :
         {
-            if (pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+            if (!pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -152,7 +152,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         break;
         case SMysqlParam::EMYSQLOPRTYPE_SELECT:
         {
-            if (pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+            if (!pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -160,7 +160,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         break;
         case SMysqlParam::EMYSQLOPRTYPE_DELETE:
         {
-            if (pDriver->Delete(xparam.strRecordName, xparam.strKey))
+            if (!pDriver->Delete(xparam.strRecordName, xparam.strKey))
             {
                 xparam.nRet = -1;
             }
@@ -169,7 +169,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
         {
             bool bExit = false;
-            if (pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
+            if (!pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
             {
                 xparam.bExit = bExit;
                 xparam.nRet = -1;
@@ -178,7 +178,7 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         break;
         case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
         {
-            if (pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
+            if (!pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
             {
                 xparam.nRet = -1;
             }
@@ -603,7 +603,7 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFo
         {
             if (pReqData->mFunReturnRsp)
             {
-                pReqData->mFunReturnRsp(pReqData->self, pReqData->nRet, pReqData->mstrUseData);
+                pReqData->mFunReturnRsp(pReqData->self, xResultparam.nRet, pReqData->mstrUseData);
             }
         }
         break;
@@ -612,7 +612,7 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFo
         {
             if (pReqData->mFunReturnVeckKeyValueRsp)
             {
-                pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, pReqData->nRet, pReqData->fieldVec, pReqData->valueVec, pReqData->mstrUseData);
+                pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, xResultparam.nRet, xResultparam.fieldVec, xResultparam.valueVec, pReqData->mstrUseData);
             }
         }
         break;
@@ -620,7 +620,7 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFo
         {
             if (pReqData->mFunReturnIntRsp)
             {
-                pReqData->mFunReturnIntRsp(pReqData->self, pReqData->nRet, pReqData->bExit, pReqData->mstrUseData);
+                pReqData->mFunReturnIntRsp(pReqData->self, xResultparam.nRet, xResultparam.bExit, pReqData->mstrUseData);
             }
         }
         break;
@@ -628,7 +628,7 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFo
         {
             if (pReqData->mFunReturnVecValueRsp)
             {
-                pReqData->mFunReturnVecValueRsp(pReqData->self, pReqData->nRet, pReqData->valueVec, pReqData->mstrUseData);
+                pReqData->mFunReturnVecValueRsp(pReqData->self, xResultparam.nRet, xResultparam.valueVec, pReqData->mstrUseData);
             }
         }
         break;
