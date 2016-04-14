@@ -11,11 +11,11 @@
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
-#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)  try{luacpp::call<void>(lw, strFuncName);} catch (string &err){printf("%s\n", err.c_str());}
-#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try{luacpp::call<void>(lw, strFuncName, arg1);} catch (string &err){printf("%s\n", err.c_str());}
+#define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaRef func(l, strFuncName);  func.call<LuaRef>(); }	catch (LuaException& e) { cout << e.what() << endl; }
+#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaRef func(l, strFuncName);  func.call<LuaRef>(arg1); }	catch (LuaException& e) { cout << e.what() << endl; }
 
-#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{lw.dofile(strFileName);} catch (string &err){printf("%s\n", err.c_str());}
-#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{lw.addPackagePath(strFilePath);} catch (string &err){printf("%s\n", err.c_str());}
+#define TRY_LOAD_SCRIPT_FLE(strFileName)  try{l.doFile(strFileName);} catch (LuaException& e) { cout << e.what() << endl; }
+#define TRY_ADD_PACKAGE_PATH(strFilePath)  try{l.addPackagePath(strFilePath);} catch (LuaException& e) { cout << e.what() << endl; }
 
 bool NFCLuaScriptModule::Init()
 {
@@ -32,6 +32,7 @@ bool NFCLuaScriptModule::Init()
 	Regisger();
 	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule");
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
+
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
 	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
@@ -108,7 +109,7 @@ int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strCompo
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, &arg);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, arg);
+		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, arg);
 	}
 	catch (string &err)
 	{
@@ -124,7 +125,7 @@ int NFCLuaScriptModule::DoEventScript(const NFGUID& self, const int nEventID, co
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, nEventID, &arg);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, nEventID, arg);
+		// luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, nEventID, arg);
 	}
 	catch (string &err)
 	{
@@ -139,7 +140,7 @@ int NFCLuaScriptModule::DoHeartBeatScript(const NFGUID& self, const std::string&
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strHeartBeat.c_str(), fTime, nCount);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strHeartBeat.c_str(), fTime, nCount);
+		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strHeartBeat.c_str(), fTime, nCount);
 	}
 	catch (string &err)
 	{
@@ -154,7 +155,7 @@ int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strPropertyName.c_str(), &oldVar, &newVar);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strPropertyName.c_str(), oldVar, newVar);
+		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strPropertyName.c_str(), oldVar, newVar);
 	}
 	catch (string &err)
 	{
@@ -169,7 +170,7 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 	try
 	{
 		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strRecordName.c_str(), nOpType, nRow, nCol, &oldVar, &newVar);
-		luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar);
+		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar);
 	}
 	catch (string &err)
 	{
@@ -178,84 +179,95 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 	}
 	return 1;
 }
-
+static int test1(int test)
+{
+	return 0;
+}
 bool NFCLuaScriptModule::Regisger()
 {
-	luacpp::reg_cclass<NFGUID>::_reg(lw, "NFGUID")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
-		//.constructor<const test_class_A&>()//Ò»¸ö²ÎÊý¹¹Ôì
-		.method("GetData", &NFGUID::GetData)
-		.method("SetData", &NFGUID::SetData)
-		.method("GetHead", &NFGUID::GetHead)
-		.method("SetHead", &NFGUID::SetHead);
+	LuaBinding(l).beginClass<NFIKernelModule>("NFIKernelModule")
+		.endClass();
 
-//	luacpp::reg_cclass<NFIKernelModule>::_reg(lw, "NFIKernelModule")
-//		.property("strName", &NFIKernelModule::strName);
 
-	luacpp::reg_cclass<NFIDataList>::_reg(lw, "NFIDataList");
+	LuaBinding(l).beginClass<NFGUID>("NFGUID")
+		.addConstructor(LUA_ARGS())
+		//.addProperty("val", &NFGUID::val, &NFGUID::set_val)
+		//.addProperty("fun", &NFGUID::callback, &NFGUID::setCallback)
+		.addFunction("GetData", &NFGUID::GetData)
+		.addFunction("SetData", &NFGUID::SetData)
+		.addFunction("GetHead", &NFGUID::GetHead)
+		.addFunction("SetHead", &NFGUID::SetHead)
+		.endClass();
 
-	luacpp::reg_cclass<NFCDataList>::_reg(lw, "NFCDataList")
-		.constructor<void>()
-		.method("IsEmpty", &NFCDataList::IsEmpty)
-		.method("GetCount", &NFCDataList::GetCount)
-		.method("Type", &NFCDataList::Type)
-		.method("AddInt", &NFCDataList::AddInt)
-		.method("AddFloat", &NFCDataList::AddFloat)
-		.method("AddString", &NFCDataList::AddStringFromChar)
-		.method("AddObject", &NFCDataList::AddObject)
-		.method("SetInt", &NFCDataList::SetInt)
-		.method("SetFloat", &NFCDataList::SetFloat)
-		.method("SetString", &NFCDataList::SetString)
-		.method("SetObject", &NFCDataList::SetObject)
-		.method("Int", &NFCDataList::Int)
-		.method("Float", &NFCDataList::Float)
-		.method("String", &NFCDataList::String)
-		.method("Object", &NFCDataList::Object);
+	LuaBinding(l).beginClass<NFCDataList>("NFCDataList")
+		.addConstructor(LUA_ARGS())
+		.addFunction("IsEmpty", &NFCDataList::IsEmpty)
+		.addFunction("GetCount", &NFCDataList::GetCount)
+		.addFunction("Type", &NFCDataList::Type)
+		.addFunction("AddInt", &NFCDataList::AddInt)
+		.addFunction("AddFloat", &NFCDataList::AddFloat)
+		.addFunction("AddString", &NFCDataList::AddStringFromChar)
+		.addFunction("AddObject", &NFCDataList::AddObject)
+		.addFunction("SetInt", &NFCDataList::SetInt)
+		.addFunction("SetFloat", &NFCDataList::SetFloat)
+		.addFunction("SetString", &NFCDataList::SetString)
+		.addFunction("SetObject", &NFCDataList::SetObject)
+		.addFunction("Int", &NFCDataList::Int)
+		.addFunction("Float", &NFCDataList::Float)
+		.addFunction("String", &NFCDataList::String)
+		.addFunction("Object", &NFCDataList::Object)
+		.endClass();
 
-	luacpp::reg_cclass<NFCDataList::TData>::_reg(lw, "TData")
-		.constructor<void>()//ÎÞ²Î¹¹Ôì
-		.method("GetFloat", &NFCDataList::TData::GetFloat)
-		.method("GetInt", &NFCDataList::TData::GetInt)
-		.method("GetObject", &NFCDataList::TData::GetObject)
-		.method("GetString", &NFCDataList::TData::GetCharArr)
-		.method("GetType", &NFCDataList::TData::GetType)
-		.method("IsNullValue", &NFCDataList::TData::IsNullValue)
-		.method("SetFloat", &NFCDataList::TData::SetFloat)
-		.method("SetInt", &NFCDataList::TData::SetInt)
-		.method("SetObject", &NFCDataList::TData::SetObject)
-		.method("SetString", &NFCDataList::TData::SetString)
-		.method("StringValEx", &NFCDataList::TData::StringValEx)
-		.property("GetData", &NFCDataList::TData::variantData);
+	LuaBinding(l).beginClass<NFCDataList::TData>("TData")
+		.addConstructor(LUA_ARGS())
+		.addFunction("GetFloat", &NFCDataList::TData::GetFloat)
+		.addFunction("GetInt", &NFCDataList::TData::GetInt)
+		.addFunction("GetObject", &NFCDataList::TData::GetObject)
+		.addFunction("GetString", &NFCDataList::TData::GetCharArr)
+		.addFunction("GetType", &NFCDataList::TData::GetType)
+		.addFunction("IsNullValue", &NFCDataList::TData::IsNullValue)
+		.addFunction("SetFloat", &NFCDataList::TData::SetFloat)
+		.addFunction("SetInt", &NFCDataList::TData::SetInt)
+		.addFunction("SetObject", &NFCDataList::TData::SetObject)
+		.addFunction("SetString", &NFCDataList::TData::SetString)
+		.addFunction("StringValEx", &NFCDataList::TData::StringValEx)
+		.endClass();
 
-	luacpp::reg_cfun(lw, "DoEvent", &KernelModule_DoEvent);
-	luacpp::reg_cfun(lw, "ExistElement", &KernelModule_ExistElement);
-	luacpp::reg_cfun(lw, "GetElementPropertyInt", &KernelModule_GetElementPropertyInt);
-	luacpp::reg_cfun(lw, "GetElementPropertyFloat", &KernelModule_GetElementPropertyFloat);
-	luacpp::reg_cfun(lw, "GetElementPropertyString", &KernelModule_GetElementPropertyString);
-	luacpp::reg_cfun(lw, "AddPropertyCallBack", &KernelModule_AddPropertyCallBack);
-	luacpp::reg_cfun(lw, "AddRecordCallBack", &KernelModule_AddRecordCallBack);
-	luacpp::reg_cfun(lw, "AddEventCallBack", &KernelModule_AddEventCallBack);
-	luacpp::reg_cfun(lw, "AddHeartBeat", &KernelModule_AddHeartBeat);
-	luacpp::reg_cfun(lw, "FindHeartBeat", &KernelModule_FindHeartBeat);
-	luacpp::reg_cfun(lw, "RemoveHeartBeat", &KernelModule_RemoveHeartBeat);
-	luacpp::reg_cfun(lw, "ExistContainer", &KernelModule_ExistContainer);
-	luacpp::reg_cfun(lw, "SetPropertyInt", &KernelModule_SetPropertyInt);
-	luacpp::reg_cfun(lw, "SetPropertyFloat", &KernelModule_SetPropertyFloat);
-	luacpp::reg_cfun(lw, "SetPropertyString", &KernelModule_SetPropertyString);
-	luacpp::reg_cfun(lw, "SetPropertyObject", &KernelModule_SetPropertyObject);
-	luacpp::reg_cfun(lw, "GetPropertyInt", &KernelModule_GetPropertyInt);
-	luacpp::reg_cfun(lw, "GetPropertyFloat", &KernelModule_GetPropertyFloat);
-	luacpp::reg_cfun(lw, "GetPropertyString", &KernelModule_GetPropertyString);
-	luacpp::reg_cfun(lw, "GetPropertyObject", &KernelModule_GetPropertyObject);
-	luacpp::reg_cfun(lw, "SetRecordInt", &KernelModule_SetRecordInt);
-	luacpp::reg_cfun(lw, "SetRecordFloat", &KernelModule_SetRecordFloat);
-	luacpp::reg_cfun(lw, "SetRecordString", &KernelModule_SetRecordString);
-	luacpp::reg_cfun(lw, "SetRecordObject", &KernelModule_SetRecordObject);
-	luacpp::reg_cfun(lw, "GetRecordInt", &KernelModule_GetRecordInt);
-	luacpp::reg_cfun(lw, "GetRecordFloat", &KernelModule_GetRecordFloat);
-	luacpp::reg_cfun(lw, "GetRecordString", &KernelModule_GetRecordString);
-	luacpp::reg_cfun(lw, "GetRecordObject", &KernelModule_GetRecordObject);
-	luacpp::reg_cfun(lw, "AddRow", &KernelModule_AddRow);
+	LuaBinding(l).beginModule("utils")
+		.addFunction("DoEvent", static_cast<bool(*)(NFINT64, const NFGUID*, int, const NFCDataList*)>(&KernelModule_DoEvent))
+		.addFunction("ExistElement", static_cast<bool(*)(NFIKernelModule*, string&)>(&KernelModule_ExistElement))
+		.addFunction("GetElementPropertyInt", static_cast<NFINT64(*)(NFINT64, string&, string&)>(&KernelModule_GetElementPropertyInt))
+		.addFunction("GetElementPropertyFloat", static_cast<double(*)(NFINT64, string&, string&)>(&KernelModule_GetElementPropertyFloat))
+		.addFunction("GetElementPropertyString", static_cast<const string&(*)(NFIKernelModule*, string&, string&)>(&KernelModule_GetElementPropertyString))
+		.addFunction("AddPropertyCallBack", static_cast<bool(*)(NFINT64, const NFGUID*, string&, string&, string&)>(&KernelModule_AddPropertyCallBack))
+		.addFunction("AddRecordCallBack", &KernelModule_AddRecordCallBack)
+		.addFunction("AddEventCallBack", &KernelModule_AddEventCallBack)
+		.addFunction("AddHeartBeat", &KernelModule_AddHeartBeat)
+		.addFunction("FindHeartBeat", &KernelModule_FindHeartBeat)
+		.addFunction("RemoveHeartBeat", &KernelModule_RemoveHeartBeat)
+		.addFunction("ExistContainer", &KernelModule_ExistContainer)
+		.addFunction("SetPropertyInt", &KernelModule_SetPropertyInt)
+		.addFunction("SetPropertyFloat", &KernelModule_SetPropertyFloat)
+		.addFunction("SetPropertyString", &KernelModule_SetPropertyString)
+		.addFunction("SetPropertyObject", &KernelModule_SetPropertyObject)
+		.addFunction("GetPropertyInt", &KernelModule_GetPropertyInt)
+		.addFunction("GetPropertyFloat", &KernelModule_GetPropertyFloat)
+		.addFunction("GetPropertyString", &KernelModule_GetPropertyString)
+		.addFunction("GetPropertyObject", &KernelModule_GetPropertyObject)
+		.addFunction("SetRecordInt", &KernelModule_SetRecordInt)
+		.addFunction("SetRecordFloat", &KernelModule_SetRecordFloat)
+		.addFunction("SetRecordString", &KernelModule_SetRecordString)
+		.addFunction("SetRecordObject", &KernelModule_SetRecordObject)
+		.addFunction("GetRecordInt", &KernelModule_GetRecordInt)
+		.addFunction("GetRecordFloat", &KernelModule_GetRecordFloat)
+		.addFunction("GetRecordString", &KernelModule_GetRecordString)
+		.addFunction("GetRecordObject", &KernelModule_GetRecordObject)
+		.addFunction("AddRow", &KernelModule_AddRow)
+
+		// this will bind string test(string), by using our LUA_FN macro
+		// LUA_FN(RETURN_TYPE, FUNC_NAME, ARG_TYPES...)
+		.addFunction("test_1", test1)
+		.endModule();
 
 	return true;
 }
@@ -264,8 +276,9 @@ int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::strin
 {
 	try
 	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule);
-		luacpp::call<void>(lw, "OnClassCommonEvent", (NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
+		LuaRef func(l, "OnClassCommonEvent");
+		auto asdf = (NFINT64)m_pKernelModule;
+		func.call<LuaRef>((NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
 	}
 	catch (string &err)
 	{
