@@ -415,7 +415,8 @@ bool NFCPluginManager::ExecuteEvent()
         if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
         {
             xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
-            m_pActorManager->ReleaseActor(xMsg.nFormActor);
+            //Actor can be reused in ActorPool mode, so we don't release it.
+            //m_pActorManager->ReleaseActor(xMsg.nFormActor);
         }
 
         bRet = mxQueue.Pop(xMsg);
