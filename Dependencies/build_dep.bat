@@ -63,3 +63,6 @@ copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFLoginServer\\ /Y
 copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFMasterServer\\ /Y
 copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFProxyServer1\\ /Y
 copy lib\\Release\\mysqlpp.dll ..\\_Out\\Server\\Release\\NFWorldServer\\ /Y
+
+REM back to main dir
+cd ..\\
