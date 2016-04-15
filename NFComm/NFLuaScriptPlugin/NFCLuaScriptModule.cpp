@@ -33,7 +33,7 @@ bool NFCLuaScriptModule::Init()
 	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule");
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", m_pKernelModule);
+	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", pPluginManager);
 	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
@@ -47,6 +47,7 @@ bool NFCLuaScriptModule::AfterInit()
 	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
 	m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
 	m_pKernelModule->ResgisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
+
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
 
@@ -98,8 +99,17 @@ int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVE
 }
 
 int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
-{
-	DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
+{	
+	try
+	{
+		LuaRef func(l, "TestModule.OnClassCommonEvent");
+		func(m_pLogicClassModule, self, strClassName, (int)eClassEvent, (NFCDataList)var);
+	}
+	catch (LuaException& e) { cout << e.what() << endl; }
+
+	
+
+	//DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
 	return 0;
 }
@@ -179,15 +189,56 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 	}
 	return 1;
 }
-static int test1(int test)
-{
-	return 0;
-}
+
 bool NFCLuaScriptModule::Regisger()
 {
-	LuaBinding(l).beginClass<NFIKernelModule>("NFIKernelModule")
+	LuaBinding(l).beginClass<NFILogicClassModule>("NFILogicClassModule")
 		.endClass();
 
+	LuaBinding(l).beginClass<NFILuaScriptModule>("NFILuaScriptModule")
+		.addFunction("AddPropertyCallBack", &NFILuaScriptModule::AddPropertyCallBack)
+		.addFunction("AddRecordCallBack", &NFILuaScriptModule::AddRecordCallBack)
+		.addFunction("AddEventCallBack", &NFILuaScriptModule::AddEventCallBack)
+		.addFunction("AddHeartBeatCallBack", &NFILuaScriptModule::AddHeartBeatCallBack)
+		.endClass();
+
+	LuaBinding(l).beginClass<NFIPluginManager>("NFIPluginManager")
+		.addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
+		.addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
+		.addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFILogicClassModule>)
+		.addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementInfoModule>)
+		.endClass();
+
+	LuaBinding(l).beginClass<NFIElementInfoModule>("NFIElementInfoModule")
+		.addFunction("ExistElement", &NFIElementInfoModule::ExistElement)
+		.addFunction("GetPropertyInt", &NFIElementInfoModule::GetPropertyInt)
+		.addFunction("GetPropertyFloat", &NFIElementInfoModule::GetPropertyFloat)
+		.addFunction("GetPropertyString", &NFIElementInfoModule::GetPropertyString)
+		.endClass();
+
+	LuaBinding(l).beginClass<NFIKernelModule>("NFIKernelModule")
+		.addFunction("GetPluginManager", &NFIKernelModule::GetPluginManager)
+		.addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFIDataList&))&NFIKernelModule::DoEvent)
+		.addFunction("FindHeartBeat", &NFIKernelModule::FindHeartBeat)
+		.addFunction("RemoveHeartBeat", &NFIKernelModule::RemoveHeartBeat)
+		.addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
+		.addFunction("SetPropertyInt", &NFIKernelModule::SetPropertyInt)
+		.addFunction("SetPropertyFloat", &NFIKernelModule::SetPropertyFloat)
+		.addFunction("SetPropertyString", &NFIKernelModule::SetPropertyString)
+		.addFunction("SetPropertyObject", &NFIKernelModule::SetPropertyObject)
+		.addFunction("GetPropertyInt", &NFIKernelModule::GetPropertyInt)
+		.addFunction("GetPropertyFloat", &NFIKernelModule::GetPropertyFloat)
+		.addFunction("GetPropertyString", &NFIKernelModule::GetPropertyString)
+		.addFunction("GetPropertyObject", &NFIKernelModule::GetPropertyObject)
+		.addFunction("SetRecordInt", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const NFINT64))&NFIKernelModule::SetRecordInt)
+		.addFunction("SetRecordFloat", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const double))&NFIKernelModule::SetRecordFloat)
+		.addFunction("SetRecordString", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const string&))&NFIKernelModule::SetRecordString)
+		.addFunction("SetRecordObject", (bool (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int, const NFGUID&))&NFIKernelModule::SetRecordObject)
+		.addFunction("GetRecordInt", (NFINT64(NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordInt)
+		.addFunction("GetRecordFloat", (double (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordFloat)
+		.addFunction("GetRecordString", (const string& (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordString)
+		.addFunction("GetRecordObject", (const NFGUID& (NFIKernelModule::*)(const NFGUID&, const string&, const int, const int))&NFIKernelModule::GetRecordObject)
+		.endClass();
 
 	LuaBinding(l).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
@@ -233,7 +284,7 @@ bool NFCLuaScriptModule::Regisger()
 		.addFunction("StringValEx", &NFCDataList::TData::StringValEx)
 		.endClass();
 
-	LuaBinding(l).beginModule("utils")
+	LuaBinding(l).beginModule("KernelModule")
 		.addFunction("DoEvent", static_cast<bool(*)(NFINT64, const NFGUID*, int, const NFCDataList*)>(&KernelModule_DoEvent))
 		.addFunction("ExistElement", static_cast<bool(*)(NFIKernelModule*, string&)>(&KernelModule_ExistElement))
 		.addFunction("GetElementPropertyInt", static_cast<NFINT64(*)(NFINT64, string&, string&)>(&KernelModule_GetElementPropertyInt))
@@ -266,7 +317,7 @@ bool NFCLuaScriptModule::Regisger()
 
 		// this will bind string test(string), by using our LUA_FN macro
 		// LUA_FN(RETURN_TYPE, FUNC_NAME, ARG_TYPES...)
-		.addFunction("test_1", test1)
+		//.addFunction("test_1", test1)
 		.endModule();
 
 	return true;
