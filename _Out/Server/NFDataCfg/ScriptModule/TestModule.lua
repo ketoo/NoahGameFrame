@@ -4,8 +4,16 @@ io.write("TestModule Init!\n");
 
 function TestModule:Init()
 	io.write("Lua Init!\n");
-	io.write(tostring(pPluginManager).."\n");
-	io.write(tostring(pPluginManager.strName));
+	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
+
+	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
+	io.write("Addr of NFCKernelModule " .. tostring(pKernelModule) .. "\n");
+
+	local pLogicClassModule = pPluginManager:FindLogicClassModule("NFCLogicClassModule");
+	io.write("Addr of NFCLogicClassModule " .. tostring(pLogicClassModule) .. "\n");
+
+	local pElementInfoModule = pPluginManager:FindElementInfoModule("NFCElementInfoModule");
+	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 end
 
 function TestModule:AfterInit()
