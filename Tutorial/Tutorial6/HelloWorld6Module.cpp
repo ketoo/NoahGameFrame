@@ -33,6 +33,7 @@ bool HelloWorld6Module::AfterInit()
         NFCDataList var;
         var << "Task_From_C++";
         var << 0;
+		var << 0;
         pRecord->AddRow(-1, var);
     }
 
