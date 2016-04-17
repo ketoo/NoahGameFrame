@@ -18,6 +18,8 @@ end
 
 function TestModule:AfterInit()
 	io.write("Lua AfterInit!\n");
+	ScriptModule.AddPropertyCallBack(kernel, self, "MAXHP", "TestModule", "MaxPropertyCallBack");
+
 end
 
 function TestModule:Execute()
@@ -125,7 +127,7 @@ function TestModule:EventCallBack(kernel, self, nEventID, arg)
 	local data = ident:GetData();
 
 	io.write("Hello Lua EventCallBack nEventID:".. nEventID .. "\n");
-	io.write("\r\targ:nValue£º".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." head:"..tostring(head).." data:"..tostring(data).."\n");
+	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." head:"..tostring(head).." data:"..tostring(data).."\n");
 end
 
 function TestModule:HearCallBack(kernel, self, strHeartBeat, fTime, nCount, arg)
@@ -134,6 +136,14 @@ function TestModule:HearCallBack(kernel, self, strHeartBeat, fTime, nCount, arg)
 	io.write("Hello Lua HearCallBack :".. strHeartBeat .. "\n");
 end
 
-function TestModule:OnClassCommonEvent(kernel, self, strComponent, strClassName, eventID)
-	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. "EventID: " .. tostring(eventID) .. "\n");
+function TestModule.OnClassCommonEvent(self, strClassName, eventID, varData)
+	io.write("onClassCommonEvent, ClassName: " .. tostring(strClassName) .. " EventID: " .. tostring(eventID) .. "\n");
+end
+
+function TestModule.OnRecordCommonEvent(self, xEventData, oldVar, newVar)
+	io.write("OnRecordCommonEvent, self: " .. tostring(self) .. " xEventData: " .. tostring(xEventData) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
+end
+
+function TestModule.OnPropertyCommEvent(self, strPropertyName, oldVar, newVar)
+	io.write("OnPropertyCommEvent, self: " .. tostring(self) .. " strPropertyName: " .. tostring(strPropertyName) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
 end
