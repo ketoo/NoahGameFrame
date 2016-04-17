@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaRef func(l, strFuncName);  func.call<LuaRef>(); }	catch (LuaException& e) { cout << e.what() << endl; }
-#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaRef func(l, strFuncName);  func.call<LuaRef>(arg1); }	catch (LuaException& e) { cout << e.what() << endl; }
+#define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaRef func(l, strFuncName);  func.call<LuaRef>(arg1); }catch (LuaException& e) { cout << e.what() << endl; }
 
 #define TRY_LOAD_SCRIPT_FLE(strFileName)  try{l.doFile(strFileName);} catch (LuaException& e) { cout << e.what() << endl; }
 #define TRY_ADD_PACKAGE_PATH(strFilePath)  try{l.addPackagePath(strFilePath);} catch (LuaException& e) { cout << e.what() << endl; }
@@ -31,12 +31,13 @@ bool NFCLuaScriptModule::Init()
 
 	Regisger();
 	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule");
+	TRY_LOAD_SCRIPT_FLE("script_module.lua");
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN1("init_script_system", pPluginManager);
 	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("Init");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Init");
 
 	return true;
 }
@@ -49,14 +50,14 @@ bool NFCLuaScriptModule::AfterInit()
 	m_pKernelModule->ResgisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
 
 
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("AfterInit");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.AfterInit");
 
 	return true;
 }
 
 bool NFCLuaScriptModule::Shut()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("Shut");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Shut");
 
 	return true;
 }
@@ -67,9 +68,7 @@ bool NFCLuaScriptModule::Execute()
 	if (pPluginManager->GetNowTime() - mnTime > 5)
 	{
 		mnTime = pPluginManager->GetNowTime();
-
-		TRY_RUN_GLOBAL_SCRIPT_FUN0("Execute");
-
+		TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Execute");
 		TRY_LOAD_SCRIPT_FLE("script_reload.lua")
 
 	}
@@ -79,35 +78,49 @@ bool NFCLuaScriptModule::Execute()
 
 bool NFCLuaScriptModule::BeforeShut()
 {
-	TRY_RUN_GLOBAL_SCRIPT_FUN0("BeforeShut");
+	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.BeforeShut");
 
 	return true;
 }
 
 int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
+	try
+	{
+		LuaRef func(l, "ScriptModule.OnPropertyCommEvent");
+		func.call<void>(self, strPropertyName, oldVar, newVar);
+	}
+	catch (LuaException& e) { cout << e.what() << endl; }
+
+	//DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
 
 	return 0;
 }
 
 int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	DoRecordCommonEvent(self, xEventData, oldVar, newVar);
+	try
+	{
+		LuaRef func(l, "ScriptModule.OnRecordCommonEvent");
+		func.call<void>(self, xEventData, oldVar, newVar);
+	}
+	catch (LuaException& e) { cout << e.what() << endl; }
+
+	//DoRecordCommonEvent(self, xEventData, oldVar, newVar);
 
 	return 0;
 }
 
 int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
-{	
+{
 	try
 	{
-		LuaRef func(l, "TestModule.OnClassCommonEvent");
-		func(m_pLogicClassModule, self, strClassName, (int)eClassEvent, (NFCDataList)var);
+		LuaRef func(l, "ScriptModule.OnClassCommonEvent");
+		func.call<void>(self, strClassName, (int)eClassEvent, (NFCDataList)var);
 	}
 	catch (LuaException& e) { cout << e.what() << endl; }
 
-	
+
 
 	//DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
 
@@ -192,6 +205,10 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 
 bool NFCLuaScriptModule::Regisger()
 {
+	LuaBinding(l).beginClass<RECORD_EVENT_DATA>("RECORD_EVENT_DATA")
+		.endClass();
+
+
 	LuaBinding(l).beginClass<NFILogicClassModule>("NFILogicClassModule")
 		.endClass();
 
@@ -286,11 +303,11 @@ bool NFCLuaScriptModule::Regisger()
 
 	LuaBinding(l).beginModule("KernelModule")
 		.addFunction("DoEvent", static_cast<bool(*)(NFINT64, const NFGUID*, int, const NFCDataList*)>(&KernelModule_DoEvent))
-		.addFunction("ExistElement", static_cast<bool(*)(NFIKernelModule*, string&)>(&KernelModule_ExistElement))
-		.addFunction("GetElementPropertyInt", static_cast<NFINT64(*)(NFINT64, string&, string&)>(&KernelModule_GetElementPropertyInt))
-		.addFunction("GetElementPropertyFloat", static_cast<double(*)(NFINT64, string&, string&)>(&KernelModule_GetElementPropertyFloat))
-		.addFunction("GetElementPropertyString", static_cast<const string&(*)(NFIKernelModule*, string&, string&)>(&KernelModule_GetElementPropertyString))
-		.addFunction("AddPropertyCallBack", static_cast<bool(*)(NFINT64, const NFGUID*, string&, string&, string&)>(&KernelModule_AddPropertyCallBack))
+		.addFunction("ExistElement", &KernelModule_ExistElement)
+		.addFunction("GetElementPropertyInt", &KernelModule_GetElementPropertyInt)
+		.addFunction("GetElementPropertyFloat", &KernelModule_GetElementPropertyFloat)
+		.addFunction("GetElementPropertyString", &KernelModule_GetElementPropertyString)
+		.addFunction("AddPropertyCallBack", &KernelModule_AddPropertyCallBack)
 		.addFunction("AddRecordCallBack", &KernelModule_AddRecordCallBack)
 		.addFunction("AddEventCallBack", &KernelModule_AddEventCallBack)
 		.addFunction("AddHeartBeat", &KernelModule_AddHeartBeat)
@@ -328,7 +345,6 @@ int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::strin
 	try
 	{
 		LuaRef func(l, "OnClassCommonEvent");
-		auto asdf = (NFINT64)m_pKernelModule;
 		func.call<LuaRef>((NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
 	}
 	catch (string &err)
