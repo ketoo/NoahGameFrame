@@ -47,48 +47,4 @@ function reload_script_table( name )
 end
 
 
-function Init(...)
-	TestModule:Init(...)
-end
-
-function AfterInit(...)
-	TestModule:AfterInit(...)
-end
-
-function Execute(...)
-	TestModule:Execute(...)
-end
-
-function BeforeShut(...)
-	TestModule:BeforeShut(...)
-
-end
-
-function Shut(...)
-	TestModule:Shut(...)
-end
-
-
-function MaxPropertyCallBack(...)
-	TestModule:MaxPropertyCallBack(...)
-end
-
-function TaskListCallBack(...)
-	TestModule:TaskListCallBack(...)
-end
-
-function EventCallBack(...)
-	TestModule:EventCallBack(...)
-
-end
-
-function HearCallBack(...)
-	TestModule:HearCallBack(...)
-end
-
-function OnClassCommonEvent(...)
-	TestModule:OnClassCommonEvent(...)
-end
-
-
 
