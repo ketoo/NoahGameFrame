@@ -17,9 +17,24 @@ function TestModule:Init()
 end
 
 function TestModule:AfterInit()
-	io.write("Lua AfterInit!\n");
-	ScriptModule.AddPropertyCallBack(kernel, self, "MAXHP", "TestModule", "MaxPropertyCallBack");
+	io.write("Lua AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
 
+	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
+	pKernelModule:CreateScene(1);
+	local pObject = pKernelModule:CreateObject(NFGUID(), 1, 0, "Player", "", NFCDataList());
+	local OID = pObject:Self();
+	pLuaScriptModule:AddPropertyCallBack(OID, "MAXHP", "TestModule.MaxPropertyCallBack");
+	pKernelModule:SetPropertyInt(OID,"MAXHP",100);
+
+end
+
+function TestModule.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
+	local nOldVar = oldVar:GetInt();
+	local nNewVar = newVar:GetInt();
+
+	local obj = NFCDataList();
+	--io.write("Hello Lua MaxPropertyCallBack oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
+	io.write("Hello Lua MaxPropertyCallBack oldVar:" .. tostring(nOldVar) .. " newVar:" .. tostring(nNewVar) .. "\n");
 end
 
 function TestModule:Execute()
@@ -89,15 +104,6 @@ function TestModule:AfterInit(kernel, self)
 	AddHeartBeat(kernel, self, "strHeartBeatName","TestModule", "HearCallBack", 1, 55);
 end
 --]]
-
-function TestModule:MaxPropertyCallBack(kernel, self, propertyName, oldVar, newVar, arg)
-	local nOldVar = oldVar:GetInt();
-	local nNewVar = newVar:GetInt();
-
-	local obj = NFCDataList();
-	--io.write("Hello Lua MaxPropertyCallBack oldVar:".. nOldVar .." newVar:" .. nNewVar .. "\n");
-	io.write("Hello Lua MaxPropertyCallBack oldVar:" .. tostring(nOldVar) .. " newVar:" .. tostring(nNewVar) .. "\n");
-end
 
 function TestModule:TaskListCallBack(kernel, self, recordName, nOpType, nRow, nCol, oldVar, newVar, arg)
 	if nCol == 0 then

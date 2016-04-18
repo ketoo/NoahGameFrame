@@ -45,6 +45,13 @@ public:
 	virtual int DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& neVar);
 	virtual int DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar);
 
+	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
+	bool AddRecordCallBack(const NFGUID* self, std::string& strRecordName, LuaRef& luaRef);
+	bool AddEventCallBack(const NFGUID* self, const int nEventID, LuaRef& luaRef);
+	bool AddHeartBeat(const NFGUID* self, std::string& strHeartBeatName, LuaRef& luaRef, const float fTime, const int nCount);
+
+	int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+
 protected:
 
 	int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
@@ -63,6 +70,7 @@ protected:
 	//luacpp::luaWrapper lw;
 	LuaContext l;
 	int64_t mnTime;
+	NFMap<string, NFMap<NFGUID, NFList<string>>> m_luaCallBackFuncMap;
 };
 
 #endif

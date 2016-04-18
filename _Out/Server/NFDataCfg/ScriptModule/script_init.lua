@@ -1,11 +1,12 @@
 --package.path = '../../NFDataCfg/Script/?.lua;'
 
-
+pLuaScriptModule = nil;
 pPluginManager = nil;
-function init_script_system(xPluginManager)
+function init_script_system(xPluginManager,xLuaScriptModule)
 	pPluginManager = xPluginManager;
+	pLuaScriptModule = xLuaScriptModule;
 	
-	io.write("\nHello Lua " .. tostring(pPluginManager) .. "\n\n");
+	io.write("\nHello Lua pPluginManager:" .. tostring(pPluginManager) .. " pLuaScriptModule:" .. tostring(pLuaScriptModule) .."\n\n");
 	io.write();
 	
 end
