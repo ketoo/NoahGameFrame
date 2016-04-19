@@ -103,7 +103,8 @@ end
 
 function TestModule:HearCallBack(self, strHeartBeat, fTime, nCount)
 	local obj = NFCDataList();
-	io.write("Hello Lua HearCallBack :".. strHeartBeat .. "\n");
+	local s = os.clock()
+	io.write("Hello Lua HearCallBack :".. strHeartBeat .. " Time:" .. s .. "\n");
 end
 
 function TestModule.OnClassCommonEvent(self, strClassName, eventID, varData)
