@@ -10,6 +10,7 @@
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFCore/NFTimer.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaRef func(l, strFuncName);  func.call<LuaRef>(); }	catch (LuaException& e) { cout << e.what() << endl; }
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaRef func(l, strFuncName);  func.call<LuaRef>(arg1); }catch (LuaException& e) { cout << e.what() << endl; }
@@ -66,7 +67,7 @@ bool NFCLuaScriptModule::Shut()
 bool NFCLuaScriptModule::Execute()
 {
 	//10秒钟reload一次
-	if (pPluginManager->GetNowTime() - mnTime > 5)
+	if (pPluginManager->GetNowTime() - mnTime > 5000)
 	{
 		mnTime = pPluginManager->GetNowTime();
 		TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Execute");
@@ -513,6 +514,7 @@ bool NFCLuaScriptModule::Regisger()
 		.addFunction("GetRecordString", &KernelModule_GetRecordString)
 		.addFunction("GetRecordObject", &KernelModule_GetRecordObject)
 		.addFunction("AddRow", &KernelModule_AddRow)
+		.addFunction("GetNFNowTime", &NFTimeEx::GetNowTimeMille)
 
 		// this will bind string test(string), by using our LUA_FN macro
 		// LUA_FN(RETURN_TYPE, FUNC_NAME, ARG_TYPES...)
