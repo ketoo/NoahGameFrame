@@ -311,6 +311,7 @@ int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& 
 			auto Ret = funcNameList->First(funcName);
 			while (Ret)
 			{
+				std::cout << "C++ Call Time:" << pPluginManager->GetNowTime() << std::endl;
 				LuaRef func(l, funcName.c_str());
 				func.call(self, strHeartBeatName, fTime, nCount);
 				Ret = funcNameList->Next(funcName);
