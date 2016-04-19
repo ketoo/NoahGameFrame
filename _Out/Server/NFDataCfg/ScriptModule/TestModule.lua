@@ -57,7 +57,7 @@ function TestModule:AfterInit()
 	pLuaScriptModule:DoEvent(OID, 1, obj);
 
 	--Hearback
-	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "TestModule.HearCallBack", 1, 55);
+	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "TestModule.HearCallBack", 0.5, 55555);
 end
 
 function TestModule.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
@@ -103,8 +103,13 @@ end
 
 function TestModule:HearCallBack(self, strHeartBeat, fTime, nCount)
 	local obj = NFCDataList();
-	local s = os.clock()
-	io.write("Hello Lua HearCallBack :".. strHeartBeat .. " Time:" .. s .. "\n");
+	--local s = os.clock()
+	local s = KernelModule.GetNFNowTime();
+	if oldTime == nil then
+		oldTime = s
+	end
+	io.write("Hello Lua HearCallBack :".. strHeartBeat .. " Time:" .. (s-oldTime) .. "\n");
+	oldTime = s;
 end
 
 function TestModule.OnClassCommonEvent(self, strClassName, eventID, varData)
