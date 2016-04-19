@@ -671,14 +671,13 @@ int NFCNet::DeCode(const char* strData, const uint32_t unAllLen, NFCMsgHead& xHe
         return -1;
     }
 
-
     if (NFIMsgHead::NF_Head::NF_HEAD_LENGTH != xHead.DeCode(strData))
     {
         //取包头失败
         return -2;
     }
 
-    if (xHead.GetBodyLength() > unAllLen)
+    if (xHead.GetBodyLength() > (unAllLen - NFIMsgHead::NF_Head::NF_HEAD_LENGTH))
     {
         //总长度不够
         return -3;
