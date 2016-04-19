@@ -46,14 +46,20 @@ public:
 	virtual int DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar);
 
 	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
-	bool AddRecordCallBack(const NFGUID* self, std::string& strRecordName, LuaRef& luaRef);
-	bool AddEventCallBack(const NFGUID* self, const int nEventID, LuaRef& luaRef);
-	bool AddHeartBeat(const NFGUID* self, std::string& strHeartBeatName, LuaRef& luaRef, const float fTime, const int nCount);
+	bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
+	bool AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc);
+	bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
+	int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
+	bool DoEvent(const NFGUID& self, const int nEventID, const NFCDataList& valueList);
 
 	int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-
+	int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+	int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
+	int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
+	template<typename KType>
+	bool AddLuaFuncToMap(NFMap<KType, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, KType& key, string& luaFunc);
+	
 protected:
-
 	int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
@@ -70,7 +76,10 @@ protected:
 	//luacpp::luaWrapper lw;
 	LuaContext l;
 	int64_t mnTime;
-	NFMap<string, NFMap<NFGUID, NFList<string>>> m_luaCallBackFuncMap;
+	NFMap<string, NFMap<NFGUID, NFList<string>>> m_luaPropertyCallBackFuncMap;
+	NFMap<string, NFMap<NFGUID, NFList<string>>> m_luaRecordCallBackFuncMap;
+	NFMap<int, NFMap<NFGUID, NFList<string>>> m_luaEventCallBackFuncMap;
+	NFMap<string, NFMap<NFGUID, NFList<string>>> m_luaHeartBeatCallBackFuncMap;
 };
 
 #endif
