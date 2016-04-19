@@ -45,12 +45,12 @@ struct NFGUID
         return *this;
     }
 
-    NFINT64 GetData()
+	const NFINT64 GetData() const
     {
         return nData64;
     }
 
-    NFINT64 GetHead()
+	const NFINT64 GetHead() const
     {
         return nHead64;
     }
