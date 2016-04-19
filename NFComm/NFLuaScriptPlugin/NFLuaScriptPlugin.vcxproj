@@ -110,22 +110,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="luawrapper\luaWrapper.cpp" />
     <ClCompile Include="NFCLuaScriptModule.cpp" />
     <ClCompile Include="NFLuaScriptPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="luawrapper\any.h" />
-    <ClInclude Include="luawrapper\luaClass.h" />
-    <ClInclude Include="luawrapper\luacommon.h" />
-    <ClInclude Include="luawrapper\luaFunction.h" />
-    <ClInclude Include="luawrapper\luaObject.h" />
-    <ClInclude Include="luawrapper\luaWrapper.h" />
-    <ClInclude Include="luawrapper\ObjPush.h" />
-    <ClInclude Include="luawrapper\PopValue.h" />
-    <ClInclude Include="luawrapper\Trait.h" />
-    <ClInclude Include="luawrapper\TypeList.h" />
-    <ClInclude Include="luawrapper\utility.h" />
     <ClInclude Include="NFCLuaScriptModule.h" />
     <ClInclude Include="NFLuaScriptPlugin.h" />
   </ItemGroup>
