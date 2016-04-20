@@ -93,9 +93,6 @@ int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::strin
 		func.call<void>(self, strPropertyName, oldVar, newVar);
 	}
 	catch (LuaException& e) { cout << e.what() << endl; }
-
-	//DoPropertyCommEvent(self, strPropertyName, oldVar, newVar);
-
 	return 0;
 }
 
@@ -107,9 +104,6 @@ int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVE
 		func.call<void>(self, xEventData, oldVar, newVar);
 	}
 	catch (LuaException& e) { cout << e.what() << endl; }
-
-	//DoRecordCommonEvent(self, xEventData, oldVar, newVar);
-
 	return 0;
 }
 
@@ -121,87 +115,31 @@ int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string
 		func.call<void>(self, strClassName, (int)eClassEvent, (NFCDataList)var);
 	}
 	catch (LuaException& e) { cout << e.what() << endl; }
-
-
-
-	//DoClassCommonEvent(m_pLogicClassModule, self, strClassName, eClassEvent, var);
-
 	return 0;
 }
 
 int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
 {
-	try
-	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, &arg);
-		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, arg);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
-
 	return 1;
 }
 
 int NFCLuaScriptModule::DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
 {
-	try
-	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, nEventID, &arg);
-		// luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, nEventID, arg);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
 	return 1;
 }
 
 int NFCLuaScriptModule::DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction)
 {
-	try
-	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strHeartBeat.c_str(), fTime, nCount);
-		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strHeartBeat.c_str(), fTime, nCount);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
 	return 1;
 }
 
 int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	try
-	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strPropertyName.c_str(), &oldVar, &newVar);
-		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strPropertyName.c_str(), oldVar, newVar);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
 	return 1;
 }
 
 int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar)
 {
-	try
-	{
-		//fflua.call<void>(strFunction.c_str(), (NFINT64)m_pKernelModule, &self, strRecordName.c_str(), nOpType, nRow, nCol, &oldVar, &newVar);
-		//luacpp::call<void>(lw, strFunction.c_str(), (NFINT64)m_pKernelModule, self, strRecordName.c_str(), nOpType, nRow, nCol, oldVar, newVar);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
 	return 1;
 }
 
@@ -215,24 +153,7 @@ bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& st
 
 int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	auto funcList = m_luaPropertyCallBackFuncMap.GetElement(strPropertyName);
-	if (funcList)
-	{
-		auto funcNameList = funcList->GetElement(self);
-		if (funcNameList)
-		{
-			string funcName;
-			auto Ret = funcNameList->First(funcName);
-			while (Ret)
-			{
-				LuaRef func(l, funcName.c_str());
-				func.call(self, strPropertyName, oldVar, newVar);
-				Ret = funcNameList->Next(funcName);
-			}
-
-		}
-	}
-	return 1;
+	return CallLuaFuncFromMap(m_luaPropertyCallBackFuncMap, strPropertyName, self, strPropertyName, oldVar, newVar);
 }
 
 bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc)
@@ -244,24 +165,7 @@ bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strR
 
 int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	auto funcList = m_luaRecordCallBackFuncMap.GetElement(xEventData.strRecordName);
-	if (funcList)
-	{
-		auto funcNameList = funcList->GetElement(self);
-		if (funcNameList)
-		{
-			string funcName;
-			auto Ret = funcNameList->First(funcName);
-			while (Ret)
-			{
-				LuaRef func(l, funcName.c_str());
-				func.call(self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
-				Ret = funcNameList->Next(funcName);
-			}
-
-		}
-	}
-	return 1;
+	return CallLuaFuncFromMap(m_luaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }
 
 bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc)
@@ -273,24 +177,7 @@ bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID
 
 int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar)
 {
-	auto funcList = m_luaEventCallBackFuncMap.GetElement(nEventID);
-	if (funcList)
-	{
-		auto funcNameList = funcList->GetElement(self);
-		if (funcNameList)
-		{
-			string funcName;
-			auto Ret = funcNameList->First(funcName);
-			while (Ret)
-			{
-				LuaRef func(l, funcName.c_str());
-				func.call(self, nEventID, (NFCDataList&)argVar);
-				Ret = funcNameList->Next(funcName);
-			}
-
-		}
-	}
-	return 1;
+	return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, nEventID, self, nEventID, (NFCDataList&)argVar);
 }
 
 bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
@@ -302,24 +189,7 @@ bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartB
 
 int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount)
 {
-	auto funcList = m_luaHeartBeatCallBackFuncMap.GetElement(strHeartBeatName);
-	if (funcList)
-	{
-		auto funcNameList = funcList->GetElement(self);
-		if (funcNameList)
-		{
-			string funcName;
-			auto Ret = funcNameList->First(funcName);
-			while (Ret)
-			{
-				std::cout << "C++ Call Time:" << pPluginManager->GetNowTime() << std::endl;
-				LuaRef func(l, funcName.c_str());
-				func.call(self, strHeartBeatName, fTime, nCount);
-				Ret = funcNameList->Next(funcName);
-			}
-		}
-	}
-	return 1;
+	return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
 }
 
 int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var)
@@ -333,8 +203,8 @@ int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, c
 	return pRecord->AddRow(-1, var);
 }
 
-template<typename KType>
-bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<KType, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, KType &key, string& luaFunc)
+template<typename T>
+bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, string& luaFunc)
 {
 	auto funcList = funcMap.GetElement(key);
 	if (!funcList)
@@ -358,6 +228,36 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<KType, NFMap<NFGUID, NFList<strin
 		if (!funcNameList->Find(luaFunc))
 		{
 			funcNameList->Add(luaFunc);
+		}
+	}
+	return true;
+}
+
+template<typename T1, typename ...T2>
+bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2 ... arg)
+{
+	auto funcList = funcMap.GetElement(key);
+	if (funcList)
+	{
+		auto funcNameList = funcList->GetElement(self);
+		if (funcNameList)
+		{
+			string funcName;
+			auto Ret = funcNameList->First(funcName);
+			while (Ret)
+			{
+				try
+				{
+					LuaRef func(l, funcName.c_str());
+					func.call(self, arg...);
+				}
+				catch (LuaException& e)
+				{
+					cout << e.what() << endl;
+					return false;
+				}
+				Ret = funcNameList->Next(funcName);
+			}
 		}
 	}
 	return true;
@@ -430,8 +330,6 @@ bool NFCLuaScriptModule::Regisger()
 
 	LuaBinding(l).beginClass<NFGUID>("NFGUID")
 		.addConstructor(LUA_ARGS())
-		//.addProperty("val", &NFGUID::val, &NFGUID::set_val)
-		//.addProperty("fun", &NFGUID::callback, &NFGUID::setCallback)
 		.addFunction("GetData", &NFGUID::GetData)
 		.addFunction("SetData", &NFGUID::SetData)
 		.addFunction("GetHead", &NFGUID::GetHead)
@@ -485,40 +383,7 @@ bool NFCLuaScriptModule::Regisger()
 		.endClass();
 
 	LuaBinding(l).beginModule("KernelModule")
-		.addFunction("DoEvent", static_cast<bool(*)(NFINT64, const NFGUID*, int, const NFCDataList*)>(&KernelModule_DoEvent))
-		.addFunction("ExistElement", &KernelModule_ExistElement)
-		.addFunction("GetElementPropertyInt", &KernelModule_GetElementPropertyInt)
-		.addFunction("GetElementPropertyFloat", &KernelModule_GetElementPropertyFloat)
-		.addFunction("GetElementPropertyString", &KernelModule_GetElementPropertyString)
-		.addFunction("AddPropertyCallBack", &KernelModule_AddPropertyCallBack)
-		.addFunction("AddRecordCallBack", &KernelModule_AddRecordCallBack)
-		.addFunction("AddEventCallBack", &KernelModule_AddEventCallBack)
-		.addFunction("AddHeartBeat", &KernelModule_AddHeartBeat)
-		.addFunction("FindHeartBeat", &KernelModule_FindHeartBeat)
-		.addFunction("RemoveHeartBeat", &KernelModule_RemoveHeartBeat)
-		.addFunction("ExistContainer", &KernelModule_ExistContainer)
-		.addFunction("SetPropertyInt", &KernelModule_SetPropertyInt)
-		.addFunction("SetPropertyFloat", &KernelModule_SetPropertyFloat)
-		.addFunction("SetPropertyString", &KernelModule_SetPropertyString)
-		.addFunction("SetPropertyObject", &KernelModule_SetPropertyObject)
-		.addFunction("GetPropertyInt", &KernelModule_GetPropertyInt)
-		.addFunction("GetPropertyFloat", &KernelModule_GetPropertyFloat)
-		.addFunction("GetPropertyString", &KernelModule_GetPropertyString)
-		.addFunction("GetPropertyObject", &KernelModule_GetPropertyObject)
-		.addFunction("SetRecordInt", &KernelModule_SetRecordInt)
-		.addFunction("SetRecordFloat", &KernelModule_SetRecordFloat)
-		.addFunction("SetRecordString", &KernelModule_SetRecordString)
-		.addFunction("SetRecordObject", &KernelModule_SetRecordObject)
-		.addFunction("GetRecordInt", &KernelModule_GetRecordInt)
-		.addFunction("GetRecordFloat", &KernelModule_GetRecordFloat)
-		.addFunction("GetRecordString", &KernelModule_GetRecordString)
-		.addFunction("GetRecordObject", &KernelModule_GetRecordObject)
-		.addFunction("AddRow", &KernelModule_AddRow)
 		.addFunction("GetNFNowTime", &NFTimeEx::GetNowTimeMille)
-
-		// this will bind string test(string), by using our LUA_FN macro
-		// LUA_FN(RETURN_TYPE, FUNC_NAME, ARG_TYPES...)
-		//.addFunction("test_1", test1)
 		.endModule();
 
 	return true;
