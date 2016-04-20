@@ -46,12 +46,6 @@ bool NFCLuaScriptModule::Init()
 
 bool NFCLuaScriptModule::AfterInit()
 {
-	//add all callback
-	m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
-	m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
-	m_pKernelModule->ResgisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
-
-
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.AfterInit");
 
 	return true;
@@ -85,38 +79,81 @@ bool NFCLuaScriptModule::BeforeShut()
 	return true;
 }
 
+bool NFCLuaScriptModule::RegisterCommonPropertyEvent(std::string& funcName)
+{
+	if (AddLuaFuncToCommonMap(m_CommonPropertyEventFuncList, funcName))
+	{
+		m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
+	}
+	return true;
+}
+bool NFCLuaScriptModule::RegisterCommonRecordEvent(std::string& funcName)
+{
+	if (AddLuaFuncToCommonMap(m_CommonRecordEventFuncList, funcName))
+	{
+		m_pKernelModule->RegisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
+	}
+	return true;
+}
+bool NFCLuaScriptModule::RegisterCommonClassEvent(std::string& funcName)
+{
+	if (AddLuaFuncToCommonMap(m_CommonClassEventFuncList, funcName))
+	{
+		m_pKernelModule->RegisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
+	}
+	return true;
+}
+
 int NFCLuaScriptModule::OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	try
-	{
-		LuaRef func(l, "ScriptModule.OnPropertyCommEvent");
-		func.call<void>(self, strPropertyName, oldVar, newVar);
-	}
-	catch (LuaException& e) { cout << e.what() << endl; }
+	CallLuaFuncFromCommonMap(m_CommonPropertyEventFuncList, self, strPropertyName, oldVar, newVar);
 	return 0;
 }
 
 int NFCLuaScriptModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	try
-	{
-		LuaRef func(l, "ScriptModule.OnRecordCommonEvent");
-		func.call<void>(self, xEventData, oldVar, newVar);
-	}
-	catch (LuaException& e) { cout << e.what() << endl; }
+	CallLuaFuncFromCommonMap(m_CommonRecordEventFuncList, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 	return 0;
 }
 
 int NFCLuaScriptModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
-	try
-	{
-		LuaRef func(l, "ScriptModule.OnClassCommonEvent");
-		func.call<void>(self, strClassName, (int)eClassEvent, (NFCDataList)var);
-	}
-	catch (LuaException& e) { cout << e.what() << endl; }
+	CallLuaFuncFromCommonMap(m_CommonClassEventFuncList, self, strClassName, (int)eClassEvent, (NFCDataList&)var);
 	return 0;
 }
+
+bool NFCLuaScriptModule::AddLuaFuncToCommonMap(NFList<std::string>& commonList, std::string& funcName)
+{
+	if (!commonList.Find(funcName))
+	{
+		commonList.Add(funcName);
+		return true;
+	}
+	return false;
+}
+
+template<typename ...T>
+bool NFCLuaScriptModule::CallLuaFuncFromCommonMap(NFList<std::string>& commonList, const NFGUID& self, T... arg)
+{
+	string funcName;
+	auto Ret = commonList.First(funcName);
+	while (Ret)
+	{
+		try
+		{
+			LuaRef func(l, funcName.c_str());
+			func.call(self, arg...);
+		}
+		catch (LuaException& e)
+		{
+			cout << e.what() << endl;
+			return false;
+		}
+		Ret = commonList.Next(funcName);
+	}
+	return false;
+}
+
 
 int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
 {
@@ -146,8 +183,11 @@ int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::st
 
 bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc)
 {
-	AddLuaFuncToMap(m_luaPropertyCallBackFuncMap, self, strPropertyName, luaFunc);
-	m_pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFCLuaScriptModule::OnLuaPropertyCB);
+	if (AddLuaFuncToMap(m_luaPropertyCallBackFuncMap, self, strPropertyName, luaFunc))
+	{
+		m_pKernelModule->AddPropertyCallBack(self, strPropertyName, this, &NFCLuaScriptModule::OnLuaPropertyCB);
+	}
+
 	return true;
 }
 
@@ -158,8 +198,10 @@ int NFCLuaScriptModule::OnLuaPropertyCB(const NFGUID& self, const std::string& s
 
 bool NFCLuaScriptModule::AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc)
 {
-	AddLuaFuncToMap(m_luaRecordCallBackFuncMap, self, strRecordName, luaFunc);
-	m_pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFCLuaScriptModule::OnLuaRecordCB);
+	if (AddLuaFuncToMap(m_luaRecordCallBackFuncMap, self, strRecordName, luaFunc))
+	{
+		m_pKernelModule->AddRecordCallBack(self, strRecordName, this, &NFCLuaScriptModule::OnLuaRecordCB);
+	}
 	return true;
 }
 
@@ -170,8 +212,10 @@ int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DAT
 
 bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc)
 {
-	AddLuaFuncToMap(m_luaEventCallBackFuncMap, self, (int)nEventID, luaFunc);
-	m_pKernelModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
+	if (AddLuaFuncToMap(m_luaEventCallBackFuncMap, self, (int)nEventID, luaFunc))
+	{
+		m_pKernelModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
+	}
 	return true;
 }
 
@@ -182,8 +226,10 @@ int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int nEventID, con
 
 bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
 {
-	AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc);
-	m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+	if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc))
+	{
+		m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+	}
 	return true;
 }
 
@@ -214,6 +260,7 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>
 		funcList = new NFMap<NFGUID, NFList<string>>;
 		funcList->AddElement(self, funcNameList);
 		funcMap.AddElement(key, funcList);
+		return true;
 	}
 
 	if (!funcList->GetElement(self))
@@ -221,6 +268,7 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>
 		NFList<string> *funcNameList = new NFList<string>;
 		funcNameList->Add(luaFunc);
 		funcList->AddElement(self, funcNameList);
+		return true;
 	}
 	else
 	{
@@ -228,9 +276,14 @@ bool NFCLuaScriptModule::AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>
 		if (!funcNameList->Find(luaFunc))
 		{
 			funcNameList->Add(luaFunc);
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
-	return true;
+
 }
 
 template<typename T1, typename ...T2>
@@ -263,11 +316,6 @@ bool NFCLuaScriptModule::CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<strin
 	return true;
 }
 
-bool NFCLuaScriptModule::DoEvent(const NFGUID& self, const int nEventID, const NFCDataList& valueList)
-{
-	return m_pKernelModule->DoEvent(self, nEventID, valueList);
-}
-
 bool NFCLuaScriptModule::Regisger()
 {
 	LuaBinding(l).beginClass<RECORD_EVENT_DATA>("RECORD_EVENT_DATA")
@@ -276,7 +324,6 @@ bool NFCLuaScriptModule::Regisger()
 	LuaBinding(l).beginClass<NFIObject>("NFIObject")
 		.addFunction("Self", &NFIObject::Self)
 		.endClass();
-
 
 	LuaBinding(l).beginClass<NFILogicClassModule>("NFILogicClassModule")
 		.endClass();
@@ -379,7 +426,9 @@ bool NFCLuaScriptModule::Regisger()
 		.addFunction("AddEventCallBack", &NFCLuaScriptModule::AddEventCallBack)
 		.addFunction("AddHeartBeat", &NFCLuaScriptModule::AddHeartBeat)
 		.addFunction("AddRow", &NFCLuaScriptModule::AddRow)
-		.addFunction("DoEvent", &NFCLuaScriptModule::DoEvent)
+		.addFunction("RegisterCommonPropertyEvent", &NFCLuaScriptModule::RegisterCommonPropertyEvent)
+		.addFunction("RegisterCommonRecordEvent", &NFCLuaScriptModule::RegisterCommonRecordEvent)
+		.addFunction("RegisterCommonClassEvent", &NFCLuaScriptModule::RegisterCommonClassEvent)
 		.endClass();
 
 	LuaBinding(l).beginModule("KernelModule")
@@ -391,15 +440,5 @@ bool NFCLuaScriptModule::Regisger()
 
 int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent)
 {
-	try
-	{
-		LuaRef func(l, "OnClassCommonEvent");
-		func.call<LuaRef>((NFINT64)m_pKernelModule, self, strComponentName, strClassName, (int)eClassEvent);
-	}
-	catch (string &err)
-	{
-		printf("%s\n", err.c_str());
-		return 0;
-	}
 	return 0;
 }
