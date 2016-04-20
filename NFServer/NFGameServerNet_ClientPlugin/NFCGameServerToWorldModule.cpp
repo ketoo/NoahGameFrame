@@ -108,7 +108,7 @@ bool NFCGameServerToWorldModule::AfterInit()
     assert(NULL != m_pLogModule);
     assert(NULL != m_pGameServerNet_ServerModule);
 
-    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
+    m_pKernelModule->RegisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
 
     NFIClusterClientModule::Bind(this, &NFCGameServerToWorldModule::OnReciveWSPack, &NFCGameServerToWorldModule::OnSocketWSEvent);
 
