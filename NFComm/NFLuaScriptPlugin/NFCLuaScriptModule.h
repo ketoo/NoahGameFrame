@@ -56,9 +56,10 @@ public:
 	int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
 	int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
-	template<typename KType>
-	bool AddLuaFuncToMap(NFMap<KType, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, KType& key, string& luaFunc);
-	
+	template<typename T>
+	bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, string& luaFunc);
+	template<typename T1, typename... T2>
+	bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 protected:
 	int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
