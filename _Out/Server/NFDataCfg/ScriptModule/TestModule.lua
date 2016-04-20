@@ -57,7 +57,7 @@ function TestModule:AfterInit()
 	pLuaScriptModule:DoEvent(OID, 1, obj);
 
 	--Hearback
-	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "TestModule.HearCallBack", 0.5, 55555);
+	pLuaScriptModule:AddHeartBeat(OID, "strHeartBeatName", "TestModule.HearCallBack", 2, 55555);
 end
 
 function TestModule.MaxPropertyCallBack(self, propertyName, oldVar, newVar)
