@@ -1219,19 +1219,19 @@ int NFCKernelModule::OnClassCommonEvent(const NFGUID& self, const std::string& s
     return 0;
 }
 
-bool NFCKernelModule::ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonClassCallBackList.push_back(cb);
     return true;
 }
 
-bool NFCKernelModule::ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonPropertyCallBackList.push_back(cb);
     return true;
 }
 
-bool NFCKernelModule::ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonRecordCallBackList.push_back(cb);
     return true;
