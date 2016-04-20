@@ -35,9 +35,9 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pDataProcessModule);
     assert(NULL != m_pGameServerToWorldModule);
 
-    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerNet_ServerModule::OnClassCommonEvent);
-    m_pKernelModule->ResgisterCommonPropertyEvent(this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent);
-    m_pKernelModule->ResgisterCommonRecordEvent(this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent);
+    m_pKernelModule->RegisterCommonClassEvent(this, &NFCGameServerNet_ServerModule::OnClassCommonEvent);
+    m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent);
+    m_pKernelModule->RegisterCommonRecordEvent(this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent);
     m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectNPCClassEvent);
