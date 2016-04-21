@@ -1,9 +1,7 @@
 TestModule = {}
 
-io.write("TestModule Init!\n");
-
-function TestModule:Init()
-	io.write("Lua Init!\n");
+function TestModule.Init()
+	io.write("TestModule Init!\n");
 	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
 
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
@@ -16,8 +14,8 @@ function TestModule:Init()
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 end
 
-function TestModule:AfterInit()
-	io.write("Lua AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
+function TestModule.AfterInit()
+	io.write("TestModule AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
 
 	pLuaScriptModule:RegisterCommonPropertyEvent("TestModule.OnPropertyCommEvent");
 	pLuaScriptModule:RegisterCommonRecordEvent("TestModule.OnRecordCommonEvent");
@@ -104,7 +102,7 @@ function TestModule.EventCallBack(self, nEventID, arg)
 	io.write("\r\targ:nValue:".. tostring(nValue) .. " fValue:"..tostring(fValue).. " strValue:"..tostring(strValue).." head:"..tostring(head).." data:"..tostring(data).."\n");
 end
 
-function TestModule:HearCallBack(self, strHeartBeat, fTime, nCount)
+function TestModule.HearCallBack(self, strHeartBeat, fTime, nCount)
 	local obj = NFCDataList();
 	--local s = os.clock()
 	local s = KernelModule.GetNFNowTime();
@@ -127,14 +125,16 @@ function TestModule.OnPropertyCommEvent(self, strPropertyName, oldVar, newVar)
 	io.write("OnPropertyCommEvent, self: " .. tostring(self) .. " strPropertyName: " .. tostring(strPropertyName) .. " oldVar: " .. tostring(oldVar) .. " newVar: " .. tostring(newVar) .. "\n");
 end
 
-function TestModule:Execute()
-	io.write("Lua Execute!\n");
+function TestModule.Execute()
+	io.write("TestModule Execute!\n");
 end
 
-function TestModule:BeforeShut()
-	io.write("Lua BeforeShut!\n");
+function TestModule.BeforeShut()
+	io.write("TestModule BeforeShut!\n");
 end
 
-function TestModule:Shut()
-	io.write("Lua Shut!\n");
+function TestModule.Shut()
+	io.write("TestModule Shut!\n");
 end
+
+return TestModule
