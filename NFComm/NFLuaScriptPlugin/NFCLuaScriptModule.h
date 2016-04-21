@@ -91,6 +91,10 @@ protected:
 	NFList<std::string> m_CommonPropertyEventFuncList;
 	NFList<std::string> m_CommonRecordEventFuncList;
 	NFList<std::string> m_CommonClassEventFuncList;
+
+	bool m_IsCommonPropertyEventRegistered = false;
+	bool m_IsCommonRecordEventRegistered = false;
+	bool m_IsCommonClassEventRegistered = false;
 };
 
 #endif
