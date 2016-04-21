@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LUA_SCRIPT_MODULE_H
-#define _NFI_LUA_SCRIPT_MODULE_H
+#ifndef NFI_LUA_SCRIPT_MODULE_H
+#define NFI_LUA_SCRIPT_MODULE_H
 
 #include "NFIScriptModule.h"
 
