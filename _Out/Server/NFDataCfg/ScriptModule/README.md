@@ -9,11 +9,11 @@
 
 ##Step 1
 Create a Lua Script File, and Must Contain following functions
-1.Init()
-2.AfterInit()
-3.Execute()
-4.BeforeShut()
-5.Shut()
+- Init()
+- AfterInit()
+- Execute()
+- BeforeShut()
+- Shut()
 
 Mostly like this
 # [TestModule2.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/TestModule2.lua)
