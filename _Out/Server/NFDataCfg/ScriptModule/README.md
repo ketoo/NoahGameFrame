@@ -18,6 +18,7 @@ Create a Lua Script File, and Must Contain following functions
 Mostly like this
 # [TestModule2.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/TestModule2.lua)
 
+```lua
 TestModule2 = {}
 
 function TestModule2.Init()
@@ -41,15 +42,15 @@ function TestModule2.Shut()
 end
 
 return TestModule2 --Do not forget return this
-
+```
 ##Step 2
 Add your LuaScriptModule Infomation into [script_list.lua](https://github.com/ketoo/NoahGameFrame/tree/develop/_Out/Server/NFDataCfg/ScriptModule/script_list.lua)
-
+```lua
 ScriptList={
     {tbl=nil, tblName="TestModule"},
     {tbl=nil, tblName="TestModule2"},
 }
 
 load_script_file(ScriptList)
-
+```
 ##Enjoy it!
