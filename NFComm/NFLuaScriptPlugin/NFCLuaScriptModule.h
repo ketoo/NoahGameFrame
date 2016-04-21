@@ -17,8 +17,6 @@
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
 
-
-using namespace LuaIntf;
 class NFCLuaScriptModule
 	: public NFILuaScriptModule
 {
@@ -81,7 +79,7 @@ protected:
 
 protected:
 	//luacpp::luaWrapper lw;
-	LuaContext l;
+	LuaIntf::LuaContext l;
 	int64_t mnTime;
 	NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
 	NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;
