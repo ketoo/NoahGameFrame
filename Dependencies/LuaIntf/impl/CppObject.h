@@ -409,7 +409,7 @@ struct CppObjectTraits
 
 #define LUA_USING_SHARED_PTR_TYPE(SP) \
     template <typename T> \
-    struct CppObjectTraits <SP<T>> \
+    struct LuaIntf::CppObjectTraits <SP<T>> \
     { \
         using ObjectType = typename std::remove_cv<T>::type; \
         \
