@@ -19,6 +19,7 @@
 #define TRY_LOAD_SCRIPT_FLE(strFileName)  try{l.doFile(strFileName);} catch (LuaException& e) { cout << e.what() << endl; }
 #define TRY_ADD_PACKAGE_PATH(strFilePath)  try{l.addPackagePath(strFilePath);} catch (LuaException& e) { cout << e.what() << endl; }
 LUA_USING_SHARED_PTR_TYPE(std::shared_ptr)
+
 bool NFCLuaScriptModule::Init()
 {
 	mnTime = pPluginManager->GetNowTime();
@@ -33,11 +34,13 @@ bool NFCLuaScriptModule::Init()
 
 	Regisger();
 	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule");
-	TRY_LOAD_SCRIPT_FLE("script_module.lua");
+
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
 	TRY_LOAD_SCRIPT_FLE("script_list.lua");
+
+	TRY_LOAD_SCRIPT_FLE("script_module.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Init");
 
@@ -81,25 +84,30 @@ bool NFCLuaScriptModule::BeforeShut()
 
 bool NFCLuaScriptModule::RegisterCommonPropertyEvent(std::string& funcName)
 {
-	if (AddLuaFuncToCommonMap(m_CommonPropertyEventFuncList, funcName))
+	if (AddLuaFuncToCommonMap(m_CommonPropertyEventFuncList, funcName) && !m_IsCommonPropertyEventRegistered)
 	{
 		m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCLuaScriptModule::OnPropertyCommEvent);
+		m_IsCommonPropertyEventRegistered = true;
 	}
 	return true;
 }
+
 bool NFCLuaScriptModule::RegisterCommonRecordEvent(std::string& funcName)
 {
-	if (AddLuaFuncToCommonMap(m_CommonRecordEventFuncList, funcName))
+	if (AddLuaFuncToCommonMap(m_CommonRecordEventFuncList, funcName) && !m_IsCommonRecordEventRegistered)
 	{
 		m_pKernelModule->RegisterCommonRecordEvent(this, &NFCLuaScriptModule::OnRecordCommonEvent);
+		m_IsCommonRecordEventRegistered = true;
 	}
 	return true;
 }
+
 bool NFCLuaScriptModule::RegisterCommonClassEvent(std::string& funcName)
 {
-	if (AddLuaFuncToCommonMap(m_CommonClassEventFuncList, funcName))
+	if (AddLuaFuncToCommonMap(m_CommonClassEventFuncList, funcName) && !m_IsCommonClassEventRegistered)
 	{
 		m_pKernelModule->RegisterCommonClassEvent(this, &NFCLuaScriptModule::OnClassCommonEvent);
+		m_IsCommonClassEventRegistered = true;
 	}
 	return true;
 }
