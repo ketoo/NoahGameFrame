@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LUA_SCRIPT_MODULE_H_
-#define _NFC_LUA_SCRIPT_MODULE_H_
+#ifndef NFC_LUA_SCRIPT_MODULE_H
+#define NFC_LUA_SCRIPT_MODULE_H
 
 //#include "NFComm/NFLuaScriptPlugin/luawrapper/luaWrapper.h"
 #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
