@@ -1,5 +1,8 @@
+# delete old makefile(s)
+find ../NFComm -name 'makefile' -type f -print -exec rm -rf {} \;
+find ../NFServer -name 'makefile' -type f -print -exec rm -rf {} \;
 
-# start to generate makefile
+# start to generate makefile(s)
 cd ./Tool
 
 ./cbp2make.linux-x86_64 -in ../NFComm/NFCluster/NFMysqlClusterPlugin.cbp -out ../NFComm/NFCluster/makefile
@@ -28,43 +31,44 @@ cd ./Tool
 ./cbp2make.linux-x86_64 -in ../NFServer/NFMasterServerPlugin/NFMasterServerPlugin.cbp -out ../NFServer/NFMasterServerPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp -out ../NFServer/NFProxyServerNet_ClientPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.cbp -out ../NFServer/NFProxyServerNet_ServerPlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFServer/NFProxyPlugin/NFProxyPlugin.cbp -out ../NFServer/NFProxyPlugin/makefile
+./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerPlugin/NFProxyPlugin.cbp -out ../NFServer/NFProxyServerPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp -out ../NFServer/NFWorldLogicPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp -out ../NFServer/NFWorldNet_ClientPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.cbp -out ../NFServer/NFWorldNet_ServerPlugin/makefile
 
-# add SolutionDir
+
+# add SolutionDir in line 20
 # SolutionDir = ../../
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFCluster/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFConfigPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFCore/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFCrashPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFDataBasePlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFDataNoSqlPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFKernelPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFLogPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFLuaScriptPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFMessageDefine/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFNet/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFPluginLoader/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFTagPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFUrlPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCluster/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFConfigPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCore/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCrashPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFDataBasePlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFDataNoSqlPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFKernelPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFLogPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFLuaScriptPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFMessageDefine/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFNet/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFPluginLoader/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFTagPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFUrlPlugin/makefile
 
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFDataBaseNet_ClientPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFGameServerNet_ClientPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFGameServerNet_ServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFGameServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFLoginLogicPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFLoginNet_ClientPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFLoginNet_ServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFMasterNet_ServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFMasterServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFProxyServerNet_ClientPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFProxyServerNet_ServerPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFProxyPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFWorldLogicPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFWorldNet_ClientPlugin/makefile
-sed '/LDFLAGS = /a\SolutionDir = ../../\n' ../NFComm/NFWorldNet_ServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFDataBaseNet_ClientPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerNet_ClientPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerNet_ServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFLoginLogicPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFLoginNet_ClientPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFLoginNet_ServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFMasterNet_ServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFMasterServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerNet_ClientPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerNet_ServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldLogicPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldNet_ClientPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldNet_ServerPlugin/makefile
 
 
-cd ../
+
