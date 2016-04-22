@@ -19,27 +19,28 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Debug/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
-LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_filesystem-mt-s.a $(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc/libboost_system-mt-s.a
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Debug/
+LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so
+OUT_DEBUG_X64 = \$\(SolutionDir\)/_Out/Comm/Debug/NFLogPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so
+OUT_RELEASE_X64 = \$\(SolutionDir\)/_Out/Comm/Release/NFLogPlugin.so
 
 OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCLogModule.o $(OBJDIR_DEBUG_X64)/NFLogPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
@@ -50,7 +51,7 @@ all: debug_x64 release_x64
 clean: clean_debug_x64 clean_release_x64
 
 before_debug_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Debug || mkdir -p $(SolutionDir)/_Out/Comm/Debug
+	test -d \$\(SolutionDir\)/_Out/Comm/Debug || mkdir -p \$\(SolutionDir\)/_Out/Comm/Debug
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
@@ -62,6 +63,8 @@ after_debug_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFLogPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
@@ -79,11 +82,11 @@ $(OBJDIR_DEBUG_X64)/dllmain.o: dllmain.cpp
 
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Debug
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Debug
 	rm -rf $(OBJDIR_DEBUG_X64)
 
 before_release_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Release || mkdir -p $(SolutionDir)/_Out/Comm/Release
+	test -d \$\(SolutionDir\)/_Out/Comm/Release || mkdir -p \$\(SolutionDir\)/_Out/Comm/Release
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
@@ -95,6 +98,8 @@ after_release_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial2/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFLogPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 
@@ -112,7 +117,7 @@ $(OBJDIR_RELEASE_X64)/dllmain.o: dllmain.cpp
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Release
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Release
 	rm -rf $(OBJDIR_RELEASE_X64)
 
 .PHONY: before_debug_x64 after_debug_x64 clean_debug_x64 before_release_x64 after_release_x64 clean_release_x64

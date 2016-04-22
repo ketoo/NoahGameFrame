@@ -66,4 +66,5 @@ cd ../
 # TODO: other libs
 
 # back to main dir
-cd ../
+pwd
+
