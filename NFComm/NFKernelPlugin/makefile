@@ -29,7 +29,7 @@ LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = \$\(SolutionDir\)/_Out/Comm/Debug/NFKernelPlugin_d.so
+OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG -D_USRDLL
@@ -40,7 +40,7 @@ LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFCore.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = \$\(SolutionDir\)/_Out/Comm/Release/NFKernelPlugin.so
+OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFKernelPlugin.so
 
 OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFKernelModule/NFCKernelModule.o $(OBJDIR_DEBUG_X64)/NFKernelModule/NFCUUIDModule.o $(OBJDIR_DEBUG_X64)/NFKernelPlugin.o $(OBJDIR_DEBUG_X64)/NFSceneModule/NFCSceneModule.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
@@ -51,7 +51,7 @@ all: debug_x64 release_x64
 clean: clean_debug_x64 clean_release_x64
 
 before_debug_x64: 
-	test -d \$\(SolutionDir\)/_Out/Comm/Debug || mkdir -p \$\(SolutionDir\)/_Out/Comm/Debug
+	test -d $(SolutionDir)/_Out/Comm/Debug || mkdir -p $(SolutionDir)/_Out/Comm/Debug
 	test -d $(OBJDIR_DEBUG_X64)/NFKernelModule || mkdir -p $(OBJDIR_DEBUG_X64)/NFKernelModule
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 	test -d $(OBJDIR_DEBUG_X64)/NFSceneModule || mkdir -p $(OBJDIR_DEBUG_X64)/NFSceneModule
@@ -90,13 +90,13 @@ $(OBJDIR_DEBUG_X64)/dllmain.o: dllmain.cpp
 
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
-	rm -rf \$\(SolutionDir\)/_Out/Comm/Debug
+	rm -rf $(SolutionDir)/_Out/Comm/Debug
 	rm -rf $(OBJDIR_DEBUG_X64)/NFKernelModule
 	rm -rf $(OBJDIR_DEBUG_X64)
 	rm -rf $(OBJDIR_DEBUG_X64)/NFSceneModule
 
 before_release_x64: 
-	test -d \$\(SolutionDir\)/_Out/Comm/Release || mkdir -p \$\(SolutionDir\)/_Out/Comm/Release
+	test -d $(SolutionDir)/_Out/Comm/Release || mkdir -p $(SolutionDir)/_Out/Comm/Release
 	test -d $(OBJDIR_RELEASE_X64)/NFKernelModule || mkdir -p $(OBJDIR_RELEASE_X64)/NFKernelModule
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 	test -d $(OBJDIR_RELEASE_X64)/NFSceneModule || mkdir -p $(OBJDIR_RELEASE_X64)/NFSceneModule
@@ -135,7 +135,7 @@ $(OBJDIR_RELEASE_X64)/dllmain.o: dllmain.cpp
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)
-	rm -rf \$\(SolutionDir\)/_Out/Comm/Release
+	rm -rf $(SolutionDir)/_Out/Comm/Release
 	rm -rf $(OBJDIR_RELEASE_X64)/NFKernelModule
 	rm -rf $(OBJDIR_RELEASE_X64)
 	rm -rf $(OBJDIR_RELEASE_X64)/NFSceneModule
