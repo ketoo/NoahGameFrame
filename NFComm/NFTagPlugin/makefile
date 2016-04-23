@@ -17,6 +17,8 @@ RESINC =
 LIBDIR = 
 LIB = 
 LDFLAGS = 
+SolutionDir = ../../
+
 
 INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL
