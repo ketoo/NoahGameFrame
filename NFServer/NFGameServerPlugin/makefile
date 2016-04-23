@@ -27,9 +27,9 @@ RCFLAGS_DEBUG_X64 = $(RCFLAGS)
 LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/
 LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a $(SolutionDir)/_Out/Comm/Debug/NFNet_d.a $(SolutionDir)/Dependencies/lib/Debug/libevent.a $(SolutionDir)/Dependencies/lib/Debug/libevent_core.a $(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFGameServerPlugin_d.so
+OUT_DEBUG_X64 = \$\(SolutionDir\)/_Out/Comm/Debug/NFGameServerPlugin_d.so
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent/ -I$(SolutionDir)/Dependencies/libevent/include/ -I$(SolutionDir)/Dependencies/libevent/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
@@ -38,20 +38,20 @@ RCFLAGS_RELEASE_X64 = $(RCFLAGS)
 LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/
 LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a $(SolutionDir)/_Out/Comm/Release/NFNet.a $(SolutionDir)/Dependencies/lib/Release/libevent.a $(SolutionDir)/Dependencies/lib/Release/libevent_core.a $(SolutionDir)/Dependencies/lib/Release/libprotobuf.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFGameServerPlugin.so
+OUT_RELEASE_X64 = \$\(SolutionDir\)/_Out/Comm/Release/NFGameServerPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCGameServerModule.o $(OBJDIR_DEBUG_X64)/NFCLevelModule.o $(OBJDIR_DEBUG_X64)/NFCPropertyConfigModule.o $(OBJDIR_DEBUG_X64)/NFCPropertyModule.o $(OBJDIR_DEBUG_X64)/NFCSceneProcessModule.o $(OBJDIR_DEBUG_X64)/NFGameServerPlugin.o $(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCGameServerModule.o $(OBJDIR_DEBUG_X64)/NFCLevelModule.o $(OBJDIR_DEBUG_X64)/NFCPropertyConfigModule.o $(OBJDIR_DEBUG_X64)/NFCPropertyModule.o $(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o $(OBJDIR_DEBUG_X64)/NFCSceneProcessModule.o $(OBJDIR_DEBUG_X64)/NFGameServerPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCGameServerModule.o $(OBJDIR_RELEASE_X64)/NFCLevelModule.o $(OBJDIR_RELEASE_X64)/NFCPropertyConfigModule.o $(OBJDIR_RELEASE_X64)/NFCPropertyModule.o $(OBJDIR_RELEASE_X64)/NFCSceneProcessModule.o $(OBJDIR_RELEASE_X64)/NFGameServerPlugin.o $(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCGameServerModule.o $(OBJDIR_RELEASE_X64)/NFCLevelModule.o $(OBJDIR_RELEASE_X64)/NFCPropertyConfigModule.o $(OBJDIR_RELEASE_X64)/NFCPropertyModule.o $(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o $(OBJDIR_RELEASE_X64)/NFCSceneProcessModule.o $(OBJDIR_RELEASE_X64)/NFGameServerPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
 clean: clean_debug_x64 clean_release_x64
 
 before_debug_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Debug || mkdir -p $(SolutionDir)/_Out/Comm/Debug
+	test -d \$\(SolutionDir\)/_Out/Comm/Debug || mkdir -p \$\(SolutionDir\)/_Out/Comm/Debug
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
@@ -74,25 +74,25 @@ $(OBJDIR_DEBUG_X64)/NFCPropertyConfigModule.o: NFCPropertyConfigModule.cpp
 $(OBJDIR_DEBUG_X64)/NFCPropertyModule.o: NFCPropertyModule.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCPropertyModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCPropertyModule.o
 
+$(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o: NFCPropertyTrailModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCPropertyTrailModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o
+
 $(OBJDIR_DEBUG_X64)/NFCSceneProcessModule.o: NFCSceneProcessModule.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCSceneProcessModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCSceneProcessModule.o
 
 $(OBJDIR_DEBUG_X64)/NFGameServerPlugin.o: NFGameServerPlugin.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFGameServerPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFGameServerPlugin.o
 
-$(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o: NFCPropertyTrailModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCPropertyTrailModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCPropertyTrailModule.o
-
 $(OBJDIR_DEBUG_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c dllmain.cpp -o $(OBJDIR_DEBUG_X64)/dllmain.o
 
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Debug
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Debug
 	rm -rf $(OBJDIR_DEBUG_X64)
 
 before_release_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Release || mkdir -p $(SolutionDir)/_Out/Comm/Release
+	test -d \$\(SolutionDir\)/_Out/Comm/Release || mkdir -p \$\(SolutionDir\)/_Out/Comm/Release
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
@@ -115,21 +115,21 @@ $(OBJDIR_RELEASE_X64)/NFCPropertyConfigModule.o: NFCPropertyConfigModule.cpp
 $(OBJDIR_RELEASE_X64)/NFCPropertyModule.o: NFCPropertyModule.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCPropertyModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCPropertyModule.o
 
+$(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o: NFCPropertyTrailModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCPropertyTrailModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o
+
 $(OBJDIR_RELEASE_X64)/NFCSceneProcessModule.o: NFCSceneProcessModule.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCSceneProcessModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCSceneProcessModule.o
 
 $(OBJDIR_RELEASE_X64)/NFGameServerPlugin.o: NFGameServerPlugin.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFGameServerPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFGameServerPlugin.o
 
-$(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o: NFCPropertyTrailModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCPropertyTrailModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCPropertyTrailModule.o
-
 $(OBJDIR_RELEASE_X64)/dllmain.o: dllmain.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c dllmain.cpp -o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Release
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Release
 	rm -rf $(OBJDIR_RELEASE_X64)
 
 .PHONY: before_debug_x64 after_debug_x64 clean_debug_x64 before_release_x64 after_release_x64 clean_release_x64
