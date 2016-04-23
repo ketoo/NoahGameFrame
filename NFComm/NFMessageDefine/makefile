@@ -27,9 +27,9 @@ RCFLAGS_DEBUG_X64 = $(RCFLAGS)
 LIBDIR_DEBUG_X64 = $(LIBDIR)
 LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a
+OUT_DEBUG_X64 = \$\(SolutionDir\)/_Out/Comm/Debug/NFMessageDefine_d.a
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/protobuf/src
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG
@@ -38,9 +38,9 @@ RCFLAGS_RELEASE_X64 = $(RCFLAGS)
 LIBDIR_RELEASE_X64 = $(LIBDIR)
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a
+OUT_RELEASE_X64 = \$\(SolutionDir\)/_Out/Comm/Release/NFMessageDefine.a
 
 OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFSLGDefine.pb.o $(OBJDIR_DEBUG_X64)/NFMsgShare.pb.o $(OBJDIR_DEBUG_X64)/NFMsgPreGame.pb.o $(OBJDIR_DEBUG_X64)/NFMsgDefine.o $(OBJDIR_DEBUG_X64)/NFDefine.pb.o $(OBJDIR_DEBUG_X64)/NFMsgBaseEx.pb.o $(OBJDIR_DEBUG_X64)/NFMsgBase.pb.o $(OBJDIR_DEBUG_X64)/NFFleetingDefine.pb.o
 
@@ -51,7 +51,7 @@ all: debug_x64 release_x64
 clean: clean_debug_x64 clean_release_x64
 
 before_debug_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Debug || mkdir -p $(SolutionDir)/_Out/Comm/Debug
+	test -d \$\(SolutionDir\)/_Out/Comm/Debug || mkdir -p \$\(SolutionDir\)/_Out/Comm/Debug
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
@@ -87,11 +87,11 @@ $(OBJDIR_DEBUG_X64)/NFFleetingDefine.pb.o: NFFleetingDefine.pb.cc
 
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Debug
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Debug
 	rm -rf $(OBJDIR_DEBUG_X64)
 
 before_release_x64: 
-	test -d $(SolutionDir)/_Out/Comm/Release || mkdir -p $(SolutionDir)/_Out/Comm/Release
+	test -d \$\(SolutionDir\)/_Out/Comm/Release || mkdir -p \$\(SolutionDir\)/_Out/Comm/Release
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
@@ -127,7 +127,7 @@ $(OBJDIR_RELEASE_X64)/NFFleetingDefine.pb.o: NFFleetingDefine.pb.cc
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)
-	rm -rf $(SolutionDir)/_Out/Comm/Release
+	rm -rf \$\(SolutionDir\)/_Out/Comm/Release
 	rm -rf $(OBJDIR_RELEASE_X64)
 
 .PHONY: before_debug_x64 after_debug_x64 clean_debug_x64 before_release_x64 after_release_x64 clean_release_x64
