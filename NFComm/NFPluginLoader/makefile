@@ -29,7 +29,7 @@ LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/Dependencies/lib/Debug/libtherond.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS) -ldl -lpthread
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
-OUT_DEBUG_X64 = \$\(SolutionDir\)/_Out/Comm/Debug/NFPluginLoader_d
+OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d
 
 INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/Theron/Include/External/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -D_X64 -DNDEBUG -D_CONSOLE -DNF_DYNAMIC_PLUGIN
@@ -40,7 +40,7 @@ LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/Dependencies/lib/Release/libtheron.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS) -ldl -lpthread
 OBJDIR_RELEASE_X64 = .objs
 DEP_RELEASE_X64 = 
-OUT_RELEASE_X64 = \$\(SolutionDir\)/_Out/Comm/Release/NFPluginLoader_r
+OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r
 
 OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCActor.o $(OBJDIR_DEBUG_X64)/NFCActorManager.o $(OBJDIR_DEBUG_X64)/NFCDynLib.o $(OBJDIR_DEBUG_X64)/NFCPluginManager.o $(OBJDIR_DEBUG_X64)/NFPluginLoader.o
 
@@ -51,7 +51,7 @@ all: debug_x64 release_x64
 clean: clean_debug_x64 clean_release_x64
 
 before_debug_x64: 
-	test -d \$\(SolutionDir\)/_Out/Comm/Debug || mkdir -p \$\(SolutionDir\)/_Out/Comm/Debug
+	test -d $(SolutionDir)/_Out/Comm/Debug || mkdir -p $(SolutionDir)/_Out/Comm/Debug
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
@@ -88,11 +88,11 @@ $(OBJDIR_DEBUG_X64)/NFPluginLoader.o: NFPluginLoader.cpp
 
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
-	rm -rf \$\(SolutionDir\)/_Out/Comm/Debug
+	rm -rf $(SolutionDir)/_Out/Comm/Debug
 	rm -rf $(OBJDIR_DEBUG_X64)
 
 before_release_x64: 
-	test -d \$\(SolutionDir\)/_Out/Comm/Release || mkdir -p \$\(SolutionDir\)/_Out/Comm/Release
+	test -d $(SolutionDir)/_Out/Comm/Release || mkdir -p $(SolutionDir)/_Out/Comm/Release
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
@@ -129,7 +129,7 @@ $(OBJDIR_RELEASE_X64)/NFPluginLoader.o: NFPluginLoader.cpp
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)
-	rm -rf \$\(SolutionDir\)/_Out/Comm/Release
+	rm -rf $(SolutionDir)/_Out/Comm/Release
 	rm -rf $(OBJDIR_RELEASE_X64)
 
 .PHONY: before_debug_x64 after_debug_x64 clean_debug_x64 before_release_x64 after_release_x64 clean_release_x64
