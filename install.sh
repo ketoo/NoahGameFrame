@@ -7,7 +7,7 @@ cd ../
 pwd
 
 # generate makefile
-chmod -R 755 Build4Makefile.sh
-./Build4Makefile.sh
+#chmod -R 755 Build4Makefile.sh
+#./Build4Makefile.sh
 
-pwd
+#pwd
