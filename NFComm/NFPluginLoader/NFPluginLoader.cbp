@@ -8,7 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="." />
+				<Option object_output=".objs/Debug" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
@@ -50,6 +50,7 @@
 			</Target>
 			<Target title="Release x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Release/NFPluginLoader_r" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/Release" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
