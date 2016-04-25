@@ -9,8 +9,8 @@
 #ifndef NFC_LUA_SCRIPT_MODULE_H
 #define NFC_LUA_SCRIPT_MODULE_H
 
-//#include "NFComm/NFLuaScriptPlugin/luawrapper/luaWrapper.h"
 #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+
 #include "Luaintf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
@@ -34,14 +34,6 @@ public:
 	virtual bool BeforeShut();
 
 	//call script
-	virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
-	virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strClassNameconst, CLASS_OBJECT_EVENT eClassEvent);
-
-	virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
-	virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction);
-
-	virtual int DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& neVar);
-	virtual int DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar);
 
 	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
 	bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
