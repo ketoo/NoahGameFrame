@@ -33,13 +33,14 @@ bool NFCLuaScriptModule::Init()
 	assert(NULL != m_pElementInfoModule);
 
 	Regisger();
+
 	TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule"); //Add Search Path to Lua
 
 	TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN2("init_script_system", pPluginManager, this);
-	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 
+	TRY_LOAD_SCRIPT_FLE("script_list.lua");
 	TRY_LOAD_SCRIPT_FLE("script_module.lua");
 
 	TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Init");
@@ -160,32 +161,6 @@ bool NFCLuaScriptModule::CallLuaFuncFromCommonMap(NFList<std::string>& commonLis
 		Ret = commonList.Next(funcName);
 	}
 	return false;
-}
-
-
-int NFCLuaScriptModule::DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
-{
-	return 1;
-}
-
-int NFCLuaScriptModule::DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg)
-{
-	return 1;
-}
-
-int NFCLuaScriptModule::DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction)
-{
-	return 1;
-}
-
-int NFCLuaScriptModule::DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
-{
-	return 1;
-}
-
-int NFCLuaScriptModule::DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar)
-{
-	return 1;
 }
 
 
@@ -336,13 +311,6 @@ bool NFCLuaScriptModule::Regisger()
 	LuaIntf::LuaBinding(l).beginClass<NFILogicClassModule>("NFILogicClassModule")
 		.endClass();
 
-	LuaIntf::LuaBinding(l).beginClass<NFILuaScriptModule>("NFILuaScriptModule")
-		.addFunction("AddPropertyCallBack", &NFILuaScriptModule::AddPropertyCallBack)
-		.addFunction("AddRecordCallBack", &NFILuaScriptModule::AddRecordCallBack)
-		.addFunction("AddEventCallBack", &NFILuaScriptModule::AddEventCallBack)
-		.addFunction("AddHeartBeatCallBack", &NFILuaScriptModule::AddHeartBeatCallBack)
-		.endClass();
-
 	LuaIntf::LuaBinding(l).beginClass<NFIPluginManager>("NFIPluginManager")
 		.addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
 		.addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
@@ -444,9 +412,4 @@ bool NFCLuaScriptModule::Regisger()
 		.endModule();
 
 	return true;
-}
-
-int NFCLuaScriptModule::DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent)
-{
-	return 0;
 }
