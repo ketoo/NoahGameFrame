@@ -12,14 +12,14 @@ function TestModule.Init()
 
 	local pElementInfoModule = pPluginManager:FindElementInfoModule("NFCElementInfoModule");
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
-end
-
-function TestModule.AfterInit()
-	io.write("TestModule AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
 
 	pLuaScriptModule:RegisterCommonPropertyEvent("TestModule.OnPropertyCommEvent");
 	pLuaScriptModule:RegisterCommonRecordEvent("TestModule.OnRecordCommonEvent");
 	pLuaScriptModule:RegisterCommonClassEvent("TestModule.OnClassCommonEvent");
+end
+
+function TestModule.AfterInit()
+	io.write("TestModule AfterInit!" .. tostring(pLuaScriptModule) .. "\n");
 
 	local pKernelModule = pPluginManager:FindKernelModule("NFCKernelModule");
 	pKernelModule:CreateScene(1);
