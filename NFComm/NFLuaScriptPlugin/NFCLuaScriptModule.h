@@ -33,30 +33,31 @@ public:
 	virtual bool AfterInit();
 	virtual bool BeforeShut();
 
-	//call script
-
 	bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
 	bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
 	bool AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc);
 	bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
 	int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
 
-	int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-	int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-	int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
-	int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
+	bool RegisterCommonPropertyEvent(std::string& funcName);
+	bool RegisterCommonRecordEvent(std::string& funcName);
+	bool RegisterCommonClassEvent(std::string& funcName);
+
+protected:
 	template<typename T>
 	bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, std::string& luaFunc);
 	template<typename T1, typename... T2>
 	bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 
-	bool RegisterCommonPropertyEvent(std::string& funcName);
-	bool RegisterCommonRecordEvent(std::string& funcName);
-	bool RegisterCommonClassEvent(std::string& funcName);
+	int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+	int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+	int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
+	int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
+
 	bool AddLuaFuncToCommonMap(NFList<std::string>& commonList, std::string& funcName);
 	template<typename ...T>
 	bool CallLuaFuncFromCommonMap(NFList<std::string>& commonList, const NFGUID& self, T... arg);
-protected:
+
 	int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
@@ -70,7 +71,6 @@ protected:
 	NFILogicClassModule* m_pLogicClassModule;
 
 protected:
-	//luacpp::luaWrapper lw;
 	LuaIntf::LuaContext l;
 	int64_t mnTime;
 	NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
