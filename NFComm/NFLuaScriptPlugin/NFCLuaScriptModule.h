@@ -11,7 +11,7 @@
 
 #define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
 
-#include "Luaintf/LuaIntf.h"
+#include "Dependencies/Luaintf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
