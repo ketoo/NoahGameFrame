@@ -13,9 +13,7 @@ function TestModule.Init()
 	local pElementInfoModule = pPluginManager:FindElementInfoModule("NFCElementInfoModule");
 	io.write("Addr of NFCElementInfoModule " .. tostring(pElementInfoModule) .. "\n");
 
-	pLuaScriptModule:RegisterCommonPropertyEvent("TestModule.OnPropertyCommEvent");
-	pLuaScriptModule:RegisterCommonRecordEvent("TestModule.OnRecordCommonEvent");
-	pLuaScriptModule:RegisterCommonClassEvent("TestModule.OnClassCommonEvent");
+	pLuaScriptModule:AddClassEventCallBack("Player", "TestModule.OnClassCommonEvent");
 end
 
 function TestModule.AfterInit()
