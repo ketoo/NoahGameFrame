@@ -39,7 +39,7 @@ public:
 	bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
 	int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
 
-	bool AddClassEventCallBack(std::string& className, std::string& funcName);
+	bool AddClassCallBack(std::string& className, std::string& funcName);
 
 protected:
 	template<typename T>
