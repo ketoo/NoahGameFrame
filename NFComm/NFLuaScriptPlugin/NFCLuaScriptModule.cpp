@@ -83,7 +83,7 @@ bool NFCLuaScriptModule::BeforeShut()
 	return true;
 }
 
-bool NFCLuaScriptModule::AddClassEventCallBack(std::string& className, std::string& funcName)
+bool NFCLuaScriptModule::AddClassCallBack(std::string& className, std::string& funcName)
 {
 	auto newFuncName = m_ClassEventFuncMap.GetElement(className);
 	if (!newFuncName)
@@ -383,7 +383,7 @@ bool NFCLuaScriptModule::Regisger()
 		.addFunction("AddEventCallBack", &NFCLuaScriptModule::AddEventCallBack)
 		.addFunction("AddHeartBeat", &NFCLuaScriptModule::AddHeartBeat)
 		.addFunction("AddRow", &NFCLuaScriptModule::AddRow)
-		.addFunction("AddClassEventCallBack", &NFCLuaScriptModule::AddClassEventCallBack)
+		.addFunction("AddClassCallBack", &NFCLuaScriptModule::AddClassCallBack)
 		.endClass();
 
 	LuaIntf::LuaBinding(l).beginModule("KernelModule")
