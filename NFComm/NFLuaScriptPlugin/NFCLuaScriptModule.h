@@ -39,9 +39,7 @@ public:
 	bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
 	int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
 
-	bool RegisterCommonPropertyEvent(std::string& funcName);
-	bool RegisterCommonRecordEvent(std::string& funcName);
-	bool RegisterCommonClassEvent(std::string& funcName);
+	bool AddClassEventCallBack(std::string& className, std::string& funcName);
 
 protected:
 	template<typename T>
@@ -54,13 +52,7 @@ protected:
 	int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
 	int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
 
-	bool AddLuaFuncToCommonMap(NFList<std::string>& commonList, std::string& funcName);
-	template<typename ...T>
-	bool CallLuaFuncFromCommonMap(NFList<std::string>& commonList, const NFGUID& self, T... arg);
-
-	int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-	int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
 	bool Regisger();
@@ -78,13 +70,7 @@ protected:
 	NFMap<int, NFMap<NFGUID, NFList<std::string>>> m_luaEventCallBackFuncMap;
 	NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaHeartBeatCallBackFuncMap;
 
-	NFList<std::string> m_CommonPropertyEventFuncList;
-	NFList<std::string> m_CommonRecordEventFuncList;
-	NFList<std::string> m_CommonClassEventFuncList;
-
-	bool m_IsCommonPropertyEventRegistered = false;
-	bool m_IsCommonRecordEventRegistered = false;
-	bool m_IsCommonClassEventRegistered = false;
+	NFMap<std::string, std::string> m_ClassEventFuncMap;
 };
 
 #endif
