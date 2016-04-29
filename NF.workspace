@@ -40,6 +40,8 @@
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
 		<Project filename="Tutorial/Tutorial4ActorPlugin/Tutorial4ActorPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial5/Tutorial5.cbp" />
-		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />		
+		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
+		<!-- NF Tutorial -->
+		<Project filename="NFTools/NFFileProcess/NFFileProcess.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
