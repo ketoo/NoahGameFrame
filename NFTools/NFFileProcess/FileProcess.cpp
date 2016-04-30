@@ -135,12 +135,12 @@ void FileProcess::CreateStructThreadFunc()
 	CreateStructXML("../Excel_Struct/IObject.xlsx", "IObject");
 
 	// 遍历Struct文件夹下的excel文件
-	auto fileList = dfsFolder(strToolBasePath + strExcelStructPath, 0);
+	auto fileList = GetFileListInFolder(strToolBasePath + strExcelStructPath, 0);
 
 	for (auto fileName : fileList)
 	{
-		string_replace(fileName, "\\", "/");
-		string_replace(fileName, "//", "/");
+		StringReplace(fileName, "\\", "/");
+		StringReplace(fileName, "//", "/");
 		// 打开excel之后生成的临时文件，略过
 		if ((int)(fileName.find("$")) != -1)
 		{
@@ -173,7 +173,7 @@ void FileProcess::CreateStructThreadFunc()
 
 		subClassElement->SetAttribute("Id", strFileName.c_str());
 		std::string strUpFileName = strFileName;
-		transform(strUpFileName.begin(), strUpFileName.end(), strUpFileName.begin(), toupper);
+		transform(strUpFileName.begin(), strUpFileName.end(), strUpFileName.begin(), ::toupper);
 		subClassElement->SetAttribute("Type", ("TYPE_" + strUpFileName).c_str());
 
 		subClassElement->SetAttribute("Path", (strExecutePath + strXMLStructPath + strFileName + ".xml").c_str());
@@ -199,11 +199,11 @@ void FileProcess::CreateStructThreadFunc()
 void FileProcess::CreateIniThreadFunc()
 {
 	// 遍历Ini文件夹下的excel文件
-	auto fileList = dfsFolder(strToolBasePath + strExcelIniPath, 0);
+	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 	for (auto fileName : fileList)
 	{
-		string_replace(fileName, "\\", "/");
-		string_replace(fileName, "//", "/");
+		StringReplace(fileName, "\\", "/");
+		StringReplace(fileName, "//", "/");
 
 		int nLastPoint = fileName.find_last_of(".") + 1;
 		int nLastSlash = fileName.find_last_of("/") + 1;
@@ -322,7 +322,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 			}
 		}
 		std::string strUpperSheetName(strSheetName);
-		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), tolower);
+		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
 		if (strUpperSheetName == "property")
 		{
 			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
@@ -348,7 +348,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					if (cell)
 					{
 						auto valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), toupper);
+						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
 							value = valueCell == "TRUE" ? 1 : 0;
@@ -404,7 +404,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					if (cell)
 					{
 						auto valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), toupper);
+						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
 							value = valueCell == "TRUE" ? 1 : 0;
@@ -625,7 +625,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 				if (cell)
 				{
 					auto valueCell = cell->value;
-					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), toupper);
+					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 					if (valueCell == "TRUE" || valueCell == "FALSE")
 					{
 						value = valueCell == "TRUE" ? 1 : 0;
@@ -633,10 +633,9 @@ bool FileProcess::CreateIniXML(std::string strFile)
 					else
 					{
 						value = cell->value;
-					}
-
-					objectNode->SetAttribute(name.c_str(), value.c_str());
+					}					
 				}
+				objectNode->SetAttribute(name.c_str(), value.c_str());
 			}
 		}
 	}
@@ -750,9 +749,20 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				}
 
 				std::string strID = nodeElement->Attribute("Id");
-				//////////////////////////////////////////////////////////////////////////Bug here
-				//std::string strDesc = nodeElement->Attribute("Desc");
-				std::string strDesc = "Desc Has a bug wait for taking over";
+
+				auto chrDesc = nodeElement->Attribute("Desc");
+				std::string strDesc = chrDesc;
+				auto descLength = strlen(chrDesc);
+				if (IsTextUTF8(chrDesc, descLength))
+				{
+					if (descLength > 0)
+					{
+						char* chrArrDesc = new char[descLength];
+						UTF8ToGBK((char*)chrDesc, chrArrDesc, descLength);
+						strDesc = chrArrDesc;
+						delete[] chrArrDesc;
+					}
+				}
 				//////////////////////////////////////////////////////////////////////////
 				std::string strType = nodeElement->Attribute("Type");
 
@@ -809,10 +819,20 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				}
 
 				std::string strID = nodeElement->Attribute("Id");
-				//////////////////////////////////////////////////////////////////////////Bug here
-				std::string strDesc = nodeElement->Attribute("Desc");
-				strDesc = "Desc Has a bug wait for taking over";
-				//////////////////////////////////////////////////////////////////////////
+
+				auto chrDesc = nodeElement->Attribute("Desc");
+				std::string strDesc = chrDesc;
+				auto descLength = strlen(chrDesc);
+				if (IsTextUTF8(chrDesc, descLength))
+				{
+					if (descLength > 0)
+					{
+						char* chrArrDesc = new char[descLength];
+						UTF8ToGBK((char*)chrDesc, chrArrDesc, descLength);
+						strDesc = chrArrDesc;
+						delete[] chrArrDesc;
+					}
+				}
 
 				std::string toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` BLOB COMMENT '" + strDesc + "';";
 				toWrite += "\n";
