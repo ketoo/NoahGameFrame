@@ -20,6 +20,8 @@
 					<Add directory="minizip" />
 					<Add directory="tinyxml2" />
 					<Add directory="zlib" />
+					<Add directory="../../" />
+					<Add directory="../../Dependencies" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
