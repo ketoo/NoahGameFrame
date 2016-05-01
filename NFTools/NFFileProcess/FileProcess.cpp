@@ -224,12 +224,6 @@ void FileProcess::CreateIniThreadFunc()
 			continue;
 		}
 
-		// ÊÇIObject.xlsxÌø¹ý
-		if (strFileName == "IObject")
-		{
-			continue;
-		}
-
 		if (!CreateIniXML(fileName))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
