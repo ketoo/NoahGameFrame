@@ -1,4 +1,5 @@
 #include "FileProcess.h"
+#include <memory>
 
 FileProcess::FileProcess()
 {
@@ -232,7 +233,6 @@ void FileProcess::CreateIniThreadFunc()
 		if (!CreateIniXML(fileName))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
-			//return;
 		}
 	}
 }
@@ -247,7 +247,6 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		printf("can't open %s\n", strFile.c_str());
 		return false;
 	}
-
 
 	// PropertyName
 	// cpp
@@ -306,8 +305,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	root->LinkEndChild(componentNodes);
 
 	// 读取excel中每一个sheet
-	auto sheets = new std::vector<MiniExcelReader::Sheet>(x->sheets());
-	for (auto sh : *sheets)
+	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
+	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 		std::string strSheetName = sh.getName();
 		const MiniExcelReader::Range& dim = sh.getDimension();
@@ -347,7 +346,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					MiniExcelReader::Cell* cell = sh.getCell(r, c);
 					if (cell)
 					{
-						auto valueCell = cell->value;
+						std::string valueCell = cell->value;
 						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
@@ -403,7 +402,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					MiniExcelReader::Cell* cell = sh.getCell(r, c);
 					if (cell)
 					{
-						auto valueCell = cell->value;
+						std::string valueCell = cell->value;
 						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
@@ -516,10 +515,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 			strJavaEnumInfo += "\n\t};\n";
 			strCSEnumInfo += "\n\t};\n";
 		}
-
-
 	}
-
 	// cpp
 	strHPPPropertyInfo += "\t// Record\n" + strHppRecordInfo + strHppEnumInfo + "\n};\n\n";
 	fwrite(strHPPPropertyInfo.c_str(), strHPPPropertyInfo.length(), 1, hppWriter);
@@ -550,7 +546,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	}
 	structDoc->SetBOM(false);
 	structDoc->SaveFile(strXMLFile.c_str());
-
+	delete structDoc;
+	delete x;
 	return true;
 }
 
@@ -561,8 +558,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
 	if (!x->open(strFile.c_str()))
 	{
-		printf("can't open.");
-		std::cout << 1 << std::endl;
+		printf("can't open %s\n", strFile.c_str());
 		return false;
 	}
 	////////////////////////////////////////////////////////////////////////////
@@ -588,8 +584,8 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	iniDoc->LinkEndChild(root);
 
 	// 读取excel中每一个sheet
-	std::vector<MiniExcelReader::Sheet>* sheets = new std::vector<MiniExcelReader::Sheet>(x->sheets());
-	for (auto sh : *sheets)
+	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
+	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
@@ -624,7 +620,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 				MiniExcelReader::Cell* cell = sh.getCell(r, c);
 				if (cell)
 				{
-					auto valueCell = cell->value;
+					std::string valueCell = cell->value;
 					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 					if (valueCell == "TRUE" || valueCell == "FALSE")
 					{
@@ -633,13 +629,12 @@ bool FileProcess::CreateIniXML(std::string strFile)
 					else
 					{
 						value = cell->value;
-					}					
+					}
 				}
 				objectNode->SetAttribute(name.c_str(), value.c_str());
 			}
 		}
 	}
-
 	////////////////////////////////////////////////////////////////////////////
 	// 保存文件
 	int nLastPoint = strFile.find_last_of(".") + 1;
@@ -659,6 +654,8 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	iniDoc->SetBOM(false);
 	iniDoc->SaveFile(strXMLFile.c_str());
+	delete iniDoc;
+	delete x;
 	return true;
 }
 
@@ -717,6 +714,7 @@ bool FileProcess::LoadLogicClass(std::string strFile)
 		}
 	}
 
+	delete doc;
 	return true;
 }
 
@@ -847,6 +845,6 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 		}
 
 	}
-
+	delete doc;
 	return true;
 }
