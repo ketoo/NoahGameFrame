@@ -435,7 +435,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + 1, c);
 				if (cell)
 				{
-					auto valueCell = cell->value;
+					std::string valueCell = cell->value;
+					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 					if (valueCell == "TRUE" || valueCell == "FALSE")
 					{
 						value = valueCell == "TRUE" ? 1 : 0;
@@ -478,7 +479,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + 1, c);
 				if (cell)
 				{
-					auto valueCell = cell->value;
+					std::string valueCell = cell->value;
+					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 					if (valueCell == "TRUE" || valueCell == "FALSE")
 					{
 						value = valueCell == "TRUE" ? 1 : 0;
@@ -560,14 +562,12 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	tinyxml2::XMLDocument* iniDoc = new tinyxml2::XMLDocument();
 	if (NULL == iniDoc)
 	{
-		std::cout << 2 << std::endl;
 		return false;
 	}
 	//xmlÉùÃ÷
 	tinyxml2::XMLDeclaration *pDel = iniDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
 	if (NULL == pDel)
 	{
-		std::cout << 3 << std::endl;
 		return false;
 	}
 
