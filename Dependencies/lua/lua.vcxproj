@@ -23,7 +23,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -129,7 +129,6 @@
     <ClCompile Include="ltablib.c" />
     <ClCompile Include="ltm.c" />
     <ClCompile Include="lua.c" />
-    <ClCompile Include="luac.c" />
     <ClCompile Include="lundump.c" />
     <ClCompile Include="lutf8lib.c" />
     <ClCompile Include="lvm.c" />
