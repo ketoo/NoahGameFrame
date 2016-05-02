@@ -20,6 +20,8 @@
 *.app
 
 # Visaul Studio
+*.iobj
+*.ipdb
 *.idb
 *.pdb
 *.tlog
@@ -28,6 +30,7 @@
 
 # Codeblocks
 *.layout
+
 /Dependencies/gperftools-2.1
 /Dependencies/lib
 /Dependencies/boost_1_53_0
@@ -43,6 +46,14 @@
 /_Out/Comm/Debug/*.bsc
 /_Out/Comm/Debug/*.pdb
 /_Out/Comm/Debug/*.dll
+
+/_Out/Comm/Release/*.manifest
+/_Out/Comm/Release/*.exp
+/_Out/Comm/Release/*.ilk
+/_Out/Comm/Release/*.bsc
+/_Out/Comm/Release/*.pdb
+/_Out/Comm/Release/*.dll
+
 /_Out/Server/Debug/
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/

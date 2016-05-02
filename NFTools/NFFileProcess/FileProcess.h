@@ -3,8 +3,8 @@
 #include "tinyxml2.h"
 #include "MiniExcelReader.h"
 #include <algorithm>
-#include <time.h>
 #include <fstream>
+#include <sstream>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +12,6 @@
 #include <locale.h>
 #include <iostream>
 #include <vector>
-#include <sstream>
 
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
