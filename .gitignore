@@ -30,7 +30,9 @@
 
 # Codeblocks
 *.layout
+*.depend
 
+/_Out/Comm/*
 /Dependencies/gperftools-2.1
 /Dependencies/lib
 /Dependencies/boost_1_53_0

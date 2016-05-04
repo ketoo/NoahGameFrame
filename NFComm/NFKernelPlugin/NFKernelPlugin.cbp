@@ -39,6 +39,8 @@
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFKernelPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial7/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
