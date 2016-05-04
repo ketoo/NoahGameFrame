@@ -160,7 +160,7 @@ public:
         return nOffset;
     }
 
-	// Message Head[ MsgID(2) | MsgSize(4) ]
+    // Message Head[ MsgID(2) | MsgSize(4) ]
     virtual int DeCode(const char* strData)
     {
         uint32_t nOffset = 0;
@@ -347,15 +347,15 @@ public:
     {
         mnClientID = xClientID;
     }
-	const NFGUID& GetHashIdentID()
-	{
-		return mnHashIdentID;
-	}
+    const NFGUID& GetHashIdentID()
+    {
+        return mnHashIdentID;
+    }
 
-	void SetHashIdentID(const NFGUID& xHashIdentID)
-	{
-		mnHashIdentID = xHashIdentID;
-	}
+    void SetHashIdentID(const NFGUID& xHashIdentID)
+    {
+        mnHashIdentID = xHashIdentID;
+    }
 
     int GetRealFD()
     {
@@ -371,8 +371,8 @@ private:
     int32_t mnLogicState;
     int32_t mnGameID;
     NFGUID mnUserID;//player id
-	NFGUID mnClientID;//temporary client id
-	NFGUID mnHashIdentID;//hash ident, special for distributed
+    NFGUID mnClientID;//temporary client id
+    NFGUID mnHashIdentID;//hash ident, special for distributed
     NFINet* m_pNet;
     //
     int nFD;
