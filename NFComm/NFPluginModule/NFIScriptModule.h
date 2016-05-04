@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFIScriptModule
-	: public NFILogicModule
+    : public NFILogicModule
 {
 
 public:

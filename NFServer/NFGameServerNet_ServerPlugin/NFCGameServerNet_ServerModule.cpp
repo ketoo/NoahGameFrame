@@ -921,67 +921,67 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 
             //add row 需要完整的row
             NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, strRecordName);
-            if(xRecord)
+            if (xRecord)
             {
                 NFCDataList xRowDataList;
-                if(xRecord->QueryRow(nRow, xRowDataList))
+                if (xRecord->QueryRow(nRow, xRowDataList))
                 {
-                    for ( int i = 0; i < xRowDataList.GetCount(); i++ )
+                    for (int i = 0; i < xRowDataList.GetCount(); i++)
                     {
-                        switch ( xRowDataList.Type( i ) )
+                        switch (xRowDataList.Type(i))
                         {
-                        case TDATA_INT:
+                            case TDATA_INT:
                             {
                                 //添加的时候数据要全s
-                                int nValue = xRowDataList.Int( i );
+                                int nValue = xRowDataList.Int(i);
                                 //if ( 0 != nValue )
                                 {
                                     NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
-                                    pAddData->set_col( i );
-                                    pAddData->set_row( nRow );
-                                    pAddData->set_data( nValue );
+                                    pAddData->set_col(i);
+                                    pAddData->set_row(nRow);
+                                    pAddData->set_data(nValue);
                                 }
                             }
                             break;
-                        case TDATA_FLOAT:
+                            case TDATA_FLOAT:
                             {
-                                float fValue = xRowDataList.Float( i );
+                                float fValue = xRowDataList.Float(i);
                                 //if ( fValue > 0.001f  || fValue < -0.001f )
                                 {
                                     NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-                                    pAddData->set_col( i );
-                                    pAddData->set_row( nRow );
-                                    pAddData->set_data( fValue );
+                                    pAddData->set_col(i);
+                                    pAddData->set_row(nRow);
+                                    pAddData->set_data(fValue);
                                 }
                             }
                             break;
-                        case TDATA_STRING:
+                            case TDATA_STRING:
                             {
-                                const std::string& str = xRowDataList.String( i );
+                                const std::string& str = xRowDataList.String(i);
                                 //if (!str.empty())
                                 {
                                     NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
-                                    pAddData->set_col( i );
-                                    pAddData->set_row( nRow );
-                                    pAddData->set_data( str );
+                                    pAddData->set_col(i);
+                                    pAddData->set_row(nRow);
+                                    pAddData->set_data(str);
                                 }
                             }
                             break;
-                        case TDATA_OBJECT:
+                            case TDATA_OBJECT:
                             {
-                                NFGUID identValue = xRowDataList.Object( i );
+                                NFGUID identValue = xRowDataList.Object(i);
                                 //if (!identValue.IsNull())
                                 {
                                     NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
-                                    pAddData->set_col( i );
-                                    pAddData->set_row( nRow );
+                                    pAddData->set_col(i);
+                                    pAddData->set_row(nRow);
 
                                     *pAddData->mutable_data() = NFToPB(identValue);
                                 }
                             }
                             break;
-                        default:
-                            break;
+                            default:
+                                break;
                         }
                     }
 
@@ -1984,7 +1984,7 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<GateData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
