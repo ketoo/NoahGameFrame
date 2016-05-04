@@ -103,7 +103,7 @@ end
 function TestModule.HearCallBack(self, strHeartBeat, fTime, nCount)
 	local obj = NFCDataList();
 	--local s = os.clock()
-	local s = KernelModule.GetNFNowTime();
+	local s = pPluginManager:GetNowTime();
 	if oldTime == nil then
 		oldTime = s
 	end
