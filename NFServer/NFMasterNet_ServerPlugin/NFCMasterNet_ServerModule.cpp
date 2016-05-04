@@ -30,7 +30,7 @@ int NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, co
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
@@ -61,7 +61,7 @@ int NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex, 
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         mWorldMap.RemoveElement(xData.server_id());
 
 
@@ -84,7 +84,7 @@ int NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, c
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
@@ -115,7 +115,7 @@ int NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, co
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
@@ -145,7 +145,7 @@ int NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex, 
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         mLoginMap.RemoveElement(xData.server_id());
 
@@ -168,7 +168,7 @@ int NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, c
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mLoginMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
