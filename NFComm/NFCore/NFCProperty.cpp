@@ -387,7 +387,7 @@ std::string NFCProperty::ToString()
         case TDATA_STRING:
             strData = GetString();
             break;
-		case TDATA_OBJECT:
+        case TDATA_OBJECT:
             strData = GetObject().ToString();
             break;
         default:

@@ -385,25 +385,25 @@ TDATA_TYPE NFCDataList::Type(const int index) const
 
 int NFCDataList::TypeInt(const int index) const
 {
-	if (!ValidIndex(index))
-	{
-		return TDATA_UNKNOWN;
-	}
+    if (!ValidIndex(index))
+    {
+        return TDATA_UNKNOWN;
+    }
 
-	if (index < STACK_SIZE)
-	{
-		return mvList[index]->GetType();
-	}
-	else
-	{
-		const NF_SHARE_PTR<TData> pData = GetStack(index);
-		if (pData)
-		{
-			return pData->GetType();
-		}
-	}
+    if (index < STACK_SIZE)
+    {
+        return mvList[index]->GetType();
+    }
+    else
+    {
+        const NF_SHARE_PTR<TData> pData = GetStack(index);
+        if (pData)
+        {
+            return pData->GetType();
+        }
+    }
 
-	return TDATA_UNKNOWN;
+    return TDATA_UNKNOWN;
 }
 
 
@@ -571,5 +571,5 @@ const NF_SHARE_PTR<NFIDataList::TData> NFCDataList::GetStack(const int index) co
 
 bool NFCDataList::ValidIndex(int index) const
 {
-	return (index < GetCount()) && (index >= 0);
+    return (index < GetCount()) && (index >= 0);
 }
