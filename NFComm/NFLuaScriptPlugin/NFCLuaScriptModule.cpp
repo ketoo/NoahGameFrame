@@ -122,29 +122,6 @@ int NFCLuaScriptModule::OnClassEventCB(const NFGUID& self, const std::string& st
     }
 }
 
-template<typename ...T>
-bool NFCLuaScriptModule::CallLuaFuncFromCommonMap(NFList<std::string>& commonList, const NFGUID& self, T... arg)
-{
-    string funcName;
-    auto Ret = commonList.First(funcName);
-    while (Ret)
-    {
-        try
-        {
-            LuaIntf::LuaRef func(l, funcName.c_str());
-            func.call(self, arg...);
-        }
-        catch (LuaIntf::LuaException& e)
-        {
-            cout << e.what() << endl;
-            return false;
-        }
-        Ret = commonList.Next(funcName);
-    }
-    return false;
-}
-
-
 bool NFCLuaScriptModule::AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc)
 {
     if (AddLuaFuncToMap(m_luaPropertyCallBackFuncMap, self, strPropertyName, luaFunc))
