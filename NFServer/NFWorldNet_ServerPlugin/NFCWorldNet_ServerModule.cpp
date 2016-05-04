@@ -90,7 +90,7 @@ int NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const int nSockIndex
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
         if (!pServerData.get())
         {
@@ -120,7 +120,7 @@ int NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess(const int nSockInd
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         mGameMap.RemoveElement(xData.server_id());
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "GameServerRegistered");
@@ -139,7 +139,7 @@ int NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const int nSockInde
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
         if (!pServerData.get())
@@ -170,7 +170,7 @@ int NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockInde
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData)
@@ -201,7 +201,7 @@ int NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess(const int nSockIn
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         mGameMap.RemoveElement(xData.server_id());
 
@@ -222,7 +222,7 @@ int NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockInd
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
         if (!pServerData.get())
