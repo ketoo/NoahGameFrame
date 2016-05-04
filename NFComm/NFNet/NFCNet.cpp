@@ -598,7 +598,7 @@ void NFCNet::log_cb(int severity, const char* msg)
 
 bool NFCNet::IsServer()
 {
-	return mbServer;
+    return mbServer;
 }
 
 bool NFCNet::Log(int severity, const char* msg)
