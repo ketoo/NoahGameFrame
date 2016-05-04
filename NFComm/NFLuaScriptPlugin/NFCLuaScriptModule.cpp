@@ -34,7 +34,7 @@ bool NFCLuaScriptModule::Init()
 
     Regisger();
 
-    TRY_ADD_PACKAGE_PATH("../../NFDataCfg/ScriptModule"); //Add Search Path to Lua
+    TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
 
     TRY_LOAD_SCRIPT_FLE("script_init.lua");
 
@@ -274,6 +274,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
     .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFILogicClassModule>)
     .addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementInfoModule>)
+	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();
 
     LuaIntf::LuaBinding(l).beginClass<NFIElementInfoModule>("NFIElementInfoModule")
@@ -362,10 +363,6 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("AddRow", &NFCLuaScriptModule::AddRow)
     .addFunction("AddClassCallBack", &NFCLuaScriptModule::AddClassCallBack)
     .endClass();
-
-    LuaIntf::LuaBinding(l).beginModule("KernelModule")
-    .addFunction("GetNFNowTime", &NFTimeEx::GetNowTimeMille)
-    .endModule();
 
     return true;
 }
