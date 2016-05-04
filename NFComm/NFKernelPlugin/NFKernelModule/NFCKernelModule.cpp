@@ -217,17 +217,17 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
-/*
-        std::string strSrciptComponentName;
-        NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
-        while (!strSrciptComponentName.empty())
-        {
-            pComponentManager->AddComponent(strSrciptComponentName, xComponent);
+        /*
+                std::string strSrciptComponentName;
+                NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
+                while (!strSrciptComponentName.empty())
+                {
+                    pComponentManager->AddComponent(strSrciptComponentName, xComponent);
 
-            strSrciptComponentName.clear();
-            NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
-        }
-*/
+                    strSrciptComponentName.clear();
+                    NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
+                }
+        */
 
         //////////////////////////////////////////////////////////////////////////
         //配置属性
