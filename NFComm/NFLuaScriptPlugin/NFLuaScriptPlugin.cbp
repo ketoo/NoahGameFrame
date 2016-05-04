@@ -5,6 +5,7 @@
 		<Option title="NFLuaScriptPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="lua/;lua/Header/;lua/Sources/;" />
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d" prefix_auto="0" extension_auto="1" />
@@ -40,6 +41,8 @@
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/" />
 					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLuaScriptPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial7/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -86,23 +89,227 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="../../Dependencies/lua/lapi.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lapi.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lauxlib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lauxlib.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lbaselib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lbitlib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lcode.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lcode.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lcorolib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lctype.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lctype.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldblib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldebug.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldebug.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldo.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldo.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ldump.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lfunc.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lfunc.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lgc.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lgc.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/linit.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/liolib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/llex.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/llex.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/llimits.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lmathlib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lmem.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lmem.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/loadlib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lobject.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lobject.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lopcodes.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lopcodes.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/loslib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lparser.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lparser.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lprefix.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lstate.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lstate.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lstring.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lstring.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lstrlib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ltable.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ltable.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ltablib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ltm.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/ltm.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lua.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lua.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lua.hpp">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lua.vcxproj" />
+		<Unit filename="../../Dependencies/lua/lua.vcxproj.filters" />
+		<Unit filename="../../Dependencies/lua/luaconf.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lualib.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lundump.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lundump.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lutf8lib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lvm.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lvm.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lzio.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lua/Sources/" />
+		</Unit>
+		<Unit filename="../../Dependencies/lua/lzio.h">
+			<Option virtualFolder="lua/Header/" />
+		</Unit>
 		<Unit filename="NFCLuaScriptModule.cpp" />
 		<Unit filename="NFCLuaScriptModule.h" />
 		<Unit filename="NFLuaScriptPlugin.cpp" />
 		<Unit filename="NFLuaScriptPlugin.h" />
 		<Unit filename="dllmain.cpp" />
-		<Unit filename="luawrapper/ObjPush.h" />
-		<Unit filename="luawrapper/PopValue.h" />
-		<Unit filename="luawrapper/Trait.h" />
-		<Unit filename="luawrapper/TypeList.h" />
-		<Unit filename="luawrapper/any.h" />
-		<Unit filename="luawrapper/luaClass.h" />
-		<Unit filename="luawrapper/luaFunction.h" />
-		<Unit filename="luawrapper/luaObject.h" />
-		<Unit filename="luawrapper/luaWrapper.cpp" />
-		<Unit filename="luawrapper/luaWrapper.h" />
-		<Unit filename="luawrapper/luacommon.h" />
-		<Unit filename="luawrapper/utility.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
