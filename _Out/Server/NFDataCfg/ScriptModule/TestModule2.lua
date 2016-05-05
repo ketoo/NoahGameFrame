@@ -1,5 +1,7 @@
 TestModule2 = {}
 
+register_module(TestModule2,"TestModule2");
+
 function TestModule2.Init()
 	io.write("TestModule2 Init!\n");
 end
@@ -19,5 +21,3 @@ end
 function TestModule2.Shut()
 	io.write("TestModule2 Shut!\n");
 end
-
-return TestModule2
