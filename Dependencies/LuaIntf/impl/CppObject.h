@@ -408,14 +408,17 @@ struct CppObjectTraits
 };
 
 #define LUA_USING_SHARED_PTR_TYPE(SP) \
+namespace LuaIntf\
+{\
     template <typename T> \
-    struct LuaIntf::CppObjectTraits <SP<T>> \
+    struct CppObjectTraits <SP<T>> \
     { \
         using ObjectType = typename std::remove_cv<T>::type; \
         \
         static constexpr bool isSharedPtr = true; \
         static constexpr bool isSharedConst = std::is_const<T>::value; \
-    };
+    };\
+}
 
 //---------------------------------------------------------------------------
 
