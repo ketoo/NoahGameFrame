@@ -498,9 +498,7 @@ int NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, co
     }
 
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetServerNetInfo(xData.game_id());
-    if (NULL != pServerData
-        && pServerData->eState != NFMsg::EST_CRASH
-        && pServerData->eState != NFMsg::EST_MAINTEN)
+	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         //Êý¾ÝÆ¥Åä
         NetObject* pNetObject = this->GetNet()->GetNetObject(nSockIndex);
