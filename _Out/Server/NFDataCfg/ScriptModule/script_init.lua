@@ -23,14 +23,9 @@ function load_script_file(name)
 					if nil == object then
 						io.write("load_script_file " .. v .. " failed\n");
 					else
-						tblObject = object;
 						io.write("load_script_file " .. v .. " successed\n");
 					end
 				end
-			end
-
-			if tblObject ~= nil then
-				ScriptList[key].tbl = tblObject;
 			end
 		end
 	end
@@ -59,5 +54,40 @@ function reload_script_table( name )
 	io.write("----End reload lua list----\n");
 end
 
+function register_module(tbl, name)
+	if ScriptList then
+		for key, value in pairs(ScriptList) do
+			local tblObject = nil;
+			if type(value) == "table" then
+				for k, v in pairs(value) do
+					if v == name then
+						tblObject = tbl;
+					end
+				end
+			end
 
+			if tblObject ~= nil then
+				io.write("----register_module successed----\n");
+				ScriptList[key].tbl = tblObject;
+			end
+		end
+	end
 
+	if ScriptReloadList then
+		for key, value in pairs(ScriptReloadList) do
+			local tblObject = nil;
+			if type(value) == "table" then
+				for k, v in pairs(value) do
+					if v == name then
+						tblObject = tbl;
+					end
+				end
+			end
+
+			if tblObject ~= nil then
+				io.write("----register_module successed----\n");
+				ScriptReloadList[key].tbl = tblObject;
+			end
+		end
+	end
+end
