@@ -65,7 +65,7 @@ bool NFCLuaScriptModule::Shut()
 bool NFCLuaScriptModule::Execute()
 {
     //10秒钟reload一次
-    if (pPluginManager->GetNowTime() - mnTime > 5000)
+    if (pPluginManager->GetNowTime() - mnTime > 10)
     {
         mnTime = pPluginManager->GetNowTime();
         TRY_RUN_GLOBAL_SCRIPT_FUN0("ScriptModule.Execute");
