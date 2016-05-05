@@ -32,11 +32,16 @@ function load_script_file(name)
 end
 
 function reload_script_file( name )
-  if package.loaded[name] then
-	package.loaded[name] = nil
-  end
+	if package.loaded[name] then
+		package.loaded[name] = nil
+	end
   
-  load_script_file( name )
+	local object = require(name);
+	if nil == object then
+		io.write("  reload_script_file " .. name .. " failed\n");
+	else
+		io.write("  reload_script_file " .. name .. " successed\n");
+	end
 end
 
 function reload_script_table( name )
@@ -46,7 +51,8 @@ function reload_script_table( name )
 		if type(value) == "table" then
 			local tblObject = nil;
 			for k, v in pairs(value) do
-				reload_script_file(tostring(value))
+				io.write("reload script : " .. tostring(v) .. "\n");
+				reload_script_file(v)
 			end
 		end
 	end
@@ -67,7 +73,6 @@ function register_module(tbl, name)
 			end
 
 			if tblObject ~= nil then
-				io.write("----register_module successed----\n");
 				ScriptList[key].tbl = tblObject;
 			end
 		end
@@ -85,7 +90,6 @@ function register_module(tbl, name)
 			end
 
 			if tblObject ~= nil then
-				io.write("----register_module successed----\n");
 				ScriptReloadList[key].tbl = tblObject;
 			end
 		end
