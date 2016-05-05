@@ -1,8 +1,6 @@
 ﻿#include "FileProcess.h"
 #include <iostream>
 #include <chrono>
-#include <ctime>
-
 
 int main(int argc, const char *argv[])
 {

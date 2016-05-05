@@ -1,5 +1,7 @@
 TestModule = {}
 
+register_module(TestModule,"TestModule");
+
 function TestModule.Init()
 	io.write("TestModule Init!\n");
 	io.write("Addr of pPluginManager " .. tostring(pPluginManager) .. "\n");
@@ -134,5 +136,3 @@ end
 function TestModule.Shut()
 	io.write("TestModule Shut!\n");
 end
-
-return TestModule
