@@ -32,8 +32,7 @@ public:
     NFCHeartBeatElement()
     {
         fBeatTime = 0.0f;
-        //fTime = 0.0f;
-        nTime = 0;
+        nNextTriggerTime = 0;
         nCount = 0;
         strBeatName = "";
     };
@@ -45,7 +44,7 @@ public:
     void DoHeartBeatEvent();
 
     float fBeatTime;
-    NFINT64 nTime;
+    NFINT64 nNextTriggerTime;//next trigger time, millisecond
     int nCount;
     std::string strBeatName;
     NFGUID self;
