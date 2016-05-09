@@ -40,6 +40,11 @@ protected:
 	//地图流言骂战
 	void ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	//查看某地块信息
+	void ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	//查看整个大地图信息
+	void ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 };
 
