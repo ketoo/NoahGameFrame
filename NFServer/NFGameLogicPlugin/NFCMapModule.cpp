@@ -10,6 +10,7 @@
 
 bool NFCMapModule::Init()
 {
+
     return true;
 }
 
@@ -25,5 +26,7 @@ bool NFCMapModule::Execute()
 
 bool NFCMapModule::AfterInit()
 {
+	//if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroProcess)) { return false; }
+
     return true;
 }

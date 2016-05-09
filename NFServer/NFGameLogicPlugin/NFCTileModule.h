@@ -52,8 +52,6 @@ protected:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
 
-private:
-    std::map<NFGUID, std::map<int, bool>> xTileDataMap; // map<playerID, TileData>
 };
 
 #endif // !NFC_TILE_MODULE_H
