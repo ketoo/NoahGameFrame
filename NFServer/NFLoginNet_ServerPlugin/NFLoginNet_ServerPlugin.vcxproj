@@ -56,7 +56,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE;PROTOBUF_USE_DLLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir)\Dependencies\Theron\Include\</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -81,7 +81,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE;PROTOBUF_USE_DLLS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir)\Dependencies\Theron\Include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
