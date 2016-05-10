@@ -54,7 +54,7 @@ public:
 
     NFCModuleHeartBeatElement()
     {
-        fBeatTime = 0.0f;
+        nBeatTime = 0;
         nNextTriggerTime = 0;
         strBeatName = "";
     };
@@ -65,7 +65,7 @@ public:
 
     void DoHeartBeatEvent();
 
-    float fBeatTime;
+    NFINT64 nBeatTime;
     NFINT64 nNextTriggerTime;//next trigger time, millisecond
     std::string strBeatName;
 };
@@ -129,12 +129,12 @@ public:
     }
 
     template<typename BaseType>
-    bool AddHeartBeatExecute(BaseType* pBase, int (BaseType::*handler)(), const float fTime)
+    bool AddHeartBeatExecute(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(), const float fTime)
     {
         MODULE_HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase);
         MODULE_HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW MODULE_HEART_BEAT_FUNCTOR(functor));
 
-        return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
+        return AddHeartBeat(strHeartBeatName, functorPtr, fTime);
     }
 
     bool RemoveHeartBeat(const std::string& strHeartBeatName)
@@ -150,13 +150,11 @@ protected:
     NFIPluginManager* pPluginManager;
 
 private:
-    bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime)
+    bool AddHeartBeat(const std::string& strHeartBeatName, const MODULE_HEART_BEAT_FUNCTOR_PTR& cb, const int nTime)
     {
         NFCModuleHeartBeatElement xHeartBeat;
-        xHeartBeat.nNextTriggerTime = NFTimeEx::GetNowTimeMille() + (NFINT64)(fTime * 1000);
-        xHeartBeat.fBeatTime = fTime;
-        xHeartBeat.nCount = ;
-        xHeartBeat.self = NFGUID();
+        xHeartBeat.nNextTriggerTime = time(NULL) + nTime;
+        xHeartBeat.nBeatTime = nTime;
         xHeartBeat.strBeatName = strHeartBeatName;
         xHeartBeat.Add(cb);
         mAddListEx.push_back(xHeartBeat);
@@ -167,25 +165,16 @@ private:
         NF_SHARE_PTR<NFCModuleHeartBeatElement> pElement = mHeartBeatElementMapEx.First();
         while (pElement.get())
         {
-            //millisecond
-            NFINT64 nTime = NFTimeEx::GetNowTimeMille();
+            //second
+            NFINT64 nTime = time(NULL);
 
-            if (nTime > pElement->nNextTriggerTime && pElement->nCount > 0)
+            if (nTime > pElement->nNextTriggerTime)
             {
-                pElement->nCount--;
 
                 pElement->DoHeartBeatEvent();
 
-                if (pElement->nCount <= 0)
-                {
-                    //µÈ´ýÉ¾³ý
-                    mRemoveListEx.Add(pElement->strBeatName);
-                }
-                else
-                {
-                    //Do Event
-                    pElement->nNextTriggerTime = nTime + NFINT64(pElement->fBeatTime * 1000);
-                }
+                //Do Event
+                pElement->nNextTriggerTime = nTime + pElement->nBeatTime;
             }
 
             pElement = mHeartBeatElementMapEx.Next();
