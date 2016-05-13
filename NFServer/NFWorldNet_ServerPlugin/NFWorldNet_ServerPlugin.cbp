@@ -30,11 +30,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.so" />
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -68,11 +68,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/mysql/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
+					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.so" />
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFNet.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.so" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
