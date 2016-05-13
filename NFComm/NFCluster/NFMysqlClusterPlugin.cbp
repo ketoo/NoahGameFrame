@@ -30,7 +30,7 @@
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlclient.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
@@ -76,7 +76,7 @@
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlclient.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
+					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
