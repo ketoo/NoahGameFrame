@@ -49,6 +49,9 @@ chmod -R 755 *
 ./configure CXXFLAGS=-fPIC
 make
 
+if [ ! -d ../../_Out/Comm/ ]; then
+ mkdir ../../_Out/Comm/
+fi
 if [ ! -d ../../_Out/Comm/Debug/ ]; then
  mkdir ../../_Out/Comm/Debug/
 fi
