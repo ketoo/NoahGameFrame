@@ -29,11 +29,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.so" />
+					<Add library="libNFMessageDefine_d" />
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -66,11 +66,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.so" />
+					<Add library="libNFMessageDefine" />
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFNet.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.so" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
