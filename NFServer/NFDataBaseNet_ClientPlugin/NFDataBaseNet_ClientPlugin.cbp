@@ -32,8 +32,8 @@
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.so" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
+					<Add library="libNFMessageDefine_d" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -80,8 +80,8 @@
 				</Compiler>
 				<Linker>
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.so" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.so" />
+					<Add library="libNFMessageDefine" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
