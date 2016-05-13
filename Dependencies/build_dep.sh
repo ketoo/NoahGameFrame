@@ -55,8 +55,8 @@ fi
 if [ ! -d ../../_Out/Comm/Debug/ ]; then
  mkdir ../../_Out/Comm/Debug/
 fi
-if [ ! -d ./../_Out/Comm/Release/ ]; then
- mkdir ./../_Out/Comm/Release/
+if [ ! -d ../../_Out/Comm/Release/ ]; then
+ mkdir ../../_Out/Comm/Release/
 fi
 
 cp -r -f ./src/.libs/*.so ../lib/Debug/
