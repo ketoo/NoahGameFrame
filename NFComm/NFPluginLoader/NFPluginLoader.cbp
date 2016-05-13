@@ -27,6 +27,7 @@
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
+					<Add option="-Wl,-R\\$$$$ORIGIN" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
@@ -70,6 +71,7 @@
 				<Linker>
 					<Add option="-ldl" />
 					<Add option="-lpthread" />
+					<Add option="-Wl,-R\\$$$$ORIGIN" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
