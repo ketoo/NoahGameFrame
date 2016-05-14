@@ -33,8 +33,6 @@ bool NFCLogicClassModule::Shut()
 
 NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 {
-    mnPropertyIndex = NF_GetTickCount() % 10 + 1;
-
     pPluginManager = p;
 
     // 判断 *.xml 是否存在，如果不存在，用 *.NF
