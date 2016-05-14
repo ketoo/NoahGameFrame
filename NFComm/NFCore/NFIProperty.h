@@ -11,6 +11,7 @@
 
 #include "NFDefine.h"
 #include "NFIDataList.h"
+#include "NFList.h"
 
 class NFIProperty
 {
