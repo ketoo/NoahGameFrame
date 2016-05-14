@@ -214,7 +214,8 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 break;
         }
 
-        pElementPropertyManager->SetProperty(pstrConfigName, var);
+        temProperty->SetValue(var);
+
     }
 
     NFIDataList::TData xData;
