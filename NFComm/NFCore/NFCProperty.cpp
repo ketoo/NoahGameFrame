@@ -20,17 +20,16 @@ NFCProperty::NFCProperty()
     msPropertyName = "";
 }
 
-NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
+NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, const std::string& strRelationValue)
 {
 
     mbPublic = bPublic;
     mbPrivate = bPrivate;
     mbSave = bSave;
-    mbView = bView;
-    mnIndex = nIndex;
     mSelf = self;
 
     msPropertyName = strPropertyName;
+    mstrRelationValue = strRelationValue;
     eType = varType;
 }
 
@@ -120,7 +119,7 @@ const int NFCProperty::GetIndex() const
 
 const std::string& NFCProperty::GetRelationValue() const
 {
-    return NULL_STR;//msScriptFunction;
+    return mstrRelationValue;
 }
 
 void NFCProperty::SetSave(bool bSave)
@@ -143,9 +142,9 @@ void NFCProperty::SetPrivate(bool bPrivate)
     mbPrivate = bPrivate;
 }
 
-void NFCProperty::SetScriptFunction(const std::string& strScriptFunction)
+void NFCProperty::SetRelationValue(const std::string& strRelationValue)
 {
-    //msScriptFunction = strScriptFunction;
+    mstrstrRelationValue = strstrRelationValue;
 }
 
 NFINT64 NFCProperty::GetInt() const
@@ -387,7 +386,7 @@ std::string NFCProperty::ToString()
         case TDATA_STRING:
             strData = GetString();
             break;
-        case TDATA_OBJECT:
+		case TDATA_OBJECT:
             strData = GetObject().ToString();
             break;
         default:
