@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_MANAGER_H
-#define _NFI_ACTOR_MANAGER_H
+#ifndef NFI_ACTOR_MANAGER_H
+#define NFI_ACTOR_MANAGER_H
 
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFIComponent.h"
@@ -58,6 +58,7 @@ public:
 
     virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex) = 0;
     virtual bool ReleaseActor(const int nActorIndex) = 0;
+    virtual void ReloadPlugin() = 0;
 
     virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg) = 0;
 
