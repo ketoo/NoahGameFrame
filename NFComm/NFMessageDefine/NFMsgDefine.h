@@ -9,16 +9,18 @@
 #ifndef NF_MSGDEFINE_H
 #define NF_MSGDEFINE_H
 
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFCore/NFIRecordManager.h"
+#include "NFComm/NFCore/NFIPropertyManager.h"
+#include "NFComm/NFCore/NFList.h"
 #include "NFLimit.h"
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
 #include "NFMsgBaseEx.pb.h"
 #include "NFMsgPreGame.pb.h"
 #include "NFMsgShare.pb.h"
-#include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFComm/NFCore/NFIRecordManager.h"
-#include "NFComm/NFCore/NFIPropertyManager.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFMsgURl.pb.h"
+#include "NFMsgMysql.pb.h"
 
 // -------------------------------------------------------------------------
 #pragma pack(push,1)

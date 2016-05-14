@@ -8,7 +8,7 @@
 
 #include "NFCWorldNet_ServerModule.h"
 #include "NFWorldNet_ServerPlugin.h"
-#include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 bool NFCWorldNet_ServerModule::Init()
 {
