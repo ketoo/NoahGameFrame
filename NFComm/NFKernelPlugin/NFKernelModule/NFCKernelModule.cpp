@@ -185,8 +185,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
                                           pStaticConfigPropertyInfo->GetPublic(),
                                           pStaticConfigPropertyInfo->GetPrivate(),
                                           pStaticConfigPropertyInfo->GetSave(),
-                                          pStaticConfigPropertyInfo->GetIndex(),
-                                          pStaticConfigPropertyInfo->GetView(),
                                           pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
@@ -1243,12 +1241,12 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
     return false;
 }
 
-bool NFCKernelModule::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
+bool NFCKernelModule::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, const std::string& strRelativeValue)
 {
     NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
     if (pObject.get())
     {
-        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
+        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, strRelativeValue);
 
         //通用回调，方便NET同步
         return pObject->AddPropertyCallBack(strPropertyName, this, &NFCKernelModule::OnPropertyCommonEvent);
