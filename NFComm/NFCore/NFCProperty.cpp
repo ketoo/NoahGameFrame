@@ -432,10 +432,10 @@ bool NFCProperty::DeSerialization()
     const TDATA_TYPE eType = GetType();
     if(eType == TDATA_STRING)
     {
-        NFCDataList xDataList();
+        NFCDataList xDataList;
         const std::string& strData = mxData->GetString();
 
-        xDataList.Split(strData.c_str(), ";")
+        xDataList.Split(strData.c_str(), ";")£»
         for(int i = 0; i < xDataList.GetCount(); ++i)
         {
             if(nullptr == mxEmbeddedList)
@@ -460,8 +460,8 @@ bool NFCProperty::DeSerialization()
             std::string strTemData;
             for(bool bListRet = mxEmbeddedList->First(strTemData); bListRet == true; bListRet = mxEmbeddedList->Next(strTemData))
             {
-                NFCDataList xTemDataList();
-                xTemDataList.Split(strTemData.c_str(), ",")
+                NFCDataList xTemDataList;
+                xTemDataList.Split(strTemData.c_str(), ",")£»
                 if(xTemDataList.GetCount() > 0)
                 {
                     if (xTemDataList.GetCount() != 2)
