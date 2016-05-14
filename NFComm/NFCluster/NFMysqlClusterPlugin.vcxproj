@@ -55,7 +55,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;NFDATABASEPLUGIN_EXPORTS;WIN32_LEAN_AND_MEAN;PROTOBUF_USE_DLLS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;NFDATABASEPLUGIN_EXPORTS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include\;$(SolutionDir)\Dependencies\mysql\;$(SolutionDir)\Dependencies\mysqlpp\;$(SolutionDir)\Dependencies\protobuf\src\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -89,7 +89,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN;NDEBUG;_WINDOWS;_USRDLL;NFDATABASEPLUGIN_EXPORTS;WIN32_LEAN_AND_MEAN;PROTOBUF_USE_DLLS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN;NDEBUG;_WINDOWS;_USRDLL;NFDATABASEPLUGIN_EXPORTS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\Theron\Include\;$(SolutionDir)\Dependencies\mysql\;$(SolutionDir)\Dependencies\mysqlpp\;$(SolutionDir)\Dependencies\protobuf\src\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

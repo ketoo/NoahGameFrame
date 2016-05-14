@@ -13,7 +13,7 @@
 #include "Dependencies/curl/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
-#include "NFComm/NFMessageDefine/NFMsgURl.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 
 int NFCURLComponent::OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
