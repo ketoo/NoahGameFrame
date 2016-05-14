@@ -42,14 +42,14 @@ public:
     virtual const std::string& GetString() const = 0;
     virtual const NFGUID& GetObject() const = 0;
 
+    virtual const NFIDataList::TData& GetValue() const = 0;
     virtual bool Changed() const = 0;
 
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    virtual const NFIDataList::TData& GetValue() const = 0;
     virtual std::string ToString() = 0;
     virtual bool FromString(const std::string& strData) = 0;
+    virtual bool DeSerialization() = 0;
 
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 };
 
 #endif

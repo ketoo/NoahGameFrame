@@ -50,16 +50,18 @@ public:
     virtual const std::string& GetString() const;
     virtual const NFGUID& GetObject() const;
 
-    virtual bool Changed() const;
-
-    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
-
     virtual const NFIDataList::TData& GetValue() const;
-
-    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    virtual bool Changed() const;
 
     virtual std::string ToString();
     virtual bool FromString(const std::string& strData);
+    virtual bool DeSerialization();
+
+    virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
+
+private:
+    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
     TPROPERTYCALLBACKEX mtPropertyCallback;
@@ -70,7 +72,7 @@ private:
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
 
     NF_SHARE_PTR<NFIDataList::TData> mxData;
-    NF_SHARE_PTR<NFMap<std::string, std::string>> mxEmbeddedMap;
+    NF_SHARE_PTR<NFMapEx<std::string, std::string>> mxEmbeddedMap;
     NF_SHARE_PTR<NFList<std::string>> mxEmbeddedList;
 
     bool mbPublic;
