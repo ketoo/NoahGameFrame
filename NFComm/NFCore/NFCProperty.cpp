@@ -97,11 +97,6 @@ const bool NFCProperty::GetSave() const
     return mbSave;
 }
 
-const bool NFCProperty::GetView() const
-{
-    return mbView;
-}
-
 const bool NFCProperty::GetPublic() const
 {
     return mbPublic;
@@ -112,11 +107,6 @@ const bool NFCProperty::GetPrivate() const
     return mbPrivate;
 }
 
-const int NFCProperty::GetIndex() const
-{
-    return mnIndex;
-};
-
 const std::string& NFCProperty::GetRelationValue() const
 {
     return mstrRelationValue;
@@ -125,11 +115,6 @@ const std::string& NFCProperty::GetRelationValue() const
 void NFCProperty::SetSave(bool bSave)
 {
     mbSave = bSave;
-}
-
-void NFCProperty::SetView(bool bView)
-{
-    mbView = bView;
 }
 
 void NFCProperty::SetPublic(bool bPublic)
@@ -144,7 +129,7 @@ void NFCProperty::SetPrivate(bool bPrivate)
 
 void NFCProperty::SetRelationValue(const std::string& strRelationValue)
 {
-    mstrstrRelationValue = strstrRelationValue;
+    mstrRelationValue = strRelationValue;
 }
 
 NFINT64 NFCProperty::GetInt() const
