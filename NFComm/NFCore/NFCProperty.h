@@ -51,8 +51,8 @@ public:
     virtual const NFGUID& GetObject() const;
 
     virtual const NFIDataList::TData& GetValue() const;
-    virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const = 0;
-    virtual const NF_SHARE_PTR<NFMapEx<std::string, std::string>> GetEmbeddedMap() const = 0;
+    virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const;
+    virtual const NF_SHARE_PTR<NFMapEx<std::string, std::string>> GetEmbeddedMap() const;
 
     virtual bool Changed() const;
 
