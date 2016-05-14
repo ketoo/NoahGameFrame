@@ -76,16 +76,15 @@ bool NFCActorManager::Execute()
 
 void NFCActorManager::ReloadPlugin()
 {
-    //need to tell plugin, there need reload
-    //warning: the network will init again
-    //so, there need a configure data to tell pluginmanager, who need to reload, but because all module interface be used in others, so all need to reload
-    pPluginManager->ReLoadState();
+    pPluginManager->StartReLoadState();
 
     BeforeShut();
     Shut();
 
     Init();
     AfterInit();
+
+    pPluginManager->EndReLoadState();
 }
 
 int NFCActorManager::RequireActor()
