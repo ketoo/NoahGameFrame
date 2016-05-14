@@ -8,8 +8,7 @@
 
 
 #include "NFCDataProcessModule.h"
-#include "NFComm/NFMessageDefine/NFDefine.pb.h"
-#include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
