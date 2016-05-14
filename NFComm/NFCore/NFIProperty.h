@@ -28,17 +28,14 @@ public:
     virtual const bool GeUsed() const = 0;
     virtual const std::string& GetKey() const = 0;
     virtual const bool GetSave() const = 0;
-    virtual const bool GetView() const = 0;
     virtual const bool GetPublic() const = 0;
     virtual const bool GetPrivate() const = 0;
-    virtual const int GetIndex() const = 0;
     virtual const std::string& GetRelationValue() const = 0;
 
     virtual void SetSave(bool bSave) = 0;
-    virtual void SetView(bool bView) = 0;
     virtual void SetPublic(bool bPublic) = 0;
     virtual void SetPrivate(bool bPrivate) = 0;
-    virtual void SetScriptFunction(const std::string& strScriptFunction) = 0;
+    virtual void SetRelation(const std::string& strRelation) = 0;
 
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;
