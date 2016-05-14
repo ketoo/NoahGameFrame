@@ -9,7 +9,7 @@
 #include "NFCWorldToMasterModule.h"
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 bool NFCWorldToMasterModule::Init()
 {
