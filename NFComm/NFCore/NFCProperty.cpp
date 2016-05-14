@@ -486,7 +486,7 @@ bool NFCProperty::DeSerialization()
                         mxEmbeddedMap->ClearAll();
                     }
 
-                    mxEmbeddedMap->AddElement(strKey, NF_SHARE_PTR<std::string>(NF_NEW std::string(strValue)))
+                    mxEmbeddedMap->AddElement(strKey, NF_SHARE_PTR<std::string>(NF_NEW std::string(strValue)));
                 }
             }
 
