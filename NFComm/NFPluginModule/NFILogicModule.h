@@ -78,7 +78,7 @@ class NFILogicModule
 public:
     NFILogicModule()
     {
-        bCanReload = true;
+        mbReloading = false;
     }
 
     virtual ~NFILogicModule() {}
@@ -114,13 +114,16 @@ public:
         return true;
     }
 
-    virtual void OnReload(const char* strModuleName, NFILogicModule* pModule)
+    virtual bool StartReLoadState()
     {
-        BeforeShut();
-        Shut();
+        mbReloading = true
+        return true;
+    }
 
-        Init();
-        AfterInit();
+    virtual bool EndReLoadState()
+    {
+        mbReloading = false;
+        return true;
     }
 
     virtual NFIPluginManager* GetPluginManager() const
@@ -141,10 +144,14 @@ public:
     {
         return mRemoveListEx.Add(strHeartBeatName);
     }
-
+	
+	bool Loading()
+    {
+        return mbReloading;
+    }
 public:
     std::string strName;
-    bool  bCanReload;
+
 
 protected:
     NFIPluginManager* pPluginManager;
@@ -207,8 +214,9 @@ private:
         mAddListEx.clear();
     }
 
-
 private:
+
+    bool  mbReloading;
     NFList<std::string> mRemoveListEx;
     std::list<NFCModuleHeartBeatElement> mAddListEx;
     NFMapEx<std::string, NFCModuleHeartBeatElement> mHeartBeatElementMapEx;
