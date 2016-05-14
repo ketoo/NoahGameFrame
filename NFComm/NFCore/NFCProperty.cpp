@@ -496,3 +496,13 @@ bool NFCProperty::DeSerialization()
 
     return bRet;
 }
+
+const NF_SHARE_PTR<NFList<std::string>> NFCProperty::GetEmbeddedList() const
+{
+    return this->mxEmbeddedList;
+}
+
+const NF_SHARE_PTR<NFMapEx<std::string, std::string>> NFCProperty::GetEmbeddedMap() const
+{
+    return this->mxEmbeddedMap;
+}
