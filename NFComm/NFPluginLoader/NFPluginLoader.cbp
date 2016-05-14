@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFPluginLoader_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="../../_Out/Server/Debug/NFLoginServer" />
 				<Option object_output=".objs/Debug" />
 				<Option type="1" />
 				<Option compiler="gcc" />
