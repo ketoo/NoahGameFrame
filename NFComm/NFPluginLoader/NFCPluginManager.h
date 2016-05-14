@@ -20,7 +20,7 @@ class NFCPluginManager
     : public NFIPluginManager
 {
 public:
-    NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager);
+    NFCPluginManager(NFIActorManager* pManager);
     virtual ~NFCPluginManager();
 
     virtual bool Init();
