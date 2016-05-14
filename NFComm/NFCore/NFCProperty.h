@@ -11,6 +11,7 @@
 
 #include "NFDefine.h"
 #include "NFMap.h"
+#include "NFList.h"
 #include "NFCDataList.h"
 #include "NFIProperty.h"
 
@@ -19,7 +20,7 @@ class NFCProperty : public NFIProperty
 public:
     NFCProperty();
 
-    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex, const std::string& strScriptFunction);
+    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, const std::string& strRelativeValue);
 
     virtual ~NFCProperty();
 
@@ -35,17 +36,14 @@ public:
     virtual const bool GeUsed() const;
     virtual const std::string& GetKey() const;
     virtual const bool GetSave() const;
-    virtual const bool GetView() const;
     virtual const bool GetPublic() const;
     virtual const bool GetPrivate() const;
-    virtual const int GetIndex() const;
     virtual const std::string& GetRelationValue() const;
 
     virtual void SetSave(bool bSave);
-    virtual void SetView(bool bView);
     virtual void SetPublic(bool bPublic);
     virtual void SetPrivate(bool bPrivate);
-    virtual void SetScriptFunction(const std::string& strScriptFunction);
+    virtual void SetRelation(const std::string& strRelation);
 
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
@@ -68,17 +66,16 @@ private:
 
     NFGUID mSelf;
     std::string msPropertyName;//可以想办法与基本类型共用
+    std::string mstrRelationValue;
     TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
-    //NFCDataList    mVarProperty;
-    //NFIDataList::TData* m_pTData;
+
     NF_SHARE_PTR<NFIDataList::TData> mxData;
+    NF_SHARE_PTR<NFMap<std::string, std::string>> mxEmbeddedMap;
+    NF_SHARE_PTR<NFList<std::string>> mxEmbeddedList;
 
     bool mbPublic;
     bool mbPrivate;
     bool mbSave;
-    bool mbView;
-    NFINT16 mnIndex;//属性编号，用于同步时识别
-    //std::string msScriptFunction;
 };
 
 #endif
