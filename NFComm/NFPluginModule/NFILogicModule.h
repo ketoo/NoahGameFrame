@@ -116,7 +116,7 @@ public:
 
     virtual bool StartReLoadState()
     {
-        mbReloading = true
+        mbReloading = true;
         return true;
     }
 
@@ -144,8 +144,8 @@ public:
     {
         return mRemoveListEx.Add(strHeartBeatName);
     }
-	
-	bool Loading()
+
+	bool Loading() const
     {
         return mbReloading;
     }
