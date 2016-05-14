@@ -35,7 +35,7 @@ public:
     virtual void SetSave(bool bSave) = 0;
     virtual void SetPublic(bool bPublic) = 0;
     virtual void SetPrivate(bool bPrivate) = 0;
-    virtual void SetRelation(const std::string& strRelation) = 0;
+    virtual void SetRelationValue(const std::string& strRelation) = 0;
 
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;
