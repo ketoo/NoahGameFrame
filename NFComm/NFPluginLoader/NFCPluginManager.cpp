@@ -40,6 +40,20 @@
 
 #endif
 
+NFCPluginManager::NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
+{
+   m_pActorManager = pManager;
+   mnAppID = 0;
+   mnInitTime = time(NULL);
+   mnNowTime = mnInitTime;
+
+   mstrConfigPath = "";
+}
+
+NFCPluginManager::~NFCPluginManager()
+{
+
+}
 
 bool NFCPluginManager::LoadPlugin()
 {
@@ -119,7 +133,7 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
     }
 }
 
-void NFCPluginManager::UnsRegistered(NFIPlugin* plugin)
+void NFCPluginManager::UnRegistered(NFIPlugin* plugin)
 {
     PluginInstanceMap::iterator it = mPluginInstanceMap.find(plugin->GetPluginName());
     if (it != mPluginInstanceMap.end())
@@ -261,8 +275,6 @@ bool NFCPluginManager::BeforeShut()
 
 bool NFCPluginManager::Shut()
 {
-
-
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
     for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
@@ -363,41 +375,31 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
     return false;
 }
 
-bool NFCPluginManager::ReInitialize()
+bool NFCPluginManager::StartReLoadState()
 {
+    NFILogicModule::StartReLoadState();
+
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
     for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
     {
-        itBeforeInstance->second->BeforeShut();
-    }
-
-    PluginInstanceMap::iterator itShutDownInstance = mPluginInstanceMap.begin();
-    for (itShutDownInstance; itShutDownInstance != mPluginInstanceMap.end(); itShutDownInstance++)
-    {
-        itShutDownInstance->second->Shut();
-    }
-
-    PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-    for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
-    {
-        itInstance->second->Init();
-    }
-
-    PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
-    for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
-    {
-        itAfterInstance->second->AfterInit();
-    }
-
-    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
-    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
-    {
-        itCheckInstance->second->CheckConfig();
+        itBeforeInstance->second->StartReLoadState();
     }
 
     return true;
 }
 
+bool NFCPluginManager::EndReLoadState()
+{
+    PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
+    for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
+    {
+        itBeforeInstance->second->EndReLoadState();
+    }
+
+    NFILogicModule::EndReLoadState();
+
+    return true;
+}
 
 void NFCPluginManager::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
 {
