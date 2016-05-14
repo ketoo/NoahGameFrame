@@ -17,12 +17,23 @@ NFCActorManager::NFCActorManager()
     m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
     pPluginManager = NF_NEW NFCPluginManager(this);
 
+    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
+}
+
+NFCActorManager::~NFCActorManager()
+{
+    m_pMainActor.reset();
+    m_pMainActor = nullptr;
+
+    delete pPluginManager;
+    pPluginManager = NULL;
+
+    delete m_pFramework;
+    m_pFramework = NULL;
 }
 
 bool NFCActorManager::Init()
 {
-    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
-
     pPluginManager->Init();
 
     return true;
@@ -44,9 +55,6 @@ bool NFCActorManager::CheckConfig()
 
 bool NFCActorManager::BeforeShut()
 {
-    m_pMainActor.reset();
-    m_pMainActor = nullptr;
-
     pPluginManager->BeforeShut();
 
     return true;
@@ -54,9 +62,6 @@ bool NFCActorManager::BeforeShut()
 
 bool NFCActorManager::Shut()
 {
-    delete m_pFramework;
-    m_pFramework = NULL;
-
     pPluginManager->Shut();
 
     return true;
@@ -67,6 +72,20 @@ bool NFCActorManager::Execute()
     pPluginManager->Execute();
 
     return true;
+}
+
+void NFCActorManager::ReloadPlugin()
+{
+    //need to tell plugin, there need reload
+    //warning: the network will init again
+    //so, there need a configure data to tell pluginmanager, who need to reload, but because all module interface be used in others, so all need to reload
+    pPluginManager->ReLoadState();
+
+    BeforeShut();
+    Shut();
+
+    Init();
+    AfterInit();
 }
 
 int NFCActorManager::RequireActor()
