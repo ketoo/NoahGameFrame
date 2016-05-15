@@ -430,23 +430,26 @@ bool NFCProperty::DeSerialization()
     bool bRet = false;
 
     const TDATA_TYPE eType = GetType();
-    if (eType == TDATA_STRING)
+    if (eType == TDATA_STRING && mxData && !mxData->IsNullValue())
     {
         NFCDataList xDataList;
         const std::string& strData = mxData->GetString();
 
         xDataList.Split(strData.c_str(), ";");
+		if (xDataList.GetCount() > 0)
+		{
+			if (nullptr == mxEmbeddedList)
+			{
+				mxEmbeddedList = NF_SHARE_PTR<NFList<std::string>>(NF_NEW NFList<std::string>());
+			}
+			else
+			{
+				mxEmbeddedList->ClearAll();
+			}
+		}
+
         for (int i = 0; i < xDataList.GetCount(); ++i)
         {
-            if (nullptr == mxEmbeddedList)
-            {
-                mxEmbeddedList = NF_SHARE_PTR<NFList<std::string>>(NF_NEW NFList<std::string>());
-            }
-            else
-            {
-                mxEmbeddedList->ClearAll();
-            }
-
             if(xDataList.String(i).empty())
             {
                 NFASSERT(0, strData, __FILE__, __FUNCTION__);
@@ -457,6 +460,15 @@ bool NFCProperty::DeSerialization()
 
         if (nullptr != mxEmbeddedList && mxEmbeddedList->Count() > 0)
         {
+			if (nullptr == mxEmbeddedMap)
+			{
+				mxEmbeddedMap = NF_SHARE_PTR<NFMapEx<std::string, std::string>>(NF_NEW NFMapEx<std::string, std::string>());
+			}
+			else
+			{
+				mxEmbeddedMap->ClearAll();
+			}
+
             std::string strTemData;
             for (bool bListRet = mxEmbeddedList->First(strTemData); bListRet == true; bListRet = mxEmbeddedList->Next(strTemData))
             {
@@ -464,6 +476,11 @@ bool NFCProperty::DeSerialization()
                 xTemDataList.Split(strTemData.c_str(), ",");
                 if (xTemDataList.GetCount() > 0)
                 {
+					if (mxEmbeddedList->Count() == 1 && xTemDataList.GetCount() == 1)
+					{
+						return bRet;
+					}
+
                     if (xTemDataList.GetCount() != 2)
                     {
                         NFASSERT(0, strTemData, __FILE__, __FUNCTION__);
@@ -475,15 +492,6 @@ bool NFCProperty::DeSerialization()
                     if (strKey.empty() || strValue.empty())
                     {
                         NFASSERT(0, strTemData, __FILE__, __FUNCTION__);
-                    }
-
-                    if (nullptr == mxEmbeddedMap)
-                    {
-                        mxEmbeddedMap = NF_SHARE_PTR<NFMapEx<std::string, std::string>>(NF_NEW NFMapEx<std::string, std::string>());
-                    }
-                    else
-                    {
-                        mxEmbeddedMap->ClearAll();
                     }
 
                     mxEmbeddedMap->AddElement(strKey, NF_SHARE_PTR<std::string>(NF_NEW std::string(strValue)));
