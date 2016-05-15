@@ -574,3 +574,19 @@ int NFCProxyServerNet_ServerModule::EnterGameSuccessEvent(const NFGUID xClientID
 
     return 0;
 }
+
+int NFCProxyServerNet_ServerModule::SwitcheGameSuccess(const NFGUID xClientID, const NFGUID xPlayerID, const int nGameID)
+{
+	NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(xClientID);
+	if (pFD)
+	{
+		NetObject* pNetObeject = GetNet()->GetNetObject(*pFD);
+		if (pNetObeject)
+		{
+			pNetObeject->SetUserID(xPlayerID);
+			pNetObeject->SetGameID(nGameID);
+		}
+	}
+
+	return 0;
+}

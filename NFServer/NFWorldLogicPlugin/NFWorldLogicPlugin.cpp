@@ -9,6 +9,7 @@
 
 #include "NFCWorldLogicModule.h"
 #include "NFWorldLogicPlugin.h"
+#include "NFCWSSwichServerModule.h"
 
 //
 //
@@ -41,10 +42,12 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 void NFWorldLogicPlugin::Install()
 {
 
-    REGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
+	REGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
+	REGISTER_MODULE(pPluginManager, NFCWSSwichServerModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
+	UNREGISTER_MODULE(pPluginManager, NFCWSSwichServerModule)
+	UNREGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
 }

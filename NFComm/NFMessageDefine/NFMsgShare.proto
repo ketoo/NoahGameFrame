@@ -522,3 +522,23 @@ message ReqSendMail
     repeated ItemStruct item_list           = 3; // 
     repeated CurrencyStruct currency_list   = 4;
 }
+
+//EGEC_REQSWICHSERVER							= 210;		 // 申请转服
+message ReqSwitchServer
+{
+    required Ident      selfid              = 1; // 角色ID
+	required int64      self_serverid		= 2; // 本来所在的服务器
+    required int64      target_serverid		= 3; // 目标ID
+	required int64      gate_serverid		= 4; // 目标ID
+	required int64      SceneID				= 5; // 
+	required Ident      client_id			= 6; // 客户端id
+}
+
+//EGEC_ACKSWICHSERVER							= 211;		 // 申请转服
+message AckSwitchServer
+{
+    required Ident      selfid              = 1; // 角色ID
+    required int64      self_serverid		= 2; // 目标ID
+	required int64      target_serverid		= 3; // 目标ID
+	required int64      gate_serverid		= 4; // 目标ID
+}

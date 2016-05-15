@@ -259,6 +259,9 @@ enum EGameMsgID
 	EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
 	EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
 	EGMI_ACK_CLONE_RECORD_SORT						= 829;
+	
+	EGMI_REQSWICHSERVER								= 840;		 // 申请转服
+	EGMI_ACKSWICHSERVER								= 841;		 // 申请转服
 
     
 	/////////////////////GM MSG/////////////////////////////////////订阅

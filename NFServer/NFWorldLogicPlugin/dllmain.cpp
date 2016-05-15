@@ -4,6 +4,8 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "NFCore_d.lib" )
+#pragma comment( lib, "NFMessageDefine_d.lib" )
+#pragma comment( lib, "libprotobuf_d.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 ////#pragma comment( lib, "RakNet_LibStatic_Debug_x64.a" )
 #pragma comment( lib, "NFNet_d.a" )

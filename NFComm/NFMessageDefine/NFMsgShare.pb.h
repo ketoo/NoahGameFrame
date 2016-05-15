@@ -92,6 +92,8 @@ class ReqWearEquip;
 class TakeOffEquip;
 class ReqMiningTitle;
 class ReqSendMail;
+class ReqSwitchServer;
+class AckSwitchServer;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -6577,6 +6579,256 @@ class ReqSendMail : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ReqSendMail* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ReqSwitchServer : public ::google::protobuf::Message {
+ public:
+  ReqSwitchServer();
+  virtual ~ReqSwitchServer();
+
+  ReqSwitchServer(const ReqSwitchServer& from);
+
+  inline ReqSwitchServer& operator=(const ReqSwitchServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSwitchServer& default_instance();
+
+  void Swap(ReqSwitchServer* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSwitchServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSwitchServer& from);
+  void MergeFrom(const ReqSwitchServer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required int64 self_serverid = 2;
+  inline bool has_self_serverid() const;
+  inline void clear_self_serverid();
+  static const int kSelfServeridFieldNumber = 2;
+  inline ::google::protobuf::int64 self_serverid() const;
+  inline void set_self_serverid(::google::protobuf::int64 value);
+
+  // required int64 target_serverid = 3;
+  inline bool has_target_serverid() const;
+  inline void clear_target_serverid();
+  static const int kTargetServeridFieldNumber = 3;
+  inline ::google::protobuf::int64 target_serverid() const;
+  inline void set_target_serverid(::google::protobuf::int64 value);
+
+  // required int64 gate_serverid = 4;
+  inline bool has_gate_serverid() const;
+  inline void clear_gate_serverid();
+  static const int kGateServeridFieldNumber = 4;
+  inline ::google::protobuf::int64 gate_serverid() const;
+  inline void set_gate_serverid(::google::protobuf::int64 value);
+
+  // required int64 SceneID = 5;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIDFieldNumber = 5;
+  inline ::google::protobuf::int64 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int64 value);
+
+  // required .NFMsg.Ident client_id = 6;
+  inline bool has_client_id() const;
+  inline void clear_client_id();
+  static const int kClientIdFieldNumber = 6;
+  inline const ::NFMsg::Ident& client_id() const;
+  inline ::NFMsg::Ident* mutable_client_id();
+  inline ::NFMsg::Ident* release_client_id();
+  inline void set_allocated_client_id(::NFMsg::Ident* client_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSwitchServer)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_self_serverid();
+  inline void clear_has_self_serverid();
+  inline void set_has_target_serverid();
+  inline void clear_has_target_serverid();
+  inline void set_has_gate_serverid();
+  inline void clear_has_gate_serverid();
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+  inline void set_has_client_id();
+  inline void clear_has_client_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::int64 self_serverid_;
+  ::google::protobuf::int64 target_serverid_;
+  ::google::protobuf::int64 gate_serverid_;
+  ::google::protobuf::int64 sceneid_;
+  ::NFMsg::Ident* client_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSwitchServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AckSwitchServer : public ::google::protobuf::Message {
+ public:
+  AckSwitchServer();
+  virtual ~AckSwitchServer();
+
+  AckSwitchServer(const AckSwitchServer& from);
+
+  inline AckSwitchServer& operator=(const AckSwitchServer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSwitchServer& default_instance();
+
+  void Swap(AckSwitchServer* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSwitchServer* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSwitchServer& from);
+  void MergeFrom(const AckSwitchServer& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required int64 self_serverid = 2;
+  inline bool has_self_serverid() const;
+  inline void clear_self_serverid();
+  static const int kSelfServeridFieldNumber = 2;
+  inline ::google::protobuf::int64 self_serverid() const;
+  inline void set_self_serverid(::google::protobuf::int64 value);
+
+  // required int64 target_serverid = 3;
+  inline bool has_target_serverid() const;
+  inline void clear_target_serverid();
+  static const int kTargetServeridFieldNumber = 3;
+  inline ::google::protobuf::int64 target_serverid() const;
+  inline void set_target_serverid(::google::protobuf::int64 value);
+
+  // required int64 gate_serverid = 4;
+  inline bool has_gate_serverid() const;
+  inline void clear_gate_serverid();
+  static const int kGateServeridFieldNumber = 4;
+  inline ::google::protobuf::int64 gate_serverid() const;
+  inline void set_gate_serverid(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSwitchServer)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_self_serverid();
+  inline void clear_has_self_serverid();
+  inline void set_has_target_serverid();
+  inline void clear_has_target_serverid();
+  inline void set_has_gate_serverid();
+  inline void clear_has_gate_serverid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::int64 self_serverid_;
+  ::google::protobuf::int64 target_serverid_;
+  ::google::protobuf::int64 gate_serverid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSwitchServer* default_instance_;
+};
 // ===================================================================
 
 
@@ -12889,6 +13141,282 @@ ReqSendMail::currency_list() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::CurrencyStruct >*
 ReqSendMail::mutable_currency_list() {
   return &currency_list_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSwitchServer
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqSwitchServer::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqSwitchServer::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqSwitchServer::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqSwitchServer::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqSwitchServer::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqSwitchServer::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqSwitchServer::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqSwitchServer::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required int64 self_serverid = 2;
+inline bool ReqSwitchServer::has_self_serverid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqSwitchServer::set_has_self_serverid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqSwitchServer::clear_has_self_serverid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqSwitchServer::clear_self_serverid() {
+  self_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_self_serverid();
+}
+inline ::google::protobuf::int64 ReqSwitchServer::self_serverid() const {
+  return self_serverid_;
+}
+inline void ReqSwitchServer::set_self_serverid(::google::protobuf::int64 value) {
+  set_has_self_serverid();
+  self_serverid_ = value;
+}
+
+// required int64 target_serverid = 3;
+inline bool ReqSwitchServer::has_target_serverid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqSwitchServer::set_has_target_serverid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqSwitchServer::clear_has_target_serverid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqSwitchServer::clear_target_serverid() {
+  target_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_target_serverid();
+}
+inline ::google::protobuf::int64 ReqSwitchServer::target_serverid() const {
+  return target_serverid_;
+}
+inline void ReqSwitchServer::set_target_serverid(::google::protobuf::int64 value) {
+  set_has_target_serverid();
+  target_serverid_ = value;
+}
+
+// required int64 gate_serverid = 4;
+inline bool ReqSwitchServer::has_gate_serverid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqSwitchServer::set_has_gate_serverid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqSwitchServer::clear_has_gate_serverid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqSwitchServer::clear_gate_serverid() {
+  gate_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_gate_serverid();
+}
+inline ::google::protobuf::int64 ReqSwitchServer::gate_serverid() const {
+  return gate_serverid_;
+}
+inline void ReqSwitchServer::set_gate_serverid(::google::protobuf::int64 value) {
+  set_has_gate_serverid();
+  gate_serverid_ = value;
+}
+
+// required int64 SceneID = 5;
+inline bool ReqSwitchServer::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqSwitchServer::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqSwitchServer::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqSwitchServer::clear_sceneid() {
+  sceneid_ = GOOGLE_LONGLONG(0);
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int64 ReqSwitchServer::sceneid() const {
+  return sceneid_;
+}
+inline void ReqSwitchServer::set_sceneid(::google::protobuf::int64 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// required .NFMsg.Ident client_id = 6;
+inline bool ReqSwitchServer::has_client_id() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ReqSwitchServer::set_has_client_id() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ReqSwitchServer::clear_has_client_id() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ReqSwitchServer::clear_client_id() {
+  if (client_id_ != NULL) client_id_->::NFMsg::Ident::Clear();
+  clear_has_client_id();
+}
+inline const ::NFMsg::Ident& ReqSwitchServer::client_id() const {
+  return client_id_ != NULL ? *client_id_ : *default_instance_->client_id_;
+}
+inline ::NFMsg::Ident* ReqSwitchServer::mutable_client_id() {
+  set_has_client_id();
+  if (client_id_ == NULL) client_id_ = new ::NFMsg::Ident;
+  return client_id_;
+}
+inline ::NFMsg::Ident* ReqSwitchServer::release_client_id() {
+  clear_has_client_id();
+  ::NFMsg::Ident* temp = client_id_;
+  client_id_ = NULL;
+  return temp;
+}
+inline void ReqSwitchServer::set_allocated_client_id(::NFMsg::Ident* client_id) {
+  delete client_id_;
+  client_id_ = client_id;
+  if (client_id) {
+    set_has_client_id();
+  } else {
+    clear_has_client_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckSwitchServer
+
+// required .NFMsg.Ident selfid = 1;
+inline bool AckSwitchServer::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckSwitchServer::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckSwitchServer::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckSwitchServer::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& AckSwitchServer::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* AckSwitchServer::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* AckSwitchServer::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void AckSwitchServer::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required int64 self_serverid = 2;
+inline bool AckSwitchServer::has_self_serverid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckSwitchServer::set_has_self_serverid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckSwitchServer::clear_has_self_serverid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckSwitchServer::clear_self_serverid() {
+  self_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_self_serverid();
+}
+inline ::google::protobuf::int64 AckSwitchServer::self_serverid() const {
+  return self_serverid_;
+}
+inline void AckSwitchServer::set_self_serverid(::google::protobuf::int64 value) {
+  set_has_self_serverid();
+  self_serverid_ = value;
+}
+
+// required int64 target_serverid = 3;
+inline bool AckSwitchServer::has_target_serverid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckSwitchServer::set_has_target_serverid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckSwitchServer::clear_has_target_serverid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckSwitchServer::clear_target_serverid() {
+  target_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_target_serverid();
+}
+inline ::google::protobuf::int64 AckSwitchServer::target_serverid() const {
+  return target_serverid_;
+}
+inline void AckSwitchServer::set_target_serverid(::google::protobuf::int64 value) {
+  set_has_target_serverid();
+  target_serverid_ = value;
+}
+
+// required int64 gate_serverid = 4;
+inline bool AckSwitchServer::has_gate_serverid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AckSwitchServer::set_has_gate_serverid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AckSwitchServer::clear_has_gate_serverid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AckSwitchServer::clear_gate_serverid() {
+  gate_serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_gate_serverid();
+}
+inline ::google::protobuf::int64 AckSwitchServer::gate_serverid() const {
+  return gate_serverid_;
+}
+inline void AckSwitchServer::set_gate_serverid(::google::protobuf::int64 value) {
+  set_has_gate_serverid();
+  gate_serverid_ = value;
 }
 
 

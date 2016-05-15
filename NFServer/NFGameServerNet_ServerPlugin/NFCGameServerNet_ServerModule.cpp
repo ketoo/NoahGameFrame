@@ -2075,6 +2075,98 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const
     }
 }
 
+void NFCGameServerNet_ServerModule::ProcessSwitchToGame(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID, const int nSceneID)
+{
+	PlayerLeaveGameServer(nRoleID);
+
+	//////////////////////////////////////////////////////////////////////////
+	//拉取数据
+	if (!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
+		return;
+	}
+	//////////////////////////////////////////////////////////////////////////
+
+	NF_SHARE_PTR<NFCGameServerNet_ServerModule::BaseData> pBaseData = mRoleBaseData.GetElement(nRoleID);
+	if (nullptr != pBaseData)
+	{
+		// 已经存在
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "player is exist, cannot enter game", "", __FUNCTION__, __LINE__);
+		return;
+	}
+
+	if (nGateID <= 0)
+	{
+		//非法gate
+		return;
+	}
+
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(nGateID);
+	if (nullptr == pServerData)
+	{
+		return;
+	}
+
+	// proxy绑定playerID和gateFD
+	if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, pServerData->xServerData.nFD)).second)
+	{
+		return;
+	}
+
+	//id和fd,gateid绑定
+	mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
+
+	//默认1号场景
+	NFCDataList var;
+	var.AddString("GateID");
+	var.AddInt(nGateID);
+
+	var.AddString("ClientID");
+	var.AddObject(nClientID);
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, "Player", "", var);
+	if (NULL == pObject.get())
+	{
+		//内存泄漏
+		//mRoleBaseData
+		//mRoleFDData
+		return;
+	}
+
+	pObject->SetPropertyInt("LoadPropertyFinish", 1);
+	pObject->SetPropertyInt("GateID", nGateID);
+	pObject->SetPropertyInt("GameID", pPluginManager->AppID());
+
+	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
+
+	NFCDataList varEntry;
+	varEntry << pObject->Self();
+	varEntry << NFINT64(0);
+	varEntry << nSceneID;
+	varEntry << -1;
+	m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+}
+
+void NFCGameServerNet_ServerModule::ProcessSwitchOffGame(const NFGUID& self)
+{
+	PlayerLeaveGameServer(self);
+}
+
+bool NFCGameServerNet_ServerModule::GetGateInfo(const NFGUID& self, int & nGateID, NFGUID& xClientID)
+{
+	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+	if (pData.get())
+	{
+		nGateID = pData->nGateID;
+		xClientID = pData->xClientID;
+
+		return true;
+	}
+
+	return false;
+}
+
 void NFCGameServerNet_ServerModule::PlayerLeaveGameServer(const NFGUID& self)
 {
     if (!m_pKernelModule->GetObject(self))

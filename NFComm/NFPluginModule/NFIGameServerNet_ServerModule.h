@@ -26,6 +26,9 @@ public:
     virtual int OnRecordEnter( const NFIDataList& argVar, const NFGUID& self ) = 0;
     virtual int OnObjectListEnter( const NFIDataList& self, const NFIDataList& argVar ) = 0;
     virtual int OnObjectListLeave( const NFIDataList& self, const NFIDataList& argVar ) = 0;
+	virtual void ProcessSwitchToGame(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID, const int nSceneID) = 0;
+	virtual void ProcessSwitchOffGame(const NFGUID& self) = 0;
+	virtual bool GetGateInfo(const NFGUID& self, int & nGateID, NFGUID& xClientID) = 0;
 };
 
 #endif

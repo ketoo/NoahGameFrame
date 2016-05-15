@@ -1,0 +1,61 @@
+// -------------------------------------------------------------------------
+//    @FileName      :    NFCGSSwichServerModule.h
+//    @Author           :    ChuanBo.Guo
+//    @Date             :    2013-07-10
+//    @Module           :    NFCGSSwichServerModule
+//
+// -------------------------------------------------------------------------
+
+#ifndef NFC_SWITCHSERVER_MODULE_H
+#define NFC_SWITCHSERVER_MODULE_H
+
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
+#include "NFComm/NFPluginModule/NFIGSSwichServerModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+
+class NFCGSSwichServerModule
+    : public NFIGSSwichServerModule
+{
+public:
+    NFCGSSwichServerModule( NFIPluginManager* p )
+    {
+        pPluginManager = p;
+    }
+    virtual ~NFCGSSwichServerModule() {};
+
+    virtual bool Init();
+    virtual bool Shut();
+    virtual bool Execute();
+	virtual bool AfterInit();
+	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID);
+
+	void OnReqSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnAckSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+
+private:
+    NFIKernelModule* m_pKernelModule;
+    NFILogModule* m_pLogModule;
+    NFIElementInfoModule* m_pElementInfoModule;
+    NFISceneProcessModule* m_pSceneProcessModule;
+    NFIPropertyModule* m_pPropertyModule;
+	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFILevelModule* m_pLevelModule;
+    NFIPackModule* m_pPackModule;
+    NFIHeroModule* m_pHeroModule;
+};
+
+
+#endif

@@ -49,7 +49,8 @@ protected:
 
     void Register(NFINet* pNet);
 
-    void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAckSwitchServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     virtual void LogServerInfo(const std::string& strServerInfo);
 
 private:

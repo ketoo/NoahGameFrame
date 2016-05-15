@@ -57,6 +57,9 @@ public:
     virtual void LogSend(const char* str) {}
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
+	virtual void ProcessSwitchToGame(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID, const int nSceneID);
+	virtual void ProcessSwitchOffGame(const NFGUID& self);
+	virtual bool GetGateInfo(const NFGUID& self, int & nGateID, NFGUID& xClientID);
 
 protected:
 

@@ -98,6 +98,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCWorldLogicModule.h" />
+    <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCWorldLogicModule.cpp" />
+    <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

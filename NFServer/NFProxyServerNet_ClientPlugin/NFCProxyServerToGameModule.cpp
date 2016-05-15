@@ -87,6 +87,9 @@ void NFCProxyServerToGameModule::OnReciveGSPack(const int nSockIndex, const int 
         case NFMsg::EGMI_ACK_ENTER_GAME:
             OnAckEnterGame(nSockIndex, nMsgID, msg, nLen);
             break;
+		case NFMsg::EGMI_REQSWICHSERVER:
+			OnAckSwitchServer(nSockIndex, nMsgID, msg, nLen);
+			break;
         default:
             m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
             break;
@@ -171,6 +174,21 @@ void NFCProxyServerToGameModule::OnAckEnterGame(const int nSockIndex, const int 
 
         m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
     }
+}
+
+void NFCProxyServerToGameModule::OnAckSwitchServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ReqSwitchServer xData;
+	if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+	{
+		return;
+	}
+
+	NFGUID xClient = NFINetModule::PBToNF(xData.client_id());
+	NFGUID xPlayer = NFINetModule::PBToNF(xData.selfid());
+	m_pProxyServerNet_ServerModule->SwitcheGameSuccess(xClient, xPlayer, xData.target_serverid());
+
 }
 
 void NFCProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
