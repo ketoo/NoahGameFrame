@@ -134,7 +134,7 @@ public:
                     break;
             }
 
-            return bChanged;
+            return !bChanged;
         }
 
         TDATA_TYPE GetType() const
