@@ -1,40 +1,30 @@
 ScriptModule = {}
 function ScriptModule.Init(...)
-	for key, value in pairs(ScriptList) do
-		if type(value) == "table" then
-			ScriptList[key].tbl.Init(...);	
-		end
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.Init(...);
 	end
 end
 
 function ScriptModule.AfterInit(...)
-	for key, value in pairs(ScriptList) do
-		if type(value) == "table" then
-			ScriptList[key].tbl.AfterInit(...);	
-		end
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.AfterInit(...);
 	end
 end
 
 function ScriptModule.Execute(...)
-	for key, value in pairs(ScriptList) do
-		if type(value) == "table" then
-			ScriptList[key].tbl.Execute(...);	
-		end
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.Execute(...);
 	end
 end
 
 function ScriptModule.BeforeShut(...)
-	for key, value in pairs(ScriptList) do
-		if type(value) == "table" then
-			ScriptList[key].tbl.BeforeShut(...);	
-		end
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.BeforeShut(...);
 	end
 end
 
 function ScriptModule.Shut(...)
-	for key, value in pairs(ScriptList) do
-		if type(value) == "table" then
-			ScriptList[key].tbl.Shut(...);	
-		end
+	for i=1, #(ScriptList) do
+		ScriptList[i].tbl.Shut(...);
 	end
 end
