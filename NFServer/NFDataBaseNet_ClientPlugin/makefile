@@ -19,31 +19,32 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/mysql/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent/ -I$(SolutionDir)/Dependencies/libevent/include/ -I$(SolutionDir)/Dependencies/libevent/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/mysql/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL -DNFDBNET_CLIENTPLUGIN_EXPORTS -DELPP_NO_DEFAULT_LOG_FILE
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
-LIB_DEBUG_X64 = $(LIB)../../_Out/Comm/Debug/NFCore_d.a ../../_Out/Comm/Debug/NFMessageDefine_d.a ../../Dependencies/lib/Debug/libprotobuf.a
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/
+LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a $(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a $(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFDataBaseNet_ClientPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/mysql/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent/ -I$(SolutionDir)/Dependencies/libevent/include/ -I$(SolutionDir)/Dependencies/libevent/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/mysql/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG -D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
-LIB_RELEASE_X64 = $(LIB)
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/
+LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFCore.a $(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a $(SolutionDir)/Dependencies/lib/Release/libprotobuf.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFDataBaseNet_ClientPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCDataBaseNet_ClientModule.o $(OBJDIR_DEBUG_X64)/NFCObjectSaveModule.o $(OBJDIR_DEBUG_X64)/NFDataBaseNet_ClientPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCDataProcessModule.o $(OBJDIR_DEBUG_X64)/NFDataBaseNet_ClientPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCDataBaseNet_ClientModule.o $(OBJDIR_RELEASE_X64)/NFCObjectSaveModule.o $(OBJDIR_RELEASE_X64)/NFDataBaseNet_ClientPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCDataProcessModule.o $(OBJDIR_RELEASE_X64)/NFDataBaseNet_ClientPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
@@ -70,11 +71,8 @@ debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 	$(LD) -shared $(LIBDIR_DEBUG_X64) $(OBJ_DEBUG_X64)  -o $(OUT_DEBUG_X64) $(LDFLAGS_DEBUG_X64) $(LIB_DEBUG_X64)
 
-$(OBJDIR_DEBUG_X64)/NFCDataBaseNet_ClientModule.o: NFCDataBaseNet_ClientModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCDataBaseNet_ClientModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCDataBaseNet_ClientModule.o
-
-$(OBJDIR_DEBUG_X64)/NFCObjectSaveModule.o: NFCObjectSaveModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCObjectSaveModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCObjectSaveModule.o
+$(OBJDIR_DEBUG_X64)/NFCDataProcessModule.o: NFCDataProcessModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCDataProcessModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCDataProcessModule.o
 
 $(OBJDIR_DEBUG_X64)/NFDataBaseNet_ClientPlugin.o: NFDataBaseNet_ClientPlugin.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFDataBaseNet_ClientPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFDataBaseNet_ClientPlugin.o
@@ -108,11 +106,8 @@ release_x64: before_release_x64 out_release_x64 after_release_x64
 out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 	$(LD) -shared $(LIBDIR_RELEASE_X64) $(OBJ_RELEASE_X64)  -o $(OUT_RELEASE_X64) $(LDFLAGS_RELEASE_X64) $(LIB_RELEASE_X64)
 
-$(OBJDIR_RELEASE_X64)/NFCDataBaseNet_ClientModule.o: NFCDataBaseNet_ClientModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCDataBaseNet_ClientModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCDataBaseNet_ClientModule.o
-
-$(OBJDIR_RELEASE_X64)/NFCObjectSaveModule.o: NFCObjectSaveModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCObjectSaveModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCObjectSaveModule.o
+$(OBJDIR_RELEASE_X64)/NFCDataProcessModule.o: NFCDataProcessModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCDataProcessModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCDataProcessModule.o
 
 $(OBJDIR_RELEASE_X64)/NFDataBaseNet_ClientPlugin.o: NFDataBaseNet_ClientPlugin.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFDataBaseNet_ClientPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFDataBaseNet_ClientPlugin.o

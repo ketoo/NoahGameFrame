@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/04/09
+//    @Date             :    2016/05/18
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -560,6 +560,41 @@ public class Language
 	public static readonly String English = "English"; // string
 	public static readonly String Chinese = "Chinese"; // string
 	// Record
+
+}
+
+public class Map
+{
+	//Class name
+	public static readonly string ThisName = "Map";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String MaxCount = "MaxCount"; // int
+	public static readonly String InComeGold = "InComeGold"; // int
+	public static readonly String InComeDiamond = "InComeDiamond"; // int
+	public static readonly String InComeOil = "InComeOil"; // int
+	public static readonly String X = "X"; // int
+	public static readonly String Z = "Z"; // int
+	public static readonly String MapLevel = "MapLevel"; // int
+	// Record
+	public static readonly String R_Station = "Station";
+
+	public enum Station
+	{
+		GUID		= 0, // GUID -- object
+		GuildID		= 1, // GuildID -- object
+		GuildName		= 2, // GuildName -- string
+		Level		= 3, // Level -- int
+		Title		= 4, // Title -- string
+		Slogan		= 5, // Slogan -- string
+		State		= 6, // State -- int
+		CurMemberCount		= 7, // CurMemberCount -- int
+	};
 
 }
 

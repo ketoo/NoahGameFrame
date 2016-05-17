@@ -7,9 +7,10 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
-				<Option type="2" />
+				<Option output="$(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Comm/Debug" />
+				<Option object_output=".objs/Debug" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
@@ -21,13 +22,40 @@
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libNFMessageDefine_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial7/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/libprotobuf.* $(SolutionDir)/_Out/Server/Debug/Tutorial7/" />
+				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Comm/Release/libNFMessageDefine" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
+				<Option object_output=".objs/Release" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -39,6 +67,32 @@
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libNFMessageDefine.so $(SolutionDir)/_Out/Server/Release/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial7/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/NFWorldServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/NFMasterServer/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/NFProxyServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/NFGameServer1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial1/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial3/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial4/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial5/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial6/" />
+					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/libprotobuf.* $(SolutionDir)/_Out/Server/Release/Tutorial7/" />
+				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>

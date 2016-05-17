@@ -31,7 +31,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFMsgBase_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
 void protobuf_AssignDesc_NFMsgBase_2eproto();
 void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -74,12 +74,12 @@ enum ReqCommand_EGameCommandType {
   ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT = 2,
   ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP = 3
 };
-bool ReqCommand_EGameCommandType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqCommand_EGameCommandType_IsValid(int value);
 const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MIN = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
 const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP;
 const int ReqCommand_EGameCommandType_EGameCommandType_ARRAYSIZE = ReqCommand_EGameCommandType_EGameCommandType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
 inline const ::std::string& ReqCommand_EGameCommandType_Name(ReqCommand_EGameCommandType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqCommand_EGameCommandType_descriptor(), value);
@@ -91,7 +91,7 @@ inline bool ReqCommand_EGameCommandType_Parse(
 }
 // ===================================================================
 
-class Ident : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT Ident : public ::google::protobuf::Message {
  public:
   Ident();
   virtual ~Ident();
@@ -174,7 +174,7 @@ class Ident : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -183,7 +183,7 @@ class Ident : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PropertyInt : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PropertyInt : public ::google::protobuf::Message {
  public:
   PropertyInt();
   virtual ~PropertyInt();
@@ -271,7 +271,7 @@ class PropertyInt : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -280,7 +280,7 @@ class PropertyInt : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PropertyFloat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PropertyFloat : public ::google::protobuf::Message {
  public:
   PropertyFloat();
   virtual ~PropertyFloat();
@@ -368,7 +368,7 @@ class PropertyFloat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -377,7 +377,7 @@ class PropertyFloat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PropertyString : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PropertyString : public ::google::protobuf::Message {
  public:
   PropertyString();
   virtual ~PropertyString();
@@ -470,7 +470,7 @@ class PropertyString : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -479,7 +479,7 @@ class PropertyString : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PropertyObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PropertyObject : public ::google::protobuf::Message {
  public:
   PropertyObject();
   virtual ~PropertyObject();
@@ -569,7 +569,7 @@ class PropertyObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -578,7 +578,7 @@ class PropertyObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordInt : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RecordInt : public ::google::protobuf::Message {
  public:
   RecordInt();
   virtual ~RecordInt();
@@ -671,7 +671,7 @@ class RecordInt : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -680,7 +680,7 @@ class RecordInt : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordFloat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RecordFloat : public ::google::protobuf::Message {
  public:
   RecordFloat();
   virtual ~RecordFloat();
@@ -773,7 +773,7 @@ class RecordFloat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -782,7 +782,7 @@ class RecordFloat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordString : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RecordString : public ::google::protobuf::Message {
  public:
   RecordString();
   virtual ~RecordString();
@@ -880,7 +880,7 @@ class RecordString : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -889,7 +889,7 @@ class RecordString : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RecordObject : public ::google::protobuf::Message {
  public:
   RecordObject();
   virtual ~RecordObject();
@@ -984,7 +984,7 @@ class RecordObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -993,7 +993,7 @@ class RecordObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RecordAddRowStruct : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RecordAddRowStruct : public ::google::protobuf::Message {
  public:
   RecordAddRowStruct();
   virtual ~RecordAddRowStruct();
@@ -1118,7 +1118,7 @@ class RecordAddRowStruct : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1127,7 +1127,7 @@ class RecordAddRowStruct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordBase : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordBase : public ::google::protobuf::Message {
  public:
   ObjectRecordBase();
   virtual ~ObjectRecordBase();
@@ -1218,7 +1218,7 @@ class ObjectRecordBase : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1227,7 +1227,7 @@ class ObjectRecordBase : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectPropertyList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectPropertyList : public ::google::protobuf::Message {
  public:
   ObjectPropertyList();
   virtual ~ObjectPropertyList();
@@ -1354,7 +1354,7 @@ class ObjectPropertyList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1363,7 +1363,7 @@ class ObjectPropertyList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MultiObjectPropertyList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT MultiObjectPropertyList : public ::google::protobuf::Message {
  public:
   MultiObjectPropertyList();
   virtual ~MultiObjectPropertyList();
@@ -1439,7 +1439,7 @@ class MultiObjectPropertyList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1448,7 +1448,7 @@ class MultiObjectPropertyList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordList : public ::google::protobuf::Message {
  public:
   ObjectRecordList();
   virtual ~ObjectRecordList();
@@ -1536,7 +1536,7 @@ class ObjectRecordList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1545,7 +1545,7 @@ class ObjectRecordList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MultiObjectRecordList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT MultiObjectRecordList : public ::google::protobuf::Message {
  public:
   MultiObjectRecordList();
   virtual ~MultiObjectRecordList();
@@ -1621,7 +1621,7 @@ class MultiObjectRecordList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1630,7 +1630,7 @@ class MultiObjectRecordList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectPropertyInt : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectPropertyInt : public ::google::protobuf::Message {
  public:
   ObjectPropertyInt();
   virtual ~ObjectPropertyInt();
@@ -1718,7 +1718,7 @@ class ObjectPropertyInt : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1727,7 +1727,7 @@ class ObjectPropertyInt : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectPropertyFloat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectPropertyFloat : public ::google::protobuf::Message {
  public:
   ObjectPropertyFloat();
   virtual ~ObjectPropertyFloat();
@@ -1815,7 +1815,7 @@ class ObjectPropertyFloat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1824,7 +1824,7 @@ class ObjectPropertyFloat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectPropertyString : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectPropertyString : public ::google::protobuf::Message {
  public:
   ObjectPropertyString();
   virtual ~ObjectPropertyString();
@@ -1912,7 +1912,7 @@ class ObjectPropertyString : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -1921,7 +1921,7 @@ class ObjectPropertyString : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectPropertyObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectPropertyObject : public ::google::protobuf::Message {
  public:
   ObjectPropertyObject();
   virtual ~ObjectPropertyObject();
@@ -2009,7 +2009,7 @@ class ObjectPropertyObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2018,7 +2018,7 @@ class ObjectPropertyObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordInt : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordInt : public ::google::protobuf::Message {
  public:
   ObjectRecordInt();
   virtual ~ObjectRecordInt();
@@ -2121,7 +2121,7 @@ class ObjectRecordInt : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2130,7 +2130,7 @@ class ObjectRecordInt : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordFloat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordFloat : public ::google::protobuf::Message {
  public:
   ObjectRecordFloat();
   virtual ~ObjectRecordFloat();
@@ -2233,7 +2233,7 @@ class ObjectRecordFloat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2242,7 +2242,7 @@ class ObjectRecordFloat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordString : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordString : public ::google::protobuf::Message {
  public:
   ObjectRecordString();
   virtual ~ObjectRecordString();
@@ -2345,7 +2345,7 @@ class ObjectRecordString : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2354,7 +2354,7 @@ class ObjectRecordString : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordObject : public ::google::protobuf::Message {
  public:
   ObjectRecordObject();
   virtual ~ObjectRecordObject();
@@ -2457,7 +2457,7 @@ class ObjectRecordObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2466,7 +2466,7 @@ class ObjectRecordObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordSwap : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordSwap : public ::google::protobuf::Message {
  public:
   ObjectRecordSwap();
   virtual ~ObjectRecordSwap();
@@ -2591,7 +2591,7 @@ class ObjectRecordSwap : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2600,7 +2600,7 @@ class ObjectRecordSwap : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordAddRow : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordAddRow : public ::google::protobuf::Message {
  public:
   ObjectRecordAddRow();
   virtual ~ObjectRecordAddRow();
@@ -2703,7 +2703,7 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2712,7 +2712,7 @@ class ObjectRecordAddRow : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ObjectRecordRemove : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ObjectRecordRemove : public ::google::protobuf::Message {
  public:
   ObjectRecordRemove();
   virtual ~ObjectRecordRemove();
@@ -2815,7 +2815,7 @@ class ObjectRecordRemove : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2824,7 +2824,7 @@ class ObjectRecordRemove : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PlayerPropertyBase : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PlayerPropertyBase : public ::google::protobuf::Message {
  public:
   PlayerPropertyBase();
   virtual ~PlayerPropertyBase();
@@ -2939,7 +2939,7 @@ class PlayerPropertyBase : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -2948,7 +2948,7 @@ class PlayerPropertyBase : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PlayerRecordBase : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PlayerRecordBase : public ::google::protobuf::Message {
  public:
   PlayerRecordBase();
   virtual ~PlayerRecordBase();
@@ -3078,7 +3078,7 @@ class PlayerRecordBase : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -3087,7 +3087,7 @@ class PlayerRecordBase : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PlayerRecordList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PlayerRecordList : public ::google::protobuf::Message {
  public:
   PlayerRecordList();
   virtual ~PlayerRecordList();
@@ -3163,7 +3163,7 @@ class PlayerRecordList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -3172,7 +3172,7 @@ class PlayerRecordList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MsgBase : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT MsgBase : public ::google::protobuf::Message {
  public:
   MsgBase();
   virtual ~MsgBase();
@@ -3287,7 +3287,7 @@ class MsgBase : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -3296,7 +3296,7 @@ class MsgBase : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Position : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT Position : public ::google::protobuf::Message {
  public:
   Position();
   virtual ~Position();
@@ -3389,7 +3389,7 @@ class Position : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 
@@ -3398,7 +3398,7 @@ class Position : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqCommand : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message {
  public:
   ReqCommand();
   virtual ~ReqCommand();
@@ -3591,7 +3591,7 @@ class ReqCommand : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgBase_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgBase_2eproto();
   friend void protobuf_AssignDesc_NFMsgBase_2eproto();
   friend void protobuf_ShutdownFile_NFMsgBase_2eproto();
 

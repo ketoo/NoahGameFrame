@@ -181,9 +181,6 @@
     <ClCompile Include="lua.c">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="luac.c">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="lundump.c">
       <Filter>Source</Filter>
     </ClCompile>

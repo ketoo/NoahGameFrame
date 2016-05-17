@@ -12,6 +12,7 @@ public:
     {
         pNet = new NFCNet(this, &TestClientClass::ReciveHandler, &TestClientClass::EventHandler);
         pNet->Initialization("127.0.0.1", 8088);
+		bConnected = false;
     }
 
     void ReciveHandler(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -25,18 +26,25 @@ public:
     void EventHandler(const int nSockIndex, const NF_NET_EVENT e, NFINet* p)
     {
         std::cout << " fd: " << nSockIndex << " event_id: " << e << " thread_id: " << std::this_thread::get_id() << std::endl;
-
+		if(e == NF_NET_EVENT_CONNECTED)
+		{
+			bConnected = true;
+		}
     }
 
     void Execute()
     {
-        pNet->SendMsgWithOutHead(1, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 100, 0);
+		if(bConnected)
+		{
+			pNet->SendMsgWithOutHead(1, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", 100, 0);
+		}
 
         pNet->Execute();
     }
 
 protected:
     NFINet* pNet;
+	bool bConnected;
 private:
 };
 

@@ -49,6 +49,8 @@ ALTER TABLE `Guild` ADD `GuildEvent` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildHouse` BLOB COMMENT 'guild';
 ALTER TABLE `Guild` ADD `GuildSkill` BLOB COMMENT 'guild';
 ALTER TABLE `GuildName` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '工会ID';
+ALTER TABLE `Map` ADD `MaxCount` bigint(11) DEFAULT '0' COMMENT '最大入驻公会';
+ALTER TABLE `Map` ADD `Station` BLOB COMMENT 'Station';
 ALTER TABLE `NPC` ADD `VIPEXP` bigint(11) DEFAULT '0' COMMENT 'VIP经验';
 ALTER TABLE `NPC` ADD `EXP` bigint(11) DEFAULT '0' COMMENT '经验获得,如果是怪物，则是掉落经验';
 ALTER TABLE `NPC` ADD `HP` bigint(11) DEFAULT '0' COMMENT '生命值';

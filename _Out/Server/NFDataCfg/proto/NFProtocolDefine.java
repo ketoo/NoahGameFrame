@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/04/09
+//    @Date             :    2016/05/18
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -536,6 +536,40 @@ public class Language {
 	public static final String English = "English"; // string
 	public static final String Chinese = "Chinese"; // string
 	// Record
+
+}
+
+public class Map {
+	//Class name
+	public static final String ThisName = "Map";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String MaxCount = "MaxCount"; // int
+	public static final String InComeGold = "InComeGold"; // int
+	public static final String InComeDiamond = "InComeDiamond"; // int
+	public static final String InComeOil = "InComeOil"; // int
+	public static final String X = "X"; // int
+	public static final String Z = "Z"; // int
+	public static final String MapLevel = "MapLevel"; // int
+	// Record
+	public static final String R_Station = "Station";
+
+	public enum Station
+	{
+		GUID		= 0, // GUID -- object
+		GuildID		= 1, // GuildID -- object
+		GuildName		= 2, // GuildName -- string
+		Level		= 3, // Level -- int
+		Title		= 4, // Title -- string
+		Slogan		= 5, // Slogan -- string
+		State		= 6, // State -- int
+		CurMemberCount		= 7, // CurMemberCount -- int
+	};
 
 }
 

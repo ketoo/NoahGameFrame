@@ -32,7 +32,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFMsgShare_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
 void protobuf_AssignDesc_NFMsgShare_2eproto();
 void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -101,12 +101,12 @@ enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_GUILD = 3,
   ReqAckSynData_SynType_EST_FRIEND = 4
 };
-bool ReqAckSynData_SynType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckSynData_SynType_IsValid(int value);
 const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MIN = ReqAckSynData_SynType_EST_SCENE;
 const ReqAckSynData_SynType ReqAckSynData_SynType_SynType_MAX = ReqAckSynData_SynType_EST_FRIEND;
 const int ReqAckSynData_SynType_SynType_ARRAYSIZE = ReqAckSynData_SynType_SynType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckSynData_SynType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckSynData_SynType_descriptor();
 inline const ::std::string& ReqAckSynData_SynType_Name(ReqAckSynData_SynType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckSynData_SynType_descriptor(), value);
@@ -119,12 +119,12 @@ inline bool ReqAckSynData_SynType_Parse(
 enum ChatContainer_ContainerType {
   ChatContainer_ContainerType_EGCT_ITEM = 1
 };
-bool ChatContainer_ContainerType_IsValid(int value);
+LIBPROTOC_EXPORT bool ChatContainer_ContainerType_IsValid(int value);
 const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MIN = ChatContainer_ContainerType_EGCT_ITEM;
 const ChatContainer_ContainerType ChatContainer_ContainerType_ContainerType_MAX = ChatContainer_ContainerType_EGCT_ITEM;
 const int ChatContainer_ContainerType_ContainerType_ARRAYSIZE = ChatContainer_ContainerType_ContainerType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ChatContainer_ContainerType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ChatContainer_ContainerType_descriptor();
 inline const ::std::string& ChatContainer_ContainerType_Name(ChatContainer_ContainerType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ChatContainer_ContainerType_descriptor(), value);
@@ -140,12 +140,12 @@ enum ReqAckPlayerChat_EGameChatType {
   ReqAckPlayerChat_EGameChatType_EGCT_TEAM = 2,
   ReqAckPlayerChat_EGameChatType_EGCT_WORLD = 3
 };
-bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckPlayerChat_EGameChatType_IsValid(int value);
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MIN = ReqAckPlayerChat_EGameChatType_EGCT_GUILD;
 const ReqAckPlayerChat_EGameChatType ReqAckPlayerChat_EGameChatType_EGameChatType_MAX = ReqAckPlayerChat_EGameChatType_EGCT_WORLD;
 const int ReqAckPlayerChat_EGameChatType_EGameChatType_ARRAYSIZE = ReqAckPlayerChat_EGameChatType_EGameChatType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckPlayerChat_EGameChatType_descriptor();
 inline const ::std::string& ReqAckPlayerChat_EGameChatType_Name(ReqAckPlayerChat_EGameChatType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckPlayerChat_EGameChatType_descriptor(), value);
@@ -160,12 +160,12 @@ enum EffectData_EResultType {
   EffectData_EResultType_EET_FAIL = 1,
   EffectData_EResultType_EET_REFUSE = 2
 };
-bool EffectData_EResultType_IsValid(int value);
+LIBPROTOC_EXPORT bool EffectData_EResultType_IsValid(int value);
 const EffectData_EResultType EffectData_EResultType_EResultType_MIN = EffectData_EResultType_EET_SUCCESS;
 const EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_REFUSE;
 const int EffectData_EResultType_EResultType_ARRAYSIZE = EffectData_EResultType_EResultType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor();
 inline const ::std::string& EffectData_EResultType_Name(EffectData_EResultType value) {
   return ::google::protobuf::internal::NameOfEnum(
     EffectData_EResultType_descriptor(), value);
@@ -181,12 +181,12 @@ enum ReqAckSwapScene_EGameSwapType {
   ReqAckSwapScene_EGameSwapType_EGST_ARENA = 2,
   ReqAckSwapScene_EGameSwapType_EGST_MIRROR = 3
 };
-bool ReqAckSwapScene_EGameSwapType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckSwapScene_EGameSwapType_IsValid(int value);
 const ReqAckSwapScene_EGameSwapType ReqAckSwapScene_EGameSwapType_EGameSwapType_MIN = ReqAckSwapScene_EGameSwapType_EGST_NARMAL;
 const ReqAckSwapScene_EGameSwapType ReqAckSwapScene_EGameSwapType_EGameSwapType_MAX = ReqAckSwapScene_EGameSwapType_EGST_MIRROR;
 const int ReqAckSwapScene_EGameSwapType_EGameSwapType_ARRAYSIZE = ReqAckSwapScene_EGameSwapType_EGameSwapType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckSwapScene_EGameSwapType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckSwapScene_EGameSwapType_descriptor();
 inline const ::std::string& ReqAckSwapScene_EGameSwapType_Name(ReqAckSwapScene_EGameSwapType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckSwapScene_EGameSwapType_descriptor(), value);
@@ -199,12 +199,12 @@ inline bool ReqAckSwapScene_EGameSwapType_Parse(
 enum ReqAckJoinActivity_EGameActivityType {
   ReqAckJoinActivity_EGameActivityType_EGAT_PVP = 0
 };
-bool ReqAckJoinActivity_EGameActivityType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckJoinActivity_EGameActivityType_IsValid(int value);
 const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MIN = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
 const ReqAckJoinActivity_EGameActivityType ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX = ReqAckJoinActivity_EGameActivityType_EGAT_PVP;
 const int ReqAckJoinActivity_EGameActivityType_EGameActivityType_ARRAYSIZE = ReqAckJoinActivity_EGameActivityType_EGameActivityType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor();
 inline const ::std::string& ReqAckJoinActivity_EGameActivityType_Name(ReqAckJoinActivity_EGameActivityType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckJoinActivity_EGameActivityType_descriptor(), value);
@@ -217,12 +217,12 @@ inline bool ReqAckJoinActivity_EGameActivityType_Parse(
 enum ReqAckJoinActivity_EGameActivitySubType {
   ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL = 0
 };
-bool ReqAckJoinActivity_EGameActivitySubType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckJoinActivity_EGameActivitySubType_IsValid(int value);
 const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MIN = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
 const ReqAckJoinActivity_EGameActivitySubType ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX = ReqAckJoinActivity_EGameActivitySubType_EGAT_NORMAL;
 const int ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_ARRAYSIZE = ReqAckJoinActivity_EGameActivitySubType_EGameActivitySubType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor();
 inline const ::std::string& ReqAckJoinActivity_EGameActivitySubType_Name(ReqAckJoinActivity_EGameActivitySubType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckJoinActivity_EGameActivitySubType_descriptor(), value);
@@ -243,12 +243,12 @@ enum ReqAckOprGuildMember_EGGuildMemberOprType {
   ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DENYAPPLY = 7,
   ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT = 8
 };
-bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckOprGuildMember_EGGuildMemberOprType_IsValid(int value);
 const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MIN = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN;
 const ReqAckOprGuildMember_EGGuildMemberOprType ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX = ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICKOUT;
 const int ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_ARRAYSIZE = ReqAckOprGuildMember_EGGuildMemberOprType_EGGuildMemberOprType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckOprGuildMember_EGGuildMemberOprType_descriptor();
 inline const ::std::string& ReqAckOprGuildMember_EGGuildMemberOprType_Name(ReqAckOprGuildMember_EGGuildMemberOprType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckOprGuildMember_EGGuildMemberOprType_descriptor(), value);
@@ -266,12 +266,12 @@ enum ReqAckOprGuild_EGGuildOprType {
   ReqAckOprGuild_EGGuildOprType_EGAT_EDITAD = 5,
   ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP = 6
 };
-bool ReqAckOprGuild_EGGuildOprType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqAckOprGuild_EGGuildOprType_IsValid(int value);
 const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MIN = ReqAckOprGuild_EGGuildOprType_EGAT_APPLYDISMISS;
 const ReqAckOprGuild_EGGuildOprType ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX = ReqAckOprGuild_EGGuildOprType_EGAT_LEVELUP;
 const int ReqAckOprGuild_EGGuildOprType_EGGuildOprType_ARRAYSIZE = ReqAckOprGuild_EGGuildOprType_EGGuildOprType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqAckOprGuild_EGGuildOprType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckOprGuild_EGGuildOprType_descriptor();
 inline const ::std::string& ReqAckOprGuild_EGGuildOprType_Name(ReqAckOprGuild_EGGuildOprType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqAckOprGuild_EGGuildOprType_descriptor(), value);
@@ -287,12 +287,12 @@ enum ChatInfo_EChatType {
   ChatInfo_EChatType_ECHATTYPE_GUILD = 2,
   ChatInfo_EChatType_ECHATTYPE_WORLD = 3
 };
-bool ChatInfo_EChatType_IsValid(int value);
+LIBPROTOC_EXPORT bool ChatInfo_EChatType_IsValid(int value);
 const ChatInfo_EChatType ChatInfo_EChatType_EChatType_MIN = ChatInfo_EChatType_ECHATTYPE_NORMAL;
 const ChatInfo_EChatType ChatInfo_EChatType_EChatType_MAX = ChatInfo_EChatType_ECHATTYPE_WORLD;
 const int ChatInfo_EChatType_EChatType_ARRAYSIZE = ChatInfo_EChatType_EChatType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ChatInfo_EChatType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ChatInfo_EChatType_descriptor();
 inline const ::std::string& ChatInfo_EChatType_Name(ChatInfo_EChatType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ChatInfo_EChatType_descriptor(), value);
@@ -304,7 +304,7 @@ inline bool ChatInfo_EChatType_Parse(
 }
 // ===================================================================
 
-class ReqEnterGameServer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqEnterGameServer : public ::google::protobuf::Message {
  public:
   ReqEnterGameServer();
   virtual ~ReqEnterGameServer();
@@ -419,7 +419,7 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -428,7 +428,7 @@ class ReqEnterGameServer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqHeartBeat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqHeartBeat : public ::google::protobuf::Message {
  public:
   ReqHeartBeat();
   virtual ~ReqHeartBeat();
@@ -491,7 +491,7 @@ class ReqHeartBeat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[1];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -500,7 +500,7 @@ class ReqHeartBeat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqLeaveGameServer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqLeaveGameServer : public ::google::protobuf::Message {
  public:
   ReqLeaveGameServer();
   virtual ~ReqLeaveGameServer();
@@ -563,7 +563,7 @@ class ReqLeaveGameServer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[1];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -572,7 +572,7 @@ class ReqLeaveGameServer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PlayerEntryInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PlayerEntryInfo : public ::google::protobuf::Message {
  public:
   PlayerEntryInfo();
   virtual ~PlayerEntryInfo();
@@ -737,7 +737,7 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -746,7 +746,7 @@ class PlayerEntryInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckPlayerEntryList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckPlayerEntryList : public ::google::protobuf::Message {
  public:
   AckPlayerEntryList();
   virtual ~AckPlayerEntryList();
@@ -822,7 +822,7 @@ class AckPlayerEntryList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -831,7 +831,7 @@ class AckPlayerEntryList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckPlayerLeaveList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckPlayerLeaveList : public ::google::protobuf::Message {
  public:
   AckPlayerLeaveList();
   virtual ~AckPlayerLeaveList();
@@ -907,7 +907,7 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -916,7 +916,7 @@ class AckPlayerLeaveList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckSynData : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckSynData : public ::google::protobuf::Message {
  public:
   ReqAckSynData();
   virtual ~ReqAckSynData();
@@ -1065,7 +1065,7 @@ class ReqAckSynData : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1074,7 +1074,7 @@ class ReqAckSynData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckPlayerMove : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
  public:
   ReqAckPlayerMove();
   virtual ~ReqAckPlayerMove();
@@ -1185,7 +1185,7 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1194,7 +1194,7 @@ class ReqAckPlayerMove : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ChatContainer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ChatContainer : public ::google::protobuf::Message {
  public:
   ChatContainer();
   virtual ~ChatContainer();
@@ -1305,7 +1305,7 @@ class ChatContainer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1314,7 +1314,7 @@ class ChatContainer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckPlayerChat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckPlayerChat : public ::google::protobuf::Message {
  public:
   ReqAckPlayerChat();
   virtual ~ReqAckPlayerChat();
@@ -1480,7 +1480,7 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1489,7 +1489,7 @@ class ReqAckPlayerChat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class EffectData : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT EffectData : public ::google::protobuf::Message {
  public:
   EffectData();
   virtual ~EffectData();
@@ -1609,7 +1609,7 @@ class EffectData : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1618,7 +1618,7 @@ class EffectData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckUseSkill : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
  public:
   ReqAckUseSkill();
   virtual ~ReqAckUseSkill();
@@ -1755,7 +1755,7 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1764,7 +1764,7 @@ class ReqAckUseSkill : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckUseItem : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckUseItem : public ::google::protobuf::Message {
  public:
   ReqAckUseItem();
   virtual ~ReqAckUseItem();
@@ -1888,7 +1888,7 @@ class ReqAckUseItem : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -1897,7 +1897,7 @@ class ReqAckUseItem : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckSwapScene : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
  public:
   ReqAckSwapScene();
   virtual ~ReqAckSwapScene();
@@ -2046,7 +2046,7 @@ class ReqAckSwapScene : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2055,7 +2055,7 @@ class ReqAckSwapScene : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ItemStruct : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ItemStruct : public ::google::protobuf::Message {
  public:
   ItemStruct();
   virtual ~ItemStruct();
@@ -2143,7 +2143,7 @@ class ItemStruct : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2152,7 +2152,7 @@ class ItemStruct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class CurrencyStruct : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT CurrencyStruct : public ::google::protobuf::Message {
  public:
   CurrencyStruct();
   virtual ~CurrencyStruct();
@@ -2235,7 +2235,7 @@ class CurrencyStruct : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2244,7 +2244,7 @@ class CurrencyStruct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckEndBattle : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
  public:
   ReqAckEndBattle();
   virtual ~ReqAckEndBattle();
@@ -2350,7 +2350,7 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2359,7 +2359,7 @@ class ReqAckEndBattle : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqPickDropItem : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqPickDropItem : public ::google::protobuf::Message {
  public:
   ReqPickDropItem();
   virtual ~ReqPickDropItem();
@@ -2434,7 +2434,7 @@ class ReqPickDropItem : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2443,7 +2443,7 @@ class ReqPickDropItem : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAcceptTask : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAcceptTask : public ::google::protobuf::Message {
  public:
   ReqAcceptTask();
   virtual ~ReqAcceptTask();
@@ -2521,7 +2521,7 @@ class ReqAcceptTask : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2530,7 +2530,7 @@ class ReqAcceptTask : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqCompeleteTask : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqCompeleteTask : public ::google::protobuf::Message {
  public:
   ReqCompeleteTask();
   virtual ~ReqCompeleteTask();
@@ -2608,7 +2608,7 @@ class ReqCompeleteTask : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2617,7 +2617,7 @@ class ReqCompeleteTask : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckJoinActivity : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message {
  public:
   ReqAckJoinActivity();
   virtual ~ReqAckJoinActivity();
@@ -2746,7 +2746,7 @@ class ReqAckJoinActivity : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2755,7 +2755,7 @@ class ReqAckJoinActivity : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckSearchOppnent : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckSearchOppnent : public ::google::protobuf::Message {
  public:
   ReqAckSearchOppnent();
   virtual ~ReqAckSearchOppnent();
@@ -2828,7 +2828,7 @@ class ReqAckSearchOppnent : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2837,7 +2837,7 @@ class ReqAckSearchOppnent : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckBattleOppnent : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckBattleOppnent : public ::google::protobuf::Message {
  public:
   ReqAckBattleOppnent();
   virtual ~ReqAckBattleOppnent();
@@ -2910,7 +2910,7 @@ class ReqAckBattleOppnent : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -2919,7 +2919,7 @@ class ReqAckBattleOppnent : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckCreateGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckCreateGuild : public ::google::protobuf::Message {
  public:
   ReqAckCreateGuild();
   virtual ~ReqAckCreateGuild();
@@ -3009,7 +3009,7 @@ class ReqAckCreateGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3018,7 +3018,7 @@ class ReqAckCreateGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSearchGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSearchGuild : public ::google::protobuf::Message {
  public:
   ReqSearchGuild();
   virtual ~ReqSearchGuild();
@@ -3096,7 +3096,7 @@ class ReqSearchGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3105,7 +3105,7 @@ class ReqSearchGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
  public:
   AckSearchGuild_SearchGuildObject();
   virtual ~AckSearchGuild_SearchGuildObject();
@@ -3250,7 +3250,7 @@ class AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3259,7 +3259,7 @@ class AckSearchGuild_SearchGuildObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckSearchGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckSearchGuild : public ::google::protobuf::Message {
  public:
   AckSearchGuild();
   virtual ~AckSearchGuild();
@@ -3337,7 +3337,7 @@ class AckSearchGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3346,7 +3346,7 @@ class AckSearchGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckJoinGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckJoinGuild : public ::google::protobuf::Message {
  public:
   ReqAckJoinGuild();
   virtual ~ReqAckJoinGuild();
@@ -3436,7 +3436,7 @@ class ReqAckJoinGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3445,7 +3445,7 @@ class ReqAckJoinGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckLeaveGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckLeaveGuild : public ::google::protobuf::Message {
  public:
   ReqAckLeaveGuild();
   virtual ~ReqAckLeaveGuild();
@@ -3535,7 +3535,7 @@ class ReqAckLeaveGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3544,7 +3544,7 @@ class ReqAckLeaveGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckOprGuildMember : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckOprGuildMember : public ::google::protobuf::Message {
  public:
   ReqAckOprGuildMember();
   virtual ~ReqAckOprGuildMember();
@@ -3672,7 +3672,7 @@ class ReqAckOprGuildMember : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3681,7 +3681,7 @@ class ReqAckOprGuildMember : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckOprGuild : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckOprGuild : public ::google::protobuf::Message {
  public:
   ReqAckOprGuild();
   virtual ~ReqAckOprGuild();
@@ -3836,7 +3836,7 @@ class ReqAckOprGuild : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3845,7 +3845,7 @@ class ReqAckOprGuild : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckDonateGuildItem : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckDonateGuildItem : public ::google::protobuf::Message {
  public:
   ReqAckDonateGuildItem();
   virtual ~ReqAckDonateGuildItem();
@@ -3945,7 +3945,7 @@ class ReqAckDonateGuildItem : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -3954,7 +3954,7 @@ class ReqAckDonateGuildItem : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqGuildEctypeInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqGuildEctypeInfo : public ::google::protobuf::Message {
  public:
   ReqGuildEctypeInfo();
   virtual ~ReqGuildEctypeInfo();
@@ -4041,7 +4041,7 @@ class ReqGuildEctypeInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4050,7 +4050,7 @@ class ReqGuildEctypeInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class GuildEctypeInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT GuildEctypeInfo : public ::google::protobuf::Message {
  public:
   GuildEctypeInfo();
   virtual ~GuildEctypeInfo();
@@ -4155,7 +4155,7 @@ class GuildEctypeInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4164,7 +4164,7 @@ class GuildEctypeInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckGuildEctypeInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckGuildEctypeInfo : public ::google::protobuf::Message {
  public:
   AckGuildEctypeInfo();
   virtual ~AckGuildEctypeInfo();
@@ -4251,7 +4251,7 @@ class AckGuildEctypeInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4260,7 +4260,7 @@ class AckGuildEctypeInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class SetGuildEctypeInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT SetGuildEctypeInfo : public ::google::protobuf::Message {
  public:
   SetGuildEctypeInfo();
   virtual ~SetGuildEctypeInfo();
@@ -4347,7 +4347,7 @@ class SetGuildEctypeInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4356,7 +4356,7 @@ class SetGuildEctypeInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqEnterGuildEctype : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqEnterGuildEctype : public ::google::protobuf::Message {
  public:
   ReqEnterGuildEctype();
   virtual ~ReqEnterGuildEctype();
@@ -4431,7 +4431,7 @@ class ReqEnterGuildEctype : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4440,7 +4440,7 @@ class ReqEnterGuildEctype : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ChatInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ChatInfo : public ::google::protobuf::Message {
  public:
   ChatInfo();
   virtual ~ChatInfo();
@@ -4644,7 +4644,7 @@ class ChatInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4653,7 +4653,7 @@ class ChatInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckCreateChatGroup : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckCreateChatGroup : public ::google::protobuf::Message {
  public:
   ReqAckCreateChatGroup();
   virtual ~ReqAckCreateChatGroup();
@@ -4765,7 +4765,7 @@ class ReqAckCreateChatGroup : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4774,7 +4774,7 @@ class ReqAckCreateChatGroup : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckjoinChatGroup : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckjoinChatGroup : public ::google::protobuf::Message {
  public:
   ReqAckjoinChatGroup();
   virtual ~ReqAckjoinChatGroup();
@@ -4881,7 +4881,7 @@ class ReqAckjoinChatGroup : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4890,7 +4890,7 @@ class ReqAckjoinChatGroup : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckQuitChatGroup : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckQuitChatGroup : public ::google::protobuf::Message {
  public:
   ReqAckQuitChatGroup();
   virtual ~ReqAckQuitChatGroup();
@@ -4987,7 +4987,7 @@ class ReqAckQuitChatGroup : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -4996,7 +4996,7 @@ class ReqAckQuitChatGroup : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSubscriptionChatGroup : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSubscriptionChatGroup : public ::google::protobuf::Message {
  public:
   ReqSubscriptionChatGroup();
   virtual ~ReqSubscriptionChatGroup();
@@ -5084,7 +5084,7 @@ class ReqSubscriptionChatGroup : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5093,7 +5093,7 @@ class ReqSubscriptionChatGroup : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
  public:
   ReqCancelSubscriptionChatGroup();
   virtual ~ReqCancelSubscriptionChatGroup();
@@ -5181,7 +5181,7 @@ class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5190,7 +5190,7 @@ class ReqCancelSubscriptionChatGroup : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqIntensifylevelToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqIntensifylevelToEquip : public ::google::protobuf::Message {
  public:
   ReqIntensifylevelToEquip();
   virtual ~ReqIntensifylevelToEquip();
@@ -5277,7 +5277,7 @@ class ReqIntensifylevelToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5286,7 +5286,7 @@ class ReqIntensifylevelToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckIntensifylevelToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckIntensifylevelToEquip : public ::google::protobuf::Message {
  public:
   AckIntensifylevelToEquip();
   virtual ~AckIntensifylevelToEquip();
@@ -5383,7 +5383,7 @@ class AckIntensifylevelToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5392,7 +5392,7 @@ class AckIntensifylevelToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqHoleToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqHoleToEquip : public ::google::protobuf::Message {
  public:
   ReqHoleToEquip();
   virtual ~ReqHoleToEquip();
@@ -5479,7 +5479,7 @@ class ReqHoleToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5488,7 +5488,7 @@ class ReqHoleToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckHoleToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckHoleToEquip : public ::google::protobuf::Message {
  public:
   AckHoleToEquip();
   virtual ~AckHoleToEquip();
@@ -5585,7 +5585,7 @@ class AckHoleToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5594,7 +5594,7 @@ class AckHoleToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqInlaystoneToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqInlaystoneToEquip : public ::google::protobuf::Message {
  public:
   ReqInlaystoneToEquip();
   virtual ~ReqInlaystoneToEquip();
@@ -5706,7 +5706,7 @@ class ReqInlaystoneToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5715,7 +5715,7 @@ class ReqInlaystoneToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckInlaystoneToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckInlaystoneToEquip : public ::google::protobuf::Message {
  public:
   AckInlaystoneToEquip();
   virtual ~AckInlaystoneToEquip();
@@ -5812,7 +5812,7 @@ class AckInlaystoneToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5821,7 +5821,7 @@ class AckInlaystoneToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqElementlevelToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqElementlevelToEquip : public ::google::protobuf::Message {
  public:
   ReqElementlevelToEquip();
   virtual ~ReqElementlevelToEquip();
@@ -5918,7 +5918,7 @@ class ReqElementlevelToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -5927,7 +5927,7 @@ class ReqElementlevelToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckElementlevelToEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckElementlevelToEquip : public ::google::protobuf::Message {
  public:
   AckElementlevelToEquip();
   virtual ~AckElementlevelToEquip();
@@ -6024,7 +6024,7 @@ class AckElementlevelToEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6033,7 +6033,7 @@ class AckElementlevelToEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSetFightHero : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message {
  public:
   ReqSetFightHero();
   virtual ~ReqSetFightHero();
@@ -6130,7 +6130,7 @@ class ReqSetFightHero : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6139,7 +6139,7 @@ class ReqSetFightHero : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqWearEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqWearEquip : public ::google::protobuf::Message {
  public:
   ReqWearEquip();
   virtual ~ReqWearEquip();
@@ -6238,7 +6238,7 @@ class ReqWearEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6247,7 +6247,7 @@ class ReqWearEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class TakeOffEquip : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT TakeOffEquip : public ::google::protobuf::Message {
  public:
   TakeOffEquip();
   virtual ~TakeOffEquip();
@@ -6346,7 +6346,7 @@ class TakeOffEquip : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6355,7 +6355,7 @@ class TakeOffEquip : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqMiningTitle : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqMiningTitle : public ::google::protobuf::Message {
  public:
   ReqMiningTitle();
   virtual ~ReqMiningTitle();
@@ -6450,7 +6450,7 @@ class ReqMiningTitle : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6459,7 +6459,7 @@ class ReqMiningTitle : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSendMail : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSendMail : public ::google::protobuf::Message {
  public:
   ReqSendMail();
   virtual ~ReqSendMail();
@@ -6572,7 +6572,7 @@ class ReqSendMail : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6581,7 +6581,7 @@ class ReqSendMail : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSwitchServer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSwitchServer : public ::google::protobuf::Message {
  public:
   ReqSwitchServer();
   virtual ~ReqSwitchServer();
@@ -6708,7 +6708,7 @@ class ReqSwitchServer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
@@ -6717,7 +6717,7 @@ class ReqSwitchServer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckSwitchServer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message {
  public:
   AckSwitchServer();
   virtual ~AckSwitchServer();
@@ -6822,7 +6822,7 @@ class AckSwitchServer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 

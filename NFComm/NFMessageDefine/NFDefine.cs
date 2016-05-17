@@ -634,6 +634,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_RECORD_SORT", Value=829)]
       EGMI_ACK_CLONE_RECORD_SORT = 829,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQSWICHSERVER", Value=840)]
+      EGMI_REQSWICHSERVER = 840,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACKSWICHSERVER", Value=841)]
+      EGMI_ACKSWICHSERVER = 841,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             

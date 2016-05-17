@@ -1916,4 +1916,94 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSwitchServer")]
+  public partial class ReqSwitchServer : global::ProtoBuf.IExtensible
+  {
+    public ReqSwitchServer() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private long _self_serverid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long self_serverid
+    {
+      get { return _self_serverid; }
+      set { _self_serverid = value; }
+    }
+    private long _target_serverid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"target_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long target_serverid
+    {
+      get { return _target_serverid; }
+      set { _target_serverid = value; }
+    }
+    private long _gate_serverid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gate_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long gate_serverid
+    {
+      get { return _gate_serverid; }
+      set { _gate_serverid = value; }
+    }
+    private long _SceneID;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"SceneID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long SceneID
+    {
+      get { return _SceneID; }
+      set { _SceneID = value; }
+    }
+    private NFMsg.Ident _client_id;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckSwitchServer")]
+  public partial class AckSwitchServer : global::ProtoBuf.IExtensible
+  {
+    public AckSwitchServer() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private long _self_serverid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long self_serverid
+    {
+      get { return _self_serverid; }
+      set { _self_serverid = value; }
+    }
+    private long _target_serverid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"target_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long target_serverid
+    {
+      get { return _target_serverid; }
+      set { _target_serverid = value; }
+    }
+    private long _gate_serverid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gate_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long gate_serverid
+    {
+      get { return _gate_serverid; }
+      set { _gate_serverid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }

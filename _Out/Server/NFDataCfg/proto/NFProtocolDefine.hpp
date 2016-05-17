@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/04/09
+//    @Date             :    2016/05/18
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -577,6 +577,42 @@ public:
 	static const std::string& English(){ static std::string xEnglish = "English"; return xEnglish; } // string
 	static const std::string& Chinese(){ static std::string xChinese = "Chinese"; return xChinese; } // string
 	// Record
+
+};
+
+class Map
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xMap = "Map"; return xMap; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& MaxCount(){ static std::string xMaxCount = "MaxCount"; return xMaxCount; } // int
+	static const std::string& InComeGold(){ static std::string xInComeGold = "InComeGold"; return xInComeGold; } // int
+	static const std::string& InComeDiamond(){ static std::string xInComeDiamond = "InComeDiamond"; return xInComeDiamond; } // int
+	static const std::string& InComeOil(){ static std::string xInComeOil = "InComeOil"; return xInComeOil; } // int
+	static const std::string& X(){ static std::string xX = "X"; return xX; } // int
+	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // int
+	static const std::string& MapLevel(){ static std::string xMapLevel = "MapLevel"; return xMapLevel; } // int
+	// Record
+	static const std::string& R_Station(){ static std::string xStation = "Station"; return xStation;}
+
+	enum Station
+	{
+		Station_GUID		= 0, // GUID -- object
+		Station_GuildID		= 1, // GuildID -- object
+		Station_GuildName		= 2, // GuildName -- string
+		Station_Level		= 3, // Level -- int
+		Station_Title		= 4, // Title -- string
+		Station_Slogan		= 5, // Slogan -- string
+		Station_State		= 6, // State -- int
+		Station_CurMemberCount		= 7, // CurMemberCount -- int
+	};
 
 };
 

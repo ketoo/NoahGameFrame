@@ -20,16 +20,8 @@ class NFCPluginManager
     : public NFIPluginManager
 {
 public:
-    NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
-    {
-        mbOnReloadPlugin = false;
-        m_pActorManager = pManager;
-        mnAppID = 0;
-        mnInitTime = time(NULL);
-        mnNowTime = mnInitTime;
-
-        mstrConfigPath = "";
-    }
+    NFCPluginManager(NFIActorManager* pManager);
+    virtual ~NFCPluginManager();
 
     virtual bool Init();
 
@@ -43,15 +35,13 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
 
-    virtual bool LoadPlugin();
-
-    // virtual bool UnLoadPlugin();
-
     virtual void Registered(NFIPlugin* pPlugin);
 
-    virtual void UnsRegistered(NFIPlugin* pPlugin);
+    virtual void UnRegistered(NFIPlugin* pPlugin);
 
-    virtual bool ReInitialize();
+    virtual bool StartReLoadState();
+
+    virtual bool EndReLoadState();
     //////////////////////////////////////////////////////////////////////////
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName);
@@ -70,11 +60,8 @@ public:
 
     virtual bool Execute();
 
-    //  virtual void OnReloadModule( const std::string& strModuleName, NFILogicModule* pModule );
-    //
-    //  virtual void ReloadPlugin( const std::string& pluginName );
-
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+
     virtual NFIActorManager* GetActorManager()
     {
         return m_pActorManager;
@@ -84,10 +71,12 @@ public:
     {
         return mnAppID;
     }
+
     virtual NFINT64 GetInitTime() const
     {
         return mnInitTime;
     }
+
     virtual NFINT64 GetNowTime() const
     {
         return mnNowTime;
@@ -99,18 +88,13 @@ public:
     }
 
 protected:
+    bool LoadPlugin();
+    bool LoadPluginLibrary(const std::string& strPluginDLLName);
+    bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
 
-    virtual bool LoadPluginLibrary(const std::string& strPluginDLLName);
-    virtual bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
-
-protected:
-    virtual bool ExecuteEvent();
+    bool ExecuteEvent();
 
 private:
-    bool mbOnReloadPlugin;
-    NFIActorManager* m_pActorManager;
-    NFQueue<NFIActorMessage> mxQueue;
-
     int mnAppID;
     NFINT64 mnInitTime;
     NFINT64 mnNowTime;
@@ -125,6 +109,8 @@ private:
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
 
+    NFIActorManager* m_pActorManager;
+    NFQueue<NFIActorMessage> mxQueue;
 
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
