@@ -10,7 +10,7 @@
 #define NFC_ASY_MYSQL_CLUSTER_MODULE_H
 
 #include "NFCMysqlDriver.h"
-#include "NFComm/NFMessageDefine/NFMsgMysql.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"

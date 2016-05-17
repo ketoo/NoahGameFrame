@@ -29,7 +29,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFMsgURl_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgURl_2eproto();
 void protobuf_AssignDesc_NFMsgURl_2eproto();
 void protobuf_ShutdownFile_NFMsgURl_2eproto();
 
@@ -37,7 +37,7 @@ class PackSURLParam;
 
 // ===================================================================
 
-class PackSURLParam : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PackSURLParam : public ::google::protobuf::Message {
  public:
   PackSURLParam();
   virtual ~PackSURLParam();
@@ -205,7 +205,7 @@ class PackSURLParam : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgURl_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgURl_2eproto();
   friend void protobuf_AssignDesc_NFMsgURl_2eproto();
   friend void protobuf_ShutdownFile_NFMsgURl_2eproto();
 

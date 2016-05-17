@@ -19,31 +19,32 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/mysql/ -I$(SolutionDir)/Dependencies/mysqlpp/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/mysql/ -I$(SolutionDir)/Dependencies/mysqlpp/ -I$(SolutionDir)/Dependencies/protobuf/src/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
 LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Debug/
-LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a $(SolutionDir)/Dependencies/lib/Debug/libmysqlpp.a $(SolutionDir)/Dependencies/lib/Debug/libmysqlclient.a
+LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a $(SolutionDir)/Dependencies/lib/Debug/libmysqlpp.a $(SolutionDir)/Dependencies/lib/Debug/libmysqlclient.a $(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/mysql/ -I$(SolutionDir)/Dependencies/mysqlpp/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/mysql/ -I$(SolutionDir)/Dependencies/mysqlpp/ -I$(SolutionDir)/Dependencies/protobuf/src/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG -D_USRDLL
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
 LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/
-LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFCore.a $(SolutionDir)/Dependencies/lib/Release/libmysqlpp.a $(SolutionDir)/Dependencies/lib/Release/libmysqlclient.a
+LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFCore.a $(SolutionDir)/Dependencies/lib/Release/libmysqlpp.a $(SolutionDir)/Dependencies/lib/Release/libmysqlclient.a $(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCMysqlClusterModule.o $(OBJDIR_DEBUG_X64)/NFCMysqlConnectMgrModule.o $(OBJDIR_DEBUG_X64)/NFCMysqlDriver.o $(OBJDIR_DEBUG_X64)/NFMysqlClusterPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCAsyMysqlClusterModule.o $(OBJDIR_DEBUG_X64)/NFCMysqlClusterModule.o $(OBJDIR_DEBUG_X64)/NFCMysqlDriver.o $(OBJDIR_DEBUG_X64)/NFCMysqlDriverManager.o $(OBJDIR_DEBUG_X64)/NFMysqlClusterPlugin.o $(OBJDIR_DEBUG_X64)/dllmain.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCMysqlClusterModule.o $(OBJDIR_RELEASE_X64)/NFCMysqlConnectMgrModule.o $(OBJDIR_RELEASE_X64)/NFCMysqlDriver.o $(OBJDIR_RELEASE_X64)/NFMysqlClusterPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCAsyMysqlClusterModule.o $(OBJDIR_RELEASE_X64)/NFCMysqlClusterModule.o $(OBJDIR_RELEASE_X64)/NFCMysqlDriver.o $(OBJDIR_RELEASE_X64)/NFCMysqlDriverManager.o $(OBJDIR_RELEASE_X64)/NFMysqlClusterPlugin.o $(OBJDIR_RELEASE_X64)/dllmain.o
 
 all: debug_x64 release_x64
 
@@ -54,23 +55,33 @@ before_debug_x64:
 	test -d $(OBJDIR_DEBUG_X64) || mkdir -p $(OBJDIR_DEBUG_X64)
 
 after_debug_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFMasterServer/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFProxyServer1/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial1/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
 out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 	$(LD) -shared $(LIBDIR_DEBUG_X64) $(OBJ_DEBUG_X64)  -o $(OUT_DEBUG_X64) $(LDFLAGS_DEBUG_X64) $(LIB_DEBUG_X64)
 
+$(OBJDIR_DEBUG_X64)/NFCAsyMysqlClusterModule.o: NFCAsyMysqlClusterModule.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCAsyMysqlClusterModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCAsyMysqlClusterModule.o
+
 $(OBJDIR_DEBUG_X64)/NFCMysqlClusterModule.o: NFCMysqlClusterModule.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCMysqlClusterModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCMysqlClusterModule.o
 
-$(OBJDIR_DEBUG_X64)/NFCMysqlConnectMgrModule.o: NFCMysqlConnectMgrModule.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCMysqlConnectMgrModule.cpp -o $(OBJDIR_DEBUG_X64)/NFCMysqlConnectMgrModule.o
-
 $(OBJDIR_DEBUG_X64)/NFCMysqlDriver.o: NFCMysqlDriver.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCMysqlDriver.cpp -o $(OBJDIR_DEBUG_X64)/NFCMysqlDriver.o
+
+$(OBJDIR_DEBUG_X64)/NFCMysqlDriverManager.o: NFCMysqlDriverManager.cpp
+	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCMysqlDriverManager.cpp -o $(OBJDIR_DEBUG_X64)/NFCMysqlDriverManager.o
 
 $(OBJDIR_DEBUG_X64)/NFMysqlClusterPlugin.o: NFMysqlClusterPlugin.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFMysqlClusterPlugin.cpp -o $(OBJDIR_DEBUG_X64)/NFMysqlClusterPlugin.o
@@ -88,23 +99,33 @@ before_release_x64:
 	test -d $(OBJDIR_RELEASE_X64) || mkdir -p $(OBJDIR_RELEASE_X64)
 
 after_release_x64: 
-	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFWorldServer/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFMasterServer/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFProxyServer1/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial1/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 
 out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 	$(LD) -shared $(LIBDIR_RELEASE_X64) $(OBJ_RELEASE_X64)  -o $(OUT_RELEASE_X64) $(LDFLAGS_RELEASE_X64) $(LIB_RELEASE_X64)
 
+$(OBJDIR_RELEASE_X64)/NFCAsyMysqlClusterModule.o: NFCAsyMysqlClusterModule.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCAsyMysqlClusterModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCAsyMysqlClusterModule.o
+
 $(OBJDIR_RELEASE_X64)/NFCMysqlClusterModule.o: NFCMysqlClusterModule.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCMysqlClusterModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCMysqlClusterModule.o
 
-$(OBJDIR_RELEASE_X64)/NFCMysqlConnectMgrModule.o: NFCMysqlConnectMgrModule.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCMysqlConnectMgrModule.cpp -o $(OBJDIR_RELEASE_X64)/NFCMysqlConnectMgrModule.o
-
 $(OBJDIR_RELEASE_X64)/NFCMysqlDriver.o: NFCMysqlDriver.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCMysqlDriver.cpp -o $(OBJDIR_RELEASE_X64)/NFCMysqlDriver.o
+
+$(OBJDIR_RELEASE_X64)/NFCMysqlDriverManager.o: NFCMysqlDriverManager.cpp
+	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCMysqlDriverManager.cpp -o $(OBJDIR_RELEASE_X64)/NFCMysqlDriverManager.o
 
 $(OBJDIR_RELEASE_X64)/NFMysqlClusterPlugin.o: NFMysqlClusterPlugin.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFMysqlClusterPlugin.cpp -o $(OBJDIR_RELEASE_X64)/NFMysqlClusterPlugin.o

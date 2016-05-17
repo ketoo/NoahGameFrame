@@ -32,7 +32,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
 void protobuf_AssignDesc_NFMsgPreGame_2eproto();
 void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -65,12 +65,12 @@ enum EServerState {
   EST_FIRE = 3,
   EST_MAINTEN = 4
 };
-bool EServerState_IsValid(int value);
+LIBPROTOC_EXPORT bool EServerState_IsValid(int value);
 const EServerState EServerState_MIN = EST_CRASH;
 const EServerState EServerState_MAX = EST_MAINTEN;
 const int EServerState_ARRAYSIZE = EServerState_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* EServerState_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EServerState_descriptor();
 inline const ::std::string& EServerState_Name(EServerState value) {
   return ::google::protobuf::internal::NameOfEnum(
     EServerState_descriptor(), value);
@@ -84,12 +84,12 @@ enum ReqServerListType {
   RSLT_WORLD_SERVER = 0,
   RSLT_GAMES_ERVER = 1
 };
-bool ReqServerListType_IsValid(int value);
+LIBPROTOC_EXPORT bool ReqServerListType_IsValid(int value);
 const ReqServerListType ReqServerListType_MIN = RSLT_WORLD_SERVER;
 const ReqServerListType ReqServerListType_MAX = RSLT_GAMES_ERVER;
 const int ReqServerListType_ARRAYSIZE = ReqServerListType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqServerListType_descriptor();
 inline const ::std::string& ReqServerListType_Name(ReqServerListType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ReqServerListType_descriptor(), value);
@@ -101,7 +101,7 @@ inline bool ReqServerListType_Parse(
 }
 // ===================================================================
 
-class ServerInfoReport : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ServerInfoReport : public ::google::protobuf::Message {
  public:
   ServerInfoReport();
   virtual ~ServerInfoReport();
@@ -254,7 +254,7 @@ class ServerInfoReport : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -263,7 +263,7 @@ class ServerInfoReport : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ServerInfoReportList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ServerInfoReportList : public ::google::protobuf::Message {
  public:
   ServerInfoReportList();
   virtual ~ServerInfoReportList();
@@ -339,7 +339,7 @@ class ServerInfoReportList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -348,7 +348,7 @@ class ServerInfoReportList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckEventResult : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckEventResult : public ::google::protobuf::Message {
  public:
   AckEventResult();
   virtual ~AckEventResult();
@@ -445,7 +445,7 @@ class AckEventResult : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -454,7 +454,7 @@ class AckEventResult : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAccountLogin : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
  public:
   ReqAccountLogin();
   virtual ~ReqAccountLogin();
@@ -647,7 +647,7 @@ class ReqAccountLogin : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -656,7 +656,7 @@ class ReqAccountLogin : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAccountLogout : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAccountLogout : public ::google::protobuf::Message {
  public:
   ReqAccountLogout();
   virtual ~ReqAccountLogout();
@@ -749,7 +749,7 @@ class ReqAccountLogout : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -758,7 +758,7 @@ class ReqAccountLogout : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ServerInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ServerInfo : public ::google::protobuf::Message {
  public:
   ServerInfo();
   virtual ~ServerInfo();
@@ -866,7 +866,7 @@ class ServerInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -875,7 +875,7 @@ class ServerInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqServerList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqServerList : public ::google::protobuf::Message {
  public:
   ReqServerList();
   virtual ~ReqServerList();
@@ -948,7 +948,7 @@ class ReqServerList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -957,7 +957,7 @@ class ReqServerList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckServerList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckServerList : public ::google::protobuf::Message {
  public:
   AckServerList();
   virtual ~AckServerList();
@@ -1043,7 +1043,7 @@ class AckServerList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1052,7 +1052,7 @@ class AckServerList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqConnectWorld : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqConnectWorld : public ::google::protobuf::Message {
  public:
   ReqConnectWorld();
   virtual ~ReqConnectWorld();
@@ -1162,7 +1162,7 @@ class ReqConnectWorld : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1171,7 +1171,7 @@ class ReqConnectWorld : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckConnectWorldResult : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckConnectWorldResult : public ::google::protobuf::Message {
  public:
   AckConnectWorldResult();
   virtual ~AckConnectWorldResult();
@@ -1321,7 +1321,7 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1330,7 +1330,7 @@ class AckConnectWorldResult : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqSelectServer : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqSelectServer : public ::google::protobuf::Message {
  public:
   ReqSelectServer();
   virtual ~ReqSelectServer();
@@ -1403,7 +1403,7 @@ class ReqSelectServer : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1412,7 +1412,7 @@ class ReqSelectServer : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqKickFromWorld : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqKickFromWorld : public ::google::protobuf::Message {
  public:
   ReqKickFromWorld();
   virtual ~ReqKickFromWorld();
@@ -1500,7 +1500,7 @@ class ReqKickFromWorld : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1509,7 +1509,7 @@ class ReqKickFromWorld : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqRoleList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqRoleList : public ::google::protobuf::Message {
  public:
   ReqRoleList();
   virtual ~ReqRoleList();
@@ -1597,7 +1597,7 @@ class ReqRoleList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1606,7 +1606,7 @@ class ReqRoleList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RoleLiteInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RoleLiteInfo : public ::google::protobuf::Message {
  public:
   RoleLiteInfo();
   virtual ~RoleLiteInfo();
@@ -1801,7 +1801,7 @@ class RoleLiteInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1810,7 +1810,7 @@ class RoleLiteInfo : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AckRoleLiteInfoList : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AckRoleLiteInfoList : public ::google::protobuf::Message {
  public:
   AckRoleLiteInfoList();
   virtual ~AckRoleLiteInfoList();
@@ -1886,7 +1886,7 @@ class AckRoleLiteInfoList : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -1895,7 +1895,7 @@ class AckRoleLiteInfoList : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqCreateRole : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqCreateRole : public ::google::protobuf::Message {
  public:
   ReqCreateRole();
   virtual ~ReqCreateRole();
@@ -2028,7 +2028,7 @@ class ReqCreateRole : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -2037,7 +2037,7 @@ class ReqCreateRole : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqDeleteRole : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqDeleteRole : public ::google::protobuf::Message {
  public:
   ReqDeleteRole();
   virtual ~ReqDeleteRole();
@@ -2140,7 +2140,7 @@ class ReqDeleteRole : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -2149,7 +2149,7 @@ class ReqDeleteRole : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqRecoverRole : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqRecoverRole : public ::google::protobuf::Message {
  public:
   ReqRecoverRole();
   virtual ~ReqRecoverRole();
@@ -2252,7 +2252,7 @@ class ReqRecoverRole : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -2261,7 +2261,7 @@ class ReqRecoverRole : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ServerHeartBeat : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ServerHeartBeat : public ::google::protobuf::Message {
  public:
   ServerHeartBeat();
   virtual ~ServerHeartBeat();
@@ -2334,7 +2334,7 @@ class ServerHeartBeat : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -2343,7 +2343,7 @@ class ServerHeartBeat : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RoleOnlineNotify : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message {
  public:
   RoleOnlineNotify();
   virtual ~RoleOnlineNotify();
@@ -2418,7 +2418,7 @@ class RoleOnlineNotify : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
@@ -2427,7 +2427,7 @@ class RoleOnlineNotify : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RoleOfflineNotify : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message {
  public:
   RoleOfflineNotify();
   virtual ~RoleOfflineNotify();
@@ -2502,7 +2502,7 @@ class RoleOfflineNotify : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
   friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 

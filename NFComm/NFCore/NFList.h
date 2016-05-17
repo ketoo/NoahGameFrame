@@ -28,7 +28,7 @@ public:
     bool                    First(T& id);
     bool                    Next(T& id);
     bool                    Get(const int32_t index, T& id);
-    int                       Count();
+    int                     Count();
 
 protected:
     //idType normal;
