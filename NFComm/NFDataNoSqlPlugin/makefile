@@ -19,22 +19,23 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -D_DEBUG -fpic -D_USRDLL -DTHERON_CPP11
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Deubg/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Deubg/
 LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFDataNoSqlPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -DNDEBUG -fpic -D_USRDLL -DTHERON_CPP11
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs

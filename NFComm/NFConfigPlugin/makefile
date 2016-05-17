@@ -19,25 +19,26 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/Theron/Include/External/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
 LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Debug/
 LIB_DEBUG_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/External/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/Theron/Include/External/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG -D_USRDLL
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
 LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/
 LIB_RELEASE_X64 = $(LIB)$(SolutionDir)/_Out/Comm/Release/NFCore.a
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so
 
@@ -61,6 +62,9 @@ after_debug_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFConfigPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
@@ -96,6 +100,9 @@ after_release_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFConfigPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 

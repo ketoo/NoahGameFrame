@@ -138,7 +138,7 @@ public:
         munMsgID = 0;
     }
 
-    // 内存结构[ MsgID(2) | MsgSize(4) ]
+    // Message Head[ MsgID(2) | MsgSize(4) ]
     virtual int EnCode(char* strData)
     {
         uint32_t nOffset = 0;
@@ -160,6 +160,7 @@ public:
         return nOffset;
     }
 
+    // Message Head[ MsgID(2) | MsgSize(4) ]
     virtual int DeCode(const char* strData)
     {
         uint32_t nOffset = 0;
@@ -262,13 +263,11 @@ public:
             return 0;
         }
 
-        //移除前面，则后面跟上
         if (nStart + nLen > mstrBuff.length())
         {
             return 0;
         }
 
-        //把后面的挪到前面来
         mstrBuff.erase(nStart, nLen);
 
         return mstrBuff.length();
@@ -348,6 +347,15 @@ public:
     {
         mnClientID = xClientID;
     }
+    const NFGUID& GetHashIdentID()
+    {
+        return mnHashIdentID;
+    }
+
+    void SetHashIdentID(const NFGUID& xHashIdentID)
+    {
+        mnHashIdentID = xHashIdentID;
+    }
 
     int GetRealFD()
     {
@@ -362,8 +370,9 @@ private:
 
     int32_t mnLogicState;
     int32_t mnGameID;
-    NFGUID mnUserID;
-    NFGUID mnClientID;
+    NFGUID mnUserID;//player id
+    NFGUID mnClientID;//temporary client id
+    NFGUID mnHashIdentID;//hash ident, special for distributed
     NFINet* m_pNet;
     //
     int nFD;
