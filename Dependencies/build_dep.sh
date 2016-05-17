@@ -46,10 +46,27 @@ cd ../
 # compiling protobuf
 cd protobuf
 chmod -R 755 *
-./configure CXXFLAGS=-fPIC --disable-shared
+./configure CXXFLAGS=-fPIC
 make
-cp -r -f ./src/.libs/*.a ../lib/Debug/
-cp -r -f ./src/.libs/*.a ../lib/Release/
+
+if [ ! -d ../../_Out/Comm/ ]; then
+ mkdir ../../_Out/Comm/
+fi
+if [ ! -d ../../_Out/Comm/Debug/ ]; then
+ mkdir ../../_Out/Comm/Debug/
+fi
+if [ ! -d ../../_Out/Comm/Release/ ]; then
+ mkdir ../../_Out/Comm/Release/
+fi
+
+cp -r -f ./src/.libs/*.so ../lib/Debug/
+cp -r -f ./src/.libs/*.so.* ../lib/Debug/
+cp -r -f ./src/.libs/*.so ../lib/Release/
+cp -r -f ./src/.libs/*.so.* ../lib/Release/
+cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
+cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Release/
 cd ../
 
 # compiling Theron
@@ -64,3 +81,7 @@ make clean
 cd ../
 
 # TODO: other libs
+
+# back to main dir
+pwd
+

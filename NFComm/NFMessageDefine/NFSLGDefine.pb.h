@@ -31,7 +31,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFSLGDefine_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
 void protobuf_AssignDesc_NFSLGDefine_2eproto();
 void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 
@@ -50,12 +50,12 @@ enum ESLGBuildingType {
   EBT_TEMPLE = 5,
   EBT_NUCLEAR = 6
 };
-bool ESLGBuildingType_IsValid(int value);
+LIBPROTOC_EXPORT bool ESLGBuildingType_IsValid(int value);
 const ESLGBuildingType ESLGBuildingType_MIN = EBT_BASE;
 const ESLGBuildingType ESLGBuildingType_MAX = EBT_NUCLEAR;
 const int ESLGBuildingType_ARRAYSIZE = ESLGBuildingType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESLGBuildingType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESLGBuildingType_descriptor();
 inline const ::std::string& ESLGBuildingType_Name(ESLGBuildingType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ESLGBuildingType_descriptor(), value);
@@ -116,12 +116,12 @@ enum ESLGBuildingSubType {
   EBST_ELEMENT_LAB = 500,
   EBST_NUCLEAR_FACTORY = 600
 };
-bool ESLGBuildingSubType_IsValid(int value);
+LIBPROTOC_EXPORT bool ESLGBuildingSubType_IsValid(int value);
 const ESLGBuildingSubType ESLGBuildingSubType_MIN = EBST_HALL;
 const ESLGBuildingSubType ESLGBuildingSubType_MAX = EBST_NUCLEAR_FACTORY;
 const int ESLGBuildingSubType_ARRAYSIZE = ESLGBuildingSubType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESLGBuildingSubType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESLGBuildingSubType_descriptor();
 inline const ::std::string& ESLGBuildingSubType_Name(ESLGBuildingSubType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ESLGBuildingSubType_descriptor(), value);
@@ -147,12 +147,12 @@ enum ESLGArmyType {
   EAT_VALKYRIE = 22,
   EAT_GOLEM = 23
 };
-bool ESLGArmyType_IsValid(int value);
+LIBPROTOC_EXPORT bool ESLGArmyType_IsValid(int value);
 const ESLGArmyType ESLGArmyType_MIN = EAT_FOOTMAN;
 const ESLGArmyType ESLGArmyType_MAX = EAT_GOLEM;
 const int ESLGArmyType_ARRAYSIZE = ESLGArmyType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESLGArmyType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESLGArmyType_descriptor();
 inline const ::std::string& ESLGArmyType_Name(ESLGArmyType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ESLGArmyType_descriptor(), value);
@@ -178,12 +178,12 @@ enum ESLGFuncType {
   EFT_CANCEL = 12,
   EFT_FINISH = 13
 };
-bool ESLGFuncType_IsValid(int value);
+LIBPROTOC_EXPORT bool ESLGFuncType_IsValid(int value);
 const ESLGFuncType ESLGFuncType_MIN = EFT_INFO;
 const ESLGFuncType ESLGFuncType_MAX = EFT_FINISH;
 const int ESLGFuncType_ARRAYSIZE = ESLGFuncType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESLGFuncType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESLGFuncType_descriptor();
 inline const ::std::string& ESLGFuncType_Name(ESLGFuncType value) {
   return ::google::protobuf::internal::NameOfEnum(
     ESLGFuncType_descriptor(), value);
@@ -198,12 +198,12 @@ enum ESLGBuildingState {
   EBS_BOOST = 1,
   EBS_UPGRADE = 2
 };
-bool ESLGBuildingState_IsValid(int value);
+LIBPROTOC_EXPORT bool ESLGBuildingState_IsValid(int value);
 const ESLGBuildingState ESLGBuildingState_MIN = EBS_IDLE;
 const ESLGBuildingState ESLGBuildingState_MAX = EBS_UPGRADE;
 const int ESLGBuildingState_ARRAYSIZE = ESLGBuildingState_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESLGBuildingState_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESLGBuildingState_descriptor();
 inline const ::std::string& ESLGBuildingState_Name(ESLGBuildingState value) {
   return ::google::protobuf::internal::NameOfEnum(
     ESLGBuildingState_descriptor(), value);
@@ -215,7 +215,7 @@ inline bool ESLGBuildingState_Parse(
 }
 // ===================================================================
 
-class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
  public:
   ReqAckBuyObjectFormShop();
   virtual ~ReqAckBuyObjectFormShop();
@@ -323,7 +323,7 @@ class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
   friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 
@@ -332,7 +332,7 @@ class ReqAckBuyObjectFormShop : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqAckMoveBuildObject : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqAckMoveBuildObject : public ::google::protobuf::Message {
  public:
   ReqAckMoveBuildObject();
   virtual ~ReqAckMoveBuildObject();
@@ -447,7 +447,7 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
   friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 
@@ -456,7 +456,7 @@ class ReqAckMoveBuildObject : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqUpBuildLv : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqUpBuildLv : public ::google::protobuf::Message {
  public:
   ReqUpBuildLv();
   virtual ~ReqUpBuildLv();
@@ -541,7 +541,7 @@ class ReqUpBuildLv : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
   friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 
@@ -550,7 +550,7 @@ class ReqUpBuildLv : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqCreateItem : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqCreateItem : public ::google::protobuf::Message {
  public:
   ReqCreateItem();
   virtual ~ReqCreateItem();
@@ -660,7 +660,7 @@ class ReqCreateItem : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
   friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 
@@ -669,7 +669,7 @@ class ReqCreateItem : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ReqBuildOperate : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqBuildOperate : public ::google::protobuf::Message {
  public:
   ReqBuildOperate();
   virtual ~ReqBuildOperate();
@@ -764,7 +764,7 @@ class ReqBuildOperate : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFSLGDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
   friend void protobuf_ShutdownFile_NFSLGDefine_2eproto();
 

@@ -108,7 +108,7 @@ bool NFCGameServerToWorldModule::AfterInit()
     assert(NULL != m_pLogModule);
     assert(NULL != m_pGameServerNet_ServerModule);
 
-    m_pKernelModule->ResgisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
+    m_pKernelModule->RegisterCommonClassEvent(this, &NFCGameServerToWorldModule::OnClassCommonEvent);
 
     NFIClusterClientModule::Bind(this, &NFCGameServerToWorldModule::OnReciveWSPack, &NFCGameServerToWorldModule::OnSocketWSEvent);
 
@@ -466,7 +466,7 @@ void NFCGameServerToWorldModule::OnAckCreateGuildProcess(const int nSockIndex, c
     *xJoinMsg.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
     xJoinMsg.set_guild_name(xData.guild_name());
 
-    SendSuitByPB(xGuild.nData64, NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD, xJoinMsg, 0, nPlayerID);
+    SendSuitByPB(xGuild.nData64, NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD, xJoinMsg);
 }
 
 void NFCGameServerToWorldModule::OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -527,7 +527,7 @@ void NFCGameServerToWorldModule::SendOnline(const NFGUID& self)
     const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
     *xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-    SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg, 0, self);
+    SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 
     NF_SHARE_PTR<NFIRecord> pChatGroup = m_pKernelModule->FindRecord(self, "ChatGroup");
     if (NULL != pChatGroup)
@@ -550,7 +550,7 @@ void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
     const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
     *xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-    SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg, 0, self);
+    SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
 
     NF_SHARE_PTR<NFIRecord> pChatGroup = m_pKernelModule->FindRecord(self, "ChatGroup");
     if (NULL != pChatGroup)
@@ -683,7 +683,7 @@ void NFCGameServerToWorldModule::CreateChatGroup(const NFGUID& self, const int n
     xMsg.set_chattype(nChatType);
     xMsg.set_name(strName);
 
-    SendSuitByPB(self.nData64, NFMsg::EGEC_REQ_CREATE_CHATGROUP, xMsg, 0, self);
+    SendSuitByPB(self.nData64, NFMsg::EGEC_REQ_CREATE_CHATGROUP, xMsg);
 }
 
 void NFCGameServerToWorldModule::JoinChatGroup(const NFGUID& self, const NFGUID& xGroup, const int nChatType)
@@ -699,7 +699,7 @@ void NFCGameServerToWorldModule::JoinChatGroup(const NFGUID& self, const NFGUID&
     *xMsg.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
     xMsg.set_chattype(nChatType);
 
-    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_JOIN_CHATGROUP, xMsg, 0, self);
+    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_JOIN_CHATGROUP, xMsg);
 }
 
 void NFCGameServerToWorldModule::QuitChatGroup(const NFGUID& self, const NFGUID& xGroup)
@@ -714,7 +714,7 @@ void NFCGameServerToWorldModule::QuitChatGroup(const NFGUID& self, const NFGUID&
     *xMsg.mutable_selfid() = NFINetModule::NFToPB(self);
     *xMsg.mutable_xchatgroupid() = NFINetModule::NFToPB(xGroup);
 
-    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_LEAVE_CHATGROUP, xMsg, 0, self);
+    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_LEAVE_CHATGROUP, xMsg);
 }
 
 void NFCGameServerToWorldModule::SubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup)
@@ -731,7 +731,7 @@ void NFCGameServerToWorldModule::SubscriptionChatGroup(const NFGUID& self, const
     NFMsg::Ident* pData = xMsg.add_xchatgroupid();
     *pData = NFINetModule::NFToPB(xGroup);
 
-    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, xMsg, 0, self);
+    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, xMsg);
 }
 
 void NFCGameServerToWorldModule::CancelSubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup)
@@ -747,7 +747,7 @@ void NFCGameServerToWorldModule::CancelSubscriptionChatGroup(const NFGUID& self,
     NFMsg::Ident* pData = xMsg.add_xchatgroupid();
     *pData = NFINetModule::NFToPB(xGroup);
 
-    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP, xMsg, 0, self);
+    SendSuitByPB(xGroup.nData64, NFMsg::EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP, xMsg);
 }
 
 // template<class TPBClass>

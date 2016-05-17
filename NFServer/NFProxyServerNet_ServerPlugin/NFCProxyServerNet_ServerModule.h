@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
+#include "NFComm/NFCore/NFCConsistentHash.hpp"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -69,7 +70,7 @@ protected:
 protected:
 
     NFMapEx<NFGUID, int> mxClientIdent;
-
+    NFCConsistentHash mxConsistentHash;
 protected:
     NFIProxyServerToWorldModule* m_pProxyToWorldModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;

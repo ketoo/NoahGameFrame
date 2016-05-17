@@ -57,20 +57,19 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
         return;
     }
 
-    int nSize = xMsg.server_list_size();
-    for (int i = 0; i < nSize; ++i)
+    for (int i = 0; i < xMsg.server_list_size(); ++i)
     {
-        const NFMsg::ServerInfoReport* pData = xMsg.mutable_server_list(i);
+        const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         //type
         ConnectData xServerData;
 
-        xServerData.nGameID = pData->server_id();
-        xServerData.strIP = pData->server_ip();
-        xServerData.nPort = pData->server_port();
-        xServerData.strName = pData->server_name();
+        xServerData.nGameID = xData.server_id();
+        xServerData.strIP = xData.server_ip();
+        xServerData.nPort = xData.server_port();
+        xServerData.strName = xData.server_name();
         //xServerData.eState = pData->server_state();
-        xServerData.eServerType = (NF_SERVER_TYPES)pData->server_type();
+        xServerData.eServerType = (NF_SERVER_TYPES)xData.server_type();
 
         switch (xServerData.eServerType)
         {

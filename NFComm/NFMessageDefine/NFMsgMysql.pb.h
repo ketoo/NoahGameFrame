@@ -29,7 +29,7 @@
 namespace NFMsg {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFMsgMysql_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgMysql_2eproto();
 void protobuf_AssignDesc_NFMsgMysql_2eproto();
 void protobuf_ShutdownFile_NFMsgMysql_2eproto();
 
@@ -38,7 +38,7 @@ class PackMysqlServerInfo;
 
 // ===================================================================
 
-class PackMysqlParam : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PackMysqlParam : public ::google::protobuf::Message {
  public:
   PackMysqlParam();
   virtual ~PackMysqlParam();
@@ -205,7 +205,7 @@ class PackMysqlParam : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgMysql_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgMysql_2eproto();
   friend void protobuf_AssignDesc_NFMsgMysql_2eproto();
   friend void protobuf_ShutdownFile_NFMsgMysql_2eproto();
 
@@ -214,7 +214,7 @@ class PackMysqlParam : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class PackMysqlServerInfo : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT PackMysqlServerInfo : public ::google::protobuf::Message {
  public:
   PackMysqlServerInfo();
   virtual ~PackMysqlServerInfo();
@@ -377,7 +377,7 @@ class PackMysqlServerInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFMsgMysql_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgMysql_2eproto();
   friend void protobuf_AssignDesc_NFMsgMysql_2eproto();
   friend void protobuf_ShutdownFile_NFMsgMysql_2eproto();
 
