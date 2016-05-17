@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFWorldLogicPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -27,11 +28,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFMessageDefine_d.a" />
+					<Add library="libNFMessageDefine_d" />
 					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libprotobuf.a" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -45,6 +46,7 @@
 			</Target>
 			<Target title="Release x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Release/NFWorldLogicPlugin" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -63,11 +65,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFMessageDefine.a" />
+					<Add library="libNFMessageDefine" />
 					<Add library="$(SolutionDir)/_Out/Comm/Release/NFNet.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libprotobuf.a" />
+					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>

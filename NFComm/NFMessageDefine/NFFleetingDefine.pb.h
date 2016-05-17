@@ -30,7 +30,7 @@
 namespace NFFS {
 
 // Internal implementation detail -- do not call these.
-void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
 void protobuf_AssignDesc_NFFleetingDefine_2eproto();
 void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -63,12 +63,12 @@ enum SuwayyahEvents_ESEType {
   SuwayyahEvents_ESEType_ESET_LEFT_AREA = 2,
   SuwayyahEvents_ESEType_ESET_RIGHT_AREA = 3
 };
-bool SuwayyahEvents_ESEType_IsValid(int value);
+LIBPROTOC_EXPORT bool SuwayyahEvents_ESEType_IsValid(int value);
 const SuwayyahEvents_ESEType SuwayyahEvents_ESEType_ESEType_MIN = SuwayyahEvents_ESEType_ESET_SINGLE;
 const SuwayyahEvents_ESEType SuwayyahEvents_ESEType_ESEType_MAX = SuwayyahEvents_ESEType_ESET_RIGHT_AREA;
 const int SuwayyahEvents_ESEType_ESEType_ARRAYSIZE = SuwayyahEvents_ESEType_ESEType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* SuwayyahEvents_ESEType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* SuwayyahEvents_ESEType_descriptor();
 inline const ::std::string& SuwayyahEvents_ESEType_Name(SuwayyahEvents_ESEType value) {
   return ::google::protobuf::internal::NameOfEnum(
     SuwayyahEvents_ESEType_descriptor(), value);
@@ -82,12 +82,12 @@ enum BulletEvents_EBEType {
   BulletEvents_EBEType_ESET_TARGET = 0,
   BulletEvents_EBEType_ESET_POSITION = 1
 };
-bool BulletEvents_EBEType_IsValid(int value);
+LIBPROTOC_EXPORT bool BulletEvents_EBEType_IsValid(int value);
 const BulletEvents_EBEType BulletEvents_EBEType_EBEType_MIN = BulletEvents_EBEType_ESET_TARGET;
 const BulletEvents_EBEType BulletEvents_EBEType_EBEType_MAX = BulletEvents_EBEType_ESET_POSITION;
 const int BulletEvents_EBEType_EBEType_ARRAYSIZE = BulletEvents_EBEType_EBEType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* BulletEvents_EBEType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvents_EBEType_descriptor();
 inline const ::std::string& BulletEvents_EBEType_Name(BulletEvents_EBEType value) {
   return ::google::protobuf::internal::NameOfEnum(
     BulletEvents_EBEType_descriptor(), value);
@@ -101,12 +101,12 @@ enum BulletEvents_EBE_BACKType {
   BulletEvents_EBE_BACKType_EBEBT_BACK = 0,
   BulletEvents_EBE_BACKType_EBEBT_SIDE = 1
 };
-bool BulletEvents_EBE_BACKType_IsValid(int value);
+LIBPROTOC_EXPORT bool BulletEvents_EBE_BACKType_IsValid(int value);
 const BulletEvents_EBE_BACKType BulletEvents_EBE_BACKType_EBE_BACKType_MIN = BulletEvents_EBE_BACKType_EBEBT_BACK;
 const BulletEvents_EBE_BACKType BulletEvents_EBE_BACKType_EBE_BACKType_MAX = BulletEvents_EBE_BACKType_EBEBT_SIDE;
 const int BulletEvents_EBE_BACKType_EBE_BACKType_ARRAYSIZE = BulletEvents_EBE_BACKType_EBE_BACKType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* BulletEvents_EBE_BACKType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvents_EBE_BACKType_descriptor();
 inline const ::std::string& BulletEvents_EBE_BACKType_Name(BulletEvents_EBE_BACKType value) {
   return ::google::protobuf::internal::NameOfEnum(
     BulletEvents_EBE_BACKType_descriptor(), value);
@@ -122,12 +122,12 @@ enum AnimatorMoves_EAMType {
   AnimatorMoves_EAMType_EAMT_LEFT = 2,
   AnimatorMoves_EAMType_EAMT_RIGHT = 3
 };
-bool AnimatorMoves_EAMType_IsValid(int value);
+LIBPROTOC_EXPORT bool AnimatorMoves_EAMType_IsValid(int value);
 const AnimatorMoves_EAMType AnimatorMoves_EAMType_EAMType_MIN = AnimatorMoves_EAMType_EAMT_FORWARD;
 const AnimatorMoves_EAMType AnimatorMoves_EAMType_EAMType_MAX = AnimatorMoves_EAMType_EAMT_RIGHT;
 const int AnimatorMoves_EAMType_EAMType_ARRAYSIZE = AnimatorMoves_EAMType_EAMType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* AnimatorMoves_EAMType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AnimatorMoves_EAMType_descriptor();
 inline const ::std::string& AnimatorMoves_EAMType_Name(AnimatorMoves_EAMType value) {
   return ::google::protobuf::internal::NameOfEnum(
     AnimatorMoves_EAMType_descriptor(), value);
@@ -148,12 +148,12 @@ enum CameraControlEvents_ECEType {
   CameraControlEvents_ECEType_FreeMode = 7,
   CameraControlEvents_ECEType_MainRPGMode = 8
 };
-bool CameraControlEvents_ECEType_IsValid(int value);
+LIBPROTOC_EXPORT bool CameraControlEvents_ECEType_IsValid(int value);
 const CameraControlEvents_ECEType CameraControlEvents_ECEType_ECEType_MIN = CameraControlEvents_ECEType_Earthquake;
 const CameraControlEvents_ECEType CameraControlEvents_ECEType_ECEType_MAX = CameraControlEvents_ECEType_MainRPGMode;
 const int CameraControlEvents_ECEType_ECEType_ARRAYSIZE = CameraControlEvents_ECEType_ECEType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* CameraControlEvents_ECEType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* CameraControlEvents_ECEType_descriptor();
 inline const ::std::string& CameraControlEvents_ECEType_Name(CameraControlEvents_ECEType value) {
   return ::google::protobuf::internal::NameOfEnum(
     CameraControlEvents_ECEType_descriptor(), value);
@@ -174,12 +174,12 @@ enum ParticleEvents_EPERTYPE {
   ParticleEvents_EPERTYPE_Random_YZ = 7,
   ParticleEvents_EPERTYPE_Random_XYZ = 8
 };
-bool ParticleEvents_EPERTYPE_IsValid(int value);
+LIBPROTOC_EXPORT bool ParticleEvents_EPERTYPE_IsValid(int value);
 const ParticleEvents_EPERTYPE ParticleEvents_EPERTYPE_EPERTYPE_MIN = ParticleEvents_EPERTYPE_NONE;
 const ParticleEvents_EPERTYPE ParticleEvents_EPERTYPE_EPERTYPE_MAX = ParticleEvents_EPERTYPE_Random_XYZ;
 const int ParticleEvents_EPERTYPE_EPERTYPE_ARRAYSIZE = ParticleEvents_EPERTYPE_EPERTYPE_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ParticleEvents_EPERTYPE_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ParticleEvents_EPERTYPE_descriptor();
 inline const ::std::string& ParticleEvents_EPERTYPE_Name(ParticleEvents_EPERTYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
     ParticleEvents_EPERTYPE_descriptor(), value);
@@ -193,12 +193,12 @@ enum EnableEvents_EEETYPE {
   EnableEvents_EEETYPE_INIT = 0,
   EnableEvents_EEETYPE_FINAL = 1
 };
-bool EnableEvents_EEETYPE_IsValid(int value);
+LIBPROTOC_EXPORT bool EnableEvents_EEETYPE_IsValid(int value);
 const EnableEvents_EEETYPE EnableEvents_EEETYPE_EEETYPE_MIN = EnableEvents_EEETYPE_INIT;
 const EnableEvents_EEETYPE EnableEvents_EEETYPE_EEETYPE_MAX = EnableEvents_EEETYPE_FINAL;
 const int EnableEvents_EEETYPE_EEETYPE_ARRAYSIZE = EnableEvents_EEETYPE_EEETYPE_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* EnableEvents_EEETYPE_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EnableEvents_EEETYPE_descriptor();
 inline const ::std::string& EnableEvents_EEETYPE_Name(EnableEvents_EEETYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
     EnableEvents_EEETYPE_descriptor(), value);
@@ -212,12 +212,12 @@ enum TrailEvents_TEETYPE {
   TrailEvents_TEETYPE_INIT = 0,
   TrailEvents_TEETYPE_FINAL = 1
 };
-bool TrailEvents_TEETYPE_IsValid(int value);
+LIBPROTOC_EXPORT bool TrailEvents_TEETYPE_IsValid(int value);
 const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MIN = TrailEvents_TEETYPE_INIT;
 const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MAX = TrailEvents_TEETYPE_FINAL;
 const int TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE = TrailEvents_TEETYPE_TEETYPE_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor();
 inline const ::std::string& TrailEvents_TEETYPE_Name(TrailEvents_TEETYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
     TrailEvents_TEETYPE_descriptor(), value);
@@ -231,12 +231,12 @@ enum AudioEvents_AEETYPE {
   AudioEvents_AEETYPE_INIT = 0,
   AudioEvents_AEETYPE_FINAL = 1
 };
-bool AudioEvents_AEETYPE_IsValid(int value);
+LIBPROTOC_EXPORT bool AudioEvents_AEETYPE_IsValid(int value);
 const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MIN = AudioEvents_AEETYPE_INIT;
 const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MAX = AudioEvents_AEETYPE_FINAL;
 const int AudioEvents_AEETYPE_AEETYPE_ARRAYSIZE = AudioEvents_AEETYPE_AEETYPE_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* AudioEvents_AEETYPE_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AudioEvents_AEETYPE_descriptor();
 inline const ::std::string& AudioEvents_AEETYPE_Name(AudioEvents_AEETYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
     AudioEvents_AEETYPE_descriptor(), value);
@@ -250,12 +250,12 @@ enum GlobalSpeeds_EGSTYPE {
   GlobalSpeeds_EGSTYPE_INIT = 0,
   GlobalSpeeds_EGSTYPE_FINAL = 1
 };
-bool GlobalSpeeds_EGSTYPE_IsValid(int value);
+LIBPROTOC_EXPORT bool GlobalSpeeds_EGSTYPE_IsValid(int value);
 const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MIN = GlobalSpeeds_EGSTYPE_INIT;
 const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MAX = GlobalSpeeds_EGSTYPE_FINAL;
 const int GlobalSpeeds_EGSTYPE_EGSTYPE_ARRAYSIZE = GlobalSpeeds_EGSTYPE_EGSTYPE_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* GlobalSpeeds_EGSTYPE_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* GlobalSpeeds_EGSTYPE_descriptor();
 inline const ::std::string& GlobalSpeeds_EGSTYPE_Name(GlobalSpeeds_EGSTYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
     GlobalSpeeds_EGSTYPE_descriptor(), value);
@@ -272,12 +272,12 @@ enum AnimatorFlys_EAFType {
   AnimatorFlys_EAFType_EAFT_RIGHT = 3,
   AnimatorFlys_EAFType_EAFT_TOP = 4
 };
-bool AnimatorFlys_EAFType_IsValid(int value);
+LIBPROTOC_EXPORT bool AnimatorFlys_EAFType_IsValid(int value);
 const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MIN = AnimatorFlys_EAFType_EAFT_FORWARD;
 const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MAX = AnimatorFlys_EAFType_EAFT_TOP;
 const int AnimatorFlys_EAFType_EAFType_ARRAYSIZE = AnimatorFlys_EAFType_EAFType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* AnimatorFlys_EAFType_descriptor();
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AnimatorFlys_EAFType_descriptor();
 inline const ::std::string& AnimatorFlys_EAFType_Name(AnimatorFlys_EAFType value) {
   return ::google::protobuf::internal::NameOfEnum(
     AnimatorFlys_EAFType_descriptor(), value);
@@ -289,7 +289,7 @@ inline bool AnimatorFlys_EAFType_Parse(
 }
 // ===================================================================
 
-class FSVector3 : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT FSVector3 : public ::google::protobuf::Message {
  public:
   FSVector3();
   virtual ~FSVector3();
@@ -382,7 +382,7 @@ class FSVector3 : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -391,7 +391,7 @@ class FSVector3 : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class SuwayyahEvents_Suwayyah : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT SuwayyahEvents_Suwayyah : public ::google::protobuf::Message {
  public:
   SuwayyahEvents_Suwayyah();
   virtual ~SuwayyahEvents_Suwayyah();
@@ -589,7 +589,7 @@ class SuwayyahEvents_Suwayyah : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -598,7 +598,7 @@ class SuwayyahEvents_Suwayyah : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class SuwayyahEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT SuwayyahEvents : public ::google::protobuf::Message {
  public:
   SuwayyahEvents();
   virtual ~SuwayyahEvents();
@@ -702,7 +702,7 @@ class SuwayyahEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -711,7 +711,7 @@ class SuwayyahEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class BulletEvents_TacheBomp : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Message {
  public:
   BulletEvents_TacheBomp();
   virtual ~BulletEvents_TacheBomp();
@@ -904,7 +904,7 @@ class BulletEvents_TacheBomp : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -913,7 +913,7 @@ class BulletEvents_TacheBomp : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class BulletEvents_Bullet : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message {
  public:
   BulletEvents_Bullet();
   virtual ~BulletEvents_Bullet();
@@ -1196,7 +1196,7 @@ class BulletEvents_Bullet : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(18 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1205,7 +1205,7 @@ class BulletEvents_Bullet : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class BulletEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvents : public ::google::protobuf::Message {
  public:
   BulletEvents();
   virtual ~BulletEvents();
@@ -1332,7 +1332,7 @@ class BulletEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1341,7 +1341,7 @@ class BulletEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AnimatorMoves_Move : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
  public:
   AnimatorMoves_Move();
   virtual ~AnimatorMoves_Move();
@@ -1474,7 +1474,7 @@ class AnimatorMoves_Move : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1483,7 +1483,7 @@ class AnimatorMoves_Move : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AnimatorMoves : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AnimatorMoves : public ::google::protobuf::Message {
  public:
   AnimatorMoves();
   virtual ~AnimatorMoves();
@@ -1587,7 +1587,7 @@ class AnimatorMoves : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1596,7 +1596,7 @@ class AnimatorMoves : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class CameraControlEvents_Camera : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::Message {
  public:
   CameraControlEvents_Camera();
   virtual ~CameraControlEvents_Camera();
@@ -1731,7 +1731,7 @@ class CameraControlEvents_Camera : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1740,7 +1740,7 @@ class CameraControlEvents_Camera : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class CameraControlEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT CameraControlEvents : public ::google::protobuf::Message {
  public:
   CameraControlEvents();
   virtual ~CameraControlEvents();
@@ -1849,7 +1849,7 @@ class CameraControlEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -1858,7 +1858,7 @@ class CameraControlEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ParticleEvents_Particle : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ParticleEvents_Particle : public ::google::protobuf::Message {
  public:
   ParticleEvents_Particle();
   virtual ~ParticleEvents_Particle();
@@ -2043,7 +2043,7 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2052,7 +2052,7 @@ class ParticleEvents_Particle : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class ParticleEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ParticleEvents : public ::google::protobuf::Message {
  public:
   ParticleEvents();
   virtual ~ParticleEvents();
@@ -2161,7 +2161,7 @@ class ParticleEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2170,7 +2170,7 @@ class ParticleEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class EnableEvents_Enable : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT EnableEvents_Enable : public ::google::protobuf::Message {
  public:
   EnableEvents_Enable();
   virtual ~EnableEvents_Enable();
@@ -2298,7 +2298,7 @@ class EnableEvents_Enable : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2307,7 +2307,7 @@ class EnableEvents_Enable : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class EnableEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT EnableEvents : public ::google::protobuf::Message {
  public:
   EnableEvents();
   virtual ~EnableEvents();
@@ -2409,7 +2409,7 @@ class EnableEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2418,7 +2418,7 @@ class EnableEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class TrailEvents_Trail : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT TrailEvents_Trail : public ::google::protobuf::Message {
  public:
   TrailEvents_Trail();
   virtual ~TrailEvents_Trail();
@@ -2546,7 +2546,7 @@ class TrailEvents_Trail : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2555,7 +2555,7 @@ class TrailEvents_Trail : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class TrailEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT TrailEvents : public ::google::protobuf::Message {
  public:
   TrailEvents();
   virtual ~TrailEvents();
@@ -2657,7 +2657,7 @@ class TrailEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2666,7 +2666,7 @@ class TrailEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AudioEvents_Audio : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AudioEvents_Audio : public ::google::protobuf::Message {
  public:
   AudioEvents_Audio();
   virtual ~AudioEvents_Audio();
@@ -2794,7 +2794,7 @@ class AudioEvents_Audio : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2803,7 +2803,7 @@ class AudioEvents_Audio : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AudioEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AudioEvents : public ::google::protobuf::Message {
  public:
   AudioEvents();
   virtual ~AudioEvents();
@@ -2905,7 +2905,7 @@ class AudioEvents : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -2914,7 +2914,7 @@ class AudioEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class GlobalSpeeds_Speed : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT GlobalSpeeds_Speed : public ::google::protobuf::Message {
  public:
   GlobalSpeeds_Speed();
   virtual ~GlobalSpeeds_Speed();
@@ -3007,7 +3007,7 @@ class GlobalSpeeds_Speed : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -3016,7 +3016,7 @@ class GlobalSpeeds_Speed : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class GlobalSpeeds : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT GlobalSpeeds : public ::google::protobuf::Message {
  public:
   GlobalSpeeds();
   virtual ~GlobalSpeeds();
@@ -3118,7 +3118,7 @@ class GlobalSpeeds : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -3127,7 +3127,7 @@ class GlobalSpeeds : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AnimatorFlys_Fly : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AnimatorFlys_Fly : public ::google::protobuf::Message {
  public:
   AnimatorFlys_Fly();
   virtual ~AnimatorFlys_Fly();
@@ -3270,7 +3270,7 @@ class AnimatorFlys_Fly : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
@@ -3279,7 +3279,7 @@ class AnimatorFlys_Fly : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AnimatorFlys : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AnimatorFlys : public ::google::protobuf::Message {
  public:
   AnimatorFlys();
   virtual ~AnimatorFlys();
@@ -3384,7 +3384,7 @@ class AnimatorFlys : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
-  friend void  protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 

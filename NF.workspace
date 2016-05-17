@@ -11,6 +11,7 @@
 		<Project filename="NFComm/NFNet/NFNet.cbp" />
 		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
 		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
+		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
 		
 		<!-- NF Server -->
 		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
@@ -19,8 +20,6 @@
 		<Project filename="NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin.cbp" />
 		
 		<Project filename="NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp" />
-		<Project filename="NFServer/NFWorldChatPlugin/NFWorldChatPlugin.cbp" />
-		<Project filename="NFServer/NFWorldGuildPlugin/NFWorldGuildPlugin.cbp" />
 		<Project filename="NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.cbp" />
 		
@@ -41,6 +40,8 @@
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
 		<Project filename="Tutorial/Tutorial4ActorPlugin/Tutorial4ActorPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial5/Tutorial5.cbp" />
-		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />		
+		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
+		<!-- NF Tutorial -->
+		<Project filename="NFTools/NFFileProcess/NFFileProcess.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

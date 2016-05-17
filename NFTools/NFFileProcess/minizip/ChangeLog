@@ -1,0 +1,140 @@
+More changes since 1.1
+- Added support for AE-2 zip files
+- Fixed error in AE-1 not testing CRC32
+
+  Credits
+  
+    Steven Christy
+
+Changes since 1.1
+- Added PKZIP spanning support
+- Added AES encryption support
+- Added I/O buffering
+- Clean up & changed unzLocateFile to support custom comparison function
+- Clean up, removed zipRemoveExtraInfoBlock
+
+  Credits
+
+    Nathan Moinvaziri
+
+Change in 1.1
+- Added ZIP64 support for unzip ( by Even Rouault )
+- Added ZIP64 support for zip ( by Mathias Svensson )
+- Reverted some changed that Even Rouault did.
+- Bunch of patches received from Gulles Vollant that he received for MiniZip from various users.
+- Added unzip patch for BZIP Compression method (patch create by Daniel Borca)
+- Added BZIP Compress method for zip
+- Did some refactoring and code cleanup
+   
+ Credits
+ 
+  Gilles Vollant    - Original MiniZip author
+  Even Rouault      - ZIP64 unzip Support
+
+   2007-2008
+    - Addition of cpl_unzGetCurrentFileZStreamPos
+    - Decoration of symbol names unz* -> cpl_unz*
+    - Remove old C style function prototypes
+    - Add unzip support for ZIP64
+   
+  Daniel Borca      - BZip Compression method support in unzip
+  Mathias Svensson  - ZIP64 zip support ( http://result42.com )
+
+   Oct-2009 unzip.c
+    - Removed cpl_* from symbol names
+    - Fixed problem if uncompressed size was > 4G and compressed size was <4G
+      should only read the compressed/uncompressed size from the Zip64 format if
+      the size from normal header was 0xffffffff
+    - Applied some bug fixes from patches received from Gilles Vollant
+    - Applied support to unzip files with compression method BZIP2 (bzip2 lib is required)
+      Patch created by Daniel Borca
+
+   Oct-2009 zip.c
+    - Remove old C style function prototypes
+    - Added Zip64 Support when creating new file archives
+    - Did some code cleanup and refactoring to get better overview of some functions.
+    - Added zipRemoveExtraInfoBlock to strip extra field data from its ZIP64 data
+      It is used when recreting zip archive with RAW when deleting items from a zip.
+      ZIP64 data is automaticly added to items that needs it, and existing ZIP64
+      data need to be removed.
+    - Added support for BZIP2 as compression mode (bzip2 lib is required)
+   
+   Oct-2009 ioapi.x
+    - Defined ZPOS64_T to fpos_t on windows and u_int64_t on linux. 
+    - Change to fseeko64, ftello64 and fopen64 so large files would work on linux.
+      More if/def section may be needed to support other platforms
+    - Defined fxxxx64 calls to normal fopen/ftell/fseek so they would compile on windows.
+     (but you should use iowin32.c for windows instead)
+
+Change in 1.01e (12 feb 05)
+- Fix in zipOpen2 for globalcomment (Rolf Kalbermatter)
+- Fix possible memory leak in unzip.c (Zoran Stevanovic)
+
+Change in 1.01b (20 may 04)
+- Integrate patch from Debian package (Mark Brown)
+- Add tools mztools from Xavier Roche
+
+Change in 1.01 (8 may 04)
+- Fix buffer overrun risk in unzip.c (Xavier Roche)
+- Fix a minor buffer insecurity in minizip.c (Mike Whittaker)
+
+Change in 1.00: (10 sept 03)
+- Rename to 1.00
+- Cosmetic code change
+
+Change in 0.22: (19 May 03)
+- Crypting support (unless you define NOCRYPT)
+- Append file in existing zipfile
+
+Change in 0.21: (10 Mar 03)
+- Bug fixes
+
+Change in 0.17: (27 Jan 02)
+- Bug fixes
+
+Change in 0.16: (19 Jan 02)
+- Support of ioapi for virtualize zip file access
+
+Change in 0.15: (19 Mar 98)
+- Fix memory leak in minizip.c
+
+Change in 0.14: (10 Mar 98)
+- Fix bugs in minizip.c sample for zipping big file
+- Fix problem in month in date handling
+- Fix bug in unzlocal_GetCurrentFileInfoInternal in unzip.c for comment handling
+
+Change in 0.13: (6 Mar 98)
+- Fix bugs in zip.c
+- Add real minizip sample
+
+Change in 0.12: (4 Mar 98)
+- Add zip.c and zip.h for creates .zip file
+- Fix change_file_date in miniunz.c for Unix (Jean-loup Gailly)
+- Fix miniunz.c for file without specific record for directory
+
+Change in 0.11: (3 Mar 98)
+- Fix bug in unzGetCurrentFileInfo for get extra field and comment
+- Enhance miniunz sample, remove the bad unztst.c sample
+
+Change in 0.10: (2 Mar 98)
+- Fix bug in unzReadCurrentFile
+- Rename unzip* to unz* function and structure
+- Remove Windows-like hungary notation variable name
+- Modify some structure in unzip.h
+- Add somes comment in source
+- Remove unzipGetcCurrentFile function
+- Replace ZUNZEXPORT by ZEXPORT
+- Add unzGetLocalExtrafield for get the local extrafield info
+- Add a new sample, miniunz.c
+
+Change in 0.4: (25 Feb 98)
+- Suppress the type unzipFileInZip.
+  Only on file in the zipfile can be open at the same time
+- Fix somes typo in code
+- Added tm_unz structure in unzip_file_info (date/time in readable format)
+
+Change unknown?
+- Added unzGetOffset (RX '2004)
+- Added unzGetFilePos & unzGoToFilePos (Ryan Haksi)
+- Added unzGetCurrentFileZStreamPos64 (GDAL)
+

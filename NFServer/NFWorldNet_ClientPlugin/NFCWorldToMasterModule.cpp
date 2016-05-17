@@ -9,7 +9,7 @@
 #include "NFCWorldToMasterModule.h"
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFCDataList.h"
-#include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 bool NFCWorldToMasterModule::Init()
 {
@@ -151,7 +151,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
 
         m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
-        SendSuitByPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
+        SendSuitByPB(xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
     }
 
     return 0;

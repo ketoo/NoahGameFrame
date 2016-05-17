@@ -13,9 +13,7 @@
 //#include "NW_Helper.h"
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include <memory>
-#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFMessageDefine/NFSLGDefine.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

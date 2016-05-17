@@ -1,6 +1,11 @@
 cd /d %~dp0
 
 @echo off
+copy ..\\..\\..\\_Out\\Comm\\Debug\\NFPluginLoader_d.exe NFLoginServer\\ /Y
+copy ..\\..\\..\\_Out\\Comm\\Debug\\NFPluginLoader_d.exe NFMasterServer\\ /Y
+copy ..\\..\\..\\_Out\\Comm\\Debug\\NFPluginLoader_d.exe NFProxyServer1\\ /Y
+copy ..\\..\\..\\_Out\\Comm\\Debug\\NFPluginLoader_d.exe NFWorldServer\\ /Y
+copy ..\\..\\..\\_Out\\Comm\\Debug\\NFPluginLoader_d.exe NFGameServer1\\ /Y
 
 copy ..\\..\\..\\Dependencies\\lib\\Debug\\libmysql.dll NFGameServer1\\ /Y
 copy ..\\..\\..\\Dependencies\\lib\\Debug\\libmysql.dll NFLoginServer\\ /Y
