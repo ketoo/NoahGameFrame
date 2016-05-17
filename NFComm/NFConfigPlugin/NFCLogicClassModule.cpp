@@ -33,8 +33,6 @@ bool NFCLogicClassModule::Shut()
 
 NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 {
-    mnPropertyIndex = NF_GetTickCount() % 10 + 1;
-
     pPluginManager = p;
 
     // 判断 *.xml 是否存在，如果不存在，用 *.NF
@@ -99,35 +97,12 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrType = pPropertyNode->first_attribute("Type")->value();
             const char* pstrPublic = pPropertyNode->first_attribute("Public")->value();
             const char* pstrPrivate = pPropertyNode->first_attribute("Private")->value();
-            const char* pstrPropertyIndex = pPropertyNode->first_attribute("Index")->value();
-
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
-
-            std::string strView;
-            if (pPropertyNode->first_attribute("View") != NULL)
-            {
-                strView = pPropertyNode->first_attribute("View")->value();
-            }
-
-            const char* pstrRelationValue = NULL_STR.c_str();
-            if (pPropertyNode->first_attribute("RelationValue"))
-            {
-                pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
-            }
+            const char* pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
-            int nIndex = lexical_cast<int>(pstrPropertyIndex);
-
-            if (bPublic || bPrivate)
-            {
-                ++mnPropertyIndex;
-
-                nIndex = mnPropertyIndex;
-                mxPropertyIndexMap.insert(std::map<std::string, int>::value_type(strPropertyName, mnPropertyIndex));
-            }
 
             NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
@@ -139,7 +114,7 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, bView, nIndex, pstrRelationValue);
+            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, pstrRelationValue);
         }
     }
 

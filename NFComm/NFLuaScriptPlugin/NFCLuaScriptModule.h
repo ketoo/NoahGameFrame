@@ -6,11 +6,12 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_LUA_SCRIPT_MODULE_H_
-#define _NFC_LUA_SCRIPT_MODULE_H_
+#ifndef NFC_LUA_SCRIPT_MODULE_H
+#define NFC_LUA_SCRIPT_MODULE_H
 
-#include "lua/lua.hpp"
-#include "LuaBridge/LuaBridge.h"
+#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+
+#include "Dependencies/LuaIntf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
@@ -23,7 +24,6 @@ public:
     NFCLuaScriptModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-        mpLuaState = NULL;
     }
 
     virtual bool Init();
@@ -33,29 +33,29 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    //call script
-    virtual int DoScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
-    virtual int DoClassCommonScript(const NFGUID& self, const std::string& strComponentName, const std::string& strFunction);
+    bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
+    bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
+    bool AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc);
+    bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
+    int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
 
-    virtual int DoEventScript(const NFGUID& self, const int nEventID, const std::string& strComponentName, const std::string& strFunction, const NFCDataList& arg);
-    virtual int DoHeartBeatScript(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, std::string& strComponentName, const std::string& strFunction);
-
-    virtual int DoScriptPropertyCallBack(const NFGUID& self, const std::string& strPropertyName, const std::string& strComponentName, const std::string& strFunction, const NFIDataList::TData& oldVar, const NFIDataList::TData& neVar);
-    virtual int DoScriptRecordCallBack(const NFGUID& self, const std::string& strRecordName, const std::string& strComponentName, const std::string& strFunction, const int nOpType, const int nRow, const int nCol, const NFCDataList::TData& oldVar, const NFCDataList::TData& newVar);
+    bool AddClassCallBack(std::string& className, std::string& funcName);
 
 protected:
+    template<typename T>
+    bool AddLuaFuncToMap(NFMap<T, NFMap<NFGUID, NFList<string>>>& funcMap, const NFGUID& self, T key, std::string& luaFunc);
+    template<typename T1, typename... T2>
+    bool CallLuaFuncFromMap(NFMap<T1, NFMap<NFGUID, NFList<string>>>& funcMap, T1 key, const NFGUID& self, T2... arg);
 
-    int OnPropertyCommEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
+    int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
+
+    int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
-    bool InstallLua(const std::string& strComponentName);
     bool Regisger();
-    bool CheckCompomentStatus(const std::string& strComponentName, const std::string& strFuncName);
-    bool CheckCompomentStatus(const std::string& strComponentName);
-
-    void LuaInit(NFIKernelModule* pKernel, const NFGUID& self, const NFIDataList& arg);
 
 protected:
     NFIElementInfoModule* m_pElementInfoModule;
@@ -63,8 +63,14 @@ protected:
     NFILogicClassModule* m_pLogicClassModule;
 
 protected:
-    NFMap<std::string, int> mmCompomentStatus;
-    lua_State* mpLuaState;
+    LuaIntf::LuaContext l;
+    int64_t mnTime;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaPropertyCallBackFuncMap;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaRecordCallBackFuncMap;
+    NFMap<int, NFMap<NFGUID, NFList<std::string>>> m_luaEventCallBackFuncMap;
+    NFMap<std::string, NFMap<NFGUID, NFList<std::string>>> m_luaHeartBeatCallBackFuncMap;
+
+    NFMap<std::string, std::string> m_ClassEventFuncMap;
 };
 
 #endif
