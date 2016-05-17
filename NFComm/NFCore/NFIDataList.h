@@ -107,7 +107,7 @@ public:
                 case TDATA_FLOAT:
                 {
                     double fValue = GetFloat();
-                    if (fValue > 0.001  || fValue < -0.001)
+                    if (fValue > 0.001 || fValue < -0.001)
                     {
                         bChanged = true;
                     }
@@ -134,7 +134,7 @@ public:
                     break;
             }
 
-            return bChanged;
+            return !bChanged;
         }
 
         TDATA_TYPE GetType() const
@@ -179,7 +179,7 @@ public:
             }
         }
 
-        const NFINT64 GetInt() const
+        NFINT64 GetInt() const
         {
             if (TDATA_INT == nType)
             {
@@ -190,7 +190,7 @@ public:
             return NULL_INT;
         }
 
-        const double GetFloat() const
+        double GetFloat() const
         {
             if (TDATA_FLOAT == nType)
             {
@@ -209,6 +209,17 @@ public:
             }
 
             return NULL_STR;
+        }
+
+        const char* GetCharArr() const
+        {
+            if (TDATA_STRING == nType)
+            {
+                //return boost::get<const std::string&>(variantData);
+                return variantData.get<std::string>().c_str();
+            }
+
+            return NULL_STR.c_str();
         }
 
         const NFGUID& GetObject() const
@@ -326,6 +337,10 @@ public:
         return Add(value);
     }
     bool AddString(const std::string& value)
+    {
+        return Add(value);
+    }
+    bool AddStringFromChar(const char* value)
     {
         return Add(value);
     }

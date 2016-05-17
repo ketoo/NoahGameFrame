@@ -19,25 +19,26 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG -D_USRDLL
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/Dependencies/lib/Debug/
 LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Deubg
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFTagPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf-2.5.0/src/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/ -I$(SolutionDir)/Dependencies/protobuf/src/ -I$(SolutionDir)/Dependencies/Theron/Include/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -D_USRDLL
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/Dependencies/lib/Release/
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFTagPlugin.so
 

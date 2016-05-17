@@ -23,6 +23,7 @@ class NFCActorManager
 {
 public:
     NFCActorManager();
+    virtual ~NFCActorManager();
 
     virtual bool Init();
 
@@ -36,12 +37,7 @@ public:
 
     virtual bool Execute();
 
-    virtual void OnReload(const char* strModuleName, NFILogicModule* pModule)
-    {
-        BeforeShut();
-
-        AfterInit();
-    }
+    virtual void ReloadPlugin();
 
     virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg);
 

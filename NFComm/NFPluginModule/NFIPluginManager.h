@@ -52,11 +52,9 @@ public:
         return FindModule(strModuleName);
     }
 
-    virtual bool LoadPlugin() = 0;
-
     virtual void Registered(NFIPlugin* plugin) = 0;
 
-    virtual void UnsRegistered(NFIPlugin* plugin) = 0;
+    virtual void UnRegistered(NFIPlugin* plugin) = 0;
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName) = 0;
 
@@ -75,7 +73,6 @@ public:
     virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
 
     //////////////////////////////////////////////////////////////////////////
-    virtual bool ReInitialize() = 0;
 
     virtual NFIActorManager* GetActorManager() = 0;
     virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
