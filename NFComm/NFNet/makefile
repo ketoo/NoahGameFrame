@@ -19,31 +19,32 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent/ -I$(SolutionDir)/Dependencies/libevent/include/ -I$(SolutionDir)/Dependencies/libevent/compat/
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -g -fPIC -D_DEBUG
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
 LIBDIR_DEBUG_X64 = $(LIBDIR)
 LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
-OBJDIR_DEBUG_X64 = .objs
+OBJDIR_DEBUG_X64 = .objs/Debug
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFNet_d.a
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/include/ -I$(SolutionDir)/Dependencies/libevent-2.0.21-stable/compat/
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/ -I$(SolutionDir)/Dependencies/libevent/ -I$(SolutionDir)/Dependencies/libevent/include/ -I$(SolutionDir)/Dependencies/libevent/compat/
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fPIC -DNDEBUG
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
 LIBDIR_RELEASE_X64 = $(LIBDIR)
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
-OBJDIR_RELEASE_X64 = .objs
+OBJDIR_RELEASE_X64 = .objs/Release
 DEP_RELEASE_X64 = 
 OUT_RELEASE_X64 = $(SolutionDir)/_Out/Comm/Release/NFNet.a
 
-OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCNet.o $(OBJDIR_DEBUG_X64)/NFCPacket.o
+OBJ_DEBUG_X64 = $(OBJDIR_DEBUG_X64)/NFCNet.o
 
-OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCNet.o $(OBJDIR_RELEASE_X64)/NFCPacket.o
+OBJ_RELEASE_X64 = $(OBJDIR_RELEASE_X64)/NFCNet.o
 
 all: debug_x64 release_x64
 
@@ -63,9 +64,6 @@ out_debug_x64: before_debug_x64 $(OBJ_DEBUG_X64) $(DEP_DEBUG_X64)
 $(OBJDIR_DEBUG_X64)/NFCNet.o: NFCNet.cpp
 	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCNet.cpp -o $(OBJDIR_DEBUG_X64)/NFCNet.o
 
-$(OBJDIR_DEBUG_X64)/NFCPacket.o: NFCPacket.cpp
-	$(CXX) $(CFLAGS_DEBUG_X64) $(INC_DEBUG_X64) -c NFCPacket.cpp -o $(OBJDIR_DEBUG_X64)/NFCPacket.o
-
 clean_debug_x64: 
 	rm -f $(OBJ_DEBUG_X64) $(OUT_DEBUG_X64)
 	rm -rf $(SolutionDir)/_Out/Comm/Debug
@@ -84,9 +82,6 @@ out_release_x64: before_release_x64 $(OBJ_RELEASE_X64) $(DEP_RELEASE_X64)
 
 $(OBJDIR_RELEASE_X64)/NFCNet.o: NFCNet.cpp
 	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCNet.cpp -o $(OBJDIR_RELEASE_X64)/NFCNet.o
-
-$(OBJDIR_RELEASE_X64)/NFCPacket.o: NFCPacket.cpp
-	$(CXX) $(CFLAGS_RELEASE_X64) $(INC_RELEASE_X64) -c NFCPacket.cpp -o $(OBJDIR_RELEASE_X64)/NFCPacket.o
 
 clean_release_x64: 
 	rm -f $(OBJ_RELEASE_X64) $(OUT_RELEASE_X64)

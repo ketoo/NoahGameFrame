@@ -20,26 +20,27 @@ bool HelloWorld6Module::AfterInit()
 
     //assert( NULL != m_pLuaScriptModule);
 
-    m_pKernelModule->CreateScene(1);
+  //  m_pKernelModule->CreateScene(1);
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(), 1, 0, "Player", "", NFCDataList());
-    if ( !pObject.get() )
-    {
-        return false;
-    }
+  //  if ( !pObject.get() )
+  //  {
+  //      return false;
+  //  }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement("TaskList");
-    if ( pRecord.get() )
-    {
-        NFCDataList var;
-        var << "Task_From_C++";
-        var << 0;
-        pRecord->AddRow(-1, var);
-    }
+  //  NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement("TaskList");
+  //  if ( pRecord.get() )
+  //  {
+  //      NFCDataList var;
+  //      var << "Task_From_C++";
+  //      var << 0;
+		//var << 0;
+  //      pRecord->AddRow(-1, var);
+  //  }
 
-    pObject->SetPropertyInt("MAXHP",100);
+  //  pObject->SetPropertyInt("MAXHP",100);
 
 
-    m_pKernelModule->DoEvent(pObject->Self(), 2222, NFCDataList());
+  //  m_pKernelModule->DoEvent(pObject->Self(), 2222, NFCDataList());
 
     return true;
 }
