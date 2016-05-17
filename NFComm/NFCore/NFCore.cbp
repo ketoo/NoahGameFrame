@@ -9,6 +9,7 @@
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFCore_d" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
+				<Option object_output=".objs/Debug" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -32,6 +33,7 @@
 			<Target title="Release x64">
 				<Option output="$(SolutionDir)/_Out/Comm/Release/NFCore" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
+				<Option object_output=".objs/Release" />
 				<Option type="2" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />

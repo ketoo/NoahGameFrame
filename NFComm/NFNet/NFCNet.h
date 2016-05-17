@@ -65,7 +65,7 @@ public:
     virtual bool AddNetObject(const int nSockIndex, NetObject* pObject);
     virtual NetObject* GetNetObject(const int nSockIndex);
 
-	virtual bool IsServer();
+    virtual bool IsServer();
     virtual bool Log(int severity, const char* msg);
 
     virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb);

@@ -19,22 +19,23 @@ LIB =
 LDFLAGS = 
 SolutionDir = ../../
 
-INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src -I$(SolutionDir)/Dependencies
+
+INC_DEBUG_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src -I$(SolutionDir)/Dependencies
 CFLAGS_DEBUG_X64 = $(CFLAGS) -std=c++11 -fpic -D_X64 -D_DEBUG
 RESINC_DEBUG_X64 = $(RESINC)
 RCFLAGS_DEBUG_X64 = $(RCFLAGS)
-LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Deubg/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_DEBUG_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Debug/ -L$(SolutionDir)/lib/Deubg/
 LIB_DEBUG_X64 = $(LIB)
 LDFLAGS_DEBUG_X64 = $(LDFLAGS)
 OBJDIR_DEBUG_X64 = .objs
 DEP_DEBUG_X64 = 
 OUT_DEBUG_X64 = $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so
 
-INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/boost_1_53_0/ -I$(SolutionDir)/Dependencies/Theron-6.00.01/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src -I$(SolutionDir)/Dependencies
+INC_RELEASE_X64 = $(INC) -I$(SolutionDir) -I$(SolutionDir)/Dependencies/Theron/Include/ -I$(SolutionDir)/Dependencies/google-breakpad/src -I$(SolutionDir)/Dependencies
 CFLAGS_RELEASE_X64 = $(CFLAGS) -std=c++11 -fpic -D_X64 -DNDEBUG -D_USRDLL
 RESINC_RELEASE_X64 = $(RESINC)
 RCFLAGS_RELEASE_X64 = $(RCFLAGS)
-LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/ -L$(SolutionDir)/Dependencies/boost_1_53_0/stage/lib/x64/gcc48/
+LIBDIR_RELEASE_X64 = $(LIBDIR) -L$(SolutionDir)/_Out/Comm/Release/ -L$(SolutionDir)/lib/Release/
 LIB_RELEASE_X64 = $(LIB)
 LDFLAGS_RELEASE_X64 = $(LDFLAGS)
 OBJDIR_RELEASE_X64 = .objs
@@ -61,6 +62,9 @@ after_debug_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Debug/NFCrashPlugin_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial5/
 
 debug_x64: before_debug_x64 out_debug_x64 after_debug_x64
 
@@ -93,6 +97,9 @@ after_release_x64:
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/NFGameServer1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial1/
 	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial2/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial3/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial4/
+	cp -f $(SolutionDir)/_Out/Comm/Release/NFCrashPlugin.so $(SolutionDir)/_Out/Server/Release/Tutorial5/
 
 release_x64: before_release_x64 out_release_x64 after_release_x64
 

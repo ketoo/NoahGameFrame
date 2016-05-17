@@ -349,3 +349,9 @@ bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
 }
 
 #endif
+
+
+//Protobuf Using Dlls
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#define PROTOBUF_USE_DLLS
+#endif

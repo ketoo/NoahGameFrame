@@ -176,7 +176,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         }
 
         NFIDataList::TData var;
-        TDATA_TYPE eType = temProperty->GetType();
+        const TDATA_TYPE eType = temProperty->GetType();
         switch (eType)
         {
             case TDATA_INT:
@@ -198,7 +198,9 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
             }
             break;
             case TDATA_STRING:
-                var.SetString(pstrConfigValue);
+                {
+                    var.SetString(pstrConfigValue);
+                }
                 break;
             case TDATA_OBJECT:
             {
@@ -214,7 +216,11 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
                 break;
         }
 
-        pElementPropertyManager->SetProperty(pstrConfigName, var);
+        temProperty->SetValue(var);
+        if (eType == TDATA_STRING)
+        {
+            temProperty->DeSerialization();
+        }
     }
 
     NFIDataList::TData xData;

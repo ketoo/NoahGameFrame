@@ -149,13 +149,13 @@ bool ValidAdd(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
         return false;
     }
 
-    if (!pVar.get())
-    {
-        if (!var.IsNullValue())
-        {
-            return false;
-        }
+	if (var.IsNullValue())
+	{
+		return false;
+	}
 
+    if (nullptr == pVar)
+    {
         pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData());
         switch (eType)
         {
@@ -243,13 +243,13 @@ bool ValidSet(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFID
         return false;
     }
 
-    if (!pVar.get())
-    {
-        if (!var.IsNullValue())
-        {
-            return false;
-        }
+	if (var.IsNullValue())
+	{
+		return false;
+	}
 
+    if (nullptr == pVar)
+    {
         pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(eType));
     }
 

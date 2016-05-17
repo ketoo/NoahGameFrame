@@ -4,6 +4,14 @@ cp -a ../../Comm/Debug/NFPluginLoader_d ./NFLoginServer/NFLoginServer_d
 cp -a ../../Comm/Debug/NFPluginLoader_d ./NFGameServer1/NFGameServer_d
 cp -a ../../Comm/Debug/NFPluginLoader_d ./NFProxyServer1/NFProxyServer_d
 
+cp -a ../../Comm/Debug/*.so ./NFMasterServer/
+cp -a ../../Comm/Debug/*.so ./NFWorldServer/
+cp -a ../../Comm/Debug/*.so ./NFLoginServer/
+cp -a ../../Comm/Debug/*.so ./NFGameServer1/
+cp -a ../../Comm/Debug/*.so ./NFProxyServer1/
+
+
+
 export LC_ALL="C"
 
 cd ./NFMasterServer

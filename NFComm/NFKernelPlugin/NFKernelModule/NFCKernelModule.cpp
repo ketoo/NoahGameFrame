@@ -185,8 +185,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
                                           pStaticConfigPropertyInfo->GetPublic(),
                                           pStaticConfigPropertyInfo->GetPrivate(),
                                           pStaticConfigPropertyInfo->GetSave(),
-                                          pStaticConfigPropertyInfo->GetIndex(),
-                                          pStaticConfigPropertyInfo->GetView(),
                                           pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
@@ -217,16 +215,18 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
+        /*
+                std::string strSrciptComponentName;
+                NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
+                while (!strSrciptComponentName.empty())
+                {
+                    pComponentManager->AddComponent(strSrciptComponentName, xComponent);
 
-        std::string strSrciptComponentName;
-        NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
-        while (!strSrciptComponentName.empty())
-        {
-            pComponentManager->AddComponent(strSrciptComponentName, xComponent);
+                    strSrciptComponentName.clear();
+                    NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
+                }
+        */
 
-            strSrciptComponentName.clear();
-            NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
-        }
         //////////////////////////////////////////////////////////////////////////
         //配置属性
         NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
@@ -1217,19 +1217,19 @@ int NFCKernelModule::OnClassCommonEvent(const NFGUID& self, const std::string& s
     return 0;
 }
 
-bool NFCKernelModule::ResgisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonClassCallBackList.push_back(cb);
     return true;
 }
 
-bool NFCKernelModule::ResgisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonPropertyCallBackList.push_back(cb);
     return true;
 }
 
-bool NFCKernelModule::ResgisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb)
+bool NFCKernelModule::RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb)
 {
     mtCommonRecordCallBackList.push_back(cb);
     return true;
@@ -1241,12 +1241,12 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
     return false;
 }
 
-bool NFCKernelModule::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex, const std::string& strScriptFunction)
+bool NFCKernelModule::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, const std::string& strRelativeValue)
 {
     NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
     if (pObject.get())
     {
-        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, bView, nIndex, strScriptFunction);
+        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, strRelativeValue);
 
         //通用回调，方便NET同步
         return pObject->AddPropertyCallBack(strPropertyName, this, &NFCKernelModule::OnPropertyCommonEvent);
