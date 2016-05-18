@@ -37,8 +37,8 @@ bool NFCGuildBroadcastModule::AfterInit()
     assert(NULL != m_pGuildModule);
     assert(NULL != m_pGameServerNet_ServerModule);
 
-    m_pKernelModule->ResgisterCommonPropertyEvent( this, &NFCGuildBroadcastModule::OnPropertyCommonEvent );
-    m_pKernelModule->ResgisterCommonRecordEvent( this, &NFCGuildBroadcastModule::OnRecordCommonEvent );
+    m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCGuildBroadcastModule::OnPropertyCommonEvent);
+    m_pKernelModule->RegisterCommonRecordEvent(this, &NFCGuildBroadcastModule::OnRecordCommonEvent);
 
     return true;
 }
