@@ -239,6 +239,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial7", "Tutorial\Tutor
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFMessageDefine", "NFComm\NFMessageDefine\NFMessageDefine.vcxproj", "{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {3E283F37-A4ED-41B7-A3E6-A2D89D131A30}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf", "Dependencies\protobuf\vsprojects\libprotobuf.vcxproj", "{3E283F37-A4ED-41B7-A3E6-A2D89D131A30}"
 EndProject
@@ -264,6 +267,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFFileProcess", "NFTools\NFFileProcess\NFFileProcess.vcxproj", "{2A24AA66-5EBC-4ECC-8021-7D9237868B33}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGameLogicPlugin", "NFServer\NFGameLogicPlugin\NFGameLogicPlugin.vcxproj", "{73CE3203-1DAD-43E8-B49D-0151973765C9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {3E283F37-A4ED-41B7-A3E6-A2D89D131A30}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

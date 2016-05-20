@@ -34,21 +34,21 @@ bool NFCWSSwichServerModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
+    //m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
+    //m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
+    //m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
+    //m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+    //m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
     
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSceneProcessModule );
-    assert( NULL != m_pPropertyModule );
+    //assert( NULL != m_pSceneProcessModule );
+    //assert( NULL != m_pPropertyModule );
 	assert( NULL != m_pLogModule );
-    assert(NULL != m_pLevelModule);
-    assert(NULL != m_pPackModule);
-    assert(NULL != m_pHeroModule);
+    //assert(NULL != m_pLevelModule);
+    //assert(NULL != m_pPackModule);
+    //assert(NULL != m_pHeroModule);
 
     return true;
 }
