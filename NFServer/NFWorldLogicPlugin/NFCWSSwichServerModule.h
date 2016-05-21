@@ -46,12 +46,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementInfoModule* m_pElementInfoModule;
-    NFISceneProcessModule* m_pSceneProcessModule;
-    NFIPropertyModule* m_pPropertyModule;
 	NFIWorldNet_ServerModule* m_pWorlNet_ServerModule;
-	NFILevelModule* m_pLevelModule;
-    NFIPackModule* m_pPackModule;
-    NFIHeroModule* m_pHeroModule;
 };
 
 
