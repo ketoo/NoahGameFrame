@@ -15,17 +15,17 @@
 
 bool NFCTeamModule::Init()
 {
-	m_pGameServerNet_ServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
+    m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
 	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
 	m_pTeamDataModule = dynamic_cast<NFITeamDataModule*>(pPluginManager->FindModule("NFCTeamDataModule"));
 	
-	assert(NULL != m_pGameServerNet_ServerModule);
+	assert(NULL != m_pWorldNet_ServerModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pTeamDataModule);
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)){ return false; }
 
 	return true;
 }

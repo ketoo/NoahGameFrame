@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFITeamDataModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 
 class NFCTeamModule
     : public NFITeamModule
@@ -49,7 +50,7 @@ protected:
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFILogModule* m_pLogModule;
 	NFITeamDataModule* m_pTeamDataModule;
 };
