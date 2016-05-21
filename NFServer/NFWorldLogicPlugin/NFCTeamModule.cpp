@@ -283,14 +283,14 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
 		NFMsg::ReqAckCreateTeam xAck;
 		*xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-		m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 	}
 	else
 	{
 		NFMsg::ReqAckCreateTeam xAck;
 		*xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-		m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 	}
 }
 
@@ -306,7 +306,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
 			NFGUID xTeam = NFINetModule::PBToNF(xMsg.team_id());
 			const std::string& strName = m_pKernelModule->GetPropertyString(xTeam, "Name");
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
 
 			int nGameID = 0;
 			if(m_pTeamDataModule->GetPlayerGameID(nPlayerID, nGameID))
@@ -319,7 +319,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
 			NFMsg::ReqAckJoinTeam xAck;
 			*xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 }
 
@@ -333,14 +333,14 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
 			NFMsg::ReqAckLeaveTeam xAck;
 			*xAck.mutable_team_id() = xMsg.team_id();
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 		else
 		{
 			NFMsg::ReqAckLeaveTeam xAck;
 			*xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 }
 
