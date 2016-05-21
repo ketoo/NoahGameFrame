@@ -10,7 +10,7 @@
 #define _NFC_DATANOSQL_MODULE_H_
 
 #include "NFCDataNoSqlDriver.h"
-#include "NFComm/NFCore/NFPlatform.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 
