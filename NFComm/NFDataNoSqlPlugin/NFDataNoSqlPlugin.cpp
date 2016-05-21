@@ -28,7 +28,7 @@ const int NFDataNoSqlPlugin::GetPluginVersion()
 
 const std::string NFDataNoSqlPlugin::GetPluginName()
 {
-    GET_PLUGIN_NAME(NFDataNoSqlPlugin)
+    return GET_CLASS_NAME(NFDataNoSqlPlugin)
 }
 
 void NFDataNoSqlPlugin::Install()
