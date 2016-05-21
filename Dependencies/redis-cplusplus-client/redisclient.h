@@ -54,18 +54,9 @@ typedef void* BUFPTR;
 #include <ctime>
 #include <sstream>
 
-#include <boost/concept_check.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/functional/hash.hpp>
-#include <boost/foreach.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/random.hpp>
-#include <boost/cstdint.hpp>
-#include <boost/date_time/posix_time/ptime.hpp>
-#include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/optional.hpp>
-#include <boost/variant.hpp>
+#include "./Dependencies/common/optional.hpp";
+#include "./Dependencies/common/lexical_cast.hpp";
+#include "./Dependencies/common/variant.hpp";
 
 #ifdef _WIN32
 #include "anet_win32.h"
@@ -120,7 +111,7 @@ namespace redis
     }
     
     std::string host;
-    boost::uint16_t port;
+    std::uint16_t port;
     int dbindex;
 
   private:
@@ -240,7 +231,7 @@ namespace redis
     template <typename T>
     makecmd & operator<<(T const & datum)
     {
-      append( boost::lexical_cast<std::string>(datum) );
+      append( lexical_cast<std::string>(datum) );
       return *this;
     }
     
@@ -256,7 +247,7 @@ namespace redis
       size_t n = data.size();
       for (size_t i = 0; i < n; ++i)
       {
-        append( boost::lexical_cast<std::string>( data[i] ) );
+        append( lexical_cast<std::string>( data[i] ) );
         //if (i < n - 1)
         //  buffer_ << " ";
       }
@@ -286,13 +277,13 @@ namespace redis
     }
     
     std::vector<std::string> lines_;
-    boost::optional<std::string> key_name_;
+    optional<std::string> key_name_;
   };
 
   template<typename CONSISTENT_HASHER>
   class base_client;
 
-  typedef boost::variant< std::string, int, std::vector<std::string> > reply_val_t;
+  typedef mapbox::util::variant< std::string, int, std::vector<std::string> > reply_val_t;
   typedef std::pair<reply_t, reply_val_t> reply_data_t;
   
   class command
@@ -331,31 +322,31 @@ namespace redis
     const std::string & get_status_code_reply() const
     {
       check_reply_t(status_code_reply);
-      return boost::get<std::string>(reply_.second);
+      return reply_.second.get<std::string>();
     }
     
     const std::string & get_error_reply() const
     {
       check_reply_t(error_reply);
-      return boost::get<std::string>(reply_.second);
+      return reply_.second.get<std::string>();
     }
     
     int get_int_reply() const
     {
       check_reply_t(int_reply);
-      return boost::get<int>(reply_.second);
+      return reply_.second.get<int>();
     }
     
     const std::string & get_bulk_reply() const
     {
       check_reply_t(bulk_reply);
-      return boost::get<std::string>(reply_.second);
+      return reply_.second.get<std::string>();
     }
     
     const std::vector<std::string> & get_multi_bulk_reply() const
     {
       check_reply_t(multi_bulk_reply);
-      return boost::get< std::vector<std::string> >(reply_.second);
+      return reply_.second.get< std::vector<std::string> >();
     }
   };
 
@@ -514,8 +505,10 @@ namespace redis
     
     ~base_client()
     {
-      BOOST_FOREACH(connection_data & con, connections_)
+      //for_each(connection_data & con, connections_)
+      for (int i = 0; i < connections_.size(); i++)
       {
+          connection_data & con = connections_[i];
         if (con.socket != ANET_ERR)
 #ifdef _WIN32
           closesocket((SOCKET)con.socket);
@@ -552,24 +545,24 @@ namespace redis
     {
       assert( keys.size() == values.size() );
 
-      std::map< int, boost::optional<makecmd> > socket_commands;
+      std::map< int, optional<makecmd> > socket_commands;
 
       for(size_t i=0; i < keys.size(); i++)
       {
         int socket = get_socket(keys);
-        boost::optional<makecmd> & cmd = socket_commands[socket];
+        optional<makecmd> & cmd = socket_commands[socket];
         if(!cmd)
           cmd = makecmd("MSET");
         *cmd << keys[i] << values[i];
       }
 
-      typedef std::pair< int, boost::optional<makecmd> > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      typedef std::pair< int, optional<makecmd> > sock_pair;      
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, *sp.second);
       }
       
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         recv_ok_reply_(sp.first);
       }
@@ -577,7 +570,7 @@ namespace redis
     
     void mset( const string_pair_vector & key_value_pairs )
     {
-      std::map< int, boost::optional<makecmd> > socket_commands;
+      std::map< int, optional<makecmd> > socket_commands;
       
       for(size_t i=0; i < key_value_pairs.size(); i++)
       {
@@ -585,19 +578,19 @@ namespace redis
         const string_type & value = key_value_pairs[i].second;
         
         int socket = get_socket(key);
-        boost::optional<makecmd> & cmd = socket_commands[socket];
+        optional<makecmd> & cmd = socket_commands[socket];
         if(!cmd)
           cmd = makecmd("MSET");
         *cmd << key << value;
       }
       
-      typedef std::pair< int, boost::optional<makecmd> > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      typedef std::pair< int, optional<makecmd> > sock_pair;
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, *sp.second);
       }
 
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         recv_ok_reply_(sp.first);
       }
@@ -606,7 +599,7 @@ namespace redis
   private:
     struct msetex_data
     {
-      boost::optional<makecmd> mset_cmd;
+      optional<makecmd> mset_cmd;
       std::string expire_cmds;
       size_t count;
     };
@@ -623,7 +616,7 @@ namespace redis
         
         int socket = get_socket(key);
         msetex_data & dat = socket_commands[socket];
-        boost::optional<makecmd> & cmd = dat.mset_cmd;
+        optional<makecmd> & cmd = dat.mset_cmd;
         if(!cmd)
         {
           cmd = makecmd("MSET");
@@ -637,14 +630,14 @@ namespace redis
       }
       
       typedef std::pair< int, msetex_data > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         std::string cmds = *sp.second.mset_cmd;
         cmds += sp.second.expire_cmds;
         send_(sp.first, cmds);
       }
       
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         recv_ok_reply_(sp.first);
         for(size_t i= 0; i < sp.second.count; i++)
@@ -670,7 +663,7 @@ namespace redis
   private:
     struct connection_keys
     {
-      boost::optional<makecmd> cmd;
+      optional<makecmd> cmd;
 
       /// Gives the position of the value in the original array
       std::vector<size_t> indices;
@@ -695,7 +688,7 @@ namespace redis
       }
       
       typedef std::pair< int, std::string > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, sp.second);
       }
@@ -751,7 +744,7 @@ namespace redis
       {
         int socket = get_socket(keys[i]);
         connection_keys & con_keys = socket_commands[socket];
-        boost::optional<makecmd> & cmd = con_keys.cmd;
+        optional<makecmd> & cmd = con_keys.cmd;
         if(!cmd)
           cmd = makecmd("MGET");
         *cmd << keys[i];
@@ -759,12 +752,12 @@ namespace redis
       }
       
       typedef std::pair< int, connection_keys > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, *sp.second.cmd);
       }
       
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      for(const auto& sp: socket_commands)
       {
         const connection_keys & con_keys = sp.second;
         string_vector cur_out;
@@ -787,12 +780,12 @@ namespace redis
     {
       assert( keys.size() == values.size() );
       
-      std::map< int, boost::optional<makecmd> > socket_commands;
+      std::map< int, optional<makecmd> > socket_commands;
       
       for(size_t i=0; i < keys.size(); i++)
       {
         int socket = get_socket(keys);
-        boost::optional<makecmd> & cmd = socket_commands[socket];
+        optional<makecmd> & cmd = socket_commands[socket];
         if(!cmd)
           cmd = makecmd("MSETNX");
         *cmd << keys[i] << values[i];
@@ -801,8 +794,8 @@ namespace redis
       if( socket_commands.size() > 1 )
         throw std::runtime_error("feature is not available in cluster mode");
       
-      typedef std::pair< int, boost::optional<makecmd> > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      typedef std::pair< int, optional<makecmd> > sock_pair;
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, *sp.second);
         recv_ok_reply_(sp.first);
@@ -811,12 +804,12 @@ namespace redis
     
     bool msetnx( const string_pair_vector & key_value_pairs )
     {
-      std::map< int, boost::optional<makecmd> > socket_commands;
+      std::map< int, optional<makecmd> > socket_commands;
       
       for(size_t i=0; i < key_value_pairs.size(); i++)
       {
         int socket = get_socket(keys);
-        boost::optional<makecmd> & cmd = socket_commands[socket];
+        optional<makecmd> & cmd = socket_commands[socket];
         if(!cmd)
           cmd = makecmd("MSETNX");
         *cmd << key_value_pairs[i].first << key_value_pairs[i].second;
@@ -825,8 +818,8 @@ namespace redis
       if( socket_commands.size() > 1 )
         throw std::runtime_error("feature is not available in cluster mode");
       
-      typedef std::pair< int, boost::optional<makecmd> > sock_pair;
-      BOOST_FOREACH(const sock_pair & sp, socket_commands)
+      typedef std::pair< int, optional<makecmd> > sock_pair;
+      for(const auto& sp: socket_commands)
       {
         send_(sp.first, *sp.second);
         recv_ok_reply_(sp.first);
@@ -944,14 +937,14 @@ namespace redis
       }
 
       typedef std::pair<const int, string_vector> sock_key_pair;
-      BOOST_FOREACH(const sock_key_pair & p, sock_key_map)
+      for(const auto& p: sock_key_map)
       {
         send_(p.first, makecmd("DEL") << p.second);
       }
 
       int_type res =  false;
 
-      BOOST_FOREACH(const sock_key_pair & p, sock_key_map)
+      for(const auto& p: sock_key_map)
       {
         res += recv_int_reply_(p.first);
       }
@@ -981,14 +974,14 @@ namespace redis
     
     int_type keys(const string_type & pattern, string_vector & out)
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("KEYS") << pattern);
       }
 
       int_type res = 0;
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         res += recv_multi_bulk_reply_(con.socket, out);
       }
@@ -1005,14 +998,12 @@ namespace redis
          * Select a random server if there are more then one
          */
         
-        boost::mt19937 gen;
-        boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
-        boost::posix_time::ptime epoch( boost::gregorian::date(1970, 1, 1) );
-        gen.seed( (now-epoch).total_seconds() );
-        
-        boost::uniform_int<> dist(0, connections_.size()-1);
-        boost::variate_generator< boost::mt19937&, boost::uniform_int<> > die(gen, dist);
-        socket = connections_[die()].socket;
+          std::random_device rd;
+          std::mt19937 gen(rd());
+          std::uniform_real_distribution<> dis(0, connections_.size() - 1);
+
+          mvRandom.push_back();
+          socket = connections_[dis(gen)].socket;
       }
       
       send_(socket, makecmd("RANDOMKEY") );
@@ -1040,7 +1031,7 @@ namespace redis
             string_vector content;
             lrange(old_name, 0, -1, content);
             del(new_name);
-            BOOST_FOREACH(const string_type & val, content)
+            for( auto val: content)
             {
               rpush(new_name, val);
             }
@@ -1051,7 +1042,7 @@ namespace redis
             string_set content;
             smembers(old_name, content);
             del(new_name);
-            BOOST_FOREACH(const string_type & val, content)
+            for(const auto & val: content)
             {
               sadd(new_name, val);
             }
@@ -1099,12 +1090,12 @@ namespace redis
     {
       int_type val = 0;
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("DBSIZE"));
       }
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         val += recv_int_reply_(con.socket);
       }
@@ -1404,7 +1395,7 @@ namespace redis
     int_type sinter(const string_vector & keys, string_set & out)
     {
       std::map<int, string_vector> per_server;
-      BOOST_FOREACH(const string_type & key, keys)
+      for(const auto& key: keys)
       {
         per_server[get_socket(key)].push_back(key);
       }
@@ -1412,12 +1403,12 @@ namespace redis
       size_t i = 0;
 
       typedef std::pair<const int, string_vector> per_server_pair;
-      BOOST_FOREACH(const per_server_pair & p, per_server)
+      for(const auto& p: per_server)
       {
         send_(p.first, makecmd("SINTER") << p.second);
       }
       
-      BOOST_FOREACH(const per_server_pair & p, per_server)
+      for (const auto& p : per_server)
       {
         string_set cur;
         recv_multi_bulk_reply_(p.first, cur);
@@ -1454,7 +1445,7 @@ namespace redis
         std::cerr << 2 << std::endl;
         del(dstkey);
         std::cerr << 3 << std::endl;
-        BOOST_FOREACH(const string_type & val, content)
+        for(const auto& val: content)
         {
           std::cerr << 4 << std::endl;
           sadd(dstkey, val);
@@ -1472,22 +1463,22 @@ namespace redis
       int socket = get_socket(keys);
       if(socket == -1)
       {
-        std::map< int, boost::optional<makecmd> > per_socket_keys;
-        BOOST_FOREACH(const string_type & key, keys)
+        std::map< int, optional<makecmd> > per_socket_keys;
+        for(const auto& key: keys)
         {
-          boost::optional<makecmd> & optCmd = per_socket_keys[ get_socket(key) ];
+          optional<makecmd> & optCmd = per_socket_keys[ get_socket(key) ];
           if( !optCmd )
             optCmd = makecmd("SUNION");
           *optCmd << key;
         }
 
-        typedef std::pair< const int, boost::optional<makecmd> > per_sock_pair;
-        BOOST_FOREACH(const per_sock_pair & p, per_socket_keys)
+        typedef std::pair< const int, optional<makecmd> > per_sock_pair;
+        for(const auto& p: per_socket_keys)
         {
           send_(p.first, *p.second);
         }
         
-        BOOST_FOREACH(const per_sock_pair & p, per_socket_keys)
+        for(const auto& p: per_socket_keys)
         {
           recv_multi_bulk_reply_(p.first, out);
         }
@@ -1570,7 +1561,7 @@ namespace redis
     {
       int socket = get_socket(key);
       send_(socket, makecmd("ZINCRBY") << key << increment << member);
-      return boost::lexical_cast<double>( recv_bulk_reply_(socket) );
+      return lexical_cast<double>( recv_bulk_reply_(socket) );
     }
     
     int_type zrank(const string_type & key, const string_type & member)
@@ -1584,7 +1575,7 @@ namespace redis
     {
       int socket = get_socket(key);
       send_(socket, makecmd("ZREVRANK") << key << value);
-      return boost::lexical_cast<int_type>( recv_int_reply_(socket) );
+      return lexical_cast<int_type>( recv_int_reply_(socket) );
     }
     
     void zrange(const string_type & key, int_type start, int_type end, string_vector & out)
@@ -1603,7 +1594,7 @@ namespace redis
       {
         const std::string & value = in[i];
         const std::string & str_score = in[i+1];
-        double score = boost::lexical_cast<double>(str_score);
+        double score = lexical_cast<double>(str_score);
         out.push_back( make_pair(value, score) );
       }
     }
@@ -1646,8 +1637,8 @@ namespace redis
       if( range_modification & exclude_max )
         max_str = "(";
       
-      min_str += boost::lexical_cast<std::string>(min);
-      max_str += boost::lexical_cast<std::string>(max);
+      min_str += lexical_cast<std::string>(min);
+      max_str += lexical_cast<std::string>(max);
       
       makecmd m("ZRANGEBYSCORE");
       m << key << min_str << max_str;
@@ -1684,8 +1675,8 @@ namespace redis
       if( range_modification & exclude_max )
         max_str = "(";
       
-      min_str += boost::lexical_cast<std::string>(min);
-      max_str += boost::lexical_cast<std::string>(max);
+      min_str += lexical_cast<std::string>(min);
+      max_str += lexical_cast<std::string>(max);
       
       send_(socket, makecmd("ZCOUNT") << key << min_str << max_str);
       return recv_int_reply_(socket);
@@ -1716,7 +1707,7 @@ namespace redis
     {
       int socket = get_socket(key);
       send_(socket, makecmd("ZSCORE") << key << element);
-      return boost::lexical_cast<double>( recv_bulk_reply_(socket) );
+      return lexical_cast<double>( recv_bulk_reply_(socket) );
     }
     
     int_type zunionstore( const string_type & dstkey, const string_vector & keys, const std::vector<double> & weights = std::vector<double>(), aggregate_type aggragate = aggregate_sum )
@@ -1905,12 +1896,12 @@ namespace redis
     
     void select(int_type dbindex)
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("SELECT") << dbindex);
       }
       
-      BOOST_FOREACH(connection_data & con, connections_)
+      for(auto & con: connections_)
       {
         recv_ok_reply_(con.socket);
         con.dbindex = dbindex;
@@ -1922,7 +1913,7 @@ namespace redis
       int socket = con.socket;
       send_(socket, makecmd("SELECT") << dbindex);
       recv_ok_reply_(socket);
-      BOOST_FOREACH(connection_data & cur_con, connections_)
+      for(auto& cur_con: connections_)
       {
         if( cur_con == con )
           cur_con.dbindex = dbindex;
@@ -1939,12 +1930,12 @@ namespace redis
     
     void flushdb()
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("FLUSHDB"));
       }
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         recv_ok_reply_(con.socket);
       }
@@ -2040,12 +2031,12 @@ namespace redis
     
     void save()
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("SAVE"));
       }
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         recv_ok_reply_(con.socket);
       }
@@ -2059,12 +2050,12 @@ namespace redis
     
     void bgsave()
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         send_(con.socket, makecmd("BGSAVE"));
       }
       
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         std::string reply = recv_single_line_reply_(con.socket);
         if(reply != REDIS_STATUS_REPLY_OK && reply != "Background saving started")
@@ -2083,7 +2074,7 @@ namespace redis
     time_t lastsave()
     {
       time_t res = 0;
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         int socket = con.socket;
         send_(socket, makecmd("LASTSAVE"));
@@ -2104,7 +2095,7 @@ namespace redis
     
     void shutdown()
     {
-      BOOST_FOREACH(const connection_data & con, connections_)
+      for(const auto& con: connections_)
       {
         int socket = con.socket;
         send_(socket, makecmd("SHUTDOWN"));
@@ -2168,29 +2159,29 @@ namespace redis
         if (key == "redis_version")
           out.version = val;
         else if (key == "bgsave_in_progress")
-          out.bgsave_in_progress = boost::lexical_cast<unsigned long>(val) == 1;
+          out.bgsave_in_progress = lexical_cast<unsigned long>(val) == 1;
         else if (key == "connected_clients")
-          out.connected_clients = boost::lexical_cast<unsigned long>(val);
+          out.connected_clients = lexical_cast<unsigned long>(val);
         else if (key == "connected_slaves")
-          out.connected_slaves = boost::lexical_cast<unsigned long>(val);
+          out.connected_slaves = lexical_cast<unsigned long>(val);
         else if (key == "used_memory")
-          out.used_memory = boost::lexical_cast<unsigned long>(val);
+          out.used_memory = lexical_cast<unsigned long>(val);
         else if (key == "changes_since_last_save")
-          out.changes_since_last_save = boost::lexical_cast<unsigned long>(val);
+          out.changes_since_last_save = lexical_cast<unsigned long>(val);
         else if (key == "last_save_time")
-          out.last_save_time = boost::lexical_cast<unsigned long>(val);
+          out.last_save_time = lexical_cast<unsigned long>(val);
         else if (key == "total_connections_received")
-          out.total_connections_received = boost::lexical_cast<unsigned long>(val);
+          out.total_connections_received = lexical_cast<unsigned long>(val);
         else if (key == "total_commands_processed")
-          out.total_commands_processed = boost::lexical_cast<unsigned long>(val);
+          out.total_commands_processed = lexical_cast<unsigned long>(val);
         else if (key == "uptime_in_seconds")
-          out.uptime_in_seconds = boost::lexical_cast<unsigned long>(val);
+          out.uptime_in_seconds = lexical_cast<unsigned long>(val);
         else if (key == "uptime_in_days")
-          out.uptime_in_days = boost::lexical_cast<unsigned long>(val);
+          out.uptime_in_days = lexical_cast<unsigned long>(val);
         else if (key == "role")
           out.role = val == "master" ? role_master : role_slave;
         else if (key == "arch_bits")
-          out.arch_bits = boost::lexical_cast<unsigned short>(val);
+          out.arch_bits = lexical_cast<unsigned short>(val);
         else if (key == "multiplexing_api")
           out.multiplexing_api = val;
         #ifndef NDEBUG // Ignore new/unknown keys in release mode
@@ -2216,7 +2207,7 @@ namespace redis
     struct subscription_t
     {
       string_type channel;
-      boost::function<void (const string_type &)> callback;
+      std::function<void (const string_type &)> callback;
     };
 
     void subscribe(const string_type & channel)
@@ -2287,7 +2278,7 @@ namespace redis
         throw protocol_error("unexpected prefix for bulk reply");
       }
       
-      return boost::lexical_cast<int_type>(line.substr(1));
+      return lexical_cast<int_type>(line.substr(1));
     }
     
     std::string recv_bulk_reply_(int socket)
@@ -2359,7 +2350,7 @@ namespace redis
       if (line[0] != REDIS_PREFIX_INT_REPLY)
         throw protocol_error("unexpected prefix for integer reply");
       
-      return boost::lexical_cast<INT_TYPE>(line.substr(1));
+      return lexical_cast<INT_TYPE>(line.substr(1));
     }
     
     int_type recv_int_reply_(int socket)
@@ -2376,7 +2367,7 @@ namespace redis
       if (line[0] != REDIS_PREFIX_INT_REPLY)
         throw protocol_error("unexpected prefix for integer reply");
       
-      return boost::lexical_cast<int_type>(line.substr(1));
+      return lexical_cast<int_type>(line.substr(1));
     }
     
     void recv_int_ok_reply_(int socket)
@@ -2604,7 +2595,7 @@ namespace redis
   {
     inline size_t operator()(const std::string & key, const std::vector<connection_data> & connections)
     {
-      return boost::hash<std::string>()(key) % connections.size();
+      return std::hash<std::string>()(key) % connections.size();
     }
   };
   
@@ -2762,7 +2753,7 @@ namespace redis
   class distributed_base_int : public distributed_value
   {
   private:
-    BOOST_STATIC_ASSERT( std::numeric_limits<INT_TYPE>::is_integer );
+      static_assert( std::numeric_limits<INT_TYPE>::is_integer , "std::numeric_limits<INT_TYPE>::is_integer error");
     
   public:
     typedef INT_TYPE int_type;
@@ -2780,14 +2771,14 @@ namespace redis
 
     distributed_base_int & operator=(int_type val)
     {
-      client_conn_->set(key(), boost::lexical_cast<client::string_type>(val));
+      client_conn_->set(key(), lexical_cast<client::string_type>(val));
       return *this;
     }
     
     distributed_base_int & operator=(const distributed_base_int & other)
     {
       if(key() != other.key())
-        client_conn_->set(key(), boost::lexical_cast<client::string_type>(other.to_int()));
+        client_conn_->set(key(), lexical_cast<client::string_type>(other.to_int()));
       return *this;
     }
     
@@ -2803,12 +2794,12 @@ namespace redis
     
     bool setnx(const int_type & value)
     {
-      return client_conn_->setnx(key(), boost::lexical_cast<client::string_type>(value) );
+      return client_conn_->setnx(key(), lexical_cast<client::string_type>(value) );
     }
     
     void setex(const int_type & value, unsigned int secs)
     {
-      client_conn_->setex(key(), boost::lexical_cast<client::string_type>(value), secs);
+      client_conn_->setex(key(), lexical_cast<client::string_type>(value), secs);
     }
     
     int_type operator++()
@@ -2846,9 +2837,9 @@ namespace redis
     {
       try
       {
-        return boost::lexical_cast<int_type>( val );
+        return lexical_cast<int_type>( val );
       }
-      catch(boost::bad_lexical_cast & e)
+      catch(std::exception& e)
       {
         throw value_error("value is not of integer type");
       }
@@ -2865,22 +2856,22 @@ namespace redis
   typedef distributed_base_int<ulong>           distributed_ulong;
 
   // TODO: lexical_cast treats int8_t/uint8_t as char/uchar
-  //typedef distributed_base_int<boost::int8_t>   distributed_int8;
-  //typedef distributed_base_int<boost::uint8_t>  distributed_uint8;
+  //typedef distributed_base_int<std::int8_t>   distributed_int8;
+  //typedef distributed_base_int<std::uint8_t>  distributed_uint8;
   
-  typedef distributed_base_int<boost::int16_t>  distributed_int16;
-  typedef distributed_base_int<boost::uint16_t> distributed_uint16;
+  typedef distributed_base_int<std::int16_t>  distributed_int16;
+  typedef distributed_base_int<std::uint16_t> distributed_uint16;
   
-  typedef distributed_base_int<boost::int32_t>  distributed_int32;
-  typedef distributed_base_int<boost::uint32_t> distributed_uint32;
+  typedef distributed_base_int<std::int32_t>  distributed_int32;
+  typedef distributed_base_int<std::uint32_t> distributed_uint32;
   
-#ifndef BOOST_NO_INT64_T
-  typedef distributed_base_int<boost::int64_t>  distributed_longlong;
-  typedef distributed_base_int<boost::uint64_t> distributed_ulonglong;
+#ifndef NF_NO_INT64_T
+  typedef distributed_base_int<std::int64_t>  distributed_longlong;
+  typedef distributed_base_int<std::uint64_t> distributed_ulonglong;
   
-  typedef distributed_base_int<boost::int64_t>  distributed_int64;
-  typedef distributed_base_int<boost::uint64_t> distributed_uint64;
-#endif // BOOST_NO_INT64_T
+  typedef distributed_base_int<std::int64_t>  distributed_int64;
+  typedef distributed_base_int<std::uint64_t> distributed_uint64;
+#endif // NF_NO_INT64_T
   
 #if 0
 // not yet working correctly!
@@ -2933,10 +2924,10 @@ namespace redis
 
   private:
     distributed_base_int<INT_TYPE> shr_int_;
-    boost::optional<INT_TYPE> cur_val_;
+    optional<INT_TYPE> cur_val_;
   };
 
-  typedef distributed_base_sequence<boost::intmax_t> distributed_sequence;
+  typedef distributed_base_sequence<std::intmax_t> distributed_sequence;
 
 #ifndef TIMEOUT_SEC
 #define TIMEOUT_SEC 60
@@ -2948,20 +2939,31 @@ namespace redis
   class distributed_mutex
   {
   private:
-    boost::int32_t tstamp_val( const boost::posix_time::time_duration & in_future = boost::posix_time::time_duration() )
+    std::int32_t tstamp_val( std::int32_t nOverSec = 0)
     {
-      boost::posix_time::ptime t = boost::posix_time::second_clock::universal_time();
-      boost::posix_time::ptime time_t_epoch( boost::gregorian::date(1970, 1, 1) );
-      t += in_future;
-      boost::posix_time::time_duration timeout_tstamp = t - time_t_epoch;
-      return timeout_tstamp.total_seconds();
+        struct timeval start;
+        gettimeofday(&start, NULL);
+        int64_t nSec = start.tv_sec;
+        int64_t nUSec = start.tv_usec;
+
+        return nSec + nOverSec;
+    }
+
+    std::int32_t GetSystemTime()
+    {
+        struct timeval start;
+        gettimeofday(&start, NULL);
+        int64_t nSec = start.tv_sec;
+        int64_t nUSec = start.tv_usec;
+
+        return nSec;
     }
     
   public:
     distributed_mutex(const client::string_type & name, client & con)
     : con_(&con), name_(name)
     {
-      std::string timeout_str = boost::lexical_cast<std::string>( tstamp_val( boost::posix_time::seconds(TIMEOUT_SEC) ) );
+      std::string timeout_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC ) );
       
       if( con_->setnx(name_, timeout_str) )
         con_->rpush(name_ + ":list", timeout_str);
@@ -2977,8 +2979,8 @@ namespace redis
       while(true)
       {
         timeout_tstamp_str = con_->get(name_);
-        boost::int32_t timeout_tstamp = boost::lexical_cast<boost::int32_t>(timeout_tstamp_str);
-        boost::int32_t diff = tstamp_val( boost::posix_time::seconds(TIMEOUT_SEC) ) - timeout_tstamp;
+        std::int32_t timeout_tstamp = lexical_cast<std::int32_t>(timeout_tstamp_str);
+        std::int32_t diff = tstamp_val( TIMEOUT_SEC ) - timeout_tstamp;
         if( diff < 1 )
           diff = 1;
         std::string token = con_->blpop(name_ + ":list", diff);
@@ -2986,7 +2988,7 @@ namespace redis
         {
           if( timeout_tstamp_str == con_->get(name_) )
           {
-            timeout_tstamp_str = boost::lexical_cast<std::string>( tstamp_val( boost::posix_time::seconds(TIMEOUT_SEC) ) );
+            timeout_tstamp_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC ) );
             con_->set(name_, timeout_tstamp_str);
             con_->rpush(name_ + ":list", timeout_tstamp_str);
           }
@@ -2998,7 +3000,7 @@ namespace redis
           break;
       }
 
-      std::string new_timeout_tstamp_str = boost::lexical_cast<std::string>( tstamp_val( boost::posix_time::seconds(TIMEOUT_SEC) ) );
+      std::string new_timeout_tstamp_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC) );
       std::string val = con_->getset(name_, timeout_tstamp_str);
       if( timeout_tstamp_str != val )
         lock();
@@ -3020,10 +3022,10 @@ namespace redis
       return false;
     }
 
-    bool timed_lock(boost::system_time const& abs_time)
+    bool timed_lock(std::int32_t const& abs_time)
     {
-      boost::posix_time::time_duration dur = abs_time - boost::get_system_time();
-      client::int_type timeout = std::max( dur.total_seconds(), 1 );
+       std::int32_t dur = abs_time - GetSystemTime();
+      client::int_type timeout = std::max(dur, 1 );
       std::string res = con_->blpop(name_ + ":list", timeout);
       if( res == client::missing_value() )
         return false;
@@ -3034,8 +3036,8 @@ namespace redis
     template<typename DurationType>
     bool timed_lock(DurationType const& rel_time)
     {
-      boost::posix_time::time_duration dur( rel_time );
-      client::int_type timeout = std::max( dur.total_seconds(), 1 );
+      int32_t dur( rel_time );
+      client::int_type timeout = std::max( dur, 1 );
       std::string res = con_->blpop(name_ + ":list", timeout);
       if( res == client::missing_value() )
         return false;
