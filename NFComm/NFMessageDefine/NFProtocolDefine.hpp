@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/04/08
+//    @Date             :    2016/05/20
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -577,6 +577,42 @@ public:
 	static const std::string& English(){ static std::string xEnglish = "English"; return xEnglish; } // string
 	static const std::string& Chinese(){ static std::string xChinese = "Chinese"; return xChinese; } // string
 	// Record
+
+};
+
+class Map
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xMap = "Map"; return xMap; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& MaxCount(){ static std::string xMaxCount = "MaxCount"; return xMaxCount; } // int
+	static const std::string& InComeGold(){ static std::string xInComeGold = "InComeGold"; return xInComeGold; } // int
+	static const std::string& InComeDiamond(){ static std::string xInComeDiamond = "InComeDiamond"; return xInComeDiamond; } // int
+	static const std::string& InComeOil(){ static std::string xInComeOil = "InComeOil"; return xInComeOil; } // int
+	static const std::string& X(){ static std::string xX = "X"; return xX; } // int
+	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // int
+	static const std::string& MapLevel(){ static std::string xMapLevel = "MapLevel"; return xMapLevel; } // int
+	// Record
+	static const std::string& R_Station(){ static std::string xStation = "Station"; return xStation;}
+
+	enum Station
+	{
+		Station_GUID		= 0, // GUID -- object
+		Station_GuildID		= 1, // GuildID -- object
+		Station_GuildName		= 2, // GuildName -- string
+		Station_Level		= 3, // Level -- int
+		Station_Title		= 4, // Title -- string
+		Station_Slogan		= 5, // Slogan -- string
+		Station_State		= 6, // State -- int
+		Station_CurMemberCount		= 7, // CurMemberCount -- int
+	};
 
 };
 
@@ -1232,6 +1268,53 @@ public:
 	static const std::string& AwardPack(){ static std::string xAwardPack = "AwardPack"; return xAwardPack; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
 	// Record
+
+};
+
+class Team
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xTeam = "Team"; return xTeam; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& Captain(){ static std::string xCaptain = "Captain"; return xCaptain; } // object
+	static const std::string& PresidentName(){ static std::string xPresidentName = "PresidentName"; return xPresidentName; } // string
+	// Record
+	static const std::string& R_MemberList(){ static std::string xMemberList = "MemberList"; return xMemberList;}
+	static const std::string& R_ApplyList(){ static std::string xApplyList = "ApplyList"; return xApplyList;}
+
+	enum MemberList
+	{
+		MemberList_GUID		= 0, // GUID -- object
+		MemberList_Name		= 1, // Name -- string
+		MemberList_Level		= 2, // Level -- int
+		MemberList_Job		= 3, // Job -- int
+		MemberList_Donation		= 4, // Donation -- int
+		MemberList_Receive		= 5, // Receive -- int
+		MemberList_VIP		= 6, // VIP -- int
+		MemberList_Online		= 7, // Online -- int
+		MemberList_Power		= 8, // Power -- int
+		MemberList_Title		= 9, // Title -- int
+		MemberList_GameID		= 10, // GameID -- int
+		MemberList_JoinTime		= 11, // JoinTime -- int
+	};
+
+	enum ApplyList
+	{
+		ApplyList_GUID		= 0, // GUID -- object
+		ApplyList_Name		= 1, // Name -- string
+		ApplyList_Level		= 2, // Level -- int
+		ApplyList_Job		= 3, // Job -- int
+		ApplyList_Donation		= 4, // Donation -- int
+		ApplyList_VIP		= 5, // VIP -- int
+		ApplyList_Power		= 6, // Power -- int
+	};
 
 };
 

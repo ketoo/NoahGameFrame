@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/05/18
+//    @Date             :    2016/05/20
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -1239,6 +1239,52 @@ public class Task
 	public static readonly String AwardPack = "AwardPack"; // string
 	public static readonly String Desc = "Desc"; // string
 	// Record
+
+}
+
+public class Team
+{
+	//Class name
+	public static readonly string ThisName = "Team";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String Captain = "Captain"; // object
+	public static readonly String PresidentName = "PresidentName"; // string
+	// Record
+	public static readonly String R_MemberList = "MemberList";
+	public static readonly String R_ApplyList = "ApplyList";
+
+	public enum MemberList
+	{
+		GUID		= 0, // GUID -- object
+		Name		= 1, // Name -- string
+		Level		= 2, // Level -- int
+		Job		= 3, // Job -- int
+		Donation		= 4, // Donation -- int
+		Receive		= 5, // Receive -- int
+		VIP		= 6, // VIP -- int
+		Online		= 7, // Online -- int
+		Power		= 8, // Power -- int
+		Title		= 9, // Title -- int
+		GameID		= 10, // GameID -- int
+		JoinTime		= 11, // JoinTime -- int
+	};
+
+	public enum ApplyList
+	{
+		GUID		= 0, // GUID -- object
+		Name		= 1, // Name -- string
+		Level		= 2, // Level -- int
+		Job		= 3, // Job -- int
+		Donation		= 4, // Donation -- int
+		VIP		= 5, // VIP -- int
+		Power		= 6, // Power -- int
+	};
 
 }
 

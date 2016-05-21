@@ -151,3 +151,7 @@ ALTER TABLE `StateFunction` ADD `EFT_SELL` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_REPAIR` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_CANCEL` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `StateFunction` ADD `EFT_FINISH` bigint(11) DEFAULT '0' COMMENT '';
+ALTER TABLE `Team` ADD `Captain` varchar(128) DEFAULT '' COMMENT '队长ID';
+ALTER TABLE `Team` ADD `PresidentName` varchar(128) DEFAULT '' COMMENT '会长名';
+ALTER TABLE `Team` ADD `MemberList` BLOB COMMENT 'guild';
+ALTER TABLE `Team` ADD `ApplyList` BLOB COMMENT 'TeamApply';

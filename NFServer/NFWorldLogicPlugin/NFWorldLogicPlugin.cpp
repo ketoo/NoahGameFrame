@@ -10,6 +10,9 @@
 #include "NFCWorldLogicModule.h"
 #include "NFWorldLogicPlugin.h"
 #include "NFCWSSwichServerModule.h"
+#include "NFCTeamBroadcastModule.h"
+#include "NFCTeamDataModule.h"
+#include "NFCTeamModule.h"
 
 //
 //
@@ -44,10 +47,16 @@ void NFWorldLogicPlugin::Install()
 
 	REGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
 	REGISTER_MODULE(pPluginManager, NFCWSSwichServerModule)
+	REGISTER_MODULE(pPluginManager, NFCTeamBroadcastModule)
+	REGISTER_MODULE(pPluginManager, NFCTeamDataModule)
+	REGISTER_MODULE(pPluginManager, NFCTeamModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFCTeamModule)
+	UNREGISTER_MODULE(pPluginManager, NFCTeamDataModule)
+	UNREGISTER_MODULE(pPluginManager, NFCTeamBroadcastModule)
 	UNREGISTER_MODULE(pPluginManager, NFCWSSwichServerModule)
 	UNREGISTER_MODULE(pPluginManager, NFCWorldLogicModule)
 }

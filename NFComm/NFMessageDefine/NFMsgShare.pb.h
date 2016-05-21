@@ -94,6 +94,10 @@ class ReqMiningTitle;
 class ReqSendMail;
 class ReqSwitchServer;
 class AckSwitchServer;
+class ReqAckCreateTeam;
+class ReqAckJoinTeam;
+class ReqAckLeaveTeam;
+class ReqAckOprTeamMember;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -301,6 +305,32 @@ inline bool ChatInfo_EChatType_Parse(
     const ::std::string& name, ChatInfo_EChatType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ChatInfo_EChatType>(
     ChatInfo_EChatType_descriptor(), name, value);
+}
+enum ReqAckOprTeamMember_EGTeamMemberOprType {
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN = 0,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_UP = 1,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICK = 2,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_APPOINT = 3,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_FIRE = 4,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DEMISE = 5,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_ACCEPTAPPLY = 6,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DENYAPPLY = 7,
+  ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT = 8
+};
+LIBPROTOC_EXPORT bool ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(int value);
+const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MIN = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN;
+const ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT;
+const int ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_ARRAYSIZE = ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
+inline const ::std::string& ReqAckOprTeamMember_EGTeamMemberOprType_Name(ReqAckOprTeamMember_EGTeamMemberOprType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqAckOprTeamMember_EGTeamMemberOprType_descriptor(), value);
+}
+inline bool ReqAckOprTeamMember_EGTeamMemberOprType_Parse(
+    const ::std::string& name, ReqAckOprTeamMember_EGTeamMemberOprType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprTeamMember_EGTeamMemberOprType>(
+    ReqAckOprTeamMember_EGTeamMemberOprType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -6828,6 +6858,395 @@ class LIBPROTOC_EXPORT AckSwitchServer : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static AckSwitchServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckCreateTeam : public ::google::protobuf::Message {
+ public:
+  ReqAckCreateTeam();
+  virtual ~ReqAckCreateTeam();
+
+  ReqAckCreateTeam(const ReqAckCreateTeam& from);
+
+  inline ReqAckCreateTeam& operator=(const ReqAckCreateTeam& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckCreateTeam& default_instance();
+
+  void Swap(ReqAckCreateTeam* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckCreateTeam* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckCreateTeam& from);
+  void MergeFrom(const ReqAckCreateTeam& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident team_id = 1;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckCreateTeam)
+ private:
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* team_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckCreateTeam* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckJoinTeam : public ::google::protobuf::Message {
+ public:
+  ReqAckJoinTeam();
+  virtual ~ReqAckJoinTeam();
+
+  ReqAckJoinTeam(const ReqAckJoinTeam& from);
+
+  inline ReqAckJoinTeam& operator=(const ReqAckJoinTeam& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckJoinTeam& default_instance();
+
+  void Swap(ReqAckJoinTeam* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckJoinTeam* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckJoinTeam& from);
+  void MergeFrom(const ReqAckJoinTeam& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident team_id = 1;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckJoinTeam)
+ private:
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* team_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckJoinTeam* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckLeaveTeam : public ::google::protobuf::Message {
+ public:
+  ReqAckLeaveTeam();
+  virtual ~ReqAckLeaveTeam();
+
+  ReqAckLeaveTeam(const ReqAckLeaveTeam& from);
+
+  inline ReqAckLeaveTeam& operator=(const ReqAckLeaveTeam& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckLeaveTeam& default_instance();
+
+  void Swap(ReqAckLeaveTeam* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckLeaveTeam* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckLeaveTeam& from);
+  void MergeFrom(const ReqAckLeaveTeam& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident team_id = 1;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckLeaveTeam)
+ private:
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* team_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckLeaveTeam* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message {
+ public:
+  ReqAckOprTeamMember();
+  virtual ~ReqAckOprTeamMember();
+
+  ReqAckOprTeamMember(const ReqAckOprTeamMember& from);
+
+  inline ReqAckOprTeamMember& operator=(const ReqAckOprTeamMember& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckOprTeamMember& default_instance();
+
+  void Swap(ReqAckOprTeamMember* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckOprTeamMember* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckOprTeamMember& from);
+  void MergeFrom(const ReqAckOprTeamMember& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqAckOprTeamMember_EGTeamMemberOprType EGTeamMemberOprType;
+  static const EGTeamMemberOprType EGAT_DOWN = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DOWN;
+  static const EGTeamMemberOprType EGAT_UP = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_UP;
+  static const EGTeamMemberOprType EGAT_KICK = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICK;
+  static const EGTeamMemberOprType EGAT_APPOINT = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_APPOINT;
+  static const EGTeamMemberOprType EGAT_FIRE = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_FIRE;
+  static const EGTeamMemberOprType EGAT_DEMISE = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DEMISE;
+  static const EGTeamMemberOprType EGAT_ACCEPTAPPLY = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_ACCEPTAPPLY;
+  static const EGTeamMemberOprType EGAT_DENYAPPLY = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_DENYAPPLY;
+  static const EGTeamMemberOprType EGAT_KICKOUT = ReqAckOprTeamMember_EGTeamMemberOprType_EGAT_KICKOUT;
+  static inline bool EGTeamMemberOprType_IsValid(int value) {
+    return ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(value);
+  }
+  static const EGTeamMemberOprType EGTeamMemberOprType_MIN =
+    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MIN;
+  static const EGTeamMemberOprType EGTeamMemberOprType_MAX =
+    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_MAX;
+  static const int EGTeamMemberOprType_ARRAYSIZE =
+    ReqAckOprTeamMember_EGTeamMemberOprType_EGTeamMemberOprType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EGTeamMemberOprType_descriptor() {
+    return ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
+  }
+  static inline const ::std::string& EGTeamMemberOprType_Name(EGTeamMemberOprType value) {
+    return ReqAckOprTeamMember_EGTeamMemberOprType_Name(value);
+  }
+  static inline bool EGTeamMemberOprType_Parse(const ::std::string& name,
+      EGTeamMemberOprType* value) {
+    return ReqAckOprTeamMember_EGTeamMemberOprType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident team_id = 1;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // required .NFMsg.Ident member_id = 2;
+  inline bool has_member_id() const;
+  inline void clear_member_id();
+  static const int kMemberIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& member_id() const;
+  inline ::NFMsg::Ident* mutable_member_id();
+  inline ::NFMsg::Ident* release_member_id();
+  inline void set_allocated_member_id(::NFMsg::Ident* member_id);
+
+  // required .NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type = 3;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 3;
+  inline ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType type() const;
+  inline void set_type(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckOprTeamMember)
+ private:
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+  inline void set_has_member_id();
+  inline void clear_has_member_id();
+  inline void set_has_type();
+  inline void clear_has_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* team_id_;
+  ::NFMsg::Ident* member_id_;
+  int type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckOprTeamMember* default_instance_;
 };
 // ===================================================================
 
@@ -13419,6 +13838,235 @@ inline void AckSwitchServer::set_gate_serverid(::google::protobuf::int64 value) 
   gate_serverid_ = value;
 }
 
+// -------------------------------------------------------------------
+
+// ReqAckCreateTeam
+
+// required .NFMsg.Ident team_id = 1;
+inline bool ReqAckCreateTeam::has_team_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckCreateTeam::set_has_team_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckCreateTeam::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckCreateTeam::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqAckCreateTeam::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateTeam::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqAckCreateTeam::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqAckCreateTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckJoinTeam
+
+// required .NFMsg.Ident team_id = 1;
+inline bool ReqAckJoinTeam::has_team_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckJoinTeam::set_has_team_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckJoinTeam::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckJoinTeam::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqAckJoinTeam::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqAckJoinTeam::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqAckJoinTeam::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqAckJoinTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckLeaveTeam
+
+// required .NFMsg.Ident team_id = 1;
+inline bool ReqAckLeaveTeam::has_team_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckLeaveTeam::set_has_team_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckLeaveTeam::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckLeaveTeam::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqAckLeaveTeam::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveTeam::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqAckLeaveTeam::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqAckLeaveTeam::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckOprTeamMember
+
+// required .NFMsg.Ident team_id = 1;
+inline bool ReqAckOprTeamMember::has_team_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckOprTeamMember::set_has_team_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckOprTeamMember::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckOprTeamMember::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprTeamMember::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprTeamMember::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprTeamMember::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprTeamMember::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// required .NFMsg.Ident member_id = 2;
+inline bool ReqAckOprTeamMember::has_member_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckOprTeamMember::set_has_member_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckOprTeamMember::clear_has_member_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckOprTeamMember::clear_member_id() {
+  if (member_id_ != NULL) member_id_->::NFMsg::Ident::Clear();
+  clear_has_member_id();
+}
+inline const ::NFMsg::Ident& ReqAckOprTeamMember::member_id() const {
+  return member_id_ != NULL ? *member_id_ : *default_instance_->member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprTeamMember::mutable_member_id() {
+  set_has_member_id();
+  if (member_id_ == NULL) member_id_ = new ::NFMsg::Ident;
+  return member_id_;
+}
+inline ::NFMsg::Ident* ReqAckOprTeamMember::release_member_id() {
+  clear_has_member_id();
+  ::NFMsg::Ident* temp = member_id_;
+  member_id_ = NULL;
+  return temp;
+}
+inline void ReqAckOprTeamMember::set_allocated_member_id(::NFMsg::Ident* member_id) {
+  delete member_id_;
+  member_id_ = member_id;
+  if (member_id) {
+    set_has_member_id();
+  } else {
+    clear_has_member_id();
+  }
+}
+
+// required .NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type = 3;
+inline bool ReqAckOprTeamMember::has_type() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckOprTeamMember::set_has_type() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckOprTeamMember::clear_has_type() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckOprTeamMember::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType ReqAckOprTeamMember::type() const {
+  return static_cast< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType >(type_);
+}
+inline void ReqAckOprTeamMember::set_type(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType value) {
+  assert(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -13467,6 +14115,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprGuild_EGGuildO
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatInfo_EChatType>() {
   return ::NFMsg::ChatInfo_EChatType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType>() {
+  return ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
 }
 
 }  // namespace google

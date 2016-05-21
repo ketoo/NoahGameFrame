@@ -97,6 +97,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCTeamBroadcastModule.h" />
+    <ClInclude Include="NFCTeamDataModule.h" />
+    <ClInclude Include="NFCTeamModule.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
     <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
@@ -110,6 +113,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCTeamBroadcastModule.cpp" />
+    <ClCompile Include="NFCTeamDataModule.cpp" />
+    <ClCompile Include="NFCTeamModule.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
     <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />

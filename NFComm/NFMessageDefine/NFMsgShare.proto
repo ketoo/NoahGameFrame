@@ -542,3 +542,60 @@ message AckSwitchServer
 	required int64      target_serverid		= 3; // 目标ID
 	required int64      gate_serverid		= 4; // 目标ID
 }
+
+///////////////组队/////////////////////////////////////////////////////////////////////////////////////
+
+//EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
+//EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
+message ReqAckCreateTeam
+{
+    required Ident		team_id = 1;
+}
+
+//EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
+//EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
+message ReqAckJoinTeam
+{
+    required Ident		team_id = 1;    
+}
+
+//EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍/
+//EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
+message ReqAckLeaveTeam
+{
+    required Ident		team_id = 1;
+}
+
+
+//	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
+//	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
+message ReqAckOprTeamMember
+{
+	enum EGTeamMemberOprType
+	{
+		EGAT_DOWN = 0;
+		EGAT_UP = 1;
+		EGAT_KICK = 2;
+		
+		EGAT_APPOINT 		= 3;//任命
+		EGAT_FIRE 			= 4;//撤职
+		EGAT_DEMISE 		= 5;//禅让
+		EGAT_ACCEPTAPPLY 	= 6;//收人
+		EGAT_DENYAPPLY 		= 7;//拒收
+		EGAT_KICKOUT 		= 8;//开除
+	}
+	required Ident						team_id = 1;
+    required Ident						member_id = 2;//被操作的ID
+    required EGTeamMemberOprType		type = 3;
+}
+
+//	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
+message ReqInviteTeamMember
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	required Ident						invite_target_id = 2;//
+}
+
+
+
