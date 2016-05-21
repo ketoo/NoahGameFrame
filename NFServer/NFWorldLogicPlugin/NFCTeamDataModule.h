@@ -47,7 +47,6 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIClusterModule* m_pClusterSQLModule;    
-    NFICommonConfigModule* m_pCommonConfigModule;
 
 	int mnScenceID;
     

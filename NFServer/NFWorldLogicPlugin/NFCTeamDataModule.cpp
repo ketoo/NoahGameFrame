@@ -33,22 +33,20 @@ bool NFCTeamDataModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
-    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
-    assert(NULL != m_pCommonConfigModule);
 
 
     m_pUUIDModule->SetIdentID(pPluginManager->AppID());
 
-    mnScenceID = m_pCommonConfigModule->GetAttributeInt("TeamEctype", "TeamEctypeInfo", "ScenceID");
-    if (mnScenceID <=0)
-    {
+//     mnScenceID = m_pCommonConfigModule->GetAttributeInt("TeamEctype", "TeamEctypeInfo", "ScenceID");
+//     if (mnScenceID <=0)
+//     {
 		mnScenceID = 400;
         m_pKernelModule->CreateScene(mnScenceID);
-    }
+//     }
 
     return true;
 }
