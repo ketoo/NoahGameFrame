@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/05/20
+//    @Date             :    2016/05/21
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -1299,10 +1299,8 @@ public:
 		MemberList_Receive		= 5, // Receive -- int
 		MemberList_VIP		= 6, // VIP -- int
 		MemberList_Online		= 7, // Online -- int
-		MemberList_Power		= 8, // Power -- int
-		MemberList_Title		= 9, // Title -- int
-		MemberList_GameID		= 10, // GameID -- int
-		MemberList_JoinTime		= 11, // JoinTime -- int
+		MemberList_Title		= 8, // Title -- int
+		MemberList_GameID		= 9, // GameID -- int
 	};
 
 	enum ApplyList

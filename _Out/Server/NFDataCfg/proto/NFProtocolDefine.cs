@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/05/20
+//    @Date             :    2016/05/21
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -1269,10 +1269,8 @@ public class Team
 		Receive		= 5, // Receive -- int
 		VIP		= 6, // VIP -- int
 		Online		= 7, // Online -- int
-		Power		= 8, // Power -- int
-		Title		= 9, // Title -- int
-		GameID		= 10, // GameID -- int
-		JoinTime		= 11, // JoinTime -- int
+		Title		= 8, // Title -- int
+		GameID		= 9, // GameID -- int
 	};
 
 	public enum ApplyList
