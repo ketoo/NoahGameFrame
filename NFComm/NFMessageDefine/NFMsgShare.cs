@@ -2006,4 +2006,149 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckCreateTeam")]
+  public partial class ReqAckCreateTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckCreateTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckJoinTeam")]
+  public partial class ReqAckJoinTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckJoinTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckLeaveTeam")]
+  public partial class ReqAckLeaveTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckLeaveTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckOprTeamMember")]
+  public partial class ReqAckOprTeamMember : global::ProtoBuf.IExtensible
+  {
+    public ReqAckOprTeamMember() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _member_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"member_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident member_id
+    {
+      get { return _member_id; }
+      set { _member_id = value; }
+    }
+    private NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType _type;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EGTeamMemberOprType")]
+    public enum EGTeamMemberOprType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DOWN", Value=0)]
+      EGAT_DOWN = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_UP", Value=1)]
+      EGAT_UP = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_KICK", Value=2)]
+      EGAT_KICK = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_APPOINT", Value=3)]
+      EGAT_APPOINT = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_FIRE", Value=4)]
+      EGAT_FIRE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DEMISE", Value=5)]
+      EGAT_DEMISE = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_ACCEPTAPPLY", Value=6)]
+      EGAT_ACCEPTAPPLY = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DENYAPPLY", Value=7)]
+      EGAT_DENYAPPLY = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_KICKOUT", Value=8)]
+      EGAT_KICKOUT = 8
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqInviteTeamMember")]
+  public partial class ReqInviteTeamMember : global::ProtoBuf.IExtensible
+  {
+    public ReqInviteTeamMember() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _self_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self_id
+    {
+      get { return _self_id; }
+      set { _self_id = value; }
+    }
+    private NFMsg.Ident _invite_target_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"invite_target_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident invite_target_id
+    {
+      get { return _invite_target_id; }
+      set { _invite_target_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }

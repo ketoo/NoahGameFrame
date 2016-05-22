@@ -16,7 +16,8 @@ bool NFCGSSwichServerModule::Init()
 	assert(NULL != m_pGameServerToWorldModule);
 	assert(NULL != m_pGameServerNet_ServerModule);
 
-	if (!m_pGameServerToWorldModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this,		&NFCGSSwichServerModule::OnReqSwichServer)){ return false; }
+	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
+	if (!m_pGameServerToWorldModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
 	if (!m_pGameServerToWorldModule->AddReciveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this,		&NFCGSSwichServerModule::OnAckSwichServer)){ return false; }
 	return true;
 }
@@ -70,17 +71,42 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 	{
 		return false;
 	}
+	*xMsg.mutable_client_id() = NFINetModule::NFToPB(xClient);
+	xMsg.set_gate_serverid(nGate);
 
 	m_pGameServerToWorldModule->SendSuitByPB(self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
 
 	return true;
 }
 
-void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
 	{
+		return;
+	}
+
+	if (xMsg.target_serverid() == pPluginManager->AppID())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is this server", xMsg.target_serverid(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	ChangeServer(nPlayerID, xMsg.target_serverid(), xMsg.sceneid());
+}
+
+void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
+	{
+		return;
+	}
+
+	if (xMsg.target_serverid() != pPluginManager->AppID())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is not this server", xMsg.target_serverid(), __FUNCTION__, __LINE__);
 		return;
 	}
 

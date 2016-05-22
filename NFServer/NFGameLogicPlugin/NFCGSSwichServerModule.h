@@ -41,7 +41,8 @@ public:
 	virtual bool AfterInit();
 	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID);
 
-	void OnReqSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnAckSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 private:

@@ -98,6 +98,7 @@ class ReqAckCreateTeam;
 class ReqAckJoinTeam;
 class ReqAckLeaveTeam;
 class ReqAckOprTeamMember;
+class ReqInviteTeamMember;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -7248,6 +7249,114 @@ class LIBPROTOC_EXPORT ReqAckOprTeamMember : public ::google::protobuf::Message 
   void InitAsDefaultInstance();
   static ReqAckOprTeamMember* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqInviteTeamMember : public ::google::protobuf::Message {
+ public:
+  ReqInviteTeamMember();
+  virtual ~ReqInviteTeamMember();
+
+  ReqInviteTeamMember(const ReqInviteTeamMember& from);
+
+  inline ReqInviteTeamMember& operator=(const ReqInviteTeamMember& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqInviteTeamMember& default_instance();
+
+  void Swap(ReqInviteTeamMember* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqInviteTeamMember* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqInviteTeamMember& from);
+  void MergeFrom(const ReqInviteTeamMember& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident team_id = 1;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // required .NFMsg.Ident self_id = 2;
+  inline bool has_self_id() const;
+  inline void clear_self_id();
+  static const int kSelfIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& self_id() const;
+  inline ::NFMsg::Ident* mutable_self_id();
+  inline ::NFMsg::Ident* release_self_id();
+  inline void set_allocated_self_id(::NFMsg::Ident* self_id);
+
+  // required .NFMsg.Ident invite_target_id = 3;
+  inline bool has_invite_target_id() const;
+  inline void clear_invite_target_id();
+  static const int kInviteTargetIdFieldNumber = 3;
+  inline const ::NFMsg::Ident& invite_target_id() const;
+  inline ::NFMsg::Ident* mutable_invite_target_id();
+  inline ::NFMsg::Ident* release_invite_target_id();
+  inline void set_allocated_invite_target_id(::NFMsg::Ident* invite_target_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqInviteTeamMember)
+ private:
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+  inline void set_has_self_id();
+  inline void clear_has_self_id();
+  inline void set_has_invite_target_id();
+  inline void clear_has_invite_target_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* team_id_;
+  ::NFMsg::Ident* self_id_;
+  ::NFMsg::Ident* invite_target_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqInviteTeamMember* default_instance_;
+};
 // ===================================================================
 
 
@@ -14065,6 +14174,124 @@ inline void ReqAckOprTeamMember::set_type(::NFMsg::ReqAckOprTeamMember_EGTeamMem
   assert(::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType_IsValid(value));
   set_has_type();
   type_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqInviteTeamMember
+
+// required .NFMsg.Ident team_id = 1;
+inline bool ReqInviteTeamMember::has_team_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqInviteTeamMember::set_has_team_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqInviteTeamMember::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqInviteTeamMember::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqInviteTeamMember::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqInviteTeamMember::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// required .NFMsg.Ident self_id = 2;
+inline bool ReqInviteTeamMember::has_self_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqInviteTeamMember::set_has_self_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqInviteTeamMember::clear_has_self_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqInviteTeamMember::clear_self_id() {
+  if (self_id_ != NULL) self_id_->::NFMsg::Ident::Clear();
+  clear_has_self_id();
+}
+inline const ::NFMsg::Ident& ReqInviteTeamMember::self_id() const {
+  return self_id_ != NULL ? *self_id_ : *default_instance_->self_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::mutable_self_id() {
+  set_has_self_id();
+  if (self_id_ == NULL) self_id_ = new ::NFMsg::Ident;
+  return self_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::release_self_id() {
+  clear_has_self_id();
+  ::NFMsg::Ident* temp = self_id_;
+  self_id_ = NULL;
+  return temp;
+}
+inline void ReqInviteTeamMember::set_allocated_self_id(::NFMsg::Ident* self_id) {
+  delete self_id_;
+  self_id_ = self_id;
+  if (self_id) {
+    set_has_self_id();
+  } else {
+    clear_has_self_id();
+  }
+}
+
+// required .NFMsg.Ident invite_target_id = 3;
+inline bool ReqInviteTeamMember::has_invite_target_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqInviteTeamMember::set_has_invite_target_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqInviteTeamMember::clear_has_invite_target_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqInviteTeamMember::clear_invite_target_id() {
+  if (invite_target_id_ != NULL) invite_target_id_->::NFMsg::Ident::Clear();
+  clear_has_invite_target_id();
+}
+inline const ::NFMsg::Ident& ReqInviteTeamMember::invite_target_id() const {
+  return invite_target_id_ != NULL ? *invite_target_id_ : *default_instance_->invite_target_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::mutable_invite_target_id() {
+  set_has_invite_target_id();
+  if (invite_target_id_ == NULL) invite_target_id_ = new ::NFMsg::Ident;
+  return invite_target_id_;
+}
+inline ::NFMsg::Ident* ReqInviteTeamMember::release_invite_target_id() {
+  clear_has_invite_target_id();
+  ::NFMsg::Ident* temp = invite_target_id_;
+  invite_target_id_ = NULL;
+  return temp;
+}
+inline void ReqInviteTeamMember::set_allocated_invite_target_id(::NFMsg::Ident* invite_target_id) {
+  delete invite_target_id_;
+  invite_target_id_ = invite_target_id;
+  if (invite_target_id) {
+    set_has_invite_target_id();
+  } else {
+    clear_has_invite_target_id();
+  }
 }
 
 

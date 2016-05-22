@@ -594,7 +594,7 @@ message ReqInviteTeamMember
 {	
 	required Ident						team_id = 1;
     required Ident						self_id = 2;//
-	required Ident						invite_target_id = 2;//
+	required Ident						invite_target_id = 3;//
 }
 
 

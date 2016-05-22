@@ -2120,9 +2120,6 @@ void NFCGameServerNet_ServerModule::ProcessSwitchToGame(const NFGUID& nRoleID, c
 		return;
 	}
 
-	//id和fd,gateid绑定
-	mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
-
 	//默认1号场景
 	NFCDataList var;
 	var.AddString("GateID");
@@ -2152,11 +2149,35 @@ void NFCGameServerNet_ServerModule::ProcessSwitchToGame(const NFGUID& nRoleID, c
 	varEntry << nSceneID;
 	varEntry << -1;
 	m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+
+	//id和fd,gateid绑定
+	mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
 }
 
 void NFCGameServerNet_ServerModule::ProcessSwitchOffGame(const NFGUID& self)
 {
-	PlayerLeaveGameServer(self);
+	NF_SHARE_PTR<BaseData> pBaseData = mRoleBaseData.GetElement(self);
+	if (nullptr == pBaseData)
+	{
+		return;
+	}
+
+	mRoleBaseData.RemoveElement(self);
+
+	NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
+	if (nullptr == pServerData)
+	{
+		return;
+	}
+
+	pServerData->xRoleInfo.erase(self);
+
+	if (!m_pKernelModule->GetObject(self))
+    {
+        return;
+    }
+
+    m_pKernelModule->DestroyObject(self);
 }
 
 bool NFCGameServerNet_ServerModule::GetGateInfo(const NFGUID& self, int & nGateID, NFGUID& xClientID)

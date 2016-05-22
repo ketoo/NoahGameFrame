@@ -640,6 +640,33 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACKSWICHSERVER", Value=841)]
       EGMI_ACKSWICHSERVER = 841,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_TEAM", Value=860)]
+      EGMI_REQ_CREATE_TEAM = 860,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_TEAM", Value=861)]
+      EGMI_ACK_CREATE_TEAM = 861,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_TEAM", Value=862)]
+      EGMI_REQ_JOIN_TEAM = 862,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_TEAM", Value=863)]
+      EGMI_ACK_JOIN_TEAM = 863,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_TEAM", Value=864)]
+      EGMI_REQ_LEAVE_TEAM = 864,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_TEAM", Value=865)]
+      EGMI_ACK_LEAVE_TEAM = 865,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_INVITE_TEAM", Value=866)]
+      EGMI_REQ_INVITE_TEAM = 866,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPRMEMBER_TEAM", Value=867)]
+      EGMI_REQ_OPRMEMBER_TEAM = 867,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPRMEMBER_TEAM", Value=868)]
+      EGMI_ACK_OPRMEMBER_TEAM = 868,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             
