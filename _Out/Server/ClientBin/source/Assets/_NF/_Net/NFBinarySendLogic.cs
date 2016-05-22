@@ -490,6 +490,22 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_SWAP_SCENE, stream);
     }
 
+    public void RequireSwapServerScene(NFCoreEx.NFIDENTID objectID, int nServerID, int nSceneID)
+    {
+        NFMsg.ReqSwitchServer xData = new NFMsg.ReqSwitchServer();
+        xData.selfid = NFToPB(objectID);
+        xData.self_serverid = 0;
+        xData.target_serverid = nServerID;
+        xData.gate_serverid = 0;
+        xData.SceneID = nSceneID;
+        xData.client_id = NFToPB(new NFCoreEx.NFIDENTID());
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ReqSwitchServer>(stream, xData);
+
+        SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQSWICHSERVER, stream);
+    }
+
 
     public void RequireAcceptTask(NFCoreEx.NFIDENTID objectID, string strTaskID)
     {

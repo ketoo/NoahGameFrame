@@ -61,6 +61,7 @@ public class NFNet
 
     /////////////Logic///////////////////////////////////////////////
     public string strReqSwapSceneID = "1";
+    public string strReqSwapServerID = "1";
 
     public string strReqMoveX = "0.0";
     public string strReqMoveZ = "0.0";
@@ -211,6 +212,13 @@ public class NFNet
 //             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
 //             strType = GUI.TextField(new Rect(200, 450, 100, 50), strType);
             strChatData = GUI.TextField(new Rect(100, 450, 100, 50), strChatData);
+
+            if (GUI.Button(new Rect(0, 500, 100, 50), "SwapServer"))
+            {
+                mxSendLogic.RequireSwapServerScene(nMainRoleID, int.Parse(strReqSwapServerID), int.Parse(strReqSwapSceneID));
+            }
+
+            strReqSwapServerID = GUI.TextField(new Rect(100, 500, 100, 50), strReqSwapServerID);
             GUI.EndScrollView();
         }
     }
