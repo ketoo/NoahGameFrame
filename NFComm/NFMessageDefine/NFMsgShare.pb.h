@@ -99,6 +99,18 @@ class ReqAckJoinTeam;
 class ReqAckLeaveTeam;
 class ReqAckOprTeamMember;
 class ReqInviteTeamMember;
+class ReqBigMapGridInfo;
+class BigMapGridBaseInfo;
+class BigMapLeaveMsg;
+class BigMapWarHistory;
+class BigMapGridDetailInfo;
+class AckBigMapGridInfo;
+class ReqBigMapInfo;
+class AckBigMapInfo;
+class ReqHoldMapGrid;
+class AckHoldMapGrid;
+class ReqLeaveMapMsg;
+class AckLeaveMapMsg;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -7357,6 +7369,1189 @@ class LIBPROTOC_EXPORT ReqInviteTeamMember : public ::google::protobuf::Message 
   void InitAsDefaultInstance();
   static ReqInviteTeamMember* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqBigMapGridInfo : public ::google::protobuf::Message {
+ public:
+  ReqBigMapGridInfo();
+  virtual ~ReqBigMapGridInfo();
+
+  ReqBigMapGridInfo(const ReqBigMapGridInfo& from);
+
+  inline ReqBigMapGridInfo& operator=(const ReqBigMapGridInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqBigMapGridInfo& default_instance();
+
+  void Swap(ReqBigMapGridInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqBigMapGridInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqBigMapGridInfo& from);
+  void MergeFrom(const ReqBigMapGridInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.Ident map_title_id = 1;
+  inline int map_title_id_size() const;
+  inline void clear_map_title_id();
+  static const int kMapTitleIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& map_title_id(int index) const;
+  inline ::NFMsg::Ident* mutable_map_title_id(int index);
+  inline ::NFMsg::Ident* add_map_title_id();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      map_title_id() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_map_title_id();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqBigMapGridInfo)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > map_title_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqBigMapGridInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
+ public:
+  BigMapGridBaseInfo();
+  virtual ~BigMapGridBaseInfo();
+
+  BigMapGridBaseInfo(const BigMapGridBaseInfo& from);
+
+  inline BigMapGridBaseInfo& operator=(const BigMapGridBaseInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BigMapGridBaseInfo& default_instance();
+
+  void Swap(BigMapGridBaseInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  BigMapGridBaseInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BigMapGridBaseInfo& from);
+  void MergeFrom(const BigMapGridBaseInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required .NFMsg.Ident owner = 2;
+  inline bool has_owner() const;
+  inline void clear_owner();
+  static const int kOwnerFieldNumber = 2;
+  inline const ::NFMsg::Ident& owner() const;
+  inline ::NFMsg::Ident* mutable_owner();
+  inline ::NFMsg::Ident* release_owner();
+  inline void set_allocated_owner(::NFMsg::Ident* owner);
+
+  // required int32 level = 3;
+  inline bool has_level() const;
+  inline void clear_level();
+  static const int kLevelFieldNumber = 3;
+  inline ::google::protobuf::int32 level() const;
+  inline void set_level(::google::protobuf::int32 value);
+
+  // required int32 member_count = 4;
+  inline bool has_member_count() const;
+  inline void clear_member_count();
+  static const int kMemberCountFieldNumber = 4;
+  inline ::google::protobuf::int32 member_count() const;
+  inline void set_member_count(::google::protobuf::int32 value);
+
+  // required int32 resource = 5;
+  inline bool has_resource() const;
+  inline void clear_resource();
+  static const int kResourceFieldNumber = 5;
+  inline ::google::protobuf::int32 resource() const;
+  inline void set_resource(::google::protobuf::int32 value);
+
+  // required bytes icon = 6;
+  inline bool has_icon() const;
+  inline void clear_icon();
+  static const int kIconFieldNumber = 6;
+  inline const ::std::string& icon() const;
+  inline void set_icon(const ::std::string& value);
+  inline void set_icon(const char* value);
+  inline void set_icon(const void* value, size_t size);
+  inline ::std::string* mutable_icon();
+  inline ::std::string* release_icon();
+  inline void set_allocated_icon(::std::string* icon);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.BigMapGridBaseInfo)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_owner();
+  inline void clear_has_owner();
+  inline void set_has_level();
+  inline void clear_has_level();
+  inline void set_has_member_count();
+  inline void clear_has_member_count();
+  inline void set_has_resource();
+  inline void clear_has_resource();
+  inline void set_has_icon();
+  inline void clear_has_icon();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* id_;
+  ::NFMsg::Ident* owner_;
+  ::google::protobuf::int32 level_;
+  ::google::protobuf::int32 member_count_;
+  ::std::string* icon_;
+  ::google::protobuf::int32 resource_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static BigMapGridBaseInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT BigMapLeaveMsg : public ::google::protobuf::Message {
+ public:
+  BigMapLeaveMsg();
+  virtual ~BigMapLeaveMsg();
+
+  BigMapLeaveMsg(const BigMapLeaveMsg& from);
+
+  inline BigMapLeaveMsg& operator=(const BigMapLeaveMsg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BigMapLeaveMsg& default_instance();
+
+  void Swap(BigMapLeaveMsg* other);
+
+  // implements Message ----------------------------------------------
+
+  BigMapLeaveMsg* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BigMapLeaveMsg& from);
+  void MergeFrom(const BigMapLeaveMsg& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident owner = 1;
+  inline bool has_owner() const;
+  inline void clear_owner();
+  static const int kOwnerFieldNumber = 1;
+  inline const ::NFMsg::Ident& owner() const;
+  inline ::NFMsg::Ident* mutable_owner();
+  inline ::NFMsg::Ident* release_owner();
+  inline void set_allocated_owner(::NFMsg::Ident* owner);
+
+  // required bytes msg_data = 2;
+  inline bool has_msg_data() const;
+  inline void clear_msg_data();
+  static const int kMsgDataFieldNumber = 2;
+  inline const ::std::string& msg_data() const;
+  inline void set_msg_data(const ::std::string& value);
+  inline void set_msg_data(const char* value);
+  inline void set_msg_data(const void* value, size_t size);
+  inline ::std::string* mutable_msg_data();
+  inline ::std::string* release_msg_data();
+  inline void set_allocated_msg_data(::std::string* msg_data);
+
+  // required int32 msg_time = 3;
+  inline bool has_msg_time() const;
+  inline void clear_msg_time();
+  static const int kMsgTimeFieldNumber = 3;
+  inline ::google::protobuf::int32 msg_time() const;
+  inline void set_msg_time(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.BigMapLeaveMsg)
+ private:
+  inline void set_has_owner();
+  inline void clear_has_owner();
+  inline void set_has_msg_data();
+  inline void clear_has_msg_data();
+  inline void set_has_msg_time();
+  inline void clear_has_msg_time();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* owner_;
+  ::std::string* msg_data_;
+  ::google::protobuf::int32 msg_time_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static BigMapLeaveMsg* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message {
+ public:
+  BigMapWarHistory();
+  virtual ~BigMapWarHistory();
+
+  BigMapWarHistory(const BigMapWarHistory& from);
+
+  inline BigMapWarHistory& operator=(const BigMapWarHistory& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BigMapWarHistory& default_instance();
+
+  void Swap(BigMapWarHistory* other);
+
+  // implements Message ----------------------------------------------
+
+  BigMapWarHistory* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BigMapWarHistory& from);
+  void MergeFrom(const BigMapWarHistory& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident red_id = 1;
+  inline bool has_red_id() const;
+  inline void clear_red_id();
+  static const int kRedIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& red_id() const;
+  inline ::NFMsg::Ident* mutable_red_id();
+  inline ::NFMsg::Ident* release_red_id();
+  inline void set_allocated_red_id(::NFMsg::Ident* red_id);
+
+  // required int32 red_level = 2;
+  inline bool has_red_level() const;
+  inline void clear_red_level();
+  static const int kRedLevelFieldNumber = 2;
+  inline ::google::protobuf::int32 red_level() const;
+  inline void set_red_level(::google::protobuf::int32 value);
+
+  // required int32 red_count = 3;
+  inline bool has_red_count() const;
+  inline void clear_red_count();
+  static const int kRedCountFieldNumber = 3;
+  inline ::google::protobuf::int32 red_count() const;
+  inline void set_red_count(::google::protobuf::int32 value);
+
+  // required int32 red_war_resource = 4;
+  inline bool has_red_war_resource() const;
+  inline void clear_red_war_resource();
+  static const int kRedWarResourceFieldNumber = 4;
+  inline ::google::protobuf::int32 red_war_resource() const;
+  inline void set_red_war_resource(::google::protobuf::int32 value);
+
+  // required bytes red_icon = 5;
+  inline bool has_red_icon() const;
+  inline void clear_red_icon();
+  static const int kRedIconFieldNumber = 5;
+  inline const ::std::string& red_icon() const;
+  inline void set_red_icon(const ::std::string& value);
+  inline void set_red_icon(const char* value);
+  inline void set_red_icon(const void* value, size_t size);
+  inline ::std::string* mutable_red_icon();
+  inline ::std::string* release_red_icon();
+  inline void set_allocated_red_icon(::std::string* red_icon);
+
+  // required .NFMsg.Ident blue_id = 11;
+  inline bool has_blue_id() const;
+  inline void clear_blue_id();
+  static const int kBlueIdFieldNumber = 11;
+  inline const ::NFMsg::Ident& blue_id() const;
+  inline ::NFMsg::Ident* mutable_blue_id();
+  inline ::NFMsg::Ident* release_blue_id();
+  inline void set_allocated_blue_id(::NFMsg::Ident* blue_id);
+
+  // required int32 blue_level = 12;
+  inline bool has_blue_level() const;
+  inline void clear_blue_level();
+  static const int kBlueLevelFieldNumber = 12;
+  inline ::google::protobuf::int32 blue_level() const;
+  inline void set_blue_level(::google::protobuf::int32 value);
+
+  // required int32 blue_count = 13;
+  inline bool has_blue_count() const;
+  inline void clear_blue_count();
+  static const int kBlueCountFieldNumber = 13;
+  inline ::google::protobuf::int32 blue_count() const;
+  inline void set_blue_count(::google::protobuf::int32 value);
+
+  // required int32 blue_war_resource = 14;
+  inline bool has_blue_war_resource() const;
+  inline void clear_blue_war_resource();
+  static const int kBlueWarResourceFieldNumber = 14;
+  inline ::google::protobuf::int32 blue_war_resource() const;
+  inline void set_blue_war_resource(::google::protobuf::int32 value);
+
+  // required bytes blue_icon = 15;
+  inline bool has_blue_icon() const;
+  inline void clear_blue_icon();
+  static const int kBlueIconFieldNumber = 15;
+  inline const ::std::string& blue_icon() const;
+  inline void set_blue_icon(const ::std::string& value);
+  inline void set_blue_icon(const char* value);
+  inline void set_blue_icon(const void* value, size_t size);
+  inline ::std::string* mutable_blue_icon();
+  inline ::std::string* release_blue_icon();
+  inline void set_allocated_blue_icon(::std::string* blue_icon);
+
+  // required .NFMsg.Ident winner_id = 20;
+  inline bool has_winner_id() const;
+  inline void clear_winner_id();
+  static const int kWinnerIdFieldNumber = 20;
+  inline const ::NFMsg::Ident& winner_id() const;
+  inline ::NFMsg::Ident* mutable_winner_id();
+  inline ::NFMsg::Ident* release_winner_id();
+  inline void set_allocated_winner_id(::NFMsg::Ident* winner_id);
+
+  // required int32 war_time = 21;
+  inline bool has_war_time() const;
+  inline void clear_war_time();
+  static const int kWarTimeFieldNumber = 21;
+  inline ::google::protobuf::int32 war_time() const;
+  inline void set_war_time(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.BigMapWarHistory)
+ private:
+  inline void set_has_red_id();
+  inline void clear_has_red_id();
+  inline void set_has_red_level();
+  inline void clear_has_red_level();
+  inline void set_has_red_count();
+  inline void clear_has_red_count();
+  inline void set_has_red_war_resource();
+  inline void clear_has_red_war_resource();
+  inline void set_has_red_icon();
+  inline void clear_has_red_icon();
+  inline void set_has_blue_id();
+  inline void clear_has_blue_id();
+  inline void set_has_blue_level();
+  inline void clear_has_blue_level();
+  inline void set_has_blue_count();
+  inline void clear_has_blue_count();
+  inline void set_has_blue_war_resource();
+  inline void clear_has_blue_war_resource();
+  inline void set_has_blue_icon();
+  inline void clear_has_blue_icon();
+  inline void set_has_winner_id();
+  inline void clear_has_winner_id();
+  inline void set_has_war_time();
+  inline void clear_has_war_time();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* red_id_;
+  ::google::protobuf::int32 red_level_;
+  ::google::protobuf::int32 red_count_;
+  ::std::string* red_icon_;
+  ::google::protobuf::int32 red_war_resource_;
+  ::google::protobuf::int32 blue_level_;
+  ::NFMsg::Ident* blue_id_;
+  ::google::protobuf::int32 blue_count_;
+  ::google::protobuf::int32 blue_war_resource_;
+  ::std::string* blue_icon_;
+  ::NFMsg::Ident* winner_id_;
+  ::google::protobuf::int32 war_time_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static BigMapWarHistory* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message {
+ public:
+  BigMapGridDetailInfo();
+  virtual ~BigMapGridDetailInfo();
+
+  BigMapGridDetailInfo(const BigMapGridDetailInfo& from);
+
+  inline BigMapGridDetailInfo& operator=(const BigMapGridDetailInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BigMapGridDetailInfo& default_instance();
+
+  void Swap(BigMapGridDetailInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  BigMapGridDetailInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const BigMapGridDetailInfo& from);
+  void MergeFrom(const BigMapGridDetailInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
+  inline bool has_grid_base_info() const;
+  inline void clear_grid_base_info();
+  static const int kGridBaseInfoFieldNumber = 1;
+  inline const ::NFMsg::BigMapGridBaseInfo& grid_base_info() const;
+  inline ::NFMsg::BigMapGridBaseInfo* mutable_grid_base_info();
+  inline ::NFMsg::BigMapGridBaseInfo* release_grid_base_info();
+  inline void set_allocated_grid_base_info(::NFMsg::BigMapGridBaseInfo* grid_base_info);
+
+  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+  inline int leave_msg_size() const;
+  inline void clear_leave_msg();
+  static const int kLeaveMsgFieldNumber = 2;
+  inline const ::NFMsg::BigMapLeaveMsg& leave_msg(int index) const;
+  inline ::NFMsg::BigMapLeaveMsg* mutable_leave_msg(int index);
+  inline ::NFMsg::BigMapLeaveMsg* add_leave_msg();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg >&
+      leave_msg() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg >*
+      mutable_leave_msg();
+
+  // repeated .NFMsg.BigMapWarHistory war_history = 3;
+  inline int war_history_size() const;
+  inline void clear_war_history();
+  static const int kWarHistoryFieldNumber = 3;
+  inline const ::NFMsg::BigMapWarHistory& war_history(int index) const;
+  inline ::NFMsg::BigMapWarHistory* mutable_war_history(int index);
+  inline ::NFMsg::BigMapWarHistory* add_war_history();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory >&
+      war_history() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory >*
+      mutable_war_history();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.BigMapGridDetailInfo)
+ private:
+  inline void set_has_grid_base_info();
+  inline void clear_has_grid_base_info();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::BigMapGridBaseInfo* grid_base_info_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg > leave_msg_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory > war_history_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static BigMapGridDetailInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckBigMapGridInfo : public ::google::protobuf::Message {
+ public:
+  AckBigMapGridInfo();
+  virtual ~AckBigMapGridInfo();
+
+  AckBigMapGridInfo(const AckBigMapGridInfo& from);
+
+  inline AckBigMapGridInfo& operator=(const AckBigMapGridInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckBigMapGridInfo& default_instance();
+
+  void Swap(AckBigMapGridInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  AckBigMapGridInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckBigMapGridInfo& from);
+  void MergeFrom(const AckBigMapGridInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
+  inline int map_data_size() const;
+  inline void clear_map_data();
+  static const int kMapDataFieldNumber = 1;
+  inline const ::NFMsg::BigMapGridDetailInfo& map_data(int index) const;
+  inline ::NFMsg::BigMapGridDetailInfo* mutable_map_data(int index);
+  inline ::NFMsg::BigMapGridDetailInfo* add_map_data();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridDetailInfo >&
+      map_data() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridDetailInfo >*
+      mutable_map_data();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckBigMapGridInfo)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridDetailInfo > map_data_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckBigMapGridInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqBigMapInfo : public ::google::protobuf::Message {
+ public:
+  ReqBigMapInfo();
+  virtual ~ReqBigMapInfo();
+
+  ReqBigMapInfo(const ReqBigMapInfo& from);
+
+  inline ReqBigMapInfo& operator=(const ReqBigMapInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqBigMapInfo& default_instance();
+
+  void Swap(ReqBigMapInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqBigMapInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqBigMapInfo& from);
+  void MergeFrom(const ReqBigMapInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqBigMapInfo)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqBigMapInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckBigMapInfo : public ::google::protobuf::Message {
+ public:
+  AckBigMapInfo();
+  virtual ~AckBigMapInfo();
+
+  AckBigMapInfo(const AckBigMapInfo& from);
+
+  inline AckBigMapInfo& operator=(const AckBigMapInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckBigMapInfo& default_instance();
+
+  void Swap(AckBigMapInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  AckBigMapInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckBigMapInfo& from);
+  void MergeFrom(const AckBigMapInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
+  inline int grid_base_info_size() const;
+  inline void clear_grid_base_info();
+  static const int kGridBaseInfoFieldNumber = 1;
+  inline const ::NFMsg::BigMapGridBaseInfo& grid_base_info(int index) const;
+  inline ::NFMsg::BigMapGridBaseInfo* mutable_grid_base_info(int index);
+  inline ::NFMsg::BigMapGridBaseInfo* add_grid_base_info();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridBaseInfo >&
+      grid_base_info() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridBaseInfo >*
+      mutable_grid_base_info();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckBigMapInfo)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridBaseInfo > grid_base_info_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckBigMapInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqHoldMapGrid : public ::google::protobuf::Message {
+ public:
+  ReqHoldMapGrid();
+  virtual ~ReqHoldMapGrid();
+
+  ReqHoldMapGrid(const ReqHoldMapGrid& from);
+
+  inline ReqHoldMapGrid& operator=(const ReqHoldMapGrid& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqHoldMapGrid& default_instance();
+
+  void Swap(ReqHoldMapGrid* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqHoldMapGrid* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqHoldMapGrid& from);
+  void MergeFrom(const ReqHoldMapGrid& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqHoldMapGrid)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqHoldMapGrid* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckHoldMapGrid : public ::google::protobuf::Message {
+ public:
+  AckHoldMapGrid();
+  virtual ~AckHoldMapGrid();
+
+  AckHoldMapGrid(const AckHoldMapGrid& from);
+
+  inline AckHoldMapGrid& operator=(const AckHoldMapGrid& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckHoldMapGrid& default_instance();
+
+  void Swap(AckHoldMapGrid* other);
+
+  // implements Message ----------------------------------------------
+
+  AckHoldMapGrid* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckHoldMapGrid& from);
+  void MergeFrom(const AckHoldMapGrid& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckHoldMapGrid)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckHoldMapGrid* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqLeaveMapMsg : public ::google::protobuf::Message {
+ public:
+  ReqLeaveMapMsg();
+  virtual ~ReqLeaveMapMsg();
+
+  ReqLeaveMapMsg(const ReqLeaveMapMsg& from);
+
+  inline ReqLeaveMapMsg& operator=(const ReqLeaveMapMsg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqLeaveMapMsg& default_instance();
+
+  void Swap(ReqLeaveMapMsg* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqLeaveMapMsg* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqLeaveMapMsg& from);
+  void MergeFrom(const ReqLeaveMapMsg& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqLeaveMapMsg)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqLeaveMapMsg* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckLeaveMapMsg : public ::google::protobuf::Message {
+ public:
+  AckLeaveMapMsg();
+  virtual ~AckLeaveMapMsg();
+
+  AckLeaveMapMsg(const AckLeaveMapMsg& from);
+
+  inline AckLeaveMapMsg& operator=(const AckLeaveMapMsg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckLeaveMapMsg& default_instance();
+
+  void Swap(AckLeaveMapMsg* other);
+
+  // implements Message ----------------------------------------------
+
+  AckLeaveMapMsg* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckLeaveMapMsg& from);
+  void MergeFrom(const AckLeaveMapMsg& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckLeaveMapMsg)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckLeaveMapMsg* default_instance_;
+};
 // ===================================================================
 
 
@@ -14293,6 +15488,967 @@ inline void ReqInviteTeamMember::set_allocated_invite_target_id(::NFMsg::Ident* 
     clear_has_invite_target_id();
   }
 }
+
+// -------------------------------------------------------------------
+
+// ReqBigMapGridInfo
+
+// repeated .NFMsg.Ident map_title_id = 1;
+inline int ReqBigMapGridInfo::map_title_id_size() const {
+  return map_title_id_.size();
+}
+inline void ReqBigMapGridInfo::clear_map_title_id() {
+  map_title_id_.Clear();
+}
+inline const ::NFMsg::Ident& ReqBigMapGridInfo::map_title_id(int index) const {
+  return map_title_id_.Get(index);
+}
+inline ::NFMsg::Ident* ReqBigMapGridInfo::mutable_map_title_id(int index) {
+  return map_title_id_.Mutable(index);
+}
+inline ::NFMsg::Ident* ReqBigMapGridInfo::add_map_title_id() {
+  return map_title_id_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+ReqBigMapGridInfo::map_title_id() const {
+  return map_title_id_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+ReqBigMapGridInfo::mutable_map_title_id() {
+  return &map_title_id_;
+}
+
+// -------------------------------------------------------------------
+
+// BigMapGridBaseInfo
+
+// required .NFMsg.Ident id = 1;
+inline bool BigMapGridBaseInfo::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BigMapGridBaseInfo::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BigMapGridBaseInfo::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& BigMapGridBaseInfo::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void BigMapGridBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required .NFMsg.Ident owner = 2;
+inline bool BigMapGridBaseInfo::has_owner() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_owner() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BigMapGridBaseInfo::clear_has_owner() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BigMapGridBaseInfo::clear_owner() {
+  if (owner_ != NULL) owner_->::NFMsg::Ident::Clear();
+  clear_has_owner();
+}
+inline const ::NFMsg::Ident& BigMapGridBaseInfo::owner() const {
+  return owner_ != NULL ? *owner_ : *default_instance_->owner_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_owner() {
+  set_has_owner();
+  if (owner_ == NULL) owner_ = new ::NFMsg::Ident;
+  return owner_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::release_owner() {
+  clear_has_owner();
+  ::NFMsg::Ident* temp = owner_;
+  owner_ = NULL;
+  return temp;
+}
+inline void BigMapGridBaseInfo::set_allocated_owner(::NFMsg::Ident* owner) {
+  delete owner_;
+  owner_ = owner;
+  if (owner) {
+    set_has_owner();
+  } else {
+    clear_has_owner();
+  }
+}
+
+// required int32 level = 3;
+inline bool BigMapGridBaseInfo::has_level() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_level() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void BigMapGridBaseInfo::clear_has_level() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void BigMapGridBaseInfo::clear_level() {
+  level_ = 0;
+  clear_has_level();
+}
+inline ::google::protobuf::int32 BigMapGridBaseInfo::level() const {
+  return level_;
+}
+inline void BigMapGridBaseInfo::set_level(::google::protobuf::int32 value) {
+  set_has_level();
+  level_ = value;
+}
+
+// required int32 member_count = 4;
+inline bool BigMapGridBaseInfo::has_member_count() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_member_count() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void BigMapGridBaseInfo::clear_has_member_count() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void BigMapGridBaseInfo::clear_member_count() {
+  member_count_ = 0;
+  clear_has_member_count();
+}
+inline ::google::protobuf::int32 BigMapGridBaseInfo::member_count() const {
+  return member_count_;
+}
+inline void BigMapGridBaseInfo::set_member_count(::google::protobuf::int32 value) {
+  set_has_member_count();
+  member_count_ = value;
+}
+
+// required int32 resource = 5;
+inline bool BigMapGridBaseInfo::has_resource() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_resource() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void BigMapGridBaseInfo::clear_has_resource() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void BigMapGridBaseInfo::clear_resource() {
+  resource_ = 0;
+  clear_has_resource();
+}
+inline ::google::protobuf::int32 BigMapGridBaseInfo::resource() const {
+  return resource_;
+}
+inline void BigMapGridBaseInfo::set_resource(::google::protobuf::int32 value) {
+  set_has_resource();
+  resource_ = value;
+}
+
+// required bytes icon = 6;
+inline bool BigMapGridBaseInfo::has_icon() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_icon() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void BigMapGridBaseInfo::clear_has_icon() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void BigMapGridBaseInfo::clear_icon() {
+  if (icon_ != &::google::protobuf::internal::kEmptyString) {
+    icon_->clear();
+  }
+  clear_has_icon();
+}
+inline const ::std::string& BigMapGridBaseInfo::icon() const {
+  return *icon_;
+}
+inline void BigMapGridBaseInfo::set_icon(const ::std::string& value) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(value);
+}
+inline void BigMapGridBaseInfo::set_icon(const char* value) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(value);
+}
+inline void BigMapGridBaseInfo::set_icon(const void* value, size_t size) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BigMapGridBaseInfo::mutable_icon() {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  return icon_;
+}
+inline ::std::string* BigMapGridBaseInfo::release_icon() {
+  clear_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = icon_;
+    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void BigMapGridBaseInfo::set_allocated_icon(::std::string* icon) {
+  if (icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete icon_;
+  }
+  if (icon) {
+    set_has_icon();
+    icon_ = icon;
+  } else {
+    clear_has_icon();
+    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// BigMapLeaveMsg
+
+// required .NFMsg.Ident owner = 1;
+inline bool BigMapLeaveMsg::has_owner() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BigMapLeaveMsg::set_has_owner() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BigMapLeaveMsg::clear_has_owner() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BigMapLeaveMsg::clear_owner() {
+  if (owner_ != NULL) owner_->::NFMsg::Ident::Clear();
+  clear_has_owner();
+}
+inline const ::NFMsg::Ident& BigMapLeaveMsg::owner() const {
+  return owner_ != NULL ? *owner_ : *default_instance_->owner_;
+}
+inline ::NFMsg::Ident* BigMapLeaveMsg::mutable_owner() {
+  set_has_owner();
+  if (owner_ == NULL) owner_ = new ::NFMsg::Ident;
+  return owner_;
+}
+inline ::NFMsg::Ident* BigMapLeaveMsg::release_owner() {
+  clear_has_owner();
+  ::NFMsg::Ident* temp = owner_;
+  owner_ = NULL;
+  return temp;
+}
+inline void BigMapLeaveMsg::set_allocated_owner(::NFMsg::Ident* owner) {
+  delete owner_;
+  owner_ = owner;
+  if (owner) {
+    set_has_owner();
+  } else {
+    clear_has_owner();
+  }
+}
+
+// required bytes msg_data = 2;
+inline bool BigMapLeaveMsg::has_msg_data() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BigMapLeaveMsg::set_has_msg_data() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BigMapLeaveMsg::clear_has_msg_data() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BigMapLeaveMsg::clear_msg_data() {
+  if (msg_data_ != &::google::protobuf::internal::kEmptyString) {
+    msg_data_->clear();
+  }
+  clear_has_msg_data();
+}
+inline const ::std::string& BigMapLeaveMsg::msg_data() const {
+  return *msg_data_;
+}
+inline void BigMapLeaveMsg::set_msg_data(const ::std::string& value) {
+  set_has_msg_data();
+  if (msg_data_ == &::google::protobuf::internal::kEmptyString) {
+    msg_data_ = new ::std::string;
+  }
+  msg_data_->assign(value);
+}
+inline void BigMapLeaveMsg::set_msg_data(const char* value) {
+  set_has_msg_data();
+  if (msg_data_ == &::google::protobuf::internal::kEmptyString) {
+    msg_data_ = new ::std::string;
+  }
+  msg_data_->assign(value);
+}
+inline void BigMapLeaveMsg::set_msg_data(const void* value, size_t size) {
+  set_has_msg_data();
+  if (msg_data_ == &::google::protobuf::internal::kEmptyString) {
+    msg_data_ = new ::std::string;
+  }
+  msg_data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BigMapLeaveMsg::mutable_msg_data() {
+  set_has_msg_data();
+  if (msg_data_ == &::google::protobuf::internal::kEmptyString) {
+    msg_data_ = new ::std::string;
+  }
+  return msg_data_;
+}
+inline ::std::string* BigMapLeaveMsg::release_msg_data() {
+  clear_has_msg_data();
+  if (msg_data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = msg_data_;
+    msg_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void BigMapLeaveMsg::set_allocated_msg_data(::std::string* msg_data) {
+  if (msg_data_ != &::google::protobuf::internal::kEmptyString) {
+    delete msg_data_;
+  }
+  if (msg_data) {
+    set_has_msg_data();
+    msg_data_ = msg_data;
+  } else {
+    clear_has_msg_data();
+    msg_data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 msg_time = 3;
+inline bool BigMapLeaveMsg::has_msg_time() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void BigMapLeaveMsg::set_has_msg_time() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void BigMapLeaveMsg::clear_has_msg_time() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void BigMapLeaveMsg::clear_msg_time() {
+  msg_time_ = 0;
+  clear_has_msg_time();
+}
+inline ::google::protobuf::int32 BigMapLeaveMsg::msg_time() const {
+  return msg_time_;
+}
+inline void BigMapLeaveMsg::set_msg_time(::google::protobuf::int32 value) {
+  set_has_msg_time();
+  msg_time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// BigMapWarHistory
+
+// required .NFMsg.Ident red_id = 1;
+inline bool BigMapWarHistory::has_red_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BigMapWarHistory::set_has_red_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BigMapWarHistory::clear_has_red_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BigMapWarHistory::clear_red_id() {
+  if (red_id_ != NULL) red_id_->::NFMsg::Ident::Clear();
+  clear_has_red_id();
+}
+inline const ::NFMsg::Ident& BigMapWarHistory::red_id() const {
+  return red_id_ != NULL ? *red_id_ : *default_instance_->red_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::mutable_red_id() {
+  set_has_red_id();
+  if (red_id_ == NULL) red_id_ = new ::NFMsg::Ident;
+  return red_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::release_red_id() {
+  clear_has_red_id();
+  ::NFMsg::Ident* temp = red_id_;
+  red_id_ = NULL;
+  return temp;
+}
+inline void BigMapWarHistory::set_allocated_red_id(::NFMsg::Ident* red_id) {
+  delete red_id_;
+  red_id_ = red_id;
+  if (red_id) {
+    set_has_red_id();
+  } else {
+    clear_has_red_id();
+  }
+}
+
+// required int32 red_level = 2;
+inline bool BigMapWarHistory::has_red_level() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BigMapWarHistory::set_has_red_level() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BigMapWarHistory::clear_has_red_level() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BigMapWarHistory::clear_red_level() {
+  red_level_ = 0;
+  clear_has_red_level();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::red_level() const {
+  return red_level_;
+}
+inline void BigMapWarHistory::set_red_level(::google::protobuf::int32 value) {
+  set_has_red_level();
+  red_level_ = value;
+}
+
+// required int32 red_count = 3;
+inline bool BigMapWarHistory::has_red_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void BigMapWarHistory::set_has_red_count() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void BigMapWarHistory::clear_has_red_count() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void BigMapWarHistory::clear_red_count() {
+  red_count_ = 0;
+  clear_has_red_count();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::red_count() const {
+  return red_count_;
+}
+inline void BigMapWarHistory::set_red_count(::google::protobuf::int32 value) {
+  set_has_red_count();
+  red_count_ = value;
+}
+
+// required int32 red_war_resource = 4;
+inline bool BigMapWarHistory::has_red_war_resource() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void BigMapWarHistory::set_has_red_war_resource() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void BigMapWarHistory::clear_has_red_war_resource() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void BigMapWarHistory::clear_red_war_resource() {
+  red_war_resource_ = 0;
+  clear_has_red_war_resource();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::red_war_resource() const {
+  return red_war_resource_;
+}
+inline void BigMapWarHistory::set_red_war_resource(::google::protobuf::int32 value) {
+  set_has_red_war_resource();
+  red_war_resource_ = value;
+}
+
+// required bytes red_icon = 5;
+inline bool BigMapWarHistory::has_red_icon() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void BigMapWarHistory::set_has_red_icon() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void BigMapWarHistory::clear_has_red_icon() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void BigMapWarHistory::clear_red_icon() {
+  if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
+    red_icon_->clear();
+  }
+  clear_has_red_icon();
+}
+inline const ::std::string& BigMapWarHistory::red_icon() const {
+  return *red_icon_;
+}
+inline void BigMapWarHistory::set_red_icon(const ::std::string& value) {
+  set_has_red_icon();
+  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
+    red_icon_ = new ::std::string;
+  }
+  red_icon_->assign(value);
+}
+inline void BigMapWarHistory::set_red_icon(const char* value) {
+  set_has_red_icon();
+  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
+    red_icon_ = new ::std::string;
+  }
+  red_icon_->assign(value);
+}
+inline void BigMapWarHistory::set_red_icon(const void* value, size_t size) {
+  set_has_red_icon();
+  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
+    red_icon_ = new ::std::string;
+  }
+  red_icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BigMapWarHistory::mutable_red_icon() {
+  set_has_red_icon();
+  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
+    red_icon_ = new ::std::string;
+  }
+  return red_icon_;
+}
+inline ::std::string* BigMapWarHistory::release_red_icon() {
+  clear_has_red_icon();
+  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = red_icon_;
+    red_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void BigMapWarHistory::set_allocated_red_icon(::std::string* red_icon) {
+  if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete red_icon_;
+  }
+  if (red_icon) {
+    set_has_red_icon();
+    red_icon_ = red_icon;
+  } else {
+    clear_has_red_icon();
+    red_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident blue_id = 11;
+inline bool BigMapWarHistory::has_blue_id() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void BigMapWarHistory::set_has_blue_id() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void BigMapWarHistory::clear_has_blue_id() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void BigMapWarHistory::clear_blue_id() {
+  if (blue_id_ != NULL) blue_id_->::NFMsg::Ident::Clear();
+  clear_has_blue_id();
+}
+inline const ::NFMsg::Ident& BigMapWarHistory::blue_id() const {
+  return blue_id_ != NULL ? *blue_id_ : *default_instance_->blue_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::mutable_blue_id() {
+  set_has_blue_id();
+  if (blue_id_ == NULL) blue_id_ = new ::NFMsg::Ident;
+  return blue_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::release_blue_id() {
+  clear_has_blue_id();
+  ::NFMsg::Ident* temp = blue_id_;
+  blue_id_ = NULL;
+  return temp;
+}
+inline void BigMapWarHistory::set_allocated_blue_id(::NFMsg::Ident* blue_id) {
+  delete blue_id_;
+  blue_id_ = blue_id;
+  if (blue_id) {
+    set_has_blue_id();
+  } else {
+    clear_has_blue_id();
+  }
+}
+
+// required int32 blue_level = 12;
+inline bool BigMapWarHistory::has_blue_level() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void BigMapWarHistory::set_has_blue_level() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void BigMapWarHistory::clear_has_blue_level() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void BigMapWarHistory::clear_blue_level() {
+  blue_level_ = 0;
+  clear_has_blue_level();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::blue_level() const {
+  return blue_level_;
+}
+inline void BigMapWarHistory::set_blue_level(::google::protobuf::int32 value) {
+  set_has_blue_level();
+  blue_level_ = value;
+}
+
+// required int32 blue_count = 13;
+inline bool BigMapWarHistory::has_blue_count() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void BigMapWarHistory::set_has_blue_count() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void BigMapWarHistory::clear_has_blue_count() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void BigMapWarHistory::clear_blue_count() {
+  blue_count_ = 0;
+  clear_has_blue_count();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::blue_count() const {
+  return blue_count_;
+}
+inline void BigMapWarHistory::set_blue_count(::google::protobuf::int32 value) {
+  set_has_blue_count();
+  blue_count_ = value;
+}
+
+// required int32 blue_war_resource = 14;
+inline bool BigMapWarHistory::has_blue_war_resource() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void BigMapWarHistory::set_has_blue_war_resource() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void BigMapWarHistory::clear_has_blue_war_resource() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void BigMapWarHistory::clear_blue_war_resource() {
+  blue_war_resource_ = 0;
+  clear_has_blue_war_resource();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::blue_war_resource() const {
+  return blue_war_resource_;
+}
+inline void BigMapWarHistory::set_blue_war_resource(::google::protobuf::int32 value) {
+  set_has_blue_war_resource();
+  blue_war_resource_ = value;
+}
+
+// required bytes blue_icon = 15;
+inline bool BigMapWarHistory::has_blue_icon() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void BigMapWarHistory::set_has_blue_icon() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void BigMapWarHistory::clear_has_blue_icon() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void BigMapWarHistory::clear_blue_icon() {
+  if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
+    blue_icon_->clear();
+  }
+  clear_has_blue_icon();
+}
+inline const ::std::string& BigMapWarHistory::blue_icon() const {
+  return *blue_icon_;
+}
+inline void BigMapWarHistory::set_blue_icon(const ::std::string& value) {
+  set_has_blue_icon();
+  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
+    blue_icon_ = new ::std::string;
+  }
+  blue_icon_->assign(value);
+}
+inline void BigMapWarHistory::set_blue_icon(const char* value) {
+  set_has_blue_icon();
+  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
+    blue_icon_ = new ::std::string;
+  }
+  blue_icon_->assign(value);
+}
+inline void BigMapWarHistory::set_blue_icon(const void* value, size_t size) {
+  set_has_blue_icon();
+  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
+    blue_icon_ = new ::std::string;
+  }
+  blue_icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BigMapWarHistory::mutable_blue_icon() {
+  set_has_blue_icon();
+  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
+    blue_icon_ = new ::std::string;
+  }
+  return blue_icon_;
+}
+inline ::std::string* BigMapWarHistory::release_blue_icon() {
+  clear_has_blue_icon();
+  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = blue_icon_;
+    blue_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void BigMapWarHistory::set_allocated_blue_icon(::std::string* blue_icon) {
+  if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete blue_icon_;
+  }
+  if (blue_icon) {
+    set_has_blue_icon();
+    blue_icon_ = blue_icon;
+  } else {
+    clear_has_blue_icon();
+    blue_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident winner_id = 20;
+inline bool BigMapWarHistory::has_winner_id() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void BigMapWarHistory::set_has_winner_id() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void BigMapWarHistory::clear_has_winner_id() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void BigMapWarHistory::clear_winner_id() {
+  if (winner_id_ != NULL) winner_id_->::NFMsg::Ident::Clear();
+  clear_has_winner_id();
+}
+inline const ::NFMsg::Ident& BigMapWarHistory::winner_id() const {
+  return winner_id_ != NULL ? *winner_id_ : *default_instance_->winner_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::mutable_winner_id() {
+  set_has_winner_id();
+  if (winner_id_ == NULL) winner_id_ = new ::NFMsg::Ident;
+  return winner_id_;
+}
+inline ::NFMsg::Ident* BigMapWarHistory::release_winner_id() {
+  clear_has_winner_id();
+  ::NFMsg::Ident* temp = winner_id_;
+  winner_id_ = NULL;
+  return temp;
+}
+inline void BigMapWarHistory::set_allocated_winner_id(::NFMsg::Ident* winner_id) {
+  delete winner_id_;
+  winner_id_ = winner_id;
+  if (winner_id) {
+    set_has_winner_id();
+  } else {
+    clear_has_winner_id();
+  }
+}
+
+// required int32 war_time = 21;
+inline bool BigMapWarHistory::has_war_time() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void BigMapWarHistory::set_has_war_time() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void BigMapWarHistory::clear_has_war_time() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void BigMapWarHistory::clear_war_time() {
+  war_time_ = 0;
+  clear_has_war_time();
+}
+inline ::google::protobuf::int32 BigMapWarHistory::war_time() const {
+  return war_time_;
+}
+inline void BigMapWarHistory::set_war_time(::google::protobuf::int32 value) {
+  set_has_war_time();
+  war_time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// BigMapGridDetailInfo
+
+// required .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
+inline bool BigMapGridDetailInfo::has_grid_base_info() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BigMapGridDetailInfo::set_has_grid_base_info() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BigMapGridDetailInfo::clear_has_grid_base_info() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BigMapGridDetailInfo::clear_grid_base_info() {
+  if (grid_base_info_ != NULL) grid_base_info_->::NFMsg::BigMapGridBaseInfo::Clear();
+  clear_has_grid_base_info();
+}
+inline const ::NFMsg::BigMapGridBaseInfo& BigMapGridDetailInfo::grid_base_info() const {
+  return grid_base_info_ != NULL ? *grid_base_info_ : *default_instance_->grid_base_info_;
+}
+inline ::NFMsg::BigMapGridBaseInfo* BigMapGridDetailInfo::mutable_grid_base_info() {
+  set_has_grid_base_info();
+  if (grid_base_info_ == NULL) grid_base_info_ = new ::NFMsg::BigMapGridBaseInfo;
+  return grid_base_info_;
+}
+inline ::NFMsg::BigMapGridBaseInfo* BigMapGridDetailInfo::release_grid_base_info() {
+  clear_has_grid_base_info();
+  ::NFMsg::BigMapGridBaseInfo* temp = grid_base_info_;
+  grid_base_info_ = NULL;
+  return temp;
+}
+inline void BigMapGridDetailInfo::set_allocated_grid_base_info(::NFMsg::BigMapGridBaseInfo* grid_base_info) {
+  delete grid_base_info_;
+  grid_base_info_ = grid_base_info;
+  if (grid_base_info) {
+    set_has_grid_base_info();
+  } else {
+    clear_has_grid_base_info();
+  }
+}
+
+// repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+inline int BigMapGridDetailInfo::leave_msg_size() const {
+  return leave_msg_.size();
+}
+inline void BigMapGridDetailInfo::clear_leave_msg() {
+  leave_msg_.Clear();
+}
+inline const ::NFMsg::BigMapLeaveMsg& BigMapGridDetailInfo::leave_msg(int index) const {
+  return leave_msg_.Get(index);
+}
+inline ::NFMsg::BigMapLeaveMsg* BigMapGridDetailInfo::mutable_leave_msg(int index) {
+  return leave_msg_.Mutable(index);
+}
+inline ::NFMsg::BigMapLeaveMsg* BigMapGridDetailInfo::add_leave_msg() {
+  return leave_msg_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg >&
+BigMapGridDetailInfo::leave_msg() const {
+  return leave_msg_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg >*
+BigMapGridDetailInfo::mutable_leave_msg() {
+  return &leave_msg_;
+}
+
+// repeated .NFMsg.BigMapWarHistory war_history = 3;
+inline int BigMapGridDetailInfo::war_history_size() const {
+  return war_history_.size();
+}
+inline void BigMapGridDetailInfo::clear_war_history() {
+  war_history_.Clear();
+}
+inline const ::NFMsg::BigMapWarHistory& BigMapGridDetailInfo::war_history(int index) const {
+  return war_history_.Get(index);
+}
+inline ::NFMsg::BigMapWarHistory* BigMapGridDetailInfo::mutable_war_history(int index) {
+  return war_history_.Mutable(index);
+}
+inline ::NFMsg::BigMapWarHistory* BigMapGridDetailInfo::add_war_history() {
+  return war_history_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory >&
+BigMapGridDetailInfo::war_history() const {
+  return war_history_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory >*
+BigMapGridDetailInfo::mutable_war_history() {
+  return &war_history_;
+}
+
+// -------------------------------------------------------------------
+
+// AckBigMapGridInfo
+
+// repeated .NFMsg.BigMapGridDetailInfo map_data = 1;
+inline int AckBigMapGridInfo::map_data_size() const {
+  return map_data_.size();
+}
+inline void AckBigMapGridInfo::clear_map_data() {
+  map_data_.Clear();
+}
+inline const ::NFMsg::BigMapGridDetailInfo& AckBigMapGridInfo::map_data(int index) const {
+  return map_data_.Get(index);
+}
+inline ::NFMsg::BigMapGridDetailInfo* AckBigMapGridInfo::mutable_map_data(int index) {
+  return map_data_.Mutable(index);
+}
+inline ::NFMsg::BigMapGridDetailInfo* AckBigMapGridInfo::add_map_data() {
+  return map_data_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridDetailInfo >&
+AckBigMapGridInfo::map_data() const {
+  return map_data_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridDetailInfo >*
+AckBigMapGridInfo::mutable_map_data() {
+  return &map_data_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqBigMapInfo
+
+// -------------------------------------------------------------------
+
+// AckBigMapInfo
+
+// repeated .NFMsg.BigMapGridBaseInfo grid_base_info = 1;
+inline int AckBigMapInfo::grid_base_info_size() const {
+  return grid_base_info_.size();
+}
+inline void AckBigMapInfo::clear_grid_base_info() {
+  grid_base_info_.Clear();
+}
+inline const ::NFMsg::BigMapGridBaseInfo& AckBigMapInfo::grid_base_info(int index) const {
+  return grid_base_info_.Get(index);
+}
+inline ::NFMsg::BigMapGridBaseInfo* AckBigMapInfo::mutable_grid_base_info(int index) {
+  return grid_base_info_.Mutable(index);
+}
+inline ::NFMsg::BigMapGridBaseInfo* AckBigMapInfo::add_grid_base_info() {
+  return grid_base_info_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridBaseInfo >&
+AckBigMapInfo::grid_base_info() const {
+  return grid_base_info_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapGridBaseInfo >*
+AckBigMapInfo::mutable_grid_base_info() {
+  return &grid_base_info_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqHoldMapGrid
+
+// -------------------------------------------------------------------
+
+// AckHoldMapGrid
+
+// -------------------------------------------------------------------
+
+// ReqLeaveMapMsg
+
+// -------------------------------------------------------------------
+
+// AckLeaveMapMsg
 
 
 // @@protoc_insertion_point(namespace_scope)

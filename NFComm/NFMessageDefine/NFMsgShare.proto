@@ -599,3 +599,103 @@ message ReqInviteTeamMember
 
 
 
+///////////////大地图/////////////////////////////////////////////////////////////////////////////////////
+
+//	EGMI_REQ_MAP_GRID_INFO
+message ReqBigMapGridInfo
+{	
+	repeated Ident						map_title_id = 1;
+}
+
+message BigMapGridBaseInfo
+{
+	required Ident						id = 1;				//GridID
+	required Ident						owner = 2;			//所属占领公会ID
+	required int32						level = 3;			//所属占领公会Level
+	required int32						member_count = 4;	//所属占领公会总人数
+	required int32						resource = 5;		//所属占领公会资源
+	required bytes						icon = 6;			//所属占领公会Icon
+	//war state
+}
+
+message BigMapLeaveMsg
+{
+	required Ident						owner = 1;//留言者
+	required bytes						msg_data = 2;//留言内容
+	required int32						msg_time = 3;//留言时间
+}
+	
+message BigMapWarHistory
+{
+	required Ident						red_id = 1;				//红方id		
+	required int32						red_level = 2;			//红方Level
+	required int32						red_count = 3;			//红方参与人数
+	required int32						red_war_resource = 4;	//输赢资源数据
+	required bytes						red_icon = 5;			//Icon
+	
+	required Ident						blue_id = 11;				//蓝方id
+	required int32						blue_level = 12;			//红方Level
+	required int32						blue_count = 13;			//红方参与人数
+	required int32						blue_war_resource = 14;		//输赢资源数据
+	required bytes						blue_icon = 15;				//Icon
+	
+	
+	required Ident						winner_id = 20;	//winner
+	required int32						war_time = 21;	//war时间
+}
+	
+message BigMapGridDetailInfo
+{
+	required BigMapGridBaseInfo			grid_base_info = 1;	
+	
+	repeated BigMapLeaveMsg				leave_msg = 2;		//此地图留言(<=10)
+	repeated BigMapWarHistory					war_history = 3;	//此地图历史战争信息(<=10)
+}
+
+//	EGMI_ACK_MAP_GRID_INFO
+message AckBigMapGridInfo
+{
+	repeated BigMapGridDetailInfo						map_data = 1;
+}
+
+//	EGMI_REQ_BIG_MAP_GRID
+message ReqBigMapInfo
+{
+}
+
+//	EGMI_ACK_BIG_MAP_GRID
+message AckBigMapInfo
+{
+	repeated BigMapGridBaseInfo			grid_base_info = 1;	
+}
+
+//	EGMI_REQ_HOLD_MAP_GRID
+message ReqHoldMapGrid
+{
+}
+//	EGMI_ACK_HOLD_MAP_GRID
+message AckHoldMapGrid
+{
+}
+
+//	EGMI_REQ_LEAVE_MSG_MAP_GRID
+message ReqLeaveMapMsg
+{
+}
+//	EGMI_ACK_LEAVE_MSG_MAP_GRID
+message AckLeaveMapMsg
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+

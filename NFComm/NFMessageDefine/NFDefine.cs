@@ -667,6 +667,48 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPRMEMBER_TEAM", Value=868)]
       EGMI_ACK_OPRMEMBER_TEAM = 868,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_INFO", Value=900)]
+      EGMI_REQ_MAP_GRID_INFO = 900,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_INFO", Value=901)]
+      EGMI_ACK_MAP_GRID_INFO = 901,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_GRID", Value=902)]
+      EGMI_REQ_BIG_MAP_GRID = 902,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_GRID", Value=903)]
+      EGMI_ACK_BIG_MAP_GRID = 903,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_HOLD_MAP_GRID", Value=910)]
+      EGMI_REQ_HOLD_MAP_GRID = 910,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_HOLD_MAP_GRID", Value=911)]
+      EGMI_ACK_HOLD_MAP_GRID = 911,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_MSG_MAP_GRID", Value=912)]
+      EGMI_REQ_LEAVE_MSG_MAP_GRID = 912,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_MSG_MAP_GRID", Value=913)]
+      EGMI_ACK_LEAVE_MSG_MAP_GRID = 913,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GET_MAP_GRID_AWARD", Value=914)]
+      EGMI_REQ_GET_MAP_GRID_AWARD = 914,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GET_MAP_GRID_AWARD", Value=915)]
+      EGMI_ACK_GET_MAP_GRID_AWARD = 915,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_HUNTING", Value=916)]
+      EGMI_REQ_MAP_GRID_HUNTING = 916,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_HUNTING", Value=917)]
+      EGMI_ACK_MAP_GRID_HUNTING = 917,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_KING_WAR", Value=918)]
+      EGMI_REQ_MAP_GRID_KING_WAR = 918,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_KING_WAR", Value=919)]
+      EGMI_ACK_MAP_GRID_KING_WAR = 919,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             

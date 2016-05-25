@@ -273,6 +273,23 @@ enum EGameMsgID
 	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
 	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
 	
+	/////////////////////MapModule/////////////////////////////////////
+	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
+	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	
+	EGMI_REQ_BIG_MAP_GRID							= 902; 	// 申请大地图信息
+	EGMI_ACK_BIG_MAP_GRID							= 903; 	// 返回大地图
+	
+	EGMI_REQ_HOLD_MAP_GRID						= 910; 	// 申请入驻
+	EGMI_ACK_HOLD_MAP_GRID						= 911; 	// 返回入驻结果
+	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 912; 	// 申请留言
+	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 913; 	// 返回留言结果
+	EGMI_REQ_GET_MAP_GRID_AWARD					= 914; 	// 申请领取地图奖励
+	EGMI_ACK_GET_MAP_GRID_AWARD					= 915; 	// 返回领取地图奖励
+	
+	EGMI_REQ_MAP_GRID_HUNTING					= 916; 	// 申请地图狩猎
+	EGMI_ACK_MAP_GRID_HUNTING					= 917; 	// 返回结果
+	EGMI_REQ_MAP_GRID_KING_WAR					= 918; 	// 申请地图争霸
+	EGMI_ACK_MAP_GRID_KING_WAR					= 919; 	// 返回结果
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形

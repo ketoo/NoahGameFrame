@@ -50,6 +50,9 @@
     <Filter Include="NFSwichServer">
       <UniqueIdentifier>{dd64f829-9c74-471a-b6b8-37bd590bb077}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFMapModule">
+      <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -140,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="NFCGSSwichServerModule.h">
       <Filter>NFSwichServer</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMapModule.h">
+      <Filter>NFMapModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="NFCGSSwichServerModule.cpp">
       <Filter>NFSwichServer</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCMapModule.cpp">
+      <Filter>NFMapModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

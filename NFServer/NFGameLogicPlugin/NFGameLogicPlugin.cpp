@@ -33,6 +33,7 @@
 #include "NFCHeroItemConsumeProcessModule.h"
 #include "NFCNormalConsumeProcessModule.h"
 #include "NFCGSSwichServerModule.h"
+#include "NFCMapModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -95,10 +96,13 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFCGmModule);
 	REGISTER_MODULE(pPluginManager, NFCTileModule);
 	REGISTER_MODULE(pPluginManager, NFCGSSwichServerModule);
+	REGISTER_MODULE(pPluginManager, NFCMapModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+	
+	UNREGISTER_MODULE(pPluginManager, NFCMapModule);
 	UNREGISTER_MODULE(pPluginManager, NFCGSSwichServerModule);
 	UNREGISTER_MODULE(pPluginManager, NFCTileModule);
     UNREGISTER_MODULE(pPluginManager, NFCGmModule);
