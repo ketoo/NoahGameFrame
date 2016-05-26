@@ -2156,13 +2156,13 @@ namespace NFMsg
   {
     public ReqBigMapGridInfo() {}
     
-    private readonly global::System.Collections.Generic.List<NFMsg.Ident> _map_title_id = new global::System.Collections.Generic.List<NFMsg.Ident>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.Ident> map_title_id
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
     {
       get { return _map_title_id; }
+      set { _map_title_id = value; }
     }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2232,19 +2232,33 @@ namespace NFMsg
       get { return _owner; }
       set { _owner = value; }
     }
+    private byte[] _owner_name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"owner_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] owner_name
+    {
+      get { return _owner_name; }
+      set { _owner_name = value; }
+    }
     private byte[] _msg_data;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"msg_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"msg_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public byte[] msg_data
     {
       get { return _msg_data; }
       set { _msg_data = value; }
     }
     private int _msg_time;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"msg_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"msg_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int msg_time
     {
       get { return _msg_time; }
       set { _msg_time = value; }
+    }
+    private int _owner_level;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"owner_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int owner_level
+    {
+      get { return _owner_level; }
+      set { _owner_level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2425,6 +2439,13 @@ namespace NFMsg
   {
     public ReqHoldMapGrid() {}
     
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2445,6 +2466,20 @@ namespace NFMsg
   {
     public ReqLeaveMapMsg() {}
     
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private NFMsg.BigMapLeaveMsg _leave_msg;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"leave_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.BigMapLeaveMsg leave_msg
+    {
+      get { return _leave_msg; }
+      set { _leave_msg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2454,6 +2489,87 @@ namespace NFMsg
   public partial class AckLeaveMapMsg : global::ProtoBuf.IExtensible
   {
     public AckLeaveMapMsg() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqGetMapAward")]
+  public partial class ReqGetMapAward : global::ProtoBuf.IExtensible
+  {
+    public ReqGetMapAward() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckGetMapAward")]
+  public partial class AckGetMapAward : global::ProtoBuf.IExtensible
+  {
+    public AckGetMapAward() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMapHunting")]
+  public partial class ReqMapHunting : global::ProtoBuf.IExtensible
+  {
+    public ReqMapHunting() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMapHunting")]
+  public partial class AckMapHunting : global::ProtoBuf.IExtensible
+  {
+    public AckMapHunting() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMapKingWar")]
+  public partial class ReqMapKingWar : global::ProtoBuf.IExtensible
+  {
+    public ReqMapKingWar() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMapKingWar")]
+  public partial class AckMapKingWar : global::ProtoBuf.IExtensible
+  {
+    public AckMapKingWar() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

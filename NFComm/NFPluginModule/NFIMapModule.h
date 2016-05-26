@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFICommonConfigModule.h
+//    @FileName         £º    NFIMapModule.h
 //    @Author           £º    LvSheng.Huang
 //    @Date             £º    2012-12-15
-//    @Module           £º    NFICosmmonConfigModule
+//    @Module           £º    NFIMapModule
 //
 // -------------------------------------------------------------------------
 

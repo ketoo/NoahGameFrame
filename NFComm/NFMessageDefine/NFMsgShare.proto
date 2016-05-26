@@ -604,7 +604,7 @@ message ReqInviteTeamMember
 //	EGMI_REQ_MAP_GRID_INFO
 message ReqBigMapGridInfo
 {	
-	repeated Ident						map_title_id = 1;
+	required bytes						map_title_id = 1;
 }
 
 message BigMapGridBaseInfo
@@ -621,8 +621,10 @@ message BigMapGridBaseInfo
 message BigMapLeaveMsg
 {
 	required Ident						owner = 1;//留言者
-	required bytes						msg_data = 2;//留言内容
-	required int32						msg_time = 3;//留言时间
+	required bytes						owner_name = 2;//留言者
+	required bytes						msg_data = 3;//留言内容
+	required int32						msg_time = 4;//留言时间
+	required int32						owner_level = 5;//留言时level
 }
 	
 message BigMapWarHistory
@@ -649,7 +651,7 @@ message BigMapGridDetailInfo
 	required BigMapGridBaseInfo			grid_base_info = 1;	
 	
 	repeated BigMapLeaveMsg				leave_msg = 2;		//此地图留言(<=10)
-	repeated BigMapWarHistory					war_history = 3;	//此地图历史战争信息(<=10)
+	repeated BigMapWarHistory			war_history = 3;	//此地图历史战争信息(<=10)
 }
 
 //	EGMI_ACK_MAP_GRID_INFO
@@ -672,6 +674,7 @@ message AckBigMapInfo
 //	EGMI_REQ_HOLD_MAP_GRID
 message ReqHoldMapGrid
 {
+	required bytes						map_title_id = 1;
 }
 //	EGMI_ACK_HOLD_MAP_GRID
 message AckHoldMapGrid
@@ -681,12 +684,43 @@ message AckHoldMapGrid
 //	EGMI_REQ_LEAVE_MSG_MAP_GRID
 message ReqLeaveMapMsg
 {
+	required bytes						map_title_id = 1;
+	required BigMapLeaveMsg				leave_msg = 2;
 }
 //	EGMI_ACK_LEAVE_MSG_MAP_GRID
 message AckLeaveMapMsg
 {
 }
 
+//	EGMI_REQ_GET_MAP_GRID_AWARD
+message ReqGetMapAward
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_GET_MAP_GRID_AWARD
+message AckGetMapAward
+{
+}
+
+//	EGMI_REQ_MAP_GRID_HUNTING
+message ReqMapHunting
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_MAP_GRID_HUNTING
+message AckMapHunting
+{
+}
+
+//	EGMI_REQ_MAP_GRID_KING_WAR
+message ReqMapKingWar
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_MAP_GRID_KING_WAR
+message AckMapKingWar
+{
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

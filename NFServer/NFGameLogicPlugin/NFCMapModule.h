@@ -62,6 +62,7 @@ private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 
 
+
 };
 
 
