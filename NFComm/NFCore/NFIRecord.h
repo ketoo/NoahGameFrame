@@ -106,10 +106,9 @@ public:
     virtual void AddRecordHook(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
     virtual const bool GetSave() = 0;
-    virtual const bool GetView() = 0;
     virtual const bool GetPublic() = 0;
     virtual const bool GetPrivate() = 0;
-    virtual const int GetIndex() = 0;
+    virtual const bool GetCache() = 0;
     virtual const std::string& GetName() const = 0;
     virtual const NFIDataList& GetInitData() const = 0;
     virtual const NFIDataList& GetKeyState() const = 0;
@@ -117,7 +116,7 @@ public:
     virtual const NFIDataList& GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
-    virtual void SetView(const bool bView) = 0;
+    virtual void SetCache(const bool bCache) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;
     virtual void SetName(const char* strName) = 0;
