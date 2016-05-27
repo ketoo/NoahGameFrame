@@ -100,8 +100,8 @@ bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseIn
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
     {
-        std::vector<std::pair<std::string, std::string>> xValue;
         std::string strKey = GetGridBaseKey(strGridID);
+        std::vector<std::pair<std::string, std::string>> xValue;
         int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
         if(nRet > 0)
         {
@@ -119,17 +119,28 @@ bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseIn
     return false;
 }
 
-bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, BigMapLeaveMsg& xLeaveMsg)
+bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<BigMapLeaveMsg>& xLeaveMsgList)
 {
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
     {
-        std::vector<std::pair<std::string, std::string>> xValue;
         std::string strKey = GetGridLeaveMsgKey(strGridID);
+        std::vector<std::pair<std::string, std::string>> xValue;
         int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
         if(nRet > 0)
         {
+            for(int i = 0; i< xValue.size(); ++i)
+            {
+                //first is a guid
+                BigMapLeaveMsg xLeaveMsg;
+                if (!xLeaveMsg.ParseFromString(xValue[i].second))
+                {
+                    //log error
+                    continue;
+                }
 
+                xLeaveMsgList.push_back(xLeaveMsg);
+            }
 
             return true;
         }
@@ -138,4 +149,91 @@ bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, BigMapLeaveM
     return false;
 }
 
+bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<BigMapWarHistory>& xWarHistoryList)
+{
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::string strKey = GetGridWarHistoryKey(strGridID);
+        std::vector<std::pair<std::string, std::string>> xValue;
+        int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
+        if(nRet > 0)
+        {
+            for(int i = 0; i< xValue.size(); ++i)
+            {
+                //first is a guid
+                BigMapWarHistory xWarData;
+                if (!xWarData.ParseFromString(xValue[i].second))
+                {
+                    //log error
+                    continue;
+                }
 
+                xWarHistoryList.push_back(xWarData);
+            }
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool NFCMapModule::SetGridBaseInfo(const BigMapGridBaseInfo& xBaseInfo)
+{
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::string strKey = GetGridBaseKey(strGridID);
+
+        std::vector<std::string> keys;
+        std::vector<std::string> values;
+
+        xBaseInfo.set_id("");
+        xBaseInfo.set_owner();
+        xBaseInfo.set_level(1);
+        xBaseInfo.set_member_count(100);
+        xBaseInfo.set_resource(100);
+        xBaseInfo.set_icon("");
+
+        pNoSqlDriver->HMSet(strKey, keys, values);
+
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCMapModule::AddGridLeaveMsgInfo(const std::string&strGridID, const BigMapLeaveMsg& xLeaveMsg)
+{
+    //数量限制
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::string strValue;
+        std::string strKey = GetGridLeaveMsgKey(strGridID);
+        pNoSqlDriver->LPush(strKey, strValue);
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCMapModule::AddGridWarHistoryInfo(const std::string&strGridID, const BigMapWarHistory& xWarHistory)
+{
+    //数量限制
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::string strValue;
+        std::string strKey = GetGridWarHistoryKey(strGridID);
+
+        pNoSqlDriver->LPush(strKey, strValue);
+
+        return true;
+    }
+
+    return false;
+}

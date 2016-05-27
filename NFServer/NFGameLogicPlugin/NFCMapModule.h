@@ -65,6 +65,14 @@ protected:
     std::string GetGridWarHistoryKey(const std::string&strGridID);
 
     bool GetGridBaseInfo(BigMapGridBaseInfo& xBaseInfo);
+    bool GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<BigMapLeaveMsg>& xLeaveMsgList);
+    bool GetGridWarHistoryInfo(const std::string&strGridID, std::vector<BigMapWarHistory>& xWarHistoryList);
+
+    bool SetGridBaseInfo(const BigMapGridBaseInfo& xBaseInfo);
+    bool AddGridLeaveMsgInfo(const std::string&strGridID, const BigMapLeaveMsg& xLeaveMsg);
+    bool AddGridWarHistoryInfo(const std::string&strGridID, const BigMapWarHistory& xWarHistory);
+
+
 
 private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
