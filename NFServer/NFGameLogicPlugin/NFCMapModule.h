@@ -12,6 +12,7 @@
 #include "NFComm/NFPluginModule/NFIMapModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
 
 class NFCMapModule
     : public NFIMapModule
@@ -57,10 +58,17 @@ protected:
 	//工会申请参与地图决战活动--决定地图归属权
 	void ReqMapKingWar(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+protected:
+
+    std::string GetGridBaseKey(const std::string&strGridID);
+    std::string GetGridLeaveMsgKey(const std::string&strGridID);
+    std::string GetGridWarHistoryKey(const std::string&strGridID);
+
+    bool GetGridBaseInfo(BigMapGridBaseInfo& xBaseInfo);
 
 private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-    NFI
+    NFIDataNosqlModule* m_pDataNoSqlModule;
 
 
 };

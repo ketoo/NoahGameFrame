@@ -10,7 +10,8 @@
 
 bool NFCMapModule::Init()
 {
-
+    m_pDataNoSqlModule = pPluginManager->GetModule<NFIDataNoSqlModule>("NFCDataNoSqlModule");
+    m_pGameServerNet_ServerModule = pPluginManager->GetModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
     return true;
 }
 
@@ -39,7 +40,7 @@ bool NFCMapModule::AfterInit()
 
     return true;
 }
-	
+
 void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
@@ -78,3 +79,38 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 }
+
+std::string NFCMapModule::GetGridBaseKey(const std::string&strGridID)
+{
+    return "GridBaseKey_" + strGridID;
+}
+
+std::string NFCMapModule::GetGridLeaveMsgKey(const std::string&strGridID)
+{
+    return "GridLeaveMsgKey_" + strGridID;
+}
+
+std::string NFCMapModule::GetGridWarHistoryKey(const std::string&strGridID)
+{
+    return "GridWarHistoryKey_" + strGridID;
+}
+
+bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseInfo& xBaseInfo)
+{
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::vector<std::pair<std::string, std::string>> xValue;
+        std::string strBaseKey = GetGridBaseKey(strGridID);
+        int nRet = pNoSqlDriver->HGetAll(strBaseKey, xValue);
+        if(nRet > 0)
+        {
+            GUILD
+        }
+    }
+
+
+    return false;
+}
+
+

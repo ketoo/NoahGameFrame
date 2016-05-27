@@ -609,7 +609,7 @@ message ReqBigMapGridInfo
 
 message BigMapGridBaseInfo
 {
-	required Ident						id = 1;				//GridID
+	required bytes						id = 1;				//GridID
 	required Ident						owner = 2;			//所属占领公会ID
 	required int32						level = 3;			//所属占领公会Level
 	required int32						member_count = 4;	//所属占领公会总人数
