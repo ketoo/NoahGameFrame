@@ -260,7 +260,7 @@ class NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
-    NFCRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex);
+    NFCRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow);
 
     virtual ~NFCRecord();
 
@@ -326,19 +326,17 @@ public:
 
     virtual const bool GetSave();
 
-    virtual const bool GetView();
+    virtual const bool GetCache();
 
     virtual const bool GetPublic();
 
     virtual const bool GetPrivate();
 
-    virtual const int GetIndex();
-
     virtual const std::string& GetName() const;
 
     virtual void SetSave(const bool bSave);
 
-    virtual void SetView(const bool bView);
+    virtual void SetCache(const bool bCache);
 
     virtual void SetPublic(const bool bPublic);
 
@@ -387,8 +385,8 @@ protected:
     bool mbView;
     bool mbPublic;
     bool mbPrivate;
+    bool mbCache;
     int mnKeyCol;
-    int mnIndex;
     std::string mstrRecordName;
 
     //col-><int_key, row_value>//整形key,暂时只支持一个key
