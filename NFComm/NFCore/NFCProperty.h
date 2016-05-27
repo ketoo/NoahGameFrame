@@ -17,10 +17,11 @@
 
 class NFCProperty : public NFIProperty
 {
-public:
+private:
     NFCProperty();
 
-    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic,  bool bPrivate,  bool bSave, const std::string& strRelativeValue);
+public:
+    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType);
 
     virtual ~NFCProperty();
 
@@ -38,11 +39,13 @@ public:
     virtual const bool GetSave() const;
     virtual const bool GetPublic() const;
     virtual const bool GetPrivate() const;
+    virtual const bool GetCache() const;
     virtual const std::string& GetRelationValue() const;
 
     virtual void SetSave(bool bSave);
     virtual void SetPublic(bool bPublic);
     virtual void SetPrivate(bool bPrivate);
+    virtual void SetCache(bool bCache);
     virtual void SetRelationValue(const std::string& strRelation);
 
     virtual NFINT64 GetInt() const;
@@ -81,6 +84,7 @@ private:
     bool mbPublic;
     bool mbPrivate;
     bool mbSave;
+    bool mbCache;
 };
 
 #endif
