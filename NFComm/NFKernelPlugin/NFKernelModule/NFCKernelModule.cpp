@@ -179,13 +179,13 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         NF_SHARE_PTR<NFIProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->First();
         while (pStaticConfigPropertyInfo.get())
         {
-            pPropertyManager->AddProperty(ident,
-                                          pStaticConfigPropertyInfo->GetKey(),
-                                          pStaticConfigPropertyInfo->GetType(),
-                                          pStaticConfigPropertyInfo->GetPublic(),
-                                          pStaticConfigPropertyInfo->GetPrivate(),
-                                          pStaticConfigPropertyInfo->GetSave(),
-                                          pStaticConfigPropertyInfo->GetRelationValue());
+            NF_SHARE_PTR<NFIProperty> xProperty = pPropertyManager->AddProperty(ident, pStaticConfigPropertyInfo->GetKey(), pStaticConfigPropertyInfo->GetType());
+
+            xProperty->SetPublic(pStaticConfigPropertyInfo->GetPublic());
+            xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
+            xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
+            xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
+            xProperty->SetRelationValue(pStaticConfigPropertyInfo->GetRelationValue());
 
             //通用回调，方便NET同步
             pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
@@ -196,19 +196,21 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         NF_SHARE_PTR<NFIRecord> pConfigRecordInfo = pStaticClassRecordManager->First();
         while (pConfigRecordInfo)
         {
-            pRecordManager->AddRecord(ident,
+            NF_SHARE_PTR<NFIRecord> xRecord =  pRecordManager->AddRecord(ident,
                                       pConfigRecordInfo->GetName(),
                                       pConfigRecordInfo->GetInitData(),
                                       pConfigRecordInfo->GetKeyState(),
                                       pConfigRecordInfo->GetInitDesc(),
                                       pConfigRecordInfo->GetTag(),
                                       pConfigRecordInfo->GetRelatedRecord(),
-                                      pConfigRecordInfo->GetRows(),
-                                      pConfigRecordInfo->GetPublic(),
-                                      pConfigRecordInfo->GetPrivate(),
-                                      pConfigRecordInfo->GetSave(),
-                                      pConfigRecordInfo->GetView(),
-                                      pConfigRecordInfo->GetIndex());
+                                      pConfigRecordInfo->GetRows());
+
+             xRecord->SetPublic(pConfigRecordInfo->GetPublic());
+             xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
+             xRecord->SetSave(pConfigRecordInfo->GetSave());
+             xRecord->SetCache(pConfigRecordInfo->GetCache());
+
+
 
             //通用回调，方便NET同步
             pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
@@ -1237,34 +1239,6 @@ bool NFCKernelModule::RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& 
 
 bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 {
-
-    return false;
-}
-
-bool NFCKernelModule::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, const std::string& strRelativeValue)
-{
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject.get())
-    {
-        pObject->GetPropertyManager()->AddProperty(self, strPropertyName, varType, bPublic, bPrivate, bSave, strRelativeValue);
-
-        //通用回调，方便NET同步
-        return pObject->AddPropertyCallBack(strPropertyName, this, &NFCKernelModule::OnPropertyCommonEvent);
-    }
-
-    return false;
-}
-
-bool NFCKernelModule::AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& varKey, const NFIDataList& varDesc, const NFIDataList& varTag, const NFIDataList& varRelatedRecord, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
-{
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject.get())
-    {
-        pObject->GetRecordManager()->AddRecord(self, strRecordName, TData, varKey, varDesc, varTag, varRelatedRecord, nRows, bPublic, bPrivate, bSave, bView, nIndex);
-
-        //通用回调，方便NET同步
-        return pObject->AddRecordCallBack(strRecordName, this, &NFCKernelModule::OnRecordCommonEvent);
-    }
 
     return false;
 }
