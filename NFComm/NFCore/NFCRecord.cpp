@@ -13,16 +13,19 @@
 NFCRecord::NFCRecord()
 {
     mSelf = NFGUID();
+
     mbSave = false;
     mbPublic = false;
     mbPrivate = false;
+    mbCache = false;
+
     mnKeyCol = -1;
     mstrRecordName = "";
     mnMaxRow = 0;
 
 }
 
-NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex)
+NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& valueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordList, int nMaxRow)
 {
     mVarRecordType.Append(valueList);
     mVarRecordDesc.Append(descList);
@@ -31,11 +34,11 @@ NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const
     mVarRecordRelation.Append(relateRecordList);
 
     mSelf = self;
-    mbSave = bSave;
-    mbView = bView;
-    mbPublic = bPublic;
-    mbPrivate = bPrivate;
-    mnIndex = nIndex;
+
+    mbSave = false;
+    mbPublic = false;
+    mbPrivate = false;
+    mbCache = false;
 
     mstrRecordName = strRecordName;
 
@@ -1091,9 +1094,9 @@ const bool NFCRecord::GetSave()
     return mbSave;
 }
 
-const bool NFCRecord::GetView()
+const bool NFCRecord::GetCache()
 {
-    return mbView;
+    return mbCache;
 }
 
 const bool NFCRecord::GetPublic()
@@ -1104,11 +1107,6 @@ const bool NFCRecord::GetPublic()
 const bool NFCRecord::GetPrivate()
 {
     return mbPrivate;
-}
-
-const int NFCRecord::GetIndex()
-{
-    return mnIndex;
 }
 
 int NFCRecord::GetPos(int nRow, int nCol) const
@@ -1126,9 +1124,9 @@ void NFCRecord::SetSave(const bool bSave)
     mbSave = bSave;
 }
 
-void NFCRecord::SetView(const bool bView)
+void NFCRecord::SetCache(const bool bCache)
 {
-    mbView = bView;
+    mbCache = bCache;
 }
 
 void NFCRecord::SetPublic(const bool bPublic)

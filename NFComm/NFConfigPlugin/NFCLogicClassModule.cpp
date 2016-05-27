@@ -98,11 +98,13 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrPublic = pPropertyNode->first_attribute("Public")->value();
             const char* pstrPrivate = pPropertyNode->first_attribute("Private")->value();
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
+            const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
             const char* pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
+            bool bCache = lexical_cast<bool>(pstrCache);
 
             NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
@@ -114,7 +116,12 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, pstrRelationValue);
+            NF_SHARE_PTR<NFIProperty> xProperty = pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType());
+            xProperty->SetPublic(bPublic);
+            xProperty->SetPrivate(bPrivate);
+            xProperty->SetSave(bSave);
+            xProperty->SetCache(bCache);
+
         }
     }
 
@@ -144,6 +151,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             const char* pstrPublic = pRecordNode->first_attribute("Public")->value();
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
+            const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
 
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
@@ -156,8 +164,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
-            int nIndex = lexical_cast<int>(pstrIndex);
+            bool bCache = lexical_cast<bool>(pstrCache);
 
             NFCDataList recordVar;
             NFCDataList recordKey;
@@ -225,7 +232,12 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                 //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
+            NF_SHARE_PTR<NFIRecord> xRecord = pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow));
+
+            xRecord->SetPublic(bPublic);
+            xRecord->SetPrivate(bPrivate);
+            xRecord->SetSave(bSave);
+            xRecord->SetCache(bCache);
         }
     }
 
