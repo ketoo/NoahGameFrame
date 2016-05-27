@@ -31,9 +31,9 @@ bool HelloWorld2::AfterInit()
         NFIObject* pObject = new NFCObject(NFGUID(0, 1), pPluginManager);
 
 		//add a property name is "Hello" of this object
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, "");
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING);
 		//add a property name is "World" of this object
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, "");
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT);
 
 		//set the "world" property value as 1111
         pObject->SetPropertyInt("World", 1111);
