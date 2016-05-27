@@ -101,14 +101,39 @@ bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseIn
     if (pNoSqlDriver)
     {
         std::vector<std::pair<std::string, std::string>> xValue;
-        std::string strBaseKey = GetGridBaseKey(strGridID);
-        int nRet = pNoSqlDriver->HGetAll(strBaseKey, xValue);
+        std::string strKey = GetGridBaseKey(strGridID);
+        int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
         if(nRet > 0)
         {
-            GUILD
+            xBaseInfo.set_id("");
+            xBaseInfo.set_owner();
+            xBaseInfo.set_level(1);
+            xBaseInfo.set_member_count(100);
+            xBaseInfo.set_resource(100);
+            xBaseInfo.set_icon("");
+
+            return true;
         }
     }
 
+    return false;
+}
+
+bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, BigMapLeaveMsg& xLeaveMsg)
+{
+    NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
+    if (pNoSqlDriver)
+    {
+        std::vector<std::pair<std::string, std::string>> xValue;
+        std::string strKey = GetGridLeaveMsgKey(strGridID);
+        int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
+        if(nRet > 0)
+        {
+
+
+            return true;
+        }
+    }
 
     return false;
 }
