@@ -29,10 +29,11 @@ NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName,
 	mbSave = false;
 	mbCache = false;
 
+	mstrRelationValue = "";
+
 	mSelf = self;
 
 	msPropertyName = strPropertyName;
-	mstrRelationValue = strRelationValue;
 	eType = varType;
 }
 

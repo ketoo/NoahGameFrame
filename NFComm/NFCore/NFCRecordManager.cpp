@@ -13,19 +13,14 @@ NFCRecordManager::~NFCRecordManager()
     ClearAll();
 }
 
-NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& ValueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordData, const int nRows, bool bPublic, bool bPrivate, bool bSave, bool bView, int nIndex)
+NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& ValueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordData, const int nRows)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
     if (!pRecord.get())
     {
         //NF_SHARE_PTR<NFIRecord>
-        pRecord = NF_SHARE_PTR<NFIRecord>(NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows, bPublic, bPrivate, bSave, bView, nIndex));
+        pRecord = NF_SHARE_PTR<NFIRecord>(NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows));
         this->AddElement(strRecordName, pRecord);
-
-        if (nIndex > 0)
-        {
-            mxRecordIndexMap.insert(std::map<std::string, int>::value_type(strRecordName, nIndex));
-        }
     }
 
     return pRecord;
@@ -53,23 +48,6 @@ void NFCRecordManager::GetRelationRows(const std::string& strSrcRecord, const st
 
     pRelatedRecord->FindRowByColValue(strRelatedTag, var, outRowList);
 }
-
-const std::map<std::string, int>& NFCRecordManager::GetRecordIndex()
-{
-    return mxRecordIndexMap;
-}
-
-const int NFCRecordManager::GetRecordIndex(const std::string& strRecordName)
-{
-    std::map<std::string, int>::iterator it = mxRecordIndexMap.find(strRecordName);
-    if (it != mxRecordIndexMap.end())
-    {
-        return it->second;
-    }
-
-    return 0;
-}
-
 
 bool NFCRecordManager::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)
 {
