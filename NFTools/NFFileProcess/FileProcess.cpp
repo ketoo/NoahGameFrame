@@ -419,97 +419,100 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
-			auto recordNode = structDoc->NewElement("Record");
-			recordNodes->LinkEndChild(recordNode);
-
-			std::string strRecordName = "";
-
-			// 从11个开始就是Record中具体的Col了
-			int nSetColNum = 0;
-
-			for (int c = dim.firstCol; c <= nRecordStart; c++)
+			for (int RecordNumber = 0; RecordNumber < (int)(dim.lastRow / 2); RecordNumber++)
 			{
-				std::string  name = colNames[c - 1];
-				std::string  value = "";
+				auto recordNode = structDoc->NewElement("Record");
+				recordNodes->LinkEndChild(recordNode);
 
-				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + 1, c);
-				if (cell)
+				std::string strRecordName = "";
+
+				// 从11个开始就是Record中具体的Col了
+				int nSetColNum = 0;
+
+				for (int c = dim.firstCol; c <= nRecordStart; c++)
 				{
-					std::string valueCell = cell->value;
-					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-					if (valueCell == "TRUE" || valueCell == "FALSE")
-					{
-						value = valueCell == "TRUE" ? 1 : 0;
-					}
-					else
-					{
-						value = cell->value;
-					}
+					std::string  name = colNames[c - 1];
+					std::string  value = "";
 
-					recordNode->SetAttribute(name.c_str(), value.c_str());
-					if (name == "Col")
+					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
+					if (cell)
 					{
-						nSetColNum = atoi(value.c_str());
-					}
+						std::string valueCell = cell->value;
+						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
+						if (valueCell == "TRUE" || valueCell == "FALSE")
+						{
+							value = valueCell == "TRUE" ? 1 : 0;
+						}
+						else
+						{
+							value = cell->value;
+						}
 
-					if (name == "Id")
-					{
-						strRecordName = value;
+						recordNode->SetAttribute(name.c_str(), value.c_str());
+						if (name == "Col")
+						{
+							nSetColNum = atoi(value.c_str());
+						}
+
+						if (name == "Id")
+						{
+							strRecordName = value;
+						}
 					}
 				}
-			}
 
-			strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
-			strHppEnumInfo = strHppEnumInfo + "\n\tenum " + strRecordName + "\n\t{\n";
+				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
+				strHppEnumInfo = strHppEnumInfo + "\n\tenum " + strRecordName + "\n\t{\n";
 
-			strJavaRecordInfo = strJavaRecordInfo + "\tpublic static final String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
-			strJavaEnumInfo = strJavaEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
+				strJavaRecordInfo = strJavaRecordInfo + "\tpublic static final String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
+				strJavaEnumInfo = strJavaEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
 
-			strCSRecordInfo = strCSRecordInfo + "\tpublic static readonly String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
-			strCSEnumInfo = strCSEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
+				strCSRecordInfo = strCSRecordInfo + "\tpublic static readonly String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
+				strCSEnumInfo = strCSEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
 
-			std::string toWrite = "enum " + strRecordName + "\n{";
-			fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
+				std::string toWrite = "enum " + strRecordName + "\n{";
+				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
-			for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
-			{
-				std::string  name = colNames[c - 1];
-				std::string  value = "";
-
-				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + 1, c);
-				if (cell)
+				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
 				{
-					std::string valueCell = cell->value;
-					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-					if (valueCell == "TRUE" || valueCell == "FALSE")
+					std::string name = sh.getCell(dim.firstRow + RecordNumber * 2, c)->value;
+					std::string value = "";
+
+					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
+					if (cell)
 					{
-						value = valueCell == "TRUE" ? 1 : 0;
+						std::string valueCell = cell->value;
+						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
+						if (valueCell == "TRUE" || valueCell == "FALSE")
+						{
+							value = valueCell == "TRUE" ? 1 : 0;
+						}
+						else
+						{
+							value = cell->value;
+						}
+
+						auto colNode = structDoc->NewElement("Col");
+						recordNode->LinkEndChild(colNode);
+
+						colNode->SetAttribute("Type", value.c_str());
+						colNode->SetAttribute("Tag", name.c_str());
+
+						toWrite = "\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + "; // " + name + " -- " + value + " \n";
+						fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
+
+						strHppEnumInfo += "\t\t" + strRecordName + "_" + name + "\t\t= " + std::to_string(c - 11 - 1) + ", // " + name + " -- " + value + "\n";
+						strJavaEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
+						strCSEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
 					}
-					else
-					{
-						value = cell->value;
-					}
-
-					auto colNode = structDoc->NewElement("Col");
-					recordNode->LinkEndChild(colNode);
-
-					colNode->SetAttribute("Type", value.c_str());
-					colNode->SetAttribute("Tag", name.c_str());
-
-					toWrite = "\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + "; // " + name + " -- " + value + " \n";
-					fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
-
-					strHppEnumInfo += "\t\t" + strRecordName + "_" + name + "\t\t= " + std::to_string(c - 11 - 1) + ", // " + name + " -- " + value + "\n";
-					strJavaEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
-					strCSEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
 				}
+
+				fwrite("}\n", sizeof("}\n"), 1, protoWriter);
+
+				strHppEnumInfo += "\n\t};\n";
+				strJavaEnumInfo += "\n\t};\n";
+				strCSEnumInfo += "\n\t};\n";
 			}
-
-			fwrite("}\n", sizeof("}\n"), 1, protoWriter);
-
-			strHppEnumInfo += "\n\t};\n";
-			strJavaEnumInfo += "\n\t};\n";
-			strCSEnumInfo += "\n\t};\n";
 		}
 	}
 	// cpp

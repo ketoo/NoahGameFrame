@@ -41,7 +41,7 @@ protected:
 	///////////////////////////
 	//工会申请入驻
 	void ReqStation(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	
+
 
 	//工会申请领取地图奖励
 	void ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -60,7 +60,7 @@ protected:
 
 private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-
+    NFI
 
 
 };

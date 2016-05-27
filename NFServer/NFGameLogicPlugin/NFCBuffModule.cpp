@@ -11,8 +11,8 @@
 bool NFCBuffModule::Init()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pBuffConfigModule = dynamic_cast<NFIBuffConfigModule*>( pPluginManager->FindModule( "NFCBuffConfigModule" ) );
-    
+    m_pBuffConfigModule = pPluginManager->FindModule<NFIBuffConfigModule>( "NFCBuffConfigModule" );
+
 
     mstrRunTimeEffectTable = "RuntimeBuffInfo";
 
