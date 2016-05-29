@@ -64,19 +64,19 @@ protected:
     std::string GetGridLeaveMsgKey(const std::string&strGridID);
     std::string GetGridWarHistoryKey(const std::string&strGridID);
 
-    bool GetGridBaseInfo(BigMapGridBaseInfo& xBaseInfo);
-    bool GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<BigMapLeaveMsg>& xLeaveMsgList);
-    bool GetGridWarHistoryInfo(const std::string&strGridID, std::vector<BigMapWarHistory>& xWarHistoryList);
+    bool GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo);
+    bool GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList);
+    bool GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList);
 
-    bool SetGridBaseInfo(const BigMapGridBaseInfo& xBaseInfo);
-    bool AddGridLeaveMsgInfo(const std::string&strGridID, const BigMapLeaveMsg& xLeaveMsg);
-    bool AddGridWarHistoryInfo(const std::string&strGridID, const BigMapWarHistory& xWarHistory);
+    bool SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo);
+    bool AddGridLeaveMsgInfo(const std::string&strGridID, const NFMsg::BigMapLeaveMsg& xLeaveMsg);
+    bool AddGridWarHistoryInfo(const std::string&strGridID, const NFMsg::BigMapWarHistory& xWarHistory);
 
 
 
 private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-    NFIDataNosqlModule* m_pDataNoSqlModule;
+	NFIDataNoSqlModule* m_pDataNoSqlModule;
 
 
 };

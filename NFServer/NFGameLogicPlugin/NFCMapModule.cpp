@@ -95,7 +95,7 @@ std::string NFCMapModule::GetGridWarHistoryKey(const std::string&strGridID)
     return "GridWarHistoryKey_" + strGridID;
 }
 
-bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseInfo& xBaseInfo)
+bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo)
 {
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
@@ -119,7 +119,7 @@ bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, BigMapGridBaseIn
     return false;
 }
 
-bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<BigMapLeaveMsg>& xLeaveMsgList)
+bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList)
 {
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
@@ -132,7 +132,7 @@ bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<
             for(int i = 0; i< xValue.size(); ++i)
             {
                 //first is a guid
-                BigMapLeaveMsg xLeaveMsg;
+				NFMsg::BigMapLeaveMsg xLeaveMsg;
                 if (!xLeaveMsg.ParseFromString(xValue[i].second))
                 {
                     //log error
@@ -149,7 +149,7 @@ bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<
     return false;
 }
 
-bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<BigMapWarHistory>& xWarHistoryList)
+bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList)
 {
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
@@ -162,7 +162,7 @@ bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vecto
             for(int i = 0; i< xValue.size(); ++i)
             {
                 //first is a guid
-                BigMapWarHistory xWarData;
+                 NFMsg::BigMapWarHistory xWarData;
                 if (!xWarData.ParseFromString(xValue[i].second))
                 {
                     //log error
@@ -179,7 +179,7 @@ bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vecto
     return false;
 }
 
-bool NFCMapModule::SetGridBaseInfo(const BigMapGridBaseInfo& xBaseInfo)
+bool NFCMapModule::SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo)
 {
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
     if (pNoSqlDriver)
@@ -205,7 +205,7 @@ bool NFCMapModule::SetGridBaseInfo(const BigMapGridBaseInfo& xBaseInfo)
     return false;
 }
 
-bool NFCMapModule::AddGridLeaveMsgInfo(const std::string&strGridID, const BigMapLeaveMsg& xLeaveMsg)
+bool NFCMapModule::AddGridLeaveMsgInfo(const std::string&strGridID, const NFMsg::BigMapLeaveMsg& xLeaveMsg)
 {
     //数量限制
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
@@ -221,7 +221,7 @@ bool NFCMapModule::AddGridLeaveMsgInfo(const std::string&strGridID, const BigMap
     return false;
 }
 
-bool NFCMapModule::AddGridWarHistoryInfo(const std::string&strGridID, const BigMapWarHistory& xWarHistory)
+bool NFCMapModule::AddGridWarHistoryInfo(const std::string&strGridID, const NFMsg::BigMapWarHistory& xWarHistory)
 {
     //数量限制
     NFIDataNoSqlDriver* pNoSqlDriver = m_pDataNoSqlModule->GetDriver();
