@@ -8,45 +8,45 @@
 
 //#include "stdafx.h"
 #include <algorithm>
-#include "NFCDataNoSqlModule.h"
+#include "NFCNoSqlModule.h"
 
-NFCDataNoSqlModule::NFCDataNoSqlModule(NFIPluginManager* p)
+NFCNoSqlModule::NFCNoSqlModule(NFIPluginManager* p)
 {
     pPluginManager = p;
 }
 
-NFCDataNoSqlModule::~NFCDataNoSqlModule()
+NFCNoSqlModule::~NFCNoSqlModule()
 {
 
 }
 
-bool NFCDataNoSqlModule::Init()
+bool NFCNoSqlModule::Init()
 {
     return true;
 }
 
-bool NFCDataNoSqlModule::Shut()
+bool NFCNoSqlModule::Shut()
 {
-    delete m_pPlayerDataDriver;
-    m_pPlayerDataDriver = NULL;
+    delete m_pRedisDriver;
+	m_pRedisDriver = NULL;
 
     return true;
 }
 
-bool NFCDataNoSqlModule::AfterInit()
+bool NFCNoSqlModule::AfterInit()
 {
     return true;
 }
 
-bool NFCDataNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
     return true;
 }
 
-bool NFCDataNoSqlModule::ConnectSql(const std::string& strIP)
+bool NFCNoSqlModule::ConnectSql(const std::string& strIP)
 {
-    m_pPlayerDataDriver = new NFCDataNoSqlDriver();
-    m_pPlayerDataDriver->Connect(strIP);
+    m_pRedisDriver = new NFCNoSqlDriver();
+	m_pRedisDriver->Connect(strIP, 3306, "");
 
     return true;
 }
