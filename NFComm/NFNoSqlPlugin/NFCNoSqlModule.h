@@ -1,26 +1,26 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCDataNoSqlModule.h
+//    @FileName			:    NFCNoSqlModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-10-11
-//    @Module           :    NFCDataNoSqlModule
+//    @Module           :    NFCNoSqlModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_DATANOSQL_MODULE_H_
-#define _NFC_DATANOSQL_MODULE_H_
+#ifndef NFC_DATANOSQL_MODULE_H
+#define NFC_DATANOSQL_MODULE_H
 
-#include "NFCDataNoSqlDriver.h"
+#include "NFCNoSqlDriver.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIDataNoSqlModule.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
-class NFCDataNoSqlModule
-    : public NFIDataNoSqlModule
+class NFCNoSqlModule
+    : public NFINoSqlModule
 {
 public:
 
-    NFCDataNoSqlModule(NFIPluginManager* p);
-    virtual ~NFCDataNoSqlModule();
+    NFCNoSqlModule(NFIPluginManager* p);
+    virtual ~NFCNoSqlModule();
 
     virtual bool Init();
     virtual bool Shut();
@@ -29,14 +29,14 @@ public:
 
     virtual bool ConnectSql(const std::string& strIP);
 
-    virtual NFIDataNoSqlDriver* GetDriver()
+    virtual NFINoSqlDriver* GetDriver()
     {
-        return m_pPlayerDataDriver;
+        return m_pRedisDriver;
     }
 
 protected:
 
-    NFCDataNoSqlDriver* m_pPlayerDataDriver;//player property
+    NFINoSqlDriver* m_pRedisDriver;//player property
 
 };
 
