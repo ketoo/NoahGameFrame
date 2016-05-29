@@ -557,7 +557,7 @@ const bool NFCNoSqlDriver::ZRevRange(const std::string & strKey, const int nStar
 
 	try
 	{
-		m_pRedisClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
+		//m_pRedisClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
 		return true;
 
 	}
@@ -575,7 +575,7 @@ const bool NFCNoSqlDriver::ZRangeByScore(const std::string & strKey, const int n
 
 	try
 	{
-		m_pRedisClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
+		//m_pRedisClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);

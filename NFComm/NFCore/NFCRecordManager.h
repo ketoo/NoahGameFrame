@@ -32,9 +32,6 @@ public:
 
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList);
 
-    virtual const std::map<std::string, int>& GetRecordIndex();
-    virtual const int GetRecordIndex(const std::string& strRecordName);
-
     //////////////////////////////////////////////////////////////////////////
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue);
