@@ -22,9 +22,6 @@ public:
     virtual const NFGUID& Self() = 0;
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList) = 0;
 
-    virtual const std::map<std::string, int>& GetRecordIndex() = 0;
-    virtual const int GetRecordIndex(const std::string& strRecordName) = 0;
-
     //////////////////////////////////////////////////////////////////////////
 
     virtual bool SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue) = 0;
