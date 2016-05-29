@@ -14,7 +14,7 @@
     <ProjectGuid>{3F68CD92-8AA1-48C4-84EF-CD63690C8DCB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFDataNoSqlPlugin</RootNamespace>
-    <ProjectName>NFDataNoSqlPlugin</ProjectName>
+    <ProjectName>NFNoSqlPlugin</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -118,16 +118,14 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCDataNoSqlDriver.cpp" />
-    <ClCompile Include="NFCDataNoSqlModule.cpp" />
-    <ClCompile Include="NFCPlatformDataModule.cpp" />
-    <ClCompile Include="NFDataNoSqlPlugin.cpp" />
+    <ClCompile Include="NFCNoSqlDriver.cpp" />
+    <ClCompile Include="NFCNoSqlModule.cpp" />
+    <ClCompile Include="NFNoSqlPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCDataNoSqlDriver.h" />
-    <ClInclude Include="NFCDataNoSqlModule.h" />
-    <ClInclude Include="NFCPlatformDataModule.h" />
-    <ClInclude Include="NFDataNoSqlPlugin.h" />
+    <ClInclude Include="NFCNoSqlDriver.h" />
+    <ClInclude Include="NFCNoSqlModule.h" />
+    <ClInclude Include="NFNoSqlPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
