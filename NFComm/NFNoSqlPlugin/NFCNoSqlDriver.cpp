@@ -551,7 +551,7 @@ const bool NFCNoSqlDriver::ZRevRange(const std::string & strKey, const int nStar
 
 	try
 	{
-		//m_pNoSqlClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
+		m_pNoSqlClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
 		return true;
 
 	}
