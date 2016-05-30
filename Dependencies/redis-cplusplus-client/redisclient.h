@@ -1636,7 +1636,7 @@ namespace redis
     void zrevrange(const string_type & key, int_type start, int_type end, string_score_vector & out)
     {
       int socket = get_socket(key);
-      send_( socket, makecmd("ZREVRANGE") << key << start << end << "WITHSCORES" );
+      send_( socket, makecmd("ZREVRANGE") << key << start << end << std::string("WITHSCORES") );
       string_vector res;
       recv_multi_bulk_reply_(socket, res);
       convert(res, out);
