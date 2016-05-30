@@ -93,8 +93,8 @@ namespace redis
   
   struct connection_data
   {
-    connection_data(const std::string & host = "localhost", uint16_t port = 6379, int dbindex = 0)
-     : host(host), port(port), dbindex(dbindex), socket(ANET_ERR)
+    connection_data(const std::string & host = "localhost", uint16_t port = 6379, const std::string & pass="",int dbindex = 0)
+     : host(host), port(port), dbindex(dbindex), socket(ANET_ERR), pass(pass)
     {
     }
 
@@ -111,6 +111,7 @@ namespace redis
     }
     
     std::string host;
+    std::string pass;
     std::uint16_t port;
     int dbindex;
 
@@ -411,7 +412,13 @@ namespace redis
         throw connection_error( os.str() );
       }
       anetTcpNoDelay(NULL, con.socket);
-      select(con.dbindex, con);
+
+      if (!con.pass.empty())
+      {
+          auth(con);
+      }
+
+      //select(con.dbindex, con);
     }
     
   public:
@@ -426,12 +433,13 @@ namespace redis
     typedef long int_type;
 
     explicit base_client(const string_type & host = "localhost",
-                    uint16_t port = 6379, int_type dbindex = 0)
+                    uint16_t port = 6379, const string_type & pass = "", int_type dbindex = 0)
     {
       connection_data con;
       con.host = host;
       con.port = port;
       con.dbindex = dbindex;
+      con.pass = pass;
       init(con);
       connections_.push_back(con);
     }
@@ -531,6 +539,13 @@ namespace redis
       int socket = connections_[0].socket;
       send_(socket, makecmd("AUTH") << pass);
       recv_ok_reply_(socket);
+    }
+
+    void auth( const connection_data& con)
+    {
+        int socket = con.socket;
+        send_(socket, makecmd("AUTH") << con.pass);
+        recv_ok_reply_(socket);
     }
     
     void set(const string_type & key,
@@ -1642,6 +1657,11 @@ namespace redis
       
       makecmd m("ZRANGEBYSCORE");
       m << key << min_str << max_str;
+
+	  if (withscores)
+	  {
+		  m << "WITHSCORES";
+	  }
         
       if(max_count != -1 || offset > 0)
       {
@@ -2373,7 +2393,7 @@ namespace redis
     void recv_int_ok_reply_(int socket)
     {
       if (recv_int_reply_(socket) != 1)
-        throw protocol_error("expecting int reply of 1");
+        /*throw protocol_error("expecting int reply of 1")*/;
     }
     
     inline int get_socket(const string_type & key)
@@ -2924,7 +2944,7 @@ namespace redis
 
   private:
     distributed_base_int<INT_TYPE> shr_int_;
-    optional<INT_TYPE> cur_val_;
+    boost::optional<INT_TYPE> cur_val_;
   };
 
   typedef distributed_base_sequence<std::intmax_t> distributed_sequence;
