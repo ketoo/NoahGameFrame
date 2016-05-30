@@ -1660,13 +1660,13 @@ namespace redis
 
 	  if (withscores)
 	  {
-		  m << "WITHSCORES";
+		  m << std::string("WITHSCORES");
 	  }
         
       if(max_count != -1 || offset > 0)
       {
         std::cerr << "Adding limit: " << offset << " " << max_count << std::endl;
-        m << "LIMIT" << offset << max_count;
+        m << std::string("LIMIT") << offset << max_count;
       }
         
       send_(socket, m);
