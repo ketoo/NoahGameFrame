@@ -43,7 +43,7 @@ bool NFCMapModule::AfterInit()
 
 void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
 
 
 
@@ -52,32 +52,32 @@ void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const
 
 void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
 }
 
 void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
 }
 
 void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
 }
 
 void NFCMapModule::ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
 }
 
 void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapHunting);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapHunting);
 }
 
 void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
+	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 }
 
 std::string NFCMapModule::GetGridBaseKey(const std::string&strGridID)
@@ -105,12 +105,12 @@ bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGri
         int nRet = pNoSqlDriver->HGetAll(strKey, xValue);
         if(nRet > 0)
         {
-            xBaseInfo.set_id("");
-            xBaseInfo.set_owner();
-            xBaseInfo.set_level(1);
-            xBaseInfo.set_member_count(100);
-            xBaseInfo.set_resource(100);
-            xBaseInfo.set_icon("");
+            //xBaseInfo.set_id("");
+            //xBaseInfo.set_owner();
+            //xBaseInfo.set_level(1);
+            //xBaseInfo.set_member_count(100);
+            //xBaseInfo.set_resource(100);
+            //xBaseInfo.set_icon("");
 
             return true;
         }
@@ -189,12 +189,12 @@ bool NFCMapModule::SetGridBaseInfo(const std::string&strGridID, const NFMsg::Big
         std::vector<std::string> keys;
         std::vector<std::string> values;
 
-        xBaseInfo.set_id("");
-        xBaseInfo.set_owner();
-        xBaseInfo.set_level(1);
-        xBaseInfo.set_member_count(100);
-        xBaseInfo.set_resource(100);
-        xBaseInfo.set_icon("");
+        //xBaseInfo.set_id("");
+        //xBaseInfo.set_owner();
+        //xBaseInfo.set_level(1);
+        //xBaseInfo.set_member_count(100);
+        //xBaseInfo.set_resource(100);
+        //xBaseInfo.set_icon("");
 
         pNoSqlDriver->HMSet(strKey, keys, values);
 
