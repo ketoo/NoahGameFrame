@@ -27,8 +27,8 @@ bool NFCNoSqlModule::Init()
 
 bool NFCNoSqlModule::Shut()
 {
-    delete m_pRedisDriver;
-	m_pRedisDriver = NULL;
+    delete m_pNoSqlDriver;
+	m_pNoSqlDriver = NULL;
 
     return true;
 }
@@ -45,8 +45,16 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
 
 bool NFCNoSqlModule::ConnectSql(const std::string& strIP)
 {
-    m_pRedisDriver = new NFCNoSqlDriver();
-	m_pRedisDriver->Connect(strIP, 3306, "");
+    m_pNoSqlDriver = new NFCNoSqlDriver();
+	m_pNoSqlDriver->Connect(strIP, 3306, "");
 
     return true;
+}
+
+bool NFCNoSqlModule::ConnectSql(const std::string & strIP, const int nPort, const std::string & strPass)
+{
+	m_pNoSqlDriver = new NFCNoSqlDriver();
+	m_pNoSqlDriver->Connect(strIP, nPort, strPass);
+
+	return true;
 }
