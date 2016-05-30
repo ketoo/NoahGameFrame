@@ -96,7 +96,7 @@ protected:
 
 private:
 	bool mbEnable;
-    redis::client* m_pRedisClient;
+    redis::client* m_pNoSqlClient;
 };
 
 #endif

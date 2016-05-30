@@ -27,16 +27,17 @@ public:
     virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
-    virtual bool ConnectSql(const std::string& strIP);
+	virtual bool ConnectSql(const std::string& strIP);
+	virtual bool ConnectSql(const std::string& strIP, const int nPort, const std::string& strPass);
 
     virtual NFINoSqlDriver* GetDriver()
     {
-        return m_pRedisDriver;
+        return m_pNoSqlDriver;
     }
 
 protected:
 
-    NFINoSqlDriver* m_pRedisDriver;//player property
+    NFINoSqlDriver* m_pNoSqlDriver;//player property
 
 };
 
