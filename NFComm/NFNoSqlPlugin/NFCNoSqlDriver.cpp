@@ -569,7 +569,7 @@ const bool NFCNoSqlDriver::ZRangeByScore(const std::string & strKey, const int n
 
 	try
 	{
-		//m_pNoSqlClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
+		m_pNoSqlClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
