@@ -228,14 +228,20 @@ namespace redis
       append(datum);
       return *this;
     }
-    
+
+    makecmd & operator<<(const char* datum)
+    {
+        append(std::string(datum));
+        return *this;
+    }
+
     template <typename T>
     makecmd & operator<<(T const & datum)
     {
       append( lexical_cast<std::string>(datum) );
       return *this;
     }
-    
+
     makecmd & operator<<(const std::vector<std::string> & data)
     {
       lines_.insert( lines_.end(), data.begin(), data.end() );
@@ -1636,7 +1642,7 @@ namespace redis
     void zrevrange(const string_type & key, int_type start, int_type end, string_score_vector & out)
     {
       int socket = get_socket(key);
-      send_( socket, makecmd("ZREVRANGE") << key << start << end << std::string("WITHSCORES") );
+      send_( socket, makecmd("ZREVRANGE") << key << start << end << "WITHSCORES" );
       string_vector res;
       recv_multi_bulk_reply_(socket, res);
       convert(res, out);
@@ -1660,7 +1666,7 @@ namespace redis
 
 	  if (withscores)
 	  {
-		  m << std::string("WITHSCORES");
+		  m << "WITHSCORES";
 	  }
         
       if(max_count != -1 || offset > 0)
