@@ -16,10 +16,10 @@
 #endif
 
 //////////////////////////////////////////////////////////////////////////
-class NFDataNoSqlPlugin : public NFIPlugin
+class NFNoSqlPlugin : public NFIPlugin
 {
 public:
-    NFDataNoSqlPlugin(NFIPluginManager* p)
+    NFNoSqlPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

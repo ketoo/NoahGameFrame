@@ -14,22 +14,26 @@ NFCProperty::NFCProperty()
 	mbPublic = false;
 	mbPrivate = false;
 	mbSave = false;
+	mbCache = false;
+
 	mSelf = NFGUID();
 	eType = TDATA_UNKNOWN;
 
 	msPropertyName = "";
 }
 
-NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType, bool bPublic, bool bPrivate, bool bSave, const std::string& strRelationValue)
+NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType)
 {
+	mbPublic = false;
+	mbPrivate = false;
+	mbSave = false;
+	mbCache = false;
 
-	mbPublic = bPublic;
-	mbPrivate = bPrivate;
-	mbSave = bSave;
+	mstrRelationValue = "";
+
 	mSelf = self;
 
 	msPropertyName = strPropertyName;
-	mstrRelationValue = strRelationValue;
 	eType = varType;
 }
 
@@ -107,6 +111,11 @@ const bool NFCProperty::GetPrivate() const
 	return mbPrivate;
 }
 
+const bool NFCProperty::GetCache() const
+{
+	return mbCache;
+}
+
 const std::string& NFCProperty::GetRelationValue() const
 {
 	return mstrRelationValue;
@@ -125,6 +134,11 @@ void NFCProperty::SetPublic(bool bPublic)
 void NFCProperty::SetPrivate(bool bPrivate)
 {
 	mbPrivate = bPrivate;
+}
+
+void NFCProperty::SetCache(bool bCache)
+{
+    mbCache = bCache;
 }
 
 void NFCProperty::SetRelationValue(const std::string& strRelationValue)

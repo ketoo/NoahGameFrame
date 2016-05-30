@@ -26,14 +26,11 @@ public:
 
     virtual ~NFCRecordManager();
 
-    virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& keyList, const NFIDataList& descData, const NFIDataList& tagData, const NFIDataList& relateRecordData, const int nRows, bool bPublic,  bool bPrivate,  bool bSave, bool bView, int nIndex);
+    virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& TData, const NFIDataList& keyList, const NFIDataList& descData, const NFIDataList& tagData, const NFIDataList& relateRecordData, const int nRows);
 
     virtual const NFGUID& Self();
 
     virtual void GetRelationRows(const std::string& strScrRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList);
-
-    virtual const std::map<std::string, int>& GetRecordIndex();
-    virtual const int GetRecordIndex(const std::string& strRecordName);
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -59,7 +56,6 @@ public:
     //////////////////////////////////////////////////////////////////////////
 private:
     NFGUID mSelf;
-    std::map<std::string, int> mxRecordIndexMap;
 
 };
 

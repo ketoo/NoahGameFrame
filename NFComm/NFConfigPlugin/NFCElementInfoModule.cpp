@@ -154,7 +154,13 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         NF_SHARE_PTR<NFIRecord> pRecord = pClassRecordManager->First();
         while (pRecord.get())
         {
-            pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
+            NF_SHARE_PTR<NFIRecord> xRecord = pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows());
+
+            xRecord->SetPublic(pRecord->GetPublic());
+            xRecord->SetPrivate(pRecord->GetPrivate());
+            xRecord->SetSave(pRecord->GetSave());
+            xRecord->SetCache(pRecord->GetCache());
+
             pRecord = pClassRecordManager->Next();
         }
 
