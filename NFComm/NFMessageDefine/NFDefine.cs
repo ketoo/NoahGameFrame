@@ -673,11 +673,11 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_INFO", Value=901)]
       EGMI_ACK_MAP_GRID_INFO = 901,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_GRID", Value=902)]
-      EGMI_REQ_BIG_MAP_GRID = 902,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_INFO", Value=902)]
+      EGMI_REQ_BIG_MAP_INFO = 902,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_GRID", Value=903)]
-      EGMI_ACK_BIG_MAP_GRID = 903,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_INFO", Value=903)]
+      EGMI_ACK_BIG_MAP_INFO = 903,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_HOLD_MAP_GRID", Value=910)]
       EGMI_REQ_HOLD_MAP_GRID = 910,

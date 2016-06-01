@@ -604,7 +604,7 @@ message ReqInviteTeamMember
 //	EGMI_REQ_MAP_GRID_INFO
 message ReqBigMapGridInfo
 {	
-	required bytes						map_title_id = 1;
+	repeated bytes						map_title_id = 1;
 }
 
 message BigMapGridBaseInfo
@@ -615,7 +615,16 @@ message BigMapGridBaseInfo
 	required int32						member_count = 4;	//所属占领公会总人数
 	required int32						resource = 5;		//所属占领公会资源
 	required bytes						icon = 6;			//所属占领公会Icon
+	
 	//war state
+	
+	//kingwar
+	required int32						kingwar_time 	= 10;			//开始时间
+	required Ident						kingwarrer 		= 11;			//发动者
+	
+	//hurting
+	required int32						hurting_time 	= 20;			//狩猎开始时间
+	required Ident						hurter 			= 21;			//狩猎者
 }
 
 message BigMapLeaveMsg

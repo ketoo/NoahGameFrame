@@ -120,9 +120,6 @@
     <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFTimer.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -134,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="NFCEventManager.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFTimer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

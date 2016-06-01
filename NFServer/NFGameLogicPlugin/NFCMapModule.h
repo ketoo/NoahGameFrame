@@ -12,6 +12,10 @@
 #include "NFComm/NFPluginModule/NFIMapModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIGuildModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCMapModule
@@ -75,8 +79,12 @@ protected:
 
 
 private:
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFINoSqlModule* m_pNoSqlModule;
+	NFIKernelModule* m_pKernelModule;
+	NFILogicClassModule* m_pLogicClassModule;
+	NFIElementInfoModule* m_pElementInfoModule;
+	NFIGuildModule* m_pGuildModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 
 
 };

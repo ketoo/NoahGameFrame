@@ -135,7 +135,7 @@ const std::string& NFCPackModule::GetPackName( const PackTableType name )
 //         std::string strRndProperty;
 //         var << strRndProperty.c_str();
 // 
-//         var << NFTimeEx::GetNowTime();
+//         var << NFTime::GetNowTime();
 // 
 //         std::string strBaseProperty;
 //         var << strBaseProperty.c_str(); // ¹Ì¶¨
@@ -348,7 +348,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 	var << 0;
 	var << 0;
 	var << NULL_STR;
-	var << NFTimeEx::GetNowTime();
+	var << NFTime::GetNowTime();
 	var << 0;
 	var << NULL_STR;
 	var << NULL_STR;
@@ -428,13 +428,13 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 //         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ItemCount, nCount);
 //         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_Bound, 0);
 //         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ExpiredType, 0);
-//         varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTimeEx::GetNowTime()));
+//         varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTime::GetNowTime()));
 
         varRowData << strConfigName;
         varRowData << nCount;
         varRowData << 0;
         varRowData << 0;
-        varRowData << NFGUID(0, NFTimeEx::GetNowTime());
+        varRowData << NFGUID(0, NFTime::GetNowTime());
 
 		int nRow= pRecord->AddRow(-1, varRowData);
 		if (nRow >= 0)

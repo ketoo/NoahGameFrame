@@ -88,7 +88,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFGUID& self, const std::string& str
     xDataList << int(fY); // y
     xDataList << int(fZ); // z
 
-    xDataList << NFTimeEx::GetNowTime();
+    xDataList << NFTime::GetNowTime();
     xDataList << int(0);
 
     if (0 > pRecord->AddRow(-1, xDataList))
@@ -127,8 +127,8 @@ int NFCSLGBuildingModule::Upgrade(const NFGUID& self, const NFGUID& xBuilID)
 
     //修改建筑的状态
     pRecord->SetInt(nRow, "State", NFMsg::EBS_UPGRADE);
-    pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
-    pRecord->SetInt(nRow, "StateEndTime", NFTimeEx::GetNowTime() + nNeedTime);
+    pRecord->SetInt(nRow, "StateStartTime", NFTime::GetNowTime());
+    pRecord->SetInt(nRow, "StateEndTime", NFTime::GetNowTime() + nNeedTime);
 
     return 0;
 }
@@ -167,7 +167,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFGUID& self, const std::stri
 // 
 //     //修改建筑的状态
 //     pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
-//     pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
+//     pRecord->SetInt(nRow, "StateStartTime", NFTime::GetNowTime());
 //     pRecord->SetInt(nRow, "StateEndTime", 0);
 
     return 0;
@@ -202,7 +202,7 @@ int NFCSLGBuildingModule::OnBoostHeartBeat( const NFGUID& self, const std::strin
 // 
 //     //修改建筑的状态
 //     pRecord->SetInt(nRow, "State", NFMsg::EBS_IDLE);
-//     pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
+//     pRecord->SetInt(nRow, "StateStartTime", NFTime::GetNowTime());
 //     pRecord->SetInt(nRow, "StateEndTime", 0);
 
     return 0;
@@ -270,8 +270,8 @@ int NFCSLGBuildingModule::Boost(const NFGUID& self, const NFGUID& xBuilID)
 
     //修改建筑的状态
     pRecord->SetInt(nRow, "State", NFMsg::EBS_BOOST);
-    pRecord->SetInt(nRow, "StateStartTime", NFTimeEx::GetNowTime());
-    pRecord->SetInt(nRow, "StateEndTime", NFTimeEx::GetNowTime() + nBoostTime);
+    pRecord->SetInt(nRow, "StateStartTime", NFTime::GetNowTime());
+    pRecord->SetInt(nRow, "StateEndTime", NFTime::GetNowTime() + nBoostTime);
 
     return 0;
 }
@@ -344,7 +344,7 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFGUID& self )
         return 1;
     }
 
-    const NFINT64 nNowTime = NFTimeEx::GetNowTime();
+    const NFINT64 nNowTime = NFTime::GetNowTime();
     for (int i= 0; i < pRecord->GetRows(); i++)
     {
         if (!pRecord->IsUsed(i))
@@ -435,7 +435,7 @@ int NFCSLGBuildingModule::AddProduceData(const NFGUID& self, const NFGUID& xBuil
         varItem << strItemID;
         varItem << nCount;
         varItem << nTime;
-        varItem << NFTimeEx::GetNowTime();
+        varItem << NFTime::GetNowTime();
 
         pProduce->AddRow(-1, varItem);
     }
@@ -517,7 +517,7 @@ int NFCSLGBuildingModule::CheckProduceData( const NFGUID& self )
             continue;
         }
 
-        const int nNowTime = NFTimeEx::GetNowTime();
+        const int nNowTime = NFTime::GetNowTime();
         const NFGUID xBuildID = pProduce->GetObject(i, "BuildingGUID");
         const std::string strItemID = pProduce->GetString(i, "ItemID");
         const int nLeftCount = pProduce->GetInt(i, "LeftCount");

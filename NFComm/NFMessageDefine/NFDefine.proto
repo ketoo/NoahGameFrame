@@ -276,8 +276,8 @@ enum EGameMsgID
 	/////////////////////MapModule/////////////////////////////////////
 	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
 	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	
-	EGMI_REQ_BIG_MAP_GRID							= 902; 	// 申请大地图信息
-	EGMI_ACK_BIG_MAP_GRID							= 903; 	// 返回大地图
+	EGMI_REQ_BIG_MAP_INFO							= 902; 	// 申请大地图信息
+	EGMI_ACK_BIG_MAP_INFO							= 903; 	// 返回大地图
 	
 	EGMI_REQ_HOLD_MAP_GRID						= 910; 	// 申请入驻
 	EGMI_ACK_HOLD_MAP_GRID						= 911; 	// 返回入驻结果

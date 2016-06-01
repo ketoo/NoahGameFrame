@@ -2156,13 +2156,13 @@ namespace NFMsg
   {
     public ReqBigMapGridInfo() {}
     
-    private byte[] _map_title_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] map_title_id
+    private readonly global::System.Collections.Generic.List<byte[]> _map_title_id = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> map_title_id
     {
       get { return _map_title_id; }
-      set { _map_title_id = value; }
     }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2173,9 +2173,9 @@ namespace NFMsg
   {
     public BigMapGridBaseInfo() {}
     
-    private NFMsg.Ident _id;
+    private byte[] _id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Ident id
+    public byte[] id
     {
       get { return _id; }
       set { _id = value; }
@@ -2214,6 +2214,34 @@ namespace NFMsg
     {
       get { return _icon; }
       set { _icon = value; }
+    }
+    private int _kingwar_time;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"kingwar_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int kingwar_time
+    {
+      get { return _kingwar_time; }
+      set { _kingwar_time = value; }
+    }
+    private NFMsg.Ident _kingwarrer;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"kingwarrer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident kingwarrer
+    {
+      get { return _kingwarrer; }
+      set { _kingwarrer = value; }
+    }
+    private int _hurting_time;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = true, Name=@"hurting_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hurting_time
+    {
+      get { return _hurting_time; }
+      set { _hurting_time = value; }
+    }
+    private NFMsg.Ident _hurter;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = true, Name=@"hurter", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident hurter
+    {
+      get { return _hurter; }
+      set { _hurter = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

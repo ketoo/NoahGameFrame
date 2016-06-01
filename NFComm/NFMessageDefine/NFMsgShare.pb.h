@@ -7431,26 +7431,28 @@ class LIBPROTOC_EXPORT ReqBigMapGridInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes map_title_id = 1;
-  inline bool has_map_title_id() const;
+  // repeated bytes map_title_id = 1;
+  inline int map_title_id_size() const;
   inline void clear_map_title_id();
   static const int kMapTitleIdFieldNumber = 1;
-  inline const ::std::string& map_title_id() const;
-  inline void set_map_title_id(const ::std::string& value);
-  inline void set_map_title_id(const char* value);
-  inline void set_map_title_id(const void* value, size_t size);
-  inline ::std::string* mutable_map_title_id();
-  inline ::std::string* release_map_title_id();
-  inline void set_allocated_map_title_id(::std::string* map_title_id);
+  inline const ::std::string& map_title_id(int index) const;
+  inline ::std::string* mutable_map_title_id(int index);
+  inline void set_map_title_id(int index, const ::std::string& value);
+  inline void set_map_title_id(int index, const char* value);
+  inline void set_map_title_id(int index, const void* value, size_t size);
+  inline ::std::string* add_map_title_id();
+  inline void add_map_title_id(const ::std::string& value);
+  inline void add_map_title_id(const char* value);
+  inline void add_map_title_id(const void* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& map_title_id() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_map_title_id();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqBigMapGridInfo)
  private:
-  inline void set_has_map_title_id();
-  inline void clear_has_map_title_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* map_title_id_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> map_title_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -7518,14 +7520,17 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .NFMsg.Ident id = 1;
+  // required bytes id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::NFMsg::Ident& id() const;
-  inline ::NFMsg::Ident* mutable_id();
-  inline ::NFMsg::Ident* release_id();
-  inline void set_allocated_id(::NFMsg::Ident* id);
+  inline const ::std::string& id() const;
+  inline void set_id(const ::std::string& value);
+  inline void set_id(const char* value);
+  inline void set_id(const void* value, size_t size);
+  inline ::std::string* mutable_id();
+  inline ::std::string* release_id();
+  inline void set_allocated_id(::std::string* id);
 
   // required .NFMsg.Ident owner = 2;
   inline bool has_owner() const;
@@ -7569,6 +7574,38 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
   inline ::std::string* release_icon();
   inline void set_allocated_icon(::std::string* icon);
 
+  // required int32 kingwar_time = 10;
+  inline bool has_kingwar_time() const;
+  inline void clear_kingwar_time();
+  static const int kKingwarTimeFieldNumber = 10;
+  inline ::google::protobuf::int32 kingwar_time() const;
+  inline void set_kingwar_time(::google::protobuf::int32 value);
+
+  // required .NFMsg.Ident kingwarrer = 11;
+  inline bool has_kingwarrer() const;
+  inline void clear_kingwarrer();
+  static const int kKingwarrerFieldNumber = 11;
+  inline const ::NFMsg::Ident& kingwarrer() const;
+  inline ::NFMsg::Ident* mutable_kingwarrer();
+  inline ::NFMsg::Ident* release_kingwarrer();
+  inline void set_allocated_kingwarrer(::NFMsg::Ident* kingwarrer);
+
+  // required int32 hurting_time = 20;
+  inline bool has_hurting_time() const;
+  inline void clear_hurting_time();
+  static const int kHurtingTimeFieldNumber = 20;
+  inline ::google::protobuf::int32 hurting_time() const;
+  inline void set_hurting_time(::google::protobuf::int32 value);
+
+  // required .NFMsg.Ident hurter = 21;
+  inline bool has_hurter() const;
+  inline void clear_hurter();
+  static const int kHurterFieldNumber = 21;
+  inline const ::NFMsg::Ident& hurter() const;
+  inline ::NFMsg::Ident* mutable_hurter();
+  inline ::NFMsg::Ident* release_hurter();
+  inline void set_allocated_hurter(::NFMsg::Ident* hurter);
+
   // @@protoc_insertion_point(class_scope:NFMsg.BigMapGridBaseInfo)
  private:
   inline void set_has_id();
@@ -7583,18 +7620,30 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
   inline void clear_has_resource();
   inline void set_has_icon();
   inline void clear_has_icon();
+  inline void set_has_kingwar_time();
+  inline void clear_has_kingwar_time();
+  inline void set_has_kingwarrer();
+  inline void clear_has_kingwarrer();
+  inline void set_has_hurting_time();
+  inline void clear_has_hurting_time();
+  inline void set_has_hurter();
+  inline void clear_has_hurter();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::NFMsg::Ident* id_;
+  ::std::string* id_;
   ::NFMsg::Ident* owner_;
   ::google::protobuf::int32 level_;
   ::google::protobuf::int32 member_count_;
   ::std::string* icon_;
   ::google::protobuf::int32 resource_;
+  ::google::protobuf::int32 kingwar_time_;
+  ::NFMsg::Ident* kingwarrer_;
+  ::NFMsg::Ident* hurter_;
+  ::google::protobuf::int32 hurting_time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -16045,81 +16094,55 @@ inline void ReqInviteTeamMember::set_allocated_invite_target_id(::NFMsg::Ident* 
 
 // ReqBigMapGridInfo
 
-// required bytes map_title_id = 1;
-inline bool ReqBigMapGridInfo::has_map_title_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqBigMapGridInfo::set_has_map_title_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqBigMapGridInfo::clear_has_map_title_id() {
-  _has_bits_[0] &= ~0x00000001u;
+// repeated bytes map_title_id = 1;
+inline int ReqBigMapGridInfo::map_title_id_size() const {
+  return map_title_id_.size();
 }
 inline void ReqBigMapGridInfo::clear_map_title_id() {
-  if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-    map_title_id_->clear();
-  }
-  clear_has_map_title_id();
+  map_title_id_.Clear();
 }
-inline const ::std::string& ReqBigMapGridInfo::map_title_id() const {
-  return *map_title_id_;
+inline const ::std::string& ReqBigMapGridInfo::map_title_id(int index) const {
+  return map_title_id_.Get(index);
 }
-inline void ReqBigMapGridInfo::set_map_title_id(const ::std::string& value) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
-  }
-  map_title_id_->assign(value);
+inline ::std::string* ReqBigMapGridInfo::mutable_map_title_id(int index) {
+  return map_title_id_.Mutable(index);
 }
-inline void ReqBigMapGridInfo::set_map_title_id(const char* value) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
-  }
-  map_title_id_->assign(value);
+inline void ReqBigMapGridInfo::set_map_title_id(int index, const ::std::string& value) {
+  map_title_id_.Mutable(index)->assign(value);
 }
-inline void ReqBigMapGridInfo::set_map_title_id(const void* value, size_t size) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
-  }
-  map_title_id_->assign(reinterpret_cast<const char*>(value), size);
+inline void ReqBigMapGridInfo::set_map_title_id(int index, const char* value) {
+  map_title_id_.Mutable(index)->assign(value);
 }
-inline ::std::string* ReqBigMapGridInfo::mutable_map_title_id() {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
-  }
+inline void ReqBigMapGridInfo::set_map_title_id(int index, const void* value, size_t size) {
+  map_title_id_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqBigMapGridInfo::add_map_title_id() {
+  return map_title_id_.Add();
+}
+inline void ReqBigMapGridInfo::add_map_title_id(const ::std::string& value) {
+  map_title_id_.Add()->assign(value);
+}
+inline void ReqBigMapGridInfo::add_map_title_id(const char* value) {
+  map_title_id_.Add()->assign(value);
+}
+inline void ReqBigMapGridInfo::add_map_title_id(const void* value, size_t size) {
+  map_title_id_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ReqBigMapGridInfo::map_title_id() const {
   return map_title_id_;
 }
-inline ::std::string* ReqBigMapGridInfo::release_map_title_id() {
-  clear_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = map_title_id_;
-    map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ReqBigMapGridInfo::set_allocated_map_title_id(::std::string* map_title_id) {
-  if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete map_title_id_;
-  }
-  if (map_title_id) {
-    set_has_map_title_id();
-    map_title_id_ = map_title_id;
-  } else {
-    clear_has_map_title_id();
-    map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+ReqBigMapGridInfo::mutable_map_title_id() {
+  return &map_title_id_;
 }
 
 // -------------------------------------------------------------------
 
 // BigMapGridBaseInfo
 
-// required .NFMsg.Ident id = 1;
+// required bytes id = 1;
 inline bool BigMapGridBaseInfo::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -16130,30 +16153,62 @@ inline void BigMapGridBaseInfo::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void BigMapGridBaseInfo::clear_id() {
-  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  if (id_ != &::google::protobuf::internal::kEmptyString) {
+    id_->clear();
+  }
   clear_has_id();
 }
-inline const ::NFMsg::Ident& BigMapGridBaseInfo::id() const {
-  return id_ != NULL ? *id_ : *default_instance_->id_;
+inline const ::std::string& BigMapGridBaseInfo::id() const {
+  return *id_;
 }
-inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_id() {
+inline void BigMapGridBaseInfo::set_id(const ::std::string& value) {
   set_has_id();
-  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  if (id_ == &::google::protobuf::internal::kEmptyString) {
+    id_ = new ::std::string;
+  }
+  id_->assign(value);
+}
+inline void BigMapGridBaseInfo::set_id(const char* value) {
+  set_has_id();
+  if (id_ == &::google::protobuf::internal::kEmptyString) {
+    id_ = new ::std::string;
+  }
+  id_->assign(value);
+}
+inline void BigMapGridBaseInfo::set_id(const void* value, size_t size) {
+  set_has_id();
+  if (id_ == &::google::protobuf::internal::kEmptyString) {
+    id_ = new ::std::string;
+  }
+  id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* BigMapGridBaseInfo::mutable_id() {
+  set_has_id();
+  if (id_ == &::google::protobuf::internal::kEmptyString) {
+    id_ = new ::std::string;
+  }
   return id_;
 }
-inline ::NFMsg::Ident* BigMapGridBaseInfo::release_id() {
+inline ::std::string* BigMapGridBaseInfo::release_id() {
   clear_has_id();
-  ::NFMsg::Ident* temp = id_;
-  id_ = NULL;
-  return temp;
+  if (id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = id_;
+    id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
-inline void BigMapGridBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
-  delete id_;
-  id_ = id;
+inline void BigMapGridBaseInfo::set_allocated_id(::std::string* id) {
+  if (id_ != &::google::protobuf::internal::kEmptyString) {
+    delete id_;
+  }
   if (id) {
     set_has_id();
+    id_ = id;
   } else {
     clear_has_id();
+    id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -16328,6 +16383,126 @@ inline void BigMapGridBaseInfo::set_allocated_icon(::std::string* icon) {
   } else {
     clear_has_icon();
     icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 kingwar_time = 10;
+inline bool BigMapGridBaseInfo::has_kingwar_time() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_kingwar_time() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void BigMapGridBaseInfo::clear_has_kingwar_time() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void BigMapGridBaseInfo::clear_kingwar_time() {
+  kingwar_time_ = 0;
+  clear_has_kingwar_time();
+}
+inline ::google::protobuf::int32 BigMapGridBaseInfo::kingwar_time() const {
+  return kingwar_time_;
+}
+inline void BigMapGridBaseInfo::set_kingwar_time(::google::protobuf::int32 value) {
+  set_has_kingwar_time();
+  kingwar_time_ = value;
+}
+
+// required .NFMsg.Ident kingwarrer = 11;
+inline bool BigMapGridBaseInfo::has_kingwarrer() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_kingwarrer() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void BigMapGridBaseInfo::clear_has_kingwarrer() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void BigMapGridBaseInfo::clear_kingwarrer() {
+  if (kingwarrer_ != NULL) kingwarrer_->::NFMsg::Ident::Clear();
+  clear_has_kingwarrer();
+}
+inline const ::NFMsg::Ident& BigMapGridBaseInfo::kingwarrer() const {
+  return kingwarrer_ != NULL ? *kingwarrer_ : *default_instance_->kingwarrer_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_kingwarrer() {
+  set_has_kingwarrer();
+  if (kingwarrer_ == NULL) kingwarrer_ = new ::NFMsg::Ident;
+  return kingwarrer_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::release_kingwarrer() {
+  clear_has_kingwarrer();
+  ::NFMsg::Ident* temp = kingwarrer_;
+  kingwarrer_ = NULL;
+  return temp;
+}
+inline void BigMapGridBaseInfo::set_allocated_kingwarrer(::NFMsg::Ident* kingwarrer) {
+  delete kingwarrer_;
+  kingwarrer_ = kingwarrer;
+  if (kingwarrer) {
+    set_has_kingwarrer();
+  } else {
+    clear_has_kingwarrer();
+  }
+}
+
+// required int32 hurting_time = 20;
+inline bool BigMapGridBaseInfo::has_hurting_time() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_hurting_time() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void BigMapGridBaseInfo::clear_has_hurting_time() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void BigMapGridBaseInfo::clear_hurting_time() {
+  hurting_time_ = 0;
+  clear_has_hurting_time();
+}
+inline ::google::protobuf::int32 BigMapGridBaseInfo::hurting_time() const {
+  return hurting_time_;
+}
+inline void BigMapGridBaseInfo::set_hurting_time(::google::protobuf::int32 value) {
+  set_has_hurting_time();
+  hurting_time_ = value;
+}
+
+// required .NFMsg.Ident hurter = 21;
+inline bool BigMapGridBaseInfo::has_hurter() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void BigMapGridBaseInfo::set_has_hurter() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void BigMapGridBaseInfo::clear_has_hurter() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void BigMapGridBaseInfo::clear_hurter() {
+  if (hurter_ != NULL) hurter_->::NFMsg::Ident::Clear();
+  clear_has_hurter();
+}
+inline const ::NFMsg::Ident& BigMapGridBaseInfo::hurter() const {
+  return hurter_ != NULL ? *hurter_ : *default_instance_->hurter_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_hurter() {
+  set_has_hurter();
+  if (hurter_ == NULL) hurter_ = new ::NFMsg::Ident;
+  return hurter_;
+}
+inline ::NFMsg::Ident* BigMapGridBaseInfo::release_hurter() {
+  clear_has_hurter();
+  ::NFMsg::Ident* temp = hurter_;
+  hurter_ = NULL;
+  return temp;
+}
+inline void BigMapGridBaseInfo::set_allocated_hurter(::NFMsg::Ident* hurter) {
+  delete hurter_;
+  hurter_ = hurter;
+  if (hurter) {
+    set_has_hurter();
+  } else {
+    clear_has_hurter();
   }
 }
 
