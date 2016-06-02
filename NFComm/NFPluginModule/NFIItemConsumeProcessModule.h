@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ITEMCONSUME_PROCESS_MODULE_H
-#define _NFI_ITEMCONSUME_PROCESS_MODULE_H
+#ifndef NFI_ITEMCONSUME_PROCESS_MODULE_H
+#define NFI_ITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

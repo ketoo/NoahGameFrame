@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_GAMESERVERNET_SERVERMODULE_H
-#define _NFI_GAMESERVERNET_SERVERMODULE_H
+#ifndef NFI_GAMESERVERNET_SERVERMODULE_H
+#define NFI_GAMESERVERNET_SERVERMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
