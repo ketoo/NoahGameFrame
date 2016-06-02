@@ -1,35 +1,35 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCDataProcessModule.cpp
+//    @FileName			:    NFCPlayerMysqlModule.cpp
 //    @Author           :    LvSheng.Huang
-//    @Date             £º    2013-10-03
-//    @Module           :    NFCDataProcessModule
+//    @Date             :    2013-10-03
+//    @Module           :    NFCPlayerMysqlModule
 //
 // -------------------------------------------------------------------------
 
 
-#include "NFCDataProcessModule.h"
+#include "NFCPlayerMysqlModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-bool NFCDataProcessModule::Init()
+bool NFCPlayerMysqlModule::Init()
 {
 	return true;
 }
 
 
-bool NFCDataProcessModule::Shut()
+bool NFCPlayerMysqlModule::Shut()
 {
 	return true;
 }
 
-bool NFCDataProcessModule::Execute()
+bool NFCPlayerMysqlModule::Execute()
 {
 
 	return true;
 }
 
-bool NFCDataProcessModule::AfterInit()
+bool NFCPlayerMysqlModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>( "NFCMysqlClusterModule" );
@@ -81,7 +81,7 @@ bool NFCDataProcessModule::AfterInit()
 	return true;
 }
 
-int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCPlayerMysqlModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
 	if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
 	{
@@ -99,7 +99,7 @@ int NFCDataProcessModule::OnObjectClassEvent( const NFGUID& self, const std::str
 	return 0;
 }
 
-const NFGUID NFCDataProcessModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
+const NFGUID NFCPlayerMysqlModule::CreateRole( const std::string& strAccount, const std::string& strName, const int nRace, const int nJob, const int nSex )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -162,7 +162,7 @@ const NFGUID NFCDataProcessModule::CreateRole( const std::string& strAccount, co
 	return xID;
 }
 
-const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, const NFGUID xID )
+const bool NFCPlayerMysqlModule::DeleteRole( const std::string& strAccount, const NFGUID xID )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -186,7 +186,7 @@ const bool NFCDataProcessModule::DeleteRole( const std::string& strAccount, cons
 	return true;
 }
 
-const NFGUID NFCDataProcessModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
+const NFGUID NFCPlayerMysqlModule::GetChar( const std::string& strAccount, const std::vector<std::string>& xFieldVec, std::vector<std::string>& xValueVec )
 {
 	bool bExit = false;
 	if (!m_pClusterSQLModule->Exists(mstrAccountTable, strAccount, bExit)
@@ -223,7 +223,7 @@ const NFGUID NFCDataProcessModule::GetChar( const std::string& strAccount, const
 	return ident;
 }
 
-void NFCDataProcessModule::OnOnline( const NFGUID& self )
+void NFCPlayerMysqlModule::OnOnline( const NFGUID& self )
 {
     const int nGateID = m_pKernelModule->GetPropertyInt(self, "GateID");
     const int nGameID = m_pKernelModule->GetPropertyInt(self, "GameID");
@@ -240,7 +240,7 @@ void NFCDataProcessModule::OnOnline( const NFGUID& self )
     m_pClusterSQLModule->Updata(mstrRoleTable, self.ToString(), xFieldVec, vValueVec);
 }
 
-void NFCDataProcessModule::OnOffline( const NFGUID& self )
+void NFCPlayerMysqlModule::OnOffline( const NFGUID& self )
 {
     const int nGateID = 0;
     const int nGameID = 0;
@@ -258,7 +258,7 @@ void NFCDataProcessModule::OnOffline( const NFGUID& self )
 }
 
 
-const bool NFCDataProcessModule::LoadDataFormSql( const NFGUID& self , const std::string& strClassName)
+const bool NFCPlayerMysqlModule::LoadDataFormSql( const NFGUID& self , const std::string& strClassName)
 {
 	NF_SHARE_PTR<NFIPropertyManager> pProManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
@@ -337,7 +337,7 @@ const bool NFCDataProcessModule::LoadDataFormSql( const NFGUID& self , const std
 	return true;
 }
 
-const bool NFCDataProcessModule::SaveDataToSql( const NFGUID& self )
+const bool NFCPlayerMysqlModule::SaveDataToSql( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( pObject.get() )
@@ -443,7 +443,7 @@ const bool NFCDataProcessModule::SaveDataToSql( const NFGUID& self )
 	return false;
 }
 
-const bool NFCDataProcessModule::AttachData( const NFGUID& self )
+const bool NFCPlayerMysqlModule::AttachData( const NFGUID& self )
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (!pObject)
@@ -511,12 +511,12 @@ const bool NFCDataProcessModule::AttachData( const NFGUID& self )
 	return true;
 }
 
-bool NFCDataProcessModule::RegisterAutoSave( const std::string& strClassName )
+bool NFCPlayerMysqlModule::RegisterAutoSave( const std::string& strClassName )
 {
-	return m_pKernelModule->AddClassCallBack( strClassName, this, &NFCDataProcessModule::OnObjectClassEvent );
+	return m_pKernelModule->AddClassCallBack( strClassName, this, &NFCPlayerMysqlModule::OnObjectClassEvent );
 }
 
-const bool NFCDataProcessModule::ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord)
+const bool NFCPlayerMysqlModule::ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord)
 {
 	const std::string& strRecordName = xRecordData.record_name();
 	for (int j = 0; j < xRecordData.record_int_list_size(); j++)
@@ -566,7 +566,7 @@ const bool NFCDataProcessModule::ConvertPBToRecord(const NFMsg::PlayerRecordBase
 	return true;
 }
 
-const bool NFCDataProcessModule::LoadDataFormSqlAsy( const NFGUID& self , const std::string& strClassName, const LOADDATA_RETURN_FUNCTOR& xFun, const std::string& strUseData)
+const bool NFCPlayerMysqlModule::LoadDataFormSqlAsy( const NFGUID& self , const std::string& strClassName, const LOADDATA_RETURN_FUNCTOR& xFun, const std::string& strUseData)
 {
     NF_SHARE_PTR<NFIPropertyManager> pProManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
     NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
@@ -623,12 +623,12 @@ const bool NFCDataProcessModule::LoadDataFormSqlAsy( const NFGUID& self , const 
 
     if (mmLoadlisReq.AddElement(mnLoadCount, pData))
     {
-        m_pAsyClusterSQLModule->Query(self, strClassName, self.ToString(), vFieldVec, this, &NFCDataProcessModule::LoadDataFormSqlAsySucess, strData);
+        m_pAsyClusterSQLModule->Query(self, strClassName, self.ToString(), vFieldVec, this, &NFCPlayerMysqlModule::LoadDataFormSqlAsySucess, strData);
     }
    
     return true;
 }
-void NFCDataProcessModule::LoadDataFormSqlAsySucess( const NFGUID& self, const int nResult, const std::vector<std::string>& vFieldVec, const std::vector<std::string>& vValueVec, const std::string& strUserData)
+void NFCPlayerMysqlModule::LoadDataFormSqlAsySucess( const NFGUID& self, const int nResult, const std::vector<std::string>& vFieldVec, const std::vector<std::string>& vValueVec, const std::string& strUserData)
 {
     NFINT64 nID = 0;
     if (!NF_StrTo(strUserData, nID))
@@ -677,7 +677,7 @@ void NFCDataProcessModule::LoadDataFormSqlAsySucess( const NFGUID& self, const i
 
 }
 
-const bool NFCDataProcessModule::SaveDataToSqlAsy( const NFGUID& self )
+const bool NFCPlayerMysqlModule::SaveDataToSqlAsy( const NFGUID& self )
 {
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
     if ( pObject.get() )
@@ -772,13 +772,13 @@ const bool NFCDataProcessModule::SaveDataToSqlAsy( const NFGUID& self )
         }
 
         const std::string& strClass = m_pKernelModule->GetPropertyString(self, "ClassName");
-        m_pAsyClusterSQLModule->Updata(self, strClass, self.ToString(), vFieldVec, vValueVec, this, &NFCDataProcessModule::SaveDataToSqlAsySucess, "");
+        m_pAsyClusterSQLModule->Updata(self, strClass, self.ToString(), vFieldVec, vValueVec, this, &NFCPlayerMysqlModule::SaveDataToSqlAsySucess, "");
     }
 
     return false;
 }
 
-void NFCDataProcessModule::SaveDataToSqlAsySucess( const NFGUID& self, const int nRet, const std::string&strUseData )
+void NFCPlayerMysqlModule::SaveDataToSqlAsySucess( const NFGUID& self, const int nRet, const std::string&strUseData )
 {
    //
 }
