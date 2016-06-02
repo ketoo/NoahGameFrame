@@ -284,12 +284,12 @@ public:
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const int nCol, const double value);
-    virtual bool SetString(const int nRow, const int nCol, const char* value);
+    virtual bool SetString(const int nRow, const int nCol, const std::string& value);
     virtual bool SetObject(const int nRow, const int nCol, const NFGUID& value);
 
     virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value);
-    virtual bool SetString(const int nRow, const std::string& strColTag, const char* value);
+    virtual bool SetString(const int nRow, const std::string& strColTag, const ::string& value);
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFGUID& value);
 
     virtual bool QueryRow(const int nRow, NFIDataList& varList);
