@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ACTOR_DATA_MODULE_H
-#define _NFI_ACTOR_DATA_MODULE_H
+#ifndef NFI_ACTOR_DATA_MODULE_H
+#define NFI_ACTOR_DATA_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
