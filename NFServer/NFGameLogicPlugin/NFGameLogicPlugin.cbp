@@ -117,7 +117,6 @@
 		    <Unit filename="NFCSkillModule.h" />
 		    <Unit filename="NFCSLGBuildingModule.h" />
 		    <Unit filename="NFCSLGShopModule.h" />
-		    <Unit filename="NFCTileModule.h" />
 		    <Unit filename="NFGameLogicPlugin.h" />	
 			<Unit filename="NFCBuffModule.cpp" />
 		    <Unit filename="NFCBulletSkillConsumeProcessModule.cpp" />
@@ -149,7 +148,6 @@
 		    <Unit filename="NFCSkillModule.cpp" />
 		    <Unit filename="NFCSLGBuildingModule.cpp" />
 		    <Unit filename="NFCSLGShopModule.cpp" />
-		    <Unit filename="NFCTileModule.cpp" />
 		    <Unit filename="NFGameLogicPlugin.cpp" />
 		<Extensions>
 			<code_completion />
