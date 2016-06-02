@@ -20,7 +20,8 @@ public:
     {
         ECONSTDEFINE_HERO_MAXLEVEL = 100,
         ECONSTDEFINE_HERO_MAXSTAR = 100,
-        ECONSTDEFINE_HERO_ONCELEVEEXP   = 100,
+		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
+		ECONSTDEFINE_HERO_MAX_FIGHT_COUNT = 5,
 
     };
     virtual bool AddHero(const NFGUID& self, const std::string& strID) = 0;

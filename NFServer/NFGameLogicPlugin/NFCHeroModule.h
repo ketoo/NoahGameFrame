@@ -20,7 +20,6 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
 
 class NFCHeroModule
@@ -64,7 +63,6 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFICommonConfigModule* m_pCommonConfigModule;
     NFIGuildEctypeModule* m_pGuildEctypeModule;
 private:
 };

@@ -35,21 +35,15 @@ bool NFCHeroModule::AfterInit()
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
     
     assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogicClassModule );
     assert( NULL != m_pGameServerNet_ServerModule);
     assert( NULL != m_pUUIDModule);
     assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pCommonConfigModule);
 
 	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)){ return false;}
 
-    std::string strEquipPath = pPluginManager->GetConfigPath();
-
-    strEquipPath += "NFDataCfg/Ini/Common/FightHeroPos.xml";
-    m_pCommonConfigModule->LoadConfig(strEquipPath);
     return true;
 }
 
@@ -247,11 +241,37 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 
 bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex)
 {
+
     return true;
 }
 
 bool NFCHeroModule::SetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID)
 {
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord.get())
+	{
+		return false;
+	}
+
+	if (xHeroID.IsNull())
+	{
+		return false;
+	}
+
+	const NFGUID& xGUID = pHeroRecord->GetObject(nIndex, NFrame::Player::PlayerHero_GUID);
+	if (xGUID != xHeroID)
+	{
+		return false;
+	}
+
+	int nCount = pHeroRecord->FindInt(NFrame::Player::PlayerHero_FightState, 1, NFCDataList());
+	if (nCount >= ECONSTDEFINE_HERO_MAX_FIGHT_COUNT)
+	{
+		return false;
+	}
+
+	pHeroRecord->SetInt(nIndex, NFrame::Player::PlayerHero_FightState, 1);
+
 	return false;
 }
 
@@ -265,8 +285,29 @@ bool NFCHeroModule::HeroUnDress(const NFGUID & self, const NFGUID & xHeroID, con
 	return false;
 }
 
-bool NFCHeroModule::HeroWearSkill(const NFGUID & self, const NFGUID & xHeroID, const std::string & xEquipID)
+bool NFCHeroModule::HeroWearSkill(const NFGUID & self, const NFGUID & xHeroID, const std::string & strSkillID)
 {
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord.get())
+	{
+		return false;
+	}
+
+	if (xHeroID.IsNull())
+	{
+		return false;
+	}
+
+	NFCDataList xDataList;
+	int nCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_FightState, xHeroID, xDataList);
+	if (nCount <= 0)
+	{
+		return false;
+	}
+
+	const int nRow = xDataList.Int(0);
+	pHeroRecord->SetString(nRow, NFrame::Player::PlayerHero_FightSkill, strSkillID.c_str());
+
 	return false;
 }
 
