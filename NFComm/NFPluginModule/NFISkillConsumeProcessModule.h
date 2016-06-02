@@ -6,8 +6,8 @@
 //    @Desc             :   技能消费机制类
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_SKILLCONSUME_PROCESS_MODULE_H
-#define _NFI_SKILLCONSUME_PROCESS_MODULE_H
+#ifndef NFI_SKILLCONSUME_PROCESS_MODULE_H
+#define NFI_SKILLCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

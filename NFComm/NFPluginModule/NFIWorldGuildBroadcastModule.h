@@ -1,23 +1,21 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIWorldChatModule.h
+//    @FileName      :    NFIWorldGuildBroadcastModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2015-05-24 08:51
-//    @Module           :   NFIWorldChatModule
+//    @Module           :   NFIWorldGuildModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_WORLD_CHAT_MODULE_H
-#define NFI_WORLD_CHAT_MODULE_H
+#ifndef NFI_WORLD_GUILD_BROADCAST_MODULE_H
+#define NFI_WORLD_GUILD_BROADCAST_MODULE_H
 
 #include "NFILogicModule.h"
 
-class NFIWorldChatModule
+class NFIWorldGuildBroadcastModule
     : public NFILogicModule
 {
 public:
 
-
-protected:
 private:
 };
 

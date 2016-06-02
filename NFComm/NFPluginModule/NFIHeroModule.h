@@ -7,6 +7,7 @@
 #ifndef NFI_HERO_MODULE_H
 #define NFI_HERO_MODULE_H
 
+
 #include <iostream>
 #include "NFILogicModule.h"
 #include "NFINetModule.h"
@@ -31,4 +32,4 @@ public:
 
 };
 
-#endif // !NFI_HERO_MODULE_H
+#endif
