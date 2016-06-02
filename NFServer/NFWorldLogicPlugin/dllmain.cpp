@@ -11,6 +11,7 @@
 #pragma comment( lib, "NFNet_d.a" )
 #pragma comment( lib, "NFCore_d.a" )
 #pragma comment( lib, "NFMessageDefine_d.a" )
+#pragma comment( lib, "libprotobuf_d.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 
@@ -21,11 +22,13 @@
 #pragma comment( lib, "NFNet.lib" )
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "NFMessageDefine.lib" )
+#pragma comment( lib, "libprotobuf.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 //#pragma comment( lib, "RakNet_LibStatic_Release_x64.a" )
 #pragma comment( lib, "NFNet.a" )
 #pragma comment( lib, "NFCore.a" )
 #pragma comment( lib, "NFMessageDefine.a" )
+#pragma comment( lib, "libprotobuf.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #endif
 

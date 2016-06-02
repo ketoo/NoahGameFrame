@@ -64,11 +64,12 @@ protected:
 
 protected:
 
-    std::string GetGridBaseKey(const std::string&strGridID);
+    std::string GetGridBaseKey();
     std::string GetGridLeaveMsgKey(const std::string&strGridID);
     std::string GetGridWarHistoryKey(const std::string&strGridID);
 
     bool GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo);
+	bool GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo);
     bool GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList);
     bool GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList);
 

@@ -11,13 +11,12 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFIActorDataModule.h"
 
 typedef std::function<void(const NFGUID& self, const int nRet, const std::string&strUseData)> LOADDATA_RETURN_FUNCTOR;
 
 
 class NFIDataProcessModule
-    : public NFIActorDataModule
+    : public NFILogicModule
 {
 
 public:

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -272,6 +272,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFNoSqlPlugin", "NFComm\NFN
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGameLogicPlugin", "NFServer\NFGameLogicPlugin\NFGameLogicPlugin.vcxproj", "{73CE3203-1DAD-43E8-B49D-0151973765C9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_NosqlPlugin", "NFServer\NFDataAgent_NosqlPlugin\NFDataAgent_NosqlPlugin.vcxproj", "{B7132059-C4A0-472A-9D58-BEB40B9528DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_MysqlPlugin", "NFServer\NFDataAgent_MysqlPlugin\NFDataAgent_MysqlPlugin.vcxproj", "{015F43BC-7D4D-4632-A565-2F30C88637BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -438,6 +442,14 @@ Global
 		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Debug|x64.Build.0 = Debug|x64
 		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Release|x64.ActiveCfg = Release|x64
 		{73CE3203-1DAD-43E8-B49D-0151973765C9}.Release|x64.Build.0 = Release|x64
+		{B7132059-C4A0-472A-9D58-BEB40B9528DB}.Debug|x64.ActiveCfg = Debug|x64
+		{B7132059-C4A0-472A-9D58-BEB40B9528DB}.Debug|x64.Build.0 = Debug|x64
+		{B7132059-C4A0-472A-9D58-BEB40B9528DB}.Release|x64.ActiveCfg = Release|x64
+		{B7132059-C4A0-472A-9D58-BEB40B9528DB}.Release|x64.Build.0 = Release|x64
+		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Debug|x64.ActiveCfg = Debug|x64
+		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Debug|x64.Build.0 = Debug|x64
+		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Release|x64.ActiveCfg = Release|x64
+		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -489,5 +501,7 @@ Global
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{3F68CD92-8AA1-48C4-84EF-CD63690C8DCB} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 		{73CE3203-1DAD-43E8-B49D-0151973765C9} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
+		{B7132059-C4A0-472A-9D58-BEB40B9528DB} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
+		{015F43BC-7D4D-4632-A565-2F30C88637BB} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
 	EndGlobalSection
 EndGlobal
