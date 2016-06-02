@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_SLG_SHOP_MODULE_H
-#define _NFI_SLG_SHOP_MODULE_H
+#ifndef NFI_SLG_SHOP_MODULE_H
+#define NFI_SLG_SHOP_MODULE_H
 
 #include "NFILogicModule.h"
 

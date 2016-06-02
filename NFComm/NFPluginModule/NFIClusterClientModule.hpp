@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_CLUSTER_CLIENT_MODULE_H
-#define _NFI_CLUSTER_CLIENT_MODULE_H
+#ifndef NFI_CLUSTER_CLIENT_MODULE_H
+#define NFI_CLUSTER_CLIENT_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
