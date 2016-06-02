@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_NET_MODULE_H
-#define _NFI_NET_MODULE_H
+#ifndef NFI_NET_MODULE_H
+#define NFI_NET_MODULE_H
 
 #include <iostream>
 #include <iosfwd>

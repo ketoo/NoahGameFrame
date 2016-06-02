@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_URL_MODULE_H_
-#define _NFI_URL_MODULE_H_
+#ifndef NFI_URL_MODULE_H
+#define NFI_URL_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
