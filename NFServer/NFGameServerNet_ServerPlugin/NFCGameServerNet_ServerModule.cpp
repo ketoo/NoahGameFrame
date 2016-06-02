@@ -2087,7 +2087,7 @@ void NFCGameServerNet_ServerModule::ProcessSwitchToGame(const NFGUID& nRoleID, c
 
 	//////////////////////////////////////////////////////////////////////////
 	//拉取数据
-	if (!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
+	if (!m_pPlayerMysqlModule->LoadDataFormSql(nRoleID, "Player"))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
 		return;
