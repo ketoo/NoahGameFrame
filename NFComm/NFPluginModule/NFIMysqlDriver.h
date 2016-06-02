@@ -65,4 +65,4 @@ public:
     virtual bool Keys(const std::string& strRecordName, const std::string& strKeyName, std::vector<std::string>& valueVec) = 0;
 };
 
-#endif // !__NFI_REDIS_DRIVER_MODULE_H__
+#endif // !_NFI_REDIS_DRIVER_MODULE_H_

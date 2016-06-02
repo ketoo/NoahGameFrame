@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_CS_SCRIPT_MODULE_H
-#define _NFI_CS_SCRIPT_MODULE_H
+#ifndef NFI_CS_SCRIPT_MODULE_H
+#define NFI_CS_SCRIPT_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

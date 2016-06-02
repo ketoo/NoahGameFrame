@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_GAMESERVERNET_CLIENTMODULE_H
-#define _NFI_GAMESERVERNET_CLIENTMODULE_H
+#ifndef NFI_GAMESERVERNET_CLIENTMODULE_H
+#define NFI_GAMESERVERNET_CLIENTMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
