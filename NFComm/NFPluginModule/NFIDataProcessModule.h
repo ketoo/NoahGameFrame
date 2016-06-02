@@ -11,10 +11,9 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFIActorDataModule.h"
 
 class NFIDataProcessModule
-    : public NFIActorDataModule
+    : public NFILogicModule
 {
 
 public:
