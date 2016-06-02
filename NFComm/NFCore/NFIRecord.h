@@ -48,12 +48,12 @@ public:
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value) = 0;
     virtual bool SetFloat(const int nRow, const int nCol, const double value) = 0;
-    virtual bool SetString(const int nRow, const int nCol, const char* value) = 0;
+    virtual bool SetString(const int nRow, const int nCol, const std::string& value) = 0;
     virtual bool SetObject(const int nRow, const int nCol, const NFGUID& value) = 0;
 
     virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value) = 0;
     virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value) = 0;
-    virtual bool SetString(const int nRow, const std::string& strColTag, const char* value) = 0;
+    virtual bool SetString(const int nRow, const std::string& strColTag, const std::string& value) = 0;
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFGUID& value) = 0;
 
     // 获得数据
