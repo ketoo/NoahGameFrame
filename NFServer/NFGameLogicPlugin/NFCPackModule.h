@@ -85,7 +85,6 @@ protected:
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     // Ìí¼ÓµôÂäµÀ¾ß
-    void AddDropItem(const NFGUID& self, const NFIDataList& var);
     int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
 
 private:

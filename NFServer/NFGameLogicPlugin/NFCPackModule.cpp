@@ -14,7 +14,6 @@ const std::string mstrPackTableName[] =
     NFrame::Player::R_BagItemList(),
     NFrame::Player::R_BagEquipList(),
     NFrame::Player::R_PlayerHero(),
-	NFrame::Player::R_DropItemList(),
 };
 
 bool NFCPackModule::Init()
@@ -264,23 +263,6 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
 //     return false;
 // }
 
-void NFCPackModule::AddDropItem(const NFGUID& self, const NFIDataList& var)
-{
-    if (var.GetCount() != 4 || !var.TypeEx(TDATA_OBJECT, TDATA_STRING, TDATA_INT, TDATA_INT, TDATA_UNKNOWN))
-    {
-        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "args error", "", __FUNCTION__, __LINE__);
-        return;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_DropItemList());
-    if (NULL == pRecord.get())
-    {
-        return;
-    }
-
-    pRecord->AddRow(-1, var);
-}
-
 int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var)
 {
     if ( var.GetCount() != 1 || !var.TypeEx(TDATA_OBJECT, TDATA_UNKNOWN))
@@ -296,18 +278,6 @@ int NFCPackModule::OnObjectBeKilled(const NFGUID& self, const int nEventID, cons
         return 1;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(identKiller, NFrame::Player::R_DropItemList());
-    if (nullptr == pRecord)
-    {
-        return 1;
-    }
-
-    NFCDataList varResult;
-    int nRowCount = pRecord->FindObject(NFrame::Player::DropItemList_MonsterID, self, varResult);
-    for (int i = 0; i < nRowCount; ++i)
-    {
-        pRecord->SetInt(varResult.Int(i), NFrame::Player::DropItemList_DrawState, NFMsg::E_DRAW_STATE_GAIN);
-    }
 
     return 0;
 }
@@ -341,37 +311,12 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 
 	NFGUID ident = m_pUUIDModule->CreateGUID();
 
-	NFCDataList var;
-	var << ident;
-	var << NULL_OBJECT;
-	var << strConfigName;
-	var << 0;
-	var << 0;
-	var << NULL_STR;
-	var << NFTime::GetNowTime();
-	var << 0;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << NULL_STR;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
-	var << 0;
+	NFCDataList var = pRecord->GetInitData();
+
+	var.SetObject(NFrame::Player::BagEquipList_GUID, ident);
+	var.SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
+	var.SetInt(NFrame::Player::BagEquipList_Date, NFTime::GetNowTime());
+
 
 	int nAddRow = pRecord->AddRow(-1, var);
 	if (nAddRow > 0)
@@ -419,17 +364,6 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	if (nRow < 0)
 	{
         NFCDataList varRowData;
-//         if (!pRecord->IniRowData(varRowData))
-//         {
-//             return 0;
-//         }
-
-//         varRowData.SetString(NFrame::Player::BagItemList::BagItemList_ConfigID, strConfigName.c_str());
-//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ItemCount, nCount);
-//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_Bound, 0);
-//         varRowData.SetInt(NFrame::Player::BagItemList::BagItemList_ExpiredType, 0);
-//         varRowData.SetObject(NFrame::Player::BagItemList::BagItemList_Date, NFGUID(0, NFTime::GetNowTime()));
-
         varRowData << strConfigName;
         varRowData << nCount;
         varRowData << 0;
@@ -648,7 +582,7 @@ bool NFCPackModule::DressEquipForHero( const NFGUID& self, const NFGUID& hero, c
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagHeroPack ) );
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
 	if (!pHeroRecord)
 	{
 		return false;
@@ -722,7 +656,7 @@ bool NFCPackModule::TakeOffEquipForm( const NFGUID& self, const NFGUID& hero, co
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagHeroPack ) );
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
 	if (!pHeroRecord)
 	{
 		return false;

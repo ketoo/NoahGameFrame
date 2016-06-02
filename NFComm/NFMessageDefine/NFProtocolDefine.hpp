@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/05/20
+//    @Date             :    Thu Jun  2 22:05:05 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -11,7 +11,6 @@
 #include <string>
 namespace NFrame
 {
-
 class IObject
 {
 public:
@@ -136,6 +135,7 @@ public:
 		GroupMemberList_GUID		= 0, // GUID -- object
 		GroupMemberList_Online		= 1, // Online -- int
 		GroupMemberList_GameID		= 2, // GameID -- int
+
 	};
 
 	enum ChatList
@@ -143,6 +143,7 @@ public:
 		ChatList_GUID		= 0, // GUID -- object
 		ChatList_msg		= 1, // msg -- string
 		ChatList_time		= 2, // time -- int
+
 	};
 
 };
@@ -364,6 +365,7 @@ public:
 		GuildBoss_VIP		= 5, // VIP -- int
 		GuildBoss_Offline		= 6, // Offline -- int
 		GuildBoss_Power		= 7, // Power -- int
+
 	};
 
 	enum GuildMemberList
@@ -382,6 +384,7 @@ public:
 		GuildMemberList_JoinTime		= 11, // JoinTime -- int
 		GuildMemberList_Contribution		= 12, // Contribution -- int
 		GuildMemberList_AllContribution		= 13, // AllContribution -- int
+
 	};
 
 	enum GuildAppyList
@@ -393,6 +396,7 @@ public:
 		GuildAppyList_Donation		= 4, // Donation -- int
 		GuildAppyList_VIP		= 5, // VIP -- int
 		GuildAppyList_Power		= 6, // Power -- int
+
 	};
 
 	enum GuildEvent
@@ -408,6 +412,7 @@ public:
 		GuildEvent_EventID		= 8, // EventID -- int
 		GuildEvent_EventTime		= 9, // EventTime -- int
 		GuildEvent_Context		= 10, // Context -- string
+
 	};
 
 	enum GuildHouse
@@ -420,6 +425,7 @@ public:
 		GuildHouse_VIP		= 5, // VIP -- int
 		GuildHouse_Offline		= 6, // Offline -- int
 		GuildHouse_Power		= 7, // Power -- int
+
 	};
 
 	enum GuildSkill
@@ -432,6 +438,7 @@ public:
 		GuildSkill_VIP		= 5, // VIP -- int
 		GuildSkill_Offline		= 6, // Offline -- int
 		GuildSkill_Power		= 7, // Power -- int
+
 	};
 
 };
@@ -612,6 +619,7 @@ public:
 		Station_Slogan		= 5, // Slogan -- string
 		Station_State		= 6, // State -- int
 		Station_CurMemberCount		= 7, // CurMemberCount -- int
+
 	};
 
 };
@@ -704,8 +712,6 @@ public:
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
 	static const std::string& FirstTarget(){ static std::string xFirstTarget = "FirstTarget"; return xFirstTarget; } // object
-	static const std::string& State(){ static std::string xState = "State"; return xState; } // int
-	static const std::string& LogicState(){ static std::string xLogicState = "LogicState"; return xLogicState; } // int
 	static const std::string& CharType(){ static std::string xCharType = "CharType"; return xCharType; } // int
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
 	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
@@ -719,26 +725,15 @@ public:
 	static const std::string& Account(){ static std::string xAccount = "Account"; return xAccount; } // string
 	static const std::string& ConnectKey(){ static std::string xConnectKey = "ConnectKey"; return xConnectKey; } // string
 	static const std::string& MAXEXP(){ static std::string xMAXEXP = "MAXEXP"; return xMAXEXP; } // int
-	static const std::string& DEAD_COUNT(){ static std::string xDEAD_COUNT = "DEAD_COUNT"; return xDEAD_COUNT; } // int
 	static const std::string& RELIVE_SOUL(){ static std::string xRELIVE_SOUL = "RELIVE_SOUL"; return xRELIVE_SOUL; } // int
-	static const std::string& GUILD_NAME(){ static std::string xGUILD_NAME = "GUILD_NAME"; return xGUILD_NAME; } // string
-	static const std::string& SPOUSE_NAME(){ static std::string xSPOUSE_NAME = "SPOUSE_NAME"; return xSPOUSE_NAME; } // string
-	static const std::string& TEAM_CARD(){ static std::string xTEAM_CARD = "TEAM_CARD"; return xTEAM_CARD; } // string
-	static const std::string& PVP_ATK_CARD(){ static std::string xPVP_ATK_CARD = "PVP_ATK_CARD"; return xPVP_ATK_CARD; } // string
-	static const std::string& PVP_DEF_CARD(){ static std::string xPVP_DEF_CARD = "PVP_DEF_CARD"; return xPVP_DEF_CARD; } // string
-	static const std::string& LUCKLY_CARD(){ static std::string xLUCKLY_CARD = "LUCKLY_CARD"; return xLUCKLY_CARD; } // string
 	static const std::string& ATK_PVP(){ static std::string xATK_PVP = "ATK_PVP"; return xATK_PVP; } // int
 	static const std::string& DEF_PVP(){ static std::string xDEF_PVP = "DEF_PVP"; return xDEF_PVP; } // int
-	static const std::string& CreditValue(){ static std::string xCreditValue = "CreditValue"; return xCreditValue; } // int
-	static const std::string& SoulValue(){ static std::string xSoulValue = "SoulValue"; return xSoulValue; } // int
 	static const std::string& OnlineCount(){ static std::string xOnlineCount = "OnlineCount"; return xOnlineCount; } // int
 	static const std::string& TotalTime(){ static std::string xTotalTime = "TotalTime"; return xTotalTime; } // int
-	static const std::string& Citizenship(){ static std::string xCitizenship = "Citizenship"; return xCitizenship; } // int
 	static const std::string& LastOfflineTime(){ static std::string xLastOfflineTime = "LastOfflineTime"; return xLastOfflineTime; } // object
 	static const std::string& OnlineTime(){ static std::string xOnlineTime = "OnlineTime"; return xOnlineTime; } // object
 	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
 	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
-	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
@@ -763,44 +758,20 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
-	static const std::string& X(){ static std::string xX = "X"; return xX; } // float
-	static const std::string& Y(){ static std::string xY = "Y"; return xY; } // float
-	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // float
-	static const std::string& TargetX(){ static std::string xTargetX = "TargetX"; return xTargetX; } // float
-	static const std::string& TargetY(){ static std::string xTargetY = "TargetY"; return xTargetY; } // float
-	static const std::string& TargetZ(){ static std::string xTargetZ = "TargetZ"; return xTargetZ; } // float
-	static const std::string& PathStep(){ static std::string xPathStep = "PathStep"; return xPathStep; } // int
 	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish; } // int
 	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
-	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
 	// Record
-	static const std::string& R_PlayerViewItem(){ static std::string xPlayerViewItem = "PlayerViewItem"; return xPlayerViewItem;}
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
 	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
-	static const std::string& R_EctypeList(){ static std::string xEctypeList = "EctypeList"; return xEctypeList;}
-	static const std::string& R_DropItemList(){ static std::string xDropItemList = "DropItemList"; return xDropItemList;}
-	static const std::string& R_SkillTable(){ static std::string xSkillTable = "SkillTable"; return xSkillTable;}
 	static const std::string& R_TaskMonsterList(){ static std::string xTaskMonsterList = "TaskMonsterList"; return xTaskMonsterList;}
 	static const std::string& R_TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
-	static const std::string& R_PVPList(){ static std::string xPVPList = "PVPList"; return xPVPList;}
-	static const std::string& R_ChatGroup(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup;}
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
-	static const std::string& R_FightHeroList(){ static std::string xFightHeroList = "FightHeroList"; return xFightHeroList;}
-	static const std::string& R_TileList(){ static std::string xTileList = "TileList"; return xTileList;}
-
-	enum PlayerViewItem
-	{
-		PlayerViewItem_ConfigID		= 0, // ConfigID -- string
-		PlayerViewItem_EnhanceLevel		= 1, // EnhanceLevel -- int
-		PlayerViewItem_InlayStone		= 2, // InlayStone -- string
-		PlayerViewItem_SagecraftLevel		= 3, // SagecraftLevel -- string
-	};
 
 	enum PlayerHero
 	{
@@ -835,6 +806,9 @@ public:
 		PlayerHero_SkillLevel3		= 28, // SkillLevel3 -- int
 		PlayerHero_SkillLevel4		= 29, // SkillLevel4 -- int
 		PlayerHero_SkillLevel5		= 30, // SkillLevel5 -- int
+		PlayerHero_FightState		= 31, // FightState -- int
+		PlayerHero_FightSkill		= 32, // FightSkill -- string
+
 	};
 
 	enum BagEquipList
@@ -868,6 +842,7 @@ public:
 		BagEquipList_ElementLevel8		= 26, // ElementLevel8 -- int
 		BagEquipList_ElementLevel9		= 27, // ElementLevel9 -- int
 		BagEquipList_ElementLevel10		= 28, // ElementLevel10 -- int
+
 	};
 
 	enum BagItemList
@@ -877,6 +852,7 @@ public:
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
 		BagItemList_Date		= 4, // Date -- object
+
 	};
 
 	enum HeroPropertyValue
@@ -906,6 +882,7 @@ public:
 		HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
 		HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
 		HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
+
 	};
 
 	enum CommPropertyValue
@@ -934,29 +911,7 @@ public:
 		CommPropertyValue_PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
 		CommPropertyValue_MAGIC_GATE		= 22, // MAGIC_GATE -- int
 		CommPropertyValue_BUFF_GATE		= 23, // BUFF_GATE -- int
-	};
 
-	enum EctypeList
-	{
-		EctypeList_EctypeID		= 0, // EctypeID -- int
-		EctypeList_IsPass		= 1, // IsPass -- int
-		EctypeList_Star		= 2, // Star -- int
-	};
-
-	enum DropItemList
-	{
-		DropItemList_MonsterID		= 0, // MonsterID -- object
-		DropItemList_ItemID		= 1, // ItemID -- string
-		DropItemList_ItemCount		= 2, // ItemCount -- int
-		DropItemList_DrawState		= 3, // DrawState -- int
-	};
-
-	enum SkillTable
-	{
-		SkillTable_SkillID		= 0, // SkillID -- string
-		SkillTable_SkillLevel		= 1, // SkillLevel -- int
-		SkillTable_SkillStone		= 2, // SkillStone -- string
-		SkillTable_SkillSoulLevel		= 3, // SkillSoulLevel -- int
 	};
 
 	enum TaskMonsterList
@@ -965,6 +920,7 @@ public:
 		TaskMonsterList_CurrentKillCount		= 1, // CurrentKillCount -- int
 		TaskMonsterList_RequireKillCount		= 2, // RequireKillCount -- int
 		TaskMonsterList_TaskID		= 3, // TaskID -- string
+
 	};
 
 	enum TaskList
@@ -972,19 +928,7 @@ public:
 		TaskList_TaskID		= 0, // TaskID -- string
 		TaskList_TaskStatus		= 1, // TaskStatus -- int
 		TaskList_Process		= 2, // Process -- int
-	};
 
-	enum PVPList
-	{
-		PVPList_ID		= 0, // ID -- object
-		PVPList_Name		= 1, // Name -- string
-		PVPList_Level		= 2, // Level -- int
-	};
-
-	enum ChatGroup
-	{
-		ChatGroup_ChatType		= 0, // ChatType -- int
-		ChatGroup_GroupGUID		= 1, // GroupGUID -- object
 	};
 
 	enum BuildingList
@@ -997,6 +941,7 @@ public:
 		BuildingList_PosZ		= 5, // PosZ -- int
 		BuildingList_StateStartTime		= 6, // StateStartTime -- int
 		BuildingList_StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 	enum BuildingListProduce
@@ -1009,20 +954,7 @@ public:
 		BuildingListProduce_PosZ		= 5, // PosZ -- int
 		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
 		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
-	};
 
-	enum FightHeroList
-	{
-		FightHeroList_HeroGUID		= 0, // HeroGUID -- object
-		FightHeroList_FightPos		= 1, // FightPos -- int
-	};
-
-	enum TileList
-	{
-		TileList_TileID		= 0, // TileID -- int
-		TileList_X		= 1, // X -- int
-		TileList_Y		= 2, // Y -- int
-		TileList_TileType		= 3, // TileType -- int
 	};
 
 };
@@ -1299,10 +1231,9 @@ public:
 		MemberList_Receive		= 5, // Receive -- int
 		MemberList_VIP		= 6, // VIP -- int
 		MemberList_Online		= 7, // Online -- int
-		MemberList_Power		= 8, // Power -- int
-		MemberList_Title		= 9, // Title -- int
-		MemberList_GameID		= 10, // GameID -- int
-		MemberList_JoinTime		= 11, // JoinTime -- int
+		MemberList_Title		= 8, // Title -- int
+		MemberList_GameID		= 9, // GameID -- int
+
 	};
 
 	enum ApplyList
@@ -1314,10 +1245,11 @@ public:
 		ApplyList_Donation		= 4, // Donation -- int
 		ApplyList_VIP		= 5, // VIP -- int
 		ApplyList_Power		= 6, // Power -- int
+
 	};
 
 };
 
 } // !@NFrame
 
-#endif // !NF_PR_NAME_HPP
+#endif // !NF_PR_NAME_HPP 

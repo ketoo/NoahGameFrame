@@ -24,11 +24,18 @@ public:
 
     };
     virtual bool AddHero(const NFGUID& self, const std::string& strID) = 0;
-    virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID) = 0;
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp) = 0;
     virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID) = 0;
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
-    virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
+	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
+
+	virtual bool HeroWearDress(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID) = 0;
+	virtual bool HeroUnDress(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID) = 0;
+
+	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
+	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
+
+	virtual bool SetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID) = 0;
 
 };
 

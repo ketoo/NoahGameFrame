@@ -64,11 +64,6 @@ protected:
     void OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnAckLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnAckCreateChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnAckJoinChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnAckQuitChatGroupProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-
     int OnDataLoadBeginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
 
     //int OnToWorldEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
@@ -90,13 +85,6 @@ protected:
 private:
     void SendOnline(const NFGUID& self);
     void SendOffline(const NFGUID& self);
-
-    void CreateChatGroup(const NFGUID& self, const int nChatType, const std::string& strName);
-    void JoinChatGroup(const NFGUID& self, const NFGUID& xGroup, const int nChatType);
-    void QuitChatGroup(const NFGUID& self, const NFGUID& xGroup);
-    void SubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup);
-    void CancelSubscriptionChatGroup(const NFGUID& self, const NFGUID& xGroup);
-
 
 private:
 
