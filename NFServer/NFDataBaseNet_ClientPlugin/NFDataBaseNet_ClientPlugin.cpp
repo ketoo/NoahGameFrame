@@ -27,7 +27,7 @@ const std::string NFDataBaseNet_ClientPlugin::GetPluginName()
     return GET_CLASS_NAME(NFDataBaseNet_ClientPlugin)
 }
 
-       void NFDataBaseNet_ClientPlugin::Install()
+void NFDataBaseNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCDataProcessModule)
 }
