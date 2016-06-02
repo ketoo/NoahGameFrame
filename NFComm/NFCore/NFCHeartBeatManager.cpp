@@ -32,7 +32,7 @@ bool NFCHeartBeatManager::Execute()
     while (pElement.get())
     {
         //millisecond
-        NFINT64 nTime = NFTimeEx::GetNowTimeMille();
+        NFINT64 nTime = NFTime::GetNowTimeMille();
 
         if (nTime > pElement->nNextTriggerTime && pElement->nCount > 0)
         {
@@ -98,7 +98,7 @@ NFGUID NFCHeartBeatManager::Self()
 bool NFCHeartBeatManager::AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
 {
     NFCHeartBeatElement xHeartBeat;
-    xHeartBeat.nNextTriggerTime = NFTimeEx::GetNowTimeMille() + (NFINT64)(fTime * 1000);
+    xHeartBeat.nNextTriggerTime = NFTime::GetNowTimeMille() + (NFINT64)(fTime * 1000);
     xHeartBeat.fBeatTime = fTime;
     xHeartBeat.nCount = nCount;
     xHeartBeat.self = self;
