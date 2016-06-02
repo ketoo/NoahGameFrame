@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROXYLOGIC_MODULE_H
-#define _NFI_PROXYLOGIC_MODULE_H
+#ifndef NFI_PROXYLOGIC_MODULE_H
+#define NFI_PROXYLOGIC_MODULE_H
 
 #include "NFILogicModule.h"
 

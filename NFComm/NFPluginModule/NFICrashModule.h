@@ -1,5 +1,5 @@
-#ifndef __NFI_CRASH_MODULE_H_
-#define __NFI_CRASH_MODULE_H_
+#ifndef _NFI_CRASH_MODULE_H
+#define _NFI_CRASH_MODULE_H
 
 #include "NFILogicModule.h"
 
@@ -10,4 +10,4 @@ public:
     virtual void TestCrash() = 0;
 };
 
-#endif // !__NFI_CRASH_MODULE_H_
+#endif // !_NFI_CRASH_MODULE_H

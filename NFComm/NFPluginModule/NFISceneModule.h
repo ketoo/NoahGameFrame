@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_CONTAINER_MODULE_H
-#define _NFI_CONTAINER_MODULE_H
+#ifndef NFI_CONTAINER_MODULE_H
+#define NFI_CONTAINER_MODULE_H
 
 #include <list>
 #include <iostream>

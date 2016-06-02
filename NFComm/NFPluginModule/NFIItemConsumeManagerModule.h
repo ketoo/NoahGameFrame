@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制管理类,所有类型的道具消费类型均需注册才能消费
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ITEMCONSUME_MANAGER_MODULE_H
-#define _NFI_ITEMCONSUME_MANAGER_MODULE_H
+#ifndef NFI_ITEMCONSUME_MANAGER_MODULE_H
+#define NFI_ITEMCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
