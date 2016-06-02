@@ -492,7 +492,7 @@ bool NFCRecord::SetFloat(const int nRow, const std::string& strColTag, const dou
     return SetFloat(nRow, nCol, value);
 }
 
-bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
+bool NFCRecord::SetString(const int nRow, const int nCol, const std::string& value)
 {
     if (!ValidPos(nRow, nCol))
     {
@@ -554,7 +554,7 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const char* value)
     return true;
 }
 
-bool NFCRecord::SetString(const int nRow, const std::string& strColTag, const char* value)
+bool NFCRecord::SetString(const int nRow, const std::string& strColTag, const std::string& value)
 {
     int nCol = GetCol(strColTag);
     return SetString(nRow, nCol, value);
