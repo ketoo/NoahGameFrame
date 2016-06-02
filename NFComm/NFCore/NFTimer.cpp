@@ -141,17 +141,17 @@ bool NFTimeSpan::operator>=(NFTimeSpan span) const throw()
 //    return TimeEx(time_t(NULL));
 //}
 
-NFTimeEx::NFTimeEx() throw() :
+NFTime::NFTime() throw() :
     m_time(0)
 {
 }
 
-NFTimeEx::NFTimeEx(time_t time)  throw():
+NFTime::NFTime(time_t time)  throw():
     m_time(time)
 {
 }
 
-NFTimeEx::NFTimeEx(int nYear, int nMonth, int nDay, int nHour, int nMin, int nSec, int nDST)
+NFTime::NFTime(int nYear, int nMonth, int nDay, int nHour, int nMin, int nSec, int nDST)
 {
     struct tm atm;
 
@@ -170,7 +170,7 @@ NFTimeEx::NFTimeEx(int nYear, int nMonth, int nDay, int nHour, int nMin, int nSe
     }
 }
 
-NFTimeEx::NFTimeEx(uint16_t wDosDate, uint16_t wDosTime, int nDST)
+NFTime::NFTime(uint16_t wDosDate, uint16_t wDosTime, int nDST)
 {
     struct tm atm;
     atm.tm_sec = (wDosTime & ~0xFFE0) << 1;
@@ -190,68 +190,68 @@ NFTimeEx::NFTimeEx(uint16_t wDosDate, uint16_t wDosTime, int nDST)
 
 }
 
-NFTimeEx& NFTimeEx::operator=(time_t time) throw()
+NFTime& NFTime::operator=(time_t time) throw()
 {
     m_time = time;
 
     return(*this);
 }
 
-NFTimeEx& NFTimeEx::operator+=(NFTimeSpan span) throw()
+NFTime& NFTime::operator+=(NFTimeSpan span) throw()
 {
     m_time += span.GetTimeSpan();
 
     return(*this);
 }
 
-NFTimeEx& NFTimeEx::operator-=(NFTimeSpan span) throw()
+NFTime& NFTime::operator-=(NFTimeSpan span) throw()
 {
     m_time -= span.GetTimeSpan();
 
     return(*this);
 }
 
-NFTimeSpan NFTimeEx::operator-(NFTimeEx time) const throw()
+NFTimeSpan NFTime::operator-(NFTime time) const throw()
 {
     return(NFTimeSpan(m_time - time.m_time));
 }
 
-NFTimeEx NFTimeEx::operator-(NFTimeSpan span) const throw()
+NFTime NFTime::operator-(NFTimeSpan span) const throw()
 {
-    return(NFTimeEx(m_time - span.GetTimeSpan()));
+    return(NFTime(m_time - span.GetTimeSpan()));
 }
 
-NFTimeEx NFTimeEx::operator+(NFTimeSpan span) const throw()
+NFTime NFTime::operator+(NFTimeSpan span) const throw()
 {
-    return(NFTimeEx(m_time + span.GetTimeSpan()));
+    return(NFTime(m_time + span.GetTimeSpan()));
 }
 
-bool NFTimeEx::operator==(NFTimeEx time) const throw()
+bool NFTime::operator==(NFTime time) const throw()
 {
     return(m_time == time.m_time);
 }
 
-bool NFTimeEx::operator!=(NFTimeEx time) const throw()
+bool NFTime::operator!=(NFTime time) const throw()
 {
     return(m_time != time.m_time);
 }
 
-bool NFTimeEx::operator<(NFTimeEx time) const throw()
+bool NFTime::operator<(NFTime time) const throw()
 {
     return(m_time < time.m_time);
 }
 
-bool NFTimeEx::operator>(NFTimeEx time) const throw()
+bool NFTime::operator>(NFTime time) const throw()
 {
     return(m_time > time.m_time);
 }
 
-bool NFTimeEx::operator<=(NFTimeEx time) const throw()
+bool NFTime::operator<=(NFTime time) const throw()
 {
     return(m_time <= time.m_time);
 }
 
-bool NFTimeEx::operator>=(NFTimeEx time) const throw()
+bool NFTime::operator>=(NFTime time) const throw()
 {
     return(m_time >= time.m_time);
 }
@@ -259,13 +259,13 @@ bool NFTimeEx::operator>=(NFTimeEx time) const throw()
 #if !_SECURE_ATL
 
 //_ATL_INSECURE_DEPRECATE("Pass an output time structure to TimeEx::GetGmtTm")
-struct tm* NFTimeEx::GetGmtTm() const throw()
+struct tm* NFTime::GetGmtTm() const throw()
 {
     return gmtime(&m_time);
 }
 
 //_ATL_INSECURE_DEPRECATE("Pass an output time structure to TimeEx::GetLocalTm")
-struct tm* NFTimeEx::GetLocalTm() const throw()
+struct tm* NFTime::GetLocalTm() const throw()
 {
 #pragma warning(push)
 #pragma warning(disable : 4996)
@@ -275,7 +275,7 @@ struct tm* NFTimeEx::GetLocalTm() const throw()
 
 #endif // !_SECURE_ATL
 
-struct tm* NFTimeEx::GetGmtTm(struct tm* ptm) const
+struct tm* NFTime::GetGmtTm(struct tm* ptm) const
 {
 #if _SECURE_ATL
     // Ensure ptm is valid
@@ -319,7 +319,7 @@ struct tm* NFTimeEx::GetGmtTm(struct tm* ptm) const
 #endif
 }
 
-struct tm* NFTimeEx::GetLocalTm(struct tm* ptm) const
+struct tm* NFTime::GetLocalTm(struct tm* ptm) const
 {
 #if _SECURE_ATL
     // Ensure ptm is valid
@@ -380,12 +380,12 @@ struct tm* NFTimeEx::GetLocalTm(struct tm* ptm) const
 //  return true;
 // }
 
-time_t NFTimeEx::GetTime() const throw()
+time_t NFTime::GetTime() const throw()
 {
     return(m_time);
 }
 
-int NFTimeEx::GetYear() const throw()
+int NFTime::GetYear() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -394,7 +394,7 @@ int NFTimeEx::GetYear() const throw()
     return ptm ? (ptm->tm_year) + 1900 : 0 ;
 }
 
-int NFTimeEx::GetMonth() const throw()
+int NFTime::GetMonth() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -403,7 +403,7 @@ int NFTimeEx::GetMonth() const throw()
     return ptm ? ptm->tm_mon + 1 : 0;
 }
 
-int NFTimeEx::GetDay() const throw()
+int NFTime::GetDay() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -412,7 +412,7 @@ int NFTimeEx::GetDay() const throw()
     return ptm ? ptm->tm_mday : 0 ;
 }
 
-int NFTimeEx::GetHour() const throw()
+int NFTime::GetHour() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -421,7 +421,7 @@ int NFTimeEx::GetHour() const throw()
     return ptm ? ptm->tm_hour : -1 ;
 }
 
-int NFTimeEx::GetMinute() const throw()
+int NFTime::GetMinute() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -430,7 +430,7 @@ int NFTimeEx::GetMinute() const throw()
     return ptm ? ptm->tm_min : -1 ;
 }
 
-int NFTimeEx::GetSecond() const throw()
+int NFTime::GetSecond() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -439,7 +439,7 @@ int NFTimeEx::GetSecond() const throw()
     return ptm ? ptm->tm_sec : -1 ;
 }
 
-int NFTimeEx::GetDayOfWeek() const throw()
+int NFTime::GetDayOfWeek() const throw()
 {
     struct tm ttm;
     struct tm* ptm;
@@ -448,9 +448,9 @@ int NFTimeEx::GetDayOfWeek() const throw()
     return ptm ? ptm->tm_wday + 1 : 0 ;
 }
 
-bool NFTimeEx::SameMinute(int64_t nTime)
+bool NFTime::SameMinute(int64_t nTime)
 {
-    NFTimeEx xLastTime(nTime);
+    NFTime xLastTime(nTime);
     if (xLastTime.GetMinute() == GetMinute()
         && xLastTime.GetDay() == GetDay()
         && xLastTime.GetMonth() == GetMonth()
@@ -462,9 +462,9 @@ bool NFTimeEx::SameMinute(int64_t nTime)
     return false;
 }
 
-bool NFTimeEx::SameDay(int64_t nTime)
+bool NFTime::SameDay(int64_t nTime)
 {
-    NFTimeEx xLastTime(nTime);
+    NFTime xLastTime(nTime);
     if (xLastTime.GetDay() == GetDay()
         && xLastTime.GetMonth() == GetMonth()
         && xLastTime.GetYear() == GetYear())
@@ -475,9 +475,9 @@ bool NFTimeEx::SameDay(int64_t nTime)
     return false;
 }
 
-bool NFTimeEx::SameHour(int64_t nTime)
+bool NFTime::SameHour(int64_t nTime)
 {
-    NFTimeEx xLastTime(nTime);
+    NFTime xLastTime(nTime);
     if (xLastTime.GetHour() == GetHour()
         && xLastTime.GetDay() == GetDay()
         && xLastTime.GetMonth() == GetMonth()
@@ -489,7 +489,7 @@ bool NFTimeEx::SameHour(int64_t nTime)
     return false;
 }
 
-bool NFTimeEx::SameWeek(int64_t nTime)
+bool NFTime::SameWeek(int64_t nTime)
 {
     if (SameDay(nTime))
     {
@@ -497,11 +497,11 @@ bool NFTimeEx::SameWeek(int64_t nTime)
     }
 
     //将2个日期都归到周1，看周1的日期是否相等[距离1970年][中国人做游戏说一周开始都是从周1开始...]
-    NFTimeEx xLastTime(nTime);
-    NFTimeEx xSourceTime(1970, 1, 1, 0, 0, 0);
+    NFTime xLastTime(nTime);
+    NFTime xSourceTime(1970, 1, 1, 0, 0, 0);
 
-    NFTimeEx xLastMondayTime = xLastTime - NFTimeSpan(xLastTime.GetDayOfWeek(), 0, 0, 0);
-    NFTimeEx xThisMondayTime = *this - NFTimeSpan(GetDayOfWeek(), 0, 0, 0);
+    NFTime xLastMondayTime = xLastTime - NFTimeSpan(xLastTime.GetDayOfWeek(), 0, 0, 0);
+    NFTime xThisMondayTime = *this - NFTimeSpan(GetDayOfWeek(), 0, 0, 0);
 
     if (xThisMondayTime.SameDay(xLastMondayTime.m_time))
     {
@@ -511,9 +511,9 @@ bool NFTimeEx::SameWeek(int64_t nTime)
     return false;
 }
 
-bool NFTimeEx::SameMonth(int64_t nTime)
+bool NFTime::SameMonth(int64_t nTime)
 {
-    NFTimeEx xLastTime(nTime);
+    NFTime xLastTime(nTime);
     if (xLastTime.GetMonth() == GetMonth()
         && xLastTime.GetYear() == GetYear())
     {
@@ -523,9 +523,9 @@ bool NFTimeEx::SameMonth(int64_t nTime)
     return false;
 }
 
-bool NFTimeEx::SameYear(int64_t nTime)
+bool NFTime::SameYear(int64_t nTime)
 {
-    NFTimeEx xLastTime(nTime);
+    NFTime xLastTime(nTime);
     if (xLastTime.GetYear() == GetYear())
     {
         return true;
