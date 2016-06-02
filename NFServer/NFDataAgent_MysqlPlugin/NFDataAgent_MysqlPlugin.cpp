@@ -31,7 +31,7 @@ const int NFDataAgent_MysqlPlugin::GetPluginVersion()
 
 const std::string NFDataAgent_MysqlPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFDataBaseNet_ClientPlugin)
+    return GET_CLASS_NAME(NFDataAgent_MysqlPlugin)
 }
 
 void NFDataAgent_MysqlPlugin::Install()
