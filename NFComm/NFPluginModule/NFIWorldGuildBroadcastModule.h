@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_WORLD_GUILD_BROADCAST_MODULE_H
-#define _NFI_WORLD_GUILD_BROADCAST_MODULE_H
+#ifndef NFI_WORLD_GUILD_BROADCAST_MODULE_H
+#define NFI_WORLD_GUILD_BROADCAST_MODULE_H
 
 #include "NFILogicModule.h"
 
