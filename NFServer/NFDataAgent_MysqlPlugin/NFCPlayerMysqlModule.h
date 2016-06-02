@@ -1,17 +1,17 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCDataProcessModule.h
+//    @FileName			:    NFCPlayerMysqlModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             £º    2013-10-03
-//    @Module           :    NFCDataProcessModule
+//    @Date             :    2013-10-03
+//    @Module           :    NFCPlayerMysqlModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_DATAPROCESS_MODULE_H
-#define NFC_DATAPROCESS_MODULE_H
+#ifndef NFC_PLAYER_MYSQL_MODULE_H
+#define NFC_PLAYER_MYSQL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -21,12 +21,12 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
 
-class NFCDataProcessModule
-    : public NFIDataProcessModule
+class NFCPlayerMysqlModule
+    : public NFIPlayerMysqlModule
 {
 public:
 
-    NFCDataProcessModule(NFIPluginManager* p)
+    NFCPlayerMysqlModule(NFIPluginManager* p)
     {
         pPluginManager = p;
 
@@ -34,7 +34,7 @@ public:
         mstrAccountTable = "AccountInfo";
         mnLoadCount = 0;
     }
-    virtual ~NFCDataProcessModule() {};
+    virtual ~NFCPlayerMysqlModule() {};
 
     virtual bool Init();
     virtual bool Shut();
