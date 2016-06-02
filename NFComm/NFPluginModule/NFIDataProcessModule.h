@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_DATAPROCESS_MODULE_H
-#define _NFI_DATAPROCESS_MODULE_H
+#ifndef NFI_DATAPROCESS_MODULE_H
+#define NFI_DATAPROCESS_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

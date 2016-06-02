@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROPERTY_CONFIG_MODULE_H
-#define _NFI_PROPERTY_CONFIG_MODULE_H
+#ifndef NFI_PROPERTY_CONFIG_MODULE_H
+#define NFI_PROPERTY_CONFIG_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
