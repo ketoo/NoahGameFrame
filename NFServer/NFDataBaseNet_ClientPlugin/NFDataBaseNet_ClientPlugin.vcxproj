@@ -16,7 +16,6 @@
     <ClCompile Include="NFDataBaseNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIObjectSaveModule.h" />
     <ClInclude Include="NFCDataProcessModule.h" />
     <ClInclude Include="NFDataBaseNet_ClientPlugin.h" />
   </ItemGroup>
