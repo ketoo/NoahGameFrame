@@ -98,7 +98,7 @@ bool NFCRecordManager::SetRecordString(const std::string& strRecordName, const i
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
     if (pRecord.get())
     {
-        return pRecord->SetString(nRow, nCol, strValue));
+        return pRecord->SetString(nRow, nCol, strValue);
     }
 
     return false;
