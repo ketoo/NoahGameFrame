@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_WORLDLOGIC_MODULE_H
-#define _NFI_WORLDLOGIC_MODULE_H
+#ifndef NFI_WORLDLOGIC_MODULE_H
+#define NFI_WORLDLOGIC_MODULE_H
 
 #include "NFILogicModule.h"
 

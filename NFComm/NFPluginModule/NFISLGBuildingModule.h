@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef __NFI_SLG_BUILDING_MODULE_H_
-#define __NFI_SLG_BUILDING_MODULE_H_
+#ifndef _NFI_SLG_BUILDING_MODULE_H
+#define _NFI_SLG_BUILDING_MODULE_H
 
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 
@@ -33,4 +33,4 @@ public:
     virtual int Move(const NFGUID& self, const NFGUID nGUID, const float fX, const float fY, const float fZ) = 0;
 };
 
-#endif // !__NFI_SLG_BUILDING_MODULE_H_
+#endif // !_NFI_SLG_BUILDING_MODULE_H
