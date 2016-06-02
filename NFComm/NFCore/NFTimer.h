@@ -103,7 +103,7 @@ private:
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-class NFTimeEx
+class NFTime
 {
 public:
     enum
@@ -111,31 +111,31 @@ public:
         UNDEF_TIME = -1
     };
 public:
-    static NFTimeEx GetCurrentTime() throw()
+    static NFTime GetCurrentTime() throw()
     {
-        return NFTimeEx(time(NULL));
+        return NFTime(time(NULL));
     }
 
-    NFTimeEx() throw();
-    NFTimeEx(time_t time) throw();
-    NFTimeEx(int nYear, int nMonth, int nDay, int nHour, int nMin, int nSec, int nDST = -1);
-    NFTimeEx(uint16_t wDosDate, uint16_t wDosTime, int nDST = -1);
+    NFTime() throw();
+    NFTime(time_t time) throw();
+    NFTime(int nYear, int nMonth, int nDay, int nHour, int nMin, int nSec, int nDST = -1);
+    NFTime(uint16_t wDosDate, uint16_t wDosTime, int nDST = -1);
 
-    NFTimeEx& operator=(time_t time) throw();
+    NFTime& operator=(time_t time) throw();
 
-    NFTimeEx& operator+=(NFTimeSpan span) throw();
-    NFTimeEx& operator-=(NFTimeSpan span) throw();
+    NFTime& operator+=(NFTimeSpan span) throw();
+    NFTime& operator-=(NFTimeSpan span) throw();
 
-    NFTimeSpan operator-(NFTimeEx time) const throw();
-    NFTimeEx operator-(NFTimeSpan span) const throw();
-    NFTimeEx operator+(NFTimeSpan span) const throw();
+    NFTimeSpan operator-(NFTime time) const throw();
+    NFTime operator-(NFTimeSpan span) const throw();
+    NFTime operator+(NFTimeSpan span) const throw();
 
-    bool operator==(NFTimeEx time) const throw();
-    bool operator!=(NFTimeEx time) const throw();
-    bool operator<(NFTimeEx time) const throw();
-    bool operator>(NFTimeEx time) const throw();
-    bool operator<=(NFTimeEx time) const throw();
-    bool operator>=(NFTimeEx time) const throw();
+    bool operator==(NFTime time) const throw();
+    bool operator!=(NFTime time) const throw();
+    bool operator<(NFTime time) const throw();
+    bool operator>(NFTime time) const throw();
+    bool operator<=(NFTime time) const throw();
+    bool operator>=(NFTime time) const throw();
 
     int GetYear() const throw();
     int GetMonth() const throw();
@@ -154,7 +154,7 @@ public:
 
     static bool IsPassCurrentTime(time_t n64Time)   // 是否过期了
     {
-        NFTimeEx ItemTime(n64Time);
+        NFTime ItemTime(n64Time);
         return (ItemTime <= GetCurrentTime());
     }
 
