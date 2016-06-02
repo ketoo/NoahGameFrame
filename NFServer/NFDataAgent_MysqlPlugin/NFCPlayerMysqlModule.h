@@ -1,17 +1,17 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCDataProcessModule.h
+//    @FileName			:    NFCPlayerMysqlModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             £º    2013-10-03
-//    @Module           :    NFCDataProcessModule
+//    @Date             :    2013-10-03
+//    @Module           :    NFCPlayerMysqlModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_DATAPROCESS_MODULE_H
-#define NFC_DATAPROCESS_MODULE_H
+#ifndef NFC_PLAYER_MYSQL_MODULE_H
+#define NFC_PLAYER_MYSQL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -19,20 +19,22 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
 
-class NFCDataProcessModule
-    : public NFIDataProcessModule
+class NFCPlayerMysqlModule
+    : public NFIPlayerMysqlModule
 {
 public:
 
-    NFCDataProcessModule(NFIPluginManager* p)
+    NFCPlayerMysqlModule(NFIPluginManager* p)
     {
         pPluginManager = p;
 
         mstrRoleTable = "Player";
         mstrAccountTable = "AccountInfo";
+        mnLoadCount = 0;
     }
-    virtual ~NFCDataProcessModule() {};
+    virtual ~NFCPlayerMysqlModule() {};
 
     virtual bool Init();
     virtual bool Shut();
@@ -49,11 +51,17 @@ public:
     virtual const bool LoadDataFormSql(const NFGUID& self , const std::string& strClassName);
     virtual const bool SaveDataToSql(const NFGUID& self);
 
-private:
-    const bool AttachData(const NFGUID& self);
-    const bool ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord);
+    virtual const bool LoadDataFormSqlAsy( const NFGUID& self , const std::string& strClassName, const LOADDATA_RETURN_FUNCTOR& xFun, const std::string& strUseData);
+    void LoadDataFormSqlAsySucess( const NFGUID& self, const int nResult, const std::vector<std::string>& vFieldVec, const std::vector<std::string>& vValueVec, const std::string& strUserData);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    virtual const bool SaveDataToSqlAsy( const NFGUID& self);
+    void SaveDataToSqlAsySucess( const NFGUID& self, const int nRet, const std::string&strUseData);
+
+private:
+	const bool AttachData( const NFGUID& self );
+	const bool ConvertPBToRecord(const NFMsg::PlayerRecordBase& xRecordData, NF_SHARE_PTR<NFIRecord> xRecord);
+
+    int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     void OnOnline(const NFGUID& self);
     void OnOffline(const NFGUID& self);
@@ -61,16 +69,27 @@ private:
 private:
     NFIKernelModule* m_pKernelModule;
     NFIClusterModule* m_pClusterSQLModule;
-    NFIUUIDModule* m_pUUIDModule;
-    NFILogicClassModule* m_pLogicClassModule;
-    NFILogModule* m_pLogModule;
+    NFIAsyClusterModule* m_pAsyClusterSQLModule;
+	NFIUUIDModule* m_pUUIDModule;
+	NFILogicClassModule* m_pLogicClassModule;
+	NFILogModule* m_pLogModule;
     NFIElementInfoModule* m_pElementInfoModule;
 
 private:
-    NFMapEx<NFGUID, NFMapEx<std::string, std::string> > mtObjectCache;
+	NFMapEx<NFGUID, NFMapEx<std::string, std::string> > mtObjectCache;
 
     std::string mstrRoleTable;
     std::string mstrAccountTable;
+
+private:
+    struct LoadData
+    {
+        LOADDATA_RETURN_FUNCTOR mFunc;
+        std::string strUseData;
+    };
+
+    NFINT64 mnLoadCount;
+    NFMapEx<NFINT64, LoadData> mmLoadlisReq;
 };
 
 

@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_PLUGIN_MANAGER_H_
-#define NFI_PLUGIN_MANAGER_H_
+#ifndef NFI_PLUGIN_MANAGER_H
+#define NFI_PLUGIN_MANAGER_H
 
 #include "NFIActor.h"
 #include "NFILogicModule.h"
