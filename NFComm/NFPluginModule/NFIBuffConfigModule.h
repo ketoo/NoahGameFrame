@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_BUFFCONFIG_MODULE_H
-#define _NFI_BUFFCONFIG_MODULE_H
+#ifndef NFI_BUFFCONFIG_MODULE_H
+#define NFI_BUFFCONFIG_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

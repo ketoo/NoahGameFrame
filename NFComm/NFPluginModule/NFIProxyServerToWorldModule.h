@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_PROXYNET_CLIENTMODULE_H
-#define _NFI_PROXYNET_CLIENTMODULE_H
+#ifndef NFI_PROXYNET_CLIENTMODULE_H
+#define NFI_PROXYNET_CLIENTMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
