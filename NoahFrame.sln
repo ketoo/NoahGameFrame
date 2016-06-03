@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -265,6 +265,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGameLogicPlugin", "NFServer\NFGameLogicPlugin\NFGameLogicPlugin.vcxproj", "{73CE3203-1DAD-43E8-B49D-0151973765C9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_NosqlPlugin", "NFServer\NFDataAgent_NosqlPlugin\NFDataAgent_NosqlPlugin.vcxproj", "{B7132059-C4A0-472A-9D58-BEB40B9528DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+		{3E283F37-A4ED-41B7-A3E6-A2D89D131A30} = {3E283F37-A4ED-41B7-A3E6-A2D89D131A30}
+		{B9833FE8-8C0B-40D6-BA01-3CDADEB21166} = {B9833FE8-8C0B-40D6-BA01-3CDADEB21166}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_MysqlPlugin", "NFServer\NFDataAgent_MysqlPlugin\NFDataAgent_MysqlPlugin.vcxproj", "{015F43BC-7D4D-4632-A565-2F30C88637BB}"
 EndProject
