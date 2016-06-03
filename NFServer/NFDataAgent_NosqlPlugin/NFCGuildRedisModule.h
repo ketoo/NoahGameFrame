@@ -41,9 +41,13 @@ public:
     virtual bool SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager);
 
 protected:
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
+protected:
     NFILogicClassModule* m_pLogicClassModule;
     NFINoSqlModule* m_pNoSqlModule;
     NFICommonRedisModule* m_pCommonRedisModule;
+    NFIKernelModule* m_pKernelModule;
 
 };
 

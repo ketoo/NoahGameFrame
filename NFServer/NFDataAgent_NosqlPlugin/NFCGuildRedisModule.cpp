@@ -34,12 +34,37 @@ bool NFCGuildRedisModule::AfterInit()
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
     m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>("NFCCommonRedisModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pNoSqlModule);
     assert(NULL != m_pCommonRedisModule);
+    assert(NULL != m_pKernelModule);
 
+
+    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, NFCGuildRedisModule::OnObjectClassEvent);
     return true;
+}
+
+int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+{
+    switch (eClassEvent)
+    {
+    case CLASS_OBJECT_EVENT::COE_CREATE_FINISH:
+    {
+        NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
+        if (pSelf)
+        {
+            SetGuildCacheInfo(self, pSelf->GetPropertyManager());
+            SetGuildCacheRecordManager(self, pSelf->GetRecordManager());
+        }
+    }
+    break;
+    default:
+        break;
+    }
+
+    return 0;
 }
 
 NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid)
