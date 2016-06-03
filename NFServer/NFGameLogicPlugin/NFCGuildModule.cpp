@@ -416,9 +416,7 @@ bool NFCGuildModule::GetGuildMemberInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFI
         return true;
     }
 
-    return m_pGuildRedisModule->GetGuildCacheInfo(xGuildID, pPropertyManager);
-
-    return true;
+    return m_pGuildRedisModule->GetGuildCacheRecordInfo(xGuildID, NFrame::Guild::R_GuildMemberList(), pMemberRecord);
 }
 
 bool NFCGuildModule::GetGuildMemberInfo(const NFGUID& xGuildID, const NFGUID& xMmember, NFIDataList& varMemeberInfo)

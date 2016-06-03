@@ -37,6 +37,8 @@ bool NFCGuildRedisModule::AfterInit()
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pNoSqlModule);
     assert(NULL != m_pCommonRedisModule);
+
+    return true;
 }
 
 bool NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
