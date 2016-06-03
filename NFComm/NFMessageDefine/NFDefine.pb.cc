@@ -33,7 +33,6 @@ const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EBattleType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* EFightPos_descriptor_ = NULL;
 
 }  // namespace
 
@@ -57,7 +56,6 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   ETaskType_descriptor_ = file->enum_type(10);
   EBattleType_descriptor_ = file->enum_type(11);
   EShopType_descriptor_ = file->enum_type(12);
-  EFightPos_descriptor_ = file->enum_type(13);
 }
 
 namespace {
@@ -309,9 +307,7 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "M\020\001*\201\001\n\tEShopType\022\020\n\014EST_BUILDING\020\001\022\014\n\010E"
     "ST_GOLD\020\002\022\017\n\013EST_DIAMOND\020\003\022\n\n\006EST_SP\020\004\022\r"
     "\n\tEST_EQUIP\020\005\022\013\n\007EST_GEM\020\006\022\014\n\010EST_Hero\020\007"
-    "\022\r\n\tEST_Other\020\010*I\n\tEFightPos\022\016\n\nEFP_MINE"
-    "R1\020\000\022\r\n\tEFP_HERO1\020\001\022\016\n\nEFP_MINER2\020\002\022\r\n\tE"
-    "FP_HERO2\020\003", 9090);
+    "\022\r\n\tEST_Other\020\010", 9015);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -795,22 +791,6 @@ bool EShopType_IsValid(int value) {
     case 6:
     case 7:
     case 8:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::google::protobuf::EnumDescriptor* EFightPos_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return EFightPos_descriptor_;
-}
-bool EFightPos_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
       return true;
     default:
       return false;

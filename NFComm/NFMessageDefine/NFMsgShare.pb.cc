@@ -192,9 +192,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* TakeOffEquip_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   TakeOffEquip_reflection_ = NULL;
-const ::google::protobuf::Descriptor* ReqMiningTitle_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ReqMiningTitle_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqSendMail_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqSendMail_reflection_ = NULL;
@@ -1210,24 +1207,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TakeOffEquip));
-  ReqMiningTitle_descriptor_ = file->message_type(53);
-  static const int ReqMiningTitle_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, selfid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, y_),
-  };
-  ReqMiningTitle_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      ReqMiningTitle_descriptor_,
-      ReqMiningTitle::default_instance_,
-      ReqMiningTitle_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ReqMiningTitle));
-  ReqSendMail_descriptor_ = file->message_type(54);
+  ReqSendMail_descriptor_ = file->message_type(53);
   static const int ReqSendMail_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, reciever_),
@@ -1245,7 +1225,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSendMail));
-  ReqSwitchServer_descriptor_ = file->message_type(55);
+  ReqSwitchServer_descriptor_ = file->message_type(54);
   static const int ReqSwitchServer_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, self_serverid_),
@@ -1265,7 +1245,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSwitchServer));
-  AckSwitchServer_descriptor_ = file->message_type(56);
+  AckSwitchServer_descriptor_ = file->message_type(55);
   static const int AckSwitchServer_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, self_serverid_),
@@ -1283,7 +1263,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSwitchServer));
-  ReqAckCreateTeam_descriptor_ = file->message_type(57);
+  ReqAckCreateTeam_descriptor_ = file->message_type(56);
   static const int ReqAckCreateTeam_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateTeam, team_id_),
   };
@@ -1298,7 +1278,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckCreateTeam));
-  ReqAckJoinTeam_descriptor_ = file->message_type(58);
+  ReqAckJoinTeam_descriptor_ = file->message_type(57);
   static const int ReqAckJoinTeam_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinTeam, team_id_),
   };
@@ -1313,7 +1293,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckJoinTeam));
-  ReqAckLeaveTeam_descriptor_ = file->message_type(59);
+  ReqAckLeaveTeam_descriptor_ = file->message_type(58);
   static const int ReqAckLeaveTeam_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveTeam, team_id_),
   };
@@ -1328,7 +1308,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveTeam));
-  ReqAckOprTeamMember_descriptor_ = file->message_type(60);
+  ReqAckOprTeamMember_descriptor_ = file->message_type(59);
   static const int ReqAckOprTeamMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprTeamMember, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprTeamMember, member_id_),
@@ -1346,7 +1326,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckOprTeamMember));
   ReqAckOprTeamMember_EGTeamMemberOprType_descriptor_ = ReqAckOprTeamMember_descriptor_->enum_type(0);
-  ReqInviteTeamMember_descriptor_ = file->message_type(61);
+  ReqInviteTeamMember_descriptor_ = file->message_type(60);
   static const int ReqInviteTeamMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqInviteTeamMember, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqInviteTeamMember, self_id_),
@@ -1363,7 +1343,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqInviteTeamMember));
-  ReqBigMapGridInfo_descriptor_ = file->message_type(62);
+  ReqBigMapGridInfo_descriptor_ = file->message_type(61);
   static const int ReqBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBigMapGridInfo, map_title_id_),
   };
@@ -1378,7 +1358,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapGridInfo));
-  BigMapGridBaseInfo_descriptor_ = file->message_type(63);
+  BigMapGridBaseInfo_descriptor_ = file->message_type(62);
   static const int BigMapGridBaseInfo_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, owner_),
@@ -1402,7 +1382,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridBaseInfo));
-  BigMapLeaveMsg_descriptor_ = file->message_type(64);
+  BigMapLeaveMsg_descriptor_ = file->message_type(63);
   static const int BigMapLeaveMsg_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_name_),
@@ -1421,7 +1401,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapLeaveMsg));
-  BigMapWarHistory_descriptor_ = file->message_type(65);
+  BigMapWarHistory_descriptor_ = file->message_type(64);
   static const int BigMapWarHistory_offsets_[12] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_level_),
@@ -1447,7 +1427,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapWarHistory));
-  BigMapGridDetailInfo_descriptor_ = file->message_type(66);
+  BigMapGridDetailInfo_descriptor_ = file->message_type(65);
   static const int BigMapGridDetailInfo_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, grid_base_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, leave_msg_),
@@ -1464,7 +1444,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridDetailInfo));
-  AckBigMapGridInfo_descriptor_ = file->message_type(67);
+  AckBigMapGridInfo_descriptor_ = file->message_type(66);
   static const int AckBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapGridInfo, map_data_),
   };
@@ -1479,7 +1459,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapGridInfo));
-  ReqBigMapInfo_descriptor_ = file->message_type(68);
+  ReqBigMapInfo_descriptor_ = file->message_type(67);
   static const int ReqBigMapInfo_offsets_[1] = {
   };
   ReqBigMapInfo_reflection_ =
@@ -1493,7 +1473,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapInfo));
-  AckBigMapInfo_descriptor_ = file->message_type(69);
+  AckBigMapInfo_descriptor_ = file->message_type(68);
   static const int AckBigMapInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapInfo, grid_base_info_),
   };
@@ -1508,7 +1488,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapInfo));
-  ReqHoldMapGrid_descriptor_ = file->message_type(70);
+  ReqHoldMapGrid_descriptor_ = file->message_type(69);
   static const int ReqHoldMapGrid_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoldMapGrid, map_title_id_),
   };
@@ -1523,7 +1503,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqHoldMapGrid));
-  AckHoldMapGrid_descriptor_ = file->message_type(71);
+  AckHoldMapGrid_descriptor_ = file->message_type(70);
   static const int AckHoldMapGrid_offsets_[1] = {
   };
   AckHoldMapGrid_reflection_ =
@@ -1537,7 +1517,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckHoldMapGrid));
-  ReqLeaveMapMsg_descriptor_ = file->message_type(72);
+  ReqLeaveMapMsg_descriptor_ = file->message_type(71);
   static const int ReqLeaveMapMsg_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, map_title_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, leave_msg_),
@@ -1553,7 +1533,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqLeaveMapMsg));
-  AckLeaveMapMsg_descriptor_ = file->message_type(73);
+  AckLeaveMapMsg_descriptor_ = file->message_type(72);
   static const int AckLeaveMapMsg_offsets_[1] = {
   };
   AckLeaveMapMsg_reflection_ =
@@ -1567,7 +1547,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckLeaveMapMsg));
-  ReqGetMapAward_descriptor_ = file->message_type(74);
+  ReqGetMapAward_descriptor_ = file->message_type(73);
   static const int ReqGetMapAward_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqGetMapAward, map_title_id_),
   };
@@ -1582,7 +1562,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqGetMapAward));
-  AckGetMapAward_descriptor_ = file->message_type(75);
+  AckGetMapAward_descriptor_ = file->message_type(74);
   static const int AckGetMapAward_offsets_[1] = {
   };
   AckGetMapAward_reflection_ =
@@ -1596,7 +1576,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckGetMapAward));
-  ReqMapHunting_descriptor_ = file->message_type(76);
+  ReqMapHunting_descriptor_ = file->message_type(75);
   static const int ReqMapHunting_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapHunting, map_title_id_),
   };
@@ -1611,7 +1591,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapHunting));
-  AckMapHunting_descriptor_ = file->message_type(77);
+  AckMapHunting_descriptor_ = file->message_type(76);
   static const int AckMapHunting_offsets_[1] = {
   };
   AckMapHunting_reflection_ =
@@ -1625,7 +1605,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMapHunting));
-  ReqMapKingWar_descriptor_ = file->message_type(78);
+  ReqMapKingWar_descriptor_ = file->message_type(77);
   static const int ReqMapKingWar_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapKingWar, map_title_id_),
   };
@@ -1640,7 +1620,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapKingWar));
-  AckMapKingWar_descriptor_ = file->message_type(79);
+  AckMapKingWar_descriptor_ = file->message_type(78);
   static const int AckMapKingWar_offsets_[1] = {
   };
   AckMapKingWar_reflection_ =
@@ -1774,8 +1754,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqWearEquip_descriptor_, &ReqWearEquip::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     TakeOffEquip_descriptor_, &TakeOffEquip::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ReqMiningTitle_descriptor_, &ReqMiningTitle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqSendMail_descriptor_, &ReqSendMail::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1941,8 +1919,6 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqWearEquip_reflection_;
   delete TakeOffEquip::default_instance_;
   delete TakeOffEquip_reflection_;
-  delete ReqMiningTitle::default_instance_;
-  delete ReqMiningTitle_reflection_;
   delete ReqSendMail::default_instance_;
   delete ReqSendMail_reflection_;
   delete ReqSwitchServer::default_instance_;
@@ -2170,69 +2146,67 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "ent\022\036\n\010Targetid\030\003 \002(\0132\014.NFMsg.Ident\"k\n\014T"
     "akeOffEquip\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Iden"
     "t\022\035\n\007equipid\030\002 \002(\0132\014.NFMsg.Ident\022\036\n\010Targ"
-    "etid\030\003 \002(\0132\014.NFMsg.Ident\"D\n\016ReqMiningTit"
-    "le\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 "
-    "\002(\005\022\t\n\001y\030\003 \002(\005\"\237\001\n\013ReqSendMail\022\034\n\006selfid"
-    "\030\001 \002(\0132\014.NFMsg.Ident\022\036\n\010reciever\030\002 \002(\0132\014"
-    ".NFMsg.Ident\022$\n\titem_list\030\003 \003(\0132\021.NFMsg."
-    "ItemStruct\022,\n\rcurrency_list\030\004 \003(\0132\025.NFMs"
-    "g.CurrencyStruct\"\250\001\n\017ReqSwitchServer\022\034\n\006"
-    "selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_serve"
-    "rid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003\022\025\n\rga"
-    "te_serverid\030\004 \002(\003\022\017\n\007SceneID\030\005 \002(\003\022\037\n\tcl"
-    "ient_id\030\006 \002(\0132\014.NFMsg.Ident\"v\n\017AckSwitch"
+    "etid\030\003 \002(\0132\014.NFMsg.Ident\"\237\001\n\013ReqSendMail"
+    "\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\036\n\010reciev"
+    "er\030\002 \002(\0132\014.NFMsg.Ident\022$\n\titem_list\030\003 \003("
+    "\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_list\030\004 "
+    "\003(\0132\025.NFMsg.CurrencyStruct\"\250\001\n\017ReqSwitch"
     "Server\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\r"
     "self_serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003"
-    " \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\"1\n\020ReqAckCre"
-    "ateTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\"/"
-    "\n\016ReqAckJoinTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMs"
-    "g.Ident\"0\n\017ReqAckLeaveTeam\022\035\n\007team_id\030\001 "
-    "\002(\0132\014.NFMsg.Ident\"\304\002\n\023ReqAckOprTeamMembe"
-    "r\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmemb"
-    "er_id\030\002 \002(\0132\014.NFMsg.Ident\022<\n\004type\030\003 \002(\0162"
-    "..NFMsg.ReqAckOprTeamMember.EGTeamMember"
-    "OprType\"\256\001\n\023EGTeamMemberOprType\022\r\n\tEGAT_"
-    "DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\022\020\n\014EG"
-    "AT_APPOINT\020\003\022\r\n\tEGAT_FIRE\020\004\022\017\n\013EGAT_DEMI"
-    "SE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020\006\022\022\n\016EGAT_DENYA"
-    "PPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\"{\n\023ReqInviteTea"
-    "mMember\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\035"
-    "\n\007self_id\030\002 \002(\0132\014.NFMsg.Ident\022&\n\020invite_"
-    "target_id\030\003 \002(\0132\014.NFMsg.Ident\")\n\021ReqBigM"
-    "apGridInfo\022\024\n\014map_title_id\030\001 \003(\014\"\356\001\n\022Big"
-    "MapGridBaseInfo\022\n\n\002id\030\001 \002(\014\022\033\n\005owner\030\002 \002"
-    "(\0132\014.NFMsg.Ident\022\r\n\005level\030\003 \002(\005\022\024\n\014membe"
-    "r_count\030\004 \002(\005\022\020\n\010resource\030\005 \002(\005\022\014\n\004icon\030"
-    "\006 \002(\014\022\024\n\014kingwar_time\030\n \002(\005\022 \n\nkingwarre"
-    "r\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurting_time\030\024 "
-    "\002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Ident\"z\n\016Big"
-    "MapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_data\030\003 \002(\014\022\020"
-    "\n\010msg_time\030\004 \002(\005\022\023\n\013owner_level\030\005 \002(\005\"\252\002"
-    "\n\020BigMapWarHistory\022\034\n\006red_id\030\001 \002(\0132\014.NFM"
-    "sg.Ident\022\021\n\tred_level\030\002 \002(\005\022\021\n\tred_count"
-    "\030\003 \002(\005\022\030\n\020red_war_resource\030\004 \002(\005\022\020\n\010red_"
-    "icon\030\005 \002(\014\022\035\n\007blue_id\030\013 \002(\0132\014.NFMsg.Iden"
-    "t\022\022\n\nblue_level\030\014 \002(\005\022\022\n\nblue_count\030\r \002("
-    "\005\022\031\n\021blue_war_resource\030\016 \002(\005\022\021\n\tblue_ico"
-    "n\030\017 \002(\014\022\037\n\twinner_id\030\024 \002(\0132\014.NFMsg.Ident"
-    "\022\020\n\010war_time\030\025 \002(\005\"\241\001\n\024BigMapGridDetailI"
-    "nfo\0221\n\016grid_base_info\030\001 \002(\0132\031.NFMsg.BigM"
-    "apGridBaseInfo\022(\n\tleave_msg\030\002 \003(\0132\025.NFMs"
-    "g.BigMapLeaveMsg\022,\n\013war_history\030\003 \003(\0132\027."
-    "NFMsg.BigMapWarHistory\"B\n\021AckBigMapGridI"
-    "nfo\022-\n\010map_data\030\001 \003(\0132\033.NFMsg.BigMapGrid"
-    "DetailInfo\"\017\n\rReqBigMapInfo\"B\n\rAckBigMap"
-    "Info\0221\n\016grid_base_info\030\001 \003(\0132\031.NFMsg.Big"
-    "MapGridBaseInfo\"&\n\016ReqHoldMapGrid\022\024\n\014map"
-    "_title_id\030\001 \002(\014\"\020\n\016AckHoldMapGrid\"P\n\016Req"
-    "LeaveMapMsg\022\024\n\014map_title_id\030\001 \002(\014\022(\n\tlea"
-    "ve_msg\030\002 \002(\0132\025.NFMsg.BigMapLeaveMsg\"\020\n\016A"
-    "ckLeaveMapMsg\"&\n\016ReqGetMapAward\022\024\n\014map_t"
-    "itle_id\030\001 \002(\014\"\020\n\016AckGetMapAward\"%\n\rReqMa"
-    "pHunting\022\024\n\014map_title_id\030\001 \002(\014\"\017\n\rAckMap"
-    "Hunting\"%\n\rReqMapKingWar\022\024\n\014map_title_id"
-    "\030\001 \002(\014\"\017\n\rAckMapKingWar", 9063);
+    " \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007SceneID\030\005"
+    " \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMsg.Ident\"v\n"
+    "\017AckSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_"
+    "serverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\"1\n"
+    "\020ReqAckCreateTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\"/\n\016ReqAckJoinTeam\022\035\n\007team_id\030\001 "
+    "\002(\0132\014.NFMsg.Ident\"0\n\017ReqAckLeaveTeam\022\035\n\007"
+    "team_id\030\001 \002(\0132\014.NFMsg.Ident\"\304\002\n\023ReqAckOp"
+    "rTeamMember\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident\022<\n\004t"
+    "ype\030\003 \002(\0162..NFMsg.ReqAckOprTeamMember.EG"
+    "TeamMemberOprType\"\256\001\n\023EGTeamMemberOprTyp"
+    "e\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KI"
+    "CK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE\020\004\022\017\n"
+    "\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020\006\022\022\n\016"
+    "EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\"{\n\023Re"
+    "qInviteTeamMember\022\035\n\007team_id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Ident\022"
+    "&\n\020invite_target_id\030\003 \002(\0132\014.NFMsg.Ident\""
+    ")\n\021ReqBigMapGridInfo\022\024\n\014map_title_id\030\001 \003"
+    "(\014\"\356\001\n\022BigMapGridBaseInfo\022\n\n\002id\030\001 \002(\014\022\033\n"
+    "\005owner\030\002 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\003 \002("
+    "\005\022\024\n\014member_count\030\004 \002(\005\022\020\n\010resource\030\005 \002("
+    "\005\022\014\n\004icon\030\006 \002(\014\022\024\n\014kingwar_time\030\n \002(\005\022 \n"
+    "\nkingwarrer\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurti"
+    "ng_time\030\024 \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Id"
+    "ent\"z\n\016BigMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.N"
+    "FMsg.Ident\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_da"
+    "ta\030\003 \002(\014\022\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_leve"
+    "l\030\005 \002(\005\"\252\002\n\020BigMapWarHistory\022\034\n\006red_id\030\001"
+    " \002(\0132\014.NFMsg.Ident\022\021\n\tred_level\030\002 \002(\005\022\021\n"
+    "\tred_count\030\003 \002(\005\022\030\n\020red_war_resource\030\004 \002"
+    "(\005\022\020\n\010red_icon\030\005 \002(\014\022\035\n\007blue_id\030\013 \002(\0132\014."
+    "NFMsg.Ident\022\022\n\nblue_level\030\014 \002(\005\022\022\n\nblue_"
+    "count\030\r \002(\005\022\031\n\021blue_war_resource\030\016 \002(\005\022\021"
+    "\n\tblue_icon\030\017 \002(\014\022\037\n\twinner_id\030\024 \002(\0132\014.N"
+    "FMsg.Ident\022\020\n\010war_time\030\025 \002(\005\"\241\001\n\024BigMapG"
+    "ridDetailInfo\0221\n\016grid_base_info\030\001 \002(\0132\031."
+    "NFMsg.BigMapGridBaseInfo\022(\n\tleave_msg\030\002 "
+    "\003(\0132\025.NFMsg.BigMapLeaveMsg\022,\n\013war_histor"
+    "y\030\003 \003(\0132\027.NFMsg.BigMapWarHistory\"B\n\021AckB"
+    "igMapGridInfo\022-\n\010map_data\030\001 \003(\0132\033.NFMsg."
+    "BigMapGridDetailInfo\"\017\n\rReqBigMapInfo\"B\n"
+    "\rAckBigMapInfo\0221\n\016grid_base_info\030\001 \003(\0132\031"
+    ".NFMsg.BigMapGridBaseInfo\"&\n\016ReqHoldMapG"
+    "rid\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckHoldMapG"
+    "rid\"P\n\016ReqLeaveMapMsg\022\024\n\014map_title_id\030\001 "
+    "\002(\014\022(\n\tleave_msg\030\002 \002(\0132\025.NFMsg.BigMapLea"
+    "veMsg\"\020\n\016AckLeaveMapMsg\"&\n\016ReqGetMapAwar"
+    "d\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckGetMapAwar"
+    "d\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \002(\014"
+    "\"\017\n\rAckMapHunting\"%\n\rReqMapKingWar\022\024\n\014ma"
+    "p_title_id\030\001 \002(\014\"\017\n\rAckMapKingWar", 8993);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -2289,7 +2263,6 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_ = new ReqSetFightHero();
   ReqWearEquip::default_instance_ = new ReqWearEquip();
   TakeOffEquip::default_instance_ = new TakeOffEquip();
-  ReqMiningTitle::default_instance_ = new ReqMiningTitle();
   ReqSendMail::default_instance_ = new ReqSendMail();
   ReqSwitchServer::default_instance_ = new ReqSwitchServer();
   AckSwitchServer::default_instance_ = new AckSwitchServer();
@@ -2370,7 +2343,6 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_->InitAsDefaultInstance();
   ReqWearEquip::default_instance_->InitAsDefaultInstance();
   TakeOffEquip::default_instance_->InitAsDefaultInstance();
-  ReqMiningTitle::default_instance_->InitAsDefaultInstance();
   ReqSendMail::default_instance_->InitAsDefaultInstance();
   ReqSwitchServer::default_instance_->InitAsDefaultInstance();
   AckSwitchServer::default_instance_->InitAsDefaultInstance();
@@ -19066,303 +19038,6 @@ void TakeOffEquip::Swap(TakeOffEquip* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = TakeOffEquip_descriptor_;
   metadata.reflection = TakeOffEquip_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int ReqMiningTitle::kSelfidFieldNumber;
-const int ReqMiningTitle::kXFieldNumber;
-const int ReqMiningTitle::kYFieldNumber;
-#endif  // !_MSC_VER
-
-ReqMiningTitle::ReqMiningTitle()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void ReqMiningTitle::InitAsDefaultInstance() {
-  selfid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
-}
-
-ReqMiningTitle::ReqMiningTitle(const ReqMiningTitle& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void ReqMiningTitle::SharedCtor() {
-  _cached_size_ = 0;
-  selfid_ = NULL;
-  x_ = 0;
-  y_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ReqMiningTitle::~ReqMiningTitle() {
-  SharedDtor();
-}
-
-void ReqMiningTitle::SharedDtor() {
-  if (this != default_instance_) {
-    delete selfid_;
-  }
-}
-
-void ReqMiningTitle::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ReqMiningTitle::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ReqMiningTitle_descriptor_;
-}
-
-const ReqMiningTitle& ReqMiningTitle::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
-  return *default_instance_;
-}
-
-ReqMiningTitle* ReqMiningTitle::default_instance_ = NULL;
-
-ReqMiningTitle* ReqMiningTitle::New() const {
-  return new ReqMiningTitle;
-}
-
-void ReqMiningTitle::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_selfid()) {
-      if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
-    }
-    x_ = 0;
-    y_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool ReqMiningTitle::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .NFMsg.Ident selfid = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_selfid()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(16)) goto parse_x;
-        break;
-      }
-
-      // required int32 x = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_x:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &x_)));
-          set_has_x();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(24)) goto parse_y;
-        break;
-      }
-
-      // required int32 y = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_y:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &y_)));
-          set_has_y();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void ReqMiningTitle::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .NFMsg.Ident selfid = 1;
-  if (has_selfid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->selfid(), output);
-  }
-
-  // required int32 x = 2;
-  if (has_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->x(), output);
-  }
-
-  // required int32 y = 3;
-  if (has_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->y(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* ReqMiningTitle::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required .NFMsg.Ident selfid = 1;
-  if (has_selfid()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, this->selfid(), target);
-  }
-
-  // required int32 x = 2;
-  if (has_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->x(), target);
-  }
-
-  // required int32 y = 3;
-  if (has_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->y(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int ReqMiningTitle::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .NFMsg.Ident selfid = 1;
-    if (has_selfid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->selfid());
-    }
-
-    // required int32 x = 2;
-    if (has_x()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->x());
-    }
-
-    // required int32 y = 3;
-    if (has_y()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->y());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ReqMiningTitle::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ReqMiningTitle* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ReqMiningTitle*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void ReqMiningTitle::MergeFrom(const ReqMiningTitle& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_selfid()) {
-      mutable_selfid()->::NFMsg::Ident::MergeFrom(from.selfid());
-    }
-    if (from.has_x()) {
-      set_x(from.x());
-    }
-    if (from.has_y()) {
-      set_y(from.y());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void ReqMiningTitle::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ReqMiningTitle::CopyFrom(const ReqMiningTitle& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ReqMiningTitle::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
-
-  if (has_selfid()) {
-    if (!this->selfid().IsInitialized()) return false;
-  }
-  return true;
-}
-
-void ReqMiningTitle::Swap(ReqMiningTitle* other) {
-  if (other != this) {
-    std::swap(selfid_, other->selfid_);
-    std::swap(x_, other->x_);
-    std::swap(y_, other->y_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata ReqMiningTitle::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ReqMiningTitle_descriptor_;
-  metadata.reflection = ReqMiningTitle_reflection_;
   return metadata;
 }
 

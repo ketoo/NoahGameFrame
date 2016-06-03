@@ -20,7 +20,6 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
 
 class NFCHeroModule
@@ -46,25 +45,24 @@ public:
     virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
     virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
-    virtual bool SetFightHero(const NFGUID& self, const NFGUID& xID);
 
-    virtual bool SwichFightHero(const NFGUID& self, const NFGUID& xID, const int nFightPos);
+	virtual bool HeroWearDress(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID);
+	virtual bool HeroUnDress(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID);
+
+	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID);
+	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID);
+
+	virtual bool SetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID);
 
 protected:
-	void OnSetFightHeroProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnObjectFightHeroEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-
-protected:
-
-
+	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+   
 protected:
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFICommonConfigModule* m_pCommonConfigModule;
     NFIGuildEctypeModule* m_pGuildEctypeModule;
 private:
 };

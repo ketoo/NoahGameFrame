@@ -16,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
-#include "NFComm/NFPluginModule/NFIDataProcessModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 
 class NFCTeamDataModule

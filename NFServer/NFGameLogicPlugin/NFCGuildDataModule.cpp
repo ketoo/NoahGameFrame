@@ -34,16 +34,16 @@ bool NFCGuildDataModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
-    m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+    m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>("NFCPlayerMysqlModule");
     m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pClusterSQLModule);
-    assert(NULL != m_pDataProcessModule);
+    assert(NULL != m_pPlayerMysqlModule);
     assert(NULL != m_pCommonConfigModule);
 
-    m_pDataProcessModule->RegisterAutoSave(NFrame::Guild::ThisName());
+    m_pPlayerMysqlModule->RegisterAutoSave(NFrame::Guild::ThisName());
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildDataModule::OnGuildClassEvent);
 
 
@@ -74,7 +74,7 @@ void NFCGuildDataModule::CheckLoadGuild( const NFGUID& self, const NFGUID& xGuil
     NF_SHARE_PTR<NFIObject> pObejct = m_pKernelModule->GetObject(xGuild);
     if (!pObejct.get())
     {
-        m_pDataProcessModule->LoadDataFormSqlAsy(xGuild, "Guild", this, &NFCGuildDataModule::HandleLoadGuildSuccess, "");
+        m_pPlayerMysqlModule->LoadDataFormSqlAsy(xGuild, "Guild", this, &NFCGuildDataModule::HandleLoadGuildSuccess, "");
     }
 }
 
@@ -353,7 +353,7 @@ bool NFCGuildDataModule::GetPlayerGameID( const NFGUID& self, int& nGameID )
 
 int NFCGuildDataModule::OnSaveGuildheartEvent( const NFGUID& self , const std::string& strHeartName, const float fTime, const int nCount )
 {
-    m_pDataProcessModule->SaveDataToSql(self);
+    m_pPlayerMysqlModule->SaveDataToSql(self);
 
     return 0;
 }

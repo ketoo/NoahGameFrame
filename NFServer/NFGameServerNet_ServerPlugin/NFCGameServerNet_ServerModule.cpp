@@ -22,7 +22,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pDataProcessModule = pPluginManager->FindModule<NFIDataProcessModule>("NFCDataProcessModule");
+    m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>("NFCPlayerMysqlModule");
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
 
 
@@ -32,7 +32,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pUUIDModule);
-    assert(NULL != m_pDataProcessModule);
+    assert(NULL != m_pPlayerMysqlModule);
     assert(NULL != m_pGameServerToWorldModule);
 
     m_pKernelModule->RegisterCommonClassEvent(this, &NFCGameServerNet_ServerModule::OnClassCommonEvent);
@@ -274,7 +274,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 
     //////////////////////////////////////////////////////////////////////////
     //拉取数据
-    if (!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
+    if (!m_pPlayerMysqlModule->LoadDataFormSql(nRoleID, "Player"))
     {
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
         return;
@@ -1693,7 +1693,7 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockInde
     vFieldVector.push_back("Name");
     vFieldVector.push_back("Race");
 
-    const NFGUID ident = m_pDataProcessModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
+    const NFGUID ident = m_pPlayerMysqlModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
     if (ident.IsNull())
     {
         NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
@@ -1767,13 +1767,13 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex
         return;
     }
 
-    NFGUID xRoleID = m_pDataProcessModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.race(), xMsg.career(), xMsg.sex());
+    NFGUID xRoleID = m_pPlayerMysqlModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.race(), xMsg.career(), xMsg.sex());
     if (xRoleID.IsNull())
     {
         return;
     }
 
-    //m_pDataProcessModule->GetChar()
+    //m_pPlayerMysqlModule->GetChar()
 
     NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
     NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
@@ -1802,7 +1802,7 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex
         return;
     }
 
-    m_pDataProcessModule->DeleteRole(xMsg.account(), nPlayerID);
+    m_pPlayerMysqlModule->DeleteRole(xMsg.account(), nPlayerID);
 
     NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
     SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);
@@ -2087,7 +2087,7 @@ void NFCGameServerNet_ServerModule::ProcessSwitchToGame(const NFGUID& nRoleID, c
 
 	//////////////////////////////////////////////////////////////////////////
 	//拉取数据
-	if (!m_pDataProcessModule->LoadDataFormSql(nRoleID, "Player"))
+	if (!m_pPlayerMysqlModule->LoadDataFormSql(nRoleID, "Player"))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
 		return;

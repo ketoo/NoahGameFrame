@@ -16,11 +16,9 @@
 
 enum PackTableType
 {
-    NONE_PACK  = -1, // 普通背包
+    NONE_PACK  = -1,
     BagItemPack  = 0, // 普通背包
-    BagEquipPack  = 1, // 可视装备背包
-    BagHeroPack = 2, // 英雄列表
-    DropItemList = 3, // 副本掉落列表
+    BagEquipPack  = 1, // 装备背包
 
     MaxPack,
 };

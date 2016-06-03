@@ -1041,21 +1041,4 @@ namespace NFMsg
       EST_Other = 8
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EFightPos")]
-    public enum EFightPos
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EFP_MINER1", Value=0)]
-      EFP_MINER1 = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EFP_HERO1", Value=1)]
-      EFP_HERO1 = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EFP_MINER2", Value=2)]
-      EFP_MINER2 = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EFP_HERO2", Value=3)]
-      EFP_HERO2 = 3
-    }
-  
 }

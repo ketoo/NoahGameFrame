@@ -11,7 +11,7 @@
 
 #include "NFComm/NFPluginModule/NFIMapModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -62,25 +62,8 @@ protected:
 	//工会申请参与地图决战活动--决定地图归属权
 	void ReqMapKingWar(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-protected:
-
-    std::string GetGridBaseKey();
-    std::string GetGridLeaveMsgKey(const std::string&strGridID);
-    std::string GetGridWarHistoryKey(const std::string&strGridID);
-
-    bool GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo);
-	bool GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo);
-    bool GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList);
-    bool GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList);
-
-    bool SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo);
-    bool AddGridLeaveMsgInfo(const std::string&strGridID, const NFMsg::BigMapLeaveMsg& xLeaveMsg);
-    bool AddGridWarHistoryInfo(const std::string&strGridID, const NFMsg::BigMapWarHistory& xWarHistory);
-
-
-
 private:
-	NFINoSqlModule* m_pNoSqlModule;
+	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;

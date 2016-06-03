@@ -39,7 +39,7 @@ king_war_info--kv-->gridid_info
 
 bool NFCMapModule::Init()
 {
-	m_pNoSqlModule = pPluginManager->GetModule<NFINoSqlModule>("NFCNoSqlModule");
+	m_pBigMapRedisModule = pPluginManager->GetModule<NFIBigMapRedisModule>("NFCBigMapRedisModule");
 	m_pKernelModule = pPluginManager->GetModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->GetModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->GetModule<NFIElementInfoModule>("NFCElementInfoModule");
@@ -93,7 +93,7 @@ void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const 
 		NFMsg::BigMapGridBaseInfo* pBigMapGridBaseInfo = xAckBigMapInfo.add_grid_base_info();
 		if (pBigMapGridBaseInfo)
 		{
-			GetGridBaseInfo(strID, *pBigMapGridBaseInfo);
+			m_pBigMapRedisModule->GetGridBaseInfo(strID, *pBigMapGridBaseInfo);
 		}
 
 		strID.clear();
@@ -119,19 +119,19 @@ void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const
 		}
 
 		NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-		if (!GetGridBaseInfo(strTitleID, xGridBaseInfo))
+		if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
 		{
 			continue;
 		}
 
 		std::vector<NFMsg::BigMapLeaveMsg> xLeaveMsgList;
-		if (!GetGridLeaveMsgInfo(strTitleID, xLeaveMsgList))
+		if (!m_pBigMapRedisModule->GetGridLeaveMsgInfo(strTitleID, xLeaveMsgList))
 		{
 			continue;
 		}
 
 		std::vector<NFMsg::BigMapWarHistory> xWarHistoryList;
-		if (!GetGridWarHistoryInfo(strTitleID, xWarHistoryList))
+		if (!m_pBigMapRedisModule->GetGridWarHistoryInfo(strTitleID, xWarHistoryList))
 		{
 			continue;
 		}
@@ -177,7 +177,7 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 
 
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-	if (!GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
 	{
 		return;
 	}
@@ -209,7 +209,7 @@ void NFCMapModule::ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, cons
 		return;
 	}
 
-	AddGridLeaveMsgInfo(xMsg.map_title_id(), xMsg.leave_msg());
+	m_pBigMapRedisModule->AddGridLeaveMsgInfo(xMsg.map_title_id(), xMsg.leave_msg());
 }
 
 void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -222,7 +222,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 	}
 
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-	if (!GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
 	{
 		return;
 	}
@@ -230,7 +230,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 	xGridBaseInfo.set_hurting_time(0);
 	xGridBaseInfo.mutable_hurter()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
-	SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
+	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
 
 	//show msgbox
 }
@@ -245,7 +245,7 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 	}
 
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-	if (!GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
 	{
 		return;
 	}
@@ -253,201 +253,8 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 	xGridBaseInfo.set_kingwar_time(NFTime::GetNowTime());
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
-	SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
+	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
 
 	//show msgbox
 }
 
-std::string NFCMapModule::GetGridBaseKey()
-{
-    return "GridBaseKey";
-}
-
-std::string NFCMapModule::GetGridLeaveMsgKey(const std::string&strGridID)
-{
-    return "GridLeaveMsgKey_" + strGridID;
-}
-
-std::string NFCMapModule::GetGridWarHistoryKey(const std::string&strGridID)
-{
-    return "GridWarHistoryKey_" + strGridID;
-}
-
-bool NFCMapModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo)
-{
-	if (!m_pElementInfoModule->ExistElement(strGridID))
-	{
-		return false;
-	}
-
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-	if (pNoSqlDriver)
-	{
-		std::string strKey = GetGridBaseKey();
-		std::string strData;
-		if (pNoSqlDriver->HGet(strKey, strGridID, strData))
-		{
-			if (xBaseInfo.ParseFromString(strData))
-			{
-				return true;
-			}
-		}
-	}
-
-    return false;
-}
-
-bool NFCMapModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfoList)
-{
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
-	NFList<std::string>& xElementList = xLogicClass->GetConfigNameList();
-
-	std::vector<std::string> vFields;
-	std::string strID;
-	for (xElementList.First(strID); !strID.empty(); xElementList.Next(strID))
-	{
-		vFields.push_back(strID);
-
-		strID.clear();
-	}
-
-
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-	if (pNoSqlDriver)
-	{
-		std::vector<std::string> vValues;
-		std::string strKey = GetGridBaseKey();
-		std::string strData;
-		if (pNoSqlDriver->HMGet(strKey, vFields, vValues))
-		{
-			for (int i = 0; i < vValues.size(); ++i)
-			{
-				const std::string& strData = vValues[i];
-				NFMsg::BigMapGridBaseInfo xBaseInfo;
-				if (xBaseInfo.ParseFromString(strData))
-				{
-					xBaseInfoList.push_back(xBaseInfo);
-				}
-			}
-
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool NFCMapModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList)
-{
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-	if (pNoSqlDriver)
-	{
-		std::string strKey = GetGridLeaveMsgKey(strGridID);
-		std::vector<std::string> xValues;
-		if (pNoSqlDriver->ListRange(strKey, 0, 10, xValues))
-		{
-			for (int i = 0; i< xValues.size(); ++i)
-			{
-				NFMsg::BigMapLeaveMsg xLeaveMsgData;
-				if (xLeaveMsgData.ParseFromString(xValues[i]))
-				{
-					xLeaveMsgList.push_back(xLeaveMsgData);
-				}
-			}
-
-			return true;
-		}
-	}
-    return false;
-}
-
-bool NFCMapModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList)
-{
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-    if (pNoSqlDriver)
-    {
-        std::string strKey = GetGridWarHistoryKey(strGridID);
-        std::vector<std::string> xValues;
-        if(pNoSqlDriver->ListRange(strKey, 0, 10, xValues))
-        {
-            for(int i = 0; i< xValues.size(); ++i)
-            {
-                 NFMsg::BigMapWarHistory xWarData;
-                if (xWarData.ParseFromString(xValues[i]))
-                {
-					xWarHistoryList.push_back(xWarData);
-                }
-            }
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool NFCMapModule::SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo)
-{
-	if (!m_pElementInfoModule->ExistElement(strGridID))
-	{
-		return false;
-	}
-
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-    if (pNoSqlDriver)
-    {
-        std::string strKey = GetGridBaseKey();
-		std::string strData;
-		if (xBaseInfo.SerializeToString(&strData))
-		{
-			return pNoSqlDriver->HSet(strKey, strGridID, strData);
-		}
-    }
-
-    return false;
-}
-
-bool NFCMapModule::AddGridLeaveMsgInfo(const std::string&strGridID, const NFMsg::BigMapLeaveMsg& xLeaveMsg)
-{
-	if (!m_pElementInfoModule->ExistElement(strGridID))
-	{
-		return false;
-	}
-
-    //数量限制
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-    if (pNoSqlDriver)
-    {
-        std::string strKey = GetGridLeaveMsgKey(strGridID);
-		std::string strData;
-		if (xLeaveMsg.SerializeToString(&strData))
-		{
-			return pNoSqlDriver->ListPush(strKey, strData);
-		}
-    }
-
-    return false;
-}
-
-bool NFCMapModule::AddGridWarHistoryInfo(const std::string&strGridID, const NFMsg::BigMapWarHistory& xWarHistory)
-{
-	if (!m_pElementInfoModule->ExistElement(strGridID))
-	{
-		return false;
-	}
-
-    //数量限制
-    NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
-    if (pNoSqlDriver)
-    {
-        std::string strKey = GetGridWarHistoryKey(strGridID);
-		std::string strData;
-		if (xWarHistory.SerializeToString(&strData))
-		{
-			//
-			return pNoSqlDriver->ListPush(strKey, strData);
-		}
-    }
-
-    return false;
-}

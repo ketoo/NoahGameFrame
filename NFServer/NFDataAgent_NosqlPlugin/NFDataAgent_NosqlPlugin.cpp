@@ -36,7 +36,7 @@ const int NFDataAgent_NosqlPlugin::GetPluginVersion()
 
 const std::string NFDataAgent_NosqlPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFDataBaseNet_ClientPlugin)
+    return GET_CLASS_NAME(NFDataAgent_NosqlPlugin)
 }
 
 void NFDataAgent_NosqlPlugin::Install()

@@ -449,15 +449,6 @@ enum EShopType
 	EST_Other		= 8;//‘”ªıµÍ
 }
 
-enum EFightPos
-{
-	EFP_MINER1 	= 0;//
-	EFP_HERO1 	= 1;//
-	EFP_MINER2 	= 2;//
-	EFP_HERO2 	= 3;//
-}
-	
-
 
 
 

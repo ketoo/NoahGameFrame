@@ -29,7 +29,6 @@
 #include "NFCRankModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
-#include "NFCTileModule.h"
 #include "NFCHeroItemConsumeProcessModule.h"
 #include "NFCNormalConsumeProcessModule.h"
 #include "NFCGSSwichServerModule.h"
@@ -94,7 +93,6 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFCRankModule);
     REGISTER_MODULE(pPluginManager, NFCCommonConfigModule);         
     REGISTER_MODULE(pPluginManager, NFCGmModule);
-	REGISTER_MODULE(pPluginManager, NFCTileModule);
 	REGISTER_MODULE(pPluginManager, NFCGSSwichServerModule);
 	REGISTER_MODULE(pPluginManager, NFCMapModule);
 }
@@ -104,7 +102,6 @@ void NFGameLogicPlugin::Uninstall()
 	
 	UNREGISTER_MODULE(pPluginManager, NFCMapModule);
 	UNREGISTER_MODULE(pPluginManager, NFCGSSwichServerModule);
-	UNREGISTER_MODULE(pPluginManager, NFCTileModule);
     UNREGISTER_MODULE(pPluginManager, NFCGmModule);
     UNREGISTER_MODULE(pPluginManager, NFCCommonConfigModule);
 	UNREGISTER_MODULE(pPluginManager, NFCRankModule);

@@ -5,7 +5,7 @@
 	<Plugin Name="NFGameServerNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFGameServerNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>
-    <Plugin Name="NFDataBaseNet_ClientPlugin" Main="1"/>
+    <Plugin Name="NFDataAgent_MysqlPlugin" Main="1"/>
     <Plugin Name="NFMysqlClusterPlugin" Main="1"/>
     <Plugin Name="NFGameLogicPlugin" Main="1"/>
 	
