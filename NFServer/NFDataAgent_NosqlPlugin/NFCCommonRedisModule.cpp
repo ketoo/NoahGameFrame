@@ -112,10 +112,12 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
         const int xPropertyValue = xPropertyData.data();
 
         NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strPropertyName);
-        if (pProperty.get())
+        if (!pProperty)
         {
-            pProperty->SetInt(xPropertyValue);
+            pProperty = pPropertyManager->AddProperty(xIdent, strPropertyName, TDATA_INT);
         }
+
+        pProperty->SetInt(xPropertyValue);
     }
 
     for (int i = 0; i < xMsg.property_float_list_size(); ++i)
@@ -125,10 +127,12 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
         const float xPropertyValue = xPropertyData.data();
 
         NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strPropertyName);
-        if (pProperty.get())
+        if (!pProperty)
         {
-            pProperty->SetFloat(xPropertyValue);
+            pProperty = pPropertyManager->AddProperty(xIdent, strPropertyName, TDATA_FLOAT);
         }
+
+        pProperty->SetFloat(xPropertyValue);
     }
 
     for (int i = 0; i < xMsg.property_string_list_size(); ++i)
@@ -138,10 +142,12 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
         const std::string xPropertyValue = xPropertyData.data();
 
         NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strPropertyName);
-        if (pProperty.get())
+        if (!pProperty)
         {
-            pProperty->SetString(xPropertyValue);
+            pProperty = pPropertyManager->AddProperty(xIdent, strPropertyName, TDATA_STRING);
         }
+
+        pProperty->SetString(xPropertyValue);
     }
 
     for (int i = 0; i < xMsg.property_object_list_size(); ++i)
@@ -151,10 +157,12 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
         const NFGUID xPropertyValue = NFINetModule::PBToNF(xPropertyData.data());
 
         NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strPropertyName);
-        if (pProperty.get())
+        if (!pProperty)
         {
-            pProperty->SetObject(xPropertyValue);
+            pProperty = pPropertyManager->AddProperty(xIdent, strPropertyName, TDATA_OBJECT);
         }
+
+        pProperty->SetObject(xPropertyValue);
     }
     
     return true;
@@ -163,7 +171,7 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
 bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordList& xMsg, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
 {
     NFGUID xIdent = NFINetModule::PBToNF(xMsg.player_id());
-    pRecordManager->Self();
+    //pRecordManager->Self();
 
     for (int iRecord = 0; iRecord < xMsg.record_list_size(); ++iRecord)
     {
@@ -227,12 +235,20 @@ bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordLis
     return true;
 }
 
-bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, NFMsg::ObjectPropertyList& xMsg)
+bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, NFMsg::ObjectPropertyList& xMsg, const bool bCheckCache /*= true*/)
 {
     *xMsg.mutable_player_id() = NFINetModule::NFToPB(pPropertyManager->Self());
     for (NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->First(); pProperty != NULL; pProperty = pPropertyManager->Next())
     {
         const int nType = pProperty->GetType();
+        if (bCheckCache)
+        {
+            if (!pProperty->GetCache())
+            {
+                continue;
+            }
+        }
+
         switch (nType)
         {
         case TDATA_INT:
@@ -295,7 +311,7 @@ bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIProp
     return true;
 }
 
-bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList& xMsg)
+bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList& xMsg, const bool bCheckCache /*= true*/)
 {
     *xMsg.mutable_player_id() = NFINetModule::NFToPB(pRecordManager->Self());
     for (NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First(); pRecord != NULL; pRecord = pRecordManager->Next())
@@ -306,6 +322,14 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
         if (!pRecordData)
         {
             continue;
+        }
+
+        if (bCheckCache)
+        {
+            if (!pRecord->GetCache())
+            {
+                continue;
+            }
         }
 
         pRecordData->set_record_name(strRecordName);

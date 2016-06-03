@@ -16,10 +16,11 @@ class NFIGuildRedisModule
 {
 
 public:
-    virtual bool GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager) = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetGuildCacheInfo(const NFGUID& xGuid) = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetGuildCacheRecordManager(const NFGUID& xGuid) = 0;
 
-    virtual bool GetGuildCacheRecordInfo(const NFGUID& xGuid, const std::string& strRecordName, NF_SHARE_PTR<NFIRecord>& pRecord) = 0;
-    virtual bool GetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager) = 0;
+    virtual bool SetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager) = 0;
+    virtual bool SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager) = 0;
 };
 
 #endif

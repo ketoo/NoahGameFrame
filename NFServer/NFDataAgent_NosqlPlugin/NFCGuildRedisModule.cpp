@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 #include "NFCGuildRedisModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 NFCGuildRedisModule::NFCGuildRedisModule(NFIPluginManager * p)
 {
@@ -41,9 +42,83 @@ bool NFCGuildRedisModule::AfterInit()
     return true;
 }
 
-bool NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid)
 {
-    pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
+    if (!pPropertyManager.get())
+    {
+        return nullptr;
+    }
+
+    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+    if (!pDriver)
+    {
+        return nullptr;
+    }
+
+    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    std::string strValue;
+    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
+    {
+        return nullptr;
+    }
+
+    NFMsg::ObjectPropertyList xMsg;
+    if (!xMsg.ParseFromString(strValue))
+    {
+        return nullptr;
+    }
+
+    if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
+    {
+        return nullptr;
+    }
+
+    return pPropertyManager;
+}
+
+NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(const NFGUID& xGuid)
+{
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
+    if (!pRecordManager.get())
+    {
+        return nullptr;
+    }
+
+    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+    if (!pDriver)
+    {
+        return nullptr;
+    }
+
+    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+    std::string strValue;
+    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
+    {
+        return nullptr;
+    }
+
+    NFMsg::ObjectRecordList xMsg;
+    if (!xMsg.ParseFromString(strValue))
+    {
+        return nullptr;
+    }
+
+    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
+    {
+        return nullptr;
+    }
+
+    return pRecordManager;
+}
+
+bool NFCGuildRedisModule::SetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+{
+    if (xGuid.IsNull())
+    {
+        return false;
+    }
+
     if (!pPropertyManager.get())
     {
         return false;
@@ -55,25 +130,34 @@ bool NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NF
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
-    std::string strValue;
-    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
-    {
-        return false;
-    }
-
     NFMsg::ObjectPropertyList xMsg;
-    if (!xMsg.ParseFromString(strValue))
+    if (!m_pCommonRedisModule->ConvertPropertyManagerToPB(pPropertyManager, xMsg, true))
     {
         return false;
     }
 
-    return m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager);
+    *xMsg.mutable_player_id() = NFINetModule::NFToPB(xGuid);
+
+    std::string strValue;
+    if (!xMsg.SerializeToString(&strValue))
+    {
+        return false;
+    }
+
+    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
+    {
+        return false;
+    }
 }
 
-bool NFCGuildRedisModule::GetGuildCacheRecordInfo(const NFGUID& xGuid, const std::string& strRecordName, NF_SHARE_PTR<NFIRecord>& pRecord)
+bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
+    if (xGuid.IsNull())
+    {
+        return false;
+    }
+
     if (!pRecordManager.get())
     {
         return false;
@@ -85,64 +169,25 @@ bool NFCGuildRedisModule::GetGuildCacheRecordInfo(const NFGUID& xGuid, const std
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
-    std::string strValue;
-    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
-    {
-        return false;
-    }
-
     NFMsg::ObjectRecordList xMsg;
-    if (!xMsg.ParseFromString(strValue))
+    if (!m_pCommonRedisModule->ConvertRecordManagerToPB(pRecordManager, xMsg, true))
     {
         return false;
     }
 
-    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
-    {
-        return false;
-    }
+    *xMsg.mutable_player_id() = NFINetModule::NFToPB(xGuid);
 
-    pRecord = pRecordManager->GetElement(strRecordName);
-    if (!pRecord.get())
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool NFCGuildRedisModule::GetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
-{
-    pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
-    if (!pRecordManager.get())
-    {
-        return false;
-    }
-
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
+    std::string strValue;
+    if (!xMsg.SerializeToString(&strValue))
     {
         return false;
     }
 
     const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
-    std::string strValue;
-    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
+    if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
     }
-
-    NFMsg::ObjectRecordList xMsg;
-    if (!xMsg.ParseFromString(strValue))
-    {
-        return false;
-    }
-
-    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
-    {
-        return false;
-    }
-
     return true;
 }
+

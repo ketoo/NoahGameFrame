@@ -22,11 +22,6 @@ public:
     virtual bool DownGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember) = 0;
     virtual bool KickGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember) = 0;
 
-    virtual bool GetGuildBaseInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager) = 0;
-    virtual bool GetGuildMemberInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIRecord>& pMemberRecord) = 0;
-    virtual bool GetGuildMemberInfo(const NFGUID& xGuildID, const NFGUID& xMmember, NFIDataList& varMemeberInfo) = 0;
-    virtual bool GetGuildMemberIDList(const NFGUID& xGuildID, std::map<std::string, int>& xMemberPos) = 0;
-
     virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList) = 0;
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID) = 0;
     virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild) = 0;

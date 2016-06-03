@@ -34,9 +34,11 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual bool GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
-    virtual bool GetGuildCacheRecordInfo(const NFGUID& xGuid, const std::string& strRecordName, NF_SHARE_PTR<NFIRecord>& pRecord);
-    virtual bool GetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetGuildCacheInfo(const NFGUID& xGuid);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetGuildCacheRecordManager(const NFGUID& xGuid);
+
+    virtual bool SetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
+    virtual bool SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager);
 
 protected:
     NFILogicClassModule* m_pLogicClassModule;
