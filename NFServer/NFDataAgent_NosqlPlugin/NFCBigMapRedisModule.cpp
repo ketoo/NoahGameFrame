@@ -86,28 +86,15 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::B
 	return false;
 }
 
-bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfoList)
+bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGridID, std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfoList)
 {
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
-	NFList<std::string>& xElementList = xLogicClass->GetConfigNameList();
-
-	std::vector<std::string> vFields;
-	std::string strID;
-	for (xElementList.First(strID); !strID.empty(); xElementList.Next(strID))
-	{
-		vFields.push_back(strID);
-
-		strID.clear();
-	}
-
-
 	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
 	if (pNoSqlDriver)
 	{
 		std::vector<std::string> vValues;
 		std::string strKey = GetGridBaseKey();
 		std::string strData;
-		if (pNoSqlDriver->HMGet(strKey, vFields, vValues))
+		if (pNoSqlDriver->HMGet(strKey, strGridID, vValues))
 		{
 			for (int i = 0; i < vValues.size(); ++i)
 			{
@@ -124,6 +111,23 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo
 	}
 
 	return false;
+}
+
+bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo)
+{
+ 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
+ 	NFList<std::string>& xElementList = xLogicClass->GetConfigNameList();
+ 	
+ 	std::vector<std::string> vFields;
+ 	std::string strID;
+ 	for (xElementList.First(strID); !strID.empty(); xElementList.Next(strID))
+ 	{
+ 		vFields.push_back(strID);
+ 	
+ 		strID.clear();
+ 	}
+
+	return GetGridBaseInfo(vFields, xBaseInfo);
 }
 
 bool NFCBigMapRedisModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList)

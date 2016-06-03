@@ -42,7 +42,7 @@ bool NFCGuildRedisModule::AfterInit()
     assert(NULL != m_pKernelModule);
 
 
-    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, NFCGuildRedisModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildRedisModule::OnObjectClassEvent);
     return true;
 }
 
@@ -55,7 +55,7 @@ int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::strin
         NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
         if (pSelf)
         {
-            SetGuildCacheInfo(self, pSelf->GetPropertyManager());
+            SetGuildCachePropertyInfo(self, pSelf->GetPropertyManager());
             SetGuildCacheRecordManager(self, pSelf->GetRecordManager());
         }
     }
@@ -67,7 +67,7 @@ int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::strin
     return 0;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCacheInfo(const NFGUID& xGuid)
+NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCachePropertyInfo(const NFGUID& xGuid)
 {
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
     if (!pPropertyManager.get())
@@ -137,7 +137,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
     return pRecordManager;
 }
 
-bool NFCGuildRedisModule::SetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
 {
     if (xGuid.IsNull())
     {

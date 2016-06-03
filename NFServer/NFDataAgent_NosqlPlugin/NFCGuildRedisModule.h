@@ -34,10 +34,10 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetGuildCacheInfo(const NFGUID& xGuid);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetGuildCachePropertyInfo(const NFGUID& xGuid);
     virtual NF_SHARE_PTR<NFIRecordManager> GetGuildCacheRecordManager(const NFGUID& xGuid);
 
-    virtual bool SetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
+    virtual bool SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
     virtual bool SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager);
 
 protected:

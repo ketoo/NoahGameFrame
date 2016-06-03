@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGuildModule.h"
+#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCMapModule
@@ -32,8 +32,6 @@ public:
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
-
-
 
 protected:
 
@@ -62,12 +60,16 @@ protected:
 	//工会申请参与地图决战活动--决定地图归属权
 	void ReqMapKingWar(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+protected:
+	void EndMapHunting(const std::string& strTitleID);
+	void EndMapKingWar(const std::string& strTitleID);
+
 private:
 	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIElementInfoModule* m_pElementInfoModule;
-	NFIGuildModule* m_pGuildModule;
+	NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 
 

@@ -8,6 +8,7 @@
 
 #include "NFCMapModule.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 /*
 
@@ -43,7 +44,7 @@ bool NFCMapModule::Init()
 	m_pKernelModule = pPluginManager->GetModule<NFIKernelModule>("NFCKernelModule");
 	m_pLogicClassModule = pPluginManager->GetModule<NFILogicClassModule>("NFCLogicClassModule");
 	m_pElementInfoModule = pPluginManager->GetModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pGuildModule = pPluginManager->GetModule<NFIGuildModule>("NFCGuildModule");
+	m_pGuildRedisModule = pPluginManager->GetModule<NFIGuildRedisModule>("NFCGuildRedisModule");
 	
     m_pGameServerNet_ServerModule = pPluginManager->GetModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
@@ -86,20 +87,21 @@ void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const 
 	
 	//find all title info
 	NFMsg::AckBigMapInfo xAckBigMapInfo;
-
-	std::string strID;
-	for (xElementList.First(strID); !strID.empty(); xElementList.Next(strID))
+	std::vector<NFMsg::BigMapGridBaseInfo> xBigMapGridBaseInfoList;
+	if (m_pBigMapRedisModule->GetGridBaseInfo(xBigMapGridBaseInfoList))
 	{
-		NFMsg::BigMapGridBaseInfo* pBigMapGridBaseInfo = xAckBigMapInfo.add_grid_base_info();
-		if (pBigMapGridBaseInfo)
+		for (std::vector<NFMsg::BigMapGridBaseInfo>::iterator it = xBigMapGridBaseInfoList.begin();
+		it != xBigMapGridBaseInfoList.end(); ++it)
 		{
-			m_pBigMapRedisModule->GetGridBaseInfo(strID, *pBigMapGridBaseInfo);
+			NFMsg::BigMapGridBaseInfo* pBigMapGridBaseInfo = xAckBigMapInfo.add_grid_base_info();
+			if (pBigMapGridBaseInfo)
+			{
+				pBigMapGridBaseInfo->CopyFrom(*it);
+			}
 		}
 
-		strID.clear();
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_BIG_MAP_INFO, xAckBigMapInfo, nPlayerID);
 	}
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_BIG_MAP_INFO, xAckBigMapInfo, nPlayerID);
 }
 
 void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -183,9 +185,19 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 	}
 
 	//get all guild information to set in grid base info
-	//m_pGuildModule->GetGuildBaseInfo()
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(nPlayerID);
+	const NFGUID xGUID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
+	const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
+	const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
+	const int nMemberCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
 
+	xGridBaseInfo.mutable_owner()->CopyFrom(NFINetModule::NFToPB(xGUID));
+	xGridBaseInfo.set_level(nLevel);
+	xGridBaseInfo.set_member_count(nMemberCount);
+	xGridBaseInfo.set_icon(strIcon);
+	xGridBaseInfo.set_resource(1000);
 
+	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
 }
 
 void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -227,7 +239,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 		return;
 	}
 
-	xGridBaseInfo.set_hurting_time(0);
+	xGridBaseInfo.set_hurting_time(NFTime::GetNowTime());
 	xGridBaseInfo.mutable_hurter()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
@@ -256,5 +268,37 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
 
 	//show msgbox
+}
+
+void NFCMapModule::EndMapHunting(const std::string& strTitleID)
+{
+	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
+	{
+		return;
+	}
+
+	xGridBaseInfo.set_hurting_time(0);
+	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(NFGUID()));
+
+	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
+
+	//show msgbox and send mail to award
+}
+
+void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
+{
+	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
+	{
+		return;
+	}
+
+	xGridBaseInfo.set_kingwar_time(0);
+	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(NFGUID()));
+
+	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
+
+	//show msgbox and send mail to award
 }
 
