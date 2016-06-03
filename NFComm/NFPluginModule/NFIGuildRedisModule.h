@@ -16,6 +16,7 @@ class NFIGuildRedisModule
 {
 
 public:
+    virtual bool GetGuildCacheInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager) = 0;
 
 
 };

@@ -45,10 +45,12 @@ bool NFCGuildModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>("NFCGuildDataModule");
-
+    m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>("NFCGuildRedisModule");
+    
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pGuildDataModule);
+    assert(NULL != m_pGuildRedisModule);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGuildModule::OnPlayerClassEvent);
 
@@ -270,23 +272,6 @@ bool NFCGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xGuildI
     return true;
 }
 
-bool NFCGuildModule::GetGuildBaseInfo( const NFGUID& self, const NFGUID& xGuildID )
-{
-	return true;
-}
-
-bool NFCGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID )
-{
-
-	return true;
-}
-
-bool NFCGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
-{
-
-	return false;
-}
-
 bool NFCGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID, int nPowerType )
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
@@ -404,6 +389,47 @@ bool NFCGuildModule::MemberOffeline( const NFGUID& self, const NFGUID& xGuild )
     return true;
 }
 
+
+bool NFCGuildModule::GetGuildBaseInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+{
+    NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
+    if (pGuildObject.get())
+    {
+        pPropertyManager = pGuildObject->GetPropertyManager();
+        if (!pPropertyManager.get())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    return m_pGuildRedisModule->GetGuildCacheInfo(xGuildID, pPropertyManager);
+}
+
+bool NFCGuildModule::GetGuildMemberInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIRecord>& pMemberRecord)
+{
+    NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
+    if (pGuildObject.get())
+    {
+        pMemberRecord = pGuildObject->GetRecordManager()->GetElement(NFrame::Guild::R_GuildMemberList());
+        return true;
+    }
+
+    return m_pGuildRedisModule->GetGuildCacheInfo(xGuildID, pPropertyManager);
+
+    return true;
+}
+
+bool NFCGuildModule::GetGuildMemberInfo(const NFGUID& xGuildID, const NFGUID& xMmember, NFIDataList& varMemeberInfo)
+{
+    return true;
+}
+
+bool NFCGuildModule::GetGuildMemberIDList(const NFGUID& xGuildID, std::map<std::string, int>& xMemberPos)
+{
+    return true;
+}
 
 void NFCGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {

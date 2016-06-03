@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 
 class NFCGuildModule
     : public NFIGuildModule
@@ -44,9 +45,10 @@ public:
     virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild);
 
 	//////////////////////其次考虑参数////////////////////////////////////////////////////
-	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
+	virtual bool GetGuildBaseInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
+	virtual bool GetGuildMemberInfo(const NFGUID& xGuildID, NF_SHARE_PTR<NFIRecord>& pMemberRecord);
+    virtual bool GetGuildMemberInfo(const NFGUID& xGuildID, const NFGUID& xMmember, NFIDataList& varMemeberInfo);
+    virtual bool GetGuildMemberIDList(const NFGUID& xGuildID, std::map<std::string, int>& xMemberPos);
 
 protected:
 	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -63,6 +65,7 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIGuildDataModule* m_pGuildDataModule;
+    NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILogModule* m_pLogModule;
 
