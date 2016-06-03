@@ -702,7 +702,7 @@ bool FileProcess::LoadLogicClass(std::string strFile)
 				return false;
 			}
 
-			fwrite("\n", sizeof("\n"), 1, mysqlClassWriter);
+			fwrite("\n", 1, 1, mysqlClassWriter);
 			if (nodeElement == classElement->LastChildElement())
 			{
 				break;
