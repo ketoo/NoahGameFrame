@@ -4,13 +4,7 @@
     <ClInclude Include="NFWorldLogicPlugin.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
     <ClInclude Include="NFCWSSwichServerModule.h" />
-    <ClInclude Include="NFCTeamBroadcastModule.h">
-      <Filter>Team</Filter>
-    </ClInclude>
     <ClInclude Include="NFCTeamModule.h">
-      <Filter>Team</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCTeamDataModule.h">
       <Filter>Team</Filter>
     </ClInclude>
   </ItemGroup>
@@ -19,13 +13,7 @@
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
     <ClCompile Include="NFCWSSwichServerModule.cpp" />
-    <ClCompile Include="NFCTeamBroadcastModule.cpp">
-      <Filter>Team</Filter>
-    </ClCompile>
     <ClCompile Include="NFCTeamModule.cpp">
-      <Filter>Team</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCTeamDataModule.cpp">
       <Filter>Team</Filter>
     </ClCompile>
   </ItemGroup>
