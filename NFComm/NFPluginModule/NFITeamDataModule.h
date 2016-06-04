@@ -22,6 +22,8 @@ public:
 	virtual const NFGUID CreateTeam(const NFGUID& xPlayeID, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP, const int nOffLine = 1) = 0;
 	virtual const bool DeleteTeam(const NFGUID& xTeam) = 0;
     virtual NF_SHARE_PTR<NFIObject> GetTeam(const NFGUID& xTeam) = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetTeamPropertyManager(const NFGUID& xTeam) = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetTeamRecordManager(const NFGUID& xTeam) = 0;
     virtual bool GetPlayerGameID(const NFGUID& self, int& nGameID) = 0;
 
 protected:
