@@ -12,6 +12,7 @@
 #include "NFCGuildRedisModule.h"
 #include "NFCBigMapRedisModule.h"
 #include "NFCCommonRedisModule.h"
+#include "NFCMailRedisModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -45,12 +46,14 @@ void NFDataAgent_NosqlPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFCPlayerRedisModule)
 	REGISTER_MODULE(pPluginManager, NFCGuildRedisModule)
     REGISTER_MODULE(pPluginManager, NFCBigMapRedisModule)
-    REGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
+	REGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
+	REGISTER_MODULE(pPluginManager, NFCMailRedisModule)
 }
 
 void NFDataAgent_NosqlPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFCMailRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
     UNREGISTER_MODULE(pPluginManager, NFCBigMapRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFCGuildRedisModule)
 	UNREGISTER_MODULE(pPluginManager, NFCPlayerRedisModule)

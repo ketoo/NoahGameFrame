@@ -278,7 +278,7 @@ bool NFCCommonRedisModule::RemoveCacheRecordInfo(const NFGUID& self, const std::
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HDel(strKey, self.ToString()))
     {
