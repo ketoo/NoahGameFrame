@@ -15,6 +15,9 @@ class NFICommonRedisModule
     : public NFILogicModule
 {
 public:
+	virtual std::string GetPropertyCacheKey(const std::string& strClassName) = 0;
+	virtual std::string GetRecordCacheKey(const std::string& strClassName) = 0;
+
     virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName) = 0;
     virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName) = 0;
 
