@@ -38,7 +38,7 @@ bool NFCNoSqlModule::AfterInit()
     return true;
 }
 
-bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCNoSqlModule::Execute()
 {
     return true;
 }

@@ -46,7 +46,7 @@ bool NFCBigMapRedisModule::AfterInit()
 	return true;
 }
 
-bool NFCBigMapRedisModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCBigMapRedisModule::Execute()
 {
 	return true;
 }

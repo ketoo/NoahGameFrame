@@ -22,7 +22,7 @@ bool NFCRankRedisModule::Shut()
 	return false;
 }
 
-bool NFCRankRedisModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCRankRedisModule::Execute()
 {
 	return false;
 }
