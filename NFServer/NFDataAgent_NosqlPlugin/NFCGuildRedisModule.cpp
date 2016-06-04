@@ -69,79 +69,49 @@ int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::strin
 
 NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCachePropertyInfo(const NFGUID& xGuid)
 {
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
-    if (!pPropertyManager.get())
-    {
-        return nullptr;
-    }
-
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
-    {
-        return nullptr;
-    }
-
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
-    std::string strValue;
-    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
-    {
-        return nullptr;
-    }
-
-    NFMsg::ObjectPropertyList xMsg;
-    if (!xMsg.ParseFromString(strValue))
-    {
-        return nullptr;
-    }
-
-    if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
-    {
-        return nullptr;
-    }
-
-    return pPropertyManager;
+    return m_pCommonRedisModule->GetCachePropertyInfo(xGuid, NFrame::Guild::ThisName());
 }
 
 bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIPropertyManager>>& xPMList)
 {
-	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-	if (!pDriver)
-	{
-		return false;
-	}
+    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+    if (!pDriver)
+    {
+        return false;
+    }
 
-	const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
-	std::vector<std::string> strValueList;
-	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
-	{
-		return nullptr;
-	}
+    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    std::vector<std::string> strValueList;
+    if (!pDriver->HMGet(strKey, xGuidList, strValueList))
+    {
+        return nullptr;
+    }
 
-	for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
-	{
-		std::string& strValue = *it;
+    for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
+    {
+        std::string& strValue = *it;
 
-		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
-		if (!pPropertyManager.get())
-		{
-			continue;
-		}
+        NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
+        if (!pPropertyManager.get())
+        {
+            continue;
+        }
 
-		NFMsg::ObjectPropertyList xMsg;
-		if (!xMsg.ParseFromString(strValue))
-		{
-			continue;
-		}
+        NFMsg::ObjectPropertyList xMsg;
+        if (!xMsg.ParseFromString(strValue))
+        {
+            continue;
+        }
 
-		if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
-		{
-			continue;
-		}
+        if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
+        {
+            continue;
+        }
 
-		xPMList.push_back(pPropertyManager);
-	}
+        xPMList.push_back(pPropertyManager);
+    }
 
-	return true;
+    return true;
 }
 
 NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(const NFGUID& xGuid)
