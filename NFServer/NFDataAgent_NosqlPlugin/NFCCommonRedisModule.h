@@ -30,8 +30,6 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual std::string GetPropertyCacheKey(const std::string& strClassName);
-    virtual std::string GetRecordCacheKey(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName);
 
@@ -40,6 +38,10 @@ public:
 
     virtual bool ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, NFMsg::ObjectPropertyList& xMsg, const bool bCheckCache = true);
     virtual bool ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList& xMsg, const bool bCheckCache = true);
+
+protected:
+	std::string GetPropertyCacheKey(const std::string& strClassName);
+	std::string GetRecordCacheKey(const std::string& strClassName);
 
 protected:
     NFILogicClassModule* m_pLogicClassModule;
