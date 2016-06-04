@@ -217,6 +217,9 @@ const ::google::protobuf::EnumDescriptor* ReqAckOprTeamMember_EGTeamMemberOprTyp
 const ::google::protobuf::Descriptor* ReqInviteTeamMember_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqInviteTeamMember_reflection_ = NULL;
+const ::google::protobuf::Descriptor* GridGuildBaseInfo_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  GridGuildBaseInfo_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqBigMapGridInfo_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqBigMapGridInfo_reflection_ = NULL;
@@ -1343,7 +1346,26 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqInviteTeamMember));
-  ReqBigMapGridInfo_descriptor_ = file->message_type(61);
+  GridGuildBaseInfo_descriptor_ = file->message_type(61);
+  static const int GridGuildBaseInfo_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, count_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, resource_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, icon_),
+  };
+  GridGuildBaseInfo_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      GridGuildBaseInfo_descriptor_,
+      GridGuildBaseInfo::default_instance_,
+      GridGuildBaseInfo_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(GridGuildBaseInfo));
+  ReqBigMapGridInfo_descriptor_ = file->message_type(62);
   static const int ReqBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBigMapGridInfo, map_title_id_),
   };
@@ -1358,14 +1380,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapGridInfo));
-  BigMapGridBaseInfo_descriptor_ = file->message_type(62);
-  static const int BigMapGridBaseInfo_offsets_[10] = {
+  BigMapGridBaseInfo_descriptor_ = file->message_type(63);
+  static const int BigMapGridBaseInfo_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, owner_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, member_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, resource_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, icon_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, guild_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, kingwar_time_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, kingwarrer_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, hurting_time_),
@@ -1382,7 +1400,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridBaseInfo));
-  BigMapLeaveMsg_descriptor_ = file->message_type(63);
+  BigMapLeaveMsg_descriptor_ = file->message_type(64);
   static const int BigMapLeaveMsg_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_name_),
@@ -1401,18 +1419,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapLeaveMsg));
-  BigMapWarHistory_descriptor_ = file->message_type(64);
-  static const int BigMapWarHistory_offsets_[12] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_war_resource_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_icon_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_war_resource_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_icon_),
+  BigMapWarHistory_descriptor_ = file->message_type(65);
+  static const int BigMapWarHistory_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_info_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, winner_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, war_time_),
   };
@@ -1427,9 +1437,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapWarHistory));
-  BigMapGridDetailInfo_descriptor_ = file->message_type(65);
-  static const int BigMapGridDetailInfo_offsets_[3] = {
+  BigMapGridDetailInfo_descriptor_ = file->message_type(66);
+  static const int BigMapGridDetailInfo_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, grid_base_info_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, stay_guid_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, leave_msg_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, war_history_),
   };
@@ -1444,7 +1455,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridDetailInfo));
-  AckBigMapGridInfo_descriptor_ = file->message_type(66);
+  AckBigMapGridInfo_descriptor_ = file->message_type(67);
   static const int AckBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapGridInfo, map_data_),
   };
@@ -1459,7 +1470,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapGridInfo));
-  ReqBigMapInfo_descriptor_ = file->message_type(67);
+  ReqBigMapInfo_descriptor_ = file->message_type(68);
   static const int ReqBigMapInfo_offsets_[1] = {
   };
   ReqBigMapInfo_reflection_ =
@@ -1473,7 +1484,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapInfo));
-  AckBigMapInfo_descriptor_ = file->message_type(68);
+  AckBigMapInfo_descriptor_ = file->message_type(69);
   static const int AckBigMapInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapInfo, grid_base_info_),
   };
@@ -1488,9 +1499,10 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapInfo));
-  ReqHoldMapGrid_descriptor_ = file->message_type(69);
-  static const int ReqHoldMapGrid_offsets_[1] = {
+  ReqHoldMapGrid_descriptor_ = file->message_type(70);
+  static const int ReqHoldMapGrid_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoldMapGrid, map_title_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoldMapGrid, guild_id_),
   };
   ReqHoldMapGrid_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1503,7 +1515,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqHoldMapGrid));
-  AckHoldMapGrid_descriptor_ = file->message_type(70);
+  AckHoldMapGrid_descriptor_ = file->message_type(71);
   static const int AckHoldMapGrid_offsets_[1] = {
   };
   AckHoldMapGrid_reflection_ =
@@ -1517,7 +1529,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckHoldMapGrid));
-  ReqLeaveMapMsg_descriptor_ = file->message_type(71);
+  ReqLeaveMapMsg_descriptor_ = file->message_type(72);
   static const int ReqLeaveMapMsg_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, map_title_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, leave_msg_),
@@ -1533,7 +1545,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqLeaveMapMsg));
-  AckLeaveMapMsg_descriptor_ = file->message_type(72);
+  AckLeaveMapMsg_descriptor_ = file->message_type(73);
   static const int AckLeaveMapMsg_offsets_[1] = {
   };
   AckLeaveMapMsg_reflection_ =
@@ -1547,7 +1559,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckLeaveMapMsg));
-  ReqGetMapAward_descriptor_ = file->message_type(73);
+  ReqGetMapAward_descriptor_ = file->message_type(74);
   static const int ReqGetMapAward_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqGetMapAward, map_title_id_),
   };
@@ -1562,7 +1574,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqGetMapAward));
-  AckGetMapAward_descriptor_ = file->message_type(74);
+  AckGetMapAward_descriptor_ = file->message_type(75);
   static const int AckGetMapAward_offsets_[1] = {
   };
   AckGetMapAward_reflection_ =
@@ -1576,7 +1588,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckGetMapAward));
-  ReqMapHunting_descriptor_ = file->message_type(75);
+  ReqMapHunting_descriptor_ = file->message_type(76);
   static const int ReqMapHunting_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapHunting, map_title_id_),
   };
@@ -1591,7 +1603,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapHunting));
-  AckMapHunting_descriptor_ = file->message_type(76);
+  AckMapHunting_descriptor_ = file->message_type(77);
   static const int AckMapHunting_offsets_[1] = {
   };
   AckMapHunting_reflection_ =
@@ -1605,7 +1617,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMapHunting));
-  ReqMapKingWar_descriptor_ = file->message_type(77);
+  ReqMapKingWar_descriptor_ = file->message_type(78);
   static const int ReqMapKingWar_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapKingWar, map_title_id_),
   };
@@ -1620,7 +1632,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapKingWar));
-  AckMapKingWar_descriptor_ = file->message_type(78);
+  AckMapKingWar_descriptor_ = file->message_type(79);
   static const int AckMapKingWar_offsets_[1] = {
   };
   AckMapKingWar_reflection_ =
@@ -1770,6 +1782,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqAckOprTeamMember_descriptor_, &ReqAckOprTeamMember::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqInviteTeamMember_descriptor_, &ReqInviteTeamMember::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    GridGuildBaseInfo_descriptor_, &GridGuildBaseInfo::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqBigMapGridInfo_descriptor_, &ReqBigMapGridInfo::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1935,6 +1949,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqAckOprTeamMember_reflection_;
   delete ReqInviteTeamMember::default_instance_;
   delete ReqInviteTeamMember_reflection_;
+  delete GridGuildBaseInfo::default_instance_;
+  delete GridGuildBaseInfo_reflection_;
   delete ReqBigMapGridInfo::default_instance_;
   delete ReqBigMapGridInfo_reflection_;
   delete BigMapGridBaseInfo::default_instance_;
@@ -2173,40 +2189,40 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "qInviteTeamMember\022\035\n\007team_id\030\001 \002(\0132\014.NFM"
     "sg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Ident\022"
     "&\n\020invite_target_id\030\003 \002(\0132\014.NFMsg.Ident\""
-    ")\n\021ReqBigMapGridInfo\022\024\n\014map_title_id\030\001 \003"
-    "(\014\"\356\001\n\022BigMapGridBaseInfo\022\n\n\002id\030\001 \002(\014\022\033\n"
-    "\005owner\030\002 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\003 \002("
-    "\005\022\024\n\014member_count\030\004 \002(\005\022\020\n\010resource\030\005 \002("
-    "\005\022\014\n\004icon\030\006 \002(\014\022\024\n\014kingwar_time\030\n \002(\005\022 \n"
-    "\nkingwarrer\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurti"
-    "ng_time\030\024 \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Id"
-    "ent\"z\n\016BigMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_da"
-    "ta\030\003 \002(\014\022\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_leve"
-    "l\030\005 \002(\005\"\252\002\n\020BigMapWarHistory\022\034\n\006red_id\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\021\n\tred_level\030\002 \002(\005\022\021\n"
-    "\tred_count\030\003 \002(\005\022\030\n\020red_war_resource\030\004 \002"
-    "(\005\022\020\n\010red_icon\030\005 \002(\014\022\035\n\007blue_id\030\013 \002(\0132\014."
-    "NFMsg.Ident\022\022\n\nblue_level\030\014 \002(\005\022\022\n\nblue_"
-    "count\030\r \002(\005\022\031\n\021blue_war_resource\030\016 \002(\005\022\021"
-    "\n\tblue_icon\030\017 \002(\014\022\037\n\twinner_id\030\024 \002(\0132\014.N"
-    "FMsg.Ident\022\020\n\010war_time\030\025 \002(\005\"\241\001\n\024BigMapG"
-    "ridDetailInfo\0221\n\016grid_base_info\030\001 \002(\0132\031."
-    "NFMsg.BigMapGridBaseInfo\022(\n\tleave_msg\030\002 "
-    "\003(\0132\025.NFMsg.BigMapLeaveMsg\022,\n\013war_histor"
-    "y\030\003 \003(\0132\027.NFMsg.BigMapWarHistory\"B\n\021AckB"
-    "igMapGridInfo\022-\n\010map_data\030\001 \003(\0132\033.NFMsg."
-    "BigMapGridDetailInfo\"\017\n\rReqBigMapInfo\"B\n"
-    "\rAckBigMapInfo\0221\n\016grid_base_info\030\001 \003(\0132\031"
-    ".NFMsg.BigMapGridBaseInfo\"&\n\016ReqHoldMapG"
-    "rid\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckHoldMapG"
-    "rid\"P\n\016ReqLeaveMapMsg\022\024\n\014map_title_id\030\001 "
-    "\002(\014\022(\n\tleave_msg\030\002 \002(\0132\025.NFMsg.BigMapLea"
-    "veMsg\"\020\n\016AckLeaveMapMsg\"&\n\016ReqGetMapAwar"
-    "d\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckGetMapAwar"
-    "d\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \002(\014"
-    "\"\017\n\rAckMapHunting\"%\n\rReqMapKingWar\022\024\n\014ma"
-    "p_title_id\030\001 \002(\014\"\017\n\rAckMapKingWar", 8993);
+    "k\n\021GridGuildBaseInfo\022\030\n\002id\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\r\n\005level\030\002 \002(\005\022\r\n\005count\030\003 \002(\005\022\020\n\010"
+    "resource\030\004 \002(\005\022\014\n\004icon\030\005 \002(\014\")\n\021ReqBigMa"
+    "pGridInfo\022\024\n\014map_title_id\030\001 \003(\014\"\272\001\n\022BigM"
+    "apGridBaseInfo\022\n\n\002id\030\001 \002(\014\022,\n\nguild_info"
+    "\030\002 \002(\0132\030.NFMsg.GridGuildBaseInfo\022\024\n\014king"
+    "war_time\030\n \002(\005\022 \n\nkingwarrer\030\013 \002(\0132\014.NFM"
+    "sg.Ident\022\024\n\014hurting_time\030\024 \002(\005\022\034\n\006hurter"
+    "\030\025 \002(\0132\014.NFMsg.Ident\"z\n\016BigMapLeaveMsg\022\033"
+    "\n\005owner\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nowner_nam"
+    "e\030\002 \002(\014\022\020\n\010msg_data\030\003 \002(\014\022\020\n\010msg_time\030\004 "
+    "\002(\005\022\023\n\013owner_level\030\005 \002(\005\"\236\001\n\020BigMapWarHi"
+    "story\022*\n\010red_info\030\001 \002(\0132\030.NFMsg.GridGuil"
+    "dBaseInfo\022+\n\tblue_info\030\002 \002(\0132\030.NFMsg.Gri"
+    "dGuildBaseInfo\022\037\n\twinner_id\030\n \002(\0132\014.NFMs"
+    "g.Ident\022\020\n\010war_time\030\013 \002(\005\"\323\001\n\024BigMapGrid"
+    "DetailInfo\0221\n\016grid_base_info\030\001 \002(\0132\031.NFM"
+    "sg.BigMapGridBaseInfo\0220\n\016stay_guid_list\030"
+    "\002 \003(\0132\030.NFMsg.GridGuildBaseInfo\022(\n\tleave"
+    "_msg\030\003 \003(\0132\025.NFMsg.BigMapLeaveMsg\022,\n\013war"
+    "_history\030\004 \003(\0132\027.NFMsg.BigMapWarHistory\""
+    "B\n\021AckBigMapGridInfo\022-\n\010map_data\030\001 \003(\0132\033"
+    ".NFMsg.BigMapGridDetailInfo\"\017\n\rReqBigMap"
+    "Info\"B\n\rAckBigMapInfo\0221\n\016grid_base_info\030"
+    "\001 \003(\0132\031.NFMsg.BigMapGridBaseInfo\"F\n\016ReqH"
+    "oldMapGrid\022\024\n\014map_title_id\030\001 \002(\014\022\036\n\010guil"
+    "d_id\030\002 \002(\0132\014.NFMsg.Ident\"\020\n\016AckHoldMapGr"
+    "id\"P\n\016ReqLeaveMapMsg\022\024\n\014map_title_id\030\001 \002"
+    "(\014\022(\n\tleave_msg\030\002 \002(\0132\025.NFMsg.BigMapLeav"
+    "eMsg\"\020\n\016AckLeaveMapMsg\"&\n\016ReqGetMapAward"
+    "\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckGetMapAward"
+    "\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \002(\014\""
+    "\017\n\rAckMapHunting\"%\n\rReqMapKingWar\022\024\n\014map"
+    "_title_id\030\001 \002(\014\"\017\n\rAckMapKingWar", 8992);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -2271,6 +2287,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAckLeaveTeam::default_instance_ = new ReqAckLeaveTeam();
   ReqAckOprTeamMember::default_instance_ = new ReqAckOprTeamMember();
   ReqInviteTeamMember::default_instance_ = new ReqInviteTeamMember();
+  GridGuildBaseInfo::default_instance_ = new GridGuildBaseInfo();
   ReqBigMapGridInfo::default_instance_ = new ReqBigMapGridInfo();
   BigMapGridBaseInfo::default_instance_ = new BigMapGridBaseInfo();
   BigMapLeaveMsg::default_instance_ = new BigMapLeaveMsg();
@@ -2351,6 +2368,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqAckLeaveTeam::default_instance_->InitAsDefaultInstance();
   ReqAckOprTeamMember::default_instance_->InitAsDefaultInstance();
   ReqInviteTeamMember::default_instance_->InitAsDefaultInstance();
+  GridGuildBaseInfo::default_instance_->InitAsDefaultInstance();
   ReqBigMapGridInfo::default_instance_->InitAsDefaultInstance();
   BigMapGridBaseInfo::default_instance_->InitAsDefaultInstance();
   BigMapLeaveMsg::default_instance_->InitAsDefaultInstance();
@@ -21468,6 +21486,391 @@ void ReqInviteTeamMember::Swap(ReqInviteTeamMember* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int GridGuildBaseInfo::kIdFieldNumber;
+const int GridGuildBaseInfo::kLevelFieldNumber;
+const int GridGuildBaseInfo::kCountFieldNumber;
+const int GridGuildBaseInfo::kResourceFieldNumber;
+const int GridGuildBaseInfo::kIconFieldNumber;
+#endif  // !_MSC_VER
+
+GridGuildBaseInfo::GridGuildBaseInfo()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void GridGuildBaseInfo::InitAsDefaultInstance() {
+  id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+GridGuildBaseInfo::GridGuildBaseInfo(const GridGuildBaseInfo& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void GridGuildBaseInfo::SharedCtor() {
+  _cached_size_ = 0;
+  id_ = NULL;
+  level_ = 0;
+  count_ = 0;
+  resource_ = 0;
+  icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+GridGuildBaseInfo::~GridGuildBaseInfo() {
+  SharedDtor();
+}
+
+void GridGuildBaseInfo::SharedDtor() {
+  if (icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete icon_;
+  }
+  if (this != default_instance_) {
+    delete id_;
+  }
+}
+
+void GridGuildBaseInfo::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* GridGuildBaseInfo::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GridGuildBaseInfo_descriptor_;
+}
+
+const GridGuildBaseInfo& GridGuildBaseInfo::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+GridGuildBaseInfo* GridGuildBaseInfo::default_instance_ = NULL;
+
+GridGuildBaseInfo* GridGuildBaseInfo::New() const {
+  return new GridGuildBaseInfo;
+}
+
+void GridGuildBaseInfo::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_id()) {
+      if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+    }
+    level_ = 0;
+    count_ = 0;
+    resource_ = 0;
+    if (has_icon()) {
+      if (icon_ != &::google::protobuf::internal::kEmptyString) {
+        icon_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool GridGuildBaseInfo::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_level;
+        break;
+      }
+
+      // required int32 level = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &level_)));
+          set_has_level();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_count;
+        break;
+      }
+
+      // required int32 count = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_count:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &count_)));
+          set_has_count();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_resource;
+        break;
+      }
+
+      // required int32 resource = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_resource:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &resource_)));
+          set_has_resource();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_icon;
+        break;
+      }
+
+      // required bytes icon = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_icon:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_icon()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void GridGuildBaseInfo::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->id(), output);
+  }
+
+  // required int32 level = 2;
+  if (has_level()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
+  }
+
+  // required int32 count = 3;
+  if (has_count()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->count(), output);
+  }
+
+  // required int32 resource = 4;
+  if (has_resource()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->resource(), output);
+  }
+
+  // required bytes icon = 5;
+  if (has_icon()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      5, this->icon(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* GridGuildBaseInfo::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->id(), target);
+  }
+
+  // required int32 level = 2;
+  if (has_level()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+  }
+
+  // required int32 count = 3;
+  if (has_count()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->count(), target);
+  }
+
+  // required int32 resource = 4;
+  if (has_resource()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->resource(), target);
+  }
+
+  // required bytes icon = 5;
+  if (has_icon()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        5, this->icon(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int GridGuildBaseInfo::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->id());
+    }
+
+    // required int32 level = 2;
+    if (has_level()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->level());
+    }
+
+    // required int32 count = 3;
+    if (has_count()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->count());
+    }
+
+    // required int32 resource = 4;
+    if (has_resource()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->resource());
+    }
+
+    // required bytes icon = 5;
+    if (has_icon()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->icon());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GridGuildBaseInfo::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const GridGuildBaseInfo* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const GridGuildBaseInfo*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void GridGuildBaseInfo::MergeFrom(const GridGuildBaseInfo& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      mutable_id()->::NFMsg::Ident::MergeFrom(from.id());
+    }
+    if (from.has_level()) {
+      set_level(from.level());
+    }
+    if (from.has_count()) {
+      set_count(from.count());
+    }
+    if (from.has_resource()) {
+      set_resource(from.resource());
+    }
+    if (from.has_icon()) {
+      set_icon(from.icon());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void GridGuildBaseInfo::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GridGuildBaseInfo::CopyFrom(const GridGuildBaseInfo& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GridGuildBaseInfo::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  if (has_id()) {
+    if (!this->id().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void GridGuildBaseInfo::Swap(GridGuildBaseInfo* other) {
+  if (other != this) {
+    std::swap(id_, other->id_);
+    std::swap(level_, other->level_);
+    std::swap(count_, other->count_);
+    std::swap(resource_, other->resource_);
+    std::swap(icon_, other->icon_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata GridGuildBaseInfo::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = GridGuildBaseInfo_descriptor_;
+  metadata.reflection = GridGuildBaseInfo_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int ReqBigMapGridInfo::kMapTitleIdFieldNumber;
 #endif  // !_MSC_VER
 
@@ -21670,11 +22073,7 @@ void ReqBigMapGridInfo::Swap(ReqBigMapGridInfo* other) {
 
 #ifndef _MSC_VER
 const int BigMapGridBaseInfo::kIdFieldNumber;
-const int BigMapGridBaseInfo::kOwnerFieldNumber;
-const int BigMapGridBaseInfo::kLevelFieldNumber;
-const int BigMapGridBaseInfo::kMemberCountFieldNumber;
-const int BigMapGridBaseInfo::kResourceFieldNumber;
-const int BigMapGridBaseInfo::kIconFieldNumber;
+const int BigMapGridBaseInfo::kGuildInfoFieldNumber;
 const int BigMapGridBaseInfo::kKingwarTimeFieldNumber;
 const int BigMapGridBaseInfo::kKingwarrerFieldNumber;
 const int BigMapGridBaseInfo::kHurtingTimeFieldNumber;
@@ -21687,7 +22086,7 @@ BigMapGridBaseInfo::BigMapGridBaseInfo()
 }
 
 void BigMapGridBaseInfo::InitAsDefaultInstance() {
-  owner_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  guild_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(&::NFMsg::GridGuildBaseInfo::default_instance());
   kingwarrer_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
   hurter_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
@@ -21701,11 +22100,7 @@ BigMapGridBaseInfo::BigMapGridBaseInfo(const BigMapGridBaseInfo& from)
 void BigMapGridBaseInfo::SharedCtor() {
   _cached_size_ = 0;
   id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  owner_ = NULL;
-  level_ = 0;
-  member_count_ = 0;
-  resource_ = 0;
-  icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  guild_info_ = NULL;
   kingwar_time_ = 0;
   kingwarrer_ = NULL;
   hurting_time_ = 0;
@@ -21721,11 +22116,8 @@ void BigMapGridBaseInfo::SharedDtor() {
   if (id_ != &::google::protobuf::internal::kEmptyString) {
     delete id_;
   }
-  if (icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete icon_;
-  }
   if (this != default_instance_) {
-    delete owner_;
+    delete guild_info_;
     delete kingwarrer_;
     delete hurter_;
   }
@@ -21759,23 +22151,13 @@ void BigMapGridBaseInfo::Clear() {
         id_->clear();
       }
     }
-    if (has_owner()) {
-      if (owner_ != NULL) owner_->::NFMsg::Ident::Clear();
-    }
-    level_ = 0;
-    member_count_ = 0;
-    resource_ = 0;
-    if (has_icon()) {
-      if (icon_ != &::google::protobuf::internal::kEmptyString) {
-        icon_->clear();
-      }
+    if (has_guild_info()) {
+      if (guild_info_ != NULL) guild_info_->::NFMsg::GridGuildBaseInfo::Clear();
     }
     kingwar_time_ = 0;
     if (has_kingwarrer()) {
       if (kingwarrer_ != NULL) kingwarrer_->::NFMsg::Ident::Clear();
     }
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     hurting_time_ = 0;
     if (has_hurter()) {
       if (hurter_ != NULL) hurter_->::NFMsg::Ident::Clear();
@@ -21800,79 +22182,17 @@ bool BigMapGridBaseInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_owner;
+        if (input->ExpectTag(18)) goto parse_guild_info;
         break;
       }
 
-      // required .NFMsg.Ident owner = 2;
+      // required .NFMsg.GridGuildBaseInfo guild_info = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_owner:
+         parse_guild_info:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_owner()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(24)) goto parse_level;
-        break;
-      }
-
-      // required int32 level = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_level:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &level_)));
-          set_has_level();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(32)) goto parse_member_count;
-        break;
-      }
-
-      // required int32 member_count = 4;
-      case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_member_count:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &member_count_)));
-          set_has_member_count();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(40)) goto parse_resource;
-        break;
-      }
-
-      // required int32 resource = 5;
-      case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_resource:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &resource_)));
-          set_has_resource();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(50)) goto parse_icon;
-        break;
-      }
-
-      // required bytes icon = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_icon:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_icon()));
+               input, mutable_guild_info()));
         } else {
           goto handle_uninterpreted;
         }
@@ -21964,31 +22284,10 @@ void BigMapGridBaseInfo::SerializeWithCachedSizes(
       1, this->id(), output);
   }
 
-  // required .NFMsg.Ident owner = 2;
-  if (has_owner()) {
+  // required .NFMsg.GridGuildBaseInfo guild_info = 2;
+  if (has_guild_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->owner(), output);
-  }
-
-  // required int32 level = 3;
-  if (has_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->level(), output);
-  }
-
-  // required int32 member_count = 4;
-  if (has_member_count()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->member_count(), output);
-  }
-
-  // required int32 resource = 5;
-  if (has_resource()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->resource(), output);
-  }
-
-  // required bytes icon = 6;
-  if (has_icon()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      6, this->icon(), output);
+      2, this->guild_info(), output);
   }
 
   // required int32 kingwar_time = 10;
@@ -22028,33 +22327,11 @@ void BigMapGridBaseInfo::SerializeWithCachedSizes(
         1, this->id(), target);
   }
 
-  // required .NFMsg.Ident owner = 2;
-  if (has_owner()) {
+  // required .NFMsg.GridGuildBaseInfo guild_info = 2;
+  if (has_guild_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->owner(), target);
-  }
-
-  // required int32 level = 3;
-  if (has_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->level(), target);
-  }
-
-  // required int32 member_count = 4;
-  if (has_member_count()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->member_count(), target);
-  }
-
-  // required int32 resource = 5;
-  if (has_resource()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->resource(), target);
-  }
-
-  // required bytes icon = 6;
-  if (has_icon()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        6, this->icon(), target);
+        2, this->guild_info(), target);
   }
 
   // required int32 kingwar_time = 10;
@@ -22099,39 +22376,11 @@ int BigMapGridBaseInfo::ByteSize() const {
           this->id());
     }
 
-    // required .NFMsg.Ident owner = 2;
-    if (has_owner()) {
+    // required .NFMsg.GridGuildBaseInfo guild_info = 2;
+    if (has_guild_info()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->owner());
-    }
-
-    // required int32 level = 3;
-    if (has_level()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->level());
-    }
-
-    // required int32 member_count = 4;
-    if (has_member_count()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->member_count());
-    }
-
-    // required int32 resource = 5;
-    if (has_resource()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->resource());
-    }
-
-    // required bytes icon = 6;
-    if (has_icon()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->icon());
+          this->guild_info());
     }
 
     // required int32 kingwar_time = 10;
@@ -22148,8 +22397,6 @@ int BigMapGridBaseInfo::ByteSize() const {
           this->kingwarrer());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // required int32 hurting_time = 20;
     if (has_hurting_time()) {
       total_size += 2 +
@@ -22194,20 +22441,8 @@ void BigMapGridBaseInfo::MergeFrom(const BigMapGridBaseInfo& from) {
     if (from.has_id()) {
       set_id(from.id());
     }
-    if (from.has_owner()) {
-      mutable_owner()->::NFMsg::Ident::MergeFrom(from.owner());
-    }
-    if (from.has_level()) {
-      set_level(from.level());
-    }
-    if (from.has_member_count()) {
-      set_member_count(from.member_count());
-    }
-    if (from.has_resource()) {
-      set_resource(from.resource());
-    }
-    if (from.has_icon()) {
-      set_icon(from.icon());
+    if (from.has_guild_info()) {
+      mutable_guild_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.guild_info());
     }
     if (from.has_kingwar_time()) {
       set_kingwar_time(from.kingwar_time());
@@ -22215,8 +22450,6 @@ void BigMapGridBaseInfo::MergeFrom(const BigMapGridBaseInfo& from) {
     if (from.has_kingwarrer()) {
       mutable_kingwarrer()->::NFMsg::Ident::MergeFrom(from.kingwarrer());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_hurting_time()) {
       set_hurting_time(from.hurting_time());
     }
@@ -22240,10 +22473,10 @@ void BigMapGridBaseInfo::CopyFrom(const BigMapGridBaseInfo& from) {
 }
 
 bool BigMapGridBaseInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
+  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
 
-  if (has_owner()) {
-    if (!this->owner().IsInitialized()) return false;
+  if (has_guild_info()) {
+    if (!this->guild_info().IsInitialized()) return false;
   }
   if (has_kingwarrer()) {
     if (!this->kingwarrer().IsInitialized()) return false;
@@ -22257,11 +22490,7 @@ bool BigMapGridBaseInfo::IsInitialized() const {
 void BigMapGridBaseInfo::Swap(BigMapGridBaseInfo* other) {
   if (other != this) {
     std::swap(id_, other->id_);
-    std::swap(owner_, other->owner_);
-    std::swap(level_, other->level_);
-    std::swap(member_count_, other->member_count_);
-    std::swap(resource_, other->resource_);
-    std::swap(icon_, other->icon_);
+    std::swap(guild_info_, other->guild_info_);
     std::swap(kingwar_time_, other->kingwar_time_);
     std::swap(kingwarrer_, other->kingwarrer_);
     std::swap(hurting_time_, other->hurting_time_);
@@ -22677,16 +22906,8 @@ void BigMapLeaveMsg::Swap(BigMapLeaveMsg* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int BigMapWarHistory::kRedIdFieldNumber;
-const int BigMapWarHistory::kRedLevelFieldNumber;
-const int BigMapWarHistory::kRedCountFieldNumber;
-const int BigMapWarHistory::kRedWarResourceFieldNumber;
-const int BigMapWarHistory::kRedIconFieldNumber;
-const int BigMapWarHistory::kBlueIdFieldNumber;
-const int BigMapWarHistory::kBlueLevelFieldNumber;
-const int BigMapWarHistory::kBlueCountFieldNumber;
-const int BigMapWarHistory::kBlueWarResourceFieldNumber;
-const int BigMapWarHistory::kBlueIconFieldNumber;
+const int BigMapWarHistory::kRedInfoFieldNumber;
+const int BigMapWarHistory::kBlueInfoFieldNumber;
 const int BigMapWarHistory::kWinnerIdFieldNumber;
 const int BigMapWarHistory::kWarTimeFieldNumber;
 #endif  // !_MSC_VER
@@ -22697,8 +22918,8 @@ BigMapWarHistory::BigMapWarHistory()
 }
 
 void BigMapWarHistory::InitAsDefaultInstance() {
-  red_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
-  blue_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  red_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(&::NFMsg::GridGuildBaseInfo::default_instance());
+  blue_info_ = const_cast< ::NFMsg::GridGuildBaseInfo*>(&::NFMsg::GridGuildBaseInfo::default_instance());
   winner_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
@@ -22710,16 +22931,8 @@ BigMapWarHistory::BigMapWarHistory(const BigMapWarHistory& from)
 
 void BigMapWarHistory::SharedCtor() {
   _cached_size_ = 0;
-  red_id_ = NULL;
-  red_level_ = 0;
-  red_count_ = 0;
-  red_war_resource_ = 0;
-  red_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  blue_id_ = NULL;
-  blue_level_ = 0;
-  blue_count_ = 0;
-  blue_war_resource_ = 0;
-  blue_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  red_info_ = NULL;
+  blue_info_ = NULL;
   winner_id_ = NULL;
   war_time_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -22730,15 +22943,9 @@ BigMapWarHistory::~BigMapWarHistory() {
 }
 
 void BigMapWarHistory::SharedDtor() {
-  if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete red_icon_;
-  }
-  if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete blue_icon_;
-  }
   if (this != default_instance_) {
-    delete red_id_;
-    delete blue_id_;
+    delete red_info_;
+    delete blue_info_;
     delete winner_id_;
   }
 }
@@ -22766,29 +22973,11 @@ BigMapWarHistory* BigMapWarHistory::New() const {
 
 void BigMapWarHistory::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_red_id()) {
-      if (red_id_ != NULL) red_id_->::NFMsg::Ident::Clear();
+    if (has_red_info()) {
+      if (red_info_ != NULL) red_info_->::NFMsg::GridGuildBaseInfo::Clear();
     }
-    red_level_ = 0;
-    red_count_ = 0;
-    red_war_resource_ = 0;
-    if (has_red_icon()) {
-      if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
-        red_icon_->clear();
-      }
-    }
-    if (has_blue_id()) {
-      if (blue_id_ != NULL) blue_id_->::NFMsg::Ident::Clear();
-    }
-    blue_level_ = 0;
-    blue_count_ = 0;
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    blue_war_resource_ = 0;
-    if (has_blue_icon()) {
-      if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
-        blue_icon_->clear();
-      }
+    if (has_blue_info()) {
+      if (blue_info_ != NULL) blue_info_->::NFMsg::GridGuildBaseInfo::Clear();
     }
     if (has_winner_id()) {
       if (winner_id_ != NULL) winner_id_->::NFMsg::Ident::Clear();
@@ -22805,159 +22994,35 @@ bool BigMapWarHistory::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .NFMsg.Ident red_id = 1;
+      // required .NFMsg.GridGuildBaseInfo red_info = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_red_id()));
+               input, mutable_red_info()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_red_level;
+        if (input->ExpectTag(18)) goto parse_blue_info;
         break;
       }
 
-      // required int32 red_level = 2;
+      // required .NFMsg.GridGuildBaseInfo blue_info = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_red_level:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &red_level_)));
-          set_has_red_level();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(24)) goto parse_red_count;
-        break;
-      }
-
-      // required int32 red_count = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_red_count:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &red_count_)));
-          set_has_red_count();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(32)) goto parse_red_war_resource;
-        break;
-      }
-
-      // required int32 red_war_resource = 4;
-      case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_red_war_resource:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &red_war_resource_)));
-          set_has_red_war_resource();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(42)) goto parse_red_icon;
-        break;
-      }
-
-      // required bytes red_icon = 5;
-      case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_red_icon:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_red_icon()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(90)) goto parse_blue_id;
-        break;
-      }
-
-      // required .NFMsg.Ident blue_id = 11;
-      case 11: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_blue_id:
+         parse_blue_info:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_blue_id()));
+               input, mutable_blue_info()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(96)) goto parse_blue_level;
+        if (input->ExpectTag(82)) goto parse_winner_id;
         break;
       }
 
-      // required int32 blue_level = 12;
-      case 12: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_blue_level:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &blue_level_)));
-          set_has_blue_level();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(104)) goto parse_blue_count;
-        break;
-      }
-
-      // required int32 blue_count = 13;
-      case 13: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_blue_count:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &blue_count_)));
-          set_has_blue_count();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(112)) goto parse_blue_war_resource;
-        break;
-      }
-
-      // required int32 blue_war_resource = 14;
-      case 14: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_blue_war_resource:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &blue_war_resource_)));
-          set_has_blue_war_resource();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(122)) goto parse_blue_icon;
-        break;
-      }
-
-      // required bytes blue_icon = 15;
-      case 15: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_blue_icon:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_blue_icon()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(162)) goto parse_winner_id;
-        break;
-      }
-
-      // required .NFMsg.Ident winner_id = 20;
-      case 20: {
+      // required .NFMsg.Ident winner_id = 10;
+      case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_winner_id:
@@ -22966,12 +23031,12 @@ bool BigMapWarHistory::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(168)) goto parse_war_time;
+        if (input->ExpectTag(88)) goto parse_war_time;
         break;
       }
 
-      // required int32 war_time = 21;
-      case 21: {
+      // required int32 war_time = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_war_time:
@@ -23004,69 +23069,27 @@ bool BigMapWarHistory::MergePartialFromCodedStream(
 
 void BigMapWarHistory::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .NFMsg.Ident red_id = 1;
-  if (has_red_id()) {
+  // required .NFMsg.GridGuildBaseInfo red_info = 1;
+  if (has_red_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->red_id(), output);
+      1, this->red_info(), output);
   }
 
-  // required int32 red_level = 2;
-  if (has_red_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->red_level(), output);
-  }
-
-  // required int32 red_count = 3;
-  if (has_red_count()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->red_count(), output);
-  }
-
-  // required int32 red_war_resource = 4;
-  if (has_red_war_resource()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->red_war_resource(), output);
-  }
-
-  // required bytes red_icon = 5;
-  if (has_red_icon()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      5, this->red_icon(), output);
-  }
-
-  // required .NFMsg.Ident blue_id = 11;
-  if (has_blue_id()) {
+  // required .NFMsg.GridGuildBaseInfo blue_info = 2;
+  if (has_blue_info()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->blue_id(), output);
+      2, this->blue_info(), output);
   }
 
-  // required int32 blue_level = 12;
-  if (has_blue_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->blue_level(), output);
-  }
-
-  // required int32 blue_count = 13;
-  if (has_blue_count()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->blue_count(), output);
-  }
-
-  // required int32 blue_war_resource = 14;
-  if (has_blue_war_resource()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->blue_war_resource(), output);
-  }
-
-  // required bytes blue_icon = 15;
-  if (has_blue_icon()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      15, this->blue_icon(), output);
-  }
-
-  // required .NFMsg.Ident winner_id = 20;
+  // required .NFMsg.Ident winner_id = 10;
   if (has_winner_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, this->winner_id(), output);
+      10, this->winner_id(), output);
   }
 
-  // required int32 war_time = 21;
+  // required int32 war_time = 11;
   if (has_war_time()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(21, this->war_time(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->war_time(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -23077,74 +23100,30 @@ void BigMapWarHistory::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* BigMapWarHistory::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required .NFMsg.Ident red_id = 1;
-  if (has_red_id()) {
+  // required .NFMsg.GridGuildBaseInfo red_info = 1;
+  if (has_red_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        1, this->red_id(), target);
+        1, this->red_info(), target);
   }
 
-  // required int32 red_level = 2;
-  if (has_red_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->red_level(), target);
-  }
-
-  // required int32 red_count = 3;
-  if (has_red_count()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->red_count(), target);
-  }
-
-  // required int32 red_war_resource = 4;
-  if (has_red_war_resource()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->red_war_resource(), target);
-  }
-
-  // required bytes red_icon = 5;
-  if (has_red_icon()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->red_icon(), target);
-  }
-
-  // required .NFMsg.Ident blue_id = 11;
-  if (has_blue_id()) {
+  // required .NFMsg.GridGuildBaseInfo blue_info = 2;
+  if (has_blue_info()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        11, this->blue_id(), target);
+        2, this->blue_info(), target);
   }
 
-  // required int32 blue_level = 12;
-  if (has_blue_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->blue_level(), target);
-  }
-
-  // required int32 blue_count = 13;
-  if (has_blue_count()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->blue_count(), target);
-  }
-
-  // required int32 blue_war_resource = 14;
-  if (has_blue_war_resource()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->blue_war_resource(), target);
-  }
-
-  // required bytes blue_icon = 15;
-  if (has_blue_icon()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        15, this->blue_icon(), target);
-  }
-
-  // required .NFMsg.Ident winner_id = 20;
+  // required .NFMsg.Ident winner_id = 10;
   if (has_winner_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        20, this->winner_id(), target);
+        10, this->winner_id(), target);
   }
 
-  // required int32 war_time = 21;
+  // required int32 war_time = 11;
   if (has_war_time()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(21, this->war_time(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->war_time(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -23158,88 +23137,30 @@ int BigMapWarHistory::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .NFMsg.Ident red_id = 1;
-    if (has_red_id()) {
+    // required .NFMsg.GridGuildBaseInfo red_info = 1;
+    if (has_red_info()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->red_id());
+          this->red_info());
     }
 
-    // required int32 red_level = 2;
-    if (has_red_level()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->red_level());
-    }
-
-    // required int32 red_count = 3;
-    if (has_red_count()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->red_count());
-    }
-
-    // required int32 red_war_resource = 4;
-    if (has_red_war_resource()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->red_war_resource());
-    }
-
-    // required bytes red_icon = 5;
-    if (has_red_icon()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->red_icon());
-    }
-
-    // required .NFMsg.Ident blue_id = 11;
-    if (has_blue_id()) {
+    // required .NFMsg.GridGuildBaseInfo blue_info = 2;
+    if (has_blue_info()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->blue_id());
+          this->blue_info());
     }
 
-    // required int32 blue_level = 12;
-    if (has_blue_level()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->blue_level());
-    }
-
-    // required int32 blue_count = 13;
-    if (has_blue_count()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->blue_count());
-    }
-
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required int32 blue_war_resource = 14;
-    if (has_blue_war_resource()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->blue_war_resource());
-    }
-
-    // required bytes blue_icon = 15;
-    if (has_blue_icon()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->blue_icon());
-    }
-
-    // required .NFMsg.Ident winner_id = 20;
+    // required .NFMsg.Ident winner_id = 10;
     if (has_winner_id()) {
-      total_size += 2 +
+      total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->winner_id());
     }
 
-    // required int32 war_time = 21;
+    // required int32 war_time = 11;
     if (has_war_time()) {
-      total_size += 2 +
+      total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->war_time());
     }
@@ -23271,37 +23192,11 @@ void BigMapWarHistory::MergeFrom(const ::google::protobuf::Message& from) {
 void BigMapWarHistory::MergeFrom(const BigMapWarHistory& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_red_id()) {
-      mutable_red_id()->::NFMsg::Ident::MergeFrom(from.red_id());
+    if (from.has_red_info()) {
+      mutable_red_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.red_info());
     }
-    if (from.has_red_level()) {
-      set_red_level(from.red_level());
-    }
-    if (from.has_red_count()) {
-      set_red_count(from.red_count());
-    }
-    if (from.has_red_war_resource()) {
-      set_red_war_resource(from.red_war_resource());
-    }
-    if (from.has_red_icon()) {
-      set_red_icon(from.red_icon());
-    }
-    if (from.has_blue_id()) {
-      mutable_blue_id()->::NFMsg::Ident::MergeFrom(from.blue_id());
-    }
-    if (from.has_blue_level()) {
-      set_blue_level(from.blue_level());
-    }
-    if (from.has_blue_count()) {
-      set_blue_count(from.blue_count());
-    }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_blue_war_resource()) {
-      set_blue_war_resource(from.blue_war_resource());
-    }
-    if (from.has_blue_icon()) {
-      set_blue_icon(from.blue_icon());
+    if (from.has_blue_info()) {
+      mutable_blue_info()->::NFMsg::GridGuildBaseInfo::MergeFrom(from.blue_info());
     }
     if (from.has_winner_id()) {
       mutable_winner_id()->::NFMsg::Ident::MergeFrom(from.winner_id());
@@ -23326,13 +23221,13 @@ void BigMapWarHistory::CopyFrom(const BigMapWarHistory& from) {
 }
 
 bool BigMapWarHistory::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000fff) != 0x00000fff) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
-  if (has_red_id()) {
-    if (!this->red_id().IsInitialized()) return false;
+  if (has_red_info()) {
+    if (!this->red_info().IsInitialized()) return false;
   }
-  if (has_blue_id()) {
-    if (!this->blue_id().IsInitialized()) return false;
+  if (has_blue_info()) {
+    if (!this->blue_info().IsInitialized()) return false;
   }
   if (has_winner_id()) {
     if (!this->winner_id().IsInitialized()) return false;
@@ -23342,16 +23237,8 @@ bool BigMapWarHistory::IsInitialized() const {
 
 void BigMapWarHistory::Swap(BigMapWarHistory* other) {
   if (other != this) {
-    std::swap(red_id_, other->red_id_);
-    std::swap(red_level_, other->red_level_);
-    std::swap(red_count_, other->red_count_);
-    std::swap(red_war_resource_, other->red_war_resource_);
-    std::swap(red_icon_, other->red_icon_);
-    std::swap(blue_id_, other->blue_id_);
-    std::swap(blue_level_, other->blue_level_);
-    std::swap(blue_count_, other->blue_count_);
-    std::swap(blue_war_resource_, other->blue_war_resource_);
-    std::swap(blue_icon_, other->blue_icon_);
+    std::swap(red_info_, other->red_info_);
+    std::swap(blue_info_, other->blue_info_);
     std::swap(winner_id_, other->winner_id_);
     std::swap(war_time_, other->war_time_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -23373,6 +23260,7 @@ void BigMapWarHistory::Swap(BigMapWarHistory* other) {
 
 #ifndef _MSC_VER
 const int BigMapGridDetailInfo::kGridBaseInfoFieldNumber;
+const int BigMapGridDetailInfo::kStayGuidListFieldNumber;
 const int BigMapGridDetailInfo::kLeaveMsgFieldNumber;
 const int BigMapGridDetailInfo::kWarHistoryFieldNumber;
 #endif  // !_MSC_VER
@@ -23435,6 +23323,7 @@ void BigMapGridDetailInfo::Clear() {
       if (grid_base_info_ != NULL) grid_base_info_->::NFMsg::BigMapGridBaseInfo::Clear();
     }
   }
+  stay_guid_list_.Clear();
   leave_msg_.Clear();
   war_history_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -23456,12 +23345,27 @@ bool BigMapGridDetailInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_leave_msg;
+        if (input->ExpectTag(18)) goto parse_stay_guid_list;
         break;
       }
 
-      // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+      // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
       case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_stay_guid_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_stay_guid_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_stay_guid_list;
+        if (input->ExpectTag(26)) goto parse_leave_msg;
+        break;
+      }
+
+      // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_leave_msg:
@@ -23470,13 +23374,13 @@ bool BigMapGridDetailInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_leave_msg;
-        if (input->ExpectTag(26)) goto parse_war_history;
+        if (input->ExpectTag(26)) goto parse_leave_msg;
+        if (input->ExpectTag(34)) goto parse_war_history;
         break;
       }
 
-      // repeated .NFMsg.BigMapWarHistory war_history = 3;
-      case 3: {
+      // repeated .NFMsg.BigMapWarHistory war_history = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_war_history:
@@ -23485,7 +23389,7 @@ bool BigMapGridDetailInfo::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_war_history;
+        if (input->ExpectTag(34)) goto parse_war_history;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -23514,16 +23418,22 @@ void BigMapGridDetailInfo::SerializeWithCachedSizes(
       1, this->grid_base_info(), output);
   }
 
-  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
-  for (int i = 0; i < this->leave_msg_size(); i++) {
+  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  for (int i = 0; i < this->stay_guid_list_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->leave_msg(i), output);
+      2, this->stay_guid_list(i), output);
   }
 
-  // repeated .NFMsg.BigMapWarHistory war_history = 3;
+  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
+  for (int i = 0; i < this->leave_msg_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->leave_msg(i), output);
+  }
+
+  // repeated .NFMsg.BigMapWarHistory war_history = 4;
   for (int i = 0; i < this->war_history_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->war_history(i), output);
+      4, this->war_history(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -23541,18 +23451,25 @@ void BigMapGridDetailInfo::SerializeWithCachedSizes(
         1, this->grid_base_info(), target);
   }
 
-  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  for (int i = 0; i < this->stay_guid_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->stay_guid_list(i), target);
+  }
+
+  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
   for (int i = 0; i < this->leave_msg_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->leave_msg(i), target);
+        3, this->leave_msg(i), target);
   }
 
-  // repeated .NFMsg.BigMapWarHistory war_history = 3;
+  // repeated .NFMsg.BigMapWarHistory war_history = 4;
   for (int i = 0; i < this->war_history_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->war_history(i), target);
+        4, this->war_history(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -23574,7 +23491,15 @@ int BigMapGridDetailInfo::ByteSize() const {
     }
 
   }
-  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  total_size += 1 * this->stay_guid_list_size();
+  for (int i = 0; i < this->stay_guid_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->stay_guid_list(i));
+  }
+
+  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
   total_size += 1 * this->leave_msg_size();
   for (int i = 0; i < this->leave_msg_size(); i++) {
     total_size +=
@@ -23582,7 +23507,7 @@ int BigMapGridDetailInfo::ByteSize() const {
         this->leave_msg(i));
   }
 
-  // repeated .NFMsg.BigMapWarHistory war_history = 3;
+  // repeated .NFMsg.BigMapWarHistory war_history = 4;
   total_size += 1 * this->war_history_size();
   for (int i = 0; i < this->war_history_size(); i++) {
     total_size +=
@@ -23615,6 +23540,7 @@ void BigMapGridDetailInfo::MergeFrom(const ::google::protobuf::Message& from) {
 
 void BigMapGridDetailInfo::MergeFrom(const BigMapGridDetailInfo& from) {
   GOOGLE_CHECK_NE(&from, this);
+  stay_guid_list_.MergeFrom(from.stay_guid_list_);
   leave_msg_.MergeFrom(from.leave_msg_);
   war_history_.MergeFrom(from.war_history_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -23643,6 +23569,9 @@ bool BigMapGridDetailInfo::IsInitialized() const {
   if (has_grid_base_info()) {
     if (!this->grid_base_info().IsInitialized()) return false;
   }
+  for (int i = 0; i < stay_guid_list_size(); i++) {
+    if (!this->stay_guid_list(i).IsInitialized()) return false;
+  }
   for (int i = 0; i < leave_msg_size(); i++) {
     if (!this->leave_msg(i).IsInitialized()) return false;
   }
@@ -23655,6 +23584,7 @@ bool BigMapGridDetailInfo::IsInitialized() const {
 void BigMapGridDetailInfo::Swap(BigMapGridDetailInfo* other) {
   if (other != this) {
     std::swap(grid_base_info_, other->grid_base_info_);
+    stay_guid_list_.Swap(&other->stay_guid_list_);
     leave_msg_.Swap(&other->leave_msg_);
     war_history_.Swap(&other->war_history_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -24244,6 +24174,7 @@ void AckBigMapInfo::Swap(AckBigMapInfo* other) {
 
 #ifndef _MSC_VER
 const int ReqHoldMapGrid::kMapTitleIdFieldNumber;
+const int ReqHoldMapGrid::kGuildIdFieldNumber;
 #endif  // !_MSC_VER
 
 ReqHoldMapGrid::ReqHoldMapGrid()
@@ -24252,6 +24183,7 @@ ReqHoldMapGrid::ReqHoldMapGrid()
 }
 
 void ReqHoldMapGrid::InitAsDefaultInstance() {
+  guild_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
 }
 
 ReqHoldMapGrid::ReqHoldMapGrid(const ReqHoldMapGrid& from)
@@ -24263,6 +24195,7 @@ ReqHoldMapGrid::ReqHoldMapGrid(const ReqHoldMapGrid& from)
 void ReqHoldMapGrid::SharedCtor() {
   _cached_size_ = 0;
   map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  guild_id_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -24275,6 +24208,7 @@ void ReqHoldMapGrid::SharedDtor() {
     delete map_title_id_;
   }
   if (this != default_instance_) {
+    delete guild_id_;
   }
 }
 
@@ -24306,6 +24240,9 @@ void ReqHoldMapGrid::Clear() {
         map_title_id_->clear();
       }
     }
+    if (has_guild_id()) {
+      if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -24323,6 +24260,20 @@ bool ReqHoldMapGrid::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_map_title_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_guild_id;
+        break;
+      }
+
+      // required .NFMsg.Ident guild_id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_guild_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_guild_id()));
         } else {
           goto handle_uninterpreted;
         }
@@ -24354,6 +24305,12 @@ void ReqHoldMapGrid::SerializeWithCachedSizes(
       1, this->map_title_id(), output);
   }
 
+  // required .NFMsg.Ident guild_id = 2;
+  if (has_guild_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->guild_id(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -24367,6 +24324,13 @@ void ReqHoldMapGrid::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->map_title_id(), target);
+  }
+
+  // required .NFMsg.Ident guild_id = 2;
+  if (has_guild_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->guild_id(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -24385,6 +24349,13 @@ int ReqHoldMapGrid::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->map_title_id());
+    }
+
+    // required .NFMsg.Ident guild_id = 2;
+    if (has_guild_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->guild_id());
     }
 
   }
@@ -24417,6 +24388,9 @@ void ReqHoldMapGrid::MergeFrom(const ReqHoldMapGrid& from) {
     if (from.has_map_title_id()) {
       set_map_title_id(from.map_title_id());
     }
+    if (from.has_guild_id()) {
+      mutable_guild_id()->::NFMsg::Ident::MergeFrom(from.guild_id());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -24434,14 +24408,18 @@ void ReqHoldMapGrid::CopyFrom(const ReqHoldMapGrid& from) {
 }
 
 bool ReqHoldMapGrid::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_guild_id()) {
+    if (!this->guild_id().IsInitialized()) return false;
+  }
   return true;
 }
 
 void ReqHoldMapGrid::Swap(ReqHoldMapGrid* other) {
   if (other != this) {
     std::swap(map_title_id_, other->map_title_id_);
+    std::swap(guild_id_, other->guild_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

@@ -102,6 +102,48 @@ NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCachePropertyInfo(
     return pPropertyManager;
 }
 
+bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIPropertyManager>>& xPMList)
+{
+	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+	std::vector<std::string> strValueList;
+	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
+	{
+		return nullptr;
+	}
+
+	for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
+	{
+		std::string& strValue = *it;
+
+		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Guild::ThisName());
+		if (!pPropertyManager.get())
+		{
+			continue;
+		}
+
+		NFMsg::ObjectPropertyList xMsg;
+		if (!xMsg.ParseFromString(strValue))
+		{
+			continue;
+		}
+
+		if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
+		{
+			continue;
+		}
+
+		xPMList.push_back(pPropertyManager);
+	}
+
+	return true;
+}
+
 NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(const NFGUID& xGuid)
 {
     NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
@@ -135,6 +177,48 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
     }
 
     return pRecordManager;
+}
+
+bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIRecordManager>>& xRMList)
+{
+	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+	std::vector<std::string> strValueList;
+	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
+	{
+		return nullptr;
+	}
+
+	for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
+	{
+		std::string& strValue = *it;
+
+		NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
+		if (!pRecordManager.get())
+		{
+			continue;
+		}
+
+		NFMsg::ObjectRecordList xMsg;
+		if (!xMsg.ParseFromString(strValue))
+		{
+			continue;
+		}
+
+		if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
+		{
+			continue;
+		}
+
+		xRMList.push_back(pRecordManager);
+	}
+
+	return true;
 }
 
 bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
@@ -174,6 +258,8 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
     {
         return false;
     }
+
+	return true;
 }
 
 bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
@@ -213,6 +299,7 @@ bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHA
     {
         return false;
     }
+
     return true;
 }
 

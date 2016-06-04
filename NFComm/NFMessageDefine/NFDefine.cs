@@ -1041,4 +1041,24 @@ namespace NFMsg
       EST_Other = 8
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"ERankType")]
+    public enum ERankType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_PLAYER_LEVEL", Value=1)]
+      ERT_PLAYER_LEVEL = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_FIGHT_VALUE", Value=2)]
+      ERT_FIGHT_VALUE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_PLAYER_MONEY", Value=3)]
+      ERT_PLAYER_MONEY = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_GUILD_LEVEL", Value=4)]
+      ERT_GUILD_LEVEL = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_GUILD_KINGSOURCE", Value=5)]
+      ERT_GUILD_KINGSOURCE = 5
+    }
+  
 }

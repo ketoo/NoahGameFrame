@@ -10,34 +10,6 @@
 #include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-/*
-
-leave_msg--list-->gridid_leavemsg
-|BigMapLeaveMsg|
-|BigMapLeaveMsg|
-|BigMapLeaveMsg|
-|BigMapLeaveMsg|
-
-war_msg--list-->gridid_war
-|BigMapWarHistory|
-|BigMapWarHistory|
-|BigMapWarHistory|
-|BigMapWarHistory|
-
-base_info--map-->grid_base
-|GridID1, GridBaseData|
-|GridID2, GridBaseData|
-|GridID3, GridBaseData|
-
-hurting_info--map-->hurting_info
-|GridID, hurterID|
-|GridID, hurterID|
-|GridID, hurterID|
-
-king_war_info--kv-->gridid_info
-
-*/
-
 bool NFCMapModule::Init()
 {
 	m_pBigMapRedisModule = pPluginManager->GetModule<NFIBigMapRedisModule>("NFCBigMapRedisModule");
@@ -177,27 +149,17 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 		return;
 	}
 
-
-	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
+	NFGUID xGuildID = NFINetModule::PBToNF(xMsg.guild_id());
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildID);
+	if (!xPropertyManager)
 	{
 		return;
 	}
 
-	//get all guild information to set in grid base info
-	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(nPlayerID);
-	const NFGUID xGUID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
-	const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
-	const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
-	const int nMemberCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
+	//remove form last grid
 
-	xGridBaseInfo.mutable_owner()->CopyFrom(NFINetModule::NFToPB(xGUID));
-	xGridBaseInfo.set_level(nLevel);
-	xGridBaseInfo.set_member_count(nMemberCount);
-	xGridBaseInfo.set_icon(strIcon);
-	xGridBaseInfo.set_resource(1000);
-
-	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
+	int nResourece = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
+	m_pBigMapRedisModule->AddGridStationInfo(xMsg.map_title_id(), xGuildID, nResourece);
 }
 
 void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -300,5 +262,40 @@ void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
 
 	//show msgbox and send mail to award
+}
+
+void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID)
+{
+	if (!m_pElementInfoModule->ExistElement(strTitleID))
+	{
+		return;
+	}
+
+	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(strTitleID, xGridBaseInfo))
+	{
+		return;
+	}
+
+	//get all guild information to set in grid base info
+	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildID);
+	const NFGUID xGUID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
+	const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
+	const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
+	const int nMemberCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
+	const int nResource = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
+
+	xGridBaseInfo.mutable_guild_info()->mutable_id()->CopyFrom(NFINetModule::NFToPB(xGUID));
+	xGridBaseInfo.mutable_guild_info()->set_level(nLevel);
+	xGridBaseInfo.mutable_guild_info()->set_count(nMemberCount);
+	xGridBaseInfo.mutable_guild_info()->set_icon(strIcon);
+	xGridBaseInfo.mutable_guild_info()->set_resource(nResource);
+
+	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
+}
+
+void NFCMapModule::LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID)
+{
+
 }
 

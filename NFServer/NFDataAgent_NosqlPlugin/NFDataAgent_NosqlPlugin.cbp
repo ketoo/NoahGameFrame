@@ -97,11 +97,13 @@
 		<Unit filename="NFCGuildRedisModule.cpp" />
 		<Unit filename="NFCPlayerRedisModule.cpp" />
 		<Unit filename="NFCRankRedisModule.cpp" />
+		<Unit filename="NFCMailRedisModule.cpp" />
 		<Unit filename="NFDataAgent_NosqlPlugin.cpp" />
 		<Unit filename="NFCBigMapRedisModule.h" />
 		<Unit filename="NFCGuildRedisModule.h" />
 		<Unit filename="NFCPlayerRedisModule.h" />
 		<Unit filename="NFCRankRedisModule.h" />
+		<Unit filename="NFCMailRedisModule.h" />
 		<Unit filename="NFDataAgent_NosqlPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>

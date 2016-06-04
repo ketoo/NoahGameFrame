@@ -1,12 +1,11 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/05/21
+//    @Date             :    Sat Jun  4 14:09:38 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
 package nframe;
-
 public class IObject {
 	//Class name
 	public static final String ThisName = "IObject";
@@ -121,6 +120,7 @@ public class ChatGroup {
 		GUID		= 0, // GUID -- object
 		Online		= 1, // Online -- int
 		GameID		= 2, // GameID -- int
+
 	};
 
 	public enum ChatList
@@ -128,6 +128,7 @@ public class ChatGroup {
 		GUID		= 0, // GUID -- object
 		msg		= 1, // msg -- string
 		time		= 2, // time -- int
+
 	};
 
 }
@@ -313,6 +314,7 @@ public class Guild {
 	public static final String DismissTime = "DismissTime"; // int
 	public static final String RecruitAD = "RecruitAD"; // string
 	public static final String RecruitLevel = "RecruitLevel"; // int
+	public static final String KingWarResource = "KingWarResource"; // int
 	public static final String AutoRecruit = "AutoRecruit"; // string
 	public static final String EctypServer = "EctypServer"; // int
 	public static final String EctypID = "EctypID"; // int
@@ -335,6 +337,7 @@ public class Guild {
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 	public enum GuildMemberList
@@ -353,6 +356,7 @@ public class Guild {
 		JoinTime		= 11, // JoinTime -- int
 		Contribution		= 12, // Contribution -- int
 		AllContribution		= 13, // AllContribution -- int
+
 	};
 
 	public enum GuildAppyList
@@ -364,6 +368,7 @@ public class Guild {
 		Donation		= 4, // Donation -- int
 		VIP		= 5, // VIP -- int
 		Power		= 6, // Power -- int
+
 	};
 
 	public enum GuildEvent
@@ -379,6 +384,7 @@ public class Guild {
 		EventID		= 8, // EventID -- int
 		EventTime		= 9, // EventTime -- int
 		Context		= 10, // Context -- string
+
 	};
 
 	public enum GuildHouse
@@ -391,6 +397,7 @@ public class Guild {
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 	public enum GuildSkill
@@ -403,6 +410,7 @@ public class Guild {
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 }
@@ -569,6 +577,7 @@ public class Map {
 		Slogan		= 5, // Slogan -- string
 		State		= 6, // State -- int
 		CurMemberCount		= 7, // CurMemberCount -- int
+
 	};
 
 }
@@ -657,8 +666,6 @@ public class Player {
 	public static final String ShowName = "ShowName"; // string
 	public static final String PrefabPath = "PrefabPath"; // string
 	public static final String FirstTarget = "FirstTarget"; // object
-	public static final String State = "State"; // int
-	public static final String LogicState = "LogicState"; // int
 	public static final String CharType = "CharType"; // int
 	public static final String Job = "Job"; // int
 	public static final String VIPLevel = "VIPLevel"; // int
@@ -672,26 +679,15 @@ public class Player {
 	public static final String Account = "Account"; // string
 	public static final String ConnectKey = "ConnectKey"; // string
 	public static final String MAXEXP = "MAXEXP"; // int
-	public static final String DEAD_COUNT = "DEAD_COUNT"; // int
 	public static final String RELIVE_SOUL = "RELIVE_SOUL"; // int
-	public static final String GUILD_NAME = "GUILD_NAME"; // string
-	public static final String SPOUSE_NAME = "SPOUSE_NAME"; // string
-	public static final String TEAM_CARD = "TEAM_CARD"; // string
-	public static final String PVP_ATK_CARD = "PVP_ATK_CARD"; // string
-	public static final String PVP_DEF_CARD = "PVP_DEF_CARD"; // string
-	public static final String LUCKLY_CARD = "LUCKLY_CARD"; // string
 	public static final String ATK_PVP = "ATK_PVP"; // int
 	public static final String DEF_PVP = "DEF_PVP"; // int
-	public static final String CreditValue = "CreditValue"; // int
-	public static final String SoulValue = "SoulValue"; // int
 	public static final String OnlineCount = "OnlineCount"; // int
 	public static final String TotalTime = "TotalTime"; // int
-	public static final String Citizenship = "Citizenship"; // int
 	public static final String LastOfflineTime = "LastOfflineTime"; // object
 	public static final String OnlineTime = "OnlineTime"; // object
 	public static final String TotalLineTime = "TotalLineTime"; // object
 	public static final String GMLevel = "GMLevel"; // int
-	public static final String LastAttacker = "LastAttacker"; // object
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -716,44 +712,20 @@ public class Player {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
-	public static final String X = "X"; // float
-	public static final String Y = "Y"; // float
-	public static final String Z = "Z"; // float
-	public static final String TargetX = "TargetX"; // float
-	public static final String TargetY = "TargetY"; // float
-	public static final String TargetZ = "TargetZ"; // float
-	public static final String PathStep = "PathStep"; // int
 	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
 	public static final String GameID = "GameID"; // int
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
-	public static final String FightHero = "FightHero"; // object
 	// Record
-	public static final String R_PlayerViewItem = "PlayerViewItem";
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
 	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_CommPropertyValue = "CommPropertyValue";
-	public static final String R_EctypeList = "EctypeList";
-	public static final String R_DropItemList = "DropItemList";
-	public static final String R_SkillTable = "SkillTable";
 	public static final String R_TaskMonsterList = "TaskMonsterList";
 	public static final String R_TaskList = "TaskList";
-	public static final String R_PVPList = "PVPList";
-	public static final String R_ChatGroup = "ChatGroup";
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
-	public static final String R_FightHeroList = "FightHeroList";
-	public static final String R_TileList = "TileList";
-
-	public enum PlayerViewItem
-	{
-		ConfigID		= 0, // ConfigID -- string
-		EnhanceLevel		= 1, // EnhanceLevel -- int
-		InlayStone		= 2, // InlayStone -- string
-		SagecraftLevel		= 3, // SagecraftLevel -- string
-	};
 
 	public enum PlayerHero
 	{
@@ -788,6 +760,9 @@ public class Player {
 		SkillLevel3		= 28, // SkillLevel3 -- int
 		SkillLevel4		= 29, // SkillLevel4 -- int
 		SkillLevel5		= 30, // SkillLevel5 -- int
+		FightState		= 31, // FightState -- int
+		FightSkill		= 32, // FightSkill -- string
+
 	};
 
 	public enum BagEquipList
@@ -821,6 +796,7 @@ public class Player {
 		ElementLevel8		= 26, // ElementLevel8 -- int
 		ElementLevel9		= 27, // ElementLevel9 -- int
 		ElementLevel10		= 28, // ElementLevel10 -- int
+
 	};
 
 	public enum BagItemList
@@ -830,6 +806,7 @@ public class Player {
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- object
+
 	};
 
 	public enum HeroPropertyValue
@@ -859,6 +836,7 @@ public class Player {
 		SKILL_GATE		= 22, // SKILL_GATE -- int
 		PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
 		MAGIC_GATE		= 24, // MAGIC_GATE -- int
+
 	};
 
 	public enum CommPropertyValue
@@ -887,29 +865,7 @@ public class Player {
 		PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
 		MAGIC_GATE		= 22, // MAGIC_GATE -- int
 		BUFF_GATE		= 23, // BUFF_GATE -- int
-	};
 
-	public enum EctypeList
-	{
-		EctypeID		= 0, // EctypeID -- int
-		IsPass		= 1, // IsPass -- int
-		Star		= 2, // Star -- int
-	};
-
-	public enum DropItemList
-	{
-		MonsterID		= 0, // MonsterID -- object
-		ItemID		= 1, // ItemID -- string
-		ItemCount		= 2, // ItemCount -- int
-		DrawState		= 3, // DrawState -- int
-	};
-
-	public enum SkillTable
-	{
-		SkillID		= 0, // SkillID -- string
-		SkillLevel		= 1, // SkillLevel -- int
-		SkillStone		= 2, // SkillStone -- string
-		SkillSoulLevel		= 3, // SkillSoulLevel -- int
 	};
 
 	public enum TaskMonsterList
@@ -918,6 +874,7 @@ public class Player {
 		CurrentKillCount		= 1, // CurrentKillCount -- int
 		RequireKillCount		= 2, // RequireKillCount -- int
 		TaskID		= 3, // TaskID -- string
+
 	};
 
 	public enum TaskList
@@ -925,19 +882,7 @@ public class Player {
 		TaskID		= 0, // TaskID -- string
 		TaskStatus		= 1, // TaskStatus -- int
 		Process		= 2, // Process -- int
-	};
 
-	public enum PVPList
-	{
-		ID		= 0, // ID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-	};
-
-	public enum ChatGroup
-	{
-		ChatType		= 0, // ChatType -- int
-		GroupGUID		= 1, // GroupGUID -- object
 	};
 
 	public enum BuildingList
@@ -950,6 +895,7 @@ public class Player {
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 	public enum BuildingListProduce
@@ -962,20 +908,7 @@ public class Player {
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
-	};
 
-	public enum FightHeroList
-	{
-		HeroGUID		= 0, // HeroGUID -- object
-		FightPos		= 1, // FightPos -- int
-	};
-
-	public enum TileList
-	{
-		TileID		= 0, // TileID -- int
-		X		= 1, // X -- int
-		Y		= 2, // Y -- int
-		TileType		= 3, // TileType -- int
 	};
 
 }
@@ -1234,6 +1167,7 @@ public class Team {
 		Online		= 7, // Online -- int
 		Title		= 8, // Title -- int
 		GameID		= 9, // GameID -- int
+
 	};
 
 	public enum ApplyList
@@ -1245,6 +1179,7 @@ public class Team {
 		Donation		= 4, // Donation -- int
 		VIP		= 5, // VIP -- int
 		Power		= 6, // Power -- int
+
 	};
 
 }

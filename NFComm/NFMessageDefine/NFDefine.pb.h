@@ -576,6 +576,28 @@ inline bool EShopType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
     EShopType_descriptor(), name, value);
 }
+enum ERankType {
+  ERT_PLAYER_LEVEL = 1,
+  ERT_FIGHT_VALUE = 2,
+  ERT_PLAYER_MONEY = 3,
+  ERT_GUILD_LEVEL = 4,
+  ERT_GUILD_KINGSOURCE = 5
+};
+LIBPROTOC_EXPORT bool ERankType_IsValid(int value);
+const ERankType ERankType_MIN = ERT_PLAYER_LEVEL;
+const ERankType ERankType_MAX = ERT_GUILD_KINGSOURCE;
+const int ERankType_ARRAYSIZE = ERankType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ERankType_descriptor();
+inline const ::std::string& ERankType_Name(ERankType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ERankType_descriptor(), value);
+}
+inline bool ERankType_Parse(
+    const ::std::string& name, ERankType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ERankType>(
+    ERankType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -644,6 +666,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
   return ::NFMsg::EShopType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {
+  return ::NFMsg::ERankType_descriptor();
 }
 
 }  // namespace google

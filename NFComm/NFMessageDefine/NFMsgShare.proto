@@ -592,7 +592,15 @@ message ReqInviteTeamMember
 
 
 ///////////////大地图/////////////////////////////////////////////////////////////////////////////////////
-
+message GridGuildBaseInfo
+{
+	required Ident						id = 1;				//ID
+	required int32						level = 2;			//Level
+	required int32						count = 3;			//人数
+	required int32						resource = 4;		//资源
+	required bytes						icon = 5;			//Icon
+}
+	
 //	EGMI_REQ_MAP_GRID_INFO
 message ReqBigMapGridInfo
 {	
@@ -602,11 +610,7 @@ message ReqBigMapGridInfo
 message BigMapGridBaseInfo
 {
 	required bytes						id = 1;				//GridID
-	required Ident						owner = 2;			//所属占领公会ID
-	required int32						level = 3;			//所属占领公会Level
-	required int32						member_count = 4;	//所属占领公会总人数
-	required int32						resource = 5;		//所属占领公会资源
-	required bytes						icon = 6;			//所属占领公会Icon
+	required GridGuildBaseInfo			guild_info = 2;			//所属占领公会
 	
 	//war state
 	
@@ -630,29 +634,20 @@ message BigMapLeaveMsg
 	
 message BigMapWarHistory
 {
-	required Ident						red_id = 1;				//红方id		
-	required int32						red_level = 2;			//红方Level
-	required int32						red_count = 3;			//红方参与人数
-	required int32						red_war_resource = 4;	//输赢资源数据
-	required bytes						red_icon = 5;			//Icon
+	required GridGuildBaseInfo			red_info = 1;				//红方	
+	required GridGuildBaseInfo			blue_info = 2;				//蓝方	
 	
-	required Ident						blue_id = 11;				//蓝方id
-	required int32						blue_level = 12;			//红方Level
-	required int32						blue_count = 13;			//红方参与人数
-	required int32						blue_war_resource = 14;		//输赢资源数据
-	required bytes						blue_icon = 15;				//Icon
-	
-	
-	required Ident						winner_id = 20;	//winner
-	required int32						war_time = 21;	//war时间
+	required Ident						winner_id = 10;	//winner
+	required int32						war_time = 11;	//war时间
 }
 	
 message BigMapGridDetailInfo
 {
-	required BigMapGridBaseInfo			grid_base_info = 1;	
+	required BigMapGridBaseInfo			grid_base_info 	= 1;
 	
-	repeated BigMapLeaveMsg				leave_msg = 2;		//此地图留言(<=10)
-	repeated BigMapWarHistory			war_history = 3;	//此地图历史战争信息(<=10)
+	repeated GridGuildBaseInfo			stay_guid_list 	= 2;	//
+	repeated BigMapLeaveMsg				leave_msg 		= 3;	//此地图留言(<=10)
+	repeated BigMapWarHistory			war_history 	= 4;	//此地图历史战争信息(<=10)
 }
 
 //	EGMI_ACK_MAP_GRID_INFO
@@ -676,6 +671,7 @@ message AckBigMapInfo
 message ReqHoldMapGrid
 {
 	required bytes						map_title_id = 1;
+	required Ident						guild_id = 2;
 }
 //	EGMI_ACK_HOLD_MAP_GRID
 message AckHoldMapGrid

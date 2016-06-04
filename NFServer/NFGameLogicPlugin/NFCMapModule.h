@@ -64,6 +64,8 @@ protected:
 	void EndMapHunting(const std::string& strTitleID);
 	void EndMapKingWar(const std::string& strTitleID);
 
+	void SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID);
+	void LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID);
 private:
 	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
