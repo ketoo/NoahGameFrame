@@ -149,7 +149,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HGet(strKey, self.ToString(), strValue))
     {
@@ -202,7 +202,7 @@ bool NFCCommonRedisModule::SetCachePropertyInfo(const NFGUID& self, const std::s
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
+    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
     if (!pDriver->HSet(strKey, self.ToString(), strValue))
     {
         return false;
@@ -243,7 +243,7 @@ bool NFCCommonRedisModule::SetCacheRecordInfo(const NFGUID& self, const std::str
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
     if (!pDriver->HSet(strKey, self.ToString(), strValue))
     {
         return false;
@@ -260,7 +260,7 @@ bool NFCCommonRedisModule::RemoveCachePropertyInfo(const NFGUID& self, const std
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
+    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HDel(strKey, self.ToString()))
     {

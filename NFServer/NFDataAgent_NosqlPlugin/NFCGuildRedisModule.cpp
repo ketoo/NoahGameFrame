@@ -80,7 +80,7 @@ bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::strin
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
     std::vector<std::string> strValueList;
     if (!pDriver->HMGet(strKey, xGuidList, strValueList))
     {
@@ -128,7 +128,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
         return nullptr;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
     std::string strValue;
     if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
     {
@@ -157,7 +157,7 @@ bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::stri
 		return false;
 	}
 
-	const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+	const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
 	std::vector<std::string> strValueList;
 	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
 	{
@@ -223,7 +223,7 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
     if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
@@ -264,7 +264,7 @@ bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHA
         return false;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
     if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
