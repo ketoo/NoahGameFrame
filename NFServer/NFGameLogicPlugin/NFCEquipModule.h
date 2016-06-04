@@ -46,6 +46,36 @@ public:
     virtual bool InlaystoneToEquip(const NFGUID& self, const NFGUID& xEquipID, const std::string& strStoneID, const int nHoleIndex);
     virtual bool ElementlevelToEquip(const NFGUID& self, const NFGUID& xEquipID, const NFMsg::EGameElementType& eElemetType);
 
+    /////////////英雄装备和背包互换/////////////////////////////////////////////////////////////
+
+    virtual bool DressEquipForHero(const NFGUID& self, const NFGUID& hero, const NFGUID& id);
+    virtual bool TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, const NFGUID& id);
+
+    /////////////装备的随机属性/////////////////////////////////////////////////////////////
+
+    virtual int SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id, const std::string& strPropertyID);
+    virtual const std::string& GetEquipRandPropertyID(const NFGUID& self, const NFGUID& id);
+
+    /////////////装备的打洞/////////////////////////////////////////////////////////////
+
+    virtual bool SetEquipHoleCount(const NFGUID& self, const NFGUID& id, const int nCount);
+    virtual int GetEquipHoleCount(const NFGUID& self, const NFGUID& id);
+
+    /////////////装备镶嵌的石头/////////////////////////////////////////////////////////////
+
+    virtual bool SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID);
+    virtual const std::string& GetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
+
+    /////////////装备强化的等级/////////////////////////////////////////////////////////////
+
+    virtual bool SetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id, const int nLevel);
+    virtual int GetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id);
+
+    /////////////装备元素的等级/////////////////////////////////////////////////////////////
+
+    virtual bool SetEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel);
+    virtual int GetEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
+
 protected:
     virtual bool RamdomSucess(const int nNowLevel, const int nMaxLevel);
     virtual float GetEquipLevelRate(const int nNowLevel);
@@ -63,12 +93,12 @@ protected:
 
 protected:
 	//Equip
-	void OnIntensifylevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnHoleToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnInlaystoneToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnElementlevelToEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqWearEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnTakeOffEquipProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnIntensifylevelToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnHoleToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnInlaystoneToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnElementlevelToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqWearEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnTakeOffEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
     NFIKernelModule* m_pKernelModule;
