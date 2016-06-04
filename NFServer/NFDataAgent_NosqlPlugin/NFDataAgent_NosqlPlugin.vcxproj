@@ -14,6 +14,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCBigMapRedisModule.cpp" />
     <ClCompile Include="NFCGuildRedisModule.cpp" />
+    <ClCompile Include="NFCMailRedisModule.cpp" />
     <ClCompile Include="NFCPlayerRedisModule.cpp" />
     <ClCompile Include="NFCRankRedisModule.cpp" />
     <ClCompile Include="NFCCommonRedisModule.cpp" />
@@ -22,6 +23,7 @@
   <ItemGroup>
     <ClInclude Include="NFCBigMapRedisModule.h" />
     <ClInclude Include="NFCGuildRedisModule.h" />
+    <ClInclude Include="NFCMailRedisModule.h" />
     <ClInclude Include="NFCPlayerRedisModule.h" />
     <ClInclude Include="NFCRankRedisModule.h" />
     <ClInclude Include="NFCCommonRedisModule.h" />

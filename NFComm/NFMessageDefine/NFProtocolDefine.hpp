@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  2 22:05:05 2016
+//    @Date             :    Sat Jun  4 14:09:38 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -343,6 +343,7 @@ public:
 	static const std::string& DismissTime(){ static std::string xDismissTime = "DismissTime"; return xDismissTime; } // int
 	static const std::string& RecruitAD(){ static std::string xRecruitAD = "RecruitAD"; return xRecruitAD; } // string
 	static const std::string& RecruitLevel(){ static std::string xRecruitLevel = "RecruitLevel"; return xRecruitLevel; } // int
+	static const std::string& KingWarResource(){ static std::string xKingWarResource = "KingWarResource"; return xKingWarResource; } // int
 	static const std::string& AutoRecruit(){ static std::string xAutoRecruit = "AutoRecruit"; return xAutoRecruit; } // string
 	static const std::string& EctypServer(){ static std::string xEctypServer = "EctypServer"; return xEctypServer; } // int
 	static const std::string& EctypID(){ static std::string xEctypID = "EctypID"; return xEctypID; } // int

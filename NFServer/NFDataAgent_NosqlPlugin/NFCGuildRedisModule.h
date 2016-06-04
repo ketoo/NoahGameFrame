@@ -40,6 +40,9 @@ public:
     virtual bool SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager);
     virtual bool SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager);
 
+	virtual bool GetGuildCachePropertyInfo(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIPropertyManager>>& xPMList);
+	virtual bool GetGuildCacheRecordManager(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIRecordManager>>& xRMList);
+
 protected:
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 

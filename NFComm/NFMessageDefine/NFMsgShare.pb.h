@@ -98,6 +98,7 @@ class ReqAckJoinTeam;
 class ReqAckLeaveTeam;
 class ReqAckOprTeamMember;
 class ReqInviteTeamMember;
+class GridGuildBaseInfo;
 class ReqBigMapGridInfo;
 class BigMapGridBaseInfo;
 class BigMapLeaveMsg;
@@ -7272,6 +7273,135 @@ class LIBPROTOC_EXPORT ReqInviteTeamMember : public ::google::protobuf::Message 
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT GridGuildBaseInfo : public ::google::protobuf::Message {
+ public:
+  GridGuildBaseInfo();
+  virtual ~GridGuildBaseInfo();
+
+  GridGuildBaseInfo(const GridGuildBaseInfo& from);
+
+  inline GridGuildBaseInfo& operator=(const GridGuildBaseInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GridGuildBaseInfo& default_instance();
+
+  void Swap(GridGuildBaseInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  GridGuildBaseInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GridGuildBaseInfo& from);
+  void MergeFrom(const GridGuildBaseInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& id() const;
+  inline ::NFMsg::Ident* mutable_id();
+  inline ::NFMsg::Ident* release_id();
+  inline void set_allocated_id(::NFMsg::Ident* id);
+
+  // required int32 level = 2;
+  inline bool has_level() const;
+  inline void clear_level();
+  static const int kLevelFieldNumber = 2;
+  inline ::google::protobuf::int32 level() const;
+  inline void set_level(::google::protobuf::int32 value);
+
+  // required int32 count = 3;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 3;
+  inline ::google::protobuf::int32 count() const;
+  inline void set_count(::google::protobuf::int32 value);
+
+  // required int32 resource = 4;
+  inline bool has_resource() const;
+  inline void clear_resource();
+  static const int kResourceFieldNumber = 4;
+  inline ::google::protobuf::int32 resource() const;
+  inline void set_resource(::google::protobuf::int32 value);
+
+  // required bytes icon = 5;
+  inline bool has_icon() const;
+  inline void clear_icon();
+  static const int kIconFieldNumber = 5;
+  inline const ::std::string& icon() const;
+  inline void set_icon(const ::std::string& value);
+  inline void set_icon(const char* value);
+  inline void set_icon(const void* value, size_t size);
+  inline ::std::string* mutable_icon();
+  inline ::std::string* release_icon();
+  inline void set_allocated_icon(::std::string* icon);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.GridGuildBaseInfo)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_level();
+  inline void clear_has_level();
+  inline void set_has_count();
+  inline void clear_has_count();
+  inline void set_has_resource();
+  inline void clear_has_resource();
+  inline void set_has_icon();
+  inline void clear_has_icon();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* id_;
+  ::google::protobuf::int32 level_;
+  ::google::protobuf::int32 count_;
+  ::std::string* icon_;
+  ::google::protobuf::int32 resource_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static GridGuildBaseInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqBigMapGridInfo : public ::google::protobuf::Message {
  public:
   ReqBigMapGridInfo();
@@ -7427,47 +7557,14 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
   inline ::std::string* release_id();
   inline void set_allocated_id(::std::string* id);
 
-  // required .NFMsg.Ident owner = 2;
-  inline bool has_owner() const;
-  inline void clear_owner();
-  static const int kOwnerFieldNumber = 2;
-  inline const ::NFMsg::Ident& owner() const;
-  inline ::NFMsg::Ident* mutable_owner();
-  inline ::NFMsg::Ident* release_owner();
-  inline void set_allocated_owner(::NFMsg::Ident* owner);
-
-  // required int32 level = 3;
-  inline bool has_level() const;
-  inline void clear_level();
-  static const int kLevelFieldNumber = 3;
-  inline ::google::protobuf::int32 level() const;
-  inline void set_level(::google::protobuf::int32 value);
-
-  // required int32 member_count = 4;
-  inline bool has_member_count() const;
-  inline void clear_member_count();
-  static const int kMemberCountFieldNumber = 4;
-  inline ::google::protobuf::int32 member_count() const;
-  inline void set_member_count(::google::protobuf::int32 value);
-
-  // required int32 resource = 5;
-  inline bool has_resource() const;
-  inline void clear_resource();
-  static const int kResourceFieldNumber = 5;
-  inline ::google::protobuf::int32 resource() const;
-  inline void set_resource(::google::protobuf::int32 value);
-
-  // required bytes icon = 6;
-  inline bool has_icon() const;
-  inline void clear_icon();
-  static const int kIconFieldNumber = 6;
-  inline const ::std::string& icon() const;
-  inline void set_icon(const ::std::string& value);
-  inline void set_icon(const char* value);
-  inline void set_icon(const void* value, size_t size);
-  inline ::std::string* mutable_icon();
-  inline ::std::string* release_icon();
-  inline void set_allocated_icon(::std::string* icon);
+  // required .NFMsg.GridGuildBaseInfo guild_info = 2;
+  inline bool has_guild_info() const;
+  inline void clear_guild_info();
+  static const int kGuildInfoFieldNumber = 2;
+  inline const ::NFMsg::GridGuildBaseInfo& guild_info() const;
+  inline ::NFMsg::GridGuildBaseInfo* mutable_guild_info();
+  inline ::NFMsg::GridGuildBaseInfo* release_guild_info();
+  inline void set_allocated_guild_info(::NFMsg::GridGuildBaseInfo* guild_info);
 
   // required int32 kingwar_time = 10;
   inline bool has_kingwar_time() const;
@@ -7505,16 +7602,8 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
  private:
   inline void set_has_id();
   inline void clear_has_id();
-  inline void set_has_owner();
-  inline void clear_has_owner();
-  inline void set_has_level();
-  inline void clear_has_level();
-  inline void set_has_member_count();
-  inline void clear_has_member_count();
-  inline void set_has_resource();
-  inline void clear_has_resource();
-  inline void set_has_icon();
-  inline void clear_has_icon();
+  inline void set_has_guild_info();
+  inline void clear_has_guild_info();
   inline void set_has_kingwar_time();
   inline void clear_has_kingwar_time();
   inline void set_has_kingwarrer();
@@ -7527,18 +7616,14 @@ class LIBPROTOC_EXPORT BigMapGridBaseInfo : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* id_;
-  ::NFMsg::Ident* owner_;
-  ::google::protobuf::int32 level_;
-  ::google::protobuf::int32 member_count_;
-  ::std::string* icon_;
-  ::google::protobuf::int32 resource_;
-  ::google::protobuf::int32 kingwar_time_;
+  ::NFMsg::GridGuildBaseInfo* guild_info_;
   ::NFMsg::Ident* kingwarrer_;
-  ::NFMsg::Ident* hurter_;
+  ::google::protobuf::int32 kingwar_time_;
   ::google::protobuf::int32 hurting_time_;
+  ::NFMsg::Ident* hurter_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -7737,128 +7822,46 @@ class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .NFMsg.Ident red_id = 1;
-  inline bool has_red_id() const;
-  inline void clear_red_id();
-  static const int kRedIdFieldNumber = 1;
-  inline const ::NFMsg::Ident& red_id() const;
-  inline ::NFMsg::Ident* mutable_red_id();
-  inline ::NFMsg::Ident* release_red_id();
-  inline void set_allocated_red_id(::NFMsg::Ident* red_id);
+  // required .NFMsg.GridGuildBaseInfo red_info = 1;
+  inline bool has_red_info() const;
+  inline void clear_red_info();
+  static const int kRedInfoFieldNumber = 1;
+  inline const ::NFMsg::GridGuildBaseInfo& red_info() const;
+  inline ::NFMsg::GridGuildBaseInfo* mutable_red_info();
+  inline ::NFMsg::GridGuildBaseInfo* release_red_info();
+  inline void set_allocated_red_info(::NFMsg::GridGuildBaseInfo* red_info);
 
-  // required int32 red_level = 2;
-  inline bool has_red_level() const;
-  inline void clear_red_level();
-  static const int kRedLevelFieldNumber = 2;
-  inline ::google::protobuf::int32 red_level() const;
-  inline void set_red_level(::google::protobuf::int32 value);
+  // required .NFMsg.GridGuildBaseInfo blue_info = 2;
+  inline bool has_blue_info() const;
+  inline void clear_blue_info();
+  static const int kBlueInfoFieldNumber = 2;
+  inline const ::NFMsg::GridGuildBaseInfo& blue_info() const;
+  inline ::NFMsg::GridGuildBaseInfo* mutable_blue_info();
+  inline ::NFMsg::GridGuildBaseInfo* release_blue_info();
+  inline void set_allocated_blue_info(::NFMsg::GridGuildBaseInfo* blue_info);
 
-  // required int32 red_count = 3;
-  inline bool has_red_count() const;
-  inline void clear_red_count();
-  static const int kRedCountFieldNumber = 3;
-  inline ::google::protobuf::int32 red_count() const;
-  inline void set_red_count(::google::protobuf::int32 value);
-
-  // required int32 red_war_resource = 4;
-  inline bool has_red_war_resource() const;
-  inline void clear_red_war_resource();
-  static const int kRedWarResourceFieldNumber = 4;
-  inline ::google::protobuf::int32 red_war_resource() const;
-  inline void set_red_war_resource(::google::protobuf::int32 value);
-
-  // required bytes red_icon = 5;
-  inline bool has_red_icon() const;
-  inline void clear_red_icon();
-  static const int kRedIconFieldNumber = 5;
-  inline const ::std::string& red_icon() const;
-  inline void set_red_icon(const ::std::string& value);
-  inline void set_red_icon(const char* value);
-  inline void set_red_icon(const void* value, size_t size);
-  inline ::std::string* mutable_red_icon();
-  inline ::std::string* release_red_icon();
-  inline void set_allocated_red_icon(::std::string* red_icon);
-
-  // required .NFMsg.Ident blue_id = 11;
-  inline bool has_blue_id() const;
-  inline void clear_blue_id();
-  static const int kBlueIdFieldNumber = 11;
-  inline const ::NFMsg::Ident& blue_id() const;
-  inline ::NFMsg::Ident* mutable_blue_id();
-  inline ::NFMsg::Ident* release_blue_id();
-  inline void set_allocated_blue_id(::NFMsg::Ident* blue_id);
-
-  // required int32 blue_level = 12;
-  inline bool has_blue_level() const;
-  inline void clear_blue_level();
-  static const int kBlueLevelFieldNumber = 12;
-  inline ::google::protobuf::int32 blue_level() const;
-  inline void set_blue_level(::google::protobuf::int32 value);
-
-  // required int32 blue_count = 13;
-  inline bool has_blue_count() const;
-  inline void clear_blue_count();
-  static const int kBlueCountFieldNumber = 13;
-  inline ::google::protobuf::int32 blue_count() const;
-  inline void set_blue_count(::google::protobuf::int32 value);
-
-  // required int32 blue_war_resource = 14;
-  inline bool has_blue_war_resource() const;
-  inline void clear_blue_war_resource();
-  static const int kBlueWarResourceFieldNumber = 14;
-  inline ::google::protobuf::int32 blue_war_resource() const;
-  inline void set_blue_war_resource(::google::protobuf::int32 value);
-
-  // required bytes blue_icon = 15;
-  inline bool has_blue_icon() const;
-  inline void clear_blue_icon();
-  static const int kBlueIconFieldNumber = 15;
-  inline const ::std::string& blue_icon() const;
-  inline void set_blue_icon(const ::std::string& value);
-  inline void set_blue_icon(const char* value);
-  inline void set_blue_icon(const void* value, size_t size);
-  inline ::std::string* mutable_blue_icon();
-  inline ::std::string* release_blue_icon();
-  inline void set_allocated_blue_icon(::std::string* blue_icon);
-
-  // required .NFMsg.Ident winner_id = 20;
+  // required .NFMsg.Ident winner_id = 10;
   inline bool has_winner_id() const;
   inline void clear_winner_id();
-  static const int kWinnerIdFieldNumber = 20;
+  static const int kWinnerIdFieldNumber = 10;
   inline const ::NFMsg::Ident& winner_id() const;
   inline ::NFMsg::Ident* mutable_winner_id();
   inline ::NFMsg::Ident* release_winner_id();
   inline void set_allocated_winner_id(::NFMsg::Ident* winner_id);
 
-  // required int32 war_time = 21;
+  // required int32 war_time = 11;
   inline bool has_war_time() const;
   inline void clear_war_time();
-  static const int kWarTimeFieldNumber = 21;
+  static const int kWarTimeFieldNumber = 11;
   inline ::google::protobuf::int32 war_time() const;
   inline void set_war_time(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.BigMapWarHistory)
  private:
-  inline void set_has_red_id();
-  inline void clear_has_red_id();
-  inline void set_has_red_level();
-  inline void clear_has_red_level();
-  inline void set_has_red_count();
-  inline void clear_has_red_count();
-  inline void set_has_red_war_resource();
-  inline void clear_has_red_war_resource();
-  inline void set_has_red_icon();
-  inline void clear_has_red_icon();
-  inline void set_has_blue_id();
-  inline void clear_has_blue_id();
-  inline void set_has_blue_level();
-  inline void clear_has_blue_level();
-  inline void set_has_blue_count();
-  inline void clear_has_blue_count();
-  inline void set_has_blue_war_resource();
-  inline void clear_has_blue_war_resource();
-  inline void set_has_blue_icon();
-  inline void clear_has_blue_icon();
+  inline void set_has_red_info();
+  inline void clear_has_red_info();
+  inline void set_has_blue_info();
+  inline void clear_has_blue_info();
   inline void set_has_winner_id();
   inline void clear_has_winner_id();
   inline void set_has_war_time();
@@ -7866,21 +7869,13 @@ class LIBPROTOC_EXPORT BigMapWarHistory : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::NFMsg::Ident* red_id_;
-  ::google::protobuf::int32 red_level_;
-  ::google::protobuf::int32 red_count_;
-  ::std::string* red_icon_;
-  ::google::protobuf::int32 red_war_resource_;
-  ::google::protobuf::int32 blue_level_;
-  ::NFMsg::Ident* blue_id_;
-  ::google::protobuf::int32 blue_count_;
-  ::google::protobuf::int32 blue_war_resource_;
-  ::std::string* blue_icon_;
+  ::NFMsg::GridGuildBaseInfo* red_info_;
+  ::NFMsg::GridGuildBaseInfo* blue_info_;
   ::NFMsg::Ident* winner_id_;
   ::google::protobuf::int32 war_time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -7954,10 +7949,22 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
   inline ::NFMsg::BigMapGridBaseInfo* release_grid_base_info();
   inline void set_allocated_grid_base_info(::NFMsg::BigMapGridBaseInfo* grid_base_info);
 
-  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+  // repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+  inline int stay_guid_list_size() const;
+  inline void clear_stay_guid_list();
+  static const int kStayGuidListFieldNumber = 2;
+  inline const ::NFMsg::GridGuildBaseInfo& stay_guid_list(int index) const;
+  inline ::NFMsg::GridGuildBaseInfo* mutable_stay_guid_list(int index);
+  inline ::NFMsg::GridGuildBaseInfo* add_stay_guid_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >&
+      stay_guid_list() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >*
+      mutable_stay_guid_list();
+
+  // repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
   inline int leave_msg_size() const;
   inline void clear_leave_msg();
-  static const int kLeaveMsgFieldNumber = 2;
+  static const int kLeaveMsgFieldNumber = 3;
   inline const ::NFMsg::BigMapLeaveMsg& leave_msg(int index) const;
   inline ::NFMsg::BigMapLeaveMsg* mutable_leave_msg(int index);
   inline ::NFMsg::BigMapLeaveMsg* add_leave_msg();
@@ -7966,10 +7973,10 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg >*
       mutable_leave_msg();
 
-  // repeated .NFMsg.BigMapWarHistory war_history = 3;
+  // repeated .NFMsg.BigMapWarHistory war_history = 4;
   inline int war_history_size() const;
   inline void clear_war_history();
-  static const int kWarHistoryFieldNumber = 3;
+  static const int kWarHistoryFieldNumber = 4;
   inline const ::NFMsg::BigMapWarHistory& war_history(int index) const;
   inline ::NFMsg::BigMapWarHistory* mutable_war_history(int index);
   inline ::NFMsg::BigMapWarHistory* add_war_history();
@@ -7986,11 +7993,12 @@ class LIBPROTOC_EXPORT BigMapGridDetailInfo : public ::google::protobuf::Message
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::BigMapGridBaseInfo* grid_base_info_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo > stay_guid_list_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapLeaveMsg > leave_msg_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::BigMapWarHistory > war_history_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -8309,17 +8317,29 @@ class LIBPROTOC_EXPORT ReqHoldMapGrid : public ::google::protobuf::Message {
   inline ::std::string* release_map_title_id();
   inline void set_allocated_map_title_id(::std::string* map_title_id);
 
+  // required .NFMsg.Ident guild_id = 2;
+  inline bool has_guild_id() const;
+  inline void clear_guild_id();
+  static const int kGuildIdFieldNumber = 2;
+  inline const ::NFMsg::Ident& guild_id() const;
+  inline ::NFMsg::Ident* mutable_guild_id();
+  inline ::NFMsg::Ident* release_guild_id();
+  inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqHoldMapGrid)
  private:
   inline void set_has_map_title_id();
   inline void clear_has_map_title_id();
+  inline void set_has_guild_id();
+  inline void clear_has_guild_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* map_title_id_;
+  ::NFMsg::Ident* guild_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -15901,6 +15921,184 @@ inline void ReqInviteTeamMember::set_allocated_invite_target_id(::NFMsg::Ident* 
 
 // -------------------------------------------------------------------
 
+// GridGuildBaseInfo
+
+// required .NFMsg.Ident id = 1;
+inline bool GridGuildBaseInfo::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GridGuildBaseInfo::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GridGuildBaseInfo::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GridGuildBaseInfo::clear_id() {
+  if (id_ != NULL) id_->::NFMsg::Ident::Clear();
+  clear_has_id();
+}
+inline const ::NFMsg::Ident& GridGuildBaseInfo::id() const {
+  return id_ != NULL ? *id_ : *default_instance_->id_;
+}
+inline ::NFMsg::Ident* GridGuildBaseInfo::mutable_id() {
+  set_has_id();
+  if (id_ == NULL) id_ = new ::NFMsg::Ident;
+  return id_;
+}
+inline ::NFMsg::Ident* GridGuildBaseInfo::release_id() {
+  clear_has_id();
+  ::NFMsg::Ident* temp = id_;
+  id_ = NULL;
+  return temp;
+}
+inline void GridGuildBaseInfo::set_allocated_id(::NFMsg::Ident* id) {
+  delete id_;
+  id_ = id;
+  if (id) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+}
+
+// required int32 level = 2;
+inline bool GridGuildBaseInfo::has_level() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GridGuildBaseInfo::set_has_level() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GridGuildBaseInfo::clear_has_level() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GridGuildBaseInfo::clear_level() {
+  level_ = 0;
+  clear_has_level();
+}
+inline ::google::protobuf::int32 GridGuildBaseInfo::level() const {
+  return level_;
+}
+inline void GridGuildBaseInfo::set_level(::google::protobuf::int32 value) {
+  set_has_level();
+  level_ = value;
+}
+
+// required int32 count = 3;
+inline bool GridGuildBaseInfo::has_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GridGuildBaseInfo::set_has_count() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GridGuildBaseInfo::clear_has_count() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GridGuildBaseInfo::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+inline ::google::protobuf::int32 GridGuildBaseInfo::count() const {
+  return count_;
+}
+inline void GridGuildBaseInfo::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
+}
+
+// required int32 resource = 4;
+inline bool GridGuildBaseInfo::has_resource() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GridGuildBaseInfo::set_has_resource() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GridGuildBaseInfo::clear_has_resource() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GridGuildBaseInfo::clear_resource() {
+  resource_ = 0;
+  clear_has_resource();
+}
+inline ::google::protobuf::int32 GridGuildBaseInfo::resource() const {
+  return resource_;
+}
+inline void GridGuildBaseInfo::set_resource(::google::protobuf::int32 value) {
+  set_has_resource();
+  resource_ = value;
+}
+
+// required bytes icon = 5;
+inline bool GridGuildBaseInfo::has_icon() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void GridGuildBaseInfo::set_has_icon() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void GridGuildBaseInfo::clear_has_icon() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void GridGuildBaseInfo::clear_icon() {
+  if (icon_ != &::google::protobuf::internal::kEmptyString) {
+    icon_->clear();
+  }
+  clear_has_icon();
+}
+inline const ::std::string& GridGuildBaseInfo::icon() const {
+  return *icon_;
+}
+inline void GridGuildBaseInfo::set_icon(const ::std::string& value) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(value);
+}
+inline void GridGuildBaseInfo::set_icon(const char* value) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(value);
+}
+inline void GridGuildBaseInfo::set_icon(const void* value, size_t size) {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  icon_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* GridGuildBaseInfo::mutable_icon() {
+  set_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    icon_ = new ::std::string;
+  }
+  return icon_;
+}
+inline ::std::string* GridGuildBaseInfo::release_icon() {
+  clear_has_icon();
+  if (icon_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = icon_;
+    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void GridGuildBaseInfo::set_allocated_icon(::std::string* icon) {
+  if (icon_ != &::google::protobuf::internal::kEmptyString) {
+    delete icon_;
+  }
+  if (icon) {
+    set_has_icon();
+    icon_ = icon;
+  } else {
+    clear_has_icon();
+    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
 // ReqBigMapGridInfo
 
 // repeated bytes map_title_id = 1;
@@ -16021,189 +16219,53 @@ inline void BigMapGridBaseInfo::set_allocated_id(::std::string* id) {
   }
 }
 
-// required .NFMsg.Ident owner = 2;
-inline bool BigMapGridBaseInfo::has_owner() const {
+// required .NFMsg.GridGuildBaseInfo guild_info = 2;
+inline bool BigMapGridBaseInfo::has_guild_info() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void BigMapGridBaseInfo::set_has_owner() {
+inline void BigMapGridBaseInfo::set_has_guild_info() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void BigMapGridBaseInfo::clear_has_owner() {
+inline void BigMapGridBaseInfo::clear_has_guild_info() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void BigMapGridBaseInfo::clear_owner() {
-  if (owner_ != NULL) owner_->::NFMsg::Ident::Clear();
-  clear_has_owner();
+inline void BigMapGridBaseInfo::clear_guild_info() {
+  if (guild_info_ != NULL) guild_info_->::NFMsg::GridGuildBaseInfo::Clear();
+  clear_has_guild_info();
 }
-inline const ::NFMsg::Ident& BigMapGridBaseInfo::owner() const {
-  return owner_ != NULL ? *owner_ : *default_instance_->owner_;
+inline const ::NFMsg::GridGuildBaseInfo& BigMapGridBaseInfo::guild_info() const {
+  return guild_info_ != NULL ? *guild_info_ : *default_instance_->guild_info_;
 }
-inline ::NFMsg::Ident* BigMapGridBaseInfo::mutable_owner() {
-  set_has_owner();
-  if (owner_ == NULL) owner_ = new ::NFMsg::Ident;
-  return owner_;
+inline ::NFMsg::GridGuildBaseInfo* BigMapGridBaseInfo::mutable_guild_info() {
+  set_has_guild_info();
+  if (guild_info_ == NULL) guild_info_ = new ::NFMsg::GridGuildBaseInfo;
+  return guild_info_;
 }
-inline ::NFMsg::Ident* BigMapGridBaseInfo::release_owner() {
-  clear_has_owner();
-  ::NFMsg::Ident* temp = owner_;
-  owner_ = NULL;
+inline ::NFMsg::GridGuildBaseInfo* BigMapGridBaseInfo::release_guild_info() {
+  clear_has_guild_info();
+  ::NFMsg::GridGuildBaseInfo* temp = guild_info_;
+  guild_info_ = NULL;
   return temp;
 }
-inline void BigMapGridBaseInfo::set_allocated_owner(::NFMsg::Ident* owner) {
-  delete owner_;
-  owner_ = owner;
-  if (owner) {
-    set_has_owner();
+inline void BigMapGridBaseInfo::set_allocated_guild_info(::NFMsg::GridGuildBaseInfo* guild_info) {
+  delete guild_info_;
+  guild_info_ = guild_info;
+  if (guild_info) {
+    set_has_guild_info();
   } else {
-    clear_has_owner();
-  }
-}
-
-// required int32 level = 3;
-inline bool BigMapGridBaseInfo::has_level() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void BigMapGridBaseInfo::set_has_level() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void BigMapGridBaseInfo::clear_has_level() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void BigMapGridBaseInfo::clear_level() {
-  level_ = 0;
-  clear_has_level();
-}
-inline ::google::protobuf::int32 BigMapGridBaseInfo::level() const {
-  return level_;
-}
-inline void BigMapGridBaseInfo::set_level(::google::protobuf::int32 value) {
-  set_has_level();
-  level_ = value;
-}
-
-// required int32 member_count = 4;
-inline bool BigMapGridBaseInfo::has_member_count() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void BigMapGridBaseInfo::set_has_member_count() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void BigMapGridBaseInfo::clear_has_member_count() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void BigMapGridBaseInfo::clear_member_count() {
-  member_count_ = 0;
-  clear_has_member_count();
-}
-inline ::google::protobuf::int32 BigMapGridBaseInfo::member_count() const {
-  return member_count_;
-}
-inline void BigMapGridBaseInfo::set_member_count(::google::protobuf::int32 value) {
-  set_has_member_count();
-  member_count_ = value;
-}
-
-// required int32 resource = 5;
-inline bool BigMapGridBaseInfo::has_resource() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void BigMapGridBaseInfo::set_has_resource() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void BigMapGridBaseInfo::clear_has_resource() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void BigMapGridBaseInfo::clear_resource() {
-  resource_ = 0;
-  clear_has_resource();
-}
-inline ::google::protobuf::int32 BigMapGridBaseInfo::resource() const {
-  return resource_;
-}
-inline void BigMapGridBaseInfo::set_resource(::google::protobuf::int32 value) {
-  set_has_resource();
-  resource_ = value;
-}
-
-// required bytes icon = 6;
-inline bool BigMapGridBaseInfo::has_icon() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void BigMapGridBaseInfo::set_has_icon() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void BigMapGridBaseInfo::clear_has_icon() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void BigMapGridBaseInfo::clear_icon() {
-  if (icon_ != &::google::protobuf::internal::kEmptyString) {
-    icon_->clear();
-  }
-  clear_has_icon();
-}
-inline const ::std::string& BigMapGridBaseInfo::icon() const {
-  return *icon_;
-}
-inline void BigMapGridBaseInfo::set_icon(const ::std::string& value) {
-  set_has_icon();
-  if (icon_ == &::google::protobuf::internal::kEmptyString) {
-    icon_ = new ::std::string;
-  }
-  icon_->assign(value);
-}
-inline void BigMapGridBaseInfo::set_icon(const char* value) {
-  set_has_icon();
-  if (icon_ == &::google::protobuf::internal::kEmptyString) {
-    icon_ = new ::std::string;
-  }
-  icon_->assign(value);
-}
-inline void BigMapGridBaseInfo::set_icon(const void* value, size_t size) {
-  set_has_icon();
-  if (icon_ == &::google::protobuf::internal::kEmptyString) {
-    icon_ = new ::std::string;
-  }
-  icon_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BigMapGridBaseInfo::mutable_icon() {
-  set_has_icon();
-  if (icon_ == &::google::protobuf::internal::kEmptyString) {
-    icon_ = new ::std::string;
-  }
-  return icon_;
-}
-inline ::std::string* BigMapGridBaseInfo::release_icon() {
-  clear_has_icon();
-  if (icon_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = icon_;
-    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BigMapGridBaseInfo::set_allocated_icon(::std::string* icon) {
-  if (icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete icon_;
-  }
-  if (icon) {
-    set_has_icon();
-    icon_ = icon;
-  } else {
-    clear_has_icon();
-    icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_guild_info();
   }
 }
 
 // required int32 kingwar_time = 10;
 inline bool BigMapGridBaseInfo::has_kingwar_time() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void BigMapGridBaseInfo::set_has_kingwar_time() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void BigMapGridBaseInfo::clear_has_kingwar_time() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void BigMapGridBaseInfo::clear_kingwar_time() {
   kingwar_time_ = 0;
@@ -16219,13 +16281,13 @@ inline void BigMapGridBaseInfo::set_kingwar_time(::google::protobuf::int32 value
 
 // required .NFMsg.Ident kingwarrer = 11;
 inline bool BigMapGridBaseInfo::has_kingwarrer() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void BigMapGridBaseInfo::set_has_kingwarrer() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void BigMapGridBaseInfo::clear_has_kingwarrer() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void BigMapGridBaseInfo::clear_kingwarrer() {
   if (kingwarrer_ != NULL) kingwarrer_->::NFMsg::Ident::Clear();
@@ -16257,13 +16319,13 @@ inline void BigMapGridBaseInfo::set_allocated_kingwarrer(::NFMsg::Ident* kingwar
 
 // required int32 hurting_time = 20;
 inline bool BigMapGridBaseInfo::has_hurting_time() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void BigMapGridBaseInfo::set_has_hurting_time() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void BigMapGridBaseInfo::clear_has_hurting_time() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void BigMapGridBaseInfo::clear_hurting_time() {
   hurting_time_ = 0;
@@ -16279,13 +16341,13 @@ inline void BigMapGridBaseInfo::set_hurting_time(::google::protobuf::int32 value
 
 // required .NFMsg.Ident hurter = 21;
 inline bool BigMapGridBaseInfo::has_hurter() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void BigMapGridBaseInfo::set_has_hurter() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void BigMapGridBaseInfo::clear_has_hurter() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void BigMapGridBaseInfo::clear_hurter() {
   if (hurter_ != NULL) hurter_->::NFMsg::Ident::Clear();
@@ -16545,363 +16607,91 @@ inline void BigMapLeaveMsg::set_owner_level(::google::protobuf::int32 value) {
 
 // BigMapWarHistory
 
-// required .NFMsg.Ident red_id = 1;
-inline bool BigMapWarHistory::has_red_id() const {
+// required .NFMsg.GridGuildBaseInfo red_info = 1;
+inline bool BigMapWarHistory::has_red_info() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void BigMapWarHistory::set_has_red_id() {
+inline void BigMapWarHistory::set_has_red_info() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void BigMapWarHistory::clear_has_red_id() {
+inline void BigMapWarHistory::clear_has_red_info() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void BigMapWarHistory::clear_red_id() {
-  if (red_id_ != NULL) red_id_->::NFMsg::Ident::Clear();
-  clear_has_red_id();
+inline void BigMapWarHistory::clear_red_info() {
+  if (red_info_ != NULL) red_info_->::NFMsg::GridGuildBaseInfo::Clear();
+  clear_has_red_info();
 }
-inline const ::NFMsg::Ident& BigMapWarHistory::red_id() const {
-  return red_id_ != NULL ? *red_id_ : *default_instance_->red_id_;
+inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::red_info() const {
+  return red_info_ != NULL ? *red_info_ : *default_instance_->red_info_;
 }
-inline ::NFMsg::Ident* BigMapWarHistory::mutable_red_id() {
-  set_has_red_id();
-  if (red_id_ == NULL) red_id_ = new ::NFMsg::Ident;
-  return red_id_;
+inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::mutable_red_info() {
+  set_has_red_info();
+  if (red_info_ == NULL) red_info_ = new ::NFMsg::GridGuildBaseInfo;
+  return red_info_;
 }
-inline ::NFMsg::Ident* BigMapWarHistory::release_red_id() {
-  clear_has_red_id();
-  ::NFMsg::Ident* temp = red_id_;
-  red_id_ = NULL;
+inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::release_red_info() {
+  clear_has_red_info();
+  ::NFMsg::GridGuildBaseInfo* temp = red_info_;
+  red_info_ = NULL;
   return temp;
 }
-inline void BigMapWarHistory::set_allocated_red_id(::NFMsg::Ident* red_id) {
-  delete red_id_;
-  red_id_ = red_id;
-  if (red_id) {
-    set_has_red_id();
+inline void BigMapWarHistory::set_allocated_red_info(::NFMsg::GridGuildBaseInfo* red_info) {
+  delete red_info_;
+  red_info_ = red_info;
+  if (red_info) {
+    set_has_red_info();
   } else {
-    clear_has_red_id();
+    clear_has_red_info();
   }
 }
 
-// required int32 red_level = 2;
-inline bool BigMapWarHistory::has_red_level() const {
+// required .NFMsg.GridGuildBaseInfo blue_info = 2;
+inline bool BigMapWarHistory::has_blue_info() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void BigMapWarHistory::set_has_red_level() {
+inline void BigMapWarHistory::set_has_blue_info() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void BigMapWarHistory::clear_has_red_level() {
+inline void BigMapWarHistory::clear_has_blue_info() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void BigMapWarHistory::clear_red_level() {
-  red_level_ = 0;
-  clear_has_red_level();
+inline void BigMapWarHistory::clear_blue_info() {
+  if (blue_info_ != NULL) blue_info_->::NFMsg::GridGuildBaseInfo::Clear();
+  clear_has_blue_info();
 }
-inline ::google::protobuf::int32 BigMapWarHistory::red_level() const {
-  return red_level_;
+inline const ::NFMsg::GridGuildBaseInfo& BigMapWarHistory::blue_info() const {
+  return blue_info_ != NULL ? *blue_info_ : *default_instance_->blue_info_;
 }
-inline void BigMapWarHistory::set_red_level(::google::protobuf::int32 value) {
-  set_has_red_level();
-  red_level_ = value;
+inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::mutable_blue_info() {
+  set_has_blue_info();
+  if (blue_info_ == NULL) blue_info_ = new ::NFMsg::GridGuildBaseInfo;
+  return blue_info_;
 }
-
-// required int32 red_count = 3;
-inline bool BigMapWarHistory::has_red_count() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void BigMapWarHistory::set_has_red_count() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void BigMapWarHistory::clear_has_red_count() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void BigMapWarHistory::clear_red_count() {
-  red_count_ = 0;
-  clear_has_red_count();
-}
-inline ::google::protobuf::int32 BigMapWarHistory::red_count() const {
-  return red_count_;
-}
-inline void BigMapWarHistory::set_red_count(::google::protobuf::int32 value) {
-  set_has_red_count();
-  red_count_ = value;
-}
-
-// required int32 red_war_resource = 4;
-inline bool BigMapWarHistory::has_red_war_resource() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void BigMapWarHistory::set_has_red_war_resource() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void BigMapWarHistory::clear_has_red_war_resource() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void BigMapWarHistory::clear_red_war_resource() {
-  red_war_resource_ = 0;
-  clear_has_red_war_resource();
-}
-inline ::google::protobuf::int32 BigMapWarHistory::red_war_resource() const {
-  return red_war_resource_;
-}
-inline void BigMapWarHistory::set_red_war_resource(::google::protobuf::int32 value) {
-  set_has_red_war_resource();
-  red_war_resource_ = value;
-}
-
-// required bytes red_icon = 5;
-inline bool BigMapWarHistory::has_red_icon() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void BigMapWarHistory::set_has_red_icon() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void BigMapWarHistory::clear_has_red_icon() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void BigMapWarHistory::clear_red_icon() {
-  if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
-    red_icon_->clear();
-  }
-  clear_has_red_icon();
-}
-inline const ::std::string& BigMapWarHistory::red_icon() const {
-  return *red_icon_;
-}
-inline void BigMapWarHistory::set_red_icon(const ::std::string& value) {
-  set_has_red_icon();
-  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
-    red_icon_ = new ::std::string;
-  }
-  red_icon_->assign(value);
-}
-inline void BigMapWarHistory::set_red_icon(const char* value) {
-  set_has_red_icon();
-  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
-    red_icon_ = new ::std::string;
-  }
-  red_icon_->assign(value);
-}
-inline void BigMapWarHistory::set_red_icon(const void* value, size_t size) {
-  set_has_red_icon();
-  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
-    red_icon_ = new ::std::string;
-  }
-  red_icon_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BigMapWarHistory::mutable_red_icon() {
-  set_has_red_icon();
-  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
-    red_icon_ = new ::std::string;
-  }
-  return red_icon_;
-}
-inline ::std::string* BigMapWarHistory::release_red_icon() {
-  clear_has_red_icon();
-  if (red_icon_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = red_icon_;
-    red_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BigMapWarHistory::set_allocated_red_icon(::std::string* red_icon) {
-  if (red_icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete red_icon_;
-  }
-  if (red_icon) {
-    set_has_red_icon();
-    red_icon_ = red_icon;
-  } else {
-    clear_has_red_icon();
-    red_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required .NFMsg.Ident blue_id = 11;
-inline bool BigMapWarHistory::has_blue_id() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void BigMapWarHistory::set_has_blue_id() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void BigMapWarHistory::clear_has_blue_id() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void BigMapWarHistory::clear_blue_id() {
-  if (blue_id_ != NULL) blue_id_->::NFMsg::Ident::Clear();
-  clear_has_blue_id();
-}
-inline const ::NFMsg::Ident& BigMapWarHistory::blue_id() const {
-  return blue_id_ != NULL ? *blue_id_ : *default_instance_->blue_id_;
-}
-inline ::NFMsg::Ident* BigMapWarHistory::mutable_blue_id() {
-  set_has_blue_id();
-  if (blue_id_ == NULL) blue_id_ = new ::NFMsg::Ident;
-  return blue_id_;
-}
-inline ::NFMsg::Ident* BigMapWarHistory::release_blue_id() {
-  clear_has_blue_id();
-  ::NFMsg::Ident* temp = blue_id_;
-  blue_id_ = NULL;
+inline ::NFMsg::GridGuildBaseInfo* BigMapWarHistory::release_blue_info() {
+  clear_has_blue_info();
+  ::NFMsg::GridGuildBaseInfo* temp = blue_info_;
+  blue_info_ = NULL;
   return temp;
 }
-inline void BigMapWarHistory::set_allocated_blue_id(::NFMsg::Ident* blue_id) {
-  delete blue_id_;
-  blue_id_ = blue_id;
-  if (blue_id) {
-    set_has_blue_id();
+inline void BigMapWarHistory::set_allocated_blue_info(::NFMsg::GridGuildBaseInfo* blue_info) {
+  delete blue_info_;
+  blue_info_ = blue_info;
+  if (blue_info) {
+    set_has_blue_info();
   } else {
-    clear_has_blue_id();
+    clear_has_blue_info();
   }
 }
 
-// required int32 blue_level = 12;
-inline bool BigMapWarHistory::has_blue_level() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void BigMapWarHistory::set_has_blue_level() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void BigMapWarHistory::clear_has_blue_level() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void BigMapWarHistory::clear_blue_level() {
-  blue_level_ = 0;
-  clear_has_blue_level();
-}
-inline ::google::protobuf::int32 BigMapWarHistory::blue_level() const {
-  return blue_level_;
-}
-inline void BigMapWarHistory::set_blue_level(::google::protobuf::int32 value) {
-  set_has_blue_level();
-  blue_level_ = value;
-}
-
-// required int32 blue_count = 13;
-inline bool BigMapWarHistory::has_blue_count() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void BigMapWarHistory::set_has_blue_count() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void BigMapWarHistory::clear_has_blue_count() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void BigMapWarHistory::clear_blue_count() {
-  blue_count_ = 0;
-  clear_has_blue_count();
-}
-inline ::google::protobuf::int32 BigMapWarHistory::blue_count() const {
-  return blue_count_;
-}
-inline void BigMapWarHistory::set_blue_count(::google::protobuf::int32 value) {
-  set_has_blue_count();
-  blue_count_ = value;
-}
-
-// required int32 blue_war_resource = 14;
-inline bool BigMapWarHistory::has_blue_war_resource() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void BigMapWarHistory::set_has_blue_war_resource() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void BigMapWarHistory::clear_has_blue_war_resource() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void BigMapWarHistory::clear_blue_war_resource() {
-  blue_war_resource_ = 0;
-  clear_has_blue_war_resource();
-}
-inline ::google::protobuf::int32 BigMapWarHistory::blue_war_resource() const {
-  return blue_war_resource_;
-}
-inline void BigMapWarHistory::set_blue_war_resource(::google::protobuf::int32 value) {
-  set_has_blue_war_resource();
-  blue_war_resource_ = value;
-}
-
-// required bytes blue_icon = 15;
-inline bool BigMapWarHistory::has_blue_icon() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void BigMapWarHistory::set_has_blue_icon() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void BigMapWarHistory::clear_has_blue_icon() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void BigMapWarHistory::clear_blue_icon() {
-  if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
-    blue_icon_->clear();
-  }
-  clear_has_blue_icon();
-}
-inline const ::std::string& BigMapWarHistory::blue_icon() const {
-  return *blue_icon_;
-}
-inline void BigMapWarHistory::set_blue_icon(const ::std::string& value) {
-  set_has_blue_icon();
-  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
-    blue_icon_ = new ::std::string;
-  }
-  blue_icon_->assign(value);
-}
-inline void BigMapWarHistory::set_blue_icon(const char* value) {
-  set_has_blue_icon();
-  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
-    blue_icon_ = new ::std::string;
-  }
-  blue_icon_->assign(value);
-}
-inline void BigMapWarHistory::set_blue_icon(const void* value, size_t size) {
-  set_has_blue_icon();
-  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
-    blue_icon_ = new ::std::string;
-  }
-  blue_icon_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BigMapWarHistory::mutable_blue_icon() {
-  set_has_blue_icon();
-  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
-    blue_icon_ = new ::std::string;
-  }
-  return blue_icon_;
-}
-inline ::std::string* BigMapWarHistory::release_blue_icon() {
-  clear_has_blue_icon();
-  if (blue_icon_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = blue_icon_;
-    blue_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BigMapWarHistory::set_allocated_blue_icon(::std::string* blue_icon) {
-  if (blue_icon_ != &::google::protobuf::internal::kEmptyString) {
-    delete blue_icon_;
-  }
-  if (blue_icon) {
-    set_has_blue_icon();
-    blue_icon_ = blue_icon;
-  } else {
-    clear_has_blue_icon();
-    blue_icon_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required .NFMsg.Ident winner_id = 20;
+// required .NFMsg.Ident winner_id = 10;
 inline bool BigMapWarHistory::has_winner_id() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void BigMapWarHistory::set_has_winner_id() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void BigMapWarHistory::clear_has_winner_id() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void BigMapWarHistory::clear_winner_id() {
   if (winner_id_ != NULL) winner_id_->::NFMsg::Ident::Clear();
@@ -16931,15 +16721,15 @@ inline void BigMapWarHistory::set_allocated_winner_id(::NFMsg::Ident* winner_id)
   }
 }
 
-// required int32 war_time = 21;
+// required int32 war_time = 11;
 inline bool BigMapWarHistory::has_war_time() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void BigMapWarHistory::set_has_war_time() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void BigMapWarHistory::clear_has_war_time() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void BigMapWarHistory::clear_war_time() {
   war_time_ = 0;
@@ -16995,7 +16785,32 @@ inline void BigMapGridDetailInfo::set_allocated_grid_base_info(::NFMsg::BigMapGr
   }
 }
 
-// repeated .NFMsg.BigMapLeaveMsg leave_msg = 2;
+// repeated .NFMsg.GridGuildBaseInfo stay_guid_list = 2;
+inline int BigMapGridDetailInfo::stay_guid_list_size() const {
+  return stay_guid_list_.size();
+}
+inline void BigMapGridDetailInfo::clear_stay_guid_list() {
+  stay_guid_list_.Clear();
+}
+inline const ::NFMsg::GridGuildBaseInfo& BigMapGridDetailInfo::stay_guid_list(int index) const {
+  return stay_guid_list_.Get(index);
+}
+inline ::NFMsg::GridGuildBaseInfo* BigMapGridDetailInfo::mutable_stay_guid_list(int index) {
+  return stay_guid_list_.Mutable(index);
+}
+inline ::NFMsg::GridGuildBaseInfo* BigMapGridDetailInfo::add_stay_guid_list() {
+  return stay_guid_list_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >&
+BigMapGridDetailInfo::stay_guid_list() const {
+  return stay_guid_list_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::GridGuildBaseInfo >*
+BigMapGridDetailInfo::mutable_stay_guid_list() {
+  return &stay_guid_list_;
+}
+
+// repeated .NFMsg.BigMapLeaveMsg leave_msg = 3;
 inline int BigMapGridDetailInfo::leave_msg_size() const {
   return leave_msg_.size();
 }
@@ -17020,7 +16835,7 @@ BigMapGridDetailInfo::mutable_leave_msg() {
   return &leave_msg_;
 }
 
-// repeated .NFMsg.BigMapWarHistory war_history = 3;
+// repeated .NFMsg.BigMapWarHistory war_history = 4;
 inline int BigMapGridDetailInfo::war_history_size() const {
   return war_history_.size();
 }
@@ -17178,6 +16993,44 @@ inline void ReqHoldMapGrid::set_allocated_map_title_id(::std::string* map_title_
   } else {
     clear_has_map_title_id();
     map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident guild_id = 2;
+inline bool ReqHoldMapGrid::has_guild_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqHoldMapGrid::set_has_guild_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqHoldMapGrid::clear_has_guild_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqHoldMapGrid::clear_guild_id() {
+  if (guild_id_ != NULL) guild_id_->::NFMsg::Ident::Clear();
+  clear_has_guild_id();
+}
+inline const ::NFMsg::Ident& ReqHoldMapGrid::guild_id() const {
+  return guild_id_ != NULL ? *guild_id_ : *default_instance_->guild_id_;
+}
+inline ::NFMsg::Ident* ReqHoldMapGrid::mutable_guild_id() {
+  set_has_guild_id();
+  if (guild_id_ == NULL) guild_id_ = new ::NFMsg::Ident;
+  return guild_id_;
+}
+inline ::NFMsg::Ident* ReqHoldMapGrid::release_guild_id() {
+  clear_has_guild_id();
+  ::NFMsg::Ident* temp = guild_id_;
+  guild_id_ = NULL;
+  return temp;
+}
+inline void ReqHoldMapGrid::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
+  delete guild_id_;
+  guild_id_ = guild_id;
+  if (guild_id) {
+    set_has_guild_id();
+  } else {
+    clear_has_guild_id();
   }
 }
 

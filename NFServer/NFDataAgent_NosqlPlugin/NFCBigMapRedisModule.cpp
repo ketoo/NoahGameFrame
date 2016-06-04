@@ -6,6 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 #include "NFCBigMapRedisModule.h"
+#include "NFComm\NFMessageDefine\NFProtocolDefine.hpp"
+#include "NFComm\NFPluginModule\NFINetModule.h"
 
 NFCBigMapRedisModule::NFCBigMapRedisModule(NFIPluginManager * p)
 {
@@ -34,10 +36,12 @@ bool NFCBigMapRedisModule::AfterInit()
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-
+	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>("NFCGuildRedisModule");
+	
 	assert(NULL != m_pNoSqlModule);
 	assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogicClassModule);
+	assert(NULL != m_pGuildRedisModule);
 
 	return true;
 }
@@ -60,6 +64,11 @@ std::string NFCBigMapRedisModule::GetGridLeaveMsgKey(const std::string&strGridID
 std::string NFCBigMapRedisModule::GetGridWarHistoryKey(const std::string&strGridID)
 {
 	return "GridWarHistoryKey_" + strGridID;
+}
+
+std::string NFCBigMapRedisModule::GetGridStationHistoryKey(const std::string&strGridID)
+{
+	return "GridStationKey_" + strGridID;
 }
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo)
@@ -179,6 +188,66 @@ bool NFCBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, st
 	return false;
 }
 
+bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridGuildBaseInfo>& xWarHistoryList)
+{
+	if (!m_pElementInfoModule->ExistElement(strGridID))
+	{
+		return false;
+	}
+
+	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	if (pNoSqlDriver)
+	{
+		std::string strKey = GetGridStationHistoryKey(strGridID);
+		int nCount = 0;
+		if (pNoSqlDriver->ZCard(strKey, nCount))
+		{
+			std::vector<std::pair<std::string, double> > memberScoreList;
+			if (pNoSqlDriver->ZRevRange(strKey, 0, nCount, memberScoreList))
+			{
+				std::vector<std::string> xGuildIDList;
+				std::vector<std::pair<std::string, double> >::iterator it = memberScoreList.begin();
+				for (it; it != memberScoreList.end(); it++)
+				{
+					xGuildIDList.push_back(it->first);					
+				}
+
+				/////////////all guild info
+				std::vector<NF_SHARE_PTR<NFIPropertyManager>> xPropertyManagerList;
+				if (m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildIDList, xPropertyManagerList))
+				{
+					for (int i = 0; i < xPropertyManagerList.size(); ++i)
+					{
+						NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xPropertyManagerList[i];
+						if (xPropertyManager)
+						{
+							NFGUID xGuildID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
+							const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
+							const int nCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
+							const int nResource = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
+							const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
+
+							NFMsg::GridGuildBaseInfo xGridGuildBaseInfo;
+							xGridGuildBaseInfo.mutable_id()->CopyFrom(NFINetModule::NFToPB(xGuildID));
+							xGridGuildBaseInfo.set_level(nLevel);
+							xGridGuildBaseInfo.set_count(nCount);
+							xGridGuildBaseInfo.set_resource(nResource);
+							xGridGuildBaseInfo.set_icon(strIcon);
+
+							xWarHistoryList.push_back(xGridGuildBaseInfo);
+						}
+					}
+
+					return true;
+				}
+			}
+		}
+	}
+
+
+	return false;
+}
+
 bool NFCBigMapRedisModule::SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo)
 {
 	if (!m_pElementInfoModule->ExistElement(strGridID))
@@ -240,6 +309,42 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 			//
 			return pNoSqlDriver->ListPush(strKey, strData);
 		}
+	}
+
+	return false;
+}
+
+bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, const NFGUID& self, const int nResource)
+{
+	if (!m_pElementInfoModule->ExistElement(strGridID))
+	{
+		return false;
+	}
+
+	//数量限制
+	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	if (pNoSqlDriver)
+	{
+		std::string strKey = GetGridStationHistoryKey(strGridID);
+		return pNoSqlDriver->ZAdd(strKey, nResource, self.ToString());
+	}
+
+	return false;
+}
+
+bool NFCBigMapRedisModule::RemoveGridStationInfo(const std::string& strGridID, const NFGUID& self, const int nResource)
+{
+	if (!m_pElementInfoModule->ExistElement(strGridID))
+	{
+		return false;
+	}
+
+	//数量限制
+	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	if (pNoSqlDriver)
+	{
+		std::string strKey = GetGridStationHistoryKey(strGridID);
+		return pNoSqlDriver->ZRem(strKey, self.ToString());
 	}
 
 	return false;
