@@ -12,6 +12,7 @@
 
 bool NFCLoginToMasterModule::Init()
 {
+	m_pClusterClientModule = NF_NEW NFIClusterClientModule();
     return true;
 }
 
@@ -36,7 +37,10 @@ bool NFCLoginToMasterModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLoginNet_ServerModule);
 
-    NFIClusterClientModule::Bind(this, &NFCLoginToMasterModule::OnReciveMSPack, &NFCLoginToMasterModule::OnSocketMSEvent);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCLoginToMasterModule::OnSelectServerResultProcess);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCLoginToMasterModule::OnWorldInfoProcess);
+	
+	m_pClusterClientModule->AddEventCallBack(this, &NFCLoginToMasterModule::OnSocketMSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -63,7 +67,7 @@ bool NFCLoginToMasterModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-                NFIClusterClientModule::AddServer(xServerData);
+				m_pClusterClientModule->AddServer(xServerData);
             }
         }
     }
@@ -81,7 +85,9 @@ bool NFCLoginToMasterModule::BeforeShut()
 
 bool NFCLoginToMasterModule::Execute()
 {
-    return NFIClusterClientModule::Execute();
+    m_pClusterClientModule->Execute();
+
+	return true;
 }
 
 void NFCLoginToMasterModule::Register(NFINet* pNet)
@@ -115,11 +121,11 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
 
-                NF_SHARE_PTR<ConnectData> pServerData = GetServerNetInfo(pNet);
+                NF_SHARE_PTR<ConnectData> pServerData = m_pClusterClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-                    SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg);
+					m_pClusterClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_LTM_LOGIN_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -128,35 +134,16 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
     }
 }
 
-int NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     m_pLoginNet_ServerModule->OnSelectWorldResultsProcess(xMsg.world_id(), NFINetModule::PBToNF(xMsg.sender()), xMsg.login_id(), xMsg.account(), xMsg.world_ip(), xMsg.world_port(), xMsg.world_key());
-
-    return 0;
-}
-
-void NFCLoginToMasterModule::OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    //统一解包
-    switch (nMsgID)
-    {
-        case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-            OnSelectServerResultProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-        case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
-            OnWorldInfoProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-        default:
-            printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
-            break;
-    }
 }
 
 void NFCLoginToMasterModule::OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -180,13 +167,13 @@ void NFCLoginToMasterModule::OnSocketMSEvent(const int nSockIndex, const NF_NET_
     }
 }
 
-int NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID ;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     for (int i = 0; i < xMsg.server_list_size(); ++i)
@@ -205,8 +192,11 @@ int NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int n
     }
 
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xMsg.server_list_size()), "", "WorldInfo");
+}
 
-    return 0;
+NFIClusterClientModule* NFCLoginToMasterModule::GetClusterModule()
+{
+	return m_pClusterClientModule;
 }
 
 NFMapEx<int, NFMsg::ServerInfoReport>& NFCLoginToMasterModule::GetWorldMap()
