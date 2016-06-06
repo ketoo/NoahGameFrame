@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
 class NFIWorldNet_ServerModule
-    : public NFINetModule
+    : public NFILogicModule
 {
 
 public:
@@ -27,7 +27,8 @@ public:
     virtual bool SendMsgToGame(const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData) = 0;
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase) = 0;
 
-    virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
+	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
+	virtual NFINetModule* GetNetModule() = 0;
 
 };
 

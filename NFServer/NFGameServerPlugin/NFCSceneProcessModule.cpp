@@ -67,7 +67,7 @@ bool NFCSceneProcessModule::AfterInit()
 
     //////////////////////////////////////////////////////////////////////////
     // add msg handler
-    if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCSceneProcessModule::OnClienSwapSceneProcess))
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCSceneProcessModule::OnClienSwapSceneProcess))
     {
         return false;
     }

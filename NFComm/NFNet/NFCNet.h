@@ -68,9 +68,6 @@ public:
     virtual bool IsServer();
     virtual bool Log(int severity, const char* msg);
 
-    virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb);
-    virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb);
-
 private:
     //已带上包头
     bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
@@ -96,7 +93,6 @@ private:
     static void conn_readcb(struct bufferevent* bev, void* user_data);
     static void conn_writecb(struct bufferevent* bev, void* user_data);
     static void conn_eventcb(struct bufferevent* bev, short events, void* user_data);
-    static void time_cb(evutil_socket_t fd, short _event, void* argc);
     static void log_cb(int severity, const char* msg);
 
 protected:
@@ -120,10 +116,8 @@ private:
     struct evconnlistener* listener;
     //////////////////////////////////////////////////////////////////////////
 
-    NET_RECIEVE_FUNCTOR mRecvCB;
+    NET_RECEIVE_FUNCTOR mRecvCB;
     NET_EVENT_FUNCTOR mEventCB;
-    std::map<int, NET_RECIEVE_FUNCTOR_PTR> mxReciveCallBack;
-    std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
 
     //////////////////////////////////////////////////////////////////////////
 };

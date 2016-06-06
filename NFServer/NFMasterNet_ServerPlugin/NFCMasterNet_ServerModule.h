@@ -20,10 +20,10 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 
 class NFCMasterNet_ServerModule
-    : public NFINetModule
+    : public NFIMasterNet_ServerModule
 {
 public:
-    NFCMasterNet_ServerModule(NFIPluginManager* p) : NFINetModule(p)
+    NFCMasterNet_ServerModule(NFIPluginManager* p)
     {
         mnLastLogTime = pPluginManager->GetNowTime();
     }
@@ -34,12 +34,12 @@ public:
     virtual bool AfterInit();
     virtual bool Execute();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
 protected:
 
-    void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -81,6 +81,7 @@ private:
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
+	NFINetModule* m_pNetModule;
 };
 
 #endif
