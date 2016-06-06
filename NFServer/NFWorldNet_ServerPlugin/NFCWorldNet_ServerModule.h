@@ -39,7 +39,7 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
@@ -53,12 +53,13 @@ public:
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
+	virtual NFINetModule* GetNetModule();
 
     virtual int GetPlayerGameID(const NFGUID self);
 
 protected:
 
-    void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -107,7 +108,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIClusterModule* m_pClusterSQLModule;
-    NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFINetModule* m_pNetModule;
 
 };
 
