@@ -37,25 +37,25 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
+	virtual NFIClusterClientModule* GetClusterModule();
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
 
 protected:
-    void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
 
     //////////////////////////////////////////////////////////////////////////
 
-    int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
     //////////////////////////////////////////////////////////////////////////
 
-    int OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);
@@ -69,6 +69,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
+	NFIClusterClientModule* m_pClusterClientModule;
 };
 
 #endif

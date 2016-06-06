@@ -14,10 +14,10 @@
 #include "NFIClusterClientModule.hpp"
 
 class NFIProxyServerToGameModule
-    : public  NFIClusterClientModule
+    : public  NFILogicModule
 {
 public:
-
+	virtual NFIClusterClientModule* GetClusterModule() = 0;
 };
 
 #endif

@@ -15,10 +15,10 @@
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule
-    : public NFIClusterClientModule
+    : public NFILogicModule
 {
-
 public:
+	virtual NFIClusterClientModule* GetClusterModule() = 0;
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap() = 0;
 };
 
