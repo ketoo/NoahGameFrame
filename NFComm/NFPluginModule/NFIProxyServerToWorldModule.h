@@ -14,11 +14,10 @@
 #include "NFIClusterClientModule.hpp"
 
 class NFIProxyServerToWorldModule
-    : public  NFIClusterClientModule
+    : public  NFILogicModule
 {
-
-
 public:
+	virtual NFIClusterClientModule* GetClusterModule() = 0;
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey) = 0;
 };
 
