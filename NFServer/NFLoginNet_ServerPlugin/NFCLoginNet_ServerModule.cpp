@@ -14,6 +14,7 @@ const std::string PROPERTY_VERIFIED = "Verified";
 
 bool NFCLoginNet_ServerModule::Init()
 {
+	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
     return true;
 }
 
@@ -64,7 +65,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
                 m_pUUIDModule->SetIdentID(nServerID);
 
-                int nRet = Initialization(this, &NFCLoginNet_ServerModule::OnReciveClientPack, &NFCLoginNet_ServerModule::OnSocketClientEvent, nMaxConnect, nPort, nCpus);
+                int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
                 {
                     std::ostringstream strLog;
@@ -87,14 +88,14 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsProcess(const int nWorldID, co
     {
         NFMsg::AckConnectWorldResult xMsg;
         xMsg.set_world_id(nWorldID);
-        xMsg.mutable_sender()->CopyFrom(NFToPB(xSenderID));
+        xMsg.mutable_sender()->CopyFrom(NFINetModule::NFToPB(xSenderID));
         xMsg.set_login_id(nLoginID);
         xMsg.set_account(strAccount);
         xMsg.set_world_ip(strWorldIP);
         xMsg.set_world_port(nWorldPort);
         xMsg.set_world_key(strWorldKey);
 
-        SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, *xFD);
+        m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, *xFD);
     }
 
     return 0;
@@ -102,12 +103,12 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsProcess(const int nWorldID, co
 
 bool NFCLoginNet_ServerModule::Execute()
 {
-    return NFINetModule::Execute();
+    return m_pNetModule->Execute();
 }
 
 void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    NetObject* pObject = GetNet()->GetNetObject(nAddress);
+    NetObject* pObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
     if (pObject)
     {
         NFGUID xIdent = m_pUUIDModule->CreateGUID();
@@ -118,7 +119,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 
 void NFCLoginNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
-    NetObject* pObject = GetNet()->GetNetObject(nAddress);
+    NetObject* pObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
     if (pObject)
     {
         NFGUID xIdent = pObject->GetClientID();
@@ -130,12 +131,12 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
 {
     NFGUID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
-    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    NetObject* pNetObject = GetNet()->GetNetObject(nSockIndex);
+    NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
     if (pNetObject)
     {
         //还没有登录过
@@ -151,7 +152,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
                 NFMsg::AckEventResult xMsg;
                 xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
 
-                SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
+				m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
                 return 0;
             }
 
@@ -161,7 +162,7 @@ int NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nMs
             NFMsg::AckEventResult xData;
             xData.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
 
-            SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
+			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
 
             m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
         }
@@ -175,12 +176,12 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const i
 {
     NFGUID nPlayerID;
     NFMsg::ReqConnectWorld xMsg;
-    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
 
-    NetObject* pNetObject = GetNet()->GetNetObject(nSockIndex);
+    NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
     if (!pNetObject)
     {
         return 0;
@@ -198,12 +199,12 @@ int NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const i
     xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
     xData.set_account(pNetObject->GetAccount());
 
-    m_pLoginToMasterModule->SendSuitByPB(pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
+    m_pLoginToMasterModule->GetClusterModule()->SendSuitByPB(pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);
 
     return 0;
 }
 
-void NFCLoginNet_ServerModule::OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginNet_ServerModule::OnReceiveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //统一解包
     switch (nMsgID)
@@ -282,14 +283,14 @@ void NFCLoginNet_ServerModule::SynWorldToClient(const int nFD)
     }
 
 
-    SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
+	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_WORLD_LIST, xData, nFD);
 }
 
 int NFCLoginNet_ServerModule::OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::ReqServerList xMsg;
-    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
