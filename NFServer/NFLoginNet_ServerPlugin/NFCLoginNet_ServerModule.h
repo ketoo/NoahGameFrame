@@ -26,7 +26,7 @@
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFGUID nPlayerID; \
     xNFMsg xMsg; \
-    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
+    if (!ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
     { \
         return 0; \
     } \
@@ -55,13 +55,13 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
     virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
 protected:
-    void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceiveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
@@ -95,6 +95,7 @@ private:
     NFILogModule* m_pLogModule;
     NFILoginLogicModule* m_pLoginLogicModule;
     NFIUUIDModule* m_pUUIDModule;
+	NFINetModule* m_pNetModule;
 };
 
 #endif

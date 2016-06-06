@@ -51,14 +51,14 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
-
+	virtual NFINetModule* GetNetModule();
 protected:
 
-    void OnRecivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -150,12 +150,12 @@ protected:
     {
         NFGUID nPlayerID;
         PBClass xMsg;
-        if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+        if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
         {
             return NULL_OBJECT;
         }
 
-        return PBToNF(xMsg.guild_id());
+        return NFINetModule::PBToNF(xMsg.guild_id());
     }
 
 private:
@@ -202,7 +202,7 @@ private:
     NFILogModule* m_pLogModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIElementInfoModule* m_pElementInfoModule;
-
+	NFINetModule* m_pNetModule;
 	NFIPlayerMysqlModule* m_pPlayerMysqlModule;
     //////////////////////////////////////////////////////////////////////////
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
