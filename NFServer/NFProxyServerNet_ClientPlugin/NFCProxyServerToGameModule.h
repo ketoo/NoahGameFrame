@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 
 
 class NFCProxyServerToGameModule : public NFIProxyServerToGameModule
@@ -38,19 +39,20 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
+	virtual NFIClusterClientModule* GetClusterModule();
 
 protected:
 
-    void OnReciveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceiveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
 
     void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    virtual void LogServerInfo(const std::string& strServerInfo);
+    void LogServerInfo(const std::string& strServerInfo);
 
 private:
 
@@ -60,7 +62,7 @@ private:
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
-
+	NFIClusterClientModule* m_pClusterClientModule;
 };
 
 #endif
