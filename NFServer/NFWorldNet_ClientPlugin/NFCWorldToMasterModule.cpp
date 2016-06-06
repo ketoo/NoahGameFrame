@@ -13,7 +13,7 @@
 
 bool NFCWorldToMasterModule::Init()
 {
-
+	m_pClusterClientModule = NF_NEW NFIClusterClientModule();
     return true;
 }
 
@@ -35,8 +35,6 @@ bool NFCWorldToMasterModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pWorldNet_ServerModule);
-
-    NFIClusterClientModule::Bind(this, &NFCWorldToMasterModule::OnReciveMSPack, &NFCWorldToMasterModule::OnSocketMSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -63,7 +61,7 @@ bool NFCWorldToMasterModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-                NFIClusterClientModule::AddServer(xServerData);
+				m_pClusterClientModule->AddServer(xServerData);
             }
         }
     }
@@ -74,7 +72,9 @@ bool NFCWorldToMasterModule::AfterInit()
 
 bool NFCWorldToMasterModule::Execute()
 {
-    return NFIClusterClientModule::Execute();
+	m_pClusterClientModule->Execute();
+
+	return true;
 }
 
 void NFCWorldToMasterModule::Register(NFINet* pNet)
@@ -130,7 +130,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
 {
     NFGUID nPlayerID;
     NFMsg::ReqConnectWorld xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -149,7 +149,7 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
         xData.set_world_port(xServerData->pData->server_port());
         xData.set_world_key(xMsg.account());
 
-        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
+        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
         SendSuitByPB(xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
     }
@@ -161,7 +161,7 @@ int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int 
 {
     NFGUID nPlayerID;
     NFMsg::ReqKickFromWorld xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return 0;
     }
@@ -173,7 +173,7 @@ int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int 
     return 0;
 }
 
-void NFCWorldToMasterModule::OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     switch (nMsgID)
     {

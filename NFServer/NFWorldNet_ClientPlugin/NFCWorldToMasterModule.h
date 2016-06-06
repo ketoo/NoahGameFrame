@@ -35,12 +35,12 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
 protected:
 
-    void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -65,7 +65,7 @@ private:
     NFILogicClassModule* m_pLogicClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
-
+	NFIClusterClientModule* m_pClusterClientModule;
 };
 
 #endif
