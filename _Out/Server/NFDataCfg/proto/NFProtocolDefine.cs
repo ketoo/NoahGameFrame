@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    Sat Jun  4 14:09:38 2016
+//    @Date             :    Mon Jun  6 21:42:47 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -500,6 +500,23 @@ public class GuildName
 
 }
 
+public class Hero
+{
+	//Class name
+	public static readonly string ThisName = "Hero";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String SkillRef = "SkillRef"; // string
+	public static readonly String TalentRef = "TalentRef"; // string
+	// Record
+
+}
+
 public class InitProperty
 {
 	//Class name
@@ -777,18 +794,26 @@ public class Player
 		Talent6		= 18, // Talent6 -- string
 		Talent7		= 19, // Talent7 -- string
 		Talent8		= 20, // Talent8 -- string
-		Skill1		= 21, // Skill1 -- string
-		Skill2		= 22, // Skill2 -- string
-		Skill3		= 23, // Skill3 -- string
-		Skill4		= 24, // Skill4 -- string
-		Skill5		= 25, // Skill5 -- string
-		SkillLevel1		= 26, // SkillLevel1 -- int
-		SkillLevel2		= 27, // SkillLevel2 -- int
-		SkillLevel3		= 28, // SkillLevel3 -- int
-		SkillLevel4		= 29, // SkillLevel4 -- int
-		SkillLevel5		= 30, // SkillLevel5 -- int
-		FightState		= 31, // FightState -- int
-		FightSkill		= 32, // FightSkill -- string
+		TalentLevel1		= 21, // TalentLevel1 -- int
+		TalentLevel2		= 22, // TalentLevel2 -- int
+		TalentLevel3		= 23, // TalentLevel3 -- int
+		TalentLevel4		= 24, // TalentLevel4 -- int
+		TalentLevel5		= 25, // TalentLevel5 -- int
+		TalentLevel6		= 26, // TalentLevel6 -- int
+		TalentLevel7		= 27, // TalentLevel7 -- int
+		TalentLevel8		= 28, // TalentLevel8 -- int
+		Skill1		= 29, // Skill1 -- string
+		Skill2		= 30, // Skill2 -- string
+		Skill3		= 31, // Skill3 -- string
+		Skill4		= 32, // Skill4 -- string
+		Skill5		= 33, // Skill5 -- string
+		SkillLevel1		= 34, // SkillLevel1 -- int
+		SkillLevel2		= 35, // SkillLevel2 -- int
+		SkillLevel3		= 36, // SkillLevel3 -- int
+		SkillLevel4		= 37, // SkillLevel4 -- int
+		SkillLevel5		= 38, // SkillLevel5 -- int
+		FightState		= 39, // FightState -- int
+		FightSkill		= 40, // FightSkill -- string
 
 	};
 
@@ -1147,6 +1172,47 @@ public class StateFunction
 	public static readonly String EFT_REPAIR = "EFT_REPAIR"; // int
 	public static readonly String EFT_CANCEL = "EFT_CANCEL"; // int
 	public static readonly String EFT_FINISH = "EFT_FINISH"; // int
+	// Record
+
+}
+
+public class Talent
+{
+	//Class name
+	public static readonly string ThisName = "Talent";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String TalentType = "TalentType"; // int
+	public static readonly String ShowName = "ShowName"; // string
+	public static readonly String Desc = "Desc"; // string
+	// Record
+
+}
+
+public class TalentRef
+{
+	//Class name
+	public static readonly string ThisName = "TalentRef";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String TALENT1 = "TALENT1"; // string
+	public static readonly String TALENT2 = "TALENT2"; // string
+	public static readonly String TALENT3 = "TALENT3"; // string
+	public static readonly String TALENT4 = "TALENT4"; // string
+	public static readonly String TALENT5 = "TALENT5"; // string
+	public static readonly String TALENT6 = "TALENT6"; // string
+	public static readonly String TALENT7 = "TALENT7"; // string
+	public static readonly String TALENT8 = "TALENT8"; // string
 	// Record
 
 }
