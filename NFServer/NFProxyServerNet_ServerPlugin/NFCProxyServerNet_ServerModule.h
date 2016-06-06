@@ -10,7 +10,7 @@
 #define NFC_PROXYSERVER_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
-
+#include "NFComm/NFCore/NFCConsistentHash.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
-#include "NFComm/NFCore/NFCConsistentHash.hpp"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -37,7 +37,7 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
     virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -47,7 +47,7 @@ public:
 
 protected:
 
-    void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReceiveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -79,6 +79,7 @@ protected:
     NFIElementInfoModule* m_pElementInfoModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIUUIDModule* m_pUUIDModule;
+	NFINetModule* m_pNetModule;
 
 };
 
