@@ -40,7 +40,6 @@ public:
 
 protected:
 
-    void OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -50,24 +49,27 @@ protected:
 
 protected:
     //世界服务器注册，刷新信息
-    int OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
     //登录服务器注册，刷新信息
-    int OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //选择世界服务器消息
-    int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
 
     void SynWorldToLogin();
     void LogGameServer();
+
+	void OnHeartBeat(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 
