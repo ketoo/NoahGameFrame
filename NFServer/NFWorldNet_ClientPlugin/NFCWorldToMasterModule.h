@@ -41,7 +41,6 @@ public:
 
 protected:
 
-    void OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -55,10 +54,10 @@ protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
-    int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
+	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 
     NFILogModule* m_pLogModule;
