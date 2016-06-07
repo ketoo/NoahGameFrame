@@ -87,6 +87,7 @@ public:
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName);
 
     virtual bool ExistElement(const std::string& strConfigName);
+    virtual bool ExistElement(const std::string& strClassName, const std::string& strConfigName);
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager(const std::string& strConfigName);
