@@ -130,19 +130,19 @@ const NFGUID NFCPlayerMysqlModule::CreateRole( const std::string& strAccount, co
 	vFieldVec.clear();
 	vValueVec.clear();
 
-    vFieldVec.push_back("Name");
+    vFieldVec.push_back(NFrame::Player::Name());
     vValueVec.push_back(strName);
 
-    vFieldVec.push_back("Job");
+    vFieldVec.push_back(NFrame::Player::Job());
     vValueVec.push_back(lexical_cast<std::string>(nJob));
 
-	vFieldVec.push_back("Race");
+	vFieldVec.push_back(NFrame::Player::Race());
 	vValueVec.push_back(lexical_cast<std::string>(nRace));
 
-    vFieldVec.push_back("Sex");
+    vFieldVec.push_back(NFrame::Player::Sex());
     vValueVec.push_back(lexical_cast<std::string>(nSex));
 
-    vFieldVec.push_back("Level");
+    vFieldVec.push_back(NFrame::Player::Level());
     vValueVec.push_back("0");
 
 	if(!m_pClusterSQLModule->Updata(mstrRoleTable, xID.ToString(), vFieldVec, vValueVec))
