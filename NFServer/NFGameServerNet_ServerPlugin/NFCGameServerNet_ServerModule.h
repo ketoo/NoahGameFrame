@@ -58,7 +58,6 @@ public:
 	virtual NFINetModule* GetNetModule();
 protected:
 
-    void OnReceivePSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -104,8 +103,13 @@ protected:
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
-
     ///////////WORLD_END///////////////////////////////////////////////////////////////
+
+	//////////////////////////////////////////////////////////////////////////
+	void OnCreateGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
+	void OnJoinGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
+	void OnLeaveGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
+	void OnOprGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
 
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
