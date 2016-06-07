@@ -54,6 +54,8 @@ protected:
     void OnAckEnterGame(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void LogServerInfo(const std::string& strServerInfo);
 
+	void Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
 
     NFILogModule* m_pLogModule;
