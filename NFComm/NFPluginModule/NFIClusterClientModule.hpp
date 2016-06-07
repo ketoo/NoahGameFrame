@@ -112,6 +112,17 @@ public:
 	}
 
 	template<typename BaseType>
+	int AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	{
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
+
+		mxCallBackList.push_back(functorPtr);
+
+		return false;
+	}
+
+	template<typename BaseType>
 	bool AddEventCallBack(BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
 		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
@@ -279,37 +290,6 @@ public:
 
 	
 protected:
-	//template<typename BaseType>
-	//void Bind(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
-	//{
-	//	mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-	//	mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-	//}
-
-	//void OnRecivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-	//{
-	//	//call receive callback
-	//	std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
-	//	if (mxReceiveCallBack.end() != it)
-	//	{
-	//		NET_RECIEVE_FUNCTOR_PTR& pFunPtr = it->second;
-	//		NET_RECIEVE_FUNCTOR* pFunc = pFunPtr.get();
-	//		pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-	//	}
-	//}
-
-	//void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
-	//{
-	//	//call event callback
-	//	std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = mxEventCallBack.begin();
-	//	for (; mxEventCallBack.end() != itEventCB; ++itEventCB)
-	//	{
-	//		NET_EVENT_FUNCTOR_PTR& pFunPtr = *itEventCB;
-	//		NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-	//		pFunc->operator()(nSockIndex, eEvent, pNet);
-	//	}
-	//}
-
 	void ProcessExecute()
 	{
 		ConnectData* pServerData = mxServerMap.FirstNude();
@@ -479,6 +459,12 @@ private:
 					xServerData->mxNetModule->AddEventCallBack(*itEventCB);
 				}
 
+				std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itCB = mxCallBackList.begin();
+				for (; mxCallBackList.end() != itCB; ++itCB)
+				{
+					xServerData->mxNetModule->AddReceiveCallBack(*itCB);
+				}
+
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
             }
         }
@@ -530,5 +516,6 @@ private:
 	//call back
 	std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
 	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
+	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
 };
 #endif
