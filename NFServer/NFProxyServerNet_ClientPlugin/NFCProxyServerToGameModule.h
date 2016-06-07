@@ -46,7 +46,6 @@ public:
 
 protected:
 
-    void OnReceiveGSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
