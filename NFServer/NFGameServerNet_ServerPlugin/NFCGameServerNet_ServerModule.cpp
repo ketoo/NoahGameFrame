@@ -403,7 +403,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, co
         NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->First();
         while (pPropertyInfo.get())
         {
-            if (pPropertyInfo->IsNullValue())
+            if (pPropertyInfo->Changed())
             {
                 switch (pPropertyInfo->GetType())
                 {
