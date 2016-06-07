@@ -10,10 +10,11 @@
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 
 bool NFCWorldToMasterModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule();
+	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
     return true;
 }
 
