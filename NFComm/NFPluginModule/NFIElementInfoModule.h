@@ -28,6 +28,7 @@ public:
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName) = 0;
 
     virtual bool ExistElement(const std::string& strConfigName) = 0;
+    virtual bool ExistElement(const std::string& strClassName, const std::string& strConfigName) = 0;
 
     virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName) = 0;
     virtual std::shared_ptr<NFIRecordManager> GetRecordManager(const std::string& strConfigName) = 0;

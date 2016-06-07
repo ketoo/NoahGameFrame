@@ -221,10 +221,12 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         if (pConfigPropertyManager.get() && pConfigRecordManager.get())
         {
             NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
-            while (pConfigPropertyInfo.get())
+            while (nullptr != pConfigPropertyInfo)
             {
-
-                pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+                if (pConfigPropertyInfo->IsNullValue())
+                {
+                    pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+                }
 
                 pConfigPropertyInfo = pConfigPropertyManager->Next();
             }
