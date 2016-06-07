@@ -207,6 +207,8 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
              xRecord->SetSave(pConfigRecordInfo->GetSave());
              xRecord->SetCache(pConfigRecordInfo->GetCache());
 
+
+
             //通用回调，方便NET同步
             pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
 
@@ -223,7 +225,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
             while (nullptr != pConfigPropertyInfo)
             {
-                if (pConfigPropertyInfo->IsNullValue())
+                if (pConfigPropertyInfo->Changed())
                 {
                     pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
                 }
