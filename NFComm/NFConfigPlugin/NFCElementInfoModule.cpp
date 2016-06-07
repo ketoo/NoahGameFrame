@@ -350,7 +350,7 @@ bool NFCElementInfoModule::ExistElement(const std::string& strClassName, const s
         return false;
     }
 
-    std::string strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
+    const std::string& strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
     if (strClass != strClassName)
     {
         return false;
