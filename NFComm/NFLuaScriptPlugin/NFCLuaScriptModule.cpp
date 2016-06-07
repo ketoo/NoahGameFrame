@@ -278,7 +278,7 @@ bool NFCLuaScriptModule::Regisger()
     .endClass();
 
     LuaIntf::LuaBinding(l).beginClass<NFIElementInfoModule>("NFIElementInfoModule")
-    .addFunction("ExistElement", &NFIElementInfoModule::ExistElement)
+    .addFunction("ExistElement", (bool (NFIElementInfoModule::*)(const std::string&))&NFIElementInfoModule::ExistElement)
     .addFunction("GetPropertyInt", &NFIElementInfoModule::GetPropertyInt)
     .addFunction("GetPropertyFloat", &NFIElementInfoModule::GetPropertyFloat)
     .addFunction("GetPropertyString", &NFIElementInfoModule::GetPropertyString)
