@@ -49,7 +49,7 @@ public:
     virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const = 0;
     virtual const NF_SHARE_PTR<NFMapEx<std::string, std::string>> GetEmbeddedMap() const = 0;
 
-    virtual bool Changed() const = 0;
+    virtual bool IsNullValue() const = 0;
 
     virtual std::string ToString() = 0;
     virtual bool FromString(const std::string& strData) = 0;
