@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerModule.cpp
+//    @FileName			:    NFCGameServerModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCGameServerModule
