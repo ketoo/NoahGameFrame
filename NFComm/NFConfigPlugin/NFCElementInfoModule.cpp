@@ -342,6 +342,23 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
     return false;
 }
 
+bool NFCElementInfoModule::ExistElement(const std::string& strClassName, const std::string& strConfigName)
+{
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (!pElementInfo)
+    {
+        return false;
+    }
+
+    std::string strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
+    if (strClass != strClassName)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 bool NFCElementInfoModule::LegalNumber(const char* str)
 {
     int nLen = int(strlen(str));
