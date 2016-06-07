@@ -37,6 +37,12 @@ bool NFCWorldToMasterModule::AfterInit()
     assert(NULL != m_pLogModule);
     assert(NULL != m_pWorldNet_ServerModule);
 
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCWorldToMasterModule::OnSelectServerProcess);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
+	m_pClusterClientModule->AddReceiveCallBack(this, &NFCWorldToMasterModule::InvalidMessage);
+
+	m_pClusterClientModule->AddEventCallBack(this, &NFCWorldToMasterModule::OnSocketMSEvent);
+
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
@@ -127,13 +133,13 @@ void NFCWorldToMasterModule::RefreshWorldInfo()
 
 }
 
-int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::ReqConnectWorld xMsg;
     if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
-        return 0;
+		return;
     }
 
     NF_SHARE_PTR<ServerData> xServerData = m_pWorldNet_ServerModule->GetSuitProxyForEnter();
@@ -155,41 +161,26 @@ int NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const in
         SendSuitByPB(xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
     }
 
-    return 0;
 }
 
-int NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::ReqKickFromWorld xMsg;
     if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
-        return 0;
+        return;
     }
 
     //T人,下线
     //     NFCDataList var;
     //     var << xMsg.world_id() << xMsg.account();
     //     m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_KICK_FROM_SERVER, var);
-    return 0;
 }
 
-void NFCWorldToMasterModule::OnReceivePack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-    switch (nMsgID)
-    {
-        case NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD:
-            OnSelectServerProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        case NFMsg::EGameMsgID::EGMI_REQ_KICK_CLIENT_INWORLD:
-            OnKickClientProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        default:
-            printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
-            break;
-    }
+	printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
 }
 
 void NFCWorldToMasterModule::OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
