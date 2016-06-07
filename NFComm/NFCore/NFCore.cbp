@@ -73,8 +73,6 @@
 		<Unit filename="NFCRecord.h" />
 		<Unit filename="NFCRecordManager.cpp" />
 		<Unit filename="NFCRecordManager.h" />
-		<Unit filename="NFCore.cpp" />
-		<Unit filename="NFCore.h" />
 		<Unit filename="NFDefine.h" />
 		<Unit filename="NFIComponent.h" />
 		<Unit filename="NFIComponentManager.h" />

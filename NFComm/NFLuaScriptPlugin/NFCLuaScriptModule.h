@@ -37,7 +37,7 @@ public:
     bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
     bool AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc);
     bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
-    int AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var);
+    int AddRow(const NFGUID& self, std::string& strRecordName, const NFIDataList& var);
 
     bool AddClassCallBack(std::string& className, std::string& funcName);
 

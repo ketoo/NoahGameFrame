@@ -1,14 +1,14 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIAsyClusterModule.h
+//    @FileName      	:    NFIAsyMysqlModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIAsyClusterModule
+//    @Module           :    NFIAsyMysqlModule
 //
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_ASY_CLUSTER_MODULE_H
-#define NFI_ASY_CLUSTER_MODULE_H
+#ifndef NFI_ASY_MYSQL_MODULE_H
+#define NFI_ASY_MYSQL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -20,7 +20,7 @@ typedef std::function<void(const NFGUID& self, const int nRet, const std::vector
 
 struct SMysqlParam;
 
-class NFIAsyClusterModule
+class NFIAsyMysqlModule
     : public NFILogicModule
 {
 public:
