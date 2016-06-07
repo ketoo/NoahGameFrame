@@ -91,12 +91,20 @@ protected:
         m_pNet = NULL;
     }
 public:
-    NFINetModule(NFIPluginManager* p)
+	template<typename BaseType>
+    NFINetModule(NFIPluginManager* p, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
     {
         pPluginManager = p;
 		nLastTime = GetPluginManager()->GetNowTime();
         m_pNet = NULL;
     }
+
+	NFINetModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+		nLastTime = GetPluginManager()->GetNowTime();
+		m_pNet = NULL;
+	}
 
     virtual ~NFINetModule()
     {
@@ -130,7 +138,15 @@ public:
         NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
 		return AddReceiveCallBack(nMsgID, functorPtr);
-    }
+	}
+	template<typename BaseType>
+	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	{
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
+
+		return AddReceiveCallBack(functorPtr);
+	}
 
 	virtual bool AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb)
 	{
@@ -142,6 +158,13 @@ public:
 		 mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
 
 		 return true;
+	}
+
+	virtual bool AddReceiveCallBack(const NET_RECEIVE_FUNCTOR_PTR& cb)
+	{
+		mxCallBackList.push_back(cb);
+
+		return true;
 	}
 
 	template<typename BaseType>
@@ -411,7 +434,15 @@ protected:
 			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
 			pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
 		}
-
+		else
+		{
+			for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxCallBackList.begin(); it != mxCallBackList.end(); ++it)
+			{
+				NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
+				NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+				pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+			}
+		}
 	}
 
 	void OnSocketNetEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -455,7 +486,9 @@ private:
     NFINet* m_pNet;
     NFINT64 nLastTime;
 	std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
-    std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
+	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
+	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
+	 ;
 };
 
 #endif
