@@ -82,7 +82,7 @@ struct ServerData
 class NFINetModule
     : public NFILogicModule
 {
-
+protected:
     NFINetModule()
     {
         //important to init the value of pPluginManager

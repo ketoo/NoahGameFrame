@@ -23,7 +23,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pWorldLogicModule);
