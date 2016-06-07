@@ -25,6 +25,7 @@ class NFCMasterNet_ServerModule
 public:
     NFCMasterNet_ServerModule(NFIPluginManager* p)
     {
+		pPluginManager = p;
         mnLastLogTime = pPluginManager->GetNowTime();
     }
 
