@@ -55,11 +55,6 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 		return;
 	}
 
-	if (xData.IsNullValue())
-	{
-		return;
-	}
-
 	if (nullptr == mxData)
 	{
 		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(xData));
@@ -70,10 +65,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 
 	mxData->variantData = xData.variantData;
 
-	NFCDataList::TData newValue;
-	newValue = *mxData;
-
-	OnEventHandler(oldValue, newValue);
+	OnEventHandler(oldValue, *mxData);
 }
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
@@ -444,7 +436,7 @@ bool NFCProperty::DeSerialization()
 	bool bRet = false;
 
 	const TDATA_TYPE eType = GetType();
-	if (eType == TDATA_STRING && nullptr != mxData && !mxData->IsNullValue())
+	if (eType == TDATA_STRING && nullptr != mxData && !mxData->GetString().empty())
 	{
 		NFCDataList xDataList;
 		const std::string& strData = mxData->GetString();

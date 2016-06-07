@@ -12,14 +12,14 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
+#include "NFComm/NFPluginModule/NFIAsyMysqlModule.h"
 
 class NFCPlayerMysqlModule
     : public NFIPlayerMysqlModule
@@ -68,8 +68,8 @@ private:
 
 private:
     NFIKernelModule* m_pKernelModule;
-    NFIClusterModule* m_pClusterSQLModule;
-    NFIAsyClusterModule* m_pAsyClusterSQLModule;
+    NFIMysqlModule* m_pClusterSQLModule;
+    NFIAsyMysqlModule* m_pAsyClusterSQLModule;
 	NFIUUIDModule* m_pUUIDModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;

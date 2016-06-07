@@ -47,13 +47,21 @@ struct ConnectData
 
 class NFIClusterClientModule : public NFILogicModule
 {
+protected:
+	NFIClusterClientModule()
+	{
+	}
 public:
     enum EConstDefine
     {
         EConstDefine_DefaultWeith = 500,
     };
 
-public:
+	NFIClusterClientModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+	}
+
 	virtual bool Init()
 	{
 		AddEventCallBack(this, &NFIClusterClientModule::OnSocketEvent);

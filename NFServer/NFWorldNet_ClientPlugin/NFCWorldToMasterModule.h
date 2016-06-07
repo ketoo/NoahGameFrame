@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 
 class NFCWorldToMasterModule
     : public NFIWorldToMasterModule
