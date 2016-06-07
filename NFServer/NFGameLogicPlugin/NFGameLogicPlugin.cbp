@@ -132,6 +132,7 @@
 		    <Unit filename="NFCGuildModule.cpp" />
 		    <Unit filename="NFCHeroItemConsumeProcessModule.cpp" />
 		    <Unit filename="NFCHeroModule.cpp" />
+		    <Unit filename="NFCHeroPropertyModule.cpp" />
 		    <Unit filename="NFCItemConsumeManagerModule.cpp" />
 		    <Unit filename="NFCMailModule.cpp" />
 		    <Unit filename="NFCMapModule.cpp" />

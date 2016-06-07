@@ -97,6 +97,7 @@ ALTER TABLE `Player` ADD `GameID` bigint(11) DEFAULT '0' COMMENT '登陆的服ID';
 ALTER TABLE `Player` ADD `GateID` bigint(11) DEFAULT '0' COMMENT '登陆的网关ID';
 ALTER TABLE `Player` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '公会ID';
 ALTER TABLE `Player` ADD `PlayerHero` BLOB COMMENT '';
+ALTER TABLE `Player` ADD `PlayerFightHero` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `BagEquipList` BLOB COMMENT '普通背包';
 ALTER TABLE `Player` ADD `BagItemList` BLOB COMMENT '普通背包';
 ALTER TABLE `Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';

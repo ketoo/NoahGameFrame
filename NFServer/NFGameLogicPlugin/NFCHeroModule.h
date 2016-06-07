@@ -46,14 +46,11 @@ public:
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
     virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
 
-	virtual bool HeroWearEquip(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID);
-	virtual bool HeroUnEquip(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID);
-
 	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
 	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
 
-	virtual bool SetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID);
-	virtual bool UnSetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID);
+	virtual bool SetFightHero(const NFGUID& self, const int nPos, const NFGUID& xHeroID);
+	virtual bool UnSetFightHero(const NFGUID& self, const int nPos, const NFGUID& xHeroID);
 
 protected:
 	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );

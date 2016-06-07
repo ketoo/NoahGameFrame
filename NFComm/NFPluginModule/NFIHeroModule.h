@@ -30,9 +30,6 @@ public:
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 
-	virtual bool HeroWearEquip(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID) = 0;
-	virtual bool HeroUnEquip(const NFGUID& self, const NFGUID& xHeroID, const NFGUID& xEquipID) = 0;
-
 	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
 	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
 

@@ -30,10 +30,6 @@ bool NFCHeroPropertyModule::AfterInit()
 	assert(NULL != m_pElementInfoModule);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroPropertyModule::OnObjectClassEvent);
-
-
-
-
 	return true;
 
 }

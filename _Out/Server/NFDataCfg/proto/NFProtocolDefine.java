@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    Mon Jun  6 21:42:47 2016
+//    @Date             :    Tue Jun  7 15:22:29 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -734,6 +734,7 @@ public class Player {
 	public static final String GuildID = "GuildID"; // object
 	// Record
 	public static final String R_PlayerHero = "PlayerHero";
+	public static final String R_PlayerFightHero = "PlayerFightHero";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
 	public static final String R_HeroPropertyValue = "HeroPropertyValue";
@@ -786,6 +787,13 @@ public class Player {
 		SkillLevel5		= 38, // SkillLevel5 -- int
 		FightState		= 39, // FightState -- int
 		FightSkill		= 40, // FightSkill -- string
+
+	};
+
+	public enum PlayerFightHero
+	{
+		GUID		= 0, // GUID -- object
+		FightPos		= 1, // FightPos -- int
 
 	};
 

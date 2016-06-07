@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Mon Jun  6 21:42:47 2016
+//    @Date             :    Tue Jun  7 15:22:29 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -783,6 +783,7 @@ public:
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
 	// Record
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
+	static const std::string& R_PlayerFightHero(){ static std::string xPlayerFightHero = "PlayerFightHero"; return xPlayerFightHero;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
 	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
@@ -835,6 +836,13 @@ public:
 		PlayerHero_SkillLevel5		= 38, // SkillLevel5 -- int
 		PlayerHero_FightState		= 39, // FightState -- int
 		PlayerHero_FightSkill		= 40, // FightSkill -- string
+
+	};
+
+	enum PlayerFightHero
+	{
+		PlayerFightHero_GUID		= 0, // GUID -- object
+		PlayerFightHero_FightPos		= 1, // FightPos -- int
 
 	};
 
