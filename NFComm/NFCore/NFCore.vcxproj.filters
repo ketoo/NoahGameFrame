@@ -11,7 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,7 +100,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

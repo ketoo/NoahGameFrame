@@ -49,7 +49,7 @@ bool NFCLoginLogicModule::Execute()
 
 bool NFCLoginLogicModule::AfterInit()
 {
-    m_pClusterSqlModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    m_pClusterSqlModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
     m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>("NFCLoginNet_ServerModule");
 
     assert(NULL != m_pClusterSqlModule);

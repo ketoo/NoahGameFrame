@@ -199,10 +199,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             NF_SHARE_PTR<NFIRecord> xRecord =  pRecordManager->AddRecord(ident,
                                       pConfigRecordInfo->GetName(),
                                       pConfigRecordInfo->GetInitData(),
-                                      pConfigRecordInfo->GetKeyState(),
-                                      pConfigRecordInfo->GetInitDesc(),
                                       pConfigRecordInfo->GetTag(),
-                                      pConfigRecordInfo->GetRelatedRecord(),
                                       pConfigRecordInfo->GetRows());
 
              xRecord->SetPublic(pConfigRecordInfo->GetPublic());
@@ -210,24 +207,11 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
              xRecord->SetSave(pConfigRecordInfo->GetSave());
              xRecord->SetCache(pConfigRecordInfo->GetCache());
 
-
-
             //通用回调，方便NET同步
             pObject->AddRecordCallBack(pConfigRecordInfo->GetName(), this, &NFCKernelModule::OnRecordCommonEvent);
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
-        /*
-                std::string strSrciptComponentName;
-                NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
-                while (!strSrciptComponentName.empty())
-                {
-                    pComponentManager->AddComponent(strSrciptComponentName, xComponent);
-
-                    strSrciptComponentName.clear();
-                    NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
-                }
-        */
 
         //////////////////////////////////////////////////////////////////////////
         //配置属性

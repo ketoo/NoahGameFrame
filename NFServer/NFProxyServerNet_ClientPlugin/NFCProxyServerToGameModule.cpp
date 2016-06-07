@@ -14,7 +14,7 @@
 
 bool NFCProxyServerToGameModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule();
+	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
     return true;
 }
 
