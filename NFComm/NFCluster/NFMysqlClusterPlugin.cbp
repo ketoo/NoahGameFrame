@@ -100,8 +100,8 @@
 		</Build>
 		<Unit filename="NFCAsyMysqlClusterModule.cpp" />
 		<Unit filename="NFCAsyMysqlClusterModule.h" />
-		<Unit filename="NFCMysqlClusterModule.cpp" />
-		<Unit filename="NFCMysqlClusterModule.h" />
+		<Unit filename="NFCMysqlModule.cpp" />
+		<Unit filename="NFCMysqlModule.h" />
 		<Unit filename="NFCMysqlDriver.cpp" />
 		<Unit filename="NFCMysqlDriver.h" />
 		<Unit filename="NFCMysqlDriverManager.cpp" />

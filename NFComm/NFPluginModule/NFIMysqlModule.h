@@ -1,19 +1,19 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIClusterModule.h
+//    @FileName      	:    NFIMysqlModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIClusterModule
+//    @Module           :    NFIMysqlModule
 //
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_CLUSTER_MODULE_H
-#define NFI_CLUSTER_MODULE_H
+#ifndef NFI_MYSQL_MODULE_H
+#define NFI_MYSQL_MODULE_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFIClusterModule
+class NFIMysqlModule
     : public NFILogicModule
 {
 public:

@@ -1,4 +1,4 @@
-#include "NFCAsyMysqlClusterModule.h"
+#include "NFCAsyMysqlModule.h"
 #include "NFCMysqlDriverManager.h"
 
 bool SMysqlParam::PackParam(std::string& strData)
@@ -91,17 +91,17 @@ int NFCMysqlComponent::OnASyncEvent(const NFGUID& self, const int event, std::st
 {
     switch (event)
     {
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_USEDB:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_USEDB:
         {
             return OnASyUseMysqlEvent(self, event, arg);
         }
         break;
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_INISERVER:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_INISERVER:
         {
             return OnASyAddMysqlServerEvent(self, event, arg);
         }
         break;
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
             return OnASyKeepServerAliveEvent(self, event, arg);
         }
@@ -221,41 +221,41 @@ NF_SHARE_PTR<NFIComponent> NFCMysqlComponent::CreateNewInstance()
     return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCMysqlComponent(NFGUID(1, 2), ""));
 }
 
-NFCAsyMysqlClusterModule::NFCAsyMysqlClusterModule(NFIPluginManager* p)
+NFCAsyMysqlModule::NFCAsyMysqlModule(NFIPluginManager* p)
 {
     pPluginManager = p;
     mnLastCheckTime = 0;
 }
 
-NFCAsyMysqlClusterModule::~NFCAsyMysqlClusterModule()
+NFCAsyMysqlModule::~NFCAsyMysqlModule()
 {
 
 }
 
-bool NFCAsyMysqlClusterModule::Init()
+bool NFCAsyMysqlModule::Init()
 {
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Shut()
-{
-
-    return true;
-}
-
-bool NFCAsyMysqlClusterModule::Execute()
+bool NFCAsyMysqlModule::Shut()
 {
 
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::AfterInit()
+bool NFCAsyMysqlModule::Execute()
 {
 
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::AfterInit()
+{
+
+    return true;
+}
+
+bool NFCAsyMysqlModule::Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -281,7 +281,7 @@ bool NFCAsyMysqlClusterModule::Updata(const NFGUID& self, const std::string& str
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -306,7 +306,7 @@ bool NFCAsyMysqlClusterModule::Query(const NFGUID& self, const std::string& strR
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Select(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::Select(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -331,7 +331,7 @@ bool NFCAsyMysqlClusterModule::Select(const NFGUID& self, const std::string& str
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -355,7 +355,7 @@ bool NFCAsyMysqlClusterModule::Delete(const NFGUID& self, const std::string& str
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -379,7 +379,7 @@ bool NFCAsyMysqlClusterModule::Exists(const NFGUID& self, const std::string& str
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData)
+bool NFCAsyMysqlModule::Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData)
 {
     NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
     if (NULL == pParam)
@@ -403,7 +403,7 @@ bool NFCAsyMysqlClusterModule::Keys(const NFGUID& self, const std::string& strRe
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::StartActorPool(const int nCount)
+bool NFCAsyMysqlModule::StartActorPool(const int nCount)
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -413,7 +413,7 @@ bool NFCAsyMysqlClusterModule::StartActorPool(const int nCount)
 
     for (int i = 0; i < nCount; i++)
     {
-        int nActorID = pActorManager->RequireActor<NFCMysqlComponent>(this, &NFCAsyMysqlClusterModule::RequestAsyEnd);
+        int nActorID = pActorManager->RequireActor<NFCMysqlComponent>(this, &NFCAsyMysqlModule::RequestAsyEnd);
         if (nActorID > 0)
         {
             mActorList.AddElement(i, NF_SHARE_PTR<int> (NF_NEW int(nActorID)));
@@ -423,7 +423,7 @@ bool NFCAsyMysqlClusterModule::StartActorPool(const int nCount)
     return true;
 }
 
-bool NFCAsyMysqlClusterModule::CloseActorPool()
+bool NFCAsyMysqlModule::CloseActorPool()
 {
     int nActor = 0;
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
@@ -441,7 +441,7 @@ bool NFCAsyMysqlClusterModule::CloseActorPool()
     return true;
 }
 
-int NFCAsyMysqlClusterModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
+int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -477,21 +477,21 @@ int NFCAsyMysqlClusterModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
     return 0;
 }
 
-int NFCAsyMysqlClusterModule::RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+int NFCAsyMysqlModule::RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
     switch (nEventID)
     {
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_USEDB:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_USEDB:
         {
             return OnUseMysqlAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_INISERVER:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_INISERVER:
         {
             return OnAddMysqlServerAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
-        case NFCAsyMysqlClusterModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
             return OnKeepServerAliveAsyEnd(self, nFormActor, nEventID, strData);
         }
@@ -503,7 +503,7 @@ int NFCAsyMysqlClusterModule::RequestAsyEnd(const NFGUID& self, const int nFormA
     return 0;
 }
 
-int NFCAsyMysqlClusterModule::GetActor()
+int NFCAsyMysqlModule::GetActor()
 {
     if (mActorList.Count() <= 0)
     {
@@ -527,7 +527,7 @@ int NFCAsyMysqlClusterModule::GetActor()
     return -1;
 }
 
-bool NFCAsyMysqlClusterModule::AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime /*= 10*/, const int nRconneCount /*= -1*/)
+bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime /*= 10*/, const int nRconneCount /*= -1*/)
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -563,7 +563,7 @@ bool NFCAsyMysqlClusterModule::AddMysqlServer(const int nServerID, const std::st
 }
 
 
-bool NFCAsyMysqlClusterModule::KeepAliveMysqlServer()
+bool NFCAsyMysqlModule::KeepAliveMysqlServer()
 {
     NFIActorManager* pActorManager = pPluginManager->GetActorManager();
     if (NULL == pActorManager)
@@ -582,7 +582,7 @@ bool NFCAsyMysqlClusterModule::KeepAliveMysqlServer()
     return true;
 }
 
-int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+int NFCAsyMysqlModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
     SMysqlParam xResultparam;
     if (!xResultparam.UnPackParam(strData))
@@ -640,12 +640,12 @@ int NFCAsyMysqlClusterModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFo
     return 0;
 }
 
-int NFCAsyMysqlClusterModule::OnAddMysqlServerAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+int NFCAsyMysqlModule::OnAddMysqlServerAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
     return 0;
 }
 
-int NFCAsyMysqlClusterModule::OnKeepServerAliveAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+int NFCAsyMysqlModule::OnKeepServerAliveAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
     return 0;
 }

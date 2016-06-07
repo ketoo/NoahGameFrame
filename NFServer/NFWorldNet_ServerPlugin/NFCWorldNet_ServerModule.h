@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCWorldNet_ServerModule
@@ -107,7 +107,7 @@ private:
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIClusterModule* m_pClusterSQLModule;
+    NFIMysqlModule* m_pClusterSQLModule;
 	NFINetModule* m_pNetModule;
 
 };

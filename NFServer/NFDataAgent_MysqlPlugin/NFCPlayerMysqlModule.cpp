@@ -32,12 +32,12 @@ bool NFCPlayerMysqlModule::Execute()
 bool NFCPlayerMysqlModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>( "NFCMysqlClusterModule" );
+    m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>( "NFCMysqlModule" );
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyClusterModule>( "NFCAsyMysqlClusterModule" );
+    m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyMysqlModule>( "NFCAsyMysqlModule" );
 	
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pClusterSQLModule);

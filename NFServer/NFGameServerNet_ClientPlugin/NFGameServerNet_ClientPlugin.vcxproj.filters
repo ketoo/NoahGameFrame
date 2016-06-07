@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClInclude Include="NFGameServerNet_ClientPlugin.h" />
     <ClInclude Include="NFCGameServerToWorldModule.h" />
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIGameServerToWorldModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
