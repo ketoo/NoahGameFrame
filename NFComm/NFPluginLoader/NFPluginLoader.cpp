@@ -65,7 +65,7 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 
 void CloseXButton()
 {
-#if defined(NF_DEBUG_MODE)
+#ifndef NF_DEBUG_MODE
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	HWND hWnd = GetConsoleWindow();
 	if (hWnd)
