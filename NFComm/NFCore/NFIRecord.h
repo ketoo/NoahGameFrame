@@ -32,9 +32,7 @@ public:
     virtual ~NFIRecord() {}
 
     virtual bool IsUsed(const int nRow) const  = 0;
-    virtual bool IsKey(const int nCol) const  = 0;
     virtual bool SetUsed(const int nRow, const int bUse)  = 0;
-    virtual bool SetKey(const int nCol, const int bKey) = 0;
 
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
@@ -110,10 +108,9 @@ public:
     virtual const bool GetPrivate() = 0;
     virtual const bool GetCache() = 0;
     virtual const std::string& GetName() const = 0;
-    virtual const NFIDataList& GetInitData() const = 0;
-    virtual const NFIDataList& GetKeyState() const = 0;
-    virtual const NFIDataList& GetInitDesc() const = 0;
-    virtual const NFIDataList& GetTag() const = 0;
+
+    virtual const NF_SHARE_PTR<NFIDataList>& GetInitData() const = 0;
+    virtual const NF_SHARE_PTR<NFIDataList>& GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetCache(const bool bCache) = 0;
@@ -122,9 +119,6 @@ public:
     virtual void SetName(const char* strName) = 0;
 
     virtual const TRECORDVEC& GetRecordVec() const = 0;
-
-    virtual const NFIDataList& GetRelatedRecord() const = 0;
-    virtual bool GetRelatedTag(const std::string& strSrcTag, const std::string& strRelatedRecord, std::string& strRelatedTag) = 0;
 };
 
 #endif

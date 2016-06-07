@@ -13,13 +13,13 @@ NFCRecordManager::~NFCRecordManager()
     ClearAll();
 }
 
-NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NFIDataList& ValueList, const NFIDataList& keyList, const NFIDataList& descList, const NFIDataList& tagList, const NFIDataList& relateRecordData, const int nRows)
+NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NF_SHARE_PTR<NFIDataList>& ValueList, const NF_SHARE_PTR<NFIDataList>& tagList, const int nRows)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
     if (!pRecord.get())
     {
         //NF_SHARE_PTR<NFIRecord>
-        pRecord = NF_SHARE_PTR<NFIRecord>(NF_NEW NFCRecord(self, strRecordName, ValueList, keyList, descList, tagList, relateRecordData, nRows));
+        pRecord = NF_SHARE_PTR<NFIRecord>(NF_NEW NFCRecord(self, strRecordName, ValueList, tagList, nRows));
         this->AddElement(strRecordName, pRecord);
     }
 
@@ -29,24 +29,6 @@ NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const st
 const NFGUID& NFCRecordManager::Self()
 {
     return mSelf;
-}
-
-void NFCRecordManager::GetRelationRows(const std::string& strSrcRecord, const std::string& strSrcTag, const NFIDataList& var, const std::string& strRelatedRecord, NFIDataList& outRowList)
-{
-    NF_SHARE_PTR<NFIRecord> pSrcRecord = GetElement(strSrcRecord);
-    NF_SHARE_PTR<NFIRecord> pRelatedRecord = GetElement(strRelatedRecord);
-    if (NULL == pSrcRecord.get() || NULL == pRelatedRecord.get())
-    {
-        return;
-    }
-
-    std::string strRelatedTag;
-    if (!pSrcRecord->GetRelatedTag(strSrcTag, strRelatedRecord, strRelatedTag))
-    {
-        return;
-    }
-
-    pRelatedRecord->FindRowByColValue(strRelatedTag, var, outRowList);
 }
 
 bool NFCRecordManager::SetRecordInt(const std::string& strRecordName, const int nRow, const int nCol, const NFINT64 nValue)

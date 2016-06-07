@@ -179,7 +179,7 @@ int NFCLuaScriptModule::OnLuaHeartBeatCB(const NFGUID& self, const std::string& 
     return CallLuaFuncFromMap(m_luaHeartBeatCallBackFuncMap, strHeartBeatName, self, strHeartBeatName, fTime, nCount);
 }
 
-int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFCDataList& var)
+int NFCLuaScriptModule::AddRow(const NFGUID& self, std::string& strRecordName, const NFIDataList& var)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, strRecordName);
     if (nullptr == pRecord)
