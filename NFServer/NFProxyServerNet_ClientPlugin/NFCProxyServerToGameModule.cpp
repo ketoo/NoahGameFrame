@@ -49,7 +49,7 @@ bool NFCProxyServerToGameModule::AfterInit()
     assert(NULL != m_pLogicClassModule);
 
 	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
-	m_pClusterClientModule->AddReceiveCallBack(-1, this, &NFCProxyServerToGameModule::Transpond);
+	m_pClusterClientModule->AddReceiveCallBack(this, &NFCProxyServerToGameModule::Transpond);
 
 	m_pClusterClientModule->AddEventCallBack(this, &NFCProxyServerToGameModule::OnSocketGSEvent);
 
