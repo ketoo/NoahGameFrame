@@ -6,6 +6,8 @@
 	<Plugin Name="NFWorldNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>
 	<Plugin Name="NFWorldNet_ServerPlugin" Main="1"/>
+	<Plugin Name="NFNoSqlPlugin" Main="1"/>
+	<Plugin Name="NFMysqlClusterPlugin" Main="1"/>
 	<Plugin Name="NFDataAgent_NosqlPlugin" Main="1"/>
 	
 	<APPID Name="7" />
