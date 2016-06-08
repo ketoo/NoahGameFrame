@@ -14,6 +14,10 @@
 
 bool NFCProxyServerToWorldModule::Init()
 {
+	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+
+	m_pClusterClientModule->Init();
+
     return true;
 }
 
@@ -26,33 +30,16 @@ bool NFCProxyServerToWorldModule::Shut()
 
 bool NFCProxyServerToWorldModule::Execute()
 {
-    return NFIClusterClientModule::Execute();
-}
+	m_pClusterClientModule->Execute();
 
-void NFCProxyServerToWorldModule::OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    //这里是worldserver发来的消息
-    switch (nMsgID)
-    {
-        case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-            OnSelectServerResultProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
-            OnServerInfoProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        default:
-            m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
-            break;
-    }
+	return true;
 }
 
 void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -75,12 +62,12 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
         {
             case NF_SERVER_TYPES::NF_ST_GAME:
             {
-                m_pToGameServerClusterClient->AddServer(xServerData);
+                m_pProxyServerToGameModule->GetClusterModule()->AddServer(xServerData);
             }
             break;
             case NF_SERVER_TYPES::NF_ST_WORLD:
             {
-                NFIClusterClientModule::AddServer(xServerData);
+				m_pClusterClientModule->AddServer(xServerData);
             }
             break;
             default:
@@ -142,11 +129,11 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
 
-                NF_SHARE_PTR<ConnectData> pServerData = GetServerNetInfo(pNet);
+                NF_SHARE_PTR<ConnectData> pServerData = GetClusterModule()->GetServerNetInfo(pNet);
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-                    SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
+					GetClusterModule()->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -163,7 +150,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pToGameServerClusterClient = dynamic_cast<NFIClusterClientModule*>(pPluginManager->FindModule("NFCProxyServerToGameModule"));
+    m_pProxyServerToGameModule = dynamic_cast<NFIProxyServerToGameModule*>(pPluginManager->FindModule("NFCProxyServerToGameModule"));
 
     assert(NULL != m_pProxyLogicModule);
     assert(NULL != m_pKernelModule);
@@ -171,9 +158,13 @@ bool NFCProxyServerToWorldModule::AfterInit()
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pLogModule);
     assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pToGameServerClusterClient);
+    assert(NULL != m_pProxyServerToGameModule);
 
-    NFIClusterClientModule::Bind(this, &NFCProxyServerToWorldModule::OnReciveWSPack, &NFCProxyServerToWorldModule::OnSocketWSEvent);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
+	m_pClusterClientModule->AddReceiveCallBack(this, &NFCProxyServerToWorldModule::OnOtherMessage);
+
+	m_pClusterClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -200,7 +191,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-                NFIClusterClientModule::AddServer(xServerData);
+				m_pClusterClientModule->AddServer(xServerData);
             }
         }
     }
@@ -214,7 +205,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     //保持记录,直到下线,或者1分钟不上线即可删除
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -230,6 +221,11 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     pConnectData->strAccount = xMsg.account();
     pConnectData->strConnectKey = xMsg.world_key();
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);
+}
+
+NFIClusterClientModule* NFCProxyServerToWorldModule::GetClusterModule()
+{
+	return m_pClusterClientModule;
 }
 
 bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccount, const std::string& strKey)
@@ -248,4 +244,9 @@ bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccoun
 void NFCProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo)
 {
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
+}
+
+void NFCProxyServerToWorldModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
 }

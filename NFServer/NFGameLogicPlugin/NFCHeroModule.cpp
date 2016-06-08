@@ -42,7 +42,7 @@ bool NFCHeroModule::AfterInit()
 	assert(NULL != m_pUUIDModule);
 	assert(NULL != m_pElementInfoModule);
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
 
 	bool isUnitTest = true;//单元测试开关
 
@@ -146,14 +146,14 @@ bool NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 		return false;
 	}
 
-	NFCDataList xRowData = pHeroRecord->GetInitData();
+	NF_SHARE_PTR<NFIDataList> xRowData = pHeroRecord->GetInitData();
 
 	NFGUID xHeroID = m_pUUIDModule->CreateGUID();
-	xRowData.SetObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
-	xRowData.SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID.c_str());
+	xRowData->SetObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
+	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID.c_str());
 
 
-	if (pHeroRecord->AddRow(-1, xRowData) < 0)
+	if (pHeroRecord->AddRow(-1, *xRowData) < 0)
 	{
 		return false;
 	}
@@ -459,12 +459,12 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const int nPos, const NFGUI
 		return false;
 	}
 
-	NFCDataList xRowData = pFightHeroRecord->GetInitData();
+	NF_SHARE_PTR<NFIDataList> xRowData = pFightHeroRecord->GetInitData();
 
-	xRowData.SetObject(NFrame::Player::PlayerFightHero::PlayerFightHero_GUID, xHeroID);
-	xRowData.SetInt(NFrame::Player::PlayerFightHero::PlayerFightHero_FightPos, nPos);
+	xRowData->SetObject(NFrame::Player::PlayerFightHero::PlayerFightHero_GUID, xHeroID);
+	xRowData->SetInt(NFrame::Player::PlayerFightHero::PlayerFightHero_FightPos, nPos);
 
-	if (pFightHeroRecord->AddRow(-1, xRowData) < 0)
+	if (pFightHeroRecord->AddRow(-1, *xRowData) < 0)
 	{
 		return false;
 	}

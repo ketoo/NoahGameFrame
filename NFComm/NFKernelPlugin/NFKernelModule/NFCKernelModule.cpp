@@ -199,10 +199,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             NF_SHARE_PTR<NFIRecord> xRecord =  pRecordManager->AddRecord(ident,
                                       pConfigRecordInfo->GetName(),
                                       pConfigRecordInfo->GetInitData(),
-                                      pConfigRecordInfo->GetKeyState(),
-                                      pConfigRecordInfo->GetInitDesc(),
                                       pConfigRecordInfo->GetTag(),
-                                      pConfigRecordInfo->GetRelatedRecord(),
                                       pConfigRecordInfo->GetRows());
 
              xRecord->SetPublic(pConfigRecordInfo->GetPublic());
@@ -217,17 +214,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
-        /*
-                std::string strSrciptComponentName;
-                NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->First(strSrciptComponentName);
-                while (!strSrciptComponentName.empty())
-                {
-                    pComponentManager->AddComponent(strSrciptComponentName, xComponent);
-
-                    strSrciptComponentName.clear();
-                    NF_SHARE_PTR<NFIComponent> xComponent = pStaticClasComponentManager->Next(strSrciptComponentName);
-                }
-        */
 
         //////////////////////////////////////////////////////////////////////////
         //配置属性
@@ -237,10 +223,12 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         if (pConfigPropertyManager.get() && pConfigRecordManager.get())
         {
             NF_SHARE_PTR<NFIProperty> pConfigPropertyInfo = pConfigPropertyManager->First();
-            while (pConfigPropertyInfo.get())
+            while (nullptr != pConfigPropertyInfo)
             {
-
-                pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+                if (pConfigPropertyInfo->Changed())
+                {
+                    pPropertyManager->SetProperty(pConfigPropertyInfo->GetKey(), pConfigPropertyInfo->GetValue());
+                }
 
                 pConfigPropertyInfo = pConfigPropertyManager->Next();
             }

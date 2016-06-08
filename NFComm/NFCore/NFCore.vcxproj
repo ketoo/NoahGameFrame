@@ -112,7 +112,6 @@
     <ClInclude Include="NFMapEx.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
-    <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h" />
     <ClInclude Include="NFDefine.h" />
     <ClInclude Include="NFIObject.h" />
@@ -134,7 +133,6 @@
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
-    <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
     <ClCompile Include="NFTimer.cpp" />
   </ItemGroup>

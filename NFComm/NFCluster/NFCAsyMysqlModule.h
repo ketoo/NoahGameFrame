@@ -1,20 +1,20 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCAsyMysqlClusterModule.h
+//    @FileName         :    NFCAsyMysqlModule.h
 //    @Author           :    ChuanBo.Guo
 //    @Date             :    2016-01-31
-//    @Module           :    NFCAsyMysqlClusterModule
+//    @Module           :    NFCAsyMysqlModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_ASY_MYSQL_CLUSTER_MODULE_H
-#define NFC_ASY_MYSQL_CLUSTER_MODULE_H
+#ifndef NFC_ASY_MYSQL_MODULE_H
+#define NFC_ASY_MYSQL_MODULE_H
 
 #include "NFCMysqlDriver.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIAsyClusterModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIAsyMysqlModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
 struct SMysqlParam
@@ -90,8 +90,8 @@ protected:
 };
 
 
-class NFCAsyMysqlClusterModule
-    : public NFIAsyClusterModule
+class NFCAsyMysqlModule
+    : public NFIAsyMysqlModule
 {
 public:
     enum ACOTERMYSQLEVENT
@@ -102,8 +102,8 @@ public:
     };
 public:
 
-    NFCAsyMysqlClusterModule(NFIPluginManager* p);
-    virtual ~NFCAsyMysqlClusterModule();
+    NFCAsyMysqlModule(NFIPluginManager* p);
+    virtual ~NFCAsyMysqlModule();
 
     virtual bool Init();
     virtual bool Shut();

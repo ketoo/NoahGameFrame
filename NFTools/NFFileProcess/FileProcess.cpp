@@ -470,7 +470,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				strCSRecordInfo = strCSRecordInfo + "\tpublic static readonly String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
 				strCSEnumInfo = strCSEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
 
-				std::string toWrite = "enum " + strRecordName + "\n{";
+				std::string toWrite = "enum " + strRecordName + "\n{\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
 				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
@@ -507,7 +507,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 
-				fwrite("}\n", sizeof("}\n"), 1, protoWriter);
+				fwrite("}\n", 2, 1, protoWriter);
 
 				strHppEnumInfo += "\n\t};\n";
 				strJavaEnumInfo += "\n\t};\n";
@@ -702,7 +702,7 @@ bool FileProcess::LoadLogicClass(std::string strFile)
 				return false;
 			}
 
-			fwrite("\n", sizeof("\n"), 1, mysqlClassWriter);
+			fwrite("\n", 1, 1, mysqlClassWriter);
 			if (nodeElement == classElement->LastChildElement())
 			{
 				break;

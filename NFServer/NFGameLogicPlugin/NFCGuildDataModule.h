@@ -13,11 +13,11 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFMessageDefine/NFMsgBase.pb.h"
 #include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 
 class NFCGuildDataModule
     : public NFIGuildDataModule
@@ -56,7 +56,7 @@ protected:
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIClusterModule* m_pClusterSQLModule;    
+    NFIMysqlModule* m_pMysqlModule;    
 	NFIPlayerMysqlModule* m_pPlayerMysqlModule;
     NFICommonConfigModule* m_pCommonConfigModule;
     

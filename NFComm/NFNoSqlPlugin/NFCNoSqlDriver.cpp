@@ -427,7 +427,7 @@ const bool NFCNoSqlDriver::ZAdd(const std::string & strKey, const double nScore,
 	return false;
 }
 
-const bool NFCNoSqlDriver::ZIncrBy(const std::string & strKey, const std::string & strMember, const double dwIncrement)
+const bool NFCNoSqlDriver::ZIncrBy(const std::string & strKey, const std::string & strMember, const double nIncrement)
 {
 	if (!Enable())
 	{
@@ -436,7 +436,7 @@ const bool NFCNoSqlDriver::ZIncrBy(const std::string & strKey, const std::string
 
 	try
 	{
-		m_pNoSqlClient->zincrby(strKey, strMember, dwIncrement);
+		m_pNoSqlClient->zincrby(strKey, strMember, nIncrement);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
@@ -493,7 +493,7 @@ const bool NFCNoSqlDriver::ZRemRangeByScore(const std::string & strKey, const in
 	return false;
 }
 
-const bool NFCNoSqlDriver::ZScore(const std::string & strKey, const std::string & strMember, double & dwScore)
+const bool NFCNoSqlDriver::ZScore(const std::string & strKey, const std::string & strMember, double & nScore)
 {
 	if (!Enable())
 	{
@@ -502,7 +502,7 @@ const bool NFCNoSqlDriver::ZScore(const std::string & strKey, const std::string 
 
 	try
 	{
-		dwScore = m_pNoSqlClient->zscore(strKey, strMember);
+		nScore = m_pNoSqlClient->zscore(strKey, strMember);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);

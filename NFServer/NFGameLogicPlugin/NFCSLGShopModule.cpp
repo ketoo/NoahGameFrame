@@ -19,7 +19,7 @@ bool NFCSLGShopModule::Init()
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pPackModule);
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
 	{
 		//Log
 	}

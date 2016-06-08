@@ -101,7 +101,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\NFComm\NFPluginModule\NFIGameServerToWorldModule.h" />
     <ClInclude Include="NFCGameServerToWorldModule.h" />
     <ClInclude Include="NFGameServerNet_ClientPlugin.h" />
   </ItemGroup>

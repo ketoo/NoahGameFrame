@@ -81,10 +81,10 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 
 		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementInfoModule->GetPropertyManager(strEffectData);
 
-		NFCDataList xDataList = pHeroPropertyRecord->GetInitData();
-		xDataList.SetObject(NFrame::Player::HeroPropertyValue_HeroGUID, xHeroGUID);
+		NF_SHARE_PTR<NFIDataList> xDataList = pHeroPropertyRecord->GetInitData();
+		xDataList->SetObject(NFrame::Player::HeroPropertyValue_HeroGUID, xHeroGUID);
 
-		pHeroPropertyRecord->AddRow(-1, xDataList);
+		pHeroPropertyRecord->AddRow(-1, *xDataList);
 	}
 	break;
 	case NFIRecord::RecordOptype::Del:
@@ -139,15 +139,15 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	return 0;
 }
 
-int NFCHeroPropertyModule::CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFCDataList& xPpropertyManager)
+int NFCHeroPropertyModule::CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xPpropertyManager)
 {
 	return 0;
 }
-int NFCHeroPropertyModule::CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFCDataList& xPpropertyManager)
+int NFCHeroPropertyModule::CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xPpropertyManager)
 {
 	return 0;
 }
-int NFCHeroPropertyModule::CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFCDataList& xPpropertyManager)
+int NFCHeroPropertyModule::CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xPpropertyManager)
 {
 	return 0;
 }
@@ -163,17 +163,17 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 		return false;
 	}
 
-	NFCDataList xDataList = pHeroPropertyRecord->GetInitData();
+	NF_SHARE_PTR<NFIDataList> xDataList = pHeroPropertyRecord->GetInitData();
 
 	NF_SHARE_PTR<NFIPropertyManager> xPropertypProperty;
 
-	CalHeroPropertySelf(self, xHeroID, xDataList);
-	CalHeroPropertyTalent(self, xHeroID, xDataList);
-	CalHeroPropertyEquip(self, xHeroID, xDataList);
+	CalHeroPropertySelf(self, xHeroID, *xDataList);
+	CalHeroPropertyTalent(self, xHeroID, *xDataList);
+	CalHeroPropertyEquip(self, xHeroID, *xDataList);
 
-	xDataList.SetObject(NFrame::Player::HeroPropertyValue_HeroGUID, xHeroID);
+	xDataList->SetObject(NFrame::Player::HeroPropertyValue_HeroGUID, xHeroID);
 
-	pHeroPropertyRecord->AddRow(-1, xDataList);
+	pHeroPropertyRecord->AddRow(-1, *xDataList);
 
 	return 0;
 }

@@ -1,6 +1,6 @@
 #include "NFMysqlClusterPlugin.h"
-#include "NFCMysqlClusterModule.h"
-#include "NFCAsyMysqlClusterModule.h"
+#include "NFCMysqlModule.h"
+#include "NFCAsyMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -33,12 +33,12 @@ const std::string NFMysqlClusterPlugin::GetPluginName()
 
        void NFMysqlClusterPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCMysqlClusterModule)
-    REGISTER_MODULE(pPluginManager, NFCAsyMysqlClusterModule)
+    REGISTER_MODULE(pPluginManager, NFCMysqlModule)
+    REGISTER_MODULE(pPluginManager, NFCAsyMysqlModule)
 }
 
 void NFMysqlClusterPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCAsyMysqlClusterModule)
-    UNREGISTER_MODULE(pPluginManager, NFCMysqlClusterModule)
+    UNREGISTER_MODULE(pPluginManager, NFCAsyMysqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFCMysqlModule)
 }

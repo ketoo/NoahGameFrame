@@ -14,15 +14,15 @@ bool NFCGmModule::Init()
 
 	assert( NULL != m_pGameServerNet_ServerModule );
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this,		&NFCGmModule::OnGMPropertyIntProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR	, this,		&NFCGmModule::OnGMPropertyStrProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this,	&NFCGmModule::OnGMPropertyObjectProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT	, this, &NFCGmModule::OnGMPropertyFloatProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT		, this, &NFCGmModule::OnGMRecordIntProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR		, this, &NFCGmModule::OnGMRecordStrProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT	, this,		&NFCGmModule::OnGMRecordObjectProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT	, this,		&NFCGmModule::OnGMRecordFloatProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL			, this, &NFCGmModule::OnGMNormalProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this,		&NFCGmModule::OnGMPropertyIntProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR	, this,		&NFCGmModule::OnGMPropertyStrProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this,	&NFCGmModule::OnGMPropertyObjectProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT	, this, &NFCGmModule::OnGMPropertyFloatProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT		, this, &NFCGmModule::OnGMRecordIntProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR		, this, &NFCGmModule::OnGMRecordStrProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT	, this,		&NFCGmModule::OnGMRecordObjectProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT	, this,		&NFCGmModule::OnGMRecordFloatProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL			, this, &NFCGmModule::OnGMNormalProcess)){ return false; }
     return true;
 }
 
@@ -474,9 +474,9 @@ void NFCGmModule::CheckAndAddRow(const NFGUID& self, const std::string strRecord
     {
         if (!pRecord->IsUsed(nRow))
         {
-            NFCDataList varData = pRecord->GetInitData();
+            NF_SHARE_PTR<NFIDataList> varData = pRecord->GetInitData();
 
-            pRecord->AddRow(nRow, varData);
+            pRecord->AddRow(nRow, *varData);
         }
     }
 }

@@ -406,11 +406,13 @@ enum EGameItemSubType {
   EGIT_ITEM_SKILL_CARD = 4,
   EGIT_ITEM_GUILD_SKILL_CARD = 5,
   EGIT_ITEM_GUILD_DIAMOND = 6,
-  EGIT_ITEM_WORLD_HORN = 7
+  EGIT_ITEM_POSITION = 7,
+  EGIT_ITEM_WORLD_HORN = 8,
+  EGIT_ITEM_REBORN = 9
 };
 LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_WORLD_HORN;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_REBORN;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();

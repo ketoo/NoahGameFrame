@@ -31,7 +31,7 @@ bool NFCGuildEctypeModule::Init()
 	strConfigPath += "NFDataCfg/Ini/Common/GuildConfig.xml";
 	m_pCommonConfigModule->LoadConfig(strConfigPath);
 
-    if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_ReqEnterGuildEctype, this, &NFCGuildEctypeModule::OnApplyEnterGuilEctypeProcess)){ return false; }
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ReqEnterGuildEctype, this, &NFCGuildEctypeModule::OnApplyEnterGuilEctypeProcess)){ return false; }
 
 	return true;
 }

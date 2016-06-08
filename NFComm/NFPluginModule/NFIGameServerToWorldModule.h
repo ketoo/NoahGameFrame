@@ -11,14 +11,15 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFINetModule.h"
 #include "NFIClusterClientModule.hpp"
 
 class NFIGameServerToWorldModule
-    : public NFIClusterClientModule
+    : public NFILogicModule
 {
 
 public:
+	virtual NFIClusterClientModule* GetClusterClientModule() = 0;
+	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 };
 
 #endif

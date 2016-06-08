@@ -18,7 +18,7 @@
 #include "NFComm/NFPluginModule/NFITeamDataModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 
 class NFCTeamModule
     : public NFITeamModule
@@ -62,7 +62,7 @@ protected:
 	NFILogModule* m_pLogModule;
 	NFITeamDataModule* m_pTeamDataModule;
     NFICommonRedisModule* m_pCommonRedisModule;
-    NFIClusterModule* m_pClusterSQLModule;
+    NFIMysqlModule* m_pMysqlModule;
 };
 
 #endif

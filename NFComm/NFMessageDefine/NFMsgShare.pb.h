@@ -90,6 +90,7 @@ class AckElementlevelToEquip;
 class ReqSetFightHero;
 class ReqWearEquip;
 class TakeOffEquip;
+class ReqMiningTitle;
 class ReqSendMail;
 class ReqSwitchServer;
 class AckSwitchServer;
@@ -6401,6 +6402,110 @@ class LIBPROTOC_EXPORT TakeOffEquip : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static TakeOffEquip* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqMiningTitle : public ::google::protobuf::Message {
+ public:
+  ReqMiningTitle();
+  virtual ~ReqMiningTitle();
+
+  ReqMiningTitle(const ReqMiningTitle& from);
+
+  inline ReqMiningTitle& operator=(const ReqMiningTitle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqMiningTitle& default_instance();
+
+  void Swap(ReqMiningTitle* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqMiningTitle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqMiningTitle& from);
+  void MergeFrom(const ReqMiningTitle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident selfid = 1;
+  inline bool has_selfid() const;
+  inline void clear_selfid();
+  static const int kSelfidFieldNumber = 1;
+  inline const ::NFMsg::Ident& selfid() const;
+  inline ::NFMsg::Ident* mutable_selfid();
+  inline ::NFMsg::Ident* release_selfid();
+  inline void set_allocated_selfid(::NFMsg::Ident* selfid);
+
+  // required int32 x = 2;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 2;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 3;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 3;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqMiningTitle)
+ private:
+  inline void set_has_selfid();
+  inline void clear_has_selfid();
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* selfid_;
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqMiningTitle* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -15164,6 +15269,92 @@ inline void TakeOffEquip::set_allocated_targetid(::NFMsg::Ident* targetid) {
   } else {
     clear_has_targetid();
   }
+}
+
+// -------------------------------------------------------------------
+
+// ReqMiningTitle
+
+// required .NFMsg.Ident selfid = 1;
+inline bool ReqMiningTitle::has_selfid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqMiningTitle::set_has_selfid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqMiningTitle::clear_has_selfid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqMiningTitle::clear_selfid() {
+  if (selfid_ != NULL) selfid_->::NFMsg::Ident::Clear();
+  clear_has_selfid();
+}
+inline const ::NFMsg::Ident& ReqMiningTitle::selfid() const {
+  return selfid_ != NULL ? *selfid_ : *default_instance_->selfid_;
+}
+inline ::NFMsg::Ident* ReqMiningTitle::mutable_selfid() {
+  set_has_selfid();
+  if (selfid_ == NULL) selfid_ = new ::NFMsg::Ident;
+  return selfid_;
+}
+inline ::NFMsg::Ident* ReqMiningTitle::release_selfid() {
+  clear_has_selfid();
+  ::NFMsg::Ident* temp = selfid_;
+  selfid_ = NULL;
+  return temp;
+}
+inline void ReqMiningTitle::set_allocated_selfid(::NFMsg::Ident* selfid) {
+  delete selfid_;
+  selfid_ = selfid;
+  if (selfid) {
+    set_has_selfid();
+  } else {
+    clear_has_selfid();
+  }
+}
+
+// required int32 x = 2;
+inline bool ReqMiningTitle::has_x() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqMiningTitle::set_has_x() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqMiningTitle::clear_has_x() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqMiningTitle::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 ReqMiningTitle::x() const {
+  return x_;
+}
+inline void ReqMiningTitle::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 3;
+inline bool ReqMiningTitle::has_y() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqMiningTitle::set_has_y() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqMiningTitle::clear_has_y() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqMiningTitle::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 ReqMiningTitle::y() const {
+  return y_;
+}
+inline void ReqMiningTitle::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
 }
 
 // -------------------------------------------------------------------

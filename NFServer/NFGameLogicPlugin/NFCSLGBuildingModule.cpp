@@ -15,9 +15,9 @@ bool NFCSLGBuildingModule::Init()
 
 	assert( NULL != m_pGameServerNet_ServerModule );
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_MOVE_BUILD_OBJECT, this, &NFCSLGBuildingModule::OnSLGClienMoveObject)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_UP_BUILD_LVL, this, &NFCSLGBuildingModule::OnSLGClienUpgradeBuilding)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_ITEM, this, &NFCSLGBuildingModule::OnSLGClienCreateItem)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_BUILD_OBJECT, this, &NFCSLGBuildingModule::OnSLGClienMoveObject)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_UP_BUILD_LVL, this, &NFCSLGBuildingModule::OnSLGClienUpgradeBuilding)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ITEM, this, &NFCSLGBuildingModule::OnSLGClienCreateItem)){ return false; }
 
     return true;
 }

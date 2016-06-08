@@ -80,10 +80,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
             NF_SHARE_PTR<NFIRecord> xRecord = pRecordManager->AddRecord(ident,
                 pConfigRecordInfo->GetName(),
                 pConfigRecordInfo->GetInitData(),
-                pConfigRecordInfo->GetKeyState(),
-                pConfigRecordInfo->GetInitDesc(),
                 pConfigRecordInfo->GetTag(),
-                pConfigRecordInfo->GetRelatedRecord(),
                 pConfigRecordInfo->GetRows());
 
             xRecord->SetPublic(pConfigRecordInfo->GetPublic());

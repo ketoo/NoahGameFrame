@@ -33,7 +33,7 @@ const std::string NFWorldNet_ClientPlugin::GetPluginName()
     return GET_CLASS_NAME(NFWorldNet_ClientPlugin)
 }
 
-       void NFWorldNet_ClientPlugin::Install()
+void NFWorldNet_ClientPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFCWorldToMasterModule)
 }

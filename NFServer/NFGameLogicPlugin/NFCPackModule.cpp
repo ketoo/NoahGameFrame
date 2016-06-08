@@ -311,14 +311,14 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 
 	NFGUID ident = m_pUUIDModule->CreateGUID();
 
-	NFCDataList var = pRecord->GetInitData();
+	NF_SHARE_PTR<NFIDataList> var = pRecord->GetInitData();
 
-	var.SetObject(NFrame::Player::BagEquipList_GUID, ident);
-	var.SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
-	var.SetInt(NFrame::Player::BagEquipList_Date, NFTime::GetNowTime());
+	var->SetObject(NFrame::Player::BagEquipList_GUID, ident);
+	var->SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
+	var->SetInt(NFrame::Player::BagEquipList_Date, NFTime::GetNowTime());
 
 
-	int nAddRow = pRecord->AddRow(-1, var);
+	int nAddRow = pRecord->AddRow(-1, *var);
 	if (nAddRow > 0)
 	{
 		return pRecord->GetObject(nAddRow, NFrame::Player::BagEquipList_GUID);

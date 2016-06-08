@@ -21,9 +21,9 @@ bool NFCTeamModule::Init()
 	assert(NULL != m_pWorldNet_ServerModule);
 	assert(NULL != m_pLogModule);
 
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)){ return false; }
-	if (!m_pWorldNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)){ return false; }
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)){ return false; }
 
 	return true;
 }
@@ -43,12 +43,12 @@ bool NFCTeamModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>("NFCCommonRedisModule");
-    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pCommonRedisModule);
-    assert(NULL != m_pClusterSQLModule);
+    assert(NULL != m_pMysqlModule);
 
     return true;
 }
@@ -226,7 +226,7 @@ bool NFCTeamModule::GetPlayerGameID(const NFGUID& self, int& nGameID)
     std::vector<std::string> xVecValue;
 
     xVecFeild.push_back("GameID");
-    if (!m_pClusterSQLModule->Query("Player", self.ToString(), xVecFeild, xVecValue))
+    if (!m_pMysqlModule->Query("Player", self.ToString(), xVecFeild, xVecValue))
     {
         return false;
     }
@@ -350,14 +350,14 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
 		NFMsg::ReqAckCreateTeam xAck;
 		*xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-        m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 	}
 	else
 	{
 		NFMsg::ReqAckCreateTeam xAck;
 		*xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-		m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 	}
 }
 
@@ -373,7 +373,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
 			NFGUID xTeam = NFINetModule::PBToNF(xMsg.team_id());
 			const std::string& strName = m_pKernelModule->GetPropertyString(xTeam, "Name");
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
 
 			int nGameID = 0;
 			if(GetPlayerGameID(nPlayerID, nGameID))
@@ -386,7 +386,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
 			NFMsg::ReqAckJoinTeam xAck;
 			*xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 }
 
@@ -400,14 +400,14 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
 			NFMsg::ReqAckLeaveTeam xAck;
 			*xAck.mutable_team_id() = xMsg.team_id();
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 		else
 		{
 			NFMsg::ReqAckLeaveTeam xAck;
 			*xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-			m_pWorldNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+			m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
 		}
 }
 

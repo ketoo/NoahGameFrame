@@ -154,7 +154,7 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         NF_SHARE_PTR<NFIRecord> pRecord = pClassRecordManager->First();
         while (pRecord.get())
         {
-            NF_SHARE_PTR<NFIRecord> xRecord = pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows());
+            NF_SHARE_PTR<NFIRecord> xRecord = pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetTag(), pRecord->GetRows());
 
             xRecord->SetPublic(pRecord->GetPublic());
             xRecord->SetPrivate(pRecord->GetPrivate());
@@ -340,6 +340,23 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
     }
 
     return false;
+}
+
+bool NFCElementInfoModule::ExistElement(const std::string& strClassName, const std::string& strConfigName)
+{
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (!pElementInfo)
+    {
+        return false;
+    }
+
+    const std::string& strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
+    if (strClass != strClassName)
+    {
+        return false;
+    }
+
+    return true;
 }
 
 bool NFCElementInfoModule::LegalNumber(const char* str)

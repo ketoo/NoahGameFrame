@@ -14,7 +14,7 @@
 #include "NFINetModule.h"
 
 class NFIProxyServerNet_ServerModule
-    :  public NFINetModule
+    :  public NFILogicModule
 {
 
 public:

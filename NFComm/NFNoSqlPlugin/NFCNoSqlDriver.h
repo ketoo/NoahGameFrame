@@ -58,14 +58,14 @@ public:
 	///////////////默认：大到小排序 ////////////////////////////////////////////
 	// sorted set系列
 	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strData);
-	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double dwIncrement);
+	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double nIncrement);
 	// 移除key中的成员member
 	virtual const bool ZRem(const std::string& strKey, const std::string& strMember);
 	virtual const bool ZRemRangeByRank(const std::string& strKey, const int nStart, const int nStop);
 	virtual const bool ZRemRangeByScore(const std::string& strKey, const int nMin, const int nMax);
 
 	// 返回有序集 key 中，成员 member 的 score 值
-	virtual const bool ZScore(const std::string& strKey, const std::string& strMember, double& dwScore);
+	virtual const bool ZScore(const std::string& strKey, const std::string& strMember, double& nScore);
 
 	//累count.得到个数
 	virtual const bool ZCard(const std::string& strKey, int& nCount);

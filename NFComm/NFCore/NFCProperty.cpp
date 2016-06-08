@@ -352,7 +352,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 bool NFCProperty::Changed() const
 {
-	return !GetValue().IsNullValue();
+	return !(GetValue().IsNullValue());
 }
 
 const TDATA_TYPE NFCProperty::GetType() const

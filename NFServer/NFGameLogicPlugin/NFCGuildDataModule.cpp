@@ -33,13 +33,13 @@ bool NFCGuildDataModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pClusterSQLModule = pPluginManager->FindModule<NFIClusterModule>("NFCMysqlClusterModule");
+    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
     m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>("NFCPlayerMysqlModule");
     m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
 
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
-    assert(NULL != m_pClusterSQLModule);
+    assert(NULL != m_pMysqlModule);
     assert(NULL != m_pPlayerMysqlModule);
     assert(NULL != m_pCommonConfigModule);
 
@@ -61,7 +61,7 @@ bool NFCGuildDataModule::AfterInit()
 
 bool NFCGuildDataModule::ExitGuild( const NFGUID& self, const std::string& strName, bool& bExit)
 {
-    if (!m_pClusterSQLModule->Exists(NFrame::GuildName::ThisName(), strName, bExit))
+    if (!m_pMysqlModule->Exists(NFrame::GuildName::ThisName(), strName, bExit))
     {
         return false;
     }
@@ -109,7 +109,7 @@ int NFCGuildDataModule::OnGuildClassEvent( const NFGUID& self, const std::string
 const NFGUID NFCGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP, const int nOffLine /*= 1*/, const int nPower/* = NFMsg::GUILD_POWER_TYPE_PRESIDENT*/)
 {
     bool bExit = false;
-    if (!m_pClusterSQLModule->Exists(NFrame::GuildName::ThisName(), strName, bExit))
+    if (!m_pMysqlModule->Exists(NFrame::GuildName::ThisName(), strName, bExit))
     {
         return NULL_OBJECT;
     }
@@ -140,7 +140,7 @@ const NFGUID NFCGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::
     vGuildFieldVec.push_back("GuildMemeberMaxCount");
     vGuildValueVec.push_back("200");
 
-    if (!m_pClusterSQLModule->Updata(NFrame::Guild::ThisName(), xGuidID.ToString(), vGuildFieldVec, vGuildValueVec))
+    if (!m_pMysqlModule->Updata(NFrame::Guild::ThisName(), xGuidID.ToString(), vGuildFieldVec, vGuildValueVec))
     {
         return NULL_OBJECT;
     }
@@ -152,7 +152,7 @@ const NFGUID NFCGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::
     vFieldVec.push_back("GuildID");
     vValueVec.push_back(xGuidID.ToString());
 
-    m_pClusterSQLModule->Updata(NFrame::GuildName::ThisName(), strName, vFieldVec, vValueVec);
+    m_pMysqlModule->Updata(NFrame::GuildName::ThisName(), strName, vFieldVec, vValueVec);
 
     return xGuidID;
 }
@@ -166,7 +166,7 @@ const bool NFCGuildDataModule::DeleteGuild(const NFGUID& xGuild )
     }
 
     bool bExit = false;
-    if (!m_pClusterSQLModule->Exists(NFrame::Guild::ThisName(), xGuild.ToString(), bExit)
+    if (!m_pMysqlModule->Exists(NFrame::Guild::ThisName(), xGuild.ToString(), bExit)
         || !bExit)
     {
         return false;
@@ -176,7 +176,7 @@ const bool NFCGuildDataModule::DeleteGuild(const NFGUID& xGuild )
     std::vector<std::string> vValueVec;
     vFieldVec.push_back("Name");
     
-    if (!m_pClusterSQLModule->Query(NFrame::Guild::ThisName(), xGuild.ToString(), vFieldVec, vValueVec))
+    if (!m_pMysqlModule->Query(NFrame::Guild::ThisName(), xGuild.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
@@ -184,13 +184,13 @@ const bool NFCGuildDataModule::DeleteGuild(const NFGUID& xGuild )
     const std::string& strGuildName = vValueVec[0];
     bExit = false;
 
-    if (!m_pClusterSQLModule->Exists(NFrame::GuildName::ThisName(), strGuildName, bExit)
+    if (!m_pMysqlModule->Exists(NFrame::GuildName::ThisName(), strGuildName, bExit)
         || !bExit)
     {
         return false;
     }
 
-    if (!m_pClusterSQLModule->Delete(NFrame::Guild::ThisName(), xGuild.ToString()))
+    if (!m_pMysqlModule->Delete(NFrame::Guild::ThisName(), xGuild.ToString()))
     {
         return false;
     }
@@ -211,7 +211,7 @@ bool NFCGuildDataModule::GetPlayerGuild( const NFGUID& self, NFGUID& xGuild )
     std::vector<std::string> vValueVec;
     vFieldVec.push_back("GuildID");
 
-    if (!m_pClusterSQLModule->Query("Player", self.ToString(), vFieldVec, vValueVec))
+    if (!m_pMysqlModule->Query("Player", self.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
@@ -223,7 +223,7 @@ bool NFCGuildDataModule::GetPlayerGuild( const NFGUID& self, NFGUID& xGuild )
 bool NFCGuildDataModule::SearchGuild( const NFGUID& self, const std::string& strName, std::vector<SearchGuildObject>& xList )
 {   
     std::vector<std::string> vValueName;
-    if (!m_pClusterSQLModule->Keys(NFrame::GuildName::ThisName(), strName, vValueName))
+    if (!m_pMysqlModule->Keys(NFrame::GuildName::ThisName(), strName, vValueName))
     {
         return false;
     }
@@ -237,7 +237,7 @@ bool NFCGuildDataModule::SearchGuild( const NFGUID& self, const std::string& str
 
         vFieldVec.push_back("GuildID");
 
-        if (!m_pClusterSQLModule->Query(NFrame::GuildName::ThisName(), strGuildName, vFieldVec, vValueVec))
+        if (!m_pMysqlModule->Query(NFrame::GuildName::ThisName(), strGuildName, vFieldVec, vValueVec))
         {
             continue;
         }
@@ -267,7 +267,7 @@ bool NFCGuildDataModule::GetGuildInfo( const NFGUID& self, const NFGUID& xGuild,
     vFieldVec.push_back("GuildHonor");
     vFieldVec.push_back("Rank");
 
-    if (!m_pClusterSQLModule->Query(NFrame::Guild::ThisName(), xGuild.ToString(), vFieldVec, vValueVec))
+    if (!m_pMysqlModule->Query(NFrame::Guild::ThisName(), xGuild.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
@@ -308,7 +308,7 @@ bool NFCGuildDataModule::GetPlayerInfo( const NFGUID& self, std::string& strRole
     vFieldVec.push_back("Level");
     vFieldVec.push_back("Job");
 
-    if (!m_pClusterSQLModule->Query( "Player", self.ToString(), vFieldVec, vValueVec))
+    if (!m_pMysqlModule->Query( "Player", self.ToString(), vFieldVec, vValueVec))
     {
         return false;
     }
@@ -337,7 +337,7 @@ bool NFCGuildDataModule::GetPlayerGameID( const NFGUID& self, int& nGameID )
     std::vector<std::string> xVecValue;
 
     xVecFeild.push_back("GameID");
-    if (!m_pClusterSQLModule->Query("Player", self.ToString(), xVecFeild, xVecValue))
+    if (!m_pMysqlModule->Query("Player", self.ToString(), xVecFeild, xVecValue))
     {
         return false;
     }

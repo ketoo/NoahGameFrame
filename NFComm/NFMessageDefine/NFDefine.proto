@@ -323,7 +323,7 @@ enum EItemType
 	EIT_STRENGTHEN_STONE	= 5; // 强化石
 	EIT_DEMONIZATION_STONE	= 6; // 附魔石
 	EIT_GEM_STONE			= 7; // 属性宝石
-	EIT_CURRENCY			= 8; // 货币道具不进背包
+	EIT_CURRENCY			= 8; // 货币道具不进背包s
 	EIT_ITEM_REBORN			= 9; // 重生道具(消耗此物品时得到某种待遇)
 	EIT_ITEM_POSITION		= 10;// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
 	
@@ -373,8 +373,10 @@ enum EGameItemSubType
     EGIT_ITEM_PVP_DEFENSE_CARD  = 3;    // PVP防御卡
     EGIT_ITEM_SKILL_CARD        = 4;    // 学习类技能书，普通的技能都是这样学习的
     EGIT_ITEM_GUILD_SKILL_CARD  = 5;    // 工会技能书
-    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝    
-    EGIT_ITEM_WORLD_HORN        = 7;   // 世界喇叭(使用某个功能的时候消耗此物品)
+    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝
+    EGIT_ITEM_POSITION          = 7;    // 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
+    EGIT_ITEM_WORLD_HORN        = 8;   // 世界喇叭(使用某个功能的时候消耗此物品)
+    EGIT_ITEM_REBORN            = 9;   // 重生道具(消耗此物品时得到某种待遇)
 };
 
 //道具时间类型
@@ -470,7 +472,6 @@ enum ERankType
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 

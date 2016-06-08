@@ -166,11 +166,9 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
 
-            NFCDataList recordVar;
-            NFCDataList recordKey;
-            NFCDataList recordDesc;
-            NFCDataList recordTag;
-            NFCDataList recordRelation;
+			NF_SHARE_PTR<NFIDataList> recordVar(NF_NEW NFCDataList());
+			NF_SHARE_PTR<NFIDataList> recordTag(NF_NEW NFCDataList());
+
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
@@ -182,57 +180,20 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                     NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
                 }
 
-                recordVar.Append(TData);
+                recordVar->Append(TData);
                 //////////////////////////////////////////////////////////////////////////
-                if (recordColNode->first_attribute("Key") != NULL)
-                {
-                    const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = lexical_cast<bool>(pstrKey);
-                    if (bKey)
-                    {
-                        recordKey.Add(NFINT64(1));
-                    }
-                    else
-                    {
-                        recordKey.Add(NFINT64(0));
-                    }
-                }
-
                 if (recordColNode->first_attribute("Tag") != NULL)
                 {
                     const char* pstrTag = recordColNode->first_attribute("Tag")->value();
-                    recordTag.Add(pstrTag);
+                    recordTag->Add(pstrTag);
                 }
                 else
                 {
-                    recordTag.Add("");
+                    recordTag->Add("");
                 }
-
-                if (recordColNode->first_attribute("RelateRecord") != NULL)
-                {
-                    std::string strRelationRecord = recordColNode->first_attribute("RelatedRecord")->value();
-                    recordRelation.Add(strRelationRecord.c_str());
-                }
-                else
-                {
-                    recordRelation.Add("");
-                }
-
-                //////////////////////////////////////////////////////////////////////////
-                if (recordColNode->first_attribute("Desc"))
-                {
-                    const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
-                    recordDesc.Add(pstrColDesc);
-                }
-                else
-                {
-                    recordDesc.Add("");
-                }
-
-                //////////////////////////////////////////////////////////////////////////
             }
 
-            NF_SHARE_PTR<NFIRecord> xRecord = pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow));
+            NF_SHARE_PTR<NFIRecord> xRecord = pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordTag, atoi(pstrRow));
 
             xRecord->SetPublic(bPublic);
             xRecord->SetPrivate(bPrivate);

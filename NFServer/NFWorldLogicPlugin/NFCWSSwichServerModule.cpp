@@ -14,8 +14,8 @@ bool NFCWSSwichServerModule::Init()
 	
 	assert(NULL != m_pWorlNet_ServerModule);
 
-	if (!m_pWorlNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this,		&NFCWSSwichServerModule::OnReqSwichServer)){ return false; }
-	if (!m_pWorlNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this,		&NFCWSSwichServerModule::OnAckSwichServer)){ return false; }
+	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCWSSwichServerModule::OnReqSwichServer)) { return false; }
+	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCWSSwichServerModule::OnAckSwichServer)) { return false; }
 	return true;
 }
 

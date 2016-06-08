@@ -19,16 +19,16 @@
 #include "NFCMysqlDriver.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
+#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
-class NFCMysqlClusterModule
-    : public NFIClusterModule
+class NFCMysqlModule
+    : public NFIMysqlModule
 {
 public:
 
-    NFCMysqlClusterModule(NFIPluginManager* p);
-    virtual ~NFCMysqlClusterModule();
+    NFCMysqlModule(NFIPluginManager* p);
+    virtual ~NFCMysqlModule();
 
     virtual bool Init();
     virtual bool Shut();

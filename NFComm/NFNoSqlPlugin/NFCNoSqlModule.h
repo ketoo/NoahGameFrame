@@ -24,7 +24,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
-    virtual bool Execute();
+    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
     virtual bool AfterInit();
 
 	virtual bool ConnectSql(const std::string& strIP);

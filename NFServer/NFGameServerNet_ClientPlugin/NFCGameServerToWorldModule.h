@@ -11,6 +11,7 @@
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -36,18 +37,12 @@ public:
     virtual bool AfterInit();
 
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
 protected:
 
-    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
-    //连接丢失,删2层(连接对象，帐号对象)
-    void OnClientDisconnect(const int nAddress);
-    //有连接
-    void OnClientConnected(const int nAddress);
 
 protected:
     void Register(NFINet* pNet);
@@ -77,8 +72,10 @@ protected:
 
     //     template<class PBClass>
     //     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual NFIClusterClientModule* GetClusterClientModule();
 
     virtual void LogServerInfo(const std::string& strServerInfo);
 
@@ -92,6 +89,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementInfoModule* m_pElementInfoModule;
+	NFIClusterClientModule* m_pClusterClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

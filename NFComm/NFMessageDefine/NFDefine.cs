@@ -900,8 +900,14 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_GUILD_DIAMOND", Value=6)]
       EGIT_ITEM_GUILD_DIAMOND = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WORLD_HORN", Value=7)]
-      EGIT_ITEM_WORLD_HORN = 7
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_POSITION", Value=7)]
+      EGIT_ITEM_POSITION = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WORLD_HORN", Value=8)]
+      EGIT_ITEM_WORLD_HORN = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_REBORN", Value=9)]
+      EGIT_ITEM_REBORN = 9
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameItemExpiredType")]

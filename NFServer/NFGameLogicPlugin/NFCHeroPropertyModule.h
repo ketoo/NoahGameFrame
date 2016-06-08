@@ -46,11 +46,11 @@ protected:
 
 	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
-	int CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFCDataList & xPpropertyManager);
+	int CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
 
-	int CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFCDataList & xPpropertyManager);
+	int CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
 
-	int CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFCDataList & xPpropertyManager);
+	int CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
 
 	
 

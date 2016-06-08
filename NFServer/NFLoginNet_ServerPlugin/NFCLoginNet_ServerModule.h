@@ -26,7 +26,7 @@
 #define NET_MSG_PROCESS(xNFMsg, msg) \
     NFGUID nPlayerID; \
     xNFMsg xMsg; \
-    if (!RecivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
+    if (!ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
     { \
         return 0; \
     } \
@@ -55,13 +55,12 @@ public:
     virtual bool BeforeShut();
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
     virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
 protected:
-    void OnReciveClientPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
@@ -69,15 +68,17 @@ protected:
     void OnClientConnected(const int nAddress);
 
     //登入
-    int OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //选择大世界
-    int OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //申请查看世界列表
-    int OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
+	void OnHeartBeat(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLogOut(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
@@ -95,6 +96,7 @@ private:
     NFILogModule* m_pLogModule;
     NFILoginLogicModule* m_pLoginLogicModule;
     NFIUUIDModule* m_pUUIDModule;
+	NFINetModule* m_pNetModule;
 };
 
 #endif

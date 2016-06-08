@@ -16,9 +16,9 @@ bool NFCGSSwichServerModule::Init()
 	assert(NULL != m_pGameServerToWorldModule);
 	assert(NULL != m_pGameServerNet_ServerModule);
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
-	if (!m_pGameServerToWorldModule->AddReciveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
-	if (!m_pGameServerToWorldModule->AddReciveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this,		&NFCGSSwichServerModule::OnAckSwichServer)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
+	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
+	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this,		&NFCGSSwichServerModule::OnAckSwichServer)){ return false; }
 	return true;
 }
 
@@ -74,7 +74,7 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 	*xMsg.mutable_client_id() = NFINetModule::NFToPB(xClient);
 	xMsg.set_gate_serverid(nGate);
 
-	m_pGameServerToWorldModule->SendSuitByPB(self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
+	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
 
 	return true;
 }
@@ -116,7 +116,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 	m_pGameServerNet_ServerModule->ProcessSwitchToGame(nPlayerID, nClientID, nGateID, nSceneID);
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
-	m_pGameServerToWorldModule->SendSuitByPB(nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
+	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
 }
 
 void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

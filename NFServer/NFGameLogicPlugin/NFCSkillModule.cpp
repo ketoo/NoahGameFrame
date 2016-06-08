@@ -17,7 +17,7 @@ bool NFCSkillModule::Init()
 
 	assert( NULL != m_pGameServerNet_ServerModule );
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)){ return false; }
 	return true;
 }
 

@@ -21,11 +21,11 @@ bool NFCGuildModule::Init()
 	assert(NULL != m_pGameServerNet_ServerModule);
 	assert(NULL != m_pLogModule);
 
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGuildModule::OnCreateGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGuildModule::OnJoinGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGuildModule::OnCreateGuildProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGuildModule::OnJoinGuildProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)){ return false; }
 
 	return true;
 }
@@ -407,7 +407,7 @@ void NFCGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID
 		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
 		xAck.set_guild_name(xMsg.guild_name());
 
-		m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
+		m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
 	}
 	else
 	{
@@ -415,7 +415,7 @@ void NFCGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID
 		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
 		xAck.set_guild_name("");
 
-		m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
+		m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
 	}
 }
 
@@ -432,7 +432,7 @@ void NFCGuildModule::OnJoinGuildProcess(const int nSockIndex, const int nMsgID, 
 			const std::string& strName = m_pKernelModule->GetPropertyString(xGuild, "Name");
 			xAck.set_guild_name(strName);
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
+			m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
 
 			int nGameID = 0;
 			if(m_pGuildDataModule->GetPlayerGameID(nPlayerID, nGameID))
@@ -446,7 +446,7 @@ void NFCGuildModule::OnJoinGuildProcess(const int nSockIndex, const int nMsgID, 
 			*xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
 			xAck.set_guild_name("");
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
+			m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_GUILD, xAck, nSockIndex, nPlayerID);
 		}
 }
 
@@ -461,7 +461,7 @@ void NFCGuildModule::OnLeaveGuildProcess(const int nSockIndex, const int nMsgID,
 			*xAck.mutable_guild_id() = xMsg.guild_id();
 			xAck.set_guild_name(xMsg.guild_name());
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
+			m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
 		}
 		else
 		{
@@ -469,7 +469,7 @@ void NFCGuildModule::OnLeaveGuildProcess(const int nSockIndex, const int nMsgID,
 			*xAck.mutable_guild_id() = NFINetModule::NFToPB(NFGUID());
 			xAck.set_guild_name("");
 
-			m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
+			m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_GUILD, xAck, nSockIndex, nPlayerID);
 		}
 }
 
@@ -520,7 +520,7 @@ void NFCGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID
 		}
 	}
 
-	m_pGameServerNet_ServerModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
+	m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
 } 
 
 int NFCGuildModule::OnPlayerClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
