@@ -5,10 +5,6 @@
 	<Plugin Name="NFWorldNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFWorldNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>	
-	<Plugin Name="NFMysqlClusterPlugin" Main="1"/>
-	<Plugin Name="NFDataAgent_MysqlPlugin" Main="1"/>	
-	
-	<ActorDataModule Name="NFCDataProcessModule" />
 	<APPID Name="7" />
     <ConfigPath Name="../../" />
 </XML>
