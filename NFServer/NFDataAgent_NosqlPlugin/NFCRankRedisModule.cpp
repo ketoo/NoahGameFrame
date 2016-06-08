@@ -14,17 +14,17 @@ NFCRankRedisModule::NFCRankRedisModule(NFIPluginManager * p)
 
 bool NFCRankRedisModule::Init()
 {
-	return false;
+	return true;
 }
 
 bool NFCRankRedisModule::Shut()
 {
-	return false;
+	return true;
 }
 
 bool NFCRankRedisModule::Execute()
 {
-	return false;
+	return true;
 }
 
 bool NFCRankRedisModule::AfterInit()
@@ -33,7 +33,7 @@ bool NFCRankRedisModule::AfterInit()
 
 	assert(NULL != m_pNoSqlModule);
 
-	return false;
+	return true;
 }
 
 bool NFCRankRedisModule::SetRankValue(const NFMsg::ERankType eRankType, const NFGUID& self, const double value)

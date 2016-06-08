@@ -14,17 +14,17 @@ NFCPlayerRedisModule::NFCPlayerRedisModule(NFIPluginManager * p)
 
 bool NFCPlayerRedisModule::Init()
 {
-	return false;
+	return true;
 }
 
 bool NFCPlayerRedisModule::Shut()
 {
-	return false;
+	return true;
 }
 
 bool NFCPlayerRedisModule::Execute()
 {
-	return false;
+	return true;
 }
 
 bool NFCPlayerRedisModule::AfterInit()
@@ -37,7 +37,7 @@ bool NFCPlayerRedisModule::AfterInit()
 	assert(NULL != m_pNoSqlModule);
 	assert(NULL != m_pCommonRedisModule);
 
-	return false;
+	return true;
 }
 
 int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
