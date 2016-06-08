@@ -15,6 +15,9 @@
 bool NFCProxyServerToWorldModule::Init()
 {
 	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+
+	m_pClusterClientModule->Init();
+
     return true;
 }
 
@@ -30,25 +33,6 @@ bool NFCProxyServerToWorldModule::Execute()
 	m_pClusterClientModule->Execute();
 
 	return true;
-}
-
-void NFCProxyServerToWorldModule::OnReceiveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    //这里是worldserver发来的消息
-    switch (nMsgID)
-    {
-        case NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD:
-            OnSelectServerResultProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        case NFMsg::EGameMsgID::EGMI_STS_NET_INFO:
-            OnServerInfoProcess(nSockIndex, nMsgID, msg, nLen);
-            break;
-
-        default:
-            m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
-            break;
-    }
 }
 
 void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -176,6 +160,12 @@ bool NFCProxyServerToWorldModule::AfterInit()
     assert(NULL != m_pLogicClassModule);
     assert(NULL != m_pProxyServerToGameModule);
 
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
+	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
+	m_pClusterClientModule->AddReceiveCallBack(this, &NFCProxyServerToWorldModule::OnOtherMessage);
+
+	m_pClusterClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
+
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
@@ -254,4 +244,9 @@ bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccoun
 void NFCProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo)
 {
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
+}
+
+void NFCProxyServerToWorldModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
 }
