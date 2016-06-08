@@ -7,10 +7,8 @@
 		<Project filename="NFComm/NFKernelPlugin/NFKernelPlugin.cbp"/>
 		<Project filename="NFComm/NFLogPlugin/NFLogPlugin.cbp" />
 		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
-		<Project filename="NFComm/NFCluster/NFMysqlClusterPlugin.cbp" />
 		<Project filename="NFComm/NFNet/NFNet.cbp" />
 		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
-		<Project filename="NFComm/NFTagPlugin/NFTagPlugin.cbp" />
 		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
 		
 		<!-- NF Server -->
