@@ -1,1 +1,1 @@
-NFFileProcess.exe
+NFFileProcess.exe %1
