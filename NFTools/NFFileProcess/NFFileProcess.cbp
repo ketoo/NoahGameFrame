@@ -23,8 +23,9 @@
 					<Add directory="../../" />
 					<Add directory="../../Dependencies" />
 				</Compiler>
-				<ExtraCommands>
-					<Add after="sh ../../GenerateConfigXML.sh" />
+				<ExtraCommands
+					<Add after="cd ../../" />
+					<Add after="sh ./GenerateConfigXML.sh" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -41,8 +42,8 @@
 					<Add option="-s" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cd $(SolutionDir)" />
-					<Add after="sh ../../GenerateConfigXML.sh" />
+					<Add after="cd ../../" />
+					<Add after="sh ./GenerateConfigXML.sh" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
