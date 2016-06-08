@@ -60,7 +60,9 @@
     </ClCompile>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb</Command>
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb
+cd $(SolutionDir)
+GenerateConfigXML.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -79,7 +81,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb</Command>
+copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb
+cd $(SolutionDir)
+GenerateConfigXML.bat</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
