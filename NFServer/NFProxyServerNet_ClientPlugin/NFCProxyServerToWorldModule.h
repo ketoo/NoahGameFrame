@@ -47,7 +47,6 @@ public:
 
 protected:
 
-    void OnReceiveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
@@ -56,6 +55,8 @@ protected:
     void OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     void LogServerInfo(const std::string& strServerInfo);
+
+	void OnOtherMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     struct ClientConnectData
     {
