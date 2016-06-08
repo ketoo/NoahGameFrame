@@ -15,10 +15,8 @@
 #include "NFIClusterClientModule.hpp"
 
 class NFIWorldToMasterModule
-    : public NFIClusterClientModule
+	: public  NFILogicModule
 {
-
-public:
 };
 
 #endif
