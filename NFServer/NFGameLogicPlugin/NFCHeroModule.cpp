@@ -44,7 +44,7 @@ bool NFCHeroModule::AfterInit()
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
 
-	bool isUnitTest = true;//单元测试开关
+	bool isUnitTest = false;//单元测试开关
 
 	if (isUnitTest)
 	{

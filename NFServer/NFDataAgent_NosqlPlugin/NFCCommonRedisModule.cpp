@@ -13,6 +13,7 @@
 
 NFCCommonRedisModule::NFCCommonRedisModule(NFIPluginManager * p)
 {
+	pPluginManager = p;
 }
 
 std::string NFCCommonRedisModule::GetPropertyCacheKey(const std::string& strClassName)
