@@ -25,7 +25,7 @@
 				</Compiler>
 				<ExtraCommands>
 					<Add after="cd ../../" />
-					<Add after="sh ./GenerateConfigXML.sh" />
+					<Add after="sh ./DoNFFileProcess.sh" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -43,7 +43,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="cd ../../" />
-					<Add after="sh ./GenerateConfigXML.sh" />
+					<Add after="sh ./DoNFFileProcess.sh" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
