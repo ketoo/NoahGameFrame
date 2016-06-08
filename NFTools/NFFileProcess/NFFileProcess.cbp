@@ -23,7 +23,7 @@
 					<Add directory="../../" />
 					<Add directory="../../Dependencies" />
 				</Compiler>
-				<ExtraCommands
+				<ExtraCommands>
 					<Add after="cd ../../" />
 					<Add after="sh ./GenerateConfigXML.sh" />
 					<Mode after="always" />
