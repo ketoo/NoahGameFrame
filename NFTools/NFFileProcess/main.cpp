@@ -15,6 +15,6 @@ int main(int argc, const char *argv[])
 		std::cout << "Timespan: " << t2 - t1 << " us (" << (t2 - t1) / 1000000.0f << "s)" << std::endl;
 		delete fp;
 	}
-	std::cin.ignore();
+	getch();
 	return 0;
 }
