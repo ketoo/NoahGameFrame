@@ -13,6 +13,9 @@
 bool NFCLoginToMasterModule::Init()
 {
 	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+
+	m_pClusterClientModule->Init();
+
     return true;
 }
 
