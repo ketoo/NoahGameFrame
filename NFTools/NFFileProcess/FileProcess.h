@@ -17,12 +17,44 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <io.h>
 #include <windows.h>
+#include <conio.h>
 #else
 #include <iconv.h>
 #include <unistd.h>
 #include <cstdio>
 #include <dirent.h>
 #include <sys/stat.h>
+/***********************************************
+function：接收一个字符立即生效(不打印)
+返回字符的ascii码
+***********************************************/
+int getch()     //windows下可以直接用这个函数但要加头文件conio.h
+{
+	struct termios tm, tm_old;
+	int fd = STDIN_FILENO, c;
+
+	if (tcgetattr(fd, &tm) < 0)
+	{
+		return -1;
+	}
+
+	tm_old = tm;
+	cfmakeraw(&tm);
+
+	if (tcsetattr(fd, TCSANOW, &tm) < 0)
+	{
+		return -1;
+	}
+
+	c = fgetc(stdin);
+
+	if (tcsetattr(fd, TCSANOW, &tm_old) < 0)
+	{
+		return -1;
+	}
+
+	return c;
+}
 #endif
 
 
