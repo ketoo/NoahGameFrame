@@ -24,8 +24,7 @@
 					<Add directory="../../Dependencies" />
 				</Compiler>
 				<ExtraCommands>
-					<Add after="cd $(SolutionDir)" />
-					<Add after="./GenerateConfigXML.sh" />
+					<Add after="../../GenerateConfigXML.sh" />
 				</ExtraCommands>
 			</Target>
 			<Target title="Release">
@@ -42,7 +41,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="cd $(SolutionDir)" />
-					<Add after="./GenerateConfigXML.sh" />
+					<Add after="../../GenerateConfigXML.sh" />
 				</ExtraCommands>
 			</Target>
 		</Build>
