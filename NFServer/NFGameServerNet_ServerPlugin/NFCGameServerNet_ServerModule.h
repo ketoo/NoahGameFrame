@@ -22,15 +22,8 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFISLGShopModule.h"
-#include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
-#include "NFComm/NFPluginModule/NFIPVPModule.h"
-#include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
-#include "NFComm/NFPluginModule/NFIEquipModule.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
-#include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 ////////////////////////////////////////////////////////////////////////////
@@ -209,7 +202,6 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIElementInfoModule* m_pElementInfoModule;
 	NFINetModule* m_pNetModule;
-	NFIPlayerMysqlModule* m_pPlayerMysqlModule;
     //////////////////////////////////////////////////////////////////////////
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
