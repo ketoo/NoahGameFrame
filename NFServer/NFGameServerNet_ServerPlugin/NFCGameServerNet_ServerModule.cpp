@@ -8,6 +8,7 @@
 
 #include "NFCGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCGameServerNet_ServerModule::Init()
 {
@@ -23,7 +24,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>("NFCPlayerMysqlModule");
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
 
 
@@ -33,7 +33,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pPlayerMysqlModule);
 	assert(NULL != m_pGameServerToWorldModule);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
@@ -178,12 +177,6 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	PlayerLeaveGameServer(nRoleID);
 
 	//////////////////////////////////////////////////////////////////////////
-	//拉取数据
-	if (!m_pPlayerMysqlModule->LoadDataFormSql(nRoleID, "Player"))
-	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "Cannot load data from mysql", "", __FUNCTION__, __LINE__);
-		return;
-	}
 	//////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFCGameServerNet_ServerModule::BaseData> pBaseData = mRoleBaseData.GetElement(nRoleID);
@@ -1588,78 +1581,7 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockInde
 		return;
 	}
 
-	std::vector<std::string> vFieldVector;
-	std::vector<std::string> vValueVector;
-
-	vFieldVector.push_back("ID");
-	vFieldVector.push_back("Level");
-	vFieldVector.push_back("Sex");
-	vFieldVector.push_back("Job");
-	vFieldVector.push_back("Name");
-	vFieldVector.push_back("Race");
-
-	const NFGUID ident = m_pPlayerMysqlModule->GetChar(xMsg.account(), vFieldVector, vValueVector);
-	if (ident.IsNull())
-	{
-		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
-		return;
-	}
-
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(ident));
-	pData->set_career(0);
-	pData->set_sex(0);
-	pData->set_race(0);
-	pData->set_noob_name("");
-	pData->set_game_id(xMsg.game_id());
-	pData->set_role_level(0);
-	pData->set_delete_time(0);
-	pData->set_reg_time(0);
-	pData->set_last_offline_time(0);
-	pData->set_last_offline_ip(0);
-	pData->set_view_record("");
-
-	NFGUID xID;
-	int nLevel = 0;
-	int nSex = 0;
-	int nJob = 0;
-	int nRace = 0;
-	std::string strName;
-
-	if (!xID.FromString(vValueVector[0]))
-	{
-		return;
-	}
-
-	if (!NF_StrTo(vValueVector[1], nLevel))
-	{
-		return;
-	}
-
-	if (!NF_StrTo(vValueVector[2], nSex))
-	{
-		return;
-	}
-
-	if (!NF_StrTo(vValueVector[3], nJob))
-	{
-		return;
-	}
-
-	strName = vValueVector[4];
-
-	if (!NF_StrTo(vValueVector[5], nRace))
-	{
-		return;
-	}
-	pData->set_role_level(nLevel);
-	pData->set_sex(nSex);
-	pData->set_career(nJob);
-	pData->set_noob_name(strName);
-	pData->set_race(nRace);
-
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
@@ -1672,17 +1594,9 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex
 		return;
 	}
 
-	NFGUID xRoleID = m_pPlayerMysqlModule->CreateRole(xMsg.account(), xMsg.noob_name(), xMsg.race(), xMsg.career(), xMsg.sex());
-	if (xRoleID.IsNull())
-	{
-		return;
-	}
-
-	//m_pPlayerMysqlModule->GetChar()
-
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xRoleID));
+	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(m_pUUIDModule->CreateGUID()));
 	pData->set_career(xMsg.career());
 	pData->set_sex(xMsg.sex());
 	pData->set_race(xMsg.race());
@@ -1707,7 +1621,6 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex
 		return;
 	}
 
-	m_pPlayerMysqlModule->DeleteRole(xMsg.account(), nPlayerID);
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);

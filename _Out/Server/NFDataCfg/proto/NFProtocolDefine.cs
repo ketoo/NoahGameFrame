@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/04/11
+//    @Date             :    Wed Jun  8 18:51:23 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading;
 namespace NFrame
 {
-
 public class IObject
 {
 	//Class name
@@ -97,6 +96,7 @@ public class ChatGroup
 		GUID		= 0, // GUID -- object
 		Online		= 1, // Online -- int
 		GameID		= 2, // GameID -- int
+
 	};
 
 	public enum ChatList
@@ -104,6 +104,7 @@ public class ChatGroup
 		GUID		= 0, // GUID -- object
 		msg		= 1, // msg -- string
 		time		= 2, // time -- int
+
 	};
 
 }
@@ -296,6 +297,7 @@ public class Guild
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 	public enum GuildMemberList
@@ -314,6 +316,7 @@ public class Guild
 		JoinTime		= 11, // JoinTime -- int
 		Contribution		= 12, // Contribution -- int
 		AllContribution		= 13, // AllContribution -- int
+
 	};
 
 	public enum GuildAppyList
@@ -325,6 +328,7 @@ public class Guild
 		Donation		= 4, // Donation -- int
 		VIP		= 5, // VIP -- int
 		Power		= 6, // Power -- int
+
 	};
 
 	public enum GuildEvent
@@ -340,6 +344,7 @@ public class Guild
 		EventID		= 8, // EventID -- int
 		EventTime		= 9, // EventTime -- int
 		Context		= 10, // Context -- string
+
 	};
 
 	public enum GuildHouse
@@ -352,6 +357,7 @@ public class Guild
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 	public enum GuildSkill
@@ -364,6 +370,7 @@ public class Guild
 		VIP		= 5, // VIP -- int
 		Offline		= 6, // Offline -- int
 		Power		= 7, // Power -- int
+
 	};
 
 }
@@ -678,6 +685,7 @@ public class Player
 		EnhanceLevel		= 1, // EnhanceLevel -- int
 		InlayStone		= 2, // InlayStone -- string
 		SagecraftLevel		= 3, // SagecraftLevel -- string
+
 	};
 
 	public enum PlayerHero
@@ -692,6 +700,7 @@ public class Player
 		Equip4		= 7, // Equip4 -- object
 		Equip5		= 8, // Equip5 -- object
 		Equip6		= 9, // Equip6 -- object
+
 	};
 
 	public enum BagEquipList
@@ -725,6 +734,7 @@ public class Player
 		ElementLevel8		= 26, // ElementLevel8 -- int
 		ElementLevel9		= 27, // ElementLevel9 -- int
 		ElementLevel10		= 28, // ElementLevel10 -- int
+
 	};
 
 	public enum BagItemList
@@ -734,6 +744,7 @@ public class Player
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- object
+
 	};
 
 	public enum CommPropertyValue
@@ -762,6 +773,7 @@ public class Player
 		PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
 		MAGIC_GATE		= 22, // MAGIC_GATE -- int
 		BUFF_GATE		= 23, // BUFF_GATE -- int
+
 	};
 
 	public enum EctypeList
@@ -769,6 +781,7 @@ public class Player
 		EctypeID		= 0, // EctypeID -- int
 		IsPass		= 1, // IsPass -- int
 		Star		= 2, // Star -- int
+
 	};
 
 	public enum DropItemList
@@ -777,6 +790,7 @@ public class Player
 		ItemID		= 1, // ItemID -- string
 		ItemCount		= 2, // ItemCount -- int
 		DrawState		= 3, // DrawState -- int
+
 	};
 
 	public enum SkillTable
@@ -785,6 +799,7 @@ public class Player
 		SkillLevel		= 1, // SkillLevel -- int
 		SkillStone		= 2, // SkillStone -- string
 		SkillSoulLevel		= 3, // SkillSoulLevel -- int
+
 	};
 
 	public enum TaskMonsterList
@@ -793,6 +808,7 @@ public class Player
 		CurrentKillCount		= 1, // CurrentKillCount -- int
 		RequireKillCount		= 2, // RequireKillCount -- int
 		TaskID		= 3, // TaskID -- string
+
 	};
 
 	public enum TaskList
@@ -800,6 +816,7 @@ public class Player
 		TaskID		= 0, // TaskID -- string
 		TaskStatus		= 1, // TaskStatus -- int
 		Process		= 2, // Process -- int
+
 	};
 
 	public enum PVPList
@@ -807,12 +824,14 @@ public class Player
 		ID		= 0, // ID -- object
 		Name		= 1, // Name -- string
 		Level		= 2, // Level -- int
+
 	};
 
 	public enum ChatGroup
 	{
 		ChatType		= 0, // ChatType -- int
 		GroupGUID		= 1, // GroupGUID -- object
+
 	};
 
 	public enum BuildingList
@@ -825,6 +844,7 @@ public class Player
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 	public enum BuildingListProduce
@@ -837,6 +857,7 @@ public class Player
 		PosZ		= 5, // PosZ -- int
 		StateStartTime		= 6, // StateStartTime -- int
 		StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 }
@@ -1076,4 +1097,4 @@ public class Task
 
 }
 
-}
+} 
