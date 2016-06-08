@@ -11,14 +11,8 @@ NFCSLGBuildingModule::NFCSLGBuildingModule(NFIPluginManager* p)
 
 bool NFCSLGBuildingModule::Init()
 {
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert( NULL != m_pGameServerNet_ServerModule );
-
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_BUILD_OBJECT, this, &NFCSLGBuildingModule::OnSLGClienMoveObject)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_UP_BUILD_LVL, this, &NFCSLGBuildingModule::OnSLGClienUpgradeBuilding)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ITEM, this, &NFCSLGBuildingModule::OnSLGClienCreateItem)){ return false; }
-
+	
+	
     return true;
 }
 
@@ -27,12 +21,17 @@ bool NFCSLGBuildingModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
+	assert(NULL != m_pGameServerNet_ServerModule);
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pLogModule );
 	assert( NULL != m_pUUIDModule );
 
     //m_pKernelModule->AddClassCallBack(NFrame::BB_Player::ThisName(), this, &NFCSLGBuildingModule::OnClassObjectEvent);
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_BUILD_OBJECT, this, &NFCSLGBuildingModule::OnSLGClienMoveObject)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_UP_BUILD_LVL, this, &NFCSLGBuildingModule::OnSLGClienUpgradeBuilding)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ITEM, this, &NFCSLGBuildingModule::OnSLGClienCreateItem)) { return false; }
 
     return true;
 }

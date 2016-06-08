@@ -12,14 +12,7 @@
 
 bool NFCMapModule::Init()
 {
-	m_pBigMapRedisModule = pPluginManager->GetModule<NFIBigMapRedisModule>("NFCBigMapRedisModule");
-	m_pKernelModule = pPluginManager->GetModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->GetModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pElementInfoModule = pPluginManager->GetModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pGuildRedisModule = pPluginManager->GetModule<NFIGuildRedisModule>("NFCGuildRedisModule");
 	
-    m_pGameServerNet_ServerModule = pPluginManager->GetModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
     return true;
 }
 
@@ -35,6 +28,13 @@ bool NFCMapModule::Execute()
 
 bool NFCMapModule::AfterInit()
 {
+	m_pBigMapRedisModule = pPluginManager->GetModule<NFIBigMapRedisModule>("NFCBigMapRedisModule");
+	m_pKernelModule = pPluginManager->GetModule<NFIKernelModule>("NFCKernelModule");
+	m_pLogicClassModule = pPluginManager->GetModule<NFILogicClassModule>("NFCLogicClassModule");
+	m_pElementInfoModule = pPluginManager->GetModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pGuildRedisModule = pPluginManager->GetModule<NFIGuildRedisModule>("NFCGuildRedisModule");
+
+	m_pGameServerNet_ServerModule = pPluginManager->GetModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_BIG_MAP_INFO, this, &NFCMapModule::ReqBigMapsInfo)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_INFO, this, &NFCMapModule::ReqMapTitleInfo)) { return false; }

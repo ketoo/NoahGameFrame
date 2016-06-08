@@ -13,11 +13,8 @@ bool NFCSkillModule::Init()
 {
     mstrSkillTableName = "SkillList";
 
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+	
 
-	assert( NULL != m_pGameServerNet_ServerModule );
-
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)){ return false; }
 	return true;
 }
 
@@ -39,7 +36,9 @@ bool NFCSkillModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 
+	assert(NULL != m_pGameServerNet_ServerModule);
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pSkillConsumeManagerModule );
     assert( NULL != m_pElementInfoModule );
@@ -52,6 +51,8 @@ bool NFCSkillModule::AfterInit()
 
     m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
     m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)) { return false; }
 
     return true;
 }

@@ -10,25 +10,27 @@
 
 bool NFCHeroItemConsumeProcessModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
     
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pItemConsumeManagerModule );
-    assert( NULL != m_pPackModule );
-    assert( NULL != m_pElementInfoModule );
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pHeroModule);
 
     return true;
 }
 
 bool NFCHeroItemConsumeProcessModule::AfterInit()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
+
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pItemConsumeManagerModule);
+	assert(NULL != m_pPackModule);
+	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pLogModule);
+	assert(NULL != m_pHeroModule);
+
     m_pItemConsumeManagerModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_HERO_STONE, this);
 
     return true;

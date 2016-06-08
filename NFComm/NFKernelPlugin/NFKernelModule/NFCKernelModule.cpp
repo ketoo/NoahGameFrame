@@ -48,17 +48,17 @@ bool NFCKernelModule::Init()
 {
     mtDeleteSelfList.clear();
 
-    m_pSceneModule = pPluginManager->FindModule<NFISceneModule>("NFCSceneModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+	m_pSceneModule = pPluginManager->FindModule<NFISceneModule>("NFCSceneModule");
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 
-    assert(NULL != m_pSceneModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pUUIDModule);
+	assert(NULL != m_pSceneModule);
+	assert(NULL != m_pLogicClassModule);
+	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pLogModule);
+	assert(NULL != m_pUUIDModule);
 
     return true;
 }

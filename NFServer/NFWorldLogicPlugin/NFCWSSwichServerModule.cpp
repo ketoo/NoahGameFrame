@@ -10,12 +10,8 @@
 
 bool NFCWSSwichServerModule::Init()
 {
-	m_pWorlNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
 	
-	assert(NULL != m_pWorlNet_ServerModule);
 
-	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCWSSwichServerModule::OnReqSwichServer)) { return false; }
-	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCWSSwichServerModule::OnAckSwichServer)) { return false; }
 	return true;
 }
 
@@ -35,10 +31,15 @@ bool NFCWSSwichServerModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    
+	m_pWorlNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+
+	assert(NULL != m_pWorlNet_ServerModule);
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
 	assert( NULL != m_pLogModule );
+
+	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCWSSwichServerModule::OnReqSwichServer)) { return false; }
+	if (!m_pWorlNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCWSSwichServerModule::OnAckSwichServer)) { return false; }
 
     return true;
 }

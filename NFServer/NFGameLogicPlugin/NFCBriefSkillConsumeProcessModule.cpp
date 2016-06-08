@@ -12,24 +12,24 @@ bool NFCBriefSkillConsumeProcessModule::Init()
 {
     mstrSkillTableName = "SkillTable";
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pSkillConsumeManagerModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSkillModule );
-    assert( NULL != m_pPropertyModule );
+    
 
     return true;
 }
 
 bool NFCBriefSkillConsumeProcessModule::AfterInit()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
+	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
 
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pSkillConsumeManagerModule);
+	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pSkillModule);
+	assert(NULL != m_pPropertyModule);
     //¶ÌÈÐÀà¼¼ÄÜ
     //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF, this );
 

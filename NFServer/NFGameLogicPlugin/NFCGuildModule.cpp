@@ -15,18 +15,9 @@
 
 bool NFCGuildModule::Init()
 {
-	m_pGameServerNet_ServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+	
 
-	assert(NULL != m_pGameServerNet_ServerModule);
-	assert(NULL != m_pLogModule);
-
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGuildModule::OnCreateGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGuildModule::OnJoinGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)){ return false; }
-
+	
 	return true;
 }
 
@@ -45,12 +36,22 @@ bool NFCGuildModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>("NFCGuildDataModule");
-    
+	m_pGameServerNet_ServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
+	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+
+	assert(NULL != m_pGameServerNet_ServerModule);
+	assert(NULL != m_pLogModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pGuildDataModule);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGuildModule::OnPlayerClassEvent);
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGuildModule::OnCreateGuildProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGuildModule::OnJoinGuildProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)) { return false; }
 
     return true;
 }

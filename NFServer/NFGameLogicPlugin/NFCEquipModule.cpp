@@ -13,17 +13,7 @@
 
 bool NFCEquipModule::Init()
 {
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert( NULL != m_pGameServerNet_ServerModule );
-
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipMsg)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipMsg)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipMsg)){ return false; }
-    return true;
+	return true;
 }
 
 bool NFCEquipModule::Shut()
@@ -47,7 +37,9 @@ bool NFCEquipModule::AfterInit()
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-    
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert(NULL != m_pGameServerNet_ServerModule);
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pSceneProcessModule );
@@ -63,6 +55,14 @@ bool NFCEquipModule::AfterInit()
     m_pCommonConfigModule->LoadConfig(strEquipPath);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipMsg)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipMsg)) { return false; }
+
     return true;
 }
 

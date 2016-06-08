@@ -10,20 +10,9 @@
 
 bool NFCGmModule::Init()
 {
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+	
 
-	assert( NULL != m_pGameServerNet_ServerModule );
-
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this,		&NFCGmModule::OnGMPropertyIntProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR	, this,		&NFCGmModule::OnGMPropertyStrProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this,	&NFCGmModule::OnGMPropertyObjectProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT	, this, &NFCGmModule::OnGMPropertyFloatProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT		, this, &NFCGmModule::OnGMRecordIntProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR		, this, &NFCGmModule::OnGMRecordStrProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT	, this,		&NFCGmModule::OnGMRecordObjectProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT	, this,		&NFCGmModule::OnGMRecordFloatProcess)){ return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL			, this, &NFCGmModule::OnGMNormalProcess)){ return false; }
-    return true;
+	return true;
 }
 
 bool NFCGmModule::Shut()
@@ -47,7 +36,9 @@ bool NFCGmModule::AfterInit()
     m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
     m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
-    
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+
+	assert(NULL != m_pGameServerNet_ServerModule);
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pElementInfoModule );
     assert( NULL != m_pSceneProcessModule );
@@ -56,6 +47,16 @@ bool NFCGmModule::AfterInit()
     assert(NULL != m_pLevelModule);
     assert(NULL != m_pPackModule);
     assert(NULL != m_pHeroModule);
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this, &NFCGmModule::OnGMPropertyIntProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR, this, &NFCGmModule::OnGMPropertyStrProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this, &NFCGmModule::OnGMPropertyObjectProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT, this, &NFCGmModule::OnGMPropertyFloatProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT, this, &NFCGmModule::OnGMRecordIntProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR, this, &NFCGmModule::OnGMRecordStrProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT, this, &NFCGmModule::OnGMRecordObjectProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT, this, &NFCGmModule::OnGMRecordFloatProcess)) { return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL, this, &NFCGmModule::OnGMNormalProcess)) { return false; }
 
     return true;
 }

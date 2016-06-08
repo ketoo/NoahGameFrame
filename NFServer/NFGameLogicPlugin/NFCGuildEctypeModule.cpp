@@ -14,25 +14,7 @@
 
 bool NFCGuildEctypeModule::Init()
 {
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	
-	assert( NULL != m_pSceneProcessModule );
-	assert( NULL != m_pGameServerNet_ServerModule );
-	assert( NULL != m_pKernelModule );
-    assert( NULL != m_pCommonConfigModule );
-    assert( NULL != m_pLogModule );
-
-	std::string strConfigPath = pPluginManager->GetConfigPath();
-
-	strConfigPath += "NFDataCfg/Ini/Common/GuildConfig.xml";
-	m_pCommonConfigModule->LoadConfig(strConfigPath);
-
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ReqEnterGuildEctype, this, &NFCGuildEctypeModule::OnApplyEnterGuilEctypeProcess)){ return false; }
-
 	return true;
 }
 
@@ -49,7 +31,27 @@ bool NFCGuildEctypeModule::Execute()
 
 bool NFCGuildEctypeModule::AfterInit()
 {
-    m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildEctypeModule::OnGuildClassEvent);
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
+
+	assert(NULL != m_pSceneProcessModule);
+	assert(NULL != m_pGameServerNet_ServerModule);
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pCommonConfigModule);
+	assert(NULL != m_pLogModule);
+
+	std::string strConfigPath = pPluginManager->GetConfigPath();
+
+	strConfigPath += "NFDataCfg/Ini/Common/GuildConfig.xml";
+	m_pCommonConfigModule->LoadConfig(strConfigPath);
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ReqEnterGuildEctype, this, &NFCGuildEctypeModule::OnApplyEnterGuilEctypeProcess)) { return false; }
+
+	m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildEctypeModule::OnGuildClassEvent);
+
 	return true;
 }
 

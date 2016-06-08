@@ -13,17 +13,9 @@
 
 bool NFCSLGShopModule::Init()
 {
-    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
     
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pPackModule);
 
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
-	{
-		//Log
-	}
-
+	
     return true;
 }
 
@@ -46,12 +38,21 @@ bool NFCSLGShopModule::AfterInit()
     m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
     m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 
+	assert(NULL != m_pKernelModule);
+	assert(NULL != m_pPackModule);
     assert( NULL != m_pKernelModule );
     assert( NULL != m_pLogModule );
     assert(NULL != m_pSLGBuildingModule);
     assert(NULL != m_pElementInfoModule);
     assert(NULL != m_pPropertyModule);
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
+	{
+		//Log
+	}
 
     return true;
 }
