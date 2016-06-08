@@ -35,6 +35,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_NosqlPlugin", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFDataAgent_MysqlPlugin", "NFServer\NFDataAgent_MysqlPlugin\NFDataAgent_MysqlPlugin.vcxproj", "{015F43BC-7D4D-4632-A565-2F30C88637BB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFWorldLogicPlugin", "NFServer\NFWorldLogicPlugin\NFWorldLogicPlugin.vcxproj", "{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -65,6 +67,10 @@ Global
 		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Debug|x64.Build.0 = Debug|x64
 		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Release|x64.ActiveCfg = Release|x64
 		{015F43BC-7D4D-4632-A565-2F30C88637BB}.Release|x64.Build.0 = Release|x64
+		{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6}.Debug|x64.ActiveCfg = Debug|x64
+		{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6}.Debug|x64.Build.0 = Debug|x64
+		{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6}.Release|x64.ActiveCfg = Release|x64
+		{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +87,6 @@ Global
 		{73CE3203-1DAD-43E8-B49D-0151973765C9} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
 		{B7132059-C4A0-472A-9D58-BEB40B9528DB} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
 		{015F43BC-7D4D-4632-A565-2F30C88637BB} = {CE93E519-82D7-4D96-A18A-37A5B8533AC1}
+		{45ABC2B9-730E-450F-BBE7-B9894BCDB0C6} = {7CE50BDF-4625-4704-8720-BE2205CE1769}
 	EndGlobalSection
 EndGlobal
