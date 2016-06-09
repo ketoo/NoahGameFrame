@@ -7,9 +7,9 @@
 	<Plugin Name="NFLogPlugin" Main="1"/>
     <Plugin Name="NFDataAgent_MysqlPlugin" Main="1"/>
     <Plugin Name="NFMysqlClusterPlugin" Main="1"/>
+    <Plugin Name="NFDataAgent_NosqlPlugin" Main="1"/>
     <Plugin Name="NFGameLogicPlugin" Main="1"/>
-	
-	<ActorDataModule Name="NFCDataProcessModule" />
+    <Plugin Name="NFNoSqlPlugin" Main="1"/>
 	<APPID Name="6" />
     <ConfigPath Name="../../" />
 </XML>
