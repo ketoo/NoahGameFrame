@@ -473,9 +473,22 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string toWrite = "enum " + strRecordName + "\n{\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
+				nSetColNum = dim.lastCol - nRecordStart;
+
 				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
 				{
-					std::string name = sh.getCell(dim.firstRow + RecordNumber * 2, c)->value;
+					std::string name = "";
+
+					auto cll = sh.getCell(dim.firstRow + RecordNumber * 2, c);
+					if (cll)
+					{
+						name = cll->value;
+					}
+					else
+					{
+						break;
+					}
+
 					std::string value = "";
 
 					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
