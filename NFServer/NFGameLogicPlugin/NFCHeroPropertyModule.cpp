@@ -130,7 +130,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	return 0;
 }
 
-int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUID & xHeroGUID)
+bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUID & xHeroGUID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
 	if (nullptr == pHeroRecord)
@@ -188,7 +188,7 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 
 	pHeroPropertyRecord->AddRow(nRow, xHeroAllValue);
 
-	return 0;
+	return true;
 }
 
 bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList)

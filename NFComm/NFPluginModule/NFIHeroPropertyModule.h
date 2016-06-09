@@ -17,7 +17,7 @@ class NFIHeroPropertyModule
 {
 public:
 
-	virtual int OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID) = 0;
+	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID) = 0;
 
 	virtual bool CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList) = 0;
 	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList) = 0;

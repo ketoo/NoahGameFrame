@@ -39,7 +39,7 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	virtual int OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
+	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
 
 	virtual bool CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList);
 	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList);
