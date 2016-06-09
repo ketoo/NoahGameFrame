@@ -33,12 +33,11 @@ public:
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
-
     virtual bool AfterInit();
 
     virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-
     virtual NFIClusterClientModule* GetClusterClientModule();
+
 protected:
 
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -46,10 +45,9 @@ protected:
 protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
+    void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-
-    void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
     void SendOnline(const NFGUID& self);

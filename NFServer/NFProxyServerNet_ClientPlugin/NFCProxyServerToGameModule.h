@@ -38,10 +38,6 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-
-    virtual void LogReceive(const char* str) {}
-    virtual void LogSend(const char* str) {}
-
 	virtual NFIClusterClientModule* GetClusterModule();
 
 protected:
