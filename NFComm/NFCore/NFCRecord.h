@@ -45,7 +45,7 @@ public:
 
     virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value);
-    virtual bool SetString(const int nRow, const std::string& strColTag, const ::string& value);
+    virtual bool SetString(const int nRow, const std::string& strColTag, const std::string& value);
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFGUID& value);
 
     virtual bool QueryRow(const int nRow, NFIDataList& varList);
@@ -65,13 +65,15 @@ public:
     virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const int nCol, const NFINT64 value, NFIDataList& varResult);
     virtual int FindFloat(const int nCol, const double value, NFIDataList& varResult);
-    virtual int FindString(const int nCol, const char* value, NFIDataList& varResult);
+	virtual int FindString(const int nCol, const char* value, NFIDataList& varResult);
+	virtual int FindString(const int nCol, const std::string& value, NFIDataList& varResult);
     virtual int FindObject(const int nCol, const NFGUID& value, NFIDataList& varResult);
 
     virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFIDataList& varResult);
     virtual int FindFloat(const std::string& strColTag, const double value, NFIDataList& varResult);
-    virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult);
+	virtual int FindString(const std::string& strColTag, const char* value, NFIDataList& varResult);
+	virtual int FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult);
     virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFIDataList& varResult);
 
     virtual bool Remove(const int nRow);
