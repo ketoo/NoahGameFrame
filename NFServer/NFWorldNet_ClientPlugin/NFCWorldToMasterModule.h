@@ -36,9 +36,6 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void LogReceive(const char* str) {}
-    virtual void LogSend(const char* str) {}
-
 protected:
 
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
