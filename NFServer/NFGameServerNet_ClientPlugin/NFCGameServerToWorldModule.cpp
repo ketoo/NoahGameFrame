@@ -155,8 +155,6 @@ bool NFCGameServerToWorldModule::AfterInit()
     return true;
 }
 
-
-
 void NFCGameServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
