@@ -375,6 +375,25 @@ bool NFCHeroModule::DestroyHero(const NFGUID& self, const NFGUID& xHeroID)
 	return false;
 }
 
+NFGUID NFCHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord.get())
+	{
+		return NFGUID();
+	}
+
+	NFCDataList xDataList;
+	int nHeroCount = pHeroRecord->FindString(NFrame::Player::PlayerHero_ConfigID, strID, xDataList);
+	if (nHeroCount != 1)
+	{
+		return NFGUID();
+	}
+
+	const int nRow = xDataList.Int(0);
+	return pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero_GUID);
+}
+
 bool NFCHeroModule::HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
