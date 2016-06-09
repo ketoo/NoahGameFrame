@@ -110,6 +110,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCCardItemConsumeProcessModule.h" />
+    <ClInclude Include="NFCChatModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCEquipPropertyModule.h" />
@@ -139,6 +140,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFCSLGBuildingModule.h" />
     <ClInclude Include="NFCSLGShopModule.h" />
+    <ClInclude Include="NFCTaskModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +155,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCCardItemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCChatModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCEquipPropertyModule.cpp" />
@@ -182,6 +185,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFCSLGBuildingModule.cpp" />
     <ClCompile Include="NFCSLGShopModule.cpp" />
+    <ClCompile Include="NFCTaskModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

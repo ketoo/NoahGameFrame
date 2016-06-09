@@ -37,13 +37,15 @@ bool NFCGuildModule::AfterInit()
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
     m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>("NFCGuildDataModule");
 	m_pGameServerNet_ServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-
+    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
+    m_pGameServerToWorldModule = dynamic_cast<NFIGameServerToWorldModule*>(pPluginManager->FindModule("NFCGameServerToWorldModule"));
+    
 	assert(NULL != m_pGameServerNet_ServerModule);
 	assert(NULL != m_pLogModule);
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pUUIDModule);
     assert(NULL != m_pGuildDataModule);
+    assert(NULL != m_pGameServerToWorldModule);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGuildModule::OnPlayerClassEvent);
 
@@ -52,6 +54,11 @@ bool NFCGuildModule::AfterInit()
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)) { return false; }
+
+    //
+    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATE_GUILD, this, &NFCGuildModule::OnAckCreateGuildProcess)) { return false; }
+    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_JOIN_GUILD, this, &NFCGuildModule::OnAckJoinGuildProcess)) { return false; }
+    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_LEAVE_GUILD, this, &NFCGuildModule::OnAckLeaveGuildProcess)) { return false; }
 
     return true;
 }
@@ -523,6 +530,64 @@ void NFCGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID
 
 	m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
 } 
+
+
+void NFCGuildModule::OnAckCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    NFGUID nPlayerID;
+    NFMsg::ReqAckCreateGuild xData;
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    {
+        return;
+    }
+
+    NFGUID xGuild = NFINetModule::PBToNF(xData.guild_id());
+    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
+
+    m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xData, nPlayerID);
+
+    //
+    NFMsg::ReqAckJoinGuild xJoinMsg;
+    *xJoinMsg.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
+    xJoinMsg.set_guild_name(xData.guild_name());
+
+    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xGuild.nData64, NFMsg::EGameMsgID::EGMI_REQ_JOIN_GUILD, xJoinMsg);
+}
+
+void NFCGuildModule::OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    NFGUID nPlayerID;
+    NFMsg::ReqAckJoinGuild xData;
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    {
+        return;
+    }
+
+    NFGUID xGuild = NFINetModule::PBToNF(xData.guild_id());
+    if (!xGuild.IsNull())
+    {
+        m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", xGuild);
+    }
+
+    m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xData, nPlayerID);
+
+}
+
+void NFCGuildModule::OnAckLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    NFGUID nPlayerID;
+    NFMsg::ReqAckLeaveGuild xData;
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    {
+        return;
+    }
+
+    m_pKernelModule->SetPropertyObject(nPlayerID, "GuildID", NFGUID());
+
+    m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, xData, nPlayerID);
+
+}
+
 
 int NFCGuildModule::OnPlayerClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {

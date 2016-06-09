@@ -50,6 +50,12 @@
     <Filter Include="NFMapModule">
       <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NFTaskmodule">
+      <UniqueIdentifier>{f8043ff6-adaf-4065-9f7a-c4e8795c54eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFChatModule">
+      <UniqueIdentifier>{dac272e6-279f-4086-8000-a76bdae68996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCGameLogicModule.h" />
@@ -146,6 +152,12 @@
     </ClInclude>
     <ClInclude Include="NFCEquipPropertyModule.h">
       <Filter>NFEquipModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCChatModule.h">
+      <Filter>NFChatModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCTaskModule.h">
+      <Filter>NFTaskmodule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="NFCEquipPropertyModule.cpp">
       <Filter>NFEquipModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCChatModule.cpp">
+      <Filter>NFChatModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTaskModule.cpp">
+      <Filter>NFTaskmodule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

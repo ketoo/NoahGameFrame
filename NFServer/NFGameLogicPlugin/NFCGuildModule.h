@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 
 class NFCGuildModule
     : public NFIGuildModule
@@ -45,11 +46,15 @@ public:
     virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild);
 
 protected:
-	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    void OnAckCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnAckLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
     bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
@@ -60,6 +65,7 @@ protected:
     NFIUUIDModule* m_pUUIDModule;
     NFIGuildDataModule* m_pGuildDataModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 	NFILogModule* m_pLogModule;
 
     NFMapEx<NFGUID, int> mmNoneGuildPlayerList;

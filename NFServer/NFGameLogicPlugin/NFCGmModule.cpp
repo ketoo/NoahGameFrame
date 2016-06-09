@@ -481,3 +481,47 @@ void NFCGmModule::CheckAndAddRow(const NFGUID& self, const std::string strRecord
         }
     }
 }
+
+void NFCGmModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+    if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
+    {
+        return;
+    }
+
+    switch (xMsg.command_id())
+    {
+    case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
+    {
+        const std::string& strPropertyName = xMsg.command_str_value();
+        //const int nValue = xMsg.command_value();
+        //m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
+    }
+    break;
+    case NFMsg::ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT:
+    {
+        const int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
+        const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
+
+        double fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
+        double fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
+        double fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
+
+        const std::string& strObjectIndex = xMsg.command_str_value();
+        //const int nValue = xMsg.command_value();
+        if (m_pElementInfoModule->ExistElement(strObjectIndex))
+        {
+            NFCDataList xDataList;
+            xDataList << "X" << fX;
+            xDataList << "Y" << fY;
+            xDataList << "Z" << fZ;
+            const std::string& strObjectClass = m_pElementInfoModule->GetPropertyString(strObjectIndex, "ClassName");
+            m_pKernelModule->CreateObject(NFGUID(), nContianerID, nGroupID, strObjectClass, strObjectIndex, xDataList);
+        }
+    }
+    break;
+    default:
+        break;
+    }
+}
