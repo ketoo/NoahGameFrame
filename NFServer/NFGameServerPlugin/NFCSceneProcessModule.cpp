@@ -258,7 +258,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType(const int nSceneID)
 
 bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
 {
-    return GetCloneSceneType(nSceneID) == 1;
+    return GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE;
 }
 
 bool NFCSceneProcessModule::ApplyCloneGroup(const int nSceneID, int& nGroupID)
