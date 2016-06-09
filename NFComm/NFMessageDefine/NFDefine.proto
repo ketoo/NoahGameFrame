@@ -388,6 +388,15 @@ enum EGameItemExpiredType
     EGIET_END_INDEX = 3;
 };
 
+//NCPTypenpc的类型
+enum ENPCType
+{
+    ENPCTYPE_NORMAL	= 0;				// 普通怪
+    ENPCTYPE_TURRET = 1;              // 炮塔
+    ENPCTYPE_HERO 	= 2;              // 英雄
+    
+};
+
 
 ////////////掉落状态/////////////////////////////////////////////////////////////////////////////////////
 
