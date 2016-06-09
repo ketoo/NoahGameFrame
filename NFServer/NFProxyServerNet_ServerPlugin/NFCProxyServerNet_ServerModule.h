@@ -37,9 +37,6 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogReceive(const char* str) {}
-    virtual void LogSend(const char* str) {}
-
     virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //进入游戏成功
