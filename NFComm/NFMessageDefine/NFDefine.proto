@@ -357,12 +357,12 @@ enum EGameEquipSubType
 
 //元素类型
 enum EGameElementType
-{
-	EELEMENTTYPE_WIND				= 0;    // 风
-	EELEMENTTYPE_FIRE				= 1;    // 火
-	EELEMENTTYPE_THUNDER			= 2;    // 雷
-	EELEMENTTYPE_SOIL              	= 3;    // 土
-	EELEMENTTYPE_WATER          	= 4;    // 水
+{	
+	EELEMENTTYPE_FIRE				= 0;    // 火
+	EELEMENTTYPE_LIGHT				= 1;    // 雷电
+	EELEMENTTYPE_WIND              	= 2;    // 风
+	EELEMENTTYPE_ICE          		= 3;    // 冰冻
+	EELEMENTTYPE_POISON          	= 4;    // 毒	
 };
 
 enum EGameItemSubType
