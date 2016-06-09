@@ -348,6 +348,12 @@ message SetGuildEctypeInfo
 	required Ident		selfid				= 1;//角色ID
 	required GuildEctypeInfo		xectypeinfo		= 2;//工会副本的信息
 }
+
+//EGMI_ReqEnterGuildEctype					= 315; // 
+message ReqEnterGuildEctype
+{	
+	required Ident		selfid				= 1;//角色ID
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 message ChatInfo
@@ -476,6 +482,7 @@ message ReqSetFightHero
 {	
 	required Ident		selfid          = 1;//角色ID
 	required Ident		Heroid			= 2;//
+	required int32		FightPos	    = 3;//
 }
 
 //EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
@@ -515,3 +522,220 @@ message ReqSendMail
     repeated ItemStruct item_list           = 3; // 
     repeated CurrencyStruct currency_list   = 4;
 }
+
+//EGEC_REQSWICHSERVER							= 210;		 // 申请转服
+message ReqSwitchServer
+{
+    required Ident      selfid              = 1; // 角色ID
+	required int64      self_serverid		= 2; // 本来所在的服务器
+    required int64      target_serverid		= 3; // 目标ID
+	required int64      gate_serverid		= 4; // 目标ID
+	required int64      SceneID				= 5; // 
+	required Ident      client_id			= 6; // 客户端id
+	required int64      groupID				= 7; //  group
+}
+
+//EGEC_ACKSWICHSERVER							= 211;		 // 申请转服
+message AckSwitchServer
+{
+    required Ident      selfid              = 1; // 角色ID
+    required int64      self_serverid		= 2; // 目标ID
+	required int64      target_serverid		= 3; // 目标ID
+	required int64      gate_serverid		= 4; // 目标ID
+}
+
+///////////////组队/////////////////////////////////////////////////////////////////////////////////////
+
+//EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
+//EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
+message ReqAckCreateTeam
+{
+    required Ident		team_id = 1;
+}
+
+//EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
+//EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
+message ReqAckJoinTeam
+{
+    required Ident		team_id = 1;    
+}
+
+//EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍/
+//EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
+message ReqAckLeaveTeam
+{
+    required Ident		team_id = 1;
+}
+
+
+//	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
+//	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
+message ReqAckOprTeamMember
+{
+	enum EGTeamMemberOprType
+	{
+		EGAT_DOWN = 0;
+		EGAT_UP = 1;
+		EGAT_KICK = 2;
+		
+		EGAT_APPOINT 		= 3;//任命
+		EGAT_FIRE 			= 4;//撤职
+		EGAT_DEMISE 		= 5;//禅让
+		EGAT_ACCEPTAPPLY 	= 6;//收人
+		EGAT_DENYAPPLY 		= 7;//拒收
+		EGAT_KICKOUT 		= 8;//开除
+	}
+	required Ident						team_id = 1;
+    required Ident						member_id = 2;//被操作的ID
+    required EGTeamMemberOprType		type = 3;
+}
+
+//	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
+message ReqInviteTeamMember
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	required Ident						invite_target_id = 3;//
+}
+
+
+
+///////////////大地图/////////////////////////////////////////////////////////////////////////////////////
+message GridGuildBaseInfo
+{
+	required Ident						id = 1;				//ID
+	required int32						level = 2;			//Level
+	required int32						count = 3;			//人数
+	required int32						resource = 4;		//资源
+	required bytes						icon = 5;			//Icon
+}
+	
+//	EGMI_REQ_MAP_GRID_INFO
+message ReqBigMapGridInfo
+{	
+	repeated bytes						map_title_id = 1;
+}
+
+message BigMapGridBaseInfo
+{
+	required bytes						id = 1;				//GridID
+	required GridGuildBaseInfo			guild_info = 2;			//所属占领公会
+	
+	//war state
+	
+	//kingwar
+	required int32						kingwar_time 	= 10;			//开始时间
+	required Ident						kingwarrer 		= 11;			//发动者
+	
+	//hurting
+	required int32						hurting_time 	= 20;			//狩猎开始时间
+	required Ident						hurter 			= 21;			//狩猎者
+}
+
+message BigMapLeaveMsg
+{
+	required Ident						owner = 1;//留言者
+	required bytes						owner_name = 2;//留言者
+	required bytes						msg_data = 3;//留言内容
+	required int32						msg_time = 4;//留言时间
+	required int32						owner_level = 5;//留言时level
+}
+	
+message BigMapWarHistory
+{
+	required GridGuildBaseInfo			red_info = 1;				//红方	
+	required GridGuildBaseInfo			blue_info = 2;				//蓝方	
+	
+	required Ident						winner_id = 10;	//winner
+	required int32						war_time = 11;	//war时间
+}
+	
+message BigMapGridDetailInfo
+{
+	required BigMapGridBaseInfo			grid_base_info 	= 1;
+	
+	repeated GridGuildBaseInfo			stay_guid_list 	= 2;	//
+	repeated BigMapLeaveMsg				leave_msg 		= 3;	//此地图留言(<=10)
+	repeated BigMapWarHistory			war_history 	= 4;	//此地图历史战争信息(<=10)
+}
+
+//	EGMI_ACK_MAP_GRID_INFO
+message AckBigMapGridInfo
+{
+	repeated BigMapGridDetailInfo						map_data = 1;
+}
+
+//	EGMI_REQ_BIG_MAP_GRID
+message ReqBigMapInfo
+{
+}
+
+//	EGMI_ACK_BIG_MAP_GRID
+message AckBigMapInfo
+{
+	repeated BigMapGridBaseInfo			grid_base_info = 1;	
+}
+
+//	EGMI_REQ_HOLD_MAP_GRID
+message ReqHoldMapGrid
+{
+	required bytes						map_title_id = 1;
+	required Ident						guild_id = 2;
+}
+//	EGMI_ACK_HOLD_MAP_GRID
+message AckHoldMapGrid
+{
+}
+
+//	EGMI_REQ_LEAVE_MSG_MAP_GRID
+message ReqLeaveMapMsg
+{
+	required bytes						map_title_id = 1;
+	required BigMapLeaveMsg				leave_msg = 2;
+}
+//	EGMI_ACK_LEAVE_MSG_MAP_GRID
+message AckLeaveMapMsg
+{
+}
+
+//	EGMI_REQ_GET_MAP_GRID_AWARD
+message ReqGetMapAward
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_GET_MAP_GRID_AWARD
+message AckGetMapAward
+{
+}
+
+//	EGMI_REQ_MAP_GRID_HUNTING
+message ReqMapHunting
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_MAP_GRID_HUNTING
+message AckMapHunting
+{
+}
+
+//	EGMI_REQ_MAP_GRID_KING_WAR
+message ReqMapKingWar
+{
+	required bytes						map_title_id = 1;
+}
+//	EGMI_ACK_MAP_GRID_KING_WAR
+message AckMapKingWar
+{
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+

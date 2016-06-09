@@ -1241,6 +1241,23 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqEnterGuildEctype")]
+  public partial class ReqEnterGuildEctype : global::ProtoBuf.IExtensible
+  {
+    public ReqEnterGuildEctype() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChatInfo")]
   public partial class ChatInfo : global::ProtoBuf.IExtensible
   {
@@ -1756,6 +1773,13 @@ namespace NFMsg
       get { return _Heroid; }
       set { _Heroid = value; }
     }
+    private int _FightPos;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"FightPos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int FightPos
+    {
+      get { return _FightPos; }
+      set { _FightPos = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1887,6 +1911,669 @@ namespace NFMsg
       get { return _currency_list; }
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSwitchServer")]
+  public partial class ReqSwitchServer : global::ProtoBuf.IExtensible
+  {
+    public ReqSwitchServer() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private long _self_serverid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long self_serverid
+    {
+      get { return _self_serverid; }
+      set { _self_serverid = value; }
+    }
+    private long _target_serverid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"target_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long target_serverid
+    {
+      get { return _target_serverid; }
+      set { _target_serverid = value; }
+    }
+    private long _gate_serverid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gate_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long gate_serverid
+    {
+      get { return _gate_serverid; }
+      set { _gate_serverid = value; }
+    }
+    private long _SceneID;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"SceneID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long SceneID
+    {
+      get { return _SceneID; }
+      set { _SceneID = value; }
+    }
+    private NFMsg.Ident _client_id;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"client_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident client_id
+    {
+      get { return _client_id; }
+      set { _client_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckSwitchServer")]
+  public partial class AckSwitchServer : global::ProtoBuf.IExtensible
+  {
+    public AckSwitchServer() {}
+    
+    private NFMsg.Ident _selfid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"selfid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident selfid
+    {
+      get { return _selfid; }
+      set { _selfid = value; }
+    }
+    private long _self_serverid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long self_serverid
+    {
+      get { return _self_serverid; }
+      set { _self_serverid = value; }
+    }
+    private long _target_serverid;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"target_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long target_serverid
+    {
+      get { return _target_serverid; }
+      set { _target_serverid = value; }
+    }
+    private long _gate_serverid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"gate_serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long gate_serverid
+    {
+      get { return _gate_serverid; }
+      set { _gate_serverid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckCreateTeam")]
+  public partial class ReqAckCreateTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckCreateTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckJoinTeam")]
+  public partial class ReqAckJoinTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckJoinTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckLeaveTeam")]
+  public partial class ReqAckLeaveTeam : global::ProtoBuf.IExtensible
+  {
+    public ReqAckLeaveTeam() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckOprTeamMember")]
+  public partial class ReqAckOprTeamMember : global::ProtoBuf.IExtensible
+  {
+    public ReqAckOprTeamMember() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _member_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"member_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident member_id
+    {
+      get { return _member_id; }
+      set { _member_id = value; }
+    }
+    private NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType _type;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFMsg.ReqAckOprTeamMember.EGTeamMemberOprType type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EGTeamMemberOprType")]
+    public enum EGTeamMemberOprType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DOWN", Value=0)]
+      EGAT_DOWN = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_UP", Value=1)]
+      EGAT_UP = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_KICK", Value=2)]
+      EGAT_KICK = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_APPOINT", Value=3)]
+      EGAT_APPOINT = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_FIRE", Value=4)]
+      EGAT_FIRE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DEMISE", Value=5)]
+      EGAT_DEMISE = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_ACCEPTAPPLY", Value=6)]
+      EGAT_ACCEPTAPPLY = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_DENYAPPLY", Value=7)]
+      EGAT_DENYAPPLY = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGAT_KICKOUT", Value=8)]
+      EGAT_KICKOUT = 8
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqInviteTeamMember")]
+  public partial class ReqInviteTeamMember : global::ProtoBuf.IExtensible
+  {
+    public ReqInviteTeamMember() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _self_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self_id
+    {
+      get { return _self_id; }
+      set { _self_id = value; }
+    }
+    private NFMsg.Ident _invite_target_id;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"invite_target_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident invite_target_id
+    {
+      get { return _invite_target_id; }
+      set { _invite_target_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GridGuildBaseInfo")]
+  public partial class GridGuildBaseInfo : global::ProtoBuf.IExtensible
+  {
+    public GridGuildBaseInfo() {}
+    
+    private NFMsg.Ident _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private int _level;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int level
+    {
+      get { return _level; }
+      set { _level = value; }
+    }
+    private int _count;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int count
+    {
+      get { return _count; }
+      set { _count = value; }
+    }
+    private int _resource;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"resource", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int resource
+    {
+      get { return _resource; }
+      set { _resource = value; }
+    }
+    private byte[] _icon;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] icon
+    {
+      get { return _icon; }
+      set { _icon = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqBigMapGridInfo")]
+  public partial class ReqBigMapGridInfo : global::ProtoBuf.IExtensible
+  {
+    public ReqBigMapGridInfo() {}
+    
+    private readonly global::System.Collections.Generic.List<byte[]> _map_title_id = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> map_title_id
+    {
+      get { return _map_title_id; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BigMapGridBaseInfo")]
+  public partial class BigMapGridBaseInfo : global::ProtoBuf.IExtensible
+  {
+    public BigMapGridBaseInfo() {}
+    
+    private byte[] _id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private NFMsg.GridGuildBaseInfo _guild_info;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.GridGuildBaseInfo guild_info
+    {
+      get { return _guild_info; }
+      set { _guild_info = value; }
+    }
+    private int _kingwar_time;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"kingwar_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int kingwar_time
+    {
+      get { return _kingwar_time; }
+      set { _kingwar_time = value; }
+    }
+    private NFMsg.Ident _kingwarrer;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"kingwarrer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident kingwarrer
+    {
+      get { return _kingwarrer; }
+      set { _kingwarrer = value; }
+    }
+    private int _hurting_time;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = true, Name=@"hurting_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int hurting_time
+    {
+      get { return _hurting_time; }
+      set { _hurting_time = value; }
+    }
+    private NFMsg.Ident _hurter;
+    [global::ProtoBuf.ProtoMember(21, IsRequired = true, Name=@"hurter", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident hurter
+    {
+      get { return _hurter; }
+      set { _hurter = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BigMapLeaveMsg")]
+  public partial class BigMapLeaveMsg : global::ProtoBuf.IExtensible
+  {
+    public BigMapLeaveMsg() {}
+    
+    private NFMsg.Ident _owner;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident owner
+    {
+      get { return _owner; }
+      set { _owner = value; }
+    }
+    private byte[] _owner_name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"owner_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] owner_name
+    {
+      get { return _owner_name; }
+      set { _owner_name = value; }
+    }
+    private byte[] _msg_data;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"msg_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] msg_data
+    {
+      get { return _msg_data; }
+      set { _msg_data = value; }
+    }
+    private int _msg_time;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"msg_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int msg_time
+    {
+      get { return _msg_time; }
+      set { _msg_time = value; }
+    }
+    private int _owner_level;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"owner_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int owner_level
+    {
+      get { return _owner_level; }
+      set { _owner_level = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BigMapWarHistory")]
+  public partial class BigMapWarHistory : global::ProtoBuf.IExtensible
+  {
+    public BigMapWarHistory() {}
+    
+    private NFMsg.GridGuildBaseInfo _red_info;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"red_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.GridGuildBaseInfo red_info
+    {
+      get { return _red_info; }
+      set { _red_info = value; }
+    }
+    private NFMsg.GridGuildBaseInfo _blue_info;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"blue_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.GridGuildBaseInfo blue_info
+    {
+      get { return _blue_info; }
+      set { _blue_info = value; }
+    }
+    private NFMsg.Ident _winner_id;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"winner_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident winner_id
+    {
+      get { return _winner_id; }
+      set { _winner_id = value; }
+    }
+    private int _war_time;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"war_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int war_time
+    {
+      get { return _war_time; }
+      set { _war_time = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BigMapGridDetailInfo")]
+  public partial class BigMapGridDetailInfo : global::ProtoBuf.IExtensible
+  {
+    public BigMapGridDetailInfo() {}
+    
+    private NFMsg.BigMapGridBaseInfo _grid_base_info;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"grid_base_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.BigMapGridBaseInfo grid_base_info
+    {
+      get { return _grid_base_info; }
+      set { _grid_base_info = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.GridGuildBaseInfo> _stay_guid_list = new global::System.Collections.Generic.List<NFMsg.GridGuildBaseInfo>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"stay_guid_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.GridGuildBaseInfo> stay_guid_list
+    {
+      get { return _stay_guid_list; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.BigMapLeaveMsg> _leave_msg = new global::System.Collections.Generic.List<NFMsg.BigMapLeaveMsg>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"leave_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.BigMapLeaveMsg> leave_msg
+    {
+      get { return _leave_msg; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.BigMapWarHistory> _war_history = new global::System.Collections.Generic.List<NFMsg.BigMapWarHistory>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"war_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.BigMapWarHistory> war_history
+    {
+      get { return _war_history; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckBigMapGridInfo")]
+  public partial class AckBigMapGridInfo : global::ProtoBuf.IExtensible
+  {
+    public AckBigMapGridInfo() {}
+    
+    private readonly global::System.Collections.Generic.List<NFMsg.BigMapGridDetailInfo> _map_data = new global::System.Collections.Generic.List<NFMsg.BigMapGridDetailInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"map_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.BigMapGridDetailInfo> map_data
+    {
+      get { return _map_data; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqBigMapInfo")]
+  public partial class ReqBigMapInfo : global::ProtoBuf.IExtensible
+  {
+    public ReqBigMapInfo() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckBigMapInfo")]
+  public partial class AckBigMapInfo : global::ProtoBuf.IExtensible
+  {
+    public AckBigMapInfo() {}
+    
+    private readonly global::System.Collections.Generic.List<NFMsg.BigMapGridBaseInfo> _grid_base_info = new global::System.Collections.Generic.List<NFMsg.BigMapGridBaseInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"grid_base_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.BigMapGridBaseInfo> grid_base_info
+    {
+      get { return _grid_base_info; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqHoldMapGrid")]
+  public partial class ReqHoldMapGrid : global::ProtoBuf.IExtensible
+  {
+    public ReqHoldMapGrid() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private NFMsg.Ident _guild_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident guild_id
+    {
+      get { return _guild_id; }
+      set { _guild_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckHoldMapGrid")]
+  public partial class AckHoldMapGrid : global::ProtoBuf.IExtensible
+  {
+    public AckHoldMapGrid() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqLeaveMapMsg")]
+  public partial class ReqLeaveMapMsg : global::ProtoBuf.IExtensible
+  {
+    public ReqLeaveMapMsg() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private NFMsg.BigMapLeaveMsg _leave_msg;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"leave_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.BigMapLeaveMsg leave_msg
+    {
+      get { return _leave_msg; }
+      set { _leave_msg = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckLeaveMapMsg")]
+  public partial class AckLeaveMapMsg : global::ProtoBuf.IExtensible
+  {
+    public AckLeaveMapMsg() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqGetMapAward")]
+  public partial class ReqGetMapAward : global::ProtoBuf.IExtensible
+  {
+    public ReqGetMapAward() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckGetMapAward")]
+  public partial class AckGetMapAward : global::ProtoBuf.IExtensible
+  {
+    public AckGetMapAward() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMapHunting")]
+  public partial class ReqMapHunting : global::ProtoBuf.IExtensible
+  {
+    public ReqMapHunting() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMapHunting")]
+  public partial class AckMapHunting : global::ProtoBuf.IExtensible
+  {
+    public AckMapHunting() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMapKingWar")]
+  public partial class ReqMapKingWar : global::ProtoBuf.IExtensible
+  {
+    public ReqMapKingWar() {}
+    
+    private byte[] _map_title_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title_id
+    {
+      get { return _map_title_id; }
+      set { _map_title_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMapKingWar")]
+  public partial class AckMapKingWar : global::ProtoBuf.IExtensible
+  {
+    public AckMapKingWar() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

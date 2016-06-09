@@ -302,6 +302,18 @@ class LIBPROTOC_EXPORT ReqAckBuyObjectFormShop : public ::google::protobuf::Mess
   inline float z() const;
   inline void set_z(float value);
 
+  // required string Shop_id = 5;
+  inline bool has_shop_id() const;
+  inline void clear_shop_id();
+  static const int kShopIdFieldNumber = 5;
+  inline const ::std::string& shop_id() const;
+  inline void set_shop_id(const ::std::string& value);
+  inline void set_shop_id(const char* value);
+  inline void set_shop_id(const char* value, size_t size);
+  inline ::std::string* mutable_shop_id();
+  inline ::std::string* release_shop_id();
+  inline void set_allocated_shop_id(::std::string* shop_id);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckBuyObjectFormShop)
  private:
   inline void set_has_config_id();
@@ -312,16 +324,19 @@ class LIBPROTOC_EXPORT ReqAckBuyObjectFormShop : public ::google::protobuf::Mess
   inline void clear_has_y();
   inline void set_has_z();
   inline void clear_has_z();
+  inline void set_has_shop_id();
+  inline void clear_has_shop_id();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* config_id_;
   float x_;
   float y_;
+  ::std::string* shop_id_;
   float z_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFSLGDefine_2eproto();
   friend void protobuf_AssignDesc_NFSLGDefine_2eproto();
@@ -912,6 +927,76 @@ inline float ReqAckBuyObjectFormShop::z() const {
 inline void ReqAckBuyObjectFormShop::set_z(float value) {
   set_has_z();
   z_ = value;
+}
+
+// required string Shop_id = 5;
+inline bool ReqAckBuyObjectFormShop::has_shop_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckBuyObjectFormShop::set_has_shop_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckBuyObjectFormShop::clear_has_shop_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckBuyObjectFormShop::clear_shop_id() {
+  if (shop_id_ != &::google::protobuf::internal::kEmptyString) {
+    shop_id_->clear();
+  }
+  clear_has_shop_id();
+}
+inline const ::std::string& ReqAckBuyObjectFormShop::shop_id() const {
+  return *shop_id_;
+}
+inline void ReqAckBuyObjectFormShop::set_shop_id(const ::std::string& value) {
+  set_has_shop_id();
+  if (shop_id_ == &::google::protobuf::internal::kEmptyString) {
+    shop_id_ = new ::std::string;
+  }
+  shop_id_->assign(value);
+}
+inline void ReqAckBuyObjectFormShop::set_shop_id(const char* value) {
+  set_has_shop_id();
+  if (shop_id_ == &::google::protobuf::internal::kEmptyString) {
+    shop_id_ = new ::std::string;
+  }
+  shop_id_->assign(value);
+}
+inline void ReqAckBuyObjectFormShop::set_shop_id(const char* value, size_t size) {
+  set_has_shop_id();
+  if (shop_id_ == &::google::protobuf::internal::kEmptyString) {
+    shop_id_ = new ::std::string;
+  }
+  shop_id_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckBuyObjectFormShop::mutable_shop_id() {
+  set_has_shop_id();
+  if (shop_id_ == &::google::protobuf::internal::kEmptyString) {
+    shop_id_ = new ::std::string;
+  }
+  return shop_id_;
+}
+inline ::std::string* ReqAckBuyObjectFormShop::release_shop_id() {
+  clear_has_shop_id();
+  if (shop_id_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = shop_id_;
+    shop_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckBuyObjectFormShop::set_allocated_shop_id(::std::string* shop_id) {
+  if (shop_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete shop_id_;
+  }
+  if (shop_id) {
+    set_has_shop_id();
+    shop_id_ = shop_id;
+  } else {
+    clear_has_shop_id();
+    shop_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
