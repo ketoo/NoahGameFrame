@@ -34,13 +34,11 @@ void FileProcess::CreateNameFile()
 {
 	time_t timeval;
 	timeval = time(NULL);
-	auto strNow = ctime(&timeval);
 	std::string strHPPHead
 		= "// -------------------------------------------------------------------------\n";
 	strHPPHead = strHPPHead
 		+ "//    @FileName         :    NFProtocolDefine.hpp\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "#ifndef NF_PR_NAME_HPP\n"
@@ -57,7 +55,6 @@ void FileProcess::CreateNameFile()
 	strJavaHead = strJavaHead
 		+ "//    @FileName         :    NFProtocolDefine.java\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "package nframe;\n";
@@ -69,7 +66,6 @@ void FileProcess::CreateNameFile()
 	strCSHead = strCSHead
 		+ "//    @FileName         :    NFProtocolDefine.cs\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "using System;\n"
