@@ -57,6 +57,12 @@ public:
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
 
+    virtual int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
+    virtual int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
+
+    virtual int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
+    virtual int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
+
 protected:
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
     void OnClientDisconnect(const int nSockIndex);
@@ -81,14 +87,6 @@ protected:
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
 	
 protected:
-    //将self的全部属性广播给argVar[应该是多对多]
-    int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
-    int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
-
-    //把argVar这些人的出现或者离去广播给self这些人
-    int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-    int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
-
     //网络同步
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);

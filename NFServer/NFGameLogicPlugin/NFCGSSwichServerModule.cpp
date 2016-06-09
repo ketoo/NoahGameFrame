@@ -66,10 +66,15 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 
 	int nGate = 0;
 	NFGUID xClient;
-	if (!m_pGameServerNet_ServerModule->GetGateInfo(self, nGate, xClient))
+
+    NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo> pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(self);
+	if (!pGateInfo)
 	{
 		return false;
 	}
+
+    nGate = pGateInfo->nGateID;
+    xClient = pGateInfo->xClientID;
 	*xMsg.mutable_client_id() = NFINetModule::NFToPB(xClient);
 	xMsg.set_gate_serverid(nGate);
 
@@ -111,8 +116,44 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 
 	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
 	const int nGateID = xMsg.gate_serverid(); 
-	const int nSceneID = xMsg.sceneid();
-	m_pGameServerNet_ServerModule->ProcessSwitchToGame(nPlayerID, nClientID, nGateID, nSceneID);
+    const int nSceneID = xMsg.sceneid();
+    const int nGroup = xMsg.groupid();
+
+    //Ä¬ÈÏ1ºÅ³¡¾°
+    NFCDataList var;
+    var.AddString("GateID");
+    var.AddInt(nGateID);
+
+    var.AddString("ClientID");
+    var.AddObject(nClientID);
+
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, "Player", "", var);
+    if (NULL == pObject.get())
+    {
+        //ÄÚ´æÐ¹Â©
+        //mRoleBaseData
+        //mRoleFDData
+        return;
+    }
+
+    pObject->SetPropertyInt("LoadPropertyFinish", 1);
+    pObject->SetPropertyInt("GateID", nGateID);
+    pObject->SetPropertyInt("GameID", pPluginManager->AppID());
+
+    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
+
+    NFCDataList varEntry;
+    varEntry << pObject->Self();
+    varEntry << NFINT64(0);
+    varEntry << nSceneID;
+    varEntry << nGroup;
+    m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+
+    if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
+    {
+        m_pKernelModule->DestroyObject(nPlayerID);
+        return ;
+    }
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
 	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
@@ -126,5 +167,6 @@ void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nM
 		return;
 	}
 
-	m_pGameServerNet_ServerModule->ProcessSwitchOffGame(nPlayerID);
+	m_pGameServerNet_ServerModule->RemovePlayerGateInfo(nPlayerID);
+    m_pKernelModule->DestroyObject(nPlayerID);
 }
