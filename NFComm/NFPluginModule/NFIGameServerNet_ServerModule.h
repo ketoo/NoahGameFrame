@@ -52,8 +52,10 @@ public:
     virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID) = 0;
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID) = 0;
     virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID) = 0;
+
     virtual int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self) = 0;
     virtual int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self) = 0;
+
     virtual int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar) = 0;
     virtual int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar) = 0;
 };
