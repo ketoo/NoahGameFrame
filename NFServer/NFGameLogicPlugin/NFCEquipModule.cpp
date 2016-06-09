@@ -305,34 +305,6 @@ bool NFCEquipModule::RamdomSucess( const int nNowLevel , const int nMaxLevel)
     return false;
 }
 
-
-int NFCEquipModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
-{
-    if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
-    {
-
-    }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent )
-    {
-         m_pKernelModule->AddRecordCallBack( self, m_pPackModule->GetPackName( PackTableType::BagEquipPack ), this, &NFCEquipModule::OnObjectBagEquipRecordEvent );
-    }
-
-    return 0;
-}
-
-
-int NFCEquipModule::OnObjectBagEquipRecordEvent( const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
-{
-    std::ostringstream stream;
-    NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
-    if (nullptr == xRecord)
-    {
-        return 0;
-    }
-
-    return 0;
-}
-
 bool NFCEquipModule::WearEquip( const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget )
 {
     if (self == xTareget)
