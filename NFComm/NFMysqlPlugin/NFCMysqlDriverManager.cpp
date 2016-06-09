@@ -9,9 +9,9 @@
 #include<arpa/inet.h>
 #endif
 
-#include "NFComm/NFCore/NFIDataList.h"
-#include "NFComm/NFCluster/NFCMysqlDriverManager.h"
 #include "NFCMysqlDriver.h"
+#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFMysqlPlugin/NFCMysqlDriverManager.h"
 
 NFIMysqlDriver* NFCMysqlDriverManager::GetMysqlDriver()
 {

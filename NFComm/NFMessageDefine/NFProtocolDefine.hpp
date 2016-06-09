@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Wed Jun  8 17:17:16 2016
+//    @Date             :    Thu Jun  9 11:58:32 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -806,36 +806,17 @@ public:
 		PlayerHero_Equip4		= 8, // Equip4 -- object
 		PlayerHero_Equip5		= 9, // Equip5 -- object
 		PlayerHero_Equip6		= 10, // Equip6 -- object
-		PlayerHero_Equip7		= 11, // Equip7 -- object
-		PlayerHero_Equip8		= 12, // Equip8 -- object
-		PlayerHero_Talent1		= 13, // Talent1 -- string
-		PlayerHero_Talent2		= 14, // Talent2 -- string
-		PlayerHero_Talent3		= 15, // Talent3 -- string
-		PlayerHero_Talent4		= 16, // Talent4 -- string
-		PlayerHero_Talent5		= 17, // Talent5 -- string
-		PlayerHero_Talent6		= 18, // Talent6 -- string
-		PlayerHero_Talent7		= 19, // Talent7 -- string
-		PlayerHero_Talent8		= 20, // Talent8 -- string
-		PlayerHero_TalentLevel1		= 21, // TalentLevel1 -- int
-		PlayerHero_TalentLevel2		= 22, // TalentLevel2 -- int
-		PlayerHero_TalentLevel3		= 23, // TalentLevel3 -- int
-		PlayerHero_TalentLevel4		= 24, // TalentLevel4 -- int
-		PlayerHero_TalentLevel5		= 25, // TalentLevel5 -- int
-		PlayerHero_TalentLevel6		= 26, // TalentLevel6 -- int
-		PlayerHero_TalentLevel7		= 27, // TalentLevel7 -- int
-		PlayerHero_TalentLevel8		= 28, // TalentLevel8 -- int
-		PlayerHero_Skill1		= 29, // Skill1 -- string
-		PlayerHero_Skill2		= 30, // Skill2 -- string
-		PlayerHero_Skill3		= 31, // Skill3 -- string
-		PlayerHero_Skill4		= 32, // Skill4 -- string
-		PlayerHero_Skill5		= 33, // Skill5 -- string
-		PlayerHero_SkillLevel1		= 34, // SkillLevel1 -- int
-		PlayerHero_SkillLevel2		= 35, // SkillLevel2 -- int
-		PlayerHero_SkillLevel3		= 36, // SkillLevel3 -- int
-		PlayerHero_SkillLevel4		= 37, // SkillLevel4 -- int
-		PlayerHero_SkillLevel5		= 38, // SkillLevel5 -- int
-		PlayerHero_FightState		= 39, // FightState -- int
-		PlayerHero_FightSkill		= 40, // FightSkill -- string
+		PlayerHero_Talent1		= 11, // Talent1 -- string
+		PlayerHero_Talent2		= 12, // Talent2 -- string
+		PlayerHero_Talent3		= 13, // Talent3 -- string
+		PlayerHero_Talent4		= 14, // Talent4 -- string
+		PlayerHero_Talent5		= 15, // Talent5 -- string
+		PlayerHero_Skill1		= 16, // Skill1 -- string
+		PlayerHero_Skill2		= 17, // Skill2 -- string
+		PlayerHero_Skill3		= 18, // Skill3 -- string
+		PlayerHero_Skill4		= 19, // Skill4 -- string
+		PlayerHero_Skill5		= 20, // Skill5 -- string
+		PlayerHero_FightSkill		= 21, // FightSkill -- string
 
 	};
 
@@ -1103,7 +1084,7 @@ public:
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas; } // string
 	static const std::string& UpLevel(){ static std::string xUpLevel = "UpLevel"; return xUpLevel; } // int
-	static const std::string& AfterUpSkillID(){ static std::string xAfterUpSkillID = "AfterUpSkillID"; return xAfterUpSkillID; } // string
+	static const std::string& AfterUpID(){ static std::string xAfterUpID = "AfterUpID"; return xAfterUpID; } // string
 	static const std::string& PlayerSkill(){ static std::string xPlayerSkill = "PlayerSkill"; return xPlayerSkill; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
 	static const std::string& NeedTar(){ static std::string xNeedTar = "NeedTar"; return xNeedTar; } // int
@@ -1225,33 +1206,13 @@ public:
 	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
-	static const std::string& TalentType(){ static std::string xTalentType = "TalentType"; return xTalentType; } // int
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
-	// Record
-
-};
-
-class TalentRef
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xTalentRef = "TalentRef"; return xTalentRef; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	// Property
-	static const std::string& TALENT1(){ static std::string xTALENT1 = "TALENT1"; return xTALENT1; } // string
-	static const std::string& TALENT2(){ static std::string xTALENT2 = "TALENT2"; return xTALENT2; } // string
-	static const std::string& TALENT3(){ static std::string xTALENT3 = "TALENT3"; return xTALENT3; } // string
-	static const std::string& TALENT4(){ static std::string xTALENT4 = "TALENT4"; return xTALENT4; } // string
-	static const std::string& TALENT5(){ static std::string xTALENT5 = "TALENT5"; return xTALENT5; } // string
-	static const std::string& TALENT6(){ static std::string xTALENT6 = "TALENT6"; return xTALENT6; } // string
-	static const std::string& TALENT7(){ static std::string xTALENT7 = "TALENT7"; return xTALENT7; } // string
-	static const std::string& TALENT8(){ static std::string xTALENT8 = "TALENT8"; return xTALENT8; } // string
+	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
+	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas; } // string
+	static const std::string& UpLevel(){ static std::string xUpLevel = "UpLevel"; return xUpLevel; } // int
+	static const std::string& AfterUpID(){ static std::string xAfterUpID = "AfterUpID"; return xAfterUpID; } // string
 	// Record
 
 };

@@ -21,7 +21,6 @@ public:
         ECONSTDEFINE_HERO_MAXLEVEL = 100,
         ECONSTDEFINE_HERO_MAXSTAR = 100,
 		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
-		ECONSTDEFINE_HERO_MAX_FIGHT_COUNT = 5,
 
     };
     virtual bool AddHero(const NFGUID& self, const std::string& strID) = 0;
@@ -31,10 +30,10 @@ public:
 	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 
 	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
-	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
-
 	virtual bool SetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID) = 0;
-	virtual bool UnSetFightHero(const NFGUID& self, const int nIndex, const NFGUID& xHeroID) = 0;
+
+	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
+	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 
 };
 

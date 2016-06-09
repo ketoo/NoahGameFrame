@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    Wed Jun  8 20:46:59 2016
+//    @Date             :    Thu Jun  9 11:58:32 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -785,36 +785,17 @@ public class Player
 		Equip4		= 8, // Equip4 -- object
 		Equip5		= 9, // Equip5 -- object
 		Equip6		= 10, // Equip6 -- object
-		Equip7		= 11, // Equip7 -- object
-		Equip8		= 12, // Equip8 -- object
-		Talent1		= 13, // Talent1 -- string
-		Talent2		= 14, // Talent2 -- string
-		Talent3		= 15, // Talent3 -- string
-		Talent4		= 16, // Talent4 -- string
-		Talent5		= 17, // Talent5 -- string
-		Talent6		= 18, // Talent6 -- string
-		Talent7		= 19, // Talent7 -- string
-		Talent8		= 20, // Talent8 -- string
-		TalentLevel1		= 21, // TalentLevel1 -- int
-		TalentLevel2		= 22, // TalentLevel2 -- int
-		TalentLevel3		= 23, // TalentLevel3 -- int
-		TalentLevel4		= 24, // TalentLevel4 -- int
-		TalentLevel5		= 25, // TalentLevel5 -- int
-		TalentLevel6		= 26, // TalentLevel6 -- int
-		TalentLevel7		= 27, // TalentLevel7 -- int
-		TalentLevel8		= 28, // TalentLevel8 -- int
-		Skill1		= 29, // Skill1 -- string
-		Skill2		= 30, // Skill2 -- string
-		Skill3		= 31, // Skill3 -- string
-		Skill4		= 32, // Skill4 -- string
-		Skill5		= 33, // Skill5 -- string
-		SkillLevel1		= 34, // SkillLevel1 -- int
-		SkillLevel2		= 35, // SkillLevel2 -- int
-		SkillLevel3		= 36, // SkillLevel3 -- int
-		SkillLevel4		= 37, // SkillLevel4 -- int
-		SkillLevel5		= 38, // SkillLevel5 -- int
-		FightState		= 39, // FightState -- int
-		FightSkill		= 40, // FightSkill -- string
+		Talent1		= 11, // Talent1 -- string
+		Talent2		= 12, // Talent2 -- string
+		Talent3		= 13, // Talent3 -- string
+		Talent4		= 14, // Talent4 -- string
+		Talent5		= 15, // Talent5 -- string
+		Skill1		= 16, // Skill1 -- string
+		Skill2		= 17, // Skill2 -- string
+		Skill3		= 18, // Skill3 -- string
+		Skill4		= 19, // Skill4 -- string
+		Skill5		= 20, // Skill5 -- string
+		FightSkill		= 21, // FightSkill -- string
 
 	};
 
@@ -1078,7 +1059,7 @@ public class Skill
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String Atlas = "Atlas"; // string
 	public static readonly String UpLevel = "UpLevel"; // int
-	public static readonly String AfterUpSkillID = "AfterUpSkillID"; // string
+	public static readonly String AfterUpID = "AfterUpID"; // string
 	public static readonly String PlayerSkill = "PlayerSkill"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
 	public static readonly String NeedTar = "NeedTar"; // int
@@ -1195,32 +1176,13 @@ public class Talent
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
-	public static readonly String TalentType = "TalentType"; // int
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String Desc = "Desc"; // string
-	// Record
-
-}
-
-public class TalentRef
-{
-	//Class name
-	public static readonly string ThisName = "TalentRef";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	// Property
-	public static readonly String TALENT1 = "TALENT1"; // string
-	public static readonly String TALENT2 = "TALENT2"; // string
-	public static readonly String TALENT3 = "TALENT3"; // string
-	public static readonly String TALENT4 = "TALENT4"; // string
-	public static readonly String TALENT5 = "TALENT5"; // string
-	public static readonly String TALENT6 = "TALENT6"; // string
-	public static readonly String TALENT7 = "TALENT7"; // string
-	public static readonly String TALENT8 = "TALENT8"; // string
+	public static readonly String EffectData = "EffectData"; // string
+	public static readonly String Icon = "Icon"; // string
+	public static readonly String Atlas = "Atlas"; // string
+	public static readonly String UpLevel = "UpLevel"; // int
+	public static readonly String AfterUpID = "AfterUpID"; // string
 	// Record
 
 }

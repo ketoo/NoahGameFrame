@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCHeroModule.h
+//    @FileName			:    NFCHeroModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCHeroModule
@@ -47,10 +47,10 @@ public:
     virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
 
 	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
-	virtual bool HeroUnSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
-
 	virtual bool SetFightHero(const NFGUID& self, const int nPos, const NFGUID& xHeroID);
-	virtual bool UnSetFightHero(const NFGUID& self, const int nPos, const NFGUID& xHeroID);
+
+	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID);
+	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
 	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
