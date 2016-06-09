@@ -330,8 +330,17 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 	const int nRow = xDataList.Int(0);
 	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero_ConfigID);
 
-	m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strConfigID, NFCDataList());
+    NFCDataList varList;
 
+    int nCamp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Camp());
+    varList << NFrame::NPC::Camp() << nCamp;
+    varList << NFrame::NPC::MasterID() << self;
+
+	NF_SHARE_PTR<NFIObject> pHero = m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strConfigID, NFCDataList());
+    if (!pHero)
+    {
+        return false;
+    }
 	return true;
 }
 
