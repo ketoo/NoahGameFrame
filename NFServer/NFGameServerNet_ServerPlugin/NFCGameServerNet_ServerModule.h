@@ -50,6 +50,13 @@ public:
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
 	virtual NFINetModule* GetNetModule();
 
+    virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
+    virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
+    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
+
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
+
 protected:
 
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -126,41 +133,10 @@ protected:
     void PlayerLeaveGameServer(const NFGUID& self);
 
 private:
-
-    struct GateData
-    {
-        ServerData xServerData;
-        //此网关上所有的对象<角色ID,gate_FD>
-        std::map<NFGUID, int> xRoleInfo;
-    };
-
-    //要管理当前所有的对象所在的actor,gateid,fd等
-    struct BaseData
-    {
-        BaseData()
-        {
-            nActorID = 0;
-            nGateID = 0;
-        }
-
-        BaseData(const int gateID, const NFGUID xIdent)
-        {
-            nActorID = 0;
-            nGateID = gateID;
-            xClientID = xIdent;
-        }
-
-        int nActorID;
-        int nGateID;
-        NFGUID xClientID;
-    };
-
-private:
     //<角色id,角色网关基础信息>//其实可以在object系统中被代替
-    NFMapEx<NFGUID, BaseData> mRoleBaseData;
-
+    NFMapEx<NFGUID, GateBaseInfo> mRoleBaseData;
     //gateid,data
-    NFMapEx<int, GateData> mProxyMap;
+    NFMapEx<int, GateServerInfo> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
     NFIUUIDModule* m_pUUIDModule;
