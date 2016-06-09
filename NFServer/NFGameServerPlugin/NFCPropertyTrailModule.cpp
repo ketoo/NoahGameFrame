@@ -168,7 +168,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
         break;
         case NFIRecord::RecordOptype::Create:
             break;
-        case NFIRecord::RecordOptype::UpData:
+        case NFIRecord::RecordOptype::Update:
         {
             stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
             stream << " [Old] " << oldVar.StringValEx();
