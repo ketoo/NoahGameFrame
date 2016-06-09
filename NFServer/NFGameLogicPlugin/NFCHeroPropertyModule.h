@@ -42,15 +42,16 @@ public:
 
 	virtual int OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroID);
 protected:
-	virtual int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	virtual int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	virtual int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
-	int CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
+	int CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
 
-	int CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
+	int CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
 
-	int CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xPpropertyManager);
+	int CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
 
 	
 
