@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
+#include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
 
 class NFCHeroPropertyModule
     : public NFIHeroPropertyModule
@@ -28,7 +28,6 @@ class NFCHeroPropertyModule
 public:
 	NFCHeroPropertyModule( NFIPluginManager* p )
     {
-		std::string s = NFrame::BB_Build::NormalStateFunc();
         pPluginManager = p;
     }
     virtual ~NFCHeroPropertyModule() {};
@@ -40,19 +39,17 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-	virtual int OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroID);
+	virtual int OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
+
+	virtual bool CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList);
+	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList);
+	virtual bool CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList);
+
 protected:
 	virtual int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 	virtual int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-
-	int CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
-
-	int CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
-
-	int CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList & xEffectDataList);
-
 	
 
     NFILogicClassModule* m_pLogicClassModule;
@@ -60,7 +57,7 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIGuildEctypeModule* m_pGuildEctypeModule;
+	NFIEquipPropertyModule* m_pEquipPropertyModule;
 private:
 };
 

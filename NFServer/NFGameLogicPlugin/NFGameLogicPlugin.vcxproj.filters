@@ -144,6 +144,9 @@
     <ClInclude Include="NFCHeroPropertyModule.h">
       <Filter>NFHeroModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCEquipPropertyModule.h">
+      <Filter>NFEquipModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -238,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="NFCHeroPropertyModule.cpp">
       <Filter>NFHeroModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCEquipPropertyModule.cpp">
+      <Filter>NFEquipModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

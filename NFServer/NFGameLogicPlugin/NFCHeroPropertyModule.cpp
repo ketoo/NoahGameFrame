@@ -22,12 +22,14 @@ bool NFCHeroPropertyModule::AfterInit()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-
+	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>("NFCEquipPropertyModule");
+	
 	assert(NULL != m_pKernelModule);
 	assert(NULL != m_pLogicClassModule);
 	assert(NULL != m_pGameServerNet_ServerModule);
 	assert(NULL != m_pUUIDModule);
 	assert(NULL != m_pElementInfoModule);
+	assert(NULL != m_pEquipPropertyModule);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroPropertyModule::OnPlayerClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroPropertyModule::OnNPCClassEvent);
@@ -128,19 +130,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	return 0;
 }
 
-int NFCHeroPropertyModule::CalHeroPropertySelf(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xEffectDataList)
-{
-	return 0;
-}
-int NFCHeroPropertyModule::CalHeroPropertyTalent(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xEffectDataList)
-{
-	return 0;
-}
-int NFCHeroPropertyModule::CalHeroPropertyEquip(const NFGUID & self, const NFGUID & xHeroID, NFIDataList& xEffectDataList)
-{
-	return 0;
-}
-int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUID & xHeroID)
+int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUID & xHeroGUID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
 	if (nullptr == pHeroRecord)
@@ -149,7 +139,7 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 	}
 
 	NFCDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -163,13 +153,13 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 	}
 
 	NFCDataList xHeroPropertyValue;
-	CalHeroPropertySelf(self, xHeroID, xHeroPropertyValue);
+	CalHeroBaseProperty(self, xHeroGUID, xHeroPropertyValue);
 
 	NFCDataList xHeroTalentValue;
-	CalHeroPropertyTalent(self, xHeroID, xHeroTalentValue);
+	CalHeroTalentProperty(self, xHeroGUID, xHeroTalentValue);
 
 	NFCDataList xHeroEqupValue;
-	CalHeroPropertyEquip(self, xHeroID, xHeroEqupValue);
+	CalHeroEquipProperty(self, xHeroGUID, xHeroEqupValue);
 
 	if (xHeroPropertyValue.GetCount() != pHeroPropertyRecord->GetRows()
 		|| xHeroTalentValue.GetCount() != pHeroPropertyRecord->GetRows()
@@ -187,10 +177,146 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 
 		int nAllValue = nPropertyValue + nTalentValue + nEquipValue;
 
-		xHeroAllValue.SetInt(i, nAllValue);
+		xHeroAllValue.AddInt(nAllValue);
 	}
 
 	pHeroPropertyRecord->AddRow(nRow, xHeroAllValue);
 
 	return 0;
+}
+
+bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	NFCDataList varFind;
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	{
+		return false;
+	}
+
+	const int nRow = varFind.Int(0);
+
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	if (nullptr == pHeroPropertyRecord)
+	{
+		return false;
+	}
+
+	/////////////PropertyBase/////////////////////////////////////////
+
+	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::PlayerHero_ConfigID);
+	const std::string& strPropertyEffectData = m_pElementInfoModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
+	if (!strPropertyEffectData.empty())
+	{
+		for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+		{
+			const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
+			int nValue = m_pElementInfoModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			xDataList.AddInt(nValue);
+		}
+	}
+
+	return true;
+}
+
+bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	NFCDataList varFind;
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	{
+		return false;
+	}
+
+	const int nRow = varFind.Int(0);
+
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	if (nullptr == pHeroPropertyRecord)
+	{
+		return false;
+	}
+
+	////////////////////Talent//////////////////////////////////////////////////////
+	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+	{
+		xDataList.AddInt(0);
+	}
+
+	for (int i = NFrame::Player::PlayerHero_Talent1; i <= NFrame::Player::PlayerHero_Talent5; ++i)
+	{
+		const std::string& strTalentID = pHeroRecord->GetString(nRow, i);
+		const std::string& strTalentEffectData = m_pElementInfoModule->GetPropertyString(strTalentID, NFrame::Talent::EffectData());
+		if (!strTalentEffectData.empty())
+		{
+			//one talent
+			for (int j = 0; j < pHeroPropertyRecord->GetCols(); ++j)
+			{
+				const std::string& strColTag = pHeroPropertyRecord->GetColTag(j);
+				int nValue = m_pElementInfoModule->GetPropertyInt(strTalentEffectData, strColTag);
+				int nOldValue = xDataList.Int(j);
+
+				xDataList.SetInt(j, nOldValue + nValue);
+			}
+		}
+	}
+
+	return true;
+}
+
+bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFIDataList& xDataList)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	NFCDataList varFind;
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	{
+		return false;
+	}
+
+	const int nRow = varFind.Int(0);
+
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	if (nullptr == pHeroPropertyRecord)
+	{
+		return false;
+	}
+
+	////////////////////Equip//////////////////////////////////////////////////////
+	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+	{
+		xDataList.AddInt(0);
+	}
+
+	for (int i = NFrame::Player::PlayerHero_Equip1; i <= NFrame::Player::PlayerHero_Equip6; ++i)
+	{
+		NFCDataList EquipDataList;
+		const NFGUID xEquipID = pHeroRecord->GetObject(nRow, i);
+		if (!xEquipID.IsNull() && m_pEquipPropertyModule->CalEquipProperty(self, xEquipID, EquipDataList))
+		{
+			//one equip
+			for (int j = 0; j < pHeroPropertyRecord->GetCols(); ++j)
+			{
+				int nOldValue = xDataList.Int(j);
+				int nEquipValue = EquipDataList.Int(j);
+
+				xDataList.SetInt(j, nOldValue + nEquipValue);
+			}
+		}
+	}
+
+	return true;
 }

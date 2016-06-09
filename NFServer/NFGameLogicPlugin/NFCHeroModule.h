@@ -29,7 +29,6 @@ class NFCHeroModule
 public:
     NFCHeroModule( NFIPluginManager* p )
     {
-		std::string s = NFrame::BB_Build::NormalStateFunc();
         pPluginManager = p;
     }
     virtual ~NFCHeroModule() {};
