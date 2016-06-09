@@ -9,13 +9,6 @@
 #include "NFCPackModule.h"
 #include "NFComm/NFCore/NFTimer.h"
 
-const std::string mstrPackTableName[] =
-{
-    NFrame::Player::R_BagItemList(),
-    NFrame::Player::R_BagEquipList(),
-    NFrame::Player::R_PlayerHero(),
-};
-
 bool NFCPackModule::Init()
 {
     return true;
@@ -54,15 +47,6 @@ bool NFCPackModule::AfterInit()
     return true;
 }
 
-const std::string& NFCPackModule::GetPackName( const PackTableType name )
-{
-    if ( name > PackTableType::MaxPack || name < PackTableType::NONE_PACK )
-    {
-        return NULL_STR;
-    }
-
-    return mstrPackTableName[name];
-}
 
 // const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string& strConfigName )
 // {
@@ -152,7 +136,7 @@ int NFCPackModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
         {
-            //m_pKernelModule->AddRecordCallBack( self, GetPackName( PackTableType::BagItemPack ), this, &NFCPackModule::OnObjectPackViewRecordEvent );
+            //m_pKernelModule->AddRecordCallBack( self, NFrame::Player::R_BagItemList(), this, &NFCPackModule::OnObjectPackViewRecordEvent );
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent )
         {
@@ -303,7 +287,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 		return NULL_OBJECT;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagEquipList() );
 	if (!pRecord)
 	{
 		return NULL_OBJECT;
@@ -354,7 +338,8 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
         return -1;
     }
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+    
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
 	if (!pRecord)
 	{
 		return 0;
@@ -438,7 +423,7 @@ int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& s
         return -1;
     }
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
 	if (!pRecord)
 	{
 		return -1;
@@ -474,7 +459,7 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	}
 
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagEquipPack ) );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagEquipList() );
 	if (nullptr == pRecord)
 	{
 		return false;
@@ -529,7 +514,7 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
         return false;
     }
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
 	if (!pRecord)
 	{
 		return false;
@@ -587,7 +572,7 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( GetPackName( PackTableType::BagItemPack ) );
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
     if (!pRecord)
     {
         return false;

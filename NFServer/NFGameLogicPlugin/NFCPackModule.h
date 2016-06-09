@@ -36,8 +36,6 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual const std::string& GetPackName( const PackTableType name );
-
 	/////////////»ù´¡/////////////////////////////////////////////////////////////
 	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
 	virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount);
