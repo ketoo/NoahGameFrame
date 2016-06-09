@@ -134,7 +134,7 @@ void NFCGameServerNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
 	//只可能是网关丢了
 	int nServerID = 0;
-	NF_SHARE_PTR<GateData> pServerData = mProxyMap.First();
+	NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
 	while (pServerData.get())
 	{
 		if (nAddress == pServerData->xServerData.nFD)
@@ -166,52 +166,40 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 
 	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
 
-	PlayerLeaveGameServer(nRoleID);
-
+    if (m_pKernelModule->GetObject(nRoleID))
+    {
+        m_pKernelModule->DestroyObject(nRoleID);
+    }
+    
 	//////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////
 
-	NF_SHARE_PTR<NFCGameServerNet_ServerModule::BaseData> pBaseData = mRoleBaseData.GetElement(nRoleID);
-	if (nullptr != pBaseData)
-	{
-		// 已经存在
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "player is exist, cannot enter game", "", __FUNCTION__, __LINE__);
-		return;
-	}
+    NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
+    if (nullptr != pGateInfo)
+    {
+        RemovePlayerGateInfo(nRoleID);
+    }
 
-	int nGateID = -1;
-	NF_SHARE_PTR<GateData> pServerData = mProxyMap.First();
-	while (pServerData.get())
-	{
-		if (nSockIndex == pServerData->xServerData.nFD)
-		{
-			nGateID = pServerData->xServerData.pData->server_id();
-			break;
-		}
+    NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateServerInfo> pGateServereinfo = GetGateServerInfoBySockIndex(nSockIndex);
+    if (nullptr == pGateServereinfo)
+    {
+        return;
+    }
 
-		pServerData = mProxyMap.Next();
-	}
+    int nGateID = -1;
+    if (pGateServereinfo->xServerData.pData)
+    {
+        nGateID = pGateServereinfo->xServerData.pData->server_id();
+    }
 
-	if (nGateID <= 0)
-	{
-		//非法gate
-		return;
-	}
-
-	pServerData = mProxyMap.GetElement(nGateID);
-	if (nullptr == pServerData)
-	{
-		return;
-	}
-
-	// proxy绑定playerID和gateFD
-	if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, nSockIndex)).second)
-	{
-		return;
-	}
-
-	//id和fd,gateid绑定
-	mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<BaseData>(NF_NEW BaseData(nGateID, nClientID)));
+    if (nGateID < 0)
+    {
+        return;
+    }
+ 
+    if (!AddPlayerGateInfo(nRoleID, nClientID, nGateID))
+    {
+        return;
+    }
 
 	//默认1号场景
 	int nSceneID = 1;
@@ -1078,7 +1066,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent(const NFGUID& self, const 
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
 		//id和fd,gateid绑定
-		NF_SHARE_PTR<BaseData> pDataBase = mRoleBaseData.GetElement(self);
+		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
 		if (pDataBase.get())
 		{
 			//回复客户端角色进入游戏世界成功了
@@ -1683,10 +1671,10 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSo
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-		NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(xData.server_id());
+		NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(xData.server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
+			pServerData = NF_SHARE_PTR<GateServerInfo>(NF_NEW GateServerInfo());
 			mProxyMap.AddElement(xData.server_id(), pServerData);
 		}
 
@@ -1732,10 +1720,10 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 	for (int i = 0; i < xMsg.server_list_size(); ++i)
 	{
 		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-		NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(xData.server_id());
+		NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(xData.server_id());
 		if (!pServerData.get())
 		{
-			pServerData = NF_SHARE_PTR<GateData>(NF_NEW GateData());
+			pServerData = NF_SHARE_PTR<GateServerInfo>(NF_NEW GateServerInfo());
 			mProxyMap.AddElement(xData.server_id(), pServerData);
 		}
 
@@ -1755,10 +1743,10 @@ void NFCGameServerNet_ServerModule::OnClientEndBattle(const int nSockIndex, cons
 
 void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self)
 {
-	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+	NF_SHARE_PTR<GateBaseInfo> pData = mRoleBaseData.GetElement(self);
 	if (pData.get())
 	{
-		NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+		NF_SHARE_PTR<GateServerInfo> pProxyData = mProxyMap.GetElement(pData->nGateID);
 		if (pProxyData.get())
 		{
 			m_pNetModule->SendMsgPB(nMsgID, xMsg, pProxyData->xServerData.nFD, pData->xClientID);
@@ -1768,10 +1756,10 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, googl
 
 void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self)
 {
-	NF_SHARE_PTR<BaseData> pData = mRoleBaseData.GetElement(self);
+	NF_SHARE_PTR<GateBaseInfo> pData = mRoleBaseData.GetElement(self);
 	if (pData.get())
 	{
-		NF_SHARE_PTR<GateData> pProxyData = mProxyMap.GetElement(pData->nGateID);
+		NF_SHARE_PTR<GateServerInfo> pProxyData = mProxyMap.GetElement(pData->nGateID);
 		if (pProxyData.get())
 		{
 			m_pNetModule->SendMsgPB(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
@@ -1784,6 +1772,100 @@ NFINetModule* NFCGameServerNet_ServerModule::GetNetModule()
 	return m_pNetModule;
 }
 
+bool NFCGameServerNet_ServerModule::AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID)
+{
+    if (nGateID <= 0)
+    {
+        //非法gate
+        return false;
+    }
+
+    if (nClientID.IsNull())
+    {
+        return false;
+    }
+
+    NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateBaseInfo> pBaseData = mRoleBaseData.GetElement(nRoleID);
+    if (nullptr != pBaseData)
+    {
+        // 已经存在
+        m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nClientID, "player is exist, cannot enter game", "", __FUNCTION__, __LINE__);
+        return false;
+    }
+
+    NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(nGateID);
+    if (nullptr == pServerData)
+    {
+        return false;
+    }
+
+    if (!pServerData->xRoleInfo.insert(std::make_pair(nRoleID, pServerData->xServerData.nFD)).second)
+    {
+        return false;
+    }
+
+    if (!mRoleBaseData.AddElement(nRoleID, NF_SHARE_PTR<GateBaseInfo>(NF_NEW GateBaseInfo(nGateID, nClientID))))
+    {
+        pServerData->xRoleInfo.erase(nRoleID) ;
+        return false;
+    }
+
+    return true;
+}
+
+bool NFCGameServerNet_ServerModule::RemovePlayerGateInfo(const NFGUID& nRoleID)
+{
+    NF_SHARE_PTR<GateBaseInfo> pBaseData = mRoleBaseData.GetElement(nRoleID);
+    if (nullptr == pBaseData)
+    {
+        return false;
+    }
+
+    mRoleBaseData.RemoveElement(nRoleID);
+
+    NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
+    if (nullptr == pServerData)
+    {
+        return false;
+    }
+
+    pServerData->xRoleInfo.erase(nRoleID);
+    return true;
+}
+
+NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo> NFCGameServerNet_ServerModule::GetPlayerGateInfo(const NFGUID& nRoleID)
+{
+    return mRoleBaseData.GetElement(nRoleID);
+}
+
+NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> NFCGameServerNet_ServerModule::GetGateServerInfo(const int nGateID)
+{
+    return mProxyMap.GetElement(nGateID);
+}
+
+NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> NFCGameServerNet_ServerModule::GetGateServerInfoBySockIndex(const int nSockIndex)
+{
+    int nGateID = -1;
+    NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
+    while (pServerData.get())
+    {
+        if (nSockIndex == pServerData->xServerData.nFD)
+        {
+            nGateID = pServerData->xServerData.pData->server_id();
+            break;
+        }
+
+        pServerData = mProxyMap.Next();
+    }
+
+    if (nGateID == -1)
+    {
+        return nullptr;
+    }
+
+    return pServerData;
+}
+
 void NFCGameServerNet_ServerModule::PlayerLeaveGameServer(const NFGUID& self)
 {
 	if (!m_pKernelModule->GetObject(self))
@@ -1794,22 +1876,7 @@ void NFCGameServerNet_ServerModule::PlayerLeaveGameServer(const NFGUID& self)
 	m_pKernelModule->DestroyObject(self);
 
 
-	NF_SHARE_PTR<BaseData> pBaseData = mRoleBaseData.GetElement(self);
-	if (nullptr == pBaseData)
-	{
-		return;
-	}
-
-	mRoleBaseData.RemoveElement(self);
-
-
-	NF_SHARE_PTR<GateData> pServerData = mProxyMap.GetElement(pBaseData->nGateID);
-	if (nullptr == pServerData)
-	{
-		return;
-	}
-
-	pServerData->xRoleInfo.erase(self);
+    RemovePlayerGateInfo(self);
 }
 
 void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
