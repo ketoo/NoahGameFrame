@@ -64,15 +64,15 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 			const int nNPCType = m_pElementInfoModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
-			if (nNPCType == 1)
+			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
 			{
 				//hero
-				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Master();
-				NFCDataList xHeroPropertyList;
-				if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
+				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID();
+				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
+				if (pHeroPropertyRecord)
 				{
-					NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
-					if (pHeroPropertyRecord)
+					NFCDataList xHeroPropertyList;
+					if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
 					{
 						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 						{

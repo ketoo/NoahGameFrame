@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 21:12:50 2016
+//    @Date             :    Thu Jun  9 21:16:00 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -660,6 +660,9 @@ public class NPC
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowCard = "ShowCard"; // string
 	public static readonly String HeroType = "HeroType"; // int
+	public static readonly String Camp = "Camp"; // int
+	public static readonly String MasterID = "MasterID"; // object
+	public static readonly String NPCType = "NPCType"; // int
 	// Record
 
 }
@@ -739,6 +742,7 @@ public class Player
 	public static readonly String GameID = "GameID"; // int
 	public static readonly String GateID = "GateID"; // int
 	public static readonly String GuildID = "GuildID"; // object
+	public static readonly String Camp = "Camp"; // int
 	// Record
 	public static readonly String R_PlayerHero = "PlayerHero";
 	public static readonly String R_PlayerFightHero = "PlayerFightHero";
@@ -825,35 +829,34 @@ public class Player
 
 	public enum HeroPropertyValue
 	{
-		HeroGUID		= 0, // HeroGUID -- object
-		Group		= 1, // Group -- int
-		SUCKBLOOD		= 2, // SUCKBLOOD -- int
-		REFLECTDAMAGE		= 3, // REFLECTDAMAGE -- int
-		CRITICAL		= 4, // CRITICAL -- int
-		MAXHP		= 5, // MAXHP -- int
-		MAXMP		= 6, // MAXMP -- int
-		MAXSP		= 7, // MAXSP -- int
-		HPREGEN		= 8, // HPREGEN -- int
-		SPREGEN		= 9, // SPREGEN -- int
-		MPREGEN		= 10, // MPREGEN -- int
-		ATK_VALUE		= 11, // ATK_VALUE -- int
-		DEF_VALUE		= 12, // DEF_VALUE -- int
-		MOVE_SPEED		= 13, // MOVE_SPEED -- int
-		ATK_SPEED		= 14, // ATK_SPEED -- int
-		ATK_FIRE		= 15, // ATK_FIRE -- int
-		ATK_LIGHT		= 16, // ATK_LIGHT -- int
-		ATK_WIND		= 17, // ATK_WIND -- int
-		ATK_ICE		= 18, // ATK_ICE -- int
-		ATK_POISON		= 19, // ATK_POISON -- int
-		DEF_FIRE		= 20, // DEF_FIRE -- int
-		DEF_LIGHT		= 21, // DEF_LIGHT -- int
-		DEF_WIND		= 22, // DEF_WIND -- int
-		DEF_ICE		= 23, // DEF_ICE -- int
-		DEF_POISON		= 24, // DEF_POISON -- int
-		DIZZY_GATE		= 25, // DIZZY_GATE -- int
-		MOVE_GATE		= 26, // MOVE_GATE -- int
-		SKILL_GATE		= 27, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 28, // PHYSICAL_GATE -- int
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
 
 	};
 
