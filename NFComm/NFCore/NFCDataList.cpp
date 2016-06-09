@@ -172,21 +172,7 @@ bool NFCDataList::Add(const char* value)
 
 bool NFCDataList::Add(const std::string& value)
 {
-    if (GetCount() == mvList.size())
-    {
-        AddStatck();
-    }
-
-    NF_SHARE_PTR<TData> var = GetStack(GetCount());
-    if (var)
-    {
-        var->SetString(value);
-        mnUseSize++;
-
-        return true;
-    }
-
-    return false;
+	return Add(value.c_str());
 }
 
 bool NFCDataList::Add(const NFGUID& value)
@@ -268,6 +254,12 @@ bool NFCDataList::Set(const int index, const NFGUID& value)
     }
 
     return false;
+}
+
+
+bool NFCDataList::Set(const int index, const std::string& value)
+{
+	return Set(index, value.c_str());
 }
 
 NFINT64 NFCDataList::Int(const int index) const

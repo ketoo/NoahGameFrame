@@ -355,7 +355,8 @@ public:
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const double value) = 0;
-    virtual bool Set(const int index, const char* value) = 0;
+	virtual bool Set(const int index, const char* value) = 0;
+	virtual bool Set(const int index, const std::string& value) = 0;
     virtual bool Set(const int index, const NFGUID& value) = 0;
 
     // 获得数据
