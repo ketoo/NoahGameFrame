@@ -755,6 +755,17 @@ int NFCRecord::FindString(const std::string& strColTag, const char* value, NFIDa
     return FindString(nCol, value, varResult);
 }
 
+
+int NFCRecord::FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult)
+{
+	return FindString(strColTag, value.c_str(), varResult);
+}
+
+int NFCRecord::FindString(const int nCol, const std::string& value, NFIDataList& varResult)
+{
+	return FindString(nCol, value.c_str(), varResult);
+}
+
 int NFCRecord::FindObject(const int nCol, const NFGUID& value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
