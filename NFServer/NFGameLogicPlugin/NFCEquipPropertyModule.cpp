@@ -345,12 +345,55 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 	xDataList.Clear();
 
 	/////////////element/////////////////////////////////////////
-	const int nIntensify = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel);
-	if (nIntensify <= 0)
+	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
+	const int nHeroType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
+	const int nItemType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
+	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
 	{
 		return false;
 	}
 
+	for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
+	{
+		xDataList.AddInt(0);
+	}
+
+	//conditional the item type to define what property to give
+	double dwCoefficientAtk = 2.0;
+	double dwCoefficientDef = 1.0;
+	int nFireLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel1_FIRE);
+	int nLightLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel2_LIGHT);
+	int nWindLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel3_Wind);
+	int nIceLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel4_ICE);
+	int nPoisonLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel5_POISON);
+
+	int nWindValue = nWindLevel * nWindLevel;
+	int nFireValue = nFireLevel * nFireLevel;
+	int nLightValue = nLightLevel * nLightLevel;
+	int nIceValue = nIceLevel * nIceLevel;
+	int nPoisonValue = nPoisonLevel * nPoisonLevel;
+
+	if (nItemSubType == NFMsg::EGameEquipSubType::EQUIPTYPE_WEAPON)
+	{
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientAtk);
+	}
+	else
+	{
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientDef);
+	}
+
+	
+
+	return true;
 
 	return true;
 }

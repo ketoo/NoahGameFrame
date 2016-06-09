@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 18:35:23 2016
+//    @Date             :    Thu Jun  9 20:14:58 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -228,6 +228,7 @@ public:
 	// Property
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
+	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
@@ -240,10 +241,12 @@ public:
 	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
 	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
 	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
+	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
 	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
 	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
 	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
 	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
+	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
 	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
 	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
 	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
@@ -634,6 +637,7 @@ public:
 	static const std::string& TargetZ(){ static std::string xTargetZ = "TargetZ"; return xTargetZ; } // float
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
+	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
@@ -646,10 +650,12 @@ public:
 	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
 	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
 	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
+	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
 	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
 	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
 	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
 	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
+	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
 	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
 	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
 	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
@@ -717,10 +723,9 @@ public:
 	static const std::string& TotalTime(){ static std::string xTotalTime = "TotalTime"; return xTotalTime; } // int
 	static const std::string& LastOfflineTime(){ static std::string xLastOfflineTime = "LastOfflineTime"; return xLastOfflineTime; } // object
 	static const std::string& OnlineTime(){ static std::string xOnlineTime = "OnlineTime"; return xOnlineTime; } // object
-	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
-	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
+	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
@@ -733,10 +738,12 @@ public:
 	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
 	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
 	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
+	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
 	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
 	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
 	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
 	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
+	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
 	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
 	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
 	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
@@ -745,6 +752,8 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
+	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
+	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
 	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish; } // int
 	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
@@ -800,32 +809,26 @@ public:
 		BagEquipList_GUID		= 0, // GUID -- object
 		BagEquipList_WearGUID		= 1, // WearGUID -- object
 		BagEquipList_ConfigID		= 2, // ConfigID -- string
-		BagEquipList_Bound		= 3, // Bound -- int
-		BagEquipList_ExpiredType		= 4, // ExpiredType -- int
+		BagEquipList_ExpiredType		= 3, // ExpiredType -- int
+		BagEquipList_Date		= 4, // Date -- int
 		BagEquipList_RandPropertyID		= 5, // RandPropertyID -- string
-		BagEquipList_Date		= 6, // Date -- object
-		BagEquipList_SlotCount		= 7, // SlotCount -- int
-		BagEquipList_InlayStone1		= 8, // InlayStone1 -- string
-		BagEquipList_InlayStone2		= 9, // InlayStone2 -- string
-		BagEquipList_InlayStone3		= 10, // InlayStone3 -- string
-		BagEquipList_InlayStone4		= 11, // InlayStone4 -- string
-		BagEquipList_InlayStone5		= 12, // InlayStone5 -- string
-		BagEquipList_InlayStone6		= 13, // InlayStone6 -- string
-		BagEquipList_InlayStone7		= 14, // InlayStone7 -- string
-		BagEquipList_InlayStone8		= 15, // InlayStone8 -- string
-		BagEquipList_InlayStone9		= 16, // InlayStone9 -- string
-		BagEquipList_InlayStone10		= 17, // InlayStone10 -- string
-		BagEquipList_IntensifyLevel		= 18, // IntensifyLevel -- string
-		BagEquipList_ElementLevel1		= 19, // ElementLevel1 -- int
-		BagEquipList_ElementLevel2		= 20, // ElementLevel2 -- int
-		BagEquipList_ElementLevel3		= 21, // ElementLevel3 -- int
-		BagEquipList_ElementLevel4		= 22, // ElementLevel4 -- int
-		BagEquipList_ElementLevel5		= 23, // ElementLevel5 -- int
-		BagEquipList_ElementLevel6		= 24, // ElementLevel6 -- int
-		BagEquipList_ElementLevel7		= 25, // ElementLevel7 -- int
-		BagEquipList_ElementLevel8		= 26, // ElementLevel8 -- int
-		BagEquipList_ElementLevel9		= 27, // ElementLevel9 -- int
-		BagEquipList_ElementLevel10		= 28, // ElementLevel10 -- int
+		BagEquipList_SlotCount		= 6, // SlotCount -- int
+		BagEquipList_InlayStone1		= 7, // InlayStone1 -- string
+		BagEquipList_InlayStone2		= 8, // InlayStone2 -- string
+		BagEquipList_InlayStone3		= 9, // InlayStone3 -- string
+		BagEquipList_InlayStone4		= 10, // InlayStone4 -- string
+		BagEquipList_InlayStone5		= 11, // InlayStone5 -- string
+		BagEquipList_InlayStone6		= 12, // InlayStone6 -- string
+		BagEquipList_InlayStone7		= 13, // InlayStone7 -- string
+		BagEquipList_InlayStone8		= 14, // InlayStone8 -- string
+		BagEquipList_InlayStone9		= 15, // InlayStone9 -- string
+		BagEquipList_InlayStone10		= 16, // InlayStone10 -- string
+		BagEquipList_IntensifyLevel		= 17, // IntensifyLevel -- string
+		BagEquipList_ElementLevel1_FIRE		= 18, // ElementLevel1_FIRE -- int
+		BagEquipList_ElementLevel2_LIGHT		= 19, // ElementLevel2_LIGHT -- int
+		BagEquipList_ElementLevel3_Wind		= 20, // ElementLevel3_Wind -- int
+		BagEquipList_ElementLevel4_ICE		= 21, // ElementLevel4_ICE -- int
+		BagEquipList_ElementLevel5_POISON		= 22, // ElementLevel5_POISON -- int
 
 	};
 
@@ -843,58 +846,66 @@ public:
 	{
 		HeroPropertyValue_HeroGUID		= 0, // HeroGUID -- object
 		HeroPropertyValue_Group		= 1, // Group -- int
-		HeroPropertyValue_MAXHP		= 2, // MAXHP -- int
-		HeroPropertyValue_MAXMP		= 3, // MAXMP -- int
-		HeroPropertyValue_MAXSP		= 4, // MAXSP -- int
-		HeroPropertyValue_HPREGEN		= 5, // HPREGEN -- int
-		HeroPropertyValue_SPREGEN		= 6, // SPREGEN -- int
-		HeroPropertyValue_MPREGEN		= 7, // MPREGEN -- int
-		HeroPropertyValue_ATK_VALUE		= 8, // ATK_VALUE -- int
-		HeroPropertyValue_DEF_VALUE		= 9, // DEF_VALUE -- int
-		HeroPropertyValue_MOVE_SPEED		= 10, // MOVE_SPEED -- int
-		HeroPropertyValue_ATK_SPEED		= 11, // ATK_SPEED -- int
-		HeroPropertyValue_ATK_FIRE		= 12, // ATK_FIRE -- int
-		HeroPropertyValue_ATK_LIGHT		= 13, // ATK_LIGHT -- int
-		HeroPropertyValue_ATK_ICE		= 14, // ATK_ICE -- int
-		HeroPropertyValue_ATK_POISON		= 15, // ATK_POISON -- int
-		HeroPropertyValue_DEF_FIRE		= 16, // DEF_FIRE -- int
-		HeroPropertyValue_DEF_LIGHT		= 17, // DEF_LIGHT -- int
-		HeroPropertyValue_DEF_ICE		= 18, // DEF_ICE -- int
-		HeroPropertyValue_DEF_POISON		= 19, // DEF_POISON -- int
-		HeroPropertyValue_DIZZY_GATE		= 20, // DIZZY_GATE -- int
-		HeroPropertyValue_MOVE_GATE		= 21, // MOVE_GATE -- int
-		HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
-		HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
-		HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
+		HeroPropertyValue_SUCKBLOOD		= 2, // SUCKBLOOD -- int
+		HeroPropertyValue_REFLECTDAMAGE		= 3, // REFLECTDAMAGE -- int
+		HeroPropertyValue_CRITICAL		= 4, // CRITICAL -- int
+		HeroPropertyValue_MAXHP		= 5, // MAXHP -- int
+		HeroPropertyValue_MAXMP		= 6, // MAXMP -- int
+		HeroPropertyValue_MAXSP		= 7, // MAXSP -- int
+		HeroPropertyValue_HPREGEN		= 8, // HPREGEN -- int
+		HeroPropertyValue_SPREGEN		= 9, // SPREGEN -- int
+		HeroPropertyValue_MPREGEN		= 10, // MPREGEN -- int
+		HeroPropertyValue_ATK_VALUE		= 11, // ATK_VALUE -- int
+		HeroPropertyValue_DEF_VALUE		= 12, // DEF_VALUE -- int
+		HeroPropertyValue_MOVE_SPEED		= 13, // MOVE_SPEED -- int
+		HeroPropertyValue_ATK_SPEED		= 14, // ATK_SPEED -- int
+		HeroPropertyValue_ATK_FIRE		= 15, // ATK_FIRE -- int
+		HeroPropertyValue_ATK_LIGHT		= 16, // ATK_LIGHT -- int
+		HeroPropertyValue_ATK_WIND		= 17, // ATK_WIND -- int
+		HeroPropertyValue_ATK_ICE		= 18, // ATK_ICE -- int
+		HeroPropertyValue_ATK_POISON		= 19, // ATK_POISON -- int
+		HeroPropertyValue_DEF_FIRE		= 20, // DEF_FIRE -- int
+		HeroPropertyValue_DEF_LIGHT		= 21, // DEF_LIGHT -- int
+		HeroPropertyValue_DEF_WIND		= 22, // DEF_WIND -- int
+		HeroPropertyValue_DEF_ICE		= 23, // DEF_ICE -- int
+		HeroPropertyValue_DEF_POISON		= 24, // DEF_POISON -- int
+		HeroPropertyValue_DIZZY_GATE		= 25, // DIZZY_GATE -- int
+		HeroPropertyValue_MOVE_GATE		= 26, // MOVE_GATE -- int
+		HeroPropertyValue_SKILL_GATE		= 27, // SKILL_GATE -- int
+		HeroPropertyValue_PHYSICAL_GATE		= 28, // PHYSICAL_GATE -- int
 
 	};
 
 	enum CommPropertyValue
 	{
-		CommPropertyValue_MAXHP		= 0, // MAXHP -- int
-		CommPropertyValue_MAXMP		= 1, // MAXMP -- int
-		CommPropertyValue_MAXSP		= 2, // MAXSP -- int
-		CommPropertyValue_HPREGEN		= 3, // HPREGEN -- int
-		CommPropertyValue_SPREGEN		= 4, // SPREGEN -- int
-		CommPropertyValue_MPREGEN		= 5, // MPREGEN -- int
-		CommPropertyValue_ATK_VALUE		= 6, // ATK_VALUE -- int
-		CommPropertyValue_DEF_VALUE		= 7, // DEF_VALUE -- int
-		CommPropertyValue_MOVE_SPEED		= 8, // MOVE_SPEED -- int
-		CommPropertyValue_ATK_SPEED		= 9, // ATK_SPEED -- int
-		CommPropertyValue_ATK_FIRE		= 10, // ATK_FIRE -- int
-		CommPropertyValue_ATK_LIGHT		= 11, // ATK_LIGHT -- int
-		CommPropertyValue_ATK_ICE		= 12, // ATK_ICE -- int
-		CommPropertyValue_ATK_POISON		= 13, // ATK_POISON -- int
-		CommPropertyValue_DEF_FIRE		= 14, // DEF_FIRE -- int
-		CommPropertyValue_DEF_LIGHT		= 15, // DEF_LIGHT -- int
-		CommPropertyValue_DEF_ICE		= 16, // DEF_ICE -- int
-		CommPropertyValue_DEF_POISON		= 17, // DEF_POISON -- int
-		CommPropertyValue_DIZZY_GATE		= 18, // DIZZY_GATE -- int
-		CommPropertyValue_MOVE_GATE		= 19, // MOVE_GATE -- int
-		CommPropertyValue_SKILL_GATE		= 20, // SKILL_GATE -- int
-		CommPropertyValue_PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
-		CommPropertyValue_MAGIC_GATE		= 22, // MAGIC_GATE -- int
-		CommPropertyValue_BUFF_GATE		= 23, // BUFF_GATE -- int
+		CommPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		CommPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CommPropertyValue_CRITICAL		= 2, // CRITICAL -- int
+		CommPropertyValue_MAXHP		= 3, // MAXHP -- int
+		CommPropertyValue_MAXMP		= 4, // MAXMP -- int
+		CommPropertyValue_MAXSP		= 5, // MAXSP -- int
+		CommPropertyValue_HPREGEN		= 6, // HPREGEN -- int
+		CommPropertyValue_SPREGEN		= 7, // SPREGEN -- int
+		CommPropertyValue_MPREGEN		= 8, // MPREGEN -- int
+		CommPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
+		CommPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
+		CommPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		CommPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
+		CommPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
+		CommPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		CommPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
+		CommPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
+		CommPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
+		CommPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
+		CommPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		CommPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
+		CommPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
+		CommPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
+		CommPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		CommPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
+		CommPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
+		CommPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		CommPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
 
 	};
 

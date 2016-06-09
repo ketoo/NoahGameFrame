@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 18:35:23 2016
+//    @Date             :    Thu Jun  9 20:14:58 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -205,6 +205,7 @@ public class EffectData {
 	// Property
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -217,10 +218,12 @@ public class EffectData {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -591,6 +594,7 @@ public class NPC {
 	public static final String TargetZ = "TargetZ"; // float
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -603,10 +607,12 @@ public class NPC {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -672,10 +678,9 @@ public class Player {
 	public static final String TotalTime = "TotalTime"; // int
 	public static final String LastOfflineTime = "LastOfflineTime"; // object
 	public static final String OnlineTime = "OnlineTime"; // object
-	public static final String TotalLineTime = "TotalLineTime"; // object
-	public static final String GMLevel = "GMLevel"; // int
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -688,10 +693,12 @@ public class Player {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -700,6 +707,8 @@ public class Player {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
+	public static final String TotalLineTime = "TotalLineTime"; // object
+	public static final String GMLevel = "GMLevel"; // int
 	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
 	public static final String GameID = "GameID"; // int
 	public static final String GateID = "GateID"; // int
@@ -755,32 +764,26 @@ public class Player {
 		GUID		= 0, // GUID -- object
 		WearGUID		= 1, // WearGUID -- object
 		ConfigID		= 2, // ConfigID -- string
-		Bound		= 3, // Bound -- int
-		ExpiredType		= 4, // ExpiredType -- int
+		ExpiredType		= 3, // ExpiredType -- int
+		Date		= 4, // Date -- int
 		RandPropertyID		= 5, // RandPropertyID -- string
-		Date		= 6, // Date -- object
-		SlotCount		= 7, // SlotCount -- int
-		InlayStone1		= 8, // InlayStone1 -- string
-		InlayStone2		= 9, // InlayStone2 -- string
-		InlayStone3		= 10, // InlayStone3 -- string
-		InlayStone4		= 11, // InlayStone4 -- string
-		InlayStone5		= 12, // InlayStone5 -- string
-		InlayStone6		= 13, // InlayStone6 -- string
-		InlayStone7		= 14, // InlayStone7 -- string
-		InlayStone8		= 15, // InlayStone8 -- string
-		InlayStone9		= 16, // InlayStone9 -- string
-		InlayStone10		= 17, // InlayStone10 -- string
-		IntensifyLevel		= 18, // IntensifyLevel -- string
-		ElementLevel1		= 19, // ElementLevel1 -- int
-		ElementLevel2		= 20, // ElementLevel2 -- int
-		ElementLevel3		= 21, // ElementLevel3 -- int
-		ElementLevel4		= 22, // ElementLevel4 -- int
-		ElementLevel5		= 23, // ElementLevel5 -- int
-		ElementLevel6		= 24, // ElementLevel6 -- int
-		ElementLevel7		= 25, // ElementLevel7 -- int
-		ElementLevel8		= 26, // ElementLevel8 -- int
-		ElementLevel9		= 27, // ElementLevel9 -- int
-		ElementLevel10		= 28, // ElementLevel10 -- int
+		SlotCount		= 6, // SlotCount -- int
+		InlayStone1		= 7, // InlayStone1 -- string
+		InlayStone2		= 8, // InlayStone2 -- string
+		InlayStone3		= 9, // InlayStone3 -- string
+		InlayStone4		= 10, // InlayStone4 -- string
+		InlayStone5		= 11, // InlayStone5 -- string
+		InlayStone6		= 12, // InlayStone6 -- string
+		InlayStone7		= 13, // InlayStone7 -- string
+		InlayStone8		= 14, // InlayStone8 -- string
+		InlayStone9		= 15, // InlayStone9 -- string
+		InlayStone10		= 16, // InlayStone10 -- string
+		IntensifyLevel		= 17, // IntensifyLevel -- string
+		ElementLevel1_FIRE		= 18, // ElementLevel1_FIRE -- int
+		ElementLevel2_LIGHT		= 19, // ElementLevel2_LIGHT -- int
+		ElementLevel3_Wind		= 20, // ElementLevel3_Wind -- int
+		ElementLevel4_ICE		= 21, // ElementLevel4_ICE -- int
+		ElementLevel5_POISON		= 22, // ElementLevel5_POISON -- int
 
 	};
 
@@ -798,58 +801,66 @@ public class Player {
 	{
 		HeroGUID		= 0, // HeroGUID -- object
 		Group		= 1, // Group -- int
-		MAXHP		= 2, // MAXHP -- int
-		MAXMP		= 3, // MAXMP -- int
-		MAXSP		= 4, // MAXSP -- int
-		HPREGEN		= 5, // HPREGEN -- int
-		SPREGEN		= 6, // SPREGEN -- int
-		MPREGEN		= 7, // MPREGEN -- int
-		ATK_VALUE		= 8, // ATK_VALUE -- int
-		DEF_VALUE		= 9, // DEF_VALUE -- int
-		MOVE_SPEED		= 10, // MOVE_SPEED -- int
-		ATK_SPEED		= 11, // ATK_SPEED -- int
-		ATK_FIRE		= 12, // ATK_FIRE -- int
-		ATK_LIGHT		= 13, // ATK_LIGHT -- int
-		ATK_ICE		= 14, // ATK_ICE -- int
-		ATK_POISON		= 15, // ATK_POISON -- int
-		DEF_FIRE		= 16, // DEF_FIRE -- int
-		DEF_LIGHT		= 17, // DEF_LIGHT -- int
-		DEF_ICE		= 18, // DEF_ICE -- int
-		DEF_POISON		= 19, // DEF_POISON -- int
-		DIZZY_GATE		= 20, // DIZZY_GATE -- int
-		MOVE_GATE		= 21, // MOVE_GATE -- int
-		SKILL_GATE		= 22, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 24, // MAGIC_GATE -- int
+		SUCKBLOOD		= 2, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 3, // REFLECTDAMAGE -- int
+		CRITICAL		= 4, // CRITICAL -- int
+		MAXHP		= 5, // MAXHP -- int
+		MAXMP		= 6, // MAXMP -- int
+		MAXSP		= 7, // MAXSP -- int
+		HPREGEN		= 8, // HPREGEN -- int
+		SPREGEN		= 9, // SPREGEN -- int
+		MPREGEN		= 10, // MPREGEN -- int
+		ATK_VALUE		= 11, // ATK_VALUE -- int
+		DEF_VALUE		= 12, // DEF_VALUE -- int
+		MOVE_SPEED		= 13, // MOVE_SPEED -- int
+		ATK_SPEED		= 14, // ATK_SPEED -- int
+		ATK_FIRE		= 15, // ATK_FIRE -- int
+		ATK_LIGHT		= 16, // ATK_LIGHT -- int
+		ATK_WIND		= 17, // ATK_WIND -- int
+		ATK_ICE		= 18, // ATK_ICE -- int
+		ATK_POISON		= 19, // ATK_POISON -- int
+		DEF_FIRE		= 20, // DEF_FIRE -- int
+		DEF_LIGHT		= 21, // DEF_LIGHT -- int
+		DEF_WIND		= 22, // DEF_WIND -- int
+		DEF_ICE		= 23, // DEF_ICE -- int
+		DEF_POISON		= 24, // DEF_POISON -- int
+		DIZZY_GATE		= 25, // DIZZY_GATE -- int
+		MOVE_GATE		= 26, // MOVE_GATE -- int
+		SKILL_GATE		= 27, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 28, // PHYSICAL_GATE -- int
 
 	};
 
 	public enum CommPropertyValue
 	{
-		MAXHP		= 0, // MAXHP -- int
-		MAXMP		= 1, // MAXMP -- int
-		MAXSP		= 2, // MAXSP -- int
-		HPREGEN		= 3, // HPREGEN -- int
-		SPREGEN		= 4, // SPREGEN -- int
-		MPREGEN		= 5, // MPREGEN -- int
-		ATK_VALUE		= 6, // ATK_VALUE -- int
-		DEF_VALUE		= 7, // DEF_VALUE -- int
-		MOVE_SPEED		= 8, // MOVE_SPEED -- int
-		ATK_SPEED		= 9, // ATK_SPEED -- int
-		ATK_FIRE		= 10, // ATK_FIRE -- int
-		ATK_LIGHT		= 11, // ATK_LIGHT -- int
-		ATK_ICE		= 12, // ATK_ICE -- int
-		ATK_POISON		= 13, // ATK_POISON -- int
-		DEF_FIRE		= 14, // DEF_FIRE -- int
-		DEF_LIGHT		= 15, // DEF_LIGHT -- int
-		DEF_ICE		= 16, // DEF_ICE -- int
-		DEF_POISON		= 17, // DEF_POISON -- int
-		DIZZY_GATE		= 18, // DIZZY_GATE -- int
-		MOVE_GATE		= 19, // MOVE_GATE -- int
-		SKILL_GATE		= 20, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 22, // MAGIC_GATE -- int
-		BUFF_GATE		= 23, // BUFF_GATE -- int
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
 
 	};
 
