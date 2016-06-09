@@ -171,6 +171,18 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         }
     }
 
+    RECORD_EVENT_DATA xEventData;
+    xEventData.nOpType = Add;
+    xEventData.nRow = nFindRow;
+    xEventData.nCol = 0;
+    xEventData.strRecordName = mstrRecordName;
+
+    if (IsUsed(nFindRow))
+    {
+        //delete
+        xEventData.nOpType = Cover;
+    }
+
     SetUsed(nFindRow, 1);
 
     for (int i = 0; i < GetCols(); ++i)
@@ -183,12 +195,6 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 			return -1;
         }
     }
-
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Add;
-    xEventData.nRow = nFindRow;
-    xEventData.nCol = 0;
-    xEventData.strRecordName = mstrRecordName;
 
     NFIDataList::TData tData;
     OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD
@@ -884,9 +890,12 @@ void NFCRecord::SetName(const char* strName)
     mstrRecordName = strName;
 }
 
-const NF_SHARE_PTR<NFIDataList>& NFCRecord::GetInitData() const
+const NF_SHARE_PTR<NFIDataList> NFCRecord::GetInitData() const
 {
-    return mVarRecordType;
+    NF_SHARE_PTR<NFIDataList> pIniData = NF_SHARE_PTR<NFIDataList>( NF_NEW NFCDataList());
+    pIniData->Append(*mVarRecordType);
+
+    return pIniData;
 }
 
 void NFCRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
@@ -947,9 +956,11 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
     return false;
 }
 
-const NF_SHARE_PTR<NFIDataList>& NFCRecord::GetTag() const
+const NF_SHARE_PTR<NFIDataList> NFCRecord::GetTag() const
 {
-    return mVarRecordTag;
+    NF_SHARE_PTR<NFIDataList> pIniData = NF_SHARE_PTR<NFIDataList>(NF_NEW NFCDataList());
+    pIniData->Append(*mVarRecordTag);
+    return pIniData;
 }
 
 const NFIRecord::TRECORDVEC& NFCRecord::GetRecordVec() const

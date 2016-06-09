@@ -49,12 +49,14 @@ public:
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
 	virtual NFINetModule* GetNetModule();
+
 protected:
 
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nSockIndex);
+
     //有连接
     void OnClientConnected(const int nSockIndex);
 
@@ -68,40 +70,23 @@ protected:
     void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    //////////////////////////////////////////////////////////////////////////
-
     void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
-
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     //////////////////////////////////////////////////////////////////////////
-
     void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
     ///////////WORLD_END///////////////////////////////////////////////////////////////
-
-	//////////////////////////////////////////////////////////////////////////
-	void OnCreateGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnJoinGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnLeaveGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnOprGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-
+	
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
@@ -139,19 +124,6 @@ protected:
     int OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var);
 
     void PlayerLeaveGameServer(const NFGUID& self);
-
-    template<class PBClass>
-    NFGUID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-    {
-        NFGUID nPlayerID;
-        PBClass xMsg;
-        if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
-        {
-            return NULL_OBJECT;
-        }
-
-        return NFINetModule::PBToNF(xMsg.guild_id());
-    }
 
 private:
 
