@@ -859,20 +859,20 @@ namespace NFMsg
     public enum EGameElementType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WIND", Value=0)]
-      EELEMENTTYPE_WIND = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FIRE", Value=0)]
+      EELEMENTTYPE_FIRE = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FIRE", Value=1)]
-      EELEMENTTYPE_FIRE = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_LIGHT", Value=1)]
+      EELEMENTTYPE_LIGHT = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_THUNDER", Value=2)]
-      EELEMENTTYPE_THUNDER = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WIND", Value=2)]
+      EELEMENTTYPE_WIND = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_SOIL", Value=3)]
-      EELEMENTTYPE_SOIL = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_ICE", Value=3)]
+      EELEMENTTYPE_ICE = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WATER", Value=4)]
-      EELEMENTTYPE_WATER = 4
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_POISON", Value=4)]
+      EELEMENTTYPE_POISON = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameItemSubType")]
@@ -925,6 +925,20 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGIET_END_INDEX", Value=3)]
       EGIET_END_INDEX = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ENPCType")]
+    public enum ENPCType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_NORMAL", Value=0)]
+      ENPCTYPE_NORMAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_TURRET", Value=1)]
+      ENPCTYPE_TURRET = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_HERO", Value=2)]
+      ENPCTYPE_HERO = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EDrawDropItemState")]

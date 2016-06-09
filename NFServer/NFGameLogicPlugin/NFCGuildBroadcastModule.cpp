@@ -316,7 +316,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
             }
         }
         break;
-    case NFIRecord::RecordOptype::UpData:
+    case NFIRecord::RecordOptype::Update:
         {
             //装备的过程中是不能更新的
             const int nCol = xEventData.nCol;

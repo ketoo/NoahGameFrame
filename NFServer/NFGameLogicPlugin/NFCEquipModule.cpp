@@ -54,8 +54,6 @@ bool NFCEquipModule::AfterInit()
     strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
     m_pCommonConfigModule->LoadConfig(strEquipPath);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCEquipModule::OnClassObjectEvent );
-
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)) { return false; }
@@ -348,8 +346,8 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
     {
         return false;
     }
-
-    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    
+    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pEquipRecord)
     {
         return false;
@@ -423,7 +421,7 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pEquipRecord)
     {
         return false;
@@ -505,7 +503,7 @@ int NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id,
         return 0;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return 0;
@@ -541,7 +539,7 @@ const std::string& NFCEquipModule::GetEquipRandPropertyID(const NFGUID& self, co
         return NULL_STR;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return NULL_STR;
@@ -583,7 +581,7 @@ bool NFCEquipModule::SetEquipHoleCount(const NFGUID& self, const NFGUID& id, con
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return false;
@@ -620,7 +618,7 @@ int NFCEquipModule::GetEquipHoleCount(const NFGUID& self, const NFGUID& id)
         return 0;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return 0;
@@ -661,7 +659,7 @@ bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, 
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return false;
@@ -697,7 +695,7 @@ const std::string& NFCEquipModule::GetEquipInlayStoneID(const NFGUID& self, cons
         return NULL_STR;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return NULL_STR;
@@ -738,7 +736,7 @@ bool NFCEquipModule::SetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return false;
@@ -774,7 +772,7 @@ int NFCEquipModule::GetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id)
         return 0;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return 0;
@@ -815,7 +813,7 @@ bool NFCEquipModule::SetEquipElementLevel(const NFGUID& self, const NFGUID& id, 
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return false;
@@ -851,7 +849,7 @@ int NFCEquipModule::GetEquipElementLevel(const NFGUID& self, const NFGUID& id, N
         return 0;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(m_pPackModule->GetPackName(PackTableType::BagEquipPack));
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
     if (!pRecord)
     {
         return 0;

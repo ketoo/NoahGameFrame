@@ -96,7 +96,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 
 	}
 	break;
-	case NFIRecord::RecordOptype::UpData:
+	case NFIRecord::RecordOptype::Update:
 	{
 		switch (xEventData.nCol)
 		{

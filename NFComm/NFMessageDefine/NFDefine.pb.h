@@ -377,15 +377,15 @@ inline bool EGameEquipSubType_Parse(
     EGameEquipSubType_descriptor(), name, value);
 }
 enum EGameElementType {
-  EELEMENTTYPE_WIND = 0,
-  EELEMENTTYPE_FIRE = 1,
-  EELEMENTTYPE_THUNDER = 2,
-  EELEMENTTYPE_SOIL = 3,
-  EELEMENTTYPE_WATER = 4
+  EELEMENTTYPE_FIRE = 0,
+  EELEMENTTYPE_LIGHT = 1,
+  EELEMENTTYPE_WIND = 2,
+  EELEMENTTYPE_ICE = 3,
+  EELEMENTTYPE_POISON = 4
 };
 LIBPROTOC_EXPORT bool EGameElementType_IsValid(int value);
-const EGameElementType EGameElementType_MIN = EELEMENTTYPE_WIND;
-const EGameElementType EGameElementType_MAX = EELEMENTTYPE_WATER;
+const EGameElementType EGameElementType_MIN = EELEMENTTYPE_FIRE;
+const EGameElementType EGameElementType_MAX = EELEMENTTYPE_POISON;
 const int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor();
@@ -445,6 +445,26 @@ inline bool EGameItemExpiredType_Parse(
     const ::std::string& name, EGameItemExpiredType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameItemExpiredType>(
     EGameItemExpiredType_descriptor(), name, value);
+}
+enum ENPCType {
+  ENPCTYPE_NORMAL = 0,
+  ENPCTYPE_TURRET = 1,
+  ENPCTYPE_HERO = 2
+};
+LIBPROTOC_EXPORT bool ENPCType_IsValid(int value);
+const ENPCType ENPCType_MIN = ENPCTYPE_NORMAL;
+const ENPCType ENPCType_MAX = ENPCTYPE_HERO;
+const int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ENPCType_descriptor();
+inline const ::std::string& ENPCType_Name(ENPCType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ENPCType_descriptor(), value);
+}
+inline bool ENPCType_Parse(
+    const ::std::string& name, ENPCType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
+    ENPCType_descriptor(), name, value);
 }
 enum EDrawDropItemState {
   E_DRAW_STATE_NONE = 0,
@@ -664,6 +684,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemSubType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemExpiredType>() {
   return ::NFMsg::EGameItemExpiredType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
+  return ::NFMsg::ENPCType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EDrawDropItemState>() {
