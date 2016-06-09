@@ -1,6 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
+//    @Date             :    Thu Jun  9 18:35:23 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -289,28 +290,6 @@ public:
 
 };
 
-class EquipRef
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xEquipRef = "EquipRef"; return xEquipRef; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	// Property
-	static const std::string& EQUIP1(){ static std::string xEQUIP1 = "EQUIP1"; return xEQUIP1; } // string
-	static const std::string& EQUIP2(){ static std::string xEQUIP2 = "EQUIP2"; return xEQUIP2; } // string
-	static const std::string& EQUIP3(){ static std::string xEQUIP3 = "EQUIP3"; return xEQUIP3; } // string
-	static const std::string& EQUIP4(){ static std::string xEQUIP4 = "EQUIP4"; return xEQUIP4; } // string
-	static const std::string& EQUIP5(){ static std::string xEQUIP5 = "EQUIP5"; return xEQUIP5; } // string
-	static const std::string& EQUIP6(){ static std::string xEQUIP6 = "EQUIP6"; return xEQUIP6; } // string
-	// Record
-
-};
-
 class Guild
 {
 public:
@@ -515,24 +494,6 @@ public:
 
 };
 
-class Hero
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xHero = "Hero"; return xHero; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	// Property
-	static const std::string& SkillRef(){ static std::string xSkillRef = "SkillRef"; return xSkillRef; } // string
-	static const std::string& TalentRef(){ static std::string xTalentRef = "TalentRef"; return xTalentRef; } // string
-	// Record
-
-};
-
 class InitProperty
 {
 public:
@@ -585,6 +546,7 @@ public:
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
+	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
 	// Record
 
 };
@@ -639,7 +601,6 @@ public:
 		Station_Slogan		= 5, // Slogan -- string
 		Station_State		= 6, // State -- int
 		Station_CurMemberCount		= 7, // CurMemberCount -- int
-		Station_WinCount		= 8, // WinCount -- int
 
 	};
 
@@ -710,6 +671,7 @@ public:
 	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
+	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
 	// Record
 
 };
@@ -904,7 +866,6 @@ public:
 		HeroPropertyValue_SKILL_GATE		= 22, // SKILL_GATE -- int
 		HeroPropertyValue_PHYSICAL_GATE		= 23, // PHYSICAL_GATE -- int
 		HeroPropertyValue_MAGIC_GATE		= 24, // MAGIC_GATE -- int
-		HeroPropertyValue_BUFF_GATE		= 25, // BUFF_GATE -- int
 
 	};
 

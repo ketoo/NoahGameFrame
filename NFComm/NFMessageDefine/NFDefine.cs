@@ -1047,6 +1047,20 @@ namespace NFMsg
       EST_Other = 8
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"EHeroType")]
+    public enum EHeroType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EHT_STRENGTH", Value=1)]
+      EHT_STRENGTH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EHT_AGILITY", Value=2)]
+      EHT_AGILITY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EHT_INTELLIGENCE", Value=3)]
+      EHT_INTELLIGENCE = 3
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ERankType")]
     public enum ERankType
     {

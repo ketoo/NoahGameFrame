@@ -33,6 +33,7 @@ const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EBattleType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EHeroType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ERankType_descriptor_ = NULL;
 
 }  // namespace
@@ -57,7 +58,8 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   ETaskType_descriptor_ = file->enum_type(10);
   EBattleType_descriptor_ = file->enum_type(11);
   EShopType_descriptor_ = file->enum_type(12);
-  ERankType_descriptor_ = file->enum_type(13);
+  EHeroType_descriptor_ = file->enum_type(13);
+  ERankType_descriptor_ = file->enum_type(14);
 }
 
 namespace {
@@ -310,10 +312,12 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "VE_TEAM\020\001*\201\001\n\tEShopType\022\020\n\014EST_BUILDING\020"
     "\001\022\014\n\010EST_GOLD\020\002\022\017\n\013EST_DIAMOND\020\003\022\n\n\006EST_"
     "SP\020\004\022\r\n\tEST_EQUIP\020\005\022\013\n\007EST_GEM\020\006\022\014\n\010EST_"
-    "Hero\020\007\022\r\n\tEST_Other\020\010*{\n\tERankType\022\024\n\020ER"
-    "T_PLAYER_LEVEL\020\001\022\023\n\017ERT_FIGHT_VALUE\020\002\022\024\n"
-    "\020ERT_PLAYER_MONEY\020\003\022\023\n\017ERT_GUILD_LEVEL\020\004"
-    "\022\030\n\024ERT_GUILD_KINGSOURCE\020\005", 9186);
+    "Hero\020\007\022\r\n\tEST_Other\020\010*D\n\tEHeroType\022\020\n\014EH"
+    "T_STRENGTH\020\001\022\017\n\013EHT_AGILITY\020\002\022\024\n\020EHT_INT"
+    "ELLIGENCE\020\003*{\n\tERankType\022\024\n\020ERT_PLAYER_L"
+    "EVEL\020\001\022\023\n\017ERT_FIGHT_VALUE\020\002\022\024\n\020ERT_PLAYE"
+    "R_MONEY\020\003\022\023\n\017ERT_GUILD_LEVEL\020\004\022\030\n\024ERT_GU"
+    "ILD_KINGSOURCE\020\005", 9256);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -799,6 +803,21 @@ bool EShopType_IsValid(int value) {
     case 6:
     case 7:
     case 8:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EHeroType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return EHeroType_descriptor_;
+}
+bool EHeroType_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;

@@ -41,17 +41,6 @@ public:
         return NULL;
     }
 
-    template <typename T>
-    T* GetModule(const std::string& strModuleName)
-    {
-        return FindModule<T>(strModuleName);
-    }
-
-    NFILogicModule* GetModule(const std::string& strModuleName)
-    {
-        return FindModule(strModuleName);
-    }
-
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;

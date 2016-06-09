@@ -1963,6 +1963,13 @@ namespace NFMsg
       get { return _client_id; }
       set { _client_id = value; }
     }
+    private long _groupID;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"groupID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long groupID
+    {
+      get { return _groupID; }
+      set { _groupID = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

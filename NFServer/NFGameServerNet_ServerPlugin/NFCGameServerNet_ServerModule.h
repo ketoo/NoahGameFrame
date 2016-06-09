@@ -48,12 +48,12 @@ public:
     virtual void LogSend(const char* str) {}
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
-	virtual NFINetModule* GetNetModule();
 
     virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
-    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
 
+	virtual NFINetModule* GetNetModule();
+    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
 

@@ -31,7 +31,15 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+	//all data,include base,gem,element
 	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+
+	//only part of property of equip
+	virtual bool CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
 
 private:
     NFIKernelModule* m_pKernelModule;

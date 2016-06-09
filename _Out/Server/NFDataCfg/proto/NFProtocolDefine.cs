@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.cs
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 11:58:32 2016
+//    @Date             :    Thu Jun  9 18:35:23 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -218,6 +218,8 @@ public class EffectData
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
+	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String MAXHP = "MAXHP"; // int
 	public static readonly String MAXMP = "MAXMP"; // int
 	public static readonly String MAXSP = "MAXSP"; // int
@@ -275,27 +277,6 @@ public class Equip
 	public static readonly String BuyPrice = "BuyPrice"; // int
 	public static readonly String SalePrice = "SalePrice"; // int
 	public static readonly String Icon = "Icon"; // string
-	// Record
-
-}
-
-public class EquipRef
-{
-	//Class name
-	public static readonly string ThisName = "EquipRef";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	// Property
-	public static readonly String EQUIP1 = "EQUIP1"; // string
-	public static readonly String EQUIP2 = "EQUIP2"; // string
-	public static readonly String EQUIP3 = "EQUIP3"; // string
-	public static readonly String EQUIP4 = "EQUIP4"; // string
-	public static readonly String EQUIP5 = "EQUIP5"; // string
-	public static readonly String EQUIP6 = "EQUIP6"; // string
 	// Record
 
 }
@@ -500,23 +481,6 @@ public class GuildName
 
 }
 
-public class Hero
-{
-	//Class name
-	public static readonly string ThisName = "Hero";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	// Property
-	public static readonly String SkillRef = "SkillRef"; // string
-	public static readonly String TalentRef = "TalentRef"; // string
-	// Record
-
-}
-
 public class InitProperty
 {
 	//Class name
@@ -567,6 +531,7 @@ public class Item
 	public static readonly String Extend = "Extend"; // string
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowName = "ShowName"; // string
+	public static readonly String HeroType = "HeroType"; // int
 	// Record
 
 }
@@ -649,6 +614,8 @@ public class NPC
 	public static readonly String TargetX = "TargetX"; // float
 	public static readonly String TargetY = "TargetY"; // float
 	public static readonly String TargetZ = "TargetZ"; // float
+	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String MAXHP = "MAXHP"; // int
 	public static readonly String MAXMP = "MAXMP"; // int
 	public static readonly String MAXSP = "MAXSP"; // int
@@ -686,6 +653,7 @@ public class NPC
 	public static readonly String EquipIDRef = "EquipIDRef"; // string
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowCard = "ShowCard"; // string
+	public static readonly String HeroType = "HeroType"; // int
 	// Record
 
 }
@@ -732,6 +700,8 @@ public class Player
 	public static readonly String OnlineTime = "OnlineTime"; // object
 	public static readonly String TotalLineTime = "TotalLineTime"; // object
 	public static readonly String GMLevel = "GMLevel"; // int
+	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String MAXHP = "MAXHP"; // int
 	public static readonly String MAXMP = "MAXMP"; // int
 	public static readonly String MAXSP = "MAXSP"; // int

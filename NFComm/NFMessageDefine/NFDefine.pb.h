@@ -578,6 +578,26 @@ inline bool EShopType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
     EShopType_descriptor(), name, value);
 }
+enum EHeroType {
+  EHT_STRENGTH = 1,
+  EHT_AGILITY = 2,
+  EHT_INTELLIGENCE = 3
+};
+LIBPROTOC_EXPORT bool EHeroType_IsValid(int value);
+const EHeroType EHeroType_MIN = EHT_STRENGTH;
+const EHeroType EHeroType_MAX = EHT_INTELLIGENCE;
+const int EHeroType_ARRAYSIZE = EHeroType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EHeroType_descriptor();
+inline const ::std::string& EHeroType_Name(EHeroType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EHeroType_descriptor(), value);
+}
+inline bool EHeroType_Parse(
+    const ::std::string& name, EHeroType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EHeroType>(
+    EHeroType_descriptor(), name, value);
+}
 enum ERankType {
   ERT_PLAYER_LEVEL = 1,
   ERT_FIGHT_VALUE = 2,
@@ -668,6 +688,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
   return ::NFMsg::EShopType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EHeroType>() {
+  return ::NFMsg::EHeroType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {

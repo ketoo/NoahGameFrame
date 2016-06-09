@@ -158,22 +158,28 @@ int NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUI
 	NFCDataList xHeroTalentValue;
 	CalHeroTalentProperty(self, xHeroGUID, xHeroTalentValue);
 
-	NFCDataList xHeroEqupValue;
-	CalHeroEquipProperty(self, xHeroGUID, xHeroEqupValue);
-
-	if (xHeroPropertyValue.GetCount() != pHeroPropertyRecord->GetRows()
-		|| xHeroTalentValue.GetCount() != pHeroPropertyRecord->GetRows()
-		|| xHeroEqupValue.GetCount() != pHeroPropertyRecord->GetRows())
-	{
-		return false;
-	}
+	NFCDataList xHeroEquipValue;
+	CalHeroEquipProperty(self, xHeroGUID, xHeroEquipValue);
 
 	NFCDataList xHeroAllValue;
-	for (int i = 0; i < pHeroPropertyRecord->GetRows(); ++i)
+	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 	{
-		const int nPropertyValue = xHeroPropertyValue.Int(i);
-		const int nTalentValue = xHeroTalentValue.Int(i);
-		const int nEquipValue = xHeroEqupValue.Int(i);
+		int nPropertyValue = 0;
+		int nTalentValue = 0;
+		int nEquipValue = 0;
+
+		if (xHeroPropertyValue.GetCount() == pHeroPropertyRecord->GetCols())
+		{
+			nPropertyValue = xHeroPropertyValue.Int(i);
+		}
+		if (xHeroTalentValue.GetCount() == pHeroPropertyRecord->GetCols())
+		{
+			nTalentValue = xHeroTalentValue.Int(i);
+		}
+		if (xHeroEquipValue.GetCount() == pHeroPropertyRecord->GetCols())
+		{
+			nEquipValue = xHeroEquipValue.Int(i);
+		}
 
 		int nAllValue = nPropertyValue + nTalentValue + nEquipValue;
 
@@ -208,6 +214,7 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 	}
 
 	/////////////PropertyBase/////////////////////////////////////////
+	xDataList.Clear();
 
 	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::PlayerHero_ConfigID);
 	const std::string& strPropertyEffectData = m_pElementInfoModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
@@ -247,6 +254,8 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 	}
 
 	////////////////////Talent//////////////////////////////////////////////////////
+	xDataList.Clear();
+
 	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 	{
 		xDataList.AddInt(0);
@@ -296,6 +305,8 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 	}
 
 	////////////////////Equip//////////////////////////////////////////////////////
+	xDataList.Clear();
+
 	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 	{
 		xDataList.AddInt(0);

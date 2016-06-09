@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 11:58:32 2016
+//    @Date             :    Thu Jun  9 18:35:23 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -203,6 +203,8 @@ public class EffectData {
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -259,26 +261,6 @@ public class Equip {
 	public static final String BuyPrice = "BuyPrice"; // int
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Icon = "Icon"; // string
-	// Record
-
-}
-
-public class EquipRef {
-	//Class name
-	public static final String ThisName = "EquipRef";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String EQUIP1 = "EQUIP1"; // string
-	public static final String EQUIP2 = "EQUIP2"; // string
-	public static final String EQUIP3 = "EQUIP3"; // string
-	public static final String EQUIP4 = "EQUIP4"; // string
-	public static final String EQUIP5 = "EQUIP5"; // string
-	public static final String EQUIP6 = "EQUIP6"; // string
 	// Record
 
 }
@@ -479,22 +461,6 @@ public class GuildName {
 
 }
 
-public class Hero {
-	//Class name
-	public static final String ThisName = "Hero";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String SkillRef = "SkillRef"; // string
-	public static final String TalentRef = "TalentRef"; // string
-	// Record
-
-}
-
 public class InitProperty {
 	//Class name
 	public static final String ThisName = "InitProperty";
@@ -543,6 +509,7 @@ public class Item {
 	public static final String Extend = "Extend"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
+	public static final String HeroType = "HeroType"; // int
 	// Record
 
 }
@@ -622,6 +589,8 @@ public class NPC {
 	public static final String TargetX = "TargetX"; // float
 	public static final String TargetY = "TargetY"; // float
 	public static final String TargetZ = "TargetZ"; // float
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -659,6 +628,7 @@ public class NPC {
 	public static final String EquipIDRef = "EquipIDRef"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowCard = "ShowCard"; // string
+	public static final String HeroType = "HeroType"; // int
 	// Record
 
 }
@@ -704,6 +674,8 @@ public class Player {
 	public static final String OnlineTime = "OnlineTime"; // object
 	public static final String TotalLineTime = "TotalLineTime"; // object
 	public static final String GMLevel = "GMLevel"; // int
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int

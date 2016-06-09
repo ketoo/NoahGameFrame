@@ -451,6 +451,12 @@ enum EShopType
 	EST_Other		= 8;//杂货店
 }
 
+enum EHeroType
+{
+	EHT_STRENGTH 			= 1;//力量	
+	EHT_AGILITY				= 2;//敏捷
+	EHT_INTELLIGENCE		= 3;//智力
+}
 ///////////////排行榜相关////////////////////////////////////////////////////////////////////////////////////
 
 enum ERankType
