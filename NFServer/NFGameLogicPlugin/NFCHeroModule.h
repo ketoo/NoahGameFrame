@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
 #include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -61,7 +62,7 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
-    NFIGuildEctypeModule* m_pGuildEctypeModule;
+    NFISceneProcessModule* m_pSceneProcessModule;
 private:
 };
 

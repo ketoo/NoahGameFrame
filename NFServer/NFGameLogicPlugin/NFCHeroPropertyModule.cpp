@@ -111,16 +111,11 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 		case NFrame::Player::PlayerHero::PlayerHero_Equip4:
 		case NFrame::Player::PlayerHero::PlayerHero_Equip5:
 		case NFrame::Player::PlayerHero::PlayerHero_Equip6:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip7:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip8:
 		case NFrame::Player::PlayerHero::PlayerHero_Talent1:
 		case NFrame::Player::PlayerHero::PlayerHero_Talent2:
 		case NFrame::Player::PlayerHero::PlayerHero_Talent3:
 		case NFrame::Player::PlayerHero::PlayerHero_Talent4:
 		case NFrame::Player::PlayerHero::PlayerHero_Talent5:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent6:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent7:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent8:
 		{
 			const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::PlayerHero_GUID);
 
