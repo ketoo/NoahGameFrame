@@ -911,7 +911,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::UpData:
+	case NFIRecord::RecordOptype::Update:
 	{
 		switch (oldVar.GetType())
 		{
