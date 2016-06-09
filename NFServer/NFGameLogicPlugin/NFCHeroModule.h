@@ -51,6 +51,7 @@ public:
 
 	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID);
 	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID);
+	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 
 protected:
 	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );

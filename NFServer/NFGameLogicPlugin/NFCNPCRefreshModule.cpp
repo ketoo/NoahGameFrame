@@ -32,23 +32,17 @@ bool NFCNPCRefreshModule::AfterInit()
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-
+	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>("NFCHeroPropertyModule");
+	
     assert(NULL != m_pKernelModule);
     assert(NULL != m_pSceneProcessModule);
     assert(NULL != m_pElementInfoModule);
 	assert(NULL != m_pPackModule);
 	assert(NULL != m_pLogModule);
 	assert(NULL != m_pLevelModule);
-	assert(NULL != m_pCommonConfigModule);
+	assert(NULL != m_pHeroPropertyModule);
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
-
-	std::string strPlayerPath = pPluginManager->GetConfigPath();
-	strPlayerPath += "NFDataCfg/Ini/Common/PlayerLevelConfig.xml";
-
-	m_pCommonConfigModule->LoadConfig(strPlayerPath);
 
     return true;
 }
@@ -66,26 +60,52 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {
             const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-            const std::string& strPropertyID = m_pElementInfoModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
-            NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strPropertyID);
-            if (pConfigPropertyManager)
-            {
-                std::string strProperName;
-                NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
-                for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
-                {
-                    if (pSelfPropertyManager && strProperName != NFrame::NPC::ID())
-                    {
-                        pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
-                    }
-                }
-            }
-        }
+			const std::string& strPropertyID = m_pElementInfoModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+			const int nNPCType = m_pElementInfoModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
+			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
-        if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
+			if (nNPCType == 1)
+			{
+				//hero
+				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::Master();
+				NFCDataList xHeroPropertyList;
+				if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
+				{
+					NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
+					if (pHeroPropertyRecord)
+					{
+						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+						{
+							const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
+							const int nValue = xHeroPropertyList.Int(i);
+							pSelfPropertyManager->SetPropertyInt(strColTag, nValue);
+						}
+					}
+				}
+			}
+			else
+			{
+				//normal npc
+				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strPropertyID);
+				if (pConfigPropertyManager)
+				{
+					std::string strProperName;
+					for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
+					{
+						if (pSelfPropertyManager && strProperName != NFrame::NPC::ID())
+						{
+							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
+						}
+					}
+				}
+			}
+            
+        }
+        else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
             const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
             int nHPMax = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
+
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
             m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 
@@ -93,10 +113,6 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         }
     }
 
-	if ( strClassName == NFrame::Player::ThisName() && CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT == eClassEvent )
-	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCNPCRefreshModule::OnObjectLevelEvent);
-	}
     return 0;
 }
 
@@ -165,48 +181,4 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const int nEventI
 	}
 
 	return 0;
-}
-
-int NFCNPCRefreshModule::OnObjectLevelEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
-{
-	NFINT64 nLevel = newVar.GetInt();
-
-	AddLevelUpAward(self, nLevel);
-
-	return 0;
-}
-
-bool NFCNPCRefreshModule::AddLevelUpAward( const NFGUID& self, const int nLevel )
-{
-	const std::string& strAwardID = m_pCommonConfigModule->GetAttributeString("PlayerLevel", lexical_cast<std::string>(nLevel), "AwardPack");
-	if (strAwardID.empty())
-	{
-		return true;
-	}
-
-	std::vector<std::string> xList;
-	m_pCommonConfigModule->GetStructItemList(strAwardID, xList);
-
-	for (int i = 0; i < xList.size(); ++i)
-	{
-		const std::string& strItemID = xList[i];
-		const int nCout = m_pCommonConfigModule->GetAttributeInt("strAwardID", strItemID, "Count");
-		if (m_pElementInfoModule->ExistElement(strItemID))
-		{
-			const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-			switch (nItemType)
-			{
-			case NFMsg::EIT_EQUIP:
-				{
-					m_pPackModule->CreateEquip(self, strItemID);
-				}
-				break;
-			default:
-				m_pPackModule->CreateItem(self, strItemID, nCout);
-				break;
-			}
-		}
-	}
-
-	return true;
 }

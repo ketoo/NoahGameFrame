@@ -34,6 +34,7 @@ public:
 
 	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
+	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID) = 0;
 
 };
 
