@@ -240,7 +240,7 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = UpData;
+    xEventData.nOpType = Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -295,7 +295,7 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const double value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = UpData;
+    xEventData.nOpType = Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -350,7 +350,7 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const std::string& val
     pVar->variantData = (std::string)value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = UpData;
+    xEventData.nOpType = Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -405,7 +405,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = UpData;
+    xEventData.nOpType = Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;

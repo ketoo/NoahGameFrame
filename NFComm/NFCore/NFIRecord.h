@@ -21,7 +21,7 @@ public:
         Del,
         Swap,
         Create,
-        UpData,
+        Update,
         Cleared,
         Sort,
         Cover,
