@@ -50,12 +50,6 @@ enum EGameEventCode
 	EGEC_NO_SERVER4ZONE							= 142;       // 还没有指派服务器管理该场景; 请稍等(游戏世界还处于混沌中...)
 	EGEC_INVALID_SKILL							= 143;       // 无效的技能
 	EGEC_ENTER_GAME_SUCCESS						= 144;		 // 进入游戏成功
-	
-	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
-	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
-	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
-	
-
 }
 
 enum EGameMsgID
