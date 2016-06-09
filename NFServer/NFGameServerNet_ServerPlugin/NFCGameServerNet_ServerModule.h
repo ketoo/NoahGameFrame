@@ -58,13 +58,8 @@ public:
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
 
 protected:
-
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
-    //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nSockIndex);
-
-    //有连接
     void OnClientConnected(const int nSockIndex);
 
 protected:
@@ -73,26 +68,17 @@ protected:
     void OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-
     void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //////////////////////////////////////////////////////////////////////////
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //////////////////////////////////////////////////////////////////////////
-    void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
-    ///////////WORLD_END///////////////////////////////////////////////////////////////
 	
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
@@ -111,26 +97,11 @@ protected:
     int OnGroupEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnContainerEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
+
     int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
     int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);
-    //////////////////////////////////////////////////////////////////////////
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnObjectNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    //////////////////////////////////////////////////////////////////////////
-    // 回馈事件
-    int OnReturnEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 移动广播
-    int OnMoveEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 技能结算结果事件
-    int OnUseSkillResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 跨场景结果事件
-    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 发送聊天结果
-    int OnChatResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 通知副本奖励结果
-    int OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var);
-
-    void PlayerLeaveGameServer(const NFGUID& self);
 
 private:
     //<角色id,角色网关基础信息>//其实可以在object系统中被代替
