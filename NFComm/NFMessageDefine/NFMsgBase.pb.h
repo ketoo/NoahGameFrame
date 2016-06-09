@@ -71,12 +71,11 @@ class ReqCommand;
 enum ReqCommand_EGameCommandType {
   ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY = 0,
   ReqCommand_EGameCommandType_EGCT_MODIY_ITEM = 1,
-  ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT = 2,
-  ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP = 3
+  ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT = 2
 };
 LIBPROTOC_EXPORT bool ReqCommand_EGameCommandType_IsValid(int value);
 const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MIN = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
-const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP;
+const ReqCommand_EGameCommandType ReqCommand_EGameCommandType_EGameCommandType_MAX = ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT;
 const int ReqCommand_EGameCommandType_EGameCommandType_ARRAYSIZE = ReqCommand_EGameCommandType_EGameCommandType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqCommand_EGameCommandType_descriptor();
@@ -3454,7 +3453,6 @@ class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message {
   static const EGameCommandType EGCT_MODIY_PROPERTY = ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY;
   static const EGameCommandType EGCT_MODIY_ITEM = ReqCommand_EGameCommandType_EGCT_MODIY_ITEM;
   static const EGameCommandType EGCT_CREATE_OBJECT = ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT;
-  static const EGameCommandType EGCT_ADD_ROLE_EXP = ReqCommand_EGameCommandType_EGCT_ADD_ROLE_EXP;
   static inline bool EGameCommandType_IsValid(int value) {
     return ReqCommand_EGameCommandType_IsValid(value);
   }

@@ -36,10 +36,9 @@ public:
 
     virtual bool AfterInit();
 
+    virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    virtual void LogReceive(const char* str) {}
-    virtual void LogSend(const char* str) {}
-
+    virtual NFIClusterClientModule* GetClusterClientModule();
 protected:
 
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -48,36 +47,9 @@ protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
-    void OnLoadRoleDataBeginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    void OnLoadRoleDataFinalProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    void OnEnquireSceneInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    void OnSwapGSProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnAckCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnAckJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnAckLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    int OnDataLoadBeginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    //int OnToWorldEvent( const NFGUID& object, const int nEventID, const NFIDataList& var );
-
-    int OnSwapGSEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-
-
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    //     template<class PBClass>
-    //     int TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual NFIClusterClientModule* GetClusterClientModule();
-
-    virtual void LogServerInfo(const std::string& strServerInfo);
 
 private:
     void SendOnline(const NFGUID& self);

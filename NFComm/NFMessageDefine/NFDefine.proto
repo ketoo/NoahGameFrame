@@ -50,12 +50,6 @@ enum EGameEventCode
 	EGEC_NO_SERVER4ZONE							= 142;       // 还没有指派服务器管理该场景; 请稍等(游戏世界还处于混沌中...)
 	EGEC_INVALID_SKILL							= 143;       // 无效的技能
 	EGEC_ENTER_GAME_SUCCESS						= 144;		 // 进入游戏成功
-	
-	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
-	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
-	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
-	
-
 }
 
 enum EGameMsgID
@@ -195,8 +189,6 @@ enum EGameMsgID
 	
 	EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
 	
-	EGMI_ReqEnterGuildEctype					= 315; // 
-	
 	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
@@ -259,37 +251,6 @@ enum EGameMsgID
 	EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
 	EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
 	EGMI_ACK_CLONE_RECORD_SORT						= 829;
-	
-	EGMI_REQSWICHSERVER								= 840;	// 申请转服
-	EGMI_ACKSWICHSERVER								= 841;	// 申请转服
-	
-	EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
-	EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
-	EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
-	EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
-	EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍
-	EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
-	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
-	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
-	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
-	
-	/////////////////////MapModule/////////////////////////////////////
-	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
-	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	
-	EGMI_REQ_BIG_MAP_INFO							= 902; 	// 申请大地图信息
-	EGMI_ACK_BIG_MAP_INFO							= 903; 	// 返回大地图
-	
-	EGMI_REQ_HOLD_MAP_GRID						= 910; 	// 申请入驻
-	EGMI_ACK_HOLD_MAP_GRID						= 911; 	// 返回入驻结果
-	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 912; 	// 申请留言
-	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 913; 	// 返回留言结果
-	EGMI_REQ_GET_MAP_GRID_AWARD					= 914; 	// 申请领取地图奖励
-	EGMI_ACK_GET_MAP_GRID_AWARD					= 915; 	// 返回领取地图奖励
-	
-	EGMI_REQ_MAP_GRID_HUNTING					= 916; 	// 申请地图狩猎
-	EGMI_ACK_MAP_GRID_HUNTING					= 917; 	// 返回结果
-	EGMI_REQ_MAP_GRID_KING_WAR					= 918; 	// 申请地图争霸
-	EGMI_ACK_MAP_GRID_KING_WAR					= 919; 	// 返回结果
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
@@ -300,7 +261,6 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_STR						= 1005;			// GM命令修改修改表字符串
 	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
 	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
-	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
 	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果
@@ -324,9 +284,6 @@ enum EItemType
 	EIT_DEMONIZATION_STONE	= 6; // 附魔石
 	EIT_GEM_STONE			= 7; // 属性宝石
 	EIT_CURRENCY			= 8; // 货币道具不进背包s
-	EIT_ITEM_REBORN			= 9; // 重生道具(消耗此物品时得到某种待遇)
-	EIT_ITEM_POSITION		= 10;// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
-	
 	
 	EIT_WOOD				= 100; // 木材
 	EIT_STONE				= 101; // 石材
@@ -439,39 +396,9 @@ enum EBattleType
 	BATTLE_PVE_TEAM      = 1; // 多人打副本
 }
 
-enum EShopType
-{
-	EST_BUILDING 	= 1;//建筑	
-	EST_GOLD		= 2;//金币
-	EST_DIAMOND		= 3;//钻石
-	EST_SP			= 4;//体力
-	EST_EQUIP		= 5;//装备
-	EST_GEM			= 6;//宝石
-	EST_Hero		= 7;//HeroCard
-	EST_Other		= 8;//杂货店
-}
-
-///////////////排行榜相关////////////////////////////////////////////////////////////////////////////////////
-
-enum ERankType
-{
-	ERT_PLAYER_LEVEL 			= 1;
-	ERT_FIGHT_VALUE				= 2;
-	ERT_PLAYER_MONEY			= 3;
-	ERT_GUILD_LEVEL				= 4;
-	ERT_GUILD_KINGSOURCE		= 5;
-}
 
 
 
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

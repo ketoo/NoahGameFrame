@@ -48,18 +48,18 @@ public:
     virtual void LogSend(const char* str) {}
     virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self);
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
-
-	virtual void ProcessSwitchToGame(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID, const int nSceneID);
-	virtual void ProcessSwitchOffGame(const NFGUID& self);
-	bool GetGateInfo(const NFGUID& self, int & nGateID, NFGUID& xClientID);
 	virtual NFINetModule* GetNetModule();
+
+    virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
+    virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
+    virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
+
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
+
 protected:
-
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
-    //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nSockIndex);
-    //有连接
     void OnClientConnected(const int nSockIndex);
 
 protected:
@@ -68,44 +68,18 @@ protected:
     void OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-
     void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    //////////////////////////////////////////////////////////////////////////
-
     void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //////////////////////////////////////////////////////////////////////////
-
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienMoveImmune(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //////////////////////////////////////////////////////////////////////////
-
-    void OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
-    ///////////WORLD_END///////////////////////////////////////////////////////////////
-
-	//////////////////////////////////////////////////////////////////////////
-	void OnCreateGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnJoinGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnLeaveGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-	void OnOprGuild(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
-
+	
 protected:
     //将self的全部属性广播给argVar[应该是多对多]
     int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
@@ -123,76 +97,17 @@ protected:
     int OnGroupEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnContainerEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
+
     int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
     int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);
-    //////////////////////////////////////////////////////////////////////////
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnObjectNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    //////////////////////////////////////////////////////////////////////////
-    // 回馈事件
-    int OnReturnEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 移动广播
-    int OnMoveEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 技能结算结果事件
-    int OnUseSkillResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 跨场景结果事件
-    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 发送聊天结果
-    int OnChatResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
-    // 通知副本奖励结果
-    int OnNoticeEctypeAward(const NFGUID& self, const int nEventID, const NFIDataList& var);
-
-    void PlayerLeaveGameServer(const NFGUID& self);
-
-    template<class PBClass>
-    NFGUID GetGuildID(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-    {
-        NFGUID nPlayerID;
-        PBClass xMsg;
-        if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
-        {
-            return NULL_OBJECT;
-        }
-
-        return NFINetModule::PBToNF(xMsg.guild_id());
-    }
-
-private:
-
-    struct GateData
-    {
-        ServerData xServerData;
-        //此网关上所有的对象<角色ID,gate_FD>
-        std::map<NFGUID, int> xRoleInfo;
-    };
-
-    //要管理当前所有的对象所在的actor,gateid,fd等
-    struct BaseData
-    {
-        BaseData()
-        {
-            nActorID = 0;
-            nGateID = 0;
-        }
-
-        BaseData(const int gateID, const NFGUID xIdent)
-        {
-            nActorID = 0;
-            nGateID = gateID;
-            xClientID = xIdent;
-        }
-
-        int nActorID;
-        int nGateID;
-        NFGUID xClientID;
-    };
 
 private:
     //<角色id,角色网关基础信息>//其实可以在object系统中被代替
-    NFMapEx<NFGUID, BaseData> mRoleBaseData;
-
+    NFMapEx<NFGUID, GateBaseInfo> mRoleBaseData;
     //gateid,data
-    NFMapEx<int, GateData> mProxyMap;
+    NFMapEx<int, GateServerInfo> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
     NFIUUIDModule* m_pUUIDModule;

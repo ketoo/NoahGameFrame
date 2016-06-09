@@ -79,14 +79,11 @@ enum EGameEventCode {
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
   EGEC_INVALID_SKILL = 143,
-  EGEC_ENTER_GAME_SUCCESS = 144,
-  EGEC_CREATE_GUILD_SUCCESS = 200,
-  EGEC_JOIN_GUILD_SUCCESS = 201,
-  EGEC_LEAVE_GUILD_SUCCESS = 202
+  EGEC_ENTER_GAME_SUCCESS = 144
 };
 LIBPROTOC_EXPORT bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_SUCCESS;
-const EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_GUILD_SUCCESS;
+const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();
@@ -207,7 +204,6 @@ enum EGameMsgID {
   EGMI_REQ_GUILDECTYPEINFO = 312,
   EGMI_ACK_GUILDECTYPEINFO = 313,
   EGMI_SET_GUILDECTYPEINFO = 314,
-  EGMI_ReqEnterGuildEctype = 315,
   EGEC_REQ_CREATE_CHATGROUP = 400,
   EGEC_ACK_CREATE_CHATGROUP = 401,
   EGEC_REQ_JOIN_CHATGROUP = 402,
@@ -256,31 +252,6 @@ enum EGameMsgID {
   EGMI_ACK_CLONE_RECORD_OBJECT = 827,
   EGMI_ACK_CLONE_RECORD_CLEAR = 828,
   EGMI_ACK_CLONE_RECORD_SORT = 829,
-  EGMI_REQSWICHSERVER = 840,
-  EGMI_ACKSWICHSERVER = 841,
-  EGMI_REQ_CREATE_TEAM = 860,
-  EGMI_ACK_CREATE_TEAM = 861,
-  EGMI_REQ_JOIN_TEAM = 862,
-  EGMI_ACK_JOIN_TEAM = 863,
-  EGMI_REQ_LEAVE_TEAM = 864,
-  EGMI_ACK_LEAVE_TEAM = 865,
-  EGMI_REQ_INVITE_TEAM = 866,
-  EGMI_REQ_OPRMEMBER_TEAM = 867,
-  EGMI_ACK_OPRMEMBER_TEAM = 868,
-  EGMI_REQ_MAP_GRID_INFO = 900,
-  EGMI_ACK_MAP_GRID_INFO = 901,
-  EGMI_REQ_BIG_MAP_INFO = 902,
-  EGMI_ACK_BIG_MAP_INFO = 903,
-  EGMI_REQ_HOLD_MAP_GRID = 910,
-  EGMI_ACK_HOLD_MAP_GRID = 911,
-  EGMI_REQ_LEAVE_MSG_MAP_GRID = 912,
-  EGMI_ACK_LEAVE_MSG_MAP_GRID = 913,
-  EGMI_REQ_GET_MAP_GRID_AWARD = 914,
-  EGMI_ACK_GET_MAP_GRID_AWARD = 915,
-  EGMI_REQ_MAP_GRID_HUNTING = 916,
-  EGMI_ACK_MAP_GRID_HUNTING = 917,
-  EGMI_REQ_MAP_GRID_KING_WAR = 918,
-  EGMI_ACK_MAP_GRID_KING_WAR = 919,
   EGMI_REQ_CMD_PROPERTY_INT = 1000,
   EGMI_REQ_CMD_PROPERTY_STR = 1001,
   EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
@@ -289,7 +260,6 @@ enum EGameMsgID {
   EGMI_REQ_CMD_RECORD_STR = 1005,
   EGMI_REQ_CMD_RECORD_OBJECT = 1006,
   EGMI_REQ_CMD_RECORD_FLOAT = 1007,
-  EGMI_REQ_CMD_NORMAL = 1008,
   EGMI_REQ_BUY_FORM_SHOP = 10000,
   EGMI_ACK_BUY_FORM_SHOP = 10001,
   EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
@@ -323,8 +293,6 @@ enum EItemType {
   EIT_DEMONIZATION_STONE = 6,
   EIT_GEM_STONE = 7,
   EIT_CURRENCY = 8,
-  EIT_ITEM_REBORN = 9,
-  EIT_ITEM_POSITION = 10,
   EIT_WOOD = 100,
   EIT_STONE = 101
 };
@@ -553,53 +521,6 @@ inline bool EBattleType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
     EBattleType_descriptor(), name, value);
 }
-enum EShopType {
-  EST_BUILDING = 1,
-  EST_GOLD = 2,
-  EST_DIAMOND = 3,
-  EST_SP = 4,
-  EST_EQUIP = 5,
-  EST_GEM = 6,
-  EST_Hero = 7,
-  EST_Other = 8
-};
-LIBPROTOC_EXPORT bool EShopType_IsValid(int value);
-const EShopType EShopType_MIN = EST_BUILDING;
-const EShopType EShopType_MAX = EST_Other;
-const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
-inline const ::std::string& EShopType_Name(EShopType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EShopType_descriptor(), value);
-}
-inline bool EShopType_Parse(
-    const ::std::string& name, EShopType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
-    EShopType_descriptor(), name, value);
-}
-enum ERankType {
-  ERT_PLAYER_LEVEL = 1,
-  ERT_FIGHT_VALUE = 2,
-  ERT_PLAYER_MONEY = 3,
-  ERT_GUILD_LEVEL = 4,
-  ERT_GUILD_KINGSOURCE = 5
-};
-LIBPROTOC_EXPORT bool ERankType_IsValid(int value);
-const ERankType ERankType_MIN = ERT_PLAYER_LEVEL;
-const ERankType ERankType_MAX = ERT_GUILD_KINGSOURCE;
-const int ERankType_ARRAYSIZE = ERankType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ERankType_descriptor();
-inline const ::std::string& ERankType_Name(ERankType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ERankType_descriptor(), value);
-}
-inline bool ERankType_Parse(
-    const ::std::string& name, ERankType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ERankType>(
-    ERankType_descriptor(), name, value);
-}
 // ===================================================================
 
 
@@ -664,14 +585,6 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
   return ::NFMsg::EBattleType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
-  return ::NFMsg::EShopType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {
-  return ::NFMsg::ERankType_descriptor();
 }
 
 }  // namespace google

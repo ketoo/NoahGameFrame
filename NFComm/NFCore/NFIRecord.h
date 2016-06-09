@@ -24,6 +24,7 @@ public:
         UpData,
         Cleared,
         Sort,
+        Cover,
     };
 
     typedef std::vector< NF_SHARE_PTR<NFIDataList::TData> > TRECORDVEC;
@@ -109,8 +110,8 @@ public:
     virtual const bool GetCache() = 0;
     virtual const std::string& GetName() const = 0;
 
-    virtual const NF_SHARE_PTR<NFIDataList>& GetInitData() const = 0;
-    virtual const NF_SHARE_PTR<NFIDataList>& GetTag() const = 0;
+    virtual const NF_SHARE_PTR<NFIDataList> GetInitData() const = 0;
+    virtual const NF_SHARE_PTR<NFIDataList> GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetCache(const bool bCache) = 0;

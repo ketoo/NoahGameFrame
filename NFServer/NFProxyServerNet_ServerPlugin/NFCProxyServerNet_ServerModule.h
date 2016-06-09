@@ -44,7 +44,6 @@ public:
 
     //进入游戏成功
     virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
-	virtual int SwitcheGameSuccess(const NFGUID xClientID, const NFGUID xPlayerID, const int nGameID);
 
 protected:
 

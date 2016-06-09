@@ -229,7 +229,6 @@ message ReqCommand//GM命令
 		EGCT_MODIY_PROPERTY		= 0;//修改属性[property_name,value]
 		EGCT_MODIY_ITEM			= 1;//得到物品[item_id,count]
 		EGCT_CREATE_OBJECT		= 2;//创建对象[object_index,count]
-		EGCT_ADD_ROLE_EXP		= 3;//增加经验
 	}
 	required Ident control_id = 1;
 	required EGameCommandType command_id = 2;

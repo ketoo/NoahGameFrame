@@ -13,15 +13,15 @@
 
 bool NFCGameServerModule::Init()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
 
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pUUIDModule);
+    assert(NULL != m_pKernelModule);
+    assert(NULL != m_pLogicClassModule);
+    assert(NULL != m_pUUIDModule);
 
-	m_pUUIDModule->SetIdentID(1);
+    m_pUUIDModule->SetIdentID(1);
 
     return true;
 }
