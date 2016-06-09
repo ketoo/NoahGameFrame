@@ -100,8 +100,8 @@ public:
 
     virtual void SetName(const char* strName);
 
-    virtual const NF_SHARE_PTR<NFIDataList>& GetInitData() const;
-    virtual const NF_SHARE_PTR<NFIDataList>& GetTag() const;
+    virtual const NF_SHARE_PTR<NFIDataList> GetInitData() const;
+    virtual const NF_SHARE_PTR<NFIDataList> GetTag() const;
 
     virtual const TRECORDVEC& GetRecordVec() const;
 protected:
