@@ -44,18 +44,10 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCGameServerNet_ServerModule::OnCreateRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_RECOVER_ROLE, this, &NFCGameServerNet_ServerModule::OnClienSwapSceneProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCGameServerNet_ServerModule::OnClienSwapSceneProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_PICK_ITEM, this, &NFCGameServerNet_ServerModule::OnClienPickItem);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCGameServerNet_ServerModule::OnClienSwapSceneProcess);	
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE, this, &NFCGameServerNet_ServerModule::OnClienMove);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_IMMUNE, this, &NFCGameServerNet_ServerModule::OnClienMoveImmune);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCGameServerNet_ServerModule::OnClienAcceptTask);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCGameServerNet_ServerModule::OnClienPushTask);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCGameServerNet_ServerModule::OnClienChatProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_BATTLE, this, &NFCGameServerNet_ServerModule::OnClientEndBattle);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGameServerNet_ServerModule::OnCreateGuild);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGameServerNet_ServerModule::OnJoinGuild);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGameServerNet_ServerModule::OnLeaveGuild);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGameServerNet_ServerModule::OnOprGuild);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
@@ -1679,69 +1671,6 @@ void NFCGameServerNet_ServerModule::OnClienMoveImmune(const int nSockIndex, cons
 	}
 }
 
-void NFCGameServerNet_ServerModule::OnClienCommand(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-
-}
-
-void NFCGameServerNet_ServerModule::OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
-}
-
-void NFCGameServerNet_ServerModule::OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
-}
-
-void NFCGameServerNet_ServerModule::OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::cu)
-}
-
-void NFCGameServerNet_ServerModule::OnClienPickItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqPickDropItem)
-}
-
-void NFCGameServerNet_ServerModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat)
-
-		switch (xMsg.chat_type())
-		{
-		case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_WORLD:
-		{
-			m_pNetModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
-		}
-		break;
-		case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
-		{
-			NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, "GuildID");
-			if (!xGuildID.IsNull())
-			{
-				OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
-			}
-		}
-		break;
-		case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_PRIVATE:
-		case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_TEAM:
-		{
-			if (xMsg.has_target_id())
-			{
-				NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
-				if (!xTargetID.IsNull())
-				{
-					OnTransWorld(nSockIndex, nMsgID, msg, nLen, nPlayerID.nData64);
-				}
-			}
-		}
-		break;
-		default:
-			break;;
-		}
-}
-
 void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
@@ -1819,55 +1748,6 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 	return;
 }
 
-void NFCGameServerNet_ServerModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID nPlayerID;
-	NFMsg::ReqCommand xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
-	{
-		return;
-	}
-
-	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
-	{
-		return;
-	}
-
-	switch (xMsg.command_id())
-	{
-	case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
-	{
-		const std::string& strPropertyName = xMsg.command_str_value();
-		//const int nValue = xMsg.command_value();
-		//m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
-	}
-	break;
-	case NFMsg::ReqCommand_EGameCommandType_EGCT_CREATE_OBJECT:
-	{
-		const int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
-		const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
-
-		double fX = m_pKernelModule->GetPropertyFloat(nPlayerID, "X");
-		double fY = m_pKernelModule->GetPropertyFloat(nPlayerID, "Y");
-		double fZ = m_pKernelModule->GetPropertyFloat(nPlayerID, "Z");
-
-		const std::string& strObjectIndex = xMsg.command_str_value();
-		//const int nValue = xMsg.command_value();
-		if (m_pElementInfoModule->ExistElement(strObjectIndex))
-		{
-			NFCDataList xDataList;
-			xDataList << "X" << fX;
-			xDataList << "Y" << fY;
-			xDataList << "Z" << fZ;
-			const std::string& strObjectClass = m_pElementInfoModule->GetPropertyString(strObjectIndex, "ClassName");
-			m_pKernelModule->CreateObject(NFGUID(), nContianerID, nGroupID, strObjectClass, strObjectIndex, xDataList);
-		}
-	}
-	break;
-	default:
-		break;
-	}
-}
 
 void NFCGameServerNet_ServerModule::OnClientEndBattle(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
@@ -1948,28 +1828,4 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
 void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
 {
 	m_pGameServerToWorldModule->SendBySuit(nWorldKey, nMsgID, msg, nLen);
-}
-
-void NFCGameServerNet_ServerModule::OnCreateGuild(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID xGuildID = GetGuildID<NFMsg::ReqAckCreateGuild>(nSockIndex, nMsgID, msg, nLen);
-	OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
-}
-
-void NFCGameServerNet_ServerModule::OnJoinGuild(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID xGuildID = GetGuildID<NFMsg::ReqAckJoinGuild>(nSockIndex, nMsgID, msg, nLen);
-	OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
-}
-
-void NFCGameServerNet_ServerModule::OnLeaveGuild(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID xGuildID = GetGuildID<NFMsg::ReqAckLeaveGuild>(nSockIndex, nMsgID, msg, nLen);
-	OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
-}
-
-void NFCGameServerNet_ServerModule::OnOprGuild(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID xGuildID = GetGuildID<NFMsg::ReqAckOprGuildMember>(nSockIndex, nMsgID, msg, nLen);
-	OnTransWorld(nSockIndex, nMsgID, msg, nLen, xGuildID.nData64);
 }
