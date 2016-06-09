@@ -384,7 +384,7 @@ NFGUID NFCHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
 	}
 
 	NFCDataList xDataList;
-	int nHeroCount = pHeroRecord->FindString(NFrame::Player::PlayerHero_ConfigID, strID, xDataList);
+	int nHeroCount = pHeroRecord->FindString(NFrame::Player::PlayerHero_ConfigID, strID.c_str(), xDataList);
 	if (nHeroCount != 1)
 	{
 		return NFGUID();
