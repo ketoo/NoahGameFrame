@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Thu Jun  9 20:14:58 2016
+//    @Date             :    Thu Jun  9 21:21:00 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -678,6 +678,9 @@ public:
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
 	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
+	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
+	static const std::string& MasterID(){ static std::string xMasterID = "MasterID"; return xMasterID; } // object
+	static const std::string& NPCType(){ static std::string xNPCType = "NPCType"; return xNPCType; } // int
 	// Record
 
 };
@@ -844,35 +847,34 @@ public:
 
 	enum HeroPropertyValue
 	{
-		HeroPropertyValue_HeroGUID		= 0, // HeroGUID -- object
-		HeroPropertyValue_Group		= 1, // Group -- int
-		HeroPropertyValue_SUCKBLOOD		= 2, // SUCKBLOOD -- int
-		HeroPropertyValue_REFLECTDAMAGE		= 3, // REFLECTDAMAGE -- int
-		HeroPropertyValue_CRITICAL		= 4, // CRITICAL -- int
-		HeroPropertyValue_MAXHP		= 5, // MAXHP -- int
-		HeroPropertyValue_MAXMP		= 6, // MAXMP -- int
-		HeroPropertyValue_MAXSP		= 7, // MAXSP -- int
-		HeroPropertyValue_HPREGEN		= 8, // HPREGEN -- int
-		HeroPropertyValue_SPREGEN		= 9, // SPREGEN -- int
-		HeroPropertyValue_MPREGEN		= 10, // MPREGEN -- int
-		HeroPropertyValue_ATK_VALUE		= 11, // ATK_VALUE -- int
-		HeroPropertyValue_DEF_VALUE		= 12, // DEF_VALUE -- int
-		HeroPropertyValue_MOVE_SPEED		= 13, // MOVE_SPEED -- int
-		HeroPropertyValue_ATK_SPEED		= 14, // ATK_SPEED -- int
-		HeroPropertyValue_ATK_FIRE		= 15, // ATK_FIRE -- int
-		HeroPropertyValue_ATK_LIGHT		= 16, // ATK_LIGHT -- int
-		HeroPropertyValue_ATK_WIND		= 17, // ATK_WIND -- int
-		HeroPropertyValue_ATK_ICE		= 18, // ATK_ICE -- int
-		HeroPropertyValue_ATK_POISON		= 19, // ATK_POISON -- int
-		HeroPropertyValue_DEF_FIRE		= 20, // DEF_FIRE -- int
-		HeroPropertyValue_DEF_LIGHT		= 21, // DEF_LIGHT -- int
-		HeroPropertyValue_DEF_WIND		= 22, // DEF_WIND -- int
-		HeroPropertyValue_DEF_ICE		= 23, // DEF_ICE -- int
-		HeroPropertyValue_DEF_POISON		= 24, // DEF_POISON -- int
-		HeroPropertyValue_DIZZY_GATE		= 25, // DIZZY_GATE -- int
-		HeroPropertyValue_MOVE_GATE		= 26, // MOVE_GATE -- int
-		HeroPropertyValue_SKILL_GATE		= 27, // SKILL_GATE -- int
-		HeroPropertyValue_PHYSICAL_GATE		= 28, // PHYSICAL_GATE -- int
+		HeroPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		HeroPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		HeroPropertyValue_CRITICAL		= 2, // CRITICAL -- int
+		HeroPropertyValue_MAXHP		= 3, // MAXHP -- int
+		HeroPropertyValue_MAXMP		= 4, // MAXMP -- int
+		HeroPropertyValue_MAXSP		= 5, // MAXSP -- int
+		HeroPropertyValue_HPREGEN		= 6, // HPREGEN -- int
+		HeroPropertyValue_SPREGEN		= 7, // SPREGEN -- int
+		HeroPropertyValue_MPREGEN		= 8, // MPREGEN -- int
+		HeroPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
+		HeroPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
+		HeroPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		HeroPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
+		HeroPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
+		HeroPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		HeroPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
+		HeroPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
+		HeroPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
+		HeroPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
+		HeroPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		HeroPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
+		HeroPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
+		HeroPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
+		HeroPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		HeroPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
+		HeroPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
+		HeroPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		HeroPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
 
 	};
 
