@@ -67,7 +67,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
 			{
 				//hero
-				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID();
+				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
 				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
 				if (pHeroPropertyRecord)
 				{
