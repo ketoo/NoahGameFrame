@@ -105,7 +105,6 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const 
 	{
 		char szData[MAX_PATH] = { 0 };
 		sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
-		LogReceive(szData);
 
 		return;
 	}
@@ -316,7 +315,6 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
     {
         char szData[MAX_PATH] = { 0 };
         sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
-        LogReceive(szData);
 
         return false;
     }
