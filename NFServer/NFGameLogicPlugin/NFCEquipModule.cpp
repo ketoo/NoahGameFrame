@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+ï»¿// -------------------------------------------------------------------------
 //    @FileName         :    NFCEquipModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-06-11
@@ -23,7 +23,7 @@ bool NFCEquipModule::Shut()
 
 bool NFCEquipModule::Execute()
 {
-    //Î»ÖÃÄØ
+    //ÃŽÂ»Ã–ÃƒÃ„Ã˜
     return true;
 }
 
@@ -95,26 +95,9 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
         return false;
     }
  
-    if (RamdomSucess(nLevel, 100))
+    if (Ramdom(nLevel, 100))
     {
-        const int nAfterLevel = nLevel +1;
-        return SetEquipIntensifyLevel(self, xEquipID, nAfterLevel);
-    }
-    else
-    {
-        const int nIsDownLevel = m_pCommonConfigModule->GetAttributeInt("IntensifylevelToEquip", lexical_cast<std::string>(nLevel), "IsDownLevel");
-        if (nIsDownLevel > 0)
-        {
-            int nAfterLevel = nLevel - 1;
-            if (nAfterLevel < 0 )
-            {
-                nAfterLevel = 0;
-            }
-
-            return SetEquipIntensifyLevel(self, xEquipID, nAfterLevel);
-        }
-
-        return false;
+        return AddEquipIntensifyLevel(self, xEquipID);
     }
 
     return false;
@@ -150,10 +133,9 @@ bool NFCEquipModule::HoleToEquip( const NFGUID& self, const NFGUID& xEquipID )
         return false;
     }
 
-    if (RamdomSucess(nHoleCount, 10))
+    if (Ramdom(nHoleCount, 10))
     {
-        const int nAfterHoleCount = nHoleCount +1;
-        return SetEquipHoleCount(self, xEquipID, nAfterHoleCount);
+        return AddEquipHoleCount(self, xEquipID);
     }
 
     return true;
@@ -161,24 +143,30 @@ bool NFCEquipModule::HoleToEquip( const NFGUID& self, const NFGUID& xEquipID )
 
 bool NFCEquipModule::InlaystoneToEquip( const NFGUID& self, const NFGUID& xEquipID, const std::string& strStoneID, const int nHoleIndex )
 {
-    if (nHoleIndex < NFrame::Player::BagEquipList::BagEquipList_InlayStone1 || nHoleIndex > NFrame::Player::BagEquipList::BagEquipList_InlayStone10)
+	if (xEquipID.IsNull() || self.IsNull() || strStoneID.empty())
+	{
+		return false;
+	}
+
+	if (!m_pElementInfoModule->ExistElement(strStoneID))
+	{
+		return false;
+	}
+
+    if (nHoleIndex < NFrame::Player::BagEquipList::BagEquipList_InlayStone1
+		|| nHoleIndex > NFrame::Player::BagEquipList::BagEquipList_InlayStone10)
     {
         return false;
     }
 
     const int nHoleCount = GetEquipHoleCount(self, xEquipID);
-    if ( nHoleIndex > (NFrame::Player::BagEquipList::BagEquipList_InlayStone1 + nHoleCount))
-    {
-        return false;
-    }
-
-    const std::string& strIDCount = GetEquipInlayStoneID(self, xEquipID, (NFrame::Player::BagEquipList)nHoleIndex);
-    if (!strIDCount.empty())
+    if ((nHoleIndex - NFrame::Player::BagEquipList::BagEquipList_InlayStone1) <= nHoleCount)
     {
         return false;
     }
 
     const int nHoleID = nHoleIndex - NFrame::Player::BagEquipList::BagEquipList_InlayStone1 + 1;
+
     const int nCostMoney = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "CostMoney");
     const int nConstItemCount = m_pCommonConfigModule->GetAttributeInt("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItemCount");
     const std::string& strCostItemID = m_pCommonConfigModule->GetAttributeString("ElementlevelToEquip", lexical_cast<std::string>(nHoleID), "ConstItem");
@@ -248,10 +236,10 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
         return false;
     }
 
-    if (RamdomSucess(nElementLevel, 100))
+    if (Ramdom(nElementLevel, 100))
     {
         const int nAfterLevel = nElementLevel + 1;
-        return SetEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex, nAfterLevel);
+        return AddEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex);
     }
     else
     {
@@ -264,7 +252,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
                 nAfterLevel = 0;
             }
 
-            return SetEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex, nAfterLevel);
+            return AddEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex);
         }
 
         return false;
@@ -273,7 +261,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     return false;
 }
 
-bool NFCEquipModule::RamdomSucess( const int nNowLevel , const int nMaxLevel)
+bool NFCEquipModule::Ramdom( const int nNowLevel , const int nMaxLevel)
 {
     if (nNowLevel >= nMaxLevel)
     {
@@ -303,433 +291,351 @@ bool NFCEquipModule::RamdomSucess( const int nNowLevel , const int nMaxLevel)
     return false;
 }
 
-bool NFCEquipModule::WearEquip( const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget )
-{
-    if (self == xTareget)
-    {
-        //¸øÈË×°
-    }
-    else
-    {
-        //to do 
-        //ÓÐÃ»ÓÐ×°±¸¸ø±ðÈË
-        return DressEquipForHero(self, xTareget, xEquipID);
-    }
-
-    return true;
-}
-
-bool NFCEquipModule::TakeOffEquip( const NFGUID& self, const NFGUID& xEquipID, const NFGUID& xTareget )
-{
-    if (self == xTareget)
-    {
-        //¸øÈË×°,ÔÝÊ±²»Ö§³Ö
-        return false;
-    }
-    else
-    {
-        return TakeOffEquipForm(self, xTareget, xEquipID);
-    }
-
-    return true;
-}
-
 bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, const NFGUID& id)
 {
-    if (id.IsNull())
+	if (id.IsNull() || self.IsNull() || hero.IsNull())
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pBagRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pBagRecord)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
+	if (!pHeroRecord)
+	{
+		return false;
+	}
+
+	NFCDataList xEquipDataList;
+	pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xEquipDataList);
+	if (xEquipDataList.GetCount() != 1)
+	{
+		return false;
+	}
+
+	NFCDataList xHeroDataList;
+	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, id, xHeroDataList);
+	if (xHeroDataList.GetCount() != 1)
+	{
+		return false;
+	}
+
+	const int nEquipRow = xEquipDataList.Int(0);
+	const int nHeroRow = xHeroDataList.Int(0);
+	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList_ConfigID);
+	const int nEquipPos = m_pElementInfoModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
+
+    if (nEquipRow < 0
+		|| nHeroRow < 0
+		|| strEquipID.empty()
+		|| nEquipPos < 0
+		|| nEquipPos > (NFrame::Player::PlayerHero_Equip6 - NFrame::Player::PlayerHero_Equip1))
     {
-        return false;
+		return false;
     }
 
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return false;
-    }
-    
-    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pEquipRecord)
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
-    if (!pHeroRecord)
-    {
-        return false;
-    }
-
-    int nEquipRow = -1;
-    int nHeroRow = -1;
-    int nHeroEquipCol = -1;
-
-    for (int i = 0; i < pEquipRecord->GetRows(); ++i)
-    {
-        if (pEquipRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pEquipRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                nEquipRow = i;
-                break;
-            }
-        }
-    }
-
-    for (int i = 0; i < pHeroRecord->GetRows(); ++i)
-    {
-        if (pHeroRecord->IsUsed(i))
-        {
-            const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFrame::Player::PlayerHero_GUID);
-            if (xHeroID == hero)
-            {
-                for (int j = NFrame::Player::PlayerHero_Equip1; i <= NFrame::Player::PlayerHero_Equip6; ++j)
-                {
-                    const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
-                    if (xHeroEquip.IsNull())
-                    {
-                        nHeroRow = i;
-                        nHeroEquipCol = j;
-
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    if (nEquipRow >= 0 && nHeroRow >= 0)
-    {
-        //ÕÒµ½ÁË×°±¸,Ò²ÕÒµ½ÁËÓ¢ÐÛ--»¹Òª²é¿´×°±¸ÊÇÊ²Ã´ÀàÐÍ£¬È»ºó·ÅÊ²Ã´Î»ÖÃ
-        pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, id);
-        pEquipRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, hero);
-    }
+	//so there have any bind?
+	//hero, position
+	pHeroRecord->SetObject(nHeroRow, nEquipPos + NFrame::Player::PlayerHero_Equip1, id);
+	pBagRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, hero);
 
     return false;
 }
 
 bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, const NFGUID& id)
 {
-    if (id.IsNull())
-    {
-        return false;
-    }
+	if (id.IsNull() || self.IsNull() || hero.IsNull())
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pEquipRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pEquipRecord)
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIRecord> pBagRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pBagRecord)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
-    if (!pHeroRecord)
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_PlayerHero());
+	if (!pHeroRecord)
+	{
+		return false;
+	}
 
-    int nEquipRow = -1;
-    int nHeroRow = -1;
-    int nHeroEquipCol = -1;
+	NFCDataList xEquipDataList;
+	pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xEquipDataList);
+	if (xEquipDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pEquipRecord->GetRows(); ++i)
-    {
-        if (pEquipRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pEquipRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                nEquipRow = i;
-                break;
-            }
-        }
-    }
+	NFCDataList xHeroDataList;
+	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, id, xHeroDataList);
+	if (xHeroDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pHeroRecord->GetRows(); ++i)
-    {
-        if (pHeroRecord->IsUsed(i))
-        {
-            const NFGUID& xHeroID = pHeroRecord->GetObject(i, NFrame::Player::PlayerHero_GUID);
-            if (xHeroID == hero)
-            {
-                for (int j = NFrame::Player::PlayerHero_Equip1; i <= NFrame::Player::PlayerHero_Equip6; ++j)
-                {
-                    const NFGUID& xHeroEquip = pHeroRecord->GetObject(i, j);
-                    if (xHeroEquip == id)
-                    {
-                        nHeroRow = i;
-                        nHeroEquipCol = j;
+	const int nEquipRow = xEquipDataList.Int(0);
+	const int nHeroRow = xHeroDataList.Int(0);
+	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList_ConfigID);
+	const int nEquipPos = m_pElementInfoModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
 
-                        break;
-                    }
-                }
-            }
-        }
-    }
+	if (nEquipRow < 0
+		|| nHeroRow < 0
+		|| strEquipID.empty()
+		|| nEquipPos < 0
+		|| nEquipPos >(NFrame::Player::PlayerHero_Equip6 - NFrame::Player::PlayerHero_Equip1))
+	{
+		return false;
+	}
 
-    if (nEquipRow >= 0 && nHeroRow >= 0)
-    {
-        //ÕÒµ½ÁË×°±¸,Ò²ÕÒµ½ÁËÓ¢ÐÛ
-        //TODO:»¹Òª²é¿´×°±¸ÊÇÊ²Ã´ÀàÐÍ£¬È»ºó·ÅÊ²Ã´Î»ÖÃµÈÌõ¼þÅÐ¶Ï
-        //HeroºÍPackItem GUID»¥Ïà°ó¶¨
-        pHeroRecord->SetObject(nHeroRow, nHeroEquipCol, id);
-        pEquipRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, hero);
-    }
-
-    return false;
+	//so there have any bind?
+	//hero, position
+	pHeroRecord->SetObject(nHeroRow, nEquipPos + NFrame::Player::PlayerHero_Equip1, NFGUID());
+	pBagRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList_WearGUID, NFGUID());
 }
 
-int NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id, const std::string& strPropertyID)
+bool NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id, const std::string& strPropertyID)
 {
-    if (id.IsNull())
-    {
-        return 0;
-    }
+	if (id.IsNull() || self.IsNull() || strPropertyID.empty())
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return 0;
-    }
+	if (!m_pElementInfoModule->ExistElement(strPropertyID))
+	{
+		return false;
+	}
 
-    if (!m_pElementInfoModule->ExistElement(strPropertyID))
-    {
-        return 0;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return 0;
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                pRecord->SetString(i, NFrame::Player::BagEquipList_RandPropertyID, strPropertyID.c_str());
-            }
-        }
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    return 0;
+	const int nRow = xDataList.Int(0);
+	pRecord->SetString(nRow, NFrame::Player::BagEquipList_RandPropertyID, strPropertyID);
+
+	return true;
 }
 
-const std::string& NFCEquipModule::GetEquipRandPropertyID(const NFGUID& self, const NFGUID& id)
+bool NFCEquipModule::AddEquipHoleCount(const NFGUID& self, const NFGUID& id)
 {
-    if (id.IsNull())
-    {
-        return NULL_STR;
-    }
+	if (id.IsNull() || self.IsNull())
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return NULL_STR;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return NULL_STR;
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->GetString(i, NFrame::Player::BagEquipList_RandPropertyID);
-            }
-        }
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    return NULL_STR;
+	const int nRow = xDataList.Int(0);
+	const int nSoltCount = pRecord->GetInt(nRow, NFrame::Player::BagEquipList_SlotCount);
+	pRecord->SetInt(nRow, NFrame::Player::BagEquipList_SlotCount, nSoltCount + 1);
+
+	return true;
 }
 
-bool NFCEquipModule::SetEquipHoleCount(const NFGUID& self, const NFGUID& id, const int nCount)
+int NFCEquipModule::GetEquipHoleCount(const NFGUID & self, const NFGUID & id)
 {
-    if (nCount <= 0
-        || nCount > (NFrame::Player::BagEquipList_InlayStone10 - NFrame::Player::BagEquipList_InlayStone1))
-    {
-        return false;
-    }
+	if (id.IsNull() || self.IsNull())
+	{
+		return false;
+	}
 
-    if (id.IsNull())
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return false;
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                pRecord->SetInt(i, NFrame::Player::BagEquipList_SlotCount, nCount);
-                return true;
-            }
-        }
-    }
-
-    return false;
+	const int nRow = xDataList.Int(0);
+	return pRecord->GetInt(nRow, NFrame::Player::BagEquipList_SlotCount);
 }
 
-int NFCEquipModule::GetEquipHoleCount(const NFGUID& self, const NFGUID& id)
+bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strStoneID)
 {
-    if (id.IsNull())
-    {
-        return 0;
-    }
+	if (id.IsNull() || self.IsNull() || strStoneID.empty())
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return 0;
-    }
+	if (eIndex > NFrame::Player::BagEquipList_InlayStone10
+		|| eIndex < NFrame::Player::BagEquipList_InlayStone1)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return 0;
-    }
+	if (!m_pElementInfoModule->ExistElement(strStoneID))
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->GetInt(i, NFrame::Player::BagEquipList_SlotCount);
-            }
-        }
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    return 0;
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return false;
+	}
+
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
+
+	const int nRow = xDataList.Int(0);
+	const int nSoltCount = pRecord->GetInt(nRow, NFrame::Player::BagEquipList_SlotCount);
+	if ((eIndex - NFrame::Player::BagEquipList_InlayStone1) <= nSoltCount)
+	{
+		return false;
+	}
+
+	pRecord->SetString(nRow, eIndex, strStoneID);
+
+	return true;
 }
 
-bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID)
+bool NFCEquipModule::AddEquipIntensifyLevel(const NFGUID& self, const NFGUID& id)
 {
-    if (id.IsNull())
-    {
-        return false;
-    }
+	if (id.IsNull() || self.IsNull())
+	{
+		return false;
+	}
 
-    if (!m_pElementInfoModule->ExistElement(strPropertyID))
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return false;
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return false;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return false;
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->SetString(i, eIndex, strPropertyID.c_str());
-            }
-        }
-    }
+	const int nRow = xDataList.Int(0);
+	const int nLevel = pRecord->GetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel);
+	pRecord->SetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel, nLevel + 1);
 
-    return false;
+	return true;
 }
 
-const std::string& NFCEquipModule::GetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex)
+int NFCEquipModule::GetEquipIntensifyLevel(const NFGUID & self, const NFGUID & id)
 {
-    if (id.IsNull())
-    {
-        return NULL_STR;
-    }
+	if (id.IsNull() || self.IsNull())
+	{
+		return -1;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return NULL_STR;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return -1;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return NULL_STR;
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return -1;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->GetString(i, eIndex);
-            }
-        }
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return -1;
+	}
 
-    return NULL_STR;
+	const int nRow = xDataList.Int(0);
+	return pRecord->GetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel);
 }
 
-bool NFCEquipModule::SetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id, const int nLevel)
+bool NFCEquipModule::AddEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex)
 {
-    if (id.IsNull())
+    if (id.IsNull() || self.IsNull())
     {
         return false;
     }
 
-    if (nLevel <= 0)
-    {
-        return false;
-    }
+	if (eIndex > NFrame::Player::BagEquipList_ElementLevel5_POISON
+		|| eIndex < NFrame::Player::BagEquipList_ElementLevel1_FIRE)
+	{
+		return false;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
     if (NULL == pObject)
     {
@@ -742,134 +648,56 @@ bool NFCEquipModule::SetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id
         return false;
     }
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->SetInt(i, NFrame::Player::BagEquipList_IntensifyLevel, nLevel);
-            }
-        }
-    }
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return false;
+	}
 
-    return false;
+	const int nRow = xDataList.Int(0);
+	const int nLevel = GetEquipElementLevel(self, id, eIndex);
+	pRecord->SetInt(nRow, eIndex, nLevel + 1);
+
+    return true;
 }
 
-int NFCEquipModule::GetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id)
+int NFCEquipModule::GetEquipElementLevel(const NFGUID & self, const NFGUID & id, NFrame::Player::BagEquipList eIndex)
 {
-    if (id.IsNull())
-    {
-        return 0;
-    }
+	if (id.IsNull() || self.IsNull())
+	{
+		return -1;
+	}
 
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return 0;
-    }
+	if (eIndex > NFrame::Player::BagEquipList_ElementLevel5_POISON
+		|| eIndex < NFrame::Player::BagEquipList_ElementLevel1_FIRE)
+	{
+		return -1;
+	}
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return 0;
-    }
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+	if (NULL == pObject)
+	{
+		return -1;
+	}
 
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->GetInt(i, NFrame::Player::BagEquipList_IntensifyLevel);
-            }
-        }
-    }
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
+	if (!pRecord)
+	{
+		return -1;
+	}
 
-    return 0;
+	NFCDataList xDataList;
+	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
+	if (xDataList.GetCount() != 1)
+	{
+		return -1;
+	}
+
+	const int nRow = xDataList.Int(0);
+	return pRecord->GetInt(nRow, eIndex);
 }
 
-bool NFCEquipModule::SetEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const int nLevel)
-{
-    if (id.IsNull())
-    {
-        return false;
-    }
-
-    if (nLevel <= 0)
-    {
-        return false;
-    }
-
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return false;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return false;
-    }
-
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->SetInt(i, eIndex, nLevel);
-            }
-        }
-    }
-
-    return false;
-}
-
-int NFCEquipModule::GetEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex)
-{
-    if (id.IsNull())
-    {
-        return 0;
-    }
-
-    //É¾³ý3¸öµØ·½£¬±³°ü£¬Ó¢ÐÛ´©´÷£¬Íæ¼Ò´©´÷
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (NULL == pObject)
-    {
-        return 0;
-    }
-
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_BagEquipList());
-    if (!pRecord)
-    {
-        return 0;
-    }
-
-    for (int i = 0; i < pRecord->GetRows(); ++i)
-    {
-        if (pRecord->IsUsed(i))
-        {
-            const NFGUID& xID = pRecord->GetObject(i, NFrame::Player::BagEquipList_GUID);
-            if (xID == id)
-            {
-                //¿´ÊÇÍæ¼Ò×°±¸£¬»¹ÊÇÓ¢ÐÛ×°±¸
-                return pRecord->GetInt(i, eIndex);
-            }
-        }
-    }
-
-    return 0;
-}
 //////////////////////////////////////////////////////////////////////////
 //msg process
 void NFCEquipModule::OnIntensifylevelToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
@@ -954,7 +782,7 @@ void NFCEquipModule::OnReqWearEquipMsg( const int nSockIndex, const int nMsgID, 
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
 	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
 
-	WearEquip(self, xEquipID, xTarget);
+	DressEquipForHero(self, xTarget, xEquipID);
 }
 
 void NFCEquipModule::OnTakeOffEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
@@ -964,5 +792,5 @@ void NFCEquipModule::OnTakeOffEquipMsg( const int nSockIndex, const int nMsgID, 
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
 	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
 
-	TakeOffEquip(self, xEquipID, xTarget);
+	TakeOffEquipForm(self, xTarget, xEquipID);
 }
