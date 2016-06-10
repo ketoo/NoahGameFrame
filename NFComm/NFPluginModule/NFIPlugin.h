@@ -24,6 +24,17 @@
 #define UNREGISTER_MODULE(pManager, className) NFILogicModule* pUnRegisterModule##className =  \
         dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); RemoveElement( (#className) ); delete pUnRegisterModule##className;
 
+#define REGISTER_MODULEEX(pManager, classBaseName, className)  \
+	assert((TIsDerived<classBaseName, NFILogicModule>::Result));	\
+	assert((TIsDerived<className, classBaseName>::Result));	\
+	NFILogicModule* pRegisterModule##className= new className(pManager); \
+    pRegisterModule##className->strName = (#className); \
+    pManager->AddModule( (#classBaseName), pRegisterModule##className );AddElement( (#classBaseName), pRegisterModule##className );
+
+#define UNREGISTER_MODULEEX(pManager, classBaseName, className) NFILogicModule* pUnRegisterModule##className =  \
+       dynamic_cast<NFILogicModule*>( pManager->FindModule( (#classBaseName) ) ); pManager->RemoveModule( (#classBaseName) ); RemoveElement( (#classBaseName) ); delete pUnRegisterModule##className;
+
+
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
 
 #define DESTROY_PLUGIN(pManager, className) pManager->UnRegistered( pManager->FindPlugin((#className)) );
