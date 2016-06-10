@@ -31,7 +31,6 @@ public:
         {
             if (!TIsDerived<T, NFILogicModule>::Result)
             {
-                //BaseTypeComponent must inherit from NFIComponent;
                 return NULL;
             }
 
@@ -40,7 +39,22 @@ public:
 
         return NULL;
     }
+	template <typename T>
+	T* FindModule()
+	{
+		NFILogicModule* pLogicModule = FindModule(typeid(T).name());
+		if (pLogicModule)
+		{
+			if (!TIsDerived<T, NFILogicModule>::Result)
+			{
+				return NULL;
+			}
 
+			return dynamic_cast<T*>(pLogicModule);
+		}
+
+		return NULL;
+	}
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;
