@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCElementInfoModule.h
+//    @FileName			:    NFCElementModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCElementInfoModule
+//    @Module           :    NFCElementModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_ELEMENTINFO_MODULE_H
-#define NFC_ELEMENTINFO_MODULE_H
+#ifndef NFC_ELEMENT_MODULE_H
+#define NFC_ELEMENT_MODULE_H
 
 #include <map>
 #include <string>
@@ -23,7 +23,7 @@
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
 #include "NFComm/NFCore/NFCComponentManager.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 
 class NFCLogicClass;
@@ -65,13 +65,13 @@ protected:
     NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 };
 
-class NFCElementInfoModule
-    : public NFIElementInfoModule,
+class NFCElementModule
+    : public NFIElementModule,
       NFMapEx<std::string, ElementConfigInfo>
 {
 public:
-    NFCElementInfoModule(NFIPluginManager* p);
-    virtual ~NFCElementInfoModule();
+    NFCElementModule(NFIPluginManager* p);
+    virtual ~NFCElementModule();
 
     virtual bool Init();
     virtual bool Shut();

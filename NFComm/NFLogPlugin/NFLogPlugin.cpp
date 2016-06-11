@@ -31,12 +31,12 @@ const std::string NFLogPlugin::GetPluginName()
     return GET_CLASS_NAME(NFLogPlugin)
 }
 
-       void NFLogPlugin::Install()
+void NFLogPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCLogModule)
+    REGISTER_MODULE(pPluginManager, NFILogModule, NFCLogModule)
 }
 
 void NFLogPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCLogModule)
+    UNREGISTER_MODULE(pPluginManager, NFILogModule, NFCLogModule)
 }

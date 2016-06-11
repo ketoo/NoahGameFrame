@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFIElementInfoModule.h
+//    @FileName         :    NFIElementModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIElementInfoModule
+//    @Module           :    NFIElementModule
 //
 // -------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
-class NFIElementInfoModule
+class NFIElementModule
     : public NFILogicModule
 {
 public:
