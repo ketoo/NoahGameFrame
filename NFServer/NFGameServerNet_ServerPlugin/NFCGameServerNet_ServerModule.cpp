@@ -18,22 +18,13 @@ bool NFCGameServerNet_ServerModule::Init()
 
 bool NFCGameServerNet_ServerModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
-
-
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pSceneProcessModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pLogModule);
-	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pGameServerToWorldModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess);
@@ -66,15 +57,15 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 		std::string strConfigName;
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+			const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
 			if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->AppID() == nServerID)
 			{
-				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-				const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-				const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+				const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+				const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+				const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)

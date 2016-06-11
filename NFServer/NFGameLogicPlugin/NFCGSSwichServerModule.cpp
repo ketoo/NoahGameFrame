@@ -26,27 +26,16 @@ bool NFCGSSwichServerModule::Execute()
 
 bool NFCGSSwichServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>("NFCGameServerToWorldModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert(NULL != m_pGameServerToWorldModule);
-	assert(NULL != m_pGameServerNet_ServerModule);
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSceneProcessModule );
-    assert( NULL != m_pPropertyModule );
-	assert( NULL != m_pLogModule );
-    assert(NULL != m_pLevelModule);
-    assert(NULL != m_pPackModule);
-    assert(NULL != m_pHeroModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
 	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }

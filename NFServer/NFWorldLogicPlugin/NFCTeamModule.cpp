@@ -33,21 +33,13 @@ bool NFCTeamModule::Execute()
 
 bool NFCTeamModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>("NFCCommonRedisModule");
-    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
-	m_pWorldNet_ServerModule = dynamic_cast<NFIWorldNet_ServerModule*>(pPluginManager->FindModule("NFCWorldNet_ServerModule"));
-	m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-    m_pPlayerRedisModule = dynamic_cast<NFIPlayerRedisModule*>(pPluginManager->FindModule("NFCPlayerRedisModule"));
-
-	assert(NULL != m_pWorldNet_ServerModule);
-	assert(NULL != m_pLogModule);
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pUUIDModule);
-    assert(NULL != m_pCommonRedisModule);
-    assert(NULL != m_pMysqlModule);
-    assert(NULL != m_pPlayerRedisModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 
 	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)) { return false; }
 	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)) { return false; }

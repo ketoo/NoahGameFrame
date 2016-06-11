@@ -33,21 +33,13 @@ bool NFCSLGShopModule::Execute()
 
 bool NFCSLGShopModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
-    m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>("NFCSLGBuildingModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pPackModule);
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pLogModule );
-    assert(NULL != m_pSLGBuildingModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pPropertyModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pSLGBuildingModule = pPluginManager->FindModule<NFISLGBuildingModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_BUY_FORM_SHOP, this, &NFCSLGShopModule::OnSLGClienBuyItem))
 	{
@@ -59,40 +51,40 @@ bool NFCSLGShopModule::AfterInit()
 
 bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ)
 {
-    if (!m_pElementInfoModule->ExistElement(strID))
+    if (!m_pElementModule->ExistElement(strID))
     {
         return false;
     }
 
-    int nNeedLevel = m_pElementInfoModule->GetPropertyInt(strID, "Level");
+    int nNeedLevel = m_pElementModule->GetPropertyInt(strID, "Level");
     if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level()) < nNeedLevel)
     {
         return false;
     }
 
     //¿Û³ý»õ±Ò
-    int nGold = m_pElementInfoModule->GetPropertyInt(strID, "Gold");
+    int nGold = m_pElementModule->GetPropertyInt(strID, "Gold");
     if (!m_pPropertyModule->ConsumeMoney(self, nGold))
     {
         return false;
     }
 
-//     int nSteel = m_pElementInfoModule->GetPropertyInt(strID, "Steel");
-//     int nStone = m_pElementInfoModule->GetPropertyInt(strID, "Stone");
+//     int nSteel = m_pElementModule->GetPropertyInt(strID, "Steel");
+//     int nStone = m_pElementModule->GetPropertyInt(strID, "Stone");
 
-    int nDiamond = m_pElementInfoModule->GetPropertyInt(strID, "Diamond");
+    int nDiamond = m_pElementModule->GetPropertyInt(strID, "Diamond");
     if (!m_pPropertyModule->ConsumeDiamond(self, nGold))
     {
         return false;
     }
 
-	const std::string strItem = m_pElementInfoModule->GetPropertyString(strID, "ItemID");
-	if (!m_pElementInfoModule->ExistElement(strItem))
+	const std::string strItem = m_pElementModule->GetPropertyString(strID, "ItemID");
+	if (!m_pElementModule->ExistElement(strItem))
 	{
 		return false;
 	}
 
-    const int nShopType = m_pElementInfoModule->GetPropertyInt(strID, "Type");
+    const int nShopType = m_pElementModule->GetPropertyInt(strID, "Type");
     switch (nShopType)
     {
         case NFMsg::EShopType::EST_GOLD:
@@ -109,7 +101,7 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
         break;
         default:
         {
-            const int nItemType = m_pElementInfoModule->GetPropertyInt(strItem, "Type");
+            const int nItemType = m_pElementModule->GetPropertyInt(strItem, "Type");
             if (nItemType == NFMsg::EItemType::EIT_EQUIP)
             {
                 m_pPackModule->CreateEquip(self, strItem);

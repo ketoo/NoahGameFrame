@@ -17,7 +17,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFCMasterNet_ServerModule
     : public NFIMasterNet_ServerModule
@@ -80,7 +80,7 @@ private:
     NFMapEx<int, ServerData> mLoginMap;
 
 
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

@@ -28,13 +28,9 @@ std::string NFCCommonRedisModule::GetRecordCacheKey(const std::string& strClassN
 
 bool NFCCommonRedisModule::AfterInit()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
-    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>("NFCCommonRedisModule");
-
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pNoSqlModule);
-    assert(NULL != m_pCommonRedisModule);
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 
     return true;
 }

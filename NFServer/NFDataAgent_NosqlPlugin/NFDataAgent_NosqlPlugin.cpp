@@ -42,20 +42,20 @@ const std::string NFDataAgent_NosqlPlugin::GetPluginName()
 
 void NFDataAgent_NosqlPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFCRankRedisModule)
-	REGISTER_MODULE(pPluginManager, NFCPlayerRedisModule)
-	REGISTER_MODULE(pPluginManager, NFCGuildRedisModule)
-    REGISTER_MODULE(pPluginManager, NFCBigMapRedisModule)
-	REGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
-	REGISTER_MODULE(pPluginManager, NFCMailRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFCRankRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFCPlayerRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFCGuildRedisModule)
+    REGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFCBigMapRedisModule)
+	REGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCCommonRedisModule)
+	REGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFCMailRedisModule)
 }
 
 void NFDataAgent_NosqlPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFCMailRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFCCommonRedisModule)
-    UNREGISTER_MODULE(pPluginManager, NFCBigMapRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFCGuildRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFCPlayerRedisModule)
-	UNREGISTER_MODULE(pPluginManager, NFCRankRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIMailRedisModule, NFCMailRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFICommonRedisModule, NFCCommonRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIBigMapRedisModule, NFCBigMapRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIGuildRedisModule, NFCGuildRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPlayerRedisModule, NFCPlayerRedisModule)
+	UNREGISTER_MODULE(pPluginManager, NFIRankRedisModule, NFCRankRedisModule)
 }

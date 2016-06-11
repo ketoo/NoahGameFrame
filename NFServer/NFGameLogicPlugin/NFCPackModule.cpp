@@ -27,19 +27,12 @@ bool NFCPackModule::Execute()
 
 bool NFCPackModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSceneProcessModule );
-    assert( NULL != m_pPropertyModule );
-    assert( NULL != m_pLogModule );
-    assert( NULL != m_pUUIDModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
     m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPackModule::OnClassObjectEvent );
@@ -57,7 +50,7 @@ bool NFCPackModule::AfterInit()
 //     }
 // 
 //     //还得确定有这个装备
-//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strConfigName );
+//     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( strConfigName );
 //     if ( NULL == pPropertyManager )
 //     {
 //         return NULL_OBJECT;
@@ -275,13 +268,13 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 	}
 
 	//还得确定有这个装备
-	bool bExist = m_pElementInfoModule->ExistElement( strConfigName );
+	bool bExist = m_pElementModule->ExistElement( strConfigName );
 	if ( !bExist )
 	{
 		return NULL_OBJECT;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
+	int nItemType = m_pElementModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
 	{
 		return NULL_OBJECT;
@@ -325,13 +318,13 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 
 	//还得确定有这个装备
-	bool bExist = m_pElementInfoModule->ExistElement( strConfigName );
+	bool bExist = m_pElementModule->ExistElement( strConfigName );
 	if ( !bExist )
 	{
 		return 0;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
+	int nItemType = m_pElementModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
     PackTableType eBagType = GetPackBagType(nItemType);
     if (eBagType != PackTableType::BagItemPack)
     {
@@ -410,13 +403,13 @@ int NFCPackModule::FindItemRowByConfig( const NFGUID& self, const std::string& s
 	}
 
 	//还得确定有这个装备
-	bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
+	bool bExist = m_pElementModule->ExistElement( strItemConfigID );
 	if ( !bExist )
 	{
 		return -1;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
+	int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
     PackTableType eBagType = GetPackBagType(nItemType);
     if (eBagType != PackTableType::BagItemPack)
     {
@@ -502,12 +495,12 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 	}
 
 	//还得确定有这个装备
-	if (!m_pElementInfoModule->ExistElement(strItemConfigID))
+	if (!m_pElementModule->ExistElement(strItemConfigID))
 	{
 		return false;
 	}
 
-	int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
+	int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
     PackTableType eBagType = GetPackBagType(nItemType);
     if (eBagType != PackTableType::BagItemPack)
     {
@@ -559,13 +552,13 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
     }
 
     //还得确定有这个装备
-    bool bExist = m_pElementInfoModule->ExistElement( strItemConfigID );
+    bool bExist = m_pElementModule->ExistElement( strItemConfigID );
     if ( !bExist )
     {
         return false;
     }
 
-    int nItemType = m_pElementInfoModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
+    int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
     PackTableType eBagType = GetPackBagType(nItemType);
     if (eBagType != PackTableType::BagItemPack)
     {

@@ -26,20 +26,20 @@ bool NFCTaskModule::Execute()
 
 bool NFCTaskModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>( "NFCHeroModule" );
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>( "NFCCommonConfigModule" );
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	assert( NULL != m_pKernelModule );
 	assert( NULL != m_pItemConsumeManagerModule );
 	assert( NULL != m_pPackModule );
-	assert( NULL != m_pElementInfoModule );
+	assert( NULL != m_pElementModule );
 	assert(	NULL != m_pLogicClassModule);
 	assert(	NULL != m_pPropertyModule);
 	assert(	NULL != m_pHeroModule);

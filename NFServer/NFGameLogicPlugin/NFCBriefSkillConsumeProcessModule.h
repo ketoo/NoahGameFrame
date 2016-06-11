@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
@@ -50,7 +50,7 @@ private:
     NFISkillModule* m_pSkillModule;
     NFIPropertyModule* m_pPropertyModule;
     NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
 };
 
 #endif

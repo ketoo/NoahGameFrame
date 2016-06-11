@@ -31,17 +31,11 @@ bool NFCGuildDataModule::Execute()
 
 bool NFCGuildDataModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>("NFCMysqlModule");
-    m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>("NFCPlayerMysqlModule");
-    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pUUIDModule);
-    assert(NULL != m_pMysqlModule);
-    assert(NULL != m_pPlayerMysqlModule);
-    assert(NULL != m_pCommonConfigModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
+    m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>();
+    m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 
     m_pPlayerMysqlModule->RegisterAutoSave(NFrame::Guild::ThisName());
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildDataModule::OnGuildClassEvent);

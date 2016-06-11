@@ -31,16 +31,10 @@ bool NFCGuildRedisModule::Execute()
 
 bool NFCGuildRedisModule::AfterInit()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
-    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>("NFCCommonRedisModule");
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pNoSqlModule);
-    assert(NULL != m_pCommonRedisModule);
-    assert(NULL != m_pKernelModule);
-
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildRedisModule::OnObjectClassEvent);
     return true;

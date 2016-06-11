@@ -23,22 +23,6 @@ public:
 
     }
 
-    template <typename T>
-    T* FindModule(const std::string& strModuleName)
-    {
-        NFILogicModule* pLogicModule = FindModule(strModuleName);
-        if (pLogicModule)
-        {
-            if (!TIsDerived<T, NFILogicModule>::Result)
-            {
-                return NULL;
-            }
-
-            return dynamic_cast<T*>(pLogicModule);
-        }
-
-        return NULL;
-    }
 	template <typename T>
 	T* FindModule()
 	{
@@ -50,7 +34,10 @@ public:
 				return NULL;
 			}
 
-			return dynamic_cast<T*>(pLogicModule);
+			T* pT = dynamic_cast<T*>(pLogicModule);
+			assert(NULL != pT);
+
+			return pT;
 		}
 
 		return NULL;

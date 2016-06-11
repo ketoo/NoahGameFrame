@@ -106,35 +106,9 @@ int NFCRecord::AddRow(const int nRow)
     return AddRow(nRow, *mVarRecordType);
 }
 
-bool ValidSet(TDATA_TYPE eType, const NFIDataList::TData& var, NF_SHARE_PTR<NFIDataList::TData>& pVar)
-{
-    if (var.GetType() != eType)
-    {
-        return false;
-    }
-
-    if (nullptr == pVar)
-    {
-        pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(eType));
-    }
-
-    if (pVar->GetType() != eType)
-    {
-        return false;
-    }
-
-    if (pVar->variantData == var.variantData)
-    {
-        return false;
-    }
-
-    pVar->variantData = var.variantData;
-
-    return true;
-}
-
 int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 {
+	bool bCover = false;
     int nFindRow = nRow;
     if (nFindRow >= mnMaxRow)
     {
@@ -157,6 +131,13 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
             }
         }
     }
+	else
+	{
+		if (IsUsed(nFindRow))
+	    {
+	        bCover = true;
+	    }		
+	}
 
     if (nFindRow < 0)
     {
@@ -171,30 +152,24 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
         }
     }
 
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Add;
-    xEventData.nRow = nFindRow;
-    xEventData.nCol = 0;
-    xEventData.strRecordName = mstrRecordName;
-
-    if (IsUsed(nFindRow))
-    {
-        //delete
-        xEventData.nOpType = Cover;
-    }
-
     SetUsed(nFindRow, 1);
 
     for (int i = 0; i < GetCols(); ++i)
     {
-		//pVar 找出来的不一定有效
-        NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));
-        if (!ValidSet(GetColType(i), *(var.GetStack(i)), pVar))
-        {
-            //添加失败--不存在这样的情况，因为类型上面已经监测过，如果返回的话，那么添加的数据是0的话就会返回，导致结果错误
-			return -1;
-        }
+        NF_SHARE_PTR<NFIDataList::TData> pVar = mtRecordVec.at(GetPos(nFindRow, i));
+		if (nullptr == pVar)
+		{
+			pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(var.Type(i)));
+		}
+
+		pVar->variantData = var.GetStack(i)->variantData;
     }
+
+	RECORD_EVENT_DATA xEventData;
+	xEventData.nOpType = bCover? Cover : Add;
+	xEventData.nRow = nFindRow;
+	xEventData.nCol = 0;
+	xEventData.strRecordName = mstrRecordName;
 
     NFIDataList::TData tData;
     OnEventHandler(mSelf, xEventData, tData, tData); //FIXME:RECORD

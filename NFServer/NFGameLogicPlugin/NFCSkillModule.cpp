@@ -30,21 +30,13 @@ bool NFCSkillModule::Execute()
 
 bool NFCSkillModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert(NULL != m_pGameServerNet_ServerModule);
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pSkillConsumeManagerModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pLogModule );
-    assert( NULL != m_pPropertyModule );
-    assert( NULL != m_pSceneProcessModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
     m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
@@ -100,7 +92,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //    return 1;
     //}
 
-    //NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.String( 2 ) );
+    //NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( var.String( 2 ) );
     //if ( pPropertyManager == NULL )
     //{
     //    return 1;
@@ -115,7 +107,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //配置表中真的有这么个技能类别
     //EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
 
-    if (!m_pElementInfoModule->ExistElement(strSkillID))
+    if (!m_pElementModule->ExistElement(strSkillID))
     {
         return 1;
     }
@@ -184,7 +176,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEvent
     //    return 1;
     //}
 
-    //NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( var.String( 2 ) );
+    //NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( var.String( 2 ) );
     //if ( pPropertyManager == NULL )
     //{
     //    return 1;
@@ -271,7 +263,7 @@ int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const int nEv
 
 int NFCSkillModule::AddSkill( const NFGUID& self, const std::string& strSkillName )
 {
-    if(m_pElementInfoModule->ExistElement(strSkillName))
+    if(m_pElementModule->ExistElement(strSkillName))
     {
         if ( ExistSkill( self, strSkillName ) < 0 )
         {

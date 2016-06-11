@@ -56,9 +56,7 @@ bool NFCUrlClientModule::Execute()
 
 bool NFCUrlClientModule::AfterInit()
 {
-    m_pUrlCodeModule = pPluginManager->FindModule<NFIUrlCodeModule>("NFCUrlCodeModule");
-
-    assert(NULL != m_pUrlCodeModule);
+    m_pUrlCodeModule = pPluginManager->FindModule<NFIUrlCodeModule>();
 
     if (!mbInitCurl)
     {

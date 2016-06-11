@@ -13,7 +13,7 @@
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -46,7 +46,7 @@ private:
     NFILogModule* m_pLogModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
     NFIPackModule* m_pPackModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFIHeroModule* m_pHeroModule;
 };
 

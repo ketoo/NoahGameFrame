@@ -33,19 +33,13 @@ bool NFCGuildModule::Execute()
 
 bool NFCGuildModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-    m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>("NFCGuildDataModule");
-	m_pGameServerNet_ServerModule = dynamic_cast<NFIGameServerNet_ServerModule*>(pPluginManager->FindModule("NFCGameServerNet_ServerModule"));
-    m_pLogModule = dynamic_cast<NFILogModule*>(pPluginManager->FindModule("NFCLogModule"));
-    m_pGameServerToWorldModule = dynamic_cast<NFIGameServerToWorldModule*>(pPluginManager->FindModule("NFCGameServerToWorldModule"));
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+    m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
     
-	assert(NULL != m_pGameServerNet_ServerModule);
-	assert(NULL != m_pLogModule);
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pUUIDModule);
-    assert(NULL != m_pGuildDataModule);
-    assert(NULL != m_pGameServerToWorldModule);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGuildModule::OnPlayerClassEvent);
 

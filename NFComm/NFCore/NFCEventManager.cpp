@@ -42,8 +42,6 @@ bool NFCEventManager::AddEventCallBack(const int nEventID, const EVENT_PROCESS_F
         mObjectEventInfoMapEx.AddElement(nEventID, pEventInfo);
     }
 
-    assert(nullptr != pEventInfo);
-
     pEventInfo->Add(cb);
 
     return true;

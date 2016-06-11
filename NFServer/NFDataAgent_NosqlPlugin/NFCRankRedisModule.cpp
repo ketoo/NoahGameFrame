@@ -29,9 +29,7 @@ bool NFCRankRedisModule::Execute()
 
 bool NFCRankRedisModule::AfterInit()
 {
-	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
-
-	assert(NULL != m_pNoSqlModule);
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 
 	return true;
 }

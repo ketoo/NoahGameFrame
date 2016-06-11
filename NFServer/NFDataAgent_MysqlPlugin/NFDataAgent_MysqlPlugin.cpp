@@ -36,10 +36,10 @@ const std::string NFDataAgent_MysqlPlugin::GetPluginName()
 
 void NFDataAgent_MysqlPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCPlayerMysqlModule)
+    REGISTER_MODULE(pPluginManager, NFIPlayerMysqlModule, NFCPlayerMysqlModule)
 }
 
 void NFDataAgent_MysqlPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCPlayerMysqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFIPlayerMysqlModule, NFCPlayerMysqlModule)
 }

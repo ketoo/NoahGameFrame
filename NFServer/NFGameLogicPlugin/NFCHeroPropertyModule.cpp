@@ -17,19 +17,12 @@ bool NFCHeroPropertyModule::Execute()
 
 bool NFCHeroPropertyModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>("NFCEquipPropertyModule");
-	
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pGameServerNet_ServerModule);
-	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pEquipPropertyModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroPropertyModule::OnPlayerClassEvent);
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroPropertyModule::OnNPCClassEvent);
@@ -246,13 +239,13 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 	xDataList.Clear();
 
 	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::PlayerHero_ConfigID);
-	const std::string& strPropertyEffectData = m_pElementInfoModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
+	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
 		for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
 		{
 			const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
-			int nValue = m_pElementInfoModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			int nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 			xDataList.AddInt(nValue);
 		}
 	}
@@ -293,14 +286,14 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 	for (int i = NFrame::Player::PlayerHero_Talent1; i <= NFrame::Player::PlayerHero_Talent5; ++i)
 	{
 		const std::string& strTalentID = pHeroRecord->GetString(nRow, i);
-		const std::string& strTalentEffectData = m_pElementInfoModule->GetPropertyString(strTalentID, NFrame::Talent::EffectData());
+		const std::string& strTalentEffectData = m_pElementModule->GetPropertyString(strTalentID, NFrame::Talent::EffectData());
 		if (!strTalentEffectData.empty())
 		{
 			//one talent
 			for (int j = 0; j < pHeroPropertyRecord->GetCols(); ++j)
 			{
 				const std::string& strColTag = pHeroPropertyRecord->GetColTag(j);
-				int nValue = m_pElementInfoModule->GetPropertyInt(strTalentEffectData, strColTag);
+				int nValue = m_pElementModule->GetPropertyInt(strTalentEffectData, strColTag);
 				int nOldValue = xDataList.Int(j);
 
 				xDataList.SetInt(j, nOldValue + nValue);
