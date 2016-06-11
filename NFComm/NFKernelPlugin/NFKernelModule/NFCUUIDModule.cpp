@@ -105,7 +105,6 @@ NFCUUIDModule::NFCUUIDModule(NFIPluginManager* p)
 bool NFCUUIDModule::Init()
 {
     m_pUUID = NF_NEW UUIDModule::UUID;
-    assert(NULL != m_pUUID);
 
     return true;
 }
@@ -125,8 +124,7 @@ bool NFCUUIDModule::BeforeShut()
 
 bool NFCUUIDModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    assert(NULL != m_pKernelModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
     // 初始化uuid
     NFINT32 nID = GetIdentID();

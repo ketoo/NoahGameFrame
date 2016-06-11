@@ -17,22 +17,15 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#define REGISTER_MODULE(pManager, className)  NFILogicModule* pRegisterModule##className= new className(pManager); \
-    pRegisterModule##className->strName = (#className); \
-    pManager->AddModule( (#className), pRegisterModule##className );AddElement( (#className), pRegisterModule##className );
-
-#define UNREGISTER_MODULE(pManager, className) NFILogicModule* pUnRegisterModule##className =  \
-        dynamic_cast<NFILogicModule*>( pManager->FindModule( (#className) ) ); pManager->RemoveModule( (#className) ); RemoveElement( (#className) ); delete pUnRegisterModule##className;
-
-#define REGISTER_MODULEEX(pManager, classBaseName, className)  \
+#define REGISTER_MODULE(pManager, classBaseName, className)  \
 	assert((TIsDerived<classBaseName, NFILogicModule>::Result));	\
 	assert((TIsDerived<className, classBaseName>::Result));	\
 	NFILogicModule* pRegisterModule##className= new className(pManager); \
     pRegisterModule##className->strName = (#className); \
-    pManager->AddModule( (#classBaseName), pRegisterModule##className );AddElement( (#classBaseName), pRegisterModule##className );
+    pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );AddElement( typeid(classBaseName).name(), pRegisterModule##className );
 
-#define UNREGISTER_MODULEEX(pManager, classBaseName, className) NFILogicModule* pUnRegisterModule##className =  \
-       dynamic_cast<NFILogicModule*>( pManager->FindModule( (#classBaseName) ) ); pManager->RemoveModule( (#classBaseName) ); RemoveElement( (#classBaseName) ); delete pUnRegisterModule##className;
+#define UNREGISTER_MODULE(pManager, classBaseName, className) NFILogicModule* pUnRegisterModule##className =  \
+       dynamic_cast<NFILogicModule*>( pManager->FindModule( typeid(classBaseName).name() )); pManager->RemoveModule( typeid(classBaseName).name() ); RemoveElement( typeid(classBaseName).name() ); delete pUnRegisterModule##className;
 
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );

@@ -133,7 +133,10 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
     }
 	else
 	{
-		bCover = true;
+		if (IsUsed(nFindRow))
+	    {
+	        bCover = true;
+	    }		
 	}
 
     if (nFindRow < 0)

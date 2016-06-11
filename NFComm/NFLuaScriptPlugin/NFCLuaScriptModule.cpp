@@ -24,15 +24,11 @@ bool NFCLuaScriptModule::Init()
 {
     mnTime = pPluginManager->GetNowTime();
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pElementInfoModule);
-
-    Regisger();
+	Regisger();
 
     TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
 
@@ -273,15 +269,15 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
     .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
     .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFILogicClassModule>)
-    .addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementInfoModule>)
+    .addFunction("FindElementModule", &NFIPluginManager::FindModule<NFIElementModule>)
 	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFIElementInfoModule>("NFIElementInfoModule")
-    .addFunction("ExistElement", (bool (NFIElementInfoModule::*)(const std::string&))&NFIElementInfoModule::ExistElement)
-    .addFunction("GetPropertyInt", &NFIElementInfoModule::GetPropertyInt)
-    .addFunction("GetPropertyFloat", &NFIElementInfoModule::GetPropertyFloat)
-    .addFunction("GetPropertyString", &NFIElementInfoModule::GetPropertyString)
+    LuaIntf::LuaBinding(l).beginClass<NFIElementModule>("NFIElementModule")
+    .addFunction("ExistElement", (bool (NFIElementModule::*)(const std::string&))&NFIElementModule::ExistElement)
+    .addFunction("GetPropertyInt", &NFIElementModule::GetPropertyInt)
+    .addFunction("GetPropertyFloat", &NFIElementModule::GetPropertyFloat)
+    .addFunction("GetPropertyString", &NFIElementModule::GetPropertyString)
     .endClass();
 
     LuaIntf::LuaBinding(l).beginClass<NFIKernelModule>("NFIKernelModule")
