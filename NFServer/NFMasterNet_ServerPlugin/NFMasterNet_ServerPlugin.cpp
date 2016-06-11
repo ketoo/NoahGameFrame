@@ -34,12 +34,12 @@ const std::string NFMasterNet_ServerPlugin::GetPluginName()
     return GET_CLASS_NAME(NFMasterNet_ServerPlugin)
 }
 
-       void NFMasterNet_ServerPlugin::Install()
+void NFMasterNet_ServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCMasterNet_ServerModule)
+    REGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFCMasterNet_ServerModule)
 }
 
 void NFMasterNet_ServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCMasterNet_ServerModule)
+    UNREGISTER_MODULE(pPluginManager, NFIMasterNet_ServerModule, NFCMasterNet_ServerModule)
 }

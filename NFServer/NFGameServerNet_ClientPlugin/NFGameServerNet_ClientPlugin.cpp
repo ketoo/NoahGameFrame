@@ -38,13 +38,13 @@ const std::string NFGameServerNet_ClientPlugin::GetPluginName()
     return GET_CLASS_NAME(NFGameServerNet_ClientPlugin)
 }
 
-       void NFGameServerNet_ClientPlugin::Install()
+void NFGameServerNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCGameServerToWorldModule)
+    REGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFCGameServerToWorldModule)
 
 }
 
 void NFGameServerNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager,  NFCGameServerToWorldModule)
+    UNREGISTER_MODULE(pPluginManager, NFIGameServerToWorldModule, NFCGameServerToWorldModule)
 }

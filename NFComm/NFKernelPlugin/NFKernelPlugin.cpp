@@ -37,14 +37,14 @@ const std::string NFKernelPlugin::GetPluginName()
 
 void NFKernelPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCUUIDModule)
-    REGISTER_MODULE(pPluginManager, NFCSceneModule)
-    REGISTER_MODULE(pPluginManager, NFCKernelModule)
+    REGISTER_MODULE(pPluginManager, NFIUUIDModule, NFCUUIDModule)
+    REGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
+    REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 }
 
 void NFKernelPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCKernelModule)
-    UNREGISTER_MODULE(pPluginManager, NFCSceneModule)
-    UNREGISTER_MODULE(pPluginManager, NFCUUIDModule)
+    UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
+    UNREGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
+    UNREGISTER_MODULE(pPluginManager, NFIUUIDModule, NFCUUIDModule)
 }
