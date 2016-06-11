@@ -35,10 +35,10 @@ const std::string NFWorldNet_ClientPlugin::GetPluginName()
 
 void NFWorldNet_ClientPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCWorldToMasterModule)
+    REGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFCWorldToMasterModule)
 }
 
 void NFWorldNet_ClientPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCWorldToMasterModule)
+    UNREGISTER_MODULE(pPluginManager, NFIWorldToMasterModule, NFCWorldToMasterModule)
 }
