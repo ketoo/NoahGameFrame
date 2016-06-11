@@ -16,7 +16,7 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 class NFCPropertyConfigModule
@@ -45,7 +45,7 @@ private:
     NFMapEx<int, std::string> mhtCoefficienData[(int)NFJobType::NJT_MAX];
 
     NFILogicClassModule* m_pLogicClassModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
 };
 
 

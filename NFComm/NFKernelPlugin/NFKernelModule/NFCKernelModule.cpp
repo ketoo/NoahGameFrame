@@ -48,17 +48,11 @@ bool NFCKernelModule::Init()
 {
     mtDeleteSelfList.clear();
 
-    m_pSceneModule = pPluginManager->FindModule<NFISceneModule>("NFCSceneModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-
-    assert(NULL != m_pSceneModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pUUIDModule);
+    m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     return true;
 }
@@ -142,7 +136,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         return pObject;
     }
 
-    //  if (!m_pElementInfoModule->ExistElement(strConfigIndex))
+    //  if (!m_pElementModule->ExistElement(strConfigIndex))
     //  {
     //      m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(0, nSceneID), "There is no group", nGroupID, __FUNCTION__, __LINE__);
     //      return pObject;
@@ -217,8 +211,8 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 
         //////////////////////////////////////////////////////////////////////////
         //配置属性
-        NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigIndex);
-        NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementInfoModule->GetRecordManager(strConfigIndex);
+        NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strConfigIndex);
+        NF_SHARE_PTR<NFIRecordManager> pConfigRecordManager = m_pElementModule->GetRecordManager(strConfigIndex);
 
         if (pConfigPropertyManager.get() && pConfigRecordManager.get())
         {
