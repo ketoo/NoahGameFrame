@@ -27,17 +27,10 @@ bool NFCLevelModule::Execute()
 
 bool NFCLevelModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>("NFCPropertyConfigModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pPropertyConfigModule);
-    assert(NULL != m_pElementInfoModule);
-
-
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
     return true;
 }

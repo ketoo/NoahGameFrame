@@ -43,14 +43,14 @@ const std::string NFMasterServerPlugin::GetPluginName()
     return GET_CLASS_NAME(NFMasterServerPlugin)
 }
 
-       void NFMasterServerPlugin::Install()
+void NFMasterServerPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCMasterModule)
+    REGISTER_MODULE(pPluginManager, NFIMasterModule, NFCMasterModule)
 
 
 }
 
 void NFMasterServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCMasterModule)
+    UNREGISTER_MODULE(pPluginManager, NFIMasterModule, NFCMasterModule)
 }
