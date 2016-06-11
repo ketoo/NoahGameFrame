@@ -14,9 +14,9 @@ bool HelloWorld6Module::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world6, AfterInit" << std::endl;
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLuaScriptModule = pPluginManager->FindModule<NFILuaScriptModule>("NFCLuaScriptModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLuaScriptModule = pPluginManager->FindModule<NFILuaScriptModule>();
 
     //assert( NULL != m_pLuaScriptModule);
 

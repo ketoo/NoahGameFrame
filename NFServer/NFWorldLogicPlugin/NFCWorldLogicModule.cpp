@@ -32,9 +32,7 @@ bool NFCWorldLogicModule::Execute()
 
 bool NFCWorldLogicModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-
-    assert(NULL != m_pKernelModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
     return true;
 }

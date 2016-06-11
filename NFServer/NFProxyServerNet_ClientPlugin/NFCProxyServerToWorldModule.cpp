@@ -107,15 +107,15 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
         std::string strConfigName;
         for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
         {
-            const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
             {
-                const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-                const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-                const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-                const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-                const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+                const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+                const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+                const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
@@ -144,21 +144,13 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 
 bool NFCProxyServerToWorldModule::AfterInit()
 {
-    m_pProxyLogicModule = dynamic_cast<NFIProxyLogicModule*>(pPluginManager->FindModule("NFCProxyLogicModule"));
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pProxyServerNet_ServerModule = dynamic_cast<NFIProxyServerNet_ServerModule*>(pPluginManager->FindModule("NFCProxyServerNet_ServerModule"));
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pProxyServerToGameModule = dynamic_cast<NFIProxyServerToGameModule*>(pPluginManager->FindModule("NFCProxyServerToGameModule"));
-
-    assert(NULL != m_pProxyLogicModule);
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pProxyServerNet_ServerModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pProxyServerToGameModule);
+    m_pProxyLogicModule = pPluginManager->FindModule<NFIProxyLogicModule>();
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
 
 	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
 	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
@@ -173,15 +165,15 @@ bool NFCProxyServerToWorldModule::AfterInit()
         std::string strConfigName;
         for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
         {
-            const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
             {
-                const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-                const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-                const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-                const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-                const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+                const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+                const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+                const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
                 ConnectData xServerData;
 

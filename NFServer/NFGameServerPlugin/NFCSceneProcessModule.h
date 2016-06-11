@@ -20,7 +20,7 @@
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerConfigModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
@@ -69,7 +69,7 @@ protected:
 
 private:
 
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
