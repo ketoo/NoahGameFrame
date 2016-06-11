@@ -58,7 +58,7 @@ protected:
     bool Regisger();
 
 protected:
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
 

@@ -28,17 +28,11 @@ bool NFCWorldToMasterModule::Shut()
 
 bool NFCWorldToMasterModule::AfterInit()
 {
-    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>("NFCWorldLogicModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
-
-    assert(NULL != m_pWorldLogicModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pWorldNet_ServerModule);
+    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 
 	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCWorldToMasterModule::OnSelectServerProcess);
 	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
@@ -53,15 +47,15 @@ bool NFCWorldToMasterModule::AfterInit()
         std::string strConfigName;
         for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
         {
-            const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
             {
-                const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-                const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-                const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-                const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-                const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+                const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+                const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+                const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
                 ConnectData xServerData;
 
@@ -96,15 +90,15 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
         std::string strConfigName;
         for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
         {
-            const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->AppID() == nServerID)
             {
-                const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-                const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-                const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-                const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-                const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+                const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+                const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+                const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
