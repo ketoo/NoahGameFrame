@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCTeamModule
     : public NFITeamModule
@@ -42,9 +43,11 @@ public:
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember);
 
     virtual bool GetPlayerGameID(const NFGUID& self, int& nGameID);
-    virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xTeam, NFCDataList& varMemberList, NFCDataList& varGameList);
+    virtual bool GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::vector<NFGUID>& xmemberList);
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xTeam, const int& nGameID);
     virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xTeam);
+    virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
+
 
 protected:
 	void OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -52,6 +55,8 @@ protected:
 	void OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+    void OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    bool GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo);
 protected:
     int mnScenceID;
 
@@ -63,6 +68,7 @@ protected:
 	NFITeamDataModule* m_pTeamDataModule;
     NFICommonRedisModule* m_pCommonRedisModule;
     NFIMysqlModule* m_pMysqlModule;
+    NFIPlayerRedisModule* m_pPlayerRedisModule;
 };
 
 #endif

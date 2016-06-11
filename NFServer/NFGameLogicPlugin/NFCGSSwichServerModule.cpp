@@ -55,7 +55,7 @@ bool NFCGSSwichServerModule::AfterInit()
     return true;
 }
 
-bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer, const int nSceneID)
+bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer, const int nSceneID, const int nGroup)
 {
 	NFMsg::ReqSwitchServer xMsg;
 
@@ -63,6 +63,7 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 	*xMsg.mutable_selfid() = NFINetModule::NFToPB(self);
 	xMsg.set_self_serverid(pPluginManager->AppID());
 	xMsg.set_target_serverid(nServer);
+    xMsg.set_groupid(nGroup);
 
 	int nGate = 0;
 	NFGUID xClient;
@@ -97,7 +98,7 @@ void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const 
 		return;
 	}
 
-	ChangeServer(nPlayerID, xMsg.target_serverid(), xMsg.sceneid());
+	ChangeServer(nPlayerID, xMsg.target_serverid(), xMsg.sceneid(), xMsg.groupid());
 }
 
 void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

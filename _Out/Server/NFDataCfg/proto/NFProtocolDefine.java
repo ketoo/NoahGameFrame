@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    Fri Jun 10 14:06:47 2016
+//    @Date             :    Sat Jun 11 15:24:51 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -716,6 +716,7 @@ public class Player {
 	public static final String GameID = "GameID"; // int
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
+	public static final String TeamID = "TeamID"; // object
 	// Record
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_PlayerFightHero = "PlayerFightHero";

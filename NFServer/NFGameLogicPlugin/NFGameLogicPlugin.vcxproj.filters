@@ -44,9 +44,6 @@
     <Filter Include="NFGMModule">
       <UniqueIdentifier>{9c627c80-9536-4c28-8b31-2dc81cfd2d6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFSwichServer">
-      <UniqueIdentifier>{dd64f829-9c74-471a-b6b8-37bd590bb077}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFMapModule">
       <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
     </Filter>
@@ -55,6 +52,12 @@
     </Filter>
     <Filter Include="NFChatModule">
       <UniqueIdentifier>{dac272e6-279f-4086-8000-a76bdae68996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFTeamModule">
+      <UniqueIdentifier>{bfd97019-f760-4999-9fb3-197a9ebb45ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFSwichServerModule">
+      <UniqueIdentifier>{dd64f829-9c74-471a-b6b8-37bd590bb077}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +145,7 @@
       <Filter>NFItemModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGSSwichServerModule.h">
-      <Filter>NFSwichServer</Filter>
+      <Filter>NFSwichServerModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCMapModule.h">
       <Filter>NFMapModule</Filter>
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="NFCTaskModule.h">
       <Filter>NFTaskmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGSTeamModule.h">
+      <Filter>NFTeamModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +252,7 @@
       <Filter>NFItemModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGSSwichServerModule.cpp">
-      <Filter>NFSwichServer</Filter>
+      <Filter>NFSwichServerModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCMapModule.cpp">
       <Filter>NFMapModule</Filter>
@@ -262,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="NFCTaskModule.cpp">
       <Filter>NFTaskmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGSTeamModule.cpp">
+      <Filter>NFTeamModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -545,12 +545,28 @@ message AckSwitchServer
 }
 
 ///////////////组队/////////////////////////////////////////////////////////////////////////////////////
+message TeamInfo
+{
+    required Ident					team_id 		= 1;			//队伍ID
+	required Ident					captain_id 		= 2;			//队长ID
+	repeated TeammemberInfo 		teammemberInfo 	= 3;			//队伍成员
+}
+
+message TeammemberInfo
+{
+    required Ident		player_id 		= 1;			//成员ID
+	required string		name 			= 2;			//名字
+	required int32		nLevel 			= 3;			//等级
+	required int32		job 			= 4;			//职业
+	required string		HeadIcon		= 5;			//头像
+}
 
 //EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
 //EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
 message ReqAckCreateTeam
 {
     required Ident		team_id = 1;
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息	
 }
 
 //EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
@@ -558,6 +574,7 @@ message ReqAckCreateTeam
 message ReqAckJoinTeam
 {
     required Ident		team_id = 1;    
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息
 }
 
 //EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍/
@@ -565,6 +582,7 @@ message ReqAckJoinTeam
 message ReqAckLeaveTeam
 {
     required Ident		team_id = 1;
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息
 }
 
 
@@ -588,14 +606,36 @@ message ReqAckOprTeamMember
 	required Ident						team_id = 1;
     required Ident						member_id = 2;//被操作的ID
     required EGTeamMemberOprType		type = 3;
+	optional TeamInfo 					xTeamInfo	= 4;				//队伍详细信息
 }
 
 //	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
-message ReqInviteTeamMember
+message ReqAckInviteTeam
 {	
 	required Ident						team_id = 1;
     required Ident						self_id = 2;//
 	required Ident						invite_target_id = 3;//
+}
+
+//	EGMI_REQ_TEAM_ENTER_ECTYPE					= 869; 	// 组队进副本
+message ReqTeamEnterEctype
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	optional int32						nEctypeID = 3;//
+	optional int32						nGroupID = 4;//
+	optional int32						nResult 	= 5;//
+	optional int32						nServerID 	= 6;//
+}
+
+//	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
+message AckTeamEnterEctype
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	optional int32						nEctypeID = 3;//
+	optional int32						nGroupID = 4;//
+	optional int32						nResult 	= 5;//
 }
 
 

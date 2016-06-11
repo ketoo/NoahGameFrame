@@ -39,7 +39,7 @@ public:
     virtual bool Shut();
     virtual bool Execute();
 	virtual bool AfterInit();
-	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID);
+	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID, const int nGroup);
 
 	void OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
