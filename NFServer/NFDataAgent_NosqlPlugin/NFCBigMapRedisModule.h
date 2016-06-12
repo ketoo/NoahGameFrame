@@ -16,7 +16,7 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
@@ -58,7 +58,7 @@ private:
 
 private:
 	NFINoSqlModule* m_pNoSqlModule;
-	NFIElementInfoModule* m_pElementInfoModule;
+	NFIElementModule* m_pElementModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
 };

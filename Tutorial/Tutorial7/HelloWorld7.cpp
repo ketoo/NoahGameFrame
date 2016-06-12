@@ -13,9 +13,7 @@ bool HelloWorld7::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world1, AfterInit" << std::endl;
 
-    m_pUrlClientModule = pPluginManager->FindModule<NFIUrlClientModule>("NFCUrlClientModule");
-
-    assert(NULL != m_pUrlClientModule);
+    m_pUrlClientModule = pPluginManager->FindModule<NFIUrlClientModule>();
 
     if (!m_pUrlClientModule->StartActorPool(10))
     {

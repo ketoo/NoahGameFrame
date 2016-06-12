@@ -16,7 +16,7 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"

@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIGSSwichServerModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -39,7 +39,7 @@ public:
     virtual bool Shut();
     virtual bool Execute();
 	virtual bool AfterInit();
-	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID);
+	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID, const int nGroup);
 
 	void OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -48,7 +48,7 @@ public:
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIGameServerToWorldModule* m_pGameServerToWorldModule;

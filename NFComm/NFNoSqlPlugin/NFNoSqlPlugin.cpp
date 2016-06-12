@@ -32,10 +32,10 @@ const std::string NFNoSqlPlugin::GetPluginName()
 
 void NFNoSqlPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCNoSqlModule)
+    REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
 }
 
 void NFNoSqlPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCNoSqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
 }

@@ -32,11 +32,8 @@ bool NFCGameLogicModule::Execute()
 
 bool NFCGameLogicModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pLogicClassModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
 
     return true;
 }

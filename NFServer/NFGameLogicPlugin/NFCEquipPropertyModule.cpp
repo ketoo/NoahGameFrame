@@ -131,13 +131,13 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 	/////////////PropertyBase/////////////////////////////////////////
 
 	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList_ConfigID);
-	const std::string& strPropertyEffectData = m_pElementInfoModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
+	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
 		for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(i);
-			int nValue = m_pElementInfoModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			int nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 			xDataList.AddInt(nValue);
 		}
 	}
@@ -171,13 +171,13 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 	/////////////RandomBase/////////////////////////////////////////
 
 	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList_RandPropertyID);
-	const std::string& strPropertyEffectData = m_pElementInfoModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
+	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
 		for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(i);
-			int nValue = m_pElementInfoModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			int nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 			xDataList.AddInt(nValue);
 		}
 	}
@@ -234,7 +234,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 			continue;
 		}
 
-		const std::string& strGemEffectData = m_pElementInfoModule->GetPropertyString(strGemID, NFrame::Item::EffectData());
+		const std::string& strGemEffectData = m_pElementModule->GetPropertyString(strGemID, NFrame::Item::EffectData());
 		if (strGemEffectData.empty())
 		{
 			continue;
@@ -244,7 +244,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		for (int j = 0; j < pCommPropertyValueRecord->GetCols(); ++j)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(j);
-			int nValue = m_pElementInfoModule->GetPropertyInt(strGemEffectData, strColTag);
+			int nValue = m_pElementModule->GetPropertyInt(strGemEffectData, strColTag);
 			int nOldValue = xDataList.Int(j);
 
 			xDataList.SetInt(j, nOldValue + nValue);
@@ -285,9 +285,9 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 	}
 
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nHeroType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
-	const int nItemType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
+	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
+	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
 	{
 		return false;
@@ -346,9 +346,9 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 
 	/////////////element/////////////////////////////////////////
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nHeroType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
-	const int nItemType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementInfoModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
+	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
+	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
 	{
 		return false;

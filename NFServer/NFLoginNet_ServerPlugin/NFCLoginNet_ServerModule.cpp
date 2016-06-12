@@ -30,22 +30,13 @@ bool NFCLoginNet_ServerModule::BeforeShut()
 
 bool NFCLoginNet_ServerModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>("NFCLoginLogicModule");
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>("NFCLoginToMasterModule");
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-
-
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLoginLogicModule);
-	assert(NULL != m_pLogModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pLoginToMasterModule);
-	assert(NULL != m_pUUIDModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCLoginNet_ServerModule::OnHeartBeat);
@@ -64,13 +55,13 @@ bool NFCLoginNet_ServerModule::AfterInit()
 		std::string strConfigName;
 		for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
 		{
-			const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-			const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+			const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+			const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
 			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
 			{
-				const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-				const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-				const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
+				const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+				const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
 
 				m_pUUIDModule->SetIdentID(nServerID);
 

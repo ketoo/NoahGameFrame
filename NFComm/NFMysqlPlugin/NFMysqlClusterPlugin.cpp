@@ -31,14 +31,14 @@ const std::string NFMysqlClusterPlugin::GetPluginName()
     return GET_CLASS_NAME(NFMysqlClusterPlugin)
 }
 
-       void NFMysqlClusterPlugin::Install()
+void NFMysqlClusterPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCMysqlModule)
-    REGISTER_MODULE(pPluginManager, NFCAsyMysqlModule)
+    REGISTER_MODULE(pPluginManager, NFIMysqlModule, NFCMysqlModule)
+    REGISTER_MODULE(pPluginManager, NFIAsyMysqlModule, NFCAsyMysqlModule)
 }
 
 void NFMysqlClusterPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCAsyMysqlModule)
-    UNREGISTER_MODULE(pPluginManager, NFCMysqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFIAsyMysqlModule, NFCAsyMysqlModule)
+    UNREGISTER_MODULE(pPluginManager, NFIMysqlModule, NFCMysqlModule)
 }

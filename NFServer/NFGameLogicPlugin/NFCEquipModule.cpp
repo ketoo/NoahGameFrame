@@ -29,25 +29,15 @@ bool NFCEquipModule::Execute()
 
 bool NFCEquipModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert(NULL != m_pGameServerNet_ServerModule);
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSceneProcessModule );
-    assert( NULL != m_pPropertyModule );
-    assert( NULL != m_pLogModule );
-    assert( NULL != m_pUUIDModule );
-	assert( NULL != m_pPackModule );
-	assert( NULL != m_pCommonConfigModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     std::string strEquipPath = pPluginManager->GetConfigPath();
 
@@ -148,7 +138,7 @@ bool NFCEquipModule::InlaystoneToEquip( const NFGUID& self, const NFGUID& xEquip
 		return false;
 	}
 
-	if (!m_pElementInfoModule->ExistElement(strStoneID))
+	if (!m_pElementModule->ExistElement(strStoneID))
 	{
 		return false;
 	}
@@ -333,7 +323,7 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 	const int nEquipRow = xEquipDataList.Int(0);
 	const int nHeroRow = xHeroDataList.Int(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nEquipPos = m_pElementInfoModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
+	const int nEquipPos = m_pElementModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
 
     if (nEquipRow < 0
 		|| nHeroRow < 0
@@ -394,7 +384,7 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
 	const int nEquipRow = xEquipDataList.Int(0);
 	const int nHeroRow = xHeroDataList.Int(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nEquipPos = m_pElementInfoModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
+	const int nEquipPos = m_pElementModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
 
 	if (nEquipRow < 0
 		|| nHeroRow < 0
@@ -418,7 +408,7 @@ bool NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id
 		return false;
 	}
 
-	if (!m_pElementInfoModule->ExistElement(strPropertyID))
+	if (!m_pElementModule->ExistElement(strPropertyID))
 	{
 		return false;
 	}
@@ -524,7 +514,7 @@ bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, 
 		return false;
 	}
 
-	if (!m_pElementInfoModule->ExistElement(strStoneID))
+	if (!m_pElementModule->ExistElement(strStoneID))
 	{
 		return false;
 	}

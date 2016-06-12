@@ -31,21 +31,13 @@ bool NFCPlayerMysqlModule::Execute()
 
 bool NFCPlayerMysqlModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>( "NFCMysqlModule" );
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>( "NFCUUIDModule" );
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>( "NFCLogicClassModule" );
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>( "NFCLogModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyMysqlModule>( "NFCAsyMysqlModule" );
-	
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pClusterSQLModule);
-	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pAsyClusterSQLModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>();
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyMysqlModule>();
 	
     NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
     if (nullptr == pLogicClass)
@@ -60,12 +52,12 @@ bool NFCPlayerMysqlModule::AfterInit()
         return false;
     }
 
-    const int nID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
-    const std::string& mstrSQLIP = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlIP");
-    const int mnSQLPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "SqlPort");
-    const std::string& mstrSQLName = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlName");
-    const std::string& mstrSQLUser = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlUser");
-    const std::string& mstrSQLPWD = m_pElementInfoModule->GetPropertyString(strConfigName, "SqlPwd");
+    const int nID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
+    const std::string& mstrSQLIP = m_pElementModule->GetPropertyString(strConfigName, "SqlIP");
+    const int mnSQLPort = m_pElementModule->GetPropertyInt(strConfigName, "SqlPort");
+    const std::string& mstrSQLName = m_pElementModule->GetPropertyString(strConfigName, "SqlName");
+    const std::string& mstrSQLUser = m_pElementModule->GetPropertyString(strConfigName, "SqlUser");
+    const std::string& mstrSQLPWD = m_pElementModule->GetPropertyString(strConfigName, "SqlPwd");
 
     bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 

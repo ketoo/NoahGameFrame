@@ -14,7 +14,7 @@
 class NFIGSSwichServerModule : public NFILogicModule
 {
 public:
-
+	virtual bool ChangeServer(const NFGUID& self, const int nServer, const int nSceneID, const int nGroup) = 0;
 };
 
 #endif

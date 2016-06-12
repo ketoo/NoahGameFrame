@@ -13,7 +13,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFISLGShopModule.h"
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -41,7 +41,7 @@ protected:
 	void OnSLGClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFISLGBuildingModule* m_pSLGBuildingModule;

@@ -30,11 +30,11 @@ const std::string Tutorial7::GetPluginName()
 
 void Tutorial7::Install()
 {
-    REGISTER_MODULE(pPluginManager, HelloWorld7)
+    REGISTER_MODULE(pPluginManager, HelloWorld7, HelloWorld7)
 
 }
 
 void Tutorial7::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, HelloWorld7)
+    UNREGISTER_MODULE(pPluginManager, HelloWorld7, HelloWorld7)
 }

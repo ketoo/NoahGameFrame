@@ -18,17 +18,11 @@ bool NFCWorldNet_ServerModule::Init()
 
 bool NFCWorldNet_ServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>("NFCWorldLogicModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pWorldLogicModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogicClassModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess);
@@ -48,15 +42,15 @@ bool NFCWorldNet_ServerModule::AfterInit()
         std::string strConfigName;
         for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
         {
-            const int nServerType = m_pElementInfoModule->GetPropertyInt(strConfigName, "Type");
-            const int nServerID = m_pElementInfoModule->GetPropertyInt(strConfigName, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strConfigName, "Type");
+            const int nServerID = m_pElementModule->GetPropertyInt(strConfigName, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->AppID() == nServerID)
             {
-                const int nPort = m_pElementInfoModule->GetPropertyInt(strConfigName, "Port");
-                const int nMaxConnect = m_pElementInfoModule->GetPropertyInt(strConfigName, "MaxOnline");
-                const int nCpus = m_pElementInfoModule->GetPropertyInt(strConfigName, "CpuCount");
-                const std::string& strName = m_pElementInfoModule->GetPropertyString(strConfigName, "Name");
-                const std::string& strIP = m_pElementInfoModule->GetPropertyString(strConfigName, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strConfigName, "Port");
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strConfigName, "MaxOnline");
+                const int nCpus = m_pElementModule->GetPropertyInt(strConfigName, "CpuCount");
+                const std::string& strName = m_pElementModule->GetPropertyString(strConfigName, "Name");
+                const std::string& strIP = m_pElementModule->GetPropertyString(strConfigName, "IP");
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)

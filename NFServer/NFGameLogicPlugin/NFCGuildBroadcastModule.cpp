@@ -29,13 +29,9 @@ bool NFCGuildBroadcastModule::Execute()
 
 bool NFCGuildBroadcastModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pGuildModule = pPluginManager->FindModule<NFIGuildModule>("NFCGuildModule");
-    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pGuildModule);
-    assert(NULL != m_pGameServerNet_ServerModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pGuildModule = pPluginManager->FindModule<NFIGuildModule>();
+    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCGuildBroadcastModule::OnPropertyCommonEvent);
     m_pKernelModule->RegisterCommonRecordEvent(this, &NFCGuildBroadcastModule::OnRecordCommonEvent);

@@ -33,15 +33,10 @@ bool NFCBigMapRedisModule::Shut()
 bool NFCBigMapRedisModule::AfterInit()
 {
 	
-	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>("NFCNoSqlModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>("NFCGuildRedisModule");
-	
-	assert(NULL != m_pNoSqlModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pGuildRedisModule);
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 
 	return true;
 }
@@ -73,7 +68,7 @@ std::string NFCBigMapRedisModule::GetGridStationHistoryKey(const std::string&str
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::BigMapGridBaseInfo& xBaseInfo)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -190,7 +185,7 @@ bool NFCBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, st
 
 bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridGuildBaseInfo>& xWarHistoryList)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -250,7 +245,7 @@ bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std:
 
 bool NFCBigMapRedisModule::SetGridBaseInfo(const std::string&strGridID, const NFMsg::BigMapGridBaseInfo& xBaseInfo)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -271,7 +266,7 @@ bool NFCBigMapRedisModule::SetGridBaseInfo(const std::string&strGridID, const NF
 
 bool NFCBigMapRedisModule::AddGridLeaveMsgInfo(const std::string&strGridID, const NFMsg::BigMapLeaveMsg& xLeaveMsg)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -293,7 +288,7 @@ bool NFCBigMapRedisModule::AddGridLeaveMsgInfo(const std::string&strGridID, cons
 
 bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, const NFMsg::BigMapWarHistory& xWarHistory)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -316,7 +311,7 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 
 bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, const NFGUID& self, const int nResource)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}
@@ -334,7 +329,7 @@ bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, cons
 
 bool NFCBigMapRedisModule::RemoveGridStationInfo(const std::string& strGridID, const NFGUID& self, const int nResource)
 {
-	if (!m_pElementInfoModule->ExistElement(strGridID))
+	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
 	}

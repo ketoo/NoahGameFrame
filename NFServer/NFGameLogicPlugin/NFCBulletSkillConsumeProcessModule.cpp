@@ -16,13 +16,9 @@ bool NFCBulletSkillConsumeProcessModule::Init()
 
 bool NFCBulletSkillConsumeProcessModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>( "NFCSkillConsumeManagerModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pSkillConsumeManagerModule );
-    assert( NULL != m_pElementInfoModule );
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
     //子弹类技能
     //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );

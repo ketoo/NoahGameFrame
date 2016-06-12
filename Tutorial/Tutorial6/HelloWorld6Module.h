@@ -10,7 +10,7 @@
 #define NFC_HELLO_WORLD6_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -35,7 +35,7 @@ protected:
     unsigned long mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILuaScriptModule* m_pLuaScriptModule;
 };
 

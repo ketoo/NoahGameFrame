@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIGmModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -56,7 +56,7 @@ protected:
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

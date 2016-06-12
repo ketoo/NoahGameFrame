@@ -273,6 +273,10 @@ enum EGameMsgID
 	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
 	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
 	
+	EGMI_REQ_TEAM_ENTER_ECTYPE						= 869; 	// 组队进副本 
+	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
+	
+	
 	/////////////////////MapModule/////////////////////////////////////
 	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
 	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	

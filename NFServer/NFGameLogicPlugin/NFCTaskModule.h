@@ -50,7 +50,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
     NFIPackModule* m_pPackModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIHeroModule* m_pHeroModule;

@@ -17,9 +17,7 @@ bool NFCRankModule::Execute()
 
 bool NFCRankModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-
-    assert(NULL != m_pKernelModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
     return true;
 }

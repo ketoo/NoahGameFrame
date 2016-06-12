@@ -17,19 +17,12 @@ bool NFCNormalConsumeProcessModule::Init()
 
 bool NFCNormalConsumeProcessModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>("NFCItemConsumeManagerModule");
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
-
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pItemConsumeManagerModule);
-	assert(NULL != m_pPackModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pLogModule);
-	assert(NULL != m_pPropertyModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 
     m_pItemConsumeManagerModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_NORMAL, this);
     m_pItemConsumeManagerModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_CURRENCY, this);
@@ -55,7 +48,7 @@ int NFCNormalConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::
 
 int NFCNormalConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFGUID& targetID )
 {
-    const std::string& strAwardProperty = m_pElementInfoModule->GetPropertyString(strItemName, "AwardProperty");
+    const std::string& strAwardProperty = m_pElementModule->GetPropertyString(strItemName, "AwardProperty");
     if (!strAwardProperty.empty())
     {
         AwardItemProperty(self, strAwardProperty);
@@ -73,13 +66,13 @@ bool NFCNormalConsumeProcessModule::AwardItemProperty(const NFGUID& self, const 
         return false;
     }
 
-    const int nVIPEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
-    const int nEXP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
-    const int nHP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
-    const int nSP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
-    const int nMP = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
-    const int nGold = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
-    const int nMoney = m_pElementInfoModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
+    const int nVIPEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
+    const int nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+    const int nHP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
+    const int nSP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
+    const int nMP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
+    const int nGold = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
+    const int nMoney = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
 
     if (nVIPEXP > 0)
     {

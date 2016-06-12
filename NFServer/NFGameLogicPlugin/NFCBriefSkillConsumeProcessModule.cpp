@@ -19,17 +19,12 @@ bool NFCBriefSkillConsumeProcessModule::Init()
 
 bool NFCBriefSkillConsumeProcessModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>("NFCSkillConsumeManagerModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>("NFCSkillModule");
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>("NFCPropertyModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pSkillConsumeManagerModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pSkillModule);
-	assert(NULL != m_pPropertyModule);
     //短刃类技能
     //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF, this );
 
@@ -67,7 +62,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
 //         return 1;
 //     }
 // 
-//     NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( skillID );
+//     NFIPropertyManager* pPropertyManager = m_pElementModule->GetPropertyManager( skillID );
 //     if ( pPropertyManager == NULL )
 //     {
 //         return 1;
@@ -132,7 +127,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
 
 int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementInfoModule->GetPropertyManager( strSkillName );
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
     if ( pPropertyManager == NULL )
     {
         return 1;
@@ -201,7 +196,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
     //附加效果
     //1伤害属性(类别)
     //2BUFF(Get,Send)
-//     NFIPropertyManager* pPropertyManager = m_pElementInfoModule->GetPropertyManager( strSkillName );
+//     NFIPropertyManager* pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
 //     if ( pPropertyManager == NULL )
 //     {
 //         return 1;

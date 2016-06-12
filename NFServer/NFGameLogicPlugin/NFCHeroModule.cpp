@@ -30,19 +30,12 @@ bool NFCHeroModule::Execute()
 
 bool NFCHeroModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
-
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pGameServerNet_ServerModule);
-	assert(NULL != m_pUUIDModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pSceneProcessModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
 
@@ -200,7 +193,7 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 	}
 	
 	const std::string& strSkillID = pHeroRecord->GetString(nRow, nIndex);
-	const std::string& strNextSkillID = m_pElementInfoModule->GetPropertyString(strSkillID, NFrame::Skill::AfterUpID());
+	const std::string& strNextSkillID = m_pElementModule->GetPropertyString(strSkillID, NFrame::Skill::AfterUpID());
 	if (strNextSkillID.empty())
 	{
 		//no next skill id, this skill is the best skill
@@ -245,7 +238,7 @@ bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, cons
 	}
 
 	const std::string& strTalentID = pHeroRecord->GetString(nRow, nIndex);
-	const std::string& strNextTalentID = m_pElementInfoModule->GetPropertyString(strTalentID, NFrame::Talent::AfterUpID());
+	const std::string& strNextTalentID = m_pElementModule->GetPropertyString(strTalentID, NFrame::Talent::AfterUpID());
 	if (strNextTalentID.empty())
 	{
 		//no next talent id, this skill is the best talent

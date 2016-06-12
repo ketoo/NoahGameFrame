@@ -13,7 +13,7 @@
 #include "NFComm/NFPluginModule/NFINPCRefreshModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
@@ -45,7 +45,7 @@ protected:
     int OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 private:
 
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPackModule* m_pPackModule;

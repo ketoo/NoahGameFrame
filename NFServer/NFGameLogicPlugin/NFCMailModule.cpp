@@ -17,9 +17,7 @@ bool NFCMailModule::Execute()
 
 bool NFCMailModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-
-    assert(NULL != m_pKernelModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
     return true;
 }

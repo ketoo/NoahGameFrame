@@ -31,17 +31,11 @@ bool NFCGuildEctypeModule::Execute()
 
 bool NFCGuildEctypeModule::AfterInit()
 {
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>("NFCSceneProcessModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>("NFCCommonConfigModule");
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-
-	assert(NULL != m_pSceneProcessModule);
-	assert(NULL != m_pGameServerNet_ServerModule);
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pCommonConfigModule);
-	assert(NULL != m_pLogModule);
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 	std::string strConfigPath = pPluginManager->GetConfigPath();
 

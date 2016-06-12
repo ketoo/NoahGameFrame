@@ -28,25 +28,15 @@ bool NFCGmModule::Execute()
 
 bool NFCGmModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>( "NFCPropertyModule" );
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>("NFCHeroModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-	assert(NULL != m_pGameServerNet_ServerModule);
-    assert( NULL != m_pKernelModule );
-    assert( NULL != m_pElementInfoModule );
-    assert( NULL != m_pSceneProcessModule );
-    assert( NULL != m_pPropertyModule );
-	assert( NULL != m_pLogModule );
-    assert(NULL != m_pLevelModule);
-    assert(NULL != m_pPackModule);
-    assert(NULL != m_pHeroModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this, &NFCGmModule::OnGMPropertyIntProcess)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR, this, &NFCGmModule::OnGMPropertyStrProcess)) { return false; }
@@ -442,7 +432,7 @@ void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, cons
         }
 
 
-        const int nItemType = m_pElementInfoModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+        const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
         switch (nItemType)
         {
         case NFMsg::EIT_EQUIP:
@@ -510,13 +500,13 @@ void NFCGmModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const
 
         const std::string& strObjectIndex = xMsg.command_str_value();
         //const int nValue = xMsg.command_value();
-        if (m_pElementInfoModule->ExistElement(strObjectIndex))
+        if (m_pElementModule->ExistElement(strObjectIndex))
         {
             NFCDataList xDataList;
             xDataList << "X" << fX;
             xDataList << "Y" << fY;
             xDataList << "Z" << fZ;
-            const std::string& strObjectClass = m_pElementInfoModule->GetPropertyString(strObjectIndex, "ClassName");
+            const std::string& strObjectClass = m_pElementModule->GetPropertyString(strObjectIndex, "ClassName");
             m_pKernelModule->CreateObject(NFGUID(), nContianerID, nGroupID, strObjectClass, strObjectIndex, xDataList);
         }
     }

@@ -13,7 +13,7 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEquipModule.h"
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFCEquipPropertyModule
     : public NFIEquipPropertyModule
@@ -43,7 +43,7 @@ public:
 
 private:
     NFIKernelModule* m_pKernelModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
   
 };
 

@@ -28,19 +28,12 @@ bool NFCMapModule::Execute()
 
 bool NFCMapModule::AfterInit()
 {
-	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>("NFCBigMapRedisModule");
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>("NFCGuildRedisModule");
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-	
-	assert(NULL != m_pBigMapRedisModule);
-	assert(NULL != m_pKernelModule);
-	assert(NULL != m_pLogicClassModule);
-	assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pGuildRedisModule);
-	assert(NULL != m_pGameServerNet_ServerModule);
+	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_BIG_MAP_INFO, this, &NFCMapModule::ReqBigMapsInfo)) { return false; }
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_MAP_GRID_INFO, this, &NFCMapModule::ReqMapTitleInfo)) { return false; }
@@ -93,7 +86,7 @@ void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const
 	{
 		std::string strTitleID = xMsg.map_title_id(i);
 
-		if (!m_pElementInfoModule->ExistElement(strTitleID))
+		if (!m_pElementModule->ExistElement(strTitleID))
 		{
 			continue;
 		}
@@ -150,7 +143,7 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
 
-	if (!m_pElementInfoModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
 	}
@@ -172,7 +165,7 @@ void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const 
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
 
-	if (!m_pElementInfoModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
 	}
@@ -184,7 +177,7 @@ void NFCMapModule::ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, cons
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
 
-	if (!m_pElementInfoModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
 	}
@@ -196,7 +189,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapHunting);
 
-	if (!m_pElementInfoModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
 	}
@@ -219,7 +212,7 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 
-	if (!m_pElementInfoModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
 		return;
 	}
@@ -272,7 +265,7 @@ void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 
 void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID)
 {
-	if (!m_pElementInfoModule->ExistElement(strTitleID))
+	if (!m_pElementModule->ExistElement(strTitleID))
 	{
 		return;
 	}

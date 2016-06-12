@@ -26,21 +26,13 @@ bool NFCNPCRefreshModule::Execute()
 
 bool NFCNPCRefreshModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>( "NFCSceneProcessModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>("NFCPackModule");
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>("NFCLevelModule");
-	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>("NFCHeroPropertyModule");
-	
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pSceneProcessModule);
-    assert(NULL != m_pElementInfoModule);
-	assert(NULL != m_pPackModule);
-	assert(NULL != m_pLogModule);
-	assert(NULL != m_pLevelModule);
-	assert(NULL != m_pHeroPropertyModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
@@ -60,8 +52,8 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {
             const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-			const std::string& strPropertyID = m_pElementInfoModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
-			const int nNPCType = m_pElementInfoModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
+			const std::string& strPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+			const int nNPCType = m_pElementModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
 			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
@@ -86,7 +78,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 			else
 			{
 				//normal npc
-				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(strPropertyID);
+				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strPropertyID);
 				if (pConfigPropertyManager)
 				{
 					std::string strProperName;
@@ -104,7 +96,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
             const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-            int nHPMax = m_pElementInfoModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
+            int nHPMax = m_pElementModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
 
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
             m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );

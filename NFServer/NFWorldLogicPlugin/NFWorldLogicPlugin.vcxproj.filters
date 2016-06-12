@@ -3,15 +3,24 @@
   <ItemGroup>
     <ClInclude Include="NFWorldLogicPlugin.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
+    <ClInclude Include="NFCTeamModule.h">
+      <Filter>NFTeamModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
+    <ClCompile Include="NFCTeamModule.cpp">
+      <Filter>NFTeamModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NFRankModule">
       <UniqueIdentifier>{5487df7b-1497-4fe0-a820-a751656f9fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NFTeamModule">
+      <UniqueIdentifier>{a20c02a9-6f6d-4686-ba18-e1aa539e2482}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

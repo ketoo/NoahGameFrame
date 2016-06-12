@@ -18,7 +18,7 @@
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIAsyMysqlModule.h"
 
 class NFCPlayerMysqlModule
@@ -73,7 +73,7 @@ private:
 	NFIUUIDModule* m_pUUIDModule;
 	NFILogicClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
 
 private:
 	NFMapEx<NFGUID, NFMapEx<std::string, std::string> > mtObjectCache;

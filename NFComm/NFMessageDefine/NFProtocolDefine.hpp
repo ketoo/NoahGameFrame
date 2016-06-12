@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Fri Jun 10 14:06:47 2016
+//    @Date             :    Sat Jun 11 15:24:51 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -761,6 +761,7 @@ public:
 	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
+	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
 	// Record
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_PlayerFightHero(){ static std::string xPlayerFightHero = "PlayerFightHero"; return xPlayerFightHero;}
