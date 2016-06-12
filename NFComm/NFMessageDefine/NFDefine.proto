@@ -317,21 +317,7 @@ enum EItemType
 {
     EIT_NORMAL   			= 0; // 普通类型(物品，主要处理属性)
     EIT_EQUIP   			= 1; // 装备
-	EIT_BOUNTY   			= 2; // 赏金令
-	EIT_HERO_CARD   		= 3; // 英雄卡牌，吃得英雄
-	EIT_HERO_STONE   		= 4; // 英雄石，吃得英雄经验
-	EIT_STRENGTHEN_STONE	= 5; // 强化石
-	EIT_DEMONIZATION_STONE	= 6; // 附魔石
-	EIT_GEM_STONE			= 7; // 属性宝石
-	EIT_CURRENCY			= 8; // 货币道具不进背包s
-	EIT_ITEM_REBORN			= 9; // 重生道具(消耗此物品时得到某种待遇)
-	EIT_ITEM_POSITION		= 10;// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
-	
-	
-	EIT_WOOD				= 100; // 木材
-	EIT_STONE				= 101; // 石材
-	
-	//EIT_STONE				= 200;
+	EIT_MATERIAL   			= 2; // 材料
 }
 
 //道具子类型(归属类型)
@@ -339,21 +325,22 @@ enum EGameEquipSubType
 {
 	EQUIPTYPE_WEAPON            = 0;    // 武器
 	EQUIPTYPE_ARMOR             = 1;    // 胸甲
-	EQUIPTYPE_NECKLACE          = 2;    // 项链
-	EQUIPTYPE_RING              = 3;    // 戒指
-	EQUIPTYPE_EARRINGS          = 4;    // 耳环
-	EQUIPTYPE_BADGE             = 5;    // 徽章
-	EQUIPTYPE_HELMET            = 6;    // 头盔
-	EQUIPTYPE_SHAWL             = 7;    // 肩甲
-	EQUIPTYPE_GLOVE             = 8;    // 手套
-	EQUIPTYPE_WRIST             = 9;    // 护腕
-	EQUIPTYPE_BELT              = 10;   // 腰带
-	EQUIPTYPE_PANT              = 11;   // 裤子
-	EQUIPTYPE_BOOT              = 12;   // 靴子
-	EQUIPTYPE_WING              = 13;   // 翅膀
-	EQUIPTYPE_CLOAK             = 14;   // 披风
-	EQUIPTYPE_FASHION           = 15;   // 时装
+	EQUIPTYPE_HELMET            = 2;    // 头盔
+	EQUIPTYPE_BELT              = 3;   	// 腰带
+	EQUIPTYPE_BOOT              = 4;   	// 靴子
+	EQUIPTYPE_BADGE             = 5;    // 徽章	
 };
+//EQUIPTYPE_NECKLACE          = 2;    // 项链
+//EQUIPTYPE_RING              = 3;    // 戒指
+//EQUIPTYPE_EARRINGS          = 4;    // 耳环
+//EQUIPTYPE_BADGE             = 5;    // 徽章	
+//EQUIPTYPE_SHAWL             = 7;    // 肩甲	
+//EQUIPTYPE_GLOVE             = 8;    // 手套
+//EQUIPTYPE_WRIST             = 9;    // 护腕	
+//EQUIPTYPE_PANT              = 11;   // 裤子
+//EQUIPTYPE_CLOAK             = 14;   // 披风
+//EQUIPTYPE_FASHION           = 15;   // 时装
+//EQUIPTYPE_WING              = 5;   // 翅膀	
 
 //元素类型
 enum EGameElementType
@@ -368,15 +355,19 @@ enum EGameElementType
 enum EGameItemSubType
 {
     EGIT_ITEM_NONE             	= 0;    // 无
-    EGIT_ITEM_PROPERTY_CARD     = 1;    // 基础属性石，合成镶嵌
-    EGIT_ITEM_PVP_ATTACK_CARD   = 2;    // PVP攻击卡
-    EGIT_ITEM_PVP_DEFENSE_CARD  = 3;    // PVP防御卡
-    EGIT_ITEM_SKILL_CARD        = 4;    // 学习类技能书，普通的技能都是这样学习的
-    EGIT_ITEM_GUILD_SKILL_CARD  = 5;    // 工会技能书
-    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝
-    EGIT_ITEM_POSITION          = 7;    // 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
-    EGIT_ITEM_WORLD_HORN        = 8;   // 世界喇叭(使用某个功能的时候消耗此物品)
-    EGIT_ITEM_REBORN            = 9;   // 重生道具(消耗此物品时得到某种待遇)
+    EGIT_ITEM_PROPERTY_CARD     = 1;    // 属性石，镶嵌
+    EGIT_ITEM_SKILL_CARD        = 2;    // 学习类技能书，普通的技能都是这样学习的
+    EGIT_ITEM_WORLD_HORN        = 3;   	// 世界喇叭(使用某个功能的时候消耗此物品)	
+	EGIT_ITEM_BOUNTY   			= 4; 	// 赏金令
+	EGIT_ITEM_HERO_CARD   		= 5; 	// 英雄卡牌，吃得英雄
+	EGIT_ITEM_GEM_STONE			= 7; 	// 属性宝石,镶嵌
+	EGIT_ITEM_CURRENCY			= 8; 	// 金币道具不进背包
+	EGIT_ITEM_EXP				= 9; 	// EXP道具不进背包
+	EGIT_ITEM_ITEM_REBORN		= 10; 	// 重生道具(消耗此物品时得到某种待遇)
+	EGIT_ITEM_ITEM_POSITION		= 11;	// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
+	EGIT_ITEM_DIAMOND			= 12;	// 钻石 
+	EGIT_ITEM_POISON			= 13;	// 普通药水
+	EGIT_ITEM_ACTIVITY			= 14;	// 活动令牌
 };
 
 //道具时间类型
@@ -392,8 +383,8 @@ enum EGameItemExpiredType
 enum ENPCType
 {
     ENPCTYPE_NORMAL	= 0;				// 普通怪
-    ENPCTYPE_TURRET = 1;              // 炮塔
-    ENPCTYPE_HERO 	= 2;              // 英雄
+    ENPCTYPE_HERO 	= 1;              // 英雄
+    ENPCTYPE_TURRET = 2;              // 炮塔
     
 };
 
