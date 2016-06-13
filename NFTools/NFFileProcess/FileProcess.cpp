@@ -34,13 +34,11 @@ void FileProcess::CreateNameFile()
 {
 	time_t timeval;
 	timeval = time(NULL);
-	auto strNow = ctime(&timeval);
 	std::string strHPPHead
 		= "// -------------------------------------------------------------------------\n";
 	strHPPHead = strHPPHead
 		+ "//    @FileName         :    NFProtocolDefine.hpp\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "#ifndef NF_PR_NAME_HPP\n"
@@ -57,7 +55,6 @@ void FileProcess::CreateNameFile()
 	strJavaHead = strJavaHead
 		+ "//    @FileName         :    NFProtocolDefine.java\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "package nframe;\n";
@@ -69,7 +66,6 @@ void FileProcess::CreateNameFile()
 	strCSHead = strCSHead
 		+ "//    @FileName         :    NFProtocolDefine.cs\n"
 		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Date             :    " + strNow
 		+ "//    @Module           :    NFProtocolDefine\n"
 		+ "// -------------------------------------------------------------------------\n\n"
 		+ "using System;\n"
@@ -470,12 +466,25 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				strCSRecordInfo = strCSRecordInfo + "\tpublic static readonly String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
 				strCSEnumInfo = strCSEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
 
-				std::string toWrite = "enum " + strRecordName + "\n{";
+				std::string toWrite = "enum " + strRecordName + "\n{\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
+
+				nSetColNum = dim.lastCol - nRecordStart;
 
 				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
 				{
-					std::string name = sh.getCell(dim.firstRow + RecordNumber * 2, c)->value;
+					std::string name = "";
+
+					auto cll = sh.getCell(dim.firstRow + RecordNumber * 2, c);
+					if (cll)
+					{
+						name = cll->value;
+					}
+					else
+					{
+						break;
+					}
+
 					std::string value = "";
 
 					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
@@ -507,7 +516,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 
-				fwrite("}\n", sizeof("}\n"), 1, protoWriter);
+				fwrite("}\n", 2, 1, protoWriter);
 
 				strHppEnumInfo += "\n\t};\n";
 				strJavaEnumInfo += "\n\t};\n";
@@ -702,7 +711,7 @@ bool FileProcess::LoadLogicClass(std::string strFile)
 				return false;
 			}
 
-			fwrite("\n", sizeof("\n"), 1, mysqlClassWriter);
+			fwrite("\n", 1, 1, mysqlClassWriter);
 			if (nodeElement == classElement->LastChildElement())
 			{
 				break;

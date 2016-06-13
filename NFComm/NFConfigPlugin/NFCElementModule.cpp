@@ -1,49 +1,44 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCElementInfoModule.h
+//    @FileName			:    NFCElementModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCElementInfoModule
+//    @Module           :    NFCElementModule
 //
 // -------------------------------------------------------------------------
 
 #include <algorithm>
 #include <ctype.h>
 #include "NFConfigPlugin.h"
-#include "NFCElementInfoModule.h"
+#include "NFCElementModule.h"
 #include "NFCLogicClassModule.h"
 
 ////
 
-NFCElementInfoModule::NFCElementInfoModule(NFIPluginManager* p)
+NFCElementModule::NFCElementModule(NFIPluginManager* p)
 {
     pPluginManager = p;
     mbLoaded = false;
 }
 
-NFCElementInfoModule::~NFCElementInfoModule()
+NFCElementModule::~NFCElementModule()
 {
 
 }
 
-bool NFCElementInfoModule::Init()
+bool NFCElementModule::Init()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFCLogicClassModule>("NFCLogicClassModule");
-
-    assert(NULL != m_pLogicClassModule);
-
-    //     Clear();
-    //     Load();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
 
     return true;
 }
 
-bool NFCElementInfoModule::Shut()
+bool NFCElementModule::Shut()
 {
     Clear();
     return true;
 }
 
-bool NFCElementInfoModule::Load()
+bool NFCElementModule::Load()
 {
     if (mbLoaded)
     {
@@ -65,27 +60,10 @@ bool NFCElementInfoModule::Load()
         int nDataSize = 0;
 
         std::string strFile = pPluginManager->GetConfigPath() + strInstancePath;
-        if (!NFCLogicClassModule::bCipher)
-        {
-            rapidxml::file<> fdoc(strFile.c_str());
-            nDataSize = fdoc.size();
-            pData = new char[nDataSize + 1];
-            strncpy(pData, fdoc.data(), nDataSize);
-        }
-        else
-        {
-            std::string strFileData;
-            if (!NFCLogicClassModule::ReadFileToString(strFile, strFileData))
-            {
-                return false;
-            }
-
-            std::string strDecode = NFCLogicClassModule::Decode(strFileData);
-
-            nDataSize = strDecode.length();
-            pData = new char[nDataSize + 1];
-            strncpy(pData, strDecode.data(), nDataSize);
-        }
+        rapidxml::file<> fdoc(strFile.c_str());
+        nDataSize = fdoc.size();
+        pData = new char[nDataSize + 1];
+        strncpy(pData, fdoc.data(), nDataSize);
 
         pData[nDataSize] = 0;
         xDoc.parse<0>(pData);
@@ -110,7 +88,7 @@ bool NFCElementInfoModule::Load()
     return true;
 }
 
-bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass)
+bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass)
 {
     //attrNode is the node of a object
     std::string strConfigID = attrNode->first_attribute("ID")->value();
@@ -154,7 +132,13 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
         NF_SHARE_PTR<NFIRecord> pRecord = pClassRecordManager->First();
         while (pRecord.get())
         {
-            pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetKeyState(), pRecord->GetInitDesc(), pRecord->GetTag(), pRecord->GetRelatedRecord(), pRecord->GetRows(), pRecord->GetPublic(), pRecord->GetPrivate(), pRecord->GetSave(), pRecord->GetView(), pRecord->GetIndex());
+            NF_SHARE_PTR<NFIRecord> xRecord = pElementRecordManager->AddRecord(NFGUID(), pRecord->GetName(), pRecord->GetInitData(), pRecord->GetTag(), pRecord->GetRows());
+
+            xRecord->SetPublic(pRecord->GetPublic());
+            xRecord->SetPrivate(pRecord->GetPrivate());
+            xRecord->SetSave(pRecord->GetSave());
+            xRecord->SetCache(pRecord->GetCache());
+
             pRecord = pClassRecordManager->Next();
         }
 
@@ -230,12 +214,12 @@ bool NFCElementInfoModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFI
     return true;
 }
 
-bool NFCElementInfoModule::Save()
+bool NFCElementModule::Save()
 {
     return true;
 }
 
-NFINT64 NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
+NFINT64 NFCElementModule::GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty.get())
@@ -246,7 +230,7 @@ NFINT64 NFCElementInfoModule::GetPropertyInt(const std::string& strConfigName, c
     return 0;
 }
 
-double NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
+double NFCElementModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty.get())
@@ -257,7 +241,7 @@ double NFCElementInfoModule::GetPropertyFloat(const std::string& strConfigName, 
     return 0.0;
 }
 
-const std::string& NFCElementInfoModule::GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
+const std::string& NFCElementModule::GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
     if (pProperty.get())
@@ -268,7 +252,7 @@ const std::string& NFCElementInfoModule::GetPropertyString(const std::string& st
     return  NULL_STR;
 }
 
-NF_SHARE_PTR<NFIProperty> NFCElementInfoModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
+NF_SHARE_PTR<NFIProperty> NFCElementModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
     if (pElementInfo.get())
@@ -279,7 +263,7 @@ NF_SHARE_PTR<NFIProperty> NFCElementInfoModule::GetProperty(const std::string& s
     return NULL;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCElementInfoModule::GetPropertyManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIPropertyManager> NFCElementModule::GetPropertyManager(const std::string& strConfigName)
 {
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
     if (pElementInfo.get())
@@ -290,7 +274,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCElementInfoModule::GetPropertyManager(const 
     return NULL;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCElementInfoModule::GetRecordManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIRecordManager> NFCElementModule::GetRecordManager(const std::string& strConfigName)
 {
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
     if (pElementInfo.get())
@@ -300,7 +284,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCElementInfoModule::GetRecordManager(const std:
     return NULL;
 }
 
-bool NFCElementInfoModule::LoadSceneInfo(const std::string& strFileName, const std::string& strClassName)
+bool NFCElementModule::LoadSceneInfo(const std::string& strFileName, const std::string& strClassName)
 {
     rapidxml::file<> fdoc(strFileName.c_str());
     //std::cout << fdoc.data() << std::endl;
@@ -325,7 +309,7 @@ bool NFCElementInfoModule::LoadSceneInfo(const std::string& strFileName, const s
     return true;
 }
 
-bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
+bool NFCElementModule::ExistElement(const std::string& strConfigName)
 {
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
     if (pElementInfo.get())
@@ -336,7 +320,24 @@ bool NFCElementInfoModule::ExistElement(const std::string& strConfigName)
     return false;
 }
 
-bool NFCElementInfoModule::LegalNumber(const char* str)
+bool NFCElementModule::ExistElement(const std::string& strClassName, const std::string& strConfigName)
+{
+    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
+    if (!pElementInfo)
+    {
+        return false;
+    }
+
+    const std::string& strClass = pElementInfo->GetPropertyManager()->GetPropertyString("ClassName");
+    if (strClass != strClassName)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool NFCElementModule::LegalNumber(const char* str)
 {
     int nLen = int(strlen(str));
     if (nLen <= 0)
@@ -361,25 +362,25 @@ bool NFCElementInfoModule::LegalNumber(const char* str)
     return true;
 }
 
-bool NFCElementInfoModule::AfterInit()
+bool NFCElementModule::AfterInit()
 {
     return true;
 
 }
 
-bool NFCElementInfoModule::BeforeShut()
+bool NFCElementModule::BeforeShut()
 {
     return true;
 
 }
 
-bool NFCElementInfoModule::Execute()
+bool NFCElementModule::Execute()
 {
     return true;
 
 }
 
-bool NFCElementInfoModule::Clear()
+bool NFCElementModule::Clear()
 {
     ClearAll();
 
@@ -387,7 +388,7 @@ bool NFCElementInfoModule::Clear()
     return true;
 }
 
-NF_SHARE_PTR<NFIComponentManager> NFCElementInfoModule::GetComponentManager(const std::string& strConfigName)
+NF_SHARE_PTR<NFIComponentManager> NFCElementModule::GetComponentManager(const std::string& strConfigName)
 {
     NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
     if (pElementInfo.get())

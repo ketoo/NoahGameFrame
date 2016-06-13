@@ -14,7 +14,7 @@
 #include "NFINetModule.h"
 
 class NFILoginNet_ServerModule
-    : public NFINetModule
+    : public NFILogicModule
 {
 public:
 

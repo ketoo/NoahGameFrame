@@ -32,12 +32,11 @@ const std::string Tutorial6Plugin::GetPluginName()
 
 void Tutorial6Plugin::Install()
 {
-
-    REGISTER_MODULE(pPluginManager, HelloWorld6Module)
+    REGISTER_MODULE(pPluginManager, HelloWorld6Module, HelloWorld6Module)
 
 }
 
 void Tutorial6Plugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, HelloWorld6Module)
+    UNREGISTER_MODULE(pPluginManager, HelloWorld6Module, HelloWorld6Module)
 }

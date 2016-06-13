@@ -11,7 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCore.h" />
     <ClInclude Include="NFCRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,7 +100,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCore.cpp" />
     <ClCompile Include="NFCRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,9 +118,6 @@
     <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFTimer.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -134,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="NFCEventManager.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFTimer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

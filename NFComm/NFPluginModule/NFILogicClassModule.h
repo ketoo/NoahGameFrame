@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGICCLASS_MODULE_H
-#define _NFI_LOGICCLASS_MODULE_H
+#ifndef NFI_LOGICCLASS_MODULE_H
+#define NFI_LOGICCLASS_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"

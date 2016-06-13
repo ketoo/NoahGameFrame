@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_NET_MODULE_H
-#define _NFI_NET_MODULE_H
+#ifndef NFI_NET_MODULE_H
+#define NFI_NET_MODULE_H
 
 #include <iostream>
 #include <iosfwd>
@@ -39,7 +39,7 @@ enum NF_SERVER_TYPES
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
         /*m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__);*/ \
         return;                                         \
@@ -55,7 +55,7 @@ enum NF_SERVER_TYPES
 #define CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::RecivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
         return;                                         \
@@ -82,22 +82,29 @@ struct ServerData
 class NFINetModule
     : public NFILogicModule
 {
-public:
+protected:
     NFINetModule()
     {
         //important to init the value of pPluginManager
         //pPluginManager
-        nLastTime = 0;
+		nLastTime = GetPluginManager()->GetNowTime();
         m_pNet = NULL;
     }
-
-    NFINetModule(NFIPluginManager* p)
+public:
+	template<typename BaseType>
+    NFINetModule(NFIPluginManager* p, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
     {
         pPluginManager = p;
-
-        nLastTime = 0;
+		nLastTime = GetPluginManager()->GetNowTime();
         m_pNet = NULL;
     }
+
+	NFINetModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+		nLastTime = GetPluginManager()->GetNowTime();
+		m_pNet = NULL;
+	}
 
     virtual ~NFINetModule()
     {
@@ -110,82 +117,71 @@ public:
         m_pNet = NULL;
     }
 
-    template<typename BaseType>
-    void Initialization(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const char* strIP, const unsigned short nPort)
+	//as client
+    void Initialization(const char* strIP, const unsigned short nPort)
     {
-        nLastTime = GetPluginManager()->GetNowTime();
-
-        m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
-
-        int nMsgID = 0;
-        for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
-        {
-            m_pNet->AddReciveCallBack(nMsgID, *pData);
-        }
-
-        NET_EVENT_FUNCTOR_PTR xData;
-        for (bool bRet = mmEventList.First(xData); bRet && xData != nullptr; bRet = mmEventList.Next(xData))
-        {
-            m_pNet->AddEventCallBack(xData);
-        }
-
+        m_pNet = NF_NEW NFCNet(this, &NFINetModule::OnReceiveNetPack, &NFINetModule::OnSocketNetEvent);
         m_pNet->Initialization(strIP, nPort);
     }
 
-    template<typename BaseType>
-    int Initialization(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*), const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
+	//as server
+    int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4)
     {
-        nLastTime = GetPluginManager()->GetNowTime();
-
-        m_pNet = new NFCNet(pBase, handleRecieve, handleEvent);
-
-        int nMsgID = 0;
-        for (NET_RECIEVE_FUNCTOR_PTR* pData = mmRecieveList.First(nMsgID);  pData != NULL ; pData = mmRecieveList.Next(nMsgID))
-        {
-            m_pNet->AddReciveCallBack(nMsgID, *pData);
-        }
-
-        NET_EVENT_FUNCTOR_PTR xData;
-        for (bool bRet = mmEventList.First(xData); bRet && xData != nullptr; bRet = mmEventList.Next(xData))
-        {
-            m_pNet->AddEventCallBack(xData);
-        }
-
+		m_pNet = NF_NEW NFCNet(this, &NFINetModule::OnReceiveNetPack, &NFINetModule::OnSocketNetEvent);
         return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
     }
 
     template<typename BaseType>
-    bool AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+    bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
     {
-        if (m_pNet)
-        {
-            if (!m_pNet->AddReciveCallBack<BaseType>(nMsgID, pBase, handleRecieve))
-            {
-                return false;
-            }
-        }
+        NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+        NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
-        NET_RECIEVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        NET_RECIEVE_FUNCTOR_PTR functorPtr(new NET_RECIEVE_FUNCTOR(functor));
+		return AddReceiveCallBack(nMsgID, functorPtr);
+	}
+	template<typename BaseType>
+	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	{
+		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
-        return mmRecieveList.AddElement(nMsgID, new NET_RECIEVE_FUNCTOR_PTR(functorPtr));
-    }
+		return AddReceiveCallBack(functorPtr);
+	}
 
-    template<typename BaseType>
-    bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
+	virtual bool AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb)
+	{
+		if (mxReceiveCallBack.find(nMsgID) != mxReceiveCallBack.end())
+		{
+			return false;
+		}
+
+		 mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
+
+		 return true;
+	}
+
+	virtual bool AddReceiveCallBack(const NET_RECEIVE_FUNCTOR_PTR& cb)
+	{
+		mxCallBackList.push_back(cb);
+
+		return true;
+	}
+
+	template<typename BaseType>
+    bool AddEventCallBack(BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
     {
-        if (m_pNet)
-        {
-            if (!m_pNet->AddEventCallBack<BaseType>(pBase, handler))
-            {
-                return false;
-            }
-        }
         NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
         NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
 
-        return mmEventList.Add(functorPtr);
+        return AddEventCallBack(functorPtr);
     }
+
+	virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb)
+	{
+		 mxEventCallBackList.push_back(cb);
+
+		 return true;
+	}
 
     virtual bool Execute()
     {
@@ -217,7 +213,7 @@ public:
 
         return xIdent;
     }
-    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
+    static bool ReceivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
         if (!xMsg.ParseFromArray(msg, nLen))
@@ -236,7 +232,7 @@ public:
         return true;
     }
 
-    static bool RecivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFGUID& nPlayer)
+    static bool ReceivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, google::protobuf::Message& xData, NFGUID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
         if (!xMsg.ParseFromArray(msg, nLen))
@@ -271,6 +267,11 @@ public:
     {
         return m_pNet->SendMsgToAllClient(msg.c_str(), msg.length());
     }
+
+	bool SendMsgPB(const google::protobuf::Message& xData, const uint32_t nSockIndex)
+	{
+		return false;
+	}
 
     bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex)
     {
@@ -424,6 +425,35 @@ public:
     }
 
 protected:
+	void OnReceiveNetPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+	{
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+		if (mxReceiveCallBack.end() != it)
+		{
+			NET_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
+			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+		}
+		else
+		{
+			for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxCallBackList.begin(); it != mxCallBackList.end(); ++it)
+			{
+				NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
+				NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+				pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+			}
+		}
+	}
+
+	void OnSocketNetEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+	{
+		for (std::list<NET_EVENT_FUNCTOR_PTR>::iterator it = mxEventCallBackList.begin(); it != mxEventCallBackList.end(); ++it)
+		{
+			NET_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+			NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(nSockIndex, eEvent, pNet);
+		}
+	}
 
     void KeepAlive()
     {
@@ -455,8 +485,10 @@ private:
 
     NFINet* m_pNet;
     NFINT64 nLastTime;
-    NFMap<int , NET_RECIEVE_FUNCTOR_PTR> mmRecieveList;
-    NFList<NET_EVENT_FUNCTOR_PTR> mmEventList;
+	std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
+	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
+	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
+	 ;
 };
 
 #endif
