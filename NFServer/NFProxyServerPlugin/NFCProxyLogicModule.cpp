@@ -33,10 +33,8 @@ bool NFCProxyLogicModule::Execute()
 
 bool NFCProxyLogicModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
 
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pLogicClassModule);
     return true;
 }

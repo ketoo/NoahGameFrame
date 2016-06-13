@@ -12,7 +12,6 @@
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
-#include "NFComm/NFPluginModule/NFIActorDataModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #pragma comment( lib, "ws2_32.lib" )

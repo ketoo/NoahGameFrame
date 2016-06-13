@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 #pragma  comment(lib,"libevent.lib")
 #pragma  comment(lib,"libevent_core.lib")
-//#pragma  comment(lib,"libevent_extras.lib")
 
 #include "NFCNet.h"
 #include <string.h>
@@ -63,13 +62,6 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
     if (pNet->mEventCB)
     {
         pNet->mEventCB(pObject->GetRealFD(), NF_NET_EVENT(events), pNet);
-    }
-
-    for (std::list<NET_EVENT_FUNCTOR_PTR>::iterator it = pNet->mxEventCallBack.begin(); it != pNet->mxEventCallBack.end(); ++it)
-    {
-        NET_EVENT_FUNCTOR_PTR& pFunPtr = *it;
-        NET_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-        pFunc->operator()(pObject->GetRealFD(), NF_NET_EVENT(events), pNet);
     }
 
     if (events & BEV_EVENT_CONNECTED)
@@ -331,16 +323,7 @@ bool NFCNet::Dismantle(NetObject* pObject)
                 mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
             }
 
-            //msg callback list
-            std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator it = mxReciveCallBack.find(xHead.GetMsgID());
-            if (mxReciveCallBack.end() != it)
-            {
-                NET_RECIEVE_FUNCTOR_PTR& pFunPtr = it->second;
-                NET_RECIEVE_FUNCTOR* pFunc = pFunPtr.get();
-                pFunc->operator()(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
-            }
-
-            pObject->RemoveBuff(0, nMsgBodyLength + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
+			pObject->RemoveBuff(0, nMsgBodyLength + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
 
             Dismantle(pObject);
         }
@@ -689,26 +672,4 @@ int NFCNet::DeCode(const char* strData, const uint32_t unAllLen, NFCMsgHead& xHe
 
     //返回使用过的量
     return xHead.GetBodyLength();
-}
-
-bool NFCNet::AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb)
-{
-    std::map<int, NET_RECIEVE_FUNCTOR_PTR>::iterator it = mxReciveCallBack.find(nMsgID);
-    if (mxReciveCallBack.end() == it)
-    {
-        mxReciveCallBack.insert(std::map<int, NET_RECIEVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
-
-        return true;
-    }
-
-    assert(nMsgID);
-
-    return false;
-}
-
-bool NFCNet::AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb)
-{
-    mxEventCallBack.push_back(cb);
-
-    return true;
 }
