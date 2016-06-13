@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerModule.cpp
+//    @FileName			:    NFCGameServerModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCGameServerModule
@@ -13,13 +13,9 @@
 
 bool NFCGameServerModule::Init()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>("NFCUUIDModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pUUIDModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     m_pUUIDModule->SetIdentID(1);
 

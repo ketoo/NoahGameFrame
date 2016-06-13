@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOGINNET_CLIENTMODULE_H
-#define _NFI_LOGINNET_CLIENTMODULE_H
+#ifndef NFI_LOGINNET_CLIENTMODULE_H
+#define NFI_LOGINNET_CLIENTMODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -15,10 +15,10 @@
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule
-    : public NFIClusterClientModule
+    : public NFILogicModule
 {
-
 public:
+	virtual NFIClusterClientModule* GetClusterModule() = 0;
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap() = 0;
 };
 

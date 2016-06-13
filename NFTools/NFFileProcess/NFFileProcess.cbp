@@ -23,6 +23,11 @@
 					<Add directory="../../" />
 					<Add directory="../../Dependencies" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after="cd ../../" />
+					<Add after="sh ./DoNFFileProcess.sh" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="../../_Out/Server/NFDataCfg/Tool/NFFileProcess" prefix_auto="1" extension_auto="1" />
@@ -36,6 +41,11 @@
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="cd ../../" />
+					<Add after="sh ./DoNFFileProcess.sh" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>

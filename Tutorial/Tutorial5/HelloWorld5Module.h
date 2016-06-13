@@ -10,7 +10,7 @@
 #define NFC_HELLO_WORLD5_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld5Module
@@ -35,7 +35,7 @@ protected:
     unsigned long mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
 };
 
 #endif

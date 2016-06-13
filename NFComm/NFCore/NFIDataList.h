@@ -76,10 +76,47 @@ public:
 
         inline bool operator==(const TData& src) const
         {
-            if (src.GetType() == GetType()
-                && src.variantData == variantData)
+			//&& src.variantData == variantData
+            if (src.GetType() == GetType())
             {
-                return true;
+				switch (GetType())
+				{
+				case TDATA_INT:
+				{
+					if (src.GetInt() == GetInt())
+					{
+						return true;
+					}
+				}
+				break;
+				case TDATA_FLOAT:
+				{
+					double fValue = GetFloat() - src.GetFloat();
+					if (fValue < 0.001  && fValue > -0.001)
+					{
+						return true;
+					}
+				}
+				break;
+				case TDATA_STRING:
+				{
+					if (src.GetString() == GetString())
+					{
+						return true;
+					}
+				}
+				break;
+				case TDATA_OBJECT:
+				{
+					if (src.GetObject() == GetObject())
+					{
+						return true;
+					}
+				}
+				break;
+				default:
+					break;
+				}
             }
 
             return false;
@@ -267,7 +304,6 @@ public:
         TDATA_TYPE nType;
 
     public:
-        //boost::variant<NFINT64, double, std::string, NFGUID> variantData;
         mapbox::util::variant<NFINT64, double, std::string, NFGUID> variantData;
     };
 
@@ -319,7 +355,8 @@ public:
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const double value) = 0;
-    virtual bool Set(const int index, const char* value) = 0;
+	virtual bool Set(const int index, const char* value) = 0;
+	virtual bool Set(const int index, const std::string& value) = 0;
     virtual bool Set(const int index, const NFGUID& value) = 0;
 
     // 获得数据
