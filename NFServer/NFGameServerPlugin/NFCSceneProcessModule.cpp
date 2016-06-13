@@ -27,17 +27,11 @@ bool NFCSceneProcessModule::Execute()
 
 bool NFCSceneProcessModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>("NFCLogicClassModule");
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>("NFCGameServerNet_ServerModule");
-
-    assert(NULL != m_pKernelModule);
-    assert(NULL != m_pElementInfoModule);
-    assert(NULL != m_pLogicClassModule);
-    assert(NULL != m_pLogModule);
-    assert(NULL != m_pGameServerNet_ServerModule);
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
     //////////////////////////////////////////////////////////////////////////
@@ -65,13 +59,6 @@ bool NFCSceneProcessModule::AfterInit()
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////
-    // add msg handler
-    if (!m_pGameServerNet_ServerModule->AddReciveCallBack(NFMsg::EGMI_REQ_SWAP_SCENE, this, &NFCSceneProcessModule::OnClienSwapSceneProcess))
-    {
-        return false;
-    }
-
     return true;
 }
 
@@ -83,7 +70,7 @@ bool NFCSceneProcessModule::CreateSceneObject(const int nSceneID, const int nGro
         NF_SHARE_PTR<SceneSeedResource> pResource = pSceneResource->First();
         while (pResource.get())
         {
-            const std::string& strClassName = m_pElementInfoModule->GetPropertyString(pResource->strConfigID, NFrame::NPC::ClassName());
+            const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::NPC::ClassName());
 
             NFCDataList arg;
             arg << NFrame::NPC::X() << pResource->fSeedX;
@@ -166,7 +153,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEven
     double fY = 0.0;
     double fZ = 0.0;
     const std::string strSceneID = lexical_cast<std::string>(nTargetScene);
-    const std::string& strRelivePosList = m_pElementInfoModule->GetPropertyString(strSceneID, NFrame::Scene::RelivePos());
+    const std::string& strRelivePosList = m_pElementModule->GetPropertyString(strSceneID, NFrame::Scene::RelivePos());
 
     NFCDataList valueRelivePosList(strRelivePosList.c_str(), ";");
     if (valueRelivePosList.GetCount() >= 1)
@@ -255,9 +242,9 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType(const int nSceneID)
 {
     char szSceneIDName[MAX_PATH] = { 0 };
     sprintf(szSceneIDName, "%d", nSceneID);
-    if (m_pElementInfoModule->ExistElement(szSceneIDName))
+    if (m_pElementModule->ExistElement(szSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementInfoModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
+        return (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
     }
 
     return SCENE_TYPE_ERROR;
@@ -265,7 +252,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType(const int nSceneID)
 
 bool NFCSceneProcessModule::IsCloneScene(const int nSceneID)
 {
-    return GetCloneSceneType(nSceneID) == 1;
+    return GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE;
 }
 
 bool NFCSceneProcessModule::ApplyCloneGroup(const int nSceneID, int& nGroupID)
@@ -285,8 +272,8 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
     char szSceneIDName[MAX_PATH] = { 0 };
     sprintf(szSceneIDName, "%d", nSceneID);
 
-    const std::string& strSceneFilePath = m_pElementInfoModule->GetPropertyString(szSceneIDName, NFrame::Scene::FilePath());
-    const int nCanClone = m_pElementInfoModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
+    const std::string& strSceneFilePath = m_pElementModule->GetPropertyString(szSceneIDName, NFrame::Scene::FilePath());
+    const int nCanClone = m_pElementModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
 
     //场景对应资源
     NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement(nSceneID);
@@ -311,7 +298,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute("SeedY")->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute("SeedZ")->value());
 
-        if (!m_pElementInfoModule->ExistElement(strConfigID))
+        if (!m_pElementModule->ExistElement(strConfigID))
         {
             assert(0);
         }

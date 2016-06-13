@@ -18,9 +18,11 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIProxyLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
 {
@@ -37,14 +39,14 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
+    virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
+	virtual NFIClusterClientModule* GetClusterModule();
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
 
 protected:
 
-    void OnReciveWSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
@@ -52,7 +54,9 @@ protected:
     void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    virtual void LogServerInfo(const std::string& strServerInfo);
+    void LogServerInfo(const std::string& strServerInfo);
+
+	void OnOtherMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     struct ClientConnectData
     {
@@ -75,9 +79,10 @@ private:
     NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
-    NFIClusterClientModule* m_pToGameServerClusterClient;
+    NFIProxyServerToGameModule* m_pProxyServerToGameModule;
+	NFIClusterClientModule* m_pClusterClientModule;
 
 };
 

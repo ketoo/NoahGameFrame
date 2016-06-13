@@ -70,8 +70,8 @@ bool HelloWorld3Module::AfterInit()
 	//初始化完毕
 	std::cout << "Hello, world3, AfterInit" << std::endl;
 
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
 	//创建容器，所有的对象均需在容器中
 	m_pKernelModule->CreateScene(1);
@@ -85,8 +85,8 @@ bool HelloWorld3Module::AfterInit()
 		return false;
 	}
 
-	pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, "");
-	pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, "");
+	pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING);
+	pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT);
 
 	pObject->AddPropertyCallBack("Hello", this, &HelloWorld3Module::OnPropertyStrCallBackEvent);
 	pObject->AddPropertyCallBack("World", this, &HelloWorld3Module::OnPropertyCallBackEvent);

@@ -43,11 +43,11 @@ const std::string NFLoginLogicPlugin::GetPluginName()
 void NFLoginLogicPlugin::Install()
 {
 
-    REGISTER_MODULE(pPluginManager, NFCLoginLogicModule)
+    REGISTER_MODULE(pPluginManager, NFILoginLogicModule, NFCLoginLogicModule)
 
 }
 
 void NFLoginLogicPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCLoginLogicModule)
+    UNREGISTER_MODULE(pPluginManager, NFILoginLogicModule, NFCLoginLogicModule)
 }
