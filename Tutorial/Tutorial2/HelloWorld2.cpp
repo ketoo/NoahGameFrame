@@ -21,6 +21,12 @@ int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string&
 
 bool HelloWorld2::AfterInit()
 {
+	NFCDataList xData;
+	xData.AddInt(111);
+
+
+
+
 // #ifdef NF_USE_ACTOR
 //     if(pPluginManager->GetActorID() == NFIActorManager::EACTOR_MAIN)
 // #endif
@@ -31,13 +37,13 @@ bool HelloWorld2::AfterInit()
         NFIObject* pObject = new NFCObject(NFGUID(0, 1), pPluginManager);
 
 		//add a property name is "Hello" of this object
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING, true, true, true, "");
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "Hello", TDATA_STRING);
 		//add a property name is "World" of this object
-        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT, true, true, true, "");
+        pObject->GetPropertyManager()->AddProperty(pObject->Self(), "World", TDATA_INT);
 
 		//set the "world" property value as 1111
         pObject->SetPropertyInt("World", 1111);
-
+		int n1 = pObject->GetPropertyInt("World");
 		//get the "world" property value and printf it
         const int nProperty1 = pObject->GetPropertyInt("World");
         std::cout << "Property World:" << nProperty1 << std::endl;
@@ -47,6 +53,7 @@ bool HelloWorld2::AfterInit()
 
 		////set the "world" property value as 2222[than the function "HelloWorld2::OnPropertyCallBackEvent" will be called]
         pObject->SetPropertyInt("World", 2222);
+		int n2 = pObject->GetPropertyInt("World");
 
 		//get the "world" property value and printf it
         const int nProperty2 = pObject->GetPropertyInt("World");

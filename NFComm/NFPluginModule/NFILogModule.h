@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_LOG_MODULE_H
-#define _NFI_LOG_MODULE_H
+#ifndef NFI_LOG_MODULE_H
+#define NFI_LOG_MODULE_H
 
 #include "NFILogicModule.h"
 

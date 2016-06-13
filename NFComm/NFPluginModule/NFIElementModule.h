@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFIElementInfoModule.h
+//    @FileName         :    NFIElementModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIElementInfoModule
+//    @Module           :    NFIElementModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFI_ELEMENTINFO_MODULE_H
-#define _NFI_ELEMENTINFO_MODULE_H
+#ifndef NFI_ELEMENTINFO_MODULE_H
+#define NFI_ELEMENTINFO_MODULE_H
 
 #include <iostream>
 #include "NFILogicModule.h"
@@ -16,7 +16,7 @@
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
-class NFIElementInfoModule
+class NFIElementModule
     : public NFILogicModule
 {
 public:
@@ -28,6 +28,7 @@ public:
     virtual bool LoadSceneInfo(const std::string& strFileName, const std::string& strClassName) = 0;
 
     virtual bool ExistElement(const std::string& strConfigName) = 0;
+    virtual bool ExistElement(const std::string& strClassName, const std::string& strConfigName) = 0;
 
     virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName) = 0;
     virtual std::shared_ptr<NFIRecordManager> GetRecordManager(const std::string& strConfigName) = 0;

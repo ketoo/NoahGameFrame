@@ -16,9 +16,10 @@
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
 
 class NFCWorldToMasterModule
     : public NFIWorldToMasterModule
@@ -35,12 +36,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void LogRecive(const char* str) {}
-    virtual void LogSend(const char* str) {}
-
 protected:
 
-    void OnReciveMSPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     //连接丢失,删2层(连接对象，帐号对象)
@@ -54,18 +51,18 @@ protected:
     void Register(NFINet* pNet);
     void RefreshWorldInfo();
 
-    int OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    int OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
+	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 
     NFILogModule* m_pLogModule;
-    NFIElementInfoModule* m_pElementInfoModule;
+    NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
-
+	NFIClusterClientModule* m_pClusterClientModule;
 };
 
 #endif

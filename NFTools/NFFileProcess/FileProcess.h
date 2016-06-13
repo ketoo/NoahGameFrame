@@ -17,6 +17,7 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <io.h>
 #include <windows.h>
+#include <conio.h>
 #else
 #include <iconv.h>
 #include <unistd.h>

@@ -35,7 +35,6 @@ public:
     {
         Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
     };
-
 };
 
 class  NFCModuleHeartBeatElement

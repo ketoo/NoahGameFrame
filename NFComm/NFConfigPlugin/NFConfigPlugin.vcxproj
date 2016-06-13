@@ -12,12 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCElementInfoModule.cpp" />
+    <ClCompile Include="NFCElementModule.cpp" />
     <ClCompile Include="NFCLogicClassModule.cpp" />
     <ClCompile Include="NFConfigPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCElementInfoModule.h" />
+    <ClInclude Include="NFCElementModule.h" />
     <ClInclude Include="NFCLogicClassModule.h" />
     <ClInclude Include="NFConfigPlugin.h" />
   </ItemGroup>
