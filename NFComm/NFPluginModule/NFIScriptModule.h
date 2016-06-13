@@ -13,7 +13,7 @@
 #include "NFILogicModule.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"

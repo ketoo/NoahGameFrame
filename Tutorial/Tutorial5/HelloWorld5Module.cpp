@@ -57,8 +57,8 @@ bool HelloWorld5Module::AfterInit()
     //³õÊ¼»¯Íê±Ï
     std::cout << "Hello, world5, AfterInit, ThreadID: " << std::this_thread::get_id() << std::endl;
 
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
 	////////////////////////test1//////////////////////////////////////////////////
 

@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
-#include "NFComm/NFPluginModule/NFIClusterModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 
 class NFCLoginLogicModule
@@ -36,7 +35,6 @@ protected:
 
 protected:
 
-    NFIClusterModule* m_pClusterSqlModule;
     NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
 private:
 };

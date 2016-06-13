@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLogicClassModule.h
+//    @FileName			:    NFCLogicClassModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCLogicClassModule
@@ -9,15 +9,13 @@
 #include <time.h>
 #include <algorithm>
 #include "NFConfigPlugin.h"
-#include "NFCElementInfoModule.h"
 #include "NFCLogicClassModule.h"
+#include "NFComm/RapidXML/rapidxml.hpp"
+#include "NFComm/RapidXML/rapidxml_print.hpp"
 
-bool NFCLogicClassModule::bCipher = false;
 bool NFCLogicClassModule::Init()
 {
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-
-    assert(NULL != m_pElementInfoModule);
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
     Load();
 
@@ -35,17 +33,8 @@ NFCLogicClassModule::NFCLogicClassModule(NFIPluginManager* p)
 {
     pPluginManager = p;
 
-    // 判断 *.xml 是否存在，如果不存在，用 *.NF
     msConfigFileName = "NFDataCfg/Struct/LogicClass.xml";
-    bCipher = false;
-    std::fstream file;
-    file.open(pPluginManager->GetConfigPath() + msConfigFileName, std::ios::in);
-    if (!file)
-    {
-        msConfigFileName = "NFDataCfg/Struct/LogicClass.NF";
-        bCipher = true;
-    }
-
+   
     std::cout << "Using [" << pPluginManager->GetConfigPath() + msConfigFileName << "]" << std::endl;
 }
 
@@ -98,11 +87,13 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
             const char* pstrPublic = pPropertyNode->first_attribute("Public")->value();
             const char* pstrPrivate = pPropertyNode->first_attribute("Private")->value();
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
+            const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
             const char* pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
+            bool bCache = lexical_cast<bool>(pstrCache);
 
             NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
@@ -114,7 +105,12 @@ bool NFCLogicClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, 
 
             //printf( " Property:%s[%s]\n", pstrPropertyName, pstrType );
 
-            pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType(), bPublic,  bPrivate, bSave, pstrRelationValue);
+            NF_SHARE_PTR<NFIProperty> xProperty = pClass->GetPropertyManager()->AddProperty(NFGUID(), strPropertyName, varProperty.GetType());
+            xProperty->SetPublic(bPublic);
+            xProperty->SetPrivate(bPrivate);
+            xProperty->SetSave(bSave);
+            xProperty->SetCache(bCache);
+
         }
     }
 
@@ -144,6 +140,7 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             const char* pstrPublic = pRecordNode->first_attribute("Public")->value();
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
+            const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
 
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
@@ -156,14 +153,11 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
-            bool bView = (strView.empty() ? false : (lexical_cast<bool>(strView)));
-            int nIndex = lexical_cast<int>(pstrIndex);
+            bool bCache = lexical_cast<bool>(pstrCache);
 
-            NFCDataList recordVar;
-            NFCDataList recordKey;
-            NFCDataList recordDesc;
-            NFCDataList recordTag;
-            NFCDataList recordRelation;
+			NF_SHARE_PTR<NFIDataList> recordVar(NF_NEW NFCDataList());
+			NF_SHARE_PTR<NFIDataList> recordTag(NF_NEW NFCDataList());
+
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
@@ -175,57 +169,25 @@ bool NFCLogicClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_S
                     NFASSERT(0, pstrRecordName, __FILE__, __FUNCTION__);
                 }
 
-                recordVar.Append(TData);
+                recordVar->Append(TData);
                 //////////////////////////////////////////////////////////////////////////
-                if (recordColNode->first_attribute("Key") != NULL)
-                {
-                    const char* pstrKey = recordColNode->first_attribute("Key")->value();
-                    bool bKey = lexical_cast<bool>(pstrKey);
-                    if (bKey)
-                    {
-                        recordKey.Add(NFINT64(1));
-                    }
-                    else
-                    {
-                        recordKey.Add(NFINT64(0));
-                    }
-                }
-
                 if (recordColNode->first_attribute("Tag") != NULL)
                 {
                     const char* pstrTag = recordColNode->first_attribute("Tag")->value();
-                    recordTag.Add(pstrTag);
+                    recordTag->Add(pstrTag);
                 }
                 else
                 {
-                    recordTag.Add("");
+                    recordTag->Add("");
                 }
-
-                if (recordColNode->first_attribute("RelateRecord") != NULL)
-                {
-                    std::string strRelationRecord = recordColNode->first_attribute("RelatedRecord")->value();
-                    recordRelation.Add(strRelationRecord.c_str());
-                }
-                else
-                {
-                    recordRelation.Add("");
-                }
-
-                //////////////////////////////////////////////////////////////////////////
-                if (recordColNode->first_attribute("Desc"))
-                {
-                    const char* pstrColDesc = recordColNode->first_attribute("Desc")->value();
-                    recordDesc.Add(pstrColDesc);
-                }
-                else
-                {
-                    recordDesc.Add("");
-                }
-
-                //////////////////////////////////////////////////////////////////////////
             }
 
-            pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordKey, recordDesc, recordTag, recordRelation, atoi(pstrRow), bPublic, bPrivate, bSave, bView, nIndex);
+            NF_SHARE_PTR<NFIRecord> xRecord = pClass->GetRecordManager()->AddRecord(NFGUID(), pstrRecordName, recordVar, recordTag, atoi(pstrRow));
+
+            xRecord->SetPublic(bPublic);
+            xRecord->SetPrivate(bPrivate);
+            xRecord->SetSave(bSave);
+            xRecord->SetCache(bCache);
         }
     }
 
@@ -272,27 +234,11 @@ bool NFCLogicClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHAR
     int nDataSize = 0;
 
     std::string strFile = pPluginManager->GetConfigPath() + pstrClassFilePath;
-    if (!bCipher)
-    {
-        rapidxml::file<> fdoc(strFile.c_str());
-        nDataSize = fdoc.size();
-        pData = new char[nDataSize + 1];
-        strncpy(pData, fdoc.data(), nDataSize);
-    }
-    else
-    {
-        std::string strFileData;
-        if (!ReadFileToString(strFile, strFileData))
-        {
-            return false;
-        }
+	rapidxml::file<> fdoc(strFile.c_str());
+	nDataSize = fdoc.size();
+	pData = new char[nDataSize + 1];
+	strncpy(pData, fdoc.data(), nDataSize);
 
-        std::string strDecode = Decode(strFileData);
-
-        nDataSize = strDecode.length();
-        pData = new char[nDataSize + 1];
-        strncpy(pData, strDecode.data(), nDataSize);
-    }
 
     pData[nDataSize] = 0;
     xDoc.parse<0>(pData);
@@ -444,28 +390,12 @@ bool NFCLogicClassModule::Load()
     int nDataSize = 0;
 
     std::string strFile = pPluginManager->GetConfigPath() + msConfigFileName;
-    if (!bCipher)
-    {
-        rapidxml::file<> fdoc(strFile.c_str());
-        nDataSize = fdoc.size();
-        pData = new char[nDataSize + 1];
-        strncpy(pData, fdoc.data(), nDataSize);
-    }
-    else
-    {
-        std::string strFileData;
-        if (!ReadFileToString(strFile, strFileData))
-        {
-            return false;
-        }
 
-        std::string strDecode = Decode(strFileData);
-
-        nDataSize = strDecode.length();
-        pData = new char[nDataSize + 1];
-        strncpy(pData, strDecode.data(), nDataSize);
-    }
-
+	rapidxml::file<> fdoc(strFile.c_str());
+	nDataSize = fdoc.size();
+	pData = new char[nDataSize + 1];
+	strncpy(pData, fdoc.data(), nDataSize);
+  
     pData[nDataSize] = 0;
     xDoc.parse<0>(pData);
     //////////////////////////////////////////////////////////////////////////
@@ -476,7 +406,7 @@ bool NFCLogicClassModule::Load()
         Load(attrNode, NULL);
     }
 
-    m_pElementInfoModule->Load();
+    m_pElementModule->Load();
     //////////////////////////////////////////////////////////////////////////
     if (NULL != pData)
     {
@@ -526,151 +456,6 @@ NF_SHARE_PTR<NFIComponentManager> NFCLogicClassModule::GetClassComponentManager(
 
 bool NFCLogicClassModule::Clear()
 {
-    return true;
-}
-
-std::string NFCLogicClassModule::cepher = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-bool NFCLogicClassModule::IsEncoded(unsigned char c)
-{
-    return (isalnum(c) || (c == '+') || (c == '/'));
-}
-
-std::string NFCLogicClassModule::Encode(unsigned char const* bytes_to_encode, unsigned int in_len)
-{
-    std::string ret;
-    int i = 0;
-    int j = 0;
-    unsigned char char_array_3[3];
-    unsigned char char_array_4[4];
-
-    while (in_len--)
-    {
-        char_array_3[i++] = *(bytes_to_encode++);
-        if (i == 3)
-        {
-            char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-            char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-            char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-            char_array_4[3] = char_array_3[2] & 0x3f;
-
-            for (i = 0; (i < 4) ; i++)
-            {
-                ret += cepher[char_array_4[i]];
-            }
-
-            i = 0;
-        }
-    }
-
-    if (i)
-    {
-        for (j = i; j < 3; j++)
-        {
-            char_array_3[j] = '\0';
-        }
-
-        char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-        char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-        char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-        char_array_4[3] = char_array_3[2] & 0x3f;
-
-        for (j = 0; (j < i + 1); j++)
-        {
-            ret += cepher[char_array_4[j]];
-        }
-
-        while ((i++ < 3))
-        {
-            ret += '=';
-        }
-    }
-
-    return ret;
-}
-
-std::string NFCLogicClassModule::Decode(const std::string& encoded_string)
-{
-    int in_len = encoded_string.size();
-    int i = 0;
-    int j = 0;
-    int in_ = 0;
-    unsigned char char_array_4[4], char_array_3[3];
-    std::string ret;
-
-    while (in_len-- && (encoded_string[in_] != '=') && IsEncoded(encoded_string[in_]))
-    {
-        char_array_4[i++] = encoded_string[in_];
-        in_++;
-        if (i == 4)
-        {
-            for (i = 0; i < 4; i++)
-            {
-                char_array_4[i] = cepher.find(char_array_4[i]);
-            }
-
-            char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
-            char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
-            char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
-
-            for (i = 0; (i < 3); i++)
-            {
-                ret += char_array_3[i];
-            }
-
-            i = 0;
-        }
-    }
-
-    if (i)
-    {
-        for (j = i; j < 4; j++)
-        {
-            char_array_4[j] = 0;
-        }
-
-        for (j = 0; j < 4; j++)
-        {
-            char_array_4[j] = cepher.find(char_array_4[j]);
-        }
-
-        char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
-        char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
-        char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
-
-        for (j = 0; (j < i - 1); j++)
-        {
-            ret += char_array_3[j];
-        }
-    }
-
-    return ret;
-}
-
-bool NFCLogicClassModule::ReadFileToString(const std::string& strFile, std::string& strOutData)
-{
-    std::ifstream stream(strFile, std::ios::binary);
-    if (!stream)
-    {
-        throw std::runtime_error(std::string("cannot open file = ") + strFile);
-        return false;
-    }
-
-    stream.unsetf(std::ios::skipws);
-
-    // Determine stream size
-    stream.seekg(0, std::ios::end);
-    size_t size = stream.tellg();
-    stream.seekg(0);
-
-    std::vector<char> m_data;
-    // Load data and add terminating 0
-    m_data.resize(size + 1);
-    stream.read(&m_data.front(), static_cast<std::streamsize>(size));
-    m_data[size] = 0;
-
-    strOutData.append(&m_data.front(), size);
-
     return true;
 }
 
