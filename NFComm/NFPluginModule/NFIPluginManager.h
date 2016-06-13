@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_PLUGIN_MANAGER_H_
-#define NFI_PLUGIN_MANAGER_H_
+#ifndef NFI_PLUGIN_MANAGER_H
+#define NFI_PLUGIN_MANAGER_H
 
 #include "NFIActor.h"
 #include "NFILogicModule.h"
@@ -23,35 +23,25 @@ public:
 
     }
 
-    template <typename T>
-    T* FindModule(const std::string& strModuleName)
-    {
-        NFILogicModule* pLogicModule = FindModule(strModuleName);
-        if (pLogicModule)
-        {
-            if (!TIsDerived<T, NFILogicModule>::Result)
-            {
-                //BaseTypeComponent must inherit from NFIComponent;
-                return NULL;
-            }
+	template <typename T>
+	T* FindModule()
+	{
+		NFILogicModule* pLogicModule = FindModule(typeid(T).name());
+		if (pLogicModule)
+		{
+			if (!TIsDerived<T, NFILogicModule>::Result)
+			{
+				return NULL;
+			}
 
-            return dynamic_cast<T*>(pLogicModule);
-        }
+			T* pT = dynamic_cast<T*>(pLogicModule);
+			assert(NULL != pT);
 
-        return NULL;
-    }
+			return pT;
+		}
 
-    template <typename T>
-    T* GetModule(const std::string& strModuleName)
-    {
-        return FindModule<T>(strModuleName);
-    }
-
-    NFILogicModule* GetModule(const std::string& strModuleName)
-    {
-        return FindModule(strModuleName);
-    }
-
+		return NULL;
+	}
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;

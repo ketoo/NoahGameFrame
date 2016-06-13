@@ -79,14 +79,11 @@ enum EGameEventCode {
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
   EGEC_INVALID_SKILL = 143,
-  EGEC_ENTER_GAME_SUCCESS = 144,
-  EGEC_CREATE_GUILD_SUCCESS = 200,
-  EGEC_JOIN_GUILD_SUCCESS = 201,
-  EGEC_LEAVE_GUILD_SUCCESS = 202
+  EGEC_ENTER_GAME_SUCCESS = 144
 };
 LIBPROTOC_EXPORT bool EGameEventCode_IsValid(int value);
 const EGameEventCode EGameEventCode_MIN = EGEC_SUCCESS;
-const EGameEventCode EGameEventCode_MAX = EGEC_LEAVE_GUILD_SUCCESS;
+const EGameEventCode EGameEventCode_MAX = EGEC_ENTER_GAME_SUCCESS;
 const int EGameEventCode_ARRAYSIZE = EGameEventCode_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameEventCode_descriptor();

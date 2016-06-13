@@ -1,7 +1,6 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    2016/01/25
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -11,7 +10,6 @@
 #include <string>
 namespace NFrame
 {
-
 class IObject
 {
 public:
@@ -100,6 +98,7 @@ public:
 		GroupMemberList_GUID		= 0, // GUID -- object
 		GroupMemberList_Online		= 1, // Online -- int
 		GroupMemberList_GameID		= 2, // GameID -- int
+
 	};
 
 	enum ChatList
@@ -107,6 +106,7 @@ public:
 		ChatList_GUID		= 0, // GUID -- object
 		ChatList_msg		= 1, // msg -- string
 		ChatList_time		= 2, // time -- int
+
 	};
 
 };
@@ -305,6 +305,7 @@ public:
 		GuildBoss_VIP		= 5, // VIP -- int
 		GuildBoss_Offline		= 6, // Offline -- int
 		GuildBoss_Power		= 7, // Power -- int
+
 	};
 
 	enum GuildMemberList
@@ -323,6 +324,7 @@ public:
 		GuildMemberList_JoinTime		= 11, // JoinTime -- int
 		GuildMemberList_Contribution		= 12, // Contribution -- int
 		GuildMemberList_AllContribution		= 13, // AllContribution -- int
+
 	};
 
 	enum GuildAppyList
@@ -334,6 +336,7 @@ public:
 		GuildAppyList_Donation		= 4, // Donation -- int
 		GuildAppyList_VIP		= 5, // VIP -- int
 		GuildAppyList_Power		= 6, // Power -- int
+
 	};
 
 	enum GuildEvent
@@ -349,6 +352,7 @@ public:
 		GuildEvent_EventID		= 8, // EventID -- int
 		GuildEvent_EventTime		= 9, // EventTime -- int
 		GuildEvent_Context		= 10, // Context -- string
+
 	};
 
 	enum GuildHouse
@@ -361,6 +365,7 @@ public:
 		GuildHouse_VIP		= 5, // VIP -- int
 		GuildHouse_Offline		= 6, // Offline -- int
 		GuildHouse_Power		= 7, // Power -- int
+
 	};
 
 	enum GuildSkill
@@ -373,6 +378,7 @@ public:
 		GuildSkill_VIP		= 5, // VIP -- int
 		GuildSkill_Offline		= 6, // Offline -- int
 		GuildSkill_Power		= 7, // Power -- int
+
 	};
 
 };
@@ -489,6 +495,7 @@ public:
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& AwardData(){ static std::string xAwardData = "AwardData"; return xAwardData; } // string
+	static const std::string& AwardProperty(){ static std::string xAwardProperty = "AwardProperty"; return xAwardProperty; } // string
 	static const std::string& CoolDownTime(){ static std::string xCoolDownTime = "CoolDownTime"; return xCoolDownTime; } // float
 	static const std::string& OverlayCount(){ static std::string xOverlayCount = "OverlayCount"; return xOverlayCount; } // int
 	static const std::string& ExpiredType(){ static std::string xExpiredType = "ExpiredType"; return xExpiredType; } // int
@@ -694,6 +701,7 @@ public:
 		PlayerViewItem_EnhanceLevel		= 1, // EnhanceLevel -- int
 		PlayerViewItem_InlayStone		= 2, // InlayStone -- string
 		PlayerViewItem_SagecraftLevel		= 3, // SagecraftLevel -- string
+
 	};
 
 	enum PlayerHero
@@ -708,6 +716,7 @@ public:
 		PlayerHero_Equip4		= 7, // Equip4 -- object
 		PlayerHero_Equip5		= 8, // Equip5 -- object
 		PlayerHero_Equip6		= 9, // Equip6 -- object
+
 	};
 
 	enum BagEquipList
@@ -741,6 +750,7 @@ public:
 		BagEquipList_ElementLevel8		= 26, // ElementLevel8 -- int
 		BagEquipList_ElementLevel9		= 27, // ElementLevel9 -- int
 		BagEquipList_ElementLevel10		= 28, // ElementLevel10 -- int
+
 	};
 
 	enum BagItemList
@@ -750,6 +760,7 @@ public:
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
 		BagItemList_Date		= 4, // Date -- object
+
 	};
 
 	enum CommPropertyValue
@@ -778,6 +789,7 @@ public:
 		CommPropertyValue_PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
 		CommPropertyValue_MAGIC_GATE		= 22, // MAGIC_GATE -- int
 		CommPropertyValue_BUFF_GATE		= 23, // BUFF_GATE -- int
+
 	};
 
 	enum EctypeList
@@ -785,6 +797,7 @@ public:
 		EctypeList_EctypeID		= 0, // EctypeID -- int
 		EctypeList_IsPass		= 1, // IsPass -- int
 		EctypeList_Star		= 2, // Star -- int
+
 	};
 
 	enum DropItemList
@@ -793,6 +806,7 @@ public:
 		DropItemList_ItemID		= 1, // ItemID -- string
 		DropItemList_ItemCount		= 2, // ItemCount -- int
 		DropItemList_DrawState		= 3, // DrawState -- int
+
 	};
 
 	enum SkillTable
@@ -801,6 +815,7 @@ public:
 		SkillTable_SkillLevel		= 1, // SkillLevel -- int
 		SkillTable_SkillStone		= 2, // SkillStone -- string
 		SkillTable_SkillSoulLevel		= 3, // SkillSoulLevel -- int
+
 	};
 
 	enum TaskMonsterList
@@ -809,6 +824,7 @@ public:
 		TaskMonsterList_CurrentKillCount		= 1, // CurrentKillCount -- int
 		TaskMonsterList_RequireKillCount		= 2, // RequireKillCount -- int
 		TaskMonsterList_TaskID		= 3, // TaskID -- string
+
 	};
 
 	enum TaskList
@@ -816,6 +832,7 @@ public:
 		TaskList_TaskID		= 0, // TaskID -- string
 		TaskList_TaskStatus		= 1, // TaskStatus -- int
 		TaskList_Process		= 2, // Process -- int
+
 	};
 
 	enum PVPList
@@ -823,12 +840,14 @@ public:
 		PVPList_ID		= 0, // ID -- object
 		PVPList_Name		= 1, // Name -- string
 		PVPList_Level		= 2, // Level -- int
+
 	};
 
 	enum ChatGroup
 	{
 		ChatGroup_ChatType		= 0, // ChatType -- int
 		ChatGroup_GroupGUID		= 1, // GroupGUID -- object
+
 	};
 
 	enum BuildingList
@@ -841,6 +860,7 @@ public:
 		BuildingList_PosZ		= 5, // PosZ -- int
 		BuildingList_StateStartTime		= 6, // StateStartTime -- int
 		BuildingList_StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 	enum BuildingListProduce
@@ -853,6 +873,7 @@ public:
 		BuildingListProduce_PosZ		= 5, // PosZ -- int
 		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
 		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
+
 	};
 
 };
@@ -883,6 +904,7 @@ public:
 	static const std::string& LoadingUI(){ static std::string xLoadingUI = "LoadingUI"; return xLoadingUI; } // string
 	static const std::string& CamOffestPos(){ static std::string xCamOffestPos = "CamOffestPos"; return xCamOffestPos; } // string
 	static const std::string& CamOffestRot(){ static std::string xCamOffestRot = "CamOffestRot"; return xCamOffestRot; } // string
+	static const std::string& SyncObject(){ static std::string xSyncObject = "SyncObject"; return xSyncObject; } // int
 	// Record
 
 };
@@ -1102,4 +1124,4 @@ public:
 
 } // !@NFrame
 
-#endif // !NF_PR_NAME_HPP
+#endif // !NF_PR_NAME_HPP 
