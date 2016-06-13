@@ -207,8 +207,8 @@ protected:
 
 class NFINet;
 
-typedef std::function<void(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECIEVE_FUNCTOR;
-typedef std::shared_ptr<NET_RECIEVE_FUNCTOR> NET_RECIEVE_FUNCTOR_PTR;
+typedef std::function<void(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
+typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
 
 typedef std::function<void(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
 typedef std::shared_ptr<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
@@ -382,24 +382,21 @@ private:
 class NFINet
 {
 public:
-    template<typename BaseType>
-    bool AddReciveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handler)(const int, const int, const char*, const uint32_t))
-    {
-        NET_RECIEVE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        NET_RECIEVE_FUNCTOR_PTR functorPtr(new NET_RECIEVE_FUNCTOR(functor));
-        return AddReciveCallBack(nMsgID, functorPtr);
-    }
+    //template<typename BaseType>
+    //bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handler)(const int, const int, const char*, const uint32_t))
+    //{
+    //    NET_RECEIVE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+    //    NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
+    //    return AddReceiveCallBack(nMsgID, functorPtr);
+    //}
 
-    template<typename BaseType>
-    bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
-    {
-        NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-        NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
-        return AddEventCallBack(functorPtr);
-    }
-
-    virtual bool AddReciveCallBack(const int nMsgID, const NET_RECIEVE_FUNCTOR_PTR& cb) = 0;
-    virtual bool AddEventCallBack(const NET_EVENT_FUNCTOR_PTR& cb) = 0;
+    //template<typename BaseType>
+    //bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
+    //{
+    //    NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    //    NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
+    //    return AddEventCallBack(functorPtr);
+    //}
 
     virtual bool Execute() = 0;
 

@@ -41,14 +41,14 @@ const std::string NFProxyPlugin::GetPluginName()
     return GET_CLASS_NAME(NFProxyPlugin)
 }
 
-       void NFProxyPlugin::Install()
+void NFProxyPlugin::Install()
 {
 
-    REGISTER_MODULE(pPluginManager, NFCProxyLogicModule)
+    REGISTER_MODULE(pPluginManager, NFIProxyLogicModule, NFCProxyLogicModule)
 
 }
 
 void NFProxyPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCProxyLogicModule)
+    UNREGISTER_MODULE(pPluginManager, NFIProxyLogicModule, NFCProxyLogicModule)
 }
