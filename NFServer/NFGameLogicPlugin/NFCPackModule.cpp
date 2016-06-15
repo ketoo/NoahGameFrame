@@ -180,17 +180,10 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 	}
 
 	//还得确定有这个装备
-	if (!m_pElementModule->ExistElement(strItemConfigID))
+	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
 	{
 		return false;
 	}
-
-	int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
-    PackTableType eBagType = GetPackBagType(nItemType);
-    if (eBagType != PackTableType::BagItemPack)
-    {
-        return false;
-    }
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
 	if (!pRecord)
