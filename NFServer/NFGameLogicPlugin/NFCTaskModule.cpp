@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCMoveModule.cpp
+//    @FileName				:    NFCTaskModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-06-11
-//    @Module               :    NFCMoveModule
+//    @Module               :    NFCTaskModule
 //    @Desc                 :
 // -------------------------------------------------------------------------
 
@@ -20,7 +20,6 @@ bool NFCTaskModule::Shut()
 
 bool NFCTaskModule::Execute()
 {
-    //Î»ÖÃÄØ
     return true;
 }
 
@@ -35,16 +34,6 @@ bool NFCTaskModule::AfterInit()
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
-	assert( NULL != m_pKernelModule );
-	assert( NULL != m_pItemConsumeManagerModule );
-	assert( NULL != m_pPackModule );
-	assert( NULL != m_pElementModule );
-	assert(	NULL != m_pLogicClassModule);
-	assert(	NULL != m_pPropertyModule);
-	assert(	NULL != m_pHeroModule);
-	assert(	NULL != m_pCommonConfigModule);
-	assert(	NULL != m_pGameServerNet_ServerModule);
 
 	std::string strPlayerPath = pPluginManager->GetConfigPath();
 	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";

@@ -44,17 +44,6 @@ public:
     virtual bool DeleteItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
     virtual bool EnoughItem(const NFGUID& self, const std::string& strItemConfigID, const int nCount);
 
-
-    virtual PackTableType GetPackBagType(int nItemType);
-
-protected:
-
-	int FindItemRowByConfig(const NFGUID& self, const std::string& strItemConfigID);
-    int OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-
-    // Ìí¼ÓµôÂäµÀ¾ß
-    int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
-
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

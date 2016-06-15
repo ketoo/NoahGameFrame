@@ -14,15 +14,6 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
-enum PackTableType
-{
-    NONE_PACK  = -1,
-    BagItemPack  = 0, // 普通背包
-    BagEquipPack  = 1, // 装备背包
-
-    MaxPack,
-};
-
 class NFIPackModule : public NFILogicModule
 {
 public:
