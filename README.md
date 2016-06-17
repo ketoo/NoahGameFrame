@@ -227,16 +227,16 @@ bool HelloWorld1::Shut()
 -------------------
 
 ### Amazing  open source projects:
-breeze
+#breeze
 * Auther: zsummer
 * Github: https://github.com/zsummer/breeze
 * Description:A fast, scalable, distributed game server framework for C++
 
 
-gce
-Auther: nousxiong
-GitHub: https://github.com/nousxiong/gce
-Description: The Game Communication Environment (GCE) is an actor model framework for online game development.
+#gce
+* Auther: nousxiong
+* GitHub: https://github.com/nousxiong/gce
+* Description: The Game Communication Environment (GCE) is an actor model framework for online game development.
 
 
 
