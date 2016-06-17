@@ -226,7 +226,7 @@ bool HelloWorld1::Shut()
 
 -------------------
 
-### Amazing  open source project:
+### Amazing  open source projects:
 * Auther: zsummer
 * Github: https://github.com/zsummer/breeze
 * Description:A fast, scalable, distributed game server framework for C++
