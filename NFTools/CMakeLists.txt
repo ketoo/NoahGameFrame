@@ -1,1 +1,2 @@
 add_subdirectory(NFFileProcess)
+add_subdirectory(NFAutoCopyDll)
