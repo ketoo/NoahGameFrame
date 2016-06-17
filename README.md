@@ -226,9 +226,10 @@ bool HelloWorld1::Shut()
 
 -------------------
 
-### Awesome-frame:
-
-* https://github.com/zsummer/breeze [A fast, scalable, distributed game server framework for C++]
+### Amazing  open source project:
+* Auther: zsummer
+* Github: https://github.com/zsummer/breeze
+* Description:A fast, scalable, distributed game server framework for C++
 
 
 
