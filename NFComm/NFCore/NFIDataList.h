@@ -320,7 +320,7 @@ public:
     virtual ~NFIDataList() = 0;
 
     virtual std::string StringValEx(const int index) const = 0;
-    virtual bool ToString(std::string& str, const char* strSplit) const = 0;
+    virtual bool ToString(std::string& str, const std::string& strSplit) const = 0;
 
 public:
 
@@ -344,18 +344,16 @@ public:
     //数据类型检测
     virtual bool TypeEx(const  int nType, ...) const = 0;
     //新进入拆分
-    virtual bool Split(const char* str, const char* strSplit) = 0;
+    virtual bool Split(const std::string& str, const std::string& strSplit) = 0;
 
     // 添加数据
     virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const double value) = 0;
-    virtual bool Add(const char* value) = 0;
     virtual bool Add(const std::string& value) = 0;
     virtual bool Add(const NFGUID& value) = 0;
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const double value) = 0;
-	virtual bool Set(const int index, const char* value) = 0;
 	virtual bool Set(const int index, const std::string& value) = 0;
     virtual bool Set(const int index, const NFGUID& value) = 0;
 
@@ -394,7 +392,7 @@ public:
     {
         return Set(index, value);
     }
-    bool SetString(const int index, const char* value)
+    bool SetString(const int index, const std::string& value)
     {
         return Set(index, value);
     }

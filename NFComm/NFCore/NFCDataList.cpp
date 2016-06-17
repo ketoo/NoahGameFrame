@@ -15,7 +15,7 @@ NFCDataList::NFCDataList()
 {
 }
 
-NFCDataList::NFCDataList(const char* str, const char* strSplit)
+NFCDataList::NFCDataList(const std::string& str, const std::string& strSplit)
 {
     Clear();
 
@@ -151,7 +151,7 @@ bool NFCDataList::Add(const double value)
     return false;
 }
 
-bool NFCDataList::Add(const char* value)
+bool NFCDataList::Add(const std::string& value)
 {
     if (GetCount() == mvList.size())
     {
@@ -168,11 +168,6 @@ bool NFCDataList::Add(const char* value)
     }
 
     return false;
-}
-
-bool NFCDataList::Add(const std::string& value)
-{
-	return Add(value.c_str());
 }
 
 bool NFCDataList::Add(const NFGUID& value)
@@ -224,7 +219,7 @@ bool NFCDataList::Set(const int index, const double value)
 
     return false;
 }
-bool NFCDataList::Set(const int index, const char* value)
+bool NFCDataList::Set(const int index, const std::string& value)
 {
     if (ValidIndex(index) && Type(index) == TDATA_STRING)
     {
@@ -256,11 +251,6 @@ bool NFCDataList::Set(const int index, const NFGUID& value)
     return false;
 }
 
-
-bool NFCDataList::Set(const int index, const std::string& value)
-{
-	return Set(index, value.c_str());
-}
 
 NFINT64 NFCDataList::Int(const int index) const
 {
@@ -322,7 +312,7 @@ const NFGUID& NFCDataList::Object(const int index) const
     return NULL_OBJECT;
 }
 
-bool NFCDataList::Split(const char* str, const char* strSplit)
+bool NFCDataList::Split(const std::string& str, const std::string& strSplit)
 {
     Clear();
 
@@ -523,7 +513,7 @@ std::string NFCDataList::StringValEx(const int index) const
     return NULL_STR;
 }
 
-bool NFCDataList::ToString(std::string& str, const char* strSplit) const
+bool NFCDataList::ToString(std::string& str, const std::string& strSplit) const
 {
     for (int i = 0; i < GetCount(); ++i)
     {
