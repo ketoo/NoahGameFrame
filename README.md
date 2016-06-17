@@ -221,14 +221,14 @@ bool HelloWorld1::Shut()
 -------------------
 ### About The Author
 
-Mail: 342006@qq.com
-GitHub: https://github.com/ketoo
+* Mail: 342006@qq.com
+* GitHub: https://github.com/ketoo
 
 -------------------
 
 ### Awesome-frame:
 
-https://github.com/zsummer/breeze [A fast, scalable, distributed game server framework for C++]
+* https://github.com/zsummer/breeze [A fast, scalable, distributed game server framework for C++]
 
 
 
