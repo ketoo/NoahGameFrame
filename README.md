@@ -217,9 +217,18 @@ bool HelloWorld1::Shut()
 * how to use the asynchronous events
 * use multiple cpus to get high performance
 
+
+-------------------
+### About The Author
+
+Mail: 342006@qq.com
+GitHub: https://github.com/ketoo
+
 -------------------
 
+### Awesome-frame:
 
+https://github.com/zsummer/breeze [A fast, scalable, distributed game server framework for C++]
 
 
 
