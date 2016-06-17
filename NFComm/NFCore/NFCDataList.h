@@ -17,7 +17,7 @@ class NFCDataList: public NFIDataList
 public:
     NFCDataList();
 
-    NFCDataList(const char* str, const char* strSplit);
+    NFCDataList(const std::string& str, const std::string& strSplit);
 
     NFCDataList(const NFCDataList& src);
     NFCDataList(const NFIDataList& src);
@@ -52,17 +52,15 @@ public:
     //数据类型检测
     virtual bool TypeEx(const  int nType, ...) const;
 
-    virtual bool Split(const char* strData, const char* strSplit);
+    virtual bool Split(const std::string& strData, const std::string& strSplit);
 
     virtual bool Add(const NFINT64 value);
     virtual bool Add(const double value);
-    virtual bool Add(const char* value);
     virtual bool Add(const std::string& value);
     virtual bool Add(const NFGUID& value);
 
     virtual bool Set(const int index, const NFINT64 value);
     virtual bool Set(const int index, const double value);
-	virtual bool Set(const int index, const char* value);
 	virtual bool Set(const int index, const std::string& value);
     virtual bool Set(const int index, const NFGUID& value);
 
@@ -73,7 +71,7 @@ public:
     virtual const std::string& String(const int index) const;
     virtual const NFGUID& Object(const int index) const;
 
-    virtual bool ToString(std::string& str, const char* strSplit) const;
+    virtual bool ToString(std::string& str, const std::string& strSplit) const;
 
 
 protected:
