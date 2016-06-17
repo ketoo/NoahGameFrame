@@ -217,12 +217,26 @@ bool HelloWorld1::Shut()
 * how to use the asynchronous events
 * use multiple cpus to get high performance
 
+
+-------------------
+### About The Author
+
+* Mail: 342006@qq.com
+* GitHub: https://github.com/ketoo
+
 -------------------
 
+### Amazing  open source projects:
+**breeze**
+* Auther: zsummer
+* Github: https://github.com/zsummer/breeze
+* Description:A fast, scalable, distributed game server framework for C++
 
 
-
-
+**gce**
+* Auther: nousxiong
+* GitHub: https://github.com/nousxiong/gce
+* Description: The Game Communication Environment (GCE) is an actor model framework for online game development.
 
 
 
