@@ -685,7 +685,7 @@ int NFCRecord::FindFloat(const std::string& strColTag, const double value, NFIDa
     return FindFloat(nCol, value, varResult);
 }
 
-int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varResult)
+int NFCRecord::FindString(const int nCol, const std::string& value, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
@@ -707,7 +707,7 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varRes
             }
 
             const std::string& strData = GetString(i, nCol);
-            if (0 == strcmp(strData.c_str(), value))
+            if (0 == strcmp(strData.c_str(), value.c_str()))
             {
                 varResult << i;
             }
@@ -719,7 +719,7 @@ int NFCRecord::FindString(const int nCol, const char* value, NFIDataList& varRes
     return -1;
 }
 
-int NFCRecord::FindString(const std::string& strColTag, const char* value, NFIDataList& varResult)
+int NFCRecord::FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult)
 {
     if (strColTag.empty())
     {
@@ -728,17 +728,6 @@ int NFCRecord::FindString(const std::string& strColTag, const char* value, NFIDa
 
     int nCol = GetCol(strColTag);
     return FindString(nCol, value, varResult);
-}
-
-
-int NFCRecord::FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult)
-{
-	return FindString(strColTag, value.c_str(), varResult);
-}
-
-int NFCRecord::FindString(const int nCol, const std::string& value, NFIDataList& varResult)
-{
-	return FindString(nCol, value.c_str(), varResult);
 }
 
 int NFCRecord::FindObject(const int nCol, const NFGUID& value, NFIDataList& varResult)
@@ -871,7 +860,7 @@ void NFCRecord::SetPrivate(const bool bPrivate)
     mbPrivate = bPrivate;
 }
 
-void NFCRecord::SetName(const char* strName)
+void NFCRecord::SetName(const std::string& strName)
 {
     mstrRecordName = strName;
 }
