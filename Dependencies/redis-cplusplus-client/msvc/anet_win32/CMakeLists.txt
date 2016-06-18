@@ -3,6 +3,7 @@ IF( WIN32 )
 	aux_source_directory(. DIR_SRCS)
 
 	add_library(anet_win64 anet_win32.c)
+	set_target_properties( anet_win64 PROPERTIES OUTPUT_NAME_DEBUG "anet_win64_d")
 	set_target_properties( anet_win64 PROPERTIES 
 		FOLDER "NFDeps"
 		ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/

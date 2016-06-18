@@ -4,7 +4,8 @@ file(GLOB NFLuaScriptPlugin_ROOT_Hpp *.h)
 add_library(NFLuaScriptPlugin SHARED
 	${NFLuaScriptPlugin_ROOT_Cpp}
 	${NFLuaScriptPlugin_ROOT_Hpp})
-	
+
+add_dependencies(NFLuaScriptPlugin libprotobuf lua NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
 set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin_d")
 set_target_properties( NFLuaScriptPlugin PROPERTIES
 	FOLDER "NFSDK"
