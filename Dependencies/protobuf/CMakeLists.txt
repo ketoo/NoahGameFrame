@@ -38,6 +38,7 @@ IF( WIN32 )
 		./src/google/protobuf/stubs/stringprintf.cc)
 
 	add_library(libprotobuf SHARED ${pbFiles})
+	set_target_properties( libprotobuf PROPERTIES OUTPUT_NAME_DEBUG "libprotobuf_d")
 	set_target_properties( libprotobuf PROPERTIES 
 		FOLDER "NFDeps"
 		ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
