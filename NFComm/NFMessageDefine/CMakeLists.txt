@@ -6,7 +6,8 @@ add_library(NFMessageDefine SHARED
 	${NFMessageDefine_ROOT_Cpp}
 	${NFMessageDefine_ROOT_CC}
 	${NFMessageDefine_ROOT_Hpp})
-	
+
+add_dependencies(NFMessageDefine libprotobuf)
 set_target_properties( NFMessageDefine PROPERTIES OUTPUT_NAME_DEBUG "NFMessageDefine_d")
 set_target_properties( NFMessageDefine PROPERTIES
 	FOLDER "NFSDK"
