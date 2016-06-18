@@ -17,7 +17,8 @@ add_library(NFKernelPlugin SHARED
 	${NFKernelPlugin_NFSceneModule_Hpp}
 	${NFKernelPlugin_ROOT_Cpp}
 	${NFKernelPlugin_ROOT_Hpp})
-	
+
+add_dependencies(NFKernelPlugin NFCore NFConfigPlugin Theron)
 set_target_properties( NFKernelPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFKernelPlugin_d")
 set_target_properties( NFKernelPlugin PROPERTIES
 	FOLDER "NFSDK"

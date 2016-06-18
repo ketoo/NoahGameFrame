@@ -6,7 +6,8 @@ remove_file(NFUrlPlugin_ROOT_Cpp "Plugin.cpp")
 add_library(NFUrlPlugin SHARED
 	${NFUrlPlugin_ROOT_Cpp}
 	${NFUrlPlugin_ROOT_Hpp})
-	
+
+add_dependencies(NFUrlPlugin libprotobuf NFCore NFMessageDefine)
 set_target_properties( NFUrlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUrlPlugin_d")
 set_target_properties( NFUrlPlugin PROPERTIES
 	FOLDER "NFSDK"
