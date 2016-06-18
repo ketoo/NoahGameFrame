@@ -8,7 +8,7 @@ file(GLOB RemoveItems_Hpp NFCPluginActor.h)
 list(REMOVE_ITEM NFPluginLoader_ROOT_Hpp ${RemoveItems_Hpp})
 
 add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_Hpp})
-
+add_dependencies(NFPluginLoader NFCore Theron)
 set_target_properties( NFPluginLoader PROPERTIES OUTPUT_NAME_DEBUG "NFPluginLoader_d")
 set_target_properties( NFPluginLoader PROPERTIES
 	FOLDER "NFSDK"

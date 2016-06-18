@@ -10,4 +10,4 @@ set_target_properties( NFCore PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-target_link_libraries(NFCore anet_win64 libprotobuf lua Theron)
+target_link_libraries(NFCore Theron)
