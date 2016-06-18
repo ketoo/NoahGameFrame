@@ -1,0 +1,24 @@
+file(GLOB NFAutoCopyDll_ROOT_Cpp *.cpp)
+file(GLOB NFAutoCopyDll_ROOT_Hpp *.h)
+
+add_executable(NFAutoCopyDll 
+	${NFAutoCopyDll_ROOT_Cpp} 
+	${NFAutoCopyDll_ROOT_Hpp})
+	
+set_target_properties( NFAutoCopyDll PROPERTIES
+	FOLDER "NFTools"
+	ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
+	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
+	LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
+	ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
+	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
+	LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/	)
+target_link_libraries(NFAutoCopyDll Theron)
+
+add_definitions(
+	-D_CRT_SECURE_NO_WARNINGS
+	-D_CRT_NONSTDC_NO_DEPRECATE
+)
+
+
+
