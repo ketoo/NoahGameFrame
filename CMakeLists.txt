@@ -28,17 +28,12 @@ ${SolutionDir}/Dependencies/lua/
 )
 
 if(UNIX)
-
-else()
-include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
-endif()
-
-SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS" )
-
-if(UNIX)
 	set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}  -std=c++11 -O0 -Wall -g -ggdb")
 	set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS}  -std=c++11 -O3 -Wall")
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
+else()
+	SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS" )
+	include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
 endif()
 set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm)
 link_directories(${DependenciesLibPath})
