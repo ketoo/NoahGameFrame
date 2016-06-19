@@ -15,8 +15,15 @@ set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 link_NFSDK("NFProxyServerNet_ClientPlugin")
 
-add_definitions(
-	-DWIN
-	-D_USRDLL
-	-DELPP_NO_DEFAULT_LOG_FILE
-)
+if(UNIX)
+	add_definitions(
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+else()
+	add_definitions(
+		-DWIN
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+endif()
