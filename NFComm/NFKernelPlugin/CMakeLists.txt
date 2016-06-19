@@ -23,6 +23,7 @@ if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 else()
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
+	target_link_libraries(NFKernelPlugin anet_win64 libprotobuf lua Theron)
 endif()
 set_target_properties( NFKernelPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFKernelPlugin_d")
 set_target_properties( NFKernelPlugin PROPERTIES
@@ -30,4 +31,4 @@ set_target_properties( NFKernelPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-target_link_libraries(NFKernelPlugin anet_win64 libprotobuf lua Theron)
+
