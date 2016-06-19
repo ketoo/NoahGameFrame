@@ -7,7 +7,13 @@ add_library(NFUrlPlugin SHARED
 	${NFUrlPlugin_ROOT_Cpp}
 	${NFUrlPlugin_ROOT_Hpp})
 
-add_dependencies(NFUrlPlugin libprotobuf NFCore NFMessageDefine)
+
+if(UNIX)
+	add_dependencies(NFUrlPlugin NFCore NFMessageDefine)
+else()
+	add_dependencies(NFUrlPlugin libprotobuf NFCore NFMessageDefine)
+endif()
+
 set_target_properties( NFUrlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUrlPlugin_d")
 set_target_properties( NFUrlPlugin PROPERTIES
 	FOLDER "NFSDK"
