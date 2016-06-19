@@ -1,26 +1,27 @@
-file(GLOB NFUrlPlugin_ROOT_Cpp *.cpp)
-file(GLOB NFUrlPlugin_ROOT_Hpp *.h)
+if(UNIX)
+	
+else()
+	file(GLOB NFUrlPlugin_ROOT_Cpp *.cpp)
+	file(GLOB NFUrlPlugin_ROOT_Hpp *.h)
 
-remove_file(NFUrlPlugin_ROOT_Cpp "Plugin.cpp")
+	remove_file(NFUrlPlugin_ROOT_Cpp "Plugin.cpp")
 
-add_library(NFUrlPlugin SHARED
+	add_library(NFUrlPlugin SHARED
 	${NFUrlPlugin_ROOT_Cpp}
 	${NFUrlPlugin_ROOT_Hpp})
-
-
-if(UNIX)
-	add_dependencies(NFUrlPlugin NFCore NFMessageDefine)
-else()
 	add_dependencies(NFUrlPlugin libprotobuf NFCore NFMessageDefine)
 	target_link_libraries(NFUrlPlugin anet_win64 libprotobuf lua Theron NFMessageDefine)
-endif()
-
-set_target_properties( NFUrlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUrlPlugin_d")
-set_target_properties( NFUrlPlugin PROPERTIES
+	add_definitions("-DWIN -D_USRDLL -DCURL_STATICLIB -DHTTP_ONLY")
+	
+	set_target_properties( NFUrlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUrlPlugin_d")
+	set_target_properties( NFUrlPlugin PROPERTIES
 	FOLDER "NFSDK"
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
+endif()
 
 
-add_definitions("-DWIN -D_USRDLL -DCURL_STATICLIB -DHTTP_ONLY")
+
+
+
