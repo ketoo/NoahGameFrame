@@ -21,6 +21,7 @@ add_library(NFKernelPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
+	target_link_libraries(NFKernelPlugin libtheron.a)
 else()
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 	target_link_libraries(NFKernelPlugin anet_win64 libprotobuf lua Theron)
