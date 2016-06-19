@@ -5,7 +5,12 @@ add_library(NFLogPlugin SHARED
 	${NFLogPlugin_ROOT_Cpp}
 	${NFLogPlugin_ROOT_Hpp})
 
-add_dependencies(NFLogPlugin NFCore Theron)
+if(UNIX)
+	add_dependencies(NFLogPlugin NFCore)
+else()
+	add_dependencies(NFLogPlugin NFCore Theron)
+endif()
+
 set_target_properties( NFLogPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLogPlugin_d")
 set_target_properties( NFLogPlugin PROPERTIES
 	FOLDER "NFSDK"
