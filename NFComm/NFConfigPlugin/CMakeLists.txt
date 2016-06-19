@@ -9,7 +9,7 @@ set_target_properties( NFConfigPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 
 if(UNIX)
-
+	target_link_libraries(NFConfigPlugin libtheron.a)
 else()
 	target_link_libraries(NFConfigPlugin anet_win64 libprotobuf lua Theron)
 endif()
