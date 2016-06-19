@@ -15,8 +15,15 @@ set_target_properties( NFMasterNet_ServerPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 link_NFSDK("NFMasterNet_ServerPlugin")
 
-add_definitions(
-	-DWIN
-	-D_USRDLL
-	-DELPP_NO_DEFAULT_LOG_FILE
-)
+if(UNIX)
+	add_definitions(
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+else()
+	add_definitions(
+		-DWIN
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+endif()
