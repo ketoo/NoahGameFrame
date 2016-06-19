@@ -11,6 +11,7 @@ add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_H
 
 if(UNIX)
 	add_dependencies(NFPluginLoader NFCore)
+	target_link_libraries(NFPluginLoader libtheron.a pthread dl)
 else()
 	add_dependencies(NFPluginLoader NFCore Theron)
 	target_link_libraries(NFPluginLoader Theron)

@@ -19,8 +19,15 @@ set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES
 
 link_NFSDK("NFGameServerNet_ClientPlugin")
 
-add_definitions(
-	-DWIN
-	-D_USRDLL
-	-DELPP_NO_DEFAULT_LOG_FILE
-)
+if(UNIX)
+	add_definitions(
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+else()
+	add_definitions(
+		-DWIN
+		-D_USRDLL
+		-DELPP_NO_DEFAULT_LOG_FILE
+	)
+endif()
