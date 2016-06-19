@@ -16,10 +16,10 @@ set_target_properties( NFNet PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 if(UNIX)
-	
+
 else()
 	target_link_libraries(NFNet anet_win64 libprotobuf lua Theron)
+	add_definitions("-D_LIB -DWIN32 -DWIN")
 endif()
 
 
-add_definitions("-D_LIB -DWIN32 -DWIN")
