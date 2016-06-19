@@ -7,4 +7,9 @@ set_target_properties( NFConfigPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-target_link_libraries(NFConfigPlugin anet_win64 libprotobuf lua Theron)
+
+if(UNIX)
+
+else()
+	target_link_libraries(NFConfigPlugin anet_win64 libprotobuf lua Theron)
+endif()

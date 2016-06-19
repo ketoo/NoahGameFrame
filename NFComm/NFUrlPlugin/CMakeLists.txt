@@ -12,6 +12,7 @@ if(UNIX)
 	add_dependencies(NFUrlPlugin NFCore NFMessageDefine)
 else()
 	add_dependencies(NFUrlPlugin libprotobuf NFCore NFMessageDefine)
+	target_link_libraries(NFUrlPlugin anet_win64 libprotobuf lua Theron NFMessageDefine)
 endif()
 
 set_target_properties( NFUrlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUrlPlugin_d")
@@ -20,6 +21,6 @@ set_target_properties( NFUrlPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-target_link_libraries(NFUrlPlugin anet_win64 libprotobuf lua Theron NFMessageDefine)
+
 
 add_definitions("-DWIN -D_USRDLL -DCURL_STATICLIB -DHTTP_ONLY")
