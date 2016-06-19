@@ -15,6 +15,14 @@ cp -r -f ./lib/Release/libmysqlclient.so ./lib/Debug/
 cp -r -f ./lib/Release/mysqlclient.lib ./lib/Debug/
 cp -r -f ./lib/Release/libmysqlpp.a ./lib/Debug
 
+echo Copy mysql libs to lib directory
+cp -r -f ./lib/Release/libmysql.dll ./lib/
+cp -r -f ./lib/Release/libmysql.lib ./lib/
+cp -r -f ./lib/Release/libmysqlclient.a ./lib/
+cp -r -f ./lib/Release/libmysqlclient.so ./lib/
+cp -r -f ./lib/Release/mysqlclient.lib ./lib/
+cp -r -f ./lib/Release/libmysqlpp.a ./lib/
+
 # extract libevent libs
 echo Extract libevent libs
 tar -xzvf libevent-2.0.22-stable.tar.gz
@@ -30,6 +38,7 @@ chmod -R 755 *
 ./configure CPPFLAGS=-fPIC --disable-shared
 make
 cp -r -f .libs/*.a ../lib/Debug/
+cp -r -f .libs/*.a ../lib/
 cp -r -f .libs/*.a ../lib/Release/
 cd ../
 
@@ -67,6 +76,9 @@ cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
 cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Release/
+
+cp -r -f ./src/.libs/*.so ../lib/
+cp -r -f ./src/.libs/*.so.* ../lib/
 cd ../
 
 # compiling Theron
