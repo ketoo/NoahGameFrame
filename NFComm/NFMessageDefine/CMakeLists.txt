@@ -8,7 +8,7 @@ add_library(NFMessageDefine SHARED
 	${NFMessageDefine_ROOT_Hpp})
 
 if(UNIX)
-
+	target_link_libraries(NFMessageDefine libtheron.a)
 else()
 	add_dependencies(NFMessageDefine libprotobuf)
 	target_link_libraries(NFMessageDefine anet_win64 libprotobuf lua Theron)
