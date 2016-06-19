@@ -17,10 +17,17 @@
 #include "dirent.h"
 #include <sys/stat.h>
 #include <errno.h>
-#ifdef WIN32
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <io.h>
+#include <windows.h>
+#include <conio.h>
 #else
+#include <iconv.h>
 #include <unistd.h>
+#include <cstdio>
+#include <dirent.h>
+#include <sys/stat.h>
 #endif
 
 bool GetPluginNameList(std::string& strPlugin, std::vector<std::string>& pluginList, std::string& configPath)
@@ -98,88 +105,73 @@ int CopyFile(std::string& SourceFile, std::string& NewFile)
 	}
 }
 
-int find_directory(const char *dirname, std::vector<std::string>& fileList)
+std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth)
 {
-	DIR *dir;
-	char buffer[PATH_MAX + 2];
-	char *p = buffer;
-	const char *src;
-	char *end = &buffer[PATH_MAX];
-	int result; //返回结果
+	std::vector<std::string> result;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	_finddata_t FileInfo;
+	std::string strfind = folderPath + "\\*";
+	long long Handle = _findfirst(strfind.c_str(), &FileInfo);
 
-				//copy目录名到buffer
-	src = dirname;
-	while (p < end  &&  *src != '\0') {
-		*p++ = *src++;
+
+	if (Handle == -1L)
+	{
+		std::cerr << "can not match the folder path" << std::endl;
+		exit(-1);
 	}
-	*p = '\0';
-
-	//打开目录
-	dir = opendir(dirname);
-	if (dir != NULL) {
-		struct dirent *ent;
-
-		while ((ent = readdir(dir)) != NULL) {//这里返回的是当前目录.
-			char *q = p;
-			char c;
-
-			//获得目录的最后一个字符
-			if (buffer < q) {
-				c = q[-1];
+	do {
+		//判断是否有子目录
+		if (FileInfo.attrib & _A_SUBDIR)
+		{
+			//这个语句很重要
+			if ((strcmp(FileInfo.name, ".") != 0) && (strcmp(FileInfo.name, "..") != 0))
+			{
+				std::string newPath = folderPath + "\\" + FileInfo.name;
+				//dfsFolder(newPath, depth);
+				auto newResult = GetFileListInFolder(newPath, depth);
+				result.insert(result.begin(), newResult.begin(), newResult.end());
 			}
-			else {
-				c = ':';
-			}
-
-			//在当前给出的目录下加上/
-			if (c != ':'  &&  c != '/'  &&  c != '\\') {
-				*q++ = '/';
-			}
-
-			//把文件名附加在后面
-			src = ent->d_name; //src 为根目录.
-			while (q < end  &&  *src != '\0') {
-				*q++ = *src++;
-			}
-			*q = '\0';
-
-			//根据是否是文件还是目录来选择操作
-			switch (ent->d_type) {
-			case DT_LNK:
-			case DT_REG:
-				//如果是文件
-				fileList.push_back(std::string(buffer));
-				//RemoveFile(buffer);
-				break;
-
-			case DT_DIR:
-				//如果是目录
-				if (strcmp(ent->d_name, ".") != 0
-					&& strcmp(ent->d_name, "..") != 0) {
-					find_directory(buffer, fileList);
-				}
-				break;
-
-			default:
-				/* Ignore device entries */
-				/*NOP*/;
-			}
-
 		}
+		else
+		{
 
-		closedir(dir);
-		result = 0;
+			std::string filename = (folderPath + "\\" + FileInfo.name);
+			result.push_back(filename);
+		}
+	} while (_findnext(Handle, &FileInfo) == 0);
 
+
+	_findclose(Handle);
+#else
+	DIR *pDir;
+	struct dirent *ent;
+	char childpath[512];
+	char absolutepath[512];
+	pDir = opendir(folderPath.c_str());
+	memset(childpath, 0, sizeof(childpath));
+	while ((ent = readdir(pDir)) != NULL)
+	{
+		if (ent->d_type & DT_DIR)
+		{
+			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+			{
+				continue;
+			}
+			std::string childpath = folderPath + "/" + ent->d_name;
+			auto newResult = GetFileListInFolder(childpath, depth);
+			result.insert(result.begin(), newResult.begin(), newResult.end());
+		}
+		else
+		{
+			sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+			result.push_back(absolutepath);
+		}
 	}
-	else {
-		//目录打不开
-		printf("Cannot open directory %s\n", dirname);
-		result = -1;
-	}
 
+	sort(result.begin(), result.end());//排序
+#endif
 	return result;
 }
-
 
 
 void printResult(int result, std::string& strName)
@@ -198,9 +190,9 @@ int main()
 {
 	std::vector<std::string> fileList;
 #ifdef NF_DEBUG_MODE
-	find_directory("../../Debug", fileList);
+	fileList = GetFileListInFolder("../../Debug", 10);
 #else
-	find_directory("../../Release", fileList);
+	fileList = GetFileListInFolder("../../Release", 10);
 #endif
 	for (auto fileName : fileList)
 	{
@@ -213,27 +205,74 @@ int main()
 			GetPluginNameList(fileName, pluginList, configPath);
 			if (pluginList.size() > 0 && configPath != "")
 			{
+#if NF_PLATFORM == NF_PLATFORM_WIN
 				pluginList.push_back("libprotobuf");
 				pluginList.push_back("NFMessageDefine");
+#else
+				pluginList.push_back("NFMessageDefine");
+#endif
 				pluginList.push_back("NFPluginLoader");
-
 				configPath = "../" + configPath;
 				configPath = fileName.substr(0, fileName.find_last_of("/")) + "/" + configPath;
 
 				for (std::string name : pluginList)
 				{
-					std::string src = configPath + "Comm/Debug/" + name;
-					std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+
+
+
+#else
+
+#endif
+
+					
 					int result = 0;
 					if (name == "NFPluginLoader")
 					{
-						printResult(CopyFile(src + "_d.exe", des + "_d.exe"), src + "_d.exe");
-						printResult(CopyFile(src + "_d.pdb", des + "_d.pdb"), src + "_d.pdb");
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifdef NF_DEBUG_MODE
+						std::string src = configPath + "Comm/Debug/" + name;
+#else
+						std::string src = configPath + "Comm/Release/" + name;
+#endif
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + "_d.exe";
+						auto strDes = des + "_d.exe";
+						auto strSrcPDB = src + "_d.pdb";
+						auto strDesPDB = des + "_d.pdb";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+#else
+						std::string src = configPath + "Comm/" + name;
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + "_d";
+						auto strDes = des + "_d";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+#endif
+
 					}
 					else
 					{
-						printResult(CopyFile(src + "_d.dll", des + "_d.dll"), src + "_d.dll");
-						printResult(CopyFile(src + "_d.pdb", des + "_d.pdb"), src + "_d.pdb");
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#ifdef NF_DEBUG_MODE
+						std::string src = configPath + "Comm/Debug/" + name;
+#else
+						std::string src = configPath + "Comm/Release/" + name;
+#endif
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + "_d.dll";
+						auto strDes = des + "_d.dll";
+						auto strSrcPDB = src + "_d.pdb";
+						auto strDesPDB = des + "_d.pdb";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+#else
+						std::string src = configPath + "Comm/lib" + name;
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + "_d.so";
+						auto strDes = des + "_d.so";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+#endif
 					}
 				}
 			}

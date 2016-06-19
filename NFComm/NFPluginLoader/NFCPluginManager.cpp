@@ -22,9 +22,9 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "Theron_d.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "Theron_d.a" )
+#pragma comment( lib, "libtherond.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "Theron_d.a" )
+#pragma comment( lib, "libtherond.a" )
 #endif
 
 #else
@@ -32,9 +32,9 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "Theron.lib" )
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "Theron.a" )
+#pragma comment( lib, "libtheron.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "Theron.a" )
+#pragma comment( lib, "libtheron.a" )
 #endif
 
 #endif

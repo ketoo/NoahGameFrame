@@ -7,6 +7,7 @@ add_library(NFLogPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFLogPlugin NFCore)
+		target_link_libraries(NFLogPlugin libtheron.a)
 else()
 	add_dependencies(NFLogPlugin NFCore Theron)
 	target_link_libraries(NFLogPlugin anet_win64 libprotobuf lua Theron)
