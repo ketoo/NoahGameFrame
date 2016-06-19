@@ -8,9 +8,11 @@ add_library(NFLuaScriptPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFLuaScriptPlugin NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
+	add_definitions("-D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE")
 else()
 	add_dependencies(NFLuaScriptPlugin libprotobuf lua NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
 	target_link_libraries(NFLuaScriptPlugin anet_win64 libprotobuf lua Theron)
+	add_definitions("-D_USRDLL -DTHERON_CPP11")
 endif()
 set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin_d")
 set_target_properties( NFLuaScriptPlugin PROPERTIES
@@ -20,4 +22,4 @@ set_target_properties( NFLuaScriptPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 
 
-add_definitions("-D_USRDLL -DTHERON_CPP11")
+
