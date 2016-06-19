@@ -10,6 +10,7 @@ if(UNIX)
 	add_dependencies(NFLuaScriptPlugin NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
 else()
 	add_dependencies(NFLuaScriptPlugin libprotobuf lua NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
+	target_link_libraries(NFLuaScriptPlugin anet_win64 libprotobuf lua Theron)
 endif()
 set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin_d")
 set_target_properties( NFLuaScriptPlugin PROPERTIES
@@ -17,6 +18,6 @@ set_target_properties( NFLuaScriptPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-target_link_libraries(NFLuaScriptPlugin anet_win64 libprotobuf lua Theron)
+
 
 add_definitions("-D_USRDLL -DTHERON_CPP11")
