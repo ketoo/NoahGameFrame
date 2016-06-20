@@ -61,7 +61,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 * MSVC >= VS2015 (**Tested in Win7/10**)
 
 ## Build and Install
-### Windows[MSVC >= 2015]
+### MSVC >= 2015
 
 1. Git pull all source
 2. Run **install.bat**
@@ -70,7 +70,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 5. Run **GenerateConfigXML.bat** to generate configuration files
 6. Run the binary file by **_Out/Server/Debug/Run.bat**
 
-### Linux[CodeBlocks >= 13.1]
+### CodeBlocks >= 13.1(Only in linux)
 
 1. Git pull all source
 2. Run **install.sh**
@@ -81,9 +81,9 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 6. Run the binary file by **_Out/Server/Debug/rund.sh**
 
 ### CMake
-1. Install cmake[>= 2.8]
-2. Install VS2015 or gcc[>= 4.8]
-3. Run **sh ./GenerateConfigXML.sh** to generate configuration files
+1. Git pull all source
+2. Install cmake[>= 2.8]
+3. Install VS2015 or gcc[>= 4.8]
 4. Run **install.bat** or **install.sh** to build NF
 5. Run the binary file by **_Out/Server/Debug/rund.sh**
 
