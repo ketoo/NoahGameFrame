@@ -2,8 +2,15 @@
 cd ./Dependencies
 chmod -R 755 build_dep.sh
 ./build_dep.sh
-
 cd ../
+
+cd _Out/Server/NFDataCfg/Tool/
+chmod 755 ./NFFileProcess
+./NFFileProcess
+cd ..
+cd ..
+cd ..
+cd ..
 
 ./BuildNF.CMake.sh
 ./BuildNF.CopyDll.sh
