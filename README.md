@@ -70,7 +70,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 * MSVC >= VS2013 (**Tested in Win7/10**)
 
 ## Build and Install
-### Windows[MSVC >= 2013]
+### Windows[MSVC >= 2015]
 
 1. Git pull all source
 2. Run **install.bat**
