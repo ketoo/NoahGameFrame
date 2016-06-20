@@ -67,7 +67,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ## Supported Compilers
 
 * GCC >= 4.8 (**Tested in Ubuntu 15.04**)
-* MSVC >= VS2013 (**Tested in Win7/10**)
+* MSVC >= VS2015 (**Tested in Win7/10**)
 
 ## Build and Install
 ### Windows[MSVC >= 2015]
