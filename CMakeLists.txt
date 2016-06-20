@@ -7,8 +7,9 @@ macro(remove_file arg_list file_remove)
 endmacro(remove_file)
 
 macro(link_NFSDK projName)
-	#target_link_libraries(${projName} NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFLuaScriptPlugin NFMessageDefine NFNet NFUrlPlugin)
+if(UNIX)
 	target_link_libraries(${projName} protobuf NFMessageDefine NFNet event event_core)
+endif()
 endmacro(link_NFSDK)
 
 project(NoahFrame)
