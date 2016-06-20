@@ -172,6 +172,19 @@ std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth)
 	return result;
 }
 
+void StringReplace(std::string &strBig, const std::string &strsrc, const std::string &strdst)
+{
+	std::string::size_type pos = 0;
+	std::string::size_type srclen = strsrc.size();
+	std::string::size_type dstlen = strdst.size();
+
+	while ((pos = strBig.find(strsrc, pos)) != std::string::npos)
+	{
+		strBig.replace(pos, srclen, strdst);
+		pos += dstlen;
+	}
+}
+
 
 void printResult(int result, std::string& strName)
 {
@@ -197,6 +210,8 @@ int main()
 	{
 		if (fileName.find("Plugin.xml") != std::string::npos)
 		{
+			StringReplace(fileName, "\\", "/");
+			StringReplace(fileName, "//", "/");
 			printf("Reading xml file: %s\n", fileName.c_str());
 
 			std::vector<std::string> pluginList;
