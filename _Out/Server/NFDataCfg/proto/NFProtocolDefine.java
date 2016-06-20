@@ -1,7 +1,6 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.java
 //    @Author           :    NFrame Studio
-//    @Date             :    Sat Jun 11 15:24:51 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -563,6 +562,7 @@ public class Map {
 		Slogan		= 5, // Slogan -- string
 		State		= 6, // State -- int
 		CurMemberCount		= 7, // CurMemberCount -- int
+		WinCount		= 8, // WinCount -- int
 
 	};
 
@@ -831,6 +831,7 @@ public class Player {
 		SKILL_GATE		= 25, // SKILL_GATE -- int
 		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
 		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
@@ -864,6 +865,7 @@ public class Player {
 		SKILL_GATE		= 25, // SKILL_GATE -- int
 		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
 		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 

@@ -1,7 +1,6 @@
 // -------------------------------------------------------------------------
 //    @FileName         :    NFProtocolDefine.hpp
 //    @Author           :    NFrame Studio
-//    @Date             :    Sat Jun 11 15:24:51 2016
 //    @Module           :    NFProtocolDefine
 // -------------------------------------------------------------------------
 
@@ -604,6 +603,7 @@ public:
 		Station_Slogan		= 5, // Slogan -- string
 		Station_State		= 6, // State -- int
 		Station_CurMemberCount		= 7, // CurMemberCount -- int
+		Station_WinCount		= 8, // WinCount -- int
 
 	};
 
@@ -876,6 +876,7 @@ public:
 		HeroPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
 		HeroPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
 		HeroPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		HeroPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
@@ -909,6 +910,7 @@ public:
 		CommPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
 		CommPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
 		CommPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		CommPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
