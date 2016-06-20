@@ -13,7 +13,6 @@ set_target_properties( NFAutoCopyDll PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/
 	LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/_Out/Server/NFDataCfg/Tool/	)
-target_link_libraries(NFAutoCopyDll Theron)
 
 add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
