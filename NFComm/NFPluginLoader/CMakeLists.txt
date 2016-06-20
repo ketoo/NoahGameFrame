@@ -11,7 +11,11 @@ add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_H
 
 if(UNIX)
 	add_dependencies(NFPluginLoader NFCore)
-	target_link_libraries(NFPluginLoader libtheron.a pthread dl)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFPluginLoader libtheron.a pthread dl)
+	else()
+		target_link_libraries(NFPluginLoader libtherond.a pthread dl)
+	endif()
 else()
 	add_dependencies(NFPluginLoader NFCore Theron)
 	target_link_libraries(NFPluginLoader Theron)
