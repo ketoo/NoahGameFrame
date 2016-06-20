@@ -89,6 +89,12 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 6. Run **sh ./GenerateConfigXML.sh** to generate configuration files
 6. Run the binary file by **_Out/Server/Debug/rund.sh**
 
+### CMake
+1. Install cmake[>= 2.8]
+2. Install VS2015 or gcc[>= 4.8]
+3. Run **sh ./GenerateConfigXML.sh** to generate configuration files
+4. Run **install.bat** or **install.sh** to build NF
+5. Run the binary file by **_Out/Server/Debug/rund.sh**
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
