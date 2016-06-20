@@ -6,16 +6,7 @@ chmod -R 755 build_dep.sh
 cd ../
 
 ./BuildNF.CMake.sh
-
-cd _Out/Server/NFDataCfg/Tool/
-./NFFileProcess
-./NFAutoCopyDll
-
-cd ..
-cd ..
-cd ..
-cd ..
-pwd
+./BuildNF.CopyDll.sh
 
 # generate makefile
 #chmod -R 755 Build4Makefile.sh
