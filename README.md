@@ -107,7 +107,7 @@ WebSite:  https://github.com/ketoo/NFrame
 ## Documents & Tutorial
 [English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
 
-[中文简体](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
+[Mandarin](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
 
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
@@ -128,8 +128,8 @@ Tutorial:
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD1_H_
-#define _NFC_HELLO_WORLD1_H_
+#ifndef NFC_HELLO_WORLD1_H
+#define NFC_HELLO_WORLD1_H
 
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -145,7 +145,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();
@@ -177,7 +177,7 @@ bool HelloWorld1::AfterInit()
     return true;
 }
 
-bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld1::Execute()
 {
     // Execute is called once per frame
 	
