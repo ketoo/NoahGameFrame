@@ -21,7 +21,11 @@ add_library(NFKernelPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
-	target_link_libraries(NFKernelPlugin libtheron.a)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFKernelPlugin libtheron.a)
+	else()
+		target_link_libraries(NFKernelPlugin libtherond.a)
+	endif()
 else()
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 	target_link_libraries(NFKernelPlugin anet_win64 libprotobuf lua Theron)
