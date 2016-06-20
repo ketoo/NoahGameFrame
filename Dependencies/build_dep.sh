@@ -86,9 +86,11 @@ cd Theron
 chmod -R 755 *
 make library mode=debug boost=off c++11=on posix=on shared=on
 cp -r -f ./Lib/libtherond.a ../lib/Debug/
+cp -r -f ./Lib/libtherond.a ../lib/
 make clean
 make library mode=release boost=off c++11=on posix=on shared=on
 cp -r -f ./Lib/libtheron.a ../lib/Release/
+cp -r -f ./Lib/libtheron.a ../lib/
 make clean
 cd ../
 
