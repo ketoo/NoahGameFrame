@@ -28,9 +28,9 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 [U3D Client](https://github.com/ketoo/NoahGameFrame/tree/master/_Out/Server/ClientBin/source)
 
 ## Introduction
-[English PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.pdf) / [English PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.ppt)
+[English PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.ppt)
 
-[中文简体 PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.pdf) / [中文简体 PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.ppt)
+[Mandarin PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.ppt)
 
 
 ## Architecture
@@ -40,9 +40,6 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 
 ### Server Architecture
 ![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
-
-### Event Driver:
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_Event_driver.png)
 
 ## Get the Sources:
 
