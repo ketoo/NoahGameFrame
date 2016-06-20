@@ -7,6 +7,7 @@ add_library(NFLuaScriptPlugin SHARED
 
 
 if(UNIX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 	add_dependencies(NFLuaScriptPlugin NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
 	add_definitions("-D_USRDLL -DELPP_NO_DEFAULT_LOG_FILE")
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
