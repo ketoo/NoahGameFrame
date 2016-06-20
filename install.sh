@@ -5,11 +5,8 @@ chmod -R 755 build_dep.sh
 
 cd ../
 
-cd ./cmake.linux/
-cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
-make
+./BuildNF.CMake.sh
 
-cd ..
 cd _Out/Server/NFDataCfg/Tool/
 ./NFFileProcess
 ./NFAutoCopyDll
