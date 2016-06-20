@@ -7,7 +7,11 @@ add_library(NFLogPlugin SHARED
 
 if(UNIX)
 	add_dependencies(NFLogPlugin NFCore)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFLogPlugin libtheron.a)
+	else()
+		target_link_libraries(NFLogPlugin libtherond.a)
+	endif()
 else()
 	add_dependencies(NFLogPlugin NFCore Theron)
 	target_link_libraries(NFLogPlugin anet_win64 libprotobuf lua Theron)
