@@ -8,6 +8,7 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 	#target_link_libraries(${projName} NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFLuaScriptPlugin NFMessageDefine NFNet NFUrlPlugin)
+	target_link_libraries(${projName} protobuf NFMessageDefine NFNet event event_core)
 endmacro(link_NFSDK)
 
 project(NoahFrame)
@@ -28,8 +29,8 @@ ${SolutionDir}/Dependencies/lua/
 )
 
 if(UNIX)
-	set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}  -std=c++11 -O0 -Wall -g -ggdb -fPIC -DDEBUG")
-	set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS}  -std=c++11 -O3 -Wall -fPIC")
+	set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}  -std=c++11 -O0 -Wall -g -ggdb -DDEBUG")
+	set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS}  -std=c++11 -O3 -Wall")
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
 	add_definitions(-std=c++11)
 else()
