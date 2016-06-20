@@ -231,15 +231,6 @@ int main()
 
 				for (std::string name : pluginList)
 				{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-
-
-
-#else
-
-#endif
-
-					
 					int result = 0;
 					if (name == "NFPluginLoader")
 					{
@@ -292,7 +283,10 @@ int main()
 			}
 		}
 	}
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	getch();
+#else
 
-	std::cin.ignore();
+#endif
 	return 0;
 }
