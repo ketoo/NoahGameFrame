@@ -9,7 +9,7 @@ set_target_properties( NFConfigPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 
 if(UNIX)
-	add_dependencies(NFPluginLoader NFCore)
+	add_dependencies(NFConfigPlugin NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFConfigPlugin libtheron.a NFCore)
 	else()
