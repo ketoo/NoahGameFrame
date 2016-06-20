@@ -28,7 +28,6 @@ public:
 	NFCTeamModule(NFIPluginManager* p)
     {
         pPluginManager = p;
-        mnScenceID = 400;
     }
 
     virtual bool Init();
@@ -57,8 +56,6 @@ protected:
 
     void OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     bool GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo);
-protected:
-    int mnScenceID;
 
 protected:
     NFIKernelModule* m_pKernelModule;
