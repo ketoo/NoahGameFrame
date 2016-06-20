@@ -15,6 +15,20 @@ cd ..
 ./BuildNF.CMake.sh
 ./BuildNF.CopyDll.sh
 
+cd _Out/Server/Debug/
+chmod -R 755 rund_cmake.sh
+chmod -R 755 killd_cmake.sh
+cd ..
+cd ..
+cd ..
+
+cd _Out/Server/Release/
+chmod -R 755 run_cmake.sh
+chmod -R 755 kill_cmake.sh
+cd ..
+cd ..
+cd ..
+
 # generate makefile
 #chmod -R 755 Build4Makefile.sh
 #./Build4Makefile.sh
