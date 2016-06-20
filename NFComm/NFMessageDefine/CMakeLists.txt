@@ -8,7 +8,11 @@ add_library(NFMessageDefine SHARED
 	${NFMessageDefine_ROOT_Hpp})
 
 if(UNIX)
-	target_link_libraries(NFMessageDefine libtheron.a)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFLuaScriptPlugin libtheron.a)
+	else()
+		target_link_libraries(NFLuaScriptPlugin libtherond.a)
+	endif()
 else()
 	add_dependencies(NFMessageDefine libprotobuf)
 	target_link_libraries(NFMessageDefine anet_win64 libprotobuf lua Theron)

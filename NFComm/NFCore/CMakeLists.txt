@@ -12,7 +12,11 @@ set_target_properties( NFCore PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
 	
 if(UNIX)
-	target_link_libraries(NFCore libtheron.a)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFCore libtheron.a)
+	else()
+		target_link_libraries(NFCore libtherond.a)
+	endif()
 else()
 	target_link_libraries(NFCore Theron)
 endif()
