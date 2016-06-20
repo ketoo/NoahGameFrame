@@ -1,6 +1,7 @@
 
 file(GLOB TEMP_SRC *.cpp)
 add_library(NFConfigPlugin SHARED ${TEMP_SRC})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFConfigPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFConfigPlugin_d")
 set_target_properties( NFConfigPlugin PROPERTIES 
 	FOLDER "NFSDK"
