@@ -36,7 +36,6 @@ IF( WIN32 )
 		./src/google/protobuf/io/zero_copy_stream_impl.cc
 		./src/google/protobuf/io/zero_copy_stream_impl_lite.cc
 		./src/google/protobuf/stubs/stringprintf.cc)
-
 	add_library(libprotobuf SHARED ${pbFiles})
 	set_target_properties( libprotobuf PROPERTIES OUTPUT_NAME_DEBUG "libprotobuf_d")
 	set_target_properties( libprotobuf PROPERTIES 

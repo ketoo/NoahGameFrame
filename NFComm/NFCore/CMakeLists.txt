@@ -1,6 +1,5 @@
-
 file(GLOB TEMP_SRC *.cpp)
-# 不要这个文件
+#Exclude this file
 file(GLOB RemoveItems Example.cpp)
 list(REMOVE_ITEM TEMP_SRC ${RemoveItems})
 add_library(NFCore ${TEMP_SRC})
