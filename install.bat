@@ -10,6 +10,3 @@ cd ..
 
 call BuildNF.CMake.bat
 call BuildNF.VS2015.Debug.X64.bat
-
-cd _Out\Server\NFDataCfg\tool\
-NFAutoCopyDll.exe
