@@ -10,7 +10,10 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 if(UNIX)
+	add_dependencies(${projName} NFNet NFCore)
 	target_link_libraries(${projName} protobuf NFMessageDefine NFNet event event_core)
+else()
+	add_dependencies(${projName} NFNet NFCore)
 endif()
 endmacro(link_NFSDK)
 
