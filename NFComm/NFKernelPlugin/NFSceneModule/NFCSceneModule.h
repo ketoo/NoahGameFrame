@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------
-//    @FileName      :    NFCSceneModule.h
+//    @FileName			:    NFCSceneModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCSceneModule
