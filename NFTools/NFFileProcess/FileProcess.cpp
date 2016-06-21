@@ -523,8 +523,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 				if (nExcelColsNum != nRealColNum)
 				{
-					printf_s("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!\n", strFile.c_str(), strRecordName.c_str(), nExcelColsNum, nRealColNum);
-					printf_s("Press [Enter] key to exit!");
+					printf("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!\n", strFile.c_str(), strRecordName.c_str(), nExcelColsNum, nRealColNum);
+					printf("Press [Enter] key to exit!");
 					std::cin.ignore();
 					exit(1);
 				}
