@@ -12,7 +12,6 @@
 		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
 		
 		<!-- NF Server -->
-		<Project filename="NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
 		<Project filename="NFServer/NFGameLogicPlugin/NFGameLogicPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
@@ -39,7 +38,6 @@
 		<Project filename="Tutorial/Tutorial1/Tutorial1.cbp" />
 		<Project filename="Tutorial/Tutorial2/Tutorial2.cbp" />
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
-		<Project filename="Tutorial/Tutorial4ActorPlugin/Tutorial4ActorPlugin.cbp" />
 		<Project filename="Tutorial/Tutorial5/Tutorial5.cbp" />
 		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
 		<!-- NF Tutorial -->

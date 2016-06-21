@@ -1,0 +1,26 @@
+file(GLOB NFNet_ROOT_Cpp *.cpp)
+file(GLOB NFNet_ROOT_Hpp *.h)
+#Exclude this file
+file(GLOB RemoveItems_Cpp TestClient.cpp TestServer.cpp)
+list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
+
+add_library(NFNet
+	${NFNet_ROOT_Cpp}
+	${NFNet_ROOT_Hpp})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+set_target_properties( NFNet PROPERTIES OUTPUT_NAME_DEBUG "NFNet_d")
+set_target_properties( NFNet PROPERTIES
+	FOLDER "NFSDK"
+	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
+	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
+	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
+if(UNIX)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFNet libtheron.a)
+	else()
+		target_link_libraries(NFNet libtherond.a)
+	endif()
+else()
+	target_link_libraries(NFNet anet_win64 libprotobuf lua Theron)
+	add_definitions("-D_LIB -DWIN32 -DWIN")
+endif()

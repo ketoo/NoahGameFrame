@@ -1,7 +1,7 @@
 <XML>
 	<Plugin Name="NFKernelPlugin" Main="1"/>
 	<Plugin Name="NFConfigPlugin" Main="1"/>
-	<Plugin Name="NFProxyPlugin" Main="1"/>
+	<Plugin Name="NFProxyServerPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ClientPlugin" Main="1"/>
 	<Plugin Name="NFProxyServerNet_ServerPlugin" Main="1"/>
 	<Plugin Name="NFLogPlugin" Main="1"/>

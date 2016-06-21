@@ -27,12 +27,6 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 ### Unity3D client
 [U3D Client](https://github.com/ketoo/NoahGameFrame/tree/master/_Out/Server/ClientBin/source)
 
-## Introduction
-[English PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.pdf) / [English PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_EN_US.ppt)
-
-[中文简体 PDF](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.pdf) / [中文简体 PPT](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/NFrame_Introduction_ZH_CN.ppt)
-
-
 ## Architecture
 
 ### App Architecture:
@@ -40,9 +34,6 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 
 ### Server Architecture
 ![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
-
-### Event Driver:
-![Event Driver](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_Event_driver.png)
 
 ## Get the Sources:
 
@@ -67,10 +58,10 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ## Supported Compilers
 
 * GCC >= 4.8 (**Tested in Ubuntu 15.04**)
-* MSVC >= VS2013 (**Tested in Win7/10**)
+* MSVC >= VS2015 (**Tested in Win7/10**)
 
 ## Build and Install
-### Windows[MSVC >= 2013]
+### MSVC >= 2015
 
 1. Git pull all source
 2. Run **install.bat**
@@ -79,7 +70,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 5. Run **GenerateConfigXML.bat** to generate configuration files
 6. Run the binary file by **_Out/Server/Debug/Run.bat**
 
-### Linux[CodeBlocks >= 13.1]
+### CodeBlocks >= 13.1(Only in linux)
 
 1. Git pull all source
 2. Run **install.sh**
@@ -89,6 +80,13 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 6. Run **sh ./GenerateConfigXML.sh** to generate configuration files
 6. Run the binary file by **_Out/Server/Debug/rund.sh**
 
+### CMake
+1. Git pull all source
+2. Install cmake[>= 2.8] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
+3. Install VS2015 or gcc[>= 4.8]
+4. Run **install.bat** or **install.sh** to build NF
+5. Run the binary file by **_Out/Server/Debug/run.bat** or **_Out/Server/Debug/rund_cmake.sh**
+6. (Optional)For Release Version, after above, run **BuildNF.VS2015.Release.X64.bat** or **BuildNF.CMake.Release.sh**, then run the binary file by **_Out/Server/Release/run.bat** or **_Out/Server/Release/run_cmake.sh**
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
@@ -101,7 +99,7 @@ WebSite:  https://github.com/ketoo/NFrame
 ## Documents & Tutorial
 [English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
 
-[中文简体](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
+[Mandarin](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
 
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
@@ -122,8 +120,8 @@ Tutorial:
 //
 // -------------------------------------------------------------------------
 
-#ifndef _NFC_HELLO_WORLD1_H_
-#define _NFC_HELLO_WORLD1_H_
+#ifndef NFC_HELLO_WORLD1_H
+#define NFC_HELLO_WORLD1_H
 
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -139,7 +137,7 @@ public:
     virtual bool Init();
     virtual bool AfterInit();
 
-    virtual bool Execute(const float fLasFrametime, const float fStartedTime);
+    virtual bool Execute();
 
     virtual bool BeforeShut();
     virtual bool Shut();
@@ -171,7 +169,7 @@ bool HelloWorld1::AfterInit()
     return true;
 }
 
-bool HelloWorld1::Execute( const float fLasFrametime, const float fStartedTime )
+bool HelloWorld1::Execute()
 {
     // Execute is called once per frame
 	
@@ -217,12 +215,26 @@ bool HelloWorld1::Shut()
 * how to use the asynchronous events
 * use multiple cpus to get high performance
 
+
+-------------------
+### About The Author
+
+* Mail: 342006@qq.com
+* GitHub: https://github.com/ketoo
+
 -------------------
 
+### Amazing  open source projects:
+**breeze**
+* Auther: zsummer
+* Github: https://github.com/zsummer/breeze
+* Description:A fast, scalable, distributed game server framework for C++
 
 
-
-
+**gce**
+* Auther: nousxiong
+* GitHub: https://github.com/nousxiong/gce
+* Description: The Game Communication Environment (GCE) is an actor model framework for online game development.
 
 
 
