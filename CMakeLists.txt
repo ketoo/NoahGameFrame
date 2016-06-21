@@ -1,6 +1,5 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 cmake_minimum_required(VERSION 2.8)
-
 macro(remove_file arg_list file_remove)
 	file(GLOB RemoveItems_Cpp ${file_remove})
 	list(REMOVE_ITEM ${arg_list} ${RemoveItems_Cpp})
