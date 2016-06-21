@@ -1,5 +1,6 @@
 file(GLOB NFMasterServerPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFMasterServerPlugin_ROOT_Hpp 
 	*.h)
 
