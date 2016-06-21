@@ -11,13 +11,13 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFIClusterClientModule.hpp"
+#include "NFINetClientModule.hpp"
 
 class NFIProxyServerToGameModule
     : public  NFILogicModule
 {
 public:
-	virtual NFIClusterClientModule* GetClusterModule() = 0;
+	virtual NFINetClientModule* GetClusterModule() = 0;
 };
 
 #endif
