@@ -82,7 +82,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 
 ### CMake
 1. Git pull all source
-2. Install cmake[>= 2.8] please choose options for installing: #"Add CMake to the system PATH for all users"
+2. Install cmake[>= 2.8] please choose options for installing: **Add CMake to the system PATH for all users**
 3. Install VS2015 or gcc[>= 4.8]
 4. Run **install.bat** or **install.sh** to build NF
 5. Run the binary file by **_Out/Server/Debug/run.bat** or **_Out/Server/Debug/rund_cmake.sh**
