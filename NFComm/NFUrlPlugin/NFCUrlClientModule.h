@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCUrlClientModule.h
+//    @FileName			:    NFCUrlClientModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08
 //    @Module           :    NFCUrlClientModule
