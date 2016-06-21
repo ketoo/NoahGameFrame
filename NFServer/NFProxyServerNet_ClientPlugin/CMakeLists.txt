@@ -1,5 +1,6 @@
 file(GLOB NFProxyServerNet_ClientPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFProxyServerNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 

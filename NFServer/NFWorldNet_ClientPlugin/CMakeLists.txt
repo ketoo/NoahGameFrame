@@ -1,5 +1,6 @@
 file(GLOB NFWorldNet_ClientPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFWorldNet_ClientPlugin_ROOT_Hpp 
 	*.h)
 
