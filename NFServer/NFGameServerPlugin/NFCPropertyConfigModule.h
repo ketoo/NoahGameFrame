@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCPropertyConfigModule.h
+//    @FileName			:    NFCPropertyConfigModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-09-30
 //    @Module           :    NFCPropertyConfigModule

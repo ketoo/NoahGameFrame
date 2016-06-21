@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLuaScriptModule.h
+//    @FileName			:    NFCLuaScriptModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08
 //    @Module           :    NFCLuaScriptModule
