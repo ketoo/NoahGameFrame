@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLoginNet_ServerModule.h
+//    @FileName			:    NFCLoginNet_ServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLoginNet_ServerModule
@@ -40,7 +40,7 @@ public:
     virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
-	virtual NFIClusterClientModule* GetClusterModule();
+	virtual NFINetClientModule* GetClusterModule();
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
 
 protected:
@@ -64,7 +64,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFILogModule* m_pLogModule;
-	NFIClusterClientModule* m_pClusterClientModule;
+	NFINetClientModule* m_pNetClientModule;
 };
 
 #endif
