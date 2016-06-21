@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFGameServerNet_ServerPlugin.h
+//    @FileName			:    NFGameServerNet_ServerPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
 //    @Module           :   NFGameServerNet_ServerPlugin

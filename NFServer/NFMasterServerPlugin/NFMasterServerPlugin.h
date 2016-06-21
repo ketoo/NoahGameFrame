@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCentreLogicPlugin.h
+//    @FileName			:    NFCentreLogicPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
 //    @Module           :    CentreLogicModule
