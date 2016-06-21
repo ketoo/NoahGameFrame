@@ -1,6 +1,6 @@
 file(GLOB NFPluginLoader_ROOT_Cpp *.cpp)
 file(GLOB NFPluginLoader_ROOT_Hpp *.h)
-# 不要这个文件
+#Exclude this file
 file(GLOB RemoveItems_Cpp NFCPluginActor.cpp)
 list(REMOVE_ITEM NFPluginLoader_ROOT_Cpp ${RemoveItems_Cpp})
 
@@ -27,6 +27,5 @@ set_target_properties( NFPluginLoader PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-
 
 add_definitions(-D_X64 -D_CONSOLE -DNF_DYNAMIC_PLUGIN)
