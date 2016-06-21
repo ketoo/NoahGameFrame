@@ -1,5 +1,6 @@
 file(GLOB NFWorldLogicPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFWorldLogicPlugin_ROOT_Hpp 
 	*.h)
 

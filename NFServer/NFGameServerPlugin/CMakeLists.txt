@@ -1,5 +1,6 @@
 file(GLOB NFGameServerPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFGameServerPlugin_ROOT_Hpp 
 	*.h)
 

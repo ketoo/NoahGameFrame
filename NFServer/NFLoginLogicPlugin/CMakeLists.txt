@@ -1,5 +1,6 @@
 file(GLOB NFLoginLogicPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFLoginLogicPlugin_ROOT_Hpp 
 	*.h)
 

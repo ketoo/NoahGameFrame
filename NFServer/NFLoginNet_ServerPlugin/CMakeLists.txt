@@ -1,5 +1,6 @@
 file(GLOB NFLoginNet_ServerPlugin_ROOT_Cpp
 	*.cpp)
+
 file(GLOB NFLoginNet_ServerPlugin_ROOT_Hpp 
 	*.h)
 
