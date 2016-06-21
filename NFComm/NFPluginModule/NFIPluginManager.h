@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFIPluginManager.h
+//    @FileName			:    NFIPluginManager.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFIPluginManager

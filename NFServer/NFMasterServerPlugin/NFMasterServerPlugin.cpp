@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFMasterServerPlugin.cpp
+//    @FileName			:    NFMasterServerPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
 //    @Module           :    CentreLogicModule

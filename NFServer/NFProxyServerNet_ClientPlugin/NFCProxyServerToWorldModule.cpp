@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCProxyServerNet_ClientModule.cpp
+//    @FileName			:    NFCProxyServerNet_ClientModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-05-06
 //    @Module           :    NFCProxyServerNet_ClientModule
@@ -14,9 +14,9 @@
 
 bool NFCProxyServerToWorldModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
 
-	m_pClusterClientModule->Init();
+	m_pNetClientModule->Init();
 
     return true;
 }
@@ -30,7 +30,7 @@ bool NFCProxyServerToWorldModule::Shut()
 
 bool NFCProxyServerToWorldModule::Execute()
 {
-	m_pClusterClientModule->Execute();
+	m_pNetClientModule->Execute();
 
 	return true;
 }
@@ -67,7 +67,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
             break;
             case NF_SERVER_TYPES::NF_ST_WORLD:
             {
-				m_pClusterClientModule->AddServer(xServerData);
+				m_pNetClientModule->AddServer(xServerData);
             }
             break;
             default:
@@ -152,11 +152,11 @@ bool NFCProxyServerToWorldModule::AfterInit()
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
     m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
 
-	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
-	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
-	m_pClusterClientModule->AddReceiveCallBack(this, &NFCProxyServerToWorldModule::OnOtherMessage);
+	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
+	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(this, &NFCProxyServerToWorldModule::OnOtherMessage);
 
-	m_pClusterClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -183,7 +183,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-				m_pClusterClientModule->AddServer(xServerData);
+				m_pNetClientModule->AddServer(xServerData);
             }
         }
     }
@@ -215,9 +215,9 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     mWantToConnectMap.AddElement(pConnectData->strAccount, pConnectData);
 }
 
-NFIClusterClientModule* NFCProxyServerToWorldModule::GetClusterModule()
+NFINetClientModule* NFCProxyServerToWorldModule::GetClusterModule()
 {
-	return m_pClusterClientModule;
+	return m_pNetClientModule;
 }
 
 bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccount, const std::string& strKey)

@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCProxyServerToGameModule.h
+//    @FileName			:    NFCProxyServerToGameModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-05-06
 //    @Module           :    NFCProxyServerToGameModule
@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
 
 class NFCProxyServerToGameModule : public NFIProxyServerToGameModule
@@ -38,7 +38,7 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual NFIClusterClientModule* GetClusterModule();
+	virtual NFINetClientModule* GetClusterModule();
 
 protected:
 
@@ -59,7 +59,7 @@ private:
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
-	NFIClusterClientModule* m_pClusterClientModule;
+	NFINetClientModule* m_pNetClientModule;
 };
 
 #endif
