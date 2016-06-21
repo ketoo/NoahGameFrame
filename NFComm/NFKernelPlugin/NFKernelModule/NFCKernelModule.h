@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCKernelModule.h
+//    @FileName			:    NFCKernelModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCKernelModule
