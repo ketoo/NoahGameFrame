@@ -5,7 +5,6 @@ add_library(NFLuaScriptPlugin SHARED
 	${NFLuaScriptPlugin_ROOT_Cpp}
 	${NFLuaScriptPlugin_ROOT_Hpp})
 
-
 if(UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 	add_dependencies(NFLuaScriptPlugin NFConfigPlugin NFCore NFKernelPlugin NFLogPlugin NFMessageDefine)
@@ -26,6 +25,3 @@ set_target_properties( NFLuaScriptPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-
-
-

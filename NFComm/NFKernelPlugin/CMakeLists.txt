@@ -18,7 +18,6 @@ add_library(NFKernelPlugin SHARED
 	${NFKernelPlugin_ROOT_Cpp}
 	${NFKernelPlugin_ROOT_Hpp})
 
-
 if(UNIX)
 	add_dependencies(NFKernelPlugin NFCore NFConfigPlugin)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
