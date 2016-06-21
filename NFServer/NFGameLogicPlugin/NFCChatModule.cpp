@@ -84,8 +84,8 @@ void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, c
         NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, "GuildID");
         if (!xGuildID.IsNull())
         {
-            NFIClusterClientModule * pClusterClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
-            pClusterClientModule->SendBySuit(xGuildID.nData64, nMsgID, msg);
+            NFINetClientModule * pNetClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
+            pNetClientModule->SendBySuit(xGuildID.nData64, nMsgID, msg);
         }
     }
     break;
@@ -97,8 +97,8 @@ void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, c
             NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
             if (!xTargetID.IsNull())
             {
-                NFIClusterClientModule * pClusterClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
-                pClusterClientModule->SendBySuit(nPlayerID.nData64, nMsgID, msg);
+                NFINetClientModule * pNetClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
+                pNetClientModule->SendBySuit(nPlayerID.nData64, nMsgID, msg);
             }
         }
     }
