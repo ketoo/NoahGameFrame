@@ -2,7 +2,7 @@ cd Dependencies
 call build_dep.bat
 
 cd _Out\Server\NFDataCfg\tool\
-start NFFileProcess.exe
+call copy_files.bat 1
 cd ..
 cd ..
 cd ..
