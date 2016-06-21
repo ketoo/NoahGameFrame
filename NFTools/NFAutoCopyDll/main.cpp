@@ -235,11 +235,9 @@ int main()
 					if (name == "NFPluginLoader")
 					{
 #if NF_PLATFORM == NF_PLATFORM_WIN
+
 #ifdef NF_DEBUG_MODE
 						std::string src = configPath + "Comm/Debug/" + name;
-#else
-						std::string src = configPath + "Comm/Release/" + name;
-#endif
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + "_d.exe";
 						auto strDes = des + "_d.exe";
@@ -247,6 +245,14 @@ int main()
 						auto strDesPDB = des + "_d.pdb";
 						printResult(CopyFile(strSrc, strDes), strSrc);
 						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+#else
+						std::string src = configPath + "Comm/Release/" + name;
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + ".exe";
+						auto strDes = des + ".exe";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+#endif
+
 #else
 						std::string src = configPath + "Comm/" + name;
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
@@ -259,11 +265,9 @@ int main()
 					else
 					{
 #if NF_PLATFORM == NF_PLATFORM_WIN
+
 #ifdef NF_DEBUG_MODE
 						std::string src = configPath + "Comm/Debug/" + name;
-#else
-						std::string src = configPath + "Comm/Release/" + name;
-#endif
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + "_d.dll";
 						auto strDes = des + "_d.dll";
@@ -271,6 +275,14 @@ int main()
 						auto strDesPDB = des + "_d.pdb";
 						printResult(CopyFile(strSrc, strDes), strSrc);
 						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+#else
+						std::string src = configPath + "Comm/Release/" + name;
+						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
+						auto strSrc = src + ".dll";
+						auto strDes = des + ".dll";
+						printResult(CopyFile(strSrc, strDes), strSrc);
+#endif
+
 #else
 						std::string src = configPath + "Comm/lib" + name;
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
