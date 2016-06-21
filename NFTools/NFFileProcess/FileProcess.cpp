@@ -469,6 +469,9 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string toWrite = "enum " + strRecordName + "\n{\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
+				int nExcelColsNum = nSetColNum;
+				int nRealColNum = 0;
+
 				nSetColNum = dim.lastCol - nRecordStart;
 
 				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
@@ -484,6 +487,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					{
 						break;
 					}
+
+					nRealColNum++;
 
 					std::string value = "";
 
@@ -514,6 +519,12 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						strJavaEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
 						strCSEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
 					}
+				}
+
+				if (nExcelColsNum != nRealColNum)
+				{
+					printf_s("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!", strFile.c_str(), strRecordName.c_str(), nExcelColsNum, nRealColNum);
+					exit(1);
 				}
 
 				fwrite("}\n", 2, 1, protoWriter);
