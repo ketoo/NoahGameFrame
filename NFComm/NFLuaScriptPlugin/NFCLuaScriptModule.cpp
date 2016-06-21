@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------
-//    @FileName      :    NFCLuaScriptModule.cpp
+//    @FileName			:    NFCLuaScriptModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLuaScriptModule
@@ -9,8 +9,8 @@
 #include <assert.h>
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(); }   catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(arg1); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
@@ -24,13 +24,12 @@ bool NFCLuaScriptModule::Init()
 {
     mnTime = pPluginManager->GetNowTime();
 
-
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
-
 	Regisger();
+
     TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
 
     TRY_LOAD_SCRIPT_FLE("script_init.lua");
@@ -273,7 +272,6 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("FindElementModule", &NFIPluginManager::FindModule<NFIElementModule>)
 	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();
-
 
     LuaIntf::LuaBinding(l).beginClass<NFIElementModule>("NFIElementModule")
     .addFunction("ExistElement", (bool (NFIElementModule::*)(const std::string&))&NFIElementModule::ExistElement)
