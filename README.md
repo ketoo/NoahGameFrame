@@ -85,7 +85,8 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 2. Install cmake[>= 2.8]
 3. Install VS2015 or gcc[>= 4.8]
 4. Run **install.bat** or **install.sh** to build NF
-5. Run the binary file by **_Out/Server/Debug/rund.sh**
+5. Run the binary file by **_Out/Server/Debug/run.bat** or **_Out/Server/Debug/rund_cmake.sh**
+6. (Optional)For Release Version, after above, run **BuildNF.VS2015.Release.X64.bat** or **BuildNF.CMake.Release.sh**, then run the binary file by **_Out/Server/Release/run.bat** or **_Out/Server/Release/run_cmake.sh**
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java
