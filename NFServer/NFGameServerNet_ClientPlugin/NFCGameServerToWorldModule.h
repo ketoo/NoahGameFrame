@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerNet_ClientModule.h
+//    @FileName			:    NFCGameServerNet_ClientModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCGameServerNet_ClientModule
@@ -12,7 +12,7 @@
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -36,7 +36,7 @@ public:
     virtual bool AfterInit();
 
     virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-    virtual NFIClusterClientModule* GetClusterClientModule();
+    virtual NFINetClientModule* GetClusterClientModule();
 
 protected:
 
@@ -59,7 +59,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
-	NFIClusterClientModule* m_pClusterClientModule;
+	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
