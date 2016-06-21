@@ -6,7 +6,8 @@ cd ../
 
 cd _Out/Server/NFDataCfg/Tool/
 chmod 755 ./NFFileProcess
-./NFFileProcess
+chmod 755 ./copy_files.sh
+./copy_files.sh
 cd ..
 cd ..
 cd ..
