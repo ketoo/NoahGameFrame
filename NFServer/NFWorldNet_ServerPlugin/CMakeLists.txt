@@ -1,3 +1,4 @@
+set(ProjectName "NFWorldNet_ServerPlugin")
 file(GLOB NFWorldNet_ServerPlugin_ROOT_Cpp
 	*.cpp)
 
@@ -27,4 +28,19 @@ else()
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName).dll")
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName).pdb")
+	else()
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.dll")
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.pdb")
+	endif()
 endif()

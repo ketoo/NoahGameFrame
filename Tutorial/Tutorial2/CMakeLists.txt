@@ -1,3 +1,4 @@
+set(ProjectName "Tutorial2")
 file(GLOB Tutorial2_ROOT_Cpp
 	*.cpp)
 file(GLOB Tutorial2_ROOT_Hpp 
@@ -26,4 +27,19 @@ else()
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName).dll")
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName).pdb")
+	else()
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName)_d.dll")
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName)_d.pdb")
+	endif()
 endif()
