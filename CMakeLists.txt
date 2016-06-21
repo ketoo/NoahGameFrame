@@ -1,4 +1,7 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
+
+option(BUILD_TOOLS_ONLY "help string describing option")
+
 cmake_minimum_required(VERSION 2.8)
 macro(remove_file arg_list file_remove)
 	file(GLOB RemoveItems_Cpp ${file_remove})
@@ -46,9 +49,15 @@ endif()
 set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm )
 link_directories(${DependenciesLibPath})
 
-add_subdirectory(Dependencies)
-add_subdirectory(NFComm)
-add_subdirectory(NFServer)
-add_subdirectory(Tutorial)
-add_subdirectory(NFTools)
+if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
+	message("Build Tools Only")
+	add_subdirectory(NFTools)
+else()
+	message("Build All")
+	add_subdirectory(Dependencies)
+	add_subdirectory(NFComm)
+	add_subdirectory(NFServer)
+	add_subdirectory(Tutorial)
+	add_subdirectory(NFTools)
+endif()
 
