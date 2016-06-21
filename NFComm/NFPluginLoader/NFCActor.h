@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    Actor.h
+//    @FileName			:    Actor.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2014-04-05
 //    @Module           :    Actor

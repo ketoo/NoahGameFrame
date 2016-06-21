@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------
-//    @FileName      :    NFCLuaScriptModule.cpp
+//    @FileName			:    NFCLuaScriptModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLuaScriptModule
@@ -9,8 +9,8 @@
 #include <assert.h>
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
-#include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(); }   catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
 #define TRY_RUN_GLOBAL_SCRIPT_FUN1(strFuncName, arg1)  try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(arg1); }catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
