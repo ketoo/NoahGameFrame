@@ -17,7 +17,7 @@ if(UNIX)
 	endif()
 	
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_post_cmd_linux(${ProjectName} "Tutorial6" "so" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial6" "so" "" "lib")
 	else()
 		add_post_cmd_linux(${ProjectName} "Tutorial6" "so" "_d")
 	endif()
