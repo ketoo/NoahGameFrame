@@ -13,11 +13,13 @@ cd ..
 cd ..
 cd ..
 
+cd BuildScript
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 chmod -R 755 ./BuildNF.CMake.Release.sh
 chmod -R 755 ./BuildNF.CopyDll.sh
 ./BuildNF.CMake.Debug.sh
 ./BuildNF.CopyDll.sh
+cd ..
 
 cd _Out/Server/Debug/
 chmod -R 755 ./rund_cmake.sh
