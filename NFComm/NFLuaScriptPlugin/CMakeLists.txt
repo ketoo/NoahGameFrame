@@ -15,25 +15,21 @@ if(UNIX)
 	else()
 		target_link_libraries(NFLuaScriptPlugin libtherond.a lua_d)
 	endif()
+	
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
+		add_post_cmd_linux(${ProjectName} "Tutorial6" "so" "")
+	else()
+		add_post_cmd_linux(${ProjectName} "Tutorial6" "so" "_d")
+	endif()
 else()
 	add_dependencies(NFLuaScriptPlugin libprotobuf lua NFConfigPlugin NFCore ${ProjectName} NFLogPlugin NFMessageDefine)
 	target_link_libraries(NFLuaScriptPlugin anet_win64 libprotobuf lua Theron)
 	add_definitions("-D_USRDLL -DTHERON_CPP11")
 	
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).dll")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).pdb")
+		add_post_cmd_win(${ProjectName} "Tutorial6" "dll" "")
 	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName)_d.dll")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName)_d.pdb")
+		add_post_cmd_win(${ProjectName} "Tutorial6" "dll" "_d")
 	endif()
 endif()
 set_target_properties( NFLuaScriptPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLuaScriptPlugin_d")

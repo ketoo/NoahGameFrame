@@ -17,156 +17,64 @@ if(UNIX)
 	else()
 		target_link_libraries(NFPluginLoader libtherond.a pthread dl)
 	endif()
+	
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
+		add_post_cmd_linux(${ProjectName} "NFLoginServer" "" "")
+		add_post_cmd_linux(${ProjectName} "NFWorldServer" "" "")
+		add_post_cmd_linux(${ProjectName} "NFMasterServer" "" "")
+		add_post_cmd_linux(${ProjectName} "NFProxyServer1" "" "")
+		add_post_cmd_linux(${ProjectName} "NFGameServer1" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial1" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial2" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial3" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial4" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial5" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial6" "" "")
+		add_post_cmd_linux(${ProjectName} "Tutorial7" "" "")
+	else()
+		add_post_cmd_linux(${ProjectName} "NFLoginServer" "" "_d")
+		add_post_cmd_linux(${ProjectName} "NFWorldServer" "" "_d")
+		add_post_cmd_linux(${ProjectName} "NFMasterServer" "" "_d")
+		add_post_cmd_linux(${ProjectName} "NFProxyServer1" "" "_d")
+		add_post_cmd_linux(${ProjectName} "NFGameServer1" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial1" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial2" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial3" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial4" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial5" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial6" "" "_d")
+		add_post_cmd_linux(${ProjectName} "Tutorial7" "" "_d")
+	endif()
 else()
 	add_dependencies(NFPluginLoader NFCore Theron)
 	target_link_libraries(NFPluginLoader Theron)
 	
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFLoginServer\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFLoginServer\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFMasterServer\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFMasterServer\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFProxyServer1\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFProxyServer1\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial1\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial1\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial3\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial3\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial4\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial4\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial5\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial5\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial7\\$(ProjectName).exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial7\\$(ProjectName).pdb")
+		add_post_cmd_win(${ProjectName} "NFLoginServer" "exe" "")
+		add_post_cmd_win(${ProjectName} "NFWorldServer" "exe" "")
+		add_post_cmd_win(${ProjectName} "NFMasterServer" "exe" "")
+		add_post_cmd_win(${ProjectName} "NFProxyServer1" "exe" "")
+		add_post_cmd_win(${ProjectName} "NFGameServer1" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial1" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial2" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial3" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial4" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial5" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial6" "exe" "")
+		add_post_cmd_win(${ProjectName} "Tutorial7" "exe" "")
 	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFLoginServer\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFLoginServer\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFMasterServer\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFMasterServer\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFProxyServer1\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFProxyServer1\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial1\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial1\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial2\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial3\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial3\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial4\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial4\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial5\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial5\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName)_d.pdb")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.exe" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial7\\$(ProjectName)_d.exe")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial7\\$(ProjectName)_d.pdb")
+		add_post_cmd_win(${ProjectName} "NFLoginServer" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "NFWorldServer" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "NFMasterServer" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "NFProxyServer1" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "NFGameServer1" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial1" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial2" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial3" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial4" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial5" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial6" "exe" "_d")
+		add_post_cmd_win(${ProjectName} "Tutorial7" "exe" "_d")
 	endif()
 endif()
 
