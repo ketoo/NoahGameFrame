@@ -17,6 +17,30 @@ else()
 endif()
 endmacro(link_NFSDK)
 
+macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
+	add_custom_command(TARGET ${strProjectName}
+						POST_BUILD
+						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
+	add_custom_command(TARGET ${strProjectName}
+						POST_BUILD
+						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+endmacro()
+
+macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix)
+	if(${dbgSuffix} STREQUAL "_d")
+		add_custom_command(TARGET ${strProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+	else()
+		add_custom_command(TARGET ${strProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+	
+	endif()
+endmacro()
+
+		
+
 project(NoahFrame)
 
 set(SolutionDir ${PROJECT_SOURCE_DIR})
