@@ -24,11 +24,11 @@ if(UNIX)
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/Release/${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/Tutorial7/")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/Release/${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/Tutorial7/{ProjectName}.so")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/Tutorial7/")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/Tutorial7/{ProjectName}.so")
 	endif()
 else()
 	add_definitions(
