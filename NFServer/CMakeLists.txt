@@ -12,7 +12,9 @@ add_subdirectory(NFProxyServerPlugin)
 add_subdirectory(NFWorldLogicPlugin)
 add_subdirectory(NFWorldNet_ClientPlugin)
 add_subdirectory(NFWorldNet_ServerPlugin)
-
+add_subdirectory(NFDataAgent_MysqlPlugin)
+add_subdirectory(NFDataAgent_NosqlPlugin)
+add_subdirectory(NFGameLogicPlugin)
 
 
 

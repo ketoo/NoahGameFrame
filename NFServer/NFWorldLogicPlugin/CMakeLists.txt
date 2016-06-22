@@ -4,6 +4,9 @@ file(GLOB NFWorldLogicPlugin_ROOT_Cpp
 
 file(GLOB NFWorldLogicPlugin_ROOT_Hpp 
 	*.h)
+	
+remove_file(NFWorldLogicPlugin_ROOT_Cpp "NFCWSSwichServerModule.cpp")
+remove_file(NFWorldLogicPlugin_ROOT_Hpp "NFCWSSwichServerModule.h")
 
 add_library(NFWorldLogicPlugin SHARED
 	${NFWorldLogicPlugin_ROOT_Cpp}

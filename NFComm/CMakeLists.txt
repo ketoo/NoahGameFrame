@@ -16,3 +16,7 @@ add_subdirectory(NFMessageDefine)
 add_subdirectory(NFNet)
 
 add_subdirectory(NFUrlPlugin)
+
+add_subdirectory(NFMysqlPlugin)
+
+add_subdirectory(NFNoSqlPlugin)
