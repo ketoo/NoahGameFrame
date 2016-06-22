@@ -289,6 +289,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* AckMapKingWar_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AckMapKingWar_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PVPRoomInfo_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PVPRoomInfo_reflection_ = NULL;
 
 }  // namespace
 
@@ -1758,6 +1761,27 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMapKingWar));
+  PVPRoomInfo_descriptor_ = file->message_type(85);
+  static const int PVPRoomInfo_offsets_[7] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, ncellstatus_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, roomid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, npvpmode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, npvpgrade_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, maxpalyer_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, xredplayer_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, xblueplayer_),
+  };
+  PVPRoomInfo_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      PVPRoomInfo_descriptor_,
+      PVPRoomInfo::default_instance_,
+      PVPRoomInfo_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(PVPRoomInfo));
 }
 
 namespace {
@@ -1942,6 +1966,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqMapKingWar_descriptor_, &ReqMapKingWar::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AckMapKingWar_descriptor_, &AckMapKingWar::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    PVPRoomInfo_descriptor_, &PVPRoomInfo::default_instance());
 }
 
 }  // namespace
@@ -2119,6 +2145,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqMapKingWar_reflection_;
   delete AckMapKingWar::default_instance_;
   delete AckMapKingWar_reflection_;
+  delete PVPRoomInfo::default_instance_;
+  delete PVPRoomInfo_reflection_;
 }
 
 void protobuf_AddDesc_NFMsgShare_2eproto() {
@@ -2373,7 +2401,12 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "d\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016AckGetMapAwar"
     "d\"%\n\rReqMapHunting\022\024\n\014map_title_id\030\001 \002(\014"
     "\"\017\n\rAckMapHunting\"%\n\rReqMapKingWar\022\024\n\014ma"
-    "p_title_id\030\001 \002(\014\"\017\n\rAckMapKingWar", 9753);
+    "p_title_id\030\001 \002(\014\"\017\n\rAckMapKingWar\"\275\001\n\013PV"
+    "PRoomInfo\022\023\n\013nCellStatus\030\001 \002(\005\022\034\n\006RoomID"
+    "\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \002(\005\022\021"
+    "\n\tnPVPGrade\030\004 \002(\005\022\021\n\tMaxPalyer\030\005 \002(\005\022 \n\n"
+    "xRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBlueP"
+    "layer\030\007 \003(\0132\014.NFMsg.Ident", 9945);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -2462,6 +2495,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   AckMapHunting::default_instance_ = new AckMapHunting();
   ReqMapKingWar::default_instance_ = new ReqMapKingWar();
   AckMapKingWar::default_instance_ = new AckMapKingWar();
+  PVPRoomInfo::default_instance_ = new PVPRoomInfo();
   ReqEnterGameServer::default_instance_->InitAsDefaultInstance();
   ReqHeartBeat::default_instance_->InitAsDefaultInstance();
   ReqLeaveGameServer::default_instance_->InitAsDefaultInstance();
@@ -2548,6 +2582,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   AckMapHunting::default_instance_->InitAsDefaultInstance();
   ReqMapKingWar::default_instance_->InitAsDefaultInstance();
   AckMapKingWar::default_instance_->InitAsDefaultInstance();
+  PVPRoomInfo::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFMsgShare_2eproto);
 }
 
@@ -28346,6 +28381,469 @@ void AckMapKingWar::Swap(AckMapKingWar* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = AckMapKingWar_descriptor_;
   metadata.reflection = AckMapKingWar_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PVPRoomInfo::kNCellStatusFieldNumber;
+const int PVPRoomInfo::kRoomIDFieldNumber;
+const int PVPRoomInfo::kNPVPModeFieldNumber;
+const int PVPRoomInfo::kNPVPGradeFieldNumber;
+const int PVPRoomInfo::kMaxPalyerFieldNumber;
+const int PVPRoomInfo::kXRedPlayerFieldNumber;
+const int PVPRoomInfo::kXBluePlayerFieldNumber;
+#endif  // !_MSC_VER
+
+PVPRoomInfo::PVPRoomInfo()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void PVPRoomInfo::InitAsDefaultInstance() {
+  roomid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+PVPRoomInfo::PVPRoomInfo(const PVPRoomInfo& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void PVPRoomInfo::SharedCtor() {
+  _cached_size_ = 0;
+  ncellstatus_ = 0;
+  roomid_ = NULL;
+  npvpmode_ = 0;
+  npvpgrade_ = 0;
+  maxpalyer_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PVPRoomInfo::~PVPRoomInfo() {
+  SharedDtor();
+}
+
+void PVPRoomInfo::SharedDtor() {
+  if (this != default_instance_) {
+    delete roomid_;
+  }
+}
+
+void PVPRoomInfo::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PVPRoomInfo::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PVPRoomInfo_descriptor_;
+}
+
+const PVPRoomInfo& PVPRoomInfo::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+PVPRoomInfo* PVPRoomInfo::default_instance_ = NULL;
+
+PVPRoomInfo* PVPRoomInfo::New() const {
+  return new PVPRoomInfo;
+}
+
+void PVPRoomInfo::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    ncellstatus_ = 0;
+    if (has_roomid()) {
+      if (roomid_ != NULL) roomid_->::NFMsg::Ident::Clear();
+    }
+    npvpmode_ = 0;
+    npvpgrade_ = 0;
+    maxpalyer_ = 0;
+  }
+  xredplayer_.Clear();
+  xblueplayer_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PVPRoomInfo::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 nCellStatus = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &ncellstatus_)));
+          set_has_ncellstatus();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_RoomID;
+        break;
+      }
+
+      // required .NFMsg.Ident RoomID = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_RoomID:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_roomid()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_nPVPMode;
+        break;
+      }
+
+      // required int32 nPVPMode = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_nPVPMode:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &npvpmode_)));
+          set_has_npvpmode();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_nPVPGrade;
+        break;
+      }
+
+      // required int32 nPVPGrade = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_nPVPGrade:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &npvpgrade_)));
+          set_has_npvpgrade();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(40)) goto parse_MaxPalyer;
+        break;
+      }
+
+      // required int32 MaxPalyer = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_MaxPalyer:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &maxpalyer_)));
+          set_has_maxpalyer();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_xRedPlayer;
+        break;
+      }
+
+      // repeated .NFMsg.Ident xRedPlayer = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_xRedPlayer:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_xredplayer()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_xRedPlayer;
+        if (input->ExpectTag(58)) goto parse_xBluePlayer;
+        break;
+      }
+
+      // repeated .NFMsg.Ident xBluePlayer = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_xBluePlayer:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_xblueplayer()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_xBluePlayer;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void PVPRoomInfo::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 nCellStatus = 1;
+  if (has_ncellstatus()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->ncellstatus(), output);
+  }
+
+  // required .NFMsg.Ident RoomID = 2;
+  if (has_roomid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->roomid(), output);
+  }
+
+  // required int32 nPVPMode = 3;
+  if (has_npvpmode()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->npvpmode(), output);
+  }
+
+  // required int32 nPVPGrade = 4;
+  if (has_npvpgrade()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->npvpgrade(), output);
+  }
+
+  // required int32 MaxPalyer = 5;
+  if (has_maxpalyer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->maxpalyer(), output);
+  }
+
+  // repeated .NFMsg.Ident xRedPlayer = 6;
+  for (int i = 0; i < this->xredplayer_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->xredplayer(i), output);
+  }
+
+  // repeated .NFMsg.Ident xBluePlayer = 7;
+  for (int i = 0; i < this->xblueplayer_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->xblueplayer(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* PVPRoomInfo::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 nCellStatus = 1;
+  if (has_ncellstatus()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->ncellstatus(), target);
+  }
+
+  // required .NFMsg.Ident RoomID = 2;
+  if (has_roomid()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->roomid(), target);
+  }
+
+  // required int32 nPVPMode = 3;
+  if (has_npvpmode()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->npvpmode(), target);
+  }
+
+  // required int32 nPVPGrade = 4;
+  if (has_npvpgrade()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->npvpgrade(), target);
+  }
+
+  // required int32 MaxPalyer = 5;
+  if (has_maxpalyer()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->maxpalyer(), target);
+  }
+
+  // repeated .NFMsg.Ident xRedPlayer = 6;
+  for (int i = 0; i < this->xredplayer_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->xredplayer(i), target);
+  }
+
+  // repeated .NFMsg.Ident xBluePlayer = 7;
+  for (int i = 0; i < this->xblueplayer_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->xblueplayer(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int PVPRoomInfo::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 nCellStatus = 1;
+    if (has_ncellstatus()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->ncellstatus());
+    }
+
+    // required .NFMsg.Ident RoomID = 2;
+    if (has_roomid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->roomid());
+    }
+
+    // required int32 nPVPMode = 3;
+    if (has_npvpmode()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->npvpmode());
+    }
+
+    // required int32 nPVPGrade = 4;
+    if (has_npvpgrade()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->npvpgrade());
+    }
+
+    // required int32 MaxPalyer = 5;
+    if (has_maxpalyer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->maxpalyer());
+    }
+
+  }
+  // repeated .NFMsg.Ident xRedPlayer = 6;
+  total_size += 1 * this->xredplayer_size();
+  for (int i = 0; i < this->xredplayer_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->xredplayer(i));
+  }
+
+  // repeated .NFMsg.Ident xBluePlayer = 7;
+  total_size += 1 * this->xblueplayer_size();
+  for (int i = 0; i < this->xblueplayer_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->xblueplayer(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PVPRoomInfo::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PVPRoomInfo* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PVPRoomInfo*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PVPRoomInfo::MergeFrom(const PVPRoomInfo& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  xredplayer_.MergeFrom(from.xredplayer_);
+  xblueplayer_.MergeFrom(from.xblueplayer_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ncellstatus()) {
+      set_ncellstatus(from.ncellstatus());
+    }
+    if (from.has_roomid()) {
+      mutable_roomid()->::NFMsg::Ident::MergeFrom(from.roomid());
+    }
+    if (from.has_npvpmode()) {
+      set_npvpmode(from.npvpmode());
+    }
+    if (from.has_npvpgrade()) {
+      set_npvpgrade(from.npvpgrade());
+    }
+    if (from.has_maxpalyer()) {
+      set_maxpalyer(from.maxpalyer());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PVPRoomInfo::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PVPRoomInfo::CopyFrom(const PVPRoomInfo& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PVPRoomInfo::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  if (has_roomid()) {
+    if (!this->roomid().IsInitialized()) return false;
+  }
+  for (int i = 0; i < xredplayer_size(); i++) {
+    if (!this->xredplayer(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < xblueplayer_size(); i++) {
+    if (!this->xblueplayer(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void PVPRoomInfo::Swap(PVPRoomInfo* other) {
+  if (other != this) {
+    std::swap(ncellstatus_, other->ncellstatus_);
+    std::swap(roomid_, other->roomid_);
+    std::swap(npvpmode_, other->npvpmode_);
+    std::swap(npvpgrade_, other->npvpgrade_);
+    std::swap(maxpalyer_, other->maxpalyer_);
+    xredplayer_.Swap(&other->xredplayer_);
+    xblueplayer_.Swap(&other->xblueplayer_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PVPRoomInfo::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PVPRoomInfo_descriptor_;
+  metadata.reflection = PVPRoomInfo_reflection_;
   return metadata;
 }
 

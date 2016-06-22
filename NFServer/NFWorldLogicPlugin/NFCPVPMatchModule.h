@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
 
 class NFCPVPMatchModule
     : public NFIPVPMatchModule
@@ -43,19 +44,22 @@ protected:
     NFGUID CreateRoom(const NFGUID& self, const int nPVPMode, const int nGrade);
     bool DestroyRoom(const NFGUID& self, const NFGUID& xRoomID);
     bool PlayerEnterRoom(const NFGUID& self, const int nRedOrBlue, const NFGUID& xRoomID);
+    bool PlayerListEnterRoom(const std::vector<NFGUID>& xPlayerList, const int nRedOrBlue, const NFGUID& xRoomID);
     bool PlayerLeaveRoom(const NFGUID& self, const NFGUID& xRoomID);
-    NF_SHARE_PTR<NFMapEx<NFGUID, NFGUID> > GetRoomList(const int nPVPMode, const int nGrade);
+    bool PlayerListLeaveRoom(const std::vector<NFGUID>& xPlayerList, const NFGUID& xRoomID);
 
+    int NeedPlayerCount(const NFMsg::PVPRoomInfo& xRoomInfo, const int nRedOrebulue);
+    bool UpdateRoomStatus(NFMsg::PVPRoomInfo& xRoomInfo, const int nTargetStatus = -1);
+
+    void ProecessWaitRoom();
+    void ProecessRoomBeginFight();
+    void ProcessSingePlayerRoom();
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
-
-private:
-    NFMapEx<int, NFMapEx< int , NFMapEx<NFGUID, NFGUID> > >mxWaitRoom; //pvpmode <--->grade<-(roomid <--> roomid)>
-    NFMapEx<NFGUID, NFGUID> mxPlayerRoomInfo; //PlayerID <--> RoomID;
-    NFMapEx<NFGUID, PVPRoom> mxRoomInfo; //RoomID <--> RoomInfo;
+    NFIPVPMatchRedisModule* m_pPVPMatchRedisModule;
 };
 
 

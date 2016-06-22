@@ -318,21 +318,11 @@ inline bool EGameMsgID_Parse(
 enum EItemType {
   EIT_NORMAL = 0,
   EIT_EQUIP = 1,
-  EIT_BOUNTY = 2,
-  EIT_HERO_CARD = 3,
-  EIT_HERO_STONE = 4,
-  EIT_STRENGTHEN_STONE = 5,
-  EIT_DEMONIZATION_STONE = 6,
-  EIT_GEM_STONE = 7,
-  EIT_CURRENCY = 8,
-  EIT_ITEM_REBORN = 9,
-  EIT_ITEM_POSITION = 10,
-  EIT_WOOD = 100,
-  EIT_STONE = 101
+  EIT_MATERIAL = 2
 };
 LIBPROTOC_EXPORT bool EItemType_IsValid(int value);
 const EItemType EItemType_MIN = EIT_NORMAL;
-const EItemType EItemType_MAX = EIT_STONE;
+const EItemType EItemType_MAX = EIT_MATERIAL;
 const int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EItemType_descriptor();
@@ -348,24 +338,14 @@ inline bool EItemType_Parse(
 enum EGameEquipSubType {
   EQUIPTYPE_WEAPON = 0,
   EQUIPTYPE_ARMOR = 1,
-  EQUIPTYPE_NECKLACE = 2,
-  EQUIPTYPE_RING = 3,
-  EQUIPTYPE_EARRINGS = 4,
-  EQUIPTYPE_BADGE = 5,
-  EQUIPTYPE_HELMET = 6,
-  EQUIPTYPE_SHAWL = 7,
-  EQUIPTYPE_GLOVE = 8,
-  EQUIPTYPE_WRIST = 9,
-  EQUIPTYPE_BELT = 10,
-  EQUIPTYPE_PANT = 11,
-  EQUIPTYPE_BOOT = 12,
-  EQUIPTYPE_WING = 13,
-  EQUIPTYPE_CLOAK = 14,
-  EQUIPTYPE_FASHION = 15
+  EQUIPTYPE_HELMET = 2,
+  EQUIPTYPE_BELT = 3,
+  EQUIPTYPE_BOOT = 4,
+  EQUIPTYPE_BADGE = 5
 };
 LIBPROTOC_EXPORT bool EGameEquipSubType_IsValid(int value);
 const EGameEquipSubType EGameEquipSubType_MIN = EQUIPTYPE_WEAPON;
-const EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_FASHION;
+const EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_BADGE;
 const int EGameEquipSubType_ARRAYSIZE = EGameEquipSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor();
@@ -403,18 +383,22 @@ inline bool EGameElementType_Parse(
 enum EGameItemSubType {
   EGIT_ITEM_NONE = 0,
   EGIT_ITEM_PROPERTY_CARD = 1,
-  EGIT_ITEM_PVP_ATTACK_CARD = 2,
-  EGIT_ITEM_PVP_DEFENSE_CARD = 3,
-  EGIT_ITEM_SKILL_CARD = 4,
-  EGIT_ITEM_GUILD_SKILL_CARD = 5,
-  EGIT_ITEM_GUILD_DIAMOND = 6,
-  EGIT_ITEM_POSITION = 7,
-  EGIT_ITEM_WORLD_HORN = 8,
-  EGIT_ITEM_REBORN = 9
+  EGIT_ITEM_SKILL_CARD = 2,
+  EGIT_ITEM_WORLD_HORN = 3,
+  EGIT_ITEM_BOUNTY = 4,
+  EGIT_ITEM_HERO_CARD = 5,
+  EGIT_ITEM_GEM_STONE = 7,
+  EGIT_ITEM_CURRENCY = 8,
+  EGIT_ITEM_EXP = 9,
+  EGIT_ITEM_ITEM_REBORN = 10,
+  EGIT_ITEM_ITEM_POSITION = 11,
+  EGIT_ITEM_DIAMOND = 12,
+  EGIT_ITEM_POISON = 13,
+  EGIT_ITEM_ACTIVITY = 14
 };
 LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_REBORN;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_ACTIVITY;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
@@ -450,12 +434,12 @@ inline bool EGameItemExpiredType_Parse(
 }
 enum ENPCType {
   ENPCTYPE_NORMAL = 0,
-  ENPCTYPE_TURRET = 1,
-  ENPCTYPE_HERO = 2
+  ENPCTYPE_HERO = 1,
+  ENPCTYPE_TURRET = 2
 };
 LIBPROTOC_EXPORT bool ENPCType_IsValid(int value);
 const ENPCType ENPCType_MIN = ENPCTYPE_NORMAL;
-const ENPCType ENPCType_MAX = ENPCTYPE_HERO;
+const ENPCType ENPCType_MAX = ENPCTYPE_TURRET;
 const int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ENPCType_descriptor();

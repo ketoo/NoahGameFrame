@@ -122,6 +122,7 @@ class ReqMapHunting;
 class AckMapHunting;
 class ReqMapKingWar;
 class AckMapKingWar;
+class PVPRoomInfo;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -9740,6 +9741,156 @@ class LIBPROTOC_EXPORT AckMapKingWar : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static AckMapKingWar* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message {
+ public:
+  PVPRoomInfo();
+  virtual ~PVPRoomInfo();
+
+  PVPRoomInfo(const PVPRoomInfo& from);
+
+  inline PVPRoomInfo& operator=(const PVPRoomInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PVPRoomInfo& default_instance();
+
+  void Swap(PVPRoomInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  PVPRoomInfo* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PVPRoomInfo& from);
+  void MergeFrom(const PVPRoomInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 nCellStatus = 1;
+  inline bool has_ncellstatus() const;
+  inline void clear_ncellstatus();
+  static const int kNCellStatusFieldNumber = 1;
+  inline ::google::protobuf::int32 ncellstatus() const;
+  inline void set_ncellstatus(::google::protobuf::int32 value);
+
+  // required .NFMsg.Ident RoomID = 2;
+  inline bool has_roomid() const;
+  inline void clear_roomid();
+  static const int kRoomIDFieldNumber = 2;
+  inline const ::NFMsg::Ident& roomid() const;
+  inline ::NFMsg::Ident* mutable_roomid();
+  inline ::NFMsg::Ident* release_roomid();
+  inline void set_allocated_roomid(::NFMsg::Ident* roomid);
+
+  // required int32 nPVPMode = 3;
+  inline bool has_npvpmode() const;
+  inline void clear_npvpmode();
+  static const int kNPVPModeFieldNumber = 3;
+  inline ::google::protobuf::int32 npvpmode() const;
+  inline void set_npvpmode(::google::protobuf::int32 value);
+
+  // required int32 nPVPGrade = 4;
+  inline bool has_npvpgrade() const;
+  inline void clear_npvpgrade();
+  static const int kNPVPGradeFieldNumber = 4;
+  inline ::google::protobuf::int32 npvpgrade() const;
+  inline void set_npvpgrade(::google::protobuf::int32 value);
+
+  // required int32 MaxPalyer = 5;
+  inline bool has_maxpalyer() const;
+  inline void clear_maxpalyer();
+  static const int kMaxPalyerFieldNumber = 5;
+  inline ::google::protobuf::int32 maxpalyer() const;
+  inline void set_maxpalyer(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.Ident xRedPlayer = 6;
+  inline int xredplayer_size() const;
+  inline void clear_xredplayer();
+  static const int kXRedPlayerFieldNumber = 6;
+  inline const ::NFMsg::Ident& xredplayer(int index) const;
+  inline ::NFMsg::Ident* mutable_xredplayer(int index);
+  inline ::NFMsg::Ident* add_xredplayer();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xredplayer() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xredplayer();
+
+  // repeated .NFMsg.Ident xBluePlayer = 7;
+  inline int xblueplayer_size() const;
+  inline void clear_xblueplayer();
+  static const int kXBluePlayerFieldNumber = 7;
+  inline const ::NFMsg::Ident& xblueplayer(int index) const;
+  inline ::NFMsg::Ident* mutable_xblueplayer(int index);
+  inline ::NFMsg::Ident* add_xblueplayer();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+      xblueplayer() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+      mutable_xblueplayer();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.PVPRoomInfo)
+ private:
+  inline void set_has_ncellstatus();
+  inline void clear_has_ncellstatus();
+  inline void set_has_roomid();
+  inline void clear_has_roomid();
+  inline void set_has_npvpmode();
+  inline void clear_has_npvpmode();
+  inline void set_has_npvpgrade();
+  inline void clear_has_npvpgrade();
+  inline void set_has_maxpalyer();
+  inline void clear_has_maxpalyer();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* roomid_;
+  ::google::protobuf::int32 ncellstatus_;
+  ::google::protobuf::int32 npvpmode_;
+  ::google::protobuf::int32 npvpgrade_;
+  ::google::protobuf::int32 maxpalyer_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xredplayer_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xblueplayer_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static PVPRoomInfo* default_instance_;
+};
 // ===================================================================
 
 
@@ -18964,6 +19115,186 @@ inline void ReqMapKingWar::set_allocated_map_title_id(::std::string* map_title_i
 // -------------------------------------------------------------------
 
 // AckMapKingWar
+
+// -------------------------------------------------------------------
+
+// PVPRoomInfo
+
+// required int32 nCellStatus = 1;
+inline bool PVPRoomInfo::has_ncellstatus() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PVPRoomInfo::set_has_ncellstatus() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PVPRoomInfo::clear_has_ncellstatus() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PVPRoomInfo::clear_ncellstatus() {
+  ncellstatus_ = 0;
+  clear_has_ncellstatus();
+}
+inline ::google::protobuf::int32 PVPRoomInfo::ncellstatus() const {
+  return ncellstatus_;
+}
+inline void PVPRoomInfo::set_ncellstatus(::google::protobuf::int32 value) {
+  set_has_ncellstatus();
+  ncellstatus_ = value;
+}
+
+// required .NFMsg.Ident RoomID = 2;
+inline bool PVPRoomInfo::has_roomid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PVPRoomInfo::set_has_roomid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PVPRoomInfo::clear_has_roomid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PVPRoomInfo::clear_roomid() {
+  if (roomid_ != NULL) roomid_->::NFMsg::Ident::Clear();
+  clear_has_roomid();
+}
+inline const ::NFMsg::Ident& PVPRoomInfo::roomid() const {
+  return roomid_ != NULL ? *roomid_ : *default_instance_->roomid_;
+}
+inline ::NFMsg::Ident* PVPRoomInfo::mutable_roomid() {
+  set_has_roomid();
+  if (roomid_ == NULL) roomid_ = new ::NFMsg::Ident;
+  return roomid_;
+}
+inline ::NFMsg::Ident* PVPRoomInfo::release_roomid() {
+  clear_has_roomid();
+  ::NFMsg::Ident* temp = roomid_;
+  roomid_ = NULL;
+  return temp;
+}
+inline void PVPRoomInfo::set_allocated_roomid(::NFMsg::Ident* roomid) {
+  delete roomid_;
+  roomid_ = roomid;
+  if (roomid) {
+    set_has_roomid();
+  } else {
+    clear_has_roomid();
+  }
+}
+
+// required int32 nPVPMode = 3;
+inline bool PVPRoomInfo::has_npvpmode() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void PVPRoomInfo::set_has_npvpmode() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void PVPRoomInfo::clear_has_npvpmode() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void PVPRoomInfo::clear_npvpmode() {
+  npvpmode_ = 0;
+  clear_has_npvpmode();
+}
+inline ::google::protobuf::int32 PVPRoomInfo::npvpmode() const {
+  return npvpmode_;
+}
+inline void PVPRoomInfo::set_npvpmode(::google::protobuf::int32 value) {
+  set_has_npvpmode();
+  npvpmode_ = value;
+}
+
+// required int32 nPVPGrade = 4;
+inline bool PVPRoomInfo::has_npvpgrade() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void PVPRoomInfo::set_has_npvpgrade() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void PVPRoomInfo::clear_has_npvpgrade() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void PVPRoomInfo::clear_npvpgrade() {
+  npvpgrade_ = 0;
+  clear_has_npvpgrade();
+}
+inline ::google::protobuf::int32 PVPRoomInfo::npvpgrade() const {
+  return npvpgrade_;
+}
+inline void PVPRoomInfo::set_npvpgrade(::google::protobuf::int32 value) {
+  set_has_npvpgrade();
+  npvpgrade_ = value;
+}
+
+// required int32 MaxPalyer = 5;
+inline bool PVPRoomInfo::has_maxpalyer() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void PVPRoomInfo::set_has_maxpalyer() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void PVPRoomInfo::clear_has_maxpalyer() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void PVPRoomInfo::clear_maxpalyer() {
+  maxpalyer_ = 0;
+  clear_has_maxpalyer();
+}
+inline ::google::protobuf::int32 PVPRoomInfo::maxpalyer() const {
+  return maxpalyer_;
+}
+inline void PVPRoomInfo::set_maxpalyer(::google::protobuf::int32 value) {
+  set_has_maxpalyer();
+  maxpalyer_ = value;
+}
+
+// repeated .NFMsg.Ident xRedPlayer = 6;
+inline int PVPRoomInfo::xredplayer_size() const {
+  return xredplayer_.size();
+}
+inline void PVPRoomInfo::clear_xredplayer() {
+  xredplayer_.Clear();
+}
+inline const ::NFMsg::Ident& PVPRoomInfo::xredplayer(int index) const {
+  return xredplayer_.Get(index);
+}
+inline ::NFMsg::Ident* PVPRoomInfo::mutable_xredplayer(int index) {
+  return xredplayer_.Mutable(index);
+}
+inline ::NFMsg::Ident* PVPRoomInfo::add_xredplayer() {
+  return xredplayer_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+PVPRoomInfo::xredplayer() const {
+  return xredplayer_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+PVPRoomInfo::mutable_xredplayer() {
+  return &xredplayer_;
+}
+
+// repeated .NFMsg.Ident xBluePlayer = 7;
+inline int PVPRoomInfo::xblueplayer_size() const {
+  return xblueplayer_.size();
+}
+inline void PVPRoomInfo::clear_xblueplayer() {
+  xblueplayer_.Clear();
+}
+inline const ::NFMsg::Ident& PVPRoomInfo::xblueplayer(int index) const {
+  return xblueplayer_.Get(index);
+}
+inline ::NFMsg::Ident* PVPRoomInfo::mutable_xblueplayer(int index) {
+  return xblueplayer_.Mutable(index);
+}
+inline ::NFMsg::Ident* PVPRoomInfo::add_xblueplayer() {
+  return xblueplayer_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >&
+PVPRoomInfo::xblueplayer() const {
+  return xblueplayer_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
+PVPRoomInfo::mutable_xblueplayer() {
+  return &xblueplayer_;
+}
 
 
 // @@protoc_insertion_point(namespace_scope)

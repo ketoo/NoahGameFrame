@@ -767,15 +767,16 @@ message ReqMapKingWar
 message AckMapKingWar
 {
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
+message PVPRoomInfo
+{
+	required int32 nCellStatus				= 1;	// 状态
+	required Ident RoomID					= 2;	// 房间ID
+	required int32 nPVPMode					= 3;	// 匹配模式
+	required int32 nPVPGrade				= 4;	// 房间所在的阶段
+	required int32 MaxPalyer				= 5;			
+	repeated Ident xRedPlayer				= 6;
+	repeated Ident xBluePlayer				= 7;
+}
 
