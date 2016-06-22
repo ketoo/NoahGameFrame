@@ -6,15 +6,17 @@ file(GLOB NFNoSqlPlugin_ROOT_Hpp *.h)
 add_library(NFNoSqlPlugin SHARED
 	${NFNoSqlPlugin_ROOT_Cpp}
 	${NFNoSqlPlugin_ROOT_CC}
-	${NFNoSqlPlugin_ROOT_Hpp})
+	${NFNoSqlPlugin_ROOT_Hpp}
+	${SolutionDir}/Dependencies/redis-cplusplus-client/anet.c
+	${SolutionDir}/Dependencies/redis-cplusplus-client/anet.h)
 	
 if(UNIX)
 	target_include_directories(NFNoSqlPlugin PUBLIC
-		${SolutionDir}/Dependencies/redis-cplusplus-client/msvc/anet_win32/)
+		${SolutionDir}/Dependencies/redis-cplusplus-client/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNoSqlPlugin libtheron.a libmysqlpp.a libmysqlclient.a)
+		target_link_libraries(NFNoSqlPlugin libtheron.a)
 	else()
-		target_link_libraries(NFNoSqlPlugin libtherond.a libmysqlpp.a libmysqlclient.a)
+		target_link_libraries(NFNoSqlPlugin libtherond.a)
 	endif()
 	add_definitions(
 			-D_USRDLL
