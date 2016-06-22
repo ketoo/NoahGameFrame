@@ -21,6 +21,15 @@ if(UNIX)
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/Release/${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/Tutorial1/")
+	else()
+		add_custom_command(TARGET ${ProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/Tutorial1/")
+	endif()
 else()
 	add_definitions(
 		-DWIN
