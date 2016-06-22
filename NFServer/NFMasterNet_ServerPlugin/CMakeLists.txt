@@ -25,11 +25,11 @@ if(UNIX)
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFMasterServer/{ProjectName}.so")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFMasterServer/${ProjectName}.so")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFMasterServer/{ProjectName}.so")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFMasterServer/${ProjectName}.so")
 	endif()
 else()
 	add_definitions(
