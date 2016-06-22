@@ -26,15 +26,15 @@ macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
 						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
 endmacro()
 
-macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix)
+macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
 	if(${dbgSuffix} STREQUAL "_d")
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
 	else()
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}.${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
 	
 	endif()
 endmacro()
