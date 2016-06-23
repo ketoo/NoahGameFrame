@@ -1,4 +1,7 @@
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
+
+option(BUILD_TOOLS_ONLY "help string describing option")
+
 cmake_minimum_required(VERSION 2.8)
 macro(remove_file arg_list file_remove)
 	file(GLOB RemoveItems_Cpp ${file_remove})
@@ -7,9 +10,36 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 if(UNIX)
+	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
 	target_link_libraries(${projName} protobuf NFMessageDefine NFNet event event_core)
+else()
+	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
 endif()
 endmacro(link_NFSDK)
+
+macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
+	add_custom_command(TARGET ${strProjectName}
+						POST_BUILD
+						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
+	add_custom_command(TARGET ${strProjectName}
+						POST_BUILD
+						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+endmacro()
+
+macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
+	if(${dbgSuffix} STREQUAL "_d")
+		add_custom_command(TARGET ${strProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+	else()
+		add_custom_command(TARGET ${strProjectName}
+							POST_BUILD
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}.${ext}")
+	
+	endif()
+endmacro()
+
+		
 
 project(NoahFrame)
 
@@ -28,9 +58,15 @@ ${SolutionDir}/Dependencies/libevent/compat/
 ${SolutionDir}/Dependencies/lua/
 )
 
+#message("Build Type:"${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})
+
 if(UNIX)
-	set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}  -std=c++11 -O0 -Wall -g -ggdb -DDEBUG")
-	set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS}  -std=c++11 -O3 -Wall")
+	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O0 -Wall -g -ggdb -DDEBUG")
+	else()
+		set(CMAKE_BUILD_TYPE "Release")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -O3 -Wall")
+	endif()
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
 	add_definitions(-std=c++11)
 else()
@@ -40,9 +76,15 @@ endif()
 set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm )
 link_directories(${DependenciesLibPath})
 
-add_subdirectory(Dependencies)
-add_subdirectory(NFComm)
-add_subdirectory(NFServer)
-add_subdirectory(Tutorial)
-add_subdirectory(NFTools)
+if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
+	message("Build Tools Only")
+	add_subdirectory(NFTools)
+else()
+	message("Build All")
+	add_subdirectory(Dependencies)
+	add_subdirectory(NFComm)
+	add_subdirectory(NFServer)
+	add_subdirectory(Tutorial)
+	add_subdirectory(NFTools)
+endif()
 
