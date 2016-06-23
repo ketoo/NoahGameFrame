@@ -74,7 +74,7 @@ public:
 			return *((T*)(&m_data));
 		}
 
-		throw std::exception("");
+		//throw std::exception("");
 	}
 
 	bool operator == (const optional<T>& rhs) const
