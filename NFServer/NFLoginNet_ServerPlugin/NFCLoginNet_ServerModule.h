@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLoginNet_ServerModule.h
+//    @FileName			:    NFCLoginNet_ServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLoginNet_ServerModule

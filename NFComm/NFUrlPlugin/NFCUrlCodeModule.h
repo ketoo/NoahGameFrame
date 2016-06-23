@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCUrlCode.hpp
+//    @FileName			:    NFCUrlCode.hpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08
 //    @Module           :    NFCUrlCode
