@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCWorldNet_ClientModule.cpp
+//    @FileName			:    NFCWorldNet_ClientModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCWorldNet_ClientModule
@@ -10,13 +10,13 @@
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
 bool NFCWorldToMasterModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
 
-	m_pClusterClientModule->Init();
+	m_pNetClientModule->Init();
 
     return true;
 }
@@ -34,11 +34,11 @@ bool NFCWorldToMasterModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 
-	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCWorldToMasterModule::OnSelectServerProcess);
-	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
-	m_pClusterClientModule->AddReceiveCallBack(this, &NFCWorldToMasterModule::InvalidMessage);
+	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCWorldToMasterModule::OnSelectServerProcess);
+	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
+	m_pNetClientModule->AddReceiveCallBack(this, &NFCWorldToMasterModule::InvalidMessage);
 
-	m_pClusterClientModule->AddEventCallBack(this, &NFCWorldToMasterModule::OnSocketMSEvent);
+	m_pNetClientModule->AddEventCallBack(this, &NFCWorldToMasterModule::OnSocketMSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -65,7 +65,7 @@ bool NFCWorldToMasterModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-				m_pClusterClientModule->AddServer(xServerData);
+				m_pNetClientModule->AddServer(xServerData);
             }
         }
     }
@@ -76,7 +76,7 @@ bool NFCWorldToMasterModule::AfterInit()
 
 bool NFCWorldToMasterModule::Execute()
 {
-	m_pClusterClientModule->Execute();
+	m_pNetClientModule->Execute();
 
 	return true;
 }
@@ -112,11 +112,11 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
 
-                NF_SHARE_PTR<ConnectData> pServerData = m_pClusterClientModule->GetServerNetInfo(pNet);
+                NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-					m_pClusterClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -155,7 +155,7 @@ void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const i
 
         m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
-		m_pClusterClientModule->SendSuitByPB(xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
+		m_pNetClientModule->SendSuitByPB(xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
     }
 
 }

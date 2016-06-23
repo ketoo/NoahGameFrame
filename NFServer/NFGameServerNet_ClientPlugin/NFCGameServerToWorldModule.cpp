@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerNet_ClientModule.cpp
+//    @FileName			:    NFCGameServerNet_ClientModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCGameServerNet_ClientModule
@@ -9,14 +9,14 @@
 #include "NFCGameServerToWorldModule.h"
 #include "NFGameServerNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCGameServerToWorldModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
 
-	m_pClusterClientModule->Init();
+	m_pNetClientModule->Init();
 
     return true;
 }
@@ -30,7 +30,7 @@ bool NFCGameServerToWorldModule::Shut()
 
 bool NFCGameServerToWorldModule::Execute()
 {
-	m_pClusterClientModule->Execute();
+	m_pNetClientModule->Execute();
 
 	return true;
 }
@@ -67,11 +67,11 @@ void NFCGameServerToWorldModule::Register(NFINet* pNet)
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
 
-                NF_SHARE_PTR<ConnectData> pServerData = m_pClusterClientModule->GetServerNetInfo(pNet);
+                NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-					m_pClusterClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_GTW_GAME_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
@@ -108,8 +108,8 @@ bool NFCGameServerToWorldModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-	m_pClusterClientModule->AddReceiveCallBack(this, &NFCGameServerToWorldModule::TransPBToProxy);
-	m_pClusterClientModule->AddEventCallBack(this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddReceiveCallBack(this, &NFCGameServerToWorldModule::TransPBToProxy);
+	m_pNetClientModule->AddEventCallBack(this, &NFCGameServerToWorldModule::OnSocketWSEvent);
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
@@ -139,7 +139,7 @@ bool NFCGameServerToWorldModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-                m_pClusterClientModule->AddServer(xServerData);
+                m_pNetClientModule->AddServer(xServerData);
             }
         }
     }
@@ -190,7 +190,7 @@ void NFCGameServerToWorldModule::SendOnline(const NFGUID& self)
     const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
     *xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-	m_pClusterClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 
 }
 
@@ -201,7 +201,7 @@ void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
     const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
     *xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-	m_pClusterClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
 
 }
 
@@ -221,10 +221,10 @@ void NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int 
 
 void NFCGameServerToWorldModule::SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    m_pClusterClientModule->SendBySuit(nHashKey, nMsgID, msg, nLen);
+    m_pNetClientModule->SendBySuit(nHashKey, nMsgID, msg, nLen);
 }
 
-NFIClusterClientModule* NFCGameServerToWorldModule::GetClusterClientModule()
+NFINetClientModule* NFCGameServerToWorldModule::GetClusterClientModule()
 {
-    return m_pClusterClientModule;
+    return m_pNetClientModule;
 }
