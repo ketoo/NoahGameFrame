@@ -316,7 +316,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
         return;
     }
 
-	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, "ItemType");
+	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
 	switch (eItemType)
 	{
 	case NFMsg::EItemType::EIT_CARD:
