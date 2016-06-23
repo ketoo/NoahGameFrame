@@ -78,7 +78,7 @@ bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::strin
     std::vector<std::string> strValueList;
     if (!pDriver->HMGet(strKey, xGuidList, strValueList))
     {
-        return nullptr;
+        return false;
     }
 
     for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
@@ -155,7 +155,7 @@ bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::stri
 	std::vector<std::string> strValueList;
 	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
 	{
-		return nullptr;
+		return false;
 	}
 
 	for (std::vector<std::string>::iterator it; it != strValueList.end(); ++it)
