@@ -37,6 +37,12 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
+					<Add directory="MiniExcelReader" />
+					<Add directory="minizip" />
+					<Add directory="tinyxml2" />
+					<Add directory="zlib" />
+					<Add directory="../../" />
+					<Add directory="../../Dependencies" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

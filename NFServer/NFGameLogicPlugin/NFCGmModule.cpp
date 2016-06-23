@@ -440,11 +440,11 @@ void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, cons
             m_pPackModule->CreateEquip(nPlayerID, strItemID);
         }
         break;
-        case NFMsg::EIT_HERO_CARD:
-        {
-            m_pHeroModule->AddHero(nPlayerID, strItemID);
-        }
-        break;
+        //case NFMsg::EIT_HERO_CARD:
+        //{
+        //    m_pHeroModule->AddHero(nPlayerID, strItemID);
+        //}
+        //break;
         default:
             m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
             break;
