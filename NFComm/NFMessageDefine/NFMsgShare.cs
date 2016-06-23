@@ -2013,6 +2013,82 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TeamInfo")]
+  public partial class TeamInfo : global::ProtoBuf.IExtensible
+  {
+    public TeamInfo() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _captain_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"captain_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident captain_id
+    {
+      get { return _captain_id; }
+      set { _captain_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.TeammemberInfo> _teammemberInfo = new global::System.Collections.Generic.List<NFMsg.TeammemberInfo>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"teammemberInfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.TeammemberInfo> teammemberInfo
+    {
+      get { return _teammemberInfo; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TeammemberInfo")]
+  public partial class TeammemberInfo : global::ProtoBuf.IExtensible
+  {
+    public TeammemberInfo() {}
+    
+    private NFMsg.Ident _player_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident player_id
+    {
+      get { return _player_id; }
+      set { _player_id = value; }
+    }
+    private string _name;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string name
+    {
+      get { return _name; }
+      set { _name = value; }
+    }
+    private int _nLevel;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"nLevel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int nLevel
+    {
+      get { return _nLevel; }
+      set { _nLevel = value; }
+    }
+    private int _job;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"job", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int job
+    {
+      get { return _job; }
+      set { _job = value; }
+    }
+    private string _HeadIcon;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"HeadIcon", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string HeadIcon
+    {
+      get { return _HeadIcon; }
+      set { _HeadIcon = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckCreateTeam")]
   public partial class ReqAckCreateTeam : global::ProtoBuf.IExtensible
   {
@@ -2024,6 +2100,14 @@ namespace NFMsg
     {
       get { return _team_id; }
       set { _team_id = value; }
+    }
+    private NFMsg.TeamInfo _xTeamInfo = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"xTeamInfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.TeamInfo xTeamInfo
+    {
+      get { return _xTeamInfo; }
+      set { _xTeamInfo = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2042,6 +2126,14 @@ namespace NFMsg
       get { return _team_id; }
       set { _team_id = value; }
     }
+    private NFMsg.TeamInfo _xTeamInfo = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"xTeamInfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.TeamInfo xTeamInfo
+    {
+      get { return _xTeamInfo; }
+      set { _xTeamInfo = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2058,6 +2150,14 @@ namespace NFMsg
     {
       get { return _team_id; }
       set { _team_id = value; }
+    }
+    private NFMsg.TeamInfo _xTeamInfo = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"xTeamInfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.TeamInfo xTeamInfo
+    {
+      get { return _xTeamInfo; }
+      set { _xTeamInfo = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2089,6 +2189,14 @@ namespace NFMsg
     {
       get { return _type; }
       set { _type = value; }
+    }
+    private NFMsg.TeamInfo _xTeamInfo = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"xTeamInfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NFMsg.TeamInfo xTeamInfo
+    {
+      get { return _xTeamInfo; }
+      set { _xTeamInfo = value; }
     }
     [global::ProtoBuf.ProtoContract(Name=@"EGTeamMemberOprType")]
     public enum EGTeamMemberOprType
@@ -2127,10 +2235,10 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqInviteTeamMember")]
-  public partial class ReqInviteTeamMember : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckInviteTeam")]
+  public partial class ReqAckInviteTeam : global::ProtoBuf.IExtensible
   {
-    public ReqInviteTeamMember() {}
+    public ReqAckInviteTeam() {}
     
     private NFMsg.Ident _team_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -2152,6 +2260,110 @@ namespace NFMsg
     {
       get { return _invite_target_id; }
       set { _invite_target_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqTeamEnterEctype")]
+  public partial class ReqTeamEnterEctype : global::ProtoBuf.IExtensible
+  {
+    public ReqTeamEnterEctype() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _self_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self_id
+    {
+      get { return _self_id; }
+      set { _self_id = value; }
+    }
+    private int _nEctypeID = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"nEctypeID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nEctypeID
+    {
+      get { return _nEctypeID; }
+      set { _nEctypeID = value; }
+    }
+    private int _nGroupID = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"nGroupID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nGroupID
+    {
+      get { return _nGroupID; }
+      set { _nGroupID = value; }
+    }
+    private int _nResult = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"nResult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nResult
+    {
+      get { return _nResult; }
+      set { _nResult = value; }
+    }
+    private int _nServerID = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"nServerID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nServerID
+    {
+      get { return _nServerID; }
+      set { _nServerID = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckTeamEnterEctype")]
+  public partial class AckTeamEnterEctype : global::ProtoBuf.IExtensible
+  {
+    public AckTeamEnterEctype() {}
+    
+    private NFMsg.Ident _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+    private NFMsg.Ident _self_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"self_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self_id
+    {
+      get { return _self_id; }
+      set { _self_id = value; }
+    }
+    private int _nEctypeID = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"nEctypeID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nEctypeID
+    {
+      get { return _nEctypeID; }
+      set { _nEctypeID = value; }
+    }
+    private int _nGroupID = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"nGroupID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nGroupID
+    {
+      get { return _nGroupID; }
+      set { _nGroupID = value; }
+    }
+    private int _nResult = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"nResult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int nResult
+    {
+      get { return _nResult; }
+      set { _nResult = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2581,6 +2793,65 @@ namespace NFMsg
   {
     public AckMapKingWar() {}
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PVPRoomInfo")]
+  public partial class PVPRoomInfo : global::ProtoBuf.IExtensible
+  {
+    public PVPRoomInfo() {}
+    
+    private int _nCellStatus;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"nCellStatus", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int nCellStatus
+    {
+      get { return _nCellStatus; }
+      set { _nCellStatus = value; }
+    }
+    private NFMsg.Ident _RoomID;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"RoomID", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident RoomID
+    {
+      get { return _RoomID; }
+      set { _RoomID = value; }
+    }
+    private int _nPVPMode;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"nPVPMode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int nPVPMode
+    {
+      get { return _nPVPMode; }
+      set { _nPVPMode = value; }
+    }
+    private int _nPVPGrade;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"nPVPGrade", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int nPVPGrade
+    {
+      get { return _nPVPGrade; }
+      set { _nPVPGrade = value; }
+    }
+    private int _MaxPalyer;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MaxPalyer", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int MaxPalyer
+    {
+      get { return _MaxPalyer; }
+      set { _MaxPalyer = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NFMsg.Ident> _xRedPlayer = new global::System.Collections.Generic.List<NFMsg.Ident>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"xRedPlayer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.Ident> xRedPlayer
+    {
+      get { return _xRedPlayer; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.Ident> _xBluePlayer = new global::System.Collections.Generic.List<NFMsg.Ident>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"xBluePlayer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.Ident> xBluePlayer
+    {
+      get { return _xBluePlayer; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

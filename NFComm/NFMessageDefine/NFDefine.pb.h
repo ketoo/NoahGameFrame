@@ -316,13 +316,15 @@ inline bool EGameMsgID_Parse(
     EGameMsgID_descriptor(), name, value);
 }
 enum EItemType {
-  EIT_NORMAL = 0,
-  EIT_EQUIP = 1,
-  EIT_MATERIAL = 2
+  EIT_EQUIP = 0,
+  EIT_GEM = 1,
+  EIT_ITEM = 2,
+  EIT_CARD = 3,
+  EIT_TOKEN = 4
 };
 LIBPROTOC_EXPORT bool EItemType_IsValid(int value);
-const EItemType EItemType_MIN = EIT_NORMAL;
-const EItemType EItemType_MAX = EIT_MATERIAL;
+const EItemType EItemType_MIN = EIT_EQUIP;
+const EItemType EItemType_MAX = EIT_TOKEN;
 const int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EItemType_descriptor();
@@ -337,15 +339,15 @@ inline bool EItemType_Parse(
 }
 enum EGameEquipSubType {
   EQUIPTYPE_WEAPON = 0,
-  EQUIPTYPE_ARMOR = 1,
-  EQUIPTYPE_HELMET = 2,
-  EQUIPTYPE_BELT = 3,
-  EQUIPTYPE_BOOT = 4,
-  EQUIPTYPE_BADGE = 5
+  EQUIPTYPE_HELMET = 1,
+  EQUIPTYPE_ARMOR = 2,
+  EQUIPTYPE_WRIST = 3,
+  EQUIPTYPE_PANT = 4,
+  EQUIPTYPE_BOOT = 5
 };
 LIBPROTOC_EXPORT bool EGameEquipSubType_IsValid(int value);
 const EGameEquipSubType EGameEquipSubType_MIN = EQUIPTYPE_WEAPON;
-const EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_BADGE;
+const EGameEquipSubType EGameEquipSubType_MAX = EQUIPTYPE_BOOT;
 const int EGameEquipSubType_ARRAYSIZE = EGameEquipSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameEquipSubType_descriptor();
@@ -358,47 +360,42 @@ inline bool EGameEquipSubType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameEquipSubType>(
     EGameEquipSubType_descriptor(), name, value);
 }
-enum EGameElementType {
-  EELEMENTTYPE_FIRE = 0,
-  EELEMENTTYPE_LIGHT = 1,
-  EELEMENTTYPE_WIND = 2,
-  EELEMENTTYPE_ICE = 3,
-  EELEMENTTYPE_POISON = 4
+enum EGameGemSubType {
+  EGGSTYPE_GEM_ATK = 0,
+  EGGSTYPE_GEM_DEF = 1,
+  EGGSTYPE_GEM_FIRE = 3,
+  EGGSTYPE_GEM_LIGHT = 4,
+  EGGSTYPE_GEM_WIND = 5,
+  EGGSTYPE_GEM_ICE = 6,
+  EGGSTYPE_GEM_POISON = 7
 };
-LIBPROTOC_EXPORT bool EGameElementType_IsValid(int value);
-const EGameElementType EGameElementType_MIN = EELEMENTTYPE_FIRE;
-const EGameElementType EGameElementType_MAX = EELEMENTTYPE_POISON;
-const int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
+LIBPROTOC_EXPORT bool EGameGemSubType_IsValid(int value);
+const EGameGemSubType EGameGemSubType_MIN = EGGSTYPE_GEM_ATK;
+const EGameGemSubType EGameGemSubType_MAX = EGGSTYPE_GEM_POISON;
+const int EGameGemSubType_ARRAYSIZE = EGameGemSubType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor();
-inline const ::std::string& EGameElementType_Name(EGameElementType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameGemSubType_descriptor();
+inline const ::std::string& EGameGemSubType_Name(EGameGemSubType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EGameElementType_descriptor(), value);
+    EGameGemSubType_descriptor(), value);
 }
-inline bool EGameElementType_Parse(
-    const ::std::string& name, EGameElementType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EGameElementType>(
-    EGameElementType_descriptor(), name, value);
+inline bool EGameGemSubType_Parse(
+    const ::std::string& name, EGameGemSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameGemSubType>(
+    EGameGemSubType_descriptor(), name, value);
 }
 enum EGameItemSubType {
-  EGIT_ITEM_NONE = 0,
-  EGIT_ITEM_PROPERTY_CARD = 1,
-  EGIT_ITEM_SKILL_CARD = 2,
-  EGIT_ITEM_WORLD_HORN = 3,
-  EGIT_ITEM_BOUNTY = 4,
-  EGIT_ITEM_HERO_CARD = 5,
-  EGIT_ITEM_GEM_STONE = 7,
-  EGIT_ITEM_CURRENCY = 8,
-  EGIT_ITEM_EXP = 9,
-  EGIT_ITEM_ITEM_REBORN = 10,
-  EGIT_ITEM_ITEM_POSITION = 11,
-  EGIT_ITEM_DIAMOND = 12,
-  EGIT_ITEM_POISON = 13,
-  EGIT_ITEM_ACTIVITY = 14
+  EGIT_ITEM_WATER = 0,
+  EGIT_ITEM_DIAMOND = 1,
+  EGIT_ITEM_CURRENCY = 2,
+  EGIT_ITEM_EXP = 3,
+  EGIT_ITEM_HP = 4,
+  EGIT_ITEM_MP = 5,
+  EGIT_ITEM_SP = 6
 };
 LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
-const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_NONE;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_ACTIVITY;
+const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_WATER;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_SP;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();
@@ -410,6 +407,47 @@ inline bool EGameItemSubType_Parse(
     const ::std::string& name, EGameItemSubType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameItemSubType>(
     EGameItemSubType_descriptor(), name, value);
+}
+enum EGameCardSubType {
+  EGCST_STRENGTH = 1,
+  EGCST_AGILITY = 2,
+  EGCST_INTELLIGENCE = 3
+};
+LIBPROTOC_EXPORT bool EGameCardSubType_IsValid(int value);
+const EGameCardSubType EGameCardSubType_MIN = EGCST_STRENGTH;
+const EGameCardSubType EGameCardSubType_MAX = EGCST_INTELLIGENCE;
+const int EGameCardSubType_ARRAYSIZE = EGameCardSubType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameCardSubType_descriptor();
+inline const ::std::string& EGameCardSubType_Name(EGameCardSubType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameCardSubType_descriptor(), value);
+}
+inline bool EGameCardSubType_Parse(
+    const ::std::string& name, EGameCardSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameCardSubType>(
+    EGameCardSubType_descriptor(), name, value);
+}
+enum EGameTokenSubType {
+  EGTST_TOKEN_REBORN = 0,
+  EGTST_TOKEN_POSITION = 1,
+  EGTST_TOKEN_BOUNTY = 2,
+  EGTST_TOKEN_ACTIVITY = 3
+};
+LIBPROTOC_EXPORT bool EGameTokenSubType_IsValid(int value);
+const EGameTokenSubType EGameTokenSubType_MIN = EGTST_TOKEN_REBORN;
+const EGameTokenSubType EGameTokenSubType_MAX = EGTST_TOKEN_ACTIVITY;
+const int EGameTokenSubType_ARRAYSIZE = EGameTokenSubType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameTokenSubType_descriptor();
+inline const ::std::string& EGameTokenSubType_Name(EGameTokenSubType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameTokenSubType_descriptor(), value);
+}
+inline bool EGameTokenSubType_Parse(
+    const ::std::string& name, EGameTokenSubType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameTokenSubType>(
+    EGameTokenSubType_descriptor(), name, value);
 }
 enum EGameItemExpiredType {
   EGIET_NONE = 0,
@@ -431,26 +469,6 @@ inline bool EGameItemExpiredType_Parse(
     const ::std::string& name, EGameItemExpiredType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameItemExpiredType>(
     EGameItemExpiredType_descriptor(), name, value);
-}
-enum ENPCType {
-  ENPCTYPE_NORMAL = 0,
-  ENPCTYPE_HERO = 1,
-  ENPCTYPE_TURRET = 2
-};
-LIBPROTOC_EXPORT bool ENPCType_IsValid(int value);
-const ENPCType ENPCType_MIN = ENPCTYPE_NORMAL;
-const ENPCType ENPCType_MAX = ENPCTYPE_TURRET;
-const int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ENPCType_descriptor();
-inline const ::std::string& ENPCType_Name(ENPCType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ENPCType_descriptor(), value);
-}
-inline bool ENPCType_Parse(
-    const ::std::string& name, ENPCType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
-    ENPCType_descriptor(), name, value);
 }
 enum EDrawDropItemState {
   E_DRAW_STATE_NONE = 0,
@@ -584,26 +602,6 @@ inline bool EShopType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EShopType>(
     EShopType_descriptor(), name, value);
 }
-enum EHeroType {
-  EHT_STRENGTH = 1,
-  EHT_AGILITY = 2,
-  EHT_INTELLIGENCE = 3
-};
-LIBPROTOC_EXPORT bool EHeroType_IsValid(int value);
-const EHeroType EHeroType_MIN = EHT_STRENGTH;
-const EHeroType EHeroType_MAX = EHT_INTELLIGENCE;
-const int EHeroType_ARRAYSIZE = EHeroType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EHeroType_descriptor();
-inline const ::std::string& EHeroType_Name(EHeroType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    EHeroType_descriptor(), value);
-}
-inline bool EHeroType_Parse(
-    const ::std::string& name, EHeroType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EHeroType>(
-    EHeroType_descriptor(), name, value);
-}
 enum ERankType {
   ERT_PLAYER_LEVEL = 1,
   ERT_FIGHT_VALUE = 2,
@@ -625,6 +623,68 @@ inline bool ERankType_Parse(
     const ::std::string& name, ERankType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ERankType>(
     ERankType_descriptor(), name, value);
+}
+enum ENPCType {
+  ENPCTYPE_NORMAL = 0,
+  ENPCTYPE_HERO = 1,
+  ENPCTYPE_TURRET = 2
+};
+LIBPROTOC_EXPORT bool ENPCType_IsValid(int value);
+const ENPCType ENPCType_MIN = ENPCTYPE_NORMAL;
+const ENPCType ENPCType_MAX = ENPCTYPE_TURRET;
+const int ENPCType_ARRAYSIZE = ENPCType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ENPCType_descriptor();
+inline const ::std::string& ENPCType_Name(ENPCType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ENPCType_descriptor(), value);
+}
+inline bool ENPCType_Parse(
+    const ::std::string& name, ENPCType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
+    ENPCType_descriptor(), name, value);
+}
+enum EPropertyType {
+  EPT_STRENGTH = 1,
+  EPT_AGILITY = 2,
+  EPT_INTELLIGENCE = 3
+};
+LIBPROTOC_EXPORT bool EPropertyType_IsValid(int value);
+const EPropertyType EPropertyType_MIN = EPT_STRENGTH;
+const EPropertyType EPropertyType_MAX = EPT_INTELLIGENCE;
+const int EPropertyType_ARRAYSIZE = EPropertyType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EPropertyType_descriptor();
+inline const ::std::string& EPropertyType_Name(EPropertyType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EPropertyType_descriptor(), value);
+}
+inline bool EPropertyType_Parse(
+    const ::std::string& name, EPropertyType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EPropertyType>(
+    EPropertyType_descriptor(), name, value);
+}
+enum EGameElementType {
+  EELEMENTTYPE_FIRE = 0,
+  EELEMENTTYPE_LIGHT = 1,
+  EELEMENTTYPE_WIND = 2,
+  EELEMENTTYPE_ICE = 3,
+  EELEMENTTYPE_POISON = 4
+};
+LIBPROTOC_EXPORT bool EGameElementType_IsValid(int value);
+const EGameElementType EGameElementType_MIN = EELEMENTTYPE_FIRE;
+const EGameElementType EGameElementType_MAX = EELEMENTTYPE_POISON;
+const int EGameElementType_ARRAYSIZE = EGameElementType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor();
+inline const ::std::string& EGameElementType_Name(EGameElementType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EGameElementType_descriptor(), value);
+}
+inline bool EGameElementType_Parse(
+    const ::std::string& name, EGameElementType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EGameElementType>(
+    EGameElementType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -660,20 +720,24 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEquipSubType>() {
   return ::NFMsg::EGameEquipSubType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameElementType>() {
-  return ::NFMsg::EGameElementType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameGemSubType>() {
+  return ::NFMsg::EGameGemSubType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemSubType>() {
   return ::NFMsg::EGameItemSubType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemExpiredType>() {
-  return ::NFMsg::EGameItemExpiredType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameCardSubType>() {
+  return ::NFMsg::EGameCardSubType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
-  return ::NFMsg::ENPCType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameTokenSubType>() {
+  return ::NFMsg::EGameTokenSubType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameItemExpiredType>() {
+  return ::NFMsg::EGameItemExpiredType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EDrawDropItemState>() {
@@ -700,12 +764,20 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {
   return ::NFMsg::EShopType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EHeroType>() {
-  return ::NFMsg::EHeroType_descriptor();
-}
-template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {
   return ::NFMsg::ERankType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
+  return ::NFMsg::ENPCType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EPropertyType>() {
+  return ::NFMsg::EPropertyType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameElementType>() {
+  return ::NFMsg::EGameElementType_descriptor();
 }
 
 }  // namespace google
