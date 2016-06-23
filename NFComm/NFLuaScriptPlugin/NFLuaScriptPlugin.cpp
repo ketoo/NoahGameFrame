@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFLuaScriptPlugin.cpp
+//    @FileName			:    NFLuaScriptPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-07-08 23:51
 //    @Module           :    NFLuaScriptPlugin

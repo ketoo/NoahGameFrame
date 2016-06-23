@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCActor.cpp
+//    @FileName			:    NFCActor.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2014-04-05
 //    @Module           :    NFCActor

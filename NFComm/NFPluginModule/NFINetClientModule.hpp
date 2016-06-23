@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFIClusterClientModule.hpp
+//    @FileName         £º    NFINetClientModule.hpp
 //    @Author           £º    LvSheng.Huang
 //    @Date             £º    2015-01-4
-//    @Module           £º    NFIClusterClientModule
+//    @Module           £º    NFINetClientModule
 //
 // -------------------------------------------------------------------------
 
@@ -45,10 +45,10 @@ struct ConnectData
 	NF_SHARE_PTR<NFINetModule> mxNetModule;
 };
 
-class NFIClusterClientModule : public NFILogicModule
+class NFINetClientModule : public NFILogicModule
 {
 protected:
-	NFIClusterClientModule()
+	NFINetClientModule()
 	{
 	}
 public:
@@ -57,14 +57,14 @@ public:
         EConstDefine_DefaultWeith = 500,
     };
 
-	NFIClusterClientModule(NFIPluginManager* p)
+	NFINetClientModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
 
 	virtual bool Init()
 	{
-		AddEventCallBack(this, &NFIClusterClientModule::OnSocketEvent);
+		AddEventCallBack(this, &NFINetClientModule::OnSocketEvent);
 
 		return true;
 	}

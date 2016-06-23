@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLoginNet_ServerModule.h
+//    @FileName			:    NFCLoginNet_ServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLoginNet_ServerModule
@@ -19,7 +19,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
 class NFCWorldToMasterModule
     : public NFIWorldToMasterModule
@@ -62,7 +62,7 @@ private:
     NFILogicClassModule* m_pLogicClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
-	NFIClusterClientModule* m_pClusterClientModule;
+	NFINetClientModule* m_pNetClientModule;
 };
 
 #endif
