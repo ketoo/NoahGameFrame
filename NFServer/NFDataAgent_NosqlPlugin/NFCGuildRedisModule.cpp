@@ -185,7 +185,7 @@ bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::stri
 	return true;
 }
 
-bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
 {
     if (xGuid.IsNull())
     {
@@ -226,7 +226,7 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
 	return true;
 }
 
-bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
+bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHARE_PTR<NFIRecordManager> pRecordManager)
 {
     if (xGuid.IsNull())
     {
