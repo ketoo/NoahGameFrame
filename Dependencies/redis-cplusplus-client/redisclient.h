@@ -53,6 +53,7 @@ typedef void* BUFPTR;
 #include <stdexcept>
 #include <ctime>
 #include <sstream>
+#include <iostream>
 
 #include "./Dependencies/common/optional.hpp";
 #include "./Dependencies/common/lexical_cast.hpp";
@@ -61,6 +62,7 @@ typedef void* BUFPTR;
 #ifdef _WIN32
 #include "anet_win32.h"
 #else
+#include <unistd.h>
 #include "anet.h"
 #endif
 
@@ -1023,7 +1025,7 @@ namespace redis
           std::mt19937 gen(rd());
           std::uniform_real_distribution<> dis(0, connections_.size() - 1);
 
-          mvRandom.push_back();
+          //mvRandom.push_back();
           socket = connections_[dis(gen)].socket;
       }
       
