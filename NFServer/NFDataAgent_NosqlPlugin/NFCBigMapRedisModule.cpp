@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 #include "NFCBigMapRedisModule.h"
-#include "NFComm\NFMessageDefine\NFProtocolDefine.hpp"
-#include "NFComm\NFPluginModule\NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 NFCBigMapRedisModule::NFCBigMapRedisModule(NFIPluginManager * p)
 {
