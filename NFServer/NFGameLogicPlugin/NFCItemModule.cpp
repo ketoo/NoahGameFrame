@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCItemModule.h"
+#include "NFComm/NFPluginModule/NFIItemCardConsumeProcessModule.h"
 
 bool NFCItemModule::Init()
 {
@@ -27,7 +28,6 @@ bool NFCItemModule::Execute()
 bool NFCItemModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
@@ -136,6 +136,7 @@ bool NFCItemModule::CheckConfig()
 
 		 bRet = configList.Next(strConfigID);
 	}
+
 	return true;
 }
 
@@ -315,22 +316,32 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
         return;
     }
 
-	int nItemType = m_pElementModule->GetPropertyInt(strItemID, "ItemType");
-	NFIItemConsumeProcessModule* pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(nItemType);
-	if (pConsumeProcessModule)
+	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, "ItemType");
+	switch (eItemType)
 	{
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTargetID) > 0)
+	case NFMsg::EItemType::EIT_CARD:
+	{
+		NFIItemCardConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemCardConsumeProcessModule>(eItemType);
+		if (pConsumeProcessModule)
 		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTargetID);
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			{
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+			}
 		}
-	}
 
-	AddItemEffectDataProperty(self, xTargetID, strItemID);
-
-	const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
-	if (!strAwardPackID.empty())
-	{
-		DoAwardPack( self, strAwardPackID);
 	}
-         
+		break;
+	default:
+		break;
+	}
+	
+	/*	AddItemEffectDataProperty(self, xTargetID, strItemID);
+
+		const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
+		if (!strAwardPackID.empty())
+		{
+			DoAwardPack( self, strAwardPackID);
+		}
+		  */
 }

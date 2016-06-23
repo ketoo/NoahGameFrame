@@ -22,7 +22,6 @@
 #include "NFCRankModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
-#include "NFCNormalConsumeProcessModule.h"
 #include "NFCGSSwichServerModule.h"
 #include "NFCMapModule.h"
 #include "NFCHeroPropertyModule.h"

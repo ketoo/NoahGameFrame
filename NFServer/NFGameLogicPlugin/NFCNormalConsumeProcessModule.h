@@ -14,8 +14,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"

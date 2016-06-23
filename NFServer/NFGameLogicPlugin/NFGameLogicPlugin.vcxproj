@@ -108,6 +108,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h" />
+    <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
     <ClInclude Include="NFCChatModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
@@ -145,6 +146,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCBuffModule.cpp" />
+    <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
     <ClCompile Include="NFCChatModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
