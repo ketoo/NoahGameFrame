@@ -5,6 +5,25 @@ file(GLOB NFGameLogicPlugin_ROOT_Cpp
 file(GLOB NFGameLogicPlugin_ROOT_Hpp 
 	*.h)
 
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCRebornItemConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCRebornItemConsumeProcessModule.h")
+
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCNormalConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCNormalConsumeProcessModule.h")
+
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCBriefSkillConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCBriefSkillConsumeProcessModule.h")
+
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCBulletSkillConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCBulletSkillConsumeProcessModule.h")
+
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCHeroItemConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCHeroItemConsumeProcessModule.h")
+
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCPotionItemConsumeProcessModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCPotionItemConsumeProcessModule.h")
+
+
 add_library(NFGameLogicPlugin SHARED
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
