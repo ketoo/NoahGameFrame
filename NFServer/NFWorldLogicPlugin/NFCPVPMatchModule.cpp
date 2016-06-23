@@ -600,11 +600,12 @@ void NFCPVPMatchModule::ProecessRoomBeginFight()
 
 void NFCPVPMatchModule::ProcessSingePlayerRoom()
 {
+    NFGUID xSelf;
     for (int nPVPMode = 0; nPVPMode < EPVPMODE::EPVPMODE_THREE; nPVPMode++)
     {
         for (int nGrade = 0; nGrade < EPVPDEFINE_MAXGRADE; nGrade++)
         {
-            const int nHavePlayer = m_pPVPMatchRedisModule->GetSinglePlayerCount(NFGUID(), nPVPMode, nGrade);
+            const int nHavePlayer = m_pPVPMatchRedisModule->GetSinglePlayerCount(xSelf, nPVPMode, nGrade);
             const int nNeedPlayer = 2 * GetMemberCount(nPVPMode);
             if (nNeedPlayer > nHavePlayer)
             {
@@ -617,7 +618,7 @@ void NFCPVPMatchModule::ProcessSingePlayerRoom()
             m_pPVPMatchRedisModule->PopSinglePlayerList(nPVPMode, nGrade, GetMemberCount(nPVPMode), xRedPlayer);
             m_pPVPMatchRedisModule->PopSinglePlayerList(nPVPMode, nGrade, GetMemberCount(nPVPMode), xBluePlayer);
 
-            NFGUID xRoomID = CreateRoom(NFGUID(), nPVPMode, nGrade);
+            NFGUID xRoomID = CreateRoom(xSelf, nPVPMode, nGrade);
             PlayerListEnterRoom(xRedPlayer, EPVPREDORBLUE_RED, xRoomID);
             PlayerListEnterRoom(xBluePlayer, EPVPREDORBLUE_BULE, xRoomID);
         }
