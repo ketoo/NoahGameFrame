@@ -377,9 +377,9 @@ enum EGameItemSubType
 //道具时间类型
 enum EGameItemExpiredType
 {
-    EGIET_NONE = 0;               // 永不过期类型
-    EGIET_USE_TIMES = 1;              // 使用次数, 变形魔杖,变0道具要消失(普通物品数量)
-    EGIET_REAL_TIME = 2;              // 真实的时间流逝(秒),适合时装,礼包,饰品(写死1天1周)
+    EGIET_NONE = 0;               	// 永不过期类型
+    EGIET_USE_TIMES = 1;            // 使用次数, 变形魔杖,变0道具要消失(普通物品数量)
+    EGIET_REAL_TIME = 2;            // 真实的时间流逝(秒),适合时装,礼包,饰品(写死1天1周)
     EGIET_END_INDEX = 3;
 };
 
