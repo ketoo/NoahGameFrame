@@ -1,1 +1,1 @@
-xcopy cmake.dir\x-game\*.* test\*.txt /e /y
+xcopy cmake.dir\x-game\*.* *.txt /e /y

@@ -6,11 +6,12 @@ file(GLOB NFNoSqlPlugin_ROOT_Hpp *.h)
 add_library(NFNoSqlPlugin SHARED
 	${NFNoSqlPlugin_ROOT_Cpp}
 	${NFNoSqlPlugin_ROOT_CC}
-	${NFNoSqlPlugin_ROOT_Hpp}
-	${SolutionDir}/Dependencies/redis-cplusplus-client/anet.c
-	${SolutionDir}/Dependencies/redis-cplusplus-client/anet.h)
+	${NFNoSqlPlugin_ROOT_Hpp})
 	
 if(UNIX)
+	add_library(NFNoSqlPlugin SHARED
+		${SolutionDir}/Dependencies/redis-cplusplus-client/anet.c
+		${SolutionDir}/Dependencies/redis-cplusplus-client/anet.h)
 	target_include_directories(NFNoSqlPlugin PUBLIC
 		${SolutionDir}/Dependencies/redis-cplusplus-client/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")

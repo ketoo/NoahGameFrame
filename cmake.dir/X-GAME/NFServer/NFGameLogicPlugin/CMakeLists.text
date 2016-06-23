@@ -23,6 +23,9 @@ remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCHeroItemConsumeProcessModule.h")
 remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCPotionItemConsumeProcessModule.cpp")
 remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCPotionItemConsumeProcessModule.h")
 
+remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCItemConsumeManagerModule.cpp")
+remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCItemConsumeManagerModule.h")
+
 
 add_library(NFGameLogicPlugin SHARED
 	${NFGameLogicPlugin_ROOT_Cpp}
