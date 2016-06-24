@@ -53,6 +53,7 @@ message ReqAccountLogin//向网关(登录服务器)申请登录
     required int64 			clientMAC = 9;
 	required bytes 			device_info = 10;
 	required bytes 			extra_info = 11;
+	optional int32 			platform_type = 12;
 }
 
 message ReqAccountLogout//向网关(登录服务器)申请登出
