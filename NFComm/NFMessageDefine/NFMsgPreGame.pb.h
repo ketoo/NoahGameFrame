@@ -608,6 +608,13 @@ class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
   inline ::std::string* release_extra_info();
   inline void set_allocated_extra_info(::std::string* extra_info);
 
+  // optional int32 platform_type = 12;
+  inline bool has_platform_type() const;
+  inline void clear_platform_type();
+  static const int kPlatformTypeFieldNumber = 12;
+  inline ::google::protobuf::int32 platform_type() const;
+  inline void set_platform_type(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAccountLogin)
  private:
   inline void set_has_account();
@@ -630,6 +637,8 @@ class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
   inline void clear_has_device_info();
   inline void set_has_extra_info();
   inline void clear_has_extra_info();
+  inline void set_has_platform_type();
+  inline void clear_has_platform_type();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -641,11 +650,12 @@ class LIBPROTOC_EXPORT ReqAccountLogin : public ::google::protobuf::Message {
   ::google::protobuf::int32 loginmode_;
   ::google::protobuf::int64 clientmac_;
   ::std::string* device_info_;
-  ::std::string* extra_info_;
   ::google::protobuf::int32 clientip_;
+  ::google::protobuf::int32 platform_type_;
+  ::std::string* extra_info_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -3431,6 +3441,28 @@ inline void ReqAccountLogin::set_allocated_extra_info(::std::string* extra_info)
     clear_has_extra_info();
     extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// optional int32 platform_type = 12;
+inline bool ReqAccountLogin::has_platform_type() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void ReqAccountLogin::set_has_platform_type() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void ReqAccountLogin::clear_has_platform_type() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void ReqAccountLogin::clear_platform_type() {
+  platform_type_ = 0;
+  clear_has_platform_type();
+}
+inline ::google::protobuf::int32 ReqAccountLogin::platform_type() const {
+  return platform_type_;
+}
+inline void ReqAccountLogin::set_platform_type(::google::protobuf::int32 value) {
+  set_has_platform_type();
+  platform_type_ = value;
 }
 
 // -------------------------------------------------------------------
