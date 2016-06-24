@@ -1,4 +1,6 @@
-cp -R -f ./cmake.dir/X-GAME/* ./cmake.dir/tmp
+rm -rf ./cmake.dir/tmp
+mkdir ./cmake.dir/tmp
+cp -R -f ./cmake.dir/X-GAME/* ./cmake.dir/tmp/
 find ./cmake.dir/tmp -name "*.text" -exec rename -f 's/.text/.txt/' {} \;
 cp -R -f ./cmake.dir/tmp/* ./
 
