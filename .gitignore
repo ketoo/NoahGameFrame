@@ -32,6 +32,9 @@
 *.layout
 *.depend
 
+# CMake
+[cC][mM]ake[lL]ists.txt
+
 /_Out/Comm/*
 /Dependencies/gperftools-2.1
 /Dependencies/lib
