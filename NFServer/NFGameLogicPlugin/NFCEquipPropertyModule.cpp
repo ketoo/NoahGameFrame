@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCEquipPropertyModule.h"
-#include "NFComm\NFMessageDefine\NFDefine.pb.h"
+#include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 bool NFCEquipPropertyModule::Init()
 {
