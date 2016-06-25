@@ -21,9 +21,13 @@ macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
 	add_custom_command(TARGET ${strProjectName}
 						POST_BUILD
 						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
-	add_custom_command(TARGET ${strProjectName}
-						POST_BUILD
-						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+	if(CMAKE_BUILD_TYPE STREQUAL "Release")
+	
+	else()
+		add_custom_command(TARGET ${strProjectName}
+							POST_BUILD
+							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+	endif()
 endmacro()
 
 macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
