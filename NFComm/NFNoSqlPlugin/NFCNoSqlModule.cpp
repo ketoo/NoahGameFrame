@@ -13,6 +13,7 @@
 NFCNoSqlModule::NFCNoSqlModule(NFIPluginManager* p)
 {
     pPluginManager = p;
+	m_pNoSqlDriver = NULL;
 }
 
 NFCNoSqlModule::~NFCNoSqlModule()

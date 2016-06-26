@@ -15,7 +15,6 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFITeamDataModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
@@ -47,7 +46,6 @@ public:
     virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xTeam);
     virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 
-
 protected:
 	void OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -62,7 +60,6 @@ protected:
     NFIUUIDModule* m_pUUIDModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFILogModule* m_pLogModule;
-	NFITeamDataModule* m_pTeamDataModule;
     NFICommonRedisModule* m_pCommonRedisModule;
     NFIMysqlModule* m_pMysqlModule;
     NFIPlayerRedisModule* m_pPlayerRedisModule;

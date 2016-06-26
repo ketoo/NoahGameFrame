@@ -35,11 +35,15 @@ public:
 			}
 
 			T* pT = dynamic_cast<T*>(pLogicModule);
-			assert(NULL != pT);
+			if (NULL == pT)
+			{
+				NFASSERT(0, (typeid(T).name() + std::string(" Module Is Invalid ") ), __FILE__, __FUNCTION__);
+			}
 
 			return pT;
 		}
 
+		NFASSERT(0, (typeid(T).name() + std::string(" Module Not Find ") ), __FILE__, __FUNCTION__);
 		return NULL;
 	}
     virtual void Registered(NFIPlugin* plugin) = 0;

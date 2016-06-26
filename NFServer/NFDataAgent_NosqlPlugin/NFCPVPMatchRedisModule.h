@@ -6,8 +6,8 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_RANK_REDIS_MODULE_H
-#define NFC_RANK_REDIS_MODULE_H
+#ifndef NFC_PVPMATCH_REDIS_MODULE_H
+#define NFC_PVPMATCH_REDIS_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"

@@ -28,6 +28,7 @@
 #include "NFCEquipPropertyModule.h"
 #include "NFCTaskModule.h"
 #include "NFCChatModule.h"
+#include "NFCGSPVPMatchModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -91,7 +92,8 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
 	REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
-    REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	REGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
     //REGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule);
     //REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule);
 }
@@ -100,7 +102,8 @@ void NFGameLogicPlugin::Uninstall()
 {
     //UNREGISTER_MODULE(pPluginManager, NFCChatModule);
     //UNREGISTER_MODULE(pPluginManager, NFCTaskModule);
-    UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	UNREGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
+	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	UNREGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);

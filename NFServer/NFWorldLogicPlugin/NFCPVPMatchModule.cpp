@@ -9,6 +9,7 @@
 #include "NFCPVPMatchModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#include "NFComm/NFCore/NFTimer.h"
 
 bool NFCPVPMatchModule::Init()
 {
@@ -25,6 +26,18 @@ bool NFCPVPMatchModule::Shut()
 bool NFCPVPMatchModule::Execute()
 {
     //Œª÷√ƒÿ
+	NFINT64 nNowTime = NFTime::GetNowTime();
+
+	if (nNowTime - mnLastCheckTime < 60)
+	{
+		return true;
+	}
+	mnLastCheckTime = nNowTime;
+
+	ProecessWaitRoom();
+	ProecessRoomBeginFight();
+	ProcessSingePlayerRoom();
+
     return true;
 }
 
@@ -32,14 +45,13 @@ bool NFCPVPMatchModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pPVPMatchRedisModule = pPluginManager->FindModule<NFIPVPMatchRedisModule>();
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, this, &NFCPVPMatchModule::OnReqPVPApplyMatchProcess)) { return false; }
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCPVPMatchModule::OnReqPVPApplyMatchProcess)) { return false; }
 	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCPVPMatchModule::OnAckCreatePVPEctypeProcess)) { return false; }
 
     return true;
@@ -594,6 +606,24 @@ void NFCPVPMatchModule::ProecessRoomBeginFight()
                         {
                             //send to Game Create ;
 
+							//find a player
+							for (int iPlayer = 0; iPlayer < xRoomInfo.xblueplayer_size(); iPlayer++)
+							{
+								NFGUID xPlayerID = NFINetModule::PBToNF(xRoomInfo.xblueplayer(iPlayer));
+								int nGameID = m_pPlayerRedisModule->GetPlayerCacheGameID(xPlayerID);
+								if (nGameID > 0)
+								{
+									NFMsg::ReqCreatePVPEctype xMsg;
+									*xMsg.mutable_self_id() = NFINetModule::NFToPB(xPlayerID);
+									xMsg.CopyFrom(xRoomInfo);
+
+									if (m_pWorldNet_ServerModule->SendMsgToGame(nGameID, NFMsg::EGMI_REQ_CREATEPVPECTYPE, xMsg, xPlayerID))
+									{
+										break;
+									}
+								}
+							}
+
                             m_pPVPMatchRedisModule->SetRoomInfo(NFINetModule::PBToNF(xRoomInfo.roomid()), xRoomInfo);
                         }
                     }
@@ -633,7 +663,7 @@ void NFCPVPMatchModule::ProcessSingePlayerRoom()
 
 void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqPVPApplyMatch);
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqPVPApplyMatch);
 
 	NFMsg::AckPVPApplyMatch xAck;
 	*xAck.mutable_self_id() = xMsg.self_id();
@@ -712,7 +742,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 
 void NFCPVPMatchModule::OnAckCreatePVPEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::AckCreatePVPEctype);
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::AckCreatePVPEctype);
 
 	NFGUID xRoomID = NFINetModule::PBToNF(xMsg.xroominfo().roomid());
 	if (!xRoomID.IsNull())

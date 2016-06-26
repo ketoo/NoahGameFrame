@@ -29,6 +29,7 @@ public:
     NFCPVPMatchModule( NFIPluginManager* p )
     {
         pPluginManager = p;
+		mnLastCheckTime = 0;
     }
 
     virtual ~NFCPVPMatchModule() {};
@@ -72,6 +73,8 @@ private:
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFITeamModule* m_pTeamModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
+
+	NFINT64 mnLastCheckTime;
 
 };
 

@@ -21,7 +21,6 @@ public:
 	virtual bool LeaveTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember) = 0;
 
-	virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xTeam, NFCDataList& varMemberList, NFCDataList& varGameList) = 0;
 	virtual bool MemberOnline(const NFGUID& self, const NFGUID& xTeam, const int& nGameID) = 0;
 	virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xTeam) = 0;
 	virtual bool GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::vector<NFGUID>& xmemberList) = 0;
