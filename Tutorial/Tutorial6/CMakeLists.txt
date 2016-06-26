@@ -40,9 +40,6 @@ else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
 							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).dll")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\Tutorial6\\$(ProjectName).pdb")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
