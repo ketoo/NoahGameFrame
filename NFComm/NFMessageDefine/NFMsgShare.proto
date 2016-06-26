@@ -778,5 +778,47 @@ message PVPRoomInfo
 	required int32 MaxPalyer				= 5;			
 	repeated Ident xRedPlayer				= 6;
 	repeated Ident xBluePlayer				= 7;
+	optional int64      serverid			= 8; // 房间副本所在的serverid	
+	optional int64      SceneID				= 9; // 房间副本所在的场景id	
+	optional int64      groupID				= 10; // 房间副本所在的层
 }
 
+//EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
+message ReqPVPApplyMatch
+{	
+	enum EApplyType
+	{
+		EApplyType_Single				=0; // 个人匹配
+		EApplyType_Team					=1; // 队伍匹配
+	};
+	
+    required Ident	self_id 				= 1;//
+	required int32	nPVPMode				= 2;	// 匹配模式
+	optional int64 	score					= 3;	// 分数
+	required int32	ApplyType 				= 4;	// 匹配方式，队伍申请还是个人申请
+	optional Ident	team_id 				= 5;	// 队伍ID 
+}
+
+//EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 返回匹配pvp
+message AckPVPApplyMatch
+{	
+    required Ident						self_id = 1;//
+	optional PVPRoomInfo				xRoomInfo = 2;
+	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
+	required int32	nResult 					= 4;	// 匹配的结果
+}
+
+//EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
+message ReqCreatePVPEctype
+{	
+    required Ident						self_id = 1;//
+	required PVPRoomInfo				xRoomInfo = 2;
+}
+
+//EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+message AckCreatePVPEctype
+{	
+    required Ident	self_id 				= 1;//
+	required PVPRoomInfo	xRoomInfo 		= 2;
+	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
+}

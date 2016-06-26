@@ -123,6 +123,10 @@ class AckMapHunting;
 class ReqMapKingWar;
 class AckMapKingWar;
 class PVPRoomInfo;
+class ReqPVPApplyMatch;
+class AckPVPApplyMatch;
+class ReqCreatePVPEctype;
+class AckCreatePVPEctype;
 
 enum ReqAckSynData_SynType {
   ReqAckSynData_SynType_EST_SCENE = 1,
@@ -356,6 +360,25 @@ inline bool ReqAckOprTeamMember_EGTeamMemberOprType_Parse(
     const ::std::string& name, ReqAckOprTeamMember_EGTeamMemberOprType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<ReqAckOprTeamMember_EGTeamMemberOprType>(
     ReqAckOprTeamMember_EGTeamMemberOprType_descriptor(), name, value);
+}
+enum ReqPVPApplyMatch_EApplyType {
+  ReqPVPApplyMatch_EApplyType_EApplyType_Single = 0,
+  ReqPVPApplyMatch_EApplyType_EApplyType_Team = 1
+};
+LIBPROTOC_EXPORT bool ReqPVPApplyMatch_EApplyType_IsValid(int value);
+const ReqPVPApplyMatch_EApplyType ReqPVPApplyMatch_EApplyType_EApplyType_MIN = ReqPVPApplyMatch_EApplyType_EApplyType_Single;
+const ReqPVPApplyMatch_EApplyType ReqPVPApplyMatch_EApplyType_EApplyType_MAX = ReqPVPApplyMatch_EApplyType_EApplyType_Team;
+const int ReqPVPApplyMatch_EApplyType_EApplyType_ARRAYSIZE = ReqPVPApplyMatch_EApplyType_EApplyType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ReqPVPApplyMatch_EApplyType_descriptor();
+inline const ::std::string& ReqPVPApplyMatch_EApplyType_Name(ReqPVPApplyMatch_EApplyType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ReqPVPApplyMatch_EApplyType_descriptor(), value);
+}
+inline bool ReqPVPApplyMatch_EApplyType_Parse(
+    const ::std::string& name, ReqPVPApplyMatch_EApplyType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ReqPVPApplyMatch_EApplyType>(
+    ReqPVPApplyMatch_EApplyType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -9858,6 +9881,27 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident >*
       mutable_xblueplayer();
 
+  // optional int64 serverid = 8;
+  inline bool has_serverid() const;
+  inline void clear_serverid();
+  static const int kServeridFieldNumber = 8;
+  inline ::google::protobuf::int64 serverid() const;
+  inline void set_serverid(::google::protobuf::int64 value);
+
+  // optional int64 SceneID = 9;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIDFieldNumber = 9;
+  inline ::google::protobuf::int64 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int64 value);
+
+  // optional int64 groupID = 10;
+  inline bool has_groupid() const;
+  inline void clear_groupid();
+  static const int kGroupIDFieldNumber = 10;
+  inline ::google::protobuf::int64 groupid() const;
+  inline void set_groupid(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.PVPRoomInfo)
  private:
   inline void set_has_ncellstatus();
@@ -9870,6 +9914,12 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message {
   inline void clear_has_npvpgrade();
   inline void set_has_maxpalyer();
   inline void clear_has_maxpalyer();
+  inline void set_has_serverid();
+  inline void clear_has_serverid();
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+  inline void set_has_groupid();
+  inline void clear_has_groupid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -9880,9 +9930,12 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message {
   ::google::protobuf::int32 maxpalyer_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xredplayer_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Ident > xblueplayer_;
+  ::google::protobuf::int64 serverid_;
+  ::google::protobuf::int64 sceneid_;
+  ::google::protobuf::int64 groupid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -9890,6 +9943,474 @@ class LIBPROTOC_EXPORT PVPRoomInfo : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static PVPRoomInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqPVPApplyMatch : public ::google::protobuf::Message {
+ public:
+  ReqPVPApplyMatch();
+  virtual ~ReqPVPApplyMatch();
+
+  ReqPVPApplyMatch(const ReqPVPApplyMatch& from);
+
+  inline ReqPVPApplyMatch& operator=(const ReqPVPApplyMatch& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqPVPApplyMatch& default_instance();
+
+  void Swap(ReqPVPApplyMatch* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqPVPApplyMatch* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqPVPApplyMatch& from);
+  void MergeFrom(const ReqPVPApplyMatch& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ReqPVPApplyMatch_EApplyType EApplyType;
+  static const EApplyType EApplyType_Single = ReqPVPApplyMatch_EApplyType_EApplyType_Single;
+  static const EApplyType EApplyType_Team = ReqPVPApplyMatch_EApplyType_EApplyType_Team;
+  static inline bool EApplyType_IsValid(int value) {
+    return ReqPVPApplyMatch_EApplyType_IsValid(value);
+  }
+  static const EApplyType EApplyType_MIN =
+    ReqPVPApplyMatch_EApplyType_EApplyType_MIN;
+  static const EApplyType EApplyType_MAX =
+    ReqPVPApplyMatch_EApplyType_EApplyType_MAX;
+  static const int EApplyType_ARRAYSIZE =
+    ReqPVPApplyMatch_EApplyType_EApplyType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EApplyType_descriptor() {
+    return ReqPVPApplyMatch_EApplyType_descriptor();
+  }
+  static inline const ::std::string& EApplyType_Name(EApplyType value) {
+    return ReqPVPApplyMatch_EApplyType_Name(value);
+  }
+  static inline bool EApplyType_Parse(const ::std::string& name,
+      EApplyType* value) {
+    return ReqPVPApplyMatch_EApplyType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident self_id = 1;
+  inline bool has_self_id() const;
+  inline void clear_self_id();
+  static const int kSelfIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& self_id() const;
+  inline ::NFMsg::Ident* mutable_self_id();
+  inline ::NFMsg::Ident* release_self_id();
+  inline void set_allocated_self_id(::NFMsg::Ident* self_id);
+
+  // required int32 nPVPMode = 2;
+  inline bool has_npvpmode() const;
+  inline void clear_npvpmode();
+  static const int kNPVPModeFieldNumber = 2;
+  inline ::google::protobuf::int32 npvpmode() const;
+  inline void set_npvpmode(::google::protobuf::int32 value);
+
+  // optional int64 score = 3;
+  inline bool has_score() const;
+  inline void clear_score();
+  static const int kScoreFieldNumber = 3;
+  inline ::google::protobuf::int64 score() const;
+  inline void set_score(::google::protobuf::int64 value);
+
+  // required int32 ApplyType = 4;
+  inline bool has_applytype() const;
+  inline void clear_applytype();
+  static const int kApplyTypeFieldNumber = 4;
+  inline ::google::protobuf::int32 applytype() const;
+  inline void set_applytype(::google::protobuf::int32 value);
+
+  // optional .NFMsg.Ident team_id = 5;
+  inline bool has_team_id() const;
+  inline void clear_team_id();
+  static const int kTeamIdFieldNumber = 5;
+  inline const ::NFMsg::Ident& team_id() const;
+  inline ::NFMsg::Ident* mutable_team_id();
+  inline ::NFMsg::Ident* release_team_id();
+  inline void set_allocated_team_id(::NFMsg::Ident* team_id);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqPVPApplyMatch)
+ private:
+  inline void set_has_self_id();
+  inline void clear_has_self_id();
+  inline void set_has_npvpmode();
+  inline void clear_has_npvpmode();
+  inline void set_has_score();
+  inline void clear_has_score();
+  inline void set_has_applytype();
+  inline void clear_has_applytype();
+  inline void set_has_team_id();
+  inline void clear_has_team_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* self_id_;
+  ::google::protobuf::int64 score_;
+  ::google::protobuf::int32 npvpmode_;
+  ::google::protobuf::int32 applytype_;
+  ::NFMsg::Ident* team_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqPVPApplyMatch* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckPVPApplyMatch : public ::google::protobuf::Message {
+ public:
+  AckPVPApplyMatch();
+  virtual ~AckPVPApplyMatch();
+
+  AckPVPApplyMatch(const AckPVPApplyMatch& from);
+
+  inline AckPVPApplyMatch& operator=(const AckPVPApplyMatch& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckPVPApplyMatch& default_instance();
+
+  void Swap(AckPVPApplyMatch* other);
+
+  // implements Message ----------------------------------------------
+
+  AckPVPApplyMatch* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckPVPApplyMatch& from);
+  void MergeFrom(const AckPVPApplyMatch& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident self_id = 1;
+  inline bool has_self_id() const;
+  inline void clear_self_id();
+  static const int kSelfIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& self_id() const;
+  inline ::NFMsg::Ident* mutable_self_id();
+  inline ::NFMsg::Ident* release_self_id();
+  inline void set_allocated_self_id(::NFMsg::Ident* self_id);
+
+  // optional .NFMsg.PVPRoomInfo xRoomInfo = 2;
+  inline bool has_xroominfo() const;
+  inline void clear_xroominfo();
+  static const int kXRoomInfoFieldNumber = 2;
+  inline const ::NFMsg::PVPRoomInfo& xroominfo() const;
+  inline ::NFMsg::PVPRoomInfo* mutable_xroominfo();
+  inline ::NFMsg::PVPRoomInfo* release_xroominfo();
+  inline void set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo);
+
+  // required int32 ApplyType = 3;
+  inline bool has_applytype() const;
+  inline void clear_applytype();
+  static const int kApplyTypeFieldNumber = 3;
+  inline ::google::protobuf::int32 applytype() const;
+  inline void set_applytype(::google::protobuf::int32 value);
+
+  // required int32 nResult = 4;
+  inline bool has_nresult() const;
+  inline void clear_nresult();
+  static const int kNResultFieldNumber = 4;
+  inline ::google::protobuf::int32 nresult() const;
+  inline void set_nresult(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckPVPApplyMatch)
+ private:
+  inline void set_has_self_id();
+  inline void clear_has_self_id();
+  inline void set_has_xroominfo();
+  inline void clear_has_xroominfo();
+  inline void set_has_applytype();
+  inline void clear_has_applytype();
+  inline void set_has_nresult();
+  inline void clear_has_nresult();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* self_id_;
+  ::NFMsg::PVPRoomInfo* xroominfo_;
+  ::google::protobuf::int32 applytype_;
+  ::google::protobuf::int32 nresult_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckPVPApplyMatch* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqCreatePVPEctype : public ::google::protobuf::Message {
+ public:
+  ReqCreatePVPEctype();
+  virtual ~ReqCreatePVPEctype();
+
+  ReqCreatePVPEctype(const ReqCreatePVPEctype& from);
+
+  inline ReqCreatePVPEctype& operator=(const ReqCreatePVPEctype& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqCreatePVPEctype& default_instance();
+
+  void Swap(ReqCreatePVPEctype* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqCreatePVPEctype* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqCreatePVPEctype& from);
+  void MergeFrom(const ReqCreatePVPEctype& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident self_id = 1;
+  inline bool has_self_id() const;
+  inline void clear_self_id();
+  static const int kSelfIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& self_id() const;
+  inline ::NFMsg::Ident* mutable_self_id();
+  inline ::NFMsg::Ident* release_self_id();
+  inline void set_allocated_self_id(::NFMsg::Ident* self_id);
+
+  // required .NFMsg.PVPRoomInfo xRoomInfo = 2;
+  inline bool has_xroominfo() const;
+  inline void clear_xroominfo();
+  static const int kXRoomInfoFieldNumber = 2;
+  inline const ::NFMsg::PVPRoomInfo& xroominfo() const;
+  inline ::NFMsg::PVPRoomInfo* mutable_xroominfo();
+  inline ::NFMsg::PVPRoomInfo* release_xroominfo();
+  inline void set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqCreatePVPEctype)
+ private:
+  inline void set_has_self_id();
+  inline void clear_has_self_id();
+  inline void set_has_xroominfo();
+  inline void clear_has_xroominfo();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* self_id_;
+  ::NFMsg::PVPRoomInfo* xroominfo_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqCreatePVPEctype* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckCreatePVPEctype : public ::google::protobuf::Message {
+ public:
+  AckCreatePVPEctype();
+  virtual ~AckCreatePVPEctype();
+
+  AckCreatePVPEctype(const AckCreatePVPEctype& from);
+
+  inline AckCreatePVPEctype& operator=(const AckCreatePVPEctype& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckCreatePVPEctype& default_instance();
+
+  void Swap(AckCreatePVPEctype* other);
+
+  // implements Message ----------------------------------------------
+
+  AckCreatePVPEctype* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckCreatePVPEctype& from);
+  void MergeFrom(const AckCreatePVPEctype& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident self_id = 1;
+  inline bool has_self_id() const;
+  inline void clear_self_id();
+  static const int kSelfIdFieldNumber = 1;
+  inline const ::NFMsg::Ident& self_id() const;
+  inline ::NFMsg::Ident* mutable_self_id();
+  inline ::NFMsg::Ident* release_self_id();
+  inline void set_allocated_self_id(::NFMsg::Ident* self_id);
+
+  // required .NFMsg.PVPRoomInfo xRoomInfo = 2;
+  inline bool has_xroominfo() const;
+  inline void clear_xroominfo();
+  static const int kXRoomInfoFieldNumber = 2;
+  inline const ::NFMsg::PVPRoomInfo& xroominfo() const;
+  inline ::NFMsg::PVPRoomInfo* mutable_xroominfo();
+  inline ::NFMsg::PVPRoomInfo* release_xroominfo();
+  inline void set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo);
+
+  // required int32 ApplyType = 3;
+  inline bool has_applytype() const;
+  inline void clear_applytype();
+  static const int kApplyTypeFieldNumber = 3;
+  inline ::google::protobuf::int32 applytype() const;
+  inline void set_applytype(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckCreatePVPEctype)
+ private:
+  inline void set_has_self_id();
+  inline void clear_has_self_id();
+  inline void set_has_xroominfo();
+  inline void clear_has_xroominfo();
+  inline void set_has_applytype();
+  inline void clear_has_applytype();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* self_id_;
+  ::NFMsg::PVPRoomInfo* xroominfo_;
+  ::google::protobuf::int32 applytype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckCreatePVPEctype* default_instance_;
 };
 // ===================================================================
 
@@ -19296,6 +19817,524 @@ PVPRoomInfo::mutable_xblueplayer() {
   return &xblueplayer_;
 }
 
+// optional int64 serverid = 8;
+inline bool PVPRoomInfo::has_serverid() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void PVPRoomInfo::set_has_serverid() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void PVPRoomInfo::clear_has_serverid() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void PVPRoomInfo::clear_serverid() {
+  serverid_ = GOOGLE_LONGLONG(0);
+  clear_has_serverid();
+}
+inline ::google::protobuf::int64 PVPRoomInfo::serverid() const {
+  return serverid_;
+}
+inline void PVPRoomInfo::set_serverid(::google::protobuf::int64 value) {
+  set_has_serverid();
+  serverid_ = value;
+}
+
+// optional int64 SceneID = 9;
+inline bool PVPRoomInfo::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void PVPRoomInfo::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void PVPRoomInfo::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void PVPRoomInfo::clear_sceneid() {
+  sceneid_ = GOOGLE_LONGLONG(0);
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int64 PVPRoomInfo::sceneid() const {
+  return sceneid_;
+}
+inline void PVPRoomInfo::set_sceneid(::google::protobuf::int64 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// optional int64 groupID = 10;
+inline bool PVPRoomInfo::has_groupid() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void PVPRoomInfo::set_has_groupid() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void PVPRoomInfo::clear_has_groupid() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void PVPRoomInfo::clear_groupid() {
+  groupid_ = GOOGLE_LONGLONG(0);
+  clear_has_groupid();
+}
+inline ::google::protobuf::int64 PVPRoomInfo::groupid() const {
+  return groupid_;
+}
+inline void PVPRoomInfo::set_groupid(::google::protobuf::int64 value) {
+  set_has_groupid();
+  groupid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqPVPApplyMatch
+
+// required .NFMsg.Ident self_id = 1;
+inline bool ReqPVPApplyMatch::has_self_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqPVPApplyMatch::set_has_self_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqPVPApplyMatch::clear_has_self_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqPVPApplyMatch::clear_self_id() {
+  if (self_id_ != NULL) self_id_->::NFMsg::Ident::Clear();
+  clear_has_self_id();
+}
+inline const ::NFMsg::Ident& ReqPVPApplyMatch::self_id() const {
+  return self_id_ != NULL ? *self_id_ : *default_instance_->self_id_;
+}
+inline ::NFMsg::Ident* ReqPVPApplyMatch::mutable_self_id() {
+  set_has_self_id();
+  if (self_id_ == NULL) self_id_ = new ::NFMsg::Ident;
+  return self_id_;
+}
+inline ::NFMsg::Ident* ReqPVPApplyMatch::release_self_id() {
+  clear_has_self_id();
+  ::NFMsg::Ident* temp = self_id_;
+  self_id_ = NULL;
+  return temp;
+}
+inline void ReqPVPApplyMatch::set_allocated_self_id(::NFMsg::Ident* self_id) {
+  delete self_id_;
+  self_id_ = self_id;
+  if (self_id) {
+    set_has_self_id();
+  } else {
+    clear_has_self_id();
+  }
+}
+
+// required int32 nPVPMode = 2;
+inline bool ReqPVPApplyMatch::has_npvpmode() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqPVPApplyMatch::set_has_npvpmode() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqPVPApplyMatch::clear_has_npvpmode() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqPVPApplyMatch::clear_npvpmode() {
+  npvpmode_ = 0;
+  clear_has_npvpmode();
+}
+inline ::google::protobuf::int32 ReqPVPApplyMatch::npvpmode() const {
+  return npvpmode_;
+}
+inline void ReqPVPApplyMatch::set_npvpmode(::google::protobuf::int32 value) {
+  set_has_npvpmode();
+  npvpmode_ = value;
+}
+
+// optional int64 score = 3;
+inline bool ReqPVPApplyMatch::has_score() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqPVPApplyMatch::set_has_score() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqPVPApplyMatch::clear_has_score() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqPVPApplyMatch::clear_score() {
+  score_ = GOOGLE_LONGLONG(0);
+  clear_has_score();
+}
+inline ::google::protobuf::int64 ReqPVPApplyMatch::score() const {
+  return score_;
+}
+inline void ReqPVPApplyMatch::set_score(::google::protobuf::int64 value) {
+  set_has_score();
+  score_ = value;
+}
+
+// required int32 ApplyType = 4;
+inline bool ReqPVPApplyMatch::has_applytype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqPVPApplyMatch::set_has_applytype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqPVPApplyMatch::clear_has_applytype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqPVPApplyMatch::clear_applytype() {
+  applytype_ = 0;
+  clear_has_applytype();
+}
+inline ::google::protobuf::int32 ReqPVPApplyMatch::applytype() const {
+  return applytype_;
+}
+inline void ReqPVPApplyMatch::set_applytype(::google::protobuf::int32 value) {
+  set_has_applytype();
+  applytype_ = value;
+}
+
+// optional .NFMsg.Ident team_id = 5;
+inline bool ReqPVPApplyMatch::has_team_id() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqPVPApplyMatch::set_has_team_id() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqPVPApplyMatch::clear_has_team_id() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqPVPApplyMatch::clear_team_id() {
+  if (team_id_ != NULL) team_id_->::NFMsg::Ident::Clear();
+  clear_has_team_id();
+}
+inline const ::NFMsg::Ident& ReqPVPApplyMatch::team_id() const {
+  return team_id_ != NULL ? *team_id_ : *default_instance_->team_id_;
+}
+inline ::NFMsg::Ident* ReqPVPApplyMatch::mutable_team_id() {
+  set_has_team_id();
+  if (team_id_ == NULL) team_id_ = new ::NFMsg::Ident;
+  return team_id_;
+}
+inline ::NFMsg::Ident* ReqPVPApplyMatch::release_team_id() {
+  clear_has_team_id();
+  ::NFMsg::Ident* temp = team_id_;
+  team_id_ = NULL;
+  return temp;
+}
+inline void ReqPVPApplyMatch::set_allocated_team_id(::NFMsg::Ident* team_id) {
+  delete team_id_;
+  team_id_ = team_id;
+  if (team_id) {
+    set_has_team_id();
+  } else {
+    clear_has_team_id();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckPVPApplyMatch
+
+// required .NFMsg.Ident self_id = 1;
+inline bool AckPVPApplyMatch::has_self_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckPVPApplyMatch::set_has_self_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckPVPApplyMatch::clear_has_self_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckPVPApplyMatch::clear_self_id() {
+  if (self_id_ != NULL) self_id_->::NFMsg::Ident::Clear();
+  clear_has_self_id();
+}
+inline const ::NFMsg::Ident& AckPVPApplyMatch::self_id() const {
+  return self_id_ != NULL ? *self_id_ : *default_instance_->self_id_;
+}
+inline ::NFMsg::Ident* AckPVPApplyMatch::mutable_self_id() {
+  set_has_self_id();
+  if (self_id_ == NULL) self_id_ = new ::NFMsg::Ident;
+  return self_id_;
+}
+inline ::NFMsg::Ident* AckPVPApplyMatch::release_self_id() {
+  clear_has_self_id();
+  ::NFMsg::Ident* temp = self_id_;
+  self_id_ = NULL;
+  return temp;
+}
+inline void AckPVPApplyMatch::set_allocated_self_id(::NFMsg::Ident* self_id) {
+  delete self_id_;
+  self_id_ = self_id;
+  if (self_id) {
+    set_has_self_id();
+  } else {
+    clear_has_self_id();
+  }
+}
+
+// optional .NFMsg.PVPRoomInfo xRoomInfo = 2;
+inline bool AckPVPApplyMatch::has_xroominfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckPVPApplyMatch::set_has_xroominfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckPVPApplyMatch::clear_has_xroominfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckPVPApplyMatch::clear_xroominfo() {
+  if (xroominfo_ != NULL) xroominfo_->::NFMsg::PVPRoomInfo::Clear();
+  clear_has_xroominfo();
+}
+inline const ::NFMsg::PVPRoomInfo& AckPVPApplyMatch::xroominfo() const {
+  return xroominfo_ != NULL ? *xroominfo_ : *default_instance_->xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* AckPVPApplyMatch::mutable_xroominfo() {
+  set_has_xroominfo();
+  if (xroominfo_ == NULL) xroominfo_ = new ::NFMsg::PVPRoomInfo;
+  return xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* AckPVPApplyMatch::release_xroominfo() {
+  clear_has_xroominfo();
+  ::NFMsg::PVPRoomInfo* temp = xroominfo_;
+  xroominfo_ = NULL;
+  return temp;
+}
+inline void AckPVPApplyMatch::set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo) {
+  delete xroominfo_;
+  xroominfo_ = xroominfo;
+  if (xroominfo) {
+    set_has_xroominfo();
+  } else {
+    clear_has_xroominfo();
+  }
+}
+
+// required int32 ApplyType = 3;
+inline bool AckPVPApplyMatch::has_applytype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckPVPApplyMatch::set_has_applytype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckPVPApplyMatch::clear_has_applytype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckPVPApplyMatch::clear_applytype() {
+  applytype_ = 0;
+  clear_has_applytype();
+}
+inline ::google::protobuf::int32 AckPVPApplyMatch::applytype() const {
+  return applytype_;
+}
+inline void AckPVPApplyMatch::set_applytype(::google::protobuf::int32 value) {
+  set_has_applytype();
+  applytype_ = value;
+}
+
+// required int32 nResult = 4;
+inline bool AckPVPApplyMatch::has_nresult() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AckPVPApplyMatch::set_has_nresult() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AckPVPApplyMatch::clear_has_nresult() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AckPVPApplyMatch::clear_nresult() {
+  nresult_ = 0;
+  clear_has_nresult();
+}
+inline ::google::protobuf::int32 AckPVPApplyMatch::nresult() const {
+  return nresult_;
+}
+inline void AckPVPApplyMatch::set_nresult(::google::protobuf::int32 value) {
+  set_has_nresult();
+  nresult_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqCreatePVPEctype
+
+// required .NFMsg.Ident self_id = 1;
+inline bool ReqCreatePVPEctype::has_self_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqCreatePVPEctype::set_has_self_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqCreatePVPEctype::clear_has_self_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqCreatePVPEctype::clear_self_id() {
+  if (self_id_ != NULL) self_id_->::NFMsg::Ident::Clear();
+  clear_has_self_id();
+}
+inline const ::NFMsg::Ident& ReqCreatePVPEctype::self_id() const {
+  return self_id_ != NULL ? *self_id_ : *default_instance_->self_id_;
+}
+inline ::NFMsg::Ident* ReqCreatePVPEctype::mutable_self_id() {
+  set_has_self_id();
+  if (self_id_ == NULL) self_id_ = new ::NFMsg::Ident;
+  return self_id_;
+}
+inline ::NFMsg::Ident* ReqCreatePVPEctype::release_self_id() {
+  clear_has_self_id();
+  ::NFMsg::Ident* temp = self_id_;
+  self_id_ = NULL;
+  return temp;
+}
+inline void ReqCreatePVPEctype::set_allocated_self_id(::NFMsg::Ident* self_id) {
+  delete self_id_;
+  self_id_ = self_id;
+  if (self_id) {
+    set_has_self_id();
+  } else {
+    clear_has_self_id();
+  }
+}
+
+// required .NFMsg.PVPRoomInfo xRoomInfo = 2;
+inline bool ReqCreatePVPEctype::has_xroominfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqCreatePVPEctype::set_has_xroominfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqCreatePVPEctype::clear_has_xroominfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqCreatePVPEctype::clear_xroominfo() {
+  if (xroominfo_ != NULL) xroominfo_->::NFMsg::PVPRoomInfo::Clear();
+  clear_has_xroominfo();
+}
+inline const ::NFMsg::PVPRoomInfo& ReqCreatePVPEctype::xroominfo() const {
+  return xroominfo_ != NULL ? *xroominfo_ : *default_instance_->xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* ReqCreatePVPEctype::mutable_xroominfo() {
+  set_has_xroominfo();
+  if (xroominfo_ == NULL) xroominfo_ = new ::NFMsg::PVPRoomInfo;
+  return xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* ReqCreatePVPEctype::release_xroominfo() {
+  clear_has_xroominfo();
+  ::NFMsg::PVPRoomInfo* temp = xroominfo_;
+  xroominfo_ = NULL;
+  return temp;
+}
+inline void ReqCreatePVPEctype::set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo) {
+  delete xroominfo_;
+  xroominfo_ = xroominfo;
+  if (xroominfo) {
+    set_has_xroominfo();
+  } else {
+    clear_has_xroominfo();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AckCreatePVPEctype
+
+// required .NFMsg.Ident self_id = 1;
+inline bool AckCreatePVPEctype::has_self_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckCreatePVPEctype::set_has_self_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckCreatePVPEctype::clear_has_self_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckCreatePVPEctype::clear_self_id() {
+  if (self_id_ != NULL) self_id_->::NFMsg::Ident::Clear();
+  clear_has_self_id();
+}
+inline const ::NFMsg::Ident& AckCreatePVPEctype::self_id() const {
+  return self_id_ != NULL ? *self_id_ : *default_instance_->self_id_;
+}
+inline ::NFMsg::Ident* AckCreatePVPEctype::mutable_self_id() {
+  set_has_self_id();
+  if (self_id_ == NULL) self_id_ = new ::NFMsg::Ident;
+  return self_id_;
+}
+inline ::NFMsg::Ident* AckCreatePVPEctype::release_self_id() {
+  clear_has_self_id();
+  ::NFMsg::Ident* temp = self_id_;
+  self_id_ = NULL;
+  return temp;
+}
+inline void AckCreatePVPEctype::set_allocated_self_id(::NFMsg::Ident* self_id) {
+  delete self_id_;
+  self_id_ = self_id;
+  if (self_id) {
+    set_has_self_id();
+  } else {
+    clear_has_self_id();
+  }
+}
+
+// required .NFMsg.PVPRoomInfo xRoomInfo = 2;
+inline bool AckCreatePVPEctype::has_xroominfo() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckCreatePVPEctype::set_has_xroominfo() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckCreatePVPEctype::clear_has_xroominfo() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckCreatePVPEctype::clear_xroominfo() {
+  if (xroominfo_ != NULL) xroominfo_->::NFMsg::PVPRoomInfo::Clear();
+  clear_has_xroominfo();
+}
+inline const ::NFMsg::PVPRoomInfo& AckCreatePVPEctype::xroominfo() const {
+  return xroominfo_ != NULL ? *xroominfo_ : *default_instance_->xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* AckCreatePVPEctype::mutable_xroominfo() {
+  set_has_xroominfo();
+  if (xroominfo_ == NULL) xroominfo_ = new ::NFMsg::PVPRoomInfo;
+  return xroominfo_;
+}
+inline ::NFMsg::PVPRoomInfo* AckCreatePVPEctype::release_xroominfo() {
+  clear_has_xroominfo();
+  ::NFMsg::PVPRoomInfo* temp = xroominfo_;
+  xroominfo_ = NULL;
+  return temp;
+}
+inline void AckCreatePVPEctype::set_allocated_xroominfo(::NFMsg::PVPRoomInfo* xroominfo) {
+  delete xroominfo_;
+  xroominfo_ = xroominfo;
+  if (xroominfo) {
+    set_has_xroominfo();
+  } else {
+    clear_has_xroominfo();
+  }
+}
+
+// required int32 ApplyType = 3;
+inline bool AckCreatePVPEctype::has_applytype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckCreatePVPEctype::set_has_applytype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckCreatePVPEctype::clear_has_applytype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckCreatePVPEctype::clear_applytype() {
+  applytype_ = 0;
+  clear_has_applytype();
+}
+inline ::google::protobuf::int32 AckCreatePVPEctype::applytype() const {
+  return applytype_;
+}
+inline void AckCreatePVPEctype::set_applytype(::google::protobuf::int32 value) {
+  set_has_applytype();
+  applytype_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -19348,6 +20387,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ChatInfo_EChatType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType>() {
   return ::NFMsg::ReqAckOprTeamMember_EGTeamMemberOprType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ReqPVPApplyMatch_EApplyType>() {
+  return ::NFMsg::ReqPVPApplyMatch_EApplyType_descriptor();
 }
 
 }  // namespace google

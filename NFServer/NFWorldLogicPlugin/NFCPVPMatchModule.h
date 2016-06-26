@@ -18,6 +18,9 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFITeamModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCPVPMatchModule
     : public NFIPVPMatchModule
@@ -46,20 +49,30 @@ protected:
     bool PlayerEnterRoom(const NFGUID& self, const int nRedOrBlue, const NFGUID& xRoomID);
     bool PlayerListEnterRoom(const std::vector<NFGUID>& xPlayerList, const int nRedOrBlue, const NFGUID& xRoomID);
     bool PlayerLeaveRoom(const NFGUID& self, const NFGUID& xRoomID);
-    bool PlayerListLeaveRoom(const std::vector<NFGUID>& xPlayerList, const NFGUID& xRoomID);
+	bool PlayerListLeaveRoom(const std::vector<NFGUID>& xPlayerList, const NFGUID& xRoomID);
 
     int NeedPlayerCount(const NFMsg::PVPRoomInfo& xRoomInfo, const int nRedOrebulue);
-    bool UpdateRoomStatus(NFMsg::PVPRoomInfo& xRoomInfo, const int nTargetStatus = -1);
+	bool UpdateRoomStatus(NFMsg::PVPRoomInfo& xRoomInfo, const int nTargetStatus = -1);
 
     void ProecessWaitRoom();
     void ProecessRoomBeginFight();
     void ProcessSingePlayerRoom();
+
+	//msg handle
+	void OnReqPVPApplyMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAckCreatePVPEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	bool BroadcastMsgToRoom(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
     NFIPVPMatchRedisModule* m_pPVPMatchRedisModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFITeamModule* m_pTeamModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
+
 };
 
 

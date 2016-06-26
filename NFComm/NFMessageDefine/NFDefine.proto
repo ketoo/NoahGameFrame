@@ -275,7 +275,7 @@ enum EGameMsgID
 	
 	EGMI_REQ_TEAM_ENTER_ECTYPE						= 869; 	// 组队进副本 
 	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
-	
+
 	
 	/////////////////////MapModule/////////////////////////////////////
 	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
@@ -305,6 +305,14 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
 	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
 	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
+	
+		
+	EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
+	EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 申请匹配pvp
+	
+	EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
+	EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+	
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
 	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果

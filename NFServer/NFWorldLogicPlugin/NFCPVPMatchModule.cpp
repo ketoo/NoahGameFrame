@@ -35,7 +35,13 @@ bool NFCPVPMatchModule::AfterInit()
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pPVPMatchRedisModule = pPluginManager->FindModule<NFIPVPMatchRedisModule>();
-    
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
+	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, this, &NFCPVPMatchModule::OnReqPVPApplyMatchProcess)) { return false; }
+	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCPVPMatchModule::OnAckCreatePVPEctypeProcess)) { return false; }
+
     return true;
 }
 
@@ -623,4 +629,175 @@ void NFCPVPMatchModule::ProcessSingePlayerRoom()
             PlayerListEnterRoom(xBluePlayer, EPVPREDORBLUE_BULE, xRoomID);
         }
     }
+}
+
+void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqPVPApplyMatch);
+
+	NFMsg::AckPVPApplyMatch xAck;
+	*xAck.mutable_self_id() = xMsg.self_id();
+	xAck.set_applytype(xMsg.applytype());
+	xAck.set_nresult(0);
+
+	switch (xMsg.applytype())
+	{
+	case NFMsg::ReqPVPApplyMatch::EApplyType_Single:
+	{
+		if (ApplyPVP(nPlayerID, xMsg.npvpmode(), xMsg.score()))
+		{
+			xAck.set_nresult(1);
+		}
+
+		NFGUID xRoomID;
+		if (m_pPVPMatchRedisModule->GetPlayerRoomID(nPlayerID, xRoomID))
+		{
+			NFMsg::PVPRoomInfo xRoomInfo;
+			if (m_pPVPMatchRedisModule->GetRoomInfo(xRoomID, xRoomInfo))
+			{
+				xAck.mutable_xroominfo()->CopyFrom(xRoomInfo);
+			}
+		}
+
+		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
+	}
+		break;
+	case NFMsg::ReqPVPApplyMatch::EApplyType_Team:
+	{
+		if (xMsg.has_team_id())
+		{
+			NFGUID xTeamID = NFINetModule::PBToNF(xMsg.team_id());
+			if (!xTeamID.IsNull())
+			{
+				std::vector<NFGUID> xPlayerList;
+				if (m_pTeamModule->GetMemberList(nPlayerID, xTeamID, xPlayerList))
+				{
+					NFCDataList varMember;
+					for (size_t i = 0; i < xPlayerList.size(); i++)
+					{
+						varMember.AddObject(xPlayerList[i]);
+					}
+
+					if (TeamApplyPVP(xTeamID, varMember, xMsg.npvpmode(), xMsg.score()))
+					{
+						xAck.set_nresult(1);
+
+						NFGUID xRoomID;
+						if (m_pPVPMatchRedisModule->GetPlayerRoomID(nPlayerID, xRoomID))
+						{
+							NFMsg::PVPRoomInfo xRoomInfo;
+							if (m_pPVPMatchRedisModule->GetRoomInfo(xRoomID, xRoomInfo))
+							{
+								xAck.mutable_xroominfo()->CopyFrom(xRoomInfo);
+							}
+						}
+
+						m_pTeamModule->BroadcastMsgToTeam(nPlayerID, xTeamID, NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck);
+
+						//³É¹¦
+						return;
+					}
+				}
+			}
+		}
+
+		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
+
+	}
+	break;
+	default:
+		break;
+	}
+}
+
+void NFCPVPMatchModule::OnAckCreatePVPEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::AckCreatePVPEctype);
+
+	NFGUID xRoomID = NFINetModule::PBToNF(xMsg.xroominfo().roomid());
+	if (!xRoomID.IsNull())
+	{
+		int nServerID = 0;
+		int nSceneID = 0;
+		int nGroup = 0;
+		if (!xMsg.xroominfo().has_serverid())
+		{
+			return;
+		}
+
+		if (!xMsg.xroominfo().has_sceneid())
+		{
+			return;
+		}
+		if (!xMsg.xroominfo().has_groupid())
+		{
+			return;
+		}
+
+		nServerID = xMsg.xroominfo().serverid();
+		nSceneID = xMsg.xroominfo().sceneid();
+		nGroup = xMsg.xroominfo().groupid();
+
+		NFMsg::PVPRoomInfo xRoomInfo;
+		if (m_pPVPMatchRedisModule->GetRoomInfo(xRoomID, xRoomInfo))
+		{
+			UpdateRoomStatus(xRoomInfo, EPVPROOMSTATUS_FIGHT);
+
+			if (xRoomInfo.ncellstatus() == EPVPROOMSTATUS_FIGHT)
+			{
+				xRoomInfo.set_serverid(nServerID);
+				xRoomInfo.set_sceneid(nSceneID);
+				xRoomInfo.set_groupid(nGroup);
+
+				if (m_pPVPMatchRedisModule->SetRoomInfo(xRoomID, xRoomInfo))
+				{
+					BroadcastMsgToRoom(nPlayerID, xRoomID, NFMsg::EGMI_ACK_CREATEPVPECTYPE, xMsg);
+				}
+			}
+		}
+	}
+}
+
+
+bool NFCPVPMatchModule::BroadcastMsgToRoom(const NFGUID& self, const NFGUID& xRoomID, const uint16_t nMsgID, google::protobuf::Message& xData)
+{
+	std::vector<std::string> xPlayerList;
+	std::vector<int64_t> xGameIDList;
+	std::vector<NFGUID> xPlayerIDList;
+
+	NFMsg::PVPRoomInfo xRoomInfo;
+	if (!m_pPVPMatchRedisModule->GetRoomInfo(xRoomID, xRoomInfo))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < xRoomInfo.xblueplayer_size(); i++)
+	{
+		xPlayerIDList.push_back(NFINetModule::PBToNF(xRoomInfo.xblueplayer(i)));
+	}
+
+	for (int i = 0; i < xRoomInfo.xredplayer_size(); i++)
+	{
+		xPlayerIDList.push_back(NFINetModule::PBToNF(xRoomInfo.xredplayer(i)));
+	}
+
+	for (int i = 0; i < xPlayerIDList.size(); i++)
+	{
+		xPlayerList.push_back(xPlayerIDList[i].ToString());
+	}
+
+	if (!m_pPlayerRedisModule->GetPlayerCacheGameID(xPlayerList, xGameIDList))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < xGameIDList.size() && i < xPlayerList.size(); i++)
+	{
+		int nGameID = xGameIDList[i];
+		NFGUID xPlayer;
+		xPlayer.FromString(xPlayerList[i]);
+		m_pWorldNet_ServerModule->SendMsgToGame(nGameID, (NFMsg::EGameMsgID)nMsgID, xData, xPlayer);
+	}
+
+	return true;
 }

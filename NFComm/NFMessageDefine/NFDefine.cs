@@ -742,6 +742,18 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=1008)]
       EGMI_REQ_CMD_NORMAL = 1008,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PVPAPPLYMACTCH", Value=1100)]
+      EGMI_REQ_PVPAPPLYMACTCH = 1100,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PVPAPPLYMACTCH", Value=1101)]
+      EGMI_ACK_PVPAPPLYMACTCH = 1101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATEPVPECTYPE", Value=1102)]
+      EGMI_REQ_CREATEPVPECTYPE = 1102,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=1103)]
+      EGMI_ACK_CREATEPVPECTYPE = 1103,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=10000)]
       EGMI_REQ_BUY_FORM_SHOP = 10000,
             

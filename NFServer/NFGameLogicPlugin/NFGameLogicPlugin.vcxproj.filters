@@ -141,6 +141,9 @@
     <ClInclude Include="NFCItemCardConsumeProcessModule.h">
       <Filter>NFItemModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCGSPVPMatchModule.h">
+      <Filter>NFPVPModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp">
       <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGSPVPMatchModule.cpp">
+      <Filter>NFPVPModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
