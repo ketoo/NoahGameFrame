@@ -13,10 +13,10 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 
-class NFProxyPlugin : public NFIPlugin
+class NFProxyLogicPlugin : public NFIPlugin
 {
 public:
-    NFProxyPlugin(NFIPluginManager* p)
+    NFProxyLogicPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
