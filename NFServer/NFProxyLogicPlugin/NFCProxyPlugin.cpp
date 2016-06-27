@@ -19,36 +19,36 @@ NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetConsoleTitle("NFProxyServer");
 #endif
-    CREATE_PLUGIN(pm, NFProxyPlugin)
+    CREATE_PLUGIN(pm, NFProxyLogicPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFProxyPlugin)
+    DESTROY_PLUGIN(pm, NFProxyLogicPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFProxyPlugin::GetPluginVersion()
+const int NFProxyLogicPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFProxyPlugin::GetPluginName()
+const std::string NFProxyLogicPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFProxyPlugin)
+    return GET_CLASS_NAME(NFProxyLogicPlugin)
 }
 
-void NFProxyPlugin::Install()
+void NFProxyLogicPlugin::Install()
 {
 
     REGISTER_MODULE(pPluginManager, NFIProxyLogicModule, NFCProxyLogicModule)
 
 }
 
-void NFProxyPlugin::Uninstall()
+void NFProxyLogicPlugin::Uninstall()
 {
     UNREGISTER_MODULE(pPluginManager, NFIProxyLogicModule, NFCProxyLogicModule)
 }
