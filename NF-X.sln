@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -74,7 +74,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGameServerPlugin", "NFSer
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFCore", "NFComm\NFCore\NFCore.vcxproj", "{B9833FE8-8C0B-40D6-BA01-3CDADEB21166}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFProxyPlugin", "NFServer\NFProxyServerPlugin\NFProxyPlugin.vcxproj", "{F7184B09-1086-4ECF-A833-4088389468B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFProxyLogicPlugin", "NFServer\NFProxyLogicPlugin\NFProxyPlugin.vcxproj", "{F7184B09-1086-4ECF-A833-4088389468B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
