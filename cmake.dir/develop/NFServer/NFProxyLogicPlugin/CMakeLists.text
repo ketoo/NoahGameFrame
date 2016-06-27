@@ -1,21 +1,21 @@
-set(ProjectName "NFProxyServerPlugin")
-file(GLOB NFProxyServerPlugin_ROOT_Cpp
+set(ProjectName "NFProxyLogicPlugin")
+file(GLOB NFProxyLogicPlugin_ROOT_Cpp
 	*.cpp)
 
-file(GLOB NFProxyServerPlugin_ROOT_Hpp 
+file(GLOB NFProxyLogicPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFProxyServerPlugin SHARED
-	${NFProxyServerPlugin_ROOT_Cpp}
-	${NFProxyServerPlugin_ROOT_Hpp})
+add_library(NFProxyLogicPlugin SHARED
+	${NFProxyLogicPlugin_ROOT_Cpp}
+	${NFProxyLogicPlugin_ROOT_Hpp})
 	
-set_target_properties( NFProxyServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyServerPlugin_d")
-set_target_properties( NFProxyServerPlugin PROPERTIES 
+set_target_properties( NFProxyLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyLogicPlugin_d")
+set_target_properties( NFProxyLogicPlugin PROPERTIES 
 	FOLDER "NFServer/ProxyServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
 	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
-link_NFSDK("NFProxyServerPlugin")
+link_NFSDK("NFProxyLogicPlugin")
 
 if(UNIX)
 	add_definitions(
