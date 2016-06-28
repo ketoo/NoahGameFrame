@@ -1,3 +1,5 @@
+xcopy cmake.dir\develop\*.* *.txt /e /y
+
 cd Dependencies
 call build_dep.bat
 
@@ -14,7 +16,7 @@ cd ..
 cd ..
 
 cd BuildScript
-call BuildNF.CMake.bat
+call BuildNF.CMake.Debug.bat
 call BuildNF.VS2015.Debug.X64.bat
 
 call BuildNF.CopyDll.bat
