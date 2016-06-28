@@ -28,10 +28,10 @@ bool NFCWSSwichServerModule::Execute()
 
 bool NFCWSSwichServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>( "NFCKernelModule" );
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>( "NFCElementInfoModule" );
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>("NFCLogModule");
-	m_pWorlNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>("NFCWorldNet_ServerModule");
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementInfoModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pWorlNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 
 	assert(NULL != m_pWorlNet_ServerModule);
     assert( NULL != m_pKernelModule );
