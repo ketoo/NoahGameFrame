@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFProxyPlugin" />
+		<Option title="NFProxyLogicPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -85,8 +85,8 @@
 		</Build>
 		<Unit filename="NFCProxyLogicModule.cpp" />
 		<Unit filename="NFCProxyLogicModule.h" />
-		<Unit filename="NFCProxyPlugin.cpp" />
-		<Unit filename="NFCProxyPlugin.h" />
+		<Unit filename="NFCProxyLogicPlugin.cpp" />
+		<Unit filename="NFCProxyLogicPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
