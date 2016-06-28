@@ -19,7 +19,6 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
