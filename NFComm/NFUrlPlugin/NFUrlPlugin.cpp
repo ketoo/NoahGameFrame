@@ -39,12 +39,12 @@ const std::string NFUrlPlugin::GetPluginName()
 
 void NFUrlPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFCUrlClientModule, NFCUrlClientModule)
-    REGISTER_MODULE(pPluginManager, NFCUrlCodeModule, NFCUrlCodeModule)
+    REGISTER_MODULE(pPluginManager, NFIUrlClientModule, NFCUrlClientModule)
+    REGISTER_MODULE(pPluginManager, NFIUrlCodeModule, NFCUrlCodeModule)
 }
 
 void NFUrlPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFCUrlCodeModule, NFCUrlCodeModule)
-    UNREGISTER_MODULE(pPluginManager, NFCUrlClientModule, NFCUrlClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFIUrlCodeModule, NFCUrlCodeModule)
+    UNREGISTER_MODULE(pPluginManager, NFIUrlClientModule, NFCUrlClientModule)
 }
