@@ -39,9 +39,8 @@
 
 #endif
 
-NFCPluginManager::NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
+NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
-   m_pActorManager = pManager;
    mnAppID = 0;
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
@@ -167,8 +166,6 @@ bool NFCPluginManager::Execute()
         bool tembRet = it->second->Execute();
         bRet = bRet && tembRet;
     }
-
-    ExecuteEvent();
 
     return bRet;
 }
@@ -398,60 +395,4 @@ bool NFCPluginManager::EndReLoadState()
     NFILogicModule::EndReLoadState();
 
     return true;
-}
-
-void NFCPluginManager::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
-{
-    //添加到队列，每帧执行
-    mxQueue.Push(message);
-}
-
-bool NFCPluginManager::ExecuteEvent()
-{
-    NFIActorMessage xMsg;
-    bool bRet = false;
-    bRet = mxQueue.Pop(xMsg);
-    while (bRet)
-    {
-        if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
-        {
-            xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
-            //Actor can be reused in ActorPool mode, so we don't release it.
-            //m_pActorManager->ReleaseActor(xMsg.nFormActor);
-        }
-
-        bRet = mxQueue.Pop(xMsg);
-    }
-
-
-
-    return true;
-}
-
-void NFCPluginManager::AddComponent(const std::string& strComponentName, NFIComponent* pComponent)
-{
-    if (!FindComponent(strComponentName))
-    {
-        mComponentInstanceMap.insert(ComponentInstanceMap::value_type(strComponentName, pComponent));
-    }
-
-}
-
-void NFCPluginManager::RemoveComponent(const std::string& strComponentName)
-{
-    ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
-    if (it != mComponentInstanceMap.end())
-    {
-        mComponentInstanceMap.erase(it);
-    }
-}
-
-NFIComponent* NFCPluginManager::FindComponent(const std::string& strComponentName)
-{
-    ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
-    if (it != mComponentInstanceMap.end())
-    {
-        return it->second;
-    }
-    return NULL;
 }
