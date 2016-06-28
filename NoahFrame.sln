@@ -189,7 +189,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFTools", "NFTools", "{32F9
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFFileProcess", "NFTools\NFFileProcess\NFFileProcess.vcxproj", "{2A24AA66-5EBC-4ECC-8021-7D9237868B33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFProxyLogicPlugin", "NFServer\NFProxyLogicPlugin\NFProxyPlugin.vcxproj", "{F7184B09-1086-4ECF-A833-4088389468B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFProxyLogicPlugin", "NFServer\NFProxyLogicPlugin\NFProxyLogicPlugin.vcxproj", "{F7184B09-1086-4ECF-A833-4088389468B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 
-#include "NFCProxyPlugin.h"
+#include "NFCProxyLogicPlugin.h"
 #include "NFCProxyLogicModule.h"
 
 //
