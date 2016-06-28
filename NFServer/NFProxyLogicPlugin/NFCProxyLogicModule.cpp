@@ -6,7 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
-#include "NFCProxyPlugin.h"
+#include "NFCProxyLogicPlugin.h"
 #include "NFCProxyLogicModule.h"
 #include "NFComm/Config/NFConfig.h"
 

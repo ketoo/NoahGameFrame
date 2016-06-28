@@ -107,11 +107,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCProxyLogicModule.cpp" />
-    <ClCompile Include="NFCProxyPlugin.cpp" />
+    <ClCompile Include="NFCProxyLogicPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCProxyLogicModule.h" />
-    <ClInclude Include="NFCProxyPlugin.h" />
+    <ClInclude Include="NFCProxyLogicPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
