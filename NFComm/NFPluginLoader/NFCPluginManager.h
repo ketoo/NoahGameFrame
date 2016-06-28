@@ -13,14 +13,15 @@
 #include <string>
 #include <time.h>
 #include "NFCDynLib.h"
+#include "NFComm/NFCore/NFSingleton.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFCore/NFQueue.h"
 
 class NFCPluginManager
-    : public NFIPluginManager
+    : public NFIPluginManager,
+	public NFSingleton<NFCPluginManager>
 {
 public:
-    NFCPluginManager(NFIActorManager* pManager);
+    NFCPluginManager();
     virtual ~NFCPluginManager();
 
     virtual bool Init();
@@ -52,20 +53,7 @@ public:
 
     virtual NFILogicModule* FindModule(const std::string& strModuleName);
 
-    virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent);
-
-    virtual void RemoveComponent(const std::string& strComponentName);
-
-    virtual NFIComponent* FindComponent(const std::string& strComponentName);
-
     virtual bool Execute();
-
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-
-    virtual NFIActorManager* GetActorManager()
-    {
-        return m_pActorManager;
-    }
 
     virtual int AppID()
     {
@@ -92,8 +80,6 @@ protected:
     bool LoadPluginLibrary(const std::string& strPluginDLLName);
     bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
 
-    bool ExecuteEvent();
-
 private:
     int mnAppID;
     NFINT64 mnInitTime;
@@ -104,19 +90,14 @@ private:
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
     typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
     typedef std::map<std::string, NFILogicModule*> ModuleInstanceMap;
-    typedef std::map<std::string, NFIComponent*> ComponentInstanceMap;
 
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
-
-    NFIActorManager* m_pActorManager;
-    NFQueue<NFIActorMessage> mxQueue;
 
     PluginNameMap mPluginNameMap;
     PluginLibMap mPluginLibMap;
     PluginInstanceMap mPluginInstanceMap;
     ModuleInstanceMap mModuleInstanceMap;
-    ComponentInstanceMap mComponentInstanceMap;
 };
 
 #endif
