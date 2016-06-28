@@ -10,8 +10,6 @@
 #include <stdarg.h>
 #include "NFCLogModule.h"
 #include "easylog/easylogging++.h"
-#include "NFComm/NFPluginModule/NFIActorManager.h"
-#include "NFComm/NFPluginModule/NFIActor.h"
 
 INITIALIZE_EASYLOGGINGPP
 
