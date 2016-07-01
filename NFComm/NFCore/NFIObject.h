@@ -66,7 +66,7 @@ public:
     template <typename T>
     NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
     {
-        NFIComponent* pComponent = m_pPluginManager->FindComponent(strComponentName);
+        NFIComponent* pComponent = FindComponent(strComponentName);
         if (pComponent)
         {
             NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
