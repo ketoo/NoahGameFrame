@@ -13,11 +13,11 @@ set_target_properties( NFCore PROPERTIES
 	
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFCore libtheron.a)
+		target_link_libraries(NFCore )
 	else()
-		target_link_libraries(NFCore libtherond.a)
+		target_link_libraries(NFCore )
 	endif()
 else()
-	target_link_libraries(NFCore Theron)
+	target_link_libraries(NFCore )
 endif()
 
