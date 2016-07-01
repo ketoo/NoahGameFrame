@@ -65,35 +65,8 @@
     <ClInclude Include="NFCBuffModule.h">
       <Filter>NFBuffModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCSkillModule.h">
-      <Filter>NFSkillModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCItemModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCPackModule.h">
       <Filter>NFPackModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCItemConsumeManagerModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCSkillConsumeManagerModule.h">
-      <Filter>NFSkillModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h">
-      <Filter>NFSkillModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h">
-      <Filter>NFSkillModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCCardItemConsumeProcessModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCPotionItemConsumeProcessModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCRebornItemConsumeProcessModule.h">
-      <Filter>NFItemModule</Filter>
     </ClInclude>
     <ClInclude Include="NFGameLogicPlugin.h" />
     <ClInclude Include="NFCNPCRefreshModule.h">
@@ -138,12 +111,6 @@
     <ClInclude Include="NFCGmModule.h">
       <Filter>NFGMModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCHeroItemConsumeProcessModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCNormalConsumeProcessModule.h">
-      <Filter>NFItemModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCGSSwichServerModule.h">
       <Filter>NFSwichServerModule</Filter>
     </ClInclude>
@@ -165,6 +132,18 @@
     <ClInclude Include="NFCGSTeamModule.h">
       <Filter>NFTeamModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCItemModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCSkillModule.h">
+      <Filter>NFSkillModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemCardConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCGSPVPMatchModule.h">
+      <Filter>NFPVPModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -172,35 +151,8 @@
     <ClCompile Include="NFCBuffModule.cpp">
       <Filter>NFBuffModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCSkillModule.cpp">
-      <Filter>NFSkillModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCItemModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCPackModule.cpp">
       <Filter>NFPackModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCItemConsumeManagerModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCSkillConsumeManagerModule.cpp">
-      <Filter>NFSkillModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp">
-      <Filter>NFSkillModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp">
-      <Filter>NFSkillModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCCardItemConsumeProcessModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCPotionItemConsumeProcessModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCRebornItemConsumeProcessModule.cpp">
-      <Filter>NFItemModule</Filter>
     </ClCompile>
     <ClCompile Include="NFGameLogicPlugin.cpp" />
     <ClCompile Include="NFCNPCRefreshModule.cpp">
@@ -245,12 +197,6 @@
     <ClCompile Include="NFCGmModule.cpp">
       <Filter>NFGMModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCHeroItemConsumeProcessModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCNormalConsumeProcessModule.cpp">
-      <Filter>NFItemModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCGSSwichServerModule.cpp">
       <Filter>NFSwichServerModule</Filter>
     </ClCompile>
@@ -271,6 +217,18 @@
     </ClCompile>
     <ClCompile Include="NFCGSTeamModule.cpp">
       <Filter>NFTeamModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSkillModule.cpp">
+      <Filter>NFSkillModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemCardConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCGSPVPMatchModule.cpp">
+      <Filter>NFPVPModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

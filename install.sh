@@ -1,8 +1,21 @@
+rm -rf ./cmake.dir/tmp
+mkdir ./cmake.dir/tmp
+cp -R -f ./cmake.dir/develop/* ./cmake.dir/tmp/
+find ./cmake.dir/tmp -name "*.text" -exec rename -f 's/.text/.txt/' {} \;
+cp -R -f ./cmake.dir/tmp/* ./
+
 # compile dep libraries
 cd ./Dependencies
 chmod -R 755 build_dep.sh
 ./build_dep.sh
 cd ../
+
+cd BuildScript
+chmod -R 755 ./BuildNF.CMake.Tools.sh
+chmod -R 755 ./BuildNF.Tools.Linux.Debug.sh
+./BuildNF.CMake.Tools.sh
+./BuildNF.Tools.Linux.Debug.sh
+cd ..
 
 cd _Out/Server/NFDataCfg/Tool/
 chmod 755 ./NFFileProcess
@@ -13,11 +26,13 @@ cd ..
 cd ..
 cd ..
 
+cd BuildScript
 chmod -R 755 ./BuildNF.CMake.Debug.sh
 chmod -R 755 ./BuildNF.CMake.Release.sh
 chmod -R 755 ./BuildNF.CopyDll.sh
 ./BuildNF.CMake.Debug.sh
 ./BuildNF.CopyDll.sh
+cd ..
 
 cd _Out/Server/Debug/
 chmod -R 755 ./rund_cmake.sh

@@ -17,6 +17,10 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
+#include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFITeamModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCPVPMatchModule
     : public NFIPVPMatchModule
@@ -25,6 +29,7 @@ public:
     NFCPVPMatchModule( NFIPluginManager* p )
     {
         pPluginManager = p;
+		mnLastCheckTime = 0;
     }
 
     virtual ~NFCPVPMatchModule() {};
@@ -43,19 +48,34 @@ protected:
     NFGUID CreateRoom(const NFGUID& self, const int nPVPMode, const int nGrade);
     bool DestroyRoom(const NFGUID& self, const NFGUID& xRoomID);
     bool PlayerEnterRoom(const NFGUID& self, const int nRedOrBlue, const NFGUID& xRoomID);
+    bool PlayerListEnterRoom(const std::vector<NFGUID>& xPlayerList, const int nRedOrBlue, const NFGUID& xRoomID);
     bool PlayerLeaveRoom(const NFGUID& self, const NFGUID& xRoomID);
-    NF_SHARE_PTR<NFMapEx<NFGUID, NFGUID> > GetRoomList(const int nPVPMode, const int nGrade);
+	bool PlayerListLeaveRoom(const std::vector<NFGUID>& xPlayerList, const NFGUID& xRoomID);
 
+    int NeedPlayerCount(const NFMsg::PVPRoomInfo& xRoomInfo, const int nRedOrebulue);
+	bool UpdateRoomStatus(NFMsg::PVPRoomInfo& xRoomInfo, const int nTargetStatus = -1);
+
+    void ProecessWaitRoom();
+    void ProecessRoomBeginFight();
+    void ProcessSingePlayerRoom();
+
+	//msg handle
+	void OnReqPVPApplyMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAckCreatePVPEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+	bool BroadcastMsgToRoom(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIUUIDModule* m_pUUIDModule;
+    NFIPVPMatchRedisModule* m_pPVPMatchRedisModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFITeamModule* m_pTeamModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
 
-private:
-    NFMapEx<int, NFMapEx< int , NFMapEx<NFGUID, NFGUID> > >mxWaitRoom; //pvpmode <--->grade<-(roomid <--> roomid)>
-    NFMapEx<NFGUID, NFGUID> mxPlayerRoomInfo; //PlayerID <--> RoomID;
-    NFMapEx<NFGUID, PVPRoom> mxRoomInfo; //RoomID <--> RoomInfo;
+	NFINT64 mnLastCheckTime;
+
 };
 
 

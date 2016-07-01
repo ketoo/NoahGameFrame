@@ -10,6 +10,7 @@
 #define NFI_TEAM_MODULE_H
 
 #include "NFILogicModule.h"
+#include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 
 class NFITeamModule
     : public NFILogicModule
@@ -20,9 +21,10 @@ public:
 	virtual bool LeaveTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember) = 0;
 
-	virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xTeam, NFCDataList& varMemberList, NFCDataList& varGameList) = 0;
 	virtual bool MemberOnline(const NFGUID& self, const NFGUID& xTeam, const int& nGameID) = 0;
 	virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xTeam) = 0;
+	virtual bool GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::vector<NFGUID>& xmemberList) = 0;
+	virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 private:
 };
 

@@ -9,17 +9,10 @@
 #include "NFGameLogicPlugin.h"
 #include "NFCGameLogicModule.h"
 #include "NFCBuffModule.h"
-#include "NFCItemModule.h"
 #include "NFCPackModule.h"
-#include "NFCSkillModule.h"
-#include "NFCBulletSkillConsumeProcessModule.h"
-#include "NFCBriefSkillConsumeProcessModule.h"
-#include "NFCSkillConsumeManagerModule.h"
-#include "NFCPotionItemConsumeProcessModule.h"
-#include "NFCCardItemConsumeProcessModule.h"
-#include "NFCItemConsumeManagerModule.h"
 #include "NFCNPCRefreshModule.h"
-#include "NFCRebornItemConsumeProcessModule.h"
+#include "NFCItemModule.h"
+#include "NFCSkillModule.h"
 #include "NFCHeroModule.h"
 #include "NFCEquipModule.h"
 #include "NFCSLGShopModule.h"
@@ -29,14 +22,13 @@
 #include "NFCRankModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
-#include "NFCHeroItemConsumeProcessModule.h"
-#include "NFCNormalConsumeProcessModule.h"
 #include "NFCGSSwichServerModule.h"
 #include "NFCMapModule.h"
 #include "NFCHeroPropertyModule.h"
 #include "NFCEquipPropertyModule.h"
 #include "NFCTaskModule.h"
 #include "NFCChatModule.h"
+#include "NFCGSPVPMatchModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -100,7 +92,8 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
 	REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
-    REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	REGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
     //REGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule);
     //REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule);
 }
@@ -109,7 +102,8 @@ void NFGameLogicPlugin::Uninstall()
 {
     //UNREGISTER_MODULE(pPluginManager, NFCChatModule);
     //UNREGISTER_MODULE(pPluginManager, NFCTaskModule);
-    UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
+	UNREGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
+	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	UNREGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);

@@ -25,9 +25,22 @@ public:
 
     enum  EPVPROOMSTATUS
     {
-        EPVPROOMSTATUS_WAIT , //1v1
-        EPVPROOMSTATUS_FIGHT  , //2v2
-        EPVPROOMSTATUS_FINISH, //3v3
+        EPVPROOMSTATUS_WAIT             = 0, //
+        EPVPROOMSTATUS_WAITFIGHT        = 1, //
+        EPVPROOMSTATUS_WAITCREATEECTYPE = 2, //
+        EPVPROOMSTATUS_FIGHT            = 3, //
+        EPVPROOMSTATUS_FINISH           = 4, //
+    };
+
+    enum  EPVPDefine
+    {
+        EPVPDEFINE_MAXGRADE = 10, //
+    };
+
+    enum  EPVPREDORBLUE
+    {
+        EPVPREDORBLUE_RED = 0, //
+        EPVPREDORBLUE_BULE = 1, //
     };
 
 public:

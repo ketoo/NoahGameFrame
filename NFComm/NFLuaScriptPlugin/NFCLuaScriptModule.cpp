@@ -269,7 +269,7 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
     .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
     .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFILogicClassModule>)
-    .addFunction("FindElementModule", &NFIPluginManager::FindModule<NFIElementModule>)
+    .addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementModule>)
 	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();
 

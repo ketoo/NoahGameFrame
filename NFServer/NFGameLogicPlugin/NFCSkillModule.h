@@ -64,7 +64,7 @@ private:
     NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
+    //NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
     NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

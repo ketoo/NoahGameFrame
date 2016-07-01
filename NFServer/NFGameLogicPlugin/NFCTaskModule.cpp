@@ -26,7 +26,6 @@ bool NFCTaskModule::Execute()
 bool NFCTaskModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
