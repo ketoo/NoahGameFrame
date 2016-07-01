@@ -10,9 +10,9 @@ add_library(NFMessageDefine SHARED
 
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFMessageDefine libtheron.a)
+		target_link_libraries(NFMessageDefine )
 	else()
-		target_link_libraries(NFMessageDefine libtherond.a)
+		target_link_libraries(NFMessageDefine )
 	endif()
 	
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
@@ -44,7 +44,7 @@ if(UNIX)
 	endif()
 else()
 	add_dependencies(NFMessageDefine libprotobuf)
-	target_link_libraries(NFMessageDefine anet_win64 libprotobuf lua Theron)
+	target_link_libraries(NFMessageDefine  libprotobuf )
 	add_definitions(
 		-D_USRDLL
 		-D_LIB
