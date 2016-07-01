@@ -9,16 +9,14 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
-#include "NFIActor.h"
 #include "NFILogicModule.h"
-#include "NFIActorManager.h"
 
 class NFIPlugin;
 
 class NFIPluginManager : public NFILogicModule
 {
 public:
-    NFIPluginManager(NFIActorManager* pManager)
+    NFIPluginManager()
     {
 
     }
@@ -57,19 +55,6 @@ public:
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
     virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
-
-    //////////////////////////////////////////////////////////////////////////
-
-    virtual void AddComponent(const std::string& strComponentName, NFIComponent* pComponent) = 0;
-
-    virtual void RemoveComponent(const std::string& strComponentName) = 0;
-
-    virtual NFIComponent* FindComponent(const std::string& strComponentName) = 0;
-
-    //////////////////////////////////////////////////////////////////////////
-
-    virtual NFIActorManager* GetActorManager() = 0;
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
 
     virtual int AppID() = 0;
     virtual NFINT64 GetInitTime() const = 0;
