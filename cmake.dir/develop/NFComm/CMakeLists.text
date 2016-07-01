@@ -12,5 +12,3 @@ add_subdirectory(NFLogPlugin)
 add_subdirectory(NFMessageDefine)
 
 add_subdirectory(NFNet)
-
-add_subdirectory(NFUrlPlugin)
