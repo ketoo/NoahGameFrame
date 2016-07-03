@@ -17,4 +17,4 @@ class NFIActorModule
 public:
 };
 
-#endif // !NFI_UUID_MODULE_H
+#endif
