@@ -38,10 +38,25 @@ private:
 	bool InitActorPool(const int nSize);
 
 private:
-	struct ActorData
+	class ActorData : public Theron::Actor
 	{
+	public:
+
 		EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR begin;
 		EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR end;
+
+		explicit ActorData(Theron::Framework &framework) : Theron::Actor(framework)
+		{
+			RegisterHandler(this, &ActorData::Handler);
+		}
+
+	private:
+
+		void Handler(const int &message, const Theron::Address from)
+		{
+			Send(message, from);
+		}
+
 	};
 
 	Theron::Framework* m_pFramework;
