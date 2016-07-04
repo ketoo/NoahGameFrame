@@ -1,3 +1,12 @@
+# make sure cmake is installed
+cmake --version
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Please install cmake first."
+    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake."
+    exit 1
+fi
+
+
 rm -rf ./cmake.dir/tmp
 mkdir ./cmake.dir/tmp
 cp -R -f ./cmake.dir/X-GAME/* ./cmake.dir/tmp/
