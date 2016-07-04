@@ -1,11 +1,9 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
+#pragma comment( lib, "Dbghelp.lib" )
 #endif
 
-
-
-#pragma comment( lib, "Dbghelp.lib" )
 
 #ifdef NF_DEBUG_MODE
 
@@ -34,8 +32,7 @@
 #pragma comment( lib, "NFCore.lib" )
 
 #else
-#pragma comment( lib, "NFCorec.lib" )
-
+#pragma comment( lib, "NFCore.lib" )
 #endif
 
 //
