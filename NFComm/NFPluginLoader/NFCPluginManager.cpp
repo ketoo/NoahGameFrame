@@ -14,8 +14,9 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
-
+#endif
 
 #ifdef NF_DEBUG_MODE
 
