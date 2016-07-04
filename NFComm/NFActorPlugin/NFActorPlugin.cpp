@@ -29,7 +29,7 @@ const std::string NFActorPlugin::GetPluginName()
 
 void NFActorPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIActorModule, NFCActorModule)
+	REGISTER_MODULE(pPluginManager, NFIActorModule, NFCActorModule)
 }
 
 void NFActorPlugin::Uninstall()

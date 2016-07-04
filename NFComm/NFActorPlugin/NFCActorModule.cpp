@@ -1,69 +1,149 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFCActorModule.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-12-15
+//    @Module           :    NFCActorModule
+//
+// -------------------------------------------------------------------------
+
 #include "NFCActorModule.h"
+#include "NFComm/NFCore/NFIComponent.h"
 
-NFCActorModule::NFCActorModule(NFIPluginManager * p)
+NFCActorModule::NFCActorModule(NFIPluginManager* p)
 {
-	srand((unsigned)time(NULL));
+	pPluginManager = p;
 
-	m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
+    srand((unsigned)time(NULL));
 
+    m_pFramework = NF_NEW Theron::Framework(NF_ACTOR_THREAD_COUNT);
+
+    m_pMainActor = NF_SHARE_PTR<NFIActor>(NF_NEW NFCActor(*m_pFramework, this));
 }
 
 NFCActorModule::~NFCActorModule()
 {
-	delete m_pFramework;
-	m_pFramework = NULL;
+    m_pMainActor.reset();
+    m_pMainActor = nullptr;
+
+    delete pPluginManager;
+    pPluginManager = NULL;
+
+    delete m_pFramework;
+    m_pFramework = NULL;
 }
 
 bool NFCActorModule::Init()
 {
-	return false;
-}
 
-bool NFCActorModule::Shut()
-{
-	return false;
-}
-
-bool NFCActorModule::BeforeShut()
-{
-	return false;
+    return true;
 }
 
 bool NFCActorModule::AfterInit()
 {
-	return false;
+
+    return true;
+}
+
+
+
+bool NFCActorModule::BeforeShut()
+{
+
+    return true;
+}
+
+bool NFCActorModule::Shut()
+{
+ 
+    return true;
 }
 
 bool NFCActorModule::Execute()
 {
-	return false;
+    return true;
 }
 
-bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID & objectID, const int nEventID, const std::string & strArg)
-{
-	return false;
-}
 
 int NFCActorModule::RequireActor()
 {
-	//NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
-	//mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
+    //¶Ñactor
+    NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
+    mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
 
-	//return pActor->GetAddress().AsInteger();
-	return 0;
+    return pActor->GetAddress().AsInteger();
 }
 
-int NFCActorModule::AddBeginFunc(const int nActorIndex, const EVENT_ASYNC_PROCESS_BEGIN_FUNCTOR_PTR & cb)
+NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 {
-	return 0;
+    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
+    if (it != mxActorMap.end())
+    {
+        return it->second;
+    }
+
+    return NF_SHARE_PTR<NFIActor>();
 }
 
-int NFCActorModule::AddEndFunc(const int nActorIndex, const EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR & cb)
-{
-	return 0;
-}
-
-bool NFCActorModule::InitActorPool(const int nSize)
+bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const Theron::Address from)
 {
 	return false;
 }
+
+bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)
+{
+    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    if (nullptr != pActor)
+    {
+        NFIActorMessage xMessage;
+
+        xMessage.data = strArg;
+        xMessage.nMsgID = nEventID;
+        xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
+        xMessage.self = objectID;
+
+        return m_pFramework->Send(xMessage, m_pMainActor->GetAddress(), pActor->GetAddress());
+    }
+
+    return false;
+}
+
+bool NFCActorModule::AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent)
+{
+    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    if (nullptr != pActor)
+    {
+        pActor->AddComponent(pComponent);
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCActorModule::ReleaseActor(const int nActorIndex)
+{
+    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
+    if (it != mxActorMap.end())
+    {
+        mxActorMap.erase(it);
+
+        return true;
+    }
+
+    return false;
+}
+
+bool NFCActorModule::AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end)
+{
+    NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
+    if (nullptr != pActor)
+    {
+        pActor->AddEndFunc(functorPtr_end);
+
+        return true;
+    }
+
+    return false;
+}
+
+

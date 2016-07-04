@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFCActor.cpp" />
     <ClCompile Include="NFCActorModule.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFActorPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCActor.h" />
     <ClInclude Include="NFCActorModule.h" />
     <ClInclude Include="NFActorPlugin.h" />
   </ItemGroup>
