@@ -52,7 +52,7 @@ private:
 
     Theron::Framework* m_pFramework;
     NF_SHARE_PTR<NFIActor> m_pMainActor;
-    std::map<int, NF_SHARE_PTR<NFIActor> > mxActorMap;
+    NFMapEx<int, NFIActor> mxActorMap;
 
 	NFQueue<NFIActorMessage> mxQueue;
 };

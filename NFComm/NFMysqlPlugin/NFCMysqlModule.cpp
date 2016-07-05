@@ -11,8 +11,6 @@
 #include "NFCMysqlModule.h"
 #include "NFCMysqlDriverManager.h"
 
-
-
 NFCMysqlModule::NFCMysqlModule(NFIPluginManager* p)
 {
     pPluginManager = p;

@@ -57,21 +57,13 @@ bool NFCUrlClientModule::Execute()
 bool NFCUrlClientModule::AfterInit()
 {
     m_pUrlCodeModule = pPluginManager->FindModule<NFIUrlCodeModule>();
+	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
     if (!mbInitCurl)
     {
         mbInitCurl = true;
         curl_global_init(CURL_GLOBAL_ALL);
     }
-
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
 
     return true;
 }

@@ -44,11 +44,9 @@ bool NFCActorModule::AfterInit()
     return true;
 }
 
-
-
 bool NFCActorModule::BeforeShut()
 {
-
+	mxActorMap.ClearAll();
     return true;
 }
 
@@ -69,25 +67,18 @@ int NFCActorModule::RequireActor()
 {
     //堆actor
     NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
-    mxActorMap.insert(std::make_pair(pActor->GetAddress().AsInteger(), pActor));
+	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 
     return pActor->GetAddress().AsInteger();
 }
 
 NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 {
-    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
-    if (it != mxActorMap.end())
-    {
-        return it->second;
-    }
-
-    return NF_SHARE_PTR<NFIActor>();
+	return mxActorMap.GetElement(nActorIndex);
 }
 
 bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const Theron::Address from)
 {
-	//添加到队列，每帧执行
 	mxQueue.Push(message);
 	return true;
 }
@@ -108,8 +99,6 @@ bool NFCActorModule::ExecuteEvent()
 
 		bRet = mxQueue.Pop(xMsg);
 	}
-
-
 
 	return true;
 }
@@ -147,15 +136,7 @@ bool NFCActorModule::AddComponent(const int nActorIndex, NF_SHARE_PTR<NFICompone
 
 bool NFCActorModule::ReleaseActor(const int nActorIndex)
 {
-    std::map<int, NF_SHARE_PTR<NFIActor> >::iterator it = mxActorMap.find(nActorIndex);
-    if (it != mxActorMap.end())
-    {
-        mxActorMap.erase(it);
-
-        return true;
-    }
-
-    return false;
+	return mxActorMap.RemoveElement(nActorIndex);
 }
 
 bool NFCActorModule::AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end)
@@ -170,5 +151,3 @@ bool NFCActorModule::AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_F
 
     return false;
 }
-
-

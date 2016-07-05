@@ -251,14 +251,8 @@ bool NFCAsyMysqlModule::Execute()
 
 bool NFCAsyMysqlModule::AfterInit()
 {
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
+	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+
     return true;
 }
 
@@ -545,15 +539,6 @@ int NFCAsyMysqlModule::GetActor()
 
 bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime /*= 10*/, const int nRconneCount /*= -1*/)
 {
-	if (NULL == m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (NULL == m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     NFMsg::PackMysqlServerInfo xMsg;
 
     xMsg.set_nrconnecttime(nRconnectTime);
