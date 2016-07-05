@@ -7,7 +7,7 @@ file(GLOB NFCore_ROOT_Hpp *.h)
 file(GLOB RemoveItems Example.cpp)
 list(REMOVE_ITEM NFCore_ROOT_Cpp ${RemoveItems})
 
-add_library(NFCore SHARED
+add_library(NFCore
 	${NFCore_ROOT_Cpp}
 	${NFCore_ROOT_Hpp})
 
