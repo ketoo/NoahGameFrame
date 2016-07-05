@@ -13,6 +13,7 @@
 #include "Dependencies/curl/include/curl/curl.h"
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 #include "NFComm/NFPluginModule/NFIUrlCodeModule.h"
+#include "NFComm/NFPluginModule/NFIActorModule.h"
 
 struct SURLParam
 {
@@ -142,6 +143,8 @@ protected:
 
     int mnSuitIndex;
     bool mbInitCurl;
+
+	NFIActorModule* m_pActorModule = nullptr;
 };
 
 #endif

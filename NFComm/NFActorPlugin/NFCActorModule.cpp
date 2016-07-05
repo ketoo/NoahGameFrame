@@ -60,6 +60,7 @@ bool NFCActorModule::Shut()
 
 bool NFCActorModule::Execute()
 {
+	ExecuteEvent();
     return true;
 }
 
@@ -86,7 +87,31 @@ NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 
 bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const Theron::Address from)
 {
-	return false;
+	//添加到队列，每帧执行
+	mxQueue.Push(message);
+	return true;
+}
+
+bool NFCActorModule::ExecuteEvent()
+{
+	NFIActorMessage xMsg;
+	bool bRet = false;
+	bRet = mxQueue.Pop(xMsg);
+	while (bRet)
+	{
+		if (xMsg.nMsgID == 0)
+		{
+			xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
+			//Actor can be reused in ActorPool mode, so we don't release it.
+			//m_pActorManager->ReleaseActor(xMsg.nFormActor);
+		}
+
+		bRet = mxQueue.Pop(xMsg);
+	}
+
+
+
+	return true;
 }
 
 bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg)

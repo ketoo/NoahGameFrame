@@ -1,5 +1,5 @@
 <XML>
-
+	<Plugin Name="NFActorPlugin" Main="1"/>
 	<Plugin Name="NFUrlPlugin" Main="1"/>
 	<Plugin Name="Tutorial7" Main="1"/>
 	<APPID Name="111" />

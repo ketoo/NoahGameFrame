@@ -15,6 +15,7 @@
 #include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
+#include "NFComm/NFCore/NFQueue.h"
 
 class NFCActorModule
     : public NFIActorModule
@@ -46,11 +47,14 @@ protected:
     virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);
     virtual bool AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
 
+	virtual bool ExecuteEvent();
 private:
 
     Theron::Framework* m_pFramework;
     NF_SHARE_PTR<NFIActor> m_pMainActor;
     std::map<int, NF_SHARE_PTR<NFIActor> > mxActorMap;
+
+	NFQueue<NFIActorMessage> mxQueue;
 };
 
 #endif

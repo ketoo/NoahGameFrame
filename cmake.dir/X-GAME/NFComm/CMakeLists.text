@@ -20,3 +20,5 @@ add_subdirectory(NFUrlPlugin)
 add_subdirectory(NFMysqlPlugin)
 
 add_subdirectory(NFNoSqlPlugin)
+
+add_subdirectory(NFActorPlugin)

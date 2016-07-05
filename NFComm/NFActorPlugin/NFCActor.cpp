@@ -41,7 +41,7 @@ void NFCActor::HandlerSelf(const NFIActorMessage& message, const Theron::Address
 
     NFIActorMessage xReturnMessage;
 
-    xReturnMessage.nMsgID = message.nMsgID;
+	xReturnMessage.nMsgID = 0;// message.nMsgID;
     xReturnMessage.data = strData;
     xReturnMessage.self = message.self;
     xReturnMessage.nFormActor = this->GetAddress().AsInteger();
