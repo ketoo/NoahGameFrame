@@ -1,8 +1,16 @@
-file(GLOB TEMP_SRC *.cpp)
+set(ProjectName "NFCore")
+file(GLOB NFCore_ROOT_Cpp *.cpp)
+
+file(GLOB NFCore_ROOT_Hpp *.h)
+
 #Exclude this file
 file(GLOB RemoveItems Example.cpp)
-list(REMOVE_ITEM TEMP_SRC ${RemoveItems})
-add_library(NFCore ${TEMP_SRC})
+list(REMOVE_ITEM NFCore_ROOT_Cpp ${RemoveItems})
+
+add_library(NFCore SHARED
+	${NFCore_ROOT_Cpp}
+	${NFCore_ROOT_Hpp})
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFCore PROPERTIES OUTPUT_NAME_DEBUG "NFCore_d")
 set_target_properties( NFCore PROPERTIES 
