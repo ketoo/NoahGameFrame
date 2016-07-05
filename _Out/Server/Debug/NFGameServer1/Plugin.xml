@@ -10,6 +10,7 @@
     <Plugin Name="NFDataAgent_NosqlPlugin" Main="1"/>
     <Plugin Name="NFGameLogicPlugin" Main="1"/>
     <Plugin Name="NFNoSqlPlugin" Main="1"/>
+    <Plugin Name="NFActorPlugin" Main="1"/>
 	<APPID Name="6" />
     <ConfigPath Name="../../" />
 </XML>

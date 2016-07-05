@@ -251,7 +251,14 @@ bool NFCAsyMysqlModule::Execute()
 
 bool NFCAsyMysqlModule::AfterInit()
 {
-
+	if (!m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (!m_pActorModule)
+		{
+			return false;
+		}
+	}
     return true;
 }
 
@@ -405,15 +412,18 @@ bool NFCAsyMysqlModule::Keys(const NFGUID& self, const std::string& strRecordNam
 
 bool NFCAsyMysqlModule::StartActorPool(const int nCount)
 {
-    NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-    if (NULL == pActorManager)
-    {
-        return false;
-    }
+	if (!m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (!m_pActorModule)
+		{
+			return false;
+		}
+	}
 
     for (int i = 0; i < nCount; i++)
     {
-        int nActorID = pActorManager->RequireActor<NFCMysqlComponent>(this, &NFCAsyMysqlModule::RequestAsyEnd);
+		int nActorID = m_pActorModule->RequireActor<NFCMysqlComponent>(this, &NFCAsyMysqlModule::RequestAsyEnd);
         if (nActorID > 0)
         {
             mActorList.AddElement(i, NF_SHARE_PTR<int> (NF_NEW int(nActorID)));
@@ -426,15 +436,18 @@ bool NFCAsyMysqlModule::StartActorPool(const int nCount)
 bool NFCAsyMysqlModule::CloseActorPool()
 {
     int nActor = 0;
-    NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-    if (NULL == pActorManager)
-    {
-        return false;
-    }
+	if (NULL == m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (NULL == m_pActorModule)
+		{
+			return false;
+		}
+	}
 
     for (NF_SHARE_PTR<int> pData = mActorList.First(nActor); pData != NULL; pData = mActorList.Next(nActor))
     {
-        pActorManager->ReleaseActor(nActor);
+		m_pActorModule->ReleaseActor(nActor);
     }
 
     mActorList.ClearAll();
@@ -443,11 +456,14 @@ bool NFCAsyMysqlModule::CloseActorPool()
 
 int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
 {
-    NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-    if (NULL == pActorManager)
-    {
-        return -1;
-    }
+	if (NULL == m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (NULL == m_pActorModule)
+		{
+			return false;
+		}
+	}
 
     int nAcotrID = GetActor();
     if (nAcotrID <= 0)
@@ -468,7 +484,7 @@ int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
         return -4;
     }
 
-    if (!pActorManager->SendMsgToActor(nAcotrID, pParam->self, nEvetID, arg))
+    if (!m_pActorModule->SendMsgToActor(nAcotrID, pParam->self, nEvetID, arg))
     {
         mReqList.RemoveElement(pParam->nReqID);
         return -5;
@@ -529,11 +545,14 @@ int NFCAsyMysqlModule::GetActor()
 
 bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime /*= 10*/, const int nRconneCount /*= -1*/)
 {
-    NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-    if (NULL == pActorManager)
-    {
-        return false;
-    }
+	if (NULL == m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (NULL == m_pActorModule)
+		{
+			return false;
+		}
+	}
 
     NFMsg::PackMysqlServerInfo xMsg;
 
@@ -556,7 +575,7 @@ bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& s
     for (int* pData = mActorList.FirstNude(); pData != NULL ; pData = mActorList.NextNude())
     {
         int nAcotrID = *pData;
-        pActorManager->SendMsgToActor(nAcotrID, NFGUID(), nEvetID, arg);
+		m_pActorModule->SendMsgToActor(nAcotrID, NFGUID(), nEvetID, arg);
     }
 
     return true;
@@ -565,18 +584,21 @@ bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& s
 
 bool NFCAsyMysqlModule::KeepAliveMysqlServer()
 {
-    NFIActorManager* pActorManager = pPluginManager->GetActorManager();
-    if (NULL == pActorManager)
-    {
-        return false;
-    }
+	if (NULL == m_pActorModule)
+	{
+		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
+		if (NULL == m_pActorModule)
+		{
+			return false;
+		}
+	}
 
     std::string arg;
     const int nEvetID = ACOTERMYSQLEVENT_KEEPALIVESERVER;
     for (int* pData = mActorList.FirstNude(); pData != NULL ; pData = mActorList.NextNude())
     {
         int nAcotrID = *pData;
-        pActorManager->SendMsgToActor(nAcotrID, NFGUID(), nEvetID, arg);
+		m_pActorModule->SendMsgToActor(nAcotrID, NFGUID(), nEvetID, arg);
     }
 
     return true;

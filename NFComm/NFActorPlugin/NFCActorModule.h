@@ -37,9 +37,10 @@ public:
 
 	virtual bool HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 
+	virtual bool ReleaseActor(const int nActorIndex);
+
 protected:
     virtual int RequireActor();
-    virtual bool ReleaseActor(const int nActorIndex);
 	virtual NF_SHARE_PTR<NFIActor> GetActor(const int nActorIndex);
 
     virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent);

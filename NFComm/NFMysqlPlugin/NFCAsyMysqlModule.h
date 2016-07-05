@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIAsyMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
+#include "NFComm/NFPluginModule/NFIActorModule.h"
 
 struct SMysqlParam
 {
@@ -144,6 +145,7 @@ private:
     int mnSuitIndex;
     NFINT64 mnLastCheckTime;
 
+	NFIActorModule* m_pActorModule = nullptr;
 };
 
 #endif

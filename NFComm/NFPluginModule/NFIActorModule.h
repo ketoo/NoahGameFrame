@@ -10,6 +10,7 @@
 #define NFI_ACTOR_MANAGER_H
 
 #include "NFILogicModule.h"
+#include "Theron/Theron.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
 ///////////////////////////////////////////////////
@@ -76,10 +77,10 @@ public:
 
     virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg) = 0;
 	virtual bool HandlerEx(const NFIActorMessage& message, const Theron::Address from) = 0;
+	virtual bool ReleaseActor(const int nActorIndex) = 0;
 
 protected:
     virtual int RequireActor() = 0;
-	virtual bool ReleaseActor(const int nActorIndex) = 0;
 
     virtual bool AddComponent(const int nActorIndex, NF_SHARE_PTR<NFIComponent> pComponent) = 0;
     virtual bool AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end) = 0;
