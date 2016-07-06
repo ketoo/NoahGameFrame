@@ -206,10 +206,17 @@ int main()
 {
 	std::vector<std::string> fileList;
 	std::vector<std::string> errorFileList;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	printf("NFAutoCopyDll is Running in Windows...\n");
+#else
+	printf("NFAutoCopyDll is Running in Linux...\n");
+#endif
 #ifdef NF_DEBUG_MODE
 	fileList = GetFileListInFolder("../../Debug", 10);
+	printf("Debug Mode, And fileList size == %d\n", fileList.size());
 #else
 	fileList = GetFileListInFolder("../../Release", 10);
+	printf("Release Mode, And fileList size == %d\n", fileList.size());
 #endif
 
 	for (auto fileName : fileList)
