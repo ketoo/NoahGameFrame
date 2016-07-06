@@ -406,15 +406,6 @@ bool NFCAsyMysqlModule::Keys(const NFGUID& self, const std::string& strRecordNam
 
 bool NFCAsyMysqlModule::StartActorPool(const int nCount)
 {
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     for (int i = 0; i < nCount; i++)
     {
 		int nActorID = m_pActorModule->RequireActor<NFCMysqlComponent>(this, &NFCAsyMysqlModule::RequestAsyEnd);
@@ -430,15 +421,6 @@ bool NFCAsyMysqlModule::StartActorPool(const int nCount)
 bool NFCAsyMysqlModule::CloseActorPool()
 {
     int nActor = 0;
-	if (NULL == m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (NULL == m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     for (NF_SHARE_PTR<int> pData = mActorList.First(nActor); pData != NULL; pData = mActorList.Next(nActor))
     {
 		m_pActorModule->ReleaseActor(nActor);
@@ -450,15 +432,6 @@ bool NFCAsyMysqlModule::CloseActorPool()
 
 int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
 {
-	if (NULL == m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (NULL == m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     int nAcotrID = GetActor();
     if (nAcotrID <= 0)
     {
@@ -569,15 +542,6 @@ bool NFCAsyMysqlModule::AddMysqlServer(const int nServerID, const std::string& s
 
 bool NFCAsyMysqlModule::KeepAliveMysqlServer()
 {
-	if (NULL == m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (NULL == m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     std::string arg;
     const int nEvetID = ACOTERMYSQLEVENT_KEEPALIVESERVER;
     for (int* pData = mActorList.FirstNude(); pData != NULL ; pData = mActorList.NextNude())

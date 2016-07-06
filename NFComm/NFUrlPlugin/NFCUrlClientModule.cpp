@@ -240,15 +240,6 @@ int NFCUrlClientModule::HttpReq(const std::string& strUrl, const std::string& st
 
 bool NFCUrlClientModule::StartActorPool(const int nCount)
 {
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     for (int i = 0; i < nCount; i++)
     {
         int nActorID = m_pActorModule->RequireActor<NFCURLComponent>(this, &NFCUrlClientModule::HttpRequestAsyEnd);
@@ -264,15 +255,6 @@ bool NFCUrlClientModule::StartActorPool(const int nCount)
 bool NFCUrlClientModule::CloseActorPool()
 {
     int nActor = 0;
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
-
     for (NF_SHARE_PTR<int> pData = mActorList.First(nActor); pData != NULL; pData = mActorList.Next(nActor))
     {
 		m_pActorModule->ReleaseActor(nActor);
@@ -328,15 +310,6 @@ int NFCUrlClientModule::HttpRequestAs(const NFGUID& self, const std::string& str
     pUrlParam->nReqID = nCurReqID++;
     pUrlParam->mFunRsp = RspFucn;
     pUrlParam->mstrUseData = strUseData;
-
-	if (!m_pActorModule)
-	{
-		m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
-		if (!m_pActorModule)
-		{
-			return false;
-		}
-	}
 
     int nAcotrID = GetActor();
     if (nAcotrID <= 0)

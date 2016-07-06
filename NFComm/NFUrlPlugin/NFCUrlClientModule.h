@@ -144,7 +144,7 @@ protected:
     int mnSuitIndex;
     bool mbInitCurl;
 
-	NFIActorModule* m_pActorModule = NULL;
+	NFIActorModule* m_pActorModule;
 };
 
 #endif
