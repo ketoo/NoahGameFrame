@@ -142,31 +142,35 @@ std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth)
 
 	_findclose(Handle);
 #else
-	DIR *pDir;
-	struct dirent *ent;
-	char childpath[512];
+	DIR *dp;
+	struct dirent *entry;
+	struct stat statbuf;
 	char absolutepath[512];
-	pDir = opendir(folderPath.c_str());
-	memset(childpath, 0, sizeof(childpath));
-	while ((ent = readdir(pDir)) != NULL)
-	{
-		if (ent->d_type & DT_DIR)
-		{
-			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+
+	if ((dp = opendir(folderPath.c_str())) == NULL) {
+		fprintf(stderr, "Can`t open directory %s\n", folderPath.c_str());
+		return result;
+	}
+
+	while ((entry = readdir(dp)) != NULL) {
+		std::string strEntry = folderPath + entry->d_name;
+		lstat(strEntry.c_str(), &statbuf);
+		if (S_ISDIR(statbuf.st_mode)) {
+			if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
 			{
 				continue;
 			}
-			std::string childpath = folderPath + "/" + ent->d_name;
+			std::string childpath = folderPath + "/" + entry->d_name;
 			auto newResult = GetFileListInFolder(childpath, depth);
 			result.insert(result.begin(), newResult.begin(), newResult.end());
 		}
 		else
 		{
-			sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+			sprintf(absolutepath, "%s/%s", folderPath.c_str(), entry->d_name);
 			result.push_back(absolutepath);
 		}
 	}
-
+	closedir(dp);
 	sort(result.begin(), result.end());//≈≈–Ú
 #endif
 	return result;
