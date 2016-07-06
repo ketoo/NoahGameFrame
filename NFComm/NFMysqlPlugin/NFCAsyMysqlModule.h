@@ -145,7 +145,7 @@ private:
     int mnSuitIndex;
     NFINT64 mnLastCheckTime;
 
-	NFIActorModule* m_pActorModule = NULL;
+	NFIActorModule* m_pActorModule;
 };
 
 #endif
