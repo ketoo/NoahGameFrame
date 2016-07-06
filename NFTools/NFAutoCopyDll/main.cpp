@@ -212,10 +212,10 @@ int main()
 	printf("NFAutoCopyDll is Running in Linux...\n");
 #endif
 #ifdef NF_DEBUG_MODE
-	fileList = GetFileListInFolder("../../Debug", 10);
+	fileList = GetFileListInFolder("../../Debug/", 10);
 	printf("Debug Mode, And fileList size == %d\n", fileList.size());
 #else
-	fileList = GetFileListInFolder("../../Release", 10);
+	fileList = GetFileListInFolder("../../Release/", 10);
 	printf("Release Mode, And fileList size == %d\n", fileList.size());
 #endif
 
