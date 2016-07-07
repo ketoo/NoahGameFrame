@@ -119,12 +119,12 @@ public:
     virtual bool Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData);
     virtual bool Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData);
 
-    virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
 
     virtual bool AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1);
 
 protected:
+	virtual bool StartActorPool(const int nCount);
     int ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam);
     int RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData);
 

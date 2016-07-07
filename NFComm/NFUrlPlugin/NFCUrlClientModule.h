@@ -118,7 +118,6 @@ public:
     virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn,  const std::string& strUseData);
     virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string& strUseData);
 
-    virtual bool StartActorPool(const int nCount);
     virtual bool CloseActorPool();
 
 public:
@@ -127,6 +126,7 @@ public:
     static bool UnPackParam(const std::string& strData, SURLParam& xParam);
 
 protected:
+	virtual bool StartActorPool(const int nCount);
     int GetActor();
     int HttpRequestAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
 

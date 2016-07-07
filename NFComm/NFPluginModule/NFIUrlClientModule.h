@@ -41,13 +41,14 @@ public:
         return HttpRequestPostAs(self, strUrl, mxGetParams, mxPostParams, mxCookies, fTimeOutSec, RspCB,  strUseData);
     }
 
-    virtual bool StartActorPool(const int nCount) = 0;
     virtual bool CloseActorPool() = 0;
 
 private:
     virtual int HttpRequestAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::string& strBodyData, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string& strUseData) = 0;
     virtual int HttpRequestPostAs(const NFGUID& self, const std::string& strUrl, const std::map<std::string, std::string>& mxGetParams, const std::map<std::string, std::string>& mxPostParams, const std::map<std::string, std::string>& mxCookies, const float fTimeOutSec, const HTTP_RSP_FUNCTOR& RspFucn, const std::string& strUseData) = 0;
 
+protected:
+	virtual bool StartActorPool(const int nCount) = 0;
 };
 
 #endif

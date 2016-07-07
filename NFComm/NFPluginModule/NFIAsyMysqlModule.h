@@ -69,11 +69,11 @@ public:
         return Keys(self, strRecordName, strKey, mFunReturnVecValueRsp, strUseData);
     }
 
-    virtual bool StartActorPool(const int nCount) = 0;
     virtual bool CloseActorPool() = 0;
     virtual bool AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime = 10, const int nRconneCount = -1) = 0;
 
 protected:
+	virtual bool StartActorPool(const int nCount) = 0;
     virtual bool Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData) = 0;
     virtual bool Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData) = 0;
 
