@@ -65,6 +65,7 @@ bool NFCUrlClientModule::AfterInit()
         curl_global_init(CURL_GLOBAL_ALL);
     }
 
+	StartActorPool(10);
     return true;
 }
 

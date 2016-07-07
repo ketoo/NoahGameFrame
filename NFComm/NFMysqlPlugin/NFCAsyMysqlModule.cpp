@@ -253,6 +253,8 @@ bool NFCAsyMysqlModule::AfterInit()
 {
 	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
+	StartActorPool(10);
+
     return true;
 }
 

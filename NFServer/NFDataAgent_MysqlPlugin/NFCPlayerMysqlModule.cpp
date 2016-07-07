@@ -61,11 +61,6 @@ bool NFCPlayerMysqlModule::AfterInit()
 
     bool bConnect = m_pClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
-    if (!m_pAsyClusterSQLModule->StartActorPool(10))
-    {
-        return false;
-    }
-
     m_pAsyClusterSQLModule->AddMysqlServer(nID, "", mstrSQLIP, mnSQLPort, mstrSQLName, mstrSQLUser, mstrSQLPWD);
 
     RegisterAutoSave(NFrame::Player::ThisName());

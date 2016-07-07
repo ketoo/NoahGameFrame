@@ -15,11 +15,6 @@ bool HelloWorld7::AfterInit()
 
     m_pUrlClientModule = pPluginManager->FindModule<NFIUrlClientModule>();
 
-    if (!m_pUrlClientModule->StartActorPool(10))
-    {
-        return false;
-    }
-
     std::string strUrl;
     std::map<std::string, std::string> mxGetParams;
     std::map<std::string, std::string> mxPostParams;
