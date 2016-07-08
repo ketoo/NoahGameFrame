@@ -15,7 +15,7 @@
 #include "NFComm/RapidXML/rapidxml_print.hpp"
 #include "NFComm/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -44,7 +44,7 @@ private:
     //Level->EffectData
     NFMapEx<int, std::string> mhtCoefficienData[(int)NFJobType::NJT_MAX];
 
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
 };
 

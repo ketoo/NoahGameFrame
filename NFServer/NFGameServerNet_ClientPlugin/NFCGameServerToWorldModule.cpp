@@ -38,7 +38,7 @@ bool NFCGameServerToWorldModule::Execute()
 void NFCGameServerToWorldModule::Register(NFINet* pNet)
 {
     //成功就注册
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
@@ -103,7 +103,7 @@ void NFCGameServerToWorldModule::RefreshWorldInfo()
 bool NFCGameServerToWorldModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
@@ -114,7 +114,7 @@ bool NFCGameServerToWorldModule::AfterInit()
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
     // 连接world server
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();

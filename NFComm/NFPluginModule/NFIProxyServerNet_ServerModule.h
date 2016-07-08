@@ -10,11 +10,11 @@
 #define NFI_PROXYNET_SERVERMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 
 class NFIProxyServerNet_ServerModule
-    :  public NFILogicModule
+    :  public NFIModule
 {
 
 public:

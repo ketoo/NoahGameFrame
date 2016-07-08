@@ -10,7 +10,7 @@
 #define NFI_CLUSTER_CLIENT_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 #include "NFComm/NFCore/NFCConsistentHash.hpp"
 
@@ -45,7 +45,7 @@ struct ConnectData
 	NF_SHARE_PTR<NFINetModule> mxNetModule;
 };
 
-class NFINetClientModule : public NFILogicModule
+class NFINetClientModule : public NFIModule
 {
 protected:
 	NFINetClientModule()

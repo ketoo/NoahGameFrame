@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
@@ -101,7 +101,7 @@ private:
     NFMapEx<int, ServerData> mProxyMap;
 
     NFIElementModule* m_pElementModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

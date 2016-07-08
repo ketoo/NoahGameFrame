@@ -9,10 +9,10 @@
 #ifndef NFI_UUID_MODULE_H
 #define NFI_UUID_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIUUIDModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual NFGUID CreateGUID() = 0;

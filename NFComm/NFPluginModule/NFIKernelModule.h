@@ -12,12 +12,12 @@
 #include <iostream>
 #include <string>
 #include <functional>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 
 class NFIKernelModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:
