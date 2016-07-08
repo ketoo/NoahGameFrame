@@ -10,10 +10,10 @@
 #define NFI_MASTER_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIMasterModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

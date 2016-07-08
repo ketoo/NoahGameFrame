@@ -10,14 +10,14 @@
 #define NFI_ELEMENTINFO_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
 class NFIElementModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool Load() = 0;

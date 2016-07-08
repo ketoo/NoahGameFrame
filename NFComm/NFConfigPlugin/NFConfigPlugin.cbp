@@ -90,8 +90,8 @@
 		</Build>
 		<Unit filename="NFCElementModule.cpp" />
 		<Unit filename="NFCElementModule.h" />
-		<Unit filename="NFCLogicClassModule.cpp" />
-		<Unit filename="NFCLogicClassModule.h" />
+		<Unit filename="NFCClassModule.cpp" />
+		<Unit filename="NFCClassModule.h" />
 		<Unit filename="NFConfigPlugin.cpp" />
 		<Unit filename="NFConfigPlugin.h" />
 		<Unit filename="dllmain.cpp" />

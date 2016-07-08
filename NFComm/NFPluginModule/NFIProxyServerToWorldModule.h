@@ -10,11 +10,11 @@
 #define NFI_PROXYNET_CLIENTMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetClientModule.hpp"
 
 class NFIProxyServerToWorldModule
-    : public  NFILogicModule
+    : public  NFIModule
 {
 public:
 	virtual NFINetClientModule* GetClusterModule() = 0;
