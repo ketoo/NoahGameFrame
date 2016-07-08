@@ -142,31 +142,35 @@ std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth)
 
 	_findclose(Handle);
 #else
-	DIR *pDir;
-	struct dirent *ent;
-	char childpath[512];
+	DIR *dp;
+	struct dirent *entry;
+	struct stat statbuf;
 	char absolutepath[512];
-	pDir = opendir(folderPath.c_str());
-	memset(childpath, 0, sizeof(childpath));
-	while ((ent = readdir(pDir)) != NULL)
-	{
-		if (ent->d_type & DT_DIR)
-		{
-			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+
+	if ((dp = opendir(folderPath.c_str())) == NULL) {
+		fprintf(stderr, "Can`t open directory %s\n", folderPath.c_str());
+		return result;
+	}
+
+	while ((entry = readdir(dp)) != NULL) {
+		std::string strEntry = folderPath + entry->d_name;
+		lstat(strEntry.c_str(), &statbuf);
+		if (S_ISDIR(statbuf.st_mode)) {
+			if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
 			{
 				continue;
 			}
-			std::string childpath = folderPath + "/" + ent->d_name;
+			std::string childpath = folderPath + "/" + entry->d_name;
 			auto newResult = GetFileListInFolder(childpath, depth);
 			result.insert(result.begin(), newResult.begin(), newResult.end());
 		}
 		else
 		{
-			sprintf(absolutepath, "%s/%s", folderPath.c_str(), ent->d_name);
+			sprintf(absolutepath, "%s/%s", folderPath.c_str(), entry->d_name);
 			result.push_back(absolutepath);
 		}
 	}
-
+	closedir(dp);
 	sort(result.begin(), result.end());//≈≈–Ú
 #endif
 	return result;
@@ -201,11 +205,20 @@ void printResult(int result, std::string& strName)
 int main()
 {
 	std::vector<std::string> fileList;
-#ifdef NF_DEBUG_MODE
-	fileList = GetFileListInFolder("../../Debug", 10);
+	std::vector<std::string> errorFileList;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	printf("NFAutoCopyDll is Running in Windows...\n");
 #else
-	fileList = GetFileListInFolder("../../Release", 10);
+	printf("NFAutoCopyDll is Running in Linux...\n");
 #endif
+#ifdef NF_DEBUG_MODE
+	fileList = GetFileListInFolder("../../Debug/", 10);
+	printf("Debug Mode, And fileList size == %d\n", fileList.size());
+#else
+	fileList = GetFileListInFolder("../../Release/", 10);
+	printf("Release Mode, And fileList size == %d\n", fileList.size());
+#endif
+
 	for (auto fileName : fileList)
 	{
 		if (fileName.find("Plugin.xml") != std::string::npos)
@@ -234,6 +247,7 @@ int main()
 					int result = 0;
 					if (name == "NFPluginLoader")
 					{
+						int result = 0;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #ifdef NF_DEBUG_MODE
@@ -243,14 +257,32 @@ int main()
 						auto strDes = des + "_d.exe";
 						auto strSrcPDB = src + "_d.pdb";
 						auto strDesPDB = des + "_d.pdb";
-						printResult(CopyFile(strSrc, strDes), strSrc);
-						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
+
+						result = CopyFile(strSrcPDB, strDesPDB);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrcPDB);
+						}
+						printResult(result, strSrcPDB);
 #else
 						std::string src = configPath + "Comm/Release/" + name;
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + ".exe";
 						auto strDes = des + ".exe";
-						printResult(CopyFile(strSrc, strDes), strSrc);
+						int result = 0;
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
 #endif
 
 #else
@@ -258,7 +290,12 @@ int main()
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + "_d";
 						auto strDes = des + "_d";
-						printResult(CopyFile(strSrc, strDes), strSrc);
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
 #endif
 
 					}
@@ -273,14 +310,30 @@ int main()
 						auto strDes = des + "_d.dll";
 						auto strSrcPDB = src + "_d.pdb";
 						auto strDesPDB = des + "_d.pdb";
-						printResult(CopyFile(strSrc, strDes), strSrc);
-						printResult(CopyFile(strSrcPDB, strDesPDB), strSrcPDB);
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
+
+						result = CopyFile(strSrcPDB, strDesPDB);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrcPDB);
+						}
+						printResult(result, strSrcPDB);
 #else
 						std::string src = configPath + "Comm/Release/" + name;
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + ".dll";
 						auto strDes = des + ".dll";
-						printResult(CopyFile(strSrc, strDes), strSrc);
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
 #endif
 
 #else
@@ -288,14 +341,32 @@ int main()
 						std::string des = fileName.substr(0, fileName.find_last_of("/")) + "/" + name;
 						auto strSrc = src + "_d.so";
 						auto strDes = des + "_d.so";
-						printResult(CopyFile(strSrc, strDes), strSrc);
+						result = CopyFile(strSrc, strDes);
+						if (result != 1)
+						{
+							errorFileList.push_back(strSrc);
+						}
+						printResult(result, strSrc);
 #endif
 					}
 				}
 			}
 		}
 	}
+	if (errorFileList.size() <= 0)
+	{
+		printf("File Copy Done with NO ERROR!\n");
+	}
+	else
+	{
+		printf("File Copy Done with %d errors as follow:\n", (int)errorFileList.size());
+		for (auto errFile : errorFileList)
+		{
+			printf("\t%s\n", errFile.c_str());
+		}
+	}
 #if NF_PLATFORM == NF_PLATFORM_WIN
+	printf("Press any Key to Exit!");
 	getch();
 #else
 

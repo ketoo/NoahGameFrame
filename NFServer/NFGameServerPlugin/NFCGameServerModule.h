@@ -12,7 +12,7 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 class NFCGameServerModule
@@ -38,7 +38,7 @@ protected:
 
 protected:
     NFIUUIDModule* m_pUUIDModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

@@ -9,10 +9,10 @@
 #ifndef NFI_LOG_MODULE_H
 #define NFI_LOG_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFILogModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

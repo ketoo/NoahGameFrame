@@ -1,5 +1,9 @@
 echo Building dependencies...
 
+mkdir lib/
+mkdir lib/Debug/
+mkdir lib/Release/
+
 # extract mysql libs
 echo Extract mysql libs
 unzip -o mysql_libs.zip -d ./
@@ -37,9 +41,10 @@ cd libevent
 chmod -R 755 *
 ./configure CPPFLAGS=-fPIC --disable-shared
 make
-cp -r -f .libs/*.a ../lib/Debug/
-cp -r -f .libs/*.a ../lib/
-cp -r -f .libs/*.a ../lib/Release/
+
+cp -R -f .libs/*.a ../lib/Debug/
+cp -R -f .libs/*.a ../lib/
+cp -R -f .libs/*.a ../lib/Release/
 cd ../
 
 # extract curl libs

@@ -9,11 +9,14 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
+
+#define FIND_MODULE(classBaseName, className)  \
+	assert((TIsDerived<classBaseName, NFIModule>::Result));
 
 class NFIPlugin;
 
-class NFIPluginManager : public NFILogicModule
+class NFIPluginManager : public NFIModule
 {
 public:
     NFIPluginManager()
@@ -24,37 +27,34 @@ public:
 	template <typename T>
 	T* FindModule()
 	{
-		NFILogicModule* pLogicModule = FindModule(typeid(T).name());
+		NFIModule* pLogicModule = FindModule(typeid(T).name());
 		if (pLogicModule)
 		{
-			if (!TIsDerived<T, NFILogicModule>::Result)
+			if (!TIsDerived<T, NFIModule>::Result)
 			{
 				return NULL;
 			}
 
 			T* pT = dynamic_cast<T*>(pLogicModule);
-			if (NULL == pT)
-			{
-				NFASSERT(0, (typeid(T).name() + std::string(" Module Is Invalid ") ), __FILE__, __FUNCTION__);
-			}
+			assert(NULL != pT);
 
 			return pT;
 		}
-
-		NFASSERT(0, (typeid(T).name() + std::string(" Module Not Find ") ), __FILE__, __FUNCTION__);
+		assert(NULL);
 		return NULL;
 	}
+
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName) = 0;
 
-    virtual void AddModule(const std::string& strModuleName, NFILogicModule* pModule) = 0;
+    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
+    virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
 
     virtual int AppID() = 0;
     virtual NFINT64 GetInitTime() const = 0;

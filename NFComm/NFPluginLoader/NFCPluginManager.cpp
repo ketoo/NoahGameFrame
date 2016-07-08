@@ -14,13 +14,14 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
-
+#endif
 
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "Theron_d.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "libtherond.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -30,7 +31,7 @@
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "Theron.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "libtheron.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
@@ -170,7 +171,7 @@ bool NFCPluginManager::Execute()
     return bRet;
 }
 
-void NFCPluginManager::AddModule(const std::string& strModuleName, NFILogicModule* pModule)
+void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
 {
     if (!FindModule(strModuleName))
     {
@@ -188,13 +189,21 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
 }
 
 
-NFILogicModule* NFCPluginManager::FindModule(const std::string& strModuleName)
+NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
-    ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
-    if (it != mModuleInstanceMap.end())
-    {
-        return it->second;
-    }
+	std::string strSubModuleName = strModuleName;
+	std::size_t position = strSubModuleName.find(" ");
+	if (string::npos != position)
+	{
+		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
+	}
+
+	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strSubModuleName);
+	if (it != mModuleInstanceMap.end())
+	{
+		return it->second;
+	}
+    
     return NULL;
 }
 
@@ -373,7 +382,7 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
 
 bool NFCPluginManager::StartReLoadState()
 {
-    NFILogicModule::StartReLoadState();
+    NFIModule::StartReLoadState();
 
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
     for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
@@ -392,7 +401,7 @@ bool NFCPluginManager::EndReLoadState()
         itBeforeInstance->second->EndReLoadState();
     }
 
-    NFILogicModule::EndReLoadState();
+    NFIModule::EndReLoadState();
 
     return true;
 }
