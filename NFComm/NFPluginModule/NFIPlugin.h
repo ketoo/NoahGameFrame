@@ -12,7 +12,6 @@
 #include <iostream>
 #include <assert.h>
 #include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFILogicModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -34,14 +33,14 @@
 
 #define GET_CLASS_NAME(className) (#className);
 
-
+/*
 #define REGISTER_COMPONENT(pManager, className)  NFIComponent* pRegisterComponent##className= new className(pManager); \
     pRegisterComponent##className->strName = (#className); \
     pManager->AddComponent( (#className), pRegisterComponent##className );
 
 #define UNREGISTER_COMPONENT(pManager, className) NFIComponent* pRegisterComponent##className =  \
         dynamic_cast<NFIComponent*>( pManager->FindComponent( (#className) ) ); pManager->RemoveComponent( (#className) ); delete pRegisterComponent##className;
-
+*/
 
 class NFIPluginManager;
 
