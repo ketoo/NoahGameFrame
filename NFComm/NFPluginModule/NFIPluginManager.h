@@ -11,6 +11,9 @@
 
 #include "NFIModule.h"
 
+#define FIND_MODULE(classBaseName, className)  \
+	assert((TIsDerived<classBaseName, NFIModule>::Result));
+
 class NFIPlugin;
 
 class NFIPluginManager : public NFIModule
@@ -37,9 +40,10 @@ public:
 
 			return pT;
 		}
-
+		assert(NULL);
 		return NULL;
 	}
+
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;
