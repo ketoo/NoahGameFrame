@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLoginNet_ServerModule.h
+//    @FileName			:    NFCLoginNet_ServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLoginNet_ServerModule
@@ -19,7 +19,6 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 

@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCPluginManager.cpp
+//    @FileName			:    NFCPluginManager.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCPluginManager
@@ -14,34 +14,34 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
-
+#endif
 
 #ifdef NF_DEBUG_MODE
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "Theron_d.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "Theron_d.a" )
+#pragma comment( lib, "libtherond.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "Theron_d.a" )
+#pragma comment( lib, "libtherond.a" )
 #endif
 
 #else
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-#pragma comment( lib, "Theron.lib" )
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "Theron.a" )
+#pragma comment( lib, "libtheron.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "Theron.a" )
+#pragma comment( lib, "libtheron.a" )
 #endif
 
 #endif
 
-NFCPluginManager::NFCPluginManager(NFIActorManager* pManager) : NFIPluginManager(pManager)
+NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
-   m_pActorManager = pManager;
    mnAppID = 0;
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
@@ -167,8 +167,6 @@ bool NFCPluginManager::Execute()
         bool tembRet = it->second->Execute();
         bRet = bRet && tembRet;
     }
-
-    ExecuteEvent();
 
     return bRet;
 }
@@ -398,60 +396,4 @@ bool NFCPluginManager::EndReLoadState()
     NFILogicModule::EndReLoadState();
 
     return true;
-}
-
-void NFCPluginManager::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
-{
-    //添加到队列，每帧执行
-    mxQueue.Push(message);
-}
-
-bool NFCPluginManager::ExecuteEvent()
-{
-    NFIActorMessage xMsg;
-    bool bRet = false;
-    bRet = mxQueue.Pop(xMsg);
-    while (bRet)
-    {
-        if (xMsg.eType == NFIActorMessage::EACTOR_RETURN_EVENT_MSG)
-        {
-            xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nSubMsgID, xMsg.data);
-            //Actor can be reused in ActorPool mode, so we don't release it.
-            //m_pActorManager->ReleaseActor(xMsg.nFormActor);
-        }
-
-        bRet = mxQueue.Pop(xMsg);
-    }
-
-
-
-    return true;
-}
-
-void NFCPluginManager::AddComponent(const std::string& strComponentName, NFIComponent* pComponent)
-{
-    if (!FindComponent(strComponentName))
-    {
-        mComponentInstanceMap.insert(ComponentInstanceMap::value_type(strComponentName, pComponent));
-    }
-
-}
-
-void NFCPluginManager::RemoveComponent(const std::string& strComponentName)
-{
-    ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
-    if (it != mComponentInstanceMap.end())
-    {
-        mComponentInstanceMap.erase(it);
-    }
-}
-
-NFIComponent* NFCPluginManager::FindComponent(const std::string& strComponentName)
-{
-    ComponentInstanceMap::iterator it = mComponentInstanceMap.find(strComponentName);
-    if (it != mComponentInstanceMap.end())
-    {
-        return it->second;
-    }
-    return NULL;
 }
