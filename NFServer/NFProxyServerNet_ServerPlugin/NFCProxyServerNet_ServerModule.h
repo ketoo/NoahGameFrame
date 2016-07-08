@@ -75,7 +75,7 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIUUIDModule* m_pUUIDModule;
 	NFINetModule* m_pNetModule;
 
