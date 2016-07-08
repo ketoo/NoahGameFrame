@@ -102,16 +102,20 @@
 			</Target>
 		</Build>
 		<Unit filename="NFCBigMapRedisModule.cpp" />
-		<Unit filename="NFCGuildRedisModule.cpp" />
-		<Unit filename="NFCPlayerRedisModule.cpp" />
-		<Unit filename="NFCRankRedisModule.cpp" />
-		<Unit filename="NFCMailRedisModule.cpp" />
-		<Unit filename="NFDataAgent_NosqlPlugin.cpp" />
 		<Unit filename="NFCBigMapRedisModule.h" />
+		<Unit filename="NFCCommonRedisModule.cpp" />
+		<Unit filename="NFCCommonRedisModule.h" />
+		<Unit filename="NFCGuildRedisModule.cpp" />
 		<Unit filename="NFCGuildRedisModule.h" />
-		<Unit filename="NFCPlayerRedisModule.h" />
-		<Unit filename="NFCRankRedisModule.h" />
+		<Unit filename="NFCMailRedisModule.cpp" />
 		<Unit filename="NFCMailRedisModule.h" />
+		<Unit filename="NFCPVPMatchRedisModule.cpp" />
+		<Unit filename="NFCPVPMatchRedisModule.h" />
+		<Unit filename="NFCPlayerRedisModule.cpp" />
+		<Unit filename="NFCPlayerRedisModule.h" />
+		<Unit filename="NFCRankRedisModule.cpp" />
+		<Unit filename="NFCRankRedisModule.h" />
+		<Unit filename="NFDataAgent_NosqlPlugin.cpp" />
 		<Unit filename="NFDataAgent_NosqlPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>

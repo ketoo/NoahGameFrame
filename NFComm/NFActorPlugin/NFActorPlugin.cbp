@@ -24,6 +24,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="../../Dependencies/lib/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
@@ -63,6 +64,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="../../Dependencies/lib/libtheron.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
@@ -84,10 +86,12 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCActorModule.cpp" />
-		<Unit filename="NFCActorModule.h" />
 		<Unit filename="NFActorPlugin.cpp" />
 		<Unit filename="NFActorPlugin.h" />
+		<Unit filename="NFCActor.cpp" />
+		<Unit filename="NFCActor.h" />
+		<Unit filename="NFCActorModule.cpp" />
+		<Unit filename="NFCActorModule.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />

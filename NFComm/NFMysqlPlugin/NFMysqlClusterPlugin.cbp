@@ -98,12 +98,14 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCMysqlModule.cpp" />
-		<Unit filename="NFCMysqlModule.h" />
+		<Unit filename="NFCAsyMysqlModule.cpp" />
+		<Unit filename="NFCAsyMysqlModule.h" />
 		<Unit filename="NFCMysqlDriver.cpp" />
 		<Unit filename="NFCMysqlDriver.h" />
 		<Unit filename="NFCMysqlDriverManager.cpp" />
 		<Unit filename="NFCMysqlDriverManager.h" />
+		<Unit filename="NFCMysqlModule.cpp" />
+		<Unit filename="NFCMysqlModule.h" />
 		<Unit filename="NFMysqlClusterPlugin.cpp" />
 		<Unit filename="NFMysqlClusterPlugin.h" />
 		<Unit filename="dllmain.cpp" />
