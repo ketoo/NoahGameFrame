@@ -26,7 +26,7 @@ bool NFCPropertyConfigModule::Execute()
 
 bool NFCPropertyConfigModule::AfterInit()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
     Load();
@@ -50,7 +50,7 @@ int NFCPropertyConfigModule::CalculateBaseValue(const NFJobType nJob, const int 
 
 void NFCPropertyConfigModule::Load()
 {
-    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement(NFrame::InitProperty::ThisName());
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::InitProperty::ThisName());
     if (pLogicClass.get())
     {
         NFList<std::string>& xList = pLogicClass->GetConfigNameList();

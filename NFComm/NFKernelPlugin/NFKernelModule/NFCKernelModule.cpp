@@ -49,7 +49,7 @@ bool NFCKernelModule::Init()
     mtDeleteSelfList.clear();
 
     m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
@@ -154,9 +154,9 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         return pObject;
     }
 
-    NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
-    NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
-    NF_SHARE_PTR<NFIComponentManager> pStaticClasComponentManager = m_pLogicClassModule->GetClassComponentManager(strClassName);
+    NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
+    NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
+    NF_SHARE_PTR<NFIComponentManager> pStaticClasComponentManager = m_pClassModule->GetClassComponentManager(strClassName);
     if (pStaticClassPropertyManager && pStaticClassRecordManager && pStaticClasComponentManager)
     {
 
@@ -1227,12 +1227,12 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 
 bool NFCKernelModule::AfterInit()
 {
-    NF_SHARE_PTR<NFILogicClass> pClass = m_pLogicClassModule->First();
+    NF_SHARE_PTR<NFIClass> pClass = m_pClassModule->First();
     while (pClass.get())
     {
         NFIKernelModule::AddClassCallBack(pClass->GetClassName(), this, &NFCKernelModule::OnClassCommonEvent);
 
-        pClass = m_pLogicClassModule->Next();
+        pClass = m_pClassModule->Next();
     }
 
     return true;
@@ -1297,7 +1297,7 @@ bool NFCKernelModule::AddEventCallBack(const NFGUID& self, const int nEventID, c
 
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
-    return m_pLogicClassModule->AddClassCallBack(strClassName, cb);
+    return m_pClassModule->AddClassCallBack(strClassName, cb);
 }
 
 void NFCKernelModule::ProcessMemFree()
@@ -1314,7 +1314,7 @@ void NFCKernelModule::ProcessMemFree()
 
 bool NFCKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList)
 {
-    return m_pLogicClassModule->DoEvent(self, strClassName, eEvent, valueList);
+    return m_pClassModule->DoEvent(self, strClassName, eEvent, valueList);
 }
 
 bool NFCKernelModule::DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList)

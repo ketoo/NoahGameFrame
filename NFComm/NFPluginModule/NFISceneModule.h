@@ -139,7 +139,7 @@ private:
 };
 
 class NFISceneModule
-    : public NFILogicModule,
+    : public NFIModule,
   public NFMapEx<int, NFCSceneInfo>
 {
 public:

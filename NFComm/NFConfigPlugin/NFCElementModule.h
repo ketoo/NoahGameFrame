@@ -24,9 +24,9 @@
 #include "NFComm/NFCore/NFCRecordManager.h"
 #include "NFComm/NFCore/NFCComponentManager.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
-class NFCLogicClass;
+class NFCClass;
 
 class ElementConfigInfo
 {
@@ -100,11 +100,11 @@ public:
 protected:
     virtual NF_SHARE_PTR<NFIProperty> GetProperty(const std::string& strConfigName, const std::string& strPropertyName);
 
-    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass);
+    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
 
     virtual bool LegalNumber(const char* str);
 protected:
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     bool mbLoaded;
 };
 

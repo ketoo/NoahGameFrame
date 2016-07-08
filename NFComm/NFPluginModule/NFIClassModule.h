@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFILogicClassModule.h
+//    @FileName         :    NFIClassModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFILogicClassModule
+//    @Module           :    NFIClassModule
 //
 // -------------------------------------------------------------------------
 
@@ -10,16 +10,16 @@
 #define NFI_LOGICCLASS_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
-class NFILogicClass
+class NFIClass
     : public NFList<std::string>//include files
 {
 public:
-    virtual ~NFILogicClass() {}
+    virtual ~NFIClass() {}
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
 
@@ -27,8 +27,8 @@ public:
 
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
-    virtual void SetParent(NF_SHARE_PTR<NFILogicClass> pClass) = 0;
-    virtual NF_SHARE_PTR<NFILogicClass> GetParent() = 0;
+    virtual void SetParent(NF_SHARE_PTR<NFIClass> pClass) = 0;
+    virtual NF_SHARE_PTR<NFIClass> GetParent() = 0;
     virtual void SetTypeName(const char* strType) = 0;
     virtual const std::string& GetTypeName() = 0;
     virtual const std::string& GetClassName() = 0;
@@ -41,12 +41,12 @@ public:
     virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList) = 0;
 };
 
-class NFILogicClassModule
-    : public NFILogicModule,
-  public NFMapEx<std::string, NFILogicClass>
+class NFIClassModule
+    : public NFIModule,
+  public NFMapEx<std::string, NFIClass>
 {
 public:
-    virtual ~NFILogicClassModule() {}
+    virtual ~NFIClassModule() {}
     virtual bool Load() = 0;
     virtual bool Save() = 0;
     virtual bool Clear() = 0;
