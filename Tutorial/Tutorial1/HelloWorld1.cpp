@@ -2,6 +2,8 @@
 
 bool HelloWorld1::Init()
 {
+	std::cout << typeid(HelloWorld1).name() << std::endl;
+
     //³õÊ¼»¯
     std::cout << "Hello, world1, Init" << std::endl;
 

@@ -12,19 +12,19 @@
 #include <iostream>
 #include <assert.h>
 #include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #define REGISTER_MODULE(pManager, classBaseName, className)  \
-	assert((TIsDerived<classBaseName, NFILogicModule>::Result));	\
+	assert((TIsDerived<classBaseName, NFIModule>::Result));	\
 	assert((TIsDerived<className, classBaseName>::Result));	\
-	NFILogicModule* pRegisterModule##className= new className(pManager); \
+	NFIModule* pRegisterModule##className= new className(pManager); \
     pRegisterModule##className->strName = (#className); \
-    pManager->AddModule( typeid(classBaseName).name(), pRegisterModule##className );AddElement( typeid(classBaseName).name(), pRegisterModule##className );
+    pManager->AddModule( #classBaseName, pRegisterModule##className );AddElement( #classBaseName, pRegisterModule##className );
 
-#define UNREGISTER_MODULE(pManager, classBaseName, className) NFILogicModule* pUnRegisterModule##className =  \
-       dynamic_cast<NFILogicModule*>( pManager->FindModule( typeid(classBaseName).name() )); pManager->RemoveModule( typeid(classBaseName).name() ); RemoveElement( typeid(classBaseName).name() ); delete pUnRegisterModule##className;
+#define UNREGISTER_MODULE(pManager, classBaseName, className) NFIModule* pUnRegisterModule##className =  \
+       dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); pManager->RemoveModule( #classBaseName ); RemoveElement( #classBaseName ); delete pUnRegisterModule##className;
 
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
@@ -44,8 +44,8 @@
 
 class NFIPluginManager;
 
-class NFIPlugin : public NFILogicModule,
-    public NFMap<std::string, NFILogicModule>
+class NFIPlugin : public NFIModule,
+    public NFMap<std::string, NFIModule>
 {
 
 public:
@@ -58,7 +58,7 @@ public:
 
     virtual bool Init()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             bool bRet = pModule->Init();
@@ -74,7 +74,7 @@ public:
 
     virtual bool AfterInit()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             bool bRet = pModule->AfterInit();
@@ -90,7 +90,7 @@ public:
 
     virtual bool CheckConfig()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             pModule->CheckConfig();
@@ -103,7 +103,7 @@ public:
 
     virtual bool Execute()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             pModule->Execute();
@@ -116,7 +116,7 @@ public:
 
     virtual bool BeforeShut()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             pModule->BeforeShut();
@@ -128,7 +128,7 @@ public:
 
     virtual bool Shut()
     {
-        NFILogicModule* pModule = First();
+        NFIModule* pModule = First();
         while (pModule)
         {
             pModule->Shut();

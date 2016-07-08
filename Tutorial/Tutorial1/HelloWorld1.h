@@ -13,7 +13,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld1
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     HelloWorld1(NFIPluginManager* p)

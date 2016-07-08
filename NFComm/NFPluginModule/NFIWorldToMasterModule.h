@@ -10,12 +10,12 @@
 #define NFI_WORLDNET_CLIENTMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 #include "NFINetClientModule.hpp"
 
 class NFIWorldToMasterModule
-	: public  NFILogicModule
+	: public  NFIModule
 {
 };
 

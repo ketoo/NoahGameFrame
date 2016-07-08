@@ -29,7 +29,7 @@ bool NFCWorldToMasterModule::Shut()
 bool NFCWorldToMasterModule::AfterInit()
 {
     m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
@@ -40,7 +40,7 @@ bool NFCWorldToMasterModule::AfterInit()
 
 	m_pNetClientModule->AddEventCallBack(this, &NFCWorldToMasterModule::OnSocketMSEvent);
 
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
@@ -83,7 +83,7 @@ bool NFCWorldToMasterModule::Execute()
 
 void NFCWorldToMasterModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();

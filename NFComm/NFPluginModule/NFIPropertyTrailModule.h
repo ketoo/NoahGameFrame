@@ -10,10 +10,10 @@
 #define NFI_PROPERTY_TRAIL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPropertyTrailModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual void StartTrail(const NFGUID self) = 0;

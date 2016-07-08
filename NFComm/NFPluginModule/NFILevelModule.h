@@ -10,11 +10,11 @@
 #define NFI_LEVEL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 
 class NFILevelModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     //nType:增加原因

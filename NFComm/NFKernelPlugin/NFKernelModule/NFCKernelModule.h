@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 
@@ -175,7 +175,7 @@ private:
 
     NFISceneModule* m_pSceneModule;
     NFILogModule* m_pLogModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
     NFIUUIDModule* m_pUUIDModule;
 };
