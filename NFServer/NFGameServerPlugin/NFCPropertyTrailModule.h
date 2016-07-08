@@ -50,7 +50,7 @@ private:
 
     NFIKernelModule* m_pKernelModule;
     NFIElementModule* m_pElementModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
 };
 

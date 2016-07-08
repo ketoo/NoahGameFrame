@@ -44,7 +44,7 @@ private:
     //Level->EffectData
     NFMapEx<int, std::string> mhtCoefficienData[(int)NFJobType::NJT_MAX];
 
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
 };
 

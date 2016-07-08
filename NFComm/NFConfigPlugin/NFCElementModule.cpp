@@ -27,7 +27,9 @@ NFCElementModule::~NFCElementModule()
 
 bool NFCElementModule::Init()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	
+	Load();
 
     return true;
 }
@@ -45,13 +47,13 @@ bool NFCElementModule::Load()
         return false;
     }
 
-    NF_SHARE_PTR<NFIClass> pLogicClass = m_pLogicClassModule->First();
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
     while (pLogicClass.get())
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
         if (strInstancePath.empty())
         {
-            pLogicClass = m_pLogicClassModule->Next();
+            pLogicClass = m_pClassModule->Next();
             continue;
         }
         //////////////////////////////////////////////////////////////////////////
@@ -82,7 +84,7 @@ bool NFCElementModule::Load()
             delete []pData;
         }
         //////////////////////////////////////////////////////////////////////////
-        pLogicClass = m_pLogicClassModule->Next();
+        pLogicClass = m_pClassModule->Next();
     }
 
     return true;
@@ -291,7 +293,7 @@ bool NFCElementModule::LoadSceneInfo(const std::string& strFileName, const std::
     rapidxml::xml_document<>  doc;
     doc.parse<0>(fdoc.data());
 
-    NF_SHARE_PTR<NFIClass> pLogicClass = m_pLogicClassModule->GetElement(strClassName.c_str());
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(strClassName.c_str());
     if (pLogicClass.get())
     {
         //support for unlimited layer class inherits
