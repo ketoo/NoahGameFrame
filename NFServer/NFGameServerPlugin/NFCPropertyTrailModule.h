@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCPropertyTrailModule.h
+//    @FileName			:    NFCPropertyTrailModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-09-30
 //    @Module           :    NFCPropertyTrailModule
