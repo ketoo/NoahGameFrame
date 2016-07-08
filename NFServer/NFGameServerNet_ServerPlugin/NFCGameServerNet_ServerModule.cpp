@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCGameServerNet_ServerModule::Init()
@@ -19,7 +19,7 @@ bool NFCGameServerNet_ServerModule::Init()
 bool NFCGameServerNet_ServerModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
@@ -50,7 +50,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent);
 
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
 	if (xLogicClass.get())
 	{
 		NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
@@ -1296,8 +1296,8 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject(const NFGUID& self, const 
 
 	//ÆÕÍ¨³¡¾°ÈÝÆ÷£¬ÅÐ¶Ï¹ã²¥ÊôÐÔ
 	std::string strClassName = m_pKernelModule->GetPropertyString(self, "ClassName");
-	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
-	NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
+	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
+	NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
 
 	NF_SHARE_PTR<NFIRecord> pRecord(NULL);
 	NF_SHARE_PTR<NFIProperty> pProperty(NULL);

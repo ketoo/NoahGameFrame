@@ -14,7 +14,7 @@
 bool NFCGameServerModule::Init()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     m_pUUIDModule->SetIdentID(1);

@@ -10,10 +10,10 @@
 #define NFI_LOGINLOGIC_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFILoginLogicModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual int OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd) = 0;
