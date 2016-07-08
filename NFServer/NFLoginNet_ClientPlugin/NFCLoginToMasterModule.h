@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
@@ -62,7 +62,7 @@ private:
     NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
 	NFINetClientModule* m_pNetClientModule;
 };

@@ -29,7 +29,7 @@ bool NFCPropertyModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
     m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 

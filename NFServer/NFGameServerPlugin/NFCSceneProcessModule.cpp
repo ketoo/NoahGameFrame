@@ -29,7 +29,7 @@ bool NFCSceneProcessModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
@@ -40,7 +40,7 @@ bool NFCSceneProcessModule::AfterInit()
     // #ifdef NF_USE_ACTOR
     //  int nSelfActorID = pPluginManager->GetActorID();
     // #endif
-    NF_SHARE_PTR<NFILogicClass> pLogicClass =  m_pLogicClassModule->GetElement("Scene");
+    NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement("Scene");
     if (pLogicClass.get())
     {
         NFList<std::string>& list = pLogicClass->GetConfigNameList();

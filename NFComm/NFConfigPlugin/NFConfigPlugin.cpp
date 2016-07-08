@@ -2,7 +2,7 @@
 //
 
 #include "NFConfigPlugin.h"
-#include "NFCLogicClassModule.h"
+#include "NFCClassModule.h"
 #include "NFCElementModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -37,12 +37,12 @@ const std::string NFConfigPlugin::GetPluginName()
 
 void NFConfigPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFILogicClassModule, NFCLogicClassModule)
+    REGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
     REGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
 }
 
 void NFConfigPlugin::Uninstall()
 {
     UNREGISTER_MODULE(pPluginManager, NFIElementModule, NFCElementModule)
-    UNREGISTER_MODULE(pPluginManager, NFILogicClassModule, NFCLogicClassModule)
+    UNREGISTER_MODULE(pPluginManager, NFIClassModule, NFCClassModule)
 }

@@ -31,7 +31,7 @@ bool NFCPropertyTrailModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
