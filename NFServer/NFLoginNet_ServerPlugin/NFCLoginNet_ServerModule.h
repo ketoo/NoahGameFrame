@@ -89,7 +89,7 @@ protected:
 private:
 
     NFILoginToMasterModule* m_pLoginToMasterModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
