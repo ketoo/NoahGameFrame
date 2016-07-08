@@ -10,11 +10,11 @@
 #define NFI_TAG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 
 class NFITagModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

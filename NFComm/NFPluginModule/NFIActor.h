@@ -14,11 +14,11 @@
 #include <map>
 #include <string>
 #include <Theron/Theron.h>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFIActorModule.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
-class NFIActor : public Theron::Actor, public NFILogicModule
+class NFIActor : public Theron::Actor, public NFIModule
 {
 public:
     NFIActor(Theron::Framework& framework, NFIActorModule* pManager) : Theron::Actor(framework)

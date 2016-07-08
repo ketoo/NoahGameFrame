@@ -9,10 +9,10 @@
 #ifndef NFI_URLCODE_MODULE_H
 #define NFI_URLCODE_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIUrlCodeModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual std::string EncodeURIValue(const std::string& strSource) = 0;

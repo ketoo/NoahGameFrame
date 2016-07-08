@@ -10,10 +10,10 @@
 #define NFI_BUFFCONFIG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIBuffConfigModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

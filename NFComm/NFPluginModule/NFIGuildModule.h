@@ -9,10 +9,10 @@
 #ifndef NFI_GUILD_MODULE_H
 #define NFI_GUILD_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIGuildModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual const NFGUID& CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP) = 0;

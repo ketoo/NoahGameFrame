@@ -9,9 +9,9 @@
 #ifndef _NFI_GM_MODULE_H
 #define _NFI_GM_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
-class NFIGmModule : public NFILogicModule
+class NFIGmModule : public NFIModule
 {
 public:
 

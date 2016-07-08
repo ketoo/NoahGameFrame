@@ -9,12 +9,12 @@
 #ifndef NFI_TEAM_BROADCAST_MODULE_H
 #define NFI_TEAM_BROADCAST_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFITeamBroadcastModule
-    : public NFILogicModule
+    : public NFIModule
 {
 protected:
 private:

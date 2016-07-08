@@ -10,13 +10,13 @@
 #define NFI_URL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 typedef std::function<void(const NFGUID& self, const int nRet, const std::string& strRsp, const std::string& strUseData)> HTTP_RSP_FUNCTOR;
 typedef std::shared_ptr<HTTP_RSP_FUNCTOR> HTTP_RSP_FUNCTOR_PTR;
 
 class NFIUrlClientModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

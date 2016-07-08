@@ -9,10 +9,10 @@
 #ifndef NFI_GS_PVP_MATCH_MODULE_H
 #define NFI_GS_PVP_MATCH_MODULE_H
 
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFIGSPVPMatchModule: public NFILogicModule
+class NFIGSPVPMatchModule: public NFIModule
 {
 public:
 

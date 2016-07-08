@@ -9,10 +9,10 @@
 #ifndef NFI_MAIL_REDIS_MODULE_H
 #define NFI_MAIL_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIMailRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

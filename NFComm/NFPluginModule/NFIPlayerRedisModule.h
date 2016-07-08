@@ -9,10 +9,10 @@
 #ifndef NFI_PLAYER_REDIS_MODULE_H
 #define NFI_PLAYER_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPlayerRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

@@ -12,8 +12,8 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFCGameLogicModule
@@ -38,7 +38,7 @@ protected:
 
 
 protected:
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pLogicClassModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };

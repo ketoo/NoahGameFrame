@@ -9,10 +9,10 @@
 #ifndef NFI_COMMON_REDIS_MODULE_H
 #define NFI_COMMON_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFICommonRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 	virtual std::string GetPropertyCacheKey(const std::string& strClassName) = 0;

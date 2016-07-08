@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFIMapModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIBigMapRedisModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
@@ -69,7 +69,7 @@ protected:
 private:
 	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
-	NFILogicClassModule* m_pLogicClassModule;
+	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

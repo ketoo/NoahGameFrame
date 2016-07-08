@@ -16,7 +16,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIAsyMysqlModule.h"
@@ -71,7 +71,7 @@ private:
     NFIMysqlModule* m_pClusterSQLModule;
     NFIAsyMysqlModule* m_pAsyClusterSQLModule;
 	NFIUUIDModule* m_pUUIDModule;
-	NFILogicClassModule* m_pLogicClassModule;
+	NFIClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
 

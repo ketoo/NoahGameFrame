@@ -9,9 +9,9 @@
 #ifndef _NFI_WSSWICHSERVER_MODULE_H
 #define _NFI_WSSWICHSERVER_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
-class NFIWSSwichServerModule : public NFILogicModule
+class NFIWSSwichServerModule : public NFIModule
 {
 public:
 

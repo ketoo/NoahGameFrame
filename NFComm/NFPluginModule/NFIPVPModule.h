@@ -10,10 +10,10 @@
 #define NFI_PVP_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPVPModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     struct PVPCell

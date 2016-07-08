@@ -13,7 +13,7 @@ bool NFCJavaScriptModule::Init()
 {
     m_pEventProcessModule = dynamic_cast<NFIEventProcessModule*>(pPluginManager->FindModule("NFCEventProcessModule"));
     m_pKernelModule = dynamic_cast<NFIKernelModule*>(pPluginManager->FindModule("NFCKernelModule"));
-    m_pLogicClassModule = dynamic_cast<NFILogicClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
+    m_pLogicClassModule = dynamic_cast<NFIClassModule*>(pPluginManager->FindModule("NFCLogicClassModule"));
     m_pElementInfoModule = dynamic_cast<NFIElementInfoModule*>(pPluginManager->FindModule("NFCElementInfoModule"));
 
     assert(NULL != m_pEventProcessModule);
@@ -26,7 +26,7 @@ bool NFCJavaScriptModule::Init()
     bool ret = InstallJS("script_init.js");
     assert(ret);
 
-    std::shared_ptr<NFILogicClass> pClass = m_pLogicClassModule->First();
+    std::shared_ptr<NFIClass> pClass = m_pLogicClassModule->First();
     while (pClass.get())
     {
         std::shared_ptr<NFIComponent> pComponent = pClass->GetComponentManager()->First();

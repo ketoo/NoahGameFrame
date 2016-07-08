@@ -10,11 +10,11 @@
 #define NFI_ITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFIItemCardConsumeProcessModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

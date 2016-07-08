@@ -35,7 +35,7 @@ bool NFCBigMapRedisModule::AfterInit()
 	
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 
 	return true;
@@ -119,7 +119,7 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGr
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo)
 {
- 	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
+ 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
  	NFList<std::string>& xElementList = xLogicClass->GetConfigNameList();
  	
  	std::vector<std::string> vFields;

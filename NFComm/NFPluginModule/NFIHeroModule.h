@@ -9,11 +9,11 @@
 
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 
 class NFIHeroModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     enum EConstDefine_Hero

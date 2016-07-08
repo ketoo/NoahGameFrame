@@ -9,7 +9,7 @@
 #ifndef NFI_NOSQL_MODULE_H
 #define NFI_NOSQL_MODULE_H
 
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
 class NFINoSqlDriver
 {
@@ -92,7 +92,7 @@ public:
 };
 
 class NFINoSqlModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

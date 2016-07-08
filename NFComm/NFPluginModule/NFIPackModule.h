@@ -10,11 +10,11 @@
 #define NFI_PACK_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
-class NFIPackModule : public NFILogicModule
+class NFIPackModule : public NFIModule
 {
 public:
     virtual const NFGUID& CreateEquip(const NFGUID& self, const std::string& strConfigName) = 0;

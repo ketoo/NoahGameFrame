@@ -10,9 +10,9 @@
 #define NFI_MAIL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
-class NFIMailModule : public NFILogicModule
+class NFIMailModule : public NFIModule
 {
 public:
     virtual bool SendMail(const NFGUID& reciever, const int nMailType, const NFIDataList& xItemList, const std::string& strNailContent = NULL_STR) = 0;

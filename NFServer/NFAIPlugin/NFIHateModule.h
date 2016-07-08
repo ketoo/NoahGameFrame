@@ -10,10 +10,10 @@
 #define _NFI_HATE_MODULE_H
 
 #include "NFComm/NFCore/NFIDataList.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
 class NFIHateModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool ClearHate(const NFGUID& self) = 0;

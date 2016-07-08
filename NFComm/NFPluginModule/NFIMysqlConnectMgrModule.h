@@ -8,10 +8,10 @@
 #ifndef NFI_MYSQL_CONNECT_MANAGER_MODULE_H
 #define NFI_MYSQL_CONNECT_MANAGER_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFIMysqlDriver.h"
 
-class NFIMysqlConnectMgrModule : public NFILogicModule
+class NFIMysqlConnectMgrModule : public NFIModule
 {
 public:
     //virtual bool ConnectNewMysql() = 0;

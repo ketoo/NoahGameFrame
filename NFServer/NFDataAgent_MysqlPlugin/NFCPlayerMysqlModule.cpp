@@ -34,12 +34,12 @@ bool NFCPlayerMysqlModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>();
 	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pAsyClusterSQLModule = pPluginManager->FindModule<NFIAsyMysqlModule>();
 	
-    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pLogicClassModule->GetElement("SqlServer");
     if (nullptr == pLogicClass)
     {
         return false;

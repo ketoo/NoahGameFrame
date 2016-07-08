@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
@@ -47,7 +47,7 @@ protected:
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 protected:
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pLogicClassModule;
     NFINoSqlModule* m_pNoSqlModule;
     NFICommonRedisModule* m_pCommonRedisModule;
     NFIKernelModule* m_pKernelModule;

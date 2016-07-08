@@ -9,11 +9,11 @@
 #ifndef NFI_TEAM_MODULE_H
 #define NFI_TEAM_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 
 class NFITeamModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 	virtual const NFGUID& CreateTeam(const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;

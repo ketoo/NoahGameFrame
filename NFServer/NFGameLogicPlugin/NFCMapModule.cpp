@@ -30,7 +30,7 @@ bool NFCMapModule::AfterInit()
 {
 	m_pBigMapRedisModule = pPluginManager->FindModule<NFIBigMapRedisModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
@@ -53,7 +53,7 @@ void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const 
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
 
 
-	NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
 	NFList<std::string>& xElementList = xLogicClass->GetConfigNameList();
 	
 	//find all title info

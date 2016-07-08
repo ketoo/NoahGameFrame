@@ -19,7 +19,7 @@
 
 
 class NFCCreateRoleModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     NFCCreateRoleModule(NFIPluginManager* p)

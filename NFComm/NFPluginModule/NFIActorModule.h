@@ -9,7 +9,7 @@
 #ifndef NFI_ACTOR_MANAGER_H
 #define NFI_ACTOR_MANAGER_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "Theron/Theron.h"
 #include "NFComm/NFCore/NFIComponent.h"
 
@@ -51,7 +51,7 @@ class NFCObjectAsyncEventInfo
 {
 };
 
-class NFIActorModule : public NFILogicModule
+class NFIActorModule : public NFIModule
 {
 public:
     template<typename BaseTypeComponent, typename BaseType>

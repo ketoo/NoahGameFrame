@@ -9,10 +9,10 @@
 #ifndef NFI_SLG_SHOP_MODULE_H
 #define NFI_SLG_SHOP_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFISLGShopModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, float fX, float fY, float fZ) = 0;

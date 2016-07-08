@@ -9,11 +9,11 @@
 
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 
 class NFIHeroPropertyModule
-	: public NFILogicModule
+	: public NFIModule
 {
 public:
 

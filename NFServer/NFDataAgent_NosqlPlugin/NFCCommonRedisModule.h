@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
@@ -51,7 +51,7 @@ public:
     virtual bool ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList& xMsg, const bool bCheckCache = true);
 
 protected:
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pLogicClassModule;
     NFINoSqlModule* m_pNoSqlModule;
     NFICommonRedisModule* m_pCommonRedisModule;
 };

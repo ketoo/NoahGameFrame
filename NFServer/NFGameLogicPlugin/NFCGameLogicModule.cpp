@@ -8,8 +8,8 @@
 
 #include "NFCGameLogicModule.h"
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -33,7 +33,7 @@ bool NFCGameLogicModule::Execute()
 bool NFCGameLogicModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 
     return true;
 }

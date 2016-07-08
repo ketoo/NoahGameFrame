@@ -10,10 +10,10 @@
 #define NFI_TOTALTIME_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFITotalLineTimeModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

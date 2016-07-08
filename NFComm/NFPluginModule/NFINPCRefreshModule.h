@@ -10,10 +10,10 @@
 #define NFI_NPC_REFRESH_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFINPCRefreshModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

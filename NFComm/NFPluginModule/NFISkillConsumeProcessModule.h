@@ -10,10 +10,10 @@
 #define NFI_SKILLCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFISkillConsumeProcessModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

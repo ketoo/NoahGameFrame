@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFIMysqlModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

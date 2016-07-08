@@ -10,15 +10,15 @@
 #define NFI_ITEM_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFIItemModule
-    : public NFILogicModule,
-	public NFMap<int, NFILogicModule>
+    : public NFIModule,
+	public NFMap<int, NFIModule>
 {
 public:
-	bool ResgisterConsumeModule(const NFMsg::EItemType eModuleType, NFILogicModule* pModule)
+	bool ResgisterConsumeModule(const NFMsg::EItemType eModuleType, NFIModule* pModule)
 	{
 		return true;
 	}

@@ -9,9 +9,9 @@
 #ifndef _NFI_SLG_BUILDING_MODULE_H
 #define _NFI_SLG_BUILDING_MODULE_H
 
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFISLGBuildingModule : public NFILogicModule
+class NFISLGBuildingModule : public NFIModule
 {
 public:
     enum EBuildingListColType

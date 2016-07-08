@@ -29,7 +29,7 @@ bool NFCPlayerRedisModule::Execute()
 
 bool NFCPlayerRedisModule::AfterInit()
 {
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 

@@ -31,7 +31,7 @@ bool NFCGuildRedisModule::Execute()
 
 bool NFCGuildRedisModule::AfterInit()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();

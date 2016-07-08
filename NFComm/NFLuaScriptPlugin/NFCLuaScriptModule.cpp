@@ -25,7 +25,7 @@ bool NFCLuaScriptModule::Init()
     mnTime = pPluginManager->GetNowTime();
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
 	Regisger();
@@ -262,13 +262,13 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("Self", &NFIObject::Self)
     .endClass();
 
-    LuaIntf::LuaBinding(l).beginClass<NFILogicClassModule>("NFILogicClassModule")
+    LuaIntf::LuaBinding(l).beginClass<NFIClassModule>("NFIClassModule")
     .endClass();
 
     LuaIntf::LuaBinding(l).beginClass<NFIPluginManager>("NFIPluginManager")
     .addFunction("FindLuaModule", &NFIPluginManager::FindModule<NFILuaScriptModule>)
     .addFunction("FindKernelModule", &NFIPluginManager::FindModule<NFIKernelModule>)
-    .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFILogicClassModule>)
+    .addFunction("FindLogicClassModule", &NFIPluginManager::FindModule<NFIClassModule>)
     .addFunction("FindElementInfoModule", &NFIPluginManager::FindModule<NFIElementModule>)
 	.addFunction("GetNowTime", &NFIPluginManager::GetNowTime)
     .endClass();

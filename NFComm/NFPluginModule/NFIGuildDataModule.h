@@ -9,12 +9,12 @@
 #ifndef NFI_GUILD_DATA_MODULE_H
 #define NFI_GUILD_DATA_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
 class NFIGuildDataModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     struct SearchGuildObject

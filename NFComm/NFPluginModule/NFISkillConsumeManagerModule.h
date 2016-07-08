@@ -10,11 +10,11 @@
 #define NFI_SKILLCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFISkillConsumeProcessModule.h"
 
 class NFISkillConsumeManagerModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool ResgisterConsumeModule(const int nModuleType, NFISkillConsumeProcessModule* pModule) = 0;

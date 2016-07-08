@@ -10,13 +10,13 @@
 #define NFI_PLAYER_MYSQL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 typedef std::function<void(const NFGUID& self, const int nRet, const std::string&strUseData)> LOADDATA_RETURN_FUNCTOR;
 
 
 class NFIPlayerMysqlModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

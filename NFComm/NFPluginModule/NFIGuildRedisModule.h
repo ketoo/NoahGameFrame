@@ -9,10 +9,10 @@
 #ifndef NFI_GUILD_REDIS_MODULE_H
 #define NFI_GUILD_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIGuildRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

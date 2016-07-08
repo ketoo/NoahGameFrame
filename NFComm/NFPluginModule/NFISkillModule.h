@@ -10,10 +10,10 @@
 #define NFI_SKILL_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFISkillModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

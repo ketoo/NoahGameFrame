@@ -13,7 +13,7 @@
 
 #include "Dependencies/LuaIntf/LuaIntf.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
 
@@ -60,7 +60,7 @@ protected:
 protected:
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pLogicClassModule;
 
 protected:
     LuaIntf::LuaContext l;

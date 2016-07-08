@@ -224,7 +224,7 @@ void NFCAIModule::OnSelect(const NFGUID& self, const NFGUID& other)
     //选择后可能是接任务啊，或者是对话，或者是搞你
 }
 
-void NFCAIModule::OnReload(const char* pstrModuleName, NFILogicModule* pModule)
+void NFCAIModule::OnReload(const char* pstrModuleName, NFIModule* pModule)
 {
 
 }

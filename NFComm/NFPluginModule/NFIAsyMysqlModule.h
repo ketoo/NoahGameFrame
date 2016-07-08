@@ -21,7 +21,7 @@ typedef std::function<void(const NFGUID& self, const int nRet, const std::vector
 struct SMysqlParam;
 
 class NFIAsyMysqlModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     template<typename BaseType>

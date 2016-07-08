@@ -10,10 +10,10 @@
 #define NFI_PVP_MATCH_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPVPMatchModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     enum  EPVPMODE

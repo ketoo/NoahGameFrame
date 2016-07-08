@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld5Module
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     HelloWorld5Module(NFIPluginManager* p)

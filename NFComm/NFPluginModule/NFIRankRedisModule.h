@@ -9,10 +9,10 @@
 #ifndef NFI_RANK_REDIS_MODULE_H
 #define NFI_RANK_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIRankRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

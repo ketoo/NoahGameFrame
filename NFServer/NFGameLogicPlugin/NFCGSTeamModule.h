@@ -26,7 +26,7 @@
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 
 class NFCGSTeamModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     NFCGSTeamModule( NFIPluginManager* p )

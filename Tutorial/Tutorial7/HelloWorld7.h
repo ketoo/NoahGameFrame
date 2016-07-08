@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIUrlClientModule.h"
 
 class HelloWorld7
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     HelloWorld7(NFIPluginManager* p)

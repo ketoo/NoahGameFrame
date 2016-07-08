@@ -9,11 +9,11 @@
 #ifndef NFI_PVPMATCH_REDIS_MODULE_H
 #define NFI_PVPMATCH_REDIS_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 class NFIPVPMatchRedisModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

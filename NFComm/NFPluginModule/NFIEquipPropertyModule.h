@@ -10,11 +10,11 @@
 #define NFI_EQUIP_PROPERTY_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
-class NFIEquipPropertyModule : public NFILogicModule
+class NFIEquipPropertyModule : public NFIModule
 {
 public:
 	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList) = 0;

@@ -10,10 +10,10 @@
 #define NFI_MAP_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIMapModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

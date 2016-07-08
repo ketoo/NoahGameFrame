@@ -30,7 +30,7 @@ bool NFCItemModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
@@ -72,7 +72,7 @@ int NFCItemModule::OnRequireUseItemPosEvent( const NFGUID& self, const int nEven
 
 bool NFCItemModule::CheckConfig()
 {
-	NF_SHARE_PTR<NFILogicClass> pLogicCLass = m_pLogicClassModule->GetElement(NFrame::Item::ThisName());
+	NF_SHARE_PTR<NFIClass> pLogicCLass = m_pLogicClassModule->GetElement(NFrame::Item::ThisName());
 	if (nullptr == pLogicCLass)
 	{
 		assert(0);

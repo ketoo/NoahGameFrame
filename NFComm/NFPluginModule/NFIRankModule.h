@@ -10,9 +10,9 @@
 #define NFI_RANK_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
-class NFIRankModule : public NFILogicModule
+class NFIRankModule : public NFIModule
 {
 public:
     virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue) = 0;

@@ -13,17 +13,17 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
 class NFCTaskModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 
@@ -49,7 +49,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pLogicClassModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIHeroModule* m_pHeroModule;
 	NFICommonConfigModule* m_pCommonConfigModule;

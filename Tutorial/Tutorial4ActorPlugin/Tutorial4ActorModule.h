@@ -14,7 +14,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class HelloWorld4ActorModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     HelloWorld4ActorModule(NFIPluginManager* p)

@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFIAIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
 class NFCAIModule
     : public NFIAIModule
@@ -35,7 +35,7 @@ public:
 
     virtual bool Execute();
 
-    virtual void OnReload(const char* pstrModuleName, NFILogicModule* pModule);
+    virtual void OnReload(const char* pstrModuleName, NFIModule* pModule);
 
     virtual NFIState* GetState(const int eState) ;
 

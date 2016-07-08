@@ -10,10 +10,10 @@
 #define NFI_MOVE_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIMoveModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:
