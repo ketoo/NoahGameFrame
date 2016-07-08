@@ -49,7 +49,7 @@ bool NFCKernelModule::Init()
     mtDeleteSelfList.clear();
 
     m_pSceneModule = pPluginManager->FindModule<NFISceneModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
@@ -1227,7 +1227,7 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 
 bool NFCKernelModule::AfterInit()
 {
-    NF_SHARE_PTR<NFILogicClass> pClass = m_pLogicClassModule->First();
+    NF_SHARE_PTR<NFIClass> pClass = m_pLogicClassModule->First();
     while (pClass.get())
     {
         NFIKernelModule::AddClassCallBack(pClass->GetClassName(), this, &NFCKernelModule::OnClassCommonEvent);

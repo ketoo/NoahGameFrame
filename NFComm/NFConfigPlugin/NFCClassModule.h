@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCLogicClassModule.h
+//    @FileName			:    NFCClassModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCLogicClassModule
+//    @Module           :    NFCClassModule
 //
 // -------------------------------------------------------------------------
 
@@ -21,15 +21,15 @@
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFCLogicClass : public NFILogicClass
+class NFCClass : public NFIClass
 {
 public:
 
-    NFCLogicClass(const std::string& strClassName)
+    NFCClass(const std::string& strClassName)
     {
         m_pParentClass = NULL;
         mstrClassName = strClassName;
@@ -39,7 +39,7 @@ public:
         m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
-    virtual ~NFCLogicClass()
+    virtual ~NFCClass()
     {
         ClearAll();
     }
@@ -78,12 +78,12 @@ public:
         return true;
     }
 
-    void SetParent(NF_SHARE_PTR<NFILogicClass> pClass)
+    void SetParent(NF_SHARE_PTR<NFIClass> pClass)
     {
         m_pParentClass = pClass;
     }
 
-    NF_SHARE_PTR<NFILogicClass> GetParent()
+    NF_SHARE_PTR<NFIClass> GetParent()
     {
         return m_pParentClass;
     }
@@ -130,7 +130,7 @@ private:
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
     NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
-    NF_SHARE_PTR<NFILogicClass> m_pParentClass;
+    NF_SHARE_PTR<NFIClass> m_pParentClass;
     std::string mstrType;
     std::string mstrClassName;
     std::string mstrClassInstancePath;
@@ -140,12 +140,12 @@ private:
     NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
 };
 
-class NFCLogicClassModule
-    : public NFILogicClassModule
+class NFCClassModule
+    : public NFIClassModule
 {
 public:
-    NFCLogicClassModule(NFIPluginManager* p);
-    virtual ~NFCLogicClassModule();
+    NFCClassModule(NFIPluginManager* p);
+    virtual ~NFCClassModule();
 
     virtual bool Init();
     virtual bool Shut();
@@ -165,14 +165,14 @@ public:
 
 protected:
     virtual TDATA_TYPE ComputerType(const char* pstrTypeName, NFIDataList::TData& var);
-    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
-    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
-    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFILogicClass> pClass);
-    virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
-    virtual bool AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFILogicClass> pClass);
+    virtual bool AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SHARE_PTR<NFIClass> pClass);
+    virtual bool AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFIClass> pClass);
+    virtual bool AddComponents(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_PTR<NFIClass> pClass);
+    virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass);
+    virtual bool AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass);
 
     //加载此节点的类
-    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pParentClass);
+    virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pParentClass);
 
 protected:
     NFIElementModule* m_pElementModule;

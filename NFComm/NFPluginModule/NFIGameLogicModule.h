@@ -10,10 +10,10 @@
 #define NFI_GAMELOGICMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIGameLogicModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:
