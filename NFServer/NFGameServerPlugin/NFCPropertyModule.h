@@ -13,7 +13,7 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -74,7 +74,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIPropertyConfigModule* m_pPropertyConfigModule;
     NFIElementModule* m_pElementModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFILevelModule* m_pLevelModule;
 };
 

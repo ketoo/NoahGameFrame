@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -75,7 +75,7 @@ protected:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIUUIDModule* m_pUUIDModule;
 	NFINetModule* m_pNetModule;
 

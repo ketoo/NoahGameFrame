@@ -10,12 +10,12 @@
 #define NFI_WORLDNET_SERVERMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
 class NFIWorldNet_ServerModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

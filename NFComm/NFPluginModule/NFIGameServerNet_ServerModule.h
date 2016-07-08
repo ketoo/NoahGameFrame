@@ -10,11 +10,11 @@
 #define NFI_GAMESERVERNET_SERVERMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetModule.h"
 
 class NFIGameServerNet_ServerModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     //要管理当前所有的对象所在的actor,gateid,fd等
