@@ -101,7 +101,7 @@ private:
     NFMapEx<int, ServerData> mProxyMap;
 
     NFIElementModule* m_pElementModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIWorldLogicModule* m_pWorldLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

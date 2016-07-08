@@ -57,7 +57,7 @@ private:
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
 	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
