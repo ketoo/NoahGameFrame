@@ -10,7 +10,7 @@
 #define NFI_PROPERTY_CONFIG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 enum NFJobType
 {
@@ -22,7 +22,7 @@ enum NFJobType
 };
 
 class NFIPropertyConfigModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

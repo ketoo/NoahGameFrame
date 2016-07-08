@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFILogicModule.h
+//    @FileName			:    NFIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFILogicModule
+//    @Module           :    NFIModule
 //
 // -------------------------------------------------------------------------
 
@@ -71,16 +71,16 @@ public:
 
 class NFIPluginManager;
 
-class NFILogicModule
+class NFIModule
 {
 
 public:
-    NFILogicModule()
+    NFIModule()
     {
         mbReloading = false;
     }
 
-    virtual ~NFILogicModule() {}
+    virtual ~NFIModule() {}
 
     virtual bool Init()
     {
