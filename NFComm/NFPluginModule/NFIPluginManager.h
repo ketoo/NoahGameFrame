@@ -9,11 +9,11 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPlugin;
 
-class NFIPluginManager : public NFILogicModule
+class NFIPluginManager : public NFIModule
 {
 public:
     NFIPluginManager()
@@ -24,10 +24,10 @@ public:
 	template <typename T>
 	T* FindModule()
 	{
-		NFILogicModule* pLogicModule = FindModule(typeid(T).name());
+		NFIModule* pLogicModule = FindModule(typeid(T).name());
 		if (pLogicModule)
 		{
-			if (!TIsDerived<T, NFILogicModule>::Result)
+			if (!TIsDerived<T, NFIModule>::Result)
 			{
 				return NULL;
 			}
@@ -46,11 +46,11 @@ public:
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName) = 0;
 
-    virtual void AddModule(const std::string& strModuleName, NFILogicModule* pModule) = 0;
+    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule) = 0;
 
     virtual void RemoveModule(const std::string& strModuleName) = 0;
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName) = 0;
+    virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
 
     virtual int AppID() = 0;
     virtual NFINT64 GetInitTime() const = 0;

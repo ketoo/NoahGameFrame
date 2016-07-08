@@ -10,11 +10,11 @@
 #define NFI_GAMESERVERTOWORLDMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetClientModule.hpp"
 
 class NFIGameServerToWorldModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

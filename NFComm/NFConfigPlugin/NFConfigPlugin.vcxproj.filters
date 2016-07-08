@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCElementInfoModule.cpp" />
-    <ClCompile Include="NFCLogicClassModule.cpp" />
     <ClCompile Include="NFConfigPlugin.cpp" />
+    <ClCompile Include="NFCElementModule.cpp" />
+    <ClCompile Include="NFCClassModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCElementInfoModule.h" />
-    <ClInclude Include="NFCLogicClassModule.h" />
     <ClInclude Include="NFConfigPlugin.h" />
+    <ClInclude Include="NFCElementModule.h" />
+    <ClInclude Include="NFCClassModule.h" />
   </ItemGroup>
 </Project>

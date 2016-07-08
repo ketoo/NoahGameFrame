@@ -10,7 +10,7 @@
 #define NFI_SCENEPROCESS_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 enum E_SCENE_TYPE
 {
@@ -21,7 +21,7 @@ enum E_SCENE_TYPE
 };
 
 class NFISceneProcessModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:
