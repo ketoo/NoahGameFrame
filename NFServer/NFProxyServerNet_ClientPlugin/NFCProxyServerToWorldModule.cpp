@@ -10,7 +10,7 @@
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFIHeartBeatManager.h"
 #include "NFComm/NFCore/NFCHeartBeatManager.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 bool NFCProxyServerToWorldModule::Init()
 {
@@ -100,7 +100,7 @@ void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF
 
 void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();
@@ -149,7 +149,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
     m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
 
 	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
@@ -158,7 +158,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 
 	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 
-    NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
     if (xLogicClass.get())
     {
         NFList<std::string>& xNameList = xLogicClass->GetConfigNameList();

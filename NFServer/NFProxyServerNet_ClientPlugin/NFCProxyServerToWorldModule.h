@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFILogicClassModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
@@ -80,7 +80,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
-    NFILogicClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFINetClientModule* m_pNetClientModule;
 
