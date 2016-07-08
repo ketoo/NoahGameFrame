@@ -110,7 +110,7 @@ private:
     //////////////////////////////////////////////////////////////////////////
     NFIUUIDModule* m_pUUIDModule;
     NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIElementModule* m_pElementModule;
