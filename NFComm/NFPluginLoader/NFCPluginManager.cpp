@@ -171,7 +171,7 @@ bool NFCPluginManager::Execute()
     return bRet;
 }
 
-void NFCPluginManager::AddModule(const std::string& strModuleName, NFILogicModule* pModule)
+void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
 {
     if (!FindModule(strModuleName))
     {
@@ -189,7 +189,7 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
 }
 
 
-NFILogicModule* NFCPluginManager::FindModule(const std::string& strModuleName)
+NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
     ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strModuleName);
     if (it != mModuleInstanceMap.end())
@@ -374,7 +374,7 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
 
 bool NFCPluginManager::StartReLoadState()
 {
-    NFILogicModule::StartReLoadState();
+    NFIModule::StartReLoadState();
 
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
     for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
@@ -393,7 +393,7 @@ bool NFCPluginManager::EndReLoadState()
         itBeforeInstance->second->EndReLoadState();
     }
 
-    NFILogicModule::EndReLoadState();
+    NFIModule::EndReLoadState();
 
     return true;
 }

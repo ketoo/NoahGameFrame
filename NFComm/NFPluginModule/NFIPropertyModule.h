@@ -10,10 +10,10 @@
 #define NFI_PROPERTY_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIPropertyModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     enum NFPropertyGroup

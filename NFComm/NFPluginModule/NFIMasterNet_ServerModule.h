@@ -10,10 +10,10 @@
 #define NFI_MASTERNET_SERVERMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIMasterNet_ServerModule
-    : public NFILogicModule
+    : public NFIModule
 {
 
 public:

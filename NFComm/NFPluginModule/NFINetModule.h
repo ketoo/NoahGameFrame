@@ -12,7 +12,7 @@
 #include <iostream>
 #include <iosfwd>
 #include "NFGUID.h"
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFIPluginManager.h"
 #include "NFComm/NFNet/NFCNet.h"
 #include "NFComm/NFCore/NFQueue.h"
@@ -80,7 +80,7 @@ struct ServerData
 };
 
 class NFINetModule
-    : public NFILogicModule
+    : public NFIModule
 {
 protected:
     NFINetModule()
