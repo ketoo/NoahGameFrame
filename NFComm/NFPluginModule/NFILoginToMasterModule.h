@@ -11,14 +11,14 @@
 
 #include <iostream>
 #include "NFILogicModule.h"
-#include "NFIClusterClientModule.hpp"
+#include "NFINetClientModule.hpp"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule
     : public NFILogicModule
 {
 public:
-	virtual NFIClusterClientModule* GetClusterModule() = 0;
+	virtual NFINetClientModule* GetClusterModule() = 0;
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap() = 0;
 };
 
