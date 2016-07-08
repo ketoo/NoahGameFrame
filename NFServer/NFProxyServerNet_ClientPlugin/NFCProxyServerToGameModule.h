@@ -58,7 +58,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
 };
 

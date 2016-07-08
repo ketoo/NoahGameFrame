@@ -104,7 +104,7 @@ protected:
 
     virtual bool LegalNumber(const char* str);
 protected:
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     bool mbLoaded;
 };
 

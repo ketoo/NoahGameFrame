@@ -38,7 +38,7 @@ protected:
 
 protected:
     NFIUUIDModule* m_pUUIDModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
 private:
 };
