@@ -10,7 +10,7 @@
 #include <ctype.h>
 #include "NFConfigPlugin.h"
 #include "NFCElementModule.h"
-#include "NFCLogicClassModule.h"
+#include "NFCClassModule.h"
 
 ////
 
@@ -27,7 +27,7 @@ NFCElementModule::~NFCElementModule()
 
 bool NFCElementModule::Init()
 {
-    m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
+    m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 
     return true;
 }
@@ -45,7 +45,7 @@ bool NFCElementModule::Load()
         return false;
     }
 
-    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->First();
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pLogicClassModule->First();
     while (pLogicClass.get())
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
@@ -88,7 +88,7 @@ bool NFCElementModule::Load()
     return true;
 }
 
-bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFILogicClass> pLogicClass)
+bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
 {
     //attrNode is the node of a object
     std::string strConfigID = attrNode->first_attribute("ID")->value();
@@ -291,7 +291,7 @@ bool NFCElementModule::LoadSceneInfo(const std::string& strFileName, const std::
     rapidxml::xml_document<>  doc;
     doc.parse<0>(fdoc.data());
 
-    NF_SHARE_PTR<NFILogicClass> pLogicClass = m_pLogicClassModule->GetElement(strClassName.c_str());
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pLogicClassModule->GetElement(strClassName.c_str());
     if (pLogicClass.get())
     {
         //support for unlimited layer class inherits
