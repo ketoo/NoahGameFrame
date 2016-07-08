@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCProxyServerNet_ClientModule.h
+//    @FileName			:    NFCProxyServerNet_ClientModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-05-06
 //    @Module           :    NFCProxyServerNet_ClientModule
@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFILogicClassModule.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
@@ -42,7 +42,7 @@ public:
     virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
-	virtual NFIClusterClientModule* GetClusterModule();
+	virtual NFINetClientModule* GetClusterModule();
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
 
 protected:
@@ -82,7 +82,7 @@ private:
     NFIElementModule* m_pElementModule;
     NFILogicClassModule* m_pLogicClassModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;
-	NFIClusterClientModule* m_pClusterClientModule;
+	NFINetClientModule* m_pNetClientModule;
 
 };
 

@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFTutorial2.h
+//    @FileName			:    NFTutorial2.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2014-05-14 08:51
 //    @Module           :   NFTutorial2

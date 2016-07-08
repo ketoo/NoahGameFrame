@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCEventProcessModule.cpp
+//    @FileName			:    NFCEventProcessModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFCEventProcessModule
