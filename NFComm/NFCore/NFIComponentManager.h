@@ -13,9 +13,9 @@
 #include "NFMap.h"
 #include "NFIComponent.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFComm/NFPluginModule/NFILogicModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFIComponentManager : public NFILogicModule, public NFMapEx<std::string, NFIComponent>
+class NFIComponentManager : public NFIModule, public NFMapEx<std::string, NFIComponent>
 {
 public:
     virtual ~NFIComponentManager() {}
