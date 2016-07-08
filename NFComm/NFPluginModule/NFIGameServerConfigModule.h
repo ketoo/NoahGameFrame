@@ -10,10 +10,10 @@
 #define NFI_GAMESERVER_CONFIG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIGameServerConfigModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool AddSceneToActor(const int nSceneID, const int nGameServer) = 0;

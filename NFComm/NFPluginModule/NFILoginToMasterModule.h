@@ -10,12 +10,12 @@
 #define NFI_LOGINNET_CLIENTMODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 #include "NFINetClientModule.hpp"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 	virtual NFINetClientModule* GetClusterModule() = 0;

@@ -47,11 +47,11 @@ public:
 
     virtual NFIPlugin* FindPlugin(const std::string& strPluginName);
 
-    virtual void AddModule(const std::string& strModuleName, NFILogicModule* pModule);
+    virtual void AddModule(const std::string& strModuleName, NFIModule* pModule);
 
     virtual void RemoveModule(const std::string& strModuleName);
 
-    virtual NFILogicModule* FindModule(const std::string& strModuleName);
+    virtual NFIModule* FindModule(const std::string& strModuleName);
 
     virtual bool Execute();
 
@@ -89,7 +89,7 @@ private:
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
     typedef std::map<std::string, NFIPlugin*> PluginInstanceMap;
-    typedef std::map<std::string, NFILogicModule*> ModuleInstanceMap;
+    typedef std::map<std::string, NFIModule*> ModuleInstanceMap;
 
     typedef void(* DLL_START_PLUGIN_FUNC)(NFIPluginManager* pm);
     typedef void(* DLL_STOP_PLUGIN_FUNC)(NFIPluginManager* pm);
