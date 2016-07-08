@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFILogicModule.h
+//    @FileName			:    NFILogicModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
 //    @Module           :    NFILogicModule

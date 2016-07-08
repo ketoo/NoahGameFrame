@@ -15,7 +15,7 @@
 #include <chrono>
 #include <functional>
 #include <atomic>
-#include "NFCActorManager.h"
+#include "NFCPluginManager.h"
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
@@ -167,9 +167,10 @@ int main(int argc, char* argv[])
     signal(SIGCHLD, SIG_IGN);
 
 #endif
-    NFCActorManager::GetSingletonPtr()->Init();
-    NFCActorManager::GetSingletonPtr()->AfterInit();
-    NFCActorManager::GetSingletonPtr()->CheckConfig();
+
+	NFCPluginManager::GetSingletonPtr()->Init();
+	NFCPluginManager::GetSingletonPtr()->AfterInit();
+	NFCPluginManager::GetSingletonPtr()->CheckConfig();
 
     PrintfLogo();
 
@@ -191,7 +192,7 @@ int main(int argc, char* argv[])
             __try
             {
 #endif
-                NFCActorManager::GetSingletonPtr()->Execute();
+				NFCPluginManager::GetSingletonPtr()->Execute();
 #if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
@@ -201,10 +202,10 @@ int main(int argc, char* argv[])
         }
     }
 
-    NFCActorManager::GetSingletonPtr()->BeforeShut();
-    NFCActorManager::GetSingletonPtr()->Shut();
+	NFCPluginManager::GetSingletonPtr()->BeforeShut();
+	NFCPluginManager::GetSingletonPtr()->Shut();
 
-    NFCActorManager::GetSingletonPtr()->ReleaseInstance();
+	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
 
     return 0;
 }

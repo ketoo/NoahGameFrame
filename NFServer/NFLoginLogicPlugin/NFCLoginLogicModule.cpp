@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCLoginLogicModule.cpp
+//    @FileName			:    NFCLoginLogicModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCLoginLogicModule

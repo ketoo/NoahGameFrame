@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCGameServerNet_ServerModule.h
+//    @FileName			:    NFCGameServerNet_ServerModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
 //    @Module           :    NFCGameServerNet_ServerModule
@@ -21,7 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
-#include "NFComm/NFPluginModule/NFIClusterClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {

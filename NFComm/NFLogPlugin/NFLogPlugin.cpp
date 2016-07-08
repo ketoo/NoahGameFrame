@@ -9,7 +9,6 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
     CREATE_PLUGIN(pm, NFLogPlugin)
-
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
