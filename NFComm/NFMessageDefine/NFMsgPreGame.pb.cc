@@ -150,7 +150,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckEventResult));
   ReqAccountLogin_descriptor_ = file->message_type(3);
-  static const int ReqAccountLogin_offsets_[10] = {
+  static const int ReqAccountLogin_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, account_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, password_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, security_code_),
@@ -161,6 +161,7 @@ void protobuf_AssignDesc_NFMsgPreGame_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, clientmac_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, device_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, extra_info_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAccountLogin, platform_type_),
   };
   ReqAccountLogin_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -590,51 +591,52 @@ void protobuf_AddDesc_NFMsgPreGame_2eproto() {
     "tResult\022)\n\nevent_code\030\001 \002(\0162\025.NFMsg.EGam"
     "eEventCode\022\"\n\014event_object\030\002 \001(\0132\014.NFMsg"
     ".Ident\022\"\n\014event_client\030\003 \001(\0132\014.NFMsg.Ide"
-    "nt\"\325\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014\022"
+    "nt\"\354\001\n\017ReqAccountLogin\022\017\n\007account\030\002 \002(\014\022"
     "\020\n\010password\030\003 \002(\014\022\025\n\rsecurity_code\030\004 \002(\014"
     "\022\020\n\010signBuff\030\005 \002(\014\022\025\n\rclientVersion\030\006 \002("
     "\005\022\021\n\tloginMode\030\007 \002(\005\022\020\n\010clientIP\030\010 \002(\005\022\021"
     "\n\tclientMAC\030\t \002(\003\022\023\n\013device_info\030\n \002(\014\022\022"
-    "\n\nextra_info\030\013 \002(\014\"7\n\020ReqAccountLogout\022\017"
-    "\n\007account\030\002 \002(\014\022\022\n\nextra_info\030\003 \002(\014\"f\n\nS"
-    "erverInfo\022\021\n\tserver_id\030\001 \002(\005\022\014\n\004name\030\002 \002"
-    "(\014\022\022\n\nwait_count\030\003 \002(\005\022#\n\006status\030\004 \002(\0162\023"
-    ".NFMsg.EServerState\"7\n\rReqServerList\022&\n\004"
-    "type\030\001 \002(\0162\030.NFMsg.ReqServerListType\"X\n\r"
-    "AckServerList\022&\n\004type\030\001 \002(\0162\030.NFMsg.ReqS"
-    "erverListType\022\037\n\004info\030\002 \003(\0132\021.NFMsg.Serv"
-    "erInfo\"d\n\017ReqConnectWorld\022\020\n\010world_id\030\001 "
-    "\002(\005\022\017\n\007account\030\002 \001(\014\022\034\n\006sender\030\003 \001(\0132\014.N"
-    "FMsg.Ident\022\020\n\010login_id\030\004 \001(\005\"\243\001\n\025AckConn"
-    "ectWorldResult\022\020\n\010world_id\030\001 \002(\005\022\034\n\006send"
-    "er\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010login_id\030\003 \002(\005"
-    "\022\017\n\007account\030\004 \002(\014\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nw"
-    "orld_port\030\006 \002(\005\022\021\n\tworld_key\030\007 \002(\014\"#\n\017Re"
-    "qSelectServer\022\020\n\010world_id\030\001 \002(\005\"5\n\020ReqKi"
-    "ckFromWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account"
-    "\030\002 \002(\014\"/\n\013ReqRoleList\022\017\n\007game_id\030\001 \002(\005\022\017"
-    "\n\007account\030\002 \002(\014\"\373\001\n\014RoleLiteInfo\022\030\n\002id\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\016\n\006career\030\002 \002(\005\022\013\n\003se"
-    "x\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014"
-    "\022\017\n\007game_id\030\006 \002(\005\022\022\n\nrole_level\030\007 \002(\005\022\023\n"
-    "\013delete_time\030\010 \002(\005\022\020\n\010reg_time\030\t \002(\005\022\031\n\021"
-    "last_offline_time\030\n \002(\005\022\027\n\017last_offline_"
-    "ip\030\013 \002(\005\022\023\n\013view_record\030\014 \002(\014\"=\n\023AckRole"
-    "LiteInfoList\022&\n\tchar_data\030\001 \003(\0132\023.NFMsg."
-    "RoleLiteInfo\"o\n\rReqCreateRole\022\017\n\007account"
-    "\030\001 \002(\014\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004r"
-    "ace\030\004 \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030"
-    "\006 \002(\005\"\?\n\rReqDeleteRole\022\017\n\007account\030\001 \002(\014\022"
-    "\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\"@\n\016ReqRec"
-    "overRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022"
-    "\017\n\007game_id\030\003 \002(\005\" \n\017ServerHeartBeat\022\r\n\005c"
-    "ount\030\001 \001(\005\"/\n\020RoleOnlineNotify\022\033\n\005guild\030"
-    "\001 \001(\0132\014.NFMsg.Ident\"0\n\021RoleOfflineNotify"
-    "\022\033\n\005guild\030\001 \001(\0132\014.NFMsg.Ident*Z\n\014EServer"
-    "State\022\r\n\tEST_CRASH\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010"
-    "EST_BUSY\020\002\022\014\n\010EST_FIRE\020\003\022\017\n\013EST_MAINTEN\020"
-    "\004*@\n\021ReqServerListType\022\025\n\021RSLT_WORLD_SER"
-    "VER\020\000\022\024\n\020RSLT_GAMES_ERVER\020\001", 2267);
+    "\n\nextra_info\030\013 \002(\014\022\025\n\rplatform_type\030\014 \001("
+    "\005\"7\n\020ReqAccountLogout\022\017\n\007account\030\002 \002(\014\022\022"
+    "\n\nextra_info\030\003 \002(\014\"f\n\nServerInfo\022\021\n\tserv"
+    "er_id\030\001 \002(\005\022\014\n\004name\030\002 \002(\014\022\022\n\nwait_count\030"
+    "\003 \002(\005\022#\n\006status\030\004 \002(\0162\023.NFMsg.EServerSta"
+    "te\"7\n\rReqServerList\022&\n\004type\030\001 \002(\0162\030.NFMs"
+    "g.ReqServerListType\"X\n\rAckServerList\022&\n\004"
+    "type\030\001 \002(\0162\030.NFMsg.ReqServerListType\022\037\n\004"
+    "info\030\002 \003(\0132\021.NFMsg.ServerInfo\"d\n\017ReqConn"
+    "ectWorld\022\020\n\010world_id\030\001 \002(\005\022\017\n\007account\030\002 "
+    "\001(\014\022\034\n\006sender\030\003 \001(\0132\014.NFMsg.Ident\022\020\n\010log"
+    "in_id\030\004 \001(\005\"\243\001\n\025AckConnectWorldResult\022\020\n"
+    "\010world_id\030\001 \002(\005\022\034\n\006sender\030\002 \002(\0132\014.NFMsg."
+    "Ident\022\020\n\010login_id\030\003 \002(\005\022\017\n\007account\030\004 \002(\014"
+    "\022\020\n\010world_ip\030\005 \002(\014\022\022\n\nworld_port\030\006 \002(\005\022\021"
+    "\n\tworld_key\030\007 \002(\014\"#\n\017ReqSelectServer\022\020\n\010"
+    "world_id\030\001 \002(\005\"5\n\020ReqKickFromWorld\022\020\n\010wo"
+    "rld_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"/\n\013ReqRole"
+    "List\022\017\n\007game_id\030\001 \002(\005\022\017\n\007account\030\002 \002(\014\"\373"
+    "\001\n\014RoleLiteInfo\022\030\n\002id\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\022\016\n\006career\030\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004"
+    " \002(\005\022\021\n\tnoob_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005"
+    "\022\022\n\nrole_level\030\007 \002(\005\022\023\n\013delete_time\030\010 \002("
+    "\005\022\020\n\010reg_time\030\t \002(\005\022\031\n\021last_offline_time"
+    "\030\n \002(\005\022\027\n\017last_offline_ip\030\013 \002(\005\022\023\n\013view_"
+    "record\030\014 \002(\014\"=\n\023AckRoleLiteInfoList\022&\n\tc"
+    "har_data\030\001 \003(\0132\023.NFMsg.RoleLiteInfo\"o\n\rR"
+    "eqCreateRole\022\017\n\007account\030\001 \002(\014\022\016\n\006career\030"
+    "\002 \002(\005\022\013\n\003sex\030\003 \002(\005\022\014\n\004race\030\004 \002(\005\022\021\n\tnoob"
+    "_name\030\005 \002(\014\022\017\n\007game_id\030\006 \002(\005\"\?\n\rReqDelet"
+    "eRole\022\017\n\007account\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007"
+    "game_id\030\003 \002(\005\"@\n\016ReqRecoverRole\022\017\n\007accou"
+    "nt\030\001 \002(\014\022\014\n\004name\030\002 \002(\014\022\017\n\007game_id\030\003 \002(\005\""
+    " \n\017ServerHeartBeat\022\r\n\005count\030\001 \001(\005\"/\n\020Rol"
+    "eOnlineNotify\022\033\n\005guild\030\001 \001(\0132\014.NFMsg.Ide"
+    "nt\"0\n\021RoleOfflineNotify\022\033\n\005guild\030\001 \001(\0132\014"
+    ".NFMsg.Ident*Z\n\014EServerState\022\r\n\tEST_CRAS"
+    "H\020\000\022\016\n\nEST_NARMAL\020\001\022\014\n\010EST_BUSY\020\002\022\014\n\010EST"
+    "_FIRE\020\003\022\017\n\013EST_MAINTEN\020\004*@\n\021ReqServerLis"
+    "tType\022\025\n\021RSLT_WORLD_SERVER\020\000\022\024\n\020RSLT_GAM"
+    "ES_ERVER\020\001", 2290);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgPreGame.proto", &protobuf_RegisterTypes);
   ServerInfoReport::default_instance_ = new ServerInfoReport();
@@ -1761,6 +1763,7 @@ const int ReqAccountLogin::kClientIPFieldNumber;
 const int ReqAccountLogin::kClientMACFieldNumber;
 const int ReqAccountLogin::kDeviceInfoFieldNumber;
 const int ReqAccountLogin::kExtraInfoFieldNumber;
+const int ReqAccountLogin::kPlatformTypeFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAccountLogin::ReqAccountLogin()
@@ -1789,6 +1792,7 @@ void ReqAccountLogin::SharedCtor() {
   clientmac_ = GOOGLE_LONGLONG(0);
   device_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   extra_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  platform_type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1878,6 +1882,7 @@ void ReqAccountLogin::Clear() {
         extra_info_->clear();
       }
     }
+    platform_type_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2032,6 +2037,22 @@ bool ReqAccountLogin::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(96)) goto parse_platform_type;
+        break;
+      }
+
+      // optional int32 platform_type = 12;
+      case 12: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_platform_type:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &platform_type_)));
+          set_has_platform_type();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2110,6 +2131,11 @@ void ReqAccountLogin::SerializeWithCachedSizes(
       11, this->extra_info(), output);
   }
 
+  // optional int32 platform_type = 12;
+  if (has_platform_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->platform_type(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2178,6 +2204,11 @@ void ReqAccountLogin::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         11, this->extra_info(), target);
+  }
+
+  // optional int32 platform_type = 12;
+  if (has_platform_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->platform_type(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2263,6 +2294,13 @@ int ReqAccountLogin::ByteSize() const {
           this->extra_info());
     }
 
+    // optional int32 platform_type = 12;
+    if (has_platform_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->platform_type());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -2322,6 +2360,9 @@ void ReqAccountLogin::MergeFrom(const ReqAccountLogin& from) {
     if (from.has_extra_info()) {
       set_extra_info(from.extra_info());
     }
+    if (from.has_platform_type()) {
+      set_platform_type(from.platform_type());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2356,6 +2397,7 @@ void ReqAccountLogin::Swap(ReqAccountLogin* other) {
     std::swap(clientmac_, other->clientmac_);
     std::swap(device_info_, other->device_info_);
     std::swap(extra_info_, other->extra_info_);
+    std::swap(platform_type_, other->platform_type_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
