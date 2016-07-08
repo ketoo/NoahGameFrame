@@ -62,7 +62,7 @@ private:
     NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
 	NFINetClientModule* m_pNetClientModule;
 };

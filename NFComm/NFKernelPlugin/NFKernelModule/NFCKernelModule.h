@@ -175,7 +175,7 @@ private:
 
     NFISceneModule* m_pSceneModule;
     NFILogModule* m_pLogModule;
-    NFIClassModule* m_pLogicClassModule;
+    NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
     NFIUUIDModule* m_pUUIDModule;
 };

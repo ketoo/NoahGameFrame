@@ -406,7 +406,6 @@ bool NFCClassModule::Load()
         Load(attrNode, NULL);
     }
 
-    m_pElementModule->Load();
     //////////////////////////////////////////////////////////////////////////
     if (NULL != pData)
     {
