@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCProxyServerNet_ClientModule.cpp
+//    @FileName			:    NFCProxyServerNet_ClientModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-05-06
 //    @Module           :    NFCProxyServerNet_ClientModule
@@ -14,9 +14,9 @@
 
 bool NFCProxyServerToGameModule::Init()
 {
-	m_pClusterClientModule = NF_NEW NFIClusterClientModule(pPluginManager);
+	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
 
-	m_pClusterClientModule->Init();
+	m_pNetClientModule->Init();
 
     return true;
 }
@@ -30,7 +30,7 @@ bool NFCProxyServerToGameModule::Shut()
 
 bool NFCProxyServerToGameModule::Execute()
 {
-	m_pClusterClientModule->Execute();
+	m_pNetClientModule->Execute();
 
 	return true;
 }
@@ -44,10 +44,10 @@ bool NFCProxyServerToGameModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pLogicClassModule = pPluginManager->FindModule<NFILogicClassModule>();
 
-	m_pClusterClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
-	m_pClusterClientModule->AddReceiveCallBack(this, &NFCProxyServerToGameModule::Transpond);
+	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
+	m_pNetClientModule->AddReceiveCallBack(this, &NFCProxyServerToGameModule::Transpond);
 
-	m_pClusterClientModule->AddEventCallBack(this, &NFCProxyServerToGameModule::OnSocketGSEvent);
+	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToGameModule::OnSocketGSEvent);
 
     NF_SHARE_PTR<NFILogicClass> xLogicClass = m_pLogicClassModule->GetElement("Server");
     if (xLogicClass.get())
@@ -74,7 +74,7 @@ bool NFCProxyServerToGameModule::AfterInit()
                 xServerData.nPort = nPort;
                 xServerData.strName = strName;
 
-				m_pClusterClientModule->AddServer(xServerData);
+				m_pNetClientModule->AddServer(xServerData);
             }
         }
     }
@@ -82,9 +82,9 @@ bool NFCProxyServerToGameModule::AfterInit()
     return true;
 }
 
-NFIClusterClientModule* NFCProxyServerToGameModule::GetClusterModule()
+NFINetClientModule* NFCProxyServerToGameModule::GetClusterModule()
 {
-	return m_pClusterClientModule;
+	return m_pNetClientModule;
 }
 
 void NFCProxyServerToGameModule::OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -136,11 +136,11 @@ void NFCProxyServerToGameModule::Register(NFINet* pNet)
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
 
-                NF_SHARE_PTR<ConnectData> pServerData = m_pClusterClientModule->GetServerNetInfo(pNet);
+                NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
                 {
                     int nTargetID = pServerData->nGameID;
-                    m_pClusterClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
+                    m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_PTWG_PROXY_REGISTERED, xMsg);
 
                     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
                 }
