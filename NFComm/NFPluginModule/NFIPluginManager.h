@@ -27,7 +27,22 @@ public:
 	template <typename T>
 	T* FindModule()
 	{
+#if NF_PLATFORM == NF_PLATFORM_WIN
 		NFIModule* pLogicModule = FindModule(typeid(T).name());
+#else
+		std::string strModuleName = typeid(T).name();
+		for (int i = 0; i < strModuleName.length(); i++)
+		{
+			std::string s = strModuleName.substr(0, i + 1);
+			int n = atof(s.c_str());
+			if (strModuleName.length() == i + 1 + n)
+			{
+				strModuleName = strModuleName.substr(i + 1, strModuleName.length());
+				break;
+			}
+		}
+		NFIModule* pLogicModule = FindModule(strModuleName.c_str());
+#endif
 		if (pLogicModule)
 		{
 			if (!TIsDerived<T, NFIModule>::Result)
