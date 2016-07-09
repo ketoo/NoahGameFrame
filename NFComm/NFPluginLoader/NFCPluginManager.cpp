@@ -192,11 +192,25 @@ void NFCPluginManager::RemoveModule(const std::string& strModuleName)
 NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 {
 	std::string strSubModuleName = strModuleName;
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	std::size_t position = strSubModuleName.find(" ");
 	if (string::npos != position)
 	{
 		strSubModuleName = strSubModuleName.substr(position + 1, strSubModuleName.length());
 	}
+#else
+	for (int i = 0; i < strSubModuleName.length(); i++)
+	{
+		std::string s = strSubModuleName.substr(0, i + 1);
+		int n = atof(s.c_str());
+		if (strSubModuleName.length() == i + 1 + n)
+		{
+			strSubModuleName = strSubModuleName.substr(i + 1, strSubModuleName.length());
+			break;
+		}
+	}
+#endif
 
 	ModuleInstanceMap::iterator it = mModuleInstanceMap.find(strSubModuleName);
 	if (it != mModuleInstanceMap.end())
