@@ -8,6 +8,10 @@
 
 #include "NFCItemModule.h"
 #include "NFComm/NFPluginModule/NFIItemCardConsumeProcessModule.h"
+//#include "NFComm/NFPluginModule/NFIItemEquipConsumeProcessModule.h"
+//#include "NFComm/NFPluginModule/NFIItemGemConsumeProcessModule.h"
+//#include "NFComm/NFPluginModule/NFIItemItemConsumeProcessModule.h"
+//#include "NFComm/NFPluginModule/NFIItemTokenConsumeProcessModule.h"
 
 bool NFCItemModule::Init()
 {
@@ -332,6 +336,58 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 
 	}
 		break;
+	//case NFMsg::EItemType::EIT_EQUIP:
+	//{
+	//	NFIItemEquipConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemEquipConsumeProcessModule>(eItemType);
+	//	if (pConsumeProcessModule)
+	//	{
+	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+	//		{
+	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+	//		}
+	//	}
+
+	//}
+	//break;
+	//case NFMsg::EItemType::EIT_GEM:
+	//{
+	//	NFIItemGemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemGemConsumeProcessModule>(eItemType);
+	//	if (pConsumeProcessModule)
+	//	{
+	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+	//		{
+	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+	//		}
+	//	}
+
+	//}
+	//break;
+	//case NFMsg::EItemType::EIT_ITEM:
+	//{
+	//	NFIItemItemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemItemConsumeProcessModule>(eItemType);
+	//	if (pConsumeProcessModule)
+	//	{
+	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+	//		{
+	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+	//		}
+	//	}
+
+	//}
+	//break;
+	//case NFMsg::EItemType::EIT_TOKEN:
+	//{
+	//	NFIItemTokenConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemTokenConsumeProcessModule>(eItemType);
+	//	if (pConsumeProcessModule)
+	//	{
+	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+	//		{
+	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+	//		}
+	//	}
+
+	//}
+	//break;
 	default:
 		break;
 	}
