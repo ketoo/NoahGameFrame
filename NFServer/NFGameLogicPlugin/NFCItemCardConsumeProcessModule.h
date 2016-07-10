@@ -1,14 +1,14 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCPotionConsumeProcessModule.h
+//    @FileName      :   NFCItemCardConsumeProcessModule.h
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
-//    @Module           :   NFCPotionConsumeProcessModule
+//    @Module           :   NFCItemCardConsumeProcessModule
 //    @Desc             :   道具消费机制类--使用物品，获得技能或者道具
 //                                  --技能书学习技能,礼包类获得物品,BUFF类得到BUFF,技能类使用技能
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CARDITEMCONSUME_PROCESS_MODULE_H
-#define NFC_CARDITEMCONSUME_PROCESS_MODULE_H
+#ifndef NFC_ITEM_CARD_CONSUME_PROCESS_MODULE_H
+#define NFC_ITEM_CARD_CONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
