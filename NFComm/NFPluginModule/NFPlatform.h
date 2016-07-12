@@ -299,13 +299,12 @@ inline unsigned long NF_GetTickCount()
 #define NFSLEEP(s) usleep(s)
 #endif
 
-
-//use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 1
-
 #ifndef NF_DYNAMIC_PLUGIN
 #define NF_DYNAMIC_PLUGIN
 #endif
+
+//use actor mode--begin
+#define NF_ACTOR_THREAD_COUNT 1
 
 #ifndef NF_USE_ACTOR
 #define NF_USE_ACTOR
