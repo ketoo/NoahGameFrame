@@ -8,25 +8,25 @@
 
 #include "NFCItemModule.h"
 #include "NFComm/NFPluginModule/NFIItemCardConsumeProcessModule.h"
-//#include "NFComm/NFPluginModule/NFIItemEquipConsumeProcessModule.h"
-//#include "NFComm/NFPluginModule/NFIItemGemConsumeProcessModule.h"
-//#include "NFComm/NFPluginModule/NFIItemItemConsumeProcessModule.h"
-//#include "NFComm/NFPluginModule/NFIItemTokenConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIItemEquipConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIItemGemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIItemItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIItemTokenConsumeProcessModule.h"
 
 bool NFCItemModule::Init()
 {
-    return true;
+	return true;
 }
 
 bool NFCItemModule::Shut()
 {
-    return true;
+	return true;
 }
 
 bool NFCItemModule::Execute()
 {
-    //Î»ÖÃÄØ
-    return true;
+	//Î»ÖÃÄØ
+	return true;
 }
 
 bool NFCItemModule::AfterInit()
@@ -44,34 +44,34 @@ bool NFCItemModule::AfterInit()
 	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
 	m_pCommonConfigModule->LoadConfig(strPlayerPath);
 
-    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent );
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent);
 	CheckConfig();
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)){ return false; }
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
 
 
-    return true;
+	return true;
 }
 
-int NFCItemModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
-    if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
-    {
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	{
 
-    }
-    else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
-    {
-        m_pKernelModule->AddEventCallBack( self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent );
-    }
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+	{
+		m_pKernelModule->AddEventCallBack(self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent);
+	}
 
-    return 0;
+	return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
+int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
 {
-    return 0;
+	return 0;
 }
 
 bool NFCItemModule::CheckConfig()
@@ -104,7 +104,7 @@ bool NFCItemModule::CheckConfig()
 		{
 			assert(0);
 		}
-		
+
 		int nLevel = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::Level());
 		if (nLevel < 0)
 		{
@@ -117,11 +117,11 @@ bool NFCItemModule::CheckConfig()
 			assert(0);
 		}
 
- 		//int nCoolDown = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::CoolDownTime());
- 		//if (nCoolDown <= 0)
- 		//{
- 		//	assert(0);
- 		//}
+		//int nCoolDown = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::CoolDownTime());
+		//if (nCoolDown <= 0)
+		//{
+		//	assert(0);
+		//}
 
 		int nOverlayCount = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::OverlayCount());
 		if (nOverlayCount <= 0)
@@ -132,163 +132,163 @@ bool NFCItemModule::CheckConfig()
 
 		int nBuyPrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::BuyPrice());
 		int nSalePrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::SalePrice());
-		
+
 		if (nSalePrice < 0 || nBuyPrice < 0)
 		{
 			assert(0);
 		}
 
-		 bRet = configList.Next(strConfigID);
+		bRet = configList.Next(strConfigID);
 	}
 
 	return true;
 }
 
-int NFCItemModule::AddItemEffectDataProperty( const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID)
+int NFCItemModule::AddItemEffectDataProperty(const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID)
 {
-    if (strItemID.empty())
-    {
-        return 1;
-    }
+	if (strItemID.empty())
+	{
+		return 1;
+	}
 
-    //////////////////////////////////////////////////////////////////////////
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( xTarget );
-    if ( NULL == pObject )
-    {
-        //m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-        return 1;
-    }
+	//////////////////////////////////////////////////////////////////////////
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(xTarget);
+	if (NULL == pObject)
+	{
+		//m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
+		return 1;
+	}
 
-    //////////////////////////////////////////////////////////////////////////
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strItemID);
-    if (!pPropertyManager)
-    {
-        return 1;
-    }
+	//////////////////////////////////////////////////////////////////////////
+	NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strItemID);
+	if (!pPropertyManager)
+	{
+		return 1;
+	}
 
-    NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
-    if (!pEffectDataProperty)
-    {
-        return 1;
-    }
+	NF_SHARE_PTR<NFIProperty> pEffectDataProperty = pPropertyManager->GetElement("EffectData");
+	if (!pEffectDataProperty)
+	{
+		return 1;
+	}
 
-    NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementModule->GetPropertyManager(pEffectDataProperty->GetString());
-    if (!pEffectDataPropertyManager)
-    {
-        return 1;
-    }
+	NF_SHARE_PTR<NFIPropertyManager> pEffectDataPropertyManager = m_pElementModule->GetPropertyManager(pEffectDataProperty->GetString());
+	if (!pEffectDataPropertyManager)
+	{
+		return 1;
+	}
 
-    NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
-    while (pProperty)
-    {
-        if (pProperty->GetInt() != 0)
-        {
-            m_pPropertyModule->AddPropertyValue( xTarget, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt());
-        }
+	NF_SHARE_PTR<NFIProperty> pProperty = pEffectDataPropertyManager->First();
+	while (pProperty)
+	{
+		if (pProperty->GetInt() != 0)
+		{
+			m_pPropertyModule->AddPropertyValue(xTarget, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt());
+		}
 
-        pProperty = pEffectDataPropertyManager->Next();
-    }
+		pProperty = pEffectDataPropertyManager->Next();
+	}
 
-    return 0;
+	return 0;
 }
 
-bool NFCItemModule::ConsumeDataItemProperty( const NFGUID& self, const std::string& strID )
+bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::string& strID)
 {
-    if (strID.empty())
-    {
-        return false;
-    }
+	if (strID.empty())
+	{
+		return false;
+	}
 
-    const int nVIPEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
-    const int nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
-    const int nHP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
-    const int nSP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
-    const int nMP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
-    const int nGold = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
-    const int nMoney = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
-   
-    if (nGold > 0 && !m_pPropertyModule->EnoughDiamond(self, nGold))
-    {
-        return false;
-    }
+	const int nVIPEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
+	const int nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+	const int nHP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
+	const int nSP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
+	const int nMP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
+	const int nGold = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
+	const int nMoney = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
 
-    if (nHP > 0 && !m_pPropertyModule->EnoughHP(self, nHP))
-    {
-        return false;
-    }
+	if (nGold > 0 && !m_pPropertyModule->EnoughDiamond(self, nGold))
+	{
+		return false;
+	}
 
-    if (nMoney > 0 && !m_pPropertyModule->EnoughMoney(self, nMoney))
-    {
-        return false;
-    }
+	if (nHP > 0 && !m_pPropertyModule->EnoughHP(self, nHP))
+	{
+		return false;
+	}
 
-    if (nMP > 0 && !m_pPropertyModule->EnoughMP(self, nMP))
-    {
-        return false;
-    }
+	if (nMoney > 0 && !m_pPropertyModule->EnoughMoney(self, nMoney))
+	{
+		return false;
+	}
 
-    if (nSP > 0 && !m_pPropertyModule->EnoughSP(self, nSP))
-    {
-        return false;
-    }
+	if (nMP > 0 && !m_pPropertyModule->EnoughMP(self, nMP))
+	{
+		return false;
+	}
 
-    if (nHP > 0 && !m_pPropertyModule->ConsumeHP(self, nHP))
-    {
-        return false;
-    }
+	if (nSP > 0 && !m_pPropertyModule->EnoughSP(self, nSP))
+	{
+		return false;
+	}
 
-    if (nMoney > 0 && !m_pPropertyModule->ConsumeMoney(self, nMoney))
-    {
-        return false;
-    }
+	if (nHP > 0 && !m_pPropertyModule->ConsumeHP(self, nHP))
+	{
+		return false;
+	}
 
-    if (nMP > 0 && !m_pPropertyModule->ConsumeMP(self, nMP))
-    {
-        return false;
-    }
+	if (nMoney > 0 && !m_pPropertyModule->ConsumeMoney(self, nMoney))
+	{
+		return false;
+	}
 
-    if (nSP > 0 && !m_pPropertyModule->ConsumeSP(self, nSP))
-    {
-        return false;
-    }
+	if (nMP > 0 && !m_pPropertyModule->ConsumeMP(self, nMP))
+	{
+		return false;
+	}
 
-    return true;
+	if (nSP > 0 && !m_pPropertyModule->ConsumeSP(self, nSP))
+	{
+		return false;
+	}
+
+	return true;
 }
-  
-bool NFCItemModule::DoAwardPack( const NFGUID& self, const std::string& strAwardPack )
+
+bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
 {
-    std::vector<std::string> xList;
-    m_pCommonConfigModule->GetStructItemList(strAwardPack, xList);
+	std::vector<std::string> xList;
+	m_pCommonConfigModule->GetStructItemList(strAwardPack, xList);
 
-    for (int i = 0; i < xList.size(); ++i)
-    {
-        const std::string& strItemID = xList[i];
-        const int nCout = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
-        const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
-        if (m_pElementModule->ExistElement(strItemID))
-        {
-            if (nIsHero > 0)
-            {
-                m_pHeroModule->AddHero(self, strItemID);
-                continue;
-            }
+	for (int i = 0; i < xList.size(); ++i)
+	{
+		const std::string& strItemID = xList[i];
+		const int nCout = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
+		const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
+		if (m_pElementModule->ExistElement(strItemID))
+		{
+			if (nIsHero > 0)
+			{
+				m_pHeroModule->AddHero(self, strItemID);
+				continue;
+			}
 
-            const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-            switch (nItemType)
-            {
-            case NFMsg::EIT_EQUIP:
-                {
-                    m_pPackModule->CreateEquip(self, strItemID);
-                }
-                break;
-            default:
-                m_pPackModule->CreateItem(self, strItemID, nCout);
-                break;
-            }
-        }
-    }
+			const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+			switch (nItemType)
+			{
+			case NFMsg::EIT_EQUIP:
+			{
+				m_pPackModule->CreateEquip(self, strItemID);
+			}
+			break;
+			default:
+				m_pPackModule->CreateItem(self, strItemID, nCout);
+				break;
+			}
+		}
+	}
 
-    return true;
+	return true;
 }
 
 void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -299,7 +299,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 	const std::string strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
 
-	if(!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
+	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
 	{
 		return;
 	}
@@ -310,15 +310,15 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		return;
 	}
 
-    if (!ConsumeDataItemProperty(self, strItemID))
-    {
-        return;
-    }
+	if (!ConsumeDataItemProperty(self, strItemID))
+	{
+		return;
+	}
 
-    if (!m_pPackModule->DeleteItem(self, strItemID, 1))
-    {
-        return;
-    }
+	if (!m_pPackModule->DeleteItem(self, strItemID, 1))
+	{
+		return;
+	}
 
 	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
 	switch (eItemType)
@@ -335,63 +335,68 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		}
 
 	}
-		break;
-	//case NFMsg::EItemType::EIT_EQUIP:
-	//{
-	//	NFIItemEquipConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemEquipConsumeProcessModule>(eItemType);
-	//	if (pConsumeProcessModule)
-	//	{
-	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-	//		{
-	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-	//		}
-	//	}
+	break;
+	case NFMsg::EItemType::EIT_EQUIP:
+	{
+		NFIItemEquipConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemEquipConsumeProcessModule>(eItemType);
+		if (pConsumeProcessModule)
+		{
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			{
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+			}
+		}
 
-	//}
-	//break;
-	//case NFMsg::EItemType::EIT_GEM:
-	//{
-	//	NFIItemGemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemGemConsumeProcessModule>(eItemType);
-	//	if (pConsumeProcessModule)
-	//	{
-	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-	//		{
-	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-	//		}
-	//	}
+	}
+	break;
+	case NFMsg::EItemType::EIT_GEM:
+	{
+		NFIItemGemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemGemConsumeProcessModule>(eItemType);
+		if (pConsumeProcessModule)
+		{
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			{
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+			}
+		}
 
-	//}
-	//break;
-	//case NFMsg::EItemType::EIT_ITEM:
-	//{
-	//	NFIItemItemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemItemConsumeProcessModule>(eItemType);
-	//	if (pConsumeProcessModule)
-	//	{
-	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-	//		{
-	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-	//		}
-	//	}
+	}
+	break;
+	case NFMsg::EItemType::EIT_ITEM:
+	{
+		NFIItemItemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemItemConsumeProcessModule>(eItemType);
+		if (pConsumeProcessModule)
+		{
+			NFCDataList xTarget;
+			xTarget.SetObject(0, xTargetID);
+			xTarget.SetString(1, xMsg.item().item_id());	//this is Item Config ID
+			xTarget.SetInt(2, xMsg.item().item_count());	//this is Item Count to Consume
 
-	//}
-	//break;
-	//case NFMsg::EItemType::EIT_TOKEN:
-	//{
-	//	NFIItemTokenConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemTokenConsumeProcessModule>(eItemType);
-	//	if (pConsumeProcessModule)
-	//	{
-	//		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-	//		{
-	//			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-	//		}
-	//	}
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) > 0)
+			{
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
+			}
+		}
 
-	//}
-	//break;
+	}
+	break;
+	case NFMsg::EItemType::EIT_TOKEN:
+	{
+		NFIItemTokenConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemTokenConsumeProcessModule>(eItemType);
+		if (pConsumeProcessModule)
+		{
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			{
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+			}
+		}
+
+	}
+	break;
 	default:
 		break;
 	}
-	
+
 	/*	AddItemEffectDataProperty(self, xTargetID, strItemID);
 
 		const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
