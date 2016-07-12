@@ -54,7 +54,31 @@ NFCPluginManager::~NFCPluginManager()
 
 }
 
-bool NFCPluginManager::LoadPlugin()
+inline bool NFCPluginManager::Init()
+{
+	LoadPluginConfig();
+
+	PluginNameMap::iterator it = mPluginNameMap.begin();
+	for (it; it != mPluginNameMap.end(); ++it)
+	{
+#ifdef NF_DYNAMIC_PLUGIN
+		LoadPluginLibrary(it->first);
+#else
+		LoadStaticPlugin(it->first);
+#endif
+	}
+
+
+	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
+	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	{
+		itInstance->second->Init();
+	}
+
+	return true;
+}
+
+bool NFCPluginManager::LoadPluginConfig()
 {
     rapidxml::file<> fdoc("Plugin.xml");
     rapidxml::xml_document<>  doc;
@@ -106,6 +130,22 @@ bool NFCPluginManager::LoadPlugin()
     mstrConfigPath = pPluginConfigPathNode->first_attribute("Name")->value();
 
     return true;
+}
+
+bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
+{
+	//     PluginNameList::iterator it = mPluginNameList.begin();
+	//     for (it; it != mPluginNameList.end(); it++)
+	//     {
+	//         const std::string& strPluginName = *it;
+	//         CREATE_PLUGIN( this, strPluginName );
+	//     }
+
+	//     CREATE_PLUGIN(this, NFKernelPlugin)
+	//     CREATE_PLUGIN(this, NFEventProcessPlugin)
+	//     CREATE_PLUGIN(this, NFConfigPlugin)
+
+	return false;
 }
 
 void NFCPluginManager::Registered(NFIPlugin* plugin)
@@ -171,6 +211,26 @@ bool NFCPluginManager::Execute()
     return bRet;
 }
 
+inline int NFCPluginManager::AppID() const
+{
+	return mnAppID;
+}
+
+inline NFINT64 NFCPluginManager::GetInitTime() const
+{
+	return mnInitTime;
+}
+
+inline NFINT64 NFCPluginManager::GetNowTime() const
+{
+	return mnNowTime;
+}
+
+inline const std::string & NFCPluginManager::GetConfigPath() const
+{
+	return mstrConfigPath;
+}
+
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
 {
     if (!FindModule(strModuleName))
@@ -221,44 +281,6 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
     return NULL;
 }
 
-bool NFCPluginManager::Init()
-{
-#ifdef NF_DYNAMIC_PLUGIN
-    LoadPlugin();
-
-
-#if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
-    PluginNameMap::iterator it = mPluginNameMap.begin();
-    for (it; it != mPluginNameMap.end(); ++it)
-    {
-        LoadPluginLibrary(it->first);
-    }
-
-#endif
-
-#else
-    //     PluginNameList::iterator it = mPluginNameList.begin();
-    //     for (it; it != mPluginNameList.end(); it++)
-    //     {
-    //         const std::string& strPluginName = *it;
-    //         CREATE_PLUGIN( this, strPluginName );
-    //     }
-
-    //     CREATE_PLUGIN(this, NFKernelPlugin)
-    //     CREATE_PLUGIN(this, NFEventProcessPlugin)
-    //     CREATE_PLUGIN(this, NFConfigPlugin)
-
-#endif
-
-    PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-    for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
-    {
-        itInstance->second->Init();
-    }
-
-    return true;
-}
-
 bool NFCPluginManager::AfterInit()
 {
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
@@ -300,22 +322,20 @@ bool NFCPluginManager::Shut()
         itInstance->second->Shut();
     }
 
-#ifdef NF_DYNAMIC_PLUGIN
+
 
     PluginNameMap::iterator it = mPluginNameMap.begin();
     for (it; it != mPluginNameMap.end(); it++)
     {
+#ifdef NF_DYNAMIC_PLUGIN
         UnLoadPluginLibrary(it->first);
+#else
+		UnLoadStaticPlugin(it->first);
+#endif
     }
 
 
-#else
 
-    //     DESTROY_PLUGIN(this, NFConfigPlugin)
-    //     DESTROY_PLUGIN(this, NFEventProcessPlugin)
-    //     DESTROY_PLUGIN(this, NFKernelPlugin)
-
-#endif
     mPluginInstanceMap.clear();
     mPluginNameMap.clear();
     return true;
@@ -392,6 +412,14 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
     }
 
     return false;
+}
+
+bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
+{
+	//     DESTROY_PLUGIN(this, NFConfigPlugin)
+	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
+	//     DESTROY_PLUGIN(this, NFKernelPlugin)
+	return false;
 }
 
 bool NFCPluginManager::StartReLoadState()
