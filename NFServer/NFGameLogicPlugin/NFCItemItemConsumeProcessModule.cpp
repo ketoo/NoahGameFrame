@@ -1,11 +1,11 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemEquipConSumeProcessModule.cpp
+//    @FileName      :   NFCItemEquipConsumeProcessModule.cpp
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
-//    @Module           :   NFCItemEquipConSumeProcessModule
+//    @Module           :   NFCItemEquipConsumeProcessModule
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
 // -------------------------------------------------------------------------
-#include "NFCItemItemConSumeProcessModule.h"
+#include "NFCItemItemConsumeProcessModule.h"
 
 bool NFCItemItemConsumeProcessModule::Init()
 {

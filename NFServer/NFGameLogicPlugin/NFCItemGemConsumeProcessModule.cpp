@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemEquipConSumeProcessModule.cpp
+//    @FileName      :   NFCItemEquipConsumeProcessModule.cpp
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
-//    @Module           :   NFCItemEquipConSumeProcessModule
+//    @Module           :   NFCItemEquipConsumeProcessModule
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
 // -------------------------------------------------------------------------
-#include "NFCItemGemConSumeProcessModule.h"
+#include "NFCItemGemConsumeProcessModule.h"
 
-bool NFCItemGemConSumeProcessModule::Init()
+bool NFCItemGemConsumeProcessModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
@@ -21,30 +21,30 @@ bool NFCItemGemConSumeProcessModule::Init()
 	return true;
 }
 
-bool NFCItemGemConSumeProcessModule::AfterInit()
+bool NFCItemGemConsumeProcessModule::AfterInit()
 {
 
 
 	return true;
 }
 
-bool NFCItemGemConSumeProcessModule::Shut()
+bool NFCItemGemConsumeProcessModule::Shut()
 {
 	return true;
 }
 
-bool NFCItemGemConSumeProcessModule::Execute()
+bool NFCItemGemConsumeProcessModule::Execute()
 {
 	return true;
 }
 
 
-int NFCItemGemConSumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemGemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
 {
 	return 1;
 }
 
-int NFCItemGemConSumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemGemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
 {
 	return 1;
 }

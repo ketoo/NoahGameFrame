@@ -19,12 +19,12 @@
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 
-class NFCItemGemConSumeProcessModule
+class NFCItemGemConsumeProcessModule
 	: public NFIItemGemConsumeProcessModule
 {
 
 public:
-	NFCItemGemConSumeProcessModule(NFIPluginManager* p)
+	NFCItemGemConsumeProcessModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
 	}
