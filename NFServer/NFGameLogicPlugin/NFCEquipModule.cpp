@@ -314,7 +314,7 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 	}
 
 	NFCDataList xHeroDataList;
-	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, id, xHeroDataList);
+	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, hero, xHeroDataList);
 	if (xHeroDataList.GetCount() != 1)
 	{
 		return false;
