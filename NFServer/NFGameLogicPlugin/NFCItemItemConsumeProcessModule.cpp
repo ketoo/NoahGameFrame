@@ -68,8 +68,8 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		return 0;
 	}
 
-	const int nBagItemCount = varItemID.Int(NFrame::Player::BagItemList_ItemCount);
-	if (nItemCount > nBagItemCount || nItemCount < 1)
+	const int nBagList_ItemCount = varItemID.Int(NFrame::Player::BagItemList_ItemCount);
+	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
 	{
 		return 0;
 	}
@@ -140,7 +140,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 		//deduct Bag ItemCount
 		const int nRow = varItemID.Int(0);
-		pBagItemList->SetInt(nRow, NFrame::Player::BagItemList_ItemCount, nBagItemCount - nItemCount);
+		pBagItemList->SetInt(nRow, NFrame::Player::BagItemList_ItemCount, nBagList_ItemCount - nItemCount);
 	}
 	break;
 	default:
