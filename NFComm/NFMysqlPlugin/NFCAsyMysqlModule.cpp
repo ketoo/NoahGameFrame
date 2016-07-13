@@ -1,7 +1,7 @@
 #include "NFCAsyMysqlModule.h"
 #include "NFCMysqlDriverManager.h"
 
-bool SMysqlParam::PackParam(std::string& strData)
+bool SMysqlBaseParam::PackParam(std::string& strData)
 {
     try
     {
@@ -37,7 +37,7 @@ bool SMysqlParam::PackParam(std::string& strData)
 }
 
 
-bool SMysqlParam::UnPackParam(const std::string& strData)
+bool SMysqlBaseParam::UnPackParam(const std::string& strData)
 {
     try
     {
@@ -52,7 +52,7 @@ bool SMysqlParam::UnPackParam(const std::string& strData)
         bExit                    = xMsg.bexit();
         nReqID                   = xMsg.nreqid();
         nRet                     = xMsg.nret();
-        eType                    = (EMysqlOPRType)xMsg.etype();
+        eType                    = (NFIAsyMysqlModule::ACOTERMYSQLEVENT)xMsg.etype();
 
         for (int i = 0; i < xMsg.fieldveclist_size(); i++)
         {
@@ -89,33 +89,59 @@ bool NFCMysqlComponent::AfterInit()
 
 int NFCMysqlComponent::OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
 {
+    int nRet = 0;
     switch (event)
     {
-        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_USEDB:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_UPDATA:
         {
-            return OnASyUseMysqlEvent(self, event, arg);
+            nRet = OnASyUpdataMysqlEvent(self, event, arg);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_QUERY:
+        {
+            nRet = OnASyQueryMysqlEvent(self, event, arg);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_SELECT:
+        {
+            nRet = OnASySelectMysqlEvent(self, event, arg);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_DELETE:
+        {
+            nRet = OnASyDeleteMysqlEvent(self, event, arg);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_EXISTS:
+        {
+            nRet = OnASyExistsMysqlEvent(self, event, arg);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEYS:
+        {
+            nRet = OnASyKeysMysqlEvent(self, event, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_INISERVER:
         {
-            return OnASyAddMysqlServerEvent(self, event, arg);
+            nRet = OnASyAddMysqlServerEvent(self, event, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
-            return OnASyKeepServerAliveEvent(self, event, arg);
+            nRet = OnASyKeepServerAliveEvent(self, event, arg);
         }
         break;
         default:
             break;
     }
 
-    return 0;
+    return nRet;
 }
 
-int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+int NFCMysqlComponent::OnASyUpdataMysqlEvent(const NFGUID& self, const int event, std::string& arg)
 {
-    SMysqlParam xparam;
+    SMysqlBaseParam xparam;
     if (!xparam.UnPackParam(arg))
     {
         return -1;
@@ -132,62 +158,187 @@ int NFCMysqlComponent::OnASyUseMysqlEvent(const NFGUID& self, const int event, s
         return -3;
     }
 
-    switch (xparam.eType)
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_UPDATA)
     {
-        case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
-        {
-            if (!pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
-            {
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_QUERY :
-        {
-            if (!pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
-            {
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_SELECT:
-        {
-            if (!pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
-            {
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_DELETE:
-        {
-            if (!pDriver->Delete(xparam.strRecordName, xparam.strKey))
-            {
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
-        {
-            bool bExit = false;
-            if (!pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
-            {
-                xparam.bExit = bExit;
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
-        {
-            if (!pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
-            {
-                xparam.nRet = -1;
-            }
-        }
-        break;
-        default:
-            break;
+        return -4;
     }
 
+    if (!pDriver->Updata(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+    {
+        xparam.nRet = -1;
+    }
+
+    xparam.PackParam(arg);
+    return 0;
+}
+
+
+int NFCMysqlComponent::OnASyQueryMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+{
+    SMysqlBaseParam xparam;
+    if (!xparam.UnPackParam(arg))
+    {
+        return -1;
+    }
+
+    if (!m_pMysqlDriverManager.get())
+    {
+        return -2;
+    }
+
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_QUERY)
+    {
+        return -4;
+    }
+
+    if (!pDriver->Query(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+    {
+        xparam.nRet = -1;
+    }
+
+    xparam.PackParam(arg);
+    return 0;
+}
+
+
+int NFCMysqlComponent::OnASySelectMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+{
+    SMysqlBaseParam xparam;
+    if (!xparam.UnPackParam(arg))
+    {
+        return -1;
+    }
+
+    if (!m_pMysqlDriverManager.get())
+    {
+        return -2;
+    }
+
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_SELECT)
+    {
+        return -4;
+    }
+
+    if (!pDriver->Select(xparam.strRecordName, xparam.strKey, xparam.fieldVec, xparam.valueVec))
+    {
+        xparam.nRet = -1;
+    }
+
+    xparam.PackParam(arg);
+    return 0;
+}
+
+
+int NFCMysqlComponent::OnASyDeleteMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+{
+    SMysqlBaseParam xparam;
+    if (!xparam.UnPackParam(arg))
+    {
+        return -1;
+    }
+
+    if (!m_pMysqlDriverManager.get())
+    {
+        return -2;
+    }
+
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_DELETE)
+    {
+        return -4;
+    }
+
+    if (!pDriver->Delete(xparam.strRecordName, xparam.strKey))
+    {
+        xparam.nRet = -1;
+    }
+
+    xparam.PackParam(arg);
+    return 0;
+}
+
+
+int NFCMysqlComponent::OnASyExistsMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+{
+    SMysqlBaseParam xparam;
+    if (!xparam.UnPackParam(arg))
+    {
+        return -1;
+    }
+
+    if (!m_pMysqlDriverManager.get())
+    {
+        return -2;
+    }
+
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_EXISTS)
+    {
+        return -4;
+    }
+
+    bool bExit = false;
+    if (!pDriver->Exists(xparam.strRecordName, xparam.strKey, bExit))
+    {
+        xparam.bExit = bExit;
+        xparam.nRet = -1;
+    }
+
+    xparam.PackParam(arg);
+    return 0;
+}
+
+
+int NFCMysqlComponent::OnASyKeysMysqlEvent(const NFGUID& self, const int event, std::string& arg)
+{
+    SMysqlBaseParam xparam;
+    if (!xparam.UnPackParam(arg))
+    {
+        return -1;
+    }
+
+    if (!m_pMysqlDriverManager.get())
+    {
+        return -2;
+    }
+
+    NFIMysqlDriver* pDriver = m_pMysqlDriverManager->GetMysqlDriver();
+    if (NULL == pDriver)
+    {
+        return -3;
+    }
+
+    if (xparam.eType != NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEYS)
+    {
+        return -4;
+    }
+
+    if (!pDriver->Keys(xparam.strRecordName, xparam.strKey, xparam.valueVec))
+    {
+        xparam.nRet = -1;
+    }
 
     xparam.PackParam(arg);
     return 0;
@@ -260,7 +411,7 @@ bool NFCAsyMysqlModule::AfterInit()
 
 bool NFCAsyMysqlModule::Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlUpDataParam> pParam(NF_NEW SMysqlUpDataParam());
     if (NULL == pParam)
     {
         return false;
@@ -271,12 +422,11 @@ bool NFCAsyMysqlModule::Updata(const NFGUID& self, const std::string& strRecordN
     pParam->fieldVec = fieldVec;
     pParam->valueVec = valueVec;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_UPDATA;
     pParam->mFunReturnRsp = mFunReturnRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -286,7 +436,7 @@ bool NFCAsyMysqlModule::Updata(const NFGUID& self, const std::string& strRecordN
 
 bool NFCAsyMysqlModule::Query(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlQueryParam> pParam(NF_NEW SMysqlQueryParam());
     if (NULL == pParam)
     {
         return false;
@@ -296,12 +446,11 @@ bool NFCAsyMysqlModule::Query(const NFGUID& self, const std::string& strRecordNa
     pParam->strKey = strKey;
     pParam->fieldVec = fieldVec;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_QUERY;
     pParam->mFunReturnVeckKeyValueRsp = mFunReturnVeckKeyValueRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -311,7 +460,7 @@ bool NFCAsyMysqlModule::Query(const NFGUID& self, const std::string& strRecordNa
 
 bool NFCAsyMysqlModule::Select(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const MYSQL_RETURN_VECKEY_VECVALUE_FUNCTOR& mFunReturnVeckKeyValueRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlSelectParam> pParam(NF_NEW SMysqlSelectParam());
     if (NULL == pParam)
     {
         return false;
@@ -321,12 +470,11 @@ bool NFCAsyMysqlModule::Select(const NFGUID& self, const std::string& strRecordN
     pParam->strKey = strKey;
     pParam->fieldVec = fieldVec;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_SELECT;
     pParam->mFunReturnVeckKeyValueRsp = mFunReturnVeckKeyValueRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -336,7 +484,7 @@ bool NFCAsyMysqlModule::Select(const NFGUID& self, const std::string& strRecordN
 
 bool NFCAsyMysqlModule::Delete(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_FUNCTOR& mFunReturnRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlDeleteParam> pParam(NF_NEW SMysqlDeleteParam());
     if (NULL == pParam)
     {
         return false;
@@ -345,12 +493,11 @@ bool NFCAsyMysqlModule::Delete(const NFGUID& self, const std::string& strRecordN
     pParam->strRecordName = strRecordName;
     pParam->strKey = strKey;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_DELETE;
     pParam->mFunReturnRsp = mFunReturnRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -360,7 +507,7 @@ bool NFCAsyMysqlModule::Delete(const NFGUID& self, const std::string& strRecordN
 
 bool NFCAsyMysqlModule::Exists(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const MYSQL_RETURN_INT_FUNCTOR& mFunReturnIntRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlExistsParam> pParam(NF_NEW SMysqlExistsParam());
     if (NULL == pParam)
     {
         return false;
@@ -369,12 +516,11 @@ bool NFCAsyMysqlModule::Exists(const NFGUID& self, const std::string& strRecordN
     pParam->strRecordName = strRecordName;
     pParam->strKey = strKey;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_EXISTS;
     pParam->mFunReturnIntRsp = mFunReturnIntRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -384,7 +530,7 @@ bool NFCAsyMysqlModule::Exists(const NFGUID& self, const std::string& strRecordN
 
 bool NFCAsyMysqlModule::Keys(const NFGUID& self, const std::string& strRecordName, const std::string& strKeyName, const MYSQL_RETURN_VECVALUE_FUNCTOR& mFunReturnVecValueRsp, const std::string& strUseData)
 {
-    NF_SHARE_PTR<SMysqlParam> pParam(NF_NEW SMysqlParam());
+    NF_SHARE_PTR<SMysqlKeysParam> pParam(NF_NEW SMysqlKeysParam());
     if (NULL == pParam)
     {
         return false;
@@ -393,12 +539,11 @@ bool NFCAsyMysqlModule::Keys(const NFGUID& self, const std::string& strRecordNam
     pParam->strRecordName = strRecordName;
     pParam->strKey = strKeyName;
     pParam->nReqID = nCurReqID++;
-    pParam->eType = SMysqlParam::EMYSQLOPRTYPE_KEYS;
     pParam->mFunReturnVecValueRsp = mFunReturnVecValueRsp;
     pParam->mstrUseData = strUseData;
     pParam->self = self;
 
-    if (ApplyRequest(pParam) < 0)
+    if (ApplyRequest(pParam, pParam->eType) < 0)
     {
         return false;
     }
@@ -432,7 +577,7 @@ bool NFCAsyMysqlModule::CloseActorPool()
     return true;
 }
 
-int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
+int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlBaseParam> pParam, const int nEvetID/* = ACOTERMYSQLEVENT_USEDB*/)
 {
     int nAcotrID = GetActor();
     if (nAcotrID <= 0)
@@ -441,8 +586,6 @@ int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
     }
 
     std::string arg;
-    const int nEvetID = ACOTERMYSQLEVENT_USEDB;
-
     if (!pParam->PackParam(arg))
     {
         return -3;
@@ -464,28 +607,54 @@ int NFCAsyMysqlModule::ApplyRequest(NF_SHARE_PTR<SMysqlParam> pParam)
 
 int NFCAsyMysqlModule::RequestAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
+    int nRet = 0;
     switch (nEventID)
     {
-        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_USEDB:
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_UPDATA:
         {
-            return OnUseMysqlAsyEnd(self, nFormActor, nEventID, strData);
+            nRet = OnUpDataMysqlAsyEnd(self, nFormActor, nEventID, strData);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_QUERY:
+        {
+            nRet = OnQueryMysqlAsyEnd(self, nFormActor, nEventID, strData);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_SELECT:
+        {
+            nRet = OnSelectMysqlAsyEnd(self, nFormActor, nEventID, strData);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_DELETE:
+        {
+            nRet = OnDeleteMysqlAsyEnd(self, nFormActor, nEventID, strData);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_EXISTS:
+        {
+            nRet = OnExistsMysqlAsyEnd(self, nFormActor, nEventID, strData);
+        }
+        break;
+        case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEYS:
+        {
+            nRet = OnUpKeyMysqlAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_INISERVER:
         {
-            return OnAddMysqlServerAsyEnd(self, nFormActor, nEventID, strData);
+            nRet = OnAddMysqlServerAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
-            return OnKeepServerAliveAsyEnd(self, nFormActor, nEventID, strData);
+            nRet = OnKeepServerAliveAsyEnd(self, nFormActor, nEventID, strData);
         }
         break;
         default:
             break;
     }
 
-    return 0;
+    return nRet;
 }
 
 int NFCAsyMysqlModule::GetActor()
@@ -555,61 +724,110 @@ bool NFCAsyMysqlModule::KeepAliveMysqlServer()
     return true;
 }
 
-int NFCAsyMysqlModule::OnUseMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+int NFCAsyMysqlModule::OnUpDataMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
-    SMysqlParam xResultparam;
-    if (!xResultparam.UnPackParam(strData))
-    {
-        return -1;
-    }
-
-    NF_SHARE_PTR<SMysqlParam> pReqData = mReqList.GetElement(xResultparam.nReqID);
+    SMysqlUpDataParam* pReqData = UnpackResult<SMysqlUpDataParam>(strData);
     if (NULL == pReqData)
     {
-        return -2;
+        return -3;
     }
 
-    switch (pReqData->eType)
+    if (pReqData->mFunReturnRsp)
     {
-        case SMysqlParam::EMYSQLOPRTYPE_DELETE:
-        case SMysqlParam::EMYSQLOPRTYPE_UPDATA:
-        {
-            if (pReqData->mFunReturnRsp)
-            {
-                pReqData->mFunReturnRsp(pReqData->self, xResultparam.nRet, pReqData->mstrUseData);
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_SELECT:
-        case SMysqlParam::EMYSQLOPRTYPE_QUERY :
-        {
-            if (pReqData->mFunReturnVeckKeyValueRsp)
-            {
-                pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, xResultparam.nRet, xResultparam.fieldVec, xResultparam.valueVec, pReqData->mstrUseData);
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_EXISTS:
-        {
-            if (pReqData->mFunReturnIntRsp)
-            {
-                pReqData->mFunReturnIntRsp(pReqData->self, xResultparam.nRet, xResultparam.bExit, pReqData->mstrUseData);
-            }
-        }
-        break;
-        case SMysqlParam::EMYSQLOPRTYPE_KEYS  :
-        {
-            if (pReqData->mFunReturnVecValueRsp)
-            {
-                pReqData->mFunReturnVecValueRsp(pReqData->self, xResultparam.nRet, xResultparam.valueVec, pReqData->mstrUseData);
-            }
-        }
-        break;
-        default:
-            break;
+        pReqData->mFunReturnRsp(pReqData->self, pReqData->nRet, pReqData->mstrUseData);
     }
 
-    mReqList.RemoveElement(xResultparam.nReqID);
+    mReqList.RemoveElement(pReqData->nReqID);
+    return 0;
+}
+
+
+int NFCAsyMysqlModule::OnQueryMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+{
+    SMysqlQueryParam* pReqData = UnpackResult<SMysqlQueryParam>(strData);
+    if (NULL == pReqData)
+    {
+        return -3;
+    }
+
+    if (pReqData->mFunReturnVeckKeyValueRsp)
+    {
+        pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, pReqData->nRet, pReqData->fieldVec, pReqData->valueVec, pReqData->mstrUseData);
+    }
+
+    mReqList.RemoveElement(pReqData->nReqID);
+    return 0;
+}
+
+
+int NFCAsyMysqlModule::OnSelectMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+{
+    SMysqlSelectParam* pReqData = UnpackResult<SMysqlSelectParam>(strData);
+    if (NULL == pReqData)
+    {
+        return -3;
+    }
+
+    if (pReqData->mFunReturnVeckKeyValueRsp)
+    {
+        pReqData->mFunReturnVeckKeyValueRsp(pReqData->self, pReqData->nRet, pReqData->fieldVec, pReqData->valueVec, pReqData->mstrUseData);
+    }
+
+    mReqList.RemoveElement(pReqData->nReqID);
+    return 0;
+}
+
+
+int NFCAsyMysqlModule::OnDeleteMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+{
+    SMysqlDeleteParam* pReqData = UnpackResult<SMysqlDeleteParam>(strData);
+    if (NULL == pReqData)
+    {
+        return -3;
+    }
+
+    if (pReqData->mFunReturnRsp)
+    {
+        pReqData->mFunReturnRsp(pReqData->self, pReqData->nRet, pReqData->mstrUseData);
+    }
+
+    mReqList.RemoveElement(pReqData->nReqID);
+    return 0;
+}
+
+
+int NFCAsyMysqlModule::OnExistsMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+{
+    SMysqlExistsParam* pReqData = UnpackResult<SMysqlExistsParam>(strData);
+    if (NULL == pReqData)
+    {
+        return -3;
+    }
+
+    if (pReqData->mFunReturnIntRsp)
+    {
+        pReqData->mFunReturnIntRsp(pReqData->self, pReqData->nRet, pReqData->bExit, pReqData->mstrUseData);
+    }
+
+    mReqList.RemoveElement(pReqData->nReqID);
+    return 0;
+}
+
+
+int NFCAsyMysqlModule::OnUpKeyMysqlAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
+{
+    SMysqlKeysParam* pReqData = UnpackResult<SMysqlKeysParam>(strData);
+    if (NULL == pReqData)
+    {
+        return -3;
+    }
+
+    if (pReqData->mFunReturnVecValueRsp)
+    {
+        pReqData->mFunReturnVecValueRsp(pReqData->self, pReqData->nRet, pReqData->valueVec, pReqData->mstrUseData);
+    }
+
+    mReqList.RemoveElement(pReqData->nReqID);
     return 0;
 }
 
@@ -621,4 +839,32 @@ int NFCAsyMysqlModule::OnAddMysqlServerAsyEnd(const NFGUID& self, const int nFor
 int NFCAsyMysqlModule::OnKeepServerAliveAsyEnd(const NFGUID& self, const int nFormActor, const int nEventID, const std::string& strData)
 {
     return 0;
+}
+
+template<typename ClassParam>
+ClassParam* NFCAsyMysqlModule::UnpackResult(const std::string& strMsgData)
+{
+    SMysqlBaseParam xResultparam;
+    if (!xResultparam.UnPackParam(strMsgData))
+    {
+        return NULL;
+    }
+
+    NF_SHARE_PTR<SMysqlBaseParam> pReqBaseData = mReqList.GetElement(xResultparam.nReqID);
+    if (NULL == pReqBaseData)
+    {
+        return NULL;
+    }
+
+    ClassParam* pReqData = dynamic_cast<ClassParam*>(pReqBaseData.get());
+    if (NULL == pReqData)
+    {
+        return NULL;
+    }
+
+    pReqData->valueVec = xResultparam.valueVec;
+    pReqData->bExit = xResultparam.bExit;
+    pReqData->nRet = xResultparam.nRet;
+
+    return pReqData;
 }

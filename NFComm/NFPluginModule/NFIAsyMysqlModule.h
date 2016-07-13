@@ -24,6 +24,19 @@ class NFIAsyMysqlModule
     : public NFIModule
 {
 public:
+    enum ACOTERMYSQLEVENT
+    {
+        ACOTERMYSQLEVENT_INISERVER = 2,
+        ACOTERMYSQLEVENT_KEEPALIVESERVER = 3,
+        ACOTERMYSQLEVENT_UPDATA = 4,
+        ACOTERMYSQLEVENT_QUERY = 5,
+        ACOTERMYSQLEVENT_SELECT = 6,
+        ACOTERMYSQLEVENT_DELETE = 7,
+        ACOTERMYSQLEVENT_EXISTS = 8,
+        ACOTERMYSQLEVENT_KEYS = 9,
+    };
+
+public:
     template<typename BaseType>
     int Updata(const NFGUID& self, const std::string& strRecordName, const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec,
                BaseType* pBaseType, void (BaseType::*handleReturnRsp)(const NFGUID&, const int, const std::string&),  const std::string& strUseData)
