@@ -6,6 +6,7 @@
 //    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
 // -------------------------------------------------------------------------
 #include "NFCItemItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 
 bool NFCItemItemConsumeProcessModule::Init()
 {
@@ -23,8 +24,6 @@ bool NFCItemItemConsumeProcessModule::Init()
 
 bool NFCItemItemConsumeProcessModule::AfterInit()
 {
-
-
 	return true;
 }
 
@@ -68,7 +67,12 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		return 0;
 	}
 
-	const int nBagList_ItemCount = varItemID.Int(NFrame::Player::BagItemList_ItemCount);
+	const int nRowNum = varItemID.Int(0);
+	NFCDataList xRowData;
+	pBagItemList->QueryRow(nRowNum, xRowData);
+
+	const int nBagList_ItemCount = xRowData.Int(NFrame::Player::BagItemList_ItemCount);
+
 	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
 	{
 		return 0;
@@ -139,8 +143,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		}
 
 		//deduct Bag ItemCount
-		const int nRow = varItemID.Int(0);
-		pBagItemList->SetInt(nRow, NFrame::Player::BagItemList_ItemCount, nBagList_ItemCount - nItemCount);
+		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList_ItemCount, nBagList_ItemCount - nItemCount);
 	}
 	break;
 	default:

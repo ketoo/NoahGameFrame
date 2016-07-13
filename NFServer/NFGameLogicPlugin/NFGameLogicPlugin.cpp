@@ -29,6 +29,11 @@
 #include "NFCTaskModule.h"
 #include "NFCChatModule.h"
 #include "NFCGSPVPMatchModule.h"
+#include "NFCItemCardConsumeProcessModule.h"
+#include "NFCItemEquipConsumeProcessModule.h"
+#include "NFCItemGemConsumeProcessModule.h"
+#include "NFCItemItemConsumeProcessModule.h"
+#include "NFCItemTokenConsumeProcessModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -96,10 +101,20 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
     //REGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule);
     //REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule);
+	REGISTER_MODULE(pPluginManager, NFIItemCardConsumeProcessModule, NFCItemCardConsumeProcessModule);
+	REGISTER_MODULE(pPluginManager, NFIItemEquipConsumeProcessModule, NFCItemEquipConsumeProcessModule);
+	REGISTER_MODULE(pPluginManager, NFIItemGemConsumeProcessModule, NFCItemGemConsumeProcessModule);
+	REGISTER_MODULE(pPluginManager, NFIItemItemConsumeProcessModule, NFCItemItemConsumeProcessModule);
+	REGISTER_MODULE(pPluginManager, NFIItemTokenConsumeProcessModule, NFCItemTokenConsumeProcessModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFIItemTokenConsumeProcessModule, NFCItemTokenConsumeProcessModule);
+	UNREGISTER_MODULE(pPluginManager, NFIItemItemConsumeProcessModule, NFCItemItemConsumeProcessModule);
+	UNREGISTER_MODULE(pPluginManager, NFIItemGemConsumeProcessModule, NFCItemGemConsumeProcessModule);
+	UNREGISTER_MODULE(pPluginManager, NFIItemEquipConsumeProcessModule, NFCItemEquipConsumeProcessModule);
+	UNREGISTER_MODULE(pPluginManager, NFIItemCardConsumeProcessModule, NFCItemCardConsumeProcessModule);
     //UNREGISTER_MODULE(pPluginManager, NFCChatModule);
     //UNREGISTER_MODULE(pPluginManager, NFCTaskModule);
 	UNREGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);

@@ -6,8 +6,8 @@
 //    @Desc             :   道具消费机制类--使用物品
 // -------------------------------------------------------------------------
 
-#ifndef NFC_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
-#define NFC_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
+#ifndef NFC_ITEM_EQUIP_CONSUME_PROCESS_MODULE_H
+#define NFC_ITEM_EQUIP_CONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

@@ -368,9 +368,9 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		if (pConsumeProcessModule)
 		{
 			NFCDataList xTarget;
-			xTarget.SetObject(0, xTargetID);
-			xTarget.SetString(1, xMsg.item().item_id());	//this is Item Config ID
-			xTarget.SetInt(2, xMsg.item().item_count());	//this is Item Count to Consume
+			xTarget.AddObject(xTargetID);
+			xTarget.AddString(xMsg.item().item_id());	//this is Item Config ID
+			xTarget.AddInt(xMsg.item().item_count());	//this is Item Count to Consume
 
 			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) > 0)
 			{
