@@ -797,7 +797,7 @@ public class Player {
 		ItemCount		= 1, // ItemCount -- int
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
-		Date		= 4, // Date -- object
+		Date		= 4, // Date -- int
 
 	};
 
