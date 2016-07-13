@@ -171,6 +171,10 @@ public class NFStart : MonoBehaviour
                         int nPort = NFStart.Instance.GetFocusNet().nWorldPort;
 
                         NFNet xNet = new NFNet();
+                        if(strWorpdIP == "127.0.0.1")
+                        {
+                            strWorpdIP = strTargetIP;
+                        }
                         xNet.strWorldIP = strWorpdIP;
                         xNet.strKey = strWorpdKey;
                         xNet.strAccount = strAccount;
