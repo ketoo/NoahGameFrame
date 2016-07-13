@@ -842,7 +842,7 @@ public:
 		BagItemList_ItemCount		= 1, // ItemCount -- int
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
-		BagItemList_Date		= 4, // Date -- object
+		BagItemList_Date		= 4, // Date -- int
 
 	};
 

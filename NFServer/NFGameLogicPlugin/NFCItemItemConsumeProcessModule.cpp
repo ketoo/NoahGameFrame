@@ -62,6 +62,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	NFCDataList varItemID;
 	const int nBagItemCount = pBagItemList->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varItemID);
+
 	if (nBagItemCount != 1)
 	{
 		return 0;
@@ -113,33 +114,49 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		const NFINT64 nGold = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Gold());
 		const NFINT64 nMoney = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Money());
 
-		if (nVIPEXP != 0)
+		if (self == xTargetID)
 		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::VIPEXP()) + nVIPEXP * nItemCount);
+			if (nVIPEXP != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::VIPEXP()) + nVIPEXP * nItemCount);
+			}
+			if (nEXP != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP()) + nEXP * nItemCount);
+			}
+			if (nHP != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::HP()) + nHP * nItemCount);
+			}
+			if (nSP != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::SP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::SP()) + nSP * nItemCount);
+			}
+			if (nMP != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::MP()) + nMP * nItemCount);
+			}
+			if (nGold != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::Gold(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold()) + nGold * nItemCount);
+			}
+			if (nMoney != 0)
+			{
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::Money(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money()) + nMoney);
+			}
 		}
-		if (nEXP != 0)
+		else
 		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP()) + nEXP * nItemCount);
-		}
-		if (nHP != 0)
-		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::HP()) + nHP * nItemCount);
-		}
-		if (nSP != 0)
-		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::SP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::SP()) + nSP * nItemCount);
-		}
-		if (nMP != 0)
-		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::MP()) + nMP * nItemCount);
-		}
-		if (nGold != 0)
-		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::Gold(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold()) + nGold * nItemCount);
-		}
-		if (nMoney != 0)
-		{
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::Money(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money()) + nMoney);
+			NF_SHARE_PTR<NFIRecord> pPlayerHero = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+			if (nullptr == pPlayerHero.get())
+			{
+				return 0;
+			}
+
+			if (nEXP != 0)
+			{
+				m_pHeroModule->AddHeroExp(self, xTargetID, nEXP * nItemCount);
+			}
 		}
 
 		//deduct Bag ItemCount
