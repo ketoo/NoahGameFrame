@@ -128,23 +128,38 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 			}
 			if (nHP != 0)
 			{
-				m_pPropertyModule->AddHP(self, nHP * nItemCount);
+				if (!m_pPropertyModule->AddHP(self, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nSP != 0)
 			{
-				m_pPropertyModule->AddSP(self, nSP * nItemCount);
+				if (!m_pPropertyModule->AddSP(self, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nMP != 0)
 			{
-				m_pPropertyModule->AddMP(self, nMP * nItemCount);
+				if (!m_pPropertyModule->AddMP(self, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nGold != 0)
 			{
-				m_pPropertyModule->AddMoney(self, nGold * nItemCount);
+				if (!m_pPropertyModule->AddMoney(self, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nMoney != 0)
 			{
-				m_pPropertyModule->AddDiamond(self, nMoney * nItemCount);
+				if (!m_pPropertyModule->AddDiamond(self, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 		}
 		else
@@ -157,15 +172,24 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 			if (nEXP != 0)
 			{
-				m_pHeroModule->AddHeroExp(self, xTargetID, nEXP * nItemCount);
+				if (!m_pHeroModule->AddHeroExp(self, xTargetID, nEXP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nHP != 0)
 			{
-				m_pHeroPropertyModule->AddHP(self, xTargetID, nHP * nItemCount);
+				if (!m_pHeroPropertyModule->AddHP(self, xTargetID, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 			if (nMP != 0)
 			{
-				m_pHeroPropertyModule->AddMP(self, xTargetID, nMP * nItemCount);
+				if (!m_pHeroPropertyModule->AddMP(self, xTargetID, nHP * nItemCount))
+				{
+					return 0;
+				}
 			}
 		}
 
