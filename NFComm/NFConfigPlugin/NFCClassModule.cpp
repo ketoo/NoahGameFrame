@@ -88,7 +88,6 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             const char* pstrPrivate = pPropertyNode->first_attribute("Private")->value();
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
             const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
-            const char* pstrRelationValue = pPropertyNode->first_attribute("RelationValue")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
