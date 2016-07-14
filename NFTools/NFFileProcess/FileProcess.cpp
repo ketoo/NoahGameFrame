@@ -129,10 +129,10 @@ void FileProcess::CreateStructThreadFunc()
 	classElement->SetAttribute("Desc", "IObject");
 	////////////////////////////////////////////////////////////////////////
 	//// 提前把IObject跑一边
-	CreateStructXML("../Excel_Struct/IObject.xlsx", "IObject");
+	CreateStructXML("../Excel_Ini/IObject.xlsx", "IObject");
 
 	// 遍历Struct文件夹下的excel文件
-	auto fileList = GetFileListInFolder(strToolBasePath + strExcelStructPath, 0);
+	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 
 	for (auto fileName : fileList)
 	{
@@ -299,25 +299,26 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 		std::string strSheetName = sh.getName();
+
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
 		std::vector<std::string> colNames;
-		for (int c = dim.firstCol; c <= dim.lastCol; c++)
+		for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
 		{
-			MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 			if (cell)
 			{
 				colNames.push_back(cell->value);
 			}
 		}
-		std::string strUpperSheetName(strSheetName);
+		std::string strUpperSheetName = strSheetName.substr(0, 8);
 		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
 		if (strUpperSheetName == "property")
 		{
-			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+			for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
 			{
 				std::string testValue = "";
-				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
 				if (cell)
 				{
 					testValue = cell->value;
@@ -326,12 +327,13 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					continue;
 				}
+
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int c = dim.firstCol; c <= dim.lastCol; c++)
+				for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
 				{
-					std::string name = colNames[c - 1];
+					std::string name = colNames[r - 1];
 					std::string value = "";
 					MiniExcelReader::Cell* cell = sh.getCell(r, c);
 					if (cell)
@@ -606,6 +608,16 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		std::string strSheetName = sh.getName();
+
+		std::string strUpperSheetName = strSheetName.substr(0, 8);
+		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
+
+		if (strUpperSheetName != "property")
+		{
+			continue;
+		}
+
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
 		std::vector<std::string> colNames;
@@ -618,7 +630,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 			}
 		}
 
-		for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+		for (int r = dim.firstRow + 7; r <= dim.lastRow; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
