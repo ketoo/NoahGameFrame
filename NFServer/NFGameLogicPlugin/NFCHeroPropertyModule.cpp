@@ -353,3 +353,115 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 	return true;
 }
+
+bool NFCHeroPropertyModule::FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID)
+{
+	NFINT64 nMaxHP = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MAXHP());
+	if (nMaxHP > 0)
+	{
+		m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::NPC::HP(), nMaxHP);
+	}
+
+	NFINT64 nMaxMP = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MAXMP());
+	if (nMaxMP > 0)
+	{
+		m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::NPC::MP(), nMaxMP);
+	}
+
+	return true;
+}
+
+bool NFCHeroPropertyModule::AddHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	if (nValue <= 0)
+	{
+		return false;
+	}
+
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::HP());
+	NFINT64 nMaxValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MAXHP());
+
+	if (nCurValue > 0)
+	{
+		nCurValue += nValue;
+		if (nCurValue > nMaxValue)
+		{
+			nCurValue = nMaxValue;
+		}
+
+		m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::NPC::HP(), nCurValue);
+	}
+
+	return true;
+}
+
+bool NFCHeroPropertyModule::EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::HP());
+	if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCHeroPropertyModule::ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::HP());
+	if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+	{
+		nCurValue -= nValue;
+		m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::NPC::HP(), nCurValue);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCHeroPropertyModule::AddMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	if (nValue <= 0)
+	{
+		return false;
+	}
+
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MP());
+	NFINT64 nMaxValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MAXMP());
+
+	nCurValue += nValue;
+	if (nCurValue > nMaxValue)
+	{
+		nCurValue = nMaxValue;
+	}
+
+	m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::Player::MP(), nCurValue);
+
+	return true;
+}
+
+bool NFCHeroPropertyModule::ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MP());
+	if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+	{
+		nCurValue -= nValue;
+		m_pKernelModule->SetPropertyInt(xHeroGUID, NFrame::NPC::MP(), nCurValue);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCHeroPropertyModule::EnoughMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
+{
+	NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(xHeroGUID, NFrame::NPC::MP());
+	if ((nCurValue > 0) && (nCurValue - nValue >= 0))
+	{
+		return true;
+	}
+
+	return false;
+}

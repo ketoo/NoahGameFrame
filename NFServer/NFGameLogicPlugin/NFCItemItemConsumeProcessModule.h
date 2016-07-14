@@ -18,6 +18,8 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFCItemItemConsumeProcessModule
 	: public NFIItemItemConsumeProcessModule
@@ -46,6 +48,8 @@ private:
 	NFIElementModule* m_pElementModule;
 	NFIItemModule* m_pItemModule;
 	NFIHeroModule* m_pHeroModule;
+	NFIHeroPropertyModule* m_pHeroPropertyModule;
+	NFIPropertyModule* m_pPropertyModule;
 };
 
 #endif

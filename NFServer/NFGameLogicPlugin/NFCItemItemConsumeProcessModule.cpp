@@ -16,6 +16,8 @@ bool NFCItemItemConsumeProcessModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pItemModule = pPluginManager->FindModule<NFIItemModule>();
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 
 	m_pItemModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM, this);
 
@@ -126,23 +128,23 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 			}
 			if (nHP != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::HP()) + nHP * nItemCount);
+				m_pPropertyModule->AddHP(self, nHP * nItemCount);
 			}
 			if (nSP != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::SP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::SP()) + nSP * nItemCount);
+				m_pPropertyModule->AddSP(self, nSP * nItemCount);
 			}
 			if (nMP != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::MP()) + nMP * nItemCount);
+				m_pPropertyModule->AddMP(self, nMP * nItemCount);
 			}
 			if (nGold != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::Gold(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold()) + nGold * nItemCount);
+				m_pPropertyModule->AddMoney(self, nGold * nItemCount);
 			}
 			if (nMoney != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::Money(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money()) + nMoney);
+				m_pPropertyModule->AddDiamond(self, nMoney * nItemCount);
 			}
 		}
 		else
@@ -156,6 +158,14 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 			if (nEXP != 0)
 			{
 				m_pHeroModule->AddHeroExp(self, xTargetID, nEXP * nItemCount);
+			}
+			if (nHP != 0)
+			{
+				m_pHeroPropertyModule->AddHP(self, xTargetID, nHP * nItemCount);
+			}
+			if (nMP != 0)
+			{
+				m_pHeroPropertyModule->AddMP(self, xTargetID, nMP * nItemCount);
 			}
 		}
 
