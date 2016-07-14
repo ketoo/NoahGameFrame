@@ -370,8 +370,17 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				}
 			}
 		}
-		else if (strUpperSheetName == "component")
+		else if (strUpperSheetName == "componen")
 		{
+			colNames.clear();
+			for (int c = dim.firstCol; c <= dim.lastCol; c++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+				if (cell)
+				{
+					colNames.push_back(cell->value);
+				}
+			}
 			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
 			{
 				std::string testValue = "";
@@ -417,6 +426,15 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
+			colNames.clear();
+			for (int c = dim.firstCol; c <= dim.lastCol; c++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+				if (cell)
+				{
+					colNames.push_back(cell->value);
+				}
+			}
 			for (int RecordNumber = 0; RecordNumber < (int)(dim.lastRow / 2); RecordNumber++)
 			{
 				auto recordNode = structDoc->NewElement("Record");
