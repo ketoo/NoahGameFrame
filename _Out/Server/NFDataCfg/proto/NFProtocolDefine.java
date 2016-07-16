@@ -448,21 +448,6 @@ public class GuildJob {
 
 }
 
-public class GuildName {
-	//Class name
-	public static final String ThisName = "GuildName";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	// Property
-	public static final String GuildID = "GuildID"; // object
-	// Record
-
-}
-
 public class InitProperty {
 	//Class name
 	public static final String ThisName = "InitProperty";
@@ -497,6 +482,7 @@ public class Item {
 	public static final String Level = "Level"; // int
 	public static final String Job = "Job"; // string
 	public static final String Quality = "Quality"; // int
+	public static final String DesignDesc = "DesignDesc"; // string
 	public static final String DescID = "DescID"; // string
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
@@ -591,7 +577,23 @@ public class NPC {
 	public static final String Z = "Z"; // float
 	public static final String TargetX = "TargetX"; // float
 	public static final String TargetY = "TargetY"; // float
-	public static final String TargetZ = "TargetZ"; // float
+	public static final String Prefab = "Prefab"; // string
+	public static final String MoveType = "MoveType"; // int
+	public static final String AtkDis = "AtkDis"; // float
+	public static final String DropPackList = "DropPackList"; // string
+	public static final String SkillIDRef = "SkillIDRef"; // string
+	public static final String Height = "Height"; // float
+	public static final String EffectData = "EffectData"; // string
+	public static final String ConsumeData = "ConsumeData"; // string
+	public static final String LastAttacker = "LastAttacker"; // object
+	public static final String ShowName = "ShowName"; // string
+	public static final String EquipIDRef = "EquipIDRef"; // string
+	public static final String Icon = "Icon"; // string
+	public static final String ShowCard = "ShowCard"; // string
+	public static final String HeroType = "HeroType"; // int
+	public static final String Camp = "Camp"; // int
+	public static final String MasterID = "MasterID"; // object
+	public static final String NPCType = "NPCType"; // int
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int
@@ -621,23 +623,6 @@ public class NPC {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
-	public static final String Prefab = "Prefab"; // string
-	public static final String MoveType = "MoveType"; // int
-	public static final String AtkDis = "AtkDis"; // float
-	public static final String DropPackList = "DropPackList"; // string
-	public static final String SkillIDRef = "SkillIDRef"; // string
-	public static final String Height = "Height"; // float
-	public static final String EffectData = "EffectData"; // string
-	public static final String ConsumeData = "ConsumeData"; // string
-	public static final String LastAttacker = "LastAttacker"; // object
-	public static final String ShowName = "ShowName"; // string
-	public static final String EquipIDRef = "EquipIDRef"; // string
-	public static final String Icon = "Icon"; // string
-	public static final String ShowCard = "ShowCard"; // string
-	public static final String HeroType = "HeroType"; // int
-	public static final String Camp = "Camp"; // int
-	public static final String MasterID = "MasterID"; // object
-	public static final String NPCType = "NPCType"; // int
 	// Record
 
 }
@@ -681,6 +666,13 @@ public class Player {
 	public static final String TotalTime = "TotalTime"; // int
 	public static final String LastOfflineTime = "LastOfflineTime"; // object
 	public static final String OnlineTime = "OnlineTime"; // object
+	public static final String TotalLineTime = "TotalLineTime"; // object
+	public static final String GMLevel = "GMLevel"; // int
+	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
+	public static final String GameID = "GameID"; // int
+	public static final String GateID = "GateID"; // int
+	public static final String GuildID = "GuildID"; // object
+	public static final String TeamID = "TeamID"; // object
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int
@@ -710,13 +702,6 @@ public class Player {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
-	public static final String TotalLineTime = "TotalLineTime"; // object
-	public static final String GMLevel = "GMLevel"; // int
-	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
-	public static final String GameID = "GameID"; // int
-	public static final String GateID = "GateID"; // int
-	public static final String GuildID = "GuildID"; // object
-	public static final String TeamID = "TeamID"; // object
 	// Record
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_PlayerFightHero = "PlayerFightHero";

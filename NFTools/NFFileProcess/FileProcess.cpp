@@ -129,10 +129,10 @@ void FileProcess::CreateStructThreadFunc()
 	classElement->SetAttribute("Desc", "IObject");
 	////////////////////////////////////////////////////////////////////////
 	//// 提前把IObject跑一边
-	CreateStructXML("../Excel_Struct/IObject.xlsx", "IObject");
+	CreateStructXML("../Excel_Ini/IObject.xlsx", "IObject");
 
 	// 遍历Struct文件夹下的excel文件
-	auto fileList = GetFileListInFolder(strToolBasePath + strExcelStructPath, 0);
+	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 
 	for (auto fileName : fileList)
 	{
@@ -299,25 +299,26 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 		std::string strSheetName = sh.getName();
+
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
 		std::vector<std::string> colNames;
-		for (int c = dim.firstCol; c <= dim.lastCol; c++)
+		for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
 		{
-			MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 			if (cell)
 			{
 				colNames.push_back(cell->value);
 			}
 		}
-		std::string strUpperSheetName(strSheetName);
+		std::string strUpperSheetName = strSheetName.substr(0, 8);
 		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
 		if (strUpperSheetName == "property")
 		{
-			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+			for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
 			{
 				std::string testValue = "";
-				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
 				if (cell)
 				{
 					testValue = cell->value;
@@ -326,12 +327,13 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					continue;
 				}
+
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int c = dim.firstCol; c <= dim.lastCol; c++)
+				for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
 				{
-					std::string name = colNames[c - 1];
+					std::string name = colNames[r - 1];
 					std::string value = "";
 					MiniExcelReader::Cell* cell = sh.getCell(r, c);
 					if (cell)
@@ -368,8 +370,17 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				}
 			}
 		}
-		else if (strUpperSheetName == "component")
+		else if (strUpperSheetName == "componen")
 		{
+			colNames.clear();
+			for (int c = dim.firstCol; c <= dim.lastCol; c++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+				if (cell)
+				{
+					colNames.push_back(cell->value);
+				}
+			}
 			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
 			{
 				std::string testValue = "";
@@ -415,6 +426,15 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
+			colNames.clear();
+			for (int c = dim.firstCol; c <= dim.lastCol; c++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+				if (cell)
+				{
+					colNames.push_back(cell->value);
+				}
+			}
 			for (int RecordNumber = 0; RecordNumber < (int)(dim.lastRow / 2); RecordNumber++)
 			{
 				auto recordNode = structDoc->NewElement("Record");
@@ -604,39 +624,60 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	// 读取excel中每一个sheet
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
+	std::vector<std::string> vColNames;
+	std::vector<std::string> vDataIDs;
+	std::map<std::string, std::string> mDataValues;
+	int nCurrentCol = 0;
+
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		std::string strSheetName = sh.getName();
+
+		std::string strUpperSheetName = strSheetName.substr(0, 8);
+		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
+
+		if (strUpperSheetName != "property")
+		{
+			continue;
+		}
+
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
-		std::vector<std::string> colNames;
 		for (int c = dim.firstCol; c <= dim.lastCol; c++)
 		{
 			MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
 			if (cell)
 			{
-				colNames.push_back(cell->value);
+				vColNames.push_back(cell->value);
 			}
 		}
 
-		for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+		if (vDataIDs.size() <= 0)
+		{
+			for (int r = dim.firstRow + 7; r <= dim.lastRow; r++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
+				if (cell)
+				{
+					if (cell->value.length() > 0)
+					{
+						vDataIDs.push_back(cell->value);
+					}
+				}
+			}
+		}
+
+		for (int r = dim.firstRow + 7; r <= vDataIDs.size() + 7; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
-			if (cell)
-			{
-				testValue = cell->value;
-			}
-			if (testValue == "")
-			{
-				continue;
-			}
-			auto objectNode = iniDoc->NewElement("Object");
-			root->LinkEndChild(objectNode);
+
 			for (int c = dim.firstCol; c <= dim.lastCol; c++)
 			{
-				std::string name = colNames[c - 1];
+				std::string name = vColNames[c - 1 + nCurrentCol];
 				std::string value = "";
 				MiniExcelReader::Cell* cell = sh.getCell(r, c);
+				std::string vType = sh.getCell(dim.firstRow + 1, c)->value;
 				if (cell)
 				{
 					std::string valueCell = cell->value;
@@ -648,12 +689,63 @@ bool FileProcess::CreateIniXML(std::string strFile)
 					else
 					{
 						value = cell->value;
+						if (value.size() <= 0)
+						{
+							if (vType == "int" || vType == "float")
+							{
+								value = "0";
+							}
+							else
+							{
+								value = "";
+							}
+						}
 					}
 				}
-				objectNode->SetAttribute(name.c_str(), value.c_str());
+				else
+				{
+					if (vType == "int" || vType == "float")
+					{
+						value = "0";
+					}
+					else
+					{
+						value = "";
+					}
+				}
+				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 8] + name, value));
 			}
 		}
+		nCurrentCol += dim.lastCol;
 	}
+
+	int nDataCount = 0;
+	if (strFile.find("NPC") > 0 && strFile.find("NPC") < strFile.size())
+	{
+		int a = 0;
+	}
+	for (auto strID : vDataIDs)
+	{
+		auto objectNode = iniDoc->NewElement("Object");
+		root->LinkEndChild(objectNode);
+		for (auto strColName : vColNames)
+		{
+			if (strColName == "Id")
+			{
+				const char* chrID = objectNode->Attribute("Id");
+				if (!chrID)
+				{
+					objectNode->SetAttribute(strColName.c_str(), mDataValues[strID + strColName].c_str());
+				}
+			}
+			else
+			{
+				objectNode->SetAttribute(strColName.c_str(), mDataValues[strID + strColName].c_str());
+			}
+			nDataCount++;
+		}
+	}
+
 	////////////////////////////////////////////////////////////////////////////
 	// 保存文件
 	int nLastPoint = strFile.find_last_of(".") + 1;

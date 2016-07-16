@@ -16,6 +16,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-liconv" />
 					<Add directory="MiniExcelReader" />
 					<Add directory="minizip" />
 					<Add directory="tinyxml2" />
@@ -57,6 +58,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
+			<Add option="-liconv" />
 			<Add option="-fexceptions" />
 			<Add option="-D_CRT_SECURE_NO_WARNINGS" />
 			<Add directory="NFFIleProcess/" />

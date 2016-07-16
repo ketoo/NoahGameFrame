@@ -156,7 +156,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
 
     for (int i = 0; i < GetCols(); ++i)
     {
-        NF_SHARE_PTR<NFIDataList::TData> pVar = mtRecordVec.at(GetPos(nFindRow, i));
+        NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nFindRow, i));
 		if (nullptr == pVar)
 		{
 			pVar = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(var.Type(i)));
@@ -412,7 +412,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
     varList.Clear();
     for (int i = 0; i < GetCols(); ++i)
     {
-        NF_SHARE_PTR<NFIDataList::TData> pVar = mtRecordVec.at(GetPos(nRow, i));
+        NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, i));
         if (pVar.get())
         {
             varList.Append(*pVar);

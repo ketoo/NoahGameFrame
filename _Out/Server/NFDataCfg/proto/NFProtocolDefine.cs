@@ -467,22 +467,6 @@ public class GuildJob
 
 }
 
-public class GuildName
-{
-	//Class name
-	public static readonly string ThisName = "GuildName";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	// Property
-	public static readonly String GuildID = "GuildID"; // object
-	// Record
-
-}
-
 public class InitProperty
 {
 	//Class name
@@ -519,6 +503,7 @@ public class Item
 	public static readonly String Level = "Level"; // int
 	public static readonly String Job = "Job"; // string
 	public static readonly String Quality = "Quality"; // int
+	public static readonly String DesignDesc = "DesignDesc"; // string
 	public static readonly String DescID = "DescID"; // string
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string
@@ -616,7 +601,23 @@ public class NPC
 	public static readonly String Z = "Z"; // float
 	public static readonly String TargetX = "TargetX"; // float
 	public static readonly String TargetY = "TargetY"; // float
-	public static readonly String TargetZ = "TargetZ"; // float
+	public static readonly String Prefab = "Prefab"; // string
+	public static readonly String MoveType = "MoveType"; // int
+	public static readonly String AtkDis = "AtkDis"; // float
+	public static readonly String DropPackList = "DropPackList"; // string
+	public static readonly String SkillIDRef = "SkillIDRef"; // string
+	public static readonly String Height = "Height"; // float
+	public static readonly String EffectData = "EffectData"; // string
+	public static readonly String ConsumeData = "ConsumeData"; // string
+	public static readonly String LastAttacker = "LastAttacker"; // object
+	public static readonly String ShowName = "ShowName"; // string
+	public static readonly String EquipIDRef = "EquipIDRef"; // string
+	public static readonly String Icon = "Icon"; // string
+	public static readonly String ShowCard = "ShowCard"; // string
+	public static readonly String HeroType = "HeroType"; // int
+	public static readonly String Camp = "Camp"; // int
+	public static readonly String MasterID = "MasterID"; // object
+	public static readonly String NPCType = "NPCType"; // int
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
@@ -646,23 +647,6 @@ public class NPC
 	public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
-	public static readonly String Prefab = "Prefab"; // string
-	public static readonly String MoveType = "MoveType"; // int
-	public static readonly String AtkDis = "AtkDis"; // float
-	public static readonly String DropPackList = "DropPackList"; // string
-	public static readonly String SkillIDRef = "SkillIDRef"; // string
-	public static readonly String Height = "Height"; // float
-	public static readonly String EffectData = "EffectData"; // string
-	public static readonly String ConsumeData = "ConsumeData"; // string
-	public static readonly String LastAttacker = "LastAttacker"; // object
-	public static readonly String ShowName = "ShowName"; // string
-	public static readonly String EquipIDRef = "EquipIDRef"; // string
-	public static readonly String Icon = "Icon"; // string
-	public static readonly String ShowCard = "ShowCard"; // string
-	public static readonly String HeroType = "HeroType"; // int
-	public static readonly String Camp = "Camp"; // int
-	public static readonly String MasterID = "MasterID"; // object
-	public static readonly String NPCType = "NPCType"; // int
 	// Record
 
 }
@@ -707,6 +691,13 @@ public class Player
 	public static readonly String TotalTime = "TotalTime"; // int
 	public static readonly String LastOfflineTime = "LastOfflineTime"; // object
 	public static readonly String OnlineTime = "OnlineTime"; // object
+	public static readonly String TotalLineTime = "TotalLineTime"; // object
+	public static readonly String GMLevel = "GMLevel"; // int
+	public static readonly String LoadPropertyFinish = "LoadPropertyFinish"; // int
+	public static readonly String GameID = "GameID"; // int
+	public static readonly String GateID = "GateID"; // int
+	public static readonly String GuildID = "GuildID"; // object
+	public static readonly String TeamID = "TeamID"; // object
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
@@ -736,13 +727,6 @@ public class Player
 	public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
-	public static readonly String TotalLineTime = "TotalLineTime"; // object
-	public static readonly String GMLevel = "GMLevel"; // int
-	public static readonly String LoadPropertyFinish = "LoadPropertyFinish"; // int
-	public static readonly String GameID = "GameID"; // int
-	public static readonly String GateID = "GateID"; // int
-	public static readonly String GuildID = "GuildID"; // object
-	public static readonly String TeamID = "TeamID"; // object
 	// Record
 	public static readonly String R_PlayerHero = "PlayerHero";
 	public static readonly String R_PlayerFightHero = "PlayerFightHero";

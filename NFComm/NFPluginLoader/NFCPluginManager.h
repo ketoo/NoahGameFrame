@@ -24,7 +24,7 @@ public:
     NFCPluginManager();
     virtual ~NFCPluginManager();
 
-    virtual bool Init();
+	virtual bool Init();
 
     virtual bool AfterInit();
 
@@ -55,30 +55,21 @@ public:
 
     virtual bool Execute();
 
-    virtual int AppID()
-    {
-        return mnAppID;
-    }
+	virtual int AppID() const;
 
-    virtual NFINT64 GetInitTime() const
-    {
-        return mnInitTime;
-    }
+	virtual NFINT64 GetInitTime() const;
 
-    virtual NFINT64 GetNowTime() const
-    {
-        return mnNowTime;
-    }
+	virtual NFINT64 GetNowTime() const;
 
-    virtual const std::string& GetConfigPath() const
-    {
-        return mstrConfigPath;
-    }
+	virtual const std::string& GetConfigPath() const;
 
 protected:
-    bool LoadPlugin();
+	bool LoadPluginConfig();
+
+	bool LoadStaticPlugin(const std::string& strPluginDLLName);
     bool LoadPluginLibrary(const std::string& strPluginDLLName);
     bool UnLoadPluginLibrary(const std::string& strPluginDLLName);
+	bool UnLoadStaticPlugin(const std::string& strPluginDLLName);
 
 private:
     int mnAppID;

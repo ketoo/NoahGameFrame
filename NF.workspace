@@ -9,7 +9,6 @@
 		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
 		<Project filename="NFComm/NFNet/NFNet.cbp" />
 		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
-		<Project filename="NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp" />
 		
 		<!-- NF Server -->
 		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
@@ -30,7 +29,7 @@
 		<Project filename="NFServer/NFMasterServerPlugin/NFMasterServerPlugin.cbp" />
 		<Project filename="NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin.cbp" />
 		
-		<Project filename="NFServer/NFProxyServerPlugin/NFProxyPlugin.cbp" />
+		<Project filename="NFServer/NFProxyLogicPlugin/NFProxyLogicPlugin.cbp" />
 		<Project filename="NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.cbp" />
 		<Project filename="NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp" />
 		
@@ -38,8 +37,6 @@
 		<Project filename="Tutorial/Tutorial1/Tutorial1.cbp" />
 		<Project filename="Tutorial/Tutorial2/Tutorial2.cbp" />
 		<Project filename="Tutorial/Tutorial3/Tutorial3.cbp" />
-		<Project filename="Tutorial/Tutorial5/Tutorial5.cbp" />
-		<Project filename="Tutorial/Tutorial6/Tutorial6.cbp" />
 		<!-- NF Tutorial -->
 		<Project filename="NFTools/NFFileProcess/NFFileProcess.cbp" />
 	</Workspace>
