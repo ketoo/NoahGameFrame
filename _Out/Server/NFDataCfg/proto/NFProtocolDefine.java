@@ -705,9 +705,9 @@ public class Player {
 	// Record
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_PlayerFightHero = "PlayerFightHero";
+	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
-	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_CommPropertyValue = "CommPropertyValue";
 	public static final String R_TaskMonsterList = "TaskMonsterList";
 	public static final String R_TaskList = "TaskList";
@@ -748,6 +748,40 @@ public class Player {
 
 	};
 
+	public enum HeroPropertyValue
+	{
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
+
+	};
+
 	public enum BagEquipList
 	{
 		GUID		= 0, // GUID -- object
@@ -783,40 +817,6 @@ public class Player {
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- int
-
-	};
-
-	public enum HeroPropertyValue
-	{
-		SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CRITICAL		= 2, // CRITICAL -- int
-		MAXHP		= 3, // MAXHP -- int
-		MAXMP		= 4, // MAXMP -- int
-		MAXSP		= 5, // MAXSP -- int
-		HPREGEN		= 6, // HPREGEN -- int
-		SPREGEN		= 7, // SPREGEN -- int
-		MPREGEN		= 8, // MPREGEN -- int
-		ATK_VALUE		= 9, // ATK_VALUE -- int
-		DEF_VALUE		= 10, // DEF_VALUE -- int
-		MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		ATK_SPEED		= 12, // ATK_SPEED -- int
-		ATK_FIRE		= 13, // ATK_FIRE -- int
-		ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		ATK_WIND		= 15, // ATK_WIND -- int
-		ATK_ICE		= 16, // ATK_ICE -- int
-		ATK_POISON		= 17, // ATK_POISON -- int
-		DEF_FIRE		= 18, // DEF_FIRE -- int
-		DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		DEF_WIND		= 20, // DEF_WIND -- int
-		DEF_ICE		= 21, // DEF_ICE -- int
-		DEF_POISON		= 22, // DEF_POISON -- int
-		DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		MOVE_GATE		= 24, // MOVE_GATE -- int
-		SKILL_GATE		= 25, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 

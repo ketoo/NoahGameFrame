@@ -302,19 +302,20 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
-		std::vector<std::string> colNames;
-		for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
-		{
-			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
-			if (cell)
-			{
-				colNames.push_back(cell->value);
-			}
-		}
 		std::string strUpperSheetName = strSheetName.substr(0, 8);
 		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
 		if (strUpperSheetName == "property")
 		{
+			std::vector<std::string> colNames;
+			for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
+			{
+				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
+				if (cell)
+				{
+					colNames.push_back(cell->value);
+				}
+			}
+
 			for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
 			{
 				std::string testValue = "";
@@ -372,7 +373,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else if (strUpperSheetName == "componen")
 		{
-			colNames.clear();
+			std::vector<std::string> colNames;
 			for (int c = dim.firstCol; c <= dim.lastCol; c++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
@@ -426,56 +427,120 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
-			colNames.clear();
-			for (int c = dim.firstCol; c <= dim.lastCol; c++)
+			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
+			const int nRecordCount = nRowsCount / 10;
+
+			if (nRowsCount != nRecordCount * 10)
 			{
-				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
+				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
+				printf("Generate faild!\n");
+				printf("Press [Enter] key to exit!\n");
+				std::cin.ignore();
+				exit(1);
+			}
+
+			for (int nCurrentRecord = 1; nCurrentRecord <= nRecordCount; nCurrentRecord++)
+			{
+				std::string strRecordName = "";
+				std::string strRow = "";
+				std::string strCol = "";
+				std::string strPublic = "";
+				std::string strPrivate = "";
+				std::string strSave = "";
+				std::string strCache = "";
+				std::string strDesc = "";
+
+				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * 10 + 1, 2);
 				if (cell)
 				{
-					colNames.push_back(cell->value);
+					strRecordName = cell->value;
 				}
-			}
-			for (int RecordNumber = 0; RecordNumber < (int)(dim.lastRow / 2); RecordNumber++)
-			{
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 2, 2);
+				if (cell)
+				{
+					strRow = cell->value;
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 3, 2);
+				if (cell)
+				{
+					strCol = cell->value;
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 4, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strPublic = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strPublic = cell->value;
+					}
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 5, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strPrivate = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strPrivate = cell->value;
+					}
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 6, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strSave = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strSave = cell->value;
+					}
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 7, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strCache = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strCache = cell->value;
+					}
+				}
+				cell = nullptr;
+				cell = sh.getCell((nCurrentRecord - 1) * 10 + 10, 2);
+				if (cell)
+				{
+					strDesc = cell->value;
+				}
+				cell = nullptr;
+
+				const int nExcelCols = atoi(strCol.c_str());
+				int nRealCols = 0;
+
 				auto recordNode = structDoc->NewElement("Record");
 				recordNodes->LinkEndChild(recordNode);
 
-				std::string strRecordName = "";
-
-				// 从11个开始就是Record中具体的Col了
-				int nSetColNum = 0;
-
-				for (int c = dim.firstCol; c <= nRecordStart; c++)
-				{
-					std::string  name = colNames[c - 1];
-					std::string  value = "";
-
-					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
-					if (cell)
-					{
-						std::string valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-						if (valueCell == "TRUE" || valueCell == "FALSE")
-						{
-							value = valueCell == "TRUE" ? 1 : 0;
-						}
-						else
-						{
-							value = cell->value;
-						}
-
-						recordNode->SetAttribute(name.c_str(), value.c_str());
-						if (name == "Col")
-						{
-							nSetColNum = atoi(value.c_str());
-						}
-
-						if (name == "Id")
-						{
-							strRecordName = value;
-						}
-					}
-				}
+				recordNode->SetAttribute("Id", strRecordName.c_str());
+				recordNode->SetAttribute("Row", strRow.c_str());
+				recordNode->SetAttribute("Col", strCol.c_str());
+				recordNode->SetAttribute("Public", strPublic.c_str());
+				recordNode->SetAttribute("Private", strPublic.c_str());
+				recordNode->SetAttribute("Save", strSave.c_str());
+				recordNode->SetAttribute("Cache", strCache.c_str());
+				recordNode->SetAttribute("Desc", strDesc.c_str());
 
 				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
 				strHppEnumInfo = strHppEnumInfo + "\n\tenum " + strRecordName + "\n\t{\n";
@@ -489,61 +554,52 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string toWrite = "enum " + strRecordName + "\n{\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
-				int nExcelColsNum = nSetColNum;
-				int nRealColNum = 0;
 
-				nSetColNum = dim.lastCol - nRecordStart;
-
-				for (int c = nRecordStart + 1; c <= nRecordStart + nSetColNum; c++)
+				for (int nRecordCol = dim.firstCol;nRecordCol <= dim.lastCol;nRecordCol++)
 				{
-					std::string name = "";
-
-					auto cll = sh.getCell(dim.firstRow + RecordNumber * 2, c);
-					if (cll)
+					std::string strType = "";
+					std::string strTag = "";
+					cell = sh.getCell((nCurrentRecord - 1) * 10 + 8, nRecordCol);
+					if (cell)
 					{
-						name = cll->value;
+						strTag = cell->value;
+					}
+					else
+					{
+						break;
+					}
+					cell = nullptr;
+					cell = sh.getCell((nCurrentRecord - 1) * 10 + 9, nRecordCol);
+					if (cell)
+					{
+						strType = cell->value;
 					}
 					else
 					{
 						break;
 					}
 
-					nRealColNum++;
+					cell = nullptr;
 
-					std::string value = "";
+					auto colNode = structDoc->NewElement("Col");
+					recordNode->LinkEndChild(colNode);
 
-					MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow + RecordNumber * 2 + 1, c);
-					if (cell)
-					{
-						std::string valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-						if (valueCell == "TRUE" || valueCell == "FALSE")
-						{
-							value = valueCell == "TRUE" ? 1 : 0;
-						}
-						else
-						{
-							value = cell->value;
-						}
+					colNode->SetAttribute("Type", strType.c_str());
+					colNode->SetAttribute("Tag", strTag.c_str());
 
-						auto colNode = structDoc->NewElement("Col");
-						recordNode->LinkEndChild(colNode);
+					toWrite = "\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
+					fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
-						colNode->SetAttribute("Type", value.c_str());
-						colNode->SetAttribute("Tag", name.c_str());
+					strHppEnumInfo += "\t\t" + strRecordName + "_" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
+					strJavaEnumInfo += "\t\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
+					strCSEnumInfo += "\t\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
 
-						toWrite = "\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + "; // " + name + " -- " + value + " \n";
-						fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
-
-						strHppEnumInfo += "\t\t" + strRecordName + "_" + name + "\t\t= " + std::to_string(c - 11 - 1) + ", // " + name + " -- " + value + "\n";
-						strJavaEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
-						strCSEnumInfo += "\t\t" + name + "\t\t= " + std::to_string(c - nRecordStart - 1) + ", // " + name + " -- " + value + "\n";
-					}
+					nRealCols++;
 				}
 
-				if (nExcelColsNum != nRealColNum)
+				if (nExcelCols != nRealCols)
 				{
-					printf("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!\n", strFile.c_str(), strRecordName.c_str(), nExcelColsNum, nRealColNum);
+					printf("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!\n", strFile.c_str(), strRecordName.c_str(), nExcelCols, nRealCols);
 					printf("Press [Enter] key to exit!");
 					std::cin.ignore();
 					exit(1);
