@@ -748,9 +748,9 @@ public:
 	// Record
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_PlayerFightHero(){ static std::string xPlayerFightHero = "PlayerFightHero"; return xPlayerFightHero;}
+	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
-	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
 	static const std::string& R_TaskMonsterList(){ static std::string xTaskMonsterList = "TaskMonsterList"; return xTaskMonsterList;}
 	static const std::string& R_TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
@@ -791,6 +791,40 @@ public:
 
 	};
 
+	enum HeroPropertyValue
+	{
+		HeroPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		HeroPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		HeroPropertyValue_CRITICAL		= 2, // CRITICAL -- int
+		HeroPropertyValue_MAXHP		= 3, // MAXHP -- int
+		HeroPropertyValue_MAXMP		= 4, // MAXMP -- int
+		HeroPropertyValue_MAXSP		= 5, // MAXSP -- int
+		HeroPropertyValue_HPREGEN		= 6, // HPREGEN -- int
+		HeroPropertyValue_SPREGEN		= 7, // SPREGEN -- int
+		HeroPropertyValue_MPREGEN		= 8, // MPREGEN -- int
+		HeroPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
+		HeroPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
+		HeroPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		HeroPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
+		HeroPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
+		HeroPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		HeroPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
+		HeroPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
+		HeroPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
+		HeroPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
+		HeroPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		HeroPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
+		HeroPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
+		HeroPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
+		HeroPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		HeroPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
+		HeroPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
+		HeroPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		HeroPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		HeroPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
+
+	};
+
 	enum BagEquipList
 	{
 		BagEquipList_GUID		= 0, // GUID -- object
@@ -826,40 +860,6 @@ public:
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
 		BagItemList_Date		= 4, // Date -- int
-
-	};
-
-	enum HeroPropertyValue
-	{
-		HeroPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		HeroPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		HeroPropertyValue_CRITICAL		= 2, // CRITICAL -- int
-		HeroPropertyValue_MAXHP		= 3, // MAXHP -- int
-		HeroPropertyValue_MAXMP		= 4, // MAXMP -- int
-		HeroPropertyValue_MAXSP		= 5, // MAXSP -- int
-		HeroPropertyValue_HPREGEN		= 6, // HPREGEN -- int
-		HeroPropertyValue_SPREGEN		= 7, // SPREGEN -- int
-		HeroPropertyValue_MPREGEN		= 8, // MPREGEN -- int
-		HeroPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
-		HeroPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
-		HeroPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		HeroPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
-		HeroPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
-		HeroPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		HeroPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
-		HeroPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
-		HeroPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
-		HeroPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
-		HeroPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		HeroPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
-		HeroPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
-		HeroPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
-		HeroPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		HeroPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
-		HeroPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
-		HeroPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		HeroPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		HeroPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
