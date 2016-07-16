@@ -147,8 +147,6 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
                 strView = pRecordNode->first_attribute("View")->value();
             }
 
-            const char* pstrIndex = pRecordNode->first_attribute("Index")->value();
-
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
