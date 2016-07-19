@@ -167,7 +167,7 @@ namespace NFCoreEx
                 //NFCLog.Instance.Log("Class:" + xLogicClass.GetName());
 
                 XmlNode xNodeClass = xNodeList.Item(i);
-                XmlAttribute strID = xNodeClass.Attributes["ID"];
+                XmlAttribute strID = xNodeClass.Attributes["Id"];
 
                 //NFCLog.Instance.Log("ClassID:" + strID.Value);
 
