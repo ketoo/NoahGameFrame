@@ -124,7 +124,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClInclude Include="NFCGuildModule.h" />
     <ClInclude Include="NFCHeroModule.h" />
     <ClInclude Include="NFCHeroPropertyModule.h" />
+    <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemGemConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemItemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemModule.h" />
+    <ClInclude Include="NFCItemTokenConsumeProcessModule.h" />
     <ClInclude Include="NFCMailModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCNPCRefreshModule.h" />
@@ -163,7 +167,11 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCGuildModule.cpp" />
     <ClCompile Include="NFCHeroModule.cpp" />
     <ClCompile Include="NFCHeroPropertyModule.cpp" />
+    <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemGemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemItemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemModule.cpp" />
+    <ClCompile Include="NFCItemTokenConsumeProcessModule.cpp" />
     <ClCompile Include="NFCMailModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCNPCRefreshModule.cpp" />

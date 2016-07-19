@@ -144,6 +144,18 @@
     <ClInclude Include="NFCGSPVPMatchModule.h">
       <Filter>NFPVPModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCItemEquipConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemGemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemTokenConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -229,6 +241,18 @@
     </ClCompile>
     <ClCompile Include="NFCGSPVPMatchModule.cpp">
       <Filter>NFPVPModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemGemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemTokenConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
