@@ -201,7 +201,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	var.AddString("ClientID");
 	var.AddObject(nClientID);
 
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, "Player", "", var);
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
 	if (NULL == pObject.get())
 	{
 		//内存泄漏
@@ -623,7 +623,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave(const NFIDataList& self, co
 
 int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-	//if ( "Player" == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
+	//if ( NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
 	{
 		if ("GroupID" == strPropertyName)
 		{
@@ -637,7 +637,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, con
 			OnContainerEvent(self, strPropertyName, oldVar, newVar);
 		}
 
-		if ("Player" == m_pKernelModule->GetPropertyString(self, "ClassName"))
+		if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, "ClassName"))
 		{
 			if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
 			{
@@ -765,7 +765,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		return 0;
 	}
 
-	if ("Player" == m_pKernelModule->GetPropertyString(self, "ClassName"))
+	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, "ClassName"))
 	{
 		if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
 		{
@@ -1041,7 +1041,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent(const NFGUID& self, const 
 		{
 			NFGUID identBC = valueAllObjectList.Object(i);
 			const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-			if ("Player" == strClassName)
+			if (NFrame::Player::ThisName() == strClassName)
 			{
 				valueBroadCaseList.Add(identBC);
 				if (identBC != self)
@@ -1077,7 +1077,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent(const NFGUID& self, const 
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
 		//自己广播给自己就够了
-		if (strClassName == "Player")
+		if (strClassName == NFrame::Player::ThisName())
 		{
 			OnObjectListEnter(NFCDataList() << self, NFCDataList() << self);
 
@@ -1118,7 +1118,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent(const NFGUID& self, const std::s
 				}
 
 				const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-				if ("Player" == strClassName)
+				if (NFrame::Player::ThisName() == strClassName)
 				{
 					valueAllOldPlayerList.Add(identBC);
 				}
@@ -1148,7 +1148,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent(const NFGUID& self, const std::s
 		{
 			NFGUID identBC = valueAllObjectList.Object(i);
 			const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-			if ("Player" == strClassName)
+			if (NFrame::Player::ThisName() == strClassName)
 			{
 				valuePlayerList.Add(identBC);
 				if (identBC != self)
@@ -1174,13 +1174,13 @@ int NFCGameServerNet_ServerModule::OnGroupEvent(const NFGUID& self, const std::s
 		//广播给自己,所有的别人出现
 		if (valueAllObjectListNoSelf.GetCount() > 0)
 		{
-			if (strSelfClassName == "Player")
+			if (strSelfClassName == NFrame::Player::ThisName())
 			{
 				OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
 			}
 		}
 
-		if (strSelfClassName == "Player")
+		if (strSelfClassName == NFrame::Player::ThisName())
 		{
 			for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
 			{
@@ -1237,7 +1237,7 @@ int NFCGameServerNet_ServerModule::OnContainerEvent(const NFGUID& self, const st
 	{
 		NFGUID identBC = valueNewAllObjectList.Object(i);
 		const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-		if ("Player" == strClassName)
+		if (NFrame::Player::ThisName() == strClassName)
 		{
 			valuePlayerList.Add(identBC);
 			if (identBC != self)
@@ -1327,7 +1327,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject(const NFGUID& self, const 
 		}
 	}
 
-	if ("Player" == strClassName)
+	if (NFrame::Player::ThisName() == strClassName)
 	{
 		if (bTable)
 		{
@@ -1383,7 +1383,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject(const int nObjectContainer
 	for (int i = 0; i < valContainerObjectList.GetCount(); i++)
 	{
 		const std::string& strObjClassName = m_pKernelModule->GetPropertyString(valContainerObjectList.Object(i), "ClassName");
-		if ("Player" == strObjClassName)
+		if (NFrame::Player::ThisName() == strObjClassName)
 		{
 			valueObject.Add(valContainerObjectList.Object(i));
 		}
