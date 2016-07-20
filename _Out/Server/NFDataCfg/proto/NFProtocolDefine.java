@@ -448,6 +448,21 @@ public class GuildJob {
 
 }
 
+public class GuildName {
+	//Class name
+	public static final String ThisName = "GuildName";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String GuildID = "GuildID"; // object
+	// Record
+
+}
+
 public class InitProperty {
 	//Class name
 	public static final String ThisName = "InitProperty";

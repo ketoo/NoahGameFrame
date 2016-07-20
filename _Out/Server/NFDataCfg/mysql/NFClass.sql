@@ -58,6 +58,11 @@ CREATE TABLE `GuildJob` (
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `GuildName` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `InitProperty` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)
