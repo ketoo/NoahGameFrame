@@ -467,6 +467,22 @@ public class GuildJob
 
 }
 
+public class GuildName
+{
+	//Class name
+	public static readonly string ThisName = "GuildName";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String GuildID = "GuildID"; // object
+	// Record
+
+}
+
 public class InitProperty
 {
 	//Class name
