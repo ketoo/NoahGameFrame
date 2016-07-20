@@ -24,7 +24,7 @@ cd ./Tool
 ./cbp2make.linux-x86_64 -in ../NFServer/NFMasterServerPlugin/NFMasterServerPlugin.cbp -out ../NFServer/NFMasterServerPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin.cbp -out ../NFServer/NFProxyServerNet_ClientPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin.cbp -out ../NFServer/NFProxyServerNet_ServerPlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFServer/NFProxyServerPlugin/NFProxyPlugin.cbp -out ../NFServer/NFProxyServerPlugin/makefile
+./cbp2make.linux-x86_64 -in ../NFServer/NFProxyLogicPlugin/NFProxyPlugin.cbp -out ../NFServer/NFProxyLogicPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin.cbp -out ../NFServer/NFWorldLogicPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldNet_ClientPlugin/NFWorldNet_ClientPlugin.cbp -out ../NFServer/NFWorldNet_ClientPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFWorldNet_ServerPlugin/NFWorldNet_ServerPlugin.cbp -out ../NFServer/NFWorldNet_ServerPlugin/makefile
@@ -50,7 +50,7 @@ sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFMasterNet_ServerPlugin/makefil
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFMasterServerPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerNet_ClientPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerNet_ServerPlugin/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyServerPlugin/makefile
+sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFProxyLogicPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldLogicPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldNet_ClientPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFWorldNet_ServerPlugin/makefile
