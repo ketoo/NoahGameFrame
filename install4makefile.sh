@@ -5,20 +5,13 @@ find ../NFServer -name 'makefile' -type f -print -exec rm -rf {} \;
 # start to generate makefile(s)
 cd ./Tool
 
-./cbp2make.linux-x86_64 -in ../NFComm/NFCluster/NFMysqlClusterPlugin.cbp -out ../NFComm/NFCluster/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFConfigPlugin/NFConfigPlugin.cbp -out ../NFComm/NFConfigPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFCore/NFCore.cbp -out ../NFComm/NFCore/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFCrashPlugin/NFCrashPlugin.cbp -out ../NFComm/NFCrashPlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFDataBasePlugin/NFDataBasePlugin.cbp -out ../NFComm/NFDataBasePlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFDataNoSqlPlugin/NFDataNoSqlPlugin.cbp -out ../NFComm/NFDataNoSqlPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFKernelPlugin/NFKernelPlugin.cbp -out ../NFComm/NFKernelPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFLogPlugin/NFLogPlugin.cbp -out ../NFComm/NFLogPlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFLuaScriptPlugin/NFLuaScriptPlugin.cbp -out ../NFComm/NFLuaScriptPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFMessageDefine/NFMessageDefine.cbp -out ../NFComm/NFMessageDefine/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFNet/NFNet.cbp -out ../NFComm/NFNet/makefile
 ./cbp2make.linux-x86_64 -in ../NFComm/NFPluginLoader/NFPluginLoader.cbp -out ../NFComm/NFPluginLoader/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFTagPlugin/NFTagPlugin.cbp -out ../NFComm/NFTagPlugin/makefile
-./cbp2make.linux-x86_64 -in ../NFComm/NFUrlPlugin/NFUrlPlugin.cbp -out ../NFComm/NFUrlPlugin/makefile
 
 ./cbp2make.linux-x86_64 -in ../NFServer/NFDataBaseNet_ClientPlugin/NFDataBaseNet_ClientPlugin.cbp -out ../NFServer/NFDataBaseNet_ClientPlugin/makefile
 ./cbp2make.linux-x86_64 -in ../NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp -out ../NFServer/NFGameServerNet_ClientPlugin/makefile
@@ -39,22 +32,14 @@ cd ./Tool
 
 # add SolutionDir in line 20
 # SolutionDir = ../../
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCluster/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFConfigPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCore/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFCrashPlugin/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFDataBasePlugin/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFDataNoSqlPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFKernelPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFLogPlugin/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFLuaScriptPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFMessageDefine/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFNet/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFPluginLoader/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFTagPlugin/makefile
-sed -i '20i\SolutionDir = ../../\n' ../NFComm/NFUrlPlugin/makefile
 
-sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFDataBaseNet_ClientPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerNet_ClientPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerNet_ServerPlugin/makefile
 sed -i '20i\SolutionDir = ../../\n' ../NFServer/NFGameServerPlugin/makefile
