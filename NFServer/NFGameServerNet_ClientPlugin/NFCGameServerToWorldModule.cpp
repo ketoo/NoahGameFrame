@@ -168,7 +168,7 @@ void NFCGameServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_
 
 int NFCGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
-    if (strClassName == "Player")
+    if (strClassName == NFrame::Player::ThisName())
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
