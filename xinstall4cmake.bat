@@ -1,4 +1,4 @@
-xcopy cmake.dir\develop\*.* *.txt /e /y
+xcopy cmake.dir\X-GAME\*.* *.txt /e /y
 
 cd Dependencies
 call build_dep.bat

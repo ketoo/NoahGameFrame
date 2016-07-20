@@ -9,7 +9,7 @@ fi
 
 rm -rf ./cmake.dir/tmp
 mkdir ./cmake.dir/tmp
-cp -R -f ./cmake.dir/develop/* ./cmake.dir/tmp/
+cp -R -f ./cmake.dir/X-GAME/* ./cmake.dir/tmp/
 python -mplatform | grep -qi Ubuntu && find ./cmake.dir/tmp -name "*.text" -exec rename -f 's/.text/.txt/' {} \; || find ./cmake.dir/tmp -name "*.text" -exec rename .text .txt {} \;
 cp -R -f ./cmake.dir/tmp/* ./
 
