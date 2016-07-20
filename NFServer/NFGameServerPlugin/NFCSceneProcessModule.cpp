@@ -9,6 +9,7 @@
 #include "NFCSceneProcessModule.h"
 #include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFCore/NFTimer.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCSceneProcessModule::Init()
 {
@@ -212,7 +213,7 @@ int NFCSceneProcessModule::OnLeaveSceneEvent(const NFGUID& object, const int nEv
 
 int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
-    if (strClassName == "Player")
+    if (strClassName == NFrame::Player::ThisName())
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {

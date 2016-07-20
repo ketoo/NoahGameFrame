@@ -479,6 +479,23 @@ public:
 
 };
 
+class GuildName
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xGuildName = "GuildName"; return xGuildName; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
+	// Record
+
+};
+
 class InitProperty
 {
 public:
