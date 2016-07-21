@@ -1,7 +1,5 @@
 cd Dependencies
 call build_dep.bat
 cd ..
-cd _Out\Server\NFDataCfg\Tool\
-start NFFileProcess.exe
-cd ..
+REM Do FileProcess
 call GenerateConfigXML.bat
