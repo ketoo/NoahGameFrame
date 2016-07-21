@@ -18,15 +18,16 @@ endif()
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
+	string(REGEX REPLACE "/" "\\\\" WIN32_PROJECT_SOURCE_DIR ${PROJECT_SOURCE_DIR})
 	add_custom_command(TARGET ${strProjectName}
 						POST_BUILD
-						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
+						COMMAND copy /y "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	
 	else()
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+							COMMAND copy /y "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
 	endif()
 endmacro()
 
