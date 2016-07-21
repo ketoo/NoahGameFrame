@@ -17,6 +17,3 @@ copy lib\\Release\\libevent.a lib\\Debug\\ /Y
 copy lib\\Release\\libevent.lib lib\\Debug\\ /Y
 copy lib\\Release\\libevent_core.a lib\\Debug\\ /Y
 copy lib\\Release\\libevent_core.lib lib\\Debug\\ /Y
-
-REM back to main dir
-cd ..\\
