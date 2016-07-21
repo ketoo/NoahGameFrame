@@ -534,6 +534,7 @@ public:
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
 	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
+	static const std::string& DesignDesc(){ static std::string xDesignDesc = "DesignDesc"; return xDesignDesc; } // string
 	static const std::string& DescID(){ static std::string xDescID = "DescID"; return xDescID; } // string
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
@@ -634,7 +635,23 @@ public:
 	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // float
 	static const std::string& TargetX(){ static std::string xTargetX = "TargetX"; return xTargetX; } // float
 	static const std::string& TargetY(){ static std::string xTargetY = "TargetY"; return xTargetY; } // float
-	static const std::string& TargetZ(){ static std::string xTargetZ = "TargetZ"; return xTargetZ; } // float
+	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
+	static const std::string& MoveType(){ static std::string xMoveType = "MoveType"; return xMoveType; } // int
+	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
+	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
+	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
+	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; } // float
+	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
+	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
+	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
+	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
+	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
+	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
+	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
+	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
+	static const std::string& MasterID(){ static std::string xMasterID = "MasterID"; return xMasterID; } // object
+	static const std::string& NPCType(){ static std::string xNPCType = "NPCType"; return xNPCType; } // int
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
@@ -664,23 +681,6 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
-	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
-	static const std::string& MoveType(){ static std::string xMoveType = "MoveType"; return xMoveType; } // int
-	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
-	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
-	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
-	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; } // float
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
-	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
-	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
-	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& MasterID(){ static std::string xMasterID = "MasterID"; return xMasterID; } // object
-	static const std::string& NPCType(){ static std::string xNPCType = "NPCType"; return xNPCType; } // int
 	// Record
 
 };
@@ -726,6 +726,13 @@ public:
 	static const std::string& TotalTime(){ static std::string xTotalTime = "TotalTime"; return xTotalTime; } // int
 	static const std::string& LastOfflineTime(){ static std::string xLastOfflineTime = "LastOfflineTime"; return xLastOfflineTime; } // object
 	static const std::string& OnlineTime(){ static std::string xOnlineTime = "OnlineTime"; return xOnlineTime; } // object
+	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
+	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
+	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish; } // int
+	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
+	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
+	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
+	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
@@ -755,13 +762,6 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
-	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
-	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
-	static const std::string& LoadPropertyFinish(){ static std::string xLoadPropertyFinish = "LoadPropertyFinish"; return xLoadPropertyFinish; } // int
-	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
-	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
-	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
-	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
 	// Record
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_PlayerFightHero(){ static std::string xPlayerFightHero = "PlayerFightHero"; return xPlayerFightHero;}
