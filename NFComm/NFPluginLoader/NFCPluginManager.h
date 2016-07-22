@@ -63,6 +63,7 @@ public:
 
 	virtual const std::string& GetConfigPath() const;
 
+	virtual void SetConfigName(const std::string& strFileName);
 protected:
 	bool LoadPluginConfig();
 
@@ -76,6 +77,7 @@ private:
     NFINT64 mnInitTime;
     NFINT64 mnNowTime;
     std::string mstrConfigPath;
+	std::string mstrConfigName;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
