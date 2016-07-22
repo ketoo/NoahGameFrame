@@ -153,6 +153,10 @@ int main(int argc, char* argv[])
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+	if (strArgvList.find("-x") != string::npos)
+	{
+		CloseXButton();
+	}
 #elif NF_PLATFORM == NF_PLATFORM_LINUX
     //run it as a daemon process
 	if (strArgvList.find("-d") != string::npos)
@@ -162,34 +166,19 @@ int main(int argc, char* argv[])
 
     signal(SIGPIPE, SIG_IGN);
     signal(SIGCHLD, SIG_IGN);
-
 #endif
-	if (strArgvList.find("-x") != string::npos)
-	{
-		CloseXButton();
-	}
 
 	if (strArgvList.find(".xml") != string::npos)
 	{
-		strPluginName = "";
-		bool isXMLFound = false;
 		for (int i = 0; i < argc; i++)
 		{
 			strPluginName = argv[i];
 			if (strPluginName.find(".xml") != string::npos)
 			{
-				if (!isXMLFound)
-				{
-					isXMLFound = true;
-				}
-				else
-				{
-					std::cout << "There are more than one .xml, Please check your command line!\n" << std::endl;
-					assert(0);
-				}
+				break;
 			}
 		}
-		assert(strPluginName.size() != std::string::npos);
+
 		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
