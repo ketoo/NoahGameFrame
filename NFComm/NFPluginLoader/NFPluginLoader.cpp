@@ -171,7 +171,25 @@ int main(int argc, char* argv[])
 
 	if (strArgvList.find(".xml") != string::npos)
 	{
-		strPluginName = "aaa.xml";
+		strPluginName = "";
+		bool isXMLFound = false;
+		for (int i = 0; i < argc; i++)
+		{
+			strPluginName = argv[i];
+			if (strPluginName.find(".xml") != string::npos)
+			{
+				if (!isXMLFound)
+				{
+					isXMLFound = true;
+				}
+				else
+				{
+					std::cout << "There are more than one .xml, Please check your command line!\n" << std::endl;
+					assert(0);
+				}
+			}
+		}
+		assert(strPluginName.size() != std::string::npos);
 		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
