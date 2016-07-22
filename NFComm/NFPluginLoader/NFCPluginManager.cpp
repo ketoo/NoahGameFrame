@@ -239,6 +239,11 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 		return;
 	}
 
+	if (strFileName.find(".xml") == string::npos)
+	{
+		return;
+	}
+
 	mstrConfigName = strFileName;
 }
 
