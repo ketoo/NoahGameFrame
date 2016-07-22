@@ -59,7 +59,8 @@ public:
     virtual int AppID() const = 0;
     virtual NFINT64 GetInitTime() const = 0;
     virtual NFINT64 GetNowTime() const = 0;
-    virtual const std::string& GetConfigPath() const = 0;
+	virtual const std::string& GetConfigPath() const = 0;
+	virtual void SetConfigName(const std::string& strFileName) = 0;
 };
 
 #endif
