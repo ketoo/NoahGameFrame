@@ -10,24 +10,25 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 if(UNIX)
-	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
-	target_link_libraries(${projName} protobuf NFMessageDefine NFNet event event_core)
+	add_dependencies(${projName} NFNet NFCore NFMessageDefine libprotobuf)
+	target_link_libraries(${projName}  event event_core)
 else()
-	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
+	add_dependencies(${projName} NFNet NFCore NFMessageDefine libprotobuf)
+	target_link_libraries(${projName} libevent libevent_core)
 endif()
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
-	string(REGEX REPLACE "/" "\\\\" WIN32_PROJECT_SOURCE_DIR ${PROJECT_SOURCE_DIR})
+	string(REGEX REPLACE "/" "\\\\" WIN32_PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR})
 	add_custom_command(TARGET ${strProjectName}
 						POST_BUILD
-						COMMAND copy /y "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
+						COMMAND xcopy /Y "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\")
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	
 	else()
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND copy /y "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "${WIN32_PROJECT_SOURCE_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
+							COMMAND xcopy /Y "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Server\\$(Configuration)\\${destDir}\\")
 	endif()
 endmacro()
 
@@ -35,11 +36,11 @@ macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
 	if(${dbgSuffix} STREQUAL "_d")
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}${ext}")
+							COMMAND cp -f "${PROJECT_BINARY_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_BINARY_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}${ext}")
 	else()
 		add_custom_command(TARGET ${strProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}${ext}")
+							COMMAND cp -f "${PROJECT_BINARY_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_BINARY_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}${ext}")
 	
 	endif()
 endmacro()
@@ -78,7 +79,7 @@ else()
 	SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS" )
 	include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
 endif()
-set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm )
+set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${PROJECT_BINARY_DIR}/_Out/Comm )
 link_directories(${DependenciesLibPath})
 
 if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
@@ -91,5 +92,12 @@ else()
 	add_subdirectory(NFServer)
 	add_subdirectory(Tutorial)
 	add_subdirectory(NFTools)
+	
+	# Copy /Samples to output folder
+	message("Copying Samples to output directory")
+	file(COPY "${PROJECT_SOURCE_DIR}/Samples/Server" DESTINATION "${PROJECT_BINARY_DIR}/_Out/")
+	file(COPY "${PROJECT_SOURCE_DIR}/Samples/VC_Clear.bat" DESTINATION "${PROJECT_BINARY_DIR}/_Out/")
+
+	
 endif()
 

@@ -14,9 +14,9 @@ add_library(NFGameServerNet_ServerPlugin SHARED
 set_target_properties( NFGameServerNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ServerPlugin_d")
 set_target_properties( NFGameServerNet_ServerPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/_Out/Comm/
+	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/_Out/Comm/
+	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/_Out/Comm/ )
 link_NFSDK("NFGameServerNet_ServerPlugin")
 
 if(UNIX)
@@ -27,11 +27,11 @@ if(UNIX)
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFGameServer1/${ProjectName}.so")
+							COMMAND cp -f "${PROJECT_BINARY_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_BINARY_DIR}/_Out/Server/Release/NFGameServer1/${ProjectName}.so")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFGameServer1/${ProjectName}.so")
+							COMMAND cp -f "${PROJECT_BINARY_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_BINARY_DIR}/_Out/Server/Debug/NFGameServer1/${ProjectName}.so")
 	endif()
 else()
 	add_definitions(
@@ -39,17 +39,17 @@ else()
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
-	
+	string(REGEX REPLACE "/" "\\\\" WIN32_PROJECT_BINARY_DIR ${PROJECT_BINARY_DIR})
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName).dll")
+							COMMAND copy /y "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName).dll" "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName).dll")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.dll")
+							COMMAND copy /y "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.dll" "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.dll")
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.pdb")
+							COMMAND copy /y "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Comm\\$(Configuration)\\$(ProjectName)_d.pdb" "${WIN32_PROJECT_BINARY_DIR}\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.pdb")
 	endif()
 endif()
