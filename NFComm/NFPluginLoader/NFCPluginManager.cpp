@@ -47,6 +47,7 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
    mnNowTime = mnInitTime;
 
    mstrConfigPath = "";
+   mstrConfigName = "Plugin.xml";
 }
 
 NFCPluginManager::~NFCPluginManager()
@@ -80,7 +81,7 @@ inline bool NFCPluginManager::Init()
 
 bool NFCPluginManager::LoadPluginConfig()
 {
-    rapidxml::file<> fdoc("Plugin.xml");
+    rapidxml::file<> fdoc(mstrConfigName.c_str());
     rapidxml::xml_document<>  doc;
     doc.parse<0>(fdoc.data());
 
@@ -229,6 +230,21 @@ inline NFINT64 NFCPluginManager::GetNowTime() const
 inline const std::string & NFCPluginManager::GetConfigPath() const
 {
 	return mstrConfigPath;
+}
+
+void NFCPluginManager::SetConfigName(const std::string & strFileName)
+{
+	if (strFileName.empty())
+	{
+		return;
+	}
+
+	if (strFileName.find(".xml") == string::npos)
+	{
+		return;
+	}
+
+	mstrConfigName = strFileName;
 }
 
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
