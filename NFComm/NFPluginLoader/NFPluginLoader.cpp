@@ -26,6 +26,11 @@
 #include <signal.h>
 #endif
 
+bool bExitApp = false;
+std::thread gThread;
+std::string strArgvList;
+std::string strPluginName;
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #pragma comment( lib, "DbgHelp" )
@@ -65,7 +70,6 @@ long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 
 void CloseXButton()
 {
-#ifndef NF_DEBUG_MODE
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	HWND hWnd = GetConsoleWindow();
 	if (hWnd)
@@ -74,11 +78,7 @@ void CloseXButton()
 		EnableMenuItem(hMenu, SC_CLOSE, MF_DISABLED | MF_BYCOMMAND);
 	}
 #endif
-#endif
 }
-
-bool bExitApp = false;
-std::thread gThread;
 
 void ThreadFunc()
 {
@@ -133,48 +133,61 @@ void PrintfLogo()
     std::cout << "°Ô                                            °Ô" << std::endl;
     std::cout << "°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô" << std::endl;
     std::cout << "\n" << std::endl;
+	std::cout << "-d Run itas daemon mode, only on linux" << std::endl;
+	std::cout << "-x Closethe 'X' button, only on windows" << std::endl;
+	std::cout << "name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
+	std::cout << "\n" << std::endl;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-#endif // NF_PLATFORM
+#endif
 }
 
-#if NF_PLATFORM == NF_PLATFORM_WIN || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
 int main(int argc, char* argv[])
-#elif  NF_PLATFORM == NF_PLATFORM_ANDROID || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-
-#endif
 {
+	for (int i = 0; i < argc; i++)
+	{
+		strArgvList += " ";
+		strArgvList += argv[i];
+	}
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+	if (strArgvList.find("-x") != string::npos)
+	{
+		CloseXButton();
+	}
 #elif NF_PLATFORM == NF_PLATFORM_LINUX
-    bool bDaemon = false;
-
-    if (argc > 1)
-    {
-        if (0 == NFSTRICMP((const char*)argv[1], "-d"))
-        {
-            bDaemon = true;
-        }
-    }
-
-    if (bDaemon)
-    {
-        InitDaemon();
+    //run it as a daemon process
+	if (strArgvList.find("-d") != string::npos)
+	{
+		InitDaemon();
     }
 
     signal(SIGPIPE, SIG_IGN);
     signal(SIGCHLD, SIG_IGN);
-
 #endif
+
+	if (strArgvList.find(".xml") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strPluginName = argv[i];
+			if (strPluginName.find(".xml") != string::npos)
+			{
+				break;
+			}
+		}
+
+		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
+	}
+
 
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
 	NFCPluginManager::GetSingletonPtr()->CheckConfig();
 
-    PrintfLogo();
-
-    CloseXButton();
+	PrintfLogo();
     CreateBackThread();
 
     while (!bExitApp)    //DEBUG∞Ê±æ±¿¿££¨RELEASE≤ª±¿
