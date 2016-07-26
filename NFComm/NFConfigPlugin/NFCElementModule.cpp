@@ -93,7 +93,7 @@ bool NFCElementModule::Load()
 bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
 {
     //attrNode is the node of a object
-    std::string strConfigID = attrNode->first_attribute("ID")->value();
+    std::string strConfigID = attrNode->first_attribute("Id")->value();
     if (strConfigID.empty())
     {
         NFASSERT(0, strConfigID, __FILE__, __FUNCTION__);

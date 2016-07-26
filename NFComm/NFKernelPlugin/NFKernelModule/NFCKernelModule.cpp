@@ -13,6 +13,7 @@
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFCore/NFCMemManger.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
@@ -163,7 +164,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         pObject = NF_SHARE_PTR<NFIObject>(NF_NEW NFCObject(ident, pPluginManager));
         //是否是应该晚点等到事件2时才加入容器，这样能保证进入容器的对象都是有完整数据的，否则因为协程的原因，其他对象找到他时他却没数据或者部分数据
         AddElement(ident, pObject);
-        pContainerInfo->AddObjectToGroup(nGroupID, ident, strClassName == "Player" ? true : false);
+        pContainerInfo->AddObjectToGroup(nGroupID, ident, strClassName == NFrame::Player::ThisName() ? true : false);
 
         NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
         NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
@@ -234,10 +235,10 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         for (int i = 0; i < arg.GetCount() - 1; i += 2)
         {
             const std::string& strPropertyName = arg.String(i);
-            if ("ConfigID" != strPropertyName
-                && "ClassName" != strPropertyName
-                && "SceneID" != strPropertyName
-                && "GroupID" != strPropertyName)
+            if (NFrame::IObject::ConfigID() != strPropertyName
+                && NFrame::IObject::ClassName() != strPropertyName
+                && NFrame::IObject::SceneID() != strPropertyName
+                && NFrame::IObject::GroupID() != strPropertyName)
             {
                 NF_SHARE_PTR<NFIProperty> pArgProperty = pStaticClassPropertyManager->GetElement(strPropertyName);
                 if (pArgProperty)
@@ -264,10 +265,10 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         }
 
         //放进容器//先进入场景，再进入层
-        pObject->SetPropertyString("ConfigID", strConfigIndex);
-        pObject->SetPropertyString("ClassName", strClassName);
-        pObject->SetPropertyInt("SceneID", nSceneID);
-        pObject->SetPropertyInt("GroupID", nGroupID);
+        pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
+        pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
+        pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
+        pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
 
         DoEvent(ident, strClassName, COE_CREATE_LOADDATA, arg);
         DoEvent(ident, strClassName, COE_CREATE_BEFORE_EFFECT, arg);
@@ -289,15 +290,15 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
     }
 
     //需要同时从容器中删掉
-    NFINT64 nGroupID = GetPropertyInt(self, "GroupID");
-    NFINT64 nSceneID = GetPropertyInt(self, "SceneID");
+    NFINT64 nGroupID = GetPropertyInt(self, NFrame::IObject::GroupID());
+    NFINT64 nSceneID = GetPropertyInt(self, NFrame::IObject::SceneID());
 
     NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
     if (pContainerInfo.get())
     {
-        const std::string& strClassName = GetPropertyString(self, "ClassName");
+        const std::string& strClassName = GetPropertyString(self, NFrame::IObject::ClassName());
 
-        pContainerInfo->RemoveObjectFromGroup(nGroupID, self, strClassName == "Player" ? true : false);
+        pContainerInfo->RemoveObjectFromGroup(nGroupID, self, strClassName == NFrame::Player::ThisName() ? true : false);
 
         DoEvent(self, strClassName, COE_BEFOREDESTROY, NFCDataList());
         DoEvent(self, strClassName, COE_DESTROY, NFCDataList());
