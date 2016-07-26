@@ -1,5 +1,3 @@
-xcopy cmake.dir\develop\*.* *.txt /e /y
-
 cd Dependencies
 call build_dep.bat
 
