@@ -12,6 +12,7 @@
 #include <locale.h>
 #include <iostream>
 #include <vector>
+#include <map>
 
 
 #if NF_PLATFORM == NF_PLATFORM_WIN

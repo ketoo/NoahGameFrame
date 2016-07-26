@@ -41,6 +41,40 @@ public class BB_Build {
 
 }
 
+public class Block {
+	//Class name
+	public static final String ThisName = "Block";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String Tag = "Tag"; // int
+	public static final String SpriteList = "SpriteList"; // string
+	public static final String SpritePath = "SpritePath"; // string
+	public static final String LeftSide = "LeftSide"; // string
+	public static final String RightSide = "RightSide"; // string
+	public static final String TopSide = "TopSide"; // string
+	public static final String DownSide = "DownSide"; // string
+	public static final String LeftTopSide = "LeftTopSide"; // string
+	public static final String LeftDownSide = "LeftDownSide"; // string
+	public static final String RightTopSide = "RightTopSide"; // string
+	public static final String RightDownSide = "RightDownSide"; // string
+	public static final String LeftTopOutSide = "LeftTopOutSide"; // string
+	public static final String LeftDownOutSide = "LeftDownOutSide"; // string
+	public static final String RightTopOutSide = "RightTopOutSide"; // string
+	public static final String RightDownOutSide = "RightDownOutSide"; // string
+	public static final String GrassList = "GrassList"; // string
+	public static final String JoinList = "JoinList"; // string
+	public static final String CrackList = "CrackList"; // string
+	public static final String TreasureList = "TreasureList"; // string
+	public static final String TreeRootList = "TreeRootList"; // string
+	// Record
+
+}
+
 public class Buff {
 	//Class name
 	public static final String ThisName = "Buff";
@@ -168,6 +202,9 @@ public class EffectData {
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -180,10 +217,12 @@ public class EffectData {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -223,6 +262,7 @@ public class Equip {
 	public static final String DropPrePath = "DropPrePath"; // string
 	public static final String BuyPrice = "BuyPrice"; // int
 	public static final String SalePrice = "SalePrice"; // int
+	public static final String Icon = "Icon"; // string
 	// Record
 
 }
@@ -258,6 +298,7 @@ public class Guild {
 	public static final String DismissTime = "DismissTime"; // int
 	public static final String RecruitAD = "RecruitAD"; // string
 	public static final String RecruitLevel = "RecruitLevel"; // int
+	public static final String KingWarResource = "KingWarResource"; // int
 	public static final String AutoRecruit = "AutoRecruit"; // string
 	public static final String EctypServer = "EctypServer"; // int
 	public static final String EctypID = "EctypID"; // int
@@ -456,6 +497,7 @@ public class Item {
 	public static final String Level = "Level"; // int
 	public static final String Job = "Job"; // string
 	public static final String Quality = "Quality"; // int
+	public static final String DesignDesc = "DesignDesc"; // string
 	public static final String DescID = "DescID"; // string
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
@@ -468,6 +510,9 @@ public class Item {
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Script = "Script"; // string
 	public static final String Extend = "Extend"; // string
+	public static final String Icon = "Icon"; // string
+	public static final String ShowName = "ShowName"; // string
+	public static final String HeroType = "HeroType"; // int
 	// Record
 
 }
@@ -485,6 +530,42 @@ public class Language {
 	public static final String English = "English"; // string
 	public static final String Chinese = "Chinese"; // string
 	// Record
+
+}
+
+public class Map {
+	//Class name
+	public static final String ThisName = "Map";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String MaxCount = "MaxCount"; // int
+	public static final String InComeGold = "InComeGold"; // int
+	public static final String InComeDiamond = "InComeDiamond"; // int
+	public static final String InComeOil = "InComeOil"; // int
+	public static final String X = "X"; // int
+	public static final String Z = "Z"; // int
+	public static final String MapLevel = "MapLevel"; // int
+	// Record
+	public static final String R_Station = "Station";
+
+	public enum Station
+	{
+		GUID		= 0, // GUID -- object
+		GuildID		= 1, // GuildID -- object
+		GuildName		= 2, // GuildName -- string
+		Level		= 3, // Level -- int
+		Title		= 4, // Title -- string
+		Slogan		= 5, // Slogan -- string
+		State		= 6, // State -- int
+		CurMemberCount		= 7, // CurMemberCount -- int
+		WinCount		= 8, // WinCount -- int
+
+	};
 
 }
 
@@ -511,7 +592,26 @@ public class NPC {
 	public static final String Z = "Z"; // float
 	public static final String TargetX = "TargetX"; // float
 	public static final String TargetY = "TargetY"; // float
-	public static final String TargetZ = "TargetZ"; // float
+	public static final String Prefab = "Prefab"; // string
+	public static final String MoveType = "MoveType"; // int
+	public static final String AtkDis = "AtkDis"; // float
+	public static final String DropPackList = "DropPackList"; // string
+	public static final String SkillIDRef = "SkillIDRef"; // string
+	public static final String Height = "Height"; // float
+	public static final String EffectData = "EffectData"; // string
+	public static final String ConsumeData = "ConsumeData"; // string
+	public static final String LastAttacker = "LastAttacker"; // object
+	public static final String ShowName = "ShowName"; // string
+	public static final String EquipIDRef = "EquipIDRef"; // string
+	public static final String Icon = "Icon"; // string
+	public static final String ShowCard = "ShowCard"; // string
+	public static final String HeroType = "HeroType"; // int
+	public static final String Camp = "Camp"; // int
+	public static final String MasterID = "MasterID"; // object
+	public static final String NPCType = "NPCType"; // int
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -524,10 +624,12 @@ public class NPC {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -536,15 +638,6 @@ public class NPC {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
-	public static final String Prefab = "Prefab"; // string
-	public static final String MoveType = "MoveType"; // int
-	public static final String AtkDis = "AtkDis"; // float
-	public static final String DropPackList = "DropPackList"; // string
-	public static final String SkillIDRef = "SkillIDRef"; // string
-	public static final String Height = "Height"; // float
-	public static final String EffectData = "EffectData"; // string
-	public static final String ConsumeData = "ConsumeData"; // string
-	public static final String LastAttacker = "LastAttacker"; // object
 	// Record
 
 }
@@ -568,8 +661,6 @@ public class Player {
 	public static final String ShowName = "ShowName"; // string
 	public static final String PrefabPath = "PrefabPath"; // string
 	public static final String FirstTarget = "FirstTarget"; // object
-	public static final String State = "State"; // int
-	public static final String LogicState = "LogicState"; // int
 	public static final String CharType = "CharType"; // int
 	public static final String Job = "Job"; // int
 	public static final String VIPLevel = "VIPLevel"; // int
@@ -583,26 +674,23 @@ public class Player {
 	public static final String Account = "Account"; // string
 	public static final String ConnectKey = "ConnectKey"; // string
 	public static final String MAXEXP = "MAXEXP"; // int
-	public static final String DEAD_COUNT = "DEAD_COUNT"; // int
 	public static final String RELIVE_SOUL = "RELIVE_SOUL"; // int
-	public static final String GUILD_NAME = "GUILD_NAME"; // string
-	public static final String SPOUSE_NAME = "SPOUSE_NAME"; // string
-	public static final String TEAM_CARD = "TEAM_CARD"; // string
-	public static final String PVP_ATK_CARD = "PVP_ATK_CARD"; // string
-	public static final String PVP_DEF_CARD = "PVP_DEF_CARD"; // string
-	public static final String LUCKLY_CARD = "LUCKLY_CARD"; // string
 	public static final String ATK_PVP = "ATK_PVP"; // int
 	public static final String DEF_PVP = "DEF_PVP"; // int
-	public static final String CreditValue = "CreditValue"; // int
-	public static final String SoulValue = "SoulValue"; // int
 	public static final String OnlineCount = "OnlineCount"; // int
 	public static final String TotalTime = "TotalTime"; // int
-	public static final String Citizenship = "Citizenship"; // int
 	public static final String LastOfflineTime = "LastOfflineTime"; // object
 	public static final String OnlineTime = "OnlineTime"; // object
 	public static final String TotalLineTime = "TotalLineTime"; // object
 	public static final String GMLevel = "GMLevel"; // int
-	public static final String LastAttacker = "LastAttacker"; // object
+	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
+	public static final String GameID = "GameID"; // int
+	public static final String GateID = "GateID"; // int
+	public static final String GuildID = "GuildID"; // object
+	public static final String TeamID = "TeamID"; // object
+	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
+	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	public static final String CRITICAL = "CRITICAL"; // int
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
@@ -615,10 +703,12 @@ public class Player {
 	public static final String ATK_SPEED = "ATK_SPEED"; // int
 	public static final String ATK_FIRE = "ATK_FIRE"; // int
 	public static final String ATK_LIGHT = "ATK_LIGHT"; // int
+	public static final String ATK_WIND = "ATK_WIND"; // int
 	public static final String ATK_ICE = "ATK_ICE"; // int
 	public static final String ATK_POISON = "ATK_POISON"; // int
 	public static final String DEF_FIRE = "DEF_FIRE"; // int
 	public static final String DEF_LIGHT = "DEF_LIGHT"; // int
+	public static final String DEF_WIND = "DEF_WIND"; // int
 	public static final String DEF_ICE = "DEF_ICE"; // int
 	public static final String DEF_POISON = "DEF_POISON"; // int
 	public static final String DIZZY_GATE = "DIZZY_GATE"; // int
@@ -627,54 +717,83 @@ public class Player {
 	public static final String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
-	public static final String X = "X"; // float
-	public static final String Y = "Y"; // float
-	public static final String Z = "Z"; // float
-	public static final String TargetX = "TargetX"; // float
-	public static final String TargetY = "TargetY"; // float
-	public static final String TargetZ = "TargetZ"; // float
-	public static final String PathStep = "PathStep"; // int
-	public static final String LoadPropertyFinish = "LoadPropertyFinish"; // int
-	public static final String GameID = "GameID"; // int
-	public static final String GateID = "GateID"; // int
-	public static final String GuildID = "GuildID"; // object
 	// Record
-	public static final String R_PlayerViewItem = "PlayerViewItem";
 	public static final String R_PlayerHero = "PlayerHero";
+	public static final String R_PlayerFightHero = "PlayerFightHero";
+	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_BagEquipList = "BagEquipList";
 	public static final String R_BagItemList = "BagItemList";
 	public static final String R_CommPropertyValue = "CommPropertyValue";
-	public static final String R_EctypeList = "EctypeList";
-	public static final String R_DropItemList = "DropItemList";
-	public static final String R_SkillTable = "SkillTable";
 	public static final String R_TaskMonsterList = "TaskMonsterList";
 	public static final String R_TaskList = "TaskList";
-	public static final String R_PVPList = "PVPList";
-	public static final String R_ChatGroup = "ChatGroup";
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
-
-	public enum PlayerViewItem
-	{
-		ConfigID		= 0, // ConfigID -- string
-		EnhanceLevel		= 1, // EnhanceLevel -- int
-		InlayStone		= 2, // InlayStone -- string
-		SagecraftLevel		= 3, // SagecraftLevel -- string
-
-	};
 
 	public enum PlayerHero
 	{
 		GUID		= 0, // GUID -- object
 		ConfigID		= 1, // ConfigID -- string
 		Level		= 2, // Level -- int
-		Exp		= 3, // Exp -- string
-		Equip1		= 4, // Equip1 -- object
-		Equip2		= 5, // Equip2 -- object
-		Equip3		= 6, // Equip3 -- object
-		Equip4		= 7, // Equip4 -- object
-		Equip5		= 8, // Equip5 -- object
-		Equip6		= 9, // Equip6 -- object
+		Exp		= 3, // Exp -- int
+		Star		= 4, // Star -- int
+		Equip1		= 5, // Equip1 -- object
+		Equip2		= 6, // Equip2 -- object
+		Equip3		= 7, // Equip3 -- object
+		Equip4		= 8, // Equip4 -- object
+		Equip5		= 9, // Equip5 -- object
+		Equip6		= 10, // Equip6 -- object
+		Talent1		= 11, // Talent1 -- string
+		Talent2		= 12, // Talent2 -- string
+		Talent3		= 13, // Talent3 -- string
+		Talent4		= 14, // Talent4 -- string
+		Talent5		= 15, // Talent5 -- string
+		Skill1		= 16, // Skill1 -- string
+		Skill2		= 17, // Skill2 -- string
+		Skill3		= 18, // Skill3 -- string
+		Skill4		= 19, // Skill4 -- string
+		Skill5		= 20, // Skill5 -- string
+		FightSkill		= 21, // FightSkill -- string
+
+	};
+
+	public enum PlayerFightHero
+	{
+		GUID		= 0, // GUID -- object
+		FightPos		= 1, // FightPos -- int
+
+	};
+
+	public enum HeroPropertyValue
+	{
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
@@ -683,32 +802,26 @@ public class Player {
 		GUID		= 0, // GUID -- object
 		WearGUID		= 1, // WearGUID -- object
 		ConfigID		= 2, // ConfigID -- string
-		Bound		= 3, // Bound -- int
-		ExpiredType		= 4, // ExpiredType -- int
+		ExpiredType		= 3, // ExpiredType -- int
+		Date		= 4, // Date -- int
 		RandPropertyID		= 5, // RandPropertyID -- string
-		Date		= 6, // Date -- object
-		SlotCount		= 7, // SlotCount -- int
-		InlayStone1		= 8, // InlayStone1 -- string
-		InlayStone2		= 9, // InlayStone2 -- string
-		InlayStone3		= 10, // InlayStone3 -- string
-		InlayStone4		= 11, // InlayStone4 -- string
-		InlayStone5		= 12, // InlayStone5 -- string
-		InlayStone6		= 13, // InlayStone6 -- string
-		InlayStone7		= 14, // InlayStone7 -- string
-		InlayStone8		= 15, // InlayStone8 -- string
-		InlayStone9		= 16, // InlayStone9 -- string
-		InlayStone10		= 17, // InlayStone10 -- string
-		IntensifyLevel		= 18, // IntensifyLevel -- string
-		ElementLevel1		= 19, // ElementLevel1 -- int
-		ElementLevel2		= 20, // ElementLevel2 -- int
-		ElementLevel3		= 21, // ElementLevel3 -- int
-		ElementLevel4		= 22, // ElementLevel4 -- int
-		ElementLevel5		= 23, // ElementLevel5 -- int
-		ElementLevel6		= 24, // ElementLevel6 -- int
-		ElementLevel7		= 25, // ElementLevel7 -- int
-		ElementLevel8		= 26, // ElementLevel8 -- int
-		ElementLevel9		= 27, // ElementLevel9 -- int
-		ElementLevel10		= 28, // ElementLevel10 -- int
+		SlotCount		= 6, // SlotCount -- int
+		InlayStone1		= 7, // InlayStone1 -- string
+		InlayStone2		= 8, // InlayStone2 -- string
+		InlayStone3		= 9, // InlayStone3 -- string
+		InlayStone4		= 10, // InlayStone4 -- string
+		InlayStone5		= 11, // InlayStone5 -- string
+		InlayStone6		= 12, // InlayStone6 -- string
+		InlayStone7		= 13, // InlayStone7 -- string
+		InlayStone8		= 14, // InlayStone8 -- string
+		InlayStone9		= 15, // InlayStone9 -- string
+		InlayStone10		= 16, // InlayStone10 -- string
+		IntensifyLevel		= 17, // IntensifyLevel -- string
+		ElementLevel1_FIRE		= 18, // ElementLevel1_FIRE -- int
+		ElementLevel2_LIGHT		= 19, // ElementLevel2_LIGHT -- int
+		ElementLevel3_Wind		= 20, // ElementLevel3_Wind -- int
+		ElementLevel4_ICE		= 21, // ElementLevel4_ICE -- int
+		ElementLevel5_POISON		= 22, // ElementLevel5_POISON -- int
 
 	};
 
@@ -718,62 +831,41 @@ public class Player {
 		ItemCount		= 1, // ItemCount -- int
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
-		Date		= 4, // Date -- object
+		Date		= 4, // Date -- int
 
 	};
 
 	public enum CommPropertyValue
 	{
-		MAXHP		= 0, // MAXHP -- int
-		MAXMP		= 1, // MAXMP -- int
-		MAXSP		= 2, // MAXSP -- int
-		HPREGEN		= 3, // HPREGEN -- int
-		SPREGEN		= 4, // SPREGEN -- int
-		MPREGEN		= 5, // MPREGEN -- int
-		ATK_VALUE		= 6, // ATK_VALUE -- int
-		DEF_VALUE		= 7, // DEF_VALUE -- int
-		MOVE_SPEED		= 8, // MOVE_SPEED -- int
-		ATK_SPEED		= 9, // ATK_SPEED -- int
-		ATK_FIRE		= 10, // ATK_FIRE -- int
-		ATK_LIGHT		= 11, // ATK_LIGHT -- int
-		ATK_ICE		= 12, // ATK_ICE -- int
-		ATK_POISON		= 13, // ATK_POISON -- int
-		DEF_FIRE		= 14, // DEF_FIRE -- int
-		DEF_LIGHT		= 15, // DEF_LIGHT -- int
-		DEF_ICE		= 16, // DEF_ICE -- int
-		DEF_POISON		= 17, // DEF_POISON -- int
-		DIZZY_GATE		= 18, // DIZZY_GATE -- int
-		MOVE_GATE		= 19, // MOVE_GATE -- int
-		SKILL_GATE		= 20, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 21, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 22, // MAGIC_GATE -- int
-		BUFF_GATE		= 23, // BUFF_GATE -- int
-
-	};
-
-	public enum EctypeList
-	{
-		EctypeID		= 0, // EctypeID -- int
-		IsPass		= 1, // IsPass -- int
-		Star		= 2, // Star -- int
-
-	};
-
-	public enum DropItemList
-	{
-		MonsterID		= 0, // MonsterID -- object
-		ItemID		= 1, // ItemID -- string
-		ItemCount		= 2, // ItemCount -- int
-		DrawState		= 3, // DrawState -- int
-
-	};
-
-	public enum SkillTable
-	{
-		SkillID		= 0, // SkillID -- string
-		SkillLevel		= 1, // SkillLevel -- int
-		SkillStone		= 2, // SkillStone -- string
-		SkillSoulLevel		= 3, // SkillSoulLevel -- int
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
@@ -791,21 +883,6 @@ public class Player {
 		TaskID		= 0, // TaskID -- string
 		TaskStatus		= 1, // TaskStatus -- int
 		Process		= 2, // Process -- int
-
-	};
-
-	public enum PVPList
-	{
-		ID		= 0, // ID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-
-	};
-
-	public enum ChatGroup
-	{
-		ChatType		= 0, // ChatType -- int
-		GroupGUID		= 1, // GroupGUID -- object
 
 	};
 
@@ -938,7 +1015,7 @@ public class Skill {
 	public static final String Icon = "Icon"; // string
 	public static final String Atlas = "Atlas"; // string
 	public static final String UpLevel = "UpLevel"; // int
-	public static final String AfterUpSkillID = "AfterUpSkillID"; // string
+	public static final String AfterUpID = "AfterUpID"; // string
 	public static final String PlayerSkill = "PlayerSkill"; // int
 	public static final String AtkDis = "AtkDis"; // float
 	public static final String NeedTar = "NeedTar"; // int
@@ -1040,6 +1117,27 @@ public class StateFunction {
 
 }
 
+public class Talent {
+	//Class name
+	public static final String ThisName = "Talent";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String ShowName = "ShowName"; // string
+	public static final String Desc = "Desc"; // string
+	public static final String EffectData = "EffectData"; // string
+	public static final String Icon = "Icon"; // string
+	public static final String Atlas = "Atlas"; // string
+	public static final String UpLevel = "UpLevel"; // int
+	public static final String AfterUpID = "AfterUpID"; // string
+	// Record
+
+}
+
 public class Task {
 	//Class name
 	public static final String ThisName = "Task";
@@ -1060,6 +1158,51 @@ public class Task {
 	public static final String AwardPack = "AwardPack"; // string
 	public static final String Desc = "Desc"; // string
 	// Record
+
+}
+
+public class Team {
+	//Class name
+	public static final String ThisName = "Team";
+	// IObject
+	public static final String ID = "ID"; // string
+	public static final String ClassName = "ClassName"; // string
+	public static final String SceneID = "SceneID"; // int
+	public static final String GroupID = "GroupID"; // int
+	public static final String ConfigID = "ConfigID"; // string
+	// Property
+	public static final String Captain = "Captain"; // object
+	public static final String PresidentName = "PresidentName"; // string
+	// Record
+	public static final String R_MemberList = "MemberList";
+	public static final String R_ApplyList = "ApplyList";
+
+	public enum MemberList
+	{
+		GUID		= 0, // GUID -- object
+		Name		= 1, // Name -- string
+		Level		= 2, // Level -- int
+		Job		= 3, // Job -- int
+		Donation		= 4, // Donation -- int
+		Receive		= 5, // Receive -- int
+		VIP		= 6, // VIP -- int
+		Online		= 7, // Online -- int
+		Title		= 8, // Title -- int
+		GameID		= 9, // GameID -- int
+
+	};
+
+	public enum ApplyList
+	{
+		GUID		= 0, // GUID -- object
+		Name		= 1, // Name -- string
+		Level		= 2, // Level -- int
+		Job		= 3, // Job -- int
+		Donation		= 4, // Donation -- int
+		VIP		= 5, // VIP -- int
+		Power		= 6, // Power -- int
+
+	};
 
 }
 
