@@ -51,11 +51,12 @@ void protobuf_AssignDesc_NFSLGDefine_2eproto() {
       "NFSLGDefine.proto");
   GOOGLE_CHECK(file != NULL);
   ReqAckBuyObjectFormShop_descriptor_ = file->message_type(0);
-  static const int ReqAckBuyObjectFormShop_offsets_[4] = {
+  static const int ReqAckBuyObjectFormShop_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBuyObjectFormShop, config_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBuyObjectFormShop, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBuyObjectFormShop, y_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBuyObjectFormShop, z_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBuyObjectFormShop, shop_id_),
   };
   ReqAckBuyObjectFormShop_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -191,62 +192,62 @@ void protobuf_AddDesc_NFSLGDefine_2eproto() {
   ::NFMsg::protobuf_AddDesc_NFMsgBase_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\021NFSLGDefine.proto\022\005NFMsg\032\017NFMsgBase.pr"
-    "oto\"M\n\027ReqAckBuyObjectFormShop\022\021\n\tconfig"
+    "oto\"^\n\027ReqAckBuyObjectFormShop\022\021\n\tconfig"
     "_id\030\001 \002(\t\022\t\n\001x\030\002 \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002"
-    "(\002\"h\n\025ReqAckMoveBuildObject\022\013\n\003row\030\001 \001(\005"
-    "\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022\t\n\001x"
-    "\030\003 \002(\002\022\t\n\001y\030\004 \002(\002\022\t\n\001z\030\005 \002(\002\">\n\014ReqUpBui"
-    "ldLv\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002 \002(\0132\014"
-    ".NFMsg.Ident\"a\n\rReqCreateItem\022\013\n\003row\030\001 \001"
-    "(\005\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022\021\n"
-    "\tconfig_id\030\003 \002(\t\022\r\n\005count\030\004 \002(\005\"h\n\017ReqBu"
-    "ildOperate\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002"
-    " \002(\0132\014.NFMsg.Ident\022%\n\010functype\030\003 \002(\0162\023.N"
-    "FMsg.ESLGFuncType*\201\001\n\020ESLGBuildingType\022\014"
-    "\n\010EBT_BASE\020\000\022\017\n\013EBT_DEFENSE\020\001\022\014\n\010EBT_ARM"
-    "Y\020\002\022\020\n\014EBT_RESOURCE\020\003\022\r\n\tEBT_GUILD\020\004\022\016\n\n"
-    "EBT_TEMPLE\020\005\022\017\n\013EBT_NUCLEAR\020\006*\200\010\n\023ESLGBu"
-    "ildingSubType\022\r\n\tEBST_HALL\020\000\022\021\n\rEBST_MAS"
-    "HROOM\020F\022\r\n\tEBST_BUSH\020G\022\021\n\rEBST_BRANCH_1\020"
-    "H\022\021\n\rEBST_BRANCH_2\020I\022\021\n\rEBST_BRANCH_3\020J\022"
-    "\017\n\013EBST_TREE_1\020K\022\017\n\013EBST_TREE_2\020L\022\017\n\013EBS"
-    "T_TREE_3\020M\022\020\n\014EBST_STONE_1\020N\022\020\n\014EBST_STO"
-    "NE_2\020O\022\020\n\014EBST_STONE_3\020P\022\r\n\tEBST_TOMB\020Q\022"
-    "\022\n\016EBST_DARK_TOMB\020R\022\016\n\nEBST_PYXIS\020S\022\016\n\nE"
-    "BST_TORCH\020T\022\024\n\020EBST__WHITE_FLAG\020U\022\017\n\013EBS"
-    "T_CANNON\020e\022\017\n\013EBST_MORTAR\020f\022\025\n\021EBST_ARCH"
-    "ER_TOWER\020g\022\025\n\021EBST_WIZARD_TOWER\020h\022\022\n\016EBS"
-    "T_AIR_TOWER\020i\022\024\n\020EBST_TESLA_TOWER\020j\022\r\n\tE"
-    "BST_WALL\020k\022\016\n\nEBST_X_BOW\020l\022\r\n\tEBST_BOMB\020"
-    "m\022\021\n\rEBST_AIR_BOMB\020n\022\024\n\020EBST_SPRING_TRAP"
-    "\020o\022\023\n\017EBST_HELL_TOWER\020p\022\016\n\tEBST_CAMP\020\310\001\022"
-    "\021\n\014EBST_BARRACK\020\311\001\022\025\n\020EBST_TEC_FACTORY\020\312"
-    "\001\022\026\n\021EBST_DARK_BARRACK\020\313\001\022\026\n\021EBST_DRUG_F"
-    "ACTORY\020\314\001\022\024\n\017EBST_KING_ALTAR\020\315\001\022\025\n\020EBST_"
-    "QUEEN_ALTAR\020\316\001\022\030\n\023EBST_GOLD_COLLECTOR\020\254\002"
-    "\022\026\n\021EBST_GOLD_STORAGE\020\255\002\022\031\n\024EBST_STONE_C"
-    "OLLECTOR\020\256\002\022\027\n\022EBST_STONE_STORAGE\020\257\002\022\031\n\024"
-    "EBST_STEEL_COLLECTOR\020\260\002\022\027\n\022EBST_STEEL_ST"
-    "ORAGE\020\261\002\022\033\n\026EBST_DIAMOND_COLLECTOR\020\262\002\022\031\n"
-    "\024EBST_DIAMOND_STORAGE\020\263\002\022\r\n\010EBST_HUT\020\264\002\022"
-    "\026\n\021EBST_GUILD_CASTLE\020\220\003\022\025\n\020EBST_GUILD_CR"
-    "YPT\020\221\003\022\025\n\020EBST_ELEMENT_LAB\020\364\003\022\031\n\024EBST_NU"
-    "CLEAR_FACTORY\020\330\004*\370\001\n\014ESLGArmyType\022\017\n\013EAT"
-    "_FOOTMAN\020\000\022\016\n\nEAT_ARCHER\020\001\022\016\n\nEAT_GOBLIN"
-    "\020\002\022\r\n\tEAT_GIANT\020\003\022\024\n\020EAT_WALL_BREAKER\020\004\022"
-    "\017\n\013EAT_BALLOON\020\005\022\016\n\nEAT_HEALER\020\006\022\016\n\nEAT_"
-    "WIZARD\020\007\022\016\n\nEAT_DRAGON\020\010\022\r\n\tEAT_PEKKA\020\t\022"
-    "\016\n\nEAT_MINION\020\024\022\021\n\rEAT_HOG_RIDER\020\025\022\020\n\014EA"
-    "T_VALKYRIE\020\026\022\r\n\tEAT_GOLEM\020\027*\225\002\n\014ESLGFunc"
-    "Type\022\014\n\010EFT_INFO\020\000\022\016\n\nEFT_BOOOST\020\001\022\r\n\tEF"
-    "T_LVLUP\020\002\022\025\n\021EFT_CREATE_SOLDER\020\003\022\024\n\020EFT_"
-    "CREATE_SPEEL\020\004\022\020\n\014EFT_RESEARCH\020\005\022\024\n\020EFT_"
-    "COLLECT_GOLD\020\006\022\025\n\021EFT_COLLECT_STONE\020\007\022\025\n"
-    "\021EFT_COLLECT_STEEL\020\010\022\027\n\023EFT_COLLECT_DIAM"
-    "OND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\nEFT_REPAIR\020\013\022\016\n\nE"
-    "FT_CANCEL\020\014\022\016\n\nEFT_FINISH\020\r*A\n\021ESLGBuild"
-    "ingState\022\014\n\010EBS_IDLE\020\000\022\r\n\tEBS_BOOST\020\001\022\017\n"
-    "\013EBS_UPGRADE\020\002", 2254);
+    "(\002\022\017\n\007Shop_id\030\005 \002(\t\"h\n\025ReqAckMoveBuildOb"
+    "ject\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002 \002(\0132\014"
+    ".NFMsg.Ident\022\t\n\001x\030\003 \002(\002\022\t\n\001y\030\004 \002(\002\022\t\n\001z\030"
+    "\005 \002(\002\">\n\014ReqUpBuildLv\022\013\n\003row\030\001 \001(\005\022!\n\013ob"
+    "ject_guid\030\002 \002(\0132\014.NFMsg.Ident\"a\n\rReqCrea"
+    "teItem\022\013\n\003row\030\001 \001(\005\022!\n\013object_guid\030\002 \002(\013"
+    "2\014.NFMsg.Ident\022\021\n\tconfig_id\030\003 \002(\t\022\r\n\005cou"
+    "nt\030\004 \002(\005\"h\n\017ReqBuildOperate\022\013\n\003row\030\001 \001(\005"
+    "\022!\n\013object_guid\030\002 \002(\0132\014.NFMsg.Ident\022%\n\010f"
+    "unctype\030\003 \002(\0162\023.NFMsg.ESLGFuncType*\201\001\n\020E"
+    "SLGBuildingType\022\014\n\010EBT_BASE\020\000\022\017\n\013EBT_DEF"
+    "ENSE\020\001\022\014\n\010EBT_ARMY\020\002\022\020\n\014EBT_RESOURCE\020\003\022\r"
+    "\n\tEBT_GUILD\020\004\022\016\n\nEBT_TEMPLE\020\005\022\017\n\013EBT_NUC"
+    "LEAR\020\006*\200\010\n\023ESLGBuildingSubType\022\r\n\tEBST_H"
+    "ALL\020\000\022\021\n\rEBST_MASHROOM\020F\022\r\n\tEBST_BUSH\020G\022"
+    "\021\n\rEBST_BRANCH_1\020H\022\021\n\rEBST_BRANCH_2\020I\022\021\n"
+    "\rEBST_BRANCH_3\020J\022\017\n\013EBST_TREE_1\020K\022\017\n\013EBS"
+    "T_TREE_2\020L\022\017\n\013EBST_TREE_3\020M\022\020\n\014EBST_STON"
+    "E_1\020N\022\020\n\014EBST_STONE_2\020O\022\020\n\014EBST_STONE_3\020"
+    "P\022\r\n\tEBST_TOMB\020Q\022\022\n\016EBST_DARK_TOMB\020R\022\016\n\n"
+    "EBST_PYXIS\020S\022\016\n\nEBST_TORCH\020T\022\024\n\020EBST__WH"
+    "ITE_FLAG\020U\022\017\n\013EBST_CANNON\020e\022\017\n\013EBST_MORT"
+    "AR\020f\022\025\n\021EBST_ARCHER_TOWER\020g\022\025\n\021EBST_WIZA"
+    "RD_TOWER\020h\022\022\n\016EBST_AIR_TOWER\020i\022\024\n\020EBST_T"
+    "ESLA_TOWER\020j\022\r\n\tEBST_WALL\020k\022\016\n\nEBST_X_BO"
+    "W\020l\022\r\n\tEBST_BOMB\020m\022\021\n\rEBST_AIR_BOMB\020n\022\024\n"
+    "\020EBST_SPRING_TRAP\020o\022\023\n\017EBST_HELL_TOWER\020p"
+    "\022\016\n\tEBST_CAMP\020\310\001\022\021\n\014EBST_BARRACK\020\311\001\022\025\n\020E"
+    "BST_TEC_FACTORY\020\312\001\022\026\n\021EBST_DARK_BARRACK\020"
+    "\313\001\022\026\n\021EBST_DRUG_FACTORY\020\314\001\022\024\n\017EBST_KING_"
+    "ALTAR\020\315\001\022\025\n\020EBST_QUEEN_ALTAR\020\316\001\022\030\n\023EBST_"
+    "GOLD_COLLECTOR\020\254\002\022\026\n\021EBST_GOLD_STORAGE\020\255"
+    "\002\022\031\n\024EBST_STONE_COLLECTOR\020\256\002\022\027\n\022EBST_STO"
+    "NE_STORAGE\020\257\002\022\031\n\024EBST_STEEL_COLLECTOR\020\260\002"
+    "\022\027\n\022EBST_STEEL_STORAGE\020\261\002\022\033\n\026EBST_DIAMON"
+    "D_COLLECTOR\020\262\002\022\031\n\024EBST_DIAMOND_STORAGE\020\263"
+    "\002\022\r\n\010EBST_HUT\020\264\002\022\026\n\021EBST_GUILD_CASTLE\020\220\003"
+    "\022\025\n\020EBST_GUILD_CRYPT\020\221\003\022\025\n\020EBST_ELEMENT_"
+    "LAB\020\364\003\022\031\n\024EBST_NUCLEAR_FACTORY\020\330\004*\370\001\n\014ES"
+    "LGArmyType\022\017\n\013EAT_FOOTMAN\020\000\022\016\n\nEAT_ARCHE"
+    "R\020\001\022\016\n\nEAT_GOBLIN\020\002\022\r\n\tEAT_GIANT\020\003\022\024\n\020EA"
+    "T_WALL_BREAKER\020\004\022\017\n\013EAT_BALLOON\020\005\022\016\n\nEAT"
+    "_HEALER\020\006\022\016\n\nEAT_WIZARD\020\007\022\016\n\nEAT_DRAGON\020"
+    "\010\022\r\n\tEAT_PEKKA\020\t\022\016\n\nEAT_MINION\020\024\022\021\n\rEAT_"
+    "HOG_RIDER\020\025\022\020\n\014EAT_VALKYRIE\020\026\022\r\n\tEAT_GOL"
+    "EM\020\027*\225\002\n\014ESLGFuncType\022\014\n\010EFT_INFO\020\000\022\016\n\nE"
+    "FT_BOOOST\020\001\022\r\n\tEFT_LVLUP\020\002\022\025\n\021EFT_CREATE"
+    "_SOLDER\020\003\022\024\n\020EFT_CREATE_SPEEL\020\004\022\020\n\014EFT_R"
+    "ESEARCH\020\005\022\024\n\020EFT_COLLECT_GOLD\020\006\022\025\n\021EFT_C"
+    "OLLECT_STONE\020\007\022\025\n\021EFT_COLLECT_STEEL\020\010\022\027\n"
+    "\023EFT_COLLECT_DIAMOND\020\t\022\014\n\010EFT_SELL\020\n\022\016\n\n"
+    "EFT_REPAIR\020\013\022\016\n\nEFT_CANCEL\020\014\022\016\n\nEFT_FINI"
+    "SH\020\r*A\n\021ESLGBuildingState\022\014\n\010EBS_IDLE\020\000\022"
+    "\r\n\tEBS_BOOST\020\001\022\017\n\013EBS_UPGRADE\020\002", 2271);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFSLGDefine.proto", &protobuf_RegisterTypes);
   ReqAckBuyObjectFormShop::default_instance_ = new ReqAckBuyObjectFormShop();
@@ -423,6 +424,7 @@ const int ReqAckBuyObjectFormShop::kConfigIdFieldNumber;
 const int ReqAckBuyObjectFormShop::kXFieldNumber;
 const int ReqAckBuyObjectFormShop::kYFieldNumber;
 const int ReqAckBuyObjectFormShop::kZFieldNumber;
+const int ReqAckBuyObjectFormShop::kShopIdFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckBuyObjectFormShop::ReqAckBuyObjectFormShop()
@@ -445,6 +447,7 @@ void ReqAckBuyObjectFormShop::SharedCtor() {
   x_ = 0;
   y_ = 0;
   z_ = 0;
+  shop_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -455,6 +458,9 @@ ReqAckBuyObjectFormShop::~ReqAckBuyObjectFormShop() {
 void ReqAckBuyObjectFormShop::SharedDtor() {
   if (config_id_ != &::google::protobuf::internal::kEmptyString) {
     delete config_id_;
+  }
+  if (shop_id_ != &::google::protobuf::internal::kEmptyString) {
+    delete shop_id_;
   }
   if (this != default_instance_) {
   }
@@ -491,6 +497,11 @@ void ReqAckBuyObjectFormShop::Clear() {
     x_ = 0;
     y_ = 0;
     z_ = 0;
+    if (has_shop_id()) {
+      if (shop_id_ != &::google::protobuf::internal::kEmptyString) {
+        shop_id_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -562,6 +573,23 @@ bool ReqAckBuyObjectFormShop::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(42)) goto parse_Shop_id;
+        break;
+      }
+
+      // required string Shop_id = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_Shop_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_shop_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->shop_id().data(), this->shop_id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -608,6 +636,15 @@ void ReqAckBuyObjectFormShop::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->z(), output);
   }
 
+  // required string Shop_id = 5;
+  if (has_shop_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->shop_id().data(), this->shop_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->shop_id(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -641,6 +678,16 @@ void ReqAckBuyObjectFormShop::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->z(), target);
   }
 
+  // required string Shop_id = 5;
+  if (has_shop_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->shop_id().data(), this->shop_id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->shop_id(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -672,6 +719,13 @@ int ReqAckBuyObjectFormShop::ByteSize() const {
     // required float z = 4;
     if (has_z()) {
       total_size += 1 + 4;
+    }
+
+    // required string Shop_id = 5;
+    if (has_shop_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->shop_id());
     }
 
   }
@@ -713,6 +767,9 @@ void ReqAckBuyObjectFormShop::MergeFrom(const ReqAckBuyObjectFormShop& from) {
     if (from.has_z()) {
       set_z(from.z());
     }
+    if (from.has_shop_id()) {
+      set_shop_id(from.shop_id());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -730,7 +787,7 @@ void ReqAckBuyObjectFormShop::CopyFrom(const ReqAckBuyObjectFormShop& from) {
 }
 
 bool ReqAckBuyObjectFormShop::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
@@ -741,6 +798,7 @@ void ReqAckBuyObjectFormShop::Swap(ReqAckBuyObjectFormShop* other) {
     std::swap(x_, other->x_);
     std::swap(y_, other->y_);
     std::swap(z_, other->z_);
+    std::swap(shop_id_, other->shop_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
