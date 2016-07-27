@@ -50,6 +50,12 @@ enum EGameEventCode
 	EGEC_NO_SERVER4ZONE							= 142;       // 还没有指派服务器管理该场景; 请稍等(游戏世界还处于混沌中...)
 	EGEC_INVALID_SKILL							= 143;       // 无效的技能
 	EGEC_ENTER_GAME_SUCCESS						= 144;		 // 进入游戏成功
+	
+	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // 创建公会成功
+	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // 加入公会成功
+	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // 离开公会成功
+	
+
 }
 
 enum EGameMsgID
@@ -189,6 +195,8 @@ enum EGameMsgID
 	
 	EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
 	
+	EGMI_ReqEnterGuildEctype					= 315; // 
+	
 	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
 	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
@@ -251,6 +259,41 @@ enum EGameMsgID
 	EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
 	EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
 	EGMI_ACK_CLONE_RECORD_SORT						= 829;
+	
+	EGMI_REQSWICHSERVER								= 840;	// 申请转服
+	EGMI_ACKSWICHSERVER								= 841;	// 申请转服
+	
+	EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
+	EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
+	EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
+	EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
+	EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍
+	EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
+	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
+	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
+	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
+	
+	EGMI_REQ_TEAM_ENTER_ECTYPE						= 869; 	// 组队进副本 
+	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
+
+	
+	/////////////////////MapModule/////////////////////////////////////
+	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
+	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	
+	EGMI_REQ_BIG_MAP_INFO							= 902; 	// 申请大地图信息
+	EGMI_ACK_BIG_MAP_INFO							= 903; 	// 返回大地图
+	
+	EGMI_REQ_HOLD_MAP_GRID						= 910; 	// 申请入驻
+	EGMI_ACK_HOLD_MAP_GRID						= 911; 	// 返回入驻结果
+	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 912; 	// 申请留言
+	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 913; 	// 返回留言结果
+	EGMI_REQ_GET_MAP_GRID_AWARD					= 914; 	// 申请领取地图奖励
+	EGMI_ACK_GET_MAP_GRID_AWARD					= 915; 	// 返回领取地图奖励
+	
+	EGMI_REQ_MAP_GRID_HUNTING					= 916; 	// 申请地图狩猎
+	EGMI_ACK_MAP_GRID_HUNTING					= 917; 	// 返回结果
+	EGMI_REQ_MAP_GRID_KING_WAR					= 918; 	// 申请地图争霸
+	EGMI_ACK_MAP_GRID_KING_WAR					= 919; 	// 返回结果
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
 	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
@@ -261,6 +304,15 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_STR						= 1005;			// GM命令修改修改表字符串
 	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
 	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
+	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
+	
+		
+	EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
+	EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 申请匹配pvp
+	
+	EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
+	EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+	
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
 	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果
@@ -275,76 +327,74 @@ enum EGameMsgID
 /////////////////////////道具系统相关//////////////////////////////////////////////////////////////////////////
 enum EItemType
 {
-    EIT_NORMAL   			= 0; // 普通类型(物品，主要处理属性)
-    EIT_EQUIP   			= 1; // 装备
-	EIT_BOUNTY   			= 2; // 赏金令
-	EIT_HERO_CARD   		= 3; // 英雄卡牌，吃得英雄
-	EIT_HERO_STONE   		= 4; // 英雄石，吃得英雄经验
-	EIT_STRENGTHEN_STONE	= 5; // 强化石
-	EIT_DEMONIZATION_STONE	= 6; // 附魔石
-	EIT_GEM_STONE			= 7; // 属性宝石
-	EIT_CURRENCY			= 8; // 货币道具不进背包s
-	
-	EIT_WOOD				= 100; // 木材
-	EIT_STONE				= 101; // 石材
-	
-	//EIT_STONE				= 200;
+    EIT_EQUIP   			= 0; // 装备
+	EIT_GEM   				= 1; // 宝石
+	EIT_ITEM   				= 2; // 消耗品
+	EIT_CARD   				= 3; // 卡牌
+	EIT_TOKEN	   			= 4; // 令牌
 }
 
-//道具子类型(归属类型)
+//装备子类型(归属类型)
 enum EGameEquipSubType
 {
 	EQUIPTYPE_WEAPON            = 0;    // 武器
-	EQUIPTYPE_ARMOR             = 1;    // 胸甲
-	EQUIPTYPE_NECKLACE          = 2;    // 项链
-	EQUIPTYPE_RING              = 3;    // 戒指
-	EQUIPTYPE_EARRINGS          = 4;    // 耳环
-	EQUIPTYPE_BADGE             = 5;    // 徽章
-	EQUIPTYPE_HELMET            = 6;    // 头盔
-	EQUIPTYPE_SHAWL             = 7;    // 肩甲
-	EQUIPTYPE_GLOVE             = 8;    // 手套
-	EQUIPTYPE_WRIST             = 9;    // 护腕
-	EQUIPTYPE_BELT              = 10;   // 腰带
-	EQUIPTYPE_PANT              = 11;   // 裤子
-	EQUIPTYPE_BOOT              = 12;   // 靴子
-	EQUIPTYPE_WING              = 13;   // 翅膀
-	EQUIPTYPE_CLOAK             = 14;   // 披风
-	EQUIPTYPE_FASHION           = 15;   // 时装
+	EQUIPTYPE_HELMET            = 1;    // 头盔
+	EQUIPTYPE_ARMOR             = 2;    // 胸甲
+	EQUIPTYPE_WRIST             = 3;    // 护腕	
+	EQUIPTYPE_PANT              = 4;    // 裤子	
+	EQUIPTYPE_BOOT              = 5;   	// 靴子
 };
 
-//元素类型
-enum EGameElementType
+//宝石子类型	
+enum EGameGemSubType
 {
-	EELEMENTTYPE_WIND				= 0;    // 风
-	EELEMENTTYPE_FIRE				= 1;    // 火
-	EELEMENTTYPE_THUNDER			= 2;    // 雷
-	EELEMENTTYPE_SOIL              	= 3;    // 土
-	EELEMENTTYPE_WATER          	= 4;    // 水
+	EGGSTYPE_GEM_ATK           	= 0;    // 攻击宝石
+	EGGSTYPE_GEM_DEF           	= 1;    // 防御宝石
+	
+	EGGSTYPE_GEM_FIRE			= 3;    // 火宝石
+	EGGSTYPE_GEM_LIGHT			= 4;    // 雷宝石
+	EGGSTYPE_GEM_WIND           = 5;    // 风宝石
+	EGGSTYPE_GEM_ICE          	= 6;    // 冰冻宝石
+	EGGSTYPE_GEM_POISON         = 7;    // 毒宝石	
+	
 };
+
 
 enum EGameItemSubType
 {
-    EGIT_ITEM_NONE             	= 0;    // 无
-    EGIT_ITEM_PROPERTY_CARD     = 1;    // 基础属性石，合成镶嵌
-    EGIT_ITEM_PVP_ATTACK_CARD   = 2;    // PVP攻击卡
-    EGIT_ITEM_PVP_DEFENSE_CARD  = 3;    // PVP防御卡
-    EGIT_ITEM_SKILL_CARD        = 4;    // 学习类技能书，普通的技能都是这样学习的
-    EGIT_ITEM_GUILD_SKILL_CARD  = 5;    // 工会技能书
-    EGIT_ITEM_GUILD_DIAMOND     = 6;    // 工会圣宝
-    EGIT_ITEM_POSITION          = 7;    // 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
-    EGIT_ITEM_WORLD_HORN        = 8;   // 世界喇叭(使用某个功能的时候消耗此物品)
-    EGIT_ITEM_REBORN            = 9;   // 重生道具(消耗此物品时得到某种待遇)
+	EGIT_ITEM_WATER				= 0; 	// 圣水
+	EGIT_ITEM_DIAMOND			= 1;	// 钻石 
+	EGIT_ITEM_CURRENCY			= 2; 	// 金币
+	EGIT_ITEM_EXP				= 3; 	// EXP
+	EGIT_ITEM_HP				= 4;	// 生命药水
+	EGIT_ITEM_MP				= 5;	// 魔法药水
+	EGIT_ITEM_SP				= 6;	// 体力药水
 };
+
+enum EGameCardSubType
+{
+	EGCST_STRENGTH 				= 1;//力量	
+	EGCST_AGILITY				= 2;//敏捷
+	EGCST_INTELLIGENCE			= 3;//智力
+};
+
+enum EGameTokenSubType
+{
+	EGTST_TOKEN_REBORN					= 0; 	// 重生道具(消耗此物品时得到某种待遇)
+	EGTST_TOKEN_POSITION				= 1;	// 移动位置(传送到新手村)(消耗此物品时得到某种待遇)
+	EGTST_TOKEN_BOUNTY   				= 2; 	// 赏金令
+	EGTST_TOKEN_ACTIVITY				= 3;	// 活动令牌
+};
+
 
 //道具时间类型
 enum EGameItemExpiredType
 {
-    EGIET_NONE = 0;               // 永不过期类型
-    EGIET_USE_TIMES = 1;              // 使用次数, 变形魔杖,变0道具要消失(普通物品数量)
-    EGIET_REAL_TIME = 2;              // 真实的时间流逝(秒),适合时装,礼包,饰品(写死1天1周)
+    EGIET_NONE = 0;               	// 永不过期类型
+    EGIET_USE_TIMES = 1;            // 使用次数, 变形魔杖,变0道具要消失(普通物品数量)
+    EGIET_REAL_TIME = 2;            // 真实的时间流逝(秒),适合时装,礼包,饰品(写死1天1周)
     EGIET_END_INDEX = 3;
 };
-
 
 ////////////掉落状态/////////////////////////////////////////////////////////////////////////////////////
 
@@ -396,11 +446,57 @@ enum EBattleType
 	BATTLE_PVE_TEAM      = 1; // 多人打副本
 }
 
+enum EShopType
+{
+	EST_BUILDING 	= 1;//建筑	
+	EST_GOLD		= 2;//金币
+	EST_DIAMOND		= 3;//钻石
+	EST_SP			= 4;//体力
+	EST_EQUIP		= 5;//装备
+	EST_GEM			= 6;//宝石
+	EST_Hero		= 7;//HeroCard
+	EST_Other		= 8;//杂货店
+}
 
 
+///////////////排行榜相关////////////////////////////////////////////////////////////////////////////////////
 
+enum ERankType
+{
+	ERT_PLAYER_LEVEL 			= 1;
+	ERT_FIGHT_VALUE				= 2;
+	ERT_PLAYER_MONEY			= 3;
+	ERT_GUILD_LEVEL				= 4;
+	ERT_GUILD_KINGSOURCE		= 5;
+}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
+//NCPTypenpc的类型
+enum ENPCType
+{
+    ENPCTYPE_NORMAL	= 0;			  // 普通怪
+    ENPCTYPE_HERO 	= 1;              // 英雄
+    ENPCTYPE_TURRET = 2;              // 炮塔
+    
+};
 
+//PropertyType 属性的类型
+enum EPropertyType
+{
+	EPT_STRENGTH 			= 1;//力量	
+	EPT_AGILITY				= 2;//敏捷
+	EPT_INTELLIGENCE		= 3;//智力
+};
+
+//元素类型
+enum EGameElementType
+{	
+	EELEMENTTYPE_FIRE				= 0;    // 火
+	EELEMENTTYPE_LIGHT				= 1;    // 雷电
+	EELEMENTTYPE_WIND              	= 2;    // 风
+	EELEMENTTYPE_ICE          		= 3;    // 冰冻
+	EELEMENTTYPE_POISON          	= 4;    // 毒	
+};
 
 
