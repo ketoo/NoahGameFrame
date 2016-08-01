@@ -12,22 +12,13 @@
 #include <iostream>
 #include "NFIModule.h"
 
-enum NFJobType
-{
-    NJT_1,
-    NJT_2,
-    NJT_3,
-    NJT_4,
-    NJT_MAX,
-};
-
 class NFIPropertyConfigModule
     : public NFIModule
 {
 public:
 
-    virtual int CalculateBaseValue(const NFJobType jobType,  const int nLevel, const std::string& strProperty) = 0;
-    virtual bool LegalLevel(const NFJobType nJob, const int nLevel) = 0;
+    virtual int CalculateBaseValue(const int nJob,  const int nLevel, const std::string& strProperty) = 0;
+    virtual bool LegalLevel(const int nJob, const int nLevel) = 0;
 };
 
 
