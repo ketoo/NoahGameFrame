@@ -36,9 +36,7 @@ bool NFCChatModule::AfterInit()
     m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
-	std::string strPlayerPath = pPluginManager->GetConfigPath();
-	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
-	m_pCommonConfigModule->LoadConfig(strPlayerPath);
+
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCChatModule::OnClassObjectEvent );
 	CheckConfig();

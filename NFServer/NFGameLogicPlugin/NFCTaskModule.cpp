@@ -34,10 +34,6 @@ bool NFCTaskModule::AfterInit()
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-	std::string strPlayerPath = pPluginManager->GetConfigPath();
-	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
-	m_pCommonConfigModule->LoadConfig(strPlayerPath);
-
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTaskModule::OnClassObjectEvent );
 	CheckConfig();
 

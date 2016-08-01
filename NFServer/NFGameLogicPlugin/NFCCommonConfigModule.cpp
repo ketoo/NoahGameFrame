@@ -28,6 +28,10 @@ bool NFCCommonConfigModule::Execute()
 
 bool NFCCommonConfigModule::AfterInit()
 {
+	std::string strPlayerPath = pPluginManager->GetConfigPath();
+	strPlayerPath += "NFDataCfg/Ini/Common/AwardPackConfig.xml";
+	LoadConfig(strPlayerPath);
+
     return true;
 }
 
