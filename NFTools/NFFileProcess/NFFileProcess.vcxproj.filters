@@ -94,5 +94,8 @@
     <ClInclude Include="FileProcess.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Utf8ToGbk.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
