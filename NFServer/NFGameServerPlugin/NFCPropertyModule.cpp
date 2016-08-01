@@ -200,7 +200,7 @@ int NFCPropertyModule::RefreshBaseProperty(const NFGUID& self)
     }
 
     //初始属性+等级属性(职业决定)
-    NFJobType eJobType = (NFJobType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
+    int eJobType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
     int nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level());
 
     for (int i = 0; i < pRecord->GetCols(); ++i)
