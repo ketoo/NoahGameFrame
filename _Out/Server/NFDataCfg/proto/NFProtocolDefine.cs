@@ -524,7 +524,7 @@ public class Item
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string
 	public static readonly String AwardData = "AwardData"; // string
-	public static readonly String AwardProperty = "AwardProperty"; // string
+	public static readonly String AwardProperty = "AwardProperty"; // int
 	public static readonly String CoolDownTime = "CoolDownTime"; // float
 	public static readonly String OverlayCount = "OverlayCount"; // int
 	public static readonly String ExpiredType = "ExpiredType"; // int
@@ -534,7 +534,7 @@ public class Item
 	public static readonly String Extend = "Extend"; // string
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowName = "ShowName"; // string
-	public static readonly String HeroType = "HeroType"; // int
+	public static readonly String HeroTye = "HeroTye"; // int
 	// Record
 
 }
