@@ -34,15 +34,16 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int CalculateBaseValue(const NFJobType nJob, const int nLevel, const std::string& strProperty);
-    virtual bool LegalLevel(const NFJobType nJob, const int nLevel);
+    virtual int CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
+    virtual bool LegalLevel(const int nJob, const int nLevel);
 
 protected:
     void Load();
 
 private:
-    //Level->EffectData
-    NFMapEx<int, std::string> mhtCoefficienData[(int)NFJobType::NJT_MAX];
+    //
+	//diffent job, diffrent PropertyID[Level->EffectData]
+	NFMapEx<int, NFMapEx<int, std::string> > mhtCoefficienData;
 
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
