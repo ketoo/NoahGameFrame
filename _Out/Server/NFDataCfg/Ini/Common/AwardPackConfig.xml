@@ -1,53 +1,72 @@
 <XML>	
-	<AwardPackPlayerLevel_1 Name="AwardPackPlayerLevel_1">
-		<ItemInfo Name="EQUIP_ZS_M_0_WEAPON_10001" Count="1"/>
-		<ItemInfo Name="EQUIP_ZS_M_0_ARMOR_10001" Count="1"/>
-		<ItemInfo Name="EQUIP_ZS_M_0_BOOT_10001" Count="1"/>
+	<AwardPackPlayerLevel_1>
+		<ItemInfo Name="Item_HOLY_WATER_1" Count="10"/>
+		<ItemInfo Name="Item_MP1" Count="10"/>
+		<ItemInfo Name="Item_HP1" Count="10"/>
+		<ItemInfo Name="Item_SP1" Count="10"/>
+		<ItemInfo Name="Item_EXP1" Count="10"/>
+		<ItemInfo Name="Item_MONEY5" Count="1"/>
+		<ItemInfo Name="Item_Diamond_5" Count="1"/>
+		<ItemInfo Name="Item_NoobPack_1" Count="1"/>
+		<ItemInfo Name="Item_WarPack_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_ATK_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_DEF_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_FIRE_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_LIGHT_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_WIND_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_ICE_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_POISON_1" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_1" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_2" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_3" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_4" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_5" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_21" Count="1"/>
 	</AwardPackPlayerLevel_1>
 	
-	<AwardPackPlayerLevel_2 Name="AwardPackPlayerLevel_2">
-		<ItemInfo Name="Gem_Maxhp_10001" Count="1"/>
-		<ItemInfo Name="Gem_Maxmp_10001" Count="1"/>
-		<ItemInfo Name="Gem_Maxsp_10001" Count="1"/>
-		<ItemInfo Name="Gem_HpRegen_10001" Count="1"/>
-		<ItemInfo Name="Gem_SPRegen_10001" Count="1"/>
-		<ItemInfo Name="Gem_MPRegen_10001" Count="1"/>
-		<ItemInfo Name="Gem_Atk_Value_10001" Count="1"/>
-		<ItemInfo Name="Gem_Def_Value_10001" Count="1"/>
-		<ItemInfo Name="Gem_Move_Speed_10001" Count="1"/>
-		<ItemInfo Name="Gem_Atk_Speed_10001" Count="1"/>
-	</AwardPackPlayerLevel_2>
+	<AwardPackPlayerLevel_10>
+	</AwardPackPlayerLevel_10>
 	
-	<AwardPackPlayerLevel_5 Name="AwardPackPlayerLevel_5">
-		<ItemInfo Name="EQUIP_ZS_M_0_WEAPON_10002" Count="1"/>
-		<ItemInfo Name="EQUIP_ZS_M_0_ARMOR_10002" Count="1"/>
-		<ItemInfo Name="EQUIP_ZS_M_0_BOOT_10002" Count="1"/>
-	</AwardPackPlayerLevel_5>
+	<AwardPackPlayerLevel_20>
+	</AwardPackPlayerLevel_20>
 	
-	<AwardPack_Hero_1001 Name="AwardPack_Hero_1001">
-		<ItemInfo Name="Player_0_0" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1001>
+	<AwardPackPlayerLevel_30>
+	</AwardPackPlayerLevel_30>
 	
-	<AwardPack_Hero_1002 Name="AwardPack_Hero_1002">
-		<ItemInfo Name="Player_0_1" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1002>
+	<AwardPackPlayerLevel_40>
+	</AwardPackPlayerLevel_40>
 	
-	<AwardPack_Hero_1003 Name="AwardPack_Hero_1003">
-		<ItemInfo Name="Player_0_2" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1003>
+	<AwardPackPlayerLevel_50>
+	</AwardPackPlayerLevel_50>
 	
-	<AwardPack_Hero_1004 Name="AwardPack_Hero_1004">
-		<ItemInfo Name="Player_0_3" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1004>
+	<AwardPackPlayerLevel_60>
+	</AwardPackPlayerLevel_60>
 	
-	<AwardPack_Hero_1005 Name="AwardPack_Hero_1005">
-		<ItemInfo Name="Player_0_4" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1005>
+	<AwardPackPlayerLevel_70>
+	</AwardPackPlayerLevel_70>
 	
-	<AwardPack_Hero_1006 Name="AwardPack_Hero_1006">
-		<ItemInfo Name="Player_1_0" Count="1" IsHero="1"/>
-	</AwardPack_Hero_1006>
-
+	<AwardPackPlayerLevel_80>
+	</AwardPackPlayerLevel_80>
+	
+	<AwardPackPlayerLevel_90>
+	</AwardPackPlayerLevel_90>
 
 </XML>
 

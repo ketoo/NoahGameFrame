@@ -369,6 +369,7 @@ enum EGameItemSubType
 	EGIT_ITEM_HP				= 4;	// 生命药水
 	EGIT_ITEM_MP				= 5;	// 魔法药水
 	EGIT_ITEM_SP				= 6;	// 体力药水
+	EGIT_ITEM_PACK				= 7;	// 礼包
 };
 
 enum EGameCardSubType
