@@ -54,13 +54,13 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 
 	NFCDataList xEquipBaseValue;
 	CalEquipBaseProperty(self, xEquipGUID, xEquipBaseValue);
-	
+
 	NFCDataList xEquipRandonValue;
 	CalEquipRandomProperty(self, xEquipGUID, xEquipRandonValue);
-	
+
 	NFCDataList xEquipGemValue;
 	CalEquipGemProperty(self, xEquipGUID, xEquipGemValue);
-	
+
 	NFCDataList xEquipIntensifyValue;
 	CalEquipIntensifyProperty(self, xEquipGUID, xEquipIntensifyValue);
 
@@ -276,7 +276,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 
 	const int nRow = varFind.Int(0);
 	xDataList.Clear();
-	
+
 	/////////////GemBase/////////////////////////////////////////
 	const int nIntensify = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel);
 	if (nIntensify <= 0)
@@ -285,7 +285,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 	}
 
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
+	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
@@ -346,7 +346,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 
 	/////////////element/////////////////////////////////////////
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroType());
+	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
@@ -391,7 +391,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientDef);
 	}
 
-	
+
 
 	return true;
 

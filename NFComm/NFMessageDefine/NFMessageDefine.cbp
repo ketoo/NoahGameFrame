@@ -109,6 +109,8 @@
 		<Unit filename="NFMsgBaseEx.pb.h" />
 		<Unit filename="NFMsgDefine.cpp" />
 		<Unit filename="NFMsgDefine.h" />
+		<Unit filename="NFMsgMysql.pb.cc" />
+		<Unit filename="NFMsgMysql.pb.h" />
 		<Unit filename="NFMsgPreGame.pb.cc" />
 		<Unit filename="NFMsgPreGame.pb.h" />
 		<Unit filename="NFMsgShare.pb.cc" />

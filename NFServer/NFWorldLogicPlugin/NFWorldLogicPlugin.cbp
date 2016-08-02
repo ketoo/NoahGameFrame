@@ -33,6 +33,7 @@
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
 					<Add library="libprotobuf" />
+					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -82,6 +83,10 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCPVPMatchModule.cpp" />
+		<Unit filename="NFCPVPMatchModule.h" />
+		<Unit filename="NFCTeamModule.cpp" />
+		<Unit filename="NFCTeamModule.h" />
 		<Unit filename="NFCWorldLogicModule.cpp" />
 		<Unit filename="NFCWorldLogicModule.h" />
 		<Unit filename="NFWorldLogicPlugin.cpp" />
