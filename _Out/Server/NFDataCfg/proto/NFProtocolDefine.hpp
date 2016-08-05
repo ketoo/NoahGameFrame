@@ -539,7 +539,7 @@ public:
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
 	static const std::string& AwardData(){ static std::string xAwardData = "AwardData"; return xAwardData; } // string
-	static const std::string& AwardProperty(){ static std::string xAwardProperty = "AwardProperty"; return xAwardProperty; } // string
+	static const std::string& AwardProperty(){ static std::string xAwardProperty = "AwardProperty"; return xAwardProperty; } // int
 	static const std::string& CoolDownTime(){ static std::string xCoolDownTime = "CoolDownTime"; return xCoolDownTime; } // float
 	static const std::string& OverlayCount(){ static std::string xOverlayCount = "OverlayCount"; return xOverlayCount; } // int
 	static const std::string& ExpiredType(){ static std::string xExpiredType = "ExpiredType"; return xExpiredType; } // int
@@ -549,7 +549,7 @@ public:
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
+	static const std::string& HeroTye(){ static std::string xHeroTye = "HeroTye"; return xHeroTye; } // int
 	// Record
 
 };

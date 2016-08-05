@@ -37,7 +37,7 @@ bool NFCLevelModule::AfterInit()
 
 int NFCLevelModule::AddExp(const NFGUID& self, const int nExp)
 {
-    NFJobType eJobType = (NFJobType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
+    int eJobType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
     int nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
     int nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level());
     int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());

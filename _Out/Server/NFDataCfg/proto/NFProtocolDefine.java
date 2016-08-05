@@ -502,7 +502,7 @@ public class Item {
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
 	public static final String AwardData = "AwardData"; // string
-	public static final String AwardProperty = "AwardProperty"; // string
+	public static final String AwardProperty = "AwardProperty"; // int
 	public static final String CoolDownTime = "CoolDownTime"; // float
 	public static final String OverlayCount = "OverlayCount"; // int
 	public static final String ExpiredType = "ExpiredType"; // int
@@ -512,7 +512,7 @@ public class Item {
 	public static final String Extend = "Extend"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
-	public static final String HeroType = "HeroType"; // int
+	public static final String HeroTye = "HeroTye"; // int
 	// Record
 
 }
