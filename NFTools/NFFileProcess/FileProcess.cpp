@@ -1,5 +1,6 @@
 #include "FileProcess.h"
 #include <memory>
+#include "Utf8ToGbk.h"
 
 FileProcess::FileProcess()
 {
@@ -307,7 +308,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		if (strUpperSheetName == "property")
 		{
 			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
+			for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -332,7 +333,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + 6; r++)
+				for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
 				{
 					std::string name = colNames[r - 1];
 					std::string value = "";
@@ -710,7 +711,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 		if (vDataIDs.size() <= 0)
 		{
-			for (int r = dim.firstRow + 7; r <= dim.lastRow; r++)
+			for (int r = dim.firstRow + 8; r <= dim.lastRow; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -723,7 +724,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 			}
 		}
 
-		for (int r = dim.firstRow + 7; r <= vDataIDs.size() + 7; r++)
+		for (int r = dim.firstRow + 8; r <= vDataIDs.size() + 8; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
@@ -769,7 +770,19 @@ bool FileProcess::CreateIniXML(std::string strFile)
 						value = "";
 					}
 				}
-				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 8] + name, value));
+				//check the field is utf8, then convert it into gbk.
+				auto descLength = value.size();
+				if (bConvertIntoUTF8 && IsTextUTF8(value.c_str(), descLength))
+				{
+					if (descLength > 0)
+					{
+						char* chrArrDesc = new char[descLength];
+						Utf8ToGbk((char*)value.c_str(), chrArrDesc);
+						value = chrArrDesc;
+						delete[] chrArrDesc;
+					}
+				}
+				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 9] + name, value));
 			}
 		}
 		nCurrentCol += dim.lastCol;
@@ -918,12 +931,12 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				auto chrDesc = nodeElement->Attribute("Desc");
 				std::string strDesc = chrDesc;
 				auto descLength = strlen(chrDesc);
-				if (IsTextUTF8(chrDesc, descLength))
+				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
 				{
 					if (descLength > 0)
 					{
 						char* chrArrDesc = new char[descLength];
-						UTF8ToGBK((char*)chrDesc, chrArrDesc, descLength);
+						Utf8ToGbk((char*)chrDesc, chrArrDesc);
 						strDesc = chrArrDesc;
 						delete[] chrArrDesc;
 					}
@@ -988,12 +1001,12 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				auto chrDesc = nodeElement->Attribute("Desc");
 				std::string strDesc = chrDesc;
 				auto descLength = strlen(chrDesc);
-				if (IsTextUTF8(chrDesc, descLength))
+				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
 				{
 					if (descLength > 0)
 					{
 						char* chrArrDesc = new char[descLength];
-						UTF8ToGBK((char*)chrDesc, chrArrDesc, descLength);
+						Utf8ToGbk((char*)chrDesc, chrArrDesc);
 						strDesc = chrArrDesc;
 						delete[] chrArrDesc;
 					}
