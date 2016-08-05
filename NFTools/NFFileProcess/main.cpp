@@ -13,6 +13,7 @@ int main(int argc, const char *argv[])
 	{
 		auto t1 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		FileProcess* fp = new FileProcess();
+		fp->bConvertIntoUTF8 = false;//set it true to convert UTF8 to GBK for supporting chinese in NF to show. 
 		fp->OnCreateXMLFile();
 		fp->OnCreateMysqlFile();
 		auto t2 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
