@@ -26,6 +26,9 @@ public:
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
+
+        mnSendMsgTotal = 0;
+        mnReceiveMsgTotal = 0;
     }
 
     template<typename BaseType>
@@ -40,6 +43,9 @@ public:
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
+
+        mnSendMsgTotal = 0;
+        mnReceiveMsgTotal = 0;
     }
     virtual ~NFCNet() {};
 
@@ -111,6 +117,9 @@ private:
     int mnPort;
     int mnCpuCount;
     bool mbServer;
+
+    int64_t mnSendMsgTotal;
+    int64_t mnReceiveMsgTotal;
 
     struct event_base* base;
     struct evconnlistener* listener;
