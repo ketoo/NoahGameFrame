@@ -19,7 +19,7 @@ mv libevent-2.0.22-stable libevent
 # compiling libevent
 cd libevent
 chmod -R 755 *
-./configure CPPFLAGS=-fPIC --disable-shared
+./configure CPPFLAGS=-fPIC --disable-shared --disable-openssl
 make
 
 cp -R -f .libs/*.a ../lib/Debug/
@@ -32,6 +32,7 @@ cd protobuf
 chmod -R 755 *
 ./configure CXXFLAGS=-fPIC
 make
+make check
 
 if [ ! -d ../../_Out/Comm/ ]; then
  mkdir ../../_Out/Comm/

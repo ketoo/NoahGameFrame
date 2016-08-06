@@ -5,16 +5,18 @@
 //    @Module           £º    NFIPacket
 //    @Desc             :     CNet
 // -------------------------------------------------------------------------
-#pragma  comment(lib,"libevent.lib")
-#pragma  comment(lib,"libevent_core.lib")
 
 #include "NFCNet.h"
 #include <string.h>
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
 #pragma  comment(lib,"Ws2_32.lib")
+#pragma  comment(lib,"libevent.lib")
+#pragma  comment(lib,"libevent_core.lib")
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#include <arpa/inet.h>
 #endif
 
 #include "event2/bufferevent_struct.h"
@@ -424,7 +426,8 @@ int NFCNet::InitServerNet()
 
     struct sockaddr_in sin;
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
     WSADATA wsa_data;
     WSAStartup(0x0201, &wsa_data);
 
@@ -433,7 +436,8 @@ int NFCNet::InitServerNet()
 
     struct event_config* cfg = event_config_new();
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
 
     //event_config_avoid_method(cfg, "iocp");
     //event_config_require_features(cfg, event_method_feature.EV_FEATURE_ET);//´¥·¢·½Ê½
