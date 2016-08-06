@@ -246,6 +246,8 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
             if (NULL != bev)
             {
                 bufferevent_write(bev, msg, nLen);
+
+                mnSendMsgTotal++;
             }
         }
     }
@@ -272,6 +274,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex)
             {
                 bufferevent_write(bev, msg, nLen);
 
+                mnSendMsgTotal++;
                 return true;
             }
         }
@@ -323,6 +326,8 @@ bool NFCNet::Dismantle(NetObject* pObject)
             if (mRecvCB)
             {
                 mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+
+                mnReceiveMsgTotal++;
             }
 
 			pObject->RemoveBuff(0, nMsgBodyLength + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
