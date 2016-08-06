@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ：    NFINet.h
-//    @Author           ：    LvSheng.Huang
-//    @Date             ：    2013-12-15
-//    @Module           ：    NFINet
+//    @FileName         锟斤拷    NFINet.h
+//    @Author           锟斤拷    LvSheng.Huang
+//    @Date             锟斤拷    2013-12-15
+//    @Module           锟斤拷    NFINet
 //    @Desc             :     INet
 // -------------------------------------------------------------------------
 
@@ -17,9 +17,11 @@
 #include <iostream>
 #include <map>
 
+#include "NFComm/NFPluginModule/NFGUID.h"
+
 #ifndef _MSC_VER
 #include <netinet/in.h>
-# ifdef _XOPEN_SOURCE_EXTENDED
+#ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
 # endif
 #include <sys/socket.h>
@@ -38,22 +40,24 @@
 #include <event2/event_compat.h>
 #include <assert.h>
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
 #include <windows.h>
+//#elseifdef _APPLE_
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#include <libkern/OSByteOrder.h>
 #else
 #include <unistd.h>
 #endif
-
-#include "NFComm/NFPluginModule/NFGUID.h"
 
 #pragma pack(push, 1)
 
 enum NF_NET_EVENT
 {
-    NF_NET_EVENT_EOF = 0x10,        //掉线
-    NF_NET_EVENT_ERROR = 0x20,      //未知错误
-    NF_NET_EVENT_TIMEOUT = 0x40,    //连接超时
-    NF_NET_EVENT_CONNECTED = 0x80,  //连接成功(作为客户端)
+    NF_NET_EVENT_EOF = 0x10,        //锟斤拷锟斤拷
+    NF_NET_EVENT_ERROR = 0x20,      //未知锟斤拷锟斤拷
+    NF_NET_EVENT_TIMEOUT = 0x40,    //锟斤拷锟接筹拷时
+    NF_NET_EVENT_CONNECTED = 0x80,  //锟斤拷锟接成癸拷(锟斤拷为锟酵伙拷锟斤拷)
 };
 
 
@@ -75,8 +79,12 @@ struct  NFIMsgHead
 
     int64_t NF_HTONLL(int64_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return htonll(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE_CC__
+        return OSSwapHostToBigInt64(nData);
 #else
         return htobe64(nData);
 #endif
@@ -84,8 +92,12 @@ struct  NFIMsgHead
 
     int64_t NF_NTOHLL(int64_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return ntohll(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE__
+        return OSSwapBigToHostInt64(nData);
 #else
         return be64toh(nData);
 #endif
@@ -93,8 +105,12 @@ struct  NFIMsgHead
 
     int32_t NF_HTONL(int32_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return htonl(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE__
+        return OSSwapHostToBigInt32(nData);
 #else
         return htobe32(nData);
 #endif
@@ -102,8 +118,12 @@ struct  NFIMsgHead
 
     int32_t NF_NTOHL(int32_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return ntohl(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE__
+        return OSSwapBigToHostInt32(nData);
 #else
         return be32toh(nData);
 #endif
@@ -111,8 +131,12 @@ struct  NFIMsgHead
 
     int16_t NF_HTONS(int16_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return htons(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE__
+        return OSSwapHostToBigInt16(nData);
 #else
         return htobe16(nData);
 #endif
@@ -120,8 +144,12 @@ struct  NFIMsgHead
 
     int16_t NF_NTOHS(int16_t nData)
     {
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
         return ntohs(nData);
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+//#elseifdef __APPLE__
+        return OSSwapBigToHostInt16(nData);
 #else
         return be16toh(nData);
 #endif
@@ -382,22 +410,7 @@ private:
 class NFINet
 {
 public:
-    //template<typename BaseType>
-    //bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handler)(const int, const int, const char*, const uint32_t))
-    //{
-    //    NET_RECEIVE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-    //    NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
-    //    return AddReceiveCallBack(nMsgID, functorPtr);
-    //}
-
-    //template<typename BaseType>
-    //bool AddEventCallBack(BaseType* pBase, int (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
-    //{
-    //    NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    //    NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
-    //    return AddEventCallBack(functorPtr);
-    //}
-
+    //need to call this function every frame to drive network library
     virtual bool Execute() = 0;
 
     virtual void Initialization(const char* strIP, const unsigned short nPort) = 0;
@@ -405,13 +418,13 @@ public:
 
     virtual bool Final() = 0;
 
-    //无包头，内部组装
+    //send a message with out msg-head[auto add msg-head in this function]
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
 
-    //已带上包头
+    //send a message to all client[need to add msg-head for this message by youself]
     virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
 
-    //无包头，内部组装
+    //send a message with out msg-head to all client[auto add msg-head in this function]
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen) = 0;
 
     virtual bool CloseNetObject(const int nSockIndex) = 0;
