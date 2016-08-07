@@ -53,6 +53,7 @@ protected:
 
 private:
     static unsigned int idx;
+    uint64_t mnLogCountTotal;
 };
 
 #endif
