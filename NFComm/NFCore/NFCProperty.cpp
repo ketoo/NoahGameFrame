@@ -264,7 +264,7 @@ bool NFCProperty::SetFloat(const double value)
 		mxData->SetFloat(0.0);
 	}
 
-	if (value - mxData->GetFloat() < 0.001)
+	if (std::abs(value - mxData->GetFloat()) < 0.001)
 	{
 		return false;
 	}
