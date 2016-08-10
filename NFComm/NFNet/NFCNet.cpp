@@ -65,13 +65,13 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
     if (events & BEV_EVENT_CONNECTED)
     {
         //must to set it's state before the "EventCB" functional be called[maybe user will send msg in the callback function]
-        mbWorking = true;
+        pNet->mbWorking = true;
     }
     else
     {
-        if (!mbServer)
+        if (!pNet->mbServer)
         {
-            mbWorking = false;
+            pNet->mbWorking = false;
         }
     }
 
