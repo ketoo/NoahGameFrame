@@ -100,25 +100,25 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     switch (nll)
     {
         case NFILogModule::NLL_DEBUG_NORMAL:
-            LOG(DEBUG) << mnLogCountTotal << " " << szBuffer;
+            LOG(DEBUG) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_INFO_NORMAL:
-            LOG(INFO) << mnLogCountTotal << " " << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_WARING_NORMAL:
-            LOG(WARNING) << mnLogCountTotal << " " << szBuffer;
+            LOG(WARNING) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_ERROR_NORMAL:
         {
-            LOG(ERROR) << mnLogCountTotal << " " << szBuffer;
+            LOG(ERROR) << mnLogCountTotal << " | " << szBuffer;
             //LogStack();
         }
         break;
         case NFILogModule::NLL_FATAL_NORMAL:
-            LOG(FATAL) << mnLogCountTotal << " " << szBuffer;
+            LOG(FATAL) << mnLogCountTotal << " | " << szBuffer;
             break;
         default:
-            LOG(INFO) << mnLogCountTotal << " " << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
             break;
     }
 
