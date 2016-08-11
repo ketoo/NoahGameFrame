@@ -349,10 +349,19 @@ bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
     return false;
 }
 
-#endif
+inline bool IsZeroFloat(const float fValue, float epsilon = 1e-6)
+{
+    return std::abs(fValue) <= epsilon;
+}
 
+inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
+{
+    return std::abs(dValue) <= epsilon;
+}
 
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define PROTOBUF_USE_DLLS
+#endif
+
 #endif
