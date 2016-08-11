@@ -255,7 +255,7 @@ bool NFCProperty::SetFloat(const double value)
 	if (!mxData.get())
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
-		if (std::abs(value) < 0.001)
+		if (IsZeroDouble(value))
 		{
 			return false;
 		}
@@ -264,17 +264,15 @@ bool NFCProperty::SetFloat(const double value)
 		mxData->SetFloat(0.0);
 	}
 
-	if (std::abs(value - mxData->GetFloat()) < 0.001)
+	if (IsZeroDouble(value - mxData->GetFloat()))
 	{
 		return false;
 	}
-
 
 	NFCDataList::TData oldValue;
 	oldValue = *mxData;
 
 	mxData->SetFloat(value);
-
 
 	OnEventHandler(oldValue, *mxData);
 
@@ -332,7 +330,6 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_OBJECT));
 		mxData->SetObject(NFGUID());
-
 	}
 
 	if (value == mxData->GetObject())
