@@ -95,7 +95,32 @@ bool NFCElementModule::CheckRef()
     NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
     while (pLogicClass)
     {
-        
+		NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = pLogicClass->GetPropertyManager();
+		if (pClassPropertyManager.get())
+		{
+			NF_SHARE_PTR<NFIProperty> pProperty = pClassPropertyManager->First();
+			while (pProperty.get())
+			{
+				//if one property is ref,check every config
+				if (pProperty->GetRef())
+				{
+					NFList<std::string>& xNameList = pLogicClass->GetConfigNameList();
+					std::string strConfigName;
+					for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
+					{
+						const std::string& strRefValue= this->GetPropertyString(strConfigName, pProperty->GetKey());
+						if (!this->GetElement(strRefValue))
+						{
+							std::string msg;
+							msg.append("check ref failed id: ").append(strRefValue).append(" in ").append(pLogicClass->GetClassName());
+							NFASSERT(nRet, msg.c_str(), __FILE__, __FUNCTION__);
+							exit(0);
+						}
+					}
+				}
+				pProperty = pClassPropertyManager->Next();
+			}
+		}
         //////////////////////////////////////////////////////////////////////////
         pLogicClass = m_pClassModule->Next();
     }
