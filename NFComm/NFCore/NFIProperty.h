@@ -38,7 +38,7 @@ public:
     virtual void SetPublic(bool bPublic) = 0;
     virtual void SetPrivate(bool bPrivate) = 0;
     virtual void SetCache(bool bCache) = 0;
-    virtual void SetRelationValue(const std::string& strRelation) = 0;
+	virtual void SetRef(bool bRef) = 0;
 
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;
