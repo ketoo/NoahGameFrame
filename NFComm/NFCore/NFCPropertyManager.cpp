@@ -38,7 +38,7 @@ NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFGUID& self, NF
         pNewProperty->SetPrivate(pProperty->GetPrivate());
         pNewProperty->SetSave(pProperty->GetSave());
         pNewProperty->SetCache(pProperty->GetCache());
-        pNewProperty->SetRelationValue(pProperty->GetRelationValue());
+        pNewProperty->SetRef(pProperty->GetRef());
 
         this->AddElement(strProperty, pNewProperty);
     }
