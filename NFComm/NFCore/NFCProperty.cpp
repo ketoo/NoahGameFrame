@@ -115,7 +115,7 @@ const bool NFCProperty::GetCache() const
 	return mbCache;
 }
 
-const NFCProperty::GetRef() const
+const bool NFCProperty::GetRef() const
 {
 	return mbRef;
 }
