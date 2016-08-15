@@ -40,13 +40,13 @@ public:
     virtual const bool GetPublic() const;
     virtual const bool GetPrivate() const;
     virtual const bool GetCache() const;
-    virtual const std::string& GetRelationValue() const;
+    virtual const bool GetRef() const;
 
     virtual void SetSave(bool bSave);
     virtual void SetPublic(bool bPublic);
     virtual void SetPrivate(bool bPrivate);
     virtual void SetCache(bool bCache);
-    virtual void SetRelationValue(const std::string& strRelation);
+    virtual void SetRef(bool bRef);
 
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
@@ -73,9 +73,8 @@ private:
     TPROPERTYCALLBACKEX mtPropertyCallback;
 
     NFGUID mSelf;
-    std::string msPropertyName;//可以想办法与基本类型共用
-    std::string mstrRelationValue;
-    TDATA_TYPE eType;//只有在不存在指针的时候才用这个判断类型--为节约内存
+    std::string msPropertyName;
+    TDATA_TYPE eType;
 
     NF_SHARE_PTR<NFIDataList::TData> mxData;
     NF_SHARE_PTR<NFMapEx<std::string, std::string>> mxEmbeddedMap;
@@ -85,6 +84,7 @@ private:
     bool mbPrivate;
     bool mbSave;
     bool mbCache;
+    bool mbRef;
 };
 
 #endif
