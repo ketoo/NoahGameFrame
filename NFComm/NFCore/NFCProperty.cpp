@@ -28,8 +28,7 @@ NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName,
 	mbPrivate = false;
 	mbSave = false;
 	mbCache = false;
-
-	mstrRelationValue = "";
+	mbRef = false;
 
 	mSelf = self;
 
@@ -116,9 +115,9 @@ const bool NFCProperty::GetCache() const
 	return mbCache;
 }
 
-const std::string& NFCProperty::GetRelationValue() const
+const NFCProperty::GetRef() const
 {
-	return mstrRelationValue;
+	return mbRef;
 }
 
 void NFCProperty::SetSave(bool bSave)
@@ -141,9 +140,9 @@ void NFCProperty::SetCache(bool bCache)
     mbCache = bCache;
 }
 
-void NFCProperty::SetRelationValue(const std::string& strRelationValue)
+void NFCProperty::SetRef(bool bRef)
 {
-	mstrRelationValue = strRelationValue;
+	mbRef = bRef;
 }
 
 NFINT64 NFCProperty::GetInt() const
@@ -202,7 +201,7 @@ int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataL
 	TPROPERTYCALLBACKEX::iterator end = mtPropertyCallback.end();
 	for (it; it != end; ++it)
 	{
-		//NFIDataList参数:属性名，OLD属性值，NEW属性值, ARG参数(pKernel,self)
+		//NFIDataList锟斤拷锟斤拷:锟斤拷锟斤拷锟斤拷锟斤拷OLD锟斤拷锟斤拷值锟斤拷NEW锟斤拷锟斤拷值, ARG锟斤拷锟斤拷(pKernel,self)
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
 		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
@@ -220,7 +219,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
 
 	if (!mxData.get())
 	{
-		//本身是空就是因为没数据，还来个没数据的就不存了
+		//锟斤拷锟斤拷锟角空撅拷锟斤拷锟斤拷为没锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷没锟斤拷锟捷的就诧拷锟斤拷锟斤拷
 		if (0 == value)
 		{
 			return false;
@@ -254,7 +253,7 @@ bool NFCProperty::SetFloat(const double value)
 
 	if (!mxData.get())
 	{
-		//本身是空就是因为没数据，还来个没数据的就不存了
+		//锟斤拷锟斤拷锟角空撅拷锟斤拷锟斤拷为没锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷没锟斤拷锟捷的就诧拷锟斤拷锟斤拷
 		if (IsZeroDouble(value))
 		{
 			return false;
@@ -288,7 +287,7 @@ bool NFCProperty::SetString(const std::string& value)
 
 	if (!mxData.get())
 	{
-		//本身是空就是因为没数据，还来个没数据的就不存了
+		//锟斤拷锟斤拷锟角空撅拷锟斤拷锟斤拷为没锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷没锟斤拷锟捷的就诧拷锟斤拷锟斤拷
 		if (value.empty())
 		{
 			return false;
@@ -322,7 +321,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 	if (!mxData.get())
 	{
-		//本身是空就是因为没数据，还来个没数据的就不存了
+		//锟斤拷锟斤拷锟角空撅拷锟斤拷锟斤拷为没锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷没锟斤拷锟捷的就诧拷锟斤拷锟斤拷
 		if (value.IsNull())
 		{
 			return false;
