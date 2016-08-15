@@ -48,7 +48,7 @@ bool NFCElementModule::Load()
     }
 
     NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
-    while (pLogicClass.get())
+    while (pLogicClass)
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
         if (strInstancePath.empty())
@@ -88,6 +88,19 @@ bool NFCElementModule::Load()
     }
 
     return true;
+}
+
+bool NFCElementModule::CheckRef()
+{
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
+    while (pLogicClass)
+    {
+        
+        //////////////////////////////////////////////////////////////////////////
+        pLogicClass = m_pClassModule->Next();
+    }
+
+    return false;
 }
 
 bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
@@ -366,6 +379,7 @@ bool NFCElementModule::LegalNumber(const char* str)
 
 bool NFCElementModule::AfterInit()
 {
+    CheckRef();
     return true;
 
 }
