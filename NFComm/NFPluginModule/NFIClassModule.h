@@ -32,8 +32,8 @@ public:
     virtual void SetTypeName(const char* strType) = 0;
     virtual const std::string& GetTypeName() = 0;
     virtual const std::string& GetClassName() = 0;
-    virtual const bool AddConfigName(std::string& strConfigName) = 0;
-    virtual NFList<std::string>& GetConfigNameList() = 0;
+    virtual const bool AddId(std::string& strConfigName) = 0;
+    virtual NFList<std::string>& GetIdList() = 0;
     virtual void SetInstancePath(const std::string& strPath) = 0;
     virtual const std::string& GetInstancePath() = 0;
 
