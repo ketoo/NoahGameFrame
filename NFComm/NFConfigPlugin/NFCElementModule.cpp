@@ -104,11 +104,11 @@ bool NFCElementModule::CheckRef()
 				//if one property is ref,check every config
 				if (pProperty->GetRef())
 				{
-					NFList<std::string>& xNameList = pLogicClass->GetConfigNameList();
-					std::string strConfigName;
-					for (bool bRet = xNameList.First(strConfigName); bRet; bRet = xNameList.Next(strConfigName))
+					NFList<std::string>& strIdList = pLogicClass->GetIdList();
+					std::string strId;
+					for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
 					{
-						const std::string& strRefValue= this->GetPropertyString(strConfigName, pProperty->GetKey());
+						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
 						if (!this->GetElement(strRefValue))
 						{
 							std::string msg;
@@ -148,7 +148,7 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
     AddElement(strConfigID, pElementInfo);
 
     //can find all configid by class name
-    pLogicClass->AddConfigName(strConfigID);
+    pLogicClass->AddId(strConfigID);
 
     //ElementConfigInfo* pElementInfo = CreateElement( strConfigID, pElementInfo );
     NF_SHARE_PTR<NFIPropertyManager> pElementPropertyManager = pElementInfo->GetPropertyManager();
