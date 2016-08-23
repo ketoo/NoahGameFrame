@@ -103,16 +103,16 @@ public:
         return mstrClassName;
     }
 
-    const bool AddConfigName(std::string& strConfigName)
+    const bool AddId(std::string& strId)
     {
-        mlConfigList.Add(strConfigName);
+        mIdList.Add(strId);
 
         return true;
     }
 
-    NFList<std::string>& GetConfigNameList()
+    NFList<std::string>& GetIdList()
     {
-        return mlConfigList;
+        return mIdList;
     }
 
     void SetInstancePath(const std::string& strPath)
@@ -135,7 +135,7 @@ private:
     std::string mstrClassName;
     std::string mstrClassInstancePath;
 
-    NFList<std::string> mlConfigList;
+    NFList<std::string> mIdList;
 
     NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
 };
