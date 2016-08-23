@@ -46,22 +46,17 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
 
 bool NFCLogModule::Init()
 {
+    mnLogCountTotal = 0;
 
-    // #ifdef NF_USE_ACTOR
-    //     NFIActor* pActor = (NFIActor*)(pPluginManager);
-    //     if (pActor->GetActorID() == NFIActorManager::EACTOR_MAIN)
-    // #endif
-    {
-        el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
-        el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+    el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
+    el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
 #if NF_PLATFORM == NF_PLATFORM_WIN
-        el::Configurations conf("log_win.conf");
+    el::Configurations conf("log_win.conf");
 #else
-        el::Configurations conf("log.conf");
+    el::Configurations conf("log.conf");
 #endif
-        el::Loggers::reconfigureAllLoggers(conf);
-        el::Helpers::installPreRollOutCallback(rolloutHandler);
-    }
+    el::Loggers::reconfigureAllLoggers(conf);
+    el::Helpers::installPreRollOutCallback(rolloutHandler);
 
     return true;
 }
@@ -93,6 +88,8 @@ bool NFCLogModule::Execute()
 
 bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
 {
+    mnLogCountTotal++;
+
     char szBuffer[1024 * 10] = {0};
 
     va_list args;
@@ -103,25 +100,25 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     switch (nll)
     {
         case NFILogModule::NLL_DEBUG_NORMAL:
-            LOG(DEBUG) << szBuffer;
+            LOG(DEBUG) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_INFO_NORMAL:
-            LOG(INFO) << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_WARING_NORMAL:
-            LOG(WARNING) << szBuffer;
+            LOG(WARNING) << mnLogCountTotal << " | " << szBuffer;
             break;
         case NFILogModule::NLL_ERROR_NORMAL:
         {
-            LOG(ERROR) << szBuffer;
+            LOG(ERROR) << mnLogCountTotal << " | " << szBuffer;
             //LogStack();
         }
         break;
         case NFILogModule::NLL_FATAL_NORMAL:
-            LOG(FATAL) << szBuffer;
+            LOG(FATAL) << mnLogCountTotal << " | " << szBuffer;
             break;
         default:
-            LOG(INFO) << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
             break;
     }
 
@@ -260,58 +257,13 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
 
 bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::ostringstream& stream, const char* func, int line)
 {
-    switch (nll)
+    if (line > 0)
     {
-        case NFILogModule::NLL_DEBUG_NORMAL:
-        {
-            if (0 == line)
-            {
-                LOG(DEBUG) << "Indent[" << ident.ToString() << "] " << stream.str();
-            }
-            else
-            {
-                LOG(DEBUG) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
-            }
-        }
-        break;
-        case NFILogModule::NLL_INFO_NORMAL:
-        {
-            if (0 == line)
-            {
-                LOG(INFO) << "Indent[" << ident.ToString() << "] " << stream.str();
-            }
-            else
-            {
-                LOG(INFO) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
-            }
-        }
-        break;
-        case NFILogModule::NLL_WARING_NORMAL:
-        {
-            if (0 == line)
-            {
-                LOG(WARNING) << "Indent[" << ident.ToString() << "] " << stream.str();
-            }
-            else
-            {
-                LOG(WARNING) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
-            }
-        }
-        break;
-        case NFILogModule::NLL_ERROR_NORMAL:
-        {
-            if (0 == line)
-            {
-                LOG(ERROR) << "Indent[" << ident.ToString() << "] " << stream.str();
-            }
-            else
-            {
-                LOG(ERROR) << "Indent[" << ident.ToString() << "] " << stream.str() << " " << func << " " << line;
-            }
-        }
-        break;
-        default:
-            break;
+        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str(), func, line);
+    }
+    else
+    {
+        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), stream.str());
     }
 
     return true;

@@ -1,20 +1,22 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFCNet.cpp
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2013-12-15
-//    @Module           £º    NFIPacket
+//    @FileName         ï¿½ï¿½    NFCNet.cpp
+//    @Author           ï¿½ï¿½    LvSheng.Huang
+//    @Date             ï¿½ï¿½    2013-12-15
+//    @Module           ï¿½ï¿½    NFIPacket
 //    @Desc             :     CNet
 // -------------------------------------------------------------------------
-#pragma  comment(lib,"libevent.lib")
-#pragma  comment(lib,"libevent_core.lib")
 
 #include "NFCNet.h"
 #include <string.h>
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
 #pragma  comment(lib,"Ws2_32.lib")
+#pragma  comment(lib,"libevent.lib")
+#pragma  comment(lib,"libevent_core.lib")
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#include <arpa/inet.h>
 #endif
 
 #include "event2/bufferevent_struct.h"
@@ -51,7 +53,7 @@ private:
 
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
-    //Ã¿´ÎÊÕµ½·¢ËÍÏûÏ¢µÄÊ±ºòÊÂ¼þ
+    //Ã¿ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Â¼ï¿½
     //  struct evbuffer *output = bufferevent_get_output(bev);
 }
 
@@ -59,6 +61,20 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 {
     NetObject* pObject = (NetObject*)user_data;
     NFCNet* pNet = (NFCNet*)pObject->GetNet();
+
+    if (events & BEV_EVENT_CONNECTED)
+    {
+        //must to set it's state before the "EventCB" functional be called[maybe user will send msg in the callback function]
+        pNet->mbWorking = true;
+    }
+    else
+    {
+        if (!pNet->mbServer)
+        {
+            pNet->mbWorking = false;
+        }
+    }
+
     if (pNet->mEventCB)
     {
         pNet->mEventCB(pObject->GetRealFD(), NF_NET_EVENT(events), pNet);
@@ -76,7 +92,7 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 
 void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data)
 {
-    //ÅÂÄãÃÇÖØÁË
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     NFCNet* pNet = (NFCNet*)user_data;
     bool bClose = pNet->CloseNetObject(fd);
     if (bClose)
@@ -86,41 +102,41 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
 
     if (pNet->mmObject.size() >= pNet->mnMaxConnect)
     {
-        //Ó¦¸ÃTµô£¬¾Ü¾ø
+        //Ó¦ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½
         return;
     }
 
     struct event_base* base = pNet->base;
-    //´´½¨Ò»¸ö»ùÓÚsocketµÄbufferevent
+    //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½socketï¿½ï¿½bufferevent
     struct bufferevent* bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
     if (!bev)
     {
-        //Ó¦¸ÃTµô£¬¾Ü¾ø
+        //Ó¦ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½
         fprintf(stderr, "Error constructing bufferevent!");
         //event_base_loopbreak(base);
         return;
     }
 
-    //ÎÒ»ñµÃÒ»¸öÐÂÁ¬½Ó¡£ÎªÆä´´½¨Ò»¸öbufferevent--FDÐèÒª¹ÜÀí
+    //ï¿½Ò»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½Îªï¿½ä´´ï¿½ï¿½Ò»ï¿½ï¿½bufferevent--FDï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
     struct sockaddr_in* pSin = (sockaddr_in*)sa;
 
     NetObject* pObject = new NetObject(pNet, fd, *pSin, bev);
     pObject->GetNet()->AddNetObject(fd, pObject);
 
-    //ÎªbuffereventÉèÖÃ¸÷ÖÖ»Øµ÷
+    //Îªbuffereventï¿½ï¿½ï¿½Ã¸ï¿½ï¿½Ö»Øµï¿½
     bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, (void*)pObject);
 
-    //¿ªÆôbuffereventµÄ¶ÁÐ´
+    //ï¿½ï¿½ï¿½ï¿½buffereventï¿½Ä¶ï¿½Ð´
     bufferevent_enable(bev, EV_READ | EV_WRITE);
 
-    //Ä£Äâ¿Í»§¶ËÒÑÁ¬½ÓÊÂ¼þ
+    //Ä£ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
     conn_eventcb(bev, BEV_EVENT_CONNECTED, (void*)pObject);
 }
 
 
 void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 {
-    //½ÓÊÜµ½ÏûÏ¢
+    //ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½Ï¢
     NetObject* pObject = (NetObject*)user_data;
     if (!pObject)
     {
@@ -146,13 +162,13 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 
     size_t len = evbuffer_get_length(input);
 
-    //·µ»Ø¸ø¿Í»§¶Ë
+    //ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Í»ï¿½ï¿½ï¿½
     //      struct evbuffer *output = bufferevent_get_output(bev);
     //      evbuffer_add_buffer(output, input);
     //      SendMsg(1, strData,len, pObject->GetFd());
     //////////////////////////////////////////////////////////////////////////
 
-    //²»ÄÜÓÃ³ÉÔ±¾²Ì¬µÈ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½Ô±ï¿½ï¿½Ì¬ï¿½ï¿½
     char* strMsg = new char[len];
 
     if (evbuffer_remove(input, strMsg, len) > 0)
@@ -241,9 +257,11 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
         if (pNetObject && !pNetObject->NeedRemove())
         {
             bufferevent* bev = pNetObject->GetBuffEvent();
-            if (NULL != bev)
+            if (NULL != bev && mbWorking )
             {
                 bufferevent_write(bev, msg, nLen);
+
+                mnSendMsgTotal++;
             }
         }
     }
@@ -266,10 +284,11 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex)
         if (pNetObject)
         {
             bufferevent* bev = pNetObject->GetBuffEvent();
-            if (NULL != bev)
+            if (NULL != bev && mbWorking)
             {
                 bufferevent_write(bev, msg, nLen);
 
+                mnSendMsgTotal++;
                 return true;
             }
         }
@@ -321,6 +340,8 @@ bool NFCNet::Dismantle(NetObject* pObject)
             if (mRecvCB)
             {
                 mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
+
+                mnReceiveMsgTotal++;
             }
 
 			pObject->RemoveBuff(0, nMsgBodyLength + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
@@ -329,13 +350,13 @@ bool NFCNet::Dismantle(NetObject* pObject)
         }
         else if (0 == nMsgBodyLength)
         {
-            //³¤¶È²»¹»(µÈ´ýÏÂ´Î½â°ü)
+            //ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½(ï¿½È´ï¿½ï¿½Â´Î½ï¿½ï¿½ï¿½)
 
             bNeedDismantle = false;
         }
         else
         {
-            //ÀÛ¼Æ´íÎóÌ«¶àÁË--¿ÉÒÔÊÊµ±Çå¿Õ¸ø»ú»á
+            //ï¿½Û¼Æ´ï¿½ï¿½ï¿½Ì«ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½
             //pObject->IncreaseError();
 
             bNeedDismantle = false;
@@ -424,7 +445,8 @@ int NFCNet::InitServerNet()
 
     struct sockaddr_in sin;
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
     WSADATA wsa_data;
     WSAStartup(0x0201, &wsa_data);
 
@@ -433,14 +455,15 @@ int NFCNet::InitServerNet()
 
     struct event_config* cfg = event_config_new();
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+//#ifdef _MSC_VER
 
     //event_config_avoid_method(cfg, "iocp");
-    //event_config_require_features(cfg, event_method_feature.EV_FEATURE_ET);//´¥·¢·½Ê½
+    //event_config_require_features(cfg, event_method_feature.EV_FEATURE_ET);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     //evthread_use_windows_threads();
     //if(event_config_set_flag(cfg, EVENT_BASE_FLAG_STARTUP_IOCP) < 0)
     //{
-    //    //Ê¹ÓÃIOCP
+    //    //Ê¹ï¿½ï¿½IOCP
     //    return -1;
     //}
 
@@ -456,7 +479,7 @@ int NFCNet::InitServerNet()
     //event_config_avoid_method(cfg, "epoll");
     if (event_config_set_flag(cfg, EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST) < 0)
     {
-        //Ê¹ÓÃEPOLL
+        //Ê¹ï¿½ï¿½EPOLL
         return -1;
     }
 
@@ -480,7 +503,7 @@ int NFCNet::InitServerNet()
         return -1;
     }
 
-    //³õÊ¼»¯Ê±¼ä
+    //ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½
     //gettime(base, &base->event_tv);
 
     memset(&sin, 0, sizeof(sin));
@@ -596,7 +619,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        //´ò°ü³É¹¦
+        //ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½
         return SendMsg(strOutData.c_str(), strOutData.length(), nSockIndex);
     }
 
@@ -609,7 +632,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        //´ò°ü³É¹¦
+        //ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½
         return SendMsg(strOutData.c_str(), strOutData.length(), fdList);
     }
 
@@ -622,7 +645,7 @@ bool NFCNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
     if (nAllLen == nLen + NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        //´ò°ü³É¹¦
+        //ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½
         return SendMsgToAllClient(strOutData.c_str(), strOutData.length());
     }
 
@@ -647,29 +670,29 @@ int NFCNet::EnCode(const uint16_t unMsgID, const char* strData, const uint32_t u
 
 int NFCNet::DeCode(const char* strData, const uint32_t unAllLen, NFCMsgHead& xHead)
 {
-    //½âÃÜ--unLenÎªbuff×Ü³¤¶È,½â°üÊ±ÄÜÓÃ¶àÉÙÊÇ¶àÉÙ
+    //ï¿½ï¿½ï¿½ï¿½--unLenÎªbuffï¿½Ü³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½
     if (unAllLen < NFIMsgHead::NF_Head::NF_HEAD_LENGTH)
     {
-        //³¤¶È²»¹»
+        //ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
         return -1;
     }
 
     if (NFIMsgHead::NF_Head::NF_HEAD_LENGTH != xHead.DeCode(strData))
     {
-        //È¡°üÍ·Ê§°Ü
+        //È¡ï¿½ï¿½Í·Ê§ï¿½ï¿½
         return -2;
     }
 
     if (xHead.GetBodyLength() > (unAllLen - NFIMsgHead::NF_Head::NF_HEAD_LENGTH))
     {
-        //×Ü³¤¶È²»¹»
+        //ï¿½Ü³ï¿½ï¿½È²ï¿½ï¿½ï¿½
         return -3;
     }
 
-    //copy°üÍ·+°üÌå
+    //copyï¿½ï¿½Í·+ï¿½ï¿½ï¿½ï¿½
     //      strOutData.clear();
     //      strOutData.append(strData, xHead.GetMsgLength());
 
-    //·µ»ØÊ¹ÓÃ¹ýµÄÁ¿
+    //ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½
     return xHead.GetBodyLength();
 }

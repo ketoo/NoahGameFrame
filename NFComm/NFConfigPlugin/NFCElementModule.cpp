@@ -48,7 +48,7 @@ bool NFCElementModule::Load()
     }
 
     NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
-    while (pLogicClass.get())
+    while (pLogicClass)
     {
         const std::string& strInstancePath = pLogicClass->GetInstancePath();
         if (strInstancePath.empty())
@@ -90,6 +90,44 @@ bool NFCElementModule::Load()
     return true;
 }
 
+bool NFCElementModule::CheckRef()
+{
+    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->First();
+    while (pLogicClass)
+    {
+		NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = pLogicClass->GetPropertyManager();
+		if (pClassPropertyManager.get())
+		{
+			NF_SHARE_PTR<NFIProperty> pProperty = pClassPropertyManager->First();
+			while (pProperty.get())
+			{
+				//if one property is ref,check every config
+				if (pProperty->GetRef())
+				{
+					NFList<std::string>& strIdList = pLogicClass->GetIdList();
+					std::string strId;
+					for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+					{
+						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
+						if (!this->GetElement(strRefValue))
+						{
+							std::string msg;
+							msg.append("check ref failed id: ").append(strRefValue).append(" in ").append(pLogicClass->GetClassName());
+							NFASSERT(nRet, msg.c_str(), __FILE__, __FUNCTION__);
+							exit(0);
+						}
+					}
+				}
+				pProperty = pClassPropertyManager->Next();
+			}
+		}
+        //////////////////////////////////////////////////////////////////////////
+        pLogicClass = m_pClassModule->Next();
+    }
+
+    return false;
+}
+
 bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass)
 {
     //attrNode is the node of a object
@@ -110,7 +148,7 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
     AddElement(strConfigID, pElementInfo);
 
     //can find all configid by class name
-    pLogicClass->AddConfigName(strConfigID);
+    pLogicClass->AddId(strConfigID);
 
     //ElementConfigInfo* pElementInfo = CreateElement( strConfigID, pElementInfo );
     NF_SHARE_PTR<NFIPropertyManager> pElementPropertyManager = pElementInfo->GetPropertyManager();
@@ -366,6 +404,7 @@ bool NFCElementModule::LegalNumber(const char* str)
 
 bool NFCElementModule::AfterInit()
 {
+    CheckRef();
     return true;
 
 }

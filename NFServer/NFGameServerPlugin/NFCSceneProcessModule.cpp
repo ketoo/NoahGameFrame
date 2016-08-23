@@ -44,19 +44,19 @@ bool NFCSceneProcessModule::AfterInit()
     NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement("Scene");
     if (pLogicClass.get())
     {
-        NFList<std::string>& list = pLogicClass->GetConfigNameList();
+        NFList<std::string>& strIdList = pLogicClass->GetIdList();
 
-        std::string strData;
-        bool bRet = list.First(strData);
+        std::string strId;
+        bool bRet = strIdList.First(strId);
         while (bRet)
         {
-            int nSceneID = lexical_cast<int>(strData);
+            int nSceneID = lexical_cast<int>(strId);
 
             LoadSceneResource(nSceneID);
 
             m_pKernelModule->CreateScene(nSceneID);
 
-            bRet = list.Next(strData);
+            bRet = strIdList.Next(strId);
         }
     }
 
