@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ：    NFCNet.h
-//    @Author           ：    LvSheng.Huang
-//    @Date             ：    2013-12-15
-//    @Module           ：    NFIPacket
+//    @FileName         锟斤拷    NFCNet.h
+//    @Author           锟斤拷    LvSheng.Huang
+//    @Date             锟斤拷    2013-12-15
+//    @Module           锟斤拷    NFIPacket
 //    @Desc             :     CNet
 // -------------------------------------------------------------------------
 
@@ -26,6 +26,10 @@ public:
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
+        mbWorking = false;
+
+        mnSendMsgTotal = 0;
+        mnReceiveMsgTotal = 0;
     }
 
     template<typename BaseType>
@@ -40,6 +44,10 @@ public:
         mnPort = 0;
         mnCpuCount = 0;
         mbServer = false;
+        mbWorking = false;
+        
+        mnSendMsgTotal = 0;
+        mnReceiveMsgTotal = 0;
     }
     virtual ~NFCNet() {};
 
@@ -51,13 +59,13 @@ public:
 
     virtual bool Final();
 
-    //无包头，内部组装
+    //锟睫帮拷头锟斤拷锟节诧拷锟斤拷装
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex);
 
-    //无包头，内部组装
+    //锟睫帮拷头锟斤拷锟节诧拷锟斤拷装
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<int>& fdList);
 
-    //无包头，内部组装
+    //锟睫帮拷头锟斤拷锟节诧拷锟斤拷装
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen);
 
 
@@ -69,13 +77,13 @@ public:
     virtual bool Log(int severity, const char* msg);
 
 private:
-    //已带上包头
+    //锟窖达拷锟较帮拷头
     bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
 
-    //已带上包头
+    //锟窖达拷锟较帮拷头
     bool SendMsg(const char* msg, const uint32_t nLen, const std::list<int>& fdList);
 
-    //已带上包头
+    //锟窖达拷锟较帮拷头
     bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex);
 
 private:
@@ -111,6 +119,11 @@ private:
     int mnPort;
     int mnCpuCount;
     bool mbServer;
+
+    bool mbWorking;
+
+    int64_t mnSendMsgTotal;
+    int64_t mnReceiveMsgTotal;
 
     struct event_base* base;
     struct evconnlistener* listener;
