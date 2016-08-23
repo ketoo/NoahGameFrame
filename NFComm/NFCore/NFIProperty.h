@@ -32,13 +32,13 @@ public:
     virtual const bool GetPublic() const = 0;
     virtual const bool GetPrivate() const = 0;
     virtual const bool GetCache() const = 0;
-    virtual const std::string& GetRelationValue() const = 0;
+    virtual const bool GetRef() const = 0;
 
     virtual void SetSave(bool bSave) = 0;
     virtual void SetPublic(bool bPublic) = 0;
     virtual void SetPrivate(bool bPrivate) = 0;
     virtual void SetCache(bool bCache) = 0;
-    virtual void SetRelationValue(const std::string& strRelation) = 0;
+	virtual void SetRef(bool bRef) = 0;
 
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;

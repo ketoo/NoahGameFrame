@@ -68,7 +68,7 @@
 #elif defined( __WIN32__ ) || defined( _WIN32 ) || defined(_WINDOWS) || defined(WIN) || defined(_WIN64) || defined( __WIN64__ )
 #   define NF_PLATFORM NF_PLATFORM_WIN
 //////////////////////////////////////////////////////////////////////////
-#elif defined( __APPLE_CC__)
+#elif defined( __APPLE_CC__) || defined(__APPLE__) || defined(__OSX__)
 // Device                                                     Simulator
 // Both requiring OS version 4.0 or greater
 #   if __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 40000 || __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000
@@ -279,6 +279,8 @@ inline unsigned long NF_GetTickCount()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
     return GetTickCount();
+#elif NF_PLATFORM == NF_PLATFORM_APPLE
+
 #else
     struct timespec ts;
 
@@ -347,10 +349,19 @@ bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
     return false;
 }
 
-#endif
+inline bool IsZeroFloat(const float fValue, float epsilon = 1e-6)
+{
+    return std::abs(fValue) <= epsilon;
+}
 
+inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
+{
+    return std::abs(dValue) <= epsilon;
+}
 
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define PROTOBUF_USE_DLLS
+#endif
+
 #endif
