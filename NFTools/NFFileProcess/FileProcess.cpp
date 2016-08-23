@@ -299,6 +299,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		// 定义表头行数
+		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
 		const MiniExcelReader::Range& dim = sh.getDimension();
@@ -308,7 +310,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		if (strUpperSheetName == "property")
 		{
 			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -333,7 +335,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 				{
 					std::string name = colNames[r - 1];
 					std::string value = "";
@@ -688,6 +690,9 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		// 定义数据起始行数
+		int nDataLine = 10;
+
 		std::string strSheetName = sh.getName();
 
 		std::string strUpperSheetName = strSheetName.substr(0, 8);
@@ -711,7 +716,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 		if (vDataIDs.size() <= 0)
 		{
-			for (int r = dim.firstRow + 8; r <= dim.lastRow; r++)
+			for (int r = dim.firstRow + nDataLine - 1; r <= dim.lastRow; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -724,7 +729,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 			}
 		}
 
-		for (int r = dim.firstRow + 8; r <= vDataIDs.size() + 8; r++)
+		for (int r = dim.firstRow + nDataLine - 1; r <= vDataIDs.size() + nDataLine - 1; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
@@ -782,7 +787,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 						delete[] chrArrDesc;
 					}
 				}
-				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 9] + name, value));
+				mDataValues.insert(std::pair<string, string>(vDataIDs[r - nDataLine] + name, value));
 			}
 		}
 		nCurrentCol += dim.lastCol;
