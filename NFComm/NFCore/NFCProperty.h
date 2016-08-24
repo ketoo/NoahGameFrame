@@ -41,12 +41,14 @@ public:
     virtual const bool GetPrivate() const;
     virtual const bool GetCache() const;
     virtual const bool GetRef() const;
+	virtual const bool GetUpload() const;
 
     virtual void SetSave(bool bSave);
     virtual void SetPublic(bool bPublic);
     virtual void SetPrivate(bool bPrivate);
     virtual void SetCache(bool bCache);
-    virtual void SetRef(bool bRef);
+	virtual void SetRef(bool bRef);
+	virtual void SetUpload(bool bUpload);
 
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
@@ -85,6 +87,7 @@ private:
     bool mbSave;
     bool mbCache;
     bool mbRef;
+	bool mbUpload;
 };
 
 #endif
