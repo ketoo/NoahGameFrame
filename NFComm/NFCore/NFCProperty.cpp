@@ -120,6 +120,11 @@ const bool NFCProperty::GetRef() const
 	return mbRef;
 }
 
+const bool NFCProperty::GetUpload() const
+{
+	return mbUpload;
+}
+
 void NFCProperty::SetSave(bool bSave)
 {
 	mbSave = bSave;
@@ -143,6 +148,11 @@ void NFCProperty::SetCache(bool bCache)
 void NFCProperty::SetRef(bool bRef)
 {
 	mbRef = bRef;
+}
+
+void NFCProperty::SetUpload(bool bUpload)
+{
+	mbUpload = bUpload;
 }
 
 NFINT64 NFCProperty::GetInt() const
