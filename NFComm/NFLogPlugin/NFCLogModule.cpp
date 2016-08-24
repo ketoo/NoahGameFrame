@@ -259,11 +259,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
 {
     if (line > 0)
     {
-        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str(), func, line);
+        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
     }
     else
     {
-        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), stream.str());
+        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
     }
 
     return true;
