@@ -181,6 +181,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
             xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
             xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+			xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
 
             //通用回调，方便NET同步
             pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
