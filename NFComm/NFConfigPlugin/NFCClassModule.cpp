@@ -89,12 +89,14 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
             const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
             const char* pstrRef = pPropertyNode->first_attribute("Ref")->value();
+			const char* pstrUpload = pPropertyNode->first_attribute("Upload")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
             bool bRef = lexical_cast<bool>(pstrRef);
+			bool bUpload = lexical_cast<bool>(pstrUpload);
 
             NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
@@ -112,6 +114,7 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             xProperty->SetSave(bSave);
             xProperty->SetCache(bCache);
             xProperty->SetRef(bRef);
+			xProperty->SetUpload(bUpload);
 
         }
     }
