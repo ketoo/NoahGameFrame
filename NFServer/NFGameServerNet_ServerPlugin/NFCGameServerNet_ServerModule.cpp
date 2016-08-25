@@ -1522,14 +1522,22 @@ void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIn
 	{
 		NFMsg::PropertyInt xPropertyInt = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyInt.property_name());
-		if (pProperty.get())
+		if (pProperty)
 		{
 			//judge upload then set value
 			if (pProperty->GetUpload())
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Upload From Client", "int set", __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client int set", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
 				pProperty->SetInt(xPropertyInt.data());
 			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client int set Upload error", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+		else
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client int set Property error", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -1542,14 +1550,22 @@ void NFCGameServerNet_ServerModule::OnClientPropertyFloatProcess(const int nSock
 	{
 		NFMsg::PropertyFloat xPropertyFloat = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyFloat.property_name());
-		if (pProperty.get())
+		if (pProperty)
 		{
 			//judge upload then set value
 			if (pProperty->GetUpload())
 			{
-				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "float set", __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client float set", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
 				pProperty->SetFloat(xPropertyFloat.data());
 			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client float set Upload error", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+		else
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client float set Property error", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -1562,14 +1578,22 @@ void NFCGameServerNet_ServerModule::OnClientPropertyStringProcess(const int nSoc
 	{
 		NFMsg::PropertyString xPropertyString = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyString.property_name());
-		if (pProperty.get())
+		if (pProperty)
 		{
 			//judge upload then set value
 			if (pProperty->GetUpload())
 			{
-				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "string set", __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client string set", xPropertyString.property_name(), __FUNCTION__, __LINE__);
 				pProperty->SetString(xPropertyString.data());
 			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client string set Upload error", xPropertyString.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+		else
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client string set Property error", xPropertyString.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
@@ -1582,19 +1606,25 @@ void NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSoc
 	{
 		NFMsg::PropertyObject xPropertyObject = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyObject.property_name());
-		if (pProperty.get())
+		if (pProperty)
 		{
 			//judge upload then set value
 			if (pProperty->GetUpload())
 			{
-				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "object set", __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
 				pProperty->SetObject(NFINetModule::PBToNF(xPropertyObject.data()));
 			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+		else
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
 		}
 	}
 }
-
-
 
 void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
