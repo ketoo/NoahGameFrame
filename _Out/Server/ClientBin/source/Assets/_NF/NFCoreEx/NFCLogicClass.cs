@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFCLogicClass.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +12,13 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.IO;
 
-namespace NFCoreEx
+namespace NFrame
 {
     public class NFCLogicClass : NFILogicClass
 	{
         public NFCLogicClass()
         {
-            mxPropertyManager = new NFCPropertyManager(new NFIDENTID());
-            mxRecordManager = new NFCRecordManager(new NFIDENTID());
+            mbEncrypt = false;
         }
 
         public override NFIPropertyManager GetPropertyManager()
@@ -27,7 +31,7 @@ namespace NFCoreEx
             return mxRecordManager;
         }
 
-        public override ArrayList GetConfigNameList()
+        public override List<string> GetConfigNameList()
         {
             return mxIntansList;
         }
@@ -69,14 +73,22 @@ namespace NFCoreEx
             mstrInstance = strInstancePath;
         }
 
-
+        public override void SetEncrypt(bool bEncrypt)
+        {
+            mbEncrypt = bEncrypt;
+        }
+        public override bool GetEncrypt()
+        {
+            return mbEncrypt;
+        }
 
         /////////////////////////////////////
-        private NFIPropertyManager mxPropertyManager;
-        private NFIRecordManager mxRecordManager;
-        private ArrayList mxIntansList = new ArrayList();
+        private NFIPropertyManager mxPropertyManager = new NFCPropertyManager(new NFGUID());
+        private NFIRecordManager mxRecordManager = new NFCRecordManager(new NFGUID());
+        private List<string> mxIntansList = new List<string>();
         private string mstrName;
         private string mstrPath;
         private string mstrInstance;
-	}
+        private bool mbEncrypt;
+    }
 }
