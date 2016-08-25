@@ -25,6 +25,16 @@ namespace NFCoreEx
             return mVarProperty;
         }
 
+        public override void SetUpload(bool upload)
+        {
+            mbUpload = upload;
+        }
+
+        public override bool GetUpload()
+        {
+            return mbUpload;
+        }
+
         public override string GetKey()
         {
             return msPropertyName;
@@ -72,7 +82,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                    doHandleDel(mSelf, this, oldValue, newValue);
                 }
 				
 			}
@@ -93,7 +103,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                    doHandleDel(mSelf, this, oldValue, newValue);
                 }
 			}
 
@@ -113,7 +123,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                    doHandleDel(mSelf, this, oldValue, newValue);
                 }
             }
 
@@ -132,7 +142,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                    doHandleDel(mSelf, this, oldValue, newValue);
                 }
             }
 
@@ -152,7 +162,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                    doHandleDel(mSelf, this, oldValue, newValue);
                 }
             }
 
@@ -169,5 +179,6 @@ namespace NFCoreEx
 		NFIDENTID mSelf;
 		string msPropertyName;
 		NFIDataList mVarProperty;
+        bool mbUpload;
     }
 }
