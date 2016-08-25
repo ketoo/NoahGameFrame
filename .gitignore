@@ -27,6 +27,7 @@
 *.tlog
 *.log
 *.ilk
+*.user
 
 # Codeblocks
 *.layout
