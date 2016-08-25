@@ -214,7 +214,7 @@ public class NFNet
                     NFIObject obj = NFCKernel.Instance.GetObject(nMainRoleID);
                     NFIPropertyManager propertyManager = obj.GetPropertyManager();
                     NFIProperty property = propertyManager.GetProperty("Gold");
-                    property.SetInt(2,true);
+                    property.SetInt(2);
                 }
             }
             strChatTargetID = nTarget.ToString();
