@@ -913,7 +913,7 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
     "\002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002(\0162\"."
     "NFMsg.ReqCommand.EGameCommandType\022\031\n\021com"
     "mand_str_value\030\003 \001(\014\022\031\n\021command_value_in"
-    "t\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001(\002\022\031\n\021"
+    "t\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001(\001\022\031\n\021"
     "command_value_str\030\006 \001(\014\022*\n\024command_value"
     "_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030\010 \001(\005"
     "\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027\n\023EGC"
@@ -10226,17 +10226,17 @@ bool ReqCommand::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(45)) goto parse_command_value_float;
+        if (input->ExpectTag(41)) goto parse_command_value_float;
         break;
       }
 
-      // optional float command_value_float = 5;
+      // optional double command_value_float = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
          parse_command_value_float:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &command_value_float_)));
           set_has_command_value_float();
         } else {
@@ -10347,9 +10347,9 @@ void ReqCommand::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->command_value_int(), output);
   }
 
-  // optional float command_value_float = 5;
+  // optional double command_value_float = 5;
   if (has_command_value_float()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->command_value_float(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->command_value_float(), output);
   }
 
   // optional bytes command_value_str = 6;
@@ -10407,9 +10407,9 @@ void ReqCommand::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->command_value_int(), target);
   }
 
-  // optional float command_value_float = 5;
+  // optional double command_value_float = 5;
   if (has_command_value_float()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->command_value_float(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->command_value_float(), target);
   }
 
   // optional bytes command_value_str = 6;
@@ -10474,9 +10474,9 @@ int ReqCommand::ByteSize() const {
           this->command_value_int());
     }
 
-    // optional float command_value_float = 5;
+    // optional double command_value_float = 5;
     if (has_command_value_float()) {
-      total_size += 1 + 4;
+      total_size += 1 + 8;
     }
 
     // optional bytes command_value_str = 6;
