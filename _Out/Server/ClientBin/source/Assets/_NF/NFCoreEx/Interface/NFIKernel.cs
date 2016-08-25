@@ -19,7 +19,9 @@ namespace NFCoreEx
 			
         /////////////////////////////////////////////////////////////
 		public abstract void RegisterPropertyCallback(NFIDENTID self, string strPropertyName, NFIProperty.PropertyEventHandler handler);
-		
+
+        public abstract void RegisterPropertyCallback(NFIProperty.PropertyEventHandler handler);
+
         public abstract void RegisterRecordCallback(NFIDENTID self, string strRecordName, NFIRecord.RecordEventHandler handler);
 
         public abstract void RegisterClassCallBack(string strClassName, NFIObject.ClassEventHandler handler);

@@ -221,6 +221,12 @@ namespace NFCoreEx
                     XmlNode xPropertyNode = xNodeList.Item(i);
                     XmlAttribute strID = xPropertyNode.Attributes["Id"];
                     XmlAttribute strType = xPropertyNode.Attributes["Type"];
+                    XmlAttribute strUpload = xPropertyNode.Attributes["Upload"];
+                    bool bUpload = false;
+                    if(strUpload.Value.Equals("1"))
+                    {
+                        bUpload = true;
+                    }
 
                     switch (strType.Value)
                     {
@@ -228,35 +234,40 @@ namespace NFCoreEx
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddInt(0);
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "float":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddFloat(0.0f);
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "double":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddDouble(0.0f);
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "string":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddString("");
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "object":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddObject(new NFIDENTID(0, 0));
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         default:
@@ -370,7 +381,9 @@ namespace NFCoreEx
                 for (int i = 0; i < xValue.Count(); ++i)
                 {
                     NFIProperty xProperty = xOtherClass.GetPropertyManager().GetProperty(xValue.StringVal(i));
-                    xLogicClass.GetPropertyManager().AddProperty(xValue.StringVal(i), xProperty.GetValue());
+                    NFIProperty property = xLogicClass.GetPropertyManager().AddProperty(xValue.StringVal(i), xProperty.GetValue());
+                    property.SetUpload(xProperty.GetUpload());
+
                 }
             }
         }

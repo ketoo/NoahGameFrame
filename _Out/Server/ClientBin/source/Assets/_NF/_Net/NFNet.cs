@@ -206,6 +206,16 @@ public class NFNet
             if (GUI.Button(new Rect(0, 450, 100, 50), "Chat"))
             {
                 mxSendLogic.RequireChat(nMainRoleID, new NFCoreEx.NFIDENTID(), 3, strChatData);
+                //test
+                if(false)
+                {
+                    int value = int.Parse(strChatData);
+
+                    NFIObject obj = NFCKernel.Instance.GetObject(nMainRoleID);
+                    NFIPropertyManager propertyManager = obj.GetPropertyManager();
+                    NFIProperty property = propertyManager.GetProperty("Gold");
+                    property.SetInt(value);
+                }
             }
             strChatTargetID = nTarget.ToString();
 //             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);

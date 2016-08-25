@@ -3,6 +3,8 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using ProtoBuf;
 
 namespace NFCoreEx
 {
@@ -20,6 +22,7 @@ namespace NFCoreEx
                     if (_Instance == null)
                     {
                         _Instance = new NFCKernel();
+                        _Instance.RegisterPropertyCallback(OnPropertydHandler);
                     }
                     return _Instance;
                 }
@@ -598,7 +601,13 @@ namespace NFCoreEx
                 NFIObject xObject = GetObject(self);
                 NFIPropertyManager xPropertyManager = xObject.GetPropertyManager();
 
-                xPropertyManager.AddProperty(strPropertyName, xProperty.GetValue());
+                NFIProperty property = xPropertyManager.AddProperty(strPropertyName, xProperty.GetValue());
+                //if property==null ,means this property alreay exist in manager
+                if(property != null)
+                {
+                    property.SetUpload(xProperty.GetUpload());
+                }
+                RegisterPropertyCallback(self, strPropertyName, propertyEventHandler);
             }
         }
 
@@ -618,12 +627,104 @@ namespace NFCoreEx
             }
         }
 
+        public override void RegisterPropertyCallback(NFIProperty.PropertyEventHandler handler)
+        {
+            propertyEventHandler += handler;
+        }
+
+
+        static void OnPropertydHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar)
+        {
+            switch(oldVar.GetType(0))
+            {
+                case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+                    {
+                        if(xProperty.GetUpload())
+                        {
+                            NFMsg.ObjectPropertyInt xData = new NFMsg.ObjectPropertyInt();
+                            xData.player_id = NFBinarySendLogic.NFToPB(self);
+
+                            NFMsg.PropertyInt xPropertyInt = new NFMsg.PropertyInt();
+                            xPropertyInt.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyInt.data = newVar.IntVal(0);
+                            xData.property_list.Add(xPropertyInt);
+
+                            MemoryStream stream = new MemoryStream();
+                            Serializer.Serialize<NFMsg.ObjectPropertyInt>(stream, xData);
+
+                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_INT, stream);
+                        }
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+                    {
+                        if (xProperty.GetUpload())
+                        {
+                            NFMsg.ObjectPropertyFloat xData = new NFMsg.ObjectPropertyFloat();
+                            xData.player_id = NFBinarySendLogic.NFToPB(self);
+
+                            NFMsg.PropertyFloat xPropertyFloat = new NFMsg.PropertyFloat();
+                            xPropertyFloat.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyFloat.data = newVar.FloatVal(0);
+                            xData.property_list.Add(xPropertyFloat);
+
+                            MemoryStream stream = new MemoryStream();
+                            Serializer.Serialize<NFMsg.ObjectPropertyFloat>(stream, xData);
+
+                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_DOUBLE, stream);
+                        }
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+                    {
+                        if (xProperty.GetUpload())
+                        {
+                            NFMsg.ObjectPropertyString xData = new NFMsg.ObjectPropertyString();
+                            xData.player_id = NFBinarySendLogic.NFToPB(self);
+
+                            NFMsg.PropertyString xPropertyString = new NFMsg.PropertyString();
+                            xPropertyString.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyString.data = System.Text.Encoding.Default.GetBytes(newVar.StringVal(0));
+                            xData.property_list.Add(xPropertyString);
+
+                            MemoryStream stream = new MemoryStream();
+                            Serializer.Serialize<NFMsg.ObjectPropertyString>(stream, xData);
+
+                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, stream);
+                        }
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+                    {
+                        if (xProperty.GetUpload())
+                        {
+                            NFMsg.ObjectPropertyObject xData = new NFMsg.ObjectPropertyObject();
+                            xData.player_id = NFBinarySendLogic.NFToPB(self);
+
+                            NFMsg.PropertyObject xPropertyObject = new NFMsg.PropertyObject();
+                            xPropertyObject.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyObject.data = NFBinarySendLogic.NFToPB(newVar.ObjectVal(0));
+                            xData.property_list.Add(xPropertyObject);
+
+                            MemoryStream stream = new MemoryStream();
+                            Serializer.Serialize<NFMsg.ObjectPropertyObject>(stream, xData);
+
+                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
+                        }
+                    }
+                    break;
+            }
+
+        }
+
         Dictionary<NFIDENTID, NFIObject> mhtObject;
         Dictionary<string, ClassHandleDel> mhtClassHandleDel;
         NFIElementManager mxElementManager;
         NFILogicClassManager mxLogicClassManager;
 
-		class ClassHandleDel
+        NFIProperty.PropertyEventHandler propertyEventHandler;
+
+        class ClassHandleDel
 		{
 			public ClassHandleDel()
 			{
