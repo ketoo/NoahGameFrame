@@ -149,9 +149,14 @@ namespace NFTCPClient
 
             if (EGameEventCode.EGEC_ACCOUNT_SUCCESS == xData.event_code)
             {
+                Debug.Log("Login  SUCCESS");
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN;
-
+                Debug.Log("QueryWorldList");
                 mNet.mxSendLogic.RequireWorldList();
+            }
+            else
+            {
+                Debug.Log("Login Faild,Code: " + xData.event_code);
             }
         }
 
@@ -168,6 +173,7 @@ namespace NFTCPClient
                 for(int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
+                    Debug.Log("WorldList  ServerId: " + info.server_id + " Name: " + System.Text.Encoding.Default.GetString(info.name) + " Status: " + info.status);
                     aWorldList.Add(info);
                 }
             }
@@ -176,6 +182,7 @@ namespace NFTCPClient
                 for (int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
+                    Debug.Log("GameList  ServerId: " + info.server_id + " Name: " + System.Text.Encoding.Default.GetString(info.name) + " Status: " + info.status);
                     aServerList.Add(info);
                 }
             }
@@ -197,6 +204,7 @@ namespace NFTCPClient
             mNet.strKey = System.Text.Encoding.Default.GetString(xData.world_key);
             mNet.strWorldIP = System.Text.Encoding.Default.GetString(xData.world_ip);
             mNet.nWorldPort = xData.world_port;
+            Debug.Log("SelectWorld SUCCESS  ProxyIpPort: " + mNet.strWorldIP + ":" + mNet.nWorldPort + " Key: " + mNet.strKey);
         }
 
         private void EGMI_ACK_CONNECT_KEY(MsgHead head, MemoryStream stream)
@@ -209,12 +217,18 @@ namespace NFTCPClient
 
             if (xData.event_code == EGameEventCode.EGEC_VERIFY_KEY_SUCCESS)
             {
+                Debug.Log("VerifyKey SUCCESS");
                 //验证成功
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_VERIFY;
                 //mNet.nMainRoleID = PBToNF(xData.event_object);
 
+                Debug.Log("QueryGameList");
                 //申请世界内的服务器列表
                 mNet.mxSendLogic.RequireServerList();
+            }
+            else
+            {
+                Debug.Log("VerifyKey Failed");
             }
         }
 
@@ -228,8 +242,15 @@ namespace NFTCPClient
 
             if (xData.event_code == EGameEventCode.EGEC_SELECTSERVER_SUCCESS)
             {
+                Debug.Log("SelectGame SUCCESS ");
+
+                Debug.Log("QueryRoleList");
                 //申请角色列表
                 mNet.mxSendLogic.RequireRoleList(mNet.strAccount, mNet.nServerID);
+            }
+            else
+            {
+                Debug.Log("SelectGame Failed ");
             }
         }
         
@@ -240,7 +261,8 @@ namespace NFTCPClient
 
             NFMsg.AckRoleLiteInfoList xData = new NFMsg.AckRoleLiteInfoList();
             xData = Serializer.Deserialize<NFMsg.AckRoleLiteInfoList>(new MemoryStream(xMsg.msg_data));
-            
+
+            Debug.Log("QueryRoleList  SUCCESS");
             aCharList.Clear();
             for (int i = 0; i < xData.char_data.Count; ++i)
             {
