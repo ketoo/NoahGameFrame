@@ -20,10 +20,16 @@ public:
 
     virtual void SetValue(const NFIDataList::TData& TData) = 0;
     virtual void SetValue(const NFIProperty* pProperty) = 0;
+
     virtual bool SetInt(const NFINT64 value) = 0;
     virtual bool SetFloat(const double value) = 0;
     virtual bool SetString(const std::string& value) = 0;
     virtual bool SetObject(const NFGUID& value) = 0;
+
+	virtual bool SetInt(const NFINT64 value, bool broadcastToSelf) = 0;
+	virtual bool SetFloat(const double value, bool broadcastToSelf) = 0;
+	virtual bool SetString(const std::string& value, bool broadcastToSelf) = 0;
+	virtual bool SetObject(const NFGUID& value, bool broadcastToSelf) = 0;
 
     virtual const TDATA_TYPE GetType() const = 0;
     virtual const bool GeUsed() const = 0;

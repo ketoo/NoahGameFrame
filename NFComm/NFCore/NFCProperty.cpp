@@ -72,7 +72,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 	NFCDataList::TData newValue;
 	newValue = *mxData;
 
-	OnEventHandler(oldValue, newValue);
+	OnEventHandler(oldValue, newValue, true);
 }
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
@@ -200,7 +200,7 @@ void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 	mtPropertyCallback.push_back(cb);
 }
 
-int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
 {
 	if (mtPropertyCallback.size() <= 0)
 	{
@@ -211,16 +211,22 @@ int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataL
 	TPROPERTYCALLBACKEX::iterator end = mtPropertyCallback.end();
 	for (it; it != end; ++it)
 	{
-		//NFIDataList����:��������OLD����ֵ��NEW����ֵ, ARG����(pKernel,self)
+		//NFIDataList参数:属性名，OLD属性值，NEW属性值, ARG参数(pKernel,self)
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
+		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar,broadcastToSelf);
 	}
 
 	return 0;
 }
 
 bool NFCProperty::SetInt(const NFINT64 value)
+{
+	//server default broadcastToSelf
+	return NFCProperty::SetInt(value, true);
+}
+
+bool NFCProperty::SetInt(const NFINT64 value, bool broadcastToSelf)
 {
 	if (eType != TDATA_INT)
 	{
@@ -229,7 +235,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
 
 	if (!mxData.get())
 	{
-		//�����ǿվ�����Ϊû���ݣ�������û���ݵľͲ�����
+		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (0 == value)
 		{
 			return false;
@@ -249,12 +255,17 @@ bool NFCProperty::SetInt(const NFINT64 value)
 
 	mxData->SetInt(value);
 
-	OnEventHandler(oldValue, *mxData);
+	OnEventHandler(oldValue, *mxData, broadcastToSelf);
 
 	return true;
 }
 
 bool NFCProperty::SetFloat(const double value)
+{
+	return NFCProperty::SetFloat(value, true);
+}
+
+bool NFCProperty::SetFloat(const double value, bool broadcastToSelf)
 {
 	if (eType != TDATA_FLOAT)
 	{
@@ -263,7 +274,7 @@ bool NFCProperty::SetFloat(const double value)
 
 	if (!mxData.get())
 	{
-		//�����ǿվ�����Ϊû���ݣ�������û���ݵľͲ�����
+		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (IsZeroDouble(value))
 		{
 			return false;
@@ -283,12 +294,17 @@ bool NFCProperty::SetFloat(const double value)
 
 	mxData->SetFloat(value);
 
-	OnEventHandler(oldValue, *mxData);
+	OnEventHandler(oldValue, *mxData, broadcastToSelf);
 
 	return true;
 }
 
 bool NFCProperty::SetString(const std::string& value)
+{
+	return NFCProperty::SetString(value, true);
+}
+
+bool NFCProperty::SetString(const std::string& value, bool broadcastToSelf)
 {
 	if (eType != TDATA_STRING)
 	{
@@ -297,7 +313,7 @@ bool NFCProperty::SetString(const std::string& value)
 
 	if (!mxData.get())
 	{
-		//�����ǿվ�����Ϊû���ݣ�������û���ݵľͲ�����
+		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.empty())
 		{
 			return false;
@@ -317,12 +333,17 @@ bool NFCProperty::SetString(const std::string& value)
 
 	mxData->SetString(value);
 
-	OnEventHandler(oldValue, *mxData);
+	OnEventHandler(oldValue, *mxData, broadcastToSelf);
 
 	return true;
 }
 
 bool NFCProperty::SetObject(const NFGUID& value)
+{
+	return NFCProperty::SetObject(value, true);
+}
+
+bool NFCProperty::SetObject(const NFGUID& value, bool broadcastToSelf)
 {
 	if (eType != TDATA_OBJECT)
 	{
@@ -331,7 +352,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 	if (!mxData.get())
 	{
-		//�����ǿվ�����Ϊû���ݣ�������û���ݵľͲ�����
+		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.IsNull())
 		{
 			return false;
@@ -351,7 +372,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 
 	mxData->SetObject(value);
 
-	OnEventHandler(oldValue, *mxData);
+	OnEventHandler(oldValue, *mxData, broadcastToSelf);
 
 	return true;
 }

@@ -50,7 +50,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::strin
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int HelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
@@ -58,7 +58,7 @@ int HelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::s
 	return 0;
 }
 
-int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int HelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
 {
 	//属性回调事件，只要属性值内容有变化，就会被回调
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetString() << " NewValue: " << newVar.GetString() << std::endl;
