@@ -3513,12 +3513,12 @@ class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 command_value_int() const;
   inline void set_command_value_int(::google::protobuf::int64 value);
 
-  // optional float command_value_float = 5;
+  // optional double command_value_float = 5;
   inline bool has_command_value_float() const;
   inline void clear_command_value_float();
   static const int kCommandValueFloatFieldNumber = 5;
-  inline float command_value_float() const;
-  inline void set_command_value_float(float value);
+  inline double command_value_float() const;
+  inline void set_command_value_float(double value);
 
   // optional bytes command_value_str = 6;
   inline bool has_command_value_str() const;
@@ -3580,12 +3580,12 @@ class LIBPROTOC_EXPORT ReqCommand : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* control_id_;
   ::std::string* command_str_value_;
-  int command_id_;
-  float command_value_float_;
   ::google::protobuf::int64 command_value_int_;
+  double command_value_float_;
+  int command_id_;
+  ::google::protobuf::int32 row_;
   ::std::string* command_value_str_;
   ::NFMsg::Ident* command_value_object_;
-  ::google::protobuf::int32 row_;
   ::google::protobuf::int32 col_;
 
   mutable int _cached_size_;
@@ -6958,7 +6958,7 @@ inline void ReqCommand::set_command_value_int(::google::protobuf::int64 value) {
   command_value_int_ = value;
 }
 
-// optional float command_value_float = 5;
+// optional double command_value_float = 5;
 inline bool ReqCommand::has_command_value_float() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -6972,10 +6972,10 @@ inline void ReqCommand::clear_command_value_float() {
   command_value_float_ = 0;
   clear_has_command_value_float();
 }
-inline float ReqCommand::command_value_float() const {
+inline double ReqCommand::command_value_float() const {
   return command_value_float_;
 }
-inline void ReqCommand::set_command_value_float(float value) {
+inline void ReqCommand::set_command_value_float(double value) {
   set_has_command_value_float();
   command_value_float_ = value;
 }
