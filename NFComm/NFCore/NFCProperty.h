@@ -33,6 +33,11 @@ public:
     virtual bool SetString(const std::string& value);
     virtual bool SetObject(const NFGUID& value);
 
+	virtual bool SetInt(const NFINT64 value, bool broadcastToSelf);
+	virtual bool SetFloat(const double value, bool broadcastToSelf);
+	virtual bool SetString(const std::string& value, bool broadcastToSelf);
+	virtual bool SetObject(const NFGUID& value, bool broadcastToSelf);
+
     virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
     virtual const std::string& GetKey() const;
@@ -68,7 +73,7 @@ public:
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
 private:
-    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf);
 
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;

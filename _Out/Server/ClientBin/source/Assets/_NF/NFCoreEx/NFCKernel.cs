@@ -633,13 +633,13 @@ namespace NFCoreEx
         }
 
 
-        static void OnPropertydHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar)
+        static void OnPropertydHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar, bool broadCastToSelf)
         {
             switch(oldVar.GetType(0))
             {
                 case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                     {
-                        if(xProperty.GetUpload())
+                        if(broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyInt xData = new NFMsg.ObjectPropertyInt();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
@@ -652,13 +652,13 @@ namespace NFCoreEx
                             MemoryStream stream = new MemoryStream();
                             Serializer.Serialize<NFMsg.ObjectPropertyInt>(stream, xData);
 
-                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_INT, stream);
+                            NFStart.Instance.GetFocusSender().SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_INT, stream);
                         }
                     }
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                     {
-                        if (xProperty.GetUpload())
+                        if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyFloat xData = new NFMsg.ObjectPropertyFloat();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
@@ -671,13 +671,13 @@ namespace NFCoreEx
                             MemoryStream stream = new MemoryStream();
                             Serializer.Serialize<NFMsg.ObjectPropertyFloat>(stream, xData);
 
-                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_DOUBLE, stream);
+                            NFStart.Instance.GetFocusSender().SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_DOUBLE, stream);
                         }
                     }
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                     {
-                        if (xProperty.GetUpload())
+                        if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyString xData = new NFMsg.ObjectPropertyString();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
@@ -690,13 +690,13 @@ namespace NFCoreEx
                             MemoryStream stream = new MemoryStream();
                             Serializer.Serialize<NFMsg.ObjectPropertyString>(stream, xData);
 
-                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, stream);
+                            NFStart.Instance.GetFocusSender().SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, stream);
                         }
                     }
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                     {
-                        if (xProperty.GetUpload())
+                        if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyObject xData = new NFMsg.ObjectPropertyObject();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
@@ -709,7 +709,7 @@ namespace NFCoreEx
                             MemoryStream stream = new MemoryStream();
                             Serializer.Serialize<NFMsg.ObjectPropertyObject>(stream, xData);
 
-                            NFStart.Instance.GetFocusSender().SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
+                            NFStart.Instance.GetFocusSender().SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
                         }
                     }
                     break;
