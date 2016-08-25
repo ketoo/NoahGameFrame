@@ -960,10 +960,10 @@ namespace NFMsg
       get { return _command_value_int; }
       set { _command_value_int = value; }
     }
-    private float _command_value_float = default(float);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"command_value_float", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
-    public float command_value_float
+    private double _command_value_float = default(double);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"command_value_float", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(double))]
+    public double command_value_float
     {
       get { return _command_value_float; }
       set { _command_value_float = value; }
@@ -1011,7 +1011,10 @@ namespace NFMsg
       EGCT_MODIY_ITEM = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGCT_CREATE_OBJECT", Value=2)]
-      EGCT_CREATE_OBJECT = 2
+      EGCT_CREATE_OBJECT = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGCT_ADD_ROLE_EXP", Value=3)]
+      EGCT_ADD_ROLE_EXP = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;

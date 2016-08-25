@@ -80,17 +80,18 @@ protected:
     void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+    ///////////WORLD_START///////////////////////////////////////////////////////////////
+    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
+
+protected:
 	void OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    ///////////WORLD_START///////////////////////////////////////////////////////////////
-    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
-	
 protected:
-    //ÍøÂçÍ¬²½
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);

@@ -235,7 +235,7 @@ message ReqCommand//GM√¸¡Ó
 	required EGameCommandType command_id = 2;
 	optional bytes command_str_value = 3;
 	optional int64 command_value_int = 4;
-	optional float command_value_float = 5;
+	optional double command_value_float = 5;
 	optional bytes command_value_str = 6;
 	optional Ident command_value_object = 7;
 	optional int32 row = 8;
