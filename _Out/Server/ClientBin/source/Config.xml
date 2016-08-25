@@ -4,5 +4,7 @@
 	<Servers>
 		<Server ID="1" IP = "127.0.0.1" Port="14001"/>
 	</Servers>
-    <ConfigPath Path="../../" />
+	<Evironment>
+		<DataPath ID="../../"/>
+	</Evironment>
 </XML>

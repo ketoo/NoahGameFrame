@@ -1,15 +1,20 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFCElement.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NFCoreEx
+namespace NFrame
 {
 	class NFCElement : NFIElement
 	{
         public NFCElement()
         {
-            mxPropertyManager = new NFCPropertyManager(new NFIDENTID());
+            mxPropertyManager = new NFCPropertyManager(new NFGUID());
         }
 
         public override NFIPropertyManager GetPropertyManager()
@@ -29,7 +34,7 @@ namespace NFCoreEx
             return 0;
         }
 
-        public override float QueryFloat(string strName)
+        public override double QueryFloat(string strName)
         {
             NFIProperty xProperty = GetPropertyManager().GetProperty(strName);
             if (null != xProperty)
@@ -37,18 +42,7 @@ namespace NFCoreEx
                 return xProperty.QueryFloat();
             }
 
-            return 0f;
-        }
-
-        public override double QueryDouble(string strName)
-        {
-            NFIProperty xProperty = GetPropertyManager().GetProperty(strName);
-            if (null != xProperty)
-            {
-                return xProperty.QueryDouble();
-            }
-
-            return 0f;
+            return 0.0;
         }
 
         public override string QueryString(string strName)
@@ -59,10 +53,10 @@ namespace NFCoreEx
                 return xProperty.QueryString();
             }
 
-            return "";
+            return NFIDataList.NULL_STRING;
         }
 
-        public override NFIDENTID QueryObject(string strName)
+        public override NFGUID QueryObject(string strName)
         {
             NFIProperty xProperty = GetPropertyManager().GetProperty(strName);
             if (null != xProperty)
@@ -70,7 +64,7 @@ namespace NFCoreEx
                 return xProperty.QueryObject();
             }
 
-            return new NFIDENTID();
+            return NFIDataList.NULL_OBJECT;
         }
 
         private NFIPropertyManager mxPropertyManager;

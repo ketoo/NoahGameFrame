@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFILogicClass.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +12,13 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.IO;
 
-namespace NFCoreEx
+namespace NFrame
 {
     public abstract class NFILogicClass
 	{
         public abstract NFIPropertyManager GetPropertyManager();
         public abstract NFIRecordManager GetRecordManager();
-        public abstract ArrayList GetConfigNameList();
+        public abstract List<string> GetConfigNameList();
         public abstract bool AddConfigName(string strConfigName);
 
         public abstract string GetName();
@@ -24,5 +29,8 @@ namespace NFCoreEx
 
         public abstract string GetInstance();
         public abstract void SetInstance(string strInstancePath);
-	}
+
+        public abstract void SetEncrypt(bool bEncrypt);
+        public abstract bool GetEncrypt();
+    }
 }
