@@ -1,13 +1,18 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFCEvent.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NFCoreEx
+namespace NFrame
 {
 	class NFCEvent : NFIEvent
 	{
-		public NFCEvent(NFIDENTID self, int nEventID, NFIDataList valueList)
+		public NFCEvent(NFGUID self, int nEventID, NFIDataList valueList)
 		{
 			mSelf = self;
 			mnEventID = nEventID;
@@ -28,7 +33,7 @@ namespace NFCoreEx
 		}
 
 
-		NFIDENTID mSelf;
+		NFGUID mSelf;
 		int mnEventID;
 		NFIDataList mArgValueList;
 

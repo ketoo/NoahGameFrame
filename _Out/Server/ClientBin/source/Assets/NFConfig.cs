@@ -1,4 +1,9 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFConfig.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,20 +72,6 @@ public class NFConfig
         return aWorldList;
     }
 
-    public String GetConfigPath()
-    {
-        if (null == mstrRootPath)
-        {
-            XmlNode node = root.SelectSingleNode("ConfigPath");
-            if (null != node)
-            {
-                mstrRootPath = node.Attributes["Path"].Value;
-            }
-        }
-
-        return mstrRootPath;
-    }
-
     public bool GetSelectServer(ref string strIP, ref int nPort)
     {
         ArrayList serverList = GetServerList();
@@ -98,5 +89,13 @@ public class NFConfig
         }
 
         return false;
+    }
+
+    public string GetDataPath()
+    {
+        XmlNode node = root.SelectSingleNode("Evironment");
+
+        XmlNode nodeDataPath = node.SelectSingleNode("DataPath");
+        return nodeDataPath.Attributes["ID"].Value;
     }
 }

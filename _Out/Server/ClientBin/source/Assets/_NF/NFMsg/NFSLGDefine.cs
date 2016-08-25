@@ -44,6 +44,13 @@ namespace NFMsg
       get { return _z; }
       set { _z = value; }
     }
+    private string _Shop_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"Shop_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string Shop_id
+    {
+      get { return _Shop_id; }
+      set { _Shop_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

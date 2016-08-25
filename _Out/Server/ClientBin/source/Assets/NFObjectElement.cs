@@ -1,12 +1,17 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFObjectElement.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using NFCoreEx;
+using NFrame;
 
 public class NFObjectElement
 {
 	
-	public NFIDENTID xTargetIdent = new NFIDENTID();
+	public NFGUID xTargetIdent = new NFGUID();
 	private string strTableName = "";
     private string strInfo = "";
     private string strCommand = "";
@@ -16,7 +21,7 @@ public class NFObjectElement
 	private Vector2 scrollPositionThird = Vector2.zero;
 	
 	GUIStyle buttonLeft;
-    public void OnGUI(NFIKernel kernel, int nHeight, int nWidth)
+    public void OnGUI(NFIKernelModule kernel, int nHeight, int nWidth)
 	{
 		if (buttonLeft == null)
 		{
@@ -49,7 +54,7 @@ public class NFObjectElement
 		//all object
 		for (int i = 0; i < objectList.Count(); i++)
 		{
-			NFIDENTID ident = objectList.ObjectVal(i);
+			NFGUID ident = objectList.ObjectVal(i);
 
             if (GUI.Button(new Rect(0, i * nElementHeight, nElementWidth, nElementHeight), ident.nHead64.ToString()  + "_" + ident.nData64.ToString()))
 			{
@@ -122,9 +127,6 @@ public class NFObjectElement
                 NFIDataList.VARIANT_TYPE eType = property.GetType();
                 switch (eType)
                 {
-                    case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
-                        strPropertyValue = property.QueryDouble().ToString();
-                        break;
                     case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                         strPropertyValue = property.QueryFloat().ToString();
                         break;
@@ -195,10 +197,6 @@ public class NFObjectElement
 									
 								case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
 									selString = record.QueryFloat(row, col).ToString();
-									break;
-									
-								case NFIDataList.VARIANT_TYPE.VTYPE_DOUBLE:
-									selString = record.QueryDouble(row, col).ToString();
 									break;
 									
 								case NFIDataList.VARIANT_TYPE.VTYPE_STRING:

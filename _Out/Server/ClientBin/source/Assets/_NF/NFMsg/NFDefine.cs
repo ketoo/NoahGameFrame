@@ -14,11 +14,11 @@ namespace NFMsg
     public enum EGameEventCode
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_UNKOWN_ERROR", Value=0)]
-      EGEC_UNKOWN_ERROR = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SUCCESS", Value=0)]
+      EGEC_SUCCESS = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_SUCCESS", Value=1)]
-      EGEC_SUCCESS = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_UNKOWN_ERROR", Value=1)]
+      EGEC_UNKOWN_ERROR = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACCOUNT_EXIST", Value=2)]
       EGEC_ACCOUNT_EXIST = 2,
@@ -319,9 +319,6 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_STRING", Value=212)]
       EGMI_ACK_PROPERTY_STRING = 212,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_DOUBLE", Value=213)]
-      EGMI_ACK_PROPERTY_DOUBLE = 213,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_OBJECT", Value=214)]
       EGMI_ACK_PROPERTY_OBJECT = 214,
             
@@ -339,9 +336,6 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_FLOAT", Value=224)]
       EGMI_ACK_RECORD_FLOAT = 224,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_DOUBLE", Value=225)]
-      EGMI_ACK_RECORD_DOUBLE = 225,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_STRING", Value=226)]
       EGMI_ACK_RECORD_STRING = 226,
@@ -424,6 +418,18 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=262)]
       EGMT_ACK_START_PVP = 262,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=280)]
+      EGMI_REQ_SEARCH_OPPNENT = 280,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=281)]
+      EGMI_ACK_SEARCH_OPPNENT = 281,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=282)]
+      EGMT_REQ_START_OPPNENT = 282,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=283)]
+      EGMT_ACK_START_OPPNENT = 283,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=290)]
       EGMI_ACK_ONLINE_NOTIFY = 290,
             
@@ -460,6 +466,216 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_GUILD", Value=309)]
       EGMI_ACK_SEARCH_GUILD = 309,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILDINFO", Value=310)]
+      EGMI_REQ_OPR_GUILDINFO = 310,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILDINFO", Value=311)]
+      EGMI_ACK_OPR_GUILDINFO = 311,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GUILDECTYPEINFO", Value=312)]
+      EGMI_REQ_GUILDECTYPEINFO = 312,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GUILDECTYPEINFO", Value=313)]
+      EGMI_ACK_GUILDECTYPEINFO = 313,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_SET_GUILDECTYPEINFO", Value=314)]
+      EGMI_SET_GUILDECTYPEINFO = 314,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ReqEnterGuildEctype", Value=315)]
+      EGMI_ReqEnterGuildEctype = 315,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=400)]
+      EGEC_REQ_CREATE_CHATGROUP = 400,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CREATE_CHATGROUP", Value=401)]
+      EGEC_ACK_CREATE_CHATGROUP = 401,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_JOIN_CHATGROUP", Value=402)]
+      EGEC_REQ_JOIN_CHATGROUP = 402,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_JOIN_CHATGROUP", Value=403)]
+      EGEC_ACK_JOIN_CHATGROUP = 403,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_LEAVE_CHATGROUP", Value=404)]
+      EGEC_REQ_LEAVE_CHATGROUP = 404,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_LEAVE_CHATGROUP", Value=405)]
+      EGEC_ACK_LEAVE_CHATGROUP = 405,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SUBSCRIPTION_CHATGROUP", Value=406)]
+      EGEC_REQ_SUBSCRIPTION_CHATGROUP = 406,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP", Value=407)]
+      EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP = 407,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INVITE_CHATGROUP", Value=408)]
+      EGEC_REQ_INVITE_CHATGROUP = 408,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INVITE_CHATGROUP", Value=409)]
+      EGEC_ACK_INVITE_CHATGROUP = 409,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_KICK_CHATGROUP", Value=410)]
+      EGEC_REQ_KICK_CHATGROUP = 410,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_KICK_CHATGROUP", Value=411)]
+      EGEC_ACK_KICK_CHATGROUP = 411,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CHATGROUP_TO_TEAM", Value=450)]
+      EGEC_REQ_CHATGROUP_TO_TEAM = 450,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CHATGROUP_TO_TEAM", Value=451)]
+      EGEC_ACK_CHATGROUP_TO_TEAM = 451,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP", Value=500)]
+      EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 500,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP", Value=501)]
+      EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_HOLE_TO_EQUIP", Value=502)]
+      EGEC_REQ_HOLE_TO_EQUIP = 502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_HOLE_TO_EQUIP", Value=503)]
+      EGEC_ACK_HOLE_TO_EQUIP = 503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INLAYSTONE_TO_EQUIP", Value=504)]
+      EGEC_REQ_INLAYSTONE_TO_EQUIP = 504,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INLAYSTONE_TO_EQUIP", Value=505)]
+      EGEC_ACK_INLAYSTONE_TO_EQUIP = 505,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_ELEMENTLEVEL_TO_EQUIP", Value=506)]
+      EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 506,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=507)]
+      EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 507,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=508)]
+      EGEC_REQ_SET_FIGHT_HERO = 508,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=509)]
+      EGEC_WEAR_EQUIP = 509,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=510)]
+      EGEC_TAKEOFF_EQUIP = 510,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=600)]
+      EGEC_REQ_MINING_TITLE = 600,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SEND_MAIL", Value=700)]
+      EGEC_REQ_SEND_MAIL = 700,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DRAW_MAIL", Value=701)]
+      EGEC_REQ_DRAW_MAIL = 701,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DELETE_MAIL", Value=702)]
+      EGEC_REQ_DELETE_MAIL = 702,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_ENTRY", Value=800)]
+      EGMI_ACK_CLONE_OBJECT_ENTRY = 800,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_LEAVE", Value=801)]
+      EGMI_ACK_CLONE_OBJECT_LEAVE = 801,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY", Value=802)]
+      EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY = 802,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY", Value=803)]
+      EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY = 803,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_INT", Value=810)]
+      EGMI_ACK_CLONE_PROPERTY_INT = 810,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_FLOAT", Value=811)]
+      EGMI_ACK_CLONE_PROPERTY_FLOAT = 811,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_STRING", Value=812)]
+      EGMI_ACK_CLONE_PROPERTY_STRING = 812,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_OBJECT", Value=814)]
+      EGMI_ACK_CLONE_PROPERTY_OBJECT = 814,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQSWICHSERVER", Value=840)]
+      EGMI_REQSWICHSERVER = 840,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACKSWICHSERVER", Value=841)]
+      EGMI_ACKSWICHSERVER = 841,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_TEAM", Value=860)]
+      EGMI_REQ_CREATE_TEAM = 860,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_TEAM", Value=861)]
+      EGMI_ACK_CREATE_TEAM = 861,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_TEAM", Value=862)]
+      EGMI_REQ_JOIN_TEAM = 862,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_TEAM", Value=863)]
+      EGMI_ACK_JOIN_TEAM = 863,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_TEAM", Value=864)]
+      EGMI_REQ_LEAVE_TEAM = 864,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_TEAM", Value=865)]
+      EGMI_ACK_LEAVE_TEAM = 865,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_INVITE_TEAM", Value=866)]
+      EGMI_REQ_INVITE_TEAM = 866,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPRMEMBER_TEAM", Value=867)]
+      EGMI_REQ_OPRMEMBER_TEAM = 867,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPRMEMBER_TEAM", Value=868)]
+      EGMI_ACK_OPRMEMBER_TEAM = 868,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_TEAM_ENTER_ECTYPE", Value=869)]
+      EGMI_REQ_TEAM_ENTER_ECTYPE = 869,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_TEAM_ENTER_ECTYPE", Value=870)]
+      EGMI_ACK_TEAM_ENTER_ECTYPE = 870,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_INFO", Value=900)]
+      EGMI_REQ_MAP_GRID_INFO = 900,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_INFO", Value=901)]
+      EGMI_ACK_MAP_GRID_INFO = 901,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_INFO", Value=902)]
+      EGMI_REQ_BIG_MAP_INFO = 902,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_INFO", Value=903)]
+      EGMI_ACK_BIG_MAP_INFO = 903,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_HOLD_MAP_GRID", Value=910)]
+      EGMI_REQ_HOLD_MAP_GRID = 910,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_HOLD_MAP_GRID", Value=911)]
+      EGMI_ACK_HOLD_MAP_GRID = 911,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_MSG_MAP_GRID", Value=912)]
+      EGMI_REQ_LEAVE_MSG_MAP_GRID = 912,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_MSG_MAP_GRID", Value=913)]
+      EGMI_ACK_LEAVE_MSG_MAP_GRID = 913,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GET_MAP_GRID_AWARD", Value=914)]
+      EGMI_REQ_GET_MAP_GRID_AWARD = 914,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GET_MAP_GRID_AWARD", Value=915)]
+      EGMI_ACK_GET_MAP_GRID_AWARD = 915,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_HUNTING", Value=916)]
+      EGMI_REQ_MAP_GRID_HUNTING = 916,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_HUNTING", Value=917)]
+      EGMI_ACK_MAP_GRID_HUNTING = 917,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_KING_WAR", Value=918)]
+      EGMI_REQ_MAP_GRID_KING_WAR = 918,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_KING_WAR", Value=919)]
+      EGMI_ACK_MAP_GRID_KING_WAR = 919,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
       EGMI_REQ_CMD_PROPERTY_INT = 1000,
             
@@ -484,6 +700,21 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_FLOAT", Value=1007)]
       EGMI_REQ_CMD_RECORD_FLOAT = 1007,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=1008)]
+      EGMI_REQ_CMD_NORMAL = 1008,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PVPAPPLYMACTCH", Value=1100)]
+      EGMI_REQ_PVPAPPLYMACTCH = 1100,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PVPAPPLYMACTCH", Value=1101)]
+      EGMI_ACK_PVPAPPLYMACTCH = 1101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATEPVPECTYPE", Value=1102)]
+      EGMI_REQ_CREATEPVPECTYPE = 1102,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=1103)]
+      EGMI_ACK_CREATEPVPECTYPE = 1103,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=10000)]
       EGMI_REQ_BUY_FORM_SHOP = 10000,
             
@@ -506,15 +737,164 @@ namespace NFMsg
       EGMI_REQ_BUILD_OPERATE = 10103
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EAwardType")]
-    public enum EAwardType
+    [global::ProtoBuf.ProtoContract(Name=@"EItemType")]
+    public enum EItemType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_NORMAL", Value=0)]
-      AWARD_TYPE_NORMAL = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_EQUIP", Value=0)]
+      EIT_EQUIP = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"AWARD_TYPE_HERO", Value=1)]
-      AWARD_TYPE_HERO = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_GEM", Value=1)]
+      EIT_GEM = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_ITEM", Value=2)]
+      EIT_ITEM = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_CARD", Value=3)]
+      EIT_CARD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EIT_TOKEN", Value=4)]
+      EIT_TOKEN = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameEquipSubType")]
+    public enum EGameEquipSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_WEAPON", Value=0)]
+      EQUIPTYPE_WEAPON = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_HELMET", Value=1)]
+      EQUIPTYPE_HELMET = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_ARMOR", Value=2)]
+      EQUIPTYPE_ARMOR = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_WRIST", Value=3)]
+      EQUIPTYPE_WRIST = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_PANT", Value=4)]
+      EQUIPTYPE_PANT = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EQUIPTYPE_BOOT", Value=5)]
+      EQUIPTYPE_BOOT = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameGemSubType")]
+    public enum EGameGemSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_ATK", Value=0)]
+      EGGSTYPE_GEM_ATK = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_DEF", Value=1)]
+      EGGSTYPE_GEM_DEF = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_FIRE", Value=3)]
+      EGGSTYPE_GEM_FIRE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_LIGHT", Value=4)]
+      EGGSTYPE_GEM_LIGHT = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_WIND", Value=5)]
+      EGGSTYPE_GEM_WIND = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_ICE", Value=6)]
+      EGGSTYPE_GEM_ICE = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGGSTYPE_GEM_POISON", Value=7)]
+      EGGSTYPE_GEM_POISON = 7
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameItemSubType")]
+    public enum EGameItemSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_WATER", Value=0)]
+      EGIT_ITEM_WATER = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_DIAMOND", Value=1)]
+      EGIT_ITEM_DIAMOND = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_CURRENCY", Value=2)]
+      EGIT_ITEM_CURRENCY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_EXP", Value=3)]
+      EGIT_ITEM_EXP = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_HP", Value=4)]
+      EGIT_ITEM_HP = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_MP", Value=5)]
+      EGIT_ITEM_MP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_SP", Value=6)]
+      EGIT_ITEM_SP = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PACK", Value=7)]
+      EGIT_ITEM_PACK = 7
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameCardSubType")]
+    public enum EGameCardSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGCST_STRENGTH", Value=1)]
+      EGCST_STRENGTH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGCST_AGILITY", Value=2)]
+      EGCST_AGILITY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGCST_INTELLIGENCE", Value=3)]
+      EGCST_INTELLIGENCE = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameTokenSubType")]
+    public enum EGameTokenSubType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_REBORN", Value=0)]
+      EGTST_TOKEN_REBORN = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_POSITION", Value=1)]
+      EGTST_TOKEN_POSITION = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_BOUNTY", Value=2)]
+      EGTST_TOKEN_BOUNTY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_ACTIVITY", Value=3)]
+      EGTST_TOKEN_ACTIVITY = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameItemExpiredType")]
+    public enum EGameItemExpiredType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_NONE", Value=0)]
+      EGIET_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_USE_TIMES", Value=1)]
+      EGIET_USE_TIMES = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_REAL_TIME", Value=2)]
+      EGIET_REAL_TIME = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIET_END_INDEX", Value=3)]
+      EGIET_END_INDEX = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EDrawDropItemState")]
+    public enum EDrawDropItemState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_NONE", Value=0)]
+      E_DRAW_STATE_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_GAIN", Value=1)]
+      E_DRAW_STATE_GAIN = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"E_DRAW_STATE_RECV", Value=2)]
+      E_DRAW_STATE_RECV = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGuildPowerType")]
@@ -581,6 +961,114 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"TASK_KILL_SOME_MONSTER_COUNT", Value=9)]
       TASK_KILL_SOME_MONSTER_COUNT = 9
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EBattleType")]
+    public enum EBattleType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_SINGLE", Value=0)]
+      BATTLE_SINGLE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_PVE_TEAM", Value=1)]
+      BATTLE_PVE_TEAM = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EShopType")]
+    public enum EShopType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BUILDING", Value=1)]
+      EST_BUILDING = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GOLD", Value=2)]
+      EST_GOLD = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_DIAMOND", Value=3)]
+      EST_DIAMOND = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_SP", Value=4)]
+      EST_SP = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_EQUIP", Value=5)]
+      EST_EQUIP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_GEM", Value=6)]
+      EST_GEM = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_Hero", Value=7)]
+      EST_Hero = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_Other", Value=8)]
+      EST_Other = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ERankType")]
+    public enum ERankType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_PLAYER_LEVEL", Value=1)]
+      ERT_PLAYER_LEVEL = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_FIGHT_VALUE", Value=2)]
+      ERT_FIGHT_VALUE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_PLAYER_MONEY", Value=3)]
+      ERT_PLAYER_MONEY = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_GUILD_LEVEL", Value=4)]
+      ERT_GUILD_LEVEL = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERT_GUILD_KINGSOURCE", Value=5)]
+      ERT_GUILD_KINGSOURCE = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ENPCType")]
+    public enum ENPCType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_NORMAL", Value=0)]
+      ENPCTYPE_NORMAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_HERO", Value=1)]
+      ENPCTYPE_HERO = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ENPCTYPE_TURRET", Value=2)]
+      ENPCTYPE_TURRET = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EPropertyType")]
+    public enum EPropertyType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EPT_STRENGTH", Value=1)]
+      EPT_STRENGTH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EPT_AGILITY", Value=2)]
+      EPT_AGILITY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EPT_INTELLIGENCE", Value=3)]
+      EPT_INTELLIGENCE = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGameElementType")]
+    public enum EGameElementType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_FIRE", Value=0)]
+      EELEMENTTYPE_FIRE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_LIGHT", Value=1)]
+      EELEMENTTYPE_LIGHT = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_WIND", Value=2)]
+      EELEMENTTYPE_WIND = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_ICE", Value=3)]
+      EELEMENTTYPE_ICE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EELEMENTTYPE_POISON", Value=4)]
+      EELEMENTTYPE_POISON = 4
     }
   
 }

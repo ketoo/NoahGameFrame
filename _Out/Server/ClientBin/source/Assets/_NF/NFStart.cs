@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFStart.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
 using NFTCPClient;
@@ -10,7 +15,7 @@ using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using NFCoreEx;
+using NFrame;
 using NFMsg;
 using ProtoBuf;
 
@@ -82,20 +87,22 @@ public class NFStart : MonoBehaviour
             }
         }
 
+        mConfig = new NFConfig();
+        mConfig.Load();
+        mConfig.GetSelectServer(ref strTargetIP, ref nPort);
 
+        NFCKernelModule.Instance.GetLogicClassModule().SetDataPath(mConfig.GetDataPath());
+
+        NFCKernelModule.Instance.Init();
     }
 
     // Use this for initialization
     void Start()
     {
-        mConfig = new NFConfig();
-        mConfig.Load();
-        mConfig.GetSelectServer(ref strTargetIP, ref nPort);
-        String strConfigPath = mConfig.GetConfigPath();
 
-        NFCElementManager.Instance.Load(strConfigPath);
+
+        NFCKernelModule.Instance.AfterInit();
         NFCRenderInterface.Instance.Init();
-
     }
 
     void OnDestroy()

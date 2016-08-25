@@ -12,7 +12,7 @@ using ProtoBuf;
 using UnityEngine;
 using NFTCPClient;
 using NFMsg;
-using NFCoreEx;
+using NFrame;
 
 class StructureTransform
 {
@@ -184,7 +184,7 @@ public class NFBinarySendLogic
 {
     NFNet xNet;
 
-    static public NFMsg.Ident NFToPB(NFCoreEx.NFIDENTID xID)
+    static public NFMsg.Ident NFToPB(NFrame.NFGUID xID)
     {
         NFMsg.Ident xIdent = new NFMsg.Ident();
         xIdent.svrid = xID.nHead64;
@@ -199,7 +199,7 @@ public class NFBinarySendLogic
         xNet = clientnet;
     }
 
-    public void SendMsg(NFCoreEx.NFIDENTID xID, NFMsg.EGameMsgID unMsgID, MemoryStream stream)
+    public void SendMsg(NFrame.NFGUID xID, NFMsg.EGameMsgID unMsgID, MemoryStream stream)
     {
         if (NFStart.Instance.bDebugMode)
         {
@@ -257,7 +257,7 @@ public class NFBinarySendLogic
             MemoryStream stream = new MemoryStream();
             Serializer.Serialize<NFMsg.ReqAccountLogin>(stream, xData);
 
-            SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_LOGIN, stream);
+            SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_LOGIN, stream);
         }
     }
 
@@ -269,7 +269,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
     public void RequireConnectWorld(int nWorldID)
@@ -280,7 +280,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqConnectWorld>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_CONNECT_WORLD, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_CONNECT_WORLD, stream);
     }
 
     public void RequireVerifyWorldKey(string strAccount, string strKey)
@@ -300,7 +300,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqAccountLogin>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_CONNECT_KEY, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_CONNECT_KEY, stream);
     }
 
     public void RequireServerList()
@@ -311,7 +311,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqServerList>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_WORLD_LIST, stream);
     }
 
     public void RequireSelectServer(int nServerID)
@@ -322,7 +322,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqSelectServer>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_SELECT_SERVER, stream);
     }
 
     public void RequireRoleList(string strAccount, int nGameID)
@@ -334,7 +334,7 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqRoleList>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_ROLE_LIST, stream);
     }
 
     public void RequireCreateRole(string strAccount, string strRoleName, int byCareer, int bySex, int nGameID)
@@ -355,11 +355,11 @@ public class NFBinarySendLogic
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ReqCreateRole>(stream, xData);
 
-        SendMsg(new NFCoreEx.NFIDENTID(), NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
+        SendMsg(new NFrame.NFGUID(), NFMsg.EGameMsgID.EGMI_REQ_CREATE_ROLE, stream);
 
     }
 
-    public void RequireDelRole(NFCoreEx.NFIDENTID objectID, string strAccount, string strRoleName, int nGameID)
+    public void RequireDelRole(NFrame.NFGUID objectID, string strAccount, string strRoleName, int nGameID)
     {
         NFMsg.ReqDeleteRole xData = new NFMsg.ReqDeleteRole();
         xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);
@@ -372,7 +372,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_DELETE_ROLE, stream);
     }
 
-    public void RequireEnterGameServer(NFCoreEx.NFIDENTID objectID, string strAccount, string strRoleName, int nServerID)
+    public void RequireEnterGameServer(NFrame.NFGUID objectID, string strAccount, string strRoleName, int nServerID)
     {
         NFMsg.ReqEnterGameServer xData = new NFMsg.ReqEnterGameServer();
         xData.name = UnicodeEncoding.Default.GetBytes(strRoleName);
@@ -386,7 +386,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_ENTER_GAME, stream);
     }
 
-    public void RequireHeartBeat(NFCoreEx.NFIDENTID objectID)
+    public void RequireHeartBeat(NFrame.NFGUID objectID)
     {
         NFMsg.ReqHeartBeat xData = new NFMsg.ReqHeartBeat();
 
@@ -397,7 +397,7 @@ public class NFBinarySendLogic
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireMove(NFCoreEx.NFIDENTID objectID, float fX, float fZ)
+    public void RequireMove(NFrame.NFGUID objectID, float fX, float fZ)
     {
         NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
         xData.mover = NFToPB(objectID);
@@ -414,7 +414,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_MOVE, stream);
     }
 
-    public void RequireMoveImmune(NFCoreEx.NFIDENTID objectID, float fX, float fZ)
+    public void RequireMoveImmune(NFrame.NFGUID objectID, float fX, float fZ)
     {
         NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
         xData.mover = NFToPB(objectID);
@@ -431,7 +431,7 @@ public class NFBinarySendLogic
     }
 
     //有可能是他副本的NPC移动,因此增加64对象ID
-    public void RequireUseSkill(NFCoreEx.NFIDENTID objectID, string strKillID, NFCoreEx.NFIDENTID nTargetID, float fNowX, float fNowZ, float fTarX, float fTarZ)
+    public void RequireUseSkill(NFrame.NFGUID objectID, string strKillID, NFrame.NFGUID nTargetID, float fNowX, float fNowZ, float fTarX, float fTarZ)
     {
         NFMsg.Position xNowPos = new NFMsg.Position();
         NFMsg.Position xTarPos = new NFMsg.Position();
@@ -463,7 +463,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_SKILL_OBJECTX, stream);
     }
 
-    public void RequireChat(NFCoreEx.NFIDENTID objectID, NFCoreEx.NFIDENTID targetID, int nType, string strData)
+    public void RequireChat(NFrame.NFGUID objectID, NFrame.NFGUID targetID, int nType, string strData)
     {
         NFMsg.ReqAckPlayerChat xData = new NFMsg.ReqAckPlayerChat();
         xData.chat_id = NFToPB(targetID);
@@ -477,7 +477,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_CHAT, stream);
     }
 
-    public void RequireSwapScene(NFCoreEx.NFIDENTID objectID, int nTransferType, int nSceneID, int nLineIndex)
+    public void RequireSwapScene(NFrame.NFGUID objectID, int nTransferType, int nSceneID, int nLineIndex)
     {
         NFMsg.ReqAckSwapScene xData = new NFMsg.ReqAckSwapScene();
         xData.transfer_type = (NFMsg.ReqAckSwapScene.EGameSwapType)nTransferType;
@@ -491,7 +491,7 @@ public class NFBinarySendLogic
     }
 
 
-    public void RequireAcceptTask(NFCoreEx.NFIDENTID objectID, string strTaskID)
+    public void RequireAcceptTask(NFrame.NFGUID objectID, string strTaskID)
     {
         NFMsg.ReqAcceptTask xData = new NFMsg.ReqAcceptTask();
         xData.task_id = UnicodeEncoding.Default.GetBytes(strTaskID);
@@ -502,7 +502,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_ACCEPT_TASK, stream);
     }
 
-    public void RequireCompeleteTask(NFCoreEx.NFIDENTID objectID, string strTaskID)
+    public void RequireCompeleteTask(NFrame.NFGUID objectID, string strTaskID)
     {
         NFMsg.ReqCompeleteTask xData = new NFMsg.ReqCompeleteTask();
         xData.task_id = UnicodeEncoding.Default.GetBytes(strTaskID);
@@ -513,7 +513,7 @@ public class NFBinarySendLogic
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_COMPELETE_TASK, stream);
     }
 
-    public void RequirePickUpItem(NFCoreEx.NFIDENTID objectID, NFCoreEx.NFIDENTID nItemID)
+    public void RequirePickUpItem(NFrame.NFGUID objectID, NFrame.NFGUID nItemID)
     {
         NFMsg.ReqPickDropItem xData = new NFMsg.ReqPickDropItem();
         xData.item_guid = NFToPB(nItemID);

@@ -1,16 +1,19 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFCDataList.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace NFCoreEx
+namespace NFrame
 {
     public class NFCDataList : NFIDataList
     {
-
-
-        private Dictionary<int, Var_Data> mValueObject = new Dictionary<int, Var_Data>();
+        private Dictionary<int, TData> mValueObject = new Dictionary<int, TData>();
 
         //==============================================
 
@@ -35,9 +38,6 @@ namespace NFCoreEx
 					case VARIANT_TYPE.VTYPE_FLOAT:
 						AddFloat(src.FloatVal(i));
 					break;
-					case VARIANT_TYPE.VTYPE_DOUBLE:
-						AddDouble(src.DoubleVal(i));
-					break;
 					case VARIANT_TYPE.VTYPE_STRING:
 						AddString(src.StringVal(i));
 					break;
@@ -57,55 +57,42 @@ namespace NFCoreEx
 
         public override bool AddInt(Int64 value)
         {
-            Var_Data data = new Var_Data();
-            data.nType = VARIANT_TYPE.VTYPE_INT;
-            data.mData = value;
+            TData data = new TData(VARIANT_TYPE.VTYPE_INT);
+            data.Set(value);
 
 			return AddDataObject(ref data);
         }
 
-        public override bool AddFloat(float value)
+        public override bool AddFloat(double value)
         {
-            Var_Data data = new Var_Data();
-            data.nType = VARIANT_TYPE.VTYPE_FLOAT;
-            data.mData = value;
+            TData data = new TData(VARIANT_TYPE.VTYPE_FLOAT);
+            data.Set(value);
 
 			return AddDataObject(ref data);
-        }
-
-        public override bool AddDouble(double value)
-        {
-            Var_Data data = new Var_Data();
-            data.nType = VARIANT_TYPE.VTYPE_DOUBLE;
-            data.mData = value;
-
-            return AddDataObject(ref data);
         }
 
         public override bool AddString(string value)
         {
-            Var_Data data = new Var_Data();
-            data.nType = VARIANT_TYPE.VTYPE_STRING;
-            data.mData = value;
+            TData data = new TData(VARIANT_TYPE.VTYPE_STRING);
+            data.Set(value);
 
             return AddDataObject(ref data);
         }
 
-        public override bool AddObject(NFIDENTID value)
+        public override bool AddObject(NFGUID value)
         {
-            Var_Data data = new Var_Data();
-            data.nType = VARIANT_TYPE.VTYPE_OBJECT;
-            data.mData = value;
+            TData data = new TData(VARIANT_TYPE.VTYPE_OBJECT);
+            data.Set(value);
 
 			return AddDataObject(ref data);
         }
 
         public override bool SetInt(int index, Int64 value)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_INT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_INT)
             {
-                data.mData = value;
+                data.Set(value);
 
                 return true;
             }
@@ -113,25 +100,12 @@ namespace NFCoreEx
             return false;
         }
 
-        public override bool SetFloat(int index, float value)
+        public override bool SetFloat(int index, double value)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_FLOAT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_FLOAT)
             {
-                data.mData = value;
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public override bool SetDouble(int index, double value)
-        {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_DOUBLE)
-            {
-                data.mData = value;
+                data.Set(value);
 
                 return true;
             }
@@ -141,10 +115,10 @@ namespace NFCoreEx
 
         public override bool SetString(int index, string value)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_STRING)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_STRING)
             {
-                data.mData = value;
+                data.Set(value);
 
                 return true;
             }
@@ -152,12 +126,12 @@ namespace NFCoreEx
             return false;
         }
 
-        public override bool SetObject(int index, NFIDENTID value)
+        public override bool SetObject(int index, NFGUID value)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_OBJECT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_OBJECT)
             {
-                data.mData = value;
+                data.Set(value);
 
                 return true;
             }
@@ -167,57 +141,46 @@ namespace NFCoreEx
 
         public override Int64 IntVal(int index)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_INT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_INT)
             {
-                return (Int64)data.mData;
+                return data.IntVal();
             }
 
-            return 0;
+            return NFIDataList.NULL_INT;
         }
 
-        public override float FloatVal(int index)
+        public override double FloatVal(int index)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_FLOAT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_FLOAT)
             {
-                return (float)data.mData;
+                return (double)data.FloatVal();
             }
 
-            return 0.0f;
-        }
-
-        public override double DoubleVal(int index)
-        {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_DOUBLE)
-            {
-                return (double)data.mData;
-            }
-
-            return 0.0;
+            return (float)NFIDataList.NULL_DOUBLE;
         }
 
         public override string StringVal(int index)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_STRING)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_STRING)
             {
-                return (string)data.mData;
+                return data.StringVal();
             }
 
-            return "";
+            return NFIDataList.NULL_STRING;
         }
 
-        public override NFIDENTID ObjectVal(int index)
+        public override NFGUID ObjectVal(int index)
         {
-            Var_Data data = GetDataObject(index);
-            if (data != null && data.nType == VARIANT_TYPE.VTYPE_OBJECT)
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_OBJECT)
             {
-                return (NFIDENTID)data.mData;
+                return data.ObjectVal();
             }
 
-            return new NFIDENTID();
+            return NFIDataList.NULL_OBJECT;
         }
 
 		public override int Count()
@@ -234,7 +197,7 @@ namespace NFCoreEx
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-        protected bool AddDataObject(ref Var_Data data)
+        protected bool AddDataObject(ref TData data)
         {
             int nCount = mValueObject.Count;
             mValueObject.Add(nCount, data);
@@ -246,25 +209,22 @@ namespace NFCoreEx
         {
 			if (mValueObject.Count > index)
 			{
-				Var_Data data = (Var_Data)mValueObject[index];
+				TData data = (TData)mValueObject[index];
 
-				return data.nType;
+				return data.GetType();
 			}
 
 			return VARIANT_TYPE.VTYPE_UNKNOWN;
         }
 
-        protected Var_Data GetDataObject(int index)
+        public override TData GetData(int index)
         {
-
             if (mValueObject.ContainsKey(index))
             {
-                return (Var_Data)mValueObject[index];
+                return (TData)mValueObject[index];
             }
 
             return null;
         }
-
-
     }
 }

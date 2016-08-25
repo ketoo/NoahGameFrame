@@ -1,10 +1,15 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFIRecordManager.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace NFCoreEx
+namespace NFrame
 {
     public abstract class NFIRecordManager
     {
