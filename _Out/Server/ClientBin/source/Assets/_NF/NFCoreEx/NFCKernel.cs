@@ -633,19 +633,19 @@ namespace NFCoreEx
         }
 
 
-        static void OnPropertydHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar, bool broadCastToSelf)
+        static void OnPropertydHandler(NFIDENTID self, string strPropertyName, NFIDataList oldVar, NFIDataList newVar)
         {
             switch(oldVar.GetType(0))
             {
                 case NFIDataList.VARIANT_TYPE.VTYPE_INT:
                     {
-                        if(broadCastToSelf && xProperty.GetUpload())
+                        //if(broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyInt xData = new NFMsg.ObjectPropertyInt();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
 
                             NFMsg.PropertyInt xPropertyInt = new NFMsg.PropertyInt();
-                            xPropertyInt.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyInt.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
                             xPropertyInt.data = newVar.IntVal(0);
                             xData.property_list.Add(xPropertyInt);
 
@@ -658,13 +658,13 @@ namespace NFCoreEx
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                     {
-                        if (broadCastToSelf && xProperty.GetUpload())
+                        //if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyFloat xData = new NFMsg.ObjectPropertyFloat();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
 
                             NFMsg.PropertyFloat xPropertyFloat = new NFMsg.PropertyFloat();
-                            xPropertyFloat.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyFloat.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
                             xPropertyFloat.data = newVar.FloatVal(0);
                             xData.property_list.Add(xPropertyFloat);
 
@@ -677,13 +677,13 @@ namespace NFCoreEx
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                     {
-                        if (broadCastToSelf && xProperty.GetUpload())
+                        //if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyString xData = new NFMsg.ObjectPropertyString();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
 
                             NFMsg.PropertyString xPropertyString = new NFMsg.PropertyString();
-                            xPropertyString.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyString.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
                             xPropertyString.data = System.Text.Encoding.Default.GetBytes(newVar.StringVal(0));
                             xData.property_list.Add(xPropertyString);
 
@@ -696,13 +696,13 @@ namespace NFCoreEx
                     break;
                 case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                     {
-                        if (broadCastToSelf && xProperty.GetUpload())
+                        //if (broadCastToSelf && xProperty.GetUpload())
                         {
                             NFMsg.ObjectPropertyObject xData = new NFMsg.ObjectPropertyObject();
                             xData.player_id = NFBinarySendLogic.NFToPB(self);
 
                             NFMsg.PropertyObject xPropertyObject = new NFMsg.PropertyObject();
-                            xPropertyObject.property_name = System.Text.Encoding.Default.GetBytes(xProperty.GetKey());
+                            xPropertyObject.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
                             xPropertyObject.data = NFBinarySendLogic.NFToPB(newVar.ObjectVal(0));
                             xData.property_list.Add(xPropertyObject);
 
