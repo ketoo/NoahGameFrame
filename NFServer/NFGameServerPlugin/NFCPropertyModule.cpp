@@ -115,7 +115,7 @@ int NFCPropertyModule::SubPropertyValue(const NFGUID& self, const std::string& s
     return 0;
 }
 
-int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
+int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     RefreshBaseProperty(self);
 

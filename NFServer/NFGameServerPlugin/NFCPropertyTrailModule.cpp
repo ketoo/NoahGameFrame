@@ -105,7 +105,7 @@ int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
     return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
+int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     std::ostringstream stream;
 

@@ -72,7 +72,7 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 	NFCDataList::TData newValue;
 	newValue = *mxData;
 
-	OnEventHandler(oldValue, newValue, true);
+	OnEventHandler(oldValue, newValue);
 }
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
@@ -200,7 +200,7 @@ void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 	mtPropertyCallback.push_back(cb);
 }
 
-int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
+int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	if (mtPropertyCallback.size() <= 0)
 	{
@@ -214,19 +214,13 @@ int NFCProperty::OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataL
 		//NFIDataList参数:属性名，OLD属性值，NEW属性值, ARG参数(pKernel,self)
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar,broadcastToSelf);
+		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
 	}
 
 	return 0;
 }
 
 bool NFCProperty::SetInt(const NFINT64 value)
-{
-	//server default broadcastToSelf
-	return NFCProperty::SetInt(value, true);
-}
-
-bool NFCProperty::SetInt(const NFINT64 value, bool broadcastToSelf)
 {
 	if (eType != TDATA_INT)
 	{
@@ -255,17 +249,12 @@ bool NFCProperty::SetInt(const NFINT64 value, bool broadcastToSelf)
 
 	mxData->SetInt(value);
 
-	OnEventHandler(oldValue, *mxData, broadcastToSelf);
+	OnEventHandler(oldValue, *mxData);
 
 	return true;
 }
 
 bool NFCProperty::SetFloat(const double value)
-{
-	return NFCProperty::SetFloat(value, true);
-}
-
-bool NFCProperty::SetFloat(const double value, bool broadcastToSelf)
 {
 	if (eType != TDATA_FLOAT)
 	{
@@ -294,17 +283,12 @@ bool NFCProperty::SetFloat(const double value, bool broadcastToSelf)
 
 	mxData->SetFloat(value);
 
-	OnEventHandler(oldValue, *mxData, broadcastToSelf);
+	OnEventHandler(oldValue, *mxData);
 
 	return true;
 }
 
 bool NFCProperty::SetString(const std::string& value)
-{
-	return NFCProperty::SetString(value, true);
-}
-
-bool NFCProperty::SetString(const std::string& value, bool broadcastToSelf)
 {
 	if (eType != TDATA_STRING)
 	{
@@ -333,17 +317,12 @@ bool NFCProperty::SetString(const std::string& value, bool broadcastToSelf)
 
 	mxData->SetString(value);
 
-	OnEventHandler(oldValue, *mxData, broadcastToSelf);
+	OnEventHandler(oldValue, *mxData);
 
 	return true;
 }
 
 bool NFCProperty::SetObject(const NFGUID& value)
-{
-	return NFCProperty::SetObject(value, true);
-}
-
-bool NFCProperty::SetObject(const NFGUID& value, bool broadcastToSelf)
 {
 	if (eType != TDATA_OBJECT)
 	{
@@ -372,7 +351,7 @@ bool NFCProperty::SetObject(const NFGUID& value, bool broadcastToSelf)
 
 	mxData->SetObject(value);
 
-	OnEventHandler(oldValue, *mxData, broadcastToSelf);
+	OnEventHandler(oldValue, *mxData);
 
 	return true;
 }
