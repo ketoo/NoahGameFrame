@@ -203,6 +203,14 @@ namespace NFMsg
       get { return _extra_info; }
       set { _extra_info = value; }
     }
+    private int _platform_type = default(int);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"platform_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int platform_type
+    {
+      get { return _platform_type; }
+      set { _platform_type = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
