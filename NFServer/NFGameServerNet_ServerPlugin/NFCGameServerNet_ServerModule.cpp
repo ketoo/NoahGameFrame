@@ -625,7 +625,7 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave(const NFIDataList& self, co
 	return 1;
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
+int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
 	//if ( NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
 	{
@@ -682,10 +682,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, con
 		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
 		{
 			NFGUID identOld = valueBroadCaseList.Object(i);
-			if (!broadcastToSelf && self == identOld)
-			{
-				continue;
-			}
+
 			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
 		}
 	}
@@ -704,10 +701,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, con
 		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
 		{
 			NFGUID identOld = valueBroadCaseList.Object(i);
-			if (!broadcastToSelf && self == identOld)
-			{
-				continue;
-			}
+
 			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat, identOld);
 		}
 	}
@@ -726,10 +720,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, con
 		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
 		{
 			NFGUID identOld = valueBroadCaseList.Object(i);
-			if (!broadcastToSelf && self == identOld)
-			{
-				continue;
-			}
+
 			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
 		}
 	}
@@ -748,10 +739,7 @@ int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, con
 		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
 		{
 			NFGUID identOld = valueBroadCaseList.Object(i);
-			if (!broadcastToSelf && self == identOld)
-			{
-				continue;
-			}
+
 			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
 		}
 	}
@@ -1540,7 +1528,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIn
 			if (pProperty->GetUpload())
 			{
 				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Upload From Client", "int set", __FUNCTION__, __LINE__);
-				pProperty->SetInt(xPropertyInt.data(),false);//no broadcastToSelf
+				pProperty->SetInt(xPropertyInt.data());
 			}
 		}
 	}
@@ -1560,7 +1548,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyFloatProcess(const int nSock
 			if (pProperty->GetUpload())
 			{
 				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "float set", __FUNCTION__, __LINE__);
-				pProperty->SetFloat(xPropertyFloat.data(), false);//no broadcastToSelf
+				pProperty->SetFloat(xPropertyFloat.data());
 			}
 		}
 	}
@@ -1580,7 +1568,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyStringProcess(const int nSoc
 			if (pProperty->GetUpload())
 			{
 				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "string set", __FUNCTION__, __LINE__);
-				pProperty->SetString(xPropertyString.data(), false);//no broadcastToSelf
+				pProperty->SetString(xPropertyString.data());
 			}
 		}
 	}
@@ -1600,7 +1588,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSoc
 			if (pProperty->GetUpload())
 			{
 				//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Test", "object set", __FUNCTION__, __LINE__);
-				pProperty->SetObject(NFINetModule::PBToNF(xPropertyObject.data()), false);//no broadcastToSelf
+				pProperty->SetObject(NFINetModule::PBToNF(xPropertyObject.data()));
 			}
 		}
 	}
