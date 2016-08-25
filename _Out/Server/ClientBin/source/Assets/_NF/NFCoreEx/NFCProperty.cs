@@ -71,12 +71,6 @@ namespace NFCoreEx
         }
 
         public override bool SetInt(Int64 value)
-        {
-            //client default not broadcastToSelf
-            return SetInt(value, false);
-        }
-
-        public override bool SetInt(Int64 value, bool broadCastToSelf)
 		{
 			if (mVarProperty.IntVal(0) != value)
 			{
@@ -88,7 +82,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, this, oldValue, newValue, broadCastToSelf);
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
                 }
 				
 			}
@@ -97,11 +91,6 @@ namespace NFCoreEx
 		}
 
         public override bool SetFloat(float value)
-        {
-            return SetFloat(value, false);
-        }
-
-        public override bool SetFloat(float value, bool broadCastToSelf)
 		{
 			if (mVarProperty.FloatVal(0) - value > 0.01f
 				|| mVarProperty.FloatVal(0) - value < -0.01f)
@@ -114,7 +103,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, this, oldValue, newValue, broadCastToSelf);
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
                 }
 			}
 
@@ -122,11 +111,6 @@ namespace NFCoreEx
 		}
 
         public override bool SetDouble(double value)
-        {
-            return SetDouble(value, false);
-        }
-
-        public override bool SetDouble(double value, bool broadCastToSelf)
 		{
             if (mVarProperty.DoubleVal(0) - value > 0.01f
                 || mVarProperty.DoubleVal(0) - value < -0.01f)
@@ -139,7 +123,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, this, oldValue, newValue, broadCastToSelf);
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
                 }
             }
 
@@ -147,11 +131,6 @@ namespace NFCoreEx
 		}
 
         public override bool SetString(string value)
-        {
-            return SetString(value, false);
-        }
-
-        public override bool SetString(string value, bool broadCastToSelf)
 		{
             if (mVarProperty.StringVal(0) != value)
             {
@@ -163,7 +142,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, this, oldValue, newValue, broadCastToSelf);
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
                 }
             }
 
@@ -171,11 +150,6 @@ namespace NFCoreEx
 		}
 
         public override bool SetObject(NFIDENTID value)
-        {
-            return SetObject(value, false);
-        }
-
-        public override bool SetObject(NFIDENTID value, bool broadCastToSelf)
 		{
 
             if (mVarProperty.ObjectVal(0) != value)
@@ -188,7 +162,7 @@ namespace NFCoreEx
 
                 if (null != doHandleDel)
                 {
-                    doHandleDel(mSelf, this, oldValue, newValue, broadCastToSelf);
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
                 }
             }
 
