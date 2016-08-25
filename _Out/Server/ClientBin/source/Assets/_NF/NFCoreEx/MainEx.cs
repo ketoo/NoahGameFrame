@@ -1,15 +1,18 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MainEx.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
-namespace NFCoreEx
+namespace NFrame
 {
-	
     class MainEx
     {
-        static void HeartBeatEventHandler(NFIDENTID self, string strHeartBeat, float fTime, NFIDataList valueList)
+        static void HeartBeatEventHandler(NFGUID self, string strHeartBeat, float fTime, int nRemainCount)
         {
             Console.Write(self);
             Console.Write(" ");
@@ -19,7 +22,7 @@ namespace NFCoreEx
             Console.WriteLine(" ");
         }
 
-		static void OnRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar)
+        static void OnRecordEventHandler(NFGUID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList.TData oldVar, NFIDataList.TData newVar)
 		{
             Console.Write(self);
             Console.Write(" ");
@@ -31,25 +34,25 @@ namespace NFCoreEx
             Console.Write(" ");
             Console.Write(nCol);
             Console.Write(" ");
-            Console.Write(oldVar.IntVal(0));
+            Console.Write(oldVar.IntVal());
             Console.Write(" ");
-            Console.Write(newVar.IntVal(0));
+            Console.Write(oldVar.IntVal());
             Console.WriteLine(" ");
 		}
 
-		static void OnPropertydHandler(NFIDENTID self, string strPropertyName, NFIDataList oldVar, NFIDataList newVar)
+        static void OnPropertydHandler(NFGUID self, string strProperty, NFIDataList.TData oldVar, NFIDataList.TData newVar)
 		{
             Console.Write(self);
             Console.Write(" ");
-            Console.Write(strPropertyName);
+            Console.Write(strProperty);
             Console.Write(" ");
-            Console.Write(oldVar.IntVal(0));
+            Console.Write(oldVar.IntVal());
             Console.Write(" ");
-            Console.Write(newVar.IntVal(0));
+            Console.Write(oldVar.IntVal());
             Console.WriteLine(" ");
 		}
 
-        static void OnClassHandler(NFIDENTID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
+        static void OnClassHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
         {
             Console.Write(self);
             Console.Write(" ");
@@ -63,7 +66,7 @@ namespace NFCoreEx
 
         public static void Main()
         {
-            NFIKernel kernel = new NFCKernel();
+            NFIKernelModule kernel = NFCKernelModule.Instance;
 
 			Console.WriteLine("****************NFIDataList******************");
 
@@ -79,7 +82,7 @@ namespace NFCoreEx
 			for (int i = 0; i < 9; i += 3)
 			{
 				Int64 n = var.IntVal(i);
-				float f = var.FloatVal(i+1);
+				double f = var.FloatVal(i+1);
 				string str = var.StringVal(i+2);
 				Console.WriteLine(n);
 				Console.WriteLine(f);
@@ -89,7 +92,7 @@ namespace NFCoreEx
 
 			Console.WriteLine("***************NFProperty*******************");
 
-            NFIDENTID ident = new NFIDENTID(0, 1);
+            NFGUID ident = new NFGUID(0, 1);
             NFIObject gameObject = kernel.CreateObject(ident, 0, 0, "", "", new NFCDataList());
 
 			NFIDataList valueProperty = new NFCDataList();
@@ -134,13 +137,13 @@ namespace NFCoreEx
             Console.WriteLine("***************ClassNFEvent*******************");
 
             kernel.RegisterClassCallBack("CLASSAAAAA", OnClassHandler);
-            kernel.CreateObject(new NFIDENTID(0, 2), 0, 0, "CLASSAAAAA", "CONFIGINDEX", new NFCDataList());
-            kernel.DestroyObject(new NFIDENTID(0, 2));
+            kernel.CreateObject(new NFGUID(0, 2), 0, 0, "CLASSAAAAA", "CONFIGINDEX", new NFCDataList());
+            kernel.DestroyObject(new NFGUID(0, 2));
 
 
             Console.WriteLine(" ");
 			Console.WriteLine("***************NFHeartBeat*******************");
-            kernel.AddHeartBeat(new NFIDENTID(0, 1), "TestHeartBeat", HeartBeatEventHandler, 5.0f, new NFCDataList());
+            kernel.AddHeartBeat(new NFGUID(0, 1), "TestHeartBeat", HeartBeatEventHandler, 5.0f, 1);
 
             while (true)
             {

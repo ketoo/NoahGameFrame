@@ -1,13 +1,18 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NFIEventModule.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NFCoreEx
+namespace NFrame
 {
-	public abstract class NFIEventManager
+	public abstract class NFIEventModule : NFILogicModule
 	{
-		public abstract void RegisterCallback(int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList);
-		public abstract void DoEvent(int nEventID, NFIDataList valueList);
+		public abstract void RegisterCallback(NFGUID self, int nEventID, NFIEvent.EventHandler handler, NFIDataList valueList);
+		public abstract void DoEvent(NFGUID self, int nEventID, NFIDataList valueList);
 	}
 }
