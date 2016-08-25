@@ -1057,7 +1057,7 @@ bool NFCKernelModule::LogInfo(const NFGUID ident)
     return true;
 }
 
-int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, bool broadcastToSelf)
+int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
     if (IsContainer(self))
     {
@@ -1069,7 +1069,7 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string
     {
         PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
         PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
-        pFun->operator()(self, strPropertyName, oldVar, newVar, broadcastToSelf);
+        pFun->operator()(self, strPropertyName, oldVar, newVar);
     }
 
     return 0;
