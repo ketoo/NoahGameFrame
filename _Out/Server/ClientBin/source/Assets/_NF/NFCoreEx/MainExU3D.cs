@@ -56,11 +56,11 @@ namespace NFCoreEx
             Debug.Log(" ");
 		}
 
-		static void OnPropertydHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar, bool broadCastToSelf)
+		static void OnPropertydHandler(NFIDENTID self, string strPropertyName, NFIDataList oldVar, NFIDataList newVar)
 		{
             Debug.Log(self);
             Debug.Log(" ");
-            Debug.Log(xProperty.GetKey());
+            Debug.Log(strPropertyName);
             Debug.Log(" ");
             Debug.Log(oldVar.IntVal(0));
             Debug.Log(" ");

@@ -7,7 +7,7 @@ namespace NFCoreEx
 {
     public abstract class NFIProperty
     {
-	public delegate void PropertyEventHandler(NFIDENTID self, NFIProperty xProperty, NFIDataList oldVar, NFIDataList newVar, bool broadCastToSelf);
+	public delegate void PropertyEventHandler(NFIDENTID self, string strPropertyName, NFIDataList oldVar, NFIDataList newVar);
 
     public abstract void SetValue(NFIDataList varData);
 
@@ -40,16 +40,6 @@ namespace NFCoreEx
 	public abstract bool SetString(string value);
 
 	public abstract bool SetObject(NFIDENTID value);
-
-    public abstract bool SetInt(Int64 value, bool broadCastToSelf);
-
-    public abstract bool SetFloat(float value, bool broadCastToSelf);
-
-    public abstract bool SetDouble(double value, bool broadCastToSelf);
-
-    public abstract bool SetString(string value, bool broadCastToSelf);
-
-    public abstract bool SetObject(NFIDENTID value, bool broadCastToSelf);
 
     public abstract void RegisterCallback(PropertyEventHandler handler);
     }
