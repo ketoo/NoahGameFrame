@@ -45,7 +45,7 @@ struct RECORD_EVENT_DATA
 typedef std::function<int(const NFGUID&, const std::string&, const float, const int)> HEART_BEAT_FUNCTOR;
 typedef std::function<void()> MODULE_HEART_BEAT_FUNCTOR;
 
-typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, bool broadcastToSelf)> PROPERTY_EVENT_FUNCTOR;
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&)> RECORD_EVENT_FUNCTOR;
 
 typedef std::function<int(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
