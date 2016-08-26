@@ -19,6 +19,10 @@ namespace NFrame
         public abstract NFIDataList.VARIANT_TYPE GetType();
         public abstract NFIDataList.TData GetData();
 
+        public abstract void SetUpload(bool upload);
+
+        public abstract bool GetUpload();
+
         public abstract Int64 QueryInt();
 
         public abstract double QueryFloat();

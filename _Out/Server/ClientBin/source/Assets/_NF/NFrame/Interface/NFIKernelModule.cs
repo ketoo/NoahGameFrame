@@ -28,6 +28,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
         public abstract NFILogicClassModule GetLogicClassModule();
         public abstract NFIElementModule GetElementModule();
+        public abstract NFIUploadModule GetUploadModule();
 #endif
 
         public abstract bool AddHeartBeat(NFGUID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, int nCount);
@@ -48,6 +49,8 @@ namespace NFrame
         public abstract void RegisterClassCallBack(string strClassName, NFIObject.ClassEventHandler handler);
 
 		public abstract void RegisterEventCallBack(NFGUID self, int nEventID, NFIEvent.EventHandler handler);
+
+        public abstract void RegisterCommonPropertyEvent(NFIProperty.PropertyEventHandler handler);
         /////////////////////////////////////////////////////////////////
 
         public abstract NFIObject GetObject(NFGUID ident);

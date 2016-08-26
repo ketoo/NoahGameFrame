@@ -60,6 +60,16 @@ namespace NFrame
             return mxData;
         }
 
+        public override void SetUpload(bool upload)
+        {
+            mbUpload = upload;
+        }
+
+        public override bool GetUpload()
+        {
+            return mbUpload;
+        }
+
         public override Int64 QueryInt()
         {
             if (NFIDataList.VARIANT_TYPE.VTYPE_INT == mxData.GetType())
@@ -217,5 +227,6 @@ namespace NFrame
 		NFGUID mSelf;
 		string msPropertyName;
         NFIDataList.TData mxData;
+        bool mbUpload;
     }
 }

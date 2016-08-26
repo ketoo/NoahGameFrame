@@ -55,6 +55,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxLogicClassModule = new NFCLogicClassModule();
             mxElementModule = new NFCElementModule();
+            mxUploadModule = new NFCUplaoaModule();
 #endif
         }
 		
@@ -65,6 +66,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxElementModule = null;
             mxLogicClassModule = null;
+            mxUploadModule = null;
 #endif
         }
 
@@ -73,6 +75,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxLogicClassModule.Init();
             mxElementModule.Init();
+            mxUploadModule.Init();
 #endif
         }
 
@@ -81,9 +84,11 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxLogicClassModule.AfterInit();
             mxElementModule.AfterInit();
+            mxUploadModule.AfterInit();
 #else
             mxLogicClassModule = GetMng().GetModule<NFILogicClassModule>();
             mxElementModule = GetMng().GetModule<NFIElementModule>();
+            mxUploadModule =  GetMng().GetModule<NFIUploadModule>();
 #endif
 
         }
@@ -93,6 +98,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxElementModule.BeforeShut();
             mxLogicClassModule.BeforeShut();
+            mxUploadModule.BeforeShut();
 #endif
         }
 
@@ -101,6 +107,7 @@ namespace NFrame
 #if NF_CLIENT_FRAME
             mxElementModule.Shut();
             mxLogicClassModule.Shut();
+            mxUploadModule.Shut();
 #endif
         }
 
@@ -118,6 +125,11 @@ namespace NFrame
         public override NFIElementModule GetElementModule()
         {
             return mxElementModule;
+        }
+
+        public override NFIUploadModule GetUploadModule()
+        {
+            return mxUploadModule;
         }
 #endif
         public override bool AddHeartBeat(NFGUID self, string strHeartBeatName, NFIHeartBeat.HeartBeatEventHandler handler, float fTime, int nCount)
@@ -613,7 +625,13 @@ namespace NFrame
                 NFIObject xObject = GetObject(self);
                 NFIPropertyManager xPropertyManager = xObject.GetPropertyManager();
 
-                xPropertyManager.AddProperty(strPropertyName, xProperty.GetData());
+                NFIProperty property = xPropertyManager.AddProperty(strPropertyName, xProperty.GetData());
+                //if property==null ,means this property alreay exist in manager
+                if (property != null)
+                {
+                    property.SetUpload(xProperty.GetUpload());
+                }
+                RegisterPropertyCallback(self, strPropertyName, mCommonPropertyCallBackList);
             }
         }
 
@@ -633,10 +651,19 @@ namespace NFrame
             }
         }
 
+        public override void RegisterCommonPropertyEvent(NFIProperty.PropertyEventHandler handler)
+        {
+            mCommonPropertyCallBackList += handler;
+        }
+
+        NFIProperty.PropertyEventHandler mCommonPropertyCallBackList;
+
         private Dictionary<NFGUID, NFIObject> mhtObject;
         private Dictionary<string, ClassHandleDel> mhtClassHandleDel;
         private NFIElementModule mxElementModule;
         private NFILogicClassModule mxLogicClassModule;
+        private NFIUploadModule mxUploadModule;
+        
 
         class ClassHandleDel
 		{
