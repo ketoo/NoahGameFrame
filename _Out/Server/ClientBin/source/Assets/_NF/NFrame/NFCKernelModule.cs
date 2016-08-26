@@ -631,7 +631,6 @@ namespace NFrame
                 {
                     property.SetUpload(xProperty.GetUpload());
                 }
-                RegisterPropertyCallback(self, strPropertyName, mCommonPropertyCallBackList);
             }
         }
 
@@ -650,13 +649,6 @@ namespace NFrame
                 xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData());
             }
         }
-
-        public override void RegisterCommonPropertyEvent(NFIProperty.PropertyEventHandler handler)
-        {
-            mCommonPropertyCallBackList += handler;
-        }
-
-        NFIProperty.PropertyEventHandler mCommonPropertyCallBackList;
 
         private Dictionary<NFGUID, NFIObject> mhtObject;
         private Dictionary<string, ClassHandleDel> mhtClassHandleDel;

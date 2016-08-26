@@ -13,7 +13,7 @@ namespace NFrame
     {
         public override void Init()
         {
-            NFCKernelModule.Instance.RegisterCommonPropertyEvent(OnPropertydHandler);
+            NFCKernelModule.Instance.RegisterClassCallBack("Player", OnClassHandler);
         }
 
         public override void AfterInit()
@@ -34,7 +34,27 @@ namespace NFrame
 
         }
 
-        static void OnPropertydHandler(NFGUID self, string strPropertyName, NFIDataList.TData oldVar, NFIDataList.TData newVar)
+        public void OnClassHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
+        {
+            if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
+            {
+                NFIObject xObject = NFCKernelModule.Instance.GetObject(self);
+                NFIPropertyManager xPropertyManager = xObject.GetPropertyManager();
+
+                NFIDataList xPropertyNameList = xPropertyManager.GetPropertyList();
+                for(int i = 0;i<xPropertyNameList.Count();i++)
+                {
+                    string xPropertyName = xPropertyNameList.StringVal(i);
+                    NFIProperty xProperty = xPropertyManager.GetProperty(xPropertyName);
+                    if(xProperty.GetUpload())
+                    {
+                        xProperty.RegisterCallback(OnPropertydHandler);
+                    }
+                }
+            }
+        }
+
+        public static void OnPropertydHandler(NFGUID self, string strPropertyName, NFIDataList.TData oldVar, NFIDataList.TData newVar)
         {
             //judge is/not upload
             NFIObject go = NFCKernelModule.Instance.GetObject(self);
