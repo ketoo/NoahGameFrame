@@ -523,4 +523,68 @@ public class NFBinarySendLogic
 
         SendMsg(objectID, NFMsg.EGameMsgID.EGMI_REQ_PICK_ITEM, stream);
     }
+
+    public void RequirePropertyInt(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyInt xData = new NFMsg.ObjectPropertyInt();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyInt xPropertyInt = new NFMsg.PropertyInt();
+        xPropertyInt.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xPropertyInt.data = newVar.IntVal();
+        xData.property_list.Add(xPropertyInt);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyInt>(stream, xData);
+        Debug.Log("send upload int");
+        SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_INT, stream);
+    }
+
+    public void RequirePropertyFloat(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyFloat xData = new NFMsg.ObjectPropertyFloat();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyFloat xPropertyFloat = new NFMsg.PropertyFloat();
+        xPropertyFloat.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xPropertyFloat.data = (float)newVar.FloatVal();
+        xData.property_list.Add(xPropertyFloat);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyFloat>(stream, xData);
+
+        NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_FLOAT, stream);
+    }
+
+    public void RequirePropertyString(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyString xData = new NFMsg.ObjectPropertyString();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyString xPropertyString = new NFMsg.PropertyString();
+        xPropertyString.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xPropertyString.data = System.Text.Encoding.Default.GetBytes(newVar.StringVal());
+        xData.property_list.Add(xPropertyString);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyString>(stream, xData);
+
+        NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, stream);
+    }
+
+    public void RequirePropertyObject(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyObject xData = new NFMsg.ObjectPropertyObject();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyObject xPropertyObject = new NFMsg.PropertyObject();
+        xPropertyObject.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xPropertyObject.data = NFBinarySendLogic.NFToPB(newVar.ObjectVal());
+        xData.property_list.Add(xPropertyObject);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyObject>(stream, xData);
+
+        NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
+    }
 }

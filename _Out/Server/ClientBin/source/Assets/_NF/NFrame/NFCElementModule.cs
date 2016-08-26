@@ -208,28 +208,32 @@ namespace NFrame
                                     {
                                         NFIDataList xValue = new NFCDataList();
                                         xValue.AddInt(int.Parse(xAttribute.Value));
-                                        xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
                                 case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
                                     {
                                         NFIDataList xValue = new NFCDataList();
                                         xValue.AddFloat(float.Parse(xAttribute.Value));
-                                        xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
                                 case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                                     {
                                         NFIDataList xValue = new NFCDataList();
                                         xValue.AddString(xAttribute.Value);
-                                        NFIProperty xTestProperty = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
                                 case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                     {
                                         NFIDataList xValue = new NFCDataList();
                                         xValue.AddObject(new NFGUID(0, int.Parse(xAttribute.Value)));
-                                        xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        NFIProperty property = xElement.GetPropertyManager().AddProperty(xAttribute.Name, xValue);
+                                        property.SetUpload(xProperty.GetUpload());
                                     }
                                     break;
                                 default:
