@@ -209,12 +209,12 @@ public class NFNet
                 //test
                 if(false)
                 {
-                    //int value = int.Parse(strChatData);
+                    int value = int.Parse(strChatData);
 
                     NFIObject obj = NFCKernelModule.Instance.GetObject(nMainRoleID);
                     NFIPropertyManager propertyManager = obj.GetPropertyManager();
                     NFIProperty property = propertyManager.GetProperty("Gold");
-                    property.SetInt(2);
+                    property.SetInt(value);
                 }
             }
             strChatTargetID = nTarget.ToString();

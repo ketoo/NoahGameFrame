@@ -227,6 +227,8 @@ namespace NFrame
                     XmlNode xPropertyNode = xNodeList.Item(i);
                     XmlAttribute strID = xPropertyNode.Attributes["Id"];
                     XmlAttribute strType = xPropertyNode.Attributes["Type"];
+                    XmlAttribute strUpload = xPropertyNode.Attributes["Upload"];
+                    bool bUpload = strUpload.Value.Equals("1");
 
                     switch (strType.Value)
                     {
@@ -234,28 +236,32 @@ namespace NFrame
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddInt(0);
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "float":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddFloat(0.0);
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "string":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddString("");
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         case "object":
                             {
                                 NFIDataList xValue = new NFCDataList();
                                 xValue.AddObject(new NFGUID(0, 0));
-                                xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                NFIProperty xProperty = xLogicClass.GetPropertyManager().AddProperty(strID.Value, xValue);
+                                xProperty.SetUpload(bUpload);
                             }
                             break;
                         default:
