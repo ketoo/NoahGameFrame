@@ -49,8 +49,7 @@ namespace NFrame
         public abstract void RegisterClassCallBack(string strClassName, NFIObject.ClassEventHandler handler);
 
 		public abstract void RegisterEventCallBack(NFGUID self, int nEventID, NFIEvent.EventHandler handler);
-
-        public abstract void RegisterCommonPropertyEvent(NFIProperty.PropertyEventHandler handler);
+        
         /////////////////////////////////////////////////////////////////
 
         public abstract NFIObject GetObject(NFGUID ident);
