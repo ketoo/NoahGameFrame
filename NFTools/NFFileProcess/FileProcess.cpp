@@ -540,7 +540,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				recordNode->SetAttribute("Row", strRow.c_str());
 				recordNode->SetAttribute("Col", strCol.c_str());
 				recordNode->SetAttribute("Public", strPublic.c_str());
-				recordNode->SetAttribute("Private", strPublic.c_str());
+				recordNode->SetAttribute("Private", strPrivate.c_str());
 				recordNode->SetAttribute("Save", strSave.c_str());
 				recordNode->SetAttribute("Cache", strCache.c_str());
 				recordNode->SetAttribute("Desc", strDesc.c_str());
