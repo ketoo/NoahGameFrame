@@ -430,10 +430,11 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
+			const int nRecordLineCount = 11;
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
-			const int nRecordCount = nRowsCount / 10;
+			const int nRecordCount = nRowsCount / nRecordLineCount;
 
-			if (nRowsCount != nRecordCount * 10)
+			if (nRowsCount != nRecordCount * nRecordLineCount)
 			{
 				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
 				printf("Generate faild!\n");
@@ -451,27 +452,29 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string strPrivate = "";
 				std::string strSave = "";
 				std::string strCache = "";
+				std::string strUpload = "";
 				std::string strDesc = "";
 
-				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * 10 + 1, 2);
+				int nRelativeRow = 1;
+				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRecordName = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 2, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRow = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 3, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strCol = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 4, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -484,7 +487,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 5, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -497,7 +500,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 6, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -510,7 +513,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 7, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -523,7 +526,22 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 10, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strUpload = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strUpload = cell->value;
+					}
+				}
+				cell = nullptr;
+				int nTagRow = nRelativeRow++;
+				int nTypeRow = nRelativeRow++;
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strDesc = cell->value;
@@ -543,6 +561,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				recordNode->SetAttribute("Private", strPrivate.c_str());
 				recordNode->SetAttribute("Save", strSave.c_str());
 				recordNode->SetAttribute("Cache", strCache.c_str());
+				recordNode->SetAttribute("Upload", strUpload.c_str());
 				recordNode->SetAttribute("Desc", strDesc.c_str());
 
 				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
@@ -562,7 +581,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					std::string strType = "";
 					std::string strTag = "";
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 8, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTagRow, nRecordCol);
 					if (cell)
 					{
 						strTag = cell->value;
@@ -572,7 +591,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						break;
 					}
 					cell = nullptr;
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 9, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTypeRow, nRecordCol);
 					if (cell)
 					{
 						strType = cell->value;
