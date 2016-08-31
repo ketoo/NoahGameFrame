@@ -23,7 +23,6 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFCProxyServerNet_ServerModule::OnConnectKeyProcess);
@@ -53,8 +52,6 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
                 const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
-
-                m_pUUIDModule->SetIdentID(nServerID);
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
@@ -356,7 +353,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
 
 void NFCProxyServerNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    NFGUID xClientIdent = m_pUUIDModule->CreateGUID();
+    NFGUID xClientIdent = m_pKernelModule->CreateGUID();
     NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
     if (pNetObject)
     {

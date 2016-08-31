@@ -36,7 +36,6 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCLoginNet_ServerModule::OnHeartBeat);
@@ -62,8 +61,6 @@ bool NFCLoginNet_ServerModule::AfterInit()
 				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
 				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
 				const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-
-				m_pUUIDModule->SetIdentID(nServerID);
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -111,7 +108,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 	NetObject* pObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
 	if (pObject)
 	{
-		NFGUID xIdent = m_pUUIDModule->CreateGUID();
+		NFGUID xIdent = m_pKernelModule->CreateGUID();
 		pObject->SetClientID(xIdent);
 		mxClientIdent.AddElement(xIdent, NF_SHARE_PTR<int>(NF_NEW int(nAddress)));
 	}

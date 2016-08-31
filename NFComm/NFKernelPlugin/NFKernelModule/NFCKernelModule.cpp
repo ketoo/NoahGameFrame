@@ -57,7 +57,6 @@ bool NFCKernelModule::Init()
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     return true;
 }
@@ -150,7 +149,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
     //默认为1分组，0则是所有分组都看得见,-1则是容器
     if (ident.IsNull())
     {
-        ident = m_pUUIDModule->CreateGUID();
+        ident = CreateGUID();
     }
 
     if (GetElement(ident))
