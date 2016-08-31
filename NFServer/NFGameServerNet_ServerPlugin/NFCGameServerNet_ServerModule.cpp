@@ -23,7 +23,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
@@ -1485,7 +1484,7 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(m_pUUIDModule->CreateGUID()));
+	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(m_pKernelModule->CreateGUID()));
 	pData->set_career(xMsg.career());
 	pData->set_sex(xMsg.sex());
 	pData->set_race(xMsg.race());
