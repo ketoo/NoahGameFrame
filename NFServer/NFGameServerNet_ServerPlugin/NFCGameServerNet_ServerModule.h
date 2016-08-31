@@ -91,6 +91,14 @@ protected:
 	void OnClientPropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	void OnClientAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRemoveRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientSwapRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 protected:
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
