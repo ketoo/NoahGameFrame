@@ -22,8 +22,18 @@ namespace NFrame
             mVarRecordType = new NFCDataList(varData);
 		}
 
+        public override void SetUpload(bool upload)
+        {
+            mbUpload = upload;
+        }
+
+        public override bool GetUpload()
+        {
+            return mbUpload;
+        }
+
         //==============================================
-		public override bool IsUsed(int nRow)
+        public override bool IsUsed(int nRow)
 		{
 			if (mhtRecordVec.ContainsKey(nRow))
 			{
@@ -481,5 +491,6 @@ namespace NFrame
 		NFGUID mSelf;
 		string mstrRecordName;
 		int mnRow;
+        bool mbUpload;
     }
 }
