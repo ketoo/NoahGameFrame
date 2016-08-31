@@ -17,7 +17,6 @@
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -169,6 +168,7 @@ private:
 
 private:
     std::vector<float> mvRandom;
+	int nGUIDIndex;
     int mnRandomPos;
 
     NFGUID mnCurExeObject;
@@ -178,7 +178,6 @@ private:
     NFILogModule* m_pLogModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
-    NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif
