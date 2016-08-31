@@ -84,6 +84,8 @@ public:
 
     virtual const bool GetCache();
 
+	virtual const bool GetUpload();
+
     virtual const bool GetPublic();
 
     virtual const bool GetPrivate();
@@ -93,6 +95,8 @@ public:
     virtual void SetSave(const bool bSave);
 
     virtual void SetCache(const bool bCache);
+
+	virtual void SetUpload(const bool bUpload);
 
     virtual void SetPublic(const bool bPublic);
 
@@ -133,6 +137,7 @@ protected:
     bool mbPublic;
     bool mbPrivate;
     bool mbCache;
+	bool mbUpload;
     std::string mstrRecordName;
 
     typedef std::vector<RECORD_EVENT_FUNCTOR_PTR> TRECORDCALLBACKEX;
