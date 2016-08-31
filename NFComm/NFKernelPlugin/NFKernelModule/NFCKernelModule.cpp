@@ -202,6 +202,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
              xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
              xRecord->SetSave(pConfigRecordInfo->GetSave());
              xRecord->SetCache(pConfigRecordInfo->GetCache());
+			 xRecord->SetUpload(pConfigRecordInfo->GetUpload());
 
 
 
