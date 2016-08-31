@@ -27,8 +27,10 @@ namespace NFrame
         };
 
         public delegate void RecordEventHandler(NFGUID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList.TData oldVar, NFIDataList.TData newVar);
-		
-		public abstract bool IsUsed(int nRow);
+
+        public abstract void SetUpload(bool upload);
+        public abstract bool GetUpload();
+        public abstract bool IsUsed(int nRow);
 		public abstract int GetRows();
         public abstract int GetCols();
         public abstract NFIDataList.VARIANT_TYPE GetColType( int nCol);
