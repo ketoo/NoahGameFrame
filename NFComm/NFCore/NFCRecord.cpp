@@ -18,6 +18,7 @@ NFCRecord::NFCRecord()
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbUpload = false;
 
     mstrRecordName = "";
     mnMaxRow = 0;
@@ -35,6 +36,7 @@ NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbUpload = false;
 
     mstrRecordName = strRecordName;
 
@@ -820,6 +822,11 @@ const bool NFCRecord::GetCache()
     return mbCache;
 }
 
+const bool NFCRecord::GetUpload()
+{
+	return mbUpload;
+}
+
 const bool NFCRecord::GetPublic()
 {
     return mbPublic;
@@ -848,6 +855,11 @@ void NFCRecord::SetSave(const bool bSave)
 void NFCRecord::SetCache(const bool bCache)
 {
     mbCache = bCache;
+}
+
+void NFCRecord::SetUpload(const bool bUpload)
+{
+	mbUpload = bUpload;
 }
 
 void NFCRecord::SetPublic(const bool bPublic)
