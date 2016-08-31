@@ -275,6 +275,30 @@ typedef int64_t NFINT64;
 #include <time.h>
 #include <sstream>
 
+uint64_t get_time()
+{
+#ifndef _MSC_VER
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    uint64_t time = tv.tv_usec;
+    time /= 1000;
+    time += (tv.tv_sec * 1000);
+    return time;
+#else
+    FILETIME filetime;
+    uint64_t time = 0;
+    GetSystemTimeAsFileTime(&filetime);
+
+    time |= filetime.dwHighDateTime;
+    time <<= 32;
+    time |= filetime.dwLowDateTime;
+
+    time /= 10;
+    time -= EPOCHFILETIME;
+    return time / 1000;
+#endif
+}
+
 inline unsigned long NF_GetTickCount()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
