@@ -1533,7 +1533,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIn
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::PropertyInt xPropertyInt = xMsg.property_list().Get(i);
+		const NFMsg::PropertyInt &xPropertyInt = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyInt.property_name());
 		if (pProperty)
 		{
@@ -1561,7 +1561,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyFloatProcess(const int nSock
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::PropertyFloat xPropertyFloat = xMsg.property_list().Get(i);
+		const NFMsg::PropertyFloat &xPropertyFloat = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyFloat.property_name());
 		if (pProperty)
 		{
@@ -1589,7 +1589,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyStringProcess(const int nSoc
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::PropertyString xPropertyString = xMsg.property_list().Get(i);
+		const NFMsg::PropertyString &xPropertyString = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyString.property_name());
 		if (pProperty)
 		{
@@ -1617,7 +1617,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSoc
 
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::PropertyObject xPropertyObject = xMsg.property_list().Get(i);
+		const NFMsg::PropertyObject &xPropertyObject = xMsg.property_list().Get(i);
 		NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xPropertyObject.property_name());
 		if (pProperty)
 		{
@@ -1656,34 +1656,34 @@ void NFCGameServerNet_ServerModule::OnClientAddRowProcess(const int nSockIndex, 
 	}
 	for (int i = 0; i < xMsg.row_data_size(); i++)
 	{
-		NFMsg::RecordAddRowStruct xAddRowStruct = xMsg.row_data().Get(i);
+		const NFMsg::RecordAddRowStruct &xAddRowStruct = xMsg.row_data().Get(i);
 		int row = xAddRowStruct.row();
 
 		std::map<int, NFIDataList::TData> colDataMap;
 		for (int j = 0; j < xAddRowStruct.record_int_list_size(); j++)
 		{
-			NFMsg::RecordInt xRecordInt = xAddRowStruct.record_int_list().Get(j);
+			const NFMsg::RecordInt &xRecordInt = xAddRowStruct.record_int_list().Get(j);
 			NFIDataList::TData data;
 			data.SetInt(xRecordInt.data());
 			colDataMap.insert(std::map<int, NFIDataList::TData>::value_type(xRecordInt.col(), data));
 		}
 		for (int j = 0; j < xAddRowStruct.record_float_list_size(); j++)
 		{
-			NFMsg::RecordFloat xRecordFloat = xAddRowStruct.record_float_list().Get(j);
+			const NFMsg::RecordFloat &xRecordFloat = xAddRowStruct.record_float_list().Get(j);
 			NFIDataList::TData data;
 			data.SetFloat(xRecordFloat.data());
 			colDataMap.insert(std::map<int, NFIDataList::TData>::value_type(xRecordFloat.col(), data));
 		}
 		for (int j = 0; j < xAddRowStruct.record_string_list_size(); j++)
 		{
-			NFMsg::RecordString xRecordString = xAddRowStruct.record_string_list().Get(j);
+			const NFMsg::RecordString &xRecordString = xAddRowStruct.record_string_list().Get(j);
 			NFIDataList::TData data;
 			data.SetString(xRecordString.data());
 			colDataMap.insert(std::map<int, NFIDataList::TData>::value_type(xRecordString.col(), data));
 		}
 		for (int j = 0; j < xAddRowStruct.record_object_list_size(); j++)
 		{
-			NFMsg::RecordObject xRecordObject = xAddRowStruct.record_object_list().Get(j);
+			const NFMsg::RecordObject &xRecordObject = xAddRowStruct.record_object_list().Get(j);
 			NFIDataList::TData data;
 			data.SetObject(NFINetModule::PBToNF(xRecordObject.data()));
 			colDataMap.insert(std::map<int, NFIDataList::TData>::value_type(xRecordObject.col(), data));
@@ -1785,7 +1785,7 @@ void NFCGameServerNet_ServerModule::OnClientRecordIntProcess(const int nSockInde
 	}
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::RecordInt xRecordInt = xMsg.property_list().Get(i);
+		const NFMsg::RecordInt &xRecordInt = xMsg.property_list().Get(i);
 		pRecord->SetInt(xRecordInt.row(), xRecordInt.col(), xRecordInt.data());
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client int set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
@@ -1809,7 +1809,7 @@ void NFCGameServerNet_ServerModule::OnClientRecordFloatProcess(const int nSockIn
 	}
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::RecordFloat xRecordFloat = xMsg.property_list().Get(i);
+		const NFMsg::RecordFloat &xRecordFloat = xMsg.property_list().Get(i);
 		pRecord->SetFloat(xRecordFloat.row(), xRecordFloat.col(), xRecordFloat.data());
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client float set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
@@ -1833,7 +1833,7 @@ void NFCGameServerNet_ServerModule::OnClientRecordStringProcess(const int nSockI
 	}
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::RecordString xRecordString = xMsg.property_list().Get(i);
+		const NFMsg::RecordString &xRecordString = xMsg.property_list().Get(i);
 		pRecord->SetString(xRecordString.row(), xRecordString.col(), xRecordString.data());
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client String set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
@@ -1857,7 +1857,7 @@ void NFCGameServerNet_ServerModule::OnClientRecordObjectProcess(const int nSockI
 	}
 	for (int i = 0; i < xMsg.property_list_size(); i++)
 	{
-		NFMsg::RecordObject xRecordObject = xMsg.property_list().Get(i);
+		const NFMsg::RecordObject &xRecordObject = xMsg.property_list().Get(i);
 		pRecord->SetObject(xRecordObject.row(), xRecordObject.col(), NFINetModule::PBToNF(xRecordObject.data()));
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client Object set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
