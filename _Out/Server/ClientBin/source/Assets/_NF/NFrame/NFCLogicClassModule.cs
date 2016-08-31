@@ -312,6 +312,8 @@ namespace NFrame
 
                             string strID = xRecordNode.Attributes["Id"].Value;
                             string strRow = xRecordNode.Attributes["Row"].Value;
+                            string strUpload = xRecordNode.Attributes["Upload"].Value;
+                            bool bUpload = strUpload.Equals("1");
                             NFIDataList xValue = new NFCDataList();
 
                             XmlNodeList xTagNodeList = xRecordNode.SelectNodes("Col");
@@ -350,7 +352,8 @@ namespace NFrame
 
                                 }
                             }
-                            xLogicClass.GetRecordManager().AddRecord(strID, int.Parse(strRow), xValue);
+                            NFIRecord xRecord = xLogicClass.GetRecordManager().AddRecord(strID, int.Parse(strRow), xValue);
+                            xRecord.SetUpload(bUpload);
                         }
                     }
                 }

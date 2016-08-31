@@ -646,7 +646,11 @@ namespace NFrame
                 NFIObject xObject = GetObject(self);
                 NFIRecordManager xRecordManager = xObject.GetRecordManager();
 
-                xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData());
+                NFIRecord record = xRecordManager.AddRecord(strRecordyName, xRecord.GetRows(), xRecord.GetColsData());
+                if(record != null)
+                {
+                    record.SetUpload(xRecord.GetUpload());
+                }
             }
         }
 
