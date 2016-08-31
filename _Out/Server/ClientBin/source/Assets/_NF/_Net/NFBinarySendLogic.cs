@@ -587,4 +587,156 @@ public class NFBinarySendLogic
 
         NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
     }
+
+    public void RequireAddRow(NFrame.NFGUID self, string strRecordName, int nRow)
+    {
+        NFMsg.ObjectRecordAddRow xData = new NFMsg.ObjectRecordAddRow();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordAddRowStruct xRecordAddRowStruct = new NFMsg.RecordAddRowStruct();
+        xData.row_data.Add(xRecordAddRowStruct);
+        xRecordAddRowStruct.row = nRow;
+
+        NFIObject xObject = NFCKernelModule.Instance.GetObject(self);
+        NFIRecord xRecord = xObject.GetRecordManager().GetRecord(strRecordName);
+        NFIDataList xRowData = xRecord.QueryRow(nRow);
+        for(int i = 0;i<xRowData.Count();i++)
+        {
+            switch(xRowData.GetType(i))
+            {
+                case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+                    {
+                        NFMsg.RecordInt xRecordInt = new NFMsg.RecordInt();
+                        xRecordInt.row = nRow;
+                        xRecordInt.col = i;
+                        xRecordInt.data = xRowData.IntVal(i);
+                        xRecordAddRowStruct.record_int_list.Add(xRecordInt);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+                    {
+                        NFMsg.RecordFloat xRecordFloat = new NFMsg.RecordFloat();
+                        xRecordFloat.row = nRow;
+                        xRecordFloat.col = i;
+                        xRecordFloat.data = (float)xRowData.FloatVal(i);
+                        xRecordAddRowStruct.record_float_list.Add(xRecordFloat);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+                    {
+                        NFMsg.RecordString xRecordString = new NFMsg.RecordString();
+                        xRecordString.row = nRow;
+                        xRecordString.col = i;
+                        xRecordString.data = System.Text.Encoding.Default.GetBytes(xRowData.StringVal(i));
+                        xRecordAddRowStruct.record_string_list.Add(xRecordString);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+                    {
+                        NFMsg.RecordObject xRecordObject = new NFMsg.RecordObject();
+                        xRecordObject.row = nRow;
+                        xRecordObject.col = i;
+                        xRecordObject.data = NFBinarySendLogic.NFToPB(xRowData.ObjectVal(i));
+                        xRecordAddRowStruct.record_object_list.Add(xRecordObject);
+                    }
+                    break;
+
+            }
+        }
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordAddRow>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_ADD_ROW, stream);
+    }
+
+    public void RequireRemoveRow(NFrame.NFGUID self, string strRecordName, int nRow)
+    {
+        NFMsg.ObjectRecordRemove xData = new NFMsg.ObjectRecordRemove();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+        xData.remove_row.Add(nRow);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordRemove>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_REMOVE_ROW, stream);
+    }
+
+    public void RequireSwapRow(NFrame.NFGUID self, string strRecordName, int nOriginRow, int nTargetRow)
+    {
+        NFMsg.ObjectRecordSwap xData = new NFMsg.ObjectRecordSwap();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.origin_record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+        xData.target_record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+        xData.row_origin = nOriginRow;
+        xData.row_target = nTargetRow;
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordSwap>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_SWAP_ROW, stream);
+    }
+
+    public void RequireRecordInt(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordInt xData = new NFMsg.ObjectRecordInt();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordInt xRecordInt = new NFMsg.RecordInt();
+        xRecordInt.row = nRow;
+        xRecordInt.col = nCol;
+        xRecordInt.data = newVar.IntVal();
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordInt>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_INT, stream);
+    }
+
+    public void RequireRecordFloat(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordFloat xData = new NFMsg.ObjectRecordFloat();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordFloat xRecordFloat = new NFMsg.RecordFloat();
+        xRecordFloat.row = nRow;
+        xRecordFloat.col = nCol;
+        xRecordFloat.data = (float)newVar.FloatVal();
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordFloat>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_FLOAT, stream);
+    }
+
+    public void RequireRecordString(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordString xData = new NFMsg.ObjectRecordString();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordString xRecordString = new NFMsg.RecordString();
+        xRecordString.row = nRow;
+        xRecordString.col = nCol;
+        xRecordString.data = System.Text.Encoding.Default.GetBytes(newVar.StringVal());
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordString>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_STRING, stream);
+    }
+
+    public void RequireRecordObject(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordObject xData = new NFMsg.ObjectRecordObject();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordObject xRecordObject = new NFMsg.RecordObject();
+        xRecordObject.row = nRow;
+        xRecordObject.col = nCol;
+        xRecordObject.data = NFBinarySendLogic.NFToPB(newVar.ObjectVal());
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordObject>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_OBJECT, stream);
+    }
 }

@@ -15,6 +15,8 @@ NFCProperty::NFCProperty()
 	mbPrivate = false;
 	mbSave = false;
 	mbCache = false;
+	mbRef = false;
+	mbUpload = false;
 
 	mSelf = NFGUID();
 	eType = TDATA_UNKNOWN;
@@ -29,6 +31,7 @@ NFCProperty::NFCProperty(const NFGUID& self, const std::string& strPropertyName,
 	mbSave = false;
 	mbCache = false;
 	mbRef = false;
+	mbUpload = false;
 
 	mSelf = self;
 
