@@ -146,6 +146,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
             const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
+			const char* pstrUpload = pRecordNode->first_attribute("Upload")->value();
 
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
@@ -157,6 +158,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
+			bool bUpload = lexical_cast<bool>(pstrUpload);
 
 			NF_SHARE_PTR<NFIDataList> recordVar(NF_NEW NFCDataList());
 			NF_SHARE_PTR<NFIDataList> recordTag(NF_NEW NFCDataList());
@@ -191,6 +193,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             xRecord->SetPrivate(bPrivate);
             xRecord->SetSave(bSave);
             xRecord->SetCache(bCache);
+			xRecord->SetUpload(bUpload);
         }
     }
 
