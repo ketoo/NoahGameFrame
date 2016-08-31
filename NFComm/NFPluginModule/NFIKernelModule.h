@@ -83,7 +83,7 @@ public:
     virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList) = 0;
 
     //////////////////////////////////////////////////////////////////////////
-    //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟襟都伙拷锟截碉拷
     template<typename BaseType>
     bool RegisterCommonClassEvent(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&))
     {
@@ -92,7 +92,7 @@ public:
         return RegisterCommonClassEvent(functorPtr);
     }
 
-    //只能网络模块注册，回调用来同步对象属性事件,所有的类属性都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟皆讹拷锟斤拷锟截碉拷
     template<typename BaseType>
     bool RegisterCommonPropertyEvent(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
@@ -101,7 +101,7 @@ public:
         return RegisterCommonPropertyEvent(functorPtr);
     }
 
-    //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟斤拷锟斤拷锟截碉拷
     template<typename BaseType>
     bool RegisterCommonRecordEvent(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
@@ -161,6 +161,7 @@ public:
     virtual bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg) = 0;
 
     ////////////////////////////////////////////////////////////////
+    virtual NFGUID CreateGUID() = 0;
 
     virtual bool CreateScene(const int nSceneID) = 0;
     virtual bool DestroyScene(const int nSceneID) = 0;
@@ -188,13 +189,13 @@ protected:
 
 protected:
 
-    //只能网络模块注册，回调用来同步对象类事件,所有的类对象都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟襟都伙拷锟截碉拷
     virtual bool RegisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    //只能网络模块注册，回调用来同步对象属性事件,所有的类属性都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟皆讹拷锟斤拷锟截碉拷
     virtual bool RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
 
-    //只能网络模块注册，回调用来同步对象类表事件,所有的类表都会回调
+    //只锟斤拷锟斤拷锟斤拷模锟斤拷注锟结，锟截碉拷锟斤拷锟斤拷同锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰硷拷,锟斤拷锟叫碉拷锟斤拷锟斤拷锟斤拷锟斤拷锟截碉拷
     virtual bool RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 };
 

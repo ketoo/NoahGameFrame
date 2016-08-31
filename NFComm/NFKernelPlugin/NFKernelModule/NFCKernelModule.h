@@ -95,6 +95,7 @@ public:
     virtual bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
     ////////////////////////////////////////////////////////////////
+    virtual NFGUID CreateGUID();
 
     virtual bool CreateScene(const int nSceneID);
     virtual bool DestroyScene(const int nSceneID);

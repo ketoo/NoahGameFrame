@@ -17,6 +17,10 @@
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
+    nGUIDIndex = 0;
+    mnRandomPos = 0;
+    nLastTime = 0;
+
     pPluginManager = p;
 
     nLastTime = pPluginManager->GetNowTime();
@@ -777,6 +781,32 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
     return false;
+}
+
+NFGUID NFCKernelModule::CreateGUID()
+{
+    int64_t value = 0;   
+    uint64_t time = get_time();
+
+    // 保留后48位时间
+    //value = time << 16;
+    value = time * 1000000;
+
+    // 最后16位是sequenceID
+    //value |= nGUIDIndex++;
+    value += nGUIDIndex++;
+
+    //if (sequence_ == 0x7FFF)
+    if (nGUIDIndex == 999999)
+    {
+        nGUIDIndex = 0;
+    }
+
+    NFGUID xID;
+    xID.nHead64 = pPluginManager->AppID();
+    xID.nData64 = value;
+
+    return xID;
 }
 
 bool NFCKernelModule::CreateScene(const int nSceneID)
