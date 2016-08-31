@@ -275,7 +275,17 @@ typedef int64_t NFINT64;
 #include <time.h>
 #include <sstream>
 
-uint64_t get_time()
+#ifndef _MSC_VER
+#include <sys/time.h>
+#include <unistd.h>
+#define EPOCHFILETIME 11644473600000000ULL
+#else
+#include <windows.h>
+#include <time.h>
+#define EPOCHFILETIME 11644473600000000Ui64
+#endif
+
+inline uint64_t get_time()
 {
 #ifndef _MSC_VER
     struct timeval tv;
