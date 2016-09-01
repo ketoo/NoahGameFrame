@@ -182,6 +182,8 @@ public:
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList) = 0;
     virtual bool LogInfo(const NFGUID ident) = 0;
 
+	virtual NFINT64 GetTime() = 0;
+
 protected:
     virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
