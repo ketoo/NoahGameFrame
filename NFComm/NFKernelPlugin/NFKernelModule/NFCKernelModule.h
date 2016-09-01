@@ -13,6 +13,7 @@
 #include <fstream>
 #include <string>
 #include <random>
+#include <chrono>
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"
@@ -22,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+
 
 class NFCKernelModule
     : public NFIKernelModule,
@@ -121,6 +123,8 @@ public:
     virtual bool LogSelfInfo(const NFGUID ident);
 
     //////////////////////////////////////////////////////////////////////////
+
+	virtual NFINT64 GetTime();
 
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
     virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
