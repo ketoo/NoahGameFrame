@@ -88,8 +88,6 @@
 		</Build>
 		<Unit filename="NFKernelModule/NFCKernelModule.cpp" />
 		<Unit filename="NFKernelModule/NFCKernelModule.h" />
-		<Unit filename="NFKernelModule/NFCUUIDModule.cpp" />
-		<Unit filename="NFKernelModule/NFCUUIDModule.h" />
 		<Unit filename="NFKernelPlugin.cpp" />
 		<Unit filename="NFKernelPlugin.h" />
 		<Unit filename="NFSceneModule/NFCSceneModule.cpp" />
