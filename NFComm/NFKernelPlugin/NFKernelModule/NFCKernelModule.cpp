@@ -786,7 +786,7 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
 NFGUID NFCKernelModule::CreateGUID()
 {
     int64_t value = 0;   
-    uint64_t time = get_time();
+    uint64_t time = GetTime();
 
     // 保留后48位时间
     //value = time << 16;
@@ -1255,6 +1255,11 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 {
 
     return false;
+}
+
+NFINT64 NFCKernelModule::GetTime()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 bool NFCKernelModule::AfterInit()
