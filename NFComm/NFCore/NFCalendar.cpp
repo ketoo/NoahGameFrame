@@ -1,54 +1,77 @@
+#include <chrono>
 #include "NFCalendar.h"
-#include "NFTime.h"
 
 NFCalendar::NFCalendar()
 {
-	mnTime = NFTime::GetTime();
+	mnTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	mnTimeZone = mnDefaultTimeZone;
 }
 NFCalendar::NFCalendar(NFINT64 nTime)
 {
-	mnTime = nTime;
-	mnTimeZone = mnDefaultTimeZone;
+	NFCalendar(nTime, mnDefaultTimeZone);
 }
-NFCalendar::NFCalendar(NFINT64 nTime, NFINT32 nTimeZone)
+NFCalendar::NFCalendar(NFINT64 nTime, int nTimeZone)
 {
 	mnTime = nTime;
 	mnTimeZone = nTimeZone;
 }
+NFCalendar::NFCalendar(std::string strTime)
+{
+	mnTime = 0;
+	mnTimeZone = mnDefaultTimeZone;
+	InitWithYMDHMSM(strTime);
+}
+NFCalendar::NFCalendar(std::string strTime, int nTimeZone)
+{
+	mnTime = 0;
+	mnTimeZone = nTimeZone;
+	InitWithYMDHMSM(strTime);
 
-NFINT64 NFCalendar::Get(TYPE type)
+}
+
+NFINT64 NFCalendar::GetTime()
+{
+	return mnTime;
+}
+std::string NFCalendar::GetStr()
+{
+	std::string str;
+	std::stringstream ss;
+	ss << this->Get(CalendarType::YEAR) << "-" << this->Get(CalendarType::MONTH) + 1 << "-" << this->Get(CalendarType::DAY) << " " << this->Get(CalendarType::HOUR) << ":" << this->Get(CalendarType::MINUTE) << ":" << this->Get(CalendarType::SECOND);
+	return ss.str();
+}
+NFINT64 NFCalendar::Get(CalendarType CalendarType)
 {
 	int year = 1970;
 	NFINT64 nFixTime = GetFixTime();
-	switch (type)
+	switch (CalendarType)
 	{
-		case TYPE::YEAR:
+		case CalendarType::YEAR:
 		{
 			while (true)
 			{
-				int days = 365;
-				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+				int nDays = 365;
+				if (IsLeapYear(year))
 				{
-					days++;
+					nDays++;
 				}
-				if (nFixTime < days*NFTime::DAY)
+				if (nFixTime < nDays*NFCalendar::DAY)
 				{
 					break;
 				}
-				nFixTime -= days*NFTime::DAY;
+				nFixTime -= nDays*NFCalendar::DAY;
 				year++;
 			}
 			return year;
 		}
-		case TYPE::MONTH:
+		case CalendarType::MONTH:
 		{
 			while (true)
 			{
-				int days = 365;
-				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+				int nDays = 365;
+				if (IsLeapYear(year))
 				{
-					days++;
+					nDays++;
 				}
 				for (int month = 1; month <= 12; month++)
 				{
@@ -57,7 +80,7 @@ NFINT64 NFCalendar::Get(TYPE type)
 					{
 						case 2:
 						{
-							if (days == 365)
+							if (nDays == 365)
 							{
 								nMothDays = 28;
 							}
@@ -84,23 +107,23 @@ NFINT64 NFCalendar::Get(TYPE type)
 						}
 						break;
 					}
-					if (nFixTime < nMothDays*NFTime::DAY)
+					if (nFixTime < nMothDays*NFCalendar::DAY)
 					{
 						return month - 1;
 					}
-					nFixTime -= nMothDays*NFTime::DAY;
+					nFixTime -= nMothDays*NFCalendar::DAY;
 				}
 				year++;
 			}
 		}
-		case TYPE::DAY:
+		case CalendarType::DAY:
 		{
 			while (true)
 			{
-				int days = 365;
-				if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+				int nDays = 365;
+				if (IsLeapYear(year))
 				{
-					days++;
+					nDays++;
 				}
 				for (int month = 1; month <= 12; month++)
 				{
@@ -109,7 +132,7 @@ NFINT64 NFCalendar::Get(TYPE type)
 					{
 						case 2:
 						{
-							if (days == 365)
+							if (nDays == 365)
 							{
 								nMothDays = 28;
 							}
@@ -135,50 +158,206 @@ NFINT64 NFCalendar::Get(TYPE type)
 							nMothDays = 30;
 						}
 					}
-					if (nFixTime < nMothDays*NFTime::DAY)
+					if (nFixTime < nMothDays*NFCalendar::DAY)
 					{
-						return nFixTime / NFTime::DAY+1;
+						return nFixTime / NFCalendar::DAY + 1;
 					}
-					nFixTime -= nMothDays*NFTime::DAY;
+					nFixTime -= nMothDays*NFCalendar::DAY;
 				}
 				year++;
 			}
 		}
-		case TYPE::HOUR:
+		case CalendarType::HOUR:
 		{
-			return (nFixTime%NFTime::DAY) / NFTime::HOUR;
+			return (nFixTime%NFCalendar::DAY) / NFCalendar::HOUR;
 		}
-		case TYPE::MINUTE:
+		case CalendarType::MINUTE:
 		{
-			return (nFixTime%NFTime::HOUR) / NFTime::MINUTE;
+			return (nFixTime%NFCalendar::HOUR) / NFCalendar::MINUTE;
 		}
-		case TYPE::SECOND:
+		case CalendarType::SECOND:
 		{
-			return (nFixTime%NFTime::MINUTE) / NFTime::SECOND;
+			return (nFixTime%NFCalendar::MINUTE) / NFCalendar::SECOND;
 		}
-		case TYPE::MILLISECOND:
+		case CalendarType::MILLISECOND:
 		{
-			return (nFixTime%NFTime::SECOND) / NFTime::MILLISECOND;
+			return (nFixTime%NFCalendar::SECOND) / NFCalendar::MILLISECOND;
 		}
-		case TYPE::WEEK_SINCE_EPOCH:
+		case CalendarType::WEEK_SINCE_EPOCH:
 		{
-			return (mnTime + NFTime::DAY * 4) / NFTime::WEEK;// 1970.1.1 is thursday , sunday is first day of week
+			return (mnTime + NFCalendar::DAY * 4) / NFCalendar::WEEK;// 1970.1.1 is thursday , sunday is first day of week
 		}
-		case TYPE::DAY_SINCE_EPOCH:
+		case CalendarType::DAY_SINCE_EPOCH:
 		{
-			return mnTime / NFTime::DAY;
+			return mnTime / NFCalendar::DAY;
 		}
-		case TYPE::HOUR_SINCE_EPOCH:
+		case CalendarType::HOUR_SINCE_EPOCH:
 		{
-			return mnTime / NFTime::HOUR;
+			return mnTime / NFCalendar::HOUR;
 		}
-		case TYPE::DAY_OF_WEEK:
+		case CalendarType::DAY_OF_WEEK:
 		{
-			return ((nFixTime+NFTime::DAY*4)%NFTime::WEEK) / NFTime::DAY +1 ;// 1970.1.1 is thursday , sunday is first day of week ,start by 1
+			return ((nFixTime + NFCalendar::DAY * 4) % NFCalendar::WEEK) / NFCalendar::DAY + 1;// 1970.1.1 is thursday , sunday is first day of week ,start by 1
+		}
+		default:
+		{
+			return 0;
 		}
 	}
 }
+
+int NFCalendar::GetTimeZone()
+{
+	return mnTime;
+}
+
+void NFCalendar::SetTime(NFINT64 nTime)
+{
+	mnTime = nTime;
+}
+void NFCalendar::SetTimeZone(int nTimeZone)
+{
+	mnTimeZone = nTimeZone;
+}
+
+void NFCalendar::InitWithYMDHMSM(std::string strTime)
+{
+	std::vector<std::string> cells;
+	split(strTime, cells, " ");
+	if (cells.size() < 2)
+	{
+		return;
+	}
+	std::vector<std::string> cellsYMD;
+	split(cells.at(0), cellsYMD, "-");
+	if (cellsYMD.size() != 3)
+	{
+		return;
+	}
+	std::vector<std::string> cellsHMS;
+	split(cells.at(1), cellsHMS, ":");
+	if (cellsHMS.size() != 3)
+	{
+		return;
+	}
+	int nYear = lexical_cast<int>(cellsYMD[0]);
+	int nMonth = lexical_cast<int>(cellsYMD[1]);
+	int nDay = lexical_cast<int>(cellsYMD[2]);
+	int nHour = lexical_cast<int>(cellsHMS[0]);
+	int nMinute = lexical_cast<int>(cellsHMS[1]);
+	int nSecond = lexical_cast<int>(cellsHMS[2]);
+	int nMilliSecond = 0;
+	if (cells.size() == 3)
+	{
+		nMilliSecond = lexical_cast<int>(cells[2]);
+	}
+	if (nYear < 1970)
+	{
+		return;
+	}
+	int nTmpYear = 1970;
+	while (nTmpYear < nYear)
+	{
+		mnTime += NFCalendar::DAY * 365;
+		if (IsLeapYear(nTmpYear))
+		{
+			mnTime += NFCalendar::DAY;
+		}
+		nTmpYear++;
+	}
+	bool bIsLeapYear = IsLeapYear(nYear);
+	for (int month = 1; month < nMonth; month++)
+	{
+		NFINT64 nMothDays;
+		switch (month)
+		{
+			case 2:
+			{
+				if (!bIsLeapYear)
+				{
+					nMothDays = 28;
+				}
+				else
+				{
+					nMothDays = 29;
+				}
+			}
+			break;
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+			{
+				nMothDays = 31;
+			}
+			break;
+			default:
+			{
+				nMothDays = 30;
+			}
+			break;
+		}
+		mnTime += NFCalendar::DAY*nMothDays;
+	}
+	mnTime += NFCalendar::DAY*(nDay - 1);
+	mnTime += NFCalendar::HOUR*nHour;
+	mnTime += NFCalendar::MINUTE*nMinute;
+	mnTime += NFCalendar::SECOND*nSecond;
+	mnTime += nMilliSecond;
+
+	mnTime -= NFCalendar::HOUR*mnTimeZone;
+}
+
 NFINT64 NFCalendar::GetFixTime()
 {
-	return mnTime + mnTimeZone*NFTime::HOUR;
+	return mnTime + mnTimeZone*NFCalendar::HOUR;
+}
+
+bool NFCalendar::IsLeapYear(int nYear)
+{
+	if ((nYear % 4 == 0) && (nYear % 100 != 0))
+	{
+		return true;
+	}
+	if (nYear % 400 == 0)
+	{
+		return true;
+	}
+	return false;
+}
+int NFCalendar::split(const string& str, vector<string>& ret_, string sep)
+{
+	if (str.empty())
+	{
+		return 0;
+	}
+
+	string tmp;
+	string::size_type pos_begin = str.find_first_not_of(sep);
+	string::size_type comma_pos = 0;
+
+	while (pos_begin != string::npos)
+	{
+		comma_pos = str.find(sep, pos_begin);
+		if (comma_pos != string::npos)
+		{
+			tmp = str.substr(pos_begin, comma_pos - pos_begin);
+			pos_begin = comma_pos + sep.length();
+		}
+		else
+		{
+			tmp = str.substr(pos_begin);
+			pos_begin = comma_pos;
+		}
+
+		if (!tmp.empty())
+		{
+			ret_.push_back(tmp);
+			tmp.clear();
+		}
+	}
+	return 0;
 }
