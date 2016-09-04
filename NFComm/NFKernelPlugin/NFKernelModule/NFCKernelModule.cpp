@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFCore/NFCMemManger.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFCore/NFTime.h"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
@@ -1259,7 +1260,7 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 
 NFINT64 NFCKernelModule::GetTime()
 {
-	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	return NFTime::GetTime();
 }
 
 bool NFCKernelModule::AfterInit()
