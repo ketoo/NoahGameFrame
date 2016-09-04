@@ -285,45 +285,6 @@ typedef int64_t NFINT64;
 #define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
-inline uint64_t get_time()
-{
-#ifndef _MSC_VER
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    uint64_t time = tv.tv_usec;
-    time /= 1000;
-    time += (tv.tv_sec * 1000);
-    return time;
-#else
-    FILETIME filetime;
-    uint64_t time = 0;
-    GetSystemTimeAsFileTime(&filetime);
-
-    time |= filetime.dwHighDateTime;
-    time <<= 32;
-    time |= filetime.dwLowDateTime;
-
-    time /= 10;
-    time -= EPOCHFILETIME;
-    return time / 1000;
-#endif
-}
-
-inline unsigned long NF_GetTickCount()
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    return GetTickCount();
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
-
-#else
-    struct timespec ts;
-
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-
-    return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
-#endif
-
-}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define NFSPRINTF sprintf_s
