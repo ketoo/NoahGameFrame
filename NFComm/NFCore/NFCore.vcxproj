@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCAddConsistentHash.hpp" />
+    <ClInclude Include="NFCalendar.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
@@ -121,9 +122,11 @@
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
+    <ClInclude Include="NFTime.h" />
     <ClInclude Include="NFTimer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFCalendar.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCEventManager.cpp" />
@@ -134,6 +137,7 @@
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
+    <ClCompile Include="NFTime.cpp" />
     <ClCompile Include="NFTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
