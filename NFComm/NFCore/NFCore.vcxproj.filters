@@ -98,6 +98,12 @@
     <ClInclude Include="NFIEventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCalendar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCRecord.cpp">
@@ -131,6 +137,12 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="NFTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCalendar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
