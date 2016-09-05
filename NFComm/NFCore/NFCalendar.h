@@ -26,12 +26,11 @@ class NFCalendar
 public:
 
 private:
-	static const NFINT64 WEEK = 7 * 24 * 60 * 60 * 1000L;
-	static const NFINT64 DAY = 24 * 60 * 60 * 1000L;
-	static const NFINT64 HOUR = 60 * 60 * 1000L;
-	static const NFINT64 MINUTE = 60 * 1000L;
-	static const NFINT64 SECOND = 1000L;
-	static const NFINT64 MILLISECOND = 1L;
+	static const NFINT64 NWEEK = 7 * 24 * 60 * 60 * 1000L;
+	static const NFINT64 NDAY = 24 * 60 * 60 * 1000L;
+	static const NFINT64 NHOUR = 60 * 60 * 1000L;
+	static const NFINT64 NMINUTE = 60 * 1000L;
+	static const NFINT64 NSECOND = 1000L;
 	static const int mnDefaultTimeZone = 8;
 public:
 	NFCalendar();
