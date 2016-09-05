@@ -2,8 +2,8 @@
 //
 
 #include "NFKernelPlugin.h"
-#include "NFKernelModule/NFCKernelModule.h"
-#include "NFSceneModule/NFCSceneModule.h"
+#include "NFCKernelModule.h"
+#include "NFCSceneModule.h"
 
 //
 //
