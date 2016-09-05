@@ -46,7 +46,7 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 	NFINT64 nFixTime = GetFixTime();
 	switch (CalendarType)
 	{
-		case CalendarType::YEAR:
+		case YEAR:
 		{
 			while (true)
 			{
@@ -55,16 +55,16 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 				{
 					nDays++;
 				}
-				if (nFixTime < nDays*NFCalendar::DAY)
+				if (nFixTime < nDays*NFCalendar::NDAY)
 				{
 					break;
 				}
-				nFixTime -= nDays*NFCalendar::DAY;
+				nFixTime -= nDays*NFCalendar::NDAY;
 				year++;
 			}
 			return year;
 		}
-		case CalendarType::MONTH:
+		case MONTH:
 		{
 			while (true)
 			{
@@ -107,16 +107,16 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 						}
 						break;
 					}
-					if (nFixTime < nMothDays*NFCalendar::DAY)
+					if (nFixTime < nMothDays*NFCalendar::NDAY)
 					{
 						return month - 1;
 					}
-					nFixTime -= nMothDays*NFCalendar::DAY;
+					nFixTime -= nMothDays*NFCalendar::NDAY;
 				}
 				year++;
 			}
 		}
-		case CalendarType::DAY:
+		case NDAY:
 		{
 			while (true)
 			{
@@ -158,46 +158,46 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 							nMothDays = 30;
 						}
 					}
-					if (nFixTime < nMothDays*NFCalendar::DAY)
+					if (nFixTime < nMothDays*NFCalendar::NDAY)
 					{
-						return nFixTime / NFCalendar::DAY + 1;
+						return nFixTime / NFCalendar::NDAY + 1;
 					}
-					nFixTime -= nMothDays*NFCalendar::DAY;
+					nFixTime -= nMothDays*NFCalendar::NDAY;
 				}
 				year++;
 			}
 		}
-		case CalendarType::HOUR:
+		case NHOUR:
 		{
-			return (nFixTime%NFCalendar::DAY) / NFCalendar::HOUR;
+			return (nFixTime%NFCalendar::NDAY) / NFCalendar::NHOUR;
 		}
-		case CalendarType::MINUTE:
+		case NMINUTE:
 		{
-			return (nFixTime%NFCalendar::HOUR) / NFCalendar::MINUTE;
+			return (nFixTime%NFCalendar::NHOUR) / NFCalendar::NMINUTE;
 		}
-		case CalendarType::SECOND:
+		case NSECOND:
 		{
-			return (nFixTime%NFCalendar::MINUTE) / NFCalendar::SECOND;
+			return (nFixTime%NFCalendar::NMINUTE) / NFCalendar::NSECOND;
 		}
-		case CalendarType::MILLISECOND:
+		case MILLISECOND:
 		{
-			return (nFixTime%NFCalendar::SECOND) / NFCalendar::MILLISECOND;
+			return (nFixTime%NFCalendar::NSECOND);
 		}
-		case CalendarType::WEEK_SINCE_EPOCH:
+		case WEEK_SINCE_EPOCH:
 		{
-			return (mnTime + NFCalendar::DAY * 4) / NFCalendar::WEEK;// 1970.1.1 is thursday , sunday is first day of week
+			return (mnTime + NFCalendar::NDAY * 4) / NFCalendar::NWEEK;// 1970.1.1 is thursday , sunday is first day of week
 		}
-		case CalendarType::DAY_SINCE_EPOCH:
+		case DAY_SINCE_EPOCH:
 		{
-			return mnTime / NFCalendar::DAY;
+			return mnTime / NFCalendar::NDAY;
 		}
-		case CalendarType::HOUR_SINCE_EPOCH:
+		case HOUR_SINCE_EPOCH:
 		{
-			return mnTime / NFCalendar::HOUR;
+			return mnTime / NFCalendar::NHOUR;
 		}
-		case CalendarType::DAY_OF_WEEK:
+		case DAY_OF_WEEK:
 		{
-			return ((nFixTime + NFCalendar::DAY * 4) % NFCalendar::WEEK) / NFCalendar::DAY + 1;// 1970.1.1 is thursday , sunday is first day of week ,start by 1
+			return ((nFixTime + NFCalendar::NDAY * 4) % NFCalendar::NWEEK) / NFCalendar::NDAY + 1;// 1970.1.1 is thursday , sunday is first day of week ,start by 1
 		}
 		default:
 		{
@@ -258,10 +258,10 @@ void NFCalendar::InitWithYMDHMSM(std::string strTime)
 	int nTmpYear = 1970;
 	while (nTmpYear < nYear)
 	{
-		mnTime += NFCalendar::DAY * 365;
+		mnTime += NFCalendar::NDAY * 365;
 		if (IsLeapYear(nTmpYear))
 		{
-			mnTime += NFCalendar::DAY;
+			mnTime += NFCalendar::NDAY;
 		}
 		nTmpYear++;
 	}
@@ -300,20 +300,20 @@ void NFCalendar::InitWithYMDHMSM(std::string strTime)
 			}
 			break;
 		}
-		mnTime += NFCalendar::DAY*nMothDays;
+		mnTime += NFCalendar::NDAY*nMothDays;
 	}
-	mnTime += NFCalendar::DAY*(nDay - 1);
-	mnTime += NFCalendar::HOUR*nHour;
-	mnTime += NFCalendar::MINUTE*nMinute;
-	mnTime += NFCalendar::SECOND*nSecond;
+	mnTime += NFCalendar::NDAY*(nDay - 1);
+	mnTime += NFCalendar::NHOUR*nHour;
+	mnTime += NFCalendar::NMINUTE*nMinute;
+	mnTime += NFCalendar::NSECOND*nSecond;
 	mnTime += nMilliSecond;
 
-	mnTime -= NFCalendar::HOUR*mnTimeZone;
+	mnTime -= NFCalendar::NHOUR*mnTimeZone;
 }
 
 NFINT64 NFCalendar::GetFixTime()
 {
-	return mnTime + mnTimeZone*NFCalendar::HOUR;
+	return mnTime + mnTimeZone*NFCalendar::NHOUR;
 }
 
 bool NFCalendar::IsLeapYear(int nYear)
