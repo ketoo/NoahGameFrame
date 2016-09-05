@@ -50,7 +50,7 @@ public:
 	void SetTimeZone(int nTimeZone);
 
 private:
-	void NFCalendar::InitWithYMDHMSM(std::string strTime);
+	void InitWithYMDHMSM(std::string strTime);
 	NFINT64 GetFixTime();//add timeZone value
 	bool IsLeapYear(int nYear);
 	int split(const string& str, vector<string>& ret_, string sep);
