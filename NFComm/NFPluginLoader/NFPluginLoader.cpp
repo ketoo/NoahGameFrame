@@ -34,25 +34,25 @@ std::string strPluginName;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #pragma comment( lib, "DbgHelp" )
-// ´´½¨DumpÎÄ¼þ
+// ï¿½ï¿½ï¿½ï¿½Dumpï¿½Ä¼ï¿½
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
-    // ´´½¨DumpÎÄ¼þ
+    // ï¿½ï¿½ï¿½ï¿½Dumpï¿½Ä¼ï¿½
     HANDLE hDumpFile = CreateFile(strDumpFilePathName.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    // DumpÐÅÏ¢
+    // Dumpï¿½ï¿½Ï¢
     MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
     dumpInfo.ExceptionPointers = pException;
     dumpInfo.ThreadId = GetCurrentThreadId();
     dumpInfo.ClientPointers = TRUE;
 
-    // Ð´ÈëDumpÎÄ¼þÄÚÈÝ
+    // Ð´ï¿½ï¿½Dumpï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
     MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
     CloseHandle(hDumpFile);
 }
 
-// ´¦ÀíUnhandled ExceptionµÄ»Øµ÷º¯Êý
+// ï¿½ï¿½ï¿½ï¿½Unhandled Exceptionï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½
 long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 {
     time_t t = time(0);
@@ -125,13 +125,13 @@ void PrintfLogo()
 #endif
 
     std::cout << "\n" << std::endl;
-    std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
-    std::cout << "¡ï                                            ¡ï" << std::endl;
-    std::cout << "¡ï                 NoahFrame                  ¡ï" << std::endl;
-    std::cout << "¡ï   Copyright (c) 2011-2016  NFrame Studio   ¡ï" << std::endl;
-    std::cout << "¡ï             All rights reserved.           ¡ï" << std::endl;
-    std::cout << "¡ï                                            ¡ï" << std::endl;
-    std::cout << "¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï¡ï" << std::endl;
+    std::cout << "************************************************" << std::endl;
+    std::cout << "**                                            **" << std::endl;
+    std::cout << "**                 NoahFrame                  **" << std::endl;
+    std::cout << "**   Copyright (c) 2011-2016  LvSheng.Huang   **" << std::endl;
+    std::cout << "**             All rights reserved.           **" << std::endl;
+    std::cout << "**                                            **" << std::endl;
+    std::cout << "************************************************" << std::endl;
     std::cout << "\n" << std::endl;
 	std::cout << "-d Run itas daemon mode, only on linux" << std::endl;
 	std::cout << "-x Closethe 'X' button, only on windows" << std::endl;
@@ -190,7 +190,7 @@ int main(int argc, char* argv[])
 	PrintfLogo();
     CreateBackThread();
 
-    while (!bExitApp)    //DEBUG°æ±¾±ÀÀ££¬RELEASE²»±À
+    while (!bExitApp)    //DEBUGï¿½æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RELEASEï¿½ï¿½ï¿½ï¿½
     {
         while (true)
         {
