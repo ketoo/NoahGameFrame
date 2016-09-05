@@ -14,9 +14,6 @@
     <ClInclude Include="NFKernelModule\NFCKernelModule.h">
       <Filter>NFKernelModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFKernelModule\NFCUUIDModule.h">
-      <Filter>NFKernelModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFSceneModule\NFCSceneModule.h">
       <Filter>NFSceneModule</Filter>
     </ClInclude>
@@ -24,13 +21,10 @@
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFKernelModule\NFCKernelModule.cpp">
+    <ClCompile Include="NFCKernelModule.cpp">
       <Filter>NFKernelModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFKernelModule\NFCUUIDModule.cpp">
-      <Filter>NFKernelModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFSceneModule\NFCSceneModule.cpp">
+    <ClCompile Include="NFCSceneModule.cpp">
       <Filter>NFSceneModule</Filter>
     </ClCompile>
   </ItemGroup>
