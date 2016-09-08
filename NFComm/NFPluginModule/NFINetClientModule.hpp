@@ -291,7 +291,7 @@ public:
 	
 protected:
 
-	void InitCallBacks(ConnectData* pServerData)
+	void InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
 	{
 		//add msg callback
 		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = mxReceiveCallBack.begin();
@@ -316,7 +316,7 @@ protected:
 
 	void ProcessExecute()
 	{
-		ConnectData* pServerData = mxServerMap.FirstNude();
+		NF_SHARE_PTR<ConnectData> pServerData = mxServerMap.First();
 		while (pServerData)
 		{
 			switch (pServerData->eState)
@@ -372,11 +372,11 @@ protected:
 				break;
 			}
 
-			pServerData = mxServerMap.NextNude();
+			pServerData = mxServerMap.Next();
 		}
 	}
 
-	void KeepReport(ConnectData* pServerData){};
+	void KeepReport(NF_SHARE_PTR<ConnectData> pServerData){};
 	void LogServerInfo(const std::string& strServerInfo){};
 
 private:
@@ -398,7 +398,7 @@ private:
 		LogServerInfo("This is a client, end to print Server Info----------------------------------");
 	};
 
-	void KeepState(ConnectData* pServerData)
+	void KeepState(NF_SHARE_PTR<ConnectData> pServerData)
 	{
 		if (pServerData->mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
 		{

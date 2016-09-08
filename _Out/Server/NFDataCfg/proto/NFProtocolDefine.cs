@@ -519,7 +519,6 @@ public class Item
 	public static readonly String Level = "Level"; // int
 	public static readonly String Job = "Job"; // string
 	public static readonly String Quality = "Quality"; // int
-	public static readonly String DesignDesc = "DesignDesc"; // string
 	public static readonly String DescID = "DescID"; // string
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string

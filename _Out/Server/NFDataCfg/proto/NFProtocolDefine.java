@@ -497,7 +497,6 @@ public class Item {
 	public static final String Level = "Level"; // int
 	public static final String Job = "Job"; // string
 	public static final String Quality = "Quality"; // int
-	public static final String DesignDesc = "DesignDesc"; // string
 	public static final String DescID = "DescID"; // string
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
