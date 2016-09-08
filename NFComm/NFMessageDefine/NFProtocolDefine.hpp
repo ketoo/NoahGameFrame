@@ -534,7 +534,6 @@ public:
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
 	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
-	static const std::string& DesignDesc(){ static std::string xDesignDesc = "DesignDesc"; return xDesignDesc; } // string
 	static const std::string& DescID(){ static std::string xDescID = "DescID"; return xDescID; } // string
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
