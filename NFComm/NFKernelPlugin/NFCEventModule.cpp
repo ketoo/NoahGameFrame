@@ -32,3 +32,43 @@ bool NFCEventModule::Execute()
 {
     return true;
 }
+
+bool NFCEventModule::DoEvent(const NFEventDefine nEventID, const NFIDataList & valueList)
+{
+	return false;
+}
+
+bool NFCEventModule::ExistEventCallBack(const NFEventDefine nEventID)
+{
+	return false;
+}
+
+bool NFCEventModule::RemoveEventCallBack(const NFEventDefine nEventID)
+{
+	return false;
+}
+
+bool NFCEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList & valueList)
+{
+	return false;
+}
+
+bool NFCEventModule::ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID)
+{
+	return false;
+}
+
+bool NFCEventModule::RemoveEventCallBack(const NFGUID self, const NFEventDefine nEventID)
+{
+	return false;
+}
+
+bool NFCEventModule::AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb)
+{
+	return false;
+}
+
+bool NFCEventModule::AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb)
+{
+	return false;
+}

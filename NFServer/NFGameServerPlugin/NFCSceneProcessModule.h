@@ -27,6 +27,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -73,6 +74,7 @@ private:
     NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
+	NFIEventModule* m_pEventModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     //////////////////////////////////////////////////////////////////////////
     struct SceneSeedResource
