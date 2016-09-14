@@ -20,7 +20,7 @@ class NFCEventModule
 public:
     NFCEventModule(NFIPluginManager* p)
     {
-        //pPluginManager = p;
+        pPluginManager = p;
     }
 
 
@@ -28,16 +28,37 @@ public:
     {
     }
 
-    virtual bool Init();
-    virtual bool AfterInit();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Execute();
+    bool Init();
+    bool AfterInit();
+    bool BeforeShut();
+    bool Shut();
+    bool Execute();
 
+	bool DoEvent(const NFEventDefine nEventID, const NFIDataList& valueList);
 
+	bool ExistEventCallBack(const NFEventDefine nEventID);
 
-protected:
+	bool RemoveEventCallBack(const NFEventDefine nEventID);
+
+	//////////////////////////////////////////////////////////
+	bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList& valueList);
+
+	bool ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID);
+
+	bool RemoveEventCallBack(const NFGUID self, const NFEventDefine nEventID);
+
 private:
+
+	bool AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb);
+	bool AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
+
+private:
+
+	NFList<NFEventDefine> mModuleRemoveListEx;
+	NFMapEx<NFEventDefine, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
+
+	NFMapEx<NFGUID, NFList<NFEventDefine>> mObjectRemoveListEx;
+	NFMapEx<NFGUID, NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
 };
 
 #endif
