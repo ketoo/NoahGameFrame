@@ -17,7 +17,6 @@
 #include "NFIHeartBeatManager.h"
 #include "NFIPropertyManager.h"
 #include "NFIComponentManager.h"
-#include "NFIEventManager.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFIObject
@@ -132,8 +131,6 @@ public:
     virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
-    virtual NF_SHARE_PTR<NFIEventManager> GetEventManager() = 0;
-
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
