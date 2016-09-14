@@ -15,7 +15,6 @@
 #include "NFComm/NFCore/NFDefine.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"
-#include "NFComm/NFEventDefine/NFEventDefine.h"
 
 template<typename DerivedType, typename BaseType>
 class TIsDerived
