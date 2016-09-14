@@ -92,12 +92,6 @@
     <ClInclude Include="NFCAddConsistentHash.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCEventManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIEventManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCalendar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -132,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="NFCMemManger.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCEventManager.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="NFTimer.cpp">
       <Filter>Source Files</Filter>
