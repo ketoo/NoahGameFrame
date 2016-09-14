@@ -1322,17 +1322,6 @@ void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFIDataList& valu
     mnRandomPos += nCount;
 }
 
-bool NFCKernelModule::AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
-{
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->GetEventManager()->AddEventCallBack(nEventID, cb);
-    }
-
-    return false;
-}
-
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
     return m_pClassModule->AddClassCallBack(strClassName, cb);
@@ -1353,15 +1342,4 @@ void NFCKernelModule::ProcessMemFree()
 bool NFCKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList)
 {
     return m_pClassModule->DoEvent(self, strClassName, eEvent, valueList);
-}
-
-bool NFCKernelModule::DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList)
-{
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->GetEventManager()->DoEvent(nEventID, valueList);
-    }
-
-    return false;
 }

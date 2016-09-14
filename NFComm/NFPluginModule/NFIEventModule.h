@@ -13,76 +13,95 @@
 #include "NFIModule.h"
 
 
+enum NFEventDefine
+{
+	////////////////Has Self---logic//////////////////////////////////////////////////////////
+	//arg[0]:resultID[EGameErrorCode]
+	NFED_ON_GENERAL_MESSAGE,
+
+	//arg[0]:x,y,z
+	NFED_ON_CLIENT_REQUIRE_MOVE,
+	NFED_ON_CLIENT_MOVE_RESULT,
+
+	//arg[0]:player_id key_value skillID target(1-N)
+	NFED_ON_CLIENT_REQUIRE_USE_SKILL,
+	NFED_ON_CLIENT_USE_SKILL_RESULT,
+
+	//arg[0]:skillID, fx, fy, fz, TargetObjectList
+	NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS,
+	NFED_ON_CLIENT_USE_SKILL_POS_RESULT,
+
+	//arg[0]:itemID,TargetObject
+	NFED_ON_CLIENT_REQUIRE_USE_ITEM,
+
+	//arg[0]:itemID, fx, fy, fz, TargetObjectList
+	NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS,
+
+	//arg[0]:object,type,sceneID,line
+	NFED_ON_CLIENT_ENTER_SCENE,
+	//arg[0]:object
+	NFED_ON_CLIENT_LEAVE_SCENE,
+
+	//arg[0]:object,type,sceneID,line
+	NFED_ON_OBJECT_ENTER_SCENE_BEFORE,
+	NFED_ON_OBJECT_ENTER_SCENE_RESULT,
+
+	NFED_ON_OBJECT_BE_KILLED,
+
+	// 通知副本奖励
+	NFED_ON_NOTICE_ECTYPE_AWARD,
+
+};
+
 class NFIEventModule
     : public NFIModule
 {
+public:
+protected:
 
-    virtual bool DoEvent(const int nEventID, const NFIDataList& valueList) = 0;
+	typedef std::function<int(const NFGUID&, const NFEventDefine, const NFIDataList&)> OBJECT_EVENT_FUNCTOR;
+	typedef std::function<int(const NFEventDefine, const NFIDataList&)> MODULE_EVENT_FUNCTOR;
 
-    virtual bool AddEventCallBack(const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
+	typedef NF_SHARE_PTR<OBJECT_EVENT_FUNCTOR> OBJECT_EVENT_FUNCTOR_PTR;//EVENT
+	typedef NF_SHARE_PTR<MODULE_EVENT_FUNCTOR> MODULE_EVENT_FUNCTOR_PTR;//EVENT
 
-    virtual bool ExistEventCallBack(const int nEventID) = 0;
+public:
+
+    virtual bool DoEvent(const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
+
+    virtual bool ExistEventCallBack(const NFEventDefine nEventID) = 0;
     
-    virtual bool RemoveEventCallBack(const int nEventID) = 0;
+    virtual bool RemoveEventCallBack(const NFEventDefine nEventID) = 0;
 
-/*
-    template<typename BaseType>
-    virtual bool AddEventCallBack(const NFGUID self,const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
-    {
-        return true;
-    }
-*/
+	template<typename BaseType>
+	bool AddEventCallBack(const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFIDataList&))
+	{
+		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));
+		return AddEventCallBack(nEventID, functorPtr);
+	}
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    virtual bool DoEvent(const NFGUID self, const int nEventID, const NFIDataList& valueList) = 0;
+    virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
 
-    virtual bool AddEventCallBack(const NFGUID self,const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
-
-    virtual bool ExistEventCallBack(const NFGUID self,const int nEventID) = 0;
+    virtual bool ExistEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
     
-    virtual bool RemoveEventCallBack(const NFGUID self,const int nEventID) = 0;
-/*
-    template<typename BaseType>
-    virtual bool AddEventCallBack(const NFGUID self,const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb)
-    {
-        return true;
-    }
-    */
-    ////////////////////time event////////////////////////////////////////////////////////////
-
-    virtual bool ExistTimeEvent(const std::string& strHeartBeatName) = 0;
-
-    virtual bool AddTimeEvent(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
-    virtual bool RemoveTimeEvent(const std::string& strHeartBeatName) = 0;
-/*
-    template<typename BaseType>
-    bool AddTimeEvent(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-    {
-        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
-    }
-    */
-
-    virtual bool ExistTimeEvent(const NFGUID self, const std::string& strHeartBeatName) = 0;
-
-    virtual bool AddTimeEvent(const NFGUID self, const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
-    virtual bool RemoveTimeEvent(const NFGUID self, const std::string& strHeartBeatName) = 0;
-/*
-    template<typename BaseType>
-    bool AddTimeEvent(const NFGUID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-    {
-        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(self, strHeartBeatName, functorPtr, fTime, nCount);
-    }
-    */
+    virtual bool RemoveEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
+	
+	template<typename BaseType>
+	bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFIDataList&))
+	{
+		OBJECT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		OBJECT_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_EVENT_FUNCTOR(functor));
+		return AddEventCallBack(self, nEventID, functorPtr);
+	}
 
 
 
+private:
 
-
-
+	virtual bool AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb) = 0;
+	virtual bool AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb) = 0;
 
 };
 
