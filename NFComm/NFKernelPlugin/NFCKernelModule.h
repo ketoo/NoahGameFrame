@@ -127,7 +127,6 @@ public:
 	virtual NFINT64 GetTime();
 
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
-    virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
 
 protected:
 
@@ -142,7 +141,6 @@ protected:
 
 protected:
 
-    virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb);
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb);
 
     void InitRandom();

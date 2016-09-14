@@ -148,9 +148,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFKernelModule\NFCKernelModule.h" />
+    <ClInclude Include="NFCEventModule.h" />
+    <ClInclude Include="NFCKernelModule.h" />
+    <ClInclude Include="NFCSceneModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
-    <ClInclude Include="NFSceneModule\NFCSceneModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -161,6 +162,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCKernelModule.cpp" />
     <ClCompile Include="NFCSceneModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />

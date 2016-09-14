@@ -80,7 +80,6 @@ public:
     }
 
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList) = 0;
-    virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList) = 0;
 
     //////////////////////////////////////////////////////////////////////////
     //ֻ������ģ��ע�ᣬ�ص�����ͬ���������¼�,���е������󶼻��ص�
@@ -112,7 +111,6 @@ public:
 
 
     /////////////////////////////////////////////////////////////////
-
 
     virtual bool IsContainer(const NFGUID& self) = 0;
     virtual bool ExistContainer(const int nContainerIndex) = 0;
@@ -185,7 +183,6 @@ public:
 	virtual NFINT64 GetTime() = 0;
 
 protected:
-    virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
 
