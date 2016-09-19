@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFKernelPlugin/NFIScheduleModule.h"
 
 
 class NFCKernelModule
@@ -42,9 +43,9 @@ public:
     virtual bool Execute();
 
     ///////////////////////////////////////////////////////////////////////
-
-    virtual bool FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
-    virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
+	virtual NFIScheduleModule* GetScheduleModule();
+	virtual bool FindSchedule(const NFGUID& self, const std::string& strScheduleName);
+	virtual bool RemoveSchedule(const NFGUID& self, const std::string& strScheduleName);
 
     virtual bool IsContainer(const NFGUID& self);
     virtual bool ExistContainer(const int nSceneID);
@@ -182,6 +183,7 @@ private:
     NFILogModule* m_pLogModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
+	NFIScheduleModule* m_pScheduleModule;
 };
 
 #endif
