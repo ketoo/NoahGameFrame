@@ -14,7 +14,10 @@
 #include <functional>
 #include "NFIModule.h"
 #include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFDefine.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFKernelPlugin/NFIScheduleModule.h"
 
 class NFIKernelModule
     : public NFIModule
@@ -22,21 +25,19 @@ class NFIKernelModule
 
 public:
 
-    template<typename BaseType>
-    bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-    {
-        NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
-        if (pObject.get())
-        {
-            return pObject->AddHeartBeat(strHeartBeatName, pBase, handler, fTime, nCount);
-        }
+	template<typename BaseType>
+	bool AddSchedule(const NFGUID self, const std::string& strScheduleName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
+	{
+		GetScheduleModule()->AddSchedule(self, strScheduleName, pBase, handler, fTime, nCount);
 
-        return false;
-    }
+		return false;
+	}
 
-    virtual bool FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName) = 0;
+	virtual NFIScheduleModule* GetScheduleModule() = 0;
 
-    virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName) = 0;
+	virtual bool FindSchedule(const NFGUID& self, const std::string& strScheduleName) = 0;
+
+	virtual bool RemoveSchedule(const NFGUID& self, const std::string& strScheduleName) = 0;
 
     template<typename BaseType>
     bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
