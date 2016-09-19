@@ -12,7 +12,6 @@
 
 #include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
