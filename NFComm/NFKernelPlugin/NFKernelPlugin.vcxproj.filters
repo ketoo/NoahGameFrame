@@ -8,14 +8,23 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="NFScheduleModule">
+      <UniqueIdentifier>{8d3b98f4-8bca-4d9f-9c68-f990ed6ba0d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFKernelPlugin.h" />
-    <ClInclude Include="NFKernelModule\NFCKernelModule.h">
-      <Filter>NFKernelModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFSceneModule\NFCSceneModule.h">
       <Filter>NFSceneModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCScheduleModule.h">
+      <Filter>NFScheduleModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFIScheduleModule.h">
+      <Filter>NFScheduleModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCKernelModule.h">
+      <Filter>NFKernelModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="NFCSceneModule.cpp">
       <Filter>NFSceneModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCScheduleModule.cpp">
+      <Filter>NFScheduleModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
