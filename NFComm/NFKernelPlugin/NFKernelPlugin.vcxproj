@@ -148,7 +148,9 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFKernelModule\NFCKernelModule.h" />
+    <ClInclude Include="NFCKernelModule.h" />
+    <ClInclude Include="NFCScheduleModule.h" />
+    <ClInclude Include="NFIScheduleModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
     <ClInclude Include="NFSceneModule\NFCSceneModule.h" />
   </ItemGroup>
@@ -163,6 +165,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     </ClCompile>
     <ClCompile Include="NFCKernelModule.cpp" />
     <ClCompile Include="NFCSceneModule.cpp" />
+    <ClCompile Include="NFCScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>

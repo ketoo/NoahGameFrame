@@ -8,7 +8,6 @@
 
 #include "NFCObject.h"
 #include "NFCRecordManager.h"
-#include "NFCHeartBeatManager.h"
 #include "NFCPropertyManager.h"
 #include "NFCComponentManager.h"
 #include "NFCEventManager.h"
@@ -20,7 +19,6 @@ NFCObject::NFCObject(NFGUID self, NFIPluginManager* pLuginManager)
     m_pPluginManager = pLuginManager;
 
     m_pRecordManager = NF_SHARE_PTR<NFCRecordManager>(NF_NEW NFCRecordManager(mSelf));
-    m_pHeartBeatManager = NF_SHARE_PTR<NFCHeartBeatManager>(NF_NEW NFCHeartBeatManager(mSelf));
     m_pPropertyManager = NF_SHARE_PTR<NFCPropertyManager>(NF_NEW NFCPropertyManager(mSelf));
     m_pComponentManager = NF_SHARE_PTR<NFCComponentManager>(NF_NEW NFCComponentManager(mSelf));
     m_pEventManager = NF_SHARE_PTR<NFIEventManager>(NF_NEW NFCEventManager(mSelf));
@@ -43,26 +41,10 @@ bool NFCObject::Shut()
 
 bool NFCObject::Execute()
 {
-    GetHeartBeatManager()->Execute();
     GetComponentManager()->Execute();
     GetEventManager()->Execute();
 
     return true;
-}
-
-bool NFCObject::AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount)
-{
-    return GetHeartBeatManager()->AddHeartBeat(mSelf , strHeartBeatName, cb, fTime, nCount);
-}
-
-bool NFCObject::FindHeartBeat(const std::string& strHeartBeatName)
-{
-    return GetHeartBeatManager()->Exist(strHeartBeatName);
-}
-
-bool NFCObject::RemoveHeartBeat(const std::string& strHeartBeatName)
-{
-    return GetHeartBeatManager()->RemoveHeartBeat(strHeartBeatName);
 }
 
 bool NFCObject::AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb)
@@ -379,11 +361,6 @@ const NFGUID& NFCObject::GetRecordObject(const std::string& strRecordName, const
 NF_SHARE_PTR<NFIRecordManager> NFCObject::GetRecordManager()
 {
     return m_pRecordManager;
-}
-
-NF_SHARE_PTR<NFIHeartBeatManager> NFCObject::GetHeartBeatManager()
-{
-    return m_pHeartBeatManager;
 }
 
 NF_SHARE_PTR<NFIPropertyManager> NFCObject::GetPropertyManager()
