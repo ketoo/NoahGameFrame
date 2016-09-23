@@ -98,7 +98,6 @@
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
-    <ClInclude Include="NFCHeartBeatManager.h" />
     <ClInclude Include="NFCMemManger.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
@@ -107,7 +106,6 @@
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIDataList.h" />
-    <ClInclude Include="NFIHeartBeatManager.h" />
     <ClInclude Include="NFMapEx.h" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFSingleton.h" />
@@ -121,13 +119,11 @@
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
     <ClInclude Include="NFTime.h" />
-    <ClInclude Include="NFTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCalendar.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
-    <ClCompile Include="NFCHeartBeatManager.cpp" />
     <ClCompile Include="NFCMemManger.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
@@ -135,7 +131,6 @@
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
     <ClCompile Include="NFTime.cpp" />
-    <ClCompile Include="NFTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

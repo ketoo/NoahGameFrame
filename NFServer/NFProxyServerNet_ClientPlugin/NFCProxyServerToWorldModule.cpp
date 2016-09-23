@@ -8,8 +8,6 @@
 
 #include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
-#include "NFComm/NFCore/NFIHeartBeatManager.h"
-#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 
 bool NFCProxyServerToWorldModule::Init()

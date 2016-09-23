@@ -50,12 +50,6 @@
     <ClInclude Include="NFSingleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCHeartBeatManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIHeartBeatManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,9 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFQueue.h">
@@ -112,9 +103,6 @@
     <ClCompile Include="NFCProperty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCHeartBeatManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -125,9 +113,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCMemManger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCalendar.cpp">
