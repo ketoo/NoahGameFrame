@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+#include "NFComm/NFKernelPlugin/NFIScheduleModule.h"
 
 
 class NFCKernelModule
@@ -42,12 +43,16 @@ public:
     virtual bool Execute();
 
     ///////////////////////////////////////////////////////////////////////
-
-    virtual bool FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
-    virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName);
+	virtual NFIScheduleModule* GetScheduleModule();
+	virtual bool FindSchedule(const NFGUID& self, const std::string& strScheduleName);
+	virtual bool RemoveSchedule(const NFGUID& self, const std::string& strScheduleName);
 
     virtual bool IsContainer(const NFGUID& self);
     virtual bool ExistContainer(const int nSceneID);
+
+	virtual bool ExistObject(const NFGUID& ident);
+	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex);
+	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex, const int nGroupID);
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident);
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg);
@@ -180,6 +185,7 @@ private:
     NFILogModule* m_pLogModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
+	NFIScheduleModule* m_pScheduleModule;
 };
 
 #endif

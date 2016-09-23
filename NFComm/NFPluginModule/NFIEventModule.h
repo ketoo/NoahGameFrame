@@ -15,6 +15,7 @@
 
 enum NFEventDefine
 {
+	NFED_UNKNOW = 0,
 	////////////////Has Self---logic//////////////////////////////////////////////////////////
 	//arg[0]:resultID[EGameErrorCode]
 	NFED_ON_GENERAL_MESSAGE,
@@ -95,8 +96,6 @@ public:
 		OBJECT_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_EVENT_FUNCTOR(functor));
 		return AddEventCallBack(self, nEventID, functorPtr);
 	}
-
-
 
 private:
 
