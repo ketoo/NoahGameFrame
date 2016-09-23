@@ -42,7 +42,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::strin
 	{
 		m_pKernelModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
 
-		m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 9999 );
+		m_pKernelModule->AddSchedule(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 9999 );
 
 		mLastTime = m_pKernelModule->GetTime();
 	}

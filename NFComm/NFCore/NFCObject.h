@@ -13,7 +13,6 @@
 #include <string>
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
-#include "NFComm/NFCore/NFIHeartBeatManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 
 class NFCObject
@@ -36,10 +35,6 @@ public:
     ///////////////////////////////////////////////////////////////////////
 
     virtual NFGUID Self();
-
-    virtual bool FindHeartBeat(const std::string& strHeartBeatName);
-
-    virtual bool RemoveHeartBeat(const std::string& strHeartBeatName);
 
     /////////////////////////////////////////////////////////////////
 
@@ -78,7 +73,6 @@ public:
     virtual const NFGUID& GetRecordObject(const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
-    virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager();
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager();
 
@@ -87,13 +81,10 @@ protected:
 
     virtual bool AddPropertyCallBack(const std::string& strCriticalName, const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
-
 private:
     NFGUID mSelf;
 
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
-    NF_SHARE_PTR<NFIHeartBeatManager> m_pHeartBeatManager;
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
     NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 

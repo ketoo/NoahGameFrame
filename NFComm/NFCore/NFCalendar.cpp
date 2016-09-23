@@ -116,7 +116,7 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 				year++;
 			}
 		}
-		case NDAY:
+		case DAY:
 		{
 			while (true)
 			{
@@ -167,15 +167,15 @@ NFINT64 NFCalendar::Get(CalendarType CalendarType)
 				year++;
 			}
 		}
-		case NHOUR:
+		case HOUR:
 		{
 			return (nFixTime%NFCalendar::NDAY) / NFCalendar::NHOUR;
 		}
-		case NMINUTE:
+		case MINUTE:
 		{
 			return (nFixTime%NFCalendar::NHOUR) / NFCalendar::NMINUTE;
 		}
-		case NSECOND:
+		case SECOND:
 		{
 			return (nFixTime%NFCalendar::NMINUTE) / NFCalendar::NSECOND;
 		}
