@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPropertyModule.h"
-#include "NFComm/NFCore/NFTimer.h"
 
 bool NFCPropertyModule::Init()
 {
