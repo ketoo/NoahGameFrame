@@ -150,6 +150,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
   <ItemGroup>
     <ClInclude Include="NFCEventModule.h" />
     <ClInclude Include="NFCKernelModule.h" />
+    <ClInclude Include="NFCScheduleModule.h" />
     <ClInclude Include="NFCSceneModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
   </ItemGroup>
@@ -165,6 +166,7 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
     <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCKernelModule.cpp" />
     <ClCompile Include="NFCSceneModule.cpp" />
+    <ClCompile Include="NFCScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>

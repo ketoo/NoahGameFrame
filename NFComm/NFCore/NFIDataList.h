@@ -304,6 +304,7 @@ public:
         TDATA_TYPE nType;
 
     public:
+		//std::variant
         mapbox::util::variant<NFINT64, double, std::string, NFGUID> variantData;
     };
 
