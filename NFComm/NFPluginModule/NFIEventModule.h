@@ -75,7 +75,7 @@ public:
     virtual bool RemoveEventCallBack(const NFEventDefine nEventID) = 0;
 
 	template<typename BaseType>
-	bool AddEventCallBack(const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFIDataList&))
+	bool AddEventCallBack(const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFEventDefine, const NFIDataList&))
 	{
 		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));

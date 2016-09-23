@@ -1,5 +1,4 @@
 #include "HelloWorld3Module.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool HelloWorld3Module::Init()
