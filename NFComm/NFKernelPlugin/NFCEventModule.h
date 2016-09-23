@@ -13,6 +13,7 @@
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFCEventModule
     : public NFIEventModule
@@ -53,11 +54,12 @@ private:
 	bool AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
 
 private:
+	NFIKernelModule* m_pKernelodule;
 
 	NFList<NFEventDefine> mModuleRemoveListEx;
 	NFMapEx<NFEventDefine, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
 
-	NFMapEx<NFGUID, NFList<NFEventDefine>> mObjectRemoveListEx;
+	NFList<NFGUID> mObjectRemoveListEx;
 	NFMapEx<NFGUID, NFMapEx<NFEventDefine, NFList<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
 };
 

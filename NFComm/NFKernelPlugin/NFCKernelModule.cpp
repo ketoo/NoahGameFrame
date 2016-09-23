@@ -58,6 +58,7 @@ bool NFCKernelModule::Init()
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
 
     return true;
 }
@@ -98,29 +99,19 @@ bool NFCKernelModule::Execute()
     return true;
 }
 
-bool NFCKernelModule::FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName)
+NFIScheduleModule* NFCKernelModule::GetScheduleModule()
 {
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->FindHeartBeat(strHeartBeatName);
-    }
-
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-    return false;
+	return m_pScheduleModule;
 }
 
-bool NFCKernelModule::RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName)
+bool NFCKernelModule::FindSchedule(const NFGUID& self, const std::string& strScheduleName)
 {
-    NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
-    if (pObject)
-    {
-        return pObject->RemoveHeartBeat(strHeartBeatName);
-    }
+	return m_pScheduleModule->FindSchedule(self, strScheduleName);
+}
 
-    m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
+bool NFCKernelModule::RemoveSchedule(const NFGUID& self, const std::string& strScheduleName)
+{
+	return m_pScheduleModule->RemoveSchedule(self, strScheduleName);
 }
 
 NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg)
@@ -1190,6 +1181,21 @@ bool NFCKernelModule::ExistContainer(const int nSceneID)
     }
 
     return false;
+}
+
+bool NFCKernelModule::ExistObject(const NFGUID & ident)
+{
+	return false;
+}
+
+bool NFCKernelModule::ExistObject(const NFGUID & ident, const int nContainerIndex)
+{
+	return false;
+}
+
+bool NFCKernelModule::ExistObject(const NFGUID & ident, const int nContainerIndex, const int nGroupID)
+{
+	return false;
 }
 
 bool NFCKernelModule::DestroySelf(const NFGUID& self)
