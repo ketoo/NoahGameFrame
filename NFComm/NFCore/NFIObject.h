@@ -14,7 +14,6 @@
 #include "NFIDataList.h"
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
-#include "NFIHeartBeatManager.h"
 #include "NFIPropertyManager.h"
 #include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -48,14 +47,6 @@ public:
         return AddRecordCallBack(strRecordName, functorPtr);
     }
 
-    template<typename BaseType>
-    bool AddHeartBeat(const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-    {
-        HEART_BEAT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-        HEART_BEAT_FUNCTOR_PTR functorPtr(NF_NEW HEART_BEAT_FUNCTOR(functor));
-        return AddHeartBeat(strHeartBeatName, functorPtr, fTime, nCount);
-    }
-
     template <typename T>
     bool AddComponent()
     {
@@ -83,10 +74,6 @@ public:
     {
         return GetComponentManager()->FindComponent<T>(strComponentName);
     }
-
-    virtual bool FindHeartBeat(const std::string& strHeartBeatName) = 0;
-
-    virtual bool RemoveHeartBeat(const std::string& strHeartBeatName) = 0;
 
     /////////////////////////////////////////////////////////////////
 
@@ -128,7 +115,6 @@ public:
     //  virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
-    virtual NF_SHARE_PTR<NFIHeartBeatManager> GetHeartBeatManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
     virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
@@ -136,8 +122,6 @@ protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 
     virtual bool AddPropertyCallBack(const std::string& strPropertyName, const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    virtual bool AddHeartBeat(const std::string& strHeartBeatName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
 
 protected:
     NFIPluginManager* m_pPluginManager;
