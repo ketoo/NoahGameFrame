@@ -34,6 +34,7 @@ public:
 	*/
 	///for object
 	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+	virtual bool RemoveSchedule(const NFGUID self) = 0; 
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 
