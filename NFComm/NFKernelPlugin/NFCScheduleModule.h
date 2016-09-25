@@ -7,7 +7,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class  NFCScheduleElement
-	: public NFList<HEART_BEAT_FUNCTOR_PTR>
+	: public NFList<OBJECT_SCHEDULE_FUNCTOR_PTR>
 {
 public:
 	NFCScheduleElement()
@@ -46,15 +46,19 @@ public:
 	virtual bool Init();
 	virtual bool Execute();
 
-	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
+	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount);
+	virtual bool RemoveSchedule(const std::string& strScheduleName);
+	virtual bool ExistSchedule(const std::string& strScheduleName);
+
+	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount);
 	virtual bool RemoveSchedule(const NFGUID self);
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName);
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName);
 
 protected:
-	NFMapEx<NFGUID, NFMapEx <std::string, NFCScheduleElement >> mScheduleMap;//guid_scheduleName_element
-	std::list<NFCScheduleElement> mAddList;
-	std::map<NFGUID, std::string> mRemoveList;
+	NFMapEx<NFGUID, NFMapEx <std::string, NFCScheduleElement >> mObjectScheduleMap;//guid_scheduleName_element
+	std::list<NFCScheduleElement> mObjectAddList;
+	std::map<NFGUID, std::string> mObjectRemoveList;
 	
 };
 
