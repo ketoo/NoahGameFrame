@@ -4,7 +4,6 @@
 #include <string>
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFList.h"
-#include "NFComm/NFCore/NFDefine.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
