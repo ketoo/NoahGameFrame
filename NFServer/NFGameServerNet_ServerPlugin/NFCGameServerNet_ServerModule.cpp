@@ -795,7 +795,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 
 	switch (nOpType)
 	{
-	case NFIRecord::RecordOptype::Add:
+	case RECORD_EVENT_DATA::Add:
 	{
 		NFMsg::ObjectRecordAddRow xAddRecordRow;
 		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
@@ -882,7 +882,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Del:
+	case RECORD_EVENT_DATA::Del:
 	{
 		NFMsg::ObjectRecordRemove xReoveRecordRow;
 
@@ -900,7 +900,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Swap:
+	case RECORD_EVENT_DATA::Swap:
 	{
 		//其实是2个row交换
 		NFMsg::ObjectRecordSwap xSwapRecord;
@@ -919,7 +919,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Update:
+	case RECORD_EVENT_DATA::Update:
 	{
 		switch (oldVar.GetType())
 		{
@@ -1008,10 +1008,10 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Create:
+	case RECORD_EVENT_DATA::Create:
 		return 0;
 		break;
-	case NFIRecord::RecordOptype::Cleared:
+	case RECORD_EVENT_DATA::Cleared:
 	{
 		//             NFMsg::ObjectRecordObject xRecordChanged;
 		//             xRecordChanged.set_player_id( self.nData64 );
