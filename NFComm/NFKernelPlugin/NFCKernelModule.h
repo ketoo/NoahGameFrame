@@ -23,7 +23,7 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
-#include "NFComm/NFKernelPlugin/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 
 class NFCKernelModule

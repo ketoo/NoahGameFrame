@@ -14,9 +14,6 @@
     <ClInclude Include="NFCRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFDefine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
