@@ -99,21 +99,6 @@ bool NFCKernelModule::Execute()
     return true;
 }
 
-NFIScheduleModule* NFCKernelModule::GetScheduleModule()
-{
-	return m_pScheduleModule;
-}
-
-bool NFCKernelModule::FindSchedule(const NFGUID& self, const std::string& strScheduleName)
-{
-	return m_pScheduleModule->FindSchedule(self, strScheduleName);
-}
-
-bool NFCKernelModule::RemoveSchedule(const NFGUID& self, const std::string& strScheduleName)
-{
-	return m_pScheduleModule->RemoveSchedule(self, strScheduleName);
-}
-
 NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg)
 {
     NF_SHARE_PTR<NFIObject> pObject;
