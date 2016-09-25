@@ -67,7 +67,7 @@ protected:
 	typedef NF_SHARE_PTR<MODULE_EVENT_FUNCTOR> MODULE_EVENT_FUNCTOR_PTR;//EVENT
 
 public:
-
+	// only be used in module
     virtual bool DoEvent(const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
 
     virtual bool ExistEventCallBack(const NFEventDefine nEventID) = 0;
@@ -82,7 +82,7 @@ public:
 		return AddEventCallBack(nEventID, functorPtr);
 	}
     ///////////////////////////////////////////////////////////////////////////////////////////////
-
+	// can be used for object
     virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
 
     virtual bool ExistEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
@@ -97,7 +97,7 @@ public:
 		return AddEventCallBack(self, nEventID, functorPtr);
 	}
 
-private:
+protected:
 
 	virtual bool AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb) = 0;
 	virtual bool AddEventCallBack(const NFGUID self, const NFEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb) = 0;

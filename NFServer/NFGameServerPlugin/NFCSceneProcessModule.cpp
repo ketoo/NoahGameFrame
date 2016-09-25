@@ -103,7 +103,7 @@ int NFCSceneProcessModule::CreateCloneScene(const int& nSceneID)
     return nTargetGroupID;
 }
 
-int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
+int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 4
         || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT,
@@ -190,7 +190,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEven
     return 0;
 }
 
-int NFCSceneProcessModule::OnLeaveSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
+int NFCSceneProcessModule::OnLeaveSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var)
 {
     if (1 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))

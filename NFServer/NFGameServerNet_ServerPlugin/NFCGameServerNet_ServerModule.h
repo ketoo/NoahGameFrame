@@ -107,7 +107,7 @@ protected:
     int OnContainerEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
+    int OnSwapSceneResultEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var);
 
     int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
     int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);

@@ -1,13 +1,6 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-#ifdef NFLOGPLUGIN_EXPORTS
-#define NFLOGPLUGIN_API __declspec(dllexport)
-#else
-#define NFLOGPLUGIN_API __declspec(dllimport)
-#endif
-
-
 //////////////////////////////////////////////////////////////////////////
 class NFLogPlugin : public NFIPlugin
 {
