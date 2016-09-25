@@ -168,7 +168,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
     }
 
 	RECORD_EVENT_DATA xEventData;
-	xEventData.nOpType = bCover? Cover : Add;
+	xEventData.nOpType = bCover? RECORD_EVENT_DATA::Cover : RECORD_EVENT_DATA::Add;
 	xEventData.nRow = nFindRow;
 	xEventData.nCol = 0;
 	xEventData.strRecordName = mstrRecordName;
@@ -217,7 +217,7 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
+    xEventData.nOpType = RECORD_EVENT_DATA::Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -272,7 +272,7 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const double value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
+    xEventData.nOpType = RECORD_EVENT_DATA::Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -327,7 +327,7 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const std::string& val
     pVar->variantData = (std::string)value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
+    xEventData.nOpType = RECORD_EVENT_DATA::Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -382,7 +382,7 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
     pVar->variantData = value;
 
     RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
+    xEventData.nOpType = RECORD_EVENT_DATA::Update;
     xEventData.nRow = nRow;
     xEventData.nCol = nCol;
     xEventData.strRecordName = mstrRecordName;
@@ -782,7 +782,7 @@ bool NFCRecord::Remove(const int nRow)
         if (IsUsed(nRow))
         {
             RECORD_EVENT_DATA xEventData;
-            xEventData.nOpType = Del;
+            xEventData.nOpType = RECORD_EVENT_DATA::Del;
             xEventData.nRow = nRow;
             xEventData.nCol = 0;
             xEventData.strRecordName = mstrRecordName;
@@ -929,7 +929,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
         mVecUsedState[nTargetRow] = nOriginUse;
 
         RECORD_EVENT_DATA xEventData;
-        xEventData.nOpType = Swap;
+        xEventData.nOpType = RECORD_EVENT_DATA::Swap;
         xEventData.nRow = nOriginRow;
         xEventData.nCol = nTargetRow;
         xEventData.strRecordName = mstrRecordName;
