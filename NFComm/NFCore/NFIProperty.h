@@ -9,9 +9,11 @@
 #ifndef NFI_PROPERTY_H
 #define NFI_PROPERTY_H
 
-#include "NFDefine.h"
 #include "NFIDataList.h"
 #include "NFList.h"
+
+typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 
 class NFIProperty
 {

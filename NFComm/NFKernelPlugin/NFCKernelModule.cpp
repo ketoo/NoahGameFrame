@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCKernelModule.h"
-#include "NFComm/NFCore/NFDefine.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"

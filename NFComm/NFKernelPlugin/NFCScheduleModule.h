@@ -3,9 +3,8 @@
 
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFList.h"
-#include "NFComm/NFCore/NFDefine.h"
 #include "NFComm/NFCore/NFIDataList.h"
-#include "NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class  NFCScheduleElement
 	: public NFList<HEART_BEAT_FUNCTOR_PTR>
