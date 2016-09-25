@@ -86,12 +86,14 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFKernelModule/NFCKernelModule.cpp" />
-		<Unit filename="NFKernelModule/NFCKernelModule.h" />
+		<Unit filename="NFCKernelModule.cpp" />
+		<Unit filename="NFCKernelModule.h" />
 		<Unit filename="NFKernelPlugin.cpp" />
 		<Unit filename="NFKernelPlugin.h" />
-		<Unit filename="NFSceneModule/NFCSceneModule.cpp" />
-		<Unit filename="NFSceneModule/NFCSceneModule.h" />
+		<Unit filename="NFCSceneModule.cpp" />
+		<Unit filename="NFCSceneModule.h" />
+		<Unit filename="NFCScheduleModule.cpp" />
+		<Unit filename="NFCScheduleModule.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
