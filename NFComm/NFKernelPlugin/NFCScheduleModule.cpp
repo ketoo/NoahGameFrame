@@ -113,7 +113,7 @@ bool NFCScheduleModule::RemoveSchedule(const NFGUID self, const std::string& str
 	return true;
 }
 
-bool NFCScheduleModule::FindSchedule(const NFGUID self, const std::string& strScheduleName)
+bool NFCScheduleModule::ExistSchedule(const NFGUID self, const std::string& strScheduleName)
 {
 	auto findIter = mScheduleMap.find(self.ToString());
 	if (findIter == mScheduleMap.end())

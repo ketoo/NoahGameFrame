@@ -20,7 +20,7 @@ class NFCSceneModule
 public:
     NFCSceneModule(NFIPluginManager* p)
     {
-        //pPluginManager = p;
+        pPluginManager = p;
     }
 
 
