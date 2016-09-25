@@ -90,8 +90,10 @@
 		<Unit filename="NFMapEx.h" />
 		<Unit filename="NFQueue.h" />
 		<Unit filename="NFSingleton.h" />
-		<Unit filename="NFTimer.cpp" />
-		<Unit filename="NFTimer.h" />
+		<Unit filename="NFCalendar.cpp" />
+		<Unit filename="NFCalendar.h" />
+		<Unit filename="NFTime.cpp" />
+		<Unit filename="NFTime.h" />
 		<Unit filename="ReadMe.txt" />
 		<Extensions>
 			<code_completion />
