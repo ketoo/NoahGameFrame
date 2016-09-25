@@ -15,6 +15,22 @@
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIComponentManager.h"
 
+enum CLASS_OBJECT_EVENT
+{
+	COE_DESTROY = 0,
+	COE_BEFOREDESTROY,
+	COE_CREATE_NODATA,
+	COE_CREATE_LOADDATA,
+	COE_CREATE_BEFORE_EFFECT,
+	COE_CREATE_EFFECTDATA,
+	COE_CREATE_AFTER_EFFECT,
+	COE_CREATE_HASDATA,
+	COE_CREATE_FINISH,  // ToModify任务创建完成后再挂回调
+};
+
+typedef std::function<int(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<CLASS_EVENT_FUNCTOR> CLASS_EVENT_FUNCTOR_PTR;//EVENT
+
 class NFIClass
     : public NFList<std::string>//include files
 {
