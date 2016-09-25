@@ -15,7 +15,9 @@ public:
 		mstrScheduleName = "";
 		mfIntervalTime = 0.0f;
 		mnNextTriggerTime = 0;
+		mnStartTime = 0;
 		mnRemainCount = 0;
+		mnAllCount = 0;
 	};
 
 	virtual ~NFCScheduleElement()
@@ -27,7 +29,9 @@ public:
 	std::string mstrScheduleName;
 	float mfIntervalTime;
 	NFINT64 mnNextTriggerTime;
+	NFINT64 mnStartTime;
 	int mnRemainCount;
+	int mnAllCount;
 
 	NFGUID self;
 };
@@ -43,13 +47,14 @@ public:
 	virtual bool Execute();
 
 	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const HEART_BEAT_FUNCTOR_PTR& cb, const float fTime, const int nCount);
+	virtual bool RemoveSchedule(const NFGUID self);
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName);
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName);
 
 protected:
-	std::map<std::string, NFMapEx <std::string, NFCScheduleElement >> mScheduleMap;//guid_scheduleName_element
+	NFMapEx<NFGUID, NFMapEx <std::string, NFCScheduleElement >> mScheduleMap;//guid_scheduleName_element
 	std::list<NFCScheduleElement> mAddList;
-	std::map<std::string, std::string> mRemoveList;
+	std::map<NFGUID, std::string> mRemoveList;
 	
 };
 
