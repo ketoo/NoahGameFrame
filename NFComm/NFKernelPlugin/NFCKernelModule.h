@@ -43,9 +43,6 @@ public:
     virtual bool Execute();
 
     ///////////////////////////////////////////////////////////////////////
-	virtual NFIScheduleModule* GetScheduleModule();
-	virtual bool FindSchedule(const NFGUID& self, const std::string& strScheduleName);
-	virtual bool RemoveSchedule(const NFGUID& self, const std::string& strScheduleName);
 
     virtual bool IsContainer(const NFGUID& self);
     virtual bool ExistContainer(const int nSceneID);

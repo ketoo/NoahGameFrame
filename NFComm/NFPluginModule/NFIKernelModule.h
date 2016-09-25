@@ -25,20 +25,6 @@ class NFIKernelModule
 
 public:
 
-	template<typename BaseType>
-	bool AddSchedule(const NFGUID self, const std::string& strScheduleName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-	{
-		GetScheduleModule()->AddSchedule(self, strScheduleName, pBase, handler, fTime, nCount);
-
-		return false;
-	}
-
-	virtual NFIScheduleModule* GetScheduleModule() = 0;
-
-	virtual bool FindSchedule(const NFGUID& self, const std::string& strScheduleName) = 0;
-
-	virtual bool RemoveSchedule(const NFGUID& self, const std::string& strScheduleName) = 0;
-
     template<typename BaseType>
     bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
     {
@@ -107,7 +93,6 @@ public:
 
     virtual bool IsContainer(const NFGUID& self) = 0;
     virtual bool ExistContainer(const int nContainerIndex) = 0;
-
 
 	virtual bool ExistObject(const NFGUID& ident) = 0;
 	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex) = 0;
