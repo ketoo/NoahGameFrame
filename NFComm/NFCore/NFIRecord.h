@@ -9,23 +9,43 @@
 #ifndef NFI_RECORD_H
 #define NFI_RECORD_H
 
-#include "NFDefine.h"
 #include "NFIDataList.h"
+
+struct RECORD_EVENT_DATA
+{
+	enum RecordOptype
+	{
+		Add = 0,
+		Del,
+		Swap,
+		Create,
+		Update,
+		Cleared,
+		Sort,
+		Cover,
+
+		UNKNOW,
+	};
+	RECORD_EVENT_DATA()
+	{
+		nOpType = UNKNOW;
+		nRow = 0;
+		nCol = 0;
+	}
+
+	RecordOptype nOpType;
+	int nRow;
+	int nCol;
+	std::string strRecordName;
+};
+
+typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&)> RECORD_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
 
 class NFIRecord
 {
 public:
-    enum RecordOptype
-    {
-        Add = 0,
-        Del,
-        Swap,
-        Create,
-        Update,
-        Cleared,
-        Sort,
-        Cover,
-    };
+    
 
     typedef std::vector< NF_SHARE_PTR<NFIDataList::TData> > TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
