@@ -1,5 +1,10 @@
-// NFKernelPlugin.cpp : Defines the exported functions for the DLL application.
+// -------------------------------------------------------------------------
+//    @FileName         :    NFKernelPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2010-03-15
+//    @Module           :    NFKernelPlugin
 //
+// -------------------------------------------------------------------------
 
 #include "NFKernelPlugin.h"
 #include "NFCKernelModule.h"

@@ -62,8 +62,8 @@ protected:
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int OnEnterSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-    int OnLeaveSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
+    int OnEnterSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
+    int OnLeaveSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
 
 protected:
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
