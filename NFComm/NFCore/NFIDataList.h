@@ -50,6 +50,13 @@ const static NFINT64 NULL_INT = 0;
 class NFIDataList
 {
 public:
+	struct Vetor3D
+	{
+		float fx;
+		float fy;
+		float fz;
+	};
+
     struct TData
     {
     public:
