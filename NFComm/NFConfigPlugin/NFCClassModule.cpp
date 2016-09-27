@@ -10,8 +10,8 @@
 #include <algorithm>
 #include "NFConfigPlugin.h"
 #include "NFCClassModule.h"
-#include "NFComm/RapidXML/rapidxml.hpp"
-#include "NFComm/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
 
 bool NFCClassModule::Init()
 {
