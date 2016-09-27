@@ -118,6 +118,8 @@
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
     <ClInclude Include="NFTime.h" />
+    <ClInclude Include="NFVector2.hpp" />
+    <ClInclude Include="NFVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCalendar.cpp" />
