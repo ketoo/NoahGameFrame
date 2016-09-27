@@ -13,7 +13,7 @@
 #include <map>
 #include <iostream>
 #include "NFCElementModule.h"
-#include "NFComm/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFCore/NFList.h"
 #include "NFComm/NFCore/NFCDataList.h"
