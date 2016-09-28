@@ -161,9 +161,14 @@ public:
 		return 0.0f;;
 	}
 
+	bool FromString(const std::string& value)
+	{
+		return false;
+	}
+
 	std::string ToString() const
 	{
-		return "(" + lexical_cast<std::string>(x) + "," + lexical_cast<std::string>(this->y) + ")";
+		return lexical_cast<std::string>(x) + "," + lexical_cast<std::string>(this->y);
 	}
 
 	// Special values.
