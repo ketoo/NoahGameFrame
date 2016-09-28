@@ -87,12 +87,12 @@ public:
 
 	bool operator== (const NFVector3& v) const
 	{
-		return std::abs(this->x - v.x < 0.001f && std::abs(this->y - v.y) < 0.001 f&& std::abs(this->z - v.z) < 0.001f;;
+		return std::abs(this->x - v.x) < 0.001f && std::abs(this->y - v.y) < 0.001f && std::abs(this->z - v.z) < 0.001f;
 	}
 
 	bool operator!= (const NFVector3& v) const
 	{
-		return false;
+		return std::abs(this->x - v.x) >= 0.001f && std::abs(this->y - v.y) >= 0.001f && std::abs(this->z - v.z) >= 0.001f;
 	}
 
     // Arithmetic Operations
@@ -155,7 +155,7 @@ public:
 
 	bool IsZero() const
 	{
-		return false;
+		return x < 0.001f && y < 0.001f && z < 0.001f;
 	}
 
     inline NFVector3 Normalized() const
@@ -178,9 +178,9 @@ public:
 		return 0.0f;;
 	}
 
-	std::string toString() const
+	std::string ToString() const
 	{
-		return "";
+		return "(" + lexical_cast<std::string>(x) + "," + lexical_cast<std::string>(y) + "," + lexical_cast<std::string>(z) + ")";
 	}
 
     // Special values.
