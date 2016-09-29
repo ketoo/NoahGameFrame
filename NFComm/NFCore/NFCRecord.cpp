@@ -768,6 +768,10 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIData
 			return FindVector2(nCol, var.Vector2(nCol), varResult);
 			break;
 
+        case TDATA_VECTOR3:
+			return FindVector3(nCol, var.Vector3(nCol), varResult);
+			break;
+
         default:
             break;
     }
