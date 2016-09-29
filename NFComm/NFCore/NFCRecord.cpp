@@ -392,10 +392,120 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
     return true;
 }
 
+bool NFCRecord::SetVector2(const int nRow, const int nCol, const NFVector2& value)
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return false;
+	}
+
+	if (TDATA_VECTOR2 != GetColType(nCol))
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	NFIDataList::TData var;
+	var.SetVector2(value);
+
+	NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+
+	//must have memory
+	if (nullptr == pVar)
+	{
+		return false;
+	}
+
+	if (var == *pVar)
+	{
+		return false;
+	}
+
+	NFCDataList::TData oldValue;
+	oldValue.SetVector2(pVar->GetVector2());
+
+	pVar->variantData = value;
+
+	RECORD_EVENT_DATA xEventData;
+	xEventData.nOpType = RECORD_EVENT_DATA::Update;
+	xEventData.nRow = nRow;
+	xEventData.nCol = nCol;
+	xEventData.strRecordName = mstrRecordName;
+
+	OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+
+	return true;
+}
+
+bool NFCRecord::SetVector3(const int nRow, const int nCol, const NFVector3& value)
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return false;
+	}
+
+	if (TDATA_VECTOR3 != GetColType(nCol))
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	NFIDataList::TData var;
+	var.SetVector3(value);
+
+	NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+
+	//must have memory
+	if (nullptr == pVar)
+	{
+		return false;
+	}
+
+	if (var == *pVar)
+	{
+		return false;
+	}
+
+	NFCDataList::TData oldValue;
+	oldValue.SetVector3(pVar->GetVector3());
+
+	pVar->variantData = value;
+
+	RECORD_EVENT_DATA xEventData;
+	xEventData.nOpType = RECORD_EVENT_DATA::Update;
+	xEventData.nRow = nRow;
+	xEventData.nCol = nCol;
+	xEventData.strRecordName = mstrRecordName;
+
+	OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+
+	return true;
+}
+
 bool NFCRecord::SetObject(const int nRow, const std::string& strColTag, const NFGUID& value)
 {
     int nCol = GetCol(strColTag);
     return SetObject(nRow, nCol, value);
+}
+
+bool NFCRecord::SetVector2(const int nRow, const std::string& strColTag, const NFVector2& value)
+{
+	int nCol = GetCol(strColTag);
+	return SetVector2(nRow, nCol, value);
+}
+
+bool NFCRecord::SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value)
+{
+	int nCol = GetCol(strColTag);
+	return SetVector3(nRow, nCol, value);
 }
 
 // 获得数据
@@ -438,6 +548,14 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
                 case TDATA_OBJECT:
                     varList.Add(NFGUID());
                     break;
+
+				case TDATA_VECTOR2:
+					varList.Add(NFVector2());
+					break;
+
+				case TDATA_VECTOR3:
+					varList.Add(NFVector3());
+					break;
                 default:
                     return false;
                     break;
@@ -561,6 +679,60 @@ const NFGUID& NFCRecord::GetObject(const int nRow, const std::string& strColTag)
     return GetObject(nRow, nCol);
 }
 
+const NFVector2& NFCRecord::GetVector2(const int nRow, const int nCol) const
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return NULL_VECTOR2;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return NULL_VECTOR2;
+	}
+
+	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+	if (!pVar.get())
+	{
+		return NULL_VECTOR2;
+	}
+
+	return pVar->GetVector2();
+}
+
+const NFVector2& NFCRecord::GetVector2(const int nRow, const std::string& strColTag) const
+{
+	int nCol = GetCol(strColTag);
+	return GetVector2(nRow, nCol);
+}
+
+const NFVector3& NFCRecord::GetVector3(const int nRow, const int nCol) const
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return NULL_VECTOR3;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return NULL_VECTOR3;
+	}
+
+	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+	if (!pVar.get())
+	{
+		return NULL_VECTOR3;
+	}
+
+	return pVar->GetVector3();
+}
+
+const NFVector3& NFCRecord::GetVector3(const int nRow, const std::string& strColTag) const
+{
+	int nCol = GetCol(strColTag);
+	return GetVector3(nRow, nCol);
+}
+
 int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult)
 {
     if (!ValidCol(nCol))
@@ -591,6 +763,10 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIData
         case TDATA_OBJECT:
             return FindObject(nCol, var.Object(nCol), varResult);
             break;
+
+		case TDATA_VECTOR2:
+			return FindVector2(nCol, var.Vector2(nCol), varResult);
+			break;
 
         default:
             break;
@@ -773,6 +949,92 @@ int NFCRecord::FindObject(const std::string& strColTag, const NFGUID& value, NFI
 
     int nCol = GetCol(strColTag);
     return FindObject(nCol, value, varResult);
+}
+
+int NFCRecord::FindVector2(const int nCol, const NFVector2& value, NFIDataList& varResult)
+{
+	if (!ValidCol(nCol))
+	{
+		return -1;
+	}
+
+	if (TDATA_VECTOR2 != mVarRecordType->Type(nCol))
+	{
+		return -1;
+	}
+
+	{
+		for (int64_t i = 0; i < mnMaxRow; ++i)
+		{
+			if (!IsUsed(i))
+			{
+				continue;
+			}
+
+			if (GetVector2(i, nCol) == value)
+			{
+				varResult << i;
+			}
+		}
+
+		return varResult.GetCount();
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector2(const std::string& strColTag, const NFVector2& value, NFIDataList& varResult)
+{
+	if (strColTag.empty())
+	{
+		return -1;
+	}
+
+	int nCol = GetCol(strColTag);
+	return FindVector2(nCol, value, varResult);
+}
+
+int NFCRecord::FindVector3(const int nCol, const NFVector3& value, NFIDataList& varResult)
+{
+	if (!ValidCol(nCol))
+	{
+		return -1;
+	}
+
+	if (TDATA_VECTOR3 != mVarRecordType->Type(nCol))
+	{
+		return -1;
+	}
+
+	{
+		for (int64_t i = 0; i < mnMaxRow; ++i)
+		{
+			if (!IsUsed(i))
+			{
+				continue;
+			}
+
+			if (GetVector3(i, nCol) == value)
+			{
+				varResult << i;
+			}
+		}
+
+		return varResult.GetCount();
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector3(const std::string& strColTag, const NFVector3& value, NFIDataList& varResult)
+{
+	if (strColTag.empty())
+	{
+		return -1;
+	}
+
+	int nCol = GetCol(strColTag);
+	return FindVector3(nCol, value, varResult);
 }
 
 bool NFCRecord::Remove(const int nRow)
