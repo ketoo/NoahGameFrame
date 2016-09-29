@@ -67,15 +67,23 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(xData));
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->variantData = xData.variantData;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->variantData = xData.variantData;
+		mxData->variantData = xData.variantData;
 
-	NFCDataList::TData newValue;
-	newValue = *mxData;
+		NFCDataList::TData newValue;
+		newValue = *mxData;
 
-	OnEventHandler(oldValue, newValue);
+		OnEventHandler(oldValue, newValue);
+	}
+
 }
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
@@ -267,12 +275,19 @@ bool NFCProperty::SetInt(const NFINT64 value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetInt(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetInt(value);
+		mxData->SetInt(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -301,12 +316,19 @@ bool NFCProperty::SetFloat(const double value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetFloat(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetFloat(value);
+		mxData->SetFloat(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -335,12 +357,19 @@ bool NFCProperty::SetString(const std::string& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetString(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetString(value);
+		mxData->SetString(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -369,12 +398,19 @@ bool NFCProperty::SetObject(const NFGUID& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetObject(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetObject(value);
+		mxData->SetObject(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -403,12 +439,19 @@ bool NFCProperty::SetVector2(const NFVector2& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetVector2(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetVector2(value);
+		mxData->SetVector2(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -437,12 +480,19 @@ bool NFCProperty::SetVector3(const NFVector3& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetVector3(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetVector3(value);
+		mxData->SetVector3(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
