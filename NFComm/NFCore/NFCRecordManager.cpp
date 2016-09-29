@@ -119,6 +119,50 @@ bool NFCRecordManager::SetRecordObject(const std::string& strRecordName, const i
     return false;
 }
 
+bool NFCRecordManager::SetRecordVector2(const std::string& strRecordName, const int nRow, const int nCol, const NFVector2& obj)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->SetVector2(nRow, nCol, obj);
+	}
+
+	return false;
+}
+
+bool NFCRecordManager::SetRecordVector2(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->SetVector2(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
+bool NFCRecordManager::SetRecordVector3(const std::string& strRecordName, const int nRow, const int nCol, const NFVector3& obj)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->SetVector3(nRow, nCol, obj);
+	}
+
+	return false;
+}
+
+bool NFCRecordManager::SetRecordVector3(const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->SetVector3(nRow, strColTag, value);
+	}
+
+	return false;
+}
+
 NFINT64 NFCRecordManager::GetRecordInt(const std::string& strRecordName, const int nRow, const int nCol)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
@@ -206,4 +250,48 @@ const NFGUID& NFCRecordManager::GetRecordObject(const std::string& strRecordName
     }
 
     return NULL_OBJECT;
+}
+
+const NFVector2& NFCRecordManager::GetRecordVector2(const std::string& strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->GetVector2(nRow, nCol);
+	}
+
+	return NULL_VECTOR2;
+}
+
+const NFVector2& NFCRecordManager::GetRecordVector2(const std::string& strRecordName, const int nRow, const std::string& strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->GetVector2(nRow, strColTag);
+	}
+
+	return NULL_VECTOR2;
+}
+
+const NFVector3& NFCRecordManager::GetRecordVector3(const std::string& strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->GetVector3(nRow, nCol);
+	}
+
+	return NULL_VECTOR3;
+}
+
+const NFVector3& NFCRecordManager::GetRecordVector3(const std::string& strRecordName, const int nRow, const std::string& strColTag)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
+	if (pRecord.get())
+	{
+		return pRecord->GetVector3(nRow, strColTag);
+	}
+
+	return NULL_VECTOR3;
 }
