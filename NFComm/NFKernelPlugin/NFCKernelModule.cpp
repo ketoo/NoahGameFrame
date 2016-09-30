@@ -360,6 +360,32 @@ bool NFCKernelModule::SetPropertyObject(const NFGUID& self, const std::string& s
     return false;
 }
 
+bool NFCKernelModule::SetPropertyVector2(const NFGUID& self, const std::string& strPropertyName, const NFVector2& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->SetPropertyVector2(strPropertyName, value);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no vector2", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
+bool NFCKernelModule::SetPropertyVector3(const NFGUID& self, const std::string& strPropertyName, const NFVector3& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->SetPropertyVector3(strPropertyName, value);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no vector3", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
 NFINT64 NFCKernelModule::GetPropertyInt(const NFGUID& self, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
@@ -410,6 +436,32 @@ const NFGUID& NFCKernelModule::GetPropertyObject(const NFGUID& self, const std::
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
     return NULL_OBJECT;
+}
+
+const NFVector2& NFCKernelModule::GetPropertyVector2(const NFGUID& self, const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetPropertyVector2(strPropertyName);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no vector2", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR2;
+}
+
+const NFVector3& NFCKernelModule::GetPropertyVector3(const NFGUID& self, const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetPropertyVector3(strPropertyName);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no vector3", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR3;
 }
 
 NF_SHARE_PTR<NFIRecord> NFCKernelModule::FindRecord(const NFGUID& self, const std::string& strRecordName)
@@ -598,6 +650,86 @@ bool NFCKernelModule::SetRecordObject(const NFGUID& self, const std::string& str
     return false;
 }
 
+bool NFCKernelModule::SetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFVector2& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		if (!pObject->SetRecordVector2(strRecordName, nRow, nCol, value))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
+bool NFCKernelModule::SetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector2& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		if (!pObject->SetRecordVector2(strRecordName, nRow, strColTag, value))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector2 for row  or col", __FUNCTION__, __LINE__);
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
+bool NFCKernelModule::SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol, const NFVector3& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		if (!pObject->SetRecordVector3(strRecordName, nRow, nCol, value))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
+bool NFCKernelModule::SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		if (!pObject->SetRecordVector3(strRecordName, nRow, strColTag, value))
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error SetRecordVector3 for row  or col", __FUNCTION__, __LINE__);
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+
+	return false;
+}
+
 NFINT64 NFCKernelModule::GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
 {
     NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
@@ -700,6 +832,58 @@ const NFGUID& NFCKernelModule::GetRecordObject(const NFGUID& self, const std::st
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
     return NULL_OBJECT;
+}
+
+const NFVector2& NFCKernelModule::GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetRecordVector2(strRecordName, nRow, nCol);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR2;
+}
+
+const NFVector2& NFCKernelModule::GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetRecordVector2(strRecordName, nRow, strColTag);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector2", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR2;
+}
+
+const NFVector3& NFCKernelModule::GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetRecordVector3(strRecordName, nRow, nCol);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR3;
+}
+
+const NFVector3& NFCKernelModule::GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject.get())
+	{
+		return pObject->GetRecordVector3(strRecordName, nRow, strColTag);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, "There is no vector3", __FUNCTION__, __LINE__);
+
+	return NULL_VECTOR3;
 }
 
 bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg)

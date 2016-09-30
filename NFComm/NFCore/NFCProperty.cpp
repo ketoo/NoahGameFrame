@@ -67,15 +67,23 @@ void NFCProperty::SetValue(const NFIDataList::TData& xData)
 		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(xData));
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->variantData = xData.variantData;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->variantData = xData.variantData;
+		mxData->variantData = xData.variantData;
 
-	NFCDataList::TData newValue;
-	newValue = *mxData;
+		NFCDataList::TData newValue;
+		newValue = *mxData;
 
-	OnEventHandler(oldValue, newValue);
+		OnEventHandler(oldValue, newValue);
+	}
+
 }
 
 void NFCProperty::SetValue(const NFIProperty* pProperty)
@@ -198,6 +206,26 @@ const NFGUID& NFCProperty::GetObject() const
 	return mxData->GetObject();
 }
 
+const NFVector2& NFCProperty::GetVector2() const
+{
+	if (!mxData.get())
+	{
+		return NULL_VECTOR2;
+	}
+
+	return mxData->GetVector2();
+}
+
+const NFVector3& NFCProperty::GetVector3() const
+{
+	if (!mxData.get())
+	{
+		return NULL_VECTOR3;
+	}
+
+	return mxData->GetVector3();
+}
+
 void NFCProperty::RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb)
 {
 	mtPropertyCallback.push_back(cb);
@@ -247,12 +275,19 @@ bool NFCProperty::SetInt(const NFINT64 value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetInt(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetInt(value);
+		mxData->SetInt(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -281,12 +316,19 @@ bool NFCProperty::SetFloat(const double value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetFloat(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetFloat(value);
+		mxData->SetFloat(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -315,12 +357,19 @@ bool NFCProperty::SetString(const std::string& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetString(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetString(value);
+		mxData->SetString(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -349,12 +398,101 @@ bool NFCProperty::SetObject(const NFGUID& value)
 		return false;
 	}
 
-	NFCDataList::TData oldValue;
-	oldValue = *mxData;
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetObject(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
 
-	mxData->SetObject(value);
+		mxData->SetObject(value);
 
-	OnEventHandler(oldValue, *mxData);
+		OnEventHandler(oldValue, *mxData);
+	}
+
+	return true;
+}
+
+bool NFCProperty::SetVector2(const NFVector2& value)
+{
+	if (eType != TDATA_VECTOR2)
+	{
+		return false;
+	}
+
+	if (!mxData.get())
+	{
+		//本身是空就是因为没数据，还来个没数据的就不存了
+		if (value.IsZero())
+		{
+			return false;
+		}
+
+		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_VECTOR2));
+		mxData->SetVector2(NFVector2());
+	}
+
+	if (value == mxData->GetVector2())
+	{
+		return false;
+	}
+
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetVector2(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
+
+		mxData->SetVector2(value);
+
+		OnEventHandler(oldValue, *mxData);
+	}
+
+	return true;
+}
+
+bool NFCProperty::SetVector3(const NFVector3& value)
+{
+	if (eType != TDATA_VECTOR3)
+	{
+		return false;
+	}
+
+	if (!mxData.get())
+	{
+		//本身是空就是因为没数据，还来个没数据的就不存了
+		if (value.IsZero())
+		{
+			return false;
+		}
+
+		mxData = NF_SHARE_PTR<NFIDataList::TData>(NF_NEW NFIDataList::TData(TDATA_VECTOR3));
+		mxData->SetVector3(NFVector3());
+	}
+
+	if (value == mxData->GetVector3())
+	{
+		return false;
+	}
+
+	if (mtPropertyCallback.size() == 0)
+	{
+		mxData->SetVector3(value);
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue = *mxData;
+
+		mxData->SetVector3(value);
+
+		OnEventHandler(oldValue, *mxData);
+	}
 
 	return true;
 }
@@ -396,6 +534,12 @@ std::string NFCProperty::ToString()
 		break;
 	case TDATA_OBJECT:
 		strData = GetObject().ToString();
+		break;
+	case TDATA_VECTOR2:
+		strData = GetVector2().ToString();
+		break;
+	case TDATA_VECTOR3:
+		strData = GetVector3().ToString();
 		break;
 	default:
 		strData = NULL_STR;
@@ -439,6 +583,22 @@ bool NFCProperty::FromString(const std::string& strData)
 
 		bRet = xID.FromString(strData);
 		SetObject(xID);
+	}
+	break;
+	case TDATA_VECTOR2:
+	{
+		NFVector2 xVector2;
+
+		bRet = xVector2.FromString(strData);
+		SetVector2(xVector2);
+	}
+	break;
+	case TDATA_VECTOR3:
+	{
+		NFVector3 xVector3;
+
+		bRet = xVector3.FromString(strData);
+		SetVector3(xVector3);
 	}
 	break;
 	default:
