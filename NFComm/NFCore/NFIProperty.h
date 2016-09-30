@@ -27,6 +27,8 @@ public:
     virtual bool SetFloat(const double value) = 0;
     virtual bool SetString(const std::string& value) = 0;
     virtual bool SetObject(const NFGUID& value) = 0;
+	virtual bool SetVector2(const NFVector2& value) = 0;
+	virtual bool SetVector3(const NFVector3& value) = 0;
 
     virtual const TDATA_TYPE GetType() const = 0;
     virtual const bool GeUsed() const = 0;
@@ -49,6 +51,8 @@ public:
     virtual double GetFloat() const = 0;
     virtual const std::string& GetString() const = 0;
     virtual const NFGUID& GetObject() const = 0;
+	virtual const NFVector2& GetVector2() const = 0;
+	virtual const NFVector3& GetVector3() const = 0;
 
     virtual const NFIDataList::TData& GetValue() const = 0;
     virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const = 0;
