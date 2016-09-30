@@ -58,11 +58,15 @@ public:
     virtual bool Add(const double value);
     virtual bool Add(const std::string& value);
     virtual bool Add(const NFGUID& value);
+	virtual bool Add(const NFVector2& value);
+	virtual bool Add(const NFVector3& value);
 
     virtual bool Set(const int index, const NFINT64 value);
     virtual bool Set(const int index, const double value);
 	virtual bool Set(const int index, const std::string& value);
     virtual bool Set(const int index, const NFGUID& value);
+	virtual bool Set(const int index, const NFVector2& value);
+	virtual bool Set(const int index, const NFVector3& value);
 
     // 获得数据
     virtual NFINT64 Int(const int index) const;
@@ -70,6 +74,8 @@ public:
     virtual std::string StringValEx(const int index) const;
     virtual const std::string& String(const int index) const;
     virtual const NFGUID& Object(const int index) const;
+	virtual const NFVector2& Vector2(const int index) const;
+	virtual const NFVector3& Vector3(const int index) const;
 
     virtual bool ToString(std::string& str, const std::string& strSplit) const;
 
