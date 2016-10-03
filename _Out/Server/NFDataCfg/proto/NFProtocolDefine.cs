@@ -249,38 +249,6 @@ public class EffectData
 	public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
-	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
-	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
-	public static readonly String CRITICAL = "CRITICAL"; // int
-	public static readonly String MAXHP = "MAXHP"; // int
-	public static readonly String MAXMP = "MAXMP"; // int
-	public static readonly String MAXSP = "MAXSP"; // int
-	public static readonly String HP = "HP"; // int
-	public static readonly String MP = "MP"; // int
-	public static readonly String SP = "SP"; // int
-	public static readonly String HPREGEN = "HPREGEN"; // int
-	public static readonly String SPREGEN = "SPREGEN"; // int
-	public static readonly String MPREGEN = "MPREGEN"; // int
-	public static readonly String ATK_VALUE = "ATK_VALUE"; // int
-	public static readonly String DEF_VALUE = "DEF_VALUE"; // int
-	public static readonly String MOVE_SPEED = "MOVE_SPEED"; // int
-	public static readonly String ATK_SPEED = "ATK_SPEED"; // int
-	public static readonly String ATK_FIRE = "ATK_FIRE"; // int
-	public static readonly String ATK_LIGHT = "ATK_LIGHT"; // int
-	public static readonly String ATK_WIND = "ATK_WIND"; // int
-	public static readonly String ATK_ICE = "ATK_ICE"; // int
-	public static readonly String ATK_POISON = "ATK_POISON"; // int
-	public static readonly String DEF_FIRE = "DEF_FIRE"; // int
-	public static readonly String DEF_LIGHT = "DEF_LIGHT"; // int
-	public static readonly String DEF_WIND = "DEF_WIND"; // int
-	public static readonly String DEF_ICE = "DEF_ICE"; // int
-	public static readonly String DEF_POISON = "DEF_POISON"; // int
-	public static readonly String DIZZY_GATE = "DIZZY_GATE"; // int
-	public static readonly String MOVE_GATE = "MOVE_GATE"; // int
-	public static readonly String SKILL_GATE = "SKILL_GATE"; // int
-	public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
-	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
-	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
 
 }
@@ -584,8 +552,6 @@ public class Language
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
-	public static readonly String English = "English"; // string
-	public static readonly String Chinese = "Chinese"; // string
 	public static readonly String English = "English"; // string
 	public static readonly String Chinese = "Chinese"; // string
 	// Record
