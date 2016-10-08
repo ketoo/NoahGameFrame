@@ -89,6 +89,8 @@ protected:
 	void OnClientPropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	void OnClientAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientRemoveRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -97,6 +99,8 @@ protected:
 	void OnClientRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientRecordStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
     int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
