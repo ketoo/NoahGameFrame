@@ -127,201 +127,205 @@ enum EGameMsgID
 	EGMI_ACK_PROPERTY_STRING					= 212;			// 属性变更
 	//EGMI_ACK_PROPERTY_DOUBLE					= 213;			// 属性变更
 	EGMI_ACK_PROPERTY_OBJECT					= 214;			// 属性变更
+	EGMI_ACK_PROPERTY_VECTOR2                   = 215;
+	EGMI_ACK_PROPERTY_VECTOR3                   = 216;
 
 	EGMI_ACK_ADD_ROW							= 220;
 	EGMI_ACK_REMOVE_ROW							= 221;
 	EGMI_ACK_SWAP_ROW							= 222;
 	EGMI_ACK_RECORD_INT							= 223;
 	EGMI_ACK_RECORD_FLOAT						= 224;
-	//EGMI_ACK_RECORD_DOUBLE						= 225;
+	//EGMI_ACK_RECORD_DOUBLE					= 225;
 	EGMI_ACK_RECORD_STRING						= 226;
 	EGMI_ACK_RECORD_OBJECT						= 227;
-	EGMI_ACK_RECORD_CLEAR						= 228;
-	EGMI_ACK_RECORD_SORT						= 229;
+	EGMI_ACK_RECORD_VECTOR2						= 228;
+	EGMI_ACK_RECORD_VECTOR3						= 229;
+	EGMI_ACK_RECORD_CLEAR						= 250;
+	EGMI_ACK_RECORD_SORT						= 251;
 
-	EGMI_REQ_MOVE								= 230;
-	EGMI_ACK_MOVE								= 231;
-	EGMI_REQ_MOVE_IMMUNE						= 232;
-	EGMI_ACK_MOVE_IMMUNE						= 233;
-
-	EGMI_REQ_SKILL_OBJECTX						= 240;
-	EGMI_ACK_SKILL_OBJECTX						= 241;
-	EGMI_REQ_SKILL_POS							= 242;
-	EGMI_ACK_SKILL_POS							= 243;
-	EGMI_REQ_ITEM_OBJECT						= 244;
-	EGMI_ACK_ITEM_OBJECT						= 245;
-	EGMI_REQ_ITEM_POS							= 246;
-	EGMI_ACK_ITEM_POS							= 247;
-
-
-	EGMI_REQ_CHAT								= 250;
-	EGMI_ACK_CHAT								= 251;
-	EGMI_REQ_SALE_ITEM							= 252;
-	EGMI_REQ_SPLIT_ITEM							= 253;
-	EGMI_REQ_PRODUCE_ITEM						= 254;
-	EGMI_REQ_PICK_ITEM							= 255;
-	EGMI_REQ_ACCEPT_TASK						= 256;
-	EGMI_REQ_COMPELETE_TASK						= 257;
-	
-	EGMI_REQ_JOIN_PVP                           = 260; // 申请加入PVP
-	EGMI_REQ_EXIT_PVP                           = 261; // 申请离开PVP
-	EGMT_ACK_START_PVP                          = 262; // 通知开始PVP
-	
-	EGMI_REQ_SEARCH_OPPNENT                     = 280; // 查找对手(EBattleType)
-	EGMI_ACK_SEARCH_OPPNENT                     = 281; // 返回查找对手的信息(EBattleType)
-	EGMT_REQ_START_OPPNENT                      = 282; // 开始战斗(EBattleType)
-	EGMT_ACK_START_OPPNENT                      = 283; // 开始战斗(EBattleType)
-	
-	
-	EGMI_ACK_ONLINE_NOTIFY						= 290; // 玩家上线通知
-	EGMI_ACK_OFFLINE_NOTIFY						= 291; // 玩家下线通知
-	
-	EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会
-	EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
-	EGMI_REQ_JOIN_GUILD                         = 302; // 申请加入公会
-	EGMI_ACK_JOIN_GUILD							= 303; // 加入公会结果
-	EGMI_REQ_LEAVE_GUILD                        = 304; // 申请离开公会
-	EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
-	EGMI_REQ_OPR_GUILD                        	= 306; // 申请成员操作 
-	EGMI_ACK_OPR_GUILD                        	= 307; // 成员操作结果
-	EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
-	EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会	
-	
-	EGMI_REQ_OPR_GUILDINFO						= 310; // 申请公会操作 
-	EGMI_ACK_OPR_GUILDINFO						= 311; // 公会操作结果
-	
-	EGMI_REQ_GUILDECTYPEINFO					= 312; // 申请公会副本
-	EGMI_ACK_GUILDECTYPEINFO					= 313; // 工会副本的信息
-	
-	EGMI_SET_GUILDECTYPEINFO					= 314; // 设置工会副本的信息
-	
-	EGMI_ReqEnterGuildEctype					= 315; // 
-	
-	EGEC_REQ_CREATE_CHATGROUP					= 400;		 // 创建聊天ReqAckCreateChatGroup
-	EGEC_ACK_CREATE_CHATGROUP					= 401;		 // 创建聊天ReqAckCreateChatGroup
-	EGEC_REQ_JOIN_CHATGROUP						= 402;		 // 加入聊天ReqAckjoinChatGroup
-	EGEC_ACK_JOIN_CHATGROUP						= 403;		 // 加入聊天ReqAckjoinChatGroup
-	EGEC_REQ_LEAVE_CHATGROUP					= 404;		 // 离开聊天ReqAckQuitChatGroup
-	EGEC_ACK_LEAVE_CHATGROUP					= 405;		 // 离开聊天ReqAckQuitChatGroup
-	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 406;		 // 订阅聊天室ReqSubscriptionChatGroup
-	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 407;		 // 取消订阅聊天室ReqSubscriptionChatGroup
-	EGEC_REQ_INVITE_CHATGROUP					= 408;		 // 邀请进入聊天室
-	EGEC_ACK_INVITE_CHATGROUP					= 409;		 // 邀请进入聊天室
-	EGEC_REQ_KICK_CHATGROUP						= 410;		 // 踢出聊天室
-	EGEC_ACK_KICK_CHATGROUP						= 411;		 // 踢出聊天室
-	
-	EGEC_REQ_CHATGROUP_TO_TEAM					= 450;		 // 聊天室快速组队
-	EGEC_ACK_CHATGROUP_TO_TEAM					= 451;		 // 聊天室快速组队	
-	
-	EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 500;		 // 装备强化
-	EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 501;		 // 装备强化
-	
-	EGEC_REQ_HOLE_TO_EQUIP						= 502;		 // 装备打洞
-	EGEC_ACK_HOLE_TO_EQUIP						= 503;		 // 装备打洞
-	
-	EGEC_REQ_INLAYSTONE_TO_EQUIP				= 504;		 // 装备镶嵌
-	EGEC_ACK_INLAYSTONE_TO_EQUIP				= 505;		 // 装备镶嵌
-	
-	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 506;		 // 装备附魔
-	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 507;		 // 装备附魔
-
-	EGEC_REQ_SET_FIGHT_HERO						= 508;		 // 战斗武将
-	
-	EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
-	EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
-
-	EGEC_REQ_MINING_TITLE						= 600;		 // 申请挖次矿（地块）
-	
-    EGEC_REQ_SEND_MAIL                          = 700; // 发送邮件
-    EGEC_REQ_DRAW_MAIL                          = 701; // 领取邮件中的奖励(包含道具或者钻石等非道具的东西)
-    EGEC_REQ_DELETE_MAIL                        = 702; // 删除邮件
+	EGMI_REQ_MOVE								= 1230;
+	EGMI_ACK_MOVE								= 1231;
+	EGMI_REQ_MOVE_IMMUNE						= 1232;
+	EGMI_ACK_MOVE_IMMUNE						= 1233;
+                                                  
+	EGMI_REQ_SKILL_OBJECTX						= 1240;
+	EGMI_ACK_SKILL_OBJECTX						= 1241;
+	EGMI_REQ_SKILL_POS							= 1242;
+	EGMI_ACK_SKILL_POS							= 1243;
+	EGMI_REQ_ITEM_OBJECT						= 1244;
+	EGMI_ACK_ITEM_OBJECT						= 1245;
+	EGMI_REQ_ITEM_POS							= 1246;
+	EGMI_ACK_ITEM_POS							= 1247;
+                                                  
+                                                  
+	EGMI_REQ_CHAT								= 1250;
+	EGMI_ACK_CHAT								= 1251;
+	EGMI_REQ_SALE_ITEM							= 1252;
+	EGMI_REQ_SPLIT_ITEM							= 1253;
+	EGMI_REQ_PRODUCE_ITEM						= 1254;
+	EGMI_REQ_PICK_ITEM							= 1255;
+	EGMI_REQ_ACCEPT_TASK						= 1256;
+	EGMI_REQ_COMPELETE_TASK						= 1257;
+	                                              
+	EGMI_REQ_JOIN_PVP                           = 1260; // 申请加入PVP
+	EGMI_REQ_EXIT_PVP                           = 1261; // 申请离开PVP
+	EGMT_ACK_START_PVP                          = 1262; // 通知开始PVP
+	                                              
+	EGMI_REQ_SEARCH_OPPNENT                     = 1280; // 查找对手(EBattleType)
+	EGMI_ACK_SEARCH_OPPNENT                     = 1281; // 返回查找对手的信息(EBattleType)
+	EGMT_REQ_START_OPPNENT                      = 1282; // 开始战斗(EBattleType)
+	EGMT_ACK_START_OPPNENT                      = 1283; // 开始战斗(EBattleType)
+	                                              
+	                                              
+	EGMI_ACK_ONLINE_NOTIFY						= 1290; // 玩家上线通知
+	EGMI_ACK_OFFLINE_NOTIFY						= 1291; // 玩家下线通知
+	                                              
+	EGMI_REQ_CREATE_GUILD                       = 1300; // 申请创建公会
+	EGMI_ACK_CREATE_GUILD						= 1301; // 创建公会结果
+	EGMI_REQ_JOIN_GUILD                         = 1302; // 申请加入公会
+	EGMI_ACK_JOIN_GUILD							= 1303; // 加入公会结果
+	EGMI_REQ_LEAVE_GUILD                        = 1304; // 申请离开公会
+	EGMI_ACK_LEAVE_GUILD						= 1305; // 离开公会结果 
+	EGMI_REQ_OPR_GUILD                        	= 1306; // 申请成员操作 
+	EGMI_ACK_OPR_GUILD                        	= 1307; // 成员操作结果
+	EGMI_REQ_SEARCH_GUILD                       = 1308; // 申请搜索公会
+	EGMI_ACK_SEARCH_GUILD                       = 1309; // 返回搜索公会	
+	                                              
+	EGMI_REQ_OPR_GUILDINFO						= 1310; // 申请公会操作 
+	EGMI_ACK_OPR_GUILDINFO						= 1311; // 公会操作结果
+	                                              
+	EGMI_REQ_GUILDECTYPEINFO					= 1312; // 申请公会副本
+	EGMI_ACK_GUILDECTYPEINFO					= 1313; // 工会副本的信息
+	                                              
+	EGMI_SET_GUILDECTYPEINFO					= 1314; // 设置工会副本的信息
+	                                              
+	EGMI_ReqEnterGuildEctype					= 1315; // 
+	                                              
+	EGEC_REQ_CREATE_CHATGROUP					= 1400;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_ACK_CREATE_CHATGROUP					= 1401;		 // 创建聊天ReqAckCreateChatGroup
+	EGEC_REQ_JOIN_CHATGROUP						= 1402;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_ACK_JOIN_CHATGROUP						= 1403;		 // 加入聊天ReqAckjoinChatGroup
+	EGEC_REQ_LEAVE_CHATGROUP					= 1404;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_ACK_LEAVE_CHATGROUP					= 1405;		 // 离开聊天ReqAckQuitChatGroup
+	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 1406;		 // 订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 1407;		 // 取消订阅聊天室ReqSubscriptionChatGroup
+	EGEC_REQ_INVITE_CHATGROUP					= 1408;		 // 邀请进入聊天室
+	EGEC_ACK_INVITE_CHATGROUP					= 1409;		 // 邀请进入聊天室
+	EGEC_REQ_KICK_CHATGROUP						= 1410;		 // 踢出聊天室
+	EGEC_ACK_KICK_CHATGROUP						= 1411;		 // 踢出聊天室
+	                                              
+	EGEC_REQ_CHATGROUP_TO_TEAM					= 1450;		 // 聊天室快速组队
+	EGEC_ACK_CHATGROUP_TO_TEAM					= 1451;		 // 聊天室快速组队	
+	                                              
+	EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 1500;		 // 装备强化
+	EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 1501;		 // 装备强化
+	                                              
+	EGEC_REQ_HOLE_TO_EQUIP						= 1502;		 // 装备打洞
+	EGEC_ACK_HOLE_TO_EQUIP						= 1503;		 // 装备打洞
+	                                              
+	EGEC_REQ_INLAYSTONE_TO_EQUIP				= 1504;		 // 装备镶嵌
+	EGEC_ACK_INLAYSTONE_TO_EQUIP				= 1505;		 // 装备镶嵌
+	                                              
+	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 1506;		 // 装备附魔
+	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 1507;		 // 装备附魔
+                                                  
+	EGEC_REQ_SET_FIGHT_HERO						= 1508;		 // 战斗武将
+	                                              
+	EGEC_WEAR_EQUIP								= 1509;		 // 装备创戴
+	EGEC_TAKEOFF_EQUIP							= 1510;		 // 装备卸载
+                                                  
+	EGEC_REQ_MINING_TITLE						= 1600;		 // 申请挖次矿（地块）
+	                                              
+    EGEC_REQ_SEND_MAIL                          = 1700; // 发送邮件
+    EGEC_REQ_DRAW_MAIL                          = 1701; // 领取邮件中的奖励(包含道具或者钻石等非道具的东西)
+    EGEC_REQ_DELETE_MAIL                        = 1702; // 删除邮件
 	
 	//对象clone
-	EGMI_ACK_CLONE_OBJECT_ENTRY						= 800;			// 有对象进入
-	EGMI_ACK_CLONE_OBJECT_LEAVE						= 801;			// 有对象出去
+	EGMI_ACK_CLONE_OBJECT_ENTRY						= 1800;			// 有对象进入
+	EGMI_ACK_CLONE_OBJECT_LEAVE						= 1801;			// 有对象出去
 	        
-	EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY			= 802;			// 有对象属性进入
-	EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY				= 803;			// 有对象表进入
+	EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY			= 1802;			// 有对象属性进入
+	EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY				= 1803;			// 有对象表进入
 	       
-	EGMI_ACK_CLONE_PROPERTY_INT						= 810;			// 属性变更
-	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 811;			// 属性变更
-	EGMI_ACK_CLONE_PROPERTY_STRING					= 812;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_INT						= 1810;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 1811;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_STRING					= 1812;			// 属性变更
 	//EGMI_ACK_CLONE_PROPERTY_DOUBLE					= 813;			// 属性变更
-	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 814;			// 属性变更
+	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 1814;			// 属性变更
             
 	//EGMI_ACK_CLONE_ADD_ROW							= 820;
-	//EGMI_ACK_CLONE_REMOVE_ROW						= 821;
+	//EGMI_ACK_CLONE_REMOVE_ROW						= 1821;
 	//EGMI_ACK_CLONE_SWAP_ROW							= 822;
-	//EGMI_ACK_CLONE_RECORD_INT						= 823;
+	//EGMI_ACK_CLONE_RECORD_INT						= 1823;
 	//EGMI_ACK_CLONE_RECORD_FLOAT						= 824;
-	//EGMI_ACK_CLONE_RECORD_DOUBLE					= 825;
-	//EGMI_ACK_CLONE_RECORD_STRING					= 826;
-	//EGMI_ACK_CLONE_RECORD_OBJECT					= 827;
+	//EGMI_ACK_CLONE_RECORD_DOUBLE					= 1825;
+	//EGMI_ACK_CLONE_RECORD_STRING					= 1826;
+	//EGMI_ACK_CLONE_RECORD_OBJECT					= 1827;
 	//EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
 	//EGMI_ACK_CLONE_RECORD_SORT						= 829;
 	
-	EGMI_REQSWICHSERVER								= 840;	// 申请转服
-	EGMI_ACKSWICHSERVER								= 841;	// 申请转服
-	
-	EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
-	EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
-	EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
-	EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
-	EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍
-	EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
-	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
-	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
-	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
-	
-	EGMI_REQ_TEAM_ENTER_ECTYPE						= 869; 	// 组队进副本 
-	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
-
-	
+	EGMI_REQSWICHSERVER								= 1840;	// 申请转服
+	EGMI_ACKSWICHSERVER								= 1841;	// 申请转服
+	                                                  
+	EGMI_REQ_CREATE_TEAM                       		= 1860; 	// 申请创建队伍
+	EGMI_ACK_CREATE_TEAM							= 1861; 	// 创建队伍结果
+	EGMI_REQ_JOIN_TEAM                         		= 1862; 	// 申请加入队伍
+	EGMI_ACK_JOIN_TEAM								= 1863; 	// 加入队伍结果
+	EGMI_REQ_LEAVE_TEAM                        		= 1864; 	// 申请离开队伍
+	EGMI_ACK_LEAVE_TEAM								= 1865; 	// 离开队伍结果 
+	EGMI_REQ_INVITE_TEAM							= 1866; 	// 邀请加入队伍
+	EGMI_REQ_OPRMEMBER_TEAM							= 1867; 	// 操作成员
+	EGMI_ACK_OPRMEMBER_TEAM							= 1868; 	// 操作成员 
+	                                                  
+	EGMI_REQ_TEAM_ENTER_ECTYPE						= 1869; 	// 组队进副本 
+	EGMI_ACK_TEAM_ENTER_ECTYPE						= 1870; 	// 组队进副本
+                                                      
+	                                                  
 	/////////////////////MapModule/////////////////////////////////////
-	EGMI_REQ_MAP_GRID_INFO							= 900; 	// 申请查看地图格子信息
-	EGMI_ACK_MAP_GRID_INFO							= 901; 	// 返回查看格子地图	
-	EGMI_REQ_BIG_MAP_INFO							= 902; 	// 申请大地图信息
-	EGMI_ACK_BIG_MAP_INFO							= 903; 	// 返回大地图
+	EGMI_REQ_MAP_GRID_INFO							= 1900; 	// 申请查看地图格子信息
+	EGMI_ACK_MAP_GRID_INFO							= 1901; 	// 返回查看格子地图	
+	EGMI_REQ_BIG_MAP_INFO							= 1902; 	// 申请大地图信息
+	EGMI_ACK_BIG_MAP_INFO							= 1903; 	// 返回大地图
 	
-	EGMI_REQ_HOLD_MAP_GRID						= 910; 	// 申请入驻
-	EGMI_ACK_HOLD_MAP_GRID						= 911; 	// 返回入驻结果
-	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 912; 	// 申请留言
-	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 913; 	// 返回留言结果
-	EGMI_REQ_GET_MAP_GRID_AWARD					= 914; 	// 申请领取地图奖励
-	EGMI_ACK_GET_MAP_GRID_AWARD					= 915; 	// 返回领取地图奖励
+	EGMI_REQ_HOLD_MAP_GRID						= 1910; 	// 申请入驻
+	EGMI_ACK_HOLD_MAP_GRID						= 1911; 	// 返回入驻结果
+	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 1912; 	// 申请留言
+	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 1913; 	// 返回留言结果
+	EGMI_REQ_GET_MAP_GRID_AWARD					= 1914; 	// 申请领取地图奖励
+	EGMI_ACK_GET_MAP_GRID_AWARD					= 1915; 	// 返回领取地图奖励
 	
-	EGMI_REQ_MAP_GRID_HUNTING					= 916; 	// 申请地图狩猎
-	EGMI_ACK_MAP_GRID_HUNTING					= 917; 	// 返回结果
-	EGMI_REQ_MAP_GRID_KING_WAR					= 918; 	// 申请地图争霸
-	EGMI_ACK_MAP_GRID_KING_WAR					= 919; 	// 返回结果
+	EGMI_REQ_MAP_GRID_HUNTING					= 1916; 	// 申请地图狩猎
+	EGMI_ACK_MAP_GRID_HUNTING					= 1917; 	// 返回结果
+	EGMI_REQ_MAP_GRID_KING_WAR					= 1918; 	// 申请地图争霸
+	EGMI_ACK_MAP_GRID_KING_WAR					= 1919; 	// 返回结果
     
 	/////////////////////GM MSG/////////////////////////////////////订阅
-	EGMI_REQ_CMD_PROPERTY_INT					= 1000;			// GM命令修改整形
-	EGMI_REQ_CMD_PROPERTY_STR					= 1001;			// GM命令修改修改字符串
-	EGMI_REQ_CMD_PROPERTY_OBJECT				= 1002;			// GM命令
-	EGMI_REQ_CMD_PROPERTY_FLOAT					= 1003;			// GM命令
-	EGMI_REQ_CMD_RECORD_INT						= 1004;			// GM命令修改表整形
-	EGMI_REQ_CMD_RECORD_STR						= 1005;			// GM命令修改修改表字符串
-	EGMI_REQ_CMD_RECORD_OBJECT					= 1006;			// GM命令修改
-	EGMI_REQ_CMD_RECORD_FLOAT					= 1007;			// GM命令修改
-	EGMI_REQ_CMD_NORMAL							= 1008;			// 其他GM修改
+	EGMI_REQ_CMD_PROPERTY_INT					= 10000;			// GM命令修改整形
+	EGMI_REQ_CMD_PROPERTY_STR					= 10001;			// GM命令修改修改字符串
+	EGMI_REQ_CMD_PROPERTY_OBJECT				= 10002;			// GM命令
+	EGMI_REQ_CMD_PROPERTY_FLOAT					= 10003;			// GM命令
+	EGMI_REQ_CMD_RECORD_INT						= 10004;			// GM命令修改表整形
+	EGMI_REQ_CMD_RECORD_STR						= 10005;			// GM命令修改修改表字符串
+	EGMI_REQ_CMD_RECORD_OBJECT					= 10006;			// GM命令修改
+	EGMI_REQ_CMD_RECORD_FLOAT					= 10007;			// GM命令修改
+	EGMI_REQ_CMD_NORMAL							= 10008;			// 其他GM修改
 	
 		
-	EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
-	EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 申请匹配pvp
+	EGMI_REQ_PVPAPPLYMACTCH						= 10100; 	// 申请匹配pvp
+	EGMI_ACK_PVPAPPLYMACTCH						= 10101; 	// 申请匹配pvp
 	
-	EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
-	EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+	EGMI_REQ_CREATEPVPECTYPE					= 10102; 	// 申请pvp副本
+	EGMI_ACK_CREATEPVPECTYPE					= 10103; 	// 返回pvp副本的信息，并拉人
 	
 	/////////////////////Base SLG MSG/////////////////////////////////////
-	EGMI_REQ_BUY_FORM_SHOP						= 10000;//申请从商店种植建筑
-	EGMI_ACK_BUY_FORM_SHOP						= 10001;//返回商店种植建筑结果
-	EGMI_REQ_MOVE_BUILD_OBJECT					= 10002;//申请移动建筑
-	EGMI_ACK_MOVE_BUILD_OBJECT					= 10003;//返回移动建筑结果
+	EGMI_REQ_BUY_FORM_SHOP						= 20000;//申请从商店种植建筑
+	EGMI_ACK_BUY_FORM_SHOP						= 20001;//返回商店种植建筑结果
+	EGMI_REQ_MOVE_BUILD_OBJECT					= 20002;//申请移动建筑
+	EGMI_ACK_MOVE_BUILD_OBJECT					= 20003;//返回移动建筑结果
 	
-	EGMI_REQ_UP_BUILD_LVL						= 10101;//申请建筑升级
-	EGMI_REQ_CREATE_ITEM						= 10102;//申请造兵&药水&等
-	EGMI_REQ_BUILD_OPERATE						= 10103;//申请建筑操作
+	EGMI_REQ_UP_BUILD_LVL						= 20101;//申请建筑升级
+	EGMI_REQ_CREATE_ITEM						= 20102;//申请造兵&药水&等
+	EGMI_REQ_BUILD_OPERATE						= 20103;//申请建筑操作
 }
 
 /////////////////////////道具系统相关//////////////////////////////////////////////////////////////////////////

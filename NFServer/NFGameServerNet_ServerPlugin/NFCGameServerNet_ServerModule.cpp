@@ -41,6 +41,9 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_FLOAT, this, &NFCGameServerNet_ServerModule::OnClientPropertyFloatProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_STRING, this, &NFCGameServerNet_ServerModule::OnClientPropertyStringProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_OBJECT, this, &NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_VECTOR2, this, &NFCGameServerNet_ServerModule::OnClientPropertyVector2Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_PROPERTY_VECTOR3, this, &NFCGameServerNet_ServerModule::OnClientPropertyVector3Process);
+
 	
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ADD_ROW, this, &NFCGameServerNet_ServerModule::OnClientAddRowProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_REMOVE_ROW, this, &NFCGameServerNet_ServerModule::OnClientRemoveRowProcess);
@@ -49,6 +52,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_FLOAT, this, &NFCGameServerNet_ServerModule::OnClientRecordIntProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_STRING, this, &NFCGameServerNet_ServerModule::OnClientRecordIntProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_OBJECT, this, &NFCGameServerNet_ServerModule::OnClientRecordIntProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_VECTOR2, this, &NFCGameServerNet_ServerModule::OnClientRecordVector2Process);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_RECORD_VECTOR3, this, &NFCGameServerNet_ServerModule::OnClientRecordVector3Process);
 
 	//EGMI_ACK_RECORD_CLEAR = 228,
 	//EGMI_ACK_RECORD_SORT = 229,
@@ -1639,6 +1644,64 @@ void NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSoc
 	}
 }
 
+
+void NFCGameServerNet_ServerModule::OnClientPropertyVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectPropertyVector2)
+
+		for (int i = 0; i < xMsg.property_list_size(); i++)
+		{
+			NFMsg::PropertyVector2 xProperty = xMsg.property_list().Get(i);
+			NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xProperty.property_name());
+			if (pProperty)
+			{
+				//judge upload then set value
+				if (pProperty->GetUpload())
+				{
+					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xProperty.property_name(), __FUNCTION__, __LINE__);
+					pProperty->SetVector2(NFINetModule::PBToNF(xProperty.data()));
+				}
+				else
+				{
+					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xProperty.property_name(), __FUNCTION__, __LINE__);
+				}
+			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xProperty.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+}
+
+void NFCGameServerNet_ServerModule::OnClientPropertyVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectPropertyVector3)
+
+		for (int i = 0; i < xMsg.property_list_size(); i++)
+		{
+			NFMsg::PropertyVector3 xProperty = xMsg.property_list().Get(i);
+			NF_SHARE_PTR<NFIProperty> pProperty = pObject->GetPropertyManager()->GetElement(xProperty.property_name());
+			if (pProperty)
+			{
+				//judge upload then set value
+				if (pProperty->GetUpload())
+				{
+					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xProperty.property_name(), __FUNCTION__, __LINE__);
+					pProperty->SetVector3(NFINetModule::PBToNF(xProperty.data()));
+				}
+				else
+				{
+					m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Upload error", xProperty.property_name(), __FUNCTION__, __LINE__);
+				}
+			}
+			else
+			{
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client object set Property error", xProperty.property_name(), __FUNCTION__, __LINE__);
+			}
+		}
+}
+
+
 void NFCGameServerNet_ServerModule::OnClientAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectRecordAddRow)
@@ -1792,6 +1855,7 @@ void NFCGameServerNet_ServerModule::OnClientRecordIntProcess(const int nSockInde
 
 }
 
+
 void NFCGameServerNet_ServerModule::OnClientRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectRecordFloat)
@@ -1860,6 +1924,52 @@ void NFCGameServerNet_ServerModule::OnClientRecordObjectProcess(const int nSockI
 		const NFMsg::RecordObject &xRecordObject = xMsg.property_list().Get(i);
 		pRecord->SetObject(xRecordObject.row(), xRecordObject.col(), NFINetModule::PBToNF(xRecordObject.data()));
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client Object set record", xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFCGameServerNet_ServerModule::OnClientRecordVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectRecordVector2)
+
+		NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector2 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+	if (!pRecord->GetUpload())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector2 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordVector2 &xRecordVector2 = xMsg.property_list().Get(i);
+		pRecord->SetVector2(xRecordVector2.row(), xRecordVector2.col(), NFINetModule::PBToNF(xRecordVector2.data()));
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client vector2 set record", xMsg.record_name(), __FUNCTION__, __LINE__);
+	}
+}
+
+void NFCGameServerNet_ServerModule::OnClientRecordVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ObjectRecordVector3)
+
+		NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement(xMsg.record_name());
+	if (!pRecord)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector3 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+	if (!pRecord->GetUpload())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Upload From Client vector3 set record error", xMsg.record_name(), __FUNCTION__, __LINE__);
+		return;
+	}
+	for (int i = 0; i < xMsg.property_list_size(); i++)
+	{
+		const NFMsg::RecordVector3 &xRecordVector3 = xMsg.property_list().Get(i);
+		pRecord->SetVector3(xRecordVector3.row(), xRecordVector3.col(), NFINetModule::PBToNF(xRecordVector3.data()));
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client vector3 set record", xMsg.record_name(), __FUNCTION__, __LINE__);
 	}
 }
 

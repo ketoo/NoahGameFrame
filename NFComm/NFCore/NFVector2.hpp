@@ -135,6 +135,16 @@ public:
 		return this->y;
 	}
 
+	void SetX(float x)
+	{
+		this->x = x;
+	}
+
+	void SetY(float y)
+	{
+		this->y = y;
+	}
+
 	bool IsZero() const
 	{
 		return x < 0.001f && y < 0.001f;

@@ -205,6 +205,23 @@ public:
         return xIdent;
     }
 
+	static NFVector2 PBToNF(NFMsg::Vector2 value)
+	{
+		NFVector2  vector;
+		vector.SetX(value.x());
+		vector.SetY(value.y());
+		return vector;
+	}
+
+	static NFVector3 PBToNF(NFMsg::Vector3 value)
+	{
+		NFVector3  vector;
+		vector.SetX(value.x());
+		vector.SetY(value.y());
+		vector.SetZ(value.z());
+		return vector;
+	}
+
     static NFMsg::Ident NFToPB(NFGUID xID)
     {
         NFMsg::Ident  xIdent;
@@ -213,6 +230,24 @@ public:
 
         return xIdent;
     }
+
+	static NFMsg::Vector2 NFToPB(NFVector2 value)
+	{
+		NFMsg::Vector2  vector;
+		vector.set_x(value.X());
+		vector.set_y(value.Y());
+		return vector;
+	}
+
+	static NFMsg::Vector3 NFToPB(NFVector3 value)
+	{
+		NFMsg::Vector3  vector;
+		vector.set_x(value.X());
+		vector.set_y(value.Y());
+		vector.set_z(value.Z());
+		return vector;
+	}
+
     static bool ReceivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
