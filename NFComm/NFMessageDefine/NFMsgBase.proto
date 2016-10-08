@@ -7,6 +7,17 @@ message Ident//基础结构，不直接发送
     required int64		svrid = 1;
     required int64      index = 2;
 }
+message Vector2//基础结构，不直接发送
+{ 
+    required float		x = 1;
+    required float      y = 2;
+}
+message Vector3//基础结构，不直接发送
+{ 
+    required float		x = 1;
+    required float      y = 2;
+	required float      z = 3;
+}
 ////////////////////////BaseCommon/////////////////////////////
 message PropertyInt//基础结构，不直接发送
 { 
@@ -30,6 +41,18 @@ message PropertyObject//基础结构，不直接发送
 { 
     required bytes     property_name = 1;
     required Ident      data = 2;
+}
+
+message PropertyVector2//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required Vector2      data = 2;
+}
+
+message PropertyVector3//基础结构，不直接发送
+{ 
+    required bytes     property_name = 1;
+    required Vector3      data = 2;
 }
 
 ///////////////////////////////////////////////
@@ -63,6 +86,20 @@ message RecordObject//基础结构，不直接发送
 	required Ident      data = 3;
 }
 
+message RecordVector2//基础结构，不直接发送
+{
+    required int32      row = 1;
+	required int32      col = 2;
+	required Vector2      data = 3;
+}
+
+message RecordVector3//基础结构，不直接发送
+{
+    required int32      row = 1;
+	required int32      col = 2;
+	required Vector3      data = 3;
+}
+
 message RecordAddRowStruct//表添加基础行结构，不直接发送
 {
 	required int32 				row = 1;
@@ -70,6 +107,8 @@ message RecordAddRowStruct//表添加基础行结构，不直接发送
 	repeated RecordFloat		record_float_list = 3;
 	repeated RecordString		record_string_list = 4;
 	repeated RecordObject		record_object_list = 5;
+	repeated RecordVector2      record_vector2_list = 6;
+	repeated RecordVector3      record_vector3_list = 7;
 }
 message ObjectRecordBase//基础结构，不直接发送
 { 
@@ -85,6 +124,8 @@ message ObjectPropertyList//个人玩家全部属性列表，可直接发送--统一发,为节约包
 	repeated PropertyFloat property_float_list = 3;
 	repeated PropertyString property_string_list = 4;
 	repeated PropertyObject property_object_list = 5;
+	repeated PropertyVector2 property_vector2_list = 6;
+	repeated PropertyVector3 property_vector3_list = 7;
 }
  
  message MultiObjectPropertyList//多人玩家全部属性列表，可直接发送--统一发,为节约包
@@ -127,6 +168,18 @@ message ObjectPropertyObject//个人玩家单类型属性数据，可直接发送---变化时
     repeated PropertyObject  	property_list = 2;
 }
 
+message ObjectPropertyVector2//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required Ident  player_id = 1;
+    repeated PropertyVector2  	property_list = 2;
+}
+
+message ObjectPropertyVector3//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required Ident  player_id = 1;
+    repeated PropertyVector3  	property_list = 2;
+}
+
 message ObjectRecordInt//个人玩家单类型属性数据，可直接发送---变化时
 {
 	required Ident  player_id = 1;
@@ -153,6 +206,20 @@ message ObjectRecordObject//个人玩家单类型属性数据，可直接发送---变化时
 	required Ident  player_id = 1;
 	required bytes     	record_name = 2;    
     repeated RecordObject  property_list = 3;
+}
+
+message ObjectRecordVector2//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required Ident  player_id = 1;
+	required bytes     	record_name = 2;    
+    repeated RecordVector2  property_list = 3;
+}
+
+message ObjectRecordVector3//个人玩家单类型属性数据，可直接发送---变化时
+{
+	required Ident  player_id = 1;
+	required bytes     	record_name = 2;    
+    repeated RecordVector3  property_list = 3;
 }
 
 message ObjectRecordSwap//个人玩家单类型属性数据，可直接发送---变化时
@@ -189,6 +256,8 @@ message PlayerPropertyBase
 	repeated PropertyFloat property_float_list = 2;
 	repeated PropertyString property_string_list = 3;
 	repeated PropertyObject property_object_list = 4;
+	repeated PropertyVector2 property_vector2_list = 5;
+	repeated PropertyVector3 property_vector3_list = 6;
 }
 
 ////////////////////////////////////////////////////////////
@@ -199,6 +268,8 @@ message PlayerRecordBase
 	repeated RecordFloat  record_float_list = 3;
 	repeated RecordString  record_string_list = 4;
 	repeated RecordObject  record_object_list = 5;
+	repeated RecordVector2 record_vector2_list = 6;
+    repeated RecordVector3 record_vector3_list = 7;	
 }
 
 message PlayerRecordList
