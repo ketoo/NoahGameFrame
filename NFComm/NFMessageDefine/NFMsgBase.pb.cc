@@ -23,6 +23,12 @@ namespace {
 const ::google::protobuf::Descriptor* Ident_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Ident_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Vector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Vector2_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Vector3_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Vector3_reflection_ = NULL;
 const ::google::protobuf::Descriptor* PropertyInt_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PropertyInt_reflection_ = NULL;
@@ -35,6 +41,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* PropertyObject_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   PropertyObject_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PropertyVector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PropertyVector2_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PropertyVector3_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PropertyVector3_reflection_ = NULL;
 const ::google::protobuf::Descriptor* RecordInt_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RecordInt_reflection_ = NULL;
@@ -47,6 +59,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* RecordObject_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RecordObject_reflection_ = NULL;
+const ::google::protobuf::Descriptor* RecordVector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  RecordVector2_reflection_ = NULL;
+const ::google::protobuf::Descriptor* RecordVector3_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  RecordVector3_reflection_ = NULL;
 const ::google::protobuf::Descriptor* RecordAddRowStruct_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RecordAddRowStruct_reflection_ = NULL;
@@ -77,6 +95,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ObjectPropertyObject_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectPropertyObject_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ObjectPropertyVector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ObjectPropertyVector2_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ObjectPropertyVector3_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ObjectPropertyVector3_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ObjectRecordInt_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectRecordInt_reflection_ = NULL;
@@ -89,6 +113,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ObjectRecordObject_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectRecordObject_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ObjectRecordVector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ObjectRecordVector2_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ObjectRecordVector3_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ObjectRecordVector3_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ObjectRecordSwap_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectRecordSwap_reflection_ = NULL;
@@ -143,7 +173,40 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Ident));
-  PropertyInt_descriptor_ = file->message_type(1);
+  Vector2_descriptor_ = file->message_type(1);
+  static const int Vector2_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, y_),
+  };
+  Vector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Vector2_descriptor_,
+      Vector2::default_instance_,
+      Vector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Vector2));
+  Vector3_descriptor_ = file->message_type(2);
+  static const int Vector3_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, z_),
+  };
+  Vector3_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Vector3_descriptor_,
+      Vector3::default_instance_,
+      Vector3_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Vector3));
+  PropertyInt_descriptor_ = file->message_type(3);
   static const int PropertyInt_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyInt, property_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyInt, data_),
@@ -159,7 +222,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PropertyInt));
-  PropertyFloat_descriptor_ = file->message_type(2);
+  PropertyFloat_descriptor_ = file->message_type(4);
   static const int PropertyFloat_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyFloat, property_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyFloat, data_),
@@ -175,7 +238,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PropertyFloat));
-  PropertyString_descriptor_ = file->message_type(3);
+  PropertyString_descriptor_ = file->message_type(5);
   static const int PropertyString_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyString, property_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyString, data_),
@@ -191,7 +254,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PropertyString));
-  PropertyObject_descriptor_ = file->message_type(4);
+  PropertyObject_descriptor_ = file->message_type(6);
   static const int PropertyObject_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyObject, property_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyObject, data_),
@@ -207,7 +270,39 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PropertyObject));
-  RecordInt_descriptor_ = file->message_type(5);
+  PropertyVector2_descriptor_ = file->message_type(7);
+  static const int PropertyVector2_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector2, property_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector2, data_),
+  };
+  PropertyVector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      PropertyVector2_descriptor_,
+      PropertyVector2::default_instance_,
+      PropertyVector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(PropertyVector2));
+  PropertyVector3_descriptor_ = file->message_type(8);
+  static const int PropertyVector3_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector3, property_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector3, data_),
+  };
+  PropertyVector3_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      PropertyVector3_descriptor_,
+      PropertyVector3::default_instance_,
+      PropertyVector3_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector3, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropertyVector3, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(PropertyVector3));
+  RecordInt_descriptor_ = file->message_type(9);
   static const int RecordInt_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordInt, row_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordInt, col_),
@@ -224,7 +319,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RecordInt));
-  RecordFloat_descriptor_ = file->message_type(6);
+  RecordFloat_descriptor_ = file->message_type(10);
   static const int RecordFloat_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordFloat, row_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordFloat, col_),
@@ -241,7 +336,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RecordFloat));
-  RecordString_descriptor_ = file->message_type(7);
+  RecordString_descriptor_ = file->message_type(11);
   static const int RecordString_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordString, row_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordString, col_),
@@ -258,7 +353,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RecordString));
-  RecordObject_descriptor_ = file->message_type(8);
+  RecordObject_descriptor_ = file->message_type(12);
   static const int RecordObject_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordObject, row_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordObject, col_),
@@ -275,13 +370,49 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RecordObject));
-  RecordAddRowStruct_descriptor_ = file->message_type(9);
-  static const int RecordAddRowStruct_offsets_[5] = {
+  RecordVector2_descriptor_ = file->message_type(13);
+  static const int RecordVector2_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector2, row_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector2, col_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector2, data_),
+  };
+  RecordVector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      RecordVector2_descriptor_,
+      RecordVector2::default_instance_,
+      RecordVector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(RecordVector2));
+  RecordVector3_descriptor_ = file->message_type(14);
+  static const int RecordVector3_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector3, row_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector3, col_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector3, data_),
+  };
+  RecordVector3_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      RecordVector3_descriptor_,
+      RecordVector3::default_instance_,
+      RecordVector3_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector3, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordVector3, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(RecordVector3));
+  RecordAddRowStruct_descriptor_ = file->message_type(15);
+  static const int RecordAddRowStruct_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, row_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_int_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_float_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_string_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_object_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_vector2_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RecordAddRowStruct, record_vector3_list_),
   };
   RecordAddRowStruct_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -294,7 +425,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(RecordAddRowStruct));
-  ObjectRecordBase_descriptor_ = file->message_type(10);
+  ObjectRecordBase_descriptor_ = file->message_type(16);
   static const int ObjectRecordBase_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordBase, record_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordBase, row_struct_),
@@ -310,13 +441,15 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordBase));
-  ObjectPropertyList_descriptor_ = file->message_type(11);
-  static const int ObjectPropertyList_offsets_[5] = {
+  ObjectPropertyList_descriptor_ = file->message_type(17);
+  static const int ObjectPropertyList_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_int_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_float_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_string_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_object_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_vector2_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyList, property_vector3_list_),
   };
   ObjectPropertyList_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -329,7 +462,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectPropertyList));
-  MultiObjectPropertyList_descriptor_ = file->message_type(12);
+  MultiObjectPropertyList_descriptor_ = file->message_type(18);
   static const int MultiObjectPropertyList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MultiObjectPropertyList, multi_player_property_),
   };
@@ -344,7 +477,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MultiObjectPropertyList));
-  ObjectRecordList_descriptor_ = file->message_type(13);
+  ObjectRecordList_descriptor_ = file->message_type(19);
   static const int ObjectRecordList_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordList, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordList, record_list_),
@@ -360,7 +493,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordList));
-  MultiObjectRecordList_descriptor_ = file->message_type(14);
+  MultiObjectRecordList_descriptor_ = file->message_type(20);
   static const int MultiObjectRecordList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MultiObjectRecordList, multi_player_record_),
   };
@@ -375,7 +508,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MultiObjectRecordList));
-  ObjectPropertyInt_descriptor_ = file->message_type(15);
+  ObjectPropertyInt_descriptor_ = file->message_type(21);
   static const int ObjectPropertyInt_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyInt, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyInt, property_list_),
@@ -391,7 +524,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectPropertyInt));
-  ObjectPropertyFloat_descriptor_ = file->message_type(16);
+  ObjectPropertyFloat_descriptor_ = file->message_type(22);
   static const int ObjectPropertyFloat_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyFloat, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyFloat, property_list_),
@@ -407,7 +540,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectPropertyFloat));
-  ObjectPropertyString_descriptor_ = file->message_type(17);
+  ObjectPropertyString_descriptor_ = file->message_type(23);
   static const int ObjectPropertyString_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyString, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyString, property_list_),
@@ -423,7 +556,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectPropertyString));
-  ObjectPropertyObject_descriptor_ = file->message_type(18);
+  ObjectPropertyObject_descriptor_ = file->message_type(24);
   static const int ObjectPropertyObject_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyObject, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyObject, property_list_),
@@ -439,7 +572,39 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectPropertyObject));
-  ObjectRecordInt_descriptor_ = file->message_type(19);
+  ObjectPropertyVector2_descriptor_ = file->message_type(25);
+  static const int ObjectPropertyVector2_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector2, player_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector2, property_list_),
+  };
+  ObjectPropertyVector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ObjectPropertyVector2_descriptor_,
+      ObjectPropertyVector2::default_instance_,
+      ObjectPropertyVector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ObjectPropertyVector2));
+  ObjectPropertyVector3_descriptor_ = file->message_type(26);
+  static const int ObjectPropertyVector3_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector3, player_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector3, property_list_),
+  };
+  ObjectPropertyVector3_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ObjectPropertyVector3_descriptor_,
+      ObjectPropertyVector3::default_instance_,
+      ObjectPropertyVector3_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector3, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectPropertyVector3, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ObjectPropertyVector3));
+  ObjectRecordInt_descriptor_ = file->message_type(27);
   static const int ObjectRecordInt_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordInt, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordInt, record_name_),
@@ -456,7 +621,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordInt));
-  ObjectRecordFloat_descriptor_ = file->message_type(20);
+  ObjectRecordFloat_descriptor_ = file->message_type(28);
   static const int ObjectRecordFloat_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordFloat, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordFloat, record_name_),
@@ -473,7 +638,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordFloat));
-  ObjectRecordString_descriptor_ = file->message_type(21);
+  ObjectRecordString_descriptor_ = file->message_type(29);
   static const int ObjectRecordString_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordString, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordString, record_name_),
@@ -490,7 +655,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordString));
-  ObjectRecordObject_descriptor_ = file->message_type(22);
+  ObjectRecordObject_descriptor_ = file->message_type(30);
   static const int ObjectRecordObject_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordObject, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordObject, record_name_),
@@ -507,7 +672,41 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordObject));
-  ObjectRecordSwap_descriptor_ = file->message_type(23);
+  ObjectRecordVector2_descriptor_ = file->message_type(31);
+  static const int ObjectRecordVector2_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector2, player_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector2, record_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector2, property_list_),
+  };
+  ObjectRecordVector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ObjectRecordVector2_descriptor_,
+      ObjectRecordVector2::default_instance_,
+      ObjectRecordVector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ObjectRecordVector2));
+  ObjectRecordVector3_descriptor_ = file->message_type(32);
+  static const int ObjectRecordVector3_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector3, player_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector3, record_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector3, property_list_),
+  };
+  ObjectRecordVector3_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ObjectRecordVector3_descriptor_,
+      ObjectRecordVector3::default_instance_,
+      ObjectRecordVector3_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector3, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordVector3, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ObjectRecordVector3));
+  ObjectRecordSwap_descriptor_ = file->message_type(33);
   static const int ObjectRecordSwap_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordSwap, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordSwap, origin_record_name_),
@@ -526,7 +725,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordSwap));
-  ObjectRecordAddRow_descriptor_ = file->message_type(24);
+  ObjectRecordAddRow_descriptor_ = file->message_type(34);
   static const int ObjectRecordAddRow_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordAddRow, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordAddRow, record_name_),
@@ -543,7 +742,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordAddRow));
-  ObjectRecordRemove_descriptor_ = file->message_type(25);
+  ObjectRecordRemove_descriptor_ = file->message_type(35);
   static const int ObjectRecordRemove_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordRemove, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectRecordRemove, record_name_),
@@ -560,12 +759,14 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectRecordRemove));
-  PlayerPropertyBase_descriptor_ = file->message_type(26);
-  static const int PlayerPropertyBase_offsets_[4] = {
+  PlayerPropertyBase_descriptor_ = file->message_type(36);
+  static const int PlayerPropertyBase_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_int_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_float_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_string_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_object_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_vector2_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerPropertyBase, property_vector3_list_),
   };
   PlayerPropertyBase_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -578,13 +779,15 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerPropertyBase));
-  PlayerRecordBase_descriptor_ = file->message_type(27);
-  static const int PlayerRecordBase_offsets_[5] = {
+  PlayerRecordBase_descriptor_ = file->message_type(37);
+  static const int PlayerRecordBase_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_int_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_float_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_string_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_object_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_vector2_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordBase, record_vector3_list_),
   };
   PlayerRecordBase_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -597,7 +800,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerRecordBase));
-  PlayerRecordList_descriptor_ = file->message_type(28);
+  PlayerRecordList_descriptor_ = file->message_type(38);
   static const int PlayerRecordList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerRecordList, record_list_),
   };
@@ -612,7 +815,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PlayerRecordList));
-  MsgBase_descriptor_ = file->message_type(29);
+  MsgBase_descriptor_ = file->message_type(39);
   static const int MsgBase_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgBase, msg_data_),
@@ -630,7 +833,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MsgBase));
-  Position_descriptor_ = file->message_type(30);
+  Position_descriptor_ = file->message_type(40);
   static const int Position_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, y_),
@@ -647,7 +850,7 @@ void protobuf_AssignDesc_NFMsgBase_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Position));
-  ReqCommand_descriptor_ = file->message_type(31);
+  ReqCommand_descriptor_ = file->message_type(41);
   static const int ReqCommand_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCommand, control_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCommand, command_id_),
@@ -686,6 +889,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Ident_descriptor_, &Ident::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Vector2_descriptor_, &Vector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Vector3_descriptor_, &Vector3::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PropertyInt_descriptor_, &PropertyInt::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PropertyFloat_descriptor_, &PropertyFloat::default_instance());
@@ -694,6 +901,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PropertyObject_descriptor_, &PropertyObject::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    PropertyVector2_descriptor_, &PropertyVector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    PropertyVector3_descriptor_, &PropertyVector3::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RecordInt_descriptor_, &RecordInt::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RecordFloat_descriptor_, &RecordFloat::default_instance());
@@ -701,6 +912,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     RecordString_descriptor_, &RecordString::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RecordObject_descriptor_, &RecordObject::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    RecordVector2_descriptor_, &RecordVector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    RecordVector3_descriptor_, &RecordVector3::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     RecordAddRowStruct_descriptor_, &RecordAddRowStruct::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -722,6 +937,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectPropertyObject_descriptor_, &ObjectPropertyObject::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ObjectPropertyVector2_descriptor_, &ObjectPropertyVector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ObjectPropertyVector3_descriptor_, &ObjectPropertyVector3::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectRecordInt_descriptor_, &ObjectRecordInt::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectRecordFloat_descriptor_, &ObjectRecordFloat::default_instance());
@@ -729,6 +948,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ObjectRecordString_descriptor_, &ObjectRecordString::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectRecordObject_descriptor_, &ObjectRecordObject::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ObjectRecordVector2_descriptor_, &ObjectRecordVector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ObjectRecordVector3_descriptor_, &ObjectRecordVector3::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectRecordSwap_descriptor_, &ObjectRecordSwap::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -754,6 +977,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_NFMsgBase_2eproto() {
   delete Ident::default_instance_;
   delete Ident_reflection_;
+  delete Vector2::default_instance_;
+  delete Vector2_reflection_;
+  delete Vector3::default_instance_;
+  delete Vector3_reflection_;
   delete PropertyInt::default_instance_;
   delete PropertyInt_reflection_;
   delete PropertyFloat::default_instance_;
@@ -762,6 +989,10 @@ void protobuf_ShutdownFile_NFMsgBase_2eproto() {
   delete PropertyString_reflection_;
   delete PropertyObject::default_instance_;
   delete PropertyObject_reflection_;
+  delete PropertyVector2::default_instance_;
+  delete PropertyVector2_reflection_;
+  delete PropertyVector3::default_instance_;
+  delete PropertyVector3_reflection_;
   delete RecordInt::default_instance_;
   delete RecordInt_reflection_;
   delete RecordFloat::default_instance_;
@@ -770,6 +1001,10 @@ void protobuf_ShutdownFile_NFMsgBase_2eproto() {
   delete RecordString_reflection_;
   delete RecordObject::default_instance_;
   delete RecordObject_reflection_;
+  delete RecordVector2::default_instance_;
+  delete RecordVector2_reflection_;
+  delete RecordVector3::default_instance_;
+  delete RecordVector3_reflection_;
   delete RecordAddRowStruct::default_instance_;
   delete RecordAddRowStruct_reflection_;
   delete ObjectRecordBase::default_instance_;
@@ -790,6 +1025,10 @@ void protobuf_ShutdownFile_NFMsgBase_2eproto() {
   delete ObjectPropertyString_reflection_;
   delete ObjectPropertyObject::default_instance_;
   delete ObjectPropertyObject_reflection_;
+  delete ObjectPropertyVector2::default_instance_;
+  delete ObjectPropertyVector2_reflection_;
+  delete ObjectPropertyVector3::default_instance_;
+  delete ObjectPropertyVector3_reflection_;
   delete ObjectRecordInt::default_instance_;
   delete ObjectRecordInt_reflection_;
   delete ObjectRecordFloat::default_instance_;
@@ -798,6 +1037,10 @@ void protobuf_ShutdownFile_NFMsgBase_2eproto() {
   delete ObjectRecordString_reflection_;
   delete ObjectRecordObject::default_instance_;
   delete ObjectRecordObject_reflection_;
+  delete ObjectRecordVector2::default_instance_;
+  delete ObjectRecordVector2_reflection_;
+  delete ObjectRecordVector3::default_instance_;
+  delete ObjectRecordVector3_reflection_;
   delete ObjectRecordSwap::default_instance_;
   delete ObjectRecordSwap_reflection_;
   delete ObjectRecordAddRow::default_instance_;
@@ -828,109 +1071,146 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\017NFMsgBase.proto\022\005NFMsg\032\016NFDefine.proto"
     "\"%\n\005Ident\022\r\n\005svrid\030\001 \002(\003\022\r\n\005index\030\002 \002(\003\""
-    "2\n\013PropertyInt\022\025\n\rproperty_name\030\001 \002(\014\022\014\n"
-    "\004data\030\002 \002(\003\"4\n\rPropertyFloat\022\025\n\rproperty"
-    "_name\030\001 \002(\014\022\014\n\004data\030\002 \002(\002\"5\n\016PropertyStr"
-    "ing\022\025\n\rproperty_name\030\001 \002(\014\022\014\n\004data\030\002 \002(\014"
-    "\"C\n\016PropertyObject\022\025\n\rproperty_name\030\001 \002("
-    "\014\022\032\n\004data\030\002 \002(\0132\014.NFMsg.Ident\"3\n\tRecordI"
-    "nt\022\013\n\003row\030\001 \002(\005\022\013\n\003col\030\002 \002(\005\022\014\n\004data\030\003 \002"
-    "(\003\"5\n\013RecordFloat\022\013\n\003row\030\001 \002(\005\022\013\n\003col\030\002 "
-    "\002(\005\022\014\n\004data\030\003 \002(\002\"6\n\014RecordString\022\013\n\003row"
-    "\030\001 \002(\005\022\013\n\003col\030\002 \002(\005\022\014\n\004data\030\003 \002(\014\"D\n\014Rec"
-    "ordObject\022\013\n\003row\030\001 \002(\005\022\013\n\003col\030\002 \002(\005\022\032\n\004d"
-    "ata\030\003 \002(\0132\014.NFMsg.Ident\"\335\001\n\022RecordAddRow"
-    "Struct\022\013\n\003row\030\001 \002(\005\022)\n\017record_int_list\030\002"
-    " \003(\0132\020.NFMsg.RecordInt\022-\n\021record_float_l"
-    "ist\030\003 \003(\0132\022.NFMsg.RecordFloat\022/\n\022record_"
-    "string_list\030\004 \003(\0132\023.NFMsg.RecordString\022/"
-    "\n\022record_object_list\030\005 \003(\0132\023.NFMsg.Recor"
-    "dObject\"V\n\020ObjectRecordBase\022\023\n\013record_na"
-    "me\030\001 \002(\014\022-\n\nrow_struct\030\002 \003(\0132\031.NFMsg.Rec"
-    "ordAddRowStruct\"\201\002\n\022ObjectPropertyList\022\037"
-    "\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022-\n\021prope"
-    "rty_int_list\030\002 \003(\0132\022.NFMsg.PropertyInt\0221"
-    "\n\023property_float_list\030\003 \003(\0132\024.NFMsg.Prop"
-    "ertyFloat\0223\n\024property_string_list\030\004 \003(\0132"
-    "\025.NFMsg.PropertyString\0223\n\024property_objec"
-    "t_list\030\005 \003(\0132\025.NFMsg.PropertyObject\"S\n\027M"
-    "ultiObjectPropertyList\0228\n\025multi_player_p"
-    "roperty\030\001 \003(\0132\031.NFMsg.ObjectPropertyList"
-    "\"a\n\020ObjectRecordList\022\037\n\tplayer_id\030\001 \002(\0132"
-    "\014.NFMsg.Ident\022,\n\013record_list\030\002 \003(\0132\027.NFM"
-    "sg.ObjectRecordBase\"M\n\025MultiObjectRecord"
-    "List\0224\n\023multi_player_record\030\001 \003(\0132\027.NFMs"
-    "g.ObjectRecordList\"_\n\021ObjectPropertyInt\022"
-    "\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022)\n\rprop"
-    "erty_list\030\002 \003(\0132\022.NFMsg.PropertyInt\"c\n\023O"
-    "bjectPropertyFloat\022\037\n\tplayer_id\030\001 \002(\0132\014."
-    "NFMsg.Ident\022+\n\rproperty_list\030\002 \003(\0132\024.NFM"
-    "sg.PropertyFloat\"e\n\024ObjectPropertyString"
-    "\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022,\n\rpro"
-    "perty_list\030\002 \003(\0132\025.NFMsg.PropertyString\""
-    "e\n\024ObjectPropertyObject\022\037\n\tplayer_id\030\001 \002"
-    "(\0132\014.NFMsg.Ident\022,\n\rproperty_list\030\002 \003(\0132"
-    "\025.NFMsg.PropertyObject\"p\n\017ObjectRecordIn"
-    "t\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013re"
-    "cord_name\030\002 \002(\014\022\'\n\rproperty_list\030\003 \003(\0132\020"
-    ".NFMsg.RecordInt\"t\n\021ObjectRecordFloat\022\037\n"
-    "\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record"
-    "_name\030\002 \002(\014\022)\n\rproperty_list\030\003 \003(\0132\022.NFM"
-    "sg.RecordFloat\"v\n\022ObjectRecordString\022\037\n\t"
-    "player_id\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_"
-    "name\030\002 \002(\014\022*\n\rproperty_list\030\003 \003(\0132\023.NFMs"
-    "g.RecordString\"v\n\022ObjectRecordObject\022\037\n\t"
-    "player_id\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_"
-    "name\030\002 \002(\014\022*\n\rproperty_list\030\003 \003(\0132\023.NFMs"
-    "g.RecordObject\"\223\001\n\020ObjectRecordSwap\022\037\n\tp"
-    "layer_id\030\001 \002(\0132\014.NFMsg.Ident\022\032\n\022origin_r"
-    "ecord_name\030\002 \002(\014\022\032\n\022target_record_name\030\003"
-    " \001(\014\022\022\n\nrow_origin\030\004 \002(\005\022\022\n\nrow_target\030\005"
-    " \002(\005\"w\n\022ObjectRecordAddRow\022\037\n\tplayer_id\030"
+    "\037\n\007Vector2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"*\n\007Vect"
+    "or3\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\013"
+    "PropertyInt\022\025\n\rproperty_name\030\001 \002(\014\022\014\n\004da"
+    "ta\030\002 \002(\003\"4\n\rPropertyFloat\022\025\n\rproperty_na"
+    "me\030\001 \002(\014\022\014\n\004data\030\002 \002(\002\"5\n\016PropertyString"
+    "\022\025\n\rproperty_name\030\001 \002(\014\022\014\n\004data\030\002 \002(\014\"C\n"
+    "\016PropertyObject\022\025\n\rproperty_name\030\001 \002(\014\022\032"
+    "\n\004data\030\002 \002(\0132\014.NFMsg.Ident\"F\n\017PropertyVe"
+    "ctor2\022\025\n\rproperty_name\030\001 \002(\014\022\034\n\004data\030\002 \002"
+    "(\0132\016.NFMsg.Vector2\"F\n\017PropertyVector3\022\025\n"
+    "\rproperty_name\030\001 \002(\014\022\034\n\004data\030\002 \002(\0132\016.NFM"
+    "sg.Vector3\"3\n\tRecordInt\022\013\n\003row\030\001 \002(\005\022\013\n\003"
+    "col\030\002 \002(\005\022\014\n\004data\030\003 \002(\003\"5\n\013RecordFloat\022\013"
+    "\n\003row\030\001 \002(\005\022\013\n\003col\030\002 \002(\005\022\014\n\004data\030\003 \002(\002\"6"
+    "\n\014RecordString\022\013\n\003row\030\001 \002(\005\022\013\n\003col\030\002 \002(\005"
+    "\022\014\n\004data\030\003 \002(\014\"D\n\014RecordObject\022\013\n\003row\030\001 "
+    "\002(\005\022\013\n\003col\030\002 \002(\005\022\032\n\004data\030\003 \002(\0132\014.NFMsg.I"
+    "dent\"G\n\rRecordVector2\022\013\n\003row\030\001 \002(\005\022\013\n\003co"
+    "l\030\002 \002(\005\022\034\n\004data\030\003 \002(\0132\016.NFMsg.Vector2\"G\n"
+    "\rRecordVector3\022\013\n\003row\030\001 \002(\005\022\013\n\003col\030\002 \002(\005"
+    "\022\034\n\004data\030\003 \002(\0132\016.NFMsg.Vector3\"\303\002\n\022Recor"
+    "dAddRowStruct\022\013\n\003row\030\001 \002(\005\022)\n\017record_int"
+    "_list\030\002 \003(\0132\020.NFMsg.RecordInt\022-\n\021record_"
+    "float_list\030\003 \003(\0132\022.NFMsg.RecordFloat\022/\n\022"
+    "record_string_list\030\004 \003(\0132\023.NFMsg.RecordS"
+    "tring\022/\n\022record_object_list\030\005 \003(\0132\023.NFMs"
+    "g.RecordObject\0221\n\023record_vector2_list\030\006 "
+    "\003(\0132\024.NFMsg.RecordVector2\0221\n\023record_vect"
+    "or3_list\030\007 \003(\0132\024.NFMsg.RecordVector3\"V\n\020"
+    "ObjectRecordBase\022\023\n\013record_name\030\001 \002(\014\022-\n"
+    "\nrow_struct\030\002 \003(\0132\031.NFMsg.RecordAddRowSt"
+    "ruct\"\357\002\n\022ObjectPropertyList\022\037\n\tplayer_id"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022-\n\021property_int_lis"
+    "t\030\002 \003(\0132\022.NFMsg.PropertyInt\0221\n\023property_"
+    "float_list\030\003 \003(\0132\024.NFMsg.PropertyFloat\0223"
+    "\n\024property_string_list\030\004 \003(\0132\025.NFMsg.Pro"
+    "pertyString\0223\n\024property_object_list\030\005 \003("
+    "\0132\025.NFMsg.PropertyObject\0225\n\025property_vec"
+    "tor2_list\030\006 \003(\0132\026.NFMsg.PropertyVector2\022"
+    "5\n\025property_vector3_list\030\007 \003(\0132\026.NFMsg.P"
+    "ropertyVector3\"S\n\027MultiObjectPropertyLis"
+    "t\0228\n\025multi_player_property\030\001 \003(\0132\031.NFMsg"
+    ".ObjectPropertyList\"a\n\020ObjectRecordList\022"
+    "\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022,\n\013reco"
+    "rd_list\030\002 \003(\0132\027.NFMsg.ObjectRecordBase\"M"
+    "\n\025MultiObjectRecordList\0224\n\023multi_player_"
+    "record\030\001 \003(\0132\027.NFMsg.ObjectRecordList\"_\n"
+    "\021ObjectPropertyInt\022\037\n\tplayer_id\030\001 \002(\0132\014."
+    "NFMsg.Ident\022)\n\rproperty_list\030\002 \003(\0132\022.NFM"
+    "sg.PropertyInt\"c\n\023ObjectPropertyFloat\022\037\n"
+    "\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022+\n\rproper"
+    "ty_list\030\002 \003(\0132\024.NFMsg.PropertyFloat\"e\n\024O"
+    "bjectPropertyString\022\037\n\tplayer_id\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022,\n\rproperty_list\030\002 \003(\0132\025.NF"
+    "Msg.PropertyString\"e\n\024ObjectPropertyObje"
+    "ct\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022,\n\rp"
+    "roperty_list\030\002 \003(\0132\025.NFMsg.PropertyObjec"
+    "t\"g\n\025ObjectPropertyVector2\022\037\n\tplayer_id\030"
+    "\001 \002(\0132\014.NFMsg.Ident\022-\n\rproperty_list\030\002 \003"
+    "(\0132\026.NFMsg.PropertyVector2\"g\n\025ObjectProp"
+    "ertyVector3\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.I"
+    "dent\022-\n\rproperty_list\030\002 \003(\0132\026.NFMsg.Prop"
+    "ertyVector3\"p\n\017ObjectRecordInt\022\037\n\tplayer"
+    "_id\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002"
+    " \002(\014\022\'\n\rproperty_list\030\003 \003(\0132\020.NFMsg.Reco"
+    "rdInt\"t\n\021ObjectRecordFloat\022\037\n\tplayer_id\030"
     "\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014"
-    "\022+\n\010row_data\030\003 \003(\0132\031.NFMsg.RecordAddRowS"
-    "truct\"^\n\022ObjectRecordRemove\022\037\n\tplayer_id"
-    "\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002("
-    "\014\022\022\n\nremove_row\030\003 \003(\005\"\340\001\n\022PlayerProperty"
-    "Base\022-\n\021property_int_list\030\001 \003(\0132\022.NFMsg."
-    "PropertyInt\0221\n\023property_float_list\030\002 \003(\013"
-    "2\024.NFMsg.PropertyFloat\0223\n\024property_strin"
-    "g_list\030\003 \003(\0132\025.NFMsg.PropertyString\0223\n\024p"
-    "roperty_object_list\030\004 \003(\0132\025.NFMsg.Proper"
-    "tyObject\"\343\001\n\020PlayerRecordBase\022\023\n\013record_"
-    "name\030\001 \002(\t\022)\n\017record_int_list\030\002 \003(\0132\020.NF"
-    "Msg.RecordInt\022-\n\021record_float_list\030\003 \003(\013"
-    "2\022.NFMsg.RecordFloat\022/\n\022record_string_li"
-    "st\030\004 \003(\0132\023.NFMsg.RecordString\022/\n\022record_"
-    "object_list\030\005 \003(\0132\023.NFMsg.RecordObject\"@"
-    "\n\020PlayerRecordList\022,\n\013record_list\030\001 \003(\0132"
-    "\027.NFMsg.PlayerRecordBase\"\210\001\n\007MsgBase\022\037\n\t"
-    "player_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010msg_dat"
-    "a\030\002 \002(\014\022(\n\022player_Client_list\030\003 \003(\0132\014.NF"
-    "Msg.Ident\022 \n\nhash_ident\030\004 \001(\0132\014.NFMsg.Id"
-    "ent\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n"
-    "\001z\030\003 \002(\002\"\213\003\n\nReqCommand\022 \n\ncontrol_id\030\001 "
-    "\002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002(\0162\"."
-    "NFMsg.ReqCommand.EGameCommandType\022\031\n\021com"
-    "mand_str_value\030\003 \001(\014\022\031\n\021command_value_in"
-    "t\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001(\001\022\031\n\021"
-    "command_value_str\030\006 \001(\014\022*\n\024command_value"
-    "_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030\010 \001(\005"
-    "\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027\n\023EGC"
-    "T_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_ITEM\020\001\022"
-    "\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD_ROLE"
-    "_EXP\020\003", 3726);
+    "\022)\n\rproperty_list\030\003 \003(\0132\022.NFMsg.RecordFl"
+    "oat\"v\n\022ObjectRecordString\022\037\n\tplayer_id\030\001"
+    " \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014\022"
+    "*\n\rproperty_list\030\003 \003(\0132\023.NFMsg.RecordStr"
+    "ing\"v\n\022ObjectRecordObject\022\037\n\tplayer_id\030\001"
+    " \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014\022"
+    "*\n\rproperty_list\030\003 \003(\0132\023.NFMsg.RecordObj"
+    "ect\"x\n\023ObjectRecordVector2\022\037\n\tplayer_id\030"
+    "\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014"
+    "\022+\n\rproperty_list\030\003 \003(\0132\024.NFMsg.RecordVe"
+    "ctor2\"x\n\023ObjectRecordVector3\022\037\n\tplayer_i"
+    "d\030\001 \002(\0132\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002"
+    "(\014\022+\n\rproperty_list\030\003 \003(\0132\024.NFMsg.Record"
+    "Vector3\"\223\001\n\020ObjectRecordSwap\022\037\n\tplayer_i"
+    "d\030\001 \002(\0132\014.NFMsg.Ident\022\032\n\022origin_record_n"
+    "ame\030\002 \002(\014\022\032\n\022target_record_name\030\003 \001(\014\022\022\n"
+    "\nrow_origin\030\004 \002(\005\022\022\n\nrow_target\030\005 \002(\005\"w\n"
+    "\022ObjectRecordAddRow\022\037\n\tplayer_id\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014\022+\n\010row"
+    "_data\030\003 \003(\0132\031.NFMsg.RecordAddRowStruct\"^"
+    "\n\022ObjectRecordRemove\022\037\n\tplayer_id\030\001 \002(\0132"
+    "\014.NFMsg.Ident\022\023\n\013record_name\030\002 \002(\014\022\022\n\nre"
+    "move_row\030\003 \003(\005\"\316\002\n\022PlayerPropertyBase\022-\n"
+    "\021property_int_list\030\001 \003(\0132\022.NFMsg.Propert"
+    "yInt\0221\n\023property_float_list\030\002 \003(\0132\024.NFMs"
+    "g.PropertyFloat\0223\n\024property_string_list\030"
+    "\003 \003(\0132\025.NFMsg.PropertyString\0223\n\024property"
+    "_object_list\030\004 \003(\0132\025.NFMsg.PropertyObjec"
+    "t\0225\n\025property_vector2_list\030\005 \003(\0132\026.NFMsg"
+    ".PropertyVector2\0225\n\025property_vector3_lis"
+    "t\030\006 \003(\0132\026.NFMsg.PropertyVector3\"\311\002\n\020Play"
+    "erRecordBase\022\023\n\013record_name\030\001 \002(\t\022)\n\017rec"
+    "ord_int_list\030\002 \003(\0132\020.NFMsg.RecordInt\022-\n\021"
+    "record_float_list\030\003 \003(\0132\022.NFMsg.RecordFl"
+    "oat\022/\n\022record_string_list\030\004 \003(\0132\023.NFMsg."
+    "RecordString\022/\n\022record_object_list\030\005 \003(\013"
+    "2\023.NFMsg.RecordObject\0221\n\023record_vector2_"
+    "list\030\006 \003(\0132\024.NFMsg.RecordVector2\0221\n\023reco"
+    "rd_vector3_list\030\007 \003(\0132\024.NFMsg.RecordVect"
+    "or3\"@\n\020PlayerRecordList\022,\n\013record_list\030\001"
+    " \003(\0132\027.NFMsg.PlayerRecordBase\"\210\001\n\007MsgBas"
+    "e\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010ms"
+    "g_data\030\002 \002(\014\022(\n\022player_Client_list\030\003 \003(\013"
+    "2\014.NFMsg.Ident\022 \n\nhash_ident\030\004 \001(\0132\014.NFM"
+    "sg.Ident\"+\n\010Position\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002"
+    "(\002\022\t\n\001z\030\003 \002(\002\"\213\003\n\nReqCommand\022 \n\ncontrol_"
+    "id\030\001 \002(\0132\014.NFMsg.Ident\0226\n\ncommand_id\030\002 \002"
+    "(\0162\".NFMsg.ReqCommand.EGameCommandType\022\031"
+    "\n\021command_str_value\030\003 \001(\014\022\031\n\021command_val"
+    "ue_int\030\004 \001(\003\022\033\n\023command_value_float\030\005 \001("
+    "\001\022\031\n\021command_value_str\030\006 \001(\014\022*\n\024command_"
+    "value_object\030\007 \001(\0132\014.NFMsg.Ident\022\013\n\003row\030"
+    "\010 \001(\005\022\013\n\003col\030\t \001(\005\"o\n\020EGameCommandType\022\027"
+    "\n\023EGCT_MODIY_PROPERTY\020\000\022\023\n\017EGCT_MODIY_IT"
+    "EM\020\001\022\026\n\022EGCT_CREATE_OBJECT\020\002\022\025\n\021EGCT_ADD"
+    "_ROLE_EXP\020\003", 4971);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgBase.proto", &protobuf_RegisterTypes);
   Ident::default_instance_ = new Ident();
+  Vector2::default_instance_ = new Vector2();
+  Vector3::default_instance_ = new Vector3();
   PropertyInt::default_instance_ = new PropertyInt();
   PropertyFloat::default_instance_ = new PropertyFloat();
   PropertyString::default_instance_ = new PropertyString();
   PropertyObject::default_instance_ = new PropertyObject();
+  PropertyVector2::default_instance_ = new PropertyVector2();
+  PropertyVector3::default_instance_ = new PropertyVector3();
   RecordInt::default_instance_ = new RecordInt();
   RecordFloat::default_instance_ = new RecordFloat();
   RecordString::default_instance_ = new RecordString();
   RecordObject::default_instance_ = new RecordObject();
+  RecordVector2::default_instance_ = new RecordVector2();
+  RecordVector3::default_instance_ = new RecordVector3();
   RecordAddRowStruct::default_instance_ = new RecordAddRowStruct();
   ObjectRecordBase::default_instance_ = new ObjectRecordBase();
   ObjectPropertyList::default_instance_ = new ObjectPropertyList();
@@ -941,10 +1221,14 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
   ObjectPropertyFloat::default_instance_ = new ObjectPropertyFloat();
   ObjectPropertyString::default_instance_ = new ObjectPropertyString();
   ObjectPropertyObject::default_instance_ = new ObjectPropertyObject();
+  ObjectPropertyVector2::default_instance_ = new ObjectPropertyVector2();
+  ObjectPropertyVector3::default_instance_ = new ObjectPropertyVector3();
   ObjectRecordInt::default_instance_ = new ObjectRecordInt();
   ObjectRecordFloat::default_instance_ = new ObjectRecordFloat();
   ObjectRecordString::default_instance_ = new ObjectRecordString();
   ObjectRecordObject::default_instance_ = new ObjectRecordObject();
+  ObjectRecordVector2::default_instance_ = new ObjectRecordVector2();
+  ObjectRecordVector3::default_instance_ = new ObjectRecordVector3();
   ObjectRecordSwap::default_instance_ = new ObjectRecordSwap();
   ObjectRecordAddRow::default_instance_ = new ObjectRecordAddRow();
   ObjectRecordRemove::default_instance_ = new ObjectRecordRemove();
@@ -955,14 +1239,20 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
   Position::default_instance_ = new Position();
   ReqCommand::default_instance_ = new ReqCommand();
   Ident::default_instance_->InitAsDefaultInstance();
+  Vector2::default_instance_->InitAsDefaultInstance();
+  Vector3::default_instance_->InitAsDefaultInstance();
   PropertyInt::default_instance_->InitAsDefaultInstance();
   PropertyFloat::default_instance_->InitAsDefaultInstance();
   PropertyString::default_instance_->InitAsDefaultInstance();
   PropertyObject::default_instance_->InitAsDefaultInstance();
+  PropertyVector2::default_instance_->InitAsDefaultInstance();
+  PropertyVector3::default_instance_->InitAsDefaultInstance();
   RecordInt::default_instance_->InitAsDefaultInstance();
   RecordFloat::default_instance_->InitAsDefaultInstance();
   RecordString::default_instance_->InitAsDefaultInstance();
   RecordObject::default_instance_->InitAsDefaultInstance();
+  RecordVector2::default_instance_->InitAsDefaultInstance();
+  RecordVector3::default_instance_->InitAsDefaultInstance();
   RecordAddRowStruct::default_instance_->InitAsDefaultInstance();
   ObjectRecordBase::default_instance_->InitAsDefaultInstance();
   ObjectPropertyList::default_instance_->InitAsDefaultInstance();
@@ -973,10 +1263,14 @@ void protobuf_AddDesc_NFMsgBase_2eproto() {
   ObjectPropertyFloat::default_instance_->InitAsDefaultInstance();
   ObjectPropertyString::default_instance_->InitAsDefaultInstance();
   ObjectPropertyObject::default_instance_->InitAsDefaultInstance();
+  ObjectPropertyVector2::default_instance_->InitAsDefaultInstance();
+  ObjectPropertyVector3::default_instance_->InitAsDefaultInstance();
   ObjectRecordInt::default_instance_->InitAsDefaultInstance();
   ObjectRecordFloat::default_instance_->InitAsDefaultInstance();
   ObjectRecordString::default_instance_->InitAsDefaultInstance();
   ObjectRecordObject::default_instance_->InitAsDefaultInstance();
+  ObjectRecordVector2::default_instance_->InitAsDefaultInstance();
+  ObjectRecordVector3::default_instance_->InitAsDefaultInstance();
   ObjectRecordSwap::default_instance_->InitAsDefaultInstance();
   ObjectRecordAddRow::default_instance_->InitAsDefaultInstance();
   ObjectRecordRemove::default_instance_->InitAsDefaultInstance();
@@ -1241,6 +1535,534 @@ void Ident::Swap(Ident* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = Ident_descriptor_;
   metadata.reflection = Ident_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Vector2::kXFieldNumber;
+const int Vector2::kYFieldNumber;
+#endif  // !_MSC_VER
+
+Vector2::Vector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void Vector2::InitAsDefaultInstance() {
+}
+
+Vector2::Vector2(const Vector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void Vector2::SharedCtor() {
+  _cached_size_ = 0;
+  x_ = 0;
+  y_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Vector2::~Vector2() {
+  SharedDtor();
+}
+
+void Vector2::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Vector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Vector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Vector2_descriptor_;
+}
+
+const Vector2& Vector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+Vector2* Vector2::default_instance_ = NULL;
+
+Vector2* Vector2::New() const {
+  return new Vector2;
+}
+
+void Vector2::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    x_ = 0;
+    y_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Vector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float x = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &x_)));
+          set_has_x();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(21)) goto parse_y;
+        break;
+      }
+
+      // required float y = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void Vector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required float x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
+  }
+
+  // required float y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* Vector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required float x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
+  }
+
+  // required float y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int Vector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required float x = 1;
+    if (has_x()) {
+      total_size += 1 + 4;
+    }
+
+    // required float y = 2;
+    if (has_y()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Vector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Vector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Vector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Vector2::MergeFrom(const Vector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Vector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Vector2::CopyFrom(const Vector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Vector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void Vector2::Swap(Vector2* other) {
+  if (other != this) {
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Vector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Vector2_descriptor_;
+  metadata.reflection = Vector2_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Vector3::kXFieldNumber;
+const int Vector3::kYFieldNumber;
+const int Vector3::kZFieldNumber;
+#endif  // !_MSC_VER
+
+Vector3::Vector3()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void Vector3::InitAsDefaultInstance() {
+}
+
+Vector3::Vector3(const Vector3& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void Vector3::SharedCtor() {
+  _cached_size_ = 0;
+  x_ = 0;
+  y_ = 0;
+  z_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Vector3::~Vector3() {
+  SharedDtor();
+}
+
+void Vector3::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Vector3::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Vector3::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Vector3_descriptor_;
+}
+
+const Vector3& Vector3::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+Vector3* Vector3::default_instance_ = NULL;
+
+Vector3* Vector3::New() const {
+  return new Vector3;
+}
+
+void Vector3::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    x_ = 0;
+    y_ = 0;
+    z_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Vector3::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float x = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &x_)));
+          set_has_x();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(21)) goto parse_y;
+        break;
+      }
+
+      // required float y = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(29)) goto parse_z;
+        break;
+      }
+
+      // required float z = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
+         parse_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &z_)));
+          set_has_z();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void Vector3::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required float x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
+  }
+
+  // required float y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
+  }
+
+  // required float z = 3;
+  if (has_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* Vector3::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required float x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
+  }
+
+  // required float y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+  }
+
+  // required float z = 3;
+  if (has_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int Vector3::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required float x = 1;
+    if (has_x()) {
+      total_size += 1 + 4;
+    }
+
+    // required float y = 2;
+    if (has_y()) {
+      total_size += 1 + 4;
+    }
+
+    // required float z = 3;
+    if (has_z()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Vector3::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Vector3* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Vector3*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Vector3::MergeFrom(const Vector3& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+    if (from.has_z()) {
+      set_z(from.z());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Vector3::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Vector3::CopyFrom(const Vector3& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Vector3::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void Vector3::Swap(Vector3* other) {
+  if (other != this) {
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
+    std::swap(z_, other->z_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Vector3::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Vector3_descriptor_;
+  metadata.reflection = Vector3_reflection_;
   return metadata;
 }
 
@@ -2283,6 +3105,536 @@ void PropertyObject::Swap(PropertyObject* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = PropertyObject_descriptor_;
   metadata.reflection = PropertyObject_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PropertyVector2::kPropertyNameFieldNumber;
+const int PropertyVector2::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+PropertyVector2::PropertyVector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void PropertyVector2::InitAsDefaultInstance() {
+  data_ = const_cast< ::NFMsg::Vector2*>(&::NFMsg::Vector2::default_instance());
+}
+
+PropertyVector2::PropertyVector2(const PropertyVector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void PropertyVector2::SharedCtor() {
+  _cached_size_ = 0;
+  property_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PropertyVector2::~PropertyVector2() {
+  SharedDtor();
+}
+
+void PropertyVector2::SharedDtor() {
+  if (property_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete property_name_;
+  }
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void PropertyVector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PropertyVector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PropertyVector2_descriptor_;
+}
+
+const PropertyVector2& PropertyVector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+PropertyVector2* PropertyVector2::default_instance_ = NULL;
+
+PropertyVector2* PropertyVector2::New() const {
+  return new PropertyVector2;
+}
+
+void PropertyVector2::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_property_name()) {
+      if (property_name_ != &::google::protobuf::internal::kEmptyString) {
+        property_name_->clear();
+      }
+    }
+    if (has_data()) {
+      if (data_ != NULL) data_->::NFMsg::Vector2::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PropertyVector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bytes property_name = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_property_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_data;
+        break;
+      }
+
+      // required .NFMsg.Vector2 data = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void PropertyVector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required bytes property_name = 1;
+  if (has_property_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->property_name(), output);
+  }
+
+  // required .NFMsg.Vector2 data = 2;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* PropertyVector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required bytes property_name = 1;
+  if (has_property_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->property_name(), target);
+  }
+
+  // required .NFMsg.Vector2 data = 2;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int PropertyVector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bytes property_name = 1;
+    if (has_property_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->property_name());
+    }
+
+    // required .NFMsg.Vector2 data = 2;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PropertyVector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PropertyVector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PropertyVector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PropertyVector2::MergeFrom(const PropertyVector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_property_name()) {
+      set_property_name(from.property_name());
+    }
+    if (from.has_data()) {
+      mutable_data()->::NFMsg::Vector2::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PropertyVector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PropertyVector2::CopyFrom(const PropertyVector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PropertyVector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  if (has_data()) {
+    if (!this->data().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void PropertyVector2::Swap(PropertyVector2* other) {
+  if (other != this) {
+    std::swap(property_name_, other->property_name_);
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PropertyVector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PropertyVector2_descriptor_;
+  metadata.reflection = PropertyVector2_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PropertyVector3::kPropertyNameFieldNumber;
+const int PropertyVector3::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+PropertyVector3::PropertyVector3()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void PropertyVector3::InitAsDefaultInstance() {
+  data_ = const_cast< ::NFMsg::Vector3*>(&::NFMsg::Vector3::default_instance());
+}
+
+PropertyVector3::PropertyVector3(const PropertyVector3& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void PropertyVector3::SharedCtor() {
+  _cached_size_ = 0;
+  property_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PropertyVector3::~PropertyVector3() {
+  SharedDtor();
+}
+
+void PropertyVector3::SharedDtor() {
+  if (property_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete property_name_;
+  }
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void PropertyVector3::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PropertyVector3::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PropertyVector3_descriptor_;
+}
+
+const PropertyVector3& PropertyVector3::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+PropertyVector3* PropertyVector3::default_instance_ = NULL;
+
+PropertyVector3* PropertyVector3::New() const {
+  return new PropertyVector3;
+}
+
+void PropertyVector3::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_property_name()) {
+      if (property_name_ != &::google::protobuf::internal::kEmptyString) {
+        property_name_->clear();
+      }
+    }
+    if (has_data()) {
+      if (data_ != NULL) data_->::NFMsg::Vector3::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PropertyVector3::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bytes property_name = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_property_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_data;
+        break;
+      }
+
+      // required .NFMsg.Vector3 data = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void PropertyVector3::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required bytes property_name = 1;
+  if (has_property_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->property_name(), output);
+  }
+
+  // required .NFMsg.Vector3 data = 2;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* PropertyVector3::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required bytes property_name = 1;
+  if (has_property_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->property_name(), target);
+  }
+
+  // required .NFMsg.Vector3 data = 2;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int PropertyVector3::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bytes property_name = 1;
+    if (has_property_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->property_name());
+    }
+
+    // required .NFMsg.Vector3 data = 2;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PropertyVector3::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PropertyVector3* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PropertyVector3*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PropertyVector3::MergeFrom(const PropertyVector3& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_property_name()) {
+      set_property_name(from.property_name());
+    }
+    if (from.has_data()) {
+      mutable_data()->::NFMsg::Vector3::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PropertyVector3::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PropertyVector3::CopyFrom(const PropertyVector3& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PropertyVector3::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  if (has_data()) {
+    if (!this->data().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void PropertyVector3::Swap(PropertyVector3* other) {
+  if (other != this) {
+    std::swap(property_name_, other->property_name_);
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PropertyVector3::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PropertyVector3_descriptor_;
+  metadata.reflection = PropertyVector3_reflection_;
   return metadata;
 }
 
@@ -3460,11 +4812,607 @@ void RecordObject::Swap(RecordObject* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int RecordVector2::kRowFieldNumber;
+const int RecordVector2::kColFieldNumber;
+const int RecordVector2::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+RecordVector2::RecordVector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void RecordVector2::InitAsDefaultInstance() {
+  data_ = const_cast< ::NFMsg::Vector2*>(&::NFMsg::Vector2::default_instance());
+}
+
+RecordVector2::RecordVector2(const RecordVector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void RecordVector2::SharedCtor() {
+  _cached_size_ = 0;
+  row_ = 0;
+  col_ = 0;
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+RecordVector2::~RecordVector2() {
+  SharedDtor();
+}
+
+void RecordVector2::SharedDtor() {
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void RecordVector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* RecordVector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RecordVector2_descriptor_;
+}
+
+const RecordVector2& RecordVector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+RecordVector2* RecordVector2::default_instance_ = NULL;
+
+RecordVector2* RecordVector2::New() const {
+  return new RecordVector2;
+}
+
+void RecordVector2::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    row_ = 0;
+    col_ = 0;
+    if (has_data()) {
+      if (data_ != NULL) data_->::NFMsg::Vector2::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool RecordVector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 row = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &row_)));
+          set_has_row();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_col;
+        break;
+      }
+
+      // required int32 col = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_col:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &col_)));
+          set_has_col();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_data;
+        break;
+      }
+
+      // required .NFMsg.Vector2 data = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void RecordVector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 row = 1;
+  if (has_row()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
+  }
+
+  // required int32 col = 2;
+  if (has_col()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->col(), output);
+  }
+
+  // required .NFMsg.Vector2 data = 3;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* RecordVector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 row = 1;
+  if (has_row()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
+  }
+
+  // required int32 col = 2;
+  if (has_col()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->col(), target);
+  }
+
+  // required .NFMsg.Vector2 data = 3;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int RecordVector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 row = 1;
+    if (has_row()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->row());
+    }
+
+    // required int32 col = 2;
+    if (has_col()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->col());
+    }
+
+    // required .NFMsg.Vector2 data = 3;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void RecordVector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const RecordVector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const RecordVector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void RecordVector2::MergeFrom(const RecordVector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_row()) {
+      set_row(from.row());
+    }
+    if (from.has_col()) {
+      set_col(from.col());
+    }
+    if (from.has_data()) {
+      mutable_data()->::NFMsg::Vector2::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void RecordVector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RecordVector2::CopyFrom(const RecordVector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RecordVector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_data()) {
+    if (!this->data().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void RecordVector2::Swap(RecordVector2* other) {
+  if (other != this) {
+    std::swap(row_, other->row_);
+    std::swap(col_, other->col_);
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata RecordVector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = RecordVector2_descriptor_;
+  metadata.reflection = RecordVector2_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int RecordVector3::kRowFieldNumber;
+const int RecordVector3::kColFieldNumber;
+const int RecordVector3::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+RecordVector3::RecordVector3()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void RecordVector3::InitAsDefaultInstance() {
+  data_ = const_cast< ::NFMsg::Vector3*>(&::NFMsg::Vector3::default_instance());
+}
+
+RecordVector3::RecordVector3(const RecordVector3& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void RecordVector3::SharedCtor() {
+  _cached_size_ = 0;
+  row_ = 0;
+  col_ = 0;
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+RecordVector3::~RecordVector3() {
+  SharedDtor();
+}
+
+void RecordVector3::SharedDtor() {
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void RecordVector3::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* RecordVector3::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return RecordVector3_descriptor_;
+}
+
+const RecordVector3& RecordVector3::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+RecordVector3* RecordVector3::default_instance_ = NULL;
+
+RecordVector3* RecordVector3::New() const {
+  return new RecordVector3;
+}
+
+void RecordVector3::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    row_ = 0;
+    col_ = 0;
+    if (has_data()) {
+      if (data_ != NULL) data_->::NFMsg::Vector3::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool RecordVector3::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 row = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &row_)));
+          set_has_row();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_col;
+        break;
+      }
+
+      // required int32 col = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_col:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &col_)));
+          set_has_col();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_data;
+        break;
+      }
+
+      // required .NFMsg.Vector3 data = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void RecordVector3::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 row = 1;
+  if (has_row()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->row(), output);
+  }
+
+  // required int32 col = 2;
+  if (has_col()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->col(), output);
+  }
+
+  // required .NFMsg.Vector3 data = 3;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* RecordVector3::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 row = 1;
+  if (has_row()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->row(), target);
+  }
+
+  // required int32 col = 2;
+  if (has_col()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->col(), target);
+  }
+
+  // required .NFMsg.Vector3 data = 3;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int RecordVector3::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 row = 1;
+    if (has_row()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->row());
+    }
+
+    // required int32 col = 2;
+    if (has_col()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->col());
+    }
+
+    // required .NFMsg.Vector3 data = 3;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void RecordVector3::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const RecordVector3* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const RecordVector3*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void RecordVector3::MergeFrom(const RecordVector3& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_row()) {
+      set_row(from.row());
+    }
+    if (from.has_col()) {
+      set_col(from.col());
+    }
+    if (from.has_data()) {
+      mutable_data()->::NFMsg::Vector3::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void RecordVector3::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RecordVector3::CopyFrom(const RecordVector3& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RecordVector3::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  if (has_data()) {
+    if (!this->data().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void RecordVector3::Swap(RecordVector3* other) {
+  if (other != this) {
+    std::swap(row_, other->row_);
+    std::swap(col_, other->col_);
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata RecordVector3::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = RecordVector3_descriptor_;
+  metadata.reflection = RecordVector3_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int RecordAddRowStruct::kRowFieldNumber;
 const int RecordAddRowStruct::kRecordIntListFieldNumber;
 const int RecordAddRowStruct::kRecordFloatListFieldNumber;
 const int RecordAddRowStruct::kRecordStringListFieldNumber;
 const int RecordAddRowStruct::kRecordObjectListFieldNumber;
+const int RecordAddRowStruct::kRecordVector2ListFieldNumber;
+const int RecordAddRowStruct::kRecordVector3ListFieldNumber;
 #endif  // !_MSC_VER
 
 RecordAddRowStruct::RecordAddRowStruct()
@@ -3525,6 +5473,8 @@ void RecordAddRowStruct::Clear() {
   record_float_list_.Clear();
   record_string_list_.Clear();
   record_object_list_.Clear();
+  record_vector2_list_.Clear();
+  record_vector3_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -3606,6 +5556,36 @@ bool RecordAddRowStruct::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(42)) goto parse_record_object_list;
+        if (input->ExpectTag(50)) goto parse_record_vector2_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_vector2_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_record_vector2_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_record_vector2_list;
+        if (input->ExpectTag(58)) goto parse_record_vector3_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_vector3_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_record_vector3_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_record_vector3_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3657,6 +5637,18 @@ void RecordAddRowStruct::SerializeWithCachedSizes(
       5, this->record_object_list(i), output);
   }
 
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->record_vector2_list(i), output);
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->record_vector3_list(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3696,6 +5688,20 @@ void RecordAddRowStruct::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->record_object_list(i), target);
+  }
+
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->record_vector2_list(i), target);
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->record_vector3_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3749,6 +5755,22 @@ int RecordAddRowStruct::ByteSize() const {
         this->record_object_list(i));
   }
 
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  total_size += 1 * this->record_vector2_list_size();
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->record_vector2_list(i));
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  total_size += 1 * this->record_vector3_list_size();
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->record_vector3_list(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -3778,6 +5800,8 @@ void RecordAddRowStruct::MergeFrom(const RecordAddRowStruct& from) {
   record_float_list_.MergeFrom(from.record_float_list_);
   record_string_list_.MergeFrom(from.record_string_list_);
   record_object_list_.MergeFrom(from.record_object_list_);
+  record_vector2_list_.MergeFrom(from.record_vector2_list_);
+  record_vector3_list_.MergeFrom(from.record_vector3_list_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_row()) {
       set_row(from.row());
@@ -3813,6 +5837,12 @@ bool RecordAddRowStruct::IsInitialized() const {
   for (int i = 0; i < record_object_list_size(); i++) {
     if (!this->record_object_list(i).IsInitialized()) return false;
   }
+  for (int i = 0; i < record_vector2_list_size(); i++) {
+    if (!this->record_vector2_list(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < record_vector3_list_size(); i++) {
+    if (!this->record_vector3_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -3823,6 +5853,8 @@ void RecordAddRowStruct::Swap(RecordAddRowStruct* other) {
     record_float_list_.Swap(&other->record_float_list_);
     record_string_list_.Swap(&other->record_string_list_);
     record_object_list_.Swap(&other->record_object_list_);
+    record_vector2_list_.Swap(&other->record_vector2_list_);
+    record_vector3_list_.Swap(&other->record_vector3_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -4106,6 +6138,8 @@ const int ObjectPropertyList::kPropertyIntListFieldNumber;
 const int ObjectPropertyList::kPropertyFloatListFieldNumber;
 const int ObjectPropertyList::kPropertyStringListFieldNumber;
 const int ObjectPropertyList::kPropertyObjectListFieldNumber;
+const int ObjectPropertyList::kPropertyVector2ListFieldNumber;
+const int ObjectPropertyList::kPropertyVector3ListFieldNumber;
 #endif  // !_MSC_VER
 
 ObjectPropertyList::ObjectPropertyList()
@@ -4170,6 +6204,8 @@ void ObjectPropertyList::Clear() {
   property_float_list_.Clear();
   property_string_list_.Clear();
   property_object_list_.Clear();
+  property_vector2_list_.Clear();
+  property_vector3_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -4249,6 +6285,36 @@ bool ObjectPropertyList::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(42)) goto parse_property_object_list;
+        if (input->ExpectTag(50)) goto parse_property_vector2_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector2 property_vector2_list = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_vector2_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_vector2_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_property_vector2_list;
+        if (input->ExpectTag(58)) goto parse_property_vector3_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector3 property_vector3_list = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_vector3_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_vector3_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_property_vector3_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4301,6 +6367,18 @@ void ObjectPropertyList::SerializeWithCachedSizes(
       5, this->property_object_list(i), output);
   }
 
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 6;
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->property_vector2_list(i), output);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 7;
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->property_vector3_list(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4342,6 +6420,20 @@ void ObjectPropertyList::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->property_object_list(i), target);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 6;
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->property_vector2_list(i), target);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 7;
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->property_vector3_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4395,6 +6487,22 @@ int ObjectPropertyList::ByteSize() const {
         this->property_object_list(i));
   }
 
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 6;
+  total_size += 1 * this->property_vector2_list_size();
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_vector2_list(i));
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 7;
+  total_size += 1 * this->property_vector3_list_size();
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_vector3_list(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -4424,6 +6532,8 @@ void ObjectPropertyList::MergeFrom(const ObjectPropertyList& from) {
   property_float_list_.MergeFrom(from.property_float_list_);
   property_string_list_.MergeFrom(from.property_string_list_);
   property_object_list_.MergeFrom(from.property_object_list_);
+  property_vector2_list_.MergeFrom(from.property_vector2_list_);
+  property_vector3_list_.MergeFrom(from.property_vector3_list_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
       mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
@@ -4462,6 +6572,12 @@ bool ObjectPropertyList::IsInitialized() const {
   for (int i = 0; i < property_object_list_size(); i++) {
     if (!this->property_object_list(i).IsInitialized()) return false;
   }
+  for (int i = 0; i < property_vector2_list_size(); i++) {
+    if (!this->property_vector2_list(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_vector3_list_size(); i++) {
+    if (!this->property_vector3_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -4472,6 +6588,8 @@ void ObjectPropertyList::Swap(ObjectPropertyList* other) {
     property_float_list_.Swap(&other->property_float_list_);
     property_string_list_.Swap(&other->property_string_list_);
     property_object_list_.Swap(&other->property_object_list_);
+    property_vector2_list_.Swap(&other->property_vector2_list_);
+    property_vector3_list_.Swap(&other->property_vector3_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6202,6 +8320,526 @@ void ObjectPropertyObject::Swap(ObjectPropertyObject* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ObjectPropertyVector2::kPlayerIdFieldNumber;
+const int ObjectPropertyVector2::kPropertyListFieldNumber;
+#endif  // !_MSC_VER
+
+ObjectPropertyVector2::ObjectPropertyVector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ObjectPropertyVector2::InitAsDefaultInstance() {
+  player_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ObjectPropertyVector2::ObjectPropertyVector2(const ObjectPropertyVector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ObjectPropertyVector2::SharedCtor() {
+  _cached_size_ = 0;
+  player_id_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ObjectPropertyVector2::~ObjectPropertyVector2() {
+  SharedDtor();
+}
+
+void ObjectPropertyVector2::SharedDtor() {
+  if (this != default_instance_) {
+    delete player_id_;
+  }
+}
+
+void ObjectPropertyVector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ObjectPropertyVector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ObjectPropertyVector2_descriptor_;
+}
+
+const ObjectPropertyVector2& ObjectPropertyVector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+ObjectPropertyVector2* ObjectPropertyVector2::default_instance_ = NULL;
+
+ObjectPropertyVector2* ObjectPropertyVector2::New() const {
+  return new ObjectPropertyVector2;
+}
+
+void ObjectPropertyVector2::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_id()) {
+      if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+    }
+  }
+  property_list_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ObjectPropertyVector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident player_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_player_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_property_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector2 property_list = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_property_list;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ObjectPropertyVector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->player_id(), output);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_list = 2;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->property_list(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ObjectPropertyVector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->player_id(), target);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_list = 2;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->property_list(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ObjectPropertyVector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident player_id = 1;
+    if (has_player_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_id());
+    }
+
+  }
+  // repeated .NFMsg.PropertyVector2 property_list = 2;
+  total_size += 1 * this->property_list_size();
+  for (int i = 0; i < this->property_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_list(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ObjectPropertyVector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ObjectPropertyVector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ObjectPropertyVector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ObjectPropertyVector2::MergeFrom(const ObjectPropertyVector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  property_list_.MergeFrom(from.property_list_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_id()) {
+      mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ObjectPropertyVector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ObjectPropertyVector2::CopyFrom(const ObjectPropertyVector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ObjectPropertyVector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_player_id()) {
+    if (!this->player_id().IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_list_size(); i++) {
+    if (!this->property_list(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ObjectPropertyVector2::Swap(ObjectPropertyVector2* other) {
+  if (other != this) {
+    std::swap(player_id_, other->player_id_);
+    property_list_.Swap(&other->property_list_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ObjectPropertyVector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ObjectPropertyVector2_descriptor_;
+  metadata.reflection = ObjectPropertyVector2_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ObjectPropertyVector3::kPlayerIdFieldNumber;
+const int ObjectPropertyVector3::kPropertyListFieldNumber;
+#endif  // !_MSC_VER
+
+ObjectPropertyVector3::ObjectPropertyVector3()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ObjectPropertyVector3::InitAsDefaultInstance() {
+  player_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ObjectPropertyVector3::ObjectPropertyVector3(const ObjectPropertyVector3& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ObjectPropertyVector3::SharedCtor() {
+  _cached_size_ = 0;
+  player_id_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ObjectPropertyVector3::~ObjectPropertyVector3() {
+  SharedDtor();
+}
+
+void ObjectPropertyVector3::SharedDtor() {
+  if (this != default_instance_) {
+    delete player_id_;
+  }
+}
+
+void ObjectPropertyVector3::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ObjectPropertyVector3::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ObjectPropertyVector3_descriptor_;
+}
+
+const ObjectPropertyVector3& ObjectPropertyVector3::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+ObjectPropertyVector3* ObjectPropertyVector3::default_instance_ = NULL;
+
+ObjectPropertyVector3* ObjectPropertyVector3::New() const {
+  return new ObjectPropertyVector3;
+}
+
+void ObjectPropertyVector3::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_id()) {
+      if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+    }
+  }
+  property_list_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ObjectPropertyVector3::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident player_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_player_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_property_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector3 property_list = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_property_list;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ObjectPropertyVector3::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->player_id(), output);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_list = 2;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->property_list(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ObjectPropertyVector3::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->player_id(), target);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_list = 2;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->property_list(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ObjectPropertyVector3::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident player_id = 1;
+    if (has_player_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_id());
+    }
+
+  }
+  // repeated .NFMsg.PropertyVector3 property_list = 2;
+  total_size += 1 * this->property_list_size();
+  for (int i = 0; i < this->property_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_list(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ObjectPropertyVector3::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ObjectPropertyVector3* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ObjectPropertyVector3*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ObjectPropertyVector3::MergeFrom(const ObjectPropertyVector3& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  property_list_.MergeFrom(from.property_list_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_id()) {
+      mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ObjectPropertyVector3::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ObjectPropertyVector3::CopyFrom(const ObjectPropertyVector3& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ObjectPropertyVector3::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_player_id()) {
+    if (!this->player_id().IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_list_size(); i++) {
+    if (!this->property_list(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ObjectPropertyVector3::Swap(ObjectPropertyVector3* other) {
+  if (other != this) {
+    std::swap(player_id_, other->player_id_);
+    property_list_.Swap(&other->property_list_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ObjectPropertyVector3::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ObjectPropertyVector3_descriptor_;
+  metadata.reflection = ObjectPropertyVector3_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int ObjectRecordInt::kPlayerIdFieldNumber;
 const int ObjectRecordInt::kRecordNameFieldNumber;
 const int ObjectRecordInt::kPropertyListFieldNumber;
@@ -7434,6 +10072,622 @@ void ObjectRecordObject::Swap(ObjectRecordObject* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ObjectRecordVector2::kPlayerIdFieldNumber;
+const int ObjectRecordVector2::kRecordNameFieldNumber;
+const int ObjectRecordVector2::kPropertyListFieldNumber;
+#endif  // !_MSC_VER
+
+ObjectRecordVector2::ObjectRecordVector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ObjectRecordVector2::InitAsDefaultInstance() {
+  player_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ObjectRecordVector2::ObjectRecordVector2(const ObjectRecordVector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ObjectRecordVector2::SharedCtor() {
+  _cached_size_ = 0;
+  player_id_ = NULL;
+  record_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ObjectRecordVector2::~ObjectRecordVector2() {
+  SharedDtor();
+}
+
+void ObjectRecordVector2::SharedDtor() {
+  if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete record_name_;
+  }
+  if (this != default_instance_) {
+    delete player_id_;
+  }
+}
+
+void ObjectRecordVector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ObjectRecordVector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ObjectRecordVector2_descriptor_;
+}
+
+const ObjectRecordVector2& ObjectRecordVector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+ObjectRecordVector2* ObjectRecordVector2::default_instance_ = NULL;
+
+ObjectRecordVector2* ObjectRecordVector2::New() const {
+  return new ObjectRecordVector2;
+}
+
+void ObjectRecordVector2::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_id()) {
+      if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+    }
+    if (has_record_name()) {
+      if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+        record_name_->clear();
+      }
+    }
+  }
+  property_list_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ObjectRecordVector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident player_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_player_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_record_name;
+        break;
+      }
+
+      // required bytes record_name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_record_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_property_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector2 property_list = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_property_list;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ObjectRecordVector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->player_id(), output);
+  }
+
+  // required bytes record_name = 2;
+  if (has_record_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->record_name(), output);
+  }
+
+  // repeated .NFMsg.RecordVector2 property_list = 3;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->property_list(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ObjectRecordVector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->player_id(), target);
+  }
+
+  // required bytes record_name = 2;
+  if (has_record_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->record_name(), target);
+  }
+
+  // repeated .NFMsg.RecordVector2 property_list = 3;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->property_list(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ObjectRecordVector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident player_id = 1;
+    if (has_player_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_id());
+    }
+
+    // required bytes record_name = 2;
+    if (has_record_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->record_name());
+    }
+
+  }
+  // repeated .NFMsg.RecordVector2 property_list = 3;
+  total_size += 1 * this->property_list_size();
+  for (int i = 0; i < this->property_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_list(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ObjectRecordVector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ObjectRecordVector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ObjectRecordVector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ObjectRecordVector2::MergeFrom(const ObjectRecordVector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  property_list_.MergeFrom(from.property_list_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_id()) {
+      mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
+    }
+    if (from.has_record_name()) {
+      set_record_name(from.record_name());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ObjectRecordVector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ObjectRecordVector2::CopyFrom(const ObjectRecordVector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ObjectRecordVector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  if (has_player_id()) {
+    if (!this->player_id().IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_list_size(); i++) {
+    if (!this->property_list(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ObjectRecordVector2::Swap(ObjectRecordVector2* other) {
+  if (other != this) {
+    std::swap(player_id_, other->player_id_);
+    std::swap(record_name_, other->record_name_);
+    property_list_.Swap(&other->property_list_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ObjectRecordVector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ObjectRecordVector2_descriptor_;
+  metadata.reflection = ObjectRecordVector2_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ObjectRecordVector3::kPlayerIdFieldNumber;
+const int ObjectRecordVector3::kRecordNameFieldNumber;
+const int ObjectRecordVector3::kPropertyListFieldNumber;
+#endif  // !_MSC_VER
+
+ObjectRecordVector3::ObjectRecordVector3()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ObjectRecordVector3::InitAsDefaultInstance() {
+  player_id_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+}
+
+ObjectRecordVector3::ObjectRecordVector3(const ObjectRecordVector3& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ObjectRecordVector3::SharedCtor() {
+  _cached_size_ = 0;
+  player_id_ = NULL;
+  record_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ObjectRecordVector3::~ObjectRecordVector3() {
+  SharedDtor();
+}
+
+void ObjectRecordVector3::SharedDtor() {
+  if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete record_name_;
+  }
+  if (this != default_instance_) {
+    delete player_id_;
+  }
+}
+
+void ObjectRecordVector3::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ObjectRecordVector3::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ObjectRecordVector3_descriptor_;
+}
+
+const ObjectRecordVector3& ObjectRecordVector3::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgBase_2eproto();
+  return *default_instance_;
+}
+
+ObjectRecordVector3* ObjectRecordVector3::default_instance_ = NULL;
+
+ObjectRecordVector3* ObjectRecordVector3::New() const {
+  return new ObjectRecordVector3;
+}
+
+void ObjectRecordVector3::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_player_id()) {
+      if (player_id_ != NULL) player_id_->::NFMsg::Ident::Clear();
+    }
+    if (has_record_name()) {
+      if (record_name_ != &::google::protobuf::internal::kEmptyString) {
+        record_name_->clear();
+      }
+    }
+  }
+  property_list_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ObjectRecordVector3::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .NFMsg.Ident player_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_player_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_record_name;
+        break;
+      }
+
+      // required bytes record_name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_record_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_property_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector3 property_list = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_property_list;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ObjectRecordVector3::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->player_id(), output);
+  }
+
+  // required bytes record_name = 2;
+  if (has_record_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->record_name(), output);
+  }
+
+  // repeated .NFMsg.RecordVector3 property_list = 3;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->property_list(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ObjectRecordVector3::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .NFMsg.Ident player_id = 1;
+  if (has_player_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->player_id(), target);
+  }
+
+  // required bytes record_name = 2;
+  if (has_record_name()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->record_name(), target);
+  }
+
+  // repeated .NFMsg.RecordVector3 property_list = 3;
+  for (int i = 0; i < this->property_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->property_list(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ObjectRecordVector3::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .NFMsg.Ident player_id = 1;
+    if (has_player_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->player_id());
+    }
+
+    // required bytes record_name = 2;
+    if (has_record_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->record_name());
+    }
+
+  }
+  // repeated .NFMsg.RecordVector3 property_list = 3;
+  total_size += 1 * this->property_list_size();
+  for (int i = 0; i < this->property_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_list(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ObjectRecordVector3::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ObjectRecordVector3* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ObjectRecordVector3*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ObjectRecordVector3::MergeFrom(const ObjectRecordVector3& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  property_list_.MergeFrom(from.property_list_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_player_id()) {
+      mutable_player_id()->::NFMsg::Ident::MergeFrom(from.player_id());
+    }
+    if (from.has_record_name()) {
+      set_record_name(from.record_name());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ObjectRecordVector3::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ObjectRecordVector3::CopyFrom(const ObjectRecordVector3& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ObjectRecordVector3::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  if (has_player_id()) {
+    if (!this->player_id().IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_list_size(); i++) {
+    if (!this->property_list(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void ObjectRecordVector3::Swap(ObjectRecordVector3* other) {
+  if (other != this) {
+    std::swap(player_id_, other->player_id_);
+    std::swap(record_name_, other->record_name_);
+    property_list_.Swap(&other->property_list_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ObjectRecordVector3::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ObjectRecordVector3_descriptor_;
+  metadata.reflection = ObjectRecordVector3_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int ObjectRecordSwap::kPlayerIdFieldNumber;
 const int ObjectRecordSwap::kOriginRecordNameFieldNumber;
 const int ObjectRecordSwap::kTargetRecordNameFieldNumber;
@@ -8452,6 +11706,8 @@ const int PlayerPropertyBase::kPropertyIntListFieldNumber;
 const int PlayerPropertyBase::kPropertyFloatListFieldNumber;
 const int PlayerPropertyBase::kPropertyStringListFieldNumber;
 const int PlayerPropertyBase::kPropertyObjectListFieldNumber;
+const int PlayerPropertyBase::kPropertyVector2ListFieldNumber;
+const int PlayerPropertyBase::kPropertyVector3ListFieldNumber;
 #endif  // !_MSC_VER
 
 PlayerPropertyBase::PlayerPropertyBase()
@@ -8508,6 +11764,8 @@ void PlayerPropertyBase::Clear() {
   property_float_list_.Clear();
   property_string_list_.Clear();
   property_object_list_.Clear();
+  property_vector2_list_.Clear();
+  property_vector3_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -8574,6 +11832,36 @@ bool PlayerPropertyBase::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(34)) goto parse_property_object_list;
+        if (input->ExpectTag(42)) goto parse_property_vector2_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector2 property_vector2_list = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_vector2_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_vector2_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_property_vector2_list;
+        if (input->ExpectTag(50)) goto parse_property_vector3_list;
+        break;
+      }
+
+      // repeated .NFMsg.PropertyVector3 property_vector3_list = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_property_vector3_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_property_vector3_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_property_vector3_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -8620,6 +11908,18 @@ void PlayerPropertyBase::SerializeWithCachedSizes(
       4, this->property_object_list(i), output);
   }
 
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 5;
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->property_vector2_list(i), output);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 6;
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->property_vector3_list(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -8654,6 +11954,20 @@ void PlayerPropertyBase::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         4, this->property_object_list(i), target);
+  }
+
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 5;
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        5, this->property_vector2_list(i), target);
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 6;
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->property_vector3_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -8698,6 +12012,22 @@ int PlayerPropertyBase::ByteSize() const {
         this->property_object_list(i));
   }
 
+  // repeated .NFMsg.PropertyVector2 property_vector2_list = 5;
+  total_size += 1 * this->property_vector2_list_size();
+  for (int i = 0; i < this->property_vector2_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_vector2_list(i));
+  }
+
+  // repeated .NFMsg.PropertyVector3 property_vector3_list = 6;
+  total_size += 1 * this->property_vector3_list_size();
+  for (int i = 0; i < this->property_vector3_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->property_vector3_list(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -8727,6 +12057,8 @@ void PlayerPropertyBase::MergeFrom(const PlayerPropertyBase& from) {
   property_float_list_.MergeFrom(from.property_float_list_);
   property_string_list_.MergeFrom(from.property_string_list_);
   property_object_list_.MergeFrom(from.property_object_list_);
+  property_vector2_list_.MergeFrom(from.property_vector2_list_);
+  property_vector3_list_.MergeFrom(from.property_vector3_list_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -8756,6 +12088,12 @@ bool PlayerPropertyBase::IsInitialized() const {
   for (int i = 0; i < property_object_list_size(); i++) {
     if (!this->property_object_list(i).IsInitialized()) return false;
   }
+  for (int i = 0; i < property_vector2_list_size(); i++) {
+    if (!this->property_vector2_list(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < property_vector3_list_size(); i++) {
+    if (!this->property_vector3_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -8765,6 +12103,8 @@ void PlayerPropertyBase::Swap(PlayerPropertyBase* other) {
     property_float_list_.Swap(&other->property_float_list_);
     property_string_list_.Swap(&other->property_string_list_);
     property_object_list_.Swap(&other->property_object_list_);
+    property_vector2_list_.Swap(&other->property_vector2_list_);
+    property_vector3_list_.Swap(&other->property_vector3_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -8788,6 +12128,8 @@ const int PlayerRecordBase::kRecordIntListFieldNumber;
 const int PlayerRecordBase::kRecordFloatListFieldNumber;
 const int PlayerRecordBase::kRecordStringListFieldNumber;
 const int PlayerRecordBase::kRecordObjectListFieldNumber;
+const int PlayerRecordBase::kRecordVector2ListFieldNumber;
+const int PlayerRecordBase::kRecordVector3ListFieldNumber;
 #endif  // !_MSC_VER
 
 PlayerRecordBase::PlayerRecordBase()
@@ -8855,6 +12197,8 @@ void PlayerRecordBase::Clear() {
   record_float_list_.Clear();
   record_string_list_.Clear();
   record_object_list_.Clear();
+  record_vector2_list_.Clear();
+  record_vector3_list_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -8937,6 +12281,36 @@ bool PlayerRecordBase::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(42)) goto parse_record_object_list;
+        if (input->ExpectTag(50)) goto parse_record_vector2_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_vector2_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_record_vector2_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_record_vector2_list;
+        if (input->ExpectTag(58)) goto parse_record_vector3_list;
+        break;
+      }
+
+      // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_record_vector3_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_record_vector3_list()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(58)) goto parse_record_vector3_list;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -8992,6 +12366,18 @@ void PlayerRecordBase::SerializeWithCachedSizes(
       5, this->record_object_list(i), output);
   }
 
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->record_vector2_list(i), output);
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->record_vector3_list(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -9036,6 +12422,20 @@ void PlayerRecordBase::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         5, this->record_object_list(i), target);
+  }
+
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->record_vector2_list(i), target);
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->record_vector3_list(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -9089,6 +12489,22 @@ int PlayerRecordBase::ByteSize() const {
         this->record_object_list(i));
   }
 
+  // repeated .NFMsg.RecordVector2 record_vector2_list = 6;
+  total_size += 1 * this->record_vector2_list_size();
+  for (int i = 0; i < this->record_vector2_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->record_vector2_list(i));
+  }
+
+  // repeated .NFMsg.RecordVector3 record_vector3_list = 7;
+  total_size += 1 * this->record_vector3_list_size();
+  for (int i = 0; i < this->record_vector3_list_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->record_vector3_list(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -9118,6 +12534,8 @@ void PlayerRecordBase::MergeFrom(const PlayerRecordBase& from) {
   record_float_list_.MergeFrom(from.record_float_list_);
   record_string_list_.MergeFrom(from.record_string_list_);
   record_object_list_.MergeFrom(from.record_object_list_);
+  record_vector2_list_.MergeFrom(from.record_vector2_list_);
+  record_vector3_list_.MergeFrom(from.record_vector3_list_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_record_name()) {
       set_record_name(from.record_name());
@@ -9153,6 +12571,12 @@ bool PlayerRecordBase::IsInitialized() const {
   for (int i = 0; i < record_object_list_size(); i++) {
     if (!this->record_object_list(i).IsInitialized()) return false;
   }
+  for (int i = 0; i < record_vector2_list_size(); i++) {
+    if (!this->record_vector2_list(i).IsInitialized()) return false;
+  }
+  for (int i = 0; i < record_vector3_list_size(); i++) {
+    if (!this->record_vector3_list(i).IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -9163,6 +12587,8 @@ void PlayerRecordBase::Swap(PlayerRecordBase* other) {
     record_float_list_.Swap(&other->record_float_list_);
     record_string_list_.Swap(&other->record_string_list_);
     record_object_list_.Swap(&other->record_object_list_);
+    record_vector2_list_.Swap(&other->record_vector2_list_);
+    record_vector3_list_.Swap(&other->record_vector3_list_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
