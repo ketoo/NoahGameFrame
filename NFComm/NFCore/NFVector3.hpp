@@ -106,36 +106,60 @@ public:
 		Zero();
 	}
 
+	NFVector3 operator- () const 
+	{
+		return NFVector3(-x, -y, -z);
+	}
+
 	NFVector3 operator* (float s) const
 	{
-		Zero();
+		return NFVector3(x * s, y * s, z * s);
 	}
 
 	NFVector3 operator/ (float s) const
 	{
-		Zero();
+		if (std::abs(s) > 0.001f)
+		{
+			return NFVector3(x / s, y / s, z / s);
+		}
+
+		return Zero();
 	}
 
 
     // Arithmetic Updates
 	NFVector3& operator+= (const NFVector3& v)
 	{
-		Zero();
+		x += v.x;
+		y += v.y;
+		z += v.z;
+		return *this;
 	}
 
 	NFVector3& operator-= (const NFVector3& v)
 	{
-		Zero();
+		x -= v.x;
+		y -= v.y;
+		z -= v.z;
+		return *this;
 	}
 
 	NFVector3& operator*= (float s)
 	{
-		Zero();
+		x *= s;
+		y *= s;
+		z *= s;
+		return *this;
 	}
 
 	NFVector3& operator/= (float s)
 	{
-		Zero();
+		if (std::abs(s) > 0.001f)
+		{
+			return NFVector3(x / s, y / s, z / s);
+		}
+
+		return Zero();
 	}
 
 	float X() const
@@ -170,7 +194,7 @@ public:
 
 	bool IsZero() const
 	{
-		return x < 0.001f && y < 0.001f && z < 0.001f;
+		return std::abs(x) < 0.001f && std::abs(y) < 0.001f && std::abs(z) < 0.001f;
 	}
 
     inline NFVector3 Normalized() const
@@ -192,7 +216,12 @@ public:
 	{
 		return 0.0f;;
 	}
-
+/*
+	static float Distance(const NFVector3& v1, const NFVector3& v2)
+	{
+		return v1.Distance(v2);
+	}
+*/
 	bool FromString(const std::string& value)
 	{
 		std::vector<std::string> values;
@@ -204,6 +233,8 @@ public:
 		x = lexical_cast<float>(values.at(0));
 		y = lexical_cast<float>(values.at(1));
 		z = lexical_cast<float>(values.at(2));
+
+		return true;
 	}
 
 	std::string ToString() const
@@ -240,46 +271,47 @@ public:
 
 	NFVector2 xx() const
 	{
+		return NFVector2(this->x, this->x);
 	}
 
 	NFVector2 yx() const
 	{
-
+		return NFVector2(this->y, this->x);
 	}
 
 	NFVector2 zx() const
 	{
-
+		return NFVector2(this->z, this->x);
 	}
 
 	NFVector2 xy() const
 	{
-
+		return NFVector2(this->x, this->y);
 	}
 
 	NFVector2 yy() const
 	{
-
+		return NFVector2(this->y, this->y);
 	}
 
 	NFVector2 zy() const
 	{
-
+		return NFVector2(this->z, this->y);
 	}
 
 	NFVector2 xz() const
 	{
-
+		return NFVector2(this->x, this->z);
 	}
 
 	NFVector2 yz() const
 	{
-
+		return NFVector2(this->y, this->z);
 	}
 
 	NFVector2 zz() const
 	{
-
+		return NFVector2(this->z, this->z);
 	}
 
 	bool Split(const std::string& str, std::vector<std::string>& result, std::string delim)
