@@ -181,6 +181,8 @@ public:
 		}
 		x = lexical_cast<float>(values.at(0));
 		y = lexical_cast<float>(values.at(1));
+
+		return true;
 	}
 
 	std::string ToString() const
