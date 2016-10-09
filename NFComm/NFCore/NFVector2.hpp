@@ -54,14 +54,14 @@ public:
 		this->y = v.x;
 	}
 
-	bool operator<(const NFVector2&) const
+	bool operator<(const NFVector2& v) const
 	{
-		return false;
+		return this->Length() < v.Length();
 	}
 
-	bool operator>(const NFVector2&) const
+	bool operator>(const NFVector2& v) const
 	{
-		return false;
+		return this->Length() > v.Length();
 	}
 
 	NFVector2& operator= (const NFVector2& v)
@@ -81,48 +81,77 @@ public:
 	{
 		return std::abs(this->x - v.x) >= 0.001f || std::abs(this->y - v.y) >= 0.001f;
 	}
-
+	//----------------------------------------------------------------------------
 	// Arithmetic Operations
 	NFVector2 operator+ (const NFVector2& v) const
 	{
-		Zero();
+		NFVector2 xV;
+
+		xV.x = this->x + v.x;
+		xV.y = this->y + v.y;
+		return xV;
 	}
 
 	NFVector2 operator- (const NFVector2& v) const
 	{
-		Zero();
+		NFVector2 xV;
+
+		xV.x = this->x - v.x;
+		xV.y = this->y - v.y;
+		return xV;
+	}
+
+	NFVector2 operator- () const
+	{
+		return NFVector2(-x, -y);
 	}
 
 	NFVector2 operator* (float s) const
 	{
-		Zero();
+		return NFVector2(x * s, y * s);
 	}
 
 	NFVector2 operator/ (float s) const
 	{
-		Zero();
+		if (std::abs(s) > 0.001f)
+		{
+			return NFVector2(x / s, y / s);
+		}
+
+		return Zero();
 	}
 
-
+	//----------------------------------------------------------------------------
 	// Arithmetic Updates
 	NFVector2& operator+= (const NFVector2& v)
 	{
-		Zero();
+		x += v.x;
+		y += v.y;
+		return *this;
 	}
 
-	NFVector2& operator-= (const NFVector2& v)
+	NFVector2& operator-= (const NFVector2 v)
 	{
-		Zero();
+		x -= v.x;
+		y -= v.y;
+		return *this;
 	}
 
 	NFVector2& operator*= (float s)
 	{
-		Zero();
+		x *= s;
+		y *= s;
+		return *this;
 	}
 
 	NFVector2& operator/= (float s)
 	{
-		Zero();
+		//if (std::abs(s) > 0.001f)
+		{
+			return NFVector2(x / s, y / s);
+		}
+
+		//return Zero();
 	}
 
 	float X() const
@@ -150,26 +179,56 @@ public:
 		return x < 0.001f && y < 0.001f;
 	}
 
+	//----------------------------------------------------------------------------
+	inline float SquaredMagnitude() const
+	{
+		return x*x + y*y;
+	}
+
+	//----------------------------------------------------------------------------
+	inline float SquaredLength() const
+	{
+		return SquaredMagnitude();
+	}
+
+	//----------------------------------------------------------------------------
+	inline float Magnitude() const
+	{
+		return sqrtf(x*x + y*y);
+	}
+
+	//----------------------------------------------------------------------------
+	inline float Length() const
+	{
+		return Magnitude();
+	}
+
+	//----------------------------------------------------------------------------
+	inline NFVector2 Direction() const
+	{
+		if (this->IsZero())
+		{
+			return Zero();
+		}
+
+		float lenSquared = SquaredMagnitude();
+		float invSqrt = 1.0f / sqrtf(lenSquared);
+		return NFVector2(x * invSqrt, y * invSqrt);
+	}
+
+	//----------------------------------------------------------------------------
 	inline NFVector2 Normalized() const
 	{
-		return Zero();
+		return Direction();
 	}
 
-
-	NFVector2 Min(const NFVector2& v) const
-	{
-		Zero();
-	}
-
-	NFVector2 Max(const NFVector2& v) const
-	{
-		Zero();
-	}
-
+	//----------------------------------------------------------------------------
 	float Distance(const NFVector2& v) const
 	{
-		return 0.0f;;
+		NFVector2 vX = *this - v;
+		return vX.Length();
 	}
+
 
 	bool FromString(const std::string& value)
 	{
