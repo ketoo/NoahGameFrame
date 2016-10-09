@@ -66,14 +66,15 @@ public:
 		this->z = v.z;
 	}
 
-	bool operator<(const NFVector3&) const
+	//----------------------------------------------------------------------------
+	bool operator<(const NFVector3& v) const
 	{
-		return false;
+		return this->Length() < v.Length() ;
 	}
 
-	bool operator>(const NFVector3&) const
+	bool operator>(const NFVector3& v) const
 	{
-		return false;
+		return this->Length() > v.Length();
 	}
 
 	NFVector3& operator= (const NFVector3& v)
@@ -95,15 +96,26 @@ public:
 		return std::abs(this->x - v.x) >= 0.001f && std::abs(this->y - v.y) >= 0.001f && std::abs(this->z - v.z) >= 0.001f;
 	}
 
+	//----------------------------------------------------------------------------
     // Arithmetic Operations
 	NFVector3 operator+ (const NFVector3& v) const
 	{
-		Zero();
+		NFVector3 xV;
+
+		xV.x = this->x + v.x;
+		xV.y = this->y + v.y;
+		xV.z = this->z + v.z;
+		return xV;
 	}
 
 	NFVector3 operator- (const NFVector3& v) const
 	{
-		Zero();
+		NFVector3 xV;
+
+		xV.x = this->x - v.x;
+		xV.y = this->y - v.y;
+		xV.z = this->z - v.z;
+		return xV;
 	}
 
 	NFVector3 operator- () const 
@@ -127,6 +139,7 @@ public:
 	}
 
 
+	//----------------------------------------------------------------------------
     // Arithmetic Updates
 	NFVector3& operator+= (const NFVector3& v)
 	{
@@ -154,14 +167,15 @@ public:
 
 	NFVector3& operator/= (float s)
 	{
-		if (std::abs(s) > 0.001f)
+		//if (std::abs(s) > 0.001f)
 		{
 			return NFVector3(x / s, y / s, z / s);
 		}
 
-		return Zero();
+		//return Zero();
 	}
 
+	//----------------------------------------------------------------------------
 	float X() const
 	{
 		return this->x;
@@ -192,36 +206,62 @@ public:
 		this->z = z;
 	}
 
+	//----------------------------------------------------------------------------
 	bool IsZero() const
 	{
 		return std::abs(x) < 0.001f && std::abs(y) < 0.001f && std::abs(z) < 0.001f;
 	}
+	//----------------------------------------------------------------------------
+	inline float SquaredMagnitude() const
+	{
+		return x*x + y*y + z*z;
+	}
 
+	//----------------------------------------------------------------------------
+	inline float SquaredLength() const 
+	{
+		return SquaredMagnitude();
+	}
+
+	//----------------------------------------------------------------------------
+	inline float Magnitude() const 
+	{
+		return sqrtf(x*x + y*y + z*z);
+	}
+
+	//----------------------------------------------------------------------------
+	inline float Length() const 
+	{
+		return Magnitude();
+	}
+
+	//----------------------------------------------------------------------------
+	inline NFVector3 Direction() const 
+	{
+		if (this->IsZero())
+		{
+			return Zero();
+		}
+
+		float lenSquared = SquaredMagnitude();
+		float invSqrt = 1.0f / sqrtf(lenSquared);
+		return NFVector3(x * invSqrt, y * invSqrt, z * invSqrt);
+	}
+
+	//----------------------------------------------------------------------------
     inline NFVector3 Normalized() const
     {
-        return Zero();
+        return Direction();
     }
 
-	NFVector3 Min(const NFVector3& v) const
-	{
-		Zero();
-	}
-
-	NFVector3 Max(const NFVector3& v) const
-	{
-		Zero();
-	}
-
+	//----------------------------------------------------------------------------
 	float Distance(const NFVector3& v) const
 	{
-		return 0.0f;;
+		NFVector3 vX = *this - v;
+		return vX.Length();
 	}
-/*
-	static float Distance(const NFVector3& v1, const NFVector3& v2)
-	{
-		return v1.Distance(v2);
-	}
-*/
+
+	//----------------------------------------------------------------------------
 	bool FromString(const std::string& value)
 	{
 		std::vector<std::string> values;
@@ -237,6 +277,7 @@ public:
 		return true;
 	}
 
+	//----------------------------------------------------------------------------
 	std::string ToString() const
 	{
 		return lexical_cast<std::string>(x) + "," + lexical_cast<std::string>(y) + "," + lexical_cast<std::string>(z);
