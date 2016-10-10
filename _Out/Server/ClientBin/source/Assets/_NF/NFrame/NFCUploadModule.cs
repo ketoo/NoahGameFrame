@@ -97,6 +97,16 @@ namespace NFrame
                         NFStart.Instance.GetFocusSender().RequirePropertyObject(self, strPropertyName, newVar);
                     }
                     break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                    {
+                        NFStart.Instance.GetFocusSender().RequirePropertyVector2(self, strPropertyName, newVar);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                    {
+                        NFStart.Instance.GetFocusSender().RequirePropertyVector3(self, strPropertyName, newVar);
+                    }
+                    break;
             }
 
         }
@@ -149,6 +159,16 @@ namespace NFrame
                             case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                                 {
                                     NFStart.Instance.GetFocusSender().RequireRecordObject(self, strRecordName, nRow, nCol, newVar);
+                                }
+                                break;
+                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                                {
+                                    NFStart.Instance.GetFocusSender().RequireRecordVector2(self, strRecordName, nRow, nCol, newVar);
+                                }
+                                break;
+                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                                {
+                                    NFStart.Instance.GetFocusSender().RequireRecordVector3(self, strRecordName, nRow, nCol, newVar);
                                 }
                                 break;
                         }

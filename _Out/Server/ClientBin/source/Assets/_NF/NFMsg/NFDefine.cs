@@ -322,6 +322,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_OBJECT", Value=214)]
       EGMI_ACK_PROPERTY_OBJECT = 214,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_VECTOR2", Value=215)]
+      EGMI_ACK_PROPERTY_VECTOR2 = 215,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PROPERTY_VECTOR3", Value=216)]
+      EGMI_ACK_PROPERTY_VECTOR3 = 216,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ADD_ROW", Value=220)]
       EGMI_ACK_ADD_ROW = 220,
             
@@ -343,398 +349,404 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_OBJECT", Value=227)]
       EGMI_ACK_RECORD_OBJECT = 227,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_CLEAR", Value=228)]
-      EGMI_ACK_RECORD_CLEAR = 228,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_VECTOR2", Value=228)]
+      EGMI_ACK_RECORD_VECTOR2 = 228,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=229)]
-      EGMI_ACK_RECORD_SORT = 229,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_VECTOR3", Value=229)]
+      EGMI_ACK_RECORD_VECTOR3 = 229,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=230)]
-      EGMI_REQ_MOVE = 230,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_CLEAR", Value=250)]
+      EGMI_ACK_RECORD_CLEAR = 250,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE", Value=231)]
-      EGMI_ACK_MOVE = 231,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=251)]
+      EGMI_ACK_RECORD_SORT = 251,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE_IMMUNE", Value=232)]
-      EGMI_REQ_MOVE_IMMUNE = 232,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=1230)]
+      EGMI_REQ_MOVE = 1230,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE_IMMUNE", Value=233)]
-      EGMI_ACK_MOVE_IMMUNE = 233,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE", Value=1231)]
+      EGMI_ACK_MOVE = 1231,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SKILL_OBJECTX", Value=240)]
-      EGMI_REQ_SKILL_OBJECTX = 240,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE_IMMUNE", Value=1232)]
+      EGMI_REQ_MOVE_IMMUNE = 1232,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SKILL_OBJECTX", Value=241)]
-      EGMI_ACK_SKILL_OBJECTX = 241,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE_IMMUNE", Value=1233)]
+      EGMI_ACK_MOVE_IMMUNE = 1233,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SKILL_POS", Value=242)]
-      EGMI_REQ_SKILL_POS = 242,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SKILL_OBJECTX", Value=1240)]
+      EGMI_REQ_SKILL_OBJECTX = 1240,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SKILL_POS", Value=243)]
-      EGMI_ACK_SKILL_POS = 243,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SKILL_OBJECTX", Value=1241)]
+      EGMI_ACK_SKILL_OBJECTX = 1241,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ITEM_OBJECT", Value=244)]
-      EGMI_REQ_ITEM_OBJECT = 244,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SKILL_POS", Value=1242)]
+      EGMI_REQ_SKILL_POS = 1242,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ITEM_OBJECT", Value=245)]
-      EGMI_ACK_ITEM_OBJECT = 245,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SKILL_POS", Value=1243)]
+      EGMI_ACK_SKILL_POS = 1243,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ITEM_POS", Value=246)]
-      EGMI_REQ_ITEM_POS = 246,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ITEM_OBJECT", Value=1244)]
+      EGMI_REQ_ITEM_OBJECT = 1244,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ITEM_POS", Value=247)]
-      EGMI_ACK_ITEM_POS = 247,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ITEM_OBJECT", Value=1245)]
+      EGMI_ACK_ITEM_OBJECT = 1245,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CHAT", Value=250)]
-      EGMI_REQ_CHAT = 250,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ITEM_POS", Value=1246)]
+      EGMI_REQ_ITEM_POS = 1246,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CHAT", Value=251)]
-      EGMI_ACK_CHAT = 251,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ITEM_POS", Value=1247)]
+      EGMI_ACK_ITEM_POS = 1247,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SALE_ITEM", Value=252)]
-      EGMI_REQ_SALE_ITEM = 252,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CHAT", Value=1250)]
+      EGMI_REQ_CHAT = 1250,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SPLIT_ITEM", Value=253)]
-      EGMI_REQ_SPLIT_ITEM = 253,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CHAT", Value=1251)]
+      EGMI_ACK_CHAT = 1251,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PRODUCE_ITEM", Value=254)]
-      EGMI_REQ_PRODUCE_ITEM = 254,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SALE_ITEM", Value=1252)]
+      EGMI_REQ_SALE_ITEM = 1252,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PICK_ITEM", Value=255)]
-      EGMI_REQ_PICK_ITEM = 255,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SPLIT_ITEM", Value=1253)]
+      EGMI_REQ_SPLIT_ITEM = 1253,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ACCEPT_TASK", Value=256)]
-      EGMI_REQ_ACCEPT_TASK = 256,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PRODUCE_ITEM", Value=1254)]
+      EGMI_REQ_PRODUCE_ITEM = 1254,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=257)]
-      EGMI_REQ_COMPELETE_TASK = 257,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PICK_ITEM", Value=1255)]
+      EGMI_REQ_PICK_ITEM = 1255,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_PVP", Value=260)]
-      EGMI_REQ_JOIN_PVP = 260,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ACCEPT_TASK", Value=1256)]
+      EGMI_REQ_ACCEPT_TASK = 1256,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_EXIT_PVP", Value=261)]
-      EGMI_REQ_EXIT_PVP = 261,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=1257)]
+      EGMI_REQ_COMPELETE_TASK = 1257,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=262)]
-      EGMT_ACK_START_PVP = 262,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_PVP", Value=1260)]
+      EGMI_REQ_JOIN_PVP = 1260,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=280)]
-      EGMI_REQ_SEARCH_OPPNENT = 280,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_EXIT_PVP", Value=1261)]
+      EGMI_REQ_EXIT_PVP = 1261,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=281)]
-      EGMI_ACK_SEARCH_OPPNENT = 281,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=1262)]
+      EGMT_ACK_START_PVP = 1262,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=282)]
-      EGMT_REQ_START_OPPNENT = 282,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=1280)]
+      EGMI_REQ_SEARCH_OPPNENT = 1280,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=283)]
-      EGMT_ACK_START_OPPNENT = 283,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1281)]
+      EGMI_ACK_SEARCH_OPPNENT = 1281,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=290)]
-      EGMI_ACK_ONLINE_NOTIFY = 290,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=1282)]
+      EGMT_REQ_START_OPPNENT = 1282,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OFFLINE_NOTIFY", Value=291)]
-      EGMI_ACK_OFFLINE_NOTIFY = 291,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=1283)]
+      EGMT_ACK_START_OPPNENT = 1283,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_GUILD", Value=300)]
-      EGMI_REQ_CREATE_GUILD = 300,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=1290)]
+      EGMI_ACK_ONLINE_NOTIFY = 1290,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_GUILD", Value=301)]
-      EGMI_ACK_CREATE_GUILD = 301,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OFFLINE_NOTIFY", Value=1291)]
+      EGMI_ACK_OFFLINE_NOTIFY = 1291,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_GUILD", Value=302)]
-      EGMI_REQ_JOIN_GUILD = 302,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_GUILD", Value=1300)]
+      EGMI_REQ_CREATE_GUILD = 1300,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_GUILD", Value=303)]
-      EGMI_ACK_JOIN_GUILD = 303,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_GUILD", Value=1301)]
+      EGMI_ACK_CREATE_GUILD = 1301,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_GUILD", Value=304)]
-      EGMI_REQ_LEAVE_GUILD = 304,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_GUILD", Value=1302)]
+      EGMI_REQ_JOIN_GUILD = 1302,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_GUILD", Value=305)]
-      EGMI_ACK_LEAVE_GUILD = 305,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_GUILD", Value=1303)]
+      EGMI_ACK_JOIN_GUILD = 1303,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILD", Value=306)]
-      EGMI_REQ_OPR_GUILD = 306,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_GUILD", Value=1304)]
+      EGMI_REQ_LEAVE_GUILD = 1304,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILD", Value=307)]
-      EGMI_ACK_OPR_GUILD = 307,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_GUILD", Value=1305)]
+      EGMI_ACK_LEAVE_GUILD = 1305,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_GUILD", Value=308)]
-      EGMI_REQ_SEARCH_GUILD = 308,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILD", Value=1306)]
+      EGMI_REQ_OPR_GUILD = 1306,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_GUILD", Value=309)]
-      EGMI_ACK_SEARCH_GUILD = 309,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILD", Value=1307)]
+      EGMI_ACK_OPR_GUILD = 1307,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILDINFO", Value=310)]
-      EGMI_REQ_OPR_GUILDINFO = 310,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_GUILD", Value=1308)]
+      EGMI_REQ_SEARCH_GUILD = 1308,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILDINFO", Value=311)]
-      EGMI_ACK_OPR_GUILDINFO = 311,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_GUILD", Value=1309)]
+      EGMI_ACK_SEARCH_GUILD = 1309,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GUILDECTYPEINFO", Value=312)]
-      EGMI_REQ_GUILDECTYPEINFO = 312,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPR_GUILDINFO", Value=1310)]
+      EGMI_REQ_OPR_GUILDINFO = 1310,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GUILDECTYPEINFO", Value=313)]
-      EGMI_ACK_GUILDECTYPEINFO = 313,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPR_GUILDINFO", Value=1311)]
+      EGMI_ACK_OPR_GUILDINFO = 1311,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_SET_GUILDECTYPEINFO", Value=314)]
-      EGMI_SET_GUILDECTYPEINFO = 314,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GUILDECTYPEINFO", Value=1312)]
+      EGMI_REQ_GUILDECTYPEINFO = 1312,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ReqEnterGuildEctype", Value=315)]
-      EGMI_ReqEnterGuildEctype = 315,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GUILDECTYPEINFO", Value=1313)]
+      EGMI_ACK_GUILDECTYPEINFO = 1313,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=400)]
-      EGEC_REQ_CREATE_CHATGROUP = 400,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_SET_GUILDECTYPEINFO", Value=1314)]
+      EGMI_SET_GUILDECTYPEINFO = 1314,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CREATE_CHATGROUP", Value=401)]
-      EGEC_ACK_CREATE_CHATGROUP = 401,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ReqEnterGuildEctype", Value=1315)]
+      EGMI_ReqEnterGuildEctype = 1315,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_JOIN_CHATGROUP", Value=402)]
-      EGEC_REQ_JOIN_CHATGROUP = 402,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CREATE_CHATGROUP", Value=1400)]
+      EGEC_REQ_CREATE_CHATGROUP = 1400,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_JOIN_CHATGROUP", Value=403)]
-      EGEC_ACK_JOIN_CHATGROUP = 403,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CREATE_CHATGROUP", Value=1401)]
+      EGEC_ACK_CREATE_CHATGROUP = 1401,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_LEAVE_CHATGROUP", Value=404)]
-      EGEC_REQ_LEAVE_CHATGROUP = 404,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_JOIN_CHATGROUP", Value=1402)]
+      EGEC_REQ_JOIN_CHATGROUP = 1402,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_LEAVE_CHATGROUP", Value=405)]
-      EGEC_ACK_LEAVE_CHATGROUP = 405,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_JOIN_CHATGROUP", Value=1403)]
+      EGEC_ACK_JOIN_CHATGROUP = 1403,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SUBSCRIPTION_CHATGROUP", Value=406)]
-      EGEC_REQ_SUBSCRIPTION_CHATGROUP = 406,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_LEAVE_CHATGROUP", Value=1404)]
+      EGEC_REQ_LEAVE_CHATGROUP = 1404,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP", Value=407)]
-      EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP = 407,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_LEAVE_CHATGROUP", Value=1405)]
+      EGEC_ACK_LEAVE_CHATGROUP = 1405,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INVITE_CHATGROUP", Value=408)]
-      EGEC_REQ_INVITE_CHATGROUP = 408,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SUBSCRIPTION_CHATGROUP", Value=1406)]
+      EGEC_REQ_SUBSCRIPTION_CHATGROUP = 1406,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INVITE_CHATGROUP", Value=409)]
-      EGEC_ACK_INVITE_CHATGROUP = 409,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP", Value=1407)]
+      EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP = 1407,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_KICK_CHATGROUP", Value=410)]
-      EGEC_REQ_KICK_CHATGROUP = 410,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INVITE_CHATGROUP", Value=1408)]
+      EGEC_REQ_INVITE_CHATGROUP = 1408,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_KICK_CHATGROUP", Value=411)]
-      EGEC_ACK_KICK_CHATGROUP = 411,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INVITE_CHATGROUP", Value=1409)]
+      EGEC_ACK_INVITE_CHATGROUP = 1409,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CHATGROUP_TO_TEAM", Value=450)]
-      EGEC_REQ_CHATGROUP_TO_TEAM = 450,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_KICK_CHATGROUP", Value=1410)]
+      EGEC_REQ_KICK_CHATGROUP = 1410,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CHATGROUP_TO_TEAM", Value=451)]
-      EGEC_ACK_CHATGROUP_TO_TEAM = 451,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_KICK_CHATGROUP", Value=1411)]
+      EGEC_ACK_KICK_CHATGROUP = 1411,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP", Value=500)]
-      EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 500,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_CHATGROUP_TO_TEAM", Value=1450)]
+      EGEC_REQ_CHATGROUP_TO_TEAM = 1450,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP", Value=501)]
-      EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 501,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_CHATGROUP_TO_TEAM", Value=1451)]
+      EGEC_ACK_CHATGROUP_TO_TEAM = 1451,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_HOLE_TO_EQUIP", Value=502)]
-      EGEC_REQ_HOLE_TO_EQUIP = 502,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP", Value=1500)]
+      EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP = 1500,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_HOLE_TO_EQUIP", Value=503)]
-      EGEC_ACK_HOLE_TO_EQUIP = 503,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP", Value=1501)]
+      EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP = 1501,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INLAYSTONE_TO_EQUIP", Value=504)]
-      EGEC_REQ_INLAYSTONE_TO_EQUIP = 504,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_HOLE_TO_EQUIP", Value=1502)]
+      EGEC_REQ_HOLE_TO_EQUIP = 1502,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INLAYSTONE_TO_EQUIP", Value=505)]
-      EGEC_ACK_INLAYSTONE_TO_EQUIP = 505,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_HOLE_TO_EQUIP", Value=1503)]
+      EGEC_ACK_HOLE_TO_EQUIP = 1503,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_ELEMENTLEVEL_TO_EQUIP", Value=506)]
-      EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 506,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_INLAYSTONE_TO_EQUIP", Value=1504)]
+      EGEC_REQ_INLAYSTONE_TO_EQUIP = 1504,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=507)]
-      EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 507,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_INLAYSTONE_TO_EQUIP", Value=1505)]
+      EGEC_ACK_INLAYSTONE_TO_EQUIP = 1505,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=508)]
-      EGEC_REQ_SET_FIGHT_HERO = 508,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_ELEMENTLEVEL_TO_EQUIP", Value=1506)]
+      EGEC_REQ_ELEMENTLEVEL_TO_EQUIP = 1506,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=509)]
-      EGEC_WEAR_EQUIP = 509,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=1507)]
+      EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 1507,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=510)]
-      EGEC_TAKEOFF_EQUIP = 510,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=1508)]
+      EGEC_REQ_SET_FIGHT_HERO = 1508,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=600)]
-      EGEC_REQ_MINING_TITLE = 600,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=1509)]
+      EGEC_WEAR_EQUIP = 1509,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SEND_MAIL", Value=700)]
-      EGEC_REQ_SEND_MAIL = 700,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=1510)]
+      EGEC_TAKEOFF_EQUIP = 1510,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DRAW_MAIL", Value=701)]
-      EGEC_REQ_DRAW_MAIL = 701,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=1600)]
+      EGEC_REQ_MINING_TITLE = 1600,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DELETE_MAIL", Value=702)]
-      EGEC_REQ_DELETE_MAIL = 702,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SEND_MAIL", Value=1700)]
+      EGEC_REQ_SEND_MAIL = 1700,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_ENTRY", Value=800)]
-      EGMI_ACK_CLONE_OBJECT_ENTRY = 800,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DRAW_MAIL", Value=1701)]
+      EGEC_REQ_DRAW_MAIL = 1701,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_LEAVE", Value=801)]
-      EGMI_ACK_CLONE_OBJECT_LEAVE = 801,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_DELETE_MAIL", Value=1702)]
+      EGEC_REQ_DELETE_MAIL = 1702,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY", Value=802)]
-      EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY = 802,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_ENTRY", Value=1800)]
+      EGMI_ACK_CLONE_OBJECT_ENTRY = 1800,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY", Value=803)]
-      EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY = 803,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_LEAVE", Value=1801)]
+      EGMI_ACK_CLONE_OBJECT_LEAVE = 1801,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_INT", Value=810)]
-      EGMI_ACK_CLONE_PROPERTY_INT = 810,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY", Value=1802)]
+      EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY = 1802,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_FLOAT", Value=811)]
-      EGMI_ACK_CLONE_PROPERTY_FLOAT = 811,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY", Value=1803)]
+      EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY = 1803,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_STRING", Value=812)]
-      EGMI_ACK_CLONE_PROPERTY_STRING = 812,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_INT", Value=1810)]
+      EGMI_ACK_CLONE_PROPERTY_INT = 1810,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_OBJECT", Value=814)]
-      EGMI_ACK_CLONE_PROPERTY_OBJECT = 814,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_FLOAT", Value=1811)]
+      EGMI_ACK_CLONE_PROPERTY_FLOAT = 1811,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQSWICHSERVER", Value=840)]
-      EGMI_REQSWICHSERVER = 840,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_STRING", Value=1812)]
+      EGMI_ACK_CLONE_PROPERTY_STRING = 1812,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACKSWICHSERVER", Value=841)]
-      EGMI_ACKSWICHSERVER = 841,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CLONE_PROPERTY_OBJECT", Value=1814)]
+      EGMI_ACK_CLONE_PROPERTY_OBJECT = 1814,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_TEAM", Value=860)]
-      EGMI_REQ_CREATE_TEAM = 860,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQSWICHSERVER", Value=1840)]
+      EGMI_REQSWICHSERVER = 1840,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_TEAM", Value=861)]
-      EGMI_ACK_CREATE_TEAM = 861,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACKSWICHSERVER", Value=1841)]
+      EGMI_ACKSWICHSERVER = 1841,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_TEAM", Value=862)]
-      EGMI_REQ_JOIN_TEAM = 862,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_TEAM", Value=1860)]
+      EGMI_REQ_CREATE_TEAM = 1860,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_TEAM", Value=863)]
-      EGMI_ACK_JOIN_TEAM = 863,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATE_TEAM", Value=1861)]
+      EGMI_ACK_CREATE_TEAM = 1861,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_TEAM", Value=864)]
-      EGMI_REQ_LEAVE_TEAM = 864,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_TEAM", Value=1862)]
+      EGMI_REQ_JOIN_TEAM = 1862,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_TEAM", Value=865)]
-      EGMI_ACK_LEAVE_TEAM = 865,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_JOIN_TEAM", Value=1863)]
+      EGMI_ACK_JOIN_TEAM = 1863,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_INVITE_TEAM", Value=866)]
-      EGMI_REQ_INVITE_TEAM = 866,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_TEAM", Value=1864)]
+      EGMI_REQ_LEAVE_TEAM = 1864,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPRMEMBER_TEAM", Value=867)]
-      EGMI_REQ_OPRMEMBER_TEAM = 867,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_TEAM", Value=1865)]
+      EGMI_ACK_LEAVE_TEAM = 1865,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPRMEMBER_TEAM", Value=868)]
-      EGMI_ACK_OPRMEMBER_TEAM = 868,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_INVITE_TEAM", Value=1866)]
+      EGMI_REQ_INVITE_TEAM = 1866,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_TEAM_ENTER_ECTYPE", Value=869)]
-      EGMI_REQ_TEAM_ENTER_ECTYPE = 869,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_OPRMEMBER_TEAM", Value=1867)]
+      EGMI_REQ_OPRMEMBER_TEAM = 1867,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_TEAM_ENTER_ECTYPE", Value=870)]
-      EGMI_ACK_TEAM_ENTER_ECTYPE = 870,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OPRMEMBER_TEAM", Value=1868)]
+      EGMI_ACK_OPRMEMBER_TEAM = 1868,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_INFO", Value=900)]
-      EGMI_REQ_MAP_GRID_INFO = 900,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_TEAM_ENTER_ECTYPE", Value=1869)]
+      EGMI_REQ_TEAM_ENTER_ECTYPE = 1869,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_INFO", Value=901)]
-      EGMI_ACK_MAP_GRID_INFO = 901,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_TEAM_ENTER_ECTYPE", Value=1870)]
+      EGMI_ACK_TEAM_ENTER_ECTYPE = 1870,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_INFO", Value=902)]
-      EGMI_REQ_BIG_MAP_INFO = 902,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_INFO", Value=1900)]
+      EGMI_REQ_MAP_GRID_INFO = 1900,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_INFO", Value=903)]
-      EGMI_ACK_BIG_MAP_INFO = 903,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_INFO", Value=1901)]
+      EGMI_ACK_MAP_GRID_INFO = 1901,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_HOLD_MAP_GRID", Value=910)]
-      EGMI_REQ_HOLD_MAP_GRID = 910,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BIG_MAP_INFO", Value=1902)]
+      EGMI_REQ_BIG_MAP_INFO = 1902,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_HOLD_MAP_GRID", Value=911)]
-      EGMI_ACK_HOLD_MAP_GRID = 911,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BIG_MAP_INFO", Value=1903)]
+      EGMI_ACK_BIG_MAP_INFO = 1903,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_MSG_MAP_GRID", Value=912)]
-      EGMI_REQ_LEAVE_MSG_MAP_GRID = 912,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_HOLD_MAP_GRID", Value=1910)]
+      EGMI_REQ_HOLD_MAP_GRID = 1910,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_MSG_MAP_GRID", Value=913)]
-      EGMI_ACK_LEAVE_MSG_MAP_GRID = 913,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_HOLD_MAP_GRID", Value=1911)]
+      EGMI_ACK_HOLD_MAP_GRID = 1911,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GET_MAP_GRID_AWARD", Value=914)]
-      EGMI_REQ_GET_MAP_GRID_AWARD = 914,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_LEAVE_MSG_MAP_GRID", Value=1912)]
+      EGMI_REQ_LEAVE_MSG_MAP_GRID = 1912,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GET_MAP_GRID_AWARD", Value=915)]
-      EGMI_ACK_GET_MAP_GRID_AWARD = 915,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_LEAVE_MSG_MAP_GRID", Value=1913)]
+      EGMI_ACK_LEAVE_MSG_MAP_GRID = 1913,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_HUNTING", Value=916)]
-      EGMI_REQ_MAP_GRID_HUNTING = 916,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_GET_MAP_GRID_AWARD", Value=1914)]
+      EGMI_REQ_GET_MAP_GRID_AWARD = 1914,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_HUNTING", Value=917)]
-      EGMI_ACK_MAP_GRID_HUNTING = 917,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_GET_MAP_GRID_AWARD", Value=1915)]
+      EGMI_ACK_GET_MAP_GRID_AWARD = 1915,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_KING_WAR", Value=918)]
-      EGMI_REQ_MAP_GRID_KING_WAR = 918,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_HUNTING", Value=1916)]
+      EGMI_REQ_MAP_GRID_HUNTING = 1916,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_KING_WAR", Value=919)]
-      EGMI_ACK_MAP_GRID_KING_WAR = 919,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_HUNTING", Value=1917)]
+      EGMI_ACK_MAP_GRID_HUNTING = 1917,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=1000)]
-      EGMI_REQ_CMD_PROPERTY_INT = 1000,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MAP_GRID_KING_WAR", Value=1918)]
+      EGMI_REQ_MAP_GRID_KING_WAR = 1918,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_STR", Value=1001)]
-      EGMI_REQ_CMD_PROPERTY_STR = 1001,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_KING_WAR", Value=1919)]
+      EGMI_ACK_MAP_GRID_KING_WAR = 1919,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_OBJECT", Value=1002)]
-      EGMI_REQ_CMD_PROPERTY_OBJECT = 1002,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=10000)]
+      EGMI_REQ_CMD_PROPERTY_INT = 10000,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_FLOAT", Value=1003)]
-      EGMI_REQ_CMD_PROPERTY_FLOAT = 1003,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_STR", Value=10001)]
+      EGMI_REQ_CMD_PROPERTY_STR = 10001,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_INT", Value=1004)]
-      EGMI_REQ_CMD_RECORD_INT = 1004,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_OBJECT", Value=10002)]
+      EGMI_REQ_CMD_PROPERTY_OBJECT = 10002,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_STR", Value=1005)]
-      EGMI_REQ_CMD_RECORD_STR = 1005,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_FLOAT", Value=10003)]
+      EGMI_REQ_CMD_PROPERTY_FLOAT = 10003,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_OBJECT", Value=1006)]
-      EGMI_REQ_CMD_RECORD_OBJECT = 1006,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_INT", Value=10004)]
+      EGMI_REQ_CMD_RECORD_INT = 10004,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_FLOAT", Value=1007)]
-      EGMI_REQ_CMD_RECORD_FLOAT = 1007,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_STR", Value=10005)]
+      EGMI_REQ_CMD_RECORD_STR = 10005,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=1008)]
-      EGMI_REQ_CMD_NORMAL = 1008,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_OBJECT", Value=10006)]
+      EGMI_REQ_CMD_RECORD_OBJECT = 10006,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PVPAPPLYMACTCH", Value=1100)]
-      EGMI_REQ_PVPAPPLYMACTCH = 1100,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_RECORD_FLOAT", Value=10007)]
+      EGMI_REQ_CMD_RECORD_FLOAT = 10007,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PVPAPPLYMACTCH", Value=1101)]
-      EGMI_ACK_PVPAPPLYMACTCH = 1101,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=10008)]
+      EGMI_REQ_CMD_NORMAL = 10008,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATEPVPECTYPE", Value=1102)]
-      EGMI_REQ_CREATEPVPECTYPE = 1102,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PVPAPPLYMACTCH", Value=10100)]
+      EGMI_REQ_PVPAPPLYMACTCH = 10100,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=1103)]
-      EGMI_ACK_CREATEPVPECTYPE = 1103,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PVPAPPLYMACTCH", Value=10101)]
+      EGMI_ACK_PVPAPPLYMACTCH = 10101,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=10000)]
-      EGMI_REQ_BUY_FORM_SHOP = 10000,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATEPVPECTYPE", Value=10102)]
+      EGMI_REQ_CREATEPVPECTYPE = 10102,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BUY_FORM_SHOP", Value=10001)]
-      EGMI_ACK_BUY_FORM_SHOP = 10001,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=10103)]
+      EGMI_ACK_CREATEPVPECTYPE = 10103,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE_BUILD_OBJECT", Value=10002)]
-      EGMI_REQ_MOVE_BUILD_OBJECT = 10002,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=20000)]
+      EGMI_REQ_BUY_FORM_SHOP = 20000,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE_BUILD_OBJECT", Value=10003)]
-      EGMI_ACK_MOVE_BUILD_OBJECT = 10003,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_BUY_FORM_SHOP", Value=20001)]
+      EGMI_ACK_BUY_FORM_SHOP = 20001,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_UP_BUILD_LVL", Value=10101)]
-      EGMI_REQ_UP_BUILD_LVL = 10101,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE_BUILD_OBJECT", Value=20002)]
+      EGMI_REQ_MOVE_BUILD_OBJECT = 20002,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_ITEM", Value=10102)]
-      EGMI_REQ_CREATE_ITEM = 10102,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE_BUILD_OBJECT", Value=20003)]
+      EGMI_ACK_MOVE_BUILD_OBJECT = 20003,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUILD_OPERATE", Value=10103)]
-      EGMI_REQ_BUILD_OPERATE = 10103
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_UP_BUILD_LVL", Value=20101)]
+      EGMI_REQ_UP_BUILD_LVL = 20101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATE_ITEM", Value=20102)]
+      EGMI_REQ_CREATE_ITEM = 20102,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUILD_OPERATE", Value=20103)]
+      EGMI_REQ_BUILD_OPERATE = 20103
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemType")]
