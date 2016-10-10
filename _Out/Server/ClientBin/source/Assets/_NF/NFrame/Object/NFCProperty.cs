@@ -33,6 +33,12 @@ namespace NFrame
                 case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
                     mxData.Set(varData.StringVal(0));
                     break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                    mxData.Set(varData.Vector2Val(0));
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                    mxData.Set(varData.Vector3Val(0));
+                    break;
                 default:
                     break;
             }
@@ -108,6 +114,26 @@ namespace NFrame
             }
 
             return NFIDataList.NULL_OBJECT;
+        }
+
+        public override NFVector2 QueryVector2()
+        {
+            if (NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2 == mxData.GetType())
+            {
+                return (NFVector2)mxData.Vector2Val();
+            }
+
+            return NFIDataList.NULL_VECTOR2;
+        }
+
+        public override NFVector3 QueryVector3()
+        {
+            if (NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3 == mxData.GetType())
+            {
+                return (NFVector3)mxData.Vector3Val();
+            }
+
+            return NFIDataList.NULL_VECTOR3;
         }
 
         public override bool SetInt(Int64 value)
@@ -188,6 +214,44 @@ namespace NFrame
 			return true;
 		}
 
+        public override bool SetVector2(NFVector2 value)
+        {
+            if (mxData.Vector2Val() != value)
+            {
+                NFIDataList.TData oldValue = new NFIDataList.TData(mxData);
+                NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2);
+                newValue.Set(value);
+
+                mxData.Set(value);
+
+                if (null != doHandleDel)
+                {
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                }
+            }
+
+            return true;
+        }
+
+        public override bool SetVector3(NFVector3 value)
+        {
+            if (mxData.Vector3Val() != value)
+            {
+                NFIDataList.TData oldValue = new NFIDataList.TData(mxData);
+                NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3);
+                newValue.Set(value);
+
+                mxData.Set(value);
+
+                if (null != doHandleDel)
+                {
+                    doHandleDel(mSelf, msPropertyName, oldValue, newValue);
+                }
+            }
+
+            return true;
+        }
+
         public override bool SetData(NFIDataList.TData x)
         {
             if (NFIDataList.VARIANT_TYPE.VTYPE_UNKNOWN == mxData.GetType()
@@ -206,6 +270,12 @@ namespace NFrame
                         break;
                     case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                         SetObject(x.ObjectVal());
+                        break;
+                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                        SetVector2(x.Vector2Val());
+                        break;
+                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                        SetVector3(x.Vector3Val());
                         break;
                     default:
                         break;

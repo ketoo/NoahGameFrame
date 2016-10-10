@@ -193,6 +193,25 @@ public class NFBinarySendLogic
         return xIdent;
     }
 
+    static public NFMsg.Vector2 NFToPB(NFVector2 value)
+    {
+        NFMsg.Vector2 vector = new NFMsg.Vector2();
+        vector.x = value.X();
+        vector.y = value.Y();
+
+        return vector;
+    }
+
+    static public NFMsg.Vector3 NFToPB(NFVector3 value)
+    {
+        NFMsg.Vector3 vector = new NFMsg.Vector3();
+        vector.x = value.X();
+        vector.y = value.Y();
+        vector.z = value.Z();
+
+        return vector;
+    }
+
 
     public NFBinarySendLogic(NFNet clientnet)
     {
@@ -588,6 +607,38 @@ public class NFBinarySendLogic
         NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
     }
 
+    public void RequirePropertyVector2(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyVector2 xData = new NFMsg.ObjectPropertyVector2();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyVector2 xProperty = new NFMsg.PropertyVector2();
+        xProperty.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xProperty.data = NFBinarySendLogic.NFToPB(newVar.Vector2Val());
+        xData.property_list.Add(xProperty);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyVector2>(stream, xData);
+
+        NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_VECTOR2, stream);
+    }
+
+    public void RequirePropertyVector3(NFrame.NFGUID objectID, string strPropertyName, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectPropertyVector3 xData = new NFMsg.ObjectPropertyVector3();
+        xData.player_id = NFBinarySendLogic.NFToPB(objectID);
+
+        NFMsg.PropertyVector3 xProperty = new NFMsg.PropertyVector3();
+        xProperty.property_name = System.Text.Encoding.Default.GetBytes(strPropertyName);
+        xProperty.data = NFBinarySendLogic.NFToPB(newVar.Vector3Val());
+        xData.property_list.Add(xProperty);
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectPropertyVector3>(stream, xData);
+
+        NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_VECTOR3, stream);
+    }
+
     public void RequireAddRow(NFrame.NFGUID self, string strRecordName, int nRow)
     {
         NFMsg.ObjectRecordAddRow xData = new NFMsg.ObjectRecordAddRow();
@@ -639,6 +690,24 @@ public class NFBinarySendLogic
                         xRecordObject.col = i;
                         xRecordObject.data = NFBinarySendLogic.NFToPB(xRowData.ObjectVal(i));
                         xRecordAddRowStruct.record_object_list.Add(xRecordObject);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                    {
+                        NFMsg.RecordVector2 xRecordVector = new NFMsg.RecordVector2();
+                        xRecordVector.row = nRow;
+                        xRecordVector.col = i;
+                        xRecordVector.data = NFBinarySendLogic.NFToPB(xRowData.Vector2Val(i));
+                        xRecordAddRowStruct.record_vector2_list.Add(xRecordVector);
+                    }
+                    break;
+                case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                    {
+                        NFMsg.RecordVector3 xRecordVector = new NFMsg.RecordVector3();
+                        xRecordVector.row = nRow;
+                        xRecordVector.col = i;
+                        xRecordVector.data = NFBinarySendLogic.NFToPB(xRowData.Vector3Val(i));
+                        xRecordAddRowStruct.record_vector3_list.Add(xRecordVector);
                     }
                     break;
 
@@ -749,5 +818,37 @@ public class NFBinarySendLogic
         Serializer.Serialize<NFMsg.ObjectRecordObject>(stream, xData);
         Debug.Log("send upload record object");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_OBJECT, stream);
+    }
+
+    public void RequireRecordVector2(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordVector2 xData = new NFMsg.ObjectRecordVector2();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordVector2 xRecordVector = new NFMsg.RecordVector2();
+        xRecordVector.row = nRow;
+        xRecordVector.col = nCol;
+        xRecordVector.data = NFBinarySendLogic.NFToPB(newVar.Vector2Val());
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordVector2>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_VECTOR2, stream);
+    }
+
+    public void RequireRecordVector3(NFrame.NFGUID self, string strRecordName, int nRow, int nCol, NFIDataList.TData newVar)
+    {
+        NFMsg.ObjectRecordVector3 xData = new NFMsg.ObjectRecordVector3();
+        xData.player_id = NFBinarySendLogic.NFToPB(self);
+        xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
+
+        NFMsg.RecordVector3 xRecordVector = new NFMsg.RecordVector3();
+        xRecordVector.row = nRow;
+        xRecordVector.col = nCol;
+        xRecordVector.data = NFBinarySendLogic.NFToPB(newVar.Vector3Val());
+
+        MemoryStream stream = new MemoryStream();
+        Serializer.Serialize<NFMsg.ObjectRecordVector3>(stream, xData);
+        SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_VECTOR3, stream);
     }
 }

@@ -174,6 +174,36 @@ namespace NFrame
 
         }
 
+        public override bool SetPropertyVector2(string strPropertyName, NFVector2 obj)
+        {
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFIDataList valueList = new NFCDataList();
+                valueList.AddVector2(new NFVector2());
+                property = mPropertyManager.AddProperty(strPropertyName, valueList);
+            }
+
+            property.SetVector2(obj);
+            return true;
+
+        }
+
+        public override bool SetPropertyVector3(string strPropertyName, NFVector3 obj)
+        {
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null == property)
+            {
+                NFIDataList valueList = new NFCDataList();
+                valueList.AddVector3(new NFVector3());
+                property = mPropertyManager.AddProperty(strPropertyName, valueList);
+            }
+
+            property.SetVector3(obj);
+            return true;
+
+        }
+
         public override Int64 QueryPropertyInt(string strPropertyName)
         {
 			NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
@@ -216,6 +246,28 @@ namespace NFrame
 			}
 
             return NFIDataList.NULL_OBJECT;
+        }
+
+        public override NFVector2 QueryPropertyVector2(string strPropertyName)
+        {
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryVector2();
+            }
+
+            return NFIDataList.NULL_VECTOR2;
+        }
+
+        public override NFVector3 QueryPropertyVector3(string strPropertyName)
+        {
+            NFIProperty property = mPropertyManager.GetProperty(strPropertyName);
+            if (null != property)
+            {
+                return property.QueryVector3();
+            }
+
+            return NFIDataList.NULL_VECTOR3;
         }
 
         public override bool FindRecord(string strRecordName)
@@ -276,6 +328,30 @@ namespace NFrame
 			return false;
         }
 
+        public override bool SetRecordVector2(string strRecordName, int nRow, int nCol, NFVector2 obj)
+        {
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetVector2(nRow, nCol, obj);
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool SetRecordVector3(string strRecordName, int nRow, int nCol, NFVector3 obj)
+        {
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                record.SetVector3(nRow, nCol, obj);
+                return true;
+            }
+
+            return false;
+        }
+
         public override Int64 QueryRecordInt(string strRecordName, int nRow, int nCol)
         {
 			NFIRecord record = mRecordManager.GetRecord(strRecordName);
@@ -316,6 +392,28 @@ namespace NFrame
 			{
 				return record.QueryObject(nRow, nCol);
 			}
+
+            return null;
+        }
+
+        public override NFVector2 QueryRecordVector2(string strRecordName, int nRow, int nCol)
+        {
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryVector2(nRow, nCol);
+            }
+
+            return null;
+        }
+
+        public override NFVector3 QueryRecordVector3(string strRecordName, int nRow, int nCol)
+        {
+            NFIRecord record = mRecordManager.GetRecord(strRecordName);
+            if (null != record)
+            {
+                return record.QueryVector3(nRow, nCol);
+            }
 
             return null;
         }
