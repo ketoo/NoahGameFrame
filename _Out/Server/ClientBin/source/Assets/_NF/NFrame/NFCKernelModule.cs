@@ -290,6 +290,20 @@ namespace NFrame
                                     xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
                                 }
                                 break;
+                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                                {
+                                    NFIDataList xDataList = new NFCDataList();
+                                    xDataList.AddVector2(arg.Vector2Val(i + 1));
+                                    xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
+                                }
+                                break;
+                            case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                                {
+                                    NFIDataList xDataList = new NFCDataList();
+                                    xDataList.AddVector3(arg.Vector3Val(i + 1));
+                                    xNewObject.GetPropertyManager().AddProperty(strPropertyName, xDataList);
+                                }
+                                break;
                             default:
                                 break;
                         }
@@ -395,8 +409,29 @@ namespace NFrame
 			return false;
 		}
 
+        public override bool SetPropertyVector2(NFGUID self, string strPropertyName, NFVector2 objectValue)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.SetPropertyVector2(strPropertyName, objectValue);
+            }
 
-		public override Int64 QueryPropertyInt(NFGUID self, string strPropertyName)
+            return false;
+        }
+
+        public override bool SetPropertyVector3(NFGUID self, string strPropertyName, NFVector3 objectValue)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.SetPropertyVector3(strPropertyName, objectValue);
+            }
+
+            return false;
+        }
+
+        public override Int64 QueryPropertyInt(NFGUID self, string strPropertyName)
 		{
 			if (mhtObject.ContainsKey(self))
 			{
@@ -440,8 +475,30 @@ namespace NFrame
 			return new NFGUID();
 		}
 
+        public override NFVector2 QueryPropertyVector2(NFGUID self, string strPropertyName)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.QueryPropertyVector2(strPropertyName);
+            }
 
-		public override NFIRecord FindRecord(NFGUID self, string strRecordName)
+            return new NFVector2();
+        }
+
+        public override NFVector3 QueryPropertyVector3(NFGUID self, string strPropertyName)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.QueryPropertyVector3(strPropertyName);
+            }
+
+            return new NFVector3();
+        }
+
+
+        public override NFIRecord FindRecord(NFGUID self, string strRecordName)
 		{
 			if (mhtObject.ContainsKey(self))
 			{
@@ -498,6 +555,28 @@ namespace NFrame
 			return false;
 		}
 
+        public override bool SetRecordVector2(NFGUID self, string strRecordName, int nRow, int nCol, NFVector2 objectValue)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.SetRecordVector2(strRecordName, nRow, nCol, objectValue);
+            }
+
+            return false;
+        }
+
+        public override bool SetRecordVector3(NFGUID self, string strRecordName, int nRow, int nCol, NFVector3 objectValue)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.SetRecordVector3(strRecordName, nRow, nCol, objectValue);
+            }
+
+            return false;
+        }
+
 
         public override Int64 QueryRecordInt(NFGUID self, string strRecordName, int nRow, int nCol)
 		{
@@ -542,8 +621,30 @@ namespace NFrame
 
 			return new NFGUID();
 		}
-		
-		public override NFIDataList GetObjectList()
+
+        public override NFVector2 QueryRecordVector2(NFGUID self, string strRecordName, int nRow, int nCol)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.QueryRecordVector2(strRecordName, nRow, nCol);
+            }
+
+            return new NFVector2();
+        }
+
+        public override NFVector3 QueryRecordVector3(NFGUID self, string strRecordName, int nRow, int nCol)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                return xGameObject.QueryRecordVector3(strRecordName, nRow, nCol);
+            }
+
+            return new NFVector3();
+        }
+
+        public override NFIDataList GetObjectList()
 		{
 			NFIDataList varData = new NFCDataList();
             foreach (KeyValuePair<NFGUID, NFIObject> kv in mhtObject)
@@ -607,6 +708,36 @@ namespace NFrame
                 if (null != xRecord)
                 {
                     return xRecord.FindObject(nCol, nValue, ref xDatalist);
+                }
+            }
+
+            return -1;
+        }
+
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector2 nValue, ref NFIDataList xDatalist)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                NFrame.NFIRecord xRecord = xGameObject.GetRecordManager().GetRecord(strRecordName);
+                if (null != xRecord)
+                {
+                    return xRecord.FindVector2(nCol, nValue, ref xDatalist);
+                }
+            }
+
+            return -1;
+        }
+
+        public override int FindRecordRow(NFGUID self, string strRecordName, int nCol, NFVector3 nValue, ref NFIDataList xDatalist)
+        {
+            if (mhtObject.ContainsKey(self))
+            {
+                NFIObject xGameObject = (NFIObject)mhtObject[self];
+                NFrame.NFIRecord xRecord = xGameObject.GetRecordManager().GetRecord(strRecordName);
+                if (null != xRecord)
+                {
+                    return xRecord.FindVector3(nCol, nValue, ref xDatalist);
                 }
             }
 

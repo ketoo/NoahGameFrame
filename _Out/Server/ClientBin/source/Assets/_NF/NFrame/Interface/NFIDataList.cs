@@ -19,6 +19,8 @@ namespace NFrame
             VTYPE_FLOAT,            // 单精度浮点数
             VTYPE_STRING,       // 字符串
             VTYPE_OBJECT,       // 对象ID
+            VTYPE_VECTOR2,
+            VTYPE_VECTOR3,
             VTYPE_MAX,
         };
 
@@ -49,7 +51,7 @@ namespace NFrame
 
             public bool Set(Int64 value)
             {
-                if(nType == VARIANT_TYPE.VTYPE_INT)
+                if (nType == VARIANT_TYPE.VTYPE_INT)
                 {
                     mData = value;
                     return true;
@@ -83,6 +85,28 @@ namespace NFrame
             public bool Set(NFGUID value)
             {
                 if (nType == VARIANT_TYPE.VTYPE_OBJECT)
+                {
+                    mData = value;
+                    return true;
+                }
+
+                return false;
+            }
+
+            public bool Set(NFVector2 value)
+            {
+                if (nType == VARIANT_TYPE.VTYPE_VECTOR2)
+                {
+                    mData = value;
+                    return true;
+                }
+
+                return false;
+            }
+
+            public bool Set(NFVector3 value)
+            {
+                if (nType == VARIANT_TYPE.VTYPE_VECTOR3)
                 {
                     mData = value;
                     return true;
@@ -135,6 +159,28 @@ namespace NFrame
                 return NFIDataList.NULL_OBJECT;
             }
 
+            public NFVector2 Vector2Val()
+            {
+                if (nType == VARIANT_TYPE.VTYPE_VECTOR2)
+                {
+
+                    return (NFVector2)mData;
+                }
+
+                return NFIDataList.NULL_VECTOR2;
+            }
+
+            public NFVector3 Vector3Val()
+            {
+                if (nType == VARIANT_TYPE.VTYPE_VECTOR3)
+                {
+
+                    return (NFVector3)mData;
+                }
+
+                return NFIDataList.NULL_VECTOR3;
+            }
+
             private VARIANT_TYPE nType;
             private Object mData;
         }
@@ -143,6 +189,8 @@ namespace NFrame
         public static readonly double NULL_DOUBLE = 0.0;
         public static readonly string NULL_STRING = "";
         public static readonly NFGUID NULL_OBJECT = new NFGUID();
+        public static readonly NFVector2 NULL_VECTOR2 = new NFVector2();
+        public static readonly NFVector3 NULL_VECTOR3 = new NFVector3();
         public static readonly double EPS_DOUBLE = 0.0001;
         public static readonly TData NULL_TDATA = new TData();
 
@@ -151,19 +199,26 @@ namespace NFrame
         public abstract bool AddFloat(double value);
         public abstract bool AddString(string value);
         public abstract bool AddObject(NFGUID value);
+        public abstract bool AddVector2(NFVector2 value);
+        public abstract bool AddVector3(NFVector3 value);
 
         public abstract bool SetInt(int index, Int64 value);
         public abstract bool SetFloat(int index, double value);
         public abstract bool SetString(int index, string value);
         public abstract bool SetObject(int index, NFGUID value);
+        public abstract bool SetVector2(int index, NFVector2 value);
+        public abstract bool SetVector3(int index, NFVector3 value);
+
 
         public abstract Int64 IntVal(int index);
         public abstract double FloatVal(int index);
         public abstract string StringVal(int index);
         public abstract NFGUID ObjectVal(int index);
+        public abstract NFVector2 Vector2Val(int index);
+        public abstract NFVector3 Vector3Val(int index);
 
-		public abstract int Count();
-		public abstract void Clear();
+        public abstract int Count();
+        public abstract void Clear();
         public abstract VARIANT_TYPE GetType(int index);
         public abstract TData GetData(int index);
     }

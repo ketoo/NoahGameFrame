@@ -44,7 +44,13 @@ namespace NFrame
 					case VARIANT_TYPE.VTYPE_OBJECT:
 						AddObject(src.ObjectVal(i));
 					break;
-						default:
+                    case VARIANT_TYPE.VTYPE_VECTOR2:
+                        AddVector2(src.Vector2Val(i));
+                        break;
+                    case VARIANT_TYPE.VTYPE_VECTOR3:
+                        AddVector3(src.Vector3Val(i));
+                        break;
+                    default:
 					break;
 				}
 			}
@@ -85,6 +91,22 @@ namespace NFrame
             data.Set(value);
 
 			return AddDataObject(ref data);
+        }
+
+        public override bool AddVector2(NFVector2 value)
+        {
+            TData data = new TData(VARIANT_TYPE.VTYPE_VECTOR2);
+            data.Set(value);
+
+            return AddDataObject(ref data);
+        }
+
+        public override bool AddVector3(NFVector3 value)
+        {
+            TData data = new TData(VARIANT_TYPE.VTYPE_VECTOR3);
+            data.Set(value);
+
+            return AddDataObject(ref data);
         }
 
         public override bool SetInt(int index, Int64 value)
@@ -139,6 +161,32 @@ namespace NFrame
             return false;
         }
 
+        public override bool SetVector2(int index, NFVector2 value)
+        {
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_VECTOR2)
+            {
+                data.Set(value);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool SetVector3(int index, NFVector3 value)
+        {
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_VECTOR3)
+            {
+                data.Set(value);
+
+                return true;
+            }
+
+            return false;
+        }
+
         public override Int64 IntVal(int index)
         {
             TData data = GetData(index);
@@ -183,7 +231,29 @@ namespace NFrame
             return NFIDataList.NULL_OBJECT;
         }
 
-		public override int Count()
+        public override NFVector2 Vector2Val(int index)
+        {
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_VECTOR3)
+            {
+                return data.Vector2Val();
+            }
+
+            return NFIDataList.NULL_VECTOR2;
+        }
+
+        public override NFVector3 Vector3Val(int index)
+        {
+            TData data = GetData(index);
+            if (data != null && data.GetType() == VARIANT_TYPE.VTYPE_VECTOR3)
+            {
+                return data.Vector3Val();
+            }
+
+            return NFIDataList.NULL_VECTOR3;
+        }
+
+        public override int Count()
 		{
 			return mValueObject.Count;
 		}
