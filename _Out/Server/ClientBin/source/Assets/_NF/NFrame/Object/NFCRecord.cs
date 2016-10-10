@@ -247,6 +247,74 @@ namespace NFrame
 			return false;
         }
 
+        public override bool SetVector2(int nRow, int nCol, NFVector2 value)
+        {
+            if (nRow >= 0 && nRow < mnRow)
+            {
+                if (!mhtRecordVec.ContainsKey(nRow))
+                {
+                    AddRow(nRow);
+                }
+                NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+                if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2)
+                {
+                    if (valueList.Vector2Val(nCol) != value)
+                    {
+                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2);
+                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2);
+
+                        oldValue.Set(valueList.Vector2Val(nCol));
+                        newValue.Set(value);
+
+                        valueList.SetVector2(nCol, value);
+
+                        if (null != doHandleDel)
+                        {
+                            doHandleDel(mSelf, mstrRecordName, eRecordOptype.Update, nRow, nCol, oldValue, newValue);
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool SetVector3(int nRow, int nCol, NFVector3 value)
+        {
+            if (nRow >= 0 && nRow < mnRow)
+            {
+                if (!mhtRecordVec.ContainsKey(nRow))
+                {
+                    AddRow(nRow);
+                }
+                NFIDataList valueList = (NFIDataList)mhtRecordVec[nRow];
+                if (valueList.GetType(nCol) == NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3)
+                {
+                    if (valueList.Vector3Val(nCol) != value)
+                    {
+                        NFIDataList.TData oldValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3);
+                        NFIDataList.TData newValue = new NFIDataList.TData(NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3);
+
+                        oldValue.Set(valueList.Vector3Val(nCol));
+                        newValue.Set(value);
+
+                        valueList.SetVector3(nCol, value);
+
+                        if (null != doHandleDel)
+                        {
+                            doHandleDel(mSelf, mstrRecordName, eRecordOptype.Update, nRow, nCol, oldValue, newValue);
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         // query data
         public override NFIDataList QueryRow(int nRow)
         {
@@ -351,6 +419,28 @@ namespace NFrame
             return NFIDataList.NULL_OBJECT;
         }
 
+        public override NFVector2 QueryVector2(int nRow, int nCol)
+        {
+            NFIDataList valueList = QueryRow(nRow);
+            if (null != valueList)
+            {
+                return valueList.Vector2Val(nCol);
+            }
+
+            return NFIDataList.NULL_VECTOR2;
+        }
+
+        public override NFVector3 QueryVector3(int nRow, int nCol)
+        {
+            NFIDataList valueList = QueryRow(nRow);
+            if (null != valueList)
+            {
+                return valueList.Vector3Val(nCol);
+            }
+
+            return NFIDataList.NULL_VECTOR3;
+        }
+
         //public override int FindRow( int nRow );
         public override int FindColValue(int nCol, NFIDataList var, ref NFIDataList varResult)
         {
@@ -370,7 +460,13 @@ namespace NFrame
 
 					case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
 						return FindObject(nCol, var.ObjectVal(0), ref varResult);
-					default:
+
+                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR2:
+                        return FindVector2(nCol, var.Vector2Val(0), ref varResult);
+
+                    case NFIDataList.VARIANT_TYPE.VTYPE_VECTOR3:
+                        return FindVector3(nCol, var.Vector3Val(0), ref varResult);
+                    default:
 					break;
 				}
 			}
@@ -431,6 +527,34 @@ namespace NFrame
                     varResult.AddInt(i);
                 }
 			}
+
+            return varResult.Count();
+        }
+
+        public override int FindVector2(int nCol, NFVector2 value, ref NFIDataList varResult)
+        {
+            foreach (int i in mhtRecordVec.Keys)
+            {
+                NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+                if (valueList.Vector2Val(nCol) == value)
+                {
+                    varResult.AddInt(i);
+                }
+            }
+
+            return varResult.Count();
+        }
+
+        public override int FindVector3(int nCol, NFVector3 value, ref NFIDataList varResult)
+        {
+            foreach (int i in mhtRecordVec.Keys)
+            {
+                NFIDataList valueList = (NFIDataList)mhtRecordVec[i];
+                if (valueList.Vector3Val(nCol) == value)
+                {
+                    varResult.AddInt(i);
+                }
+            }
 
             return varResult.Count();
         }

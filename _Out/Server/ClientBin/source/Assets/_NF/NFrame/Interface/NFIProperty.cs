@@ -31,6 +31,10 @@ namespace NFrame
 
         public abstract NFGUID QueryObject();
 
+        public abstract NFVector2 QueryVector2();
+
+        public abstract NFVector3 QueryVector3();
+
         public abstract bool SetInt(Int64 value);
 
         public abstract bool SetFloat(double value);
@@ -38,6 +42,10 @@ namespace NFrame
         public abstract bool SetString(string value);
 
         public abstract bool SetObject(NFGUID value);
+
+        public abstract bool SetVector2(NFVector2 value);
+
+        public abstract bool SetVector3(NFVector3 value);
 
         public abstract bool SetData(NFIDataList.TData x);
 
