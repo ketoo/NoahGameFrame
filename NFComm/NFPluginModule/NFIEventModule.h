@@ -88,6 +88,7 @@ public:
     virtual bool ExistEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
     
     virtual bool RemoveEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
+	virtual bool RemoveEventCallBack(const NFGUID self) = 0;
 	
 	template<typename BaseType>
 	bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFIDataList&))
