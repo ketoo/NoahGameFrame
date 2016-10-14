@@ -154,6 +154,11 @@ bool NFCEventModule::RemoveEventCallBack(const NFGUID self, const NFEventDefine 
 	return xEventMapPtr->RemoveElement(nEventID);
 }
 
+bool NFCEventModule::RemoveEventCallBack(const NFGUID self)
+{
+	return mObjectEventInfoMapEx.RemoveElement(self);
+}
+
 bool NFCEventModule::AddEventCallBack(const NFEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb)
 {
 	NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>> xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
