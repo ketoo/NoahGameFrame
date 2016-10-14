@@ -144,7 +144,7 @@ public:
 		return *this;
 	}
 
-	NFVector2& operator/= (float s)
+	NFVector2 operator/= (float s)
 	{
 		//if (std::abs(s) > 0.001f)
 		{
