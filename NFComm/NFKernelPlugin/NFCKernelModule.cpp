@@ -58,6 +58,7 @@ bool NFCKernelModule::Init()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 
     return true;
 }
@@ -285,6 +286,9 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
         DoEvent(self, strClassName, COE_DESTROY, NFCDataList());
 
         RemoveElement(self);
+
+		m_pEventModule->RemoveEventCallBack(self);
+		m_pScheduleModule->RemoveSchedule(self);
 
         return true;
 
