@@ -264,6 +264,7 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex
     {
         m_pKernelModule->DestroyObject(nPlayerID);
     }
+	m_pEventModule->RemoveEventCallBack(nPlayerID);
 
     RemovePlayerGateInfo(nPlayerID);
 }
