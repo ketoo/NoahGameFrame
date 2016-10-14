@@ -24,6 +24,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 
 class NFCKernelModule
@@ -195,6 +196,7 @@ private:
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
 	NFIScheduleModule* m_pScheduleModule;
+	NFIEventModule* m_pEventModule;
 };
 
 #endif
