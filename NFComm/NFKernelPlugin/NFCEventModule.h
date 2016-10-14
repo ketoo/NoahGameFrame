@@ -47,6 +47,7 @@ public:
 	virtual bool ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID);
 
 	virtual bool RemoveEventCallBack(const NFGUID self, const NFEventDefine nEventID);
+	virtual bool RemoveEventCallBack(const NFGUID self);
 
 protected:
 
