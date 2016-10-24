@@ -50,9 +50,9 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCNet.cpp" />
-		<Unit filename="NFCNet.h" />
-		<Unit filename="NFINet.h" />
+<Unit filename="NFCNet.cpp" />
+<Unit filename="NFCNet.h" />
+<Unit filename="NFINet.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

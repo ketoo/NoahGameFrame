@@ -57,9 +57,30 @@
 			<Add option="-D_CRT_SECURE_NO_WARNINGS" />
 			<Add directory="NFFIleProcess/" />
 		</Compiler>
-		<Unit filename="FileProcess.cpp" />
-		<Unit filename="FileProcess.h" />
-		<Unit filename="MiniExcelReader/MiniExcelReader.cpp">
+<Unit filename="FileProcess.cpp" /
+<Unit filename="MiniExcelReader\MiniExcelReader.cpp" /
+<Unit filename="minizip\ioapi.c" /
+<Unit filename="minizip\ioapi_mem.c" /
+<Unit filename="minizip\unzip.c" /
+<Unit filename="main.cpp" /
+<Unit filename="tinyxml2\tinyxml2.cpp" /
+<Unit filename="zlib\adler32.c" /
+<Unit filename="zlib\compress.c" /
+<Unit filename="zlib\crc32.c" /
+<Unit filename="zlib\deflate.c" /
+<Unit filename="zlib\gzclose.c" /
+<Unit filename="zlib\gzlib.c" /
+<Unit filename="zlib\gzread.c" /
+<Unit filename="zlib\gzwrite.c" /
+<Unit filename="zlib\infback.c" /
+<Unit filename="zlib\inffast.c" /
+<Unit filename="zlib\inflate.c" /
+<Unit filename="zlib\inftrees.c" /
+<Unit filename="zlib\trees.c" /
+<Unit filename="zlib\uncompr.c" /
+<Unit filename="zlib\zutil.c" /
+<Unit filename="FileProcess.h" /
+<Unit filename="Utf8ToGbk.h" /
 			<Option virtualFolder="MiniExcelReader/" />
 		</Unit>
 		<Unit filename="MiniExcelReader/MiniExcelReader.h">
