@@ -91,7 +91,7 @@
 <Unit filename="NFCScheduleModule.h" />
 <Unit filename="NFCSceneModule.h" />
 <Unit filename="NFKernelPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCEventModule.cpp" />
 <Unit filename="NFCKernelModule.cpp" />
 <Unit filename="NFCSceneModule.cpp" />
