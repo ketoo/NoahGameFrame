@@ -7,3 +7,5 @@ cd ..
 # generate makefile
 chmod -R 755 GenerateConfigXML.sh
 ./GenerateConfigXML.sh
+
+./convertvs2cb.sh
