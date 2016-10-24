@@ -85,7 +85,7 @@
 		</Build>
 <Unit filename="NFCLoginToMasterModule.h" />
 <Unit filename="NFLoginNet_ClientPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCLoginToMasterModule.cpp" />
 <Unit filename="NFLoginNet_ClientPlugin.cpp" />
 		<Extensions>

@@ -85,7 +85,7 @@
 		</Build>
 <Unit filename="NFCWorldToMasterModule.h" />
 <Unit filename="NFWorldNet_ClientPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCWorldToMasterModule.cpp" />
 <Unit filename="NFWorldNet_ClientPlugin.cpp" />
 		<Extensions>

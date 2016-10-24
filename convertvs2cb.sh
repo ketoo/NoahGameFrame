@@ -46,9 +46,19 @@ cat $project_vs | awk 'BEGIN{}
     if($1=="<ClInclude" || $1=="<ClCompile") 
     {
         info=$0;
+        if (index(info, "/>") > 0)
+        {
+            start=index(info, "=");
+            data="<Unit filename" "" substr(info, start, length($0) - start + 1);
+        }
+        else
+        {
+            start=index(info, "=");
+            data="<Unit filename" "" substr(info, start, length($0) - start - 1) "" "/>";
+        }
         
-        start=index(info, "=");
-        data="<Unit filename" "" substr(info, start, length($0) - start + 1);
+        
+
         print data >> project_cbp_temp_file
     }
 } END{}'
