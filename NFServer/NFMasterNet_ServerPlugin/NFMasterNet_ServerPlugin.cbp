@@ -85,7 +85,7 @@
 		</Build>
 <Unit filename="NFCMasterNet_ServerModule.h" />
 <Unit filename="NFMasterNet_ServerPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCMasterNet_ServerModule.cpp" />
 <Unit filename="NFMasterNet_ServerPlugin.cpp" />
 		<Extensions>
