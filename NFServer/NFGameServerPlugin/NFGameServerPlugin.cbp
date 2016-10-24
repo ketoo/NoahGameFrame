@@ -90,7 +90,7 @@
 <Unit filename="NFCPropertyTrailModule.h" />
 <Unit filename="NFCSceneProcessModule.h" />
 <Unit filename="NFGameServerPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCGameServerModule.cpp" />
 <Unit filename="NFCLevelModule.cpp" />
 <Unit filename="NFCPropertyConfigModule.cpp" />

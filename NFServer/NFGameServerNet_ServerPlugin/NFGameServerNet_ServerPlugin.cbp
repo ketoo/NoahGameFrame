@@ -85,7 +85,7 @@
 		</Build>
 <Unit filename="NFCGameServerNet_ServerModule.h" />
 <Unit filename="NFGameServerNet_ServerPlugin.h" />
-<Unit filename="dllmain.cpp">
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCGameServerNet_ServerModule.cpp" />
 <Unit filename="NFGameServerNet_ServerPlugin.cpp" />
 		<Extensions>
