@@ -92,21 +92,21 @@ echo "Converted file: $project_vs to $project_cbp !!"
 
 
 array_name=(
-FComm/NFCore/NFCore
-FComm/NFKernelPlugin/NFKernelPlugin
-FComm/NFConfigPlugin/NFConfigPlugin
-FComm/NFLogPlugin/NFLogPlugin
-FComm/NFMessageDefine/NFMessageDefine
-FComm/NFNet/NFNet
-FComm/NFPluginLoader/NFPluginLoader
-FServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin
-FServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin
-FServer/NFGameServerPlugin/NFGameServerPlugin
-FServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin
-FServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin
-FServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin
-FServer/NFMasterServerPlugin/NFMasterServerPlugin
-FServer/NFProxyLogicPlugin/NFProxyLogicPlugin
+NFComm/NFCore/NFCore
+NFComm/NFKernelPlugin/NFKernelPlugin
+NFComm/NFConfigPlugin/NFConfigPlugin
+NFComm/NFLogPlugin/NFLogPlugin
+NFComm/NFMessageDefine/NFMessageDefine
+NFComm/NFNet/NFNet
+NFComm/NFPluginLoader/NFPluginLoader
+NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin
+NFServer/NFGameServerNet_ServerPlugin/NFGameServerNet_ServerPlugin
+NFServer/NFGameServerPlugin/NFGameServerPlugin
+NFServer/NFLoginNet_ClientPlugin/NFLoginNet_ClientPlugin
+NFServer/NFLoginNet_ServerPlugin/NFLoginNet_ServerPlugin
+NFServer/NFMasterNet_ServerPlugin/NFMasterNet_ServerPlugin
+NFServer/NFMasterServerPlugin/NFMasterServerPlugin
+NFServer/NFProxyLogicPlugin/NFProxyLogicPlugin
 NFServer/NFProxyServerNet_ClientPlugin/NFProxyServerNet_ClientPlugin
 NFServer/NFProxyServerNet_ServerPlugin/NFProxyServerNet_ServerPlugin
 NFServer/NFWorldLogicPlugin/NFWorldLogicPlugin
