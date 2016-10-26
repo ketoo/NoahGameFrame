@@ -221,7 +221,7 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockIn
         if (!pServerData.get())
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(xData.server_id(), pServerData);
+            mProxyMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
