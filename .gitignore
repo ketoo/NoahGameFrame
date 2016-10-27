@@ -60,7 +60,6 @@
 /_Out/Comm/Release/*.pdb
 /_Out/Comm/Release/*.dll
 
-/_Out/Server/Debug/
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/
 /_Out/Server/NFDataCfg/Proto/

@@ -34,7 +34,7 @@ bool NFCComponentManager::Init()
 bool NFCComponentManager::AfterInit()
 {
     NF_SHARE_PTR<NFIComponent> pComponent = First();
-    while (pComponent.get())
+    while (pComponent)
     {
         pComponent->AfterInit();
 
@@ -47,7 +47,7 @@ bool NFCComponentManager::AfterInit()
 bool NFCComponentManager::BeforeShut()
 {
     NF_SHARE_PTR<NFIComponent> pComponent = First();
-    while (pComponent.get())
+    while (pComponent)
     {
         pComponent->BeforeShut();
 
@@ -60,7 +60,7 @@ bool NFCComponentManager::BeforeShut()
 bool NFCComponentManager::Shut()
 {
     NF_SHARE_PTR<NFIComponent> pComponent = First();
-    while (pComponent.get())
+    while (pComponent)
     {
         pComponent->Shut();
 

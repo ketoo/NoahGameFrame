@@ -83,7 +83,7 @@ bool HelloWorld3Module::AfterInit()
 
 	//创建对象，挂类回调和属性回调,然后事件处理对象
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName(), "", NFCDataList());
-	if (!pObject.get())
+	if (!pObject)
 	{
 		return false;
 	}
