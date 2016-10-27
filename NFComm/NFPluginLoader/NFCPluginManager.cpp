@@ -86,15 +86,22 @@ bool NFCPluginManager::LoadPluginConfig()
     doc.parse<0>(fdoc.data());
 
     rapidxml::xml_node<>* pRoot = doc.first_node();
-    for (rapidxml::xml_node<>* pPluginNode = pRoot->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
+    rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
+    if (!pAppNameNode)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    for (rapidxml::xml_node<>* pPluginNode = pAppNameNode->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
     {
         const char* strPluginName = pPluginNode->first_attribute("Name")->value();
-        const char* strMain = pPluginNode->first_attribute("Main")->value();
 
         mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 
     }
 
+/*
     rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
     if (!pPluginAppNode)
     {
@@ -114,7 +121,7 @@ bool NFCPluginManager::LoadPluginConfig()
         NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
         return false;
     }
-
+*/
     rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
     if (!pPluginConfigPathNode)
     {
@@ -212,9 +219,14 @@ bool NFCPluginManager::Execute()
     return bRet;
 }
 
-inline int NFCPluginManager::AppID() const
+inline int NFCPluginManager::GetAppID() const
 {
 	return mnAppID;
+}
+
+inline void NFCPluginManager::SetAppID(const int nAppID)
+{
+    mnAppID = nAppID;
 }
 
 inline NFINT64 NFCPluginManager::GetInitTime() const
@@ -245,6 +257,21 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 	}
 
 	mstrConfigName = strFileName;
+}
+
+const std::string& NFCPluginManager::GetAppName() const
+{
+	return mstrAppName;
+}
+
+void NFCPluginManager::SetAppName(const std::string& strAppName)
+{
+	if (mstrAppName.empty())
+	{
+		return;
+	}
+
+	mstrAppName = mstrAppName;
 }
 
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
@@ -293,7 +320,7 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 	{
 		return it->second;
 	}
-    
+
     return NULL;
 }
 
