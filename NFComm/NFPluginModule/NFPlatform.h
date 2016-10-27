@@ -327,6 +327,8 @@ typedef int64_t NFINT64;
 #define NF_NEW new
 
 #include <string>
+#include <algorithm>
+#include <cmath>
 #include <common/lexical_cast.hpp>
 template<typename DTYPE>
 bool NF_StrTo(const std::string& strValue, DTYPE& nValue)

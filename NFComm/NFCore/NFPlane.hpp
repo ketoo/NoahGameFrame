@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFPlane.h
+//    @FileName         :    NFPlane.hpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-10-09
 //    @Module           :    NFPlane
@@ -15,6 +15,13 @@
 
 class NFPlane
 {
+
+private:
+    NFVector3 mvCorner[4];
+
+    NFVector3 mvRadius[2];
+
+    NFVector3 mvCenter;
 };
 
 #endif
