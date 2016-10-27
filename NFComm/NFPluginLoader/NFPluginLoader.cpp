@@ -13,6 +13,7 @@
 #include <utility>
 #include <thread>
 #include <chrono>
+#include <future>
 #include <functional>
 #include <atomic>
 #include "NFCPluginManager.h"
@@ -84,22 +85,23 @@ void ThreadFunc()
 {
     while (!bExitApp)
     {
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        //         std::string s;
-        //         std::cin >> s;
-        //         if ( 0 == stricmp( s.c_str(), "exit" ) )
-        //         {
-        //             bExitApp = true;
-        //         }
+        std::string s;
+        std::cin >> s;
+        if ( 0 == stricmp( s.c_str(), "exit" ) )
+        {
+            bExitApp = true;
+            gThread.detach();
+        }
     }
 }
 
 void CreateBackThread()
 {
-    //gThread = std::thread(std::bind(&ThreadFunc));
-    //auto f = std::async (std::launch::async, std::bind(ThreadFunc));
-    //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
+    gThread = std::thread(std::bind(&ThreadFunc));
+    auto f = std::async (std::launch::deferred, std::bind(ThreadFunc));
+    std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
 void InitDaemon()

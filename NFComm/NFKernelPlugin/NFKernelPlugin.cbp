@@ -86,15 +86,17 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCKernelModule.cpp" />
-		<Unit filename="NFCKernelModule.h" />
-		<Unit filename="NFKernelPlugin.cpp" />
-		<Unit filename="NFKernelPlugin.h" />
-		<Unit filename="NFCSceneModule.cpp" />
-		<Unit filename="NFCSceneModule.h" />
-		<Unit filename="NFCScheduleModule.cpp" />
-		<Unit filename="NFCScheduleModule.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCEventModule.h" />
+<Unit filename="NFCKernelModule.h" />
+<Unit filename="NFCScheduleModule.h" />
+<Unit filename="NFCSceneModule.h" />
+<Unit filename="NFKernelPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCEventModule.cpp" />
+<Unit filename="NFCKernelModule.cpp" />
+<Unit filename="NFCSceneModule.cpp" />
+<Unit filename="NFCScheduleModule.cpp" />
+<Unit filename="NFKernelPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
