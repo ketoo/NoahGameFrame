@@ -55,7 +55,9 @@ public:
 
     virtual bool Execute();
 
-	virtual int AppID() const;
+	virtual int GetAppID() const;
+
+    virtual void SetAppID(const int nAppID);
 
 	virtual NFINT64 GetInitTime() const;
 
@@ -64,6 +66,10 @@ public:
 	virtual const std::string& GetConfigPath() const;
 
 	virtual void SetConfigName(const std::string& strFileName);
+
+	virtual const std::string& GetAppName() const;
+
+	virtual void SetAppName(const std::string& strAppName);
 protected:
 	bool LoadPluginConfig();
 
@@ -78,6 +84,7 @@ private:
     NFINT64 mnNowTime;
     std::string mstrConfigPath;
 	std::string mstrConfigName;
+	std::string mstrAppName;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
