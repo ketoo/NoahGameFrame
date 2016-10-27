@@ -1,49 +1,15 @@
-cp -a ../../Comm/Debug/NFPluginLoader_d ./NFMasterServer/NFMasterServer_d
-cp -a ../../Comm/Debug/NFPluginLoader_d ./NFWorldServer/NFWorldServer_d
-cp -a ../../Comm/Debug/NFPluginLoader_d ./NFLoginServer/NFLoginServer_d
-cp -a ../../Comm/Debug/NFPluginLoader_d ./NFGameServer1/NFGameServer_d
-cp -a ../../Comm/Debug/NFPluginLoader_d ./NFProxyServer1/NFProxyServer_d
-
-cp -a ../../Comm/Debug/*.so* ./NFMasterServer/
-cp -a ../../Comm/Debug/*.so* ./NFWorldServer/
-cp -a ../../Comm/Debug/*.so* ./NFLoginServer/
-cp -a ../../Comm/Debug/*.so* ./NFGameServer1/
-cp -a ../../Comm/Debug/*.so* ./NFProxyServer1/
-
-
-
 export LC_ALL="C"
 
-cd ./NFMasterServer
-chmod -R 777  NFMasterServer_d
-./NFMasterServer_d -d
-cd ../
+chmod -R 777  NFPluginLoader_d
 
-cd ./NFWorldServer
-chmod -R 777  NFWorldServer_d
-./NFWorldServer_d -d
-cd ../
+./NFPluginLoader_d -d Server=MasterServer ID=1
 
+./NFPluginLoader_d -d Server=NFWorldServer ID=2
 
-cd ./NFLoginServer
-chmod -R 777  NFLoginServer_d
-./NFLoginServer_d -d
-cd ../
+./NFPluginLoader_d -d Server=NFLoginServer ID=3
 
+./NFPluginLoader_d -d Server=NFGameServer ID=4
 
-
-cd ./NFGameServer1
-chmod -R 777  NFGameServer_d
-./NFGameServer_d -d
-cd ../
-
-
-cd ./NFProxyServer1
-chmod -R 777  NFProxyServer_d
-./NFProxyServer_d -d
-cd ../
-
-
-
+./NFPluginLoader_d -d Server=NFProxyServer ID=5
 
 ps -A|grep NF
