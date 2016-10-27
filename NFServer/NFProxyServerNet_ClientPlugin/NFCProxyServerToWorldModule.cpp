@@ -99,7 +99,7 @@ void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF
 void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 {
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -107,7 +107,7 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
@@ -157,7 +157,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -201,7 +201,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     }
 
     NF_SHARE_PTR<ClientConnectData> pConnectData = mWantToConnectMap.GetElement(xMsg.account());
-    if (NULL != pConnectData.get())
+    if (NULL != pConnectData)
     {
         pConnectData->strConnectKey = xMsg.world_key();
         return;
