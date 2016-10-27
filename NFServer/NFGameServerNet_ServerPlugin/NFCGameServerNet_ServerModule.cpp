@@ -73,7 +73,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-	if (xLogicClass.get())
+	if (xLogicClass)
 	{
 		NFList<std::string>& strIdList = xLogicClass->GetIdList();
 		std::string strId;
@@ -81,7 +81,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 		{
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->AppID() == nServerID)
+			if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->GetAppID() == nServerID)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
 				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
@@ -145,7 +145,7 @@ void NFCGameServerNet_ServerModule::OnClientDisconnect(const int nAddress)
 	//只可能是网关丢了
 	int nServerID = 0;
 	NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
-	while (pServerData.get())
+	while (pServerData)
 	{
 		if (nAddress == pServerData->xServerData.nFD)
 		{
@@ -224,7 +224,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	var.AddObject(nClientID);
 
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
-	if (NULL == pObject.get())
+	if (NULL == pObject)
 	{
 		//内存泄漏
 		//mRoleBaseData
@@ -234,7 +234,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 
 	pObject->SetPropertyInt("LoadPropertyFinish", 1);
 	pObject->SetPropertyInt("GateID", nGateID);
-	pObject->SetPropertyInt("GameID", pPluginManager->AppID());
+	pObject->SetPropertyInt("GameID", pPluginManager->GetAppID());
 
 	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 
@@ -282,7 +282,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, co
 	//1.public发送给所有人
 	//2.如果自己在列表中，再次发送private数据
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-	if (pObject.get())
+	if (pObject)
 	{
 		NFMsg::ObjectPropertyList* pPublicData = xPublicMsg.add_multi_player_property();
 		NFMsg::ObjectPropertyList* pPrivateData = xPrivateMsg.add_multi_player_property();
@@ -292,7 +292,7 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, co
 
 		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
 		NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->First();
-		while (pPropertyInfo.get())
+		while (pPropertyInfo)
 		{
 			if (pPropertyInfo->Changed())
 			{
@@ -487,14 +487,14 @@ int NFCGameServerNet_ServerModule::OnRecordEnter(const NFIDataList& argVar, cons
 	NFMsg::MultiObjectRecordList xPrivateMsg;
 
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-	if (pObject.get())
+	if (pObject)
 	{
 		NFMsg::ObjectRecordList* pPublicData = NULL;
 		NFMsg::ObjectRecordList* pPrivateData = NULL;
 
 		NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
 		NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First();
-		while (pRecord.get())
+		while (pRecord)
 		{
 			if (!pRecord->GetPublic() && !pRecord->GetPrivate())
 			{
@@ -1081,7 +1081,7 @@ int NFCGameServerNet_ServerModule::OnClassCommonEvent(const NFGUID& self, const 
 	{
 		//id和fd,gateid绑定
 		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
-		if (pDataBase.get())
+		if (pDataBase)
 		{
 			//回复客户端角色进入游戏世界成功了
 			NFMsg::AckEventResult xMsg;
@@ -1331,7 +1331,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject(const NFGUID& self, const 
 		}
 
 		pRecord = pClassRecordManager->GetElement(strPropertyName);
-		if (NULL == pRecord.get())
+		if (NULL == pRecord)
 		{
 			return -1;
 		}
@@ -1343,7 +1343,7 @@ int NFCGameServerNet_ServerModule::GetBroadCastObject(const NFGUID& self, const 
 			return -1;
 		}
 		pProperty = pClassPropertyManager->GetElement(strPropertyName);
-		if (NULL == pProperty.get())
+		if (NULL == pProperty)
 		{
 			return -1;
 		}
@@ -1986,7 +1986,7 @@ void NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSo
 	{
 		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 		NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(xData.server_id());
-		if (!pServerData.get())
+		if (!pServerData)
 		{
 			pServerData = NF_SHARE_PTR<GateServerInfo>(NF_NEW GateServerInfo());
 			mProxyMap.AddElement(xData.server_id(), pServerData);
@@ -2035,7 +2035,7 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 	{
 		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 		NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.GetElement(xData.server_id());
-		if (!pServerData.get())
+		if (!pServerData)
 		{
 			pServerData = NF_SHARE_PTR<GateServerInfo>(NF_NEW GateServerInfo());
 			mProxyMap.AddElement(xData.server_id(), pServerData);
@@ -2053,10 +2053,10 @@ void NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nS
 void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const NFGUID& self)
 {
 	NF_SHARE_PTR<GateBaseInfo> pData = mRoleBaseData.GetElement(self);
-	if (pData.get())
+	if (pData)
 	{
 		NF_SHARE_PTR<GateServerInfo> pProxyData = mProxyMap.GetElement(pData->nGateID);
-		if (pProxyData.get())
+		if (pProxyData)
 		{
 			m_pNetModule->SendMsgPB(nMsgID, xMsg, pProxyData->xServerData.nFD, pData->xClientID);
 		}
@@ -2066,10 +2066,10 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, googl
 void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self)
 {
 	NF_SHARE_PTR<GateBaseInfo> pData = mRoleBaseData.GetElement(self);
-	if (pData.get())
+	if (pData)
 	{
 		NF_SHARE_PTR<GateServerInfo> pProxyData = mProxyMap.GetElement(pData->nGateID);
-		if (pProxyData.get())
+		if (pProxyData)
 		{
 			m_pNetModule->SendMsgPB(nMsgID, strMsg, pProxyData->xServerData.nFD, pData->xClientID);
 		}
@@ -2156,7 +2156,7 @@ NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> NFCGameServerNet_Ser
 {
     int nGateID = -1;
     NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
-    while (pServerData.get())
+    while (pServerData)
     {
         if (nSockIndex == pServerData->xServerData.nFD)
         {

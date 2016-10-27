@@ -378,7 +378,7 @@ const NFGUID& NFCDataList::Object(const int index) const
         if (TDATA_OBJECT == type)
         {
             NF_SHARE_PTR<TData> var = GetStack(index);
-            if (var.get())
+            if (var)
             {
                 return var->GetObject();
             }
@@ -396,7 +396,7 @@ const NFVector2& NFCDataList::Vector2(const int index) const
 		if (TDATA_VECTOR2 == type)
 		{
 			NF_SHARE_PTR<TData> var = GetStack(index);
-			if (var.get())
+			if (var)
 			{
 				return var->GetVector2();
 			}
@@ -414,7 +414,7 @@ const NFVector3& NFCDataList::Vector3(const int index) const
 		if (TDATA_VECTOR3 == type)
 		{
 			NF_SHARE_PTR<TData> var = GetStack(index);
-			if (var.get())
+			if (var)
 			{
 				return var->GetVector3();
 			}
