@@ -31,6 +31,8 @@ bool bExitApp = false;
 std::thread gThread;
 std::string strArgvList;
 std::string strPluginName;
+std::string strAppName;
+std::string strAppID;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
@@ -137,7 +139,8 @@ void PrintfLogo()
     std::cout << "\n" << std::endl;
 	std::cout << "-d Run itas daemon mode, only on linux" << std::endl;
 	std::cout << "-x Closethe 'X' button, only on windows" << std::endl;
-	std::cout << "name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
+	std::cout << "Instance: name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
+	std::cout << "Instance: \"ID=number\", \"Server=GameServer\"  when programs be launched, all platform" << std::endl;
 	std::cout << "\n" << std::endl;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -145,16 +148,15 @@ void PrintfLogo()
 #endif
 }
 
-int main(int argc, char* argv[])
+void ProcessParameter(int argc, char* argv[])
 {
-	for (int i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
 	{
 		strArgvList += " ";
 		strArgvList += argv[i];
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 	if (strArgvList.find("-x") != string::npos)
 	{
 		CloseXButton();
@@ -184,6 +186,50 @@ int main(int argc, char* argv[])
 		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
+    if (strArgvList.find("Server=") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strAppName = argv[i];
+			if (strAppName.find("Server=") != string::npos)
+			{
+                strAppName.erase(0, 7);
+				break;
+			}
+		}
+
+		NFCPluginManager::GetSingletonPtr()->SetAppName(strAppName);
+	}
+
+	if (strArgvList.find("ID=") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strAppID = argv[i];
+			if (strPluginName.find("ID=") != string::npos)
+			{
+                strAppID.erase(0, 3);
+				break;
+			}
+		}
+
+		int nAppID = 0;
+        if(NF_StrTo(strAppID, nAppID))
+        {
+            NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
+        }
+	}
+
+}
+
+int main(int argc, char* argv[])
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#endif
+
+    ProcessParameter(argc, argv);
 
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
@@ -192,7 +238,7 @@ int main(int argc, char* argv[])
 	PrintfLogo();
     CreateBackThread();
 
-    while (!bExitApp)    //DEBUG�汾������RELEASE����
+    while (!bExitApp)
     {
         while (true)
         {
