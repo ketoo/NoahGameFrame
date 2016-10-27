@@ -41,14 +41,14 @@ start "" "NFPluginLoader_d.exe"
 choice /t 2 /d y /n >nul
 
 cd  ..
-cd  NFGameServer1
-echo Starting NFGameServer1...
+cd  NFGameServer
+echo Starting NFGameServer...
 start "" "NFPluginLoader_d.exe"
 
 choice /t 4 /d y /n >nul
 
 cd  ..
-cd  NFProxyServer1
+cd  NFProxyServer
 echo Starting NFProxyServer1...
 start "" "NFPluginLoader_d.exe"
 
