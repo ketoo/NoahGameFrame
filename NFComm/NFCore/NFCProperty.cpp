@@ -93,7 +93,7 @@ void NFCProperty::SetValue(const NFIProperty* pProperty)
 
 const NFIDataList::TData& NFCProperty::GetValue() const
 {
-	if (mxData.get())
+	if (mxData)
 	{
 		return *mxData;
 	}
@@ -168,7 +168,7 @@ void NFCProperty::SetUpload(bool bUpload)
 
 NFINT64 NFCProperty::GetInt() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return 0;
 	}
@@ -178,7 +178,7 @@ NFINT64 NFCProperty::GetInt() const
 
 double NFCProperty::GetFloat() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return 0.0;
 	}
@@ -188,7 +188,7 @@ double NFCProperty::GetFloat() const
 
 const std::string& NFCProperty::GetString() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return NULL_STR;
 	}
@@ -198,7 +198,7 @@ const std::string& NFCProperty::GetString() const
 
 const NFGUID& NFCProperty::GetObject() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return NULL_OBJECT;
 	}
@@ -208,7 +208,7 @@ const NFGUID& NFCProperty::GetObject() const
 
 const NFVector2& NFCProperty::GetVector2() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return NULL_VECTOR2;
 	}
@@ -218,7 +218,7 @@ const NFVector2& NFCProperty::GetVector2() const
 
 const NFVector3& NFCProperty::GetVector3() const
 {
-	if (!mxData.get())
+	if (!mxData)
 	{
 		return NULL_VECTOR3;
 	}
@@ -258,7 +258,7 @@ bool NFCProperty::SetInt(const NFINT64 value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (0 == value)
@@ -299,7 +299,7 @@ bool NFCProperty::SetFloat(const double value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (IsZeroDouble(value))
@@ -340,7 +340,7 @@ bool NFCProperty::SetString(const std::string& value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.empty())
@@ -381,7 +381,7 @@ bool NFCProperty::SetObject(const NFGUID& value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.IsNull())
@@ -422,7 +422,7 @@ bool NFCProperty::SetVector2(const NFVector2& value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.IsZero())
@@ -463,7 +463,7 @@ bool NFCProperty::SetVector3(const NFVector3& value)
 		return false;
 	}
 
-	if (!mxData.get())
+	if (!mxData)
 	{
 		//本身是空就是因为没数据，还来个没数据的就不存了
 		if (value.IsZero())
@@ -509,7 +509,7 @@ const TDATA_TYPE NFCProperty::GetType() const
 
 const bool NFCProperty::GeUsed() const
 {
-	if (mxData.get())
+	if (mxData)
 	{
 		return true;
 	}

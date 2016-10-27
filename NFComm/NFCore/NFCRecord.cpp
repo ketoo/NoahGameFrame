@@ -567,7 +567,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
     for (int i = 0; i < GetCols(); ++i)
     {
         NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, i));
-        if (pVar.get())
+        if (pVar)
         {
             varList.Append(*pVar);
         }
@@ -626,7 +626,7 @@ NFINT64 NFCRecord::GetInt(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return 0;
     }
@@ -653,7 +653,7 @@ double NFCRecord::GetFloat(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return 0.0f;
     }
@@ -680,7 +680,7 @@ const std::string& NFCRecord::GetString(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return NULL_STR;
     }
@@ -707,7 +707,7 @@ const NFGUID& NFCRecord::GetObject(const int nRow, const int nCol) const
     }
 
     const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return NULL_OBJECT;
     }
@@ -734,7 +734,7 @@ const NFVector2& NFCRecord::GetVector2(const int nRow, const int nCol) const
 	}
 
 	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-	if (!pVar.get())
+	if (!pVar)
 	{
 		return NULL_VECTOR2;
 	}
@@ -761,7 +761,7 @@ const NFVector3& NFCRecord::GetVector3(const int nRow, const int nCol) const
 	}
 
 	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-	if (!pVar.get())
+	if (!pVar)
 	{
 		return NULL_VECTOR3;
 	}
