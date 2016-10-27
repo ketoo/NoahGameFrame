@@ -67,7 +67,6 @@ protected:
 protected:
 
     NFMapEx<NFGUID, int> mxClientIdent;
-    NFCConsistentHash mxConsistentHash;
 protected:
     NFIProxyServerToWorldModule* m_pProxyToWorldModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;
