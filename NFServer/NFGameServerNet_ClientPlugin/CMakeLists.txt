@@ -14,9 +14,9 @@ add_library(NFGameServerNet_ClientPlugin SHARED
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ClientPlugin_d")
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
+	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
+	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
 
 link_NFSDK("NFGameServerNet_ClientPlugin")
 
@@ -27,15 +27,7 @@ if(UNIX)
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
-	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFGameServer1/${ProjectName}.so")
-	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFGameServer1/${ProjectName}.so")
-	endif()
+
 	
 else()
 	add_definitions(
@@ -44,16 +36,5 @@ else()
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
 	
-	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName).dll")
-	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.dll")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFGameServer1\\$(ProjectName)_d.pdb")
-	endif()
+
 endif()
