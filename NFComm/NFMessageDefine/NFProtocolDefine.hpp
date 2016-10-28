@@ -1011,7 +1011,6 @@ public:
 	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
 	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
 	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
-	static const std::string& Area(){ static std::string xArea = "Area"; return xArea; } // int
 	// Record
 
 };
