@@ -12,9 +12,9 @@ add_library(NFWorldNet_ClientPlugin SHARED
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ClientPlugin_d")
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Comm/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
+	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
+	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
 link_NFSDK("NFWorldNet_ClientPlugin")
 
 if(UNIX)
@@ -25,11 +25,11 @@ if(UNIX)
 	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFWorldServer/${ProjectName}.so")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Server/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFWorldServer/${ProjectName}.so")
 	else()
 		add_custom_command(TARGET ${ProjectName}
 							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFWorldServer/${ProjectName}.so")
+							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Server/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFWorldServer/${ProjectName}.so")
 	endif()
 else()
 	add_definitions(
