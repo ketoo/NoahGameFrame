@@ -34,17 +34,17 @@ chmod -R 755 *
 make
 make check
 
-cp -r -f ./src/.libs/*.so ../lib/Debug/
-cp -r -f ./src/.libs/*.so.* ../lib/Debug/
-cp -r -f ./src/.libs/*.so ../lib/Release/
-cp -r -f ./src/.libs/*.so.* ../lib/Release/
-cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
-cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Release/
-
-cp -r -f ./src/.libs/*.so ../lib/
-cp -r -f ./src/.libs/*.so.* ../lib/
+#cp -r -f ./src/.libs/*.so ../lib/Debug/
+#cp -r -f ./src/.libs/*.so.* ../lib/Debug/
+#cp -r -f ./src/.libs/*.so ../lib/Release/
+#cp -r -f ./src/.libs/*.so.* ../lib/Release/
+#cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
+#cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
+#cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
+#cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Release/
+#
+#cp -r -f ./src/.libs/*.so ../lib/
+#cp -r -f ./src/.libs/*.so.* ../lib/
 cd ../
 
 
