@@ -206,7 +206,7 @@ void ProcessParameter(int argc, char* argv[])
 		for (int i = 0; i < argc; i++)
 		{
 			strAppID = argv[i];
-			if (strPluginName.find("ID=") != string::npos)
+			if (strAppID.find("ID=") != string::npos)
 			{
                 strAppID.erase(0, 3);
 				break;
