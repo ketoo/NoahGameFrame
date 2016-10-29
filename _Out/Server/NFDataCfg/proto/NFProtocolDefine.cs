@@ -990,6 +990,7 @@ public class Server
 	public static readonly String IP = "IP"; // string
 	public static readonly String Port = "Port"; // int
 	public static readonly String Type = "Type"; // int
+	public static readonly String Area = "Area"; // int
 	// Record
 
 }
