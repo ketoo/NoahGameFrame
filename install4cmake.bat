@@ -19,4 +19,5 @@ call BuildNF.CMake.Debug.bat
 call BuildNF.VS2015.Debug.X64.bat
 
 call BuildNF.CopyDll.bat
-cd ..
+cd .. 
+pause
