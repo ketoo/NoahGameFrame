@@ -63,7 +63,7 @@
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/
 /_Out/Server/NFDataCfg/Proto/
-/_Out/Server/Release/
+#/_Out/Server/Release/
 /Dependencies/libevent
 /Dependencies/curl
 /.vs/
