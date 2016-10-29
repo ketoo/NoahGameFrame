@@ -1,23 +1,24 @@
-xcopy cmake.dir\develop\*.* *.txt /e /y
 
 cd Dependencies
 call build_dep.bat
 cd ..
 
-cd BuildScript
+cd BuildScript\win\
 call BuildNF.CMake.Tools.bat
 call BuildNF.Tools.VS2015.Debug.X64.bat
-cd ..
+call BuildNF.Tools.VS2015.Release.X64.bat
+cd ..\..\
 
 cd _Out\Server\NFDataCfg\tool\
 
 call copy_files.bat 1
 cd ..\..\..\..\
 
-cd BuildScript
+cd BuildScript\win\
 call BuildNF.CMake.Debug.bat
 call BuildNF.VS2015.Debug.X64.bat
+call BuildNF.VS2015.Release.X64.bat
 
-call BuildNF.CopyDll.bat
-cd .. 
+cd ..\..\
+
 pause
