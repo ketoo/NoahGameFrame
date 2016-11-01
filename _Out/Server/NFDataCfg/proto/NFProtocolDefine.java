@@ -962,6 +962,7 @@ public class Server {
 	public static final String IP = "IP"; // string
 	public static final String Port = "Port"; // int
 	public static final String Type = "Type"; // int
+	public static final String Area = "Area"; // int
 	// Record
 
 }
