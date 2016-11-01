@@ -18,29 +18,11 @@ endif()
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
-	add_custom_command(TARGET ${strProjectName}
-						POST_BUILD
-						COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)${dbgSuffix}.${ext}" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.${ext}")
-	if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	
-	else()
-		add_custom_command(TARGET ${strProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)${dbgSuffix}.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\${destDir}\\$(ProjectName)${dbgSuffix}.pdb")
-	endif()
 endmacro()
 
 macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
-	if(dbgSuffix STREQUAL "_d")
-		add_custom_command(TARGET ${strProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/${destDir}/${ProjectName}${dbgSuffix}${ext}")
-	else()
-		add_custom_command(TARGET ${strProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Comm/${dllPrefix}${ProjectName}${dbgSuffix}${ext}" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/${destDir}/${ProjectName}${dbgSuffix}${ext}")
 	
-	endif()
 endmacro()
 
 		
