@@ -1,7 +1,4 @@
-cd ..
-cd ./cmake.linux/
+cd ../../
 cmake .. -G "CodeBlocks - Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
 make
-
-cd ..
-cd BuildScript
+cd BuildScript/linux/
