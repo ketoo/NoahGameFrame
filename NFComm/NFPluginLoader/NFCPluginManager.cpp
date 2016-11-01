@@ -102,7 +102,7 @@ bool NFCPluginManager::LoadPluginConfig()
     }
 
 /*
-    rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
+    rapidxml::xml_node<>* pPluginAppNode = pAppNameNode->first_node("APPID");
     if (!pPluginAppNode)
     {
         NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
@@ -122,7 +122,7 @@ bool NFCPluginManager::LoadPluginConfig()
         return false;
     }
 */
-    rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
+    rapidxml::xml_node<>* pPluginConfigPathNode = pAppNameNode->first_node("ConfigPath");
     if (!pPluginConfigPathNode)
     {
         NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
@@ -266,12 +266,12 @@ const std::string& NFCPluginManager::GetAppName() const
 
 void NFCPluginManager::SetAppName(const std::string& strAppName)
 {
-	if (mstrAppName.empty())
+	if (!mstrAppName.empty())
 	{
 		return;
 	}
 
-	mstrAppName = mstrAppName;
+	mstrAppName = strAppName;
 }
 
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
