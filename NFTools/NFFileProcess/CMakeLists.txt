@@ -41,12 +41,12 @@ add_executable(NFFileProcess
 	
 set_target_properties( NFFileProcess PROPERTIES
 	FOLDER "NFTools"
-	ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${NFOutPutDir}NFDataCfg/Tool/
-	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${NFOutPutDir}NFDataCfg/Tool/
-	LIBRARY_OUTPUT_DIRECTORY_DEBUG ${NFOutPutDir}NFDataCfg/Tool/
-	ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${NFOutPutDir}NFDataCfg/Tool/
-	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${NFOutPutDir}NFDataCfg/Tool/
-	LIBRARY_OUTPUT_DIRECTORY_RELEASE ${NFOutPutDir}NFDataCfg/Tool/	)
+	ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${SolutionDir}/_Out/Server/NFDataCfg/Tool/
+	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${SolutionDir}/_Out/Server/NFDataCfg/Tool/
+	LIBRARY_OUTPUT_DIRECTORY_DEBUG ${SolutionDir}/_Out/Server/NFDataCfg/Tool/
+	ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${SolutionDir}/_Out/Server/NFDataCfg/Tool/
+	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${SolutionDir}/_Out/Server/NFDataCfg/Tool/
+	LIBRARY_OUTPUT_DIRECTORY_RELEASE ${SolutionDir}/_Out/Server/NFDataCfg/Tool/	)
 
 add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS

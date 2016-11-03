@@ -10,6 +10,7 @@ add_library(NFLoginLogicPlugin SHARED
 	${NFLoginLogicPlugin_ROOT_Hpp})
 	
 set_target_properties( NFLoginLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginLogicPlugin_d")
+set_target_properties( NFLoginLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginLogicPlugin PROPERTIES 
 	FOLDER "NFServer/LoginServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
