@@ -9,11 +9,12 @@ add_library(Tutorial3Plugin SHARED
 	${Tutorial3_ROOT_Hpp})
 	
 set_target_properties( Tutorial3Plugin PROPERTIES OUTPUT_NAME_DEBUG "Tutorial3Plugin_d")
+set_target_properties( Tutorial3Plugin PROPERTIES PREFIX "")
 set_target_properties( Tutorial3Plugin PROPERTIES 
 	FOLDER "Tutorial"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial3Plugin")
 
 if(UNIX)

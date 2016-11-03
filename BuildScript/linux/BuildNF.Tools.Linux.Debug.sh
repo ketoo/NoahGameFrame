@@ -1,7 +1,3 @@
-cd ../../
-cd NFTools
-cd NFFileProcess
+cd Build.Tools
 make
-cd ..
-cd ..
-cd BuildScript/linux
+cd ../
