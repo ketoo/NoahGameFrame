@@ -30,6 +30,17 @@ endmacro()
 project(NoahFrame)
 
 set(SolutionDir ${PROJECT_SOURCE_DIR})
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/Debug)
+	else()
+		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/Release)
+	endif()
+else()
+	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/)
+endif()
+
+
 # message(STATUS "SolutionDir=" ${SolutionDir})
 include_directories(
 ${SolutionDir} 
