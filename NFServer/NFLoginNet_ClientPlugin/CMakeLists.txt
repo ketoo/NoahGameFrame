@@ -10,6 +10,7 @@ add_library(NFLoginNet_ClientPlugin SHARED
 	${NFLoginNet_ClientPlugin_ROOT_Hpp})
 	
 set_target_properties( NFLoginNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFLoginNet_ClientPlugin_d")
+set_target_properties( NFLoginNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFLoginNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/LoginServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
