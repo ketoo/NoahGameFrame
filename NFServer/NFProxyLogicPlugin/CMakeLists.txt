@@ -10,6 +10,7 @@ add_library(NFProxyLogicPlugin SHARED
 	${NFProxyLogicPlugin_ROOT_Hpp})
 	
 set_target_properties( NFProxyLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyLogicPlugin_d")
+set_target_properties( NFProxyLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFProxyLogicPlugin PROPERTIES 
 	FOLDER "NFServer/ProxyServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}

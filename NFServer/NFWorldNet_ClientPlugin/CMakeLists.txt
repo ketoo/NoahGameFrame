@@ -10,6 +10,7 @@ add_library(NFWorldNet_ClientPlugin SHARED
 	${NFWorldNet_ClientPlugin_ROOT_Hpp})
 	
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ClientPlugin_d")
+set_target_properties( NFWorldNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
