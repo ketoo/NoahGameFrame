@@ -9,4 +9,4 @@ chmod -R 755 GenerateConfigXML.sh
 ./GenerateConfigXML.sh
 
 chmod -R 755 convertvs2cb.sh
-./convertvs2cb.sh
+#./convertvs2cb.sh
