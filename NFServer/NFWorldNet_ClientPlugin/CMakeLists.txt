@@ -12,9 +12,9 @@ add_library(NFWorldNet_ClientPlugin SHARED
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ClientPlugin_d")
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFWorldNet_ClientPlugin")
 
 if(UNIX)
