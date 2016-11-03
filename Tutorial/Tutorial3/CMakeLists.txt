@@ -9,7 +9,7 @@ add_library(Tutorial3Plugin SHARED
 	${Tutorial3_ROOT_Hpp})
 	
 set_target_properties( Tutorial3Plugin PROPERTIES OUTPUT_NAME_DEBUG "Tutorial3Plugin_d")
-set_target_properties( Tutorial3 PROPERTIES PREFIX "")
+set_target_properties( Tutorial3Plugin PROPERTIES PREFIX "")
 set_target_properties( Tutorial3Plugin PROPERTIES 
 	FOLDER "Tutorial"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
