@@ -14,9 +14,9 @@ add_library(NFGameServerNet_ClientPlugin SHARED
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ClientPlugin_d")
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 
 link_NFSDK("NFGameServerNet_ClientPlugin")
 
