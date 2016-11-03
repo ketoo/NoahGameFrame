@@ -10,11 +10,12 @@ add_library(NFWorldNet_ClientPlugin SHARED
 	${NFWorldNet_ClientPlugin_ROOT_Hpp})
 	
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldNet_ClientPlugin_d")
+set_target_properties( NFWorldNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFWorldNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFWorldNet_ClientPlugin")
 
 if(UNIX)
@@ -22,31 +23,12 @@ if(UNIX)
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
-	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Server/lib${ProjectName}.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Release/NFWorldServer/${ProjectName}.so")
-	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND cp -f "${PROJECT_SOURCE_DIR}/_Out/Server/lib${ProjectName}_d.so" "${PROJECT_SOURCE_DIR}/_Out/Server/Debug/NFWorldServer/${ProjectName}.so")
-	endif()
+
 else()
 	add_definitions(
 		-DWIN
 		-D_USRDLL
 		-DELPP_NO_DEFAULT_LOG_FILE
 	)
-	if(CMAKE_BUILD_TYPE STREQUAL "Release")		
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName).dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName).dll")
-	else()
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)_d.dll" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.dll")
-		add_custom_command(TARGET ${ProjectName}
-							POST_BUILD
-							COMMAND copy /y "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\$(ProjectName)_d.pdb" "$(SolutionDir)\\..\\_Out\\Server\\$(Configuration)\\NFWorldServer\\$(ProjectName)_d.pdb")
-	endif()
+
 endif()

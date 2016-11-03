@@ -10,11 +10,12 @@ add_library(NFWorldLogicPlugin SHARED
 	${NFWorldLogicPlugin_ROOT_Hpp})
 	
 set_target_properties( NFWorldLogicPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFWorldLogicPlugin_d")
+set_target_properties( NFWorldLogicPlugin PROPERTIES PREFIX "")
 set_target_properties( NFWorldLogicPlugin PROPERTIES 
 	FOLDER "NFServer/WorldServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFWorldLogicPlugin")
 
 if(UNIX)
