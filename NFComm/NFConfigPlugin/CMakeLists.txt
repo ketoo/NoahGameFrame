@@ -7,11 +7,12 @@ file(GLOB NFConfigPlugin_ROOT_Hpp
 add_library(NFConfigPlugin SHARED ${NFConfigPlugin_ROOT_Cpp} ${NFConfigPlugin_ROOT_Hpp})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFConfigPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFConfigPlugin_d")
+set_target_properties( NFConfigPlugin PROPERTIES PREFIX "")
 set_target_properties( NFConfigPlugin PROPERTIES 
 	FOLDER "NFSDK"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 
 if(UNIX)
 	add_dependencies(NFConfigPlugin NFCore)
