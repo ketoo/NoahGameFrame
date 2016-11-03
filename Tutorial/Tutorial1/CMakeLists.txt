@@ -9,11 +9,12 @@ add_library(Tutorial1 SHARED
 	${Tutorial1_ROOT_Hpp})
 	
 set_target_properties( Tutorial1 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial1_d")
+set_target_properties( Tutorial1 PROPERTIES PREFIX "")
 set_target_properties( Tutorial1 PROPERTIES 
 	FOLDER "Tutorial"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("Tutorial1")
 
 if(UNIX)
