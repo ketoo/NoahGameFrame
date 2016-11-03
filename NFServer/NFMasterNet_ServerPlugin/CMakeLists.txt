@@ -10,6 +10,7 @@ add_library(NFMasterNet_ServerPlugin SHARED
 	${NFMasterNet_ServerPlugin_ROOT_Hpp})
 	
 set_target_properties( NFMasterNet_ServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterNet_ServerPlugin_d")
+set_target_properties( NFMasterNet_ServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterNet_ServerPlugin PROPERTIES 
 	FOLDER "NFServer/MasterServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}

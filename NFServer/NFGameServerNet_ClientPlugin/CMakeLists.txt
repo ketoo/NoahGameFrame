@@ -12,6 +12,7 @@ add_library(NFGameServerNet_ClientPlugin SHARED
 	${NFGameServerNet_ClientPlugin_ROOT_Hpp})
 	
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGameServerNet_ClientPlugin_d")
+set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGameServerNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
