@@ -10,11 +10,12 @@ add_library(NFMasterServerPlugin SHARED
 	${NFMasterServerPlugin_ROOT_Hpp})
 	
 set_target_properties( NFMasterServerPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMasterServerPlugin_d")
+set_target_properties( NFMasterServerPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMasterServerPlugin PROPERTIES 
 	FOLDER "NFServer/MasterServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFMasterServerPlugin")
 
 if(UNIX)

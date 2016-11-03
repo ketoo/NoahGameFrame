@@ -30,6 +30,17 @@ endmacro()
 project(NoahFrame)
 
 set(SolutionDir ${PROJECT_SOURCE_DIR})
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/Debug)
+	else()
+		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/Release)
+	endif()
+else()
+	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Server/)
+endif()
+
+
 # message(STATUS "SolutionDir=" ${SolutionDir})
 include_directories(
 ${SolutionDir} 
@@ -59,7 +70,18 @@ else()
 	SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS" )
 	include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
 endif()
-set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm )
+if(UNIX)
+	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+		set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm ${SolutionDir}/_Out/Server/Debug/)
+	else()
+		set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm ${SolutionDir}/_Out/Server/Release/)
+	endif()
+else()
+	set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Comm ${SolutionDir}/_Out/Server/)
+endif()
+
+
+
 link_directories(${DependenciesLibPath})
 
 if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
