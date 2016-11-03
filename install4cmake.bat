@@ -17,6 +17,7 @@ cd ..\..\..\..\
 cd BuildScript\win\
 call BuildNF.CMake.Debug.bat
 call BuildNF.VS2015.Debug.X64.bat
+call BuildNF.CMake.Release.bat
 call BuildNF.VS2015.Release.X64.bat
 
 cd ..\..\
