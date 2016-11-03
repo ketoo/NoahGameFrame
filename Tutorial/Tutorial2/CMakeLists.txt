@@ -9,6 +9,7 @@ add_library(Tutorial2 SHARED
 	${Tutorial2_ROOT_Hpp})
 	
 set_target_properties( Tutorial2 PROPERTIES OUTPUT_NAME_DEBUG "Tutorial2_d")
+set_target_properties( Tutorial2 PROPERTIES PREFIX "")
 set_target_properties( Tutorial2 PROPERTIES 
 	FOLDER "Tutorial"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
