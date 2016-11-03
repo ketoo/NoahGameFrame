@@ -32,6 +32,7 @@ else()
 
 endif()
 set_target_properties( NFKernelPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFKernelPlugin_d")
+set_target_properties( NFKernelPlugin PROPERTIES PREFIX "")
 set_target_properties( NFKernelPlugin PROPERTIES
 	FOLDER "NFSDK"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
