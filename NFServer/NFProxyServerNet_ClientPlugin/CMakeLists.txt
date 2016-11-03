@@ -10,11 +10,12 @@ add_library(NFProxyServerNet_ClientPlugin SHARED
 	${NFProxyServerNet_ClientPlugin_ROOT_Hpp})
 	
 set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFProxyServerNet_ClientPlugin_d")
+set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES PREFIX "")
 set_target_properties( NFProxyServerNet_ClientPlugin PROPERTIES 
 	FOLDER "NFServer/ProxyServer"
-	ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-	LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFProxyServerNet_ClientPlugin")
 
 if(UNIX)

@@ -34,10 +34,10 @@ chmod -R 755 *
 make
 make check
 
-#cp -r -f ./src/.libs/*.so ../lib/Debug/
-#cp -r -f ./src/.libs/*.so.* ../lib/Debug/
-#cp -r -f ./src/.libs/*.so ../lib/Release/
-#cp -r -f ./src/.libs/*.so.* ../lib/Release/
+cp -r -f ./src/.libs/*.so ../../_Out/Server/Debug/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Server/Debug/
+cp -r -f ./src/.libs/*.so ../../_Out/Server/Release/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Server/Release/
 #cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
 #cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
 #cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
