@@ -300,7 +300,7 @@ public:
 
     bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg)
     {
-        return m_pNet->SendMsgToAllClient(msg.c_str(), msg.length());
+        return m_pNet->SendMsgToAllClientWithOutHead(nMsgID,msg.c_str(), msg.length());
     }
 
 	bool SendMsgPB(const google::protobuf::Message& xData, const uint32_t nSockIndex)

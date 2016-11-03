@@ -40,11 +40,12 @@ IF( WIN32 )
 		./src/google/protobuf/stubs/stringprintf.cc)
 	add_library(${ProjectName} SHARED ${pbFiles})
 	set_target_properties( ${ProjectName} PROPERTIES OUTPUT_NAME_DEBUG "${ProjectName}_d")
+	set_target_properties( ${ProjectName} PROPERTIES PREFIX "")
 	set_target_properties( ${ProjectName} PROPERTIES 
 		FOLDER "NFDeps"
-		ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-		RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/
-		LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/_Out/Server/ )
+		ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
+		RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
+		LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 	add_definitions(
 		-D_USRDLL
 		-DLIBPROTOBUF_EXPORTS
