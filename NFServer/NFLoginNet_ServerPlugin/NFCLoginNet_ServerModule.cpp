@@ -36,7 +36,6 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCLoginNet_ServerModule::OnHeartBeat);
@@ -49,7 +48,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 	m_pNetModule->AddEventCallBack(this, &NFCLoginNet_ServerModule::OnSocketClientEvent);
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-	if (xLogicClass.get())
+	if (xLogicClass)
 	{
 		NFList<std::string>& strIdList = xLogicClass->GetIdList();
 		std::string strId;
@@ -57,13 +56,11 @@ bool NFCLoginNet_ServerModule::AfterInit()
 		{
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
+			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
 			{
 				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
 				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
 				const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-
-				m_pUUIDModule->SetIdentID(nServerID);
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -111,7 +108,7 @@ void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
 	NetObject* pObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
 	if (pObject)
 	{
-		NFGUID xIdent = m_pUUIDModule->CreateGUID();
+		NFGUID xIdent = m_pKernelModule->CreateGUID();
 		pObject->SetClientID(xIdent);
 		mxClientIdent.AddElement(xIdent, NF_SHARE_PTR<int>(NF_NEW int(nAddress)));
 	}
@@ -192,7 +189,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 
 	NFMsg::ReqConnectWorld xData;
 	xData.set_world_id(xMsg.world_id());
-	xData.set_login_id(pPluginManager->AppID());
+	xData.set_login_id(pPluginManager->GetAppID());
 	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 	xData.set_account(pNetObject->GetAccount());
 

@@ -34,11 +34,15 @@ public:
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue) = 0;
     virtual bool SetPropertyString(const std::string& strPropertyName, const std::string& strValue) = 0;
     virtual bool SetPropertyObject(const std::string& strPropertyName, const NFGUID& obj) = 0;
+	virtual bool SetPropertyVector2(const std::string& strPropertyName, const NFVector2& value) = 0;
+	virtual bool SetPropertyVector3(const std::string& strPropertyName, const NFVector3& value) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const std::string& strPropertyName) = 0;
     virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName) = 0;
+	virtual const NFVector2& GetPropertyVector2(const std::string& strPropertyName) = 0;
+	virtual const NFVector3& GetPropertyVector3(const std::string& strPropertyName) = 0;
 
     //////////////////////////////////////////////////////////////////////////
 
