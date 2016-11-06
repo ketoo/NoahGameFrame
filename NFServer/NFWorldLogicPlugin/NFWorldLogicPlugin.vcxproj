@@ -93,6 +93,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCPVPMatchModule.h" />
+    <ClInclude Include="NFCTeamModule.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
@@ -105,6 +107,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCPVPMatchModule.cpp" />
+    <ClCompile Include="NFCTeamModule.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
