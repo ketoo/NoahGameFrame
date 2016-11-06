@@ -35,7 +35,6 @@ bool NFCTeamModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
-    m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
@@ -251,18 +250,9 @@ bool NFCTeamModule::GetPlayerGameID(const NFGUID& self, int& nGameID)
     std::vector<std::string> xVecValue;
 
     xVecFeild.push_back("GameID");
-    if (!m_pMysqlModule->Query("Player", self.ToString(), xVecFeild, xVecValue))
-    {
-        return false;
-    }
+	nGameID = m_pPlayerRedisModule->GetPlayerCacheGameID(self);
 
-    const std::string& strGameID = xVecValue[0];
-    if (!NF_StrTo(strGameID, nGameID))
-    {
-        return false;
-    }
-
-    return true;
+	return true;
 }
 
 
