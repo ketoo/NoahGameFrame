@@ -9,6 +9,7 @@
     <ClInclude Include="NFCPVPMatchModule.h">
       <Filter>PVPMatchModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCWSSwichServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -20,6 +21,7 @@
     <ClCompile Include="NFCPVPMatchModule.cpp">
       <Filter>PVPMatchModule</Filter>
     </ClCompile>
+    <ClCompile Include="NFCWSSwichServerModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NFRankModule">
