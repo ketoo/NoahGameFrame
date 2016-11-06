@@ -277,11 +277,13 @@ typedef int64_t NFINT64;
 #include <cmath>
 #include <time.h>
 #include <sstream>
+#include <stdio.h>
 #include <common/lexical_cast.hpp>
 
 #ifndef _MSC_VER
 #include <sys/time.h>
 #include <unistd.h>
+#include <sys/prctl.h>
 #define EPOCHFILETIME 11644473600000000ULL
 #else
 #include <windows.h>
