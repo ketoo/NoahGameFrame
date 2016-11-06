@@ -1,0 +1,163 @@
+// -------------------------------------------------------------------------
+//    @FileName         :    NFCGSSwichServerModule.cpp
+//    @Author               :    s.Guo
+//    @Date                 :    2013-06-11
+//    @Module               :    NFCGSSwichServerModule
+//    @Desc                 :
+// -------------------------------------------------------------------------
+
+#include "NFCGSSwichServerModule.h"
+
+bool NFCGSSwichServerModule::Init()
+{
+	return true;
+}
+
+bool NFCGSSwichServerModule::Shut()
+{
+    return true;
+}
+
+bool NFCGSSwichServerModule::Execute()
+{
+    //Î»ÖÃÄØ
+    return true;
+}
+
+bool NFCGSSwichServerModule::AfterInit()
+{
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+
+	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
+	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
+	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCGSSwichServerModule::OnAckSwichServer)) { return false; }
+
+    return true;
+}
+
+bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer, const int nSceneID, const int nGroup)
+{
+	NFMsg::ReqSwitchServer xMsg;
+
+	xMsg.set_sceneid(nSceneID);
+	*xMsg.mutable_selfid() = NFINetModule::NFToPB(self);
+	xMsg.set_self_serverid(pPluginManager->GetAppID());
+	xMsg.set_target_serverid(nServer);
+    xMsg.set_groupid(nGroup);
+
+	int nGate = 0;
+	NFGUID xClient;
+
+    NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo> pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(self);
+	if (!pGateInfo)
+	{
+		return false;
+	}
+
+    nGate = pGateInfo->nGateID;
+    xClient = pGateInfo->xClientID;
+	*xMsg.mutable_client_id() = NFINetModule::NFToPB(xClient);
+	xMsg.set_gate_serverid(nGate);
+
+	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
+
+	return true;
+}
+
+void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
+	{
+		return;
+	}
+
+	if (xMsg.target_serverid() == pPluginManager->GetAppID())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is this server", xMsg.target_serverid(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	ChangeServer(nPlayerID, xMsg.target_serverid(), xMsg.sceneid(), xMsg.groupid());
+}
+
+void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
+	{
+		return;
+	}
+
+	if (xMsg.target_serverid() != pPluginManager->GetAppID())
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is not this server", xMsg.target_serverid(), __FUNCTION__, __LINE__);
+		return;
+	}
+
+	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
+	const int nGateID = xMsg.gate_serverid(); 
+    const int nSceneID = xMsg.sceneid();
+    const int nGroup = xMsg.groupid();
+
+    //Ä¬ÈÏ1ºÅ³¡¾°
+    NFCDataList var;
+    var.AddString("GateID");
+    var.AddInt(nGateID);
+
+    var.AddString("ClientID");
+    var.AddObject(nClientID);
+
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, "Player", "", var);
+    if (NULL == pObject.get())
+    {
+        //ÄÚ´æÐ¹Â©
+        //mRoleBaseData
+        //mRoleFDData
+        return;
+    }
+
+    pObject->SetPropertyInt("LoadPropertyFinish", 1);
+    pObject->SetPropertyInt("GateID", nGateID);
+    pObject->SetPropertyInt("GameID", pPluginManager->GetAppID());
+
+    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
+
+    NFCDataList varEntry;
+    varEntry << pObject->Self();
+    varEntry << NFINT64(0);
+    varEntry << nSceneID;
+    varEntry << nGroup;
+	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+
+    if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
+    {
+        m_pKernelModule->DestroyObject(nPlayerID);
+        return ;
+    }
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
+	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
+}
+
+void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::AckSwitchServer);
+	if (nPlayerID != NFINetModule::PBToNF((xMsg.selfid())))
+	{
+		return;
+	}
+
+	m_pGameServerNet_ServerModule->RemovePlayerGateInfo(nPlayerID);
+    m_pKernelModule->DestroyObject(nPlayerID);
+}
