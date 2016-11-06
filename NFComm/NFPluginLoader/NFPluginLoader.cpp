@@ -33,6 +33,7 @@ std::string strArgvList;
 std::string strPluginName;
 std::string strAppName;
 std::string strAppID;
+std::string strTitleName;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
@@ -220,6 +221,12 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
+	strTitleName = strAppName + "[" + strAppID + "] PID[" + NFGetPID() + "]";
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	SetConsoleTitle(strTitleName.c_str());
+#else
+	setproctitle(strTitleName.c_str());
+#endif
 }
 
 int main(int argc, char* argv[])
