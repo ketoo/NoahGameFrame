@@ -1,6 +1,0 @@
-*.*
-!.gitignore
-!Plugin.xml
-!log.conf
-!log_win.conf
-!RunAll.bat
