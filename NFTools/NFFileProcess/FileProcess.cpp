@@ -299,6 +299,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		// 定义表头行数
+		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
 		const MiniExcelReader::Range& dim = sh.getDimension();
@@ -308,7 +310,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		if (strUpperSheetName == "property")
 		{
 			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -333,7 +335,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 				{
 					std::string name = colNames[r - 1];
 					std::string value = "";
@@ -428,10 +430,11 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
+			const int nRecordLineCount = 11;
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
-			const int nRecordCount = nRowsCount / 10;
+			const int nRecordCount = nRowsCount / nRecordLineCount;
 
-			if (nRowsCount != nRecordCount * 10)
+			if (nRowsCount != nRecordCount * nRecordLineCount)
 			{
 				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
 				printf("Generate faild!\n");
@@ -449,27 +452,29 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string strPrivate = "";
 				std::string strSave = "";
 				std::string strCache = "";
+				std::string strUpload = "";
 				std::string strDesc = "";
 
-				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * 10 + 1, 2);
+				int nRelativeRow = 1;
+				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRecordName = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 2, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRow = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 3, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strCol = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 4, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -482,7 +487,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 5, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -495,7 +500,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 6, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -508,7 +513,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 7, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -521,7 +526,22 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 10, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strUpload = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strUpload = cell->value;
+					}
+				}
+				cell = nullptr;
+				int nTagRow = nRelativeRow++;
+				int nTypeRow = nRelativeRow++;
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strDesc = cell->value;
@@ -538,9 +558,10 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				recordNode->SetAttribute("Row", strRow.c_str());
 				recordNode->SetAttribute("Col", strCol.c_str());
 				recordNode->SetAttribute("Public", strPublic.c_str());
-				recordNode->SetAttribute("Private", strPublic.c_str());
+				recordNode->SetAttribute("Private", strPrivate.c_str());
 				recordNode->SetAttribute("Save", strSave.c_str());
 				recordNode->SetAttribute("Cache", strCache.c_str());
+				recordNode->SetAttribute("Upload", strUpload.c_str());
 				recordNode->SetAttribute("Desc", strDesc.c_str());
 
 				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
@@ -560,7 +581,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					std::string strType = "";
 					std::string strTag = "";
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 8, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTagRow, nRecordCol);
 					if (cell)
 					{
 						strTag = cell->value;
@@ -570,7 +591,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						break;
 					}
 					cell = nullptr;
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 9, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTypeRow, nRecordCol);
 					if (cell)
 					{
 						strType = cell->value;
@@ -688,6 +709,9 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		// 定义数据起始行数
+		int nDataLine = 10;
+
 		std::string strSheetName = sh.getName();
 
 		std::string strUpperSheetName = strSheetName.substr(0, 8);
@@ -711,7 +735,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 		if (vDataIDs.size() <= 0)
 		{
-			for (int r = dim.firstRow + 8; r <= dim.lastRow; r++)
+			for (int r = dim.firstRow + nDataLine - 1; r <= dim.lastRow; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -724,7 +748,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 			}
 		}
 
-		for (int r = dim.firstRow + 8; r <= vDataIDs.size() + 8; r++)
+		for (int r = dim.firstRow + nDataLine - 1; r <= vDataIDs.size() + nDataLine - 1; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
@@ -782,7 +806,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 						delete[] chrArrDesc;
 					}
 				}
-				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 9] + name, value));
+				mDataValues.insert(std::pair<string, string>(vDataIDs[r - nDataLine] + name, value));
 			}
 		}
 		nCurrentCol += dim.lastCol;

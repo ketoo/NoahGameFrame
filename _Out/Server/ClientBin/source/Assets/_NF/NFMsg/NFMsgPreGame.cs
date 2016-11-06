@@ -10,7 +10,6 @@
 // Generated from: NFMsgPreGame.proto
 // Note: requires additional types generated from: NFDefine.proto
 // Note: requires additional types generated from: NFMsgBase.proto
-// Note: requires additional types generated from: NFMsgBaseEx.proto
 namespace NFMsg
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ServerInfoReport")]
@@ -66,6 +65,13 @@ namespace NFMsg
     {
       get { return _server_state; }
       set { _server_state = value; }
+    }
+    private int _server_type;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"server_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int server_type
+    {
+      get { return _server_type; }
+      set { _server_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -196,6 +202,14 @@ namespace NFMsg
     {
       get { return _extra_info; }
       set { _extra_info = value; }
+    }
+    private int _platform_type = default(int);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"platform_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int platform_type
+    {
+      get { return _platform_type; }
+      set { _platform_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
