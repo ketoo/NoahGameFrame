@@ -28,7 +28,6 @@ bool NFCWorldToMasterModule::Shut()
 
 bool NFCWorldToMasterModule::AfterInit()
 {
-    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
