@@ -14,4 +14,4 @@ chmod -R 777  NFPluginLoader
 
 ./NFPluginLoader -d Server=ProxyServer ID=5
 
-ps -A|grep NF
+ps -A|grep Svr
