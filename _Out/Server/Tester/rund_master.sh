@@ -1,9 +1,9 @@
 export LC_ALL="C"
 
-cd Debug
+cd ../Debug/
 
 chmod -R 777  NFPluginLoader_d
 
-../Debug/NFPluginLoader_d Server=MasterServer ID=3
+./NFPluginLoader_d Server=MasterServer ID=3
 
 ps -A|grep NF

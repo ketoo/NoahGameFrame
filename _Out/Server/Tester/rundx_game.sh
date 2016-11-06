@@ -1,9 +1,9 @@
 export LC_ALL="C"
 
-cd Debug
+cd ../Debug/
 
 chmod -R 777  NFPluginLoader_d
 
-../Debug/NFPluginLoader_d PluginX.xml Server=GameServer ID=6
+./NFPluginLoader_d PluginX.xml Server=GameServer ID=6
 
 ps -A|grep NF
