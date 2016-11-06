@@ -272,8 +272,12 @@ typedef int64_t NFINT64;
 //#define GOOGLE_GLOG_DLL_DECL=
 
 ///////////////////////////////////////////////////////////////
+#include <string>
+#include <algorithm>
+#include <cmath>
 #include <time.h>
 #include <sstream>
+#include <common/lexical_cast.hpp>
 
 #ifndef _MSC_VER
 #include <sys/time.h>
@@ -282,6 +286,7 @@ typedef int64_t NFINT64;
 #else
 #include <windows.h>
 #include <time.h>
+#include <process.h>
 #define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
@@ -290,10 +295,12 @@ typedef int64_t NFINT64;
 #define NFSPRINTF sprintf_s
 #define NFSTRICMP stricmp
 #define NFSLEEP(s) Sleep(s)
+#define NFGetPID() lexical_cast<std::string>(getpid())
 #else
 #define NFSPRINTF snprintf
 #define NFSTRICMP strcasecmp
 #define NFSLEEP(s) usleep(s)
+#define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 
 #ifndef NF_DYNAMIC_PLUGIN
@@ -326,10 +333,7 @@ typedef int64_t NFINT64;
 #define NF_SHARE_PTR std::shared_ptr
 #define NF_NEW new
 
-#include <string>
-#include <algorithm>
-#include <cmath>
-#include <common/lexical_cast.hpp>
+
 template<typename DTYPE>
 bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
 {
