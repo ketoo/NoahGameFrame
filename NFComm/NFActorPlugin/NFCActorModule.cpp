@@ -77,7 +77,7 @@ NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 	return mxActorMap.GetElement(nActorIndex);
 }
 
-bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const Theron::Address from)
+bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const int from)
 {
 	mxQueue.Push(message);
 	return true;

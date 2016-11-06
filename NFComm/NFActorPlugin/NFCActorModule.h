@@ -12,6 +12,7 @@
 #include <map>
 #include <string>
 #include "NFCActor.h"
+#include "Theron/Theron.h"
 #include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
@@ -36,7 +37,7 @@ public:
 
     virtual bool SendMsgToActor(const int nActorIndex, const NFGUID& objectID, const int nEventID, const std::string& strArg);
 
-	virtual bool HandlerEx(const NFIActorMessage& message, const Theron::Address from);
+	virtual bool HandlerEx(const NFIActorMessage& message, const int from);
 
 	virtual bool ReleaseActor(const int nActorIndex);
 
