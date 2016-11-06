@@ -222,7 +222,8 @@ void ProcessParameter(int argc, char* argv[])
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle(strTitleName.c_str());
 #else
-	setproctitle(strTitleName.c_str());
+	prctl(PR_SET_NAME, strTitleName.c_str());
+	//setproctitle(strTitleName.c_str());
 #endif
 }
 
