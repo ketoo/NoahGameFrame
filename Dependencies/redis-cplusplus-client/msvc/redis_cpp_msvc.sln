@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "anet_win32", "anet_win32\anet_win32.vcxproj", "{2BAF285D-1AAE-451F-A096-830A5D122CCD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "redis_cpp_tests", "redis_cpp_tests\redis_cpp_tests.vcxproj", "{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD} = {2BAF285D-1AAE-451F-A096-830A5D122CCD}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Debug|Win32.Build.0 = Debug|Win32
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Debug|x64.ActiveCfg = Debug|x64
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Debug|x64.Build.0 = Debug|x64
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|Win32.ActiveCfg = Release|Win32
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|Win32.Build.0 = Release|Win32
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|x64.ActiveCfg = Release|x64
+		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|x64.Build.0 = Release|x64
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Debug|Win32.Build.0 = Debug|Win32
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Debug|x64.ActiveCfg = Debug|x64
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Debug|x64.Build.0 = Debug|x64
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Release|Win32.ActiveCfg = Release|Win32
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Release|Win32.Build.0 = Release|Win32
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Release|x64.ActiveCfg = Release|x64
+		{EE6B6AB6-C33C-422F-8DD1-5F7EE2FF4CBB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

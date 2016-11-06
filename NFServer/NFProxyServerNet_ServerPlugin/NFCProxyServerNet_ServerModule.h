@@ -19,7 +19,6 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
@@ -68,7 +67,6 @@ protected:
 protected:
 
     NFMapEx<NFGUID, int> mxClientIdent;
-    NFCConsistentHash mxConsistentHash;
 protected:
     NFIProxyServerToWorldModule* m_pProxyToWorldModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;
@@ -76,7 +74,6 @@ protected:
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIUUIDModule* m_pUUIDModule;
 	NFINetModule* m_pNetModule;
 
 };

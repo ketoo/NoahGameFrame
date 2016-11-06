@@ -56,11 +56,17 @@ public:
 
     virtual NFIModule* FindModule(const std::string& strModuleName) = 0;
 
-    virtual int AppID() const = 0;
+    virtual int GetAppID() const = 0;
+    virtual void SetAppID(const int nAppID) = 0;
+
     virtual NFINT64 GetInitTime() const = 0;
     virtual NFINT64 GetNowTime() const = 0;
+
 	virtual const std::string& GetConfigPath() const = 0;
 	virtual void SetConfigName(const std::string& strFileName) = 0;
+
+	virtual const std::string& GetAppName() const = 0;
+	virtual void SetAppName(const std::string& strAppName) = 0;
 };
 
 #endif
