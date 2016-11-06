@@ -16,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
-#include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCTeamModule
@@ -59,7 +58,6 @@ protected:
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFILogModule* m_pLogModule;
     NFICommonRedisModule* m_pCommonRedisModule;
-    NFIMysqlModule* m_pMysqlModule;
     NFIPlayerRedisModule* m_pPlayerRedisModule;
 };
 
