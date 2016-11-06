@@ -96,6 +96,7 @@
     <ClInclude Include="NFCPVPMatchModule.h" />
     <ClInclude Include="NFCTeamModule.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
+    <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,7 @@
     <ClCompile Include="NFCPVPMatchModule.cpp" />
     <ClCompile Include="NFCTeamModule.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
+    <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
