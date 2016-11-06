@@ -74,7 +74,8 @@ public:
 			return *((T*)(&m_data));
 		}
 
-		throw std::exception("");
+		std::logic_error ex("Dependencies/common/optional.hpp::line 72 not init");
+		throw std::exception(ex);
 	}
 
 	bool operator == (const optional<T>& rhs) const
