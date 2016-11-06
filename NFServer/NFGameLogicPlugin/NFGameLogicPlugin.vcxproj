@@ -113,10 +113,6 @@
     <ClInclude Include="NFCGmModule.h" />
     <ClInclude Include="NFCGSSwichServerModule.h" />
     <ClInclude Include="NFCGSTeamModule.h" />
-    <ClInclude Include="NFCGuildBroadcastModule.h" />
-    <ClInclude Include="NFCGuildDataModule.h" />
-    <ClInclude Include="NFCGuildEctypeModule.h" />
-    <ClInclude Include="NFCGuildModule.h" />
     <ClInclude Include="NFCHeroModule.h" />
     <ClInclude Include="NFCHeroPropertyModule.h" />
     <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
@@ -156,10 +152,6 @@
     <ClCompile Include="NFCGmModule.cpp" />
     <ClCompile Include="NFCGSSwichServerModule.cpp" />
     <ClCompile Include="NFCGSTeamModule.cpp" />
-    <ClCompile Include="NFCGuildBroadcastModule.cpp" />
-    <ClCompile Include="NFCGuildDataModule.cpp" />
-    <ClCompile Include="NFCGuildEctypeModule.cpp" />
-    <ClCompile Include="NFCGuildModule.cpp" />
     <ClCompile Include="NFCHeroModule.cpp" />
     <ClCompile Include="NFCHeroPropertyModule.cpp" />
     <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
