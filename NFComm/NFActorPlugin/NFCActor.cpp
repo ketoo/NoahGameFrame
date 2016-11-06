@@ -11,7 +11,7 @@
 
 void NFCActor::HandlerEx(const NFIActorMessage& message, const Theron::Address from)
 {
-    m_pActorModule->HandlerEx(message, from);
+    m_pActorModule->HandlerEx(message, from.AsInteger());
 }
 
 void NFCActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
