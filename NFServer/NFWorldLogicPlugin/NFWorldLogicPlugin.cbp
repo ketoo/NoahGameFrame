@@ -80,11 +80,15 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCWorldLogicModule.h" />
-<Unit filename="NFWorldLogicPlugin.h" />
-<Unit filename="dllmain.cpp"/>
-<Unit filename="NFCWorldLogicModule.cpp" />
-<Unit filename="NFWorldLogicPlugin.cpp" />
+		<Unit filename="NFCPVPMatchModule.cpp" />
+		<Unit filename="NFCPVPMatchModule.h" />
+		<Unit filename="NFCTeamModule.cpp" />
+		<Unit filename="NFCTeamModule.h" />
+		<Unit filename="NFCWorldLogicModule.cpp" />
+		<Unit filename="NFCWorldLogicModule.h" />
+		<Unit filename="NFWorldLogicPlugin.cpp" />
+		<Unit filename="NFWorldLogicPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
