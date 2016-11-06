@@ -1,3 +1,3 @@
-kill -9 $(pidof NFPluginLoader_d)
+pgrep NF | xargs kill -s 9
 
-ps -A|grep NF
+ps -A|grep Svr

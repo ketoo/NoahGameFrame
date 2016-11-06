@@ -19,7 +19,6 @@ bool NFCWorldNet_ServerModule::Init()
 bool NFCWorldNet_ServerModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pWorldLogicModule = pPluginManager->FindModule<NFIWorldLogicModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
