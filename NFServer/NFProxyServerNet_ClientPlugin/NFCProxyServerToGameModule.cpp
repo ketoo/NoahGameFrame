@@ -8,8 +8,6 @@
 
 #include "NFCProxyServerToGameModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
-#include "NFComm/NFCore/NFIHeartBeatManager.h"
-#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 
 bool NFCProxyServerToGameModule::Init()
@@ -50,7 +48,7 @@ bool NFCProxyServerToGameModule::AfterInit()
 	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToGameModule::OnSocketGSEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -108,7 +106,7 @@ void NFCProxyServerToGameModule::OnSocketGSEvent(const int nSockIndex, const NF_
 void NFCProxyServerToGameModule::Register(NFINet* pNet)
 {
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -116,7 +114,7 @@ void NFCProxyServerToGameModule::Register(NFINet* pNet)
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");

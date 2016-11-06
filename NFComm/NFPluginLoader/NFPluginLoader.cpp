@@ -13,6 +13,7 @@
 #include <utility>
 #include <thread>
 #include <chrono>
+#include <future>
 #include <functional>
 #include <atomic>
 #include "NFCPluginManager.h"
@@ -30,29 +31,31 @@ bool bExitApp = false;
 std::thread gThread;
 std::string strArgvList;
 std::string strPluginName;
+std::string strAppName;
+std::string strAppID;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #pragma comment( lib, "DbgHelp" )
-// ¥¥Ω®DumpŒƒº˛
+// ÔøΩÔøΩÔøΩÔøΩDumpÔøΩƒºÔøΩ
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
-    // ¥¥Ω®DumpŒƒº˛
+    // ÔøΩÔøΩÔøΩÔøΩDumpÔøΩƒºÔøΩ
     HANDLE hDumpFile = CreateFile(strDumpFilePathName.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    // Dump–≈œ¢
+    // DumpÔøΩÔøΩœ¢
     MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
     dumpInfo.ExceptionPointers = pException;
     dumpInfo.ThreadId = GetCurrentThreadId();
     dumpInfo.ClientPointers = TRUE;
 
-    // –¥»ÎDumpŒƒº˛ƒ⁄»›
+    // –¥ÔøΩÔøΩDumpÔøΩƒºÔøΩÔøΩÔøΩÔøΩÔøΩ
     MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
     CloseHandle(hDumpFile);
 }
 
-// ¥¶¿ÌUnhandled Exceptionµƒªÿµ˜∫Ø ˝
+// ÔøΩÔøΩÔøΩÔøΩUnhandled ExceptionÔøΩƒªÿµÔøΩÔøΩÔøΩÔøΩÔøΩ
 long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 {
     time_t t = time(0);
@@ -84,22 +87,23 @@ void ThreadFunc()
 {
     while (!bExitApp)
     {
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-        //         std::string s;
-        //         std::cin >> s;
-        //         if ( 0 == stricmp( s.c_str(), "exit" ) )
-        //         {
-        //             bExitApp = true;
-        //         }
+        std::string s;
+        std::cin >> s;
+        if ( 0 == stricmp( s.c_str(), "exit" ) )
+        {
+            bExitApp = true;
+            gThread.detach();
+        }
     }
 }
 
 void CreateBackThread()
 {
-    //gThread = std::thread(std::bind(&ThreadFunc));
-    //auto f = std::async (std::launch::async, std::bind(ThreadFunc));
-    //std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
+    gThread = std::thread(std::bind(&ThreadFunc));
+    auto f = std::async (std::launch::deferred, std::bind(ThreadFunc));
+    std::cout << "CreateBackThread, thread ID = " << gThread.get_id() << std::endl;
 }
 
 void InitDaemon()
@@ -125,17 +129,18 @@ void PrintfLogo()
 #endif
 
     std::cout << "\n" << std::endl;
-    std::cout << "°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô" << std::endl;
-    std::cout << "°Ô                                            °Ô" << std::endl;
-    std::cout << "°Ô                 NoahFrame                  °Ô" << std::endl;
-    std::cout << "°Ô   Copyright (c) 2011-2016  NFrame Studio   °Ô" << std::endl;
-    std::cout << "°Ô             All rights reserved.           °Ô" << std::endl;
-    std::cout << "°Ô                                            °Ô" << std::endl;
-    std::cout << "°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô°Ô" << std::endl;
+    std::cout << "************************************************" << std::endl;
+    std::cout << "**                                            **" << std::endl;
+    std::cout << "**                 NoahFrame                  **" << std::endl;
+    std::cout << "**   Copyright (c) 2011-2016  LvSheng.Huang   **" << std::endl;
+    std::cout << "**             All rights reserved.           **" << std::endl;
+    std::cout << "**                                            **" << std::endl;
+    std::cout << "************************************************" << std::endl;
     std::cout << "\n" << std::endl;
 	std::cout << "-d Run itas daemon mode, only on linux" << std::endl;
 	std::cout << "-x Closethe 'X' button, only on windows" << std::endl;
-	std::cout << "name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
+	std::cout << "Instance: name.xml File's name to instead of \"Plugin.xml\" when programs be launched, all platform" << std::endl;
+	std::cout << "Instance: \"ID=number\", \"Server=GameServer\"  when programs be launched, all platform" << std::endl;
 	std::cout << "\n" << std::endl;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -143,16 +148,15 @@ void PrintfLogo()
 #endif
 }
 
-int main(int argc, char* argv[])
+void ProcessParameter(int argc, char* argv[])
 {
-	for (int i = 0; i < argc; i++)
+    for (int i = 0; i < argc; i++)
 	{
 		strArgvList += " ";
 		strArgvList += argv[i];
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 	if (strArgvList.find("-x") != string::npos)
 	{
 		CloseXButton();
@@ -182,6 +186,50 @@ int main(int argc, char* argv[])
 		NFCPluginManager::GetSingletonPtr()->SetConfigName(strPluginName);
 	}
 
+    if (strArgvList.find("Server=") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strAppName = argv[i];
+			if (strAppName.find("Server=") != string::npos)
+			{
+                strAppName.erase(0, 7);
+				break;
+			}
+		}
+
+		NFCPluginManager::GetSingletonPtr()->SetAppName(strAppName);
+	}
+
+	if (strArgvList.find("ID=") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strAppID = argv[i];
+			if (strAppID.find("ID=") != string::npos)
+			{
+                strAppID.erase(0, 3);
+				break;
+			}
+		}
+
+		int nAppID = 0;
+        if(NF_StrTo(strAppID, nAppID))
+        {
+            NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
+        }
+	}
+
+}
+
+int main(int argc, char* argv[])
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#endif
+
+    ProcessParameter(argc, argv);
 
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
@@ -190,7 +238,7 @@ int main(int argc, char* argv[])
 	PrintfLogo();
     CreateBackThread();
 
-    while (!bExitApp)    //DEBUG∞Ê±æ±¿¿££¨RELEASE≤ª±¿
+    while (!bExitApp)
     {
         while (true)
         {

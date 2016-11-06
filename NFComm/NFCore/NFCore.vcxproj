@@ -42,12 +42,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_d</TargetName>
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\Server\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\Server\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -93,12 +93,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFBox.hpp" />
     <ClInclude Include="NFCAddConsistentHash.hpp" />
+    <ClInclude Include="NFCalendar.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
-    <ClInclude Include="NFCEventManager.h" />
-    <ClInclude Include="NFCHeartBeatManager.h" />
     <ClInclude Include="NFCMemManger.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
@@ -107,13 +107,14 @@
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIDataList.h" />
-    <ClInclude Include="NFIEventManager.h" />
-    <ClInclude Include="NFIHeartBeatManager.h" />
+    <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.h" />
+    <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFQueue.h" />
+    <ClInclude Include="NFRay.hpp" />
+    <ClInclude Include="NFSphere.hpp" />
     <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCRecord.h" />
-    <ClInclude Include="NFDefine.h" />
     <ClInclude Include="NFIObject.h" />
     <ClInclude Include="NFIProperty.h" />
     <ClInclude Include="NFIPropertyManager.h" />
@@ -121,20 +122,21 @@
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.h" />
     <ClInclude Include="NFMap.h" />
-    <ClInclude Include="NFTimer.h" />
+    <ClInclude Include="NFTime.h" />
+    <ClInclude Include="NFVector2.hpp" />
+    <ClInclude Include="NFVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NFCalendar.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
-    <ClCompile Include="NFCEventManager.cpp" />
-    <ClCompile Include="NFCHeartBeatManager.cpp" />
     <ClCompile Include="NFCMemManger.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
-    <ClCompile Include="NFTimer.cpp" />
+    <ClCompile Include="NFTime.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
