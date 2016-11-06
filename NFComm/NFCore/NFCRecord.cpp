@@ -18,6 +18,7 @@ NFCRecord::NFCRecord()
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbUpload = false;
 
     mstrRecordName = "";
     mnMaxRow = 0;
@@ -35,6 +36,7 @@ NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbUpload = false;
 
     mstrRecordName = strRecordName;
 
@@ -166,7 +168,7 @@ int NFCRecord::AddRow(const int nRow, const NFIDataList& var)
     }
 
 	RECORD_EVENT_DATA xEventData;
-	xEventData.nOpType = bCover? Cover : Add;
+	xEventData.nOpType = bCover? RECORD_EVENT_DATA::Cover : RECORD_EVENT_DATA::Add;
 	xEventData.nRow = nFindRow;
 	xEventData.nCol = 0;
 	xEventData.strRecordName = mstrRecordName;
@@ -209,18 +211,25 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
 		return false;
 	}
 
-    NFCDataList::TData oldValue;
-    oldValue.SetInt(pVar->GetInt());
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetInt(pVar->GetInt());
 
-    pVar->variantData = value;
+		pVar->variantData = value;
 
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
-    xEventData.nRow = nRow;
-    xEventData.nCol = nCol;
-    xEventData.strRecordName = mstrRecordName;
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
 
-    OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
 
     return true;
 }
@@ -264,18 +273,25 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const double value)
 		return false;
 	}
 
-    NFCDataList::TData oldValue;
-    oldValue.SetFloat(pVar->GetFloat());
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetFloat(pVar->GetFloat());
 
-    pVar->variantData = value;
+		pVar->variantData = value;
 
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
-    xEventData.nRow = nRow;
-    xEventData.nCol = nCol;
-    xEventData.strRecordName = mstrRecordName;
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
 
-    OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
 
     return true;
 }
@@ -319,18 +335,25 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const std::string& val
 		return false;
 	}
 
-    NFCDataList::TData oldValue;
-    oldValue.SetString(pVar->GetString());
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = (std::string)value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetString(pVar->GetString());
 
-    pVar->variantData = (std::string)value;
+		pVar->variantData = (std::string)value;
 
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
-    xEventData.nRow = nRow;
-    xEventData.nCol = nCol;
-    xEventData.strRecordName = mstrRecordName;
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
 
-    OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
 
     return true;
 }
@@ -374,26 +397,157 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
 		return false;
 	}
 
-    NFCDataList::TData oldValue;
-    oldValue.SetObject(pVar->GetObject());
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetObject(pVar->GetObject());
 
-    pVar->variantData = value;
+		pVar->variantData = value;
 
-    RECORD_EVENT_DATA xEventData;
-    xEventData.nOpType = Update;
-    xEventData.nRow = nRow;
-    xEventData.nCol = nCol;
-    xEventData.strRecordName = mstrRecordName;
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
 
-    OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
 
     return true;
 }
 
 bool NFCRecord::SetObject(const int nRow, const std::string& strColTag, const NFGUID& value)
 {
-    int nCol = GetCol(strColTag);
-    return SetObject(nRow, nCol, value);
+	int nCol = GetCol(strColTag);
+	return SetObject(nRow, nCol, value);
+}
+
+bool NFCRecord::SetVector2(const int nRow, const int nCol, const NFVector2& value)
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return false;
+	}
+
+	if (TDATA_VECTOR2 != GetColType(nCol))
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	NFIDataList::TData var;
+	var.SetVector2(value);
+
+	NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+
+	//must have memory
+	if (nullptr == pVar)
+	{
+		return false;
+	}
+
+	if (var == *pVar)
+	{
+		return false;
+	}
+
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetVector2(pVar->GetVector2());
+
+		pVar->variantData = value;
+
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
+
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
+
+	return true;
+}
+
+bool NFCRecord::SetVector3(const int nRow, const int nCol, const NFVector3& value)
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return false;
+	}
+
+	if (TDATA_VECTOR3 != GetColType(nCol))
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	NFIDataList::TData var;
+	var.SetVector3(value);
+
+	NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+
+	//must have memory
+	if (nullptr == pVar)
+	{
+		return false;
+	}
+
+	if (var == *pVar)
+	{
+		return false;
+	}
+
+	if (mtRecordCallback.size() == 0)
+	{
+		pVar->variantData = value;
+	}
+	else
+	{
+		NFCDataList::TData oldValue;
+		oldValue.SetVector3(pVar->GetVector3());
+
+		pVar->variantData = value;
+
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = nCol;
+		xEventData.strRecordName = mstrRecordName;
+
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
+
+	return true;
+}
+
+bool NFCRecord::SetVector2(const int nRow, const std::string& strColTag, const NFVector2& value)
+{
+	int nCol = GetCol(strColTag);
+	return SetVector2(nRow, nCol, value);
+}
+
+bool NFCRecord::SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value)
+{
+	int nCol = GetCol(strColTag);
+	return SetVector3(nRow, nCol, value);
 }
 
 // 获得数据
@@ -413,7 +567,7 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
     for (int i = 0; i < GetCols(); ++i)
     {
         NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, i));
-        if (pVar.get())
+        if (pVar)
         {
             varList.Append(*pVar);
         }
@@ -436,6 +590,14 @@ bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
                 case TDATA_OBJECT:
                     varList.Add(NFGUID());
                     break;
+
+				case TDATA_VECTOR2:
+					varList.Add(NFVector2());
+					break;
+
+				case TDATA_VECTOR3:
+					varList.Add(NFVector3());
+					break;
                 default:
                     return false;
                     break;
@@ -464,7 +626,7 @@ NFINT64 NFCRecord::GetInt(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return 0;
     }
@@ -491,7 +653,7 @@ double NFCRecord::GetFloat(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return 0.0f;
     }
@@ -518,7 +680,7 @@ const std::string& NFCRecord::GetString(const int nRow, const int nCol) const
     }
 
     const NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return NULL_STR;
     }
@@ -545,7 +707,7 @@ const NFGUID& NFCRecord::GetObject(const int nRow, const int nCol) const
     }
 
     const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
-    if (!pVar.get())
+    if (!pVar)
     {
         return NULL_OBJECT;
     }
@@ -557,6 +719,60 @@ const NFGUID& NFCRecord::GetObject(const int nRow, const std::string& strColTag)
 {
     int nCol = GetCol(strColTag);
     return GetObject(nRow, nCol);
+}
+
+const NFVector2& NFCRecord::GetVector2(const int nRow, const int nCol) const
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return NULL_VECTOR2;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return NULL_VECTOR2;
+	}
+
+	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+	if (!pVar)
+	{
+		return NULL_VECTOR2;
+	}
+
+	return pVar->GetVector2();
+}
+
+const NFVector2& NFCRecord::GetVector2(const int nRow, const std::string& strColTag) const
+{
+	int nCol = GetCol(strColTag);
+	return GetVector2(nRow, nCol);
+}
+
+const NFVector3& NFCRecord::GetVector3(const int nRow, const int nCol) const
+{
+	if (!ValidPos(nRow, nCol))
+	{
+		return NULL_VECTOR3;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return NULL_VECTOR3;
+	}
+
+	const  NF_SHARE_PTR<NFIDataList::TData>& pVar = mtRecordVec.at(GetPos(nRow, nCol));
+	if (!pVar)
+	{
+		return NULL_VECTOR3;
+	}
+
+	return pVar->GetVector3();
+}
+
+const NFVector3& NFCRecord::GetVector3(const int nRow, const std::string& strColTag) const
+{
+	int nCol = GetCol(strColTag);
+	return GetVector3(nRow, nCol);
 }
 
 int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult)
@@ -589,6 +805,14 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFIDataList& var, NFIData
         case TDATA_OBJECT:
             return FindObject(nCol, var.Object(nCol), varResult);
             break;
+
+		case TDATA_VECTOR2:
+			return FindVector2(nCol, var.Vector2(nCol), varResult);
+			break;
+
+        case TDATA_VECTOR3:
+			return FindVector3(nCol, var.Vector3(nCol), varResult);
+			break;
 
         default:
             break;
@@ -773,22 +997,109 @@ int NFCRecord::FindObject(const std::string& strColTag, const NFGUID& value, NFI
     return FindObject(nCol, value, varResult);
 }
 
+int NFCRecord::FindVector2(const int nCol, const NFVector2& value, NFIDataList& varResult)
+{
+	if (!ValidCol(nCol))
+	{
+		return -1;
+	}
+
+	if (TDATA_VECTOR2 != mVarRecordType->Type(nCol))
+	{
+		return -1;
+	}
+
+	{
+		for (int64_t i = 0; i < mnMaxRow; ++i)
+		{
+			if (!IsUsed(i))
+			{
+				continue;
+			}
+
+			if (GetVector2(i, nCol) == value)
+			{
+				varResult << i;
+			}
+		}
+
+		return varResult.GetCount();
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector2(const std::string& strColTag, const NFVector2& value, NFIDataList& varResult)
+{
+	if (strColTag.empty())
+	{
+		return -1;
+	}
+
+	int nCol = GetCol(strColTag);
+	return FindVector2(nCol, value, varResult);
+}
+
+int NFCRecord::FindVector3(const int nCol, const NFVector3& value, NFIDataList& varResult)
+{
+	if (!ValidCol(nCol))
+	{
+		return -1;
+	}
+
+	if (TDATA_VECTOR3 != mVarRecordType->Type(nCol))
+	{
+		return -1;
+	}
+
+	{
+		for (int64_t i = 0; i < mnMaxRow; ++i)
+		{
+			if (!IsUsed(i))
+			{
+				continue;
+			}
+
+			if (GetVector3(i, nCol) == value)
+			{
+				varResult << i;
+			}
+		}
+
+		return varResult.GetCount();
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector3(const std::string& strColTag, const NFVector3& value, NFIDataList& varResult)
+{
+	if (strColTag.empty())
+	{
+		return -1;
+	}
+
+	int nCol = GetCol(strColTag);
+	return FindVector3(nCol, value, varResult);
+}
+
 bool NFCRecord::Remove(const int nRow)
 {
     if (ValidRow(nRow))
     {
         if (IsUsed(nRow))
         {
-            RECORD_EVENT_DATA xEventData;
-            xEventData.nOpType = Del;
-            xEventData.nRow = nRow;
-            xEventData.nCol = 0;
-            xEventData.strRecordName = mstrRecordName;
+			RECORD_EVENT_DATA xEventData;
+			xEventData.nOpType = RECORD_EVENT_DATA::Del;
+			xEventData.nRow = nRow;
+			xEventData.nCol = 0;
+			xEventData.strRecordName = mstrRecordName;
 
-            OnEventHandler(mSelf, xEventData, NFCDataList::TData(), NFCDataList::TData());
+			OnEventHandler(mSelf, xEventData, NFCDataList::TData(), NFCDataList::TData());
 
-            mVecUsedState[nRow] = 0;
-            return true;
+			mVecUsedState[nRow] = 0;
+
+			return true;
         }
     }
 
@@ -820,6 +1131,11 @@ const bool NFCRecord::GetCache()
     return mbCache;
 }
 
+const bool NFCRecord::GetUpload()
+{
+	return mbUpload;
+}
+
 const bool NFCRecord::GetPublic()
 {
     return mbPublic;
@@ -848,6 +1164,11 @@ void NFCRecord::SetSave(const bool bSave)
 void NFCRecord::SetCache(const bool bCache)
 {
     mbCache = bCache;
+}
+
+void NFCRecord::SetUpload(const bool bUpload)
+{
+	mbUpload = bUpload;
 }
 
 void NFCRecord::SetPublic(const bool bPublic)
@@ -917,7 +1238,7 @@ bool NFCRecord::SwapRowInfo(const int nOriginRow, const int nTargetRow)
         mVecUsedState[nTargetRow] = nOriginUse;
 
         RECORD_EVENT_DATA xEventData;
-        xEventData.nOpType = Swap;
+        xEventData.nOpType = RECORD_EVENT_DATA::Swap;
         xEventData.nRow = nOriginRow;
         xEventData.nCol = nTargetRow;
         xEventData.strRecordName = mstrRecordName;

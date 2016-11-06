@@ -23,7 +23,6 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
     m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFCProxyServerNet_ServerModule::OnConnectKeyProcess);
@@ -38,7 +37,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddEventCallBack(this, &NFCProxyServerNet_ServerModule::OnSocketClientEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -46,15 +45,13 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
                 const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
-
-                m_pUUIDModule->SetIdentID(nServerID);
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
@@ -112,21 +109,12 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const 
 		//special for distributed
 		if (!pNetObject->GetHashIdentID().IsNull())
 		{
-			NFCMachineNode xNode;
-			if (mxConsistentHash.GetSuitNode(pNetObject->GetHashIdentID().ToString(), xNode))
-			{
-				m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(xNode.GetDataID(), nMsgID, msg, nLen);
-			}
+			m_pProxyServerToGameModule->GetClusterModule()->SendBySuit(pNetObject->GetHashIdentID().ToString(), nMsgID, msg, nLen);
 		}
 		else
 		{
 			NFGUID xHashIdent = NFINetModule::PBToNF(xMsg.hash_ident());
-
-			NFCMachineNode xNode;
-			if (mxConsistentHash.GetSuitNode(xHashIdent.ToString(), xNode))
-			{
-				m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(xNode.GetDataID(), nMsgID, msg, nLen);
-			}
+			m_pProxyServerToGameModule->GetClusterModule()->SendBySuit(xHashIdent.ToString(), nMsgID, msg, nLen);
 		}
 	}
 	else
@@ -356,7 +344,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
 
 void NFCProxyServerNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    NFGUID xClientIdent = m_pUUIDModule->CreateGUID();
+    NFGUID xClientIdent = m_pKernelModule->CreateGUID();
     NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nAddress);
     if (pNetObject)
     {

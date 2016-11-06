@@ -9,7 +9,7 @@ using System.IO;
 using UnityEngine;
 using NFMsg;
 using ProtoBuf;
-using NFCoreEx;
+using NFrame;
 
 namespace NFTCPClient
 {
@@ -35,9 +35,9 @@ namespace NFTCPClient
             FinalLog();
         }
 
-        static public NFCoreEx.NFIDENTID PBToNF(NFMsg.Ident xID)
+        static public NFrame.NFGUID PBToNF(NFMsg.Ident xID)
         {
-            NFCoreEx.NFIDENTID xIdent = new NFCoreEx.NFIDENTID();
+            NFrame.NFGUID xIdent = new NFrame.NFGUID();
             xIdent.nHead64 = xID.svrid;
             xIdent.nData64 = xID.index;
 
@@ -149,9 +149,14 @@ namespace NFTCPClient
 
             if (EGameEventCode.EGEC_ACCOUNT_SUCCESS == xData.event_code)
             {
+                Debug.Log("Login  SUCCESS");
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_PLAYER_LOGIN;
-
+                Debug.Log("QueryWorldList");
                 mNet.mxSendLogic.RequireWorldList();
+            }
+            else
+            {
+                Debug.Log("Login Faild,Code: " + xData.event_code);
             }
         }
 
@@ -168,6 +173,7 @@ namespace NFTCPClient
                 for(int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
+                    Debug.Log("WorldList  ServerId: " + info.server_id + " Name: " + System.Text.Encoding.Default.GetString(info.name) + " Status: " + info.status);
                     aWorldList.Add(info);
                 }
             }
@@ -176,6 +182,7 @@ namespace NFTCPClient
                 for (int i = 0; i < xData.info.Count; ++i)
                 {
                     ServerInfo info = xData.info[i];
+                    Debug.Log("GameList  ServerId: " + info.server_id + " Name: " + System.Text.Encoding.Default.GetString(info.name) + " Status: " + info.status);
                     aServerList.Add(info);
                 }
             }
@@ -197,6 +204,7 @@ namespace NFTCPClient
             mNet.strKey = System.Text.Encoding.Default.GetString(xData.world_key);
             mNet.strWorldIP = System.Text.Encoding.Default.GetString(xData.world_ip);
             mNet.nWorldPort = xData.world_port;
+            Debug.Log("SelectWorld SUCCESS  ProxyIpPort: " + mNet.strWorldIP + ":" + mNet.nWorldPort + " Key: " + mNet.strKey);
         }
 
         private void EGMI_ACK_CONNECT_KEY(MsgHead head, MemoryStream stream)
@@ -209,12 +217,18 @@ namespace NFTCPClient
 
             if (xData.event_code == EGameEventCode.EGEC_VERIFY_KEY_SUCCESS)
             {
+                Debug.Log("VerifyKey SUCCESS");
                 //验证成功
                 mNet.mPlayerState = NFNet.PLAYER_STATE.E_HAS_VERIFY;
                 //mNet.nMainRoleID = PBToNF(xData.event_object);
 
+                Debug.Log("QueryGameList");
                 //申请世界内的服务器列表
                 mNet.mxSendLogic.RequireServerList();
+            }
+            else
+            {
+                Debug.Log("VerifyKey Failed");
             }
         }
 
@@ -228,8 +242,15 @@ namespace NFTCPClient
 
             if (xData.event_code == EGameEventCode.EGEC_SELECTSERVER_SUCCESS)
             {
+                Debug.Log("SelectGame SUCCESS ");
+
+                Debug.Log("QueryRoleList");
                 //申请角色列表
                 mNet.mxSendLogic.RequireRoleList(mNet.strAccount, mNet.nServerID);
+            }
+            else
+            {
+                Debug.Log("SelectGame Failed ");
             }
         }
         
@@ -240,7 +261,8 @@ namespace NFTCPClient
 
             NFMsg.AckRoleLiteInfoList xData = new NFMsg.AckRoleLiteInfoList();
             xData = Serializer.Deserialize<NFMsg.AckRoleLiteInfoList>(new MemoryStream(xMsg.msg_data));
-            
+
+            Debug.Log("QueryRoleList  SUCCESS");
             aCharList.Clear();
             for (int i = 0; i < xData.char_data.Count; ++i)
             {
@@ -288,7 +310,7 @@ namespace NFTCPClient
                 var.AddFloat(xInfo.y);
                 var.AddString("Z");
                 var.AddFloat(xInfo.z);
-                NFIObject xGO = NFCKernel.Instance.CreateObject(PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
+                NFIObject xGO = NFCKernelModule.Instance.CreateObject(PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
                 if (null == xGO)
                 {
                     Debug.LogError("ID冲突: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
@@ -307,7 +329,7 @@ namespace NFTCPClient
 
             for (int i = 0; i < xData.object_list.Count; ++i)
             {
-                NFCKernel.Instance.DestroyObject(PBToNF(xData.object_list[i]));
+                NFCKernelModule.Instance.DestroyObject(PBToNF(xData.object_list[i]));
             }
 		}
 
@@ -322,7 +344,7 @@ namespace NFTCPClient
             {
                 return;
             }
-            float fSpeed = NFCKernel.Instance.QueryPropertyInt(PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
+            float fSpeed = NFCKernelModule.Instance.QueryPropertyInt(PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
             //NFCRenderInterface.Instance.MoveTo(PBToNF(xData.mover), new Vector3(xData.target_pos[0].x, xData.target_pos[0].y, xData.target_pos[0].z), fSpeed, true);
         }
 
@@ -339,7 +361,7 @@ namespace NFTCPClient
             }
 
             //其实就是jump
-            float fSpeed = NFCKernel.Instance.QueryPropertyInt(PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
+            float fSpeed = NFCKernelModule.Instance.QueryPropertyInt(PBToNF(xData.mover), "MOVE_SPEED") / 10000.0f;
             fSpeed *= 1.5f;
 
             //NFCRenderInterface.Instance.MoveImmuneBySpeed(PBToNF(xData.mover), new Vector3(xData.target_pos[0].x, xData.target_pos[0].y, xData.target_pos[0].z), fSpeed, true);
@@ -354,7 +376,7 @@ namespace NFTCPClient
 			NFMsg.ObjectPropertyInt propertyData = new NFMsg.ObjectPropertyInt();
             propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyInt>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(propertyData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(propertyData.player_id));
             NFIPropertyManager propertyManager = go.GetPropertyManager();
 			
 			for(int i = 0; i < propertyData.property_list.Count; i++)
@@ -380,7 +402,7 @@ namespace NFTCPClient
 			NFMsg.ObjectPropertyFloat propertyData = new NFMsg.ObjectPropertyFloat();
             propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyFloat>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(propertyData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(propertyData.player_id));
 			
 			for(int i = 0; i < propertyData.property_list.Count; i++)
 			{
@@ -406,7 +428,7 @@ namespace NFTCPClient
 			NFMsg.ObjectPropertyString propertyData = new NFMsg.ObjectPropertyString();
             propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyString>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(propertyData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(propertyData.player_id));
 
 			for(int i = 0; i < propertyData.property_list.Count; i++)
 			{
@@ -432,7 +454,7 @@ namespace NFTCPClient
 			NFMsg.ObjectPropertyObject propertyData = new NFMsg.ObjectPropertyObject();
             propertyData = Serializer.Deserialize<NFMsg.ObjectPropertyObject>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(propertyData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(propertyData.player_id));
 			
 			for(int i = 0; i < propertyData.property_list.Count; i++)
 			{
@@ -441,7 +463,7 @@ namespace NFTCPClient
                 if (null == property)
                 {
                     NFIDataList varList = new NFCDataList();
-                    varList.AddObject(new NFIDENTID());
+                    varList.AddObject(new NFGUID());
 
                     property = propertyManager.AddProperty(System.Text.Encoding.Default.GetString(propertyData.property_list[i].property_name), varList);
                 }
@@ -458,7 +480,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordInt recordData = new NFMsg.ObjectRecordInt();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordInt>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
 
@@ -476,7 +498,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordFloat recordData = new NFMsg.ObjectRecordFloat();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordFloat>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
 
@@ -494,7 +516,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordString recordData = new NFMsg.ObjectRecordString();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordString>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
 
@@ -512,7 +534,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordObject recordData = new NFMsg.ObjectRecordObject();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordObject>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
 
@@ -531,7 +553,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordSwap recordData = new NFMsg.ObjectRecordSwap();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordSwap>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.origin_record_name));
 
@@ -541,9 +563,9 @@ namespace NFTCPClient
         
         }
 
-        private void ADD_ROW(NFIDENTID self, string strRecordName, NFMsg.RecordAddRowStruct xAddStruct)
+        private void ADD_ROW(NFGUID self, string strRecordName, NFMsg.RecordAddRowStruct xAddStruct)
         {
-            NFIObject go = NFCKernel.Instance.GetObject(self);
+            NFIObject go = NFCKernelModule.Instance.GetObject(self);
             NFIRecordManager xRecordManager = go.GetRecordManager();
 
 
@@ -627,8 +649,8 @@ namespace NFTCPClient
                             break;
                         case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
                             {
-                                varListDesc.AddObject(new NFIDENTID());
-                                varListData.AddObject((NFIDENTID)recordVecData[m]);
+                                varListDesc.AddObject(new NFGUID());
+                                varListData.AddObject((NFGUID)recordVecData[m]);
                             }
                             break;
                         default:
@@ -660,7 +682,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordAddRow recordData = new NFMsg.ObjectRecordAddRow();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordAddRow>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
 
             for (int i = 0; i < recordData.row_data.Count; i++)
@@ -677,7 +699,7 @@ namespace NFTCPClient
 			NFMsg.ObjectRecordRemove recordData = new NFMsg.ObjectRecordRemove();
             recordData = Serializer.Deserialize<NFMsg.ObjectRecordRemove>(new MemoryStream(xMsg.msg_data));
 
-            NFIObject go = NFCKernel.Instance.GetObject(PBToNF(recordData.player_id));
+            NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(recordData.player_id));
             NFIRecordManager recordManager = go.GetRecordManager();
             NFIRecord record = recordManager.GetRecord(System.Text.Encoding.Default.GetString(recordData.record_name));
 
@@ -722,7 +744,7 @@ namespace NFTCPClient
             for (int i = 0; i < xMultiObjectPropertyList.multi_player_property.Count; i++)
             {
                 NFMsg.ObjectPropertyList xPropertyData = xMultiObjectPropertyList.multi_player_property[i];
-                NFIObject go = NFCKernel.Instance.GetObject(PBToNF(xPropertyData.player_id));
+                NFIObject go = NFCKernelModule.Instance.GetObject(PBToNF(xPropertyData.player_id));
                 NFIPropertyManager xPropertyManager = go.GetPropertyManager();
 
                 for (int j = 0; j < xPropertyData.property_int_list.Count; j++)
@@ -777,7 +799,7 @@ namespace NFTCPClient
                     if (null == xProperty)
                     {
                         NFIDataList varList = new NFCDataList();
-                        varList.AddObject(new NFIDENTID());
+                        varList.AddObject(new NFGUID());
 
                         xProperty = xPropertyManager.AddProperty(strPropertyName, varList);
                     }

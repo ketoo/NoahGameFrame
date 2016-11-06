@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFLoginNet_ServerPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Server/Debug/NFLoginNet_ServerPlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -30,15 +30,14 @@
 				</Compiler>
 				<Linker>
 					<Add library="libNFMessageDefine_d" />
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFNet_d.a" />
+					<Add library="$(SolutionDir)/_Out/Server/Debug/NFNet_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
 					<Add library="libprotobuf" />
-					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
+					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFLoginNet_ServerPlugin_d.so $(SolutionDir)/_Out/Server/Debug/NFLoginServer/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -46,7 +45,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFLoginNet_ServerPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Server/Release/NFLoginNet_ServerPlugin" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -67,15 +66,14 @@
 				</Compiler>
 				<Linker>
 					<Add library="libNFMessageDefine" />
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFNet.a" />
+					<Add library="$(SolutionDir)/_Out/Server/Release/NFNet.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
 					<Add library="libprotobuf" />
-					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
+					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFLoginNet_ServerPlugin.so $(SolutionDir)/_Out/Server/Release/NFLoginServer/" />
 					<Mode after="always" />
 				</ExtraCommands>
 				<Environment>
@@ -83,11 +81,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCLoginNet_ServerModule.cpp" />
-		<Unit filename="NFCLoginNet_ServerModule.h" />
-		<Unit filename="NFLoginNet_ServerPlugin.cpp" />
-		<Unit filename="NFLoginNet_ServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCLoginNet_ServerModule.h" />
+<Unit filename="NFLoginNet_ServerPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCLoginNet_ServerModule.cpp" />
+<Unit filename="NFLoginNet_ServerPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

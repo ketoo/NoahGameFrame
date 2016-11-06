@@ -39,7 +39,7 @@ bool NFCLoginToMasterModule::AfterInit()
 	m_pNetClientModule->AddEventCallBack(this, &NFCLoginToMasterModule::OnSocketMSEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -89,7 +89,7 @@ bool NFCLoginToMasterModule::Execute()
 void NFCLoginToMasterModule::Register(NFINet* pNet)
 {
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -97,7 +97,7 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
@@ -177,7 +177,7 @@ void NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int 
         const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<NFMsg::ServerInfoReport> pServerData = mWorldMap.GetElement(xData.server_id());
-        if (!pServerData.get())
+        if (!pServerData)
         {
             pServerData = NF_SHARE_PTR<NFMsg::ServerInfoReport>(NF_NEW NFMsg::ServerInfoReport());
             *pServerData = xData;
