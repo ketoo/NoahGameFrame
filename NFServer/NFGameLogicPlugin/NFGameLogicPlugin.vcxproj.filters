@@ -38,9 +38,6 @@
     <Filter Include="NFCommonConfigModule">
       <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFGuildModule">
-      <UniqueIdentifier>{758bd285-309d-45a8-8950-aa2abb0a6d78}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFGMModule">
       <UniqueIdentifier>{9c627c80-9536-4c28-8b31-2dc81cfd2d6e}</UniqueIdentifier>
     </Filter>
@@ -95,18 +92,6 @@
     </ClInclude>
     <ClInclude Include="NFCCommonConfigModule.h">
       <Filter>NFCommonConfigModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGuildEctypeModule.h">
-      <Filter>NFGuildModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGuildDataModule.h">
-      <Filter>NFGuildModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGuildModule.h">
-      <Filter>NFGuildModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGuildBroadcastModule.h">
-      <Filter>NFGuildModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCGmModule.h">
       <Filter>NFGMModule</Filter>
@@ -193,18 +178,6 @@
     </ClCompile>
     <ClCompile Include="NFCCommonConfigModule.cpp">
       <Filter>NFCommonConfigModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGuildEctypeModule.cpp">
-      <Filter>NFGuildModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGuildDataModule.cpp">
-      <Filter>NFGuildModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGuildModule.cpp">
-      <Filter>NFGuildModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGuildBroadcastModule.cpp">
-      <Filter>NFGuildModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCGmModule.cpp">
       <Filter>NFGMModule</Filter>
