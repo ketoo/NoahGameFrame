@@ -50,7 +50,10 @@
 		<Plugin Name="NFWorldLogicPlugin" />
 		<Plugin Name="NFWorldNet_ClientPlugin" />
 		<Plugin Name="NFWorldNet_ServerPlugin" />
-		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFDataAgent_NosqlPlugin" />
+		<Plugin Name="NFActorPlugin" />
+		<Plugin Name="NFNoSqlPlugin" />
     	<ConfigPath Name="../" />		
 	</WorldServer>
 </XML>
