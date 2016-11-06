@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPropertyModule.h"
-#include "NFComm/NFCore/NFTimer.h"
 
 bool NFCPropertyModule::Init()
 {
@@ -53,10 +52,10 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-        if (pObject.get())
+        if (pObject)
         {
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
-            if (pRecord.get())
+            if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
                 return pRecord->SetInt(eGroupType, strPropertyName, nValue);
@@ -78,10 +77,10 @@ int NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& s
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-        if (pObject.get())
+        if (pObject)
         {
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
-            if (pRecord.get())
+            if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
                 int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
@@ -99,10 +98,10 @@ int NFCPropertyModule::SubPropertyValue(const NFGUID& self, const std::string& s
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-        if (pObject.get())
+        if (pObject)
         {
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
-            if (pRecord.get())
+            if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
                 int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
@@ -156,7 +155,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
         {
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
-            if (pRecord.get())
+            if (pRecord)
             {
                 for (int i = 0; i < NPG_ALL; i++)
                 {
@@ -194,7 +193,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
 int NFCPropertyModule::RefreshBaseProperty(const NFGUID& self)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
-    if (!pRecord.get())
+    if (!pRecord)
     {
         return 1;
     }

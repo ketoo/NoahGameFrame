@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFStart.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
 using NFTCPClient;
@@ -10,7 +15,7 @@ using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using NFCoreEx;
+using NFrame;
 using NFMsg;
 using ProtoBuf;
 
@@ -82,20 +87,22 @@ public class NFStart : MonoBehaviour
             }
         }
 
+        mConfig = new NFConfig();
+        mConfig.Load();
+        mConfig.GetSelectServer(ref strTargetIP, ref nPort);
 
+        NFCKernelModule.Instance.GetLogicClassModule().SetDataPath(mConfig.GetDataPath());
+
+        NFCKernelModule.Instance.Init();
     }
 
     // Use this for initialization
     void Start()
     {
-        mConfig = new NFConfig();
-        mConfig.Load();
-        mConfig.GetSelectServer(ref strTargetIP, ref nPort);
-        String strConfigPath = mConfig.GetConfigPath();
 
-        NFCElementManager.Instance.Load(strConfigPath);
+
+        NFCKernelModule.Instance.AfterInit();
         NFCRenderInterface.Instance.Init();
-
     }
 
     void OnDestroy()
@@ -124,6 +131,7 @@ public class NFStart : MonoBehaviour
                     {
                         if (strTargetIP.Length > 0)
                         {
+                            Debug.Log("Conect to LoginServer  " + strTargetIP + ":" + nPort);
                             mxNetFocus.StartConnect(strTargetIP, nPort);
                             mxNetFocus.mPlayerState = NFNet.PLAYER_STATE.E_WAITING_PLAYER_LOGIN;
                         }
@@ -142,6 +150,7 @@ public class NFStart : MonoBehaviour
                             mxNetFocus.strPassword = GUI.TextField(new Rect(10, 100, 150, 50), mxNetFocus.strPassword);
                             if (GUI.Button (new Rect (10, 200, 150, 50), "Login"))
                             {
+                                Debug.Log("Login  Name: " + mxNetFocus.strAccount + "  Pass: " + mxNetFocus.strPassword);
                                 mxNetFocus.mxSendLogic.LoginPB(mxNetFocus.strAccount, mxNetFocus.strPassword, "");
                             }
                         }
@@ -158,6 +167,7 @@ public class NFStart : MonoBehaviour
                             {
                                 NFStart.Instance.GetFocusNet().nServerID = xInfo.server_id;
                                 mxNetFocus.mxSendLogic.RequireConnectWorld(xInfo.server_id);
+                                Debug.Log("SelectWorld  ServerId: " + xInfo.server_id);
                             }
                         }
                     }
@@ -183,12 +193,14 @@ public class NFStart : MonoBehaviour
                         xNet.nWorldPort = nPort;
 
                         xNet.mPlayerState = NFNet.PLAYER_STATE.E_START_CONNECT_TO_GATE;
+                        Debug.Log("Conect to ProxyServer  " + strWorpdIP + ":" + nPort + "  Key: " + strWorpdKey);
                         xNet.StartConnect(xNet.strWorldIP, nPort);
                         NFStart.Instance.SetFocusNet(xNet);
                     }
                     break;
                 case NFNet.PLAYER_STATE.E_HAS_PLAYER_GATE:
                     {
+                        Debug.Log("VerifyKey  Account: " + NFStart.Instance.GetFocusNet().strAccount + "  Key: " + NFStart.Instance.GetFocusNet().strKey);
                         NFStart.Instance.GetFocusNet().mxSendLogic.RequireVerifyWorldKey(NFStart.Instance.GetFocusNet().strAccount, NFStart.Instance.GetFocusNet().strKey);
                         NFStart.Instance.GetFocusNet().mPlayerState = NFNet.PLAYER_STATE.E_WATING_VERIFY;
                     }
@@ -204,6 +216,7 @@ public class NFStart : MonoBehaviour
                             {
                                 NFStart.Instance.GetFocusNet().nServerID = xInfo.server_id;
                                 NFStart.Instance.GetFocusSender().RequireSelectServer(xInfo.server_id);
+                                Debug.Log("SelectGame ServerId: " + xInfo.server_id);
                             }
                         }
                     }
@@ -221,6 +234,7 @@ public class NFStart : MonoBehaviour
                                     mxNetFocus.strRoleName = System.Text.Encoding.Default.GetString(xLiteInfo.noob_name);
                                     NFStart.Instance.GetFocusNet().nMainRoleID = NFTCPClient.NFCoreExListener.PBToNF(xLiteInfo.id);
                                     mxNetFocus.mxSendLogic.RequireEnterGameServer(NFStart.Instance.GetFocusNet().nMainRoleID, mxNetFocus.strAccount, mxNetFocus.strRoleName, mxNetFocus.nServerID);
+                                    Debug.Log("SelectRoleEnterGame  RoldId: " + NFStart.Instance.GetFocusNet().nMainRoleID + "  RoldName:" + mxNetFocus.strRoleName);
                                 }
                             }
                             
@@ -230,6 +244,7 @@ public class NFStart : MonoBehaviour
                             mxNetFocus.strRoleName = GUI.TextField(new Rect(10, 10, 150, 50), mxNetFocus.strRoleName);
                             if (GUI.Button(new Rect(10, 200, 150, 50), "CreateRole"))
                             {
+                                Debug.Log("CreateRole  RoleName: " + mxNetFocus.strRoleName);
                                 mxNetFocus.mxSendLogic.RequireCreateRole(mxNetFocus.strAccount, mxNetFocus.strRoleName, 0, 0, mxNetFocus.nServerID);
                             }
                         }

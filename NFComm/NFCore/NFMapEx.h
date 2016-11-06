@@ -28,6 +28,32 @@ public:
     {
     };
 
+	virtual bool ExistElement(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr != mObjectList.end())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+/*
+	virtual NF_SHARE_PTR<TD> AddElement(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr == mObjectList.end())
+		{
+			NF_SHARE_PTR<TD> data(NF_NEW TD());
+			mObjectList.insert(typename NFMapOBJECT::value_type(name, data));
+			return data;
+		}
+
+		return NF_SHARE_PTR<TD>();
+	}
+	*/
     virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
     {
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);

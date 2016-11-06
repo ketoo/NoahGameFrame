@@ -1,10 +1,15 @@
+//-----------------------------------------------------------------------
+// <copyright file="NFCRenderInterface.cs">
+//     Copyright (C) 2015-2015 lvsheng.huang <https://github.com/ketoo/NFrame>
+// </copyright>
+//-----------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System;
-using NFCoreEx;
+using NFrame;
 using NFTCPClient;
 using System.Collections.Generic;
 
@@ -32,28 +37,28 @@ public class NFCRenderInterface
 
     public void Init()
     {
-        NFCKernel.Instance.RegisterClassCallBack("Player", OnClassPlayerEventHandler);
-        NFCKernel.Instance.RegisterClassCallBack("NPC", OnClassNPCEventHandler);
+        NFCKernelModule.Instance.RegisterClassCallBack("Player", OnClassPlayerEventHandler);
+        NFCKernelModule.Instance.RegisterClassCallBack("NPC", OnClassNPCEventHandler);
     }
 
-    private void OnClassPlayerEventHandler(NFIDENTID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
+    private void OnClassPlayerEventHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
     {
         if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
         {
-            string strConfigID = NFCKernel.Instance.QueryPropertyString(self, "ConfigID");
+            string strConfigID = NFCKernelModule.Instance.QueryPropertyString(self, "ConfigID");
             Vector3 vec = new Vector3();
-            vec.x = NFCKernel.Instance.QueryPropertyFloat(self, "X");
-            vec.y = NFCKernel.Instance.QueryPropertyFloat(self, "Y");
-            vec.z = NFCKernel.Instance.QueryPropertyFloat(self, "Z");
+            vec.x = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "X");
+            vec.y = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "Y");
+            vec.z = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "Z");
 
             string strPrefabPath = "";
             if (strConfigID.Length <= 0)
             {
-                strPrefabPath = NFCElementManager.Instance.QueryPropertyString("Player", "Prefab");
+                strPrefabPath = NFCKernelModule.Instance.GetElementModule().QueryPropertyString("Player", "Prefab");
             }
             else
             {
-                strPrefabPath = NFCElementManager.Instance.QueryPropertyString(strConfigID, "Prefab");
+                strPrefabPath = NFCKernelModule.Instance.GetElementModule().QueryPropertyString(strConfigID, "Prefab");
             }
 
             //CreateObject(self, strPrefabPath, vec, strClassName);
@@ -65,24 +70,24 @@ public class NFCRenderInterface
         
     }
 
-    private void OnClassNPCEventHandler(NFIDENTID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
+    private void OnClassNPCEventHandler(NFGUID self, int nContainerID, int nGroupID, NFIObject.CLASS_EVENT_TYPE eType, string strClassName, string strConfigIndex)
     {
         if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_CREATE)
         {
-            string strConfigID = NFCKernel.Instance.QueryPropertyString(self, "ConfigID");
+            string strConfigID = NFCKernelModule.Instance.QueryPropertyString(self, "ConfigID");
             Vector3 vec = new Vector3();
-            vec.x = NFCKernel.Instance.QueryPropertyFloat(self, "X");
-            vec.y = NFCKernel.Instance.QueryPropertyFloat(self, "Y");
-            vec.z = NFCKernel.Instance.QueryPropertyFloat(self, "Z");
+            vec.x = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "X");
+            vec.y = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "Y");
+            vec.z = (float)NFCKernelModule.Instance.QueryPropertyFloat(self, "Z");
 
             string strPrefabPath = "";
             if (strConfigID.Length <= 0)
             {
-                strPrefabPath = NFCElementManager.Instance.QueryPropertyString("Player", "Prefab");
+                strPrefabPath = NFCKernelModule.Instance.GetElementModule().QueryPropertyString("Player", "Prefab");
             }
             else
             {
-                strPrefabPath = NFCElementManager.Instance.QueryPropertyString(strConfigID, "Prefab");
+                strPrefabPath = NFCKernelModule.Instance.GetElementModule().QueryPropertyString(strConfigID, "Prefab");
             }
 
             //CreateObject(self, strPrefabPath, vec, strClassName);
@@ -100,12 +105,12 @@ public class NFCRenderInterface
     }
 
     /////////////////////////////////////////////////////////////////
-    private void OnBuildRecordEventHandler(NFIDENTID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar)
+    private void OnBuildRecordEventHandler(NFGUID self, string strRecordName, NFIRecord.eRecordOptype eType, int nRow, int nCol, NFIDataList oldVar, NFIDataList newVar)
     {
  
     }
 
    
     ///////////////////////////////////////////////////////////////////////////////////////
-    Dictionary<NFIDENTID, GameObject> mhtObject = new Dictionary<NFIDENTID, GameObject>();
+    Dictionary<NFGUID, GameObject> mhtObject = new Dictionary<NFGUID, GameObject>();
 }

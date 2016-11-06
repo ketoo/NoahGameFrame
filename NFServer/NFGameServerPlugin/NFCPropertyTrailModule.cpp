@@ -131,7 +131,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
 
     switch (xEventData.nOpType)
     {
-        case NFIRecord::RecordOptype::Add:
+        case RECORD_EVENT_DATA::Add:
         {
             NFCDataList xDataList;
             bool bRet = xRecord->QueryRow(xEventData.nRow, xDataList);
@@ -148,21 +148,21 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
             }
         }
         break;
-        case NFIRecord::RecordOptype::Del:
+        case RECORD_EVENT_DATA::Del:
         {
             stream << " Trail Del Row[" << xEventData.nRow << "]";
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
         }
         break;
-        case NFIRecord::RecordOptype::Swap:
+        case RECORD_EVENT_DATA::Swap:
         {
             stream << " Trail Swap Row[" << xEventData.nRow << "] Row[" << xEventData.nCol << "]";
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
         }
         break;
-        case NFIRecord::RecordOptype::Create:
+        case RECORD_EVENT_DATA::Create:
             break;
-        case NFIRecord::RecordOptype::Update:
+        case RECORD_EVENT_DATA::Update:
         {
             stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
             stream << " [Old] " << oldVar.StringValEx();
@@ -170,9 +170,9 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
         }
         break;
-        case NFIRecord::RecordOptype::Cleared:
+        case RECORD_EVENT_DATA::Cleared:
             break;
-        case NFIRecord::RecordOptype::Sort:
+        case RECORD_EVENT_DATA::Sort:
             break;
         default:
             break;

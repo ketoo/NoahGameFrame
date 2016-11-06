@@ -27,13 +27,14 @@
 *.tlog
 *.log
 *.ilk
+*.user
 
 # Codeblocks
 *.layout
 *.depend
 
 # CMake
-[cC][mM]ake[lL]ists.txt
+#[cC][mM]ake[lL]ists.txt
 
 /_Out/Comm/*
 /Dependencies/gperftools-2.1
@@ -59,11 +60,10 @@
 /_Out/Comm/Release/*.pdb
 /_Out/Comm/Release/*.dll
 
-/_Out/Server/Debug/
 /_Out/Server/NFDataCfg/Ini/
 /_Out/Server/NFDataCfg/Struct/
 /_Out/Server/NFDataCfg/Proto/
-/_Out/Server/Release/
+#/_Out/Server/Release/
 /Dependencies/libevent
 /Dependencies/curl
 /.vs/

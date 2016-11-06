@@ -8,8 +8,8 @@
 
 #include "NFCSceneProcessModule.h"
 #include "NFComm/Config/NFConfig.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 bool NFCSceneProcessModule::Init()
 {
@@ -31,8 +31,10 @@ bool NFCSceneProcessModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
     //////////////////////////////////////////////////////////////////////////
@@ -42,7 +44,7 @@ bool NFCSceneProcessModule::AfterInit()
     //  int nSelfActorID = pPluginManager->GetActorID();
     // #endif
     NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement("Scene");
-    if (pLogicClass.get())
+    if (pLogicClass)
     {
         NFList<std::string>& strIdList = pLogicClass->GetIdList();
 
@@ -66,10 +68,10 @@ bool NFCSceneProcessModule::AfterInit()
 bool NFCSceneProcessModule::CreateSceneObject(const int nSceneID, const int nGroupID)
 {
     NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSceneResource = mtSceneResourceConfig.GetElement(nSceneID);
-    if (pSceneResource.get())
+    if (pSceneResource)
     {
         NF_SHARE_PTR<SceneSeedResource> pResource = pSceneResource->First();
-        while (pResource.get())
+        while (pResource)
         {
             const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::NPC::ClassName());
 
@@ -101,7 +103,7 @@ int NFCSceneProcessModule::CreateCloneScene(const int& nSceneID)
     return nTargetGroupID;
 }
 
-int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
+int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
 {
     if (var.GetCount() != 4
         || !var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT,
@@ -173,7 +175,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEven
     xSceneResult.Add(fY);
     xSceneResult.Add(fZ);
 
-    m_pKernelModule->DoEvent(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult);
+	m_pEventModule->DoEvent(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, xSceneResult);
 
     if (!m_pKernelModule->SwitchScene(self, nTargetScene, nNewGroupID, fX, fY, fZ, 0.0f, var))
     {
@@ -183,12 +185,12 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const int nEven
     }
 
     xSceneResult.Add(nNewGroupID);
-    m_pKernelModule->DoEvent(self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult);
+	m_pEventModule->DoEvent(self, NFED_ON_OBJECT_ENTER_SCENE_RESULT, xSceneResult);
 
     return 0;
 }
 
-int NFCSceneProcessModule::OnLeaveSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var)
+int NFCSceneProcessModule::OnLeaveSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var)
 {
     if (1 != var.GetCount()
         || !var.TypeEx(TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_UNKNOWN))
@@ -231,8 +233,9 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
         {
-            m_pKernelModule->AddEventCallBack(self, NFED_ON_CLIENT_ENTER_SCENE, this, &NFCSceneProcessModule::OnEnterSceneEvent);
-            m_pKernelModule->AddEventCallBack(self, NFED_ON_CLIENT_LEAVE_SCENE, this, &NFCSceneProcessModule::OnLeaveSceneEvent);
+			m_pEventModule->AddEventCallBack(self, NFED_ON_CLIENT_ENTER_SCENE, this, &NFCSceneProcessModule::OnEnterSceneEvent);
+
+			m_pEventModule->AddEventCallBack(self, NFED_ON_CLIENT_LEAVE_SCENE, this, &NFCSceneProcessModule::OnLeaveSceneEvent);
         }
     }
 
@@ -278,7 +281,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
 
     //场景对应资源
     NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement(nSceneID);
-    if (!pSceneResourceMap.get())
+    if (!pSceneResourceMap)
     {
         pSceneResourceMap = NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>>(NF_NEW NFMapEx<std::string, SceneSeedResource>());
         mtSceneResourceConfig.AddElement(nSceneID, pSceneResourceMap);
@@ -305,7 +308,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
         }
 
         NF_SHARE_PTR<SceneSeedResource> pSeedResource = pSceneResourceMap->GetElement(strSeedID);
-        if (!pSeedResource.get())
+        if (!pSeedResource)
         {
             pSeedResource = NF_SHARE_PTR<SceneSeedResource>(NF_NEW SceneSeedResource());
             pSceneResourceMap->AddElement(strSeedID, pSeedResource);

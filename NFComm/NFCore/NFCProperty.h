@@ -9,7 +9,6 @@
 #ifndef NFC_PROPERTY_H
 #define NFC_PROPERTY_H
 
-#include "NFDefine.h"
 #include "NFMap.h"
 #include "NFList.h"
 #include "NFCDataList.h"
@@ -32,6 +31,8 @@ public:
     virtual bool SetFloat(const double value);
     virtual bool SetString(const std::string& value);
     virtual bool SetObject(const NFGUID& value);
+	virtual bool SetVector2(const NFVector2& value);
+	virtual bool SetVector3(const NFVector3& value);
 
     virtual const TDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
@@ -41,17 +42,21 @@ public:
     virtual const bool GetPrivate() const;
     virtual const bool GetCache() const;
     virtual const bool GetRef() const;
+	virtual const bool GetUpload() const;
 
     virtual void SetSave(bool bSave);
     virtual void SetPublic(bool bPublic);
     virtual void SetPrivate(bool bPrivate);
     virtual void SetCache(bool bCache);
-    virtual void SetRef(bool bRef);
+	virtual void SetRef(bool bRef);
+	virtual void SetUpload(bool bUpload);
 
     virtual NFINT64 GetInt() const;
     virtual double GetFloat() const;
     virtual const std::string& GetString() const;
     virtual const NFGUID& GetObject() const;
+	virtual const NFVector2& GetVector2() const;
+	virtual const NFVector3& GetVector3() const;
 
     virtual const NFIDataList::TData& GetValue() const;
     virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const;
@@ -85,6 +90,7 @@ private:
     bool mbSave;
     bool mbCache;
     bool mbRef;
+	bool mbUpload;
 };
 
 #endif

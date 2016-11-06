@@ -351,7 +351,7 @@ protected:
 			case ConnectDataState::RECONNECT:
 			{
 				//¼ÆËãÊ±¼ä
-				if ((pServerData->mnLastActionTime + 30) >= GetPluginManager()->GetNowTime())
+				if ((pServerData->mnLastActionTime + 10) >= GetPluginManager()->GetNowTime())
 				{
 					break;
 				}

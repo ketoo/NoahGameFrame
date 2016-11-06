@@ -275,21 +275,16 @@ typedef int64_t NFINT64;
 #include <time.h>
 #include <sstream>
 
-inline unsigned long NF_GetTickCount()
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    return GetTickCount();
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
-
+#ifndef _MSC_VER
+#include <sys/time.h>
+#include <unistd.h>
+#define EPOCHFILETIME 11644473600000000ULL
 #else
-    struct timespec ts;
-
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-
-    return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+#include <windows.h>
+#include <time.h>
+#define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
-}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define NFSPRINTF sprintf_s
@@ -332,6 +327,8 @@ inline unsigned long NF_GetTickCount()
 #define NF_NEW new
 
 #include <string>
+#include <algorithm>
+#include <cmath>
 #include <common/lexical_cast.hpp>
 template<typename DTYPE>
 bool NF_StrTo(const std::string& strValue, DTYPE& nValue)

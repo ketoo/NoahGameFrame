@@ -1,6 +1,6 @@
 #include "HelloWorld3Module.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 bool HelloWorld3Module::Init()
 {
@@ -10,7 +10,7 @@ bool HelloWorld3Module::Init()
 	return true;
 }
 
-int HelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFIDataList& arg)
+int HelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event, const NFIDataList& arg)
 {
 	//事件回调函数
 	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
@@ -24,7 +24,7 @@ int HelloWorld3Module::OnEvent(const NFGUID& self, const int event, const NFIDat
 int HelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 
-	unsigned long unNowTime = NF_GetTickCount();
+	unsigned long unNowTime = m_pKernelModule->GetTime();
 
 	std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
@@ -40,11 +40,11 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::strin
 
 	if (event == COE_CREATE_HASDATA)
 	{
-		m_pKernelModule->AddEventCallBack(self, 11111111, this, &HelloWorld3Module::OnEvent);
+		m_pEventModule->AddEventCallBack(self, NFEventDefine(1), this, &HelloWorld3Module::OnEvent);
 
-		m_pKernelModule->AddHeartBeat(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 9999 );
+		m_pScheduleModule->AddSchedule(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 10 );
 
-		mLastTime = NF_GetTickCount();
+		mLastTime = m_pKernelModule->GetTime();
 	}
 
 	return 0;
@@ -73,7 +73,9 @@ bool HelloWorld3Module::AfterInit()
 
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	
 	//创建容器，所有的对象均需在容器中
 	m_pKernelModule->CreateScene(1);
 
@@ -81,7 +83,7 @@ bool HelloWorld3Module::AfterInit()
 
 	//创建对象，挂类回调和属性回调,然后事件处理对象
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName(), "", NFCDataList());
-	if (!pObject.get())
+	if (!pObject)
 	{
 		return false;
 	}
@@ -96,7 +98,7 @@ bool HelloWorld3Module::AfterInit()
 	pObject->SetPropertyInt("World", 1111);
 
 
-	m_pKernelModule->DoEvent(pObject->Self(), 11111111, NFCDataList() << int(100) << "200");
+	m_pEventModule->DoEvent(pObject->Self(), NFEventDefine(1), NFCDataList() << int(100) << "200");
 
 	return true;
 }
