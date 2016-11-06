@@ -10,12 +10,11 @@
 #define NFI_COMMONCONFIG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
 #include "NFIBuffConfigModule.h"
 
 
 class NFICommonConfigModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool ClearConfig() = 0;
