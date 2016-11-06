@@ -218,8 +218,9 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
-	strTitleName = strAppName + strAppID + "PID" + NFGetPID();
-	strTitleName.replace(strTitleName.find("Server"), 5, "Svr");
+	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
+	strTitleName.replace(strTitleName.find("Server"), 5, "");
+	strTitleName = "NF" + strTitleName;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle(strTitleName.c_str());
 #else
