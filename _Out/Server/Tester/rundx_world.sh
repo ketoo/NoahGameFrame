@@ -4,6 +4,6 @@ cd Debug
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d -d Server=GameServer ID=6
+./NFPluginLoader_d -d PluginX.xml Server=WorldServer ID=7
 
 ps -A|grep NF

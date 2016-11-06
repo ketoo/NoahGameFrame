@@ -6,4 +6,4 @@ chmod -R 777  NFPluginLoader_d
 
 ./NFPluginLoader_d -d Server=MasterServer ID=3
 
-ps -A|grep Svr
+ps -A|grep NF
