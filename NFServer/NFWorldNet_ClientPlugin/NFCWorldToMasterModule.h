@@ -60,7 +60,6 @@ private:
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIWorldLogicModule* m_pWorldLogicModule;
     NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFINetClientModule* m_pNetClientModule;
 };
