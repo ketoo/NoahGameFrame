@@ -39,7 +39,7 @@ void NFCGameServerToWorldModule::Register(NFINet* pNet)
 {
     //成功就注册
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -47,7 +47,7 @@ void NFCGameServerToWorldModule::Register(NFINet* pNet)
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
@@ -115,7 +115,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 
     // 连接world server
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;

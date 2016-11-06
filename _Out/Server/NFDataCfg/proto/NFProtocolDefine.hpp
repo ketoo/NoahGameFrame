@@ -231,6 +231,9 @@ public:
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
+	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
+	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
+	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
 	static const std::string& HPREGEN(){ static std::string xHPREGEN = "HPREGEN"; return xHPREGEN; } // int
 	static const std::string& SPREGEN(){ static std::string xSPREGEN = "SPREGEN"; return xSPREGEN; } // int
 	static const std::string& MPREGEN(){ static std::string xMPREGEN = "MPREGEN"; return xMPREGEN; } // int
@@ -534,7 +537,6 @@ public:
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
 	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
-	static const std::string& DesignDesc(){ static std::string xDesignDesc = "DesignDesc"; return xDesignDesc; } // string
 	static const std::string& DescID(){ static std::string xDescID = "DescID"; return xDescID; } // string
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
@@ -1009,6 +1011,7 @@ public:
 	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
 	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
 	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
+	static const std::string& Area(){ static std::string xArea = "Area"; return xArea; } // int
 	// Record
 
 };

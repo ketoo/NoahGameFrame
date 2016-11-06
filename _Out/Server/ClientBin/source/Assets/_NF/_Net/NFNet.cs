@@ -10,7 +10,7 @@ using System.Threading;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using NFCoreEx;
+using NFrame;
 
 public class NFNet
 {
@@ -205,7 +205,17 @@ public class NFNet
 
             if (GUI.Button(new Rect(0, 450, 100, 50), "Chat"))
             {
-                mxSendLogic.RequireChat(nMainRoleID, new NFCoreEx.NFIDENTID(), 3, strChatData);
+                mxSendLogic.RequireChat(nMainRoleID, new NFrame.NFGUID(), 3, strChatData);
+                //test
+                if(false)
+                {
+                    int value = int.Parse(strChatData);
+
+                    NFIObject obj = NFCKernelModule.Instance.GetObject(nMainRoleID);
+                    NFIPropertyManager propertyManager = obj.GetPropertyManager();
+                    NFIProperty property = propertyManager.GetProperty("Gold");
+                    property.SetInt(value);
+                }
             }
             strChatTargetID = nTarget.ToString();
 //             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
@@ -219,7 +229,7 @@ public class NFNet
     {
         if (null != mxObjectElement)
         {
-            mxObjectElement.OnGUI(NFCKernel.Instance, nHeight, nWidth);
+            mxObjectElement.OnGUI(NFCKernelModule.Instance, nHeight, nWidth);
         }
         OnOpratorGUI(nHeight, nWidth);
 
@@ -267,9 +277,9 @@ public class NFNet
     public string strRoleName = "";
 
     public int nServerID = 0;
-    public NFIDENTID nMainRoleID = new NFIDENTID();//Ö÷½ÇID
+    public NFGUID nMainRoleID = new NFGUID();//Ö÷½ÇID
 
-    public NFIDENTID nTarget = new NFIDENTID();
+    public NFGUID nTarget = new NFGUID();
     public Int64 nSceneID = 0;
     public Int64 nLineID = 0;
     public PLAYER_STATE mPlayerState = NFNet.PLAYER_STATE.E_NONE;

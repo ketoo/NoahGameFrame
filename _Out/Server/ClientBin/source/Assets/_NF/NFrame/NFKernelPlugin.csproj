@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3C73F6BE-F1AE-412A-AC32-FCCD86498812}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFrame</RootNamespace>
+    <AssemblyName>NFKernelPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\_Out\Lib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\_Out\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface\NFIDataList.cs" />
+    <Compile Include="Interface\NFIElement.cs" />
+    <Compile Include="Interface\NFIElementModule.cs" />
+    <Compile Include="Interface\NFIEvent.cs" />
+    <Compile Include="Interface\NFIEventManager.cs" />
+    <Compile Include="Interface\NFIHeartBeat.cs" />
+    <Compile Include="Interface\NFIHeartBeatManager.cs" />
+    <Compile Include="Interface\NFIKernelModule.cs" />
+    <Compile Include="Interface\NFILogicClass.cs" />
+    <Compile Include="Interface\NFILogicClassModule.cs" />
+    <Compile Include="Interface\NFIObject.cs" />
+    <Compile Include="Interface\NFIProperty.cs" />
+    <Compile Include="Interface\NFIPropertyManager.cs" />
+    <Compile Include="Interface\NFIRecord.cs" />
+    <Compile Include="Interface\NFIRecordManager.cs" />
+    <Compile Include="NFCDataList.cs" />
+    <Compile Include="NFCElement.cs" />
+    <Compile Include="NFCElementModule.cs" />
+    <Compile Include="NFCEvent.cs" />
+    <Compile Include="NFCEventModule.cs" />
+    <Compile Include="Object\NFCHeartBeat.cs" />
+    <Compile Include="Object\NFCHeartBeatManager.cs" />
+    <Compile Include="NFCKernelModule.cs" />
+    <Compile Include="NFCLogicClass.cs" />
+    <Compile Include="NFCLogicClassModule.cs" />
+    <Compile Include="Object\NFCObject.cs" />
+    <Compile Include="Object\NFCProperty.cs" />
+    <Compile Include="Object\NFCPropertyManager.cs" />
+    <Compile Include="Object\NFCRecord.cs" />
+    <Compile Include="Object\NFCRecordManager.cs" />
+    <Compile Include="NFKernelPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFPluginModule\NFComm.csproj">
+      <Project>{fafe0576-7d94-468c-b0fb-95c2c7f33dcd}</Project>
+      <Name>NFComm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).dll $(SolutionDir)\_Out\$(Configuration)\NFLoginServer\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).pdb $(SolutionDir)\_Out\$(Configuration)\NFLoginServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).dll $(SolutionDir)\_Out\$(Configuration)\NFWorldServer\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).pdb $(SolutionDir)\_Out\$(Configuration)\NFWorldServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).dll $(SolutionDir)\_Out\$(Configuration)\NFMasterServer\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).pdb $(SolutionDir)\_Out\$(Configuration)\NFMasterServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).dll $(SolutionDir)\_Out\$(Configuration)\NFProxyServer\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).pdb $(SolutionDir)\_Out\$(Configuration)\NFProxyServer\$(ProjectName).pdb
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).dll $(SolutionDir)\_Out\$(Configuration)\NFGameServer\$(ProjectName).dll
+copy /y $(SolutionDir)\_Out\Lib\$(ProjectName).pdb $(SolutionDir)\_Out\$(Configuration)\NFGameServer\$(ProjectName).pdb</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

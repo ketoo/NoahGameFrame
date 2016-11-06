@@ -36,7 +36,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	m_pNetModule->AddEventCallBack(this, &NFCWorldNet_ServerModule::OnSocketEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
-    if (xLogicClass.get())
+    if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
@@ -44,7 +44,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
         {
             const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
-            if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->AppID() == nServerID)
+            if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->GetAppID() == nServerID)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
@@ -94,7 +94,7 @@ void NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const int nSockInde
     {
         const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
         NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
-        if (!pServerData.get())
+        if (!pServerData)
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(xData.server_id(), pServerData);
@@ -141,7 +141,7 @@ void NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess(const int nSockInd
         const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<ServerData> pServerData =  mGameMap.GetElement(xData.server_id());
-        if (!pServerData.get())
+        if (!pServerData)
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
             mGameMap.AddElement(xData.server_id(), pServerData);
@@ -218,10 +218,10 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockIn
         const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
 
         NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.GetElement(xData.server_id());
-        if (!pServerData.get())
+        if (!pServerData)
         {
             pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-            mGameMap.AddElement(xData.server_id(), pServerData);
+            mProxyMap.AddElement(xData.server_id(), pServerData);
         }
 
         pServerData->nFD = nSockIndex;
@@ -268,7 +268,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy()
     NFMsg::ServerInfoReportList xData;
 
     NF_SHARE_PTR<ServerData> pServerData =  mProxyMap.First();
-    while (pServerData.get())
+    while (pServerData)
     {
         SynGameToProxy(pServerData->nFD);
 
@@ -281,7 +281,7 @@ void NFCWorldNet_ServerModule::SynGameToProxy(const int nFD)
     NFMsg::ServerInfoReportList xData;
 
     NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
-    while (pServerData.get())
+    while (pServerData)
     {
         NFMsg::ServerInfoReport* pData = xData.add_server_list();
         *pData = *(pServerData->pData);
@@ -296,7 +296,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
     //不管是game还是proxy都要找出来,替他反注册
     NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
-    while (pServerData.get())
+    while (pServerData)
     {
         if (nAddress == pServerData->nFD)
         {
@@ -389,7 +389,7 @@ void NFCWorldNet_ServerModule::OnOfflineProcess(const int nSockIndex, const int 
 bool NFCWorldNet_ServerModule::SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer)
 {
     NF_SHARE_PTR<ServerData> pData = mGameMap.GetElement(nGameID);
-    if (pData.get())
+    if (pData)
     {
         const int nFD = pData->nFD;
 		m_pNetModule->SendMsgPB(eMsgID, xData, nFD, nPlayer);
@@ -531,14 +531,14 @@ int NFCWorldNet_ServerModule::OnRecordEnter(const NFIDataList& argVar, const NFI
     NFMsg::MultiObjectRecordList xPrivateMsg;
 
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (pObject.get())
+    if (pObject)
     {
         NFMsg::ObjectRecordList* pPublicData = NULL;
         NFMsg::ObjectRecordList* pPrivateData = NULL;
 
         NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
         NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First();
-        while (pRecord.get())
+        while (pRecord)
         {
             if (!pRecord->GetPublic() && !pRecord->GetPrivate())
             {
@@ -702,7 +702,7 @@ int NFCWorldNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, const N
     //1.public发送给所有人
     //2.如果自己在列表中，再次发送private数据
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
-    if (pObject.get())
+    if (pObject)
     {
         NFMsg::ObjectPropertyList* pPublicData = xPublicMsg.add_multi_player_property();
         NFMsg::ObjectPropertyList* pPrivateData = xPrivateMsg.add_multi_player_property();
@@ -712,7 +712,7 @@ int NFCWorldNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, const N
 
         NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
         NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->First();
-        while (pPropertyInfo.get())
+        while (pPropertyInfo)
         {
             if (pPropertyInfo->Changed())
             {

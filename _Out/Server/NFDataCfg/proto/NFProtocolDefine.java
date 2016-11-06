@@ -208,6 +208,9 @@ public class EffectData {
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
+	public static final String HP = "HP"; // int
+	public static final String MP = "MP"; // int
+	public static final String SP = "SP"; // int
 	public static final String HPREGEN = "HPREGEN"; // int
 	public static final String SPREGEN = "SPREGEN"; // int
 	public static final String MPREGEN = "MPREGEN"; // int
@@ -497,7 +500,6 @@ public class Item {
 	public static final String Level = "Level"; // int
 	public static final String Job = "Job"; // string
 	public static final String Quality = "Quality"; // int
-	public static final String DesignDesc = "DesignDesc"; // string
 	public static final String DescID = "DescID"; // string
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
@@ -960,6 +962,7 @@ public class Server {
 	public static final String IP = "IP"; // string
 	public static final String Port = "Port"; // int
 	public static final String Type = "Type"; // int
+	public static final String Area = "Area"; // int
 	// Record
 
 }
