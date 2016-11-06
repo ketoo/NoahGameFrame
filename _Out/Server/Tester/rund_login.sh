@@ -4,6 +4,6 @@ cd Debug
 
 chmod -R 777  NFPluginLoader_d
 
-./NFPluginLoader_d -d Server=LoginServer ID=4
+./NFPluginLoader_d Server=LoginServer ID=4
 
 ps -A|grep NF
