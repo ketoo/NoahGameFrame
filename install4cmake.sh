@@ -36,7 +36,12 @@ chmod -R 755 ./BuildNF.CMake.Release.sh
 ./BuildNF.CMake.Release.sh
 cd ../../
 
+cd _Out/Server/
+chmod 777 *.sh
+cd  Tester/
+chmod 777 *.sh
 
+cd ../../../
 # generate makefile
 #chmod -R 755 Build4Makefile.sh
 #./Build4Makefile.sh
