@@ -33,29 +33,27 @@ std::string strArgvList;
 std::string strPluginName;
 std::string strAppName;
 std::string strAppID;
+std::string strTitleName;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #pragma comment( lib, "DbgHelp" )
-// ����Dump�ļ�
+
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
-    // ����Dump�ļ�
+    //Dump
     HANDLE hDumpFile = CreateFile(strDumpFilePathName.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    // Dump��Ϣ
     MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
     dumpInfo.ExceptionPointers = pException;
     dumpInfo.ThreadId = GetCurrentThreadId();
     dumpInfo.ClientPointers = TRUE;
 
-    // д��Dump�ļ�����
     MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
     CloseHandle(hDumpFile);
 }
 
-// ����Unhandled Exception�Ļص�����
 long ApplicationCrashHandler(EXCEPTION_POINTERS* pException)
 {
     time_t t = time(0);
@@ -220,6 +218,15 @@ void ProcessParameter(int argc, char* argv[])
         }
 	}
 
+	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
+	strTitleName.replace(strTitleName.find("Server"), 6, "");
+	strTitleName = "NF" + strTitleName;
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	SetConsoleTitle(strTitleName.c_str());
+#else
+	prctl(PR_SET_NAME, strTitleName.c_str());
+	//setproctitle(strTitleName.c_str());
+#endif
 }
 
 int main(int argc, char* argv[])
