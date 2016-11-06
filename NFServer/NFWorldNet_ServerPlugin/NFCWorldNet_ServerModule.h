@@ -102,7 +102,6 @@ private:
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIWorldLogicModule* m_pWorldLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
