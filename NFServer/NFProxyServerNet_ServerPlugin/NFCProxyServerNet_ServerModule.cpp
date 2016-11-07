@@ -9,6 +9,7 @@
 #include "NFCProxyServerNet_ServerModule.h"
 #include "NFProxyServerNet_ServerPlugin.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCProxyServerNet_ServerModule::Init()
 {

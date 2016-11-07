@@ -11,6 +11,7 @@
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCWorldToMasterModule::Init()
 {
@@ -46,7 +47,7 @@ bool NFCWorldToMasterModule::AfterInit()
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type();
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
             const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
             if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
             {
