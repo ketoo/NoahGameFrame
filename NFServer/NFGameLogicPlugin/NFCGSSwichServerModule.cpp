@@ -20,7 +20,7 @@ bool NFCGSSwichServerModule::Shut()
 
 bool NFCGSSwichServerModule::Execute()
 {
-    //Î»ÖÃÄØ
+    //Î»ï¿½ï¿½ï¿½ï¿½
     return true;
 }
 
@@ -110,26 +110,26 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     const int nSceneID = xMsg.sceneid();
     const int nGroup = xMsg.groupid();
 
-    //Ä¬ÈÏ1ºÅ³¡¾°
+	if (!AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
+    {
+        return;
+    }
+
     NFCDataList var;
-    var.AddString("GateID");
+    var.AddString(NFrame::Player::GateID());
     var.AddInt(nGateID);
 
-    var.AddString("ClientID");
-    var.AddObject(nClientID);
-
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, "Player", "", var);
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
     if (NULL == pObject.get())
     {
-        //ÄÚ´æÐ¹Â©
         //mRoleBaseData
         //mRoleFDData
         return;
     }
 
-    pObject->SetPropertyInt("LoadPropertyFinish", 1);
-    pObject->SetPropertyInt("GateID", nGateID);
-    pObject->SetPropertyInt("GameID", pPluginManager->GetAppID());
+    pObject->SetPropertyInt(NFrame::Player::LoadPropertyFinish(), 1);
+    pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
+    pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 
     m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 

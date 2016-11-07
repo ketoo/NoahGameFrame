@@ -3,7 +3,7 @@
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCBriefSkillConsumeProcessModule
-//    @Desc             :   ¼¼ÄÜÏû·Ñ»úÖÆÀà
+//    @Desc             :   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ»ï¿½ï¿½ï¿½ï¿½ï¿½
 // -------------------------------------------------------------------------
 
 #include "NFCBriefSkillConsumeProcessModule.h"
@@ -25,7 +25,6 @@ bool NFCBriefSkillConsumeProcessModule::AfterInit()
 	m_pSkillModule = pPluginManager->FindModule<NFISkillModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 
-    //¶ÌÈÐÀà¼¼ÄÜ
     //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF, this );
 
     return true;
@@ -44,7 +43,6 @@ bool NFCBriefSkillConsumeProcessModule::Execute()
 
 int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFIDataList& other )
 {
-    //ÊÇ·ñ±»³ÁÄ¬,CD,¾àÀëµÈ
 
     return 0;
 }
@@ -100,15 +98,15 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
 //         switch ( nConsumeType )
 //         {
 //             case ConsumeType_Value:
-//                 //¾ø¶ÔÖµ
+//                 //ï¿½ï¿½ï¿½ï¿½Öµ
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) );
 //                 break;
 //             case ConsumeType_CurrentPercent:
-//                 //µ±Ç°Á¿°Ù·Ö±È
+//                 //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ù·Ö±ï¿½
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfCurProperty->QueryInt();
 //                 break;
 //             case ConsumeType_MaxPercent:
-//                 //×î´óÁ¿°Ù·Ö±È
+//                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·Ö±ï¿½
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfMaxProperty->QueryInt();
 //                 break;
 //             default:
@@ -154,7 +152,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
     //for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
     {
-        //ÏÈ²â¶¨Ä¿±êÊÇ·ñÓÐ´ËÊôÐÔ(ÆäÊµÊÇµ£ÐÄÅä´íÁË)
+        //ï¿½È²â¶¨Ä¿ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Êµï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
         for ( int j = 0; j < other.GetCount(); j++ )
         {
             NFGUID identOther = other.Object( j );
@@ -169,7 +167,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
                 continue;
             }
 
-            //¶Ìµ¶ÉËº¦£¬Ö»ÄÜÊÇHP,MPÖ®ÀàµÄÓÐ×î´óÉÏÏÞÖµµÄÊôÐÔ
+            //ï¿½Ìµï¿½ï¿½Ëºï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½HP,MPÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //             std::string strCurProperty = valueEffectProperty.StringVal( i );
 //             std::string strMaxProperty = "MAX" + strCurProperty;
 //             NFIProperty* pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
@@ -193,8 +191,8 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
 int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
-    //¸½¼ÓÐ§¹û
-    //1ÉËº¦ÊôÐÔ(Àà±ð)
+    //ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
+    //1ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
     //2BUFF(Get,Send)
 //     NFIPropertyManager* pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
 //     if ( pPropertyManager == NULL )
@@ -223,7 +221,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 // 
 //     for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
 //     {
-//         //ÏÈ²â¶¨Ä¿±êÊÇ·ñÓÐ´ËÊôÐÔ(ÆäÊµÊÇµ£ÐÄÅä´íÁË)
+//         //ï¿½È²â¶¨Ä¿ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Êµï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 //         for ( int j = 0; j < other.GetCount(); j++ )
 //         {
 //             NFGUID identOther = other.ObjectVal( j );
@@ -238,7 +236,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //                 continue;
 //             }
 // 
-//             //¶Ìµ¶ÉËº¦£¬Ö»ÄÜÊÇHP,MPÖ®ÀàµÄÓÐ×î´óÉÏÏÞÖµµÄÊôÐÔ
+//             //ï¿½Ìµï¿½ï¿½Ëºï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½HP,MPÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //             std::string strCurProperty = valueEffectProperty.StringVal( i );
 //             std::string strMaxProperty = "MAX" + strCurProperty;
 //             NFIProperty* pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
@@ -254,9 +252,9 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //                 pLastProperty->SetObject( self );
 //             }
 // 
-//             //°Ù·Ö±È¾ÍÒÔ×î´óÖµµÄ°Ù·Ö±È(Ä¬ÈÏ)
+//             //ï¿½Ù·Ö±È¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Ä°Ù·Ö±ï¿½(Ä¬ï¿½ï¿½)
 //             int nDamageValue = 0;
-//             int nCurValue = pOtherCurProperty->QueryInt();//²»ÄÜ±ÞÊ¬
+//             int nCurValue = pOtherCurProperty->QueryInt();//ï¿½ï¿½ï¿½Ü±ï¿½Ê¬
 //             if ( nCurValue <= 0 )
 //             {
 //                 continue;
@@ -267,15 +265,15 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //             switch ( nDamageType )
 //             {
 //             case 0:
-//                 //¾ø¶ÔÖµ
+//                 //ï¿½ï¿½ï¿½ï¿½Öµ
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) );
 //                 break;
 //             case 1:
-//                 //µ±Ç°Á¿°Ù·Ö±È
+//                 //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ù·Ö±ï¿½
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nCurValue;
 //                 break;
 //             case 2:
-//                 //×î´óÁ¿°Ù·Ö±È
+//                 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·Ö±ï¿½
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nMaxValue;
 //                 break;
 //             default:
@@ -284,12 +282,12 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 // 
 //             if ( 0 == nDamageSubType )
 //             {
-//                 //¼õ(ÉËÑª¼¼ÄÜ)--Ä¿Ç°Ã»¼ÆËã·ÀÓù,ÎäÆ÷¹¥»÷µÈ
+//                 //ï¿½ï¿½(ï¿½ï¿½Ñªï¿½ï¿½ï¿½ï¿½)--Ä¿Ç°Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //                 nCurValue = m_pPropertyModule->ConsumeHP( identOther, nDamageValue );
 //             }
 //             else
 //             {
-//                 //Ôö(¼ÓÑª¼¼ÄÜ)
+//                 //ï¿½ï¿½(ï¿½ï¿½Ñªï¿½ï¿½ï¿½ï¿½)
 //                 nCurValue = m_pPropertyModule->AddHP( identOther, nDamageValue );
 //             }
 // 
