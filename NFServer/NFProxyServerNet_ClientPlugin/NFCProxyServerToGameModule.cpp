@@ -9,6 +9,7 @@
 #include "NFCProxyServerToGameModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCProxyServerToGameModule::Init()
 {
@@ -111,7 +112,7 @@ void NFCProxyServerToGameModule::Register(NFINet* pNet)
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type();
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
             const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
