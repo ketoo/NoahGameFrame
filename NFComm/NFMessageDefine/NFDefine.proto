@@ -82,6 +82,7 @@ enum EGameMsgID
 	EGMI_GTW_GAME_REFRESH			= 42;
 
 	EGMI_STS_NET_INFO				= 50;
+	EGMI_STS_SERVER_REPORT          = 90;
 	EGMI_STS_HEART_BEAT				= 100;
 	//////////////////////////////////////////////////////////////////////////////////////
 	EGMI_REQ_LOGIN									= 101;     // 登陆帐号
@@ -316,6 +317,7 @@ enum EGameMsgID
 	
 	EGMI_REQ_CREATEPVPECTYPE					= 10102; 	// 申请pvp副本
 	EGMI_ACK_CREATEPVPECTYPE					= 10103; 	// 返回pvp副本的信息，并拉人
+	EGMI_REQ_QUERY_SERVER_STATUS                 = 10200;
 	
 	/////////////////////Base SLG MSG/////////////////////////////////////
 	EGMI_REQ_BUY_FORM_SHOP						= 20000;//申请从商店种植建筑
