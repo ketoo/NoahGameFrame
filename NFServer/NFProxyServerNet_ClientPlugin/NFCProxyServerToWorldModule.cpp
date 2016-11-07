@@ -9,6 +9,7 @@
 #include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCProxyServerToWorldModule::Init()
 {
@@ -98,7 +99,7 @@ void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF
 
 void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName();
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
