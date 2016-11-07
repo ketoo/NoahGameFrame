@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ：    NFINetModule.h
-//    @Author           ：    LvSheng.Huang
-//    @Date             ：    2012-12-15
-//    @Module           ：    NFINetModule
+//    @FileName         锟斤拷    NFINetModule.h
+//    @Author           锟斤拷    LvSheng.Huang
+//    @Date             锟斤拷    2012-12-15
+//    @Module           锟斤拷    NFINetModule
 //
 // -------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ enum NF_SERVER_TYPES
 
 ////////////////////////////////////////////////////////////////////////////
 
-// 客户端消息处理宏
+// 锟酵伙拷锟斤拷锟斤拷息锟斤拷锟斤拷锟斤拷
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
@@ -139,6 +139,16 @@ public:
 
 		return AddReceiveCallBack(nMsgID, functorPtr);
 	}
+    
+    void RemoveReceiveCallBack(const int nMsgID)
+	{
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+		if (mxReceiveCallBack.end() == it)
+		{
+			mxReceiveCallBack.erase(it);
+		}
+	}
+
 	template<typename BaseType>
 	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
@@ -190,7 +200,7 @@ public:
             return false;
         }
 
-        //把上次的数据处理了
+        //锟斤拷锟较次碉拷锟斤拷锟捷达拷锟斤拷锟斤拷
         KeepAlive();
 
         return m_pNet->Execute();
@@ -381,7 +391,7 @@ public:
             return false;
         }
 
-        //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+        //playerid锟斤拷要锟斤拷锟斤拷锟斤拷转锟斤拷锟斤拷息锟斤拷时锟斤拷锟斤拷识锟斤拷使锟矫ｏ拷锟斤拷锟斤拷使锟矫诧拷使锟斤拷
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)
@@ -424,7 +434,7 @@ public:
         NFMsg::MsgBase xMsg;
         xMsg.set_msg_data(strData.data(), strData.length());
 
-        //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+        //playerid锟斤拷要锟斤拷锟斤拷锟斤拷转锟斤拷锟斤拷息锟斤拷时锟斤拷锟斤拷识锟斤拷使锟矫ｏ拷锟斤拷锟斤拷使锟矫诧拷使锟斤拷
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)

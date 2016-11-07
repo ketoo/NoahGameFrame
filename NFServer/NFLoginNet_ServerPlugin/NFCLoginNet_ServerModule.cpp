@@ -136,10 +136,9 @@ void NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nM
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
 	if (pNetObject)
 	{
-		//��û�е�¼��
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
+			int nState = 0;//successful
 			if (0 != nState)
 			{
 				std::ostringstream strLog;
@@ -271,4 +270,7 @@ void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nM
 	printf("NFNet || �Ƿ���Ϣ:unMsgID=%d\n", nMsgID);
 }
 
-
+NFINetModule* NFCLoginNet_ServerModule::GetNetModule()
+{
+	return m_pNetModule;
+}
