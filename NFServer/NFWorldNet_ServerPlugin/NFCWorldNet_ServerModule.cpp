@@ -293,7 +293,6 @@ void NFCWorldNet_ServerModule::SynGameToProxy(const int nFD)
 
 void NFCWorldNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
-    //������game����proxy��Ҫ�ҳ���,������ע��
     NF_SHARE_PTR<ServerData> pServerData =  mGameMap.First();
     while (pServerData)
     {
@@ -311,25 +310,22 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const int nAddress)
 
     //////////////////////////////////////////////////////////////////////////
 
-    int nServerID = 0;
     pServerData =  mProxyMap.First();
     while (pServerData)
     {
         if (nAddress == pServerData->nFD)
         {
-            nServerID = pServerData->pData->server_id();
+            int nServerID = pServerData->pData->server_id();
+            mProxyMap.RemoveElement(nServerID);
             break;
         }
 
         pServerData = mProxyMap.Next();
     }
-
-    mProxyMap.RemoveElement(nServerID);
 }
 
 void NFCWorldNet_ServerModule::OnClientConnected(const int nAddress)
 {
-
 
 }
 
