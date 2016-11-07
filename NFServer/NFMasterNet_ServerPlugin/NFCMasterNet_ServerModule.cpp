@@ -8,6 +8,9 @@
 
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -414,3 +417,88 @@ void NFCMasterNet_ServerModule::InvalidMessage(const int nSockIndex, const int n
 {
 	printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
 }
+
+
+std::string NFCMasterNet_ServerModule::GetServersStatus()
+{
+	rapidjson::Document doc;
+	rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+	rapidjson::Value root(rapidjson::kObjectType);
+
+	root.AddMember("code", 0, allocator);
+	root.AddMember("errMsg", "", allocator);
+
+	rapidjson::Value logins(rapidjson::kArrayType);
+	std::shared_ptr<ServerData> pServerData = mLoginMap.First();
+	while (pServerData)
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		logins.PushBack(server, allocator);
+		pServerData = mLoginMap.Next();
+	}
+	root.AddMember("logins", logins, allocator);
+
+	rapidjson::Value worlds(rapidjson::kArrayType);
+	pServerData = mWorldMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		worlds.PushBack(server, allocator);
+		pServerData = mWorldMap.Next();
+	}
+	root.AddMember("worlds", worlds, allocator);
+
+	rapidjson::Value proxys(rapidjson::kArrayType);
+	pServerData = mProxyMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		proxys.PushBack(server, allocator);
+		pServerData = mProxyMap.Next();
+	}
+	root.AddMember("proxys", proxys, allocator);
+
+	rapidjson::Value games(rapidjson::kArrayType);
+	pServerData = mGameMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		games.PushBack(server, allocator);
+		pServerData = mGameMap.Next();
+	}
+	root.AddMember("games", games, allocator);
+
+	rapidjson::StringBuffer jsonBuf;
+	rapidjson::Writer<rapidjson::StringBuffer> jsonWriter(jsonBuf);
+	root.Accept(jsonWriter);
+	return jsonBuf.GetString();
+}
+
