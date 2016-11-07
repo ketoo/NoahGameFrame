@@ -8,6 +8,7 @@
 
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -251,11 +252,11 @@ bool NFCMasterNet_ServerModule::AfterInit()
             const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port();
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
                 const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP);
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
