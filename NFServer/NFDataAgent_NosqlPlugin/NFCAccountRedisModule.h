@@ -17,12 +17,16 @@
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCAccountRedisModule : public NFIAccountRedisModule
 {
 public:
 
-	NFCAccountRedisModule(NFIPluginManager* p);
+	NFCAccountRedisModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
+	}
 
 	virtual bool Init();
 	virtual bool Shut();

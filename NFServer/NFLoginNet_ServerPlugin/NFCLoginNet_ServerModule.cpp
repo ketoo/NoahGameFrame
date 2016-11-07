@@ -8,6 +8,7 @@
 
 #include "NFCLoginNet_ServerModule.h"
 #include "NFLoginNet_ServerPlugin.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 const std::string PROPERTY_ACCOUNT = "Account";
 const std::string PROPERTY_VERIFIED = "Verified";
@@ -54,7 +55,7 @@ bool NFCLoginNet_ServerModule::AfterInit()
 		std::string strId;
 		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
 		{
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type();
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
 			{

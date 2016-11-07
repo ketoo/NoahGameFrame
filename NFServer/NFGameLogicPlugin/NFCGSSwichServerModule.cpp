@@ -110,10 +110,10 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     const int nSceneID = xMsg.sceneid();
     const int nGroup = xMsg.groupid();
 
-	if (!AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
-    {
-        return;
-    }
+	//if (!AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
+ //   {
+ //       return;
+ //   }
 
     NFCDataList var;
     var.AddString(NFrame::Player::GateID());
