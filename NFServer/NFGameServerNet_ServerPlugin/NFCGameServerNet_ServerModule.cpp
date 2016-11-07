@@ -142,7 +142,6 @@ void NFCGameServerNet_ServerModule::OnSocketPSEvent(const int nSockIndex, const 
 
 void NFCGameServerNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
-	//ֻ���������ض���
 	int nServerID = 0;
 	NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
 	while (pServerData)
@@ -166,7 +165,6 @@ void NFCGameServerNet_ServerModule::OnClientConnected(const int nAddress)
 
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	//�ڽ�����Ϸ֮ǰnPlayerIDΪ�������ص�FD
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
 	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
@@ -211,30 +209,25 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
         return;
     }
 
-	//Ĭ��1�ų���
 	int nSceneID = 1;
 	NFCDataList var;
-	var.AddString("Name");
+	var.AddString(NFrame::Player::Name());
 	var.AddString(xMsg.name());
 
-	var.AddString("GateID");
+	var.AddString(NFrame::Player::GateID());
 	var.AddInt(nGateID);
-
-	var.AddString("ClientID");
-	var.AddObject(nClientID);
 
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
 	if (NULL == pObject)
 	{
-		//�ڴ�й©
 		//mRoleBaseData
 		//mRoleFDData
 		return;
 	}
 
-	pObject->SetPropertyInt("LoadPropertyFinish", 1);
-	pObject->SetPropertyInt("GateID", nGateID);
-	pObject->SetPropertyInt("GameID", pPluginManager->GetAppID());
+	pObject->SetPropertyInt(NFrame::Player::LoadPropertyFinish(), 1);
+	pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
+	pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 
 	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 
