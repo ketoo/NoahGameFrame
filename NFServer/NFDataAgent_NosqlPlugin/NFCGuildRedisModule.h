@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFCGuildRedisModule : public NFIGuildRedisModule
 {

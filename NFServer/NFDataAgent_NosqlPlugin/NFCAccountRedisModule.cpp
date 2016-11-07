@@ -7,11 +7,6 @@
 // -------------------------------------------------------------------------
 #include "NFCAccountRedisModule.h"
 
-NFCAccountRedisModule::NFCAccountRedisModule(NFIPluginManager * p)
-{
-	pPluginManager = p;
-}
-
 bool NFCAccountRedisModule::Init()
 {
 	return true;
