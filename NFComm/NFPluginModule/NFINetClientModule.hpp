@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFINetClientModule.hpp
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2015-01-4
-//    @Module           £º    NFINetClientModule
+//    @FileName         ï¿½ï¿½    NFINetClientModule.hpp
+//    @Author           ï¿½ï¿½    LvSheng.Huang
+//    @Date             ï¿½ï¿½    2015-01-4
+//    @Module           ï¿½ï¿½    NFINetClientModule
 //
 // -------------------------------------------------------------------------
 
@@ -110,6 +110,15 @@ public:
 
 		return false;
 	}
+	
+	void RemoveReceiveCallBack(const int nMsgID)
+	{
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+		if (mxReceiveCallBack.end() == it)
+		{
+			mxReceiveCallBack.erase(it);
+		}
+	}
 
 	template<typename BaseType>
 	int AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
@@ -139,13 +148,13 @@ public:
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-	//ÂãÊý¾Ý,·¢Ê±×é°ü
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
     void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData)
     {
         SendByServerID(nServerID, nMsgID, strData.c_str(), strData.length());
     }
 
-    //ÂãÊý¾Ý,·¢Ê±×é°ü
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
     void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
@@ -159,7 +168,7 @@ public:
         }
     }
 
-	//ÂãÊý¾Ý,·¢Ê±×é°ü
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 	void SendToAllServer(const int nMsgID, const std::string& strData)
 	{
 		NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
@@ -350,7 +359,7 @@ protected:
 			break;
 			case ConnectDataState::RECONNECT:
 			{
-				//¼ÆËãÊ±¼ä
+				//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 				if ((pServerData->mnLastActionTime + 10) >= GetPluginManager()->GetNowTime())
 				{
 					break;
@@ -457,7 +466,7 @@ private:
             NF_SHARE_PTR<ConnectData> xServerData = mxServerMap.GetElement(xInfo.nGameID);
             if (nullptr == xServerData)
             {
-				//Õý³££¬Ìí¼ÓÐÂ·þÎñÆ÷
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½
 				xServerData = NF_SHARE_PTR<ConnectData>(NF_NEW ConnectData());
 
 				xServerData->nGameID = xInfo.nGameID;
@@ -488,7 +497,7 @@ private:
 
     void AddServerWeightData(NF_SHARE_PTR<ConnectData> xInfo)
     {
-        //¸ù¾ÝÈ¨ÖØ´´½¨½Úµã
+        //ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ø´ï¿½ï¿½ï¿½ï¿½Úµï¿½
         for (int j = 0; j < EConstDefine_DefaultWeith; ++j)
         {
             NFCMachineNode vNode(j);
