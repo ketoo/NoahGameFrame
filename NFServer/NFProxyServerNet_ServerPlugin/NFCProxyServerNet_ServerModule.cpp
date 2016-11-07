@@ -36,22 +36,22 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCProxyServerNet_ServerModule::OnSocketClientEvent);
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
@@ -71,20 +71,12 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 
 bool NFCProxyServerNet_ServerModule::Shut()
 {
-
     return true;
 }
 
 bool NFCProxyServerNet_ServerModule::Execute()
 {
     return m_pNetModule->Execute();
-}
-
-int NFCProxyServerNet_ServerModule::HB_OnConnectCheckTime(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var)
-{
-    m_pKernelModule->DestroyObject(self);
-
-    return 0;
 }
 
 void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -104,6 +96,7 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const 
 		//state error
 		return;
 	}
+
 	if (xMsg.has_hash_ident())
 	{
 		//special for distributed
@@ -135,22 +128,24 @@ void NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, c
     bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
-        //可以进入,设置标志，选单服,心跳延迟,进入gs创建角色和删除角色,这里只是转发
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject)
         {
+            //this net-object verify successful and set state as true
             pNetObject->SetConnectKeyState(1);
+            //this net-object bind a user's account
             pNetObject->SetAccount(xMsg.account());
 
             NFMsg::AckEventResult xSendMsg;
             xSendMsg.set_event_code(NFMsg::EGEC_VERIFY_KEY_SUCCESS);
-            *xSendMsg.mutable_event_client() = NFINetModule::NFToPB(pNetObject->GetClientID());//让前端记得自己的fd，后面有一些验证
+            *xSendMsg.mutable_event_client() = NFINetModule::NFToPB(pNetObject->GetClientID());
 
 			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_KEY, xSendMsg, nSockIndex);
         }
     }
     else
     {
+        //if verify failed then close this connect
 		m_pNetModule->GetNet()->CloseNetObject(nSockIndex);
     }
 }
@@ -187,13 +182,12 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const int nAddress)
         int nGameID = pNetObject->GetGameID();
         if (nGameID > 0)
         {
+            //when a net-object bind a account then tell that game-server
             if (!pNetObject->GetUserID().IsNull())
             {
-                //掉线
                 NFMsg::ReqLeaveGameServer xData;
 
                 NFMsg::MsgBase xMsg;
-                //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
                 *xMsg.mutable_player_id() = NFINetModule::NFToPB(pNetObject->GetUserID());
 
                 if (!xData.SerializeToString(xMsg.mutable_msg_data()))
@@ -211,8 +205,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const int nAddress)
             }
         }
 
-        NFGUID xClientIdent = pNetObject->GetClientID();
-        mxClientIdent.RemoveElement(xClientIdent);
+        mxClientIdent.RemoveElement(pNetObject->GetClientID());
     }
 }
 
@@ -231,7 +224,7 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex,
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject)
         {
-            //now this client bind a game server, after this time, all message will be sent to this game server who bind with client
+            //now this client bind a game server, all message will be sent to this game server whom bind with client
             pNetObject->SetGameID(xMsg.world_id());
 
             NFMsg::AckEventResult xMsg;
@@ -356,7 +349,6 @@ void NFCProxyServerNet_ServerModule::OnClientConnected(const int nAddress)
 
 void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //在没有正式进入游戏之前，nPlayerID都是FD
     NFGUID nPlayerID;
     NFMsg::ReqRoleList xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -367,7 +359,6 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        //数据匹配
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
             && pNetObject->GetConnectKeyState() > 0
@@ -380,7 +371,6 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
                 return;
             }
 
-            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
             xMsg.mutable_player_id()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
@@ -396,9 +386,6 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
 
 void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //在没有正式进入游戏之前，nPlayerID都是FD
-
-
     NFGUID nPlayerID;
     NFMsg::ReqCreateRole xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -409,7 +396,6 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        //数据匹配
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
             && pNetObject->GetConnectKeyState() > 0
@@ -421,8 +407,8 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
             {
                 return;
             }
-
-            //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+            
+            //the clientid == playerid before the player entre the game-server
             xMsg.mutable_player_id()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
@@ -438,7 +424,6 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
 
 void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //在没有正式进入游戏之前，nPlayerID都是FD
     NFGUID nPlayerID;
     NFMsg::ReqDeleteRole xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -449,7 +434,6 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
 	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        //数据匹配
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
             && pNetObject->GetConnectKeyState() > 0
@@ -463,7 +447,6 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
 
 void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //在没有正式进入游戏之前，nPlayerID都是FD
     NFGUID nPlayerID;
     NFMsg::ReqEnterGameServer xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -474,7 +457,6 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
     NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        //数据匹配
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
         if (pNetObject
             && pNetObject->GetConnectKeyState() > 0
@@ -489,7 +471,6 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
                 return;
             }
 
-            //playerid在进入游戏之前都是FD，其他时候是真实的ID
             xMsg.mutable_player_id()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 
             std::string strMsg;
