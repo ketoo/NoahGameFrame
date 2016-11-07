@@ -6,6 +6,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFNet/NFCHttpNetModule.h"
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 class NFCMasterNet_HttpServerModule
 	: public NFIMasterNet_HttpServerModule
