@@ -1,6 +1,6 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-#if YX_PLATFORM == YX_PLATFORM_WIN
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
@@ -50,7 +50,7 @@ int NFCHttpNet::InitServer(const unsigned short port)
 	struct evhttp *http;
 	struct evhttp_bound_socket *handle;
 
-#if YX_PLATFORM == YX_PLATFORM_WIN
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	WSADATA WSAData;
 	WSAStartup(0x101, &WSAData);
 #else
