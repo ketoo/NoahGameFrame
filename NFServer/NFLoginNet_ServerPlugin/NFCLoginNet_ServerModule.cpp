@@ -47,20 +47,20 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCLoginNet_ServerModule::OnSocketClientEvent);
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		NFList<std::string>& strIdList = xLogicClass->GetIdList();
 		std::string strId;
 		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
 		{
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type();
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
+				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -136,7 +136,7 @@ void NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nM
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
 	if (pNetObject)
 	{
-		//»¹Ã»ÓÐµÇÂ¼¹ý
+		//ï¿½ï¿½Ã»ï¿½Ðµï¿½Â¼ï¿½ï¿½
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
 			int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
@@ -181,7 +181,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 		return;
 	}
 
-	//Ã»µÇÂ¼¹ý
+	//Ã»ï¿½ï¿½Â¼ï¿½ï¿½
 	if (pNetObject->GetConnectKeyState() <= 0)
 	{
 		return;
@@ -268,7 +268,7 @@ void NFCLoginNet_ServerModule::OnLogOut(const int nSockIndex, const int nMsgID, 
 
 void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || ·Ç·¨ÏûÏ¢:unMsgID=%d\n", nMsgID);
+	printf("NFNet || ï¿½Ç·ï¿½ï¿½ï¿½Ï¢:unMsgID=%d\n", nMsgID);
 }
 
 
