@@ -9,6 +9,7 @@
 #include "NFCLoginToMasterModule.h"
 #include "NFLoginNet_ClientPlugin.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCLoginToMasterModule::Init()
 {
@@ -88,7 +89,7 @@ bool NFCLoginToMasterModule::Execute()
 
 void NFCLoginToMasterModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName();
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();

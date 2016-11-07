@@ -21,7 +21,7 @@ bool NFCLoginLogicModule::Shut()
     return true;
 }
 
-int NFCLoginLogicModule::OnLoginProcess(const NFGUID& object, const std::string& strAccount, const std::string& strPwd)
+void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFINetModule* pNetModule = m_pLoginNet_ServerModule->GetNetModule();
 
@@ -63,7 +63,6 @@ int NFCLoginLogicModule::OnLoginProcess(const NFGUID& object, const std::string&
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}
 	}
-	return 0;
 }
 
 bool NFCLoginLogicModule::ReadyExecute()
