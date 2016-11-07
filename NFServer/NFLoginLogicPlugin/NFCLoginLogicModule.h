@@ -25,6 +25,7 @@ public:
 
     virtual bool Init();
     virtual bool Shut();
+    virtual bool ReadyExecute();
     virtual bool Execute();
 
     virtual bool AfterInit();

@@ -346,6 +346,17 @@ bool NFCPluginManager::CheckConfig()
     return true;
 }
 
+bool NFCPluginManager::ReadyExecute()
+{
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->ReadyExecute();
+    }
+
+    return true;
+}
+
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
