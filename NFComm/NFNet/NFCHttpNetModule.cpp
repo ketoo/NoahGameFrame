@@ -33,7 +33,7 @@ bool NFCHttpNetModule::Execute()
 int NFCHttpNetModule::InitServer(const unsigned short nPort)
 {
 	mHttpNet = new NFCHttpNet(this, &NFCHttpNetModule::OnReceiveNetPack);
-	std::ostringstream stream; stream << "Open http port:" << nPort; mLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0,0),stream.str(),"", __FUNCTION__, __LINE__);
+	std::cout << "Open http port:" << nPort;
 	return mHttpNet->InitServer(nPort);
 }
 
