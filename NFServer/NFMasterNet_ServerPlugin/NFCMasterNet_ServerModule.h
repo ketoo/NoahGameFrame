@@ -38,6 +38,8 @@ public:
     virtual void LogReceive(const char* str) {}
     virtual void LogSend(const char* str) {}
 
+	virtual std::string GetServersStatus();
+
 protected:
 
     void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -76,8 +78,10 @@ private:
     NFINT64 mnLastLogTime;
 
     //serverid,data
+	NFMapEx<int, ServerData> mLoginMap;
     NFMapEx<int, ServerData> mWorldMap;
-    NFMapEx<int, ServerData> mLoginMap;
+	NFMapEx<int, ServerData> mProxyMap;
+	NFMapEx<int, ServerData> mGameMap;
 
 
     NFIElementModule* m_pElementModule;
