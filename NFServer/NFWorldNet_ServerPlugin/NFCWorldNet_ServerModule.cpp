@@ -389,8 +389,9 @@ void NFCWorldNet_ServerModule::OnOfflineProcess(const int nSockIndex, const int 
 
 void NFCWorldNet_ServerModule::OnTranspondServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
 {
+    NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;
-	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg,NFGUID()))
+	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg, xGUID))
 	{
 		return;
 	}
