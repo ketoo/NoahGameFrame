@@ -9,6 +9,7 @@
 #include "NFCProxyServerToWorldModule.h"
 #include "NFProxyServerNet_ClientPlugin.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCProxyServerToWorldModule::Init()
 {
@@ -98,22 +99,22 @@ void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF
 
 void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
@@ -200,22 +201,22 @@ bool NFCProxyServerToWorldModule::AfterInit()
 
 	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 ConnectData xServerData;
 
@@ -236,7 +237,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 
 void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //±£³Ö¼ÇÂ¼,Ö±µ½ÏÂÏß,»òÕß1·ÖÖÓ²»ÉÏÏß¼´¿ÉÉ¾³ý
+    //ï¿½ï¿½ï¿½Ö¼ï¿½Â¼,Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½É¾ï¿½ï¿½
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
     if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
