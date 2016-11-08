@@ -30,6 +30,8 @@ public:
 
     virtual bool CheckConfig();
 
+    virtual bool ReadyExecute();
+
     virtual bool BeforeShut();
 
     virtual bool Shut();
