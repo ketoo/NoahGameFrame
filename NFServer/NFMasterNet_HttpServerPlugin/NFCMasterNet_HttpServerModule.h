@@ -1,11 +1,10 @@
 #ifndef NFC_MASTERNET_HTTP_MODULE_H
 #define NFC_MASTERNET_HTTP_MODULE_H
 
-#include "NFIMasterNet_HttpServerModule.h"
+#include "NFComm/NFPluginModule/NFIMasterNet_HttpServerModule.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFNet/NFCHttpNetModule.h"
+#include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
 class NFCMasterNet_HttpServerModule
@@ -29,7 +28,7 @@ protected:
 
 private:
 	NFIKernelModule* mKernelModule;
-	NFIHttpNetModule* mHttpNetModule;
+	NFIHttpServerModule* mHttpNetModule;
 
 	NFIMasterNet_ServerModule* mMasterServerModule;
 };

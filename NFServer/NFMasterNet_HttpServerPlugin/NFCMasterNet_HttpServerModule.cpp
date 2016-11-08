@@ -4,7 +4,7 @@
 
 bool NFCMasterNet_HttpServerModule::Init()
 {
-	mHttpNetModule = new NFCHttpNetModule(pPluginManager);
+	mHttpNetModule = new NFIHttpServerModule(pPluginManager);
 
 	mKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	mMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
