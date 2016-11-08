@@ -37,23 +37,23 @@ bool NFCGameServerToWorldModule::Execute()
 
 void NFCGameServerToWorldModule::Register(NFINet* pNet)
 {
-    //³É¹¦¾Í×¢²á
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    //ï¿½É¹ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 NFMsg::ServerInfoReportList xMsg;
                 NFMsg::ServerInfoReport* pData = xMsg.add_server_list();
@@ -157,23 +157,23 @@ bool NFCGameServerToWorldModule::AfterInit()
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
-    // Á¬½Óworld server
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    // ï¿½ï¿½ï¿½ï¿½world server
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 ConnectData xServerData;
 
