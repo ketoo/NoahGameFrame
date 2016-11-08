@@ -11,15 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCHttpNetModule.cpp" />
     <ClCompile Include="NFCNet.cpp" />
     <ClCompile Include="NFCHttpNet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCHttpNetModule.h" />
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFIHttpNet.h" />
-    <ClInclude Include="NFIHttpNetModule.h" />
     <ClInclude Include="NFINet.h" />
     <ClInclude Include="NFCHttpNet.h" />
   </ItemGroup>
