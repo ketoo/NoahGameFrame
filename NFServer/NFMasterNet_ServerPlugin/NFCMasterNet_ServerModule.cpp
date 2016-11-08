@@ -469,7 +469,7 @@ void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, c
 	pServerData->nFD = nFd;
 	*(pServerData->pData) = msg;
 
-	std::cout << "ServerReport:"<<msg.server_name() << std::endl;
+	//std::cout << "ServerReport:"<<msg.server_name() << std::endl;
 
 }
 
