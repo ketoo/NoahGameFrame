@@ -30,6 +30,7 @@ public:
     NFCProxyServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
 
     virtual bool Init();
@@ -49,6 +50,7 @@ protected:
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
     void Register(NFINet* pNet);
+	void ServerReport();
 
     void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -73,6 +75,7 @@ private:
     NFMapEx<std::string, ClientConnectData> mWantToConnectMap;
 
 private:
+	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
     NFIProxyLogicModule* m_pProxyLogicModule;
