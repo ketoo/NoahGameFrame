@@ -20,7 +20,7 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 	mHttpNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_QUERY_SERVER_STATUS, this, &NFCMasterNet_HttpServerModule::OnQueryServerStatus);
 	mHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpServerModule::InvalidMessage);
 
-	mHttpNetModule->InitServer(7000);
+	mHttpNetModule->InitServer(80);
 	return true;
 }
 
