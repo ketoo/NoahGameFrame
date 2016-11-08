@@ -8,6 +8,7 @@
 
 #include "NFCLoginNet_ServerModule.h"
 #include "NFLoginNet_ServerPlugin.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 const std::string PROPERTY_ACCOUNT = "Account";
 const std::string PROPERTY_VERIFIED = "Verified";
@@ -47,20 +48,20 @@ bool NFCLoginNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCLoginNet_ServerModule::OnSocketClientEvent);
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		NFList<std::string>& strIdList = xLogicClass->GetIdList();
 		std::string strId;
 		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
 		{
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
+				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -136,10 +137,9 @@ void NFCLoginNet_ServerModule::OnLoginProcess(const int nSockIndex, const int nM
 	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
 	if (pNetObject)
 	{
-		//还没有登录过
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
+			int nState = 0;//successful
 			if (0 != nState)
 			{
 				std::ostringstream strLog;
@@ -181,7 +181,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 		return;
 	}
 
-	//没登录过
+	//没锟斤拷录锟斤拷
 	if (pNetObject->GetConnectKeyState() <= 0)
 	{
 		return;
@@ -268,7 +268,10 @@ void NFCLoginNet_ServerModule::OnLogOut(const int nSockIndex, const int nMsgID, 
 
 void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || 非法消息:unMsgID=%d\n", nMsgID);
+	printf("NFNet || 锟角凤拷锟斤拷息:unMsgID=%d\n", nMsgID);
 }
 
-
+NFINetModule* NFCLoginNet_ServerModule::GetNetModule()
+{
+	return m_pNetModule;
+}
