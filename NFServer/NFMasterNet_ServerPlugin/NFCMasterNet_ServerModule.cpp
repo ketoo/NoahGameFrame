@@ -193,7 +193,6 @@ void NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const
         return;
     }
 
-    //ת���͵�����������
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
@@ -343,7 +342,6 @@ void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 void NFCMasterNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    //��������ɶ������
 }
 
 void NFCMasterNet_ServerModule::SynWorldToLogin()
@@ -359,7 +357,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
         pServerData = mWorldMap.Next();
     }
 
-    //�㲥������loginserver
+    //loginserver
     pServerData =  mLoginMap.First();
     while (pServerData)
     {
@@ -417,13 +415,14 @@ void NFCMasterNet_ServerModule::OnHeartBeat(const int nSockIndex, const int nMsg
 
 void NFCMasterNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || �Ƿ���Ϣ:unMsgID=%d\n", nMsgID);
+	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
 
 void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
 {
+    NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;
-	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg,NFGUID()))
+	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg, xGUID))
 	{
 		return;
 	}
@@ -539,10 +538,10 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 	while (pServerData.get())
 	{
 		rapidjson::Value server(rapidjson::kObjectType);
-		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
-		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
-		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
-		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember(NFrame::Server::ServerID(), pServerData->pData->server_id(), allocator);
+		//server.AddMember(NFrame::Server::Ser"servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember(NFrame::Server::IP(), rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember(NFrame::Server::Port(), pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
 
