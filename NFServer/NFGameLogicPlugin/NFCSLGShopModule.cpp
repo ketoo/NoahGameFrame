@@ -27,7 +27,7 @@ bool NFCSLGShopModule::Shut()
 
 bool NFCSLGShopModule::Execute()
 {
-    //Î»ÖÃÄØ
+    //Î»ï¿½ï¿½ï¿½ï¿½
     return true;
 }
 
@@ -62,7 +62,7 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
         return false;
     }
 
-    //¿Û³ý»õ±Ò
+    //ï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½
     int nGold = m_pElementModule->GetPropertyInt(strID, "Gold");
     if (!m_pPropertyModule->ConsumeMoney(self, nGold))
     {
@@ -101,7 +101,7 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
         break;
         default:
         {
-            const int nItemType = m_pElementModule->GetPropertyInt(strItem, "Type");
+            const int nItemType = m_pElementModule->GetPropertyInt(strItem, NFrame::Server::Type());
             if (nItemType == NFMsg::EItemType::EIT_EQUIP)
             {
                 m_pPackModule->CreateEquip(self, strItem);

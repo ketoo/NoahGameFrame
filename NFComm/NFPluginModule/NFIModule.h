@@ -74,6 +74,11 @@ public:
         return true;
     }
 
+    virtual bool ReadyExecute()
+    {
+        return true;
+    }
+
     virtual bool Execute()
     {
         return true;

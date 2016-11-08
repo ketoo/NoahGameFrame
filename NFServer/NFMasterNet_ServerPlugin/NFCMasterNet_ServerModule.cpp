@@ -8,9 +8,10 @@
 
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "Dependencies/rapidjson/document.h"
+#include "Dependencies/rapidjson/writer.h"
+#include "Dependencies/rapidjson/stringbuffer.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -192,7 +193,7 @@ void NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const
         return;
     }
 
-    //×ª·¢ËÍµ½ÊÀ½ç·þÎñÆ÷
+    //×ªï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
@@ -219,7 +220,7 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
         return;
     }
 
-    //×ª·¢ËÍµ½µÇÂ¼·þÎñÆ÷
+    //×ªï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
@@ -244,22 +245,22 @@ bool NFCMasterNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCMasterNet_ServerModule::OnSocketEvent);
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
         std::string strId;
         for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
         {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, "CpuCount");
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
@@ -305,7 +306,7 @@ void NFCMasterNet_ServerModule::OnSocketEvent(const int nSockIndex, const NF_NET
 
 void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
-    //²»¹ÜÊÇlogin»¹ÊÇworld¶¼ÒªÕÒ³öÀ´,ÌæËû·´×¢²á
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½loginï¿½ï¿½ï¿½ï¿½worldï¿½ï¿½Òªï¿½Ò³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
     NF_SHARE_PTR<ServerData> pServerData =  mWorldMap.First();
     while (pServerData)
     {
@@ -342,7 +343,7 @@ void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 void NFCMasterNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    //Á¬½ÓÉÏÀ´É¶¶¼²»×ö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 void NFCMasterNet_ServerModule::SynWorldToLogin()
@@ -358,7 +359,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
         pServerData = mWorldMap.Next();
     }
 
-    //¹ã²¥¸øËùÓÐloginserver
+    //ï¿½ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½loginserver
     pServerData =  mLoginMap.First();
     while (pServerData)
     {
@@ -416,7 +417,7 @@ void NFCMasterNet_ServerModule::OnHeartBeat(const int nSockIndex, const int nMsg
 
 void NFCMasterNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || ·Ç·¨ÏûÏ¢:unMsgID=%d\n", nMsgID);
+	printf("NFNet || ï¿½Ç·ï¿½ï¿½ï¿½Ï¢:unMsgID=%d\n", nMsgID);
 }
 
 void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
