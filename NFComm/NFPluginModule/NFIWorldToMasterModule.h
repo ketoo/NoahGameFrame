@@ -17,6 +17,8 @@
 class NFIWorldToMasterModule
 	: public  NFIModule
 {
+public:
+	virtual NFINetClientModule* GetNetClientModule() = 0;
 };
 
 #endif
