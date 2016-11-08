@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -90,7 +91,8 @@ protected:
 
     void OnOnlineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnOfflineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
+	void OnTranspondServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen);
+	void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
 private:
 
@@ -105,6 +107,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
+	NFIWorldToMasterModule* m_pWorldToMasterModule;
 
 };
 

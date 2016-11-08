@@ -28,6 +28,7 @@ public:
     NFCWorldToMasterModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
 
     virtual bool Init();
@@ -35,7 +36,7 @@ public:
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
-
+	virtual NFINetClientModule* GetNetClientModule();
 protected:
 
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -49,6 +50,7 @@ protected:
 
 
     void Register(NFINet* pNet);
+	void ServerReport();
     void RefreshWorldInfo();
 
     void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -56,6 +58,7 @@ protected:
 
 	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
+	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;

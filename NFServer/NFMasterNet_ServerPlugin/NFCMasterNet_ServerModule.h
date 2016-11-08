@@ -65,6 +65,8 @@ protected:
     void OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	void OnServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen);
+
     //////////////////////////////////////////////////////////////////////////
 
     void SynWorldToLogin();
