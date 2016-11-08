@@ -53,7 +53,6 @@ protected:
 private:
 
     NFILogModule* m_pLogModule;
-    NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;

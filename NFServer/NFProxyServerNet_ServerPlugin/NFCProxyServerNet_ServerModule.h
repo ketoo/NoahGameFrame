@@ -38,16 +38,14 @@ public:
 
     virtual int Transpond(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    //进入游戏成功
+    //锟斤拷锟斤拷锟斤拷戏锟缴癸拷
     virtual int EnterGameSuccessEvent(const NFGUID xClientID, const NFGUID xPlayerID);
 
 protected:
 
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-    //连接丢失,删2层(连接对象，帐号对象)
     void OnClientDisconnect(const int nAddress);
-    //有连接
     void OnClientConnected(const int nAddress);
 
     void OnConnectKeyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -58,9 +56,6 @@ protected:
     void OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
-    //客户端的连接60秒删掉
-    int HB_OnConnectCheckTime(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount, const NFIDataList& var);
     //////////////////////////////////////////////////////////////////////////
 
 	void OnOtherMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
