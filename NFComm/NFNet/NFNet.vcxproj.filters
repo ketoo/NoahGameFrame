@@ -2,35 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="NFCNet.cpp" />
-    <ClCompile Include="NFCHttpNet.cpp">
-      <Filter>HttpNet</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCHttpNetModule.cpp">
-      <Filter>HttpNetModule</Filter>
-    </ClCompile>
+    <ClCompile Include="NFCHttpNet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFINet.h" />
-    <ClInclude Include="NFIHttpNet.h">
-      <Filter>HttpNet</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCHttpNet.h">
-      <Filter>HttpNet</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIHttpNetModule.h">
-      <Filter>HttpNetModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCHttpNetModule.h">
-      <Filter>HttpNetModule</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="HttpNet">
-      <UniqueIdentifier>{719c82ce-b2c4-46d5-be93-f56d32315df0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HttpNetModule">
-      <UniqueIdentifier>{a28cfc34-867d-495a-ae72-d03b6d360603}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="NFCHttpNet.h" />
+    <ClInclude Include="NFIHttpNet.h" />
   </ItemGroup>
 </Project>
