@@ -29,6 +29,7 @@ public:
     NFCGameServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
     virtual bool Init();
     virtual bool Shut();
@@ -44,6 +45,7 @@ protected:
 
 protected:
     void Register(NFINet* pNet);
+	void ServerReport();
     void RefreshWorldInfo();
     void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
@@ -54,6 +56,7 @@ private:
     void SendOffline(const NFGUID& self);
 
 private:
+	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;
