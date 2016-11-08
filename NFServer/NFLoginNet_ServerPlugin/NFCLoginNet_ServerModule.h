@@ -58,6 +58,7 @@ public:
 
     virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
+    virtual NFINetModule* GetNetModule();
 protected:
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
@@ -65,13 +66,8 @@ protected:
     void OnClientDisconnect(const int nAddress);
     void OnClientConnected(const int nAddress);
 
-    //登入
     void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //选择大世界
     void OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-    //申请查看世界列表
     void OnViewWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	void OnHeartBeat(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
