@@ -98,6 +98,7 @@ public:
 
     virtual NFINoSqlDriver* GetDriver() = 0;
     virtual bool ConnectSql(const std::string& strIP) = 0;
+	virtual bool ConnectSql(const std::string& strIP, const int nPort) = 0;
 	virtual bool ConnectSql(const std::string& strIP, const int nPort, const std::string& strPass) = 0;
 };
 
