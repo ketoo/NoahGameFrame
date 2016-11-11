@@ -28,12 +28,11 @@ public:
     virtual bool AfterInit();
 
 	virtual bool ConnectSql(const std::string& strIP);
+	virtual bool ConnectSql(const std::string& strIP, const int nPort);
 	virtual bool ConnectSql(const std::string& strIP, const int nPort, const std::string& strPass);
 
-    virtual NFINoSqlDriver* GetDriver()
-    {
-        return m_pNoSqlDriver;
-    }
+	virtual NFINoSqlDriver* GetDriver();
+
 
 protected:
 
