@@ -17,7 +17,7 @@ class NFIMasterNet_ServerModule
 {
 
 public:
-    //actor
+	virtual std::string GetServersStatus() = 0;
 };
 
 #endif

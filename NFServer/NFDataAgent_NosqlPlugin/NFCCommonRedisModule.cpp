@@ -9,6 +9,7 @@
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 
 NFCCommonRedisModule::NFCCommonRedisModule(NFIPluginManager * p)
@@ -31,7 +32,28 @@ bool NFCCommonRedisModule::AfterInit()
     m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
+	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	if (!pDriver)
+	{
+		const std::string strIP = m_pElementModule->GetPropertyString("NoSqlServer_1", NFrame::NoSqlServer::IP());
+		const int nPort = m_pElementModule->GetPropertyInt("NoSqlServer_1", NFrame::NoSqlServer::Port());
+		const std::string strAuth = m_pElementModule->GetPropertyString("NoSqlServer_1", NFrame::NoSqlServer::Auth());
+		if (!m_pNoSqlModule->ConnectSql(strIP, nPort, strAuth))
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+		}
+		else
+		{
+			std::ostringstream strLog;
+			strLog << "Connected NoSqlServer[" << strIP << "], Port = " << nPort;
+			m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+		}
+	}
     return true;
 }
 

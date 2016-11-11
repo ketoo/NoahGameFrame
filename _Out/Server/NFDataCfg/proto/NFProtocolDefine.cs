@@ -595,6 +595,25 @@ public class Map
 
 }
 
+public class NoSqlServer
+{
+	//Class name
+	public static readonly string ThisName = "NoSqlServer";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String ServerID = "ServerID"; // int
+	public static readonly String IP = "IP"; // string
+	public static readonly String Port = "Port"; // int
+	public static readonly String Auth = "Auth"; // string
+	// Record
+
+}
+
 public class NPC
 {
 	//Class name

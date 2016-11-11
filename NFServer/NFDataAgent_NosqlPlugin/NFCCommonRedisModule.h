@@ -50,6 +50,8 @@ protected:
     NFIClassModule* m_pLogicClassModule;
     NFINoSqlModule* m_pNoSqlModule;
     NFICommonRedisModule* m_pCommonRedisModule;
+	NFIElementModule* m_pElementModule;
+	NFILogModule* m_pLogModule;
 };
 
 
