@@ -155,21 +155,27 @@ bool NFCPVPMatchRedisModule::GetRoomInfoList(const std::vector<NFGUID>& xRoomIDL
             vFields.push_back(xRoomIDList[i].ToString());
         }
 
-        std::string strData;
-        if (pNoSqlDriver->HMGet(strKey, vFields, vValues))
-        {
-            for (int i = 0; i < vValues.size(); ++i)
-            {
-                const std::string& strData = vValues[i];
-                NFMsg::PVPRoomInfo xBaseInfo;
-                if (xBaseInfo.ParseFromString(strData))
-                {
-                    vecRoomInfoList.push_back(xBaseInfo);
-                }
-            }
-
-            return true;
-        }
+		if (vFields.size()>0)
+		{
+			std::string strData;
+			if (pNoSqlDriver->HMGet(strKey, vFields, vValues))
+			{
+				for (int i = 0; i < vValues.size(); ++i)
+				{
+					const std::string& strData = vValues[i];
+					NFMsg::PVPRoomInfo xBaseInfo;
+					if (xBaseInfo.ParseFromString(strData))
+					{
+						vecRoomInfoList.push_back(xBaseInfo);
+					}
+				}
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
     }
 
     return false;
