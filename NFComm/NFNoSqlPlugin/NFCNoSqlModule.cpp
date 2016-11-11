@@ -46,16 +46,35 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
 
 bool NFCNoSqlModule::ConnectSql(const std::string& strIP)
 {
-    m_pNoSqlDriver = new NFCNoSqlDriver();
-	m_pNoSqlDriver->Connect(strIP, 3306, "");
+	if (!m_pNoSqlDriver)
+	{
+		m_pNoSqlDriver = new NFCNoSqlDriver();
+		return m_pNoSqlDriver->Connect(strIP, 6379);
+	}
+	return false;
+}
 
-    return true;
+bool NFCNoSqlModule::ConnectSql(const std::string & strIP, const int nPort)
+{
+	if (!m_pNoSqlDriver)
+	{
+		m_pNoSqlDriver = new NFCNoSqlDriver();
+		return m_pNoSqlDriver->Connect(strIP, nPort, "");
+	}
+	return false;
 }
 
 bool NFCNoSqlModule::ConnectSql(const std::string & strIP, const int nPort, const std::string & strPass)
 {
-	m_pNoSqlDriver = new NFCNoSqlDriver();
-	m_pNoSqlDriver->Connect(strIP, nPort, strPass);
+	if (!m_pNoSqlDriver)
+	{
+		m_pNoSqlDriver = new NFCNoSqlDriver();
+		return m_pNoSqlDriver->Connect(strIP, nPort, strPass);
+	}
+	return false;
+}
 
-	return true;
+NFINoSqlDriver * NFCNoSqlModule::GetDriver()
+{
+	return m_pNoSqlDriver;
 }

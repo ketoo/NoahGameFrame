@@ -23,6 +23,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pWorldToMasterModule = pPluginManager->FindModule<NFIWorldToMasterModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess);
@@ -32,6 +33,7 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTranspondServerReport);
 
 	m_pNetModule->AddEventCallBack(this, &NFCWorldNet_ServerModule::OnSocketEvent);
 
@@ -302,6 +304,7 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const int nAddress)
             pServerData->pData->set_server_state(NFMsg::EST_CRASH);
             pServerData->nFD = 0;
 
+			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
             SynGameToProxy();
             return;
         }
@@ -318,6 +321,8 @@ void NFCWorldNet_ServerModule::OnClientDisconnect(const int nAddress)
         {
             int nServerID = pServerData->pData->server_id();
             mProxyMap.RemoveElement(nServerID);
+
+			ServerReport(pServerData->pData->server_id(), NFMsg::EST_CRASH);
             break;
         }
 
@@ -380,6 +385,22 @@ void NFCWorldNet_ServerModule::OnOnlineProcess(const int nSockIndex, const int n
 void NFCWorldNet_ServerModule::OnOfflineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::RoleOfflineNotify);
+}
+
+void NFCWorldNet_ServerModule::OnTranspondServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
+{
+    NFGUID xGUID;
+	NFMsg::ServerInfoReport msg;
+	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg, xGUID))
+	{
+		return;
+	}
+
+	std::shared_ptr<ConnectData> pServerData = m_pWorldToMasterModule->GetNetClientModule()->GetServerList().First();
+	if (pServerData)
+	{
+		m_pWorldToMasterModule->GetNetClientModule()->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, msg);
+	}
 }
 
 bool NFCWorldNet_ServerModule::SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer)
@@ -828,4 +849,43 @@ int NFCWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)
 {
     //to do
     return -1;
+}
+
+void NFCWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerState serverStatus)
+{
+	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+			if (reportServerId == nServerID)
+			{
+				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
+				const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
+				const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+
+				NFMsg::ServerInfoReport reqMsg;
+
+				reqMsg.set_server_id(nServerID);
+				reqMsg.set_server_name(strName);
+				reqMsg.set_server_cur_count(0);
+				reqMsg.set_server_ip(strIP);
+				reqMsg.set_server_port(nPort);
+				reqMsg.set_server_max_online(nMaxConnect);
+				reqMsg.set_server_state(serverStatus);
+				reqMsg.set_server_type(nServerType);
+
+				std::shared_ptr<ConnectData> pServerData = m_pWorldToMasterModule->GetNetClientModule()->GetServerList().First();
+				if (pServerData)
+				{
+					m_pWorldToMasterModule->GetNetClientModule()->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				}
+			}
+		}
+	}
 }

@@ -612,6 +612,26 @@ public:
 
 };
 
+class NoSqlServer
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xNoSqlServer = "NoSqlServer"; return xNoSqlServer; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
+	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
+	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
+	static const std::string& Auth(){ static std::string xAuth = "Auth"; return xAuth; } // string
+	// Record
+
+};
+
 class NPC
 {
 public:
