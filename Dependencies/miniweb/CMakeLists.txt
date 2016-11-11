@@ -1,4 +1,6 @@
 set(ProjectName "miniweb")
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 set(miniwebFile
     ./http.c
     ./httpauth.c
@@ -36,7 +38,7 @@ else()
 	add_definitions( -DWIN32 -D_DEBUG -D_CONSOLE -DHTTP_DEBUG -D_CRT_SECURE_NO_DEPRECATE)
     add_executable(miniweb ${miniwebFile})
 endif()
-
+target_link_libraries( miniweb Threads::Threads)
 set_target_properties( miniweb PROPERTIES
 	FOLDER "NFTools"
 	ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${SolutionDir}/Tool
