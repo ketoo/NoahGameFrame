@@ -9,6 +9,9 @@
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "Dependencies/rapidjson/document.h"
+#include "Dependencies/rapidjson/writer.h"
+#include "Dependencies/rapidjson/stringbuffer.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -190,7 +193,6 @@ void NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const
         return;
     }
 
-    //ת���͵�����������
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
@@ -237,6 +239,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCMasterNet_ServerModule::OnSelectWorldProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCMasterNet_ServerModule::OnSelectServerResultProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCMasterNet_ServerModule::OnServerReport);
 	m_pNetModule->AddReceiveCallBack(this, &NFCMasterNet_ServerModule::InvalidMessage);
 
 	m_pNetModule->AddEventCallBack(this, &NFCMasterNet_ServerModule::OnSocketEvent);
@@ -339,7 +342,6 @@ void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 void NFCMasterNet_ServerModule::OnClientConnected(const int nAddress)
 {
-    //��������ɶ������
 }
 
 void NFCMasterNet_ServerModule::SynWorldToLogin()
@@ -355,7 +357,7 @@ void NFCMasterNet_ServerModule::SynWorldToLogin()
         pServerData = mWorldMap.Next();
     }
 
-    //�㲥������loginserver
+    //loginserver
     pServerData =  mLoginMap.First();
     while (pServerData)
     {
@@ -413,5 +415,144 @@ void NFCMasterNet_ServerModule::OnHeartBeat(const int nSockIndex, const int nMsg
 
 void NFCMasterNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || �Ƿ���Ϣ:unMsgID=%d\n", nMsgID);
+	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
+
+void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
+{
+    NFGUID xGUID;
+	NFMsg::ServerInfoReport msg;
+	if (!m_pNetModule->ReceivePB(nFd,msgId, buffer, nLen, msg, xGUID))
+	{
+		return;
+	}
+
+	std::shared_ptr<ServerData> pServerData;
+	if (msg.server_type() == NF_SERVER_TYPES::NF_ST_LOGIN)
+	{
+		pServerData = mLoginMap.GetElement(msg.server_id());
+		if (!pServerData)
+		{
+			pServerData = std::shared_ptr<ServerData>(new ServerData());
+			mLoginMap.AddElement(msg.server_id(), pServerData);
+		}
+	}
+	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_WORLD)
+	{
+		pServerData = mWorldMap.GetElement(msg.server_id());
+		if (!pServerData)
+		{
+			pServerData = std::shared_ptr<ServerData>(new ServerData());
+			mWorldMap.AddElement(msg.server_id(), pServerData);
+		}
+	}
+	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_PROXY)
+	{
+		pServerData = mProxyMap.GetElement(msg.server_id());
+		if (!pServerData)
+		{
+			pServerData = std::shared_ptr<ServerData>(new ServerData());
+			mProxyMap.AddElement(msg.server_id(), pServerData);
+		}
+	}
+	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_GAME)
+	{
+		pServerData = mGameMap.GetElement(msg.server_id());
+		if (!pServerData)
+		{
+			pServerData = std::shared_ptr<ServerData>(new ServerData());
+			mGameMap.AddElement(msg.server_id(), pServerData);
+		}
+	}
+
+	//udate status
+	pServerData->nFD = nFd;
+	*(pServerData->pData) = msg;
+
+	//std::cout << "ServerReport:"<<msg.server_name() << std::endl;
+
+}
+
+std::string NFCMasterNet_ServerModule::GetServersStatus()
+{
+	rapidjson::Document doc;
+	rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+	rapidjson::Value root(rapidjson::kObjectType);
+
+	root.AddMember("code", 0, allocator);
+	root.AddMember("errMsg", "", allocator);
+
+	rapidjson::Value logins(rapidjson::kArrayType);
+	std::shared_ptr<ServerData> pServerData = mLoginMap.First();
+	while (pServerData)
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		logins.PushBack(server, allocator);
+		pServerData = mLoginMap.Next();
+	}
+	root.AddMember("logins", logins, allocator);
+
+	rapidjson::Value worlds(rapidjson::kArrayType);
+	pServerData = mWorldMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		worlds.PushBack(server, allocator);
+		pServerData = mWorldMap.Next();
+	}
+	root.AddMember("worlds", worlds, allocator);
+
+	rapidjson::Value proxys(rapidjson::kArrayType);
+	pServerData = mProxyMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		proxys.PushBack(server, allocator);
+		pServerData = mProxyMap.Next();
+	}
+	root.AddMember("proxys", proxys, allocator);
+
+	rapidjson::Value games(rapidjson::kArrayType);
+	pServerData = mGameMap.First();
+	while (pServerData.get())
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverid", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		games.PushBack(server, allocator);
+		pServerData = mGameMap.Next();
+	}
+	root.AddMember("games", games, allocator);
+
+	rapidjson::StringBuffer jsonBuf;
+	rapidjson::Writer<rapidjson::StringBuffer> jsonWriter(jsonBuf);
+	root.Accept(jsonWriter);
+	return jsonBuf.GetString();
+}
+

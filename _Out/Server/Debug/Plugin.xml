@@ -24,6 +24,7 @@
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFMasterServerPlugin" />
 		<Plugin Name="NFMasterNet_ServerPlugin" />
+		<Plugin Name="NFMasterNet_HttpServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
     	<ConfigPath Name="../" />		
 	</MasterServer>
