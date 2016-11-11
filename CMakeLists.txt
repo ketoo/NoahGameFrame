@@ -2,7 +2,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
 option(BUILD_TOOLS_ONLY "help string describing option")
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 macro(remove_file arg_list file_remove)
 	file(GLOB RemoveItems_Cpp ${file_remove})
 	list(REMOVE_ITEM ${arg_list} ${RemoveItems_Cpp})
