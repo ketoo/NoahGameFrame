@@ -110,7 +110,7 @@ public:
 
 
 protected:
-    NFIPluginManager* pPluginManager;
+	NFIPluginManager* pPluginManager = NULL;
 
 
 private:
