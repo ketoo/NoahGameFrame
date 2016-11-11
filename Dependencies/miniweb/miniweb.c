@@ -203,7 +203,7 @@ int main(int argc,char* argv[])
 	httpParam.pfnFileUpload = DefaultWebFileUploadCallback;
 #endif
 #ifndef WIN32
-	bool isDaemon = false;
+	int isDaemon = 0;
 #endif // WIN32
 	//parsing command line arguments
 	{
@@ -251,7 +251,7 @@ int main(int argc,char* argv[])
 					break;
 #ifndef WIN32
 				case 't':
-					isDaemon = true;
+					isDaemon = 1;
 					break;
 #endif // WIN32
 				}
@@ -288,7 +288,7 @@ int main(int argc,char* argv[])
 		//register page variable substitution callback
 		//httpParam[i].pfnSubst=DefaultWebSubstCallback;
 #ifndef WIN32
-		if (isDaemon)
+		if (isDaemon == 1)
 		{
 			daemon(1, 0);
 		}
