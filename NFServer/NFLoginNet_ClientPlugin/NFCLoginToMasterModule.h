@@ -27,6 +27,7 @@ public:
     NFCLoginToMasterModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
 
 
@@ -54,8 +55,10 @@ protected:
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);
+	void ServerReport();
 
 private:
+	NFINT64 mLastReportTime;
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
     NFILoginLogicModule* m_pLoginLogicModule;
