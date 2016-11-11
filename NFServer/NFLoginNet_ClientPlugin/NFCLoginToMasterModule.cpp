@@ -83,7 +83,7 @@ bool NFCLoginToMasterModule::BeforeShut()
 bool NFCLoginToMasterModule::Execute()
 {
     m_pNetClientModule->Execute();
-
+	ServerReport();
 	return true;
 }
 
@@ -129,6 +129,50 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
             }
         }
     }
+}
+
+void NFCLoginToMasterModule::ServerReport()
+{
+	if (mLastReportTime + 10 > pPluginManager->GetNowTime())
+	{
+		return;
+	}
+	mLastReportTime = pPluginManager->GetNowTime();
+	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement("Server");
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, "Type");
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, "ServerID");
+			if (pPluginManager->GetAppID() == nServerID)
+			{
+				const int nPort = m_pElementModule->GetPropertyInt(strId, "Port");
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, "MaxOnline");
+				const std::string& strName = m_pElementModule->GetPropertyString(strId, "Name");
+				const std::string& strIP = m_pElementModule->GetPropertyString(strId, "IP");
+
+				NFMsg::ServerInfoReport reqMsg;
+
+				reqMsg.set_server_id(nServerID);
+				reqMsg.set_server_name(strName);
+				reqMsg.set_server_cur_count(0);
+				reqMsg.set_server_ip(strIP);
+				reqMsg.set_server_port(nPort);
+				reqMsg.set_server_max_online(nMaxConnect);
+				reqMsg.set_server_state(NFMsg::EST_NARMAL);
+				reqMsg.set_server_type(nServerType);
+
+				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerList().First();
+				if (pServerData)
+				{
+					m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+				}
+			}
+		}
+	}
 }
 
 void NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

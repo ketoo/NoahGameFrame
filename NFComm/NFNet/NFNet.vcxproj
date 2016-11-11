@@ -12,10 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCNet.cpp" />
+    <ClCompile Include="NFCHttpNet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCNet.h" />
+    <ClInclude Include="NFIHttpNet.h" />
     <ClInclude Include="NFINet.h" />
+    <ClInclude Include="NFCHttpNet.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{403EB74F-6AF5-4250-8DA5-9D3CBFB7E545}</ProjectGuid>
