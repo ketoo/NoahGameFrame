@@ -1,0 +1,6 @@
+LIBRARY mccore
+EXPORTS
+	mwGetVarValue
+	mwGetHttpDateTime
+	mwServerStart
+	mwServerShutdown
