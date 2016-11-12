@@ -2,7 +2,7 @@
 //    @FileName         :    NFMap.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-03-01
-//    @Module           :    切记，不能在循环中自己删除自己
+//    @Module           :    锟叫记ｏ拷锟斤拷锟斤拷锟斤拷循锟斤拷锟斤拷锟皆硷拷删锟斤拷锟皆硷拷
 //
 // -------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@
 #include <string>
 #include <iostream>
 #include <typeinfo>
-#include "NFMapEx.h"
+#include "NFMapEx.hpp"
 
 template <typename T , typename TD>
 class NFMap
@@ -26,7 +26,7 @@ public:
     virtual ~NFMap()
     {
         //mObjectList.clear();
-        //新的NFMap只管理元素，不管理元素所占的内存，谁new 谁delete
+        //锟铰碉拷NFMap只锟斤拷锟斤拷元锟截ｏ拷锟斤拷锟斤拷锟斤拷元锟斤拷锟斤拷占锟斤拷锟节存，谁new 谁delete
         //DeleteAllElement();
     };
 
