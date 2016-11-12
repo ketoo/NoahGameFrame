@@ -9,7 +9,7 @@
 #ifndef NFI_PROPERTYMANAGER_H
 #define NFI_PROPERTYMANAGER_H
 
-#include "NFMap.h"
+#include "NFMap.hpp"
 #include "NFIProperty.h"
 #include <map>
 
