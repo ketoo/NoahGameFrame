@@ -108,7 +108,7 @@
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFLine.hpp" />
-    <ClInclude Include="NFMapEx.h" />
+    <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFRay.hpp" />
@@ -120,7 +120,7 @@
     <ClInclude Include="NFIPropertyManager.h" />
     <ClInclude Include="NFIRecord.h" />
     <ClInclude Include="NFIRecordManager.h" />
-    <ClInclude Include="NFList.h" />
+    <ClInclude Include="NFList.hpp" />
     <ClInclude Include="NFMap.h" />
     <ClInclude Include="NFTime.h" />
     <ClInclude Include="NFVector2.hpp" />
