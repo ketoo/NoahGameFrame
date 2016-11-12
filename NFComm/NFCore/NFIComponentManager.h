@@ -10,7 +10,7 @@
 #define NFI_COMPONENT_MANAGER_H
 
 #include <memory>
-#include "NFMap.h"
+#include "NFMap.hpp"
 #include "NFIComponent.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIModule.h"

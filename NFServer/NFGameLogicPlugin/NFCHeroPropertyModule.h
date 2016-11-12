@@ -9,7 +9,7 @@
 #ifndef NFC_HERO_PROPERTY_MODULE_MODULE_H
 #define NFC_HERO_PROPERTY_MODULE_MODULE_H
 
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"

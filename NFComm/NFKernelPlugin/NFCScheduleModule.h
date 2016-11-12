@@ -1,8 +1,8 @@
 #ifndef NFC_SCHEDULE_MODULE_H
 #define NFC_SCHEDULE_MODULE_H
 
-#include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
