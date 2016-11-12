@@ -83,13 +83,13 @@
     <ClInclude Include="NFQueue.h">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFMapEx.h">
+    <ClInclude Include="NFMapEx.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFMap.h">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFList.h">
+    <ClInclude Include="NFList.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFCComponentManager.h">
