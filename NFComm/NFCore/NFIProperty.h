@@ -10,7 +10,7 @@
 #define NFI_PROPERTY_H
 
 #include "NFIDataList.h"
-#include "NFList.h"
+#include "NFList.hpp"
 
 typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
@@ -18,6 +18,7 @@ typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 class NFIProperty
 {
 public:
+    NFIProperty(){}
     virtual ~NFIProperty() {}
 
     virtual void SetValue(const NFIDataList::TData& TData) = 0;
