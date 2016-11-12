@@ -10,7 +10,7 @@
 #define NFI_RECORDMANAGER_H
 
 #include "NFIRecord.h"
-#include "NFMap.h"
+#include "NFMap.hpp"
 
 class NFIRecordManager
     : public NFMapEx<std::string, NFIRecord>
