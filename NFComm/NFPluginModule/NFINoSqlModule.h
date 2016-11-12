@@ -100,6 +100,15 @@ public:
     virtual bool ConnectSql(const std::string& strIP) = 0;
 	virtual bool ConnectSql(const std::string& strIP, const int nPort) = 0;
 	virtual bool ConnectSql(const std::string& strIP, const int nPort, const std::string& strPass) = 0;
+
+	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP) = 0;
+	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort) = 0;
+	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass) = 0;
+
+	virtual NFINoSqlDriver* GetDriver(const std::string& strID) = 0;
+	virtual NFINoSqlDriver* GetDriverBySuit(const std::string& strHash) = 0;
+	virtual NFINoSqlDriver* GetDriverBySuit(const int strHash) = 0;
+    virtual bool RemoveConnectSql(const std::string& strID) = 0;
 };
 
 #endif
