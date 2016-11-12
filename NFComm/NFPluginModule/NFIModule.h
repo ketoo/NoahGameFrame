@@ -48,6 +48,11 @@ public:
 
     virtual ~NFIModule() {}
 
+    virtual bool Awake()
+    {
+        return true;
+    }
+
     virtual bool Init()
     {
 
@@ -64,6 +69,16 @@ public:
         return true;
     }
 
+    virtual bool ReadyExecute()
+    {
+        return true;
+    }
+
+    virtual bool Execute()
+    {
+        return true;
+    }
+
     virtual bool BeforeShut()
     {
         return true;
@@ -73,13 +88,7 @@ public:
     {
         return true;
     }
-
-    virtual bool ReadyExecute()
-    {
-        return true;
-    }
-
-    virtual bool Execute()
+    virtual bool Finalize()
     {
         return true;
     }

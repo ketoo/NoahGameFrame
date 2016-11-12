@@ -10,7 +10,7 @@
 #define NFC_PROPERTY_H
 
 #include "NFMap.h"
-#include "NFList.h"
+#include "NFList.hpp"
 #include "NFCDataList.h"
 #include "NFIProperty.h"
 

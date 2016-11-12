@@ -12,7 +12,7 @@
 #include <vector>
 #include "NFIRecord.h"
 #include "NFCDataList.h"
-#include "NFMapEx.h"
+#include "NFMapEx.hpp"
 
 class NFCRecord : public NFIRecord
 {
@@ -33,7 +33,7 @@ public:
     virtual TDATA_TYPE GetColType(const int nCol) const;
     virtual const std::string& GetColTag(const int nCol) const;
 
-    // 添加数据
+    // 锟斤拷锟斤拷锟斤拷锟斤拷
     virtual int AddRow(const int nRow);
 
     virtual int AddRow(const int nRow, const NFIDataList& var);
@@ -133,15 +133,15 @@ protected:
     void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 protected:
-    //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
-	NF_SHARE_PTR<NFIDataList> mVarRecordType;//初始值类型--应该引用静态的(或者智能指针)，节约大量内存
-	NF_SHARE_PTR<NFIDataList> mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
+    //锟斤拷录锟斤拷锟斤拷锟斤拷锟斤拷Key锟斤拷锟酵ｏ拷锟斤拷锟斤拷锟节讹拷取锟斤拷锟斤拷锟矫碉拷时锟斤拷锟斤拷锟杰憋拷锟斤拷锟斤拷确
+	NF_SHARE_PTR<NFIDataList> mVarRecordType;//锟斤拷始值锟斤拷锟斤拷--应锟斤拷锟斤拷锟矫撅拷态锟斤拷(锟斤拷锟斤拷锟斤拷锟斤拷指锟斤拷)锟斤拷锟斤拷约锟斤拷锟斤拷锟节达拷
+	NF_SHARE_PTR<NFIDataList> mVarRecordTag;//col锟斤拷tag值--应锟斤拷锟斤拷锟矫撅拷态锟斤拷(锟斤拷锟斤拷锟斤拷锟斤拷指锟斤拷)锟斤拷锟斤拷约锟斤拷锟斤拷锟节达拷
 
-    std::map<std::string, int> mmTag;//tag->col转换
+    std::map<std::string, int> mmTag;//tag->col转锟斤拷
 
 	////////////////////////////
 	
-	TRECORDVEC mtRecordVec;//真的数据
+	TRECORDVEC mtRecordVec;//锟斤拷锟斤拷锟斤拷锟斤拷
 	std::vector<int> mVecUsedState;
     int mnMaxRow;
 
