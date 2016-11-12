@@ -2,7 +2,7 @@
 #define NFC_NFCMEMMANGER_H
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "NFSingleton.h"
+#include "NFSingleton.hpp"
 
 //#define  NF_USE_TCMALLOC
 
