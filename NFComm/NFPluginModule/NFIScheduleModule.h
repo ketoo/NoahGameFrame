@@ -2,8 +2,8 @@
 #define NFI_SCHEDULE_MODULE_H
 
 #include <string>
-#include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 

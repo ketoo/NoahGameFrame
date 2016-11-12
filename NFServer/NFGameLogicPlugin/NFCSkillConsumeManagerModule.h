@@ -10,7 +10,7 @@
 #define NFC_SKILLCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFISkillConsumeProcessModule.h"
 

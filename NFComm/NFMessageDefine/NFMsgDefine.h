@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFLimit.h"
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
