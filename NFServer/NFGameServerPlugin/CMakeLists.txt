@@ -3,12 +3,7 @@ file(GLOB NFGameServerPlugin_ROOT_Cpp
 	*.cpp)
 
 file(GLOB NFGameServerPlugin_ROOT_Hpp 
-	*.h)
-
-remove_file(NFGameServerPlugin_ROOT_Cpp "NFCCreateRoleModule.cpp")	
-remove_file(NFGameServerPlugin_ROOT_Hpp "NFCCreateRoleModule.h")	
-remove_file(NFGameServerPlugin_ROOT_Cpp "NFCEventRouteModule.cpp")	
-remove_file(NFGameServerPlugin_ROOT_Hpp "NFCEventRouteModule.h")	
+	*.h)	
 
 add_library(NFGameServerPlugin SHARED
 	${NFGameServerPlugin_ROOT_Cpp}

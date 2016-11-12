@@ -9,7 +9,7 @@
 #ifndef NFC_GAMESERVER_MODULE_H
 #define NFC_GAMESERVER_MODULE_H
 
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"

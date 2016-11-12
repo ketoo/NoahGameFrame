@@ -78,14 +78,14 @@ NFINoSqlDriver * NFCNoSqlModule::GetDriver()
 {
 	return m_pNoSqlDriver;
 }
-NFINoSqlDriver* GetDriverBySuit(const std::string& strHash)
+NFINoSqlDriver* NFCNoSqlModule::GetDriverBySuit(const std::string& strHash)
 {
-	return nullstr;
+	return nullptr;
 }
 
-NFINoSqlDriver* GetDriverBySuit(const int strHash)
+NFINoSqlDriver* NFCNoSqlModule::GetDriverBySuit(const int strHash)
 {
-	return nullstr;
+	return nullptr;
 }
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
@@ -105,7 +105,7 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 
 NFINoSqlDriver* NFCNoSqlModule::GetDriver(const std::string& strID)
 {
-	return nullstr;
+	return nullptr;
 }
 
 bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)

@@ -11,7 +11,7 @@
 
 #include <map>
 #include <string>
-#include "NFComm/NFCore/NFSingleton.h"
+#include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFCore/NFIComponent.h"
