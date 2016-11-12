@@ -35,7 +35,7 @@ bool NFCCommonRedisModule::AfterInit()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::NoSqlServer::ThisName());
     if (xLogicClass)
     {
         NFList<std::string>& strIdList = xLogicClass->GetIdList();
