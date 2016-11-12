@@ -9,7 +9,7 @@
 #ifndef NFC_WORLDLOGIC_MODULE_H
 #define NFC_WORLDLOGIC_MODULE_H
 
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
 

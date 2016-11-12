@@ -9,7 +9,7 @@
 #ifndef NFC_TEAM_MODULE_H
 #define NFC_TEAM_MODULE_H
 
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFITeamModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
