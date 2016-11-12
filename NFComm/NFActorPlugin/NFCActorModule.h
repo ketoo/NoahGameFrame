@@ -16,7 +16,7 @@
 #include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
-#include "NFComm/NFCore/NFQueue.h"
+#include "NFComm/NFCore/NFQueue.hpp"
 
 class NFCActorModule
     : public NFIActorModule

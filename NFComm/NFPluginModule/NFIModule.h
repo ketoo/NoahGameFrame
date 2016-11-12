@@ -10,8 +10,8 @@
 #define NFI_LOGIC_MODULE_H
 
 #include <string>
-#include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"
 
