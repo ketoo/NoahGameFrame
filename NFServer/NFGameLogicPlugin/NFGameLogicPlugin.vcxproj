@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h" />
+    <ClInclude Include="NFCCreateRoleModule.h" />
     <ClInclude Include="NFCGSPVPMatchModule.h" />
     <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
     <ClInclude Include="NFCChatModule.h" />
@@ -142,6 +143,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCBuffModule.cpp" />
+    <ClCompile Include="NFCCreateRoleModule.cpp" />
     <ClCompile Include="NFCGSPVPMatchModule.cpp" />
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
     <ClCompile Include="NFCChatModule.cpp" />
