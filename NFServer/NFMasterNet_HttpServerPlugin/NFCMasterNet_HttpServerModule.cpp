@@ -33,7 +33,8 @@ bool NFCMasterNet_HttpServerModule::Execute()
 void NFCMasterNet_HttpServerModule::OnQueryServerStatus(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
 {
 	std::string str = mMasterServerModule->GetServersStatus();
-	NFCHttpNet::SendMsg(req, str);
+	
+	NFCHttpNet::SendMsg(req, argMap["jsoncallback"] + "(" + str + ");");
 }
 
 void NFCMasterNet_HttpServerModule::InvalidMessage(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
