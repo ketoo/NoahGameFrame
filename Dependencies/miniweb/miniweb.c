@@ -189,7 +189,7 @@ int main(int argc,char* argv[])
 	mwInitParam(&httpParam);
 	httpParam.maxClients=32;
 	httpParam.httpPort = 80;
-	GetFullPath(httpParam.pchWebPath, argv[0], "htdocs");
+	GetFullPath(httpParam.pchWebPath, argv[0], "NF_Web_Monitor");
 #ifndef DISABLE_BASIC_WWWAUTH
 	httpParam.pxAuthHandler = authHandlerList;
 #endif
