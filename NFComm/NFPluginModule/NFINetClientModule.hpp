@@ -148,13 +148,11 @@ public:
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-	//������,��ʱ����
     void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData)
     {
         SendByServerID(nServerID, nMsgID, strData.c_str(), strData.length());
     }
 
-    //������,��ʱ����
     void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
@@ -168,7 +166,6 @@ public:
         }
     }
 
-	//������,��ʱ����
 	void SendToAllServer(const int nMsgID, const std::string& strData)
 	{
 		NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
@@ -359,7 +356,6 @@ protected:
 			break;
 			case ConnectDataState::RECONNECT:
 			{
-				//����ʱ��
 				if ((pServerData->mnLastActionTime + 10) >= GetPluginManager()->GetNowTime())
 				{
 					break;
@@ -466,7 +462,6 @@ private:
             NF_SHARE_PTR<ConnectData> xServerData = mxServerMap.GetElement(xInfo.nGameID);
             if (nullptr == xServerData)
             {
-				//�����������·�����
 				xServerData = NF_SHARE_PTR<ConnectData>(NF_NEW ConnectData());
 
 				xServerData->nGameID = xInfo.nGameID;
@@ -497,7 +492,6 @@ private:
 
     void AddServerWeightData(NF_SHARE_PTR<ConnectData> xInfo)
     {
-        //����Ȩ�ش����ڵ�
         for (int j = 0; j < EConstDefine_DefaultWeith; ++j)
         {
             NFCMachineNode vNode(j);
