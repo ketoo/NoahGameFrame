@@ -12,6 +12,7 @@
 #include "Dependencies/rapidjson/document.h"
 #include "Dependencies/rapidjson/writer.h"
 #include "Dependencies/rapidjson/stringbuffer.h"
+#include "NFComm/NFCore/NFTime.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -481,6 +482,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 
 	root.AddMember("code", 0, allocator);
 	root.AddMember("errMsg", "", allocator);
+	root.AddMember("nowTime", rapidjson::Value(NFTime::GetStr().c_str(), allocator), allocator);
 
 	rapidjson::Value logins(rapidjson::kArrayType);
 	std::shared_ptr<ServerData> pServerData = mLoginMap.First();
