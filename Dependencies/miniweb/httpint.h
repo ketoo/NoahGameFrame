@@ -127,7 +127,7 @@ void _mwRedirect(HttpSocket* phsSocket, char* pchFilename);
 int _mwSendRawDataChunk(HttpParam *hp, HttpSocket* phsSocket);
 int _mwStartSendRawData(HttpParam *hp, HttpSocket* phsSocket);
 int _mwGetToken(char* pchBuffer,int iTokenNumber,char** ppchToken); 
-__inline char _mwDecodeCharacter(char* pchEncodedChar);
+char _mwDecodeCharacter(char* pchEncodedChar);
 int _mwLoadFileChunk(HttpParam *hp, HttpSocket* phsSocket);
 char* _mwFindMultipartBoundary(char *poHaystack, int iHaystackSize, char *poNeedle);
 void _mwNotifyPostVars(HttpParam *hp, HttpSocket* phsSocket, PostParam *pp);
