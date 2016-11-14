@@ -63,7 +63,10 @@ typedef void* BUFPTR;
 #include "anet_win32.h"
 #else
 #include <unistd.h>
+extern "C"
+{
 #include "anet.h"
+}
 #endif
 
 #define REDIS_LBR                       "\r\n"
