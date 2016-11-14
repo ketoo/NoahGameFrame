@@ -1994,7 +1994,7 @@ char* _mwStrStrNoCase(char* pchHaystack, char* pchNeedle)
 // _mwDecodeCharacter
 // Convert and individual character
 ////////////////////////////////////////////////////////////////////////////
-__inline char _mwDecodeCharacter(char* s)
+char _mwDecodeCharacter(char* s)
 {
   	register unsigned char v;
 	if (!*s) return 0;
