@@ -237,6 +237,8 @@
     	if($.cookie("formServerIP") && $.cookie("formServerPort"))
     	{
     		document.getElementById("MSIPPORT").innerHTML = $.cookie("formServerIP") + ":" + $.cookie("formServerPort");
+    		$("#formServerIP").val($.cookie("formServerIP"));
+    		$("#formServerPort").val($.cookie("formServerPort"));
     	}
  
 	    $("#serverButton").click(function(){  
