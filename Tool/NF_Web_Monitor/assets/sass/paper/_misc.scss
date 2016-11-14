@@ -1,0 +1,69 @@
+/*     General overwrite     */
+body{
+    color: $font-color;
+    font-size: $font-size-base;
+    font-family: 'Muli', Arial, sans-serif;
+    .wrapper{
+        min-height: 100vh;
+        position: relative;
+    }
+}
+a{
+  color: $info-color;
+
+  &:hover, &:focus{
+     color: $info-states-color;
+     text-decoration: none;
+  }
+}
+
+a:focus, a:active,
+button::-moz-focus-inner,
+input::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner{
+    outline:0 !important;
+}
+.ui-slider-handle:focus,
+.navbar-toggle,
+input:focus,
+button:focus {
+    outline : 0 !important;
+}
+
+/*           Animations              */
+.form-control,
+.input-group-addon,
+.tagsinput,
+.navbar,
+.navbar .alert{
+    @include transition($general-transition-time, $transition-linear);
+}
+
+.sidebar .nav a,
+.table > tbody > tr .td-actions .btn{
+    @include transition($fast-transition-time, $transition-ease-in);
+}
+
+.btn{
+    @include transition($ultra-fast-transition-time, $transition-ease-in);
+}
+.fa{
+    width: 21px;
+    text-align: center;
+}
+.fa-base{
+    font-size: 1.25em !important;
+}
+
+.margin-top{
+    margin-top: 50px;
+}
+hr{
+    border-color: $medium-pale-bg;
+}
+.wrapper{
+    position: relative;
+    top: 0;
+    height: 100vh;
+}

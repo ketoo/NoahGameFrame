@@ -1,0 +1,115 @@
+.dropdown-menu{
+    background-color: $pale-bg;
+    border: 0 none;
+    border-radius: $border-radius-extreme;
+    display: block;
+    margin-top: 10px;
+    padding: 0px;
+    position: absolute;
+    visibility: hidden;
+    z-index: 9000;  
+    
+    @include opacity(0); 
+    @include box-shadow($dropdown-shadow);
+        
+//     the style for opening dropdowns on mobile devices; for the desktop version check the _responsive.scss file    
+    .open &{
+        @include opacity(1);
+        visibility: visible;
+    }    
+    
+    .divider{
+        background-color: $medium-pale-bg;
+        margin: 0px;
+    }
+    
+    .dropdown-header{
+        color: $dark-gray;
+        font-size: $font-size-small;
+        padding: $padding-dropdown-vertical $padding-dropdown-horizontal;
+    }
+    
+//     the style for the dropdown menu that appears under select, it is different from the default one
+    .select &{
+       border-radius: $border-radius-bottom; 
+       @include box-shadow(none);
+       @include transform-origin($select-coordinates);
+       @include transform-scale(1);
+       @include transition($fast-transition-time, $transition-linear);
+       margin-top: -20px;
+    }
+    .select.open &{
+        margin-top: -1px;
+    }
+    
+    > li > a {
+       color: $font-color;
+       font-size: $font-size-base;
+       padding: $padding-dropdown-vertical $padding-dropdown-horizontal;
+       @include transition-none();
+       
+       img{
+           margin-top: -3px;
+       }
+    }
+    > li > a:focus{
+        outline: 0 !important;
+    }
+
+    .btn-group.select &{
+        min-width: 100%;
+    }
+    
+    > li:first-child > a{
+       border-top-left-radius: $border-radius-extreme;
+       border-top-right-radius: $border-radius-extreme;
+    }
+    
+    > li:last-child > a{
+        border-bottom-left-radius: $border-radius-extreme;
+        border-bottom-right-radius: $border-radius-extreme;
+    }
+    
+    .select & > li:first-child > a{
+        border-radius: 0;
+        border-bottom: 0 none;
+    }
+    
+    > li > a:hover,
+    > li > a:focus {
+        background-color: $default-color;
+        color: $fill-font-color;
+        opacity: 1;
+        text-decoration: none;
+    }
+    
+    &.dropdown-primary > li > a:hover,
+    &.dropdown-primary > li > a:focus{
+        background-color: $primary-color;
+    }
+    &.dropdown-info > li > a:hover,
+    &.dropdown-info > li > a:focus{
+        background-color: $info-color;
+    }
+    &.dropdown-success > li > a:hover,
+    &.dropdown-success > li > a:focus{
+        background-color: $success-color;
+    }
+    &.dropdown-warning > li > a:hover,
+    &.dropdown-warning > li > a:focus{
+        background-color: $warning-color;
+    }
+    &.dropdown-danger > li > a:hover,
+    &.dropdown-danger > li > a:focus{
+        background-color: $danger-color;
+    }
+
+}
+
+//fix bug for the select items in btn-group 
+.btn-group.select{
+    overflow: hidden;
+}
+.btn-group.select.open{
+    overflow: visible;
+}

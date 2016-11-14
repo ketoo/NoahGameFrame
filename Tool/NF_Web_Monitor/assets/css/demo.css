@@ -13,32 +13,41 @@
     }
 }
 
-.all-icons [class*="pe-"]{
-    font-size: 40px;
+.icon-section {
+	margin: 0 0 3em;
+	clear: both;
+	overflow: hidden;
 }
-.all-icons input{
-    border: 0;
+.icon-container {
+	width: 240px;
+	padding: .7em 0;
+	float: left;
+	position: relative;
+	text-align: left;
 }
-.all-icons .font-icon-detail{
-    text-align: center;
-    padding: 45px 0px 30px;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    margin: 15px 0;
+.icon-container [class^="ti-"],
+.icon-container [class*=" ti-"] {
+	color: #000;
+	position: absolute;
+	margin-top: 3px;
+	transition: .3s;
 }
-.all-icons .font-icon-detail input{
-    margin: 25px auto 0;
-    width: 100%;
-    text-align: center;
-    display: block;
-    color: #aaa;
-    font-size: 13px;
+.icon-container:hover [class^="ti-"],
+.icon-container:hover [class*=" ti-"] {
+	font-size: 2.2em;
+	margin-top: -5px;
 }
-
-#map{
-    position:relative;
-    width:100%;
-    height: calc(100% - 60px);
+.icon-container:hover .icon-name {
+	color: #000;
+}
+.icon-name {
+	color: #aaa;
+	margin-left: 35px;
+	font-size: .8em;
+	transition: .3s;
+}
+.icon-container:hover .icon-name {
+	margin-left: 45px;
 }
 
 .places-buttons .btn{
