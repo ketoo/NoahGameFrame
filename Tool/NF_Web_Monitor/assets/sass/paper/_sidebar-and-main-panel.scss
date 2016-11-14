@@ -1,0 +1,194 @@
+.sidebar{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background-size: cover;
+    background-position: center center;
+    .sidebar-wrapper{
+        position: relative;
+        max-height: none;
+        min-height: 100%;
+        overflow: hidden;
+        width: 260px;
+        z-index: 4;
+        box-shadow: inset -1px 0px 0px 0px $medium-gray;
+    }
+    .sidebar-background{
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        display: block;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center center;
+    }
+
+}
+.sidebar,
+.off-canvas-sidebar{
+    width: 260px;
+    display: block;
+    font-weight: 200;
+
+    .logo{
+        padding: 18px 0px;
+        margin: 0 20px;
+
+        p{
+            float: left;
+            font-size: 20px;
+            margin: 10px 10px;
+            line-height: 20px;
+        }
+
+        .simple-text{
+            text-transform: uppercase;
+            padding: $padding-small-vertical $padding-zero;
+            display: block;
+            font-size: $font-size-large;
+            text-align: center;
+            font-weight: $font-weight-normal;
+            line-height: 30px;
+        }
+    }
+
+    .nav{
+        margin-top: 20px;
+
+        li{
+            > a{
+                margin: 10px 0px;
+                padding-left: 25px;
+                padding-right: 25px;
+
+                opacity: .7;
+            }
+
+            &:hover > a{
+                opacity: 1;
+            }
+
+            &.active > a{
+                color: $primary-color;
+                opacity: 1;
+
+                &:before{
+                    border-right: 17px solid $medium-gray;
+                    border-top: 17px solid transparent;
+                    border-bottom: 17px solid transparent;
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    right: 0;
+                    top: 8px;
+                }
+
+                &:after{
+                    border-right: 17px solid $bg-nude;
+                    border-top: 17px solid transparent;
+                    border-bottom: 17px solid transparent;
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    right: -1px;
+                    top: 8px;
+                }
+            }
+        }
+
+        p{
+            margin: 0;
+            line-height: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        i{
+            font-size: 24px;
+            float: left;
+            margin-right: 15px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+        }
+    }
+
+    &:after,
+    &:before{
+        display: block;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        background:  $white-background-color;
+    }
+
+    &,
+    &[data-background-color="white"]{
+        @include sidebar-background-color($white-background-color, $default-color);
+    }
+    &[data-background-color="black"]{
+        @include sidebar-background-color($black-background-color, $white-color);
+    }
+
+    &[data-active-color="primary"]{
+        @include sidebar-active-color($primary-color);
+    }
+    &[data-active-color="info"]{
+        @include sidebar-active-color($info-color);
+    }
+    &[data-active-color="success"]{
+        @include sidebar-active-color($success-color);
+    }
+    &[data-active-color="warning"]{
+        @include sidebar-active-color($warning-color);
+    }
+    &[data-active-color="danger"]{
+        @include sidebar-active-color($danger-color);
+    }
+
+}
+
+.main-panel{
+    background-color: $bg-nude;
+    position: relative;
+    z-index: 2;
+    float: right;
+    width: $sidebar-width;
+    min-height: 100%;
+
+    > .content{
+        padding: 30px 15px;
+        min-height: calc(100% - 123px);
+    }
+
+    > .footer{
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar{
+        margin-bottom: 0;
+    }
+}
+
+.sidebar,
+.main-panel{
+    overflow: auto;
+    max-height: 100%;
+    height: 100%;
+    -webkit-transition-property: top,bottom;
+    transition-property: top,bottom;
+    -webkit-transition-duration: .2s,.2s;
+    transition-duration: .2s,.2s;
+    -webkit-transition-timing-function: linear,linear;
+    transition-timing-function: linear,linear;
+    -webkit-overflow-scrolling: touch;
+}
