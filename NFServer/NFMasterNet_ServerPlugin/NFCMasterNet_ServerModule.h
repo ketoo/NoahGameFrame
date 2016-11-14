@@ -74,6 +74,7 @@ private:
     NFINT64 mnLastLogTime;
 
     //serverid,data
+	NFMapEx<int, ServerData> mMasterMap;
 	NFMapEx<int, ServerData> mLoginMap;
     NFMapEx<int, ServerData> mWorldMap;
 	NFMapEx<int, ServerData> mProxyMap;

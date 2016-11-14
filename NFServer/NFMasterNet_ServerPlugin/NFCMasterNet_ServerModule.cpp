@@ -271,6 +271,20 @@ bool NFCMasterNet_ServerModule::AfterInit()
                     NFASSERT(nRet, "Cannot init server net", __FILE__, __FUNCTION__);
                     exit(0);
                 }
+				NFMsg::ServerInfoReport reqMsg;
+
+				reqMsg.set_server_id(nServerID);
+				reqMsg.set_server_name(strName);
+				reqMsg.set_server_cur_count(0);
+				reqMsg.set_server_ip(strIP);
+				reqMsg.set_server_port(nPort);
+				reqMsg.set_server_max_online(nMaxConnect);
+				reqMsg.set_server_state(NFMsg::EST_NARMAL);
+				reqMsg.set_server_type(nServerType);
+
+				auto pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+				*(pServerData->pData) = reqMsg;
+				mMasterMap.AddElement(nServerID, pServerData);
             }
         }
     }
@@ -484,8 +498,25 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 	root.AddMember("errMsg", "", allocator);
 	root.AddMember("nowTime", rapidjson::Value(NFTime::GetStr().c_str(), allocator), allocator);
 
+	rapidjson::Value master(rapidjson::kArrayType);
+	std::shared_ptr<ServerData> pServerData = mMasterMap.First();
+	while (pServerData)
+	{
+		rapidjson::Value server(rapidjson::kObjectType);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
+		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
+		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
+		server.AddMember("port", pServerData->pData->server_port(), allocator);
+		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
+		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		master.PushBack(server, allocator);
+		pServerData = mMasterMap.Next();
+	}
+	root.AddMember("master", master, allocator);
+
 	rapidjson::Value logins(rapidjson::kArrayType);
-	std::shared_ptr<ServerData> pServerData = mLoginMap.First();
+	pServerData = mLoginMap.First();
 	while (pServerData)
 	{
 		rapidjson::Value server(rapidjson::kObjectType);
