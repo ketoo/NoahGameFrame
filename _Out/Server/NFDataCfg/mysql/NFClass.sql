@@ -63,6 +63,11 @@ CREATE TABLE `GuildName` (
 	PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `HttpServer` (
+	`ID` varchar(128) NOT NULL,
+	PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `InitProperty` (
 	`ID` varchar(128) NOT NULL,
 	PRIMARY KEY (`ID`)

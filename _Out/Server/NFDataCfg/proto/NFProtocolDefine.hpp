@@ -499,6 +499,27 @@ public:
 
 };
 
+class HttpServer
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xHttpServer = "HttpServer"; return xHttpServer; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	// Property
+	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
+	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
+	static const std::string& JsonPort(){ static std::string xJsonPort = "JsonPort"; return xJsonPort; } // int
+	static const std::string& WebPort(){ static std::string xWebPort = "WebPort"; return xWebPort; } // int
+	static const std::string& WebRootPath(){ static std::string xWebRootPath = "WebRootPath"; return xWebRootPath; } // string
+	// Record
+
+};
+
 class InitProperty
 {
 public:
