@@ -110,6 +110,7 @@ extern FILE *fpLog;
 /////////////////////////////////////////////////////////////////////////////
 // local helper function prototypes
 /////////////////////////////////////////////////////////////////////////////
+void _mwInitSocketData(HttpSocket *phsSocket);
 SOCKET _mwAcceptSocket(HttpParam* hp, struct sockaddr_in *sinaddr);
 void _mwDenySocket(HttpParam* hp,struct sockaddr_in *sinaddr);
 int _mwProcessReadSocket(HttpParam* hp, HttpSocket* phsSocket);
