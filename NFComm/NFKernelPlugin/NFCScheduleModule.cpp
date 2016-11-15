@@ -1,5 +1,4 @@
 #include "NFCScheduleModule.h"
-#include "NFComm/NFCore/NFTime.h"
 
 void NFCScheduleElement::DoHeartBeatEvent()
 {
@@ -36,7 +35,7 @@ bool NFCScheduleModule::Execute()
 		NF_SHARE_PTR<NFCScheduleElement> pSchedule = xObjectSchedule->First();
 		while (pSchedule)
 		{
-			NFINT64 nNow = NFTime::GetTime();
+			NFINT64 nNow = NFGetTime();
 			if (nNow > pSchedule->mnNextTriggerTime && pSchedule->mnRemainCount > 0)
 			{
 				pSchedule->mnRemainCount--;
@@ -121,8 +120,8 @@ bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strSch
 	NFCScheduleElement xSchedule;
 	xSchedule.mstrScheduleName = strScheduleName;
 	xSchedule.mfIntervalTime = fTime;
-	xSchedule.mnNextTriggerTime = NFTime::GetTime() + (NFINT64)(fTime * 1000);
-	xSchedule.mnStartTime = NFTime::GetTime();
+	xSchedule.mnNextTriggerTime = NFGetTime() + (NFINT64)(fTime * 1000);
+	xSchedule.mnStartTime = NFGetTime();
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = self;

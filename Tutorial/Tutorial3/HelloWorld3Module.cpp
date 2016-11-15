@@ -24,7 +24,7 @@ int HelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event, co
 int HelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 
-	unsigned long unNowTime = m_pKernelModule->GetTime();
+	unsigned long unNowTime = NFGetTime();
 
 	std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 
@@ -44,7 +44,7 @@ int HelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::strin
 
 		m_pScheduleModule->AddSchedule(self, "OnHeartBeat", this, &HelloWorld3Module::OnHeartBeat, 5.0f, 10 );
 
-		mLastTime = m_pKernelModule->GetTime();
+		mLastTime = NFGetTime();
 	}
 
 	return 0;
