@@ -94,7 +94,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFBox.hpp" />
-    <ClInclude Include="NFCAddConsistentHash.hpp" />
     <ClInclude Include="NFCalendar.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
@@ -110,10 +109,8 @@
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFPlane.hpp" />
-    <ClInclude Include="NFQueue.h" />
     <ClInclude Include="NFRay.hpp" />
     <ClInclude Include="NFSphere.hpp" />
-    <ClInclude Include="NFSingleton.h" />
     <ClInclude Include="NFCRecord.h" />
     <ClInclude Include="NFIObject.h" />
     <ClInclude Include="NFIProperty.h" />
@@ -121,8 +118,6 @@
     <ClInclude Include="NFIRecord.h" />
     <ClInclude Include="NFIRecordManager.h" />
     <ClInclude Include="NFList.hpp" />
-    <ClInclude Include="NFMap.h" />
-    <ClInclude Include="NFTime.h" />
     <ClInclude Include="NFVector2.hpp" />
     <ClInclude Include="NFVector3.hpp" />
   </ItemGroup>
@@ -136,7 +131,6 @@
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
-    <ClCompile Include="NFTime.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
