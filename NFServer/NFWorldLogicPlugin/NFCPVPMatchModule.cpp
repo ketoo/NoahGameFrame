@@ -9,7 +9,6 @@
 #include "NFCPVPMatchModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#include "NFComm/NFCore/NFTime.h"
 
 bool NFCPVPMatchModule::Init()
 {
@@ -26,7 +25,7 @@ bool NFCPVPMatchModule::Shut()
 bool NFCPVPMatchModule::Execute()
 {
 	//Î»ÖÃÄØ
-	NFINT64 nNowTime = NFTime::GetTime();
+	NFINT64 nNowTime = pPluginManager->GetNowTime();
 
 	if (nNowTime - mnLastCheckTime < 60)
 	{
