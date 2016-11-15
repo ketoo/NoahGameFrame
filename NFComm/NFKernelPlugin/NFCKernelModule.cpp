@@ -10,10 +10,9 @@
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
-#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFCore/NFCMemManger.h"
+#include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-#include "NFComm/NFCore/NFTime.h"
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
@@ -950,7 +949,7 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
 NFGUID NFCKernelModule::CreateGUID()
 {
     int64_t value = 0;   
-    uint64_t time = GetTime();
+    uint64_t time = NFGetTime();
 
     // 保留后48位时间
     //value = time << 16;
@@ -1434,11 +1433,6 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 {
 
     return false;
-}
-
-NFINT64 NFCKernelModule::GetTime()
-{
-	return NFTime::GetTime();
 }
 
 bool NFCKernelModule::AfterInit()
