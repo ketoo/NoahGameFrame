@@ -244,6 +244,7 @@
 #endif
 
 #include <stdint.h>
+#include <chrono>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
@@ -362,6 +363,10 @@ inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
     return std::abs(dValue) <= epsilon;
 }
 
+inline int64_t NFGetTime()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define PROTOBUF_USE_DLLS
