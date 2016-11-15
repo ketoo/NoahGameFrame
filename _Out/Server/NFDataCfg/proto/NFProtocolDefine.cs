@@ -486,6 +486,26 @@ public class GuildName
 
 }
 
+public class HttpServer
+{
+	//Class name
+	public static readonly string ThisName = "HttpServer";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	// Property
+	public static readonly String ServerID = "ServerID"; // int
+	public static readonly String IP = "IP"; // string
+	public static readonly String JsonPort = "JsonPort"; // int
+	public static readonly String WebPort = "WebPort"; // int
+	public static readonly String WebRootPath = "WebRootPath"; // string
+	// Record
+
+}
+
 public class InitProperty
 {
 	//Class name
