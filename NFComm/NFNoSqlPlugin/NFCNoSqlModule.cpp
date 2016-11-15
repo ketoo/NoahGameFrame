@@ -90,16 +90,37 @@ NFINoSqlDriver* NFCNoSqlModule::GetDriverBySuit(const int strHash)
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
 {
+	if (!mxNoSqlDriver.ExistElement(strID))
+	{
+		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver(new NFCNoSqlDriver());
+		pNoSqlDriver->Connect(strIP, 6379, "");
+		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
+	}
+
 	return false;
 }
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort)
 {
+	if (!mxNoSqlDriver.ExistElement(strID))
+	{
+		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver(new NFCNoSqlDriver());
+		pNoSqlDriver->Connect(strIP, nPort, "");
+		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
+	}
+
 	return false;
 }
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass)
 {
+	if (!mxNoSqlDriver.ExistElement(strID))
+	{
+		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver(new NFCNoSqlDriver());
+		pNoSqlDriver->Connect(strIP, nPort, strPass);
+		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
+	}
+
 	return false;
 }
 
@@ -110,5 +131,5 @@ NFINoSqlDriver* NFCNoSqlModule::GetDriver(const std::string& strID)
 
 bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 {
-	return false;
+	return mxNoSqlDriver.RemoveElement(strID);
 }
