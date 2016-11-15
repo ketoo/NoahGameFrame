@@ -8,11 +8,11 @@
 
 #include "NFCMasterNet_ServerModule.h"
 #include "NFMasterNet_ServerPlugin.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "Dependencies/rapidjson/document.h"
 #include "Dependencies/rapidjson/writer.h"
 #include "Dependencies/rapidjson/stringbuffer.h"
-#include "NFComm/NFCore/NFTime.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFCore/NFCalendar.h"
 
 bool NFCMasterNet_ServerModule::Init()
 {
@@ -494,9 +494,10 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 	rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
 	rapidjson::Value root(rapidjson::kObjectType);
 
+	NFCalendar xCalendar;
 	root.AddMember("code", 0, allocator);
 	root.AddMember("errMsg", "", allocator);
-	root.AddMember("nowTime", rapidjson::Value(NFTime::GetStr().c_str(), allocator), allocator);
+	root.AddMember("nowTime", rapidjson::Value(xCalendar.GetStr().c_str(), allocator), allocator);
 
 	rapidjson::Value master(rapidjson::kArrayType);
 	std::shared_ptr<ServerData> pServerData = mMasterMap.First();
