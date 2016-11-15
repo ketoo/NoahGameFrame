@@ -276,6 +276,10 @@ $(document).ready(function(){
 		$("#formServerIP").val(window.localStorage.getItem("formServerIP"));
 		$("#formServerPort").val(window.localStorage.getItem("formServerPort"));
 	}
+	else
+	{
+		$("#formServerIP").val(document.domain);
+	}
 	$.notify({
 		icon: 'ti-gift',
 		message: "Welcome to <b>NoahGameFrame Web Monitor</b>."
