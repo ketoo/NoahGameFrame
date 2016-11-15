@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <string>
-#include "NFComm/NFCore/NFIObject.h"
+#include <map>
+#include <vector>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 enum CalendarType
 {
@@ -25,13 +27,13 @@ class NFCalendar
 {
 public:
 
-private:
 	static const NFINT64 NWEEK = 7 * 24 * 60 * 60 * 1000L;
 	static const NFINT64 NDAY = 24 * 60 * 60 * 1000L;
 	static const NFINT64 NHOUR = 60 * 60 * 1000L;
 	static const NFINT64 NMINUTE = 60 * 1000L;
 	static const NFINT64 NSECOND = 1000L;
 	static const int mnDefaultTimeZone = 8;
+
 public:
 	NFCalendar();
 	NFCalendar(NFINT64 nTime);
@@ -43,16 +45,18 @@ public:
 	NFINT64 GetTime();
 	std::string GetStr();
 	NFINT64 Get(CalendarType type);
-	int GetTimeZone();
 
-	void SetTime(NFINT64 nTime);
+	int GetTimeZone();
 	void SetTimeZone(int nTimeZone);
 
+	std::string GetStr_YMD();
+	std::string GetStr_HMS();
+	std::string GetStr_YMDHMSM();
 private:
 	void InitWithYMDHMSM(std::string strTime);
 	NFINT64 GetFixTime();//add timeZone value
 	bool IsLeapYear(int nYear);
-	int split(const string& str, vector<string>& ret_, string sep);
+	int split(const string& str, std::vector<string>& ret_, string sep);
 
 private:
 	NFINT64 mnTime;
