@@ -230,18 +230,13 @@ public:
 
     void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
     {
-        if (mxConsistentHash.Size() <= 0)
-        {
-            return;
-        }
+		NF_SHARE_PTR<ConnectData> pConnectData = mxServerMap.GetElementBySuit(nHashKey);
+		if (pConnectData)
+		{
 
-        NFCMachineNode xNode;
-        if (!GetServerMachineData(lexical_cast<std::string>(nHashKey), xNode))
-        {
-            return ;
-        }
+		}
 
-        SendByServerID(xNode.nMachineID, nMsgID, msg, nLen);
+        SendByServerID(pConnectData->nGameID, nMsgID, msg, nLen);
     }
 
     void SendSuitByPB(const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData)
@@ -252,18 +247,12 @@ public:
 
 	void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData)
 	{
-		if (mxConsistentHash.Size() <= 0)
+		NF_SHARE_PTR<ConnectData> pConnectData = mxServerMap.GetElementBySuit(nHashKey);
+		if (pConnectData)
 		{
-			return;
-		}
 
-		NFCMachineNode xNode;
-		if (!GetServerMachineData(lexical_cast<std::string> (nHashKey), xNode))
-		{
-			return ;
 		}
-
-		SendToServerByPB(xNode.nMachineID, nMsgID, xData);
+		SendToServerByPB(pConnectData->nGameID, nMsgID, xData);
 	}
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -433,7 +422,8 @@ private:
         NF_SHARE_PTR<ConnectData> pServerInfo = GetServerNetInfo(pNet);
         if (pServerInfo.get())
         {
-            AddServerWeightData(pServerInfo);
+			/////////////////////////////////////////////////////////////////////////////////////
+            //AddServerWeightData(pServerInfo);
             pServerInfo->eState = ConnectDataState::NORMAL;
         }
 
@@ -445,7 +435,8 @@ private:
         NF_SHARE_PTR<ConnectData> pServerInfo = GetServerNetInfo(pNet);
         if (nullptr != pServerInfo)
         {
-            RemoveServerWeightData(pServerInfo);
+			/////////////////////////////////////////////////////////////////////////////////////
+			//RemoveServerWeightData(pServerInfo);
             pServerInfo->eState = ConnectDataState::DISCONNECT;
             pServerInfo->mnLastActionTime = GetPluginManager()->GetNowTime();
         }
@@ -484,43 +475,10 @@ private:
         mxTempNetList.clear();
     }
 
-    bool GetServerMachineData(const std::string& strServerID, NFCMachineNode& xMachineData)
-    {
-        uint32_t nCRC32 = NFrame::CRC32(strServerID);
-        return mxConsistentHash.GetSuitNode(nCRC32, xMachineData);
-    }
-
-    void AddServerWeightData(NF_SHARE_PTR<ConnectData> xInfo)
-    {
-        for (int j = 0; j < EConstDefine_DefaultWeith; ++j)
-        {
-            NFCMachineNode vNode(j);
-
-            vNode.nMachineID = xInfo->nGameID;
-            vNode.strIP = xInfo->strIP;
-            vNode.nPort = xInfo->nPort;
-            vNode.nWeight = EConstDefine_DefaultWeith;
-            mxConsistentHash.Insert(vNode);
-        }
-    }
-
-    void RemoveServerWeightData(NF_SHARE_PTR<ConnectData> xInfo)
-    {
-        for (int j = 0; j < EConstDefine_DefaultWeith; ++j)
-        {
-            NFCMachineNode vNode(j);
-
-            vNode.nMachineID = xInfo->nGameID;
-            vNode.strIP = xInfo->strIP;
-            vNode.nPort = xInfo->nPort;
-            vNode.nWeight = EConstDefine_DefaultWeith;
-            mxConsistentHash.Erase(vNode);
-        }
-    }
-
 private:
-	NFMapEx<int, ConnectData> mxServerMap;
-	NFCConsistentHash mxConsistentHash;
+	NFCConsistentHashMapEx<int, ConnectData> mxServerMap;
+	//NFMapEx<int, ConnectData> mxServerMap;
+	//NFCConsistentHash mxConsistentHash;
 
     std::list<ConnectData> mxTempNetList;
 
