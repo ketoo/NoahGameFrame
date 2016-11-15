@@ -140,32 +140,33 @@
         <div class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-3">
-						<div class="form-group">
-							<label>MasterServer IP</label>
-							<input id="formServerIP" type="text" class="form-control border-input" placeholder="MasterServer IP" value="127.0.0.1">
+					<div class="col-md-4">
+						<div class="alert alert-info">
+								<span>MasterServer :
+								<label id="MSIPPORT" class="text-danger">[unset, please enter!]</label></span>
 						</div>
 					</div>
-					<div class="col-md-2">
-						<div class="form-group">
-							<label>MasterServer Port</label>
-							<input id="formServerPort" type="text" class="form-control border-input" placeholder="MasterServer Port" value="80">
+					<div id="MasterInfoForm">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>MasterServer IP</label>
+								<input id="formServerIP" type="text" class="form-control border-input" placeholder="MasterServer IP" value="127.0.0.1">
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="form-group">
-							<label>Confirm</label><br>
-							<button id="serverButton" type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>MasterServer Port</label>
+								<input id="formServerPort" type="text" class="form-control border-input" placeholder="MasterServer Port" value="80">
+							</div>
 						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Confirm</label><br>
+								<button id="serverButton" type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+							</div>
+						</div>	
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<div class="form-group">
-							<label>MasterServer</label>
-							<label id="MSIPPORT">unset, please enter!</label>
-						</div>
-					</div>
+	
 				</div>
 			</div>
             <div id="serverChartList" class="container-fluid">
@@ -182,7 +183,7 @@
 
                         <li>
                             <a href="http://www.noahframe.com/">
-                                NoahGameFrame
+                               NoahGameFrame
                             </a>
                         </li>
                         <li>
@@ -192,7 +193,7 @@
                         </li>
                         <li>
                             <a href="https://github.com/ketoo/NoahGameFrame">
-                                github
+                               github
                             </a>
                         </li>
                     </ul>
