@@ -74,19 +74,7 @@
     <ClInclude Include="NFSphere.hpp">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="NFTime.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFSingleton.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFQueue.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFMapEx.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFMap.h">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFList.hpp">
@@ -102,9 +90,6 @@
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFCConsistentHash.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCAddConsistentHash.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFCMemManger.h">
@@ -137,9 +122,6 @@
       <Filter>Unit</Filter>
     </ClCompile>
     <ClCompile Include="NFCDataList.cpp">
-      <Filter>Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="NFTime.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
     <ClCompile Include="NFCMemManger.cpp">

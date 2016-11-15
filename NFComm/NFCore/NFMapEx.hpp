@@ -15,6 +15,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
+#include "NFCConsistentHash.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 template <typename T , typename TD>
@@ -60,26 +61,18 @@ public:
         if (itr == mObjectList.end())
         {
             mObjectList.insert(typename NFMapOBJECT::value_type(name, data));
+
             return true;
         }
 
         return false;
     }
 
-    virtual bool SetElement(const T& name, const NF_SHARE_PTR<TD> data)
-    {
-        mObjectList[name] = data;
-
-        return true;
-    }
-
     virtual bool RemoveElement(const T& name)
     {
-        NF_SHARE_PTR<TD> pData;
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr != mObjectList.end())
         {
-            pData = itr->second;
             mObjectList.erase(itr);
 
             return true;
@@ -113,6 +106,7 @@ public:
             return NF_SHARE_PTR<TD>();
         }
     }
+
     virtual TD* FirstNude(T& name)
     {
         if (mObjectList.size() <= 0)
@@ -269,16 +263,89 @@ public:
         mObjectList.clear();
         return true;
     }
-private:
+
+protected:
     NFMapOBJECT     mObjectList;
     typename NFMapOBJECT::iterator mObjectCurIter;
 };
 
-template <typename T , typename TD>
-class NFConcurrentMap : public NFMapEx<T, TD>
+template <typename T, typename TD>
+class NFCConsistentHashMapEx : public NFMapEx<T, TD>
 {
 public:
-protected:
+	virtual void InitHashNodeWeith(const int nWeigh = 500)
+	{
+		mnWeigh = nWeigh;
+	}
+
+	virtual NF_SHARE_PTR<TD> GetElementBySuit()
+	{
+		NFCVirtualNode<T> vNode;
+		if (mxConsistentHash.GetSuitNode(vNode))
+		{
+			typename NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
+			if (itr != mObjectList.end())
+			{
+				return itr->second;
+			}
+		}
+
+		return NULL;
+	}
+
+	virtual NF_SHARE_PTR<TD> GetElementBySuit(const T& name)
+	{
+		NFCVirtualNode<T> vNode;
+		if (mxConsistentHash.GetSuitNode(name, vNode))
+		{
+			typename NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
+			if (itr != mObjectList.end())
+			{
+				return itr->second;
+			}
+		}
+
+		return NULL;
+	}
+
+	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr == mObjectList.end())
+		{
+			mObjectList.insert(typename NFMapOBJECT::value_type(name, data));
+
+			mxConsistentHash.Insert(name);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	virtual bool RemoveElement(const T& name)
+	{
+		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		if (itr != mObjectList.end())
+		{
+			mObjectList.erase(itr);
+			mxConsistentHash.Erase(name);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	bool ClearAll()
+	{
+		mObjectList.clear();
+		mxConsistentHash.ClearAll();
+		return true;
+	}
+
 private:
+	int mnWeigh = 0;
+	NFCConsistentHash<T> mxConsistentHash;
 };
 #endif
