@@ -1,10 +1,10 @@
-#ifndef NFI_MASTER_HTTP_MODULE_H
-#define NFI_MASTER_HTTP_MODULE_H
+#ifndef NFI_MASTER_WEB_MODULE_H
+#define NFI_MASTER_WEB_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFIMasterNet_HttpServerModule
+class NFIMasterNet_WebServerModule
 	: public NFIModule
 {
 
