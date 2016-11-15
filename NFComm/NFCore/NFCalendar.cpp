@@ -26,7 +26,6 @@ NFCalendar::NFCalendar(std::string strTime, int nTimeZone)
 	mnTime = 0;
 	mnTimeZone = nTimeZone;
 	InitWithYMDHMSM(strTime);
-
 }
 
 NFINT64 NFCalendar::GetTime()
@@ -211,10 +210,6 @@ int NFCalendar::GetTimeZone()
 	return mnTime;
 }
 
-void NFCalendar::SetTime(NFINT64 nTime)
-{
-	mnTime = nTime;
-}
 void NFCalendar::SetTimeZone(int nTimeZone)
 {
 	mnTimeZone = nTimeZone;
@@ -360,4 +355,29 @@ int NFCalendar::split(const string& str, vector<string>& ret_, string sep)
 		}
 	}
 	return 0;
+}
+
+std::string NFCalendar::GetStr_YMD()
+{
+	std::string str;
+	NFCalendar calendar;
+	std::stringstream ss;
+	ss << calendar.Get(CalendarType::YEAR) << "-" << calendar.Get(CalendarType::MONTH) + 1 << "-" << calendar.Get(CalendarType::DAY);
+	return ss.str();
+}
+std::string NFCalendar::GetStr_HMS()
+{
+	std::string str;
+	NFCalendar calendar;
+	std::stringstream ss;
+	ss << calendar.Get(CalendarType::HOUR) << ":" << calendar.Get(CalendarType::MINUTE) << ":" << calendar.Get(CalendarType::SECOND);
+	return ss.str();
+}
+std::string NFCalendar::GetStr_YMDHMSM()
+{
+	std::string str;
+	NFCalendar calendar;
+	std::stringstream ss;
+	ss << calendar.Get(CalendarType::YEAR) << "-" << calendar.Get(CalendarType::MONTH) + 1 << "-" << calendar.Get(CalendarType::DAY) << " " << calendar.Get(CalendarType::HOUR) << ":" << calendar.Get(CalendarType::MINUTE) << ":" << calendar.Get(CalendarType::SECOND) << " " << calendar.Get(CalendarType::MILLISECOND);
+	return ss.str();
 }
