@@ -9,13 +9,12 @@
 #ifndef NFI_OBJECT_H
 #define NFI_OBJECT_H
 
-
-#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFIDataList.h"
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
 #include "NFIPropertyManager.h"
 #include "NFIComponentManager.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFIObject

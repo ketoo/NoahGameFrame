@@ -139,8 +139,6 @@ public:
 
     //////////////////////////////////////////////////////////////////////////
 
-	virtual NFINT64 GetTime();
-
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
 
 protected:
