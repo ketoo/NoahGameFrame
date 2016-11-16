@@ -49,6 +49,7 @@ html_ServerLine_temp = "\
 		</div>\
 	</div>";
 
+var intervalTrigger;
 var serverNowTime;
 var chartMaxMaster;
 var chartMaxWorld;
@@ -136,150 +137,186 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 
 function getMasterInfo()
 {
-	$.getJSON("http://" + window.localStorage.getItem("formServerIP") + ":" + window.localStorage.getItem("formServerPort") + "/id=10200,jsoncallback=?", function (data) {
-		var serverNameList = new Array();
-		var serverStatusList = new Array();
-		var serverUpdateList = new Array();
-		var serverOnlineList = new Array();
-		var serverMaxList = new Array();
+	$.ajax({ 
+		type: "post", 
+		url: "json/dashboard", 
+		dataType: "json", 
+		success: function (data) { 
+			if(typeof(data.code) == "undefined")
+			{
+				$.notify({
+					icon: 'ti-info',
+					message: "Master Web Server Error!"
 
-		serverNowTime = data.nowTime;
-		labelArr.push(serverNowTime);
+				},{
+					type: 'danger',
+					delay: 2000,
+				});
+				clearInterval(intervalTrigger);
+				return;
+			}
+			else
+			{
+				if(data.code != "0")
+				{
+					$.notify({
+						icon: 'ti-info',
+						message: "Master Web Server Error!["+ data.errMsg +"]"
 
-		if(labelArr.length > 8)
-		{
-			labelArr.shift();
-		}
-		
-		$.each(data.master, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
+					},{
+						type: 'danger ',
+						delay: 2000,
+					});
+					if(data.code != "0")
+					{
+						clearInterval(intervalTrigger);
+						return;
+					}
+				}
+			}
+
+			var serverNameList = new Array();
+			var serverStatusList = new Array();
+			var serverUpdateList = new Array();
+			var serverOnlineList = new Array();
+			var serverMaxList = new Array();
+
+			serverNowTime = data.nowTime;
+			serverNowTime = new Date(data.nowTime * 1000);
+			serverNowTime = pad(serverNowTime.getHours(),2) +":"+ pad(serverNowTime.getMinutes(),2) +":"+ pad(serverNowTime.getSeconds(),2);
+			labelArr.push(serverNowTime);
+
+			if(labelArr.length > 8)
+			{
+				labelArr.shift();
+			}
 			
-			if(typeof(masterOnline[i]) == "undefined")
-			{
-				masterOnline[i] = new Array();
-			}
-			masterOnline[i].push(item.onlineCount);
-			if(masterOnline[i].length > 8)
-			{
-				masterOnline[i].shift();
-			}
-			if(chartMaxMaster < item.onlineCount + 10)
-			{
-				chartMaxMaster = item.onlineCount + 10;
-			}
-			serverOnlineList.push(masterOnline);
-			serverMaxList.push(chartMaxMaster);
-		});
-		
-		$.each(data.worlds, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(worldOnline[i]) == "undefined")
-			{
-				worldOnline[i] = new Array();
-			}
-			worldOnline[i].push(item.onlineCount);
-			if(worldOnline[i].length > 8)
-			{
-				worldOnline[i].shift();
-			}
-			if(chartMaxWorld < item.onlineCount + 10)
-			{
-				chartMaxWorld = item.onlineCount + 10;
-			}
-			serverOnlineList.push(worldOnline);
-			serverMaxList.push(chartMaxWorld);
-		});
+			$.each(data.master, function (i, item) {
+				serverNameList.push(item.servrName);
+				serverStatusList.push(item.status);
+				serverUpdateList.push(serverNowTime);
+				
+				if(typeof(masterOnline[i]) == "undefined")
+				{
+					masterOnline[i] = new Array();
+				}
+				masterOnline[i].push(item.onlineCount);
+				if(masterOnline[i].length > 8)
+				{
+					masterOnline[i].shift();
+				}
+				if(chartMaxMaster < item.onlineCount + 10)
+				{
+					chartMaxMaster = item.onlineCount + 10;
+				}
+				serverOnlineList.push(masterOnline);
+				serverMaxList.push(chartMaxMaster);
+			});
+			
+			$.each(data.worlds, function (i, item) {
+				serverNameList.push(item.servrName);
+				serverStatusList.push(item.status);
+				serverUpdateList.push(serverNowTime);
+				if(typeof(worldOnline[i]) == "undefined")
+				{
+					worldOnline[i] = new Array();
+				}
+				worldOnline[i].push(item.onlineCount);
+				if(worldOnline[i].length > 8)
+				{
+					worldOnline[i].shift();
+				}
+				if(chartMaxWorld < item.onlineCount + 10)
+				{
+					chartMaxWorld = item.onlineCount + 10;
+				}
+				serverOnlineList.push(worldOnline);
+				serverMaxList.push(chartMaxWorld);
+			});
 
-		$.each(data.games, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(gameOnline[i]) == "undefined")
-			{
-				gameOnline[i] = new Array();
-			}
-			gameOnline[i].push(item.onlineCount);
-			if(gameOnline[i].length > 8)
-			{
-				gameOnline[i].shift();
-			}
-			if(chartMaxGame < item.onlineCount + 10)
-			{
-				chartMaxGame = item.onlineCount + 10;
-			}
-			serverOnlineList.push(gameOnline);
-			serverMaxList.push(chartMaxGame);
-		});
+			$.each(data.games, function (i, item) {
+				serverNameList.push(item.servrName);
+				serverStatusList.push(item.status);
+				serverUpdateList.push(serverNowTime);
+				if(typeof(gameOnline[i]) == "undefined")
+				{
+					gameOnline[i] = new Array();
+				}
+				gameOnline[i].push(item.onlineCount);
+				if(gameOnline[i].length > 8)
+				{
+					gameOnline[i].shift();
+				}
+				if(chartMaxGame < item.onlineCount + 10)
+				{
+					chartMaxGame = item.onlineCount + 10;
+				}
+				serverOnlineList.push(gameOnline);
+				serverMaxList.push(chartMaxGame);
+			});
 
-		$.each(data.proxys, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(proxyOnline[i]) == "undefined")
-			{
-				proxyOnline[i] = new Array();
-			}
-			proxyOnline[i].push(item.onlineCount);
-			if(proxyOnline[i].length > 8)
-			{
-				proxyOnline[i].shift();
-			}
-			if(chartMaxProxy < item.onlineCount + 10)
-			{
-				chartMaxProxy = item.onlineCount + 10;
-			}
-			serverOnlineList.push(proxyOnline);
-			serverMaxList.push(chartMaxProxy);
-		});
+			$.each(data.proxys, function (i, item) {
+				serverNameList.push(item.servrName);
+				serverStatusList.push(item.status);
+				serverUpdateList.push(serverNowTime);
+				if(typeof(proxyOnline[i]) == "undefined")
+				{
+					proxyOnline[i] = new Array();
+				}
+				proxyOnline[i].push(item.onlineCount);
+				if(proxyOnline[i].length > 8)
+				{
+					proxyOnline[i].shift();
+				}
+				if(chartMaxProxy < item.onlineCount + 10)
+				{
+					chartMaxProxy = item.onlineCount + 10;
+				}
+				serverOnlineList.push(proxyOnline);
+				serverMaxList.push(chartMaxProxy);
+			});
 
-		$.each(data.logins, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(loginOnline[i]) == "undefined")
-			{
-				loginOnline[i] = new Array();
-			}
-			loginOnline[i].push(item.onlineCount);
-			if(loginOnline[i].length > 8)
-			{
-				loginOnline[i].shift();
-			}
-			if(chartMaxLogin < item.onlineCount + 10)
-			{
-				chartMaxLogin = item.onlineCount + 10;
-			}
-			serverOnlineList.push(loginOnline);
-			serverMaxList.push(chartMaxLogin);
-		});			
-		
-		showServerStatus(serverNameList, serverStatusList, serverUpdateList, serverOnlineList, serverMaxList);
+			$.each(data.logins, function (i, item) {
+				serverNameList.push(item.servrName);
+				serverStatusList.push(item.status);
+				serverUpdateList.push(serverNowTime);
+				if(typeof(loginOnline[i]) == "undefined")
+				{
+					loginOnline[i] = new Array();
+				}
+				loginOnline[i].push(item.onlineCount);
+				if(loginOnline[i].length > 8)
+				{
+					loginOnline[i].shift();
+				}
+				if(chartMaxLogin < item.onlineCount + 10)
+				{
+					chartMaxLogin = item.onlineCount + 10;
+				}
+				serverOnlineList.push(loginOnline);
+				serverMaxList.push(chartMaxLogin);
+			});			
+			
+			showServerStatus(serverNameList, serverStatusList, serverUpdateList, serverOnlineList, serverMaxList);
+		}, 
+		error: function (XMLHttpRequest, textStatus, errorThrown) { 
+			$.notify({
+				icon: 'ti-info',
+				message: "Master Web Server Error!"
+			},{
+				type: 'danger ',
+				delay: 2000,
+			});
+			clearInterval(intervalTrigger);
+			return;
+		} 
 	});
 }
 
 
 $(document).ready(function(){
-	if(window.localStorage.getItem("formServerIP") && window.localStorage.getItem("formServerPort"))
-	{
-		setInterval(getMasterInfo,1000);
-		$("#MasterInfoForm").hide();
-		document.getElementById("MSIPPORT").innerHTML = "[" + window.localStorage.getItem("formServerIP") + ":" + window.localStorage.getItem("formServerPort") + "]";
-		document.getElementById("MSIPPORT").innerHTML += " (click to edit)";
-		document.getElementById("MSIPPORT").className = "text-success";
-		$("#MSIPPORT").click(function(){
-			$("#MasterInfoForm").show();
-		});
-		$("#formServerIP").val(window.localStorage.getItem("formServerIP"));
-		$("#formServerPort").val(window.localStorage.getItem("formServerPort"));
-	}
-	else
-	{
-		$("#formServerIP").val(document.domain);
-	}
+	intervalTrigger = setInterval(getMasterInfo,1000);
+
 	$.notify({
 		icon: 'ti-gift',
 		message: "Welcome to <b>NoahGameFrame Web Monitor</b>."
@@ -290,19 +327,11 @@ $(document).ready(function(){
 	});
 });
 
-function reloadWeb(){location.reload();}
-
-$("#serverButton").click(function(){  
-	window.localStorage.setItem("formServerIP", $("#formServerIP").val());
-	window.localStorage.setItem("formServerPort", $("#formServerPort").val());
-
-	$.notify({
-		icon: 'ti-gift',
-		message: "Set IP[" + window.localStorage.getItem("formServerIP") + "] and Port[" + window.localStorage.getItem("formServerPort") + "] successfully."
-	},{
-		type: 'info',
-		timer: 10
-	});
-	$("#MasterInfoForm").hide();
-	setTimeout(function(){location.reload();},2000);
-}); 
+function pad(num, n) {
+    var len = num.toString().length;
+    while(len < n) {
+        num = '0' + num;
+        len++;
+    }
+    return num;
+}
