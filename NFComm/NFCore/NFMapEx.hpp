@@ -283,7 +283,7 @@ public:
 		NFCVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNode(vNode))
 		{
-			typename NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
+			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
 			if (itr != mObjectList.end())
 			{
 				return itr->second;
@@ -298,7 +298,7 @@ public:
 		NFCVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNode(name, vNode))
 		{
-			typename NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
+			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
 			if (itr != mObjectList.end())
 			{
 				return itr->second;
@@ -310,10 +310,10 @@ public:
 
 	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
 	{
-		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(name);
 		if (itr == mObjectList.end())
 		{
-			mObjectList.insert(typename NFMapOBJECT::value_type(name, data));
+			mObjectList.insert(typename NFMapEx<T, TD>::NFMapOBJECT::value_type(name, data));
 
 			mxConsistentHash.Insert(name);
 
@@ -325,7 +325,7 @@ public:
 
 	virtual bool RemoveElement(const T& name)
 	{
-		typename NFMapOBJECT::iterator itr = mObjectList.find(name);
+		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(name);
 		if (itr != mObjectList.end())
 		{
 			mObjectList.erase(itr);
