@@ -166,7 +166,7 @@ bool NFCMasterNet_WebServerModule::AfterInit()
 			strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
 		}
 	}
-
+	//webserver only run one instance for NF
 	if (pPluginManager->GetAppID() != nWebServerAppID)
 	{
 		return true;
