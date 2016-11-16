@@ -2,7 +2,7 @@
 //
 
 #include "NFMasterNet_HttpServerPlugin.h"
-#include "NFCMasterNet_HttpServerModule.h"
+#include "NFCMasterNet_HttpJsonModule.h"
 #include "NFCMasterNet_WebServerModule.h"
 //
 //
