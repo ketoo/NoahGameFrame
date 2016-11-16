@@ -52,7 +52,7 @@ int NFCMasterNet_WebServerModule::GetMasterJson(UrlHandlerParam * param)
 		p += len;
 		bufsize -= len;
 		//return data to server
-		param->dataBytes = (int)p - (int)(param->pucBuffer);
+		param->dataBytes = (long)p - (long)(param->pucBuffer);
 		param->fileType = HTTPFILETYPE_JS;
 		return FLAG_DATA_RAW;
 	}
@@ -81,7 +81,7 @@ int NFCMasterNet_WebServerModule::GetMasterJson(UrlHandlerParam * param)
 			p += len;
 			bufsize -= len;
 			//return data to server
-			param->dataBytes = (int)p - (int)(param->pucBuffer);
+			param->dataBytes = (long)p - (long)(param->pucBuffer);
 			param->fileType = HTTPFILETYPE_JS;
 			return ret;
 		}
@@ -97,7 +97,7 @@ int NFCMasterNet_WebServerModule::GetMasterJson(UrlHandlerParam * param)
 		p += len;
 		bufsize -= len;
 		//return data to server
-		param->dataBytes = (int)p - (int)(param->pucBuffer);
+		param->dataBytes = (long)p - (long)(param->pucBuffer);
 		param->fileType = HTTPFILETYPE_JS;
 		return FLAG_DATA_RAW;
 	}
