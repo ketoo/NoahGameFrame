@@ -87,7 +87,7 @@ bool NFCMasterNet_WebServerModule::AfterInit()
 		int error = 0;
 		for (i = 0; urlHandlerList[i].pchUrlPrefix; i++) {
 			if (urlHandlerList[i].pfnEventHandler) {
-				if (urlHandlerList[i].pfnEventHandler(MW_PARSE_ARGS, urlHandlerList[i].pfnEventHandler, &httpParam))
+				if (urlHandlerList[i].pfnEventHandler(MW_PARSE_ARGS, (void*)urlHandlerList[i].pfnEventHandler, &httpParam))
 					error++;
 			}
 		}
@@ -151,7 +151,7 @@ bool NFCMasterNet_WebServerModule::Execute()
 				{
 					int iError = 0;
 					int iOptSize = sizeof(int);
-					if (getsockopt(socket, SOL_SOCKET, SO_ERROR, (char*)&iError, &iOptSize)) {
+					if (getsockopt(socket, SOL_SOCKET, SO_ERROR, (char*)&iError, (socklen_t*)&iOptSize)) {
 						// if a socket contains a error, close it
 						SYSLOG(LOG_INFO, "[%d] Socket no longer vaild.\n", socket);
 						phsSocketCur->flags = FLAG_CONN_CLOSE;
