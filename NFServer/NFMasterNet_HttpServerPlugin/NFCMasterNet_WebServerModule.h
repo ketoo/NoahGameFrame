@@ -17,6 +17,8 @@ extern "C" {
 #include <string.h>
 #include <fcntl.h>
 
+extern "C" int uhStats(UrlHandlerParam* param);
+
 class NFCMasterNet_WebServerModule
 	: public NFIMasterNet_WebServerModule
 {
@@ -33,12 +35,24 @@ public:
 	virtual bool Execute();
 
 	virtual bool BeforeShut();
-
+	static int GetMasterJson(UrlHandlerParam* param);
 protected:
+
 	char* GetLocalAddrString();;
 	void GetFullPath(char* buffer, const char* path);
 
 private:
+	UrlHandler urlHandlerList[3] = {
+		{ "stats", uhStats, NULL },
+		{ "json", GetMasterJson ,NULL},
+		{ NULL },
+	};
+
+	AuthHandler authHandlerList[2] = {
+		{ "stats", "user", "pass", "group=admin", "" },
+		{ NULL }
+	};
+
 	NFIKernelModule* mKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
