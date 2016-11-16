@@ -29,10 +29,10 @@ protected:
 	void InvalidMessage(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap);
 
 private:
-	NFIKernelModule* mKernelModule;
-	NFIHttpServerModule* mHttpNetModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIHttpServerModule* m_pHttpNetModule;
 
-	NFIMasterNet_ServerModule* mMasterServerModule;
+	NFIMasterNet_ServerModule* m_pMasterServerModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 };
