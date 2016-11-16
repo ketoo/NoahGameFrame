@@ -26,6 +26,7 @@ public:
 	NFCMasterNet_WebServerModule(NFIPluginManager* p)
 	{
 		pPluginManager = p;
+		s_pPluginManager = p;
 	}
 
 	virtual bool Init();
@@ -40,6 +41,8 @@ protected:
 
 	char* GetLocalAddrString();;
 	void GetFullPath(char* buffer, const char* path);
+	static std::vector<std::string> SplitString(const std::string& str, std::string delim);
+
 
 private:
 	UrlHandler urlHandlerList[3] = {
@@ -70,6 +73,8 @@ private:
 
 	int nWebPort;
 	std::string strWebRootPath;
+
+	static NFIPluginManager* s_pPluginManager;
 };
 
 #endif
