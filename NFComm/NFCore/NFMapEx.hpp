@@ -283,8 +283,8 @@ public:
 		NFCVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNode(vNode))
 		{
-			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
-			if (itr != mObjectList.end())
+			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
+			if (itr != NFMapEx<T, TD>::mObjectList.end())
 			{
 				return itr->second;
 			}
@@ -298,8 +298,8 @@ public:
 		NFCVirtualNode<T> vNode;
 		if (mxConsistentHash.GetSuitNode(name, vNode))
 		{
-			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(vNode.mxData);
-			if (itr != mObjectList.end())
+			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
+			if (itr != NFMapEx<T, TD>::mObjectList.end())
 			{
 				return itr->second;
 			}
@@ -310,10 +310,10 @@ public:
 
 	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
 	{
-		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(name);
-		if (itr == mObjectList.end())
+		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(name);
+		if (itr == NFMapEx<T, TD>::mObjectList.end())
 		{
-			mObjectList.insert(typename NFMapEx<T, TD>::NFMapOBJECT::value_type(name, data));
+			NFMapEx<T, TD>::mObjectList.insert(typename NFMapEx<T, TD>::NFMapOBJECT::value_type(name, data));
 
 			mxConsistentHash.Insert(name);
 
@@ -325,10 +325,10 @@ public:
 
 	virtual bool RemoveElement(const T& name)
 	{
-		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = mObjectList.find(name);
-		if (itr != mObjectList.end())
+		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(name);
+		if (itr != NFMapEx<T, TD>::mObjectList.end())
 		{
-			mObjectList.erase(itr);
+			NFMapEx<T, TD>::mObjectList.erase(itr);
 			mxConsistentHash.Erase(name);
 
 			return true;
@@ -339,7 +339,7 @@ public:
 
 	bool ClearAll()
 	{
-		mObjectList.clear();
+		NFMapEx<T, TD>::mObjectList.clear();
 		mxConsistentHash.ClearAll();
 		return true;
 	}
