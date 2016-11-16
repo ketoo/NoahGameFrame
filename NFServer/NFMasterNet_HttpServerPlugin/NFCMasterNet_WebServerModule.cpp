@@ -1,6 +1,6 @@
 #include "NFCMasterNet_WebServerModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-
+NFIPluginManager* NFCMasterNet_WebServerModule::s_pPluginManager = nullptr;
 bool NFCMasterNet_WebServerModule::Init()
 {
 	return true;
@@ -34,27 +34,73 @@ bool NFCMasterNet_WebServerModule::Shut()
 
 int NFCMasterNet_WebServerModule::GetMasterJson(UrlHandlerParam * param)
 {
+	NFIMasterNet_ServerModule* mMasterServerModule = s_pPluginManager->FindModule<NFIMasterNet_ServerModule>();
+	std::string str = mMasterServerModule->GetServersStatus();
+
 	char *p;
+	p = param->pucBuffer;
 	HttpStats *stats = &((HttpParam*)param->hp)->stats;
 	HttpRequest *req = &param->hs->request;
+	std::string strUrl(req->pucPath);
 	IPADDR ip = param->hs->ipAddr;
 	int bufsize = param->dataBytes;
-	int ret = FLAG_DATA_RAW;
 
-	if (stats->clientCount > 4) {
-		param->pucBuffer = (char*)malloc(stats->clientCount * 256 + 1024);
-		ret = FLAG_DATA_RAW | FLAG_TO_FREE;
+	auto findCmd = SplitString(strUrl, "/");
+	if (findCmd.size() != 2)
+	{
+		int len = snprintf(p, bufsize, "{\"code\":1,\"errMsg\":\"Url Cannot be recongnized!\"}", 1, 0, "utf-8");
+		p += len;
+		bufsize -= len;
+		//return data to server
+		param->dataBytes = (int)p - (int)(param->pucBuffer);
+		param->fileType = HTTPFILETYPE_JS;
+		return FLAG_DATA_RAW;
 	}
 
-	p = param->pucBuffer;
+	std::string strCmd = findCmd[1];
+	std::map<string, int> CmdMap;
+	CmdMap.insert(std::pair<std::string, int>("dashboard", 1));
 
-	int len1 = snprintf(p, bufsize, "{Json:Json}", 1, 0, "utf-8");
-	p += len1;
-	bufsize -= len1;
-	//return data to server
-	param->dataBytes = (int)p - (int)(param->pucBuffer);
-	param->fileType = HTTPFILETYPE_JS;
-	return ret;
+	std::map<string, int>::iterator it = CmdMap.find(strCmd);
+	if (it != CmdMap.end())
+	{
+		switch (CmdMap[strCmd])
+		{
+		case 1:
+		{
+			int ret = FLAG_DATA_RAW;
+
+			if (stats->clientCount > 4) {
+				param->pucBuffer = (char*)malloc(stats->clientCount * 256 + 1024);
+				ret = FLAG_DATA_RAW | FLAG_TO_FREE;
+			}
+
+			p = param->pucBuffer;
+
+			int len = snprintf(p, bufsize, str.c_str(), 1, 0, "utf-8");
+			p += len;
+			bufsize -= len;
+			//return data to server
+			param->dataBytes = (int)p - (int)(param->pucBuffer);
+			param->fileType = HTTPFILETYPE_JS;
+			return ret;
+		}
+		break;
+		default:
+			break;
+		}
+
+	}
+	else {
+		std::string errMsg = "{\"code\":1,\"errMsg\":\"Cannot find the command:" + strCmd + "!\"}";
+		int len = snprintf(p, bufsize, errMsg.c_str(), 1, 0, "utf-8");
+		p += len;
+		bufsize -= len;
+		//return data to server
+		param->dataBytes = (int)p - (int)(param->pucBuffer);
+		param->fileType = HTTPFILETYPE_JS;
+		return FLAG_DATA_RAW;
+	}
 }
 
 char * NFCMasterNet_WebServerModule::GetLocalAddrString()
@@ -65,6 +111,40 @@ char * NFCMasterNet_WebServerModule::GetLocalAddrString()
 void NFCMasterNet_WebServerModule::GetFullPath(char * buffer, const char * path)
 {
 	strcpy(buffer, path);
+}
+
+std::vector<std::string> NFCMasterNet_WebServerModule::SplitString(const std::string & str, std::string delim)
+{
+	std::vector<std::string> result;
+	if (str.empty() || delim.empty())
+	{
+		return result;
+	}
+
+	std::string tmp;
+	size_t pos_begin = str.find_first_not_of(delim);
+	size_t pos = 0;
+	while (pos_begin != std::string::npos)
+	{
+		pos = str.find(delim, pos_begin);
+		if (pos != std::string::npos)
+		{
+			tmp = str.substr(pos_begin, pos - pos_begin);
+			pos_begin = pos + delim.length();
+		}
+		else
+		{
+			tmp = str.substr(pos_begin);
+			pos_begin = pos;
+		}
+
+		if (!tmp.empty())
+		{
+			result.push_back(tmp);
+			tmp.clear();
+		}
+	}
+	return result;
 }
 
 bool NFCMasterNet_WebServerModule::AfterInit()
@@ -288,12 +368,7 @@ bool NFCMasterNet_WebServerModule::Execute()
 				phsSocketCur->socket = _mwAcceptSocket(hp, &sinaddr);
 				if (phsSocketCur->socket == 0) return true;
 				phsSocketCur->ipAddr.laddr = ntohl(sinaddr.sin_addr.s_addr);
-				SYSLOG(LOG_INFO, "[%d] IP: %d.%d.%d.%d\n",
-					phsSocketCur->socket,
-					phsSocketCur->ipAddr.caddr[3],
-					phsSocketCur->ipAddr.caddr[2],
-					phsSocketCur->ipAddr.caddr[1],
-					phsSocketCur->ipAddr.caddr[0]);
+				//SYSLOG(LOG_INFO, "[%d] IP: %d.%d.%d.%d\n", phsSocketCur->socket, phsSocketCur->ipAddr.caddr[3], phsSocketCur->ipAddr.caddr[2], phsSocketCur->ipAddr.caddr[1],phsSocketCur->ipAddr.caddr[0]);
 
 				hp->stats.clientCount++;
 
