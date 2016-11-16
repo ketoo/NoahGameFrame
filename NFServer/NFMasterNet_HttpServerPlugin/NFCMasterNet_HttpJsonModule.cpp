@@ -4,24 +4,27 @@
 
 bool NFCMasterNet_HttpJsonModule::Init()
 {
-	mHttpNetModule = new NFIHttpServerModule(pPluginManager);
+	m_pHttpNetModule = new NFIHttpServerModule(pPluginManager);
 
-	mKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	mMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
 	return true;
 }
 bool NFCMasterNet_HttpJsonModule::Shut()
 {
+	delete m_pHttpNetModule;
+	m_pHttpNetModule = nullptr;
 	return true;
 }
 
 bool NFCMasterNet_HttpJsonModule::AfterInit()
 {
-	mHttpNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_QUERY_SERVER_STATUS, this, &NFCMasterNet_HttpJsonModule::OnQueryServerStatus);
-	mHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpJsonModule::InvalidMessage);
-
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
+	m_pHttpNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_QUERY_SERVER_STATUS, this, &NFCMasterNet_HttpJsonModule::OnQueryServerStatus);
+	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpJsonModule::InvalidMessage);
+
 
 	int nJsonPort = 80;
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
@@ -34,19 +37,21 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 			nJsonPort = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::JsonPort());
 		}
 	}
-	mHttpNetModule->InitServer(nJsonPort);
+
+	m_pHttpNetModule->InitServer(nJsonPort);
+
 	return true;
 }
 
 bool NFCMasterNet_HttpJsonModule::Execute()
 {
-	mHttpNetModule->Execute();
+	m_pHttpNetModule->Execute();
 	return true;
 }
 
 void NFCMasterNet_HttpJsonModule::OnQueryServerStatus(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
 {
-	std::string str = mMasterServerModule->GetServersStatus();
+	std::string str = m_pMasterServerModule->GetServersStatus();
 	
 	NFCHttpNet::SendMsg(req, argMap["jsoncallback"] + "(" + str + ");");
 }
