@@ -30,9 +30,10 @@ if(UNIX)
         ./libctb/src/portscan.cpp
         ./libctb/src/serportx.cpp
         )
+	add_definitions( -DNOCONSOLE )
     add_library(miniweb ${miniwebFile} ${miniwebFile2})
 else()
-	add_definitions( -DWIN32 -D_DEBUG -D_CONSOLE -DHTTP_DEBUG -D_CRT_SECURE_NO_DEPRECATE)
+	add_definitions( -DWIN32 -D_CONSOLE -D_CRT_SECURE_NO_DEPRECATE -DNOCONSOLE )
     add_library(miniweb ${miniwebFile})
 endif()
 target_link_libraries( miniweb Threads::Threads)
