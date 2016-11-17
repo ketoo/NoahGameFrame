@@ -36,6 +36,7 @@ bool NFCNoSqlModule::AfterInit()
 {
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
 	if (xLogicClass)
@@ -48,7 +49,18 @@ bool NFCNoSqlModule::AfterInit()
 			const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
 			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
 
-			this->AddConnectSql(strId, strIP, nPort);
+			if(this->AddConnectSql(strId, strIP, nPort))
+			{
+				std::ostringstream strLog;
+				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			}
+			else
+			{
+				std::ostringstream strLog;
+				strLog << "Connected NoSqlServer[" << strIP << "], Port = " << nPort;
+				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			}
 		}
 	}
     return true;
@@ -59,9 +71,14 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
     return true;
 }
 
-NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit()
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuitRandom()
 {
-	return mxNoSqlDriver.GetElementBySuit();
+	return mxNoSqlDriver.GetElementBySuitRandom();
+}
+
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuitConsistent()
+{
+	return mxNoSqlDriver.GetElementBySuitConsistent();
 }
 
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& strHash)
