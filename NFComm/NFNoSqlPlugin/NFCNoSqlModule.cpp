@@ -13,7 +13,6 @@
 NFCNoSqlModule::NFCNoSqlModule(NFIPluginManager* p)
 {
     pPluginManager = p;
-	m_pNoSqlDriver = NULL;
 }
 
 NFCNoSqlModule::~NFCNoSqlModule()
@@ -28,8 +27,6 @@ bool NFCNoSqlModule::Init()
 
 bool NFCNoSqlModule::Shut()
 {
-    delete m_pNoSqlDriver;
-	m_pNoSqlDriver = NULL;
 
     return true;
 }
@@ -44,48 +41,19 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
     return true;
 }
 
-bool NFCNoSqlModule::ConnectSql(const std::string& strIP)
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit()
 {
-	if (!m_pNoSqlDriver)
-	{
-		m_pNoSqlDriver = new NFCNoSqlDriver();
-		return m_pNoSqlDriver->Connect(strIP, 6379);
-	}
-	return false;
+	return mxNoSqlDriver.GetElementBySuit();
 }
 
-bool NFCNoSqlModule::ConnectSql(const std::string & strIP, const int nPort)
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& strHash)
 {
-	if (!m_pNoSqlDriver)
-	{
-		m_pNoSqlDriver = new NFCNoSqlDriver();
-		return m_pNoSqlDriver->Connect(strIP, nPort, "");
-	}
-	return false;
+	return mxNoSqlDriver.GetElementBySuit(strHash);
 }
 
-bool NFCNoSqlModule::ConnectSql(const std::string & strIP, const int nPort, const std::string & strPass)
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int strHash)
 {
-	if (!m_pNoSqlDriver)
-	{
-		m_pNoSqlDriver = new NFCNoSqlDriver();
-		return m_pNoSqlDriver->Connect(strIP, nPort, strPass);
-	}
-	return false;
-}
-
-NFINoSqlDriver * NFCNoSqlModule::GetDriver()
-{
-	return m_pNoSqlDriver;
-}
-NFINoSqlDriver* NFCNoSqlModule::GetDriverBySuit(const std::string& strHash)
-{
-	return nullptr;
-}
-
-NFINoSqlDriver* NFCNoSqlModule::GetDriverBySuit(const int strHash)
-{
-	return nullptr;
+	return mxNoSqlDriver.GetElementBySuit(strHash);
 }
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
@@ -124,9 +92,9 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 	return false;
 }
 
-NFINoSqlDriver* NFCNoSqlModule::GetDriver(const std::string& strID)
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriver(const std::string& strID)
 {
-	return nullptr;
+	return mxNoSqlDriver.GetElement(strID);
 }
 
 bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
