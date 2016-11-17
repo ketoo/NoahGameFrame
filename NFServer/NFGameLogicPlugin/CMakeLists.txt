@@ -4,9 +4,7 @@ file(GLOB NFGameLogicPlugin_ROOT_Cpp
 
 file(GLOB NFGameLogicPlugin_ROOT_Hpp 
 	*.h)
-remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCCreateRoleModule.cpp")	
-remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCCreateRoleModule.h")
-
+	
 remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCRebornItemConsumeProcessModule.cpp")
 remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCRebornItemConsumeProcessModule.h")
 

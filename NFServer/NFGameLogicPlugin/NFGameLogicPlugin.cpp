@@ -29,6 +29,7 @@
 #include "NFCTaskModule.h"
 #include "NFCChatModule.h"
 #include "NFCGSPVPMatchModule.h"
+#include "NFCCreateRoleModule.h"
 #include "NFCItemCardConsumeProcessModule.h"
 #include "NFCItemEquipConsumeProcessModule.h"
 #include "NFCItemGemConsumeProcessModule.h"
@@ -69,7 +70,8 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
     REGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
     REGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
-    REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
 
     //REGISTER_MODULE(pPluginManager, NFIRebornItemConsumeProcessModule, NFCRebornItemConsumeProcessModule)
     //REGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
@@ -145,7 +147,8 @@ void NFGameLogicPlugin::Uninstall()
     //UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
     //UNREGISTER_MODULE(pPluginManager, NFIRebornItemConsumeProcessModule, NFCRebornItemConsumeProcessModule)
 
-    UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+    UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
+	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
     UNREGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
     UNREGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
     UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
