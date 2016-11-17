@@ -104,7 +104,8 @@ public:
 	virtual void Erase(const T& name) = 0;
 	virtual std::size_t Erase(const NFIVirtualNode& xNode)  = 0;
 
-	virtual bool GetSuitNode(NFIVirtualNode& node) = 0;
+	virtual bool GetSuitNodeRandom(NFIVirtualNode& node) = 0;
+	virtual bool GetSuitNodeConsistent(NFIVirtualNode& node) = 0;
 	virtual bool GetSuitNode(const T& name, NFIVirtualNode& node) = 0;
 	//virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node) = 0;
 	virtual bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node) = 0;
@@ -189,10 +190,15 @@ public:
         return mxNodes.erase(hash);
     }
 
-	virtual bool GetSuitNode(NFIVirtualNode& node)
+	virtual bool GetSuitNodeRandom(NFIVirtualNode& node)
 	{
 		int nID = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		return GetSuitNode(nID, node);
+	}
+
+	virtual bool GetSuitNodeConsistent(NFIVirtualNode& node)
+	{
+		return GetSuitNode(0, node);
 	}
 
 	virtual bool GetSuitNode(const T& name, NFIVirtualNode& node)

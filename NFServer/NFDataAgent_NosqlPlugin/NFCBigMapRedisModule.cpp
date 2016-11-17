@@ -72,8 +72,8 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::B
 	{
 		return false;
 	}
-
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuit(strGridID);
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridBaseKey();
@@ -92,7 +92,7 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::string&strGridID, NFMsg::B
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGridID, std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfoList)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::vector<std::string> vValues;
@@ -119,7 +119,7 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGr
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo)
 {
- 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
+ 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Map::ThisName());
  	NFList<std::string>& xElementList = xLogicClass->GetIdList();
  	
  	std::vector<std::string> vFields;
@@ -136,7 +136,7 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo
 
 bool NFCBigMapRedisModule::GetGridLeaveMsgInfo(const std::string&strGridID, std::vector<NFMsg::BigMapLeaveMsg>& xLeaveMsgList)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridLeaveMsgKey(strGridID);
@@ -160,7 +160,7 @@ bool NFCBigMapRedisModule::GetGridLeaveMsgInfo(const std::string&strGridID, std:
 
 bool NFCBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, std::vector<NFMsg::BigMapWarHistory>& xWarHistoryList)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridWarHistoryKey(strGridID);
@@ -190,7 +190,7 @@ bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std:
 		return false;
 	}
 
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);
@@ -250,7 +250,7 @@ bool NFCBigMapRedisModule::SetGridBaseInfo(const std::string&strGridID, const NF
 		return false;
 	}
 
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridBaseKey();
@@ -272,7 +272,7 @@ bool NFCBigMapRedisModule::AddGridLeaveMsgInfo(const std::string&strGridID, cons
 	}
 
 	//数量限制
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridLeaveMsgKey(strGridID);
@@ -294,7 +294,7 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 	}
 
 	//数量限制
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridWarHistoryKey(strGridID);
@@ -317,7 +317,7 @@ bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, cons
 	}
 
 	//数量限制
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);
@@ -335,7 +335,7 @@ bool NFCBigMapRedisModule::RemoveGridStationInfo(const std::string& strGridID, c
 	}
 
 	//数量限制
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
 		std::string strKey = GetGridStationHistoryKey(strGridID);

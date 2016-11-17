@@ -38,7 +38,7 @@ bool NFCPlayerRedisModule::AfterInit()
 
 int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (!pNoSqlDriver)
 	{
 		return 0;
@@ -64,7 +64,7 @@ int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
 
 int64_t NFCPlayerRedisModule::GetPlayerCacheProxyID(const NFGUID & self)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (!pNoSqlDriver)
 	{
 		return 0;
@@ -90,7 +90,7 @@ int64_t NFCPlayerRedisModule::GetPlayerCacheProxyID(const NFGUID & self)
 
 bool NFCPlayerRedisModule::GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (!pNoSqlDriver)
 	{
 		return 0;
@@ -124,7 +124,7 @@ bool NFCPlayerRedisModule::GetPlayerCacheGameID(const std::vector<std::string>& 
 
 bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList)
 {
-	NFINoSqlDriver* pNoSqlDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (!pNoSqlDriver)
 	{
 		return 0;
