@@ -217,6 +217,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_NET_INFO", Value=50)]
       EGMI_STS_NET_INFO = 50,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_SERVER_REPORT", Value=90)]
+      EGMI_STS_SERVER_REPORT = 90,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_HEART_BEAT", Value=100)]
       EGMI_STS_HEART_BEAT = 100,
             
@@ -726,6 +729,9 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=10103)]
       EGMI_ACK_CREATEPVPECTYPE = 10103,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_QUERY_SERVER_STATUS", Value=10200)]
+      EGMI_REQ_QUERY_SERVER_STATUS = 10200,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUY_FORM_SHOP", Value=20000)]
       EGMI_REQ_BUY_FORM_SHOP = 20000,
