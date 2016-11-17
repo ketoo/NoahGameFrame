@@ -35,36 +35,6 @@ bool NFCCommonRedisModule::AfterInit()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::NoSqlServer::ThisName());
-    if (xLogicClass)
-    {
-        NFList<std::string>& strIdList = xLogicClass->GetIdList();
-        std::string strId;
-        for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
-        {
-            const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
-            const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
-            const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
-            if (!m_pNoSqlModule->ConnectSql(strIP, nPort, strAuth))
-            {
-                std::ostringstream strLog;
-                strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
-                m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-            }
-            else
-            {
-                std::ostringstream strLog;
-                strLog << "Connected NoSqlServer[" << strIP << "], Port = " << nPort;
-                m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-            }
-        }
-    }
-
-	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-	if (!pDriver)
-	{
-		
-	}
     return true;
 }
 
@@ -135,7 +105,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
         return nullptr;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return nullptr;
@@ -170,7 +140,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return nullptr;
@@ -209,7 +179,7 @@ bool NFCCommonRedisModule::SetCachePropertyInfo(const NFGUID& self, const std::s
         return false;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
@@ -250,7 +220,7 @@ bool NFCCommonRedisModule::SetCacheRecordInfo(const NFGUID& self, const std::str
         return false;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
@@ -281,7 +251,7 @@ bool NFCCommonRedisModule::SetCacheRecordInfo(const NFGUID& self, const std::str
 
 bool NFCCommonRedisModule::RemoveCachePropertyInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
@@ -299,7 +269,7 @@ bool NFCCommonRedisModule::RemoveCachePropertyInfo(const NFGUID& self, const std
 
 bool NFCCommonRedisModule::RemoveCacheRecordInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
     if (!pDriver)
     {
         return false;
