@@ -22,49 +22,51 @@
 #include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 
 class NFCWorldToMasterModule
-    : public NFIWorldToMasterModule
+	: public NFIWorldToMasterModule
 {
 public:
-    NFCWorldToMasterModule(NFIPluginManager* p)
-    {
-        pPluginManager = p;
+	NFCWorldToMasterModule(NFIPluginManager* p)
+	{
+		pPluginManager = p;
 		mLastReportTime = 0;
-    }
+	}
 
-    virtual bool Init();
-    virtual bool BeforeShut();
-    virtual bool Shut();
-    virtual bool Execute();
-    virtual bool AfterInit();
+	virtual bool Init();
+	virtual bool BeforeShut();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
 	virtual NFINetClientModule* GetNetClientModule();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 protected:
 
-    void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-    //连接丢失,删2层(连接对象，帐号对象)
-    void OnClientDisconnect(const int nAddress);
-    //有连接
-    void OnClientConnected(const int nAddress);
+	//连接丢失,删2层(连接对象，帐号对象)
+	void OnClientDisconnect(const int nAddress);
+	//有连接
+	void OnClientConnected(const int nAddress);
 
-    virtual void LogServerInfo(const std::string& strServerInfo);
+	virtual void LogServerInfo(const std::string& strServerInfo);
 
 
-    void Register(NFINet* pNet);
+	void Register(NFINet* pNet);
 	void ServerReport();
-    void RefreshWorldInfo();
+	void RefreshWorldInfo();
 
-    void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 	NFINT64 mLastReportTime;
 
-    NFILogModule* m_pLogModule;
-    NFIElementModule* m_pElementModule;
-    NFIClassModule* m_pClassModule;
-    NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
+	NFILogModule* m_pLogModule;
+	NFIElementModule* m_pElementModule;
+	NFIClassModule* m_pClassModule;
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFINetClientModule* m_pNetClientModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

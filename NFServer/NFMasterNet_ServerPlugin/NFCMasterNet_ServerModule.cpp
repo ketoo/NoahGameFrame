@@ -510,6 +510,15 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
 
+		rapidjson::Value server_info_ext(rapidjson::kArrayType);
+		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
+		{
+			rapidjson::Value extKeyValue(rapidjson::kObjectType);
+			extKeyValue.AddMember(rapidjson::Value(pServerData->pData->server_info_list_ext().key(i).c_str(), allocator), rapidjson::Value(pServerData->pData->server_info_list_ext().value(i).c_str(), allocator), allocator);
+			server_info_ext.PushBack(extKeyValue, allocator);
+		}
+		server.AddMember("info_ext", server_info_ext, allocator);
+
 		master.PushBack(server, allocator);
 		pServerData = mMasterMap.Next();
 	}
@@ -526,6 +535,15 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		rapidjson::Value server_info_ext(rapidjson::kArrayType);
+		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
+		{
+			rapidjson::Value extKeyValue(rapidjson::kObjectType);
+			extKeyValue.AddMember(rapidjson::Value(pServerData->pData->server_info_list_ext().key(i).c_str(), allocator), rapidjson::Value(pServerData->pData->server_info_list_ext().value(i).c_str(), allocator), allocator);
+			server_info_ext.PushBack(extKeyValue, allocator);
+		}
+		server.AddMember("info_ext", server_info_ext, allocator);
 
 		logins.PushBack(server, allocator);
 		pServerData = mLoginMap.Next();
@@ -544,6 +562,15 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
 
+		rapidjson::Value server_info_ext(rapidjson::kArrayType);
+		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
+		{
+			rapidjson::Value extKeyValue(rapidjson::kObjectType);
+			extKeyValue.AddMember(rapidjson::Value(pServerData->pData->server_info_list_ext().key(i).c_str(), allocator), rapidjson::Value(pServerData->pData->server_info_list_ext().value(i).c_str(), allocator), allocator);
+			server_info_ext.PushBack(extKeyValue, allocator);
+		}
+		server.AddMember("info_ext", server_info_ext, allocator);
+
 		worlds.PushBack(server, allocator);
 		pServerData = mWorldMap.Next();
 	}
@@ -561,6 +588,15 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
 
+		rapidjson::Value server_info_ext(rapidjson::kArrayType);
+		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
+		{
+			rapidjson::Value extKeyValue(rapidjson::kObjectType);
+			extKeyValue.AddMember(rapidjson::Value(pServerData->pData->server_info_list_ext().key(i).c_str(), allocator), rapidjson::Value(pServerData->pData->server_info_list_ext().value(i).c_str(), allocator), allocator);
+			server_info_ext.PushBack(extKeyValue, allocator);
+		}
+		server.AddMember("info_ext", server_info_ext, allocator);
+
 		proxys.PushBack(server, allocator);
 		pServerData = mProxyMap.Next();
 	}
@@ -577,6 +613,15 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
+
+		rapidjson::Value server_info_ext(rapidjson::kArrayType);
+		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
+		{
+			rapidjson::Value extKeyValue(rapidjson::kObjectType);
+			extKeyValue.AddMember(rapidjson::Value(pServerData->pData->server_info_list_ext().key(i).c_str(), allocator), rapidjson::Value(pServerData->pData->server_info_list_ext().value(i).c_str(), allocator), allocator);
+			server_info_ext.PushBack(extKeyValue, allocator);
+		}
+		server.AddMember("info_ext", server_info_ext, allocator);
 
 		games.PushBack(server, allocator);
 		pServerData = mGameMap.Next();
