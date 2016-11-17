@@ -31,7 +31,6 @@ bool NFCCommonRedisModule::AfterInit()
 {
     m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
-    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
@@ -99,7 +98,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
 
 NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(strClassName);
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(strClassName);
     if (!pPropertyManager.get())
     {
         return nullptr;
@@ -111,7 +110,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
         return nullptr;
     }
 
-    const std::string& strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
+    const std::string& strKey = GetPropertyCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HGet(strKey, self.ToString(), strValue))
     {
@@ -124,7 +123,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
         return nullptr;
     }
 
-    if (!m_pCommonRedisModule->ConvertPBToPropertyManager(xMsg, pPropertyManager))
+    if (!ConvertPBToPropertyManager(xMsg, pPropertyManager))
     {
         return nullptr;
     }
@@ -134,7 +133,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
 
 NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(strClassName);
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(strClassName);
     if (!pRecordManager.get())
     {
         return nullptr;
@@ -146,7 +145,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    const std::string strKey = GetRecordCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HGet(strKey, self.ToString(), strValue))
     {
@@ -159,7 +158,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
+    if (!ConvertPBToRecordManager(xMsg, pRecordManager))
     {
         return nullptr;
     }
@@ -186,7 +185,7 @@ bool NFCCommonRedisModule::SetCachePropertyInfo(const NFGUID& self, const std::s
     }
 
     NFMsg::ObjectPropertyList xMsg;
-    if (!m_pCommonRedisModule->ConvertPropertyManagerToPB(pPropertyManager, xMsg, true))
+    if (!ConvertPropertyManagerToPB(pPropertyManager, xMsg, true))
     {
         return false;
     }
@@ -199,7 +198,7 @@ bool NFCCommonRedisModule::SetCachePropertyInfo(const NFGUID& self, const std::s
         return false;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
+    const std::string strKey = GetPropertyCacheKey(strClassName);
     if (!pDriver->HSet(strKey, self.ToString(), strValue))
     {
         return false;
@@ -227,7 +226,7 @@ bool NFCCommonRedisModule::SetCacheRecordInfo(const NFGUID& self, const std::str
     }
 
     NFMsg::ObjectRecordList xMsg;
-    if (!m_pCommonRedisModule->ConvertRecordManagerToPB(pRecordManager, xMsg, true))
+    if (!ConvertRecordManagerToPB(pRecordManager, xMsg, true))
     {
         return false;
     }
@@ -240,7 +239,7 @@ bool NFCCommonRedisModule::SetCacheRecordInfo(const NFGUID& self, const std::str
         return false;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    const std::string strKey = GetRecordCacheKey(strClassName);
     if (!pDriver->HSet(strKey, self.ToString(), strValue))
     {
         return false;
@@ -257,7 +256,7 @@ bool NFCCommonRedisModule::RemoveCachePropertyInfo(const NFGUID& self, const std
         return false;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(strClassName);
+    const std::string strKey = GetPropertyCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HDel(strKey, self.ToString()))
     {
@@ -275,7 +274,7 @@ bool NFCCommonRedisModule::RemoveCacheRecordInfo(const NFGUID& self, const std::
         return false;
     }
 
-    std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(strClassName);
+    std::string strKey = GetRecordCacheKey(strClassName);
     std::string strValue;
     if (!pDriver->HDel(strKey, self.ToString()))
     {
