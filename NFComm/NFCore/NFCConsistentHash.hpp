@@ -106,7 +106,7 @@ public:
 
 	virtual bool GetSuitNode(NFIVirtualNode& node) = 0;
 	virtual bool GetSuitNode(const T& name, NFIVirtualNode& node) = 0;
-	virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node) = 0;
+	//virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node) = 0;
 	virtual bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node) = 0;
 
 	virtual bool GetNodeList(std::list<NFIVirtualNode>& nodeList) = 0;
@@ -201,13 +201,13 @@ public:
 		uint32_t nCRC32 = NFrame::CRC32(str);
 		return GetSuitNode(nCRC32, node);
 	}
-	
+	/*
 	virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node)
 	{
 		uint32_t nCRC32 = NFrame::CRC32(str);
         return GetSuitNode(nCRC32, node);
 	}
-	
+	*/
 	virtual bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node)
 	{
 		if(mxNodes.empty())
