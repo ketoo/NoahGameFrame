@@ -37,7 +37,6 @@ bool NFCGameServerToWorldModule::Execute()
 
 void NFCGameServerToWorldModule::Register(NFINet* pNet)
 {
-    //�ɹ���ע��
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
@@ -157,7 +156,6 @@ bool NFCGameServerToWorldModule::AfterInit()
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
-    // ����world server
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {

@@ -13,6 +13,9 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCNoSqlModule
     : public NFINoSqlModule
@@ -34,10 +37,13 @@ public:
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const std::string& strHash);
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int strHash);
+	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int nHash);
     virtual bool RemoveConnectSql(const std::string& strID);
 
 protected:
+
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
 
 	NFCConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
 
