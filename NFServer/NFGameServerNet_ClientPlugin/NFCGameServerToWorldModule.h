@@ -38,6 +38,7 @@ public:
 
     virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
     virtual NFINetClientModule* GetClusterClientModule();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -64,6 +65,7 @@ private:
     NFIElementModule* m_pElementModule;
 	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

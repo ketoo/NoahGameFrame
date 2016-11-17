@@ -36,6 +36,7 @@ void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
 void protobuf_AssignDesc_NFMsgPreGame_2eproto();
 void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
 
+class ServerInfoExt;
 class ServerInfoReport;
 class ServerInfoReportList;
 class AckEventResult;
@@ -100,6 +101,112 @@ inline bool ReqServerListType_Parse(
     ReqServerListType_descriptor(), name, value);
 }
 // ===================================================================
+
+class LIBPROTOC_EXPORT ServerInfoExt : public ::google::protobuf::Message {
+ public:
+  ServerInfoExt();
+  virtual ~ServerInfoExt();
+
+  ServerInfoExt(const ServerInfoExt& from);
+
+  inline ServerInfoExt& operator=(const ServerInfoExt& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ServerInfoExt& default_instance();
+
+  void Swap(ServerInfoExt* other);
+
+  // implements Message ----------------------------------------------
+
+  ServerInfoExt* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ServerInfoExt& from);
+  void MergeFrom(const ServerInfoExt& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated bytes key = 1;
+  inline int key_size() const;
+  inline void clear_key();
+  static const int kKeyFieldNumber = 1;
+  inline const ::std::string& key(int index) const;
+  inline ::std::string* mutable_key(int index);
+  inline void set_key(int index, const ::std::string& value);
+  inline void set_key(int index, const char* value);
+  inline void set_key(int index, const void* value, size_t size);
+  inline ::std::string* add_key();
+  inline void add_key(const ::std::string& value);
+  inline void add_key(const char* value);
+  inline void add_key(const void* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& key() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_key();
+
+  // repeated bytes value = 2;
+  inline int value_size() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline const ::std::string& value(int index) const;
+  inline ::std::string* mutable_value(int index);
+  inline void set_value(int index, const ::std::string& value);
+  inline void set_value(int index, const char* value);
+  inline void set_value(int index, const void* value, size_t size);
+  inline ::std::string* add_value();
+  inline void add_value(const ::std::string& value);
+  inline void add_value(const char* value);
+  inline void add_value(const void* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& value() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_value();
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoExt)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::std::string> key_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> value_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgPreGame_2eproto();
+
+  void InitAsDefaultInstance();
+  static ServerInfoExt* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class LIBPROTOC_EXPORT ServerInfoReport : public ::google::protobuf::Message {
  public:
@@ -221,6 +328,15 @@ class LIBPROTOC_EXPORT ServerInfoReport : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 server_type() const;
   inline void set_server_type(::google::protobuf::int32 value);
 
+  // required .NFMsg.ServerInfoExt server_info_list_ext = 9;
+  inline bool has_server_info_list_ext() const;
+  inline void clear_server_info_list_ext();
+  static const int kServerInfoListExtFieldNumber = 9;
+  inline const ::NFMsg::ServerInfoExt& server_info_list_ext() const;
+  inline ::NFMsg::ServerInfoExt* mutable_server_info_list_ext();
+  inline ::NFMsg::ServerInfoExt* release_server_info_list_ext();
+  inline void set_allocated_server_info_list_ext(::NFMsg::ServerInfoExt* server_info_list_ext);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ServerInfoReport)
  private:
   inline void set_has_server_id();
@@ -239,6 +355,8 @@ class LIBPROTOC_EXPORT ServerInfoReport : public ::google::protobuf::Message {
   inline void clear_has_server_state();
   inline void set_has_server_type();
   inline void clear_has_server_type();
+  inline void set_has_server_info_list_ext();
+  inline void clear_has_server_info_list_ext();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -250,9 +368,10 @@ class LIBPROTOC_EXPORT ServerInfoReport : public ::google::protobuf::Message {
   ::google::protobuf::int32 server_cur_count_;
   int server_state_;
   ::google::protobuf::int32 server_type_;
+  ::NFMsg::ServerInfoExt* server_info_list_ext_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2524,6 +2643,98 @@ class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message {
 
 // ===================================================================
 
+// ServerInfoExt
+
+// repeated bytes key = 1;
+inline int ServerInfoExt::key_size() const {
+  return key_.size();
+}
+inline void ServerInfoExt::clear_key() {
+  key_.Clear();
+}
+inline const ::std::string& ServerInfoExt::key(int index) const {
+  return key_.Get(index);
+}
+inline ::std::string* ServerInfoExt::mutable_key(int index) {
+  return key_.Mutable(index);
+}
+inline void ServerInfoExt::set_key(int index, const ::std::string& value) {
+  key_.Mutable(index)->assign(value);
+}
+inline void ServerInfoExt::set_key(int index, const char* value) {
+  key_.Mutable(index)->assign(value);
+}
+inline void ServerInfoExt::set_key(int index, const void* value, size_t size) {
+  key_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ServerInfoExt::add_key() {
+  return key_.Add();
+}
+inline void ServerInfoExt::add_key(const ::std::string& value) {
+  key_.Add()->assign(value);
+}
+inline void ServerInfoExt::add_key(const char* value) {
+  key_.Add()->assign(value);
+}
+inline void ServerInfoExt::add_key(const void* value, size_t size) {
+  key_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ServerInfoExt::key() const {
+  return key_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+ServerInfoExt::mutable_key() {
+  return &key_;
+}
+
+// repeated bytes value = 2;
+inline int ServerInfoExt::value_size() const {
+  return value_.size();
+}
+inline void ServerInfoExt::clear_value() {
+  value_.Clear();
+}
+inline const ::std::string& ServerInfoExt::value(int index) const {
+  return value_.Get(index);
+}
+inline ::std::string* ServerInfoExt::mutable_value(int index) {
+  return value_.Mutable(index);
+}
+inline void ServerInfoExt::set_value(int index, const ::std::string& value) {
+  value_.Mutable(index)->assign(value);
+}
+inline void ServerInfoExt::set_value(int index, const char* value) {
+  value_.Mutable(index)->assign(value);
+}
+inline void ServerInfoExt::set_value(int index, const void* value, size_t size) {
+  value_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ServerInfoExt::add_value() {
+  return value_.Add();
+}
+inline void ServerInfoExt::add_value(const ::std::string& value) {
+  value_.Add()->assign(value);
+}
+inline void ServerInfoExt::add_value(const char* value) {
+  value_.Add()->assign(value);
+}
+inline void ServerInfoExt::add_value(const void* value, size_t size) {
+  value_.Add()->assign(reinterpret_cast<const char*>(value), size);
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ServerInfoExt::value() const {
+  return value_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+ServerInfoExt::mutable_value() {
+  return &value_;
+}
+
+// -------------------------------------------------------------------
+
 // ServerInfoReport
 
 // required int32 server_id = 1;
@@ -2797,6 +3008,44 @@ inline ::google::protobuf::int32 ServerInfoReport::server_type() const {
 inline void ServerInfoReport::set_server_type(::google::protobuf::int32 value) {
   set_has_server_type();
   server_type_ = value;
+}
+
+// required .NFMsg.ServerInfoExt server_info_list_ext = 9;
+inline bool ServerInfoReport::has_server_info_list_ext() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ServerInfoReport::set_has_server_info_list_ext() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ServerInfoReport::clear_has_server_info_list_ext() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void ServerInfoReport::clear_server_info_list_ext() {
+  if (server_info_list_ext_ != NULL) server_info_list_ext_->::NFMsg::ServerInfoExt::Clear();
+  clear_has_server_info_list_ext();
+}
+inline const ::NFMsg::ServerInfoExt& ServerInfoReport::server_info_list_ext() const {
+  return server_info_list_ext_ != NULL ? *server_info_list_ext_ : *default_instance_->server_info_list_ext_;
+}
+inline ::NFMsg::ServerInfoExt* ServerInfoReport::mutable_server_info_list_ext() {
+  set_has_server_info_list_ext();
+  if (server_info_list_ext_ == NULL) server_info_list_ext_ = new ::NFMsg::ServerInfoExt;
+  return server_info_list_ext_;
+}
+inline ::NFMsg::ServerInfoExt* ServerInfoReport::release_server_info_list_ext() {
+  clear_has_server_info_list_ext();
+  ::NFMsg::ServerInfoExt* temp = server_info_list_ext_;
+  server_info_list_ext_ = NULL;
+  return temp;
+}
+inline void ServerInfoReport::set_allocated_server_info_list_ext(::NFMsg::ServerInfoExt* server_info_list_ext) {
+  delete server_info_list_ext_;
+  server_info_list_ext_ = server_info_list_ext;
+  if (server_info_list_ext) {
+    set_has_server_info_list_ext();
+  } else {
+    clear_has_server_info_list_ext();
+  }
 }
 
 // -------------------------------------------------------------------

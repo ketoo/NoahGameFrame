@@ -38,6 +38,7 @@ public:
 
     virtual bool AfterInit();
 	virtual NFINetClientModule* GetClusterModule();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -58,6 +59,7 @@ private:
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif
