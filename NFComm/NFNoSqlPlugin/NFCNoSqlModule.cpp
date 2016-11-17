@@ -69,11 +69,12 @@ NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& 
 	return mxNoSqlDriver.GetElementBySuit(strHash);
 }
 
+/*
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int nHash)
 {
 	return mxNoSqlDriver.GetElementBySuit(nHash);
 }
-
+*/
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
 {
 	if (!mxNoSqlDriver.ExistElement(strID))
