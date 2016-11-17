@@ -9,6 +9,7 @@
 //#include "stdafx.h"
 #include <algorithm>
 #include "NFCNoSqlModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 NFCNoSqlModule::NFCNoSqlModule(NFIPluginManager* p)
 {
@@ -33,6 +34,23 @@ bool NFCNoSqlModule::Shut()
 
 bool NFCNoSqlModule::AfterInit()
 {
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::ServerID());
+			const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
+			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
+
+			this->AddConnectSql(strId, strIP, nPort);
+		}
+	}
     return true;
 }
 
@@ -51,9 +69,9 @@ NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& 
 	return mxNoSqlDriver.GetElementBySuit(strHash);
 }
 
-NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int strHash)
+NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int nHash)
 {
-	return mxNoSqlDriver.GetElementBySuit(strHash);
+	return mxNoSqlDriver.GetElementBySuit(nHash);
 }
 
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
