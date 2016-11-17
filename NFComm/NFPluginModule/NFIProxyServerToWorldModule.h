@@ -19,6 +19,7 @@ class NFIProxyServerToWorldModule
 public:
 	virtual NFINetClientModule* GetClusterModule() = 0;
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey) = 0;
+    virtual void AddServerInfoExt(const std::string& key, const std::string& value) = 0;
 };
 
 #endif
