@@ -68,15 +68,15 @@ NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCachePropertyInfo(
 
 bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIPropertyManager>>& xPMList)
 {
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+    if (!pNoSqlDriver)
     {
         return false;
     }
 
     const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
     std::vector<std::string> strValueList;
-    if (!pDriver->HMGet(strKey, xGuidList, strValueList))
+    if (!pNoSqlDriver->HMGet(strKey, xGuidList, strValueList))
     {
         return false;
     }
@@ -116,15 +116,15 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
         return nullptr;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+    if (!pNoSqlDriver)
     {
         return nullptr;
     }
 
     const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
     std::string strValue;
-    if (!pDriver->HGet(strKey, xGuid.ToString(), strValue))
+    if (!pNoSqlDriver->HGet(strKey, xGuid.ToString(), strValue))
     {
         return nullptr;
     }
@@ -145,15 +145,15 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
 
 bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIRecordManager>>& xRMList)
 {
-	NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-	if (!pDriver)
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+	if (!pNoSqlDriver)
 	{
 		return false;
 	}
 
 	const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
 	std::vector<std::string> strValueList;
-	if (!pDriver->HMGet(strKey, xGuidList, strValueList))
+	if (!pNoSqlDriver->HMGet(strKey, xGuidList, strValueList))
 	{
 		return false;
 	}
@@ -197,8 +197,8 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
         return false;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+    if (!pNoSqlDriver)
     {
         return false;
     }
@@ -218,7 +218,7 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
     }
 
     const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
-    if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
+    if (!pNoSqlDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
     }
@@ -238,8 +238,8 @@ bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHA
         return false;
     }
 
-    NFINoSqlDriver* pDriver = m_pNoSqlModule->GetDriver();
-    if (!pDriver)
+	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
+    if (!pNoSqlDriver)
     {
         return false;
     }
@@ -259,7 +259,7 @@ bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHA
     }
 
     const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
-    if (!pDriver->HSet(strKey, xGuid.ToString(), strValue))
+    if (!pNoSqlDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
     }

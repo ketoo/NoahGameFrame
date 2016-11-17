@@ -278,10 +278,25 @@ public:
 		mnWeigh = nWeigh;
 	}
 
-	virtual NF_SHARE_PTR<TD> GetElementBySuit()
+	virtual NF_SHARE_PTR<TD> GetElementBySuitRandom()
 	{
 		NFCVirtualNode<T> vNode;
-		if (mxConsistentHash.GetSuitNode(vNode))
+		if (mxConsistentHash.GetSuitNodeRandom(vNode))
+		{
+			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
+			if (itr != NFMapEx<T, TD>::mObjectList.end())
+			{
+				return itr->second;
+			}
+		}
+
+		return NULL;
+	}
+
+	virtual NF_SHARE_PTR<TD> GetElementBySuitConsistent()
+	{
+		NFCVirtualNode<T> vNode;
+		if (mxConsistentHash.GetSuitNodeConsistent(vNode))
 		{
 			typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(vNode.mxData);
 			if (itr != NFMapEx<T, TD>::mObjectList.end())
