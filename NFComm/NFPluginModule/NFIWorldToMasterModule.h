@@ -19,6 +19,7 @@ class NFIWorldToMasterModule
 {
 public:
 	virtual NFINetClientModule* GetNetClientModule() = 0;
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value) = 0;
 };
 
 #endif
