@@ -35,7 +35,8 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
 
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
-	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit();
+	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
+	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const std::string& strHash);
 	//virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int nHash);
     virtual bool RemoveConnectSql(const std::string& strID);
@@ -44,6 +45,7 @@ protected:
 
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
+	NFILogModule* m_pLogModule;
 
 	NFCConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
 
