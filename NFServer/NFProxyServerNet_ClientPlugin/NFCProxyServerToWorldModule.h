@@ -44,6 +44,7 @@ public:
 
 	virtual NFINetClientModule* GetClusterModule();
     virtual bool VerifyConnectData(const std::string& strAccount, const std::string& strKey);
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -85,7 +86,7 @@ private:
     NFIClassModule* m_pClassModule;
     NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFINetClientModule* m_pNetClientModule;
-
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif
