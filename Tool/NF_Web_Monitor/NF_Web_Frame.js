@@ -104,6 +104,7 @@ var worldOnline = new Array();
 var gameOnline = new Array();
 var proxyOnline = new Array();
 var loginOnline = new Array();
+var chartList = new Array();
 var currentPageHtml = "Dashboard";
 
 function showNavBar(CurrentPage, ServerNameList, ServerIDList)
@@ -204,7 +205,14 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 			  }]
 			];		    	
 
-			Chartist.Line('#' + ServerNameList[i] + "ID", data, options, responsive);
+			var chart = Chartist.Line('#' + ServerNameList[i] + "ID", data, options, responsive);
+			chartList.push(chart);			
+			while(chartList.length > 20)
+			{
+				var chartToDel = chartList.shift();
+				chartToDel.detach();
+				chartToDel = null;
+			}
 		}
 	}
 }
