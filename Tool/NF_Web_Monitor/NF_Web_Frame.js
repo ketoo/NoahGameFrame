@@ -48,6 +48,43 @@ html_ServerLine_temp = "\
 			</div>\
 		</div>\
 	</div>";
+var html_ServerInfoTable_temp;
+html_ServerInfoTable_temp = "\
+	<div class='row'>\
+		<div class='col-md-12'>\
+			<div class='card'>\
+				<div class='header'>\
+					<h4 class='title'>{$TableTitle}</h4>\
+					<p class='category'>{$TableDescript}</p>\
+				</div>\
+				<div class='content table-responsive table-full-width'>\
+					<table class='table table-striped'>\
+						<thead>\
+							<th>ID</th>\
+							<th>InfoName</th>\
+							<th>InfoValue</th>\
+						</thead>\
+						<tbody>\
+						{$InfoTableTr}\
+						</tbody>\
+					</table>\
+				</div>\
+			</div>\
+		</div>\
+	</div>"
+var html_ServerInfoTableTr = "\
+							<tr id='InfoTableTr'>\
+								<td>{$RowID}</td>\
+								<td>{$RowKey}</td>\
+								<td>{$RowValue}</td>\
+							</tr>"
+var html_Nav_li = "\
+                <li id='left_{$li_name}' class='{$li_active}' onclick='{$li_Script}'>\
+                    <a href='#'>\
+                        <i class='{$li_class}'></i>\
+                        <p>{$li_name}</p>\
+                    </a>\
+                </li>"
 
 var intervalTrigger;
 var serverNowTime;
@@ -68,6 +105,44 @@ var gameOnline = new Array();
 var proxyOnline = new Array();
 var loginOnline = new Array();
 var currentPageHtml = "Dashboard";
+
+function showNavBar(CurrentPage, ServerNameList, ServerIDList)
+{
+	var serverClass = "ti-view-list-alt";
+	var dashboardClass = "ti-panel";
+	var html_Nav_bar = html_Nav_li;
+	html_Nav_bar = html_Nav_bar.replace("{$li_name}", "Dashboard");
+	html_Nav_bar = html_Nav_bar.replace("{$li_name}", "Dashboard");
+	if(CurrentPage == "Dashboard")
+	{
+		html_Nav_bar = html_Nav_bar.replace("{$li_active}", "active");
+	}
+	else
+	{
+		html_Nav_bar = html_Nav_bar.replace("{$li_active}", "");
+	}
+	html_Nav_bar = html_Nav_bar.replace("{$li_class}", dashboardClass);
+	html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "currentPageHtml=\"Dashboard\";");
+
+	for(var i=0;i<ServerNameList.length;i++)
+	{
+		html_Nav_bar += html_Nav_li;
+		html_Nav_bar = html_Nav_bar.replace("{$li_name}", ServerNameList[i]);
+		html_Nav_bar = html_Nav_bar.replace("{$li_name}", ServerNameList[i]);
+		if(CurrentPage == ServerNameList[i])
+		{
+			html_Nav_bar = html_Nav_bar.replace("{$li_active}", "active");
+		}
+		else
+		{
+			html_Nav_bar = html_Nav_bar.replace("{$li_active}", "");
+		}
+		html_Nav_bar = html_Nav_bar.replace("{$li_class}", serverClass);
+		html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "currentPageHtml=\""+ServerNameList[i]+"\";");
+	}
+	document.getElementById("Nav_ul").innerHTML = html_Nav_bar;
+}
+
 function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, ServerOnlineList, ServerMaxList)
 {
 	if(typeof(ServerNameList) != "undefined")
@@ -93,7 +168,7 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 			html_ServerLine += html_ServerLine_temp.replace("{$serverName}", ServerNameList[i]);
 			html_ServerLine = html_ServerLine.replace("{$serverNameId}", ServerNameList[i] + "ID");
 		}
-		document.getElementById("serverChartList").innerHTML = "<div class='row'>" + html_ServerStatus + "</div>" + html_ServerLine;
+		document.getElementById("serverContent").innerHTML = "<div class='row'>" + html_ServerStatus + "</div>" + html_ServerLine;
 		
 		for(var i=0;i<ServerNameList.length;i++)
 		{
@@ -131,6 +206,97 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 
 			Chartist.Line('#' + ServerNameList[i] + "ID", data, options, responsive);
 		}
+	}
+}
+
+function showServerInfoTable(CurrentServerID, ServerNameList, ServerStatusList, ServerUpdateList, ServerIPList, ServerPortList, ServerIDList, serverOnlineList, ServerInfoExt)
+{
+	if(typeof(ServerNameList) != "undefined")
+	{
+		var html_ServerInfoTable;
+		html_ServerInfoTable = "";
+		var nCol = 0;
+
+		for(var i=0;i<ServerNameList.length;i++){
+			if(ServerIDList[i] == CurrentServerID)
+			{
+				html_ServerInfoTable += html_ServerInfoTable_temp.replace("{$TableTitle}", ServerNameList[i] + " Basic Information");
+				html_ServerInfoTable = html_ServerInfoTable.replace("{$TableDescript}", "Main Information");
+				var html_tbody = "";
+				var html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "serverId");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerNameList[i]);
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerName");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIDList[i]);
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerIP");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIPList[i]);
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerPort");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerPortList[i]);
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerOnlineCount");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", serverOnlineList[i][0][serverOnlineList[i][0].length - 1]);
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+				if(ServerStatusList[i] == 1)
+				{
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerStatus");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", "Online");
+				}
+				else
+				{
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerStatus");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", "Offline");
+				}
+				html_tbody += html_ServerInfoTable_Tr;
+				html_ServerInfoTable = html_ServerInfoTable.replace("{$InfoTableTr}", html_tbody);
+
+
+				if(ServerStatusList[i] == 1)
+				{
+					html_ServerInfoTable = html_ServerInfoTable.replace("{$Color}", "icon-success");
+					html_ServerInfoTable = html_ServerInfoTable.replace("{$ServerStatus}", "Online");
+				}
+				else
+				{
+					html_ServerInfoTable = html_ServerInfoTable.replace("{$Color}", "icon-warning");
+					html_ServerInfoTable = html_ServerInfoTable.replace("{$ServerStatus}", "Offline");
+				}
+
+				html_ServerInfoTable += html_ServerInfoTable_temp.replace("{$TableTitle}", ServerNameList[i] + " Extra Information");
+				html_ServerInfoTable = html_ServerInfoTable.replace("{$TableDescript}", "TBD");
+
+				
+				var dataList = ServerInfoExt[i];
+				html_tbody = "";
+				$.each(dataList, function (i, item) {
+					html_ServerInfoTable_Tr = html_ServerInfoTableTr;
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", i);
+					$.each(item, function (key, value){
+						html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", key);
+						html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", value);
+					});
+					html_tbody += html_ServerInfoTable_Tr;
+				});
+				html_ServerInfoTable = html_ServerInfoTable.replace("{$InfoTableTr}", html_tbody);
+
+			}
+		}
+		
+		document.getElementById("serverContent").innerHTML = html_ServerInfoTable;
 
 	}
 }
@@ -160,185 +326,209 @@ function getMasterInfo()
 
 function dataFunctionSwitch(data)
 {
-	if(currentPageHtml == "Dashboard")
+	if(typeof(data.code) == "undefined")
 	{
-		if(typeof(data.code) == "undefined")
+		$.notify({
+			icon: 'ti-info',
+			message: "Master Web Server Error!"
+
+		},{
+			type: 'danger',
+			delay: 2000,
+		});
+		clearInterval(intervalTrigger);
+		return;
+	}
+	else
+	{
+		if(data.code != "0")
 		{
 			$.notify({
 				icon: 'ti-info',
-				message: "Master Web Server Error!"
+				message: "Master Web Server Error!["+ data.errMsg +"]"
 
 			},{
-				type: 'danger',
+				type: 'danger ',
 				delay: 2000,
 			});
-			clearInterval(intervalTrigger);
-			return;
-		}
-		else
-		{
 			if(data.code != "0")
 			{
-				$.notify({
-					icon: 'ti-info',
-					message: "Master Web Server Error!["+ data.errMsg +"]"
-
-				},{
-					type: 'danger ',
-					delay: 2000,
-				});
-				if(data.code != "0")
-				{
-					clearInterval(intervalTrigger);
-					return;
-				}
+				clearInterval(intervalTrigger);
+				return;
 			}
 		}
+	}
 
-		var serverNameList = new Array();
-		var serverStatusList = new Array();
-		var serverUpdateList = new Array();
-		var serverOnlineList = new Array();
-		var serverMaxList = new Array();
+	var serverNameList = new Array();
+	var serverStatusList = new Array();
+	var serverUpdateList = new Array();
+	var serverOnlineList = new Array();
+	var serverMaxList = new Array();
+	var serverIPList = new Array();
+	var serverPortList = new Array();
+	var serverIDList = new Array();
+	var serverInfoExt = new Array();
 
-		serverNowTime = data.nowTime;
-		serverNowTime = new Date(data.nowTime * 1000);
-		serverNowTime = pad(serverNowTime.getHours(),2) +":"+ pad(serverNowTime.getMinutes(),2) +":"+ pad(serverNowTime.getSeconds(),2);
-		labelArr.push(serverNowTime);
+	serverNowTime = data.nowTime;
+	serverNowTime = new Date(data.nowTime * 1000);
+	serverNowTime = pad(serverNowTime.getHours(),2) +":"+ pad(serverNowTime.getMinutes(),2) +":"+ pad(serverNowTime.getSeconds(),2);
+	labelArr.push(serverNowTime);
 
-		if(labelArr.length > 8)
+	if(labelArr.length > 8)
+	{
+		labelArr.shift();
+	}
+	
+	$.each(data.master, function (i, item) {
+		serverNameList.push(item.servrName);
+		serverStatusList.push(item.status);
+		serverUpdateList.push(serverNowTime);
+		serverIPList.push(item.ip);
+		serverPortList.push(item.port);
+		serverIDList.push(item.serverId);
+		serverInfoExt.push(item.info_ext);
+
+		if(typeof(masterOnline[i]) == "undefined")
 		{
-			labelArr.shift();
+			masterOnline[i] = new Array();
 		}
-		
-		$.each(data.master, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			
-			if(typeof(masterOnline[i]) == "undefined")
-			{
-				masterOnline[i] = new Array();
-			}
-			masterOnline[i].push(item.onlineCount);
-			if(masterOnline[i].length > 8)
-			{
-				masterOnline[i].shift();
-			}
-			if(chartMaxMaster < item.onlineCount + 10)
-			{
-				chartMaxMaster = item.onlineCount + 10;
-			}
-			serverOnlineList.push(masterOnline);
-			serverMaxList.push(chartMaxMaster);
-		});
-		
-		$.each(data.worlds, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(worldOnline[i]) == "undefined")
-			{
-				worldOnline[i] = new Array();
-			}
-			worldOnline[i].push(item.onlineCount);
-			if(worldOnline[i].length > 8)
-			{
-				worldOnline[i].shift();
-			}
-			if(chartMaxWorld < item.onlineCount + 10)
-			{
-				chartMaxWorld = item.onlineCount + 10;
-			}
-			serverOnlineList.push(worldOnline);
-			serverMaxList.push(chartMaxWorld);
-		});
+		masterOnline[i].push(item.onlineCount);
+		if(masterOnline[i].length > 8)
+		{
+			masterOnline[i].shift();
+		}
+		if(chartMaxMaster < item.onlineCount + 10)
+		{
+			chartMaxMaster = item.onlineCount + 10;
+		}
+		serverOnlineList.push(masterOnline);
+		serverMaxList.push(chartMaxMaster);
+	});
+	
+	$.each(data.worlds, function (i, item) {
+		serverNameList.push(item.servrName);
+		serverStatusList.push(item.status);
+		serverUpdateList.push(serverNowTime);
+		serverIPList.push(item.ip);
+		serverPortList.push(item.port);
+		serverIDList.push(item.serverId);
+		serverInfoExt.push(item.info_ext);
 
-		$.each(data.games, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(gameOnline[i]) == "undefined")
-			{
-				gameOnline[i] = new Array();
-			}
-			gameOnline[i].push(item.onlineCount);
-			if(gameOnline[i].length > 8)
-			{
-				gameOnline[i].shift();
-			}
-			if(chartMaxGame < item.onlineCount + 10)
-			{
-				chartMaxGame = item.onlineCount + 10;
-			}
-			serverOnlineList.push(gameOnline);
-			serverMaxList.push(chartMaxGame);
-		});
+		if(typeof(worldOnline[i]) == "undefined")
+		{
+			worldOnline[i] = new Array();
+		}
+		worldOnline[i].push(item.onlineCount);
+		if(worldOnline[i].length > 8)
+		{
+			worldOnline[i].shift();
+		}
+		if(chartMaxWorld < item.onlineCount + 10)
+		{
+			chartMaxWorld = item.onlineCount + 10;
+		}
+		serverOnlineList.push(worldOnline);
+		serverMaxList.push(chartMaxWorld);
+	});
 
-		$.each(data.proxys, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(proxyOnline[i]) == "undefined")
-			{
-				proxyOnline[i] = new Array();
-			}
-			proxyOnline[i].push(item.onlineCount);
-			if(proxyOnline[i].length > 8)
-			{
-				proxyOnline[i].shift();
-			}
-			if(chartMaxProxy < item.onlineCount + 10)
-			{
-				chartMaxProxy = item.onlineCount + 10;
-			}
-			serverOnlineList.push(proxyOnline);
-			serverMaxList.push(chartMaxProxy);
-		});
+	$.each(data.games, function (i, item) {
+		serverNameList.push(item.servrName);
+		serverStatusList.push(item.status);
+		serverUpdateList.push(serverNowTime);
+		serverIPList.push(item.ip);
+		serverPortList.push(item.port);
+		serverIDList.push(item.serverId);
+		serverInfoExt.push(item.info_ext);
 
-		$.each(data.logins, function (i, item) {
-			serverNameList.push(item.servrName);
-			serverStatusList.push(item.status);
-			serverUpdateList.push(serverNowTime);
-			if(typeof(loginOnline[i]) == "undefined")
-			{
-				loginOnline[i] = new Array();
-			}
-			loginOnline[i].push(item.onlineCount);
-			if(loginOnline[i].length > 8)
-			{
-				loginOnline[i].shift();
-			}
-			if(chartMaxLogin < item.onlineCount + 10)
-			{
-				chartMaxLogin = item.onlineCount + 10;
-			}
-			serverOnlineList.push(loginOnline);
-			serverMaxList.push(chartMaxLogin);
-		});			
-		
+		if(typeof(gameOnline[i]) == "undefined")
+		{
+			gameOnline[i] = new Array();
+		}
+		gameOnline[i].push(item.onlineCount);
+		if(gameOnline[i].length > 8)
+		{
+			gameOnline[i].shift();
+		}
+		if(chartMaxGame < item.onlineCount + 10)
+		{
+			chartMaxGame = item.onlineCount + 10;
+		}
+		serverOnlineList.push(gameOnline);
+		serverMaxList.push(chartMaxGame);
+	});
+
+	$.each(data.proxys, function (i, item) {
+		serverNameList.push(item.servrName);
+		serverStatusList.push(item.status);
+		serverUpdateList.push(serverNowTime);
+		serverIPList.push(item.ip);
+		serverPortList.push(item.port);
+		serverIDList.push(item.serverId);
+		serverInfoExt.push(item.info_ext);
+
+		if(typeof(proxyOnline[i]) == "undefined")
+		{
+			proxyOnline[i] = new Array();
+		}
+		proxyOnline[i].push(item.onlineCount);
+		if(proxyOnline[i].length > 8)
+		{
+			proxyOnline[i].shift();
+		}
+		if(chartMaxProxy < item.onlineCount + 10)
+		{
+			chartMaxProxy = item.onlineCount + 10;
+		}
+		serverOnlineList.push(proxyOnline);
+		serverMaxList.push(chartMaxProxy);
+	});
+
+	$.each(data.logins, function (i, item) {
+		serverNameList.push(item.servrName);
+		serverStatusList.push(item.status);
+		serverUpdateList.push(serverNowTime);
+		serverIPList.push(item.ip);
+		serverPortList.push(item.port);
+		serverIDList.push(item.serverId);
+		serverInfoExt.push(item.info_ext);
+
+		if(typeof(loginOnline[i]) == "undefined")
+		{
+			loginOnline[i] = new Array();
+		}
+		loginOnline[i].push(item.onlineCount);
+		if(loginOnline[i].length > 8)
+		{
+			loginOnline[i].shift();
+		}
+		if(chartMaxLogin < item.onlineCount + 10)
+		{
+			chartMaxLogin = item.onlineCount + 10;
+		}
+		serverOnlineList.push(loginOnline);
+		serverMaxList.push(chartMaxLogin);
+	});
+
+	showNavBar(currentPageHtml, serverNameList, serverIDList);
+
+	if(currentPageHtml == "Dashboard")
+	{
 		showServerStatus(serverNameList, serverStatusList, serverUpdateList, serverOnlineList, serverMaxList);
 	}
-	else if(currentPageHtml == "MasterServer")
+	else
 	{
+		for(var i=0;i<serverNameList.length;i++)
+		{
 
+			if(serverNameList[i] == currentPageHtml)
+			{
+
+				showServerInfoTable(serverIDList[i], serverNameList, serverStatusList, serverUpdateList, serverIPList, serverPortList, serverIDList, serverOnlineList, serverInfoExt);
+			}
+		}		
 	}
-	else if(currentPageHtml == "WorldServer")
-	{
-		
-	}
-	else if(currentPageHtml == "GameServer")
-	{
-		
-	}
-	else if(currentPageHtml == "ProxyServer")
-	{
-		
-	}
-	else if(currentPageHtml == "LoginServer")
-	{
-		
-	}
+
+	document.getElementById("PageTitle").innerHTML = currentPageHtml;
 }
 
 
@@ -353,41 +543,14 @@ $(document).ready(function(){
 		type: 'info',
 		timer: 4000
 	});
-
-	$("#left_Dashboard").click(function(){
-		activeLeftBar("#left_Dashboard");
-		currentPageHtml = "Dashboard";
-	});
-	$("#left_MasterServer").click(function(){
-		activeLeftBar("#left_MasterServer");
-		currentPageHtml = "MasterServer";
-	});
-	$("#left_WorldServer").click(function(){
-		activeLeftBar("#left_WorldServer");
-		currentPageHtml = "WorldServer";
-	});
-	$("#left_GameServer").click(function(){
-		activeLeftBar("#left_GameServer");
-		currentPageHtml = "GameServer";
-	});
-	$("#left_ProxyServer").click(function(){
-		activeLeftBar("#left_ProxyServer");
-		currentPageHtml = "ProxyServer";
-	});
-	$("#left_LoginServer").click(function(){
-		activeLeftBar("#left_LoginServer");
-		currentPageHtml = "LoginServer";
-	});
 });
 
-function activeLeftBar(id)
+function activeLeftBar(id,ServerNameList)
 {
-	$("#left_Dashboard").attr("class", "");
-	$("#left_MasterServer").attr("class", "");
-	$("#left_WorldServer").attr("class", "");
-	$("#left_GameServer").attr("class", "");
-	$("#left_ProxyServer").attr("class", "");
-	$("#left_LoginServer").attr("class", "");
+	for(var i=0; i<ServerNameList.length;i++)
+	{
+		$("#left_"+ServerNameList).attr("class", "");
+	}
 	$(id).attr("class", "active");
 }
 
