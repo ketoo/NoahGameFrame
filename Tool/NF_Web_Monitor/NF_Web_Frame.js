@@ -226,12 +226,12 @@ function showServerInfoTable(CurrentServerID, ServerNameList, ServerStatusList, 
 				var html_ServerInfoTable_Tr = html_ServerInfoTableTr;
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "serverId");
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerNameList[i]);
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIDList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerName");
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIDList[i]);
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerNameList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
@@ -529,6 +529,16 @@ function dataFunctionSwitch(data)
 	}
 
 	document.getElementById("PageTitle").innerHTML = currentPageHtml;
+
+	serverNameList.length = 0;
+	serverStatusList.length = 0;
+	serverUpdateList.length = 0;
+	serverOnlineList.length = 0;
+	serverMaxList.length = 0;
+	serverIPList.length = 0;
+	serverPortList.length = 0;
+	serverIDList.length = 0;
+	serverInfoExt.length = 0;
 }
 
 
