@@ -607,7 +607,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 	while (pServerData.get())
 	{
 		rapidjson::Value server(rapidjson::kObjectType);
-		server.AddMember("serverid", pServerData->pData->server_id(), allocator);
+		server.AddMember("serverId", pServerData->pData->server_id(), allocator);
 		server.AddMember("servrName", rapidjson::Value(pServerData->pData->server_name().c_str(), allocator), allocator);
 		server.AddMember("ip", rapidjson::Value(pServerData->pData->server_ip().c_str(), allocator), allocator);
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
