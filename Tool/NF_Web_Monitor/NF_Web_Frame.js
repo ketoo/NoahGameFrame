@@ -188,6 +188,9 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 			  axisX: {
 				showGrid: false,
 			  },
+			  axisY: {
+			  	onlyInteger: true,
+			  },
 			  lineSmooth: Chartist.Interpolation.simple({
 				divisor: 5
 			  }),
