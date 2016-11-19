@@ -121,7 +121,11 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 
 	int fd = -1;
 	struct stat st;
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	if ((fd = open(strPath.c_str(), O_RDONLY | O_BINARY)) < 0) {
+#else
+	if ((fd = open(strPath.c_str(), O_RDONLY)) < 0) {
+#endif
 		NFCHttpNet::SendMsg(req, "error");
 		return;
 	}
