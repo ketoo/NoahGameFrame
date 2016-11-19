@@ -3,7 +3,6 @@
 
 #include "NFMasterNet_HttpServerPlugin.h"
 #include "NFCMasterNet_HttpJsonModule.h"
-#include "NFCMasterNet_WebServerModule.h"
 //
 //
 #ifdef NF_DYNAMIC_PLUGIN
@@ -37,11 +36,9 @@ const std::string NFMasterNet_HttpServerPlugin::GetPluginName()
 void NFMasterNet_HttpServerPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFIMasterNet_JsonServerModule, NFCMasterNet_HttpJsonModule)
-	REGISTER_MODULE(pPluginManager, NFIMasterNet_WebServerModule, NFCMasterNet_WebServerModule)
 }
 
 void NFMasterNet_HttpServerPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIMasterNet_WebServerModule, NFCMasterNet_WebServerModule)
 	UNREGISTER_MODULE(pPluginManager, NFIMasterNet_JsonServerModule, NFCMasterNet_HttpJsonModule)
 }
