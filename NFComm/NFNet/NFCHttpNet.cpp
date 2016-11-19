@@ -111,27 +111,18 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 		strUri.erase(0, 1);
 		decodeUri = strUri.c_str();
 	}
-	//get argMap
-	int msgId = 0;
-	std::map<std::string, std::string> argMap;
-	std::vector<std::string> argList = Split(decodeUri, ",");
-	std::vector<std::string>::iterator it = argList.begin();
-	for (; it != argList.end(); it++)
+	//get strCommand
+	auto cmdList = Split(strUri, "/");
+	std::string strCommand = "";
+	if (cmdList.size() > 0)
 	{
-		std::vector<std::string> param = Split(*it, "=");
-		if (param.size() == 2)
-		{
-			if (param.at(0) == "id")
-			{
-				msgId = lexical_cast<int>(param.at(1));
-			}
-			argMap.insert(make_pair(param.at(0), param.at(1)));
-		}
+		strCommand = cmdList[0];
 	}
+
 	// call cb
 	if (pNet->mRecvCB)
 	{
-		pNet->mRecvCB(req, msgId, argMap);
+		pNet->mRecvCB(req, strCommand, decodeUri);
 	}
 	else
 	{
@@ -150,12 +141,27 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	evbuffer_free(eventBuffer);
 	}*/
 }
-bool NFCHttpNet::SendMsg(struct evhttp_request *req, const std::string& strMsg)
+bool NFCHttpNet::SendMsg(struct evhttp_request *req, const char* strMsg)
 {
 	//create buffer
 	struct evbuffer *eventBuffer = evbuffer_new();
 	//send data
-	evbuffer_add_printf(eventBuffer, strMsg.c_str());
+	evbuffer_add_printf(eventBuffer, strMsg);
+	evhttp_add_header(evhttp_request_get_output_headers(req), "Content-Type", "text/html");
+	evhttp_send_reply(req, 200, "OK", eventBuffer);
+
+	//free
+	evbuffer_free(eventBuffer);
+	return true;
+}
+
+bool NFCHttpNet::SendFile(evhttp_request * req, const int fd, struct stat st, const std::string& strType)
+{
+	//create buffer
+	struct evbuffer *eventBuffer = evbuffer_new();
+	//send data
+	evbuffer_add_file(eventBuffer, fd, 0, st.st_size);
+	evhttp_add_header(evhttp_request_get_output_headers(req), "Content-Type", strType.c_str());
 	evhttp_send_reply(req, 200, "OK", eventBuffer);
 
 	//free

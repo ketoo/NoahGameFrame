@@ -1,6 +1,22 @@
 #include "NFCMasterNet_HttpJsonModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-
+#ifdef WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#ifndef S_ISDIR
+#define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
+#endif
+#else
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
+#endif
 
 bool NFCMasterNet_HttpJsonModule::Init()
 {
@@ -22,11 +38,12 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
-	m_pHttpNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_QUERY_SERVER_STATUS, this, &NFCMasterNet_HttpJsonModule::OnQueryServerStatus);
-	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpJsonModule::InvalidMessage);
-
+	m_pHttpNetModule->AddReceiveCallBack("json", this, &NFCMasterNet_HttpJsonModule::OnCommandQuery);
+	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpJsonModule::OnCommonQuery);
 
 	int nJsonPort = 80;
+	int nWebServerAppID = 0;
+
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
 	if (xLogicClass)
 	{
@@ -34,8 +51,16 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 		std::string strId;
 		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
 		{
-			nJsonPort = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::JsonPort());
+			nJsonPort = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::WebPort());
+			nWebServerAppID = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::ServerID());
+			m_strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
 		}
+	}
+
+	//webserver only run one instance for NF
+	if (pPluginManager->GetAppID() != nWebServerAppID)
+	{
+		return true;
 	}
 
 	m_pHttpNetModule->InitServer(nJsonPort);
@@ -49,15 +74,72 @@ bool NFCMasterNet_HttpJsonModule::Execute()
 	return true;
 }
 
-void NFCMasterNet_HttpJsonModule::OnQueryServerStatus(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
+void NFCMasterNet_HttpJsonModule::OnCommandQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)
 {
 	std::string str = m_pMasterServerModule->GetServersStatus();
-	
-	NFCHttpNet::SendMsg(req, argMap["jsoncallback"] + "(" + str + ");");
+	NFCHttpNet::SendMsg(req, str.c_str());
 }
 
-void NFCMasterNet_HttpJsonModule::InvalidMessage(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
+void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)
 {
-	std::ostringstream stream; stream << "error: unsupport msg";
-	NFCHttpNet::SendMsg(req, stream.str());
+	//Add response type
+	std::map<std::string, std::string> typeMap;
+	typeMap["txt"] = "text/plain";
+	typeMap["txt"] = "text/plain";
+	typeMap["c"] = "text/plain";
+	typeMap["h"] = "text/plain";
+	typeMap["html"] = "text/html";
+	typeMap["htm"] = "text/htm";
+	typeMap["css"] = "text/css";
+	typeMap["gif"] = "image/gif";
+	typeMap["jpg"] = "image/jpeg";
+	typeMap["jpeg"] = "image/jpeg";
+	typeMap["png"] = "image/png";
+	typeMap["pdf"] = "application/pdf";
+	typeMap["ps"] = "application/postsript";
+
+	std::string strPath;
+	if (m_strWebRootPath.find_last_of("/") != m_strWebRootPath.size())
+	{
+		m_strWebRootPath += "/";
+	}
+	strPath = m_strWebRootPath.c_str() + strUrl;
+
+	std::ifstream in(strPath.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
+	if (!in.is_open())
+	{
+		strPath += "index.html";
+		in = std::ifstream(strPath.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
+	}
+
+	if (!in.is_open())
+	{
+		NFCHttpNet::SendMsg(req, "Cannot open a dir!");
+		return;
+	}
+	in.close();
+
+	int fd = -1;
+	struct stat st;
+	if ((fd = open(strPath.c_str(), O_RDONLY | O_BINARY)) < 0) {
+		NFCHttpNet::SendMsg(req, "error");
+		return;
+	}
+
+	if (fstat(fd, &st) < 0) {
+		NFCHttpNet::SendMsg(req, "error");
+		return;
+	}
+
+	const char* last_period = strrchr(strPath.c_str(), '.');
+	std::string strType = last_period + 1;
+	if (typeMap.find(strType) == typeMap.end())
+	{
+		strType = "application/misc";
+	}
+	else
+	{
+		strType = typeMap[strType];
+	}
+	NFCHttpNet::SendFile(req, fd, st, strType);
 }
