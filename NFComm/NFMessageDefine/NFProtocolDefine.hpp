@@ -512,8 +512,6 @@ public:
 	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
 	// Property
 	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
-	static const std::string& JsonPort(){ static std::string xJsonPort = "JsonPort"; return xJsonPort; } // int
 	static const std::string& WebPort(){ static std::string xWebPort = "WebPort"; return xWebPort; } // int
 	static const std::string& WebRootPath(){ static std::string xWebRootPath = "WebRootPath"; return xWebRootPath; } // string
 	// Record

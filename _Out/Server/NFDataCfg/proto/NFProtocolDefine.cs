@@ -498,8 +498,6 @@ public class HttpServer
 	public static readonly String ConfigID = "ConfigID"; // string
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
-	public static readonly String IP = "IP"; // string
-	public static readonly String JsonPort = "JsonPort"; // int
 	public static readonly String WebPort = "WebPort"; // int
 	public static readonly String WebRootPath = "WebRootPath"; // string
 	// Record

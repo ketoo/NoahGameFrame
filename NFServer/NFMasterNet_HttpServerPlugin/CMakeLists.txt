@@ -14,7 +14,6 @@ set_target_properties( NFMasterNet_HttpServerPlugin PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 link_NFSDK("NFMasterNet_HttpServerPlugin")
-target_link_libraries(NFMasterNet_HttpServerPlugin  miniweb )
 
 if(UNIX)
 	add_definitions(
