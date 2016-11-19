@@ -477,8 +477,6 @@ public class HttpServer {
 	public static final String ConfigID = "ConfigID"; // string
 	// Property
 	public static final String ServerID = "ServerID"; // int
-	public static final String IP = "IP"; // string
-	public static final String JsonPort = "JsonPort"; // int
 	public static final String WebPort = "WebPort"; // int
 	public static final String WebRootPath = "WebRootPath"; // string
 	// Record
