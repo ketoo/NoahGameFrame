@@ -105,22 +105,23 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 	}
 	strPath = m_strWebRootPath.c_str() + strUrl;
 
-	std::ifstream in(strPath.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
-	if (!in.is_open())
-	{
-		strPath += "index.html";
-		in = std::ifstream(strPath.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
-	}
-
-	if (!in.is_open())
-	{
-		NFCHttpNet::SendMsg(req, "Cannot open a dir!");
-		return;
-	}
-	in.close();
-
 	int fd = -1;
 	struct stat st;
+	if (stat(strPath.c_str(), &st) < 0)
+	{
+		NFCHttpNet::SendMsg(req, "404");
+	}
+
+	if (S_ISDIR(st.st_mode))
+	{
+		strPath += "/index.html";
+	}
+
+	if (stat(strPath.c_str(), &st) < 0)
+	{
+		NFCHttpNet::SendMsg(req, "404");
+	}
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	if ((fd = open(strPath.c_str(), O_RDONLY | O_BINARY)) < 0) {
 #else
@@ -146,4 +147,6 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 		strType = typeMap[strType];
 	}
 	NFCHttpNet::SendFile(req, fd, st, strType);
+
+
 }
