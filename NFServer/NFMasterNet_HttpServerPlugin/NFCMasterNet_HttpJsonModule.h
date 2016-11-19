@@ -25,8 +25,8 @@ public:
 	virtual bool Execute();
 
 protected:
-	void OnQueryServerStatus(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap);
-	void InvalidMessage(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap);
+	void OnCommandQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl);
+	void OnCommonQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl);
 
 private:
 	NFIKernelModule* m_pKernelModule;
@@ -35,6 +35,7 @@ private:
 	NFIMasterNet_ServerModule* m_pMasterServerModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
+	std::string m_strWebRootPath;
 };
 
 #endif
