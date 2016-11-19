@@ -79,7 +79,7 @@ var html_ServerInfoTableTr = "\
 								<td>{$RowValue}</td>\
 							</tr>"
 var html_Nav_li = "\
-                <li id='left_{$li_name}' class='{$li_active}' onclick='{$li_Script}'>\
+                <li name='left_bar' class='{$li_active}' onclick='{$li_Script}'>\
                     <a href='#'>\
                         <i class='{$li_class}'></i>\
                         <p>{$li_name}</p>\
@@ -106,9 +106,22 @@ var proxyOnline = new Array();
 var loginOnline = new Array();
 var chartList = new Array();
 var currentPageHtml = "Dashboard";
-
+var nShowBarCount = 0;
 function showNavBar(CurrentPage, ServerNameList, ServerIDList)
 {
+	if(nShowBarCount != 0)
+	{
+		if(nShowBarCount % 5 != 0)
+		{
+			nShowBarCount++;
+			return;
+		}
+	}
+	nShowBarCount++;
+	if(nShowBarCount > 10)
+	{
+		nShowBarCount = 0;
+	}
 	var serverClass = "ti-view-list-alt";
 	var dashboardClass = "ti-panel";
 	var html_Nav_bar = html_Nav_li;
@@ -123,7 +136,13 @@ function showNavBar(CurrentPage, ServerNameList, ServerIDList)
 		html_Nav_bar = html_Nav_bar.replace("{$li_active}", "");
 	}
 	html_Nav_bar = html_Nav_bar.replace("{$li_class}", dashboardClass);
-	html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "currentPageHtml=\"Dashboard\";");
+	html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "currentPageHtml=\"Dashboard\";\
+			getMasterInfo();\
+			clearInterval(intervalTrigger);\
+			intervalTrigger = setInterval(getMasterInfo,1000);\
+			clearActiveLeftBar();\
+			this.className =\"active\";\
+			");
 
 	for(var i=0;i<ServerNameList.length;i++)
 	{
@@ -139,7 +158,14 @@ function showNavBar(CurrentPage, ServerNameList, ServerIDList)
 			html_Nav_bar = html_Nav_bar.replace("{$li_active}", "");
 		}
 		html_Nav_bar = html_Nav_bar.replace("{$li_class}", serverClass);
-		html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "currentPageHtml=\""+ServerNameList[i]+"\";");
+		html_Nav_bar = html_Nav_bar.replace("{$li_Script}", "\
+			currentPageHtml=\""+ServerNameList[i]+"\";\
+			getMasterInfo();\
+			clearInterval(intervalTrigger);\
+			intervalTrigger = setInterval(getMasterInfo,1000);\
+			clearActiveLeftBar();\
+			this.className =\"active\";\
+			");
 	}
 	document.getElementById("Nav_ul").innerHTML = html_Nav_bar;
 }
@@ -566,13 +592,14 @@ $(document).ready(function(){
 	});
 });
 
-function activeLeftBar(id,ServerNameList)
+function clearActiveLeftBar()
 {
-	for(var i=0; i<ServerNameList.length;i++)
+	var BarList = document.getElementsByName("left_bar");
+	for(var i =0; i< BarList.length; i++)
 	{
-		$("#left_"+ServerNameList).attr("class", "");
+		BarList[i].className ="";
 	}
-	$(id).attr("class", "active");
+	
 }
 
 function pad(num, n) {
