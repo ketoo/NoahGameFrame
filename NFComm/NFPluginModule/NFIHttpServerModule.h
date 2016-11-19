@@ -25,14 +25,14 @@ public:
 	
 	// register msg callback
 	template<typename BaseType>
-	bool AddReceiveCallBack(const int msgId, BaseType* pBase, void (BaseType::*handleRecieve)(struct evhttp_request*, const int, std::map<std::string, std::string>& argMap))
+	bool AddReceiveCallBack(const std::string& strCommand, BaseType* pBase, void (BaseType::*handleRecieve)(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl))
 	{
 		HTTPNET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		HTTPNET_RECEIVE_FUNCTOR_PTR functorPtr(new HTTPNET_RECEIVE_FUNCTOR(functor));
-		return AddMsgCB(msgId, functorPtr);
+		return AddMsgCB(strCommand, functorPtr);
 	}
 	template<typename BaseType>
-	bool AddNetCommonReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(struct evhttp_request*, const int, std::map<std::string, std::string>& argMap))
+	bool AddNetCommonReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl))
 	{
 		HTTPNET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		HTTPNET_RECEIVE_FUNCTOR_PTR functorPtr(new HTTPNET_RECEIVE_FUNCTOR(functor));
@@ -53,14 +53,14 @@ public:
 		return mHttpNet->InitServer(nPort);
 	}
 	
-	void OnReceiveNetPack(struct evhttp_request *req, const int msgId, std::map<std::string, std::string>& argMap)
+	void OnReceiveNetPack(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)
 	{
-		std::map<int, HTTPNET_RECEIVE_FUNCTOR_PTR>::iterator it = mMsgCBMap.find(msgId);
+		auto it = mMsgCBMap.find(strCommand);
 		if (mMsgCBMap.end() != it)
 		{
 			HTTPNET_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
 			HTTPNET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-			pFunc->operator()(req, msgId, argMap);
+			pFunc->operator()(req, strCommand, strUrl);
 		}
 		else
 		{
@@ -70,21 +70,21 @@ public:
 				{
 					HTTPNET_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
 					HTTPNET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-					pFunc->operator()(req, msgId, argMap);
+					pFunc->operator()(req, strCommand, strUrl);
 				}
 			}
 			else
 			{
-				std::cout<< "un support http msgId:" << msgId<<std::endl;
+				std::cout<< "un support http Command:" << strCommand.c_str() <<std::endl;
 			}
 		}	
 	}
 	
-	virtual bool AddMsgCB(const int msgId, const HTTPNET_RECEIVE_FUNCTOR_PTR& cb)
+	virtual bool AddMsgCB(const std::string& strCommand, const HTTPNET_RECEIVE_FUNCTOR_PTR& cb)
 	{
-		if (mMsgCBMap.find(msgId) == mMsgCBMap.end())
+		if (mMsgCBMap.find(strCommand) == mMsgCBMap.end())
 		{
-			mMsgCBMap.insert(std::map<int, HTTPNET_RECEIVE_FUNCTOR_PTR>::value_type(msgId, cb));
+			mMsgCBMap.insert(std::map<std::string, HTTPNET_RECEIVE_FUNCTOR_PTR>::value_type(strCommand, cb));
 			return true;
 		}
 		return false;
@@ -105,7 +105,7 @@ private:
 	NFILogModule* mLogModule;
 
 	NFIHttpNet* mHttpNet;
-	std::map<int, HTTPNET_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
+	std::map<std::string, HTTPNET_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
 	std::list<HTTPNET_RECEIVE_FUNCTOR_PTR> mComMsgCBList;
 };
 
