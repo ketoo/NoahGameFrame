@@ -34,6 +34,7 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort);
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
 
+	virtual NFList<std::string> GetDriverIdList();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
