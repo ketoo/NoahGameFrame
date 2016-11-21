@@ -9,7 +9,6 @@ file(GLOB NFCore_ROOT_Hpp
 	*.h)
 add_library(NFCore ${NFCore_ROOT_Cpp} ${NFCore_ROOT_Hpp})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFCore PROPERTIES OUTPUT_NAME_DEBUG "NFCore_d")
 set_target_properties( NFCore PROPERTIES PREFIX "")
 set_target_properties( NFCore PROPERTIES 

@@ -106,8 +106,8 @@
   <ItemGroup>
     <ClInclude Include="NFCEventModule.h" />
     <ClInclude Include="NFCKernelModule.h" />
+    <ClInclude Include="NFCSceneAOIModule.h" />
     <ClInclude Include="NFCScheduleModule.h" />
-    <ClInclude Include="NFCSceneModule.h" />
     <ClInclude Include="NFKernelPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +121,7 @@
     </ClCompile>
     <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCKernelModule.cpp" />
-    <ClCompile Include="NFCSceneModule.cpp" />
+    <ClCompile Include="NFCSceneAOIModule.cpp" />
     <ClCompile Include="NFCScheduleModule.cpp" />
     <ClCompile Include="NFKernelPlugin.cpp" />
   </ItemGroup>
