@@ -138,12 +138,12 @@ private:
     int mnWidth;
 };
 
-class NFISceneModule
+class NFISceneAOIModule
     : public NFIModule,
   public NFMapEx<int, NFCSceneInfo>
 {
 public:
-    virtual ~NFISceneModule()
+    virtual ~NFISceneAOIModule()
     {
         ClearAll();
     }
