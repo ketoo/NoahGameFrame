@@ -130,7 +130,6 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 
 NFList<std::string> NFCNoSqlModule::GetDriverIdList()
 {
-	NF_SHARE_PTR<NFIDataList> pIniData = NF_SHARE_PTR<NFIDataList>(NF_NEW NFCDataList());
 	NFList<std::string> lDriverIdList;
 	std::string strDriverId;
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = mxNoSqlDriver.First(strDriverId);
