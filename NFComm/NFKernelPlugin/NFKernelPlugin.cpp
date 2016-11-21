@@ -8,7 +8,7 @@
 
 #include "NFKernelPlugin.h"
 #include "NFCKernelModule.h"
-#include "NFCSceneModule.h"
+#include "NFCSceneAOIModule.h"
 #include "NFCEventModule.h"
 #include "NFCScheduleModule.h"
 
@@ -43,7 +43,7 @@ const std::string NFKernelPlugin::GetPluginName()
 
 void NFKernelPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
+    REGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
 	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
@@ -53,6 +53,6 @@ void NFKernelPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
-	UNREGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
+	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
 	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
 }

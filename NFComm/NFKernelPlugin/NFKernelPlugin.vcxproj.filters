@@ -3,16 +3,16 @@
   <ItemGroup>
     <ClInclude Include="NFKernelPlugin.h" />
     <ClInclude Include="NFCEventModule.h" />
-    <ClInclude Include="NFCSceneModule.h" />
     <ClInclude Include="NFCKernelModule.h" />
     <ClInclude Include="NFCScheduleModule.h" />
+    <ClInclude Include="NFCSceneAOIModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFKernelPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCKernelModule.cpp" />
-    <ClCompile Include="NFCSceneModule.cpp" />
     <ClCompile Include="NFCEventModule.cpp" />
     <ClCompile Include="NFCScheduleModule.cpp" />
+    <ClCompile Include="NFCSceneAOIModule.cpp" />
   </ItemGroup>
 </Project>
