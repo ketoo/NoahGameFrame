@@ -5,7 +5,6 @@ file(GLOB NFConfigPlugin_ROOT_Cpp
 file(GLOB NFConfigPlugin_ROOT_Hpp 
 	*.h)
 add_library(NFConfigPlugin SHARED ${NFConfigPlugin_ROOT_Cpp} ${NFConfigPlugin_ROOT_Hpp})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFConfigPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFConfigPlugin_d")
 set_target_properties( NFConfigPlugin PROPERTIES PREFIX "")
 set_target_properties( NFConfigPlugin PROPERTIES 

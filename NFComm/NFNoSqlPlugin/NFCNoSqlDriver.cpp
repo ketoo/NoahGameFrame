@@ -278,7 +278,7 @@ const bool NFCNoSqlDriver::HMSet(const std::string & strKey, const std::vector<s
 		return false;
 	}
 
-	if (strKey.empty() <= 0 || fieldVec.size() != valueVec.size())
+	if (strKey.empty() || fieldVec.size() != valueVec.size())
 	{
 		return false;
 	}
