@@ -130,13 +130,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCMasterNet_HttpJsonModule.h" />
-    <ClInclude Include="NFCMasterNet_WebServerModule.h" />
     <ClInclude Include="NFMasterNet_HttpServerPlugin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCMasterNet_HttpJsonModule.cpp" />
-    <ClCompile Include="NFCMasterNet_WebServerModule.cpp" />
     <ClCompile Include="NFMasterNet_HttpServerPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
