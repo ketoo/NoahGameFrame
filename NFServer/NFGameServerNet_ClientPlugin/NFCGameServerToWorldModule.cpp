@@ -88,6 +88,7 @@ void NFCGameServerToWorldModule::ServerReport()
 		return;
 	}
 	mLastReportTime = pPluginManager->GetNowTime();
+
 	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
