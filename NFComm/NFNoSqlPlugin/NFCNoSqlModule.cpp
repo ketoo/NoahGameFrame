@@ -23,6 +23,8 @@ NFCNoSqlModule::~NFCNoSqlModule()
 
 bool NFCNoSqlModule::Init()
 {
+	mLastCheckTime = 0;
+
 	return true;
 }
 
@@ -68,22 +70,57 @@ bool NFCNoSqlModule::AfterInit()
 
 bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
 {
+	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
+	{
+		return;
+	}
+	mLastCheckTime = pPluginManager->GetNowTime();
+
+	NF_SHARE_PTR<NFINoSqlDriver> xNosqlDriver = this->mxNoSqlDriver.First();
+	while (xNosqlDriver)
+	{
+		if (xNosqlDriver->Enable())
+		{
+			xNosqlDriver->ReConnect();
+		}
+
+		xNosqlDriver = this->mxNoSqlDriver.First();
+	}
+
 	return true;
 }
 
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuitRandom()
 {
-	return mxNoSqlDriver.GetElementBySuitRandom();
+	NF_SHARE_PTR<NFINoSqlDriver> xDriver = mxNoSqlDriver.GetElementBySuitRandom();
+	if (xDriver && xDriver->Enable())
+	{
+		return xDriver;
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuitConsistent()
 {
-	return mxNoSqlDriver.GetElementBySuitConsistent();
+	NF_SHARE_PTR<NFINoSqlDriver> xDriver = mxNoSqlDriver.GetElementBySuitConsistent();
+	if (xDriver && xDriver->Enable())
+	{
+		return xDriver;
+	}
+
+	return nullptr;
 }
 
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& strHash)
 {
-	return mxNoSqlDriver.GetElementBySuit(strHash);
+	NF_SHARE_PTR<NFINoSqlDriver> xDriver = mxNoSqlDriver.GetElementBySuit(strHash);
+	if (xDriver && xDriver->Enable())
+	{
+		return xDriver;
+	}
+
+	return nullptr;
 }
 
 /*
@@ -143,7 +180,13 @@ NFList<std::string> NFCNoSqlModule::GetDriverIdList()
 
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriver(const std::string& strID)
 {
-	return mxNoSqlDriver.GetElement(strID);
+	NF_SHARE_PTR<NFINoSqlDriver> xDriver = mxNoSqlDriver.GetElement(strID);
+	if (xDriver && xDriver->Enable())
+	{
+		return xDriver;
+	}
+
+	return nullptr;
 }
 
 bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)

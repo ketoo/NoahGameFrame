@@ -43,7 +43,7 @@ public:
     virtual bool RemoveConnectSql(const std::string& strID);
 
 protected:
-
+	NFINT64 mLastCheckTime;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFILogModule* m_pLogModule;
