@@ -49,7 +49,7 @@ public:
 	virtual int InitServer(const unsigned short nPort)
 	{
 		mHttpNet = new NFCHttpNet(this, &NFIHttpServerModule::OnReceiveNetPack);
-		std::cout << "Open http port:" << nPort;
+		std::cout << "Open http port:" << nPort << std::endl;
 		return mHttpNet->InitServer(nPort);
 	}
 	
