@@ -97,6 +97,10 @@ protected:
 private:
 	bool mbEnable;
     redis::client* m_pNoSqlClient;
+
+	int nPort;
+	std::string strIP;
+	std::string strAuthKey;
 };
 
 #endif

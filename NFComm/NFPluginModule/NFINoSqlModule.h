@@ -44,7 +44,7 @@ public:
 	virtual const bool HGet(const std::string& strKey, const std::string& strField, std::string& strValue) = 0;
 	virtual const bool HMSet(const std::string& strKey, const std::vector<std::string>& fieldVec, const std::vector<std::string>& valueVec) = 0;
 	virtual const bool HMGet(const std::string& strKey, const std::vector<std::string>& fieldVec, std::vector<std::string>& valueVec) = 0;
-	
+
 	virtual const bool HExists(const std::string& strKey, const std::string& strField) = 0;
 	virtual const bool HDel(const std::string& strKey, const std::string& strField) = 0;
 	virtual const bool HLength(const std::string& strKey, int& nLen) = 0;
@@ -69,7 +69,7 @@ public:
 	virtual const bool ZCard(const std::string& strKey, int& nCount) = 0;
 	// score 值在 min 和 max 之间的成员的数量
 	virtual const bool ZCount(const std::string& strKey, const int nMin, const int nMax, int& nCount) = 0;
-	
+
 	// 返回key中指定区间内的成员, 包含分数:大到小排序
 	virtual const bool ZRevRange(const std::string& strKey, const int nStart, const int nStop, std::vector<std::pair<std::string, double> >& memberScoreVec) = 0;
 	virtual const bool ZRevRank(const std::string& strKey, const std::string& strMember, int& nRank) = 0;
@@ -92,7 +92,7 @@ public:
 };
 
 class NFINoSqlModule
-    : public NFIModule
+	: public NFIModule
 {
 public:
 
@@ -100,12 +100,13 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort) = 0;
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass) = 0;
 
+	virtual NFList<std::string> GetDriverIdList() = 0;
 	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriver(const std::string& strID) = 0;
 	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuitRandom() = 0;
 	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuitConsistent() = 0;
 	virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuit(const std::string& strHash) = 0;
 	//virtual NF_SHARE_PTR<NFINoSqlDriver>  GetDriverBySuit(const int nHash) = 0;
-    virtual bool RemoveConnectSql(const std::string& strID) = 0;
+	virtual bool RemoveConnectSql(const std::string& strID) = 0;
 };
 
 #endif
