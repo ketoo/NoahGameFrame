@@ -7,7 +7,6 @@ list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
 add_library(NFNet
 	${NFNet_ROOT_Cpp}
 	${NFNet_ROOT_Hpp})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set_target_properties( NFNet PROPERTIES OUTPUT_NAME_DEBUG "NFNet_d")
 set_target_properties( NFNet PROPERTIES PREFIX "")
 set_target_properties( NFNet PROPERTIES
