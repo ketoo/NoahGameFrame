@@ -17,6 +17,7 @@ public:
 	virtual ~NFINoSqlDriver() {}
 
 	virtual const bool Connect(const std::string& strDns, const int nPort = 6379, const std::string& strAuthKey = "") = 0;
+	virtual const bool ReConnect() = 0;
 	virtual const bool Enable() = 0;
 
 	virtual const std::string& GetIP() = 0;
