@@ -21,8 +21,9 @@ else()
 	add_definitions(
 		-D_USRDLL
 		-D_LIB
-		-DPROTOBUF_USE_DLLS
 		-DLIBPROTOC_EXPORTS
+		-DPROTOBUF_USE_DLLS
+		-D_SCL_SECURE_NO_WARNINGS
 		)
 
 endif()
