@@ -62,6 +62,10 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 
 		m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
 
+		this->strIP = strDns;
+		this->nPort = nPort;
+		this->strAuthKey = strAuthKey;
+		
 		mbEnable = true;
 	}
 	catch (...)
@@ -72,6 +76,11 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 	return mbEnable;
 }
 
+const bool NFCNoSqlDriver::ReConnect()
+{
+	return Connect(this->strIP, this->nPort, this->strAuthKey);
+}
+
 const bool NFCNoSqlDriver::Enable()
 {
 	return mbEnable;
@@ -79,21 +88,19 @@ const bool NFCNoSqlDriver::Enable()
 
 const std::string & NFCNoSqlDriver::GetIP()
 {
-	// TODO: insert return statement here
-
-	return NULL_STR;
+	return strIP;
 }
 
 const int NFCNoSqlDriver::GetPort()
 {
-	return 0;
+	return nPort;
 }
 
 const std::string & NFCNoSqlDriver::GetAuthKey()
 {
 	// TODO: insert return statement here
 
-	return NULL_STR;
+	return strAuthKey;
 }
 
 const bool NFCNoSqlDriver::Del(const std::string & strKey)
@@ -277,7 +284,7 @@ const bool NFCNoSqlDriver::HMSet(const std::string & strKey, const std::vector<s
 		return false;
 	}
 
-	if (strKey.empty() <= 0 || fieldVec.size() != valueVec.size())
+	if (strKey.empty() || fieldVec.size() != valueVec.size())
 	{
 		return false;
 	}

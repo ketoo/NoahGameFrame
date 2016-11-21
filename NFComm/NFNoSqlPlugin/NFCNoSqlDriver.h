@@ -19,6 +19,7 @@ public:
     virtual ~NFCNoSqlDriver();
 
 	virtual const bool Connect(const std::string& strDns, const int nPort = 6379, const std::string& strAuthKey = "");
+	virtual const bool ReConnect();
 	virtual const bool Enable();
 
 	virtual const std::string& GetIP();
@@ -97,6 +98,10 @@ protected:
 private:
 	bool mbEnable;
     redis::client* m_pNoSqlClient;
+
+	int nPort;
+	std::string strIP;
+	std::string strAuthKey;
 };
 
 #endif

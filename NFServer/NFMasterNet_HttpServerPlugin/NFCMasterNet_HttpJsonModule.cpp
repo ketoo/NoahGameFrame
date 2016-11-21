@@ -98,18 +98,19 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 	typeMap["pdf"] = "application/pdf";
 	typeMap["ps"] = "application/postsript";
 
-	std::string strPath;
-	if (m_strWebRootPath.find_last_of("/") != m_strWebRootPath.size())
+	std::string strPath = m_strWebRootPath;
+	if (strPath.find_last_of("/") != strPath.size())
 	{
-		m_strWebRootPath += "/";
+		strPath += "/";
 	}
-	strPath = m_strWebRootPath.c_str() + strUrl;
+	strPath = strPath + strUrl;
 
 	int fd = -1;
 	struct stat st;
 	if (stat(strPath.c_str(), &st) < 0)
 	{
-		NFCHttpNet::SendMsg(req, "404");
+		std::string errMsg = "404:" + strPath;
+		NFCHttpNet::SendMsg(req, errMsg.c_str());
 	}
 
 	if (S_ISDIR(st.st_mode))
@@ -119,7 +120,8 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 
 	if (stat(strPath.c_str(), &st) < 0)
 	{
-		NFCHttpNet::SendMsg(req, "404");
+		std::string errMsg = "404:" + strPath;
+		NFCHttpNet::SendMsg(req, errMsg.c_str());
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -147,6 +149,4 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 		strType = typeMap[strType];
 	}
 	NFCHttpNet::SendFile(req, fd, st, strType);
-
-
 }

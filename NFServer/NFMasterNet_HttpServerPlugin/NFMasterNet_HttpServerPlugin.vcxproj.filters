@@ -3,12 +3,10 @@
   <ItemGroup>
     <ClInclude Include="NFMasterNet_HttpServerPlugin.h" />
     <ClInclude Include="NFCMasterNet_HttpJsonModule.h" />
-    <ClInclude Include="NFCMasterNet_WebServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFMasterNet_HttpServerPlugin.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCMasterNet_HttpJsonModule.cpp" />
-    <ClCompile Include="NFCMasterNet_WebServerModule.cpp" />
   </ItemGroup>
 </Project>
