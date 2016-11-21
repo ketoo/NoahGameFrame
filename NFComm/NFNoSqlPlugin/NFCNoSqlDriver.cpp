@@ -65,6 +65,7 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 		this->strIP = strDns;
 		this->nPort = nPort;
 		this->strAuthKey = strAuthKey;
+		
 		mbEnable = true;
 	}
 	catch (...)
@@ -73,6 +74,11 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 	}
 
 	return mbEnable;
+}
+
+const bool NFCNoSqlDriver::ReConnect()
+{
+	return Connect(this->strIP, this->nPort, this->strAuthKey);
 }
 
 const bool NFCNoSqlDriver::Enable()
