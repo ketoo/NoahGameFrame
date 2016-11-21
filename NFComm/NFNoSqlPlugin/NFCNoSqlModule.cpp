@@ -72,7 +72,7 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
 {
 	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
 	{
-		return;
+		return false;
 	}
 	mLastCheckTime = pPluginManager->GetNowTime();
 
