@@ -40,7 +40,6 @@ typedef unsigned short ushort;
 typedef unsigned long ulong;
 typedef unsigned int uint;
 typedef char* BUFPTR;
-#define INFINITY 0x7fffffff
 #else
 #include <sys/socket.h>
 typedef void* BUFPTR;
@@ -55,12 +54,15 @@ typedef void* BUFPTR;
 #include <sstream>
 #include <iostream>
 
-#include "./Dependencies/common/optional.hpp";
-#include "./Dependencies/common/lexical_cast.hpp";
-#include "./Dependencies/common/variant.hpp";
+#include "./Dependencies/common/optional.hpp"
+#include "./Dependencies/common/lexical_cast.hpp"
+#include "./Dependencies/common/variant.hpp"
 
 #ifdef _WIN32
 #include "anet_win32.h"
+#ifndef INFINITY
+#define INFINITY 0x7fffffff
+#endif
 #else
 #include <unistd.h>
 extern "C"
