@@ -34,6 +34,7 @@ public:
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort);
 	virtual bool AddConnectSql(const std::string& strID, const std::string& strIP, const int nPort, const std::string& strPass);
 
+	virtual NFList<std::string> GetDriverIdList();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriver(const std::string& strID);
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
@@ -42,7 +43,7 @@ public:
     virtual bool RemoveConnectSql(const std::string& strID);
 
 protected:
-
+	NFINT64 mLastCheckTime;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 	NFILogModule* m_pLogModule;

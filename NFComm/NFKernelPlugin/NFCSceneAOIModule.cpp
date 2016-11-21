@@ -1,34 +1,34 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCSceneModule.cpp
+//    @FileName			:    NFCSceneAOIModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFCSceneModule
+//    @Module           :    NFCSceneAOIModule
 //
 // -------------------------------------------------------------------------
 
-#include "NFCSceneModule.h"
+#include "NFCSceneAOIModule.h"
 
-bool NFCSceneModule::Init()
+bool NFCSceneAOIModule::Init()
 {
     return true;
 }
 
-bool NFCSceneModule::AfterInit()
+bool NFCSceneAOIModule::AfterInit()
 {
     return true;
 }
 
-bool NFCSceneModule::BeforeShut()
+bool NFCSceneAOIModule::BeforeShut()
 {
     return true;
 }
 
-bool NFCSceneModule::Shut()
+bool NFCSceneAOIModule::Shut()
 {
     return true;
 }
 
-bool NFCSceneModule::Execute()
+bool NFCSceneAOIModule::Execute()
 {
     return true;
 }
