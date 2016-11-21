@@ -1,10 +1,10 @@
 var html_ServerStatus_temp;
 html_ServerStatus_temp = "\
-	<div class='col-lg-3 col-sm-6'>\
+	<div class='col-lg-2 col-sm-6'>\
 		<div class='card'>\
 			<div class='content'>\
 				<div class='row'>\
-					<div class='col-xs-5'>\
+					<div class='col-xs-3'>\
 						<div class='icon-big {$Color} text-center'>\
 							<i class='ti-light-bulb'></i>\
 						</div>\
