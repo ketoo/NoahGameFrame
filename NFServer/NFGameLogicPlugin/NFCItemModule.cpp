@@ -25,7 +25,7 @@ bool NFCItemModule::Shut()
 
 bool NFCItemModule::Execute()
 {
-	//Œª÷√ƒÿ
+	
 	return true;
 }
 

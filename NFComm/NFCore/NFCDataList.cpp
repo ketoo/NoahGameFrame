@@ -59,7 +59,7 @@ NFCDataList& NFCDataList::operator=(const NFIDataList& src)
 }
 
 */
-// 添加
+
 bool NFCDataList::Append(const NFIDataList& src, const int start, const int count)
 {
     if (start >= src.GetCount())
@@ -518,7 +518,7 @@ bool NFCDataList::TypeEx(const int nType, ...) const
 
     while (pareType != TDATA_UNKNOWN)
     {
-        //比较
+        
         TDATA_TYPE varType = Type(index);
         if (varType != pareType)
         {
@@ -527,10 +527,10 @@ bool NFCDataList::TypeEx(const int nType, ...) const
         }
 
         ++index;
-        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
+        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   
     }
 
-    va_end(arg_ptr); //结束
+    va_end(arg_ptr); 
 
     return bRet;
 }
@@ -544,7 +544,7 @@ bool NFCDataList::Concat(const NFIDataList& src)
 void NFCDataList::Clear()
 {
     mnUseSize = 0;
-    //8个以后的清除掉
+    
     if (mvList.size() > STACK_SIZE)
     {
         for (int i = 0; i < STACK_SIZE; ++i)

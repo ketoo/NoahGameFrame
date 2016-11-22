@@ -1,4 +1,4 @@
-﻿#include "FileProcess.h"
+#include "FileProcess.h"
 #include <iostream>
 #include <chrono>
 

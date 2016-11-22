@@ -55,7 +55,7 @@ enum NFEventDefine
 
 	NFED_ON_OBJECT_BE_KILLED,
 
-	// 通知副本奖励
+
 	NFED_ON_NOTICE_ECTYPE_AWARD,
 
 };

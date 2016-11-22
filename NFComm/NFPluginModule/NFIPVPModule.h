@@ -30,8 +30,8 @@ public:
             PVPCell_Player_Count = 6,
         };
 
-        int mnCellStatus;               // 房间状态 0有空位 1满员 2
-        NFMap<NFGUID, int> mxList;   // 仅限6个人, first = playerID second = is_owner
+
+
     };
 
 public:
