@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName			:    NFCSceneAOIModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
@@ -147,7 +147,7 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 	NFCDataList valueBroadCaseList;
 	GetBroadCastObject(self, strRecordName, true, valueBroadCaseList);
 
-	OnRecordEvent(self, xEventData, oldVar, newVar, valueBroadCaseList);
+	OnRecordEvent(self, strRecordName, xEventData, oldVar, newVar, valueBroadCaseList);
 
 	return 0;
 }
@@ -191,19 +191,7 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
-		/*
-		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
-		if (pDataBase)
-		{
-			NFMsg::AckEventResult xMsg;
-			xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
 
-			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
-			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
-		}
-		*/
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
@@ -563,14 +551,14 @@ int NFCSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & 
 	return 0;
 }
 
-int NFCSceneAOIModule::OnRecordEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
+int NFCSceneAOIModule::OnRecordEvent(const NFGUID & self, const std::string& strProperty, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
 {
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mtRecordSingleCallback.begin();
 	for (; it != mtRecordSingleCallback.end(); it++)
 	{
 		RECORD_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		RECORD_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		pFunc->operator()(self, xEventData, oldVar, newVar, argVar);
+		pFunc->operator()(self, strProperty, xEventData, oldVar, newVar, argVar);
 	}
 
 	return 0;

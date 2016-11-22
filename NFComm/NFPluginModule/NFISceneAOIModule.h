@@ -152,7 +152,7 @@ typedef NF_SHARE_PTR<RECORD_ENTER_EVENT_FUNCTOR> RECORD_ENTER_EVENT_FUNCTOR_PTR;
 typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> PROPERTY_SINGLE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_SINGLE_EVENT_FUNCTOR> PROPERTY_SINGLE_EVENT_FUNCTOR_PTR;//AddPropertyEventCallBack
 
-typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_SINGLE_EVENT_FUNCTOR> RECORD_SINGLE_EVENT_FUNCTOR_PTR;//AddRecordEventCallBack
 
 
@@ -207,9 +207,9 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddRecordEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
+	bool AddRecordEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
 	{
-		RECORD_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		RECORD_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, std::placeholders::_6);
 		RECORD_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new RECORD_SINGLE_EVENT_FUNCTOR(functor));
 		return AddRecordEventCallBack(functorPtr);
 	}
