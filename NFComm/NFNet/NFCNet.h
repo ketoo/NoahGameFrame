@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ��    NFCNet.h
-//    @Author           ��    LvSheng.Huang
-//    @Date             ��    2013-12-15
-//    @Module           ��    NFIPacket
+
+
+
+
 //    @Desc             :     CNet
 // -------------------------------------------------------------------------
 
@@ -59,13 +59,13 @@ public:
 
     virtual bool Final();
 
-    //�ް�ͷ���ڲ���װ
+    
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex);
 
-    //�ް�ͷ���ڲ���װ
+    
     virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<int>& fdList);
 
-    //�ް�ͷ���ڲ���װ
+    
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen);
 
 
@@ -77,13 +77,13 @@ public:
     virtual bool Log(int severity, const char* msg);
 
 private:
-    //�Ѵ��ϰ�ͷ
+    
     bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
 
-    //�Ѵ��ϰ�ͷ
+    
     bool SendMsg(const char* msg, const uint32_t nLen, const std::list<int>& fdList);
 
-    //�Ѵ��ϰ�ͷ
+    
     bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex);
 
 private:

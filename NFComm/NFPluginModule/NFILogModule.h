@@ -20,7 +20,7 @@ public:
     enum NF_LOG_LEVEL
     {
         NLL_DEBUG_NORMAL,
-        NLL_INFO_NORMAL,//无意义，只为打印
+		NLL_INFO_NORMAL,
         NLL_WARING_NORMAL,
         NLL_ERROR_NORMAL,
         NLL_FATAL_NORMAL,
