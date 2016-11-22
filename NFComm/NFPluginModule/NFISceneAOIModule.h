@@ -214,15 +214,14 @@ public:
 		return AddRecordEventCallBack(functorPtr);
 	}
 
-	////////////////add events//////////////////////////////////////////////////////////
-	bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
-	bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
-	bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR& cb) = 0;
-	bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR& cb) = 0;
-	bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR& cb) = 0;
-	bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
-
 protected:
+	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR& cb) = 0;
+	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR& cb) = 0;
+	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR& cb) = 0;
+	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
+
 private:
 };
 #endif
