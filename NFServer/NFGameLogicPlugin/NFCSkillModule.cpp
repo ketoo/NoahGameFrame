@@ -105,7 +105,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //    return 1;
     //}
 
-    //配置表中真的有这么个技能类别
+    
     //EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
 
     if (!m_pElementModule->ExistElement(strSkillID))
@@ -136,21 +136,21 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     }
 
     m_pKernelModule->SetPropertyObject(nTargetID, NFrame::NPC::LastAttacker(), self);
-    m_pKernelModule->SetPropertyInt(nTargetID, NFrame::NPC::HP(), (nCurHP - 10) >= 0 ? (nCurHP - 10) : 0); // 暂时扣10点血
+    m_pKernelModule->SetPropertyInt(nTargetID, NFrame::NPC::HP(), (nCurHP - 10) >= 0 ? (nCurHP - 10) : 0); 
     
 
-    ////结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
+    //
     //if ( damageValueList.GetCount() == damageResultList.GetCount()
     //    && damageValueList.GetCount() == valueOther.GetCount() )
     //{
     //    NFCDataList valueResult;
     //    valueResult.AddString( var.String( 2 ).c_str() );
     //    valueResult.AddInt( valueOther.GetCount() );
-    //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); //伤害对象
-    //    valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); //伤害值
-    //    valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); //击打效果
+    //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); 
+    //    valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); 
+    //    valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); 
 
-    //    //现在不需要反馈，杀了就杀了
+    //    
     //    //m_pEventProcessModule->DoEvent( pObejct->Self(), NFED_ON_CLIENT_USE_SKILL_RESULT, valueResult );
     //}
 
@@ -189,7 +189,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     //    return 1;
     //}
 
-    ////配置表中真的有这么个技能类别
+    //
     //EGameSkillType eItemType = ( EGameSkillType )pItemTypeProperty->GetInt();
     //NFISkillConsumeProcessModule* pConsumeProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule( EGameSkillType::EGST_JOBSKILL_BRIEF );
     //if ( pConsumeProcessModule == NULL )
@@ -198,7 +198,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     //}
 
     //NFCDataList valueOther;
-    //valueOther.Append( var, 3, var.GetCount() - 3 ); // 被攻击玩家数量 3表示从第几个参数开始是被攻击玩家
+    
     ////     if ( pConsumeProcessModule->ConsumeLegal( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther ) != 0 )
     ////     {
     ////         return 1;
@@ -219,18 +219,18 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     //    damageResultList.AddInt(0);
     //}
 
-    ////结果事件--无论失败或者是成功，都会发下去--当然使用结果只对使用者下发--成果的结果，还得对被施放的人发
+    //
     //if ( damageValueList.GetCount() == damageResultList.GetCount()
     //    && damageValueList.GetCount() == valueOther.GetCount() )
     //{
     //    NFCDataList valueResult;
     //    valueResult.AddString( var.String( 2 ).c_str() );
     //    valueResult.AddInt( valueOther.GetCount() );
-    //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); //伤害对象
-    //    valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); //伤害值
-    //    valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); //击打效果
+    //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); 
+    //    valueResult.Append( damageValueList, 0, damageValueList.GetCount() ); 
+    //    valueResult.Append( damageResultList, 0, damageResultList.GetCount() ); 
 
-    //    //现在不需要反馈，杀了就杀了
+    //    
     //    //m_pEventProcessModule->DoEvent( pObejct->Self(), NFED_ON_CLIENT_USE_SKILL_RESULT, valueResult );
     //}
 
@@ -249,9 +249,9 @@ int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const NFEvent
     double fX = var.Float( 1 );
     double fY = var.Float( 2 );
     double fZ = var.Float( 3 );
-    //群伤，就只计算第一个人的闪避
+    
 
-    //结果事件
+    
     //  NFCDataList valueResult;
     //  valueResult.AddInt(nSkillID);
     //  valueResult.AddInt(nResult);
@@ -369,9 +369,9 @@ int NFCSkillModule::GetSkillGemLevel( const NFGUID& self, const std::string& str
 
 int NFCSkillModule::AddNewerSkill( const NFGUID& self )
 {
-    //全部技能扫一遍
-    //角色第一次上线的话，添加技能
-    //初始化技能列表
+    
+    
+    
 
     return 0;
 }
@@ -396,13 +396,13 @@ void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, con
 	{
 		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
 		const NFGUID nTarget = NFINetModule::PBToNF(xEffectData.effect_ident());
-		// 技能伤害
+		
 		OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
 
 		NFMsg::EffectData* pNewEffectData = xReqAckUseSkill.add_effect_data();
 
 		*pNewEffectData->mutable_effect_ident() = NFINetModule::NFToPB(nTarget);
-		pNewEffectData->set_effect_value(20);// 暂时代替
+		pNewEffectData->set_effect_value(20);
 		pNewEffectData->set_effect_rlt(xEffectData.effect_rlt());
 	}
 

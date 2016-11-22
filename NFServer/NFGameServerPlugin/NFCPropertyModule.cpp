@@ -65,7 +65,7 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
         //return m_pKernelModule->SetRecordInt( self, mstrCommPropertyName, eGroupType, *pTableCol, nValue );
     }
 
-    //动态表中没有，则设置到最终值
+    
     m_pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
 
     return 0;
@@ -126,7 +126,7 @@ int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string&
 
 int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    //计算总值
+    
     const std::string& strRecordName = xEventData.strRecordName;
     const int nOpType = xEventData.nOpType;
     const int nRow = xEventData.nRow;
@@ -165,7 +165,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
 
             m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCPropertyModule::OnObjectLevelEvent);
 
-            // TODO:一级属性回调
+            
             m_pKernelModule->AddRecordCallBack(self, NFrame::Player::R_CommPropertyValue(), this, &NFCPropertyModule::OnRecordPropertyEvent);
 
 
@@ -175,7 +175,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
             int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
             if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID()) > 0)
             {
-                //第一次出生，设置基础属性
+                
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
             }
         }
@@ -198,7 +198,7 @@ int NFCPropertyModule::RefreshBaseProperty(const NFGUID& self)
         return 1;
     }
 
-    //初始属性+等级属性(职业决定)
+    
     int eJobType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
     int nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level());
 

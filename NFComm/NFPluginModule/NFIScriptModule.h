@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFIScriptModule.h
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2013-07-08
-//    @Module           £º    NFIScriptModule
+
+
+
+
 //    @Desc             :     every script plugin need to export two interfaces(NFCScriptVarList and most of NFCScriptKernel)
 // -------------------------------------------------------------------------
 

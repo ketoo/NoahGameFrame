@@ -3,7 +3,7 @@
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemEquipConsumeProcessModule
-//    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
+
 // -------------------------------------------------------------------------
 #include "NFCItemItemConsumeProcessModule.h"
 
@@ -90,17 +90,17 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	switch (nSubItemType)
 	{
-	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:		// 圣水
+	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:		
 	{
 		//don't know what to do, what is shengshui?
 	}
 	break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:	// 钻石
-	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:	// 金币
+	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:	
+	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:	
 	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:		// EXP
-	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:			// 生命药水
-	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:			// 魔法药水
-	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:			// 体力药水
+	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:			
+	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:			
+	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:			
 	{
 		const std::string strAwardProperty = m_pElementModule->GetPropertyString(strItemConfigID, NFrame::Item::AwardProperty());
 		if (strAwardProperty.length() <= 0)
