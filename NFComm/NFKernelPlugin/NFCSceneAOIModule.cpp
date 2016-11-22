@@ -44,6 +44,36 @@ bool NFCSceneAOIModule::Execute()
     return true;
 }
 
+bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR & cb)
+{
+	return false;
+}
+
 int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
 {
 		if (NFrame::Player::GroupID() == strPropertyName)
