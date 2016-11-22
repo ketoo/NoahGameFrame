@@ -33,7 +33,7 @@ public:
     virtual TDATA_TYPE GetColType(const int nCol) const;
     virtual const std::string& GetColTag(const int nCol) const;
 
-    // ��������
+    
     virtual int AddRow(const int nRow);
 
     virtual int AddRow(const int nRow, const NFIDataList& var);
@@ -133,15 +133,15 @@ protected:
     void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 protected:
-    //��¼��������Key���ͣ������ڶ�ȡ�����õ�ʱ�����ܱ�����ȷ
-	NF_SHARE_PTR<NFIDataList> mVarRecordType;//��ʼֵ����--Ӧ�����þ�̬��(��������ָ��)����Լ�����ڴ�
-	NF_SHARE_PTR<NFIDataList> mVarRecordTag;//col��tagֵ--Ӧ�����þ�̬��(��������ָ��)����Լ�����ڴ�
+    
+	NF_SHARE_PTR<NFIDataList> mVarRecordType;
+	NF_SHARE_PTR<NFIDataList> mVarRecordTag;
 
-    std::map<std::string, int> mmTag;//tag->colת��
+    std::map<std::string, int> mmTag;
 
 	////////////////////////////
 	
-	TRECORDVEC mtRecordVec;//��������
+	TRECORDVEC mtRecordVec;
 	std::vector<int> mVecUsedState;
     int mnMaxRow;
 

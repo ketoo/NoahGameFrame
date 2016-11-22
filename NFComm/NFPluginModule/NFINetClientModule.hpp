@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ��    NFINetClientModule.hpp
-//    @Author           ��    LvSheng.Huang
-//    @Date             ��    2015-01-4
-//    @Module           ��    NFINetClientModule
+//    @FileName         :    NFINetClientModule.hpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2015-01-4
+//    @Module           :    NFINetClientModule
 //
 // -------------------------------------------------------------------------
 
