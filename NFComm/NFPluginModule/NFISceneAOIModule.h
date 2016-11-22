@@ -90,11 +90,11 @@ public:
         {
             if (bPlayer)
             {
-                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>());
             }
             else
             {
-                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>());
             }
         }
 
@@ -217,9 +217,9 @@ public:
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR& cb) = 0;
-	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR& cb) = 0;
-	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR& cb) = 0;
+	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 
 private:
