@@ -24,6 +24,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
@@ -66,11 +68,16 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCGameServerNet_ServerModule::OnSocketPSEvent);
 
-	m_pKernelModule->RegisterCommonClassEvent(this, &NFCGameServerNet_ServerModule::OnClassCommonEvent);
-	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCGameServerNet_ServerModule::OnPropertyCommonEvent);
-	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCGameServerNet_ServerModule::OnRecordCommonEvent);
-
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent);
+
+	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFCGameServerNet_ServerModule::OnObjectListEnter);
+	m_pSceneAOIModule->AddObjectLeaveCallBack(this, &NFCGameServerNet_ServerModule::OnObjectListLeave);
+	m_pSceneAOIModule->AddPropertyEnterCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEnter);
+	m_pSceneAOIModule->AddRecordEnterCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEnter);
+	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEvent);
+	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEvent);
+
+	/////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
@@ -270,10 +277,6 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, co
 
 	NFMsg::MultiObjectPropertyList xPublicMsg;
 	NFMsg::MultiObjectPropertyList xPrivateMsg;
-
-	
-	
-	
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (pObject)
 	{
@@ -550,6 +553,332 @@ int NFCGameServerNet_ServerModule::OnRecordEnter(const NFIDataList& argVar, cons
 	return 0;
 }
 
+int NFCGameServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList & argVar)
+{
+	switch (oldVar.GetType())
+	{
+	case TDATA_INT:
+	{
+		NFMsg::ObjectPropertyInt xPropertyInt;
+		NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
+		pDataInt->set_property_name(strProperty);
+		pDataInt->set_data(newVar.GetInt());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
+		}
+	}
+	break;
+
+	case TDATA_FLOAT:
+	{
+		NFMsg::ObjectPropertyFloat xPropertyFloat;
+		NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
+		pDataFloat->set_property_name(strProperty);
+		pDataFloat->set_data(newVar.GetFloat());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
+		}
+	}
+	break;
+
+	case TDATA_STRING:
+	{
+		NFMsg::ObjectPropertyString xPropertyString;
+		NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
+		pDataString->set_property_name(strProperty);
+		pDataString->set_data(newVar.GetString());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
+		}
+	}
+	break;
+
+	case TDATA_OBJECT:
+	{
+		NFMsg::ObjectPropertyObject xPropertyObject;
+		NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
+		pDataObject->set_property_name(strProperty);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
+		}
+	}
+	break;
+
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std::string& strRecord, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList & argVar)
+{
+	switch (xEventData.nOpType)
+	{
+	case RECORD_EVENT_DATA::Add:
+	{
+		NFMsg::ObjectRecordAddRow xAddRecordRow;
+		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		xAddRecordRow.set_record_name(strRecord);
+
+		NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
+		pAddRowData->set_row(xEventData.nRow);
+
+
+		NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, strRecord);
+		if (xRecord)
+		{
+			NFCDataList xRowDataList;
+			if (xRecord->QueryRow(xEventData.nRow, xRowDataList))
+			{
+				for (int i = 0; i < xRowDataList.GetCount(); i++)
+				{
+					switch (xRowDataList.Type(i))
+					{
+					case TDATA_INT:
+					{
+
+						int nValue = xRowDataList.Int(i);
+						//if ( 0 != nValue )
+						{
+							NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
+							pAddData->set_col(i);
+							pAddData->set_row(xEventData.nRow);
+							pAddData->set_data(nValue);
+						}
+					}
+					break;
+					case TDATA_FLOAT:
+					{
+						float fValue = xRowDataList.Float(i);
+						//if ( fValue > 0.001f  || fValue < -0.001f )
+						{
+							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
+							pAddData->set_col(i);
+							pAddData->set_row(xEventData.nRow);
+							pAddData->set_data(fValue);
+						}
+					}
+					break;
+					case TDATA_STRING:
+					{
+						const std::string& str = xRowDataList.String(i);
+						//if (!str.empty())
+						{
+							NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
+							pAddData->set_col(i);
+							pAddData->set_row(xEventData.nRow);
+							pAddData->set_data(str);
+						}
+					}
+					break;
+					case TDATA_OBJECT:
+					{
+						NFGUID identValue = xRowDataList.Object(i);
+						//if (!identValue.IsNull())
+						{
+							NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
+							pAddData->set_col(i);
+							pAddData->set_row(xEventData.nRow);
+
+							*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
+						}
+					}
+					break;
+					default:
+						break;
+					}
+				}
+
+				for (int i = 0; i < argVar.GetCount(); i++)
+				{
+					NFGUID identOther = argVar.Object(i);
+
+					SendMsgPBToGate(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
+				}
+			}
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Del:
+	{
+		NFMsg::ObjectRecordRemove xReoveRecordRow;
+
+		NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		xReoveRecordRow.set_record_name(strRecord);
+		xReoveRecordRow.add_remove_row(xEventData.nRow);
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOther = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Swap:
+	{
+
+		NFMsg::ObjectRecordSwap xSwapRecord;
+		*xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(self);
+
+		xSwapRecord.set_origin_record_name(strRecord);
+		xSwapRecord.set_target_record_name(strRecord);
+		xSwapRecord.set_row_origin(xEventData.nRow);
+		xSwapRecord.set_row_target(xEventData.nCol);
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOther = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Update:
+	{
+		switch (oldVar.GetType())
+		{
+		case TDATA_INT:
+		{
+			NFMsg::ObjectRecordInt xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			int nData = newVar.GetInt();
+			recordProperty->set_data(nData);
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
+			}
+		}
+		break;
+
+		case TDATA_FLOAT:
+		{
+			NFMsg::ObjectRecordFloat xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			recordProperty->set_data(newVar.GetFloat());
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xRecordChanged, identOther);
+			}
+		}
+		break;
+		case TDATA_STRING:
+		{
+			NFMsg::ObjectRecordString xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			recordProperty->set_data(newVar.GetString());
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
+			}
+		}
+		break;
+		case TDATA_OBJECT:
+		{
+			NFMsg::ObjectRecordObject xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
+			}
+		}
+		break;
+
+		default:
+			return 0;
+			break;
+		}
+	}
+	break;
+	case RECORD_EVENT_DATA::Create:
+		return 0;
+		break;
+	case RECORD_EVENT_DATA::Cleared:
+	{
+		//             NFMsg::ObjectRecordObject xRecordChanged;
+		//             xRecordChanged.set_player_id( self.nData64 );
+		//             xRecordChanged.set_record_name( strRecordName );
+		//
+		//             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
+		//             {
+		//                 NFGUID identOther = valueBroadCaseList.Object( i );
+		//                 SendMsgPB(NFMsg::EGMI_ACK_RECORD_CLEAR, xRecordChanged, 0);
+		//             }
+	}
+	break;
+	default:
+		break;
+	}
+	return 0;
+}
+
 int NFCGameServerNet_ServerModule::OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar)
 {
 	if (self.GetCount() <= 0 || argVar.GetCount() <= 0)
@@ -570,14 +899,14 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter(const NFIDataList& self, co
 		NFMsg::PlayerEntryInfo* pEntryInfo = xPlayerEntryInfoList.add_object_list();
 		*(pEntryInfo->mutable_object_guid()) = NFINetModule::NFToPB(identOld);
 
-		pEntryInfo->set_x(m_pKernelModule->GetPropertyFloat(identOld, "X"));
-		pEntryInfo->set_y(m_pKernelModule->GetPropertyFloat(identOld, "Y"));
-		pEntryInfo->set_z(m_pKernelModule->GetPropertyFloat(identOld, "Z"));
-		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, "Job"));
-		pEntryInfo->set_player_state(m_pKernelModule->GetPropertyInt(identOld, "State"));
-		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, "ConfigID"));
-		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, "SceneID"));
-		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, "ClassName"));
+		pEntryInfo->set_x(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::X()));
+		pEntryInfo->set_y(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Y()));
+		pEntryInfo->set_z(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Z()));
+		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
+		pEntryInfo->set_player_state(m_pKernelModule->GetPropertyInt(identOld, 0));
+		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));
+		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID()));
+		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName()));
 
 	}
 
@@ -636,777 +965,6 @@ int NFCGameServerNet_ServerModule::OnObjectListLeave(const NFIDataList& self, co
 	return 1;
 }
 
-int NFCGameServerNet_ServerModule::OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
-{
-	//if ( NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString( self, "ClassName" ) )
-	{
-		if ("GroupID" == strPropertyName)
-		{
-			
-			OnGroupEvent(self, strPropertyName, oldVar, newVar);
-		}
-
-		if ("SceneID" == strPropertyName)
-		{
-			
-			OnContainerEvent(self, strPropertyName, oldVar, newVar);
-		}
-
-		if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, "ClassName"))
-		{
-			if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
-			{
-				return 0;
-			}
-		}
-	}
-
-	NFCDataList valueBroadCaseList;
-	int nCount = 0;//argVar.GetCount() ;
-	if (nCount <= 0)
-	{
-		nCount = GetBroadCastObject(self, strPropertyName, false, valueBroadCaseList);
-	}
-	else
-	{
-		
-		//valueBroadCaseList = argVar;
-	}
-
-	if (valueBroadCaseList.GetCount() <= 0)
-	{
-		return 0;
-	}
-
-	switch (oldVar.GetType())
-	{
-	case TDATA_INT:
-	{
-		NFMsg::ObjectPropertyInt xPropertyInt;
-		NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
-		pDataInt->set_property_name(strPropertyName);
-		pDataInt->set_data(newVar.GetInt());
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOld = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt, identOld);
-		}
-	}
-	break;
-
-	case TDATA_FLOAT:
-	{
-		NFMsg::ObjectPropertyFloat xPropertyFloat;
-		NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
-		pDataFloat->set_property_name(strPropertyName);
-		pDataFloat->set_data(newVar.GetFloat());
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOld = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, identOld);
-		}
-	}
-	break;
-
-	case TDATA_STRING:
-	{
-		NFMsg::ObjectPropertyString xPropertyString;
-		NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
-		pDataString->set_property_name(strPropertyName);
-		pDataString->set_data(newVar.GetString());
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOld = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString, identOld);
-		}
-	}
-	break;
-
-	case TDATA_OBJECT:
-	{
-		NFMsg::ObjectPropertyObject xPropertyObject;
-		NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
-		pDataObject->set_property_name(strPropertyName);
-		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOld = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject, identOld);
-		}
-	}
-	break;
-
-	default:
-		break;
-	}
-
-
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
-{
-	const std::string& strRecordName = xEventData.strRecordName;
-	const int nOpType = xEventData.nOpType;
-	const int nRow = xEventData.nRow;
-	const int nCol = xEventData.nCol;
-
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
-	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
-
-	if (nObjectGroupID < 0)
-	{
-		
-		return 0;
-	}
-
-	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, "ClassName"))
-	{
-		if (m_pKernelModule->GetPropertyInt(self, "LoadPropertyFinish") <= 0)
-		{
-			return 0;
-		}
-	}
-
-	NFCDataList valueBroadCaseList;
-	GetBroadCastObject(self, strRecordName, true, valueBroadCaseList);
-
-	switch (nOpType)
-	{
-	case RECORD_EVENT_DATA::Add:
-	{
-		NFMsg::ObjectRecordAddRow xAddRecordRow;
-		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		xAddRecordRow.set_record_name(strRecordName);
-
-		NFMsg::RecordAddRowStruct* pAddRowData = xAddRecordRow.add_row_data();
-		pAddRowData->set_row(nRow);
-
-		
-		NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, strRecordName);
-		if (xRecord)
-		{
-			NFCDataList xRowDataList;
-			if (xRecord->QueryRow(nRow, xRowDataList))
-			{
-				for (int i = 0; i < xRowDataList.GetCount(); i++)
-				{
-					switch (xRowDataList.Type(i))
-					{
-					case TDATA_INT:
-					{
-						
-						int nValue = xRowDataList.Int(i);
-						//if ( 0 != nValue )
-						{
-							NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
-							pAddData->set_col(i);
-							pAddData->set_row(nRow);
-							pAddData->set_data(nValue);
-						}
-					}
-					break;
-					case TDATA_FLOAT:
-					{
-						float fValue = xRowDataList.Float(i);
-						//if ( fValue > 0.001f  || fValue < -0.001f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-							pAddData->set_col(i);
-							pAddData->set_row(nRow);
-							pAddData->set_data(fValue);
-						}
-					}
-					break;
-					case TDATA_STRING:
-					{
-						const std::string& str = xRowDataList.String(i);
-						//if (!str.empty())
-						{
-							NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
-							pAddData->set_col(i);
-							pAddData->set_row(nRow);
-							pAddData->set_data(str);
-						}
-					}
-					break;
-					case TDATA_OBJECT:
-					{
-						NFGUID identValue = xRowDataList.Object(i);
-						//if (!identValue.IsNull())
-						{
-							NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
-							pAddData->set_col(i);
-							pAddData->set_row(nRow);
-
-							*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
-						}
-					}
-					break;
-					default:
-						break;
-					}
-				}
-
-				for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-				{
-					NFGUID identOther = valueBroadCaseList.Object(i);
-
-					SendMsgPBToGate(NFMsg::EGMI_ACK_ADD_ROW, xAddRecordRow, identOther);
-				}
-			}
-		}
-	}
-	break;
-	case RECORD_EVENT_DATA::Del:
-	{
-		NFMsg::ObjectRecordRemove xReoveRecordRow;
-
-		NFMsg::Ident* pIdent = xReoveRecordRow.mutable_player_id();
-		*pIdent = NFINetModule::NFToPB(self);
-
-		xReoveRecordRow.set_record_name(strRecordName);
-		xReoveRecordRow.add_remove_row(nRow);
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOther = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_REMOVE_ROW, xReoveRecordRow, identOther);
-		}
-	}
-	break;
-	case RECORD_EVENT_DATA::Swap:
-	{
-		
-		NFMsg::ObjectRecordSwap xSwapRecord;
-		*xSwapRecord.mutable_player_id() = NFINetModule::NFToPB(self);
-
-		xSwapRecord.set_origin_record_name(strRecordName);
-		xSwapRecord.set_target_record_name(strRecordName);   
-		xSwapRecord.set_row_origin(nRow);
-		xSwapRecord.set_row_target(nCol);
-
-		for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-		{
-			NFGUID identOther = valueBroadCaseList.Object(i);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_ROW, xSwapRecord, identOther);
-		}
-	}
-	break;
-	case RECORD_EVENT_DATA::Update:
-	{
-		switch (oldVar.GetType())
-		{
-		case TDATA_INT:
-		{
-			NFMsg::ObjectRecordInt xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-			xRecordChanged.set_record_name(strRecordName);
-			NFMsg::RecordInt* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(nRow);
-			recordProperty->set_col(nCol);
-			int nData = newVar.GetInt();
-			recordProperty->set_data(nData);
-
-			for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-			{
-				NFGUID identOther = valueBroadCaseList.Object(i);
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_INT, xRecordChanged, identOther);
-			}
-		}
-		break;
-
-		case TDATA_FLOAT:
-		{
-			NFMsg::ObjectRecordFloat xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-			xRecordChanged.set_record_name(strRecordName);
-			NFMsg::RecordFloat* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(nRow);
-			recordProperty->set_col(nCol);
-			recordProperty->set_data(newVar.GetFloat());
-
-			for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-			{
-				NFGUID identOther = valueBroadCaseList.Object(i);
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xRecordChanged, identOther);
-			}
-		}
-		break;
-		case TDATA_STRING:
-		{
-			NFMsg::ObjectRecordString xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-			xRecordChanged.set_record_name(strRecordName);
-			NFMsg::RecordString* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(nRow);
-			recordProperty->set_col(nCol);
-			recordProperty->set_data(newVar.GetString());
-
-			for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-			{
-				NFGUID identOther = valueBroadCaseList.Object(i);
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_STRING, xRecordChanged, identOther);
-			}
-		}
-		break;
-		case TDATA_OBJECT:
-		{
-			NFMsg::ObjectRecordObject xRecordChanged;
-			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
-
-			xRecordChanged.set_record_name(strRecordName);
-			NFMsg::RecordObject* recordProperty = xRecordChanged.add_property_list();
-			recordProperty->set_row(nRow);
-			recordProperty->set_col(nCol);
-			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
-
-			for (int i = 0; i < valueBroadCaseList.GetCount(); i++)
-			{
-				NFGUID identOther = valueBroadCaseList.Object(i);
-
-				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_OBJECT, xRecordChanged, identOther);
-			}
-		}
-		break;
-
-		default:
-			return 0;
-			break;
-		}
-	}
-	break;
-	case RECORD_EVENT_DATA::Create:
-		return 0;
-		break;
-	case RECORD_EVENT_DATA::Cleared:
-	{
-		//             NFMsg::ObjectRecordObject xRecordChanged;
-		//             xRecordChanged.set_player_id( self.nData64 );
-		//             xRecordChanged.set_record_name( strRecordName );
-		//
-		//             for ( int i = 0; i < valueBroadCaseList.GetCount(); i++ )
-		//             {
-		//                 NFGUID identOther = valueBroadCaseList.Object( i );
-		//                 SendMsgPB(NFMsg::EGMI_ACK_RECORD_CLEAR, xRecordChanged, 0);
-		//             }
-	}
-	break;
-	default:
-		break;
-	}
-
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
-{
-	
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
-	{
-		
-
-		//////////////////////////////////////////////////////////////////////////
-
-		int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
-		int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
-
-		if (nObjectGroupID < 0)
-		{
-			
-			return 0;
-		}
-
-		NFCDataList valueAllObjectList;
-		NFCDataList valueBroadCaseList;
-		NFCDataList valueBroadListNoSelf;
-		m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueAllObjectList);
-
-		for (int i = 0; i < valueAllObjectList.GetCount(); i++)
-		{
-			NFGUID identBC = valueAllObjectList.Object(i);
-			const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-			if (NFrame::Player::ThisName() == strClassName)
-			{
-				valueBroadCaseList.Add(identBC);
-				if (identBC != self)
-				{
-					valueBroadListNoSelf.Add(identBC);
-				}
-			}
-		}
-
-		
-		OnObjectListLeave(valueBroadListNoSelf, NFCDataList() << self);
-	}
-
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
-	{
-		
-		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
-		if (pDataBase)
-		{
-			
-			NFMsg::AckEventResult xMsg;
-			xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
-
-			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
-			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
-		}
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
-	{
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
-	{
-		
-		if (strClassName == NFrame::Player::ThisName())
-		{
-			OnObjectListEnter(NFCDataList() << self, NFCDataList() << self);
-
-			OnPropertyEnter(NFCDataList() << self, self);
-			OnRecordEnter(NFCDataList() << self, self);
-		}
-	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
-	{
-
-	}
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::OnGroupEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
-{
-	
-	
-	int nSceneID = m_pKernelModule->GetPropertyInt(self, "SceneID");
-
-	
-	int nOldGroupID = oldVar.GetInt();
-	if (nOldGroupID > 0)
-	{
-		NFCDataList valueAllOldObjectList;
-		NFCDataList valueAllOldPlayerList;
-		m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldObjectList);
-		if (valueAllOldObjectList.GetCount() > 0)
-		{
-			
-			for (int i = 0; i < valueAllOldObjectList.GetCount(); i++)
-			{
-				NFGUID identBC = valueAllOldObjectList.Object(i);
-
-				if (valueAllOldObjectList.Object(i) == self)
-				{
-					valueAllOldObjectList.Set(i, NFGUID());
-				}
-
-				const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-				if (NFrame::Player::ThisName() == strClassName)
-				{
-					valueAllOldPlayerList.Add(identBC);
-				}
-			}
-
-			OnObjectListLeave(valueAllOldPlayerList, NFCDataList() << self);
-
-			
-			OnObjectListLeave(NFCDataList() << self, valueAllOldObjectList);
-		}
-
-		m_pEventModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
-	}
-
-	
-	int nNewGroupID = newVar.GetInt();
-	if (nNewGroupID > 0)
-	{
-		
-		//////////////////////////////////////////////////////////////////////////
-		NFCDataList valueAllObjectList;
-		NFCDataList valueAllObjectListNoSelf;
-		NFCDataList valuePlayerList;
-		NFCDataList valuePlayerListNoSelf;
-		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllObjectList);
-		for (int i = 0; i < valueAllObjectList.GetCount(); i++)
-		{
-			NFGUID identBC = valueAllObjectList.Object(i);
-			const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-			if (NFrame::Player::ThisName() == strClassName)
-			{
-				valuePlayerList.Add(identBC);
-				if (identBC != self)
-				{
-					valuePlayerListNoSelf.Add(identBC);
-				}
-			}
-
-			if (identBC != self)
-			{
-				valueAllObjectListNoSelf.Add(identBC);
-			}
-		}
-
-		
-		if (valuePlayerListNoSelf.GetCount() > 0)
-		{
-			OnObjectListEnter(valuePlayerListNoSelf, NFCDataList() << self);
-		}
-
-		const std::string& strSelfClassName = m_pKernelModule->GetPropertyString(self, "ClassName");
-
-		
-		if (valueAllObjectListNoSelf.GetCount() > 0)
-		{
-			if (strSelfClassName == NFrame::Player::ThisName())
-			{
-				OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
-			}
-		}
-
-		if (strSelfClassName == NFrame::Player::ThisName())
-		{
-			for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
-			{
-				
-				
-				NFGUID identOld = valueAllObjectListNoSelf.Object(i);
-
-				OnPropertyEnter(NFCDataList() << self, identOld);
-				
-				OnRecordEnter(NFCDataList() << self, identOld);
-			}
-		}
-
-		
-		if (valuePlayerListNoSelf.GetCount() > 0)
-		{
-			OnPropertyEnter(valuePlayerListNoSelf, self);
-			OnRecordEnter(valuePlayerListNoSelf, self);
-		}
-	}
-
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::OnContainerEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
-{
-	
-	
-	int nOldSceneID = oldVar.GetInt();
-	int nNowSceneID = newVar.GetInt();
-
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Enter Scene:", nNowSceneID);
-
-	
-	NFCDataList valueOldAllObjectList;
-	NFCDataList valueNewAllObjectList;
-	NFCDataList valueAllObjectListNoSelf;
-	NFCDataList valuePlayerList;
-	NFCDataList valuePlayerNoSelf;
-
-	m_pKernelModule->GetGroupObjectList(nOldSceneID, 0, valueOldAllObjectList);
-	m_pKernelModule->GetGroupObjectList(nNowSceneID, 0, valueNewAllObjectList);
-
-	for (int i = 0; i < valueOldAllObjectList.GetCount(); i++)
-	{
-		NFGUID identBC = valueOldAllObjectList.Object(i);
-		if (identBC == self)
-		{
-			valueOldAllObjectList.Set(i, NFGUID());
-		}
-	}
-
-	for (int i = 0; i < valueNewAllObjectList.GetCount(); i++)
-	{
-		NFGUID identBC = valueNewAllObjectList.Object(i);
-		const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, "ClassName");
-		if (NFrame::Player::ThisName() == strClassName)
-		{
-			valuePlayerList.Add(identBC);
-			if (identBC != self)
-			{
-				valuePlayerNoSelf.Add(identBC);
-			}
-		}
-
-		if (identBC != self)
-		{
-			valueAllObjectListNoSelf.Add(identBC);
-		}
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	
-	OnObjectListLeave(NFCDataList() << self, valueOldAllObjectList);
-
-	
-	
-	if (valuePlayerList.GetCount() > 0)
-	{
-		
-		OnObjectListEnter(valuePlayerNoSelf, NFCDataList() << self);
-	}
-
-	
-
-	
-	OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
-
-	//////////////////
-	for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
-	{
-		NFGUID identOld = valueAllObjectListNoSelf.Object(i);
-		OnPropertyEnter(NFCDataList() << self, identOld);
-		//////////////////
-		OnRecordEnter(NFCDataList() << self, identOld);
-	}
-
-	
-	if (valuePlayerNoSelf.GetCount() > 0)
-	{
-		OnPropertyEnter(valuePlayerNoSelf, self);
-		OnRecordEnter(valuePlayerNoSelf, self);
-	}
-
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject)
-{
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, "SceneID");
-	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, "GroupID");
-
-	
-	std::string strClassName = m_pKernelModule->GetPropertyString(self, "ClassName");
-	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
-	NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
-
-	NF_SHARE_PTR<NFIRecord> pRecord(NULL);
-	NF_SHARE_PTR<NFIProperty> pProperty(NULL);
-	if (bTable)
-	{
-		if (NULL == pClassRecordManager)
-		{
-			return -1;
-		}
-
-		pRecord = pClassRecordManager->GetElement(strPropertyName);
-		if (NULL == pRecord)
-		{
-			return -1;
-		}
-	}
-	else
-	{
-		if (NULL == pClassPropertyManager)
-		{
-			return -1;
-		}
-		pProperty = pClassPropertyManager->GetElement(strPropertyName);
-		if (NULL == pProperty)
-		{
-			return -1;
-		}
-	}
-
-	if (NFrame::Player::ThisName() == strClassName)
-	{
-		if (bTable)
-		{
-			if (pRecord->GetPublic())
-			{
-				GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-			}
-			else if (pRecord->GetPrivate())
-			{
-				valueObject.Add(self);
-			}
-		}
-		else
-		{
-			if (pProperty->GetPublic())
-			{
-				GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-			}
-			else if (pProperty->GetPrivate())
-			{
-				valueObject.Add(self);
-			}
-		}
-		
-		return valueObject.GetCount();
-	}
-
-	
-	if (bTable)
-	{
-		if (pRecord->GetPublic())
-		{
-			
-			GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-		}
-	}
-	else
-	{
-		if (pProperty->GetPublic())
-		{
-			
-			GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-		}
-	}
-
-	return valueObject.GetCount();
-}
-
-int NFCGameServerNet_ServerModule::GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject)
-{
-	NFCDataList valContainerObjectList;
-	m_pKernelModule->GetGroupObjectList(nObjectContainerID, nGroupID, valContainerObjectList);
-	for (int i = 0; i < valContainerObjectList.GetCount(); i++)
-	{
-		const std::string& strObjClassName = m_pKernelModule->GetPropertyString(valContainerObjectList.Object(i), "ClassName");
-		if (NFrame::Player::ThisName() == strObjClassName)
-		{
-			valueObject.Add(valContainerObjectList.Object(i));
-		}
-	}
-
-	return valueObject.GetCount();
-}
-
 int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
@@ -1417,6 +975,20 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
 		//LoadDataFormNoSql( self );
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+	{
+		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
+		if (pDataBase)
+		{
+			NFMsg::AckEventResult xMsg;
+			xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
+
+			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
+			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
+		}
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
