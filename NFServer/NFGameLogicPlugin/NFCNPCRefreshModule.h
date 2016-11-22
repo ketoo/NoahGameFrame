@@ -3,7 +3,7 @@
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-10-17
 //    @Module               :    NFCNPCRefreshModule
-//    @Desc                 :    NPCËÀÍöË¢ÐÂ
+
 // -------------------------------------------------------------------------
 
 #ifndef NFC_NPC_REFRESH_MODULE_H
