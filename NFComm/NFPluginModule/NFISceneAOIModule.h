@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFISceneModule.h
+//    @FileName		:    NFISceneAOIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFISceneModule
+//    @Module           :    NFISceneAOIModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_CONTAINER_MODULE_H
-#define NFI_CONTAINER_MODULE_H
+#ifndef NFI_SCENE_AOI_MODULE_H
+#define NFI_SCENE_AOI_MODULE_H
 
 #include <list>
 #include <iostream>
@@ -90,11 +90,11 @@ public:
         {
             if (bPlayer)
             {
-
+                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>());
             }
             else
             {
-
+                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>());
             }
         }
 
@@ -217,9 +217,9 @@ public:
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR& cb) = 0;
-	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR& cb) = 0;
-	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR& cb) = 0;
+	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 
 private:
