@@ -117,7 +117,7 @@ protected:
     int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);
 
 private:
-    //<角色id,角色网关基础信息>//其实可以在object系统中被代替
+    
     NFMapEx<NFGUID, GateBaseInfo> mRoleBaseData;
     //gateid,data
     NFMapEx<int, GateServerInfo> mProxyMap;

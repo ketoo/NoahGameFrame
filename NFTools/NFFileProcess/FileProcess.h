@@ -99,10 +99,10 @@ private:
 			exit(-1);
 		}
 		do {
-			//判断是否有子目录
+			
 			if (FileInfo.attrib & _A_SUBDIR)
 			{
-				//这个语句很重要
+				
 				if ((strcmp(FileInfo.name, ".") != 0) && (strcmp(FileInfo.name, "..") != 0))
 				{
 					std::string newPath = folderPath + "\\" + FileInfo.name;
@@ -142,7 +142,7 @@ private:
 		}
 	}
 
-	sort(result.begin(), result.end());//排序
+	sort(result.begin(), result.end());
 #endif
 		return result;
 	}
