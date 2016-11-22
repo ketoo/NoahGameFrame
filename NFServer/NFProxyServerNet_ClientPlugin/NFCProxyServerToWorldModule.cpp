@@ -246,7 +246,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 
 void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //���ּ�¼,ֱ������,����1���Ӳ����߼���ɾ��
+    
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
     if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))

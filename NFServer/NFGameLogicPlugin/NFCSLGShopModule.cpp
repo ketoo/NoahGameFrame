@@ -27,7 +27,7 @@ bool NFCSLGShopModule::Shut()
 
 bool NFCSLGShopModule::Execute()
 {
-    //λ����
+    
     return true;
 }
 
@@ -62,7 +62,7 @@ bool NFCSLGShopModule::ReqBuyItem(const NFGUID& self, const std::string& strID, 
         return false;
     }
 
-    //�۳�����
+    
     int nGold = m_pElementModule->GetPropertyInt(strID, "Gold");
     if (!m_pPropertyModule->ConsumeMoney(self, nGold))
     {

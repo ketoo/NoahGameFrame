@@ -53,10 +53,10 @@ public:
             nMaxPalyer = 1;
         }
 
-        int mnCellStatus;             // 状态
-        NFGUID xCellID;               // 房间ID
-        int mnPVPMode;                // 匹配模式
-        int mnPVPGrade;               // 房间所在的阶段
+		int mnCellStatus;
+		NFGUID xCellID;
+		int mnPVPMode;
+		int mnPVPGrade;
         int nMaxPalyer;
         NFMapEx<NFGUID, int> mxRedPlayer;
         NFMapEx<NFGUID, int> mxBluePlayer;
