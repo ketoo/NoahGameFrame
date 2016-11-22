@@ -15,6 +15,9 @@ public class IObject {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Record
 
 }
@@ -28,6 +31,9 @@ public class BB_Build {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Type = "Type"; // int
 	public static final String SubType = "SubType"; // int
@@ -50,6 +56,9 @@ public class Block {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Tag = "Tag"; // int
 	public static final String SpriteList = "SpriteList"; // string
@@ -84,6 +93,9 @@ public class Buff {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String EffectType = "EffectType"; // int
 	public static final String EffectValueType = "EffectValueType"; // int
@@ -107,6 +119,9 @@ public class ChatGroup {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Name = "Name"; // string
 	public static final String CreateObject = "CreateObject"; // object
@@ -141,6 +156,9 @@ public class ConsumeData {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String VIPEXP = "VIPEXP"; // int
 	public static final String EXP = "EXP"; // int
@@ -162,6 +180,9 @@ public class Cost {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String CostMoney = "CostMoney"; // int
 	public static final String CostDiamond = "CostDiamond"; // int
@@ -180,6 +201,9 @@ public class DescData {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ShowName = "ShowName"; // string
 	public static final String Icon = "Icon"; // string
@@ -201,6 +225,9 @@ public class EffectData {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
@@ -247,6 +274,9 @@ public class Equip {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Sex = "Sex"; // int
 	public static final String IntensiveBuffList = "IntensiveBuffList"; // string
@@ -279,6 +309,9 @@ public class Guild {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Name = "Name"; // string
 	public static final String PresidentID = "PresidentID"; // object
@@ -411,6 +444,9 @@ public class GuildConfig {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ConditionPlayerLevel = "ConditionPlayerLevel"; // int
 	public static final String ConditionPlayerVIP = "ConditionPlayerVIP"; // int
@@ -431,6 +467,9 @@ public class GuildJob {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Job = "Job"; // int
 	public static final String JobCount = "JobCount"; // object
@@ -460,6 +499,9 @@ public class GuildName {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String GuildID = "GuildID"; // object
 	// Record
@@ -475,6 +517,9 @@ public class HttpServer {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ServerID = "ServerID"; // int
 	public static final String WebPort = "WebPort"; // int
@@ -492,6 +537,9 @@ public class InitProperty {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Job = "Job"; // int
 	public static final String Level = "Level"; // int
@@ -511,6 +559,9 @@ public class Item {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ItemType = "ItemType"; // int
 	public static final String ItemSubType = "ItemSubType"; // int
@@ -545,6 +596,9 @@ public class Language {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String English = "English"; // string
 	public static final String Chinese = "Chinese"; // string
@@ -561,13 +615,14 @@ public class Map {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String MaxCount = "MaxCount"; // int
 	public static final String InComeGold = "InComeGold"; // int
 	public static final String InComeDiamond = "InComeDiamond"; // int
 	public static final String InComeOil = "InComeOil"; // int
-	public static final String X = "X"; // int
-	public static final String Z = "Z"; // int
 	public static final String MapLevel = "MapLevel"; // int
 	// Record
 	public static final String R_Station = "Station";
@@ -597,6 +652,9 @@ public class NoSqlServer {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ServerID = "ServerID"; // int
 	public static final String IP = "IP"; // string
@@ -615,6 +673,9 @@ public class NPC {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String SeedID = "SeedID"; // string
 	public static final String VIPEXP = "VIPEXP"; // int
@@ -624,9 +685,6 @@ public class NPC {
 	public static final String MP = "MP"; // int
 	public static final String Gold = "Gold"; // int
 	public static final String Money = "Money"; // int
-	public static final String X = "X"; // float
-	public static final String Y = "Y"; // float
-	public static final String Z = "Z"; // float
 	public static final String TargetX = "TargetX"; // float
 	public static final String TargetY = "TargetY"; // float
 	public static final String Prefab = "Prefab"; // string
@@ -688,6 +746,9 @@ public class Player {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Name = "Name"; // string
 	public static final String Sex = "Sex"; // int
@@ -960,6 +1021,9 @@ public class Scene {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String SceneName = "SceneName"; // string
 	public static final String SceneShowName = "SceneShowName"; // string
@@ -989,6 +1053,9 @@ public class Server {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ServerID = "ServerID"; // int
 	public static final String Name = "Name"; // string
@@ -1011,6 +1078,9 @@ public class Shop {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Type = "Type"; // int
 	public static final String ItemID = "ItemID"; // string
@@ -1032,6 +1102,9 @@ public class Skill {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String SkillType = "SkillType"; // int
 	public static final String AnimaState = "AnimaState"; // int
@@ -1071,6 +1144,9 @@ public class SkillRef {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String NORMALATTACK1 = "NORMALATTACK1"; // string
 	public static final String NORMALATTACK2 = "NORMALATTACK2"; // string
@@ -1099,6 +1175,9 @@ public class SqlServer {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ServerID = "ServerID"; // int
 	public static final String IP = "IP"; // string
@@ -1121,6 +1200,9 @@ public class StateFuncResources {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Atlas_ResID = "Atlas_ResID"; // string
 	// Record
@@ -1136,6 +1218,9 @@ public class StateFunction {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String EFT_INFO = "EFT_INFO"; // int
 	public static final String EFT_BOOOST = "EFT_BOOOST"; // int
@@ -1164,6 +1249,9 @@ public class Talent {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String ShowName = "ShowName"; // string
 	public static final String Desc = "Desc"; // string
@@ -1185,6 +1273,9 @@ public class Task {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Type = "Type"; // int
 	public static final String NextTaskID = "NextTaskID"; // string
@@ -1208,6 +1299,9 @@ public class Team {
 	public static final String SceneID = "SceneID"; // int
 	public static final String GroupID = "GroupID"; // int
 	public static final String ConfigID = "ConfigID"; // string
+	public static final String X = "X"; // float
+	public static final String Y = "Y"; // float
+	public static final String Z = "Z"; // float
 	// Property
 	public static final String Captain = "Captain"; // object
 	public static final String PresidentName = "PresidentName"; // string

@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFISceneModule.h
+//    @FileName		:    NFISceneAOIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFISceneModule
+//    @Module           :    NFISceneAOIModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_CONTAINER_MODULE_H
-#define NFI_CONTAINER_MODULE_H
+#ifndef NFI_SCENE_AOI_MODULE_H
+#define NFI_SCENE_AOI_MODULE_H
 
 #include <list>
 #include <iostream>
@@ -22,7 +22,6 @@
 if a object in the group of '0', them it can be see by all object in this scene.
 */
 class NFCSceneGroupInfo
-    //: public NFList<NFGUID>
 {
 public:
     NFCSceneGroupInfo(int nSceneID, int nGroupID)
@@ -91,11 +90,11 @@ public:
         {
             if (bPlayer)
             {
-                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>());
             }
             else
             {
-                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>());
             }
         }
 
@@ -138,6 +137,25 @@ private:
     int mnWidth;
 };
 
+typedef std::function<int(const NFIDataList&, const NFIDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<OBJECT_ENTER_EVENT_FUNCTOR> OBJECT_ENTER_EVENT_FUNCTOR_PTR;//ObjectEnterCallBack
+
+typedef std::function<int(const NFIDataList&, const NFIDataList&)> OBJECT_LEAVE_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<OBJECT_LEAVE_EVENT_FUNCTOR> OBJECT_LEAVE_EVENT_FUNCTOR_PTR;//ObjectLeaveCallBack
+
+typedef std::function<int(const NFIDataList&, const NFGUID&)> PROPERTY_ENTER_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<PROPERTY_ENTER_EVENT_FUNCTOR> PROPERTY_ENTER_EVENT_FUNCTOR_PTR;//AddPropertyEnterCallBack
+
+typedef std::function<int(const NFIDataList&, const NFGUID&)> RECORD_ENTER_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<RECORD_ENTER_EVENT_FUNCTOR> RECORD_ENTER_EVENT_FUNCTOR_PTR;//AddRecordEnterCallBack
+
+typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> PROPERTY_SINGLE_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<PROPERTY_SINGLE_EVENT_FUNCTOR> PROPERTY_SINGLE_EVENT_FUNCTOR_PTR;//AddPropertyEventCallBack
+
+typedef std::function<int(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<RECORD_SINGLE_EVENT_FUNCTOR> RECORD_SINGLE_EVENT_FUNCTOR_PTR;//AddRecordEventCallBack
+
+
 class NFISceneAOIModule
     : public NFIModule,
   public NFMapEx<int, NFCSceneInfo>
@@ -148,7 +166,62 @@ public:
         ClearAll();
     }
 
+	template<typename BaseType>
+	bool AddObjectEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFIDataList&))
+	{
+		OBJECT_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		OBJECT_ENTER_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_ENTER_EVENT_FUNCTOR(functor));
+		return AddObjectEnterCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddObjectLeaveCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFIDataList&))
+	{
+		OBJECT_LEAVE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		OBJECT_LEAVE_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_LEAVE_EVENT_FUNCTOR(functor));
+		return AddObjectLeaveCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddPropertyEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFGUID&))
+	{
+		PROPERTY_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		PROPERTY_ENTER_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_ENTER_EVENT_FUNCTOR(functor));
+		return AddPropertyEnterCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddRecordEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFGUID&))
+	{
+		RECORD_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		RECORD_ENTER_EVENT_FUNCTOR_PTR functorPtr(new RECORD_ENTER_EVENT_FUNCTOR(functor));
+		return AddRecordEnterCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
+	{
+		PROPERTY_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_SINGLE_EVENT_FUNCTOR(functor));
+		return AddPropertyEventCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
+	bool AddRecordEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
+	{
+		RECORD_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, std::placeholders::_6);
+		RECORD_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new RECORD_SINGLE_EVENT_FUNCTOR(functor));
+		return AddRecordEventCallBack(functorPtr);
+	}
+
 protected:
+	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
+
 private:
 };
 #endif

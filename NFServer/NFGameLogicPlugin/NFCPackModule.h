@@ -35,7 +35,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	/////////////»ù´¡/////////////////////////////////////////////////////////////
+	///////////
 	virtual const NFGUID& CreateEquip( const NFGUID& self, const std::string& strConfigName);
 	virtual bool CreateItem(const NFGUID& self, const std::string& strConfigName, const int nCount);
 
