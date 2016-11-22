@@ -3,7 +3,6 @@
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCBulletSkillConsumeProcessModule
-//    @Desc             :   技能消费机制类
 // -------------------------------------------------------------------------
 
 #include "NFCBulletSkillConsumeProcessModule.h"
@@ -20,8 +19,7 @@ bool NFCBulletSkillConsumeProcessModule::AfterInit()
     m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
-    //子弹类技能
-    //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );
+        //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );
 
     return true;
 }
@@ -39,16 +37,13 @@ bool NFCBulletSkillConsumeProcessModule::Execute()
 
 int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFIDataList& other )
 {
-    //是否被沉默,CD,距离等
-    return 1;
+        return 1;
 }
 
 int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const std::string& skillID )
 {
-    //得到数量-1
-
-    //失败
-
+    
+    
     return 0;
 }
 
