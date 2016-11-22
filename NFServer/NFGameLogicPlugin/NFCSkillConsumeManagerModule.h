@@ -3,7 +3,7 @@
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCBuSkillConsumeManagerModule
-//    @Desc             :   技能消费机制管理类,所有类型的技能消费类型均需注册才能消费
+
 // -------------------------------------------------------------------------
 
 #ifndef NFC_SKILLCONSUME_MANAGER_MODULE_H

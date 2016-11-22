@@ -90,11 +90,11 @@ public:
         {
             if (bPlayer)
             {
-                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+
             }
             else
             {
-                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>()); // TODO:Map.second为空，使用的时候千万注意
+
             }
         }
 

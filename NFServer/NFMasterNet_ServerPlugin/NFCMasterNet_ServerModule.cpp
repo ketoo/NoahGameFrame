@@ -220,7 +220,7 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
 		return;
 	}
 
-	//ת���͵���¼������
+	
 	m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_CONNECT_WORLD, xMsg, pServerData->nFD);
 }
 
@@ -320,7 +320,7 @@ void NFCMasterNet_ServerModule::OnSocketEvent(const int nSockIndex, const NF_NET
 
 void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 {
-	//������login����world��Ҫ�ҳ���,������ע��
+	
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
 	while (pServerData)
 	{
