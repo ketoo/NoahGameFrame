@@ -53,10 +53,10 @@ public:
             nMaxPalyer = 1;
         }
 
-
-
-
-
+		int mnCellStatus;
+		NFGUID xCellID;
+		int mnPVPMode;
+		int mnPVPGrade;
         int nMaxPalyer;
         NFMapEx<NFGUID, int> mxRedPlayer;
         NFMapEx<NFGUID, int> mxBluePlayer;

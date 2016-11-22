@@ -18,15 +18,13 @@ class NFIPropertyModule
 public:
     enum NFPropertyGroup
     {
-
-
-
-
-
-
-
-
-
+		NPG_JOBLEVEL,
+		NPG_EFFECTVALUE,
+		NPG_REBIRTH_ADD,
+		NPG_EQUIP,
+		NPG_EQUIP_AWARD,
+		NPG_STATIC_BUFF,
+		NPG_RUNTIME_BUFF,
         NPG_ALL ,
     };
 
