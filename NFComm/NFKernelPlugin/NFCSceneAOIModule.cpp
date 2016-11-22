@@ -46,32 +46,38 @@ bool NFCSceneAOIModule::Execute()
 
 bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtObjectEnterCallback.push_back(cb);
+	return true;
 }
 
 bool NFCSceneAOIModule::AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtObjectLeaveCallback.push_back(cb);
+	return true;
 }
 
-bool NFCSceneAOIModule::AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR & cb)
+bool NFCSceneAOIModule::AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtPropertyEnterCallback.push_back(cb);
+	return true;
 }
 
-bool NFCSceneAOIModule::AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR & cb)
+bool NFCSceneAOIModule::AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtRecordEnterCallback.push_back(cb);
+	return true;
 }
 
-bool NFCSceneAOIModule::AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR & cb)
+bool NFCSceneAOIModule::AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtPropertySingleCallback.push_back(cb);
+	return true;
 }
 
 bool NFCSceneAOIModule::AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtRecordSingleCallback.push_back(cb);
+	return true;
 }
 
 int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
@@ -494,30 +500,78 @@ int NFCSceneAOIModule::GetBroadCastObject(const int nObjectContainerID, const in
 
 int NFCSceneAOIModule::OnObjectListEnter(const NFIDataList & self, const NFIDataList & argVar)
 {
+	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtObjectEnterCallback.begin();
+	for (; it != mtObjectEnterCallback.end(); it++)
+	{
+		OBJECT_ENTER_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		OBJECT_ENTER_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, argVar);
+	}
+
 	return 0;
 }
 
 int NFCSceneAOIModule::OnObjectListLeave(const NFIDataList & self, const NFIDataList & argVar)
 {
+	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR>::iterator it = mtObjectLeaveCallback.begin();
+	for (; it != mtObjectLeaveCallback.end(); it++)
+	{
+		OBJECT_LEAVE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		OBJECT_LEAVE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, argVar);
+	}
+
 	return 0;
 }
 
 int NFCSceneAOIModule::OnPropertyEnter(const NFIDataList & argVar, const NFGUID & self)
 {
+	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtPropertyEnterCallback.begin();
+	for (; it != mtPropertyEnterCallback.end(); it++)
+	{
+		PROPERTY_ENTER_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		PROPERTY_ENTER_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(argVar, self);
+	}
+
 	return 0;
 }
 
 int NFCSceneAOIModule::OnRecordEnter(const NFIDataList & argVar, const NFGUID & self)
 {
+	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtRecordEnterCallback.begin();
+	for (; it != mtRecordEnterCallback.end(); it++)
+	{
+		RECORD_ENTER_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		RECORD_ENTER_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(argVar, self);
+	}
+
 	return 0;
 }
 
 int NFCSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
 {
+	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mtPropertySingleCallback.begin();
+	for (; it != mtPropertySingleCallback.end(); it++)
+	{
+		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		PROPERTY_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, strProperty, oldVar, newVar, argVar);
+	}
+
 	return 0;
 }
 
 int NFCSceneAOIModule::OnRecordEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
 {
+	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mtRecordSingleCallback.begin();
+	for (; it != mtRecordSingleCallback.end(); it++)
+	{
+		RECORD_SINGLE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		RECORD_SINGLE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, xEventData, oldVar, newVar, argVar);
+	}
+
 	return 0;
 }
