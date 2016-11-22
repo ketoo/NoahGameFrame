@@ -41,7 +41,7 @@ NFCRecord::NFCRecord(const NFGUID& self, const std::string& strRecordName, const
     mstrRecordName = strRecordName;
 
     mnMaxRow = nMaxRow;
-    //确定大小
+    
     mVecUsedState.resize(mnMaxRow);
 
     for (int i = 0; i < mnMaxRow; i++)
@@ -102,7 +102,7 @@ const std::string& NFCRecord::GetColTag(const int nCol) const
     return mVarRecordTag->String(nCol);
 }
 
-// 添加数据
+
 int NFCRecord::AddRow(const int nRow)
 {
     return AddRow(nRow, *mVarRecordType);
@@ -550,7 +550,7 @@ bool NFCRecord::SetVector3(const int nRow, const std::string& strColTag, const N
 	return SetVector3(nRow, nCol, value);
 }
 
-// 获得数据
+
 bool NFCRecord::QueryRow(const int nRow, NFIDataList& varList)
 {
     if (!ValidRow(nRow))
@@ -1200,7 +1200,7 @@ void NFCRecord::OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEve
     TRECORDCALLBACKEX::iterator end = mtRecordCallback.end();
     for (; itr != end; ++itr)
     {
-        //NFIDataList参数:所属对象名string，操作类型int，Row,Col, OLD属性值，NEW属性值
+        
         RECORD_EVENT_FUNCTOR_PTR functorPtr = *itr;
         functorPtr.get()->operator()(self, xEventData, oldVar, newVar);
     }

@@ -65,7 +65,7 @@ bool NFCActorModule::Execute()
 
 int NFCActorModule::RequireActor()
 {
-    //¶Ñactor
+    
     NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
 	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 

@@ -3,7 +3,6 @@
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCBriefSkillConsumeProcessModule
-//    @Desc             :   �������ѻ�����
 // -------------------------------------------------------------------------
 
 #include "NFCBriefSkillConsumeProcessModule.h"
@@ -98,15 +97,12 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
 //         switch ( nConsumeType )
 //         {
 //             case ConsumeType_Value:
-//                 //����ֵ
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) );
 //                 break;
 //             case ConsumeType_CurrentPercent:
-//                 //��ǰ���ٷֱ�
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfCurProperty->QueryInt();
 //                 break;
 //             case ConsumeType_MaxPercent:
-//                 //�������ٷֱ�
 //                 nConsumeValue = lexical_cast<int>( valueConsumeValue.StringVal( i ) ) / 100.0f * pSelfMaxProperty->QueryInt();
 //                 break;
 //             default:
@@ -152,8 +148,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
     //for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
     {
-        //�ȲⶨĿ���Ƿ��д�����(��ʵ�ǵ���������)
-        for ( int j = 0; j < other.GetCount(); j++ )
+                for ( int j = 0; j < other.GetCount(); j++ )
         {
             NFGUID identOther = other.Object( j );
             if ( identOther.IsNull() )
@@ -167,8 +162,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
                 continue;
             }
 
-            //�̵��˺���ֻ����HP,MP֮��������������ֵ������
-//             std::string strCurProperty = valueEffectProperty.StringVal( i );
+            //             std::string strCurProperty = valueEffectProperty.StringVal( i );
 //             std::string strMaxProperty = "MAX" + strCurProperty;
 //             NFIProperty* pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
 //             NFIProperty* pOtherMaxProperty = pObject->GetPropertyManager()->GetElement( strMaxProperty );
@@ -191,9 +185,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
 int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
 {
-    //����Ч��
-    //1�˺�����(����)
-    //2BUFF(Get,Send)
+            //2BUFF(Get,Send)
 //     NFIPropertyManager* pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
 //     if ( pPropertyManager == NULL )
 //     {
@@ -221,7 +213,6 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 // 
 //     for ( int i = 0; i < valueEffectProperty.GetCount(); i++ )
 //     {
-//         //�ȲⶨĿ���Ƿ��д�����(��ʵ�ǵ���������)
 //         for ( int j = 0; j < other.GetCount(); j++ )
 //         {
 //             NFGUID identOther = other.ObjectVal( j );
@@ -236,7 +227,6 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //                 continue;
 //             }
 // 
-//             //�̵��˺���ֻ����HP,MP֮��������������ֵ������
 //             std::string strCurProperty = valueEffectProperty.StringVal( i );
 //             std::string strMaxProperty = "MAX" + strCurProperty;
 //             NFIProperty* pOtherCurProperty = pObject->GetPropertyManager()->GetElement( strCurProperty );
@@ -252,9 +242,8 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //                 pLastProperty->SetObject( self );
 //             }
 // 
-//             //�ٷֱȾ�������ֵ�İٷֱ�(Ĭ��)
 //             int nDamageValue = 0;
-//             int nCurValue = pOtherCurProperty->QueryInt();//���ܱ�ʬ
+//             int nCurValue = pOtherCurProperty->QueryInt();
 //             if ( nCurValue <= 0 )
 //             {
 //                 continue;
@@ -265,15 +254,12 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 //             switch ( nDamageType )
 //             {
 //             case 0:
-//                 //����ֵ
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) );
 //                 break;
 //             case 1:
-//                 //��ǰ���ٷֱ�
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nCurValue;
 //                 break;
 //             case 2:
-//                 //�������ٷֱ�
 //                 nDamageValue = lexical_cast<int>( valueEffectValue.StringVal( i ) ) / 100.0f * nMaxValue;
 //                 break;
 //             default:
@@ -282,12 +268,10 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, con
 // 
 //             if ( 0 == nDamageSubType )
 //             {
-//                 //��(��Ѫ����)--Ŀǰû��������,����������
 //                 nCurValue = m_pPropertyModule->ConsumeHP( identOther, nDamageValue );
 //             }
 //             else
 //             {
-//                 //��(��Ѫ����)
 //                 nCurValue = m_pPropertyModule->AddHP( identOther, nDamageValue );
 //             }
 // 

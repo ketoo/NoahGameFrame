@@ -18,7 +18,7 @@ void NFCMemManger::FreeMem()
 {
 
 #ifdef NF_USE_TCMALLOC
-    // »ØÊÕÄÚ´æ
+    
     MallocExtension::instance()->ReleaseFreeMemory();
 #endif //NF_USE_TCMALLOC
 

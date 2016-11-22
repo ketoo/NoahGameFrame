@@ -1,4 +1,4 @@
-﻿// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 //    @FileName         :    NFCEquipModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-06-11
@@ -22,7 +22,6 @@ bool NFCEquipModule::Shut()
 
 bool NFCEquipModule::Execute()
 {
-    //Î»ÖÃÄØ
     return true;
 }
 
