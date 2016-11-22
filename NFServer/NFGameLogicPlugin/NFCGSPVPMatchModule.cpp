@@ -24,7 +24,7 @@ bool NFCGSPVPMatchModule::Shut()
 
 bool NFCGSPVPMatchModule::Execute()
 {
-    //Œª÷√ƒÿ
+    
     return true;
 }
 

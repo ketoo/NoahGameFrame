@@ -20,7 +20,7 @@ bool NFCChatModule::Shut()
 
 bool NFCChatModule::Execute()
 {
-    //Œª÷√ƒÿ
+    
     return true;
 }
 
