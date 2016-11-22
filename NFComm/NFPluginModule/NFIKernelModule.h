@@ -166,7 +166,8 @@ public:
     virtual bool ExitGroupScene(const int nSceneID, const int nGroupID) = 0;
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list) = 0;
-    virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list) = 0;
+	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list) = 0;
+	virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list) = 0;
 
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList) = 0;
     virtual bool LogInfo(const NFGUID ident) = 0;
@@ -176,14 +177,8 @@ protected:
 
 
 protected:
-
-    //ֻ������ģ��ע�ᣬ�ص�����ͬ���������¼�,���е������󶼻��ص�
     virtual bool RegisterCommonClassEvent(const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    //ֻ������ģ��ע�ᣬ�ص�����ͬ�����������¼�,���е������Զ����ص�
     virtual bool RegisterCommonPropertyEvent(const PROPERTY_EVENT_FUNCTOR_PTR& cb) = 0;
-
-    //ֻ������ģ��ע�ᣬ�ص�����ͬ�����������¼�,���е����������ص�
     virtual bool RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;
 };
 

@@ -125,7 +125,7 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 					mmData.AddElement(strName, pAppSDKConfigInfo);
 				}
 
-				//CStruct Ù–‘
+				
 				for (rapidxml::xml_attribute<>* pAttribute = pAppSDKRootNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
 				{
 					if (pAttribute)
@@ -137,7 +137,7 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 					}
 				}
 
-				//CStruct.itemdµƒ Ù–‘
+				
 				for (rapidxml::xml_node<>* pSDKInterfaceNode = pAppSDKRootNode->first_node(); pSDKInterfaceNode; pSDKInterfaceNode = pSDKInterfaceNode->next_sibling())
 				{
 					if (pSDKInterfaceNode)
