@@ -271,7 +271,7 @@ bool NFCBigMapRedisModule::AddGridLeaveMsgInfo(const std::string&strGridID, cons
 		return false;
 	}
 
-	//数量限制
+	
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
@@ -293,7 +293,7 @@ bool NFCBigMapRedisModule::AddGridWarHistoryInfo(const std::string&strGridID, co
 		return false;
 	}
 
-	//数量限制
+	
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
@@ -316,7 +316,7 @@ bool NFCBigMapRedisModule::AddGridStationInfo(const std::string& strGridID, cons
 		return false;
 	}
 
-	//数量限制
+	
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{
@@ -334,7 +334,7 @@ bool NFCBigMapRedisModule::RemoveGridStationInfo(const std::string& strGridID, c
 		return false;
 	}
 
-	//数量限制
+	
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
 	if (pNoSqlDriver)
 	{

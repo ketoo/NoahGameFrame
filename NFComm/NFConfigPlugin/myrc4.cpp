@@ -3,7 +3,7 @@
 #pragma warning ( push )
 #pragma warning ( disable : 4267 )
 
-int Encrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)   // 加密，返回加密结果
+int Encrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)   
 {
     if (data == NULL || key == NULL)
     {
@@ -23,7 +23,7 @@ int Encrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned in
     return nResult;
 }
 
-int Decrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)  // 解密，返回解密结果
+int Decrypt(unsigned char* data, unsigned int nLen, const char* key, unsigned int key_len)  
 {
     if (data == NULL || key == NULL)
     {
@@ -100,7 +100,7 @@ static void swap_byte(unsigned char* a, unsigned char* b)
     *b = swapByte;
 }
 
-// 把字节码转为十六进制码，一个字节两个十六进制，内部为字符串分配空间
+
 char* ByteToHex(const unsigned char* vByte, const int vLen)
 {
     if (!vByte)
@@ -108,7 +108,7 @@ char* ByteToHex(const unsigned char* vByte, const int vLen)
         return NULL;
     }
 
-    char* tmp = new char[vLen * 2 + 1]; // 一个字节两个十六进制码，最后要多一个'\0'
+    char* tmp = new char[vLen * 2 + 1]; 
 
     int tmp2;
     for (int i = 0; i < vLen; i++)
@@ -123,7 +123,7 @@ char* ByteToHex(const unsigned char* vByte, const int vLen)
     return tmp;
 }
 
-// 把十六进制字符串，转为字节码，每两个十六进制字符作为一个字节
+
 unsigned char* HexToByte(const char* szHex)
 {
     if (!szHex)
@@ -138,7 +138,7 @@ unsigned char* HexToByte(const char* szHex)
         return NULL;
     }
 
-    unsigned char* pbBuf = new unsigned char[iLen / 2]; // 数据缓冲区
+    unsigned char* pbBuf = new unsigned char[iLen / 2]; 
 
     int tmp1, tmp2;
     for (int i = 0; i < iLen / 2; i++)

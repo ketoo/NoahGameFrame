@@ -39,7 +39,7 @@ bool NFCSceneProcessModule::AfterInit()
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
     //////////////////////////////////////////////////////////////////////////
 
-    //初始化场景容器
+    
     // #ifdef NF_USE_ACTOR
     //  int nSelfActorID = pPluginManager->GetActorID();
     // #endif
@@ -128,13 +128,13 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const NFEventDe
     if (nNowSceneID == nTargetScene
         && nTargetGroupID == nNowGroupID)
     {
-        //本来就是这个层这个场景就别切换了
+        
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "in same scene and group but it not a clone scene", nTargetScene);
 
         return 1;
     }
 
-    //每个玩家，一个副本
+    
     NFINT64 nNewGroupID = 0;
     if (nTargetGroupID <= 0)
     {
@@ -151,7 +151,7 @@ int NFCSceneProcessModule::OnEnterSceneEvent(const NFGUID& self, const NFEventDe
         return 0;
     }
 
-    //得到坐标
+    
     double fX = 0.0;
     double fY = 0.0;
     double fZ = 0.0;
@@ -219,7 +219,7 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
-            //如果在副本中,则删除他的那个副本
+            
             int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
             if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
             {
@@ -279,7 +279,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
     const std::string& strSceneFilePath = m_pElementModule->GetPropertyString(szSceneIDName, NFrame::Scene::FilePath());
     const int nCanClone = m_pElementModule->GetPropertyInt(szSceneIDName, NFrame::Scene::CanClone());
 
-    //场景对应资源
+    
     NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement(nSceneID);
     if (!pSceneResourceMap)
     {
@@ -291,11 +291,11 @@ bool NFCSceneProcessModule::LoadSceneResource(const int nSceneID)
     rapidxml::xml_document<>  xFileDoc;
     xFileDoc.parse<0>(xFileSource.data());
 
-    //资源文件列表
+    
     rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
     for (rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling())
     {
-        //种子具体信息
+        
         std::string strSeedID = pSeedFileNode->first_attribute("ID")->value();
         std::string strConfigID = pSeedFileNode->first_attribute("NPCConfigID")->value();
         float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute("SeedX")->value());
