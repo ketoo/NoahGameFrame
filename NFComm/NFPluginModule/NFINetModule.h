@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ��    NFINetModule.h
-//    @Author           ��    LvSheng.Huang
-//    @Date             ��    2012-12-15
-//    @Module           ��    NFINetModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ enum NF_SERVER_TYPES
 
 ////////////////////////////////////////////////////////////////////////////
 
-// �ͻ�����Ϣ������
+
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
@@ -200,7 +200,7 @@ public:
             return false;
         }
 
-        //���ϴε����ݴ�����
+
         KeepAlive();
 
         return m_pNet->Execute();
@@ -391,7 +391,7 @@ public:
             return false;
         }
 
-        //playerid��Ҫ������ת����Ϣ��ʱ����ʶ��ʹ�ã�����ʹ�ò�ʹ��
+
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)
@@ -434,7 +434,7 @@ public:
         NFMsg::MsgBase xMsg;
         xMsg.set_msg_data(strData.data(), strData.length());
 
-        //playerid��Ҫ������ת����Ϣ��ʱ����ʶ��ʹ�ã�����ʹ�ò�ʹ��
+
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)

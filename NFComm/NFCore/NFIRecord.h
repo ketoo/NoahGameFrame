@@ -61,7 +61,7 @@ public:
     virtual TDATA_TYPE GetColType(const int nCol) const = 0;
     virtual const std::string& GetColTag(const int nCol) const = 0;
 
-    // 添加数据
+    
     virtual int AddRow(const int nRow) = 0;
     virtual int AddRow(const int nRow, const NFIDataList& var) = 0;
 
@@ -79,7 +79,7 @@ public:
 	virtual bool SetVector2(const int nRow, const std::string& strColTag, const NFVector2& value) = 0;
 	virtual bool SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
 
-    // 获得数据
+    
     virtual bool QueryRow(const int nRow, NFIDataList& varList) = 0;
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 

@@ -20,7 +20,7 @@ bool NFCGSSwichServerModule::Shut()
 
 bool NFCGSSwichServerModule::Execute()
 {
-    //λ����
+    
     return true;
 }
 
