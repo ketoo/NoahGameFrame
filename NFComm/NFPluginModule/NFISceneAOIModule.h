@@ -202,7 +202,7 @@ public:
 	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
 	{
 		PROPERTY_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
-		PROPERTY_SINGLE_EVENT_FUNCTOR_ptr functorPtr(new PROPERTY_SINGLE_EVENT_FUNCTOR(functor));
+		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_SINGLE_EVENT_FUNCTOR(functor));
 		return AddPropertyEventCallBack(functorPtr);
 	}
 
