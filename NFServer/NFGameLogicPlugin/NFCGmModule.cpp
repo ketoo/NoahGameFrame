@@ -22,7 +22,7 @@ bool NFCGmModule::Shut()
 
 bool NFCGmModule::Execute()
 {
-    //Œª÷√ƒÿ
+    
     return true;
 }
 

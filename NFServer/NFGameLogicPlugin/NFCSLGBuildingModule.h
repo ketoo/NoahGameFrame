@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFCSLGBuildingModule.h
-//    @Author           £º    eliteYang
-//    @Date             £º    2014-09-12
-//    @Module           £º    NFCSLGBuildingModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 #ifndef NFC_SLG_BUILDING_MODULE_H
