@@ -25,7 +25,7 @@ enum CLASS_OBJECT_EVENT
 	COE_CREATE_EFFECTDATA,
 	COE_CREATE_AFTER_EFFECT,
 	COE_CREATE_HASDATA,
-
+	COE_CREATE_FINISH,
 };
 
 typedef std::function<int(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
