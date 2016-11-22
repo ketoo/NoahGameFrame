@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName			:    NFCSceneAOIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
@@ -70,7 +70,7 @@ protected:
 	int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
 
 	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
-	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
+	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
 	////////////////interface for broadcast event///////////////////////////////////
 
 private:
