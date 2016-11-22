@@ -137,7 +137,7 @@ int NFCCreateRoleModule::OnLoadRoleFinalEvent(const NFIDENTID& object, const int
         return -1;
     }
 
-    //赋予属性
+    
     const char* pstrAccount = var.StringVal(0);
     NFCValueList valueInfo;
     valueInfo << pstrAccount;
@@ -148,7 +148,7 @@ int NFCCreateRoleModule::OnLoadRoleFinalEvent(const NFIDENTID& object, const int
         const char* pstrRoleName = var.StringVal(i);
         if (strlen(pstrRoleName) > 0)
         {
-            //看容器中是否已经存在，存在则不创建
+            
             NFCValueList varHallObjectList;
             NFCValueList varHalvalueInfo;
             varHalvalueInfo << pstrRoleName;
@@ -197,7 +197,7 @@ int NFCCreateRoleModule::OnCreateRoleEvent(const NFIDENTID& object, const int nE
         return 0;
     }
 
-    //如果有4个玩家则不让创建
+    
     const char* pstrAccountName = var.StringVal(0);
     const char* pstrRoleName = var.StringVal(1);
     int nRoleSex = var.IntVal(2);
@@ -212,7 +212,7 @@ int NFCCreateRoleModule::OnCreateRoleEvent(const NFIDENTID& object, const int nE
         return 0;
     }
     //////////////////////////////////////////////////////////////////////////
-    //创建人物直接走了数据库
+    
     //////////////////////////////////////////////////////////////////////////
     if (m_pNoSqlModule->CreateRole(pstrAccountName, pstrRoleName) <= 0)
         //if (m_pDataBaseModule->CreateRole(pstrAccountName, pstrRoleName) <= 0)
@@ -245,20 +245,20 @@ int NFCCreateRoleModule::OnCreateRoleEvent(const NFIDENTID& object, const int nE
     char szConfigName[MAX_PATH] = { 0 };
     sprintf(szConfigName, "%d", nConfigName);
 
-    //弄到所有的属性
+    
     GTPropertyManager* pConfigPropertyManager = m_pElementInfoModule->GetPropertyManager(szConfigName);
     if (pConfigPropertyManager)
     {
         GTProperty* pConfigPropertyInfo = pConfigPropertyManager->First();
         while (pConfigPropertyInfo)
         {
-            //看属性是否需要保存,不需要保存的就别村
+            
             if (!pConfigPropertyInfo->GetSave())
             {
                 pConfigPropertyInfo = pConfigPropertyManager->Next();
                 continue;
             }
-            //这个属性RoleName是玩家的，因此，这里不能有RoleName
+            
             const NFIValueList& valueList = pConfigPropertyInfo->GetValue();
 
 
@@ -292,7 +292,7 @@ int NFCCreateRoleModule::OnCreateRoleEvent(const NFIDENTID& object, const int nE
     varPropertyKeyList << "SceneID";
     varPropertyValueList << mnRoleHallContainer;
     varPropertyKeyList << "LastContainerID";
-    varPropertyValueList << 1;//1号场景为新手村
+    varPropertyValueList << 1;
     varPropertyKeyList << "ClassName";
     varPropertyValueList << "Player";
     varPropertyKeyList << "Level";
@@ -313,7 +313,7 @@ int NFCCreateRoleModule::OnCreateRoleEvent(const NFIDENTID& object, const int nE
     arg << "Y" << atof(valueRelivePos.StringVal(1));
     arg << "Z" << atof(valueRelivePos.StringVal(2));
     m_pKernelModule->CreateObject(0, mnRoleHallContainer, 0, "Player", szConfigName, arg);
-    //nosql 则不需要这样了
+    
     //m_pEventProcessModule->DoEvent(0, NFED_ON_DATABASE_SERVER_LOADROE_BEGIN, NFCValueList() << pstrAccountName);
 
     return 0;
@@ -385,7 +385,7 @@ int NFCCreateRoleModule::OnAcountDisConnectEvent(const NFIDENTID& object, const 
 
 int NFCCreateRoleModule::OnLoadRoleBeginEvent(const NFIDENTID& object, const int nEventID, const NFIValueList& var)
 {
-    //直接从NOSQL数据库拉
+    
     const char* pstrAccount = var.StringVal(0);
     NFCValueList roleLlist;
     if (m_pNoSqlModule->QueryAccountRoleList(pstrAccount, roleLlist) > 0)
@@ -395,7 +395,7 @@ int NFCCreateRoleModule::OnLoadRoleBeginEvent(const NFIDENTID& object, const int
             const char* pstrRoleName = roleLlist.StringVal(i);
             if (strlen(pstrRoleName) > 0)
             {
-                //看容器中是否已经存在，存在则不创建
+                
                 NFCValueList varHallObjectList;
                 NFCValueList varHalvalueInfo;
                 varHalvalueInfo << pstrRoleName;

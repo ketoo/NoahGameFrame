@@ -20,7 +20,7 @@ public:
     NFSingleton()
     {
         //assert( !m_instance );
-        // 下面是判断VC++编译器版本，版本不同相应的处理也不同
+
 #if defined( _MSC_VER ) && _MSC_VER < 1200
         int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
         m_pInstance = (T*)((int)this + offset);
