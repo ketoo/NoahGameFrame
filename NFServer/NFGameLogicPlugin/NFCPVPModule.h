@@ -47,7 +47,7 @@ private:
     NFILogModule* m_pLogModule;
 
 private:
-    NFList<NFGUID> mxPVPList; // 报名的队列
+    NFList<NFGUID> mxPVPList; 
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

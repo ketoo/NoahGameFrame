@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ��    NFINet.h
-//    @Author           ��    LvSheng.Huang
-//    @Date             ��    2013-12-15
-//    @Module           ��    NFINet
+
+
+
+
 //    @Desc             :     INet
 // -------------------------------------------------------------------------
 
@@ -54,10 +54,10 @@
 
 enum NF_NET_EVENT
 {
-    NF_NET_EVENT_EOF = 0x10,        //����
-    NF_NET_EVENT_ERROR = 0x20,      //δ֪����
-    NF_NET_EVENT_TIMEOUT = 0x40,    //���ӳ�ʱ
-    NF_NET_EVENT_CONNECTED = 0x80,  //���ӳɹ�(��Ϊ�ͻ���)
+    NF_NET_EVENT_EOF = 0x10,        
+    NF_NET_EVENT_ERROR = 0x20,      
+    NF_NET_EVENT_TIMEOUT = 0x40,    
+    NF_NET_EVENT_CONNECTED = 0x80,  
 };
 
 

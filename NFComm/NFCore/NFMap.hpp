@@ -2,7 +2,6 @@
 //    @FileName         :    NFMap.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-03-01
-//    @Module           :    �мǣ�������ѭ�����Լ�ɾ���Լ�
 //
 // -------------------------------------------------------------------------
 
@@ -26,7 +25,6 @@ public:
     virtual ~NFMap()
     {
         //mObjectList.clear();
-        //�µ�NFMapֻ����Ԫ�أ�������Ԫ����ռ���ڴ棬˭new ˭delete
         //DeleteAllElement();
     };
 
