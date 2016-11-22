@@ -181,7 +181,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 		return;
 	}
 
-	//û��¼��
+	
 	if (pNetObject->GetConnectKeyState() <= 0)
 	{
 		return;
@@ -268,7 +268,7 @@ void NFCLoginNet_ServerModule::OnLogOut(const int nSockIndex, const int nMsgID, 
 
 void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	printf("NFNet || �Ƿ���Ϣ:unMsgID=%d\n", nMsgID);
+	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
 
 NFINetModule* NFCLoginNet_ServerModule::GetNetModule()

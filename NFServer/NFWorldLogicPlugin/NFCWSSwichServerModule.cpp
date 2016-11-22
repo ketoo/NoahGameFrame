@@ -22,7 +22,7 @@ bool NFCWSSwichServerModule::Shut()
 
 bool NFCWSSwichServerModule::Execute()
 {
-    //Œª÷√ƒÿ
+    
     return true;
 }
 

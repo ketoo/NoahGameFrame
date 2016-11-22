@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ：    NFIPropertyModule.h
-//    @Author           ：    LvSheng.Huang
-//    @Date             ：    2012-12-15
-//    @Module           ：    NFIPropertyModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -18,15 +18,13 @@ class NFIPropertyModule
 public:
     enum NFPropertyGroup
     {
-        NPG_JOBLEVEL        ,//职业等级基础
-        NPG_EFFECTVALUE     ,//一级属性影响二级属性的部分(直接用公式计算，其他部分不用动)
-        NPG_REBIRTH_ADD     ,//重生奖励
-        NPG_EQUIP           ,//装备不会影响体质之类的导致2次计算(直接不要力量体质什么的)
-        NPG_EQUIP_AWARD     ,//套装奖励
-        NPG_STATIC_BUFF     ,//永久类型的BUFF，天赋之类的，或者吃的永久药水
-
-        NPG_RUNTIME_BUFF    ,//动态BUFF
-
+		NPG_JOBLEVEL,
+		NPG_EFFECTVALUE,
+		NPG_REBIRTH_ADD,
+		NPG_EQUIP,
+		NPG_EQUIP_AWARD,
+		NPG_STATIC_BUFF,
+		NPG_RUNTIME_BUFF,
         NPG_ALL ,
     };
 
