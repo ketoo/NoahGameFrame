@@ -54,8 +54,7 @@ public:
         DST_SAVE,
     };
 
-    class NFCBuffConfig
-
+    class NFCBuffConfig : public NFMap<std::string, int>
     {
     public:
         std::string strConfig;
