@@ -37,7 +37,7 @@ bool NFCGSTeamModule::Shut()
 
 bool NFCGSTeamModule::Execute()
 {
-    //Œª÷√ƒÿ
+    
     return true;
 }
 

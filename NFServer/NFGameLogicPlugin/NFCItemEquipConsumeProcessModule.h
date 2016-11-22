@@ -3,7 +3,7 @@
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemEquipConsumeProcessModule
-//    @Desc             :   道具消费机制类--使用物品
+
 // -------------------------------------------------------------------------
 
 #ifndef NFC_ITEM_EQUIP_CONSUME_PROCESS_MODULE_H
@@ -34,10 +34,10 @@ public:
 	virtual bool Execute();
 	virtual bool AfterInit();
 
-	//物品使用是否合法
+	
 	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
 
-	//合法,消耗,那么处理过程[消耗后,nItemRowID已经找不到了，因为可能被清空了]
+	
 	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
 
 private:
