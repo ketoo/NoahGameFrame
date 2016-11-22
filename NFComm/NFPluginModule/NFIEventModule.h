@@ -20,6 +20,12 @@ enum NFEventDefine
 	//arg[0]:resultID[EGameErrorCode]
 	NFED_ON_GENERAL_MESSAGE,
 
+	////////////////core events for NF--start////////////////////////////////////////////////////////
+	//scene swap
+	//common property
+	//common record
+
+	////////////////core events for NF--end//////////////////////////////////////////////////////////
 	//arg[0]:x,y,z
 	NFED_ON_CLIENT_REQUIRE_MOVE,
 	NFED_ON_CLIENT_MOVE_RESULT,
