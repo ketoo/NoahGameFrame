@@ -24,7 +24,7 @@ bool NFCPVPMatchModule::Shut()
 
 bool NFCPVPMatchModule::Execute()
 {
-	//Î»ÖÃÄØ
+	
 	NFINT64 nNowTime = pPluginManager->GetNowTime();
 
 	if (nNowTime - mnLastCheckTime < 60)
@@ -728,7 +728,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 
 						m_pTeamModule->BroadcastMsgToTeam(nPlayerID, xTeamID, NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck);
 
-						//³É¹¦
+						
 						return;
 					}
 				}
