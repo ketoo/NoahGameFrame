@@ -3,7 +3,7 @@
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCCardItemConsumeProcessModule
-//    @Desc             :   道具消费机制类,详细的具体某类道具消费流程以及扣除机制
+
 // -------------------------------------------------------------------------
 
 #include "NFCItemCardConsumeProcessModule.h"
