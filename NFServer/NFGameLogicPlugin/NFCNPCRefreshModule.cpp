@@ -3,7 +3,7 @@
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-10-17
 //    @Module               :    NFCNPCRefreshModule
-//    @Desc                 :    NPCËÀÍöË¢ÐÂ
+
 // -------------------------------------------------------------------------
 
 #include "NFCNPCRefreshModule.h"
@@ -165,7 +165,7 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefi
 
 			m_pLevelModule->AddExp( identKiller, nExp);
 
-			// TODO:¼Ó¹ÖÎïµôÂä½ðÇ®
+			
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);
 		}
 		else
