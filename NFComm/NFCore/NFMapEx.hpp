@@ -18,14 +18,18 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 template <typename T , typename TD>
-class NFMapEx
+class NFMapEx : public NFMemoryCounter
 {
 public:
     typedef std::map<T, NF_SHARE_PTR<TD> > NFMapOBJECT;
 
-    NFMapEx() {};
+    NFMapEx()
+	{
+		AddInstance(GET_CLASS_NAME(NFMapEx));
+	};
     virtual ~NFMapEx()
     {
+		RemInstance(GET_CLASS_NAME(NFMapEx));
     };
 
 	virtual bool ExistElement(const T& name)
