@@ -17,25 +17,35 @@
 class NFMemoryCounter
 {
 public:
-	virtual ~NFMemoryCounter() {}
+	NFMemoryCounter()
+	{
+		if (!mxCounter)
+		{
+			mxCounter = new std::map<std::string, int>();
+		}
+	}
+
+	virtual ~NFMemoryCounter()
+	{
+	}
 
     void AddInstance(const std::string& strClassName)
     {
-        std::map<std::string, int>::iterator it = mxCounter.find(strClassName);
-        if(it != mxCounter.end())
+        std::map<std::string, int>::iterator it = mxCounter->find(strClassName);
+        if(it != mxCounter->end())
         {
             it->second++;
         }
         else
         {
-            mxCounter.insert(std::map<std::string, int>::value_type(strClassName, 1));
+            mxCounter->insert(std::map<std::string, int>::value_type(strClassName, 1));
         }
     }
 
 	void RemInstance(const std::string& strClassName)
 	{
-		std::map<std::string, int>::iterator it = mxCounter.find(strClassName);
-		if (it != mxCounter.end())
+		std::map<std::string, int>::iterator it = mxCounter->find(strClassName);
+		if (it != mxCounter->end())
 		{
 			it->second--;
 		}
@@ -43,11 +53,12 @@ public:
 
 	const std::map<std::string, int>& GetCounter()
 	{
-		return mxCounter;
+		return *mxCounter;
 	}
 
 protected:
-    static std::map<std::string, int> mxCounter;
+    static std::map<std::string, int>* mxCounter;
 };
 
+std::map<std::string, int>* NFMemoryCounter::mxCounter = NULL;
 #endif
