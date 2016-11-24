@@ -14,7 +14,7 @@
 #include <map>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-/*
+
 template <class T>
 class NFMemoryCounter
 {
@@ -37,7 +37,8 @@ public:
 
 template <class T>
 int NFMemoryCounter<T>::nCount = 0;
-*/
+
+/*
 class NFMemoryCounter
 {
 public:
@@ -85,4 +86,6 @@ protected:
 };
 
 std::map<std::string, int>* NFMemoryCounter::mxCounter = NULL;
+
+*/
 #endif
