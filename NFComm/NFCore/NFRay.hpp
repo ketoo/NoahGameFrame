@@ -17,7 +17,7 @@ class NFLine;
 class NFBox;
 class NFPlane;
 class NFSphere;
-
+class NFVector3;
 
 class NFRay
 {
