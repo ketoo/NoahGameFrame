@@ -30,8 +30,13 @@ public:
 		--nCount;
 	}
 
+	static int GetCount()
+	{
+		return nCount;
+	}
 
-public:
+
+private:
 	static int nCount;
 };
 
@@ -54,18 +59,18 @@ public:
 	{
 	}
 
-    void AddInstance(const std::string& strClassName)
-    {
-        std::map<std::string, int>::iterator it = mxCounter->find(strClassName);
-        if(it != mxCounter->end())
-        {
-            it->second++;
-        }
-        else
-        {
-            mxCounter->insert(std::map<std::string, int>::value_type(strClassName, 1));
-        }
-    }
+	void AddInstance(const std::string& strClassName)
+	{
+		std::map<std::string, int>::iterator it = mxCounter->find(strClassName);
+		if(it != mxCounter->end())
+		{
+			it->second++;
+		}
+		else
+		{
+			mxCounter->insert(std::map<std::string, int>::value_type(strClassName, 1));
+		}
+	}
 
 	void RemInstance(const std::string& strClassName)
 	{
@@ -82,7 +87,7 @@ public:
 	}
 
 protected:
-    static std::map<std::string, int>* mxCounter;
+	static std::map<std::string, int>* mxCounter;
 };
 
 std::map<std::string, int>* NFMemoryCounter::mxCounter = NULL;
