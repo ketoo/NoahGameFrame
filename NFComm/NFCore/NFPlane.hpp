@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <string>
-
+#include "NFVector3.hpp"
 
 class NFPlane
 {
