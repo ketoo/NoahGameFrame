@@ -11,7 +11,12 @@
 
 #include <iostream>
 #include <string>
+#include "NFSpaceNode.hpp"
 
+class NFLine;
+class NFBox;
+class NFPlane;
+class NFVector3;
 
 class NFSphere : public NFSpaceNode
 {
@@ -30,12 +35,12 @@ public:
 
     virtual ~NFSphere() {}
 
-    bool operator==(const Sphere& other) const
+    bool operator==(const NFSphere& other) const
     {
         return (mvCenter == other.mvCenter) && (mfRadius == other.mfRadius);
     }
 
-    bool operator!=(const Sphere& other) const
+    bool operator!=(const NFSphere& other) const
     {
         return !((mvCenter == other.mvCenter) && (mfRadius == other.mfRadius));
     }
