@@ -24,7 +24,7 @@ const int NFActorPlugin::GetPluginVersion()
 
 const std::string NFActorPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFActorPlugin)
+	return GET_CLASS_NAME(NFActorPlugin);
 }
 
 void NFActorPlugin::Install()
