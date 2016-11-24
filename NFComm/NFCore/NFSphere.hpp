@@ -11,12 +11,12 @@
 
 #include <iostream>
 #include <string>
-#include "NFVector3.hpp"
 #include "NFSpaceNode.hpp"
 
 class NFLine;
 class NFBox;
 class NFPlane;
+class NFVector3;
 
 class NFSphere : public NFSpaceNode
 {
