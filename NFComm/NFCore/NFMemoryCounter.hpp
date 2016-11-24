@@ -14,6 +14,30 @@
 #include <map>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
+/*
+template <class T>
+class NFMemoryCounter
+{
+public:
+
+	NFMemoryCounter()
+	{
+		++nCount;
+	}
+
+	virtual ~NFMemoryCounter()
+	{
+		--nCount;
+	}
+
+
+public:
+	static int nCount;
+};
+
+template <class T>
+int NFMemoryCounter<T>::nCount = 0;
+*/
 class NFMemoryCounter
 {
 public:
