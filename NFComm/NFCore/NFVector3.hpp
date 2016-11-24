@@ -304,11 +304,11 @@ public:
         static NFVector3 v(0, 1, 0);
         return v;
     }
-    inline static const NFVector3& UnitZ()
-    {
-        static NFVector3 v(0, 0, 1);
-        return v;
-    }
+	inline static const NFVector3& UnitZ()
+	{
+		static NFVector3 v(0, 0, 1);
+		return v;
+	}
 
 	NFVector2 xx() const
 	{
