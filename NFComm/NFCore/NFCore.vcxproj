@@ -108,8 +108,10 @@
     <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
+    <ClInclude Include="NFMemoryCounter.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
+    <ClInclude Include="NFSpaceNode.hpp" />
     <ClInclude Include="NFSphere.hpp" />
     <ClInclude Include="NFCRecord.h" />
     <ClInclude Include="NFIObject.h" />

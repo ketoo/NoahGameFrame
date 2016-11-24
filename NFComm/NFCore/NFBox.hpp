@@ -6,12 +6,12 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_VETOR2_H
-#define NF_VETOR2_H
+#ifndef NF_BOX_H
+#define NF_BOX_H
 
 #include <iostream>
 #include <string>
-
+#include "NFVector3.hpp"
 
 class NFBox
 {

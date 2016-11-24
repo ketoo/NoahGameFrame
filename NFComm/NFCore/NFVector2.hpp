@@ -11,7 +11,9 @@
 
 #include <iostream>
 #include <string>
-
+#include <vector>
+#include "NFVector3.hpp"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 class NFVector2
 {
