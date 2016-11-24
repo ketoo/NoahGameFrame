@@ -332,6 +332,7 @@ typedef int64_t NFINT64;
 #endif
 //use actor mode--end
 
+#define GET_CLASS_NAME(className) (#className)
 
 #define NF_SHARE_PTR std::shared_ptr
 #define NF_NEW new
