@@ -319,7 +319,7 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
     return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, NFrame::Team::ThisName(), pRecordManager);
 }
 
-bool NFCTeamModule::MemberOffeline( const NFGUID& self, const NFGUID& xTeam )
+bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
 {
     NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam, NFrame::Team::ThisName());
     if (!pRecordManager)
