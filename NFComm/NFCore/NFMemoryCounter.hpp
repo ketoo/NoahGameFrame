@@ -11,23 +11,41 @@
 
 #include <iostream>
 #include <string>
+#include <map>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 class NFMemoryCounter
 {
 public:
-    NFMemoryCounter(const std::string& strClassName)
+	virtual ~NFMemoryCounter() {}
+
+    void AddInstance(const std::string& strClassName)
     {
-        std::map<std::string, int>::iterate it = mxCounter.find(strClassName);
+        std::map<std::string, int>::iterator it = mxCounter.find(strClassName);
         if(it != mxCounter.end())
         {
             it->second++;
         }
         else
         {
-            mxCounter.insert(std::map<std::string, int>::typeof(strClassName, 1));
+            mxCounter.insert(std::map<std::string, int>::value_type(strClassName, 1));
         }
     }
-	
+
+	void RemInstance(const std::string& strClassName)
+	{
+		std::map<std::string, int>::iterator it = mxCounter.find(strClassName);
+		if (it != mxCounter.end())
+		{
+			mxCounter.erase(it);
+		}
+	}
+
+	const std::map<std::string, int>& GetCounter()
+	{
+		return mxCounter;
+	}
+
 private:
     static std::map<std::string, int> mxCounter;
 };
