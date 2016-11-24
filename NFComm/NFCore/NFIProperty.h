@@ -11,11 +11,11 @@
 
 #include "NFIDataList.h"
 #include "NFList.hpp"
-
+#include "NFComm/NFPluginModule/NFPlatform.h"
 typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 
-class NFIProperty
+class _NFExport NFIProperty
 {
 public:
     NFIProperty(){}

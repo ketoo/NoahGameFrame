@@ -13,8 +13,8 @@
 #include "NFIRecord.h"
 #include "NFCDataList.h"
 #include "NFMapEx.hpp"
-
-class NFCRecord : public NFIRecord
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();

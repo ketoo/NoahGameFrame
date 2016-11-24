@@ -11,8 +11,9 @@
 
 #include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-class NFCComponentManager : public NFIComponentManager
+class _NFExport NFCComponentManager : public NFIComponentManager
 {
 private:
     NFCComponentManager()
