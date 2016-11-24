@@ -11,11 +11,11 @@
 
 #include <iostream>
 #include <string>
-#include "NFVector3.hpp"
 
 class NFLine;
 class NFBox;
 class NFPlane;
+class NFVector3;
 
 
 class NFLine
