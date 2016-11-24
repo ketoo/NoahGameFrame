@@ -103,9 +103,9 @@ bool NFCDataList::Append(const NFIDataList::TData& xData)
             break;
 		case TDATA_VECTOR2:
 			AddVector2(xData.GetVector2());
+			break;
 		case TDATA_VECTOR3:
 			AddVector3(xData.GetVector3());
-			break;
 			break;
         default:
             break;
