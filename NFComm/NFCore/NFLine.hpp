@@ -6,11 +6,16 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_VETOR2_H
-#define NF_VETOR2_H
+#ifndef NF_Line_H
+#define NF_Line_H
 
 #include <iostream>
 #include <string>
+#include "NFVector3.hpp"
+
+class NFLine;
+class NFBox;
+class NFPlane;
 
 
 class NFLine
