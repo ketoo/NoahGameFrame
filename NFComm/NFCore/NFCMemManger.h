@@ -32,7 +32,7 @@
 
 #endif
 
-class NFCMemManger: public NFSingleton<NFCMemManger>
+class _NFExport NFCMemManger: public NFSingleton<NFCMemManger>
 {
 public:
     NFCMemManger();
