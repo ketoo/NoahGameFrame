@@ -30,9 +30,9 @@ cd %ASTYLE_DIR%
 
 ::a dir
 set SRC_DIR=%~dp0/NFComm
-AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp
+AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp %SRC_DIR%/*.hpp
 
 set SRC_DIR=%~dp0/NFServer
-AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp
+AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp %SRC_DIR%/*.hpp
 
 pause
