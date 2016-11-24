@@ -30,7 +30,7 @@ const int NFLoginNet_ServerPlugin::GetPluginVersion()
 
 const std::string NFLoginNet_ServerPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFLoginNet_ServerPlugin)
+	return GET_CLASS_NAME(NFLoginNet_ServerPlugin);
 }
 
 void NFLoginNet_ServerPlugin::Install()
