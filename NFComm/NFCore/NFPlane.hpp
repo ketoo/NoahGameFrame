@@ -12,6 +12,9 @@
 #include <iostream>
 #include <string>
 
+class NFLine;
+class NFBox;
+class NFVector3;
 
 class NFPlane
 {
