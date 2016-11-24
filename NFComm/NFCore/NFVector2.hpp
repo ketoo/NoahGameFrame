@@ -11,7 +11,13 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
+class NFLine;
+class NFBox;
+class NFPlane;
+class NFVector3;
 
 class NFVector2
 {
