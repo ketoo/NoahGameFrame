@@ -13,8 +13,8 @@
 #include "NFList.hpp"
 #include "NFCDataList.h"
 #include "NFIProperty.h"
-
-class NFCProperty : public NFIProperty
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFCProperty : public NFIProperty
 {
 private:
     NFCProperty();
