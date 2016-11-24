@@ -26,6 +26,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include "NFMemoryCounter.hpp"
 #include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
@@ -53,7 +54,7 @@ const static NFVector2 NULL_VECTOR2 = NFVector2();
 const static NFVector3 NULL_VECTOR3 = NFVector3();
 
 
-class NFIDataList
+class NFIDataList : public NFMemoryCounter
 {
 public:
 	struct Vetor3D
@@ -407,9 +408,14 @@ public:
         {
             mvList.push_back(NF_SHARE_PTR<TData>(NF_NEW TData()));
         }
+
+		AddInstance(GET_CLASS_NAME(NFIDataList));
     }
 
-    virtual ~NFIDataList() = 0;
+	virtual ~NFIDataList()
+	{
+		RemInstance(GET_CLASS_NAME(NFIDataList));
+	}
 
     virtual std::string StringValEx(const int index) const = 0;
     virtual bool ToString(std::string& str, const std::string& strSplit) const = 0;
@@ -633,8 +639,6 @@ protected:
     std::vector< NF_SHARE_PTR<TData> > mvList;
     std::map<std::string, NF_SHARE_PTR<TData> > mxMap;
 };
-
-inline NFIDataList::~NFIDataList() {}
 
 const static NFIDataList::TData NULL_TDATA = NFIDataList::TData();
 
