@@ -37,7 +37,7 @@ public:
 		std::map<std::string, int>::iterator it = mxCounter.find(strClassName);
 		if (it != mxCounter.end())
 		{
-			mxCounter.erase(it);
+			it->second--;
 		}
 	}
 
@@ -46,7 +46,7 @@ public:
 		return mxCounter;
 	}
 
-private:
+protected:
     static std::map<std::string, int> mxCounter;
 };
 
