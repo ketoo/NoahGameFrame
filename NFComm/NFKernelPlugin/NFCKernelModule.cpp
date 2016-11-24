@@ -1222,6 +1222,32 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 	return false;
 }
 
+bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string & strClassName, const NFGUID & noSelf, NFIDataList & list)
+{
+	NFCDataList xDataList;
+	if (GetGroupObjectList(nSceneID, nGroupID, xDataList))
+	{
+		for (int i = 0; i < xDataList.GetCount(); i++)
+		{
+			NFGUID xID = xDataList.Object(i);
+			if (xID.IsNull())
+			{
+				continue;
+			}
+
+			if (this->GetPropertyString(xID, NFrame::IObject::ClassName()) == strClassName
+				&& xID != noSelf)
+			{
+				list.AddObject(xID);
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 bool NFCKernelModule::LogStack()
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN

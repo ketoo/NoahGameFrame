@@ -56,8 +56,6 @@ protected:
 	int OnSceneEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	
 	int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
-	int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);
-
 
 protected:
 	////////////////interface for broadcast event//////////////////////////////////
