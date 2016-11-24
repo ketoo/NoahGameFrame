@@ -11,7 +11,11 @@
 
 #include <iostream>
 #include <string>
-#include "NFVector2.hpp"
+
+class NFLine;
+class NFBox;
+class NFPlane;
+class NFVector2;
 
 class NFVector3
 {
@@ -304,11 +308,11 @@ public:
         static NFVector3 v(0, 1, 0);
         return v;
     }
-    inline static const NFVector3& UnitZ()
-    {
-        static NFVector3 v(0, 0, 1);
-        return v;
-    }
+	inline static const NFVector3& UnitZ()
+	{
+		static NFVector3 v(0, 0, 1);
+		return v;
+	}
 
 	NFVector2 xx() const
 	{
