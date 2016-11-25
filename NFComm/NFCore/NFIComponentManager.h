@@ -15,7 +15,10 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFIComponentManager : public NFIModule, public NFMapEx<std::string, NFIComponent>
+class NFIComponentManager 
+	: public NFIModule,
+	public NFMapEx<std::string, NFIComponent>,
+	public NFMemoryCounter<NFIComponentManager>
 {
 public:
     virtual ~NFIComponentManager() {}
