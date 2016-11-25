@@ -11,10 +11,9 @@
 
 #include "NFIRecord.h"
 #include "NFMap.hpp"
-
-class NFIRecordManager
-    : public NFMapEx<std::string, NFIRecord>,
-	public NFMemoryCounter<NFIRecordManager>
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFIRecordManager
+    : public NFMapEx<std::string, NFIRecord>
 {
 public:
     virtual ~NFIRecordManager() {}

@@ -54,7 +54,7 @@ const static NFVector2 NULL_VECTOR2 = NFVector2();
 const static NFVector3 NULL_VECTOR3 = NFVector3();
 
 
-class NFIDataList : public NFMemoryCounter<NFIDataList>
+class _NFExport NFIDataList :public NFMemoryCounter<NFIDataList>
 {
 public:
 	struct Vetor3D
@@ -409,12 +409,12 @@ public:
             mvList.push_back(NF_SHARE_PTR<TData>(NF_NEW TData()));
         }
 
-		//AddInstance(GET_CLASS_NAME(NFIDataList));
+		//AddInstance(GET_class _NFExport_NAME(NFIDataList));
     }
 
 	virtual ~NFIDataList()
 	{
-		//RemInstance(GET_CLASS_NAME(NFIDataList));
+		//RemInstance(GET_class _NFExport_NAME(NFIDataList));
 	}
 
     virtual std::string StringValEx(const int index) const = 0;

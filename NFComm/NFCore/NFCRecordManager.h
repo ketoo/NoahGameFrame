@@ -15,8 +15,8 @@
 #include <vector>
 #include "NFCRecord.h"
 #include "NFIRecordManager.h"
-
-class NFCRecordManager : public NFIRecordManager
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFCRecordManager : public NFIRecordManager
 {
 public:
     NFCRecordManager(const NFGUID& self)
