@@ -23,7 +23,9 @@ class NFMapEx
 public:
     typedef std::map<T, NF_SHARE_PTR<TD> > NFMapOBJECT;
 
-    NFMapEx() {};
+    NFMapEx()
+	{
+	};
     virtual ~NFMapEx()
     {
     };
