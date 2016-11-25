@@ -41,7 +41,7 @@ public:
     virtual bool GetPlayerGameID(const NFGUID& self, int& nGameID);
     virtual bool GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::vector<NFGUID>& xmemberList);
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xTeam, const int& nGameID);
-    virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xTeam);
+    virtual bool MemberOffline(const NFGUID& self, const NFGUID& xTeam);
     virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 protected:

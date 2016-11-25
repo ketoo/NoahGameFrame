@@ -23,7 +23,7 @@ enum CalendarType
 	HOUR_SINCE_EPOCH,//start by 0
 	DAY_OF_WEEK,//start by 1 ,1 means Sunday
 };
-class NFCalendar
+class _NFExport NFCalendar
 {
 public:
 
