@@ -10,13 +10,11 @@
 #define NFI_PROPERTYMANAGER_H
 
 #include "NFMap.hpp"
-#include "NFIDataList.h"
 #include "NFIProperty.h"
 #include <map>
-
-class NFIPropertyManager
-    : public NFMapEx<std::string, NFIProperty>,
-	public NFMemoryCounter<NFIPropertyManager>
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFIPropertyManager
+    : public NFMapEx<std::string, NFIProperty>
 {
 public:
     virtual ~NFIPropertyManager() {}
