@@ -43,7 +43,8 @@
 class NFIPluginManager;
 
 class NFIPlugin : public NFIModule,
-    public NFMap<std::string, NFIModule>
+    public NFMap<std::string, NFIModule>,
+	public NFMemoryCounter<NFIPlugin>
 {
 
 public:
