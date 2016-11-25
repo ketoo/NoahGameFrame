@@ -37,7 +37,7 @@ public:
 
 class NFIPluginManager;
 
-class NFIModule
+class NFIModule : public NFMemoryCounter<NFIModule>
 {
 
 public:
