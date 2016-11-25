@@ -17,7 +17,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFIObject :public NFMemoryCounter<NFIObject>
+class NFIObject : public NFMemoryCounter<NFIObject>
 {
 public:
 	NFIObject()

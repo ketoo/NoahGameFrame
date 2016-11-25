@@ -54,7 +54,7 @@ const static NFVector2 NULL_VECTOR2 = NFVector2();
 const static NFVector3 NULL_VECTOR3 = NFVector3();
 
 
-class NFIDataList
+class NFIDataList : public NFMemoryCounter<NFIDataList>
 {
 public:
 	struct Vetor3D
