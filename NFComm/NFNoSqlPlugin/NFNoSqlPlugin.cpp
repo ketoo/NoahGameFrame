@@ -27,7 +27,7 @@ const int NFNoSqlPlugin::GetPluginVersion()
 
 const std::string NFNoSqlPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFNoSqlPlugin)
+	return GET_CLASS_NAME(NFNoSqlPlugin);
 }
 
 void NFNoSqlPlugin::Install()
