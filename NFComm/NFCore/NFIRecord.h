@@ -10,7 +10,7 @@
 #define NFI_RECORD_H
 
 #include "NFIDataList.h"
-
+#include "NFComm/NFPluginModule/NFPlatform.h"
 struct RECORD_EVENT_DATA
 {
 	enum RecordOptype
@@ -42,7 +42,7 @@ struct RECORD_EVENT_DATA
 typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&)> RECORD_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
 
-class NFIRecord
+class _NFExport NFIRecord :public NFMemoryCounter<NFIRecord>
 {
 public:
     

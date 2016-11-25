@@ -14,8 +14,9 @@
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-class NFCObject
+class _NFExport NFCObject
     : public NFIObject
 {
 private:

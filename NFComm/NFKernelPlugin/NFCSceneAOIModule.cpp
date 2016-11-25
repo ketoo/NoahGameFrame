@@ -82,36 +82,27 @@ bool NFCSceneAOIModule::AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR
 
 int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
 {
-		if (NFrame::Player::GroupID() == strPropertyName)
-		{
-			OnGroupEvent(self, strPropertyName, oldVar, newVar);
-		}
+	if (NFrame::Player::GroupID() == strPropertyName)
+	{
+		OnGroupEvent(self, strPropertyName, oldVar, newVar);
+	}
 
-		if (NFrame::Player::SceneID() == strPropertyName)
+	if (NFrame::Player::SceneID() == strPropertyName)
+	{
+		OnSceneEvent(self, strPropertyName, oldVar, newVar);
+	}
+	/*
+	//if u want to runing more fast, please uncomment this code
+	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
+	{
+		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
 		{
-			OnSceneEvent(self, strPropertyName, oldVar, newVar);
+			return 0;
 		}
-
-		if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
-		{
-			if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
-			{
-				return 0;
-			}
-		}
-
+	}
+	*/
 	NFCDataList valueBroadCaseList;
-	int nCount = 0;//argVar.GetCount() ;
-	if (nCount <= 0)
-	{
-		nCount = GetBroadCastObject(self, strPropertyName, false, valueBroadCaseList);
-	}
-	else
-	{
-		//valueBroadCaseList = argVar;
-	}
-
-	if (valueBroadCaseList.GetCount() <= 0)
+	if (GetBroadCastObject(self, strPropertyName, false, valueBroadCaseList) <= 0)
 	{
 		return 0;
 	}
@@ -136,13 +127,16 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 		return 0;
 	}
 
+	/*
+	//if u want to runing more fast, please uncomment this code
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
-		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
-		{
-			return 0;
-		}
+	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+	{
+	return 0;
 	}
+	}
+	*/
 
 	NFCDataList valueBroadCaseList;
 	GetBroadCastObject(self, strRecordName, true, valueBroadCaseList);
@@ -392,7 +386,7 @@ int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string
 	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
 
-	std::string strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
 	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);
 	NF_SHARE_PTR<NFIPropertyManager> pClassPropertyManager = m_pClassModule->GetClassPropertyManager(strClassName);
 
@@ -424,62 +418,27 @@ int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string
 		}
 	}
 
-	if (NFrame::Player::ThisName() == strClassName)
-	{
-		if (bTable)
-		{
-			if (pRecord->GetPublic())
-			{
-				GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-			}
-			else if (pRecord->GetPrivate())
-			{
-				valueObject.Add(self);
-			}
-		}
-		else
-		{
-			if (pProperty->GetPublic())
-			{
-				GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
-			}
-			else if (pProperty->GetPrivate())
-			{
-				valueObject.Add(self);
-			}
-		}
-
-		return valueObject.GetCount();
-	}
-
 	if (bTable)
 	{
 		if (pRecord->GetPublic())
 		{
-			GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
+			m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, NFrame::Player::ThisName(), self, valueObject);
+		}
+		else if (pRecord->GetPrivate() && !pRecord->GetUpload())
+		{//upload property can not board to itself
+			valueObject.Add(self);
 		}
 	}
 	else
 	{
 		if (pProperty->GetPublic())
 		{
-			GetBroadCastObject(nObjectContainerID, nObjectGroupID, valueObject);
+			m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, NFrame::Player::ThisName(), self, valueObject);
 		}
-	}
-
-	return valueObject.GetCount();
-}
-
-int NFCSceneAOIModule::GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList & valueObject)
-{
-	NFCDataList valContainerObjectList;
-	m_pKernelModule->GetGroupObjectList(nObjectContainerID, nGroupID, valContainerObjectList);
-	for (int i = 0; i < valContainerObjectList.GetCount(); i++)
-	{
-		const std::string& strObjClassName = m_pKernelModule->GetPropertyString(valContainerObjectList.Object(i), NFrame::IObject::ClassName());
-		if (NFrame::Player::ThisName() == strObjClassName)
+		else if (pProperty->GetPrivate() && !pRecord->GetUpload())
 		{
-			valueObject.Add(valContainerObjectList.Object(i));
+			//upload property can not board to itself
+			valueObject.Add(self);
 		}
 	}
 
