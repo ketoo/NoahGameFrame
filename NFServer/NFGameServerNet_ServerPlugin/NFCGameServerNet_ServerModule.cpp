@@ -555,6 +555,14 @@ int NFCGameServerNet_ServerModule::OnRecordEnter(const NFIDataList& argVar, cons
 
 int NFCGameServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList & argVar)
 {
+	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
+	{
+		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+		{
+			return 0;
+		}
+	}
+
 	switch (oldVar.GetType())
 	{
 	case TDATA_INT:
@@ -642,6 +650,14 @@ int NFCGameServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const st
 
 int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std::string& strRecord, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList & argVar)
 {
+	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
+	{
+		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+		{
+			return 0;
+		}
+	}
+
 	switch (xEventData.nOpType)
 	{
 	case RECORD_EVENT_DATA::Add:

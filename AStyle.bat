@@ -29,10 +29,10 @@ cd %ASTYLE_DIR%
 ::AStyle %ASTYLE_PARAM% %SRC_FILE%
 
 ::a dir
-set SRC_DIR=D:/NoahGameFrame/trunk/NFComm
-AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp
+set SRC_DIR=%~dp0/NFComm
+AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp %SRC_DIR%/*.hpp
 
-set SRC_DIR=D:/NoahGameFrame/trunk/NFServer
-AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp
+set SRC_DIR=%~dp0/NFServer
+AStyle %ASTYLE_PARAM% -r %SRC_DIR%/*.h %SRC_DIR%/*.cpp %SRC_DIR%/*.hpp
 
 pause

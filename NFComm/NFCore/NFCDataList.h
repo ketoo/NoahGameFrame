@@ -11,8 +11,9 @@
 
 #include "NFIDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
-class NFCDataList: public NFIDataList
+class _NFExport NFCDataList: public NFIDataList
 {
 public:
     NFCDataList();

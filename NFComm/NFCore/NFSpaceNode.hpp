@@ -20,11 +20,12 @@ public:
     //rotate
     //move
     //CollideWithNode
-
+	/*
     NFSpaceNode xParentNode;
     NFList<NFSpaceNode> xNodeList;
     int nMask;
     NFVector3 vCenter;
+	*/
 };
 
 #endif
