@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include"NFMemoryCounter.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 enum CalendarType
@@ -23,7 +24,8 @@ enum CalendarType
 	HOUR_SINCE_EPOCH,//start by 0
 	DAY_OF_WEEK,//start by 1 ,1 means Sunday
 };
-class NFCalendar
+
+class NFCalendar : public NFMemoryCounter<NFCalendar>
 {
 public:
 

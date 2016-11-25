@@ -13,7 +13,8 @@
 #include "NFMap.hpp"
 
 class NFIRecordManager
-    : public NFMapEx<std::string, NFIRecord>
+    : public NFMapEx<std::string, NFIRecord>,
+	public NFMemoryCounter<NFIRecordManager>
 {
 public:
     virtual ~NFIRecordManager() {}

@@ -13,7 +13,9 @@
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFIComponent : public NFIModule
+class NFIComponent 
+	: public NFIModule,
+	public NFMemoryCounter<NFIComponent>
 {
 private:
     NFIComponent()
