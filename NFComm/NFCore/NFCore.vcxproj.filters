@@ -98,6 +98,12 @@
     <ClInclude Include="NFCDataList.h">
       <Filter>Unit</Filter>
     </ClInclude>
+    <ClInclude Include="NFMemoryCounter.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFSpaceNode.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCRecord.cpp">
