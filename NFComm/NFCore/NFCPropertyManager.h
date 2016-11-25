@@ -12,8 +12,8 @@
 #include "NFMap.hpp"
 #include "NFIDataList.h"
 #include "NFIPropertyManager.h"
-
-class NFCPropertyManager : public NFIPropertyManager
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFCPropertyManager : public NFIPropertyManager
 {
 public:
     NFCPropertyManager(const NFGUID& self)
