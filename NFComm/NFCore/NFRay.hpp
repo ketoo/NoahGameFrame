@@ -11,7 +11,13 @@
 
 #include <iostream>
 #include <string>
+#include "NFVector3.hpp"
 
+class NFLine;
+class NFBox;
+class NFPlane;
+class NFSphere;
+class NFVector3;
 
 class NFRay
 {
@@ -43,7 +49,7 @@ public:
 
 
 private:
-    NFLine mxLine;
+    NFLine* m_pLine;
 
 };
 
