@@ -62,33 +62,39 @@ bool NFCSceneAOIModule::Execute()
 
 bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
 {
+	return RequestEnterScene(self, nSceneID, -1, nType, argList);
+}
+
+bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
+{
 	const int nNowSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-	/*
-	if (nNowSceneID == nSceneID)
+	
+	if (nNowSceneID == nSceneID
+		&& nNowGroupID == nGrupID)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "in same scene and group but it not a clone scene", nSceneID);
 
 		return false;
 	}
-	*/
+
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (!pSceneInfo)
 	{
 		return false;
 	}
 
-	int nEnterConditionCode = BeforeEnterScene(self, nSceneID, nNowGroupID, nType, argList);
+	NFINT64 nNewGroupID = nGrupID;
+	if (nGrupID < 0)
+	{
+		//call in inner environments
+		nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+	}
+	
+	int nEnterConditionCode = BeforeEnterScene(self, nSceneID, nNewGroupID, nType, argList);
 	if (nEnterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
-		return false;
-	}
-
-	NFINT64 nNewGroupID = nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-	if (nNewGroupID <= 0)
-	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "CreateCloneScene failed", nSceneID);
 		return false;
 	}
 
@@ -105,32 +111,27 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		arg << NFrame::NPC::Z() << pResource->vSeedPos.Z();
 		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nNewGroupID, strClassName, pResource->strConfigID, arg);
+		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nSceneID, strClassName, pResource->strConfigID, arg);
 
 		pResource = pSceneInfo->mtSceneResourceConfig.Next();
 	}
 
 	///////////////////////////////
 
-	if (!m_pKernelModule->SwitchScene(self, nSceneID, nNewGroupID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	if (!m_pKernelModule->SwitchScene(self, nSceneID, nSceneID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
 		return false;
 	}
 
-	int nAfterConditionCode = AfterEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+	int nAfterConditionCode = AfterEnterScene(self, nSceneID, nSceneID, nType, argList);
 	if (nAfterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "After enter scene condition code:", nAfterConditionCode);
 	}
 
 	return true;
-}
-
-bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
-{
-	return false;
 }
 
 bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos)
