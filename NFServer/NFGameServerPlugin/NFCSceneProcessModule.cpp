@@ -133,15 +133,7 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType(const int nSceneID)
 bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 {
     const std::string& strSceneFilePath = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::FilePath());
-    const int nCanClone = m_pElementModule->GetPropertyInt(strSceneIDName, NFrame::Scene::CanClone());
-    
-    NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>> pSceneResourceMap = mtSceneResourceConfig.GetElement(strSceneIDName);
-    if (!pSceneResourceMap)
-    {
-        pSceneResourceMap = NF_SHARE_PTR<NFMapEx<std::string, SceneSeedResource>>(NF_NEW NFMapEx<std::string, SceneSeedResource>());
-        mtSceneResourceConfig.AddElement(strSceneIDName, pSceneResourceMap);
-    }
-
+ 
     rapidxml::file<> xFileSource(strSceneFilePath.c_str());
     rapidxml::xml_document<>  xFileDoc;
     xFileDoc.parse<0>(xFileSource.data());
