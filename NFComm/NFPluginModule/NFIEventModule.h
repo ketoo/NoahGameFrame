@@ -44,15 +44,6 @@ enum NFEventDefine
 	//arg[0]:itemID, fx, fy, fz, TargetObjectList
 	NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS,
 
-	//arg[0]:object,type,sceneID,line
-	NFED_ON_CLIENT_ENTER_SCENE,
-	//arg[0]:object
-	NFED_ON_CLIENT_LEAVE_SCENE,
-
-	//arg[0]:object,type,sceneID,line
-	NFED_ON_OBJECT_ENTER_SCENE_BEFORE,
-	NFED_ON_OBJECT_ENTER_SCENE_RESULT,
-
 	NFED_ON_OBJECT_BE_KILLED,
 
 
