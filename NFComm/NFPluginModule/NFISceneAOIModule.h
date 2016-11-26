@@ -289,7 +289,9 @@ public:
 		AFTER_LEAVE_SCENE_FUNCTOR_PTR functorPtr(new AFTER_LEAVE_SCENE_FUNCTOR(functor));
 		return AddAfterLeaveSceneCallBack(functorPtr);
 	}
+
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList) = 0;
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
 
 protected:
