@@ -919,7 +919,7 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter(const NFIDataList& self, co
 		pEntryInfo->set_y(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Y()));
 		pEntryInfo->set_z(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Z()));
 		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
-		pEntryInfo->set_player_state(m_pKernelModule->GetPropertyInt(identOld, 0));
+		pEntryInfo->set_player_state(0);
 		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));
 		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID()));
 		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName()));
