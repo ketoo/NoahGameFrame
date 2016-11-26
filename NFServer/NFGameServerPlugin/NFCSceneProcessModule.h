@@ -18,6 +18,7 @@
 #include "Dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -28,7 +29,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSceneProcessModule
@@ -52,21 +53,18 @@ public:
     virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
 
 protected:
+	bool LoadSceneResource(const int nSceneID);
+
+protected:
     int CreateCloneScene(const int& nSceneID);
-
     bool CreateSceneObject(const int nSceneID, const int nGroupID);
-
-    bool LoadSceneResource(const int nSceneID);
 
 protected:
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-
-    int OnEnterSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
-    int OnLeaveSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
-
-protected:
-    void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	
+	int BeforeEnterSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int AfterLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
 
 private:
 
@@ -75,7 +73,9 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIEventModule* m_pEventModule;
+	NFISceneAOIModule* m_pSceneAOIModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+
     //////////////////////////////////////////////////////////////////////////
     struct SceneSeedResource
     {
@@ -88,8 +88,6 @@ private:
 
     //SceneID,(SeedID,SeedData)
     NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
-
-    //////////////////////////////////////////////////////////////////////////
 };
 
 #endif
