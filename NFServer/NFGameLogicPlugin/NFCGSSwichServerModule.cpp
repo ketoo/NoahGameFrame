@@ -37,7 +37,8 @@ bool NFCGSSwichServerModule::AfterInit()
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-
+	m_pScenemodule = pPluginManager->FindModule<NFISceneAOIModule>();
+	
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
 	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
 	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCGSSwichServerModule::OnAckSwichServer)) { return false; }
@@ -133,12 +134,8 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 
     m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 
-    NFCDataList varEntry;
-    varEntry << pObject->Self();
-    varEntry << NFINT64(0);
-    varEntry << nSceneID;
-    varEntry << nGroup;
-	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pScenemodule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFCDataList());
+	//m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
     {
