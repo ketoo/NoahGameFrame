@@ -880,6 +880,9 @@ void NFCWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSt
 				reqMsg.set_server_state(serverStatus);
 				reqMsg.set_server_type(nServerType);
 
+				NFMsg::ServerInfoExt pb_ServerInfoExt;
+				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
+
 				std::shared_ptr<ConnectData> pServerData = m_pWorldToMasterModule->GetNetClientModule()->GetServerList().First();
 				if (pServerData)
 				{
