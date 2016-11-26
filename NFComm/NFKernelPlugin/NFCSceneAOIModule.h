@@ -40,6 +40,7 @@ public:
     virtual bool Execute();
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList);
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList& argList);
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos);
 
 protected:

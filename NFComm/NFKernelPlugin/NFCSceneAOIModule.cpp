@@ -128,6 +128,11 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	return true;
 }
 
+bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
+{
+	return false;
+}
+
 bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
