@@ -35,6 +35,7 @@ else()
 			-DTHERON_CPP11
 		)
 endif()
+link_NFSDK("NFNoSqlPlugin")
 set_target_properties( NFNoSqlPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFNoSqlPlugin_d")
 set_target_properties( NFNoSqlPlugin PROPERTIES PREFIX "")
 set_target_properties( NFNoSqlPlugin PROPERTIES
