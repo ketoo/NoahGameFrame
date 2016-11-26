@@ -43,11 +43,14 @@
 class NFIPluginManager;
 
 class NFIPlugin : public NFIModule,
-    public NFMap<std::string, NFIModule>,
-	public NFMemoryCounter<NFIPlugin>
+    public NFMap<std::string, NFIModule>
 {
 
 public:
+	NFIPlugin()
+	{
+		MCB_SetClassName(typeid(NFIPlugin).name());
+	}
 
     virtual const int GetPluginVersion() = 0;
 
