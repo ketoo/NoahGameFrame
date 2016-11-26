@@ -76,7 +76,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneAOIModule->AddRecordEnterCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEnter);
 	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEvent);
 	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEvent);
-
+	m_pSceneAOIModule->AddAfterEnterSceneCallBack(this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
 	/////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
@@ -238,12 +238,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 
 	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 
-	NFCDataList varEntry;
-	varEntry << pObject->Self();
-	varEntry << NFINT64(0);
-	varEntry << nSceneID;
-	varEntry << -1;
-	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, -1, 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -1006,16 +1001,13 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
 		}
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
-	{
-		m_pEventModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
-	}
 
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
+int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList)
 {
+	/*
 	if (var.GetCount() != 7 ||
 		!var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
 			TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_FLOAT,
@@ -1042,7 +1034,7 @@ int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, co
 	xSwapScene.set_z(fZ);
 
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, self);
-
+	*/
 	return 0;
 }
 
@@ -1105,12 +1097,7 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
-		NFCDataList varEntry;
-	varEntry << pObject->Self();
-	varEntry << 0;
-	varEntry << xMsg.scene_id();
-	varEntry << -1;
-	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), - 1, 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
