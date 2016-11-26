@@ -23,6 +23,16 @@
 /*
 if a object in the group of '0', them it can be see by all object in this scene.
 */
+struct SceneSeedResource
+{
+	std::string strSeedID;
+	std::string strConfigID;
+	NFVector3 vSeedPos;
+};
+
+//SceneID,(SeedID,SeedData)
+//NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
+
 class NFCSceneGroupInfo
 {
 public:
@@ -132,11 +142,32 @@ public:
         }
         return true;
     }
-protected:
-private:
+
+	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos)
+	{
+		NF_SHARE_PTR<SceneSeedResource> pInfo = mtSceneResourceConfig.GetElement(strSeedID);
+		if (!pInfo)
+		{
+			pInfo = NF_SHARE_PTR<SceneSeedResource>(new SceneSeedResource());
+			pInfo->strSeedID = strSeedID;
+			pInfo->strConfigID = strConfigID;
+			pInfo->vSeedPos = vPos;
+			return mtSceneResourceConfig.AddElement(strSeedID, pInfo);
+		}
+
+		return true;
+	}
+
+	bool RemoveSeedObject(const std::string& strSeedID)
+	{
+		return true;
+	}
+	
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
+	//seedID, seedInfo
+	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
 };
 
 typedef std::function<int(const NFIDataList&, const NFIDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
@@ -258,7 +289,8 @@ public:
 		AFTER_LEAVE_SCENE_FUNCTOR_PTR functorPtr(new AFTER_LEAVE_SCENE_FUNCTOR(functor));
 		return AddAfterLeaveSceneCallBack(functorPtr);
 	}
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList) = 0;
+	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;

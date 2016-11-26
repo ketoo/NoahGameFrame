@@ -26,6 +26,22 @@ bool NFCSceneAOIModule::AfterInit()
 	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCSceneAOIModule::OnPropertyCommonEvent);
 	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCSceneAOIModule::OnRecordCommonEvent);
 
+	//init all scene
+	NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (pLogicClass)
+	{
+		NFList<std::string>& strIdList = pLogicClass->GetIdList();
+
+		std::string strId;
+		bool bRet = strIdList.First(strId);
+		while (bRet)
+		{
+			int nSceneID = lexical_cast<int>(strId);
+			m_pKernelModule->CreateScene(nSceneID);
+
+			bRet = strIdList.Next(strId);
+		}
+	}
     return true;
 }
 
@@ -44,43 +60,57 @@ bool NFCSceneAOIModule::Execute()
     return true;
 }
 
-bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
 {
 	const int nNowSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-
-	if (nNowSceneID == nSceneID
-		&& nGroupID == nNowGroupID)
+	/*
+	if (nNowSceneID == nSceneID)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "in same scene and group but it not a clone scene", nSceneID);
 
 		return false;
 	}
-
-
-	NFINT64 nNewGroupID = 0;
-	if (nGroupID <= 0)
+	*/
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (!pSceneInfo)
 	{
-		nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
-
-	}
-	else
-	{
-		nNewGroupID = nGroupID;
-	}
-
-	if (nNewGroupID <= 0)
-	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "CreateCloneScene failed", nGroupID);
 		return false;
 	}
 
-	int nEnterConditionCode = BeforeEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+	int nEnterConditionCode = BeforeEnterScene(self, nSceneID, nNowGroupID, nType, argList);
 	if (nEnterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
 		return false;
 	}
+
+	NFINT64 nNewGroupID = nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+	if (nNewGroupID <= 0)
+	{
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "CreateCloneScene failed", nSceneID);
+		return false;
+	}
+
+	////////////////////////////////////
+
+	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
+	while (pResource)
+	{
+		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::NPC::ClassName());
+
+		NFCDataList arg;
+		arg << NFrame::NPC::X() << pResource->vSeedPos.X();
+		arg << NFrame::NPC::Y() << pResource->vSeedPos.Y();
+		arg << NFrame::NPC::Z() << pResource->vSeedPos.Z();
+		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+
+		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nNewGroupID, strClassName, pResource->strConfigID, arg);
+
+		pResource = pSceneInfo->mtSceneResourceConfig.Next();
+	}
+
+	///////////////////////////////
 
 	if (!m_pKernelModule->SwitchScene(self, nSceneID, nNewGroupID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
@@ -96,6 +126,17 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	}
 
 	return true;
+}
+
+bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->AddSeedObjectInfo(strSeedID, strConfigID, vPos);
+	}
+
+	return false;
 }
 
 bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
@@ -156,6 +197,11 @@ bool NFCSceneAOIModule::AddAfterLeaveSceneCallBack(const AFTER_LEAVE_SCENE_FUNCT
 {
 	mtAfterLeaveSceneCallback.push_back(cb);
 	return true;
+}
+
+bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID)
+{
+	return false;
 }
 
 int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
@@ -321,7 +367,11 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 			OnObjectListLeave(NFCDataList() << self, valueAllOldObjectList);
 		}
 
-		AfterLeaveScene(self, nSceneID, nOldGroupID, 0, NFCDataList());
+		int nReason = AfterLeaveScene(self, nSceneID, nOldGroupID, 0, NFCDataList());
+		if (nReason == 0)
+		{
+			m_pKernelModule->ReleaseGroupScene(nSceneID, nOldGroupID);
+		}
 	}
 
 	int nNewGroupID = newVar.GetInt();
