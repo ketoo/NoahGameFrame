@@ -71,19 +71,6 @@ private:
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-
-    //////////////////////////////////////////////////////////////////////////
-    struct SceneSeedResource
-    {
-        std::string strSeedID;
-        std::string strConfigID;
-        float fSeedX;
-        float fSeedY;
-        float fSeedZ;
-    };
-
-    //SceneID,(SeedID,SeedData)
-    NFMapEx<std::string, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 };
 
 #endif
