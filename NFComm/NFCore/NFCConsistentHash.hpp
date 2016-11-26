@@ -60,6 +60,7 @@ class NFCVirtualNode : public NFIVirtualNode
 public:
 	NFCVirtualNode(const T tData, const int nVirID ) : NFIVirtualNode(nVirID)
 	{
+		mxData = tData;
 	}
 	NFCVirtualNode()
 	{
@@ -98,19 +99,19 @@ public:
 
 	virtual void ClearAll() = 0;
 	virtual void Insert(const T& name) = 0;
-	virtual void Insert(const NFIVirtualNode& xNode) = 0;
+	virtual void Insert(const NFCVirtualNode<T>& xNode) = 0;
 
-	virtual bool Exist(const NFIVirtualNode& xInNode) = 0;
+	virtual bool Exist(const NFCVirtualNode<T>& xInNode) = 0;
 	virtual void Erase(const T& name) = 0;
-	virtual std::size_t Erase(const NFIVirtualNode& xNode)  = 0;
+	virtual std::size_t Erase(const NFCVirtualNode<T>& xNode)  = 0;
 
-	virtual bool GetSuitNodeRandom(NFIVirtualNode& node) = 0;
-	virtual bool GetSuitNodeConsistent(NFIVirtualNode& node) = 0;
-	virtual bool GetSuitNode(const T& name, NFIVirtualNode& node) = 0;
-	//virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node) = 0;
-	virtual bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node) = 0;
+	virtual bool GetSuitNodeRandom(NFCVirtualNode<T>& node) = 0;
+	virtual bool GetSuitNodeConsistent(NFCVirtualNode<T>& node) = 0;
+	virtual bool GetSuitNode(const T& name, NFCVirtualNode<T>& node) = 0;
+	//virtual bool GetSuitNode(const std::string& str, NFCVirtualNode<T>& node) = 0;
+	virtual bool GetSuitNode(uint32_t hashValue, NFCVirtualNode<T>& node) = 0;
 
-	virtual bool GetNodeList(std::list<NFIVirtualNode>& nodeList) = 0;
+	virtual bool GetNodeList(std::list<NFCVirtualNode<T>>& nodeList) = 0;
 };
 
 template <typename T>
@@ -153,20 +154,20 @@ public:
 		}
 	}
 
-	virtual void Insert(const NFIVirtualNode& xNode)
+	virtual void Insert(const NFCVirtualNode<T>& xNode)
     {
         uint32_t hash = m_pHasher->GetHashValue(xNode);
         auto it = mxNodes.find(hash);
         if (it == mxNodes.end())
         {
-            mxNodes.insert(std::map<uint32_t, NFIVirtualNode>::value_type(hash, xNode));
+            mxNodes.insert(std::map<uint32_t, NFCVirtualNode<T>>::value_type(hash, xNode));
         }
     }
 
-	virtual bool Exist(const NFIVirtualNode& xInNode)
+	virtual bool Exist(const NFCVirtualNode<T>& xInNode)
 	{
 		uint32_t hash = m_pHasher->GetHashValue(xInNode);
-		std::map<uint32_t, NFIVirtualNode>::iterator it = mxNodes.find(hash);
+		std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.find(hash);
 		if (it != mxNodes.end())
 		{
 			return true;
@@ -184,44 +185,44 @@ public:
 		}
 	}
 
-	virtual std::size_t Erase(const NFIVirtualNode& xNode)
+	virtual std::size_t Erase(const NFCVirtualNode<T>& xNode)
     {
         uint32_t hash = m_pHasher->GetHashValue(xNode);
         return mxNodes.erase(hash);
     }
 
-	virtual bool GetSuitNodeRandom(NFIVirtualNode& node)
+	virtual bool GetSuitNodeRandom(NFCVirtualNode<T>& node)
 	{
 		int nID = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		return GetSuitNode(nID, node);
 	}
 
-	virtual bool GetSuitNodeConsistent(NFIVirtualNode& node)
+	virtual bool GetSuitNodeConsistent(NFCVirtualNode<T>& node)
 	{
 		return GetSuitNode(0, node);
 	}
 
-	virtual bool GetSuitNode(const T& name, NFIVirtualNode& node)
+	virtual bool GetSuitNode(const T& name, NFCVirtualNode<T>& node)
 	{
 		std::string str = lexical_cast<std::string>(name);
 		uint32_t nCRC32 = NFrame::CRC32(str);
 		return GetSuitNode(nCRC32, node);
 	}
 	/*
-	virtual bool GetSuitNode(const std::string& str, NFIVirtualNode& node)
+	virtual bool GetSuitNode(const std::string& str, NFCVirtualNode<T>& node)
 	{
 		uint32_t nCRC32 = NFrame::CRC32(str);
         return GetSuitNode(nCRC32, node);
 	}
 	*/
-	virtual bool GetSuitNode(uint32_t hashValue, NFIVirtualNode& node)
+	virtual bool GetSuitNode(uint32_t hashValue, NFCVirtualNode<T>& node)
 	{
 		if(mxNodes.empty())
 		{
 			return false;
 		}
 
-		std::map<uint32_t, NFIVirtualNode>::iterator it = mxNodes.lower_bound(hashValue);
+		std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.lower_bound(hashValue);
 
 		if (it == mxNodes.end())
 		{
@@ -233,9 +234,9 @@ public:
 		return true;
 	}
 
-	virtual bool GetNodeList(std::list<NFIVirtualNode>& nodeList)
+	virtual bool GetNodeList(std::list<NFCVirtualNode<T>>& nodeList)
 	{
-		for (std::map<uint32_t, NFIVirtualNode>::iterator it = mxNodes.begin(); it != mxNodes.end(); ++it)
+		for (std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.begin(); it != mxNodes.end(); ++it)
 		{
 			nodeList.push_back(it->second);
 		}
@@ -245,7 +246,7 @@ public:
 
 private:
 	int mnNodeCount = 500;
-	std::map<uint32_t, NFIVirtualNode> mxNodes;
+	std::map<uint32_t, NFCVirtualNode<T>> mxNodes;
     NFIHasher* m_pHasher;
 };
 

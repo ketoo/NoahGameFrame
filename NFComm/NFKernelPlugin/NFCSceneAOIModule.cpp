@@ -435,7 +435,7 @@ int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string
 		{
 			m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, NFrame::Player::ThisName(), self, valueObject);
 		}
-		else if (pProperty->GetPrivate() && !pRecord->GetUpload())
+		else if (pProperty->GetPrivate() && !pProperty->GetUpload())
 		{
 			//upload property can not board to itself
 			valueObject.Add(self);
