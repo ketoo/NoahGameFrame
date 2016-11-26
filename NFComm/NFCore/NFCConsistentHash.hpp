@@ -160,14 +160,14 @@ public:
         auto it = mxNodes.find(hash);
         if (it == mxNodes.end())
         {
-            mxNodes.insert(std::map<uint32_t, NFCVirtualNode<T>>::value_type(hash, xNode));
+            mxNodes.insert(typename std::map<uint32_t, NFCVirtualNode<T>>::value_type(hash, xNode));
         }
     }
 
 	virtual bool Exist(const NFCVirtualNode<T>& xInNode)
 	{
 		uint32_t hash = m_pHasher->GetHashValue(xInNode);
-		std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.find(hash);
+		typename std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.find(hash);
 		if (it != mxNodes.end())
 		{
 			return true;
@@ -222,7 +222,7 @@ public:
 			return false;
 		}
 
-		std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.lower_bound(hashValue);
+		typename std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.lower_bound(hashValue);
 
 		if (it == mxNodes.end())
 		{
@@ -236,7 +236,7 @@ public:
 
 	virtual bool GetNodeList(std::list<NFCVirtualNode<T>>& nodeList)
 	{
-		for (std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.begin(); it != mxNodes.end(); ++it)
+		for (typename std::map<uint32_t, NFCVirtualNode<T>>::iterator it = mxNodes.begin(); it != mxNodes.end(); ++it)
 		{
 			nodeList.push_back(it->second);
 		}
@@ -246,7 +246,7 @@ public:
 
 private:
 	int mnNodeCount = 500;
-	std::map<uint32_t, NFCVirtualNode<T>> mxNodes;
+	typename std::map<uint32_t, NFCVirtualNode<T>> mxNodes;
     NFIHasher* m_pHasher;
 };
 
