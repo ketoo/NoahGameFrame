@@ -1,3 +1,3 @@
 cd ../Debug/
 
-start NFPluginLoader_d Server=LoginServer ID=4
+start NFPluginLoader_d PluginX.xml Server=LoginServer ID=4

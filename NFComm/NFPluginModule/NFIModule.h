@@ -37,12 +37,13 @@ public:
 
 class NFIPluginManager;
 
-class NFIModule : public NFMemoryCounter<NFIModule>
+class NFIModule : public NFMemoryCounter
 {
 
 public:
     NFIModule()
     {
+		MCB_SetClassName(typeid(NFIModule).name());
         mbReloading = false;
     }
 
