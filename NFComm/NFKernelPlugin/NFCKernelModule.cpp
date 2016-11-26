@@ -894,8 +894,8 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
     NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
     if (pObject)
     {
-        NFINT64 nOldSceneID = pObject->GetPropertyInt("SceneID");
-        NFINT64 nOldGroupID = pObject->GetPropertyInt("GroupID");
+        NFINT64 nOldSceneID = pObject->GetPropertyInt(NFrame::Scene::SceneID());
+        NFINT64 nOldGroupID = pObject->GetPropertyInt(NFrame::Scene::GroupID());
 
         NF_SHARE_PTR<NFCSceneInfo> pOldSceneInfo = m_pSceneModule->GetElement(nOldSceneID);
         NF_SHARE_PTR<NFCSceneInfo> pNewSceneInfo = m_pSceneModule->GetElement(nTargetSceneID);
@@ -922,19 +922,16 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
         
         if (nTargetSceneID != nOldSceneID)
         {
-            
-            
-            pObject->SetPropertyInt("GroupID", 0);
+            pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
 
-            pObject->SetPropertyInt("SceneID", nTargetSceneID);
-            
+            pObject->SetPropertyInt(NFrame::Scene::SceneID(), nTargetSceneID);
         }
 
         pObject->SetPropertyFloat("X", fX);
         pObject->SetPropertyFloat("Y", fY);
         pObject->SetPropertyFloat("Z", fZ);
 
-        pObject->SetPropertyInt("GroupID", nTargetGroupID);
+        pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
 
         pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
 
@@ -980,12 +977,10 @@ bool NFCKernelModule::CreateScene(const int nSceneID)
         return false;
     }
 
-    
     pSceneInfo = NF_SHARE_PTR<NFCSceneInfo>(NF_NEW NFCSceneInfo(nSceneID));
     if (pSceneInfo)
     {
         m_pSceneModule->AddElement(nSceneID, pSceneInfo);
-
         
         NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = NF_SHARE_PTR<NFCSceneGroupInfo>(NF_NEW NFCSceneGroupInfo(nSceneID, 0));
         if (NULL != pGroupInfo)
