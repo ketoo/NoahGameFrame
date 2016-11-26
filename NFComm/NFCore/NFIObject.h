@@ -17,16 +17,16 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class _NFExport NFIObject :public NFMemoryCounter<NFIObject>
+class _NFExport NFIObject :public NFMemoryCounter
 {
 public:
 	NFIObject()
 	{
-
+		MCB_SetClassName(typeid(NFIObject).name());
 	}
     NFIObject(NFGUID self)
     {
-
+		MCB_SetClassName(typeid(NFIObject).name());
     }
     virtual ~NFIObject() {}
 

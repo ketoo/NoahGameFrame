@@ -9,7 +9,7 @@ file(GLOB NFPluginLoader_ROOT_Hpp *.h)
 #list(REMOVE_ITEM NFPluginLoader_ROOT_Hpp ${RemoveItems_Hpp})
 
 add_executable(NFPluginLoader ${NFPluginLoader_ROOT_Cpp} ${NFPluginLoader_ROOT_Hpp})
-
+link_NFSDK("NFPluginLoader")
 if(UNIX)
 	add_dependencies(NFPluginLoader NFCore)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
