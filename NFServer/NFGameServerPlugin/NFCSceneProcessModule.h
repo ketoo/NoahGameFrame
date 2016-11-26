@@ -48,22 +48,18 @@ public:
     virtual bool AfterInit();
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
-    virtual bool IsCloneScene(const int nSceneID);
-    virtual bool ApplyCloneGroup(const int nSceneID, int& nGroupID);
-    virtual bool ExitCloneGroup(const int nSceneID, const int& nGroupID);
 
 protected:
-	bool LoadSceneResource(const int nSceneID);
-
-protected:
-    int CreateCloneScene(const int& nSceneID);
-    bool CreateSceneObject(const int nSceneID, const int nGroupID);
+	bool LoadSceneResource(const std::string& strSceneIDName);
 
 protected:
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 	
 	int BeforeEnterSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int AfterEnterSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+
+	int BeforeLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
 	int AfterLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
 
 private:
@@ -87,7 +83,7 @@ private:
     };
 
     //SceneID,(SeedID,SeedData)
-    NFMapEx<int, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
+    NFMapEx<std::string, NFMapEx<std::string, SceneSeedResource>> mtSceneResourceConfig;
 };
 
 #endif
