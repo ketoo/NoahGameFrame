@@ -1,3 +1,10 @@
+// -------------------------------------------------------------------------
+//    @FileName         :    NFCMemManger.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-03-01
+//    @Module           :    NFCMemManger
+//
+// -------------------------------------------------------------------------
 #ifndef NFC_NFCMEMMANGER_H
 #define NFC_NFCMEMMANGER_H
 
