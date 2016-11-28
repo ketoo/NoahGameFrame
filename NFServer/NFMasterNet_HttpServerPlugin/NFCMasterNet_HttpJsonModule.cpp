@@ -1,6 +1,7 @@
 #include "NFCMasterNet_HttpJsonModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-#ifdef WIN32
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
