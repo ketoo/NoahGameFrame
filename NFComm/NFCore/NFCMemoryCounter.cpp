@@ -8,30 +8,15 @@
 
 #include "NFMemoryCounter.h"
 
-NFMemoryCounter::NFMemoryCounter()
-{
+std::map<std::string, int> NFMemoryCounter::mxCounter;
 
-}
-
-void NFMemoryCounter::MCB_SetClassName(std::string className)
+NFMemoryCounter::NFMemoryCounter(const std::string& strClassName)
 {
-	mClassName = className;
-	mnCounter[className]++;
-}
-
-int NFMemoryCounter::MCB_GetCount()
-{
-	return mnCounter[mClassName];
-}
-
-int NFMemoryCounter::MCB_GetCount(std::string className)
-{
-	return mnCounter[className];
+	mstrClassName = strClassName;
+	mxCounter[mstrClassName]++;
 }
 
 NFMemoryCounter::~NFMemoryCounter()
 {
-	mnCounter[mClassName]--;
+	mxCounter[mstrClassName]--;
 }
-
-std::map<std::string, int> NFMemoryCounter::mnCounter;
