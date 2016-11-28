@@ -45,9 +45,8 @@ typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
 class _NFExport NFIRecord :public NFMemoryCounter
 {
 public:
-    NFIRecord()
+    NFIRecord() : NFMemoryCounter(GET_CLASS_NAME(NFIRecord))
 	{
-		MCB_SetClassName(typeid(NFIRecord).name());
 	}
 
     typedef std::vector< NF_SHARE_PTR<NFIDataList::TData> > TRECORDVEC;
