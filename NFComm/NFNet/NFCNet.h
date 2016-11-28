@@ -14,7 +14,7 @@
 #pragma pack(push, 1)
 
 
-class NFCNet : public NFINet
+class _NFExport NFCNet : public NFINet
 {
 public:
     NFCNet()
