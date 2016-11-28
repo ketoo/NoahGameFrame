@@ -22,7 +22,7 @@ public:
 	NFMemoryCounter(const std::string& strClassName);
 	virtual ~NFMemoryCounter();
 
-	const std::map<std::string, int>& GetCounter();
+	static const std::map<std::string, int>& GetCounter();
 private:
 	std::string mstrClassName;
 	static std::map<std::string, int> mxCounter;
