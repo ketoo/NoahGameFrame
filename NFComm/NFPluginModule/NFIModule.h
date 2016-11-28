@@ -37,11 +37,11 @@ public:
 
 class NFIPluginManager;
 
-class NFIModule : public NFCMemoryCounter
+class NFIModule
 {
 
 public:
-    NFIModule() : NFCMemoryCounter(GET_CLASS_NAME(NFIModule))
+    NFIModule()
     {
         mbReloading = false;
     }
