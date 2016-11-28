@@ -20,3 +20,8 @@ NFMemoryCounter::~NFMemoryCounter()
 {
 	mxCounter[mstrClassName]--;
 }
+
+const std::map<std::string, int>& NFMemoryCounter::GetCounter()
+{
+	return mxCounter;
+}
