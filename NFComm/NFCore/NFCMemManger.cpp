@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName         :    NFCMemManger.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-03-01
+//    @Module           :    NFCMemManger
+//
+// -------------------------------------------------------------------------
+
 #include "NFCMemManger.h"
 
 #ifdef NF_USE_TCMALLOC

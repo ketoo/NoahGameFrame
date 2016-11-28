@@ -49,7 +49,6 @@ class NFIPlugin : public NFIModule,
 public:
 	NFIPlugin()
 	{
-		MCB_SetClassName(typeid(NFIPlugin).name());
 	}
 
     virtual const int GetPluginVersion() = 0;
