@@ -99,6 +99,7 @@
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCMemManger.h" />
+    <ClInclude Include="NFCMemoryCounter.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -108,7 +109,6 @@
     <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
-    <ClInclude Include="NFMemoryCounter.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
@@ -128,6 +128,7 @@
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCMemManger.cpp" />
+    <ClCompile Include="NFCMemoryCounter.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

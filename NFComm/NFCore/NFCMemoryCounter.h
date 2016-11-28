@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_COUNTER_MEMORY_BASE_HPP
-#define NF_COUNTER_MEMORY_BASE_HPP
+#ifndef NF_MEMORY_COUNTER_H
+#define NF_MEMORY_COUNTER_H
 
 #include <iostream>
 #include <string>
@@ -16,14 +16,14 @@
 
 class _NFExport NFMemoryCounter
 {
-public:
-	NFMemoryCounter();
-	void MCB_SetClassName(std::string className);
-	int MCB_GetCount();
-	int MCB_GetCount(std::string className);
-	virtual ~NFMemoryCounter();
 private:
-	std::string mClassName = "Default";
-	static std::map<std::string, int> mnCounter;
+	NFMemoryCounter() {}
+public:
+	NFMemoryCounter(const std::string& strClassName);
+	virtual ~NFMemoryCounter();
+
+private:
+	std::string mstrClassName;
+	static std::map<std::string, int> mxCounter;
 };
 #endif
