@@ -4,9 +4,8 @@ file(GLOB NFNet_ROOT_Hpp *.h)
 file(GLOB RemoveItems_Cpp TestClient.cpp TestServer.cpp)
 list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
 
-add_library(NFNet
-	${NFNet_ROOT_Cpp}
-	${NFNet_ROOT_Hpp})
+add_library(NFNet SHARED ${NFNet_ROOT_Cpp} ${NFNet_ROOT_Hpp})
+add_definitions(-DNF_NONCLIENT_BUILD)
 set_target_properties( NFNet PROPERTIES OUTPUT_NAME_DEBUG "NFNet_d")
 set_target_properties( NFNet PROPERTIES PREFIX "")
 set_target_properties( NFNet PROPERTIES
