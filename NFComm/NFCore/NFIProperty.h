@@ -18,9 +18,8 @@ typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 class _NFExport NFIProperty :public NFMemoryCounter
 {
 public:
-	NFIProperty()
+	NFIProperty() : NFMemoryCounter(GET_CLASS_NAME(NFIProperty))
 	{
-		MCB_SetClassName(typeid(NFIProperty).name());
 	}
 
 	virtual ~NFIProperty() {}

@@ -16,6 +16,7 @@ NFCDataList::NFCDataList()
 }
 
 NFCDataList::NFCDataList(const std::string& str, const std::string& strSplit)
+	: NFIDataList()
 {
     Clear();
 
@@ -23,6 +24,7 @@ NFCDataList::NFCDataList(const std::string& str, const std::string& strSplit)
 }
 
 NFCDataList::NFCDataList(const NFCDataList& src)
+	: NFIDataList()
 {
     Clear();
 
@@ -30,6 +32,7 @@ NFCDataList::NFCDataList(const NFCDataList& src)
 }
 
 NFCDataList::NFCDataList(const NFIDataList& src)
+	: NFIDataList()
 {
     Clear();
 

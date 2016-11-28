@@ -400,9 +400,8 @@ public:
         mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
     };
 
-    NFIDataList()
+    NFIDataList() : NFMemoryCounter(GET_CLASS_NAME(NFIDataList))
     {
-		MCB_SetClassName(typeid(NFIDataList).name());
         mnUseSize = 0;
         mvList.reserve(STACK_SIZE);
         for (int i = 0; i < STACK_SIZE; ++i)
