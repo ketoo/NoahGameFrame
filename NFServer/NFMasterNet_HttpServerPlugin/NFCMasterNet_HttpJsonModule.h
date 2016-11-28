@@ -26,6 +26,7 @@ public:
 
 protected:
 	void OnCommandQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl);
+	void OnCommonQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl);
 
 private:
 	NFIKernelModule* m_pKernelModule;
