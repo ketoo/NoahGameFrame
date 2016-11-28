@@ -101,7 +101,7 @@
     <ClInclude Include="NFSpaceNode.hpp">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="NFCMemoryCounter.h">
+    <ClInclude Include="NFMemoryCounter.h">
       <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
@@ -133,7 +133,7 @@
     <ClCompile Include="NFCMemManger.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
-    <ClCompile Include="NFCMemoryCounter.cpp">
+    <ClCompile Include="NFMemoryCounter.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
   </ItemGroup>
