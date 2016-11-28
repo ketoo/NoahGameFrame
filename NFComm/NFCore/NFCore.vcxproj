@@ -99,7 +99,6 @@
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
     <ClInclude Include="NFCMemManger.h" />
-    <ClInclude Include="NFCMemoryCounter.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -109,6 +108,7 @@
     <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
+    <ClInclude Include="NFMemoryCounter.h" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
@@ -128,12 +128,12 @@
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCMemManger.cpp" />
-    <ClCompile Include="NFCMemoryCounter.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
+    <ClCompile Include="NFMemoryCounter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
