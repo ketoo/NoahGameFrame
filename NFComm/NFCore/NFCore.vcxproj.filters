@@ -98,11 +98,11 @@
     <ClInclude Include="NFCDataList.h">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFMemoryCounter.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFSpaceNode.hpp">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMemoryCounter.h">
+      <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +131,9 @@
       <Filter>Unit</Filter>
     </ClCompile>
     <ClCompile Include="NFCMemManger.cpp">
+      <Filter>Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCMemoryCounter.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
   </ItemGroup>

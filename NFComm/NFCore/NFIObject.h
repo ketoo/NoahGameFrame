@@ -19,16 +19,19 @@
 
 class _NFExport NFIObject :public NFMemoryCounter
 {
-public:
-	NFIObject()
+private:
+	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
 	{
-		MCB_SetClassName(typeid(NFIObject).name());
 	}
-    NFIObject(NFGUID self)
+
+public:
+    NFIObject(NFGUID self) : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
     {
-		MCB_SetClassName(typeid(NFIObject).name());
     }
-    virtual ~NFIObject() {}
+
+    virtual ~NFIObject()
+	{
+	}
 
     virtual bool Execute() = 0;
 
