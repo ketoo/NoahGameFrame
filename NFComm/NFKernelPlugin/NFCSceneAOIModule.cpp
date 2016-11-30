@@ -111,21 +111,21 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		arg << NFrame::NPC::Z() << pResource->vSeedPos.Z();
 		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nSceneID, strClassName, pResource->strConfigID, arg);
+		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nNewGroupID, strClassName, pResource->strConfigID, arg);
 
 		pResource = pSceneInfo->mtSceneResourceConfig.Next();
 	}
 
 	///////////////////////////////
 
-	if (!m_pKernelModule->SwitchScene(self, nSceneID, nSceneID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	if (!m_pKernelModule->SwitchScene(self, nSceneID, nNewGroupID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
 		return false;
 	}
 
-	int nAfterConditionCode = AfterEnterScene(self, nSceneID, nSceneID, nType, argList);
+	int nAfterConditionCode = AfterEnterScene(self, nSceneID, nNewGroupID, nType, argList);
 	if (nAfterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "After enter scene condition code:", nAfterConditionCode);
