@@ -29,17 +29,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="libNFMessageDefine_d" />
-					<Add library="$(SolutionDir)/_Out/Server/Debug/NFNet_d.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
-					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -65,37 +57,29 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="libNFMessageDefine" />
-					<Add library="$(SolutionDir)/_Out/Server/Release/NFNet.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
-					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCGameServerModule.h" />
-<Unit filename="NFCLevelModule.h" />
-<Unit filename="NFCPropertyConfigModule.h" />
-<Unit filename="NFCPropertyModule.h" />
-<Unit filename="NFCPropertyTrailModule.h" />
-<Unit filename="NFCSceneProcessModule.h" />
-<Unit filename="NFGameServerPlugin.h" />
-<Unit filename="dllmain.cpp"/>
-<Unit filename="NFCGameServerModule.cpp" />
-<Unit filename="NFCLevelModule.cpp" />
-<Unit filename="NFCPropertyConfigModule.cpp" />
-<Unit filename="NFCPropertyModule.cpp" />
-<Unit filename="NFCPropertyTrailModule.cpp" />
-<Unit filename="NFCSceneProcessModule.cpp" />
-<Unit filename="NFGameServerPlugin.cpp" />
+		<Unit filename="NFCGameServerModule.cpp" />
+		<Unit filename="NFCGameServerModule.h" />
+		<Unit filename="NFCLevelModule.cpp" />
+		<Unit filename="NFCLevelModule.h" />
+		<Unit filename="NFCPropertyConfigModule.cpp" />
+		<Unit filename="NFCPropertyConfigModule.h" />
+		<Unit filename="NFCPropertyModule.cpp" />
+		<Unit filename="NFCPropertyModule.h" />
+		<Unit filename="NFCPropertyTrailModule.cpp" />
+		<Unit filename="NFCPropertyTrailModule.h" />
+		<Unit filename="NFCSceneProcessModule.cpp" />
+		<Unit filename="NFCSceneProcessModule.h" />
+		<Unit filename="NFGameServerPlugin.cpp" />
+		<Unit filename="NFGameServerPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

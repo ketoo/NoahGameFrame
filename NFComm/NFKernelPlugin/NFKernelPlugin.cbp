@@ -24,13 +24,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Server/Debug/NFCore_d.a" />
 					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-						<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -52,29 +48,25 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Server/Release/NFCore.a" />
 					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-						<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCEventModule.h" />
-<Unit filename="NFCKernelModule.h" />
-<Unit filename="NFCScheduleModule.h" />
-<Unit filename="NFCSceneModule.h" />
-<Unit filename="NFKernelPlugin.h" />
-<Unit filename="dllmain.cpp"/>
-<Unit filename="NFCEventModule.cpp" />
-<Unit filename="NFCKernelModule.cpp" />
-<Unit filename="NFCSceneModule.cpp" />
-<Unit filename="NFCScheduleModule.cpp" />
-<Unit filename="NFKernelPlugin.cpp" />
+		<Unit filename="NFCEventModule.cpp" />
+		<Unit filename="NFCEventModule.h" />
+		<Unit filename="NFCKernelModule.cpp" />
+		<Unit filename="NFCKernelModule.h" />
+		<Unit filename="NFCSceneAOIModule.cpp" />
+		<Unit filename="NFCSceneAOIModule.h" />
+		<Unit filename="NFCScheduleModule.cpp" />
+		<Unit filename="NFCScheduleModule.h" />
+		<Unit filename="NFKernelPlugin.cpp" />
+		<Unit filename="NFKernelPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
