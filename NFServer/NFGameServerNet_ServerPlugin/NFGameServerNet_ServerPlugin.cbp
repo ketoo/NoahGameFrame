@@ -29,17 +29,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="libNFMessageDefine_d" />
-					<Add library="$(SolutionDir)/_Out/Server/Debug/NFNet_d.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libevent_core.a" />
-					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -65,27 +57,19 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="libNFMessageDefine" />
-					<Add library="$(SolutionDir)/_Out/Server/Release/NFNet.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent.a" />
-					<Add library="$(SolutionDir)/Dependencies/lib/Release/libevent_core.a" />
-					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCGameServerNet_ServerModule.h" />
-<Unit filename="NFGameServerNet_ServerPlugin.h" />
-<Unit filename="dllmain.cpp"/>
-<Unit filename="NFCGameServerNet_ServerModule.cpp" />
-<Unit filename="NFGameServerNet_ServerPlugin.cpp" />
+		<Unit filename="NFCGameServerNet_ServerModule.cpp" />
+		<Unit filename="NFCGameServerNet_ServerModule.h" />
+		<Unit filename="NFGameServerNet_ServerPlugin.cpp" />
+		<Unit filename="NFGameServerNet_ServerPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
