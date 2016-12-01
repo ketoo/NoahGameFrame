@@ -8,11 +8,12 @@
 		<Build>
 			<Target title="Debug x64">
 				<Option output="$(SolutionDir)/_Out/Server/Debug/NFNet_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
+				<Option working_dir="$(SolutionDir)/_Out/Server/Debug" />
 				<Option object_output=".objs/Debug" />
-				<Option type="2" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -30,9 +31,9 @@
 			</Target>
 			<Target title="Release x64">
 				<Option output="$(SolutionDir)/_Out/Server/Release/NFNet" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
+				<Option working_dir="$(SolutionDir)/_Out/Server/Release" />
 				<Option object_output=".objs/Release" />
-				<Option type="2" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
@@ -51,8 +52,11 @@
 			</Target>
 		</Build>
 <Unit filename="NFCNet.cpp" />
+<Unit filename="NFCHttpNet.cpp" />
 <Unit filename="NFCNet.h" />
+<Unit filename="NFIHttpNet.h" />
 <Unit filename="NFINet.h" />
+<Unit filename="NFCHttpNet.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -28,14 +28,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Server/Debug/NFCore_d.a" />
 					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Server/Debug/Tutorial2_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -45,7 +40,6 @@
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
@@ -63,10 +57,6 @@
 					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Server/Release/Tutorial2.so $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Mode after="always" />
-				</ExtraCommands>
 			</Target>
 		</Build>
 		<Unit filename="HelloWorld2.cpp" />
