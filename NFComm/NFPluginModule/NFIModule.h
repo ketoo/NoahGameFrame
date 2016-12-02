@@ -114,13 +114,11 @@ public:
     {
         return mbReloading;
     }
-public:
-    std::string strName;
 
+    std::string strName;
 
 protected:
 	NFIPluginManager* pPluginManager = NULL;
-
 
 private:
 
