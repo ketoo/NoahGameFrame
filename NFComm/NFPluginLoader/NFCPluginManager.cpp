@@ -274,6 +274,16 @@ void NFCPluginManager::SetAppName(const std::string& strAppName)
 	mstrAppName = strAppName;
 }
 
+const std::string & NFCPluginManager::GetLogConfigName() const
+{
+	return mstrLogConfigName;
+}
+
+void NFCPluginManager::SetLogConfigName(const std::string & strName)
+{
+	mstrLogConfigName = strName;
+}
+
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
 {
     if (!FindModule(strModuleName))
