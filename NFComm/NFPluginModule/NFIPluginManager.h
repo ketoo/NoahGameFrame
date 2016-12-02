@@ -67,6 +67,9 @@ public:
 
 	virtual const std::string& GetAppName() const = 0;
 	virtual void SetAppName(const std::string& strAppName) = 0;
+
+	virtual const std::string& GetLogConfigName() const = 0;
+	virtual void SetLogConfigName(const std::string& strName) = 0;
 };
 
 #endif
