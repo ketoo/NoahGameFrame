@@ -72,6 +72,11 @@ public:
 	virtual const std::string& GetAppName() const;
 
 	virtual void SetAppName(const std::string& strAppName);
+
+	virtual const std::string& GetLogConfigName() const;
+
+	virtual void SetLogConfigName(const std::string& strName);
+
 protected:
 	bool LoadPluginConfig();
 
@@ -87,6 +92,7 @@ private:
     std::string mstrConfigPath;
 	std::string mstrConfigName;
 	std::string mstrAppName;
+	std::string mstrLogConfigName;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;
