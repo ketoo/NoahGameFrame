@@ -68,7 +68,7 @@
 /_Out/Server/NFDataCfg/Proto/
 #/_Out/Server/Release/
 
-/_Out/Server/Debug/*
+#/_Out/Server/Debug/*
 /Dependencies/libevent
 /Dependencies/curl
 /.vs/
