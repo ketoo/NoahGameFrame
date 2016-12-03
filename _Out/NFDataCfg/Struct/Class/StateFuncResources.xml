@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Atlas_ResID" Type="string" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>
