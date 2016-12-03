@@ -25,6 +25,9 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
 				</Compiler>
+				<Linker>
+					<Add library="../../Dependencies/lib/libevent.a" />
+				</Linker>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -51,12 +54,12 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCNet.cpp" />
-<Unit filename="NFCHttpNet.cpp" />
-<Unit filename="NFCNet.h" />
-<Unit filename="NFIHttpNet.h" />
-<Unit filename="NFINet.h" />
-<Unit filename="NFCHttpNet.h" />
+		<Unit filename="NFCHttpNet.cpp" />
+		<Unit filename="NFCHttpNet.h" />
+		<Unit filename="NFCNet.cpp" />
+		<Unit filename="NFCNet.h" />
+		<Unit filename="NFIHttpNet.h" />
+		<Unit filename="NFINet.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

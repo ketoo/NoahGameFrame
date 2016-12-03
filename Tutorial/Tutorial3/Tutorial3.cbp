@@ -28,6 +28,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
@@ -44,8 +45,8 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-D_USRDLL" />
 					<Add option="-fPIC" />
+					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
@@ -55,6 +56,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>

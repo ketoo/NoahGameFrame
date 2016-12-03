@@ -25,12 +25,10 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-							<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -53,22 +51,20 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-							<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCLogModule.cpp" />
-<Unit filename="dllmain.cpp" />
-<Unit filename="NFLogPlugin.cpp" />
-<Unit filename="NFCLogModule.h" />
-<Unit filename="NFLogPlugin.h" />
+		<Unit filename="NFCLogModule.cpp" />
+		<Unit filename="NFCLogModule.h" />
+		<Unit filename="NFLogPlugin.cpp" />
+		<Unit filename="NFLogPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
