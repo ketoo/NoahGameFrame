@@ -1,2 +1,2 @@
 NFFileProcess.exe %1
-copy ..\\proto\\NFProtocolDefine.hpp ..\\..\\..\\..\\NFComm\\NFMessageDefine\\ /Y
+copy ..\\proto\\NFProtocolDefine.hpp ..\\..\\..\\NFComm\\NFMessageDefine\\ /Y
