@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="GuildID" Type="object" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc=""/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

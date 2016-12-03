@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="MaxCount" Type="int" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="最大入驻公会"/>
+        <Property Id="InComeGold" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="收益金币/小时"/>
+        <Property Id="InComeDiamond" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="收益钻石/小时"/>
+        <Property Id="InComeOil" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="收益石油/小时"/>
+        <Property Id="MapLevel" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Level决定收益，展示给玩家争夺"/>
+    </Propertys>
+    <Records>
+        <Record Id="Station" Row="100" Col="9" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="Station">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="object" Tag="GuildID"/>
+            <Col Type="string" Tag="GuildName"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="string" Tag="Title"/>
+            <Col Type="string" Tag="Slogan"/>
+            <Col Type="int" Tag="State"/>
+            <Col Type="int" Tag="CurMemberCount"/>
+            <Col Type="int" Tag="WinCount"/>
+        </Record>
+    </Records>
+    <Components/>
+</XML>
