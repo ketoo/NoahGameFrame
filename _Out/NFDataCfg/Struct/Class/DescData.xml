@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="名字字符串索引"/>
+        <Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="ICON"/>
+        <Property Id="Atlas" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="图集"/>
+        <Property Id="PrefabPath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="主模型预设路径"/>
+        <Property Id="PerformanceEffect" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="使用时的特效"/>
+        <Property Id="PerformanceSound" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品使用时声音"/>
+        <Property Id="DescText" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="对此事务的描述意思"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

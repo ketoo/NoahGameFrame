@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Job" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="SkillIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
+        <Property Id="ModelPtah" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="主角模型"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>
