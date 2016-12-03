@@ -1,0 +1,180 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>
+	<WALK>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.0"  EventType="0" EndTime="0.0" DamageRang="0.0" BackHeroDis="0.0" BackNpcDis="0.0" BeAttackParticle="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.0" EventType="0" MoveDis="0.0" MoveTime="0.0" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
+		
+		<AudioEvents>
+		</AudioEvents>
+	</WALK>
+	<JUMP>
+		<SuwayyahEvents>	
+		</SuwayyahEvents>
+		<BulletEvents>
+
+		</BulletEvents>
+		<AnimatorMoves>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.0" EventType="0" AmountParam="0.0,0.0,0.0" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_031" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="1" DestroyTime="0.5" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
+		<AudioEvents>
+		
+		</AudioEvents>
+	</JUMP>
+	<NORMALATTACK1>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.6" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
+		<BulletEvents>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.3" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.5" EventType="3" AmountParam="0.2,0.0,0.2" ShakeTime="0.1" MethodCall="" MethodParam=""/>
+			
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_103" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+
+		</TrailEvents>
+		<AudioEvents>
+		
+			<Audio EventTime="0.2" EventType="0" TargetName="" AudioName="Sources/Audio/Thump" MethodCall="" MethodParam=""/>
+		</AudioEvents>
+	</NORMALATTACK1>
+	<NORMALATTACK2>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.4" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.3" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.5" EventType="3" AmountParam="0.3,0.0,0.3" ShakeTime="0.1" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_104_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.0" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_102" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+		
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
+		<AudioEvents>
+		
+			<Audio EventTime="0.2" EventType="0" TargetName="" AudioName="Sources/Audio/Thump" MethodCall="" MethodParam=""/>
+		</AudioEvents>
+	</NORMALATTACK2>
+	<NORMALATTACK3>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.6"  EventType="0" EndTime="0.5" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.4" EventType="0" MoveDis="0.5" MoveTime="0.3" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.5" EventType="3" AmountParam="0.4,0.0,0.4" ShakeTime="0.0" MethodCall="" MethodParam=""/>
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.2" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_1001_2_3" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+		
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
+		<AudioEvents>
+		
+			<Audio EventTime="0.2" EventType="0" TargetName="" AudioName="Sources/Audio/Thump" MethodCall="" MethodParam=""/>
+		</AudioEvents>
+	</NORMALATTACK3>
+	<NORMALTHUMP>
+		<SuwayyahEvents>
+			<Suwayyah EventTime="0.4"  EventType="0" EndTime="0.2" DamageRang="0.0" BackHeroDis="0.8" BackNpcDis="0.5" BeAttackParticle="SFXs/FT_BloodFX_vol01/_Prefab/Blood_Splash01" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+		
+		</SuwayyahEvents>
+		<BulletEvents>
+			<Bullet EventTime="0.0" EventType="0" Speed="0.0" MaxDis="0.0" BulletRang="0.0" BulletBackType="0" BackHeroDis="0.0" BackNpcDis="0.0" TacheDetroy="0" BeAttackParticle="" FireTacheName="" FireTacheOffest="0.0,0.0,0.0" BulletPrefabPath="" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam="" >
+				<Bomp BompTime="0.0" BompRang="0.0" BompPrefabPath="" BeAttackParticle="" BackNpcDis="0.0" BackHeroDis="0.0" MethodCall="" MethodParam="" TargetMethodCall="" TargetMethodParam=""/>
+			</Bullet>
+		</BulletEvents>
+		<AnimatorMoves>
+			<Move EventTime="0.1" EventType="0" MoveDis="1" MoveTime="0.5" MethodCall="" MethodParam=""/>
+		</AnimatorMoves>
+		<CameraControlEvents>
+			<Camera EventTime="0.3" EventType="3" AmountParam="0.5,0.0,0.5" ShakeTime="0.1" MethodCall="" MethodParam=""/>
+			
+		</CameraControlEvents>
+		<ParticleEvents>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_102_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.1" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/Male100_105_1" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+			<Particle EventTime="0.2" Rotation="0" ParticlePath="SFXs/SFXs/Partner/Male100/male_cast_2_104" TargetTacheName="" TargetTacheOffest ="0.0,0.0,0.0" CastToSurface="0" BindTarget="0" DestroyTime="5" MethodCall="" MethodParam=""/>
+		
+		</ParticleEvents>
+		<EnableEvents>
+			<Enable EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</EnableEvents>
+		<TrailEvents>
+			<Trail EventTime="0.0" EventType="0" TargetName="" MethodCall="" MethodParam=""/>
+		</TrailEvents>
+		<AudioEvents>
+			<Audio EventTime="0.2" EventType="0" TargetName="" AudioName="Sources/Audio/Thump" MethodCall="" MethodParam=""/>
+		</AudioEvents>
+	</NORMALTHUMP>
+</XML>
