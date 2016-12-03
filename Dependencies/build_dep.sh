@@ -34,17 +34,11 @@ chmod -R 755 *
 make
 make check
 
-cp -r -f ./src/.libs/*.so ../../_Out/Server/Debug/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Server/Debug/
-cp -r -f ./src/.libs/*.so ../../_Out/Server/Release/
-cp -r -f ./src/.libs/*.so.* ../../_Out/Server/Release/
-#cp -r -f ./src/.libs/*.so ../../_Out/Comm/Debug/
-#cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Debug/
-#cp -r -f ./src/.libs/*.so ../../_Out/Comm/Release/
-#cp -r -f ./src/.libs/*.so.* ../../_Out/Comm/Release/
-#
-#cp -r -f ./src/.libs/*.so ../lib/
-#cp -r -f ./src/.libs/*.so.* ../lib/
+cp -r -f ./src/.libs/*.so ../../_Out/Debug/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
+cp -r -f ./src/.libs/*.so ../../_Out/Release/
+cp -r -f ./src/.libs/*.so.* ../../_Out/Release/
+
 cd ../
 
 # compiling Theron
