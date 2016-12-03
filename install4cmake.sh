@@ -20,11 +20,10 @@ chmod -R 755 ./BuildNF.Tools.Linux.Debug.sh
 ./BuildNF.Tools.Linux.Debug.sh
 cd ../../
 
-cd _Out/Server/NFDataCfg/Tool/
+cd _Out/NFDataCfg/Tool/
 chmod 755 ./NFFileProcess
 chmod 755 ./copy_files.sh
 ./copy_files.sh
-cd ..
 cd ..
 cd ..
 cd ..
@@ -36,12 +35,12 @@ chmod -R 755 ./BuildNF.CMake.Release.sh
 ./BuildNF.CMake.Release.sh
 cd ../../
 
-cd _Out/Server/
+cd _Out/
 chmod 777 *.sh
 cd  Tester/
 chmod 777 *.sh
 
-cd ../../../
+cd ../../
 # generate makefile
 #chmod -R 755 Build4Makefile.sh
 #./Build4Makefile.sh
