@@ -25,6 +25,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
@@ -50,6 +51,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/External/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
@@ -58,13 +60,13 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="dllmain.cpp" />
-<Unit filename="NFCClassModule.cpp" />
-<Unit filename="NFCElementModule.cpp" />
-<Unit filename="NFConfigPlugin.cpp" />
-<Unit filename="NFCClassModule.h" />
-<Unit filename="NFCElementModule.h" />
-<Unit filename="NFConfigPlugin.h" />
+		<Unit filename="NFCClassModule.cpp" />
+		<Unit filename="NFCClassModule.h" />
+		<Unit filename="NFCElementModule.cpp" />
+		<Unit filename="NFCElementModule.h" />
+		<Unit filename="NFConfigPlugin.cpp" />
+		<Unit filename="NFConfigPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
