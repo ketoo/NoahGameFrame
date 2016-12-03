@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Server/Debug/NFActorPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Debug/NFActorPlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -25,7 +25,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="../../Dependencies/lib/libtherond.a" />
-					<Add directory="$(SolutionDir)/_Out/Server/Debug/" />
+					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
 				<ExtraCommands>
@@ -35,7 +35,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Server/Release/NFActorPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/NFActorPlugin" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -52,7 +52,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="../../Dependencies/lib/libtheron.a" />
-					<Add directory="$(SolutionDir)/_Out/Server/Release/" />
+					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
 				<ExtraCommands>
