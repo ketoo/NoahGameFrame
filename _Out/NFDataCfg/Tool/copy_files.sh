@@ -1,2 +1,2 @@
 ./NFFileProcess
-cp -a ../proto/NFProtocolDefine.hpp ../../../../NFComm/NFMessageDefine
+cp -a ../proto/NFProtocolDefine.hpp ../../../NFComm/NFMessageDefine
