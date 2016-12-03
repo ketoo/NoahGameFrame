@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Server/Debug/NFCore_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="$(SolutionDir)/_Out/Server/Debug" />
+				<Option output="$(SolutionDir)/_Out/Debug/NFCore_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Debug" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -31,8 +31,8 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Server/Release/NFCore" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="$(SolutionDir)/_Out/Server/Release" />
+				<Option output="$(SolutionDir)/_Out/Release/NFCore" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Release" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
