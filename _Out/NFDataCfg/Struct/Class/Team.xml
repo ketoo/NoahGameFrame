@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Captain" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="队长ID"/>
+        <Property Id="PresidentName" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="会长名"/>
+    </Propertys>
+    <Records>
+        <Record Id="MemberList" Row="50" Col="10" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="Receive"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Online"/>
+            <Col Type="int" Tag="Title"/>
+            <Col Type="int" Tag="GameID"/>
+        </Record>
+        <Record Id="ApplyList" Row="50" Col="7" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="TeamApply">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Power"/>
+        </Record>
+    </Records>
+    <Components>
+        <Component Name="TestModule" Language="lua" Enable="1" Desc="测试组件"/>
+    </Components>
+</XML>

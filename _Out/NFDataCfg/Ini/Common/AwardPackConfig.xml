@@ -1,0 +1,71 @@
+<XML>	
+	<AwardPackPlayerLevel_1>
+		<ItemInfo Name="Item_HOLY_WATER_1" Count="10"/>
+		<ItemInfo Name="Item_MP1" Count="10"/>
+		<ItemInfo Name="Item_HP1" Count="10"/>
+		<ItemInfo Name="Item_SP1" Count="10"/>
+		<ItemInfo Name="Item_EXP1" Count="10"/>
+		<ItemInfo Name="Item_MONEY5" Count="1"/>
+		<ItemInfo Name="Item_Diamond_5" Count="1"/>
+		<ItemInfo Name="Item_NoobPack_1" Count="1"/>
+		<ItemInfo Name="Item_WarPack_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_ATK_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_DEF_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_FIRE_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_LIGHT_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_WIND_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_ICE_1" Count="1"/>
+		<ItemInfo Name="Item_GEM_POISON_1" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_1" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_2" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_3" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_4" Count="1"/>
+		<ItemInfo Name="Item_HeroCard_5" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_WEAPON_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_HELMET_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_ARMOR_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_WRIST_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_PANT_21" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_1" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_11" Count="1"/>
+		<ItemInfo Name="Item_Hero_BOOT_21" Count="1"/>
+	</AwardPackPlayerLevel_1>
+	
+	<AwardPackPlayerLevel_10>
+	</AwardPackPlayerLevel_10>
+	
+	<AwardPackPlayerLevel_20>
+	</AwardPackPlayerLevel_20>
+	
+	<AwardPackPlayerLevel_30>
+	</AwardPackPlayerLevel_30>
+	
+	<AwardPackPlayerLevel_40>
+	</AwardPackPlayerLevel_40>
+	
+	<AwardPackPlayerLevel_50>
+	</AwardPackPlayerLevel_50>
+	
+	<AwardPackPlayerLevel_60>
+	</AwardPackPlayerLevel_60>
+	
+	<AwardPackPlayerLevel_70>
+	</AwardPackPlayerLevel_70>
+	
+	<AwardPackPlayerLevel_80>
+	</AwardPackPlayerLevel_80>
+	
+	<AwardPackPlayerLevel_90>
+	</AwardPackPlayerLevel_90>
+
+</XML>
