@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Name" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会名"/>
+        <Property Id="PresidentID" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="会长ID"/>
+        <Property Id="PresidentName" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="会长名"/>
+        <Property Id="Rank" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会排名"/>
+        <Property Id="GuildAD" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会公告"/>
+        <Property Id="GuildDesc" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会描述"/>
+        <Property Id="GuildMoney" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会财富"/>
+        <Property Id="GuildLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会等级"/>
+        <Property Id="GuildContinueDay" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会霸占排行榜天数"/>
+        <Property Id="GuilID" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会ID"/>
+        <Property Id="GuilIDIcon" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会头像"/>
+        <Property Id="GuildMemeberCount" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="成员数量(增加个字段，不然遍历Record太麻烦)"/>
+        <Property Id="GuildMemeberMaxCount" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="成员最大数量"/>
+        <Property Id="GuildHonor" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会荣誉"/>
+        <Property Id="GuildCreateTime" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会创建时间"/>
+        <Property Id="GuildCreateter" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会创始人"/>
+        <Property Id="GuildExp" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会经验"/>
+        <Property Id="GuildStatus" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会状态，正常状态，申请解散状态"/>
+        <Property Id="DismissTime" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="申请解散时间"/>
+        <Property Id="RecruitAD" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="招募公告"/>
+        <Property Id="RecruitLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="招募等级限制"/>
+        <Property Id="KingWarResource" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="获得的战役资源"/>
+        <Property Id="AutoRecruit" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="自动招募"/>
+        <Property Id="EctypServer" Type="int" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会副本所在的服"/>
+        <Property Id="EctypID" Type="int" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会副本ID"/>
+        <Property Id="EctypIDGroup" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="工会副本所在的曾"/>
+    </Propertys>
+    <Records>
+        <Record Id="GuildBoss" Row="50" Col="8" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Offline"/>
+            <Col Type="int" Tag="Power"/>
+        </Record>
+        <Record Id="GuildMemberList" Row="50" Col="14" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="Receive"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Online"/>
+            <Col Type="int" Tag="Power"/>
+            <Col Type="int" Tag="Title"/>
+            <Col Type="int" Tag="GameID"/>
+            <Col Type="int" Tag="JoinTime"/>
+            <Col Type="int" Tag="Contribution"/>
+            <Col Type="int" Tag="AllContribution"/>
+        </Record>
+        <Record Id="GuildAppyList" Row="50" Col="7" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Power"/>
+        </Record>
+        <Record Id="GuildEvent" Row="50" Col="11" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Offline"/>
+            <Col Type="int" Tag="Power"/>
+            <Col Type="int" Tag="EventID"/>
+            <Col Type="int" Tag="EventTime"/>
+            <Col Type="string" Tag="Context"/>
+        </Record>
+        <Record Id="GuildHouse" Row="50" Col="8" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Offline"/>
+            <Col Type="int" Tag="Power"/>
+        </Record>
+        <Record Id="GuildSkill" Row="50" Col="8" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="Name"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Job"/>
+            <Col Type="int" Tag="Donation"/>
+            <Col Type="int" Tag="VIP"/>
+            <Col Type="int" Tag="Offline"/>
+            <Col Type="int" Tag="Power"/>
+        </Record>
+    </Records>
+    <Components/>
+</XML>
