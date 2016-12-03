@@ -37,7 +37,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Release/NFProxyPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/NFProxyLogicPlugin" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -57,6 +57,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
@@ -65,7 +66,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="dllmain.cpp/&gt;&#x0A;&lt;Unit filename=" />
+		<Unit filename="NFCProxyLogicModule.cpp" />
+		<Unit filename="NFCProxyLogicModule.h" />
+		<Unit filename="NFCProxyLogicPlugin.cpp" />
+		<Unit filename="NFCProxyLogicPlugin.h" />
+		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

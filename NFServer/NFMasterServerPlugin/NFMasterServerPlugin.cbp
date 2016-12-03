@@ -30,6 +30,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-Wl,-rpath,\\$$ORIGIN" />
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
+					<Add library="$(SolutionDir)/_Out/Debug/NFMessageDefine_d.so" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>

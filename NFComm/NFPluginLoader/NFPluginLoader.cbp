@@ -32,9 +32,6 @@
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-						<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -61,19 +58,16 @@
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-							<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="NFCDynLib.h" />
-<Unit filename="NFCPluginManager.h" />
-<Unit filename="NFCDynLib.cpp" />
-<Unit filename="NFCPluginManager.cpp" />
-<Unit filename="NFPluginLoader.cpp" />
+		<Unit filename="NFCDynLib.cpp" />
+		<Unit filename="NFCDynLib.h" />
+		<Unit filename="NFCPluginManager.cpp" />
+		<Unit filename="NFCPluginManager.h" />
+		<Unit filename="NFPluginLoader.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
