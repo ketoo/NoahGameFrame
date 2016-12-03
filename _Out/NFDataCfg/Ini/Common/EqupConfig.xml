@@ -1,0 +1,50 @@
+<XML>	
+	<IntensifylevelToEquip Name="IntensifylevelToEquip">
+		<Level1 Name="1" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level2 Name="2" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level3 Name="3" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level4 Name="4" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level5 Name="5" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level6 Name="6" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level7 Name="7" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level8 Name="8" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level9 Name="9" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level10 Name="10" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level11 Name="11" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level12 Name="12" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level13 Name="13" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level14 Name="14" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level15 Name="15" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level16 Name="16" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level17 Name="17" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level18 Name="18" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level19 Name="19" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level20 Name="20" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level21 Name="21" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level22 Name="22" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+		<Level23 Name="23" CostMoney="200" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+	</IntensifylevelToEquip>
+	
+	<HoleToEquip Name="HoleToEquip">
+		<Count1 Name="1" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+	</HoleToEquip>
+	
+	<InlaystoneToEquip Name="InlaystoneToEquip">
+		<HoleInex Name="1" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="2" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="3" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="4" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="5" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="6" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="7" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="8" CostMoney="300" ConstItsem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="9" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="10" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+		<HoleInex Name="11" CostMoney="300" ConstItem="EquipIntensify_10001" ConstItemCount="1"/>
+	</InlaystoneToEquip>
+	
+	<ElementlevelToEquip Name="ElementlevelToEquip">
+		<Level1 Name="1" CostMoney="100" ConstItem="EquipIntensify_10001" ConstItemCount="1" IsDownLevel="1"/>
+	</ElementlevelToEquip>
+	
+</XML>
