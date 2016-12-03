@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="NoSqlServer_1" ServerID="001" IP="127.0.0.1" Port="6379" Auth="NoahGameFrame"/>
+</XML>

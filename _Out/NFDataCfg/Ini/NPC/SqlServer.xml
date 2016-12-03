@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="SqlServer_1" ServerID="000107001" IP="127.0.0.1" Port="7001" SqlIP="127.0.0.1" SqlPort="3306" SqlUser="root" SqlPwd="123456" SqlName="app_test"/>
+</XML>

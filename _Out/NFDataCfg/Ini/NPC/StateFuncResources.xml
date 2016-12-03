@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="EFT_INFO" Atlas_ResID="msg_icon"/>
+    <Object Id="EFT_BOOOST" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_LVLUP" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_CREATE_SOLDER" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_CREATE_SPEEL" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_RESEARCH" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_COLLECT_GOLD" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_COLLECT_STONE" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_COLLECT_STEEL" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_COLLECT_DIAMOND" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_SELL" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_REPAIR" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_CANCEL" Atlas_ResID="Ssetting"/>
+    <Object Id="EFT_FINISH" Atlas_ResID="Ssetting"/>
+</XML>

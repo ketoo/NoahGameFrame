@@ -1,0 +1,6 @@
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
+<XML>   
+	<Object ID="NEW_Attack1" ConfigID="AttackNpc2" X="20" Y="0" Z="-135"  /> 
+	<Object ID="NEW_Attack2" ConfigID="AttackNpc2" X="20" Y="0" Z="-130" /> 
+	<Object ID="NEW_Attack3" ConfigID="AttackNpc2" X="20" Y="0" Z="-125" /> 
+</XML>
