@@ -24,6 +24,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
@@ -48,6 +49,7 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
