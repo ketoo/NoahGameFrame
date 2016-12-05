@@ -9,9 +9,8 @@
 
 #ifndef NFI_MYSQL_DRIVER_MANAGER_H
 #define NFI_MYSQL_DRIVER_MANAGER_H
-#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
-#include "NFComm/NFCore/NFMap.h"
 
+#include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 
 class NFIMysqlDriverManager
 {
