@@ -10,7 +10,7 @@
 #ifndef NFC_MYSQL_DRIVER_MANAGER_H
 #define NFC_MYSQL_DRIVER_MANAGER_H
 
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIMysqlDriver.h"
 #include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 
