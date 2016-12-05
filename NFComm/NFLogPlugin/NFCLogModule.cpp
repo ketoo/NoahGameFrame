@@ -58,13 +58,16 @@ bool NFCLogModule::Init()
 		strLogConfigName = pPluginManager->GetAppName();
 	}
 
+	string strAppLogName = "";
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	string strAppLogName = "logconfig/" + strLogConfigName + "_win.conf";
+	strAppLogName = "logconfig/" + strLogConfigName + "_win.conf";
     el::Configurations conf(strAppLogName);
 #else
-	string strAppLogName = "logconfig/" + strLogConfigName + ".conf";
+	strAppLogName = "logconfig/" + strLogConfigName + ".conf";
     el::Configurations conf(strAppLogName);
 #endif
+
+	std::cout << "LogConfig: " << strAppLogName << std::endl;
 
     el::Loggers::reconfigureAllLoggers(conf);
     el::Helpers::installPreRollOutCallback(rolloutHandler);
