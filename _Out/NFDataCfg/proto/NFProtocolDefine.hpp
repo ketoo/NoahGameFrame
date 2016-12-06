@@ -686,6 +686,29 @@ public:
 
 };
 
+class NoSqlServer
+{
+public:
+	//Class name
+	static const std::string& ThisName(){ static std::string xNoSqlServer = "NoSqlServer"; return xNoSqlServer; }
+	// IObject
+	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	static const std::string& X(){ static std::string xX = "X"; return xX; } // float
+	static const std::string& Y(){ static std::string xY = "Y"; return xY; } // float
+	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // float
+	// Property
+	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
+	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
+	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
+	static const std::string& Auth(){ static std::string xAuth = "Auth"; return xAuth; } // string
+	// Record
+
+};
+
 class NPC
 {
 public:
@@ -757,29 +780,6 @@ public:
 	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
-	// Record
-
-};
-
-class NoSqlServer
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xNoSqlServer = "NoSqlServer"; return xNoSqlServer; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& X(){ static std::string xX = "X"; return xX; } // float
-	static const std::string& Y(){ static std::string xY = "Y"; return xY; } // float
-	static const std::string& Z(){ static std::string xZ = "Z"; return xZ; } // float
-	// Property
-	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
-	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
-	static const std::string& Auth(){ static std::string xAuth = "Auth"; return xAuth; } // string
 	// Record
 
 };
