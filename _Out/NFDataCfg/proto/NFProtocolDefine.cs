@@ -668,6 +668,28 @@ public class Map
 
 }
 
+public class NoSqlServer
+{
+	//Class name
+	public static readonly string ThisName = "NoSqlServer";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	public static readonly String X = "X"; // float
+	public static readonly String Y = "Y"; // float
+	public static readonly String Z = "Z"; // float
+	// Property
+	public static readonly String ServerID = "ServerID"; // int
+	public static readonly String IP = "IP"; // string
+	public static readonly String Port = "Port"; // int
+	public static readonly String Auth = "Auth"; // string
+	// Record
+
+}
+
 public class NPC
 {
 	//Class name
@@ -738,28 +760,6 @@ public class NPC
 	public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE"; // int
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
-	// Record
-
-}
-
-public class NoSqlServer
-{
-	//Class name
-	public static readonly string ThisName = "NoSqlServer";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
-	// Property
-	public static readonly String ServerID = "ServerID"; // int
-	public static readonly String IP = "IP"; // string
-	public static readonly String Port = "Port"; // int
-	public static readonly String Auth = "Auth"; // string
 	// Record
 
 }
