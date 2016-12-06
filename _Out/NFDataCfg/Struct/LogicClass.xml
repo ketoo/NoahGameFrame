@@ -19,8 +19,8 @@
         <Class Id="Item" Type="TYPE_ITEM" Path="NFDataCfg/Struct/Class/Item.xml" InstancePath="NFDataCfg/Ini/NPC/Item.xml" Public="0" Desc="Item"/>
         <Class Id="Language" Type="TYPE_LANGUAGE" Path="NFDataCfg/Struct/Class/Language.xml" InstancePath="NFDataCfg/Ini/NPC/Language.xml" Public="0" Desc="Language"/>
         <Class Id="Map" Type="TYPE_MAP" Path="NFDataCfg/Struct/Class/Map.xml" InstancePath="NFDataCfg/Ini/NPC/Map.xml" Public="0" Desc="Map"/>
-        <Class Id="NPC" Type="TYPE_NPC" Path="NFDataCfg/Struct/Class/NPC.xml" InstancePath="NFDataCfg/Ini/NPC/NPC.xml" Public="0" Desc="NPC"/>
         <Class Id="NoSqlServer" Type="TYPE_NOSQLSERVER" Path="NFDataCfg/Struct/Class/NoSqlServer.xml" InstancePath="NFDataCfg/Ini/NPC/NoSqlServer.xml" Public="0" Desc="NoSqlServer"/>
+        <Class Id="NPC" Type="TYPE_NPC" Path="NFDataCfg/Struct/Class/NPC.xml" InstancePath="NFDataCfg/Ini/NPC/NPC.xml" Public="0" Desc="NPC"/>
         <Class Id="Player" Type="TYPE_PLAYER" Path="NFDataCfg/Struct/Class/Player.xml" InstancePath="NFDataCfg/Ini/NPC/Player.xml" Public="0" Desc="Player"/>
         <Class Id="Scene" Type="TYPE_SCENE" Path="NFDataCfg/Struct/Class/Scene.xml" InstancePath="NFDataCfg/Ini/NPC/Scene.xml" Public="0" Desc="Scene"/>
         <Class Id="Server" Type="TYPE_SERVER" Path="NFDataCfg/Struct/Class/Server.xml" InstancePath="NFDataCfg/Ini/NPC/Server.xml" Public="0" Desc="Server"/>
