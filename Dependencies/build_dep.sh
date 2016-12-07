@@ -22,9 +22,9 @@ chmod -R 755 *
 ./configure CPPFLAGS=-fPIC --disable-shared --disable-openssl
 make
 
-cp -R -f .libs/*.a ../lib/Debug/
-cp -R -f .libs/*.a ../lib/
-cp -R -f .libs/*.a ../lib/Release/
+cp -R -f ./libs/*.a ../lib/Debug/
+cp -R -f ./libs/*.a ../lib/
+cp -R -f ./libs/*.a ../lib/Release/
 cd ../
 
 # compiling protobuf
@@ -54,7 +54,12 @@ cp -r -f ./Lib/libtheron.a ../lib/
 make clean
 cd ../
 
+#mysql
+cp -R -f ./lib/Release/libmysqlclient.so ../_Out/Debug/
+cp -R -f ./lib/Release/libmysqlclient.so ../_Out/Release/
 
+cp -R -f ./lib/Release/libmysqlclient.a ./lib/Debug/
+cp -R -f ./lib/Release/libmysqlpp.a ./lib/Debug/
 # TODO: other libs
 
 # back to main dir
