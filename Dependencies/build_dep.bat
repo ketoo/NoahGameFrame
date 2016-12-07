@@ -30,3 +30,5 @@ copy lib\\Release\\libmysql.dll ..\\_Out\\Debug\\ /Y
 copy lib\\Release\\libmysql.dll ..\\_Out\\Release\\ /Y
 
 copy lib\\Release\\mysqlclient.lib lib\\Debug\\ /Y
+copy lib\\Release\\mysqlpp.lib lib\\Debug\\ /Y
+copy lib\\Release\\libmysql.lib lib\\Debug\\ /Y
