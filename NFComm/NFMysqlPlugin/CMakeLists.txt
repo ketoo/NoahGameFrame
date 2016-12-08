@@ -29,12 +29,14 @@ else()
 		${NFMysqlPlugin_ROOT_CC}
 		${NFMysqlPlugin_ROOT_Hpp})
 	target_include_directories(NFMysqlPlugin PUBLIC
-		${SolutionDir}/Dependencies/mysqlpp/)
+		${SolutionDir}/Dependencies/mysqlpp/
+		${SolutionDir}/Dependencies/mysql/)
 	add_dependencies(NFMysqlPlugin libprotobuf NFMessageDefine)
 	target_link_libraries(NFMysqlPlugin libprotobuf Theron NFMessageDefine)
 	add_definitions(
 			-D_USRDLL
 			-DTHERON_CPP11
+			-DWIN32_LEAN_AND_MEAN
 		)
 endif()
 link_NFSDK("NFMysqlPlugin")
