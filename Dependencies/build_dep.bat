@@ -32,3 +32,6 @@ copy lib\\Release\\libmysql.dll ..\\_Out\\Release\\ /Y
 copy lib\\Release\\mysqlclient.lib lib\\Debug\\ /Y
 copy lib\\Release\\mysqlpp.lib lib\\Debug\\ /Y
 copy lib\\Release\\libmysql.lib lib\\Debug\\ /Y
+
+
+"..\\Tool\\7z.exe" x gperftools-2.5.zip -Y
