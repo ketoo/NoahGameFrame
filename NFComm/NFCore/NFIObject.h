@@ -17,6 +17,19 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
+enum CLASS_OBJECT_EVENT
+{
+	COE_CREATE_NODATA,
+	COE_CREATE_LOADDATA,
+	COE_CREATE_BEFORE_EFFECT,
+	COE_CREATE_EFFECTDATA,
+	COE_CREATE_AFTER_EFFECT,
+	COE_CREATE_HASDATA,
+	COE_CREATE_FINISH,
+	COE_BEFOREDESTROY,
+	COE_DESTROY,
+};
+
 class _NFExport NFIObject :public NFMemoryCounter
 {
 private:
@@ -82,6 +95,8 @@ public:
     }
 
     /////////////////////////////////////////////////////////////////
+	virtual CLASS_OBJECT_EVENT GetState() = 0;
+	virtual bool SetState(const CLASS_OBJECT_EVENT eState) = 0;
 
     virtual bool FindProperty(const std::string& strPropertyName) = 0;
 
