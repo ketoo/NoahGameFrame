@@ -72,6 +72,14 @@ cp -R -f ./lib/Release/libmysqlclient.a ./lib/
 cp -R -f ./lib/Release/libmysqlpp.a ./lib/
 
 # TODO: other libs
+unzip -o gperftools-2.5.zip -d ./
+cd gperftools-2.5
+chmod -R 755 *
+./configure –enable-frame-pointers
+make
+make install
+cd ../
+
 
 # back to main dir
 pwd
