@@ -224,6 +224,9 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	var.AddString(NFrame::Player::GateID());
 	var.AddInt(nGateID);
 
+	var.AddString(NFrame::Player::GameID());
+	var.AddInt(pPluginManager->GetAppID());
+
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
 	if (NULL == pObject)
 	{
@@ -231,12 +234,6 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		//mRoleFDData
 		return;
 	}
-
-	pObject->SetPropertyInt(NFrame::Player::LoadPropertyFinish(), 1);
-	pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
-	pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
-
-	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
 
 	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 0, NFCDataList());
 }
@@ -552,7 +549,8 @@ int NFCGameServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const st
 {
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
-		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 		{
 			return 0;
 		}
@@ -647,7 +645,8 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 {
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
-		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 		{
 			return 0;
 		}
