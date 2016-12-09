@@ -28,6 +28,7 @@ public:
 		pPluginManager = p;
         mnLastLogTime = pPluginManager->GetNowTime();
     }
+	virtual ~NFCMasterNet_ServerModule();
 
     virtual bool Init();
     virtual bool Shut();
