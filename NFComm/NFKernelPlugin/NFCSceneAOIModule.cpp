@@ -221,16 +221,17 @@ int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::str
 	{
 		OnSceneEvent(self, strPropertyName, oldVar, newVar);
 	}
-	/*
-	//if u want to runing more fast, please uncomment this code
+
+	
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
-		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
+		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 		{
 			return 0;
 		}
 	}
-	*/
+
 	NFCDataList valueBroadCaseList;
 	if (GetBroadCastObject(self, strPropertyName, false, valueBroadCaseList) <= 0)
 	{
@@ -257,17 +258,15 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 		return 0;
 	}
 
-	/*
-	//if u want to runing more fast, please uncomment this code
 	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
 	{
-	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::LoadPropertyFinish()) <= 0)
-	{
-	return 0;
+		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+		{
+			return 0;
+		}
 	}
-	}
-	*/
-
+	
 	NFCDataList valueBroadCaseList;
 	GetBroadCastObject(self, strRecordName, true, valueBroadCaseList);
 
