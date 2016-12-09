@@ -14,6 +14,8 @@
 NFCObject::NFCObject(NFGUID self, NFIPluginManager* pLuginManager)
     : NFIObject(self)
 {
+	mObjectEventState = COE_CREATE_NODATA;
+
     mSelf = self;
     m_pPluginManager = pLuginManager;
 
@@ -68,6 +70,17 @@ bool NFCObject::AddPropertyCallBack(const std::string& strCriticalName, const PR
     }
 
     return false;
+}
+
+CLASS_OBJECT_EVENT NFCObject::GetState()
+{
+	return mObjectEventState;
+}
+
+bool NFCObject::SetState(const CLASS_OBJECT_EVENT eState)
+{
+	mObjectEventState = eState;
+	return true;
 }
 
 bool NFCObject::FindProperty(const std::string& strPropertyName)
