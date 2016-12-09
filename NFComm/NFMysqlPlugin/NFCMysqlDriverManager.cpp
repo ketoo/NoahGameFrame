@@ -13,6 +13,22 @@
 #include "NFCMysqlDriverManager.h"
 #include "NFComm/NFCore/NFIDataList.h"
 
+NFCMysqlDriverManager::~NFCMysqlDriverManager()
+{
+	for (NFIMysqlDriver* pMysqlDriver = mvMysql.First(); nullptr != pMysqlDriver; pMysqlDriver = mvMysql.Next())
+	{
+		delete pMysqlDriver;
+		pMysqlDriver = nullptr;
+	}
+	mvMysql.ClearAll();
+	for (NFIMysqlDriver* pMysqlDriver = mvInvalidMsyql.First(); nullptr != pMysqlDriver; pMysqlDriver = mvInvalidMsyql.Next())
+	{
+		delete pMysqlDriver;
+		pMysqlDriver = nullptr;
+	}
+	mvInvalidMsyql.ClearAll();
+}
+
 NFIMysqlDriver* NFCMysqlDriverManager::GetMysqlDriver()
 {
     return mvMysql.First(); // ÔÝÊ±ÏÈ¸øfirst

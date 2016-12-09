@@ -57,8 +57,8 @@
 		<Unit filename="NFCConsistentHash.hpp" />
 		<Unit filename="NFCDataList.cpp" />
 		<Unit filename="NFCDataList.h" />
-		<Unit filename="NFCMemManger.cpp" />
-		<Unit filename="NFCMemManger.h" />
+		<Unit filename="NFCMemManager.cpp" />
+		<Unit filename="NFCMemManager.h" />
 		<Unit filename="NFCObject.cpp" />
 		<Unit filename="NFCObject.h" />
 		<Unit filename="NFCProperty.cpp" />

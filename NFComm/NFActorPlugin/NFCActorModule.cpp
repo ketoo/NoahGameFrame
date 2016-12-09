@@ -25,9 +25,6 @@ NFCActorModule::~NFCActorModule()
     m_pMainActor.reset();
     m_pMainActor = nullptr;
 
-    delete pPluginManager;
-    pPluginManager = NULL;
-
     delete m_pFramework;
     m_pFramework = NULL;
 }
