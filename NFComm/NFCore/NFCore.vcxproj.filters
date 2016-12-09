@@ -92,9 +92,6 @@
     <ClInclude Include="NFCConsistentHash.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
-    <ClInclude Include="NFCMemManger.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFCDataList.h">
       <Filter>Unit</Filter>
     </ClInclude>
@@ -102,6 +99,9 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="NFMemoryCounter.h">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMemManager.h">
       <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
@@ -130,10 +130,10 @@
     <ClCompile Include="NFCDataList.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
-    <ClCompile Include="NFCMemManger.cpp">
+    <ClCompile Include="NFMemoryCounter.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
-    <ClCompile Include="NFMemoryCounter.cpp">
+    <ClCompile Include="NFCMemManager.cpp">
       <Filter>Unit</Filter>
     </ClCompile>
   </ItemGroup>
