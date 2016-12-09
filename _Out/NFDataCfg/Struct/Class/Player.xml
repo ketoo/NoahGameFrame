@@ -32,7 +32,6 @@
         <Property Id="OnlineTime" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="本次上线时间"/>
         <Property Id="TotalLineTime" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="今日在线时长{截至至本次上线时间}"/>
         <Property Id="GMLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="GM等级"/>
-        <Property Id="LoadPropertyFinish" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
         <Property Id="GameID" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc="登陆的服ID"/>
         <Property Id="GateID" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc="登陆的网关ID"/>
         <Property Id="GuildID" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会ID"/>
