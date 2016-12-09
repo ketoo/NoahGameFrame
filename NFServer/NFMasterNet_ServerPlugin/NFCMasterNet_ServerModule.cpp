@@ -14,6 +14,12 @@
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFCore/NFCalendar.h"
 
+NFCMasterNet_ServerModule::~NFCMasterNet_ServerModule()
+{
+	delete m_pNetModule;
+	m_pNetModule = nullptr;
+}
+
 bool NFCMasterNet_ServerModule::Init()
 {
 	m_pNetModule = NF_NEW NFINetModule(pPluginManager);

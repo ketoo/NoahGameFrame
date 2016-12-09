@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCMemManger.h
+//    @FileName         :    NFCMemManager.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-03-01
-//    @Module           :    NFCMemManger
+//    @Module           :    NFCMemManager
 //
 // -------------------------------------------------------------------------
 #ifndef NFC_NFCMEMMANGER_H
@@ -39,11 +39,11 @@
 
 #endif
 
-class _NFExport NFCMemManger: public NFSingleton<NFCMemManger>
+class _NFExport NFCMemManager: public NFSingleton<NFCMemManager>
 {
 public:
-    NFCMemManger();
-    ~NFCMemManger();
+    NFCMemManager();
+    ~NFCMemManager();
 
 public:
     virtual void FreeMem();

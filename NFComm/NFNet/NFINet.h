@@ -410,6 +410,8 @@ private:
 class _NFExport NFINet
 {
 public:
+	virtual ~NFINet() {}
+
     //need to call this function every frame to drive network library
     virtual bool Execute() = 0;
 
