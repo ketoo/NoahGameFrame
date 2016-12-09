@@ -98,7 +98,7 @@
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
-    <ClInclude Include="NFCMemManger.h" />
+    <ClInclude Include="NFCMemManager.h" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
@@ -127,7 +127,7 @@
     <ClCompile Include="NFCalendar.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
-    <ClCompile Include="NFCMemManger.cpp" />
+    <ClCompile Include="NFCMemManager.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
