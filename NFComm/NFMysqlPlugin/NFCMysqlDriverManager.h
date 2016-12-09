@@ -17,6 +17,8 @@
 class NFCMysqlDriverManager : public NFIMysqlDriverManager
 {
 public:
+	virtual ~NFCMysqlDriverManager();
+
     virtual bool AddMysqlServer(const int nServerID, const std::string& strDns, const std::string& strIP, const int nPort, const std::string strDBName, const std::string strDBUser, const std::string strDBPwd, const int nRconnectTime/* = 10*/, const int nRconneCount/* = -1*/);
     virtual NFIMysqlDriver* GetMysqlDriver();
     virtual void CheckMysql();

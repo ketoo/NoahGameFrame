@@ -1,28 +1,28 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCMemManger.cpp
+//    @FileName         :    NFCMemManager.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-03-01
-//    @Module           :    NFCMemManger
+//    @Module           :    NFCMemManager
 //
 // -------------------------------------------------------------------------
 
-#include "NFCMemManger.h"
+#include "NFCMemManager.h"
 
 #ifdef NF_USE_TCMALLOC
 #include "Dependencies/gperftools-2.1/src/gperftools/malloc_extension.h"
 #endif
 
-NFCMemManger::NFCMemManger()
+NFCMemManager::NFCMemManager()
 {
 
 }
 
-NFCMemManger::~NFCMemManger()
+NFCMemManager::~NFCMemManager()
 {
 
 }
 
-void NFCMemManger::FreeMem()
+void NFCMemManager::FreeMem()
 {
 
 #ifdef NF_USE_TCMALLOC

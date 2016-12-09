@@ -47,6 +47,8 @@
 class NFIMysqlDriver
 {
 public:
+	virtual ~NFIMysqlDriver() {}
+	
     virtual bool Connect(const std::string& strDBName, const std::string& strDBHost, const int nDBPort, const std::string& strDBUser, const std::string& strDBPwd) = 0;
     virtual  bool Execute() = 0;
     virtual mysqlpp::Connection* GetConnection() = 0;
