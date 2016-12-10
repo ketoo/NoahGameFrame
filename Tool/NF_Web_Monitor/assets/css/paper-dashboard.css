@@ -1249,6 +1249,12 @@ textarea.form-control {
 .table-striped tbody > tr:nth-of-type(2n) {
   background-color: #FFFCF5;
 }
+.table-striped tbody > tr:nth-of-type(2n+7) {
+  background-color: #AFF;
+}
+.table-striped tbody > tr:nth-of-type(2n+8) {
+  background-color: #CFF;
+}
 .table-striped > thead > tr > th,
 .table-striped > tbody > tr > th,
 .table-striped > tfoot > tr > th,
