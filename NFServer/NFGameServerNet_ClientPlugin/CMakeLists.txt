@@ -1,11 +1,9 @@
 set(ProjectName "NFGameServerNet_ClientPlugin")
 file(GLOB NFGameServerNet_ClientPlugin_ROOT_Cpp
-	dllmain.cpp
-	NFCGameServerToWorldModule.cpp
-	NFGameServerNet_ClientPlugin.cpp)
+	*.cpp)
+	
 file(GLOB NFGameServerNet_ClientPlugin_ROOT_Hpp 
-	NFCGameServerToWorldModule.h
-	NFGameServerNet_ClientPlugin.h)
+	*.h)
 
 add_library(NFGameServerNet_ClientPlugin SHARED
 	${NFGameServerNet_ClientPlugin_ROOT_Cpp}
