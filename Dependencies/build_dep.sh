@@ -59,6 +59,13 @@ make clean
 cd ../
 
 #mysql
+# extract mysql libs
+echo Extract mysql libs
+unzip -o mysql_libs.zip -d ./
+
+echo Extract mysql++ libs
+unzip -o mysqlpp_libs.zip -d ./
+# copy libs
 cp -R -f ./lib/Release/libmysqlclient.so ../_Out/Debug/
 cp -R -f ./lib/Release/libmysqlclient.so ../_Out/Release/
 
