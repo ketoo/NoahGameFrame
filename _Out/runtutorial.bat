@@ -1,0 +1,3 @@
+cd Debug
+echo Starting NFTutorial...
+start "NFTutorialServer" "NFPluginLoader_d.exe" "Server=TutorialServer" "ID=0"
