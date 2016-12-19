@@ -102,6 +102,19 @@ public:
         return true;
     }
 
+	virtual bool ReadyExecute()
+	{
+		NFIModule* pModule = First();
+		while (pModule)
+		{
+			pModule->ReadyExecute();
+
+			pModule = Next();
+		}
+
+		return true;
+	}
+
     virtual bool Execute()
     {
         NFIModule* pModule = First();
