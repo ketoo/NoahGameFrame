@@ -128,7 +128,6 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
         return;
     }
 
-    pObject->SetPropertyInt(NFrame::Player::LoadPropertyFinish(), 1);
     pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
     pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 

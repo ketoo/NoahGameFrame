@@ -33,7 +33,7 @@ html_ServerLine_temp = "\
 			<div class='card'>\
 				<div class='header'>\
 					<h4 class='title'>{$serverName}</h4>\
-					<p class='category'>Online Count</p>\
+					<p class='category'>Online Count [Now {$NowCount}]</p>\
 				</div>\
 				<div class='content'>\
 					<div id='{$serverNameId}' class='ct-chart'></div>\
@@ -73,7 +73,7 @@ html_ServerInfoTable_temp = "\
 		</div>\
 	</div>"
 var html_ServerInfoTableTr = "\
-							<tr id='InfoTableTr'>\
+							<tr id='InfoTableTr' class='table-tr-extra'>\
 								<td>{$RowID}</td>\
 								<td>{$RowKey}</td>\
 								<td>{$RowValue}</td>\
@@ -194,6 +194,7 @@ function showServerStatus(ServerNameList, ServerStatusList, UpdateTimeList, Serv
 			
 			html_ServerLine += html_ServerLine_temp.replace("{$serverName}", ServerNameList[i]);
 			html_ServerLine = html_ServerLine.replace("{$serverNameId}", ServerNameList[i] + "ID");
+            html_ServerLine = html_ServerLine.replace("{$NowCount}", ServerOnlineList[i][0][ServerOnlineList[i][0].length-1]);
 		}
 		document.getElementById("serverContent").innerHTML = "<div class='row'>" + html_ServerStatus + "</div>" + html_ServerLine;
 		
@@ -266,41 +267,39 @@ function showServerInfoTable(CurrentServerID, ServerNameList, ServerStatusList, 
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIDList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "2");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerName");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerNameList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "3");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerIP");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerIPList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "4");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerPort");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", ServerPortList[i]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
-				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "5");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerOnlineCount");
 				html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", serverOnlineList[i][0][serverOnlineList[i][0].length - 1]);
 				html_tbody += html_ServerInfoTable_Tr;
 				html_ServerInfoTable_Tr = html_ServerInfoTableTr;
 				if(ServerStatusList[i] == 1)
 				{
-					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "6");
 					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerStatus");
 					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", "Online");
 				}
 				else
 				{
-					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "1");
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", "6");
 					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", "ServerStatus");
 					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", "Offline");
 				}
 				html_tbody += html_ServerInfoTable_Tr;
-				html_ServerInfoTable = html_ServerInfoTable.replace("{$InfoTableTr}", html_tbody);
-
 
 				if(ServerStatusList[i] == 1)
 				{
@@ -313,15 +312,10 @@ function showServerInfoTable(CurrentServerID, ServerNameList, ServerStatusList, 
 					html_ServerInfoTable = html_ServerInfoTable.replace("{$ServerStatus}", "Offline");
 				}
 
-				html_ServerInfoTable += html_ServerInfoTable_temp.replace("{$TableTitle}", ServerNameList[i] + " Extra Information");
-				html_ServerInfoTable = html_ServerInfoTable.replace("{$TableDescript}", "TBD");
-
-				
 				var dataList = ServerInfoExt[i];
-				html_tbody = "";
 				$.each(dataList, function (i, item) {
 					html_ServerInfoTable_Tr = html_ServerInfoTableTr;
-					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", i);
+					html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowID}", i+7);
 					$.each(item, function (key, value){
 						html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowKey}", key);
 						html_ServerInfoTable_Tr = html_ServerInfoTable_Tr.replace("{$RowValue}", value);
@@ -584,7 +578,7 @@ $(document).ready(function(){
 
 	$.notify({
 		icon: 'ti-gift',
-		message: "Welcome to <b>NoahGameFrame Web Monitor</b>."
+		message: "Welcome to <b>NoahFrame Web Monitor</b>."
 
 	},{
 		type: 'info',
