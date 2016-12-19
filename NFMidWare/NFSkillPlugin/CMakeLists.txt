@@ -1,22 +1,22 @@
-set(ProjectName "NFChatPlugin")
-file(GLOB NFChatPlugin_ROOT_Cpp
+set(ProjectName "NFSkillPlugin")
+file(GLOB NFSkillPlugin_ROOT_Cpp
 	*.cpp)
 	
-file(GLOB NFChatPlugin_ROOT_Hpp 
+file(GLOB NFSkillPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFChatPlugin SHARED
-	${NFChatPlugin_ROOT_Cpp}
-	${NFChatPlugin_ROOT_Cpp})
+add_library(NFSkillPlugin SHARED
+	${NFSkillPlugin_ROOT_Cpp}
+	${NFSkillPlugin_ROOT_Hpp})
 	
-set_target_properties( NFChatPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFChatPlugin_d")
-set_target_properties( NFChatPlugin PROPERTIES PREFIX "")
-set_target_properties( NFChatPlugin PROPERTIES 
+set_target_properties( NFSkillPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFSkillPlugin_d")
+set_target_properties( NFSkillPlugin PROPERTIES PREFIX "")
+set_target_properties( NFSkillPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-link_NFSDK("NFChatPlugin")
+link_NFSDK("NFSkillPlugin")
 
 if(UNIX)
 	add_definitions(
