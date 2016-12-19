@@ -7,7 +7,7 @@ file(GLOB NFChatPlugin_ROOT_Hpp
 
 add_library(NFChatPlugin SHARED
 	${NFChatPlugin_ROOT_Cpp}
-	${NFChatPlugin_ROOT_Hpp})
+	${NFChatPlugin_ROOT_Cpp})
 	
 set_target_properties( NFChatPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFChatPlugin_d")
 set_target_properties( NFChatPlugin PROPERTIES PREFIX "")
