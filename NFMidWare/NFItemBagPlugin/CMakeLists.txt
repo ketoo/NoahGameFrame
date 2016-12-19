@@ -1,22 +1,22 @@
-set(ProjectName "NFChatPlugin")
-file(GLOB NFChatPlugin_ROOT_Cpp
+set(ProjectName "NFItemBagPlugin")
+file(GLOB NFItemBagPlugin_ROOT_Cpp
 	*.cpp)
 	
-file(GLOB NFChatPlugin_ROOT_Hpp 
+file(GLOB NFItemBagPlugin_ROOT_Hpp 
 	*.h)
 
-add_library(NFChatPlugin SHARED
-	${NFChatPlugin_ROOT_Cpp}
-	${NFChatPlugin_ROOT_Cpp})
+add_library(NFItemBagPlugin SHARED
+	${NFItemBagPlugin_ROOT_Cpp}
+	${NFItemBagPlugin_ROOT_Hpp})
 	
-set_target_properties( NFChatPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFChatPlugin_d")
-set_target_properties( NFChatPlugin PROPERTIES PREFIX "")
-set_target_properties( NFChatPlugin PROPERTIES 
+set_target_properties( NFItemBagPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFItemBagPlugin_d")
+set_target_properties( NFItemBagPlugin PROPERTIES PREFIX "")
+set_target_properties( NFItemBagPlugin PROPERTIES 
 	FOLDER "NFServer/GameServer"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
-link_NFSDK("NFChatPlugin")
+link_NFSDK("NFItemBagPlugin")
 
 if(UNIX)
 	add_definitions(
