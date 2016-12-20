@@ -12,7 +12,7 @@
 
 #include "NFIModule.h"
 
-class NFIGMModule : public NFIModule
+class NFIGmModule : public NFIModule
 {
 public:
 
