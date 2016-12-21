@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="GuildConfig_1" ConditionPlayerLevel="1" ConditionPlayerVIP="0" CostMoney="100" DismissTime="1000" GuildLevel="1" MaxMember="25"/>
+    <Object Id="GuildConfig_2" ConditionPlayerLevel="25" ConditionPlayerVIP="3" CostMoney="100" DismissTime="1000" GuildLevel="2" MaxMember="45"/>
+    <Object Id="GuildConfig_3" ConditionPlayerLevel="100" ConditionPlayerVIP="100" CostMoney="100" DismissTime="1000" GuildLevel="3" MaxMember="55"/>
+</XML>

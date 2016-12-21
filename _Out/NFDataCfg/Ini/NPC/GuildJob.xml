@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="GuildJobg_Master" Job="1" JobCount="1" Appoint="1" Fire="1" Demise="1" ApplyDismiss="1" StopDismiss="1" AcceptApply="1" DenyApply="1" Kickout="1" SetRecruit="1" PublishRecruit="1" EditAD="1" Leave="0" LevelUp="1"/>
+    <Object Id="GuildJobg_Assistant" Job="2" JobCount="2" Appoint="0" Fire="0" Demise="0" ApplyDismiss="0" StopDismiss="1" AcceptApply="1" DenyApply="1" Kickout="1" SetRecruit="1" PublishRecruit="1" EditAD="1" Leave="1" LevelUp="0"/>
+    <Object Id="GuildJobg_Elite" Job="3" JobCount="4" Appoint="0" Fire="0" Demise="0" ApplyDismiss="0" StopDismiss="1" AcceptApply="1" DenyApply="1" Kickout="0" SetRecruit="0" PublishRecruit="1" EditAD="1" Leave="1" LevelUp="0"/>
+    <Object Id="GuildJobg_Member" Job="4" JobCount="-1" Appoint="0" Fire="0" Demise="0" ApplyDismiss="0" StopDismiss="0" AcceptApply="0" DenyApply="0" Kickout="0" SetRecruit="0" PublishRecruit="0" EditAD="0" Leave="1" LevelUp="0"/>
+</XML>

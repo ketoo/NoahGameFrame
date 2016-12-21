@@ -1,0 +1,14 @@
+<XML>	
+	<PlayerLevel Name="PlayerLevel">
+		<LevelAwardPack Name="1" AwardPack="AwardPackPlayerLevel_1" />
+		<LevelAwardPack Name="10" AwardPack="AwardPackPlayerLevel_10" />
+		<LevelAwardPack Name="20" AwardPack="AwardPackPlayerLevel_20" />
+		<LevelAwardPack Name="30" AwardPack="AwardPackPlayerLevel_30" />
+		<LevelAwardPack Name="40" AwardPack="AwardPackPlayerLevel_40" />
+		<LevelAwardPack Name="50" AwardPack="AwardPackPlayerLevel_50" />
+		<LevelAwardPack Name="60" AwardPack="AwardPackPlayerLevel_60" />
+		<LevelAwardPack Name="70" AwardPack="AwardPackPlayerLevel_70" />
+		<LevelAwardPack Name="80" AwardPack="AwardPackPlayerLevel_80" />
+		<LevelAwardPack Name="90" AwardPack="AwardPackPlayerLevel_90" />
+	</PlayerLevel>
+</XML>

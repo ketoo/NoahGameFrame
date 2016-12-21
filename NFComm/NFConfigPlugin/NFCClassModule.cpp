@@ -10,8 +10,8 @@
 #include <algorithm>
 #include "NFConfigPlugin.h"
 #include "NFCClassModule.h"
-#include "NFComm/RapidXML/rapidxml.hpp"
-#include "NFComm/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
 
 bool NFCClassModule::Init()
 {
@@ -89,12 +89,14 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             const char* pstrSave = pPropertyNode->first_attribute("Save")->value();
             const char* pstrCache = pPropertyNode->first_attribute("Cache")->value();
             const char* pstrRef = pPropertyNode->first_attribute("Ref")->value();
+			const char* pstrUpload = pPropertyNode->first_attribute("Upload")->value();
 
             bool bPublic = lexical_cast<bool>(pstrPublic);
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
             bool bRef = lexical_cast<bool>(pstrRef);
+			bool bUpload = lexical_cast<bool>(pstrUpload);
 
             NFIDataList::TData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
@@ -112,6 +114,7 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             xProperty->SetSave(bSave);
             xProperty->SetCache(bCache);
             xProperty->SetRef(bRef);
+			xProperty->SetUpload(bUpload);
 
         }
     }
@@ -143,6 +146,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             const char* pstrPrivate = pRecordNode->first_attribute("Private")->value();
             const char* pstrSave = pRecordNode->first_attribute("Save")->value();
             const char* pstrCache = pRecordNode->first_attribute("Cache")->value();
+			const char* pstrUpload = pRecordNode->first_attribute("Upload")->value();
 
             std::string strView;
             if (pRecordNode->first_attribute("View") != NULL)
@@ -154,6 +158,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             bool bPrivate = lexical_cast<bool>(pstrPrivate);
             bool bSave = lexical_cast<bool>(pstrSave);
             bool bCache = lexical_cast<bool>(pstrCache);
+			bool bUpload = lexical_cast<bool>(pstrUpload);
 
 			NF_SHARE_PTR<NFIDataList> recordVar(NF_NEW NFCDataList());
 			NF_SHARE_PTR<NFIDataList> recordTag(NF_NEW NFCDataList());
@@ -188,6 +193,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             xRecord->SetPrivate(bPrivate);
             xRecord->SetSave(bSave);
             xRecord->SetCache(bCache);
+			xRecord->SetUpload(bUpload);
         }
     }
 
@@ -297,7 +303,7 @@ bool NFCClassModule::AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR
 bool NFCClassModule::AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass)
 {
     NF_SHARE_PTR<NFIClass> pParent = pClass->GetParent();
-    while (pParent.get())
+    while (pParent)
     {
         //inherited some properties form class of parent
         std::string strFileName = "";
@@ -337,7 +343,7 @@ bool NFCClassModule::AddClass(const std::string& strClassName, const std::string
 {
     NF_SHARE_PTR<NFIClass> pParentClass = GetElement(strParentName);
     NF_SHARE_PTR<NFIClass> pChildClass = GetElement(strClassName);
-    if (!pChildClass.get())
+    if (!pChildClass)
     {
         pChildClass = NF_SHARE_PTR<NFIClass>(NF_NEW NFCClass(strClassName));
         AddElement(strClassName, pChildClass);
@@ -423,7 +429,7 @@ bool NFCClassModule::Save()
 NF_SHARE_PTR<NFIPropertyManager> NFCClassModule::GetClassPropertyManager(const std::string& strClassName)
 {
     NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
-    if (pClass.get())
+    if (pClass)
     {
         return pClass->GetPropertyManager();
     }
@@ -434,7 +440,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCClassModule::GetClassPropertyManager(const s
 NF_SHARE_PTR<NFIRecordManager> NFCClassModule::GetClassRecordManager(const std::string& strClassName)
 {
     NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
-    if (pClass.get())
+    if (pClass)
     {
         return pClass->GetRecordManager();
     }
@@ -445,7 +451,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCClassModule::GetClassRecordManager(const std::
 NF_SHARE_PTR<NFIComponentManager> NFCClassModule::GetClassComponentManager(const std::string& strClassName)
 {
     NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
-    if (pClass.get())
+    if (pClass)
     {
         return pClass->GetComponentManager();
     }

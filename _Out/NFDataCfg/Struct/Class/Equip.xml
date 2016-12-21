@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Sex" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="NFSexType"/>
+        <Property Id="IntensiveBuffList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="强化对应的BUFF列表，最大10次强化那么就9个逗号隔开，对应10个BUFF"/>
+        <Property Id="EnchantmentBuffList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="附魔对应的BUFF列表，最大10次附魔那么就9个逗号隔开，对应10个BUFF"/>
+        <Property Id="SuitID" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="套装ID"/>
+        <Property Id="SuitBuffID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="套装BUFFID"/>
+        <Property Id="ItemType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品类别EGameItemType"/>
+        <Property Id="ItemSubType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品子类别EGameEquipType"/>
+        <Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="等级限制"/>
+        <Property Id="Job" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="职业限制,用分号隔开"/>
+        <Property Id="Quality" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品品质"/>
+        <Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="显示名字"/>
+        <Property Id="Desc" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="装备描述字符串索引"/>
+        <Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="绝对值属性包索引"/>
+        <Property Id="PrefabPath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="预置物体的路径"/>
+        <Property Id="DropPrePath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="掉落预置物体的路径"/>
+        <Property Id="BuyPrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="商店买价格"/>
+        <Property Id="SalePrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="卖商店价格"/>
+        <Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="显示图标"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>
