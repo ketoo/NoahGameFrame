@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFCChatPlugin" />
+		<Option title="NFCShopPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Debug/NFCChatPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Debug/NFCShopPlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -40,7 +40,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Release/NFCChatPlugin" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/NFCShopPlugin" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -69,10 +69,10 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCChatModule.cpp" />
-		<Unit filename="NFCChatModule.h" />
-		<Unit filename="NFCChatModule.cpp" />
-		<Unit filename="NFCChatModule.h" />
+		<Unit filename="NFCShopModule.cpp" />
+		<Unit filename="NFCShopModule.h" />
+		<Unit filename="NFCShopModule.cpp" />
+		<Unit filename="NFCShopModule.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
