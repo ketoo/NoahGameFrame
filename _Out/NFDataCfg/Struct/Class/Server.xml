@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ServerID" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="服务器ID"/>
+        <Property Id="Name" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="服务器名字"/>
+        <Property Id="MaxOnline" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="作为服务器时：服务器最大连接"/>
+        <Property Id="CpuCount" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="CPU个数（机器）"/>
+        <Property Id="IP" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="IP地址"/>
+        <Property Id="Port" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="作为服务器时：相对客户端的port"/>
+        <Property Id="Type" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="服务器类型"/>
+        <Property Id="Area" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="区服"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

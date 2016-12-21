@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="VIPEXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="VIP经验"/>
+        <Property Id="EXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
+        <Property Id="HP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="生命值"/>
+        <Property Id="SP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="体力"/>
+        <Property Id="MP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="法力值"/>
+        <Property Id="Gold" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家游戏金币"/>
+        <Property Id="Money" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="钻石"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

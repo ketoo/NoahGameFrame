@@ -12,9 +12,9 @@
 #include <vector>
 #include "NFIRecord.h"
 #include "NFCDataList.h"
-#include "NFMapEx.h"
-
-class NFCRecord : public NFIRecord
+#include "NFMapEx.hpp"
+#include "NFComm/NFPluginModule/NFPlatform.h"
+class _NFExport NFCRecord : public NFIRecord
 {
 public:
     NFCRecord();
@@ -33,7 +33,7 @@ public:
     virtual TDATA_TYPE GetColType(const int nCol) const;
     virtual const std::string& GetColTag(const int nCol) const;
 
-    // 添加数据
+    
     virtual int AddRow(const int nRow);
 
     virtual int AddRow(const int nRow, const NFIDataList& var);
@@ -42,11 +42,15 @@ public:
     virtual bool SetFloat(const int nRow, const int nCol, const double value);
     virtual bool SetString(const int nRow, const int nCol, const std::string& value);
     virtual bool SetObject(const int nRow, const int nCol, const NFGUID& value);
+	virtual bool SetVector2(const int nRow, const int nCol, const NFVector2& value);
+	virtual bool SetVector3(const int nRow, const int nCol, const NFVector3& value);
 
     virtual bool SetInt(const int nRow, const std::string& strColTag, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const std::string& strColTag, const double value);
     virtual bool SetString(const int nRow, const std::string& strColTag, const std::string& value);
     virtual bool SetObject(const int nRow, const std::string& strColTag, const NFGUID& value);
+	virtual bool SetVector2(const int nRow, const std::string& strColTag, const NFVector2& value);
+	virtual bool SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value);
 
     virtual bool QueryRow(const int nRow, NFIDataList& varList);
 
@@ -56,23 +60,32 @@ public:
     virtual double GetFloat(const int nRow, const int nCol) const;
     virtual const std::string& GetString(const int nRow, const int nCol) const;
     virtual const NFGUID& GetObject(const int nRow, const int nCol) const;
+	virtual const NFVector2& GetVector2(const int nRow, const int nCol) const;
+	virtual const NFVector3& GetVector3(const int nRow, const int nCol) const;
 
     virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const;
     virtual double GetFloat(const int nRow, const std::string& strColTag) const;
     virtual const std::string& GetString(const int nRow, const std::string& strColTag) const;
     virtual const NFGUID& GetObject(const int nRow, const std::string& strColTag) const;
+	virtual const NFVector2& GetVector2(const int nRow, const std::string& strColTag) const;
+	virtual const NFVector3& GetVector3(const int nRow, const std::string& strColTag) const;
 
     virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const int nCol, const NFINT64 value, NFIDataList& varResult);
     virtual int FindFloat(const int nCol, const double value, NFIDataList& varResult);
 	virtual int FindString(const int nCol, const std::string& value, NFIDataList& varResult);
     virtual int FindObject(const int nCol, const NFGUID& value, NFIDataList& varResult);
+	virtual int FindVector2(const int nCol, const NFVector2& value, NFIDataList& varResult);
+	virtual int FindVector3(const int nCol, const NFVector3& value, NFIDataList& varResult);
+
 
     virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult);
     virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFIDataList& varResult);
     virtual int FindFloat(const std::string& strColTag, const double value, NFIDataList& varResult);
 	virtual int FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult);
     virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFIDataList& varResult);
+	virtual int FindVector2(const std::string& strColTag, const NFVector2& value, NFIDataList& varResult);
+	virtual int FindVector3(const std::string& strColTag, const NFVector3& value, NFIDataList& varResult);
 
     virtual bool Remove(const int nRow);
 
@@ -84,6 +97,8 @@ public:
 
     virtual const bool GetCache();
 
+	virtual const bool GetUpload();
+
     virtual const bool GetPublic();
 
     virtual const bool GetPrivate();
@@ -93,6 +108,8 @@ public:
     virtual void SetSave(const bool bSave);
 
     virtual void SetCache(const bool bCache);
+
+	virtual void SetUpload(const bool bUpload);
 
     virtual void SetPublic(const bool bPublic);
 
@@ -116,15 +133,15 @@ protected:
     void OnEventHandler(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 
 protected:
-    //记录这个表的Key类型，那样在读取和设置的时候才能保持正确
-	NF_SHARE_PTR<NFIDataList> mVarRecordType;//初始值类型--应该引用静态的(或者智能指针)，节约大量内存
-	NF_SHARE_PTR<NFIDataList> mVarRecordTag;//col的tag值--应该引用静态的(或者智能指针)，节约大量内存
+    
+	NF_SHARE_PTR<NFIDataList> mVarRecordType;
+	NF_SHARE_PTR<NFIDataList> mVarRecordTag;
 
-    std::map<std::string, int> mmTag;//tag->col转换
+    std::map<std::string, int> mmTag;
 
 	////////////////////////////
 	
-	TRECORDVEC mtRecordVec;//真的数据
+	TRECORDVEC mtRecordVec;
 	std::vector<int> mVecUsedState;
     int mnMaxRow;
 
@@ -133,6 +150,7 @@ protected:
     bool mbPublic;
     bool mbPrivate;
     bool mbCache;
+	bool mbUpload;
     std::string mstrRecordName;
 
     typedef std::vector<RECORD_EVENT_FUNCTOR_PTR> TRECORDCALLBACKEX;

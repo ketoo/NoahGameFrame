@@ -21,8 +21,8 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -57,11 +57,7 @@ public:
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex);
 
-    virtual int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
-    virtual int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
 
-    virtual int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-    virtual int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
 
 protected:
     void OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -81,40 +77,60 @@ protected:
     void OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
-	
+
 protected:
-    //网络同步
-    int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	void OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnGroupEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-    int OnContainerEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+	void OnClientAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRemoveRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientSwapRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-    int OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var);
+protected:
 
-    int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
-    int GetBroadCastObject(const int nObjectContainerID, const int nGroupID, NFIDataList& valueObject);
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	int OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	
+	//////////////////////////////////////////
+
+	int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
+	int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
+
+	//broad the data of argvar to self
+	int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
+	int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
+
+	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
+	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
 
 private:
-    //<角色id,角色网关基础信息>//其实可以在object系统中被代替
+    
     NFMapEx<NFGUID, GateBaseInfo> mRoleBaseData;
     //gateid,data
     NFMapEx<int, GateServerInfo> mProxyMap;
 
     //////////////////////////////////////////////////////////////////////////
-    NFIUUIDModule* m_pUUIDModule;
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
+	NFIEventModule* m_pEventModule;
+	NFISceneAOIModule* m_pSceneAOIModule;
     //////////////////////////////////////////////////////////////////////////
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };

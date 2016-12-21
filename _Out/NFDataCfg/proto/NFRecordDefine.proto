@@ -1,0 +1,285 @@
+package NFrame;
+enum GroupMemberList
+{
+	GUID		= 0; // GUID -- object
+	Online		= 1; // Online -- int
+	GameID		= 2; // GameID -- int
+}
+enum ChatList
+{
+	GUID		= 0; // GUID -- object
+	msg		= 1; // msg -- string
+	time		= 2; // time -- int
+}
+enum GuildBoss
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Offline		= 6; // Offline -- int
+	Power		= 7; // Power -- int
+}
+enum GuildMemberList
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	Receive		= 5; // Receive -- int
+	VIP		= 6; // VIP -- int
+	Online		= 7; // Online -- int
+	Power		= 8; // Power -- int
+	Title		= 9; // Title -- int
+	GameID		= 10; // GameID -- int
+	JoinTime		= 11; // JoinTime -- int
+	Contribution		= 12; // Contribution -- int
+	AllContribution		= 13; // AllContribution -- int
+}
+enum GuildAppyList
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Power		= 6; // Power -- int
+}
+enum GuildEvent
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Offline		= 6; // Offline -- int
+	Power		= 7; // Power -- int
+	EventID		= 8; // EventID -- int
+	EventTime		= 9; // EventTime -- int
+	Context		= 10; // Context -- string
+}
+enum GuildHouse
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Offline		= 6; // Offline -- int
+	Power		= 7; // Power -- int
+}
+enum GuildSkill
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Offline		= 6; // Offline -- int
+	Power		= 7; // Power -- int
+}
+enum Station
+{
+	GUID		= 0; // GUID -- object
+	GuildID		= 1; // GuildID -- object
+	GuildName		= 2; // GuildName -- string
+	Level		= 3; // Level -- int
+	Title		= 4; // Title -- string
+	Slogan		= 5; // Slogan -- string
+	State		= 6; // State -- int
+	CurMemberCount		= 7; // CurMemberCount -- int
+	WinCount		= 8; // WinCount -- int
+}
+enum PlayerHero
+{
+	GUID		= 0; // GUID -- object
+	ConfigID		= 1; // ConfigID -- string
+	Level		= 2; // Level -- int
+	Exp		= 3; // Exp -- int
+	Star		= 4; // Star -- int
+	Equip1		= 5; // Equip1 -- object
+	Equip2		= 6; // Equip2 -- object
+	Equip3		= 7; // Equip3 -- object
+	Equip4		= 8; // Equip4 -- object
+	Equip5		= 9; // Equip5 -- object
+	Equip6		= 10; // Equip6 -- object
+	Talent1		= 11; // Talent1 -- string
+	Talent2		= 12; // Talent2 -- string
+	Talent3		= 13; // Talent3 -- string
+	Talent4		= 14; // Talent4 -- string
+	Talent5		= 15; // Talent5 -- string
+	Skill1		= 16; // Skill1 -- string
+	Skill2		= 17; // Skill2 -- string
+	Skill3		= 18; // Skill3 -- string
+	Skill4		= 19; // Skill4 -- string
+	Skill5		= 20; // Skill5 -- string
+	FightSkill		= 21; // FightSkill -- string
+}
+enum PlayerFightHero
+{
+	GUID		= 0; // GUID -- object
+	FightPos		= 1; // FightPos -- int
+}
+enum HeroPropertyValue
+{
+	SUCKBLOOD		= 0; // SUCKBLOOD -- int
+	REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+	CRITICAL		= 2; // CRITICAL -- int
+	MAXHP		= 3; // MAXHP -- int
+	MAXMP		= 4; // MAXMP -- int
+	MAXSP		= 5; // MAXSP -- int
+	HPREGEN		= 6; // HPREGEN -- int
+	SPREGEN		= 7; // SPREGEN -- int
+	MPREGEN		= 8; // MPREGEN -- int
+	ATK_VALUE		= 9; // ATK_VALUE -- int
+	DEF_VALUE		= 10; // DEF_VALUE -- int
+	MOVE_SPEED		= 11; // MOVE_SPEED -- int
+	ATK_SPEED		= 12; // ATK_SPEED -- int
+	ATK_FIRE		= 13; // ATK_FIRE -- int
+	ATK_LIGHT		= 14; // ATK_LIGHT -- int
+	ATK_WIND		= 15; // ATK_WIND -- int
+	ATK_ICE		= 16; // ATK_ICE -- int
+	ATK_POISON		= 17; // ATK_POISON -- int
+	DEF_FIRE		= 18; // DEF_FIRE -- int
+	DEF_LIGHT		= 19; // DEF_LIGHT -- int
+	DEF_WIND		= 20; // DEF_WIND -- int
+	DEF_ICE		= 21; // DEF_ICE -- int
+	DEF_POISON		= 22; // DEF_POISON -- int
+	DIZZY_GATE		= 23; // DIZZY_GATE -- int
+	MOVE_GATE		= 24; // MOVE_GATE -- int
+	SKILL_GATE		= 25; // SKILL_GATE -- int
+	PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+	MAGIC_GATE		= 27; // MAGIC_GATE -- int
+	BUFF_GATE		= 28; // BUFF_GATE -- int
+}
+enum BagEquipList
+{
+	GUID		= 0; // GUID -- object
+	WearGUID		= 1; // WearGUID -- object
+	ConfigID		= 2; // ConfigID -- string
+	ExpiredType		= 3; // ExpiredType -- int
+	Date		= 4; // Date -- int
+	RandPropertyID		= 5; // RandPropertyID -- string
+	SlotCount		= 6; // SlotCount -- int
+	InlayStone1		= 7; // InlayStone1 -- string
+	InlayStone2		= 8; // InlayStone2 -- string
+	InlayStone3		= 9; // InlayStone3 -- string
+	InlayStone4		= 10; // InlayStone4 -- string
+	InlayStone5		= 11; // InlayStone5 -- string
+	InlayStone6		= 12; // InlayStone6 -- string
+	InlayStone7		= 13; // InlayStone7 -- string
+	InlayStone8		= 14; // InlayStone8 -- string
+	InlayStone9		= 15; // InlayStone9 -- string
+	InlayStone10		= 16; // InlayStone10 -- string
+	IntensifyLevel		= 17; // IntensifyLevel -- string
+	ElementLevel1_FIRE		= 18; // ElementLevel1_FIRE -- int
+	ElementLevel2_LIGHT		= 19; // ElementLevel2_LIGHT -- int
+	ElementLevel3_Wind		= 20; // ElementLevel3_Wind -- int
+	ElementLevel4_ICE		= 21; // ElementLevel4_ICE -- int
+	ElementLevel5_POISON		= 22; // ElementLevel5_POISON -- int
+}
+enum BagItemList
+{
+	ConfigID		= 0; // ConfigID -- string
+	ItemCount		= 1; // ItemCount -- int
+	Bound		= 2; // Bound -- int
+	ExpiredType		= 3; // ExpiredType -- int
+	Date		= 4; // Date -- int
+}
+enum CommPropertyValue
+{
+	SUCKBLOOD		= 0; // SUCKBLOOD -- int
+	REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+	CRITICAL		= 2; // CRITICAL -- int
+	MAXHP		= 3; // MAXHP -- int
+	MAXMP		= 4; // MAXMP -- int
+	MAXSP		= 5; // MAXSP -- int
+	HPREGEN		= 6; // HPREGEN -- int
+	SPREGEN		= 7; // SPREGEN -- int
+	MPREGEN		= 8; // MPREGEN -- int
+	ATK_VALUE		= 9; // ATK_VALUE -- int
+	DEF_VALUE		= 10; // DEF_VALUE -- int
+	MOVE_SPEED		= 11; // MOVE_SPEED -- int
+	ATK_SPEED		= 12; // ATK_SPEED -- int
+	ATK_FIRE		= 13; // ATK_FIRE -- int
+	ATK_LIGHT		= 14; // ATK_LIGHT -- int
+	ATK_WIND		= 15; // ATK_WIND -- int
+	ATK_ICE		= 16; // ATK_ICE -- int
+	ATK_POISON		= 17; // ATK_POISON -- int
+	DEF_FIRE		= 18; // DEF_FIRE -- int
+	DEF_LIGHT		= 19; // DEF_LIGHT -- int
+	DEF_WIND		= 20; // DEF_WIND -- int
+	DEF_ICE		= 21; // DEF_ICE -- int
+	DEF_POISON		= 22; // DEF_POISON -- int
+	DIZZY_GATE		= 23; // DIZZY_GATE -- int
+	MOVE_GATE		= 24; // MOVE_GATE -- int
+	SKILL_GATE		= 25; // SKILL_GATE -- int
+	PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+	MAGIC_GATE		= 27; // MAGIC_GATE -- int
+	BUFF_GATE		= 28; // BUFF_GATE -- int
+}
+enum TaskMonsterList
+{
+	MonsterID		= 0; // MonsterID -- string
+	CurrentKillCount		= 1; // CurrentKillCount -- int
+	RequireKillCount		= 2; // RequireKillCount -- int
+	TaskID		= 3; // TaskID -- string
+}
+enum TaskList
+{
+	TaskID		= 0; // TaskID -- string
+	TaskStatus		= 1; // TaskStatus -- int
+	Process		= 2; // Process -- int
+}
+enum BuildingList
+{
+	BuildingID		= 0; // BuildingID -- string
+	BuildingGUID		= 1; // BuildingGUID -- object
+	State		= 2; // State -- int
+	PosX		= 3; // PosX -- int
+	PosY		= 4; // PosY -- int
+	PosZ		= 5; // PosZ -- int
+	StateStartTime		= 6; // StateStartTime -- int
+	StateEndTime		= 7; // StateEndTime -- int
+}
+enum BuildingListProduce
+{
+	BuildingID		= 0; // BuildingID -- string
+	BuildingGUID		= 1; // BuildingGUID -- object
+	State		= 2; // State -- int
+	PosX		= 3; // PosX -- int
+	PosY		= 4; // PosY -- int
+	PosZ		= 5; // PosZ -- int
+	StateStartTime		= 6; // StateStartTime -- int
+	StateEndTime		= 7; // StateEndTime -- int
+}
+enum MemberList
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	Receive		= 5; // Receive -- int
+	VIP		= 6; // VIP -- int
+	Online		= 7; // Online -- int
+	Title		= 8; // Title -- int
+	GameID		= 9; // GameID -- int
+}
+enum ApplyList
+{
+	GUID		= 0; // GUID -- object
+	Name		= 1; // Name -- string
+	Level		= 2; // Level -- int
+	Job		= 3; // Job -- int
+	Donation		= 4; // Donation -- int
+	VIP		= 5; // VIP -- int
+	Power		= 6; // Power -- int
+}

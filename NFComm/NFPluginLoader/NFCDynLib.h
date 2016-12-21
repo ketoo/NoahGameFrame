@@ -30,8 +30,9 @@ typedef struct HINSTANCE__* hInstance;
 #define DYNLIB_UNLOAD( a ) dlclose( a )
 
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#include <dlfcn.h>
 #define DYNLIB_HANDLE void*
-#define DYNLIB_LOAD( a ) mac_loadDylib( a )
+#define DYNLIB_LOAD( a ) dlopen( a, RTLD_LOCAL|RTLD_LAZY)
 #define DYNLIB_GETSYM( a, b ) dlsym( a, b )
 #define DYNLIB_UNLOAD( a ) dlclose( a )
 

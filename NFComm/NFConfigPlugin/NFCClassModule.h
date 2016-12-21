@@ -13,12 +13,12 @@
 #include <map>
 #include <iostream>
 #include "NFCElementModule.h"
-#include "NFComm/RapidXML/rapidxml.hpp"
-#include "NFComm/NFCore/NFMap.h"
-#include "NFComm/NFCore/NFList.h"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFCore/NFCRecord.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -171,7 +171,7 @@ protected:
     virtual bool AddClassInclude(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass);
     virtual bool AddClass(const char* pstrClassFilePath, NF_SHARE_PTR<NFIClass> pClass);
 
-    //加载此节点的类
+    
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pParentClass);
 
 protected:

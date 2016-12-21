@@ -28,7 +28,7 @@ public:
 
     virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList) = 0;
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID) = 0;
-    virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild) = 0;
+    virtual bool MemberOffline(const NFGUID& self, const NFGUID& xGuild) = 0;
 
 private:
 };
