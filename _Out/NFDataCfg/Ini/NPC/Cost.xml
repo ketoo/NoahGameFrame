@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="Cost_1" CostMoney="100" CostDiamond="0" CostVP="0" CostHonour="0"/>
+    <Object Id="Cost_2" CostMoney="0" CostDiamond="100" CostVP="0" CostHonour="0"/>
+</XML>

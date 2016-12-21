@@ -1,9 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ��    NFINet.h
-//    @Author           ��    LvSheng.Huang
-//    @Date             ��    2013-12-15
-//    @Module           ��    NFINet
-//    @Desc             :     INet
+//    @FileName			:		NFINet.h
+//    @Author			:		LvSheng.Huang
+//    @Date				:		2012-12-15
+//    @Module			:		NFINet
 // -------------------------------------------------------------------------
 
 #ifndef NFI_NET_H
@@ -54,10 +53,10 @@
 
 enum NF_NET_EVENT
 {
-    NF_NET_EVENT_EOF = 0x10,        //����
-    NF_NET_EVENT_ERROR = 0x20,      //δ֪����
-    NF_NET_EVENT_TIMEOUT = 0x40,    //���ӳ�ʱ
-    NF_NET_EVENT_CONNECTED = 0x80,  //���ӳɹ�(��Ϊ�ͻ���)
+    NF_NET_EVENT_EOF = 0x10,        
+    NF_NET_EVENT_ERROR = 0x20,      
+    NF_NET_EVENT_TIMEOUT = 0x40,    
+    NF_NET_EVENT_CONNECTED = 0x80,  
 };
 
 
@@ -157,7 +156,7 @@ struct  NFIMsgHead
 
 };
 
-class NFCMsgHead : public NFIMsgHead
+class _NFExport NFCMsgHead : public NFIMsgHead
 {
 public:
     NFCMsgHead()
@@ -233,7 +232,7 @@ protected:
     uint16_t munMsgID;
 };
 
-class NFINet;
+class _NFExport NFINet;
 
 typedef std::function<void(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
@@ -244,7 +243,7 @@ typedef std::shared_ptr<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
 typedef std::function<void(int severity, const char* msg)> NET_EVENT_LOG_FUNCTOR;
 typedef std::shared_ptr<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 
-class NetObject
+class _NFExport NetObject
 {
 public:
     NetObject(NFINet* pNet, int32_t fd, sockaddr_in& addr, bufferevent* pBev)
@@ -407,9 +406,11 @@ private:
     bool bNeedRemove;
 };
 
-class NFINet
+class _NFExport NFINet
 {
 public:
+	virtual ~NFINet() {}
+
     //need to call this function every frame to drive network library
     virtual bool Execute() = 0;
 

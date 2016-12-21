@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Tag" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="SpriteList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="SpritePath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="LeftSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="RightSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="TopSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="DownSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="LeftTopSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="LeftDownSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="RightTopSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="RightDownSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="LeftTopOutSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="LeftDownOutSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="RightTopOutSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="RightDownOutSide" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="GrassList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="JoinList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="CrackList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="TreasureList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="TreeRootList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

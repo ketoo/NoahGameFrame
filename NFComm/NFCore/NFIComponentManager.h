@@ -10,12 +10,12 @@
 #define NFI_COMPONENT_MANAGER_H
 
 #include <memory>
-#include "NFMap.h"
+#include "NFMap.hpp"
 #include "NFIComponent.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
-class NFIComponentManager : public NFIModule, public NFMapEx<std::string, NFIComponent>
+class _NFExport NFIComponentManager : public NFIModule, public NFMapEx<std::string, NFIComponent>
 {
 public:
     virtual ~NFIComponentManager() {}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Job" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="公会职位"/>
+        <Property Id="JobCount" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="公会职位人数"/>
+        <Property Id="Appoint" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="任命"/>
+        <Property Id="Fire" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="撤职"/>
+        <Property Id="Demise" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="禅让"/>
+        <Property Id="ApplyDismiss" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="申请解散军团"/>
+        <Property Id="StopDismiss" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="中止解散军团"/>
+        <Property Id="AcceptApply" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="收人"/>
+        <Property Id="DenyApply" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="拒收"/>
+        <Property Id="Kickout" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="开除"/>
+        <Property Id="SetRecruit" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="设置招募"/>
+        <Property Id="PublishRecruit" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="发布招募"/>
+        <Property Id="EditAD" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="编辑公告"/>
+        <Property Id="Leave" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="退团"/>
+        <Property Id="LevelUp" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="军团升级"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

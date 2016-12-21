@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFICommonConfigModule.h
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2012-12-15
-//    @Module           £º    NFICosmmonConfigModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -10,12 +10,11 @@
 #define NFI_COMMONCONFIG_MODULE_H
 
 #include <iostream>
-#include "NFILogicModule.h"
 #include "NFIBuffConfigModule.h"
 
 
 class NFICommonConfigModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
     virtual bool ClearConfig() = 0;

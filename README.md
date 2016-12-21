@@ -50,7 +50,6 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 - easylogging++ 9.80
 - mysql++ 3.2.2
 - google protobuf 2.5.0
-- pybind11 1.2
 - redis-cpp-client 
 - Theron 6.00.01
 - curl 7.37.1
@@ -68,7 +67,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 3. Open the solution: **NoahFrame.sln**
 4. Build the solution
 5. Run **GenerateConfigXML.bat** to generate configuration files
-6. Run the binary file by **_Out/Server/Debug/Run.bat**
+6. Run the binary file by **_Out/Debug/rund.bat**
 
 ### CodeBlocks >= 13.1(Only in linux)
 
@@ -78,15 +77,14 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 4. Check **C++11** option in CodeBlocks compiler setting
 5. Build **NF.workspace**
 6. Run **sh ./GenerateConfigXML.sh** to generate configuration files
-6. Run the binary file by **_Out/Server/Debug/rund.sh**
+7. Run the binary file by **_Out/Debug/rund.sh**
 
 ### CMake
 1. Git pull all source
 2. Install cmake[>= 2.8] please choose options for installing: **Add CMake to the system PATH for all users and restart your computer**
 3. Install VS2015 or gcc[>= 4.8]
-4. Run **install.bat** or **install.sh** to build NF
-5. Run the binary file by **_Out/Server/Debug/run.bat** or **_Out/Server/Debug/rund_cmake.sh**
-6. (Optional)For Release Version, after above, run **BuildNF.VS2015.Release.X64.bat** or **BuildNF.CMake.Release.sh**, then run the binary file by **_Out/Server/Release/run.bat** or **_Out/Server/Release/run_cmake.sh**
+4. Run **install4cmake.bat** or **install4cmake.sh** to build NF
+5. Run the binary file by **_Out/Debug/rund.bat** or **_Out/Debug/rund.sh**
 
 ### JAVA Project
 WebSite:  https://github.com/NFGameTeam/NFrame-java

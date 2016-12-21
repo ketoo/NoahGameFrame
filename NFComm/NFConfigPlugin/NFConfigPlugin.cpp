@@ -1,5 +1,10 @@
-// NFConfigPlugin.cpp : Defines the exported functions for the DLL application.
+// -------------------------------------------------------------------------
+//    @FileName         :    NFConfigPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2010-03-15
+//    @Module           :    NFConfigPlugin
 //
+// -------------------------------------------------------------------------
 
 #include "NFConfigPlugin.h"
 #include "NFCClassModule.h"
@@ -32,7 +37,7 @@ const int NFConfigPlugin::GetPluginVersion()
 
 const std::string NFConfigPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFConfigPlugin)
+	return GET_CLASS_NAME(NFConfigPlugin);
 }
 
 void NFConfigPlugin::Install()
