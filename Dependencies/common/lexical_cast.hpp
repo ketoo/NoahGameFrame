@@ -1,6 +1,3 @@
-// C++ 11实现的lexical_cast，为了剥离boost
-// 代码来自: http://purecpp.org/?p=221
-
 #ifndef CPP_11_LEXICAL_CAST_HPP
 #define CPP_11_LEXICAL_CAST_HPP
 
@@ -168,7 +165,6 @@ namespace detail
         }
         else
         {
-            // 数字转为bool
             int value = Converter<int, const char*>::convert(from);
             return (value > 0);
         }

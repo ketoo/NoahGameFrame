@@ -12,7 +12,6 @@
 
 #include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFCore/NFCHeartBeatManager.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -39,6 +38,7 @@ public:
 
     virtual bool AfterInit();
 	virtual NFINetClientModule* GetClusterModule();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -54,12 +54,12 @@ protected:
 private:
 
     NFILogModule* m_pLogModule;
-    NFIProxyLogicModule* m_pProxyLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

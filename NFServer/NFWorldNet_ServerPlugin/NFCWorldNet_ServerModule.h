@@ -10,7 +10,7 @@
 #define NFC_WORLDNET_SERVER_MODULE_H
 
 //  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
-#include "NFComm/NFCore/NFMap.h"
+#include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 #include "NFComm/NFPluginModule/NFIWorldLogicModule.h"
@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
 
 class NFCWorldNet_ServerModule
     : public NFIWorldNet_ServerModule
@@ -60,9 +61,9 @@ protected:
 
     void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-    //连接丢失,删2层(连接对象，帐号对象)
+    
     void OnClientDisconnect(const int nAddress);
-    //有连接
+    
     void OnClientConnected(const int nAddress);
 
 
@@ -90,7 +91,8 @@ protected:
 
     void OnOnlineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnOfflineProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
+	void OnTranspondServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen);
+	void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
 private:
 
@@ -102,10 +104,10 @@ private:
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIWorldLogicModule* m_pWorldLogicModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
+	NFIWorldToMasterModule* m_pWorldToMasterModule;
 
 };
 

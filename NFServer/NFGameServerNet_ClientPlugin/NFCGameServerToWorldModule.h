@@ -29,6 +29,7 @@ public:
     NFCGameServerToWorldModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
     virtual bool Init();
     virtual bool Shut();
@@ -37,6 +38,7 @@ public:
 
     virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
     virtual NFINetClientModule* GetClusterClientModule();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -44,6 +46,7 @@ protected:
 
 protected:
     void Register(NFINet* pNet);
+	void ServerReport();
     void RefreshWorldInfo();
     void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
@@ -54,6 +57,7 @@ private:
     void SendOffline(const NFGUID& self);
 
 private:
+	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
     NFIKernelModule* m_pKernelModule;
@@ -61,6 +65,7 @@ private:
     NFIElementModule* m_pElementModule;
 	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

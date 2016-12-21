@@ -13,7 +13,7 @@
 #include <string>
 #include <time.h>
 #include "NFCDynLib.h"
-#include "NFComm/NFCore/NFSingleton.h"
+#include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 class NFCPluginManager
@@ -29,6 +29,8 @@ public:
     virtual bool AfterInit();
 
     virtual bool CheckConfig();
+
+    virtual bool ReadyExecute();
 
     virtual bool BeforeShut();
 
@@ -55,7 +57,9 @@ public:
 
     virtual bool Execute();
 
-	virtual int AppID() const;
+	virtual int GetAppID() const;
+
+    virtual void SetAppID(const int nAppID);
 
 	virtual NFINT64 GetInitTime() const;
 
@@ -64,6 +68,15 @@ public:
 	virtual const std::string& GetConfigPath() const;
 
 	virtual void SetConfigName(const std::string& strFileName);
+
+	virtual const std::string& GetAppName() const;
+
+	virtual void SetAppName(const std::string& strAppName);
+
+	virtual const std::string& GetLogConfigName() const;
+
+	virtual void SetLogConfigName(const std::string& strName);
+
 protected:
 	bool LoadPluginConfig();
 
@@ -78,6 +91,8 @@ private:
     NFINT64 mnNowTime;
     std::string mstrConfigPath;
 	std::string mstrConfigName;
+	std::string mstrAppName;
+	std::string mstrLogConfigName;
 
     typedef std::map<std::string, bool> PluginNameMap;
     typedef std::map<std::string, NFCDynLib*> PluginLibMap;

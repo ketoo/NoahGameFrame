@@ -18,11 +18,7 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleTitle("NFGameServer");
-#endif // NF_PLATFORM
     CREATE_PLUGIN(pm, NFGameServerPlugin)
-
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
@@ -40,7 +36,7 @@ const int NFGameServerPlugin::GetPluginVersion()
 
 const std::string NFGameServerPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFGameServerPlugin)
+	return GET_CLASS_NAME(NFGameServerPlugin);
 }
 
 void NFGameServerPlugin::Install()

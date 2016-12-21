@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="SceneName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="SceneShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="MaxGroup" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="最大组"/>
+        <Property Id="MaxGroupPlayers" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="每组最大人数"/>
+        <Property Id="FilePath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="文件路径"/>
+        <Property Id="RelivePos" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="复活坐标列表"/>
+        <Property Id="Width" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="场景宽度"/>
+        <Property Id="SoundList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="场景背景音乐列表"/>
+        <Property Id="Share" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="多人实时副本"/>
+        <Property Id="CanClone" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="是否副本"/>
+        <Property Id="ActorID" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="acctorid"/>
+        <Property Id="LoadingUI" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="CamOffestPos" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="CamOffestRot" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="SyncObject" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="是否同步对象"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

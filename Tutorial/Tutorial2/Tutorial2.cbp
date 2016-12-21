@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/Tutorial2_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Debug/Tutorial2_d" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -28,24 +28,19 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
-					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
+					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/Tutorial2_d.so $(SolutionDir)/_Out/Server/Debug/Tutorial2/" />
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/Tutorial2" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/Tutorial2" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
@@ -60,13 +55,10 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
+					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/Tutorial2.so $(SolutionDir)/_Out/Server/Release/Tutorial2/" />
-					<Mode after="always" />
-				</ExtraCommands>
 			</Target>
 		</Build>
 		<Unit filename="HelloWorld2.cpp" />
