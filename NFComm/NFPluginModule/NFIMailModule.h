@@ -9,7 +9,6 @@
 #ifndef NFI_MAIL_MODULE_H
 #define NFI_MAIL_MODULE_H
 
-#include <iostream>
 #include "NFIModule.h"
 
 class NFIMailModule : public NFIModule
