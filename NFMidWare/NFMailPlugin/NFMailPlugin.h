@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFMailPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
 //    @Module           :    NFMailPlugin
