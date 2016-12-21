@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         ：    NFINetModule.h
-//    @Author           ：    LvSheng.Huang
-//    @Date             ：    2012-12-15
-//    @Module           ：    NFINetModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@
 #include "NFIModule.h"
 #include "NFIPluginManager.h"
 #include "NFComm/NFNet/NFCNet.h"
-#include "NFComm/NFCore/NFQueue.h"
+#include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
@@ -35,7 +35,7 @@ enum NF_SERVER_TYPES
 
 ////////////////////////////////////////////////////////////////////////////
 
-// 客户端消息处理宏
+
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
@@ -139,6 +139,16 @@ public:
 
 		return AddReceiveCallBack(nMsgID, functorPtr);
 	}
+    
+    void RemoveReceiveCallBack(const int nMsgID)
+	{
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+		if (mxReceiveCallBack.end() == it)
+		{
+			mxReceiveCallBack.erase(it);
+		}
+	}
+
 	template<typename BaseType>
 	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
@@ -190,7 +200,7 @@ public:
             return false;
         }
 
-        //把上次的数据处理了
+
         KeepAlive();
 
         return m_pNet->Execute();
@@ -205,6 +215,23 @@ public:
         return xIdent;
     }
 
+	static NFVector2 PBToNF(NFMsg::Vector2 value)
+	{
+		NFVector2  vector;
+		vector.SetX(value.x());
+		vector.SetY(value.y());
+		return vector;
+	}
+
+	static NFVector3 PBToNF(NFMsg::Vector3 value)
+	{
+		NFVector3  vector;
+		vector.SetX(value.x());
+		vector.SetY(value.y());
+		vector.SetZ(value.z());
+		return vector;
+	}
+
     static NFMsg::Ident NFToPB(NFGUID xID)
     {
         NFMsg::Ident  xIdent;
@@ -213,6 +240,24 @@ public:
 
         return xIdent;
     }
+
+	static NFMsg::Vector2 NFToPB(NFVector2 value)
+	{
+		NFMsg::Vector2  vector;
+		vector.set_x(value.X());
+		vector.set_y(value.Y());
+		return vector;
+	}
+
+	static NFMsg::Vector3 NFToPB(NFVector3 value)
+	{
+		NFMsg::Vector3  vector;
+		vector.set_x(value.X());
+		vector.set_y(value.Y());
+		vector.set_z(value.Z());
+		return vector;
+	}
+
     static bool ReceivePB(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, std::string& strMsg, NFGUID& nPlayer)
     {
         NFMsg::MsgBase xMsg;
@@ -265,7 +310,7 @@ public:
 
     bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg)
     {
-        return m_pNet->SendMsgToAllClient(msg.c_str(), msg.length());
+        return m_pNet->SendMsgToAllClientWithOutHead(nMsgID,msg.c_str(), msg.length());
     }
 
 	bool SendMsgPB(const google::protobuf::Message& xData, const uint32_t nSockIndex)
@@ -346,7 +391,7 @@ public:
             return false;
         }
 
-        //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)
@@ -389,7 +434,7 @@ public:
         NFMsg::MsgBase xMsg;
         xMsg.set_msg_data(strData.data(), strData.length());
 
-        //playerid主要是网关转发消息的时候做识别使用，其他使用不使用
+
         NFMsg::Ident* pPlayerID = xMsg.mutable_player_id();
         *pPlayerID = NFToPB(nPlayer);
         if (pClientIDList)

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="HttpServer_1" ServerID="3" WebPort="80" WebRootPath="../../Tool/NF_Web_Monitor"/>
+</XML>

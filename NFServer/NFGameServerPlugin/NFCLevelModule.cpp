@@ -21,7 +21,7 @@ bool NFCLevelModule::Shut()
 
 bool NFCLevelModule::Execute()
 {
-    //位置呢
+    
     return true;
 }
 
@@ -47,9 +47,9 @@ int NFCLevelModule::AddExp(const NFGUID& self, const int nExp)
     int nRemainExp = nCurExp - nMaxExp;
     while (nRemainExp >= 0)
     {
-        //升级
+        
         nLevel++;
-        //防止越级BUG
+        
         m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), nLevel);
 
         nCurExp = nRemainExp;

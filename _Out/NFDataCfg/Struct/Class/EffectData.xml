@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_SUCKBLOOD"/>
+        <Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_REFLECTDAMAGE"/>
+        <Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_CRITICAL"/>
+        <Property Id="MAXHP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MAXHP"/>
+        <Property Id="MAXMP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MAXMP"/>
+        <Property Id="MAXSP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MAXSP"/>
+        <Property Id="HP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_HP"/>
+        <Property Id="MP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MP"/>
+        <Property Id="SP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_SP"/>
+        <Property Id="HPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_HPREGEN"/>
+        <Property Id="SPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_SPREGEN"/>
+        <Property Id="MPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MPREGEN"/>
+        <Property Id="ATK_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_VALUE"/>
+        <Property Id="DEF_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_VALUE"/>
+        <Property Id="MOVE_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MOVE_SPEED"/>
+        <Property Id="ATK_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_SPEED"/>
+        <Property Id="ATK_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_FIRE"/>
+        <Property Id="ATK_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_LIGHT"/>
+        <Property Id="ATK_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_WIND"/>
+        <Property Id="ATK_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_ICE"/>
+        <Property Id="ATK_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_ATK_POISON"/>
+        <Property Id="DEF_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_FIRE"/>
+        <Property Id="DEF_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_LIGHT"/>
+        <Property Id="DEF_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_WIND"/>
+        <Property Id="DEF_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_ICE"/>
+        <Property Id="DEF_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DEF_POISON"/>
+        <Property Id="DIZZY_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_DIZZY_GATE"/>
+        <Property Id="MOVE_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MOVE_GATE"/>
+        <Property Id="SKILL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_SKILL_GATE"/>
+        <Property Id="PHYSICAL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_PHYSICAL_GATE"/>
+        <Property Id="MAGIC_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_MAGIC_GATE"/>
+        <Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="LPID_BUFF_GATE"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

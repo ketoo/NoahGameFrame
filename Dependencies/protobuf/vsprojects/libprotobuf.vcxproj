@@ -38,13 +38,13 @@
     <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -64,30 +64,7 @@
       <GenerateMapFile>false</GenerateMapFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName)_d.pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial7\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial7\$(ProjectName)_d.pdb</Command>
+
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -102,30 +79,6 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFLoginServer\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFMasterServer\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFProxyServer1\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFGameServer1\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial1\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial2\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial3\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial4\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial5\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial6\$(ProjectName).pdb
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial7\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\Tutorial7\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFILoginNet_ClientModule.h
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2012-12-15
-//    @Module           £º    NFILoginNet_ClientModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ class NFIMasterNet_ServerModule
 {
 
 public:
-    //actor
+	virtual std::string GetServersStatus() = 0;
 };
 
 #endif

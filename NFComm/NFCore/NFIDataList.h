@@ -26,18 +26,23 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include "NFMemoryCounter.h"
 #include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFComm/NFCore/NFVector2.hpp"
+#include "NFComm/NFCore/NFVector3.hpp"
 
-//变量类型
+
 enum TDATA_TYPE
 {
-    TDATA_UNKNOWN,  // 未知
-    TDATA_INT,      // 64位整数
-    TDATA_FLOAT,    // 浮点数(双精度，用double类型实现)
-    TDATA_STRING,   // 字符串
-    TDATA_OBJECT,   // 对象ID
+    TDATA_UNKNOWN,  
+    TDATA_INT,      
+    TDATA_FLOAT,    
+    TDATA_STRING,   
+    TDATA_OBJECT,   
+	TDATA_VECTOR2,
+	TDATA_VECTOR3,
     TDATA_MAX,
 };
 
@@ -45,11 +50,20 @@ const static std::string NULL_STR = "";
 const static NFGUID NULL_OBJECT = NFGUID();
 const static double NULL_FLOAT = 0.0;
 const static NFINT64 NULL_INT = 0;
+const static NFVector2 NULL_VECTOR2 = NFVector2();
+const static NFVector3 NULL_VECTOR3 = NFVector3();
 
-//类型接口
-class NFIDataList
+
+class _NFExport NFIDataList :public NFMemoryCounter
 {
 public:
+	struct Vetor3D
+	{
+		float fx;
+		float fy;
+		float fz;
+	};
+
     struct TData
     {
     public:
@@ -114,6 +128,22 @@ public:
 					}
 				}
 				break;
+				case TDATA_VECTOR2:
+				{
+					if (src.GetVector2() == GetVector2())
+					{
+						return true;
+					}
+				}
+				break;
+				case TDATA_VECTOR3:
+				{
+					if (src.GetVector3() == GetVector3())
+					{
+						return true;
+					}
+				}
+				break;
 				default:
 					break;
 				}
@@ -167,6 +197,22 @@ public:
                     }
                 }
                 break;
+				case TDATA_VECTOR2:
+				{
+					if (!GetVector2().IsZero())
+					{
+						bChanged = true;
+					}
+				}
+				break;
+				case TDATA_VECTOR3:
+				{
+					if (!GetVector3().IsZero())
+					{
+						bChanged = true;
+					}
+				}
+				break;
                 default:
                     break;
             }
@@ -179,7 +225,7 @@ public:
             return nType;
         }
 
-        // 设置值，类型必须和之前一致
+        
         void SetInt(const NFINT64 var)
         {
             if (nType == TDATA_INT || TDATA_UNKNOWN == nType)
@@ -215,6 +261,24 @@ public:
                 variantData = (NFGUID)var;
             }
         }
+
+		void SetVector2(const NFVector2 var)
+		{
+			if (nType == TDATA_VECTOR2 || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_VECTOR2;
+				variantData = (NFVector2)var;
+			}
+		}
+
+		void SetVector3(const NFVector3 var)
+		{
+			if (nType == TDATA_VECTOR3 || TDATA_UNKNOWN == nType)
+			{
+				nType = TDATA_VECTOR3;
+				variantData = (NFVector3)var;
+			}
+		}
 
         NFINT64 GetInt() const
         {
@@ -270,6 +334,26 @@ public:
             return NULL_OBJECT;
         }
 
+		const NFVector2& GetVector2() const
+		{
+			if (TDATA_VECTOR2 == nType)
+			{
+				return variantData.get<NFVector2>();
+			}
+
+			return NULL_VECTOR2;
+		}
+
+		const NFVector3& GetVector3() const
+		{
+			if (TDATA_VECTOR3 == nType)
+			{
+				return variantData.get<NFVector3>();
+			}
+
+			return NULL_VECTOR3;
+		}
+
         std::string StringValEx() const
         {
             std::string strData;
@@ -292,6 +376,14 @@ public:
                     strData = GetObject().ToString();
                     break;
 
+				case TDATA_VECTOR2:
+					strData = GetVector2().ToString();
+					break;
+
+				case TDATA_VECTOR3:
+					strData = GetVector3().ToString();
+					break;
+
                 default:
                     strData = NULL_STR;
                     break;
@@ -304,10 +396,11 @@ public:
         TDATA_TYPE nType;
 
     public:
-        mapbox::util::variant<NFINT64, double, std::string, NFGUID> variantData;
+		//std::variant
+        mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3> variantData;
     };
 
-    NFIDataList()
+    NFIDataList() : NFMemoryCounter(GET_CLASS_NAME(NFIDataList))
     {
         mnUseSize = 0;
         mvList.reserve(STACK_SIZE);
@@ -315,9 +408,14 @@ public:
         {
             mvList.push_back(NF_SHARE_PTR<TData>(NF_NEW TData()));
         }
+
+		//AddInstance(GET_class _NFExport_NAME(NFIDataList));
     }
 
-    virtual ~NFIDataList() = 0;
+	virtual ~NFIDataList()
+	{
+		//RemInstance(GET_class _NFExport_NAME(NFIDataList));
+	}
 
     virtual std::string StringValEx(const int index) const = 0;
     virtual bool ToString(std::string& str, const std::string& strSplit) const = 0;
@@ -326,42 +424,48 @@ public:
 
     virtual const NF_SHARE_PTR<TData> GetStack(const int index) const = 0;
 
-    // 合并
+    
     virtual bool Concat(const NFIDataList& src) = 0;
-    // 部分添加
+    
     virtual bool Append(const NFIDataList& src) = 0;
     virtual bool Append(const NFIDataList& src, const int start, const int count) = 0;
-    // 部分添加
+    
     virtual bool Append(const NFIDataList::TData& sTData) = 0;
-    // 清空
+    
     virtual void Clear() = 0;
-    // 是否为空
+    
     virtual bool IsEmpty() const = 0;
-    // 数据数量
+    
     virtual int GetCount() const = 0;
-    // 数据类型
+    
     virtual TDATA_TYPE Type(const int index) const = 0;
-    //数据类型检测
+    
     virtual bool TypeEx(const  int nType, ...) const = 0;
-    //新进入拆分
+    
     virtual bool Split(const std::string& str, const std::string& strSplit) = 0;
 
-    // 添加数据
+    
     virtual bool Add(const NFINT64 value) = 0;
     virtual bool Add(const double value) = 0;
     virtual bool Add(const std::string& value) = 0;
     virtual bool Add(const NFGUID& value) = 0;
+	virtual bool Add(const NFVector2& value) = 0;
+	virtual bool Add(const NFVector3& value) = 0;
 
     virtual bool Set(const int index, const NFINT64 value) = 0;
     virtual bool Set(const int index, const double value) = 0;
 	virtual bool Set(const int index, const std::string& value) = 0;
     virtual bool Set(const int index, const NFGUID& value) = 0;
+	virtual bool Set(const int index, const NFVector2& value) = 0;
+	virtual bool Set(const int index, const NFVector3& value) = 0;
 
-    // 获得数据
+    
     virtual NFINT64 Int(const int index) const = 0;
     virtual double Float(const int index) const = 0;
     virtual const std::string& String(const int index) const = 0;
     virtual const NFGUID& Object(const int index) const = 0;
+	virtual const NFVector2& Vector2(const int index) const = 0;
+	virtual const NFVector3& Vector3(const int index) const = 0;
 
     bool AddInt(const NFINT64 value)
     {
@@ -383,6 +487,14 @@ public:
     {
         return Add(value);
     }
+	bool AddVector2(const NFVector2& value)
+	{
+		return Add(value);
+	}
+	bool AddVector3(const NFVector3& value)
+	{
+		return Add(value);
+	}
 
     bool SetInt(const int index, const NFINT64 value)
     {
@@ -400,6 +512,14 @@ public:
     {
         return Set(index, value);
     }
+	bool SetVector2(const int index, const NFVector2& value)
+	{
+		return Set(index, value);
+	}
+	bool SetVector3(const int index, const NFVector3& value)
+	{
+		return Set(index, value);
+	}
 
 
 
@@ -426,6 +546,14 @@ public:
                 case TDATA_OBJECT:
                     return Object(nPos) == src.Object(nPos);
                     break;
+
+				case TDATA_VECTOR2:
+					return Vector2(nPos) == src.Vector2(nPos);
+					break;
+
+				case TDATA_VECTOR3:
+					return Vector3(nPos) == src.Vector3(nPos);
+					break;
 
                 default:
                     return false;
@@ -490,6 +618,16 @@ public:
         Add(value);
         return *this;
     }
+	inline NFIDataList& operator<<(const NFVector2& value)
+	{
+		Add(value);
+		return *this;
+	}
+	inline NFIDataList& operator<<(const NFVector3& value)
+	{
+		Add(value);
+		return *this;
+	}
     inline NFIDataList& operator<<(const NFIDataList& value)
     {
         Concat(value);
@@ -501,8 +639,6 @@ protected:
     std::vector< NF_SHARE_PTR<TData> > mvList;
     std::map<std::string, NF_SHARE_PTR<TData> > mxMap;
 };
-
-inline NFIDataList::~NFIDataList() {}
 
 const static NFIDataList::TData NULL_TDATA = NFIDataList::TData();
 

@@ -7,10 +7,10 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPluginManager.h"
-#include "NFComm/RapidXML/rapidxml.hpp"
-#include "NFComm/RapidXML/rapidxml_iterators.hpp"
-#include "NFComm/RapidXML/rapidxml_print.hpp"
-#include "NFComm/RapidXML/rapidxml_utils.hpp"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
@@ -86,16 +86,23 @@ bool NFCPluginManager::LoadPluginConfig()
     doc.parse<0>(fdoc.data());
 
     rapidxml::xml_node<>* pRoot = doc.first_node();
-    for (rapidxml::xml_node<>* pPluginNode = pRoot->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
+    rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
+    if (!pAppNameNode)
+    {
+        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
+        return false;
+    }
+
+    for (rapidxml::xml_node<>* pPluginNode = pAppNameNode->first_node("Plugin"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Plugin"))
     {
         const char* strPluginName = pPluginNode->first_attribute("Name")->value();
-        const char* strMain = pPluginNode->first_attribute("Main")->value();
 
         mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 
     }
 
-    rapidxml::xml_node<>* pPluginAppNode = pRoot->first_node("APPID");
+/*
+    rapidxml::xml_node<>* pPluginAppNode = pAppNameNode->first_node("APPID");
     if (!pPluginAppNode)
     {
         NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
@@ -114,8 +121,8 @@ bool NFCPluginManager::LoadPluginConfig()
         NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
         return false;
     }
-
-    rapidxml::xml_node<>* pPluginConfigPathNode = pRoot->first_node("ConfigPath");
+*/
+    rapidxml::xml_node<>* pPluginConfigPathNode = pAppNameNode->first_node("ConfigPath");
     if (!pPluginConfigPathNode)
     {
         NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
@@ -212,9 +219,14 @@ bool NFCPluginManager::Execute()
     return bRet;
 }
 
-inline int NFCPluginManager::AppID() const
+inline int NFCPluginManager::GetAppID() const
 {
 	return mnAppID;
+}
+
+inline void NFCPluginManager::SetAppID(const int nAppID)
+{
+    mnAppID = nAppID;
 }
 
 inline NFINT64 NFCPluginManager::GetInitTime() const
@@ -245,6 +257,31 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 	}
 
 	mstrConfigName = strFileName;
+}
+
+const std::string& NFCPluginManager::GetAppName() const
+{
+	return mstrAppName;
+}
+
+void NFCPluginManager::SetAppName(const std::string& strAppName)
+{
+	if (!mstrAppName.empty())
+	{
+		return;
+	}
+
+	mstrAppName = strAppName;
+}
+
+const std::string & NFCPluginManager::GetLogConfigName() const
+{
+	return mstrLogConfigName;
+}
+
+void NFCPluginManager::SetLogConfigName(const std::string & strName)
+{
+	mstrLogConfigName = strName;
 }
 
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
@@ -293,7 +330,7 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 	{
 		return it->second;
 	}
-    
+
     return NULL;
 }
 
@@ -314,6 +351,17 @@ bool NFCPluginManager::CheckConfig()
     for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
         itCheckInstance->second->CheckConfig();
+    }
+
+    return true;
+}
+
+bool NFCPluginManager::ReadyExecute()
+{
+    PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
+    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    {
+        itCheckInstance->second->ReadyExecute();
     }
 
     return true;

@@ -1,0 +1,77 @@
+.table{
+    thead,
+    tbody,
+    tfoot{
+        tr > th,
+        tr > td{
+            border-top: 1px solid $table-line-color;
+        }
+    }
+   > thead > tr > th{
+       border-bottom-width: 0;
+       font-size: $font-size-h5;
+       font-weight: $font-weight-light;
+   }
+
+   .radio,
+   .checkbox{
+       margin-top: 0;
+       margin-bottom: 22px;
+       padding: 0;
+       width: 15px;
+   }
+   > thead > tr > th,
+   > tbody > tr > th,
+   > tfoot > tr > th,
+   > thead > tr > td,
+   > tbody > tr > td,
+   > tfoot > tr > td{
+       padding: 12px;
+       vertical-align: middle;
+   }
+
+   .th-description{
+       max-width: 150px;
+   }
+   .td-price{
+       font-size: 26px;
+       font-weight: $font-weight-light;
+       margin-top: 5px;
+       text-align: right;
+   }
+   .td-total{
+        font-weight: $font-weight-bold;
+        font-size: $font-size-h5;
+        padding-top: 20px;
+        text-align: right;
+    }
+
+   .td-actions .btn{
+
+        &.btn-sm,
+        &.btn-xs{
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+    }
+
+    > tbody > tr{
+        position: relative;
+    }
+}
+.table-striped{
+    tbody > tr:nth-of-type(2n+1) {
+        background-color: #fff;
+    }
+    tbody > tr:nth-of-type(2n) {
+        background-color: $pale-bg;
+    }
+    > thead > tr > th,
+    > tbody > tr > th,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > tbody > tr > td,
+    > tfoot > tr > td{
+        padding: 15px 8px;
+    }
+}

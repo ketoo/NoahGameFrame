@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ItemType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品类别EItemType"/>
+        <Property Id="ItemSubType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品子类别EGameEquipSubType EGameGemSubType EGameItemSubType EGameCardSubType EGameTokenSubType"/>
+        <Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="等级限制"/>
+        <Property Id="Job" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="职业限制,用分号隔开"/>
+        <Property Id="Quality" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品品质"/>
+        <Property Id="DescID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="1" Upload="0" Desc="装备描述字符串索引"/>
+        <Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="绝对值属性包索引"/>
+        <Property Id="ConsumeData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="消费数据属性包索引"/>
+        <Property Id="AwardData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="使用后获得的物品"/>
+        <Property Id="AwardProperty" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="使用后增加的属性值（货币经验等,一般有他就不用EffectData）"/>
+        <Property Id="CoolDownTime" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="使用冷却CD"/>
+        <Property Id="OverlayCount" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="叠加数量"/>
+        <Property Id="ExpiredType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="过期类型EGameItemExpiredType"/>
+        <Property Id="BuyPrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="商店买价格"/>
+        <Property Id="SalePrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="卖商店价格"/>
+        <Property Id="Script" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品使用脚本文件，比如得到英雄等"/>
+        <Property Id="Extend" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="扩展字段，比如得到英雄等，实际意义和当时的类型有关系"/>
+        <Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品显示Icon"/>
+        <Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="1" Upload="0" Desc="名字"/>
+        <Property Id="HeroTye" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="归属英雄类型，力敏智"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Theron" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="Theron" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_X64" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DTHERON_USE_STD_THREADS" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="Theron" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_X64" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DTHERON_USE_STD_THREADS" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/" />
+					<Add directory="/home/shadow/trunk/Dependencies/Theron-6.00.01/Theron/../Include/External/" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../Include/Theron/Actor.h" />
+		<Unit filename="../Include/Theron/Address.h" />
+		<Unit filename="../Include/Theron/Align.h" />
+		<Unit filename="../Include/Theron/AllocatorManager.h" />
+		<Unit filename="../Include/Theron/Assert.h" />
+		<Unit filename="../Include/Theron/BasicTypes.h" />
+		<Unit filename="../Include/Theron/Catcher.h" />
+		<Unit filename="../Include/Theron/DefaultAllocator.h" />
+		<Unit filename="../Include/Theron/Defines.h" />
+		<Unit filename="../Include/Theron/Detail/Alignment/MessageAlignment.h" />
+		<Unit filename="../Include/Theron/Detail/Allocators/CachingAllocator.h" />
+		<Unit filename="../Include/Theron/Detail/Allocators/Pool.h" />
+		<Unit filename="../Include/Theron/Detail/Containers/List.h" />
+		<Unit filename="../Include/Theron/Detail/Containers/Map.h" />
+		<Unit filename="../Include/Theron/Detail/Containers/Queue.h" />
+		<Unit filename="../Include/Theron/Detail/Debug/BuildDescriptor.h" />
+		<Unit filename="../Include/Theron/Detail/Directory/Directory.h" />
+		<Unit filename="../Include/Theron/Detail/Directory/Entry.h" />
+		<Unit filename="../Include/Theron/Detail/Directory/StaticDirectory.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/BlindDefaultHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/BlindFallbackHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/DefaultFallbackHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/DefaultHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/DefaultHandlerCollection.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/FallbackHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/FallbackHandlerCollection.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/HandlerCollection.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/IDefaultHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/IFallbackHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/IMessageHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/IReceiverHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/MessageHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/MessageHandlerCast.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/ReceiverHandler.h" />
+		<Unit filename="../Include/Theron/Detail/Handlers/ReceiverHandlerCast.h" />
+		<Unit filename="../Include/Theron/Detail/Mailboxes/Mailbox.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/IMessage.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/Message.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/MessageCast.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/MessageCreator.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/MessageSize.h" />
+		<Unit filename="../Include/Theron/Detail/Messages/MessageTraits.h" />
+		<Unit filename="../Include/Theron/Detail/Network/Index.h" />
+		<Unit filename="../Include/Theron/Detail/Network/MessageFactory.h" />
+		<Unit filename="../Include/Theron/Detail/Network/NameGenerator.h" />
+		<Unit filename="../Include/Theron/Detail/Network/NameMap.h" />
+		<Unit filename="../Include/Theron/Detail/Network/NetworkMessage.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/BlockingMonitor.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/Counting.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/IScheduler.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/MailboxContext.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/MailboxProcessor.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/MailboxQueue.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/NonBlockingMonitor.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/Scheduler.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/SchedulerHints.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/ThreadPool.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/WorkerContext.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/YieldImplementation.h" />
+		<Unit filename="../Include/Theron/Detail/Scheduler/YieldPolicy.h" />
+		<Unit filename="../Include/Theron/Detail/Strings/String.h" />
+		<Unit filename="../Include/Theron/Detail/Strings/StringHash.h" />
+		<Unit filename="../Include/Theron/Detail/Strings/StringPool.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Atomic.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Clock.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Condition.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Lock.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Mutex.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/README.txt" />
+		<Unit filename="../Include/Theron/Detail/Threading/SpinLock.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Thread.h" />
+		<Unit filename="../Include/Theron/Detail/Threading/Utils.h" />
+		<Unit filename="../Include/Theron/Detail/Transport/Context.h" />
+		<Unit filename="../Include/Theron/Detail/Transport/InputMessage.h" />
+		<Unit filename="../Include/Theron/Detail/Transport/InputSocket.h" />
+		<Unit filename="../Include/Theron/Detail/Transport/OutputMessage.h" />
+		<Unit filename="../Include/Theron/Detail/Transport/OutputSocket.h" />
+		<Unit filename="../Include/Theron/EndPoint.h" />
+		<Unit filename="../Include/Theron/Framework.h" />
+		<Unit filename="../Include/Theron/IAllocator.h" />
+		<Unit filename="../Include/Theron/Receiver.h" />
+		<Unit filename="../Include/Theron/Register.h" />
+		<Unit filename="../Include/Theron/Theron.h" />
+		<Unit filename="../Include/Theron/YieldStrategy.h" />
+		<Unit filename="Actor.cpp" />
+		<Unit filename="Address.cpp" />
+		<Unit filename="AllocatorManager.cpp" />
+		<Unit filename="BuildDescriptor.cpp" />
+		<Unit filename="Clock.cpp" />
+		<Unit filename="DefaultHandlerCollection.cpp" />
+		<Unit filename="EndPoint.cpp" />
+		<Unit filename="FallbackHandlerCollection.cpp" />
+		<Unit filename="Framework.cpp" />
+		<Unit filename="HandlerCollection.cpp" />
+		<Unit filename="Receiver.cpp" />
+		<Unit filename="StringPool.cpp" />
+		<Unit filename="Theron.def" />
+		<Unit filename="YieldPolicy.cpp" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

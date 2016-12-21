@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Type" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="任务类别"/>
+        <Property Id="NextTaskID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="下一个任务ID"/>
+        <Property Id="KillMonsterName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="要求杀的怪，逗号分开"/>
+        <Property Id="KillCount" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="要求杀的怪数量，逗号分开"/>
+        <Property Id="LevelReq" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="任务限制等级"/>
+        <Property Id="AwardExp" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="奖励的经验"/>
+        <Property Id="AwardGold" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="奖励的金币"/>
+        <Property Id="AwardPack" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="奖励包"/>
+        <Property Id="Desc" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="任务描述"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

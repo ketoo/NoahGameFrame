@@ -12,6 +12,30 @@
 // Note: requires additional types generated from: NFMsgBase.proto
 namespace NFMsg
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ServerInfoExt")]
+  public partial class ServerInfoExt : global::ProtoBuf.IExtensible
+  {
+    public ServerInfoExt() {}
+    
+    private readonly global::System.Collections.Generic.List<byte[]> _key = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> key
+    {
+      get { return _key; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<byte[]> _value = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> value
+    {
+      get { return _value; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ServerInfoReport")]
   public partial class ServerInfoReport : global::ProtoBuf.IExtensible
   {
@@ -72,6 +96,13 @@ namespace NFMsg
     {
       get { return _server_type; }
       set { _server_type = value; }
+    }
+    private NFMsg.ServerInfoExt _server_info_list_ext;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"server_info_list_ext", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.ServerInfoExt server_info_list_ext
+    {
+      get { return _server_info_list_ext; }
+      set { _server_info_list_ext = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -202,6 +233,14 @@ namespace NFMsg
     {
       get { return _extra_info; }
       set { _extra_info = value; }
+    }
+    private int _platform_type = default(int);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"platform_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int platform_type
+    {
+      get { return _platform_type; }
+      set { _platform_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

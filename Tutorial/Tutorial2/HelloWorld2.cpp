@@ -1,19 +1,20 @@
 #include "HelloWorld2.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFIComponent.h"
+#include "NFComm/NFCore//NFCDataList.h"
 
 bool HelloWorld2::Init()
 {
-    //初始化
+    
 
     std::cout << "Hello, world2, Init" << std::endl;
 
     return true;
 }
 
-int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar )
+int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
 {
-    //属性回调事件，只要属性值内容有变化，就会被回调
+    
     std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
 
     return 0;
@@ -66,7 +67,7 @@ bool HelloWorld2::AfterInit()
 
 bool HelloWorld2::Execute()
 {
-    //每帧执行
+    
     //std::cout << "Hello, world2, Execute" << std::endl;
 
     return true;
@@ -74,7 +75,7 @@ bool HelloWorld2::Execute()
 
 bool HelloWorld2::BeforeShut()
 {
-    //反初始化之前
+    
     std::cout << "Hello, world2, BeforeShut" << std::endl;
 
     return true;
@@ -82,7 +83,7 @@ bool HelloWorld2::BeforeShut()
 
 bool HelloWorld2::Shut()
 {
-    //反初始化
+    
     std::cout << "Hello, world2, Shut" << std::endl;
 
     return true;

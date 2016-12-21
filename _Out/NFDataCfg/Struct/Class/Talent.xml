@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="名字字符串索引"/>
+        <Property Id="Desc" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="描述字符串索引"/>
+        <Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="绝对值属性索引"/>
+        <Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="ICON"/>
+        <Property Id="Atlas" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="图集"/>
+        <Property Id="UpLevel" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="升级需要的等级"/>
+        <Property Id="AfterUpID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="升级后的新技能ID"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>
