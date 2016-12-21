@@ -1,20 +1,20 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCShopModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
+//    @Module           :    NFCShopModule
 //    @Desc             :
 
-#include "NFCChatModule.h"
+#include "NFCShopModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 
-bool NFCChatModule::Init()
+bool NFCShopModule::Init()
 {
 	return true;
 }
 
-bool NFCChatModule::AfterInit()
+bool NFCShopModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
@@ -27,13 +27,13 @@ bool NFCChatModule::AfterInit()
 	return true;
 }
 
-bool NFCChatModule::Shut()
+bool NFCShopModule::Shut()
 {
 
 	return true;
 }
 
-bool NFCChatModule::Execute()
+bool NFCShopModule::Execute()
 {
 	return true;
 }
