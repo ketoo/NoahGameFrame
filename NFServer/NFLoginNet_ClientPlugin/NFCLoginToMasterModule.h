@@ -27,6 +27,7 @@ public:
     NFCLoginToMasterModule(NFIPluginManager* p)
     {
         pPluginManager = p;
+		mLastReportTime = 0;
     }
 
 
@@ -42,6 +43,7 @@ public:
 
 	virtual NFINetClientModule* GetClusterModule();
     virtual NFMapEx<int, NFMsg::ServerInfoReport>& GetWorldMap();
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
     void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -54,8 +56,10 @@ protected:
 
     //////////////////////////////////////////////////////////////////////////
     void Register(NFINet* pNet);
+	void ServerReport();
 
 private:
+	NFINT64 mLastReportTime;
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
     NFILoginLogicModule* m_pLoginLogicModule;
@@ -65,6 +69,7 @@ private:
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
 	NFINetClientModule* m_pNetClientModule;
+	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

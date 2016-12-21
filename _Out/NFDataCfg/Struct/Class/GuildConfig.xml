@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ConditionPlayerLevel" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="创建玩家等级"/>
+        <Property Id="ConditionPlayerVIP" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="玩家VIP"/>
+        <Property Id="CostMoney" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="花费金币"/>
+        <Property Id="DismissTime" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="解散等待时间"/>
+        <Property Id="GuildLevel" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="公会等级"/>
+        <Property Id="MaxMember" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="最大人数"/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

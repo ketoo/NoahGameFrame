@@ -59,7 +59,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
-      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration);$(BOOST_LIB);D:\NoahGameFrame\trunk\_Out\Comm\Debug;D:\NoahGameFrame\trunk\Dependencies\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(NFBIN_COMM)\$(Configuration);$(APP_DEPLIB)\$(Configuration);$(BOOST_LIB);D:\NoahGameFrame\trunk\_Out\Debug;D:\NoahGameFrame\trunk\Dependencies\lib\Debug</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libcpmtd.lib;libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>

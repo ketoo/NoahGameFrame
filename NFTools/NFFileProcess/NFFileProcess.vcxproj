@@ -42,12 +42,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\NFDataCfg\Tool</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -59,10 +59,6 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.exe $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb
-cd $(SolutionDir)
-GenerateConfigXML.bat 1</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -80,10 +76,6 @@ GenerateConfigXML.bat 1</Command>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).exe $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).exe
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\NFDataCfg\Tool\$(ProjectName).pdb
-cd $(SolutionDir)
-GenerateConfigXML.bat 1</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

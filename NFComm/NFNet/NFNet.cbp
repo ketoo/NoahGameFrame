@@ -7,12 +7,13 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFNet_d" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
+				<Option output="$(SolutionDir)/_Out/Debug/NFNet_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Debug" />
 				<Option object_output=".objs/Debug" />
-				<Option type="2" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -24,15 +25,18 @@
 					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
 				</Compiler>
+				<Linker>
+					<Add library="../../Dependencies/lib/libevent.a" />
+				</Linker>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFNet" prefix_auto="0" extension_auto="1" />
-				<Option working_dir="" />
+				<Option output="$(SolutionDir)/_Out/Release/NFNet" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Release" />
 				<Option object_output=".objs/Release" />
-				<Option type="2" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
@@ -50,8 +54,11 @@
 				</Environment>
 			</Target>
 		</Build>
+		<Unit filename="NFCHttpNet.cpp" />
+		<Unit filename="NFCHttpNet.h" />
 		<Unit filename="NFCNet.cpp" />
 		<Unit filename="NFCNet.h" />
+		<Unit filename="NFIHttpNet.h" />
 		<Unit filename="NFINet.h" />
 		<Extensions>
 			<code_completion />

@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/Tutorial3_d" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Debug/Tutorial3_d" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Debug" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -28,7 +28,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
+					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
 				<Environment>
@@ -36,7 +37,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/Tutorial3" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/Tutorial3" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".objs/Release" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -44,8 +45,8 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-D_USRDLL" />
 					<Add option="-fPIC" />
+					<Add option="-D_USRDLL" />
 					<Add directory="$(SolutionDir)" />
 					<Add directory="$(SolutionDir)/Dependencies/" />
 					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
@@ -55,7 +56,8 @@
 					<Add directory="$(SolutionDir)/Dependencies/Theron/Include/" />
 				</Compiler>
 				<Linker>
-					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
+					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
 			</Target>

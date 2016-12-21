@@ -10,6 +10,7 @@
 #include <stdarg.h>
 #include "NFCLogModule.h"
 #include "easylogging++.h"
+#include "NFLogPlugin.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -50,13 +51,28 @@ bool NFCLogModule::Init()
 
     el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
     el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+
+	std::string strLogConfigName = pPluginManager->GetLogConfigName();
+	if (strLogConfigName.empty())
+	{
+		strLogConfigName = pPluginManager->GetAppName();
+	}
+
+	string strAppLogName = "";
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    el::Configurations conf("log_win.conf");
+	strAppLogName = "logconfig/" + strLogConfigName + "_win.conf";
+    el::Configurations conf(strAppLogName);
 #else
-    el::Configurations conf("log.conf");
+	strAppLogName = "logconfig/" + strLogConfigName + ".conf";
+    el::Configurations conf(strAppLogName);
 #endif
+
+	std::cout << "LogConfig: " << strAppLogName << std::endl;
+
     el::Loggers::reconfigureAllLoggers(conf);
     el::Helpers::installPreRollOutCallback(rolloutHandler);
+
+	////////////////////////////////////////////////////
 
     return true;
 }
@@ -76,8 +92,33 @@ bool NFCLogModule::BeforeShut()
 
 bool NFCLogModule::AfterInit()
 {
-    return true;
+	/*
+	el::Logger* pLogger = el::Loggers::getLogger("default");
+	if (NULL == pLogger)
+	{
+		return false;
+	}
 
+	el::Configurations* pConfigurations = pLogger->configurations();
+	if (NULL == pConfigurations)
+	{
+		return false;
+	}
+
+	const int nAppID = pPluginManager->GetAppID();
+	const std::string& strAppName = pPluginManager->GetAppName();
+	std::string strLogPreName = strAppName + lexical_cast<std::string>(nAppID);
+
+	std::string strLogFileName = "log/" + strAppName + "%datetime{ %Y%M%d%H }.log";
+	el::Configuration errorConfiguration(el::Level::Info, el::ConfigurationType::Filename, strLogFileName);
+	el::Configuration errorConfiguration(el::Level::Debug, el::ConfigurationType::Filename, strLogFileName);
+	el::Configuration errorConfiguration(el::Level::Warning, el::ConfigurationType::Filename, strLogFileName);
+	el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Filename, strLogFileName);
+	el::Configuration errorConfiguration(el::Level::Fatal, el::ConfigurationType::Filename, strLogFileName);
+	//el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Filename, "log/game_server_info_%datetime{ %Y%M%d%H }.log");
+	pConfigurations->set(&errorConfiguration);
+	*/
+    return true;
 }
 
 bool NFCLogModule::Execute()
@@ -100,25 +141,25 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     switch (nll)
     {
         case NFILogModule::NLL_DEBUG_NORMAL:
-            LOG(DEBUG) << mnLogCountTotal << " | " << szBuffer;
+            LOG(DEBUG) << mnLogCountTotal << " | " << pPluginManager->GetAppID()<< " | " << szBuffer;
             break;
         case NFILogModule::NLL_INFO_NORMAL:
-            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
             break;
         case NFILogModule::NLL_WARING_NORMAL:
-            LOG(WARNING) << mnLogCountTotal << " | " << szBuffer;
+            LOG(WARNING) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
             break;
         case NFILogModule::NLL_ERROR_NORMAL:
         {
-            LOG(ERROR) << mnLogCountTotal << " | " << szBuffer;
+            LOG(ERROR) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
             //LogStack();
         }
         break;
         case NFILogModule::NLL_FATAL_NORMAL:
-            LOG(FATAL) << mnLogCountTotal << " | " << szBuffer;
+            LOG(FATAL) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
             break;
         default:
-            LOG(INFO) << mnLogCountTotal << " | " << szBuffer;
+            LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
             break;
     }
 
@@ -209,16 +250,16 @@ void NFCLogModule::LogStack()
     tm* ptm = localtime(&t);
 
     sprintf(szDmupName, "%d_%d_%d_%d_%d_%d.dmp",  ptm->tm_year + 1900, ptm->tm_mon, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec);
-    // 创建Dump文件
+    
     HANDLE hDumpFile = CreateFile(szDmupName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    // Dump信息
+    
     MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
     //dumpInfo.ExceptionPointers = pException;
     dumpInfo.ThreadId = GetCurrentThreadId();
     dumpInfo.ClientPointers = TRUE;
 
-    // 写入Dump文件内容
+    
     MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 
     CloseHandle(hDumpFile);
@@ -259,11 +300,11 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
 {
     if (line > 0)
     {
-        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str(), func, line);
+        Log(nll, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
     }
     else
     {
-        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), stream.str());
+        Log(nll, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
     }
 
     return true;
@@ -301,15 +342,11 @@ bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
     }
 
     el::Configurations* pConfigurations = pLogger->configurations();
-    el::base::TypedConfigurations* pTypeConfigurations = pLogger->typedConfigurations();
     if (NULL == pConfigurations)
     {
         return false;
     }
 
-    // log级别为debug, info, warning, error, fatal(级别逐渐提高)
-    // 当传入为info时，则高于(包含)info的级别会输出
-    // !!!!!! NOTICE:故意没有break，请千万注意 !!!!!!
     switch (logLevel)
     {
         case el::Level::Fatal:
