@@ -11,9 +11,10 @@
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFComm/NFCore/NFIPropertyManager.h"
-#include "NFComm/NFCore/NFIRecordManager.h"
-#include "NFComm/NFCore/NFIComponentManager.h"
+#include "NFComm/NFCore/NFIObject.h"
+
+typedef std::function<int(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&)> CLASS_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<CLASS_EVENT_FUNCTOR> CLASS_EVENT_FUNCTOR_PTR;//EVENT
 
 class NFIClass
     : public NFList<std::string>//include files

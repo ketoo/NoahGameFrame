@@ -16,6 +16,7 @@ NFCDataList::NFCDataList()
 }
 
 NFCDataList::NFCDataList(const std::string& str, const std::string& strSplit)
+	: NFIDataList()
 {
     Clear();
 
@@ -23,6 +24,7 @@ NFCDataList::NFCDataList(const std::string& str, const std::string& strSplit)
 }
 
 NFCDataList::NFCDataList(const NFCDataList& src)
+	: NFIDataList()
 {
     Clear();
 
@@ -30,6 +32,7 @@ NFCDataList::NFCDataList(const NFCDataList& src)
 }
 
 NFCDataList::NFCDataList(const NFIDataList& src)
+	: NFIDataList()
 {
     Clear();
 
@@ -59,7 +62,7 @@ NFCDataList& NFCDataList::operator=(const NFIDataList& src)
 }
 
 */
-// 添加
+
 bool NFCDataList::Append(const NFIDataList& src, const int start, const int count)
 {
     if (start >= src.GetCount())
@@ -101,6 +104,12 @@ bool NFCDataList::Append(const NFIDataList::TData& xData)
         case TDATA_STRING:
             AddString(xData.GetString());
             break;
+		case TDATA_VECTOR2:
+			AddVector2(xData.GetVector2());
+			break;
+		case TDATA_VECTOR3:
+			AddVector3(xData.GetVector3());
+			break;
         default:
             break;
     }
@@ -189,6 +198,44 @@ bool NFCDataList::Add(const NFGUID& value)
     return false;
 }
 
+bool NFCDataList::Add(const NFVector2& value)
+{
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetVector2(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCDataList::Add(const NFVector3& value)
+{
+	if (GetCount() == mvList.size())
+	{
+		AddStatck();
+	}
+
+	NF_SHARE_PTR<TData> var = GetStack(GetCount());
+	if (var)
+	{
+		var->SetVector3(value);
+		mnUseSize++;
+
+		return true;
+	}
+
+	return false;
+}
+
 bool NFCDataList::Set(const int index, const NFINT64 value)
 {
     if (ValidIndex(index) && Type(index) == TDATA_INT)
@@ -251,6 +298,38 @@ bool NFCDataList::Set(const int index, const NFGUID& value)
     return false;
 }
 
+bool NFCDataList::Set(const int index, const NFVector2& value)
+{
+	if (ValidIndex(index) && Type(index) == TDATA_VECTOR2)
+	{
+		NF_SHARE_PTR<TData> var = GetStack(index);
+		if (var)
+		{
+			var->SetVector2(value);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool NFCDataList::Set(const int index, const NFVector3& value)
+{
+	if (ValidIndex(index) && Type(index) == TDATA_VECTOR3)
+	{
+		NF_SHARE_PTR<TData> var = GetStack(index);
+		if (var)
+		{
+			var->SetVector3(value);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 NFINT64 NFCDataList::Int(const int index) const
 {
@@ -302,7 +381,7 @@ const NFGUID& NFCDataList::Object(const int index) const
         if (TDATA_OBJECT == type)
         {
             NF_SHARE_PTR<TData> var = GetStack(index);
-            if (var.get())
+            if (var)
             {
                 return var->GetObject();
             }
@@ -310,6 +389,42 @@ const NFGUID& NFCDataList::Object(const int index) const
     }
 
     return NULL_OBJECT;
+}
+
+const NFVector2& NFCDataList::Vector2(const int index) const
+{
+	if (ValidIndex(index))
+	{
+		TDATA_TYPE type = Type(index);
+		if (TDATA_VECTOR2 == type)
+		{
+			NF_SHARE_PTR<TData> var = GetStack(index);
+			if (var)
+			{
+				return var->GetVector2();
+			}
+		}
+	}
+
+	return NULL_VECTOR2;
+}
+
+const NFVector3& NFCDataList::Vector3(const int index) const
+{
+	if (ValidIndex(index))
+	{
+		TDATA_TYPE type = Type(index);
+		if (TDATA_VECTOR3 == type)
+		{
+			NF_SHARE_PTR<TData> var = GetStack(index);
+			if (var)
+			{
+				return var->GetVector3();
+			}
+		}
+	}
+
+	return NULL_VECTOR3;
 }
 
 bool NFCDataList::Split(const std::string& str, const std::string& strSplit)
@@ -406,7 +521,7 @@ bool NFCDataList::TypeEx(const int nType, ...) const
 
     while (pareType != TDATA_UNKNOWN)
     {
-        //比较
+        
         TDATA_TYPE varType = Type(index);
         if (varType != pareType)
         {
@@ -415,10 +530,10 @@ bool NFCDataList::TypeEx(const int nType, ...) const
         }
 
         ++index;
-        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   //获取下一个参数
+        pareType = (TDATA_TYPE)va_arg(arg_ptr, int);   
     }
 
-    va_end(arg_ptr); //结束
+    va_end(arg_ptr); 
 
     return bRet;
 }
@@ -432,7 +547,7 @@ bool NFCDataList::Concat(const NFIDataList& src)
 void NFCDataList::Clear()
 {
     mnUseSize = 0;
-    //8个以后的清除掉
+    
     if (mvList.size() > STACK_SIZE)
     {
         for (int i = 0; i < STACK_SIZE; ++i)
@@ -473,6 +588,12 @@ void NFCDataList::InnerAppendEx(const NFIDataList& src, const int start, const i
             case TDATA_OBJECT:
                 AddObject(src.Object(i));
                 break;
+			case TDATA_VECTOR2:
+				AddVector2(src.Vector2(i));
+				break;
+			case TDATA_VECTOR3:
+				AddVector3(src.Vector3(i));
+				break;
             default:
                 break;
         }
@@ -503,6 +624,14 @@ std::string NFCDataList::StringValEx(const int index) const
             case TDATA_OBJECT:
                 strData = Object(index).ToString();
                 break;
+
+			case TDATA_VECTOR2:
+				strData = Vector2(index).ToString();
+				break;
+
+			case TDATA_VECTOR3:
+				strData = Vector3(index).ToString();
+				break;
 
             default:
                 strData = NULL_STR;

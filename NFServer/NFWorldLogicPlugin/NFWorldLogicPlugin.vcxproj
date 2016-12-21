@@ -41,14 +41,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <EmbedManifest>false</EmbedManifest>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\_Out\Comm\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\_Out\$(Configuration)\</OutDir>
     <EmbedManifest>false</EmbedManifest>
     <IntDir>$(SolutionDir)\Temp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -64,11 +64,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.dll $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName)_d.pdb</Command>
     </PostBuildEvent>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -89,15 +87,16 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName)_d.pdb $(Solutio
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\Comm\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\_Out\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).dll $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).dll
-copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionDir)\_Out\Server\$(Configuration)\NFWorldServer\$(ProjectName).pdb</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="NFCPVPMatchModule.h" />
+    <ClInclude Include="NFCTeamModule.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
+    <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +108,10 @@ copy /y $(SolutionDir)\_Out\Comm\$(Configuration)\$(ProjectName).pdb $(SolutionD
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCPVPMatchModule.cpp" />
+    <ClCompile Include="NFCTeamModule.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
+    <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

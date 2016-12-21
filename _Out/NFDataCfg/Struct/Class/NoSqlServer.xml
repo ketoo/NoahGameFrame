@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="IP" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="Port" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="Auth" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

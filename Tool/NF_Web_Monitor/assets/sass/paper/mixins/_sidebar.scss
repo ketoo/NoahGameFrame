@@ -1,0 +1,42 @@
+@mixin sidebar-background-color($background-color, $font-color){
+    &:after,
+    &:before{
+	    background-color: $background-color;
+	}
+
+    .logo{
+        border-bottom: 1px solid rgba($font-color,.3);
+
+        p{
+            color: $font-color;
+        }
+
+        .simple-text{
+            color: $font-color;
+        }
+    }
+
+    .nav{
+        li:not(.active){
+            > a{
+                color: $font-color;
+            }
+        }
+        .divider{
+            background-color: rgba($font-color,.2);
+        }
+        
+    }
+
+}
+
+@mixin sidebar-active-color($font-color){
+    .nav{
+        li{
+            &.active > a{
+                color: $font-color;
+                opacity: 1;
+            }
+        }
+    }
+}

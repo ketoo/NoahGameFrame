@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Name" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="角色名"/>
+        <Property Id="Sex" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="性别"/>
+        <Property Id="Race" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="种族"/>
+        <Property Id="Camp" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="阵营"/>
+        <Property Id="LastContainerID" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家下线的时候需要保存上次在线的场景"/>
+        <Property Id="Level" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="等级"/>
+        <Property Id="ShowName" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="显示的名字"/>
+        <Property Id="PrefabPath" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="预设路径"/>
+        <Property Id="FirstTarget" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="首要目标"/>
+        <Property Id="CharType" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="角色类型"/>
+        <Property Id="Job" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="职业"/>
+        <Property Id="VIPLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
+        <Property Id="VIPEXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="VIP经验"/>
+        <Property Id="EXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
+        <Property Id="HP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="生命值"/>
+        <Property Id="SP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="体力"/>
+        <Property Id="MP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="法力值"/>
+        <Property Id="Gold" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家游戏金币"/>
+        <Property Id="Money" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="钻石"/>
+        <Property Id="Account" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家的帐号"/>
+        <Property Id="ConnectKey" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家连接服务器的KEY"/>
+        <Property Id="MAXEXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="升级需要的经验"/>
+        <Property Id="RELIVE_SOUL" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="转生次数"/>
+        <Property Id="ATK_PVP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="PVP攻击力"/>
+        <Property Id="DEF_PVP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="PVP防御力"/>
+        <Property Id="OnlineCount" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="上线次数"/>
+        <Property Id="TotalTime" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="在线时间"/>
+        <Property Id="LastOfflineTime" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="上次下线时间"/>
+        <Property Id="OnlineTime" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="本次上线时间"/>
+        <Property Id="TotalLineTime" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="今日在线时长{截至至本次上线时间}"/>
+        <Property Id="GMLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="GM等级"/>
+        <Property Id="GameID" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc="登陆的服ID"/>
+        <Property Id="GateID" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc="登陆的网关ID"/>
+        <Property Id="GuildID" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会ID"/>
+        <Property Id="TeamID" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="所在队伍ID"/>
+        <Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="吸血"/>
+        <Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="反伤"/>
+        <Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="暴击"/>
+        <Property Id="MAXHP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="生命值"/>
+        <Property Id="MAXMP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="法力值"/>
+        <Property Id="MAXSP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="体力"/>
+        <Property Id="HPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="生命值回复"/>
+        <Property Id="SPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="体力回复"/>
+        <Property Id="MPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="MP回复"/>
+        <Property Id="ATK_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="物理攻击力"/>
+        <Property Id="DEF_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="物理防御力"/>
+        <Property Id="MOVE_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="移动速度,默认单位是10000=1米"/>
+        <Property Id="ATK_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="攻击速度默认10000"/>
+        <Property Id="ATK_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="火"/>
+        <Property Id="ATK_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="雷电"/>
+        <Property Id="ATK_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="土"/>
+        <Property Id="ATK_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="冰"/>
+        <Property Id="ATK_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="毒"/>
+        <Property Id="DEF_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="火抗"/>
+        <Property Id="DEF_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="雷电抗"/>
+        <Property Id="DEF_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="土抗"/>
+        <Property Id="DEF_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="冰抗"/>
+        <Property Id="DEF_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="毒抗"/>
+        <Property Id="DIZZY_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="眩晕开关"/>
+        <Property Id="MOVE_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="移动开关"/>
+        <Property Id="SKILL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能开关"/>
+        <Property Id="PHYSICAL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="物理免疫开关"/>
+        <Property Id="MAGIC_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="魔法免疫开关"/>
+        <Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="BUFF免疫开关"/>
+    </Propertys>
+    <Records>
+        <Record Id="PlayerHero" Row="64" Col="22" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="ConfigID"/>
+            <Col Type="int" Tag="Level"/>
+            <Col Type="int" Tag="Exp"/>
+            <Col Type="int" Tag="Star"/>
+            <Col Type="object" Tag="Equip1"/>
+            <Col Type="object" Tag="Equip2"/>
+            <Col Type="object" Tag="Equip3"/>
+            <Col Type="object" Tag="Equip4"/>
+            <Col Type="object" Tag="Equip5"/>
+            <Col Type="object" Tag="Equip6"/>
+            <Col Type="string" Tag="Talent1"/>
+            <Col Type="string" Tag="Talent2"/>
+            <Col Type="string" Tag="Talent3"/>
+            <Col Type="string" Tag="Talent4"/>
+            <Col Type="string" Tag="Talent5"/>
+            <Col Type="string" Tag="Skill1"/>
+            <Col Type="string" Tag="Skill2"/>
+            <Col Type="string" Tag="Skill3"/>
+            <Col Type="string" Tag="Skill4"/>
+            <Col Type="string" Tag="Skill5"/>
+            <Col Type="string" Tag="FightSkill"/>
+        </Record>
+        <Record Id="PlayerFightHero" Row="5" Col="2" Public="0" Private="1" Save="1" Cache="0" Upload="1" Desc="">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="int" Tag="FightPos"/>
+        </Record>
+        <Record Id="HeroPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
+            <Col Type="int" Tag="SUCKBLOOD"/>
+            <Col Type="int" Tag="REFLECTDAMAGE"/>
+            <Col Type="int" Tag="CRITICAL"/>
+            <Col Type="int" Tag="MAXHP"/>
+            <Col Type="int" Tag="MAXMP"/>
+            <Col Type="int" Tag="MAXSP"/>
+            <Col Type="int" Tag="HPREGEN"/>
+            <Col Type="int" Tag="SPREGEN"/>
+            <Col Type="int" Tag="MPREGEN"/>
+            <Col Type="int" Tag="ATK_VALUE"/>
+            <Col Type="int" Tag="DEF_VALUE"/>
+            <Col Type="int" Tag="MOVE_SPEED"/>
+            <Col Type="int" Tag="ATK_SPEED"/>
+            <Col Type="int" Tag="ATK_FIRE"/>
+            <Col Type="int" Tag="ATK_LIGHT"/>
+            <Col Type="int" Tag="ATK_WIND"/>
+            <Col Type="int" Tag="ATK_ICE"/>
+            <Col Type="int" Tag="ATK_POISON"/>
+            <Col Type="int" Tag="DEF_FIRE"/>
+            <Col Type="int" Tag="DEF_LIGHT"/>
+            <Col Type="int" Tag="DEF_WIND"/>
+            <Col Type="int" Tag="DEF_ICE"/>
+            <Col Type="int" Tag="DEF_POISON"/>
+            <Col Type="int" Tag="DIZZY_GATE"/>
+            <Col Type="int" Tag="MOVE_GATE"/>
+            <Col Type="int" Tag="SKILL_GATE"/>
+            <Col Type="int" Tag="PHYSICAL_GATE"/>
+            <Col Type="int" Tag="MAGIC_GATE"/>
+            <Col Type="int" Tag="BUFF_GATE"/>
+        </Record>
+        <Record Id="BagEquipList" Row="256" Col="23" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="普通背包">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="object" Tag="WearGUID"/>
+            <Col Type="string" Tag="ConfigID"/>
+            <Col Type="int" Tag="ExpiredType"/>
+            <Col Type="int" Tag="Date"/>
+            <Col Type="string" Tag="RandPropertyID"/>
+            <Col Type="int" Tag="SlotCount"/>
+            <Col Type="string" Tag="InlayStone1"/>
+            <Col Type="string" Tag="InlayStone2"/>
+            <Col Type="string" Tag="InlayStone3"/>
+            <Col Type="string" Tag="InlayStone4"/>
+            <Col Type="string" Tag="InlayStone5"/>
+            <Col Type="string" Tag="InlayStone6"/>
+            <Col Type="string" Tag="InlayStone7"/>
+            <Col Type="string" Tag="InlayStone8"/>
+            <Col Type="string" Tag="InlayStone9"/>
+            <Col Type="string" Tag="InlayStone10"/>
+            <Col Type="string" Tag="IntensifyLevel"/>
+            <Col Type="int" Tag="ElementLevel1_FIRE"/>
+            <Col Type="int" Tag="ElementLevel2_LIGHT"/>
+            <Col Type="int" Tag="ElementLevel3_Wind"/>
+            <Col Type="int" Tag="ElementLevel4_ICE"/>
+            <Col Type="int" Tag="ElementLevel5_POISON"/>
+        </Record>
+        <Record Id="BagItemList" Row="128" Col="5" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="普通背包">
+            <Col Type="string" Tag="ConfigID"/>
+            <Col Type="int" Tag="ItemCount"/>
+            <Col Type="int" Tag="Bound"/>
+            <Col Type="int" Tag="ExpiredType"/>
+            <Col Type="int" Tag="Date"/>
+        </Record>
+        <Record Id="CommPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
+            <Col Type="int" Tag="SUCKBLOOD"/>
+            <Col Type="int" Tag="REFLECTDAMAGE"/>
+            <Col Type="int" Tag="CRITICAL"/>
+            <Col Type="int" Tag="MAXHP"/>
+            <Col Type="int" Tag="MAXMP"/>
+            <Col Type="int" Tag="MAXSP"/>
+            <Col Type="int" Tag="HPREGEN"/>
+            <Col Type="int" Tag="SPREGEN"/>
+            <Col Type="int" Tag="MPREGEN"/>
+            <Col Type="int" Tag="ATK_VALUE"/>
+            <Col Type="int" Tag="DEF_VALUE"/>
+            <Col Type="int" Tag="MOVE_SPEED"/>
+            <Col Type="int" Tag="ATK_SPEED"/>
+            <Col Type="int" Tag="ATK_FIRE"/>
+            <Col Type="int" Tag="ATK_LIGHT"/>
+            <Col Type="int" Tag="ATK_WIND"/>
+            <Col Type="int" Tag="ATK_ICE"/>
+            <Col Type="int" Tag="ATK_POISON"/>
+            <Col Type="int" Tag="DEF_FIRE"/>
+            <Col Type="int" Tag="DEF_LIGHT"/>
+            <Col Type="int" Tag="DEF_WIND"/>
+            <Col Type="int" Tag="DEF_ICE"/>
+            <Col Type="int" Tag="DEF_POISON"/>
+            <Col Type="int" Tag="DIZZY_GATE"/>
+            <Col Type="int" Tag="MOVE_GATE"/>
+            <Col Type="int" Tag="SKILL_GATE"/>
+            <Col Type="int" Tag="PHYSICAL_GATE"/>
+            <Col Type="int" Tag="MAGIC_GATE"/>
+            <Col Type="int" Tag="BUFF_GATE"/>
+        </Record>
+        <Record Id="TaskMonsterList" Row="8" Col="4" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="任务杀怪表">
+            <Col Type="string" Tag="MonsterID"/>
+            <Col Type="int" Tag="CurrentKillCount"/>
+            <Col Type="int" Tag="RequireKillCount"/>
+            <Col Type="string" Tag="TaskID"/>
+        </Record>
+        <Record Id="TaskList" Row="512" Col="3" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="任务表">
+            <Col Type="string" Tag="TaskID"/>
+            <Col Type="int" Tag="TaskStatus"/>
+            <Col Type="int" Tag="Process"/>
+        </Record>
+        <Record Id="BuildingList" Row="128" Col="8" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="">
+            <Col Type="string" Tag="BuildingID"/>
+            <Col Type="object" Tag="BuildingGUID"/>
+            <Col Type="int" Tag="State"/>
+            <Col Type="int" Tag="PosX"/>
+            <Col Type="int" Tag="PosY"/>
+            <Col Type="int" Tag="PosZ"/>
+            <Col Type="int" Tag="StateStartTime"/>
+            <Col Type="int" Tag="StateEndTime"/>
+        </Record>
+        <Record Id="BuildingListProduce" Row="128" Col="8" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="">
+            <Col Type="string" Tag="BuildingID"/>
+            <Col Type="object" Tag="BuildingGUID"/>
+            <Col Type="int" Tag="State"/>
+            <Col Type="int" Tag="PosX"/>
+            <Col Type="int" Tag="PosY"/>
+            <Col Type="int" Tag="PosZ"/>
+            <Col Type="int" Tag="StateStartTime"/>
+            <Col Type="int" Tag="StateEndTime"/>
+        </Record>
+    </Records>
+    <Components>
+        <Component Name="Test" Language="lua" Enable="1" Desc="测试组件"/>
+    </Components>
+</XML>

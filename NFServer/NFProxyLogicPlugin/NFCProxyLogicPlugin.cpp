@@ -10,17 +10,11 @@
 #include "NFCProxyLogicPlugin.h"
 #include "NFCProxyLogicModule.h"
 
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    SetConsoleTitle("NFProxyServer");
-#endif
     CREATE_PLUGIN(pm, NFProxyLogicPlugin)
-
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
@@ -38,7 +32,7 @@ const int NFProxyLogicPlugin::GetPluginVersion()
 
 const std::string NFProxyLogicPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFProxyLogicPlugin)
+	return GET_CLASS_NAME(NFProxyLogicPlugin);
 }
 
 void NFProxyLogicPlugin::Install()

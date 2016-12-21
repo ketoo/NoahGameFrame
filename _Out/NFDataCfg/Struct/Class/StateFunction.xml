@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="EFT_INFO" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_BOOOST" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_LVLUP" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_CREATE_SOLDER" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_CREATE_SPEEL" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_RESEARCH" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_COLLECT_GOLD" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_COLLECT_STONE" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_COLLECT_STEEL" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_COLLECT_DIAMOND" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_SELL" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_REPAIR" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_CANCEL" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+        <Property Id="EFT_FINISH" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+    </Propertys>
+    <Records/>
+    <Components/>
+</XML>

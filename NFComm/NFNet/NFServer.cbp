@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Debug/NFNet_Client" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Debug/NFNet_Client" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="$(SolutionDir)/_Out/Comm/Debug" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -35,7 +35,7 @@
 				</Environment>
 			</Target>
 			<Target title="Release x64">
-				<Option output="$(SolutionDir)/_Out/Comm/Release/NFNet" prefix_auto="0" extension_auto="1" />
+				<Option output="$(SolutionDir)/_Out/Release/NFNet" prefix_auto="0" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />

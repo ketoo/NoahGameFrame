@@ -91,21 +91,21 @@ void FileProcess::OnCreateXMLFile()
 
 void FileProcess::CreateStructThreadFunc()
 {
-	// 生成proto文件
+	
 	CreateProtoFile();
 
-	// 升成Property和Record名字hpp头文件
+	
 	CreateNameFile();
 
 
-	//xml文档
+	
 	tinyxml2::XMLDocument* xmlDoc = new tinyxml2::XMLDocument();
 	if (NULL == xmlDoc)
 	{
 		return;
 	}
 
-	//xml声明
+	
 	tinyxml2::XMLDeclaration *pDel = xmlDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
 	if (NULL == pDel)
 	{
@@ -129,37 +129,37 @@ void FileProcess::CreateStructThreadFunc()
 	classElement->SetAttribute("Public", "0");
 	classElement->SetAttribute("Desc", "IObject");
 	////////////////////////////////////////////////////////////////////////
-	//// 提前把IObject跑一边
+	
 	CreateStructXML("../Excel_Ini/IObject.xlsx", "IObject");
 
-	// 遍历Struct文件夹下的excel文件
+	
 	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 
 	for (auto fileName : fileList)
 	{
 		StringReplace(fileName, "\\", "/");
 		StringReplace(fileName, "//", "/");
-		// 打开excel之后生成的临时文件，略过
+		
 		if ((int)(fileName.find("$")) != -1)
 		{
 			continue;
 		}
 
-		// 不是excel文件，默认跳过
+		
 		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
 		if (strExt != "xlsx")
 		{
 			continue;
 		}
 
-		// 是IObject.xlsx跳过
+		
 		auto strFileName = fileName.substr(fileName.find_last_of('/') + 1, fileName.find_last_of('.') - fileName.find_last_of('/') - 1);
 		if (strFileName == "IObject")
 		{
 			continue;
 		}
 
-		// 单个excel文件转为xml
+		
 		if (!CreateStructXML(fileName.c_str(), strFileName.c_str()))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
@@ -181,22 +181,22 @@ void FileProcess::CreateStructThreadFunc()
 		subClassElement->SetAttribute("Desc", strFileName.c_str());
 	}
 
-	//// name文件结束
+	
 
 	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP",
 		sizeof("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
 	fwrite("}",
 		sizeof("}"), 1, csWriter);
 	xmlDoc->SetBOM(false);
-	auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());//保存文件 参数：路径
+	auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
 
-	//xmlDoc->Print();//打印
+	//xmlDoc->Print();
 	delete xmlDoc;
 }
 
 void FileProcess::CreateIniThreadFunc()
 {
-	// 遍历Ini文件夹下的excel文件
+	
 	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 	for (auto fileName : fileList)
 	{
@@ -208,13 +208,13 @@ void FileProcess::CreateIniThreadFunc()
 		std::string strFileName = fileName.substr(nLastSlash, nLastPoint - nLastSlash - 1);
 		std::string strFileExt = fileName.substr(nLastPoint, fileName.length() - nLastPoint);
 
-		// 打开excel之后生成的临时文件，略过
+		
 		if ((int)(fileName.find("$")) != -1)
 		{
 			continue;
 		}
 
-		// 不是excel文件，默认跳过
+		
 		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
 		if (strExt != "xlsx")
 		{
@@ -231,7 +231,7 @@ void FileProcess::CreateIniThreadFunc()
 bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 {
 	std::cout << strFile << std::endl;
-	// 打开excel
+	
 	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
 	if (!x->open(strFile.c_str()))
 	{
@@ -264,13 +264,13 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	strCSPropertyInfo = strCSPropertyInfo + "public class " + strFileName + "\n{\n";
 	strCSPropertyInfo = strCSPropertyInfo + "\t//Class name\n\tpublic static readonly string ThisName = \"" + strFileName + "\";\n\t// IObject\n" + strCSIObjectInfo + "\t// Property\n";
 
-	// 开始创建xml
+	
 	tinyxml2::XMLDocument* structDoc = new tinyxml2::XMLDocument();
 	if (NULL == structDoc)
 	{
 		return false;
 	}
-	//xml声明
+	
 	tinyxml2::XMLDeclaration *pDel = structDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
 	if (NULL == pDel)
 	{
@@ -279,26 +279,28 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 	structDoc->LinkEndChild(pDel);
 
-	// 写入XML root标签
+	
 	tinyxml2::XMLElement* root = structDoc->NewElement("XML");
 	structDoc->LinkEndChild(root);
 
-	// 写入Propertys标签
+	
 	tinyxml2::XMLElement* propertyNodes = structDoc->NewElement("Propertys");
 	root->LinkEndChild(propertyNodes);
 
-	// 写入Records标签
+	
 	tinyxml2::XMLElement* recordNodes = structDoc->NewElement("Records");
 	root->LinkEndChild(recordNodes);
 
-	// 写入components的处理
+	
 	tinyxml2::XMLElement* componentNodes = structDoc->NewElement("Components");
 	root->LinkEndChild(componentNodes);
 
-	// 读取excel中每一个sheet
+	
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		
+		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
 		const MiniExcelReader::Range& dim = sh.getDimension();
@@ -308,7 +310,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		if (strUpperSheetName == "property")
 		{
 			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -333,7 +335,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				auto propertyNode = structDoc->NewElement("Property");
 				propertyNodes->LinkEndChild(propertyNode);
 				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + 7; r++)
+				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 				{
 					std::string name = colNames[r - 1];
 					std::string value = "";
@@ -428,10 +430,11 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 		}
 		else
 		{
+			const int nRecordLineCount = 11;
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
-			const int nRecordCount = nRowsCount / 10;
+			const int nRecordCount = nRowsCount / nRecordLineCount;
 
-			if (nRowsCount != nRecordCount * 10)
+			if (nRowsCount != nRecordCount * nRecordLineCount)
 			{
 				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
 				printf("Generate faild!\n");
@@ -449,27 +452,29 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				std::string strPrivate = "";
 				std::string strSave = "";
 				std::string strCache = "";
+				std::string strUpload = "";
 				std::string strDesc = "";
 
-				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * 10 + 1, 2);
+				int nRelativeRow = 1;
+				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRecordName = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 2, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRow = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 3, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strCol = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 4, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -482,7 +487,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 5, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -495,7 +500,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 6, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -508,7 +513,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 7, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -521,7 +526,22 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * 10 + 10, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				if (cell)
+				{
+					if (cell->value == "TRUE" || cell->value == "FALSE")
+					{
+						strUpload = cell->value == "TRUE" ? 1 : 0;
+					}
+					else
+					{
+						strUpload = cell->value;
+					}
+				}
+				cell = nullptr;
+				int nTagRow = nRelativeRow++;
+				int nTypeRow = nRelativeRow++;
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
 				if (cell)
 				{
 					strDesc = cell->value;
@@ -538,9 +558,10 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				recordNode->SetAttribute("Row", strRow.c_str());
 				recordNode->SetAttribute("Col", strCol.c_str());
 				recordNode->SetAttribute("Public", strPublic.c_str());
-				recordNode->SetAttribute("Private", strPublic.c_str());
+				recordNode->SetAttribute("Private", strPrivate.c_str());
 				recordNode->SetAttribute("Save", strSave.c_str());
 				recordNode->SetAttribute("Cache", strCache.c_str());
+				recordNode->SetAttribute("Upload", strUpload.c_str());
 				recordNode->SetAttribute("Desc", strDesc.c_str());
 
 				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
@@ -560,7 +581,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					std::string strType = "";
 					std::string strTag = "";
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 8, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTagRow, nRecordCol);
 					if (cell)
 					{
 						strTag = cell->value;
@@ -570,7 +591,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						break;
 					}
 					cell = nullptr;
-					cell = sh.getCell((nCurrentRecord - 1) * 10 + 9, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTypeRow, nRecordCol);
 					if (cell)
 					{
 						strType = cell->value;
@@ -627,7 +648,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	fwrite(strCSPropertyInfo.c_str(), strCSPropertyInfo.length(), 1, csWriter);
 
 	////////////////////////////////////////////////////////////////////////////
-	// 保存文件
+	
 	std::string strFilePath(strFile);
 	int nLastPoint = strFilePath.find_last_of(".") + 1;
 	int nLastSlash = strFilePath.find_last_of("/") + 1;
@@ -652,7 +673,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 bool FileProcess::CreateIniXML(std::string strFile)
 {
 	std::cout << strFile << std::endl;
-	// 打开excel
+	
 	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
 	if (!x->open(strFile.c_str()))
 	{
@@ -660,13 +681,13 @@ bool FileProcess::CreateIniXML(std::string strFile)
 		return false;
 	}
 	////////////////////////////////////////////////////////////////////////////
-	// 开始创建xml
+	
 	tinyxml2::XMLDocument* iniDoc = new tinyxml2::XMLDocument();
 	if (NULL == iniDoc)
 	{
 		return false;
 	}
-	//xml声明
+	
 	tinyxml2::XMLDeclaration *pDel = iniDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
 	if (NULL == pDel)
 	{
@@ -675,11 +696,11 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	iniDoc->LinkEndChild(pDel);
 
-	// 写入XML root标签
+	
 	tinyxml2::XMLElement* root = iniDoc->NewElement("XML");
 	iniDoc->LinkEndChild(root);
 
-	// 读取excel中每一个sheet
+	
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	std::vector<std::string> vColNames;
 	std::vector<std::string> vDataIDs;
@@ -688,6 +709,9 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		
+		int nDataLine = 10;
+
 		std::string strSheetName = sh.getName();
 
 		std::string strUpperSheetName = strSheetName.substr(0, 8);
@@ -711,7 +735,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 		if (vDataIDs.size() <= 0)
 		{
-			for (int r = dim.firstRow + 8; r <= dim.lastRow; r++)
+			for (int r = dim.firstRow + nDataLine - 1; r <= dim.lastRow; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -724,7 +748,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 			}
 		}
 
-		for (int r = dim.firstRow + 8; r <= vDataIDs.size() + 8; r++)
+		for (int r = dim.firstRow + nDataLine - 1; r <= vDataIDs.size() + nDataLine - 1; r++)
 		{
 			std::string testValue = "";
 			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
@@ -782,7 +806,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 						delete[] chrArrDesc;
 					}
 				}
-				mDataValues.insert(std::pair<string, string>(vDataIDs[r - 9] + name, value));
+				mDataValues.insert(std::pair<string, string>(vDataIDs[r - nDataLine] + name, value));
 			}
 		}
 		nCurrentCol += dim.lastCol;
@@ -816,7 +840,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// 保存文件
+	
 	int nLastPoint = strFile.find_last_of(".") + 1;
 	int nLastSlash = strFile.find_last_of("/") + 1;
 	std::string strFileName = strFile.substr(nLastSlash, nLastPoint - nLastSlash - 1);
@@ -872,13 +896,13 @@ bool FileProcess::LoadLogicClass(std::string strFile)
 			sqlToWrite += ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n";
 			fwrite(sqlToWrite.c_str(), sqlToWrite.length(), 1, mysqlClassWriter);
 
-			// 读取父节点内容
+			
 			if (!LoadClass(strRelativePath + strIObjectPath, strID))
 			{
 				return false;
 			}
 
-			// 读取自己节点内容
+			
 			std::string strPath = nodeElement->Attribute("Path");
 			if (!LoadClass(strRelativePath + strPath, strID))
 			{

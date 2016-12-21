@@ -1,10 +1,16 @@
-// NFKernelPlugin.cpp : Defines the exported functions for the DLL application.
+// -------------------------------------------------------------------------
+//    @FileName         :    NFKernelPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2010-03-15
+//    @Module           :    NFKernelPlugin
 //
+// -------------------------------------------------------------------------
 
 #include "NFKernelPlugin.h"
-#include "NFKernelModule/NFCKernelModule.h"
-#include "NFSceneModule/NFCSceneModule.h"
-#include "NFKernelModule/NFCUUIDModule.h"
+#include "NFCKernelModule.h"
+#include "NFCSceneAOIModule.h"
+#include "NFCEventModule.h"
+#include "NFCScheduleModule.h"
 
 //
 //
@@ -32,19 +38,21 @@ const int NFKernelPlugin::GetPluginVersion()
 
 const std::string NFKernelPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFKernelPlugin)
+	return GET_CLASS_NAME(NFKernelPlugin);
 }
 
 void NFKernelPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIUUIDModule, NFCUUIDModule)
-    REGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
-    REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
+    REGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
+	REGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
+	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
+	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
 }
 
 void NFKernelPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
-    UNREGISTER_MODULE(pPluginManager, NFISceneModule, NFCSceneModule)
-    UNREGISTER_MODULE(pPluginManager, NFIUUIDModule, NFCUUIDModule)
+	UNREGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
+	UNREGISTER_MODULE(pPluginManager, NFIKernelModule, NFCKernelModule)
+	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
+	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
 }

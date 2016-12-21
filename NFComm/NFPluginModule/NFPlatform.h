@@ -244,6 +244,7 @@
 #endif
 
 #include <stdint.h>
+#include <chrono>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
@@ -272,33 +273,37 @@ typedef int64_t NFINT64;
 //#define GOOGLE_GLOG_DLL_DECL=
 
 ///////////////////////////////////////////////////////////////
+#include <string>
+#include <algorithm>
+#include <cmath>
 #include <time.h>
 #include <sstream>
+#include <stdio.h>
+#include <common/lexical_cast.hpp>
 
-inline unsigned long NF_GetTickCount()
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-    return GetTickCount();
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
-
+#ifndef _MSC_VER
+#include <sys/time.h>
+#include <unistd.h>
+#include <sys/prctl.h>
+#define EPOCHFILETIME 11644473600000000ULL
 #else
-    struct timespec ts;
-
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-
-    return (ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+#include <windows.h>
+#include <time.h>
+#include <process.h>
+#define EPOCHFILETIME 11644473600000000Ui64
 #endif
 
-}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define NFSPRINTF sprintf_s
 #define NFSTRICMP stricmp
 #define NFSLEEP(s) Sleep(s)
+#define NFGetPID() lexical_cast<std::string>(getpid())
 #else
 #define NFSPRINTF snprintf
 #define NFSTRICMP strcasecmp
 #define NFSLEEP(s) usleep(s)
+#define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 
 #ifndef NF_DYNAMIC_PLUGIN
@@ -327,12 +332,12 @@ inline unsigned long NF_GetTickCount()
 #endif
 //use actor mode--end
 
+#define GET_CLASS_NAME(className) (#className)
 
 #define NF_SHARE_PTR std::shared_ptr
 #define NF_NEW new
 
-#include <string>
-#include <common/lexical_cast.hpp>
+
 template<typename DTYPE>
 bool NF_StrTo(const std::string& strValue, DTYPE& nValue)
 {
@@ -359,9 +364,15 @@ inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
     return std::abs(dValue) <= epsilon;
 }
 
+inline int64_t NFGetTime()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
+#ifndef PROTOBUF_USE_DLLS
 #define PROTOBUF_USE_DLLS
+#endif
 #endif
 
 #endif
