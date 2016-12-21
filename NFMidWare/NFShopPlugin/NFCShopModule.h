@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCShopModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
+//    @Module           :    NFCShopModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CHAT_MODULE_H
-#define NFC_CHAT_MODULE_H
+#ifndef NFC_SHOP_MODULE_H
+#define NFC_SHOP_MODULE_H
 
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIChatModule.h"
+#include "NFComm/NFPluginModule/NFIShopModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
@@ -23,11 +23,11 @@
 
 
 
-class NFCChatModule
-    : public NFIChatModule
+class NFCShopModule
+    : public NFIShopModule
 {
 public:
-	NFCChatModule(NFIPluginManager* p)
+	NFCShopModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
