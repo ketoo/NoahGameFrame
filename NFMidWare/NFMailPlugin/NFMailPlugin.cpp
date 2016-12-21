@@ -1,14 +1,14 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.cpp
+//    @FileName			:    NFMailPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
-//    @Module           :    NFChatPlugin
+//    @Module           :    NFMailPlugin
 //
 // -------------------------------------------------------------------------
 
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
+#include "NFCMailModule.h"
+#include "NFMailPlugin.h"
 
 //
 //
@@ -17,35 +17,35 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFMailPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFMailPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFMailPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFMailPlugin::GetPluginName()
 {
 	return GET_CLASS_NAME(NFCChatPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFMailPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    REGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule)
 
 }
 
-void NFChatPlugin::Uninstall()
+void NFMailPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    UNREGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule)
 }
