@@ -1,0 +1,58 @@
+<XML>
+	<GameServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFGameServerPlugin" />
+		<Plugin Name="NFGameServerNet_ServerPlugin" />
+		<Plugin Name="NFGameServerNet_ClientPlugin" />
+		<Plugin Name="NFLogPlugin" />
+    	<ConfigPath Name="../" />		
+	</GameServer>
+
+	<LoginServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />	
+		<Plugin Name="NFLoginLogicPlugin" />
+		<Plugin Name="NFLoginNet_ServerPlugin" />
+		<Plugin Name="NFLoginNet_ClientPlugin" />
+		<Plugin Name="NFLogPlugin" />
+    	<ConfigPath Name="../" />		
+	</LoginServer>
+
+	<MasterServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFMasterServerPlugin" />
+		<Plugin Name="NFMasterNet_ServerPlugin" />
+		<Plugin Name="NFMasterNet_HttpServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+    	<ConfigPath Name="../" />		
+	</MasterServer>
+
+	<ProxyServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFProxyLogicPlugin" />
+		<Plugin Name="NFProxyServerNet_ClientPlugin" />
+		<Plugin Name="NFProxyServerNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />
+    	<ConfigPath Name="../" />				
+	</ProxyServer>
+
+	<WorldServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFWorldNet_ClientPlugin" />
+		<Plugin Name="NFWorldNet_ServerPlugin" />
+		<Plugin Name="NFLogPlugin" />	
+    	<ConfigPath Name="../" />		
+	</WorldServer>
+	
+	<TutorialServer>
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFLogPlugin" />	
+		<Plugin Name="Tutorial1" />	
+    	<ConfigPath Name="../" />		
+	</TutorialServer>
+</XML>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Object Id="GameServer_1" ServerID="6" Name="GameServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="16001" Type="6" Area="1"/>
+    <Object Id="WorldServer_1" ServerID="7" Name="WorldServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="17001" Type="7" Area="1"/>
+    <Object Id="ProxyServer_1" ServerID="5" Name="ProxyServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="15001" Type="5" Area="1"/>
+    <Object Id="MasterServer_1" ServerID="3" Name="MasterServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="13001" Type="3" Area="1"/>
+    <Object Id="LoginServer_1" ServerID="4" Name="LoginServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" Type="4" Area="1"/>
+    <Object Id="TutorialServer_1" ServerID="0" Name="TutorialServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" Type="4" Area="1"/>
+</XML>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XML>
+    <Propertys>
+        <Property Id="Name" Type="string" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="组名字"/>
+        <Property Id="CreateObject" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="创建者"/>
+    </Propertys>
+    <Records>
+        <Record Id="GroupMemberList" Row="126" Col="3" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="int" Tag="Online"/>
+            <Col Type="int" Tag="GameID"/>
+        </Record>
+        <Record Id="ChatList" Row="126" Col="3" Public="0" Private="1" Save="1" Cache="0" Upload="0" Desc="">
+            <Col Type="object" Tag="GUID"/>
+            <Col Type="string" Tag="msg"/>
+            <Col Type="int" Tag="time"/>
+        </Record>
+    </Records>
+    <Components/>
+</XML>

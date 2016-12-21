@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      ：    NFMsgDefine.h
-//    @Author      ：    LvSheng.Huang
-//    @Date    ：    2010-10-5 12:05
-//    @Module    ：    消息协议声明
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
 #include "NFComm/NFCore/NFIPropertyManager.h"
-#include "NFComm/NFCore/NFList.h"
+#include "NFComm/NFCore/NFList.hpp"
 #include "NFLimit.h"
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
@@ -27,9 +27,9 @@
 
 enum E_CHECK_TYPE
 {
-    ECT_SAVE        = 0, // 保存
-    ECT_PRIVATE     = 1, // 私有
-    ECT_PUBLIC      = 2, // 公有
+    ECT_SAVE        = 0, 
+    ECT_PRIVATE     = 1, 
+    ECT_PUBLIC      = 2, 
 };
 
 // bool RecordToString( NFIRecord* pRecord, NFMsg::ObjectRecordBase& recordBase, E_CHECK_TYPE nCheckType, const bool bCheck );

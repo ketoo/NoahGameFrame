@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         £º    NFIWorldNet_ClientModule.h
-//    @Author           £º    LvSheng.Huang
-//    @Date             £º    2012-12-15
-//    @Module           £º    NFIWorldNet_ClientModule
+
+
+
+
 //
 // -------------------------------------------------------------------------
 
@@ -17,6 +17,9 @@
 class NFIWorldToMasterModule
 	: public  NFIModule
 {
+public:
+	virtual NFINetClientModule* GetNetClientModule() = 0;
+	virtual void AddServerInfoExt(const std::string& key, const std::string& value) = 0;
 };
 
 #endif
