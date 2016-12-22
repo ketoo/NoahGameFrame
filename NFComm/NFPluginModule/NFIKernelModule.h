@@ -87,12 +87,10 @@ public:
 
     /////////////////////////////////////////////////////////////////
 
-    virtual bool IsContainer(const NFGUID& self) = 0;
-    virtual bool ExistContainer(const int nContainerIndex) = 0;
+    virtual bool ExistScene(const int nSceneID) = 0;
 
 	virtual bool ExistObject(const NFGUID& ident) = 0;
-	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex) = 0;
-	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex, const int nGroupID) = 0;
+	virtual bool ExistObject(const NFGUID& ident, const int nSceneID, const int nGroupID) = 0;
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident) = 0;
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
