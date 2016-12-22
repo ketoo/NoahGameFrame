@@ -1,13 +1,34 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFCScheduleModule.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2016-12-05
+//    @Module           :    NFCScheduleModule
+//
+// -------------------------------------------------------------------------
+
 #include "NFCScheduleModule.h"
 
 void NFCScheduleElement::DoHeartBeatEvent()
 {
-	OBJECT_SCHEDULE_FUNCTOR_PTR cb;
-	bool bRet = First(cb);
-	while (bRet)
+	if (self.IsNull())
 	{
-		cb.get()->operator()(self, mstrScheduleName, mfIntervalTime, mnRemainCount);
-		bRet = Next(cb);
+		MODULE_SCHEDULE_FUNCTOR_PTR cb;
+		bool bRet = this->mxModuleFunctor.First(cb);
+		while (bRet)
+		{
+			cb.get()->operator()(mstrScheduleName, mfIntervalTime, mnRemainCount);
+			bRet = this->mxModuleFunctor.Next(cb);
+		}
+	}
+	else
+	{
+		OBJECT_SCHEDULE_FUNCTOR_PTR cb;
+		bool bRet = this->mxObjectFunctor.First(cb);
+		while (bRet)
+		{
+			cb.get()->operator()(self, mstrScheduleName, mfIntervalTime, mnRemainCount);
+			bRet = this->mxObjectFunctor.Next(cb);
+		}
 	}
 }
 
@@ -97,22 +118,87 @@ bool NFCScheduleModule::Execute()
 
 	mObjectAddList.clear();
 
+	////////////////////////////////////////////
+	//execute every schedule
+	NF_SHARE_PTR< NFCScheduleElement > xModuleSchedule = mModuleScheduleMap.First();
+	while (xModuleSchedule)
+	{
+		NFINT64 nNow = NFGetTime();
+		if (nNow > xModuleSchedule->mnNextTriggerTime && xModuleSchedule->mnRemainCount > 0)
+		{
+			xModuleSchedule->mnRemainCount--;
+			xModuleSchedule->DoHeartBeatEvent();
+
+			if (xModuleSchedule->mnRemainCount <= 0)
+			{
+				mModuleRemoveList.push_back(xModuleSchedule->mstrScheduleName);
+			}
+			else
+			{
+				NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000) * (xModuleSchedule->mnAllCount - xModuleSchedule->mnRemainCount);
+				xModuleSchedule->mnNextTriggerTime = xModuleSchedule->mnStartTime + nNextCostTime;
+			}
+		}
+
+		xModuleSchedule = mModuleScheduleMap.Next();
+	}
+
+	//remove schedule
+	for (std::list<std::string>::iterator it = mModuleRemoveList.begin(); it != mModuleRemoveList.end(); ++it)
+	{
+		const std::string& strSheduleName = *it;;
+		auto findIter = mModuleScheduleMap.GetElement(strSheduleName);
+		if (NULL != findIter)
+		{
+			mModuleScheduleMap.RemoveElement(strSheduleName);
+		}
+	}
+	mModuleRemoveList.clear();
+
+	//add schedule
+	for (std::list<NFCScheduleElement>::iterator iter = mModuleAddList.begin(); iter != mModuleAddList.end(); ++iter)
+	{
+		NF_SHARE_PTR< NFCScheduleElement > xModuleScheduleMap = mModuleScheduleMap.GetElement(iter->mstrScheduleName);
+		if (NULL == xModuleScheduleMap)
+		{
+			xModuleScheduleMap = NF_SHARE_PTR< NFCScheduleElement >(NF_NEW NFCScheduleElement());
+			mModuleScheduleMap.AddElement(iter->mstrScheduleName, xModuleScheduleMap);
+		}
+
+		*xModuleScheduleMap = *iter;
+	}
+
+	mModuleAddList.clear();
 	return true;
 }
 
 bool NFCScheduleModule::AddSchedule(const std::string & strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR & cb, const float fTime, const int nCount)
 {
-	return false;
+	NFCScheduleElement xSchedule;
+	xSchedule.mstrScheduleName = strScheduleName;
+	xSchedule.mfIntervalTime = fTime;
+	xSchedule.mnNextTriggerTime = NFGetTime() + (NFINT64)(fTime * 1000);
+	xSchedule.mnStartTime = NFGetTime();
+	xSchedule.mnRemainCount = nCount;
+	xSchedule.mnAllCount = nCount;
+	xSchedule.self = NFGUID();
+	xSchedule.mxModuleFunctor.Add(cb);
+
+	mModuleAddList.push_back(xSchedule);
+
+	return true;
 }
 
 bool NFCScheduleModule::RemoveSchedule(const std::string & strScheduleName)
 {
-	return false;
+	mModuleRemoveList.push_back(strScheduleName);
+
+	return true;
 }
 
 bool NFCScheduleModule::ExistSchedule(const std::string & strScheduleName)
 {
-	return false;
+	return mModuleScheduleMap.ExistElement(strScheduleName);
 }
 
 bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount)
@@ -125,7 +211,7 @@ bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strSch
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = self;
-	xSchedule.Add(cb);
+	xSchedule.mxObjectFunctor.Add(cb);
 
 	mObjectAddList.push_back(xSchedule);
 
