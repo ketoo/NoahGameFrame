@@ -131,6 +131,17 @@ public:
         return false;
     }
 
+	bool ExistObjectInGroup(const int nGroupID, const NFGUID& ident)
+	{
+		NF_SHARE_PTR<NFCSceneGroupInfo> pInfo = GetElement(nGroupID);
+		if (pInfo)
+		{
+			return pInfo->mxPlayerList.ExistElement(ident) || pInfo->mxOtherList.ExistElement(ident);
+		}
+
+		return false;
+	}
+
     bool Execute()
     {
         NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = First();
