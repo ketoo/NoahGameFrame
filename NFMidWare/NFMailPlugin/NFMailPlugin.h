@@ -1,31 +1,32 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFMailPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFChatPlugin
+//    @Module           :    NFMailPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
+#ifndef NF_MAIL_PLUGIN_H
+#define NF_MAIL_PLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFChatPlugin : public NFIPlugin
+class NFMailPlugin : public NFIPlugin
 {
 public:
-	NFChatPlugin(NFIPluginManager* p)
+	NFMailPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
-    virtual const int GetPluginVersion();
 
-    virtual const std::string GetPluginName();
+	virtual const int GetPluginVersion() override;
 
-    virtual void Install();
+	virtual const std::string GetPluginName() override;
 
-    virtual void Uninstall();
+	virtual void Install() override;
+
+	virtual void Uninstall() override;
 };
 #endif
