@@ -55,7 +55,7 @@ NFCPluginManager::~NFCPluginManager()
 
 }
 
-inline bool NFCPluginManager::Init()
+bool NFCPluginManager::Awake()
 {
 	LoadPluginConfig();
 
@@ -70,6 +70,17 @@ inline bool NFCPluginManager::Init()
 	}
 
 
+	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
+	for (itAfterInstance; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
+	{
+		itAfterInstance->second->Awake();
+	}
+
+	return true;
+}
+
+inline bool NFCPluginManager::Init()
+{
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
 	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
@@ -190,6 +201,97 @@ void NFCPluginManager::UnRegistered(NFIPlugin* plugin)
         it->second = NULL;
         mPluginInstanceMap.erase(it);
     }
+}
+
+bool NFCPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
+{
+	//1.shut all module of this plugin
+	//2.unload this plugin
+	//3.load new plugin
+	//4.init new module
+	//5.tell others who has been reloaded
+	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.find(strPluginDLLName);
+	if (itInstance == mPluginInstanceMap.end())
+	{
+		return false;
+	}
+	//1
+	NFIPlugin* pPlugin = itInstance->second;
+	NFIModule* pModule = pPlugin->First();
+	while (pModule)
+	{
+		pModule->BeforeShut();
+		pModule->Shut();
+		pModule->Finalize();
+		
+		pModule = pPlugin->Next();
+	}
+
+	//2
+	PluginLibMap::iterator it = mPluginLibMap.find(strPluginDLLName);
+	if (it != mPluginLibMap.end())
+	{
+		NFCDynLib* pLib = it->second;
+		DLL_STOP_PLUGIN_FUNC pFunc = (DLL_STOP_PLUGIN_FUNC)pLib->GetSymbol("DllStopPlugin");
+
+		if (pFunc)
+		{
+			pFunc(this);
+		}
+
+		pLib->UnLoad();
+
+		delete pLib;
+		pLib = NULL;
+		mPluginLibMap.erase(it);
+	}
+
+	//3
+	NFCDynLib* pLib = new NFCDynLib(strPluginDLLName);
+	bool bLoad = pLib->Load();
+	if (bLoad)
+	{
+		mPluginLibMap.insert(PluginLibMap::value_type(strPluginDLLName, pLib));
+
+		DLL_START_PLUGIN_FUNC pFunc = (DLL_START_PLUGIN_FUNC)pLib->GetSymbol("DllStartPlugin");
+		if (!pFunc)
+		{
+			std::cout << "Reload Find function DllStartPlugin Failed in [" << pLib->GetName() << "]" << std::endl;
+			assert(0);
+			return false;
+		}
+
+		pFunc(this);
+	}
+	else
+	{
+#if NF_PLATFORM == NF_PLATFORM_LINUX
+		char* error = dlerror();
+		if (error)
+		{
+			std::cout << stderr << " Reload shared lib[" << pLib->GetName() << "] failed, ErrorNo. = [" << error << "]" << std::endl;
+			std::cout << "Reload [" << pLib->GetName() << "] failed" << std::endl;
+			assert(0);
+			return false;
+		}
+#elif NF_PLATFORM == NF_PLATFORM_WIN
+		std::cout << stderr << " Reload DLL[" << pLib->GetName() << "] failed, ErrorNo. = [" << GetLastError() << "]" << std::endl;
+		std::cout << "Reload [" << pLib->GetName() << "] failed" << std::endl;
+		assert(0);
+		return false;
+#endif // NF_PLATFORM
+	}
+
+	//4
+	PluginInstanceMap::iterator itReloadInstance = mPluginInstanceMap.begin();
+	for (itReloadInstance; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
+	{
+		if (strPluginDLLName != itReloadInstance->first)
+		{
+			itReloadInstance->second->OnReloadPlugin();
+		}
+	}
+	return true;
 }
 
 NFIPlugin* NFCPluginManager::FindPlugin(const std::string& strPluginName)
@@ -386,23 +488,33 @@ bool NFCPluginManager::Shut()
         itInstance->second->Shut();
     }
 
+    return true;
+}
 
+bool NFCPluginManager::Finalize()
+{
+	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
+	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	{
+		itInstance->second->Finalize();
+	}
 
-    PluginNameMap::iterator it = mPluginNameMap.begin();
-    for (it; it != mPluginNameMap.end(); it++)
-    {
+	////////////////////////////////////////////////
+
+	PluginNameMap::iterator it = mPluginNameMap.begin();
+	for (it; it != mPluginNameMap.end(); it++)
+	{
 #ifdef NF_DYNAMIC_PLUGIN
-        UnLoadPluginLibrary(it->first);
+		UnLoadPluginLibrary(it->first);
 #else
 		UnLoadStaticPlugin(it->first);
 #endif
-    }
+	}
 
+	mPluginInstanceMap.clear();
+	mPluginNameMap.clear();
 
-
-    mPluginInstanceMap.clear();
-    mPluginNameMap.clear();
-    return true;
+	return true;
 }
 
 bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
@@ -458,7 +570,6 @@ bool NFCPluginManager::UnLoadPluginLibrary(const std::string& strPluginDLLName)
     if (it != mPluginLibMap.end())
     {
         NFCDynLib* pLib = it->second;
-
         DLL_STOP_PLUGIN_FUNC pFunc = (DLL_STOP_PLUGIN_FUNC)pLib->GetSymbol("DllStopPlugin");
 
         if (pFunc)
@@ -484,30 +595,4 @@ bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
 	//     DESTROY_PLUGIN(this, NFKernelPlugin)
 	return false;
-}
-
-bool NFCPluginManager::StartReLoadState()
-{
-    NFIModule::StartReLoadState();
-
-    PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
-    for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
-    {
-        itBeforeInstance->second->StartReLoadState();
-    }
-
-    return true;
-}
-
-bool NFCPluginManager::EndReLoadState()
-{
-    PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
-    for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
-    {
-        itBeforeInstance->second->EndReLoadState();
-    }
-
-    NFIModule::EndReLoadState();
-
-    return true;
 }
