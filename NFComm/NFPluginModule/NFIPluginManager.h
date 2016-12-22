@@ -44,6 +44,8 @@ public:
 		return NULL;
 	}
 
+	virtual bool ReLoadPlugin(const std::string& strPluginDLLName) = 0;
+
     virtual void Registered(NFIPlugin* plugin) = 0;
 
     virtual void UnRegistered(NFIPlugin* plugin) = 0;

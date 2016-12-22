@@ -43,7 +43,6 @@ class NFIModule
 public:
     NFIModule()
     {
-        mbReloading = false;
     }
 
     virtual ~NFIModule() {}
@@ -88,40 +87,25 @@ public:
     {
         return true;
     }
+
     virtual bool Finalize()
     {
         return true;
     }
 
-    virtual bool StartReLoadState()
-    {
-        mbReloading = true;
-        return true;
-    }
-
-    virtual bool EndReLoadState()
-    {
-        mbReloading = false;
-        return true;
-    }
+	virtual bool OnReloadPlugin()
+	{
+		return true;
+	}
 
     virtual NFIPluginManager* GetPluginManager() const
     {
         return pPluginManager;
     }
 
-	bool Loading() const
-    {
-        return mbReloading;
-    }
-
     std::string strName;
 
 protected:
 	NFIPluginManager* pPluginManager = NULL;
-
-private:
-
-    bool  mbReloading;
 };
 #endif
