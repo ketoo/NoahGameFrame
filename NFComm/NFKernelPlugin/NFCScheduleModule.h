@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFCScheduleModule.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2016-12-05
+//    @Module           :    NFCScheduleModule
+//
+// -------------------------------------------------------------------------
+
 #ifndef NFC_SCHEDULE_MODULE_H
 #define NFC_SCHEDULE_MODULE_H
 
@@ -7,7 +15,6 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class  NFCScheduleElement
-	: public NFList<OBJECT_SCHEDULE_FUNCTOR_PTR>
 {
 public:
 	NFCScheduleElement()
@@ -34,6 +41,9 @@ public:
 	int mnAllCount;
 
 	NFGUID self;
+
+	NFList<OBJECT_SCHEDULE_FUNCTOR_PTR> mxObjectFunctor;
+	NFList<MODULE_SCHEDULE_FUNCTOR_PTR> mxModuleFunctor;
 };
 
 class NFCScheduleModule : public NFIScheduleModule
@@ -59,6 +69,10 @@ protected:
 	NFMapEx<NFGUID, NFMapEx <std::string, NFCScheduleElement >> mObjectScheduleMap;//guid_scheduleName_element
 	std::list<NFCScheduleElement> mObjectAddList;
 	std::map<NFGUID, std::string> mObjectRemoveList;
+
+	NFMapEx <std::string, NFCScheduleElement > mModuleScheduleMap;//guid_scheduleName_element
+	std::list<NFCScheduleElement> mModuleAddList;
+	std::list<std::string> mModuleRemoveList;
 	
 };
 
