@@ -238,6 +238,7 @@ int main(int argc, char* argv[])
 
     ProcessParameter(argc, argv);
 
+	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
 	NFCPluginManager::GetSingletonPtr()->CheckConfig();
@@ -273,6 +274,7 @@ int main(int argc, char* argv[])
 
 	NFCPluginManager::GetSingletonPtr()->BeforeShut();
 	NFCPluginManager::GetSingletonPtr()->Shut();
+	NFCPluginManager::GetSingletonPtr()->Finalize();
 
 	NFCPluginManager::GetSingletonPtr()->ReleaseInstance();
 
