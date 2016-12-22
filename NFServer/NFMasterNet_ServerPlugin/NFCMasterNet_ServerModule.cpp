@@ -12,7 +12,6 @@
 #include "Dependencies/rapidjson/writer.h"
 #include "Dependencies/rapidjson/stringbuffer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-#include "NFComm/NFCore/NFCalendar.h"
 
 NFCMasterNet_ServerModule::~NFCMasterNet_ServerModule()
 {
