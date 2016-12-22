@@ -93,8 +93,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCChatModule.h" />
-    <ClInclude Include="NFChatPlugin.h" />
+    <ClInclude Include="NFCMailModule.h" />
+    <ClInclude Include="NFMailPlugin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -105,8 +105,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCChatModule.cpp" />
-    <ClCompile Include="NFChatPlugin.cpp" />
+    <ClCompile Include="NFCMailModule.cpp" />
+    <ClCompile Include="NFMailPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
