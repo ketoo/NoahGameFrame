@@ -104,6 +104,12 @@
     <ClInclude Include="NFCMemManager.h">
       <Filter>Unit</Filter>
     </ClInclude>
+    <ClInclude Include="NFDateTime.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFException.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCRecord.cpp">
