@@ -143,7 +143,7 @@ public:
     void RemoveReceiveCallBack(const int nMsgID)
 	{
 		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
-		if (mxReceiveCallBack.end() == it)
+		if (mxReceiveCallBack.end() != it)
 		{
 			mxReceiveCallBack.erase(it);
 		}
