@@ -24,7 +24,8 @@
     pManager->AddModule( #classBaseName, pRegisterModule##className );AddElement( #classBaseName, pRegisterModule##className );
 
 #define UNREGISTER_MODULE(pManager, classBaseName, className) NFIModule* pUnRegisterModule##className =  \
-       dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); pManager->RemoveModule( #classBaseName ); RemoveElement( #classBaseName ); delete pUnRegisterModule##className;
+	dynamic_cast<NFIModule*>( pManager->FindModule( #classBaseName )); \
+	pManager->RemoveModule( #classBaseName ); RemoveElement( #classBaseName ); delete pUnRegisterModule##className;
 
 
 #define CREATE_PLUGIN(pManager, className)  NFIPlugin* pCreatePlugin##className = new className(pManager); pManager->Registered( pCreatePlugin##className );
@@ -153,6 +154,18 @@ public:
         return true;
     }
 
+	virtual bool OnReloadPlugin()
+	{
+		NFIModule* pModule = First();
+		while (pModule)
+		{
+			pModule->OnReloadPlugin();
+
+			pModule = Next();
+		}
+
+		return true;
+	}
     virtual void Uninstall() = 0;
 };
 
