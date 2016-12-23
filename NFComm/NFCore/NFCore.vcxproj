@@ -103,6 +103,8 @@
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
     <ClInclude Include="NFCRecordManager.h" />
+    <ClInclude Include="NFDateTime.hpp" />
+    <ClInclude Include="NFException.hpp" />
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFIDataList.h" />
