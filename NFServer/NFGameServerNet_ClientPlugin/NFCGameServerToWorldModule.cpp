@@ -239,7 +239,7 @@ void NFCGameServerToWorldModule::SendOnline(const NFGUID& self)
 {
 	NFMsg::RoleOnlineNotify xMsg;
 
-	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
+	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
 	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
 	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
@@ -250,7 +250,7 @@ void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
 {
 	NFMsg::RoleOfflineNotify xMsg;
 
-	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, "GuildID");
+	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
 	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
 	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
