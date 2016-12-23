@@ -59,7 +59,7 @@ private:
 	NFIKernelModule* m_pKernelodule;
 
 private:
-	// fo module
+	// for module
 	NFList<NFEventDefine> mModuleRemoveListEx;
 	NFMapEx<NFEventDefine, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
 
