@@ -39,8 +39,8 @@ bool NFCTaskModule::AfterInit()
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTaskModule::OnClienAcceptTask)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTaskModule::OnClienPushTask)) { return false; }
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTaskModule::OnClientAcceptTask)) { return false; }
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTaskModule::OnClientPushTask)) { return false; }
 
     return true;
 }
@@ -58,17 +58,17 @@ int NFCTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
     return 0;
 }
 
-void NFCTaskModule::OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTaskModule::OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
 }
 
-void NFCTaskModule::OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTaskModule::OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
 }
 
-void NFCTaskModule::OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTaskModule::OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     //CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::cu)
 }
