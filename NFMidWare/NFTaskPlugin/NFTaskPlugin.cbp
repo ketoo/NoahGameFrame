@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="NFCChatPlugin" />
+		<Option title="NFTaskPlugin" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -69,10 +69,10 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCChatModule.cpp" />
-		<Unit filename="NFCChatModule.h" />
-		<Unit filename="NFCChatModule.cpp" />
-		<Unit filename="NFCChatModule.h" />
+		<Unit filename="NFCTaskModule.cpp" />
+		<Unit filename="NFCTaskModule.h" />
+		<Unit filename="NFTaskPlugin.cpp" />
+		<Unit filename="NFTaskPlugin.h" />
 		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />

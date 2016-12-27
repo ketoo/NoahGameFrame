@@ -1,14 +1,14 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.cpp
+//    @FileName			:    NFTaskPlugin.cpp
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFChatPlugin
+//    @Date             :    2016-12-27 08:51
+//    @Module           :    NFTaskPlugin
 //
 // -------------------------------------------------------------------------
 
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
+#include "NFCTaskModule.h"
+#include "NFTaskPlugin.h"
 
 //
 //
@@ -17,35 +17,35 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFTaskPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFTaskPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFTaskPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFTaskPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFTaskPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFTaskPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    REGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule)
 
 }
 
-void NFChatPlugin::Uninstall()
+void NFTaskPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    UNREGISTER_MODULE(pPluginManager, NFITaskModule, NFCTaskModule)
 }
