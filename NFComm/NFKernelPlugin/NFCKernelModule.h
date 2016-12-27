@@ -126,6 +126,7 @@ public:
     virtual bool ExitGroupScene(const int nSceneID, const int nGroupID);
 
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list);
+	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, const NFGUID& noSelf, NFIDataList& list);
 	virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);

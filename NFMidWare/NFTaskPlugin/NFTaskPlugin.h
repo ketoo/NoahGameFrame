@@ -1,22 +1,22 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFTaskPlugin.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFChatPlugin
+//    @Date             :    2016-12-27
+//    @Module           :    NFTaskPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
+#ifndef NF_TASK_PLUGIN_H
+#define NF_TASK_PLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFChatPlugin : public NFIPlugin
+class NFTaskPlugin : public NFIPlugin
 {
 public:
-	NFChatPlugin(NFIPluginManager* p)
+	NFTaskPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -28,4 +28,4 @@ public:
 
     virtual void Uninstall();
 };
-#endif
+#endif //NF_TASK_PLUGIN_H
