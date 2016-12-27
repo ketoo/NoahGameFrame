@@ -42,9 +42,9 @@ protected:
 	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
 protected:
-    void OnClienAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     NFIKernelModule* m_pKernelModule;
     NFIPackModule* m_pPackModule;
