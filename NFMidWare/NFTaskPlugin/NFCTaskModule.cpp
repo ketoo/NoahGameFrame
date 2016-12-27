@@ -1,39 +1,75 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
-//    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
-//    @Desc             :
+//    @FileName				:    NFCTaskModule.cpp
+//    @Author               :    LvSheng.Huang
+//    @Date                 :    2013-06-11
+//    @Module               :    NFCTaskModule
+//    @Desc                 :
+// -------------------------------------------------------------------------
 
-#include "NFCChatModule.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
-#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFCTaskModule.h"
 
-bool NFCChatModule::Init()
+bool NFCTaskModule::Init()
 {
-	return true;
+    return true;
 }
 
-bool NFCChatModule::AfterInit()
+bool NFCTaskModule::Shut()
+{
+    return true;
+}
+
+bool NFCTaskModule::Execute()
+{
+    return true;
+}
+
+bool NFCTaskModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	
+  m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTaskModule::OnClassObjectEvent );
+	
+	CheckConfig();
 
-	return true;
+	//////////////////////////////////////////////////////////////////////////
+	// add msg handler
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTaskModule::OnClientAcceptTask)) { return false; }
+    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTaskModule::OnClientPushTask)) { return false; }
+
+    return true;
 }
 
-bool NFCChatModule::Shut()
+int NFCTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
 {
+    if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
+    {
 
-	return true;
+    }
+    else if ( CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent )
+    {
+    }
+
+    return 0;
 }
 
-bool NFCChatModule::Execute()
+void NFCTaskModule::OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	return true;
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
+}
+
+void NFCTaskModule::OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
+}
+
+void NFCTaskModule::OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    //CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::cu)
 }
