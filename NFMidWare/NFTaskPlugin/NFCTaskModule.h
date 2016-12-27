@@ -1,53 +1,58 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCTaskModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
-//    @Desc             :
+//    @Date             :    2013-06-11
+//    @Module           :    NFCTaskModule
+//
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CHAT_MODULE_H
-#define NFC_CHAT_MODULE_H
+#ifndef NFC_TASK_MODULE_H
+#define NFC_TASK_MODULE_H
 
-#include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIChatModule.h"
-#include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-////////////////////////////////////////////////////////////////////////////
+#include "NFComm/NFPluginModule/NFIItemModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFITaskModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-
-
-class NFCChatModule
-    : public NFIChatModule
+class NFCTaskModule
+    : public NFIModule
 {
 public:
-	NFCChatModule(NFIPluginManager* p)
+    NFCTaskModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
+    virtual ~NFCTaskModule() {};
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
-
     virtual bool AfterInit();
 
+protected:
+		int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
 protected:
-
-    //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pClassModule;
-    NFILogModule* m_pLogModule;
-    NFIElementModule* m_pElementModule;
-	NFINetModule* m_pNetModule;
-	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
-    //////////////////////////////////////////////////////////////////////////
+    void OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+private:
+    NFIKernelModule* 				m_pKernelModule;
+    NFIPackModule* 					m_pPackModule;
+    NFIElementModule* 			m_pElementModule;
+    NFIClassModule* 				m_pLogicClassModule;
+    NFIPropertyModule* 			m_pPropertyModule;
+		NFIHeroModule* 					m_pHeroModule;
+		NFICommonConfigModule* 	m_pCommonConfigModule;
+		NFIGameServerNet_ServerModule*	m_pGameServerNet_ServerModule;
 };
+
+
 #endif
