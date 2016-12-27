@@ -94,7 +94,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFBox.hpp" />
-    <ClInclude Include="NFCalendar.h" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
     <ClInclude Include="NFCDataList.h" />
@@ -126,7 +125,6 @@
     <ClInclude Include="NFVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCalendar.cpp" />
     <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCDataList.cpp" />
     <ClCompile Include="NFCMemManager.cpp" />

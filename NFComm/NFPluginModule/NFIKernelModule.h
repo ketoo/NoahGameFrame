@@ -164,7 +164,7 @@ public:
     virtual bool ExitGroupScene(const int nSceneID, const int nGroupID) = 0;
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list) = 0;
-	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer); 
+	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer) = 0; 
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, const NFGUID& noSelf, NFIDataList& list) = 0;
 	virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list) = 0;
