@@ -36,7 +36,7 @@ const int NFChatPlugin::GetPluginVersion()
 
 const std::string NFChatPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFChatPlugin);
 }
 
 void NFChatPlugin::Install()
