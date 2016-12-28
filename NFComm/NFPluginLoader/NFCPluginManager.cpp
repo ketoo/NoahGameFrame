@@ -47,6 +47,8 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
 
+   mGetFileContentFunctor = nullptr;
+
    mstrConfigPath = "";
    mstrConfigName = "Plugin.xml";
 }
