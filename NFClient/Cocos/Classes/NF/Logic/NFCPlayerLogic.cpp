@@ -46,6 +46,8 @@ bool NFCPlayerLogic::AfterInit()
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_MOVE, this, &NFCPlayerLogic::OnObjectMove);
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_MOVE_IMMUNE, this, &NFCPlayerLogic::OnObjectJump);
 
+	g_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerLogic::OnObjectClassEvent);
+
 	return true;
 }
 
@@ -87,28 +89,20 @@ void NFCPlayerLogic::RequireEnterGameServer(int nRoleIndex)
 
 	xMsg.set_name(m_RoleList[nRoleIndex].noob_name());
 	*xMsg.mutable_id() = m_RoleList[nRoleIndex].id();
-
+	m_nRoleIndex = nRoleIndex;
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, xMsg);
 }
 
 void NFCPlayerLogic::RequireMove(NFVector3 pos)
 {
-	
-
-	//if(nRoleIndex >= m_RoleList.size())
-	//{
-	//	NFASSERT(0, "out of range", __FILE__, __FUNCTION__);
-	//	return ;
-	//}
-
-	//NFMsg::ReqMoveEnterGameServer xMsg;
-	//xMsg.set_account(g_pLoginLogic->GetAccount());	
-	//xMsg.set_game_id(g_pLoginLogic->GetServerID());
-
-	//xMsg.set_name(m_RoleList[nRoleIndex].noob_name());
-	//*xMsg.mutable_id() = m_RoleList[nRoleIndex].id();
-
-	//g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, xMsg);
+	NFMsg::ReqAckPlayerMove xMsg;
+	*xMsg.mutable_mover() = NFINetModule::NFToPB(m_RoleGuid);
+	xMsg.set_movetype(0);
+	NFMsg::Position *tPos = xMsg.add_target_pos();
+	tPos->set_x((float)pos.X());
+	tPos->set_y((float)pos.Y());
+	tPos->set_z((float)pos.Z());
+	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_MOVE, xMsg);
 }
 //--------------------------------------------收消息-------------------------------------------------------------
 void NFCPlayerLogic::OnRoleList(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -205,4 +199,21 @@ void NFCPlayerLogic::OnObjectJump(const int nSockIndex, const int nMsgID, const 
 	var.AddVector3(NFVector3(pos.x(), pos.y(), pos.z()));
 
 	DoEvent(E_PlayerEvent_PlayerJump, var);
+}
+
+int NFCPlayerLogic::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+{
+	// 第一个创建的是主角
+	if (!m_RoleGuid.IsNull())
+		return 0;
+
+	if (strClassName == NFrame::Player::ThisName())
+	{
+		if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+		{
+			m_RoleGuid = self;
+		}
+	}
+
+	return 0;
 }
