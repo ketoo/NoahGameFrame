@@ -66,7 +66,7 @@ public:
 	NFVector3(const NFVector3& v)
 	{
 		this->x = v.x;
-		this->y = v.x;
+		this->y = v.y;
 		this->z = v.z;
 	}
 
