@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <NFRoot>../../../</NFRoot>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(NFRoot);$(NFRoot)\Dependencies\;$(NFRoot)\Dependencies\libevent\;$(NFRoot)\Dependencies\libevent\WIN32-Code\;$(NFRoot)\Dependencies\libevent\include\;$(NFRoot)\Dependencies\libevent\compat\;$(NFRoot)\Dependencies\protobuf\src\;$(NFRoot)\Dependencies\Theron\Include\;$(NFRoot)\Dependencies\mysql\;$(NFRoot)\Dependencies\protobuf\src;$(NFRoot)\Dependencies\protobuf\vsprojects;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="NFRoot">
+      <Value>$(NFRoot)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
