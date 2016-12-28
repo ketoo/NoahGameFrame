@@ -237,7 +237,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		return;
 	}
 
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 0, NFCDataList());
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 0, 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -1103,22 +1103,26 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 
 void NFCGameServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
 
-	this->SendMsgPBToGate(nMsgID, xMsg, nSceneID, nGroupID);
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+
+	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
 }
 
 void NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
+	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GroupID());
+	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
 
-	this->SendMsgPBToGate(nMsgID, xMsg, nSceneID, nGroupID);
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+
+	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 }
 
 void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
