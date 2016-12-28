@@ -28,5 +28,13 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="UILogin.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="UILogin.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

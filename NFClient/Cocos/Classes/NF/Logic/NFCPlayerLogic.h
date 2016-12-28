@@ -53,14 +53,21 @@ private:
 	void OnObjectMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnObjectJump(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	// ÊÂ¼þ
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
 private:
 	void AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std::string &strRecordName, const NFMsg::RecordAddRowStruct &data);
 
 public:
 	std::vector<NFMsg::RoleLiteInfo> GetRoleList() { return m_RoleList; }
+	const NFMsg::RoleLiteInfo& GetRoleInfo() { return m_RoleList[m_nRoleIndex]; }
+	const NFGUID& GetRoleGuid() { return m_RoleGuid; }
 
 private:
 	std::vector<NFMsg::RoleLiteInfo> m_RoleList;
+	int m_nRoleIndex;
+	NFGUID m_RoleGuid;
 };
 
 #define g_pPlayerLogic (NFCPlayerLogic::Instance())
