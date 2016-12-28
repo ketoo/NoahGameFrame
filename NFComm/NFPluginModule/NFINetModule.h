@@ -35,7 +35,7 @@ enum NF_SERVER_TYPES
 
 ////////////////////////////////////////////////////////////////////////////
 
-
+//only use this macro when u has entered game server
 #define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
