@@ -93,11 +93,13 @@ inline bool NFCPluginManager::Init()
 
 bool NFCPluginManager::LoadPluginConfig()
 {
-    rapidxml::file<> fdoc(mstrConfigName.c_str());
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>(fdoc.data());
+	std::string strContent;
+	GetFileContent(mstrConfigName, strContent);
 
-    rapidxml::xml_node<>* pRoot = doc.first_node();
+	rapidxml::xml_document<> xDoc;
+	xDoc.parse<0>((char*)strContent.c_str());
+
+    rapidxml::xml_node<>* pRoot = xDoc.first_node();
     rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
     if (!pAppNameNode)
     {
