@@ -85,6 +85,6 @@ bool NFCLoginLogicModule::Execute()
 bool NFCLoginLogicModule::AfterInit()
 {
     m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>();
-
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     return true;
 }
