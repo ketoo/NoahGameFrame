@@ -106,7 +106,6 @@
     <ClInclude Include="NFCCreateRoleModule.h" />
     <ClInclude Include="NFCGSPVPMatchModule.h" />
     <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
-    <ClInclude Include="NFCChatModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCEquipPropertyModule.h" />
@@ -146,7 +145,6 @@
     <ClCompile Include="NFCCreateRoleModule.cpp" />
     <ClCompile Include="NFCGSPVPMatchModule.cpp" />
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
-    <ClCompile Include="NFCChatModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCEquipPropertyModule.cpp" />
