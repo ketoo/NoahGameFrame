@@ -87,7 +87,8 @@ public:
 
     int NewGroupID()
     {
-        return ++mnGroupIndex;
+        ++mnGroupIndex;
+		return mnGroupIndex;
     }
 
     int GetWidth()
