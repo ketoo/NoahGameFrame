@@ -19,6 +19,11 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -37,6 +42,8 @@ public:
 
     virtual bool AfterInit();
 
+private:
+	void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
@@ -48,6 +55,7 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
-    //////////////////////////////////////////////////////////////////////////
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
 #endif
