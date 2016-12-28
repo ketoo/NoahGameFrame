@@ -9,6 +9,7 @@
 #ifndef NFC_PLAYER_REDIS_MODULE_H
 #define NFC_PLAYER_REDIS_MODULE_H
 
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -42,12 +43,13 @@ protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
 
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
-
+	NFIKernelModule* m_pKernelModule;
 };
 
 
