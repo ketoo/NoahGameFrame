@@ -12,8 +12,10 @@
 #include <WS2tcpip.h>
 #include <winsock2.h>
 #pragma  comment(lib,"Ws2_32.lib")
+#ifndef LIBEVENT_SRC
 #pragma  comment(lib,"libevent.lib")
 #pragma  comment(lib,"libevent_core.lib")
+#endif
 #elif NF_PLATFORM == NF_PLATFORM_APPLE
 #include <arpa/inet.h>
 #endif
@@ -21,34 +23,6 @@
 #include "event2/bufferevent_struct.h"
 #include "event2/event.h"
 #include <atomic>
-
-class NFLock
-{
-public:
-    explicit NFLock()
-    {
-        flag.clear();
-    }
-
-    ~NFLock()
-    {
-    }
-    void lock()
-    {
-        while (flag.test_and_set(std::memory_order_acquire));
-    }
-
-    void unlock()
-    {
-        flag.clear(std::memory_order_release);
-    }
-
-protected:
-    mutable std::atomic_flag flag;
-
-private:
-    NFLock& operator=(const NFLock& src);
-};
 
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
