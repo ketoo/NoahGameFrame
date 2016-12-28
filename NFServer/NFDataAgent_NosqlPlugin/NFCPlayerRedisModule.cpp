@@ -32,8 +32,26 @@ bool NFCPlayerRedisModule::AfterInit()
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectClassEvent);
 
 	return true;
+}
+
+int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+{
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	{
+		//SaveDataToNoSql( self, true );
+		//m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Player Offline", "");
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+	{
+		//LoadDataFormNoSql( self );
+	}
+
+	return 0;
 }
 
 int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
