@@ -25,6 +25,7 @@ bool NFCChatModule::AfterInit()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
+	m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCChatModule::OnClienChatProcess);
 
 	return true;
 }
