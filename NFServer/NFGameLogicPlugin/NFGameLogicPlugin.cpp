@@ -27,7 +27,7 @@
 #include "NFCHeroPropertyModule.h"
 #include "NFCEquipPropertyModule.h"
 #include "NFCTaskModule.h"
-#include "NFCChatModule.h"
+//#include "NFCChatModule.h"
 #include "NFCGSPVPMatchModule.h"
 #include "NFCCreateRoleModule.h"
 #include "NFCItemCardConsumeProcessModule.h"
