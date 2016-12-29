@@ -21,10 +21,9 @@ NFCGameScene::~NFCGameScene()
 
 bool NFCGameScene::initLayout()
 {	
-	//CCSprite *pBackGround = CCSprite::create("Scene/bbg_fine_ship.jpg");
-	//pBackGround->setAnchorPoint(ccp(0,0));
-	//pBackGround->setScale(1.2);
-	//addChild(pBackGround);
+	auto map = TMXTiledMap::create("Scene/NFMap.tmx");
+	addChild(map);
+	map->setPosition(map->getContentSize()*-0.5);
 	
     g_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameScene::OnObjectClassEvent);
 
