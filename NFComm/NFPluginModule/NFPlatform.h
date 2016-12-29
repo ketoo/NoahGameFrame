@@ -263,7 +263,7 @@ typedef int64_t NFINT64;
 #define NFASSERT(exp_, msg_, file_, func_)  \
     std::string strInfo("Message:");        \
     strInfo += msg_ + std::string(" don't exist or some warning") + std::string("\n\nFile:") + std::string(file_) + std::string("\n Function:") + func_; \
-    MessageBox(0, TEXT(strInfo.c_str()), TEXT("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR); \
+    MessageBoxA(0, strInfo.c_str(), ("Error_"#exp_), MB_RETRYCANCEL | MB_ICONERROR); \
     assert(0);
 #else
 #define NFASSERT(exp_, msg_, file_, func_)
@@ -370,8 +370,10 @@ inline int64_t NFGetTime()
 }
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
+#ifndef PROTOBUF_SRC
 #ifndef PROTOBUF_USE_DLLS
 #define PROTOBUF_USE_DLLS
+#endif
 #endif
 #endif
 
