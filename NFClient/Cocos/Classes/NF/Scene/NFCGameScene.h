@@ -26,6 +26,7 @@ private:
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 	int OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 	int OnPlayerMoveEvent(const int nEventID, const NFIDataList& varDataList);
+	int OnPlayerChatEvent(const int nEventID, const NFIDataList& varDataList);
 
 private:
 	NFMap<NFGUID, Sprite> m_Players;

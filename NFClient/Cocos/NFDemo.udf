@@ -32,8 +32,9 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="UILogin.csd" />
+          <FilePathData Path="UIChatPanel.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="UILogin.csd" />
+        <ActiveDocument Path="UIChatPanel.csd" />
       </Value>
     </Item>
   </Properties>

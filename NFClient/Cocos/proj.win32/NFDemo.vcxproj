@@ -459,6 +459,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\NF\Logic\NFCChatLogic.cpp" />
     <ClCompile Include="..\Classes\NF\Logic\NFCLogicBase.cpp" />
     <ClCompile Include="..\Classes\NF\Logic\NFCLogicPlugin.cpp" />
     <ClCompile Include="..\Classes\NF\Logic\NFCLoginLogic.cpp" />
@@ -471,6 +472,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\NF\Scene\NFCGameScene.cpp" />
     <ClCompile Include="..\Classes\NF\Scene\NFCSceneManager.cpp" />
     <ClCompile Include="..\Classes\NF\Scene\NFCScenePlugin.cpp" />
+    <ClCompile Include="..\Classes\NF\UI\NFCUIChatPanel.cpp" />
     <ClCompile Include="..\Classes\NF\UI\NFCUIDialog.cpp" />
     <ClCompile Include="..\Classes\NF\UI\NFCUILogin.cpp" />
     <ClCompile Include="..\Classes\NF\UI\NFCUIManager.cpp" />
@@ -582,6 +584,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.h" />
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\NF\Logic\NFCChatLogic.h" />
     <ClInclude Include="..\Classes\NF\Logic\NFCLogicBase.h" />
     <ClInclude Include="..\Classes\NF\Logic\NFCLogicPlugin.h" />
     <ClInclude Include="..\Classes\NF\Logic\NFCLoginLogic.h" />
@@ -594,6 +597,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\NF\Scene\NFCGameScene.h" />
     <ClInclude Include="..\Classes\NF\Scene\NFCSceneManager.h" />
     <ClInclude Include="..\Classes\NF\Scene\NFCScenePlugin.h" />
+    <ClInclude Include="..\Classes\NF\UI\NFCUIChatPanel.h" />
     <ClInclude Include="..\Classes\NF\UI\NFCUIDialog.h" />
     <ClInclude Include="..\Classes\NF\UI\NFCUILogin.h" />
     <ClInclude Include="..\Classes\NF\UI\NFCUIManager.h" />

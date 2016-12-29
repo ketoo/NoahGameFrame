@@ -4,6 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Project Name="UILogin.csd" Type="Layer" />
+        <Project Name="UIChatPanel.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

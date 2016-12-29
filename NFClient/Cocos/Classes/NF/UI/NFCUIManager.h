@@ -38,6 +38,10 @@ public:
 	virtual bool HasBackDialog();
 	virtual void CloseDialog();
 
+	virtual void ShowPanel(NFCUIDialog *pPanel);
+	virtual void ClosePanel(NFCUIDialog *pDialog);
+	virtual void CloseAllPanel();
+
 public:
 	void onBackKeyClicked();
 	void onMenuKeyClicked();
@@ -54,6 +58,7 @@ private:
 
 private:
     Vector<NFCUIDialog*> m_pDialogQueue;
+	Vector<NFCUIDialog*> m_pPanelQueue;
 	NFCUIDialog *m_pCurrentDialog;
 };
 
@@ -96,6 +101,45 @@ private:
 	static IUniqueDialog** _getDialog() {
 		static T* _instance;
 		return (IUniqueDialog**)(&_instance);
+	}
+};
+
+template<typename T>
+class IUniquePanel : public NFCUIDialog
+{
+public:
+	// 显示窗口(窗口没创建时创建窗口并显示，已经创建则只显示)
+	static void showPanel(const void *customData = nullptr)
+	{
+		IUniquePanel **p = _getPanel();
+		if (!*p) {
+			*p = new T;
+			(*p)->initLayout();
+			(*p)->autorelease();
+		}
+
+		(*p)->initData((void*)customData);
+		g_pNFCUIManager->ShowPanel(*p);
+	}
+	static void closePanel(const void *customData = nullptr)
+	{
+		IUniquePanel **p = _getPanel();
+		if (*p) {
+			g_pNFCUIManager->ClosePanel(*p);
+		}
+	}
+	IUniquePanel() { // 不允许外部手动new
+		*_getPanel() = this;
+	}
+	virtual ~IUniquePanel() { // 不允许外部手动delete
+		if (*_getPanel() == this)
+			*_getPanel() = nullptr;
+	}
+
+private:
+	static IUniquePanel** _getPanel() {
+		static T* _instance;
+		return (IUniquePanel**)(&_instance);
 	}
 };
 
