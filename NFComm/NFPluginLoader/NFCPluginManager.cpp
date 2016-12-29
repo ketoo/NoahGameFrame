@@ -13,7 +13,6 @@
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include <io.h>
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32.lib" )
@@ -410,9 +409,11 @@ bool NFCPluginManager::GetFileContent(const std::string &strFileName, std::strin
 		return false;
 	}
 
-	auto nSize = filelength(fileno(fp));
-	strContent.resize(nSize);
-	fread((void*)strContent.data(), nSize, 1, fp);
+	fseek(fp, 0, SEEK_END);
+	const long filelength = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+	strContent.resize(filelength);
+	fread((void*)strContent.data(), filelength, 1, fp);
 	fclose(fp);
 
 	return true;
