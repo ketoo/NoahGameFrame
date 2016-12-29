@@ -8,8 +8,10 @@
 #include "stdafx.h"
 #include "Logic/NFCNetLogic.h"
 #include "Logic/NFCPlayerLogic.h"
+#include "Logic/NFCChatLogic.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFCGameScene.h"
+#include "UI/NFCUIChatPanel.h"
 
 NFCGameScene::NFCGameScene()
 {
@@ -28,17 +30,48 @@ bool NFCGameScene::initLayout()
     g_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameScene::OnObjectClassEvent);
 
 	g_pPlayerLogic->AddEventCallBack(E_PlayerEvent_PlayerMove, this, &NFCGameScene::OnPlayerMoveEvent);
+	g_pChatLogic->AddEventCallBack(E_ChatEvent_ChatWorld, this, &NFCGameScene::OnPlayerChatEvent);
 
 	scheduleUpdate();
 
 	setTouchEnabled(true);
 	setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
 
+	NFCUIChatPanel::showPanel();
+
 	return true;
 }
 
 void NFCGameScene::initData(void *pData)
 {
+}
+
+void NFCGameScene::update(float dt)
+{
+	if (m_Players.Count() == 0)
+		return;
+
+	Vec2 size = Director::getInstance()->getWinSize();
+	const NFGUID &self = g_pPlayerLogic->GetRoleGuid();
+	Sprite *pPlayer = m_Players.GetElement(self);
+	if (pPlayer)
+	{
+		Vec2 pos = pPlayer->getPosition();
+		this->setPosition((size*0.5 - pos));
+	}
+}
+
+bool NFCGameScene::onTouchBegan(Touch *touch, Event *unused_event)
+{
+	Vec2 toPos = this->convertTouchToNodeSpace(touch);
+	g_pPlayerLogic->RequireMove(NFVector3(toPos.x, toPos.y, 0));
+	return true;
+}
+
+void NFCGameScene::onTouchMoved(Touch *touch, Event *unused_event)
+{
+	Vec2 toPos = this->convertTouchToNodeSpace(touch);
+	g_pPlayerLogic->RequireMove(NFVector3(toPos.x, toPos.y, 0));
 }
 
 int NFCGameScene::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
@@ -52,6 +85,7 @@ int NFCGameScene::OnObjectClassEvent(const NFGUID& self, const std::string& strC
 			m_Players.AddElement(self, pPlayer);
 			addChild(pPlayer);
 			g_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Name(), this, &NFCGameScene::OnObjectPropertyEvent);
+			update(0.0f);
         }
         else if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
@@ -85,30 +119,17 @@ int NFCGameScene::OnPlayerMoveEvent(const int nEventID, const NFIDataList& varDa
 	return 0;
 }
 
-void NFCGameScene::update(float dt)
+int NFCGameScene::OnPlayerChatEvent(const int nEventID, const NFIDataList& varDataList)
 {
-	if (m_Players.Count() == 0)
-		return ;
-
-	Vec2 size = Director::getInstance()->getWinSize();
-	const NFGUID &self = g_pPlayerLogic->GetRoleGuid();
+	const NFGUID &self = varDataList.Object(0);
 	Sprite *pPlayer = m_Players.GetElement(self);
-	if (pPlayer)
-	{
-		Vec2 pos = pPlayer->getPosition();
-		this->setPosition((size*0.5 - pos));
-	}
-}
 
-bool NFCGameScene::onTouchBegan(Touch *touch, Event *unused_event)
-{
-	Vec2 toPos = this->convertTouchToNodeSpace(touch);
-	g_pPlayerLogic->RequireMove(NFVector3(toPos.x, toPos.y, 0));
-	return true;
-}
+	auto pChat = ui::Text::create(varDataList.String(3), "", 16);
+	pChat->setAnchorPoint(Vec2(0.5, 0));
+	pChat->setPosition(Vec2(pPlayer->getAnchorPointInPoints().x, pPlayer->getContentSize().height+ pChat->getContentSize().height));
+	pPlayer->addChild(pChat);
+	pChat->runAction(Sequence::create(FadeIn::create(0.5), DelayTime::create(5.0f), FadeIn::create(0.5), RemoveSelf::create(), NULL));
+	pChat->runAction(MoveBy::create(0.5, Vec2(0, pChat->getContentSize().height)));
 
-void NFCGameScene::onTouchMoved(Touch *touch, Event *unused_event)
-{
-	Vec2 toPos = this->convertTouchToNodeSpace(touch);
-	g_pPlayerLogic->RequireMove(NFVector3(toPos.x, toPos.y, 0));
+	return 0;
 }
