@@ -51,6 +51,7 @@ public:
 
 protected:
 	bool LoadSceneResource(const std::string& strSceneIDName);
+	bool CreateSceneBaseGroup(const std::string& strSceneIDName);
 
 protected:
 
