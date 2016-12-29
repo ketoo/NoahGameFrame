@@ -52,7 +52,11 @@ void NFCNetLogic::ConnectServer(const std::string strIp, int nPort)
 	if (serverData)
 	{
 		serverData->eState = ConnectDataState::RECONNECT;
-		serverData->strIP = strIp;
+		// server config error, fix it
+		if (strIp != "127.0.0.1")
+		{
+			serverData->strIP = strIp;
+		}
 		serverData->nPort = nPort; 
 		serverData->mnLastActionTime = GetPluginManager()->GetNowTime()-9;
 	}

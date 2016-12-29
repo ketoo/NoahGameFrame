@@ -151,6 +151,33 @@ void NFCUIManager::CloseDialog()
     m_pDialogQueue.clear();
 }
 
+
+void NFCUIManager::ShowPanel(NFCUIDialog *pPanel)
+{
+	int nIndex = m_pPanelQueue.getIndex(pPanel);
+	if (nIndex == CC_INVALID_INDEX)
+	{
+		m_pPanelQueue.pushBack(pPanel);
+		m_pPanelNode->addChild(pPanel);
+	}
+}
+
+void NFCUIManager::ClosePanel(NFCUIDialog *pPanel)
+{
+	int nIndex = m_pPanelQueue.getIndex(pPanel);
+	if (nIndex != CC_INVALID_INDEX)
+	{
+		m_pPanelQueue.erase(nIndex);
+		m_pPanelNode->removeChild(pPanel);
+	}
+}
+
+void NFCUIManager::CloseAllPanel()
+{
+	m_pPanelQueue.clear();
+	m_pPanelNode->removeAllChildren();
+}
+
 void NFCUIManager::onBackKeyClicked()
 {
 	CCLOG("%s", __FUNCTION__);
