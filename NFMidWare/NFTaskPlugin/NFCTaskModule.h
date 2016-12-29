@@ -22,7 +22,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCTaskModule
-    : public NFIModule
+    : public NFITaskModule
 {
 public:
     NFCTaskModule( NFIPluginManager* p )
