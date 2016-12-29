@@ -53,9 +53,6 @@ private:
 	void OnObjectMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnObjectJump(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	// ÊÂ¼þ
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-
 private:
 	void AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std::string &strRecordName, const NFMsg::RecordAddRowStruct &data);
 
