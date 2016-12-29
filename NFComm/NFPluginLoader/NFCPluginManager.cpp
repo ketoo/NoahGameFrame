@@ -46,6 +46,8 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
 
+   mGetFileContentFunctor = nullptr;
+
    mstrConfigPath = "";
    mstrConfigName = "Plugin.xml";
 }
@@ -92,11 +94,13 @@ inline bool NFCPluginManager::Init()
 
 bool NFCPluginManager::LoadPluginConfig()
 {
-    rapidxml::file<> fdoc(mstrConfigName.c_str());
-    rapidxml::xml_document<>  doc;
-    doc.parse<0>(fdoc.data());
+	std::string strContent;
+	GetFileContent(mstrConfigName, strContent);
 
-    rapidxml::xml_node<>* pRoot = doc.first_node();
+	rapidxml::xml_document<> xDoc;
+	xDoc.parse<0>((char*)strContent.c_str());
+
+    rapidxml::xml_node<>* pRoot = xDoc.first_node();
     rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(mstrAppName.c_str());
     if (!pAppNameNode)
     {
@@ -172,18 +176,19 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
     std::string strPluginName = plugin->GetPluginName();
     if (!FindPlugin(strPluginName))
     {
-        bool bFind = false;
-        PluginNameMap::iterator it = mPluginNameMap.begin();
-        for (it; it != mPluginNameMap.end(); ++it)
-        {
-            if (strPluginName == it->first)
-            {
-                bFind = true;
-                break;
-            }
-        }
+		// dynamic add plugin no dlls
+        //bool bFind = false;
+        //PluginNameMap::iterator it = mPluginNameMap.begin();
+        //for (it; it != mPluginNameMap.end(); ++it)
+        //{
+        //    if (strPluginName == it->first)
+        //    {
+        //        bFind = true;
+        //        break;
+        //    }
+        //}
 
-        if (bFind)
+        //if (bFind)
         {
             mPluginInstanceMap.insert(PluginInstanceMap::value_type(strPluginName, plugin));
             plugin->Install();
@@ -384,6 +389,34 @@ const std::string & NFCPluginManager::GetLogConfigName() const
 void NFCPluginManager::SetLogConfigName(const std::string & strName)
 {
 	mstrLogConfigName = strName;
+}
+
+void NFCPluginManager::SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun)
+{
+	mGetFileContentFunctor = fun;
+}
+
+bool NFCPluginManager::GetFileContent(const std::string &strFileName, std::string &strContent)
+{
+	if (mGetFileContentFunctor)
+	{
+		return mGetFileContentFunctor(strFileName, strContent);
+	}
+
+	FILE *fp = fopen(strFileName.c_str(), "rb");
+	if (!fp)
+	{
+		return false;
+	}
+
+	fseek(fp, 0, SEEK_END);
+	const long filelength = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+	strContent.resize(filelength);
+	fread((void*)strContent.data(), filelength, 1, fp);
+	fclose(fp);
+
+	return true;
 }
 
 void NFCPluginManager::AddModule(const std::string& strModuleName, NFIModule* pModule)
