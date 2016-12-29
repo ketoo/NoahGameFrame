@@ -396,6 +396,12 @@
     <ClCompile Include="..\Classes\NF\Scene\NFCScenePlugin.cpp">
       <Filter>src\NF\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCChatLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUIChatPanel.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -751,6 +757,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\NF\Scene\NFCScenePlugin.h">
       <Filter>src\NF\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCChatLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUIChatPanel.h">
+      <Filter>src\NF\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

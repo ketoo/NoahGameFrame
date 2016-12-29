@@ -46,8 +46,6 @@ bool NFCPlayerLogic::AfterInit()
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_MOVE, this, &NFCPlayerLogic::OnObjectMove);
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_MOVE_IMMUNE, this, &NFCPlayerLogic::OnObjectJump);
 
-	g_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerLogic::OnObjectClassEvent);
-
 	return true;
 }
 
@@ -90,6 +88,7 @@ void NFCPlayerLogic::RequireEnterGameServer(int nRoleIndex)
 	xMsg.set_name(m_RoleList[nRoleIndex].noob_name());
 	*xMsg.mutable_id() = m_RoleList[nRoleIndex].id();
 	m_nRoleIndex = nRoleIndex;
+	m_RoleGuid = NFINetModule::PBToNF(m_RoleList[nRoleIndex].id());
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, xMsg);
 }
 
@@ -199,21 +198,4 @@ void NFCPlayerLogic::OnObjectJump(const int nSockIndex, const int nMsgID, const 
 	var.AddVector3(NFVector3(pos.x(), pos.y(), pos.z()));
 
 	DoEvent(E_PlayerEvent_PlayerJump, var);
-}
-
-int NFCPlayerLogic::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
-{
-	// 第一个创建的是主角
-	if (!m_RoleGuid.IsNull())
-		return 0;
-
-	if (strClassName == NFrame::Player::ThisName())
-	{
-		if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
-		{
-			m_RoleGuid = self;
-		}
-	}
-
-	return 0;
 }
