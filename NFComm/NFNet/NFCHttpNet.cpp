@@ -30,7 +30,9 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef LIBEVENT_SRC
 #pragma comment( lib, "libevent.lib")
+#endif
 
 
 bool NFCHttpNet::Execute()
