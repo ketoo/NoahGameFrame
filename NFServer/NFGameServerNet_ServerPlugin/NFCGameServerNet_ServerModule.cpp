@@ -237,7 +237,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		return;
 	}
 
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 0, 0, NFCDataList());
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
