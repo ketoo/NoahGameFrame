@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NF">
+      <UniqueIdentifier>{9df66dca-8e1e-411c-9ad9-23846ba96858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon">
+      <UniqueIdentifier>{3ea4be4a-3611-485b-86e6-60c9dfaa0abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFCore">
+      <UniqueIdentifier>{3ffef286-e0b3-42d6-a614-b5e7ae75263e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFCore\Header Files">
+      <UniqueIdentifier>{ced15078-56c4-4baa-b13c-455eb108abe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFCore\Math">
+      <UniqueIdentifier>{37663073-006e-44a1-924f-82ef027317d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFCore\Source Files">
+      <UniqueIdentifier>{360173e2-03f5-48ae-975c-3f0974d4379a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFCore\Unit">
+      <UniqueIdentifier>{1b5e2d6f-1a75-43f9-848c-f1d466780e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFConfig">
+      <UniqueIdentifier>{2e37a547-47d2-442f-a2c7-831ebee7d6db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFKernel">
+      <UniqueIdentifier>{22bb1f57-bcb9-4f78-9e46-47398393982f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFMessageDefine">
+      <UniqueIdentifier>{15ff8fd7-214d-450a-ac5c-3a4f934edd19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFNet">
+      <UniqueIdentifier>{4bf2ea6b-d4d3-442f-b0ef-7d2e91cf1eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFNet\libevent">
+      <UniqueIdentifier>{62b00c7d-e6e0-4c48-b9c0-402e13dda606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFNet\libevent\core">
+      <UniqueIdentifier>{83f2bd51-4d53-4539-991c-d62d763f2e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFNet\libevent\extras">
+      <UniqueIdentifier>{ad1ef5e0-46b8-453d-8805-d226cfe93bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFLog">
+      <UniqueIdentifier>{8187040a-2683-4768-860d-5f6d9fc7df6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFLog\NFLogModule">
+      <UniqueIdentifier>{514c29a9-d08b-4a2b-9bca-50eb550c7c11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NFCommon\NFPluginLoader">
+      <UniqueIdentifier>{8538ac89-5e5d-4e34-971f-20e70b1804e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\libprotobuf">
+      <UniqueIdentifier>{9a0c517c-8718-40a3-be83-758b4e158c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NF\Logic">
+      <UniqueIdentifier>{2561147f-f1c4-4d07-a6fc-b6c887b8c996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NF\UI">
+      <UniqueIdentifier>{52f535ab-e4a8-4bbf-86cc-1056273ffb96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\NF\Scene">
+      <UniqueIdentifier>{f9e82e52-064f-4df2-a707-520d1ebfe493}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\NFCRoot.cpp">
+      <Filter>src\NF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\NFCClientPlugin.cpp">
+      <Filter>src\NF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCComponentManager.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCObject.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCProperty.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCPropertyManager.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCRecordManager.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCRecord.cpp">
+      <Filter>src\NFCommon\NFCore\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCDataList.cpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFCMemManager.cpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFCore\NFMemoryCounter.cpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.cpp">
+      <Filter>src\NFCommon\NFConfig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.cpp">
+      <Filter>src\NFCommon\NFConfig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCEventModule.cpp">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCKernelModule.cpp">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCSceneAOIModule.cpp">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCScheduleModule.cpp">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFDefine.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.cpp">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.cc">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNet\NFCHttpNet.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNet\NFCNet.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.cpp">
+      <Filter>src\NFCommon\NFLog\NFLogModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\win32select.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\buffer.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\buffer_iocp.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent_async.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent_filter.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent_pair.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent_ratelim.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\bufferevent_sock.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\event.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\event_iocp.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evmap.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evthread.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evutil.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evutil_rand.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\listener.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\log.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\signal.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\strlcpy.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\http.c">
+      <Filter>src\NFCommon\NFNet\libevent\extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evdns.c">
+      <Filter>src\NFCommon\NFNet\libevent\extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\event_tagging.c">
+      <Filter>src\NFCommon\NFNet\libevent\extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evrpc.c">
+      <Filter>src\NFCommon\NFNet\libevent\extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops_internals_x86_msvc.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\common.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.pb.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor_database.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\dynamic_message.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set_heavy.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_reflection.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_util.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\gzip_stream.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\importer.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message_lite.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\once.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\parser.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\printer.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\reflection_ops.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\repeated_field.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\service.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stringprintf.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\structurally_valid.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\strutil.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\substitute.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\text_format.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\tokenizer.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\unknown_field_set.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl_lite.cc">
+      <Filter>src\libprotobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.cpp">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.cpp">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCLogicBase.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCLogicPlugin.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCLoginLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCNetLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCPlayerLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCPropertyLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Logic\NFCRecordLogic.cpp">
+      <Filter>src\NF\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUIDialog.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUISelectServer.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUISelectRole.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUIManager.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUIPlugin.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\UI\NFCUILogin.cpp">
+      <Filter>src\NF\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Scene\NFCGameScene.cpp">
+      <Filter>src\NF\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Scene\NFCSceneManager.cpp">
+      <Filter>src\NF\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NF\Scene\NFCScenePlugin.cpp">
+      <Filter>src\NF\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\NFCRoot.h">
+      <Filter>src\NF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\stdafx.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\NFCClientPlugin.h">
+      <Filter>src\NF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCComponentManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCObject.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCProperty.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCPropertyManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCRecordManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIComponent.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIComponentManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCRecord.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIObject.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIProperty.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIPropertyManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIRecord.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIRecordManager.h">
+      <Filter>src\NFCommon\NFCore\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFBox.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFLine.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFPlane.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFRay.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFSpaceNode.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFSphere.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFVector2.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFVector3.hpp">
+      <Filter>src\NFCommon\NFCore\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCConsistentHash.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCDataList.h">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.h">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFDateTime.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFException.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFIDataList.h">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFMapEx.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.h">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFList.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.h">
+      <Filter>src\NFCommon\NFConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.h">
+      <Filter>src\NFCommon\NFConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFKernelPlugin\NFCScheduleModule.h">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFKernelPlugin\NFCEventModule.h">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFKernelPlugin\NFCKernelModule.h">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFKernelPlugin\NFCSceneAOIModule.h">
+      <Filter>src\NFCommon\NFKernel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFDefine.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFLimit.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFProtocolDefine.hpp">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.h">
+      <Filter>src\NFCommon\NFMessageDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNet\NFINet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNet\NFCHttpNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNet\NFCNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNet\NFIHttpNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.h">
+      <Filter>src\NFCommon\NFLog\NFLogModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\libevent\event.h">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\atomicops_internals_x86_msvc.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\coded_stream_inl.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\common.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\vsprojects\config.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor.pb.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\descriptor_database.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\dynamic_message.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\extension_set.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_reflection.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\generated_message_util.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\gzip_stream.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\hash.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\importer.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\map-util.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\message_lite.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\once.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\compiler\parser.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\platform_macros.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\printer.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\reflection_ops.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\repeated_field.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\service.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stl_util.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\stringprintf.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\strutil.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\substitute.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\template_util.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\text_format.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\tokenizer.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\stubs\type_traits.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\unknown_field_set.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\wire_format_lite_inl.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Dependencies\protobuf\src\google\protobuf\io\zero_copy_stream_impl_lite.h">
+      <Filter>src\libprotobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.h">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.h">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCLogicBase.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCLogicPlugin.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCLoginLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCNetLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCPlayerLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCPropertyLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Logic\NFCRecordLogic.h">
+      <Filter>src\NF\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUIDialog.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUISelectServer.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUISelectRole.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUIManager.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUIPlugin.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\UI\NFCUILogin.h">
+      <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Scene\NFCGameScene.h">
+      <Filter>src\NF\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Scene\NFCSceneManager.h">
+      <Filter>src\NF\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NF\Scene\NFCScenePlugin.h">
+      <Filter>src\NF\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

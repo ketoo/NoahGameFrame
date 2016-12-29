@@ -19,10 +19,8 @@
 class NFCCommonRedisModule : public NFICommonRedisModule
 {
 public:
-
     NFCCommonRedisModule(NFIPluginManager* p);
 
-public:
     virtual bool AfterInit();
 
 public:
