@@ -5,6 +5,6 @@
 		<Server ID="1" IP = "127.0.0.1" Port="14001"/>
 	</Servers>
 	<Evironment>
-		<DataPath ID="../../"/>
+		<DataPath ID="../../_Out/"/>
 	</Evironment>
 </XML>
