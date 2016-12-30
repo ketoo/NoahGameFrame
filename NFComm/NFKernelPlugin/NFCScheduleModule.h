@@ -25,6 +25,7 @@ public:
 		mnStartTime = 0;
 		mnRemainCount = 0;
 		mnAllCount = 0;
+		mbForever = false;
 	};
 
 	virtual ~NFCScheduleElement()
@@ -39,6 +40,7 @@ public:
 	NFINT64 mnStartTime;
 	int mnRemainCount;
 	int mnAllCount;
+	bool mbForever;
 
 	NFGUID self;
 
