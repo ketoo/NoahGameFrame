@@ -57,20 +57,24 @@ bool NFCScheduleModule::Execute()
 		while (pSchedule)
 		{
 			NFINT64 nNow = NFGetTime();
-			if (nNow > pSchedule->mnNextTriggerTime && pSchedule->mnRemainCount > 0)
+			if (nNow > pSchedule->mnNextTriggerTime)
 			{
-				pSchedule->mnRemainCount--;
-				pSchedule->DoHeartBeatEvent();
+				if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)
+				{
+					pSchedule->mnRemainCount--;
+					pSchedule->DoHeartBeatEvent();
 
-				if (pSchedule->mnRemainCount <= 0)
-				{
-					mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(pSchedule->self, pSchedule->mstrScheduleName));
+					if (pSchedule->mnRemainCount <= 0 && pSchedule->mbForever == false)
+					{
+						mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(pSchedule->self, pSchedule->mstrScheduleName));
+					}
+					else
+					{
+						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount);
+						pSchedule->mnNextTriggerTime = pSchedule->mnStartTime + nNextCostTime;
+					}
 				}
-				else
-				{
-					NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount);
-					pSchedule->mnNextTriggerTime = pSchedule->mnStartTime + nNextCostTime;
-				}
+				
 			}
 
 			pSchedule = xObjectSchedule->Next();
@@ -124,20 +128,25 @@ bool NFCScheduleModule::Execute()
 	while (xModuleSchedule)
 	{
 		NFINT64 nNow = NFGetTime();
-		if (nNow > xModuleSchedule->mnNextTriggerTime && xModuleSchedule->mnRemainCount > 0)
+		if (nNow > xModuleSchedule->mnNextTriggerTime)
 		{
-			xModuleSchedule->mnRemainCount--;
-			xModuleSchedule->DoHeartBeatEvent();
+			if (xModuleSchedule->mnRemainCount > 0 || xModuleSchedule->mbForever == true)
+			{
+				xModuleSchedule->mnRemainCount--;
+				xModuleSchedule->DoHeartBeatEvent();
 
-			if (xModuleSchedule->mnRemainCount <= 0)
-			{
-				mModuleRemoveList.push_back(xModuleSchedule->mstrScheduleName);
+				if (xModuleSchedule->mnRemainCount <= 0 && xModuleSchedule->mbForever == false)
+				{
+					mModuleRemoveList.push_back(xModuleSchedule->mstrScheduleName);
+				}
+				else
+				{
+					NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000) * (xModuleSchedule->mnAllCount - xModuleSchedule->mnRemainCount);
+					xModuleSchedule->mnNextTriggerTime = xModuleSchedule->mnStartTime + nNextCostTime;
+				}
 			}
-			else
-			{
-				NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000) * (xModuleSchedule->mnAllCount - xModuleSchedule->mnRemainCount);
-				xModuleSchedule->mnNextTriggerTime = xModuleSchedule->mnStartTime + nNextCostTime;
-			}
+
+			
 		}
 
 		xModuleSchedule = mModuleScheduleMap.Next();
@@ -182,6 +191,11 @@ bool NFCScheduleModule::AddSchedule(const std::string & strScheduleName, const M
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = NFGUID();
+	if (nCount < 0)
+	{
+		xSchedule.mbForever = true;
+	}
+
 	xSchedule.mxModuleFunctor.Add(cb);
 
 	mModuleAddList.push_back(xSchedule);
@@ -211,6 +225,11 @@ bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strSch
 	xSchedule.mnRemainCount = nCount;
 	xSchedule.mnAllCount = nCount;
 	xSchedule.self = self;
+	if (nCount < 0)
+	{
+		xSchedule.mbForever = true;
+	}
+
 	xSchedule.mxObjectFunctor.Add(cb);
 
 	mObjectAddList.push_back(xSchedule);
