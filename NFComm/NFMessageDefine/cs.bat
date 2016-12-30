@@ -7,7 +7,7 @@ protogen -i:NFSLGDefine.proto -o:NFSLGDefine.cs
 protogen -i:NFFleetingDefine.proto -o:NFFleetingDefine.cs
 protogen -i:NFMsgURl.proto -o:NFMsgURl.cs
 
-copy *.cs ..\..\NFClient\NFMessageDefine\ -Y
-copy *.proto ..\..\NFClient\NFMessageDefin\e -Y
+xcopy *.cs ..\..\NFClient\NFMessageDefine\ /s /e /Y
+xcopy *.proto ..\..\NFClient\NFMessageDefine\ /s /e /Y
 
 pause
