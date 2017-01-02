@@ -166,6 +166,43 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
     return pRecordManager;
 }
 
+bool NFCCommonRedisModule::GetCachePropertyListPB(const NFGUID& self, const std::string& strClassName, NFMsg::ObjectPropertyList& propertyList)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::string strValue;
+	const std::string& strKey = GetPropertyCacheKey(strClassName);
+	if (!pDriver->HGet(strKey, self.ToString(), strValue))
+	{
+		return false;
+	}
+
+	return propertyList.ParseFromString(strValue);
+
+}
+
+bool NFCCommonRedisModule::GetCacheRecordListPB(const NFGUID& self, const std::string& strClassName, NFMsg::ObjectRecordList& recordList)
+{
+	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
+	if (!pDriver)
+	{
+		return false;
+	}
+
+	std::string strValue;
+	const std::string strKey = GetRecordCacheKey(strClassName);
+	if (!pDriver->HGet(strKey, self.ToString(), strValue))
+	{
+		return false;
+	}
+
+	return recordList.ParseFromString(strValue);
+}
+
 bool NFCCommonRedisModule::SetCachePropertyInfo(const NFGUID& self, const std::string& strClassName, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
 {
     if (self.IsNull())
@@ -293,7 +330,7 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
     {
         const NFMsg::PropertyInt& xPropertyData = xMsg.property_int_list(i);
         const std::string& strPropertyName = xPropertyData.property_name();
-        const int xPropertyValue = xPropertyData.data();
+        const NFINT64 xPropertyValue = xPropertyData.data();
 
         NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strPropertyName);
         if (!pProperty)
@@ -501,13 +538,6 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
     for (NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First(); pRecord != NULL; pRecord = pRecordManager->Next())
     {
         const std::string& strRecordName = pRecord->GetName();
-
-        NFMsg::ObjectRecordBase* pRecordData = xMsg.add_record_list();
-        if (!pRecordData)
-        {
-            continue;
-        }
-
         if (bCheckCache)
         {
             if (!pRecord->GetCache())
@@ -515,6 +545,12 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
                 continue;
             }
         }
+
+		NFMsg::ObjectRecordBase* pRecordData = xMsg.add_record_list();
+		if (!pRecordData)
+		{
+			continue;
+		}
 
         pRecordData->set_record_name(strRecordName);
         for (int iRow = 0; iRow < pRecord->GetRows(); iRow++)
