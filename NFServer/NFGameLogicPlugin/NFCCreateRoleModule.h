@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -33,21 +34,6 @@ public:
     virtual bool AfterInit();
 
 protected:
-	void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	/*
-    int OnLoadRoleBeginEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnLoadRoleFinalEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnCreateRoleEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnDeleteRoleEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-
-    int OnAcountDisConnectEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-	*/
 
 private:
 
@@ -55,6 +41,7 @@ private:
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
 };
 
 #endif
