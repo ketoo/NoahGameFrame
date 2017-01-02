@@ -21,6 +21,9 @@ public:
     virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName) = 0;
     virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName) = 0;
 
+	virtual bool GetCachePropertyListPB(const NFGUID& self, const std::string& strClassName, NFMsg::ObjectPropertyList& propertyList) = 0;
+	virtual bool GetCacheRecordListPB(const NFGUID& self, const std::string& strClassName, NFMsg::ObjectRecordList& recordList) = 0;
+
     virtual bool SetCachePropertyInfo(const NFGUID& self, const std::string& strClassName, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
     virtual bool SetCacheRecordInfo(const NFGUID& self, const std::string& strClassName, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
 
