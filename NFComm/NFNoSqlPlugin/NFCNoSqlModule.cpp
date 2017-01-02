@@ -50,25 +50,27 @@ bool NFCNoSqlModule::AfterInit()
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::ServerID());
 			const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
 			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
+			const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
 
-			if (this->AddConnectSql(strId, strIP, nPort))
-			{
-				std::ostringstream strLog;
-				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
-				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-			}
-			else
+			if (this->AddConnectSql(strId, strIP, nPort, strAuth))
 			{
 				std::ostringstream strLog;
 				strLog << "Connected NoSqlServer[" << strIP << "], Port = " << nPort;
 				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+
+			}
+			else
+			{
+				std::ostringstream strLog;
+				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
+				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 			}
 		}
 	}
 	return true;
 }
 
-bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime)
+bool NFCNoSqlModule::Execute()
 {
 	if (mLastCheckTime + 10 > pPluginManager->GetNowTime())
 	{
@@ -79,12 +81,12 @@ bool NFCNoSqlModule::Execute(const float fLasFrametime, const float fStartedTime
 	NF_SHARE_PTR<NFINoSqlDriver> xNosqlDriver = this->mxNoSqlDriver.First();
 	while (xNosqlDriver)
 	{
-		if (xNosqlDriver->Enable())
+		if (!xNosqlDriver->Enable())
 		{
 			xNosqlDriver->ReConnect();
 		}
 
-		xNosqlDriver = this->mxNoSqlDriver.First();
+		xNosqlDriver = this->mxNoSqlDriver.Next();
 	}
 
 	return true;
@@ -126,7 +128,7 @@ NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const std::string& 
 /*
 NF_SHARE_PTR<NFINoSqlDriver> NFCNoSqlModule::GetDriverBySuit(const int nHash)
 {
-	return mxNoSqlDriver.GetElementBySuit(nHash);
+return mxNoSqlDriver.GetElementBySuit(nHash);
 }
 */
 bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& strIP)
@@ -159,10 +161,18 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 	{
 		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver(new NFCNoSqlDriver());
 		pNoSqlDriver->Connect(strIP, nPort, strPass);
-		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
+		if (pNoSqlDriver->Enable())
+		{
+			mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	return false;
+	return true;
 }
 
 NFList<std::string> NFCNoSqlModule::GetDriverIdList()

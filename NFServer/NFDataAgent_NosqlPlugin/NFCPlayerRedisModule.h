@@ -39,12 +39,28 @@ public:
 	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
 	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
 
+	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self);
+	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self);
+
+	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
+	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
+
+	virtual	bool GetAccountRoleID(const std::string& strAccount, NFGUID& xPlayerID);
+	virtual bool SavePlayerDataToCatch(const NFGUID& self);
+
+	virtual const NFGUID CreateRole(const std::string& strAccount, const std::string& strName);
+	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
 
+	virtual bool RegisterAutoSave(const std::string& strClassName);
+	const bool AttachData(const NFGUID& self);
+
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
+	void OnOnline(const NFGUID& self);
+	void OnOffline(const NFGUID& self);
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
