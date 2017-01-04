@@ -11,11 +11,6 @@
 
 bool NFCSceneAOIModule::Init()
 {
-    return true;
-}
-
-bool NFCSceneAOIModule::AfterInit()
-{
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -42,6 +37,13 @@ bool NFCSceneAOIModule::AfterInit()
 			bRet = strIdList.Next(strId);
 		}
 	}
+
+    return true;
+}
+
+bool NFCSceneAOIModule::AfterInit()
+{
+	
     return true;
 }
 
