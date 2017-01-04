@@ -19,6 +19,7 @@ public:
     NFCLogModule(NFIPluginManager* p);
     virtual ~NFCLogModule() {}
 
+	virtual bool Awake();
     virtual bool Init();
     virtual bool Shut();
 
