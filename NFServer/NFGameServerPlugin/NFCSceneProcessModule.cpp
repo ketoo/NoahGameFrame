@@ -52,8 +52,8 @@ bool NFCSceneProcessModule::AfterInit()
         bool bRet = strIdList.First(strId);
         while (bRet)
         {
-            LoadSceneResource(strId);
 			CreateSceneBaseGroup(strId);
+            LoadSceneResource(strId);
 
             bRet = strIdList.Next(strId);
         }
@@ -170,6 +170,7 @@ bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDN
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
 	if (GetCloneSceneType(nSceneID) != SCENE_TYPE_CLONE_SCENE)
 	{
+		//m_pKernelModule->CreateScene(nSceneID);
 		m_pKernelModule->RequestGroupScene(nSceneID);
 		return true;
 	}

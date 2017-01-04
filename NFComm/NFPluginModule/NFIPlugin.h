@@ -58,6 +58,22 @@ public:
 
     virtual void Install() = 0;
 
+	virtual bool Awake()
+	{
+		NFIModule* pModule = First();
+		while (pModule)
+		{
+			bool bRet = pModule->Awake();
+			if (!bRet)
+			{
+				assert(0);
+			}
+
+			pModule = Next();
+		}
+		return true;
+	}
+
     virtual bool Init()
     {
         NFIModule* pModule = First();
