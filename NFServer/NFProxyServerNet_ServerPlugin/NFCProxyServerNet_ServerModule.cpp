@@ -305,7 +305,7 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
         return false;
     }
 
-    //broadcast many palyer
+    //broadcast many palyers
     for (int i = 0; i < xMsg.player_client_list_size(); ++i)
     {
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(NFINetModule::PBToNF(xMsg.player_client_list(i)));
@@ -327,8 +327,6 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
     //send message to one player
     if (xMsg.player_client_list_size() <= 0)
     {
-        //playerid==ClientID;
-
         NF_SHARE_PTR<int> pFD = mxClientIdent.GetElement(NFINetModule::PBToNF(xMsg.player_id()));
         if (pFD)
         {
@@ -343,6 +341,11 @@ int NFCProxyServerNet_ServerModule::Transpond(const int nSockIndex, const int nM
 
 			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
+		else
+		{
+			//send this msessage to all clientss
+			m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
+		}
     }
 
     return true;

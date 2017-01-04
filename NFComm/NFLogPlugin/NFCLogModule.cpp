@@ -45,12 +45,12 @@ NFCLogModule::NFCLogModule(NFIPluginManager* p)
     pPluginManager = p;
 }
 
-bool NFCLogModule::Init()
+bool NFCLogModule::Awake()
 {
-    mnLogCountTotal = 0;
+	mnLogCountTotal = 0;
 
-    el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
-    el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+	el::Loggers::addFlag(el::LoggingFlag::StrictLogFileSizeCheck);
+	el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
 
 	std::string strLogConfigName = pPluginManager->GetLogConfigName();
 	if (strLogConfigName.empty())
@@ -61,19 +61,23 @@ bool NFCLogModule::Init()
 	string strAppLogName = "";
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	strAppLogName = "logconfig/" + strLogConfigName + "_win.conf";
-    el::Configurations conf(strAppLogName);
+	el::Configurations conf(strAppLogName);
 #else
 	strAppLogName = "logconfig/" + strLogConfigName + ".conf";
-    el::Configurations conf(strAppLogName);
+	el::Configurations conf(strAppLogName);
 #endif
 
 	std::cout << "LogConfig: " << strAppLogName << std::endl;
 
-    el::Loggers::reconfigureAllLoggers(conf);
-    el::Helpers::installPreRollOutCallback(rolloutHandler);
+	el::Loggers::reconfigureAllLoggers(conf);
+	el::Helpers::installPreRollOutCallback(rolloutHandler);
 
-	////////////////////////////////////////////////////
+	return true;
+}
 
+bool NFCLogModule::Init()
+{
+   
     return true;
 }
 
