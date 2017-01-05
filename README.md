@@ -25,7 +25,7 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 [FAQ](http://blog.noahframe.com/?p=229)
 
 ### Unity3D client
-[U3D Client](https://github.com/ketoo/NoahGameFrame/tree/master/_Out/ClientBin/source)
+[U3D Client](https://github.com/ketoo/NoahGameFrame/tree/master/NFClient/Unity3D)
 
 ## Architecture
 
@@ -111,7 +111,7 @@ Tutorial:
 ```cpp
 
 // -------------------------------------------------------------------------
-//    @FileName      :    HelloWorld1.h
+//    @FileName      	:    HelloWorld1.h
 //    @Author           :    ketoo
 //    @Date             :    2014-05-01 08:51
 //    @Module           :   HelloWorld1
