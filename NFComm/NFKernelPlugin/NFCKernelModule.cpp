@@ -1515,17 +1515,18 @@ bool NFCKernelModule::DestroyAll()
 
     m_pSceneModule->ClearAll();
 
-    mvRandom.clear();
-    mtCommonClassCallBackList.clear();
-    mtCommonPropertyCallBackList.clear();
-    mtCommonRecordCallBackList.clear();
-
     return true;
 }
 
 bool NFCKernelModule::BeforeShut()
 {
     DestroyAll();
+
+	mvRandom.clear();
+	mtCommonClassCallBackList.clear();
+	mtCommonPropertyCallBackList.clear();
+	mtCommonRecordCallBackList.clear();
+
     return true;
 }
 
