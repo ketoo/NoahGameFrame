@@ -49,6 +49,18 @@ bool NFCSceneAOIModule::AfterInit()
 
 bool NFCSceneAOIModule::BeforeShut()
 {
+	mtObjectEnterCallback.clear();
+	mtObjectLeaveCallback.clear();
+	mtPropertyEnterCallback.clear();
+	mtRecordEnterCallback.clear();
+	mtPropertySingleCallback.clear();
+	mtRecordSingleCallback.clear();
+
+	mtBeforeEnterSceneCallback.clear();
+	mtAfterEnterSceneCallback.clear();
+	mtBeforeLeaveSceneCallback.clear();
+	mtAfterLeaveSceneCallback.clear();
+
     return true;
 }
 
