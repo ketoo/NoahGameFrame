@@ -25,7 +25,6 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
@@ -220,7 +219,6 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		return;
 	}
 
-	//默认1号场景
 	int nSceneID = 1;
 	NFCDataList var;
 	var.AddString(NFrame::Player::Name());
@@ -1047,78 +1045,8 @@ void NFCGameServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockInde
 		return;
 	}
 
-	NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = GetGateServerInfoBySockIndex(nSockIndex);
-	if (nullptr == pGateServerinfo)
-	{
-		return;
-	}
-
-	NFGUID nRoleID = m_pKernelModule->CreateGUID();
-
-	NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
-	if (nullptr != pGateInfo)
-	{
-		RemovePlayerGateInfo(nClientID);
-	}
-
-	int nGateID = -1;
-	if (pGateServerinfo->xServerData.pData)
-	{
-		nGateID = pGateServerinfo->xServerData.pData->server_id();
-	}
-
-	if (nGateID < 0)
-	{
-		return;
-	}
-
-	if (!AddPlayerGateInfo(nRoleID, nClientID, nGateID))
-	{
-		return;
-	}
-
-	const std::string& strAccount = xMsg.account();
-
-	NFGUID xPlayerID;
-	m_pPlayerRedisModule->GetAccountRoleID(strAccount, xPlayerID);
-
-	NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->GetPlayerCacheProperty(xPlayerID);
-
-	if (xPlayerProperty && xPlayerID != NULL_OBJECT)
-	{
-		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-		pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xPlayerID));
-		pData->set_game_id(pPluginManager->GetAppID());
-		pData->set_career(0);
-		pData->set_sex(0);
-		pData->set_race(0);
-		pData->set_noob_name(xPlayerProperty->GetPropertyString(NFrame::Player::Name()));
-		pData->set_role_level(0);
-		pData->set_delete_time(0);
-		pData->set_reg_time(0);
-		pData->set_last_offline_time(0);
-		pData->set_last_offline_ip(0);
-		pData->set_view_record("");
-		SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nRoleID);
-
-		NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
-		if (nullptr != pGateInfo)
-		{
-			RemovePlayerGateInfo(nRoleID);
-		}
-
-		if (!AddPlayerGateInfo(xPlayerID, nClientID, nGateID))
-		{
-			return;
-		}
-	}
-	else
-	{
-		//没有角色
-		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nRoleID);
-	}
+	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
 void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -1130,29 +1058,22 @@ void NFCGameServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex
 		return;
 	}
 
-	const std::string& strAccount = xMsg.account();
-	const std::string& strName = xMsg.noob_name();
+	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
+	pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(m_pKernelModule->CreateGUID()));
+	pData->set_career(xMsg.career());
+	pData->set_sex(xMsg.sex());
+	pData->set_race(xMsg.race());
+	pData->set_noob_name(xMsg.noob_name());
+	pData->set_game_id(xMsg.game_id());
+	pData->set_role_level(1);
+	pData->set_delete_time(0);
+	pData->set_reg_time(0);
+	pData->set_last_offline_time(0);
+	pData->set_last_offline_ip(0);
+	pData->set_view_record("");
 
-	NFGUID xID = m_pPlayerRedisModule->CreateRole(strAccount, strName);
-	if (xID != NULL_OBJECT)
-	{
-		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
-		pData->mutable_id()->CopyFrom(NFINetModule::NFToPB(xID));
-		pData->set_career(xMsg.career());
-		pData->set_game_id(pPluginManager->GetAppID());
-		pData->set_sex(xMsg.sex());
-		pData->set_race(xMsg.race());
-		pData->set_noob_name(xMsg.noob_name());
-		pData->set_role_level(1);
-		pData->set_delete_time(0);
-		pData->set_reg_time(0);
-		pData->set_last_offline_time(0);
-		pData->set_last_offline_ip(0);
-		pData->set_view_record("");
-
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
-	}
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
 void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -1163,7 +1084,6 @@ void NFCGameServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex
 	{
 		return;
 	}
-
 
 	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);
