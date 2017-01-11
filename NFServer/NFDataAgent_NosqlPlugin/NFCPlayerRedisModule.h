@@ -54,7 +54,6 @@ protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
 
-	virtual bool RegisterAutoSave(const std::string& strClassName);
 	const bool AttachData(const NFGUID& self);
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
