@@ -35,7 +35,7 @@ bool NFCPlayerRedisModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectClassEvent);
-	RegisterAutoSave(NFrame::Player::ThisName());
+
 	return true;
 }
 
@@ -274,11 +274,6 @@ std::string NFCPlayerRedisModule::GetOnlineProxyServerKey()
 	return "OnlineProxyKey";
 }
 
-bool NFCPlayerRedisModule::RegisterAutoSave(const std::string & strClassName)
-{
-	return m_pKernelModule->AddClassCallBack(strClassName, this, &NFCPlayerRedisModule::OnObjectClassEvent);;
-}
-
 const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
@@ -286,13 +281,13 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 	{
 		return false;
 	}
-	NF_SHARE_PTR<NFIPropertyManager> pProManager = pObject->GetPropertyManager();
+	NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
 
 	NFMsg::ObjectPropertyList xPbPropertyList;
 	if (m_pCommonRedisModule->GetCachePropertyListPB(self, NFrame::Player::ThisName(), xPbPropertyList))
 	{
-		m_pCommonRedisModule->ConvertPBToPropertyManager(xPbPropertyList, pProManager);
+		m_pCommonRedisModule->ConvertPBToPropertyManager(xPbPropertyList, pPropertyManager);
 	}
 
 	NFMsg::ObjectRecordList xPbRecordList;
@@ -323,7 +318,7 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	{
 		OnOnline(self);
 		AttachData(self);
-		// 加入上线信息
+
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTime());
 		int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
