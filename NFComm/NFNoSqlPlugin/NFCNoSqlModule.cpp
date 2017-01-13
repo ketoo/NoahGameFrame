@@ -25,10 +25,6 @@ bool NFCNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
 
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	
 	return true;
 }
 
@@ -40,6 +36,9 @@ bool NFCNoSqlModule::Shut()
 
 bool NFCNoSqlModule::AfterInit()
 {
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
 	if (xLogicClass)
