@@ -39,6 +39,7 @@ public:
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitRandom();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuitConsistent();
 	virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const std::string& strHash);
+	//virtual NF_SHARE_PTR<NFINoSqlDriver> GetDriverBySuit(const int nHash);
     virtual bool RemoveConnectSql(const std::string& strID);
 
 protected:
