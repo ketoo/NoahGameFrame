@@ -65,6 +65,16 @@ TDATA_TYPE NFCClassModule::ComputerType(const char* pstrTypeName, NFIDataList::T
         var.SetObject(NULL_OBJECT);
         return var.GetType();
     }
+	else if (0 == strcmp(pstrTypeName, "vector2"))
+	{
+		var.SetVector2(NULL_VECTOR2);
+		return var.GetType();
+	}
+	else if (0 == strcmp(pstrTypeName, "vector3"))
+	{
+		var.SetVector3(NULL_VECTOR3);
+		return var.GetType();
+	}
 
     return TDATA_UNKNOWN;
 }
