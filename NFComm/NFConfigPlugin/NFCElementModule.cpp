@@ -224,6 +224,28 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
                 var.SetObject(NFGUID());
             }
             break;
+			case TDATA_VECTOR2:
+			{
+				if (strlen(pstrConfigValue))
+				{
+					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+				}
+				NFVector2 tmp;
+				tmp.FromString(pstrConfigValue);
+				var.SetVector2(tmp);
+			}
+			break;
+			case TDATA_VECTOR3:
+			{
+				if (strlen(pstrConfigValue))
+				{
+					NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
+				}
+				NFVector3 tmp;
+				tmp.FromString(pstrConfigValue);
+				var.SetVector3(tmp);
+			}
+			break;
             default:
                 NFASSERT(0, temProperty->GetKey(), __FILE__, __FUNCTION__);
                 break;
