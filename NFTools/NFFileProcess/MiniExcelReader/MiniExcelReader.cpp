@@ -1,8 +1,7 @@
 #include "MiniExcelReader.h"
+#include <iostream>
 #include <cmath>
 #include "unzip.h"
-#include "tinyxml2.h"
-
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -27,10 +26,10 @@ namespace MiniExcelReader {
 		~Zip();
 
 		bool open(const char* file);
-		bool openXML(const char* filename, tinyxml2::XMLDocument& doc);
+		bool openXML(const char* filename, rapidxml::xml_document<>& doc);
 
 	private:
-		unsigned char* getFileData(const char* filename, unsigned long& size);
+		char* getFileData(const char* filename, unsigned long& size);
 		std::map<std::string, ZipEntryInfo> _files;
 		unzFile _zipFile;
 	};
@@ -71,9 +70,9 @@ namespace MiniExcelReader {
 		return true;
 	}
 
-	unsigned char* Zip::getFileData(const char* filename, unsigned long& size)
+	char* Zip::getFileData(const char* filename, unsigned long& size)
 	{
-		unsigned char * pBuffer = NULL;
+		char * pBuffer = NULL;
 
 		auto it = _files.find(filename);
 
@@ -87,7 +86,7 @@ namespace MiniExcelReader {
 		nRet = unzOpenCurrentFile(_zipFile);
 		if (UNZ_OK != nRet) return NULL;
 
-		pBuffer = new unsigned char[fileInfo.uncompressed_size];
+		pBuffer = new char[fileInfo.uncompressed_size];
 		unzReadCurrentFile(_zipFile, pBuffer, fileInfo.uncompressed_size);
 
 		size = fileInfo.uncompressed_size;
@@ -96,17 +95,22 @@ namespace MiniExcelReader {
 		return pBuffer;
 	}
 
-	bool Zip::openXML(const char* filename, tinyxml2::XMLDocument& doc)
+	bool Zip::openXML(const char* filename, rapidxml::xml_document<>& doc)
 	{
 		unsigned long size = 0;
-		unsigned char* data = getFileData(filename, size);
+		char* data = getFileData(filename, size);
 
 		if (!data) return false;
 
-		doc.Parse((const char*)data, size);
+		char* pData = new char[size + 1];
+		strncpy(pData, data, size);
+		pData[size] = 0;
+		doc.parse<0>(pData);
 
 		if (data)
 			delete[] data;
+		//if (pData)
+		//	delete[] pData;
 
 		return true;
 	}
@@ -142,25 +146,24 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readWorkBook(const char* filename)
 	{
-		tinyxml2::XMLDocument doc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
 
-		tinyxml2::XMLElement* e;
-		e = doc.FirstChildElement("workbook");
-		e = e->FirstChildElement("sheets");
-		e = e->FirstChildElement("sheet");
+		rapidxml::xml_node<>* e = doc.first_node("workbook");
+		e = e->first_node("sheets");
+		e = e->first_node("sheet");
 
 		while (e)
 		{
 			Sheet s;
 
-			s._name = e->Attribute("name");
-			s._rid = e->Attribute("r:id");
-			s._sheetId = e->IntAttribute("sheetId");
-			s._visible = (e->Attribute("state") && !strcmp(e->Attribute("state"), "hidden"));
+			s._name = e->first_attribute("name")->value();
+			s._rid = e->first_attribute("r:id")->value();
+			s._sheetId = lexical_cast<int>(e->first_attribute("sheetId")->value());
+			s._visible = (e->first_attribute("state") && !strcmp(e->first_attribute("state")->value(), "hidden"));
 
-			e = e->NextSiblingElement("sheet");
+			e = e->next_sibling("sheet");
 
 			_sheets.push_back(s);
 		}
@@ -168,72 +171,70 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readWorkBookRels(const char* filename)
 	{
-		tinyxml2::XMLDocument doc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
-		tinyxml2::XMLElement* e = doc.FirstChildElement("Relationships");
-		e = e->FirstChildElement("Relationship");
+		rapidxml::xml_node<>* e = doc.first_node("Relationships");
+		e = e->first_node("Relationship");
 
 		while (e)
 		{
-			const char* rid = e->Attribute("Id");
+			const char* rid = e->first_attribute("Id")->value();
 
 			for (Sheet& sheet : _sheets)
 			{
 				if (sheet._rid == rid)
 				{
-					sheet._path = "xl/" + std::string(e->Attribute("Target"));
+					sheet._path = "xl/" + std::string(e->first_attribute("Target")->value());
 
 					break;
 				}
 			}
 
-			e = e->NextSiblingElement("Relationship");
+			e = e->next_sibling("Relationship");
 		}
 	}
 
 	void ExcelFile::readSharedStrings(const char* filename)
 	{
-		tinyxml2::XMLDocument doc;
+		rapidxml::xml_document<> doc;
 
 		if (!_zip->openXML(filename, doc)) return;
 
-		tinyxml2::XMLElement* e;
+		rapidxml::xml_node<>* e = doc.first_node("sst");
+		e = e->first_node("si");
 
-		e = doc.FirstChildElement("sst");
-		e = e->FirstChildElement("si");
-
-		tinyxml2::XMLElement *t, *r;
+		rapidxml::xml_node<> *t, *r;
 		int i = 0;
 
 		while (e)
 		{
-			t = e->FirstChildElement("t");
+			t = e->first_node("t");
 			i++;
 			if (t)
 			{
-				const char* text = t->GetText();
+				const char* text = t->value();
 				_sharedString.push_back(text ? text : "");
 			}
 			else
 			{
-				r = e->FirstChildElement("r");
+				r = e->first_node("r");
 				std::string value;
 				while (r)
 				{
-					t = r->FirstChildElement("t");
-					value += t->GetText();
-					r = r->NextSiblingElement("r");
+					t = r->first_node("t");
+					value += t->value();
+					r = r->next_sibling("r");
 				}
 				_sharedString.push_back(value);
 			}
-			e = e->NextSiblingElement("si");
+			e = e->next_sibling("si");
 		}
 	}
 
 	void ExcelFile::readStyles(const char* filename)
 	{
-		tinyxml2::XMLDocument doc;
+		rapidxml::xml_document<> doc;
 
 		_zip->openXML(filename, doc);
 	}
@@ -279,19 +280,19 @@ namespace MiniExcelReader {
 
 	void ExcelFile::readSheet(Sheet& sh)
 	{
-		tinyxml2::XMLDocument doc;
-		tinyxml2::XMLElement *root, *row, *c, *v, *d;
+		rapidxml::xml_document<> doc;
+		rapidxml::xml_node<> *root, *row, *c, *v, *d;
 
 		_zip->openXML(sh._path.c_str(), doc);
 
-		root = doc.FirstChildElement("worksheet");
+		root = doc.first_node("worksheet");
 
-		d = root->FirstChildElement("dimension");
+		d = root->first_node("dimension");
 		if (d)
-			parseRange(d->Attribute("ref"), sh._dimension);
+			parseRange(d->first_attribute("ref")->value(), sh._dimension);
 
-		row = root->FirstChildElement("sheetData");
-		row = row->FirstChildElement("row");
+		row = root->first_node("sheetData");
+		row = row->first_node("row");
 
 		int vecsize = (sh._dimension.lastCol - sh._dimension.firstCol + 1) * (sh._dimension.lastRow - sh._dimension.firstRow + 1);
 
@@ -300,29 +301,44 @@ namespace MiniExcelReader {
 
 		while (row)
 		{
-			int rowIdx = row->IntAttribute("r");
-			c = row->FirstChildElement("c");
+			int rowIdx = lexical_cast<int>(row->first_attribute("r")->value());
+			c = row->first_node("c");
 
 			while (c)
 			{
 				int colIdx = 0;
-				parseCell(c->Attribute("r"), rowIdx, colIdx);
+				parseCell(c->first_attribute("r")->value(), rowIdx, colIdx);
 				int index = sh.toIndex(rowIdx, colIdx);
 
 				const char *s, *t;
 
-				v = c->FirstChildElement("v");
-				t = c->Attribute("t");
+				v = c->first_node("v");
 
 				Cell* cell = new Cell;
 
 				if (v)
 				{
-					s = v->GetText();
-					if (t && !strcmp(t, "s"))
+					s = v->value();
+					if (c->first_attribute("t"))
 					{
-						cell->value = (char*)_sharedString[atoi(s)].c_str();
-						cell->type = "string";
+						t = c->first_attribute("t")->value();
+						if (!strcmp(t, "s"))
+						{
+							cell->value = (char*)_sharedString[atoi(s)].c_str();
+							cell->type = "string";
+						}
+						else if (!strcmp(t, "b"))
+						{
+							if (!strcmp(s, "0"))
+							{
+								cell->value = "FALSE";
+							}
+							else
+							{
+								cell->value = "TRUE";
+							}
+							cell->type = "bool";
+						}
 					}
 					else
 					{
@@ -331,10 +347,10 @@ namespace MiniExcelReader {
 					}
 				}
 				sh._cells[index] = cell;
-				c = c->NextSiblingElement("c");
+				c = c->next_sibling("c");
 			}
 
-			row = row->NextSiblingElement("row");
+			row = row->next_sibling("row");
 		}
 	}
 

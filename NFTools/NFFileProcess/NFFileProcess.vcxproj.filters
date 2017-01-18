@@ -12,9 +12,6 @@
     <Filter Include="minizip">
       <UniqueIdentifier>{8178ac90-c611-4c5a-b634-e6087bb51b6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tinyxml2">
-      <UniqueIdentifier>{f9830a04-b407-438b-bb3c-848b8ae8323a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="zlib">
       <UniqueIdentifier>{0ffbd1b1-c46f-42eb-8caa-929160b52a45}</UniqueIdentifier>
     </Filter>
@@ -76,9 +73,6 @@
     </ClCompile>
     <ClCompile Include="zlib\zutil.c">
       <Filter>zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml2\tinyxml2.cpp">
-      <Filter>tinyxml2</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source</Filter>
