@@ -101,10 +101,15 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	}
 	const char *decode1 = evhttp_uri_get_path(decoded);
 	if (!decode1) decode1 = "/";
+	
+	//The returned string must be freed by the caller.
 	const char* decodeUri = evhttp_uridecode(decode1, 0, NULL);
+
 	if (decodeUri == NULL)
 	{
-		evhttp_send_error(req, 404, "error");
+		printf("uri decode error\n");
+		evhttp_send_error(req, HTTP_BADREQUEST, "uri decode error");
+		return;
 	}
 	std::string strUri;
 	if (decodeUri[0] == '/')
