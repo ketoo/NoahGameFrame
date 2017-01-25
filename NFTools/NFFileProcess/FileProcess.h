@@ -54,7 +54,7 @@ public:
 	bool bConvertIntoUTF8 = false;
 
 private:
-	char * NewChar(std::string& str);
+	char * NewChar(const std::string& str);
 	int nCipher = 0;
 	std::vector<char *> tmpStrList;
 	std::string strCipherCfg = "conf";

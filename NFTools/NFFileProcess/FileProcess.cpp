@@ -185,6 +185,7 @@ void FileProcess::CreateStructThreadFunc()
 	//auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
 	std::ofstream out(strLogicClassFile.c_str());
 	out << xmlDoc;
+	out.close();
 }
 
 void FileProcess::CreateIniThreadFunc()
@@ -844,7 +845,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	std::ofstream out(strXMLFile.c_str());
 	out << iniDoc;
-
+	out.close();
 	delete x;
 	return true;
 }
@@ -1055,7 +1056,7 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 	return true;
 }
 
-char * FileProcess::NewChar(std::string & str)
+char * FileProcess::NewChar(const std::string& str)
 {
 	char * newChar = new char[str.size()+1];
 	strncpy(newChar, str.c_str(), str.size());
