@@ -97,24 +97,33 @@ void FileProcess::OnCreateXMLFile()
 void FileProcess::CreateStructThreadFunc()
 {
 	CreateProtoFile();
+
+
 	CreateNameFile();
+
+
+
 	rapidxml::xml_document<> xmlDoc;
+
 	rapidxml::xml_node<>* pDel = xmlDoc.allocate_node(rapidxml::node_pi, xmlDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
 	if (NULL == pDel)
 	{
 		return;
 	}
+
 	xmlDoc.append_node(pDel);
 
 	rapidxml::xml_node<>* root = xmlDoc.allocate_node(rapidxml::node_element, "XML", NULL);
 	xmlDoc.append_node(root);
+
 	rapidxml::xml_node<>* classElement = xmlDoc.allocate_node(rapidxml::node_element, "Class", NULL);
 	root->append_node(classElement);
 	////////////////////////////////////////////////////////////////////////
 	classElement->append_attribute(xmlDoc.allocate_attribute("Id", "IObject"));
 	classElement->append_attribute(xmlDoc.allocate_attribute("Type", "TYPE_IOBJECT"));
-	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar((strExecutePath + "Struct/Class/IObject.xml"))));
-	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar((strExecutePath + "Ini/NPC/IObject.xml"))));
+
+	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + "Struct/Class/IObject.xml"))));
+	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + "Ini/NPC/IObject.xml"))));
 
 	classElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
 	classElement->append_attribute(xmlDoc.allocate_attribute("Desc", "IObject"));
@@ -161,21 +170,21 @@ void FileProcess::CreateStructThreadFunc()
 		subClassElement->append_attribute(xmlDoc.allocate_attribute("Id", NewChar(strFileName)));
 		std::string strUpFileName = strFileName;
 		transform(strUpFileName.begin(), strUpFileName.end(), strUpFileName.begin(), ::toupper);
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Type", NewChar(("TYPE_" + strUpFileName))));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(strExecutePath + strXMLStructPath + strFileName + ".xml")));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar((strExecutePath + strXMLIniPath + strFileName + ".xml"))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Type", NewChar(std::string("TYPE_" + strUpFileName))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + strXMLStructPath + strFileName + ".xml"))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + strXMLIniPath + strFileName + ".xml"))));
 		subClassElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
 		subClassElement->append_attribute(xmlDoc.allocate_attribute("Desc", NewChar(strFileName)));
 	}
 
-	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP",
-		sizeof("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
-	fwrite("}",
-		sizeof("}"), 1, csWriter);
 
+
+	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP", strlen("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
+	fwrite("}",	strlen("}"), 1, csWriter);
+
+	//auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
 	std::ofstream out(strLogicClassFile.c_str());
 	out << xmlDoc;
-	out.close();
 }
 
 void FileProcess::CreateIniThreadFunc()
@@ -262,18 +271,23 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	rapidxml::xml_node<>* root = structDoc.allocate_node(rapidxml::node_element, "XML", NULL);
 	structDoc.append_node(root);
 
+
 	rapidxml::xml_node<>* propertyNodes = structDoc.allocate_node(rapidxml::node_element, "Propertys", NULL);
 	root->append_node(propertyNodes);
+
 
 	rapidxml::xml_node<>* recordNodes = structDoc.allocate_node(rapidxml::node_element, "Records", NULL);
 	root->append_node(recordNodes);
 
+
 	rapidxml::xml_node<>* componentNodes = structDoc.allocate_node(rapidxml::node_element, "Components", NULL);
 	root->append_node(componentNodes);
+
 
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+
 		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
@@ -527,6 +541,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 				auto recordNode = structDoc.allocate_node(rapidxml::node_element, "Record", NULL);
 				recordNodes->append_node(recordNode);
+
 				recordNode->append_attribute(structDoc.allocate_attribute("Id", NewChar(strRecordName)));
 				recordNode->append_attribute(structDoc.allocate_attribute("Row", NewChar(strRow)));
 				recordNode->append_attribute(structDoc.allocate_attribute("Col", NewChar(strCol)));
@@ -578,6 +593,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 					auto colNode = structDoc.allocate_node(rapidxml::node_element, "Col", NULL);
 					recordNode->append_node(colNode);
+
 					colNode->append_attribute(structDoc.allocate_attribute("Type", NewChar(strType)));
 					colNode->append_attribute(structDoc.allocate_attribute("Tag", NewChar(strTag)));
 
@@ -675,6 +691,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+
 		int nDataLine = 10;
 
 		std::string strSheetName = sh.getName();
@@ -982,6 +999,7 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 			}
 		}
 	}
+
 
 	auto xRecordsNode = root->first_node("Records");
 	if (xRecordsNode)
