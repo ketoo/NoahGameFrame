@@ -1,22 +1,21 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFItemBagPlugin.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFChatPlugin
+//    @Date             :    2017-02-03
+//    @Module           :    NFItemBagPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
+#ifndef NF_ITEM_BAG_PLUGIN_H
+#define NF_ITEM_BAG_PLUGIN_H
 
-///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFChatPlugin : public NFIPlugin
+class NFItemBagPlugin : public NFIPlugin
 {
 public:
-	NFChatPlugin(NFIPluginManager* p)
+	NFItemBagPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

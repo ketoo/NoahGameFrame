@@ -5,25 +5,23 @@
 //    @Module           :   NFCHeroItemConsumeProcessModule
 // -------------------------------------------------------------------------
 
-#ifndef NFC_HEROITEMCONSUME_PROCESS_MODULE_H
-#define NFC_HEROITEMCONSUME_PROCESS_MODULE_H
+#ifndef NFC_NORMALITEMCONSUME_PROCESS_MODULE_H
+#define NFC_NORMALITEMCONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
-class NFCHeroItemConsumeProcessModule
+class NFCNormalConsumeProcessModule
     : public NFIItemConsumeProcessModule
 {
 
 public:
-    NFCHeroItemConsumeProcessModule( NFIPluginManager* p )
+    NFCNormalConsumeProcessModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
@@ -35,15 +33,16 @@ public:
 	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
 
 	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemName, const NFGUID& targetID);
+    
+    bool AwardItemProperty(const NFGUID& self, const std::string& strID);
 
-    bool AwardItemProperty(const NFGUID& self, const NFGUID& xHeroID, const std::string& strID);
 private:
+    NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
+    //NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
-    NFIHeroModule* m_pHeroModule;
 };
 
 #endif

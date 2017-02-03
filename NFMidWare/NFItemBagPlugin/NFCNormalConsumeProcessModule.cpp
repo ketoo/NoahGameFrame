@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCHeroItemConsumeProcessModule.cpp
+//    @FileName			:   NFCNormalConsumeProcessModule.cpp
 //    @Author           :   Chuanbo.Guo
 //    @Date             :   2013-10-02
-//    @Module           :   NFCHeroItemConsumeProcessModule
+//    @Module           :   NFCNormalConsumeProcessModule
 // -------------------------------------------------------------------------
 
 #include "NFCNormalConsumeProcessModule.h"
@@ -17,7 +17,7 @@ bool NFCNormalConsumeProcessModule::Init()
 bool NFCNormalConsumeProcessModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
+	//m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
