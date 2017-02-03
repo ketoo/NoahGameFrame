@@ -9,7 +9,6 @@
 #ifndef NFC_TASK_MODULE_H
 #define NFC_TASK_MODULE_H
 
-#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
@@ -20,7 +19,8 @@
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFCTaskModule
     : public NFIModule
