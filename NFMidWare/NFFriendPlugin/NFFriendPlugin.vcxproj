@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7767C45A-F011-4E91-83C2-F7AA197CDA0B}</ProjectGuid>
+    <ProjectGuid>{02DF8A95-4262-474B-BAE1-A2071257B297}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFFriendPlugin</RootNamespace>
   </PropertyGroup>
