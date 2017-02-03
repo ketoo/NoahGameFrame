@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-
 #include "NFCFriendModule.h"
 #include "NFFriendPlugin.h"
 
