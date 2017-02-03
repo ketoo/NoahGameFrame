@@ -5,6 +5,23 @@ file(GLOB NFItemBagPlugin_ROOT_Cpp
 file(GLOB NFItemBagPlugin_ROOT_Hpp 
 	*.h)
 
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCRebornItemConsumeProcessModule.cpp")
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCRebornItemConsumeProcessModule.h")
+
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCNormalConsumeProcessModule.cpp")
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCNormalConsumeProcessModule.h")
+
+
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCHeroItemConsumeProcessModule.cpp")
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCHeroItemConsumeProcessModule.h")
+
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCPotionItemConsumeProcessModule.cpp")
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCPotionItemConsumeProcessModule.h")
+
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCItemConsumeManagerModule.cpp")
+remove_file(NFItemBagPlugin_ROOT_Hpp "NFCItemConsumeManagerModule.h")
+
+
 add_library(NFItemBagPlugin SHARED
 	${NFItemBagPlugin_ROOT_Cpp}
 	${NFItemBagPlugin_ROOT_Hpp})
