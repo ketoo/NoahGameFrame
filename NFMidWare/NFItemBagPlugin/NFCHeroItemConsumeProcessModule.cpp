@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCHeroItemConsumeProcessModule.cpp
+//    @FileName			:   NFCHeroItemConsumeProcessModule.cpp
 //    @Author           :   Chuanbo.Guo
 //    @Date             :   2013-10-02
 //    @Module           :   NFCHeroItemConsumeProcessModule
