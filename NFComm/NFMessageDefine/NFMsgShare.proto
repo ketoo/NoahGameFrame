@@ -69,8 +69,8 @@ message ReqAckPlayerMove
 {
 	required Ident 	mover = 1;
 	required int32  moveType = 2;
-	repeated Position target_pos = 3;
-	repeated Position source_pos = 4;
+	repeated Vector3 target_pos = 3;
+	repeated Vector3 source_pos = 4;
 }
 
 message ChatContainer
@@ -119,8 +119,8 @@ message ReqAckUseSkill
 {
 	required Ident 	user = 1;
 	required bytes skill_id = 2;
-	required Position now_pos = 3;
-	required Position tar_pos = 4;
+	required Vector3 now_pos = 3;
+	required Vector3 tar_pos = 4;
 	required int32  use_index = 5;//因为客户端要先展示
 	repeated EffectData 	effect_data = 6;
 }
@@ -822,57 +822,3 @@ message AckCreatePVPEctype
 	required PVPRoomInfo	xRoomInfo 		= 2;
 	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
 }
-
-//////////////////SHARE-TOOL//////////////////////////////////////////////////////////////////////////////////
-message ShareObjectUserData
-{
-	required Ident		user_id 	= 1;
-	required string		user_id 	= 2;
-	required int32		guild_honor 	= 3;
-}
-
-//EGMI_REQ_SEARCH_TO_SHARE 					= 30000;
-message ReqSearchToShare
-{	
-    required Ident	self_id 				= 1;
-	required float	startX = 2;
-	required float	startY = 3;
-	required float	endX = 4;
-	required float	endY = 5;
-}
-
-//EGMI_ACK_SEARCH_TO_SHARE 					= 30001;
-message AckSearchToShare
-{
-    required Ident	self_id 				= 1;
-	required float	startX = 2;
-	required float	startY = 3;
-	required float	endX = 4;
-	required float	endY = 5;
-
-	repeated ShareObjectUserData user_list = 6;
-}
-
-//EGMI_REQ_SHARE_TO_ATART 					= 30002;
-message ReqSearchToShare
-{	
-    required Ident	self_id 				= 1;
-	required float	startX = 2;
-	required float	startY = 3;
-	required float	endX = 4;
-	required float	endY = 5;
-    required Ident	shareid = 6;
-}
-
-//EGMI_ACK_SHARE_TO_ATART 					= 30003;
-message AckStartToShare
-{
-    required Ident	self_id 				= 1;
-	required float	startX = 2;
-	required float	startY = 3;
-	required float	endX = 4;
-	required float	endY = 5;
-    required Ident	shareid = 6;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
