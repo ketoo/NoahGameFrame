@@ -7,18 +7,16 @@ if(UNIX)
 	add_library(NFMysqlPlugin SHARED
 		${NFMysqlPlugin_ROOT_Cpp}
 		${NFMysqlPlugin_ROOT_CC}
-		${NFMysqlPlugin_ROOT_Hpp}
-		${SolutionDir}/Dependencies/redis-cplusplus-client/anet.c
-		${SolutionDir}/Dependencies/redis-cplusplus-client/anet.h)
+		${NFMysqlPlugin_ROOT_Hpp})
 	target_include_directories(NFMysqlPlugin PUBLIC
 		${SolutionDir}/Dependencies/mysql/
 		${SolutionDir}/Dependencies/mysqlpp/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFMysqlPlugin mysqlclient.a)
-		target_link_libraries(NFMysqlPlugin libmysqlpp.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/mysqlclient.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/libmysqlpp.a)
 	else()
-		target_link_libraries(NFMysqlPlugin mysqlclient.a)
-		target_link_libraries(NFMysqlPlugin libmysqlpp.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/mysqlclient.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/libmysqlpp.a)
 	endif()
 	add_definitions(
 			-D_USRDLL
