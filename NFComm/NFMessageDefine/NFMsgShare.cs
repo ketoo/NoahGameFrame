@@ -258,16 +258,16 @@ namespace NFMsg
       get { return _moveType; }
       set { _moveType = value; }
     }
-    private readonly global::System.Collections.Generic.List<NFMsg.Position> _target_pos = new global::System.Collections.Generic.List<NFMsg.Position>();
+    private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _target_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
     [global::ProtoBuf.ProtoMember(3, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.Position> target_pos
+    public global::System.Collections.Generic.List<NFMsg.Vector3> target_pos
     {
       get { return _target_pos; }
     }
   
-    private readonly global::System.Collections.Generic.List<NFMsg.Position> _source_pos = new global::System.Collections.Generic.List<NFMsg.Position>();
+    private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _source_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
     [global::ProtoBuf.ProtoMember(4, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.Position> source_pos
+    public global::System.Collections.Generic.List<NFMsg.Vector3> source_pos
     {
       get { return _source_pos; }
     }
@@ -443,16 +443,16 @@ namespace NFMsg
       get { return _skill_id; }
       set { _skill_id = value; }
     }
-    private NFMsg.Position _now_pos;
+    private NFMsg.Vector3 _now_pos;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"now_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Position now_pos
+    public NFMsg.Vector3 now_pos
     {
       get { return _now_pos; }
       set { _now_pos = value; }
     }
-    private NFMsg.Position _tar_pos;
+    private NFMsg.Vector3 _tar_pos;
     [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"tar_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Position tar_pos
+    public NFMsg.Vector3 tar_pos
     {
       get { return _tar_pos; }
       set { _tar_pos = value; }

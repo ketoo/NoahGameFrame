@@ -752,7 +752,19 @@ namespace NFMsg
       EGMI_REQ_CREATE_ITEM = 20102,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUILD_OPERATE", Value=20103)]
-      EGMI_REQ_BUILD_OPERATE = 20103
+      EGMI_REQ_BUILD_OPERATE = 20103,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_TO_SHARE", Value=30000)]
+      EGMI_REQ_SEARCH_TO_SHARE = 30000,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_TO_SHARE", Value=30001)]
+      EGMI_ACK_SEARCH_TO_SHARE = 30001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SHARE_TO_ATART", Value=30002)]
+      EGMI_REQ_SHARE_TO_ATART = 30002,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SHARE_TO_ATART", Value=30003)]
+      EGMI_ACK_SHARE_TO_ATART = 30003
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemType")]

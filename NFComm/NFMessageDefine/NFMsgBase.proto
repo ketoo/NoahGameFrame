@@ -248,32 +248,6 @@ message ObjectRecordList//send all records as a pack when client log in or log o
 	repeated ObjectRecordList multi_player_record = 1;
  }
 
-message PlayerPropertyBase??
-{
-	repeated PropertyInt property_int_list = 1;
-	repeated PropertyFloat property_float_list = 2;
-	repeated PropertyString property_string_list = 3;
-	repeated PropertyObject property_object_list = 4;
-	repeated PropertyVector2 property_vector2_list = 5;
-	repeated PropertyVector3 property_vector3_list = 6;
-}
-
-////////////////////////////////////////////////////////////
-message PlayerRecordBase??
-{
-	required string  record_name = 1;
-	repeated RecordInt  record_int_list = 2;
-	repeated RecordFloat  record_float_list = 3;
-	repeated RecordString  record_string_list = 4;
-	repeated RecordObject  record_object_list = 5;
-	repeated RecordVector2 record_vector2_list = 6;
-    repeated RecordVector3 record_vector3_list = 7;	
-}
-
-message PlayerRecordList??
-{
-	repeated PlayerRecordBase record_list = 1;
-}
 
 ///////////////////////////////////////////////////////////////////
 message MsgBase
