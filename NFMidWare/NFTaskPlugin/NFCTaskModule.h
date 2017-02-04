@@ -18,6 +18,9 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFITaskModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -46,12 +49,12 @@ protected:
 private:
     NFIKernelModule* 				m_pKernelModule;
     NFIPackModule* 					m_pPackModule;
-    NFIElementModule* 			m_pElementModule;
+    NFIElementModule* 				m_pElementModule;
     NFIClassModule* 				m_pLogicClassModule;
-    NFIPropertyModule* 			m_pPropertyModule;
-		NFIHeroModule* 					m_pHeroModule;
-		NFICommonConfigModule* 	m_pCommonConfigModule;
-		NFIGameServerNet_ServerModule*	m_pGameServerNet_ServerModule;
+    NFIPropertyModule* 				m_pPropertyModule;
+	NFIHeroModule* 					m_pHeroModule;
+	NFICommonConfigModule* 			m_pCommonConfigModule;
+	NFIGameServerNet_ServerModule*	m_pGameServerNet_ServerModule;
 };
 
 
