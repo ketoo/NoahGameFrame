@@ -1222,28 +1222,28 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 movetype() const;
   inline void set_movetype(::google::protobuf::int32 value);
 
-  // repeated .NFMsg.Position target_pos = 3;
+  // repeated .NFMsg.Vector3 target_pos = 3;
   inline int target_pos_size() const;
   inline void clear_target_pos();
   static const int kTargetPosFieldNumber = 3;
-  inline const ::NFMsg::Position& target_pos(int index) const;
-  inline ::NFMsg::Position* mutable_target_pos(int index);
-  inline ::NFMsg::Position* add_target_pos();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+  inline const ::NFMsg::Vector3& target_pos(int index) const;
+  inline ::NFMsg::Vector3* mutable_target_pos(int index);
+  inline ::NFMsg::Vector3* add_target_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
       target_pos() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_target_pos();
 
-  // repeated .NFMsg.Position source_pos = 4;
+  // repeated .NFMsg.Vector3 source_pos = 4;
   inline int source_pos_size() const;
   inline void clear_source_pos();
   static const int kSourcePosFieldNumber = 4;
-  inline const ::NFMsg::Position& source_pos(int index) const;
-  inline ::NFMsg::Position* mutable_source_pos(int index);
-  inline ::NFMsg::Position* add_source_pos();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+  inline const ::NFMsg::Vector3& source_pos(int index) const;
+  inline ::NFMsg::Vector3* mutable_source_pos(int index);
+  inline ::NFMsg::Vector3* add_source_pos();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
       source_pos() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_source_pos();
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerMove)
@@ -1256,8 +1256,8 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* mover_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > target_pos_;
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::Position > source_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > target_pos_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > source_pos_;
   ::google::protobuf::int32 movetype_;
 
   mutable int _cached_size_;
@@ -1771,23 +1771,23 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::std::string* release_skill_id();
   inline void set_allocated_skill_id(::std::string* skill_id);
 
-  // required .NFMsg.Position now_pos = 3;
+  // required .NFMsg.Vector3 now_pos = 3;
   inline bool has_now_pos() const;
   inline void clear_now_pos();
   static const int kNowPosFieldNumber = 3;
-  inline const ::NFMsg::Position& now_pos() const;
-  inline ::NFMsg::Position* mutable_now_pos();
-  inline ::NFMsg::Position* release_now_pos();
-  inline void set_allocated_now_pos(::NFMsg::Position* now_pos);
+  inline const ::NFMsg::Vector3& now_pos() const;
+  inline ::NFMsg::Vector3* mutable_now_pos();
+  inline ::NFMsg::Vector3* release_now_pos();
+  inline void set_allocated_now_pos(::NFMsg::Vector3* now_pos);
 
-  // required .NFMsg.Position tar_pos = 4;
+  // required .NFMsg.Vector3 tar_pos = 4;
   inline bool has_tar_pos() const;
   inline void clear_tar_pos();
   static const int kTarPosFieldNumber = 4;
-  inline const ::NFMsg::Position& tar_pos() const;
-  inline ::NFMsg::Position* mutable_tar_pos();
-  inline ::NFMsg::Position* release_tar_pos();
-  inline void set_allocated_tar_pos(::NFMsg::Position* tar_pos);
+  inline const ::NFMsg::Vector3& tar_pos() const;
+  inline ::NFMsg::Vector3* mutable_tar_pos();
+  inline ::NFMsg::Vector3* release_tar_pos();
+  inline void set_allocated_tar_pos(::NFMsg::Vector3* tar_pos);
 
   // required int32 use_index = 5;
   inline bool has_use_index() const;
@@ -1825,8 +1825,8 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* user_;
   ::std::string* skill_id_;
-  ::NFMsg::Position* now_pos_;
-  ::NFMsg::Position* tar_pos_;
+  ::NFMsg::Vector3* now_pos_;
+  ::NFMsg::Vector3* tar_pos_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
   ::google::protobuf::int32 use_index_;
 
@@ -11246,52 +11246,52 @@ inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
   movetype_ = value;
 }
 
-// repeated .NFMsg.Position target_pos = 3;
+// repeated .NFMsg.Vector3 target_pos = 3;
 inline int ReqAckPlayerMove::target_pos_size() const {
   return target_pos_.size();
 }
 inline void ReqAckPlayerMove::clear_target_pos() {
   target_pos_.Clear();
 }
-inline const ::NFMsg::Position& ReqAckPlayerMove::target_pos(int index) const {
+inline const ::NFMsg::Vector3& ReqAckPlayerMove::target_pos(int index) const {
   return target_pos_.Get(index);
 }
-inline ::NFMsg::Position* ReqAckPlayerMove::mutable_target_pos(int index) {
+inline ::NFMsg::Vector3* ReqAckPlayerMove::mutable_target_pos(int index) {
   return target_pos_.Mutable(index);
 }
-inline ::NFMsg::Position* ReqAckPlayerMove::add_target_pos() {
+inline ::NFMsg::Vector3* ReqAckPlayerMove::add_target_pos() {
   return target_pos_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
 ReqAckPlayerMove::target_pos() const {
   return target_pos_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
 ReqAckPlayerMove::mutable_target_pos() {
   return &target_pos_;
 }
 
-// repeated .NFMsg.Position source_pos = 4;
+// repeated .NFMsg.Vector3 source_pos = 4;
 inline int ReqAckPlayerMove::source_pos_size() const {
   return source_pos_.size();
 }
 inline void ReqAckPlayerMove::clear_source_pos() {
   source_pos_.Clear();
 }
-inline const ::NFMsg::Position& ReqAckPlayerMove::source_pos(int index) const {
+inline const ::NFMsg::Vector3& ReqAckPlayerMove::source_pos(int index) const {
   return source_pos_.Get(index);
 }
-inline ::NFMsg::Position* ReqAckPlayerMove::mutable_source_pos(int index) {
+inline ::NFMsg::Vector3* ReqAckPlayerMove::mutable_source_pos(int index) {
   return source_pos_.Mutable(index);
 }
-inline ::NFMsg::Position* ReqAckPlayerMove::add_source_pos() {
+inline ::NFMsg::Vector3* ReqAckPlayerMove::add_source_pos() {
   return source_pos_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
 ReqAckPlayerMove::source_pos() const {
   return source_pos_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Position >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
 ReqAckPlayerMove::mutable_source_pos() {
   return &source_pos_;
 }
@@ -11859,7 +11859,7 @@ inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
   }
 }
 
-// required .NFMsg.Position now_pos = 3;
+// required .NFMsg.Vector3 now_pos = 3;
 inline bool ReqAckUseSkill::has_now_pos() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -11870,24 +11870,24 @@ inline void ReqAckUseSkill::clear_has_now_pos() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqAckUseSkill::clear_now_pos() {
-  if (now_pos_ != NULL) now_pos_->::NFMsg::Position::Clear();
+  if (now_pos_ != NULL) now_pos_->::NFMsg::Vector3::Clear();
   clear_has_now_pos();
 }
-inline const ::NFMsg::Position& ReqAckUseSkill::now_pos() const {
+inline const ::NFMsg::Vector3& ReqAckUseSkill::now_pos() const {
   return now_pos_ != NULL ? *now_pos_ : *default_instance_->now_pos_;
 }
-inline ::NFMsg::Position* ReqAckUseSkill::mutable_now_pos() {
+inline ::NFMsg::Vector3* ReqAckUseSkill::mutable_now_pos() {
   set_has_now_pos();
-  if (now_pos_ == NULL) now_pos_ = new ::NFMsg::Position;
+  if (now_pos_ == NULL) now_pos_ = new ::NFMsg::Vector3;
   return now_pos_;
 }
-inline ::NFMsg::Position* ReqAckUseSkill::release_now_pos() {
+inline ::NFMsg::Vector3* ReqAckUseSkill::release_now_pos() {
   clear_has_now_pos();
-  ::NFMsg::Position* temp = now_pos_;
+  ::NFMsg::Vector3* temp = now_pos_;
   now_pos_ = NULL;
   return temp;
 }
-inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Position* now_pos) {
+inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Vector3* now_pos) {
   delete now_pos_;
   now_pos_ = now_pos;
   if (now_pos) {
@@ -11897,7 +11897,7 @@ inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Position* now_pos) {
   }
 }
 
-// required .NFMsg.Position tar_pos = 4;
+// required .NFMsg.Vector3 tar_pos = 4;
 inline bool ReqAckUseSkill::has_tar_pos() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -11908,24 +11908,24 @@ inline void ReqAckUseSkill::clear_has_tar_pos() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void ReqAckUseSkill::clear_tar_pos() {
-  if (tar_pos_ != NULL) tar_pos_->::NFMsg::Position::Clear();
+  if (tar_pos_ != NULL) tar_pos_->::NFMsg::Vector3::Clear();
   clear_has_tar_pos();
 }
-inline const ::NFMsg::Position& ReqAckUseSkill::tar_pos() const {
+inline const ::NFMsg::Vector3& ReqAckUseSkill::tar_pos() const {
   return tar_pos_ != NULL ? *tar_pos_ : *default_instance_->tar_pos_;
 }
-inline ::NFMsg::Position* ReqAckUseSkill::mutable_tar_pos() {
+inline ::NFMsg::Vector3* ReqAckUseSkill::mutable_tar_pos() {
   set_has_tar_pos();
-  if (tar_pos_ == NULL) tar_pos_ = new ::NFMsg::Position;
+  if (tar_pos_ == NULL) tar_pos_ = new ::NFMsg::Vector3;
   return tar_pos_;
 }
-inline ::NFMsg::Position* ReqAckUseSkill::release_tar_pos() {
+inline ::NFMsg::Vector3* ReqAckUseSkill::release_tar_pos() {
   clear_has_tar_pos();
-  ::NFMsg::Position* temp = tar_pos_;
+  ::NFMsg::Vector3* temp = tar_pos_;
   tar_pos_ = NULL;
   return temp;
 }
-inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Position* tar_pos) {
+inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Vector3* tar_pos) {
   delete tar_pos_;
   tar_pos_ = tar_pos;
   if (tar_pos) {
