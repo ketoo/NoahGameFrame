@@ -107,6 +107,7 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
     {
         NFIActorMessage xMessage;
 
+		xMessage.bComponentMsg = true;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
