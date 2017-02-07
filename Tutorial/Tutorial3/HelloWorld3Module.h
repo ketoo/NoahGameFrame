@@ -14,11 +14,17 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
-class HelloWorld3Module
-    : public NFIModule
+class NFIHelloWorld3Module
+	: public NFIModule
+{
+
+};
+
+class NFCHelloWorld3Module
+    : public NFIHelloWorld3Module
 {
 public:
-    HelloWorld3Module(NFIPluginManager* p)
+    NFCHelloWorld3Module(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
