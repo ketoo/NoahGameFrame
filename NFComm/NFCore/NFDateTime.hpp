@@ -238,7 +238,7 @@ public:
 		SetWithTimestamp(timestamp);
 	}
 
-	NFDateTime::~NFDateTime() 
+	~NFDateTime() 
 	{
 	}
 
