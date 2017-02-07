@@ -1,8 +1,8 @@
 #include "HelloWorld1.h"
 
-bool HelloWorld1::Init()
+bool NFCHelloWorld1::Init()
 {
-	std::cout << typeid(HelloWorld1).name() << std::endl;
+	std::cout << typeid(NFCHelloWorld1).name() << std::endl;
 
     
     std::cout << "Hello, world1, Init" << std::endl;
@@ -10,7 +10,7 @@ bool HelloWorld1::Init()
     return true;
 }
 
-bool HelloWorld1::AfterInit()
+bool NFCHelloWorld1::AfterInit()
 {
     
     std::cout << "Hello, world1, AfterInit" << std::endl;
@@ -18,7 +18,7 @@ bool HelloWorld1::AfterInit()
     return true;
 }
 
-bool HelloWorld1::Execute()
+bool NFCHelloWorld1::Execute()
 {
     
     //std::cout << "Hello, world1, Execute" << std::endl;
@@ -26,7 +26,7 @@ bool HelloWorld1::Execute()
     return true;
 }
 
-bool HelloWorld1::BeforeShut()
+bool NFCHelloWorld1::BeforeShut()
 {
     std::cout << "Hello, world1, BeforeShut1111" << std::endl;
 
@@ -38,7 +38,7 @@ bool HelloWorld1::BeforeShut()
     return true;
 }
 
-bool HelloWorld1::Shut()
+bool NFCHelloWorld1::Shut()
 {
     
     std::cout << "Hello, world1, Shut" << std::endl;
