@@ -26,7 +26,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "NFMemoryCounter.h"
+#include "NFMemoryCounter.hpp"
 #include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
@@ -54,7 +54,7 @@ const static NFVector2 NULL_VECTOR2 = NFVector2();
 const static NFVector3 NULL_VECTOR3 = NFVector3();
 
 
-class _NFExport NFIDataList :public NFMemoryCounter
+class _NFExport NFIDataList :public NFMemoryCounter<NFIDataList>
 {
 public:
 	struct Vetor3D

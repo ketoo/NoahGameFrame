@@ -58,7 +58,7 @@
 #define MIN_MILLISECOND             0
 #define MAX_MILLISECOND          1000
 
-class _NFExport NFTimeSpan
+class NFTimeSpan
 {
 public:
 	NFTimeSpan(int seconds)
@@ -187,7 +187,7 @@ protected:
 
 //////////////////////////////////////////////
 
-class _NFExport NFDateTime
+class NFDateTime
 {
 public:
 

@@ -14,17 +14,28 @@
 #include <map>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
-class _NFExport NFMemoryCounter
+template <class T>
+class NFMemoryCounter
 {
 private:
 	NFMemoryCounter() {}
 public:
-	NFMemoryCounter(const std::string& strClassName);
-	virtual ~NFMemoryCounter();
+	NFMemoryCounter(const std::string& strClassName)
+	{
+		mstrClassName = strClassName;
+		mxCounter[mstrClassName]++;
+	}
 
-	static const std::map<std::string, int>& GetCounter();
-private:
+	~NFMemoryCounter()
+	{
+		mxCounter[mstrClassName]--;
+	}
+
 	std::string mstrClassName;
 	static std::map<std::string, int> mxCounter;
 };
+
+template <class T>
+std::map<std::string, int> NFMemoryCounter<T>::mxCounter;
+
 #endif

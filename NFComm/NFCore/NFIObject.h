@@ -30,7 +30,7 @@ enum CLASS_OBJECT_EVENT
 	COE_DESTROY,
 };
 
-class _NFExport NFIObject :public NFMemoryCounter
+class _NFExport NFIObject :public NFMemoryCounter<NFIObject>
 {
 private:
 	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
