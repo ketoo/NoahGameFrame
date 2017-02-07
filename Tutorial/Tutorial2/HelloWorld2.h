@@ -11,12 +11,17 @@
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+class NFIHelloWorld2
+	: public NFIModule
+{
 
-class HelloWorld2
-    : public NFIModule
+};
+
+class NFCHelloWorld2
+    : public NFIHelloWorld2
 {
 public:
-    HelloWorld2(NFIPluginManager* p)
+    NFCHelloWorld2(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
