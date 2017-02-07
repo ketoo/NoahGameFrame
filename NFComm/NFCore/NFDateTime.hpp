@@ -238,8 +238,6 @@ public:
 		SetWithTimestamp(timestamp);
 	}
 
-	
-
 	NFDateTime::~NFDateTime() 
 	{
 	}
