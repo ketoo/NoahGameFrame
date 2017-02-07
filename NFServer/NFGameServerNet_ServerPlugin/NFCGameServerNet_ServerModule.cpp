@@ -238,12 +238,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		return;
 	}
 
-	pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
-	pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
-
-	m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
-
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 0, NFCDataList());
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
