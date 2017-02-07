@@ -43,14 +43,30 @@
 
 #endif
 
-class _NFExport NFCMemManager: public NFSingleton<NFCMemManager>
+class NFCMemManager: public NFSingleton<NFCMemManager>
 {
 public:
-    NFCMemManager();
-    ~NFCMemManager();
+	NFCMemManager()
+	{
+
+	}
+
+	~NFCMemManager()
+	{
+
+	}
+
 
 public:
-    virtual void FreeMem();
+	void FreeMem()
+	{
+
+#ifdef NF_USE_TCMALLOC
+
+		MallocExtension::instance()->ReleaseFreeMemory();
+#endif
+
+	}
 
 private:
 
