@@ -76,8 +76,12 @@ NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 
 bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const int from)
 {
-	mxQueue.Push(message);
-	return true;
+	if (!message.bComponentMsg)
+	{
+		return mxQueue.Push(message);
+	}
+
+	return false;
 }
 
 bool NFCActorModule::ExecuteEvent()
@@ -87,7 +91,7 @@ bool NFCActorModule::ExecuteEvent()
 	bRet = mxQueue.Pop(xMsg);
 	while (bRet)
 	{
-		if (xMsg.nMsgID == 0)
+		if (!xMsg.bComponentMsg)
 		{
 			xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
 			//Actor can be reused in ActorPool mode, so we don't release it.
@@ -107,6 +111,7 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
     {
         NFIActorMessage xMessage;
 
+		xMessage.bComponentMsg = true;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
