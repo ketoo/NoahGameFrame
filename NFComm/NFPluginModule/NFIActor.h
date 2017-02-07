@@ -45,7 +45,7 @@ protected:
 private:
     void Handler(const NFIActorMessage& message, const Theron::Address from)
     {
-        if (message.nMsgID > 0 )
+        if (message.bComponentMsg > 0 )
         {
             HandlerSelf(message, from);
 
