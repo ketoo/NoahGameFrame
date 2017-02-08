@@ -23,12 +23,12 @@ public:
 
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, NF_SHARE_PTR<NFIProperty> pProperty) = 0;
 
-    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType) = 0;
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType) = 0;
 
     virtual const NFGUID& Self() = 0;
 
     //////////////////////////////////////////////////////////////////////////
-    virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData) = 0;
+    virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData) = 0;
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue) = 0;
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue) = 0;

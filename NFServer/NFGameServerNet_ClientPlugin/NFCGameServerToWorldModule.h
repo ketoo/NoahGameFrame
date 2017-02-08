@@ -50,7 +50,7 @@ protected:
     void RefreshWorldInfo();
     void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 private:
     void SendOnline(const NFGUID& self);

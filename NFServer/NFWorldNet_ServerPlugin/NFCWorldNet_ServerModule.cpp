@@ -415,7 +415,7 @@ bool NFCWorldNet_ServerModule::SendMsgToGame(const int nGameID, const NFMsg::EGa
     return true;
 }
 
-bool NFCWorldNet_ServerModule::SendMsgToGame(const NFIDataList& argObjectVar, const NFIDataList& argGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
+bool NFCWorldNet_ServerModule::SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData)
 {
     if (argGameID.GetCount() != argObjectVar.GetCount())
     {
@@ -444,7 +444,7 @@ bool NFCWorldNet_ServerModule::SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, g
     return SendMsgToGame(nGameID, eMsgID, xData, nPlayer);
 }
 
-int NFCWorldNet_ServerModule::OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar)
+int NFCWorldNet_ServerModule::OnObjectListEnter(const NFDataList& self, const NFDataList& argVar)
 {
     if (self.GetCount() <= 0 || argVar.GetCount() <= 0)
     {
@@ -496,7 +496,7 @@ int NFCWorldNet_ServerModule::OnObjectListEnter(const NFIDataList& self, const N
 }
 
 
-int NFCWorldNet_ServerModule::OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar)
+int NFCWorldNet_ServerModule::OnObjectListLeave(const NFDataList& self, const NFDataList& argVar)
 {
     if (self.GetCount() <= 0 || argVar.GetCount() <= 0)
     {
@@ -532,7 +532,7 @@ int NFCWorldNet_ServerModule::OnObjectListLeave(const NFIDataList& self, const N
 }
 
 
-int NFCWorldNet_ServerModule::OnRecordEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self)
+int NFCWorldNet_ServerModule::OnRecordEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self)
 {
     if (argVar.GetCount() <= 0 || self.IsNull())
     {
@@ -638,11 +638,11 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
             for (int j = 0; j < pRecord->GetCols(); j++)
             {
                 
-                NFCDataList valueList;
-                TDATA_TYPE eType = pRecord->GetColType(j);
+                NFDataList valueList;
+                NFDATA_TYPE eType = pRecord->GetColType(j);
                 switch (eType)
                 {
-                    case TDATA_TYPE::TDATA_INT:
+                    case NFDATA_TYPE::TDATA_INT:
                     {
                         int nValue = pRecord->GetInt(i, j);
                         //if ( 0 != nValue )
@@ -654,7 +654,7 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
                         }
                     }
                     break;
-                    case TDATA_TYPE::TDATA_FLOAT:
+                    case NFDATA_TYPE::TDATA_FLOAT:
                     {
                         double dwValue = pRecord->GetFloat(i, j);
                         //if ( dwValue < -0.01f || dwValue > 0.01f )
@@ -666,7 +666,7 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
                         }
                     }
                     break;
-                    case TDATA_TYPE::TDATA_STRING:
+                    case NFDATA_TYPE::TDATA_STRING:
                     {
                         const std::string& strData = pRecord->GetString(i, j);
                         //if ( !strData.empty() )
@@ -678,7 +678,7 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
                         }
                     }
                     break;
-                    case TDATA_TYPE::TDATA_OBJECT:
+                    case NFDATA_TYPE::TDATA_OBJECT:
                     {
                         NFGUID ident = pRecord->GetObject(i, j);
                         //if ( !ident.IsNull() )
@@ -700,7 +700,7 @@ bool NFCWorldNet_ServerModule::OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord
     return true;
 }
 
-int NFCWorldNet_ServerModule::OnPropertyEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self)
+int NFCWorldNet_ServerModule::OnPropertyEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self)
 {
     if (argVar.GetCount() <= 0 || self.IsNull())
     {
