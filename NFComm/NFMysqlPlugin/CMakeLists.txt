@@ -12,10 +12,10 @@ if(UNIX)
 		${SolutionDir}/Dependencies/mysql/
 		${SolutionDir}/Dependencies/mysqlpp/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Release/mysqlclient.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Release/libmysqlclient.a)
 		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Release/libmysqlpp.a)
 	else()
-		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Debug/mysqlclient.a)
+		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Debug/libmysqlclient.a)
 		target_link_libraries(NFMysqlPlugin ../../Dependencies/lib/Debug/libmysqlpp.a)
 	endif()
 	add_definitions(
