@@ -83,11 +83,13 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFUrlModule.cpp" />
-		<Unit filename="NFUrlModule.h" />
-		<Unit filename="NFUrlPlugin.cpp" />
-		<Unit filename="NFUrlPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp/>
+<Unit filename="NFCUrlClientModule.cpp" />
+<Unit filename="NFCUrlCodeModule.cpp" />
+<Unit filename="NFUrlPlugin.cpp" />
+<Unit filename="NFCUrlClientModule.h" />
+<Unit filename="NFCUrlCodeModule.h" />
+<Unit filename="NFUrlPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
