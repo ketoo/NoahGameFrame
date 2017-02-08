@@ -53,12 +53,15 @@ protected:
 	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb);
 
 	virtual bool AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
-	virtual bool AddAfterEnterSceneCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
-	virtual bool AddBeforeLeaveSceneCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+
+	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
 protected:
 	bool CreateSceneObject(const int nSceneID, const int nGroupID);
-	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
+	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
 protected:
 	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
@@ -71,8 +74,11 @@ protected:
 	int GetBroadCastObject(const NFGUID& self, const std::string& strPropertyName, const bool bTable, NFIDataList& valueObject);
 
 	int EnterSceneCondition(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
-	int AfterEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
-	int BeforeLeaveScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+
+	int BeforeLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int AfterLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int BeforeEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
 
 protected:
 	////////////////interface for broadcast event//////////////////////////////////
@@ -98,8 +104,10 @@ private:
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR> mtRecordSingleCallback;
 
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtEnterSceneConditionCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeEnterSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterEnterSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeLeaveSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterLeaveSceneCallback;
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pClassModule;
