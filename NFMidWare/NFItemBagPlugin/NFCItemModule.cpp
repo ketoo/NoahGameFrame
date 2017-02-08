@@ -52,7 +52,7 @@ bool NFCItemModule::AfterInit()
 	return true;
 }
 
-int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -66,7 +66,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
+int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var)
 {
 	return 0;
 }
@@ -325,9 +325,9 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		NFIItemCardConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemCardConsumeProcessModule>(eItemType);
 		if (pConsumeProcessModule)
 		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
 			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 			}
 		}
 
@@ -338,9 +338,9 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		NFIItemEquipConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemEquipConsumeProcessModule>(eItemType);
 		if (pConsumeProcessModule)
 		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
 			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 			}
 		}
 
@@ -351,9 +351,9 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		NFIItemGemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemGemConsumeProcessModule>(eItemType);
 		if (pConsumeProcessModule)
 		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
 			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 			}
 		}
 
@@ -364,7 +364,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		NFIItemItemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemItemConsumeProcessModule>(eItemType);
 		if (pConsumeProcessModule)
 		{
-			NFCDataList xTarget;
+			NFDataList xTarget;
 			xTarget.AddObject(xTargetID);
 			xTarget.AddString(xMsg.item().item_id());	//this is Item Config ID
 			xTarget.AddInt(xMsg.item().item_count());	//this is Item Count to Consume
@@ -382,9 +382,9 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 		NFIItemTokenConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemTokenConsumeProcessModule>(eItemType);
 		if (pConsumeProcessModule)
 		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
 			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
+				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 			}
 		}
 

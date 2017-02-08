@@ -34,10 +34,10 @@ public:
 	virtual bool AfterInit();
 
 	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
 	
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
 private:
 	NFIKernelModule* m_pKernelModule;

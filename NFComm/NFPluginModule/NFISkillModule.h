@@ -46,7 +46,7 @@ public:
 
     virtual int AddNewerSkill(const NFGUID& self) = 0;
 
-    virtual int OnUseSkill(const NFGUID& self, const NFIDataList& var) = 0;
+    virtual int OnUseSkill(const NFGUID& self, const NFDataList& var) = 0;
 };
 
 #endif

@@ -74,12 +74,12 @@ bool NFCSceneAOIModule::Execute()
     return true;
 }
 
-bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
+bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList)
 {
 	return RequestEnterScene(self, nSceneID, -1, nType, argList);
 }
 
-bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
+bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
 {
 	const int nNowSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
@@ -119,7 +119,7 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	{
 		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::NPC::ClassName());
 
-		NFCDataList arg;
+		NFDataList arg;
 		arg << NFrame::NPC::X() << pResource->vSeedPos.X();
 		arg << NFrame::NPC::Y() << pResource->vSeedPos.Y();
 		arg << NFrame::NPC::Z() << pResource->vSeedPos.Z();
@@ -224,7 +224,7 @@ bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID
 	return false;
 }
 
-int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
+int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	if (NFrame::Player::GroupID() == strPropertyName)
 	{
@@ -246,7 +246,7 @@ int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::str
 		}
 	}
 
-	NFCDataList valueBroadCaseList;
+	NFDataList valueBroadCaseList;
 	if (GetBroadCastObject(self, strPropertyName, false, valueBroadCaseList) <= 0)
 	{
 		return 0;
@@ -257,7 +257,7 @@ int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::str
 	return 0;
 }
 
-int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
+int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
 	const std::string& strRecordName = xEventData.strRecordName;
 	const int nOpType = xEventData.nOpType;
@@ -281,7 +281,7 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 		}
 	}
 	
-	NFCDataList valueBroadCaseList;
+	NFDataList valueBroadCaseList;
 	GetBroadCastObject(self, strRecordName, true, valueBroadCaseList);
 
 	OnRecordEvent(self, strRecordName, xEventData, oldVar, newVar, valueBroadCaseList);
@@ -289,7 +289,7 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 	return 0;
 }
 
-int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList & var)
+int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -301,9 +301,9 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 			return 0;
 		}
 
-		NFCDataList valueAllObjectList;
-		NFCDataList valueBroadCastList;
-		NFCDataList valueBroadListNoSelf;
+		NFDataList valueAllObjectList;
+		NFDataList valueBroadCastList;
+		NFDataList valueBroadListNoSelf;
 
 		m_pKernelModule->GetGroupObjectList(nObjectSceneID, nObjectGroupID, valueAllObjectList);
 
@@ -323,7 +323,7 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 		}
 
 		//tell other people that you want to leave from this scene or this group
-		OnObjectListLeave(valueBroadListNoSelf, NFCDataList() << self);
+		OnObjectListLeave(valueBroadListNoSelf, NFDataList() << self);
 	}
 
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
@@ -338,11 +338,11 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 		if (strClassName == NFrame::Player::ThisName())
 		{
 			//tell youself<client>, u want to enter this scene or this group
-			OnObjectListEnter(NFCDataList() << self, NFCDataList() << self);
+			OnObjectListEnter(NFDataList() << self, NFDataList() << self);
 
 			//tell youself<client>, u want to broad your properties and records to youself
-			OnPropertyEnter(NFCDataList() << self, self);
-			OnRecordEnter(NFCDataList() << self, self);
+			OnPropertyEnter(NFDataList() << self, self);
+			OnRecordEnter(NFDataList() << self, self);
 		}
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
@@ -353,7 +353,7 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 	return 0;
 }
 
-int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
+int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//this event only happened in the same group
 	int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
@@ -361,8 +361,8 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 	if (nOldGroupID > 0)
 	{
 		//jump to 0 group from this group<nOldGroupID>
-		NFCDataList valueAllOldObjectList;
-		NFCDataList valueAllOldPlayerList;
+		NFDataList valueAllOldObjectList;
+		NFDataList valueAllOldPlayerList;
 		m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldObjectList);
 		if (valueAllOldObjectList.GetCount() > 0)
 		{
@@ -382,11 +382,11 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 				}
 			}
 
-			OnObjectListLeave(valueAllOldPlayerList, NFCDataList() << self);
-			OnObjectListLeave(NFCDataList() << self, valueAllOldObjectList);
+			OnObjectListLeave(valueAllOldPlayerList, NFDataList() << self);
+			OnObjectListLeave(NFDataList() << self, valueAllOldObjectList);
 		}
 
-		int nReason = AfterLeaveScene(self, nSceneID, nOldGroupID, 0, NFCDataList());
+		int nReason = AfterLeaveScene(self, nSceneID, nOldGroupID, 0, NFDataList());
 		if (nReason == 0)
 		{
 			m_pKernelModule->ReleaseGroupScene(nSceneID, nOldGroupID);
@@ -397,10 +397,10 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 	if (nNewGroupID > 0)
 	{
 		//jump to this group<nNewGroupID> from 0 group
-		NFCDataList valueAllObjectList;
-		NFCDataList valueAllObjectListNoSelf;
-		NFCDataList valuePlayerList;
-		NFCDataList valuePlayerListNoSelf;
+		NFDataList valueAllObjectList;
+		NFDataList valueAllObjectListNoSelf;
+		NFDataList valuePlayerList;
+		NFDataList valuePlayerListNoSelf;
 		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllObjectList);
 		for (int i = 0; i < valueAllObjectList.GetCount(); i++)
 		{
@@ -423,7 +423,7 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 
 		if (valuePlayerListNoSelf.GetCount() > 0)
 		{
-			OnObjectListEnter(valuePlayerListNoSelf, NFCDataList() << self);
+			OnObjectListEnter(valuePlayerListNoSelf, NFDataList() << self);
 		}
 
 		const std::string& strSelfClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
@@ -432,7 +432,7 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 		{
 			if (strSelfClassName == NFrame::Player::ThisName())
 			{
-				OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
+				OnObjectListEnter(NFDataList() << self, valueAllObjectListNoSelf);
 			}
 		}
 
@@ -442,8 +442,8 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 			{
 				NFGUID identOld = valueAllObjectListNoSelf.Object(i);
 
-				OnPropertyEnter(NFCDataList() << self, identOld);
-				OnRecordEnter(NFCDataList() << self, identOld);
+				OnPropertyEnter(NFDataList() << self, identOld);
+				OnRecordEnter(NFDataList() << self, identOld);
 			}
 		}
 
@@ -457,18 +457,18 @@ int NFCSceneAOIModule::OnGroupEvent(const NFGUID & self, const std::string & str
 	return 0;
 }
 
-int NFCSceneAOIModule::OnSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
+int NFCSceneAOIModule::OnSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	int nOldSceneID = oldVar.GetInt();
 	int nNowSceneID = newVar.GetInt();
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Enter Scene:", nNowSceneID);
 
-	NFCDataList valueOldAllObjectList;
-	NFCDataList valueNewAllObjectList;
-	NFCDataList valueAllObjectListNoSelf;
-	NFCDataList valuePlayerList;
-	NFCDataList valuePlayerNoSelf;
+	NFDataList valueOldAllObjectList;
+	NFDataList valueNewAllObjectList;
+	NFDataList valueAllObjectListNoSelf;
+	NFDataList valuePlayerList;
+	NFDataList valuePlayerNoSelf;
 
 	m_pKernelModule->GetGroupObjectList(nOldSceneID, 0, valueOldAllObjectList);
 	m_pKernelModule->GetGroupObjectList(nNowSceneID, 0, valueNewAllObjectList);
@@ -503,20 +503,20 @@ int NFCSceneAOIModule::OnSceneEvent(const NFGUID & self, const std::string & str
 
 	//////////////////////////////////////////////////////////////////////////
 
-	OnObjectListLeave(NFCDataList() << self, valueOldAllObjectList);
+	OnObjectListLeave(NFDataList() << self, valueOldAllObjectList);
 
 	if (valuePlayerList.GetCount() > 0)
 	{
-		OnObjectListEnter(valuePlayerNoSelf, NFCDataList() << self);
+		OnObjectListEnter(valuePlayerNoSelf, NFDataList() << self);
 	}
 
-	OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
+	OnObjectListEnter(NFDataList() << self, valueAllObjectListNoSelf);
 
 	for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
 	{
 		NFGUID identOld = valueAllObjectListNoSelf.Object(i);
-		OnPropertyEnter(NFCDataList() << self, identOld);
-		OnRecordEnter(NFCDataList() << self, identOld);
+		OnPropertyEnter(NFDataList() << self, identOld);
+		OnRecordEnter(NFDataList() << self, identOld);
 	}
 
 	if (valuePlayerNoSelf.GetCount() > 0)
@@ -528,7 +528,7 @@ int NFCSceneAOIModule::OnSceneEvent(const NFGUID & self, const std::string & str
 	return 0;
 }
 
-int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFIDataList & valueObject)
+int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFDataList & valueObject)
 {
 	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
@@ -592,7 +592,7 @@ int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string
 	return valueObject.GetCount();
 }
 
-int NFCSceneAOIModule::BeforeEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::BeforeEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<BEFORE_ENTER_SCENE_FUNCTOR_PTR>::iterator it = mtBeforeEnterSceneCallback.begin();
 	for (; it != mtBeforeEnterSceneCallback.end(); it++)
@@ -609,7 +609,7 @@ int NFCSceneAOIModule::BeforeEnterScene(const NFGUID & self, const int nSceneID,
 	return 0;
 }
 
-int NFCSceneAOIModule::AfterEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::AfterEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<AFTER_ENTER_SCENE_FUNCTOR_PTR>::iterator it = mtBeforeEnterSceneCallback.begin();
 	for (; it != mtBeforeEnterSceneCallback.end(); it++)
@@ -622,7 +622,7 @@ int NFCSceneAOIModule::AfterEnterScene(const NFGUID & self, const int nSceneID, 
 	return 0;
 }
 
-int NFCSceneAOIModule::BeforeLeaveScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::BeforeLeaveScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<BEFORE_LEAVE_SCENE_FUNCTOR_PTR>::iterator it = mtBeforeLeaveSceneCallback.begin();
 	for (; it != mtBeforeLeaveSceneCallback.end(); it++)
@@ -635,7 +635,7 @@ int NFCSceneAOIModule::BeforeLeaveScene(const NFGUID & self, const int nSceneID,
 	return 0;
 }
 
-int NFCSceneAOIModule::AfterLeaveScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::AfterLeaveScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	std::vector<AFTER_LEAVE_SCENE_FUNCTOR_PTR>::iterator it = mtAfterLeaveSceneCallback.begin();
 	for (; it != mtAfterLeaveSceneCallback.end(); it++)
@@ -648,7 +648,7 @@ int NFCSceneAOIModule::AfterLeaveScene(const NFGUID & self, const int nSceneID, 
 	return 0;
 }
 
-int NFCSceneAOIModule::OnObjectListEnter(const NFIDataList & self, const NFIDataList & argVar)
+int NFCSceneAOIModule::OnObjectListEnter(const NFDataList & self, const NFDataList & argVar)
 {
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtObjectEnterCallback.begin();
 	for (; it != mtObjectEnterCallback.end(); it++)
@@ -661,7 +661,7 @@ int NFCSceneAOIModule::OnObjectListEnter(const NFIDataList & self, const NFIData
 	return 0;
 }
 
-int NFCSceneAOIModule::OnObjectListLeave(const NFIDataList & self, const NFIDataList & argVar)
+int NFCSceneAOIModule::OnObjectListLeave(const NFDataList & self, const NFDataList & argVar)
 {
 	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR>::iterator it = mtObjectLeaveCallback.begin();
 	for (; it != mtObjectLeaveCallback.end(); it++)
@@ -674,7 +674,7 @@ int NFCSceneAOIModule::OnObjectListLeave(const NFIDataList & self, const NFIData
 	return 0;
 }
 
-int NFCSceneAOIModule::OnPropertyEnter(const NFIDataList & argVar, const NFGUID & self)
+int NFCSceneAOIModule::OnPropertyEnter(const NFDataList & argVar, const NFGUID & self)
 {
 	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtPropertyEnterCallback.begin();
 	for (; it != mtPropertyEnterCallback.end(); it++)
@@ -687,7 +687,7 @@ int NFCSceneAOIModule::OnPropertyEnter(const NFIDataList & argVar, const NFGUID 
 	return 0;
 }
 
-int NFCSceneAOIModule::OnRecordEnter(const NFIDataList & argVar, const NFGUID & self)
+int NFCSceneAOIModule::OnRecordEnter(const NFDataList & argVar, const NFGUID & self)
 {
 	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtRecordEnterCallback.begin();
 	for (; it != mtRecordEnterCallback.end(); it++)
@@ -700,7 +700,7 @@ int NFCSceneAOIModule::OnRecordEnter(const NFIDataList & argVar, const NFGUID & 
 	return 0;
 }
 
-int NFCSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
+int NFCSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
 {
 	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mtPropertySingleCallback.begin();
 	for (; it != mtPropertySingleCallback.end(); it++)
@@ -713,7 +713,7 @@ int NFCSceneAOIModule::OnPropertyEvent(const NFGUID & self, const std::string & 
 	return 0;
 }
 
-int NFCSceneAOIModule::OnRecordEvent(const NFGUID & self, const std::string& strProperty, const RECORD_EVENT_DATA & xEventData, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar, const NFIDataList& argVar)
+int NFCSceneAOIModule::OnRecordEvent(const NFGUID & self, const std::string& strProperty, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList& argVar)
 {
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR>::iterator it = mtRecordSingleCallback.begin();
 	for (; it != mtRecordSingleCallback.end(); it++)

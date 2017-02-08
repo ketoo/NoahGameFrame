@@ -56,7 +56,7 @@ protected:
 
 	const bool AttachData(const NFGUID& self);
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
