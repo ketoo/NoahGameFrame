@@ -27,28 +27,12 @@
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Debug/NFCore_d.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Debug/libmysqlclient.a" />
 					<Add library="libprotobuf" />
-					<Add directory="$(SolutionDir)/_Out/Comm/Debug/" />
+					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/NFLoginServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/NFWorldServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/NFMasterServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/NFProxyServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/NFGameServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial5/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial6/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Debug/NFMysqlClusterPlugin_d.so $(SolutionDir)/_Out/Debug/Tutorial7/" />
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -73,26 +57,12 @@
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Comm/Release/NFCore.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlpp.a" />
 					<Add library="$(SolutionDir)/Dependencies/lib/Release/libmysqlclient.a" />
 					<Add library="libprotobuf" />
-					<Add directory="$(SolutionDir)/_Out/Comm/Release/" />
+					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/NFLoginServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/NFWorldServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/NFMasterServer/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/NFProxyServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/NFGameServer1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/Tutorial1/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/Tutorial2/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/Tutorial3/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/Tutorial4/" />
-					<Add after="cp -f $(SolutionDir)/_Out/Comm/Release/NFMysqlClusterPlugin.so $(SolutionDir)/_Out/Release/Tutorial5/" />
-					<Mode after="always" />
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -112,8 +82,8 @@
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

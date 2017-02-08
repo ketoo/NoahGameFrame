@@ -63,11 +63,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCDynLib.cpp" />
-		<Unit filename="NFCDynLib.h" />
-		<Unit filename="NFCPluginManager.cpp" />
-		<Unit filename="NFCPluginManager.h" />
-		<Unit filename="NFPluginLoader.cpp" />
+<Unit filename="NFCDynLib.h" />
+<Unit filename="NFCPluginManager.h" />
+<Unit filename="NFCDynLib.cpp" />
+<Unit filename="NFCPluginManager.cpp" />
+<Unit filename="NFPluginLoader.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
