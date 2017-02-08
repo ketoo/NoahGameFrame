@@ -63,7 +63,6 @@
 <Unit filename="minizip\ioapi_mem.c" />
 <Unit filename="minizip\unzip.c" />
 <Unit filename="main.cpp" />
-<Unit filename="tinyxml2\tinyxml2.cpp" />
 <Unit filename="zlib\adler32.c" />
 <Unit filename="zlib\compress.c" />
 <Unit filename="zlib\crc32.c" />
