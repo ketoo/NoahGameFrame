@@ -218,7 +218,7 @@ void NFCGameServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_
 	}
 }
 
-int NFCGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (strClassName == NFrame::Player::ThisName())
 	{

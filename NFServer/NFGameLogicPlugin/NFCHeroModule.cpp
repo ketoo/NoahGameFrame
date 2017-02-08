@@ -54,7 +54,7 @@ bool NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIDataList> xRowData = pHeroRecord->GetInitData();
+	NF_SHARE_PTR<NFDataList> xRowData = pHeroRecord->GetInitData();
 
 	NFGUID xHeroID = m_pKernelModule->CreateGUID();
 	xRowData->SetObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
@@ -87,14 +87,14 @@ bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const 
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varFind) <= 0)
 	{
 		return false;
 	}
 
 	const int nRow = varFind.Int(0);
-	NFCDataList varRowData;
+	NFDataList varRowData;
 	if (!pHeroRecord->QueryRow(nRow, varRowData))
 	{
 		return false;
@@ -139,7 +139,7 @@ bool NFCHeroModule::HeroStarUp(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varFind) <= 0)
 	{
 		return false;
@@ -177,7 +177,7 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 		return false;
 	}
 
-	NFCDataList xMatchList;
+	NFDataList xMatchList;
 	int nMatchCout = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xMatchList);
 	if (nMatchCout != 1)
 	{
@@ -185,7 +185,7 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 	}
 
 	const int nRow = xMatchList.Int(0);
-	NFCDataList varRowData;
+	NFDataList varRowData;
 	if (!pHeroRecord->QueryRow(nRow, varRowData))
 	{
 		return false;
@@ -222,7 +222,7 @@ bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, cons
 		return false;
 	}
 
-	NFCDataList xMatchList;
+	NFDataList xMatchList;
 	int nMatchCout = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xMatchList);
 	if (nMatchCout != 1)
 	{
@@ -230,7 +230,7 @@ bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, cons
 	}
 
 	const int nRow = xMatchList.Int(0);
-	NFCDataList varRowData;
+	NFDataList varRowData;
 	if (!pHeroRecord->QueryRow(nRow, varRowData))
 	{
 		return false;
@@ -262,7 +262,7 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const int nPos, const NFGUI
 		return false;
 	}
 
-	NFCDataList varHeroID;
+	NFDataList varHeroID;
 	int nHeroCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varHeroID);
 	if (nHeroCount != 1)
 	{
@@ -281,7 +281,7 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const int nPos, const NFGUI
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIDataList> xRowData = pFightHeroRecord->GetInitData();
+	NF_SHARE_PTR<NFDataList> xRowData = pFightHeroRecord->GetInitData();
 
 	xRowData->SetObject(NFrame::Player::PlayerFightHero::PlayerFightHero_GUID, xHeroID);
 	if (pFightHeroRecord->AddRow(nPos, *xRowData) < 0)
@@ -312,7 +312,7 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	int nHeroCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xDataList);
 	if (nHeroCount != 1)
 	{
@@ -322,13 +322,13 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 	const int nRow = xDataList.Int(0);
 	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero_ConfigID);
 
-    NFCDataList varList;
+    NFDataList varList;
 
     int nCamp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Camp());
     varList << NFrame::NPC::Camp() << nCamp;
     varList << NFrame::NPC::MasterID() << self;
 
-	NF_SHARE_PTR<NFIObject> pHero = m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strConfigID, NFCDataList());
+	NF_SHARE_PTR<NFIObject> pHero = m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strConfigID, NFDataList());
     if (!pHero)
     {
         return false;
@@ -349,7 +349,7 @@ bool NFCHeroModule::DestroyHero(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	int nHeroCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xDataList);
 	if (nHeroCount != 1)
 	{
@@ -375,7 +375,7 @@ NFGUID NFCHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
 		return NFGUID();
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	int nHeroCount = pHeroRecord->FindString(NFrame::Player::PlayerHero_ConfigID, strID.c_str(), xDataList);
 	if (nHeroCount != 1)
 	{
@@ -399,7 +399,7 @@ bool NFCHeroModule::HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, con
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	int nHeroCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, xDataList);
 	if (nHeroCount != 1)
 	{

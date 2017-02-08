@@ -11,7 +11,7 @@
 
 #include "NFMap.hpp"
 #include "NFList.hpp"
-#include "NFCDataList.h"
+#include "NFDataList.hpp"
 #include "NFIProperty.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 class _NFExport NFCProperty : public NFIProperty
@@ -20,11 +20,11 @@ private:
     NFCProperty();
 
 public:
-    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType);
+    NFCProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType);
 
     virtual ~NFCProperty();
 
-    virtual void SetValue(const NFIDataList::TData& TData);
+    virtual void SetValue(const NFData& TData);
     virtual void SetValue(const NFIProperty* pProperty);
 
     virtual bool SetInt(const NFINT64 value);
@@ -34,7 +34,7 @@ public:
 	virtual bool SetVector2(const NFVector2& value);
 	virtual bool SetVector3(const NFVector3& value);
 
-    virtual const TDATA_TYPE GetType() const;
+    virtual const NFDATA_TYPE GetType() const;
     virtual const bool GeUsed() const;
     virtual const std::string& GetKey() const;
     virtual const bool GetSave() const;
@@ -58,7 +58,7 @@ public:
 	virtual const NFVector2& GetVector2() const;
 	virtual const NFVector3& GetVector3() const;
 
-    virtual const NFIDataList::TData& GetValue() const;
+    virtual const NFData& GetValue() const;
     virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const;
     virtual const NF_SHARE_PTR<NFMapEx<std::string, std::string>> GetEmbeddedMap() const;
 
@@ -71,7 +71,7 @@ public:
     virtual void RegisterCallback(const PROPERTY_EVENT_FUNCTOR_PTR& cb);
 
 private:
-    int OnEventHandler(const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
+    int OnEventHandler(const NFData& oldVar, const NFData& newVar);
 
 private:
     typedef std::vector<PROPERTY_EVENT_FUNCTOR_PTR> TPROPERTYCALLBACKEX;
@@ -79,9 +79,9 @@ private:
 
     NFGUID mSelf;
     std::string msPropertyName;
-    TDATA_TYPE eType;
+    NFDATA_TYPE eType;
 
-    NF_SHARE_PTR<NFIDataList::TData> mxData;
+    NF_SHARE_PTR<NFData> mxData;
     NF_SHARE_PTR<NFMapEx<std::string, std::string>> mxEmbeddedMap;
     NF_SHARE_PTR<NFList<std::string>> mxEmbeddedList;
 
