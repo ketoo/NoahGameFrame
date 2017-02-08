@@ -19,7 +19,7 @@ class _NFExport NFIRecordManager
 public:
     virtual ~NFIRecordManager() {}
 
-    virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFGUID& self, const std::string& strRecordName, const NF_SHARE_PTR<NFIDataList>& TData, const NF_SHARE_PTR<NFIDataList>& tagData, const int nRows) = 0;
+    virtual NF_SHARE_PTR<NFIRecord> AddRecord(const NFGUID& self, const std::string& strRecordName, const NF_SHARE_PTR<NFDataList>& TData, const NF_SHARE_PTR<NFDataList>& tagData, const int nRows) = 0;
     virtual const NFGUID& Self() = 0;
     //////////////////////////////////////////////////////////////////////////
 

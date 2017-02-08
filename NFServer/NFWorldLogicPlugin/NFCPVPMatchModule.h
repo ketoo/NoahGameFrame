@@ -39,7 +39,7 @@ public:
     virtual bool AfterInit();
 
     virtual bool ApplyPVP(const NFGUID& self, const int nPVPMode, const int nScore);
-    virtual bool TeamApplyPVP(const NFGUID& xTeam, const NFIDataList& varMemberList, int nPVPMODE, const int nScore);
+    virtual bool TeamApplyPVP(const NFGUID& xTeam, const NFDataList& varMemberList, int nPVPMODE, const int nScore);
     virtual int GetGradeByScore(const int nScore);
     virtual int GetMemberCount(const int nPVPMode);
 
