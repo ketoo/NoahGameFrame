@@ -179,7 +179,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
                 
                 int nPropertyGroupCol = 0;
                 int nPropertyBuffGroupRow = 0;
-                TDATA_TYPE eColType = pPropertyGroupRecord->GetColType( nPropertyGroupCol );
+                NFDATA_TYPE eColType = pPropertyGroupRecord->GetColType( nPropertyGroupCol );
 
                 if ( NFIBuffConfigModule::BuffReverseType::ERT_NEED_REVERSE == pBuffConfig->NeedReverseType )
                 {
@@ -201,7 +201,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
                 else if ( NFIBuffConfigModule::BuffReverseType::ERT_NO_REVERSE == pBuffConfig->NeedReverseType )
                 {
                     
-                    NFIDataList::TData valueEffectValue;
+                    NFData valueEffectValue;
                     switch ( eColType )
                     {
                         case TDATA_INT:
@@ -216,7 +216,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
                             break;
                     }
 
-                    //const NFIDataList& oldValue = pProperty->GetValue();
+                    //const NFDataList& oldValue = pProperty->GetValue();
                     pObject->GetPropertyManager()->SetProperty( strPropertyName, valueEffectValue );
                 }
 
@@ -224,7 +224,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
             }
 
             
-            NFCDataList valueBuffProperty;
+            NFDataList valueBuffProperty;
             valueBuffProperty.AddString( strPropertyName.c_str() );
             valueBuffProperty.AddObject( releaserIdent );
             valueBuffProperty.AddFloat( pBuffConfig->EffectTimeInterval );

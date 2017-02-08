@@ -35,14 +35,14 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-	virtual bool DoEvent(const NFEventDefine nEventID, const NFIDataList& valueList);
+	virtual bool DoEvent(const NFEventDefine nEventID, const NFDataList& valueList);
 
 	virtual bool ExistEventCallBack(const NFEventDefine nEventID);
 
 	virtual bool RemoveEventCallBack(const NFEventDefine nEventID);
 
 	//////////////////////////////////////////////////////////
-	virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList& valueList);
+	virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFDataList& valueList);
 
 	virtual bool ExistEventCallBack(const NFGUID self, const NFEventDefine nEventID);
 

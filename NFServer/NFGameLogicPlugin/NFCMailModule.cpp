@@ -22,22 +22,22 @@ bool NFCMailModule::AfterInit()
     return true;
 }
 
-bool NFCMailModule::SendMail(const NFGUID& reciever, const int nMailType, const NFIDataList& xItemList, const std::string& strNailContent/* = NULL_STR*/)
+bool NFCMailModule::SendMail(const NFGUID& reciever, const int nMailType, const NFDataList& xItemList, const std::string& strNailContent/* = NULL_STR*/)
 {
     return true;
 }
 
-int NFCMailModule::OnDrawMail(const NFGUID& self, const NFIDataList& var)
+int NFCMailModule::OnDrawMail(const NFGUID& self, const NFDataList& var)
 {
     return 0;
 }
 
-int NFCMailModule::OnOpenMail(const NFGUID& self, const NFIDataList& var)
+int NFCMailModule::OnOpenMail(const NFGUID& self, const NFDataList& var)
 {
     return 0;
 }
 
-int NFCMailModule::OnDeleteMail(const NFGUID& self, const NFIDataList& var)
+int NFCMailModule::OnDeleteMail(const NFGUID& self, const NFDataList& var)
 {
     return 0;
 }
