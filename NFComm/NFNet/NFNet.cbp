@@ -54,12 +54,12 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCHttpNet.cpp" />
-		<Unit filename="NFCHttpNet.h" />
-		<Unit filename="NFCNet.cpp" />
-		<Unit filename="NFCNet.h" />
-		<Unit filename="NFIHttpNet.h" />
-		<Unit filename="NFINet.h" />
+<Unit filename="NFCNet.cpp" />
+<Unit filename="NFCHttpNet.cpp" />
+<Unit filename="NFCNet.h" />
+<Unit filename="NFIHttpNet.h" />
+<Unit filename="NFINet.h" />
+<Unit filename="NFCHttpNet.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
