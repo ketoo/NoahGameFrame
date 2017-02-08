@@ -131,22 +131,13 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	}
 
 	///////////////////////////////
-	//BeforeLeaveScene
-	//leave old group --> switch to group 0
 
-	//switch to new scene
-
-	//switch to new group
-	//AfterEnterScene
-
-	if (!SwitchScene(self, nSceneID, nNewGroupID, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	if (!SwitchScene(self, nSceneID, nNewGroupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
 		return false;
 	}
-
-	AfterEnterScene(self, nSceneID, nNewGroupID, nType, argList);
 
 	return true;
 }
@@ -204,16 +195,26 @@ bool NFCSceneAOIModule::AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR
 	return true;
 }
 
-bool NFCSceneAOIModule::AddAfterEnterSceneCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFCSceneAOIModule::AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+	return false;
+}
+
+bool NFCSceneAOIModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mtAfterEnterSceneCallback.push_back(cb);
 	return true;
 }
 
-bool NFCSceneAOIModule::AddBeforeLeaveSceneCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+bool NFCSceneAOIModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mtBeforeLeaveSceneCallback.push_back(cb);
 	return true;
+}
+
+bool NFCSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+	return false;
 }
 
 bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID)
@@ -221,7 +222,7 @@ bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID
 	return false;
 }
 
-bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg)
+bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (pObject)
@@ -248,28 +249,33 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, self, "no this group", nTargetGroupID);
 			return false;
 		}
+		/////////
+		BeforeLeaveSceneGroup(self, nOldSceneID, nOldGroupID, nType, arg);
 
 		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
 
 		if (nTargetSceneID != nOldSceneID)
 		{
 			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
-
 			/////////
-			BeforeLeaveScene(self, nOldSceneID, nOldGroupID, 0, arg);
+			AfterLeaveSceneGroup(self, nOldSceneID, nOldGroupID, nType, arg);
 
 			pObject->SetPropertyInt(NFrame::Scene::SceneID(), nTargetSceneID);
 
-			/////////
-			AfterEnterScene(self, nOldSceneID, nOldGroupID, 0, arg);
 		}
 
 		pObject->SetPropertyFloat(NFrame::IObject::X(), fX);
 		pObject->SetPropertyFloat(NFrame::IObject::Y(), fY);
 		pObject->SetPropertyFloat(NFrame::IObject::Z(), fZ);
 
-		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
+		////////
+		BeforeEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, nType, arg);
+
 		pNewSceneInfo->AddObjectToGroup(nTargetGroupID, self, true);
+		pObject->SetPropertyInt(NFrame::Scene::GroupID(), nTargetGroupID);
+
+		/////////
+		AfterEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, nType, arg);
 
 		return true;
 	}
@@ -647,7 +653,7 @@ int NFCSceneAOIModule::EnterSceneCondition(const NFGUID & self, const int nScene
 	return 0;
 }
 
-int NFCSceneAOIModule::AfterEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::AfterEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtAfterEnterSceneCallback.begin();
 	for (; it != mtAfterEnterSceneCallback.end(); it++)
@@ -660,7 +666,7 @@ int NFCSceneAOIModule::AfterEnterScene(const NFGUID & self, const int nSceneID, 
 	return 0;
 }
 
-int NFCSceneAOIModule::BeforeLeaveScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneAOIModule::BeforeLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
 	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtBeforeLeaveSceneCallback.begin();
 	for (; it != mtBeforeLeaveSceneCallback.end(); it++)
@@ -670,6 +676,31 @@ int NFCSceneAOIModule::BeforeLeaveScene(const NFGUID & self, const int nSceneID,
 		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
 	}
 
+	return 0;
+}
+
+int NFCSceneAOIModule::AfterLeaveSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtAfterLeaveSceneCallback.begin();
+	for (; it != mtAfterLeaveSceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
+
+	return 0;
+}
+
+int NFCSceneAOIModule::BeforeEnterSceneGroup(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtBeforeEnterSceneCallback.begin();
+	for (; it != mtBeforeEnterSceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
 	return 0;
 }
 
