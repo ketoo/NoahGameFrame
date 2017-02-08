@@ -37,10 +37,9 @@ bool NFCSceneProcessModule::AfterInit()
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
 
-	m_pSceneAOIModule->AddBeforeEnterSceneCallBack(this, &NFCSceneProcessModule::BeforeEnterSceneEvent);
+	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCSceneProcessModule::EnterSceneConditionEvent);
 	m_pSceneAOIModule->AddAfterEnterSceneCallBack(this, &NFCSceneProcessModule::AfterEnterSceneEvent);
 	m_pSceneAOIModule->AddBeforeLeaveSceneCallBack(this, &NFCSceneProcessModule::BeforeLeaveSceneEvent);
-	m_pSceneAOIModule->AddAfterLeaveSceneCallBack(this, &NFCSceneProcessModule::AfterLeaveSceneEvent);
     //////////////////////////////////////////////////////////////////////////
 
     NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
@@ -67,20 +66,6 @@ int NFCSceneProcessModule::BeforeLeaveSceneEvent(const NFGUID & self, const int 
 	return 0;
 }
 
-int NFCSceneProcessModule::AfterLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList)
-{
-    if (nGroupID > 0)
-    {
-        if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
-        {
-            m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
-			return 0;
-        }
-    }
-
-    return 1;
-}
-
 int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
 {
     if (strClassName == NFrame::Player::ThisName())
@@ -93,7 +78,7 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
             {
                 int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
-                m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+                //m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
 
@@ -104,15 +89,8 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
     return 0;
 }
 
-int NFCSceneProcessModule::BeforeEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
-	//condition
-	//clone scene, need create new group
-	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
-	{
-		return 0;
-	}
-
 	return 0;
 }
 
