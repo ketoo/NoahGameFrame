@@ -38,8 +38,8 @@ bool NFCSceneProcessModule::AfterInit()
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCSceneProcessModule::EnterSceneConditionEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneCallBack(this, &NFCSceneProcessModule::AfterEnterSceneEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneCallBack(this, &NFCSceneProcessModule::BeforeLeaveSceneEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCSceneProcessModule::AfterEnterSceneEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::BeforeLeaveSceneEvent);
     //////////////////////////////////////////////////////////////////////////
 
     NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
