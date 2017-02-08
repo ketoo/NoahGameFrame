@@ -35,7 +35,7 @@ public:
     virtual bool Shut();
 
 protected:
-    int OnPropertyCallBackEvent(const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVarList, const NFIDataList::TData& newVarList);
+    int OnPropertyCallBackEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVarList, const NFData& newVarList);
 
 
 

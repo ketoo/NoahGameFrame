@@ -43,13 +43,13 @@ public:
     virtual void LogSend(const char* str) {}
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
-    virtual bool SendMsgToGame(const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
+    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
     virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
 
-    virtual int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-    virtual int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
-    virtual int OnPropertyEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self);
-    virtual int OnRecordEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self);
+    virtual int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+    virtual int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
+    virtual int OnPropertyEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
+    virtual int OnRecordEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();

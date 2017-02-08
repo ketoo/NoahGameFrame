@@ -13,7 +13,7 @@ NFCRecordManager::~NFCRecordManager()
     ClearAll();
 }
 
-NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NF_SHARE_PTR<NFIDataList>& ValueList, const NF_SHARE_PTR<NFIDataList>& tagList, const int nRows)
+NF_SHARE_PTR<NFIRecord> NFCRecordManager::AddRecord(const NFGUID& self, const std::string& strRecordName, const NF_SHARE_PTR<NFDataList>& ValueList, const NF_SHARE_PTR<NFDataList>& tagList, const int nRows)
 {
     NF_SHARE_PTR<NFIRecord> pRecord = GetElement(strRecordName);
     if (!pRecord)

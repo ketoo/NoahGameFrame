@@ -31,7 +31,7 @@ bool NFCGameServerModule::Execute()
     char szContent[MAX_PATH] = { 0 };
     if (kbhit() && gets(szContent))
     {
-        NFCDataList val(szContent, ",");
+        NFDataList val(szContent, ",");
         if (val.GetCount() > 0)
         {
             //const char* pstrCmd = val.String( 0 );

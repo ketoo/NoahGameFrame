@@ -8,7 +8,7 @@
 
 #include "NFCWorldToMasterModule.h"
 #include "NFWorldNet_ClientPlugin.h"
-#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.hpp"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -230,7 +230,7 @@ void NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int
 	}
 
 	
-	//     NFCDataList var;
+	//     NFDataList var;
 	//     var << xMsg.world_id() << xMsg.account();
 	//     m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_KICK_FROM_SERVER, var);
 }

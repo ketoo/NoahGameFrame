@@ -106,20 +106,20 @@ protected:
 
 protected:
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-	int OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	
 	//////////////////////////////////////////
 
-	int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-	int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
+	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
 
 	//broad the data of argvar to self
-	int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
-	int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
+	int OnPropertyEnter(const NFDataList& argVar, const NFGUID& self);
+	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
 
-	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
-	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
+	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
+	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 
 private:
     

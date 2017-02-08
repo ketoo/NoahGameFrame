@@ -61,7 +61,7 @@ bool NFCPVPMatchModule::ApplyPVP(const NFGUID& self, const int nPVPMode, const i
 	return m_pPVPMatchRedisModule->PushSinglePlayer(self, nPVPMode, nGrade);
 }
 
-bool NFCPVPMatchModule::TeamApplyPVP(const NFGUID& xTeam, const NFIDataList& varMemberList, int nPVPMode, const int nScore)
+bool NFCPVPMatchModule::TeamApplyPVP(const NFGUID& xTeam, const NFDataList& varMemberList, int nPVPMode, const int nScore)
 {
 	int nMemberCount = varMemberList.GetCount();
 	std::vector<NFGUID> xPlayerList;
@@ -706,7 +706,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 				std::vector<NFGUID> xPlayerList;
 				if (m_pTeamModule->GetMemberList(nPlayerID, xTeamID, xPlayerList))
 				{
-					NFCDataList varMember;
+					NFDataList varMember;
 					for (size_t i = 0; i < xPlayerList.size(); i++)
 					{
 						varMember.AddObject(xPlayerList[i]);
