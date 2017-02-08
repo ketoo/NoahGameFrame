@@ -62,12 +62,12 @@ bool NFCSceneProcessModule::AfterInit()
     return true;
 }
 
-int NFCSceneProcessModule::BeforeLeaveSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::BeforeLeaveSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
 }
 
-int NFCSceneProcessModule::AfterLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList)
+int NFCSceneProcessModule::AfterLeaveSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
 {
     if (nGroupID > 0)
     {
@@ -81,7 +81,7 @@ int NFCSceneProcessModule::AfterLeaveSceneEvent(const NFGUID& self, const int nS
     return 1;
 }
 
-int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     if (strClassName == NFrame::Player::ThisName())
     {
@@ -104,7 +104,7 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
     return 0;
 }
 
-int NFCSceneProcessModule::BeforeEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::BeforeEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	//condition
 	//clone scene, need create new group
@@ -116,7 +116,7 @@ int NFCSceneProcessModule::BeforeEnterSceneEvent(const NFGUID & self, const int 
 	return 0;
 }
 
-int NFCSceneProcessModule::AfterEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::AfterEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
 	{

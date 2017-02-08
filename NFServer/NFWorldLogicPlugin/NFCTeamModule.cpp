@@ -79,14 +79,14 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         return NFGUID();
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return NFGUID();
     }
 
-    NFCDataList varData;
+    NFDataList varData;
 
     int nReceive = 0;
     int nOnLine = 0;
@@ -134,14 +134,14 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return false;
     }
 
-    NFCDataList varData;
+    NFDataList varData;
 
     std::string strName ;
     int nLevel = 0;
@@ -179,7 +179,7 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -227,7 +227,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
 		return false;
 	}
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -304,7 +304,7 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() <=  0)
     {
@@ -333,7 +333,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() <= 0)
     {

@@ -116,7 +116,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
  //       return;
  //   }
 
-    NFCDataList var;
+    NFDataList var;
     var.AddString(NFrame::Player::GateID());
     var.AddInt(nGateID);
 
@@ -131,9 +131,9 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
     pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 
-    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFCDataList());
+    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
 
-	m_pScenemodule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFCDataList());
+	m_pScenemodule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
 	//m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))

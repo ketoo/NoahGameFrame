@@ -8,7 +8,7 @@
 
 #include "NFCPropertyTrailModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 bool NFCPropertyTrailModule::Init()
 {
@@ -82,7 +82,7 @@ int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
         {
             for (int i = 0; i < xRecord->GetRows(); ++i)
             {
-                NFCDataList xDataList;
+                NFDataList xDataList;
                 bool bRet = xRecord->QueryRow(i, xDataList);
                 if (bRet)
                 {
@@ -105,7 +105,7 @@ int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
     return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
 
@@ -120,7 +120,7 @@ int NFCPropertyTrailModule::OnObjectPropertyEvent(const NFGUID& self, const std:
     return 0;
 }
 
-int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
     std::ostringstream stream;
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, xEventData.strRecordName);
@@ -133,7 +133,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
     {
         case RECORD_EVENT_DATA::Add:
         {
-            NFCDataList xDataList;
+            NFDataList xDataList;
             bool bRet = xRecord->QueryRow(xEventData.nRow, xDataList);
             if (bRet)
             {
