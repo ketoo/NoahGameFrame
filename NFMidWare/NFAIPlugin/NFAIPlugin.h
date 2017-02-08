@@ -1,25 +1,30 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFGuildPlugin.h
+//    @FileName			:    NFAIPlugin.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFGuildPlugin
-//
+//    @Date             :    2017-02-08
+//    @Module           :    NFAIPlugin
+//    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
-
-///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFGuildPlugin : public NFIPlugin
+#ifdef NFAIPLUGIN_EXPORTS
+#define NFAIPLUGIN_API __declspec(dllexport)
+#else
+#define NFAIPLUGIN_API __declspec(dllimport)
+#endif
+
+
+//////////////////////////////////////////////////////////////////////////
+class NFAIPlugin : public NFIPlugin
 {
 public:
-	NFGuildPlugin(NFIPluginManager* p)
+    NFAIPlugin(NFIPluginManager* pm)
     {
-        pPluginManager = p;
+        pPluginManager = pm;
     }
+
     virtual const int GetPluginVersion();
 
     virtual const std::string GetPluginName();
@@ -28,4 +33,3 @@ public:
 
     virtual void Uninstall();
 };
-#endif
