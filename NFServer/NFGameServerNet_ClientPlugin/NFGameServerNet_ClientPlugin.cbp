@@ -69,11 +69,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCGameServerToWorldModule.cpp" />
-		<Unit filename="NFCGameServerToWorldModule.h" />
-		<Unit filename="NFGameServerNet_ClientPlugin.cpp" />
-		<Unit filename="NFGameServerNet_ClientPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCGameServerToWorldModule.h" />
+<Unit filename="NFGameServerNet_ClientPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCGameServerToWorldModule.cpp" />
+<Unit filename="NFGameServerNet_ClientPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
