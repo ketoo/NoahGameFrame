@@ -145,8 +145,6 @@ public:
 	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 
-    virtual bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg) = 0;
-
     ////////////////////////////////////////////////////////////////
     virtual NFGUID CreateGUID() = 0;
 
@@ -165,6 +163,7 @@ public:
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer) = 0; 
+	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer, const NFGUID& noSelf) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, const NFGUID& noSelf, NFIDataList& list) = 0;
 	virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list) = 0;
