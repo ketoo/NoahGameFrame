@@ -7,45 +7,42 @@
 // -------------------------------------------------------------------------
 
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
+#include "NFGuildPlugin.h"
 
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFGuildPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFGuildPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFGuildPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFGuildPlugin::GetPluginName()
 {
 	return GET_CLASS_NAME(NFCChatPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFGuildPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    //REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
 
 }
 
-void NFChatPlugin::Uninstall()
+void NFGuildPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    //UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
 }
