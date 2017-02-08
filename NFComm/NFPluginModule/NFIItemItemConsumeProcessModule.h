@@ -19,10 +19,10 @@ class NFIItemItemConsumeProcessModule
 public:
 
 
-    virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID) = 0;
+    virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID) = 0;
 
 
-    virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID) = 0;
+    virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID) = 0;
 
 };
 

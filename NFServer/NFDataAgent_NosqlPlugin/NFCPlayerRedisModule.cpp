@@ -243,7 +243,7 @@ const NFGUID NFCPlayerRedisModule::CreateRole(const std::string & strAccount, co
 		}
 
 		xCacheRoleID = m_pKernelModule->CreateGUID();
-		NFCDataList xArgs;
+		NFDataList xArgs;
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(xCacheRoleID, 1, 0, NFrame::Player::ThisName(), "", xArgs);
 
 		pObject->SetPropertyString(NFrame::Player::Account(), strAccount);
@@ -299,7 +299,7 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 	return true;
 }
 
-int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList & var)
+int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{

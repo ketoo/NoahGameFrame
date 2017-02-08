@@ -65,7 +65,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 
 	NFGUID ident = m_pKernelModule->CreateGUID();
 
-	NF_SHARE_PTR<NFIDataList> var = pRecord->GetInitData();
+	NF_SHARE_PTR<NFDataList> var = pRecord->GetInitData();
 
 	var->SetObject(NFrame::Player::BagEquipList_GUID, ident);
 	var->SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
@@ -107,11 +107,11 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		return 0;
 	}
 
-	NFCDataList varFindResult;
+	NFDataList varFindResult;
 	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strConfigName, varFindResult);
 	if (nFindRowCount <= 0)
 	{
-		NF_SHARE_PTR<NFIDataList> xRowData = pRecord->GetInitData();
+		NF_SHARE_PTR<NFDataList> xRowData = pRecord->GetInitData();
 
 		xRowData->SetString(NFrame::Player::BagItemList_ConfigID, strConfigName);
 		xRowData->SetInt(NFrame::Player::BagItemList_ItemCount, nCount);
@@ -149,7 +149,7 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 		return false;
 	}
 
-	NFCDataList varFindResult;
+	NFDataList varFindResult;
 	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagItemList_ConfigID, id, varFindResult);
 	if (nFindRowCount > 0)
 	{
@@ -189,7 +189,7 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 		return false;
 	}
 
-	NFCDataList varFindResult;
+	NFDataList varFindResult;
 	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varFindResult);
 	if (nFindRowCount > 0)
 	{
@@ -253,7 +253,7 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
         return false;
     }
 
-	NFCDataList varFindResult;
+	NFDataList varFindResult;
 	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varFindResult);
 	if (nFindRowCount > 0)
 	{

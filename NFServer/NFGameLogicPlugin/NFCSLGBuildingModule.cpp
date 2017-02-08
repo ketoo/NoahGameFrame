@@ -74,7 +74,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFGUID& self, const std::string& str
         return 1;
     }
 
-    NFCDataList xDataList;
+    NFDataList xDataList;
     xDataList << strBuilding;
     xDataList << m_pKernelModule->CreateGUID();
     xDataList << NFMsg::EBS_IDLE;; // state
@@ -103,7 +103,7 @@ int NFCSLGBuildingModule::Upgrade(const NFGUID& self, const NFGUID& xBuilID)
         return 1;
     }
 
-    NFCDataList var;
+    NFDataList var;
     pRecord->FindObject("BuildingGUID", xBuilID, var);
     if (var.GetCount() <= 0)
     {
@@ -115,7 +115,7 @@ int NFCSLGBuildingModule::Upgrade(const NFGUID& self, const NFGUID& xBuilID)
     const int nNeedTime = 20;
     const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
 
-    //NFCDataList varHeart;
+    //NFDataList varHeart;
     //varHeart << xBuilID;
     m_pScheduleModule->AddSchedule(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart,*/ nNeedTime, 1);
 
@@ -145,7 +145,7 @@ int NFCSLGBuildingModule::OnUpgradeHeartBeat(const NFGUID& self, const std::stri
 //         return 1;
 //     }
 // 
-//     NFCDataList varBuild;
+//     NFDataList varBuild;
 //     pRecord->FindObject("BuildingGUID", xBuildID, varBuild);
 //     if (varBuild.GetCount() <= 0)
 //     {
@@ -184,7 +184,7 @@ int NFCSLGBuildingModule::OnBoostHeartBeat( const NFGUID& self, const std::strin
 //         return 1;
 //     }
 // 
-//     NFCDataList varBuild;
+//     NFDataList varBuild;
 //     pRecord->FindObject("BuildingGUID", xBuidID, varBuild);
 //     if (varBuild.GetCount() <= 0)
 //     {
@@ -227,7 +227,7 @@ int NFCSLGBuildingModule::OnProduceHeartBeat( const NFGUID& self, const std::str
 //             const std::string strHeartname = GetProduceHeartName(self, xBuildID, strItem);
 //             const int nTime = 50;//To ADD
 // 
-//             NFCDataList varHeart;
+//             NFDataList varHeart;
 //             varHeart << xBuildID;
 //             varHeart << strItem;
 //             m_pKernelModule->AddHeartBeat(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, nTime, nLeftCount);
@@ -246,7 +246,7 @@ int NFCSLGBuildingModule::Boost(const NFGUID& self, const NFGUID& xBuilID)
         return 1;
     }
 
-    NFCDataList var;
+    NFDataList var;
     pRecord->FindObject("BuildingGUID", xBuilID, var);
     if (var.GetCount() <= 0)
     {
@@ -258,7 +258,7 @@ int NFCSLGBuildingModule::Boost(const NFGUID& self, const NFGUID& xBuilID)
     const int nBoostTime = 20;
     const std::string strBuildID = pRecord->GetString(nRow, "BuildingID");
 
-    //NFCDataList varHeart;
+    //NFDataList varHeart;
     //varHeart << xBuilID;
     m_pScheduleModule->AddSchedule(self, "OnBoostHeartBeat", this, &NFCSLGBuildingModule::OnBoostHeartBeat, /*varHeart,*/ nBoostTime, 1);
 
@@ -279,7 +279,7 @@ int NFCSLGBuildingModule::Produce(const NFGUID& self, const NFGUID& xBuilID, con
         return 1;
     }
 
-    NFCDataList var;
+    NFDataList var;
     pRecord->FindObject("BuildingGUID", xBuilID, var);
     if (var.GetCount() <= 0)
     {
@@ -294,7 +294,7 @@ int NFCSLGBuildingModule::Produce(const NFGUID& self, const NFGUID& xBuilID, con
     const int nTime = 50;//To ADD
     if (!m_pScheduleModule->ExistSchedule(self, strHeartname))
     {
-        //NFCDataList varHeart;
+        //NFDataList varHeart;
         //varHeart << xBuilID;
         //varHeart << strItemID;
 		m_pScheduleModule->AddSchedule(self, strHeartname, this, &NFCSLGBuildingModule::OnProduceHeartBeat, /*varHeart, */nTime, nCount);
@@ -312,7 +312,7 @@ int NFCSLGBuildingModule::Move(const NFGUID& self, const NFGUID nGUID, const flo
         return 1;
     }
 
-    NFCDataList xMatchList;
+    NFDataList xMatchList;
     int nMatchCount = pRecord->FindObject(BUILDING_GUID, nGUID, xMatchList);
     if (nMatchCount != 1)
     {
@@ -362,14 +362,14 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFGUID& self )
         }
         else if(nStatus == NFMsg::EBS_UPGRADE)
         {
-            //NFCDataList varHeart;
+            //NFDataList varHeart;
             //varHeart << xBuildID;
 
 			m_pScheduleModule->AddSchedule(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart, */fTime, 1);
         }
         else if(nStatus == NFMsg::EBS_BOOST)
         {
-            //NFCDataList varHeart;
+            //NFDataList varHeart;
             //varHeart << xBuildID;
 
 			m_pScheduleModule->AddSchedule(self, "OnUpgradeHeartBeat", this, &NFCSLGBuildingModule::OnUpgradeHeartBeat, /*varHeart, */fTime, 1);
@@ -379,7 +379,7 @@ int NFCSLGBuildingModule::CheckBuildingStatusEnd( const NFGUID& self )
     return 0;
 }
 
-int NFCSLGBuildingModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCSLGBuildingModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
 {
     if (COE_CREATE_FINISH == eClassEvent)
     {
@@ -399,7 +399,7 @@ int NFCSLGBuildingModule::AddProduceData(const NFGUID& self, const NFGUID& xBuil
         return 1;
     }
 
-    NFCDataList varProduce;
+    NFDataList varProduce;
     pProduce->FindObject("BuildingGUID", xBuilID, varProduce);
 
     int  nFindRow = -1;
@@ -423,7 +423,7 @@ int NFCSLGBuildingModule::AddProduceData(const NFGUID& self, const NFGUID& xBuil
     else
     {
         const int nTime = 20;
-        NFCDataList varItem;
+        NFDataList varItem;
 
         varItem << xBuilID;
         varItem << strItemID;
@@ -446,7 +446,7 @@ int NFCSLGBuildingModule::CostProduceData( const NFGUID& self, const NFGUID& xBu
         return 1;
     }
 
-    NFCDataList varProduce;
+    NFDataList varProduce;
     pProduce->FindObject("BuildingGUID", xBuilID, varProduce);
 
     for (int i = 0; i< varProduce.GetCount(); i++)
@@ -471,7 +471,7 @@ bool NFCSLGBuildingModule::GetProduceDataCount( const NFGUID& self, const NFGUID
         return false;
     }
 
-    NFCDataList varProduce;
+    NFDataList varProduce;
     pProduce->FindObject("BuildingGUID", xBuilID, varProduce);
 
     if(varProduce.GetCount() <= 0)
@@ -540,7 +540,7 @@ int NFCSLGBuildingModule::CheckProduceData( const NFGUID& self )
             pProduce->SetInt(i, "", nLeftCount - nCount);
 
             
-            //NFCDataList varHeart;
+            //NFDataList varHeart;
             //varHeart << xBuildID;
             //varHeart << strItemID;
 

@@ -18,15 +18,15 @@ class NFISkillConsumeProcessModule
 
 public:
 
-    virtual int ConsumeLegal(const NFGUID& self, const std::string& skillID,  const NFIDataList& other) = 0;
+    virtual int ConsumeLegal(const NFGUID& self, const std::string& skillID,  const NFDataList& other) = 0;
 
 
     virtual int ConsumeSelf(const NFGUID& self, const std::string& skillID) = 0;
 
 
-    virtual int ConsumeProcess(const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList) = 0;
+    virtual int ConsumeProcess(const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList) = 0;
 
-    virtual int ConsumeProcessEx(const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList) = 0;
+    virtual int ConsumeProcessEx(const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList) = 0;
 
 
 };

@@ -465,7 +465,7 @@ void NFCGmModule::CheckAndAddRow(const NFGUID& self, const std::string strRecord
     {
         if (!pRecord->IsUsed(nRow))
         {
-            NF_SHARE_PTR<NFIDataList> varData = pRecord->GetInitData();
+            NF_SHARE_PTR<NFDataList> varData = pRecord->GetInitData();
 
             pRecord->AddRow(nRow, *varData);
         }
@@ -502,7 +502,7 @@ void NFCGmModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const
         //const int nValue = xMsg.command_value();
         if (m_pElementModule->ExistElement(strObjectIndex))
         {
-            NFCDataList xDataList;
+            NFDataList xDataList;
             xDataList << "X" << fX;
             xDataList << "Y" << fY;
             xDataList << "Z" << fZ;

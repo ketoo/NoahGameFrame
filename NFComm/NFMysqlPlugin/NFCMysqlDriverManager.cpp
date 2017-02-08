@@ -11,7 +11,7 @@
 
 #include "NFCMysqlDriver.h"
 #include "NFCMysqlDriverManager.h"
-#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 NFCMysqlDriverManager::~NFCMysqlDriverManager()
 {
