@@ -38,8 +38,11 @@ bool NFCSceneProcessModule::AfterInit()
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCSceneProcessModule::EnterSceneConditionEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCSceneProcessModule::AfterEnterSceneEvent);
-	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::BeforeLeaveSceneEvent);
+
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCSceneProcessModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCSceneProcessModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::AfterLeaveSceneGroupEvent);
     //////////////////////////////////////////////////////////////////////////
 
     NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
@@ -61,7 +64,12 @@ bool NFCSceneProcessModule::AfterInit()
     return true;
 }
 
-int NFCSceneProcessModule::BeforeLeaveSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+{
+	return 0;
+}
+
+int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
 	return 0;
 }
@@ -94,7 +102,14 @@ int NFCSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const i
 	return 0;
 }
 
-int NFCSceneProcessModule::AfterEnterSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
+{
+	//m_pSceneAOIModule->CreateSceneObject(nSceneID, nGroupID);
+
+	return 0;
+}
+
+int NFCSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
 	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
 	{
@@ -148,7 +163,7 @@ bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDN
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
 	if (GetCloneSceneType(nSceneID) != SCENE_TYPE_CLONE_SCENE)
 	{
-		//m_pKernelModule->CreateScene(nSceneID);
+		//line 1
 		m_pKernelModule->RequestGroupScene(nSceneID);
 		return true;
 	}
