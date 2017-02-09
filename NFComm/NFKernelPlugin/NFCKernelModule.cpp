@@ -216,6 +216,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             if (NFrame::IObject::ConfigID() != strPropertyName
                 && NFrame::IObject::ClassName() != strPropertyName
                 && NFrame::IObject::SceneID() != strPropertyName
+				&& NFrame::IObject::ID() != strPropertyName
                 && NFrame::IObject::GroupID() != strPropertyName)
             {
                 NF_SHARE_PTR<NFIProperty> pArgProperty = pStaticClassPropertyManager->GetElement(strPropertyName);
@@ -243,7 +244,8 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
         }
 
         
-        pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
+		pObject->SetPropertyObject(NFrame::IObject::ID(), self);
+		pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
         pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
         pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
         pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);

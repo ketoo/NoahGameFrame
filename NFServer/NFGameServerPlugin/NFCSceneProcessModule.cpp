@@ -104,7 +104,7 @@ int NFCSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const i
 
 int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
-	//m_pSceneAOIModule->CreateSceneObject(nSceneID, nGroupID);
+	m_pSceneAOIModule->CreateSceneObject(nSceneID, nGroupID);
 
 	return 0;
 }
