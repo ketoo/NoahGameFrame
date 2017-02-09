@@ -35,6 +35,9 @@ bool NFCHeroModule::AfterInit()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
+
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroModule::OnObjectClassEvent);
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
 
@@ -441,4 +444,45 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 	}
 
 	SetFightHero(nPlayerID, nFightPos, xHero);	
+}
+
+int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList & var)
+{
+
+	NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
+	if (nullptr == pSelf)
+	{
+		return 1;
+	}
+
+	if (strClassName == NFrame::NPC::ThisName())
+	{
+		if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+		{
+			const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+			const int nNPCType = m_pElementModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
+			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
+
+			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
+			{
+				//hero
+				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
+				if (pHeroPropertyRecord)
+				{
+					NFCDataList xHeroPropertyList;
+					if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
+					{
+						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+						{
+							const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
+							const int nValue = xHeroPropertyList.Int(i);
+							pSelfPropertyManager->SetPropertyInt(strColTag, nValue);
+						}
+					}
+				}
+			}
+		}
+	}
 }
