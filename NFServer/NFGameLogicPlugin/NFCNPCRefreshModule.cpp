@@ -54,7 +54,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {
             const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-			const std::string& strPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
 			const int nNPCType = m_pElementModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
@@ -73,6 +73,22 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 							const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
 							const int nValue = xHeroPropertyList.Int(i);
 							pSelfPropertyManager->SetPropertyInt(strColTag, nValue);
+						}
+					}
+				}
+			}
+			else
+			{
+				//normal npc
+				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strEffectPropertyID);
+				if (pConfigPropertyManager)
+				{
+					std::string strProperName;
+					for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
+					{
+						if (pSelfPropertyManager && strProperName != NFrame::NPC::ID() && pProperty->Changed())
+						{
+							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
 						}
 					}
 				}
