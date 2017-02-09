@@ -42,7 +42,7 @@ void NFCStateMachine::Execute()
             pState->Execute(mOwnerID);
 
             //设置心跳时间
-            NFCDataList xDataList;
+            NFDataList xDataList;
             m_pKernelModule->Random(0, 10, 1, xDataList);
 
             mfHeartBeatTime = pState->GetHeartBeatTime() + xDataList.Int(0);
