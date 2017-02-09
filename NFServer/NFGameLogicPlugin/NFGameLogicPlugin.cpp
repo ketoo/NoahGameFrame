@@ -10,7 +10,6 @@
 #include "NFCGameLogicModule.h"
 #include "NFCBuffModule.h"
 #include "NFCPackModule.h"
-#include "NFCNPCRefreshModule.h"
 #include "NFCItemModule.h"
 #include "NFCSkillModule.h"
 #include "NFCHeroModule.h"
@@ -87,7 +86,6 @@ void NFGameLogicPlugin::Install()
     //Continue to add other skill types of consumption
 
 	REGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
-    REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
 	REGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
 	REGISTER_MODULE(pPluginManager, NFISLGShopModule, NFCSLGShopModule)
 	REGISTER_MODULE(pPluginManager, NFISLGBuildingModule, NFCSLGBuildingModule)
@@ -133,7 +131,6 @@ void NFGameLogicPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFISLGBuildingModule, NFCSLGBuildingModule)
 	UNREGISTER_MODULE(pPluginManager, NFISLGShopModule, NFCSLGShopModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-    UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
 	UNREGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
 
     //UNREGISTER_MODULE(pPluginManager, NFIBulletSkillConsumeProcessModule, NFCBulletSkillConsumeProcessModule)
