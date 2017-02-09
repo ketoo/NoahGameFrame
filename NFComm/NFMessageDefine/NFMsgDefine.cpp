@@ -44,7 +44,7 @@
 //      {
 //          for ( int j = 0; j < pRecord->GetCols(); j++ )
 //          {
-//              TDATA_TYPE varType = pRecord->GetColType( j );
+//              NFDATA_TYPE varType = pRecord->GetColType( j );
 //              switch ( varType )
 //              {
 //              case TDATA_INT:
@@ -218,7 +218,7 @@
 //
 //        if (bCheckType && bCheckType == bCheck)
 //        {
-//            TDATA_TYPE varType = pProperty->GetType();
+//            NFDATA_TYPE varType = pProperty->GetType();
 //            switch ( varType )
 //            {
 //            case TDATA_INT:
@@ -271,7 +271,7 @@
 //      int nData = propertyInt.data();
 //
 //      NFData TData;
-//      TData.nType = TDATA_TYPE::TDATA_INT;
+//      TData.nType = NFDATA_TYPE::TDATA_INT;
 //      TData.variantData = nData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -283,7 +283,7 @@
 //      float fData = propertyFloat.data();
 //
 //      NFData TData;
-//      TData.nType = TDATA_TYPE::TDATA_FLOAT;
+//      TData.nType = NFDATA_TYPE::TDATA_FLOAT;
 //      TData.variantData = fData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -295,7 +295,7 @@
 //      const std::string& strData = propertyString.data();
 //
 //      NFData TData;
-//      TData.nType = TDATA_TYPE::TDATA_STRING;
+//      TData.nType = NFDATA_TYPE::TDATA_STRING;
 //      TData.variantData = strData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -307,7 +307,7 @@
 //      int64_t nData = propertyObject.data();
 //
 //      NFData TData;
-//      TData.nType = TDATA_TYPE::TDATA_OBJECT;
+//      TData.nType = NFDATA_TYPE::TDATA_OBJECT;
 //      TData.variantData = nData;
 //      pProManager->SetProperty( strName, TData );
 //  }

@@ -239,7 +239,7 @@ float NFCAIModule::UseAnySkill(const NFGUID& self, const NFGUID& other)
     return 0.5f;
 }
 
-int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
     {

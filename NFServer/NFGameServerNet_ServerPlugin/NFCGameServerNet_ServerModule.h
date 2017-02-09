@@ -107,14 +107,13 @@ protected:
 protected:
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
-	
-	//////////////////////////////////////////
 
+	//////////////////////////////////////////
+	//broad the data of argvar to self
 	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
 	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
 
-	//broad the data of argvar to self
+	//broad the data of self to argvar 
 	int OnPropertyEnter(const NFDataList& argVar, const NFGUID& self);
 	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
 
