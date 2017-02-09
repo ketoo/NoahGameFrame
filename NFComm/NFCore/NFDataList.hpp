@@ -9,6 +9,7 @@
 #ifndef NF_DATALIST_H
 #define NF_DATALIST_H
 
+#include <cstdarg>
 #include <string>
 #include <cstring>
 #include <iostream>
