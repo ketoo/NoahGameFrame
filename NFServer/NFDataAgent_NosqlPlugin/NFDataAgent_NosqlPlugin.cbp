@@ -30,14 +30,11 @@
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.a" />
-					<Add library="libNFMessageDefine_d" />
-					<Add library="libprotobuf" />
+					<Add library="$(SolutionDir)/_Out/Debug/NFCore_d.so" />
+					<Add library="../../Dependencies/lib/libtherond.a" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Debug/" />
 				</Linker>
-				<ExtraCommands>
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
@@ -64,36 +61,34 @@
 					<Add directory="$(SolutionDir)/Dependencies/protobuf/src/" />
 				</Compiler>
 				<Linker>
-					<Add library="$(SolutionDir)/_Out/Release/NFCore.a" />
+					<Add library="$(SolutionDir)/_Out/Release/NFCore.so" />
 					<Add library="libNFMessageDefine" />
 					<Add library="libprotobuf" />
 					<Add directory="$(SolutionDir)/_Out/Release/" />
 					<Add directory="$(SolutionDir)/Dependencies/lib/Release/" />
 				</Linker>
-				<ExtraCommands>
-				</ExtraCommands>
 				<Environment>
 					<Variable name="SolutionDir" value="../../" />
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCBigMapRedisModule.cpp" />
-		<Unit filename="NFCBigMapRedisModule.h" />
-		<Unit filename="NFCCommonRedisModule.cpp" />
-		<Unit filename="NFCCommonRedisModule.h" />
-		<Unit filename="NFCGuildRedisModule.cpp" />
-		<Unit filename="NFCGuildRedisModule.h" />
-		<Unit filename="NFCMailRedisModule.cpp" />
-		<Unit filename="NFCMailRedisModule.h" />
-		<Unit filename="NFCPVPMatchRedisModule.cpp" />
-		<Unit filename="NFCPVPMatchRedisModule.h" />
-		<Unit filename="NFCPlayerRedisModule.cpp" />
-		<Unit filename="NFCPlayerRedisModule.h" />
-		<Unit filename="NFCRankRedisModule.cpp" />
-		<Unit filename="NFCRankRedisModule.h" />
-		<Unit filename="NFDataAgent_NosqlPlugin.cpp" />
-		<Unit filename="NFDataAgent_NosqlPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFCBigMapRedisModule.cpp" />
+<Unit filename="NFCGuildRedisModule.cpp" />
+<Unit filename="NFCMailRedisModule.cpp" />
+<Unit filename="NFCPlayerRedisModule.cpp" />
+<Unit filename="NFCPVPMatchRedisModule.cpp" />
+<Unit filename="NFCRankRedisModule.cpp" />
+<Unit filename="NFCCommonRedisModule.cpp" />
+<Unit filename="NFDataAgent_NosqlPlugin.cpp" />
+<Unit filename="NFCBigMapRedisModule.h" />
+<Unit filename="NFCGuildRedisModule.h" />
+<Unit filename="NFCMailRedisModule.h" />
+<Unit filename="NFCPlayerRedisModule.h" />
+<Unit filename="NFCPVPMatchRedisModule.h" />
+<Unit filename="NFCRankRedisModule.h" />
+<Unit filename="NFCCommonRedisModule.h" />
+<Unit filename="NFDataAgent_NosqlPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
