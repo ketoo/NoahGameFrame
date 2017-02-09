@@ -162,6 +162,7 @@ public:
     virtual bool ExitGroupScene(const int nSceneID, const int nGroupID) = 0;
 
     virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list) = 0;
+	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const NFGUID& noSelf) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer) = 0; 
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer, const NFGUID& noSelf) = 0;
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list) = 0;

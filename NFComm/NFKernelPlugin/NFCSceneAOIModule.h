@@ -42,6 +42,7 @@ public:
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList);
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList& argList);
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos);
+	virtual bool CreateSceneObject(const int nSceneID, const int nGroupID);
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
@@ -60,7 +61,6 @@ protected:
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
 protected:
-	bool CreateSceneObject(const int nSceneID, const int nGroupID);
 	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
 protected:
@@ -98,8 +98,10 @@ private:
 
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mtObjectEnterCallback;
 	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR> mtObjectLeaveCallback;
+
 	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR> mtPropertyEnterCallback;
 	std::vector<RECORD_ENTER_EVENT_FUNCTOR_PTR> mtRecordEnterCallback;
+
 	std::vector<PROPERTY_SINGLE_EVENT_FUNCTOR_PTR> mtPropertySingleCallback;
 	std::vector<RECORD_SINGLE_EVENT_FUNCTOR_PTR> mtRecordSingleCallback;
 
