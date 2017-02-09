@@ -101,6 +101,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCGuildDataModule.cpp" />
+    <ClCompile Include="NFCGuildEctypeModule.cpp" />
+    <ClCompile Include="NFCGuildModule.cpp" />
+    <ClCompile Include="NFGuildPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCGuildDataModule.h" />
+    <ClInclude Include="NFCGuildEctypeModule.h" />
+    <ClInclude Include="NFCGuildModule.h" />
+    <ClInclude Include="NFGuildPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
