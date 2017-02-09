@@ -60,13 +60,13 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCClassModule.cpp" />
-		<Unit filename="NFCClassModule.h" />
-		<Unit filename="NFCElementModule.cpp" />
-		<Unit filename="NFCElementModule.h" />
-		<Unit filename="NFConfigPlugin.cpp" />
-		<Unit filename="NFConfigPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFCClassModule.cpp" />
+<Unit filename="NFCElementModule.cpp" />
+<Unit filename="NFConfigPlugin.cpp" />
+<Unit filename="NFCClassModule.h" />
+<Unit filename="NFCElementModule.h" />
+<Unit filename="NFConfigPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
