@@ -62,13 +62,13 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFActorPlugin.cpp" />
-		<Unit filename="NFActorPlugin.h" />
-		<Unit filename="NFCActor.cpp" />
-		<Unit filename="NFCActor.h" />
-		<Unit filename="NFCActorModule.cpp" />
-		<Unit filename="NFCActorModule.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCActor.cpp" />
+<Unit filename="NFCActorModule.cpp" />
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFActorPlugin.cpp" />
+<Unit filename="NFCActor.h" />
+<Unit filename="NFCActorModule.h" />
+<Unit filename="NFActorPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
