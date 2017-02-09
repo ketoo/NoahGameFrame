@@ -77,23 +77,6 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 					}
 				}
 			}
-			else
-			{
-				//normal npc
-				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strPropertyID);
-				if (pConfigPropertyManager)
-				{
-					std::string strProperName;
-					for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
-					{
-						if (pSelfPropertyManager && strProperName != NFrame::NPC::ID())
-						{
-							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
-						}
-					}
-				}
-			}
-            
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
@@ -101,8 +84,8 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
             int nHPMax = m_pElementModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
 
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
-            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 
+            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 			m_pEventModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCNPCRefreshModule::OnObjectBeKilled );
         }
     }
