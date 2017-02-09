@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFGuildPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFChatPlugin
+//    @Module           :    NFGuildPlugin
 //
 // -------------------------------------------------------------------------
 
@@ -13,10 +13,10 @@
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFChatPlugin : public NFIPlugin
+class NFGuildPlugin : public NFIPlugin
 {
 public:
-	NFChatPlugin(NFIPluginManager* p)
+	NFGuildPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
