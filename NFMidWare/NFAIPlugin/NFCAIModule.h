@@ -56,7 +56,7 @@ protected:
     virtual bool DelAIObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    virtual int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
     //////////////////////////////////////////////////////////////////////////
 
