@@ -102,6 +102,13 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		//call in inner environments
 		nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
 	}
+	else
+	{
+		if (!pSceneInfo->ExistElement(nNewGroupID))
+		{
+			return false;
+		}
+	}
 	
 	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nNewGroupID, nType, argList);
 	if (nEnterConditionCode != 0)
@@ -109,28 +116,6 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
 		return false;
 	}
-
-	////////////////////////////////////
-	//prepare monster for player
-	//create monster before the player enter the scene, then we can send monster's data by one message pack
-	//if you create monster after player enter scene, then send monster's data one by one
-	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
-	while (pResource)
-	{
-		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
-
-		NFCDataList arg;
-		arg << NFrame::IObject::X() << pResource->vSeedPos.X();
-		arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
-		arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
-		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
-
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nNewGroupID, strClassName, pResource->strConfigID, arg);
-
-		pResource = pSceneInfo->mtSceneResourceConfig.Next();
-	}
-
-	///////////////////////////////
 
 	if (!SwitchScene(self, nSceneID, nNewGroupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
@@ -197,7 +182,8 @@ bool NFCSceneAOIModule::AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR
 
 bool NFCSceneAOIModule::AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtBeforeEnterSceneCallback.push_back(cb);
+	return true;
 }
 
 bool NFCSceneAOIModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
@@ -214,11 +200,37 @@ bool NFCSceneAOIModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCT
 
 bool NFCSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
-	return false;
+	mtAfterLeaveSceneCallback.push_back(cb);
+	return true;
 }
 
 bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID)
 {
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (!pSceneInfo)
+	{
+		return false;
+	}
+
+	//prepare monster for player
+	//create monster before the player enter the scene, then we can send monster's data by one message pack
+	//if you create monster after player enter scene, then send monster's data one by one
+	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
+	while (pResource)
+	{
+		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
+
+		NFCDataList arg;
+		arg << NFrame::IObject::X() << pResource->vSeedPos.X();
+		arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
+		arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
+		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+
+		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
+
+		pResource = pSceneInfo->mtSceneResourceConfig.Next();
+	}
+
 	return false;
 }
 
@@ -404,98 +416,83 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 
 int NFCSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
 {
-	//this event only happened in the same group
+	//this event only happened in the same scene
 	int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
 	int nOldGroupID = oldVar.GetInt();
-	if (nOldGroupID > 0)
-	{
-		//jump to 0 group from this group<nOldGroupID>
-		NFCDataList valueAllOldObjectList;
-		NFCDataList valueAllOldPlayerList;
-		m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldObjectList);
-		if (valueAllOldObjectList.GetCount() > 0)
-		{
-			for (int i = 0; i < valueAllOldObjectList.GetCount(); i++)
-			{
-				NFGUID identBC = valueAllOldObjectList.Object(i);
-
-				if (valueAllOldObjectList.Object(i) == self)
-				{
-					valueAllOldObjectList.Set(i, NFGUID());
-				}
-
-				const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, NFrame::IObject::ClassName());
-				if (NFrame::Player::ThisName() == strClassName)
-				{
-					valueAllOldPlayerList.Add(identBC);
-				}
-			}
-
-			OnObjectListLeave(valueAllOldPlayerList, NFCDataList() << self);
-			OnObjectListLeave(NFCDataList() << self, valueAllOldObjectList);
-		}
-
-		//m_pKernelModule->ReleaseGroupScene(nSceneID, nOldGroupID);
-	}
-
 	int nNewGroupID = newVar.GetInt();
+
+	//maybe form 0, maybe not, only three stuation
+	//example1: 0 -> 1 ==> new_group > 0 && old_group <= 0
+	//example2: 1 -> 2 ==> new_group > 0 && old_group > 0
+	//example3: 5 -> 0 ==> new_group <= 0 && old_group > 0
 	if (nNewGroupID > 0)
 	{
-		//jump to this group<nNewGroupID> from 0 group
-		NFCDataList valueAllObjectList;
-		NFCDataList valueAllObjectListNoSelf;
-		NFCDataList valuePlayerList;
-		NFCDataList valuePlayerListNoSelf;
-		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllObjectList);
-		for (int i = 0; i < valueAllObjectList.GetCount(); i++)
+		if (nOldGroupID > 0)
 		{
-			NFGUID identBC = valueAllObjectList.Object(i);
-			const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, NFrame::IObject::ClassName());
-			if (NFrame::Player::ThisName() == strClassName)
-			{
-				valuePlayerList.Add(identBC);
-				if (identBC != self)
-				{
-					valuePlayerListNoSelf.Add(identBC);
-				}
-			}
+			//example2: 1 -> 2 ==> new_group > 0 && old_group > 0
+			//step1: leave
+			NFCDataList valueAllOldNPCListNoSelf;
+			NFCDataList valueAllOldPlayerListNoSelf;
+			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldNPCListNoSelf, false, self);
+			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldPlayerListNoSelf, true, self);
 
-			if (identBC != self)
-			{
-				valueAllObjectListNoSelf.Add(identBC);
-			}
+			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFCDataList() << self);
+			OnObjectListLeave(NFCDataList() << self, valueAllOldPlayerListNoSelf);
+			OnObjectListLeave(NFCDataList() << self, valueAllOldNPCListNoSelf);
+		}
+		else
+		{
+			//example1: 0 -> 1 == > new_group > 0 && old_group <= 0
+			//only use step2 that enough
 		}
 
-		if (valuePlayerListNoSelf.GetCount() > 0)
+		//step2: enter
+		NFCDataList valueAllNewNPCListNoSelf;
+		NFCDataList valueAllNewPlayerListNoSelf;
+
+		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllNewNPCListNoSelf, false, self);
+		m_pKernelModule->GetGroupObjectList(nSceneID, nNewGroupID, valueAllNewPlayerListNoSelf, true, self);
+
+		OnObjectListEnter(valueAllNewPlayerListNoSelf, NFCDataList() << self);
+		OnObjectListEnter(NFCDataList() << self, valueAllNewPlayerListNoSelf);
+		OnObjectListEnter(NFCDataList() << self, valueAllNewNPCListNoSelf);
+
+		//bc others data to u
+		for (int i = 0; i < valueAllNewNPCListNoSelf.GetCount(); i++)
 		{
-			OnObjectListEnter(valuePlayerListNoSelf, NFCDataList() << self);
+			NFGUID identOld = valueAllNewNPCListNoSelf.Object(i);
+
+			OnPropertyEnter(NFCDataList() << self, identOld);
+			OnRecordEnter(NFCDataList() << self, identOld);
 		}
 
-		const std::string& strSelfClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
-
-		if (valueAllObjectListNoSelf.GetCount() > 0)
+		//bc others data to u
+		for (int i = 0; i < valueAllNewPlayerListNoSelf.GetCount(); i++)
 		{
-			if (strSelfClassName == NFrame::Player::ThisName())
-			{
-				OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
-			}
+			NFGUID identOld = valueAllNewPlayerListNoSelf.Object(i);
+
+			OnPropertyEnter(NFCDataList() << self, identOld);
+			OnRecordEnter(NFCDataList() << self, identOld);
 		}
 
-		if (strSelfClassName == NFrame::Player::ThisName())
+		//bc u data to others
+		OnPropertyEnter(valueAllNewPlayerListNoSelf, self);
+		OnRecordEnter(valueAllNewPlayerListNoSelf, self);
+	}
+	else
+	{
+		if (nOldGroupID > 0)
 		{
-			for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
-			{
-				NFGUID identOld = valueAllObjectListNoSelf.Object(i);
+			//example3: 5 -> 0 ==> new_group <= 0 && old_group > 0
+			//step1: leave
+			NFCDataList valueAllOldNPCListNoSelf;
+			NFCDataList valueAllOldPlayerListNoSelf;
+			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldNPCListNoSelf, false, self);
+			m_pKernelModule->GetGroupObjectList(nSceneID, nOldGroupID, valueAllOldPlayerListNoSelf, true, self);
 
-				OnPropertyEnter(NFCDataList() << self, identOld);
-				OnRecordEnter(NFCDataList() << self, identOld);
-			}
-		}
-
-		if (valuePlayerListNoSelf.GetCount() > 0)
-		{
-			OnPropertyEnter(valuePlayerListNoSelf, self);
-			OnRecordEnter(valuePlayerListNoSelf, self);
+			OnObjectListLeave(valueAllOldPlayerListNoSelf, NFCDataList() << self);
+			OnObjectListLeave(NFCDataList() << self, valueAllOldPlayerListNoSelf);
+			OnObjectListLeave(NFCDataList() << self, valueAllOldNPCListNoSelf);
 		}
 	}
 
@@ -504,71 +501,10 @@ int NFCSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string
 
 int NFCSceneAOIModule::OnPlayerSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFIDataList::TData & oldVar, const NFIDataList::TData & newVar)
 {
-	int nOldSceneID = oldVar.GetInt();
-	int nNowSceneID = newVar.GetInt();
-
-	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "Enter Scene:", nNowSceneID);
-
-	NFCDataList valueOldAllObjectList;
-	NFCDataList valueNewAllObjectList;
-	NFCDataList valueAllObjectListNoSelf;
-	NFCDataList valuePlayerList;
-	NFCDataList valuePlayerNoSelf;
-
-	m_pKernelModule->GetGroupObjectList(nOldSceneID, 0, valueOldAllObjectList);
-	m_pKernelModule->GetGroupObjectList(nNowSceneID, 0, valueNewAllObjectList);
-
-	for (int i = 0; i < valueOldAllObjectList.GetCount(); i++)
-	{
-		NFGUID identBC = valueOldAllObjectList.Object(i);
-		if (identBC == self)
-		{
-			valueOldAllObjectList.Set(i, NFGUID());
-		}
-	}
-
-	for (int i = 0; i < valueNewAllObjectList.GetCount(); i++)
-	{
-		NFGUID identBC = valueNewAllObjectList.Object(i);
-		const std::string& strClassName = m_pKernelModule->GetPropertyString(identBC, NFrame::IObject::ClassName());
-		if (NFrame::Player::ThisName() == strClassName)
-		{
-			valuePlayerList.Add(identBC);
-			if (identBC != self)
-			{
-				valuePlayerNoSelf.Add(identBC);
-			}
-		}
-
-		if (identBC != self)
-		{
-			valueAllObjectListNoSelf.Add(identBC);
-		}
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	OnObjectListLeave(NFCDataList() << self, valueOldAllObjectList);
-
-	if (valuePlayerList.GetCount() > 0)
-	{
-		OnObjectListEnter(valuePlayerNoSelf, NFCDataList() << self);
-	}
-
-	OnObjectListEnter(NFCDataList() << self, valueAllObjectListNoSelf);
-
-	for (int i = 0; i < valueAllObjectListNoSelf.GetCount(); i++)
-	{
-		NFGUID identOld = valueAllObjectListNoSelf.Object(i);
-		OnPropertyEnter(NFCDataList() << self, identOld);
-		OnRecordEnter(NFCDataList() << self, identOld);
-	}
-
-	if (valuePlayerNoSelf.GetCount() > 0)
-	{
-		OnPropertyEnter(valuePlayerNoSelf, self);
-		OnRecordEnter(valuePlayerNoSelf, self);
-	}
+	//no more player in this group of this scene at the same time
+	//so now only one player(that you) in this group of this scene
+	//BTW, most of time, we dont create monsters in the group 0
+	//so no one at this group but u
 
 	return 0;
 }

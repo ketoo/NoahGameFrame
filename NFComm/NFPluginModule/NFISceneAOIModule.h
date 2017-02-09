@@ -87,7 +87,7 @@ public:
 
     int NewGroupID()
     {
-        ++mnGroupIndex;
+		mnGroupIndex += 1;
 		return mnGroupIndex;
     }
 
@@ -305,6 +305,7 @@ public:
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList) = 0;
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList) = 0;
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
+	virtual bool CreateSceneObject(const int nSceneID, const int nGroupID) = 0;
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
