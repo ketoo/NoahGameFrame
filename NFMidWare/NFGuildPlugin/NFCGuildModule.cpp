@@ -88,7 +88,7 @@ bool NFCGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() > 0)
     {
@@ -102,7 +102,7 @@ bool NFCGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID )
         return false;
     }
 
-    NFCDataList varData;
+    NFDataList varData;
 
     std::string strName ;
     int nLevel = 0;
@@ -151,7 +151,7 @@ bool NFCGuildModule::LeaveGuild( const NFGUID& self, const NFGUID& xGuildID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -179,7 +179,7 @@ bool NFCGuildModule::UpGuildMmember( const NFGUID& self, const NFGUID& xGuildID,
 
     CheckPower(self, xGuildID, NFMsg::ReqAckOprGuildMember::EGAT_UP);
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -215,7 +215,7 @@ bool NFCGuildModule::DownGuildMmember( const NFGUID& self, const NFGUID& xGuildI
 
     CheckPower(self, xGuildID, NFMsg::ReqAckOprGuildMember::EGAT_DOWN);
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -255,7 +255,7 @@ bool NFCGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xGuildI
 
     CheckPower(self, xGuildID, NFMsg::ReqAckOprGuildMember::EGAT_KICK);
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -293,7 +293,7 @@ bool NFCGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID, int
         NF_SHARE_PTR<NFIRecord> pMemberRecord = m_pKernelModule->FindRecord(xGuildID, "GuildMemberList");
         if (pMemberRecord.get())
         {
-            NFCDataList varList;
+            NFDataList varList;
             pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
             if (varList.GetCount() == 1)
             {
@@ -310,7 +310,7 @@ bool NFCGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID, int
     return false;
 }
 
-bool NFCGuildModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGuild, NFCDataList& varMemberList, NFCDataList& varGameList)
+bool NFCGuildModule::GetOnlineMember( const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList)
 {
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuild);
     if (!pGuildObject.get())
@@ -359,7 +359,7 @@ bool NFCGuildModule::MemberOnline( const NFGUID& self, const NFGUID& xGuild , co
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() <=  0)
     {
@@ -389,7 +389,7 @@ bool NFCGuildModule::MemberOffeline( const NFGUID& self, const NFGUID& xGuild )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Guild::GuildMemberList_GUID, self, varList);
     if (varList.GetCount() <= 0)
     {
