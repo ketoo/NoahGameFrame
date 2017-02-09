@@ -129,7 +129,7 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self)
 					eStateType = NFObjectStateType::NOST_WALK;
 				}
 
-				NFCDataList valueList;
+				NFDataList valueList;
 				valueList.AddFloat(fCurX);
 				valueList.AddFloat(fCurY);
 				valueList.AddFloat(fCurZ);
