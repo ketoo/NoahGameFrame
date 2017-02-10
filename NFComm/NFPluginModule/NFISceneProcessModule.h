@@ -26,8 +26,8 @@ class NFISceneProcessModule
 
 public:
     virtual E_SCENE_TYPE GetCloneSceneType(const int nContainerID) = 0;
-	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList) = 0;
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList& argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList) = 0;
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList) = 0;
 };
 
 #endif
