@@ -157,7 +157,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
             if (pRecord)
             {
-                for (int i = 0; i < NPG_ALL; i++)
+                for (int i = 0; i < NFPropertyGroup::NPG_ALL; i++)
                 {
                     pRecord->AddRow(-1);
                 }
