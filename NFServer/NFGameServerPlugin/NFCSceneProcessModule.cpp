@@ -65,12 +65,12 @@ bool NFCSceneProcessModule::AfterInit()
 
     return true;
 }
-bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
+bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList)
 {
 	return RequestEnterScene(self, nSceneID, -1, nType, argList);
 }
 
-bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
+bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
 {
 	if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
@@ -108,7 +108,7 @@ int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const 
 	}
 	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
-		NFCDataList varObjectList;
+		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
 			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
@@ -137,7 +137,7 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
             }
 			else if (GetCloneSceneType(nSceneID) == SCENE_TYPE_MULTI_CLONE_SCENE)
 			{
-				NFCDataList varObjectList;
+				NFDataList varObjectList;
 				if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 				{
 					m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
@@ -168,7 +168,7 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 	}
 	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
-		NFCDataList varObjectList;
+		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
 			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);

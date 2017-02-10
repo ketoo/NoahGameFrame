@@ -304,7 +304,7 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-	if (!m_pSceneProcessModule->GetCloneSceneType(nSceneID) != E_SCENE_TYPE::SCENE_TYPE_CLONE_SCENE)
+	if (!m_pSceneProcessModule->GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_ERROR)
 	{
 		return false;
 	}
@@ -446,7 +446,7 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 	SetFightHero(nPlayerID, nFightPos, xHero);	
 }
 
-int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList & var)
+int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 
 	NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
@@ -471,7 +471,7 @@ int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
 				if (pHeroPropertyRecord)
 				{
-					NFCDataList xHeroPropertyList;
+					NFDataList xHeroPropertyList;
 					if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
 					{
 						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
