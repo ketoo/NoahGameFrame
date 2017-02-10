@@ -72,13 +72,13 @@ bool NFCSceneAOIModule::Execute()
     return true;
 }
 
-bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
-{
-	return RequestEnterScene(self, nSceneID, -1, nType, argList);
-}
-
 bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
 {
+	if (nGrupID < 0)
+	{
+		return false;
+	}
+
 	const int nNowSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 	
@@ -96,28 +96,21 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		return false;
 	}
 
-	NFINT64 nNewGroupID = nGrupID;
-	if (nGrupID < 0)
+	/*
+	if (!pSceneInfo->ExistElement(nNewGroupID))
 	{
-		//call in inner environments
-		nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+		return false;
 	}
-	else
-	{
-		if (!pSceneInfo->ExistElement(nNewGroupID))
-		{
-			return false;
-		}
-	}
-	
-	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nNewGroupID, nType, argList);
+	*/
+
+	int nEnterConditionCode = EnterSceneCondition(self, nSceneID, nGrupID, nType, argList);
 	if (nEnterConditionCode != 0)
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "before enter condition code:", nEnterConditionCode);
 		return false;
 	}
 
-	if (!SwitchScene(self, nSceneID, nNewGroupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	if (!SwitchScene(self, nSceneID, nGrupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
@@ -204,7 +197,7 @@ bool NFCSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTO
 	return true;
 }
 
-bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID)
+bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (!pSceneInfo)
@@ -229,6 +222,32 @@ bool NFCSceneAOIModule::CreateSceneObject(const int nSceneID, const int nGroupID
 		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
 
 		pResource = pSceneInfo->mtSceneResourceConfig.Next();
+	}
+
+	return false;
+}
+
+bool NFCSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		if (pSceneInfo->GetElement(nGroupID))
+		{
+			NFCDataList xMonsterlistObject;
+			if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, xMonsterlistObject, false))
+			{
+				for (int i = 0; i < xMonsterlistObject.GetCount(); ++i)
+				{
+					NFGUID ident = xMonsterlistObject.Object(i);
+					m_pKernelModule->DestroyObject(ident);
+				}
+			}
+
+			pSceneInfo->RemoveElement(nGroupID);
+
+			return true;
+		}
 	}
 
 	return false;

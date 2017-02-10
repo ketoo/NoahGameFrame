@@ -114,10 +114,6 @@ public:
 
     virtual int GetOnLineCount();
     virtual int GetMaxOnLineCount();
-    virtual int GetSceneOnLineCount(const int nSceneID);
-    virtual int GetSceneOnLineCount(const int nSceneID, const int nGroupID);
-
-    virtual int GetSceneOnLineList(const int nSceneID, NFIDataList& var);
 
     virtual int RequestGroupScene(const int nSceneID);
     virtual bool ReleaseGroupScene(const int nSceneID, const int nGroupID);
@@ -129,7 +125,8 @@ public:
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList& list, const bool bPlayer, const NFGUID& noSelf);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, NFIDataList& list);
 	virtual bool GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string& strClassName, const NFGUID& noSelf, NFIDataList& list);
-	virtual int GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
+	
+	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFIDataList& valueArgArg, NFIDataList& list);
 
     virtual void Random(int nStart, int nEnd, int nCount, NFIDataList& valueList);
 
