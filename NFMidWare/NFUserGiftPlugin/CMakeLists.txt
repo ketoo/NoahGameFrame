@@ -12,7 +12,7 @@ add_library(NFUserGiftPlugin SHARED
 set_target_properties( NFUserGiftPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFUserGiftPlugin_d")
 set_target_properties( NFUserGiftPlugin PROPERTIES PREFIX "")
 set_target_properties( NFUserGiftPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFUserGiftPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
