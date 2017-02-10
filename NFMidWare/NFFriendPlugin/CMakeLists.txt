@@ -12,7 +12,7 @@ add_library(NFFriendPlugin SHARED
 set_target_properties( NFFriendPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFFriendPlugin_d")
 set_target_properties( NFFriendPlugin PROPERTIES PREFIX "")
 set_target_properties( NFFriendPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFFriendPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

@@ -12,7 +12,7 @@ add_library(NFHeroPlugin SHARED
 set_target_properties( NFHeroPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFHeroPlugin_d")
 set_target_properties( NFHeroPlugin PROPERTIES PREFIX "")
 set_target_properties( NFHeroPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFHeroPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

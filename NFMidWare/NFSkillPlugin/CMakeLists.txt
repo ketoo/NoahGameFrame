@@ -12,7 +12,7 @@ add_library(NFSkillPlugin SHARED
 set_target_properties( NFSkillPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFSkillPlugin_d")
 set_target_properties( NFSkillPlugin PROPERTIES PREFIX "")
 set_target_properties( NFSkillPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFSkillPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
