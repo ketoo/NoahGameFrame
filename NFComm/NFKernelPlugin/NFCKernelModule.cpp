@@ -987,68 +987,6 @@ int NFCKernelModule::GetMaxOnLineCount()
     return 10000;
 }
 
-int NFCKernelModule::GetSceneOnLineCount(const int nSceneID)
-{
-    int nCount = 0;
-
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo)
-    {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->First();
-        while (pGroupInfo)
-        {
-            nCount += pGroupInfo->mxPlayerList.Count();
-            pGroupInfo = pSceneInfo->Next();
-        }
-    }
-
-    return nCount;
-}
-
-int NFCKernelModule::GetSceneOnLineCount(const int nSceneID, const int nGroupID)
-{
-    int nCount = 0;
-
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo)
-    {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
-        if (pGroupInfo)
-        {
-            nCount = pGroupInfo->mxPlayerList.Count();
-        }
-    }
-
-    return nCount;
-}
-
-//int NFCKernelModule::GetSceneOnLineList( const int nSceneID, type, NFIDataList& var )
-int NFCKernelModule::GetSceneOnLineList(const int nSceneID, NFIDataList& var)
-{
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo)
-    {
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->First();
-        while (pGroupInfo)
-        {
-            NFGUID ident;
-
-            NF_SHARE_PTR<int> pRet  = pGroupInfo->mxPlayerList.First(ident);
-            while (!ident.IsNull())
-            {
-                var.Add(ident);
-
-                ident = NFGUID();
-                pRet = pGroupInfo->mxPlayerList.Next(ident);
-            }
-
-            pGroupInfo = pSceneInfo->Next();
-        }
-    }
-
-    return var.GetCount();
-}
-
 int NFCKernelModule::RequestGroupScene(const int nSceneID)
 {
     NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
@@ -1075,26 +1013,14 @@ int NFCKernelModule::RequestGroupScene(const int nSceneID)
 
 bool NFCKernelModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 {
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo)
-    {
-        if (pSceneInfo->GetElement(nGroupID))
-        {
-            NFCDataList listObject;
-            if (GetGroupObjectList(nSceneID, nGroupID, listObject))
-            {
-                for (int i = 0; i < listObject.GetCount(); ++i)
-                {
-                    NFGUID ident = listObject.Object(i);
-                    DestroyObject(ident);
-                }
-            }
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		m_pSceneModule->DestroySceneNPC(nSceneID, nGroupID);
 
-            pSceneInfo->RemoveElement(nGroupID);
+		pSceneInfo->RemoveElement(nGroupID);
+	}
 
-            return true;
-        }
-    }
 
     return false;
 }
@@ -1116,7 +1042,6 @@ bool NFCKernelModule::ExitGroupScene(const int nSceneID, const int nGroupID)
 
 bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFIDataList & list, const NFGUID & noSelf)
 {
-
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo)
 	{
@@ -1190,7 +1115,6 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-
 		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
 		if (pGroupInfo)
 		{
@@ -1340,13 +1264,14 @@ bool NFCKernelModule::LogInfo(const NFGUID ident)
     NF_SHARE_PTR<NFIObject> pObject = GetObject(ident);
     if (pObject)
     {
-        int nSceneID = GetPropertyInt(ident, "SceneID");
+		int nSceneID = GetPropertyInt(ident, NFrame::IObject::SceneID());
+		int nGroupID = GetPropertyInt(ident, NFrame::IObject::GroupID());
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nSceneID);
 
         NFCDataList valObjectList;
-        int nCount = GetSceneOnLineList(nSceneID, valObjectList);
-        for (int i  = 0; i < nCount; i++)
+		GetGroupObjectList(nSceneID, nGroupID, valObjectList);
+        for (int i  = 0; i < valObjectList.GetCount(); i++)
         {
            NFGUID targetIdent = valObjectList.Object(i);
            LogInfo(targetIdent);
@@ -1386,10 +1311,11 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::GetObject(const NFGUID& ident)
     return GetElement(ident);
 }
 
-int NFCKernelModule::GetObjectByProperty(const int nSceneID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list)
+int NFCKernelModule::GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFIDataList& valueArg, NFIDataList& list)
 {
     NFCDataList varObjectList;
-    GetSceneOnLineList(nSceneID, varObjectList);
+	GetGroupObjectList(nSceneID, nGroupID, varObjectList);
+
     int nWorldCount = varObjectList.GetCount();
     for (int i = 0; i < nWorldCount; i++)
     {
