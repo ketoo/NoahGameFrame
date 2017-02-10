@@ -5,11 +5,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="NFItemModule">
+      <UniqueIdentifier>{aca86d9b-804f-493c-99f8-fbaa0a951d79}</UniqueIdentifier>
+    </Filter>
     <Filter Include="NFSkillModule">
       <UniqueIdentifier>{64e4498b-a722-4265-83c7-878f6081a67f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFNPCRefreshModule">
-      <UniqueIdentifier>{66b71f90-47f5-4f43-90e9-1f0b1af85713}</UniqueIdentifier>
+    <Filter Include="NFPackModule">
+      <UniqueIdentifier>{c6ede39e-606e-4c1c-af62-bd5348fb7990}</UniqueIdentifier>
     </Filter>
     <Filter Include="NFHeroModule">
       <UniqueIdentifier>{338af58a-ffe4-4588-ae11-6dc9949a7b53}</UniqueIdentifier>
@@ -56,10 +59,10 @@
     <ClInclude Include="NFCBuffModule.h">
       <Filter>NFBuffModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFGameLogicPlugin.h" />
-    <ClInclude Include="NFCNPCRefreshModule.h">
-      <Filter>NFNPCRefreshModule</Filter>
+    <ClInclude Include="NFCPackModule.h">
+      <Filter>NFPackModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFGameLogicPlugin.h" />
     <ClInclude Include="NFCHeroModule.h">
       <Filter>NFHeroModule</Filter>
     </ClInclude>
@@ -105,11 +108,29 @@
     <ClInclude Include="NFCGSTeamModule.h">
       <Filter>NFTeamModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCItemModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
     <ClInclude Include="NFCSkillModule.h">
       <Filter>NFSkillModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCItemCardConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
     <ClInclude Include="NFCGSPVPMatchModule.h">
       <Filter>NFPVPModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemEquipConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemGemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemItemConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCItemTokenConsumeProcessModule.h">
+      <Filter>NFItemModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
@@ -121,10 +142,10 @@
     <ClCompile Include="NFCBuffModule.cpp">
       <Filter>NFBuffModule</Filter>
     </ClCompile>
-    <ClCompile Include="NFGameLogicPlugin.cpp" />
-    <ClCompile Include="NFCNPCRefreshModule.cpp">
-      <Filter>NFNPCRefreshModule</Filter>
+    <ClCompile Include="NFCPackModule.cpp">
+      <Filter>NFPackModule</Filter>
     </ClCompile>
+    <ClCompile Include="NFGameLogicPlugin.cpp" />
     <ClCompile Include="NFCHeroModule.cpp">
       <Filter>NFHeroModule</Filter>
     </ClCompile>
@@ -170,11 +191,29 @@
     <ClCompile Include="NFCGSTeamModule.cpp">
       <Filter>NFTeamModule</Filter>
     </ClCompile>
+    <ClCompile Include="NFCItemModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
     <ClCompile Include="NFCSkillModule.cpp">
       <Filter>NFSkillModule</Filter>
     </ClCompile>
+    <ClCompile Include="NFCItemCardConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
     <ClCompile Include="NFCGSPVPMatchModule.cpp">
       <Filter>NFPVPModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemGemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemItemConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCItemTokenConsumeProcessModule.cpp">
+      <Filter>NFItemModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
