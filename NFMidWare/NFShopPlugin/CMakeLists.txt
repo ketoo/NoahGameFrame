@@ -12,7 +12,7 @@ add_library(NFShopPlugin SHARED
 set_target_properties( NFShopPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFShopPlugin_d")
 set_target_properties( NFShopPlugin PROPERTIES PREFIX "")
 set_target_properties( NFShopPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFShopPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
