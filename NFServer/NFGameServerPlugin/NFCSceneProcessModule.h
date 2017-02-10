@@ -48,6 +48,8 @@ public:
     virtual bool AfterInit();
 
     virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
+	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList);
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList& argList);
 
 protected:
 	bool LoadSceneResource(const std::string& strSceneIDName);
