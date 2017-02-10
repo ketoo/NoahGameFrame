@@ -55,7 +55,7 @@ public:
 
 protected:
 	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 protected:
     NFIClassModule* m_pLogicClassModule;
