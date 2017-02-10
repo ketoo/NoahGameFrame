@@ -1,4 +1,2 @@
 add_subdirectory(NFChatPlugin)
-add_subdirectory(NFFriendPlugin)
-add_subdirectory(NFHeroPlugin)
 add_subdirectory(NFItemBagPlugin)
