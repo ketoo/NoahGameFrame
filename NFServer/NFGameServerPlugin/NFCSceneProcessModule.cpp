@@ -54,14 +54,42 @@ bool NFCSceneProcessModule::AfterInit()
         bool bRet = strIdList.First(strId);
         while (bRet)
         {
-			CreateSceneBaseGroup(strId);
+			//load first
             LoadSceneResource(strId);
+			//create second
+			CreateSceneBaseGroup(strId);
 
             bRet = strIdList.Next(strId);
         }
     }
 
     return true;
+}
+bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFIDataList & argList)
+{
+	return RequestEnterScene(self, nSceneID, -1, nType, argList);
+}
+
+bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFIDataList & argList)
+{
+	if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
+	{
+		int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+		if (nNewGroupID > 0)
+		{
+			return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+		}
+	}
+	else if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
+	{
+
+
+	}
+	else if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
+	{
+		return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, 1, nType, argList);
+	}
+	return false;
 }
 
 int NFCSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
@@ -71,6 +99,24 @@ int NFCSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const
 
 int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
+	E_SCENE_TYPE eSceneType = GetCloneSceneType(nSceneID);
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
+	{
+		m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+
+		return 0;
+	}
+	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
+	{
+		NFCDataList varObjectList;
+		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		{
+			m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+		}
+	}
+
 	return 0;
 }
 
@@ -80,17 +126,25 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
-            
-            int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-            if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
-            {
-                int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+			int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+			int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
-                //m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+            if (GetCloneSceneType(nSceneID) == SCENE_TYPE_SINGLE_CLONE_SCENE)
+            {
+                m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
-
             }
+			else if (GetCloneSceneType(nSceneID) == SCENE_TYPE_MULTI_CLONE_SCENE)
+			{
+				NFCDataList varObjectList;
+				if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+				{
+					m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
+
+					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
+				}
+			}
         }
     }
 
@@ -104,17 +158,29 @@ int NFCSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const i
 
 int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
-	m_pSceneAOIModule->CreateSceneObject(nSceneID, nGroupID);
+	//you can use object pool to enhance performance
+	E_SCENE_TYPE eSceneType = GetCloneSceneType(nSceneID);
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
+	{
+		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+
+		return 0;
+	}
+	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
+	{
+		NFCDataList varObjectList;
+		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
+		{
+			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+		}
+	}
 
 	return 0;
 }
 
 int NFCSceneProcessModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList & argList)
 {
-	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_CLONE_SCENE)
-	{
-		return 0;
-	}
+
 
 	return 1;
 }
@@ -124,10 +190,26 @@ E_SCENE_TYPE NFCSceneProcessModule::GetCloneSceneType(const int nSceneID)
 	std::string strSceneIDName = lexical_cast<std::string>(nSceneID);
     if (m_pElementModule->ExistElement(strSceneIDName))
     {
-        return (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(strSceneIDName, NFrame::Scene::CanClone());
+		int nClone = m_pElementModule->GetPropertyInt(strSceneIDName, NFrame::Scene::CanClone());
+		int nMulti = m_pElementModule->GetPropertyInt(strSceneIDName, NFrame::Scene::Share());
+		if (nClone > 0)
+		{
+			if (nMulti > 0)
+			{
+				return E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE;
+			}
+			else
+			{
+				return E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE;
+			}
+		}
+		else
+		{
+			return E_SCENE_TYPE::SCENE_TYPE_NORMAL;
+		}
     }
 
-    return SCENE_TYPE_ERROR;
+    return E_SCENE_TYPE::SCENE_TYPE_ERROR;
 }
 
 bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
@@ -161,10 +243,15 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDName)
 {
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
-	if (GetCloneSceneType(nSceneID) != SCENE_TYPE_CLONE_SCENE)
+	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_NORMAL)
 	{
-		//line 1
-		m_pKernelModule->RequestGroupScene(nSceneID);
+		//line 10
+		for (int i = 0; i < 10; ++i)
+		{
+			int nGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+		}
+
 		return true;
 	}
 
