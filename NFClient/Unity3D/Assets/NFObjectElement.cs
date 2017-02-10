@@ -33,13 +33,13 @@ public class NFObjectElement
 	    }
 
 		
-		int nElementWidth = 150;
+		int nElementWidth = 300;
 		int nElementHeight = 20;
 
         GUI.color = Color.red;
-        strInfo = GUI.TextField(new Rect(0, nHeight - 20, nElementWidth * 3f + 120, 20), strInfo);
-        strCommand = GUI.TextField(new Rect(nElementWidth * 3f + 120, nHeight - 20, 350, 20), strCommand);
-        if (GUI.Button(new Rect(nWidth - 100, nHeight - 20, 100, 20),  "cmd"))
+        strInfo = GUI.TextField(new Rect(0, nHeight - 20, nElementWidth, 20), strInfo);
+        strCommand = GUI.TextField(new Rect(nElementWidth, nHeight - 20, 350, 20), strCommand);
+		if (GUI.Button(new Rect(nElementWidth + 350, nHeight - 20, 100, 20),  "cmd"))
         {
 
         }
@@ -48,7 +48,7 @@ public class NFObjectElement
 
         NFIDataList objectList = kernel.GetObjectList();
 
-        scrollPositionFirst = GUI.BeginScrollView(new Rect(0, nElementHeight, nElementWidth / 2 + 20, nHeight), scrollPositionFirst, new Rect(0, 0, nElementWidth, objectList.Count() * (nElementHeight)));
+        scrollPositionFirst = GUI.BeginScrollView(new Rect(0, nElementHeight, nElementWidth / 2 + 20, nHeight - 100), scrollPositionFirst, new Rect(0, 0, nElementWidth, objectList.Count() * (nElementHeight)));
 
 
 		//all object
@@ -60,6 +60,7 @@ public class NFObjectElement
 			{
                 xTargetIdent = ident;
 				strTableName = "";
+				strInfo = ident.ToString();
 			}
 			
 		}
@@ -70,166 +71,166 @@ public class NFObjectElement
 		if(!xTargetIdent.IsNull())
 		{
 			NFIObject go = kernel.GetObject(xTargetIdent);
-			
-			
-			NFIDataList recordLlist = go.GetRecordManager().GetRecordList();
-			NFIDataList propertyList = go.GetPropertyManager().GetPropertyList();
-			
-			int nAllElement = 1;
-			for(int j = 0; j < recordLlist.Count(); j++)
+			if (null != go)
 			{
-				string strRecordName = recordLlist.StringVal(j);
-				if(strRecordName.Length > 0)
-				{
-					nAllElement++;
-				}
-			}
-			for(int j = 0; j < propertyList.Count(); j++)
-			{
-				string strPropertyName = propertyList.StringVal(j);
-				if(strPropertyName.Length > 0)
-				{
-					nAllElement++;
-				}
-			}
-			//////////////////
-            scrollPositionSecond = GUI.BeginScrollView(new Rect(nElementWidth / 2 + 20, nElementHeight, nElementWidth+20, nHeight/2), scrollPositionSecond, new Rect(0, 0, nElementWidth, (nAllElement+1) * (nElementHeight) + 1));
+				NFIDataList recordLlist = go.GetRecordManager().GetRecordList();
+				NFIDataList propertyList = go.GetPropertyManager().GetPropertyList();
 
-			int nElementIndex = 0;
-			GUI.Button(new Rect(0, nElementIndex*nElementHeight, nElementWidth, nElementHeight), xTargetIdent.nData64.ToString());
-			nElementIndex++;
-			//all record
-			for(int j = 0; j < recordLlist.Count(); j++)
-			{
-				string strRecordName = recordLlist.StringVal(j);
-				if(strRecordName.Length > 0)
+				int nAllElement = 1;
+				for(int j = 0; j < recordLlist.Count(); j++)
 				{
-					if(GUI.Button(new Rect(0, nElementIndex*nElementHeight, nElementWidth, nElementHeight), "++" + strRecordName))
+					string strRecordName = recordLlist.StringVal(j);
+					if(strRecordName.Length > 0)
 					{
-						strTableName = strRecordName;
+						nAllElement++;
 					}
-					
-					nElementIndex++;
 				}
-				
-			}
-	
-			
-			///////////////////////////////
-			//all property 
-
-
-            for (int k = 0; k < propertyList.Count(); k++)
-            {
-                string strPropertyValue = null;
-                string strPropertyName = propertyList.StringVal(k);
-                NFIProperty property = go.GetPropertyManager().GetProperty(strPropertyName);
-                NFIDataList.VARIANT_TYPE eType = property.GetType();
-                switch (eType)
-                {
-                    case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
-                        strPropertyValue = property.QueryFloat().ToString();
-                        break;
-                    case NFIDataList.VARIANT_TYPE.VTYPE_INT:
-                        strPropertyValue = property.QueryInt().ToString();
-                        break;
-                    case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
-                        strPropertyValue = property.QueryObject().nData64.ToString();
-                        break;
-                    case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
-                        strPropertyValue = property.QueryString();
-                        break;
-                    default:
-                        strPropertyValue = "?";
-                        break;
-                }
-
-                if (strPropertyName.Length > 0)
-                {
-                    if (GUI.Button(new Rect(0, nElementIndex * nElementHeight, nElementWidth, nElementHeight), strPropertyName + ":" + strPropertyValue))
-                    {
-                        strTableName = "";
-                        strInfo = strPropertyName + ":" + strPropertyValue;
-                    }
-                    nElementIndex++;
-                }
-				
-			}
-			
-			
-			GUI.EndScrollView();
-			////////////////////////
-			
-			
-			if(strTableName.Length > 0)
-			{
-				NFIRecord record = go.GetRecordManager().GetRecord(strTableName);
-				if(null != record)
+				for(int j = 0; j < propertyList.Count(); j++)
 				{
-					int nRow = record.GetRows();
-					int nCol = record.GetCols();
-					int nOffest = 30;
-
-                    scrollPositionThird = GUI.BeginScrollView(new Rect(nElementWidth * 1.5f + 40, nElementHeight, nElementWidth * 2, nHeight/2), scrollPositionThird, new Rect(0, 0, nElementWidth * nCol + nOffest, nRow * nElementHeight + nOffest));
-					
-						
-					string selString = null;
-					
-					
-					for(int row = 0; row < nRow; row++)
+					string strPropertyName = propertyList.StringVal(j);
+					if(strPropertyName.Length > 0)
 					{
-						GUI.Button(new Rect(0, row*nElementHeight+nOffest, nOffest, nElementHeight), row.ToString());//row
-						for(int col = 0; col < nCol; col++)
+						nAllElement++;
+					}
+				}
+				//////////////////
+				scrollPositionSecond = GUI.BeginScrollView(new Rect(nElementWidth / 2 + 25, nElementHeight, nElementWidth/2 + 25, nHeight - 100), scrollPositionSecond, new Rect(0, 0, nElementWidth, (nAllElement+1) * (nElementHeight) + 1));
+
+				int nElementIndex = 0;
+				GUI.Button(new Rect(0, nElementIndex*nElementHeight, nElementWidth, nElementHeight), xTargetIdent.ToString());
+				nElementIndex++;
+				//all record
+				for(int j = 0; j < recordLlist.Count(); j++)
+				{
+					string strRecordName = recordLlist.StringVal(j);
+					if(strRecordName.Length > 0)
+					{
+						if(GUI.Button(new Rect(0, nElementIndex*nElementHeight, nElementWidth, nElementHeight), "++" + strRecordName))
 						{
-							if(0 == row)
-							{
-                                GUI.Button(new Rect(col * nElementWidth + nOffest, 0, nElementWidth, nElementHeight), col.ToString() + "  [" + record.GetColType(col) + "]");
-							}
-							
-							if(record.IsUsed(row))
-							{
-								NFIDataList.VARIANT_TYPE eType = record.GetColType(col);
-								switch(eType)
-								{								
-								case NFIDataList.VARIANT_TYPE.VTYPE_INT:
-									selString = record.QueryInt(row, col).ToString();
-									break;
-									
-								case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
-									selString = record.QueryFloat(row, col).ToString();
-									break;
-									
-								case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
-									selString = record.QueryString(row, col).ToString();
-									break;
-									
-								case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
-									selString = record.QueryObject(row, col).nData64.ToString();
-									break;
-									
-								default:
-									selString = "UnKnowType";
-									break;
-									
-								}
-							}
-							else
-							{
-								selString = "NoUse";
-							}
-							
-							if(GUI.Button(new Rect(col*nElementWidth+nOffest, row*nElementHeight+nOffest, nElementWidth, nElementHeight), selString))
-							{
-								strInfo = "Row:" + row.ToString() + " Col:" + col.ToString() + " " + selString;
-							}
-			
+							strTableName = strRecordName;
 						}
+
+						nElementIndex++;
 					}
-					
-					GUI.EndScrollView();
-				}				
+
+				}
+
+
+				///////////////////////////////
+				//all property 
+
+
+				for (int k = 0; k < propertyList.Count(); k++)
+				{
+					string strPropertyValue = null;
+					string strPropertyName = propertyList.StringVal(k);
+					NFIProperty property = go.GetPropertyManager().GetProperty(strPropertyName);
+					NFIDataList.VARIANT_TYPE eType = property.GetType();
+					switch (eType)
+					{
+						case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+						strPropertyValue = property.QueryFloat().ToString();
+						break;
+						case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+						strPropertyValue = property.QueryInt().ToString();
+						break;
+						case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+						strPropertyValue = property.QueryObject().nData64.ToString();
+						break;
+						case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+						strPropertyValue = property.QueryString();
+						break;
+						default:
+						strPropertyValue = "?";
+						break;
+					}
+
+					if (strPropertyName.Length > 0)
+					{
+						if (GUI.Button(new Rect(0, nElementIndex * nElementHeight, nElementWidth, nElementHeight), strPropertyName + ":" + strPropertyValue))
+						{
+							strTableName = "";
+							strInfo = strPropertyName + ":" + strPropertyValue;
+						}
+						nElementIndex++;
+					}
+
+				}
+
+
+				GUI.EndScrollView();
+				////////////////////////
+
+
+				if(strTableName.Length > 0)
+				{
+					NFIRecord record = go.GetRecordManager().GetRecord(strTableName);
+					if(null != record)
+					{
+						int nRow = record.GetRows();
+						int nCol = record.GetCols();
+						int nOffest = 30;
+
+						scrollPositionThird = GUI.BeginScrollView(new Rect(nElementWidth + 50, nElementHeight, nElementWidth * 3, nHeight/2), scrollPositionThird, new Rect(0, 0, nElementWidth * nCol + nOffest, nRow * nElementHeight + nOffest));
+
+
+						string selString = null;
+
+
+						for(int row = 0; row < nRow; row++)
+						{
+							GUI.Button(new Rect(0, row*nElementHeight+nOffest, nOffest, nElementHeight), row.ToString());//row
+							for(int col = 0; col < nCol; col++)
+							{
+								if(0 == row)
+								{
+									GUI.Button(new Rect(col * nElementWidth + nOffest, 0, nElementWidth, nElementHeight), col.ToString() + "  [" + record.GetColType(col) + "]");
+								}
+
+								if(record.IsUsed(row))
+								{
+									NFIDataList.VARIANT_TYPE eType = record.GetColType(col);
+									switch(eType)
+									{								
+										case NFIDataList.VARIANT_TYPE.VTYPE_INT:
+										selString = record.QueryInt(row, col).ToString();
+										break;
+
+										case NFIDataList.VARIANT_TYPE.VTYPE_FLOAT:
+										selString = record.QueryFloat(row, col).ToString();
+										break;
+
+										case NFIDataList.VARIANT_TYPE.VTYPE_STRING:
+										selString = record.QueryString(row, col).ToString();
+										break;
+
+										case NFIDataList.VARIANT_TYPE.VTYPE_OBJECT:
+										selString = record.QueryObject(row, col).nData64.ToString();
+										break;
+
+										default:
+										selString = "UnKnowType";
+										break;
+
+									}
+								}
+								else
+								{
+									selString = "NoUse";
+								}
+
+								if(GUI.Button(new Rect(col*nElementWidth+nOffest, row*nElementHeight+nOffest, nElementWidth, nElementHeight), selString))
+								{
+									strInfo = "Row:" + row.ToString() + " Col:" + col.ToString() + " " + selString;
+								}
+
+							}
+						}
+
+						GUI.EndScrollView();
+					}				
+				}
 			}
-			
 		}
 		
 
