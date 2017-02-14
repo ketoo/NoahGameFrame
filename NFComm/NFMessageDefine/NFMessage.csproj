@@ -46,7 +46,6 @@
     <Compile Include="NFMsgPreGame.cs" />
     <Compile Include="NFMsgShare.cs" />
     <Compile Include="NFMsgURl.cs" />
-    <Compile Include="NFRecordDefine.cs" />
     <Compile Include="NFSLGDefine.cs" />
   </ItemGroup>
   <ItemGroup>
