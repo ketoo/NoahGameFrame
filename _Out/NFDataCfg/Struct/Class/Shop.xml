@@ -8,6 +8,7 @@
 		<Property Id="Stone" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Diamond" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Level" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
+		<Property Id="Count" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Upload="0" Desc=""/>
 	</Propertys>
 	<Records/>
 	<Components/>

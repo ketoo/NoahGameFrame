@@ -184,6 +184,7 @@ ALTER TABLE `Shop` ADD `Steel` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Stone` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Diamond` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Shop` ADD `Level` bigint(11) DEFAULT '0' COMMENT '';
+ALTER TABLE `Shop` ADD `Count` bigint(11) DEFAULT '0' COMMENT '';
 ALTER TABLE `Skill` ADD `X` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Skill` ADD `Y` float(11,3) DEFAULT '0' COMMENT '';
 ALTER TABLE `Skill` ADD `Z` float(11,3) DEFAULT '0' COMMENT '';

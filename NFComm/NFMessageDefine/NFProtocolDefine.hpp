@@ -1143,6 +1143,7 @@ public:
 	static const std::string& Stone(){ static std::string xStone = "Stone"; return xStone; } // int
 	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond; } // int
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
+	static const std::string& Count(){ static std::string xCount = "Count"; return xCount; } // int
 	// Record
 
 };
