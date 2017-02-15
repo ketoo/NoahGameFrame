@@ -1088,6 +1088,7 @@ public class Shop {
 	public static final String Stone = "Stone"; // int
 	public static final String Diamond = "Diamond"; // int
 	public static final String Level = "Level"; // int
+	public static final String Count = "Count"; // int
 	// Record
 
 }

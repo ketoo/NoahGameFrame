@@ -582,16 +582,14 @@ inline bool EBattleType_Parse(
 enum EShopType {
   EST_BUILDING = 1,
   EST_GOLD = 2,
-  EST_DIAMOND = 3,
-  EST_SP = 4,
+  EST_ITEM = 3,
   EST_EQUIP = 5,
   EST_GEM = 6,
-  EST_Hero = 7,
-  EST_Other = 8
+  EST_CARD = 7
 };
 LIBPROTOC_EXPORT bool EShopType_IsValid(int value);
 const EShopType EShopType_MIN = EST_BUILDING;
-const EShopType EShopType_MAX = EST_Other;
+const EShopType EShopType_MAX = EST_CARD;
 const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
