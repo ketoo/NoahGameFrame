@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFCHeroPropertyModule.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2017-02-16
+//    @Module           :    NFCHeroPropertyModule
+//
+// -------------------------------------------------------------------------
+
 #include "NFCHeroPropertyModule.h"
 
 bool NFCHeroPropertyModule::Init()

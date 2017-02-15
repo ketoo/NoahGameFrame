@@ -112,15 +112,11 @@
     <ClInclude Include="NFCGmModule.h" />
     <ClInclude Include="NFCGSSwichServerModule.h" />
     <ClInclude Include="NFCGSTeamModule.h" />
-    <ClInclude Include="NFCHeroModule.h" />
-    <ClInclude Include="NFCHeroPropertyModule.h" />
     <ClInclude Include="NFCMailModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCRankModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
-    <ClInclude Include="NFCSLGBuildingModule.h" />
-    <ClInclude Include="NFCSLGShopModule.h" />
     <ClInclude Include="NFCTaskModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
@@ -143,15 +139,11 @@
     <ClCompile Include="NFCGmModule.cpp" />
     <ClCompile Include="NFCGSSwichServerModule.cpp" />
     <ClCompile Include="NFCGSTeamModule.cpp" />
-    <ClCompile Include="NFCHeroModule.cpp" />
-    <ClCompile Include="NFCHeroPropertyModule.cpp" />
     <ClCompile Include="NFCMailModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCRankModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
-    <ClCompile Include="NFCSLGBuildingModule.cpp" />
-    <ClCompile Include="NFCSLGShopModule.cpp" />
     <ClCompile Include="NFCTaskModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>

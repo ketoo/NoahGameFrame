@@ -4,6 +4,10 @@ file(GLOB NFShopPlugin_ROOT_Cpp
 	
 file(GLOB NFShopPlugin_ROOT_Hpp 
 	*.h)
+	
+remove_file(NFShopPlugin_ROOT_Cpp "NFCSLGBuildingModule.cpp")
+remove_file(NFShopPlugin_ROOT_Hpp "NFCSLGBuildingModule.h")
+
 
 add_library(NFShopPlugin SHARED
 	${NFShopPlugin_ROOT_Cpp}
