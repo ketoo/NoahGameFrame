@@ -55,7 +55,7 @@ public:
     };
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
@@ -66,7 +66,7 @@ public:
 	}
 
 	template<typename BaseType>
-	int AddReceiveCallBack(NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	int AddReceiveCallBack(const NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
@@ -77,7 +77,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddEventCallBack(NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
+	bool AddEventCallBack(const NF_SERVER_TYPES eType, BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
 	{
 		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
@@ -87,11 +87,11 @@ public:
 		return true;
 	}
 
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
-	virtual int AddEventCallBack(NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr) = 0;
 
-	virtual void RemoveReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID) = 0;
+	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID) = 0;
 	////////////////////////////////////////////////////////////////////////////////
 
 	virtual void AddServer(const ConnectData& xInfo) = 0;
@@ -100,40 +100,28 @@ public:
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 
 	virtual void SendToAllServer(const int nMsgID, const std::string& strData) = 0;
-	virtual void SendToAllServer(NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData) = 0;
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData) = 0;
 
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 
 	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-	virtual void SendToAllServerByPB(NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
+	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
 
-	virtual void SendBySuit(const std::string& strHashKey, const int nMsgID, const std::string& strData) = 0;
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData) = 0;
-
-	virtual void SendBySuit(const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-
-	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const std::string& strData) = 0;
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData) = 0;
-
-	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-
-	virtual void SendSuitByPB(const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-	virtual void SendSuitByPB(NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-
-	virtual void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-	virtual void SendSuitByPB(NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
-
-	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID) = 0;
 
 	virtual NFMapEx<int, ConnectData>& GetServerList() = 0;
-	virtual NFMapEx<int, ConnectData>& GetServerList(NF_SERVER_TYPES eType) = 0;
+	virtual NFMapEx<int, ConnectData>& GetServerList(const NF_SERVER_TYPES eType) = 0;
 
+	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID) = 0;
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet) = 0;
 };
 #endif
