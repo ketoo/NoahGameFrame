@@ -40,7 +40,7 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
-    virtual bool AddHero(const NFGUID& self, const std::string& strID);
+    virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp);
     virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
