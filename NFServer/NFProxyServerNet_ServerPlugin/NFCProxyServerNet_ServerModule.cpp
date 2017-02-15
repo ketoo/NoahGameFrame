@@ -275,7 +275,7 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex
 
         NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
         ConnectData* pGameData = xServerList.FirstNude();
-        while (NULL != pGameData)
+        while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
         {
             if (ConnectDataState::NORMAL == pGameData->eState)
             {
