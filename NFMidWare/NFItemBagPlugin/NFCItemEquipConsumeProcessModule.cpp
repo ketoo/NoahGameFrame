@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemEquipConsumeProcessModule.cpp
+//    @FileName			:   NFCItemEquipConsumeProcessModule.cpp
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemEquipConsumeProcessModule

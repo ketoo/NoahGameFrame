@@ -49,12 +49,12 @@ bool NFCHeroModule::BeforeShut()
 	return true;
 }
 
-bool NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
+NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
-	if (nullptr == pHeroRecord.get())
+	if (nullptr == pHeroRecord)
 	{
-		return false;
+		return NFGUID();
 	}
 
 	NF_SHARE_PTR<NFDataList> xRowData = pHeroRecord->GetInitData();
@@ -66,10 +66,10 @@ bool NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 
 	if (pHeroRecord->AddRow(-1, *xRowData) < 0)
 	{
-		return false;
+		return xHeroID;
 	}
 
-	return true;
+	return NFGUID();
 }
 
 bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp)
