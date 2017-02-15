@@ -4,6 +4,7 @@
 //    @Date             :    2016-12-18
 //    @Module           :    NFCShopModule
 //    @Desc             :
+// -------------------------------------------------------------------------
 
 #include "NFCShopModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -17,6 +18,7 @@ bool NFCShopModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	
 	return true;
 }
@@ -32,76 +34,95 @@ bool NFCShopModule::AfterInit()
 
 void NFCShopModule::OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	/*
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
 
-	const std::string& strItemID = xMsg.config_id();
+	const std::string& strShopItemID = xMsg.config_id();
 	NFVector3 v;
 	v.SetX(xMsg.x());
 	v.SetY(xMsg.y());
 	v.SetZ(xMsg.z());
 
-	ReqBuyItem(nPlayerID, strItemID, v);
-	*/
+	ReqBuyItem(nPlayerID, strShopItemID, v);
 }
 
-bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strID)
+bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopItemID)
 {
 	return false;
 }
 
-bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strID, const NFVector3 & v)
+bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopItemID, const NFVector3 & v)
 {
-	if (!m_pElementModule->ExistElement(strID))
+	if (!m_pElementModule->ExistElement(strShopItemID))
 	{
 		return false;
 	}
 
-	int nNeedLevel = m_pElementModule->GetPropertyInt(strID, NFrame::Shop::Level());
+	const int nNeedLevel = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Level());
 	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level()) < nNeedLevel)
 	{
 		return false;
 	}
 
-	int nDiamond = m_pElementModule->GetPropertyInt(strID, NFrame::Shop::Diamond());
-	if (!m_pPropertyModule->ConsumeDiamond(self, nDiamond))
-	{
-		return false;
-	}
-
-	const std::string& strItem = m_pElementModule->GetPropertyString(strID, NFrame::Shop::ItemID());
+	const std::string& strItem = m_pElementModule->GetPropertyString(strShopItemID, NFrame::Shop::ItemID());
 	if (!m_pElementModule->ExistElement(strItem))
 	{
 		return false;
 	}
 
-	const int nShopType = m_pElementModule->GetPropertyInt(strID, NFrame::Shop::Type());
+	const int nDiamond = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Diamond());
+	const int nGold = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Gold());
+	const int nStone = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Stone());
+	const int nSteel = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Steel());
+	
+	if (!m_pPropertyModule->EnoughDiamond(self, nDiamond)
+		&& !m_pPropertyModule->EnoughMoney(self, nGold))
+	{
+		return false;
+	}
+	
+	if (!m_pPropertyModule->ConsumeDiamond(self, nDiamond)
+		&& !m_pPropertyModule->ConsumeMoney(self, nGold))
+	{
+		return false;
+	}
+
+	const int nShopType = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Type());
+	const int nShopCount = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Count());
 	switch (nShopType)
 	{
-	case NFMsg::EShopType::EST_GOLD:
-	case NFMsg::EShopType::EST_DIAMOND:
-	case NFMsg::EShopType::EST_SP:
-	{
-		//m_pPackModule->CreateItem(self, strItem, 1);
-	}
-	break;
-	case NFMsg::EShopType::EST_BUILDING:
-	{
-		//m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
-	}
-	break;
-	default:
-	{
-		const int nItemType = m_pElementModule->GetPropertyInt(strItem, NFrame::Server::Type());
-		if (nItemType == NFMsg::EItemType::EIT_EQUIP)
+		//EST_BUILDING 	= 1;//
+		//EST_GOLD = 2;//
+		//EST_ITEM = 3;//
+		//EST_EQUIP = 5;//
+		//EST_GEM = 6;//
+		//EST_CARD = 7;//
+		case NFMsg::EShopType::EST_BUILDING:
 		{
-			//m_pPackModule->CreateEquip(self, strItem);
+			//m_pSLGBuildingModule->AddBuilding(self, strItem, fX, fY, fZ);
 		}
-		else
+		break;
+		case NFMsg::EShopType::EST_GOLD:
 		{
-			//m_pPackModule->CreateItem(self, strItem, 1);
+			m_pPropertyModule->AddMoney(self, nShopCount);
 		}
-	}
+		break;
+		default:
+		{
+			const int nItemType = m_pElementModule->GetPropertyInt(strItem, NFrame::Server::Type());
+			switch (nItemType)
+			{
+			case NFMsg::EItemType::EIT_EQUIP:
+			case NFMsg::EItemType::EIT_GEM:
+			case NFMsg::EItemType::EIT_ITEM:
+			case NFMsg::EItemType::EIT_CARD:
+			case NFMsg::EItemType::EIT_TOKEN:
+				m_pPackModule->CreateEquip(self, strItem);
+				break;
+			default:
+				break;
+			}
+		}
+		break;
 	}
 
 	return false;
