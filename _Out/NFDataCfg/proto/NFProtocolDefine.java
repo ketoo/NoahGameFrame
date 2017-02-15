@@ -322,8 +322,8 @@ public class Guild {
 	public static final String GuildMoney = "GuildMoney"; // int
 	public static final String GuildLevel = "GuildLevel"; // int
 	public static final String GuildContinueDay = "GuildContinueDay"; // int
-	public static final String GuilID = "GuilID"; // object
-	public static final String GuilIDIcon = "GuilIDIcon"; // int
+	public static final String GuildID = "GuildID"; // object
+	public static final String GuildIcon = "GuildIcon"; // int
 	public static final String GuildMemeberCount = "GuildMemeberCount"; // int
 	public static final String GuildMemeberMaxCount = "GuildMemeberMaxCount"; // int
 	public static final String GuildHonor = "GuildHonor"; // int

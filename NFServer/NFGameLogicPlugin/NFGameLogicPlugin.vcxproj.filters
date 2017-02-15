@@ -43,7 +43,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCGameLogicModule.h" />
     <ClInclude Include="NFCBuffModule.h">
       <Filter>NFBuffModule</Filter>
     </ClInclude>
@@ -93,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCGameLogicModule.cpp" />
     <ClCompile Include="NFCBuffModule.cpp">
       <Filter>NFBuffModule</Filter>
     </ClCompile>

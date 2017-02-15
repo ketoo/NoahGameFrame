@@ -57,8 +57,8 @@ ALTER TABLE `Guild` ADD `GuildDesc` varchar(128) DEFAULT '' COMMENT '工会描�
 ALTER TABLE `Guild` ADD `GuildMoney` bigint(11) DEFAULT '0' COMMENT '工会财富';
 ALTER TABLE `Guild` ADD `GuildLevel` bigint(11) DEFAULT '0' COMMENT '工会等级';
 ALTER TABLE `Guild` ADD `GuildContinueDay` bigint(11) DEFAULT '0' COMMENT '工会霸占排行榜天数';
-ALTER TABLE `Guild` ADD `GuilID` varchar(128) DEFAULT '' COMMENT '工会ID';
-ALTER TABLE `Guild` ADD `GuilIDIcon` bigint(11) DEFAULT '0' COMMENT '公会头像';
+ALTER TABLE `Guild` ADD `GuildID` varchar(128) DEFAULT '' COMMENT '工会ID';
+ALTER TABLE `Guild` ADD `GuildIcon` bigint(11) DEFAULT '0' COMMENT '公会头像';
 ALTER TABLE `Guild` ADD `GuildMemeberCount` bigint(11) DEFAULT '0' COMMENT '成员数量(增加个字段，不然遍历Record太麻烦)';
 ALTER TABLE `Guild` ADD `GuildMemeberMaxCount` bigint(11) DEFAULT '0' COMMENT '成员最大数量';
 ALTER TABLE `Guild` ADD `GuildHonor` bigint(11) DEFAULT '0' COMMENT '公会荣誉';
