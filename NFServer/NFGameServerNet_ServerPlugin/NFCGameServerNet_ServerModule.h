@@ -9,9 +9,6 @@
 #ifndef NFC_GAMESERVER_SERVER_MODULE_H
 #define NFC_GAMESERVER_SERVER_MODULE_H
 
-//#include "GameServerPCH.h"
-//#include "NW_Helper.h"
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -136,6 +133,6 @@ private:
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
     //////////////////////////////////////////////////////////////////////////
-    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+    NFINetClientModule* m_pNetClientModule;
 };
 #endif

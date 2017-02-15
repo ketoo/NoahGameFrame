@@ -38,10 +38,10 @@ bool NFCProxyServerToGameModule::AfterInit()
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 
-	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
-	m_pNetClientModule->AddReceiveCallBack(this, &NFCProxyServerToGameModule::Transpond);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::Transpond);
 
-	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToGameModule::OnSocketGSEvent);
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::OnSocketGSEvent);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)

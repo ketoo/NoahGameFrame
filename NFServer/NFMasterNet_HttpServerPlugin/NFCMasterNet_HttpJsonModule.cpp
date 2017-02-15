@@ -22,6 +22,11 @@
 bool NFCMasterNet_HttpJsonModule::Init()
 {
 	m_pHttpNetModule = new NFIHttpServerModule(pPluginManager);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
 
 	return true;
 }
@@ -34,11 +39,6 @@ bool NFCMasterNet_HttpJsonModule::Shut()
 
 bool NFCMasterNet_HttpJsonModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
 	m_pHttpNetModule->AddReceiveCallBack("json", this, &NFCMasterNet_HttpJsonModule::OnCommandQuery);
 	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpJsonModule::OnCommonQuery);
 

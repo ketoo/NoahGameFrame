@@ -15,13 +15,16 @@
 
 NFCMasterNet_ServerModule::~NFCMasterNet_ServerModule()
 {
-	delete m_pNetModule;
-	m_pNetModule = nullptr;
 }
 
 bool NFCMasterNet_ServerModule::Init()
 {
-	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
 	return true;
 }
 
@@ -231,10 +234,6 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
 
 bool NFCMasterNet_ServerModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCMasterNet_ServerModule::OnHeartBeat);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_REGISTERED, this, &NFCMasterNet_ServerModule::OnWorldRegisteredProcess);

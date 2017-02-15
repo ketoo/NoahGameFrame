@@ -17,7 +17,6 @@ class NFIProxyServerToGameModule
     : public  NFIModule
 {
 public:
-	virtual NFINetClientModule* GetClusterModule() = 0;
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value) = 0;
 };
 
