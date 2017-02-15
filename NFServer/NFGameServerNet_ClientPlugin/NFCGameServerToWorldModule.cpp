@@ -238,7 +238,7 @@ void NFCGameServerToWorldModule::SendOnline(const NFGUID& self)
 	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
 	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 
 }
 
@@ -249,7 +249,7 @@ void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
 	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
 	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-	m_pNetClientModule->SendSuitByPB(xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
 
 }
 
@@ -265,16 +265,6 @@ void NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(nMsgID, strData, nPlayerID);
 
 	return;
-}
-
-void NFCGameServerToWorldModule::SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	m_pNetClientModule->SendBySuit(nHashKey, nMsgID, msg, nLen);
-}
-
-NFINetClientModule* NFCGameServerToWorldModule::GetClusterClientModule()
-{
-	return m_pNetClientModule;
 }
 
 void NFCGameServerToWorldModule::AddServerInfoExt(const std::string & key, const std::string & value)

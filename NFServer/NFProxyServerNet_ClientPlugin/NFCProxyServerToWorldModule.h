@@ -84,7 +84,6 @@ private:
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFINetClientModule* m_pNetClientModule;
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
