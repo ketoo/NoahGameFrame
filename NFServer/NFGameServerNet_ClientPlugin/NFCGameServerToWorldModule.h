@@ -9,7 +9,6 @@
 #ifndef NFC_GAMESERVER_NETCLIENT_MODULE_H
 #define NFC_GAMESERVER_NETCLIENT_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
@@ -60,11 +59,13 @@ private:
 	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
+	NFINetClientModule* m_pNetClientModule;
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
 	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
