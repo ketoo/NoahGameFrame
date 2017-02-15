@@ -1,51 +1,50 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.cpp
+//    @FileName			:    NFHeroPlugin.cpp
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFChatPlugin
+//    @Date             :    2016-12-18
+//    @Module           :    NFHeroPlugin
 //
 // -------------------------------------------------------------------------
 
+#include "NFHeroPlugin.h"
+#include "NFCHeroModule.h"
+#include "NFCHeroPropertyModule.h"
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
-
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFHeroPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFHeroPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFHeroPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFHeroPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFHeroPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFHeroPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
-
+	REGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
+	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule)
 }
 
-void NFChatPlugin::Uninstall()
+void NFHeroPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
 }

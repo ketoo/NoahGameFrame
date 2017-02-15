@@ -10,6 +10,11 @@
 
 bool NFCPropertyModule::Init()
 {
+	   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 
     return true;
 }
@@ -26,12 +31,6 @@ bool NFCPropertyModule::Execute()
 
 bool NFCPropertyModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent);
 
     return true;
