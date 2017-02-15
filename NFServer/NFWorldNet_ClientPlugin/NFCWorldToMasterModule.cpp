@@ -10,12 +10,12 @@
 #include "NFWorldNet_ClientPlugin.h"
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCWorldToMasterModule::Init()
 {
-	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
 	m_pNetClientModule->Init();
 
@@ -76,7 +76,6 @@ bool NFCWorldToMasterModule::AfterInit()
 
 bool NFCWorldToMasterModule::Execute()
 {
-	m_pNetClientModule->Execute();
 	ServerReport();
 	return true;
 }
@@ -279,11 +278,6 @@ bool NFCWorldToMasterModule::BeforeShut()
 void NFCWorldToMasterModule::LogServerInfo(const std::string& strServerInfo)
 {
 	m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
-}
-
-NFINetClientModule* NFCWorldToMasterModule::GetNetClientModule()
-{
-	return m_pNetClientModule;
 }
 
 void NFCWorldToMasterModule::AddServerInfoExt(const std::string & key, const std::string & value)

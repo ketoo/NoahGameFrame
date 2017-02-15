@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 
 class NFCProxyServerToGameModule : public NFIProxyServerToGameModule
@@ -37,7 +37,6 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual NFINetClientModule* GetClusterModule();
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
@@ -59,6 +58,7 @@ private:
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
+
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
