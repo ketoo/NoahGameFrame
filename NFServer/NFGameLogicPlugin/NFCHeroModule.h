@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -54,11 +55,13 @@ public:
 
 protected:
 	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-   
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+
 protected:
     NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
+	NFIHeroPropertyModule* m_pHeroPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFISceneProcessModule* m_pSceneProcessModule;
 private:

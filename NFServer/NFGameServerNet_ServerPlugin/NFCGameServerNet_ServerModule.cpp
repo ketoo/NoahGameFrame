@@ -78,7 +78,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneAOIModule->AddRecordEnterCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEnter);
 	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEvent);
 	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEvent);
-	m_pSceneAOIModule->AddAfterEnterSceneCallBack(this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
+
 	/////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
@@ -238,7 +238,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 		return;
 	}
 
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, NFCDataList());
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -683,50 +683,40 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 					{
 
 						int nValue = xRowDataList.Int(i);
-						//if ( 0 != nValue )
-						{
-							NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
-							pAddData->set_col(i);
-							pAddData->set_row(xEventData.nRow);
-							pAddData->set_data(nValue);
-						}
+
+						NFMsg::RecordInt* pAddData = pAddRowData->add_record_int_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(nValue);
 					}
 					break;
 					case TDATA_FLOAT:
 					{
 						float fValue = xRowDataList.Float(i);
-						//if ( fValue > 0.001f  || fValue < -0.001f )
-						{
-							NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
-							pAddData->set_col(i);
-							pAddData->set_row(xEventData.nRow);
-							pAddData->set_data(fValue);
-						}
+
+						NFMsg::RecordFloat* pAddData = pAddRowData->add_record_float_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(fValue);
 					}
 					break;
 					case TDATA_STRING:
 					{
 						const std::string& str = xRowDataList.String(i);
-						//if (!str.empty())
-						{
-							NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
-							pAddData->set_col(i);
-							pAddData->set_row(xEventData.nRow);
-							pAddData->set_data(str);
-						}
+						NFMsg::RecordString* pAddData = pAddRowData->add_record_string_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						pAddData->set_data(str);
 					}
 					break;
 					case TDATA_OBJECT:
 					{
 						NFGUID identValue = xRowDataList.Object(i);
-						//if (!identValue.IsNull())
-						{
-							NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
-							pAddData->set_col(i);
-							pAddData->set_row(xEventData.nRow);
+						NFMsg::RecordObject* pAddData = pAddRowData->add_record_object_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
 
-							*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
-						}
+						*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
 					}
 					break;
 					default:
@@ -982,6 +972,7 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
+		//only just to tell client, now player can enter world(without data) and you can start to load scene or mesh
 		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
 		if (pDataBase)
 		{
@@ -995,39 +986,6 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 		}
 	}
 
-	return 0;
-}
-
-int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList)
-{
-	/*
-	if (var.GetCount() != 7 ||
-		!var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
-			TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_FLOAT,
-			TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_FLOAT, TDATA_TYPE::TDATA_UNKNOWN)
-		)
-	{
-		return 1;
-	}
-
-	NFGUID ident = var.Object(0);
-	int nType = var.Int(1);
-	int nTargetScene = var.Int(2);
-	int nTargetGroupID = var.Int(3);
-	float fX = var.Float(4);
-	float fY = var.Float(5);
-	float fZ = var.Float(6);
-
-	NFMsg::ReqAckSwapScene xSwapScene;
-	xSwapScene.set_transfer_type(NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL);
-	xSwapScene.set_scene_id(nTargetScene);
-	xSwapScene.set_line_id(nTargetGroupID);
-	xSwapScene.set_x(fX);
-	xSwapScene.set_y(fY);
-	xSwapScene.set_z(fZ);
-
-	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xSwapScene, self);
-	*/
 	return 0;
 }
 
@@ -1088,7 +1046,7 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
-	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, NFCDataList());
+	m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, NFCDataList());
 }
 
 void NFCGameServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
