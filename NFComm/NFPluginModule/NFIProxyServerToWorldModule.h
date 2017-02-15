@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFINetClientModule.hpp"
+#include "NFINetClientModule.h"
 
 class NFIProxyServerToWorldModule
     : public  NFIModule
