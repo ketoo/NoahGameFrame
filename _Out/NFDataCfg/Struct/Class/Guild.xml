@@ -10,8 +10,8 @@
 		<Property Id="GuildMoney" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会财富"/>
 		<Property Id="GuildLevel" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会等级"/>
 		<Property Id="GuildContinueDay" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会霸占排行榜天数"/>
-		<Property Id="GuilID" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会ID"/>
-		<Property Id="GuilIDIcon" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会头像"/>
+		<Property Id="GuildID" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="工会ID"/>
+		<Property Id="GuildIcon" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会头像"/>
 		<Property Id="GuildMemeberCount" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="成员数量(增加个字段，不然遍历Record太麻烦)"/>
 		<Property Id="GuildMemeberMaxCount" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="成员最大数量"/>
 		<Property Id="GuildHonor" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="公会荣誉"/>
