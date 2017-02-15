@@ -37,30 +37,20 @@ public:
 
 	virtual void AddServer(const ConnectData& xInfo);
 
-	virtual int AddReceiveCallBack(const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-
-	virtual int AddReceiveCallBack(NET_RECEIVE_FUNCTOR_PTR functorPtr);
 	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-
-	virtual int AddEventCallBack(NET_EVENT_FUNCTOR_PTR functorPtr);
+	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
 	virtual int AddEventCallBack(NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
 
-	virtual void RemoveReceiveCallBack(const int nMsgID);
 	virtual void RemoveReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID);
 
 	////////////////////////////////////////////////////////////////////////////////
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData);
-	virtual void SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const std::string& strData);
-
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	virtual void SendToAllServer(const int nMsgID, const std::string& strData);
 	virtual void SendToAllServer(NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
 
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendToServerByPB(NF_SERVER_TYPES eType, const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData);
 	virtual void SendToAllServerByPB(NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData);
@@ -131,8 +121,8 @@ private:
 	NFMapEx<int, CallBack> mxCallBack;
 
 	//call back
-	std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
-	std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
-	std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
+	//std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
+	//std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
+	//std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
 };
 #endif
