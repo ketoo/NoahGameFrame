@@ -55,34 +55,12 @@ public:
     };
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
-	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
-
-		AddReceiveCallBack(nMsgID, functorPtr);
-
-		return true;
-	}
-
-	template<typename BaseType>
 	bool AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
-		//AddReceiveCallBack(nMsgID, functorPtr);
-
-		return true;
-	}
-
-	template<typename BaseType>
-	int AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
-	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
-
-		AddReceiveCallBack(functorPtr);
+		AddReceiveCallBack(eType, nMsgID, functorPtr);
 
 		return true;
 	}
@@ -93,18 +71,7 @@ public:
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
 
-		//AddReceiveCallBack(functorPtr);
-
-		return true;
-	}
-
-	template<typename BaseType>
-	bool AddEventCallBack(BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
-	{
-		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
-
-		AddEventCallBack(functorPtr);
+		AddReceiveCallBack(eType, functorPtr);
 
 		return true;
 	}
@@ -115,38 +82,27 @@ public:
 		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
 
-		//AddEventCallBack(functorPtr);
+		AddEventCallBack(eType, functorPtr);
 
 		return true;
 	}
 
-	virtual int AddReceiveCallBack(const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-
-	virtual int AddReceiveCallBack(NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-
-	virtual int AddEventCallBack(NET_EVENT_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
+	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr) = 0;
 	virtual int AddEventCallBack(NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr) = 0;
 
-	////////////////////////////////////////////////////////////////////////////////
-
-	virtual void RemoveReceiveCallBack(const int nMsgID) = 0;
 	virtual void RemoveReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID) = 0;
+	////////////////////////////////////////////////////////////////////////////////
 
 	virtual void AddServer(const ConnectData& xInfo) = 0;
 	
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData) = 0;
-	virtual void SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const std::string& strData) = 0;
-
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-	virtual void SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 
 	virtual void SendToAllServer(const int nMsgID, const std::string& strData) = 0;
 	virtual void SendToAllServer(NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData) = 0;
 
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-	virtual void SendToServerByPB(NF_SERVER_TYPES eType, const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 
 	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 	virtual void SendToAllServerByPB(NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
