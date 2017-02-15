@@ -46,7 +46,7 @@ protected:
 private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+	NFINetClientModule* m_pNetClientModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIGSSwichServerModule* m_pGSSwitchServerModule;
 };

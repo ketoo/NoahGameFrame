@@ -12,12 +12,6 @@
 
 bool NFCGameServerNet_ServerModule::Init()
 {
-	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
-	return true;
-}
-
-bool NFCGameServerNet_ServerModule::AfterInit()
-{
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
@@ -25,8 +19,15 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+
+	return true;
+}
+
+bool NFCGameServerNet_ServerModule::AfterInit()
+{
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCGameServerNet_ServerModule::OnProxyServerRegisteredProcess);
@@ -1754,10 +1755,10 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
 		nHasKey = nPlayer.nData64;
 	}
 
-	m_pGameServerToWorldModule->SendBySuit(nHasKey, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
 }
 
 void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
 {
-	m_pGameServerToWorldModule->SendBySuit(nWorldKey, nMsgID, msg, nLen);
+	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nWorldKey, nMsgID, msg, nLen);
 }

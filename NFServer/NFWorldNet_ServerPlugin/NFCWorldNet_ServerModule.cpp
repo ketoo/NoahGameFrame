@@ -13,24 +13,26 @@
 
 bool NFCWorldNet_ServerModule::Init()
 {
-	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+
     return true;
 }
 
 bool NFCWorldNet_ServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pWorldToMasterModule = pPluginManager->FindModule<NFIWorldToMasterModule>();
-
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnProxyServerUnRegisteredProcess);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTranspondServerReport);
@@ -396,10 +398,10 @@ void NFCWorldNet_ServerModule::OnTranspondServerReport(const int nFd, const int 
 		return;
 	}
 
-	std::shared_ptr<ConnectData> pServerData = m_pWorldToMasterModule->GetNetClientModule()->GetServerList().First();
+	std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerList().First();
 	if (pServerData)
 	{
-		m_pWorldToMasterModule->GetNetClientModule()->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, msg);
+		m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, msg);
 	}
 }
 
@@ -883,10 +885,10 @@ void NFCWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSt
 				NFMsg::ServerInfoExt pb_ServerInfoExt;
 				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
-				std::shared_ptr<ConnectData> pServerData = m_pWorldToMasterModule->GetNetClientModule()->GetServerList().First();
+				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerList().First();
 				if (pServerData)
 				{
-					m_pWorldToMasterModule->GetNetClientModule()->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
+					m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
 				}
 			}
 		}
