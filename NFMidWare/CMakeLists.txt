@@ -1,2 +1,2 @@
 add_subdirectory(NFChatPlugin)
-#add_subdirectory(NFItemBagPlugin)
+add_subdirectory(NFItemBagPlugin)
