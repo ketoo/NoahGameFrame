@@ -1,19 +1,19 @@
 // -------------------------------------------------------------------------
-//    @FileName      	:   NFIItemItemConsumeProcessModule.h
-//    @Author           :   Yu.Tang
-//    @Date             :   2016-07-02
-//    @Module           :   NFIItemItemConsumeProcessModule
+//    @FileName      	:   NFIItemConsumeProcessModule.h
+//    @Author           :   LvSheng.Huang
+//    @Date             :   2017-02-16
+//    @Module           :   NFIItemConsumeProcessModule
 
 // -------------------------------------------------------------------------
 
-#ifndef NFI_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
-#define NFI_ITEM_ITEM_CONSUME_PROCESS_MODULE_H
+#ifndef NFI_ITEM_CONSUME_PROCESS_MODULE_H
+#define NFI_ITEM_CONSUME_PROCESS_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 
-class NFIItemItemConsumeProcessModule
+class NFIItemConsumeProcessModule
     : public NFIModule
 {
 public:

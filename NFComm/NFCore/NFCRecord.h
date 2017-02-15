@@ -6,14 +6,15 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef _GT_RECORD_H
-#define _GT_RECORD_H
+#ifndef NFC_RECORD_H
+#define NFC_RECORD_H
 
 #include <vector>
 #include "NFIRecord.h"
 #include "NFDataList.hpp"
 #include "NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 class _NFExport NFCRecord : public NFIRecord
 {
 public:
