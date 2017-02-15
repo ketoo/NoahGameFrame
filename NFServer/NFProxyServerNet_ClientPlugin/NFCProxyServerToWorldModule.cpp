@@ -13,9 +13,7 @@
 
 bool NFCProxyServerToWorldModule::Init()
 {
-	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
-
-	m_pNetClientModule->Init();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
     return true;
 }
@@ -29,7 +27,6 @@ bool NFCProxyServerToWorldModule::Shut()
 
 bool NFCProxyServerToWorldModule::Execute()
 {
-	m_pNetClientModule->Execute();
 	ServerReport();
 	return true;
 }
