@@ -40,6 +40,12 @@ bool NFCItemConsumeManagerModule::AfterInit()
 
 bool NFCItemConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeProcessModule> pModule )
 {
+	if (ExistElement(nModuleType))
+	{
+		assert(0);
+		return false;
+	}
+
     return AddElement( nModuleType, pModule );
 }
 
