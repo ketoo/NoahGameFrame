@@ -248,6 +248,17 @@ void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & n
 	}
 }
 
+NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NF_SERVER_TYPES eType)
+{
+	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	if (xConnectDataMap)
+	{
+		return xConnectDataMap->GetElementBySuitRandom();
+	}
+
+	return nullptr;
+}
+
 NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const int nServerID)
 {
 	return mxServerMap.GetElement(nServerID);
@@ -256,12 +267,6 @@ NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const int nServer
 NFMapEx<int, ConnectData>& NFCNetClientModule::GetServerList()
 {
 	return mxServerMap;
-}
-
-NFMapEx<int, ConnectData>& NFCNetClientModule::GetServerList(const NF_SERVER_TYPES eType)
-{
-	// TODO: insert return statement here
-	return NFMapEx<int, ConnectData>();
 }
 
 NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NFINet * pNet)
