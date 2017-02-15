@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
 
 class NFCShopModule
     : public NFIShopModule
@@ -50,6 +51,7 @@ protected:
     NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
 	NFIPropertyModule* m_pPropertyModule;
+	NFIPackModule* m_pPackModule;
     //////////////////////////////////////////////////////////////////////////
 };
 #endif
