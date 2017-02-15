@@ -102,6 +102,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemGemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemItemConsumeProcessModule.cpp" />
@@ -112,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemConsumeManagerModule.h" />
     <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
     <ClInclude Include="NFCItemGemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemItemConsumeProcessModule.h" />

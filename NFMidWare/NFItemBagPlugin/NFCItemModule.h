@@ -21,6 +21,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -61,6 +62,7 @@ private:
     NFIClassModule* m_pLogicClassModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIHeroModule* m_pHeroModule;
+	NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
 	NFICommonConfigModule* m_pCommonConfigModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
