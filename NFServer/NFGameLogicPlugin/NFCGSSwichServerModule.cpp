@@ -34,14 +34,14 @@ bool NFCGSSwichServerModule::AfterInit()
     m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
     m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
     m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pScenemodule = pPluginManager->FindModule<NFISceneAOIModule>();
 	
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
-	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
-	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCGSSwichServerModule::OnAckSwichServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACKSWICHSERVER, this, &NFCGSSwichServerModule::OnAckSwichServer)) { return false; }
 
     return true;
 }
@@ -70,7 +70,7 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 	*xMsg.mutable_client_id() = NFINetModule::NFToPB(xClient);
 	xMsg.set_gate_serverid(nGate);
 
-	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
 
 	return true;
 }
@@ -143,7 +143,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     }
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
-	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
 }
 
 void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

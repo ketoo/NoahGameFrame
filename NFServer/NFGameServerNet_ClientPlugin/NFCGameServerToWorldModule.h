@@ -35,8 +35,6 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-    virtual NFINetClientModule* GetClusterClientModule();
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
@@ -59,7 +57,6 @@ private:
 	NFINT64 mLastReportTime;
 
     NFILogModule* m_pLogModule;
-	NFINetClientModule* m_pNetClientModule;
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
