@@ -8,7 +8,7 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="NFGameLogicPlugin" />
-		<Plugin Name="NFItemBagPlugin" />
+		<!-- <Plugin Name="NFItemBagPlugin" /> -->
 
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
