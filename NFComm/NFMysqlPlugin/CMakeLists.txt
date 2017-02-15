@@ -10,7 +10,7 @@ if(UNIX)
 		${NFMysqlPlugin_ROOT_Hpp})
 	target_include_directories(NFMysqlPlugin PUBLIC
 		${SolutionDir}/Dependencies/mysql/
-		${SolutionDir}/Dependencies/mysql/Users/James/Desktop/NoahGameFrame/NFComm/NFNoSqlPlugin/CMakeLists.txtpp/)
+		${SolutionDir}/Dependencies/mysql/pp/)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFMysqlPlugin libmysqlclient.a)
 		target_link_libraries(NFMysqlPlugin libmysqlpp.a)
