@@ -21,7 +21,7 @@
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #pragma comment( lib, "ws2_32" )
-#pragma comment( lib, "NFNet.lib" )
+#pragma comment( lib, "NFNetPlugin.lib" )
 #pragma comment( lib, "NFCore.lib" )
 #pragma comment( lib, "NFMessageDefine.lib" )
 #pragma comment( lib, "libprotobuf.lib" )
