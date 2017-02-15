@@ -15,6 +15,11 @@
 bool NFCGameServerToWorldModule::Init()
 {
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	return true;
 }
@@ -152,14 +157,8 @@ void NFCGameServerToWorldModule::RefreshWorldInfo()
 
 bool NFCGameServerToWorldModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
-	m_pNetClientModule->AddReceiveCallBack(this, &NFCGameServerToWorldModule::TransPBToProxy);
-	m_pNetClientModule->AddEventCallBack(this, &NFCGameServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::TransPBToProxy);
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCGameServerToWorldModule::OnSocketWSEvent);
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
