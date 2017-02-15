@@ -31,10 +31,7 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
@@ -54,46 +51,32 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {
             const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-			const std::string& strPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
+			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
 			const int nNPCType = m_pElementModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
-			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
-			{
-				//hero
-				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
-				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
-				if (pHeroPropertyRecord)
-				{
-					NFCDataList xHeroPropertyList;
-					if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
-					{
-						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
-						{
-							const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
-							const int nValue = xHeroPropertyList.Int(i);
-							pSelfPropertyManager->SetPropertyInt(strColTag, nValue);
-						}
-					}
-				}
-			}
-			else
+			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL
+				|| nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
 			{
 				//normal npc
-				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strPropertyID);
+				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strEffectPropertyID);
 				if (pConfigPropertyManager)
 				{
 					std::string strProperName;
 					for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
 					{
-						if (pSelfPropertyManager && strProperName != NFrame::NPC::ID())
+						if (pSelfPropertyManager && pProperty->Changed()
+							&& strProperName != NFrame::IObject::ID()
+							&& strProperName != NFrame::IObject::ConfigID()
+							&& strProperName != NFrame::IObject::ClassName()
+							&& strProperName != NFrame::IObject::SceneID()
+							&& strProperName != NFrame::IObject::GroupID())
 						{
 							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
 						}
 					}
 				}
 			}
-            
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
@@ -101,8 +84,8 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
             int nHPMax = m_pElementModule->GetPropertyInt(strConfigID, NFrame::NPC::MAXHP());
 
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
-            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 
+            m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 			m_pEventModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCNPCRefreshModule::OnObjectBeKilled );
         }
     }
