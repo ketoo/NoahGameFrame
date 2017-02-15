@@ -17,7 +17,11 @@ NFCNetClientModule::NFCNetClientModule(NFIPluginManager * p)
 
 bool NFCNetClientModule::Init()
 {
-	NFINetClientModule::AddEventCallBack(this, &NFCNetClientModule::OnSocketEvent);
+	for (int i = 0; i < NF_SERVER_TYPES::NF_ST_MAX; ++i)
+	{
+		NFINetClientModule::AddEventCallBack((NF_SERVER_TYPES)i, this, &NFCNetClientModule::OnSocketEvent);
+	}
+
 	return true;
 }
 
@@ -44,17 +48,17 @@ bool NFCNetClientModule::Execute()
 	return true;
 }
 
-void NFCNetClientModule::RemoveReceiveCallBack(const int nMsgID)
-{
-	std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
-	if (mxReceiveCallBack.end() == it)
-	{
-		mxReceiveCallBack.erase(it);
-	}
-}
-
 void NFCNetClientModule::RemoveReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID)
 {
+	NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
+	if (xCallBack)
+	{
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = xCallBack->mxReceiveCallBack.find(nMsgID);
+		if (xCallBack->mxReceiveCallBack.end() == it)
+		{
+			xCallBack->mxReceiveCallBack.erase(it);
+		}
+	}
 }
 
 void NFCNetClientModule::AddServer(const ConnectData & xInfo)
@@ -62,51 +66,51 @@ void NFCNetClientModule::AddServer(const ConnectData & xInfo)
 	mxTempNetList.push_back(xInfo);
 }
 
-int NFCNetClientModule::AddReceiveCallBack(const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr)
-{
-	std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
-	if (mxReceiveCallBack.end() == it)
-	{
-		mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, functorPtr));
-	}
-
-	return 0;
-}
-
 int NFCNetClientModule::AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr)
 {
-	return 0;
-}
+	NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
+	if (!xCallBack)
+	{
+		xCallBack = NF_SHARE_PTR<CallBack>(NF_NEW CallBack);
+		mxCallBack.AddElement(eType, xCallBack);
+	}
 
-int NFCNetClientModule::AddReceiveCallBack(NET_RECEIVE_FUNCTOR_PTR functorPtr)
-{
-	mxCallBackList.push_back(functorPtr);
+	xCallBack->mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, functorPtr));
+
 	return 0;
 }
 
 int NFCNetClientModule::AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr)
 {
+	NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
+	if (!xCallBack)
+	{
+		xCallBack = NF_SHARE_PTR<CallBack>(NF_NEW CallBack);
+		mxCallBack.AddElement(eType, xCallBack);
+	}
+
+	xCallBack->mxCallBackList.push_back(functorPtr);
+
 	return 0;
 }
 
-int NFCNetClientModule::AddEventCallBack(NET_EVENT_FUNCTOR_PTR functorPtr)
-{
-	mxEventCallBack.push_back(functorPtr);
-	return 0;
-}
 
 int NFCNetClientModule::AddEventCallBack(NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr)
 {
+	NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
+	if (!xCallBack)
+	{
+		xCallBack = NF_SHARE_PTR<CallBack>(NF_NEW CallBack);
+		mxCallBack.AddElement(eType, xCallBack);
+	}
+
+	xCallBack->mxEventCallBack.push_back(functorPtr);
 	return 0;
 }
 
 void NFCNetClientModule::SendByServerID(const int nServerID, const int nMsgID, const std::string & strData)
 {
 	SendByServerID(nServerID, nMsgID, strData.c_str(), strData.length());
-}
-
-void NFCNetClientModule::SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const std::string & strData)
-{
 }
 
 void NFCNetClientModule::SendByServerID(const int nServerID, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -120,10 +124,6 @@ void NFCNetClientModule::SendByServerID(const int nServerID, const int nMsgID, c
 			pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, 0);
 		}
 	}
-}
-
-void NFCNetClientModule::SendByServerID(NF_SERVER_TYPES eType, const int nServerID, const int nMsgID, const char * msg, const uint32_t nLen)
-{
 }
 
 void NFCNetClientModule::SendToAllServer(const int nMsgID, const std::string & strData)
@@ -156,10 +156,6 @@ void NFCNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nM
 			pNetModule->SendMsgPB(nMsgID, xData, 0, NFGUID(), NULL);
 		}
 	}
-}
-
-void NFCNetClientModule::SendToServerByPB(NF_SERVER_TYPES eType, const int nServerID, const uint16_t nMsgID, google::protobuf::Message & xData)
-{
 }
 
 void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message & xData)
@@ -262,6 +258,7 @@ NFMapEx<int, ConnectData>& NFCNetClientModule::GetServerList()
 NFMapEx<int, ConnectData>& NFCNetClientModule::GetServerList(NF_SERVER_TYPES eType)
 {
 	// TODO: insert return statement here
+	return NFMapEx<int, ConnectData>();
 }
 
 NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NFINet * pNet)
@@ -280,22 +277,29 @@ NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NFINet * pN
 
 void NFCNetClientModule::InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
 {
+	NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(pServerData->eServerType);
+	if (!xCallBack)
+	{
+		xCallBack = NF_SHARE_PTR<CallBack>(NF_NEW CallBack);
+		mxCallBack.AddElement(pServerData->eServerType, xCallBack);
+	}
+
 	//add msg callback
-	std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = mxReceiveCallBack.begin();
-	for (; mxReceiveCallBack.end() != itReciveCB; ++itReciveCB)
+	std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = xCallBack->mxReceiveCallBack.begin();
+	for (; xCallBack->mxReceiveCallBack.end() != itReciveCB; ++itReciveCB)
 	{
 		pServerData->mxNetModule->AddReceiveCallBack(itReciveCB->first, itReciveCB->second);
 	}
 
 	//add event callback
-	std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = mxEventCallBack.begin();
-	for (; mxEventCallBack.end() != itEventCB; ++itEventCB)
+	std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = xCallBack->mxEventCallBack.begin();
+	for (; xCallBack->mxEventCallBack.end() != itEventCB; ++itEventCB)
 	{
 		pServerData->mxNetModule->AddEventCallBack(*itEventCB);
 	}
 
-	std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itCB = mxCallBackList.begin();
-	for (; mxCallBackList.end() != itCB; ++itCB)
+	std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itCB = xCallBack->mxCallBackList.begin();
+	for (; xCallBack->mxCallBackList.end() != itCB; ++itCB)
 	{
 		pServerData->mxNetModule->AddReceiveCallBack(*itCB);
 	}
