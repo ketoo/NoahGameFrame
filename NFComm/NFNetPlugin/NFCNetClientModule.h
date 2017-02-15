@@ -64,8 +64,7 @@ public:
 	////////////////////////////////////////////////////////////////////////////////
 
 	virtual NFMapEx<int, ConnectData>& GetServerList();
-	virtual NFMapEx<int, ConnectData>& GetServerList(const NF_SERVER_TYPES eType);
-
+	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NF_SERVER_TYPES eType);
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID);
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet);
 
