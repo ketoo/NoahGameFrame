@@ -163,6 +163,7 @@ ALTER TABLE `Player` ADD `PlayerHero` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `PlayerFightHero` BLOB COMMENT '';
 ALTER TABLE `Player` ADD `BagEquipList` BLOB COMMENT '普通背包';
 ALTER TABLE `Player` ADD `BagItemList` BLOB COMMENT '普通背包';
+ALTER TABLE `Player` ADD `CommPropertyValue` BLOB COMMENT '所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性';
 ALTER TABLE `Player` ADD `TaskMonsterList` BLOB COMMENT '任务杀怪表';
 ALTER TABLE `Player` ADD `TaskList` BLOB COMMENT '任务表';
 ALTER TABLE `Player` ADD `BuildingList` BLOB COMMENT '';
