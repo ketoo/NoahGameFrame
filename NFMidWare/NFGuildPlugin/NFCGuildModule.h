@@ -14,9 +14,9 @@
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
 #include "NFComm/NFPluginModule/NFIGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
-/*
 class NFCGuildModule
     : public NFIGuildModule
 {
@@ -41,7 +41,7 @@ public:
 
     virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList);
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
-    virtual bool MemberOffeline(const NFGUID& self, const NFGUID& xGuild);
+	virtual bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
 
 	//////////////////////其次考虑参数////////////////////////////////////////////////////
 	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
@@ -63,7 +63,7 @@ protected:
     NFIGuildDataModule* m_pGuildDataModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILogModule* m_pLogModule;
+	NFINetModule* m_pNetModule;
 };
 
-*/
 #endif
