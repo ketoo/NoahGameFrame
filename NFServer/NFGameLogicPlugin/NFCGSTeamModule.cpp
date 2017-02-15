@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCGSTeamModule.cpp
+//    @FileName         	:    NFCGSTeamModule.cpp
 //    @Author               :    chuanbo.Guo
 //    @Date                 :    2013-06-11
 //    @Module               :    NFCGSTeamModule
@@ -10,7 +10,7 @@
 
 bool NFCGSTeamModule::Init()
 {
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCGSTeamModule::OnReqCreateTeamFromClient)) { return false; }
@@ -20,12 +20,12 @@ bool NFCGSTeamModule::Init()
     if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnReqOprmemberTeamFromClient)) { return false; }
     if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromClient)) { return false; }
 
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATE_TEAM, this, &NFCGSTeamModule::OnAckCreateTeamFromWorldServer)) { return false; }
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_JOIN_TEAM, this, &NFCGSTeamModule::OnAckJoinTeamFromWorldServer)) { return false; }
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_LEAVE_TEAM, this, &NFCGSTeamModule::OnAckLeaveTeamFromWorldServer)) { return false; }
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnAckOprMemberTeamFromWorldServer)) { return false; }
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromWorldServer)) { return false; }
-    if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnAckTeamEnterEcypeFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CREATE_TEAM, this, &NFCGSTeamModule::OnAckCreateTeamFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_JOIN_TEAM, this, &NFCGSTeamModule::OnAckJoinTeamFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_LEAVE_TEAM, this, &NFCGSTeamModule::OnAckLeaveTeamFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnAckOprMemberTeamFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromWorldServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnAckTeamEnterEcypeFromWorldServer)) { return false; }
 
 	return true;
 }
@@ -81,7 +81,7 @@ void NFCGSTeamModule::OnReqJoinTeamFromClient(const int nSockIndex, const int nM
         return;
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnReqLeaveTeamFromClient(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -94,7 +94,7 @@ void NFCGSTeamModule::OnReqLeaveTeamFromClient(const int nSockIndex, const int n
         return;
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnReqInviteTeamFromClient(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -107,7 +107,7 @@ void NFCGSTeamModule::OnReqInviteTeamFromClient(const int nSockIndex, const int 
         return;
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnReqOprmemberTeamFromClient(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -120,7 +120,7 @@ void NFCGSTeamModule::OnReqOprmemberTeamFromClient(const int nSockIndex, const i
         return;
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnReqTeamEnterEctypeFromClient(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -133,7 +133,7 @@ void NFCGSTeamModule::OnReqTeamEnterEctypeFromClient(const int nSockIndex, const
         return;
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+    m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnAckTeamEnterEcypeFromWorldServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

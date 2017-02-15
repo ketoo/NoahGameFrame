@@ -83,13 +83,14 @@ protected:
 
 private:
 
-    NFILoginToMasterModule* m_pLoginToMasterModule;
+	NFINetModule* m_pNetModule;
+	NFINetClientModule* m_pNetClientModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFILoginLogicModule* m_pLoginLogicModule;
-	NFINetModule* m_pNetModule;
+	NFILoginToMasterModule* m_pLoginToMasterModule;
 };
 
 #endif

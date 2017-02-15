@@ -218,10 +218,14 @@ void NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int & nHa
 
 void NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int & nHashKey, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	NF_SHARE_PTR<ConnectData> pConnectData = mxServerMap.GetElementBySuit(nHashKey);
-	if (pConnectData)
+	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	if (xConnectDataMap)
 	{
-		SendByServerID(pConnectData->nGameID, nMsgID, msg, nLen);
+		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
+		if (pConnectData)
+		{
+			SendByServerID(pConnectData->nGameID, nMsgID, msg, nLen);
+		}
 	}
 }
 
@@ -233,10 +237,14 @@ void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::st
 
 void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & nHashKey, const uint16_t nMsgID, google::protobuf::Message & xData)
 {
-	NF_SHARE_PTR<ConnectData> pConnectData = mxServerMap.GetElementBySuit(nHashKey);
-	if (pConnectData)
+	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	if (xConnectDataMap)
 	{
-		SendToServerByPB(pConnectData->nGameID, nMsgID, xData);
+		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
+		if (pConnectData)
+		{
+			SendToServerByPB(pConnectData->nGameID, nMsgID, xData);
+		}
 	}
 }
 
@@ -455,6 +463,14 @@ void NFCNetClientModule::ProcessAddNetConnect()
 			InitCallBacks(xServerData);
 
 			mxServerMap.AddElement(xInfo.nGameID, xServerData);
+			//for type
+			NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(xInfo.eServerType);
+			if (!xConnectDataMap)
+			{
+				xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+			}
+
+			xConnectDataMap->AddElement(xInfo.eServerType, xServerData);
 		}
 	}
 

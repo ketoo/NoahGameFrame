@@ -63,7 +63,7 @@ private:
     NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
-	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+	NFINetClientModule* m_pNetClientModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILevelModule* m_pLevelModule;
     NFIPackModule* m_pPackModule;

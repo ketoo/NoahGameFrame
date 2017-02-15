@@ -93,10 +93,8 @@ private:
 private:
 	//server_id, server_data
 	NFCConsistentHashMapEx<int, ConnectData> mxServerMap;
-	//server_id, server_type
-	//NFCConsistentHashMapEx<int, int> mxServerMap;
 	//server_type, server_id, server_data
-	//NFCConsistentHashMapEx<int, NFCConsistentHashMapEx<int, ConnectData>> mxServerMap;
+	NFMapEx<int, NFCConsistentHashMapEx<int, ConnectData>> mxServerTypeMap;
 
 	std::list<ConnectData> mxTempNetList;
 
@@ -109,10 +107,5 @@ private:
 	};
 
 	NFMapEx<int, CallBack> mxCallBack;
-
-	//call back
-	//std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
-	//std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
-	//std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
 };
 #endif
