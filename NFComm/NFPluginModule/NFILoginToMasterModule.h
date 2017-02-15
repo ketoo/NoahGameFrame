@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFINetClientModule.hpp"
+#include "NFINetClientModule.h"
 #include "NFComm/NFMessageDefine/NFMsgPreGame.pb.h"
 
 class NFILoginToMasterModule

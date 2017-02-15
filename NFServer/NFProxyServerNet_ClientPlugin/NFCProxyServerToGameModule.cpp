@@ -13,9 +13,7 @@
 
 bool NFCProxyServerToGameModule::Init()
 {
-	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
-
-	m_pNetClientModule->Init();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
     return true;
 }
@@ -29,8 +27,6 @@ bool NFCProxyServerToGameModule::Shut()
 
 bool NFCProxyServerToGameModule::Execute()
 {
-	m_pNetClientModule->Execute();
-
 	return true;
 }
 
@@ -78,11 +74,6 @@ bool NFCProxyServerToGameModule::AfterInit()
     }
 
     return true;
-}
-
-NFINetClientModule* NFCProxyServerToGameModule::GetClusterModule()
-{
-	return m_pNetClientModule;
 }
 
 void NFCProxyServerToGameModule::AddServerInfoExt(const std::string & key, const std::string & value)

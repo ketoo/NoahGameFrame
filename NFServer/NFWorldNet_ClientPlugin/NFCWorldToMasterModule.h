@@ -19,7 +19,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 class NFCWorldToMasterModule
 	: public NFIWorldToMasterModule
@@ -36,7 +36,6 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 	virtual bool AfterInit();
-	virtual NFINetClientModule* GetNetClientModule();
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 protected:
 
