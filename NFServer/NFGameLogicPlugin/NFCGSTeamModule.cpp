@@ -68,7 +68,7 @@ void NFCGSTeamModule::OnReqCreateTeamFromClient(const int nSockIndex, const int 
         *xMsg.mutable_team_id() = NFINetModule::NFToPB(xTeamID);
     }
 
-    m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(xTeamID.GetData(), nMsgID, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xTeamID.GetData(), nMsgID, xMsg);
 }
 
 void NFCGSTeamModule::OnReqJoinTeamFromClient(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
