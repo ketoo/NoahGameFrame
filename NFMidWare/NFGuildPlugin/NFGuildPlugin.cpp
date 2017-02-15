@@ -8,6 +8,7 @@
 
 
 #include "NFGuildPlugin.h"
+#include "NFCGuildModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -38,11 +39,11 @@ const std::string NFGuildPlugin::GetPluginName()
 
 void NFGuildPlugin::Install()
 {
-    //REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    REGISTER_MODULE(pPluginManager, NFIGuildModule, NFCGuildModule)
 
 }
 
 void NFGuildPlugin::Uninstall()
 {
-    //UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    UNREGISTER_MODULE(pPluginManager, NFIGuildModule, NFCGuildModule)
 }
