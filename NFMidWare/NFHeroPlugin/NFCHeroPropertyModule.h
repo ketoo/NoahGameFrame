@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCHeroPropertyModule.h
+//    @FileName			:    NFCHeroPropertyModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2012-12-15
+//    @Date             :    2017-02-16
 //    @Module           :    NFCHeroPropertyModule
 //
 // -------------------------------------------------------------------------

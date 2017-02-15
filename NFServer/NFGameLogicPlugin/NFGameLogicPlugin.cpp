@@ -10,10 +10,7 @@
 #include "NFCGameLogicModule.h"
 #include "NFCBuffModule.h"
 #include "NFCSkillModule.h"
-#include "NFCHeroModule.h"
 #include "NFCEquipModule.h"
-#include "NFCSLGShopModule.h"
-#include "NFCSLGBuildingModule.h"
 #include "NFCPVPModule.h"
 #include "NFCMailModule.h"
 #include "NFCRankModule.h"
@@ -21,11 +18,11 @@
 #include "NFCGmModule.h"
 #include "NFCGSSwichServerModule.h"
 #include "NFCMapModule.h"
-#include "NFCHeroPropertyModule.h"
 #include "NFCEquipPropertyModule.h"
 #include "NFCTaskModule.h"
 #include "NFCGSPVPMatchModule.h"
 #include "NFCCreateRoleModule.h"
+
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin( NFIPluginManager* pm )
@@ -61,23 +58,7 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
 
-    //REGISTER_MODULE(pPluginManager, NFIRebornItemConsumeProcessModule, NFCRebornItemConsumeProcessModule)
-    //REGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
-    //REGISTER_MODULE(pPluginManager, NFIPotionItemConsumeProcessModule, NFCPotionItemConsumeProcessModule)
-    //REGISTER_MODULE(pPluginManager, NFICardItemConsumeProcessModule, NFCCardItemConsumeProcessModule)
-    //REGISTER_MODULE(pPluginManager, NFIHeroItemConsumeProcessModule, NFCHeroItemConsumeProcessModule)
-    //REGISTER_MODULE(pPluginManager, NFINormalConsumeProcessModule, NFCNormalConsumeProcessModule)
-    //Continue to ad other item types of consumption
-
-    //REGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
-    //REGISTER_MODULE(pPluginManager, NFIBriefSkillConsumeProcessModule, NFCBriefSkillConsumeProcessModule)
-    //REGISTER_MODULE(pPluginManager, NFIBulletSkillConsumeProcessModule, NFCBulletSkillConsumeProcessModule)
-    //Continue to add other skill types of consumption
-
-	REGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
 	REGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-	REGISTER_MODULE(pPluginManager, NFISLGShopModule, NFCSLGShopModule)
-	REGISTER_MODULE(pPluginManager, NFISLGBuildingModule, NFCSLGBuildingModule)
 	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
 	REGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule);
 	REGISTER_MODULE(pPluginManager, NFIRankModule, NFCRankModule);
@@ -85,7 +66,6 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
 	REGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
 	REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
-	REGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
 	REGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
 	REGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
 }
@@ -94,7 +74,6 @@ void NFGameLogicPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIGSPVPMatchModule, NFCGSPVPMatchModule);
 	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
-	UNREGISTER_MODULE(pPluginManager, NFIHeroPropertyModule, NFCHeroPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	UNREGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
     UNREGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
@@ -103,21 +82,7 @@ void NFGameLogicPlugin::Uninstall()
     UNREGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule);
     
 	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
-	UNREGISTER_MODULE(pPluginManager, NFISLGBuildingModule, NFCSLGBuildingModule)
-	UNREGISTER_MODULE(pPluginManager, NFISLGShopModule, NFCSLGShopModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-	UNREGISTER_MODULE(pPluginManager, NFIHeroModule, NFCHeroModule)
-
-    //UNREGISTER_MODULE(pPluginManager, NFIBulletSkillConsumeProcessModule, NFCBulletSkillConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFIBriefSkillConsumeProcessModule, NFCBriefSkillConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
-
-    //UNREGISTER_MODULE(pPluginManager, NFINormalConsumeProcessModule, NFCNormalConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFIHeroItemConsumeProcessModule, NFCHeroItemConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFICardItemConsumeProcessModule, NFCCardItemConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFIPotionItemConsumeProcessModule, NFCPotionItemConsumeProcessModule)
-    //UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
-    //UNREGISTER_MODULE(pPluginManager, NFIRebornItemConsumeProcessModule, NFCRebornItemConsumeProcessModule)
 
     UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
 	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
