@@ -26,62 +26,47 @@ public:
 	NFCNetClientModule(NFIPluginManager* p);
 
 	virtual bool Init();
-
 	virtual bool AfterInit();
-
 	virtual bool BeforeShut();
-
 	virtual bool Shut();
-
 	virtual bool Execute();
 
 	virtual void AddServer(const ConnectData& xInfo);
 
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-	virtual int AddReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-	virtual int AddEventCallBack(NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+	virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
 
-	virtual void RemoveReceiveCallBack(NF_SERVER_TYPES eType, const int nMsgID);
+	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID);
 
 	////////////////////////////////////////////////////////////////////////////////
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData);
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	virtual void SendToAllServer(const int nMsgID, const std::string& strData);
-	virtual void SendToAllServer(NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
 
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendToAllServerByPB(NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
-	virtual void SendBySuit(const std::string& strHashKey, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
-
-	virtual void SendBySuit(const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData);
-
-	virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-
-	virtual void SendSuitByPB(const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-
-	virtual void SendSuitByPB(const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData);
+	//
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
-
-	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID);
 
 	virtual NFMapEx<int, ConnectData>& GetServerList();
-	virtual NFMapEx<int, ConnectData>& GetServerList(NF_SERVER_TYPES eType);
+	virtual NFMapEx<int, ConnectData>& GetServerList(const NF_SERVER_TYPES eType);
 
+	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const int nServerID);
 	virtual NF_SHARE_PTR<ConnectData> GetServerNetInfo(const NFINet* pNet);
 
 protected:
@@ -106,7 +91,12 @@ private:
 	void ProcessAddNetConnect();
 
 private:
+	//server_id, server_data
 	NFCConsistentHashMapEx<int, ConnectData> mxServerMap;
+	//server_id, server_type
+	//NFCConsistentHashMapEx<int, int> mxServerMap;
+	//server_type, server_id, server_data
+	//NFCConsistentHashMapEx<int, NFCConsistentHashMapEx<int, ConnectData>> mxServerMap;
 
 	std::list<ConnectData> mxTempNetList;
 
