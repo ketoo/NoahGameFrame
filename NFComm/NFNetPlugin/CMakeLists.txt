@@ -1,5 +1,8 @@
+set(ProjectName "NFNetPlugin")
+
 file(GLOB NFNet_ROOT_Cpp *.cpp)
 file(GLOB NFNet_ROOT_Hpp *.h)
+
 #Exclude this file
 file(GLOB RemoveItems_Cpp TestClient.cpp TestServer.cpp)
 list(REMOVE_ITEM NFNet_ROOT_Cpp ${RemoveItems_Cpp})
