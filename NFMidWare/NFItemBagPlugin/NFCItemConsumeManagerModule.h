@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemConsumeManagerModule.h
+//    @FileName      	:   NFCItemConsumeManagerModule.h
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-09-28
 //    @Module           :   NFCItemConsumeManagerModule
@@ -14,7 +14,7 @@
 
 class NFCItemConsumeManagerModule
     : public NFIItemConsumeManagerModule,
-      NFMap<int, NFIItemConsumeProcessModule>
+      NFMapEx<int, NFIItemConsumeProcessModule>
 {
 public:
 
@@ -27,9 +27,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual bool ResgisterConsumeModule( const int nModuleType, NFIItemConsumeProcessModule* pModule );
+    virtual bool ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFIItemConsumeProcessModule> pModule );
 
-    virtual NFIItemConsumeProcessModule* GetConsumeModule( const int nModuleType );
+    virtual NF_SHARE_PTR<NFIItemConsumeProcessModule> GetConsumeModule( const int nModuleType );
 
 };
 
