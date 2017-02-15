@@ -170,7 +170,7 @@ void NFCLoginToMasterModule::ServerReport()
 				}
 				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
-				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerList().First();
+				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_MASTER);
 				if (pServerData)
 				{
 					m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
