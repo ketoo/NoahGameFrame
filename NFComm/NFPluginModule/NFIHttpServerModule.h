@@ -2,7 +2,7 @@
 #define NFI_HTTPNET_MODULE_H
 
 #include <iostream>
-#include "NFComm/NFNet/NFCHttpNet.h"
+#include "NFComm/NFNetPlugin/NFCHttpNet.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
