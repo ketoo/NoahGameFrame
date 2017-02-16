@@ -17,7 +17,6 @@ bool NFCCreateRoleModule::Init()
 bool NFCCreateRoleModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pGameLogicModule = pPluginManager->FindModule<NFIGameLogicModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
