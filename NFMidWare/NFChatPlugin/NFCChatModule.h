@@ -19,7 +19,6 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
