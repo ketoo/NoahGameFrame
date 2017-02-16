@@ -52,8 +52,6 @@ const std::string NFGameLogicPlugin::GetPluginName()
 void NFGameLogicPlugin::Install()
 {
 
-    REGISTER_MODULE(pPluginManager, NFIGameLogicModule, NFCGameLogicModule)
-
     REGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
 	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
@@ -88,5 +86,4 @@ void NFGameLogicPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
     UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
 
-    UNREGISTER_MODULE(pPluginManager, NFIGameLogicModule, NFCGameLogicModule)
 }
