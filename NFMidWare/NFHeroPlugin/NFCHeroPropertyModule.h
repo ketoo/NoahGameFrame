@@ -11,7 +11,6 @@
 
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

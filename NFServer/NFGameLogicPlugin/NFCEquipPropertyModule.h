@@ -10,7 +10,6 @@
 #define NFC_EUIP_PROPERTY_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEquipModule.h"
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"

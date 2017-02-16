@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -40,7 +39,6 @@ protected:
 
 private:
 
-    NFIGameLogicModule* m_pGameLogicModule;
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
