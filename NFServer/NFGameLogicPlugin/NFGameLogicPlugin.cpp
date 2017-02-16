@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFGameLogicPlugin.h"
-#include "NFCGameLogicModule.h"
 #include "NFCBuffModule.h"
 #include "NFCSkillModule.h"
 #include "NFCEquipModule.h"
