@@ -8,11 +8,15 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="NFGameLogicPlugin" />
-		<!-- <Plugin Name="NFItemBagPlugin" /> -->
-
+		
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFChatPlugin" />
+		<Plugin Name="NFHeroPlugin" />
+		<Plugin Name="NFItemBagPlugin" />
+		<Plugin Name="NFShopPlugin" />
+		<Plugin Name="NFGuildPlugin" />
 		
     	<ConfigPath Name="../" />		
 	</GameServer>
