@@ -277,8 +277,8 @@ void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& x
 
 	//get all guild information to set in grid base info
 	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildID);
-	const NFGUID xGUID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
-	const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
+	const NFGUID xGUID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuildID());
+	const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuildIcon());
 	const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
 	const int nMemberCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
 	const int nResource = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
