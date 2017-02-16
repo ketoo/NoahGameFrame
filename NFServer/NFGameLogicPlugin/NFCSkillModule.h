@@ -11,7 +11,6 @@
 
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
