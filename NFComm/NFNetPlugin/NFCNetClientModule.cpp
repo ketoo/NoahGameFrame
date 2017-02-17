@@ -473,6 +473,7 @@ void NFCNetClientModule::ProcessAddNetConnect()
 			if (!xConnectDataMap)
 			{
 				xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+				mxServerTypeMap.AddElement(xInfo.eServerType, xConnectDataMap);
 			}
 
 			xConnectDataMap->AddElement(xInfo.eServerType, xServerData);
