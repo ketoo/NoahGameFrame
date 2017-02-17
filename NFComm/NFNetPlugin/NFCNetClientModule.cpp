@@ -424,6 +424,16 @@ int NFCNetClientModule::OnConnected(const int fd, NFINet * pNet)
 		/////////////////////////////////////////////////////////////////////////////////////
 		//AddServerWeightData(pServerInfo);
 		pServerInfo->eState = ConnectDataState::NORMAL;
+
+		//for type--suit
+		NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
+		if (!xConnectDataMap)
+		{
+			xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+			mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
+		}
+
+		xConnectDataMap->AddElement(pServerInfo->nGameID, pServerInfo);
 	}
 
 	return 0;
@@ -438,6 +448,16 @@ int NFCNetClientModule::OnDisConnected(const int fd, NFINet * pNet)
 		//RemoveServerWeightData(pServerInfo);
 		pServerInfo->eState = ConnectDataState::DISCONNECT;
 		pServerInfo->mnLastActionTime = GetPluginManager()->GetNowTime();
+
+		//for type--suit
+		NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
+		if (!xConnectDataMap)
+		{
+			xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+			mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
+		}
+
+		xConnectDataMap->RemoveElement(pServerInfo->nGameID);
 	}
 
 	return 0;
@@ -468,15 +488,6 @@ void NFCNetClientModule::ProcessAddNetConnect()
 			InitCallBacks(xServerData);
 
 			mxServerMap.AddElement(xInfo.nGameID, xServerData);
-			//for type
-			NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(xInfo.eServerType);
-			if (!xConnectDataMap)
-			{
-				xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
-				mxServerTypeMap.AddElement(xInfo.eServerType, xConnectDataMap);
-			}
-
-			xConnectDataMap->AddElement(xInfo.eServerType, xServerData);
 		}
 	}
 
