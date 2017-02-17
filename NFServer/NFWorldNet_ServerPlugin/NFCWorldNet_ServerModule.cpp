@@ -82,7 +82,7 @@ bool NFCWorldNet_ServerModule::Execute()
 {
     LogGameServer();
 
-    return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCWorldNet_ServerModule::OnGameServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

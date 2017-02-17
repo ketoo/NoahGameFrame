@@ -123,7 +123,7 @@ bool NFCGameServerNet_ServerModule::Shut()
 
 bool NFCGameServerNet_ServerModule::Execute()
 {
-	return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCGameServerNet_ServerModule::OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
