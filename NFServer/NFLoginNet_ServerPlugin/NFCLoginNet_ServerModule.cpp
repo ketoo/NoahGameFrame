@@ -103,7 +103,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsProcess(const int nWorldID, co
 
 bool NFCLoginNet_ServerModule::Execute()
 {
-	return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
