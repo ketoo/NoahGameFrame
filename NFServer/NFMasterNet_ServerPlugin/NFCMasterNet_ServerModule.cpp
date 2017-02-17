@@ -209,7 +209,6 @@ bool NFCMasterNet_ServerModule::Execute()
 {
 	LogGameServer();
 
-	m_pNetModule->Execute();
 	return true;
 }
 
