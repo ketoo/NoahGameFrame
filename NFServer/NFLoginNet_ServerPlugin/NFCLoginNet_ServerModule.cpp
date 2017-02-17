@@ -273,7 +273,7 @@ void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nM
 	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
 
-NFINetModule* NFCLoginNet_ServerModule::GetNetModule()
-{
-	return m_pNetModule;
-}
+//NFINetModule* NFCLoginNet_ServerModule::GetNetModule()
+//{
+//	return m_pNetModule;
+//}

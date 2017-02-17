@@ -58,7 +58,7 @@ public:
 
     virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
-    virtual NFINetModule* GetNetModule();
+    //virtual NFINetModule* GetNetModule();
 protected:
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
