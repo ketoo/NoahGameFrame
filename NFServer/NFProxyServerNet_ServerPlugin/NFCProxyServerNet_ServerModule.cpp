@@ -77,7 +77,7 @@ bool NFCProxyServerNet_ServerModule::Shut()
 
 bool NFCProxyServerNet_ServerModule::Execute()
 {
-    return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
