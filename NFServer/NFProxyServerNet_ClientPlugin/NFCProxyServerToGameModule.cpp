@@ -153,15 +153,12 @@ void NFCProxyServerToGameModule::OnAckEnterGame(const int nSockIndex, const int 
     {
         return;
     }
+ 
+	const NFGUID& xClient = NFINetModule::PBToNF(xData.event_client());
+	const NFGUID& xPlayer = NFINetModule::PBToNF(xData.event_object());
 
-    if (xData.event_code() == NFMsg::EGEC_ENTER_GAME_SUCCESS)
-    {
-        const NFGUID& xClient = NFINetModule::PBToNF(xData.event_client());
-        const NFGUID& xPlayer = NFINetModule::PBToNF(xData.event_object());
-
-        m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
-		m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
-    }
+	m_pProxyServerNet_ServerModule->EnterGameSuccessEvent(xClient, xPlayer);
+	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
 }
 
 void NFCProxyServerToGameModule::LogServerInfo(const std::string& strServerInfo)
