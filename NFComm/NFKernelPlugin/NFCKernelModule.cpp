@@ -187,6 +187,17 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
 
+
+
+		pObject->SetPropertyObject(NFrame::IObject::ID(), self);
+		pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
+		pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
+		pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
+		pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
+
+		//no data
+		DoEvent(ident, strClassName, pObject->GetState(), arg);
+
         //////////////////////////////////////////////////////////////////////////
         
         NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strConfigIndex);
@@ -206,9 +217,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             }
         }
 
-        DoEvent(ident, strClassName, pObject->GetState(), arg);
-
-        
         for (int i = 0; i < arg.GetCount() - 1; i += 2)
         {
             const std::string& strPropertyName = arg.String(i);
@@ -242,12 +250,6 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             }
         }
 
-        
-		pObject->SetPropertyObject(NFrame::IObject::ID(), self);
-		pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
-        pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
-        pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
-        pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
 
 		pObject->SetState(COE_CREATE_LOADDATA);
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
