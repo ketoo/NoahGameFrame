@@ -977,8 +977,10 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
 		if (pDataBase)
 		{
+			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+
 			NFMsg::AckEventResult xMsg;
-			xMsg.set_event_code(NFMsg::EGEC_ENTER_GAME_SUCCESS);
+			xMsg.set_event_code((NFMsg::EGameEventCode)nSceneID);
 
 			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
 			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
