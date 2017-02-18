@@ -18,10 +18,16 @@ set_target_properties( NFNetPlugin PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir})
 if(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
-		target_link_libraries(NFNetPlugin libprotobuf libevent_core.a)
+		target_link_libraries(NFNetPlugin libevent_core.a)
+		target_link_libraries(NFNetPlugin libprotobuf.so)
 	else()
-		target_link_libraries(NFNetPlugin libprotobuf libevent_core.a)
+		target_link_libraries(NFNetPlugin libevent_core.a)
+		target_link_libraries(NFNetPlugin libprotobuf.so)
 	endif()
+		add_definitions(
+			-D_USRDLL
+			-DTHERON_CPP11
+		)
 else()
 	target_link_libraries(NFNetPlugin  libprotobuf libevent_core)
 	add_definitions("-D_LIB -DWIN32 -DWIN")
