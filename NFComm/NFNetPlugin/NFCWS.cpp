@@ -11,7 +11,7 @@
 
 bool NFCWS::Execute()
 {
-	m_EndPoint.poll();
+	m_EndPoint.poll_one();
 	return false;
 }
 
@@ -30,7 +30,7 @@ int NFCWS::Initialization(const unsigned int nMaxClient, const unsigned short nP
 bool NFCWS::Final()
 {
 	CloseSocketAll();
-	m_EndPoint.stop();
+	m_EndPoint.stop_listening();
 
 	return true;
 }
