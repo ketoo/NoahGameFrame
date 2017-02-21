@@ -9,6 +9,7 @@
 #define NFCUILogin_H
 
 #include "NFCUIManager.h"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 class NFCUILogin : public IUniqueDialog<NFCUILogin>
 {
