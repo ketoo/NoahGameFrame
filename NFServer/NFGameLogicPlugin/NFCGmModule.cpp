@@ -10,7 +10,16 @@
 
 bool NFCGmModule::Init()
 {
-	
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	return true;
 }
@@ -28,25 +37,16 @@ bool NFCGmModule::Execute()
 
 bool NFCGmModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this, &NFCGmModule::OnGMPropertyIntProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR, this, &NFCGmModule::OnGMPropertyStrProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this, &NFCGmModule::OnGMPropertyObjectProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT, this, &NFCGmModule::OnGMPropertyFloatProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT, this, &NFCGmModule::OnGMRecordIntProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR, this, &NFCGmModule::OnGMRecordStrProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT, this, &NFCGmModule::OnGMRecordObjectProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT, this, &NFCGmModule::OnGMRecordFloatProcess)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL, this, &NFCGmModule::OnGMNormalProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_INT, this, &NFCGmModule::OnGMPropertyIntProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_STR, this, &NFCGmModule::OnGMPropertyStrProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_OBJECT, this, &NFCGmModule::OnGMPropertyObjectProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_PROPERTY_FLOAT, this, &NFCGmModule::OnGMPropertyFloatProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_INT, this, &NFCGmModule::OnGMRecordIntProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_STR, this, &NFCGmModule::OnGMRecordStrProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_OBJECT, this, &NFCGmModule::OnGMRecordObjectProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_RECORD_FLOAT, this, &NFCGmModule::OnGMRecordFloatProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CMD_NORMAL, this, &NFCGmModule::OnGMNormalProcess)) { return false; }
 
     return true;
 }
