@@ -43,7 +43,7 @@ bool NFCItemModule::AfterInit()
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
 
 
 	return true;
