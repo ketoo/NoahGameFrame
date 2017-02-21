@@ -19,6 +19,8 @@
 #include "NFComm\NFKernelPlugin\NFCEventModule.h"
 #include "NFComm\NFKernelPlugin\NFCScheduleModule.h"
 
+#include "NFComm\NFNetPlugin\NFCNetClientModule.h"
+
 const int NFCClientPlugin::GetPluginVersion()
 {
     return 0;
@@ -39,7 +41,7 @@ void NFCClientPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFIEventModule, NFCEventModule)
 	REGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
 	
-    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFINetClientModule)
+    REGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
 }
 
 void NFCClientPlugin::Uninstall()
@@ -52,5 +54,5 @@ void NFCClientPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFISceneAOIModule, NFCSceneAOIModule)
 	UNREGISTER_MODULE(pPluginManager, NFIScheduleModule, NFCScheduleModule)
 
-    UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFINetClientModule)
+    UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
 }

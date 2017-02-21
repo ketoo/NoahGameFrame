@@ -24,7 +24,7 @@ public:
 
 private:
 	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-	int OnLoginEvent(const int, const NFIDataList&);
+	int OnLoginEvent(const int, const NFDataList&);
 
 private:
 	void onLoginTouch(Ref *sender);
