@@ -10,22 +10,20 @@
 
 bool NFCGSTeamModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
 
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCGSTeamModule::OnReqCreateTeamFromClient)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCGSTeamModule::OnReqJoinTeamFromClient)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCGSTeamModule::OnReqLeaveTeamFromClient)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_INVITE_TEAM, this, &NFCGSTeamModule::OnReqInviteTeamFromClient)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnReqOprmemberTeamFromClient)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromClient)) { return false; }
 
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CREATE_TEAM, this, &NFCGSTeamModule::OnAckCreateTeamFromWorldServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_JOIN_TEAM, this, &NFCGSTeamModule::OnAckJoinTeamFromWorldServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_LEAVE_TEAM, this, &NFCGSTeamModule::OnAckLeaveTeamFromWorldServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnAckOprMemberTeamFromWorldServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromWorldServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnAckTeamEnterEcypeFromWorldServer)) { return false; }
 
 	return true;
 }
@@ -43,15 +41,19 @@ bool NFCGSTeamModule::Execute()
 
 bool NFCGSTeamModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-    m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCGSTeamModule::OnReqCreateTeamFromClient)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCGSTeamModule::OnReqJoinTeamFromClient)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCGSTeamModule::OnReqLeaveTeamFromClient)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_INVITE_TEAM, this, &NFCGSTeamModule::OnReqInviteTeamFromClient)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnReqOprmemberTeamFromClient)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromClient)) { return false; }
+
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CREATE_TEAM, this, &NFCGSTeamModule::OnAckCreateTeamFromWorldServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_JOIN_TEAM, this, &NFCGSTeamModule::OnAckJoinTeamFromWorldServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_LEAVE_TEAM, this, &NFCGSTeamModule::OnAckLeaveTeamFromWorldServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_OPRMEMBER_TEAM, this, &NFCGSTeamModule::OnAckOprMemberTeamFromWorldServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnReqTeamEnterEctypeFromWorldServer)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, this, &NFCGSTeamModule::OnAckTeamEnterEcypeFromWorldServer)) { return false; }
 
     return true;
 }
