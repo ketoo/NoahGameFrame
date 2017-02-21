@@ -57,6 +57,7 @@ protected:
     void OnAckTeamEnterEcypeFromWorldServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;

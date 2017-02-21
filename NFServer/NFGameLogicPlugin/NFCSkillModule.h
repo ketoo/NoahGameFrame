@@ -61,6 +61,7 @@ protected:
 private:
     char* mstrSkillTableName;
 
+	NFINetModule* m_pNetModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

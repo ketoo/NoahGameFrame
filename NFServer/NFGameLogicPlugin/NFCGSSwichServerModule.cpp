@@ -10,6 +10,20 @@
 
 bool NFCGSSwichServerModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pScenemodule = pPluginManager->FindModule<NFISceneAOIModule>();
+
 	return true;
 }
 
@@ -26,20 +40,9 @@ bool NFCGSSwichServerModule::Execute()
 
 bool NFCGSSwichServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-    m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-    m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pScenemodule = pPluginManager->FindModule<NFISceneAOIModule>();
+
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
 	
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACKSWICHSERVER, this, &NFCGSSwichServerModule::OnAckSwichServer)) { return false; }
 
