@@ -51,17 +51,17 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 			try
 			{
 				m_EndPoint.send(it->first, msg, nLen, websocketpp::frame::opcode::TEXT);
+				return true;
 			}
 			catch (websocketpp::exception& e)
 			{
 				std::cout<<"websocket exception: "<<e.what()<<std::endl;
-				return false;
 			}
 		}
 		it++;
 	}
 	
-	return true;
+	return false;
 }
 
 bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, std::vector<websocketpp::connection_hdl> vList)
@@ -74,14 +74,15 @@ bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, std::vector<w
 			try
 			{
 				m_EndPoint.send(vIt, msg, nLen, websocketpp::frame::opcode::TEXT);
+				return true;
 			}
 			catch (websocketpp::exception& e)
 			{
 				std::cout << "websocket exception: " << e.what() << std::endl;	
-				return false;
 			}
 		}
 	}
+	return false;
 }
 
 bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, websocketpp::connection_hdl hd)
@@ -92,14 +93,14 @@ bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, websocketpp::
 		try
 		{
 			m_EndPoint.send(hd, msg, nLen, websocketpp::frame::opcode::TEXT);
+			return true;
 		}
 		catch (websocketpp::exception& e)
 		{
 			std::cout << "websocket exception: " << e.what() << std::endl;
-			return false;
 		}
 	}
-	return true;
+	return false;
 }
 
 bool NFCWS::AddNetObject(websocketpp::connection_hdl hd,WSObjectPtr pWSObject)
