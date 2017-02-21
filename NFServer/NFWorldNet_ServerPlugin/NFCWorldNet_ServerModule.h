@@ -52,7 +52,6 @@ public:
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
-	virtual NFINetModule* GetNetModule();
 
     virtual int GetPlayerGameID(const NFGUID self);
 
