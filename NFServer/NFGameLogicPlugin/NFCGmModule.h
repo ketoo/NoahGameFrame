@@ -52,6 +52,7 @@ protected:
     void CheckAndAddRow(const NFGUID& self, std::string strRecordName, const int nRow);
 
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
