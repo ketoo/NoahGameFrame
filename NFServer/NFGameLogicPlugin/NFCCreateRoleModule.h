@@ -38,7 +38,7 @@ protected:
 	void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

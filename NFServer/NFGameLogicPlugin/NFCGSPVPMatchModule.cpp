@@ -13,6 +13,13 @@
 
 bool NFCGSPVPMatchModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
+
     return true;
 }
 
@@ -30,13 +37,8 @@ bool NFCGSPVPMatchModule::Execute()
 
 bool NFCGSPVPMatchModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
-	
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnReqPVPMatchProcess)) { return false; }
+
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnReqPVPMatchProcess)) { return false; }
 
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnAckPVPMatchProcess)) { return false; }
 	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_CREATEPVPECTYPE, this, &NFCGSPVPMatchModule::OnReqCreatePVPEctyProcess)) { return false; }
