@@ -30,12 +30,13 @@ bool NFCPVPModule::Execute()
 
 bool NFCPVPModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_PVP, this, &NFCPVPModule::OnClientJoinPVP)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_EXIT_PVP, this, &NFCPVPModule::OnClientExitPVP)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_PVP, this, &NFCPVPModule::OnClientJoinPVP)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_EXIT_PVP, this, &NFCPVPModule::OnClientExitPVP)) { return false; }
 
     return true;
 }
