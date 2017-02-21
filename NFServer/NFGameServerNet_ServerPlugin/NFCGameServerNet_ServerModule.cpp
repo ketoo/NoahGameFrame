@@ -1648,11 +1648,6 @@ void NFCGameServerNet_ServerModule::SendMsgPBToGate(const uint16_t nMsgID, const
 	}
 }
 
-NFINetModule* NFCGameServerNet_ServerModule::GetNetModule()
-{
-	return m_pNetModule;
-}
-
 bool NFCGameServerNet_ServerModule::AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID)
 {
     if (nGateID <= 0)
