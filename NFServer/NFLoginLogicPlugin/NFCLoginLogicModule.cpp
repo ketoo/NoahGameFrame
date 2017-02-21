@@ -22,8 +22,6 @@ bool NFCLoginLogicModule::Shut()
 
 void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //NFINetModule* pNetModule = m_pLoginNet_ServerModule->GetNetModule();
-
     NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
 	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
@@ -66,7 +64,6 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 
 bool NFCLoginLogicModule::ReadyExecute()
 {
-    //NFINetModule* pNetModule = m_pLoginNet_ServerModule->GetNetModule();
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_LOGIN);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFCLoginLogicModule::OnLoginProcess);
 
