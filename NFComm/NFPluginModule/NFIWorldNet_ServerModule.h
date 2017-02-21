@@ -28,8 +28,6 @@ public:
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase) = 0;
 
 	virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter() = 0;
-	virtual NFINetModule* GetNetModule() = 0;
-
 };
 
 #endif
