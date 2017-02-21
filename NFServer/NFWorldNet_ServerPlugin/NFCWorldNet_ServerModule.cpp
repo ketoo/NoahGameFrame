@@ -842,11 +842,6 @@ NF_SHARE_PTR<ServerData> NFCWorldNet_ServerModule::GetSuitProxyForEnter()
     return mProxyMap.First();
 }
 
-NFINetModule* NFCWorldNet_ServerModule::GetNetModule()
-{
-	return m_pNetModule;
-}
-
 int NFCWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)
 {
     //to do
