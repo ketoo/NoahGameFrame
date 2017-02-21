@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:		NFIWS.h
+//    @FileName			:		NFCWS.cpp
 //    @Author			:		Stone.xin
 //    @Date				:		2016-12-22
-//    @Module			:		NFIWS
+//    @Module			:		NFCWS
 // -------------------------------------------------------------------------
 
 #include "NFCWS.h"
@@ -20,6 +20,38 @@ int NFCWS::Initialization(const unsigned int nMaxClient, const unsigned short nP
 	mnPort = nPort;
 	mnMaxConnect = nMaxClient;
 	mnCpuCount = nCpuCount;
+
+	m_EndPoint.init_asio();
+
+	m_EndPoint.set_message_handler(std::bind(
+		&NFCWS::OnMessageHandler, this,
+		std::placeholders::_1, std::placeholders::_2
+		));
+
+	m_EndPoint.set_open_handler(std::bind(
+		&NFCWS::OnOpenHandler, this,
+		std::placeholders::_1));
+
+	m_EndPoint.set_close_handler(std::bind(
+		&NFCWS::OnCloseHandler, this,
+		std::placeholders::_1));
+
+	m_EndPoint.set_fail_handler(std::bind(
+		&NFCWS::OnFailHandler, this,
+		std::placeholders::_1));
+
+	m_EndPoint.set_pong_handler(std::bind(
+		&NFCWS::OnPongHandler, this,
+		std::placeholders::_1, std::placeholders::_2));
+
+	m_EndPoint.set_interrupt_handler(std::bind(
+		&NFCWS::OnInterruptHandler, this,
+		std::placeholders::_1));
+	
+	m_EndPoint.set_pong_timeout_handler(std::bind(
+		&NFCWS::OnPongTimeOutHandler, this,
+		std::placeholders::_1, std::placeholders::_2));
+
 
 	m_EndPoint.listen(nPort);
 	m_EndPoint.start_accept();
@@ -51,7 +83,6 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 			try
 			{
 				m_EndPoint.send(it->first, msg, nLen, websocketpp::frame::opcode::TEXT);
-				return true;
 			}
 			catch (websocketpp::exception& e)
 			{
@@ -61,7 +92,7 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 		it++;
 	}
 	
-	return false;
+	return true;
 }
 
 bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, std::vector<websocketpp::connection_hdl> vList)
