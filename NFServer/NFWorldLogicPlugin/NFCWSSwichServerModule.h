@@ -41,10 +41,11 @@ public:
 	void OnAckSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 private:
-    NFIKernelModule* m_pKernelModule;
-    NFILogModule* m_pLogModule;
-	NFIElementModule* m_pElementInfoModule;
-	NFIWorldNet_ServerModule* m_pWorlNet_ServerModule;
+	NFINetModule*				m_pNetModule;
+    NFIKernelModule*			m_pKernelModule;
+    NFILogModule*				m_pLogModule;
+	NFIElementModule*			m_pElementInfoModule;
+	NFIWorldNet_ServerModule*	m_pWorlNet_ServerModule;
 };
 
 
