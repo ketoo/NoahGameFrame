@@ -13,14 +13,14 @@
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFCore/NFSingleton.hpp"
 
 class NFCLogicBase
     : public NFIModule
 {
 protected:	
-	typedef std::function<int(const int, const NFIDataList&)> MODULE_EVENT_FUNCTOR;
+	typedef std::function<int(const int, const NFDataList&)> MODULE_EVENT_FUNCTOR;
 	typedef NF_SHARE_PTR<MODULE_EVENT_FUNCTOR> MODULE_EVENT_FUNCTOR_PTR;//EVENT
 
 public:
@@ -39,14 +39,14 @@ public:
     virtual bool AfterInit();
 	
 	template<typename BaseType>
-	bool AddEventCallBack(const int nEventID, BaseType* pBase, int (BaseType::*handler)(const int, const NFIDataList&))
+	bool AddEventCallBack(const int nEventID, BaseType* pBase, int (BaseType::*handler)(const int, const NFDataList&))
 	{
 		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));
 		mModuleEventPrtMap[pBase] = functorPtr.get();
 		return AddEventCallBack(nEventID, functorPtr);
 	}
-	virtual bool DoEvent(const int nEventID, const NFIDataList& valueList);
+	virtual bool DoEvent(const int nEventID, const NFDataList& valueList);
 	virtual bool RemoveEventCallBack(const int nEventID, void *pTarget);
 
 protected:
@@ -74,7 +74,7 @@ private:
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 //class NFIClassModule;
 //class NFIElementModule;

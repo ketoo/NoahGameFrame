@@ -33,7 +33,7 @@ public:
 	template<typename BaseType>
 	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
 	{
-		return GetNetModule()->AddReceiveCallBack(nMsgID, pBase, handleRecieve);
+		return GetNetModule()->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_NONE, nMsgID, pBase, handleRecieve);
 	}
 
 	void ConnectServer(const std::string strIp, int nPort);	
