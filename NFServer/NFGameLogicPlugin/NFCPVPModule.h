@@ -42,6 +42,7 @@ protected:
 	void OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 

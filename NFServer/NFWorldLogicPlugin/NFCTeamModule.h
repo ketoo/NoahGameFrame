@@ -54,6 +54,7 @@ protected:
     bool GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo);
 
 protected:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFILogModule* m_pLogModule;
