@@ -108,15 +108,6 @@
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCRecord.cpp">
       <Filter>src\NFCommon\NFCore\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCDataList.cpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCMemManager.cpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFMemoryCounter.cpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.cpp">
       <Filter>src\NFCommon\NFConfig</Filter>
     </ClCompile>
@@ -164,12 +155,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.cc">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFNet\NFCHttpNet.cpp">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFNet\NFCNet.cpp">
-      <Filter>src\NFCommon\NFNet</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.cpp">
       <Filter>src\NFCommon\NFLog\NFLogModule</Filter>
@@ -402,6 +387,18 @@
     <ClCompile Include="..\Classes\NF\UI\NFCUIChatPanel.cpp">
       <Filter>src\NF\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNet.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.cpp">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -482,33 +479,6 @@
     <ClInclude Include="..\..\..\NFComm\NFCore\NFVector3.hpp">
       <Filter>src\NFCommon\NFCore\Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCConsistentHash.hpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCDataList.h">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.h">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFDateTime.hpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFException.hpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFIDataList.h">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFMapEx.hpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.h">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFList.hpp">
-      <Filter>src\NFCommon\NFCore\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.h">
       <Filter>src\NFCommon\NFConfig</Filter>
     </ClInclude>
@@ -562,18 +532,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.h">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFINet.h">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFCHttpNet.h">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFCNet.h">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFIHttpNet.h">
-      <Filter>src\NFCommon\NFNet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.h">
       <Filter>src\NFCommon\NFLog\NFLogModule</Filter>
@@ -763,6 +721,51 @@
     </ClInclude>
     <ClInclude Include="..\Classes\NF\UI\NFCUIChatPanel.h">
       <Filter>src\NF\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFINet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFIHttpNet.h">
+      <Filter>src\NFCommon\NFNet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFSingleton.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCConsistentHash.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFDataList.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFDateTime.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFException.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFList.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFMapEx.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.hpp">
+      <Filter>src\NFCommon\NFCore\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
