@@ -219,22 +219,38 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
     rapidxml::xml_document<>  xFileDoc;
     xFileDoc.parse<0>(xFileSource.data());
 
+	int nSceneID = lexical_cast<float>(strSceneIDName);
+
     rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
     for (rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling())
     {
         std::string strSeedID = pSeedFileNode->first_attribute(NFrame::IObject::ID().c_str())->value();
-        std::string strConfigID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
+		std::string strConfigID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
         float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::X().c_str())->value());
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Y().c_str())->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Z().c_str())->value());
+		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ));
 
-        if (!m_pElementModule->ExistElement(strConfigID))
-        {
-            assert(0);
-        }
-
-		m_pSceneAOIModule->AddSeedData(lexical_cast<int>(strSceneIDName), strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ));
-    }
+		const string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
+		NFDataList xPositionList;
+		xPositionList.Split(strRelivePosition, ";");
+		for (int i = 0; i < xPositionList.GetCount(); ++i)
+		{
+			const std::string& strPos = xPositionList.String(i);
+			if (!strPos.empty())
+			{
+				NFDataList xPosition;
+				xPosition.Split(strPos, ",");
+				if (xPosition.GetCount() == 3)
+				{
+					float fPosX = lexical_cast<float>(xPosition.String(0));
+					float fPosY = lexical_cast<float>(xPosition.String(1));
+					float fPosZ = lexical_cast<float>(xPosition.String(2));
+					m_pSceneAOIModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+				}
+			}
+		}
+	}
 
     return true;
 }

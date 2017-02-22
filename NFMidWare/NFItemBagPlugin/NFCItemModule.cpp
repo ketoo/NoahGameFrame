@@ -11,6 +11,7 @@
 bool NFCItemModule::Init()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
