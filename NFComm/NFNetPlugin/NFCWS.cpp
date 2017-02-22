@@ -157,7 +157,7 @@ WSObjectPtr NFCWS::GetNetObject(websocketpp::connection_hdl hd)
 
 void NFCWS::ExecuteClose()
 {
-	for each (auto vIt in mvRemoveObject)
+	for(auto vIt : mvRemoveObject)
 	{
 		CloseObject(vIt);
 	}
@@ -167,9 +167,10 @@ void NFCWS::ExecuteClose()
 bool NFCWS::CloseSocketAll()
 {
 	session_list::iterator it = mmObject.begin();
-	for (it; it != mmObject.end(); ++it)
+	while(it != mmObject.end())
 	{
 		mvRemoveObject.push_back(it->first);
+		it++;
 	}
 
 	ExecuteClose();
