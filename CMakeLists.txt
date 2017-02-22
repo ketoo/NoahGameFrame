@@ -54,6 +54,8 @@ ${SolutionDir}/Dependencies/libevent/
 ${SolutionDir}/Dependencies/libevent/include/
 ${SolutionDir}/Dependencies/libevent/compat/
 ${SolutionDir}/Dependencies/lua/
+${SolutionDir}/Dependencies/asio/
+${SolutionDir}/Dependencies/websocketpp/
 )
 
 #message("Build Type:"${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})

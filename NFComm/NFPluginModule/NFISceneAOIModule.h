@@ -175,11 +175,26 @@ public:
 		return true;
 	}
 	
+	bool AddReliveInfo(const int nIndex, const NFVector3& vPos)
+	{
+		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
+	}
+	NFVector3 GetReliveInfo(const int nIndex)
+	{
+		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
+		if (vPos)
+		{
+			return *vPos;
+		}
+
+		return NFVector3();
+	}
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
 	//seedID, seedInfo
 	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
+	NFMapEx<int, NFVector3 > mtSceneRelivePos;
 };
 
 typedef std::function<int(const NFDataList&, const NFDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
@@ -304,6 +319,9 @@ public:
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
+	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
+	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
+
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
 

@@ -187,13 +187,16 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             pConfigRecordInfo = pStaticClassRecordManager->Next();
         }
 
-
+		NFVector3 vRelivePos = m_pSceneModule->GetRelivePosition(nSceneID, 0);
 
 		pObject->SetPropertyObject(NFrame::IObject::ID(), self);
 		pObject->SetPropertyString(NFrame::IObject::ConfigID(), strConfigIndex);
 		pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
 		pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
 		pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
+		pObject->SetPropertyFloat(NFrame::IObject::X(), vRelivePos.X());
+		pObject->SetPropertyFloat(NFrame::IObject::Y(), vRelivePos.Y());
+		pObject->SetPropertyFloat(NFrame::IObject::Z(), vRelivePos.Z());
 
 		//no data
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
