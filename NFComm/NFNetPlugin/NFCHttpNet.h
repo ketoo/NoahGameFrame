@@ -4,7 +4,7 @@
 #include "NFIHttpNet.h"
 #include "NFINet.h"
 
-class NFCHttpNet : public NFIHttpNet
+class _NFExport NFCHttpNet : public NFIHttpNet
 {
 public:
 	template<typename BaseType>
