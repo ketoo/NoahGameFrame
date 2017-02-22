@@ -13,7 +13,7 @@
 #pragma pack(push, 1)
 
 
-class _NFExport NFCWS : public NFIWS
+class NFCWS : public NFIWS
 {
 public:
     template<typename BaseType>

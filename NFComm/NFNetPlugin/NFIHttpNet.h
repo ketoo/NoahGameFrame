@@ -40,7 +40,7 @@
 typedef std::function<void(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)> HTTPNET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<HTTPNET_RECEIVE_FUNCTOR> HTTPNET_RECEIVE_FUNCTOR_PTR;
 
-class _NFExport NFIHttpNet
+class NFIHttpNet
 {
 public:
 	virtual bool Execute() = 0;
