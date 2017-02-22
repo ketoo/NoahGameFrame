@@ -13,7 +13,7 @@
 #pragma pack(push, 1)
 
 
-class _NFExport NFCNet : public NFINet
+class NFCNet : public NFINet
 {
 public:
     NFCNet()
