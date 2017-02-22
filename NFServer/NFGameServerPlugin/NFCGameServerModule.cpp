@@ -8,7 +8,6 @@
 
 #include "NFGameServerPlugin.h"
 #include "NFCGameServerModule.h"
-#include "NFComm/Config/NFConfig.h"
 
 
 bool NFCGameServerModule::Init()
