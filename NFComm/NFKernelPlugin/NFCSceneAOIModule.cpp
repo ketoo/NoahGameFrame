@@ -131,6 +131,26 @@ bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strS
 	return false;
 }
 
+bool NFCSceneAOIModule::AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->AddReliveInfo(nIndex, vPos);
+	}
+
+	return false;
+}
+NFVector3 NFCSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->GetReliveInfo(nIndex);
+	}
+
+	return NFVector3();
+}
 bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mtObjectEnterCallback.push_back(cb);
