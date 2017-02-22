@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D73E7D61-0945-4C68-9A55-70192B8C2F4B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFChatPlugin</RootNamespace>
+    <RootNamespace>NFSkillPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
