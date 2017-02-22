@@ -17,7 +17,6 @@
 #include <functional>
 #include <atomic>
 #include "NFCPluginManager.h"
-#include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
