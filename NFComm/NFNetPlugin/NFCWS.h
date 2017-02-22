@@ -21,10 +21,10 @@ public:
     {
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2);
         mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
-        mstrIP = "";
+        //mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
-        mbServer = true;
+        //mbServer = true;
         mbWorking = false;
         
         mnSendMsgTotal = 0;
