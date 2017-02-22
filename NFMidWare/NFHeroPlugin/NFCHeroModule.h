@@ -60,6 +60,7 @@ protected:
     NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
+	NFINetModule* m_pNetModule;
 	NFIHeroPropertyModule* m_pHeroPropertyModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFISceneProcessModule* m_pSceneProcessModule;
