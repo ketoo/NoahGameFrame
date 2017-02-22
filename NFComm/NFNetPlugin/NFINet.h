@@ -156,7 +156,7 @@ struct  NFIMsgHead
 
 };
 
-class _NFExport NFCMsgHead : public NFIMsgHead
+class NFCMsgHead : public NFIMsgHead
 {
 public:
     NFCMsgHead()
@@ -232,7 +232,7 @@ protected:
     uint16_t munMsgID;
 };
 
-class _NFExport NFINet;
+class NFINet;
 
 typedef std::function<void(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
@@ -243,7 +243,7 @@ typedef std::shared_ptr<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
 typedef std::function<void(int severity, const char* msg)> NET_EVENT_LOG_FUNCTOR;
 typedef std::shared_ptr<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 
-class _NFExport NetObject
+class NetObject
 {
 public:
     NetObject(NFINet* pNet, int32_t fd, sockaddr_in& addr, bufferevent* pBev)
@@ -406,7 +406,7 @@ private:
     bool bNeedRemove;
 };
 
-class _NFExport NFINet
+class NFINet
 {
 public:
 	virtual ~NFINet() {}
