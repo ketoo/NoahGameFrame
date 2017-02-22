@@ -736,7 +736,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 			}
 		}
 
-		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
 
 	}
 	break;

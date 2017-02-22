@@ -16,8 +16,12 @@
 bool NFCWorldToMasterModule::Init()
 {
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 
-	m_pNetClientModule->Init();
 
 	return true;
 }
@@ -29,11 +33,6 @@ bool NFCWorldToMasterModule::Shut()
 
 bool NFCWorldToMasterModule::AfterInit()
 {
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
-
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_REQ_CONNECT_WORLD, this, &NFCWorldToMasterModule::OnSelectServerProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_REQ_KICK_CLIENT_INWORLD, this, &NFCWorldToMasterModule::OnKickClientProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCWorldToMasterModule::InvalidMessage);
@@ -212,7 +211,7 @@ void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const i
 		xData.set_world_port(xServerData->pData->server_port());
 		xData.set_world_key(xMsg.account());
 
-		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 
 		m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, xMsg.account(), NFMsg::EGMI_ACK_CONNECT_WORLD, xData);
 	}
