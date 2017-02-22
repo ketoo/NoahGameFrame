@@ -194,9 +194,9 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 		pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
 		pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
 		pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
-		pObject->SetPropertyInt(NFrame::IObject::X(), vRelivePos.X());
-		pObject->SetPropertyInt(NFrame::IObject::Y(), vRelivePos.Y());
-		pObject->SetPropertyInt(NFrame::IObject::Z(), vRelivePos.Z());
+		pObject->SetPropertyFloat(NFrame::IObject::X(), vRelivePos.X());
+		pObject->SetPropertyFloat(NFrame::IObject::Y(), vRelivePos.Y());
+		pObject->SetPropertyFloat(NFrame::IObject::Z(), vRelivePos.Z());
 
 		//no data
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
