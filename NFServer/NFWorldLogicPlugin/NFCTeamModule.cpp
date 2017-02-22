@@ -397,7 +397,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
         if (!GetTeamInfo(nPlayerID, xTeam, xTeamInfo))
         {
             xAck.mutable_xteaminfo()->CopyFrom(xTeamInfo);
-            m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+            m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
             return;
         }
     }
@@ -405,7 +405,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
     NFMsg::ReqAckCreateTeam xAck;
     *xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-    m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+    m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 }
 
 void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -433,7 +433,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
         NFMsg::ReqAckJoinTeam xAck;
         *xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
     }
 }
 
@@ -509,7 +509,7 @@ void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMs
         }
     }
 
-    m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, xMsg, nSockIndex, nPlayerID);
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, xMsg, nSockIndex, nPlayerID);
 }
 
 bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo)

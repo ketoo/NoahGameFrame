@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:		NFIWS.h
+//    @FileName			:		NFCWS.h
 //    @Author			:		Stone.xin
 //    @Date				:		2016-12-22
-//    @Module			:		NFIWS
+//    @Module			:		NFCWS
 // -------------------------------------------------------------------------
 
 #ifndef NFC_WS_H
@@ -19,15 +19,12 @@ public:
     template<typename BaseType>
 	NFCWS(BaseType* pBaseType, void (BaseType::*handleRecieve)(websocketpp::connection_hdl, const std::string&), void (BaseType::*handleEvent)(websocketpp::connection_hdl, NF_WS_EVENT))
     {
-        base = NULL;
-        listener = NULL;
-
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2);
         mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
-        mstrIP = "";
+        //mstrIP = "";
         mnPort = 0;
         mnCpuCount = 0;
-        mbServer = true;
+        //mbServer = true;
         mbWorking = false;
         
         mnSendMsgTotal = 0;
