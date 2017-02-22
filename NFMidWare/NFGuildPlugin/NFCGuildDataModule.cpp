@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCGuildDataModule.h"
-#include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
