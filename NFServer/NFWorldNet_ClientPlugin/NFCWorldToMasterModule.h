@@ -63,7 +63,7 @@ private:
 	NFIClassModule* m_pClassModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFINetClientModule* m_pNetClientModule;
-
+	NFINetModule* m_pNetModule;
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
