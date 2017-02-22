@@ -56,6 +56,7 @@ protected:
 private:
     NFIEventModule* m_pEventModule;
 	NFIKernelModule* m_pKernelModule;
+	NFINetModule* m_pNetModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pLogicClassModule;

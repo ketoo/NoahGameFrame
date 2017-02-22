@@ -14,6 +14,14 @@
 
 bool NFCHeroModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
+
 	return true;
 }
 
@@ -29,16 +37,10 @@ bool NFCHeroModule::Execute()
 
 bool NFCHeroModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroModule::OnObjectClassEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg)) { return false; }
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg);
 
 	return true;
 }
