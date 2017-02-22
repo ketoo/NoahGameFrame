@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCHeroModule.h"
-#include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
