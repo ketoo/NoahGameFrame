@@ -21,19 +21,16 @@
 
 bool NFCMasterNet_HttpJsonModule::Init()
 {
-	m_pHttpNetModule = new NFIHttpServerModule(pPluginManager);
+	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpServerModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 
-
 	return true;
 }
 bool NFCMasterNet_HttpJsonModule::Shut()
 {
-	delete m_pHttpNetModule;
-	m_pHttpNetModule = nullptr;
 	return true;
 }
 
@@ -71,14 +68,13 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 
 bool NFCMasterNet_HttpJsonModule::Execute()
 {
-	m_pHttpNetModule->Execute();
 	return true;
 }
 
 void NFCMasterNet_HttpJsonModule::OnCommandQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)
 {
 	std::string str = m_pMasterServerModule->GetServersStatus();
-	NFCHttpNet::SendMsg(req, str.c_str());
+	m_pHttpNetModule->GetHttpNet()->SendMsg(req, str.c_str());
 }
 
 void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)
@@ -111,7 +107,7 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 	if (stat(strPath.c_str(), &st) < 0)
 	{
 		std::string errMsg = "404:" + strPath;
-		NFCHttpNet::SendMsg(req, errMsg.c_str());
+		m_pHttpNetModule->GetHttpNet()->SendMsg(req, errMsg.c_str());
 	}
 
 	if (S_ISDIR(st.st_mode))
@@ -122,7 +118,7 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 	if (stat(strPath.c_str(), &st) < 0)
 	{
 		std::string errMsg = "404:" + strPath;
-		NFCHttpNet::SendMsg(req, errMsg.c_str());
+		m_pHttpNetModule->GetHttpNet()->SendMsg(req, errMsg.c_str());
 	}
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -130,12 +126,12 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 #else
 	if ((fd = open(strPath.c_str(), O_RDONLY)) < 0) {
 #endif
-		NFCHttpNet::SendMsg(req, "error");
+		m_pHttpNetModule->GetHttpNet()->SendMsg(req, "error");
 		return;
 	}
 
 	if (fstat(fd, &st) < 0) {
-		NFCHttpNet::SendMsg(req, "error");
+		m_pHttpNetModule->GetHttpNet()->SendMsg(req, "error");
 		return;
 	}
 
@@ -149,5 +145,5 @@ void NFCMasterNet_HttpJsonModule::OnCommonQuery(struct evhttp_request *req, cons
 	{
 		strType = typeMap[strType];
 	}
-	NFCHttpNet::SendFile(req, fd, st, strType);
+	m_pHttpNetModule->GetHttpNet()->SendFile(req, fd, st, strType);
 }
