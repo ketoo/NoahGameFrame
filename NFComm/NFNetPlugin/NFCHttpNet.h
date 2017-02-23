@@ -2,9 +2,8 @@
 #define NFC_HTTP_NET_H
 
 #include "NFIHttpNet.h"
-#include "NFINet.h"
 
-class _NFExport NFCHttpNet : public NFIHttpNet
+class NFCHttpNet : public NFIHttpNet
 {
 public:
 	template<typename BaseType>
@@ -24,8 +23,8 @@ public:
 public:
 	virtual int InitServer(const unsigned short nPort);
 	static void listener_cb(struct evhttp_request *req, void *arg);
-	static bool SendMsg(struct evhttp_request *req, const char* strMsg);
-	static bool SendFile(evhttp_request * req, const int fd, struct stat st, const std::string& strType);
+	virtual bool SendMsg(struct evhttp_request *req, const char* strMsg);
+	virtual bool SendFile(evhttp_request * req, const int fd, struct stat st, const std::string& strType);
 	virtual bool Final();
 	static std::vector<std::string> Split(const std::string& str, std::string delim);
 private:
