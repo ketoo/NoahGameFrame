@@ -23,12 +23,6 @@
 #include <memory>
 #include <list>
 #include <vector>
-#include <event2/bufferevent.h>
-#include <event2/buffer.h>
-#include <event2/listener.h>
-#include <event2/util.h>
-#include <event2/thread.h>
-#include <event2/event_compat.h>
 #include <assert.h>
 
 #ifdef _MSC_VER
@@ -46,6 +40,10 @@ public:
 	virtual bool Execute() = 0;
 	virtual int InitServer(const unsigned short nPort) = 0;
 	virtual bool Final() = 0;
+
+public:
+	virtual bool SendMsg(struct evhttp_request *req, const char* strMsg) = 0;
+	virtual bool SendFile(struct evhttp_request * req, const int fd, struct stat st, const std::string& strType) = 0;
 };
 
 #endif
