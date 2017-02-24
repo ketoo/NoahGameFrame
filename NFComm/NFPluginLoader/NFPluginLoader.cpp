@@ -24,6 +24,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <signal.h>
+#include <sys/prctl.h>
 #endif
 
 bool bExitApp = false;
