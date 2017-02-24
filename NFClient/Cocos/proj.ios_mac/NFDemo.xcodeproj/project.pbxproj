@@ -1618,18 +1618,18 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\",
-					"\"$(SRCROOT)/../../../Dependencies\",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\",
+					"\"$(SRCROOT)/../../..\"",
+					"\"$(SRCROOT)/../../../Dependencies\"",
+					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\"",
+					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\"",
 					"\"$(SRCROOT)/../../../Dependencies/libevent\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/include\",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\",
-					"\"$(SRCROOT)/../cocos2d/cocos/editor-support\",
-					"\"$(SRCROOT)/../Classes\",
-					"\"$(SRCROOT)/../Classes/NF\",
-					"\"$(SRCROOT)/../Classes/NF\",
-					"\"$(SRCROOT)/../Classes/libevent/ios",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/include\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code\"",
+					"\"$(SRCROOT)/../cocos2d/cocos/editor-support\"",
+					"\"$(SRCROOT)/../Classes\"",
+					"\"$(SRCROOT)/../Classes/NF\"",
+					"\"$(SRCROOT)/../Classes/libevent/ios"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1665,18 +1665,18 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\",
-					"\"$(SRCROOT)/../../../Dependencies\",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\",
-					"\"$(SRCROOT)/../../../Dependencies/libevent\",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/include\",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code\",
+					"\"$(SRCROOT)/../../..\"",
+					"\"$(SRCROOT)/../../../Dependencies\"",
+					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\"",
+					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/include\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\"",
+					"\"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code\"",
 					"\"$(SRCROOT)/../cocos2d/cocos/editor-support\"",
-					"\"$(SRCROOT)/../Classes\",
-					"\"$(SRCROOT)/../Classes/NF\",
-					"\"$(SRCROOT)/../Classes/libevent/ios",
+					"\"$(SRCROOT)/../Classes\"",
+					"\"$(SRCROOT)/../Classes/NF\"",
+					"\"$(SRCROOT)/../Classes/libevent/ios"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
