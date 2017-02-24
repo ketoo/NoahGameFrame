@@ -153,6 +153,12 @@
 		010CE9831E5FE86B00C50289 /* poll.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9811E5FE86B00C50289 /* poll.c */; };
 		010CE9851E5FE89A00C50289 /* kqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9841E5FE89A00C50289 /* kqueue.c */; };
 		010CE9861E5FE89A00C50289 /* kqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9841E5FE89A00C50289 /* kqueue.c */; };
+		010CEABD1E601E3F00C50289 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABB1E601E3F00C50289 /* res */; };
+		010CEABE1E601E3F00C50289 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABB1E601E3F00C50289 /* res */; };
+		010CEABF1E601E3F00C50289 /* Scene in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABC1E601E3F00C50289 /* Scene */; };
+		010CEAC01E601E3F00C50289 /* Scene in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABC1E601E3F00C50289 /* Scene */; };
+		010CEAC21E601E4C00C50289 /* NFDataCfg in Resources */ = {isa = PBXBuildFile; fileRef = 010CEAC11E601E4C00C50289 /* NFDataCfg */; };
+		010CEAC31E601E4C00C50289 /* NFDataCfg in Resources */ = {isa = PBXBuildFile; fileRef = 010CEAC11E601E4C00C50289 /* NFDataCfg */; };
 		0190545B1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */; };
 		0190545C1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */; };
 		019054631E5E8F12009153C1 /* coded_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054611E5E8F12009153C1 /* coded_stream.cc */; };
@@ -216,22 +222,6 @@
 		019055A21E5E91BC009153C1 /* zero_copy_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */; };
 		019055B71E5E93D5009153C1 /* grossini.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AB1E5E93D5009153C1 /* grossini.png */; };
 		019055B81E5E93D5009153C1 /* grossini.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AB1E5E93D5009153C1 /* grossini.png */; };
-		019055B91E5E93D5009153C1 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 019055AD1E5E93D5009153C1 /* .gitkeep */; };
-		019055BA1E5E93D5009153C1 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 019055AD1E5E93D5009153C1 /* .gitkeep */; };
-		019055BB1E5E93D5009153C1 /* Button_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AF1E5E93D5009153C1 /* Button_Disable.png */; };
-		019055BC1E5E93D5009153C1 /* Button_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AF1E5E93D5009153C1 /* Button_Disable.png */; };
-		019055BD1E5E93D5009153C1 /* Button_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B01E5E93D5009153C1 /* Button_Normal.png */; };
-		019055BE1E5E93D5009153C1 /* Button_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B01E5E93D5009153C1 /* Button_Normal.png */; };
-		019055BF1E5E93D5009153C1 /* Button_Press.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B11E5E93D5009153C1 /* Button_Press.png */; };
-		019055C01E5E93D5009153C1 /* Button_Press.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B11E5E93D5009153C1 /* Button_Press.png */; };
-		019055C11E5E93D5009153C1 /* UIChatPanel.csb in Resources */ = {isa = PBXBuildFile; fileRef = 019055B21E5E93D5009153C1 /* UIChatPanel.csb */; };
-		019055C21E5E93D5009153C1 /* UIChatPanel.csb in Resources */ = {isa = PBXBuildFile; fileRef = 019055B21E5E93D5009153C1 /* UIChatPanel.csb */; };
-		019055C31E5E93D5009153C1 /* UILogin.csb in Resources */ = {isa = PBXBuildFile; fileRef = 019055B31E5E93D5009153C1 /* UILogin.csb */; };
-		019055C41E5E93D5009153C1 /* UILogin.csb in Resources */ = {isa = PBXBuildFile; fileRef = 019055B31E5E93D5009153C1 /* UILogin.csb */; };
-		019055C51E5E93D5009153C1 /* NFMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 019055B51E5E93D5009153C1 /* NFMap.tmx */; };
-		019055C61E5E93D5009153C1 /* NFMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 019055B51E5E93D5009153C1 /* NFMap.tmx */; };
-		019055C71E5E93D5009153C1 /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B61E5E93D5009153C1 /* tile.png */; };
-		019055C81E5E93D5009153C1 /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055B61E5E93D5009153C1 /* tile.png */; };
 		019055CC1E5EAA0A009153C1 /* common.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055C91E5EAA0A009153C1 /* common.cc */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
@@ -482,6 +472,9 @@
 		010CE97E1E5FE83800C50289 /* select.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = select.c; path = ../../../Dependencies/libevent/select.c; sourceTree = "<group>"; };
 		010CE9811E5FE86B00C50289 /* poll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = poll.c; path = ../../../Dependencies/libevent/poll.c; sourceTree = "<group>"; };
 		010CE9841E5FE89A00C50289 /* kqueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kqueue.c; path = ../../../Dependencies/libevent/kqueue.c; sourceTree = "<group>"; };
+		010CEABB1E601E3F00C50289 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		010CEABC1E601E3F00C50289 /* Scene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scene; sourceTree = "<group>"; };
+		010CEAC11E601E4C00C50289 /* NFDataCfg */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NFDataCfg; path = ../../../_Out/NFDataCfg; sourceTree = "<group>"; };
 		019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = atomicops_internals_x86_gcc.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.cc; sourceTree = "<group>"; };
 		019054591E5E8EF2009153C1 /* atomicops_internals_x86_gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = atomicops_internals_x86_gcc.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.h; sourceTree = "<group>"; };
 		0190545A1E5E8EF2009153C1 /* atomicops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = atomicops.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops.h; sourceTree = "<group>"; };
@@ -552,14 +545,6 @@
 		0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zero_copy_stream.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream.cc; sourceTree = "<group>"; };
 		0190559C1E5E91BC009153C1 /* zero_copy_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zero_copy_stream.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream.h; sourceTree = "<group>"; };
 		019055AB1E5E93D5009153C1 /* grossini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grossini.png; sourceTree = "<group>"; };
-		019055AD1E5E93D5009153C1 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		019055AF1E5E93D5009153C1 /* Button_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Disable.png; sourceTree = "<group>"; };
-		019055B01E5E93D5009153C1 /* Button_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Normal.png; sourceTree = "<group>"; };
-		019055B11E5E93D5009153C1 /* Button_Press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Press.png; sourceTree = "<group>"; };
-		019055B21E5E93D5009153C1 /* UIChatPanel.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = UIChatPanel.csb; sourceTree = "<group>"; };
-		019055B31E5E93D5009153C1 /* UILogin.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = UILogin.csb; sourceTree = "<group>"; };
-		019055B51E5E93D5009153C1 /* NFMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = NFMap.tmx; sourceTree = "<group>"; };
-		019055B61E5E93D5009153C1 /* tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile.png; sourceTree = "<group>"; };
 		019055C91E5EAA0A009153C1 /* common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/common.cc; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
@@ -1014,36 +999,6 @@
 			name = libprotobuf;
 			sourceTree = "<group>";
 		};
-		019055AC1E5E93D5009153C1 /* res */ = {
-			isa = PBXGroup;
-			children = (
-				019055AD1E5E93D5009153C1 /* .gitkeep */,
-				019055AE1E5E93D5009153C1 /* Default */,
-				019055B21E5E93D5009153C1 /* UIChatPanel.csb */,
-				019055B31E5E93D5009153C1 /* UILogin.csb */,
-			);
-			path = res;
-			sourceTree = "<group>";
-		};
-		019055AE1E5E93D5009153C1 /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				019055AF1E5E93D5009153C1 /* Button_Disable.png */,
-				019055B01E5E93D5009153C1 /* Button_Normal.png */,
-				019055B11E5E93D5009153C1 /* Button_Press.png */,
-			);
-			path = Default;
-			sourceTree = "<group>";
-		};
-		019055B41E5E93D5009153C1 /* Scene */ = {
-			isa = PBXGroup;
-			children = (
-				019055B51E5E93D5009153C1 /* NFMap.tmx */,
-				019055B61E5E93D5009153C1 /* tile.png */,
-			);
-			path = Scene;
-			sourceTree = "<group>";
-		};
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -1122,9 +1077,10 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				010CEAC11E601E4C00C50289 /* NFDataCfg */,
+				010CEABB1E601E3F00C50289 /* res */,
+				010CEABC1E601E3F00C50289 /* Scene */,
 				019055AB1E5E93D5009153C1 /* grossini.png */,
-				019055AC1E5E93D5009153C1 /* res */,
-				019055B41E5E93D5009153C1 /* Scene */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -1301,29 +1257,24 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
-				019055C71E5E93D5009153C1 /* tile.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
-				019055C11E5E93D5009153C1 /* UIChatPanel.csb in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
-				019055C51E5E93D5009153C1 /* NFMap.tmx in Resources */,
-				019055B91E5E93D5009153C1 /* .gitkeep in Resources */,
+				010CEAC21E601E4C00C50289 /* NFDataCfg in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
-				019055BF1E5E93D5009153C1 /* Button_Press.png in Resources */,
-				019055BD1E5E93D5009153C1 /* Button_Normal.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
-				019055C31E5E93D5009153C1 /* UILogin.csb in Resources */,
+				010CEABF1E601E3F00C50289 /* Scene in Resources */,
 				019055B71E5E93D5009153C1 /* grossini.png in Resources */,
+				010CEABD1E601E3F00C50289 /* res in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
-				019055BB1E5E93D5009153C1 /* Button_Disable.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
@@ -1333,16 +1284,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				019055C41E5E93D5009153C1 /* UILogin.csb in Resources */,
-				019055C81E5E93D5009153C1 /* tile.png in Resources */,
-				019055BC1E5E93D5009153C1 /* Button_Disable.png in Resources */,
-				019055BA1E5E93D5009153C1 /* .gitkeep in Resources */,
+				010CEABE1E601E3F00C50289 /* res in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
-				019055C01E5E93D5009153C1 /* Button_Press.png in Resources */,
-				019055C61E5E93D5009153C1 /* NFMap.tmx in Resources */,
-				019055C21E5E93D5009153C1 /* UIChatPanel.csb in Resources */,
-				019055BE1E5E93D5009153C1 /* Button_Normal.png in Resources */,
+				010CEAC31E601E4C00C50289 /* NFDataCfg in Resources */,
 				019055B81E5E93D5009153C1 /* grossini.png in Resources */,
+				010CEAC01E601E3F00C50289 /* Scene in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1616,9 +1562,7 @@
 					LIBEVENT_SRC,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
@@ -1651,9 +1595,7 @@
 					NDEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
