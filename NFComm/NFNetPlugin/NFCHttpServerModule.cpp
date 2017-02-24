@@ -7,14 +7,20 @@ NFCHttpServerModule::NFCHttpServerModule(NFIPluginManager* p)
 }
 NFCHttpServerModule::~NFCHttpServerModule()
 {
-	mHttpNet->Final();
-	delete mHttpNet;
-	mHttpNet = NULL;
+	if (mHttpNet)
+	{
+		mHttpNet->Final();
+		delete mHttpNet;
+		mHttpNet = NULL;
+	}
 }
 
 bool NFCHttpServerModule::Execute()
 {
-	return mHttpNet->Execute();
+	if(mHttpNet)
+		return mHttpNet->Execute();
+
+	return true;
 }
 
 int NFCHttpServerModule::InitServer(const unsigned short nPort)
