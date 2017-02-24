@@ -1618,18 +1618,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\"",
-					"\"$(SRCROOT)/../../../Dependencies\"",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\"",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/include\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code\"",
-					"\"$(SRCROOT)/../cocos2d/cocos/editor-support\"",
-					"\"$(SRCROOT)/../Classes\"",
-					"\"$(SRCROOT)/../Classes/NF\"",
-					"\"$(SRCROOT)/../Classes/libevent/ios\"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1665,18 +1653,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../..\"",
-					"\"$(SRCROOT)/../../../Dependencies\"",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/src\"",
-					"\"$(SRCROOT)/../../../Dependencies/protobuf/xcode\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/include\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/compat\"",
-					"\"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code\"",
-					"\"$(SRCROOT)/../cocos2d/cocos/editor-support\"",
-					"\"$(SRCROOT)/../Classes\"",
-					"\"$(SRCROOT)/../Classes/NF\"",
-					"\"$(SRCROOT)/../Classes/libevent/ios\"",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -1770,6 +1746,18 @@
 					"$(SRCROOT)/../cocos2d/extensions",
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../Dependencies",
+					"$(SRCROOT)/../../../Dependencies/protobuf/src",
+					"$(SRCROOT)/../../../Dependencies/protobuf/xcode",
+					"$(SRCROOT)/../../../Dependencies/libevent",
+					"$(SRCROOT)/../../../Dependencies/libevent/include",
+					"$(SRCROOT)/../../../Dependencies/libevent/compat",
+					"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code",
+					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/NF",
+					"$(SRCROOT)/../Classes/libevent/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -1793,6 +1781,18 @@
 					"$(SRCROOT)/../cocos2d/extensions",
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../Dependencies",
+					"$(SRCROOT)/../../../Dependencies/protobuf/src",
+					"$(SRCROOT)/../../../Dependencies/protobuf/xcode",
+					"$(SRCROOT)/../../../Dependencies/libevent",
+					"$(SRCROOT)/../../../Dependencies/libevent/include",
+					"$(SRCROOT)/../../../Dependencies/libevent/compat",
+					"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code",
+					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/NF",
+					"$(SRCROOT)/../Classes/libevent/ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
