@@ -9,17 +9,17 @@
 
 #include "NFCClientPlugin.h"
 
-#include "NFComm\NFConfigPlugin\NFCClassModule.h"
-#include "NFComm\NFConfigPlugin\NFCElementModule.h"
-#include "NFComm\NFLogPlugin\NFCLogModule.h"
-#include "NFComm\NFLogPlugin\NFCLogModule.h"
+#include "NFComm/NFConfigPlugin/NFCClassModule.h"
+#include "NFComm/NFConfigPlugin/NFCElementModule.h"
+#include "NFComm/NFLogPlugin/NFCLogModule.h"
+#include "NFComm/NFLogPlugin/NFCLogModule.h"
 
-#include "NFComm\NFKernelPlugin\NFCKernelModule.h"
-#include "NFComm\NFKernelPlugin\NFCSceneAOIModule.h"
-#include "NFComm\NFKernelPlugin\NFCEventModule.h"
-#include "NFComm\NFKernelPlugin\NFCScheduleModule.h"
+#include "NFComm/NFKernelPlugin/NFCKernelModule.h"
+#include "NFComm/NFKernelPlugin/NFCSceneAOIModule.h"
+#include "NFComm/NFKernelPlugin/NFCEventModule.h"
+#include "NFComm/NFKernelPlugin/NFCScheduleModule.h"
 
-#include "NFComm\NFNetPlugin\NFCNetClientModule.h"
+#include "NFComm/NFNetPlugin/NFCNetClientModule.h"
 
 const int NFCClientPlugin::GetPluginVersion()
 {
