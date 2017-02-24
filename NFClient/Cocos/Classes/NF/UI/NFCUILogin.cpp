@@ -8,8 +8,8 @@
 #include "stdafx.h"
 
 #include "NFCUILogin.h"
-#include "Logic\NFCLoginLogic.h"
-#include "Logic\NFCNetLogic.h"
+#include "Logic/NFCLoginLogic.h"
+#include "Logic/NFCNetLogic.h"
 
 #include "NFCUISelectServer.h"
 

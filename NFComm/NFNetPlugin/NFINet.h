@@ -38,7 +38,7 @@
 #include <windows.h>
 #include <WinSock2.h>
 //#elseifdef _APPLE_
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 #include <libkern/OSByteOrder.h>
 #else
 #include <unistd.h>
@@ -76,7 +76,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return htonll(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE_CC__
         return OSSwapHostToBigInt64(nData);
 #else
@@ -89,7 +89,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return ntohll(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt64(nData);
 #else
@@ -102,7 +102,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return htonl(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapHostToBigInt32(nData);
 #else
@@ -115,7 +115,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return ntohl(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt32(nData);
 #else
@@ -128,7 +128,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return htons(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapHostToBigInt16(nData);
 #else
@@ -141,7 +141,7 @@ struct  NFIMsgHead
 #if NF_PLATFORM == NF_PLATFORM_WIN
 //#ifdef _MSC_VER
         return ntohs(nData);
-#elif NF_PLATFORM == NF_PLATFORM_APPLE
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt16(nData);
 #else
