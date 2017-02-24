@@ -363,7 +363,7 @@ int NFCNet::InitClientNet()
     addr.sin_family = AF_INET;
     addr.sin_port = htons(nPort);
 
-    if (inet_pton(AF_INET, strIP.c_str(), &addr.sin_addr) <= 0)
+    if (evutil_inet_pton(AF_INET, strIP.c_str(), &addr.sin_addr) <= 0)
     {
         printf("inet_pton");
         return -1;
