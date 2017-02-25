@@ -39,7 +39,11 @@ int NFCNetModule::Initialization(const unsigned int nMaxClient, const unsigned s
 
 int NFCNetModule::ExpandBufferSize(const unsigned int size)
 {
-	m_pNet->ExpandBufferSize(size);
+	if (size > 0)
+	{
+		return m_pNet->ExpandBufferSize(size);
+	}
+
 	return 0;
 }
 
