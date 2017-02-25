@@ -36,6 +36,8 @@ bool NFCLoginToMasterModule::AfterInit()
 	
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_MASTER, this, &NFCLoginToMasterModule::OnSocketMSEvent);
 
+	m_pNetClientModule->ExpandBufferSize();
+
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {

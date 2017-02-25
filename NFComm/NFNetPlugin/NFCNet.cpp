@@ -95,7 +95,6 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
     {
         
         fprintf(stderr, "Error constructing bufferevent!");
-        //event_base_loopbreak(base);
         return;
     }
 
@@ -144,10 +143,6 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 
     size_t len = evbuffer_get_length(input);
 
-    
-    //      struct evbuffer *output = bufferevent_get_output(bev);
-    //      evbuffer_add_buffer(output, input);
-    //      SendMsg(1, strData,len, pObject->GetFd());
     //////////////////////////////////////////////////////////////////////////
 
     
@@ -175,7 +170,6 @@ bool NFCNet::Execute()
 {
     ExecuteClose();
 
-    //std::cout << "Running:" << mbRuning << std::endl;
     if (base)
     {
         event_base_loop(base, EVLOOP_ONCE | EVLOOP_NONBLOCK);
@@ -204,7 +198,10 @@ int NFCNet::Initialization(const unsigned int nMaxClient, const unsigned short n
 
 int NFCNet::ExpandBufferSize(const unsigned int size)
 {
-	mnBufferSize = size;
+	if (size > 0)
+	{
+		mnBufferSize = size;
+	}
 	return mnBufferSize;
 }
 
@@ -420,7 +417,6 @@ int NFCNet::InitClientNet()
     bufferevent_enable(bev, EV_READ | EV_WRITE);
 
     event_set_log_callback(&NFCNet::log_cb);
-    //event_base_loop(base, EVLOOP_ONCE|EVLOOP_NONBLOCK);
 
     return sockfd;
 }
@@ -434,7 +430,6 @@ int NFCNet::InitServerNet()
     struct sockaddr_in sin;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
     WSADATA wsa_data;
     WSAStartup(0x0201, &wsa_data);
 
@@ -444,21 +439,6 @@ int NFCNet::InitServerNet()
     struct event_config* cfg = event_config_new();
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
-
-    //event_config_avoid_method(cfg, "iocp");
-    //event_config_require_features(cfg, event_method_feature.EV_FEATURE_ET);
-    //evthread_use_windows_threads();
-    //if(event_config_set_flag(cfg, EVENT_BASE_FLAG_STARTUP_IOCP) < 0)
-    //{
-    //    
-    //    return -1;
-    //}
-
-    //if(event_config_set_num_cpus_hint(cfg, nCpuCount) < 0)
-    //{
-    //    return -1;
-    //}
 
     base = event_base_new_with_config(cfg);
 
@@ -491,9 +471,6 @@ int NFCNet::InitServerNet()
         return -1;
     }
 
-    
-    //gettime(base, &base->event_tv);
-
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_port = htons(nPort);
@@ -512,15 +489,6 @@ int NFCNet::InitServerNet()
 
         return -1;
     }
-
-    //     signal_event = evsignal_new(base, SIGINT, signal_cb, (void *)this);
-    //
-    //     if (!signal_event || event_add(signal_event, NULL)<0)
-    //     {
-    //         fprintf(stderr, "Could not create/add a signal event!\n");
-    //         Final();
-    //         return -1;
-    //     }
 
     mbServer = true;
 
@@ -676,11 +644,6 @@ int NFCNet::DeCode(const char* strData, const uint32_t unAllLen, NFCMsgHead& xHe
         
         return -3;
     }
-
-    
-    //      strOutData.clear();
-    //      strOutData.append(strData, xHead.GetMsgLength());
-
     
     return xHead.GetBodyLength();
 }
