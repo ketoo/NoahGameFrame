@@ -32,6 +32,7 @@ public:
 	virtual bool Execute();
 
 	virtual void AddServer(const ConnectData& xInfo);
+	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
 
 	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
 	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
@@ -90,6 +91,7 @@ private:
 	void ProcessAddNetConnect();
 
 private:
+	int mnBufferSize;
 	//server_id, server_data
 	NFCConsistentHashMapEx<int, ConnectData> mxServerMap;
 	//server_type, server_id, server_data
