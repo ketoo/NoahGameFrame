@@ -98,6 +98,24 @@ inline bool EGameEventCode_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameEventCode>(
     EGameEventCode_descriptor(), name, value);
 }
+enum ESynMsgID {
+  ESMI_UNKNOW = 0
+};
+LIBPROTOC_EXPORT bool ESynMsgID_IsValid(int value);
+const ESynMsgID ESynMsgID_MIN = ESMI_UNKNOW;
+const ESynMsgID ESynMsgID_MAX = ESMI_UNKNOW;
+const int ESynMsgID_ARRAYSIZE = ESynMsgID_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESynMsgID_descriptor();
+inline const ::std::string& ESynMsgID_Name(ESynMsgID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESynMsgID_descriptor(), value);
+}
+inline bool ESynMsgID_Parse(
+    const ::std::string& name, ESynMsgID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESynMsgID>(
+    ESynMsgID_descriptor(), name, value);
+}
 enum EGameMsgID {
   EGMI_UNKNOW = 0,
   EGMI_EVENT_RESULT = 1,
@@ -236,6 +254,7 @@ enum EGameMsgID {
   EGEC_WEAR_EQUIP = 1509,
   EGEC_TAKEOFF_EQUIP = 1510,
   EGEC_REQ_MINING_TITLE = 1600,
+  EGEC_ACK_MINING_TITLE = 1601,
   EGEC_REQ_SEND_MAIL = 1700,
   EGEC_REQ_DRAW_MAIL = 1701,
   EGEC_REQ_DELETE_MAIL = 1702,
@@ -249,17 +268,6 @@ enum EGameMsgID {
   EGMI_ACK_CLONE_PROPERTY_OBJECT = 1814,
   EGMI_REQSWICHSERVER = 1840,
   EGMI_ACKSWICHSERVER = 1841,
-  EGMI_REQ_CREATE_TEAM = 1860,
-  EGMI_ACK_CREATE_TEAM = 1861,
-  EGMI_REQ_JOIN_TEAM = 1862,
-  EGMI_ACK_JOIN_TEAM = 1863,
-  EGMI_REQ_LEAVE_TEAM = 1864,
-  EGMI_ACK_LEAVE_TEAM = 1865,
-  EGMI_REQ_INVITE_TEAM = 1866,
-  EGMI_REQ_OPRMEMBER_TEAM = 1867,
-  EGMI_ACK_OPRMEMBER_TEAM = 1868,
-  EGMI_REQ_TEAM_ENTER_ECTYPE = 1869,
-  EGMI_ACK_TEAM_ENTER_ECTYPE = 1870,
   EGMI_REQ_MAP_GRID_INFO = 1900,
   EGMI_ACK_MAP_GRID_INFO = 1901,
   EGMI_REQ_BIG_MAP_INFO = 1902,
@@ -705,6 +713,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEventCode>() {
   return ::NFMsg::EGameEventCode_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESynMsgID>() {
+  return ::NFMsg::ESynMsgID_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
