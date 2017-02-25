@@ -130,7 +130,7 @@ void PrintfLogo()
     std::cout << "************************************************" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "**                 NoahFrame                  **" << std::endl;
-    std::cout << "**   Copyright (c) 2011-2016  LvSheng.Huang   **" << std::endl;
+    std::cout << "**   Copyright (c) 2011,  LvSheng.Huang		**" << std::endl;
     std::cout << "**             All rights reserved.           **" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "************************************************" << std::endl;
