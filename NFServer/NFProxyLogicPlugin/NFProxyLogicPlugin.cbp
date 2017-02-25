@@ -66,11 +66,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCProxyLogicModule.cpp" />
-		<Unit filename="NFCProxyLogicModule.h" />
-		<Unit filename="NFCProxyLogicPlugin.cpp" />
-		<Unit filename="NFCProxyLogicPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp/>
+<Unit filename="NFCProxyLogicModule.cpp" />
+<Unit filename="NFCProxyLogicPlugin.cpp" />
+<Unit filename="NFCProxyLogicModule.h" />
+<Unit filename="NFCProxyLogicPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

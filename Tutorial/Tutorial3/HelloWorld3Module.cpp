@@ -10,7 +10,7 @@ bool NFCHelloWorld3Module::Init()
 	return true;
 }
 
-int NFCHelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event, const NFIDataList& arg)
+int NFCHelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event, const NFDataList& arg)
 {
 	
 	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
@@ -33,7 +33,7 @@ int NFCHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& str
 	return 0;
 }
 
-int NFCHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFIDataList& arg)
+int NFCHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const NFDataList& arg)
 {
 	
 	std::cout << "OnClassCallBackEvent ClassName: " << strClassName << " ID: " << self.nData64 << " Event: " << event << std::endl;
@@ -50,7 +50,7 @@ int NFCHelloWorld3Module::OnClassCallBackEvent(const NFGUID& self, const std::st
 	return 0;
 }
 
-int NFCHelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCHelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
 {
 	
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
@@ -58,7 +58,7 @@ int NFCHelloWorld3Module::OnPropertyCallBackEvent( const NFGUID& self, const std
 	return 0;
 }
 
-int NFCHelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCHelloWorld3Module::OnPropertyStrCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
 {
 	
 	std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetString() << " NewValue: " << newVar.GetString() << std::endl;
@@ -82,7 +82,7 @@ bool NFCHelloWorld3Module::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHelloWorld3Module::OnClassCallBackEvent);
 
 	
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName(), "", NFCDataList());
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName(), "", NFDataList());
 	if (!pObject)
 	{
 		return false;
@@ -98,7 +98,7 @@ bool NFCHelloWorld3Module::AfterInit()
 	pObject->SetPropertyInt("World", 1111);
 
 
-	m_pEventModule->DoEvent(pObject->Self(), NFEventDefine(1), NFCDataList() << int(100) << "200");
+	m_pEventModule->DoEvent(pObject->Self(), NFEventDefine(1), NFDataList() << int(100) << "200");
 
 	return true;
 }

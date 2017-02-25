@@ -9,10 +9,10 @@
 #ifndef NFI_WORLD_GUILD_ECTYP_MODULE_H
 #define NFI_WORLD_GUILD_ECTYP_MODULE_H
 
-#include "NFILogicModule.h"
+#include "NFIModule.h"
 
 class NFIWorldGuildEctypeModule
-    : public NFILogicModule
+    : public NFIModule
 {
 public:
 

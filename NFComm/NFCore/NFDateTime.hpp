@@ -242,10 +242,10 @@ public:
 	{
 	}
 
-	static NFDateTime *Now()
+	static NFDateTime Now()
 	{
-		NFDateTime *dt = new NFDateTime();
-		dt->SetNow();
+		NFDateTime dt;
+		dt.SetNow();
 		return dt;
 	}
 

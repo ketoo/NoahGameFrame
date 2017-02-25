@@ -9,10 +9,10 @@
 #ifndef NFI_PROPERTY_H
 #define NFI_PROPERTY_H
 
-#include "NFIDataList.h"
+#include "NFDataList.hpp"
 #include "NFList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&)> PROPERTY_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&)> PROPERTY_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 
 class _NFExport NFIProperty :public NFMemoryCounter<NFIProperty>
@@ -24,7 +24,7 @@ public:
 
 	virtual ~NFIProperty() {}
 
-	virtual void SetValue(const NFIDataList::TData& TData) = 0;
+	virtual void SetValue(const NFData& TData) = 0;
 	virtual void SetValue(const NFIProperty* pProperty) = 0;
 
 	virtual bool SetInt(const NFINT64 value) = 0;
@@ -34,7 +34,7 @@ public:
 	virtual bool SetVector2(const NFVector2& value) = 0;
 	virtual bool SetVector3(const NFVector3& value) = 0;
 
-	virtual const TDATA_TYPE GetType() const = 0;
+	virtual const NFDATA_TYPE GetType() const = 0;
 	virtual const bool GeUsed() const = 0;
 	virtual const std::string& GetKey() const = 0;
 	virtual const bool GetSave() const = 0;
@@ -58,7 +58,7 @@ public:
 	virtual const NFVector2& GetVector2() const = 0;
 	virtual const NFVector3& GetVector3() const = 0;
 
-	virtual const NFIDataList::TData& GetValue() const = 0;
+	virtual const NFData& GetValue() const = 0;
 	virtual const NF_SHARE_PTR<NFList<std::string>> GetEmbeddedList() const = 0;
 	virtual const NF_SHARE_PTR<NFMapEx<std::string, std::string>> GetEmbeddedMap() const = 0;
 

@@ -9,7 +9,7 @@
 #ifndef NFI_RECORD_H
 #define NFI_RECORD_H
 
-#include "NFIDataList.h"
+#include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 struct RECORD_EVENT_DATA
 {
@@ -39,7 +39,7 @@ struct RECORD_EVENT_DATA
 	std::string strRecordName;
 };
 
-typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&)> RECORD_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&)> RECORD_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_EVENT_FUNCTOR> RECORD_EVENT_FUNCTOR_PTR;
 
 class _NFExport NFIRecord :public NFMemoryCounter<NFIRecord>
@@ -49,7 +49,7 @@ public:
 	{
 	}
 
-    typedef std::vector< NF_SHARE_PTR<NFIDataList::TData> > TRECORDVEC;
+    typedef std::vector< NF_SHARE_PTR<NFData> > TRECORDVEC;
     typedef TRECORDVEC::const_iterator TRECORDVECCONSTITER;
 
     virtual ~NFIRecord() {}
@@ -60,12 +60,12 @@ public:
     virtual int GetCols() const  = 0;
     virtual int GetRows() const  = 0;
 
-    virtual TDATA_TYPE GetColType(const int nCol) const = 0;
+    virtual NFDATA_TYPE GetColType(const int nCol) const = 0;
     virtual const std::string& GetColTag(const int nCol) const = 0;
 
     
     virtual int AddRow(const int nRow) = 0;
-    virtual int AddRow(const int nRow, const NFIDataList& var) = 0;
+    virtual int AddRow(const int nRow, const NFDataList& var) = 0;
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value) = 0;
     virtual bool SetFloat(const int nRow, const int nCol, const double value) = 0;
@@ -82,7 +82,7 @@ public:
 	virtual bool SetVector3(const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
 
     
-    virtual bool QueryRow(const int nRow, NFIDataList& varList) = 0;
+    virtual bool QueryRow(const int nRow, NFDataList& varList) = 0;
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
     virtual NFINT64 GetInt(const int nRow, const int nCol) const = 0;
@@ -99,32 +99,32 @@ public:
 	virtual const NFVector2& GetVector2(const int nRow, const std::string& strColTag) const = 0;
 	virtual const NFVector3& GetVector3(const int nRow, const std::string& strColTag) const = 0;
 
-    virtual int FindRowByColValue(const int nCol, const NFIDataList& var, NFIDataList& varResult) = 0;
-    virtual int FindInt(const int nCol, const NFINT64 value, NFIDataList& varResult) = 0;
-    virtual int FindFloat(const int nCol, const double value, NFIDataList& varResult) = 0;
-	virtual int FindString(const int nCol, const std::string& value, NFIDataList& varResult) = 0;
-    virtual int FindObject(const int nCol, const NFGUID& value, NFIDataList& varResult) = 0;
-	virtual int FindVector2(const int nCol, const NFVector2& value, NFIDataList& varResult) = 0;
-	virtual int FindVector3(const int nCol, const NFVector3& value, NFIDataList& varResult) = 0;
-    virtual int SortByCol(const int nCol, const bool bOrder, NFIDataList& varResult)
+    virtual int FindRowByColValue(const int nCol, const NFDataList& var, NFDataList& varResult) = 0;
+    virtual int FindInt(const int nCol, const NFINT64 value, NFDataList& varResult) = 0;
+    virtual int FindFloat(const int nCol, const double value, NFDataList& varResult) = 0;
+	virtual int FindString(const int nCol, const std::string& value, NFDataList& varResult) = 0;
+    virtual int FindObject(const int nCol, const NFGUID& value, NFDataList& varResult) = 0;
+	virtual int FindVector2(const int nCol, const NFVector2& value, NFDataList& varResult) = 0;
+	virtual int FindVector3(const int nCol, const NFVector3& value, NFDataList& varResult) = 0;
+    virtual int SortByCol(const int nCol, const bool bOrder, NFDataList& varResult)
     {
         return 0;
     };
 
-    virtual int FindRowByColValue(const std::string& strColTag, const NFIDataList& var, NFIDataList& varResult) = 0;
-    virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFIDataList& varResult) = 0;
-    virtual int FindFloat(const std::string& strColTag, const double value, NFIDataList& varResult) = 0;
-	virtual int FindString(const std::string& strColTag, const std::string& value, NFIDataList& varResult) = 0;
-    virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFIDataList& varResult) = 0;
-	virtual int FindVector2(const std::string& strColTag, const NFVector2& value, NFIDataList& varResult) = 0;
-	virtual int FindVector3(const std::string& strColTag, const NFVector3& value, NFIDataList& varResult) = 0;
-    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFIDataList& varResult)
+    virtual int FindRowByColValue(const std::string& strColTag, const NFDataList& var, NFDataList& varResult) = 0;
+    virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFDataList& varResult) = 0;
+    virtual int FindFloat(const std::string& strColTag, const double value, NFDataList& varResult) = 0;
+	virtual int FindString(const std::string& strColTag, const std::string& value, NFDataList& varResult) = 0;
+    virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFDataList& varResult) = 0;
+	virtual int FindVector2(const std::string& strColTag, const NFVector2& value, NFDataList& varResult) = 0;
+	virtual int FindVector3(const std::string& strColTag, const NFVector3& value, NFDataList& varResult) = 0;
+    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFDataList& varResult)
     {
         return 0;
     };
 
     virtual bool Remove(const int nRow) = 0;
-    virtual bool Remove(NFIDataList& varRows) //need to optimize
+    virtual bool Remove(NFDataList& varRows) //need to optimize
     {
         for (int i  = 0; i < varRows.GetCount(); ++i)
         {
@@ -145,8 +145,8 @@ public:
 	virtual const bool GetUpload() = 0;
     virtual const std::string& GetName() const = 0;
 
-    virtual const NF_SHARE_PTR<NFIDataList> GetInitData() const = 0;
-    virtual const NF_SHARE_PTR<NFIDataList> GetTag() const = 0;
+    virtual const NF_SHARE_PTR<NFDataList> GetInitData() const = 0;
+    virtual const NF_SHARE_PTR<NFDataList> GetTag() const = 0;
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetCache(const bool bCache) = 0;

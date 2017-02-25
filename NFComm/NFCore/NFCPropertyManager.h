@@ -10,9 +10,10 @@
 #define NFC_PROPERTYMANAGER_H
 
 #include "NFMap.hpp"
-#include "NFIDataList.h"
+#include "NFDataList.hpp"
 #include "NFIPropertyManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 class _NFExport NFCPropertyManager : public NFIPropertyManager
 {
 public:
@@ -27,11 +28,11 @@ public:
 
     virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, NF_SHARE_PTR<NFIProperty> pProperty);
 
-    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType);
+    virtual NF_SHARE_PTR<NFIProperty> AddProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType);
 
     virtual const NFGUID& Self();
 
-    virtual bool SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData);
+    virtual bool SetProperty(const std::string& strPropertyName, const NFData& TData);
 
     virtual bool SetPropertyInt(const std::string& strPropertyName, const NFINT64 nValue);
     virtual bool SetPropertyFloat(const std::string& strPropertyName, const double dwValue);

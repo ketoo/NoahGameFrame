@@ -188,8 +188,8 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
             continue;
         }
 
-        NFIDataList::TData var;
-        const TDATA_TYPE eType = temProperty->GetType();
+        NFData var;
+        const NFDATA_TYPE eType = temProperty->GetType();
         switch (eType)
         {
             case TDATA_INT:
@@ -258,7 +258,7 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
         }
     }
 
-    NFIDataList::TData xData;
+    NFData xData;
     xData.SetString(pLogicClass->GetClassName());
     pElementPropertyManager->SetProperty("ClassName", xData);
 

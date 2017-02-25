@@ -1,20 +1,27 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCMoveModule.cpp
+//    @FileName				:    NFCItemModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-06-11
-//    @Module               :    NFCMoveModule
+//    @Module               :    NFCItemModule
 //    @Desc                 :
 // -------------------------------------------------------------------------
 
 #include "NFCItemModule.h"
-#include "NFComm/NFPluginModule/NFIItemCardConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemEquipConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemGemConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemItemConsumeProcessModule.h"
-#include "NFComm/NFPluginModule/NFIItemTokenConsumeProcessModule.h"
 
 bool NFCItemModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pItemConsumeManagerModule = pPluginManager->FindModule<NFIItemConsumeManagerModule>();
+	
 	return true;
 }
 
@@ -31,28 +38,19 @@ bool NFCItemModule::Execute()
 
 bool NFCItemModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	
+
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent);
 	CheckConfig();
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
 
 
 	return true;
 }
 
-int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -66,7 +64,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
+int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var)
 {
 	return 0;
 }
@@ -130,6 +128,7 @@ bool NFCItemModule::CheckConfig()
 		int nBuyPrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::BuyPrice());
 		int nSalePrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::SalePrice());
 
+		//if (nSalePrice <= 0 || nBuyPrice <= 0)
 		if (nSalePrice < 0 || nBuyPrice < 0)
 		{
 			assert(0);
@@ -318,53 +317,28 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 	}
 
 	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+	NF_SHARE_PTR<NFIItemConsumeProcessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
+	if (!pConsumeProcessModule)
+	{
+		return;
+	}
+
 	switch (eItemType)
 	{
 	case NFMsg::EItemType::EIT_CARD:
-	{
-		NFIItemCardConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemCardConsumeProcessModule>(eItemType);
-		if (pConsumeProcessModule)
-		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-			}
-		}
-
-	}
-	break;
 	case NFMsg::EItemType::EIT_EQUIP:
-	{
-		NFIItemEquipConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemEquipConsumeProcessModule>(eItemType);
-		if (pConsumeProcessModule)
-		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-			}
-		}
-
-	}
-	break;
 	case NFMsg::EItemType::EIT_GEM:
+	case NFMsg::EItemType::EIT_TOKEN:
 	{
-		NFIItemGemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemGemConsumeProcessModule>(eItemType);
-		if (pConsumeProcessModule)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
 		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-			}
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 		}
-
 	}
 	break;
 	case NFMsg::EItemType::EIT_ITEM:
 	{
-		NFIItemItemConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemItemConsumeProcessModule>(eItemType);
-		if (pConsumeProcessModule)
-		{
-			NFCDataList xTarget;
+			NFDataList xTarget;
 			xTarget.AddObject(xTargetID);
 			xTarget.AddString(xMsg.item().item_id());	//this is Item Config ID
 			xTarget.AddInt(xMsg.item().item_count());	//this is Item Count to Consume
@@ -373,22 +347,8 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 			{
 				pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
 			}
-		}
-
 	}
 	break;
-	case NFMsg::EItemType::EIT_TOKEN:
-	{
-		NFIItemTokenConsumeProcessModule* pConsumeProcessModule = GetConsumeModule<NFIItemTokenConsumeProcessModule>(eItemType);
-		if (pConsumeProcessModule)
-		{
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFCDataList()) > 0)
-			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, NFCDataList());
-			}
-		}
-
-	}
 	break;
 	default:
 		break;

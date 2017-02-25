@@ -40,7 +40,7 @@ bool NFCGuildRedisModule::AfterInit()
     return true;
 }
 
-int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     switch (eClassEvent)
     {

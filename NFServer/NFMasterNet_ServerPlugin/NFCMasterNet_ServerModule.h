@@ -9,8 +9,6 @@
 #ifndef NFC_MASTERNET_SERVER_MODULE_H
 #define NFC_MASTERNET_SERVER_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
-
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIMasterNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
