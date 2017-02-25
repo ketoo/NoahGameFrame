@@ -37,6 +37,12 @@ int NFCNetModule::Initialization(const unsigned int nMaxClient, const unsigned s
 	return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 }
 
+int NFCNetModule::ExpandBufferSize(const unsigned int size)
+{
+	m_pNet->ExpandBufferSize(size);
+	return 0;
+}
+
 void NFCNetModule::RemoveReceiveCallBack(const int nMsgID)
 {
 	std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
