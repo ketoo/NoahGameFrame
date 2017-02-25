@@ -411,6 +411,7 @@ public:
 
     virtual void Initialization(const char* strIP, const unsigned short nPort) = 0;
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
+	virtual int ExpandBufferSize(const unsigned int size) = 0;
 
     virtual bool Final() = 0;
 
