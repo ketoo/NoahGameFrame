@@ -95,7 +95,8 @@ public:
 	////////////////////////////////////////////////////////////////////////////////
 
 	virtual void AddServer(const ConnectData& xInfo) = 0;
-	
+	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20) = 0;
+
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData) = 0;
 	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 

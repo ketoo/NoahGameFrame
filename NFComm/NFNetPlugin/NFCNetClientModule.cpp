@@ -12,6 +12,7 @@
 
 NFCNetClientModule::NFCNetClientModule(NFIPluginManager * p)
 {
+	mnBufferSize = 0;
 	pPluginManager = p;
 }
 
@@ -64,6 +65,15 @@ void NFCNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, cons
 void NFCNetClientModule::AddServer(const ConnectData & xInfo)
 {
 	mxTempNetList.push_back(xInfo);
+}
+
+int NFCNetClientModule::ExpandBufferSize(const unsigned int size)
+{
+	if (size > 0)
+	{
+		mnBufferSize = size;
+	}
+	return mnBufferSize;
 }
 
 int NFCNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr)
@@ -484,6 +494,7 @@ void NFCNetClientModule::ProcessAddNetConnect()
 
 			xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFCNetModule(pPluginManager));
 			xServerData->mxNetModule->Initialization(xServerData->strIP.c_str(), xServerData->nPort);
+			xServerData->mxNetModule->ExpandBufferSize(mnBufferSize);
 
 			InitCallBacks(xServerData);
 
