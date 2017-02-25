@@ -162,6 +162,8 @@ bool NFCGameServerToWorldModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerToWorldModule::OnObjectClassEvent);
 
+	m_pNetClientModule->ExpandBufferSize();
+
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{

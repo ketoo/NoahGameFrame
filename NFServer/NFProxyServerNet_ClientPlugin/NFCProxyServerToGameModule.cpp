@@ -42,6 +42,7 @@ bool NFCProxyServerToGameModule::AfterInit()
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::Transpond);
 
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::OnSocketGSEvent);
+	m_pNetClientModule->ExpandBufferSize();
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
