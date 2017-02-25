@@ -319,7 +319,7 @@ bool NFCNet::Dismantle(NetObject* pObject)
 
 			pObject->RemoveBuff(0, nMsgBodyLength + NFIMsgHead::NF_Head::NF_HEAD_LENGTH);
 
-            Dismantle(pObject);
+            bNeedDismantle = true;
         }
         else if (0 == nMsgBodyLength)
         {
