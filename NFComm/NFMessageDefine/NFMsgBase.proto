@@ -16,7 +16,7 @@ message Vector3//The base protocol can not be transfer directly
 { 
     required float		x = 1;
     required float      y = 2;
-	required float      z = 3;
+    required float      z = 3;
 }
 ////////////////////////BaseCommon/////////////////////////////
 message PropertyInt//The base protocol can not be transfer directly

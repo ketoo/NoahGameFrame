@@ -89,6 +89,9 @@
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCTileModule.h">
+      <Filter>NFMapModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTileModule.cpp">
+      <Filter>NFMapModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
