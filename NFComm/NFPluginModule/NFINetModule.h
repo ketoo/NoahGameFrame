@@ -214,6 +214,7 @@ public:
 
 	//as server
 	virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
+	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 100) = 0;
 
 	virtual void RemoveReceiveCallBack(const int nMsgID) = 0;
 
