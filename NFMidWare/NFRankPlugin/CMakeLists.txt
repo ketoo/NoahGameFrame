@@ -12,7 +12,7 @@ add_library(NFRankPlugin SHARED
 set_target_properties( NFRankPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFRankPlugin_d")
 set_target_properties( NFRankPlugin PROPERTIES PREFIX "")
 set_target_properties( NFRankPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFRankPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

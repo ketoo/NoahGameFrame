@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemEquipConsumeProcessModule.cpp
+//    @FileName			:   NFCItemEquipConsumeProcessModule.cpp
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemEquipConsumeProcessModule
@@ -39,12 +39,12 @@ bool NFCItemGemConsumeProcessModule::Execute()
 }
 
 
-int NFCItemGemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemGemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	return 1;
 }
 
-int NFCItemGemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemGemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	return 1;
 }

@@ -57,22 +57,22 @@ class NFIEventModule
 public:
 protected:
 
-	typedef std::function<int(const NFGUID&, const NFEventDefine, const NFIDataList&)> OBJECT_EVENT_FUNCTOR;
-	typedef std::function<int(const NFEventDefine, const NFIDataList&)> MODULE_EVENT_FUNCTOR;
+	typedef std::function<int(const NFGUID&, const NFEventDefine, const NFDataList&)> OBJECT_EVENT_FUNCTOR;
+	typedef std::function<int(const NFEventDefine, const NFDataList&)> MODULE_EVENT_FUNCTOR;
 
 	typedef NF_SHARE_PTR<OBJECT_EVENT_FUNCTOR> OBJECT_EVENT_FUNCTOR_PTR;//EVENT
 	typedef NF_SHARE_PTR<MODULE_EVENT_FUNCTOR> MODULE_EVENT_FUNCTOR_PTR;//EVENT
 
 public:
 	// only be used in module
-    virtual bool DoEvent(const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
+    virtual bool DoEvent(const NFEventDefine nEventID, const NFDataList& valueList) = 0;
 
     virtual bool ExistEventCallBack(const NFEventDefine nEventID) = 0;
     
     virtual bool RemoveEventCallBack(const NFEventDefine nEventID) = 0;
 
 	template<typename BaseType>
-	bool AddEventCallBack(const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFEventDefine, const NFIDataList&))
+	bool AddEventCallBack(const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFEventDefine, const NFDataList&))
 	{
 		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));
@@ -80,7 +80,7 @@ public:
 	}
     ///////////////////////////////////////////////////////////////////////////////////////////////
 	// can be used for object
-    virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList& valueList) = 0;
+    virtual bool DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFDataList& valueList) = 0;
 
     virtual bool ExistEventCallBack(const NFGUID self,const NFEventDefine nEventID) = 0;
     
@@ -88,7 +88,7 @@ public:
 	virtual bool RemoveEventCallBack(const NFGUID self) = 0;
 	
 	template<typename BaseType>
-	bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFIDataList&))
+	bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const NFEventDefine, const NFDataList&))
 	{
 		OBJECT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		OBJECT_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_EVENT_FUNCTOR(functor));

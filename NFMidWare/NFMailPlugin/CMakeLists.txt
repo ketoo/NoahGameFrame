@@ -12,7 +12,7 @@ add_library(NFMailPlugin SHARED
 set_target_properties( NFMailPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFMailPlugin_d")
 set_target_properties( NFMailPlugin PROPERTIES PREFIX "")
 set_target_properties( NFMailPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFMailPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

@@ -62,13 +62,17 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCNoSqlDriver.cpp" />
-		<Unit filename="NFCNoSqlDriver.h" />
-		<Unit filename="NFCNoSqlModule.cpp" />
-		<Unit filename="NFCNoSqlModule.h" />
-		<Unit filename="NFNoSqlPlugin.cpp" />
-		<Unit filename="NFNoSqlPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp/>
+<Unit filename="NFCAsyNoSqlModule.cpp" />
+<Unit filename="NFCNoSqlDriver.cpp" />
+<Unit filename="NFCNoSqlDriverManager.cpp" />
+<Unit filename="NFCNoSqlModule.cpp" />
+<Unit filename="NFNoSqlPlugin.cpp" />
+<Unit filename="NFCAsyNoSqlModule.h" />
+<Unit filename="NFCNoSqlDriver.h" />
+<Unit filename="NFCNoSqlDriverManager.h" />
+<Unit filename="NFCNoSqlModule.h" />
+<Unit filename="NFNoSqlPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -10,7 +10,6 @@
 #define NFC_EUIP_PROPERTY_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIEquipModule.h"
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -32,14 +31,14 @@ public:
     virtual bool AfterInit();
 
 	//all data,include base,gem,element
-	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
 
 	//only part of property of equip
-	virtual bool CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
-	virtual bool CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
-	virtual bool CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
-	virtual bool CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
-	virtual bool CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList);
+	virtual bool CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
+	virtual bool CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
+	virtual bool CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
+	virtual bool CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
+	virtual bool CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList);
 
 private:
     NFIKernelModule* m_pKernelModule;

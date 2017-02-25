@@ -14,7 +14,7 @@
 #include <algorithm>
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFMap.hpp"
-#include "NFComm/NFCore/NFIDataList.h"
+#include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIModule.h"
@@ -87,7 +87,7 @@ public:
 
     int NewGroupID()
     {
-        ++mnGroupIndex;
+		mnGroupIndex += 1;
 		return mnGroupIndex;
     }
 
@@ -175,42 +175,49 @@ public:
 		return true;
 	}
 	
+	bool AddReliveInfo(const int nIndex, const NFVector3& vPos)
+	{
+		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
+	}
+	NFVector3 GetReliveInfo(const int nIndex)
+	{
+		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
+		if (vPos)
+		{
+			return *vPos;
+		}
+
+		return NFVector3();
+	}
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
 	//seedID, seedInfo
 	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
+	NFMapEx<int, NFVector3 > mtSceneRelivePos;
 };
 
-typedef std::function<int(const NFIDataList&, const NFIDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
+typedef std::function<int(const NFDataList&, const NFDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<OBJECT_ENTER_EVENT_FUNCTOR> OBJECT_ENTER_EVENT_FUNCTOR_PTR;//ObjectEnterCallBack
 
-typedef std::function<int(const NFIDataList&, const NFIDataList&)> OBJECT_LEAVE_EVENT_FUNCTOR;
+typedef std::function<int(const NFDataList&, const NFDataList&)> OBJECT_LEAVE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<OBJECT_LEAVE_EVENT_FUNCTOR> OBJECT_LEAVE_EVENT_FUNCTOR_PTR;//ObjectLeaveCallBack
 
-typedef std::function<int(const NFIDataList&, const NFGUID&)> PROPERTY_ENTER_EVENT_FUNCTOR;
+typedef std::function<int(const NFDataList&, const NFGUID&)> PROPERTY_ENTER_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_ENTER_EVENT_FUNCTOR> PROPERTY_ENTER_EVENT_FUNCTOR_PTR;//AddPropertyEnterCallBack
 
-typedef std::function<int(const NFIDataList&, const NFGUID&)> RECORD_ENTER_EVENT_FUNCTOR;
+typedef std::function<int(const NFDataList&, const NFGUID&)> RECORD_ENTER_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_ENTER_EVENT_FUNCTOR> RECORD_ENTER_EVENT_FUNCTOR_PTR;//AddRecordEnterCallBack
 
-typedef std::function<int(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> PROPERTY_SINGLE_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&)> PROPERTY_SINGLE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_SINGLE_EVENT_FUNCTOR> PROPERTY_SINGLE_EVENT_FUNCTOR_PTR;//AddPropertyEventCallBack
 
-typedef std::function<int(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
+typedef std::function<int(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFData&, const NFData&, const NFDataList&)> RECORD_SINGLE_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<RECORD_SINGLE_EVENT_FUNCTOR> RECORD_SINGLE_EVENT_FUNCTOR_PTR;//AddRecordEventCallBack
 
-typedef std::function<int(const NFGUID&, const int, const int, const int, const NFIDataList&)> BEFORE_ENTER_SCENE_FUNCTOR;
-typedef NF_SHARE_PTR<BEFORE_ENTER_SCENE_FUNCTOR> BEFORE_ENTER_SCENE_FUNCTOR_PTR;//AddBeforeEnterSceneCallBack
+typedef std::function<int(const NFGUID&, const int, const int, const int, const NFDataList&)> SCENE_EVENT_FUNCTOR;
+typedef NF_SHARE_PTR<SCENE_EVENT_FUNCTOR> SCENE_EVENT_FUNCTOR_PTR;
 
-typedef std::function<int(const NFGUID&, const int, const int, const int, const NFIDataList&)> AFTER_ENTER_SCENE_FUNCTOR;
-typedef NF_SHARE_PTR<AFTER_ENTER_SCENE_FUNCTOR> AFTER_ENTER_SCENE_FUNCTOR_PTR;//AddAfterEnterSceneCallBack
-
-typedef std::function<int(const NFGUID&, const int, const int, const int, const NFIDataList&)> BEFORE_LEAVE_SCENE_FUNCTOR;
-typedef NF_SHARE_PTR<BEFORE_LEAVE_SCENE_FUNCTOR> BEFORE_LEAVE_SCENE_FUNCTOR_PTR;//AddBeforeLeaveSceneCallBack
-
-typedef std::function<int(const NFGUID&, const int, const int, const int, const NFIDataList&)> AFTER_LEAVE_SCENE_FUNCTOR;
-typedef NF_SHARE_PTR<AFTER_LEAVE_SCENE_FUNCTOR> AFTER_LEAVE_SCENE_FUNCTOR_PTR;//AddAfterLeaveSceneCallBack
 
 class NFISceneAOIModule
     : public NFIModule,
@@ -223,7 +230,7 @@ public:
     }
 
 	template<typename BaseType>
-	bool AddObjectEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFIDataList&))
+	bool AddObjectEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
 	{
 		OBJECT_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		OBJECT_ENTER_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_ENTER_EVENT_FUNCTOR(functor));
@@ -231,7 +238,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddObjectLeaveCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFIDataList&))
+	bool AddObjectLeaveCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
 	{
 		OBJECT_LEAVE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		OBJECT_LEAVE_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_LEAVE_EVENT_FUNCTOR(functor));
@@ -239,7 +246,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddPropertyEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFGUID&))
+	bool AddPropertyEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFGUID&))
 	{
 		PROPERTY_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		PROPERTY_ENTER_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_ENTER_EVENT_FUNCTOR(functor));
@@ -247,7 +254,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddRecordEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFIDataList&, const NFGUID&))
+	bool AddRecordEnterCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFGUID&))
 	{
 		RECORD_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		RECORD_ENTER_EVENT_FUNCTOR_PTR functorPtr(new RECORD_ENTER_EVENT_FUNCTOR(functor));
@@ -255,7 +262,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
+	bool AddPropertyEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&, const NFDataList&))
 	{
 		PROPERTY_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
 		PROPERTY_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new PROPERTY_SINGLE_EVENT_FUNCTOR(functor));
@@ -263,7 +270,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddRecordEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&, const NFIDataList&))
+	bool AddRecordEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const RECORD_EVENT_DATA&, const NFData&, const NFData&, const NFDataList&))
 	{
 		RECORD_SINGLE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, std::placeholders::_6);
 		RECORD_SINGLE_EVENT_FUNCTOR_PTR functorPtr(new RECORD_SINGLE_EVENT_FUNCTOR(functor));
@@ -271,40 +278,52 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddBeforeEnterSceneCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFIDataList&))
+	bool AddEnterSceneConditionCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
-		BEFORE_ENTER_SCENE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
-		BEFORE_ENTER_SCENE_FUNCTOR_PTR functorPtr(new BEFORE_ENTER_SCENE_FUNCTOR(functor));
-		return AddBeforeEnterSceneCallBack(functorPtr);
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddEnterSceneConditionCallBack(functorPtr);
 	}
 
 	template<typename BaseType>
-	bool AddAfterEnterSceneCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFIDataList&))
+	bool AddBeforeEnterSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
-		AFTER_ENTER_SCENE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
-		AFTER_ENTER_SCENE_FUNCTOR_PTR functorPtr(new AFTER_ENTER_SCENE_FUNCTOR(functor));
-		return AddAfterEnterSceneCallBack(functorPtr);
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddBeforeEnterSceneGroupCallBack(functorPtr);
 	}
 
 	template<typename BaseType>
-	bool AddBeforeLeaveSceneCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFIDataList&))
+	bool AddAfterEnterSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
-		BEFORE_LEAVE_SCENE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
-		BEFORE_LEAVE_SCENE_FUNCTOR_PTR functorPtr(new BEFORE_LEAVE_SCENE_FUNCTOR(functor));
-		return AddBeforeLeaveSceneCallBack(functorPtr);
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddAfterEnterSceneGroupCallBack(functorPtr);
 	}
 
 	template<typename BaseType>
-	bool AddAfterLeaveSceneCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFIDataList&))
+	bool AddBeforeLeaveSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
-		AFTER_LEAVE_SCENE_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
-		AFTER_LEAVE_SCENE_FUNCTOR_PTR functorPtr(new AFTER_LEAVE_SCENE_FUNCTOR(functor));
-		return AddAfterLeaveSceneCallBack(functorPtr);
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddBeforeLeaveSceneGroupCallBack(functorPtr);
 	}
 
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nType, const NFIDataList& argList) = 0;
-	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList) = 0;
+	template<typename BaseType>
+	bool AddAfterLeaveSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
+	{
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddAfterLeaveSceneGroupCallBack(functorPtr);
+	}
+
+	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
+	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
+	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
+
+	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
+	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
@@ -314,11 +333,12 @@ protected:
 	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 
-	virtual bool AddBeforeEnterSceneCallBack(const BEFORE_ENTER_SCENE_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddAfterEnterSceneCallBack(const AFTER_ENTER_SCENE_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 
-	virtual bool AddBeforeLeaveSceneCallBack(const BEFORE_LEAVE_SCENE_FUNCTOR_PTR& cb) = 0;
-	virtual bool AddAfterLeaveSceneCallBack(const AFTER_LEAVE_SCENE_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 
 private:
 };
