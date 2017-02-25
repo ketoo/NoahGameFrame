@@ -349,8 +349,8 @@ public:
 	static const std::string& GuildMoney(){ static std::string xGuildMoney = "GuildMoney"; return xGuildMoney; } // int
 	static const std::string& GuildLevel(){ static std::string xGuildLevel = "GuildLevel"; return xGuildLevel; } // int
 	static const std::string& GuildContinueDay(){ static std::string xGuildContinueDay = "GuildContinueDay"; return xGuildContinueDay; } // int
-	static const std::string& GuilID(){ static std::string xGuilID = "GuilID"; return xGuilID; } // object
-	static const std::string& GuilIDIcon(){ static std::string xGuilIDIcon = "GuilIDIcon"; return xGuilIDIcon; } // int
+	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
+	static const std::string& GuildIcon(){ static std::string xGuildIcon = "GuildIcon"; return xGuildIcon; } // int
 	static const std::string& GuildMemeberCount(){ static std::string xGuildMemeberCount = "GuildMemeberCount"; return xGuildMemeberCount; } // int
 	static const std::string& GuildMemeberMaxCount(){ static std::string xGuildMemeberMaxCount = "GuildMemeberMaxCount"; return xGuildMemeberMaxCount; } // int
 	static const std::string& GuildHonor(){ static std::string xGuildHonor = "GuildHonor"; return xGuildHonor; } // int
@@ -1143,6 +1143,7 @@ public:
 	static const std::string& Stone(){ static std::string xStone = "Stone"; return xStone; } // int
 	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond; } // int
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
+	static const std::string& Count(){ static std::string xCount = "Count"; return xCount; } // int
 	// Record
 
 };
@@ -1410,4 +1411,4 @@ public:
 
 } // !@NFrame
 
-#endif // !NF_PR_NAME_HPP 
+#endif // !NF_PR_NAME_HPP

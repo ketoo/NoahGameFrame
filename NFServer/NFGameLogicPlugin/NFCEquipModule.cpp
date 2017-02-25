@@ -12,6 +12,16 @@
 
 bool NFCEquipModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+
 	return true;
 }
 
@@ -27,26 +37,18 @@ bool NFCEquipModule::Execute()
 
 bool NFCEquipModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     std::string strEquipPath = pPluginManager->GetConfigPath();
 
     strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
     m_pCommonConfigModule->LoadConfig(strEquipPath);
 
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipMsg)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipMsg)) { return false; }
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipMsg)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipMsg)) { return false; }
 
     return true;
 }
@@ -265,7 +267,7 @@ bool NFCEquipModule::Ramdom( const int nNowLevel , const int nMaxLevel)
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     m_pKernelModule->Random(0, nMaxLevel, 1, varList);
 
     const NFINT64 nRandomNum = varList.Int(0);
@@ -303,14 +305,14 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 		return false;
 	}
 
-	NFCDataList xEquipDataList;
+	NFDataList xEquipDataList;
 	pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xEquipDataList);
 	if (xEquipDataList.GetCount() != 1)
 	{
 		return false;
 	}
 
-	NFCDataList xHeroDataList;
+	NFDataList xHeroDataList;
 	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, hero, xHeroDataList);
 	if (xHeroDataList.GetCount() != 1)
 	{
@@ -364,14 +366,14 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
 		return false;
 	}
 
-	NFCDataList xEquipDataList;
+	NFDataList xEquipDataList;
 	pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xEquipDataList);
 	if (xEquipDataList.GetCount() != 1)
 	{
 		return false;
 	}
 
-	NFCDataList xHeroDataList;
+	NFDataList xHeroDataList;
 	pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, id, xHeroDataList);
 	if (xHeroDataList.GetCount() != 1)
 	{
@@ -423,7 +425,7 @@ bool NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -455,7 +457,7 @@ bool NFCEquipModule::AddEquipHoleCount(const NFGUID& self, const NFGUID& id)
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -488,7 +490,7 @@ int NFCEquipModule::GetEquipHoleCount(const NFGUID & self, const NFGUID & id)
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -529,7 +531,7 @@ bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, 
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -567,7 +569,7 @@ bool NFCEquipModule::AddEquipIntensifyLevel(const NFGUID& self, const NFGUID& id
 		return false;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -600,7 +602,7 @@ int NFCEquipModule::GetEquipIntensifyLevel(const NFGUID & self, const NFGUID & i
 		return -1;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -636,7 +638,7 @@ bool NFCEquipModule::AddEquipElementLevel(const NFGUID& self, const NFGUID& id, 
         return false;
     }
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{
@@ -675,7 +677,7 @@ int NFCEquipModule::GetEquipElementLevel(const NFGUID & self, const NFGUID & id,
 		return -1;
 	}
 
-	NFCDataList xDataList;
+	NFDataList xDataList;
 	pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, xDataList);
 	if (xDataList.GetCount() != 1)
 	{

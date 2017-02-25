@@ -9,9 +9,6 @@
 #ifndef NFC_GAMESERVER_SERVER_MODULE_H
 #define NFC_GAMESERVER_SERVER_MODULE_H
 
-//#include "GameServerPCH.h"
-//#include "NW_Helper.h"
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -19,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
@@ -51,7 +47,6 @@ public:
     virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const NFGUID& self);
 	virtual void SendMsgPBToGate(const uint16_t nMsgID, google::protobuf::Message& xMsg, const int nSceneID, const int nGroupID);
 	virtual void SendMsgPBToGate(const uint16_t nMsgID, const std::string& strMsg, const int nSceneID, const int nGroupID);
-	virtual NFINetModule* GetNetModule();
 
     virtual bool AddPlayerGateInfo(const NFGUID& nRoleID, const NFGUID& nClientID, const int nGateID);
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID);
@@ -106,20 +101,19 @@ protected:
 
 protected:
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
-	int OnSwapSceneResultEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFIDataList& argList);
-	
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+
 	//////////////////////////////////////////
-
-	int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-	int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
-
 	//broad the data of argvar to self
-	int OnPropertyEnter(const NFIDataList& argVar, const NFGUID& self);
-	int OnRecordEnter(const NFIDataList& argVar, const NFGUID& self);
+	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
 
-	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
-	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar, const NFIDataList& argVar);
+	//broad the data of self to argvar 
+	int OnPropertyEnter(const NFDataList& argVar, const NFGUID& self);
+	int OnRecordEnter(const NFDataList& argVar, const NFGUID& self);
+
+	int OnPropertyEvent(const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
+	int OnRecordEvent(const NFGUID& self, const std::string& strRecord, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar, const NFDataList& argVar);
 
 private:
     
@@ -137,6 +131,6 @@ private:
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
     //////////////////////////////////////////////////////////////////////////
-    NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+    NFINetClientModule* m_pNetClientModule;
 };
 #endif

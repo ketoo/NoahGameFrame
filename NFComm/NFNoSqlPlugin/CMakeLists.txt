@@ -1,4 +1,5 @@
 set(ProjectName "NFNoSqlPlugin")
+
 file(GLOB NFNoSqlPlugin_ROOT_Cpp *.cpp)
 file(GLOB NFNoSqlPlugin_ROOT_CC *.cc)
 file(GLOB NFNoSqlPlugin_ROOT_Hpp *.h)

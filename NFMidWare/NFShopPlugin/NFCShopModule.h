@@ -18,10 +18,8 @@
 #include "NFComm/NFPluginModule/NFIShopModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-////////////////////////////////////////////////////////////////////////////
-
-
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
 
 class NFCShopModule
     : public NFIShopModule
@@ -31,12 +29,18 @@ public:
     {
         pPluginManager = p;
     }
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
 
     virtual bool AfterInit();
 
+	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID);
+	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, const NFVector3& v);
+
+protected:
+	void OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
@@ -46,8 +50,8 @@ protected:
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
-	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
+	NFIPropertyModule* m_pPropertyModule;
+	NFIPackModule* m_pPackModule;
     //////////////////////////////////////////////////////////////////////////
 };
 #endif

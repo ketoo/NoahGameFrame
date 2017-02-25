@@ -5,6 +5,9 @@ file(GLOB NFGuildPlugin_ROOT_Cpp
 file(GLOB NFGuildPlugin_ROOT_Hpp 
 	*.h)
 
+remove_file(NFGuildPlugin_ROOT_Cpp "NFCGuildEctypeModule.cpp")
+remove_file(NFGuildPlugin_ROOT_Hpp "NFCGuildEctypeModule.h")
+
 add_library(NFGuildPlugin SHARED
 	${NFGuildPlugin_ROOT_Cpp}
 	${NFGuildPlugin_ROOT_Hpp})
@@ -12,7 +15,7 @@ add_library(NFGuildPlugin SHARED
 set_target_properties( NFGuildPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFGuildPlugin_d")
 set_target_properties( NFGuildPlugin PROPERTIES PREFIX "")
 set_target_properties( NFGuildPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFGuildPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
