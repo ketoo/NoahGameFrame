@@ -55,6 +55,15 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 
     if (events & BEV_EVENT_CONNECTED)
     {
+		int  evbuffer_expand(struct  evbuffer  *buf, size_t datlen);
+
+		struct evbuffer* input = bufferevent_get_input(bev);
+		struct evbuffer* output = bufferevent_get_output(bev);
+		if (pNet->mnBufferSize > 0)
+		{
+			evbuffer_expand(input, pNet->mnBufferSize);
+			evbuffer_expand(output, pNet->mnBufferSize);
+		}
         //printf("%d Connection successed\n", pObject->GetFd());/*XXX win32*/
     }
     else
@@ -90,7 +99,7 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
         return;
     }
 
-    
+
     struct sockaddr_in* pSin = (sockaddr_in*)sa;
 
     NetObject* pObject = new NetObject(pNet, fd, *pSin, bev);
@@ -191,6 +200,12 @@ int NFCNet::Initialization(const unsigned int nMaxClient, const unsigned short n
     mnCpuCount = nCpuCount;
 
     return InitServerNet();
+}
+
+int NFCNet::ExpandBufferSize(const unsigned int size)
+{
+	mnBufferSize = size;
+	return mnBufferSize;
 }
 
 bool NFCNet::Final()
