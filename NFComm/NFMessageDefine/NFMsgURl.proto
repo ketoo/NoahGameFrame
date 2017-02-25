@@ -1,12 +1,10 @@
 package NFMsg; 
 
-//除 去基础对象身上的属性外，这里全部游戏中的逻辑协议
-
 message PackSURLParam
 {
 	required bytes 		strUrl 			= 1;
 	required bytes 		strGetParams 	= 2;
-    required bytes 		strBodyData 	= 3;
+    	required bytes 		strBodyData 	= 3;
 	required bytes 		strCookies 		= 4;
 	required double		fTimeOutSec 	= 5;
 	required bytes 		strRsp 			= 6;
