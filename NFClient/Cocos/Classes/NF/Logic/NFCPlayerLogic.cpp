@@ -97,7 +97,7 @@ void NFCPlayerLogic::RequireMove(NFVector3 pos)
 	NFMsg::ReqAckPlayerMove xMsg;
 	*xMsg.mutable_mover() = NFINetModule::NFToPB(m_RoleGuid);
 	xMsg.set_movetype(0);
-	NFMsg::Position *tPos = xMsg.add_target_pos();
+	NFMsg::Vector3 *tPos = xMsg.add_target_pos();
 	tPos->set_x((float)pos.X());
 	tPos->set_y((float)pos.Y());
 	tPos->set_z((float)pos.Z());
@@ -120,7 +120,7 @@ void NFCPlayerLogic::OnRoleList(const int nSockIndex, const int nMsgID, const ch
 		m_RoleList.push_back(xMsg.char_data(i));
 	}
 
-	DoEvent(E_PlayerEvent_RoleList, NFCDataList());
+	DoEvent(E_PlayerEvent_RoleList, NFDataList());
 }
 
 void NFCPlayerLogic::OnObjectEntry(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -136,7 +136,7 @@ void NFCPlayerLogic::OnObjectEntry(const int nSockIndex, const int nMsgID, const
 	{
 		const NFMsg::PlayerEntryInfo info =  xMsg.object_list(i);
 
-		NFCDataList var;
+		NFDataList var;
 		var.Add("X");
 		var.AddFloat(info.x());
 		var.Add("Y");
@@ -173,10 +173,10 @@ void NFCPlayerLogic::OnObjectMove(const int nSockIndex, const int nMsgID, const 
 	}
 		
 	float fMove = g_pKernelModule->GetPropertyInt(NFINetModule::PBToNF(xMsg.mover()), "MOVE_SPEED")/10000.0f;
-	NFCDataList var;
+	NFDataList var;
 	var.AddObject(NFINetModule::PBToNF(xMsg.mover()));
 	var.AddFloat(fMove);
-	const NFMsg::Position &pos = xMsg.target_pos().Get(0);
+	const NFMsg::Vector3 &pos = xMsg.target_pos(0);
 	var.AddVector3(NFVector3(pos.x(), pos.y(), pos.z()));
 	DoEvent(E_PlayerEvent_PlayerMove, var);
 }
@@ -191,10 +191,10 @@ void NFCPlayerLogic::OnObjectJump(const int nSockIndex, const int nMsgID, const 
 	}
 		
 	float fMove = g_pKernelModule->GetPropertyInt(NFINetModule::PBToNF(xMsg.mover()), "MOVE_SPEED")/10000.0f;
-	NFCDataList var;
+	NFDataList var;
 	var.AddObject(NFINetModule::PBToNF(xMsg.mover()));
 	var.AddFloat(fMove);
-	const NFMsg::Position &pos = xMsg.target_pos().Get(0);
+	const NFMsg::Vector3 &pos = xMsg.target_pos(0);
 	var.AddVector3(NFVector3(pos.x(), pos.y(), pos.z()));
 
 	DoEvent(E_PlayerEvent_PlayerJump, var);

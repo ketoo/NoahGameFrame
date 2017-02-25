@@ -64,7 +64,7 @@ void NFCUISelectRole::initData(void *customData)
 	m_pRoleList->removeAllItems();
 }
 
-int NFCUISelectRole::OnRoleListEvent(const int nEventID, const NFIDataList& varDataList)
+int NFCUISelectRole::OnRoleListEvent(const int nEventID, const NFDataList& varDataList)
 {
 	auto roleList = g_pPlayerLogic->GetRoleList();
 	m_pRoleList->removeAllItems();
@@ -92,7 +92,7 @@ void NFCUISelectRole::OnRoleSelected(Ref* sender)
 
 void NFCUISelectRole::OnRoleCreate(Ref* sender)
 {
-	NFCDataList varData;
+	NFDataList varData;
 	g_pKernelModule->Random(0, 1000, 1, varData);
 	g_pPlayerLogic->RequireCreateRole(CCString::createWithFormat("TestRole%lld", varData.Int(0))->getCString(), 1, 1);
 }

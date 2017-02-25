@@ -74,7 +74,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes\NF;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;NF_STATIC_LIB;PROTOBUF_SRC;LIBEVENT_SRC;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;NF_STATIC_LIB;PROTOBUF_SRC;LIBEVENT_SRC;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;_EVENT_HAVE_GETTIMEOFDAY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -431,14 +431,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCComponentManager.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCDataList.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCMemManager.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCObject.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCProperty.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCPropertyManager.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCRecord.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCRecordManager.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFMemoryCounter.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCEventModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCKernelModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFKernelPlugin\NFCSceneAOIModule.cpp" />
@@ -454,8 +451,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFNet\NFCHttpNet.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFNet\NFCNet.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNet.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
@@ -533,18 +532,17 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFCore\NFBox.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCComponentManager.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCConsistentHash.hpp" />
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCDataList.h" />
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.h" />
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCObject.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCProperty.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCPropertyManager.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCRecord.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCRecordManager.h" />
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFDataList.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFDateTime.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFException.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFIComponent.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFIComponentManager.h" />
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFIDataList.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFIObject.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFIProperty.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFIPropertyManager.h" />
@@ -553,9 +551,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFCore\NFLine.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFList.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFMapEx.hpp" />
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.h" />
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFPlane.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFRay.hpp" />
+    <ClInclude Include="..\..\..\NFComm\NFCore\NFSingleton.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFSpaceNode.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFSphere.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFVector2.hpp" />
@@ -577,10 +576,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFProtocolDefine.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFCHttpNet.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFCNet.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFIHttpNet.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNet\NFINet.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNet.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFIHttpNet.h" />
+    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFINet.h" />
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.h" />
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />

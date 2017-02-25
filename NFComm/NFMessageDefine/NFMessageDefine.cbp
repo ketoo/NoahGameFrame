@@ -49,28 +49,28 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFDefine.pb.cc" />
-		<Unit filename="NFDefine.pb.h" />
-		<Unit filename="NFFleetingDefine.pb.cc" />
-		<Unit filename="NFFleetingDefine.pb.h" />
-		<Unit filename="NFLimit.h" />
-		<Unit filename="NFMsgBase.pb.cc" />
-		<Unit filename="NFMsgBase.pb.h" />
-		<Unit filename="NFMsgBaseEx.pb.cc" />
-		<Unit filename="NFMsgBaseEx.pb.h" />
-		<Unit filename="NFMsgDefine.cpp" />
-		<Unit filename="NFMsgDefine.h" />
-		<Unit filename="NFMsgMysql.pb.cc" />
-		<Unit filename="NFMsgMysql.pb.h" />
-		<Unit filename="NFMsgPreGame.pb.cc" />
-		<Unit filename="NFMsgPreGame.pb.h" />
-		<Unit filename="NFMsgShare.pb.cc" />
-		<Unit filename="NFMsgShare.pb.h" />
-		<Unit filename="NFMsgURl.pb.cc" />
-		<Unit filename="NFMsgURl.pb.h" />
-		<Unit filename="NFProtocolDefine.hpp" />
-		<Unit filename="NFSLGDefine.pb.cc" />
-		<Unit filename="NFSLGDefine.pb.h" />
+<Unit filename="NFDefine.pb.h" />
+<Unit filename="NFFleetingDefine.pb.h" />
+<Unit filename="NFLimit.h" />
+<Unit filename="NFMsgBase.pb.h" />
+<Unit filename="NFMsgBaseEx.pb.h" />
+<Unit filename="NFMsgDefine.h" />
+<Unit filename="NFMsgMysql.pb.h" />
+<Unit filename="NFMsgPreGame.pb.h" />
+<Unit filename="NFMsgShare.pb.h" />
+<Unit filename="NFMsgURl.pb.h" />
+<Unit filename="NFProtocolDefine.hpp" />
+<Unit filename="NFSLGDefine.pb.h" />
+<Unit filename="NFDefine.pb.cc" />
+<Unit filename="NFFleetingDefine.pb.cc" />
+<Unit filename="NFMsgBase.pb.cc" />
+<Unit filename="NFMsgBaseEx.pb.cc" />
+<Unit filename="NFMsgDefine.cpp" />
+<Unit filename="NFMsgMysql.pb.cc" />
+<Unit filename="NFMsgPreGame.pb.cc" />
+<Unit filename="NFMsgShare.pb.cc" />
+<Unit filename="NFMsgURl.pb.cc" />
+<Unit filename="NFSLGDefine.pb.cc" />
 		<Extensions>
 			<code_completion />
 			<envvars />

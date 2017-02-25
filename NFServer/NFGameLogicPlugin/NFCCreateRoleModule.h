@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -39,8 +38,7 @@ protected:
 	void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-
-    NFIGameLogicModule* m_pGameLogicModule;
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

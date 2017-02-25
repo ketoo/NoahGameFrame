@@ -70,11 +70,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCLoginLogicModule.cpp" />
-		<Unit filename="NFCLoginLogicModule.h" />
-		<Unit filename="NFLoginLogicPlugin.cpp" />
-		<Unit filename="NFLoginLogicPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCLoginLogicModule.h" />
+<Unit filename="NFLoginLogicPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCLoginLogicModule.cpp" />
+<Unit filename="NFLoginLogicPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -35,8 +35,8 @@ bool NFCNetLogic::Execute()
 bool NFCNetLogic::AfterInit()
 {
 	NFCLogicBase::AfterInit();
-	g_pNetClientModule->AddEventCallBack(this, &NFCNetLogic::OnSocketEvent);
-	g_pNetClientModule->AddReceiveCallBack(this, &NFCNetLogic::OnMsgRecive);
+	g_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_NONE, this, &NFCNetLogic::OnSocketEvent);
+	g_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_NONE, this, &NFCNetLogic::OnMsgRecive);
 
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_EVENT_RESULT, this, &NFCNetLogic::OnEventResult);
 

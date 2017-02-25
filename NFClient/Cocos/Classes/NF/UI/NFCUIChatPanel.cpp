@@ -8,8 +8,8 @@
 #include "stdafx.h"
 
 #include "NFCUIChatPanel.h"
-#include "Logic\NFCChatLogic.h"
-#include "Logic\NFCNetLogic.h"
+#include "Logic/NFCChatLogic.h"
+#include "Logic/NFCNetLogic.h"
 
 #include "NFCUISelectServer.h"
 
