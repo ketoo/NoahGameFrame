@@ -117,6 +117,7 @@
     <ClInclude Include="NFCRankModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFCTaskModule.h" />
+    <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <ClCompile Include="NFCRankModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFCTaskModule.cpp" />
+    <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

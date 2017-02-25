@@ -1,18 +1,18 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFIMapModule.h
+//    @FileName			:    NFITileModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2013-07-05
-//    @Module           :    NFIMapModule
+//    @Date             :    2017-02-25
+//    @Module           :    NFITileModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_MAP_MODULE_H
-#define NFI_MAP_MODULE_H
+#ifndef NFI_TILE_MODULE_H
+#define NFI_TILE_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"
 
-class NFIMapModule
+class NFITileModule
     : public NFIModule
 {
 public:
