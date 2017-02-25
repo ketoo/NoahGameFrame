@@ -13,6 +13,7 @@
 #include "NFCPropertyModule.h"
 #include "NFCLevelModule.h"
 #include "NFCPropertyConfigModule.h"
+#include "NFCNPCRefreshModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -48,11 +49,13 @@ void NFGameServerPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFIPropertyModule, NFCPropertyModule)
     REGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
+    REGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
 }
 
 void NFGameServerPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
+	UNREGISTER_MODULE(pPluginManager, NFINPCRefreshModule, NFCNPCRefreshModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
     UNREGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
     UNREGISTER_MODULE(pPluginManager, NFIPropertyModule, NFCPropertyModule)
 

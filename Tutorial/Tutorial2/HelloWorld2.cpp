@@ -1,7 +1,7 @@
 #include "HelloWorld2.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFIComponent.h"
-#include "NFComm/NFCore//NFCDataList.h"
+#include "NFComm/NFCore//NFDataList.hpp"
 
 bool NFCHelloWorld2::Init()
 {
@@ -12,7 +12,7 @@ bool NFCHelloWorld2::Init()
     return true;
 }
 
-int NFCHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
 {
     
     std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
@@ -22,7 +22,7 @@ int NFCHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::stri
 
 bool NFCHelloWorld2::AfterInit()
 {
-	NFCDataList xData;
+	NFDataList xData;
 	xData.AddInt(111);
 
 

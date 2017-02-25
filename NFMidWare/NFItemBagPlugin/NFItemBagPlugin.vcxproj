@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AE53470C-E0C6-4583-996D-011A7269C4AA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFChatPlugin</RootNamespace>
+    <RootNamespace>NFItemBagPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -102,6 +102,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemGemConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemItemConsumeProcessModule.cpp" />
@@ -112,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemConsumeManagerModule.h" />
     <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
     <ClInclude Include="NFCItemGemConsumeProcessModule.h" />
     <ClInclude Include="NFCItemItemConsumeProcessModule.h" />

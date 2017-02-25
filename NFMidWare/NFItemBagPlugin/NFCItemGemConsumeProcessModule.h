@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemGemConsumeProcessModule.h
+//    @FileName			:   NFCItemGemConsumeProcessModule.h
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemGemConsumeProcessModule
@@ -13,14 +13,14 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIItemGemConsumeProcessModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
 
 class NFCItemGemConsumeProcessModule
-	: public NFIItemGemConsumeProcessModule
+	: public NFIItemConsumeProcessModule
 {
 
 public:
@@ -34,10 +34,10 @@ public:
 	virtual bool AfterInit();
 
 	
-	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
+	virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
 	
-	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID);
+	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
 private:
 	NFIKernelModule* m_pKernelModule;
