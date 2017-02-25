@@ -270,7 +270,19 @@ enum EGameMsgID
 	
 	EGMI_REQSWICHSERVER								= 1840;		//
 	EGMI_ACKSWICHSERVER								= 1841;		//
-	                                                 
+	                                                  
+	EGMI_REQ_CREATE_TEAM                       		= 1860; 	//
+	EGMI_ACK_CREATE_TEAM							= 1861; 	//
+	EGMI_REQ_JOIN_TEAM                         		= 1862; 	//
+	EGMI_ACK_JOIN_TEAM								= 1863; 	//
+	EGMI_REQ_LEAVE_TEAM                        		= 1864; 	//
+	EGMI_ACK_LEAVE_TEAM								= 1865; 	//
+	EGMI_REQ_INVITE_TEAM							= 1866; 	//
+	EGMI_REQ_OPRMEMBER_TEAM							= 1867; 	//
+	EGMI_ACK_OPRMEMBER_TEAM							= 1868; 	//
+	                                                  
+	EGMI_REQ_TEAM_ENTER_ECTYPE						= 1869; 	//
+	EGMI_ACK_TEAM_ENTER_ECTYPE						= 1870; 	//
                                                       
 	                                                  
 	/////////////////////MapModule/////////////////////////////////////
