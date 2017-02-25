@@ -67,6 +67,7 @@ protected:
 
 private:
 
+	int mnBufferSize;
 	NFINet* m_pNet;
 	NFINT64 nLastTime;
 	std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
