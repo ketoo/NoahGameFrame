@@ -9,7 +9,6 @@
 #ifndef NFC_WORLDNET_SERVER_MODULE_H
 #define NFC_WORLDNET_SERVER_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIWorldToMasterModule.h"
@@ -43,17 +42,16 @@ public:
     virtual void LogSend(const char* str) {}
 
     virtual bool SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer = NFGUID());
-    virtual bool SendMsgToGame(const NFIDataList& argObjectVar, const NFIDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
+    virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
     virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
 
-    virtual int OnObjectListEnter(const NFIDataList& self, const NFIDataList& argVar);
-    virtual int OnObjectListLeave(const NFIDataList& self, const NFIDataList& argVar);
-    virtual int OnPropertyEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self);
-    virtual int OnRecordEnter(const NFIDataList& argVar, const NFIDataList& argGameID, const NFGUID& self);
+    virtual int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+    virtual int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
+    virtual int OnPropertyEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
+    virtual int OnRecordEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
     virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
 
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
-	virtual NFINetModule* GetNetModule();
 
     virtual int GetPlayerGameID(const NFGUID self);
 
@@ -107,7 +105,7 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
-	NFIWorldToMasterModule* m_pWorldToMasterModule;
+	NFINetClientModule* m_pNetClientModule;
 
 };
 

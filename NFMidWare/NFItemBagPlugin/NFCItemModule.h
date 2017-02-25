@@ -11,7 +11,6 @@
 
 #include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -21,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIItemConsumeManagerModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -44,8 +44,8 @@ protected:
 	virtual bool CheckConfig();
 
 
-	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
-	int OnRequireUseItemPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var );
+	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
+	int OnRequireUseItemPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
     int AddItemEffectDataProperty( const NFGUID& self, const NFGUID& xTarget, const std::string& strItemID);
     bool ConsumeDataItemProperty( const NFGUID& self, const std::string& strID);
 	bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
@@ -56,11 +56,13 @@ protected:
 private:
     NFIEventModule* m_pEventModule;
 	NFIKernelModule* m_pKernelModule;
+	NFINetModule* m_pNetModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pLogicClassModule;
     NFIPropertyModule* m_pPropertyModule;
 	NFIHeroModule* m_pHeroModule;
+	NFIItemConsumeManagerModule* m_pItemConsumeManagerModule;
 	NFICommonConfigModule* m_pCommonConfigModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };

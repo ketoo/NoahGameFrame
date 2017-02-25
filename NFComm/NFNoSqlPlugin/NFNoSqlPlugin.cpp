@@ -1,7 +1,11 @@
-// NFDataBasePlugin.cpp : Defines the exported functions for the DLL application.
+//------------------------------------------------------------------------ -
+//    @FileName			:    NFNoSqlPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2017-02-08
+//    @Module           :    NFNoSqlPlugin
 //
+// -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include "NFNoSqlPlugin.h"
 #include "NFCNoSqlModule.h"
 #include "NFCAsyNoSqlModule.h"

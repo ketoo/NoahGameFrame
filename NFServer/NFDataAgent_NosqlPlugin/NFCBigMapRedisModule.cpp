@@ -216,11 +216,11 @@ bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std:
 						NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = xPropertyManagerList[i];
 						if (xPropertyManager)
 						{
-							NFGUID xGuildID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuilID());
+							NFGUID xGuildID = xPropertyManager->GetPropertyObject(NFrame::Guild::GuildID());
 							const int nLevel = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildLevel());
 							const int nCount = xPropertyManager->GetPropertyInt(NFrame::Guild::GuildMemeberCount());
 							const int nResource = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
-							const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuilIDIcon());
+							const std::string& strIcon = xPropertyManager->GetPropertyString(NFrame::Guild::GuildIcon());
 
 							NFMsg::GridGuildBaseInfo xGridGuildBaseInfo;
 							xGridGuildBaseInfo.mutable_id()->CopyFrom(NFINetModule::NFToPB(xGuildID));

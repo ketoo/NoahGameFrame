@@ -15,7 +15,15 @@ const std::string PROPERTY_VERIFIED = "Verified";
 
 bool NFCLoginNet_ServerModule::Init()
 {
-	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
+
 	return true;
 }
 
@@ -31,12 +39,6 @@ bool NFCLoginNet_ServerModule::BeforeShut()
 
 bool NFCLoginNet_ServerModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLoginToMasterModule = pPluginManager->FindModule<NFILoginToMasterModule>();
 
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCLoginNet_ServerModule::OnHeartBeat);
@@ -101,7 +103,7 @@ int NFCLoginNet_ServerModule::OnSelectWorldResultsProcess(const int nWorldID, co
 
 bool NFCLoginNet_ServerModule::Execute()
 {
-	return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCLoginNet_ServerModule::OnClientConnected(const int nAddress)
@@ -193,7 +195,7 @@ void NFCLoginNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const 
 	xData.mutable_sender()->CopyFrom(NFINetModule::NFToPB(pNetObject->GetClientID()));
 	xData.set_account(pNetObject->GetAccount());
 
-	m_pLoginToMasterModule->GetClusterModule()->SendSuitByPB(pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);//here has a problem to be solve
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_MASTER, pNetObject->GetAccount(), NFMsg::EGameMsgID::EGMI_REQ_CONNECT_WORLD, xData);//here has a problem to be solve
 }
 
 void NFCLoginNet_ServerModule::OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -269,9 +271,4 @@ void NFCLoginNet_ServerModule::OnLogOut(const int nSockIndex, const int nMsgID, 
 void NFCLoginNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	printf("NFNet || unMsgID=%d\n", nMsgID);
-}
-
-NFINetModule* NFCLoginNet_ServerModule::GetNetModule()
-{
-	return m_pNetModule;
 }

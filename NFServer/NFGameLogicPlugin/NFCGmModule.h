@@ -10,7 +10,6 @@
 #define NFC_GM_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIGmModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
@@ -53,6 +52,7 @@ protected:
     void CheckAndAddRow(const NFGUID& self, std::string strRecordName, const int nRow);
 
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;

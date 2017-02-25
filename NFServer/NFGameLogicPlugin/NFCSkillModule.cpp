@@ -13,7 +13,16 @@ bool NFCSkillModule::Init()
 {
     mstrSkillTableName = "SkillList";
 
-	
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	//m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+
 
 	return true;
 }
@@ -30,27 +39,19 @@ bool NFCSkillModule::Execute()
 
 bool NFCSkillModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    //m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
+   
 	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
 	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
     m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
     m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
 
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)) { return false; }
 
     return true;
 }
 
-int NFCSkillModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCSkillModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {
@@ -71,7 +72,7 @@ int NFCSkillModule::OnClassObjectEvent( const NFGUID& self, const std::string& s
     return 0;
 }
 
-int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
+int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFDataList& var)
 {
     if ( var.GetCount() != 2)
     {
@@ -119,8 +120,8 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //    return 1;
     //}
 
-    //NFCDataList damageValueList;
-    //NFCDataList damageResultList;
+    //NFDataList damageValueList;
+    //NFDataList damageResultList;
     //int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
     //for (int i = 0; i < valueOther.GetCount(); i++)
     //{
@@ -143,7 +144,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     //if ( damageValueList.GetCount() == damageResultList.GetCount()
     //    && damageValueList.GetCount() == valueOther.GetCount() )
     //{
-    //    NFCDataList valueResult;
+    //    NFDataList valueResult;
     //    valueResult.AddString( var.String( 2 ).c_str() );
     //    valueResult.AddInt( valueOther.GetCount() );
     //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); 
@@ -157,7 +158,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var )
 {
     //if ( var.GetCount() < 3)
     //{
@@ -197,7 +198,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     //    return 1;
     //}
 
-    //NFCDataList valueOther;
+    //NFDataList valueOther;
     
     ////     if ( pConsumeProcessModule->ConsumeLegal( var.ObjectVal( 0 ), var.StringVal( 2 ), valueOther ) != 0 )
     ////     {
@@ -209,8 +210,8 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     ////         return 1;
     ////     }
     //// 
-    //NFCDataList damageValueList;
-    //NFCDataList damageResultList;
+    //NFDataList damageValueList;
+    //NFDataList damageResultList;
     //int nResult = pConsumeProcessModule->ConsumeProcess( var.Object( 0 ), var.String( 2 ), valueOther, damageValueList, damageResultList );
     //for (int i = 0; i < valueOther.GetCount(); i++)
     //{
@@ -223,7 +224,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     //if ( damageValueList.GetCount() == damageResultList.GetCount()
     //    && damageValueList.GetCount() == valueOther.GetCount() )
     //{
-    //    NFCDataList valueResult;
+    //    NFDataList valueResult;
     //    valueResult.AddString( var.String( 2 ).c_str() );
     //    valueResult.AddInt( valueOther.GetCount() );
     //    valueResult.Append( valueOther, 0, valueOther.GetCount() ); 
@@ -237,7 +238,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDef
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var )
 {
     if ( var.GetCount() < 4 ||
         !var.TypeEx(TDATA_OBJECT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_OBJECT))
@@ -252,7 +253,7 @@ int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const NFEvent
     
 
     
-    //  NFCDataList valueResult;
+    //  NFDataList valueResult;
     //  valueResult.AddInt(nSkillID);
     //  valueResult.AddInt(nResult);
     //  valueResult.Append(var, 4, var.GetCount());
@@ -271,7 +272,7 @@ int NFCSkillModule::AddSkill( const NFGUID& self, const std::string& strSkillNam
             NF_SHARE_PTR<NFIRecord> pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
             if ( pRecord )
             {
-                return pRecord->AddRow( -1,  NFCDataList() << strSkillName.c_str());
+                return pRecord->AddRow( -1,  NFDataList() << strSkillName.c_str());
                 //if ( nRow >= 0 )
                 //{
                 //    return pRecord->SetString( nRow, EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str() );
@@ -290,7 +291,7 @@ int NFCSkillModule::ExistSkill( const NFGUID& self, const std::string& strSkillN
     //NF_SHARE_PTR<NFIRecord> pRecord =  m_pKernelModule->FindRecord( self, mstrSkillTableName );
     //if ( pRecord )
     //{
-    //    NFCDataList varResult;
+    //    NFDataList varResult;
     //    pRecord->FindString( EGameSkillStoreType::EGSST_TYPE_SKILL_CONFIGID, strSkillName.c_str(), varResult );
     //    if ( varResult.GetCount() == 1 )
     //    {
@@ -397,7 +398,7 @@ void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, con
 		const NFMsg::EffectData& xEffectData = xMsg.effect_data(i);
 		const NFGUID nTarget = NFINetModule::PBToNF(xEffectData.effect_ident());
 		
-		OnUseSkill(nPlayerID, NFCDataList() << strSkillID << nTarget);
+		OnUseSkill(nPlayerID, NFDataList() << strSkillID << nTarget);
 
 		NFMsg::EffectData* pNewEffectData = xReqAckUseSkill.add_effect_data();
 
