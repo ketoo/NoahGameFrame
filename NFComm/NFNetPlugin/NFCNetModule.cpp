@@ -11,6 +11,7 @@ NFCNetModule::NFCNetModule(NFIPluginManager * p)
 {
 	pPluginManager = p;
 
+	mnBufferSize = 0;
 	nLastTime = GetPluginManager()->GetNowTime();
 	m_pNet = NULL;
 }
@@ -28,12 +29,14 @@ NFCNetModule::~NFCNetModule()
 void NFCNetModule::Initialization(const char * strIP, const unsigned short nPort)
 {
 	m_pNet = NF_NEW NFCNet(this, &NFCNetModule::OnReceiveNetPack, &NFCNetModule::OnSocketNetEvent);
+	m_pNet->ExpandBufferSize(mnBufferSize);
 	m_pNet->Initialization(strIP, nPort);
 }
 
 int NFCNetModule::Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount)
 {
 	m_pNet = NF_NEW NFCNet(this, &NFCNetModule::OnReceiveNetPack, &NFCNetModule::OnSocketNetEvent);
+	m_pNet->ExpandBufferSize(mnBufferSize);
 	return m_pNet->Initialization(nMaxClient, nPort, nCpuCount);
 }
 
@@ -41,10 +44,14 @@ int NFCNetModule::ExpandBufferSize(const unsigned int size)
 {
 	if (size > 0)
 	{
-		return m_pNet->ExpandBufferSize(size);
+		mnBufferSize = size;
+		if (m_pNet)
+		{
+			m_pNet->ExpandBufferSize(mnBufferSize);
+		}
 	}
 
-	return 0;
+	return mnBufferSize;
 }
 
 void NFCNetModule::RemoveReceiveCallBack(const int nMsgID)
