@@ -19,6 +19,13 @@
 
 USING_NS_CC;
 
+#ifdef WIN32
+extern "C" int gettimeofday(struct timeval *val, struct timezone *tz)
+{
+	return cocos2d::gettimeofday(val, tz);
+}
+#endif
+
 Scene* NFCRoot::scene()
 {
     Scene *scene = Scene::create();    

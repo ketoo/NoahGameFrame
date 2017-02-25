@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCItemEquipConsumeProcessModule.cpp
+//    @FileName			:   NFCItemEquipConsumeProcessModule.cpp
 //    @Author           :   Yu.Tang
 //    @Date             :   2016-07-02
 //    @Module           :   NFCItemEquipConsumeProcessModule
@@ -39,12 +39,12 @@ bool NFCItemItemConsumeProcessModule::Execute()
 }
 
 
-int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	return 1;
 }
 
-int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFIDataList& targetID)
+int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
 	if (nullptr == pBagItemList.get())
@@ -61,7 +61,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		return 0;
 	}
 
-	NFCDataList varItemID;
+	NFDataList varItemID;
 	const int nBagItemCount = pBagItemList->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varItemID);
 
 	if (nBagItemCount != 1)
@@ -70,7 +70,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	}
 
 	const int nRowNum = varItemID.Int(0);
-	NFCDataList xRowData;
+	NFDataList xRowData;
 	pBagItemList->QueryRow(nRowNum, xRowData);
 
 	const int nBagList_ItemCount = xRowData.Int(NFrame::Player::BagItemList_ItemCount);

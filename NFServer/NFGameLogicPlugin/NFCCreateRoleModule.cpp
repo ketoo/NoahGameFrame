@@ -11,15 +11,15 @@
 
 bool NFCCreateRoleModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     return true;
 }
 
 bool NFCCreateRoleModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pGameLogicModule = pPluginManager->FindModule<NFIGameLogicModule>();
-	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
 	return true;
 }
@@ -28,7 +28,7 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -73,7 +73,7 @@ void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const in
 {
 	NFGUID nClientID;
 	NFMsg::ReqCreateRole xMsg;
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -99,7 +99,7 @@ void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const in
 		pData->set_last_offline_ip(0);
 		pData->set_view_record("");
 
-		m_pGameServerNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 	}
 }
 
@@ -107,7 +107,7 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -118,13 +118,13 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 
 bool NFCCreateRoleModule::ReadyExecute()
 {
-	m_pGameServerNet_ServerModule->GetNetModule()->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
-	m_pGameServerNet_ServerModule->GetNetModule()->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
-	m_pGameServerNet_ServerModule->GetNetModule()->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
 
-	m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
-	m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
-	m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
 
 	return true;
 }

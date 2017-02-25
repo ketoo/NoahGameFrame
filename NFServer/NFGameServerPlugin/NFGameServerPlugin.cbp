@@ -68,21 +68,21 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCGameServerModule.cpp" />
-		<Unit filename="NFCGameServerModule.h" />
-		<Unit filename="NFCLevelModule.cpp" />
-		<Unit filename="NFCLevelModule.h" />
-		<Unit filename="NFCPropertyConfigModule.cpp" />
-		<Unit filename="NFCPropertyConfigModule.h" />
-		<Unit filename="NFCPropertyModule.cpp" />
-		<Unit filename="NFCPropertyModule.h" />
-		<Unit filename="NFCPropertyTrailModule.cpp" />
-		<Unit filename="NFCPropertyTrailModule.h" />
-		<Unit filename="NFCSceneProcessModule.cpp" />
-		<Unit filename="NFCSceneProcessModule.h" />
-		<Unit filename="NFGameServerPlugin.cpp" />
-		<Unit filename="NFGameServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCGameServerModule.h" />
+<Unit filename="NFCLevelModule.h" />
+<Unit filename="NFCPropertyConfigModule.h" />
+<Unit filename="NFCPropertyModule.h" />
+<Unit filename="NFCPropertyTrailModule.h" />
+<Unit filename="NFCSceneProcessModule.h" />
+<Unit filename="NFGameServerPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCGameServerModule.cpp" />
+<Unit filename="NFCLevelModule.cpp" />
+<Unit filename="NFCPropertyConfigModule.cpp" />
+<Unit filename="NFCPropertyModule.cpp" />
+<Unit filename="NFCPropertyTrailModule.cpp" />
+<Unit filename="NFCSceneProcessModule.cpp" />
+<Unit filename="NFGameServerPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

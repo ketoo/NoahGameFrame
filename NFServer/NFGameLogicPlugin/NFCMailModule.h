@@ -30,10 +30,10 @@ public:
     virtual bool AfterInit();
 
 public:
-    virtual bool SendMail(const NFGUID& reciever, const int nMailType, const NFIDataList& xItemList, const std::string& strNailContent = NULL_STR);
-    virtual int OnDrawMail(const NFGUID& self, const NFIDataList& var);
-    virtual int OnOpenMail(const NFGUID& self, const NFIDataList& var);
-    virtual int OnDeleteMail(const NFGUID& self, const NFIDataList& var);
+    virtual bool SendMail(const NFGUID& reciever, const int nMailType, const NFDataList& xItemList, const std::string& strNailContent = NULL_STR);
+    virtual int OnDrawMail(const NFGUID& self, const NFDataList& var);
+    virtual int OnOpenMail(const NFGUID& self, const NFDataList& var);
+    virtual int OnDeleteMail(const NFGUID& self, const NFDataList& var);
 
 private:
     NFIKernelModule* m_pKernelModule;

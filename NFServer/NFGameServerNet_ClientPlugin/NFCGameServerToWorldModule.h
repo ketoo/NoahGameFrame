@@ -9,14 +9,12 @@
 #ifndef NFC_GAMESERVER_NETCLIENT_MODULE_H
 #define NFC_GAMESERVER_NETCLIENT_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ClientModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -36,8 +34,6 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual void SendBySuit(const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-    virtual NFINetClientModule* GetClusterClientModule();
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
@@ -50,7 +46,7 @@ protected:
     void RefreshWorldInfo();
     void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+    int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 private:
     void SendOnline(const NFGUID& self);
@@ -65,6 +61,7 @@ private:
     NFIElementModule* m_pElementModule;
 	NFINetClientModule* m_pNetClientModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 

@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFILoginLogicModule.h"
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 
 
 class NFCLoginLogicModule
@@ -36,10 +37,8 @@ public:
     virtual void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-
-protected:
-
-    NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
+	NFINetModule* m_pNetModule;
+    //NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
 	NFILogModule* m_pLogModule;
 private:
 };

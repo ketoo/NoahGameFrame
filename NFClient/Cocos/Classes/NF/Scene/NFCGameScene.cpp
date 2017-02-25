@@ -74,7 +74,7 @@ void NFCGameScene::onTouchMoved(Touch *touch, Event *unused_event)
 	g_pPlayerLogic->RequireMove(NFVector3(toPos.x, toPos.y, 0));
 }
 
-int NFCGameScene::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCGameScene::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     if (strClassName == NFrame::Player::ThisName())
     {
@@ -97,7 +97,7 @@ int NFCGameScene::OnObjectClassEvent(const NFGUID& self, const std::string& strC
     return 0;
 }
 
-int NFCGameScene::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCGameScene::OnObjectPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
 	Sprite *pPlayer = m_Players.GetElement(self);
 	auto pName = ui::Text::create(newVar.GetString(), "", 16);
@@ -107,7 +107,7 @@ int NFCGameScene::OnObjectPropertyEvent(const NFGUID& self, const std::string& s
 	return 0;
 }
 
-int NFCGameScene::OnPlayerMoveEvent(const int nEventID, const NFIDataList& varDataList)
+int NFCGameScene::OnPlayerMoveEvent(const int nEventID, const NFDataList& varDataList)
 {
 	const NFGUID &self = varDataList.Object(0);
 	Sprite *pPlayer = m_Players.GetElement(self);
@@ -119,7 +119,7 @@ int NFCGameScene::OnPlayerMoveEvent(const int nEventID, const NFIDataList& varDa
 	return 0;
 }
 
-int NFCGameScene::OnPlayerChatEvent(const int nEventID, const NFIDataList& varDataList)
+int NFCGameScene::OnPlayerChatEvent(const int nEventID, const NFDataList& varDataList)
 {
 	const NFGUID &self = varDataList.Object(0);
 	Sprite *pPlayer = m_Players.GetElement(self);

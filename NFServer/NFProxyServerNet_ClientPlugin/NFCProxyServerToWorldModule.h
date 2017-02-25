@@ -20,7 +20,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
@@ -84,7 +84,6 @@ private:
     NFIProxyServerNet_ServerModule* m_pProxyServerNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
-    NFIProxyServerToGameModule* m_pProxyServerToGameModule;
 	NFINetClientModule* m_pNetClientModule;
 	std::map<std::string, std::string> m_mServerInfoExt;
 };

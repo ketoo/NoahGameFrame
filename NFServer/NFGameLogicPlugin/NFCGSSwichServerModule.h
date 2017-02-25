@@ -10,7 +10,6 @@
 #define NFC_SWITCHSERVER_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIGSSwichServerModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
@@ -47,18 +46,19 @@ public:
 	void OnAckSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
-	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFINetClientModule* m_pNetClientModule;
 	NFILevelModule* m_pLevelModule;
     NFIPackModule* m_pPackModule;
     NFIHeroModule* m_pHeroModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pScenemodule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 

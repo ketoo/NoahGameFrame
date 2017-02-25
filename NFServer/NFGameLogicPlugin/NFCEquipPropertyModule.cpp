@@ -29,7 +29,7 @@ bool NFCEquipPropertyModule::AfterInit()
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -43,7 +43,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
@@ -52,19 +52,19 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 	const int nRow = varFind.Int(0);
 	xDataList.Clear();
 
-	NFCDataList xEquipBaseValue;
+	NFDataList xEquipBaseValue;
 	CalEquipBaseProperty(self, xEquipGUID, xEquipBaseValue);
 
-	NFCDataList xEquipRandonValue;
+	NFDataList xEquipRandonValue;
 	CalEquipRandomProperty(self, xEquipGUID, xEquipRandonValue);
 
-	NFCDataList xEquipGemValue;
+	NFDataList xEquipGemValue;
 	CalEquipGemProperty(self, xEquipGUID, xEquipGemValue);
 
-	NFCDataList xEquipIntensifyValue;
+	NFDataList xEquipIntensifyValue;
 	CalEquipIntensifyProperty(self, xEquipGUID, xEquipIntensifyValue);
 
-	NFCDataList xEquipElementValue;
+	NFDataList xEquipElementValue;
 	CalEquipElementProperty(self, xEquipGUID, xEquipElementValue);
 
 	for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
@@ -105,7 +105,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -119,7 +119,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
@@ -145,7 +145,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -159,7 +159,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
@@ -185,7 +185,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -199,7 +199,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
@@ -254,7 +254,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -268,7 +268,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
@@ -321,7 +321,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 	return true;
 }
 
-bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList)
+bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
 	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
 	if (nullptr == pBagRecord)
@@ -335,7 +335,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 		return false;
 	}
 
-	NFCDataList varFind;
+	NFDataList varFind;
 	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;

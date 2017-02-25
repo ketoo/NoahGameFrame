@@ -1,0 +1,1781 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		010CE83F1E5EB14C00C50289 /* parser.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE83D1E5EB14C00C50289 /* parser.cc */; };
+		010CE8401E5EB14C00C50289 /* parser.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE83D1E5EB14C00C50289 /* parser.cc */; };
+		010CE8421E5EB1D700C50289 /* unknown_field_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8411E5EB1D700C50289 /* unknown_field_set.cc */; };
+		010CE8431E5EB1D700C50289 /* unknown_field_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8411E5EB1D700C50289 /* unknown_field_set.cc */; };
+		010CE8461E5EB24A00C50289 /* common.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8441E5EB24A00C50289 /* common.cc */; };
+		010CE8471E5EB24A00C50289 /* common.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8441E5EB24A00C50289 /* common.cc */; };
+		010CE84D1E5EBC7300C50289 /* NFCClassModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8491E5EBC7300C50289 /* NFCClassModule.cpp */; };
+		010CE84E1E5EBC7300C50289 /* NFCClassModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8491E5EBC7300C50289 /* NFCClassModule.cpp */; };
+		010CE84F1E5EBC7300C50289 /* NFCElementModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE84B1E5EBC7300C50289 /* NFCElementModule.cpp */; };
+		010CE8501E5EBC7300C50289 /* NFCElementModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE84B1E5EBC7300C50289 /* NFCElementModule.cpp */; };
+		010CE87A1E5EBCD700C50289 /* NFCComponentManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8541E5EBCD700C50289 /* NFCComponentManager.cpp */; };
+		010CE87B1E5EBCD700C50289 /* NFCComponentManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8541E5EBCD700C50289 /* NFCComponentManager.cpp */; };
+		010CE87C1E5EBCD700C50289 /* NFCObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8581E5EBCD700C50289 /* NFCObject.cpp */; };
+		010CE87D1E5EBCD700C50289 /* NFCObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8581E5EBCD700C50289 /* NFCObject.cpp */; };
+		010CE87E1E5EBCD700C50289 /* NFCProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85A1E5EBCD700C50289 /* NFCProperty.cpp */; };
+		010CE87F1E5EBCD700C50289 /* NFCProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85A1E5EBCD700C50289 /* NFCProperty.cpp */; };
+		010CE8801E5EBCD700C50289 /* NFCPropertyManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85C1E5EBCD700C50289 /* NFCPropertyManager.cpp */; };
+		010CE8811E5EBCD700C50289 /* NFCPropertyManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85C1E5EBCD700C50289 /* NFCPropertyManager.cpp */; };
+		010CE8821E5EBCD700C50289 /* NFCRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85E1E5EBCD700C50289 /* NFCRecord.cpp */; };
+		010CE8831E5EBCD700C50289 /* NFCRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE85E1E5EBCD700C50289 /* NFCRecord.cpp */; };
+		010CE8841E5EBCD700C50289 /* NFCRecordManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8601E5EBCD700C50289 /* NFCRecordManager.cpp */; };
+		010CE8851E5EBCD700C50289 /* NFCRecordManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8601E5EBCD700C50289 /* NFCRecordManager.cpp */; };
+		010CE88F1E5EBD4200C50289 /* NFCEventModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8871E5EBD4200C50289 /* NFCEventModule.cpp */; };
+		010CE8901E5EBD4200C50289 /* NFCEventModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8871E5EBD4200C50289 /* NFCEventModule.cpp */; };
+		010CE8911E5EBD4200C50289 /* NFCKernelModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8891E5EBD4200C50289 /* NFCKernelModule.cpp */; };
+		010CE8921E5EBD4200C50289 /* NFCKernelModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8891E5EBD4200C50289 /* NFCKernelModule.cpp */; };
+		010CE8931E5EBD4200C50289 /* NFCSceneAOIModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE88B1E5EBD4200C50289 /* NFCSceneAOIModule.cpp */; };
+		010CE8941E5EBD4200C50289 /* NFCSceneAOIModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE88B1E5EBD4200C50289 /* NFCSceneAOIModule.cpp */; };
+		010CE8951E5EBD4200C50289 /* NFCScheduleModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE88D1E5EBD4200C50289 /* NFCScheduleModule.cpp */; };
+		010CE8961E5EBD4200C50289 /* NFCScheduleModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE88D1E5EBD4200C50289 /* NFCScheduleModule.cpp */; };
+		010CE89A1E5EBD5F00C50289 /* NFCLogModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8981E5EBD5F00C50289 /* NFCLogModule.cpp */; };
+		010CE89B1E5EBD5F00C50289 /* NFCLogModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8981E5EBD5F00C50289 /* NFCLogModule.cpp */; };
+		010CE8A11E5EBD8900C50289 /* NFCDynLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE89D1E5EBD8900C50289 /* NFCDynLib.cpp */; };
+		010CE8A21E5EBD8900C50289 /* NFCDynLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE89D1E5EBD8900C50289 /* NFCDynLib.cpp */; };
+		010CE8A31E5EBD8900C50289 /* NFCPluginManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE89F1E5EBD8900C50289 /* NFCPluginManager.cpp */; };
+		010CE8A41E5EBD8900C50289 /* NFCPluginManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE89F1E5EBD8900C50289 /* NFCPluginManager.cpp */; };
+		010CE8BC1E5EBDE100C50289 /* NFDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8A61E5EBDE100C50289 /* NFDefine.pb.cc */; };
+		010CE8BD1E5EBDE100C50289 /* NFDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8A61E5EBDE100C50289 /* NFDefine.pb.cc */; };
+		010CE8BE1E5EBDE100C50289 /* NFFleetingDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8A81E5EBDE100C50289 /* NFFleetingDefine.pb.cc */; };
+		010CE8BF1E5EBDE100C50289 /* NFFleetingDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8A81E5EBDE100C50289 /* NFFleetingDefine.pb.cc */; };
+		010CE8C01E5EBDE100C50289 /* NFMsgBase.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AB1E5EBDE100C50289 /* NFMsgBase.pb.cc */; };
+		010CE8C11E5EBDE100C50289 /* NFMsgBase.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AB1E5EBDE100C50289 /* NFMsgBase.pb.cc */; };
+		010CE8C21E5EBDE100C50289 /* NFMsgBaseEx.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AD1E5EBDE100C50289 /* NFMsgBaseEx.pb.cc */; };
+		010CE8C31E5EBDE100C50289 /* NFMsgBaseEx.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AD1E5EBDE100C50289 /* NFMsgBaseEx.pb.cc */; };
+		010CE8C41E5EBDE100C50289 /* NFMsgDefine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AF1E5EBDE100C50289 /* NFMsgDefine.cpp */; };
+		010CE8C51E5EBDE100C50289 /* NFMsgDefine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8AF1E5EBDE100C50289 /* NFMsgDefine.cpp */; };
+		010CE8C61E5EBDE100C50289 /* NFMsgMysql.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B11E5EBDE100C50289 /* NFMsgMysql.pb.cc */; };
+		010CE8C71E5EBDE100C50289 /* NFMsgMysql.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B11E5EBDE100C50289 /* NFMsgMysql.pb.cc */; };
+		010CE8C81E5EBDE100C50289 /* NFMsgPreGame.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B31E5EBDE100C50289 /* NFMsgPreGame.pb.cc */; };
+		010CE8C91E5EBDE100C50289 /* NFMsgPreGame.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B31E5EBDE100C50289 /* NFMsgPreGame.pb.cc */; };
+		010CE8CA1E5EBDE100C50289 /* NFMsgShare.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B51E5EBDE100C50289 /* NFMsgShare.pb.cc */; };
+		010CE8CB1E5EBDE100C50289 /* NFMsgShare.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B51E5EBDE100C50289 /* NFMsgShare.pb.cc */; };
+		010CE8CC1E5EBDE100C50289 /* NFMsgURl.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B71E5EBDE100C50289 /* NFMsgURl.pb.cc */; };
+		010CE8CD1E5EBDE100C50289 /* NFMsgURl.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8B71E5EBDE100C50289 /* NFMsgURl.pb.cc */; };
+		010CE8CE1E5EBDE100C50289 /* NFSLGDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8BA1E5EBDE100C50289 /* NFSLGDefine.pb.cc */; };
+		010CE8CF1E5EBDE100C50289 /* NFSLGDefine.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8BA1E5EBDE100C50289 /* NFSLGDefine.pb.cc */; };
+		010CE8D81E5EBE3500C50289 /* NFCNet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D11E5EBE3500C50289 /* NFCNet.cpp */; };
+		010CE8D91E5EBE3500C50289 /* NFCNet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D11E5EBE3500C50289 /* NFCNet.cpp */; };
+		010CE8DA1E5EBE3500C50289 /* NFCNetClientModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D31E5EBE3500C50289 /* NFCNetClientModule.cpp */; };
+		010CE8DB1E5EBE3500C50289 /* NFCNetClientModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D31E5EBE3500C50289 /* NFCNetClientModule.cpp */; };
+		010CE8DC1E5EBE3500C50289 /* NFCNetModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D51E5EBE3500C50289 /* NFCNetModule.cpp */; };
+		010CE8DD1E5EBE3500C50289 /* NFCNetModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8D51E5EBE3500C50289 /* NFCNetModule.cpp */; };
+		010CE8F21E5EBED600C50289 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E11E5EBED600C50289 /* buffer.c */; };
+		010CE8F31E5EBED600C50289 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E11E5EBED600C50289 /* buffer.c */; };
+		010CE8F61E5EBED600C50289 /* bufferevent_filter.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E31E5EBED600C50289 /* bufferevent_filter.c */; };
+		010CE8F71E5EBED600C50289 /* bufferevent_filter.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E31E5EBED600C50289 /* bufferevent_filter.c */; };
+		010CE8F81E5EBED600C50289 /* bufferevent_pair.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E41E5EBED600C50289 /* bufferevent_pair.c */; };
+		010CE8F91E5EBED600C50289 /* bufferevent_pair.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E41E5EBED600C50289 /* bufferevent_pair.c */; };
+		010CE8FA1E5EBED600C50289 /* bufferevent_ratelim.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E51E5EBED600C50289 /* bufferevent_ratelim.c */; };
+		010CE8FB1E5EBED600C50289 /* bufferevent_ratelim.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E51E5EBED600C50289 /* bufferevent_ratelim.c */; };
+		010CE8FC1E5EBED600C50289 /* bufferevent_sock.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E61E5EBED600C50289 /* bufferevent_sock.c */; };
+		010CE8FD1E5EBED600C50289 /* bufferevent_sock.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E61E5EBED600C50289 /* bufferevent_sock.c */; };
+		010CE8FE1E5EBED600C50289 /* bufferevent.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E71E5EBED600C50289 /* bufferevent.c */; };
+		010CE8FF1E5EBED600C50289 /* bufferevent.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E71E5EBED600C50289 /* bufferevent.c */; };
+		010CE9001E5EBED600C50289 /* event.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E81E5EBED600C50289 /* event.c */; };
+		010CE9011E5EBED600C50289 /* event.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8E81E5EBED600C50289 /* event.c */; };
+		010CE9021E5EBED600C50289 /* evmap.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EA1E5EBED600C50289 /* evmap.c */; };
+		010CE9031E5EBED600C50289 /* evmap.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EA1E5EBED600C50289 /* evmap.c */; };
+		010CE9041E5EBED600C50289 /* evthread.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EB1E5EBED600C50289 /* evthread.c */; };
+		010CE9051E5EBED600C50289 /* evthread.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EB1E5EBED600C50289 /* evthread.c */; };
+		010CE9061E5EBED600C50289 /* evutil_rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EC1E5EBED600C50289 /* evutil_rand.c */; };
+		010CE9071E5EBED600C50289 /* evutil_rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EC1E5EBED600C50289 /* evutil_rand.c */; };
+		010CE9081E5EBED600C50289 /* evutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8ED1E5EBED600C50289 /* evutil.c */; };
+		010CE9091E5EBED600C50289 /* evutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8ED1E5EBED600C50289 /* evutil.c */; };
+		010CE90A1E5EBED600C50289 /* listener.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EE1E5EBED600C50289 /* listener.c */; };
+		010CE90B1E5EBED600C50289 /* listener.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EE1E5EBED600C50289 /* listener.c */; };
+		010CE90C1E5EBED600C50289 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EF1E5EBED600C50289 /* log.c */; };
+		010CE90D1E5EBED600C50289 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8EF1E5EBED600C50289 /* log.c */; };
+		010CE90E1E5EBED600C50289 /* signal.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8F01E5EBED600C50289 /* signal.c */; };
+		010CE90F1E5EBED600C50289 /* signal.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8F01E5EBED600C50289 /* signal.c */; };
+		010CE9101E5EBED600C50289 /* strlcpy.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8F11E5EBED600C50289 /* strlcpy.c */; };
+		010CE9111E5EBED600C50289 /* strlcpy.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE8F11E5EBED600C50289 /* strlcpy.c */; };
+		010CE9161E5EBF0800C50289 /* evdns.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9121E5EBF0800C50289 /* evdns.c */; };
+		010CE9171E5EBF0800C50289 /* evdns.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9121E5EBF0800C50289 /* evdns.c */; };
+		010CE9181E5EBF0800C50289 /* event_tagging.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9131E5EBF0800C50289 /* event_tagging.c */; };
+		010CE9191E5EBF0800C50289 /* event_tagging.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9131E5EBF0800C50289 /* event_tagging.c */; };
+		010CE91A1E5EBF0800C50289 /* evrpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9141E5EBF0800C50289 /* evrpc.c */; };
+		010CE91B1E5EBF0800C50289 /* evrpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9141E5EBF0800C50289 /* evrpc.c */; };
+		010CE91C1E5EBF0800C50289 /* http.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9151E5EBF0800C50289 /* http.c */; };
+		010CE91D1E5EBF0800C50289 /* http.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9151E5EBF0800C50289 /* http.c */; };
+		010CE9501E5FE4E000C50289 /* NFCChatLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE91F1E5FE4E000C50289 /* NFCChatLogic.cpp */; };
+		010CE9511E5FE4E000C50289 /* NFCChatLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE91F1E5FE4E000C50289 /* NFCChatLogic.cpp */; };
+		010CE9521E5FE4E000C50289 /* NFCLogicBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9211E5FE4E000C50289 /* NFCLogicBase.cpp */; };
+		010CE9531E5FE4E000C50289 /* NFCLogicBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9211E5FE4E000C50289 /* NFCLogicBase.cpp */; };
+		010CE9541E5FE4E000C50289 /* NFCLogicPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9231E5FE4E000C50289 /* NFCLogicPlugin.cpp */; };
+		010CE9551E5FE4E000C50289 /* NFCLogicPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9231E5FE4E000C50289 /* NFCLogicPlugin.cpp */; };
+		010CE9561E5FE4E000C50289 /* NFCLoginLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9251E5FE4E000C50289 /* NFCLoginLogic.cpp */; };
+		010CE9571E5FE4E000C50289 /* NFCLoginLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9251E5FE4E000C50289 /* NFCLoginLogic.cpp */; };
+		010CE9581E5FE4E000C50289 /* NFCNetLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9271E5FE4E000C50289 /* NFCNetLogic.cpp */; };
+		010CE9591E5FE4E000C50289 /* NFCNetLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9271E5FE4E000C50289 /* NFCNetLogic.cpp */; };
+		010CE95A1E5FE4E000C50289 /* NFCPlayerLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9291E5FE4E000C50289 /* NFCPlayerLogic.cpp */; };
+		010CE95B1E5FE4E000C50289 /* NFCPlayerLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9291E5FE4E000C50289 /* NFCPlayerLogic.cpp */; };
+		010CE95C1E5FE4E000C50289 /* NFCPropertyLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92B1E5FE4E000C50289 /* NFCPropertyLogic.cpp */; };
+		010CE95D1E5FE4E000C50289 /* NFCPropertyLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92B1E5FE4E000C50289 /* NFCPropertyLogic.cpp */; };
+		010CE95E1E5FE4E000C50289 /* NFCRecordLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92D1E5FE4E000C50289 /* NFCRecordLogic.cpp */; };
+		010CE95F1E5FE4E000C50289 /* NFCRecordLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92D1E5FE4E000C50289 /* NFCRecordLogic.cpp */; };
+		010CE9601E5FE4E000C50289 /* NFCClientPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92F1E5FE4E000C50289 /* NFCClientPlugin.cpp */; };
+		010CE9611E5FE4E000C50289 /* NFCClientPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE92F1E5FE4E000C50289 /* NFCClientPlugin.cpp */; };
+		010CE9621E5FE4E000C50289 /* NFCRoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9311E5FE4E000C50289 /* NFCRoot.cpp */; };
+		010CE9631E5FE4E000C50289 /* NFCRoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9311E5FE4E000C50289 /* NFCRoot.cpp */; };
+		010CE96A1E5FE4E000C50289 /* NFCGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93B1E5FE4E000C50289 /* NFCGameScene.cpp */; };
+		010CE96B1E5FE4E000C50289 /* NFCGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93B1E5FE4E000C50289 /* NFCGameScene.cpp */; };
+		010CE96C1E5FE4E000C50289 /* NFCSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93D1E5FE4E000C50289 /* NFCSceneManager.cpp */; };
+		010CE96D1E5FE4E000C50289 /* NFCSceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93D1E5FE4E000C50289 /* NFCSceneManager.cpp */; };
+		010CE96E1E5FE4E000C50289 /* NFCScenePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93F1E5FE4E000C50289 /* NFCScenePlugin.cpp */; };
+		010CE96F1E5FE4E000C50289 /* NFCScenePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE93F1E5FE4E000C50289 /* NFCScenePlugin.cpp */; };
+		010CE9701E5FE4E000C50289 /* NFCUIChatPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9421E5FE4E000C50289 /* NFCUIChatPanel.cpp */; };
+		010CE9711E5FE4E000C50289 /* NFCUIChatPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9421E5FE4E000C50289 /* NFCUIChatPanel.cpp */; };
+		010CE9721E5FE4E000C50289 /* NFCUIDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9441E5FE4E000C50289 /* NFCUIDialog.cpp */; };
+		010CE9731E5FE4E000C50289 /* NFCUIDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9441E5FE4E000C50289 /* NFCUIDialog.cpp */; };
+		010CE9741E5FE4E000C50289 /* NFCUILogin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9461E5FE4E000C50289 /* NFCUILogin.cpp */; };
+		010CE9751E5FE4E000C50289 /* NFCUILogin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9461E5FE4E000C50289 /* NFCUILogin.cpp */; };
+		010CE9761E5FE4E000C50289 /* NFCUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9481E5FE4E000C50289 /* NFCUIManager.cpp */; };
+		010CE9771E5FE4E000C50289 /* NFCUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9481E5FE4E000C50289 /* NFCUIManager.cpp */; };
+		010CE9781E5FE4E000C50289 /* NFCUIPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94A1E5FE4E000C50289 /* NFCUIPlugin.cpp */; };
+		010CE9791E5FE4E000C50289 /* NFCUIPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94A1E5FE4E000C50289 /* NFCUIPlugin.cpp */; };
+		010CE97A1E5FE4E000C50289 /* NFCUISelectRole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94C1E5FE4E000C50289 /* NFCUISelectRole.cpp */; };
+		010CE97B1E5FE4E000C50289 /* NFCUISelectRole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94C1E5FE4E000C50289 /* NFCUISelectRole.cpp */; };
+		010CE97C1E5FE4E000C50289 /* NFCUISelectServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94E1E5FE4E000C50289 /* NFCUISelectServer.cpp */; };
+		010CE97D1E5FE4E000C50289 /* NFCUISelectServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 010CE94E1E5FE4E000C50289 /* NFCUISelectServer.cpp */; };
+		010CE97F1E5FE83800C50289 /* select.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE97E1E5FE83800C50289 /* select.c */; };
+		010CE9801E5FE83800C50289 /* select.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE97E1E5FE83800C50289 /* select.c */; };
+		010CE9821E5FE86B00C50289 /* poll.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9811E5FE86B00C50289 /* poll.c */; };
+		010CE9831E5FE86B00C50289 /* poll.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9811E5FE86B00C50289 /* poll.c */; };
+		010CE9851E5FE89A00C50289 /* kqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9841E5FE89A00C50289 /* kqueue.c */; };
+		010CE9861E5FE89A00C50289 /* kqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 010CE9841E5FE89A00C50289 /* kqueue.c */; };
+		010CEABD1E601E3F00C50289 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABB1E601E3F00C50289 /* res */; };
+		010CEABE1E601E3F00C50289 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABB1E601E3F00C50289 /* res */; };
+		010CEABF1E601E3F00C50289 /* Scene in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABC1E601E3F00C50289 /* Scene */; };
+		010CEAC01E601E3F00C50289 /* Scene in Resources */ = {isa = PBXBuildFile; fileRef = 010CEABC1E601E3F00C50289 /* Scene */; };
+		010CEAC21E601E4C00C50289 /* NFDataCfg in Resources */ = {isa = PBXBuildFile; fileRef = 010CEAC11E601E4C00C50289 /* NFDataCfg */; };
+		010CEAC31E601E4C00C50289 /* NFDataCfg in Resources */ = {isa = PBXBuildFile; fileRef = 010CEAC11E601E4C00C50289 /* NFDataCfg */; };
+		0190545B1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */; };
+		0190545C1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */; };
+		019054631E5E8F12009153C1 /* coded_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054611E5E8F12009153C1 /* coded_stream.cc */; };
+		019054641E5E8F12009153C1 /* coded_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054611E5E8F12009153C1 /* coded_stream.cc */; };
+		019054781E5E8FAA009153C1 /* descriptor_database.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054691E5E8FAA009153C1 /* descriptor_database.cc */; };
+		019054791E5E8FAA009153C1 /* descriptor_database.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054691E5E8FAA009153C1 /* descriptor_database.cc */; };
+		0190547A1E5E8FAA009153C1 /* descriptor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546B1E5E8FAA009153C1 /* descriptor.cc */; };
+		0190547B1E5E8FAA009153C1 /* descriptor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546B1E5E8FAA009153C1 /* descriptor.cc */; };
+		0190547C1E5E8FAA009153C1 /* descriptor.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546D1E5E8FAA009153C1 /* descriptor.pb.cc */; };
+		0190547D1E5E8FAA009153C1 /* descriptor.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546D1E5E8FAA009153C1 /* descriptor.pb.cc */; };
+		0190547E1E5E8FAA009153C1 /* dynamic_message.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546F1E5E8FAA009153C1 /* dynamic_message.cc */; };
+		0190547F1E5E8FAA009153C1 /* dynamic_message.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190546F1E5E8FAA009153C1 /* dynamic_message.cc */; };
+		019054801E5E8FAA009153C1 /* extension_set_heavy.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054711E5E8FAA009153C1 /* extension_set_heavy.cc */; };
+		019054811E5E8FAA009153C1 /* extension_set_heavy.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054711E5E8FAA009153C1 /* extension_set_heavy.cc */; };
+		019054821E5E8FAA009153C1 /* extension_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054721E5E8FAA009153C1 /* extension_set.cc */; };
+		019054831E5E8FAA009153C1 /* extension_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054721E5E8FAA009153C1 /* extension_set.cc */; };
+		019054841E5E8FAA009153C1 /* generated_message_reflection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054741E5E8FAA009153C1 /* generated_message_reflection.cc */; };
+		019054851E5E8FAA009153C1 /* generated_message_reflection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054741E5E8FAA009153C1 /* generated_message_reflection.cc */; };
+		019054861E5E8FAA009153C1 /* generated_message_util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054761E5E8FAA009153C1 /* generated_message_util.cc */; };
+		019054871E5E8FAA009153C1 /* generated_message_util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054761E5E8FAA009153C1 /* generated_message_util.cc */; };
+		0190548A1E5E8FBB009153C1 /* gzip_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054881E5E8FBB009153C1 /* gzip_stream.cc */; };
+		0190548B1E5E8FBB009153C1 /* gzip_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054881E5E8FBB009153C1 /* gzip_stream.cc */; };
+		0190548F1E5E8FEC009153C1 /* importer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190548D1E5E8FEC009153C1 /* importer.cc */; };
+		019054901E5E8FEC009153C1 /* importer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190548D1E5E8FEC009153C1 /* importer.cc */; };
+		019054951E5E9008009153C1 /* message_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054911E5E9008009153C1 /* message_lite.cc */; };
+		019054961E5E9008009153C1 /* message_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054911E5E9008009153C1 /* message_lite.cc */; };
+		019054971E5E9008009153C1 /* message.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054931E5E9008009153C1 /* message.cc */; };
+		019054981E5E9008009153C1 /* message.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054931E5E9008009153C1 /* message.cc */; };
+		0190549D1E5E9032009153C1 /* once.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190549A1E5E9032009153C1 /* once.cc */; };
+		0190549E1E5E9032009153C1 /* once.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190549A1E5E9032009153C1 /* once.cc */; };
+		019054A11E5E905A009153C1 /* printer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190549F1E5E905A009153C1 /* printer.cc */; };
+		019054A21E5E905A009153C1 /* printer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190549F1E5E905A009153C1 /* printer.cc */; };
+		019054A61E5E9064009153C1 /* parser.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019054A31E5E9064009153C1 /* parser.cc */; };
+		019055681E5E9079009153C1 /* reflection_ops.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055021E5E9079009153C1 /* reflection_ops.cc */; };
+		019055691E5E9079009153C1 /* reflection_ops.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055021E5E9079009153C1 /* reflection_ops.cc */; };
+		0190556A1E5E9079009153C1 /* repeated_field.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055041E5E9079009153C1 /* repeated_field.cc */; };
+		0190556B1E5E9079009153C1 /* repeated_field.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055041E5E9079009153C1 /* repeated_field.cc */; };
+		0190556E1E5E9087009153C1 /* service.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190556C1E5E9087009153C1 /* service.cc */; };
+		0190556F1E5E9087009153C1 /* service.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190556C1E5E9087009153C1 /* service.cc */; };
+		019055791E5E9141009153C1 /* stringprintf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055711E5E9141009153C1 /* stringprintf.cc */; };
+		0190557A1E5E9141009153C1 /* stringprintf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055711E5E9141009153C1 /* stringprintf.cc */; };
+		0190557B1E5E9141009153C1 /* structurally_valid.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055731E5E9141009153C1 /* structurally_valid.cc */; };
+		0190557C1E5E9141009153C1 /* structurally_valid.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055731E5E9141009153C1 /* structurally_valid.cc */; };
+		0190557D1E5E9141009153C1 /* strutil.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055741E5E9141009153C1 /* strutil.cc */; };
+		0190557E1E5E9141009153C1 /* strutil.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055741E5E9141009153C1 /* strutil.cc */; };
+		0190557F1E5E9141009153C1 /* substitute.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055761E5E9141009153C1 /* substitute.cc */; };
+		019055801E5E9141009153C1 /* substitute.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055761E5E9141009153C1 /* substitute.cc */; };
+		019055831E5E9158009153C1 /* text_format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055811E5E9158009153C1 /* text_format.cc */; };
+		019055841E5E9158009153C1 /* text_format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055811E5E9158009153C1 /* text_format.cc */; };
+		019055871E5E9168009153C1 /* tokenizer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055851E5E9168009153C1 /* tokenizer.cc */; };
+		019055881E5E9168009153C1 /* tokenizer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055851E5E9168009153C1 /* tokenizer.cc */; };
+		019055931E5E9196009153C1 /* wire_format_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190558D1E5E9196009153C1 /* wire_format_lite.cc */; };
+		019055941E5E9196009153C1 /* wire_format_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190558D1E5E9196009153C1 /* wire_format_lite.cc */; };
+		019055951E5E9196009153C1 /* wire_format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190558F1E5E9196009153C1 /* wire_format.cc */; };
+		019055961E5E9196009153C1 /* wire_format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190558F1E5E9196009153C1 /* wire_format.cc */; };
+		0190559D1E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055971E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc */; };
+		0190559E1E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055971E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc */; };
+		0190559F1E5E91BC009153C1 /* zero_copy_stream_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055991E5E91BC009153C1 /* zero_copy_stream_impl.cc */; };
+		019055A01E5E91BC009153C1 /* zero_copy_stream_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055991E5E91BC009153C1 /* zero_copy_stream_impl.cc */; };
+		019055A11E5E91BC009153C1 /* zero_copy_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */; };
+		019055A21E5E91BC009153C1 /* zero_copy_stream.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */; };
+		019055B71E5E93D5009153C1 /* grossini.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AB1E5E93D5009153C1 /* grossini.png */; };
+		019055B81E5E93D5009153C1 /* grossini.png in Resources */ = {isa = PBXBuildFile; fileRef = 019055AB1E5E93D5009153C1 /* grossini.png */; };
+		019055CC1E5EAA0A009153C1 /* common.cc in Sources */ = {isa = PBXBuildFile; fileRef = 019055C91E5EAA0A009153C1 /* common.cc */; };
+		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
+		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
+		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
+		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
+		46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
+		46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
+		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
+		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
+		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
+		503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FF17EB989F00D1A890 /* RootViewController.mm */; };
+		503AE10517EB98FF00D1A890 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 503AE10317EB98FF00D1A890 /* main.cpp */; };
+		503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503AE11A17EB9C5A00D1A890 /* IOKit.framework */; };
+		5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		5087E76717EB910900C73F5D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
+		5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
+		5087E76A17EB910900C73F5D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
+		5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77217EB970100C73F5D /* Default-568h@2x.png */; };
+		5087E77E17EB970100C73F5D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77317EB970100C73F5D /* Default.png */; };
+		5087E77F17EB970100C73F5D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77417EB970100C73F5D /* Default@2x.png */; };
+		5087E78017EB970100C73F5D /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77517EB970100C73F5D /* Icon-114.png */; };
+		5087E78117EB970100C73F5D /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77617EB970100C73F5D /* Icon-120.png */; };
+		5087E78217EB970100C73F5D /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77717EB970100C73F5D /* Icon-144.png */; };
+		5087E78317EB970100C73F5D /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77817EB970100C73F5D /* Icon-152.png */; };
+		5087E78417EB970100C73F5D /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77917EB970100C73F5D /* Icon-57.png */; };
+		5087E78517EB970100C73F5D /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77A17EB970100C73F5D /* Icon-72.png */; };
+		5087E78617EB970100C73F5D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 5087E77B17EB970100C73F5D /* Icon-76.png */; };
+		5087E78917EB974C00C73F5D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5087E78817EB974C00C73F5D /* AppKit.framework */; };
+		5087E78B17EB975400C73F5D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5087E78A17EB975400C73F5D /* OpenGL.framework */; };
+		50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629217ECD46A001EB2F8 /* Icon-40.png */; };
+		50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629317ECD46A001EB2F8 /* Icon-58.png */; };
+		50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629417ECD46A001EB2F8 /* Icon-80.png */; };
+		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
+		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
+		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6219F0C34300D177D7 /* Default-667h@2x.png */; };
+		521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6319F0C34300D177D7 /* Default-736h@3x.png */; };
+		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
+		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
+		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
+		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
+		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
+		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
+		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
+		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0190545E1E5E8EF2009153C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 507B40FD1C31BDD30067B53E;
+			remoteInfo = "libcocos2d tvOS";
+		};
+		1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
+			remoteInfo = "cocos2dx Mac";
+		};
+		1AC6FB06180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A07A4D641783777C0073F6A7;
+			remoteInfo = "cocos2dx iOS";
+		};
+		1AC6FB15180E9959004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1551A33E158F2AB200E66CFE;
+			remoteInfo = "cocos2dx Mac";
+		};
+		1AC6FB24180E99E1004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A07A4C241783777C0073F6A7;
+			remoteInfo = "cocos2dx iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		010CE83D1E5EB14C00C50289 /* parser.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/compiler/parser.cc; sourceTree = "<group>"; };
+		010CE83E1E5EB14C00C50289 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parser.h; path = ../../../Dependencies/protobuf/src/google/protobuf/compiler/parser.h; sourceTree = "<group>"; };
+		010CE8411E5EB1D700C50289 /* unknown_field_set.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unknown_field_set.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/unknown_field_set.cc; sourceTree = "<group>"; };
+		010CE8441E5EB24A00C50289 /* common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/common.cc; sourceTree = "<group>"; };
+		010CE8451E5EB24A00C50289 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/common.h; sourceTree = "<group>"; };
+		010CE8491E5EBC7300C50289 /* NFCClassModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCClassModule.cpp; path = ../../../NFComm/NFConfigPlugin/NFCClassModule.cpp; sourceTree = "<group>"; };
+		010CE84A1E5EBC7300C50289 /* NFCClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCClassModule.h; path = ../../../NFComm/NFConfigPlugin/NFCClassModule.h; sourceTree = "<group>"; };
+		010CE84B1E5EBC7300C50289 /* NFCElementModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCElementModule.cpp; path = ../../../NFComm/NFConfigPlugin/NFCElementModule.cpp; sourceTree = "<group>"; };
+		010CE84C1E5EBC7300C50289 /* NFCElementModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCElementModule.h; path = ../../../NFComm/NFConfigPlugin/NFCElementModule.h; sourceTree = "<group>"; };
+		010CE8531E5EBCD700C50289 /* NFBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFBox.hpp; path = ../../../NFComm/NFCore/NFBox.hpp; sourceTree = "<group>"; };
+		010CE8541E5EBCD700C50289 /* NFCComponentManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCComponentManager.cpp; path = ../../../NFComm/NFCore/NFCComponentManager.cpp; sourceTree = "<group>"; };
+		010CE8551E5EBCD700C50289 /* NFCComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCComponentManager.h; path = ../../../NFComm/NFCore/NFCComponentManager.h; sourceTree = "<group>"; };
+		010CE8561E5EBCD700C50289 /* NFCConsistentHash.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFCConsistentHash.hpp; path = ../../../NFComm/NFCore/NFCConsistentHash.hpp; sourceTree = "<group>"; };
+		010CE8571E5EBCD700C50289 /* NFCMemManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFCMemManager.hpp; path = ../../../NFComm/NFCore/NFCMemManager.hpp; sourceTree = "<group>"; };
+		010CE8581E5EBCD700C50289 /* NFCObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCObject.cpp; path = ../../../NFComm/NFCore/NFCObject.cpp; sourceTree = "<group>"; };
+		010CE8591E5EBCD700C50289 /* NFCObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCObject.h; path = ../../../NFComm/NFCore/NFCObject.h; sourceTree = "<group>"; };
+		010CE85A1E5EBCD700C50289 /* NFCProperty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCProperty.cpp; path = ../../../NFComm/NFCore/NFCProperty.cpp; sourceTree = "<group>"; };
+		010CE85B1E5EBCD700C50289 /* NFCProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCProperty.h; path = ../../../NFComm/NFCore/NFCProperty.h; sourceTree = "<group>"; };
+		010CE85C1E5EBCD700C50289 /* NFCPropertyManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCPropertyManager.cpp; path = ../../../NFComm/NFCore/NFCPropertyManager.cpp; sourceTree = "<group>"; };
+		010CE85D1E5EBCD700C50289 /* NFCPropertyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCPropertyManager.h; path = ../../../NFComm/NFCore/NFCPropertyManager.h; sourceTree = "<group>"; };
+		010CE85E1E5EBCD700C50289 /* NFCRecord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCRecord.cpp; path = ../../../NFComm/NFCore/NFCRecord.cpp; sourceTree = "<group>"; };
+		010CE85F1E5EBCD700C50289 /* NFCRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCRecord.h; path = ../../../NFComm/NFCore/NFCRecord.h; sourceTree = "<group>"; };
+		010CE8601E5EBCD700C50289 /* NFCRecordManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCRecordManager.cpp; path = ../../../NFComm/NFCore/NFCRecordManager.cpp; sourceTree = "<group>"; };
+		010CE8611E5EBCD700C50289 /* NFCRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCRecordManager.h; path = ../../../NFComm/NFCore/NFCRecordManager.h; sourceTree = "<group>"; };
+		010CE8621E5EBCD700C50289 /* NFDataList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFDataList.hpp; path = ../../../NFComm/NFCore/NFDataList.hpp; sourceTree = "<group>"; };
+		010CE8631E5EBCD700C50289 /* NFDateTime.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFDateTime.hpp; path = ../../../NFComm/NFCore/NFDateTime.hpp; sourceTree = "<group>"; };
+		010CE8641E5EBCD700C50289 /* NFException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFException.hpp; path = ../../../NFComm/NFCore/NFException.hpp; sourceTree = "<group>"; };
+		010CE8651E5EBCD700C50289 /* NFIComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIComponent.h; path = ../../../NFComm/NFCore/NFIComponent.h; sourceTree = "<group>"; };
+		010CE8661E5EBCD700C50289 /* NFIComponentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIComponentManager.h; path = ../../../NFComm/NFCore/NFIComponentManager.h; sourceTree = "<group>"; };
+		010CE8671E5EBCD700C50289 /* NFIObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIObject.h; path = ../../../NFComm/NFCore/NFIObject.h; sourceTree = "<group>"; };
+		010CE8681E5EBCD700C50289 /* NFIProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIProperty.h; path = ../../../NFComm/NFCore/NFIProperty.h; sourceTree = "<group>"; };
+		010CE8691E5EBCD700C50289 /* NFIPropertyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIPropertyManager.h; path = ../../../NFComm/NFCore/NFIPropertyManager.h; sourceTree = "<group>"; };
+		010CE86A1E5EBCD700C50289 /* NFIRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIRecord.h; path = ../../../NFComm/NFCore/NFIRecord.h; sourceTree = "<group>"; };
+		010CE86B1E5EBCD700C50289 /* NFIRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFIRecordManager.h; path = ../../../NFComm/NFCore/NFIRecordManager.h; sourceTree = "<group>"; };
+		010CE86C1E5EBCD700C50289 /* NFLine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFLine.hpp; path = ../../../NFComm/NFCore/NFLine.hpp; sourceTree = "<group>"; };
+		010CE86D1E5EBCD700C50289 /* NFList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFList.hpp; path = ../../../NFComm/NFCore/NFList.hpp; sourceTree = "<group>"; };
+		010CE86E1E5EBCD700C50289 /* NFMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFMap.hpp; path = ../../../NFComm/NFCore/NFMap.hpp; sourceTree = "<group>"; };
+		010CE86F1E5EBCD700C50289 /* NFMapEx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFMapEx.hpp; path = ../../../NFComm/NFCore/NFMapEx.hpp; sourceTree = "<group>"; };
+		010CE8701E5EBCD700C50289 /* NFMath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFMath.hpp; path = ../../../NFComm/NFCore/NFMath.hpp; sourceTree = "<group>"; };
+		010CE8711E5EBCD700C50289 /* NFMemoryCounter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFMemoryCounter.hpp; path = ../../../NFComm/NFCore/NFMemoryCounter.hpp; sourceTree = "<group>"; };
+		010CE8721E5EBCD700C50289 /* NFPlane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFPlane.hpp; path = ../../../NFComm/NFCore/NFPlane.hpp; sourceTree = "<group>"; };
+		010CE8731E5EBCD700C50289 /* NFQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFQueue.hpp; path = ../../../NFComm/NFCore/NFQueue.hpp; sourceTree = "<group>"; };
+		010CE8741E5EBCD700C50289 /* NFRay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFRay.hpp; path = ../../../NFComm/NFCore/NFRay.hpp; sourceTree = "<group>"; };
+		010CE8751E5EBCD700C50289 /* NFSingleton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFSingleton.hpp; path = ../../../NFComm/NFCore/NFSingleton.hpp; sourceTree = "<group>"; };
+		010CE8761E5EBCD700C50289 /* NFSpaceNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFSpaceNode.hpp; path = ../../../NFComm/NFCore/NFSpaceNode.hpp; sourceTree = "<group>"; };
+		010CE8771E5EBCD700C50289 /* NFSphere.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFSphere.hpp; path = ../../../NFComm/NFCore/NFSphere.hpp; sourceTree = "<group>"; };
+		010CE8781E5EBCD700C50289 /* NFVector2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFVector2.hpp; path = ../../../NFComm/NFCore/NFVector2.hpp; sourceTree = "<group>"; };
+		010CE8791E5EBCD700C50289 /* NFVector3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFVector3.hpp; path = ../../../NFComm/NFCore/NFVector3.hpp; sourceTree = "<group>"; };
+		010CE8871E5EBD4200C50289 /* NFCEventModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCEventModule.cpp; path = ../../../NFComm/NFKernelPlugin/NFCEventModule.cpp; sourceTree = "<group>"; };
+		010CE8881E5EBD4200C50289 /* NFCEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCEventModule.h; path = ../../../NFComm/NFKernelPlugin/NFCEventModule.h; sourceTree = "<group>"; };
+		010CE8891E5EBD4200C50289 /* NFCKernelModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCKernelModule.cpp; path = ../../../NFComm/NFKernelPlugin/NFCKernelModule.cpp; sourceTree = "<group>"; };
+		010CE88A1E5EBD4200C50289 /* NFCKernelModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCKernelModule.h; path = ../../../NFComm/NFKernelPlugin/NFCKernelModule.h; sourceTree = "<group>"; };
+		010CE88B1E5EBD4200C50289 /* NFCSceneAOIModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCSceneAOIModule.cpp; path = ../../../NFComm/NFKernelPlugin/NFCSceneAOIModule.cpp; sourceTree = "<group>"; };
+		010CE88C1E5EBD4200C50289 /* NFCSceneAOIModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCSceneAOIModule.h; path = ../../../NFComm/NFKernelPlugin/NFCSceneAOIModule.h; sourceTree = "<group>"; };
+		010CE88D1E5EBD4200C50289 /* NFCScheduleModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCScheduleModule.cpp; path = ../../../NFComm/NFKernelPlugin/NFCScheduleModule.cpp; sourceTree = "<group>"; };
+		010CE88E1E5EBD4200C50289 /* NFCScheduleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCScheduleModule.h; path = ../../../NFComm/NFKernelPlugin/NFCScheduleModule.h; sourceTree = "<group>"; };
+		010CE8981E5EBD5F00C50289 /* NFCLogModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCLogModule.cpp; path = ../../../NFComm/NFLogPlugin/NFCLogModule.cpp; sourceTree = "<group>"; };
+		010CE8991E5EBD5F00C50289 /* NFCLogModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCLogModule.h; path = ../../../NFComm/NFLogPlugin/NFCLogModule.h; sourceTree = "<group>"; };
+		010CE89D1E5EBD8900C50289 /* NFCDynLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCDynLib.cpp; path = ../../../NFComm/NFPluginLoader/NFCDynLib.cpp; sourceTree = "<group>"; };
+		010CE89E1E5EBD8900C50289 /* NFCDynLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCDynLib.h; path = ../../../NFComm/NFPluginLoader/NFCDynLib.h; sourceTree = "<group>"; };
+		010CE89F1E5EBD8900C50289 /* NFCPluginManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCPluginManager.cpp; path = ../../../NFComm/NFPluginLoader/NFCPluginManager.cpp; sourceTree = "<group>"; };
+		010CE8A01E5EBD8900C50289 /* NFCPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCPluginManager.h; path = ../../../NFComm/NFPluginLoader/NFCPluginManager.h; sourceTree = "<group>"; };
+		010CE8A61E5EBDE100C50289 /* NFDefine.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFDefine.pb.cc; path = ../../../NFComm/NFMessageDefine/NFDefine.pb.cc; sourceTree = "<group>"; };
+		010CE8A71E5EBDE100C50289 /* NFDefine.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFDefine.pb.h; path = ../../../NFComm/NFMessageDefine/NFDefine.pb.h; sourceTree = "<group>"; };
+		010CE8A81E5EBDE100C50289 /* NFFleetingDefine.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFFleetingDefine.pb.cc; path = ../../../NFComm/NFMessageDefine/NFFleetingDefine.pb.cc; sourceTree = "<group>"; };
+		010CE8A91E5EBDE100C50289 /* NFFleetingDefine.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFFleetingDefine.pb.h; path = ../../../NFComm/NFMessageDefine/NFFleetingDefine.pb.h; sourceTree = "<group>"; };
+		010CE8AA1E5EBDE100C50289 /* NFLimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFLimit.h; path = ../../../NFComm/NFMessageDefine/NFLimit.h; sourceTree = "<group>"; };
+		010CE8AB1E5EBDE100C50289 /* NFMsgBase.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgBase.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgBase.pb.cc; sourceTree = "<group>"; };
+		010CE8AC1E5EBDE100C50289 /* NFMsgBase.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgBase.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgBase.pb.h; sourceTree = "<group>"; };
+		010CE8AD1E5EBDE100C50289 /* NFMsgBaseEx.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgBaseEx.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgBaseEx.pb.cc; sourceTree = "<group>"; };
+		010CE8AE1E5EBDE100C50289 /* NFMsgBaseEx.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgBaseEx.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgBaseEx.pb.h; sourceTree = "<group>"; };
+		010CE8AF1E5EBDE100C50289 /* NFMsgDefine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgDefine.cpp; path = ../../../NFComm/NFMessageDefine/NFMsgDefine.cpp; sourceTree = "<group>"; };
+		010CE8B01E5EBDE100C50289 /* NFMsgDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgDefine.h; path = ../../../NFComm/NFMessageDefine/NFMsgDefine.h; sourceTree = "<group>"; };
+		010CE8B11E5EBDE100C50289 /* NFMsgMysql.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgMysql.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgMysql.pb.cc; sourceTree = "<group>"; };
+		010CE8B21E5EBDE100C50289 /* NFMsgMysql.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgMysql.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgMysql.pb.h; sourceTree = "<group>"; };
+		010CE8B31E5EBDE100C50289 /* NFMsgPreGame.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgPreGame.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgPreGame.pb.cc; sourceTree = "<group>"; };
+		010CE8B41E5EBDE100C50289 /* NFMsgPreGame.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgPreGame.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgPreGame.pb.h; sourceTree = "<group>"; };
+		010CE8B51E5EBDE100C50289 /* NFMsgShare.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgShare.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgShare.pb.cc; sourceTree = "<group>"; };
+		010CE8B61E5EBDE100C50289 /* NFMsgShare.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgShare.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgShare.pb.h; sourceTree = "<group>"; };
+		010CE8B71E5EBDE100C50289 /* NFMsgURl.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFMsgURl.pb.cc; path = ../../../NFComm/NFMessageDefine/NFMsgURl.pb.cc; sourceTree = "<group>"; };
+		010CE8B81E5EBDE100C50289 /* NFMsgURl.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFMsgURl.pb.h; path = ../../../NFComm/NFMessageDefine/NFMsgURl.pb.h; sourceTree = "<group>"; };
+		010CE8B91E5EBDE100C50289 /* NFProtocolDefine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NFProtocolDefine.hpp; path = ../../../NFComm/NFMessageDefine/NFProtocolDefine.hpp; sourceTree = "<group>"; };
+		010CE8BA1E5EBDE100C50289 /* NFSLGDefine.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFSLGDefine.pb.cc; path = ../../../NFComm/NFMessageDefine/NFSLGDefine.pb.cc; sourceTree = "<group>"; };
+		010CE8BB1E5EBDE100C50289 /* NFSLGDefine.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFSLGDefine.pb.h; path = ../../../NFComm/NFMessageDefine/NFSLGDefine.pb.h; sourceTree = "<group>"; };
+		010CE8D11E5EBE3500C50289 /* NFCNet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCNet.cpp; path = ../../../NFComm/NFNetPlugin/NFCNet.cpp; sourceTree = "<group>"; };
+		010CE8D21E5EBE3500C50289 /* NFCNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCNet.h; path = ../../../NFComm/NFNetPlugin/NFCNet.h; sourceTree = "<group>"; };
+		010CE8D31E5EBE3500C50289 /* NFCNetClientModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCNetClientModule.cpp; path = ../../../NFComm/NFNetPlugin/NFCNetClientModule.cpp; sourceTree = "<group>"; };
+		010CE8D41E5EBE3500C50289 /* NFCNetClientModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCNetClientModule.h; path = ../../../NFComm/NFNetPlugin/NFCNetClientModule.h; sourceTree = "<group>"; };
+		010CE8D51E5EBE3500C50289 /* NFCNetModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCNetModule.cpp; path = ../../../NFComm/NFNetPlugin/NFCNetModule.cpp; sourceTree = "<group>"; };
+		010CE8D61E5EBE3500C50289 /* NFCNetModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCNetModule.h; path = ../../../NFComm/NFNetPlugin/NFCNetModule.h; sourceTree = "<group>"; };
+		010CE8D71E5EBE3500C50289 /* NFINet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFINet.h; path = ../../../NFComm/NFNetPlugin/NFINet.h; sourceTree = "<group>"; };
+		010CE8E11E5EBED600C50289 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = buffer.c; path = ../../../Dependencies/libevent/buffer.c; sourceTree = "<group>"; };
+		010CE8E21E5EBED600C50289 /* bufferevent_async.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent_async.c; path = ../../../Dependencies/libevent/bufferevent_async.c; sourceTree = "<group>"; };
+		010CE8E31E5EBED600C50289 /* bufferevent_filter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent_filter.c; path = ../../../Dependencies/libevent/bufferevent_filter.c; sourceTree = "<group>"; };
+		010CE8E41E5EBED600C50289 /* bufferevent_pair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent_pair.c; path = ../../../Dependencies/libevent/bufferevent_pair.c; sourceTree = "<group>"; };
+		010CE8E51E5EBED600C50289 /* bufferevent_ratelim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent_ratelim.c; path = ../../../Dependencies/libevent/bufferevent_ratelim.c; sourceTree = "<group>"; };
+		010CE8E61E5EBED600C50289 /* bufferevent_sock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent_sock.c; path = ../../../Dependencies/libevent/bufferevent_sock.c; sourceTree = "<group>"; };
+		010CE8E71E5EBED600C50289 /* bufferevent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bufferevent.c; path = ../../../Dependencies/libevent/bufferevent.c; sourceTree = "<group>"; };
+		010CE8E81E5EBED600C50289 /* event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = event.c; path = ../../../Dependencies/libevent/event.c; sourceTree = "<group>"; };
+		010CE8E91E5EBED600C50289 /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = event.h; path = ../../../Dependencies/libevent/event.h; sourceTree = "<group>"; };
+		010CE8EA1E5EBED600C50289 /* evmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evmap.c; path = ../../../Dependencies/libevent/evmap.c; sourceTree = "<group>"; };
+		010CE8EB1E5EBED600C50289 /* evthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evthread.c; path = ../../../Dependencies/libevent/evthread.c; sourceTree = "<group>"; };
+		010CE8EC1E5EBED600C50289 /* evutil_rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evutil_rand.c; path = ../../../Dependencies/libevent/evutil_rand.c; sourceTree = "<group>"; };
+		010CE8ED1E5EBED600C50289 /* evutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evutil.c; path = ../../../Dependencies/libevent/evutil.c; sourceTree = "<group>"; };
+		010CE8EE1E5EBED600C50289 /* listener.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = listener.c; path = ../../../Dependencies/libevent/listener.c; sourceTree = "<group>"; };
+		010CE8EF1E5EBED600C50289 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../../../Dependencies/libevent/log.c; sourceTree = "<group>"; };
+		010CE8F01E5EBED600C50289 /* signal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = signal.c; path = ../../../Dependencies/libevent/signal.c; sourceTree = "<group>"; };
+		010CE8F11E5EBED600C50289 /* strlcpy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = strlcpy.c; path = ../../../Dependencies/libevent/strlcpy.c; sourceTree = "<group>"; };
+		010CE9121E5EBF0800C50289 /* evdns.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evdns.c; path = ../../../Dependencies/libevent/evdns.c; sourceTree = "<group>"; };
+		010CE9131E5EBF0800C50289 /* event_tagging.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = event_tagging.c; path = ../../../Dependencies/libevent/event_tagging.c; sourceTree = "<group>"; };
+		010CE9141E5EBF0800C50289 /* evrpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = evrpc.c; path = ../../../Dependencies/libevent/evrpc.c; sourceTree = "<group>"; };
+		010CE9151E5EBF0800C50289 /* http.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = http.c; path = ../../../Dependencies/libevent/http.c; sourceTree = "<group>"; };
+		010CE91F1E5FE4E000C50289 /* NFCChatLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCChatLogic.cpp; sourceTree = "<group>"; };
+		010CE9201E5FE4E000C50289 /* NFCChatLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCChatLogic.h; sourceTree = "<group>"; };
+		010CE9211E5FE4E000C50289 /* NFCLogicBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCLogicBase.cpp; sourceTree = "<group>"; };
+		010CE9221E5FE4E000C50289 /* NFCLogicBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCLogicBase.h; sourceTree = "<group>"; };
+		010CE9231E5FE4E000C50289 /* NFCLogicPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCLogicPlugin.cpp; sourceTree = "<group>"; };
+		010CE9241E5FE4E000C50289 /* NFCLogicPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCLogicPlugin.h; sourceTree = "<group>"; };
+		010CE9251E5FE4E000C50289 /* NFCLoginLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCLoginLogic.cpp; sourceTree = "<group>"; };
+		010CE9261E5FE4E000C50289 /* NFCLoginLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCLoginLogic.h; sourceTree = "<group>"; };
+		010CE9271E5FE4E000C50289 /* NFCNetLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCNetLogic.cpp; sourceTree = "<group>"; };
+		010CE9281E5FE4E000C50289 /* NFCNetLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCNetLogic.h; sourceTree = "<group>"; };
+		010CE9291E5FE4E000C50289 /* NFCPlayerLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCPlayerLogic.cpp; sourceTree = "<group>"; };
+		010CE92A1E5FE4E000C50289 /* NFCPlayerLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCPlayerLogic.h; sourceTree = "<group>"; };
+		010CE92B1E5FE4E000C50289 /* NFCPropertyLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCPropertyLogic.cpp; sourceTree = "<group>"; };
+		010CE92C1E5FE4E000C50289 /* NFCPropertyLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCPropertyLogic.h; sourceTree = "<group>"; };
+		010CE92D1E5FE4E000C50289 /* NFCRecordLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCRecordLogic.cpp; sourceTree = "<group>"; };
+		010CE92E1E5FE4E000C50289 /* NFCRecordLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCRecordLogic.h; sourceTree = "<group>"; };
+		010CE92F1E5FE4E000C50289 /* NFCClientPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCClientPlugin.cpp; path = NF/NFCClientPlugin.cpp; sourceTree = "<group>"; };
+		010CE9301E5FE4E000C50289 /* NFCClientPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCClientPlugin.h; path = NF/NFCClientPlugin.h; sourceTree = "<group>"; };
+		010CE9311E5FE4E000C50289 /* NFCRoot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFCRoot.cpp; path = NF/NFCRoot.cpp; sourceTree = "<group>"; };
+		010CE9321E5FE4E000C50289 /* NFCRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NFCRoot.h; path = NF/NFCRoot.h; sourceTree = "<group>"; };
+		010CE93B1E5FE4E000C50289 /* NFCGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCGameScene.cpp; sourceTree = "<group>"; };
+		010CE93C1E5FE4E000C50289 /* NFCGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCGameScene.h; sourceTree = "<group>"; };
+		010CE93D1E5FE4E000C50289 /* NFCSceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCSceneManager.cpp; sourceTree = "<group>"; };
+		010CE93E1E5FE4E000C50289 /* NFCSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCSceneManager.h; sourceTree = "<group>"; };
+		010CE93F1E5FE4E000C50289 /* NFCScenePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCScenePlugin.cpp; sourceTree = "<group>"; };
+		010CE9401E5FE4E000C50289 /* NFCScenePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCScenePlugin.h; sourceTree = "<group>"; };
+		010CE9421E5FE4E000C50289 /* NFCUIChatPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUIChatPanel.cpp; sourceTree = "<group>"; };
+		010CE9431E5FE4E000C50289 /* NFCUIChatPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUIChatPanel.h; sourceTree = "<group>"; };
+		010CE9441E5FE4E000C50289 /* NFCUIDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUIDialog.cpp; sourceTree = "<group>"; };
+		010CE9451E5FE4E000C50289 /* NFCUIDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUIDialog.h; sourceTree = "<group>"; };
+		010CE9461E5FE4E000C50289 /* NFCUILogin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUILogin.cpp; sourceTree = "<group>"; };
+		010CE9471E5FE4E000C50289 /* NFCUILogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUILogin.h; sourceTree = "<group>"; };
+		010CE9481E5FE4E000C50289 /* NFCUIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUIManager.cpp; sourceTree = "<group>"; };
+		010CE9491E5FE4E000C50289 /* NFCUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUIManager.h; sourceTree = "<group>"; };
+		010CE94A1E5FE4E000C50289 /* NFCUIPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUIPlugin.cpp; sourceTree = "<group>"; };
+		010CE94B1E5FE4E000C50289 /* NFCUIPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUIPlugin.h; sourceTree = "<group>"; };
+		010CE94C1E5FE4E000C50289 /* NFCUISelectRole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUISelectRole.cpp; sourceTree = "<group>"; };
+		010CE94D1E5FE4E000C50289 /* NFCUISelectRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUISelectRole.h; sourceTree = "<group>"; };
+		010CE94E1E5FE4E000C50289 /* NFCUISelectServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NFCUISelectServer.cpp; sourceTree = "<group>"; };
+		010CE94F1E5FE4E000C50289 /* NFCUISelectServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCUISelectServer.h; sourceTree = "<group>"; };
+		010CE97E1E5FE83800C50289 /* select.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = select.c; path = ../../../Dependencies/libevent/select.c; sourceTree = "<group>"; };
+		010CE9811E5FE86B00C50289 /* poll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = poll.c; path = ../../../Dependencies/libevent/poll.c; sourceTree = "<group>"; };
+		010CE9841E5FE89A00C50289 /* kqueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kqueue.c; path = ../../../Dependencies/libevent/kqueue.c; sourceTree = "<group>"; };
+		010CEABB1E601E3F00C50289 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		010CEABC1E601E3F00C50289 /* Scene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scene; sourceTree = "<group>"; };
+		010CEAC11E601E4C00C50289 /* NFDataCfg */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NFDataCfg; path = ../../../_Out/NFDataCfg; sourceTree = "<group>"; };
+		019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = atomicops_internals_x86_gcc.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.cc; sourceTree = "<group>"; };
+		019054591E5E8EF2009153C1 /* atomicops_internals_x86_gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = atomicops_internals_x86_gcc.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops_internals_x86_gcc.h; sourceTree = "<group>"; };
+		0190545A1E5E8EF2009153C1 /* atomicops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = atomicops.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/atomicops.h; sourceTree = "<group>"; };
+		019054601E5E8F12009153C1 /* coded_stream_inl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coded_stream_inl.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/coded_stream_inl.h; sourceTree = "<group>"; };
+		019054611E5E8F12009153C1 /* coded_stream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = coded_stream.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/coded_stream.cc; sourceTree = "<group>"; };
+		019054621E5E8F12009153C1 /* coded_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coded_stream.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/coded_stream.h; sourceTree = "<group>"; };
+		019054691E5E8FAA009153C1 /* descriptor_database.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = descriptor_database.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor_database.cc; sourceTree = "<group>"; };
+		0190546A1E5E8FAA009153C1 /* descriptor_database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptor_database.h; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor_database.h; sourceTree = "<group>"; };
+		0190546B1E5E8FAA009153C1 /* descriptor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = descriptor.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor.cc; sourceTree = "<group>"; };
+		0190546C1E5E8FAA009153C1 /* descriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptor.h; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor.h; sourceTree = "<group>"; };
+		0190546D1E5E8FAA009153C1 /* descriptor.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = descriptor.pb.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor.pb.cc; sourceTree = "<group>"; };
+		0190546E1E5E8FAA009153C1 /* descriptor.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptor.pb.h; path = ../../../Dependencies/protobuf/src/google/protobuf/descriptor.pb.h; sourceTree = "<group>"; };
+		0190546F1E5E8FAA009153C1 /* dynamic_message.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dynamic_message.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/dynamic_message.cc; sourceTree = "<group>"; };
+		019054701E5E8FAA009153C1 /* dynamic_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dynamic_message.h; path = ../../../Dependencies/protobuf/src/google/protobuf/dynamic_message.h; sourceTree = "<group>"; };
+		019054711E5E8FAA009153C1 /* extension_set_heavy.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = extension_set_heavy.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/extension_set_heavy.cc; sourceTree = "<group>"; };
+		019054721E5E8FAA009153C1 /* extension_set.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = extension_set.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/extension_set.cc; sourceTree = "<group>"; };
+		019054731E5E8FAA009153C1 /* extension_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extension_set.h; path = ../../../Dependencies/protobuf/src/google/protobuf/extension_set.h; sourceTree = "<group>"; };
+		019054741E5E8FAA009153C1 /* generated_message_reflection.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generated_message_reflection.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/generated_message_reflection.cc; sourceTree = "<group>"; };
+		019054751E5E8FAA009153C1 /* generated_message_reflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generated_message_reflection.h; path = ../../../Dependencies/protobuf/src/google/protobuf/generated_message_reflection.h; sourceTree = "<group>"; };
+		019054761E5E8FAA009153C1 /* generated_message_util.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = generated_message_util.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/generated_message_util.cc; sourceTree = "<group>"; };
+		019054771E5E8FAA009153C1 /* generated_message_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = generated_message_util.h; path = ../../../Dependencies/protobuf/src/google/protobuf/generated_message_util.h; sourceTree = "<group>"; };
+		019054881E5E8FBB009153C1 /* gzip_stream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gzip_stream.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/gzip_stream.cc; sourceTree = "<group>"; };
+		019054891E5E8FBB009153C1 /* gzip_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gzip_stream.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/gzip_stream.h; sourceTree = "<group>"; };
+		0190548C1E5E8FCF009153C1 /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hash.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/hash.h; sourceTree = "<group>"; };
+		0190548D1E5E8FEC009153C1 /* importer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = importer.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/compiler/importer.cc; sourceTree = "<group>"; };
+		0190548E1E5E8FEC009153C1 /* importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = importer.h; path = ../../../Dependencies/protobuf/src/google/protobuf/compiler/importer.h; sourceTree = "<group>"; };
+		019054911E5E9008009153C1 /* message_lite.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message_lite.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/message_lite.cc; sourceTree = "<group>"; };
+		019054921E5E9008009153C1 /* message_lite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message_lite.h; path = ../../../Dependencies/protobuf/src/google/protobuf/message_lite.h; sourceTree = "<group>"; };
+		019054931E5E9008009153C1 /* message.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/message.cc; sourceTree = "<group>"; };
+		019054941E5E9008009153C1 /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message.h; path = ../../../Dependencies/protobuf/src/google/protobuf/message.h; sourceTree = "<group>"; };
+		019054991E5E9032009153C1 /* map-util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "map-util.h"; path = "../../../Dependencies/protobuf/src/google/protobuf/stubs/map-util.h"; sourceTree = "<group>"; };
+		0190549A1E5E9032009153C1 /* once.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/once.cc; sourceTree = "<group>"; };
+		0190549B1E5E9032009153C1 /* once.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = once.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/once.h; sourceTree = "<group>"; };
+		0190549C1E5E9032009153C1 /* platform_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_macros.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/platform_macros.h; sourceTree = "<group>"; };
+		0190549F1E5E905A009153C1 /* printer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = printer.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/printer.cc; sourceTree = "<group>"; };
+		019054A01E5E905A009153C1 /* printer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = printer.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/printer.h; sourceTree = "<group>"; };
+		019054A31E5E9064009153C1 /* parser.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/compiler/parser.cc; sourceTree = "<group>"; };
+		019055021E5E9079009153C1 /* reflection_ops.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reflection_ops.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/reflection_ops.cc; sourceTree = "<group>"; };
+		019055031E5E9079009153C1 /* reflection_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reflection_ops.h; path = ../../../Dependencies/protobuf/src/google/protobuf/reflection_ops.h; sourceTree = "<group>"; };
+		019055041E5E9079009153C1 /* repeated_field.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = repeated_field.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/repeated_field.cc; sourceTree = "<group>"; };
+		019055051E5E9079009153C1 /* repeated_field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = repeated_field.h; path = ../../../Dependencies/protobuf/src/google/protobuf/repeated_field.h; sourceTree = "<group>"; };
+		0190556C1E5E9087009153C1 /* service.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = service.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/service.cc; sourceTree = "<group>"; };
+		0190556D1E5E9087009153C1 /* service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = service.h; path = ../../../Dependencies/protobuf/src/google/protobuf/service.h; sourceTree = "<group>"; };
+		019055701E5E90DD009153C1 /* stl_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stl_util.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/stl_util.h; sourceTree = "<group>"; };
+		019055711E5E9141009153C1 /* stringprintf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stringprintf.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/stringprintf.cc; sourceTree = "<group>"; };
+		019055721E5E9141009153C1 /* stringprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringprintf.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/stringprintf.h; sourceTree = "<group>"; };
+		019055731E5E9141009153C1 /* structurally_valid.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = structurally_valid.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/structurally_valid.cc; sourceTree = "<group>"; };
+		019055741E5E9141009153C1 /* strutil.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = strutil.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/strutil.cc; sourceTree = "<group>"; };
+		019055751E5E9141009153C1 /* strutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strutil.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/strutil.h; sourceTree = "<group>"; };
+		019055761E5E9141009153C1 /* substitute.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = substitute.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/substitute.cc; sourceTree = "<group>"; };
+		019055771E5E9141009153C1 /* substitute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = substitute.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/substitute.h; sourceTree = "<group>"; };
+		019055781E5E9141009153C1 /* template_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = template_util.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/template_util.h; sourceTree = "<group>"; };
+		019055811E5E9158009153C1 /* text_format.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = text_format.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/text_format.cc; sourceTree = "<group>"; };
+		019055821E5E9158009153C1 /* text_format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text_format.h; path = ../../../Dependencies/protobuf/src/google/protobuf/text_format.h; sourceTree = "<group>"; };
+		019055851E5E9168009153C1 /* tokenizer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tokenizer.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/tokenizer.cc; sourceTree = "<group>"; };
+		019055861E5E9168009153C1 /* tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tokenizer.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/tokenizer.h; sourceTree = "<group>"; };
+		019055891E5E917A009153C1 /* type_traits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = type_traits.h; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/type_traits.h; sourceTree = "<group>"; };
+		0190558B1E5E9196009153C1 /* unknown_field_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unknown_field_set.h; path = ../../../Dependencies/protobuf/src/google/protobuf/unknown_field_set.h; sourceTree = "<group>"; };
+		0190558C1E5E9196009153C1 /* wire_format_lite_inl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wire_format_lite_inl.h; path = ../../../Dependencies/protobuf/src/google/protobuf/wire_format_lite_inl.h; sourceTree = "<group>"; };
+		0190558D1E5E9196009153C1 /* wire_format_lite.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wire_format_lite.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/wire_format_lite.cc; sourceTree = "<group>"; };
+		0190558E1E5E9196009153C1 /* wire_format_lite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wire_format_lite.h; path = ../../../Dependencies/protobuf/src/google/protobuf/wire_format_lite.h; sourceTree = "<group>"; };
+		0190558F1E5E9196009153C1 /* wire_format.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wire_format.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/wire_format.cc; sourceTree = "<group>"; };
+		019055901E5E9196009153C1 /* wire_format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wire_format.h; path = ../../../Dependencies/protobuf/src/google/protobuf/wire_format.h; sourceTree = "<group>"; };
+		019055971E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zero_copy_stream_impl_lite.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc; sourceTree = "<group>"; };
+		019055981E5E91BC009153C1 /* zero_copy_stream_impl_lite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zero_copy_stream_impl_lite.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.h; sourceTree = "<group>"; };
+		019055991E5E91BC009153C1 /* zero_copy_stream_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zero_copy_stream_impl.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc; sourceTree = "<group>"; };
+		0190559A1E5E91BC009153C1 /* zero_copy_stream_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zero_copy_stream_impl.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream_impl.h; sourceTree = "<group>"; };
+		0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zero_copy_stream.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream.cc; sourceTree = "<group>"; };
+		0190559C1E5E91BC009153C1 /* zero_copy_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zero_copy_stream.h; path = ../../../Dependencies/protobuf/src/google/protobuf/io/zero_copy_stream.h; sourceTree = "<group>"; };
+		019055AB1E5E93D5009153C1 /* grossini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grossini.png; sourceTree = "<group>"; };
+		019055C91E5EAA0A009153C1 /* common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = common.cc; path = ../../../Dependencies/protobuf/src/google/protobuf/stubs/common.cc; sourceTree = "<group>"; };
+		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
+		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* NFDemo-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NFDemo-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
+		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
+		46880B8719C43A87006E1F66 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
+		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
+		503AE0FB17EB989F00D1A890 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppController.mm; path = ios/AppController.mm; sourceTree = SOURCE_ROOT; };
+		503AE0FC17EB989F00D1A890 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ios/main.m; sourceTree = SOURCE_ROOT; };
+		503AE0FD17EB989F00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = ios/Prefix.pch; sourceTree = SOURCE_ROOT; };
+		503AE0FE17EB989F00D1A890 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ios/RootViewController.h; sourceTree = SOURCE_ROOT; };
+		503AE0FF17EB989F00D1A890 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RootViewController.mm; path = ios/RootViewController.mm; sourceTree = SOURCE_ROOT; };
+		503AE10317EB98FF00D1A890 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = mac/main.cpp; sourceTree = "<group>"; };
+		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
+		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
+		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		5087E76F17EB910900C73F5D /* NFDemo-desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NFDemo-desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5087E77217EB970100C73F5D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5087E77317EB970100C73F5D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5087E77417EB970100C73F5D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5087E77517EB970100C73F5D /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
+		5087E77617EB970100C73F5D /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
+		5087E77717EB970100C73F5D /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
+		5087E77817EB970100C73F5D /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
+		5087E77917EB970100C73F5D /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
+		5087E77A17EB970100C73F5D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		5087E77B17EB970100C73F5D /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		5087E77C17EB970100C73F5D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5087E78817EB974C00C73F5D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5087E78A17EB975400C73F5D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		50EF629217ECD46A001EB2F8 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
+		50EF629317ECD46A001EB2F8 /* Icon-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-58.png"; sourceTree = "<group>"; };
+		50EF629417ECD46A001EB2F8 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
+		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
+		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
+		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		521A8E6219F0C34300D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
+		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
+		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */,
+				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
+				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
+				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
+				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
+				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
+				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
+				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
+				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
+				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5087E75C17EB910900C73F5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */,
+				1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */,
+				5087E76717EB910900C73F5D /* libz.dylib in Frameworks */,
+				8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */,
+				503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */,
+				5087E78B17EB975400C73F5D /* OpenGL.framework in Frameworks */,
+				5087E78917EB974C00C73F5D /* AppKit.framework in Frameworks */,
+				5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */,
+				5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */,
+				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
+				5087E76A17EB910900C73F5D /* AVFoundation.framework in Frameworks */,
+				5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		010CE8481E5EBC4500C50289 /* NFConfig */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8491E5EBC7300C50289 /* NFCClassModule.cpp */,
+				010CE84A1E5EBC7300C50289 /* NFCClassModule.h */,
+				010CE84B1E5EBC7300C50289 /* NFCElementModule.cpp */,
+				010CE84C1E5EBC7300C50289 /* NFCElementModule.h */,
+			);
+			name = NFConfig;
+			sourceTree = "<group>";
+		};
+		010CE8511E5EBC7900C50289 /* NFCore */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8531E5EBCD700C50289 /* NFBox.hpp */,
+				010CE8541E5EBCD700C50289 /* NFCComponentManager.cpp */,
+				010CE8551E5EBCD700C50289 /* NFCComponentManager.h */,
+				010CE8561E5EBCD700C50289 /* NFCConsistentHash.hpp */,
+				010CE8571E5EBCD700C50289 /* NFCMemManager.hpp */,
+				010CE8581E5EBCD700C50289 /* NFCObject.cpp */,
+				010CE8591E5EBCD700C50289 /* NFCObject.h */,
+				010CE85A1E5EBCD700C50289 /* NFCProperty.cpp */,
+				010CE85B1E5EBCD700C50289 /* NFCProperty.h */,
+				010CE85C1E5EBCD700C50289 /* NFCPropertyManager.cpp */,
+				010CE85D1E5EBCD700C50289 /* NFCPropertyManager.h */,
+				010CE85E1E5EBCD700C50289 /* NFCRecord.cpp */,
+				010CE85F1E5EBCD700C50289 /* NFCRecord.h */,
+				010CE8601E5EBCD700C50289 /* NFCRecordManager.cpp */,
+				010CE8611E5EBCD700C50289 /* NFCRecordManager.h */,
+				010CE8621E5EBCD700C50289 /* NFDataList.hpp */,
+				010CE8631E5EBCD700C50289 /* NFDateTime.hpp */,
+				010CE8641E5EBCD700C50289 /* NFException.hpp */,
+				010CE8651E5EBCD700C50289 /* NFIComponent.h */,
+				010CE8661E5EBCD700C50289 /* NFIComponentManager.h */,
+				010CE8671E5EBCD700C50289 /* NFIObject.h */,
+				010CE8681E5EBCD700C50289 /* NFIProperty.h */,
+				010CE8691E5EBCD700C50289 /* NFIPropertyManager.h */,
+				010CE86A1E5EBCD700C50289 /* NFIRecord.h */,
+				010CE86B1E5EBCD700C50289 /* NFIRecordManager.h */,
+				010CE86C1E5EBCD700C50289 /* NFLine.hpp */,
+				010CE86D1E5EBCD700C50289 /* NFList.hpp */,
+				010CE86E1E5EBCD700C50289 /* NFMap.hpp */,
+				010CE86F1E5EBCD700C50289 /* NFMapEx.hpp */,
+				010CE8701E5EBCD700C50289 /* NFMath.hpp */,
+				010CE8711E5EBCD700C50289 /* NFMemoryCounter.hpp */,
+				010CE8721E5EBCD700C50289 /* NFPlane.hpp */,
+				010CE8731E5EBCD700C50289 /* NFQueue.hpp */,
+				010CE8741E5EBCD700C50289 /* NFRay.hpp */,
+				010CE8751E5EBCD700C50289 /* NFSingleton.hpp */,
+				010CE8761E5EBCD700C50289 /* NFSpaceNode.hpp */,
+				010CE8771E5EBCD700C50289 /* NFSphere.hpp */,
+				010CE8781E5EBCD700C50289 /* NFVector2.hpp */,
+				010CE8791E5EBCD700C50289 /* NFVector3.hpp */,
+			);
+			name = NFCore;
+			sourceTree = "<group>";
+		};
+		010CE8861E5EBD2100C50289 /* NFKernel */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8871E5EBD4200C50289 /* NFCEventModule.cpp */,
+				010CE8881E5EBD4200C50289 /* NFCEventModule.h */,
+				010CE8891E5EBD4200C50289 /* NFCKernelModule.cpp */,
+				010CE88A1E5EBD4200C50289 /* NFCKernelModule.h */,
+				010CE88B1E5EBD4200C50289 /* NFCSceneAOIModule.cpp */,
+				010CE88C1E5EBD4200C50289 /* NFCSceneAOIModule.h */,
+				010CE88D1E5EBD4200C50289 /* NFCScheduleModule.cpp */,
+				010CE88E1E5EBD4200C50289 /* NFCScheduleModule.h */,
+			);
+			name = NFKernel;
+			sourceTree = "<group>";
+		};
+		010CE8971E5EBD4600C50289 /* NFLog */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8981E5EBD5F00C50289 /* NFCLogModule.cpp */,
+				010CE8991E5EBD5F00C50289 /* NFCLogModule.h */,
+			);
+			name = NFLog;
+			sourceTree = "<group>";
+		};
+		010CE89C1E5EBD7500C50289 /* NFPluginLoader */ = {
+			isa = PBXGroup;
+			children = (
+				010CE89D1E5EBD8900C50289 /* NFCDynLib.cpp */,
+				010CE89E1E5EBD8900C50289 /* NFCDynLib.h */,
+				010CE89F1E5EBD8900C50289 /* NFCPluginManager.cpp */,
+				010CE8A01E5EBD8900C50289 /* NFCPluginManager.h */,
+			);
+			name = NFPluginLoader;
+			sourceTree = "<group>";
+		};
+		010CE8A51E5EBDA800C50289 /* NFMessageDefine */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8A61E5EBDE100C50289 /* NFDefine.pb.cc */,
+				010CE8A71E5EBDE100C50289 /* NFDefine.pb.h */,
+				010CE8A81E5EBDE100C50289 /* NFFleetingDefine.pb.cc */,
+				010CE8A91E5EBDE100C50289 /* NFFleetingDefine.pb.h */,
+				010CE8AA1E5EBDE100C50289 /* NFLimit.h */,
+				010CE8AB1E5EBDE100C50289 /* NFMsgBase.pb.cc */,
+				010CE8AC1E5EBDE100C50289 /* NFMsgBase.pb.h */,
+				010CE8AD1E5EBDE100C50289 /* NFMsgBaseEx.pb.cc */,
+				010CE8AE1E5EBDE100C50289 /* NFMsgBaseEx.pb.h */,
+				010CE8AF1E5EBDE100C50289 /* NFMsgDefine.cpp */,
+				010CE8B01E5EBDE100C50289 /* NFMsgDefine.h */,
+				010CE8B11E5EBDE100C50289 /* NFMsgMysql.pb.cc */,
+				010CE8B21E5EBDE100C50289 /* NFMsgMysql.pb.h */,
+				010CE8B31E5EBDE100C50289 /* NFMsgPreGame.pb.cc */,
+				010CE8B41E5EBDE100C50289 /* NFMsgPreGame.pb.h */,
+				010CE8B51E5EBDE100C50289 /* NFMsgShare.pb.cc */,
+				010CE8B61E5EBDE100C50289 /* NFMsgShare.pb.h */,
+				010CE8B71E5EBDE100C50289 /* NFMsgURl.pb.cc */,
+				010CE8B81E5EBDE100C50289 /* NFMsgURl.pb.h */,
+				010CE8B91E5EBDE100C50289 /* NFProtocolDefine.hpp */,
+				010CE8BA1E5EBDE100C50289 /* NFSLGDefine.pb.cc */,
+				010CE8BB1E5EBDE100C50289 /* NFSLGDefine.pb.h */,
+			);
+			name = NFMessageDefine;
+			sourceTree = "<group>";
+		};
+		010CE8D01E5EBDE900C50289 /* NFNet */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8DE1E5EBE3E00C50289 /* libevent */,
+				010CE8D11E5EBE3500C50289 /* NFCNet.cpp */,
+				010CE8D21E5EBE3500C50289 /* NFCNet.h */,
+				010CE8D31E5EBE3500C50289 /* NFCNetClientModule.cpp */,
+				010CE8D41E5EBE3500C50289 /* NFCNetClientModule.h */,
+				010CE8D51E5EBE3500C50289 /* NFCNetModule.cpp */,
+				010CE8D61E5EBE3500C50289 /* NFCNetModule.h */,
+				010CE8D71E5EBE3500C50289 /* NFINet.h */,
+			);
+			name = NFNet;
+			sourceTree = "<group>";
+		};
+		010CE8DE1E5EBE3E00C50289 /* libevent */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8E01E5EBE5100C50289 /* extras */,
+				010CE8DF1E5EBE4C00C50289 /* core */,
+			);
+			name = libevent;
+			sourceTree = "<group>";
+		};
+		010CE8DF1E5EBE4C00C50289 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8E11E5EBED600C50289 /* buffer.c */,
+				010CE8E21E5EBED600C50289 /* bufferevent_async.c */,
+				010CE8E31E5EBED600C50289 /* bufferevent_filter.c */,
+				010CE8E41E5EBED600C50289 /* bufferevent_pair.c */,
+				010CE8E51E5EBED600C50289 /* bufferevent_ratelim.c */,
+				010CE8E61E5EBED600C50289 /* bufferevent_sock.c */,
+				010CE8E71E5EBED600C50289 /* bufferevent.c */,
+				010CE8E81E5EBED600C50289 /* event.c */,
+				010CE97E1E5FE83800C50289 /* select.c */,
+				010CE8E91E5EBED600C50289 /* event.h */,
+				010CE8EA1E5EBED600C50289 /* evmap.c */,
+				010CE8EB1E5EBED600C50289 /* evthread.c */,
+				010CE8EC1E5EBED600C50289 /* evutil_rand.c */,
+				010CE8ED1E5EBED600C50289 /* evutil.c */,
+				010CE8EE1E5EBED600C50289 /* listener.c */,
+				010CE9841E5FE89A00C50289 /* kqueue.c */,
+				010CE8EF1E5EBED600C50289 /* log.c */,
+				010CE9811E5FE86B00C50289 /* poll.c */,
+				010CE8F01E5EBED600C50289 /* signal.c */,
+				010CE8F11E5EBED600C50289 /* strlcpy.c */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		010CE8E01E5EBE5100C50289 /* extras */ = {
+			isa = PBXGroup;
+			children = (
+				010CE9121E5EBF0800C50289 /* evdns.c */,
+				010CE9131E5EBF0800C50289 /* event_tagging.c */,
+				010CE9141E5EBF0800C50289 /* evrpc.c */,
+				010CE9151E5EBF0800C50289 /* http.c */,
+			);
+			name = extras;
+			sourceTree = "<group>";
+		};
+		010CE91E1E5FE4E000C50289 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				010CE91F1E5FE4E000C50289 /* NFCChatLogic.cpp */,
+				010CE9201E5FE4E000C50289 /* NFCChatLogic.h */,
+				010CE9211E5FE4E000C50289 /* NFCLogicBase.cpp */,
+				010CE9221E5FE4E000C50289 /* NFCLogicBase.h */,
+				010CE9231E5FE4E000C50289 /* NFCLogicPlugin.cpp */,
+				010CE9241E5FE4E000C50289 /* NFCLogicPlugin.h */,
+				010CE9251E5FE4E000C50289 /* NFCLoginLogic.cpp */,
+				010CE9261E5FE4E000C50289 /* NFCLoginLogic.h */,
+				010CE9271E5FE4E000C50289 /* NFCNetLogic.cpp */,
+				010CE9281E5FE4E000C50289 /* NFCNetLogic.h */,
+				010CE9291E5FE4E000C50289 /* NFCPlayerLogic.cpp */,
+				010CE92A1E5FE4E000C50289 /* NFCPlayerLogic.h */,
+				010CE92B1E5FE4E000C50289 /* NFCPropertyLogic.cpp */,
+				010CE92C1E5FE4E000C50289 /* NFCPropertyLogic.h */,
+				010CE92D1E5FE4E000C50289 /* NFCRecordLogic.cpp */,
+				010CE92E1E5FE4E000C50289 /* NFCRecordLogic.h */,
+			);
+			name = Logic;
+			path = NF/Logic;
+			sourceTree = "<group>";
+		};
+		010CE9331E5FE4E000C50289 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				010CE93B1E5FE4E000C50289 /* NFCGameScene.cpp */,
+				010CE93C1E5FE4E000C50289 /* NFCGameScene.h */,
+				010CE93D1E5FE4E000C50289 /* NFCSceneManager.cpp */,
+				010CE93E1E5FE4E000C50289 /* NFCSceneManager.h */,
+				010CE93F1E5FE4E000C50289 /* NFCScenePlugin.cpp */,
+				010CE9401E5FE4E000C50289 /* NFCScenePlugin.h */,
+			);
+			name = Scene;
+			path = NF/Scene;
+			sourceTree = "<group>";
+		};
+		010CE9411E5FE4E000C50289 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				010CE9421E5FE4E000C50289 /* NFCUIChatPanel.cpp */,
+				010CE9431E5FE4E000C50289 /* NFCUIChatPanel.h */,
+				010CE9441E5FE4E000C50289 /* NFCUIDialog.cpp */,
+				010CE9451E5FE4E000C50289 /* NFCUIDialog.h */,
+				010CE9461E5FE4E000C50289 /* NFCUILogin.cpp */,
+				010CE9471E5FE4E000C50289 /* NFCUILogin.h */,
+				010CE9481E5FE4E000C50289 /* NFCUIManager.cpp */,
+				010CE9491E5FE4E000C50289 /* NFCUIManager.h */,
+				010CE94A1E5FE4E000C50289 /* NFCUIPlugin.cpp */,
+				010CE94B1E5FE4E000C50289 /* NFCUIPlugin.h */,
+				010CE94C1E5FE4E000C50289 /* NFCUISelectRole.cpp */,
+				010CE94D1E5FE4E000C50289 /* NFCUISelectRole.h */,
+				010CE94E1E5FE4E000C50289 /* NFCUISelectServer.cpp */,
+				010CE94F1E5FE4E000C50289 /* NFCUISelectServer.h */,
+			);
+			name = UI;
+			path = NF/UI;
+			sourceTree = "<group>";
+		};
+		019054541E5E8CF9009153C1 /* NFCommon */ = {
+			isa = PBXGroup;
+			children = (
+				010CE8D01E5EBDE900C50289 /* NFNet */,
+				010CE8A51E5EBDA800C50289 /* NFMessageDefine */,
+				010CE89C1E5EBD7500C50289 /* NFPluginLoader */,
+				010CE8971E5EBD4600C50289 /* NFLog */,
+				010CE8861E5EBD2100C50289 /* NFKernel */,
+				010CE8511E5EBC7900C50289 /* NFCore */,
+				010CE8481E5EBC4500C50289 /* NFConfig */,
+			);
+			name = NFCommon;
+			sourceTree = "<group>";
+		};
+		019054551E5E8D12009153C1 /* NF */ = {
+			isa = PBXGroup;
+			children = (
+				010CE91E1E5FE4E000C50289 /* Logic */,
+				010CE92F1E5FE4E000C50289 /* NFCClientPlugin.cpp */,
+				010CE9301E5FE4E000C50289 /* NFCClientPlugin.h */,
+				010CE9311E5FE4E000C50289 /* NFCRoot.cpp */,
+				010CE9321E5FE4E000C50289 /* NFCRoot.h */,
+				010CE9331E5FE4E000C50289 /* Scene */,
+				010CE9411E5FE4E000C50289 /* UI */,
+			);
+			name = NF;
+			sourceTree = "<group>";
+		};
+		019054571E5E8DA1009153C1 /* libprotobuf */ = {
+			isa = PBXGroup;
+			children = (
+				0190545A1E5E8EF2009153C1 /* atomicops.h */,
+				019054591E5E8EF2009153C1 /* atomicops_internals_x86_gcc.h */,
+				019054581E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc */,
+				019054611E5E8F12009153C1 /* coded_stream.cc */,
+				019054621E5E8F12009153C1 /* coded_stream.h */,
+				019054601E5E8F12009153C1 /* coded_stream_inl.h */,
+				010CE8441E5EB24A00C50289 /* common.cc */,
+				010CE8451E5EB24A00C50289 /* common.h */,
+				0190546B1E5E8FAA009153C1 /* descriptor.cc */,
+				0190546C1E5E8FAA009153C1 /* descriptor.h */,
+				0190546D1E5E8FAA009153C1 /* descriptor.pb.cc */,
+				0190546E1E5E8FAA009153C1 /* descriptor.pb.h */,
+				019054691E5E8FAA009153C1 /* descriptor_database.cc */,
+				0190546A1E5E8FAA009153C1 /* descriptor_database.h */,
+				0190546F1E5E8FAA009153C1 /* dynamic_message.cc */,
+				019054701E5E8FAA009153C1 /* dynamic_message.h */,
+				019054721E5E8FAA009153C1 /* extension_set.cc */,
+				019054731E5E8FAA009153C1 /* extension_set.h */,
+				019054711E5E8FAA009153C1 /* extension_set_heavy.cc */,
+				019054741E5E8FAA009153C1 /* generated_message_reflection.cc */,
+				019054751E5E8FAA009153C1 /* generated_message_reflection.h */,
+				019054761E5E8FAA009153C1 /* generated_message_util.cc */,
+				019054771E5E8FAA009153C1 /* generated_message_util.h */,
+				019054881E5E8FBB009153C1 /* gzip_stream.cc */,
+				019054891E5E8FBB009153C1 /* gzip_stream.h */,
+				0190548C1E5E8FCF009153C1 /* hash.h */,
+				0190548E1E5E8FEC009153C1 /* importer.h */,
+				0190548D1E5E8FEC009153C1 /* importer.cc */,
+				019054991E5E9032009153C1 /* map-util.h */,
+				019054921E5E9008009153C1 /* message_lite.h */,
+				019054911E5E9008009153C1 /* message_lite.cc */,
+				019054941E5E9008009153C1 /* message.h */,
+				019054931E5E9008009153C1 /* message.cc */,
+				0190549B1E5E9032009153C1 /* once.h */,
+				0190549A1E5E9032009153C1 /* once.cc */,
+				010CE83D1E5EB14C00C50289 /* parser.cc */,
+				010CE83E1E5EB14C00C50289 /* parser.h */,
+				0190549F1E5E905A009153C1 /* printer.cc */,
+				019054A01E5E905A009153C1 /* printer.h */,
+				0190549C1E5E9032009153C1 /* platform_macros.h */,
+				019055021E5E9079009153C1 /* reflection_ops.cc */,
+				019055031E5E9079009153C1 /* reflection_ops.h */,
+				019055041E5E9079009153C1 /* repeated_field.cc */,
+				019055051E5E9079009153C1 /* repeated_field.h */,
+				0190556C1E5E9087009153C1 /* service.cc */,
+				0190556D1E5E9087009153C1 /* service.h */,
+				019055701E5E90DD009153C1 /* stl_util.h */,
+				019055711E5E9141009153C1 /* stringprintf.cc */,
+				019055721E5E9141009153C1 /* stringprintf.h */,
+				019055731E5E9141009153C1 /* structurally_valid.cc */,
+				019055741E5E9141009153C1 /* strutil.cc */,
+				019055751E5E9141009153C1 /* strutil.h */,
+				019055761E5E9141009153C1 /* substitute.cc */,
+				019055771E5E9141009153C1 /* substitute.h */,
+				019055781E5E9141009153C1 /* template_util.h */,
+				019055851E5E9168009153C1 /* tokenizer.cc */,
+				019055861E5E9168009153C1 /* tokenizer.h */,
+				019055891E5E917A009153C1 /* type_traits.h */,
+				019055811E5E9158009153C1 /* text_format.cc */,
+				019055821E5E9158009153C1 /* text_format.h */,
+				0190558B1E5E9196009153C1 /* unknown_field_set.h */,
+				010CE8411E5EB1D700C50289 /* unknown_field_set.cc */,
+				0190558F1E5E9196009153C1 /* wire_format.cc */,
+				019055901E5E9196009153C1 /* wire_format.h */,
+				0190558C1E5E9196009153C1 /* wire_format_lite_inl.h */,
+				0190558E1E5E9196009153C1 /* wire_format_lite.h */,
+				0190558D1E5E9196009153C1 /* wire_format_lite.cc */,
+				019055971E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc */,
+				019055981E5E91BC009153C1 /* zero_copy_stream_impl_lite.h */,
+				019055991E5E91BC009153C1 /* zero_copy_stream_impl.cc */,
+				0190559A1E5E91BC009153C1 /* zero_copy_stream_impl.h */,
+				0190559B1E5E91BC009153C1 /* zero_copy_stream.cc */,
+				0190559C1E5E91BC009153C1 /* zero_copy_stream.h */,
+			);
+			name = libprotobuf;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				5087E77117EB970100C73F5D /* Icons */,
+				503AE0FA17EB989F00D1A890 /* AppController.h */,
+				503AE0FB17EB989F00D1A890 /* AppController.mm */,
+				503AE0FC17EB989F00D1A890 /* main.m */,
+				503AE0FD17EB989F00D1A890 /* Prefix.pch */,
+				503AE0FE17EB989F00D1A890 /* RootViewController.h */,
+				503AE0FF17EB989F00D1A890 /* RootViewController.mm */,
+			);
+			name = ios;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* NFDemo-mobile.app */,
+				5087E76F17EB910900C73F5D /* NFDemo-desktop.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AC6FAE6180E9839004C840B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
+				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
+				0190545F1E5E8EF2009153C1 /* libcocos2d tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				46880B8319C43A87006E1F66 /* Classes */,
+				46880B7519C43A67006E1F66 /* Resources */,
+				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				080E96DDFE201D6D7F000001 /* ios */,
+				503AE10617EB990700D1A890 /* mac */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				294D0D631D0D56D500F7F5D4 /* CoreText.framework */,
+				ED545A7D1B68A1FA00C3958E /* libiconv.dylib */,
+				ED545A7B1B68A1F400C3958E /* libiconv.dylib */,
+				8262943D1AAF051F00CB7CF7 /* Security.framework */,
+				52B47A461A53D09B004E4C60 /* Security.framework */,
+				D6B0611A1803AB670077942B /* CoreMotion.framework */,
+				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
+				503AE11117EB99EE00D1A890 /* libcurl.dylib */,
+				5087E78A17EB975400C73F5D /* OpenGL.framework */,
+				5087E78817EB974C00C73F5D /* AppKit.framework */,
+				1ACB3243164770DE00914215 /* libcurl.a */,
+				BF170DB412928DE900B8313A /* libz.dylib */,
+				D44C620F132DFF4E0009C878 /* AudioToolbox.framework */,
+				D44C620D132DFF430009C878 /* AVFoundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				D44C620B132DFF330009C878 /* OpenAL.framework */,
+				BF170DB012928DE900B8313A /* OpenGLES.framework */,
+				BF1C47EA1293683800B63C5D /* QuartzCore.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46880B7519C43A67006E1F66 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				010CEAC11E601E4C00C50289 /* NFDataCfg */,
+				010CEABB1E601E3F00C50289 /* res */,
+				010CEABC1E601E3F00C50289 /* Scene */,
+				019055AB1E5E93D5009153C1 /* grossini.png */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		46880B8319C43A87006E1F66 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				019054571E5E8DA1009153C1 /* libprotobuf */,
+				019054551E5E8D12009153C1 /* NF */,
+				019054541E5E8CF9009153C1 /* NFCommon */,
+				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
+				46880B8519C43A87006E1F66 /* AppDelegate.h */,
+				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
+				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		503AE0F517EB97AB00D1A890 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				503AE0F617EB97AB00D1A890 /* Icon.icns */,
+				503AE0F717EB97AB00D1A890 /* Info.plist */,
+			);
+			name = Icons;
+			path = mac;
+			sourceTree = SOURCE_ROOT;
+		};
+		503AE10617EB990700D1A890 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				503AE0F517EB97AB00D1A890 /* Icons */,
+				503AE10317EB98FF00D1A890 /* main.cpp */,
+				503AE10417EB98FF00D1A890 /* Prefix.pch */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		5087E77117EB970100C73F5D /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				521A8E6219F0C34300D177D7 /* Default-667h@2x.png */,
+				521A8E6319F0C34300D177D7 /* Default-736h@3x.png */,
+				5087E77217EB970100C73F5D /* Default-568h@2x.png */,
+				5087E77317EB970100C73F5D /* Default.png */,
+				5087E77417EB970100C73F5D /* Default@2x.png */,
+				50EF62A017ECD613001EB2F8 /* Icon-29.png */,
+				50EF62A117ECD613001EB2F8 /* Icon-50.png */,
+				50EF629217ECD46A001EB2F8 /* Icon-40.png */,
+				50EF629317ECD46A001EB2F8 /* Icon-58.png */,
+				50EF629417ECD46A001EB2F8 /* Icon-80.png */,
+				50EF629517ECD46A001EB2F8 /* Icon-100.png */,
+				5087E77517EB970100C73F5D /* Icon-114.png */,
+				5087E77617EB970100C73F5D /* Icon-120.png */,
+				5087E77717EB970100C73F5D /* Icon-144.png */,
+				5087E77817EB970100C73F5D /* Icon-152.png */,
+				5087E77917EB970100C73F5D /* Icon-57.png */,
+				5087E77A17EB970100C73F5D /* Icon-72.png */,
+				5087E77B17EB970100C73F5D /* Icon-76.png */,
+				5087E77C17EB970100C73F5D /* Info.plist */,
+			);
+			name = Icons;
+			path = ios;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* NFDemo-mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "NFDemo-mobile" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AC6FB25180E99E1004C840B /* PBXTargetDependency */,
+			);
+			name = "NFDemo-mobile";
+			productName = iphone;
+			productReference = 1D6058910D05DD3D006BFB54 /* NFDemo-mobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5087E73D17EB910900C73F5D /* NFDemo-desktop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "NFDemo-desktop" */;
+			buildPhases = (
+				5087E74817EB910900C73F5D /* Resources */,
+				5087E75617EB910900C73F5D /* Sources */,
+				5087E75C17EB910900C73F5D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AC6FB16180E9959004C840B /* PBXTargetDependency */,
+			);
+			name = "NFDemo-desktop";
+			productName = iphone;
+			productReference = 5087E76F17EB910900C73F5D /* NFDemo-desktop.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = 6S5925JH32;
+					};
+				};
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NFDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1AC6FAE6180E9839004C840B /* Products */;
+					ProjectRef = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* NFDemo-mobile */,
+				5087E73D17EB910900C73F5D /* NFDemo-desktop */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0190545F1E5E8EF2009153C1 /* libcocos2d tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d tvOS.a";
+			remoteRef = 0190545E1E5E8EF2009153C1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d Mac.a";
+			remoteRef = 1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1AC6FB07180E9839004C840B /* libcocos2d iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d iOS.a";
+			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
+				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				010CEAC21E601E4C00C50289 /* NFDataCfg in Resources */,
+				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
+				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				010CEABF1E601E3F00C50289 /* Scene in Resources */,
+				019055B71E5E93D5009153C1 /* grossini.png in Resources */,
+				010CEABD1E601E3F00C50289 /* res in Resources */,
+				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
+				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5087E74817EB910900C73F5D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				010CEABE1E601E3F00C50289 /* res in Resources */,
+				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				010CEAC31E601E4C00C50289 /* NFDataCfg in Resources */,
+				019055B81E5E93D5009153C1 /* grossini.png in Resources */,
+				010CEAC01E601E3F00C50289 /* Scene in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0190549D1E5E9032009153C1 /* once.cc in Sources */,
+				010CE8421E5EB1D700C50289 /* unknown_field_set.cc in Sources */,
+				0190556A1E5E9079009153C1 /* repeated_field.cc in Sources */,
+				0190557B1E5E9141009153C1 /* structurally_valid.cc in Sources */,
+				010CE87C1E5EBCD700C50289 /* NFCObject.cpp in Sources */,
+				010CE9161E5EBF0800C50289 /* evdns.c in Sources */,
+				010CE8C21E5EBDE100C50289 /* NFMsgBaseEx.pb.cc in Sources */,
+				010CE91C1E5EBF0800C50289 /* http.c in Sources */,
+				010CE8FC1E5EBED600C50289 /* bufferevent_sock.c in Sources */,
+				010CE9851E5FE89A00C50289 /* kqueue.c in Sources */,
+				010CE8F61E5EBED600C50289 /* bufferevent_filter.c in Sources */,
+				019055791E5E9141009153C1 /* stringprintf.cc in Sources */,
+				019054951E5E9008009153C1 /* message_lite.cc in Sources */,
+				010CE9581E5FE4E000C50289 /* NFCNetLogic.cpp in Sources */,
+				019054821E5E8FAA009153C1 /* extension_set.cc in Sources */,
+				010CE88F1E5EBD4200C50289 /* NFCEventModule.cpp in Sources */,
+				010CE90E1E5EBED600C50289 /* signal.c in Sources */,
+				010CE8A31E5EBD8900C50289 /* NFCPluginManager.cpp in Sources */,
+				010CE97A1E5FE4E000C50289 /* NFCUISelectRole.cpp in Sources */,
+				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				010CE87A1E5EBCD700C50289 /* NFCComponentManager.cpp in Sources */,
+				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				010CE9101E5EBED600C50289 /* strlcpy.c in Sources */,
+				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				0190559F1E5E91BC009153C1 /* zero_copy_stream_impl.cc in Sources */,
+				010CE8DA1E5EBE3500C50289 /* NFCNetClientModule.cpp in Sources */,
+				0190556E1E5E9087009153C1 /* service.cc in Sources */,
+				019055681E5E9079009153C1 /* reflection_ops.cc in Sources */,
+				010CE9761E5FE4E000C50289 /* NFCUIManager.cpp in Sources */,
+				010CE8C61E5EBDE100C50289 /* NFMsgMysql.pb.cc in Sources */,
+				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				010CE8CC1E5EBDE100C50289 /* NFMsgURl.pb.cc in Sources */,
+				010CE8461E5EB24A00C50289 /* common.cc in Sources */,
+				010CE8911E5EBD4200C50289 /* NFCKernelModule.cpp in Sources */,
+				010CE8821E5EBCD700C50289 /* NFCRecord.cpp in Sources */,
+				010CE8931E5EBD4200C50289 /* NFCSceneAOIModule.cpp in Sources */,
+				0190548F1E5E8FEC009153C1 /* importer.cc in Sources */,
+				019055951E5E9196009153C1 /* wire_format.cc in Sources */,
+				010CE9501E5FE4E000C50289 /* NFCChatLogic.cpp in Sources */,
+				010CE91A1E5EBF0800C50289 /* evrpc.c in Sources */,
+				010CE8BE1E5EBDE100C50289 /* NFFleetingDefine.pb.cc in Sources */,
+				0190547A1E5E8FAA009153C1 /* descriptor.cc in Sources */,
+				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				019055A11E5E91BC009153C1 /* zero_copy_stream.cc in Sources */,
+				019054A11E5E905A009153C1 /* printer.cc in Sources */,
+				010CE96E1E5FE4E000C50289 /* NFCScenePlugin.cpp in Sources */,
+				010CE90A1E5EBED600C50289 /* listener.c in Sources */,
+				010CE9821E5FE86B00C50289 /* poll.c in Sources */,
+				010CE8A11E5EBD8900C50289 /* NFCDynLib.cpp in Sources */,
+				0190548A1E5E8FBB009153C1 /* gzip_stream.cc in Sources */,
+				010CE8C41E5EBDE100C50289 /* NFMsgDefine.cpp in Sources */,
+				010CE9041E5EBED600C50289 /* evthread.c in Sources */,
+				019054631E5E8F12009153C1 /* coded_stream.cc in Sources */,
+				0190547E1E5E8FAA009153C1 /* dynamic_message.cc in Sources */,
+				010CE9061E5EBED600C50289 /* evutil_rand.c in Sources */,
+				010CE8FE1E5EBED600C50289 /* bufferevent.c in Sources */,
+				010CE9561E5FE4E000C50289 /* NFCLoginLogic.cpp in Sources */,
+				010CE8C01E5EBDE100C50289 /* NFMsgBase.pb.cc in Sources */,
+				010CE87E1E5EBCD700C50289 /* NFCProperty.cpp in Sources */,
+				010CE9721E5FE4E000C50289 /* NFCUIDialog.cpp in Sources */,
+				010CE9701E5FE4E000C50289 /* NFCUIChatPanel.cpp in Sources */,
+				0190547C1E5E8FAA009153C1 /* descriptor.pb.cc in Sources */,
+				010CE96A1E5FE4E000C50289 /* NFCGameScene.cpp in Sources */,
+				019055831E5E9158009153C1 /* text_format.cc in Sources */,
+				0190557D1E5E9141009153C1 /* strutil.cc in Sources */,
+				010CE9601E5FE4E000C50289 /* NFCClientPlugin.cpp in Sources */,
+				010CE95A1E5FE4E000C50289 /* NFCPlayerLogic.cpp in Sources */,
+				010CE8DC1E5EBE3500C50289 /* NFCNetModule.cpp in Sources */,
+				019054841E5E8FAA009153C1 /* generated_message_reflection.cc in Sources */,
+				010CE8F81E5EBED600C50289 /* bufferevent_pair.c in Sources */,
+				010CE9781E5FE4E000C50289 /* NFCUIPlugin.cpp in Sources */,
+				010CE9741E5FE4E000C50289 /* NFCUILogin.cpp in Sources */,
+				010CE8841E5EBCD700C50289 /* NFCRecordManager.cpp in Sources */,
+				010CE97C1E5FE4E000C50289 /* NFCUISelectServer.cpp in Sources */,
+				010CE8951E5EBD4200C50289 /* NFCScheduleModule.cpp in Sources */,
+				010CE9021E5EBED600C50289 /* evmap.c in Sources */,
+				010CE8FA1E5EBED600C50289 /* bufferevent_ratelim.c in Sources */,
+				010CE89A1E5EBD5F00C50289 /* NFCLogModule.cpp in Sources */,
+				010CE8CA1E5EBDE100C50289 /* NFMsgShare.pb.cc in Sources */,
+				010CE84F1E5EBC7300C50289 /* NFCElementModule.cpp in Sources */,
+				010CE8C81E5EBDE100C50289 /* NFMsgPreGame.pb.cc in Sources */,
+				019054781E5E8FAA009153C1 /* descriptor_database.cc in Sources */,
+				019054971E5E9008009153C1 /* message.cc in Sources */,
+				010CE8BC1E5EBDE100C50289 /* NFDefine.pb.cc in Sources */,
+				010CE9521E5FE4E000C50289 /* NFCLogicBase.cpp in Sources */,
+				010CE8CE1E5EBDE100C50289 /* NFSLGDefine.pb.cc in Sources */,
+				0190559D1E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc in Sources */,
+				010CE95E1E5FE4E000C50289 /* NFCRecordLogic.cpp in Sources */,
+				010CE9001E5EBED600C50289 /* event.c in Sources */,
+				010CE97F1E5FE83800C50289 /* select.c in Sources */,
+				010CE9181E5EBF0800C50289 /* event_tagging.c in Sources */,
+				0190557F1E5E9141009153C1 /* substitute.cc in Sources */,
+				010CE84D1E5EBC7300C50289 /* NFCClassModule.cpp in Sources */,
+				010CE9081E5EBED600C50289 /* evutil.c in Sources */,
+				010CE83F1E5EB14C00C50289 /* parser.cc in Sources */,
+				010CE8F21E5EBED600C50289 /* buffer.c in Sources */,
+				010CE90C1E5EBED600C50289 /* log.c in Sources */,
+				010CE8D81E5EBE3500C50289 /* NFCNet.cpp in Sources */,
+				019055871E5E9168009153C1 /* tokenizer.cc in Sources */,
+				010CE9621E5FE4E000C50289 /* NFCRoot.cpp in Sources */,
+				010CE96C1E5FE4E000C50289 /* NFCSceneManager.cpp in Sources */,
+				019054861E5E8FAA009153C1 /* generated_message_util.cc in Sources */,
+				0190545B1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */,
+				019054801E5E8FAA009153C1 /* extension_set_heavy.cc in Sources */,
+				010CE8801E5EBCD700C50289 /* NFCPropertyManager.cpp in Sources */,
+				019055931E5E9196009153C1 /* wire_format_lite.cc in Sources */,
+				010CE9541E5FE4E000C50289 /* NFCLogicPlugin.cpp in Sources */,
+				010CE95C1E5FE4E000C50289 /* NFCPropertyLogic.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5087E75617EB910900C73F5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0190559E1E5E91BC009153C1 /* zero_copy_stream_impl_lite.cc in Sources */,
+				0190547B1E5E8FAA009153C1 /* descriptor.cc in Sources */,
+				019054901E5E8FEC009153C1 /* importer.cc in Sources */,
+				019054A21E5E905A009153C1 /* printer.cc in Sources */,
+				010CE87D1E5EBCD700C50289 /* NFCObject.cpp in Sources */,
+				010CE9171E5EBF0800C50289 /* evdns.c in Sources */,
+				010CE8C31E5EBDE100C50289 /* NFMsgBaseEx.pb.cc in Sources */,
+				010CE91D1E5EBF0800C50289 /* http.c in Sources */,
+				010CE8FD1E5EBED600C50289 /* bufferevent_sock.c in Sources */,
+				010CE9861E5FE89A00C50289 /* kqueue.c in Sources */,
+				010CE8F71E5EBED600C50289 /* bufferevent_filter.c in Sources */,
+				010CE8431E5EB1D700C50289 /* unknown_field_set.cc in Sources */,
+				019054961E5E9008009153C1 /* message_lite.cc in Sources */,
+				010CE9591E5FE4E000C50289 /* NFCNetLogic.cpp in Sources */,
+				019054981E5E9008009153C1 /* message.cc in Sources */,
+				010CE8901E5EBD4200C50289 /* NFCEventModule.cpp in Sources */,
+				010CE90F1E5EBED600C50289 /* signal.c in Sources */,
+				010CE8A41E5EBD8900C50289 /* NFCPluginManager.cpp in Sources */,
+				010CE97B1E5FE4E000C50289 /* NFCUISelectRole.cpp in Sources */,
+				019054851E5E8FAA009153C1 /* generated_message_reflection.cc in Sources */,
+				010CE87B1E5EBCD700C50289 /* NFCComponentManager.cpp in Sources */,
+				0190556B1E5E9079009153C1 /* repeated_field.cc in Sources */,
+				010CE9111E5EBED600C50289 /* strlcpy.c in Sources */,
+				019054811E5E8FAA009153C1 /* extension_set_heavy.cc in Sources */,
+				010CE8471E5EB24A00C50289 /* common.cc in Sources */,
+				010CE8DB1E5EBE3500C50289 /* NFCNetClientModule.cpp in Sources */,
+				019054871E5E8FAA009153C1 /* generated_message_util.cc in Sources */,
+				019055841E5E9158009153C1 /* text_format.cc in Sources */,
+				010CE9771E5FE4E000C50289 /* NFCUIManager.cpp in Sources */,
+				010CE8C71E5EBDE100C50289 /* NFMsgMysql.pb.cc in Sources */,
+				019055801E5E9141009153C1 /* substitute.cc in Sources */,
+				010CE8CD1E5EBDE100C50289 /* NFMsgURl.pb.cc in Sources */,
+				019055881E5E9168009153C1 /* tokenizer.cc in Sources */,
+				010CE8921E5EBD4200C50289 /* NFCKernelModule.cpp in Sources */,
+				010CE8831E5EBCD700C50289 /* NFCRecord.cpp in Sources */,
+				010CE8941E5EBD4200C50289 /* NFCSceneAOIModule.cpp in Sources */,
+				0190547F1E5E8FAA009153C1 /* dynamic_message.cc in Sources */,
+				010CE8401E5EB14C00C50289 /* parser.cc in Sources */,
+				010CE9511E5FE4E000C50289 /* NFCChatLogic.cpp in Sources */,
+				010CE91B1E5EBF0800C50289 /* evrpc.c in Sources */,
+				010CE8BF1E5EBDE100C50289 /* NFFleetingDefine.pb.cc in Sources */,
+				0190547D1E5E8FAA009153C1 /* descriptor.pb.cc in Sources */,
+				019054831E5E8FAA009153C1 /* extension_set.cc in Sources */,
+				019055961E5E9196009153C1 /* wire_format.cc in Sources */,
+				0190557C1E5E9141009153C1 /* structurally_valid.cc in Sources */,
+				010CE96F1E5FE4E000C50289 /* NFCScenePlugin.cpp in Sources */,
+				010CE90B1E5EBED600C50289 /* listener.c in Sources */,
+				010CE9831E5FE86B00C50289 /* poll.c in Sources */,
+				010CE8A21E5EBD8900C50289 /* NFCDynLib.cpp in Sources */,
+				019055CC1E5EAA0A009153C1 /* common.cc in Sources */,
+				010CE8C51E5EBDE100C50289 /* NFMsgDefine.cpp in Sources */,
+				010CE9051E5EBED600C50289 /* evthread.c in Sources */,
+				019054A61E5E9064009153C1 /* parser.cc in Sources */,
+				0190557E1E5E9141009153C1 /* strutil.cc in Sources */,
+				010CE9071E5EBED600C50289 /* evutil_rand.c in Sources */,
+				010CE8FF1E5EBED600C50289 /* bufferevent.c in Sources */,
+				010CE9571E5FE4E000C50289 /* NFCLoginLogic.cpp in Sources */,
+				010CE8C11E5EBDE100C50289 /* NFMsgBase.pb.cc in Sources */,
+				010CE87F1E5EBCD700C50289 /* NFCProperty.cpp in Sources */,
+				010CE9731E5FE4E000C50289 /* NFCUIDialog.cpp in Sources */,
+				010CE9711E5FE4E000C50289 /* NFCUIChatPanel.cpp in Sources */,
+				019055941E5E9196009153C1 /* wire_format_lite.cc in Sources */,
+				010CE96B1E5FE4E000C50289 /* NFCGameScene.cpp in Sources */,
+				0190549E1E5E9032009153C1 /* once.cc in Sources */,
+				0190548B1E5E8FBB009153C1 /* gzip_stream.cc in Sources */,
+				010CE9611E5FE4E000C50289 /* NFCClientPlugin.cpp in Sources */,
+				010CE95B1E5FE4E000C50289 /* NFCPlayerLogic.cpp in Sources */,
+				010CE8DD1E5EBE3500C50289 /* NFCNetModule.cpp in Sources */,
+				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				010CE8F91E5EBED600C50289 /* bufferevent_pair.c in Sources */,
+				010CE9791E5FE4E000C50289 /* NFCUIPlugin.cpp in Sources */,
+				010CE9751E5FE4E000C50289 /* NFCUILogin.cpp in Sources */,
+				010CE8851E5EBCD700C50289 /* NFCRecordManager.cpp in Sources */,
+				010CE97D1E5FE4E000C50289 /* NFCUISelectServer.cpp in Sources */,
+				010CE8961E5EBD4200C50289 /* NFCScheduleModule.cpp in Sources */,
+				010CE9031E5EBED600C50289 /* evmap.c in Sources */,
+				010CE8FB1E5EBED600C50289 /* bufferevent_ratelim.c in Sources */,
+				010CE89B1E5EBD5F00C50289 /* NFCLogModule.cpp in Sources */,
+				010CE8CB1E5EBDE100C50289 /* NFMsgShare.pb.cc in Sources */,
+				010CE8501E5EBC7300C50289 /* NFCElementModule.cpp in Sources */,
+				010CE8C91E5EBDE100C50289 /* NFMsgPreGame.pb.cc in Sources */,
+				0190557A1E5E9141009153C1 /* stringprintf.cc in Sources */,
+				0190545C1E5E8EF2009153C1 /* atomicops_internals_x86_gcc.cc in Sources */,
+				010CE8BD1E5EBDE100C50289 /* NFDefine.pb.cc in Sources */,
+				010CE9531E5FE4E000C50289 /* NFCLogicBase.cpp in Sources */,
+				010CE8CF1E5EBDE100C50289 /* NFSLGDefine.pb.cc in Sources */,
+				0190556F1E5E9087009153C1 /* service.cc in Sources */,
+				010CE95F1E5FE4E000C50289 /* NFCRecordLogic.cpp in Sources */,
+				010CE9011E5EBED600C50289 /* event.c in Sources */,
+				010CE9801E5FE83800C50289 /* select.c in Sources */,
+				010CE9191E5EBF0800C50289 /* event_tagging.c in Sources */,
+				019054641E5E8F12009153C1 /* coded_stream.cc in Sources */,
+				010CE84E1E5EBC7300C50289 /* NFCClassModule.cpp in Sources */,
+				010CE9091E5EBED600C50289 /* evutil.c in Sources */,
+				019054791E5E8FAA009153C1 /* descriptor_database.cc in Sources */,
+				010CE8F31E5EBED600C50289 /* buffer.c in Sources */,
+				010CE90D1E5EBED600C50289 /* log.c in Sources */,
+				010CE8D91E5EBE3500C50289 /* NFCNet.cpp in Sources */,
+				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				010CE9631E5FE4E000C50289 /* NFCRoot.cpp in Sources */,
+				010CE96D1E5FE4E000C50289 /* NFCSceneManager.cpp in Sources */,
+				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				019055A21E5E91BC009153C1 /* zero_copy_stream.cc in Sources */,
+				019055691E5E9079009153C1 /* reflection_ops.cc in Sources */,
+				010CE8811E5EBCD700C50289 /* NFCPropertyManager.cpp in Sources */,
+				019055A01E5E91BC009153C1 /* zero_copy_stream_impl.cc in Sources */,
+				010CE9551E5FE4E000C50289 /* NFCLogicPlugin.cpp in Sources */,
+				010CE95D1E5FE4E000C50289 /* NFCPropertyLogic.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1AC6FB16180E9959004C840B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "cocos2dx Mac";
+			targetProxy = 1AC6FB15180E9959004C840B /* PBXContainerItemProxy */;
+		};
+		1AC6FB25180E99E1004C840B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "cocos2dx iOS";
+			targetProxy = 1AC6FB24180E99E1004C840B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = 6S5925JH32;
+				ENABLE_BITCODE = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_FILE32API,
+					"COCOS2D_DEBUG=1",
+					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					PROTOBUF_SRC,
+					NF_STATIC_LIB,
+					LIBEVENT_SRC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(_COCOS_LIB_IOS_BEGIN)",
+					"$(_COCOS_LIB_IOS_END)",
+				);
+				SDKROOT = iphoneos;
+				STRIP_PNG_TEXT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = 6S5925JH32;
+				ENABLE_BITCODE = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_FILE32API,
+					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(_COCOS_LIB_IOS_BEGIN)",
+					"$(_COCOS_LIB_IOS_END)",
+				);
+				SDKROOT = iphoneos;
+				STRIP_PNG_TEXT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_IOS_BEGIN) $(_COCOS_HEADER_IOS_END)";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+		5087E76D17EB910900C73F5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_FILE32API,
+					"COCOS2D_DEBUG=1",
+					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+				);
+				INFOPLIST_FILE = mac/Info.plist;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(_COCOS_LIB_MAC_BEGIN)",
+					"$(_COCOS_LIB_MAC_END)",
+				);
+				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
+			};
+			name = Debug;
+		};
+		5087E76E17EB910900C73F5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_FILE32API,
+					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+				);
+				INFOPLIST_FILE = mac/Info.plist;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"$(_COCOS_LIB_MAC_BEGIN)",
+					"$(_COCOS_LIB_MAC_END)",
+				);
+				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../Dependencies",
+					"$(SRCROOT)/../../../Dependencies/protobuf/src",
+					"$(SRCROOT)/../../../Dependencies/protobuf/xcode",
+					"$(SRCROOT)/../../../Dependencies/libevent",
+					"$(SRCROOT)/../../../Dependencies/libevent/include",
+					"$(SRCROOT)/../../../Dependencies/libevent/compat",
+					"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code",
+					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/NF",
+					"$(SRCROOT)/../Classes/libevent/ios",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../../..",
+					"$(SRCROOT)/../../../Dependencies",
+					"$(SRCROOT)/../../../Dependencies/protobuf/src",
+					"$(SRCROOT)/../../../Dependencies/protobuf/xcode",
+					"$(SRCROOT)/../../../Dependencies/libevent",
+					"$(SRCROOT)/../../../Dependencies/libevent/include",
+					"$(SRCROOT)/../../../Dependencies/libevent/compat",
+					"$(SRCROOT)/../../../Dependencies/libevent/Win32-Code",
+					"$(SRCROOT)/../Classes",
+					"$(SRCROOT)/../Classes/NF",
+					"$(SRCROOT)/../Classes/libevent/ios",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "NFDemo-mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "NFDemo-desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5087E76D17EB910900C73F5D /* Debug */,
+				5087E76E17EB910900C73F5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NFDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

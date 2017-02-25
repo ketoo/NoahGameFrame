@@ -68,7 +68,7 @@ void NFCPropertyLogic::OnPropertyInt(const int nSockIndex, const int nMsgID, con
 		NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(xMsg.property_list(i).property_name());
 		if(prop == nullptr)
 		{
-			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), TDATA_TYPE::TDATA_INT);
+			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), NFDATA_TYPE::TDATA_INT);
 		}
 		prop->SetInt(xMsg.property_list(i).data());
 	}
@@ -91,7 +91,7 @@ void NFCPropertyLogic::OnPropertyFloat(const int nSockIndex, const int nMsgID, c
 		NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(xMsg.property_list(i).property_name());
 		if(prop == nullptr)
 		{
-			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), TDATA_TYPE::TDATA_FLOAT);
+			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), NFDATA_TYPE::TDATA_FLOAT);
 		}
 		prop->SetFloat(xMsg.property_list(i).data());
 	}
@@ -114,7 +114,7 @@ void NFCPropertyLogic::OnPropertyString(const int nSockIndex, const int nMsgID, 
 		NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(xMsg.property_list(i).property_name());
 		if(prop == nullptr)
 		{
-			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), TDATA_TYPE::TDATA_STRING);
+			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), NFDATA_TYPE::TDATA_STRING);
 		}
 		prop->SetString(xMsg.property_list(i).data());
 	}
@@ -137,7 +137,7 @@ void NFCPropertyLogic::OnPropertyObject(const int nSockIndex, const int nMsgID, 
 		NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(xMsg.property_list(i).property_name());
 		if(prop == nullptr)
 		{
-			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), TDATA_TYPE::TDATA_OBJECT);
+			prop = propertyMgr->AddProperty(NFGUID(),  xMsg.property_list(i).property_name(), NFDATA_TYPE::TDATA_OBJECT);
 		}
 		prop->SetObject(NFINetModule::PBToNF(xMsg.property_list(i).data()));
 	}
@@ -165,7 +165,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_float_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_float_list(j).property_name(), TDATA_TYPE::TDATA_FLOAT);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_float_list(j).property_name(), NFDATA_TYPE::TDATA_FLOAT);
 			}
 			prop->SetFloat(data.property_float_list(j).data());
 		}
@@ -174,7 +174,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_int_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_int_list(j).property_name(), TDATA_TYPE::TDATA_INT);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_int_list(j).property_name(), NFDATA_TYPE::TDATA_INT);
 			}
 			prop->SetInt(data.property_int_list(j).data());
 		}
@@ -183,7 +183,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_string_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_string_list(j).property_name(), TDATA_TYPE::TDATA_STRING);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_string_list(j).property_name(), NFDATA_TYPE::TDATA_STRING);
 			}
 			prop->SetString(data.property_string_list(j).data());
 		}
@@ -192,7 +192,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_object_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_object_list(j).property_name(), TDATA_TYPE::TDATA_OBJECT);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_object_list(j).property_name(), NFDATA_TYPE::TDATA_OBJECT);
 			}
 			prop->SetObject(NFINetModule::PBToNF(data.property_object_list(j).data()));
 		}
@@ -201,7 +201,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_vector2_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_vector2_list(j).property_name(), TDATA_TYPE::TDATA_VECTOR2);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_vector2_list(j).property_name(), NFDATA_TYPE::TDATA_VECTOR2);
 			}
 			prop->SetVector2(NFINetModule::PBToNF(data.property_vector2_list(j).data()));
 		}
@@ -210,7 +210,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 			NF_SHARE_PTR<NFIProperty> prop = propertyMgr->GetElement(data.property_vector3_list(j).property_name());
 			if(prop == nullptr)
 			{
-				prop = propertyMgr->AddProperty(NFGUID(),  data.property_vector3_list(j).property_name(), TDATA_TYPE::TDATA_VECTOR3);
+				prop = propertyMgr->AddProperty(NFGUID(),  data.property_vector3_list(j).property_name(), NFDATA_TYPE::TDATA_VECTOR3);
 			}
 			prop->SetVector3(NFINetModule::PBToNF(data.property_vector3_list(j).data()));
 		}

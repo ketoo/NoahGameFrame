@@ -12,7 +12,7 @@ add_library(NFTaskPlugin SHARED
 set_target_properties( NFTaskPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFTaskPlugin_d")
 set_target_properties( NFTaskPlugin PROPERTIES PREFIX "")
 set_target_properties( NFTaskPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFTaskPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

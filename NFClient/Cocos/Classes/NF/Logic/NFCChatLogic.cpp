@@ -92,7 +92,7 @@ void NFCChatLogic::OnChatProcess(const int nSockIndex, const int nMsgID, const c
 		return;
 	}
 
-	NFCDataList var;
+	NFDataList var;
 	var.AddObject(NFINetModule::PBToNF(xMsg.chat_id()));
 	var.AddInt(xMsg.chat_type());
 	var.AddString(xMsg.chat_name());

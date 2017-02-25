@@ -68,11 +68,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCMasterModule.cpp" />
-		<Unit filename="NFCMasterModule.h" />
-		<Unit filename="NFMasterServerPlugin.cpp" />
-		<Unit filename="NFMasterServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCMasterModule.h" />
+<Unit filename="NFMasterServerPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCMasterModule.cpp" />
+<Unit filename="NFMasterServerPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

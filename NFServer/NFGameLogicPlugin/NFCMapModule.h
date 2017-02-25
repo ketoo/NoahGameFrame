@@ -67,6 +67,7 @@ protected:
 	void SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID);
 	void LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID);
 private:
+	NFINetModule* m_pNetModule;
 	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;

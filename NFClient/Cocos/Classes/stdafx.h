@@ -8,7 +8,7 @@
 #endif
 
 // 必须放这边 引导 cocos和libevent有一样的timezone
-#include "NFComm\NFPluginModule\NFINetClientModule.hpp"
+//#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 USING_NS_CC;
 using namespace cocostudio;

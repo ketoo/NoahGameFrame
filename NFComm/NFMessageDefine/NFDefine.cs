@@ -149,9 +149,6 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_SKILL", Value=143)]
       EGEC_INVALID_SKILL = 143,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ENTER_GAME_SUCCESS", Value=144)]
-      EGEC_ENTER_GAME_SUCCESS = 144,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CREATE_GUILD_SUCCESS", Value=200)]
       EGEC_CREATE_GUILD_SUCCESS = 200,
             
@@ -1014,11 +1011,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EST_GOLD", Value=2)]
       EST_GOLD = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_DIAMOND", Value=3)]
-      EST_DIAMOND = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_SP", Value=4)]
-      EST_SP = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_ITEM", Value=3)]
+      EST_ITEM = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EST_EQUIP", Value=5)]
       EST_EQUIP = 5,
@@ -1026,11 +1020,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EST_GEM", Value=6)]
       EST_GEM = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_Hero", Value=7)]
-      EST_Hero = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_Other", Value=8)]
-      EST_Other = 8
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_CARD", Value=7)]
+      EST_CARD = 7
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ERankType")]

@@ -71,11 +71,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCWorldNet_ServerModule.cpp" />
-		<Unit filename="NFCWorldNet_ServerModule.h" />
-		<Unit filename="NFWorldNet_ServerPlugin.cpp" />
-		<Unit filename="NFWorldNet_ServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCWorldNet_ServerModule.h" />
+<Unit filename="NFWorldNet_ServerPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCWorldNet_ServerModule.cpp" />
+<Unit filename="NFWorldNet_ServerPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

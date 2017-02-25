@@ -13,6 +13,13 @@
 
 bool NFCGSPVPMatchModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
+
     return true;
 }
 
@@ -30,17 +37,12 @@ bool NFCGSPVPMatchModule::Execute()
 
 bool NFCGSPVPMatchModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
-	
-	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnReqPVPMatchProcess)) { return false; }
 
-	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnAckPVPMatchProcess)) { return false; }
-	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATEPVPECTYPE, this, &NFCGSPVPMatchModule::OnReqCreatePVPEctyProcess)) { return false; }
-	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCGSPVPMatchModule::OnAckCreatePVPEctyProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnReqPVPMatchProcess)) { return false; }
+
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_PVPAPPLYMACTCH, this, &NFCGSPVPMatchModule::OnAckPVPMatchProcess)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQ_CREATEPVPECTYPE, this, &NFCGSPVPMatchModule::OnReqCreatePVPEctyProcess)) { return false; }
+	if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCGSPVPMatchModule::OnAckCreatePVPEctyProcess)) { return false; }
 
     return true;
 }
@@ -55,7 +57,7 @@ void NFCGSPVPMatchModule::OnReqPVPMatchProcess(const int nSockIndex, const int n
 	}
  	NFGUID xTeamID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::TeamID());
  	*xMsg.mutable_team_id() = NFINetModule::NFToPB(xTeamID);
-	m_pGameServerToWorldModule->GetClusterClientModule()->SendSuitByPB(nPlayerID.GetData(), NFMsg::EGMI_REQ_PVPAPPLYMACTCH, xMsg);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.GetData(), NFMsg::EGMI_REQ_PVPAPPLYMACTCH, xMsg);
 }
 
 void NFCGSPVPMatchModule::OnAckPVPMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

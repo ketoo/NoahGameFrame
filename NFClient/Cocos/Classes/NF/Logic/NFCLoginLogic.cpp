@@ -127,7 +127,7 @@ void NFCLoginLogic::OnLoginProcess(const int nSockIndex, const int nMsgID, const
 	if(NFMsg::EGEC_ACCOUNT_SUCCESS == xMsg.event_code())
 	{
 		CCLOG("Login Success");
-		DoEvent(E_LoginEvent_LoginSuccess, NFCDataList());
+		DoEvent(E_LoginEvent_LoginSuccess, NFDataList());
 	}
 	else
 	{
@@ -152,7 +152,7 @@ void NFCLoginLogic::OnWorldList(const int nSockIndex, const int nMsgID, const ch
 		{
 			m_WorldServerList[i] = xMsg.info(i);
 		}
-		DoEvent(E_LoginEvent_WorldList, NFCDataList());
+		DoEvent(E_LoginEvent_WorldList, NFDataList());
 	}
 	else if(xMsg.type() == NFMsg::RSLT_GAMES_ERVER)
 	{
@@ -162,7 +162,7 @@ void NFCLoginLogic::OnWorldList(const int nSockIndex, const int nMsgID, const ch
 		{
 			m_GameServerList[i] = xMsg.info(i);
 		}
-		DoEvent(E_LoginEvent_ServerList, NFCDataList());
+		DoEvent(E_LoginEvent_ServerList, NFDataList());
 	}
 }
 

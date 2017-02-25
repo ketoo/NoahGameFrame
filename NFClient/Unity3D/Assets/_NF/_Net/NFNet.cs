@@ -60,6 +60,7 @@ public class NFNet
 
 
     /////////////Logic///////////////////////////////////////////////
+	public string strReqSwapGroupID = "-1";
     public string strReqSwapSceneID = "1";
 
     public string strReqMoveX = "0.0";
@@ -67,6 +68,7 @@ public class NFNet
 
     public string strReqAcceptTaskID = "taskid";
 
+	public string strReqKillID = "skillid";
     public string strReqKillNPCID = "npcid";
     public string strReqUseItemID = "itemid";
 
@@ -81,7 +83,6 @@ public class NFNet
     public string strSwapOrigin = "swaporigin";
     public string strSwapTarget = "target";
 
-    public string strChatTargetID = "target";
     public string strType = "0";
     public string strChatData = "data";
 
@@ -99,7 +100,7 @@ public class NFNet
         {
 
             ////聊天
-            scrollVecChatMsg = GUI.BeginScrollView(new Rect(0, nHeight / 2 + 20, 150 * 1.5f + 40, nHeight / 2 - 40), scrollVecChatMsg, new Rect(0, 0, 1500, 3000));
+            scrollVecChatMsg = GUI.BeginScrollView(new Rect(350, nHeight / 2 + 20, 240, nHeight / 2 - 50), scrollVecChatMsg, new Rect(0, 0, 1500, 3000));
             int nChatIndex = 0;
             for (int i = mxListener.aChatMsgList.Count - 1; i >= 0 ; i--)
             {
@@ -111,7 +112,7 @@ public class NFNet
             GUI.EndScrollView();
 
             ////网络消息
-            scrollVecMsg = GUI.BeginScrollView(new Rect(150 * 1.5f + 40, nHeight / 2 + 20, 150 * 2, nHeight / 2 - 40), scrollVecMsg, new Rect(0, 0, 1500, 3000));
+            scrollVecMsg = GUI.BeginScrollView(new Rect(560 + 40, nHeight / 2 + 20, 240, nHeight / 2 - 50), scrollVecMsg, new Rect(0, 0, 1500, 3000));
             int nNetIndex = 0;
             for (int i = mxListener.aMsgList.Count - 1; i >= 0; i--)
             {
@@ -124,7 +125,7 @@ public class NFNet
             GUI.EndScrollView();
 
             //操作功能区
-            scrollVecBtn = GUI.BeginScrollView(new Rect(570, 20, 350, nHeight-40), scrollVecBtn, new Rect(0, 0, 600, 3000));
+            scrollVecBtn = GUI.BeginScrollView(new Rect(850, 535, 410, nHeight/2 - 50), scrollVecBtn, new Rect(0, 0, 500, 1200));
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -132,7 +133,8 @@ public class NFNet
             {
                 mxSendLogic.RequireSwapScene(nMainRoleID, 0, int.Parse(strReqSwapSceneID), -1);
             }
-            strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
+			strReqSwapSceneID = GUI.TextField(new Rect(100, 0, 100, 50), strReqSwapSceneID);
+			strReqSwapGroupID = GUI.TextField(new Rect(200, 0, 100, 50), strReqSwapGroupID);
         
             ////////////////////////////////////////////////////////////////////////////////////////////////
             if (GUI.Button(new Rect(0, 50, 100, 50), "Move"))
@@ -141,16 +143,37 @@ public class NFNet
             }
             strReqMoveX = GUI.TextField(new Rect(100, 50, 100, 50), strReqMoveX);
             strReqMoveZ = GUI.TextField(new Rect(200, 50, 100, 50), strReqMoveZ);
+			////////////////////////////////////////////////////////////////////////////////////////////////
+			if (GUI.Button(new Rect(0, 100, 100, 50), "Chat"))
+			{
+				mxSendLogic.RequireChat(nMainRoleID, new NFrame.NFGUID(), 3, strChatData);
+				//test
+				if(false)
+				{
+					int value = int.Parse(strChatData);
+
+					NFIObject obj = NFCKernelModule.Instance.GetObject(nMainRoleID);
+					NFIPropertyManager propertyManager = obj.GetPropertyManager();
+					NFIProperty property = propertyManager.GetProperty("Gold");
+					property.SetInt(value);
+				}
+			}
+			strChatData = GUI.TextField(new Rect(100, 100, 300, 50), strChatData);
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
+			if (GUI.Button(new Rect(0, 150, 100, 50), "UseSkill"))
+			{
+				NFGUID xMonsterID = new NFGUID ();
+				xMonsterID.Parse (strReqKillNPCID, out xMonsterID);
+				mxSendLogic.RequireUseSkill(nMainRoleID, "", xMonsterID, 0f, 0f, 0f, 0f);
+			}
+			strReqKillID = GUI.TextField(new Rect(100, 150, 100, 50), strReqKillID);
+			strReqKillNPCID = GUI.TextField(new Rect(200, 150, 200, 50), strReqKillNPCID);
+
             /*
 
-                        if (GUI.Button(new Rect(0, 100, 100, 50), "接任务"))
-                        {
-                            sendLogic.RequireAcceptTask(strReqAcceptTaskID);
-                        }
-                        strReqAcceptTaskID = GUI.TextField(new Rect(100, 100, 100, 50), strReqAcceptTaskID);
-
+                        
                         ////////////////////////////////////////////////////////////////////////////////////////////////
 
                         if (GUI.Button(new Rect(0, 150, 100, 50), "交任务"))
@@ -161,11 +184,7 @@ public class NFNet
 
                         ////////////////////////////////////////////////////////////////////////////////////////////////
             
-                        if (GUI.Button(new Rect(0, 200, 100, 50), "杀怪"))
-                        {
-                            sendLogic.RequireUseSkill("", long.Parse(strReqKillNPCID));
-                        }
-                        strReqKillNPCID = GUI.TextField(new Rect(100, 200, 100, 50), strReqKillNPCID);
+                        
             
                         ////////////////////////////////////////////////////////////////////////////////////////////////
                         if (GUI.Button(new Rect(0, 250, 100, 50), "使用道具"))
@@ -183,6 +202,12 @@ public class NFNet
                         strPickUpItemID = GUI.TextField(new Rect(100, 300, 100, 50), strPickUpItemID);
 
                         ////////////////////////////////////////////////////////////////////////////////////////////////
+			 			if (GUI.Button(new Rect(0, 450, 100, 50), "接任务"))
+						{
+							sendLogic.RequireAcceptTask(strReqAcceptTaskID);
+						}
+						strReqAcceptTaskID = GUI.TextField(new Rect(100, 450, 100, 50), strReqAcceptTaskID);
+
                         */
         
 //             if (GUI.Button(new Rect(0, 350, 100, 50), "Set Property"))
@@ -203,24 +228,7 @@ public class NFNet
 
             ////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (GUI.Button(new Rect(0, 450, 100, 50), "Chat"))
-            {
-                mxSendLogic.RequireChat(nMainRoleID, new NFrame.NFGUID(), 3, strChatData);
-                //test
-                if(false)
-                {
-                    int value = int.Parse(strChatData);
-
-                    NFIObject obj = NFCKernelModule.Instance.GetObject(nMainRoleID);
-                    NFIPropertyManager propertyManager = obj.GetPropertyManager();
-                    NFIProperty property = propertyManager.GetProperty("Gold");
-                    property.SetInt(value);
-                }
-            }
-            strChatTargetID = nTarget.ToString();
-//             strChatTargetID = GUI.TextField(new Rect(100, 450, 100, 50), strChatTargetID);
-//             strType = GUI.TextField(new Rect(200, 450, 100, 50), strType);
-            strChatData = GUI.TextField(new Rect(100, 450, 100, 50), strChatData);
+            
             GUI.EndScrollView();
         }
     }

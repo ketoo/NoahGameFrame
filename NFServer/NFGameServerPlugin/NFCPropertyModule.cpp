@@ -10,6 +10,11 @@
 
 bool NFCPropertyModule::Init()
 {
+	   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
+    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 
     return true;
 }
@@ -26,12 +31,6 @@ bool NFCPropertyModule::Execute()
 
 bool NFCPropertyModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
-    m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent);
 
     return true;
@@ -114,7 +113,7 @@ int NFCPropertyModule::SubPropertyValue(const NFGUID& self, const std::string& s
     return 0;
 }
 
-int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
     RefreshBaseProperty(self);
 
@@ -124,7 +123,7 @@ int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string&
     return 0;
 }
 
-int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
 {
     
     const std::string& strRecordName = xEventData.strRecordName;
@@ -148,7 +147,7 @@ int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EV
     return 0;
 }
 
-int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var)
+int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     if (strClassName == NFrame::Player::ThisName())
     {
@@ -157,7 +156,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
             NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
             if (pRecord)
             {
-                for (int i = 0; i < NPG_ALL; i++)
+                for (int i = 0; i < NFPropertyGroup::NPG_ALL; i++)
                 {
                     pRecord->AddRow(-1);
                 }
