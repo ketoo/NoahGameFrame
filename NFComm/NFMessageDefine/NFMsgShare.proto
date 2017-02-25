@@ -194,6 +194,20 @@ message ReqCompeleteTask//完成任务后申请领奖
 	required bytes task_id = 1;
 }
 
+//EGEC_WEAR_EQUIP								= 509;		 // 装备创戴
+message ReqWearEquip
+{	
+	required Ident		equipid			= 1;//装备ID
+	required Ident		Targetid        = 2;//
+	
+}
+
+//EGEC_TAKEOFF_EQUIP							= 510;		 // 装备卸载
+message TakeOffEquip
+{	
+	required Ident		equipid			    = 1;//装备ID
+	required Ident		Targetid			= 2;//
+}
 ///////////////战斗/////////////////////////////////////////////////////////////////////////////////////
 
 message ReqAckJoinActivity
@@ -402,6 +416,101 @@ message AckSwitchServer
 	required int64      gate_serverid		= 4; // 目标ID
 }
 
+///////////////组队/////////////////////////////////////////////////////////////////////////////////////
+message TeamInfo
+{
+    required Ident					team_id 		= 1;			//队伍ID
+	required Ident					captain_id 		= 2;			//队长ID
+	repeated TeammemberInfo 		teammemberInfo 	= 3;			//队伍成员
+}
+
+message TeammemberInfo
+{
+    required Ident		player_id 		= 1;			//成员ID
+	required string		name 			= 2;			//名字
+	required int32		nLevel 			= 3;			//等级
+	required int32		job 			= 4;			//职业
+	required string		HeadIcon		= 5;			//头像
+}
+
+//EGMI_REQ_CREATE_TEAM                       		= 860; 	// 申请创建队伍
+//EGMI_ACK_CREATE_TEAM							= 861; 	// 创建队伍结果
+message ReqAckCreateTeam
+{
+    required Ident		team_id = 1;
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息	
+}
+
+//EGMI_REQ_JOIN_TEAM                         		= 862; 	// 申请加入队伍
+//EGMI_ACK_JOIN_TEAM								= 863; 	// 加入队伍结果
+message ReqAckJoinTeam
+{
+    required Ident		team_id = 1;    
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息
+}
+
+//EGMI_REQ_LEAVE_TEAM                        		= 864; 	// 申请离开队伍/
+//EGMI_ACK_LEAVE_TEAM								= 865; 	// 离开队伍结果 
+message ReqAckLeaveTeam
+{
+    required Ident		team_id = 1;
+	optional TeamInfo xTeamInfo	= 2;				//队伍详细信息
+}
+
+
+//	EGMI_REQ_OPRMEMBER_TEAM							= 867; 	// 操作成员
+//	EGMI_ACK_OPRMEMBER_TEAM							= 868; 	// 操作成员 
+message ReqAckOprTeamMember
+{
+	enum EGTeamMemberOprType
+	{
+		EGAT_DOWN = 0;
+		EGAT_UP = 1;
+		EGAT_KICK = 2;
+		
+		EGAT_APPOINT 		= 3;//任命
+		EGAT_FIRE 			= 4;//撤职
+		EGAT_DEMISE 		= 5;//禅让
+		EGAT_ACCEPTAPPLY 	= 6;//收人
+		EGAT_DENYAPPLY 		= 7;//拒收
+		EGAT_KICKOUT 		= 8;//开除
+	}
+	required Ident						team_id = 1;
+    required Ident						member_id = 2;//被操作的ID
+    required EGTeamMemberOprType		type = 3;
+	optional TeamInfo 					xTeamInfo	= 4;				//队伍详细信息
+}
+
+//	EGMI_REQ_INVITE_TEAM							= 866; 	// 邀请加入队伍
+message ReqAckInviteTeam
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	required Ident						invite_target_id = 3;//
+}
+
+//	EGMI_REQ_TEAM_ENTER_ECTYPE					= 869; 	// 组队进副本
+message ReqTeamEnterEctype
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	optional int32						nEctypeID = 3;//
+	optional int32						nGroupID = 4;//
+	optional int32						nResult 	= 5;//
+	optional int32						nServerID 	= 6;//
+}
+
+//	EGMI_ACK_TEAM_ENTER_ECTYPE						= 870; 	// 组队进副本
+message AckTeamEnterEctype
+{	
+	required Ident						team_id = 1;
+    required Ident						self_id = 2;//
+	optional int32						nEctypeID = 3;//
+	optional int32						nGroupID = 4;//
+	optional int32						nResult 	= 5;//
+}
+
+
 ///////////////大地图/////////////////////////////////////////////////////////////////////////////////////
 message GridGuildBaseInfo
 {
@@ -528,4 +637,59 @@ message ReqMapKingWar
 //	EGMI_ACK_MAP_GRID_KING_WAR
 message AckMapKingWar
 {
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+message PVPRoomInfo
+{
+	required int32 nCellStatus				= 1;	// 状态
+	required Ident RoomID					= 2;	// 房间ID
+	required int32 nPVPMode					= 3;	// 匹配模式
+	required int32 nPVPGrade				= 4;	// 房间所在的阶段
+	required int32 MaxPalyer				= 5;			
+	repeated Ident xRedPlayer				= 6;
+	repeated Ident xBluePlayer				= 7;
+	optional int64      serverid			= 8; // 房间副本所在的serverid	
+	optional int64      SceneID				= 9; // 房间副本所在的场景id	
+	optional int64      groupID				= 10; // 房间副本所在的层
+}
+
+//EGMI_REQ_PVPAPPLYMACTCH						= 1100; 	// 申请匹配pvp
+message ReqPVPApplyMatch
+{	
+	enum EApplyType
+	{
+		EApplyType_Single				=0; // 个人匹配
+		EApplyType_Team					=1; // 队伍匹配
+	};
+	
+    required Ident	self_id 				= 1;//
+	required int32	nPVPMode				= 2;	// 匹配模式
+	optional int64 	score					= 3;	// 分数
+	required int32	ApplyType 				= 4;	// 匹配方式，队伍申请还是个人申请
+	optional Ident	team_id 				= 5;	// 队伍ID 
+}
+
+//EGMI_ACK_PVPAPPLYMACTCH						= 1101; 	// 返回匹配pvp
+message AckPVPApplyMatch
+{	
+    required Ident						self_id = 1;//
+	optional PVPRoomInfo				xRoomInfo = 2;
+	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
+	required int32	nResult 					= 4;	// 匹配的结果
+}
+
+//EGMI_REQ_CREATEPVPECTYPE					= 1102; 	// 申请pvp副本
+message ReqCreatePVPEctype
+{	
+    required Ident						self_id = 1;//
+	required PVPRoomInfo				xRoomInfo = 2;
+}
+
+//EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+message AckCreatePVPEctype
+{	
+    required Ident	self_id 				= 1;//
+	required PVPRoomInfo	xRoomInfo 		= 2;
+	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
 }
