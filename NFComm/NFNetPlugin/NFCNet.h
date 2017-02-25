@@ -36,6 +36,8 @@ public:
 
         mnSendMsgTotal = 0;
         mnReceiveMsgTotal = 0;
+
+		mnBufferSize = 0;
     }
 
     template<typename BaseType>
@@ -54,6 +56,8 @@ public:
         
         mnSendMsgTotal = 0;
         mnReceiveMsgTotal = 0;
+
+		mnBufferSize = 0;
     }
     virtual ~NFCNet() {};
 
@@ -62,6 +66,7 @@ public:
 
     virtual void Initialization(const char* strIP, const unsigned short nPort);
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4);
+	virtual int ExpandBufferSize(const unsigned int size);
 
     virtual bool Final();
 
@@ -124,7 +129,9 @@ private:
     std::string mstrIP;
     int mnPort;
     int mnCpuCount;
-    bool mbServer;
+	bool mbServer;
+
+	int mnBufferSize;
 
     bool mbWorking;
 
