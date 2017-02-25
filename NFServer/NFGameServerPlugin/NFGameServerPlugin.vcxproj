@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="NFCGameServerModule.h" />
     <ClInclude Include="NFCLevelModule.h" />
+    <ClInclude Include="NFCNPCRefreshModule.h" />
     <ClInclude Include="NFCPropertyConfigModule.h" />
     <ClInclude Include="NFCPropertyModule.h" />
     <ClInclude Include="NFCPropertyTrailModule.h" />
@@ -120,6 +121,7 @@
     </ClCompile>
     <ClCompile Include="NFCGameServerModule.cpp" />
     <ClCompile Include="NFCLevelModule.cpp" />
+    <ClCompile Include="NFCNPCRefreshModule.cpp" />
     <ClCompile Include="NFCPropertyConfigModule.cpp" />
     <ClCompile Include="NFCPropertyModule.cpp" />
     <ClCompile Include="NFCPropertyTrailModule.cpp" />

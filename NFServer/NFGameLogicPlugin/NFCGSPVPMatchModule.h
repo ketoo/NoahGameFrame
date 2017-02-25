@@ -10,7 +10,6 @@
 #define NFC_GS_PVP_MATCH_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -44,9 +43,10 @@ protected:
 	void OnAckCreatePVPEctyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+	NFINetClientModule* m_pNetClientModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIGSSwichServerModule* m_pGSSwitchServerModule;
 };

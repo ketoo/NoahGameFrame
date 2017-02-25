@@ -65,7 +65,7 @@ bool NFCEventModule::Execute()
 
 }
 
-bool NFCEventModule::DoEvent(const NFEventDefine nEventID, const NFIDataList & valueList)
+bool NFCEventModule::DoEvent(const NFEventDefine nEventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 
@@ -98,7 +98,7 @@ bool NFCEventModule::RemoveEventCallBack(const NFEventDefine nEventID)
 	return mModuleEventInfoMapEx.RemoveElement(nEventID);
 }
 
-bool NFCEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFIDataList & valueList)
+bool NFCEventModule::DoEvent(const NFGUID self, const NFEventDefine nEventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 

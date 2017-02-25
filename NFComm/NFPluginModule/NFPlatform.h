@@ -284,7 +284,6 @@ typedef int64_t NFINT64;
 #ifndef _MSC_VER
 #include <sys/time.h>
 #include <unistd.h>
-#include <sys/prctl.h>
 #define EPOCHFILETIME 11644473600000000ULL
 #else
 #include <windows.h>

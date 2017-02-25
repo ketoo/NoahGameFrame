@@ -1,53 +1,70 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCHeroModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
-//    @Desc             :
+//    @Date             :    2017-02-16
+//    @Module           :    NFCHeroModule
+//
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CHAT_MODULE_H
-#define NFC_CHAT_MODULE_H
+#ifndef NFC_HERO_MODULE_MODULE_H
+#define NFC_HERO_MODULE_MODULE_H
 
-#include <memory>
-#include "NFComm/NFMessageDefine/NFMsgDefine.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIChatModule.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIEventModule.h"
-#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-////////////////////////////////////////////////////////////////////////////
+#include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
+#include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 
-
-
-class NFCChatModule
-    : public NFIChatModule
+class NFCHeroModule
+    : public NFIHeroModule
 {
 public:
-	NFCChatModule(NFIPluginManager* p)
+    NFCHeroModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
+    virtual ~NFCHeroModule() {};
+
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
 
     virtual bool AfterInit();
+    virtual bool BeforeShut();
 
+    virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
+    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp);
+    virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
+    virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
+    virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
+
+	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
+	virtual bool SetFightHero(const NFGUID& self, const int nPos, const NFGUID& xHeroID);
+
+	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID);
+	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID);
+	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 
 protected:
+	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
-    //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
-    NFIClassModule* m_pClassModule;
-    NFILogModule* m_pLogModule;
+protected:
+    NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
+	NFIKernelModule* m_pKernelModule;
 	NFINetModule* m_pNetModule;
-	NFIEventModule* m_pEventModule;
-	NFISceneAOIModule* m_pSceneAOIModule;
-    //////////////////////////////////////////////////////////////////////////
+	NFIHeroPropertyModule* m_pHeroPropertyModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+    NFISceneProcessModule* m_pSceneProcessModule;
+private:
 };
+
 #endif

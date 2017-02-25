@@ -9,9 +9,8 @@
 #ifndef NFC_PROPERTY_CONFIG_MODULE_H
 #define NFC_PROPERTY_CONFIG_MODULE_H
 
-#include "NFComm/Config/NFConfig.h"
 #include "Dependencies/RapidXML/rapidxml.hpp"
-#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+//#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "Dependencies/RapidXML/rapidxml_print.hpp"
 #include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
