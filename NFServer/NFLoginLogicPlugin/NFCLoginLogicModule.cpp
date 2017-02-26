@@ -38,7 +38,7 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			if (m_pAccountRedisModule->ExistAccount(xMsg.account()))
+			if (!m_pAccountRedisModule->ExistAccount(xMsg.account()))
 			{
 				m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password());
 			}
