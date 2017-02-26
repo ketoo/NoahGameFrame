@@ -27,6 +27,16 @@ std::string NFCCommonRedisModule::GetRecordCacheKey(const std::string& strClassN
     return strClassName + "_ObjectRecord";
 }
 
+std::string NFCCommonRedisModule::GetAccountCacheKey(const std::string & strAccount)
+{
+	return "AccountInfo_" + strAccount;
+}
+
+std::string NFCCommonRedisModule::GetTileCacheKey(const NFGUID & self)
+{
+	return "TileInfo_" + self.ToString();
+}
+
 bool NFCCommonRedisModule::AfterInit()
 {
     m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();

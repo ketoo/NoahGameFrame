@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -43,6 +44,7 @@ private:
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
+	NFIAccountRedisModule* m_pAccountRedisModule;
 };
 
 #endif

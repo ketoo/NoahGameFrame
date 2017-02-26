@@ -16,7 +16,7 @@
 #include "NFComm/NFPluginModule/NFILoginNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-
+#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 
 class NFCLoginLogicModule
     : public NFILoginLogicModule
@@ -38,8 +38,8 @@ public:
 
 protected:
 	NFINetModule* m_pNetModule;
-    //NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
 	NFILogModule* m_pLogModule;
+	NFIAccountRedisModule* m_pAccountRedisModule;
 private:
 };
 
