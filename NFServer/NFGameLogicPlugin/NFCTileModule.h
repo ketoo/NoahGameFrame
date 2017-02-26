@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 
 class NFCTileModule
     : public NFITileModule
@@ -37,8 +38,29 @@ protected:
 	void ReqMineTile(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-	bool AddTile(const NFGUID& self, const int nX, const int nY);
+	bool AddTile(const NFGUID& self, const int nX, const int nY, const int nOpr);
 	bool RemoveTile(const NFGUID& self, const int nX, const int nY);
+
+	bool SaveTileData(const NFGUID& self);
+	bool LoadTileData(const NFGUID& self);
+
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+
+protected:
+	struct TileState
+	{
+		int x;
+		int y;
+		int state;
+	};
+
+	struct TileData
+	{
+		//x,y,state
+		NFMapEx<int, NFMapEx<int, TileState>> mxTileState;
+	};
+
+	NFMapEx<NFGUID, TileData> mxTileData;
 
 private:
 	NFINetModule* m_pNetModule;
@@ -47,9 +69,8 @@ private:
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-
-
 };
 
 

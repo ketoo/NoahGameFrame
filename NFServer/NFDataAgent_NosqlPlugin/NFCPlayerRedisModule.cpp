@@ -199,31 +199,31 @@ bool NFCPlayerRedisModule::SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR
 	return true;
 }
 
-bool NFCPlayerRedisModule::GetAccountRoleID(const std::string & strAccount, NFGUID& xPlayerID)
+bool NFCPlayerRedisModule::SavePlayerTileToCache(const NFGUID & self, const std::string & strTileData)
 {
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-	if (!pNoSqlDriver)
+	std::string strTileKey = self.ToString();
+	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
+	if (xNoSqlDriver)
 	{
-		return false;
-	}
-
-	std::string strValue;
-
-	if (pNoSqlDriver->HGet("AccountInfo_" + strAccount, "RoleID", strValue))
-	{
-		if (strValue == "**nonexistent-key**")
-		{
-			return false;
-		}
-
-		xPlayerID.FromString(strValue);
-		return true;
+		return xNoSqlDriver->Set(strTileKey, strTileData);
 	}
 
 	return false;
 }
 
-bool NFCPlayerRedisModule::SavePlayerDataToCatch(const NFGUID & self)
+bool NFCPlayerRedisModule::GetPlayerTileFromCache(const NFGUID & self, std::string & strTileData)
+{
+	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(self);
+	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
+	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
+	{
+		return xNoSqlDriver->Get(strTileKey, strTileData);
+	}
+
+	return false;
+}
+
+bool NFCPlayerRedisModule::SavePlayerDataToCache(const NFGUID & self)
 {
 	bool isProperty = SetPlayerCacheProperty(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
 	bool isRecord = SetPlayerCacheRecord(self, m_pKernelModule->GetObject(self)->GetRecordManager());
@@ -231,41 +231,9 @@ bool NFCPlayerRedisModule::SavePlayerDataToCatch(const NFGUID & self)
 	return isProperty && isRecord;
 }
 
-const NFGUID NFCPlayerRedisModule::CreateRole(const std::string & strAccount, const std::string & strName)
-{
-	NFGUID xCacheRoleID;
-	if (!GetAccountRoleID(strAccount, xCacheRoleID))
-	{
-		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-		if (!pNoSqlDriver)
-		{
-			return xCacheRoleID;
-		}
-
-		xCacheRoleID = m_pKernelModule->CreateGUID();
-		NFDataList xArgs;
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(xCacheRoleID, 1, 0, NFrame::Player::ThisName(), "", xArgs);
-
-		pObject->SetPropertyString(NFrame::Player::Account(), strAccount);
-		pObject->SetPropertyString(NFrame::Player::Name(), strName);
-		m_pKernelModule->DestroyObject(xCacheRoleID);
-
-		if (!pNoSqlDriver->HSet("AccountInfo_" + strAccount, "RoleID", xCacheRoleID.ToString()))
-		{
-			return NFGUID();
-		}
-	}
-
-	return xCacheRoleID;
-}
-
-const bool NFCPlayerRedisModule::DeleteRole(const std::string & strAccount, const NFGUID xID)
-{
-	return false;
-}
-
 std::string NFCPlayerRedisModule::GetOnlineGameServerKey()
 {
+	//if (strValue == "**nonexistent-key**")
 	return "OnlineGameKey";
 }
 
@@ -304,13 +272,13 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
 		OnOffline(self);
-		NFINT64 xT1 = NFGetTime();
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::LastOfflineTime(), xT1);
+		//NFINT64 xT1 = NFGetTime();
+		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::LastOfflineTime(), xT1);
 
-		const NFINT64& xT2 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineTime());
+		//const NFINT64& xT2 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineTime());
 
-		NFINT64 totalTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::TotalTime());
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::TotalTime(), totalTime + xT1 - xT2);
+		//NFINT64 totalTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::TotalTime());
+		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::TotalTime(), totalTime + xT1 - xT2);
 
 		SavePlayerDataToCatch(self);
 	}
@@ -319,9 +287,9 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 		OnOnline(self);
 		AttachData(self);
 
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTime());
-		int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
-		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
+		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTime());
+		//int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
+		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
 	}
 
 	return 0;
