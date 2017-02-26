@@ -4,6 +4,7 @@
 //    @Date             :    2016-12-18
 //    @Module           :    NFCChatModule
 //    @Desc             :
+// -------------------------------------------------------------------------
 
 #include "NFCChatModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -11,11 +12,7 @@
 
 bool NFCChatModule::Init()
 {
-	return true;
-}
-
-bool NFCChatModule::AfterInit()
-{
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -23,8 +20,13 @@ bool NFCChatModule::AfterInit()
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-    m_pNetClientModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
+	return true;
+}
+
+bool NFCChatModule::AfterInit()
+{
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCChatModule::OnClienChatProcess);
 
 	return true;
