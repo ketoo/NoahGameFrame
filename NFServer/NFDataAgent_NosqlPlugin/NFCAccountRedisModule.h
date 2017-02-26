@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 class NFCAccountRedisModule : public NFIAccountRedisModule
 {
@@ -35,14 +36,19 @@ public:
 	virtual bool AfterInit();
 
 	virtual int VerifyAccount(const std::string& strAccount, const std::string& strPwd);
+	virtual bool AddAccount(const std::string& strAccount, const std::string& strPwd);
+	virtual bool ExistAccount(const std::string& strAccount);
 
+	virtual bool ExistRoleName(const std::string& strRoleName);
+	virtual bool CreateRole(const std::string& strAccount, const std::string& strRoleName, const NFGUID& id);
+	virtual bool GetRoleInfo(const std::string& strAccount, std::string& strRoleName, NFGUID& id);
 protected:
 
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
-
+	NFIKernelModule* m_pKernelModule;
 };
 
 

@@ -25,7 +25,9 @@ public:
 
 public:
     virtual std::string GetPropertyCacheKey(const std::string& strClassName);
-    virtual std::string GetRecordCacheKey(const std::string& strClassName);
+	virtual std::string GetRecordCacheKey(const std::string& strClassName);
+	virtual std::string GetAccountCacheKey(const std::string& strAccount);
+	virtual std::string GetTileCacheKey(const NFGUID& self);
 
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName);
