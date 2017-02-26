@@ -280,7 +280,7 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 		//NFINT64 totalTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::TotalTime());
 		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::TotalTime(), totalTime + xT1 - xT2);
 
-		SavePlayerDataToCatch(self);
+		SavePlayerDataToCache(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{

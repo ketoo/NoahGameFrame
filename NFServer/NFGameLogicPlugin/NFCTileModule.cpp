@@ -51,7 +51,7 @@ void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const ch
 	int nOpr = xMsg.opr();
 	if (1 == nOpr)//add
 	{
-		AddTile(nPlayerID, nX, nY);
+		AddTile(nPlayerID, nX, nY, nOpr);
 	}
 	else if (0 == nOpr)//rem
 	{
