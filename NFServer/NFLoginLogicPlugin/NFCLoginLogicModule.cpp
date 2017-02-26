@@ -12,6 +12,10 @@
 
 bool NFCLoginLogicModule::Init()
 {
+	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
     return true;
 }
 
@@ -34,8 +38,12 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			//int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
-            int nState = 0;
+			if (m_pAccountRedisModule->ExistAccount(xMsg.account()))
+			{
+				m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password());
+			}
+
+			int nState = m_pAccountRedisModule->VerifyAccount(xMsg.account(), xMsg.password());
 			if (0 != nState)
 			{
 				std::ostringstream strLog;
@@ -80,8 +88,5 @@ bool NFCLoginLogicModule::Execute()
 
 bool NFCLoginLogicModule::AfterInit()
 {
-    //m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>();
-	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     return true;
 }
