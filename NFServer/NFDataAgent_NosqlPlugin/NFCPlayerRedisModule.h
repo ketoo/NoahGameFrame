@@ -41,14 +41,12 @@ public:
 	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self);
 	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self);
 
+	virtual bool SavePlayerDataToCache(const NFGUID& self);
 	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
 	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
 
-	virtual	bool GetAccountRoleID(const std::string& strAccount, NFGUID& xPlayerID);
-	virtual bool SavePlayerDataToCatch(const NFGUID& self);
-
-	virtual const NFGUID CreateRole(const std::string& strAccount, const std::string& strName);
-	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID);
+	virtual bool SavePlayerTileToCache(const NFGUID& self, const std::string& strTileData);
+	virtual bool GetPlayerTileFromCache(const NFGUID& self, std::string& strTileData);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
