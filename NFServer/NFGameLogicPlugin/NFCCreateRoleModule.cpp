@@ -41,6 +41,8 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 	std::string strRoleName;
 	if (!m_pAccountRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
 	{
+		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 		return;
 	}
 
