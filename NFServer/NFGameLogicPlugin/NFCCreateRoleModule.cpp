@@ -11,6 +11,8 @@
 
 bool NFCCreateRoleModule::Init()
 {
+	
+	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
@@ -33,17 +35,17 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 		return;
 	}
 
-	const std::string& strAccount = xMsg.account();
+	;
 
 	NFGUID xPlayerID;
-	if (!m_pPlayerRedisModule->GetAccountRoleID(strAccount, xPlayerID))
+	std::string strRoleName;
+	if (!m_pAccountRedisModule->GetRoleInfo(xMsg.account(), strRoleName, xPlayerID))
 	{
 		return;
 	}
 
 	NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->GetPlayerCacheProperty(xPlayerID);
-
-	if (xPlayerProperty && xPlayerID != NULL_OBJECT)
+	if (xPlayerProperty)
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
@@ -81,8 +83,8 @@ void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const in
 	const std::string& strAccount = xMsg.account();
 	const std::string& strName = xMsg.noob_name();
 
-	NFGUID xID = m_pPlayerRedisModule->CreateRole(strAccount, strName);
-	if (xID != NULL_OBJECT)
+	NFGUID xID = m_pKernelModule->CreateGUID();
+	if (m_pAccountRedisModule->CreateRole(strAccount, strName, xID))
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();

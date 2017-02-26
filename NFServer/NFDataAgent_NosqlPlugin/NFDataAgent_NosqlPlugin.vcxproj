@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="NFCAccountRedisModule.cpp" />
     <ClCompile Include="NFCBigMapRedisModule.cpp" />
     <ClCompile Include="NFCGuildRedisModule.cpp" />
     <ClCompile Include="NFCMailRedisModule.cpp" />
@@ -22,6 +23,7 @@
     <ClCompile Include="NFDataAgent_NosqlPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCAccountRedisModule.h" />
     <ClInclude Include="NFCBigMapRedisModule.h" />
     <ClInclude Include="NFCGuildRedisModule.h" />
     <ClInclude Include="NFCMailRedisModule.h" />
@@ -105,7 +107,6 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\_Out\$(Configuration)\;$(SolutionDir)\Dependencies\lib\$(Configuration)\;$(SolutionDir)\Dependencies\boost_1_53_0\stage\lib\x64\vs11_0\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
