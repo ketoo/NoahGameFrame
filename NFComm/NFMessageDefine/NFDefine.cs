@@ -306,6 +306,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_BATTLE", Value=158)]
       EGMI_ACK_END_BATTLE = 158,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ENTER_GAME_FINISH", Value=159)]
+      EGMI_REQ_ENTER_GAME_FINISH = 159,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ENTER_GAME_FINISH", Value=160)]
+      EGMI_ACK_ENTER_GAME_FINISH = 160,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
             

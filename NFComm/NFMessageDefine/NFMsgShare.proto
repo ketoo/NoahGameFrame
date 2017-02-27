@@ -14,6 +14,10 @@ message ReqEnterGameServer
 	required bytes 		name = 4;
 }
 
+message ReqAckEnterGameSuccess
+{
+}
+
 message ReqHeartBeat
 {
 }
