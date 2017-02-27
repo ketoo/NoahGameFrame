@@ -161,12 +161,12 @@ bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>&
 
 NF_SHARE_PTR<NFIPropertyManager> NFCPlayerRedisModule::GetPlayerCacheProperty(const NFGUID& self)
 {
-	return m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
+	return m_pCommonRedisModule->GetCachePropertyInfo(self);
 }
 
 NF_SHARE_PTR<NFIRecordManager> NFCPlayerRedisModule::GetPlayerCacheRecord(const NFGUID& self)
 {
-	return m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
+	return m_pCommonRedisModule->GetCacheRecordInfo(self);
 }
 
 bool NFCPlayerRedisModule::SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
@@ -176,7 +176,7 @@ bool NFCPlayerRedisModule::SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_P
 		return false;
 	}
 
-	if (!m_pCommonRedisModule->SetCachePropertyInfo(self, NFrame::Player::ThisName(), pPropertyManager))
+	if (!m_pCommonRedisModule->SetCachePropertyInfo(self, pPropertyManager))
 	{
 		return false;
 	}
@@ -191,7 +191,7 @@ bool NFCPlayerRedisModule::SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR
 		return false;
 	}
 
-	if (!m_pCommonRedisModule->SetCacheRecordInfo(self, NFrame::Player::ThisName(), pRecordManager))
+	if (!m_pCommonRedisModule->SetCacheRecordInfo(self, pRecordManager))
 	{
 		return false;
 	}
@@ -253,15 +253,22 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 	NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
 
 	NFMsg::ObjectPropertyList xPbPropertyList;
-	if (m_pCommonRedisModule->GetCachePropertyListPB(self, NFrame::Player::ThisName(), xPbPropertyList))
+	if (m_pCommonRedisModule->GetCachePropertyListPB(self, xPbPropertyList))
 	{
-		m_pCommonRedisModule->ConvertPBToPropertyManager(xPbPropertyList, pPropertyManager);
+		m_pCommonRedisModule->ConvertPBToPropertyManager(xPbPropertyList, pPropertyManager, true);
 	}
-
-	NFMsg::ObjectRecordList xPbRecordList;
-	if (m_pCommonRedisModule->GetCacheRecordListPB(self, NFrame::Player::ThisName(), xPbRecordList))
+	if (m_pCommonRedisModule->GetStoragePropertyListPB(self, xPbPropertyList))
 	{
-		m_pCommonRedisModule->ConvertPBToRecordManager(xPbRecordList, pRecordManager);
+		m_pCommonRedisModule->ConvertPBToPropertyManager(xPbPropertyList, pPropertyManager, false);
+	}
+	NFMsg::ObjectRecordList xPbRecordList;
+	if (m_pCommonRedisModule->GetCacheRecordListPB(self, xPbRecordList))
+	{
+		m_pCommonRedisModule->ConvertPBToRecordManager(xPbRecordList, pRecordManager, true);
+	}
+	if (m_pCommonRedisModule->GetStorageRecordListPB(self, xPbRecordList))
+	{
+		m_pCommonRedisModule->ConvertPBToRecordManager(xPbRecordList, pRecordManager, false);
 	}
 
 	return true;
