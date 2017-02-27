@@ -51,12 +51,15 @@ void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const ch
 	int nOpr = xMsg.opr();
 	if (1 == nOpr)//add
 	{
+		////consume diamond
 		AddTile(nPlayerID, nX, nY, nOpr);
 	}
 	else if (0 == nOpr)//rem
 	{
-		RemoveTile(nPlayerID, nX, nY);
+		//get money
+		AddTile(nPlayerID, nX, nY, nOpr);
 	}
+
 	NFMsg::AckMiningTitle xData;
 	NFMsg::AckMiningTitle::TileState* pTile = xData.add_tile();
 	if (pTile)
@@ -134,10 +137,10 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 
 	NFMsg::AckMiningTitle xData;
 	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
-	for (; ; xStateDataMap = xTileData->mxTileState.Next())
+	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
 	{
 		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
-		for (; ; xStateData = xStateDataMap->Next())
+		for (; xStateData; xStateData = xStateDataMap->Next())
 		{
 			//pb
 			//xStateData
@@ -161,6 +164,8 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 
 bool NFCTileModule::LoadTileData(const NFGUID & self)
 {
+	mxTileData.RemoveElement(self);
+
 	std::string strData;
 	if (m_pPlayerRedisModule->GetPlayerTileFromCache(self, strData))
 	{
@@ -181,6 +186,42 @@ bool NFCTileModule::LoadTileData(const NFGUID & self)
 	return false;
 }
 
+bool NFCTileModule::SendTileData(const NFGUID & self)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		return false;
+	}
+
+	bool bNeedSend = false;
+	NFMsg::AckMiningTitle xData;
+	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
+	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
+	{
+		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
+		for (; xStateData; xStateData = xStateDataMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::AckMiningTitle::TileState* pTile = xData.add_tile();
+			if (pTile)
+			{
+				bNeedSend = true;
+
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_opr(xStateData->state);
+			}
+		}
+	}
+
+	if (bNeedSend)
+	{
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, self);
+	}
+}
+
 int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
@@ -192,6 +233,11 @@ int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 	{
 		//load
 		LoadTileData(self);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH == eClassEvent)
+	{
+		//load
+		SendTileData(self);
 	}
 
 	return 0;
