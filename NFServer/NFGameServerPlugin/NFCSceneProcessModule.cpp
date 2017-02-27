@@ -11,6 +11,14 @@
 
 bool NFCSceneProcessModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+
     return true;
 }
 
@@ -26,14 +34,6 @@ bool NFCSceneProcessModule::Execute()
 
 bool NFCSceneProcessModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCSceneProcessModule::EnterSceneConditionEvent);

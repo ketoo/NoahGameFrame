@@ -50,6 +50,16 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckEnterGameSuccess")]
+  public partial class ReqAckEnterGameSuccess : global::ProtoBuf.IExtensible
+  {
+    public ReqAckEnterGameSuccess() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqHeartBeat")]
   public partial class ReqHeartBeat : global::ProtoBuf.IExtensible
   {

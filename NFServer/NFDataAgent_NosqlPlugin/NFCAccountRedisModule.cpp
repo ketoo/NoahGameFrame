@@ -115,8 +115,7 @@ bool NFCAccountRedisModule::GetRoleInfo(const std::string & strAccount, std::str
 			bool bRoleNameRet = xNoSqlDriver->HGet(strAccountKey, "Name", strRoleName);
 			bool bRoleIDRet = xNoSqlDriver->HGet(strAccountKey, "RoleID", strID);
 			if (bRoleNameRet && bRoleIDRet
-				&& !strRoleName .empty() && !strID.empty()
-				&& xNoSqlDriver->Exists(strRoleName) && xNoSqlDriver->Exists(strID))
+				&& !strRoleName .empty() && !strID.empty())
 			{
 				return id.FromString(strID);
 			}
