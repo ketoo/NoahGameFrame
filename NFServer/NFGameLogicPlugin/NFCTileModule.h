@@ -43,6 +43,7 @@ protected:
 
 	bool SaveTileData(const NFGUID& self);
 	bool LoadTileData(const NFGUID& self);
+	bool SendTileData(const NFGUID& self);
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
