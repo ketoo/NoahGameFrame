@@ -37,6 +37,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto();
 void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
 class ReqEnterGameServer;
+class ReqAckEnterGameSuccess;
 class ReqHeartBeat;
 class ReqLeaveGameServer;
 class PlayerEntryInfo;
@@ -443,6 +444,78 @@ class LIBPROTOC_EXPORT ReqEnterGameServer : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqEnterGameServer* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckEnterGameSuccess : public ::google::protobuf::Message {
+ public:
+  ReqAckEnterGameSuccess();
+  virtual ~ReqAckEnterGameSuccess();
+
+  ReqAckEnterGameSuccess(const ReqAckEnterGameSuccess& from);
+
+  inline ReqAckEnterGameSuccess& operator=(const ReqAckEnterGameSuccess& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckEnterGameSuccess& default_instance();
+
+  void Swap(ReqAckEnterGameSuccess* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckEnterGameSuccess* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckEnterGameSuccess& from);
+  void MergeFrom(const ReqAckEnterGameSuccess& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEnterGameSuccess)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckEnterGameSuccess* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -9172,6 +9245,10 @@ inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
+
+// -------------------------------------------------------------------
+
+// ReqAckEnterGameSuccess
 
 // -------------------------------------------------------------------
 

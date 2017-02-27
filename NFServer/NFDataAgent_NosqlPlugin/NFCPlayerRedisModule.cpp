@@ -201,7 +201,7 @@ bool NFCPlayerRedisModule::SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR
 
 bool NFCPlayerRedisModule::SavePlayerTileToCache(const NFGUID & self, const std::string & strTileData)
 {
-	std::string strTileKey = self.ToString();
+	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(self);
 	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
 	if (xNoSqlDriver)
 	{
