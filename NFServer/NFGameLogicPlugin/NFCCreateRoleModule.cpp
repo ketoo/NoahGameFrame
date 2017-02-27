@@ -11,7 +11,7 @@
 
 bool NFCCreateRoleModule::Init()
 {
-	
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
@@ -34,8 +34,6 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 	{
 		return;
 	}
-
-	;
 
 	NFGUID xPlayerID;
 	std::string strRoleName;
@@ -64,12 +62,12 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 		pData->set_last_offline_ip(0);
 		pData->set_view_record("");
 
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 	}
 	else
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nClientID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 	}
 }
 
