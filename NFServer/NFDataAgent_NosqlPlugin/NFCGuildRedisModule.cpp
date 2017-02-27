@@ -63,9 +63,10 @@ int NFCGuildRedisModule::OnObjectClassEvent(const NFGUID& self, const std::strin
 
 NF_SHARE_PTR<NFIPropertyManager> NFCGuildRedisModule::GetGuildCachePropertyInfo(const NFGUID& xGuid)
 {
-    return m_pCommonRedisModule->GetCachePropertyInfo(xGuid, NFrame::Guild::ThisName());
+    return m_pCommonRedisModule->GetCachePropertyInfo(xGuid);
 }
 
+/*
 bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIPropertyManager>>& xPMList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
@@ -107,11 +108,12 @@ bool NFCGuildRedisModule::GetGuildCachePropertyInfo(const std::vector<std::strin
 
     return true;
 }
+*/
 
 NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(const NFGUID& xGuid)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Guild::ThisName());
-    if (!pRecordManager.get())
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(xGuid);
+    if (!pRecordManager)
     {
         return nullptr;
     }
@@ -122,7 +124,7 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
         return nullptr;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(xGuid);
     std::string strValue;
     if (!pNoSqlDriver->HGet(strKey, xGuid.ToString(), strValue))
     {
@@ -135,14 +137,14 @@ NF_SHARE_PTR<NFIRecordManager> NFCGuildRedisModule::GetGuildCacheRecordManager(c
         return nullptr;
     }
 
-    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager))
+    if (!m_pCommonRedisModule->ConvertPBToRecordManager(xMsg, pRecordManager, true))
     {
         return nullptr;
     }
 
     return pRecordManager;
 }
-
+/*
 bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::string>& xGuidList, std::vector<NF_SHARE_PTR<NFIRecordManager>>& xRMList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
@@ -184,7 +186,7 @@ bool NFCGuildRedisModule::GetGuildCacheRecordManager(const std::vector<std::stri
 
 	return true;
 }
-
+*/
 bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
 {
     if (xGuid.IsNull())
@@ -217,7 +219,7 @@ bool NFCGuildRedisModule::SetGuildCachePropertyInfo(const NFGUID& xGuid, NF_SHAR
         return false;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetPropertyCacheKey(xGuid);
     if (!pNoSqlDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
@@ -258,7 +260,7 @@ bool NFCGuildRedisModule::SetGuildCacheRecordManager(const NFGUID& xGuid, NF_SHA
         return false;
     }
 
-    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(NFrame::Guild::ThisName());
+    const std::string strKey = m_pCommonRedisModule->GetRecordCacheKey(xGuid);
     if (!pNoSqlDriver->HSet(strKey, xGuid.ToString(), strValue))
     {
         return false;
