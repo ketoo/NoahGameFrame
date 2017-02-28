@@ -39,7 +39,7 @@ std::string NFCCommonRedisModule::GetRecordStorageKey(const NFGUID & self)
 
 std::string NFCCommonRedisModule::GetAccountCacheKey(const std::string & strAccount)
 {
-	return strAccount + "AccountInfo";
+	return strAccount + "_AccountInfo";
 }
 
 std::string NFCCommonRedisModule::GetTileCacheKey(const NFGUID & self)
