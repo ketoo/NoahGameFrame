@@ -94,7 +94,7 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 			xNoSqlDriver->HSet(strAccountKey, "Name", strRoleName);
 			xNoSqlDriver->HSet(strAccountKey, "RoleID", id.ToString());
 
-			xNoSqlDriver->HSet(id.ToString(), "Name", strRoleName);
+			xNoSqlDriver->HSet(strRoleName, "RoleID", id.ToString());
 
 			return true;
 		}
