@@ -803,7 +803,7 @@ public:
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
 	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& LastContainerID(){ static std::string xLastContainerID = "LastContainerID"; return xLastContainerID; } // int
+	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
