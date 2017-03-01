@@ -128,7 +128,8 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArgArg, NFDataList& list);
 
-    virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList);
+	virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList);
+	virtual int Random(int nStart, int nEnd);
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool LogStack();
