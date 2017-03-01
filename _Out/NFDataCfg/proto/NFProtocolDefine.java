@@ -754,7 +754,7 @@ public class Player {
 	public static final String Sex = "Sex"; // int
 	public static final String Race = "Race"; // int
 	public static final String Camp = "Camp"; // int
-	public static final String LastContainerID = "LastContainerID"; // int
+	public static final String HomeSceneID = "HomeSceneID"; // int
 	public static final String Level = "Level"; // int
 	public static final String ShowName = "ShowName"; // string
 	public static final String PrefabPath = "PrefabPath"; // string

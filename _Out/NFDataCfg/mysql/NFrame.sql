@@ -65,7 +65,7 @@ ALTER TABLE `Player` ADD `Name` varchar(128) DEFAULT '' COMMENT '角色名';
 ALTER TABLE `Player` ADD `Sex` bigint(11) DEFAULT '0' COMMENT '性别';
 ALTER TABLE `Player` ADD `Race` bigint(11) DEFAULT '0' COMMENT '种族';
 ALTER TABLE `Player` ADD `Camp` bigint(11) DEFAULT '0' COMMENT '阵营';
-ALTER TABLE `Player` ADD `LastContainerID` bigint(11) DEFAULT '0' COMMENT '玩家下线的时候需要保存上次在线的场景';
+ALTER TABLE `Player` ADD `HomeSceneID` bigint(11) DEFAULT '0' COMMENT '玩家下线的时候需要保存上次在线的场景';
 ALTER TABLE `Player` ADD `Level` bigint(11) DEFAULT '0' COMMENT '等级';
 ALTER TABLE `Player` ADD `ShowName` varchar(128) DEFAULT '' COMMENT '显示的名字';
 ALTER TABLE `Player` ADD `PrefabPath` varchar(128) DEFAULT '' COMMENT '预设路径';
