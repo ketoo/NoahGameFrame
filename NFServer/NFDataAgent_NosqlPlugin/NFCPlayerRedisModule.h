@@ -58,6 +58,12 @@ protected:
 
 	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
+
+
+private:
+
+	NFMapEx<NFGUID, std::string> mxObjectDataCache;
+
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
