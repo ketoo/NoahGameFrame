@@ -16,13 +16,14 @@ bool NFCCreateRoleModule::Init()
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	
     return true;
 }
 
 bool NFCCreateRoleModule::AfterInit()
 {
-
 	return true;
 }
 
@@ -118,15 +119,87 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nClientID);
 }
 
+void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::ReqEnterGameServer xMsg;
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+
+	if (m_pKernelModule->GetObject(nRoleID))
+	{
+		//it should be rebind with proxy's netobject
+		m_pKernelModule->DestroyObject(nRoleID);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(nRoleID);
+	if (nullptr != pGateInfo)
+	{
+		m_pGameServerNet_ServerModule->RemovePlayerGateInfo(nRoleID);
+	}
+
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = m_pGameServerNet_ServerModule->GetGateServerInfoBySockIndex(nSockIndex);
+	if (nullptr == pGateServerinfo)
+	{
+		return;
+	}
+
+	int nGateID = -1;
+	if (pGateServerinfo->xServerData.pData)
+	{
+		nGateID = pGateServerinfo->xServerData.pData->server_id();
+	}
+
+	if (nGateID < 0)
+	{
+		return;
+	}
+
+	if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nRoleID, nClientID, nGateID))
+	{
+		return;
+	}
+
+	int nSceneID = 1;
+	NFDataList var;
+	var.AddString(NFrame::Player::Name());
+	var.AddString(xMsg.name());
+
+	var.AddString(NFrame::Player::GateID());
+	var.AddInt(nGateID);
+
+	var.AddString(NFrame::Player::GameID());
+	var.AddInt(pPluginManager->GetAppID());
+
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
+	if (NULL == pObject)
+	{
+		//mRoleBaseData
+		//mRoleFDData
+		return;
+	}
+
+	//get data first then create player
+	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
+}
+
 bool NFCCreateRoleModule::ReadyExecute()
 {
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME, this, &NFCCreateRoleModule::OnClienEnterGameProcess);
 
 	return true;
 }
