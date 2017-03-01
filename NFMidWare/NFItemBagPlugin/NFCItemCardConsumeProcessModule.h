@@ -38,7 +38,7 @@ public:
 	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 protected:
 
-	bool AwardItemProperty(const NFGUID& self, const NFGUID& xHeroID, const ::string& strID);
+	bool AwardItemProperty(const NFGUID& self, const NFGUID& xHeroID, const std::string& strID);
 
 private:
     NFIKernelModule* m_pKernelModule;
