@@ -42,9 +42,9 @@ std::string NFCCommonRedisModule::GetAccountCacheKey(const std::string & strAcco
 	return strAccount + "_AccountInfo";
 }
 
-std::string NFCCommonRedisModule::GetTileCacheKey(const NFGUID & self)
+std::string NFCCommonRedisModule::GetTileCacheKey(const int & nSceneID)
 {
-	return self.ToString() + "_TileInfo_";
+	return lexical_cast<std::string>(nSceneID) + "_TileInfo";
 }
 
 bool NFCCommonRedisModule::AfterInit()
