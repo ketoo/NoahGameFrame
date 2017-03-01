@@ -225,6 +225,23 @@ bool NFCPlayerRedisModule::GetPlayerTileFromCache(const int nSceneID, const NFGU
 
 bool NFCPlayerRedisModule::GetPlayerTileRandomFromCache(const int nSceneID, std::string & strTileData)
 {
+	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
+	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
+	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
+	{
+		//need t cache this keys
+		std::vector<std::string> vKeys;
+		if (xNoSqlDriver->HKeys(strTileKey, vKeys))
+		{
+			int nKeyIndex = m_pKernelModule->Random(0, vKeys.size());
+			std::string strKey = vKeys[nKeyIndex];
+			if (xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
+			{
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
