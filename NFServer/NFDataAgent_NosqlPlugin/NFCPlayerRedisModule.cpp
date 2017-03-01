@@ -266,6 +266,15 @@ std::string NFCPlayerRedisModule::GetOnlineProxyServerKey()
 
 const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 {
+	if (mxObjectDataCache.ExistElement(self))
+	{
+		//way 1:load first then create object, especially we have loaded nosql plugin
+	}
+	else
+	{
+		//way 2:load data when creating a object, especially we donot loaded any sql or nosql plugin
+	}
+
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (!pObject)
 	{

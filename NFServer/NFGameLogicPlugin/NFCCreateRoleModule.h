@@ -16,6 +16,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -37,6 +38,7 @@ protected:
 	void OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFINetModule* m_pNetModule;
@@ -45,6 +47,7 @@ private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIAccountRedisModule* m_pAccountRedisModule;
+	NFISceneAOIModule* m_pSceneAOIModule;
 };
 
 #endif
