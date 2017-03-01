@@ -36,14 +36,17 @@ public:
 
 protected:
 	void ReqMineTile(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqSearchOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
+
 
 protected:
 	bool AddTile(const NFGUID& self, const int nX, const int nY, const int nOpr);
 	bool RemoveTile(const NFGUID& self, const int nX, const int nY);
 
 	bool SaveTileData(const NFGUID& self);
-	bool LoadTileData(const NFGUID& self);
 	bool SendTileData(const NFGUID& self);
+	bool LoadTileData(const NFGUID& self);
+	bool LoadTileData(const NFGUID& self, const int nSceneID);
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
