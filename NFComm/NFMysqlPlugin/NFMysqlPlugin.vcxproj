@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03A9453A-D961-409D-A10D-ACB8B7A9F2AB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFMysqlClusterPlugin</RootNamespace>
+    <RootNamespace>NFMysqlPlugin</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>NFMysqlPlugin</ProjectName>
   </PropertyGroup>
