@@ -31,7 +31,7 @@ public:
 	virtual std::string GetRecordStorageKey(const NFGUID& self);
 
 	virtual std::string GetAccountCacheKey(const std::string& strAccount);
-	virtual std::string GetTileCacheKey(const NFGUID& self);
+	virtual std::string GetTileCacheKey(const int& nSceneID);
 
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const NFGUID& self);
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const NFGUID& self);

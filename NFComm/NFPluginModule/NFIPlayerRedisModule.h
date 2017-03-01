@@ -29,8 +29,9 @@ public:
 	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
 	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
 
-	virtual bool SavePlayerTileToCache(const NFGUID& self, const std::string& strTileData) = 0;
-	virtual bool GetPlayerTileFromCache(const NFGUID& self, std::string& strTileData) = 0;
+	virtual bool SavePlayerTileToCache(const int nSceneID, const NFGUID& self, const std::string& strTileData) = 0;
+	virtual bool GetPlayerTileRandomFromCache(const int nSceneID, std::string& strTileData) = 0;
+	virtual bool GetPlayerTileFromCache(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
 };
 
 #endif
