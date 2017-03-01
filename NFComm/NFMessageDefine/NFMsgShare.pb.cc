@@ -99,12 +99,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckJoinActivity_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivityType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ReqAckJoinActivity_EGameActivitySubType_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* ReqAckSearchOppnent_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ReqAckSearchOppnent_reflection_ = NULL;
-const ::google::protobuf::Descriptor* ReqAckBattleOppnent_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ReqAckBattleOppnent_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqAckCreateGuild_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqAckCreateGuild_reflection_ = NULL;
@@ -160,12 +154,18 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqMiningTitle_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqMiningTitle_reflection_ = NULL;
+const ::google::protobuf::Descriptor* TileState_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  TileState_reflection_ = NULL;
 const ::google::protobuf::Descriptor* AckMiningTitle_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AckMiningTitle_reflection_ = NULL;
-const ::google::protobuf::Descriptor* AckMiningTitle_TileState_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ReqSearchOppnent_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  AckMiningTitle_TileState_reflection_ = NULL;
+  ReqSearchOppnent_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AckSearchOppnent_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AckSearchOppnent_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqSendMail_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqSendMail_reflection_ = NULL;
@@ -698,37 +698,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckJoinActivity));
   ReqAckJoinActivity_EGameActivityType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(0);
   ReqAckJoinActivity_EGameActivitySubType_descriptor_ = ReqAckJoinActivity_descriptor_->enum_type(1);
-  ReqAckSearchOppnent_descriptor_ = file->message_type(23);
-  static const int ReqAckSearchOppnent_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, search_type_),
-  };
-  ReqAckSearchOppnent_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      ReqAckSearchOppnent_descriptor_,
-      ReqAckSearchOppnent::default_instance_,
-      ReqAckSearchOppnent_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckSearchOppnent, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ReqAckSearchOppnent));
-  ReqAckBattleOppnent_descriptor_ = file->message_type(24);
-  static const int ReqAckBattleOppnent_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, battle_type_),
-  };
-  ReqAckBattleOppnent_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      ReqAckBattleOppnent_descriptor_,
-      ReqAckBattleOppnent::default_instance_,
-      ReqAckBattleOppnent_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckBattleOppnent, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ReqAckBattleOppnent));
-  ReqAckCreateGuild_descriptor_ = file->message_type(25);
+  ReqAckCreateGuild_descriptor_ = file->message_type(23);
   static const int ReqAckCreateGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateGuild, guild_name_),
@@ -744,7 +714,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckCreateGuild));
-  ReqSearchGuild_descriptor_ = file->message_type(26);
+  ReqSearchGuild_descriptor_ = file->message_type(24);
   static const int ReqSearchGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSearchGuild, guild_name_),
   };
@@ -759,7 +729,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSearchGuild));
-  AckSearchGuild_descriptor_ = file->message_type(27);
+  AckSearchGuild_descriptor_ = file->message_type(25);
   static const int AckSearchGuild_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchGuild, guild_list_),
   };
@@ -795,7 +765,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSearchGuild_SearchGuildObject));
-  ReqAckJoinGuild_descriptor_ = file->message_type(28);
+  ReqAckJoinGuild_descriptor_ = file->message_type(26);
   static const int ReqAckJoinGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinGuild, guild_name_),
@@ -811,7 +781,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckJoinGuild));
-  ReqAckLeaveGuild_descriptor_ = file->message_type(29);
+  ReqAckLeaveGuild_descriptor_ = file->message_type(27);
   static const int ReqAckLeaveGuild_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveGuild, guild_name_),
@@ -827,7 +797,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveGuild));
-  ReqAckOprGuildMember_descriptor_ = file->message_type(30);
+  ReqAckOprGuildMember_descriptor_ = file->message_type(28);
   static const int ReqAckOprGuildMember_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, guild_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprGuildMember, member_id_),
@@ -845,7 +815,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckOprGuildMember));
   ReqAckOprGuildMember_EGGuildMemberOprType_descriptor_ = ReqAckOprGuildMember_descriptor_->enum_type(0);
-  ReqEnterGuildEctype_descriptor_ = file->message_type(31);
+  ReqEnterGuildEctype_descriptor_ = file->message_type(29);
   static const int ReqEnterGuildEctype_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqEnterGuildEctype, guild_id_),
   };
@@ -860,7 +830,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqEnterGuildEctype));
-  ReqIntensifylevelToEquip_descriptor_ = file->message_type(32);
+  ReqIntensifylevelToEquip_descriptor_ = file->message_type(30);
   static const int ReqIntensifylevelToEquip_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqIntensifylevelToEquip, equipid_),
   };
@@ -875,7 +845,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqIntensifylevelToEquip));
-  AckIntensifylevelToEquip_descriptor_ = file->message_type(33);
+  AckIntensifylevelToEquip_descriptor_ = file->message_type(31);
   static const int AckIntensifylevelToEquip_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckIntensifylevelToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckIntensifylevelToEquip, result_),
@@ -891,7 +861,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckIntensifylevelToEquip));
-  ReqHoleToEquip_descriptor_ = file->message_type(34);
+  ReqHoleToEquip_descriptor_ = file->message_type(32);
   static const int ReqHoleToEquip_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoleToEquip, equipid_),
   };
@@ -906,7 +876,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqHoleToEquip));
-  AckHoleToEquip_descriptor_ = file->message_type(35);
+  AckHoleToEquip_descriptor_ = file->message_type(33);
   static const int AckHoleToEquip_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckHoleToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckHoleToEquip, result_),
@@ -922,7 +892,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckHoleToEquip));
-  ReqInlaystoneToEquip_descriptor_ = file->message_type(36);
+  ReqInlaystoneToEquip_descriptor_ = file->message_type(34);
   static const int ReqInlaystoneToEquip_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqInlaystoneToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqInlaystoneToEquip, stoneid_),
@@ -939,7 +909,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqInlaystoneToEquip));
-  AckInlaystoneToEquip_descriptor_ = file->message_type(37);
+  AckInlaystoneToEquip_descriptor_ = file->message_type(35);
   static const int AckInlaystoneToEquip_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckInlaystoneToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckInlaystoneToEquip, result_),
@@ -955,7 +925,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckInlaystoneToEquip));
-  ReqElementlevelToEquip_descriptor_ = file->message_type(38);
+  ReqElementlevelToEquip_descriptor_ = file->message_type(36);
   static const int ReqElementlevelToEquip_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqElementlevelToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqElementlevelToEquip, eelementtype_),
@@ -971,7 +941,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqElementlevelToEquip));
-  AckElementlevelToEquip_descriptor_ = file->message_type(39);
+  AckElementlevelToEquip_descriptor_ = file->message_type(37);
   static const int AckElementlevelToEquip_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckElementlevelToEquip, equipid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckElementlevelToEquip, result_),
@@ -987,7 +957,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckElementlevelToEquip));
-  ReqSetFightHero_descriptor_ = file->message_type(40);
+  ReqSetFightHero_descriptor_ = file->message_type(38);
   static const int ReqSetFightHero_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSetFightHero, heroid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSetFightHero, fightpos_),
@@ -1003,7 +973,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSetFightHero));
-  ReqMiningTitle_descriptor_ = file->message_type(41);
+  ReqMiningTitle_descriptor_ = file->message_type(39);
   static const int ReqMiningTitle_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, y_),
@@ -1020,7 +990,24 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMiningTitle));
-  AckMiningTitle_descriptor_ = file->message_type(42);
+  TileState_descriptor_ = file->message_type(40);
+  static const int TileState_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, opr_),
+  };
+  TileState_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      TileState_descriptor_,
+      TileState::default_instance_,
+      TileState_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(TileState));
+  AckMiningTitle_descriptor_ = file->message_type(41);
   static const int AckMiningTitle_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle, tile_),
   };
@@ -1035,24 +1022,36 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMiningTitle));
-  AckMiningTitle_TileState_descriptor_ = AckMiningTitle_descriptor_->nested_type(0);
-  static const int AckMiningTitle_TileState_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle_TileState, x_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle_TileState, y_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle_TileState, opr_),
+  ReqSearchOppnent_descriptor_ = file->message_type(42);
+  static const int ReqSearchOppnent_offsets_[1] = {
   };
-  AckMiningTitle_TileState_reflection_ =
+  ReqSearchOppnent_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      AckMiningTitle_TileState_descriptor_,
-      AckMiningTitle_TileState::default_instance_,
-      AckMiningTitle_TileState_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle_TileState, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle_TileState, _unknown_fields_),
+      ReqSearchOppnent_descriptor_,
+      ReqSearchOppnent::default_instance_,
+      ReqSearchOppnent_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSearchOppnent, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSearchOppnent, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(AckMiningTitle_TileState));
-  ReqSendMail_descriptor_ = file->message_type(43);
+      sizeof(ReqSearchOppnent));
+  AckSearchOppnent_descriptor_ = file->message_type(43);
+  static const int AckSearchOppnent_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchOppnent, scene_id_),
+  };
+  AckSearchOppnent_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      AckSearchOppnent_descriptor_,
+      AckSearchOppnent::default_instance_,
+      AckSearchOppnent_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchOppnent, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchOppnent, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(AckSearchOppnent));
+  ReqSendMail_descriptor_ = file->message_type(44);
   static const int ReqSendMail_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, reciever_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, item_list_),
@@ -1069,7 +1068,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSendMail));
-  ReqSwitchServer_descriptor_ = file->message_type(44);
+  ReqSwitchServer_descriptor_ = file->message_type(45);
   static const int ReqSwitchServer_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, self_serverid_),
@@ -1090,7 +1089,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSwitchServer));
-  AckSwitchServer_descriptor_ = file->message_type(45);
+  AckSwitchServer_descriptor_ = file->message_type(46);
   static const int AckSwitchServer_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, self_serverid_),
@@ -1108,7 +1107,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSwitchServer));
-  TeamInfo_descriptor_ = file->message_type(46);
+  TeamInfo_descriptor_ = file->message_type(47);
   static const int TeamInfo_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TeamInfo, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TeamInfo, captain_id_),
@@ -1125,7 +1124,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TeamInfo));
-  TeammemberInfo_descriptor_ = file->message_type(47);
+  TeammemberInfo_descriptor_ = file->message_type(48);
   static const int TeammemberInfo_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TeammemberInfo, player_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TeammemberInfo, name_),
@@ -1144,7 +1143,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TeammemberInfo));
-  ReqAckCreateTeam_descriptor_ = file->message_type(48);
+  ReqAckCreateTeam_descriptor_ = file->message_type(49);
   static const int ReqAckCreateTeam_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateTeam, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckCreateTeam, xteaminfo_),
@@ -1160,7 +1159,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckCreateTeam));
-  ReqAckJoinTeam_descriptor_ = file->message_type(49);
+  ReqAckJoinTeam_descriptor_ = file->message_type(50);
   static const int ReqAckJoinTeam_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinTeam, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckJoinTeam, xteaminfo_),
@@ -1176,7 +1175,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckJoinTeam));
-  ReqAckLeaveTeam_descriptor_ = file->message_type(50);
+  ReqAckLeaveTeam_descriptor_ = file->message_type(51);
   static const int ReqAckLeaveTeam_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveTeam, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckLeaveTeam, xteaminfo_),
@@ -1192,7 +1191,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckLeaveTeam));
-  ReqAckOprTeamMember_descriptor_ = file->message_type(51);
+  ReqAckOprTeamMember_descriptor_ = file->message_type(52);
   static const int ReqAckOprTeamMember_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprTeamMember, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckOprTeamMember, member_id_),
@@ -1211,7 +1210,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckOprTeamMember));
   ReqAckOprTeamMember_EGTeamMemberOprType_descriptor_ = ReqAckOprTeamMember_descriptor_->enum_type(0);
-  ReqAckInviteTeam_descriptor_ = file->message_type(52);
+  ReqAckInviteTeam_descriptor_ = file->message_type(53);
   static const int ReqAckInviteTeam_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckInviteTeam, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckInviteTeam, self_id_),
@@ -1228,7 +1227,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckInviteTeam));
-  ReqTeamEnterEctype_descriptor_ = file->message_type(53);
+  ReqTeamEnterEctype_descriptor_ = file->message_type(54);
   static const int ReqTeamEnterEctype_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqTeamEnterEctype, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqTeamEnterEctype, self_id_),
@@ -1248,7 +1247,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqTeamEnterEctype));
-  AckTeamEnterEctype_descriptor_ = file->message_type(54);
+  AckTeamEnterEctype_descriptor_ = file->message_type(55);
   static const int AckTeamEnterEctype_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckTeamEnterEctype, team_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckTeamEnterEctype, self_id_),
@@ -1267,7 +1266,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckTeamEnterEctype));
-  GridGuildBaseInfo_descriptor_ = file->message_type(55);
+  GridGuildBaseInfo_descriptor_ = file->message_type(56);
   static const int GridGuildBaseInfo_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridGuildBaseInfo, level_),
@@ -1286,7 +1285,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GridGuildBaseInfo));
-  ReqBigMapGridInfo_descriptor_ = file->message_type(56);
+  ReqBigMapGridInfo_descriptor_ = file->message_type(57);
   static const int ReqBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqBigMapGridInfo, map_title_id_),
   };
@@ -1301,7 +1300,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapGridInfo));
-  BigMapGridBaseInfo_descriptor_ = file->message_type(57);
+  BigMapGridBaseInfo_descriptor_ = file->message_type(58);
   static const int BigMapGridBaseInfo_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridBaseInfo, guild_info_),
@@ -1321,7 +1320,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridBaseInfo));
-  BigMapLeaveMsg_descriptor_ = file->message_type(58);
+  BigMapLeaveMsg_descriptor_ = file->message_type(59);
   static const int BigMapLeaveMsg_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapLeaveMsg, owner_name_),
@@ -1340,7 +1339,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapLeaveMsg));
-  BigMapWarHistory_descriptor_ = file->message_type(59);
+  BigMapWarHistory_descriptor_ = file->message_type(60);
   static const int BigMapWarHistory_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, red_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapWarHistory, blue_info_),
@@ -1358,7 +1357,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapWarHistory));
-  BigMapGridDetailInfo_descriptor_ = file->message_type(60);
+  BigMapGridDetailInfo_descriptor_ = file->message_type(61);
   static const int BigMapGridDetailInfo_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, grid_base_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BigMapGridDetailInfo, stay_guid_list_),
@@ -1376,7 +1375,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BigMapGridDetailInfo));
-  AckBigMapGridInfo_descriptor_ = file->message_type(61);
+  AckBigMapGridInfo_descriptor_ = file->message_type(62);
   static const int AckBigMapGridInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapGridInfo, map_data_),
   };
@@ -1391,7 +1390,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapGridInfo));
-  ReqBigMapInfo_descriptor_ = file->message_type(62);
+  ReqBigMapInfo_descriptor_ = file->message_type(63);
   static const int ReqBigMapInfo_offsets_[1] = {
   };
   ReqBigMapInfo_reflection_ =
@@ -1405,7 +1404,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBigMapInfo));
-  AckBigMapInfo_descriptor_ = file->message_type(63);
+  AckBigMapInfo_descriptor_ = file->message_type(64);
   static const int AckBigMapInfo_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckBigMapInfo, grid_base_info_),
   };
@@ -1420,7 +1419,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckBigMapInfo));
-  ReqHoldMapGrid_descriptor_ = file->message_type(64);
+  ReqHoldMapGrid_descriptor_ = file->message_type(65);
   static const int ReqHoldMapGrid_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoldMapGrid, map_title_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHoldMapGrid, guild_id_),
@@ -1436,7 +1435,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqHoldMapGrid));
-  AckHoldMapGrid_descriptor_ = file->message_type(65);
+  AckHoldMapGrid_descriptor_ = file->message_type(66);
   static const int AckHoldMapGrid_offsets_[1] = {
   };
   AckHoldMapGrid_reflection_ =
@@ -1450,7 +1449,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckHoldMapGrid));
-  ReqLeaveMapMsg_descriptor_ = file->message_type(66);
+  ReqLeaveMapMsg_descriptor_ = file->message_type(67);
   static const int ReqLeaveMapMsg_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, map_title_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveMapMsg, leave_msg_),
@@ -1466,7 +1465,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqLeaveMapMsg));
-  AckLeaveMapMsg_descriptor_ = file->message_type(67);
+  AckLeaveMapMsg_descriptor_ = file->message_type(68);
   static const int AckLeaveMapMsg_offsets_[1] = {
   };
   AckLeaveMapMsg_reflection_ =
@@ -1480,7 +1479,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckLeaveMapMsg));
-  ReqGetMapAward_descriptor_ = file->message_type(68);
+  ReqGetMapAward_descriptor_ = file->message_type(69);
   static const int ReqGetMapAward_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqGetMapAward, map_title_id_),
   };
@@ -1495,7 +1494,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqGetMapAward));
-  AckGetMapAward_descriptor_ = file->message_type(69);
+  AckGetMapAward_descriptor_ = file->message_type(70);
   static const int AckGetMapAward_offsets_[1] = {
   };
   AckGetMapAward_reflection_ =
@@ -1509,7 +1508,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckGetMapAward));
-  ReqMapHunting_descriptor_ = file->message_type(70);
+  ReqMapHunting_descriptor_ = file->message_type(71);
   static const int ReqMapHunting_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapHunting, map_title_id_),
   };
@@ -1524,7 +1523,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapHunting));
-  AckMapHunting_descriptor_ = file->message_type(71);
+  AckMapHunting_descriptor_ = file->message_type(72);
   static const int AckMapHunting_offsets_[1] = {
   };
   AckMapHunting_reflection_ =
@@ -1538,7 +1537,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMapHunting));
-  ReqMapKingWar_descriptor_ = file->message_type(72);
+  ReqMapKingWar_descriptor_ = file->message_type(73);
   static const int ReqMapKingWar_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapKingWar, map_title_id_),
   };
@@ -1553,7 +1552,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMapKingWar));
-  AckMapKingWar_descriptor_ = file->message_type(73);
+  AckMapKingWar_descriptor_ = file->message_type(74);
   static const int AckMapKingWar_offsets_[1] = {
   };
   AckMapKingWar_reflection_ =
@@ -1567,7 +1566,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMapKingWar));
-  PVPRoomInfo_descriptor_ = file->message_type(74);
+  PVPRoomInfo_descriptor_ = file->message_type(75);
   static const int PVPRoomInfo_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, ncellstatus_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, roomid_),
@@ -1591,7 +1590,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PVPRoomInfo));
-  ReqPVPApplyMatch_descriptor_ = file->message_type(75);
+  ReqPVPApplyMatch_descriptor_ = file->message_type(76);
   static const int ReqPVPApplyMatch_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqPVPApplyMatch, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqPVPApplyMatch, npvpmode_),
@@ -1611,7 +1610,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqPVPApplyMatch));
   ReqPVPApplyMatch_EApplyType_descriptor_ = ReqPVPApplyMatch_descriptor_->enum_type(0);
-  AckPVPApplyMatch_descriptor_ = file->message_type(76);
+  AckPVPApplyMatch_descriptor_ = file->message_type(77);
   static const int AckPVPApplyMatch_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPVPApplyMatch, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPVPApplyMatch, xroominfo_),
@@ -1629,7 +1628,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckPVPApplyMatch));
-  ReqCreatePVPEctype_descriptor_ = file->message_type(77);
+  ReqCreatePVPEctype_descriptor_ = file->message_type(78);
   static const int ReqCreatePVPEctype_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreatePVPEctype, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreatePVPEctype, xroominfo_),
@@ -1645,7 +1644,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreatePVPEctype));
-  AckCreatePVPEctype_descriptor_ = file->message_type(78);
+  AckCreatePVPEctype_descriptor_ = file->message_type(79);
   static const int AckCreatePVPEctype_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreatePVPEctype, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreatePVPEctype, xroominfo_),
@@ -1723,10 +1722,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckJoinActivity_descriptor_, &ReqAckJoinActivity::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ReqAckSearchOppnent_descriptor_, &ReqAckSearchOppnent::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ReqAckBattleOppnent_descriptor_, &ReqAckBattleOppnent::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqAckCreateGuild_descriptor_, &ReqAckCreateGuild::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqSearchGuild_descriptor_, &ReqSearchGuild::default_instance());
@@ -1763,9 +1758,13 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqMiningTitle_descriptor_, &ReqMiningTitle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TileState_descriptor_, &TileState::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AckMiningTitle_descriptor_, &AckMiningTitle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    AckMiningTitle_TileState_descriptor_, &AckMiningTitle_TileState::default_instance());
+    ReqSearchOppnent_descriptor_, &ReqSearchOppnent::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AckSearchOppnent_descriptor_, &AckSearchOppnent::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqSendMail_descriptor_, &ReqSendMail::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1891,10 +1890,6 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete TakeOffEquip_reflection_;
   delete ReqAckJoinActivity::default_instance_;
   delete ReqAckJoinActivity_reflection_;
-  delete ReqAckSearchOppnent::default_instance_;
-  delete ReqAckSearchOppnent_reflection_;
-  delete ReqAckBattleOppnent::default_instance_;
-  delete ReqAckBattleOppnent_reflection_;
   delete ReqAckCreateGuild::default_instance_;
   delete ReqAckCreateGuild_reflection_;
   delete ReqSearchGuild::default_instance_;
@@ -1931,10 +1926,14 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqSetFightHero_reflection_;
   delete ReqMiningTitle::default_instance_;
   delete ReqMiningTitle_reflection_;
+  delete TileState::default_instance_;
+  delete TileState_reflection_;
   delete AckMiningTitle::default_instance_;
   delete AckMiningTitle_reflection_;
-  delete AckMiningTitle_TileState::default_instance_;
-  delete AckMiningTitle_TileState_reflection_;
+  delete ReqSearchOppnent::default_instance_;
+  delete ReqSearchOppnent_reflection_;
+  delete AckSearchOppnent::default_instance_;
+  delete AckSearchOppnent_reflection_;
   delete ReqSendMail::default_instance_;
   delete ReqSendMail_reflection_;
   delete ReqSwitchServer::default_instance_;
@@ -2089,147 +2088,145 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\021sub_activity_type\030\002 \002(\0162..NFMsg.ReqAckJ"
     "oinActivity.EGameActivitySubType\"!\n\021EGam"
     "eActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EGameActi"
-    "vitySubType\022\017\n\013EGAT_NORMAL\020\000\">\n\023ReqAckSe"
-    "archOppnent\022\'\n\013search_type\030\001 \002(\0162\022.NFMsg"
-    ".EBattleType\">\n\023ReqAckBattleOppnent\022\'\n\013b"
-    "attle_type\030\001 \002(\0162\022.NFMsg.EBattleType\"G\n\021"
-    "ReqAckCreateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NF"
-    "Msg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSear"
-    "chGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSearc"
-    "hGuild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSe"
-    "archGuild.SearchGuildObject\032\300\001\n\021SearchGu"
-    "ildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002("
-    "\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036\n\026guild_m"
-    "ember_max_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 \002"
-    "(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGuil"
-    "d\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngui"
-    "ld_name\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010gui"
+    "vitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021ReqAckCr"
+    "eateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSearchGuild\022"
+    "\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSearchGuild\022;"
+    "\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSearchGuil"
+    "d.SearchGuildObject\032\300\001\n\021SearchGuildObjec"
+    "t\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngui"
+    "ld_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002(\t\022\032\n\022gui"
+    "ld_member_count\030\004 \002(\005\022\036\n\026guild_member_ma"
+    "x_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 \002(\005\022\022\n\ngu"
+    "ild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGuild\022\036\n\010gui"
     "ld_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030"
-    "\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_"
-    "id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002("
-    "\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.Re"
-    "qAckOprGuildMember.EGGuildMemberOprType\""
-    "A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013"
-    "\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGu"
-    "ildEctype\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\"9\n\030ReqIntensifylevelToEquip\022\035\n\007equipid"
-    "\030\001 \002(\0132\014.NFMsg.Ident\"I\n\030AckIntensifyleve"
-    "lToEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022"
-    "\016\n\006result\030\002 \002(\005\"/\n\016ReqHoleToEquip\022\035\n\007equ"
-    "ipid\030\001 \002(\0132\014.NFMsg.Ident\"\?\n\016AckHoleToEqu"
-    "ip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006res"
-    "ult\030\002 \002(\005\"Z\n\024ReqInlaystoneToEquip\022\035\n\007equ"
-    "ipid\030\001 \002(\0132\014.NFMsg.Ident\022\017\n\007stoneid\030\002 \002("
-    "\014\022\022\n\nhole_index\030\003 \002(\005\"E\n\024AckInlaystoneTo"
-    "Equip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006"
-    "result\030\002 \002(\005\"f\n\026ReqElementlevelToEquip\022\035"
-    "\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022-\n\014eElemen"
-    "tType\030\002 \002(\0162\027.NFMsg.EGameElementType\"G\n\026"
-    "AckElementlevelToEquip\022\035\n\007equipid\030\001 \002(\0132"
-    "\014.NFMsg.Ident\022\016\n\006result\030\002 \002(\005\"A\n\017ReqSetF"
-    "ightHero\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\022\020"
-    "\n\010FightPos\030\002 \002(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030"
-    "\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\"o\n\016AckMini"
-    "ngTitle\022-\n\004tile\030\001 \003(\0132\037.NFMsg.AckMiningT"
-    "itle.TileState\032.\n\tTileState\022\t\n\001x\030\001 \002(\005\022\t"
-    "\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\"\201\001\n\013ReqSendMail\022\036"
-    "\n\010reciever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem_l"
-    "ist\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency"
-    "_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017R"
-    "eqSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.I"
-    "dent\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_se"
-    "rverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007S"
-    "ceneID\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMsg."
-    "Ident\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchServe"
-    "r\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_"
-    "serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003\022"
-    "\025\n\rgate_serverid\030\004 \002(\003\"z\n\010TeamInfo\022\035\n\007te"
-    "am_id\030\001 \002(\0132\014.NFMsg.Ident\022 \n\ncaptain_id\030"
-    "\002 \002(\0132\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003 "
-    "\003(\0132\025.NFMsg.TeammemberInfo\"n\n\016Teammember"
-    "Info\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\014\n"
-    "\004name\030\002 \002(\t\022\016\n\006nLevel\030\003 \002(\005\022\013\n\003job\030\004 \002(\005"
-    "\022\020\n\010HeadIcon\030\005 \002(\t\"U\n\020ReqAckCreateTeam\022\035"
+    "\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010guild_id\030\001 "
+    "\002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"\332\001"
+    "\n\024ReqAckOprGuildMember\022\036\n\010guild_id\030\001 \002(\013"
+    "2\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMs"
+    "g.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.ReqAckOprG"
+    "uildMember.EGGuildMemberOprType\"A\n\024EGGui"
+    "ldMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_U"
+    "P\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGuildEctyp"
+    "e\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\"9\n\030Req"
+    "IntensifylevelToEquip\022\035\n\007equipid\030\001 \002(\0132\014"
+    ".NFMsg.Ident\"I\n\030AckIntensifylevelToEquip"
+    "\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006resul"
+    "t\030\002 \002(\005\"/\n\016ReqHoleToEquip\022\035\n\007equipid\030\001 \002"
+    "(\0132\014.NFMsg.Ident\"\?\n\016AckHoleToEquip\022\035\n\007eq"
+    "uipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006result\030\002 \002("
+    "\005\"Z\n\024ReqInlaystoneToEquip\022\035\n\007equipid\030\001 \002"
+    "(\0132\014.NFMsg.Ident\022\017\n\007stoneid\030\002 \002(\014\022\022\n\nhol"
+    "e_index\030\003 \002(\005\"E\n\024AckInlaystoneToEquip\022\035\n"
+    "\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006result\030\002"
+    " \002(\005\"f\n\026ReqElementlevelToEquip\022\035\n\007equipi"
+    "d\030\001 \002(\0132\014.NFMsg.Ident\022-\n\014eElementType\030\002 "
+    "\002(\0162\027.NFMsg.EGameElementType\"G\n\026AckEleme"
+    "ntlevelToEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\016\n\006result\030\002 \002(\005\"A\n\017ReqSetFightHero"
+    "\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010FightP"
+    "os\030\002 \002(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030\001 \002(\005\022\t\n"
+    "\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n\tTileState\022\t\n\001x\030"
+    "\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\"0\n\016AckMini"
+    "ngTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMsg.TileState\""
+    "\022\n\020ReqSearchOppnent\"$\n\020AckSearchOppnent\022"
+    "\020\n\010scene_id\030\001 \002(\005\"\201\001\n\013ReqSendMail\022\036\n\010rec"
+    "iever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem_list\030\002"
+    " \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency_list"
+    "\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017ReqSwi"
+    "tchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022"
+    "\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_serveri"
+    "d\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007SceneI"
+    "D\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMsg.Ident"
+    "\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchServer\022\034\n\006"
+    "selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_serve"
+    "rid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003\022\025\n\rga"
+    "te_serverid\030\004 \002(\003\"z\n\010TeamInfo\022\035\n\007team_id"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022 \n\ncaptain_id\030\002 \002(\013"
+    "2\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003 \003(\0132\025"
+    ".NFMsg.TeammemberInfo\"n\n\016TeammemberInfo\022"
+    "\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\014\n\004name"
+    "\030\002 \002(\t\022\016\n\006nLevel\030\003 \002(\005\022\013\n\003job\030\004 \002(\005\022\020\n\010H"
+    "eadIcon\030\005 \002(\t\"U\n\020ReqAckCreateTeam\022\035\n\007tea"
+    "m_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txTeamInfo\030\002 "
+    "\001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoinTeam\022\035"
     "\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txTeamIn"
-    "fo\030\002 \001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoinT"
-    "eam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txT"
-    "eamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAck"
-    "LeaveTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022\"\n\txTeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002\n"
-    "\023ReqAckOprTeamMember\022\035\n\007team_id\030\001 \002(\0132\014."
-    "NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.I"
-    "dent\022<\n\004type\030\003 \002(\0162..NFMsg.ReqAckOprTeam"
-    "Member.EGTeamMemberOprType\022\"\n\txTeamInfo\030"
-    "\004 \001(\0132\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMemberO"
-    "prType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEG"
-    "AT_KICK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE"
-    "\020\004\022\017\n\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020"
-    "\006\022\022\n\016EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\""
-    "x\n\020ReqAckInviteTeam\022\035\n\007team_id\030\001 \002(\0132\014.N"
+    "fo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAckLeave"
+    "Team\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\tx"
+    "TeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002\n\023ReqA"
+    "ckOprTeamMember\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.Ident\022"
+    "<\n\004type\030\003 \002(\0162..NFMsg.ReqAckOprTeamMembe"
+    "r.EGTeamMemberOprType\022\"\n\txTeamInfo\030\004 \001(\013"
+    "2\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMemberOprTyp"
+    "e\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KI"
+    "CK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE\020\004\022\017\n"
+    "\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020\006\022\022\n\016"
+    "EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\"x\n\020Re"
+    "qAckInviteTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Ident\022&\n\020"
+    "invite_target_id\030\003 \002(\0132\014.NFMsg.Ident\"\233\001\n"
+    "\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \002(\0132\014.N"
     "FMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Iden"
-    "t\022&\n\020invite_target_id\030\003 \002(\0132\014.NFMsg.Iden"
-    "t\"\233\001\n\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \002("
-    "\0132\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg"
-    ".Ident\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 "
-    "\001(\005\022\017\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005\""
-    "\210\001\n\022AckTeamEnterEctype\022\035\n\007team_id\030\001 \002(\0132"
-    "\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.I"
-    "dent\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001("
-    "\005\022\017\n\007nResult\030\005 \001(\005\"k\n\021GridGuildBaseInfo\022"
-    "\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \002(\005"
-    "\022\r\n\005count\030\003 \002(\005\022\020\n\010resource\030\004 \002(\005\022\014\n\004ico"
-    "n\030\005 \002(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_titl"
-    "e_id\030\001 \003(\014\"\272\001\n\022BigMapGridBaseInfo\022\n\n\002id\030"
-    "\001 \002(\014\022,\n\nguild_info\030\002 \002(\0132\030.NFMsg.GridGu"
-    "ildBaseInfo\022\024\n\014kingwar_time\030\n \002(\005\022 \n\nkin"
-    "gwarrer\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurting_t"
-    "ime\030\024 \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Ident\""
-    "z\n\016BigMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.NFMsg"
-    ".Ident\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_data\030\003"
-    " \002(\014\022\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_level\030\005 "
-    "\002(\005\"\236\001\n\020BigMapWarHistory\022*\n\010red_info\030\001 \002"
-    "(\0132\030.NFMsg.GridGuildBaseInfo\022+\n\tblue_inf"
-    "o\030\002 \002(\0132\030.NFMsg.GridGuildBaseInfo\022\037\n\twin"
-    "ner_id\030\n \002(\0132\014.NFMsg.Ident\022\020\n\010war_time\030\013"
-    " \002(\005\"\323\001\n\024BigMapGridDetailInfo\0221\n\016grid_ba"
-    "se_info\030\001 \002(\0132\031.NFMsg.BigMapGridBaseInfo"
-    "\0220\n\016stay_guid_list\030\002 \003(\0132\030.NFMsg.GridGui"
-    "ldBaseInfo\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.Bi"
-    "gMapLeaveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFMs"
-    "g.BigMapWarHistory\"B\n\021AckBigMapGridInfo\022"
-    "-\n\010map_data\030\001 \003(\0132\033.NFMsg.BigMapGridDeta"
-    "ilInfo\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInfo"
-    "\0221\n\016grid_base_info\030\001 \003(\0132\031.NFMsg.BigMapG"
-    "ridBaseInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_tit"
-    "le_id\030\001 \002(\014\022\036\n\010guild_id\030\002 \002(\0132\014.NFMsg.Id"
-    "ent\"\020\n\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg\022"
-    "\024\n\014map_title_id\030\001 \002(\014\022(\n\tleave_msg\030\002 \002(\013"
-    "2\025.NFMsg.BigMapLeaveMsg\"\020\n\016AckLeaveMapMs"
-    "g\"&\n\016ReqGetMapAward\022\024\n\014map_title_id\030\001 \002("
-    "\014\"\020\n\016AckGetMapAward\"%\n\rReqMapHunting\022\024\n\014"
-    "map_title_id\030\001 \002(\014\"\017\n\rAckMapHunting\"%\n\rR"
-    "eqMapKingWar\022\024\n\014map_title_id\030\001 \002(\014\"\017\n\rAc"
-    "kMapKingWar\"\361\001\n\013PVPRoomInfo\022\023\n\013nCellStat"
-    "us\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\0132\014.NFMsg.Ident\022\020"
-    "\n\010nPVPMode\030\003 \002(\005\022\021\n\tnPVPGrade\030\004 \002(\005\022\021\n\tM"
-    "axPalyer\030\005 \002(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFM"
-    "sg.Ident\022!\n\013xBluePlayer\030\007 \003(\0132\014.NFMsg.Id"
-    "ent\022\020\n\010serverid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017"
-    "\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007"
-    "self_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030"
-    "\002 \002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyType\030\004 \002(\005\022"
-    "\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Ident\"8\n\nEApply"
-    "Type\022\025\n\021EApplyType_Single\020\000\022\023\n\017EApplyTyp"
-    "e_Team\020\001\"|\n\020AckPVPApplyMatch\022\035\n\007self_id\030"
-    "\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022"
-    ".NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005\022\017\n"
-    "\007nResult\030\004 \002(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007"
-    "self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo"
-    "\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\"m\n\022AckCreateP"
-    "VPEctype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022"
-    "%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\022\021"
-    "\n\tApplyType\030\003 \002(\005", 8457);
+    "t\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001(\005\022\017"
+    "\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005\"\210\001\n\022A"
+    "ckTeamEnterEctype\022\035\n\007team_id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Ident\022"
+    "\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001(\005\022\017\n\007"
+    "nResult\030\005 \001(\005\"k\n\021GridGuildBaseInfo\022\030\n\002id"
+    "\030\001 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \002(\005\022\r\n\005c"
+    "ount\030\003 \002(\005\022\020\n\010resource\030\004 \002(\005\022\014\n\004icon\030\005 \002"
+    "(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_title_id\030"
+    "\001 \003(\014\"\272\001\n\022BigMapGridBaseInfo\022\n\n\002id\030\001 \002(\014"
+    "\022,\n\nguild_info\030\002 \002(\0132\030.NFMsg.GridGuildBa"
+    "seInfo\022\024\n\014kingwar_time\030\n \002(\005\022 \n\nkingwarr"
+    "er\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurting_time\030\024"
+    " \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Ident\"z\n\016Bi"
+    "gMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_data\030\003 \002(\014\022"
+    "\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_level\030\005 \002(\005\"\236"
+    "\001\n\020BigMapWarHistory\022*\n\010red_info\030\001 \002(\0132\030."
+    "NFMsg.GridGuildBaseInfo\022+\n\tblue_info\030\002 \002"
+    "(\0132\030.NFMsg.GridGuildBaseInfo\022\037\n\twinner_i"
+    "d\030\n \002(\0132\014.NFMsg.Ident\022\020\n\010war_time\030\013 \002(\005\""
+    "\323\001\n\024BigMapGridDetailInfo\0221\n\016grid_base_in"
+    "fo\030\001 \002(\0132\031.NFMsg.BigMapGridBaseInfo\0220\n\016s"
+    "tay_guid_list\030\002 \003(\0132\030.NFMsg.GridGuildBas"
+    "eInfo\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.BigMapL"
+    "eaveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFMsg.Big"
+    "MapWarHistory\"B\n\021AckBigMapGridInfo\022-\n\010ma"
+    "p_data\030\001 \003(\0132\033.NFMsg.BigMapGridDetailInf"
+    "o\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInfo\0221\n\016g"
+    "rid_base_info\030\001 \003(\0132\031.NFMsg.BigMapGridBa"
+    "seInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_title_id"
+    "\030\001 \002(\014\022\036\n\010guild_id\030\002 \002(\0132\014.NFMsg.Ident\"\020"
+    "\n\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg\022\024\n\014ma"
+    "p_title_id\030\001 \002(\014\022(\n\tleave_msg\030\002 \002(\0132\025.NF"
+    "Msg.BigMapLeaveMsg\"\020\n\016AckLeaveMapMsg\"&\n\016"
+    "ReqGetMapAward\022\024\n\014map_title_id\030\001 \002(\014\"\020\n\016"
+    "AckGetMapAward\"%\n\rReqMapHunting\022\024\n\014map_t"
+    "itle_id\030\001 \002(\014\"\017\n\rAckMapHunting\"%\n\rReqMap"
+    "KingWar\022\024\n\014map_title_id\030\001 \002(\014\"\017\n\rAckMapK"
+    "ingWar\"\361\001\n\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 "
+    "\002(\005\022\034\n\006RoomID\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010nPV"
+    "PMode\030\003 \002(\005\022\021\n\tnPVPGrade\030\004 \002(\005\022\021\n\tMaxPal"
+    "yer\030\005 \002(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Id"
+    "ent\022!\n\013xBluePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020"
+    "\n\010serverid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007gro"
+    "upID\030\n \001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_"
+    "id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 \002(\005"
+    "\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyType\030\004 \002(\005\022\035\n\007te"
+    "am_id\030\005 \001(\0132\014.NFMsg.Ident\"8\n\nEApplyType\022"
+    "\025\n\021EApplyType_Single\020\000\022\023\n\017EApplyType_Tea"
+    "m\020\001\"|\n\020AckPVPApplyMatch\022\035\n\007self_id\030\001 \002(\013"
+    "2\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMs"
+    "g.PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005\022\017\n\007nRes"
+    "ult\030\004 \002(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007self_"
+    "id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \002("
+    "\0132\022.NFMsg.PVPRoomInfo\"m\n\022AckCreatePVPEct"
+    "ype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txR"
+    "oomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApp"
+    "lyType\030\003 \002(\005", 8372);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -2256,8 +2253,6 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqWearEquip::default_instance_ = new ReqWearEquip();
   TakeOffEquip::default_instance_ = new TakeOffEquip();
   ReqAckJoinActivity::default_instance_ = new ReqAckJoinActivity();
-  ReqAckSearchOppnent::default_instance_ = new ReqAckSearchOppnent();
-  ReqAckBattleOppnent::default_instance_ = new ReqAckBattleOppnent();
   ReqAckCreateGuild::default_instance_ = new ReqAckCreateGuild();
   ReqSearchGuild::default_instance_ = new ReqSearchGuild();
   AckSearchGuild::default_instance_ = new AckSearchGuild();
@@ -2276,8 +2271,10 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   AckElementlevelToEquip::default_instance_ = new AckElementlevelToEquip();
   ReqSetFightHero::default_instance_ = new ReqSetFightHero();
   ReqMiningTitle::default_instance_ = new ReqMiningTitle();
+  TileState::default_instance_ = new TileState();
   AckMiningTitle::default_instance_ = new AckMiningTitle();
-  AckMiningTitle_TileState::default_instance_ = new AckMiningTitle_TileState();
+  ReqSearchOppnent::default_instance_ = new ReqSearchOppnent();
+  AckSearchOppnent::default_instance_ = new AckSearchOppnent();
   ReqSendMail::default_instance_ = new ReqSendMail();
   ReqSwitchServer::default_instance_ = new ReqSwitchServer();
   AckSwitchServer::default_instance_ = new AckSwitchServer();
@@ -2338,8 +2335,6 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqWearEquip::default_instance_->InitAsDefaultInstance();
   TakeOffEquip::default_instance_->InitAsDefaultInstance();
   ReqAckJoinActivity::default_instance_->InitAsDefaultInstance();
-  ReqAckSearchOppnent::default_instance_->InitAsDefaultInstance();
-  ReqAckBattleOppnent::default_instance_->InitAsDefaultInstance();
   ReqAckCreateGuild::default_instance_->InitAsDefaultInstance();
   ReqSearchGuild::default_instance_->InitAsDefaultInstance();
   AckSearchGuild::default_instance_->InitAsDefaultInstance();
@@ -2358,8 +2353,10 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   AckElementlevelToEquip::default_instance_->InitAsDefaultInstance();
   ReqSetFightHero::default_instance_->InitAsDefaultInstance();
   ReqMiningTitle::default_instance_->InitAsDefaultInstance();
+  TileState::default_instance_->InitAsDefaultInstance();
   AckMiningTitle::default_instance_->InitAsDefaultInstance();
-  AckMiningTitle_TileState::default_instance_->InitAsDefaultInstance();
+  ReqSearchOppnent::default_instance_->InitAsDefaultInstance();
+  AckSearchOppnent::default_instance_->InitAsDefaultInstance();
   ReqSendMail::default_instance_->InitAsDefaultInstance();
   ReqSwitchServer::default_instance_->InitAsDefaultInstance();
   AckSwitchServer::default_instance_->InitAsDefaultInstance();
@@ -9649,436 +9646,6 @@ void ReqAckJoinActivity::Swap(ReqAckJoinActivity* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ReqAckSearchOppnent::kSearchTypeFieldNumber;
-#endif  // !_MSC_VER
-
-ReqAckSearchOppnent::ReqAckSearchOppnent()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void ReqAckSearchOppnent::InitAsDefaultInstance() {
-}
-
-ReqAckSearchOppnent::ReqAckSearchOppnent(const ReqAckSearchOppnent& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void ReqAckSearchOppnent::SharedCtor() {
-  _cached_size_ = 0;
-  search_type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ReqAckSearchOppnent::~ReqAckSearchOppnent() {
-  SharedDtor();
-}
-
-void ReqAckSearchOppnent::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void ReqAckSearchOppnent::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ReqAckSearchOppnent::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ReqAckSearchOppnent_descriptor_;
-}
-
-const ReqAckSearchOppnent& ReqAckSearchOppnent::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
-  return *default_instance_;
-}
-
-ReqAckSearchOppnent* ReqAckSearchOppnent::default_instance_ = NULL;
-
-ReqAckSearchOppnent* ReqAckSearchOppnent::New() const {
-  return new ReqAckSearchOppnent;
-}
-
-void ReqAckSearchOppnent::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    search_type_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool ReqAckSearchOppnent::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .NFMsg.EBattleType search_type = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::NFMsg::EBattleType_IsValid(value)) {
-            set_search_type(static_cast< ::NFMsg::EBattleType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void ReqAckSearchOppnent::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .NFMsg.EBattleType search_type = 1;
-  if (has_search_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->search_type(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* ReqAckSearchOppnent::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required .NFMsg.EBattleType search_type = 1;
-  if (has_search_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->search_type(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int ReqAckSearchOppnent::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .NFMsg.EBattleType search_type = 1;
-    if (has_search_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->search_type());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ReqAckSearchOppnent::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ReqAckSearchOppnent* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAckSearchOppnent*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void ReqAckSearchOppnent::MergeFrom(const ReqAckSearchOppnent& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_search_type()) {
-      set_search_type(from.search_type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void ReqAckSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ReqAckSearchOppnent::CopyFrom(const ReqAckSearchOppnent& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ReqAckSearchOppnent::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void ReqAckSearchOppnent::Swap(ReqAckSearchOppnent* other) {
-  if (other != this) {
-    std::swap(search_type_, other->search_type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata ReqAckSearchOppnent::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ReqAckSearchOppnent_descriptor_;
-  metadata.reflection = ReqAckSearchOppnent_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int ReqAckBattleOppnent::kBattleTypeFieldNumber;
-#endif  // !_MSC_VER
-
-ReqAckBattleOppnent::ReqAckBattleOppnent()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void ReqAckBattleOppnent::InitAsDefaultInstance() {
-}
-
-ReqAckBattleOppnent::ReqAckBattleOppnent(const ReqAckBattleOppnent& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void ReqAckBattleOppnent::SharedCtor() {
-  _cached_size_ = 0;
-  battle_type_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ReqAckBattleOppnent::~ReqAckBattleOppnent() {
-  SharedDtor();
-}
-
-void ReqAckBattleOppnent::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void ReqAckBattleOppnent::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ReqAckBattleOppnent::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ReqAckBattleOppnent_descriptor_;
-}
-
-const ReqAckBattleOppnent& ReqAckBattleOppnent::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
-  return *default_instance_;
-}
-
-ReqAckBattleOppnent* ReqAckBattleOppnent::default_instance_ = NULL;
-
-ReqAckBattleOppnent* ReqAckBattleOppnent::New() const {
-  return new ReqAckBattleOppnent;
-}
-
-void ReqAckBattleOppnent::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    battle_type_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool ReqAckBattleOppnent::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .NFMsg.EBattleType battle_type = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::NFMsg::EBattleType_IsValid(value)) {
-            set_battle_type(static_cast< ::NFMsg::EBattleType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void ReqAckBattleOppnent::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .NFMsg.EBattleType battle_type = 1;
-  if (has_battle_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->battle_type(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* ReqAckBattleOppnent::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required .NFMsg.EBattleType battle_type = 1;
-  if (has_battle_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->battle_type(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int ReqAckBattleOppnent::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .NFMsg.EBattleType battle_type = 1;
-    if (has_battle_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->battle_type());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ReqAckBattleOppnent::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const ReqAckBattleOppnent* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAckBattleOppnent*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void ReqAckBattleOppnent::MergeFrom(const ReqAckBattleOppnent& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_battle_type()) {
-      set_battle_type(from.battle_type());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void ReqAckBattleOppnent::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void ReqAckBattleOppnent::CopyFrom(const ReqAckBattleOppnent& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ReqAckBattleOppnent::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-
-  return true;
-}
-
-void ReqAckBattleOppnent::Swap(ReqAckBattleOppnent* other) {
-  if (other != this) {
-    std::swap(battle_type_, other->battle_type_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata ReqAckBattleOppnent::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ReqAckBattleOppnent_descriptor_;
-  metadata.reflection = ReqAckBattleOppnent_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
 const int ReqAckCreateGuild::kGuildIdFieldNumber;
 const int ReqAckCreateGuild::kGuildNameFieldNumber;
 #endif  // !_MSC_VER
@@ -14951,26 +14518,26 @@ void ReqMiningTitle::Swap(ReqMiningTitle* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int AckMiningTitle_TileState::kXFieldNumber;
-const int AckMiningTitle_TileState::kYFieldNumber;
-const int AckMiningTitle_TileState::kOprFieldNumber;
+const int TileState::kXFieldNumber;
+const int TileState::kYFieldNumber;
+const int TileState::kOprFieldNumber;
 #endif  // !_MSC_VER
 
-AckMiningTitle_TileState::AckMiningTitle_TileState()
+TileState::TileState()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void AckMiningTitle_TileState::InitAsDefaultInstance() {
+void TileState::InitAsDefaultInstance() {
 }
 
-AckMiningTitle_TileState::AckMiningTitle_TileState(const AckMiningTitle_TileState& from)
+TileState::TileState(const TileState& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void AckMiningTitle_TileState::SharedCtor() {
+void TileState::SharedCtor() {
   _cached_size_ = 0;
   x_ = 0;
   y_ = 0;
@@ -14978,37 +14545,37 @@ void AckMiningTitle_TileState::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-AckMiningTitle_TileState::~AckMiningTitle_TileState() {
+TileState::~TileState() {
   SharedDtor();
 }
 
-void AckMiningTitle_TileState::SharedDtor() {
+void TileState::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void AckMiningTitle_TileState::SetCachedSize(int size) const {
+void TileState::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* AckMiningTitle_TileState::descriptor() {
+const ::google::protobuf::Descriptor* TileState::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return AckMiningTitle_TileState_descriptor_;
+  return TileState_descriptor_;
 }
 
-const AckMiningTitle_TileState& AckMiningTitle_TileState::default_instance() {
+const TileState& TileState::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
   return *default_instance_;
 }
 
-AckMiningTitle_TileState* AckMiningTitle_TileState::default_instance_ = NULL;
+TileState* TileState::default_instance_ = NULL;
 
-AckMiningTitle_TileState* AckMiningTitle_TileState::New() const {
-  return new AckMiningTitle_TileState;
+TileState* TileState::New() const {
+  return new TileState;
 }
 
-void AckMiningTitle_TileState::Clear() {
+void TileState::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     x_ = 0;
     y_ = 0;
@@ -15018,7 +14585,7 @@ void AckMiningTitle_TileState::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool AckMiningTitle_TileState::MergePartialFromCodedStream(
+bool TileState::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -15087,7 +14654,7 @@ bool AckMiningTitle_TileState::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void AckMiningTitle_TileState::SerializeWithCachedSizes(
+void TileState::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int32 x = 1;
   if (has_x()) {
@@ -15110,7 +14677,7 @@ void AckMiningTitle_TileState::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* AckMiningTitle_TileState::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* TileState::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required int32 x = 1;
   if (has_x()) {
@@ -15134,7 +14701,7 @@ void AckMiningTitle_TileState::SerializeWithCachedSizes(
   return target;
 }
 
-int AckMiningTitle_TileState::ByteSize() const {
+int TileState::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -15171,10 +14738,10 @@ int AckMiningTitle_TileState::ByteSize() const {
   return total_size;
 }
 
-void AckMiningTitle_TileState::MergeFrom(const ::google::protobuf::Message& from) {
+void TileState::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const AckMiningTitle_TileState* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const AckMiningTitle_TileState*>(
+  const TileState* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TileState*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -15183,7 +14750,7 @@ void AckMiningTitle_TileState::MergeFrom(const ::google::protobuf::Message& from
   }
 }
 
-void AckMiningTitle_TileState::MergeFrom(const AckMiningTitle_TileState& from) {
+void TileState::MergeFrom(const TileState& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_x()) {
@@ -15199,25 +14766,25 @@ void AckMiningTitle_TileState::MergeFrom(const AckMiningTitle_TileState& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void AckMiningTitle_TileState::CopyFrom(const ::google::protobuf::Message& from) {
+void TileState::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void AckMiningTitle_TileState::CopyFrom(const AckMiningTitle_TileState& from) {
+void TileState::CopyFrom(const TileState& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool AckMiningTitle_TileState::IsInitialized() const {
+bool TileState::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
 
-void AckMiningTitle_TileState::Swap(AckMiningTitle_TileState* other) {
+void TileState::Swap(TileState* other) {
   if (other != this) {
     std::swap(x_, other->x_);
     std::swap(y_, other->y_);
@@ -15228,16 +14795,16 @@ void AckMiningTitle_TileState::Swap(AckMiningTitle_TileState* other) {
   }
 }
 
-::google::protobuf::Metadata AckMiningTitle_TileState::GetMetadata() const {
+::google::protobuf::Metadata TileState::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = AckMiningTitle_TileState_descriptor_;
-  metadata.reflection = AckMiningTitle_TileState_reflection_;
+  metadata.descriptor = TileState_descriptor_;
+  metadata.reflection = TileState_reflection_;
   return metadata;
 }
 
 
-// -------------------------------------------------------------------
+// ===================================================================
 
 #ifndef _MSC_VER
 const int AckMiningTitle::kTileFieldNumber;
@@ -15304,7 +14871,7 @@ bool AckMiningTitle::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+      // repeated .NFMsg.TileState tile = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -15337,7 +14904,7 @@ bool AckMiningTitle::MergePartialFromCodedStream(
 
 void AckMiningTitle::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+  // repeated .NFMsg.TileState tile = 1;
   for (int i = 0; i < this->tile_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->tile(i), output);
@@ -15351,7 +14918,7 @@ void AckMiningTitle::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* AckMiningTitle::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+  // repeated .NFMsg.TileState tile = 1;
   for (int i = 0; i < this->tile_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -15368,7 +14935,7 @@ void AckMiningTitle::SerializeWithCachedSizes(
 int AckMiningTitle::ByteSize() const {
   int total_size = 0;
 
-  // repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+  // repeated .NFMsg.TileState tile = 1;
   total_size += 1 * this->tile_size();
   for (int i = 0; i < this->tile_size(); i++) {
     total_size +=
@@ -15439,6 +15006,371 @@ void AckMiningTitle::Swap(AckMiningTitle* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = AckMiningTitle_descriptor_;
   metadata.reflection = AckMiningTitle_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+#endif  // !_MSC_VER
+
+ReqSearchOppnent::ReqSearchOppnent()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqSearchOppnent::InitAsDefaultInstance() {
+}
+
+ReqSearchOppnent::ReqSearchOppnent(const ReqSearchOppnent& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqSearchOppnent::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqSearchOppnent::~ReqSearchOppnent() {
+  SharedDtor();
+}
+
+void ReqSearchOppnent::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReqSearchOppnent::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqSearchOppnent::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqSearchOppnent_descriptor_;
+}
+
+const ReqSearchOppnent& ReqSearchOppnent::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqSearchOppnent* ReqSearchOppnent::default_instance_ = NULL;
+
+ReqSearchOppnent* ReqSearchOppnent::New() const {
+  return new ReqSearchOppnent;
+}
+
+void ReqSearchOppnent::Clear() {
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqSearchOppnent::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      return true;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, mutable_unknown_fields()));
+  }
+  return true;
+#undef DO_
+}
+
+void ReqSearchOppnent::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqSearchOppnent::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqSearchOppnent::ByteSize() const {
+  int total_size = 0;
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqSearchOppnent::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqSearchOppnent* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqSearchOppnent*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqSearchOppnent::MergeFrom(const ReqSearchOppnent& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqSearchOppnent::CopyFrom(const ReqSearchOppnent& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqSearchOppnent::IsInitialized() const {
+
+  return true;
+}
+
+void ReqSearchOppnent::Swap(ReqSearchOppnent* other) {
+  if (other != this) {
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqSearchOppnent::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqSearchOppnent_descriptor_;
+  metadata.reflection = ReqSearchOppnent_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int AckSearchOppnent::kSceneIdFieldNumber;
+#endif  // !_MSC_VER
+
+AckSearchOppnent::AckSearchOppnent()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void AckSearchOppnent::InitAsDefaultInstance() {
+}
+
+AckSearchOppnent::AckSearchOppnent(const AckSearchOppnent& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AckSearchOppnent::SharedCtor() {
+  _cached_size_ = 0;
+  scene_id_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AckSearchOppnent::~AckSearchOppnent() {
+  SharedDtor();
+}
+
+void AckSearchOppnent::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void AckSearchOppnent::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AckSearchOppnent::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AckSearchOppnent_descriptor_;
+}
+
+const AckSearchOppnent& AckSearchOppnent::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+AckSearchOppnent* AckSearchOppnent::default_instance_ = NULL;
+
+AckSearchOppnent* AckSearchOppnent::New() const {
+  return new AckSearchOppnent;
+}
+
+void AckSearchOppnent::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    scene_id_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool AckSearchOppnent::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 scene_id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &scene_id_)));
+          set_has_scene_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AckSearchOppnent::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 scene_id = 1;
+  if (has_scene_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->scene_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* AckSearchOppnent::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 scene_id = 1;
+  if (has_scene_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->scene_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int AckSearchOppnent::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 scene_id = 1;
+    if (has_scene_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->scene_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AckSearchOppnent::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const AckSearchOppnent* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AckSearchOppnent*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void AckSearchOppnent::MergeFrom(const AckSearchOppnent& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_scene_id()) {
+      set_scene_id(from.scene_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AckSearchOppnent::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AckSearchOppnent::CopyFrom(const AckSearchOppnent& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AckSearchOppnent::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void AckSearchOppnent::Swap(AckSearchOppnent* other) {
+  if (other != this) {
+    std::swap(scene_id_, other->scene_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AckSearchOppnent::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AckSearchOppnent_descriptor_;
+  metadata.reflection = AckSearchOppnent_reflection_;
   return metadata;
 }
 
