@@ -199,27 +199,32 @@ bool NFCPlayerRedisModule::SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR
 	return true;
 }
 
-bool NFCPlayerRedisModule::SavePlayerTileToCache(const NFGUID & self, const std::string & strTileData)
+bool NFCPlayerRedisModule::SavePlayerTileToCache(const int nSceneID, const NFGUID & self, const std::string & strTileData)
 {
-	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(self);
+	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
 	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
 	if (xNoSqlDriver)
 	{
-		return xNoSqlDriver->Set(strTileKey, strTileData);
+		return xNoSqlDriver->HSet(strTileKey, self.ToString(), strTileData);
 	}
 
 	return false;
 }
 
-bool NFCPlayerRedisModule::GetPlayerTileFromCache(const NFGUID & self, std::string & strTileData)
+bool NFCPlayerRedisModule::GetPlayerTileFromCache(const int nSceneID, const NFGUID & self, std::string & strTileData)
 {
-	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(self);
+	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
 	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
 	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
 	{
-		return xNoSqlDriver->Get(strTileKey, strTileData);
+		return xNoSqlDriver->HGet(strTileKey, self.ToString(), strTileData);
 	}
 
+	return false;
+}
+
+bool NFCPlayerRedisModule::GetPlayerTileRandomFromCache(const int nSceneID, std::string & strTileData)
+{
 	return false;
 }
 
