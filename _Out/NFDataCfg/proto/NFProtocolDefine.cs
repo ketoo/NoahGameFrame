@@ -782,7 +782,7 @@ public class Player
 	public static readonly String Sex = "Sex"; // int
 	public static readonly String Race = "Race"; // int
 	public static readonly String Camp = "Camp"; // int
-	public static readonly String LastContainerID = "LastContainerID"; // int
+	public static readonly String HomeSceneID = "HomeSceneID"; // int
 	public static readonly String Level = "Level"; // int
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String PrefabPath = "PrefabPath"; // string
