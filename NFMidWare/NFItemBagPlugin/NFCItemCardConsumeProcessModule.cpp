@@ -95,7 +95,7 @@ int NFCItemCardConsumeProcessModule::ConsumeProcess( const NFGUID& self, const s
 }
 
 
-bool NFCItemCardConsumeProcessModule::AwardItemProperty(const NFGUID& self, const NFGUID& xHeroID, const ::string& strID)
+bool NFCItemCardConsumeProcessModule::AwardItemProperty(const NFGUID& self, const NFGUID& xHeroID, const std::string& strID)
 {
 	NF_SHARE_PTR<NFIRecord> pHero = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
 	if (nullptr == pHero.get())
