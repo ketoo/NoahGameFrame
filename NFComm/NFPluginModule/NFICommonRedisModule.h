@@ -18,7 +18,7 @@ public:
 	virtual std::string GetPropertyCacheKey(const NFGUID& self) = 0;
 	virtual std::string GetRecordCacheKey(const NFGUID& self) = 0;
 	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
-	virtual std::string GetTileCacheKey(const NFGUID& self) = 0;
+	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self) = 0;
     virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self) = 0;

@@ -828,40 +828,6 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckSearchOppnent")]
-  public partial class ReqAckSearchOppnent : global::ProtoBuf.IExtensible
-  {
-    public ReqAckSearchOppnent() {}
-    
-    private NFMsg.EBattleType _search_type;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"search_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFMsg.EBattleType search_type
-    {
-      get { return _search_type; }
-      set { _search_type = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckBattleOppnent")]
-  public partial class ReqAckBattleOppnent : global::ProtoBuf.IExtensible
-  {
-    public ReqAckBattleOppnent() {}
-    
-    private NFMsg.EBattleType _battle_type;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"battle_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFMsg.EBattleType battle_type
-    {
-      get { return _battle_type; }
-      set { _battle_type = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckCreateGuild")]
   public partial class ReqAckCreateGuild : global::ProtoBuf.IExtensible
   {
@@ -1329,18 +1295,6 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMiningTitle")]
-  public partial class AckMiningTitle : global::ProtoBuf.IExtensible
-  {
-    public AckMiningTitle() {}
-    
-    private readonly global::System.Collections.Generic.List<NFMsg.AckMiningTitle.TileState> _tile = new global::System.Collections.Generic.List<NFMsg.AckMiningTitle.TileState>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"tile", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFMsg.AckMiningTitle.TileState> tile
-    {
-      get { return _tile; }
-    }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TileState")]
   public partial class TileState : global::ProtoBuf.IExtensible
   {
@@ -1372,6 +1326,45 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMiningTitle")]
+  public partial class AckMiningTitle : global::ProtoBuf.IExtensible
+  {
+    public AckMiningTitle() {}
+    
+    private readonly global::System.Collections.Generic.List<NFMsg.TileState> _tile = new global::System.Collections.Generic.List<NFMsg.TileState>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"tile", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.TileState> tile
+    {
+      get { return _tile; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSearchOppnent")]
+  public partial class ReqSearchOppnent : global::ProtoBuf.IExtensible
+  {
+    public ReqSearchOppnent() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckSearchOppnent")]
+  public partial class AckSearchOppnent : global::ProtoBuf.IExtensible
+  {
+    public AckSearchOppnent() {}
+    
+    private int _scene_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"scene_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int scene_id
+    {
+      get { return _scene_id; }
+      set { _scene_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

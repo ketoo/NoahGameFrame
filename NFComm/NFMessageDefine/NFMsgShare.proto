@@ -229,18 +229,6 @@ message ReqAckJoinActivity
     required EGameActivitySubType	sub_activity_type = 2;
 }
 
-message ReqAckSearchOppnent
-{
-    required EBattleType		search_type = 1;
-    //optional EGameActivitySubType	sub_activity_type = 2;//回来要带对手数据
-}
-
-message ReqAckBattleOppnent
-{
-    required EBattleType		battle_type = 1;
-}
-
-
 
 ///////////////工会/////////////////////////////////////////////////////////////////////////////////////
 //EGMI_REQ_CREATE_GUILD                       = 300; // 申请创建公会 EGMI_ACK_CREATE_GUILD						= 301; // 创建公会结果
@@ -377,17 +365,29 @@ message ReqMiningTitle
 	required int32		y				= 2;//
 	required int32		opr 			= 3;//
 }
+
+message TileState
+{
+	required int32		x				= 1;//
+	required int32		y				= 2;//
+	required int32		opr 			= 3;//0:rem;1:add
+}
+	
 //EGEC_ACK_MINING_TITLE
 message AckMiningTitle
 {	
-	message TileState
-	{
-		required int32		x				= 1;//
-		required int32		y				= 2;//
-		required int32		opr 			= 3;//
-	}
-	
 	repeated TileState		tile			= 1;//
+}
+
+//EGMI_REQ_SEARCH_OPPNENT
+message ReqSearchOppnent
+{
+}
+
+//EGMI_ACK_SEARCH_OPPNENT
+message AckSearchOppnent
+{
+    required int32		scene_id = 1;
 }
 
 
