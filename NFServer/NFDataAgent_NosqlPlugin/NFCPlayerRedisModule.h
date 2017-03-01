@@ -45,8 +45,9 @@ public:
 	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
 	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
 
-	virtual bool SavePlayerTileToCache(const NFGUID& self, const std::string& strTileData);
-	virtual bool GetPlayerTileFromCache(const NFGUID& self, std::string& strTileData);
+	virtual bool SavePlayerTileToCache(const int nSceneID, const NFGUID& self, const std::string& strTileData);
+	virtual bool GetPlayerTileFromCache(const int nSceneID, const NFGUID& self, std::string& strTileData);
+	virtual bool GetPlayerTileRandomFromCache(const int nSceneID, std::string& strTileData);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
