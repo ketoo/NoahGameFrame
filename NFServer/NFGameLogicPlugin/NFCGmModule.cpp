@@ -420,7 +420,7 @@ void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, cons
             nCount = xMsg.command_value_int();
         }
 
-        string strItemID;
+        std::string strItemID;
         if (xMsg.has_command_str_value())
         {
             strItemID = xMsg.command_str_value();
