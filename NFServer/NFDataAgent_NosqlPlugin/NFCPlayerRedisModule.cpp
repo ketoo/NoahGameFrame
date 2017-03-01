@@ -161,12 +161,12 @@ bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>&
 
 NF_SHARE_PTR<NFIPropertyManager> NFCPlayerRedisModule::GetPlayerCacheProperty(const NFGUID& self)
 {
-	return m_pCommonRedisModule->GetCachePropertyInfo(self);
+	return m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
 }
 
 NF_SHARE_PTR<NFIRecordManager> NFCPlayerRedisModule::GetPlayerCacheRecord(const NFGUID& self)
 {
-	return m_pCommonRedisModule->GetCacheRecordInfo(self);
+	return m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
 }
 
 bool NFCPlayerRedisModule::SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
