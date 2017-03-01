@@ -38,16 +38,7 @@ bool NFCTileModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::ReqMineTile)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_SEARCH_OPPNENT, this, &NFCTileModule::ReqSearchOppnent)) { return false; }
-
     return true;
-}
-
-void NFCTileModule::ReqSearchOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
-	int nSceneiD = 1;//it will be better if random a scene id
-
 }
 
 void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
