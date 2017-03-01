@@ -231,7 +231,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Z().c_str())->value());
 		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ));
 
-		const string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
+		const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
 		NFDataList xPositionList;
 		xPositionList.Split(strRelivePosition, ";");
 		for (int i = 0; i < xPositionList.GetCount(); ++i)
