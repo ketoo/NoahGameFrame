@@ -60,8 +60,6 @@ class ReqCompeleteTask;
 class ReqWearEquip;
 class TakeOffEquip;
 class ReqAckJoinActivity;
-class ReqAckSearchOppnent;
-class ReqAckBattleOppnent;
 class ReqAckCreateGuild;
 class ReqSearchGuild;
 class AckSearchGuild;
@@ -80,8 +78,10 @@ class ReqElementlevelToEquip;
 class AckElementlevelToEquip;
 class ReqSetFightHero;
 class ReqMiningTitle;
+class TileState;
 class AckMiningTitle;
-class AckMiningTitle_TileState;
+class ReqSearchOppnent;
+class AckSearchOppnent;
 class ReqSendMail;
 class ReqSwitchServer;
 class AckSwitchServer;
@@ -3040,170 +3040,6 @@ class LIBPROTOC_EXPORT ReqAckJoinActivity : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckSearchOppnent : public ::google::protobuf::Message {
- public:
-  ReqAckSearchOppnent();
-  virtual ~ReqAckSearchOppnent();
-
-  ReqAckSearchOppnent(const ReqAckSearchOppnent& from);
-
-  inline ReqAckSearchOppnent& operator=(const ReqAckSearchOppnent& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckSearchOppnent& default_instance();
-
-  void Swap(ReqAckSearchOppnent* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqAckSearchOppnent* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqAckSearchOppnent& from);
-  void MergeFrom(const ReqAckSearchOppnent& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required .NFMsg.EBattleType search_type = 1;
-  inline bool has_search_type() const;
-  inline void clear_search_type();
-  static const int kSearchTypeFieldNumber = 1;
-  inline ::NFMsg::EBattleType search_type() const;
-  inline void set_search_type(::NFMsg::EBattleType value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSearchOppnent)
- private:
-  inline void set_has_search_type();
-  inline void clear_has_search_type();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  int search_type_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqAckSearchOppnent* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT ReqAckBattleOppnent : public ::google::protobuf::Message {
- public:
-  ReqAckBattleOppnent();
-  virtual ~ReqAckBattleOppnent();
-
-  ReqAckBattleOppnent(const ReqAckBattleOppnent& from);
-
-  inline ReqAckBattleOppnent& operator=(const ReqAckBattleOppnent& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckBattleOppnent& default_instance();
-
-  void Swap(ReqAckBattleOppnent* other);
-
-  // implements Message ----------------------------------------------
-
-  ReqAckBattleOppnent* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqAckBattleOppnent& from);
-  void MergeFrom(const ReqAckBattleOppnent& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required .NFMsg.EBattleType battle_type = 1;
-  inline bool has_battle_type() const;
-  inline void clear_battle_type();
-  static const int kBattleTypeFieldNumber = 1;
-  inline ::NFMsg::EBattleType battle_type() const;
-  inline void set_battle_type(::NFMsg::EBattleType value);
-
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckBattleOppnent)
- private:
-  inline void set_has_battle_type();
-  inline void clear_has_battle_type();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  int battle_type_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
-  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
-  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
-
-  void InitAsDefaultInstance();
-  static ReqAckBattleOppnent* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class LIBPROTOC_EXPORT ReqAckCreateGuild : public ::google::protobuf::Message {
  public:
   ReqAckCreateGuild();
@@ -4987,14 +4823,14 @@ class LIBPROTOC_EXPORT ReqMiningTitle : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AckMiningTitle_TileState : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT TileState : public ::google::protobuf::Message {
  public:
-  AckMiningTitle_TileState();
-  virtual ~AckMiningTitle_TileState();
+  TileState();
+  virtual ~TileState();
 
-  AckMiningTitle_TileState(const AckMiningTitle_TileState& from);
+  TileState(const TileState& from);
 
-  inline AckMiningTitle_TileState& operator=(const AckMiningTitle_TileState& from) {
+  inline TileState& operator=(const TileState& from) {
     CopyFrom(from);
     return *this;
   }
@@ -5008,17 +4844,17 @@ class LIBPROTOC_EXPORT AckMiningTitle_TileState : public ::google::protobuf::Mes
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AckMiningTitle_TileState& default_instance();
+  static const TileState& default_instance();
 
-  void Swap(AckMiningTitle_TileState* other);
+  void Swap(TileState* other);
 
   // implements Message ----------------------------------------------
 
-  AckMiningTitle_TileState* New() const;
+  TileState* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AckMiningTitle_TileState& from);
-  void MergeFrom(const AckMiningTitle_TileState& from);
+  void CopyFrom(const TileState& from);
+  void MergeFrom(const TileState& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -5062,7 +4898,7 @@ class LIBPROTOC_EXPORT AckMiningTitle_TileState : public ::google::protobuf::Mes
   inline ::google::protobuf::int32 opr() const;
   inline void set_opr(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:NFMsg.AckMiningTitle.TileState)
+  // @@protoc_insertion_point(class_scope:NFMsg.TileState)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -5085,7 +4921,7 @@ class LIBPROTOC_EXPORT AckMiningTitle_TileState : public ::google::protobuf::Mes
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static AckMiningTitle_TileState* default_instance_;
+  static TileState* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5141,20 +4977,18 @@ class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef AckMiningTitle_TileState TileState;
-
   // accessors -------------------------------------------------------
 
-  // repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+  // repeated .NFMsg.TileState tile = 1;
   inline int tile_size() const;
   inline void clear_tile();
   static const int kTileFieldNumber = 1;
-  inline const ::NFMsg::AckMiningTitle_TileState& tile(int index) const;
-  inline ::NFMsg::AckMiningTitle_TileState* mutable_tile(int index);
-  inline ::NFMsg::AckMiningTitle_TileState* add_tile();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckMiningTitle_TileState >&
+  inline const ::NFMsg::TileState& tile(int index) const;
+  inline ::NFMsg::TileState* mutable_tile(int index);
+  inline ::NFMsg::TileState* add_tile();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >&
       tile() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckMiningTitle_TileState >*
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
       mutable_tile();
 
   // @@protoc_insertion_point(class_scope:NFMsg.AckMiningTitle)
@@ -5162,7 +4996,7 @@ class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFMsg::AckMiningTitle_TileState > tile_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState > tile_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -5173,6 +5007,160 @@ class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static AckMiningTitle* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqSearchOppnent : public ::google::protobuf::Message {
+ public:
+  ReqSearchOppnent();
+  virtual ~ReqSearchOppnent();
+
+  ReqSearchOppnent(const ReqSearchOppnent& from);
+
+  inline ReqSearchOppnent& operator=(const ReqSearchOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSearchOppnent& default_instance();
+
+  void Swap(ReqSearchOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSearchOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSearchOppnent& from);
+  void MergeFrom(const ReqSearchOppnent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSearchOppnent)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSearchOppnent* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckSearchOppnent : public ::google::protobuf::Message {
+ public:
+  AckSearchOppnent();
+  virtual ~AckSearchOppnent();
+
+  AckSearchOppnent(const AckSearchOppnent& from);
+
+  inline AckSearchOppnent& operator=(const AckSearchOppnent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckSearchOppnent& default_instance();
+
+  void Swap(AckSearchOppnent* other);
+
+  // implements Message ----------------------------------------------
+
+  AckSearchOppnent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckSearchOppnent& from);
+  void MergeFrom(const AckSearchOppnent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 scene_id = 1;
+  inline bool has_scene_id() const;
+  inline void clear_scene_id();
+  static const int kSceneIdFieldNumber = 1;
+  inline ::google::protobuf::int32 scene_id() const;
+  inline void set_scene_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.AckSearchOppnent)
+ private:
+  inline void set_has_scene_id();
+  inline void clear_has_scene_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 scene_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static AckSearchOppnent* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -11572,60 +11560,6 @@ inline void ReqAckJoinActivity::set_sub_activity_type(::NFMsg::ReqAckJoinActivit
 
 // -------------------------------------------------------------------
 
-// ReqAckSearchOppnent
-
-// required .NFMsg.EBattleType search_type = 1;
-inline bool ReqAckSearchOppnent::has_search_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckSearchOppnent::set_has_search_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckSearchOppnent::clear_has_search_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckSearchOppnent::clear_search_type() {
-  search_type_ = 0;
-  clear_has_search_type();
-}
-inline ::NFMsg::EBattleType ReqAckSearchOppnent::search_type() const {
-  return static_cast< ::NFMsg::EBattleType >(search_type_);
-}
-inline void ReqAckSearchOppnent::set_search_type(::NFMsg::EBattleType value) {
-  assert(::NFMsg::EBattleType_IsValid(value));
-  set_has_search_type();
-  search_type_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ReqAckBattleOppnent
-
-// required .NFMsg.EBattleType battle_type = 1;
-inline bool ReqAckBattleOppnent::has_battle_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ReqAckBattleOppnent::set_has_battle_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ReqAckBattleOppnent::clear_has_battle_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ReqAckBattleOppnent::clear_battle_type() {
-  battle_type_ = 0;
-  clear_has_battle_type();
-}
-inline ::NFMsg::EBattleType ReqAckBattleOppnent::battle_type() const {
-  return static_cast< ::NFMsg::EBattleType >(battle_type_);
-}
-inline void ReqAckBattleOppnent::set_battle_type(::NFMsg::EBattleType value) {
-  assert(::NFMsg::EBattleType_IsValid(value));
-  set_has_battle_type();
-  battle_type_ = value;
-}
-
-// -------------------------------------------------------------------
-
 // ReqAckCreateGuild
 
 // required .NFMsg.Ident guild_id = 1;
@@ -13153,70 +13087,70 @@ inline void ReqMiningTitle::set_opr(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// AckMiningTitle_TileState
+// TileState
 
 // required int32 x = 1;
-inline bool AckMiningTitle_TileState::has_x() const {
+inline bool TileState::has_x() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AckMiningTitle_TileState::set_has_x() {
+inline void TileState::set_has_x() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void AckMiningTitle_TileState::clear_has_x() {
+inline void TileState::clear_has_x() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void AckMiningTitle_TileState::clear_x() {
+inline void TileState::clear_x() {
   x_ = 0;
   clear_has_x();
 }
-inline ::google::protobuf::int32 AckMiningTitle_TileState::x() const {
+inline ::google::protobuf::int32 TileState::x() const {
   return x_;
 }
-inline void AckMiningTitle_TileState::set_x(::google::protobuf::int32 value) {
+inline void TileState::set_x(::google::protobuf::int32 value) {
   set_has_x();
   x_ = value;
 }
 
 // required int32 y = 2;
-inline bool AckMiningTitle_TileState::has_y() const {
+inline bool TileState::has_y() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AckMiningTitle_TileState::set_has_y() {
+inline void TileState::set_has_y() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AckMiningTitle_TileState::clear_has_y() {
+inline void TileState::clear_has_y() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AckMiningTitle_TileState::clear_y() {
+inline void TileState::clear_y() {
   y_ = 0;
   clear_has_y();
 }
-inline ::google::protobuf::int32 AckMiningTitle_TileState::y() const {
+inline ::google::protobuf::int32 TileState::y() const {
   return y_;
 }
-inline void AckMiningTitle_TileState::set_y(::google::protobuf::int32 value) {
+inline void TileState::set_y(::google::protobuf::int32 value) {
   set_has_y();
   y_ = value;
 }
 
 // required int32 opr = 3;
-inline bool AckMiningTitle_TileState::has_opr() const {
+inline bool TileState::has_opr() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AckMiningTitle_TileState::set_has_opr() {
+inline void TileState::set_has_opr() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AckMiningTitle_TileState::clear_has_opr() {
+inline void TileState::clear_has_opr() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AckMiningTitle_TileState::clear_opr() {
+inline void TileState::clear_opr() {
   opr_ = 0;
   clear_has_opr();
 }
-inline ::google::protobuf::int32 AckMiningTitle_TileState::opr() const {
+inline ::google::protobuf::int32 TileState::opr() const {
   return opr_;
 }
-inline void AckMiningTitle_TileState::set_opr(::google::protobuf::int32 value) {
+inline void TileState::set_opr(::google::protobuf::int32 value) {
   set_has_opr();
   opr_ = value;
 }
@@ -13225,29 +13159,59 @@ inline void AckMiningTitle_TileState::set_opr(::google::protobuf::int32 value) {
 
 // AckMiningTitle
 
-// repeated .NFMsg.AckMiningTitle.TileState tile = 1;
+// repeated .NFMsg.TileState tile = 1;
 inline int AckMiningTitle::tile_size() const {
   return tile_.size();
 }
 inline void AckMiningTitle::clear_tile() {
   tile_.Clear();
 }
-inline const ::NFMsg::AckMiningTitle_TileState& AckMiningTitle::tile(int index) const {
+inline const ::NFMsg::TileState& AckMiningTitle::tile(int index) const {
   return tile_.Get(index);
 }
-inline ::NFMsg::AckMiningTitle_TileState* AckMiningTitle::mutable_tile(int index) {
+inline ::NFMsg::TileState* AckMiningTitle::mutable_tile(int index) {
   return tile_.Mutable(index);
 }
-inline ::NFMsg::AckMiningTitle_TileState* AckMiningTitle::add_tile() {
+inline ::NFMsg::TileState* AckMiningTitle::add_tile() {
   return tile_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::AckMiningTitle_TileState >&
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >&
 AckMiningTitle::tile() const {
   return tile_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFMsg::AckMiningTitle_TileState >*
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
 AckMiningTitle::mutable_tile() {
   return &tile_;
+}
+
+// -------------------------------------------------------------------
+
+// ReqSearchOppnent
+
+// -------------------------------------------------------------------
+
+// AckSearchOppnent
+
+// required int32 scene_id = 1;
+inline bool AckSearchOppnent::has_scene_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckSearchOppnent::set_has_scene_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckSearchOppnent::clear_has_scene_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckSearchOppnent::clear_scene_id() {
+  scene_id_ = 0;
+  clear_has_scene_id();
+}
+inline ::google::protobuf::int32 AckSearchOppnent::scene_id() const {
+  return scene_id_;
+}
+inline void AckSearchOppnent::set_scene_id(::google::protobuf::int32 value) {
+  set_has_scene_id();
+  scene_id_ = value;
 }
 
 // -------------------------------------------------------------------
