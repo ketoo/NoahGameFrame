@@ -20,8 +20,8 @@ public:
 	virtual std::string GetAccountCacheKey(const std::string& strAccount) = 0;
 	virtual std::string GetTileCacheKey(const int& nSceneID) = 0;
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self) = 0;
-    virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self) = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName) = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName) = 0;
 
 	virtual bool GetCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList) = 0;
 	virtual bool GetCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList) = 0;
@@ -37,8 +37,8 @@ public:
     virtual bool RemoveCachePropertyInfo(const NFGUID& self) = 0;
     virtual bool RemoveCacheRecordInfo(const NFGUID& self) = 0;
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const NFGUID& self) = 0;
-    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const NFGUID& self) = 0;
+    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName) = 0;
+    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName) = 0;
 
     virtual bool ConvertPBToPropertyManager(const NFMsg::ObjectPropertyList& xMsg, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, const bool bCache) = 0;
     virtual bool ConvertPBToRecordManager(const NFMsg::ObjectRecordList& xMsg, NF_SHARE_PTR<NFIRecordManager>& pRecordManager, const bool bCache) = 0;
