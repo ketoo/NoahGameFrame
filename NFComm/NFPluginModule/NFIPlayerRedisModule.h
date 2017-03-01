@@ -22,6 +22,9 @@ public:
 	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList) = 0;
 	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList) = 0;
 
+	virtual bool LoadPlayerData(const NFGUID& self) = 0;
+	virtual int GetPlayerHomeSceneID(const NFGUID& self) = 0;
+
 	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self) = 0;
 	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self) = 0;
 
