@@ -38,8 +38,16 @@ bool NFCTileModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::ReqMineTile)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGMI_REQ_SEARCH_OPPNENT, this, &NFCTileModule::ReqSearchOppnent)) { return false; }
 
     return true;
+}
+
+void NFCTileModule::ReqSearchOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+	int nSceneiD = 1;//it will be better if random a scene id
+
 }
 
 void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -61,7 +69,7 @@ void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const ch
 	}
 
 	NFMsg::AckMiningTitle xData;
-	NFMsg::AckMiningTitle::TileState* pTile = xData.add_tile();
+	NFMsg::TileState* pTile = xData.add_tile();
 	if (pTile)
 	{
 		pTile->set_x(nX);
@@ -106,8 +114,10 @@ bool NFCTileModule::AddTile(const NFGUID & self, const int nX, const int nY, con
 	xTileState->x = nX;
 	xTileState->y = nY;
 	xTileState->state = nOpr;
+	//save
+	SaveTileData(self);
 
-	return false;
+	return true;
 }
 
 bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
@@ -124,7 +134,16 @@ bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
 		return false;
 	}
 
-	return xStateDataMap->RemoveElement(nY);
+	if (xStateDataMap->ExistElement(nY))
+	{
+		xStateDataMap->RemoveElement(nY);
+		//save
+		SaveTileData(self);
+
+		return true;
+	}
+
+	return false;
 }
 
 bool NFCTileModule::SaveTileData(const NFGUID & self)
@@ -144,7 +163,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 		{
 			//pb
 			//xStateData
-			NFMsg::AckMiningTitle::TileState* pTile = xData.add_tile();
+			NFMsg::TileState* pTile = xData.add_tile();
 			if (pTile)
 			{
 				pTile->set_x(xStateData->x);
@@ -153,10 +172,12 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 			}
 		}
 	}
+
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
 	std::string strData;
 	if (xData.SerializeToString(&strData))
 	{
-		return m_pPlayerRedisModule->SavePlayerTileToCache(self, strData);
+		return m_pPlayerRedisModule->SavePlayerTileToCache(nSceneID, self, strData);
 	}
 
 	return false;
@@ -164,10 +185,18 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 
 bool NFCTileModule::LoadTileData(const NFGUID & self)
 {
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	LoadTileData(self, nSceneID);
+
+	return false;
+}
+
+bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
+{
 	mxTileData.RemoveElement(self);
 
 	std::string strData;
-	if (m_pPlayerRedisModule->GetPlayerTileFromCache(self, strData))
+	if (m_pPlayerRedisModule->GetPlayerTileFromCache(nSceneID, self, strData))
 	{
 		NFMsg::AckMiningTitle xData;
 		if (xData.ParseFromString(strData))
@@ -175,14 +204,13 @@ bool NFCTileModule::LoadTileData(const NFGUID & self)
 			int nCount = xData.tile_size();
 			for (int i = 0; i < nCount; ++i)
 			{
-				const NFMsg::AckMiningTitle::TileState& xTile = xData.tile(i);
+				const NFMsg::TileState& xTile = xData.tile(i);
 				AddTile(self, xTile.x(), xTile.y(), xTile.opr());
 			}
 
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -204,7 +232,7 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 		{
 			//pb
 			//xStateData
-			NFMsg::AckMiningTitle::TileState* pTile = xData.add_tile();
+			NFMsg::TileState* pTile = xData.add_tile();
 			if (pTile)
 			{
 				bNeedSend = true;
@@ -226,8 +254,7 @@ int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
-		//save
-		SaveTileData(self);
+		//cannot save tile here, because player maybe offline in other people scene
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{

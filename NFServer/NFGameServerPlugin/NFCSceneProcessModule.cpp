@@ -69,7 +69,7 @@ bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSc
 	return RequestEnterScene(self, nSceneID, -1, nType, argList);
 }
 
-bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGrupID, const int nType, const NFDataList & argList)
+bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
