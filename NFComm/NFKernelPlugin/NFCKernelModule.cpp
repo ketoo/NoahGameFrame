@@ -1517,6 +1517,20 @@ void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFDataList& value
     mnRandomPos += nCount;
 }
 
+int NFCKernelModule::Random(int nStart, int nEnd)
+{
+	if (mnRandomPos + 1 >= mvRandom.size())
+	{
+		mnRandomPos = 0;
+	}
+
+	float fRanValue = mvRandom.at(mnRandomPos);
+	mnRandomPos++;
+
+	int nValue = (nEnd - nStart) * fRanValue + nStart;
+	return nValue;
+}
+
 bool NFCKernelModule::AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb)
 {
     return m_pClassModule->AddClassCallBack(strClassName, cb);
