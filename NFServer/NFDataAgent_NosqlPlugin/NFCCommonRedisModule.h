@@ -33,11 +33,11 @@ public:
 	virtual std::string GetAccountCacheKey(const std::string& strAccount);
 	virtual std::string GetTileCacheKey(const int& nSceneID);
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const NFGUID& self);
-    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const NFGUID& self);
+    virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName);
 
-    virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self);
-    virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self);
+    virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName);
+    virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName);
 
 	virtual bool GetCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList);
 	virtual bool GetCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList);
