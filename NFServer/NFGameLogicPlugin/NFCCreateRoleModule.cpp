@@ -19,6 +19,7 @@ bool NFCCreateRoleModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	
     return true;
@@ -211,7 +212,7 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 		}
 
 		//get data first then create player
-		m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nSceneID, -1, 0, NFDataList());
 	}
 }
 
