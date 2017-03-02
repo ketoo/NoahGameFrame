@@ -81,12 +81,23 @@ bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSc
 	}
 	else if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
-
-
+		if (nGroupID > 0)
+		{
+			return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nGroupID, nType, argList);
+		}
+		else
+		{
+			int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
+			if (nNewGroupID > 0)
+			{
+				return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nNewGroupID, nType, argList);
+			}
+		}
+		
 	}
 	else if (GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
 	{
-		return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, 1, nType, argList);
+		return m_pSceneAOIModule->RequestEnterScene(self, nSceneID, nGroupID, nType, argList);
 	}
 	return false;
 }
