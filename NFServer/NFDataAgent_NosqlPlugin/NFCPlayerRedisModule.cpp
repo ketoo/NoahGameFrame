@@ -194,7 +194,7 @@ int NFCPlayerRedisModule::GetPlayerHomeSceneID(const NFGUID & self)
 		return xPlayerDataCache->nHomeSceneID;
 	}
 
-	return 1;
+	return 0;
 }
 
 NF_SHARE_PTR<NFIPropertyManager> NFCPlayerRedisModule::GetPlayerCacheProperty(const NFGUID& self)
