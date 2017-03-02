@@ -11,18 +11,37 @@
 
 bool NFCCreateRoleModule::Init()
 {
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	
     return true;
 }
 
 bool NFCCreateRoleModule::AfterInit()
 {
-
+	//Tile
+	//mxTileSceneIDList
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Scene::Tile());
+			if (nServerType == 1)
+			{
+				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
+			}
+		}
+	}
 	return true;
 }
 
@@ -44,8 +63,8 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 		return;
 	}
 
-	NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->GetPlayerCacheProperty(xPlayerID);
-	if (xPlayerProperty)
+	//NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->GetPlayerCacheProperty(xPlayerID);
+	//if (xPlayerProperty)
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
 		NFMsg::RoleLiteInfo* pData = xAckRoleLiteInfoList.add_char_data();
@@ -54,7 +73,7 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 		pData->set_career(0);
 		pData->set_sex(0);
 		pData->set_race(0);
-		pData->set_noob_name(xPlayerProperty->GetPropertyString(NFrame::Player::Name()));
+		pData->set_noob_name(strRoleName);
 		pData->set_role_level(0);
 		pData->set_delete_time(0);
 		pData->set_reg_time(0);
@@ -64,11 +83,11 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 
 		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 	}
-	else
-	{
-		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
-	}
+	//else
+	//{
+	//	NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
+	//	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
+	//}
 }
 
 void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -118,15 +137,95 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nClientID);
 }
 
+void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	NFGUID nClientID;
+	NFMsg::ReqEnterGameServer xMsg;
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	{
+		return;
+	}
+
+	NFGUID nRoleID = NFINetModule::PBToNF(xMsg.id());
+
+	if (m_pKernelModule->GetObject(nRoleID))
+	{
+		//it should be rebind with proxy's netobject
+		m_pKernelModule->DestroyObject(nRoleID);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = m_pGameServerNet_ServerModule->GetPlayerGateInfo(nRoleID);
+	if (nullptr != pGateInfo)
+	{
+		m_pGameServerNet_ServerModule->RemovePlayerGateInfo(nRoleID);
+	}
+
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = m_pGameServerNet_ServerModule->GetGateServerInfoBySockIndex(nSockIndex);
+	if (nullptr == pGateServerinfo)
+	{
+		return;
+	}
+
+	int nGateID = -1;
+	if (pGateServerinfo->xServerData.pData)
+	{
+		nGateID = pGateServerinfo->xServerData.pData->server_id();
+	}
+
+	if (nGateID < 0)
+	{
+		return;
+	}
+
+	if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nRoleID, nClientID, nGateID))
+	{
+		return;
+	}
+
+	if (m_pPlayerRedisModule->LoadPlayerData(nRoleID))
+	{
+		int nSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
+		if (nSceneID <= 0)
+		{
+			nSceneID = mxTileSceneIDList.at(m_pKernelModule->Random(0, mxTileSceneIDList.size()));
+		}
+
+		NFDataList var;
+		var.AddString(NFrame::Player::Name());
+		var.AddString(xMsg.name());
+
+		var.AddString(NFrame::Player::GateID());
+		var.AddInt(nGateID);
+
+		var.AddString(NFrame::Player::GameID());
+		var.AddInt(pPluginManager->GetAppID());
+
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
+		if (nullptr == pObject)
+		{
+			//mRoleBaseData
+			//mRoleFDData
+			return;
+		}
+
+		//get data first then create player
+		m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
+	}
+}
+
 bool NFCCreateRoleModule::ReadyExecute()
 {
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST);
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE);
 	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ROLE_LIST, this, &NFCCreateRoleModule::OnReqiureRoleListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_ROLE, this, &NFCCreateRoleModule::OnCreateRoleGameProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_DELETE_ROLE, this, &NFCCreateRoleModule::OnDeleteRoleGameProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ENTER_GAME, this, &NFCCreateRoleModule::OnClienEnterGameProcess);
 
 	return true;
 }
