@@ -67,7 +67,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 3. Open the solution: **NoahFrame.sln**, build FileProcessTool project
 4. Run **GenerateConfigXML.bat** to generate configuration files
 5. Open the solution: **NoahFrame.sln**
-6. Build the solution
+6. Build the solution(if u build failed, please build again(not rebuild))
 7. Run the binary file by **_Out/Debug/rund.bat**
 
 ### CodeBlocks >= 13.1(Only in linux)
