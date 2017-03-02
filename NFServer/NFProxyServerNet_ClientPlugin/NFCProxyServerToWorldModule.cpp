@@ -13,9 +13,7 @@
 
 bool NFCProxyServerToWorldModule::Init()
 {
-	m_pNetClientModule = NF_NEW NFINetClientModule(pPluginManager);
-
-	m_pNetClientModule->Init();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
     return true;
 }
@@ -29,7 +27,6 @@ bool NFCProxyServerToWorldModule::Shut()
 
 bool NFCProxyServerToWorldModule::Execute()
 {
-	m_pNetClientModule->Execute();
 	ServerReport();
 	return true;
 }
@@ -61,7 +58,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
         {
             case NF_SERVER_TYPES::NF_ST_GAME:
             {
-                m_pProxyServerToGameModule->GetClusterModule()->AddServer(xServerData);
+                m_pNetClientModule->AddServer(xServerData);
             }
             break;
             case NF_SERVER_TYPES::NF_ST_WORLD:
@@ -184,7 +181,7 @@ void NFCProxyServerToWorldModule::ServerReport()
 				}
 				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
-				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerList().First();
+				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_WORLD);
 				if (pServerData)
 				{
 					m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
@@ -202,13 +199,14 @@ bool NFCProxyServerToWorldModule::AfterInit()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
+    m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
-	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
-	m_pNetClientModule->AddReceiveCallBack(NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
-	m_pNetClientModule->AddReceiveCallBack(this, &NFCProxyServerToWorldModule::OnOtherMessage);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
+	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCProxyServerToWorldModule::OnOtherMessage);
 
-	m_pNetClientModule->AddEventCallBack(this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
+	m_pNetClientModule->ExpandBufferSize();
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)

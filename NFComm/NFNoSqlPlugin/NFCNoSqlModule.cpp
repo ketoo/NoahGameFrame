@@ -6,7 +6,6 @@
 //    Row,Col; ; ; ; ; ; ;
 // -------------------------------------------------------------------------
 
-//#include "stdafx.h"
 #include <algorithm>
 #include "NFCNoSqlModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -55,14 +54,14 @@ bool NFCNoSqlModule::AfterInit()
 			if (this->AddConnectSql(strId, strIP, nPort, strAuth))
 			{
 				std::ostringstream strLog;
-				strLog << "Connected NoSqlServer[" << strIP << "], Port = " << nPort;
+				strLog << "Connected NoSqlServer[" << strIP << "], Port = [" << nPort << "], Passsword = [" << strAuth << "]";
 				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 
 			}
 			else
 			{
 				std::ostringstream strLog;
-				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort;
+				strLog << "Cannot connect NoSqlServer[" << strIP << "], Port = " << nPort << "], Passsword = [" << strAuth << "]";
 				m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
 			}
 		}

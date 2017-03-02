@@ -96,22 +96,22 @@
     <ClInclude Include="NFBox.hpp" />
     <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFCConsistentHash.hpp" />
-    <ClInclude Include="NFCDataList.h" />
-    <ClInclude Include="NFCMemManager.h" />
+    <ClInclude Include="NFCMemManager.hpp" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
     <ClInclude Include="NFCPropertyManager.h" />
     <ClInclude Include="NFCRecordManager.h" />
+    <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
     <ClInclude Include="NFException.hpp" />
     <ClInclude Include="NFIComponent.h" />
     <ClInclude Include="NFIComponentManager.h" />
-    <ClInclude Include="NFIDataList.h" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
-    <ClInclude Include="NFMemoryCounter.h" />
+    <ClInclude Include="NFMemoryCounter.hpp" />
     <ClInclude Include="NFPlane.hpp" />
     <ClInclude Include="NFRay.hpp" />
+    <ClInclude Include="NFSingleton.hpp" />
     <ClInclude Include="NFSpaceNode.hpp" />
     <ClInclude Include="NFSphere.hpp" />
     <ClInclude Include="NFCRecord.h" />
@@ -126,14 +126,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFCComponentManager.cpp" />
-    <ClCompile Include="NFCDataList.cpp" />
-    <ClCompile Include="NFCMemManager.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />
     <ClCompile Include="NFCRecordManager.cpp" />
     <ClCompile Include="NFCRecord.cpp" />
-    <ClCompile Include="NFMemoryCounter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

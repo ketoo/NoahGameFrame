@@ -1,6 +1,11 @@
 #pragma once
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "tinyxml2.h"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
+#include "Dependencies/common/lexical_cast.hpp"
+//#include "tinyxml2.h"
 #include "MiniExcelReader.h"
 #include <algorithm>
 #include <fstream>
@@ -49,7 +54,9 @@ public:
 	bool bConvertIntoUTF8 = false;
 
 private:
+	char * NewChar(const std::string& str);
 	int nCipher = 0;
+	std::vector<char *> tmpStrList;
 	std::string strCipherCfg = "conf";
 
 	std::string strExecutePath = "NFDataCfg/";

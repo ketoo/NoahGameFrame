@@ -25,14 +25,13 @@ public:
 	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self) = 0;
 	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self) = 0;
 
+	virtual bool SavePlayerDataToCache(const NFGUID& self) = 0;
 	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
 	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
 
-	virtual	bool GetAccountRoleID(const std::string& strAccount, NFGUID& xPlayerID) = 0;
-	virtual bool SavePlayerDataToCatch(const NFGUID& self) = 0;
-
-	virtual const NFGUID CreateRole(const std::string& strAccount, const std::string& strName) = 0;
-	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID) = 0;
+	virtual bool SavePlayerTileToCache(const int nSceneID, const NFGUID& self, const std::string& strTileData) = 0;
+	virtual bool GetPlayerTileRandomFromCache(const int nSceneID, std::string& strTileData) = 0;
+	virtual bool GetPlayerTileFromCache(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
 };
 
 #endif

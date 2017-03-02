@@ -339,8 +339,8 @@ public class Guild
 	public static readonly String GuildMoney = "GuildMoney"; // int
 	public static readonly String GuildLevel = "GuildLevel"; // int
 	public static readonly String GuildContinueDay = "GuildContinueDay"; // int
-	public static readonly String GuilID = "GuilID"; // object
-	public static readonly String GuilIDIcon = "GuilIDIcon"; // int
+	public static readonly String GuildID = "GuildID"; // object
+	public static readonly String GuildIcon = "GuildIcon"; // int
 	public static readonly String GuildMemeberCount = "GuildMemeberCount"; // int
 	public static readonly String GuildMemeberMaxCount = "GuildMemeberMaxCount"; // int
 	public static readonly String GuildHonor = "GuildHonor"; // int
@@ -1119,6 +1119,7 @@ public class Shop
 	public static readonly String Stone = "Stone"; // int
 	public static readonly String Diamond = "Diamond"; // int
 	public static readonly String Level = "Level"; // int
+	public static readonly String Count = "Count"; // int
 	// Record
 
 }
@@ -1376,4 +1377,4 @@ public class Team
 
 }
 
-} 
+}

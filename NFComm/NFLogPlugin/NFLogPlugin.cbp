@@ -60,11 +60,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCLogModule.cpp" />
-		<Unit filename="NFCLogModule.h" />
-		<Unit filename="NFLogPlugin.cpp" />
-		<Unit filename="NFLogPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCLogModule.cpp" />
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFLogPlugin.cpp" />
+<Unit filename="NFCLogModule.h" />
+<Unit filename="NFLogPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

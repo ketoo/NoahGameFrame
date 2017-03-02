@@ -1,9 +1,9 @@
 #include "HelloWorld2.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFIComponent.h"
-#include "NFComm/NFCore//NFCDataList.h"
+#include "NFComm/NFCore//NFDataList.hpp"
 
-bool HelloWorld2::Init()
+bool NFCHelloWorld2::Init()
 {
     
 
@@ -12,7 +12,7 @@ bool HelloWorld2::Init()
     return true;
 }
 
-int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCHelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string& strProperty, const NFData& oldVar, const NFData& newVar)
 {
     
     std::cout << "OnPropertyCallBackEvent Property: " << strProperty << " OldValue: " << oldVar.GetInt() << " NewValue: " << newVar.GetInt() << std::endl;
@@ -20,9 +20,9 @@ int HelloWorld2::OnPropertyCallBackEvent( const NFGUID& self, const std::string&
     return 0;
 }
 
-bool HelloWorld2::AfterInit()
+bool NFCHelloWorld2::AfterInit()
 {
-	NFCDataList xData;
+	NFDataList xData;
 	xData.AddInt(111);
 
 
@@ -50,7 +50,7 @@ bool HelloWorld2::AfterInit()
         std::cout << "Property World:" << nProperty1 << std::endl;
 
         //add a call back functin for "world" property
-        pObject->AddPropertyCallBack("World", this, &HelloWorld2::OnPropertyCallBackEvent);
+        pObject->AddPropertyCallBack("World", this, &NFCHelloWorld2::OnPropertyCallBackEvent);
 
 		////set the "world" property value as 2222[than the function "HelloWorld2::OnPropertyCallBackEvent" will be called]
         pObject->SetPropertyInt("World", 2222);
@@ -65,7 +65,7 @@ bool HelloWorld2::AfterInit()
     return true;
 }
 
-bool HelloWorld2::Execute()
+bool NFCHelloWorld2::Execute()
 {
     
     //std::cout << "Hello, world2, Execute" << std::endl;
@@ -73,7 +73,7 @@ bool HelloWorld2::Execute()
     return true;
 }
 
-bool HelloWorld2::BeforeShut()
+bool NFCHelloWorld2::BeforeShut()
 {
     
     std::cout << "Hello, world2, BeforeShut" << std::endl;
@@ -81,7 +81,7 @@ bool HelloWorld2::BeforeShut()
     return true;
 }
 
-bool HelloWorld2::Shut()
+bool NFCHelloWorld2::Shut()
 {
     
     std::cout << "Hello, world2, Shut" << std::endl;

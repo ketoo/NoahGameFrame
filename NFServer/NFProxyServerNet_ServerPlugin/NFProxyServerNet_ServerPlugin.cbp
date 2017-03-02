@@ -65,11 +65,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCProxyServerNet_ServerModule.cpp" />
-		<Unit filename="NFCProxyServerNet_ServerModule.h" />
-		<Unit filename="NFProxyServerNet_ServerPlugin.cpp" />
-		<Unit filename="NFProxyServerNet_ServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCProxyServerNet_ServerModule.cpp" />
+<Unit filename="NFProxyServerNet_ServerPlugin.cpp" />
+<Unit filename="NFCProxyServerNet_ServerModule.h" />
+<Unit filename="NFProxyServerNet_ServerPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

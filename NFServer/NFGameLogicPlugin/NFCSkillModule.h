@@ -11,7 +11,6 @@
 
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -49,19 +48,20 @@ public:
     virtual int GetSkillGemLevel( const NFGUID& self, const std::string& strSkillName );
 
     virtual int AddNewerSkill( const NFGUID& self );
-    virtual int OnUseSkill(const NFGUID& self, const NFIDataList& var);
+    virtual int OnUseSkill(const NFGUID& self, const NFDataList& var);
 protected:
 
-    int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+    int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
 
-	int OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var );
-	int OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var );
+	int OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
+	int OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
 
 protected:
 	void OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
     char* mstrSkillTableName;
 
+	NFINetModule* m_pNetModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;

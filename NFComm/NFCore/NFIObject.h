@@ -9,7 +9,7 @@
 #ifndef NFI_OBJECT_H
 #define NFI_OBJECT_H
 
-#include "NFIDataList.h"
+#include "NFDataList.hpp"
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
 #include "NFIPropertyManager.h"
@@ -26,11 +26,12 @@ enum CLASS_OBJECT_EVENT
 	COE_CREATE_AFTER_EFFECT,
 	COE_CREATE_HASDATA,
 	COE_CREATE_FINISH,
+	COE_CREATE_CLIENT_FINISH,
 	COE_BEFOREDESTROY,
 	COE_DESTROY,
 };
 
-class _NFExport NFIObject :public NFMemoryCounter
+class _NFExport NFIObject :public NFMemoryCounter<NFIObject>
 {
 private:
 	NFIObject() : NFMemoryCounter(GET_CLASS_NAME(NFIObject))
@@ -51,7 +52,7 @@ public:
     virtual NFGUID Self() = 0;
 
     template<typename BaseType>
-    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFIDataList::TData&, const NFIDataList::TData&))
+    bool AddPropertyCallBack(const std::string& strPropertyName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const NFData&, const NFData&))
     {
         PROPERTY_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         PROPERTY_EVENT_FUNCTOR_PTR functorPtr(NF_NEW PROPERTY_EVENT_FUNCTOR(functor));
@@ -59,7 +60,7 @@ public:
     }
 
     template<typename BaseType>
-    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
+    bool AddRecordCallBack(const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFData&, const NFData&))
     {
         RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
