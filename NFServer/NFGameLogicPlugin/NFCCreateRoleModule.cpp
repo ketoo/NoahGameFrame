@@ -64,7 +64,7 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 		return;
 	}
 
-	//NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->GetPlayerCacheProperty(xPlayerID);
+	//NF_SHARE_PTR<NFIPropertyManager> xPlayerProperty = m_pPlayerRedisModule->LoadPlayerCacheProperty(xPlayerID);
 	//if (xPlayerProperty)
 	{
 		NFMsg::AckRoleLiteInfoList xAckRoleLiteInfoList;
@@ -202,6 +202,9 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 
 		var.AddString(NFrame::Player::GameID());
 		var.AddInt(pPluginManager->GetAppID());
+
+		var.AddString(NFrame::Player::HomeSceneID());
+		var.AddInt(nSceneID);
 
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)
