@@ -103,6 +103,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MasterServer", "MasterServer", "{266C0DF9-8DF0-4422-8FD7-AECC4E38AD97}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFCore", "NFComm\NFCore\NFCore.vcxproj", "{B9833FE8-8C0B-40D6-BA01-3CDADEB21166}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A24AA66-5EBC-4ECC-8021-7D9237868B33} = {2A24AA66-5EBC-4ECC-8021-7D9237868B33}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFWorldNet_ServerPlugin", "NFServer\NFWorldNet_ServerPlugin\NFWorldNet_ServerPlugin.vcxproj", "{4BC56C4A-50BC-446D-8906-2CF8F0845E76}"
 	ProjectSection(ProjectDependencies) = postProject
