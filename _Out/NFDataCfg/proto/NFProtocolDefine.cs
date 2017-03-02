@@ -1061,6 +1061,7 @@ public class Scene
 	public static readonly String RelivePos = "RelivePos"; // string
 	public static readonly String Width = "Width"; // int
 	public static readonly String SoundList = "SoundList"; // string
+	public static readonly String Tile = "Tile"; // int
 	public static readonly String Share = "Share"; // int
 	public static readonly String CanClone = "CanClone"; // int
 	public static readonly String ActorID = "ActorID"; // int
