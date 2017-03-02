@@ -106,12 +106,12 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         return NFGUID();
     }
 
-    if (!m_pCommonRedisModule->SetCachePropertyInfo(xTeam, pPropertyManager))
+    if (!m_pCommonRedisModule->SaveCachePropertyInfo(xTeam, pPropertyManager))
     {
         return NFGUID();
     }
 
-    if (!m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager))
+    if (!m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager))
     {
         return NFGUID();
     }
@@ -161,7 +161,7 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
+    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
@@ -191,7 +191,7 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
+    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember )
@@ -238,7 +238,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
         return false;
     }
     
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
+    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 
@@ -314,7 +314,7 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
     
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 1);
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager);
+    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
 }
 
 bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
@@ -341,7 +341,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_GameID, 0);
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager);
+    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
 }
 
 bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData)

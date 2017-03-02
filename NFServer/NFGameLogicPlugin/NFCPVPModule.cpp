@@ -126,7 +126,7 @@ void NFCPVPModule::OnSearchOppnent(const int nSockIndex, const int nMsgID, const
 
 	int nSceneID = 1;
 	std::string strTileData;
-	if (m_pPlayerRedisModule->GetPlayerTileRandomFromCache(nSceneID, strTileData))
+	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, strTileData))
 	{
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
