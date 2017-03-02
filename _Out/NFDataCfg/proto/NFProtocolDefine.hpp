@@ -803,7 +803,7 @@ public:
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
 	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& LastContainerID(){ static std::string xLastContainerID = "LastContainerID"; return xLastContainerID; } // int
+	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
@@ -1083,6 +1083,7 @@ public:
 	static const std::string& RelivePos(){ static std::string xRelivePos = "RelivePos"; return xRelivePos; } // string
 	static const std::string& Width(){ static std::string xWidth = "Width"; return xWidth; } // int
 	static const std::string& SoundList(){ static std::string xSoundList = "SoundList"; return xSoundList; } // string
+	static const std::string& Tile(){ static std::string xTile = "Tile"; return xTile; } // int
 	static const std::string& Share(){ static std::string xShare = "Share"; return xShare; } // int
 	static const std::string& CanClone(){ static std::string xCanClone = "CanClone"; return xCanClone; } // int
 	static const std::string& ActorID(){ static std::string xActorID = "ActorID"; return xActorID; } // int

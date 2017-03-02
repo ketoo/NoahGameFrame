@@ -5,7 +5,7 @@
 		<Property Id="Sex" Type="int" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="性别"/>
 		<Property Id="Race" Type="int" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="种族"/>
 		<Property Id="Camp" Type="int" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="阵营"/>
-		<Property Id="LastContainerID" Type="int" Public="0" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="玩家下线的时候需要保存上次在线的场景"/>
+		<Property Id="HomeSceneID" Type="int" Public="0" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="玩家下线的时候需要保存上次在线的场景"/>
 		<Property Id="Level" Type="int" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="等级"/>
 		<Property Id="ShowName" Type="string" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="显示的名字"/>
 		<Property Id="PrefabPath" Type="string" Public="1" Private="0" Save="1" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
