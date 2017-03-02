@@ -40,7 +40,7 @@ public:
     virtual bool Final();
 
 	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
-	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, std::vector<websocketpp::connection_hdl>);
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>&);
 	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl);
 
     virtual bool AddNetObject(websocketpp::connection_hdl conn,WSObjectPtr pObject);

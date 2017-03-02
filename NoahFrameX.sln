@@ -103,6 +103,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MasterServer", "MasterServer", "{266C0DF9-8DF0-4422-8FD7-AECC4E38AD97}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFCore", "NFComm\NFCore\NFCore.vcxproj", "{B9833FE8-8C0B-40D6-BA01-3CDADEB21166}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A24AA66-5EBC-4ECC-8021-7D9237868B33} = {2A24AA66-5EBC-4ECC-8021-7D9237868B33}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFWorldNet_ServerPlugin", "NFServer\NFWorldNet_ServerPlugin\NFWorldNet_ServerPlugin.vcxproj", "{4BC56C4A-50BC-446D-8906-2CF8F0845E76}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -217,6 +220,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFTaskPlugin", "NFMidWare\NFTaskPlugin\NFTaskPlugin.vcxproj", "{85B677E2-4D92-442E-9D81-5500F00092E8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFNetPlugin", "NFComm\NFNetPlugin\NFNetPlugin.vcxproj", "{403EB74F-6AF5-4250-8DA5-9D3CBFB7E545}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D9DB426-BA46-450B-BBAC-DABB6B6D69DE} = {3D9DB426-BA46-450B-BBAC-DABB6B6D69DE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFGuildPlugin", "NFMidWare\NFGuildPlugin\NFGuildPlugin.vcxproj", "{7642169F-2530-4B2F-8FEF-6390D8FECA4A}"
 EndProject

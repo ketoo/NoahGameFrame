@@ -29,12 +29,12 @@ std::string NFCCommonRedisModule::GetRecordCacheKey(const NFGUID& self)
 
 std::string NFCCommonRedisModule::GetPropertyStorageKey(const NFGUID & self)
 {
-	return std::string();
+	return self.ToString() + "_ObjectStorageRecord";
 }
 
 std::string NFCCommonRedisModule::GetRecordStorageKey(const NFGUID & self)
 {
-	return std::string();
+	return self.ToString() + "_ObjectStorageRecord";
 }
 
 std::string NFCCommonRedisModule::GetAccountCacheKey(const std::string & strAccount)
@@ -58,9 +58,8 @@ bool NFCCommonRedisModule::AfterInit()
     return true;
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::NewPropertyManager(const NFGUID& self)
+NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::NewPropertyManager(const std::string& strClassName)
 {
-	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
     NF_SHARE_PTR<NFIPropertyManager> pStaticClassPropertyManager = m_pLogicClassModule->GetClassPropertyManager(strClassName);
     if (pStaticClassPropertyManager)
     {
@@ -87,9 +86,8 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::NewPropertyManager(const 
     return NF_SHARE_PTR<NFIPropertyManager>(NULL);
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const NFGUID& self)
+NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std::string& strClassName)
 {
-	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
     NF_SHARE_PTR<NFIRecordManager> pStaticClassRecordManager = m_pLogicClassModule->GetClassRecordManager(strClassName);
     if (pStaticClassRecordManager)
     {
@@ -119,9 +117,9 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const NFGU
     return NF_SHARE_PTR<NFIRecordManager>(NULL);
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self)
+NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(self);
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(strClassName);
     if (!pPropertyManager)
     {
         return nullptr;
@@ -154,9 +152,9 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
     return pPropertyManager;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self)
+NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(self);
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(strClassName);
     if (!pRecordManager.get())
     {
         return nullptr;

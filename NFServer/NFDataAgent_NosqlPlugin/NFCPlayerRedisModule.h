@@ -9,10 +9,11 @@
 #ifndef NFC_PLAYER_REDIS_MODULE_H
 #define NFC_PLAYER_REDIS_MODULE_H
 
+#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
@@ -38,6 +39,8 @@ public:
 	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
 	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
 
+	virtual bool LoadPlayerData(const NFGUID& self);
+	virtual int GetPlayerHomeSceneID(const NFGUID& self);
 	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self);
 	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self);
 
@@ -58,6 +61,27 @@ protected:
 
 	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
+
+
+private:
+	struct PlayerDataCache
+	{
+		PlayerDataCache()
+		{
+			nLoadTime = NFDateTime::Now().GetSecond();
+			nHomeSceneID = 1;
+		}
+		int nLoadTime;
+		int nHomeSceneID;
+
+		NFMsg::ObjectPropertyList xPbPropertyCacheList;
+		NFMsg::ObjectPropertyList xPbPropertyStorageList;
+		NFMsg::ObjectRecordList xPbRecordCacheList;
+		NFMsg::ObjectRecordList xPbRecordStorageList;
+	};
+
+	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
+
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
