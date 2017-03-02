@@ -96,6 +96,7 @@ public:
 protected:
 
 private:
+	std::string mstrNoExistKey;
 	bool mbEnable;
     redis::client* m_pNoSqlClient;
 
