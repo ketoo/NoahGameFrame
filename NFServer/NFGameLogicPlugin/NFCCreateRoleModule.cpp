@@ -11,6 +11,8 @@
 
 bool NFCCreateRoleModule::Init()
 {
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
@@ -24,6 +26,22 @@ bool NFCCreateRoleModule::Init()
 
 bool NFCCreateRoleModule::AfterInit()
 {
+	//Tile
+	//mxTileSceneIDList
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Scene::Tile());
+			if (nServerType == 1)
+			{
+				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
+			}
+		}
+	}
 	return true;
 }
 
@@ -169,6 +187,11 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 	if (m_pPlayerRedisModule->LoadPlayerData(nRoleID))
 	{
 		int nSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
+		if (nSceneID <= 0)
+		{
+			nSceneID = mxTileSceneIDList.at(m_pKernelModule->Random(0, mxTileSceneIDList.size()));
+		}
+
 		NFDataList var;
 		var.AddString(NFrame::Player::Name());
 		var.AddString(xMsg.name());
