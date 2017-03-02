@@ -26,10 +26,10 @@ public:
 	template<typename BaseType>
 	void SetEventCallBack(void (BaseType::*handleEvent)(websocketpp::connection_hdl, NF_WS_EVENT))
 	{
-		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
+		NF_WS_EVENT_CALL_BACK functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		NF_WS_EVENT_CALL_BACK_PTR functorPtr(new NF_WS_EVENT_CALL_BACK(functor));
 
-		SetEventCallBack(eType, functorPtr);
+		SetEventCallBack(functorPtr);
 	}
 
 	virtual void SetReceiveCallBack(NF_WS_MSG_CALL_BACK_PTR functorPtr) = 0;
