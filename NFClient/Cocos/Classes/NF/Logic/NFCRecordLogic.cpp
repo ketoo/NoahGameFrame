@@ -221,9 +221,9 @@ void NFCRecordLogic::AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std:
 {
 	NF_SHARE_PTR<NFIRecordManager> recordMgr = object->GetRecordManager();
 
-	NF_SHARE_PTR<NFIDataList> varData = NF_SHARE_PTR<NFIDataList>(NF_NEW NFCDataList());
-	NF_SHARE_PTR<NFIDataList> varInit = NF_SHARE_PTR<NFIDataList>(NF_NEW NFCDataList());
-	NF_SHARE_PTR<NFIDataList> varTag = NF_SHARE_PTR<NFIDataList>(NF_NEW NFCDataList());
+	NF_SHARE_PTR<NFDataList> varData = NF_SHARE_PTR<NFDataList>(NF_NEW NFDataList());
+	NF_SHARE_PTR<NFDataList> varInit = NF_SHARE_PTR<NFDataList>(NF_NEW NFDataList());
+	NF_SHARE_PTR<NFDataList> varTag = NF_SHARE_PTR<NFDataList>(NF_NEW NFDataList());
 	for(int j = 0; j < data.record_float_list_size(); j++)
 	{
 		varInit->AddFloat(0);

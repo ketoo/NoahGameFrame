@@ -12,6 +12,9 @@
 
 bool NFCLoginLogicModule::Init()
 {
+	m_pAccountRedisModule = pPluginManager->FindModule<NFIAccountRedisModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }
@@ -23,22 +26,24 @@ bool NFCLoginLogicModule::Shut()
 
 void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFINetModule* pNetModule = m_pLoginNet_ServerModule->GetNetModule();
-
     NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
 
-	NetObject* pNetObject = pNetModule->GetNet()->GetNetObject(nSockIndex);
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
 	if (pNetObject)
 	{
 		if (pNetObject->GetConnectKeyState() == 0)
 		{
-			//int nState = m_pLoginLogicModule->OnLoginProcess(pNetObject->GetClientID(), xMsg.account(), xMsg.password());
-            int nState = 0;
+			if (!m_pAccountRedisModule->ExistAccount(xMsg.account()))
+			{
+				m_pAccountRedisModule->AddAccount(xMsg.account(), xMsg.password());
+			}
+
+			int nState = m_pAccountRedisModule->VerifyAccount(xMsg.account(), xMsg.password());
 			if (0 != nState)
 			{
 				std::ostringstream strLog;
@@ -48,7 +53,7 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 				NFMsg::AckEventResult xMsg;
 				xMsg.set_event_code(NFMsg::EGEC_ACCOUNTPWD_INVALID);
 
-				pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
+				m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xMsg, nSockIndex);
 				return;
 			}
 
@@ -58,7 +63,7 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 			NFMsg::AckEventResult xData;
 			xData.set_event_code(NFMsg::EGEC_ACCOUNT_SUCCESS);
 
-			pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
+			m_pNetModule->SendMsgPB(NFMsg::EGameMsgID::EGMI_ACK_LOGIN, xData, nSockIndex);
 
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "Login successed :", xMsg.account().c_str());
 		}
@@ -67,9 +72,8 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 
 bool NFCLoginLogicModule::ReadyExecute()
 {
-    NFINetModule* pNetModule = m_pLoginNet_ServerModule->GetNetModule();
-    pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_LOGIN);
-	pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFCLoginLogicModule::OnLoginProcess);
+	m_pNetModule->RemoveReceiveCallBack(NFMsg::EGMI_REQ_LOGIN);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LOGIN, this, &NFCLoginLogicModule::OnLoginProcess);
 
     return true;
 }
@@ -84,7 +88,5 @@ bool NFCLoginLogicModule::Execute()
 
 bool NFCLoginLogicModule::AfterInit()
 {
-    m_pLoginNet_ServerModule = pPluginManager->FindModule<NFILoginNet_ServerModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     return true;
 }

@@ -23,8 +23,8 @@ public:
 	virtual void initData(void *customData);
 
 private:
-	int OnWorldListEvent(const int nEventID, const NFIDataList& varDataList);
-	int OnServerListEvent(const int nEventID, const NFIDataList& varDataList);
+	int OnWorldListEvent(const int nEventID, const NFDataList& varDataList);
+	int OnServerListEvent(const int nEventID, const NFDataList& varDataList);
 
 private:
 	void OnWorldSelected(Ref *sender);

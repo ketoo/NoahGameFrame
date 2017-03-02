@@ -12,6 +12,13 @@
 
 bool NFCPVPMatchModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pPVPMatchRedisModule = pPluginManager->FindModule<NFIPVPMatchRedisModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
+	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 
 	return true;
 }
@@ -42,15 +49,9 @@ bool NFCPVPMatchModule::Execute()
 
 bool NFCPVPMatchModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pPVPMatchRedisModule = pPluginManager->FindModule<NFIPVPMatchRedisModule>();
-	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
-	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCPVPMatchModule::OnReqPVPApplyMatchProcess)) { return false; }
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCPVPMatchModule::OnAckCreatePVPEctypeProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_PVPAPPLYMACTCH, this, &NFCPVPMatchModule::OnReqPVPApplyMatchProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_CREATEPVPECTYPE, this, &NFCPVPMatchModule::OnAckCreatePVPEctypeProcess)) { return false; }
 
 	return true;
 }
@@ -61,7 +62,7 @@ bool NFCPVPMatchModule::ApplyPVP(const NFGUID& self, const int nPVPMode, const i
 	return m_pPVPMatchRedisModule->PushSinglePlayer(self, nPVPMode, nGrade);
 }
 
-bool NFCPVPMatchModule::TeamApplyPVP(const NFGUID& xTeam, const NFIDataList& varMemberList, int nPVPMode, const int nScore)
+bool NFCPVPMatchModule::TeamApplyPVP(const NFGUID& xTeam, const NFDataList& varMemberList, int nPVPMode, const int nScore)
 {
 	int nMemberCount = varMemberList.GetCount();
 	std::vector<NFGUID> xPlayerList;
@@ -693,7 +694,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 			}
 		}
 
-		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
 	}
 	break;
 	case NFMsg::ReqPVPApplyMatch::EApplyType_Team:
@@ -706,7 +707,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 				std::vector<NFGUID> xPlayerList;
 				if (m_pTeamModule->GetMemberList(nPlayerID, xTeamID, xPlayerList))
 				{
-					NFCDataList varMember;
+					NFDataList varMember;
 					for (size_t i = 0; i < xPlayerList.size(); i++)
 					{
 						varMember.AddObject(xPlayerList[i]);
@@ -735,7 +736,7 @@ void NFCPVPMatchModule::OnReqPVPApplyMatchProcess(const int nSockIndex, const in
 			}
 		}
 
-		m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
+		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_PVPAPPLYMACTCH, xAck, nSockIndex, nPlayerID);
 
 	}
 	break;

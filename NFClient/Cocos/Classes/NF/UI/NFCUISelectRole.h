@@ -23,7 +23,7 @@ public:
 	virtual void initData(void *customData);
 
 private:
-	int OnRoleListEvent(const int nEventID, const NFIDataList& varDataList);
+	int OnRoleListEvent(const int nEventID, const NFDataList& varDataList);
 
 private:
 	void OnRoleSelected(Ref* sender);

@@ -16,7 +16,7 @@
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 NFIClassModule *g_pClassModule = NULL;
 NFIElementModule *g_pElementModule = NULL;
@@ -70,7 +70,7 @@ bool NFCLogicBase::AfterInit()
 }
 
 
-bool NFCLogicBase::DoEvent(const int nEventID, const NFIDataList & valueList)
+bool NFCLogicBase::DoEvent(const int nEventID, const NFDataList & valueList)
 {
 	bool bRet = false;
 	auto moduleEventInfoMapEx = mModuleEventInfoMapEx;

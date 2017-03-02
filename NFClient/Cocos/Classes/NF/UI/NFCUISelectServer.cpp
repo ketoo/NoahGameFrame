@@ -57,7 +57,7 @@ void NFCUISelectServer::initData(void *customData)
 	m_pServerList->removeAllItems();
 }
 
-int NFCUISelectServer::OnWorldListEvent(const int nEventID, const NFIDataList& varDataList)
+int NFCUISelectServer::OnWorldListEvent(const int nEventID, const NFDataList& varDataList)
 {
 	auto worldList = g_pLoginLogic->GetWorldList();
 	for(size_t i = 0; i < worldList.size(); i++)
@@ -73,7 +73,7 @@ int NFCUISelectServer::OnWorldListEvent(const int nEventID, const NFIDataList& v
 	return 0;
 }
 
-int NFCUISelectServer::OnServerListEvent(const int nEventID, const NFIDataList& varDataList)
+int NFCUISelectServer::OnServerListEvent(const int nEventID, const NFDataList& varDataList)
 {
 	auto worldList = g_pLoginLogic->GetServerList();
 	for(size_t i = 0; i < worldList.size(); i++)

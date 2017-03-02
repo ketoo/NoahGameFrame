@@ -10,10 +10,10 @@ endmacro(remove_file)
 
 macro(link_NFSDK projName)
 if(UNIX)
-	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
-	target_link_libraries(${projName} NFCore protobuf NFMessageDefine NFNet event event_core)
+	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
+	target_link_libraries(${projName} NFCore protobuf NFMessageDefine NFNetPlugin event event_core)
 else()
-	add_dependencies(${projName} NFNet NFCore NFMessageDefine)
+	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
 	target_link_libraries(${projName} NFCore)
 endif()
 endmacro(link_NFSDK)
@@ -54,6 +54,8 @@ ${SolutionDir}/Dependencies/libevent/
 ${SolutionDir}/Dependencies/libevent/include/
 ${SolutionDir}/Dependencies/libevent/compat/
 ${SolutionDir}/Dependencies/lua/
+${SolutionDir}/Dependencies/asio/
+${SolutionDir}/Dependencies/websocketpp/
 )
 
 #message("Build Type:"${CMAKE_BUILD_TYPE} ${CMAKE_CXX_FLAGS})
@@ -92,10 +94,11 @@ if(${BUILD_TOOLS_ONLY} STREQUAL "ON")
 	add_subdirectory(NFTools)
 else()
 	message("Build All")
+	add_subdirectory(NFTools)
 	add_subdirectory(Dependencies)
 	add_subdirectory(NFComm)
 	add_subdirectory(NFServer)
+	add_subdirectory(NFMidWare)
 	add_subdirectory(Tutorial)
-	add_subdirectory(NFTools)
 endif()
 

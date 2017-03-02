@@ -149,9 +149,6 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_INVALID_SKILL", Value=143)]
       EGEC_INVALID_SKILL = 143,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ENTER_GAME_SUCCESS", Value=144)]
-      EGEC_ENTER_GAME_SUCCESS = 144,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_CREATE_GUILD_SUCCESS", Value=200)]
       EGEC_CREATE_GUILD_SUCCESS = 200,
             
@@ -160,6 +157,14 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_LEAVE_GUILD_SUCCESS", Value=202)]
       EGEC_LEAVE_GUILD_SUCCESS = 202
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ESynMsgID")]
+    public enum ESynMsgID
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ESMI_UNKNOW", Value=0)]
+      ESMI_UNKNOW = 0
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameMsgID")]
@@ -300,6 +305,12 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_BATTLE", Value=158)]
       EGMI_ACK_END_BATTLE = 158,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ENTER_GAME_FINISH", Value=159)]
+      EGMI_REQ_ENTER_GAME_FINISH = 159,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ENTER_GAME_FINISH", Value=160)]
+      EGMI_ACK_ENTER_GAME_FINISH = 160,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
@@ -577,6 +588,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=1600)]
       EGEC_REQ_MINING_TITLE = 1600,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_MINING_TITLE", Value=1601)]
+      EGEC_ACK_MINING_TITLE = 1601,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SEND_MAIL", Value=1700)]
       EGEC_REQ_SEND_MAIL = 1700,
             
@@ -752,7 +766,19 @@ namespace NFMsg
       EGMI_REQ_CREATE_ITEM = 20102,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_BUILD_OPERATE", Value=20103)]
-      EGMI_REQ_BUILD_OPERATE = 20103
+      EGMI_REQ_BUILD_OPERATE = 20103,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_TO_SHARE", Value=30000)]
+      EGMI_REQ_SEARCH_TO_SHARE = 30000,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_TO_SHARE", Value=30001)]
+      EGMI_ACK_SEARCH_TO_SHARE = 30001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SHARE_TO_ATART", Value=30002)]
+      EGMI_REQ_SHARE_TO_ATART = 30002,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SHARE_TO_ATART", Value=30003)]
+      EGMI_ACK_SHARE_TO_ATART = 30003
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemType")]
@@ -1002,11 +1028,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EST_GOLD", Value=2)]
       EST_GOLD = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_DIAMOND", Value=3)]
-      EST_DIAMOND = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_SP", Value=4)]
-      EST_SP = 4,
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_ITEM", Value=3)]
+      EST_ITEM = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EST_EQUIP", Value=5)]
       EST_EQUIP = 5,
@@ -1014,11 +1037,8 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EST_GEM", Value=6)]
       EST_GEM = 6,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_Hero", Value=7)]
-      EST_Hero = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EST_Other", Value=8)]
-      EST_Other = 8
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_CARD", Value=7)]
+      EST_CARD = 7
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ERankType")]

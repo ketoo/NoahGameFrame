@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"

@@ -44,7 +44,7 @@
 //      {
 //          for ( int j = 0; j < pRecord->GetCols(); j++ )
 //          {
-//              TDATA_TYPE varType = pRecord->GetColType( j );
+//              NFDATA_TYPE varType = pRecord->GetColType( j );
 //              switch ( varType )
 //              {
 //              case TDATA_INT:
@@ -218,7 +218,7 @@
 //
 //        if (bCheckType && bCheckType == bCheck)
 //        {
-//            TDATA_TYPE varType = pProperty->GetType();
+//            NFDATA_TYPE varType = pProperty->GetType();
 //            switch ( varType )
 //            {
 //            case TDATA_INT:
@@ -270,8 +270,8 @@
 //      const std::string& strName = propertyInt.property_name();
 //      int nData = propertyInt.data();
 //
-//      NFIDataList::TData TData;
-//      TData.nType = TDATA_TYPE::TDATA_INT;
+//      NFData TData;
+//      TData.nType = NFDATA_TYPE::TDATA_INT;
 //      TData.variantData = nData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -282,8 +282,8 @@
 //      const std::string& strName = propertyFloat.property_name();
 //      float fData = propertyFloat.data();
 //
-//      NFIDataList::TData TData;
-//      TData.nType = TDATA_TYPE::TDATA_FLOAT;
+//      NFData TData;
+//      TData.nType = NFDATA_TYPE::TDATA_FLOAT;
 //      TData.variantData = fData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -294,8 +294,8 @@
 //      const std::string& strName = propertyString.property_name();
 //      const std::string& strData = propertyString.data();
 //
-//      NFIDataList::TData TData;
-//      TData.nType = TDATA_TYPE::TDATA_STRING;
+//      NFData TData;
+//      TData.nType = NFDATA_TYPE::TDATA_STRING;
 //      TData.variantData = strData;
 //      pProManager->SetProperty( strName, TData );
 //  }
@@ -306,8 +306,8 @@
 //      const std::string& strName = propertyObject.property_name();
 //      int64_t nData = propertyObject.data();
 //
-//      NFIDataList::TData TData;
-//      TData.nType = TDATA_TYPE::TDATA_OBJECT;
+//      NFData TData;
+//      TData.nType = NFDATA_TYPE::TDATA_OBJECT;
 //      TData.variantData = nData;
 //      pProManager->SetProperty( strName, TData );
 //  }

@@ -1,69 +1,71 @@
 package NFMsg; 
 
-//���е������߼��¼�ö�ٶ������� 
+//events
 enum EGameEventCode
 {
-	EGEC_SUCCESS								= 0;        // �����ɹ�
-	EGEC_UNKOWN_ERROR							= 1;		// δ֪����
-	EGEC_ACCOUNT_EXIST							= 2;        // ע��ʱ�˺������ݿ����Ѵ���
-	EGEC_ACCOUNTPWD_INVALID						= 3;        // �˺Ų����ڻ�����������
-	EGEC_ACCOUNT_USING							= 4;        // �˺�����ʹ��
-	EGEC_ACCOUNT_LOCKED							= 5;        // �˺��ѷ�ͣ
-	EGEC_ACCOUNT_SUCCESS						= 6;        // �˺ŵ�¼�ɹ�
-	EGEC_VERIFY_KEY_SUCCESS						= 7;        // �˺�KEY��֤�ɹ�
-	EGEC_VERIFY_KEY_FAIL						= 8;        // �˺�KEY��֤ʧ��
-	EGEC_SELECTSERVER_SUCCESS					= 9;        // ѡ�񵥷��ɹ�
-	EGEC_SELECTSERVER_FAIL						= 10;       // ѡ�񵥷�ʧ��
+	EGEC_SUCCESS								= 0;        //
+	EGEC_UNKOWN_ERROR							= 1;		//
+	EGEC_ACCOUNT_EXIST							= 2;        //
+	EGEC_ACCOUNTPWD_INVALID						= 3;        //
+	EGEC_ACCOUNT_USING							= 4;        //
+	EGEC_ACCOUNT_LOCKED							= 5;        //
+	EGEC_ACCOUNT_SUCCESS						= 6;        //
+	EGEC_VERIFY_KEY_SUCCESS						= 7;        //
+	EGEC_VERIFY_KEY_FAIL						= 8;        //
+	EGEC_SELECTSERVER_SUCCESS					= 9;        //
+	EGEC_SELECTSERVER_FAIL						= 10;       //
 
-	EGEC_CHARACTER_EXIST						= 110;       // ������ɫʱ��ɫ���ظ�
-	EGEC_SVRZONEID_INVALID						= 111;       // ������ɫʱ��Ϸ��������Ч
-	EGEC_CHARACTER_NUMOUT						= 112;       // ������ɫʱ��ɫ���������趨ֵ��һ���˺����ཨ4����ɫ��
-	EGEC_CHARACTER_INVALID						= 113;       // ��ɫ����Ч���Ƿ���ɫ����
-	EGEC_CHARACTER_NOTEXIST						= 114;       // ��ɫ������
-	EGEC_CHARACTER_USING						= 115;       // ��ɫ������Ϸ��
-	EGEC_CHARACTER_LOCKED						= 116;       // ��ɫ�ѷ�ͣ
-	EGEC_ZONE_OVERLOAD							= 117;       // ������������(����XXX; ����ӵ��)
-	EGEC_NOT_ONLINE								= 118;       // ���Ҳ�����
-	EGEC_ALREAY_IN_TEAM							= 119;       // �����Ѿ��ڶ�������
-	EGEC_INVALID_TEAM_INVITE					= 120;       // ��Ч����������
-	EGEC_TEAM_FULL								= 121;       // ������������
-	EGEC_MAIL_UPDATE_ERROR						= 122;       // �����ʼ�״̬ʱ����
-	EGEC_MAIL_TONAME_INVALID					= 123;       // �ʼ�ʱ�ռ��˲�����
-	EGEC_MAIL_DELETE_ERROR						= 124;       // ɾ���ʼ�ʧ��
-	EGEC_MAIL_TOWNAME_EQUAL						= 125;       // �����Լ����Լ����ʼ�
-	EGEC_LACK_MONEY								= 126;       // ��Ǯ����
-	EGEC_FULL_PACKAGE							= 127;       // ��������
-	EGEC_INVALID_ITEM							= 128;       // ��Ч�ĵ���
-	EGEC_INVALID_CONSIGNMENT					= 129;       // ��Ч�ļ���ID
-	EGEC_NOT_ENOUGH_VIP							= 130;       // VIP��������
-	EGEC_NEED_LEVEL								= 131;       // �ȼ�����
-	EGEC_MAX_FRIEND_LIST						= 132;       // �����б�����
-	EGEC_MAX_ENEMY_LIST							= 133;       // �����б�����
-	EGEC_MAX_GANGS_LSIT							= 134;       // ��������������
-	EGEC_LIMITS_TO_RIGHTS						= 135;       // ��ҪȨ��
-	EGEC_INVALID_GANGS_NAME						= 136;       // ��Ч�İ�������
-	EGEC_REPEAT_ENTER_GANGS						= 137;       // ��ɫ�Ѿ��ǰ�����Ա��;�����ټ���������
-	EGEC_INVALID_GANGSMEMBER					= 138;       // ��ɫ����ָ��������Ա
-	EGEC_MASTER_LEAVE_GANGS						= 139;       // �᳤�����뿪����
-	EGEC_GANGS_TITLE_OUTOF						= 140;       // ָ������ְ�������೬����ְ������������
-	EGEC_ENTER_GATEWAY_FAILD					= 141;       // ��Ч�Ĵ�������(������ʵ�ʲ�����;û�е��ﴥ�����͵�������)
-	EGEC_NO_SERVER4ZONE							= 142;       // ��û��ָ�ɷ����������ó���; ���Ե�(��Ϸ���绹���ڻ�����...)
-	EGEC_INVALID_SKILL							= 143;       // ��Ч�ļ���
-	EGEC_ENTER_GAME_SUCCESS						= 144;		 // ������Ϸ�ɹ�
+	EGEC_CHARACTER_EXIST						= 110;       //
+	EGEC_SVRZONEID_INVALID						= 111;       //
+	EGEC_CHARACTER_NUMOUT						= 112;       //
+	EGEC_CHARACTER_INVALID						= 113;       //
+	EGEC_CHARACTER_NOTEXIST						= 114;       //
+	EGEC_CHARACTER_USING						= 115;       //
+	EGEC_CHARACTER_LOCKED						= 116;       //
+	EGEC_ZONE_OVERLOAD							= 117;       //
+	EGEC_NOT_ONLINE								= 118;       //
+	EGEC_ALREAY_IN_TEAM							= 119;       //
+	EGEC_INVALID_TEAM_INVITE					= 120;       //
+	EGEC_TEAM_FULL								= 121;       //
+	EGEC_MAIL_UPDATE_ERROR						= 122;       //
+	EGEC_MAIL_TONAME_INVALID					= 123;       //
+	EGEC_MAIL_DELETE_ERROR						= 124;       //
+	EGEC_MAIL_TOWNAME_EQUAL						= 125;       //
+	EGEC_LACK_MONEY								= 126;       //
+	EGEC_FULL_PACKAGE							= 127;       //
+	EGEC_INVALID_ITEM							= 128;       //
+	EGEC_INVALID_CONSIGNMENT					= 129;       //
+	EGEC_NOT_ENOUGH_VIP							= 130;       //
+	EGEC_NEED_LEVEL								= 131;       //
+	EGEC_MAX_FRIEND_LIST						= 132;       //
+	EGEC_MAX_ENEMY_LIST							= 133;       //
+	EGEC_MAX_GANGS_LSIT							= 134;       //
+	EGEC_LIMITS_TO_RIGHTS						= 135;       //
+	EGEC_INVALID_GANGS_NAME						= 136;       //
+	EGEC_REPEAT_ENTER_GANGS						= 137;       //
+	EGEC_INVALID_GANGSMEMBER					= 138;       //
+	EGEC_MASTER_LEAVE_GANGS						= 139;       //
+	EGEC_GANGS_TITLE_OUTOF						= 140;       //
+	EGEC_ENTER_GATEWAY_FAILD					= 141;       //
+	EGEC_NO_SERVER4ZONE							= 142;       //
+	EGEC_INVALID_SKILL							= 143;       //
 	
-	EGEC_CREATE_GUILD_SUCCESS					= 200;		 // ���������ɹ�
-	EGEC_JOIN_GUILD_SUCCESS						= 201;		 // ���빫���ɹ�
-	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 // �뿪�����ɹ�
+	EGEC_CREATE_GUILD_SUCCESS					= 200;		 //
+	EGEC_JOIN_GUILD_SUCCESS						= 201;		 //
+	EGEC_LEAVE_GUILD_SUCCESS					= 202;		 //
 	
 
 }
-
+enum ESynMsgID
+{
+	ESMI_UNKNOW						= 0;         //
+}
 enum EGameMsgID
 {
-	EGMI_UNKNOW						= 0;         // λ֪
-	EGMI_EVENT_RESULT				= 1;         // �¼�����
-	EGMI_EVENT_TRANSPOND			= 2;         // ����ת��
-	EGMI_CLOSE_SOCKET				= 3;         // ��Ҫ�ر�ĳ����������
+	EGMI_UNKNOW						= 0;         //
+	EGMI_EVENT_RESULT				= 1;         // for events
+	EGMI_EVENT_TRANSPOND			= 2;         // for events
+	EGMI_CLOSE_SOCKET				= 3;         // want to close some one
 
 	EGMI_MTL_WORLD_REGISTERED		= 10;
 	EGMI_MTL_WORLD_UNREGISTERED		= 11;
@@ -85,49 +87,52 @@ enum EGameMsgID
 	EGMI_STS_SERVER_REPORT          = 90;
 	EGMI_STS_HEART_BEAT				= 100;
 	//////////////////////////////////////////////////////////////////////////////////////
-	EGMI_REQ_LOGIN									= 101;     // ��½�ʺ�
-	EGMI_ACK_LOGIN									= 102;     // ��½�ʺ�
-	EGMI_REQ_LOGOUT									= 103;		// �ǳ��ʺ�
+	EGMI_REQ_LOGIN									= 101;     	//
+	EGMI_ACK_LOGIN									= 102;     	//
+	EGMI_REQ_LOGOUT									= 103;		//
 
-	EGMI_REQ_WORLD_LIST							= 110;			// ���������б�
+	EGMI_REQ_WORLD_LIST							= 110;			//
 	EGMI_ACK_WORLD_LIST							= 111;			//
-	EGMI_REQ_CONNECT_WORLD						= 112;			// �������ӵ�����
+	EGMI_REQ_CONNECT_WORLD						= 112;			//
 	EGMI_ACK_CONNECT_WORLD						= 113;
-	EGMI_REQ_KICK_CLIENT_INWORLD				= 114;			//Ҫ���ڴ�����T��
+	EGMI_REQ_KICK_CLIENT_INWORLD				= 114;			//
 	
-	EGMI_REQ_CONNECT_KEY						= 120;         // ��KEY��������������
+	EGMI_REQ_CONNECT_KEY						= 120;         //
 	EGMI_ACK_CONNECT_KEY						= 122;         // 
 
 
-	EGMI_REQ_SELECT_SERVER						= 130;			// ѡ��һ������
-	EGMI_ACK_SELECT_SERVER						= 131;			// ѡ��һ������
-	EGMI_REQ_ROLE_LIST							= 132;			// ������ɫ�б�
-	EGMI_ACK_ROLE_LIST							= 133;			// 
-	EGMI_REQ_CREATE_ROLE						= 134;			// ���봴��һ����ɫ
-	EGMI_REQ_DELETE_ROLE						= 135;			// ����ɾ��һ����ɫ
-	EGMI_REQ_RECOVER_ROLE						= 136;			// �����ָ�һ����ɫ
+	EGMI_REQ_SELECT_SERVER						= 130;			//
+	EGMI_ACK_SELECT_SERVER						= 131;			//
+	EGMI_REQ_ROLE_LIST							= 132;			//
+	EGMI_ACK_ROLE_LIST							= 133;			//
+	EGMI_REQ_CREATE_ROLE						= 134;			//
+	EGMI_REQ_DELETE_ROLE						= 135;			//
+	EGMI_REQ_RECOVER_ROLE						= 136;			//
 
-	EGMI_REQ_ENTER_GAME							= 150;			// ����������Ϸ����
-	EGMI_ACK_ENTER_GAME							= 151;			// �ظ���������Ϸ�����ɹ�
-	EGMI_REQ_LEAVE_GAME							= 152;			// �����뿪��Ϸ����, �ص�ѡ��
-	EGMI_ACK_LEAVE_GAME							= 153;			// �ظ�,�����뿪��Ϸ����
+	EGMI_REQ_ENTER_GAME							= 150;			//
+	EGMI_ACK_ENTER_GAME							= 151;			//
+	EGMI_REQ_LEAVE_GAME							= 152;			//
+	EGMI_ACK_LEAVE_GAME							= 153;			//
 	EGMI_REQ_SWAP_GAME							= 154;			//
-	EGMI_REQ_SWAP_SCENE							= 155;			// �����л�����
-	EGMI_ACK_SWAP_SCENE							= 156;			// �ظ��л���������
-	EGMI_REQ_END_BATTLE							= 157;			// ���븱������
-	EGMI_ACK_END_BATTLE							= 158;			// �ظ���������
+	EGMI_REQ_SWAP_SCENE							= 155;			//
+	EGMI_ACK_SWAP_SCENE							= 156;			//
+	EGMI_REQ_END_BATTLE							= 157;			//
+	EGMI_ACK_END_BATTLE							= 158;			//
 
-	EGMI_ACK_OBJECT_ENTRY						= 200;			// �ж�������
-	EGMI_ACK_OBJECT_LEAVE						= 201;			// �ж�����ȥ
+	EGMI_REQ_ENTER_GAME_FINISH					= 159;			//
+	EGMI_ACK_ENTER_GAME_FINISH					= 160;			//
 	
-	EGMI_ACK_OBJECT_PROPERTY_ENTRY				= 202;			// �ж������Խ���
-	EGMI_ACK_OBJECT_RECORD_ENTRY				= 203;			// �ж���������
+	EGMI_ACK_OBJECT_ENTRY						= 200;			//
+	EGMI_ACK_OBJECT_LEAVE						= 201;			//
 	
-	EGMI_ACK_PROPERTY_INT						= 210;			// ���Ա���
-	EGMI_ACK_PROPERTY_FLOAT						= 211;			// ���Ա���
-	EGMI_ACK_PROPERTY_STRING					= 212;			// ���Ա���
-	//EGMI_ACK_PROPERTY_DOUBLE					= 213;			// ���Ա���
-	EGMI_ACK_PROPERTY_OBJECT					= 214;			// ���Ա���
+	EGMI_ACK_OBJECT_PROPERTY_ENTRY				= 202;			//
+	EGMI_ACK_OBJECT_RECORD_ENTRY				= 203;			//
+	
+	EGMI_ACK_PROPERTY_INT						= 210;			//
+	EGMI_ACK_PROPERTY_FLOAT						= 211;			//
+	EGMI_ACK_PROPERTY_STRING					= 212;			//
+	//EGMI_ACK_PROPERTY_DOUBLE					= 213;			//
+	EGMI_ACK_PROPERTY_OBJECT					= 214;			//
 	EGMI_ACK_PROPERTY_VECTOR2                   = 215;
 	EGMI_ACK_PROPERTY_VECTOR3                   = 216;
 
@@ -168,166 +173,167 @@ enum EGameMsgID
 	EGMI_REQ_ACCEPT_TASK						= 1256;
 	EGMI_REQ_COMPELETE_TASK						= 1257;
 	                                              
-	EGMI_REQ_JOIN_PVP                           = 1260; // ��������PVP
-	EGMI_REQ_EXIT_PVP                           = 1261; // �����뿪PVP
-	EGMT_ACK_START_PVP                          = 1262; // ֪ͨ��ʼPVP
+	EGMI_REQ_JOIN_PVP                           = 1260; //
+	EGMI_REQ_EXIT_PVP                           = 1261; //
+	EGMT_ACK_START_PVP                          = 1262; //
 	                                              
-	EGMI_REQ_SEARCH_OPPNENT                     = 1280; // ���Ҷ���(EBattleType)
-	EGMI_ACK_SEARCH_OPPNENT                     = 1281; // ���ز��Ҷ��ֵ���Ϣ(EBattleType)
-	EGMT_REQ_START_OPPNENT                      = 1282; // ��ʼս��(EBattleType)
-	EGMT_ACK_START_OPPNENT                      = 1283; // ��ʼս��(EBattleType)
+	EGMI_REQ_SEARCH_OPPNENT                     = 1280; //
+	EGMI_ACK_SEARCH_OPPNENT                     = 1281; //
+	EGMT_REQ_START_OPPNENT                      = 1282; //
+	EGMT_ACK_START_OPPNENT                      = 1283; //
 	                                              
 	                                              
-	EGMI_ACK_ONLINE_NOTIFY						= 1290; // ��������֪ͨ
-	EGMI_ACK_OFFLINE_NOTIFY						= 1291; // ��������֪ͨ
+	EGMI_ACK_ONLINE_NOTIFY						= 1290; //
+	EGMI_ACK_OFFLINE_NOTIFY						= 1291; //
 	                                              
-	EGMI_REQ_CREATE_GUILD                       = 1300; // ���봴������
-	EGMI_ACK_CREATE_GUILD						= 1301; // ������������
-	EGMI_REQ_JOIN_GUILD                         = 1302; // �������빫��
-	EGMI_ACK_JOIN_GUILD							= 1303; // ���빫������
-	EGMI_REQ_LEAVE_GUILD                        = 1304; // �����뿪����
-	EGMI_ACK_LEAVE_GUILD						= 1305; // �뿪�������� 
-	EGMI_REQ_OPR_GUILD                        	= 1306; // ������Ա���� 
-	EGMI_ACK_OPR_GUILD                        	= 1307; // ��Ա��������
-	EGMI_REQ_SEARCH_GUILD                       = 1308; // ������������
-	EGMI_ACK_SEARCH_GUILD                       = 1309; // ������������	
+	EGMI_REQ_CREATE_GUILD                       = 1300; //
+	EGMI_ACK_CREATE_GUILD						= 1301; //
+	EGMI_REQ_JOIN_GUILD                         = 1302; //
+	EGMI_ACK_JOIN_GUILD							= 1303; //
+	EGMI_REQ_LEAVE_GUILD                        = 1304; //
+	EGMI_ACK_LEAVE_GUILD						= 1305; //
+	EGMI_REQ_OPR_GUILD                        	= 1306; //
+	EGMI_ACK_OPR_GUILD                        	= 1307; //
+	EGMI_REQ_SEARCH_GUILD                       = 1308; //
+	EGMI_ACK_SEARCH_GUILD                       = 1309; //
 	                                              
-	EGMI_REQ_OPR_GUILDINFO						= 1310; // ���빫������ 
-	EGMI_ACK_OPR_GUILDINFO						= 1311; // ������������
+	EGMI_REQ_OPR_GUILDINFO						= 1310; //
+	EGMI_ACK_OPR_GUILDINFO						= 1311; //
 	                                              
-	EGMI_REQ_GUILDECTYPEINFO					= 1312; // ���빫�ḱ��
-	EGMI_ACK_GUILDECTYPEINFO					= 1313; // ���ḱ������Ϣ
+	EGMI_REQ_GUILDECTYPEINFO					= 1312; //
+	EGMI_ACK_GUILDECTYPEINFO					= 1313; //
 	                                              
-	EGMI_SET_GUILDECTYPEINFO					= 1314; // ���ù��ḱ������Ϣ
+	EGMI_SET_GUILDECTYPEINFO					= 1314; //
 	                                              
 	EGMI_ReqEnterGuildEctype					= 1315; // 
 	                                              
-	EGEC_REQ_CREATE_CHATGROUP					= 1400;		 // ��������ReqAckCreateChatGroup
-	EGEC_ACK_CREATE_CHATGROUP					= 1401;		 // ��������ReqAckCreateChatGroup
-	EGEC_REQ_JOIN_CHATGROUP						= 1402;		 // ��������ReqAckjoinChatGroup
-	EGEC_ACK_JOIN_CHATGROUP						= 1403;		 // ��������ReqAckjoinChatGroup
-	EGEC_REQ_LEAVE_CHATGROUP					= 1404;		 // �뿪����ReqAckQuitChatGroup
-	EGEC_ACK_LEAVE_CHATGROUP					= 1405;		 // �뿪����ReqAckQuitChatGroup
-	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 1406;		 // ����������ReqSubscriptionChatGroup
-	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 1407;		 // ȡ������������ReqSubscriptionChatGroup
-	EGEC_REQ_INVITE_CHATGROUP					= 1408;		 // ��������������
-	EGEC_ACK_INVITE_CHATGROUP					= 1409;		 // ��������������
-	EGEC_REQ_KICK_CHATGROUP						= 1410;		 // �߳�������
-	EGEC_ACK_KICK_CHATGROUP						= 1411;		 // �߳�������
+	EGEC_REQ_CREATE_CHATGROUP					= 1400;		 //
+	EGEC_ACK_CREATE_CHATGROUP					= 1401;		 //
+	EGEC_REQ_JOIN_CHATGROUP						= 1402;		 //
+	EGEC_ACK_JOIN_CHATGROUP						= 1403;		 //
+	EGEC_REQ_LEAVE_CHATGROUP					= 1404;		 //
+	EGEC_ACK_LEAVE_CHATGROUP					= 1405;		 //
+	EGEC_REQ_SUBSCRIPTION_CHATGROUP				= 1406;		 //
+	EGEC_REQ_CANCELSUBSCRIPTION_CHATGROUP		= 1407;		 //
+	EGEC_REQ_INVITE_CHATGROUP					= 1408;		 //
+	EGEC_ACK_INVITE_CHATGROUP					= 1409;		 //
+	EGEC_REQ_KICK_CHATGROUP						= 1410;		 //
+	EGEC_ACK_KICK_CHATGROUP						= 1411;		 //
 	                                              
-	EGEC_REQ_CHATGROUP_TO_TEAM					= 1450;		 // �����ҿ�������
-	EGEC_ACK_CHATGROUP_TO_TEAM					= 1451;		 // �����ҿ�������	
+	EGEC_REQ_CHATGROUP_TO_TEAM					= 1450;		 //
+	EGEC_ACK_CHATGROUP_TO_TEAM					= 1451;		 //	
 	                                              
-	EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 1500;		 // װ��ǿ��
-	EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 1501;		 // װ��ǿ��
+	EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP			= 1500;		 //
+	EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP			= 1501;		 //
 	                                              
-	EGEC_REQ_HOLE_TO_EQUIP						= 1502;		 // װ������
-	EGEC_ACK_HOLE_TO_EQUIP						= 1503;		 // װ������
+	EGEC_REQ_HOLE_TO_EQUIP						= 1502;		 //
+	EGEC_ACK_HOLE_TO_EQUIP						= 1503;		 //
 	                                              
-	EGEC_REQ_INLAYSTONE_TO_EQUIP				= 1504;		 // װ����Ƕ
-	EGEC_ACK_INLAYSTONE_TO_EQUIP				= 1505;		 // װ����Ƕ
+	EGEC_REQ_INLAYSTONE_TO_EQUIP				= 1504;		 //
+	EGEC_ACK_INLAYSTONE_TO_EQUIP				= 1505;		 //
 	                                              
-	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 1506;		 // װ����ħ
-	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 1507;		 // װ����ħ
+	EGEC_REQ_ELEMENTLEVEL_TO_EQUIP				= 1506;		 //
+	EGEC_ACK_ELEMENTLEVEL_TO_EQUIP				= 1507;		 //
                                                   
-	EGEC_REQ_SET_FIGHT_HERO						= 1508;		 // ս���佫
+	EGEC_REQ_SET_FIGHT_HERO						= 1508;		 //
 	                                              
-	EGEC_WEAR_EQUIP								= 1509;		 // װ������
-	EGEC_TAKEOFF_EQUIP							= 1510;		 // װ��ж��
+	EGEC_WEAR_EQUIP								= 1509;		 //
+	EGEC_TAKEOFF_EQUIP							= 1510;		 //
                                                   
-	EGEC_REQ_MINING_TITLE						= 1600;		 // �����ڴο󣨵ؿ飩
+	EGEC_REQ_MINING_TITLE						= 1600;		 //
+	EGEC_ACK_MINING_TITLE						= 1601;		 //
 	                                              
-    EGEC_REQ_SEND_MAIL                          = 1700; // �����ʼ�
-    EGEC_REQ_DRAW_MAIL                          = 1701; // ��ȡ�ʼ��еĽ���(�������߻�����ʯ�ȷǵ��ߵĶ���)
-    EGEC_REQ_DELETE_MAIL                        = 1702; // ɾ���ʼ�
+    EGEC_REQ_SEND_MAIL                          = 1700; //
+    EGEC_REQ_DRAW_MAIL                          = 1701; //
+    EGEC_REQ_DELETE_MAIL                        = 1702; //
 	
-	//����clone
-	EGMI_ACK_CLONE_OBJECT_ENTRY						= 1800;			// �ж�������
-	EGMI_ACK_CLONE_OBJECT_LEAVE						= 1801;			// �ж�����ȥ
+	//clone
+	EGMI_ACK_CLONE_OBJECT_ENTRY						= 1800;			//
+	EGMI_ACK_CLONE_OBJECT_LEAVE						= 1801;			//
 	        
-	EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY			= 1802;			// �ж������Խ���
-	EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY				= 1803;			// �ж���������
+	EGMI_ACK_CLONE_OBJECT_PROPERTY_ENTRY			= 1802;			//
+	EGMI_ACK_CLONE_OBJECT_RECORD_ENTRY				= 1803;			//
 	       
-	EGMI_ACK_CLONE_PROPERTY_INT						= 1810;			// ���Ա���
-	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 1811;			// ���Ա���
-	EGMI_ACK_CLONE_PROPERTY_STRING					= 1812;			// ���Ա���
-	//EGMI_ACK_CLONE_PROPERTY_DOUBLE					= 813;			// ���Ա���
-	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 1814;			// ���Ա���
+	EGMI_ACK_CLONE_PROPERTY_INT						= 1810;			//
+	EGMI_ACK_CLONE_PROPERTY_FLOAT					= 1811;			//
+	EGMI_ACK_CLONE_PROPERTY_STRING					= 1812;			//
+	//EGMI_ACK_CLONE_PROPERTY_DOUBLE				= 813;			//
+	EGMI_ACK_CLONE_PROPERTY_OBJECT					= 1814;			//
             
-	//EGMI_ACK_CLONE_ADD_ROW							= 820;
+	//EGMI_ACK_CLONE_ADD_ROW						= 820;
 	//EGMI_ACK_CLONE_REMOVE_ROW						= 1821;
-	//EGMI_ACK_CLONE_SWAP_ROW							= 822;
+	//EGMI_ACK_CLONE_SWAP_ROW						= 822;
 	//EGMI_ACK_CLONE_RECORD_INT						= 1823;
-	//EGMI_ACK_CLONE_RECORD_FLOAT						= 824;
+	//EGMI_ACK_CLONE_RECORD_FLOAT					= 824;
 	//EGMI_ACK_CLONE_RECORD_DOUBLE					= 1825;
 	//EGMI_ACK_CLONE_RECORD_STRING					= 1826;
 	//EGMI_ACK_CLONE_RECORD_OBJECT					= 1827;
-	//EGMI_ACK_CLONE_RECORD_CLEAR						= 828;
-	//EGMI_ACK_CLONE_RECORD_SORT						= 829;
+	//EGMI_ACK_CLONE_RECORD_CLEAR					= 828;
+	//EGMI_ACK_CLONE_RECORD_SORT					= 829;
 	
-	EGMI_REQSWICHSERVER								= 1840;	// ����ת��
-	EGMI_ACKSWICHSERVER								= 1841;	// ����ת��
+	EGMI_REQSWICHSERVER								= 1840;		//
+	EGMI_ACKSWICHSERVER								= 1841;		//
 	                                                  
-	EGMI_REQ_CREATE_TEAM                       		= 1860; 	// ���봴������
-	EGMI_ACK_CREATE_TEAM							= 1861; 	// ������������
-	EGMI_REQ_JOIN_TEAM                         		= 1862; 	// ������������
-	EGMI_ACK_JOIN_TEAM								= 1863; 	// ������������
-	EGMI_REQ_LEAVE_TEAM                        		= 1864; 	// �����뿪����
-	EGMI_ACK_LEAVE_TEAM								= 1865; 	// �뿪�������� 
-	EGMI_REQ_INVITE_TEAM							= 1866; 	// ������������
-	EGMI_REQ_OPRMEMBER_TEAM							= 1867; 	// ������Ա
-	EGMI_ACK_OPRMEMBER_TEAM							= 1868; 	// ������Ա 
+	EGMI_REQ_CREATE_TEAM                       		= 1860; 	//
+	EGMI_ACK_CREATE_TEAM							= 1861; 	//
+	EGMI_REQ_JOIN_TEAM                         		= 1862; 	//
+	EGMI_ACK_JOIN_TEAM								= 1863; 	//
+	EGMI_REQ_LEAVE_TEAM                        		= 1864; 	//
+	EGMI_ACK_LEAVE_TEAM								= 1865; 	//
+	EGMI_REQ_INVITE_TEAM							= 1866; 	//
+	EGMI_REQ_OPRMEMBER_TEAM							= 1867; 	//
+	EGMI_ACK_OPRMEMBER_TEAM							= 1868; 	//
 	                                                  
-	EGMI_REQ_TEAM_ENTER_ECTYPE						= 1869; 	// ���ӽ����� 
-	EGMI_ACK_TEAM_ENTER_ECTYPE						= 1870; 	// ���ӽ�����
+	EGMI_REQ_TEAM_ENTER_ECTYPE						= 1869; 	//
+	EGMI_ACK_TEAM_ENTER_ECTYPE						= 1870; 	//
                                                       
 	                                                  
 	/////////////////////MapModule/////////////////////////////////////
-	EGMI_REQ_MAP_GRID_INFO							= 1900; 	// �����鿴��ͼ������Ϣ
-	EGMI_ACK_MAP_GRID_INFO							= 1901; 	// ���ز鿴���ӵ�ͼ	
-	EGMI_REQ_BIG_MAP_INFO							= 1902; 	// ��������ͼ��Ϣ
-	EGMI_ACK_BIG_MAP_INFO							= 1903; 	// ���ش���ͼ
+	EGMI_REQ_MAP_GRID_INFO							= 1900; 	//
+	EGMI_ACK_MAP_GRID_INFO							= 1901; 	//
+	EGMI_REQ_BIG_MAP_INFO							= 1902; 	//
+	EGMI_ACK_BIG_MAP_INFO							= 1903; 	//
 	
-	EGMI_REQ_HOLD_MAP_GRID						= 1910; 	// ������פ
-	EGMI_ACK_HOLD_MAP_GRID						= 1911; 	// ������פ����
-	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 1912; 	// ��������
-	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 1913; 	// �������Խ���
-	EGMI_REQ_GET_MAP_GRID_AWARD					= 1914; 	// ������ȡ��ͼ����
-	EGMI_ACK_GET_MAP_GRID_AWARD					= 1915; 	// ������ȡ��ͼ����
+	EGMI_REQ_HOLD_MAP_GRID						= 1910; 	//
+	EGMI_ACK_HOLD_MAP_GRID						= 1911; 	//
+	EGMI_REQ_LEAVE_MSG_MAP_GRID					= 1912; 	//
+	EGMI_ACK_LEAVE_MSG_MAP_GRID					= 1913; 	//
+	EGMI_REQ_GET_MAP_GRID_AWARD					= 1914; 	//
+	EGMI_ACK_GET_MAP_GRID_AWARD					= 1915; 	//
 	
-	EGMI_REQ_MAP_GRID_HUNTING					= 1916; 	// ������ͼ����
-	EGMI_ACK_MAP_GRID_HUNTING					= 1917; 	// ���ؽ���
-	EGMI_REQ_MAP_GRID_KING_WAR					= 1918; 	// ������ͼ����
-	EGMI_ACK_MAP_GRID_KING_WAR					= 1919; 	// ���ؽ���
+	EGMI_REQ_MAP_GRID_HUNTING					= 1916; 	//
+	EGMI_ACK_MAP_GRID_HUNTING					= 1917; 	//
+	EGMI_REQ_MAP_GRID_KING_WAR					= 1918; 	//
+	EGMI_ACK_MAP_GRID_KING_WAR					= 1919; 	//
     
-	/////////////////////GM MSG/////////////////////////////////////����
-	EGMI_REQ_CMD_PROPERTY_INT					= 10000;			// GM�����޸�����
-	EGMI_REQ_CMD_PROPERTY_STR					= 10001;			// GM�����޸��޸��ַ���
-	EGMI_REQ_CMD_PROPERTY_OBJECT				= 10002;			// GM����
-	EGMI_REQ_CMD_PROPERTY_FLOAT					= 10003;			// GM����
-	EGMI_REQ_CMD_RECORD_INT						= 10004;			// GM�����޸ı�����
-	EGMI_REQ_CMD_RECORD_STR						= 10005;			// GM�����޸��޸ı��ַ���
-	EGMI_REQ_CMD_RECORD_OBJECT					= 10006;			// GM�����޸�
-	EGMI_REQ_CMD_RECORD_FLOAT					= 10007;			// GM�����޸�
-	EGMI_REQ_CMD_NORMAL							= 10008;			// ����GM�޸�
+	/////////////////////GM MSG/////////////////////////////////////
+	EGMI_REQ_CMD_PROPERTY_INT					= 10000;			//
+	EGMI_REQ_CMD_PROPERTY_STR					= 10001;			//
+	EGMI_REQ_CMD_PROPERTY_OBJECT				= 10002;			//
+	EGMI_REQ_CMD_PROPERTY_FLOAT					= 10003;			//
+	EGMI_REQ_CMD_RECORD_INT						= 10004;			//
+	EGMI_REQ_CMD_RECORD_STR						= 10005;			//ַ
+	EGMI_REQ_CMD_RECORD_OBJECT					= 10006;			//
+	EGMI_REQ_CMD_RECORD_FLOAT					= 10007;			//
+	EGMI_REQ_CMD_NORMAL							= 10008;			//
 	
 		
-	EGMI_REQ_PVPAPPLYMACTCH						= 10100; 	// ����ƥ��pvp
-	EGMI_ACK_PVPAPPLYMACTCH						= 10101; 	// ����ƥ��pvp
+	EGMI_REQ_PVPAPPLYMACTCH						= 10100; 	//
+	EGMI_ACK_PVPAPPLYMACTCH						= 10101; 	//
 	
-	EGMI_REQ_CREATEPVPECTYPE					= 10102; 	// ����pvp����
-	EGMI_ACK_CREATEPVPECTYPE					= 10103; 	// ����pvp��������Ϣ��������
+	EGMI_REQ_CREATEPVPECTYPE					= 10102; 	//
+	EGMI_ACK_CREATEPVPECTYPE					= 10103; 	//
 	EGMI_REQ_QUERY_SERVER_STATUS                 = 10200;
 	
 	/////////////////////Base SLG MSG/////////////////////////////////////
-	EGMI_REQ_BUY_FORM_SHOP						= 20000;//�������̵���ֲ����
-	EGMI_ACK_BUY_FORM_SHOP						= 20001;//�����̵���ֲ��������
-	EGMI_REQ_MOVE_BUILD_OBJECT					= 20002;//�����ƶ�����
-	EGMI_ACK_MOVE_BUILD_OBJECT					= 20003;//�����ƶ���������
+	EGMI_REQ_BUY_FORM_SHOP						= 20000;
+	EGMI_ACK_BUY_FORM_SHOP						= 20001;
+	EGMI_REQ_MOVE_BUILD_OBJECT					= 20002;
+	EGMI_ACK_MOVE_BUILD_OBJECT					= 20003;
 	
-	EGMI_REQ_UP_BUILD_LVL						= 20101;//���뽨������
-	EGMI_REQ_CREATE_ITEM						= 20102;//��������&ҩˮ&��
-	EGMI_REQ_BUILD_OPERATE						= 20103;//���뽨������
+	EGMI_REQ_UP_BUILD_LVL						= 20101;
+	EGMI_REQ_CREATE_ITEM						= 20102;
+	EGMI_REQ_BUILD_OPERATE						= 20103;
 
 	/////////////////////Base SHARE-TOOL MSG/////////////////////////////////////
 	EGMI_REQ_SEARCH_TO_SHARE 					= 30000;
@@ -337,143 +343,141 @@ enum EGameMsgID
 
 }
 
-/////////////////////////����ϵͳ����//////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 enum EItemType
 {
-    EIT_EQUIP   			= 0; // װ��
-	EIT_GEM   				= 1; // ��ʯ
-	EIT_ITEM   				= 2; // ����Ʒ
-	EIT_CARD   				= 3; // ����
-	EIT_TOKEN	   			= 4; // ����
+    EIT_EQUIP   			= 0; //
+	EIT_GEM   				= 1; //
+	EIT_ITEM   				= 2; //
+	EIT_CARD   				= 3; //
+	EIT_TOKEN	   			= 4; //
 }
 
-//װ��������(��������)
+//
 enum EGameEquipSubType
 {
-	EQUIPTYPE_WEAPON            = 0;    // ����
-	EQUIPTYPE_HELMET            = 1;    // ͷ��
-	EQUIPTYPE_ARMOR             = 2;    // �ؼ�
-	EQUIPTYPE_WRIST             = 3;    // ����	
-	EQUIPTYPE_PANT              = 4;    // ����	
-	EQUIPTYPE_BOOT              = 5;   	// ѥ��
+	EQUIPTYPE_WEAPON            = 0;    //
+	EQUIPTYPE_HELMET            = 1;    //
+	EQUIPTYPE_ARMOR             = 2;    //
+	EQUIPTYPE_WRIST             = 3;    //
+	EQUIPTYPE_PANT              = 4;    //
+	EQUIPTYPE_BOOT              = 5;   	//
 };
 
-//��ʯ������	
+//
 enum EGameGemSubType
 {
-	EGGSTYPE_GEM_ATK           	= 0;    // ������ʯ
-	EGGSTYPE_GEM_DEF           	= 1;    // ������ʯ
+	EGGSTYPE_GEM_ATK           	= 0;    //
+	EGGSTYPE_GEM_DEF           	= 1;    //
 	
-	EGGSTYPE_GEM_FIRE			= 3;    // ����ʯ
-	EGGSTYPE_GEM_LIGHT			= 4;    // �ױ�ʯ
-	EGGSTYPE_GEM_WIND           = 5;    // �籦ʯ
-	EGGSTYPE_GEM_ICE          	= 6;    // ������ʯ
-	EGGSTYPE_GEM_POISON         = 7;    // ����ʯ	
+	EGGSTYPE_GEM_FIRE			= 3;    //
+	EGGSTYPE_GEM_LIGHT			= 4;    //
+	EGGSTYPE_GEM_WIND           = 5;    //
+	EGGSTYPE_GEM_ICE          	= 6;    //
+	EGGSTYPE_GEM_POISON         = 7;    //	
 	
 };
 
 
 enum EGameItemSubType
 {
-	EGIT_ITEM_WATER				= 0; 	// ʥˮ
-	EGIT_ITEM_DIAMOND			= 1;	// ��ʯ 
-	EGIT_ITEM_CURRENCY			= 2; 	// ����
-	EGIT_ITEM_EXP				= 3; 	// EXP
-	EGIT_ITEM_HP				= 4;	// ����ҩˮ
-	EGIT_ITEM_MP				= 5;	// ħ��ҩˮ
-	EGIT_ITEM_SP				= 6;	// ����ҩˮ
-	EGIT_ITEM_PACK				= 7;	// ����
+	EGIT_ITEM_WATER				= 0; 	//
+	EGIT_ITEM_DIAMOND			= 1;	//
+	EGIT_ITEM_CURRENCY			= 2; 	//
+	EGIT_ITEM_EXP				= 3; 	//
+	EGIT_ITEM_HP				= 4;	//
+	EGIT_ITEM_MP				= 5;	//
+	EGIT_ITEM_SP				= 6;	//
+	EGIT_ITEM_PACK				= 7;	//
 };
 
 enum EGameCardSubType
 {
-	EGCST_STRENGTH 				= 1;//����	
-	EGCST_AGILITY				= 2;//����
-	EGCST_INTELLIGENCE			= 3;//����
+	EGCST_STRENGTH 				= 1;//	
+	EGCST_AGILITY				= 2;//
+	EGCST_INTELLIGENCE			= 3;//
 };
 
 enum EGameTokenSubType
 {
-	EGTST_TOKEN_REBORN					= 0; 	// ��������(���Ĵ���Ʒʱ�õ�ĳ�ִ���)
-	EGTST_TOKEN_POSITION				= 1;	// �ƶ�λ��(���͵����ִ�)(���Ĵ���Ʒʱ�õ�ĳ�ִ���)
-	EGTST_TOKEN_BOUNTY   				= 2; 	// �ͽ���
-	EGTST_TOKEN_ACTIVITY				= 3;	// �����
+	EGTST_TOKEN_REBORN					= 0; 	//
+	EGTST_TOKEN_POSITION				= 1;	//
+	EGTST_TOKEN_BOUNTY   				= 2; 	//
+	EGTST_TOKEN_ACTIVITY				= 3;	//
 };
 
 
-//����ʱ������
+//
 enum EGameItemExpiredType
 {
-    EGIET_NONE = 0;               	// ������������
-    EGIET_USE_TIMES = 1;            // ʹ�ô���, ����ħ��,��0����Ҫ��ʧ(��ͨ��Ʒ����)
-    EGIET_REAL_TIME = 2;            // ��ʵ��ʱ������(��),�ʺ�ʱװ,����,��Ʒ(д��1��1��)
+    EGIET_NONE = 0;               	//
+    EGIET_USE_TIMES = 1;            //
+    EGIET_REAL_TIME = 2;            //
     EGIET_END_INDEX = 3;
 };
 
-////////////����״̬/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 enum EDrawDropItemState
 {
-    E_DRAW_STATE_NONE   = 0; // ��ʼ״̬
-    E_DRAW_STATE_GAIN   = 1; // �ɻ���
-    E_DRAW_STATE_RECV   = 2; // ����ȡ
+    E_DRAW_STATE_NONE   = 0; //
+    E_DRAW_STATE_GAIN   = 1; //
+    E_DRAW_STATE_RECV   = 2; //
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// ������ԱȨ��
+//
 enum EGuildPowerType
 {
-    GUILD_POWER_TYPE_NORMAL   			= 0; // ��ͨ��Ա
-	GUILD_POWER_TYPE_VICE_PRESIDENT		= 1; // ���᳤
-	GUILD_POWER_TYPE_PRESIDENT			= 2; // �᳤
+    GUILD_POWER_TYPE_NORMAL   			= 0; //
+	GUILD_POWER_TYPE_VICE_PRESIDENT		= 1; //
+	GUILD_POWER_TYPE_PRESIDENT			= 2; //
 	// TODO
 }
 
-// ����״̬
+//
 enum ETaskState
 {
-    TASK_IN_PROCESS             = 0; // ����������
-    TASK_DONE                   = 1; // ��������
-    TASK_DRAW_AWARD             = 2; // ��ȡ������������
-    TASK_FINISH                 = 3; // ��������
+    TASK_IN_PROCESS             = 0; //
+    TASK_DONE                   = 1; //
+    TASK_DRAW_AWARD             = 2; //
+    TASK_FINISH                 = 3; //
 }
 
-// ��������
+//
 enum ETaskType
 {
-    TASK_LEVEL_UPDATE_SOME_LEVEL        = 0; // ����������ĳ���ȼ�
-    TASK_PASS_ECTYPE                    = 1; // ͨ��ĳ������
-    TASK_PASS_ECTYPE_COUNT              = 2; // ͨ�����⸱�����ٴ�
-    TASK_PASS_SOME_TYPE_ECTYPE_COUNT    = 3; // ͨ��ĳ�ั�����ٴ�
-    TASK_UPDATE_SKILL_COUNT             = 4; // �������ܶ��ٴ�
-    TASK_CONSUME_MONEY                  = 5; // ���Ѷ��ٽ���
-    TASK_CONSUME_DIAMOND                = 6; // ���Ѷ�����ʯ
-    TASK_ARENA_COUNT                    = 7; // �μӾ��������ٴ�
-    TASK_KILL_MONSTER_COUNT             = 8; // �ۼ�ɱ�ֶ���ֻ
-    TASK_KILL_SOME_MONSTER_COUNT        = 9; // ɱ��ĳ���ض��ֶȶ���ֻ
+    TASK_LEVEL_UPDATE_SOME_LEVEL        = 0; //
+    TASK_PASS_ECTYPE                    = 1; //
+    TASK_PASS_ECTYPE_COUNT              = 2; //
+    TASK_PASS_SOME_TYPE_ECTYPE_COUNT    = 3; //
+    TASK_UPDATE_SKILL_COUNT             = 4; //
+    TASK_CONSUME_MONEY                  = 5; //
+    TASK_CONSUME_DIAMOND                = 6; //
+    TASK_ARENA_COUNT                    = 7; //
+    TASK_KILL_MONSTER_COUNT             = 8; //
+    TASK_KILL_SOME_MONSTER_COUNT        = 9; //
     // TODO
 }
 
-// ս������
+//
 enum EBattleType
 {
-	BATTLE_SINGLE        = 0; // ���ǵ��˴򸱱�
-	BATTLE_PVE_TEAM      = 1; // ���˴򸱱�
+	BATTLE_SINGLE        = 0; //
+	BATTLE_PVE_TEAM      = 1; //
 }
 
 enum EShopType
 {
-	EST_BUILDING 	= 1;//����	
-	EST_GOLD		= 2;//����
-	EST_DIAMOND		= 3;//��ʯ
-	EST_SP			= 4;//����
-	EST_EQUIP		= 5;//װ��
-	EST_GEM			= 6;//��ʯ
-	EST_Hero		= 7;//HeroCard
-	EST_Other		= 8;//�ӻ���
+	EST_BUILDING 	= 1;//
+	EST_GOLD		= 2;//
+	EST_ITEM		= 3;//
+	EST_EQUIP		= 5;//
+	EST_GEM			= 6;//
+	EST_CARD		= 7;//
 }
 
 
-///////////////���а�����////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 enum ERankType
 {
@@ -486,31 +490,31 @@ enum ERankType
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//NCPTypenpc������
+//NCPTypenpc
 enum ENPCType
 {
-    ENPCTYPE_NORMAL	= 0;			  // ��ͨ��
-    ENPCTYPE_HERO 	= 1;              // Ӣ��
-    ENPCTYPE_TURRET = 2;              // ����
+    ENPCTYPE_NORMAL	= 0;			  //
+    ENPCTYPE_HERO 	= 1;              //
+    ENPCTYPE_TURRET = 2;              //
     
 };
 
-//PropertyType ���Ե�����
+//PropertyType
 enum EPropertyType
 {
-	EPT_STRENGTH 			= 1;//����	
-	EPT_AGILITY				= 2;//����
-	EPT_INTELLIGENCE		= 3;//����
+	EPT_STRENGTH 			= 1;//
+	EPT_AGILITY				= 2;//
+	EPT_INTELLIGENCE		= 3;//
 };
 
-//Ԫ������
+//
 enum EGameElementType
 {	
-	EELEMENTTYPE_FIRE				= 0;    // ��
-	EELEMENTTYPE_LIGHT				= 1;    // �׵�
-	EELEMENTTYPE_WIND              	= 2;    // ��
-	EELEMENTTYPE_ICE          		= 3;    // ����
-	EELEMENTTYPE_POISON          	= 4;    // ��	
+	EELEMENTTYPE_FIRE				= 0;    //
+	EELEMENTTYPE_LIGHT				= 1;    //
+	EELEMENTTYPE_WIND              	= 2;    //
+	EELEMENTTYPE_ICE          		= 3;    //
+	EELEMENTTYPE_POISON          	= 4;    //
 };
 
 
