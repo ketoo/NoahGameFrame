@@ -9,6 +9,7 @@
 		<Property Id="RelivePos" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="复活坐标列表"/>
 		<Property Id="Width" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="场景宽度"/>
 		<Property Id="SoundList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="场景背景音乐列表"/>
+		<Property Id="Tile" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="Tile"/>
 		<Property Id="Share" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="多人实时副本"/>
 		<Property Id="CanClone" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="是否副本"/>
 		<Property Id="ActorID" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="acctorid"/>
