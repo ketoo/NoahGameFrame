@@ -11,13 +11,12 @@
 
 #include <iostream>
 #include "NFIModule.h"
-#include "NFINetClientModule.hpp"
+#include "NFINetClientModule.h"
 
 class NFIProxyServerToGameModule
     : public  NFIModule
 {
 public:
-	virtual NFINetClientModule* GetClusterModule() = 0;
 	virtual void AddServerInfoExt(const std::string& key, const std::string& value) = 0;
 };
 

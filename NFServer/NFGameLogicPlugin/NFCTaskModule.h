@@ -9,9 +9,7 @@
 #ifndef NFC_TASK_MODULE_H
 #define NFC_TASK_MODULE_H
 
-#include "NFCPackModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -20,7 +18,8 @@
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFCTaskModule
     : public NFIModule
@@ -39,13 +38,14 @@ public:
     virtual bool AfterInit();
 
 protected:
-	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
+	int OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
 
 protected:
     void OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;

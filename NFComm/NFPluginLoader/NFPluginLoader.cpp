@@ -17,7 +17,6 @@
 #include <functional>
 #include <atomic>
 #include "NFCPluginManager.h"
-#include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 #if NF_PLATFORM == NF_PLATFORM_LINUX
@@ -25,6 +24,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <signal.h>
+#include <sys/prctl.h>
 #endif
 
 bool bExitApp = false;
@@ -130,7 +130,7 @@ void PrintfLogo()
     std::cout << "************************************************" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "**                 NoahFrame                  **" << std::endl;
-    std::cout << "**   Copyright (c) 2011-2016  LvSheng.Huang   **" << std::endl;
+    std::cout << "**   Copyright (c) 2011, LvSheng.Huang        **" << std::endl;
     std::cout << "**             All rights reserved.           **" << std::endl;
     std::cout << "**                                            **" << std::endl;
     std::cout << "************************************************" << std::endl;

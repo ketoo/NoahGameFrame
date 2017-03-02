@@ -1,51 +1,54 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.cpp
+//    @FileName			:    NFItemBagPlugin.cpp
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2012-07-14 08:51
-//    @Module           :    NFChatPlugin
+//    @Date             :    2017-02-03 08:51
+//    @Module           :    NFItemBagPlugin
 //
 // -------------------------------------------------------------------------
 
+#include "NFItemBagPlugin.h"
+#include "NFCItemModule.h"
+#include "NFCPackModule.h"
+#include "NFCItemConsumeManagerModule.h"
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
-
-//
-//
 #ifdef NF_DYNAMIC_PLUGIN
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFItemBagPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFItemBagPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFItemBagPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFItemBagPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFItemBagPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFItemBagPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+	REGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
+	REGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
+	REGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
 
 }
 
-void NFChatPlugin::Uninstall()
+void NFItemBagPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+	UNREGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
+	UNREGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
+	UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
 }

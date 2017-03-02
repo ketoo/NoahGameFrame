@@ -17,7 +17,7 @@
 class NFIEquipPropertyModule : public NFIModule
 {
 public:
-	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFIDataList& xDataList) = 0;
+	virtual bool CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList) = 0;
 
 };
 

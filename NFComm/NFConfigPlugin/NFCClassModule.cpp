@@ -43,7 +43,7 @@ NFCClassModule::~NFCClassModule()
     ClearAll();
 }
 
-TDATA_TYPE NFCClassModule::ComputerType(const char* pstrTypeName, NFIDataList::TData& var)
+NFDATA_TYPE NFCClassModule::ComputerType(const char* pstrTypeName, NFData& var)
 {
     if (0 == strcmp(pstrTypeName, "int"))
     {
@@ -65,6 +65,16 @@ TDATA_TYPE NFCClassModule::ComputerType(const char* pstrTypeName, NFIDataList::T
         var.SetObject(NULL_OBJECT);
         return var.GetType();
     }
+	else if (0 == strcmp(pstrTypeName, "vector2"))
+	{
+		var.SetVector2(NULL_VECTOR2);
+		return var.GetType();
+	}
+	else if (0 == strcmp(pstrTypeName, "vector3"))
+	{
+		var.SetVector3(NULL_VECTOR3);
+		return var.GetType();
+	}
 
     return TDATA_UNKNOWN;
 }
@@ -98,7 +108,7 @@ bool NFCClassModule::AddPropertys(rapidxml::xml_node<>* pPropertyRootNode, NF_SH
             bool bRef = lexical_cast<bool>(pstrRef);
 			bool bUpload = lexical_cast<bool>(pstrUpload);
 
-            NFIDataList::TData varProperty;
+            NFData varProperty;
             if (TDATA_UNKNOWN == ComputerType(pstrType, varProperty))
             {
                 //std::cout << "error:" << pClass->GetTypeName() << "  " << pClass->GetInstancePath() << ": " << strPropertyName << " type error!!!" << std::endl;
@@ -160,13 +170,13 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             bool bCache = lexical_cast<bool>(pstrCache);
 			bool bUpload = lexical_cast<bool>(pstrUpload);
 
-			NF_SHARE_PTR<NFIDataList> recordVar(NF_NEW NFCDataList());
-			NF_SHARE_PTR<NFIDataList> recordTag(NF_NEW NFCDataList());
+			NF_SHARE_PTR<NFDataList> recordVar(NF_NEW NFDataList());
+			NF_SHARE_PTR<NFDataList> recordTag(NF_NEW NFDataList());
 
             for (rapidxml::xml_node<>* recordColNode = pRecordNode->first_node(); recordColNode;  recordColNode = recordColNode->next_sibling())
             {
                 //const char* pstrColName = recordColNode->first_attribute( "Id" )->value();
-                NFIDataList::TData TData;
+                NFData TData;
                 const char* pstrColType = recordColNode->first_attribute("Type")->value();
                 if (TDATA_UNKNOWN == ComputerType(pstrColType, TData))
                 {
@@ -447,7 +457,7 @@ bool NFCClassModule::AddClassCallBack(const std::string& strClassName, const CLA
     return pClass->AddClassCallBack(cb);
 }
 
-bool NFCClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& valueList)
+bool NFCClassModule::DoEvent(const NFGUID& objectID, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList)
 {
     NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
     if (nullptr == pClass)

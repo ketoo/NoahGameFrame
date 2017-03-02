@@ -58,7 +58,6 @@ public:
 
     virtual int OnSelectWorldResultsProcess(const int nWorldID, const NFGUID xSenderID, const int nLoginID, const std::string& strAccount, const std::string& strWorldIP, const int nWorldPort, const std::string& strKey);
 
-    virtual NFINetModule* GetNetModule();
 protected:
     void OnSocketClientEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
@@ -83,13 +82,14 @@ protected:
 
 private:
 
-    NFILoginToMasterModule* m_pLoginToMasterModule;
+	NFINetModule* m_pNetModule;
+	NFINetClientModule* m_pNetClientModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFILoginLogicModule* m_pLoginLogicModule;
-	NFINetModule* m_pNetModule;
+	NFILoginToMasterModule* m_pLoginToMasterModule;
 };
 
 #endif

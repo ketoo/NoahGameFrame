@@ -40,7 +40,7 @@
 #[cC][mM]ake[lL]ists.txt
 
 /_Out/Comm/*
-/Dependencies/gperftools-2.1
+/Dependencies/gperftools-2.5
 /Dependencies/lib
 /Dependencies/boost_1_53_0
 /Dependencies/curl-7.37.1

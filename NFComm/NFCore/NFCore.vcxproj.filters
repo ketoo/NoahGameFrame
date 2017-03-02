@@ -83,28 +83,28 @@
     <ClInclude Include="NFCComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFIDataList.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFCConsistentHash.hpp">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCDataList.h">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFSpaceNode.hpp">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="NFMemoryCounter.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCMemManager.h">
-      <Filter>Unit</Filter>
-    </ClInclude>
     <ClInclude Include="NFDateTime.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
     <ClInclude Include="NFException.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCMemManager.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFMemoryCounter.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFSingleton.hpp">
+      <Filter>Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="NFDataList.hpp">
       <Filter>Unit</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,15 +126,6 @@
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCDataList.cpp">
-      <Filter>Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="NFMemoryCounter.cpp">
-      <Filter>Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCMemManager.cpp">
-      <Filter>Unit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

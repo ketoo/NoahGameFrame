@@ -9,7 +9,6 @@
 #ifndef NFC_PROXYSERVER_SERVER_MODULE_H
 #define NFC_PROXYSERVER_SERVER_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFCore/NFCConsistentHash.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
@@ -20,7 +19,7 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
-#include "NFComm/NFPluginModule/NFINetClientModule.hpp"
+#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 class NFCProxyServerNet_ServerModule : public NFIProxyServerNet_ServerModule
 {
@@ -63,14 +62,13 @@ protected:
 
     NFMapEx<NFGUID, int> mxClientIdent;
 protected:
-    NFIProxyServerToWorldModule* m_pProxyToWorldModule;
-    NFIProxyServerToGameModule* m_pProxyServerToGameModule;
+    NFINetClientModule* m_pNetClientModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetModule* m_pNetModule;
-
+	NFIProxyServerToWorldModule* m_pProxyToWorldModule;
 };
 
 #endif

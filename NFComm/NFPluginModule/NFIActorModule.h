@@ -62,10 +62,10 @@ class NFCObjectAsyncEventInfo
 class NFIActorModule : public NFIModule
 {
 public:
-    template<typename BaseTypeComponent, typename BaseType>
+    template<typename TypeComponent, typename BaseType>
     int RequireActor(BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
     {
-        if (!TIsDerived<BaseTypeComponent, NFIComponent>::Result)
+        if (!TIsDerived<TypeComponent, NFIComponent>::Result)
         {
             //BaseTypeComponent must inherit from NFIComponent;
             return 0;
@@ -74,7 +74,7 @@ public:
         int nActorID = RequireActor();
         if (nActorID >= 0)
         {
-            AddComponent<BaseTypeComponent>(nActorID);
+            AddComponent<TypeComponent>(nActorID);
             AddEndFunc<BaseType>(nActorID, pBase, handler_end);
 
             return nActorID;
@@ -94,7 +94,7 @@ protected:
     virtual bool AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end) = 0;
 
 private:
-	template<typename BaseTypeComponent, typename BaseType>
+	template<typename TypeComponent, typename BaseType>
 	int AddEndFunc(const int nActorIndex, BaseType* pBase, int (BaseType::*handler_end)(const NFGUID&, const int, const int, const std::string&))
 	{
 		EVENT_ASYNC_PROCESS_END_FUNCTOR functor_end = std::bind(handler_end, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -103,16 +103,17 @@ private:
 		return AddEndFunc(nActorIndex, functorPtr_end);
 	}
 
-	template<typename BaseTypeComponent>
+	template<typename TypeComponent>
 	bool AddComponent(const int nActorIndex)
 	{
-		if (!TIsDerived<BaseTypeComponent, NFIComponent>::Result)
+		if (!TIsDerived<TypeComponent, NFIComponent>::Result)
 		{
 			//BaseTypeComponent must inherit from NFIComponent;
 			return false;
 		}
 
-		NF_SHARE_PTR<BaseTypeComponent> pComponent = NF_SHARE_PTR<BaseTypeComponent>(NF_NEW BaseTypeComponent(pPluginManager));
+		//use CreateNewInstance to replace this line to create a new component script
+		NF_SHARE_PTR<TypeComponent> pComponent = NF_SHARE_PTR<TypeComponent>(NF_NEW TypeComponent(pPluginManager));
 		return AddComponent(nActorIndex, pComponent);
 	}
 

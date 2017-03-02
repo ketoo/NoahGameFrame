@@ -203,6 +203,11 @@ bool NFCScheduleModule::AddSchedule(const std::string & strScheduleName, const M
 	return true;
 }
 
+bool NFCScheduleModule::AddSchedule(const std::string & strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR & cb, const int nCount, const NFDateTime & date)
+{
+	return false;
+}
+
 bool NFCScheduleModule::RemoveSchedule(const std::string & strScheduleName)
 {
 	mModuleRemoveList.push_back(strScheduleName);
@@ -235,6 +240,11 @@ bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string& strSch
 	mObjectAddList.push_back(xSchedule);
 
 	return true;
+}
+
+bool NFCScheduleModule::AddSchedule(const NFGUID self, const std::string & strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR & cb, const int nCount, const NFDateTime & date)
+{
+	return false;
 }
 
 bool NFCScheduleModule::RemoveSchedule(const NFGUID self)

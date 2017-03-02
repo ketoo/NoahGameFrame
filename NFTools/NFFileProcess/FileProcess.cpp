@@ -15,6 +15,11 @@ FileProcess::FileProcess()
 
 FileProcess::~FileProcess()
 {
+	for (auto charArr : tmpStrList)
+	{
+		delete[] charArr;
+	}
+	tmpStrList.clear();
 	fclose(mysqlWriter);
 	fclose(mysqlClassWriter);
 	fclose(protoWriter);
@@ -91,112 +96,101 @@ void FileProcess::OnCreateXMLFile()
 
 void FileProcess::CreateStructThreadFunc()
 {
-	
 	CreateProtoFile();
 
-	
+
 	CreateNameFile();
 
 
-	
-	tinyxml2::XMLDocument* xmlDoc = new tinyxml2::XMLDocument();
-	if (NULL == xmlDoc)
-	{
-		return;
-	}
 
-	
-	tinyxml2::XMLDeclaration *pDel = xmlDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
+	rapidxml::xml_document<> xmlDoc;
+
+	rapidxml::xml_node<>* pDel = xmlDoc.allocate_node(rapidxml::node_pi, xmlDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
 	if (NULL == pDel)
 	{
 		return;
 	}
 
-	xmlDoc->LinkEndChild(pDel);
+	xmlDoc.append_node(pDel);
 
-	tinyxml2::XMLElement* root = xmlDoc->NewElement("XML");
-	xmlDoc->LinkEndChild(root);
+	rapidxml::xml_node<>* root = xmlDoc.allocate_node(rapidxml::node_element, "XML", NULL);
+	xmlDoc.append_node(root);
 
-	tinyxml2::XMLElement* classElement = xmlDoc->NewElement("Class");
-	root->LinkEndChild(classElement);
+	rapidxml::xml_node<>* classElement = xmlDoc.allocate_node(rapidxml::node_element, "Class", NULL);
+	root->append_node(classElement);
 	////////////////////////////////////////////////////////////////////////
-	classElement->SetAttribute("Id", "IObject");
-	classElement->SetAttribute("Type", "TYPE_IOBJECT");
+	classElement->append_attribute(xmlDoc.allocate_attribute("Id", "IObject"));
+	classElement->append_attribute(xmlDoc.allocate_attribute("Type", "TYPE_IOBJECT"));
 
-	classElement->SetAttribute("Path", (strExecutePath + "Struct/Class/IObject.xml").c_str());
-	classElement->SetAttribute("InstancePath", (strExecutePath + "Ini/NPC/IObject.xml").c_str());
+	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + "Struct/Class/IObject.xml"))));
+	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + "Ini/NPC/IObject.xml"))));
 
-	classElement->SetAttribute("Public", "0");
-	classElement->SetAttribute("Desc", "IObject");
+	classElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
+	classElement->append_attribute(xmlDoc.allocate_attribute("Desc", "IObject"));
 	////////////////////////////////////////////////////////////////////////
-	
+
 	CreateStructXML("../Excel_Ini/IObject.xlsx", "IObject");
 
-	
+
 	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 
 	for (auto fileName : fileList)
 	{
 		StringReplace(fileName, "\\", "/");
 		StringReplace(fileName, "//", "/");
-		
+
 		if ((int)(fileName.find("$")) != -1)
 		{
 			continue;
 		}
 
-		
+
 		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
 		if (strExt != "xlsx")
 		{
 			continue;
 		}
 
-		
+
 		auto strFileName = fileName.substr(fileName.find_last_of('/') + 1, fileName.find_last_of('.') - fileName.find_last_of('/') - 1);
 		if (strFileName == "IObject")
 		{
 			continue;
 		}
 
-		
+
 		if (!CreateStructXML(fileName.c_str(), strFileName.c_str()))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
 			return;
 		}
 
-		tinyxml2::XMLElement* subClassElement = xmlDoc->NewElement("Class");
-		classElement->LinkEndChild(subClassElement);
-
-		subClassElement->SetAttribute("Id", strFileName.c_str());
+		rapidxml::xml_node<>* subClassElement = xmlDoc.allocate_node(rapidxml::node_element, "Class", NULL);
+		classElement->append_node(subClassElement);
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Id", NewChar(strFileName)));
 		std::string strUpFileName = strFileName;
 		transform(strUpFileName.begin(), strUpFileName.end(), strUpFileName.begin(), ::toupper);
-		subClassElement->SetAttribute("Type", ("TYPE_" + strUpFileName).c_str());
-
-		subClassElement->SetAttribute("Path", (strExecutePath + strXMLStructPath + strFileName + ".xml").c_str());
-		subClassElement->SetAttribute("InstancePath", (strExecutePath + strXMLIniPath + strFileName + ".xml").c_str());
-
-		subClassElement->SetAttribute("Public", "0");
-		subClassElement->SetAttribute("Desc", strFileName.c_str());
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Type", NewChar(std::string("TYPE_" + strUpFileName))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + strXMLStructPath + strFileName + ".xml"))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + strXMLIniPath + strFileName + ".xml"))));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
+		subClassElement->append_attribute(xmlDoc.allocate_attribute("Desc", NewChar(strFileName)));
 	}
 
-	
 
-	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP",
-		sizeof("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
-	fwrite("}",
-		sizeof("}"), 1, csWriter);
-	xmlDoc->SetBOM(false);
-	auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
 
-	//xmlDoc->Print();
-	delete xmlDoc;
+	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP", strlen("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
+	fwrite("}",	strlen("}"), 1, csWriter);
+
+	//auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
+	std::ofstream out(strLogicClassFile.c_str());
+	out << xmlDoc;
+	out.close();
 }
 
 void FileProcess::CreateIniThreadFunc()
 {
-	
+
 	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
 	for (auto fileName : fileList)
 	{
@@ -208,13 +202,13 @@ void FileProcess::CreateIniThreadFunc()
 		std::string strFileName = fileName.substr(nLastSlash, nLastPoint - nLastSlash - 1);
 		std::string strFileExt = fileName.substr(nLastPoint, fileName.length() - nLastPoint);
 
-		
+
 		if ((int)(fileName.find("$")) != -1)
 		{
 			continue;
 		}
 
-		
+
 		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
 		if (strExt != "xlsx")
 		{
@@ -231,7 +225,7 @@ void FileProcess::CreateIniThreadFunc()
 bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 {
 	std::cout << strFile << std::endl;
-	
+
 	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
 	if (!x->open(strFile.c_str()))
 	{
@@ -264,42 +258,37 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	strCSPropertyInfo = strCSPropertyInfo + "public class " + strFileName + "\n{\n";
 	strCSPropertyInfo = strCSPropertyInfo + "\t//Class name\n\tpublic static readonly string ThisName = \"" + strFileName + "\";\n\t// IObject\n" + strCSIObjectInfo + "\t// Property\n";
 
-	
-	tinyxml2::XMLDocument* structDoc = new tinyxml2::XMLDocument();
-	if (NULL == structDoc)
-	{
-		return false;
-	}
-	
-	tinyxml2::XMLDeclaration *pDel = structDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
+
+	rapidxml::xml_document<> structDoc;
+
+	rapidxml::xml_node<>* pDel = structDoc.allocate_node(rapidxml::node_pi, structDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
 	if (NULL == pDel)
 	{
 		return false;
 	}
 
-	structDoc->LinkEndChild(pDel);
+	structDoc.append_node(pDel);
 
-	
-	tinyxml2::XMLElement* root = structDoc->NewElement("XML");
-	structDoc->LinkEndChild(root);
+	rapidxml::xml_node<>* root = structDoc.allocate_node(rapidxml::node_element, "XML", NULL);
+	structDoc.append_node(root);
 
-	
-	tinyxml2::XMLElement* propertyNodes = structDoc->NewElement("Propertys");
-	root->LinkEndChild(propertyNodes);
 
-	
-	tinyxml2::XMLElement* recordNodes = structDoc->NewElement("Records");
-	root->LinkEndChild(recordNodes);
+	rapidxml::xml_node<>* propertyNodes = structDoc.allocate_node(rapidxml::node_element, "Propertys", NULL);
+	root->append_node(propertyNodes);
 
-	
-	tinyxml2::XMLElement* componentNodes = structDoc->NewElement("Components");
-	root->LinkEndChild(componentNodes);
 
-	
+	rapidxml::xml_node<>* recordNodes = structDoc.allocate_node(rapidxml::node_element, "Records", NULL);
+	root->append_node(recordNodes);
+
+
+	rapidxml::xml_node<>* componentNodes = structDoc.allocate_node(rapidxml::node_element, "Components", NULL);
+	root->append_node(componentNodes);
+
+
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
-		
+
 		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
@@ -332,8 +321,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 					continue;
 				}
 
-				auto propertyNode = structDoc->NewElement("Property");
-				propertyNodes->LinkEndChild(propertyNode);
+				auto propertyNode = structDoc.allocate_node(rapidxml::node_element, "Property", NULL);
+				propertyNodes->append_node(propertyNode);
 				std::string strType = "";
 				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
 				{
@@ -346,7 +335,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
-							value = valueCell == "TRUE" ? 1 : 0;
+							value = valueCell == "TRUE" ? "1" : "0";
 						}
 						else
 						{
@@ -359,7 +348,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						}
 
 					}
-					propertyNode->SetAttribute(name.c_str(), value.c_str());
+					propertyNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
 				}
 
 				strHPPPropertyInfo = strHPPPropertyInfo + "\tstatic const std::string& " + testValue + "(){ static std::string x" + testValue + " = \"" + testValue + "\";" + " return x" + testValue + "; } // " + strType + "\n";
@@ -397,8 +386,8 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					continue;
 				}
-				auto componentNode = structDoc->NewElement("Component");
-				componentNodes->LinkEndChild(componentNode);
+				auto componentNode = structDoc.allocate_node(rapidxml::node_element, "Component", NULL);
+				componentNodes->append_node(componentNode);
 				std::string strType = "";
 				for (int c = dim.firstCol; c <= dim.lastCol; c++)
 				{
@@ -411,7 +400,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 						if (valueCell == "TRUE" || valueCell == "FALSE")
 						{
-							value = valueCell == "TRUE" ? 1 : 0;
+							value = valueCell == "TRUE" ? "1" : "0";
 						}
 						else
 						{
@@ -424,7 +413,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 						}
 
 					}
-					componentNode->SetAttribute(name.c_str(), value.c_str());
+					componentNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
 				}
 			}
 		}
@@ -479,7 +468,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
 					{
-						strPublic = cell->value == "TRUE" ? 1 : 0;
+						strPublic = cell->value == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -492,7 +481,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
 					{
-						strPrivate = cell->value == "TRUE" ? 1 : 0;
+						strPrivate = cell->value == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -505,7 +494,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
 					{
-						strSave = cell->value == "TRUE" ? 1 : 0;
+						strSave = cell->value == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -518,7 +507,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
 					{
-						strCache = cell->value == "TRUE" ? 1 : 0;
+						strCache = cell->value == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -531,7 +520,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
 					{
-						strUpload = cell->value == "TRUE" ? 1 : 0;
+						strUpload = cell->value == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -551,18 +540,18 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				const int nExcelCols = atoi(strCol.c_str());
 				int nRealCols = 0;
 
-				auto recordNode = structDoc->NewElement("Record");
-				recordNodes->LinkEndChild(recordNode);
+				auto recordNode = structDoc.allocate_node(rapidxml::node_element, "Record", NULL);
+				recordNodes->append_node(recordNode);
 
-				recordNode->SetAttribute("Id", strRecordName.c_str());
-				recordNode->SetAttribute("Row", strRow.c_str());
-				recordNode->SetAttribute("Col", strCol.c_str());
-				recordNode->SetAttribute("Public", strPublic.c_str());
-				recordNode->SetAttribute("Private", strPrivate.c_str());
-				recordNode->SetAttribute("Save", strSave.c_str());
-				recordNode->SetAttribute("Cache", strCache.c_str());
-				recordNode->SetAttribute("Upload", strUpload.c_str());
-				recordNode->SetAttribute("Desc", strDesc.c_str());
+				recordNode->append_attribute(structDoc.allocate_attribute("Id", NewChar(strRecordName)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Row", NewChar(strRow)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Col", NewChar(strCol)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Public", NewChar(strPublic)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Private", NewChar(strPrivate)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Save", NewChar(strSave)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Cache", NewChar(strCache)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Upload", NewChar(strUpload)));
+				recordNode->append_attribute(structDoc.allocate_attribute("Desc", NewChar(strDesc)));
 
 				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
 				strHppEnumInfo = strHppEnumInfo + "\n\tenum " + strRecordName + "\n\t{\n";
@@ -577,7 +566,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
 
-				for (int nRecordCol = dim.firstCol;nRecordCol <= dim.lastCol;nRecordCol++)
+				for (int nRecordCol = dim.firstCol; nRecordCol <= dim.lastCol; nRecordCol++)
 				{
 					std::string strType = "";
 					std::string strTag = "";
@@ -603,11 +592,11 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 
 					cell = nullptr;
 
-					auto colNode = structDoc->NewElement("Col");
-					recordNode->LinkEndChild(colNode);
+					auto colNode = structDoc.allocate_node(rapidxml::node_element, "Col", NULL);
+					recordNode->append_node(colNode);
 
-					colNode->SetAttribute("Type", strType.c_str());
-					colNode->SetAttribute("Tag", strTag.c_str());
+					colNode->append_attribute(structDoc.allocate_attribute("Type", NewChar(strType)));
+					colNode->append_attribute(structDoc.allocate_attribute("Tag", NewChar(strTag)));
 
 					toWrite = "\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
 					fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
@@ -648,7 +637,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	fwrite(strCSPropertyInfo.c_str(), strCSPropertyInfo.length(), 1, csWriter);
 
 	////////////////////////////////////////////////////////////////////////////
-	
+
 	std::string strFilePath(strFile);
 	int nLastPoint = strFilePath.find_last_of(".") + 1;
 	int nLastSlash = strFilePath.find_last_of("/") + 1;
@@ -663,9 +652,10 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 	{
 		strXMLFile += ".xml";
 	}
-	structDoc->SetBOM(false);
-	structDoc->SaveFile(strXMLFile.c_str());
-	delete structDoc;
+
+	std::ofstream out(strXMLFile.c_str());
+	out << structDoc;
+	out.close();
 	delete x;
 	return true;
 }
@@ -673,7 +663,7 @@ bool FileProcess::CreateStructXML(std::string strFile, std::string strFileName)
 bool FileProcess::CreateIniXML(std::string strFile)
 {
 	std::cout << strFile << std::endl;
-	
+
 	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
 	if (!x->open(strFile.c_str()))
 	{
@@ -681,26 +671,19 @@ bool FileProcess::CreateIniXML(std::string strFile)
 		return false;
 	}
 	////////////////////////////////////////////////////////////////////////////
-	
-	tinyxml2::XMLDocument* iniDoc = new tinyxml2::XMLDocument();
-	if (NULL == iniDoc)
-	{
-		return false;
-	}
-	
-	tinyxml2::XMLDeclaration *pDel = iniDoc->NewDeclaration("xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"");
+	rapidxml::xml_document<> iniDoc;
+
+	rapidxml::xml_node<>* pDel = iniDoc.allocate_node(rapidxml::node_pi, iniDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
 	if (NULL == pDel)
 	{
 		return false;
 	}
 
-	iniDoc->LinkEndChild(pDel);
+	iniDoc.append_node(pDel);
 
-	
-	tinyxml2::XMLElement* root = iniDoc->NewElement("XML");
-	iniDoc->LinkEndChild(root);
+	rapidxml::xml_node<>* root = iniDoc.allocate_node(rapidxml::node_element, "XML", NULL);
+	iniDoc.append_node(root);
 
-	
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	std::vector<std::string> vColNames;
 	std::vector<std::string> vDataIDs;
@@ -709,7 +692,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
-		
+
 		int nDataLine = 10;
 
 		std::string strSheetName = sh.getName();
@@ -765,7 +748,7 @@ bool FileProcess::CreateIniXML(std::string strFile)
 					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
 					if (valueCell == "TRUE" || valueCell == "FALSE")
 					{
-						value = valueCell == "TRUE" ? 1 : 0;
+						value = valueCell == "TRUE" ? "1" : "0";
 					}
 					else
 					{
@@ -819,28 +802,32 @@ bool FileProcess::CreateIniXML(std::string strFile)
 	}
 	for (auto strID : vDataIDs)
 	{
-		auto objectNode = iniDoc->NewElement("Object");
-		root->LinkEndChild(objectNode);
+		auto objectNode = iniDoc.allocate_node(rapidxml::node_element, "Object", NULL);
+		root->append_node(objectNode);
 		for (auto strColName : vColNames)
 		{
 			if (strColName == "Id")
 			{
-				const char* chrID = objectNode->Attribute("Id");
+				char* chrID = NULL;
+				if (objectNode->first_attribute("Id"))
+				{
+					chrID = objectNode->first_attribute("Id")->value();
+				}
 				if (!chrID)
 				{
-					objectNode->SetAttribute(strColName.c_str(), mDataValues[strID + strColName].c_str());
+					objectNode->append_attribute(iniDoc.allocate_attribute(NewChar(strColName), NewChar(mDataValues[strID + strColName])));
 				}
 			}
 			else
 			{
-				objectNode->SetAttribute(strColName.c_str(), mDataValues[strID + strColName].c_str());
+				objectNode->append_attribute(iniDoc.allocate_attribute(NewChar(strColName), NewChar(mDataValues[strID + strColName])));
 			}
 			nDataCount++;
 		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	
+
 	int nLastPoint = strFile.find_last_of(".") + 1;
 	int nLastSlash = strFile.find_last_of("/") + 1;
 	std::string strFileName = strFile.substr(nLastSlash, nLastPoint - nLastSlash - 1);
@@ -856,9 +843,9 @@ bool FileProcess::CreateIniXML(std::string strFile)
 		strXMLFile += ".xml";
 	}
 
-	iniDoc->SetBOM(false);
-	iniDoc->SaveFile(strXMLFile.c_str());
-	delete iniDoc;
+	std::ofstream out(strXMLFile.c_str());
+	out << iniDoc;
+	out.close();
 	delete x;
 	return true;
 }
@@ -874,85 +861,98 @@ void FileProcess::OnCreateMysqlFile()
 bool FileProcess::LoadLogicClass(std::string strFile)
 {
 	////////////////////////////////////////////////////
-	tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
-	if (NULL == doc)
-	{
-		return false;
-	}
-	doc->LoadFile(strFile.c_str());
+	rapidxml::xml_document<> doc;
+	char* pData = NULL;
+	int nDataSize = 0;
 
-	tinyxml2::XMLElement* root = doc->RootElement();
-	auto classElement = root->FirstChildElement("Class");
-	std::string strIObjectPath = classElement->Attribute("Path");
-	auto nodeElement = classElement->FirstChildElement();
+	rapidxml::file<> fdoc(strFile.c_str());
+	nDataSize = fdoc.size();
+	pData = new char[nDataSize + 1];
+	strncpy(pData, fdoc.data(), nDataSize);
+
+	pData[nDataSize] = 0;
+	doc.parse<0>(pData);
+
+	rapidxml::xml_node<>* root = doc.first_node();
+	auto classElement = root->first_node("Class");
+	std::string strIObjectPath = classElement->first_attribute("Path")->value();
+	auto nodeElement = classElement->first_node();
 	if (nodeElement)
 	{
 		while (true)
 		{
-			std::string strID = nodeElement->Attribute("Id");
+			std::string strID = nodeElement->first_attribute("Id")->value();
 			std::string sqlToWrite = "CREATE TABLE `" + strID + "` (\n";
 			sqlToWrite += "\t`ID` varchar(128) NOT NULL,\n";
 			sqlToWrite += "\tPRIMARY KEY (`ID`)\n";
 			sqlToWrite += ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n";
 			fwrite(sqlToWrite.c_str(), sqlToWrite.length(), 1, mysqlClassWriter);
 
-			
+
 			if (!LoadClass(strRelativePath + strIObjectPath, strID))
 			{
 				return false;
 			}
 
-			
-			std::string strPath = nodeElement->Attribute("Path");
+
+			std::string strPath = nodeElement->first_attribute("Path")->value();
 			if (!LoadClass(strRelativePath + strPath, strID))
 			{
 				return false;
 			}
 
 			fwrite("\n", 1, 1, mysqlClassWriter);
-			if (nodeElement == classElement->LastChildElement())
+			if (nodeElement == classElement->last_node())
 			{
 				break;
 			}
-			nodeElement++;
+			nodeElement = nodeElement->next_sibling();
 		}
 	}
+	if (NULL != pData)
+	{
+		delete[]pData;
+	}
 
-	delete doc;
 	return true;
 }
 
 bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 {
-	tinyxml2::XMLDocument* doc = new tinyxml2::XMLDocument();
-	if (NULL == doc)
-	{
-		return false;
-	}
-	doc->LoadFile(strFile.c_str());
-	auto ff = doc->Value();
-	tinyxml2::XMLElement* root = doc->RootElement();
-	auto classElement = root->FirstChildElement("Propertys");
+	rapidxml::xml_document<> doc;
+	char* pData = NULL;
+	int nDataSize = 0;
+
+	rapidxml::file<> fdoc(strFile.c_str());
+	nDataSize = fdoc.size();
+	pData = new char[nDataSize + 1];
+	strncpy(pData, fdoc.data(), nDataSize);
+
+	pData[nDataSize] = 0;
+	doc.parse<0>(pData);
+
+	rapidxml::xml_node<>* root = doc.first_node("XML");
+	auto classElement = root->first_node("Propertys");
 	if (classElement)
 	{
-		auto nodeElement = classElement->FirstChildElement("Property");
+		auto nodeElement = classElement->first_node("Property");
 		if (nodeElement)
 		{
 			while (true)
 			{
-				if (!nodeElement || (std::string)(nodeElement->Attribute("Save")) != "1")
+				if (!nodeElement || (std::string)(nodeElement->first_attribute("Save")->value()) != "1")
 				{
 					if (!nodeElement)
 					{
 						break;
 					}
-					nodeElement = nodeElement->NextSiblingElement();
+					nodeElement = nodeElement->next_sibling();
 					continue;
 				}
 
-				std::string strID = nodeElement->Attribute("Id");
+				std::string strID = nodeElement->first_attribute("Id")->value();
 
-				auto chrDesc = nodeElement->Attribute("Desc");
+				auto chrDesc = nodeElement->first_attribute("Desc")->value();
 				std::string strDesc = chrDesc;
 				auto descLength = strlen(chrDesc);
 				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
@@ -966,7 +966,7 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 					}
 				}
 				//////////////////////////////////////////////////////////////////////////
-				std::string strType = nodeElement->Attribute("Type");
+				std::string strType = nodeElement->first_attribute("Type")->value();
 
 				std::string toWrite = "";
 				if (strType == "string")
@@ -996,33 +996,33 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				{
 					break;
 				}
-				nodeElement = nodeElement->NextSiblingElement();
+				nodeElement = nodeElement->next_sibling();
 			}
 		}
 	}
 
 
-	auto xRecordsNode = root->FirstChildElement("Records");
+	auto xRecordsNode = root->first_node("Records");
 	if (xRecordsNode)
 	{
-		auto nodeElement = xRecordsNode->FirstChildElement("Record");
+		auto nodeElement = xRecordsNode->first_node("Record");
 		if (nodeElement)
 		{
 			while (true)
 			{
-				if (!nodeElement || (std::string)(nodeElement->Attribute("Save")) != "1")
+				if (!nodeElement || (std::string)(nodeElement->first_attribute("Save")->value()) != "1")
 				{
 					if (!nodeElement)
 					{
 						break;
 					}
-					nodeElement = nodeElement->NextSiblingElement();
+					nodeElement = nodeElement->next_sibling();
 					continue;
 				}
 
-				std::string strID = nodeElement->Attribute("Id");
+				std::string strID = nodeElement->first_attribute("Id")->value();
 
-				auto chrDesc = nodeElement->Attribute("Desc");
+				auto chrDesc = nodeElement->first_attribute("Desc")->value();
 				std::string strDesc = chrDesc;
 				auto descLength = strlen(chrDesc);
 				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
@@ -1040,15 +1040,27 @@ bool FileProcess::LoadClass(std::string strFile, std::string strTable)
 				toWrite += "\n";
 				fwrite(toWrite.c_str(), toWrite.length(), 1, mysqlWriter);
 
-				if (nodeElement == classElement->LastChildElement())
+				if (nodeElement == classElement->last_node())
 				{
 					break;
 				}
-				nodeElement = nodeElement->NextSiblingElement();
+				nodeElement = nodeElement->next_sibling();
 			}
 		}
 
 	}
-	delete doc;
+	if (NULL != pData)
+	{
+		delete[]pData;
+	}
 	return true;
+}
+
+char * FileProcess::NewChar(const std::string& str)
+{
+	char * newChar = new char[str.size()+1];
+	strncpy(newChar, str.c_str(), str.size());
+	newChar[str.size()] = 0;
+	tmpStrList.push_back(newChar);
+	return newChar;
 }

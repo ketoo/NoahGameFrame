@@ -47,7 +47,7 @@ NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFGUID& self, NF
     return pOldProperty;
 }
 
-NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFGUID& self, const std::string& strPropertyName, const TDATA_TYPE varType)
+NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFGUID& self, const std::string& strPropertyName, const NFDATA_TYPE varType)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = this->GetElement(strPropertyName);
     if (!pProperty)
@@ -60,7 +60,7 @@ NF_SHARE_PTR<NFIProperty> NFCPropertyManager::AddProperty(const NFGUID& self, co
     return pProperty;
 }
 
-bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFIDataList::TData& TData)
+bool NFCPropertyManager::SetProperty(const std::string& strPropertyName, const NFData& TData)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
     if (pProperty)

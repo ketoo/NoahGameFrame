@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7767C45A-F011-4E91-83C2-F7AA197CDA0B}</ProjectGuid>
+    <ProjectGuid>{535FA741-F175-43DB-B3CB-4AE8C1E93E17}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFChatPlugin</RootNamespace>
+    <RootNamespace>NFHeroPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -93,10 +93,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCChatModule.h" />
-    <ClInclude Include="NFChatPlugin.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,8 +101,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCChatModule.cpp" />
-    <ClCompile Include="NFChatPlugin.cpp" />
+    <ClCompile Include="NFCHeroModule.cpp" />
+    <ClCompile Include="NFCHeroPropertyModule.cpp" />
+    <ClCompile Include="NFHeroPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCHeroModule.h" />
+    <ClInclude Include="NFCHeroPropertyModule.h" />
+    <ClInclude Include="NFHeroPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
