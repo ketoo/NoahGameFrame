@@ -75,14 +75,14 @@ enum NF_WS_EVENT
 };
 
 typedef std::function<void(websocketpp::connection_hdl,const std::string&) >			NF_WS_MSG_CALL_BACK;
-typedef std::function<void(websocketpp::connection_hdl,NF_WS_EVENT) > 					NF_WS_EVENT_CALL_BACK;
+typedef std::shared_ptr<NF_WS_MSG_CALL_BACK> NF_WS_MSG_CALL_BACK_PTR;
 
+typedef std::function<void(websocketpp::connection_hdl,NF_WS_EVENT) > 					NF_WS_EVENT_CALL_BACK;
+typedef std::shared_ptr<NF_WS_EVENT_CALL_BACK> NF_WS_EVENT_CALL_BACK_PTR;
 
 struct WSObject
 {
-	bool	bInited = false;
 	bool	bNeedRemove = false;
-	std::string strSessionIdent;
 
 	bool NeedRemove()
 	{
@@ -96,7 +96,7 @@ struct WSObject
 
 typedef std::shared_ptr<WSObject> WSObjectPtr;
 
-class _NFExport NFIWS
+class NFIWS
 {
 public:
 	virtual ~NFIWS() {}
@@ -112,10 +112,10 @@ public:
 	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
 
 	//send a message to client list
-	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen,std::vector<websocketpp::connection_hdl>) = 0;
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen,const std::vector<websocketpp::connection_hdl>&) = 0;
 
 	//send a message to client list
-	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl) = 0;
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl) = 0;
 };
 
 #endif
