@@ -23,19 +23,17 @@ public:
     virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName) = 0;
     virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName) = 0;
 
-	virtual bool GetCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList) = 0;
-	virtual bool GetCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList) = 0;
-	virtual bool GetStoragePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList) = 0;
-	virtual bool GetStorageRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList) = 0;
+	virtual bool LoadCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList) = 0;
+	virtual bool LoadCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList) = 0;
 
-    virtual bool SetCachePropertyInfo(const NFGUID& self,  NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
-    virtual bool SetCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
+	virtual bool LoadStoragePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList) = 0;
+	virtual bool LoadStorageRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList) = 0;
 
-	virtual bool SetStroragePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
-	virtual bool SetStrorageRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
+	virtual bool SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
+	virtual bool SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
 
-    virtual bool RemoveCachePropertyInfo(const NFGUID& self) = 0;
-    virtual bool RemoveCacheRecordInfo(const NFGUID& self) = 0;
+	virtual bool SaveStroragePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager) = 0;
+	virtual bool SaveStrorageRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager) = 0;
 
     virtual NF_SHARE_PTR<NFIPropertyManager> NewPropertyManager(const std::string& strClassName) = 0;
     virtual NF_SHARE_PTR<NFIRecordManager> NewRecordManager(const std::string& strClassName) = 0;
