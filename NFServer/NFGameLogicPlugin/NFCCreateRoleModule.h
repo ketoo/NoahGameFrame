@@ -9,14 +9,15 @@
 #ifndef NFC_CREATEROLE_MODULE_H
 #define NFC_CREATEROLE_MODULE_H
 
-#include "NFComm/NFPluginModule/NFICreateRoleModule.h"
+#include "NFComm/NFCore/NFCConsistentHash.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -41,7 +42,11 @@ protected:
 	void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
+	std::vector<int> mxTileSceneIDList;
+private:
 	NFINetModule* m_pNetModule;
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
