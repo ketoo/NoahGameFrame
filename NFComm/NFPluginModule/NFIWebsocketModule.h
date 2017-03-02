@@ -8,7 +8,7 @@
 #ifndef NFI_WEBSOCKET_MODULE_H__
 #define NFI_WEBSOCKET_MODULE_H__
 
-#include "NFIWS.h"
+#include "NFComm/NFNetPlugin/NFIWS.h"
 #include "NFIModule.h"
 
 class NFIWebsocketModule : public NFIModule
