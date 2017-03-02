@@ -1,5 +1,6 @@
 <XML>
 	<GameServer>
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFGameServerPlugin" />
@@ -7,15 +8,21 @@
 		<Plugin Name="NFGameServerNet_ClientPlugin" />
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="NFGameLogicPlugin" />
-
+		
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFChatPlugin" />
+		<Plugin Name="NFHeroPlugin" />
+		<Plugin Name="NFItemBagPlugin" />
+		<Plugin Name="NFShopPlugin" />
+		<Plugin Name="NFGuildPlugin" />
 		
     	<ConfigPath Name="../" />		
 	</GameServer>
 
 	<LoginServer>
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />	
 		<Plugin Name="NFLoginLogicPlugin" />
@@ -31,6 +38,7 @@
 	</LoginServer>
 
 	<MasterServer>
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFMasterServerPlugin" />
@@ -41,6 +49,7 @@
 	</MasterServer>
 
 	<ProxyServer>
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFProxyLogicPlugin" />
@@ -51,6 +60,7 @@
 	</ProxyServer>
 
 	<WorldServer>
+		<Plugin Name="NFNetPlugin" />
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />
 		<Plugin Name="NFWorldLogicPlugin" />

@@ -4,7 +4,8 @@
 #include <string>
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
-#include "NFComm/NFCore/NFCDataList.h"
+#include "NFComm/NFCore/NFDataList.hpp"
+#include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 
 typedef std::function<int(const NFGUID&, const std::string&, const float, const int)> OBJECT_SCHEDULE_FUNCTOR;
@@ -18,9 +19,10 @@ class NFIScheduleModule
 {
 public:
 	virtual ~NFIScheduleModule() {}
-	
+
 	///for module
 	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
+	virtual bool AddSchedule(const std::string& strScheduleName, const MODULE_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
 	virtual bool RemoveSchedule(const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const std::string& strScheduleName) = 0;
 
@@ -34,7 +36,8 @@ public:
 	
 	///for object
 	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const float fTime, const int nCount) = 0;
-	virtual bool RemoveSchedule(const NFGUID self) = 0; 
+	virtual bool AddSchedule(const NFGUID self, const std::string& strScheduleName, const OBJECT_SCHEDULE_FUNCTOR_PTR& cb, const int nCount, const NFDateTime& date) = 0;
+	virtual bool RemoveSchedule(const NFGUID self) = 0;
 	virtual bool RemoveSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 	virtual bool ExistSchedule(const NFGUID self, const std::string& strScheduleName) = 0;
 

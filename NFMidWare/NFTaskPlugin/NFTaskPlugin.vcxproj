@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7767C45A-F011-4E91-83C2-F7AA197CDA0B}</ProjectGuid>
+    <ProjectGuid>{85B677E2-4D92-442E-9D81-5500F00092E8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFTaskPlugin</RootNamespace>
   </PropertyGroup>

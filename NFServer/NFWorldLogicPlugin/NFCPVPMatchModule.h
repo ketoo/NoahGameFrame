@@ -10,7 +10,6 @@
 #define NFC_PVP_MATCH_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPVPMatchModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
@@ -39,7 +38,7 @@ public:
     virtual bool AfterInit();
 
     virtual bool ApplyPVP(const NFGUID& self, const int nPVPMode, const int nScore);
-    virtual bool TeamApplyPVP(const NFGUID& xTeam, const NFIDataList& varMemberList, int nPVPMODE, const int nScore);
+    virtual bool TeamApplyPVP(const NFGUID& xTeam, const NFDataList& varMemberList, int nPVPMODE, const int nScore);
     virtual int GetGradeByScore(const int nScore);
     virtual int GetMemberCount(const int nPVPMode);
 
@@ -64,6 +63,7 @@ protected:
 
 	bool BroadcastMsgToRoom(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 private:
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

@@ -85,7 +85,6 @@
     <ClCompile Include="minizip\ioapi_mem.c" />
     <ClCompile Include="minizip\unzip.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="zlib\adler32.c" />
     <ClCompile Include="zlib\compress.c" />
     <ClCompile Include="zlib\crc32.c" />

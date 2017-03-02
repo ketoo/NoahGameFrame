@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7767C45A-F011-4E91-83C2-F7AA197CDA0B}</ProjectGuid>
+    <ProjectGuid>{AE53470C-E0C6-4583-996D-011A7269C4AA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFChatPlugin</RootNamespace>
+    <RootNamespace>NFItemBagPlugin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -93,10 +93,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCChatModule.h" />
-    <ClInclude Include="NFChatPlugin.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,8 +101,26 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCChatModule.cpp" />
-    <ClCompile Include="NFChatPlugin.cpp" />
+    <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemGemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemItemConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCItemModule.cpp" />
+    <ClCompile Include="NFCItemTokenConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCPackModule.cpp" />
+    <ClCompile Include="NFItemBagPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemConsumeManagerModule.h" />
+    <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemGemConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemItemConsumeProcessModule.h" />
+    <ClInclude Include="NFCItemModule.h" />
+    <ClInclude Include="NFCItemTokenConsumeProcessModule.h" />
+    <ClInclude Include="NFCPackModule.h" />
+    <ClInclude Include="NFItemBagPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

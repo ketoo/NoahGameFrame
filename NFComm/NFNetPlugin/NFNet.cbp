@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFNet" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="$(SolutionDir)/_Out/Debug/NFNet_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Debug" />
+				<Option object_output=".objs/Debug" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-fPIC" />
+					<Add option="-D_DEBUG" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
+				</Compiler>
+				<Linker>
+					<Add library="../../Dependencies/lib/libevent.a" />
+				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
+			</Target>
+			<Target title="Release x64">
+				<Option output="$(SolutionDir)/_Out/Release/NFNet" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Release" />
+				<Option object_output=".objs/Release" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
+					<Add option="-DNDEBUG" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
+				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
+			</Target>
+		</Build>
+<Unit filename="NFCNet.cpp" />
+<Unit filename="NFCHttpNet.cpp" />
+<Unit filename="NFCNet.h" />
+<Unit filename="NFIHttpNet.h" />
+<Unit filename="NFINet.h" />
+<Unit filename="NFCHttpNet.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

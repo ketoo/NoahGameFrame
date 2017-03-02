@@ -11,11 +11,11 @@
 
 #include "NFComm/NFPluginModule/NFICreateRoleModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 
 class NFCCreateRoleModule
     : public NFICreateRoleModule
@@ -39,12 +39,12 @@ protected:
 	void OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-
-    NFIGameLogicModule* m_pGameLogicModule;
+	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
+	NFIAccountRedisModule* m_pAccountRedisModule;
 };
 
 #endif

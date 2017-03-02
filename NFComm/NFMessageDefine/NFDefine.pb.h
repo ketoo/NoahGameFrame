@@ -79,7 +79,6 @@ enum EGameEventCode {
   EGEC_ENTER_GATEWAY_FAILD = 141,
   EGEC_NO_SERVER4ZONE = 142,
   EGEC_INVALID_SKILL = 143,
-  EGEC_ENTER_GAME_SUCCESS = 144,
   EGEC_CREATE_GUILD_SUCCESS = 200,
   EGEC_JOIN_GUILD_SUCCESS = 201,
   EGEC_LEAVE_GUILD_SUCCESS = 202
@@ -98,6 +97,24 @@ inline bool EGameEventCode_Parse(
     const ::std::string& name, EGameEventCode* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EGameEventCode>(
     EGameEventCode_descriptor(), name, value);
+}
+enum ESynMsgID {
+  ESMI_UNKNOW = 0
+};
+LIBPROTOC_EXPORT bool ESynMsgID_IsValid(int value);
+const ESynMsgID ESynMsgID_MIN = ESMI_UNKNOW;
+const ESynMsgID ESynMsgID_MAX = ESMI_UNKNOW;
+const int ESynMsgID_ARRAYSIZE = ESynMsgID_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESynMsgID_descriptor();
+inline const ::std::string& ESynMsgID_Name(ESynMsgID value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESynMsgID_descriptor(), value);
+}
+inline bool ESynMsgID_Parse(
+    const ::std::string& name, ESynMsgID* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESynMsgID>(
+    ESynMsgID_descriptor(), name, value);
 }
 enum EGameMsgID {
   EGMI_UNKNOW = 0,
@@ -145,6 +162,8 @@ enum EGameMsgID {
   EGMI_ACK_SWAP_SCENE = 156,
   EGMI_REQ_END_BATTLE = 157,
   EGMI_ACK_END_BATTLE = 158,
+  EGMI_REQ_ENTER_GAME_FINISH = 159,
+  EGMI_ACK_ENTER_GAME_FINISH = 160,
   EGMI_ACK_OBJECT_ENTRY = 200,
   EGMI_ACK_OBJECT_LEAVE = 201,
   EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
@@ -237,6 +256,7 @@ enum EGameMsgID {
   EGEC_WEAR_EQUIP = 1509,
   EGEC_TAKEOFF_EQUIP = 1510,
   EGEC_REQ_MINING_TITLE = 1600,
+  EGEC_ACK_MINING_TITLE = 1601,
   EGEC_REQ_SEND_MAIL = 1700,
   EGEC_REQ_DRAW_MAIL = 1701,
   EGEC_REQ_DELETE_MAIL = 1702,
@@ -295,11 +315,15 @@ enum EGameMsgID {
   EGMI_ACK_MOVE_BUILD_OBJECT = 20003,
   EGMI_REQ_UP_BUILD_LVL = 20101,
   EGMI_REQ_CREATE_ITEM = 20102,
-  EGMI_REQ_BUILD_OPERATE = 20103
+  EGMI_REQ_BUILD_OPERATE = 20103,
+  EGMI_REQ_SEARCH_TO_SHARE = 30000,
+  EGMI_ACK_SEARCH_TO_SHARE = 30001,
+  EGMI_REQ_SHARE_TO_ATART = 30002,
+  EGMI_ACK_SHARE_TO_ATART = 30003
 };
 LIBPROTOC_EXPORT bool EGameMsgID_IsValid(int value);
 const EGameMsgID EGameMsgID_MIN = EGMI_UNKNOW;
-const EGameMsgID EGameMsgID_MAX = EGMI_REQ_BUILD_OPERATE;
+const EGameMsgID EGameMsgID_MAX = EGMI_ACK_SHARE_TO_ATART;
 const int EGameMsgID_ARRAYSIZE = EGameMsgID_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameMsgID_descriptor();
@@ -578,16 +602,14 @@ inline bool EBattleType_Parse(
 enum EShopType {
   EST_BUILDING = 1,
   EST_GOLD = 2,
-  EST_DIAMOND = 3,
-  EST_SP = 4,
+  EST_ITEM = 3,
   EST_EQUIP = 5,
   EST_GEM = 6,
-  EST_Hero = 7,
-  EST_Other = 8
+  EST_CARD = 7
 };
 LIBPROTOC_EXPORT bool EShopType_IsValid(int value);
 const EShopType EShopType_MIN = EST_BUILDING;
-const EShopType EShopType_MAX = EST_Other;
+const EShopType EShopType_MAX = EST_CARD;
 const int EShopType_ARRAYSIZE = EShopType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EShopType_descriptor();
@@ -704,6 +726,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameEventCode>() {
   return ::NFMsg::EGameEventCode_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESynMsgID>() {
+  return ::NFMsg::ESynMsgID_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {

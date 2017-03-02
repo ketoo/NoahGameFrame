@@ -57,7 +57,7 @@ public:
 	NFVector2(const NFVector2& v)
 	{
 		this->x = v.x;
-		this->y = v.x;
+		this->y = v.y;
 	}
 
 	bool operator<(const NFVector2& v) const
@@ -73,7 +73,7 @@ public:
 	NFVector2& operator= (const NFVector2& v)
 	{
 		this->x = v.x;
-		this->y = v.x;
+		this->y = v.y;
 
 		return *this;
 	}

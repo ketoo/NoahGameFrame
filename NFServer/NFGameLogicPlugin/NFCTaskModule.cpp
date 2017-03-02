@@ -10,6 +10,16 @@
 
 bool NFCTaskModule::Init()
 {
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+
     return true;
 }
 
@@ -25,27 +35,19 @@ bool NFCTaskModule::Execute()
 
 bool NFCTaskModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTaskModule::OnClassObjectEvent );
 	CheckConfig();
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTaskModule::OnClientAcceptTask)) { return false; }
-    if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTaskModule::OnClientPushTask)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACCEPT_TASK, this, &NFCTaskModule::OnClientAcceptTask)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_COMPELETE_TASK, this, &NFCTaskModule::OnClientPushTask)) { return false; }
 
     return true;
 }
 
-int NFCTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
 {
     if ( CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent )
     {

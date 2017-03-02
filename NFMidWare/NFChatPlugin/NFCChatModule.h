@@ -19,7 +19,6 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -56,6 +55,6 @@ protected:
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
+	NFIGameServerToWorldModule* m_pNetClientModule;
 };
 #endif

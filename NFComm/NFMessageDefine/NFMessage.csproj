@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
-      <HintPath>CoreOnly\ios\protobuf-net.dll</HintPath>
+      <HintPath>..\..\..\GoogleMap\Server\NFComm\NFMessageDefine\CoreOnly\ios\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -46,11 +46,7 @@
     <Compile Include="NFMsgPreGame.cs" />
     <Compile Include="NFMsgShare.cs" />
     <Compile Include="NFMsgURl.cs" />
-    <Compile Include="NFRecordDefine.cs" />
     <Compile Include="NFSLGDefine.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="protobuf-net.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

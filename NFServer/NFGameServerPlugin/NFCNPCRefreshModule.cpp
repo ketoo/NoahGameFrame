@@ -38,7 +38,7 @@ bool NFCNPCRefreshModule::AfterInit()
     return true;
 }
 
-int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var )
+int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var )
 {
     NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
     if (nullptr == pSelf)
@@ -93,14 +93,14 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar)
+int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
     if ( newVar.GetInt() <= 0 )
     {
         NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, NFrame::NPC::LastAttacker());
         if (!identAttacker.IsNull())
 		{
-			m_pEventModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
+			m_pEventModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFDataList() << identAttacker );
 
 			m_pScheduleModule->AddSchedule( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, 5.0f, 1 );
         }
@@ -126,7 +126,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
 
     m_pKernelModule->DestroyObject( self );
 
-    NFCDataList arg;
+    NFDataList arg;
 	arg << NFrame::NPC::X() << fSeedX;
     arg << NFrame::NPC::Y() << fSeedY;
     arg << NFrame::NPC::Z() << fSeedZ;
@@ -137,7 +137,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
+int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var )
 {
 	if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
 	{

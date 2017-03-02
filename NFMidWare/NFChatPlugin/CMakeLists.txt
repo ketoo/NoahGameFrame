@@ -12,7 +12,7 @@ add_library(NFChatPlugin SHARED
 set_target_properties( NFChatPlugin PROPERTIES OUTPUT_NAME_DEBUG "NFChatPlugin_d")
 set_target_properties( NFChatPlugin PROPERTIES PREFIX "")
 set_target_properties( NFChatPlugin PROPERTIES 
-	FOLDER "NFServer/GameServer"
+	FOLDER "NFMidWare/NFChatPlugin"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )

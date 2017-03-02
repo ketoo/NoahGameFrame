@@ -110,12 +110,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCAsyNoSqlModule.cpp" />
     <ClCompile Include="NFCNoSqlDriver.cpp" />
+    <ClCompile Include="NFCNoSqlDriverManager.cpp" />
     <ClCompile Include="NFCNoSqlModule.cpp" />
     <ClCompile Include="NFNoSqlPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCAsyNoSqlModule.h" />
     <ClInclude Include="NFCNoSqlDriver.h" />
+    <ClInclude Include="NFCNoSqlDriverManager.h" />
     <ClInclude Include="NFCNoSqlModule.h" />
     <ClInclude Include="NFNoSqlPlugin.h" />
   </ItemGroup>

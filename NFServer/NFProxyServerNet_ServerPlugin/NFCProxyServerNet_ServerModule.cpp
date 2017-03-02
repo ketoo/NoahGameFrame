@@ -13,19 +13,19 @@
 
 bool NFCProxyServerNet_ServerModule::Init()
 {
-	m_pNetModule = NF_NEW NFINetModule(pPluginManager);
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
+	
     return true;
 }
 
 bool NFCProxyServerNet_ServerModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pProxyServerToGameModule = pPluginManager->FindModule<NFIProxyServerToGameModule>();
-
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CONNECT_KEY, this, &NFCProxyServerNet_ServerModule::OnConnectKeyProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_WORLD_LIST, this, &NFCProxyServerNet_ServerModule::OnReqServerListProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SELECT_SERVER, this, &NFCProxyServerNet_ServerModule::OnSelectServerProcess);
@@ -36,6 +36,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(this, &NFCProxyServerNet_ServerModule::OnOtherMessage);
 
 	m_pNetModule->AddEventCallBack(this, &NFCProxyServerNet_ServerModule::OnSocketClientEvent);
+	m_pNetModule->ExpandBufferSize(1024*1024*2);
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
@@ -77,7 +78,7 @@ bool NFCProxyServerNet_ServerModule::Shut()
 
 bool NFCProxyServerNet_ServerModule::Execute()
 {
-    return m_pNetModule->Execute();
+	return true;
 }
 
 void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -113,17 +114,17 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const 
 		//special for distributed
 		if (!pNetObject->GetHashIdentID().IsNull())
 		{
-			m_pProxyServerToGameModule->GetClusterModule()->SendBySuit(pNetObject->GetHashIdentID().ToString(), nMsgID, strMsg);
+			m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_GAME, pNetObject->GetHashIdentID().ToString(), nMsgID, strMsg);
 		}
 		else
 		{
 			NFGUID xHashIdent = NFINetModule::PBToNF(xMsg.hash_ident());
-			m_pProxyServerToGameModule->GetClusterModule()->SendBySuit(xHashIdent.ToString(), nMsgID, strMsg);
+			m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_GAME, xHashIdent.ToString(), nMsgID, strMsg);
 		}
 	}
 	else
 	{
-		m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+		m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
 	}
 }
 
@@ -214,7 +215,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const int nAddress)
                     return;
                 }
 
-				m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
+				m_pNetClientModule->SendByServerID(nGameID, NFMsg::EGameMsgID::EGMI_REQ_LEAVE_GAME, strMsg);
             }
         }
 
@@ -231,7 +232,7 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex,
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xMsg.world_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xMsg.world_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -273,9 +274,9 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
 
-        NFMapEx<int, ConnectData>& xServerList = m_pProxyServerToGameModule->GetClusterModule()->GetServerList();
+        NFMapEx<int, ConnectData>& xServerList = m_pNetClientModule->GetServerList();
         ConnectData* pGameData = xServerList.FirstNude();
-        while (NULL != pGameData)
+        while (pGameData && NF_SERVER_TYPES::NF_ST_GAME == pGameData->eServerType)
         {
             if (ConnectDataState::NORMAL == pGameData->eState)
             {
@@ -373,7 +374,7 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -397,7 +398,7 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
                 return;
             }
 
-			m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg);
+			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ROLE_LIST, strMsg);
         }
     }
 }
@@ -411,7 +412,7 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -435,7 +436,7 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
                 return;
             }
 
-			m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 }
@@ -449,7 +450,7 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
 	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -473,7 +474,7 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
 				return;
 			}
 
-			m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
+			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), nMsgID, strMsg);
         }
     }
 }
@@ -487,7 +488,7 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
         return;
     }
 
-    NF_SHARE_PTR<ConnectData> pServerData = m_pProxyServerToGameModule->GetClusterModule()->GetServerNetInfo(xData.game_id());
+    NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -513,7 +514,7 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
                 return;
             }
 
-			m_pProxyServerToGameModule->GetClusterModule()->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg);
+			m_pNetClientModule->SendByServerID(pNetObject->GetGameID(), NFMsg::EGameMsgID::EGMI_REQ_ENTER_GAME, strMsg);
         }
     }
 }

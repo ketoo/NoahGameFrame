@@ -11,7 +11,6 @@
 
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -42,21 +41,20 @@ public:
 	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self);
 	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self);
 
+	virtual bool SavePlayerDataToCache(const NFGUID& self);
 	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
 	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
 
-	virtual	bool GetAccountRoleID(const std::string& strAccount, NFGUID& xPlayerID);
-	virtual bool SavePlayerDataToCatch(const NFGUID& self);
-
-	virtual const NFGUID CreateRole(const std::string& strAccount, const std::string& strName);
-	virtual const bool DeleteRole(const std::string& strAccount, const NFGUID xID);
+	virtual bool SavePlayerTileToCache(const int nSceneID, const NFGUID& self, const std::string& strTileData);
+	virtual bool GetPlayerTileFromCache(const int nSceneID, const NFGUID& self, std::string& strTileData);
+	virtual bool GetPlayerTileRandomFromCache(const int nSceneID, std::string& strTileData);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
 
 	const bool AttachData(const NFGUID& self);
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);

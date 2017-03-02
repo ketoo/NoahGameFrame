@@ -4,6 +4,7 @@
 //    @Date             :    2016-12-18
 //    @Module           :    NFCChatModule
 //    @Desc             :
+// -------------------------------------------------------------------------
 
 #include "NFCChatModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -11,11 +12,7 @@
 
 bool NFCChatModule::Init()
 {
-	return true;
-}
-
-bool NFCChatModule::AfterInit()
-{
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -23,9 +20,14 @@ bool NFCChatModule::AfterInit()
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-    m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pNetClientModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
-	m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCChatModule::OnClienChatProcess);
+	return true;
+}
+
+bool NFCChatModule::AfterInit()
+{
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCChatModule::OnClienChatProcess);
 
 	return true;
 }
@@ -49,11 +51,7 @@ void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, c
 	{
 	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_WORLD:
 	{
-		NFINetModule* m_pNetModule = m_pGameServerNet_ServerModule->GetNetModule();
-		if (m_pNetModule)
-		{
-			m_pNetModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
-		}
+		m_pNetModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
 	}
 	break;
 	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
@@ -61,8 +59,6 @@ void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, c
 		NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::GuildID());
 		if (!xGuildID.IsNull())
 		{
-			NFINetClientModule * pNetClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
-			pNetClientModule->SendBySuit(xGuildID.nData64, nMsgID, msg);
 		}
 	}
 	break;
@@ -74,8 +70,6 @@ void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, c
 			NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
 			if (!xTargetID.IsNull())
 			{
-				NFINetClientModule * pNetClientModule = m_pGameServerToWorldModule->GetClusterClientModule();
-				pNetClientModule->SendBySuit(nPlayerID.nData64, nMsgID, msg);
 			}
 		}
 	}

@@ -1,8 +1,13 @@
 #ifndef _TINYXLSX_H_
 #define _TINYXLSX_H_
-
 #include <vector>
 #include <string>
+#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
+#include "Dependencies/common/lexical_cast.hpp"
 namespace MiniExcelReader
 {
     struct Cell

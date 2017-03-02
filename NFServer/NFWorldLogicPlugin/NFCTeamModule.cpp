@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCTeamModule.h"
-#include "NFComm/Config/NFConfig.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -15,8 +14,12 @@
 
 bool NFCTeamModule::Init()
 {
-    
-
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	
 	return true;
 }
@@ -33,16 +36,11 @@ bool NFCTeamModule::Execute()
 
 bool NFCTeamModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
-	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)) { return false; }
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)) { return false; }
-	if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)) { return false; }
-    if (!m_pWorldNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCTeamModule::OnTeamEnterEctypeProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_TEAM, this, &NFCTeamModule::OnCreateTeamProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_TEAM, this, &NFCTeamModule::OnJoinTeamProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_TEAM, this, &NFCTeamModule::OnLeaveTeamProcess)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_TEAM_ENTER_ECTYPE, this, &NFCTeamModule::OnTeamEnterEctypeProcess)) { return false; }
 
     return true;
 }
@@ -60,8 +58,8 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         xTeam = m_pKernelModule->CreateGUID();
     }
 
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Team::ThisName());
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(xTeam);
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->NewRecordManager(xTeam);
 
     if (!pPropertyManager)
     {
@@ -79,14 +77,14 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         return NFGUID();
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return NFGUID();
     }
 
-    NFCDataList varData;
+    NFDataList varData;
 
     int nReceive = 0;
     int nOnLine = 0;
@@ -108,12 +106,12 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         return NFGUID();
     }
 
-    if (!m_pCommonRedisModule->SetCachePropertyInfo(xTeam, NFrame::Team::ThisName(), pPropertyManager))
+    if (!m_pCommonRedisModule->SetCachePropertyInfo(xTeam, pPropertyManager))
     {
         return NFGUID();
     }
 
-    if (!m_pCommonRedisModule->SetCacheRecordInfo(xTeam, NFrame::Team::ThisName(), pRecordManager))
+    if (!m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager))
     {
         return NFGUID();
     }
@@ -123,7 +121,7 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
 
 bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID);
     if (!pRecordManager)
     {
         return false;
@@ -134,14 +132,14 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return false;
     }
 
-    NFCDataList varData;
+    NFDataList varData;
 
     std::string strName ;
     int nLevel = 0;
@@ -163,12 +161,12 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, NFrame::Team::ThisName(), pRecordManager);
+    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID);
     if (!pRecordManager)
     {
         return false;
@@ -179,7 +177,7 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -193,12 +191,12 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, NFrame::Team::ThisName(), pRecordManager);
+    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember )
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeamID);
     if (!pRecordManager)
     {
         return false;
@@ -210,7 +208,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
         return false;
     }
 
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeamID, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeamID);
     if (!pPropertyManager)
     {
         return false;
@@ -227,7 +225,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
 		return false;
 	}
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() == 0)
     {
@@ -240,7 +238,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
         return false;
     }
     
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, NFrame::Team::ThisName(), pRecordManager);
+    return m_pCommonRedisModule->SetCacheRecordInfo(xTeamID, pRecordManager);
 }
 
 
@@ -258,7 +256,7 @@ bool NFCTeamModule::GetPlayerGameID(const NFGUID& self, int& nGameID)
 
 bool NFCTeamModule::GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::vector<NFGUID>& xmemberList)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam);
     if (!pRecordManager)
     {
         return false;
@@ -292,7 +290,7 @@ bool NFCTeamModule::GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::
 
 bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , const int& nGameID)
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam);
     if (!pRecordManager)
     {
         return false;
@@ -304,7 +302,7 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() <=  0)
     {
@@ -316,12 +314,12 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
     
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 1);
 
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, NFrame::Team::ThisName(), pRecordManager);
+    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager);
 }
 
 bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
 {
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam);
     if (!pRecordManager)
     {
         return false;
@@ -333,7 +331,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
         return false;
     }
 
-    NFCDataList varList;
+    NFDataList varList;
     pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
     if (varList.GetCount() <= 0)
     {
@@ -343,7 +341,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
     const int nRow = varList.Int(0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_GameID, 0);
-    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, NFrame::Team::ThisName(), pRecordManager);
+    return m_pCommonRedisModule->SetCacheRecordInfo(xTeam, pRecordManager);
 }
 
 bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData)
@@ -399,7 +397,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
         if (!GetTeamInfo(nPlayerID, xTeam, xTeamInfo))
         {
             xAck.mutable_xteaminfo()->CopyFrom(xTeamInfo);
-            m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+            m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
             return;
         }
     }
@@ -407,7 +405,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
     NFMsg::ReqAckCreateTeam xAck;
     *xAck.mutable_team_id() = NFINetModule::NFToPB(xTeam);
 
-    m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
+    m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 }
 
 void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -435,7 +433,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
         NFMsg::ReqAckJoinTeam xAck;
         *xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_JOIN_TEAM, xAck, nSockIndex, nPlayerID);
     }
 }
 
@@ -457,7 +455,7 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
             xAck.mutable_xteaminfo()->CopyFrom(xTeamInfo);
         }
 
-        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
 
         BroadcastMsgToTeam(nPlayerID, xTeam, NFMsg::EGMI_ACK_LEAVE_TEAM, xAck);
     }
@@ -466,7 +464,7 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
         NFMsg::ReqAckLeaveTeam xAck;
         *xAck.mutable_team_id() = NFINetModule::NFToPB(NFGUID());
 
-        m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
+        m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_LEAVE_TEAM, xAck, nSockIndex, nPlayerID);
     }
 }
 
@@ -500,7 +498,7 @@ void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMs
 
     NFGUID xTeam = NFINetModule::PBToNF(xMsg.team_id());
     NFGUID xSelfID = NFINetModule::PBToNF(xMsg.self_id());
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeam, NFrame::Guild::ThisName());
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeam);
     if (pPropertyManager)
     {
         NFGUID xCaptain = pPropertyManager->GetPropertyObject(NFrame::Team::Captain());
@@ -511,7 +509,7 @@ void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMs
         }
     }
 
-    m_pWorldNet_ServerModule->GetNetModule()->SendMsgPB(NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, xMsg, nSockIndex, nPlayerID);
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_TEAM_ENTER_ECTYPE, xMsg, nSockIndex, nPlayerID);
 }
 
 bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo)
@@ -521,8 +519,8 @@ bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::
         return false;
     }
 
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeam, NFrame::Team::ThisName());
-    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam, NFrame::Team::ThisName());
+    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(xTeam);
+    NF_SHARE_PTR<NFIRecordManager> pRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(xTeam);
 
     if (!pPropertyManager)
     {
