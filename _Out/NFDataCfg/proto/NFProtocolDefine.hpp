@@ -1083,6 +1083,7 @@ public:
 	static const std::string& RelivePos(){ static std::string xRelivePos = "RelivePos"; return xRelivePos; } // string
 	static const std::string& Width(){ static std::string xWidth = "Width"; return xWidth; } // int
 	static const std::string& SoundList(){ static std::string xSoundList = "SoundList"; return xSoundList; } // string
+	static const std::string& Tile(){ static std::string xTile = "Tile"; return xTile; } // int
 	static const std::string& Share(){ static std::string xShare = "Share"; return xShare; } // int
 	static const std::string& CanClone(){ static std::string xCanClone = "CanClone"; return xCanClone; } // int
 	static const std::string& ActorID(){ static std::string xActorID = "ActorID"; return xActorID; } // int
