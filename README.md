@@ -63,11 +63,13 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 ### MSVC >= 2015
 
 1. Git pull all source
-2. Run **install.bat**
-3. Open the solution: **NoahFrame.sln**
-4. Build the solution
-5. Run **GenerateConfigXML.bat** to generate configuration files
-6. Run the binary file by **_Out/Debug/rund.bat**
+2. Open the solution: **NoahFrame.sln**, build FileProcessTool project
+3. Run **GenerateConfigXML.bat** to generate configuration files
+4. Run **install.bat**
+5. Open the solution: **NoahFrame.sln**
+6. Build the solution
+7. Run **GenerateConfigXML.bat** to generate configuration files
+8. Run the binary file by **_Out/Debug/rund.bat**
 
 ### CodeBlocks >= 13.1(Only in linux)
 
