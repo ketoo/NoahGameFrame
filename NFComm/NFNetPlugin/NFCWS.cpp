@@ -11,12 +11,21 @@
 
 bool NFCWS::Execute()
 {
-	m_EndPoint.poll_one();
+	if (mbWorking)
+	{
+		ExecuteClose();
+		m_EndPoint.poll_one();
+	}
 	return false;
 }
 
 int NFCWS::Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount)
 {
+	if (mbWorking)
+	{
+		return 1;
+	}
+
 	mnPort = nPort;
 	mnMaxConnect = nMaxClient;
 	mnCpuCount = nCpuCount;
@@ -56,6 +65,8 @@ int NFCWS::Initialization(const unsigned int nMaxClient, const unsigned short nP
 	m_EndPoint.listen(nPort);
 	m_EndPoint.start_accept();
 
+	mbWorking = true;
+
 	return 0;
 }
 
@@ -86,7 +97,8 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 			}
 			catch (websocketpp::exception& e)
 			{
-				std::cout<<"websocket exception: "<<e.what()<<std::endl;
+				std::cout<<"websocket exception: "<<e.what()<< " this conn will be removed." <<std::endl;
+				RemoveConnection(it->first, NF_WS_EVENT_CLOSE);
 			}
 		}
 		it++;
@@ -95,7 +107,7 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 	return true;
 }
 
-bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, std::vector<websocketpp::connection_hdl> vList)
+bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& vList)
 {
 	for (auto vIt:vList)
 	{
@@ -109,7 +121,8 @@ bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, std::vector<w
 			}
 			catch (websocketpp::exception& e)
 			{
-				std::cout << "websocket exception: " << e.what() << std::endl;	
+				std::cout << "websocket exception: " << e.what()<<" this conn will be removed." << std::endl;	
+				RemoveConnection(vIt, NF_WS_EVENT_CLOSE);
 			}
 		}
 	}
@@ -128,7 +141,8 @@ bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, websocketpp::
 		}
 		catch (websocketpp::exception& e)
 		{
-			std::cout << "websocket exception: " << e.what() << std::endl;
+			std::cout << "websocket exception: " << e.what()<<" this conn will be removed." << std::endl;
+			RemoveConnection(hd, NF_WS_EVENT_CLOSE);
 		}
 	}
 	return false;
