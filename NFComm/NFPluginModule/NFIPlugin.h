@@ -66,6 +66,7 @@ public:
 			bool bRet = pModule->Awake();
 			if (!bRet)
 			{
+				std::cout << pModule->strName << std::endl;
 				assert(0);
 			}
 
