@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCPVPModule
@@ -45,6 +46,13 @@ protected:
 	void FindAllTileScene();
 	void InitAllTileSceneRobot();
 
+	int EnterSceneConditionEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
+	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 private:
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
@@ -53,6 +61,7 @@ private:
 	NFILogModule* m_pLogModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
+	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 
 	std::vector<int> mxTileSceneIDList;
