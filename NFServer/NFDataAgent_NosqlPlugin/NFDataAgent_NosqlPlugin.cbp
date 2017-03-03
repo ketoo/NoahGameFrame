@@ -73,6 +73,7 @@
 			</Target>
 		</Build>
 <Unit filename="dllmain.cpp" />
+<Unit filename="NFCAccountRedisModule.cpp" />
 <Unit filename="NFCBigMapRedisModule.cpp" />
 <Unit filename="NFCGuildRedisModule.cpp" />
 <Unit filename="NFCMailRedisModule.cpp" />
@@ -81,6 +82,7 @@
 <Unit filename="NFCRankRedisModule.cpp" />
 <Unit filename="NFCCommonRedisModule.cpp" />
 <Unit filename="NFDataAgent_NosqlPlugin.cpp" />
+<Unit filename="NFCAccountRedisModule.h" />
 <Unit filename="NFCBigMapRedisModule.h" />
 <Unit filename="NFCGuildRedisModule.h" />
 <Unit filename="NFCMailRedisModule.h" />
