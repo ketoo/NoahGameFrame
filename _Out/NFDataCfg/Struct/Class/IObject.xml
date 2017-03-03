@@ -6,7 +6,7 @@
 		<Property Id="SceneID" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="GroupID" Type="int" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="0全局广播"/>
 		<Property Id="ConfigID" Type="string" Public="0" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
-		<Property Id="X" Type="float" Public="1" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc=""/>
+		<Property Id="X" Type="float" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Y" Type="float" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Z" Type="float" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 	</Propertys>

@@ -754,7 +754,7 @@ public class Player {
 	public static final String Sex = "Sex"; // int
 	public static final String Race = "Race"; // int
 	public static final String Camp = "Camp"; // int
-	public static final String LastContainerID = "LastContainerID"; // int
+	public static final String HomeSceneID = "HomeSceneID"; // int
 	public static final String Level = "Level"; // int
 	public static final String ShowName = "ShowName"; // string
 	public static final String PrefabPath = "PrefabPath"; // string
@@ -1032,6 +1032,7 @@ public class Scene {
 	public static final String RelivePos = "RelivePos"; // string
 	public static final String Width = "Width"; // int
 	public static final String SoundList = "SoundList"; // string
+	public static final String Tile = "Tile"; // int
 	public static final String Share = "Share"; // int
 	public static final String CanClone = "CanClone"; // int
 	public static final String ActorID = "ActorID"; // int
