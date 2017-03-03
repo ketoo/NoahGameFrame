@@ -120,12 +120,12 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	return true;
 }
 
-bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos)
+bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->AddSeedObjectInfo(strSeedID, strConfigID, vPos);
+		return pSceneInfo->AddSeedObjectInfo(strSeedID, strConfigID, vPos, nWeight);
 	}
 
 	return false;
@@ -229,19 +229,21 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 	//create monster before the player enter the scene, then we can send monster's data by one message pack
 	//if you create monster after player enter scene, then send monster's data one by one
 	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
-	while (pResource)
+	for (; pResource; pResource = pSceneInfo->mtSceneResourceConfig.Next())
 	{
-		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
+		int nWeight = m_pKernelModule->Random(0, 100);
+		if (nWeight <= pResource->nWeight)
+		{
+			const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
 
-		NFDataList arg;
-		arg << NFrame::IObject::X() << pResource->vSeedPos.X();
-		arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
-		arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
-		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+			NFDataList arg;
+			arg << NFrame::IObject::X() << pResource->vSeedPos.X();
+			arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
+			arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
+			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
-
-		pResource = pSceneInfo->mtSceneResourceConfig.Next();
+			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
+		}
 	}
 
 	return false;
