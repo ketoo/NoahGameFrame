@@ -175,7 +175,6 @@ void NFCGameServerNet_ServerModule::OnClientConnected(const int nAddress)
 
 void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	//在进入游戏之前nPlayerID为其在网关的FD
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
 	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
@@ -187,18 +186,19 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 
 	if (m_pKernelModule->GetObject(nRoleID))
 	{
+		//it should be rebind with proxy's netobject
 		m_pKernelModule->DestroyObject(nRoleID);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
-	NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateBaseInfo>  pGateInfo = GetPlayerGateInfo(nRoleID);
 	if (nullptr != pGateInfo)
 	{
 		RemovePlayerGateInfo(nRoleID);
 	}
 
-	NF_SHARE_PTR<NFCGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = GetGateServerInfoBySockIndex(nSockIndex);
+	NF_SHARE_PTR<NFIGameServerNet_ServerModule::GateServerInfo> pGateServerinfo = GetGateServerInfoBySockIndex(nSockIndex);
 	if (nullptr == pGateServerinfo)
 	{
 		return;
