@@ -9,9 +9,12 @@
 #include "NFCPVPModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCPVPModule::Init()
 {
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
@@ -36,97 +39,23 @@ bool NFCPVPModule::Execute()
 
 bool NFCPVPModule::AfterInit()
 {
+	FindAllTileScene();
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_PVP, this, &NFCPVPModule::OnClientJoinPVP)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_EXIT_PVP, this, &NFCPVPModule::OnClientExitPVP)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnSearchOppnent)) { return false; }
 	
     return true;
 }
 
-bool NFCPVPModule::MatchPVPObject( const NFGUID& self )
-{
-	
-	//const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
-	//if (eLogicState != NLST_FREE)
-	//{
-	//	return false;
-	//}
 
-	
-
-	return true;
-}
-
-bool NFCPVPModule::StartPVPWar( const NFGUID& self )
-{
-	
-	//const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
-	//if (eLogicState != NLST_PVP)
-	//{
-	//	return false;
-	//}
-
- 
- //   mxPVPList.Add(self);
-
- //   if (mxPVPList.Count() < PVPCell::PVPCell_Player_Count)
- //   {
- //       return true;
- //   }
-    
-    //record
-    //switch
-
-    //mxPVPList remove
-
-    
-
-	return true;
-}
-
-bool NFCPVPModule::ExitPVPWar( const NFGUID& self )
-{
-	
-	//const NFLogicStateType eLogicState = (NFLogicStateType)m_pKernelModule->GetPropertyInt(self, "LogicState");
-	//if (eLogicState == NLST_PVP)
-	//{
-	//	m_pKernelModule->SetPropertyInt(self, "LogicState", NLST_FREE);
-	//}
-
-	
- //   mxPVPList.Remove(self);
-
-	return false;
-}
-
-void NFCPVPModule::OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinActivity)
-
-	switch (xMsg.activity_type())
-	{
-		case NFMsg::ReqAckJoinActivity_EGameActivityType_EGAT_PVP:
-			StartPVPWar(nPlayerID);
-			break;
-		default:
-			break;
-	}
-}
-void NFCPVPModule::OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	//CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::reqex)
-
-}
 
 void NFCPVPModule::OnSearchOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	//find a tile map and swap scene
 
-	int nSceneID = 1;
+	int nSceneID = RandomTileScene();
 	std::string strTileData;
-	if (m_pPlayerRedisModule->GetPlayerTileRandomFromCache(nSceneID, strTileData))
+	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, strTileData))
 	{
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
@@ -138,8 +67,44 @@ void NFCPVPModule::OnSearchOppnent(const int nSockIndex, const int nMsgID, const
 
 			//tell client u shoud adjust tile
 			m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nSockIndex);
+
+			return;
 		}
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
+}
+
+void NFCPVPModule::FindAllTileScene()
+{
+	//Tile
+	//mxTileSceneIDList
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
+	{
+		NFList<std::string>& strIdList = xLogicClass->GetIdList();
+		std::string strId;
+		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		{
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Scene::Tile());
+			if (nServerType == 1)
+			{
+				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
+			}
+		}
+	}
+}
+
+void NFCPVPModule::InitAllTileSceneRobot()
+{
+	for (int i = 0; i < mxTileSceneIDList.size(); ++i)
+	{
+		int nSceneID = mxTileSceneIDList[i];
+
+	}
+}
+
+int NFCPVPModule::RandomTileScene()
+{
+	return mxTileSceneIDList.at(m_pKernelModule->Random(0, mxTileSceneIDList.size()));
 }
