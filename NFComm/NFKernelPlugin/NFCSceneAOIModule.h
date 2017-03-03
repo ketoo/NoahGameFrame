@@ -40,7 +40,7 @@ public:
     virtual bool Execute();
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList);
-	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos);
+	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight);
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos);
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex);
 
