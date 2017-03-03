@@ -38,19 +38,14 @@ public:
 
 	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
 	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
+	virtual int GetPlayerHomeSceneID(const NFGUID& self);
 
 	virtual bool LoadPlayerData(const NFGUID& self);
-	virtual int GetPlayerHomeSceneID(const NFGUID& self);
-	virtual NF_SHARE_PTR<NFIPropertyManager> GetPlayerCacheProperty(const NFGUID& self);
-	virtual NF_SHARE_PTR<NFIRecordManager> GetPlayerCacheRecord(const NFGUID& self);
+	virtual bool SavePlayerData(const NFGUID& self);
 
-	virtual bool SavePlayerDataToCache(const NFGUID& self);
-	virtual bool SetPlayerCacheProperty(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
-	virtual bool SetPlayerCacheRecord(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
-
-	virtual bool SavePlayerTileToCache(const int nSceneID, const NFGUID& self, const std::string& strTileData);
-	virtual bool GetPlayerTileFromCache(const int nSceneID, const NFGUID& self, std::string& strTileData);
-	virtual bool GetPlayerTileRandomFromCache(const int nSceneID, std::string& strTileData);
+	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
+	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData);
+	virtual bool LoadPlayerTileRandom(const int nSceneID, std::string& strTileData);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
@@ -69,7 +64,7 @@ private:
 		PlayerDataCache()
 		{
 			nLoadTime = NFDateTime::Now().GetSecond();
-			nHomeSceneID = 1;
+			nHomeSceneID = 0;
 		}
 		int nLoadTime;
 		int nHomeSceneID;
