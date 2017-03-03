@@ -11,6 +11,7 @@
 #include "NFCLogModule.h"
 #include "easylogging++.h"
 #include "NFLogPlugin.h"
+#include "termcolor.hpp"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -145,27 +146,45 @@ bool NFCLogModule::Log(const NF_LOG_LEVEL nll, const char* format, ...)
     switch (nll)
     {
         case NFILogModule::NLL_DEBUG_NORMAL:
-            LOG(DEBUG) << mnLogCountTotal << " | " << pPluginManager->GetAppID()<< " | " << szBuffer;
-            break;
+			{
+				std::cout << termcolor::green;
+				LOG(DEBUG) << mnLogCountTotal << " | " << pPluginManager->GetAppID()<< " | " << szBuffer;
+			}
+			break;
         case NFILogModule::NLL_INFO_NORMAL:
-            LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
-            break;
+			{
+				std::cout << termcolor::green;
+				LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+			}	
+			break;
         case NFILogModule::NLL_WARING_NORMAL:
-            LOG(WARNING) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
-            break;
+			{
+				std::cout << termcolor::yellow;
+				LOG(WARNING) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+			}
+			break;
         case NFILogModule::NLL_ERROR_NORMAL:
-        {
-            LOG(ERROR) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
-            //LogStack();
-        }
-        break;
+			{
+				std::cout << termcolor::red;
+				LOG(ERROR) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+				//LogStack();
+			}
+			break;
         case NFILogModule::NLL_FATAL_NORMAL:
-            LOG(FATAL) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
-            break;
+			{
+				std::cout << termcolor::red;
+				LOG(FATAL) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+			}
+			break;
         default:
-            LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
-            break;
+			{
+				std::cout << termcolor::green;
+				LOG(INFO) << mnLogCountTotal << " | " << pPluginManager->GetAppID() << " | " << szBuffer;
+			}
+			break;
     }
+
+	std::cout<<termcolor::reset;
 
     return true;
 }

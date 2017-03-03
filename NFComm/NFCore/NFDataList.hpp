@@ -507,6 +507,8 @@ public:
 		}
 
 		InnerAppendEx(src, start, end);
+
+		return true;
 	}
     
 	virtual bool Append(const NFData& xData)
@@ -817,6 +819,8 @@ public:
 				return true;
 			}
 		}
+
+		return false;
 	}
 
 	virtual bool Set(const int index, const NFGUID& value)

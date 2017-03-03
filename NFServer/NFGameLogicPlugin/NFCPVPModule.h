@@ -10,6 +10,7 @@
 #define NFC_PVP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
@@ -34,29 +35,27 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual bool MatchPVPObject(const NFGUID& self);
-
-	virtual bool StartPVPWar(const NFGUID& self);
-
-	virtual bool ExitPVPWar(const NFGUID& self);
+	virtual int RandomTileScene();
 
 protected:
-	void OnClientJoinPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientExitPVP(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	
+
 	void OnSearchOppnent(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	
+protected:
+	void FindAllTileScene();
+	void InitAllTileSceneRobot();
+
 private:
+	NFIClassModule* m_pClassModule;
+	NFIElementModule* m_pElementModule;
 	NFINetModule* m_pNetModule;
     NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFISceneProcessModule* m_pSceneProcessModule;
-
-private:
-    NFList<NFGUID> mxPVPList; 
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+
+	std::vector<int> mxTileSceneIDList;
 };
 
 
