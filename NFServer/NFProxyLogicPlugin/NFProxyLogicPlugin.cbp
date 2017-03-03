@@ -66,7 +66,7 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="dllmain.cpp/>
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCProxyLogicModule.cpp" />
 <Unit filename="NFCProxyLogicPlugin.cpp" />
 <Unit filename="NFCProxyLogicModule.h" />

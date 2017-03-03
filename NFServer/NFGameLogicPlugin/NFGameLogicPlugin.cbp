@@ -96,7 +96,7 @@
 <Unit filename="NFCTaskModule.h" />
 <Unit filename="NFCTileModule.h" />
 <Unit filename="NFGameLogicPlugin.h" />
-<Unit filename="dllmain.cpp/>
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCBuffModule.cpp" />
 <Unit filename="NFCCreateRoleModule.cpp" />
 <Unit filename="NFCGSPVPMatchModule.cpp" />
