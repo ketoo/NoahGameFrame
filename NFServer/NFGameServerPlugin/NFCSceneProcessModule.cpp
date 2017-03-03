@@ -173,8 +173,6 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
-
-		return 0;
 	}
 	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
@@ -240,7 +238,8 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
         float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::X().c_str())->value());
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Y().c_str())->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Z().c_str())->value());
-		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ));
+		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
+		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 
 		const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
 		NFDataList xPositionList;
