@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFIAccountRedisModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCCreateRoleModule
@@ -43,8 +44,7 @@ protected:
 	void OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-	std::vector<int> mxTileSceneIDList;
-private:
+	NFIPVPModule* m_pPVPModule;
 	NFINetModule* m_pNetModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
