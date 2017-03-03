@@ -83,7 +83,7 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="dllmain.cpp/>
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCUrlClientModule.cpp" />
 <Unit filename="NFCUrlCodeModule.cpp" />
 <Unit filename="NFUrlPlugin.cpp" />
