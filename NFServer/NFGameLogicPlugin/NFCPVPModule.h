@@ -41,6 +41,8 @@ public:
 protected:
 
 	void OnSearchOppnent(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnStartPVPOppnent(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnEndPVPOppnent(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 	void FindAllTileScene();
