@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName			:    NFCGameServerNet_ServerModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
@@ -988,6 +988,28 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
 		}
 	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCGameServerNet_ServerModule::OnSceneEvent);
+	}
+
+	return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	int nSceneID = newVar.GetInt();
+	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
+
+	NFMsg::ReqAckSwapScene xAckSwapScene;
+	xAckSwapScene.set_scene_id(nSceneID);
+	xAckSwapScene.set_transfer_type(NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL);
+	xAckSwapScene.set_line_id(0);
+	xAckSwapScene.set_x(vRelivePos.X());
+	xAckSwapScene.set_y(vRelivePos.Y());
+	xAckSwapScene.set_z(vRelivePos.Z());
+	
+	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xAckSwapScene, self);
 
 	return 0;
 }

@@ -28,6 +28,7 @@ struct SceneSeedResource
 	std::string strSeedID;
 	std::string strConfigID;
 	NFVector3 vSeedPos;
+	int nWeight;
 };
 
 //SceneID,(SeedID,SeedData)
@@ -155,7 +156,7 @@ public:
         return true;
     }
 
-	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos)
+	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight)
 	{
 		NF_SHARE_PTR<SceneSeedResource> pInfo = mtSceneResourceConfig.GetElement(strSeedID);
 		if (!pInfo)
@@ -164,6 +165,7 @@ public:
 			pInfo->strSeedID = strSeedID;
 			pInfo->strConfigID = strConfigID;
 			pInfo->vSeedPos = vPos;
+			pInfo->nWeight = nWeight;
 			return mtSceneResourceConfig.AddElement(strSeedID, pInfo);
 		}
 
@@ -318,7 +320,7 @@ public:
 	}
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
-	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
+	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
 
