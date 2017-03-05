@@ -54,12 +54,26 @@
 				</Environment>
 			</Target>
 		</Build>
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFCHttpServerModule.cpp" />
 <Unit filename="NFCNet.cpp" />
 <Unit filename="NFCHttpNet.cpp" />
+<Unit filename="NFCNetClientModule.cpp" />
+<Unit filename="NFCNetModule.cpp" />
+<Unit filename="NFCWebsocketModule.cpp" />
+<Unit filename="NFCWS.cpp" />
+<Unit filename="NFNetPlugin.cpp" />
+<Unit filename="NFCHttpServerModule.h" />
 <Unit filename="NFCNet.h" />
+<Unit filename="NFCNetClientModule.h" />
+<Unit filename="NFCNetModule.h" />
+<Unit filename="NFCWebsocketModule.h" />
+<Unit filename="NFCWS.h" />
 <Unit filename="NFIHttpNet.h" />
 <Unit filename="NFINet.h" />
 <Unit filename="NFCHttpNet.h" />
+<Unit filename="NFIWS.h" />
+<Unit filename="NFNetPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

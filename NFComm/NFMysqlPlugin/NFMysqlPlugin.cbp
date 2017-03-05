@@ -68,17 +68,17 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCAsyMysqlModule.cpp" />
-		<Unit filename="NFCAsyMysqlModule.h" />
-		<Unit filename="NFCMysqlDriver.cpp" />
-		<Unit filename="NFCMysqlDriver.h" />
-		<Unit filename="NFCMysqlDriverManager.cpp" />
-		<Unit filename="NFCMysqlDriverManager.h" />
-		<Unit filename="NFCMysqlModule.cpp" />
-		<Unit filename="NFCMysqlModule.h" />
-		<Unit filename="NFMysqlPlugin.cpp" />
-		<Unit filename="NFMysqlPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCAsyMysqlModule.cpp" />
+<Unit filename="NFCMysqlDriver.cpp" />
+<Unit filename="NFCMysqlDriverManager.cpp" />
+<Unit filename="NFCMysqlModule.cpp" />
+<Unit filename="NFMysqlPlugin.cpp" />
+<Unit filename="NFCAsyMysqlModule.h" />
+<Unit filename="NFCMysqlDriver.h" />
+<Unit filename="NFCMysqlDriverManager.h" />
+<Unit filename="NFCMysqlModule.h" />
+<Unit filename="NFMysqlPlugin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
