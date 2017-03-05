@@ -105,6 +105,8 @@ protected:
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 	//////////////////////////////////////////
+	int OnSceneEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
 	//broad the data of argvar to self
 	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
 	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
