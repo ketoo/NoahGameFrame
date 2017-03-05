@@ -20,8 +20,9 @@ bool NFCPVPModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
+	
     return true;
 }
 
@@ -40,6 +41,13 @@ bool NFCPVPModule::Execute()
 bool NFCPVPModule::AfterInit()
 {
 	FindAllTileScene();
+
+	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCPVPModule::EnterSceneConditionEvent);
+
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCPVPModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCPVPModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCPVPModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCPVPModule::AfterLeaveSceneGroupEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnSearchOppnent)) { return false; }
 	
@@ -60,19 +68,41 @@ void NFCPVPModule::OnSearchOppnent(const int nSockIndex, const int nMsgID, const
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
 		{
+			m_pSceneProcessModule->RequestEnterScene(nPlayerID, nSceneID, 0, NFDataList());
+
+			//tell client u shoud adjust tile
+			m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nSockIndex);
+			
 			//tell client u should load resources
 			NFMsg::AckSearchOppnent xAckData;
 			xAckData.set_scene_id(nSceneID);
 			m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex);
-
-			//tell client u shoud adjust tile
-			m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nSockIndex);
 
 			return;
 		}
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
+}
+
+void NFCPVPModule::OnStartPVPOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	//set a sign = 1 or oppnent id
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::GuildID(), NFGUID());
+	
+}
+
+void NFCPVPModule::OnEndPVPOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	//get oppnent
+	//calculate how many monster has been killed
+	//calculate how many building has been destroyed
+	//calculate how much experice and how many money
+
+	//tell client the end information
+	//set oppnent 0
 }
 
 void NFCPVPModule::FindAllTileScene()
@@ -102,6 +132,31 @@ void NFCPVPModule::InitAllTileSceneRobot()
 		int nSceneID = mxTileSceneIDList[i];
 
 	}
+}
+
+int NFCPVPModule::EnterSceneConditionEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCPVPModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCPVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCPVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
 }
 
 int NFCPVPModule::RandomTileScene()
