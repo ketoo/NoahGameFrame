@@ -68,21 +68,41 @@ void NFCPVPModule::OnSearchOppnent(const int nSockIndex, const int nMsgID, const
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
 		{
-			//tell client u should load resources
-			NFMsg::AckSearchOppnent xAckData;
-			xAckData.set_scene_id(nSceneID);
-			m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex);
-
 			m_pSceneProcessModule->RequestEnterScene(nPlayerID, nSceneID, 0, NFDataList());
 
 			//tell client u shoud adjust tile
 			m_pNetModule->SendMsgPB(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nSockIndex);
+			
+			//tell client u should load resources
+			NFMsg::AckSearchOppnent xAckData;
+			xAckData.set_scene_id(nSceneID);
+			m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nSockIndex);
 
 			return;
 		}
 	}
 
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
+}
+
+void NFCPVPModule::OnStartPVPOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	//set a sign = 1 or oppnent id
+	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::GuildID(), NFGUID());
+	
+}
+
+void NFCPVPModule::OnEndPVPOppnent(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	//get oppnent
+	//calculate how many monster has been killed
+	//calculate how many building has been destroyed
+	//calculate how much experice and how many money
+
+	//tell client the end information
+	//set oppnent 0
 }
 
 void NFCPVPModule::FindAllTileScene()
