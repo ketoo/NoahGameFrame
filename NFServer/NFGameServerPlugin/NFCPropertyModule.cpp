@@ -382,7 +382,7 @@ bool NFCPropertyModule::EnoughSP(const NFGUID& self, const NFINT64& nValue)
     return false;
 }
 
-bool NFCPropertyModule::AddMoney(const NFGUID& self, const NFINT64& nValue)
+bool NFCPropertyModule::AddGold(const NFGUID& self, const NFINT64& nValue)
 {
     if (nValue <= 0)
     {
@@ -396,7 +396,7 @@ bool NFCPropertyModule::AddMoney(const NFGUID& self, const NFINT64& nValue)
     return false;
 }
 
-bool NFCPropertyModule::ConsumeMoney(const NFGUID& self, const NFINT64& nValue)
+bool NFCPropertyModule::ConsumeGold(const NFGUID& self, const NFINT64& nValue)
 {
     if (nValue <= 0)
     {
@@ -415,7 +415,7 @@ bool NFCPropertyModule::ConsumeMoney(const NFGUID& self, const NFINT64& nValue)
     return false;
 }
 
-bool NFCPropertyModule::EnoughMoney(const NFGUID& self, const NFINT64& nValue)
+bool NFCPropertyModule::EnoughGold(const NFGUID& self, const NFINT64& nValue)
 {
     NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
