@@ -77,20 +77,20 @@
     <ClInclude Include="NFCTaskModule.h">
       <Filter>NFTaskmodule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCGSTeamModule.h">
-      <Filter>NFTeamModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCSkillModule.h">
       <Filter>NFSkillModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGSPVPMatchModule.h">
-      <Filter>NFPVPModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCTileModule.h">
       <Filter>NFMapModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCTeamPVPModule.h">
+      <Filter>NFPVPModule</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCTeamModule.h">
+      <Filter>NFTeamModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -129,20 +129,20 @@
     <ClCompile Include="NFCTaskModule.cpp">
       <Filter>NFTaskmodule</Filter>
     </ClCompile>
-    <ClCompile Include="NFCGSTeamModule.cpp">
-      <Filter>NFTeamModule</Filter>
-    </ClCompile>
     <ClCompile Include="NFCSkillModule.cpp">
       <Filter>NFSkillModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGSPVPMatchModule.cpp">
-      <Filter>NFPVPModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCTileModule.cpp">
       <Filter>NFMapModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTeamPVPModule.cpp">
+      <Filter>NFPVPModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCTeamModule.cpp">
+      <Filter>NFTeamModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
