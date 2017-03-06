@@ -2557,12 +2557,12 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 money = 1;
-  inline bool has_money() const;
-  inline void clear_money();
-  static const int kMoneyFieldNumber = 1;
-  inline ::google::protobuf::int32 money() const;
-  inline void set_money(::google::protobuf::int32 value);
+  // required int32 gold = 1;
+  inline bool has_gold() const;
+  inline void clear_gold();
+  static const int kGoldFieldNumber = 1;
+  inline ::google::protobuf::int32 gold() const;
+  inline void set_gold(::google::protobuf::int32 value);
 
   // required int32 exp = 2;
   inline bool has_exp() const;
@@ -2592,8 +2592,8 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
  private:
-  inline void set_has_money();
-  inline void clear_has_money();
+  inline void set_has_gold();
+  inline void clear_has_gold();
   inline void set_has_exp();
   inline void clear_has_exp();
   inline void set_has_diamond();
@@ -2601,7 +2601,7 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 money_;
+  ::google::protobuf::int32 gold_;
   ::google::protobuf::int32 exp_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
   ::google::protobuf::int32 diamond_;
@@ -11285,26 +11285,26 @@ inline void ReqAckStartBattle::set_diamond(::google::protobuf::int32 value) {
 
 // ReqAckEndBattle
 
-// required int32 money = 1;
-inline bool ReqAckEndBattle::has_money() const {
+// required int32 gold = 1;
+inline bool ReqAckEndBattle::has_gold() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckEndBattle::set_has_money() {
+inline void ReqAckEndBattle::set_has_gold() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckEndBattle::clear_has_money() {
+inline void ReqAckEndBattle::clear_has_gold() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqAckEndBattle::clear_money() {
-  money_ = 0;
-  clear_has_money();
+inline void ReqAckEndBattle::clear_gold() {
+  gold_ = 0;
+  clear_has_gold();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::money() const {
-  return money_;
+inline ::google::protobuf::int32 ReqAckEndBattle::gold() const {
+  return gold_;
 }
-inline void ReqAckEndBattle::set_money(::google::protobuf::int32 value) {
-  set_has_money();
-  money_ = value;
+inline void ReqAckEndBattle::set_gold(::google::protobuf::int32 value) {
+  set_has_gold();
+  gold_ = value;
 }
 
 // required int32 exp = 2;

@@ -387,6 +387,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_OPPNENT", Value=1223)]
       EGMI_ACK_END_OPPNENT = 1223,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=1224)]
+      EGMI_REQ_SEARCH_OPPNENT = 1224,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1225)]
+      EGMI_ACK_SEARCH_OPPNENT = 1225,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=1230)]
       EGMI_REQ_MOVE = 1230,
             
@@ -446,18 +452,6 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=1257)]
       EGMI_REQ_COMPELETE_TASK = 1257,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=1280)]
-      EGMI_REQ_SEARCH_OPPNENT = 1280,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1281)]
-      EGMI_ACK_SEARCH_OPPNENT = 1281,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=1282)]
-      EGMT_REQ_START_OPPNENT = 1282,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=1283)]
-      EGMT_ACK_START_OPPNENT = 1283,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=1290)]
       EGMI_ACK_ONLINE_NOTIFY = 1290,
