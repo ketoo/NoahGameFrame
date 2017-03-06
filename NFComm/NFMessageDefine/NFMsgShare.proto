@@ -190,7 +190,7 @@ message ReqAckEndBattle
 {
 	//下发的时候则为道具列表
 	//获得的金币等列表
-    required int32 money            = 1; // 副本获得的金币
+    required int32 gold            = 1; // 副本获得的金币
     required int32 exp              = 2; // 副本获得的经验
     required int32 diamond          = 3; // 副本获得的zhuanshi
     repeated ItemStruct item_list   = 4; // 副本获得的道具列表
