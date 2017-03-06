@@ -88,7 +88,6 @@ private:
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
-    NFILoginLogicModule* m_pLoginLogicModule;
 	NFILoginToMasterModule* m_pLoginToMasterModule;
 };
 
