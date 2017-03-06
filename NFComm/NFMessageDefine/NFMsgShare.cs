@@ -603,6 +603,16 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckHomeScene")]
+  public partial class ReqAckHomeScene : global::ProtoBuf.IExtensible
+  {
+    public ReqAckHomeScene() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemStruct")]
   public partial class ItemStruct : global::ProtoBuf.IExtensible
   {
@@ -645,6 +655,30 @@ namespace NFMsg
     {
       get { return _currency_count; }
       set { _currency_count = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckStartBattle")]
+  public partial class ReqAckStartBattle : global::ProtoBuf.IExtensible
+  {
+    public ReqAckStartBattle() {}
+    
+    private int _gold;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int gold
+    {
+      get { return _gold; }
+      set { _gold = value; }
+    }
+    private int _diamond;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"diamond", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int diamond
+    {
+      get { return _diamond; }
+      set { _diamond = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

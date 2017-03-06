@@ -221,19 +221,19 @@ bool NFCPlayerRedisModule::LoadPlayerTile(const int nSceneID, const NFGUID & sel
 	return false;
 }
 
-bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, std::string & strTileData)
+bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string & strTileData)
 {
 	std::string strTileKey = m_pCommonRedisModule->GetTileCacheKey(nSceneID);
 	NF_SHARE_PTR<NFINoSqlDriver> xNoSqlDriver = m_pNoSqlModule->GetDriverBySuitRandom();
 	if (xNoSqlDriver && xNoSqlDriver->Exists(strTileKey))
 	{
-		//need t cache this keys
+		//need to cache this keys
 		std::vector<std::string> vKeys;
 		if (xNoSqlDriver->HKeys(strTileKey, vKeys))
 		{
 			int nKeyIndex = m_pKernelModule->Random(0, vKeys.size());
 			std::string strKey = vKeys[nKeyIndex];
-			if (xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
+			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
 			{
 				return true;
 			}

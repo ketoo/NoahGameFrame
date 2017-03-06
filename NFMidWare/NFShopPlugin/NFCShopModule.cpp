@@ -75,13 +75,13 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 	const int nSteel = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Steel());
 	
 	if (!m_pPropertyModule->EnoughDiamond(self, nDiamond)
-		&& !m_pPropertyModule->EnoughMoney(self, nGold))
+		&& !m_pPropertyModule->EnoughGold(self, nGold))
 	{
 		return false;
 	}
 	
 	if (!m_pPropertyModule->ConsumeDiamond(self, nDiamond)
-		&& !m_pPropertyModule->ConsumeMoney(self, nGold))
+		&& !m_pPropertyModule->ConsumeGold(self, nGold))
 	{
 		return false;
 	}
@@ -103,7 +103,7 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 		break;
 		case NFMsg::EShopType::EST_GOLD:
 		{
-			m_pPropertyModule->AddMoney(self, nShopCount);
+			m_pPropertyModule->AddGold(self, nShopCount);
 		}
 		break;
 		default:
