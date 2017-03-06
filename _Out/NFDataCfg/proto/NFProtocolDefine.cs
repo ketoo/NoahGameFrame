@@ -813,6 +813,10 @@ public class Player
 	public static readonly String GateID = "GateID"; // int
 	public static readonly String GuildID = "GuildID"; // object
 	public static readonly String TeamID = "TeamID"; // object
+	public static readonly String ViewOppnent = "ViewOppnent"; // object
+	public static readonly String FightOppnent = "FightOppnent"; // object
+	public static readonly String GambleGold = "GambleGold"; // int
+	public static readonly String GambleDiamond = "GambleDiamond"; // int
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
