@@ -153,7 +153,8 @@ enum EGameMsgID
 	EGMI_ACK_START_OPPNENT						= 1221;
 	EGMI_REQ_END_OPPNENT						= 1222;
 	EGMI_ACK_END_OPPNENT						= 1223;
-	
+	EGMI_REQ_SEARCH_OPPNENT                     = 1224;
+	EGMI_ACK_SEARCH_OPPNENT                     = 1225;
 	
 	EGMI_REQ_MOVE								= 1230;
 	EGMI_ACK_MOVE								= 1231;
@@ -179,10 +180,6 @@ enum EGameMsgID
 	EGMI_REQ_ACCEPT_TASK						= 1256;
 	EGMI_REQ_COMPELETE_TASK						= 1257;
 
-	EGMI_REQ_SEARCH_OPPNENT                     = 1280; //
-	EGMI_ACK_SEARCH_OPPNENT                     = 1281; //
-	EGMT_REQ_START_OPPNENT                      = 1282; //
-	EGMT_ACK_START_OPPNENT                      = 1283; //
 	                                              
 	                                              
 	EGMI_ACK_ONLINE_NOTIFY						= 1290; //

@@ -690,12 +690,12 @@ namespace NFMsg
   {
     public ReqAckEndBattle() {}
     
-    private int _money;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"money", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int money
+    private int _gold;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int gold
     {
-      get { return _money; }
-      set { _money = value; }
+      get { return _gold; }
+      set { _gold = value; }
     }
     private int _exp;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
