@@ -1,35 +1,35 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCPVPMatchModule.h
-//    @Author           :    Chuanbo.Guo
-//    @Date             :    2015-01-02
-//    @Module           :    NFCPVPMatchModule
+//    @FileName         :    NFCTeamPVPModule.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2017-03-06
+//    @Module           :    NFCTeamPVPModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_GS_PVP_MATCH_MODULE_H
-#define NFC_GS_PVP_MATCH_MODULE_H
+#ifndef NFC_TEAM_PVP_MODULE_H
+#define NFC_TEAM_PVP_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPVPRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFITeamModule.h"
-#include "NFComm/NFPluginModule/NFIGSPVPMatchModule.h"
+#include "NFComm/NFPluginModule/NFITeamPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIGSSwichServerModule.h"
 
-class NFCGSPVPMatchModule
-    : public NFIGSPVPMatchModule
+class NFCTeamPVPModule
+    : public NFITeamPVPModule
 {
 public:
-    NFCGSPVPMatchModule( NFIPluginManager* p )
+	NFCTeamPVPModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFCGSPVPMatchModule() {};
+    virtual ~NFCTeamPVPModule() {};
 
     virtual bool Init();
     virtual bool Shut();
@@ -37,10 +37,6 @@ public:
 	virtual bool AfterInit();
 
 protected:
-	void OnReqPVPMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnAckPVPMatchProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqCreatePVPEctyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnAckCreatePVPEctyProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFINetModule* m_pNetModule;

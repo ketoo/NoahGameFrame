@@ -1,18 +1,18 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFIPVPMatchRedisModule.h
+//    @FileName         :    NFIPVPRedisModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-12-15
-//    @Module           :    NFIPVPMatchRedisModule
+//    @Module           :    NFIPVPRedisModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_PVPMATCH_REDIS_MODULE_H
-#define NFI_PVPMATCH_REDIS_MODULE_H
+#ifndef NFI_PVP_REDIS_MODULE_H
+#define NFI_PVP_REDIS_MODULE_H
 
 #include "NFIModule.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 
-class NFIPVPMatchRedisModule
+class NFIPVPRedisModule
     : public NFIModule
 {
 
