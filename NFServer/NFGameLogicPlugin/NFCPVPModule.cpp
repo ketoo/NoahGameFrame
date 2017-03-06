@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName         :    NFCPVPModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2017-02-02
@@ -119,13 +119,19 @@ void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int n
 
 	int nGambleGold = xMsg.gold();
 	int nGambleDiamond = xMsg.diamond();
-	if (nGambleGold < 0 || nGambleDiamond < 0)
+	if (nGambleGold > 0)
 	{
-		return;
+		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleGold(), nGambleGold);
+	}
+	if (nGambleDiamond > 0)
+	{
+		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleDiamond(), nGambleDiamond);
 	}
 
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleGold(), nGambleGold);
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleDiamond(), nGambleDiamond);
+	NFMsg::ReqAckStartBattle xReqAckStartBattle;
+	xReqAckStartBattle.set_gold(nGambleGold);
+	xReqAckStartBattle.set_diamond(nGambleDiamond);
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_START_OPPNENT, xReqAckStartBattle, nPlayerID);
 }
 
 void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -146,6 +152,13 @@ void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMs
 	
 	m_pPropertyModule->AddGold(nPlayerID, nGambleGold);
 	m_pPropertyModule->AddDiamond(nPlayerID, nGambleDiamond);
+
+	NFMsg::ReqAckEndBattle xReqAckEndBattle;
+	xReqAckEndBattle.set_gold(nGambleGold);
+	xReqAckEndBattle.set_exp(0);
+	xReqAckEndBattle.set_diamond(nGambleDiamond);
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, nPlayerID);
 }
 
 void NFCPVPModule::FindAllTileScene()
