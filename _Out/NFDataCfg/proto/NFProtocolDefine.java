@@ -785,6 +785,10 @@ public class Player {
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
 	public static final String TeamID = "TeamID"; // object
+	public static final String ViewOppnent = "ViewOppnent"; // object
+	public static final String FightOppnent = "FightOppnent"; // object
+	public static final String GambleGold = "GambleGold"; // int
+	public static final String GambleDiamond = "GambleDiamond"; // int
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int

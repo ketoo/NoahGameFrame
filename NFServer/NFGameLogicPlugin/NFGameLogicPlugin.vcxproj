@@ -104,19 +104,19 @@
   <ItemGroup>
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCCreateRoleModule.h" />
-    <ClInclude Include="NFCGSPVPMatchModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCEquipModule.h" />
     <ClInclude Include="NFCEquipPropertyModule.h" />
     <ClInclude Include="NFCGmModule.h" />
     <ClInclude Include="NFCGSSwichServerModule.h" />
-    <ClInclude Include="NFCGSTeamModule.h" />
     <ClInclude Include="NFCMailModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCRankModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFCTaskModule.h" />
+    <ClInclude Include="NFCTeamModule.h" />
+    <ClInclude Include="NFCTeamPVPModule.h" />
     <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
@@ -131,19 +131,19 @@
     </ClCompile>
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCCreateRoleModule.cpp" />
-    <ClCompile Include="NFCGSPVPMatchModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCEquipModule.cpp" />
     <ClCompile Include="NFCEquipPropertyModule.cpp" />
     <ClCompile Include="NFCGmModule.cpp" />
     <ClCompile Include="NFCGSSwichServerModule.cpp" />
-    <ClCompile Include="NFCGSTeamModule.cpp" />
     <ClCompile Include="NFCMailModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCRankModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFCTaskModule.cpp" />
+    <ClCompile Include="NFCTeamModule.cpp" />
+    <ClCompile Include="NFCTeamPVPModule.cpp" />
     <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
