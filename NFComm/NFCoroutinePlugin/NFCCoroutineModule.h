@@ -18,6 +18,9 @@ public:
 	NFCCoroutineModule(NFIPluginManager* p);
 	virtual ~NFCCoroutineModule();
 
+
+	virtual bool StartCoroutine(TaskFunction const& fn);
+
 	virtual bool Init();
 	virtual bool AfterInit();
 	virtual bool BeforeShut();
@@ -28,7 +31,15 @@ private:
 	void Schedule();
 	void StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
 	void ResumeCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
+	NFINT64 CreateNewContextID();
+
 private:
+	NFINT64 mnIndex;
+
+#ifndef _MSC_VER
+	ucontext_t mxCtxMain;
+#endif
+
 	std::map<NFINT64, NF_SHARE_PTR<NFContextData>> mxCoroutineMap;
 };
 

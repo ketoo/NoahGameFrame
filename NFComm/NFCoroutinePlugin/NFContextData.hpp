@@ -41,8 +41,8 @@ public:
 	}
 
 
-private:
 	ucontext_t mxCtx;
+
 #endif
 	NFContextState GetState() { return meState; };
 	void SetState(NFContextState state) { meState = state; };
