@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCPVPMatchRedisModule.h
+//    @FileName			:    NFCPVPRedisModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-10-03
-//    @Module           :    NFCPVPMatchRedisModule
+//    @Module           :    NFCPVPRedisModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_PVPMATCH_REDIS_MODULE_H
-#define NFC_PVPMATCH_REDIS_MODULE_H
+#ifndef NFC_PVP_REDIS_MODULE_H
+#define NFC_PVP_REDIS_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -15,13 +15,13 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
-#include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPVPRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
-class NFCPVPMatchRedisModule : public NFIPVPMatchRedisModule
+class NFCPVPRedisModule : public NFIPVPRedisModule
 {
 public:
-	NFCPVPMatchRedisModule(NFIPluginManager* p);
+	NFCPVPRedisModule(NFIPluginManager* p);
 
 	virtual bool Init();
 	virtual bool Shut();

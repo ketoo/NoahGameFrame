@@ -116,8 +116,8 @@ enum EGameMsgID
 	EGMI_REQ_SWAP_GAME							= 154;			//
 	EGMI_REQ_SWAP_SCENE							= 155;			//
 	EGMI_ACK_SWAP_SCENE							= 156;			//
-	EGMI_REQ_END_BATTLE							= 157;			//
-	EGMI_ACK_END_BATTLE							= 158;			//
+	EGMI_REQ_SWAP_HOME_SCENE					= 157;			//
+	EGMI_ACK_SWAP_HOME_SCENE					= 158;			//
 
 	EGMI_REQ_ENTER_GAME_FINISH					= 159;			//
 	EGMI_ACK_ENTER_GAME_FINISH					= 160;			//
@@ -149,6 +149,13 @@ enum EGameMsgID
 	EGMI_ACK_RECORD_CLEAR						= 250;
 	EGMI_ACK_RECORD_SORT						= 251;
 
+	EGMI_REQ_START_OPPNENT						= 1220;
+	EGMI_ACK_START_OPPNENT						= 1221;
+	EGMI_REQ_END_OPPNENT						= 1222;
+	EGMI_ACK_END_OPPNENT						= 1223;
+	EGMI_REQ_SEARCH_OPPNENT                     = 1224;
+	EGMI_ACK_SEARCH_OPPNENT                     = 1225;
+	
 	EGMI_REQ_MOVE								= 1230;
 	EGMI_ACK_MOVE								= 1231;
 	EGMI_REQ_MOVE_IMMUNE						= 1232;
@@ -172,15 +179,7 @@ enum EGameMsgID
 	EGMI_REQ_PICK_ITEM							= 1255;
 	EGMI_REQ_ACCEPT_TASK						= 1256;
 	EGMI_REQ_COMPELETE_TASK						= 1257;
-	                                              
-	EGMI_REQ_JOIN_PVP                           = 1260; //
-	EGMI_REQ_EXIT_PVP                           = 1261; //
-	EGMT_ACK_START_PVP                          = 1262; //
-	                                              
-	EGMI_REQ_SEARCH_OPPNENT                     = 1280; //
-	EGMI_ACK_SEARCH_OPPNENT                     = 1281; //
-	EGMT_REQ_START_OPPNENT                      = 1282; //
-	EGMT_ACK_START_OPPNENT                      = 1283; //
+
 	                                              
 	                                              
 	EGMI_ACK_ONLINE_NOTIFY						= 1290; //
@@ -317,12 +316,7 @@ enum EGameMsgID
 	EGMI_REQ_CMD_RECORD_FLOAT					= 10007;			//
 	EGMI_REQ_CMD_NORMAL							= 10008;			//
 	
-		
-	EGMI_REQ_PVPAPPLYMACTCH						= 10100; 	//
-	EGMI_ACK_PVPAPPLYMACTCH						= 10101; 	//
-	
-	EGMI_REQ_CREATEPVPECTYPE					= 10102; 	//
-	EGMI_ACK_CREATEPVPECTYPE					= 10103; 	//
+
 	EGMI_REQ_QUERY_SERVER_STATUS                 = 10200;
 	
 	/////////////////////Base SLG MSG/////////////////////////////////////
