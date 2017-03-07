@@ -60,6 +60,7 @@ protected:
 
 	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
@@ -80,6 +81,7 @@ protected:
 
 	int BeforeLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int OnSwapSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int BeforeEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
@@ -111,6 +113,7 @@ private:
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtEnterSceneConditionCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeEnterSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterEnterSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtOnSwapSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeLeaveSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterLeaveSceneCallback;
 private:
