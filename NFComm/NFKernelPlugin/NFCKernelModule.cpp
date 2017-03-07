@@ -1020,11 +1020,13 @@ bool NFCKernelModule::ReleaseGroupScene(const int nSceneID, const int nGroupID)
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-		m_pSceneModule->DestroySceneNPC(nSceneID, nGroupID);
+		if (nGroupID > 0)
+		{
+			m_pSceneModule->DestroySceneNPC(nSceneID, nGroupID);
 
-		pSceneInfo->RemoveElement(nGroupID);
+			pSceneInfo->RemoveElement(nGroupID);
+		}
 	}
-
 
     return false;
 }
