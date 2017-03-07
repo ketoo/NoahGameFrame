@@ -238,14 +238,16 @@ int main(int argc, char* argv[])
 
     ProcessParameter(argc, argv);
 
+	PrintfLogo();
+	CreateBackThread();
+
 	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
 	NFCPluginManager::GetSingletonPtr()->AfterInit();
 	NFCPluginManager::GetSingletonPtr()->CheckConfig();
 	NFCPluginManager::GetSingletonPtr()->ReadyExecute();
 
-	PrintfLogo();
-    CreateBackThread();
+	
 
     while (!bExitApp)
     {

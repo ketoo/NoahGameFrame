@@ -62,7 +62,6 @@ private:
 	NFINT64 mLastReportTime;
     NFMapEx<int, NFMsg::ServerInfoReport> mWorldMap;
 
-    NFILoginLogicModule* m_pLoginLogicModule;
     NFILoginNet_ServerModule* m_pLoginNet_ServerModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;

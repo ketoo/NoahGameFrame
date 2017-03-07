@@ -42,6 +42,7 @@ return false; \
 
 NFCNoSqlDriver::NFCNoSqlDriver()
 {
+	mstrNoExistKey = "nonexistent";
 	mbEnable = false;
 	m_pNoSqlClient = NULL;
 }
@@ -199,7 +200,10 @@ const bool NFCNoSqlDriver::Get(const std::string & strKey, std::string & strValu
 	try
 	{
 		strValue = m_pNoSqlClient->get(strKey);
-		return true;
+		if (std::string::npos == strValue.find(mstrNoExistKey))
+		{
+			return true;
+		}
 	}
 
 	REDIS_CATCH(__FUNCTION__, __LINE__);
@@ -271,7 +275,10 @@ const bool NFCNoSqlDriver::HGet(const std::string & strKey, const std::string & 
 	try
 	{
 		strValue = m_pNoSqlClient->hget(strKey, strField);
-		return true;
+		if (std::string::npos == strValue.find(mstrNoExistKey))
+		{
+			return true;
+		}
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
@@ -309,7 +316,10 @@ const bool NFCNoSqlDriver::HMGet(const std::string & strKey, const std::vector<s
 	try
 	{
 		m_pNoSqlClient->hmget(strKey, fieldVec, valueVec);
-
+		//if (std::string::npos == strValue.find(mstrNoExistKey))
+		//{
+		//	return true;
+		//}
 		return fieldVec.size() == valueVec.size();
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
@@ -394,6 +404,10 @@ const bool NFCNoSqlDriver::HValues(const std::string & strKey, std::vector<std::
 	try
 	{
 		m_pNoSqlClient->hvals(strKey, valueVec);
+		//if (std::string::npos == strValue.find(mstrNoExistKey))
+		//{
+		//	return true;
+		//}
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);

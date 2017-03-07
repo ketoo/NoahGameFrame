@@ -300,11 +300,11 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SWAP_SCENE", Value=156)]
       EGMI_ACK_SWAP_SCENE = 156,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_END_BATTLE", Value=157)]
-      EGMI_REQ_END_BATTLE = 157,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SWAP_HOME_SCENE", Value=157)]
+      EGMI_REQ_SWAP_HOME_SCENE = 157,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_BATTLE", Value=158)]
-      EGMI_ACK_END_BATTLE = 158,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SWAP_HOME_SCENE", Value=158)]
+      EGMI_ACK_SWAP_HOME_SCENE = 158,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ENTER_GAME_FINISH", Value=159)]
       EGMI_REQ_ENTER_GAME_FINISH = 159,
@@ -375,6 +375,24 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=251)]
       EGMI_ACK_RECORD_SORT = 251,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_START_OPPNENT", Value=1220)]
+      EGMI_REQ_START_OPPNENT = 1220,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_START_OPPNENT", Value=1221)]
+      EGMI_ACK_START_OPPNENT = 1221,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_END_OPPNENT", Value=1222)]
+      EGMI_REQ_END_OPPNENT = 1222,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_END_OPPNENT", Value=1223)]
+      EGMI_ACK_END_OPPNENT = 1223,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=1224)]
+      EGMI_REQ_SEARCH_OPPNENT = 1224,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1225)]
+      EGMI_ACK_SEARCH_OPPNENT = 1225,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=1230)]
       EGMI_REQ_MOVE = 1230,
             
@@ -434,27 +452,6 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_COMPELETE_TASK", Value=1257)]
       EGMI_REQ_COMPELETE_TASK = 1257,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_JOIN_PVP", Value=1260)]
-      EGMI_REQ_JOIN_PVP = 1260,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_EXIT_PVP", Value=1261)]
-      EGMI_REQ_EXIT_PVP = 1261,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_PVP", Value=1262)]
-      EGMT_ACK_START_PVP = 1262,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SEARCH_OPPNENT", Value=1280)]
-      EGMI_REQ_SEARCH_OPPNENT = 1280,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1281)]
-      EGMI_ACK_SEARCH_OPPNENT = 1281,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_REQ_START_OPPNENT", Value=1282)]
-      EGMT_REQ_START_OPPNENT = 1282,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMT_ACK_START_OPPNENT", Value=1283)]
-      EGMT_ACK_START_OPPNENT = 1283,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ONLINE_NOTIFY", Value=1290)]
       EGMI_ACK_ONLINE_NOTIFY = 1290,
@@ -731,18 +728,6 @@ namespace NFMsg
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_NORMAL", Value=10008)]
       EGMI_REQ_CMD_NORMAL = 10008,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_PVPAPPLYMACTCH", Value=10100)]
-      EGMI_REQ_PVPAPPLYMACTCH = 10100,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_PVPAPPLYMACTCH", Value=10101)]
-      EGMI_ACK_PVPAPPLYMACTCH = 10101,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CREATEPVPECTYPE", Value=10102)]
-      EGMI_REQ_CREATEPVPECTYPE = 10102,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_CREATEPVPECTYPE", Value=10103)]
-      EGMI_ACK_CREATEPVPECTYPE = 10103,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_QUERY_SERVER_STATUS", Value=10200)]
       EGMI_REQ_QUERY_SERVER_STATUS = 10200,

@@ -68,7 +68,7 @@ void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const ch
 		pTile->set_opr(nOpr);
 	}
 
-
+	SaveTileData(nPlayerID);
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, nPlayerID);
 }
 
@@ -106,7 +106,7 @@ bool NFCTileModule::AddTile(const NFGUID & self, const int nX, const int nY, con
 	xTileState->y = nY;
 	xTileState->state = nOpr;
 	//save
-	SaveTileData(self);
+	//SaveTileData(self);
 
 	return true;
 }
@@ -164,11 +164,11 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 		}
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 	std::string strData;
 	if (xData.SerializeToString(&strData))
 	{
-		return m_pPlayerRedisModule->SavePlayerTileToCache(nSceneID, self, strData);
+		return m_pPlayerRedisModule->SavePlayerTile(nSceneID, self, strData);
 	}
 
 	return false;
@@ -176,7 +176,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 
 bool NFCTileModule::LoadTileData(const NFGUID & self)
 {
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 	LoadTileData(self, nSceneID);
 
 	return false;
@@ -187,7 +187,7 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 	mxTileData.RemoveElement(self);
 
 	std::string strData;
-	if (m_pPlayerRedisModule->GetPlayerTileFromCache(nSceneID, self, strData))
+	if (m_pPlayerRedisModule->LoadPlayerTile(nSceneID, self, strData))
 	{
 		NFMsg::AckMiningTitle xData;
 		if (xData.ParseFromString(strData))
@@ -247,9 +247,9 @@ int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 	{
 		//cannot save tile here, because player maybe offline in other people scene
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT == eClassEvent)
 	{
-		//load
+		//preload at first, then attach
 		LoadTileData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH == eClassEvent)
