@@ -15,6 +15,8 @@
 #include <stddef.h>
 #include <functional>
 #include <exception>
+#include <iostream>
+#include <ucontext.h>
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFICoroutineModule.h"
 
@@ -30,7 +32,7 @@ class NFContextData
 {
 public:
 #ifndef _MSC_VER
-	NFContextData(NFICoroutineModule* pCoroutineModule, ucontext_t ctx)
+	NFContextData(NFICoroutineModule* pCoroutineModule)
 	{
 		meState = NFContextState::NFCOROUTINE_READY;
 		mnOutTime = 60 * 1000;
@@ -41,7 +43,9 @@ public:
 	}
 
 
-	ucontext_t mxCtx;
+
+    ucontext_t ctx_func;
+    ucontext_t ctx_resume;
 
 #endif
 	NFContextState GetState() { return meState; };
