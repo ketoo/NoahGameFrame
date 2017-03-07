@@ -10,6 +10,48 @@
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
+static char g_stack[2048];
+static ucontext_t ctx_main;
+static NF_SHARE_PTR<NFContextData> xConTextPtr = nullptr;
+//void* func(void* a_pObj)
+void func()
+{
+    //WS_T_P_CONTROL_T* pObj = (WS_T_P_CONTROL_T*)a_pObj;
+    // do something.
+    cout << "enter func" << endl;
+
+    sleep(2);
+
+    if (xConTextPtr)
+    {
+        xConTextPtr->SetState(NFContextState::NFCOROUTINE_COMPLETED);
+
+        setcontext(&ctx_main);
+    }
+}
+
+int main()
+{
+    /*
+    ucontext_t context;
+
+    getcontext(&context);
+    puts("Hello world");
+    sleep(5);
+    setcontext(&context);
+*/
+    NFCCoroutineModule xCCoroutineModule(nullptr);
+
+
+    while(1)
+    {
+        sleep(1);
+        xCCoroutineModule.Execute();
+
+    }
+
+    return 0;
+}
 
 NFCCoroutineModule::NFCCoroutineModule(NFIPluginManager* p)
 {
@@ -21,8 +63,30 @@ NFCCoroutineModule::~NFCCoroutineModule()
 {
 }
 
+
 bool NFCCoroutineModule::Execute()
 {
+
+    static bool bInit = false;
+    if (!bInit)
+    {
+        bInit = true;
+        getcontext(&ctx_main);
+    }
+
+    static int iindex  = 0;
+    if (iindex < 3)
+    {
+        iindex += 1;
+
+        std::cout << "StartCoroutine begin" << std::endl;
+        StartCoroutine(&func);
+        std::cout << "StartCoroutine end" << std::endl;
+    }
+
+    Schedule();
+
+
 
 	return true;
 }
@@ -56,7 +120,7 @@ void NFCCoroutineModule::Schedule()
 		break;
 		case NFContextState::NFCOROUTINE_COMPLETED:
 		{
-			ResumeCoroutine(it->second);
+			EndCoroutine(it->second);
 		}
 		break;
 
@@ -81,14 +145,21 @@ void NFCCoroutineModule::Schedule()
 
 void NFCCoroutineModule::StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
 {
+#ifndef _MSC_VER
+
 	xContextData->SetState(NFContextState::NFCOROUTINE_RUNNING);
-	//swap context to main entre
+    xConTextPtr = xContextData;
+
+    swapcontext(&ctx_main, &(xContextData->ctx_func));
+
+#endif // _MSC_VER
 }
 
-void NFCCoroutineModule::ResumeCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
+void NFCCoroutineModule::EndCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
 {
 	xContextData->SetState(NFContextState::NFCOROUTINE_DEAD);
 
+    setcontext(&(xContextData->ctx_resume));
 	//swap context ---continue execute last address
 }
 
@@ -99,14 +170,29 @@ NFINT64 NFCCoroutineModule::CreateNewContextID()
 
 bool NFCCoroutineModule::StartCoroutine(TaskFunction const & fn)
 {
-	NF_SHARE_PTR<NFContextData> xContextData(NF_NEW NFContextData());
+	NF_SHARE_PTR<NFContextData> xContextData(NF_NEW NFContextData(this));
 	NFINT64 nContextID = CreateNewContextID();
 	mxCoroutineMap[nContextID] = xContextData;
 
-
-
 #ifndef _MSC_VER
-	getcontext(&(xContextData.mxCtx));
+
+    getcontext(&(xContextData->ctx_func));
+
+    xContextData->ctx_func.uc_stack.ss_sp = g_stack;
+    xContextData->ctx_func.uc_stack.ss_size = sizeof g_stack;
+    //xCoroutine[i].ctx_func.uc_link = &ctx_main;
+    xContextData->ctx_func.uc_link = NULL;
+    makecontext(&(xContextData->ctx_func), func, 0);
+
+
+    getcontext(&(xContextData->ctx_resume));
+
+    if (xContextData->GetState() == NFContextState::NFCOROUTINE_READY)
+    {
+        setcontext(&ctx_main);
+    }
+
+    std::cout << " The End of StartCoroutine " << std::endl;
 #endif
 
 	return true;

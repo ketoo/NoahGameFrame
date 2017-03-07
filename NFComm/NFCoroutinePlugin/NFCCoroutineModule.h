@@ -30,7 +30,7 @@ public:
 private:
 	void Schedule();
 	void StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
-	void ResumeCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
+	void EndCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
 	NFINT64 CreateNewContextID();
 
 private:
