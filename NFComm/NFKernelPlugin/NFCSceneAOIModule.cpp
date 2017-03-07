@@ -110,7 +110,9 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		return false;
 	}
 
-	if (!SwitchScene(self, nSceneID, nGrupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	
+	NFVector3 vRelivePos = GetRelivePosition(nSceneID, 0);
+	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos.X(), vRelivePos.Y(), vRelivePos.Z(), 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
