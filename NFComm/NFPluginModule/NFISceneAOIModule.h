@@ -76,7 +76,7 @@ public:
 
     NFCSceneInfo(int nSceneID, int nWidth)
     {
-        mnGroupIndex = 0;
+        mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = nWidth;
     }
