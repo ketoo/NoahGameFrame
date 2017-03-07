@@ -54,9 +54,9 @@ public:
     virtual bool ConsumeSP(const NFGUID& self, const NFINT64& nValue);
     virtual bool EnoughSP(const NFGUID& self, const NFINT64& nValue);
 
-    virtual bool AddMoney(const NFGUID& self, const NFINT64& nValue);
-    virtual bool ConsumeMoney(const NFGUID& self, const NFINT64& nValue);
-    virtual bool EnoughMoney(const NFGUID& self, const NFINT64& nValue);
+    virtual bool AddGold(const NFGUID& self, const NFINT64& nValue);
+    virtual bool ConsumeGold(const NFGUID& self, const NFINT64& nValue);
+    virtual bool EnoughGold(const NFGUID& self, const NFINT64& nValue);
 
     virtual bool AddDiamond(const NFGUID& self, const NFINT64& nValue);
     virtual bool ConsumeDiamond(const NFGUID& self, const NFINT64& nValue);

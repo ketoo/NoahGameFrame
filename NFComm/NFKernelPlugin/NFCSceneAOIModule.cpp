@@ -205,6 +205,12 @@ bool NFCSceneAOIModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTO
 	return true;
 }
 
+bool NFCSceneAOIModule::AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+	mtOnSwapSceneCallback.push_back(cb);
+	return true;
+}
+
 bool NFCSceneAOIModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mtBeforeLeaveSceneCallback.push_back(cb);
@@ -307,7 +313,7 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 
 		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
 
-		if (nTargetSceneID != nOldSceneID)
+		//if (nTargetSceneID != nOldSceneID)
 		{
 			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
 			/////////
@@ -315,6 +321,7 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 
 			pObject->SetPropertyInt(NFrame::Scene::SceneID(), nTargetSceneID);
 
+			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, nType, arg);
 		}
 
 		pObject->SetPropertyFloat(NFrame::IObject::X(), fX);
@@ -666,6 +673,18 @@ int NFCSceneAOIModule::AfterLeaveSceneGroup(const NFGUID & self, const int nScen
 		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
 	}
 
+	return 0;
+}
+
+int NFCSceneAOIModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtOnSwapSceneCallback.begin();
+	for (; it != mtOnSwapSceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
 	return 0;
 }
 

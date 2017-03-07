@@ -268,6 +268,8 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDName)
 {
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
+	m_pKernelModule->RequestGroupScene(nSceneID);
+
 	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_NORMAL)
 	{
 		//line 10
@@ -279,6 +281,5 @@ bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDN
 
 		return true;
 	}
-
 	return false;
 }

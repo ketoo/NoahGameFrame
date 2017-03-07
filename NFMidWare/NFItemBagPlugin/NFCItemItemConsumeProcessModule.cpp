@@ -113,7 +113,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		const NFINT64 nSP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::SP());
 		const NFINT64 nMP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::MP());
 		const NFINT64 nGold = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Gold());
-		const NFINT64 nMoney = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Money());
+		const NFINT64 nDiamond = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Money());
 
 		if (self == xTargetID)
 		{
@@ -134,28 +134,28 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 			}
 			if (nSP != 0)
 			{
-				if (!m_pPropertyModule->AddSP(self, nHP * nItemCount))
+				if (!m_pPropertyModule->AddSP(self, nSP * nItemCount))
 				{
 					return 0;
 				}
 			}
 			if (nMP != 0)
 			{
-				if (!m_pPropertyModule->AddMP(self, nHP * nItemCount))
+				if (!m_pPropertyModule->AddMP(self, nMP * nItemCount))
 				{
 					return 0;
 				}
 			}
 			if (nGold != 0)
 			{
-				if (!m_pPropertyModule->AddMoney(self, nHP * nItemCount))
+				if (!m_pPropertyModule->AddGold(self, nGold * nItemCount))
 				{
 					return 0;
 				}
 			}
-			if (nMoney != 0)
+			if (nDiamond != 0)
 			{
-				if (!m_pPropertyModule->AddDiamond(self, nHP * nItemCount))
+				if (!m_pPropertyModule->AddDiamond(self, nDiamond * nItemCount))
 				{
 					return 0;
 				}
@@ -185,7 +185,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 			}
 			if (nMP != 0)
 			{
-				if (!m_pHeroPropertyModule->AddMP(self, xTargetID, nHP * nItemCount))
+				if (!m_pHeroPropertyModule->AddMP(self, xTargetID, nMP * nItemCount))
 				{
 					return 0;
 				}
