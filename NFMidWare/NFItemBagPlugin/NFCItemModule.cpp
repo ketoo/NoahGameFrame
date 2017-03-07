@@ -213,7 +213,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->EnoughMoney(self, nMoney))
+	if (nMoney > 0 && !m_pPropertyModule->EnoughGold(self, nMoney))
 	{
 		return false;
 	}
@@ -233,7 +233,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->ConsumeMoney(self, nMoney))
+	if (nMoney > 0 && !m_pPropertyModule->ConsumeGold(self, nMoney))
 	{
 		return false;
 	}

@@ -1,5 +1,6 @@
 # NoahGameFrame
-##### Copyright © http://www.noahframe.com
+#####  http://www.noahframe.com
+##### Forum: http://bbs.noahframe.com/forum.php
 
 [![Join the chat at https://gitter.im/ketoo/NoahGameFrame](https://badges.gitter.im/ketoo/NoahGameFrame.svg)](https://gitter.im/ketoo/NoahGameFrame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

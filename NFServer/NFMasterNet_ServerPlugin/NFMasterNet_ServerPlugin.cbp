@@ -69,11 +69,11 @@
 				</Environment>
 			</Target>
 		</Build>
-		<Unit filename="NFCMasterNet_HttpJsonModule.cpp" />
-		<Unit filename="NFCMasterNet_HttpJsonModule.h" />
-		<Unit filename="NFMasterNet_HttpServerPlugin.cpp" />
-		<Unit filename="NFMasterNet_HttpServerPlugin.h" />
-		<Unit filename="dllmain.cpp" />
+<Unit filename="NFCMasterNet_ServerModule.h" />
+<Unit filename="NFMasterNet_ServerPlugin.h" />
+<Unit filename="dllmain.cpp"/>
+<Unit filename="NFCMasterNet_ServerModule.cpp" />
+<Unit filename="NFMasterNet_ServerPlugin.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

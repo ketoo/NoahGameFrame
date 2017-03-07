@@ -17,7 +17,6 @@ bool NFCLoginNet_ServerModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
