@@ -51,8 +51,10 @@ class EffectData;
 class ReqAckUseSkill;
 class ReqAckUseItem;
 class ReqAckSwapScene;
+class ReqAckHomeScene;
 class ItemStruct;
 class CurrencyStruct;
+class ReqAckStartBattle;
 class ReqAckEndBattle;
 class ReqPickDropItem;
 class ReqAcceptTask;
@@ -2148,6 +2150,78 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqAckHomeScene : public ::google::protobuf::Message {
+ public:
+  ReqAckHomeScene();
+  virtual ~ReqAckHomeScene();
+
+  ReqAckHomeScene(const ReqAckHomeScene& from);
+
+  inline ReqAckHomeScene& operator=(const ReqAckHomeScene& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckHomeScene& default_instance();
+
+  void Swap(ReqAckHomeScene* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckHomeScene* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckHomeScene& from);
+  void MergeFrom(const ReqAckHomeScene& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckHomeScene)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckHomeScene* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ItemStruct : public ::google::protobuf::Message {
  public:
   ItemStruct();
@@ -2337,6 +2411,98 @@ class LIBPROTOC_EXPORT CurrencyStruct : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT ReqAckStartBattle : public ::google::protobuf::Message {
+ public:
+  ReqAckStartBattle();
+  virtual ~ReqAckStartBattle();
+
+  ReqAckStartBattle(const ReqAckStartBattle& from);
+
+  inline ReqAckStartBattle& operator=(const ReqAckStartBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckStartBattle& default_instance();
+
+  void Swap(ReqAckStartBattle* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckStartBattle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckStartBattle& from);
+  void MergeFrom(const ReqAckStartBattle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 gold = 1;
+  inline bool has_gold() const;
+  inline void clear_gold();
+  static const int kGoldFieldNumber = 1;
+  inline ::google::protobuf::int32 gold() const;
+  inline void set_gold(::google::protobuf::int32 value);
+
+  // required int32 diamond = 2;
+  inline bool has_diamond() const;
+  inline void clear_diamond();
+  static const int kDiamondFieldNumber = 2;
+  inline ::google::protobuf::int32 diamond() const;
+  inline void set_diamond(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckStartBattle)
+ private:
+  inline void set_has_gold();
+  inline void clear_has_gold();
+  inline void set_has_diamond();
+  inline void clear_has_diamond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 gold_;
+  ::google::protobuf::int32 diamond_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckStartBattle* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
  public:
   ReqAckEndBattle();
@@ -2391,12 +2557,12 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 money = 1;
-  inline bool has_money() const;
-  inline void clear_money();
-  static const int kMoneyFieldNumber = 1;
-  inline ::google::protobuf::int32 money() const;
-  inline void set_money(::google::protobuf::int32 value);
+  // required int32 gold = 1;
+  inline bool has_gold() const;
+  inline void clear_gold();
+  static const int kGoldFieldNumber = 1;
+  inline ::google::protobuf::int32 gold() const;
+  inline void set_gold(::google::protobuf::int32 value);
 
   // required int32 exp = 2;
   inline bool has_exp() const;
@@ -2426,8 +2592,8 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
  private:
-  inline void set_has_money();
-  inline void clear_has_money();
+  inline void set_has_gold();
+  inline void clear_has_gold();
   inline void set_has_exp();
   inline void clear_has_exp();
   inline void set_has_diamond();
@@ -2435,7 +2601,7 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 money_;
+  ::google::protobuf::int32 gold_;
   ::google::protobuf::int32 exp_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
   ::google::protobuf::int32 diamond_;
@@ -10921,6 +11087,10 @@ inline void ReqAckSwapScene::set_z(float value) {
 
 // -------------------------------------------------------------------
 
+// ReqAckHomeScene
+
+// -------------------------------------------------------------------
+
 // ItemStruct
 
 // required string item_id = 1;
@@ -11065,28 +11235,76 @@ inline void CurrencyStruct::set_currency_count(::google::protobuf::int32 value) 
 
 // -------------------------------------------------------------------
 
-// ReqAckEndBattle
+// ReqAckStartBattle
 
-// required int32 money = 1;
-inline bool ReqAckEndBattle::has_money() const {
+// required int32 gold = 1;
+inline bool ReqAckStartBattle::has_gold() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckEndBattle::set_has_money() {
+inline void ReqAckStartBattle::set_has_gold() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckEndBattle::clear_has_money() {
+inline void ReqAckStartBattle::clear_has_gold() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqAckEndBattle::clear_money() {
-  money_ = 0;
-  clear_has_money();
+inline void ReqAckStartBattle::clear_gold() {
+  gold_ = 0;
+  clear_has_gold();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::money() const {
-  return money_;
+inline ::google::protobuf::int32 ReqAckStartBattle::gold() const {
+  return gold_;
 }
-inline void ReqAckEndBattle::set_money(::google::protobuf::int32 value) {
-  set_has_money();
-  money_ = value;
+inline void ReqAckStartBattle::set_gold(::google::protobuf::int32 value) {
+  set_has_gold();
+  gold_ = value;
+}
+
+// required int32 diamond = 2;
+inline bool ReqAckStartBattle::has_diamond() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAckStartBattle::set_has_diamond() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAckStartBattle::clear_has_diamond() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAckStartBattle::clear_diamond() {
+  diamond_ = 0;
+  clear_has_diamond();
+}
+inline ::google::protobuf::int32 ReqAckStartBattle::diamond() const {
+  return diamond_;
+}
+inline void ReqAckStartBattle::set_diamond(::google::protobuf::int32 value) {
+  set_has_diamond();
+  diamond_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAckEndBattle
+
+// required int32 gold = 1;
+inline bool ReqAckEndBattle::has_gold() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckEndBattle::set_has_gold() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckEndBattle::clear_has_gold() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckEndBattle::clear_gold() {
+  gold_ = 0;
+  clear_has_gold();
+}
+inline ::google::protobuf::int32 ReqAckEndBattle::gold() const {
+  return gold_;
+}
+inline void ReqAckEndBattle::set_gold(::google::protobuf::int32 value) {
+  set_has_gold();
+  gold_ = value;
 }
 
 // required int32 exp = 2;

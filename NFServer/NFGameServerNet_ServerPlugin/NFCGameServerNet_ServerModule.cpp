@@ -80,6 +80,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEvent);
 	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEvent);
 
+	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFCGameServerNet_ServerModule::OnSceneEvent);
+
 	/////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
@@ -990,15 +992,14 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
-		m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCGameServerNet_ServerModule::OnSceneEvent);
+		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCGameServerNet_ServerModule::OnSceneEvent);
 	}
 
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+int NFCGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
 {
-	int nSceneID = newVar.GetInt();
 	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
