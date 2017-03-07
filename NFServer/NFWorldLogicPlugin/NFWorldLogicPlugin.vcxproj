@@ -59,7 +59,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN;_DEBUG;_WINDOWS;_USRDLL;ELPP_NO_DEFAULT_LOG_FILE</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir)\Dependencies\Theron\Include\</AdditionalIncludeDirectories>
-      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,8 +93,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCPVPMatchModule.h" />
-    <ClInclude Include="NFCTeamModule.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
     <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
@@ -108,8 +106,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="NFCPVPMatchModule.cpp" />
-    <ClCompile Include="NFCTeamModule.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
     <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
