@@ -28,7 +28,7 @@ public:
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData) = 0;
 
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData) = 0;
-	virtual bool LoadPlayerTileRandom(const int nSceneID, std::string& strTileData) = 0;
+	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData) = 0;
 };
 
 #endif

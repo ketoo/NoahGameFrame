@@ -69,12 +69,12 @@ bool NFCEquipModule::IntensifylevelToEquip( const NFGUID& self, const NFGUID& xE
         }
     }
 
-    if (!m_pPropertyModule->EnoughMoney(self, nCostMoney))
+    if (!m_pPropertyModule->EnoughGold(self, nCostMoney))
     {
         return false;
     }
     
-    if (!m_pPropertyModule->ConsumeMoney(self, nCostMoney))
+    if (!m_pPropertyModule->ConsumeGold(self, nCostMoney))
     {
         return false;
     }
@@ -107,12 +107,12 @@ bool NFCEquipModule::HoleToEquip( const NFGUID& self, const NFGUID& xEquipID )
         }
     }
 
-    if (!m_pPropertyModule->EnoughMoney(self, nCostMoney))
+    if (!m_pPropertyModule->EnoughGold(self, nCostMoney))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeMoney(self, nCostMoney))
+    if (!m_pPropertyModule->ConsumeGold(self, nCostMoney))
     {
         return false;
     }
@@ -168,12 +168,12 @@ bool NFCEquipModule::InlaystoneToEquip( const NFGUID& self, const NFGUID& xEquip
         }
     }
 
-    if (!m_pPropertyModule->EnoughMoney(self, nCostMoney))
+    if (!m_pPropertyModule->EnoughGold(self, nCostMoney))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeMoney(self, nCostMoney))
+    if (!m_pPropertyModule->ConsumeGold(self, nCostMoney))
     {
         return false;
     }
@@ -210,12 +210,12 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
         }
     }
 
-    if (!m_pPropertyModule->EnoughMoney(self, nCostMoney))
+    if (!m_pPropertyModule->EnoughGold(self, nCostMoney))
     {
         return false;
     }
 
-    if (!m_pPropertyModule->ConsumeMoney(self, nCostMoney))
+    if (!m_pPropertyModule->ConsumeGold(self, nCostMoney))
     {
         return false;
     }
