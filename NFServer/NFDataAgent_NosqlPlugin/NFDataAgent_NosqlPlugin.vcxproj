@@ -17,7 +17,7 @@
     <ClCompile Include="NFCGuildRedisModule.cpp" />
     <ClCompile Include="NFCMailRedisModule.cpp" />
     <ClCompile Include="NFCPlayerRedisModule.cpp" />
-    <ClCompile Include="NFCPVPMatchRedisModule.cpp" />
+    <ClCompile Include="NFCPVPRedisModule.cpp" />
     <ClCompile Include="NFCRankRedisModule.cpp" />
     <ClCompile Include="NFCCommonRedisModule.cpp" />
     <ClCompile Include="NFDataAgent_NosqlPlugin.cpp" />
@@ -28,7 +28,7 @@
     <ClInclude Include="NFCGuildRedisModule.h" />
     <ClInclude Include="NFCMailRedisModule.h" />
     <ClInclude Include="NFCPlayerRedisModule.h" />
-    <ClInclude Include="NFCPVPMatchRedisModule.h" />
+    <ClInclude Include="NFCPVPRedisModule.h" />
     <ClInclude Include="NFCRankRedisModule.h" />
     <ClInclude Include="NFCCommonRedisModule.h" />
     <ClInclude Include="NFDataAgent_NosqlPlugin.h" />
