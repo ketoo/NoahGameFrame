@@ -1,3 +1,11 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFLogPlugin.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-12-15
+//    @Module           :    NFLogPlugin
+//    @Desc             :
+// -------------------------------------------------------------------------
+
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
