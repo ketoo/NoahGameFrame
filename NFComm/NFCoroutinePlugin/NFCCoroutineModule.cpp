@@ -14,6 +14,7 @@
 NFCCoroutineModule::NFCCoroutineModule(NFIPluginManager* p)
 {
 	pPluginManager = p;
+	mnIndex = 1;
 }
 
 NFCCoroutineModule::~NFCCoroutineModule()
@@ -58,8 +59,6 @@ void NFCCoroutineModule::Schedule()
 			ResumeCoroutine(it->second);
 		}
 		break;
-		case NFContextState::NFCOROUTINE_DEAD:
-			break;
 
 		default:
 			break;
@@ -83,14 +82,34 @@ void NFCCoroutineModule::Schedule()
 void NFCCoroutineModule::StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
 {
 	xContextData->SetState(NFContextState::NFCOROUTINE_RUNNING);
-	//swap context
+	//swap context to main entre
 }
 
 void NFCCoroutineModule::ResumeCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
 {
 	xContextData->SetState(NFContextState::NFCOROUTINE_DEAD);
 
-	//swap context
+	//swap context ---continue execute last address
+}
+
+NFINT64 NFCCoroutineModule::CreateNewContextID()
+{
+	return mnIndex++;
+}
+
+bool NFCCoroutineModule::StartCoroutine(TaskFunction const & fn)
+{
+	NF_SHARE_PTR<NFContextData> xContextData(NF_NEW NFContextData());
+	NFINT64 nContextID = CreateNewContextID();
+	mxCoroutineMap[nContextID] = xContextData;
+
+
+
+#ifndef _MSC_VER
+	getcontext(&(xContextData.mxCtx));
+#endif
+
+	return true;
 }
 
 bool NFCCoroutineModule::Init()
