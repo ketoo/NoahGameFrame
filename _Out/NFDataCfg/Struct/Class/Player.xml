@@ -36,6 +36,10 @@
 		<Property Id="GateID" Type="int" Public="0" Private="0" Save="1" Cache="1" Ref="0" Upload="0" Desc="登陆的网关ID"/>
 		<Property Id="GuildID" Type="object" Public="0" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="公会ID"/>
 		<Property Id="TeamID" Type="object" Public="0" Private="1" Save="1" Cache="1" Ref="0" Upload="0" Desc="所在队伍ID"/>
+		<Property Id="ViewOppnent" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="when searching"/>
+		<Property Id="FightOppnent" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="pvp_oppnent"/>
+		<Property Id="GambleGold" Type="int" Public="0" Private="0" Save="1" Cache="1" Ref="0" Upload="0" Desc=""/>
+		<Property Id="GambleDiamond" Type="int" Public="0" Private="0" Save="1" Cache="1" Ref="0" Upload="0" Desc=""/>
 		<Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="吸血"/>
 		<Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="反伤"/>
 		<Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="暴击"/>

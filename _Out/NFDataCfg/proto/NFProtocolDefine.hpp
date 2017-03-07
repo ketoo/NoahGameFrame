@@ -834,6 +834,10 @@ public:
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
 	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
+	static const std::string& ViewOppnent(){ static std::string xViewOppnent = "ViewOppnent"; return xViewOppnent; } // object
+	static const std::string& FightOppnent(){ static std::string xFightOppnent = "FightOppnent"; return xFightOppnent; } // object
+	static const std::string& GambleGold(){ static std::string xGambleGold = "GambleGold"; return xGambleGold; } // int
+	static const std::string& GambleDiamond(){ static std::string xGambleDiamond = "GambleDiamond"; return xGambleDiamond; } // int
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
