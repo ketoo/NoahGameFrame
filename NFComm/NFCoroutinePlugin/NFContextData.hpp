@@ -29,9 +29,11 @@ enum NFContextState
 class NFContextData
 {
 public:
-	NFContextData(NFICoroutineModule* pCoroutineModule, NFINT64 id, std::size_t stack_size, TaskFunction const& fn)
+#ifndef _MSC_VER
+	NFContextData(NFICoroutineModule* pCoroutineModule, ucontext_t ctx)
 	{
-
+		meState = NFContextState::NFCOROUTINE_READY;
+		mnOutTime = 60 * 1000;
 	}
 	virtual ~NFContextData()
 	{
@@ -40,12 +42,16 @@ public:
 
 
 private:
+	ucontext_t mxCtx;
+#endif
+	NFContextState GetState() { return meState; };
+	void SetState(NFContextState state) { meState = state; };
+	int GetOutTime() const { return mnOutTime; }
 
-	ucontext_t ctx_;
-
+private:
 	std::string m_msg;
-	NFUINT64 mnOutTime; //yield task out time
-
+	int mnOutTime;
+	NFContextState meState;
 
 private:
 	NFICoroutineModule* m_coroutinueModule;
