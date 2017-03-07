@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_LIB;WIN32;WIN;NF_NONCLIENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <BrowseInformation>true</BrowseInformation>
+      <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

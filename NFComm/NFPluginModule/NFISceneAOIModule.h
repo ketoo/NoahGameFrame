@@ -28,6 +28,7 @@ struct SceneSeedResource
 	std::string strSeedID;
 	std::string strConfigID;
 	NFVector3 vSeedPos;
+	int nWeight;
 };
 
 //SceneID,(SeedID,SeedData)
@@ -68,14 +69,14 @@ public:
 
     NFCSceneInfo(int nSceneID)
     {
-        mnGroupIndex = 0;
+        mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = 512;
     }
 
     NFCSceneInfo(int nSceneID, int nWidth)
     {
-        mnGroupIndex = 0;
+        mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = nWidth;
     }
@@ -155,7 +156,7 @@ public:
         return true;
     }
 
-	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos)
+	bool AddSeedObjectInfo(const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight)
 	{
 		NF_SHARE_PTR<SceneSeedResource> pInfo = mtSceneResourceConfig.GetElement(strSeedID);
 		if (!pInfo)
@@ -164,6 +165,7 @@ public:
 			pInfo->strSeedID = strSeedID;
 			pInfo->strConfigID = strConfigID;
 			pInfo->vSeedPos = vPos;
+			pInfo->nWeight = nWeight;
 			return mtSceneResourceConfig.AddElement(strSeedID, pInfo);
 		}
 
@@ -302,6 +304,14 @@ public:
 	}
 
 	template<typename BaseType>
+	bool AddSwapSceneEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
+	{
+		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
+		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
+		return AddSwapSceneEventCallBack(functorPtr);
+	}
+
+	template<typename BaseType>
 	bool AddBeforeLeaveSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
 		SCENE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5);
@@ -318,7 +328,7 @@ public:
 	}
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
-	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos) = 0;
+	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
 
@@ -337,6 +347,7 @@ protected:
 
 	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 

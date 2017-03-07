@@ -1,40 +1,40 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCPVPMatchRedisModule.h
+//    @FileName			:    NFCPVPRedisModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-10-03
-//    @Module           :    NFCPVPMatchRedisModule
+//    @Module           :    NFCPVPRedisModule
 //    @Desc             :
 // -------------------------------------------------------------------------
-#include "NFCPVPMatchRedisModule.h"
+#include "NFCPVPRedisModule.h"
 
-NFCPVPMatchRedisModule::NFCPVPMatchRedisModule(NFIPluginManager * p)
+NFCPVPRedisModule::NFCPVPRedisModule(NFIPluginManager * p)
 {
 	pPluginManager = p;
 }
 
-bool NFCPVPMatchRedisModule::Init()
+bool NFCPVPRedisModule::Init()
 {
 	return true;
 }
 
-bool NFCPVPMatchRedisModule::Shut()
+bool NFCPVPRedisModule::Shut()
 {
 	return true;
 }
 
-bool NFCPVPMatchRedisModule::Execute()
+bool NFCPVPRedisModule::Execute()
 {
 	return true;
 }
 
-bool NFCPVPMatchRedisModule::AfterInit()
+bool NFCPVPRedisModule::AfterInit()
 {
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 
 	return true;
 }
 
-bool NFCPVPMatchRedisModule::GetPlayerRoomID(const NFGUID& self, NFGUID& xRoomID)
+bool NFCPVPRedisModule::GetPlayerRoomID(const NFGUID& self, NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -53,7 +53,7 @@ bool NFCPVPMatchRedisModule::GetPlayerRoomID(const NFGUID& self, NFGUID& xRoomID
     return false;
 }
 
-bool NFCPVPMatchRedisModule::GetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList)
+bool NFCPVPRedisModule::GetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -84,7 +84,7 @@ bool NFCPVPMatchRedisModule::GetPlayerRoomIDList(const std::vector<NFGUID>& xPla
     return false;
 }
 
-bool NFCPVPMatchRedisModule::SetPlayerRoomID(const NFGUID& self, const NFGUID& xRoomID)
+bool NFCPVPRedisModule::SetPlayerRoomID(const NFGUID& self, const NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -96,7 +96,7 @@ bool NFCPVPMatchRedisModule::SetPlayerRoomID(const NFGUID& self, const NFGUID& x
     return false;
 }
 
-bool NFCPVPMatchRedisModule::SetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList)
+bool NFCPVPRedisModule::SetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -122,7 +122,7 @@ bool NFCPVPMatchRedisModule::SetPlayerRoomIDList(const std::vector<NFGUID>& xPla
     return false;
 }
 
-bool NFCPVPMatchRedisModule::GetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo)
+bool NFCPVPRedisModule::GetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -141,7 +141,7 @@ bool NFCPVPMatchRedisModule::GetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomIn
     return false;
 }
 
-bool NFCPVPMatchRedisModule::GetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList)
+bool NFCPVPRedisModule::GetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -181,7 +181,7 @@ bool NFCPVPMatchRedisModule::GetRoomInfoList(const std::vector<NFGUID>& xRoomIDL
     return false;
 }
 
-bool NFCPVPMatchRedisModule::GetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, std::vector<NFGUID>& xRoomIDList)
+bool NFCPVPRedisModule::GetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, std::vector<NFGUID>& xRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -209,7 +209,7 @@ bool NFCPVPMatchRedisModule::GetStatusRoomID(const int nPVPMode, const int nGrad
     return false;
 }
 
-bool NFCPVPMatchRedisModule::SetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo)
+bool NFCPVPRedisModule::SetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -228,7 +228,7 @@ bool NFCPVPMatchRedisModule::SetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomIn
     return false;
 }
 
-bool NFCPVPMatchRedisModule::SetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList)
+bool NFCPVPRedisModule::SetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -261,7 +261,7 @@ bool NFCPVPMatchRedisModule::SetRoomInfoList(const std::vector<NFGUID>& xRoomIDL
     return false;
 }
 
-bool NFCPVPMatchRedisModule::SetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID)
+bool NFCPVPRedisModule::SetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -279,7 +279,7 @@ bool NFCPVPMatchRedisModule::SetStatusRoomID(const int nPVPMode, const int nGrad
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeletePlayerRoomID(const NFGUID& self, const NFGUID& xRoomID)
+bool NFCPVPRedisModule::DeletePlayerRoomID(const NFGUID& self, const NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -291,7 +291,7 @@ bool NFCPVPMatchRedisModule::DeletePlayerRoomID(const NFGUID& self, const NFGUID
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeletePlayerRoomIDList(const std::vector<NFGUID>& xPlayerList)
+bool NFCPVPRedisModule::DeletePlayerRoomIDList(const std::vector<NFGUID>& xPlayerList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -310,7 +310,7 @@ bool NFCPVPMatchRedisModule::DeletePlayerRoomIDList(const std::vector<NFGUID>& x
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeleteRoomInfo(const NFGUID& xRoomID)
+bool NFCPVPRedisModule::DeleteRoomInfo(const NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -326,7 +326,7 @@ bool NFCPVPMatchRedisModule::DeleteRoomInfo(const NFGUID& xRoomID)
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeleteRoomInfoList(const std::vector<NFGUID>& xRoomIDList)
+bool NFCPVPRedisModule::DeleteRoomInfoList(const std::vector<NFGUID>& xRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -345,7 +345,7 @@ bool NFCPVPMatchRedisModule::DeleteRoomInfoList(const std::vector<NFGUID>& xRoom
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID)
+bool NFCPVPRedisModule::DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -363,7 +363,7 @@ bool NFCPVPMatchRedisModule::DeleteStatusRoomID(const int nPVPMode, const int nG
     return false;
 }
 
-bool NFCPVPMatchRedisModule::DeletetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const std::vector<NFGUID>& xRoomIDList)
+bool NFCPVPRedisModule::DeletetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const std::vector<NFGUID>& xRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -382,7 +382,7 @@ bool NFCPVPMatchRedisModule::DeletetStatusRoomID(const int nPVPMode, const int n
     return false;
 }
 
-bool NFCPVPMatchRedisModule::PushSinglePlayer(const NFGUID& self, const int nPVPMode, const int nGrade)
+bool NFCPVPRedisModule::PushSinglePlayer(const NFGUID& self, const int nPVPMode, const int nGrade)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -396,7 +396,7 @@ bool NFCPVPMatchRedisModule::PushSinglePlayer(const NFGUID& self, const int nPVP
     return false;
 }
 
-bool NFCPVPMatchRedisModule::PopSinglePlayer(NFGUID& self, const int nPVPMode, const int nGrade)
+bool NFCPVPRedisModule::PopSinglePlayer(NFGUID& self, const int nPVPMode, const int nGrade)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -413,7 +413,7 @@ bool NFCPVPMatchRedisModule::PopSinglePlayer(NFGUID& self, const int nPVPMode, c
     return false;
 }
 
-bool NFCPVPMatchRedisModule::PopSinglePlayerList(const int nPVPMode, const int nGrade, const int nCount, std::vector<NFGUID>& xPlayerList)
+bool NFCPVPRedisModule::PopSinglePlayerList(const int nPVPMode, const int nGrade, const int nCount, std::vector<NFGUID>& xPlayerList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -436,7 +436,7 @@ bool NFCPVPMatchRedisModule::PopSinglePlayerList(const int nPVPMode, const int n
     return false;
 }
 
-int NFCPVPMatchRedisModule::GetSinglePlayerCount(NFGUID& self, const int nPVPMode, const int nGrade)
+int NFCPVPRedisModule::GetSinglePlayerCount(NFGUID& self, const int nPVPMode, const int nGrade)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
@@ -454,28 +454,28 @@ int NFCPVPMatchRedisModule::GetSinglePlayerCount(NFGUID& self, const int nPVPMod
     return 0;
 }
 
-std::string NFCPVPMatchRedisModule::MakePlayerRoomKey()
+std::string NFCPVPRedisModule::MakePlayerRoomKey()
 {
     std::string szKey = "PvpPlayerRoom_";
 
     return szKey;
 }
 
-std::string NFCPVPMatchRedisModule::MakePvpRoomRedisKey()
+std::string NFCPVPRedisModule::MakePvpRoomRedisKey()
 {
 	std::string szKey = "PvpRoomInfo_";
 	
 	return szKey;
 }
 
-std::string NFCPVPMatchRedisModule::MakeSingleWaitRedisKey(const int nPvpMode, const int nGrade)
+std::string NFCPVPRedisModule::MakeSingleWaitRedisKey(const int nPvpMode, const int nGrade)
 {
     std::string szKey = "PvpSingleWait_" + lexical_cast<std::string>(nPvpMode) + "_" + lexical_cast<std::string>(nGrade);
 
     return szKey;
 }
 
-std::string NFCPVPMatchRedisModule::MakeStatusRoomIDRedisKey(const int nPvpMode, const int nGrade, const int nStatus)
+std::string NFCPVPRedisModule::MakeStatusRoomIDRedisKey(const int nPvpMode, const int nGrade, const int nStatus)
 {
     std::string szKey = "WaitPlayerRoomID_" + lexical_cast<std::string>(nPvpMode) + "_" + lexical_cast<std::string>(nGrade) + "_" + lexical_cast<std::string>(nStatus);
 
