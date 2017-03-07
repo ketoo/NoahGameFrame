@@ -1,9 +1,3 @@
-#ifndef NF_COROUTINE_MODULE_H
-#define NF_COROUTINE_MODULE_H
-
-#include "NFComm/NFPluginModule/NFICoroutineModule.h"
-#include <unordered_map>
-#include <type_traits>
 // -------------------------------------------------------------------------
 //    @FileName			:    NFCCoroutineModule.h
 //    @Author           :    LvSheng.Huang
@@ -11,6 +5,9 @@
 //    @Module           :    NFCCoroutineModule
 //    @Desc             :
 // -------------------------------------------------------------------------
+
+#ifndef NF_COROUTINE_MODULE_H
+#define NF_COROUTINE_MODULE_H
 
 #include "NFContextData.hpp"
 
@@ -27,9 +24,12 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-public:
 private:
-	NFMapEx<NFINT64, NF_SHARE_PTR<NFContextData>> m_taskMap;
+	void Schedule();
+	void StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
+	void ResumeCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
+private:
+	std::map<NFINT64, NF_SHARE_PTR<NFContextData>> mxCoroutineMap;
 };
 
 
