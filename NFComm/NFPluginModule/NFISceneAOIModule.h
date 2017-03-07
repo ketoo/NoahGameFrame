@@ -69,7 +69,7 @@ public:
 
     NFCSceneInfo(int nSceneID)
     {
-        mnGroupIndex = 0;
+        mnGroupIndex = -1;
         mnSceneID = nSceneID;
         mnWidth = 512;
     }
