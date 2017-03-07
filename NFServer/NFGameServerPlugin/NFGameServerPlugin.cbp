@@ -70,6 +70,7 @@
 		</Build>
 <Unit filename="NFCGameServerModule.h" />
 <Unit filename="NFCLevelModule.h" />
+<Unit filename="NFCNPCRefreshModule.h" />
 <Unit filename="NFCPropertyConfigModule.h" />
 <Unit filename="NFCPropertyModule.h" />
 <Unit filename="NFCPropertyTrailModule.h" />
@@ -78,6 +79,7 @@
 <Unit filename="dllmain.cpp"/>
 <Unit filename="NFCGameServerModule.cpp" />
 <Unit filename="NFCLevelModule.cpp" />
+<Unit filename="NFCNPCRefreshModule.cpp" />
 <Unit filename="NFCPropertyConfigModule.cpp" />
 <Unit filename="NFCPropertyModule.cpp" />
 <Unit filename="NFCPropertyTrailModule.cpp" />
