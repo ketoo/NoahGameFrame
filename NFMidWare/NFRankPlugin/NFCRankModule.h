@@ -1,8 +1,8 @@
-// -------------------------------------------------------------------------
-//    @FileName         :   NFCRankModule.h
-//    @Author           :   NickYang
-//    @Date             :   2012/12/15
-//    @Module           :   NFCRankModule
+//------------------------------------------------------------------------ -
+//    @FileName			:    NFRankPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2016-12-18
+//    @Module           :    NFRankPlugin
 //
 // -------------------------------------------------------------------------
 
@@ -29,12 +29,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-public:
-
-    virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue);
-
 private:
     NFIKernelModule* m_pKernelModule;
 };
 
-#endif // !NFC_RANK_MODULE_H
+#endif

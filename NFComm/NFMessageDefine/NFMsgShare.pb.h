@@ -55,7 +55,8 @@ class ReqAckHomeScene;
 class ItemStruct;
 class CurrencyStruct;
 class ReqAckStartBattle;
-class ReqAckEndBattle;
+class ReqEndBattle;
+class AckEndBattle;
 class ReqPickDropItem;
 class ReqAcceptTask;
 class ReqCompeleteTask;
@@ -2114,6 +2115,18 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
   inline float z() const;
   inline void set_z(float value);
 
+  // optional string data = 7;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 7;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const char* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckSwapScene)
  private:
   inline void set_has_transfer_type();
@@ -2128,6 +2141,8 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
   inline void clear_has_y();
   inline void set_has_z();
   inline void clear_has_z();
+  inline void set_has_data();
+  inline void clear_has_data();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -2137,9 +2152,10 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
   float x_;
   float y_;
   float z_;
+  ::std::string* data_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -2204,14 +2220,29 @@ class LIBPROTOC_EXPORT ReqAckHomeScene : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // optional string data = 1;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 1;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const char* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckHomeScene)
  private:
+  inline void set_has_data();
+  inline void clear_has_data();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* data_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -2503,14 +2534,14 @@ class LIBPROTOC_EXPORT ReqAckStartBattle : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message {
  public:
-  ReqAckEndBattle();
-  virtual ~ReqAckEndBattle();
+  ReqEndBattle();
+  virtual ~ReqEndBattle();
 
-  ReqAckEndBattle(const ReqAckEndBattle& from);
+  ReqEndBattle(const ReqEndBattle& from);
 
-  inline ReqAckEndBattle& operator=(const ReqAckEndBattle& from) {
+  inline ReqEndBattle& operator=(const ReqEndBattle& from) {
     CopyFrom(from);
     return *this;
   }
@@ -2524,17 +2555,17 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ReqAckEndBattle& default_instance();
+  static const ReqEndBattle& default_instance();
 
-  void Swap(ReqAckEndBattle* other);
+  void Swap(ReqEndBattle* other);
 
   // implements Message ----------------------------------------------
 
-  ReqAckEndBattle* New() const;
+  ReqEndBattle* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ReqAckEndBattle& from);
-  void MergeFrom(const ReqAckEndBattle& from);
+  void CopyFrom(const ReqEndBattle& from);
+  void MergeFrom(const ReqEndBattle& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -2557,31 +2588,117 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 gold = 1;
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqEndBattle)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqEndBattle* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AckEndBattle : public ::google::protobuf::Message {
+ public:
+  AckEndBattle();
+  virtual ~AckEndBattle();
+
+  AckEndBattle(const AckEndBattle& from);
+
+  inline AckEndBattle& operator=(const AckEndBattle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AckEndBattle& default_instance();
+
+  void Swap(AckEndBattle* other);
+
+  // implements Message ----------------------------------------------
+
+  AckEndBattle* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AckEndBattle& from);
+  void MergeFrom(const AckEndBattle& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 win = 1;
+  inline bool has_win() const;
+  inline void clear_win();
+  static const int kWinFieldNumber = 1;
+  inline ::google::protobuf::int32 win() const;
+  inline void set_win(::google::protobuf::int32 value);
+
+  // required int32 star = 2;
+  inline bool has_star() const;
+  inline void clear_star();
+  static const int kStarFieldNumber = 2;
+  inline ::google::protobuf::int32 star() const;
+  inline void set_star(::google::protobuf::int32 value);
+
+  // required int32 gold = 3;
   inline bool has_gold() const;
   inline void clear_gold();
-  static const int kGoldFieldNumber = 1;
+  static const int kGoldFieldNumber = 3;
   inline ::google::protobuf::int32 gold() const;
   inline void set_gold(::google::protobuf::int32 value);
 
-  // required int32 exp = 2;
+  // required int32 exp = 4;
   inline bool has_exp() const;
   inline void clear_exp();
-  static const int kExpFieldNumber = 2;
+  static const int kExpFieldNumber = 4;
   inline ::google::protobuf::int32 exp() const;
   inline void set_exp(::google::protobuf::int32 value);
 
-  // required int32 diamond = 3;
+  // required int32 diamond = 5;
   inline bool has_diamond() const;
   inline void clear_diamond();
-  static const int kDiamondFieldNumber = 3;
+  static const int kDiamondFieldNumber = 5;
   inline ::google::protobuf::int32 diamond() const;
   inline void set_diamond(::google::protobuf::int32 value);
 
-  // repeated .NFMsg.ItemStruct item_list = 4;
+  // repeated .NFMsg.ItemStruct item_list = 6;
   inline int item_list_size() const;
   inline void clear_item_list();
-  static const int kItemListFieldNumber = 4;
+  static const int kItemListFieldNumber = 6;
   inline const ::NFMsg::ItemStruct& item_list(int index) const;
   inline ::NFMsg::ItemStruct* mutable_item_list(int index);
   inline ::NFMsg::ItemStruct* add_item_list();
@@ -2590,8 +2707,12 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
       mutable_item_list();
 
-  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEndBattle)
+  // @@protoc_insertion_point(class_scope:NFMsg.AckEndBattle)
  private:
+  inline void set_has_win();
+  inline void clear_has_win();
+  inline void set_has_star();
+  inline void clear_has_star();
   inline void set_has_gold();
   inline void clear_has_gold();
   inline void set_has_exp();
@@ -2601,20 +2722,22 @@ class LIBPROTOC_EXPORT ReqAckEndBattle : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 win_;
+  ::google::protobuf::int32 star_;
   ::google::protobuf::int32 gold_;
   ::google::protobuf::int32 exp_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct > item_list_;
   ::google::protobuf::int32 diamond_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
   friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
 
   void InitAsDefaultInstance();
-  static ReqAckEndBattle* default_instance_;
+  static AckEndBattle* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -11085,9 +11208,149 @@ inline void ReqAckSwapScene::set_z(float value) {
   z_ = value;
 }
 
+// optional string data = 7;
+inline bool ReqAckSwapScene::has_data() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void ReqAckSwapScene::set_has_data() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void ReqAckSwapScene::clear_has_data() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void ReqAckSwapScene::clear_data() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    data_->clear();
+  }
+  clear_has_data();
+}
+inline const ::std::string& ReqAckSwapScene::data() const {
+  return *data_;
+}
+inline void ReqAckSwapScene::set_data(const ::std::string& value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSwapScene::set_data(const char* value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckSwapScene::set_data(const char* value, size_t size) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckSwapScene::mutable_data() {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  return data_;
+}
+inline ::std::string* ReqAckSwapScene::release_data() {
+  clear_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_;
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckSwapScene::set_allocated_data(::std::string* data) {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
+  if (data) {
+    set_has_data();
+    data_ = data;
+  } else {
+    clear_has_data();
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // ReqAckHomeScene
+
+// optional string data = 1;
+inline bool ReqAckHomeScene::has_data() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckHomeScene::set_has_data() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckHomeScene::clear_has_data() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckHomeScene::clear_data() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    data_->clear();
+  }
+  clear_has_data();
+}
+inline const ::std::string& ReqAckHomeScene::data() const {
+  return *data_;
+}
+inline void ReqAckHomeScene::set_data(const ::std::string& value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckHomeScene::set_data(const char* value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void ReqAckHomeScene::set_data(const char* value, size_t size) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAckHomeScene::mutable_data() {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  return data_;
+}
+inline ::std::string* ReqAckHomeScene::release_data() {
+  clear_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_;
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAckHomeScene::set_allocated_data(::std::string* data) {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
+  if (data) {
+    set_has_data();
+    data_ = data;
+  } else {
+    clear_has_data();
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
 
 // -------------------------------------------------------------------
 
@@ -11283,96 +11546,144 @@ inline void ReqAckStartBattle::set_diamond(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// ReqAckEndBattle
+// ReqEndBattle
 
-// required int32 gold = 1;
-inline bool ReqAckEndBattle::has_gold() const {
+// -------------------------------------------------------------------
+
+// AckEndBattle
+
+// required int32 win = 1;
+inline bool AckEndBattle::has_win() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqAckEndBattle::set_has_gold() {
+inline void AckEndBattle::set_has_win() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqAckEndBattle::clear_has_gold() {
+inline void AckEndBattle::clear_has_win() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqAckEndBattle::clear_gold() {
+inline void AckEndBattle::clear_win() {
+  win_ = 0;
+  clear_has_win();
+}
+inline ::google::protobuf::int32 AckEndBattle::win() const {
+  return win_;
+}
+inline void AckEndBattle::set_win(::google::protobuf::int32 value) {
+  set_has_win();
+  win_ = value;
+}
+
+// required int32 star = 2;
+inline bool AckEndBattle::has_star() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AckEndBattle::set_has_star() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AckEndBattle::clear_has_star() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AckEndBattle::clear_star() {
+  star_ = 0;
+  clear_has_star();
+}
+inline ::google::protobuf::int32 AckEndBattle::star() const {
+  return star_;
+}
+inline void AckEndBattle::set_star(::google::protobuf::int32 value) {
+  set_has_star();
+  star_ = value;
+}
+
+// required int32 gold = 3;
+inline bool AckEndBattle::has_gold() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AckEndBattle::set_has_gold() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AckEndBattle::clear_has_gold() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AckEndBattle::clear_gold() {
   gold_ = 0;
   clear_has_gold();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::gold() const {
+inline ::google::protobuf::int32 AckEndBattle::gold() const {
   return gold_;
 }
-inline void ReqAckEndBattle::set_gold(::google::protobuf::int32 value) {
+inline void AckEndBattle::set_gold(::google::protobuf::int32 value) {
   set_has_gold();
   gold_ = value;
 }
 
-// required int32 exp = 2;
-inline bool ReqAckEndBattle::has_exp() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+// required int32 exp = 4;
+inline bool AckEndBattle::has_exp() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ReqAckEndBattle::set_has_exp() {
-  _has_bits_[0] |= 0x00000002u;
+inline void AckEndBattle::set_has_exp() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void ReqAckEndBattle::clear_has_exp() {
-  _has_bits_[0] &= ~0x00000002u;
+inline void AckEndBattle::clear_has_exp() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void ReqAckEndBattle::clear_exp() {
+inline void AckEndBattle::clear_exp() {
   exp_ = 0;
   clear_has_exp();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::exp() const {
+inline ::google::protobuf::int32 AckEndBattle::exp() const {
   return exp_;
 }
-inline void ReqAckEndBattle::set_exp(::google::protobuf::int32 value) {
+inline void AckEndBattle::set_exp(::google::protobuf::int32 value) {
   set_has_exp();
   exp_ = value;
 }
 
-// required int32 diamond = 3;
-inline bool ReqAckEndBattle::has_diamond() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// required int32 diamond = 5;
+inline bool AckEndBattle::has_diamond() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ReqAckEndBattle::set_has_diamond() {
-  _has_bits_[0] |= 0x00000004u;
+inline void AckEndBattle::set_has_diamond() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void ReqAckEndBattle::clear_has_diamond() {
-  _has_bits_[0] &= ~0x00000004u;
+inline void AckEndBattle::clear_has_diamond() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void ReqAckEndBattle::clear_diamond() {
+inline void AckEndBattle::clear_diamond() {
   diamond_ = 0;
   clear_has_diamond();
 }
-inline ::google::protobuf::int32 ReqAckEndBattle::diamond() const {
+inline ::google::protobuf::int32 AckEndBattle::diamond() const {
   return diamond_;
 }
-inline void ReqAckEndBattle::set_diamond(::google::protobuf::int32 value) {
+inline void AckEndBattle::set_diamond(::google::protobuf::int32 value) {
   set_has_diamond();
   diamond_ = value;
 }
 
-// repeated .NFMsg.ItemStruct item_list = 4;
-inline int ReqAckEndBattle::item_list_size() const {
+// repeated .NFMsg.ItemStruct item_list = 6;
+inline int AckEndBattle::item_list_size() const {
   return item_list_.size();
 }
-inline void ReqAckEndBattle::clear_item_list() {
+inline void AckEndBattle::clear_item_list() {
   item_list_.Clear();
 }
-inline const ::NFMsg::ItemStruct& ReqAckEndBattle::item_list(int index) const {
+inline const ::NFMsg::ItemStruct& AckEndBattle::item_list(int index) const {
   return item_list_.Get(index);
 }
-inline ::NFMsg::ItemStruct* ReqAckEndBattle::mutable_item_list(int index) {
+inline ::NFMsg::ItemStruct* AckEndBattle::mutable_item_list(int index) {
   return item_list_.Mutable(index);
 }
-inline ::NFMsg::ItemStruct* ReqAckEndBattle::add_item_list() {
+inline ::NFMsg::ItemStruct* AckEndBattle::add_item_list() {
   return item_list_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >&
-ReqAckEndBattle::item_list() const {
+AckEndBattle::item_list() const {
   return item_list_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::ItemStruct >*
-ReqAckEndBattle::mutable_item_list() {
+AckEndBattle::mutable_item_list() {
   return &item_list_;
 }
 

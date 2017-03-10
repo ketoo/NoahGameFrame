@@ -11,8 +11,6 @@
 #include "NFCSkillModule.h"
 #include "NFCEquipModule.h"
 #include "NFCPVPModule.h"
-#include "NFCMailModule.h"
-#include "NFCRankModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
 #include "NFCGSSwichServerModule.h"
@@ -58,8 +56,6 @@ void NFGameLogicPlugin::Install()
 
 	REGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
 	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
-	REGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule);
-	REGISTER_MODULE(pPluginManager, NFIRankModule, NFCRankModule);
     REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
     REGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
 	REGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
@@ -78,8 +74,6 @@ void NFGameLogicPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFIGSSwichServerModule, NFCGSSwichServerModule);
     UNREGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
     UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
-	UNREGISTER_MODULE(pPluginManager, NFIRankModule, NFCRankModule);
-    UNREGISTER_MODULE(pPluginManager, NFIMailModule, NFCMailModule);
     
 	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
 	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
