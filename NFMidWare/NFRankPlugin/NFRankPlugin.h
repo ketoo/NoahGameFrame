@@ -1,22 +1,22 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.h
+//    @FileName			:    NFRankPlugin.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFChatPlugin
+//    @Module           :    NFRankPlugin
 //
 // -------------------------------------------------------------------------
 
-#ifndef NF_CHAT_PLUGIN_H
-#define NF_CHAT_PLUGIN_H
+#ifndef NF_RANK_PLUGIN_H
+#define NF_RANK_PLUGIN_H
 
 ///
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-class NFChatPlugin : public NFIPlugin
+class NFRankPlugin : public NFIPlugin
 {
 public:
-	NFChatPlugin(NFIPluginManager* p)
+	NFRankPlugin(NFIPluginManager* p)
     {
         pPluginManager = p;
     }

@@ -34,6 +34,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+	virtual bool GetOnlinePlayerTileData(const NFGUID& self, std::string& strData);
 protected:
 	void ReqMineTile(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 

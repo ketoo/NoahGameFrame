@@ -234,9 +234,9 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
 bool NFCMasterNet_ServerModule::AfterInit()
 {
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCMasterNet_ServerModule::OnHeartBeat);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_REGISTERED, this, &NFCMasterNet_ServerModule::OnWorldRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REGISTERED, this, &NFCMasterNet_ServerModule::OnWorldRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REGISTERED, this, &NFCMasterNet_ServerModule::OnLoginRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess);
