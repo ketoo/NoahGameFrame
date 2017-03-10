@@ -4,6 +4,7 @@
 //    @Date             :    2016-12-18
 //    @Module           :    NFCMailModule
 //    @Desc             :
+// -------------------------------------------------------------------------
 
 #include "NFCMailModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
