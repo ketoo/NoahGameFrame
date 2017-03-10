@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFITileModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCPVPModule
@@ -36,6 +37,7 @@ public:
     virtual bool Shut();
     virtual bool Execute();
     virtual bool AfterInit();
+	virtual bool ReadyExecute();
 
 	virtual int RandomTileScene();
 
@@ -50,6 +52,8 @@ protected:
 	void FindAllTileScene();
 	void InitAllTileSceneRobot();
 
+	int OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 	int EnterSceneConditionEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
 	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
@@ -58,6 +62,7 @@ protected:
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
 private:
+	NFITileModule* m_pTileModule;
 	NFIPropertyModule* m_pPropertyModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
