@@ -283,6 +283,13 @@ bool NFCSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
 	return false;
 }
 
+bool NFCSceneAOIModule::RemoveSwapSceneEventCallBack()
+{
+	mtOnSwapSceneCallback.clear();
+
+	return true;
+}
+
 bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
