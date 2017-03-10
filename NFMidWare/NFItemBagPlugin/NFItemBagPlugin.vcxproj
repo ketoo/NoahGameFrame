@@ -101,6 +101,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCEquipModule.cpp" />
+    <ClCompile Include="NFCEquipPropertyModule.cpp" />
     <ClCompile Include="NFCItemCardConsumeProcessModule.cpp" />
     <ClCompile Include="NFCItemConsumeManagerModule.cpp" />
     <ClCompile Include="NFCItemEquipConsumeProcessModule.cpp" />
@@ -112,6 +114,8 @@
     <ClCompile Include="NFItemBagPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCEquipModule.h" />
+    <ClInclude Include="NFCEquipPropertyModule.h" />
     <ClInclude Include="NFCItemCardConsumeProcessModule.h" />
     <ClInclude Include="NFCItemConsumeManagerModule.h" />
     <ClInclude Include="NFCItemEquipConsumeProcessModule.h" />
