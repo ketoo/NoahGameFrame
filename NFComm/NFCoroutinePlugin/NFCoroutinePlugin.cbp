@@ -10,6 +10,7 @@
 				<Option output="$(SolutionDir)/_Out/Debug/NFCoroutinePlugin_d" prefix_auto="0" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -24,6 +25,8 @@
 					<Add directory="$(SolutionDir)/NFComm/NFPluginModule" />
 				</Compiler>
 				<Linker>
+					<Add option="-ldl" />
+					<Add option="-lpthread" />
 					<Add directory="$(SolutionDir)/_Out/Debug/" />
 					<Add directory="$(SolutionDir)/lib/Deubg/" />
 				</Linker>
@@ -60,10 +63,6 @@
 		</Build>
 		<Unit filename="NFCCoroutineModule.cpp" />
 		<Unit filename="NFCCoroutineModule.h" />
-		<Unit filename="NFContextData.hpp" />
-		<Unit filename="NFCoroutinePlugin.cpp" />
-		<Unit filename="NFCoroutinePlugin.h" />
-		<Unit filename="dllmain.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
