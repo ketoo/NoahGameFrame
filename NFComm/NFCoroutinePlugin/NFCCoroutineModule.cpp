@@ -10,210 +10,195 @@
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-static char g_stack[2048];
-static ucontext_t ctx_main;
-static NF_SHARE_PTR<NFContextData> xConTextPtr = nullptr;
-//void* func(void* a_pObj)
-void func()
+struct coro_pck
 {
-    //WS_T_P_CONTROL_T* pObj = (WS_T_P_CONTROL_T*)a_pObj;
-    // do something.
-    cout << "enter func" << endl;
-
-    sleep(2);
-
-    if (xConTextPtr)
+    coro_pck()
     {
-        xConTextPtr->SetState(NFContextState::NFCOROUTINE_COMPLETED);
-
-        setcontext(&ctx_main);
+        nID = 0;
+        _mainCoro = NULL;
+        state = NFCoroutineState::READY;
     }
+
+	ucontext_t* _mainCoro;
+	int nID;
+
+	ucontext_t taskCoro;
+    enum NFCoroutineState state;
+};
+
+void Schedule();
+void Execute();
+
+void thread_work(coro_pck *pData)
+{
+        std::cout << "do_some_work_start ID " << pData->nID << std::endl;
+        sleep(3);
+        pData->state = NFCoroutineState::FINISHED;
+        std::cout << "do_some_work_end ID " << pData->nID << std::endl;
+
+}
+
+
+void funckkkkkkk(void * arg)
+{
+	coro_pck* pck = (coro_pck*)arg;
+
+    std::cout << "enter coro ID " << pck->nID << std::endl;
+
+    if (pck->state == NFCoroutineState::READY)
+    {
+        pck->state = NFCoroutineState::RUNNING;
+
+        std::thread t(thread_work, pck);
+        t.detach();
+    }
+
+    while(1)
+    {
+
+	    //sleep(1);
+        if (pck->state == NFCoroutineState::FINISHED)
+        {
+
+            pck->state = NFCoroutineState::BACKING;
+            break;
+        }
+        else
+        {
+            printf("switch to main\n");
+
+            swapcontext(&(pck->taskCoro), pck->_mainCoro);
+
+            std::cout << "switch in coro ID " << pck->nID << std::endl;
+        }
+
+    }
+
+    std::cout << "leave coro ID " << pck->nID << std::endl;
+}
+
+std::vector<coro_pck*> coroutine_list;
+
+int start_coroutine(ucontext_t* ctx_main)
+{
+
+    std::cout << "start_coroutine_start" << std::endl;
+
+    coro_pck* coroPck = new coro_pck();
+    coroPck->nID = coroutine_list.size();
+    coroutine_list.push_back(coroPck);
+
+    coroPck->_mainCoro = ctx_main;
+
+
+	getcontext(&coroPck->taskCoro);
+
+	coroPck->taskCoro.uc_stack.ss_sp = malloc(1024*1024);
+	coroPck->taskCoro.uc_stack.ss_size = 1024 * 1024;
+	coroPck->taskCoro.uc_stack.ss_flags = 0;
+	coroPck->taskCoro.uc_link = ctx_main;
+
+	makecontext(&(coroPck->taskCoro), (void(*)(void))funckkkkkkk, 1, coroPck);
+
+	//check state finished
+    while(1)
+    {
+
+	    //sleep(1);
+        if (coroPck->state == NFCoroutineState::BACKING)
+        {
+            coroPck->state = NFCoroutineState::FREE;
+            std::cout << "FREE coro ID " << coroPck->nID << std::endl;
+
+            break;
+        }
+        else
+        {
+            std::cout << "switch to coro ID " << coroPck->nID << std::endl;
+
+            swapcontext(ctx_main, &(coroPck->taskCoro));
+
+            printf("switch in main\n");
+
+            Schedule();
+        }
+    }
+    std::cout << "start_coroutine_end " << coroPck->nID << std::endl;
+
+    return coroPck->nID;
+}
+int i = 0;
+
+ucontext_t mainCoro;
+
+void OtherBusiness1()
+{
+        if (i <= 0)
+        {
+            i++;
+
+            std::cout << "use coroutine---start000" << std::endl;
+            start_coroutine(&mainCoro);
+            std::cout << "use coroutine---end0000" << std::endl;
+
+            std::cout << "use coroutine---start111" << std::endl;
+            start_coroutine(&mainCoro);
+            std::cout << "use coroutine---end111" << std::endl;
+
+            std::cout << "use coroutine---start222" << std::endl;
+            start_coroutine(&mainCoro);
+            std::cout << "use coroutine---end222" << std::endl;
+
+        }
+    printf("do others business1111111\n");
+}
+
+void OtherBusiness2()
+{
+    printf("do others business222222222\n");
+}
+
+void Schedule()
+{
+    sleep(1);
+
+        for (int index = 0; index < coroutine_list.size(); ++index)
+        {
+
+            coro_pck* coroPck =coroutine_list[index];
+            if (coroPck->state == NFCoroutineState::FINISHED)
+            {
+
+                std::cout << "Schedule switch to coro ID " << coroPck->nID << std::endl;
+
+                swapcontext(coroPck->_mainCoro, &(coroPck->taskCoro));
+                //break;
+                return;
+            }
+        }
+
+        Execute();
+}
+
+void Execute()
+{
+
+    printf("Execute\n");
+
+    OtherBusiness1();
+    OtherBusiness2();
+
+    Schedule();
 }
 
 int main()
 {
-    /*
-    ucontext_t context;
-
-    getcontext(&context);
-    puts("Hello world");
-    sleep(5);
-    setcontext(&context);
-*/
-    NFCCoroutineModule xCCoroutineModule(nullptr);
 
 
-    while(1)
-    {
-        sleep(1);
-        xCCoroutineModule.Execute();
-
-    }
-
-    return 0;
-}
-
-NFCCoroutineModule::NFCCoroutineModule(NFIPluginManager* p)
-{
-	pPluginManager = p;
-	mnIndex = 1;
-}
-
-NFCCoroutineModule::~NFCCoroutineModule()
-{
-}
-
-
-bool NFCCoroutineModule::Execute()
-{
-
-    static bool bInit = false;
-    if (!bInit)
-    {
-        bInit = true;
-        getcontext(&ctx_main);
-    }
-
-    static int iindex  = 0;
-    if (iindex < 3)
-    {
-        iindex += 1;
-
-        std::cout << "StartCoroutine begin" << std::endl;
-        StartCoroutine(&func);
-        std::cout << "StartCoroutine end" << std::endl;
-    }
-
-    Schedule();
-
-
-
-	return true;
-}
-
-void NFCCoroutineModule::Schedule()
-{
-	for (auto it = mxCoroutineMap.begin(); it != mxCoroutineMap.end(); it++)
+	while (true)
 	{
-		switch (it->second->GetState())
-		{
-		case NFContextState::NFCOROUTINE_READY:
-		{
-			//start
-			//1:synchron--exp:sleep
-			//2:asynchron--exp:actor
-			StartCoroutine(it->second);
-
-		}
-		break;
-		case NFContextState::NFCOROUTINE_RUNNING:
-		{
-			if (it->second->GetOutTime() > (uint64_t)NFGetTime())
-			{
-				it->second->SetState(NFContextState::NFCOROUTINE_DEAD);
-			}
-			else
-			{
-				//check actor msessage
-			}
-		}
-		break;
-		case NFContextState::NFCOROUTINE_COMPLETED:
-		{
-			EndCoroutine(it->second);
-		}
-		break;
-
-		default:
-			break;
-		}
+        Execute();
 	}
 
-	for (auto it = mxCoroutineMap.begin(); it != mxCoroutineMap.end();)
-	{
-		if (it->second->GetState() == NFContextState::NFCOROUTINE_DEAD)
-		{
-			it = mxCoroutineMap.erase(it);
-			continue;
-		}
-
-		it++;
-	}
-
-	return;
-}
-
-void NFCCoroutineModule::StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
-{
-#ifndef _MSC_VER
-
-	xContextData->SetState(NFContextState::NFCOROUTINE_RUNNING);
-    xConTextPtr = xContextData;
-
-    swapcontext(&ctx_main, &(xContextData->ctx_func));
-
-#endif // _MSC_VER
-}
-
-void NFCCoroutineModule::EndCoroutine(NF_SHARE_PTR<NFContextData> xContextData)
-{
-	xContextData->SetState(NFContextState::NFCOROUTINE_DEAD);
-
-    setcontext(&(xContextData->ctx_resume));
-	//swap context ---continue execute last address
-}
-
-NFINT64 NFCCoroutineModule::CreateNewContextID()
-{
-	return mnIndex++;
-}
-
-bool NFCCoroutineModule::StartCoroutine(TaskFunction const & fn)
-{
-	NF_SHARE_PTR<NFContextData> xContextData(NF_NEW NFContextData(this));
-	NFINT64 nContextID = CreateNewContextID();
-	mxCoroutineMap[nContextID] = xContextData;
-
-#ifndef _MSC_VER
-
-    getcontext(&(xContextData->ctx_func));
-
-    xContextData->ctx_func.uc_stack.ss_sp = g_stack;
-    xContextData->ctx_func.uc_stack.ss_size = sizeof g_stack;
-    //xCoroutine[i].ctx_func.uc_link = &ctx_main;
-    xContextData->ctx_func.uc_link = NULL;
-    makecontext(&(xContextData->ctx_func), func, 0);
-
-
-    getcontext(&(xContextData->ctx_resume));
-
-    if (xContextData->GetState() == NFContextState::NFCOROUTINE_READY)
-    {
-        setcontext(&ctx_main);
-    }
-
-    std::cout << " The End of StartCoroutine " << std::endl;
-#endif
-
-	return true;
-}
-
-bool NFCCoroutineModule::Init()
-{
-	return true;
-}
-
-bool NFCCoroutineModule::AfterInit()
-{
-	return true;
-}
-
-bool NFCCoroutineModule::Shut()
-{
-	return true;
-}
-
-bool NFCCoroutineModule::BeforeShut()
-{
-	return true;
+	return 0;
 }
