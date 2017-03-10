@@ -183,14 +183,14 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_CLOSE_SOCKET", Value=3)]
       EGMI_CLOSE_SOCKET = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_MTL_WORLD_REGISTERED", Value=10)]
-      EGMI_MTL_WORLD_REGISTERED = 10,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_WTM_WORLD_REGISTERED", Value=10)]
+      EGMI_WTM_WORLD_REGISTERED = 10,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_MTL_WORLD_UNREGISTERED", Value=11)]
-      EGMI_MTL_WORLD_UNREGISTERED = 11,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_WTM_WORLD_UNREGISTERED", Value=11)]
+      EGMI_WTM_WORLD_UNREGISTERED = 11,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_MTL_WORLD_REFRESH", Value=12)]
-      EGMI_MTL_WORLD_REFRESH = 12,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_WTM_WORLD_REFRESH", Value=12)]
+      EGMI_WTM_WORLD_REFRESH = 12,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_LTM_LOGIN_REGISTERED", Value=20)]
       EGMI_LTM_LOGIN_REGISTERED = 20,
