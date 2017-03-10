@@ -118,7 +118,7 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
 				if (pServerData)
 				{
 					int nTargetID = pServerData->nGameID;
-					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_MTL_WORLD_REGISTERED, xMsg);
+					m_pNetClientModule->SendToServerByPB(nTargetID, NFMsg::EGameMsgID::EGMI_WTM_WORLD_REGISTERED, xMsg);
 
 					m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, pData->server_id()), pData->server_name(), "Register");
 				}
