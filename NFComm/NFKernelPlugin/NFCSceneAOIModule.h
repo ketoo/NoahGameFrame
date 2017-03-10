@@ -47,6 +47,8 @@ public:
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID);
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID);
 
+	virtual bool RemoveSwapSceneEventCallBack();
+
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb);

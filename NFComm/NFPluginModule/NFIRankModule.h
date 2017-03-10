@@ -15,7 +15,6 @@
 class NFIRankModule : public NFIModule
 {
 public:
-    virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue) = 0;
 };
 
-#endif // !NFI_RANK_MODULE_H
+#endif
