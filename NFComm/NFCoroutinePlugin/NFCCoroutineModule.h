@@ -9,38 +9,31 @@
 #ifndef NF_COROUTINE_MODULE_H
 #define NF_COROUTINE_MODULE_H
 
-#include "NFContextData.hpp"
+#include <stdint.h>
+#include <type_traits>
+#include <functional>
+#include <list>
+#include <vector>
+#include <set>
+#include <stddef.h>
+#include <functional>
+#include <exception>
+#include <iostream>
+#include <ucontext.h>
+#include <thread>
+#include <sys/time.h>
+#include <unistd.h>
+#include <time.h>
 
-class NFCCoroutineModule
-	: public NFICoroutineModule
+typedef void (*CoroutineFun)(void *arg);
+
+enum NFCoroutineState
 {
-public:
-	NFCCoroutineModule(NFIPluginManager* p);
-	virtual ~NFCCoroutineModule();
-
-
-	virtual bool StartCoroutine(TaskFunction const& fn);
-
-	virtual bool Init();
-	virtual bool AfterInit();
-	virtual bool BeforeShut();
-	virtual bool Shut();
-	virtual bool Execute();
-
-private:
-	void Schedule();
-	void StartCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
-	void EndCoroutine(NF_SHARE_PTR<NFContextData> xContextData);
-	NFINT64 CreateNewContextID();
-
-private:
-	NFINT64 mnIndex;
-
-#ifndef _MSC_VER
-	ucontext_t mxCtxMain;
-#endif
-
-	std::map<NFINT64, NF_SHARE_PTR<NFContextData>> mxCoroutineMap;
+    FREE,
+    READY,
+    RUNNING,
+    FINISHED,
+    BACKING
 };
 
 
