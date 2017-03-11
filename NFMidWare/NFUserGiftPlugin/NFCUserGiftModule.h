@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCUserGiftModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
+//    @Module           :    NFCUserGiftModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
@@ -15,19 +15,17 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIChatModule.h"
+#include "NFComm/NFPluginModule/NFIUserGiftModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
-
-
-class NFCChatModule
-    : public NFIChatModule
+class NFCUserGiftModule
+    : public NFIUserGiftModule
 {
 public:
-	NFCChatModule(NFIPluginManager* p)
+	NFCUserGiftModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
