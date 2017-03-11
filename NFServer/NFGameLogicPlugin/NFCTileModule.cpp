@@ -80,6 +80,13 @@ void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const ch
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
+	NFGUID xViewOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent());
+	NFGUID xFightOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightOppnent());
+	if (!xViewOppnentID.IsNull() || !xFightOppnentID.IsNull())
+	{
+		return;
+	}
+
 	int nX = xMsg.x();
 	int nY = xMsg.y();
 	int nOpr = xMsg.opr();
