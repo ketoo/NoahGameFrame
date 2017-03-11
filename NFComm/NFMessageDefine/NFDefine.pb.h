@@ -336,11 +336,12 @@ enum EItemType {
   EIT_GEM = 1,
   EIT_ITEM = 2,
   EIT_CARD = 3,
-  EIT_TOKEN = 4
+  EIT_TOKEN = 4,
+  EIT_GIFT_PACK = 5
 };
 LIBPROTOC_EXPORT bool EItemType_IsValid(int value);
 const EItemType EItemType_MIN = EIT_EQUIP;
-const EItemType EItemType_MAX = EIT_TOKEN;
+const EItemType EItemType_MAX = EIT_GIFT_PACK;
 const int EItemType_ARRAYSIZE = EItemType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EItemType_descriptor();
