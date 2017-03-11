@@ -25,16 +25,13 @@ bool NFCSceneAOIModule::Init()
 	NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (pLogicClass)
 	{
-		NFList<std::string>& strIdList = pLogicClass->GetIdList();
+		std::vector<std::string>& strIdList = pLogicClass->GetIdList();
 
 		std::string strId;
-		bool bRet = strIdList.First(strId);
-		while (bRet)
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
-			int nSceneID = lexical_cast<int>(strId);
+			int nSceneID = lexical_cast<int>(strIdList[i]);
 			m_pKernelModule->CreateScene(nSceneID);
-
-			bRet = strIdList.Next(strId);
 		}
 	}
 
