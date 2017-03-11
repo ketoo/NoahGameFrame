@@ -1,14 +1,14 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFChatPlugin.cpp
+//    @FileName			:    NFUserGiftPlugin.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-07-14 08:51
-//    @Module           :    NFChatPlugin
+//    @Module           :    NFUserGiftPlugin
 //
 // -------------------------------------------------------------------------
 
 
-#include "NFCChatModule.h"
-#include "NFChatPlugin.h"
+#include "NFCUserGiftModule.h"
+#include "NFUserGiftPlugin.h"
 
 //
 //
@@ -17,35 +17,35 @@
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
 
-    CREATE_PLUGIN(pm, NFChatPlugin)
+    CREATE_PLUGIN(pm, NFUserGiftPlugin)
 
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
 {
-    DESTROY_PLUGIN(pm, NFChatPlugin)
+    DESTROY_PLUGIN(pm, NFUserGiftPlugin)
 };
 
 #endif
 //////////////////////////////////////////////////////////////////////////
 
-const int NFChatPlugin::GetPluginVersion()
+const int NFUserGiftPlugin::GetPluginVersion()
 {
     return 0;
 }
 
-const std::string NFChatPlugin::GetPluginName()
+const std::string NFUserGiftPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFUserGiftPlugin);
 }
 
-void NFChatPlugin::Install()
+void NFUserGiftPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    REGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFCUserGiftModule)
 
 }
 
-void NFChatPlugin::Uninstall()
+void NFUserGiftPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFIChatModule, NFCChatModule)
+    UNREGISTER_MODULE(pPluginManager, NFIUserGiftModule, NFCUserGiftModule)
 }
