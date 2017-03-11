@@ -17,9 +17,7 @@
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
-
     CREATE_PLUGIN(pm, NFItemBagPlugin)
-
 };
 
 NF_EXPORT void DllStopPlugin(NFIPluginManager* pm)
@@ -53,7 +51,6 @@ void NFItemBagPlugin::Uninstall()
 {
 	UNREGISTER_MODULE(pPluginManager, NFIEquipPropertyModule, NFCEquipPropertyModule);
 	UNREGISTER_MODULE(pPluginManager, NFIEquipModule, NFCEquipModule)
-
 	UNREGISTER_MODULE(pPluginManager, NFIPackModule, NFCPackModule)
 	UNREGISTER_MODULE(pPluginManager, NFIItemModule, NFCItemModule)
 	UNREGISTER_MODULE(pPluginManager, NFIItemConsumeManagerModule, NFCItemConsumeManagerModule)
