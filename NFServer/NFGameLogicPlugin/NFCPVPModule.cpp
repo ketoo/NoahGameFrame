@@ -231,14 +231,14 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 
 		if (m_pTileModule->GetOnlinePlayerTileData(self, strTileData))
 		{
-			xAckSwapScene.set_data(strTileData.c_str());
+			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
 	}
 	else
 	{
 		if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOppnent, strTileData))
 		{
-			xAckSwapScene.set_data(strTileData.c_str());
+			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
 	}
 	
