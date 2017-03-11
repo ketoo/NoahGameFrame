@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIPackModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 class NFCUserGiftModule
@@ -34,12 +35,21 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
+	virtual bool CheckConfig();
 
+private:
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
+
+private:
+	NFMapEx<int, std::vector<std::string>> mxGiftMap;
 
 protected:
 
     //////////////////////////////////////////////////////////////////////////
-    NFIKernelModule* m_pKernelModule;
+	NFIPackModule* m_pPackModule;
+	NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;

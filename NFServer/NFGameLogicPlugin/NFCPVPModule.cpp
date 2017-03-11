@@ -189,10 +189,10 @@ void NFCPVPModule::FindAllTileScene()
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		std::vector<std::string>& strIdList = xLogicClass->GetIdList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Scene::Tile());
 			if (nServerType == 1)
 			{
