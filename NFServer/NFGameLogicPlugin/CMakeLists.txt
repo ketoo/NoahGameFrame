@@ -5,13 +5,6 @@ file(GLOB NFGameLogicPlugin_ROOT_Cpp
 file(GLOB NFGameLogicPlugin_ROOT_Hpp 
 	*.h)
 	
-remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCBriefSkillConsumeProcessModule.cpp")
-remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCBriefSkillConsumeProcessModule.h")
-
-remove_file(NFGameLogicPlugin_ROOT_Cpp "NFCBulletSkillConsumeProcessModule.cpp")
-remove_file(NFGameLogicPlugin_ROOT_Hpp "NFCBulletSkillConsumeProcessModule.h")
-	
-
 add_library(NFGameLogicPlugin SHARED
 	${NFGameLogicPlugin_ROOT_Cpp}
 	${NFGameLogicPlugin_ROOT_Hpp})
