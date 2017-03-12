@@ -18,6 +18,7 @@
 		<Property Id="SalePrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="卖商店价格"/>
 		<Property Id="Script" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品使用脚本文件，比如得到英雄等"/>
 		<Property Id="Extend" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="扩展字段，比如得到英雄等，实际意义和当时的类型有关系"/>
+		<Property Id="SpriteFile" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="SpriteFile"/>
 		<Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品显示Icon"/>
 		<Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="1" Upload="0" Desc="名字"/>
 		<Property Id="HeroTye" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="归属英雄类型，力敏智"/>
