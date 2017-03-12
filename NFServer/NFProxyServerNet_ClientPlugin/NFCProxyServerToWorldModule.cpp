@@ -99,8 +99,7 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
-		std::vector<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
@@ -152,8 +151,7 @@ void NFCProxyServerToWorldModule::ServerReport()
 	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
-		std::vector<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
@@ -215,8 +213,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
-		std::vector<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];

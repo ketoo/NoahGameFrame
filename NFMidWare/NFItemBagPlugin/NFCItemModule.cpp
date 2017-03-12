@@ -77,7 +77,7 @@ bool NFCItemModule::CheckConfig()
 		assert(0);
 	}
 
-	std::vector<std::string>& strIdList = pLogicCLass->GetIdList();
+	const std::vector<std::string>& strIdList = pLogicCLass->GetIDList();
 	for (int i = 0; i < strIdList.size(); ++i)
 	{
 		const std::string& strConfigID = strIdList[i];
