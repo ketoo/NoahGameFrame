@@ -580,6 +580,7 @@ public class Item {
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Script = "Script"; // string
 	public static final String Extend = "Extend"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
 	public static final String HeroTye = "HeroTye"; // int
