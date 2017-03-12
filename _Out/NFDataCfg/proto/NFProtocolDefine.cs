@@ -603,6 +603,7 @@ public class Item
 	public static readonly String SalePrice = "SalePrice"; // int
 	public static readonly String Script = "Script"; // string
 	public static readonly String Extend = "Extend"; // string
+	public static readonly String SpriteFile = "SpriteFile"; // string
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String HeroTye = "HeroTye"; // int
