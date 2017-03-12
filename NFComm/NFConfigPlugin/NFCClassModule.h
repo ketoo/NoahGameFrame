@@ -109,7 +109,7 @@ public:
         return true;
     }
 
-	std::vector<std::string>& GetIdList()
+	const std::vector<std::string>& GetIDList()
     {
         return mIdList;
     }

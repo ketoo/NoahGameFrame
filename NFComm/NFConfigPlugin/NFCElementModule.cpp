@@ -92,10 +92,11 @@ bool NFCElementModule::CheckRef()
 				//if one property is ref,check every config
 				if (pProperty->GetRef())
 				{
-					std::vector<std::string>& strIdList = pLogicClass->GetIdList();
-					std::string strId;
+					const std::vector<std::string>& strIdList = pLogicClass->GetIDList();
 					for (int i = 0; i < strIdList.size(); ++i)
 					{
+						const std::string& strId = strIdList[i];
+
 						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
 						if (!this->GetElement(strRefValue))
 						{
@@ -310,7 +311,7 @@ const std::vector<std::string> NFCElementModule::GetListByProperty(const std::st
 	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
 	if (nullptr != xClass)
 	{
-		std::vector<std::string>& xElementList = xClass->GetIdList();
+		const std::vector<std::string>& xElementList = xClass->GetIDList();
 		for (int i = 0; i < xElementList.size(); ++i)
 		{
 			const std::string& strConfigID = xElementList[i];
@@ -332,7 +333,7 @@ const std::vector<std::string> NFCElementModule::GetListByProperty(const std::st
 	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
 	if (nullptr != xClass)
 	{
-		std::vector<std::string>& xElementList = xClass->GetIdList();
+		const std::vector<std::string>& xElementList = xClass->GetIDList();
 		for (int i = 0; i < xElementList.size(); ++i)
 		{
 			const std::string& strConfigID = xElementList[i];

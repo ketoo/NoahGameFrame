@@ -45,7 +45,7 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
 	if (xLogicClass)
 	{
-		std::vector<std::string>& strIdList = xLogicClass->GetIdList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
