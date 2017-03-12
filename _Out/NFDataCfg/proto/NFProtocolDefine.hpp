@@ -619,6 +619,7 @@ public:
 	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
 	static const std::string& Script(){ static std::string xScript = "Script"; return xScript; } // string
 	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
+	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& HeroTye(){ static std::string xHeroTye = "HeroTye"; return xHeroTye; } // int
