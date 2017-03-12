@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="NFSkillModule">
-      <UniqueIdentifier>{64e4498b-a722-4265-83c7-878f6081a67f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFPVPModule">
       <UniqueIdentifier>{61a8697e-e6af-4dc2-a039-8939512fadc9}</UniqueIdentifier>
     </Filter>
@@ -50,9 +47,6 @@
     <ClInclude Include="NFCMapModule.h">
       <Filter>NFMapModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCSkillModule.h">
-      <Filter>NFSkillModule</Filter>
-    </ClInclude>
     <ClInclude Include="NFCCreateRoleModule.h">
       <Filter>NFCreateRoleModule</Filter>
     </ClInclude>
@@ -86,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="NFCMapModule.cpp">
       <Filter>NFMapModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCSkillModule.cpp">
-      <Filter>NFSkillModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCCreateRoleModule.cpp">
       <Filter>NFCreateRoleModule</Filter>

@@ -40,7 +40,7 @@ bool NFCBriefSkillConsumeProcessModule::Execute()
 }
 
 
-int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFIDataList& other )
+int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other )
 {
 
     return 0;
@@ -119,7 +119,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const st
     return 0;
 }
 
-int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
+int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
 {
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
     if ( pPropertyManager == NULL )
@@ -183,7 +183,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
     return 0;
 }
 
-int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFIDataList& other, NFIDataList& damageListValue, NFIDataList& damageResultList )
+int NFCBriefSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
 {
             //2BUFF(Get,Send)
 //     NFIPropertyManager* pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
