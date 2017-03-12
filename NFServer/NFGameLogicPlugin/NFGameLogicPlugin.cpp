@@ -8,7 +8,6 @@
 
 #include "NFGameLogicPlugin.h"
 #include "NFCBuffModule.h"
-#include "NFCSkillModule.h"
 #include "NFCPVPModule.h"
 #include "NFCCommonConfigModule.h"
 #include "NFCGmModule.h"
@@ -47,7 +46,6 @@ const std::string NFGameLogicPlugin::GetPluginName()
 void NFGameLogicPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
-	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
 	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
     REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
@@ -68,7 +66,6 @@ void NFGameLogicPlugin::Uninstall()
     UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
 	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
     UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
-	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
     UNREGISTER_MODULE(pPluginManager, NFIBuffModule, NFCBuffModule)
 
 }
