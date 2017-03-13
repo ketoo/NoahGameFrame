@@ -42,10 +42,11 @@ bool NFCNoSqlModule::AfterInit()
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::NoSqlServer::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
+
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::ServerID());
 			const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
 			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
@@ -66,6 +67,7 @@ bool NFCNoSqlModule::AfterInit()
 			}
 		}
 	}
+
 	return true;
 }
 

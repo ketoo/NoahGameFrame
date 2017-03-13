@@ -235,9 +235,32 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPla
 			std::string strKey = vKeys[nKeyIndex];
 			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
 			{
+				if (mxObjectTileCache.ExistElement(xPlayer))
+				{
+					mxObjectTileCache.RemoveElement(xPlayer);
+				}
+
+				mxObjectTileCache.AddElement(xPlayer, NF_SHARE_PTR<std::string>(NF_NEW std::string(strTileData)));
+
 				return true;
 			}
 		}
+	}
+
+	return false;
+}
+
+bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std::string & strTileData)
+{
+	if (mxObjectTileCache.ExistElement(xPlayer))
+	{
+		NF_SHARE_PTR<std::string> xData = mxObjectTileCache.GetElement(xPlayer);
+		if (xData)
+		{
+			strTileData = *xData;
+		}
+
+		return true;
 	}
 
 	return false;

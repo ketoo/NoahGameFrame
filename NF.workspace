@@ -6,7 +6,7 @@
 		<Project filename="NFComm/NFKernelPlugin/NFKernelPlugin.cbp" />
 		<Project filename="NFComm/NFLogPlugin/NFLogPlugin.cbp" />
 		<Project filename="NFComm/NFMessageDefine/NFMessageDefine.cbp" />
-		<Project filename="NFComm/NFNet/NFNet.cbp" />
+		<Project filename="NFComm/NFNetPlugin/NFNetPlugin.cbp" />
 		<Project filename="NFComm/NFPluginLoader/NFPluginLoader.cbp" />
 		<Project filename="NFServer/NFGameServerPlugin/NFGameServerPlugin.cbp" />
 		<Project filename="NFServer/NFGameServerNet_ClientPlugin/NFGameServerNet_ClientPlugin.cbp" />
