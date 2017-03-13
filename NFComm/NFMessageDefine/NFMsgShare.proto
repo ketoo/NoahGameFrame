@@ -158,10 +158,12 @@ message ReqAckSwapScene
 	optional float 		x = 4;
 	optional float 		y = 5;
 	optional float 		z = 6;
+	optional string 	data = 7;
 }
 //EGMI_REQ_SWAP_HOME_SCENE
 message ReqAckHomeScene
 {
+	optional string 	data = 1;
 }
 
 message ItemStruct
@@ -185,15 +187,21 @@ message ReqAckStartBattle
 }
 
 //EGMI_REQ_END_OPPNENT
+message ReqEndBattle
+{
+}
+
 //EGMI_ACK_END_OPPNENT
-message ReqAckEndBattle
+message AckEndBattle
 {
 	//下发的时候则为道具列表
 	//获得的金币等列表
-    required int32 gold            = 1; // 副本获得的金币
-    required int32 exp              = 2; // 副本获得的经验
-    required int32 diamond          = 3; // 副本获得的zhuanshi
-    repeated ItemStruct item_list   = 4; // 副本获得的道具列表
+    required int32 win            	= 1; //
+    required int32 star            	= 2; //
+    required int32 gold            	= 3; // 副本获得的金币
+    required int32 exp              = 4; // 副本获得的经验
+    required int32 diamond          = 5; // 副本获得的zhuanshi
+    repeated ItemStruct item_list   = 6; // 副本获得的道具列表
 }
 
 

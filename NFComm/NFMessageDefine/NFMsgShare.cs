@@ -581,6 +581,14 @@ namespace NFMsg
       get { return _z; }
       set { _z = value; }
     }
+    private string _data = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string data
+    {
+      get { return _data; }
+      set { _data = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"EGameSwapType")]
     public enum EGameSwapType
     {
@@ -608,6 +616,14 @@ namespace NFMsg
   {
     public ReqAckHomeScene() {}
     
+    private string _data = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string data
+    {
+      get { return _data; }
+      set { _data = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -685,34 +701,58 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckEndBattle")]
-  public partial class ReqAckEndBattle : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqEndBattle")]
+  public partial class ReqEndBattle : global::ProtoBuf.IExtensible
   {
-    public ReqAckEndBattle() {}
+    public ReqEndBattle() {}
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckEndBattle")]
+  public partial class AckEndBattle : global::ProtoBuf.IExtensible
+  {
+    public AckEndBattle() {}
+    
+    private int _win;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"win", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int win
+    {
+      get { return _win; }
+      set { _win = value; }
+    }
+    private int _star;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"star", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int star
+    {
+      get { return _star; }
+      set { _star = value; }
+    }
     private int _gold;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int gold
     {
       get { return _gold; }
       set { _gold = value; }
     }
     private int _exp;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"exp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int exp
     {
       get { return _exp; }
       set { _exp = value; }
     }
     private int _diamond;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"diamond", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"diamond", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int diamond
     {
       get { return _diamond; }
       set { _diamond = value; }
     }
     private readonly global::System.Collections.Generic.List<NFMsg.ItemStruct> _item_list = new global::System.Collections.Generic.List<NFMsg.ItemStruct>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"item_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"item_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.ItemStruct> item_list
     {
       get { return _item_list; }

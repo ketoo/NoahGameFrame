@@ -97,12 +97,16 @@ public:
     virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strConfigName, const std::string& strPropertyName);
 
+	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const int nValue);
+	virtual const std::vector<std::string> GetListByProperty(const std::string& strClassName, const std::string& strPropertyName, const std::string& nValue);
+
 protected:
     virtual NF_SHARE_PTR<NFIProperty> GetProperty(const std::string& strConfigName, const std::string& strPropertyName);
 
     virtual bool Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pLogicClass);
     virtual bool CheckRef();
     virtual bool LegalNumber(const char* str);
+
 protected:
     NFIClassModule* m_pClassModule;
     bool mbLoaded;

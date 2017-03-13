@@ -16,7 +16,7 @@ class NFITileModule
     : public NFIModule
 {
 public:
-
+	 virtual bool GetOnlinePlayerTileData(const NFGUID& self, std::string& strData) = 0;
 };
 
 #endif
