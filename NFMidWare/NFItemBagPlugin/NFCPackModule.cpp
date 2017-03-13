@@ -117,6 +117,8 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		xRowData->SetString(NFrame::Player::BagItemList_ConfigID, strConfigName);
 		xRowData->SetInt(NFrame::Player::BagItemList_ItemCount, nCount);
 		xRowData->SetInt(NFrame::Player::BagItemList_Date, pPluginManager->GetNowTime());
+
+		pRecord->AddRow(-1, *xRowData);
 	}
 	else
 	{

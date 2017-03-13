@@ -55,9 +55,13 @@ bool NFCUserGiftModule::CheckConfig()
 
 int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
-	if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+	if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_AFTER_EFFECT)
 	{
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCUserGiftModule::OnLevelPropertyEvent);
+		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount()) <= 0)
+		{
+			DoLevelAward(self, 1);
+		}
 	}
 
 	return 0;
@@ -65,7 +69,15 @@ int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string
 int NFCUserGiftModule::OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
 	int nNewLevel = newVar.GetInt();
-	NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nNewLevel);
+
+	DoLevelAward(self, nNewLevel);
+
+	return 0;
+}
+
+bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
+{
+	NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
 	if (xItemList)
 	{
 		for (int i = 0; i < xItemList->size(); ++i)
@@ -74,7 +86,7 @@ int NFCUserGiftModule::OnLevelPropertyEvent(const NFGUID& self, const std::strin
 			//
 			NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementModule->GetPropertyManager(strGiftItemID);
 			NF_SHARE_PTR<NFIProperty> xProperty = xPropertyManager->GetElement(NFrame::Item::AwardData());
-			const NF_SHARE_PTR<NFMapEx<std::string, std::string>> xEmbeddedMap =  xProperty->GetEmbeddedMap();
+			const NF_SHARE_PTR<NFMapEx<std::string, std::string>> xEmbeddedMap = xProperty->GetEmbeddedMap();
 			if (xEmbeddedMap)
 			{
 				std::string strItemID;
@@ -87,9 +99,11 @@ int NFCUserGiftModule::OnLevelPropertyEvent(const NFGUID& self, const std::strin
 				}
 			}
 		}
+
+		return true;
 	}
 
-	return 0;
+	return false;
 }
 
 bool NFCUserGiftModule::Shut()

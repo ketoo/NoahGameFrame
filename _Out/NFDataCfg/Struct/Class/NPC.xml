@@ -22,6 +22,7 @@
 		<Property Id="LastAttacker" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="最后攻击者"/>
 		<Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="显示名字"/>
 		<Property Id="EquipIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="装备列表索引"/>
+		<Property Id="SpriteFile" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="SpriteFile"/>
 		<Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="图标"/>
 		<Property Id="ShowCard" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="卡牌背景"/>
 		<Property Id="HeroType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="英雄类型，力智敏"/>
