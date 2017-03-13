@@ -783,10 +783,7 @@ namespace NFMsg
       EIT_CARD = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EIT_TOKEN", Value=4)]
-      EIT_TOKEN = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EIT_GIFT_PACK", Value=5)]
-      EIT_GIFT_PACK = 5
+      EIT_TOKEN = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameEquipSubType")]

@@ -345,7 +345,6 @@ enum EItemType
 	EIT_ITEM   				= 2; //
 	EIT_CARD   				= 3; //
 	EIT_TOKEN	   			= 4; //
-	EIT_GIFT_PACK	   		= 5; //
 }
 
 //
