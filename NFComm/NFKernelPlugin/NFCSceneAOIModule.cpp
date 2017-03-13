@@ -22,19 +22,17 @@ bool NFCSceneAOIModule::Init()
 	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCSceneAOIModule::OnRecordCommonEvent);
 
 	//init all scene
-	NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
-	if (pLogicClass)
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = pLogicClass->GetIdList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-		std::string strId;
-		bool bRet = strIdList.First(strId);
-		while (bRet)
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
-			int nSceneID = lexical_cast<int>(strId);
-			m_pKernelModule->CreateScene(nSceneID);
+			const std::string& strId = strIdList[i];
 
-			bRet = strIdList.Next(strId);
+			int nSceneID = lexical_cast<int>(strIdList[i]);
+			m_pKernelModule->CreateScene(nSceneID);
 		}
 	}
 
@@ -110,7 +108,9 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		return false;
 	}
 
-	if (!SwitchScene(self, nSceneID, nGrupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	
+	NFVector3 vRelivePos = GetRelivePosition(nSceneID, 0);
+	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos.X(), vRelivePos.Y(), vRelivePos.Z(), 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
@@ -279,6 +279,13 @@ bool NFCSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
 	}
 
 	return false;
+}
+
+bool NFCSceneAOIModule::RemoveSwapSceneEventCallBack()
+{
+	mtOnSwapSceneCallback.clear();
+
+	return true;
 }
 
 bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFDataList& arg)
