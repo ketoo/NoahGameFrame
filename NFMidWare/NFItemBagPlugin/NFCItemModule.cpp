@@ -77,12 +77,11 @@ bool NFCItemModule::CheckConfig()
 		assert(0);
 	}
 
-	NFList<std::string>& configList = pLogicCLass->GetIdList();
-	std::string strConfigID;
-	bool bRet = configList.First(strConfigID);
-
-	while (bRet)
+	const std::vector<std::string>& strIdList = pLogicCLass->GetIDList();
+	for (int i = 0; i < strIdList.size(); ++i)
 	{
+		const std::string& strConfigID = strIdList[i];
+
 		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strConfigID);
 		if (!pPropertyManager)
 		{
@@ -133,8 +132,6 @@ bool NFCItemModule::CheckConfig()
 		{
 			assert(0);
 		}
-
-		bRet = configList.Next(strConfigID);
 	}
 
 	return true;

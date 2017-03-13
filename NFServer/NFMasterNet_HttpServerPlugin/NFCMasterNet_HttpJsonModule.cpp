@@ -45,10 +45,11 @@ bool NFCMasterNet_HttpJsonModule::AfterInit()
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
+
 			nJsonPort = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::WebPort());
 			nWebServerAppID = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::ServerID());
 			m_strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
