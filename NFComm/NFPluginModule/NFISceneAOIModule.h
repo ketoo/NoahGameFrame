@@ -303,6 +303,7 @@ public:
 		return AddAfterEnterSceneGroupCallBack(functorPtr);
 	}
 
+
 	template<typename BaseType>
 	bool AddSwapSceneEventCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
 	{
@@ -310,6 +311,8 @@ public:
 		SCENE_EVENT_FUNCTOR_PTR functorPtr(new SCENE_EVENT_FUNCTOR(functor));
 		return AddSwapSceneEventCallBack(functorPtr);
 	}
+
+	virtual bool RemoveSwapSceneEventCallBack() = 0;
 
 	template<typename BaseType>
 	bool AddBeforeLeaveSceneGroupCallBack(BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const int, const int, const NFDataList&))
