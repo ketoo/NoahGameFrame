@@ -7,8 +7,9 @@
     <LocalDebuggerWorkingDirectory>$(NFBIN_SERVER)\$(Configuration)\NFMasterServer\</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Debug\Tutorial3</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>$(SolutionDir)\_Out\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>$(SolutionDir)\_Out\Debug\Tutorial3\NFPluginLoader_d.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommand>$(SolutionDir)\_Out\Debug\NFPluginLoader_d.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>"Server=TutorialServer" "ID=4"</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
