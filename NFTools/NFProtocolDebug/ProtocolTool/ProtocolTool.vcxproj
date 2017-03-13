@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{30830014-FCD7-4EFE-B16E-83D795FFCC69}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ProtocolTool</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>..\Obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>..\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>..\Obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>..\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;__WXMSW__
+;__WXDEBUG__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\wx\include;.\wx\lib\vc_lib\mswud;..\..\..\;..\..\..\Dependencies\;..\..\..\Dependencies\libevent\;..\..\..\Dependencies\libevent\WIN32-Code\;..\..\..\Dependencies\libevent\include\;..\..\..\Dependencies\libevent\compat\;..\protobuf\src\;..\..\..\Dependencies\Theron\Include\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>.\wx\lib\vc_lib;..\..\..;..\..\..\Dependencies\lib\$(Configuration)\;..\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase30ud_net.lib;wxmsw30ud_html.lib;wxbase30ud_xml.lib;wxmsw30ud_adv.lib;wxmsw30ud_aui.lib;wxmsw30ud_gl.lib;wxmsw30ud_media.lib;wxmsw30ud_propgrid.lib;wxmsw30ud_qa.lib;wxmsw30ud_ribbon.lib;wxmsw30ud_richtext.lib;wxmsw30ud_stc.lib;wxmsw30ud_xrc.lib;wxscintillad.lib;wxmsw30ud_core.lib;wxbase30ud.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbccp32.lib;ws2_32.lib;wldap32.lib;libprotobuf_d.lib;libevent.lib;libevent_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;__WXMSW__
+;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\wx\include;.\wx\lib\vc_lib\mswu;..\..\..\;..\..\..\Dependencies\;..\..\..\Dependencies\libevent\;..\..\..\Dependencies\libevent\WIN32-Code\;..\..\..\Dependencies\libevent\include\;..\..\..\Dependencies\libevent\compat\;..\protobuf\src\;..\..\..\Dependencies\Theron\Include\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>.\wx\lib\vc_lib;..\..\..;..\..\..\Dependencies\lib\$(Configuration)\;..\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase30u_net.lib;wxmsw30u_html.lib;wxbase30u_xml.lib;wxmsw30u_adv.lib;wxmsw30u_aui.lib;wxmsw30u_gl.lib;wxmsw30u_media.lib;wxmsw30u_propgrid.lib;wxmsw30u_qa.lib;wxmsw30u_ribbon.lib;wxmsw30u_richtext.lib;wxmsw30u_stc.lib;wxmsw30u_xrc.lib;wxscintilla.lib;wxmsw30u_core.lib;wxbase30u.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxexpat.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbccp32.lib;ws2_32.lib;wldap32.lib;libprotobuf.lib;libevent.lib;libevent_core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="Dlg.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetWorkThread.cpp" />
+    <ClCompile Include="NFCNet.cpp" />
+    <ClCompile Include="NFDefine.pb.cc" />
+    <ClCompile Include="NFMsgBase.pb.cc" />
+    <ClCompile Include="NFMsgBaseEx.pb.cc" />
+    <ClCompile Include="ProtocolManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app.h" />
+    <ClInclude Include="Dlg.h" />
+    <ClInclude Include="NetWorkThread.h" />
+    <ClInclude Include="NFCNet.h" />
+    <ClInclude Include="NFDefine.pb.h" />
+    <ClInclude Include="NFMsgBase.pb.h" />
+    <ClInclude Include="NFMsgBaseEx.pb.h" />
+    <ClInclude Include="ProtocolManager.h" />
+    <ClInclude Include="stdwx.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
