@@ -21,12 +21,24 @@
 	<Object Id="Desc_GEM_WIND" English="" Chinese="风属性宝石！"/>
 	<Object Id="Desc_GEM_ICE" English="" Chinese="冰属性宝石！"/>
 	<Object Id="Desc_GEM_POISON" English="" Chinese="毒属性宝石！"/>
-	<Object Id="Desc_HeroCard_1" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
-	<Object Id="Desc_HeroCard_2" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
-	<Object Id="Desc_HeroCard_3" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
-	<Object Id="Desc_HeroCard_4" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
-	<Object Id="Desc_HeroCard_5" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
-	<Object Id="Desc_HeroCard_6" English="" Chinese="英雄卡片，使用获得英雄或者增加经验。"/>
+	<Object Id="NameID_Abaddon" English="Abaddon" Chinese="亚巴顿"/>
+	<Object Id="NameID_Beastmaster" English="Beastmaster" Chinese="兽王"/>
+	<Object Id="NameID_BountyHunter" English="BountyHunter" Chinese="赏金猎人"/>
+	<Object Id="NameID_Bristleback" English="Bristleback" Chinese="钢背熊"/>
+	<Object Id="NameID_Clinkz" English="Clinkz" Chinese="克林丽兹"/>
+	<Object Id="NameID_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女"/>
+	<Object Id="NameID_Ezalor" English="Ezalor" Chinese="光之守卫"/>
+	<Object Id="NameID_Lifestealer" English="Lifestealer" Chinese="食尸鬼"/>
+	<Object Id="NameID_TeaantProtector" English="TeaantProtector" Chinese="树精卫士"/>
+	<Object Id="Desc_HeroCard_Abaddon" English="Abaddon" Chinese="亚巴顿是一个英雄"/>
+	<Object Id="Desc_HeroCard_Beastmaster" English="Beastmaster" Chinese="兽王是一个英雄"/>
+	<Object Id="Desc_HeroCard_BountyHunter" English="BountyHunter" Chinese="赏金猎人是一个英雄"/>
+	<Object Id="Desc_HeroCard_Bristleback" English="Bristleback" Chinese="钢背熊是一个英雄"/>
+	<Object Id="Desc_HeroCard_Clinkz" English="Clinkz" Chinese="克林丽兹是一个英雄"/>
+	<Object Id="Desc_HeroCard_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女是一个英雄"/>
+	<Object Id="Desc_HeroCard_Ezalor" English="Ezalor" Chinese="光之守卫是一个英雄"/>
+	<Object Id="Desc_HeroCard_Lifestealer" English="Lifestealer" Chinese="食尸鬼是一个英雄"/>
+	<Object Id="Desc_HeroCard_TeaantProtector" English="TeaantProtector" Chinese="树精卫士是一个英雄"/>
 	<Object Id="NameID_HOLY_WATER" English="" Chinese="圣水"/>
 	<Object Id="NameID_MP" English="" Chinese="蓝药"/>
 	<Object Id="NameID_HP" English="" Chinese="血药"/>
