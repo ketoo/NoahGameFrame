@@ -699,6 +699,7 @@ public class NPC {
 	public static final String LastAttacker = "LastAttacker"; // object
 	public static final String ShowName = "ShowName"; // string
 	public static final String EquipIDRef = "EquipIDRef"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowCard = "ShowCard"; // string
 	public static final String HeroType = "HeroType"; // int
