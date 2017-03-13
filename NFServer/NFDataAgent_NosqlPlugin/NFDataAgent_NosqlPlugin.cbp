@@ -78,7 +78,7 @@
 <Unit filename="NFCGuildRedisModule.cpp" />
 <Unit filename="NFCMailRedisModule.cpp" />
 <Unit filename="NFCPlayerRedisModule.cpp" />
-<Unit filename="NFCPVPMatchRedisModule.cpp" />
+<Unit filename="NFCPVPRedisModule.cpp" />
 <Unit filename="NFCRankRedisModule.cpp" />
 <Unit filename="NFCCommonRedisModule.cpp" />
 <Unit filename="NFDataAgent_NosqlPlugin.cpp" />
@@ -87,7 +87,7 @@
 <Unit filename="NFCGuildRedisModule.h" />
 <Unit filename="NFCMailRedisModule.h" />
 <Unit filename="NFCPlayerRedisModule.h" />
-<Unit filename="NFCPVPMatchRedisModule.h" />
+<Unit filename="NFCPVPRedisModule.h" />
 <Unit filename="NFCRankRedisModule.h" />
 <Unit filename="NFCCommonRedisModule.h" />
 <Unit filename="NFDataAgent_NosqlPlugin.h" />
