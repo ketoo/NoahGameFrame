@@ -101,6 +101,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
+    <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCSkillModule.cpp" />
+    <ClCompile Include="NFSkillPlugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
+    <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
+    <ClInclude Include="NFCSkillConsumeManagerModule.h" />
+    <ClInclude Include="NFCSkillModule.h" />
+    <ClInclude Include="NFSkillPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -34,9 +34,9 @@ public:
     virtual const std::string& GetTypeName() = 0;
     virtual const std::string& GetClassName() = 0;
     virtual const bool AddId(std::string& strConfigName) = 0;
-    virtual NFList<std::string>& GetIdList() = 0;
-    virtual void SetInstancePath(const std::string& strPath) = 0;
+    virtual const std::vector<std::string>& GetIDList() = 0;
     virtual const std::string& GetInstancePath() = 0;
+	virtual void SetInstancePath(const std::string& strPath) = 0;
 
     virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
     virtual bool DoEvent(const NFGUID& objectID, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& valueList) = 0;

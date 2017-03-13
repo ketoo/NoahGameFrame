@@ -44,22 +44,19 @@ bool NFCSceneProcessModule::AfterInit()
 	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::AfterLeaveSceneGroupEvent);
     //////////////////////////////////////////////////////////////////////////
 
-    NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
-    if (pLogicClass)
+    NF_SHARE_PTR<NFIClass> xLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
+    if (xLogicClass)
     {
-        NFList<std::string>& strIdList = pLogicClass->GetIdList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
 
-        std::string strId;
-        bool bRet = strIdList.First(strId);
-        while (bRet)
-        {
 			//load first
-            LoadSceneResource(strId);
+			LoadSceneResource(strId);
 			//create second
 			CreateSceneBaseGroup(strId);
-
-            bRet = strIdList.Next(strId);
-        }
+		}
     }
 
     return true;
