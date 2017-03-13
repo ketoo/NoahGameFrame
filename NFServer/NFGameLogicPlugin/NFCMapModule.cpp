@@ -54,7 +54,6 @@ void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const 
 
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
-	NFList<std::string>& xElementList = xLogicClass->GetIdList();
 	
 	//find all title info
 	NFMsg::AckBigMapInfo xAckBigMapInfo;

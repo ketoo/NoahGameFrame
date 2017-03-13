@@ -41,9 +41,51 @@ bool NFCTileModule::AfterInit()
     return true;
 }
 
+bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& strData)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		return false;
+	}
+
+	NFMsg::AckMiningTitle xData;
+	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
+	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
+	{
+		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
+		for (; xStateData; xStateData = xStateDataMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileState* pTile = xData.add_tile();
+			if (pTile)
+			{
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_opr(xStateData->state);
+			}
+		}
+	}
+
+	if (xData.SerializeToString(&strData))
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
+
+	NFGUID xViewOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent());
+	NFGUID xFightOppnentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightOppnent());
+	if (!xViewOppnentID.IsNull() || !xFightOppnentID.IsNull())
+	{
+		return;
+	}
 
 	int nX = xMsg.x();
 	int nY = xMsg.y();
