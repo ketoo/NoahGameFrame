@@ -92,10 +92,11 @@ bool NFCElementModule::CheckRef()
 				//if one property is ref,check every config
 				if (pProperty->GetRef())
 				{
-					NFList<std::string>& strIdList = pLogicClass->GetIdList();
-					std::string strId;
-					for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+					const std::vector<std::string>& strIdList = pLogicClass->GetIDList();
+					for (int i = 0; i < strIdList.size(); ++i)
 					{
+						const std::string& strId = strIdList[i];
+
 						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
 						if (!this->GetElement(strRefValue))
 						{
@@ -301,6 +302,50 @@ const std::string& NFCElementModule::GetPropertyString(const std::string& strCon
     }
 
     return  NULL_STR;
+}
+
+const std::vector<std::string> NFCElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, const int nValue)
+{
+	std::vector<std::string> xList;
+
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
+	if (nullptr != xClass)
+	{
+		const std::vector<std::string>& xElementList = xClass->GetIDList();
+		for (int i = 0; i < xElementList.size(); ++i)
+		{
+			const std::string& strConfigID = xElementList[i];
+			int nElementValue = GetPropertyInt(strConfigID, strPropertyName);
+			if (nValue == nElementValue)
+			{
+				xList.push_back(strConfigID);
+			}
+		}
+	}
+
+	return xList;
+}
+
+const std::vector<std::string> NFCElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, const std::string & nValue)
+{
+	std::vector<std::string> xList;
+
+	NF_SHARE_PTR<NFIClass> xClass = m_pClassModule->GetElement(strClassName);
+	if (nullptr != xClass)
+	{
+		const std::vector<std::string>& xElementList = xClass->GetIDList();
+		for (int i = 0; i < xElementList.size(); ++i)
+		{
+			const std::string& strConfigID = xElementList[i];
+			const std::string& strElementValue = GetPropertyString(strConfigID, strPropertyName);
+			if (nValue == strElementValue)
+			{
+				xList.push_back(strConfigID);
+			}
+		}
+	}
+
+	return xList;
 }
 
 NF_SHARE_PTR<NFIProperty> NFCElementModule::GetProperty(const std::string& strConfigName, const std::string& strPropertyName)

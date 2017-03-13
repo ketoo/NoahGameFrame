@@ -1,28 +1,20 @@
 // -------------------------------------------------------------------------
+//    @FileName			:    NFIUserGiftModule.h
 //    @Author           :    LvSheng.Huang
-//    @Date             :    2016-12-27
-//    @Module           :    NFIRankModule
+//    @Date             :    2016-12-18
+//    @Module           :    NFIUserGiftModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
 
-#ifndef NFI_RANK_MODULE_H
-#define NFI_RANK_MODULE_H
+#ifndef NFI_USERGIFT_MODULE_H
+#define NFI_USERGIFT_MODULE_H
 
-#include <iostream>
 #include "NFIModule.h"
 
-
-class NFIRankModule
-    : public NFIModule
+class NFIUserGiftModule : public NFIModule
 {
-
 public:
-    enum RANK_TYPE
-    {
-        RT_REAL_TIME,
-    };
-
 
 };
 
