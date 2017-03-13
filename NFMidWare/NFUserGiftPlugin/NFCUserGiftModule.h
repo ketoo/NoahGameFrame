@@ -40,7 +40,8 @@ public:
 private:
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
-
+	
+	bool DoLevelAward(const NFGUID& self, const int nLevel);
 
 private:
 	NFMapEx<int, std::vector<std::string>> mxGiftMap;

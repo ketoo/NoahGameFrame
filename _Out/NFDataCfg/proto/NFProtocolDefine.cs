@@ -726,6 +726,7 @@ public class NPC
 	public static readonly String LastAttacker = "LastAttacker"; // object
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String EquipIDRef = "EquipIDRef"; // string
+	public static readonly String SpriteFile = "SpriteFile"; // string
 	public static readonly String Icon = "Icon"; // string
 	public static readonly String ShowCard = "ShowCard"; // string
 	public static readonly String HeroType = "HeroType"; // int
