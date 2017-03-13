@@ -25,20 +25,23 @@ bool NFCUserGiftModule::Init()
 
 bool NFCUserGiftModule::AfterInit()
 {
-	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_GIFT_PACK);
+	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_ITEM);
 	for (int i = 0; i < xGiftItemList.size(); ++i)
 	{
 		const std::string& strItemID = xGiftItemList[i];
-		int nLevel = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::Level());
-
-		NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
-		if (!xItemList)
+		int nSubItem = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+		if (nSubItem == NFMsg::EGameItemSubType::EGIT_ITEM_PACK)
 		{
-			xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
-			mxGiftMap.AddElement(nLevel, xItemList);
-		}
+			int nLevel = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::Level());
+			NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
+			if (!xItemList)
+			{
+				xItemList = NF_SHARE_PTR<std::vector<std::string>>(NF_NEW std::vector<std::string>());
+				mxGiftMap.AddElement(nLevel, xItemList);
+			}
 
-		xItemList->push_back(strItemID);
+			xItemList->push_back(strItemID);
+		}
 	}
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCUserGiftModule::OnObjectClassEvent);
