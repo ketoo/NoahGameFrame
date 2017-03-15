@@ -13,6 +13,12 @@
 #include <queue>
 #include "NFComm/NFNetPlugin/NFINet.h"
 
+enum MSG_ID
+{
+	ID_RECV_CONNECT_MSG,
+	ID_RECV_PROTO_MSG
+};
+
 // a thread class that will periodically send events to the GUI thread
 class NetWorkThread : public wxThread
 {
