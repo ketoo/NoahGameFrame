@@ -1,0 +1,21 @@
+##What is ProtocolTool?
+
+An open source protocol debugging tool for NoahGameFrame(https://github.com/ketoo/NoahGameFrame).
+
+To use the tool can simulate client message to sever.
+
+Tool is written using C++ and use the wxWidgets UI lib, to Compile it, you need clone the NoahGameFrame and the download the wxWidgets3.0.2(http://www.wxWidgets.org)
+
+It now only available for Windows.
+
+Compile Step:
+	1、git clone the NoahGameFrame,you will find the NFProtocolDebug under the NFTools dir.
+	2、excute the Dependencies\build_dep.bat first
+	3、download the wxwidgets lib,enter to wxWidgets-3.0.2\build\msw, open the sln with vs2015,and build all the libs with x64 configure
+	4、copy all the wxWidgets-3.0.2\lib\vc_x64_lib to NFProtocolDebug\ProtocolTool\wx\lib\vc_lib dir 
+	
+	open the ProtocolTool.sln,you can compile the project.
+	
+	Any questions,you can 
+	email: xinxinst@163.com
+	qq:    179541454
