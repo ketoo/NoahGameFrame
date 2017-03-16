@@ -27,6 +27,8 @@ public:
 
     virtual bool SetUsed(const int nRow, const int bUse);
 
+	virtual bool PreAllocMemoryForRow(const int nRow);
+
     virtual int GetCols() const;
 
     virtual int GetRows() const;
