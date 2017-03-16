@@ -84,6 +84,7 @@ private:
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
 	NFIKernelModule* m_pKernelModule;
+	NFILogModule* m_pLogModule;
 };
 
 

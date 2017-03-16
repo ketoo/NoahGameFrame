@@ -18,7 +18,8 @@ bool NFCPlayerRedisModule::Init()
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	
 	return true;
 }
 
@@ -170,6 +171,42 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 	m_pCommonRedisModule->LoadStoragePropertyListPB(self, xPlayerDataCache->xPbPropertyStorageList);
 	m_pCommonRedisModule->LoadCacheRecordListPB(self, xPlayerDataCache->xPbRecordCacheList);
 	m_pCommonRedisModule->LoadStorageRecordListPB(self, xPlayerDataCache->xPbRecordStorageList);
+
+#ifdef NF_DEBUG_MODE
+	for (int i = 0; i < xPlayerDataCache->xPbPropertyCacheList.property_int_list_size(); ++i)
+	{
+		const NFMsg::PropertyInt& xPropertyData = xPlayerDataCache->xPbPropertyCacheList.property_int_list(i);
+		const std::string& strPropertyName = xPropertyData.property_name();
+		const NFINT64 xPropertyValue = xPropertyData.data();
+		
+		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, xPropertyValue, "PbPropertyCacheList", i);
+	}
+	for (int iRecord = 0; iRecord < xPlayerDataCache->xPbRecordCacheList.record_list_size(); ++iRecord)
+	{
+		const NFMsg::ObjectRecordBase& xRecordBase = xPlayerDataCache->xPbRecordCacheList.record_list(iRecord);
+		const std::string& strRecordName = xRecordBase.record_name();
+
+		
+		for (int iRow = 0; iRow < xRecordBase.row_struct_size(); ++iRow)
+		{
+
+			const NFMsg::RecordAddRowStruct& xAddRowStruct = xRecordBase.row_struct(iRow);
+
+			for (int iStr = 0; iStr < xAddRowStruct.record_string_list_size(); iStr++)
+			{
+				const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(iStr);
+				const int nRow = xPropertyData.row();
+				const int nCol = xPropertyData.col();
+				const std::string& xPropertyValue = xPropertyData.data();
+
+				std::ostringstream strData;
+				strData  << strRecordName << " Row:" << nRow << " Col:" << nCol << " " << xPropertyValue;
+
+				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strData, "xPbRecordCacheList", iRow);
+			}
+		}
+	}
+#endif // NF_DEBUG_MODE
 
 	for (int i = 0; i < xPlayerDataCache->xPbPropertyCacheList.property_int_list_size(); ++i)
 	{
