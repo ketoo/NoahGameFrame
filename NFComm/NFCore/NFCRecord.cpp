@@ -1275,6 +1275,25 @@ bool NFCRecord::SetUsed(const int nRow, const int bUse)
     return false;
 }
 
+bool NFCRecord::PreAllocMemoryForRow(const int nRow)
+{
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < GetCols(); ++i)
+	{
+		NF_SHARE_PTR<NFData>& pVar = mtRecordVec.at(GetPos(nRow, i));
+		if (nullptr == pVar)
+		{
+			pVar = NF_SHARE_PTR<NFData>(NF_NEW NFData(mVarRecordType->Type(i)));
+		}
+
+		pVar->variantData = mVarRecordType->GetStack(i)->variantData;
+	}
+}
+
 bool NFCRecord::ValidPos(int nRow, int nCol) const
 {
     if (ValidCol(nCol)
