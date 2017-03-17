@@ -18,10 +18,10 @@ class NFIItemConsumeProcessModule
 {
 public:
 
-
+	// > 0, error code
     virtual int ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID) = 0;
 
-
+	//> 0, error code
     virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID) = 0;
 
 };

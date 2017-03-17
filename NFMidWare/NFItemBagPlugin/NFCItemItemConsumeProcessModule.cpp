@@ -41,15 +41,15 @@ bool NFCItemItemConsumeProcessModule::Execute()
 
 int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	return 1;
+	return 0;
 }
 
 int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
 	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
-	if (nullptr == pBagItemList.get())
+	if (!pBagItemList)
 	{
-		return 0;
+		return 1;
 	}
 
 	const NFGUID xTargetID = targetID.Object(0);
@@ -58,7 +58,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	if (xTargetID.IsNull())
 	{
-		return 0;
+		return 2;
 	}
 
 	NFDataList varItemID;
@@ -66,7 +66,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	if (nBagItemCount != 1)
 	{
-		return 0;
+		return 3;
 	}
 
 	const int nRowNum = varItemID.Int(0);
@@ -77,7 +77,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
 	{
-		return 0;
+		return 4;
 	}
 
 	const int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
@@ -85,7 +85,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	if (nItemType != NFMsg::EItemType::EIT_ITEM)
 	{
-		return 0;
+		return 5;
 	}
 
 	switch (nSubItemType)
@@ -105,7 +105,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		const std::string strAwardProperty = m_pElementModule->GetPropertyString(strItemConfigID, NFrame::Item::AwardProperty());
 		if (strAwardProperty.length() <= 0)
 		{
-			return 0;
+			return 6;
 		}
 		const NFINT64 nVIPEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::VIPEXP());
 		const NFINT64 nEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::EXP());
@@ -200,5 +200,5 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		break;
 	}
 
-	return 1;
+	return 100;
 }
