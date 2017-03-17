@@ -65,7 +65,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID.c_str());
 
 
-	if (pHeroRecord->AddRow(-1, *xRowData) < 0)
+	if (pHeroRecord->AddRow(-1, *xRowData) >= 0)
 	{
 		return xHeroID;
 	}

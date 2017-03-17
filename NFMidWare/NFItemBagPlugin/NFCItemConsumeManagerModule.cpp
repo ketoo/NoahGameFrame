@@ -20,21 +20,40 @@ bool NFCItemConsumeManagerModule::Init()
 	ResgisterConsumeModule(NFMsg::EItemType::EIT_TOKEN, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFCItemTokenConsumeProcessModule(pPluginManager)));
 	ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM, NF_SHARE_PTR<NFIItemConsumeProcessModule>(NF_NEW NFCItemItemConsumeProcessModule(pPluginManager)));
 
+	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	{
+		xModule->Init();
+	}
+
     return true;
 }
 
 bool NFCItemConsumeManagerModule::Shut()
 {
+	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	{
+		xModule->Shut();
+	}
+
     return true;
 }
 
 bool NFCItemConsumeManagerModule::Execute()
 {
+	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	{
+		xModule->Execute();
+	}
     return true;
 }
 
 bool NFCItemConsumeManagerModule::AfterInit()
 {
+	for (NF_SHARE_PTR<NFIItemConsumeProcessModule> xModule = First(); xModule != nullptr; xModule = Next())
+	{
+		xModule->AfterInit();
+	}
+
     return true;
 }
 
