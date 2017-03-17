@@ -44,7 +44,7 @@ bool NFCItemModule::AfterInit()
 
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClienUseItem)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClientUseItem)) { return false; }
 
 
 	return true;
@@ -225,6 +225,8 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
+	//////
+
 	if (nHP > 0 && !m_pPropertyModule->ConsumeHP(self, nHP))
 	{
 		return false;
@@ -284,12 +286,12 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 	return true;
 }
 
-void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCItemModule::OnClientUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
 
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
-	const std::string strItemID = xMsg.item().item_id();
+	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
 
 	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
@@ -327,7 +329,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 	case NFMsg::EItemType::EIT_GEM:
 	case NFMsg::EItemType::EIT_TOKEN:
 	{
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) > 0)
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
 		{
 			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
 		}
@@ -340,7 +342,7 @@ void NFCItemModule::OnClienUseItem(const int nSockIndex, const int nMsgID, const
 			xTarget.AddString(xMsg.item().item_id());	//this is Item Config ID
 			xTarget.AddInt(xMsg.item().item_count());	//this is Item Count to Consume
 
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) > 0)
+			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) == 0)
 			{
 				pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
 			}
