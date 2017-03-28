@@ -53,7 +53,8 @@ public:
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 
 protected:
-	void OnSetFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSwitchFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
 protected:

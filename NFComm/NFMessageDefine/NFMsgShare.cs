@@ -1326,12 +1326,19 @@ namespace NFMsg
       get { return _Heroid; }
       set { _Heroid = value; }
     }
-    private int _FightPos;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"FightPos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int FightPos
+    private int _Set;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"Set", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int Set
     {
-      get { return _FightPos; }
-      set { _FightPos = value; }
+      get { return _Set; }
+      set { _Set = value; }
+    }
+    private int _Switch;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"Switch", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int Switch
+    {
+      get { return _Switch; }
+      set { _Switch = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
