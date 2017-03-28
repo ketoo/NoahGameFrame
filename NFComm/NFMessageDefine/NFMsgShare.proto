@@ -374,7 +374,8 @@ message AckElementlevelToEquip
 message ReqSetFightHero
 {	
 	required Ident		Heroid				= 1;//
-	required int32		FightPos	    	= 2;//
+	required int32		Set	    			= 2;//
+	required int32		Switch	    		= 3;// switch
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -41,6 +41,7 @@ bool NFCHeroModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroModule::OnObjectClassEvent);
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg);
+	m_pNetModule->AddReceiveCallBack(NFMsg::, this, &NFCHeroModule::OnSwitchFightHeroMsg);
 
 	return true;
 }
@@ -445,6 +446,10 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 	}
 
 	SetFightHero(nPlayerID, nFightPos, xHero);	
+}
+
+void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
 }
 
 int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)

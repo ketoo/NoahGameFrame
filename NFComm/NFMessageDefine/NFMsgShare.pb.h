@@ -4979,27 +4979,37 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_heroid();
   inline void set_allocated_heroid(::NFMsg::Ident* heroid);
 
-  // required int32 FightPos = 2;
-  inline bool has_fightpos() const;
-  inline void clear_fightpos();
-  static const int kFightPosFieldNumber = 2;
-  inline ::google::protobuf::int32 fightpos() const;
-  inline void set_fightpos(::google::protobuf::int32 value);
+  // required int32 Set = 2;
+  inline bool has_set() const;
+  inline void clear_set();
+  static const int kSetFieldNumber = 2;
+  inline ::google::protobuf::int32 set() const;
+  inline void set_set(::google::protobuf::int32 value);
+
+  // required int32 Switch = 3;
+  inline bool has_switch_() const;
+  inline void clear_switch_();
+  static const int kSwitchFieldNumber = 3;
+  inline ::google::protobuf::int32 switch_() const;
+  inline void set_switch_(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqSetFightHero)
  private:
   inline void set_has_heroid();
   inline void clear_has_heroid();
-  inline void set_has_fightpos();
-  inline void clear_has_fightpos();
+  inline void set_has_set();
+  inline void clear_has_set();
+  inline void set_has_switch_();
+  inline void clear_has_switch_();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* heroid_;
-  ::google::protobuf::int32 fightpos_;
+  ::google::protobuf::int32 set_;
+  ::google::protobuf::int32 switch__;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -13522,26 +13532,48 @@ inline void ReqSetFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
   }
 }
 
-// required int32 FightPos = 2;
-inline bool ReqSetFightHero::has_fightpos() const {
+// required int32 Set = 2;
+inline bool ReqSetFightHero::has_set() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ReqSetFightHero::set_has_fightpos() {
+inline void ReqSetFightHero::set_has_set() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ReqSetFightHero::clear_has_fightpos() {
+inline void ReqSetFightHero::clear_has_set() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ReqSetFightHero::clear_fightpos() {
-  fightpos_ = 0;
-  clear_has_fightpos();
+inline void ReqSetFightHero::clear_set() {
+  set_ = 0;
+  clear_has_set();
 }
-inline ::google::protobuf::int32 ReqSetFightHero::fightpos() const {
-  return fightpos_;
+inline ::google::protobuf::int32 ReqSetFightHero::set() const {
+  return set_;
 }
-inline void ReqSetFightHero::set_fightpos(::google::protobuf::int32 value) {
-  set_has_fightpos();
-  fightpos_ = value;
+inline void ReqSetFightHero::set_set(::google::protobuf::int32 value) {
+  set_has_set();
+  set_ = value;
+}
+
+// required int32 Switch = 3;
+inline bool ReqSetFightHero::has_switch_() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqSetFightHero::set_has_switch_() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqSetFightHero::clear_has_switch_() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqSetFightHero::clear_switch_() {
+  switch__ = 0;
+  clear_has_switch_();
+}
+inline ::google::protobuf::int32 ReqSetFightHero::switch_() const {
+  return switch__;
+}
+inline void ReqSetFightHero::set_switch_(::google::protobuf::int32 value) {
+  set_has_switch_();
+  switch__ = value;
 }
 
 // -------------------------------------------------------------------
