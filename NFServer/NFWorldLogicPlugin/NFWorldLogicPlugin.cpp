@@ -6,14 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-
 #include "NFCWorldLogicModule.h"
 #include "NFWorldLogicPlugin.h"
-#include "NFCPVPMatchModule.h"
-#include "NFCTeamModule.h"
-
-//
-//
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {
@@ -39,15 +33,10 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 
 void NFWorldLogicPlugin::Install()
 {
-
 	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
-	REGISTER_MODULE(pPluginManager, NFIPVPMatchModule, NFCPVPMatchModule)
-	REGISTER_MODULE(pPluginManager, NFITeamModule, NFCTeamModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFITeamModule, NFCTeamModule)
-	UNREGISTER_MODULE(pPluginManager, NFIPVPMatchModule, NFCPVPMatchModule)
 	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
 }

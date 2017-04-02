@@ -105,12 +105,11 @@ public:
 
     const bool AddId(std::string& strId)
     {
-        mIdList.Add(strId);
-
+		mIdList.push_back(strId);
         return true;
     }
 
-    NFList<std::string>& GetIdList()
+	const std::vector<std::string>& GetIDList()
     {
         return mIdList;
     }
@@ -135,7 +134,7 @@ private:
     std::string mstrClassName;
     std::string mstrClassInstancePath;
 
-    NFList<std::string> mIdList;
+    std::vector<std::string> mIdList;
 
     NFList<CLASS_EVENT_FUNCTOR_PTR> mxClassEventInfo;
 };

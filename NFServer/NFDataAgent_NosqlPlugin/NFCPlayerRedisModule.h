@@ -45,7 +45,8 @@ public:
 
 	virtual bool SavePlayerTile(const int nSceneID, const NFGUID& self, const std::string& strTileData);
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData);
-	virtual bool LoadPlayerTileRandom(const int nSceneID, std::string& strTileData);
+	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData);
+	virtual bool LoadPlayerTileRandomCache(const NFGUID& xPlayer, std::string& strTileData);
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
@@ -76,12 +77,14 @@ private:
 	};
 
 	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
+	NFMapEx<NFGUID, std::string> mxObjectTileCache;
 
 private:
 	NFIClassModule* m_pLogicClassModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
 	NFIKernelModule* m_pKernelModule;
+	NFILogModule* m_pLogModule;
 };
 
 

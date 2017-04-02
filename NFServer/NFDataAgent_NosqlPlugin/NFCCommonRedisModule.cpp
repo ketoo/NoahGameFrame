@@ -189,6 +189,8 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
 
 bool NFCCommonRedisModule::LoadCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList)
 {
+	propertyList.Clear();
+
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
@@ -208,6 +210,8 @@ bool NFCCommonRedisModule::LoadCachePropertyListPB(const NFGUID& self, NFMsg::Ob
 
 bool NFCCommonRedisModule::LoadCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList)
 {
+	recordList.Clear();
+
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
@@ -226,6 +230,8 @@ bool NFCCommonRedisModule::LoadCacheRecordListPB(const NFGUID& self, NFMsg::Obje
 
 bool NFCCommonRedisModule::LoadStoragePropertyListPB(const NFGUID & self, NFMsg::ObjectPropertyList & propertyList)
 {
+	propertyList.Clear();
+
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
@@ -244,6 +250,8 @@ bool NFCCommonRedisModule::LoadStoragePropertyListPB(const NFGUID & self, NFMsg:
 
 bool NFCCommonRedisModule::LoadStorageRecordListPB(const NFGUID & self, NFMsg::ObjectRecordList & recordList)
 {
+	recordList.Clear();
+
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
 	{
@@ -308,7 +316,7 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
         return false;
     }
 
-    if (!pRecordManager.get())
+    if (!pRecordManager)
     {
         return false;
     }
@@ -583,7 +591,8 @@ bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordLis
             const NFMsg::RecordAddRowStruct& xAddRowStruct = xRecordBase.row_struct(iStuct);
 
             const int nCommonRow = xAddRowStruct.row();
-            pRecord->SetUsed(nCommonRow, true);
+			pRecord->SetUsed(nCommonRow, true);
+			pRecord->PreAllocMemoryForRow(nCommonRow);
 
             for (int i = 0; i < xAddRowStruct.record_int_list_size(); i++)
             {
@@ -610,7 +619,7 @@ bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordLis
                 const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(i);
                 const int nRow = xPropertyData.row();
                 const int nCol = xPropertyData.col();
-                const std::string xPropertyValue = xPropertyData.data();
+                const std::string& xPropertyValue = xPropertyData.data();
 
                 pRecord->SetString(nRow, nCol, xPropertyValue.c_str());
             }
@@ -821,13 +830,14 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
                 case TDATA_STRING:
                 {
                     NFMsg::RecordString* pPropertyData = pRowData->add_record_string_list();
-                    const std::string xPropertyValue = pRecord->GetString(iRow, iCol);
+                    const std::string& xPropertyValue = pRecord->GetString(iRow, iCol);
 
                     if (pPropertyData)
                     {
                         pPropertyData->set_col(iCol);
                         pPropertyData->set_row(iRow);
                         pPropertyData->set_data(xPropertyValue);
+
                     }
                 }
                 break;
@@ -882,6 +892,27 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
                 }
             }
         }
+#ifdef NF_DEBUG_MODE
+
+		for (int iRow = 0; iRow < pRecordData->row_struct_size(); ++iRow)
+		{
+
+			const NFMsg::RecordAddRowStruct& xAddRowStruct = pRecordData->row_struct(iRow);
+
+			for (int iStr = 0; iStr < xAddRowStruct.record_string_list_size(); iStr++)
+			{
+				const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(iStr);
+				const int nRow = xPropertyData.row();
+				const int nCol = xPropertyData.col();
+				const std::string& xPropertyValue = xPropertyData.data();
+
+				std::ostringstream strData;
+				strData << strRecordName << " Row:" << nRow << " Col:" << nCol << " " << xPropertyValue;
+
+				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, pRecordManager->Self(), strData, "Save Record", iRow);
+			}
+		}
+#endif // NF_DEBUG_MODE
     }
 
     return true;

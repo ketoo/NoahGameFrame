@@ -55,8 +55,6 @@ void NFCNet::conn_eventcb(struct bufferevent* bev, short events, void* user_data
 
     if (events & BEV_EVENT_CONNECTED)
     {
-		int  evbuffer_expand(struct  evbuffer  *buf, size_t datlen);
-
 		struct evbuffer* input = bufferevent_get_input(bev);
 		struct evbuffer* output = bufferevent_get_output(bev);
 		if (pNet->mnBufferSize > 0)
@@ -417,6 +415,15 @@ int NFCNet::InitClientNet()
     bufferevent_enable(bev, EV_READ | EV_WRITE);
 
     event_set_log_callback(&NFCNet::log_cb);
+
+	int nSizeRead = bufferevent_get_max_to_read(bev);
+	int nSizeWrite = bufferevent_get_max_to_write(bev);
+
+	std::cout << "SizeRead: " << nSizeRead << std::endl;
+	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
+
+	//bufferevent_set_max_single_read(bev, 0);
+	//bufferevent_set_max_single_write(bev, 0);
 
     return sockfd;
 }
