@@ -40,12 +40,14 @@ public:
     virtual bool Execute();
 
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList);
-	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos);
+	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight);
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos);
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex);
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID);
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID);
+
+	virtual bool RemoveSwapSceneEventCallBack();
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
@@ -60,6 +62,7 @@ protected:
 
 	virtual bool AddBeforeEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
@@ -80,6 +83,7 @@ protected:
 
 	int BeforeLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterLeaveSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int OnSwapSceneEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int BeforeEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterEnterSceneGroup(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
@@ -111,6 +115,7 @@ private:
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtEnterSceneConditionCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeEnterSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterEnterSceneCallback;
+	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtOnSwapSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtBeforeLeaveSceneCallback;
 	std::vector<SCENE_EVENT_FUNCTOR_PTR> mtAfterLeaveSceneCallback;
 private:

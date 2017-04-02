@@ -77,12 +77,11 @@ bool NFCItemModule::CheckConfig()
 		assert(0);
 	}
 
-	NFList<std::string>& configList = pLogicCLass->GetIdList();
-	std::string strConfigID;
-	bool bRet = configList.First(strConfigID);
-
-	while (bRet)
+	const std::vector<std::string>& strIdList = pLogicCLass->GetIDList();
+	for (int i = 0; i < strIdList.size(); ++i)
 	{
+		const std::string& strConfigID = strIdList[i];
+
 		NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strConfigID);
 		if (!pPropertyManager)
 		{
@@ -133,8 +132,6 @@ bool NFCItemModule::CheckConfig()
 		{
 			assert(0);
 		}
-
-		bRet = configList.Next(strConfigID);
 	}
 
 	return true;
@@ -213,7 +210,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->EnoughMoney(self, nMoney))
+	if (nMoney > 0 && !m_pPropertyModule->EnoughGold(self, nMoney))
 	{
 		return false;
 	}
@@ -233,7 +230,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->ConsumeMoney(self, nMoney))
+	if (nMoney > 0 && !m_pPropertyModule->ConsumeGold(self, nMoney))
 	{
 		return false;
 	}

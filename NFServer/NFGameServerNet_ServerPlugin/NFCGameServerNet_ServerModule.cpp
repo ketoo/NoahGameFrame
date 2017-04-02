@@ -1,4 +1,4 @@
-// -------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------
 //    @FileName			:    NFCGameServerNet_ServerModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-01-02
@@ -80,15 +80,18 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneAOIModule->AddPropertyEventCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEvent);
 	m_pSceneAOIModule->AddRecordEventCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEvent);
 
+	m_pSceneAOIModule->AddSwapSceneEventCallBack(this, &NFCGameServerNet_ServerModule::OnSceneEvent);
+
 	/////////////////////////////////////////////////////////////////////////
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
+
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_GAME && pPluginManager->GetAppID() == nServerID)
@@ -988,6 +991,27 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
 		}
 	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
+	{
+		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCGameServerNet_ServerModule::OnSceneEvent);
+	}
+
+	return 0;
+}
+
+int NFCGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList)
+{
+	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
+
+	NFMsg::ReqAckSwapScene xAckSwapScene;
+	xAckSwapScene.set_scene_id(nSceneID);
+	xAckSwapScene.set_transfer_type(NFMsg::ReqAckSwapScene::EGameSwapType::ReqAckSwapScene_EGameSwapType_EGST_NARMAL);
+	xAckSwapScene.set_line_id(0);
+	xAckSwapScene.set_x(vRelivePos.X());
+	xAckSwapScene.set_y(vRelivePos.Y());
+	xAckSwapScene.set_z(vRelivePos.Z());
+	
+	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xAckSwapScene, self);
 
 	return 0;
 }

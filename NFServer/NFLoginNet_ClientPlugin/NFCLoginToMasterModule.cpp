@@ -15,7 +15,6 @@ bool NFCLoginToMasterModule::Init()
 {
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLoginLogicModule = pPluginManager->FindModule<NFILoginLogicModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -41,31 +40,32 @@ bool NFCLoginToMasterModule::AfterInit()
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
-        NFList<std::string>& strIdList = xLogicClass->GetIdList();
-        std::string strId;
-        for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
-        {
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
-            {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
 
-                ConnectData xServerData;
+			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
+			{
+				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
-                xServerData.nGameID = nServerID;
-                xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
-                xServerData.strIP = strIP;
-                xServerData.nPort = nPort;
-                xServerData.strName = strName;
+				ConnectData xServerData;
+
+				xServerData.nGameID = nServerID;
+				xServerData.eServerType = (NF_SERVER_TYPES)nServerType;
+				xServerData.strIP = strIP;
+				xServerData.nPort = nPort;
+				xServerData.strName = strName;
 
 				m_pNetClientModule->AddServer(xServerData);
-            }
-        }
+			}
+		}
     }
 
 
@@ -90,10 +90,11 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
-        NFList<std::string>& strIdList = xLogicClass->GetIdList();
-        std::string strId;
-        for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
-        {
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
             const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
             const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_LOGIN && pPluginManager->GetAppID() == nServerID)
@@ -141,10 +142,11 @@ void NFCLoginToMasterModule::ServerReport()
 	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
+
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (pPluginManager->GetAppID() == nServerID)

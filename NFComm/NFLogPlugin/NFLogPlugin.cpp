@@ -1,5 +1,11 @@
-// NFLogPlugin.cpp : Defines the exported functions for the DLL application.
-//
+// -------------------------------------------------------------------------
+//    @FileName			:    NFLogPlugin.cpp
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2012-12-15
+//    @Module           :    NFLogPlugin
+//    @Desc             :
+// -------------------------------------------------------------------------
+
 
 #include "NFLogPlugin.h"
 #include "NFCLogModule.h"
