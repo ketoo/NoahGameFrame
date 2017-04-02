@@ -62,7 +62,7 @@
 				</Environment>
 			</Target>
 		</Build>
-<Unit filename="dllmain.cpp/>
+<Unit filename="dllmain.cpp"/>
 <Unit filename="NFCAsyNoSqlModule.cpp" />
 <Unit filename="NFCNoSqlDriver.cpp" />
 <Unit filename="NFCNoSqlDriverManager.cpp" />

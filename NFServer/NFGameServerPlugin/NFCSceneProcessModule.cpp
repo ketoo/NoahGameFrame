@@ -44,22 +44,19 @@ bool NFCSceneProcessModule::AfterInit()
 	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::AfterLeaveSceneGroupEvent);
     //////////////////////////////////////////////////////////////////////////
 
-    NF_SHARE_PTR<NFIClass> pLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
-    if (pLogicClass)
+    NF_SHARE_PTR<NFIClass> xLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
+    if (xLogicClass)
     {
-        NFList<std::string>& strIdList = pLogicClass->GetIdList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
 
-        std::string strId;
-        bool bRet = strIdList.First(strId);
-        while (bRet)
-        {
 			//load first
-            LoadSceneResource(strId);
+			LoadSceneResource(strId);
 			//create second
 			CreateSceneBaseGroup(strId);
-
-            bRet = strIdList.Next(strId);
-        }
+		}
     }
 
     return true;
@@ -173,8 +170,6 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
-
-		return 0;
 	}
 	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
@@ -240,7 +235,8 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
         float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::X().c_str())->value());
         float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Y().c_str())->value());
         float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Z().c_str())->value());
-		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ));
+		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
+		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 
 		const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
 		NFDataList xPositionList;
@@ -269,6 +265,8 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDName)
 {
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
+	m_pKernelModule->RequestGroupScene(nSceneID);
+
 	if (GetCloneSceneType(nSceneID) == SCENE_TYPE_NORMAL)
 	{
 		//line 10
@@ -280,6 +278,5 @@ bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDN
 
 		return true;
 	}
-
 	return false;
 }

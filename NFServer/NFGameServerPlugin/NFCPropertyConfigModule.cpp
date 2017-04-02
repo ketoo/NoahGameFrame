@@ -51,14 +51,14 @@ int NFCPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLevel
 
 void NFCPropertyConfigModule::Load()
 {
-    NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::InitProperty::ThisName());
-    if (pLogicClass)
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::InitProperty::ThisName());
+    if (xLogicClass)
     {
-        NFList<std::string>& strIdList = pLogicClass->GetIdList();
-        std::string strId;
-        bool bRet = strIdList.First(strId);
-        while (bRet)
-        {
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+
             NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strId);
             if (pPropertyManager)
             {
@@ -80,8 +80,6 @@ void NFCPropertyConfigModule::Load()
 					}
 				}
             }
-
-            bRet = strIdList.Next(strId);
         }
     }
 }

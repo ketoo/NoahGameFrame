@@ -234,9 +234,9 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
 bool NFCMasterNet_ServerModule::AfterInit()
 {
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_HEART_BEAT, this, &NFCMasterNet_ServerModule::OnHeartBeat);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_REGISTERED, this, &NFCMasterNet_ServerModule::OnWorldRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_MTL_WORLD_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REGISTERED, this, &NFCMasterNet_ServerModule::OnWorldRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_WTM_WORLD_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REGISTERED, this, &NFCMasterNet_ServerModule::OnLoginRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_UNREGISTERED, this, &NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_LTM_LOGIN_REFRESH, this, &NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess);
@@ -251,10 +251,11 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = xLogicClass->GetIdList();
-		std::string strId;
-		for (bool bRet = strIdList.First(strId); bRet; bRet = strIdList.Next(strId))
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
+			const std::string& strId = strIdList[i];
+
 			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
 			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->GetAppID() == nServerID)

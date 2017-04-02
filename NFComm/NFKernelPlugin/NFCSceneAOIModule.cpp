@@ -22,19 +22,17 @@ bool NFCSceneAOIModule::Init()
 	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCSceneAOIModule::OnRecordCommonEvent);
 
 	//init all scene
-	NF_SHARE_PTR<NFIClass> pLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
-	if (pLogicClass)
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
+	if (xLogicClass)
 	{
-		NFList<std::string>& strIdList = pLogicClass->GetIdList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 
-		std::string strId;
-		bool bRet = strIdList.First(strId);
-		while (bRet)
+		for (int i = 0; i < strIdList.size(); ++i)
 		{
-			int nSceneID = lexical_cast<int>(strId);
-			m_pKernelModule->CreateScene(nSceneID);
+			const std::string& strId = strIdList[i];
 
-			bRet = strIdList.Next(strId);
+			int nSceneID = lexical_cast<int>(strIdList[i]);
+			m_pKernelModule->CreateScene(nSceneID);
 		}
 	}
 
@@ -110,7 +108,9 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		return false;
 	}
 
-	if (!SwitchScene(self, nSceneID, nGrupID, nType, 0.0f, 0.0f, 0.0f, 0.0f, argList))
+	
+	NFVector3 vRelivePos = GetRelivePosition(nSceneID, 0);
+	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos.X(), vRelivePos.Y(), vRelivePos.Z(), 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
@@ -120,12 +120,12 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 	return true;
 }
 
-bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos)
+bool NFCSceneAOIModule::AddSeedData(const int nSceneID, const std::string & strSeedID, const std::string & strConfigID, const NFVector3 & vPos, const int nWeight)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->AddSeedObjectInfo(strSeedID, strConfigID, vPos);
+		return pSceneInfo->AddSeedObjectInfo(strSeedID, strConfigID, vPos, nWeight);
 	}
 
 	return false;
@@ -205,6 +205,12 @@ bool NFCSceneAOIModule::AddAfterEnterSceneGroupCallBack(const SCENE_EVENT_FUNCTO
 	return true;
 }
 
+bool NFCSceneAOIModule::AddSwapSceneEventCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
+{
+	mtOnSwapSceneCallback.push_back(cb);
+	return true;
+}
+
 bool NFCSceneAOIModule::AddBeforeLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR & cb)
 {
 	mtBeforeLeaveSceneCallback.push_back(cb);
@@ -229,19 +235,21 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 	//create monster before the player enter the scene, then we can send monster's data by one message pack
 	//if you create monster after player enter scene, then send monster's data one by one
 	NF_SHARE_PTR<SceneSeedResource> pResource = pSceneInfo->mtSceneResourceConfig.First();
-	while (pResource)
+	for (; pResource; pResource = pSceneInfo->mtSceneResourceConfig.Next())
 	{
-		const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
+		int nWeight = m_pKernelModule->Random(0, 100);
+		if (nWeight <= pResource->nWeight)
+		{
+			const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
 
-		NFDataList arg;
-		arg << NFrame::IObject::X() << pResource->vSeedPos.X();
-		arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
-		arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
-		arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+			NFDataList arg;
+			arg << NFrame::IObject::X() << pResource->vSeedPos.X();
+			arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
+			arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
+			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 
-		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
-
-		pResource = pSceneInfo->mtSceneResourceConfig.Next();
+			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
+		}
 	}
 
 	return false;
@@ -271,6 +279,13 @@ bool NFCSceneAOIModule::DestroySceneNPC(const int nSceneID, const int nGroupID)
 	}
 
 	return false;
+}
+
+bool NFCSceneAOIModule::RemoveSwapSceneEventCallBack()
+{
+	mtOnSwapSceneCallback.clear();
+
+	return true;
 }
 
 bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFDataList& arg)
@@ -305,7 +320,7 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 
 		pOldSceneInfo->RemoveObjectFromGroup(nOldGroupID, self, true);
 
-		if (nTargetSceneID != nOldSceneID)
+		//if (nTargetSceneID != nOldSceneID)
 		{
 			pObject->SetPropertyInt(NFrame::Scene::GroupID(), 0);
 			/////////
@@ -313,6 +328,7 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 
 			pObject->SetPropertyInt(NFrame::Scene::SceneID(), nTargetSceneID);
 
+			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, nType, arg);
 		}
 
 		pObject->SetPropertyFloat(NFrame::IObject::X(), fX);
@@ -664,6 +680,18 @@ int NFCSceneAOIModule::AfterLeaveSceneGroup(const NFGUID & self, const int nScen
 		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
 	}
 
+	return 0;
+}
+
+int NFCSceneAOIModule::OnSwapSceneEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	std::vector<SCENE_EVENT_FUNCTOR_PTR>::iterator it = mtOnSwapSceneCallback.begin();
+	for (; it != mtOnSwapSceneCallback.end(); it++)
+	{
+		SCENE_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		SCENE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, nSceneID, nGroupID, nType, argList);
+	}
 	return 0;
 }
 
