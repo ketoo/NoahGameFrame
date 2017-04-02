@@ -46,15 +46,17 @@ cat $project_vs | awk 'BEGIN{}
     if($1=="<ClInclude" || $1=="<ClCompile") 
     {
         info=$0;
+        start=index(info, "=");
+        _end=index(info, ">");
+		
+		
         if (index(info, "/>") > 0)
         {
-            start=index(info, "=");
-            data="<Unit filename" "" substr(info, start, length($0) - start + 1);
+			data="<Unit filename" "" substr(info, start, length($0));
         }
         else
         {
-            start=index(info, "=");
-            data="<Unit filename" "" substr(info, start, length($0) - start - 1) "" "/>";
+            data="<Unit filename" "" substr(info, start, _end - start) "" "/>";
         }
         
         
@@ -105,7 +107,7 @@ array_name=(
 NFTools/NFFileProcess/NFFileProcess
 NFComm/NFCore/NFCore
 NFComm/NFMessageDefine/NFMessageDefine
-NFComm/NFNet/NFNet
+NFComm/NFNetPlugin/NFNetPlugin
 NFComm/NFKernelPlugin/NFKernelPlugin
 NFComm/NFConfigPlugin/NFConfigPlugin
 NFComm/NFLogPlugin/NFLogPlugin
@@ -144,3 +146,6 @@ do
     array_index=`expr $array_index + $array_step`
     
 done 
+
+
+echo. & pause 

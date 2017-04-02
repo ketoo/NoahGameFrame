@@ -12,6 +12,10 @@
 
 bool NFCPropertyTrailModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }
@@ -29,10 +33,6 @@ bool NFCPropertyTrailModule::Execute()
 
 bool NFCPropertyTrailModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }

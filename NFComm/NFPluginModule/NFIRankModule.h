@@ -1,10 +1,10 @@
 // -------------------------------------------------------------------------
-//    @FileName         :   NFIRankModule.h
-//    @Author           :   NickYang
-//    @Date             :   2012/12/15
-//    @Module           :   NFIRankModule
-//
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2016-12-27
+//    @Module           :    NFIRankModule
+//    @Desc             :
 // -------------------------------------------------------------------------
+
 
 #ifndef NFI_RANK_MODULE_H
 #define NFI_RANK_MODULE_H
@@ -12,10 +12,18 @@
 #include <iostream>
 #include "NFIModule.h"
 
-class NFIRankModule : public NFIModule
+
+class NFIRankModule
+    : public NFIModule
 {
+
 public:
-    virtual void ProcessRankValueUpdate(const NFGUID& self, const int nRankType, const int nOperateType, const NFINT64 nValue) = 0;
+    enum RANK_TYPE
+    {
+        RT_REAL_TIME,
+    };
+
+
 };
 
-#endif // !NFI_RANK_MODULE_H
+#endif

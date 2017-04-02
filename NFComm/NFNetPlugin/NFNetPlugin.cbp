@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NFNetPlugin" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="$(SolutionDir)/_Out/Debug/NFNetPlugin_d" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Debug" />
+				<Option object_output=".objs/Debug" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-fPIC" />
+					<Add option="-D_DEBUG" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src" />
+					<Add directory="$(SolutionDir)/Dependencies/asio" />
+				</Compiler>
+				<Linker>
+					<Add library="../../Dependencies/lib/libevent.a" />
+				</Linker>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
+			</Target>
+			<Target title="Release x64">
+				<Option output="$(SolutionDir)/_Out/Release" prefix_auto="0" extension_auto="1" />
+				<Option working_dir="$(SolutionDir)/_Out/Release" />
+				<Option object_output=".objs/Release" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
+					<Add option="-DNDEBUG" />
+					<Add directory="$(SolutionDir)" />
+					<Add directory="$(SolutionDir)/Dependencies/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/include/" />
+					<Add directory="$(SolutionDir)/Dependencies/libevent/compat/" />
+					<Add directory="$(SolutionDir)/Dependencies/protobuf/src" />
+					<Add directory="$(SolutionDir)/Dependencies/asio" />
+				</Compiler>
+				<Environment>
+					<Variable name="SolutionDir" value="../../" />
+				</Environment>
+			</Target>
+		</Build>
+<Unit filename="dllmain.cpp" />
+<Unit filename="NFCHttpServerModule.cpp" />
+<Unit filename="NFCNet.cpp" />
+<Unit filename="NFCHttpNet.cpp" />
+<Unit filename="NFCNetClientModule.cpp" />
+<Unit filename="NFCNetModule.cpp" />
+<Unit filename="NFCWebsocketModule.cpp" />
+<Unit filename="NFCWS.cpp" />
+<Unit filename="NFNetPlugin.cpp" />
+<Unit filename="NFCHttpServerModule.h" />
+<Unit filename="NFCNet.h" />
+<Unit filename="NFCNetClientModule.h" />
+<Unit filename="NFCNetModule.h" />
+<Unit filename="NFCWebsocketModule.h" />
+<Unit filename="NFCWS.h" />
+<Unit filename="NFIHttpNet.h" />
+<Unit filename="NFINet.h" />
+<Unit filename="NFCHttpNet.h" />
+<Unit filename="NFIWS.h" />
+<Unit filename="NFNetPlugin.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

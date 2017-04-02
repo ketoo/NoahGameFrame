@@ -43,7 +43,7 @@ public:
 	{
 		MODULE_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
 		MODULE_EVENT_FUNCTOR_PTR functorPtr(new MODULE_EVENT_FUNCTOR(functor));
-		mModuleEventPrtMap[pBase] = functorPtr.get();
+		mModuleEventPrtMap[functorPtr.get()] = pBase;
 		return AddEventCallBack(nEventID, functorPtr);
 	}
 	virtual bool DoEvent(const int nEventID, const NFDataList& valueList);

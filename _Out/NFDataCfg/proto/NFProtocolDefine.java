@@ -580,6 +580,7 @@ public class Item {
 	public static final String SalePrice = "SalePrice"; // int
 	public static final String Script = "Script"; // string
 	public static final String Extend = "Extend"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowName = "ShowName"; // string
 	public static final String HeroTye = "HeroTye"; // int
@@ -698,6 +699,7 @@ public class NPC {
 	public static final String LastAttacker = "LastAttacker"; // object
 	public static final String ShowName = "ShowName"; // string
 	public static final String EquipIDRef = "EquipIDRef"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
 	public static final String Icon = "Icon"; // string
 	public static final String ShowCard = "ShowCard"; // string
 	public static final String HeroType = "HeroType"; // int
@@ -785,6 +787,10 @@ public class Player {
 	public static final String GateID = "GateID"; // int
 	public static final String GuildID = "GuildID"; // object
 	public static final String TeamID = "TeamID"; // object
+	public static final String ViewOppnent = "ViewOppnent"; // object
+	public static final String FightOppnent = "FightOppnent"; // object
+	public static final String GambleGold = "GambleGold"; // int
+	public static final String GambleDiamond = "GambleDiamond"; // int
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int

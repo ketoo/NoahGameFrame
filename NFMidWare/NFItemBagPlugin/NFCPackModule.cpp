@@ -10,6 +10,12 @@
 
 bool NFCPackModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
     return true;
 }
 
@@ -26,11 +32,6 @@ bool NFCPackModule::Execute()
 
 bool NFCPackModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-    m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
     return true;
 }
@@ -116,6 +117,8 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		xRowData->SetString(NFrame::Player::BagItemList_ConfigID, strConfigName);
 		xRowData->SetInt(NFrame::Player::BagItemList_ItemCount, nCount);
 		xRowData->SetInt(NFrame::Player::BagItemList_Date, pPluginManager->GetNowTime());
+
+		pRecord->AddRow(-1, *xRowData);
 	}
 	else
 	{

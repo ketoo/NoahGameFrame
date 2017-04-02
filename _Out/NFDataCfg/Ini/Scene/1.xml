@@ -1,8 +1,8 @@
 <!-- edited with XMLSpy v2011 (http://www.altova.com) by tom (acer) -->
 <XML>   
-	<Object ID="NEW_Attack1" ConfigID="AttackNpc1" X="100.5" Y="146" Z="0"  />
-	<Object ID="NEW_Attack2" ConfigID="AttackNpc2" X="120.5" Y="106" Z="0" />
-	<Object ID="NEW_Attack3" ConfigID="AttackNpc3" X="109.5" Y="106" Z="0" />
-	<Object ID="NEW_Attack4" ConfigID="AttackNpc3" X="106.5" Y="106" Z="0" />
-	<Object ID="NEW_Attack5" ConfigID="AttackNpc3" X="103.5" Y="126" Z="0" />
+	<Object ID="NEW_Attack1" ConfigID="AttackNpc1" X="100.5" Y="146" Z="0"  Weight="90" />
+	<Object ID="NEW_Attack2" ConfigID="AttackNpc2" X="120.5" Y="106" Z="0" Weight="90" />
+	<Object ID="NEW_Attack3" ConfigID="AttackNpc3" X="109.5" Y="106" Z="0" Weight="90" />
+	<Object ID="NEW_Attack4" ConfigID="AttackNpc3" X="106.5" Y="106" Z="0" Weight="90" />
+	<Object ID="NEW_Attack5" ConfigID="AttackNpc3" X="103.5" Y="126" Z="0" Weight="90" />
 </XML>
