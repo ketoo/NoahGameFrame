@@ -82,7 +82,7 @@ cp -R -f ./lib/Release/libmysqlpp.a ./lib/
 unzip -o gperftools-2.5.zip -d ./
 cd gperftools-2.5
 chmod -R 755 *
-./configure –enable-frame-pointers
+./configure --enable-frame-pointers
 make
 make install
 cd ../
