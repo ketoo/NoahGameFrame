@@ -63,7 +63,7 @@ public:
 private:
 	NFList<int> mModuleRemoveListEx;
 	NFMapEx<int, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
-	std::map<void*, MODULE_EVENT_FUNCTOR*> mModuleEventPrtMap;
+	std::map<void*, void*> mModuleEventPrtMap;
 };
 
 #include "NFComm/NFPluginModule/NFILogModule.h"
