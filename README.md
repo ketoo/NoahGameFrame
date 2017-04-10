@@ -69,7 +69,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 4. Run **GenerateConfigXML.bat** to generate configuration files
 5. Open the solution: **NoahFrame.sln**
 6. Build the solution(if u build failed, please build again(not rebuild))
-7. Run the binary file by **_Out/Debug/rund.bat**
+7. Run the binary file by **_Out/rund.bat**
 
 ### CodeBlocks >= 13.1(Only in linux)
 
@@ -79,7 +79,7 @@ svn checkout https://github.com/ketoo/NoahGameFrame
 4. Check **C++11** option in CodeBlocks compiler setting
 5. Build **NF.workspace**
 6. Run **sh ./GenerateConfigXML.sh** to generate configuration files
-7. Run the binary file by **_Out/Debug/rund.sh**
+7. Run the binary file by **_Out/rund.sh**
 
 ### CMake
 1. Git pull all source
