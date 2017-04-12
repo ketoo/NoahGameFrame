@@ -10,6 +10,7 @@
 
 NFCWebsocketModule::NFCWebsocketModule(NFIPluginManager * p)
 {
+	pPluginManager = p;
 }
 
 bool NFCWebsocketModule::Init()
@@ -48,6 +49,11 @@ void NFCWebsocketModule::SetReceiveCallBack(NF_WS_MSG_CALL_BACK_PTR functorPtr)
 void NFCWebsocketModule::SetEventCallBack(NF_WS_EVENT_CALL_BACK_PTR functorPtr)
 {
 	m_pEvtCB = functorPtr;
+}
+
+int NFCWebsocketModule::Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount /*= 4*/)
+{
+	return m_pWSServer->Initialization(nMaxClient,nPort,nCpuCount);
 }
 
 void NFCWebsocketModule::OnWebsocketMessage(websocketpp::connection_hdl hd, const std::string & strPayload)
