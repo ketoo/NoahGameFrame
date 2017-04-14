@@ -315,7 +315,17 @@ public:
         return m_pNet;
     }
     //////////////////////////////////////////////////////////////////////////
-    int GetConnectKeyState() const
+	const std::string& GetSecurityKey() const
+	{
+		return mstrSecurityKey;
+	}
+
+	void SetSecurityKey(const std::string& strKey)
+	{
+		mstrSecurityKey = strKey;
+	}
+	
+	int GetConnectKeyState() const
     {
         return mnLogicState;
     }
@@ -388,7 +398,8 @@ private:
     sockaddr_in sin;
     bufferevent* bev;
     std::string mstrBuff;
-    std::string mstrUserData;
+	std::string mstrUserData;
+	std::string mstrSecurityKey;
 
     int32_t mnLogicState;
     int32_t mnGameID;

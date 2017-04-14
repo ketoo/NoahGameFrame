@@ -125,7 +125,6 @@ enum PlayerHero
 enum PlayerFightHero
 {
 	GUID		= 0; // GUID -- object
-	FightPos		= 1; // FightPos -- int
 }
 enum HeroPropertyValue
 {

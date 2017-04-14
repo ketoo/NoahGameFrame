@@ -791,6 +791,7 @@ public class Player {
 	public static final String FightOppnent = "FightOppnent"; // object
 	public static final String GambleGold = "GambleGold"; // int
 	public static final String GambleDiamond = "GambleDiamond"; // int
+	public static final String FightHero = "FightHero"; // object
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int
@@ -862,7 +863,6 @@ public class Player {
 	public enum PlayerFightHero
 	{
 		GUID		= 0, // GUID -- object
-		FightPos		= 1, // FightPos -- int
 
 	};
 

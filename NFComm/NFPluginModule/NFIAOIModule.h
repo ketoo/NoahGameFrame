@@ -1,18 +1,18 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFIChatModule.h
+//    @FileName			:    NFIAOIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFIChatModule
+//    @Module           :    NFIAOIModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
 
-#ifndef NFI_CHAT_MODULE_H
-#define NFI_CHAT_MODULE_H
+#ifndef NFI_AOI_MODULE_H
+#define NFI_AOI_MODULE_H
 
 #include "NFIModule.h"
 
-class NFIChatModule : public NFIModule
+class NFIAOIModule : public NFIModule
 {
 public:
 

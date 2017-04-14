@@ -13,6 +13,13 @@
 
 bool NFCProxyServerToWorldModule::Init()
 {
+	m_pSecurityModule = pPluginManager->FindModule<NFISecurityModule>();
+	m_pProxyLogicModule = pPluginManager->FindModule<NFIProxyLogicModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
     return true;
@@ -195,14 +202,6 @@ void NFCProxyServerToWorldModule::ServerReport()
 
 bool NFCProxyServerToWorldModule::AfterInit()
 {
-    m_pProxyLogicModule = pPluginManager->FindModule<NFIProxyLogicModule>();
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
-
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_CONNECT_WORLD, this, &NFCProxyServerToWorldModule::OnSelectServerResultProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_STS_NET_INFO, this, &NFCProxyServerToWorldModule::OnServerInfoProcess);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCProxyServerToWorldModule::OnOtherMessage);

@@ -9,7 +9,6 @@
 #ifndef NFC_LOGINNET_SERVER_MODULE_H
 #define NFC_LOGINNET_SERVER_MODULE_H
 
-//  the cause of sock'libariy, thenfore "NFCNet.h" much be included first.
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
@@ -21,23 +20,8 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILoginToMasterModule.h"
 
-#define NET_MSG_PROCESS(xNFMsg, msg) \
-    NFGUID nPlayerID; \
-    xNFMsg xMsg; \
-    if (!ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID)) \
-    { \
-        return 0; \
-    } \
-    \
-    NFIActorMessage xActorMsg; \
-    xActorMsg.eType = NFIActorMessage::EACTOR_NET_MSG; \
-    xActorMsg.nSubMsgID = nMsgID; \
-    xMsg.SerializeToString(&xActorMsg.data); \
-    pPluginManager->GetFramework().Send(xActorMsg, pPluginManager->GetAddress(), pPluginManager->GetAddress());
-
 class NFCLoginNet_ServerModule
     : public NFILoginNet_ServerModule
-
 {
 public:
     NFCLoginNet_ServerModule(NFIPluginManager* p)

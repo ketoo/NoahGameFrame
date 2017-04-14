@@ -21,7 +21,7 @@ bool NFCWorldToMasterModule::Init()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
-
+	m_pSecurityModule = pPluginManager->FindModule<NFISecurityModule>();
 
 	return true;
 }
@@ -204,6 +204,8 @@ void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const i
 	NF_SHARE_PTR<ServerData> xServerData = m_pWorldNet_ServerModule->GetSuitProxyForEnter();
 	if (xServerData)
 	{
+		const std::string& strSecurityKey = m_pSecurityModule->GetSecurityKey(xMsg.account());
+
 		NFMsg::AckConnectWorldResult xData;
 
 		xData.set_world_id(xMsg.world_id());
@@ -213,7 +215,7 @@ void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const i
 
 		xData.set_world_ip(xServerData->pData->server_ip());
 		xData.set_world_port(xServerData->pData->server_port());
-		xData.set_world_key(xMsg.account());
+		xData.set_world_key(strSecurityKey);
 
 		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CONNECT_WORLD, xData, xServerData->nFD);
 

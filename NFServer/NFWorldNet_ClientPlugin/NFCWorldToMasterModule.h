@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFISecurityModule.h"
 
 class NFCWorldToMasterModule
 	: public NFIWorldToMasterModule
@@ -64,6 +65,8 @@ private:
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFINetModule* m_pNetModule;
+	NFISecurityModule* m_pSecurityModule;
+
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
