@@ -69,7 +69,14 @@ public:
 		this->y = v.y;
 		this->z = v.z;
 	}
+	NFVector3(const char* v, const int len)
+	{
 
+	}
+	NFVector3(const std::string& v)
+	{
+		
+	}
 	//----------------------------------------------------------------------------
 	bool operator<(const NFVector3& v) const
 	{

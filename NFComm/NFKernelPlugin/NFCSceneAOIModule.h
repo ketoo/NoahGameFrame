@@ -67,7 +67,7 @@ protected:
 	virtual bool AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb);
 
 protected:
-	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFDataList& arg);
+	bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg);
 
 protected:
 	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);

@@ -63,6 +63,7 @@
 		<Plugin Name="NFProxyServerNet_ClientPlugin" />
 		<Plugin Name="NFProxyServerNet_ServerPlugin" />
 		<Plugin Name="NFLogPlugin" />
+		<Plugin Name="NFSecurityPlugin" />	
     	<ConfigPath Name="../" />				
 	</ProxyServer>
 
@@ -77,6 +78,7 @@
 		<Plugin Name="NFDataAgent_NosqlPlugin" />
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
+		<Plugin Name="NFSecurityPlugin" />	
     	<ConfigPath Name="../" />		
 	</WorldServer>
 </XML>

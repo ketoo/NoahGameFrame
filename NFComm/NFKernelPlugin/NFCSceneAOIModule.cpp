@@ -110,7 +110,7 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 
 	
 	NFVector3 vRelivePos = GetRelivePosition(nSceneID, 0);
-	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos.X(), vRelivePos.Y(), vRelivePos.Z(), 0.0f, argList))
+	if (!SwitchScene(self, nSceneID, nGrupID, nType, vRelivePos, 0.0f, argList))
 	{
 		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "SwitchScene failed", nSceneID);
 
@@ -243,9 +243,7 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 			const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
 
 			NFDataList arg;
-			arg << NFrame::IObject::X() << pResource->vSeedPos.X();
-			arg << NFrame::IObject::Y() << pResource->vSeedPos.Y();
-			arg << NFrame::IObject::Z() << pResource->vSeedPos.Z();
+			arg << NFrame::IObject::Position() << pResource->vSeedPos;
 			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 
 			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
@@ -288,7 +286,7 @@ bool NFCSceneAOIModule::RemoveSwapSceneEventCallBack()
 	return true;
 }
 
-bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const float fX, const float fY, const float fZ, const float fOrient, const NFDataList& arg)
+bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const int nType, const NFVector3 v, const float fOrient, const NFDataList& arg)
 {
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (pObject)
@@ -331,9 +329,7 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 			OnSwapSceneEvent(self, nTargetSceneID, nTargetGroupID, nType, arg);
 		}
 
-		pObject->SetPropertyFloat(NFrame::IObject::X(), fX);
-		pObject->SetPropertyFloat(NFrame::IObject::Y(), fY);
-		pObject->SetPropertyFloat(NFrame::IObject::Z(), fZ);
+		pObject->SetPropertyVector3(NFrame::IObject::Position(), v);
 
 		////////
 		BeforeEnterSceneGroup(self, nTargetSceneID, nTargetGroupID, nType, arg);
