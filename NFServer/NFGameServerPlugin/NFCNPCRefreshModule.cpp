@@ -120,16 +120,12 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
 
     //m_pSceneProcessModule->ClearAll( nSceneID, nGroupID, strSeendID );
 
-	float fSeedX = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::X());
-	float fSeedY = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Y());
-	float fSeedZ = m_pKernelModule->GetPropertyFloat( self, NFrame::NPC::Z());
+	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
 
     m_pKernelModule->DestroyObject( self );
 
     NFDataList arg;
-	arg << NFrame::NPC::X() << fSeedX;
-    arg << NFrame::NPC::Y() << fSeedY;
-    arg << NFrame::NPC::Z() << fSeedZ;
+	arg << NFrame::NPC::Position() << fSeedPos;
 	arg << NFrame::NPC::SeedID() << strSeedID;
 
 	m_pKernelModule->CreateObject( NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg );

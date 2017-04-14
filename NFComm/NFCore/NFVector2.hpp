@@ -59,7 +59,14 @@ public:
 		this->x = v.x;
 		this->y = v.y;
 	}
+	NFVector2(const char* v, const int len)
+	{
 
+	}
+	NFVector2(const std::string& v)
+	{
+
+	}
 	bool operator<(const NFVector2& v) const
 	{
 		return this->Length() < v.Length();

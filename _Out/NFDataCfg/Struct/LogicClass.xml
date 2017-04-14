@@ -23,6 +23,7 @@
 		<Class Id="NPC" Type="TYPE_NPC" Path="NFDataCfg/Struct/Class/NPC.xml" InstancePath="NFDataCfg/Ini/NPC/NPC.xml" Public="0" Desc="NPC"/>
 		<Class Id="Player" Type="TYPE_PLAYER" Path="NFDataCfg/Struct/Class/Player.xml" InstancePath="NFDataCfg/Ini/NPC/Player.xml" Public="0" Desc="Player"/>
 		<Class Id="Scene" Type="TYPE_SCENE" Path="NFDataCfg/Struct/Class/Scene.xml" InstancePath="NFDataCfg/Ini/NPC/Scene.xml" Public="0" Desc="Scene"/>
+		<Class Id="Security" Type="TYPE_SECURITY" Path="NFDataCfg/Struct/Class/Security.xml" InstancePath="NFDataCfg/Ini/NPC/Security.xml" Public="0" Desc="Security"/>
 		<Class Id="Server" Type="TYPE_SERVER" Path="NFDataCfg/Struct/Class/Server.xml" InstancePath="NFDataCfg/Ini/NPC/Server.xml" Public="0" Desc="Server"/>
 		<Class Id="Shop" Type="TYPE_SHOP" Path="NFDataCfg/Struct/Class/Shop.xml" InstancePath="NFDataCfg/Ini/NPC/Shop.xml" Public="0" Desc="Shop"/>
 		<Class Id="Skill" Type="TYPE_SKILL" Path="NFDataCfg/Struct/Class/Skill.xml" InstancePath="NFDataCfg/Ini/NPC/Skill.xml" Public="0" Desc="Skill"/>

@@ -906,9 +906,10 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter(const NFDataList& self, con
 		NFMsg::PlayerEntryInfo* pEntryInfo = xPlayerEntryInfoList.add_object_list();
 		*(pEntryInfo->mutable_object_guid()) = NFINetModule::NFToPB(identOld);
 
-		pEntryInfo->set_x(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::X()));
-		pEntryInfo->set_y(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Y()));
-		pEntryInfo->set_z(m_pKernelModule->GetPropertyFloat(identOld, NFrame::IObject::Z()));
+		NFVector3 vPos = m_pKernelModule->GetPropertyVector3(identOld, NFrame::IObject::Position());
+		pEntryInfo->set_x(vPos.X());
+		pEntryInfo->set_y(vPos.Y());
+		pEntryInfo->set_z(vPos.Z());
 		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
 		pEntryInfo->set_player_state(0);
 		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));

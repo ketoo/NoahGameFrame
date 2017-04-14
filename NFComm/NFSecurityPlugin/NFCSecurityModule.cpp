@@ -11,14 +11,26 @@
 
 bool NFCSecurityModule::Init()
 {
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+
 	return true;
 }
 
 bool NFCSecurityModule::AfterInit()
 {
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Security::ThisName());
+	if (xLogicClass)
+	{
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		for (int i = 0; i < strIdList.size(); ++i)
+		{
+			const std::string& strId = strIdList[i];
+			const std::string& strSecurityData = m_pElementModule->GetPropertyString(strId, NFrame::Security::SecurityData());
+
+		}
+	}
 
 	return true;
 }
