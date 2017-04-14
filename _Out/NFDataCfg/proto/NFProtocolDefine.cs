@@ -819,6 +819,7 @@ public class Player
 	public static readonly String FightOppnent = "FightOppnent"; // object
 	public static readonly String GambleGold = "GambleGold"; // int
 	public static readonly String GambleDiamond = "GambleDiamond"; // int
+	public static readonly String FightHero = "FightHero"; // object
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
@@ -890,7 +891,6 @@ public class Player
 	public enum PlayerFightHero
 	{
 		GUID		= 0, // GUID -- object
-		FightPos		= 1, // FightPos -- int
 
 	};
 

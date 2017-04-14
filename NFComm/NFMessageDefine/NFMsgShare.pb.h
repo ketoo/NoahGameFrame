@@ -80,6 +80,7 @@ class AckInlaystoneToEquip;
 class ReqElementlevelToEquip;
 class AckElementlevelToEquip;
 class ReqSetFightHero;
+class ReqSwitchFightHero;
 class ReqMiningTitle;
 class TileState;
 class AckMiningTitle;
@@ -4986,30 +4987,20 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 set() const;
   inline void set_set(::google::protobuf::int32 value);
 
-  // required int32 Switch = 3;
-  inline bool has_switch_() const;
-  inline void clear_switch_();
-  static const int kSwitchFieldNumber = 3;
-  inline ::google::protobuf::int32 switch_() const;
-  inline void set_switch_(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:NFMsg.ReqSetFightHero)
  private:
   inline void set_has_heroid();
   inline void clear_has_heroid();
   inline void set_has_set();
   inline void clear_has_set();
-  inline void set_has_switch_();
-  inline void clear_has_switch_();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* heroid_;
   ::google::protobuf::int32 set_;
-  ::google::protobuf::int32 switch__;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -5017,6 +5008,90 @@ class LIBPROTOC_EXPORT ReqSetFightHero : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqSetFightHero* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message {
+ public:
+  ReqSwitchFightHero();
+  virtual ~ReqSwitchFightHero();
+
+  ReqSwitchFightHero(const ReqSwitchFightHero& from);
+
+  inline ReqSwitchFightHero& operator=(const ReqSwitchFightHero& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqSwitchFightHero& default_instance();
+
+  void Swap(ReqSwitchFightHero* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqSwitchFightHero* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqSwitchFightHero& from);
+  void MergeFrom(const ReqSwitchFightHero& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .NFMsg.Ident Heroid = 1;
+  inline bool has_heroid() const;
+  inline void clear_heroid();
+  static const int kHeroidFieldNumber = 1;
+  inline const ::NFMsg::Ident& heroid() const;
+  inline ::NFMsg::Ident* mutable_heroid();
+  inline ::NFMsg::Ident* release_heroid();
+  inline void set_allocated_heroid(::NFMsg::Ident* heroid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqSwitchFightHero)
+ private:
+  inline void set_has_heroid();
+  inline void clear_has_heroid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFMsg::Ident* heroid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqSwitchFightHero* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -13554,26 +13629,46 @@ inline void ReqSetFightHero::set_set(::google::protobuf::int32 value) {
   set_ = value;
 }
 
-// required int32 Switch = 3;
-inline bool ReqSetFightHero::has_switch_() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+// -------------------------------------------------------------------
+
+// ReqSwitchFightHero
+
+// required .NFMsg.Ident Heroid = 1;
+inline bool ReqSwitchFightHero::has_heroid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqSetFightHero::set_has_switch_() {
-  _has_bits_[0] |= 0x00000004u;
+inline void ReqSwitchFightHero::set_has_heroid() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqSetFightHero::clear_has_switch_() {
-  _has_bits_[0] &= ~0x00000004u;
+inline void ReqSwitchFightHero::clear_has_heroid() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqSetFightHero::clear_switch_() {
-  switch__ = 0;
-  clear_has_switch_();
+inline void ReqSwitchFightHero::clear_heroid() {
+  if (heroid_ != NULL) heroid_->::NFMsg::Ident::Clear();
+  clear_has_heroid();
 }
-inline ::google::protobuf::int32 ReqSetFightHero::switch_() const {
-  return switch__;
+inline const ::NFMsg::Ident& ReqSwitchFightHero::heroid() const {
+  return heroid_ != NULL ? *heroid_ : *default_instance_->heroid_;
 }
-inline void ReqSetFightHero::set_switch_(::google::protobuf::int32 value) {
-  set_has_switch_();
-  switch__ = value;
+inline ::NFMsg::Ident* ReqSwitchFightHero::mutable_heroid() {
+  set_has_heroid();
+  if (heroid_ == NULL) heroid_ = new ::NFMsg::Ident;
+  return heroid_;
+}
+inline ::NFMsg::Ident* ReqSwitchFightHero::release_heroid() {
+  clear_has_heroid();
+  ::NFMsg::Ident* temp = heroid_;
+  heroid_ = NULL;
+  return temp;
+}
+inline void ReqSwitchFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
+  delete heroid_;
+  heroid_ = heroid;
+  if (heroid) {
+    set_has_heroid();
+  } else {
+    clear_has_heroid();
+  }
 }
 
 // -------------------------------------------------------------------

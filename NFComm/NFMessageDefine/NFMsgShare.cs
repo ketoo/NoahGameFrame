@@ -1333,12 +1333,22 @@ namespace NFMsg
       get { return _Set; }
       set { _Set = value; }
     }
-    private int _Switch;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"Switch", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int Switch
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqSwitchFightHero")]
+  public partial class ReqSwitchFightHero : global::ProtoBuf.IExtensible
+  {
+    public ReqSwitchFightHero() {}
+    
+    private NFMsg.Ident _Heroid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"Heroid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident Heroid
     {
-      get { return _Switch; }
-      set { _Switch = value; }
+      get { return _Heroid; }
+      set { _Heroid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
