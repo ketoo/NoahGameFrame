@@ -194,9 +194,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 		pObject->SetPropertyString(NFrame::IObject::ClassName(), strClassName);
 		pObject->SetPropertyInt(NFrame::IObject::SceneID(), nSceneID);
 		pObject->SetPropertyInt(NFrame::IObject::GroupID(), nGroupID);
-		pObject->SetPropertyFloat(NFrame::IObject::X(), vRelivePos.X());
-		pObject->SetPropertyFloat(NFrame::IObject::Y(), vRelivePos.Y());
-		pObject->SetPropertyFloat(NFrame::IObject::Z(), vRelivePos.Z());
+		pObject->SetPropertyVector3(NFrame::IObject::Position(), vRelivePos);
 
 		//no data
 		DoEvent(ident, strClassName, pObject->GetState(), arg);
@@ -246,6 +244,12 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
                         case TDATA_OBJECT:
                             pObject->SetPropertyObject(strPropertyName, arg.Object(i + 1));
                             break;
+						case TDATA_VECTOR2:
+							pObject->SetPropertyVector2(strPropertyName, arg.Vector2(i + 1));
+							break; 
+						case TDATA_VECTOR3:
+								pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
+								break;
                         default:
                             break;
                     }

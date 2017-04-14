@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFISecurityModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
 
 class NFCSecurityModule
     : public NFISecurityModule
@@ -47,7 +48,8 @@ protected:
     //////////////////////////////////////////////////////////////////////////
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
-    NFILogModule* m_pLogModule;
+	NFILogModule* m_pLogModule;
+	NFIElementModule* m_pElementModule;
     //////////////////////////////////////////////////////////////////////////
 };
 #endif

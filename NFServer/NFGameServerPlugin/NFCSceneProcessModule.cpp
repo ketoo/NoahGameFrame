@@ -232,9 +232,9 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
     {
         std::string strSeedID = pSeedFileNode->first_attribute(NFrame::IObject::ID().c_str())->value();
 		std::string strConfigID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
-        float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::X().c_str())->value());
-        float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Y().c_str())->value());
-        float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute(NFrame::IObject::Z().c_str())->value());
+        float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute("X")->value());
+        float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute("Y")->value());
+        float fSeedZ = lexical_cast<float>(pSeedFileNode->first_attribute("Z")->value());
 		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
 		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 

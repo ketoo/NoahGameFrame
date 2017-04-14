@@ -14,6 +14,11 @@
 bool NFCProxyServerToGameModule::Init()
 {
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 
     return true;
 }
@@ -32,12 +37,6 @@ bool NFCProxyServerToGameModule::Execute()
 
 bool NFCProxyServerToGameModule::AfterInit()
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pProxyServerNet_ServerModule = pPluginManager->FindModule<NFIProxyServerNet_ServerModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-    m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, NFMsg::EGMI_ACK_ENTER_GAME, this, &NFCProxyServerToGameModule::OnAckEnterGame);
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_GAME, this, &NFCProxyServerToGameModule::Transpond);
 

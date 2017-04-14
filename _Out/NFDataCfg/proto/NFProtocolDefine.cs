@@ -22,9 +22,7 @@ public class IObject
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Record
 
 }
@@ -39,9 +37,7 @@ public class BB_Build
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Type = "Type"; // int
 	public static readonly String SubType = "SubType"; // int
@@ -65,9 +61,7 @@ public class Block
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Tag = "Tag"; // int
 	public static readonly String SpriteList = "SpriteList"; // string
@@ -103,9 +97,7 @@ public class Buff
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String EffectType = "EffectType"; // int
 	public static readonly String EffectValueType = "EffectValueType"; // int
@@ -130,9 +122,7 @@ public class ChatGroup
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Name = "Name"; // string
 	public static readonly String CreateObject = "CreateObject"; // object
@@ -168,9 +158,7 @@ public class ConsumeData
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
@@ -193,9 +181,7 @@ public class Cost
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String CostMoney = "CostMoney"; // int
 	public static readonly String CostDiamond = "CostDiamond"; // int
@@ -215,9 +201,7 @@ public class DescData
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String Icon = "Icon"; // string
@@ -240,9 +224,7 @@ public class EffectData
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
@@ -290,9 +272,7 @@ public class Equip
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Sex = "Sex"; // int
 	public static readonly String IntensiveBuffList = "IntensiveBuffList"; // string
@@ -326,9 +306,7 @@ public class Guild
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Name = "Name"; // string
 	public static readonly String PresidentID = "PresidentID"; // object
@@ -462,9 +440,7 @@ public class GuildConfig
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ConditionPlayerLevel = "ConditionPlayerLevel"; // int
 	public static readonly String ConditionPlayerVIP = "ConditionPlayerVIP"; // int
@@ -486,9 +462,7 @@ public class GuildJob
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Job = "Job"; // int
 	public static readonly String JobCount = "JobCount"; // object
@@ -519,9 +493,7 @@ public class GuildName
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String GuildID = "GuildID"; // object
 	// Record
@@ -538,9 +510,7 @@ public class HttpServer
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String WebPort = "WebPort"; // int
@@ -559,9 +529,7 @@ public class InitProperty
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Job = "Job"; // int
 	public static readonly String Level = "Level"; // int
@@ -582,9 +550,7 @@ public class Item
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ItemType = "ItemType"; // int
 	public static readonly String ItemSubType = "ItemSubType"; // int
@@ -621,9 +587,7 @@ public class Language
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String English = "English"; // string
 	public static readonly String Chinese = "Chinese"; // string
@@ -641,9 +605,7 @@ public class Map
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String MaxCount = "MaxCount"; // int
 	public static readonly String InComeGold = "InComeGold"; // int
@@ -679,9 +641,7 @@ public class NoSqlServer
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String IP = "IP"; // string
@@ -701,9 +661,7 @@ public class NPC
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String SeedID = "SeedID"; // string
 	public static readonly String VIPEXP = "VIPEXP"; // int
@@ -776,9 +734,7 @@ public class Player
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Name = "Name"; // string
 	public static readonly String Sex = "Sex"; // int
@@ -1055,9 +1011,7 @@ public class Scene
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String SceneName = "SceneName"; // string
 	public static readonly String SceneShowName = "SceneShowName"; // string
@@ -1079,6 +1033,23 @@ public class Scene
 
 }
 
+public class Security
+{
+	//Class name
+	public static readonly string ThisName = "Security";
+	// IObject
+	public static readonly String ID = "ID"; // string
+	public static readonly String ClassName = "ClassName"; // string
+	public static readonly String SceneID = "SceneID"; // int
+	public static readonly String GroupID = "GroupID"; // int
+	public static readonly String ConfigID = "ConfigID"; // string
+	public static readonly String Position = "Position"; // vector3
+	// Property
+	public static readonly String SecurityData = "SecurityData"; // string
+	// Record
+
+}
+
 public class Server
 {
 	//Class name
@@ -1089,9 +1060,7 @@ public class Server
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String Name = "Name"; // string
@@ -1115,9 +1084,7 @@ public class Shop
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Type = "Type"; // int
 	public static readonly String ItemID = "ItemID"; // string
@@ -1141,9 +1108,7 @@ public class Skill
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String SkillType = "SkillType"; // int
 	public static readonly String AnimaState = "AnimaState"; // int
@@ -1184,9 +1149,7 @@ public class SkillRef
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String NORMALATTACK1 = "NORMALATTACK1"; // string
 	public static readonly String NORMALATTACK2 = "NORMALATTACK2"; // string
@@ -1216,9 +1179,7 @@ public class SqlServer
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ServerID = "ServerID"; // int
 	public static readonly String IP = "IP"; // string
@@ -1242,9 +1203,7 @@ public class StateFuncResources
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Atlas_ResID = "Atlas_ResID"; // string
 	// Record
@@ -1261,9 +1220,7 @@ public class StateFunction
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String EFT_INFO = "EFT_INFO"; // int
 	public static readonly String EFT_BOOOST = "EFT_BOOOST"; // int
@@ -1293,9 +1250,7 @@ public class Talent
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String Desc = "Desc"; // string
@@ -1318,9 +1273,7 @@ public class Task
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Type = "Type"; // int
 	public static readonly String NextTaskID = "NextTaskID"; // string
@@ -1345,9 +1298,7 @@ public class Team
 	public static readonly String SceneID = "SceneID"; // int
 	public static readonly String GroupID = "GroupID"; // int
 	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String X = "X"; // float
-	public static readonly String Y = "Y"; // float
-	public static readonly String Z = "Z"; // float
+	public static readonly String Position = "Position"; // vector3
 	// Property
 	public static readonly String Captain = "Captain"; // object
 	public static readonly String PresidentName = "PresidentName"; // string
