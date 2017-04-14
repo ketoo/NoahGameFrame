@@ -358,13 +358,6 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
 		OnOffline(self);
-		//NFINT64 xT1 = NFGetTime();
-		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::LastOfflineTime(), xT1);
-
-		//const NFINT64& xT2 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineTime());
-
-		//NFINT64 totalTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::TotalTime());
-		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::TotalTime(), totalTime + xT1 - xT2);
 
 		SavePlayerData(self);
 	}
@@ -372,10 +365,6 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	{
 		OnOnline(self);
 		AttachData(self);
-
-		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineTime(), NFGetTime());
-		//int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
-		//m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{

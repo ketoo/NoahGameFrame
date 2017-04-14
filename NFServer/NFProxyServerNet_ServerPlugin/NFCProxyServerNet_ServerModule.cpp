@@ -20,7 +20,8 @@ bool NFCProxyServerNet_ServerModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pProxyToWorldModule = pPluginManager->FindModule<NFIProxyServerToWorldModule>();
-	
+	m_pSecurityModule = pPluginManager->FindModule<NFISecurityModule>();
+
     return true;
 }
 
@@ -84,8 +85,22 @@ bool NFCProxyServerNet_ServerModule::Execute()
 
 void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject || pNetObject->GetConnectKeyState() <= 0 || pNetObject->GetGameID() <= 0)
+	{
+		//state error
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
 	NFMsg::MsgBase xMsg;
-	if (!xMsg.ParseFromArray(msg, nLen))
+	if (!xMsg.ParseFromString(strMsgData))
 	{
 		char szData[MAX_PATH] = { 0 };
 		sprintf(szData, "Parse Message Failed from Packet to MsgBase, MessageID: %d\n", nMsgID);
@@ -93,12 +108,6 @@ void NFCProxyServerNet_ServerModule::OnOtherMessage(const int nSockIndex, const 
 		return;
 	}
 
-	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-	if (!pNetObject || pNetObject->GetConnectKeyState() <= 0 || pNetObject->GetGameID() <= 0)
-	{
-		//state error
-		return;
-	}
 
 	//real user id
 	*xMsg.mutable_player_id() = NFINetModule::NFToPB(pNetObject->GetUserID());
@@ -138,7 +147,8 @@ void NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, c
         return;
     }
 
-    bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
+	bool bRet = m_pSecurityModule->VirifySecurityKey(xMsg.account(), xMsg.security_code());
+    //bool bRet = m_pProxyToWorldModule->VerifyConnectData(xMsg.account(), xMsg.security_code());
     if (bRet)
     {
         NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
@@ -146,6 +156,8 @@ void NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, c
         {
             //this net-object verify successful and set state as true
             pNetObject->SetConnectKeyState(1);
+			pNetObject->SetSecurityKey(xMsg.security_code());
+
             //this net-object bind a user's account
             pNetObject->SetAccount(xMsg.account());
 
@@ -226,9 +238,22 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
     NFGUID nPlayerID;
     NFMsg::ReqSelectServer xMsg;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, strMsgData, xMsg, nPlayerID))
     {
         return;
     }
@@ -256,21 +281,33 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex,
 
 void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    NFGUID nPlayerID;//no value
-    NFMsg::ReqServerList xMsg;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
-    {
-        return;
-    }
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
 
-    if (xMsg.type() != NFMsg::RSLT_GAMES_ERVER)
-    {
-        return;
-    }
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
 
-    NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-    if (pNetObject && pNetObject->GetConnectKeyState() > 0)
+    if (pNetObject->GetConnectKeyState() > 0)
     {
+		NFGUID nPlayerID;//no value
+		NFMsg::ReqServerList xMsg;
+		if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, strMsgData, xMsg, nPlayerID))
+		{
+			return;
+		}
+
+		if (xMsg.type() != NFMsg::RSLT_GAMES_ERVER)
+		{
+			return;
+		}
+
         //ack all gameserver data
         NFMsg::AckServerList xData;
         xData.set_type(NFMsg::RSLT_GAMES_ERVER);
@@ -368,6 +405,19 @@ void NFCProxyServerNet_ServerModule::OnClientConnected(const int nAddress)
 
 void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
     NFGUID nPlayerID;
     NFMsg::ReqRoleList xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -378,9 +428,7 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject
-            && pNetObject->GetConnectKeyState() > 0
+        if (pNetObject->GetConnectKeyState() > 0
             && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account())
         {
@@ -406,6 +454,19 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
 
 void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
     NFGUID nPlayerID;//no value
     NFMsg::ReqCreateRole xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -416,9 +477,7 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject
-            && pNetObject->GetConnectKeyState() > 0
+        if (pNetObject->GetConnectKeyState() > 0
             && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account())
         {
@@ -444,6 +503,19 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
 
 void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
     NFGUID nPlayerID;// no value
     NFMsg::ReqDeleteRole xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -454,9 +526,7 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
 	if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject
-            && pNetObject->GetConnectKeyState() > 0
+        if (pNetObject->GetConnectKeyState() > 0
             && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account())
         {
@@ -482,6 +552,19 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
 
 void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
+	NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
+	if (!pNetObject)
+	{
+		return;
+	}
+
+	std::string strMsgData = m_pSecurityModule->DecodeMsg(pNetObject->GetAccount(), pNetObject->GetSecurityKey(), nMsgID, msg, nLen);
+	if (strMsgData.empty())
+	{
+		//decode failed
+		return;
+	}
+
     NFGUID nPlayerID;//no value
     NFMsg::ReqEnterGameServer xData;
     if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
@@ -492,9 +575,7 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
     NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(xData.game_id());
     if (pServerData && ConnectDataState::NORMAL == pServerData->eState)
     {
-        NetObject* pNetObject = m_pNetModule->GetNet()->GetNetObject(nSockIndex);
-        if (pNetObject
-            && pNetObject->GetConnectKeyState() > 0
+        if (pNetObject->GetConnectKeyState() > 0
             && pNetObject->GetGameID() == xData.game_id()
             && pNetObject->GetAccount() == xData.account()
             && !xData.name().empty()

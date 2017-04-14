@@ -573,14 +573,17 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_ACK_ELEMENTLEVEL_TO_EQUIP", Value=1507)]
       EGEC_ACK_ELEMENTLEVEL_TO_EQUIP = 1507,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=1508)]
-      EGEC_REQ_SET_FIGHT_HERO = 1508,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=1508)]
+      EGEC_WEAR_EQUIP = 1508,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_WEAR_EQUIP", Value=1509)]
-      EGEC_WEAR_EQUIP = 1509,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=1509)]
+      EGEC_TAKEOFF_EQUIP = 1509,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_TAKEOFF_EQUIP", Value=1510)]
-      EGEC_TAKEOFF_EQUIP = 1510,
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SET_FIGHT_HERO", Value=1520)]
+      EGEC_REQ_SET_FIGHT_HERO = 1520,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_SWITCH_FIGHT_HERO", Value=1521)]
+      EGEC_REQ_SWITCH_FIGHT_HERO = 1521,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGEC_REQ_MINING_TITLE", Value=1600)]
       EGEC_REQ_MINING_TITLE = 1600,

@@ -375,8 +375,14 @@ message ReqSetFightHero
 {	
 	required Ident		Heroid				= 1;//
 	required int32		Set	    			= 2;//
-	required int32		Switch	    		= 3;// switch
 }
+
+//EGEC_REQ_SWITCH_FIGHT_HERO						= 508;		 // 战斗武将
+message ReqSwitchFightHero
+{	
+	required Ident		Heroid				= 1;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

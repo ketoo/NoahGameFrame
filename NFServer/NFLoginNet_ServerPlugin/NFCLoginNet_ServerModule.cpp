@@ -10,9 +10,6 @@
 #include "NFLoginNet_ServerPlugin.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
-const std::string PROPERTY_ACCOUNT = "Account";
-const std::string PROPERTY_VERIFIED = "Verified";
-
 bool NFCLoginNet_ServerModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
