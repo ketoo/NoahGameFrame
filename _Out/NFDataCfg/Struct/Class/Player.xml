@@ -40,6 +40,7 @@
 		<Property Id="FightOppnent" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="pvp_oppnent"/>
 		<Property Id="GambleGold" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="GambleDiamond" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+		<Property Id="FightHero" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc=""/>
 		<Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="吸血"/>
 		<Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="反伤"/>
 		<Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="暴击"/>
@@ -95,9 +96,8 @@
 			<Col Type="string" Tag="Skill5"/>
 			<Col Type="string" Tag="FightSkill"/>
 		</Record>
-		<Record Id="PlayerFightHero" Row="5" Col="2" Public="0" Private="1" Save="0" Cache="1" Upload="1" Desc="">
+		<Record Id="PlayerFightHero" Row="3" Col="1" Public="0" Private="1" Save="0" Cache="1" Upload="1" Desc="">
 			<Col Type="object" Tag="GUID"/>
-			<Col Type="int" Tag="FightPos"/>
 		</Record>
 		<Record Id="HeroPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
 			<Col Type="int" Tag="SUCKBLOOD"/>

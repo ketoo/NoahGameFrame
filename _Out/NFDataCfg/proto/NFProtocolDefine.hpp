@@ -840,6 +840,7 @@ public:
 	static const std::string& FightOppnent(){ static std::string xFightOppnent = "FightOppnent"; return xFightOppnent; } // object
 	static const std::string& GambleGold(){ static std::string xGambleGold = "GambleGold"; return xGambleGold; } // int
 	static const std::string& GambleDiamond(){ static std::string xGambleDiamond = "GambleDiamond"; return xGambleDiamond; } // int
+	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
@@ -911,7 +912,6 @@ public:
 	enum PlayerFightHero
 	{
 		PlayerFightHero_GUID		= 0, // GUID -- object
-		PlayerFightHero_FightPos		= 1, // FightPos -- int
 
 	};
 

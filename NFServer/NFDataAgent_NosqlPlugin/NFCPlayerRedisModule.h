@@ -36,8 +36,9 @@ public:
 	virtual int64_t GetPlayerCacheGameID(const NFGUID& self);
 	virtual int64_t GetPlayerCacheProxyID(const NFGUID& self);
 
-	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
-	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList);
+	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xPlayerList, std::vector<int64_t>& xResultList);
+	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xPlayerList, std::vector<int64_t>& xResultList);
+
 	virtual int GetPlayerHomeSceneID(const NFGUID& self);
 
 	virtual bool LoadPlayerData(const NFGUID& self);

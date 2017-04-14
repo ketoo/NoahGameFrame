@@ -10,7 +10,6 @@
 #ifndef NFC_PROXYSERVER_NETCLIENT_MODULE_H
 #define NFC_PROXYSERVER_NETCLIENT_MODULE_H
 
-#include <string>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
@@ -21,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
+#include "NFComm/NFPluginModule/NFISecurityModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToGameModule.h"
 
 class NFCProxyServerToWorldModule : public NFIProxyServerToWorldModule
@@ -85,6 +85,8 @@ private:
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
+	NFISecurityModule* m_pSecurityModule;
+
 	std::map<std::string, std::string> m_mServerInfoExt;
 };
 

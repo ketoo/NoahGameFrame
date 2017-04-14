@@ -3,8 +3,7 @@
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-05-06
 //    @Module           :    NFCProxyServerToGameModule
-//
-//     @Changed         : NFCProxyConnectObject Add HeartBeat by hahaya 2013-11-1
+//    @Changed          :	 NFCProxyConnectObject Add HeartBeat by hahaya 2013-11-1
 // -------------------------------------------------------------------------
 
 #ifndef NFC_PROXYSERVER_TO_GAME_MODULE_H

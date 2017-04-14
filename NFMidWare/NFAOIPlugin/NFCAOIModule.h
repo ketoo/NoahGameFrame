@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------
-//    @FileName			:    NFCChatModule.h
+//    @FileName			:    NFCAOIModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2016-12-18
-//    @Module           :    NFCChatModule
+//    @Module           :    NFCAOIModule
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#ifndef NFC_CHAT_MODULE_H
-#define NFC_CHAT_MODULE_H
+#ifndef NFC_AOI_MODULE_H
+#define NFC_AOI_MODULE_H
 
 #include <memory>
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
@@ -15,7 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
-#include "NFComm/NFPluginModule/NFIChatModule.h"
+#include "NFComm/NFPluginModule/NFIAOIModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
@@ -25,11 +25,13 @@
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
-class NFCChatModule
-    : public NFIChatModule
+
+
+class NFCAOIModule
+    : public NFIAOIModule
 {
 public:
-	NFCChatModule(NFIPluginManager* p)
+	NFCAOIModule(NFIPluginManager* p)
     {
         pPluginManager = p;
     }
@@ -38,9 +40,6 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-
-private:
-	void OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 

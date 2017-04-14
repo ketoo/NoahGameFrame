@@ -182,6 +182,11 @@ public:
 		return true;
 	}
 
+	static bool ReceivePB(const int nSockIndex, const int nMsgID, const std::string& strMsgData, google::protobuf::Message & xData, NFGUID & nPlayer)
+	{
+		return ReceivePB(nSockIndex, nMsgID, strMsgData.c_str(), strMsgData.length(), xData, nPlayer);
+	}
+
 	static bool ReceivePB(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen, google::protobuf::Message & xData, NFGUID & nPlayer)
 	{
 		NFMsg::MsgBase xMsg;

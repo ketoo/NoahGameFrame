@@ -8,7 +8,6 @@
 
 #include "NFNoSqlPlugin.h"
 #include "NFCNoSqlModule.h"
-#include "NFCAsyNoSqlModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -38,11 +37,9 @@ const std::string NFNoSqlPlugin::GetPluginName()
 void NFNoSqlPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
-	REGISTER_MODULE(pPluginManager, NFIAsyNoSqlModule, NFCAsyNoSqlModule)
 }
 
 void NFNoSqlPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIAsyNoSqlModule, NFCAsyNoSqlModule)
 	UNREGISTER_MODULE(pPluginManager, NFINoSqlModule, NFCNoSqlModule)
 }
