@@ -1057,21 +1057,25 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 		{
 			NFGUID ident = NFGUID();
 			NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-			while (!ident.IsNull() && noSelf != ident)
+			for (; pRet; pRet = pGroupInfo->mxPlayerList.Next(ident))
 			{
-				list.Add(ident);
+				if (!ident.IsNull() && ident != noSelf)
+				{
+					list.Add(ident);
+				}
 
 				ident = NFGUID();
-				pRet = pGroupInfo->mxPlayerList.Next(ident);
 			}
 
 			pRet = pGroupInfo->mxOtherList.First(ident);
-			while (!ident.IsNull() && noSelf != ident)
+			for (; pRet; pRet = pGroupInfo->mxOtherList.Next(ident))
 			{
-				list.Add(ident);
+				if (!ident.IsNull() && ident != noSelf)
+				{
+					list.Add(ident);
+				}
 
 				ident = NFGUID();
-				pRet = pGroupInfo->mxOtherList.Next(ident);
 			}
 
 			return true;
@@ -1169,24 +1173,28 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 			{
 				NFGUID ident = NFGUID();
 				NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-				while (!ident.IsNull() && ident != noSelf)
+				for (; pRet; pRet = pGroupInfo->mxPlayerList.Next(ident))
 				{
-					list.Add(ident);
+					if (!ident.IsNull() && ident != noSelf)
+					{
+						list.Add(ident);
+					}
 
 					ident = NFGUID();
-					pRet = pGroupInfo->mxPlayerList.Next(ident);
 				}
 			}
 			else
 			{
 				NFGUID ident = NFGUID();
 				NF_SHARE_PTR<int> pRet = pGroupInfo->mxOtherList.First(ident);
-				while (!ident.IsNull() && ident != noSelf)
+				for (; pRet; pRet = pGroupInfo->mxOtherList.Next(ident))
 				{
-					list.Add(ident);
+					if (!ident.IsNull() && ident != noSelf)
+					{
+						list.Add(ident);
+					}
 
 					ident = NFGUID();
-					pRet = pGroupInfo->mxOtherList.Next(ident);
 				}
 			}
 
