@@ -14,7 +14,8 @@ bool NFCSecurityModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	
 	return true;
 }
 
