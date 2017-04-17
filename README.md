@@ -22,7 +22,7 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 
 ## Toturial 
 
-[Toturial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39)
+[Toturial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39)http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
 
 ### FAQ
 [FAQ](http://blog.noahframe.com/?p=229)
