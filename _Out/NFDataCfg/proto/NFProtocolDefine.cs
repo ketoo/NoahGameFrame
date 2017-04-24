@@ -671,8 +671,6 @@ public class NPC
 	public static readonly String MP = "MP"; // int
 	public static readonly String Gold = "Gold"; // int
 	public static readonly String Money = "Money"; // int
-	public static readonly String TargetX = "TargetX"; // float
-	public static readonly String TargetY = "TargetY"; // float
 	public static readonly String Prefab = "Prefab"; // string
 	public static readonly String MoveType = "MoveType"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
@@ -691,6 +689,9 @@ public class NPC
 	public static readonly String Camp = "Camp"; // int
 	public static readonly String MasterID = "MasterID"; // object
 	public static readonly String NPCType = "NPCType"; // int
+	public static readonly String SkillList = "SkillList"; // string
+	public static readonly String SpecialSkill = "SpecialSkill"; // string
+	public static readonly String BuffSkill = "BuffSkill"; // string
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int

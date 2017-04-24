@@ -644,8 +644,6 @@ public class NPC {
 	public static final String MP = "MP"; // int
 	public static final String Gold = "Gold"; // int
 	public static final String Money = "Money"; // int
-	public static final String TargetX = "TargetX"; // float
-	public static final String TargetY = "TargetY"; // float
 	public static final String Prefab = "Prefab"; // string
 	public static final String MoveType = "MoveType"; // int
 	public static final String AtkDis = "AtkDis"; // float
@@ -664,6 +662,9 @@ public class NPC {
 	public static final String Camp = "Camp"; // int
 	public static final String MasterID = "MasterID"; // object
 	public static final String NPCType = "NPCType"; // int
+	public static final String SkillList = "SkillList"; // string
+	public static final String SpecialSkill = "SpecialSkill"; // string
+	public static final String BuffSkill = "BuffSkill"; // string
 	public static final String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static final String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static final String CRITICAL = "CRITICAL"; // int
