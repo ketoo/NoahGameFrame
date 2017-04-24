@@ -58,6 +58,11 @@ public:
 	*/
     virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
     {
+		if (data == nullptr)
+		{
+			return false;
+		}
+
         typename NFMapOBJECT::iterator itr = mObjectList.find(name);
         if (itr == mObjectList.end())
         {
@@ -104,7 +109,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
     }
 
@@ -184,7 +189,7 @@ public:
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -194,7 +199,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
     }
 
@@ -202,7 +207,7 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
 
         ++mObjectCurIter;
@@ -212,7 +217,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
     }
 
@@ -220,7 +225,7 @@ public:
     {
         if (mObjectList.size() <= 0)
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
 
         mObjectCurIter = mObjectList.begin();
@@ -231,7 +236,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
     }
 
@@ -239,7 +244,7 @@ public:
     {
         if (mObjectCurIter == mObjectList.end())
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
 
         mObjectCurIter++;
@@ -250,7 +255,7 @@ public:
         }
         else
         {
-            return NF_SHARE_PTR<TD>();
+            return nullptr;
         }
     }
 
@@ -326,6 +331,11 @@ public:
 
 	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
 	{
+		if (data == nullptr)
+		{
+			return false;
+		}
+
 		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(name);
 		if (itr == NFMapEx<T, TD>::mObjectList.end())
 		{
