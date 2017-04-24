@@ -9,8 +9,6 @@
 		<Property Id="MP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="法力值"/>
 		<Property Id="Gold" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="玩家游戏金币"/>
 		<Property Id="Money" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="钻石"/>
-		<Property Id="TargetX" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
-		<Property Id="TargetY" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Prefab" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="客户端预设模型"/>
 		<Property Id="MoveType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="Move类型"/>
 		<Property Id="AtkDis" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="攻击距离"/>
@@ -29,6 +27,9 @@
 		<Property Id="Camp" Type="int" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="阵营"/>
 		<Property Id="MasterID" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Upload="0" Desc="召唤者，主人"/>
 		<Property Id="NPCType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="NPC类型"/>
+		<Property Id="SkillList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+		<Property Id="SpecialSkill" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
+		<Property Id="BuffSkill" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="吸血"/>
 		<Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="反伤"/>
 		<Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="暴击"/>
