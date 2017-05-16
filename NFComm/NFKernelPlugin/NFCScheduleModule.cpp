@@ -60,7 +60,7 @@ bool NFCScheduleModule::Execute()
 			if (nNow > pSchedule->mnNextTriggerTime)
 			{
 				std::map<NFGUID, std::string>::iterator itRet = mObjectRemoveList.find(pSchedule->self);
-				if (itRet == mObjectRemoveList.end())
+				if (itRet != mObjectRemoveList.end())
 				{
 					if (itRet->second != pSchedule->mstrScheduleName)
 					{
