@@ -97,7 +97,7 @@ public:
 
 	bool operator!= (const NFVector3& v) const
 	{
-		return std::abs(this->x - v.x) >= 0.001f && std::abs(this->y - v.y) >= 0.001f && std::abs(this->z - v.z) >= 0.001f;
+		return std::abs(this->x - v.x) >= 0.001f || std::abs(this->y - v.y) >= 0.001f || std::abs(this->z - v.z) >= 0.001f;
 	}
 
 	//----------------------------------------------------------------------------
