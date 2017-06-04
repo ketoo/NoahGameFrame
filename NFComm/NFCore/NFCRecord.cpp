@@ -213,14 +213,14 @@ bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = value;
+		pVar->SetInt(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetInt(pVar->GetInt());
 
-		pVar->variantData = value;
+		pVar->SetInt(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
@@ -275,14 +275,13 @@ bool NFCRecord::SetFloat(const int nRow, const int nCol, const double value)
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = value;
+		pVar->SetFloat(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetFloat(pVar->GetFloat());
-
-		pVar->variantData = value;
+		pVar->SetFloat(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
@@ -337,14 +336,14 @@ bool NFCRecord::SetString(const int nRow, const int nCol, const std::string& val
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = (std::string)value;
+		pVar->SetString(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetString(pVar->GetString());
 
-		pVar->variantData = (std::string)value;
+		pVar->SetString(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
@@ -399,14 +398,14 @@ bool NFCRecord::SetObject(const int nRow, const int nCol, const NFGUID& value)
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = value;
+		pVar->SetObject(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetObject(pVar->GetObject());
 
-		pVar->variantData = value;
+		pVar->SetObject(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
@@ -461,14 +460,14 @@ bool NFCRecord::SetVector2(const int nRow, const int nCol, const NFVector2& valu
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = value;
+		pVar->SetVector2(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetVector2(pVar->GetVector2());
 
-		pVar->variantData = value;
+		pVar->SetVector2(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
@@ -517,14 +516,14 @@ bool NFCRecord::SetVector3(const int nRow, const int nCol, const NFVector3& valu
 
 	if (mtRecordCallback.size() == 0)
 	{
-		pVar->variantData = value;
+		pVar->SetVector3(value);
 	}
 	else
 	{
 		NFData oldValue;
 		oldValue.SetVector3(pVar->GetVector3());
 
-		pVar->variantData = value;
+		pVar->SetVector3(value);
 
 		RECORD_EVENT_DATA xEventData;
 		xEventData.nOpType = RECORD_EVENT_DATA::Update;
