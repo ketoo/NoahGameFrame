@@ -1061,25 +1061,28 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 		{
 			NFGUID ident = NFGUID();
 			NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-			for (; pRet; pRet = pGroupInfo->mxPlayerList.Next(ident))
+			while (!ident.IsNull())
 			{
-				if (!ident.IsNull() && ident != noSelf)
+				if (ident != noSelf)
 				{
 					list.Add(ident);
 				}
 
 				ident = NFGUID();
+				pRet = pGroupInfo->mxPlayerList.Next(ident);
 			}
 
+			ident = NFGUID();
 			pRet = pGroupInfo->mxOtherList.First(ident);
-			for (; pRet; pRet = pGroupInfo->mxOtherList.Next(ident))
+			while (!ident.IsNull())
 			{
-				if (!ident.IsNull() && ident != noSelf)
+				if (ident != noSelf)
 				{
 					list.Add(ident);
 				}
 
 				ident = NFGUID();
+				pRet = pGroupInfo->mxOtherList.Next(ident);
 			}
 
 			return true;
@@ -1108,6 +1111,7 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
                 pRet = pGroupInfo->mxPlayerList.Next(ident);
             }
 
+			ident = NFGUID();
             pRet = pGroupInfo->mxOtherList.First(ident);
             while (!ident.IsNull())
             {
@@ -1177,28 +1181,29 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 			{
 				NFGUID ident = NFGUID();
 				NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-				for (; pRet; pRet = pGroupInfo->mxPlayerList.Next(ident))
+				while (!ident.IsNull())
 				{
-					if (!ident.IsNull() && ident != noSelf)
+					if (ident != noSelf)
 					{
 						list.Add(ident);
 					}
 
 					ident = NFGUID();
+					pRet = pGroupInfo->mxPlayerList.Next(ident);
 				}
 			}
 			else
 			{
 				NFGUID ident = NFGUID();
 				NF_SHARE_PTR<int> pRet = pGroupInfo->mxOtherList.First(ident);
-				for (; pRet; pRet = pGroupInfo->mxOtherList.Next(ident))
+				while (!ident.IsNull())
 				{
-					if (!ident.IsNull() && ident != noSelf)
+					if (ident != noSelf)
 					{
 						list.Add(ident);
 					}
-
 					ident = NFGUID();
+					pRet = pGroupInfo->mxOtherList.Next(ident);
 				}
 			}
 
