@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
-#include "NFComm/NFPluginModule/NFIGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -43,7 +42,6 @@ public:
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
 	virtual bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
 
-	//////////////////////其次考虑参数////////////////////////////////////////////////////
 	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
 	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID);
 	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
@@ -60,7 +58,6 @@ protected:
 
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIGuildDataModule* m_pGuildDataModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
