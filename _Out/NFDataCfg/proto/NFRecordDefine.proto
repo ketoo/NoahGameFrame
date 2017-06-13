@@ -101,30 +101,32 @@ enum PlayerHero
 {
 	GUID		= 0; // GUID -- object
 	ConfigID		= 1; // ConfigID -- string
-	Level		= 2; // Level -- int
-	Exp		= 3; // Exp -- int
-	Star		= 4; // Star -- int
-	Equip1		= 5; // Equip1 -- object
-	Equip2		= 6; // Equip2 -- object
-	Equip3		= 7; // Equip3 -- object
-	Equip4		= 8; // Equip4 -- object
-	Equip5		= 9; // Equip5 -- object
-	Equip6		= 10; // Equip6 -- object
-	Talent1		= 11; // Talent1 -- string
-	Talent2		= 12; // Talent2 -- string
-	Talent3		= 13; // Talent3 -- string
-	Talent4		= 14; // Talent4 -- string
-	Talent5		= 15; // Talent5 -- string
-	Skill1		= 16; // Skill1 -- string
-	Skill2		= 17; // Skill2 -- string
-	Skill3		= 18; // Skill3 -- string
-	Skill4		= 19; // Skill4 -- string
-	Skill5		= 20; // Skill5 -- string
-	FightSkill		= 21; // FightSkill -- string
+	Activated		= 2; // Activated -- int
+	Level		= 3; // Level -- int
+	Exp		= 4; // Exp -- int
+	Star		= 5; // Star -- int
+	Equip1		= 6; // Equip1 -- object
+	Equip2		= 7; // Equip2 -- object
+	Equip3		= 8; // Equip3 -- object
+	Equip4		= 9; // Equip4 -- object
+	Equip5		= 10; // Equip5 -- object
+	Equip6		= 11; // Equip6 -- object
+	Talent1		= 12; // Talent1 -- string
+	Talent2		= 13; // Talent2 -- string
+	Talent3		= 14; // Talent3 -- string
+	Talent4		= 15; // Talent4 -- string
+	Talent5		= 16; // Talent5 -- string
+	Skill1		= 17; // Skill1 -- string
+	Skill2		= 18; // Skill2 -- string
+	Skill3		= 19; // Skill3 -- string
+	Skill4		= 20; // Skill4 -- string
+	Skill5		= 21; // Skill5 -- string
+	FightSkill		= 22; // FightSkill -- string
 }
 enum PlayerFightHero
 {
 	GUID		= 0; // GUID -- object
+	FightPos		= 1; // FightPos -- int
 }
 enum HeroPropertyValue
 {

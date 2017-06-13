@@ -691,6 +691,8 @@ public:
 	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
 	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
 	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; } // int
+	static const std::string& TargetX(){ static std::string xTargetX = "TargetX"; return xTargetX; } // float
+	static const std::string& TargetY(){ static std::string xTargetY = "TargetY"; return xTargetY; } // float
 	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
 	static const std::string& MoveType(){ static std::string xMoveType = "MoveType"; return xMoveType; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
@@ -709,9 +711,6 @@ public:
 	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
 	static const std::string& MasterID(){ static std::string xMasterID = "MasterID"; return xMasterID; } // object
 	static const std::string& NPCType(){ static std::string xNPCType = "NPCType"; return xNPCType; } // int
-	static const std::string& SkillList(){ static std::string xSkillList = "SkillList"; return xSkillList; } // string
-	static const std::string& SpecialSkill(){ static std::string xSpecialSkill = "SpecialSkill"; return xSpecialSkill; } // string
-	static const std::string& BuffSkill(){ static std::string xBuffSkill = "BuffSkill"; return xBuffSkill; } // string
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
@@ -760,6 +759,7 @@ public:
 	// Property
 	static const std::string& Name(){ static std::string xName = "Name"; return xName; } // string
 	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
+	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
 	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
 	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
@@ -767,8 +767,7 @@ public:
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
 	static const std::string& FirstTarget(){ static std::string xFirstTarget = "FirstTarget"; return xFirstTarget; } // object
-	static const std::string& CharType(){ static std::string xCharType = "CharType"; return xCharType; } // int
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
+	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // string
 	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
 	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
@@ -797,7 +796,6 @@ public:
 	static const std::string& FightOppnent(){ static std::string xFightOppnent = "FightOppnent"; return xFightOppnent; } // object
 	static const std::string& GambleGold(){ static std::string xGambleGold = "GambleGold"; return xGambleGold; } // int
 	static const std::string& GambleDiamond(){ static std::string xGambleDiamond = "GambleDiamond"; return xGambleDiamond; } // int
-	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
 	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
 	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
 	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
@@ -843,32 +841,34 @@ public:
 	{
 		PlayerHero_GUID		= 0, // GUID -- object
 		PlayerHero_ConfigID		= 1, // ConfigID -- string
-		PlayerHero_Level		= 2, // Level -- int
-		PlayerHero_Exp		= 3, // Exp -- int
-		PlayerHero_Star		= 4, // Star -- int
-		PlayerHero_Equip1		= 5, // Equip1 -- object
-		PlayerHero_Equip2		= 6, // Equip2 -- object
-		PlayerHero_Equip3		= 7, // Equip3 -- object
-		PlayerHero_Equip4		= 8, // Equip4 -- object
-		PlayerHero_Equip5		= 9, // Equip5 -- object
-		PlayerHero_Equip6		= 10, // Equip6 -- object
-		PlayerHero_Talent1		= 11, // Talent1 -- string
-		PlayerHero_Talent2		= 12, // Talent2 -- string
-		PlayerHero_Talent3		= 13, // Talent3 -- string
-		PlayerHero_Talent4		= 14, // Talent4 -- string
-		PlayerHero_Talent5		= 15, // Talent5 -- string
-		PlayerHero_Skill1		= 16, // Skill1 -- string
-		PlayerHero_Skill2		= 17, // Skill2 -- string
-		PlayerHero_Skill3		= 18, // Skill3 -- string
-		PlayerHero_Skill4		= 19, // Skill4 -- string
-		PlayerHero_Skill5		= 20, // Skill5 -- string
-		PlayerHero_FightSkill		= 21, // FightSkill -- string
+		PlayerHero_Activated		= 2, // Activated -- int
+		PlayerHero_Level		= 3, // Level -- int
+		PlayerHero_Exp		= 4, // Exp -- int
+		PlayerHero_Star		= 5, // Star -- int
+		PlayerHero_Equip1		= 6, // Equip1 -- object
+		PlayerHero_Equip2		= 7, // Equip2 -- object
+		PlayerHero_Equip3		= 8, // Equip3 -- object
+		PlayerHero_Equip4		= 9, // Equip4 -- object
+		PlayerHero_Equip5		= 10, // Equip5 -- object
+		PlayerHero_Equip6		= 11, // Equip6 -- object
+		PlayerHero_Talent1		= 12, // Talent1 -- string
+		PlayerHero_Talent2		= 13, // Talent2 -- string
+		PlayerHero_Talent3		= 14, // Talent3 -- string
+		PlayerHero_Talent4		= 15, // Talent4 -- string
+		PlayerHero_Talent5		= 16, // Talent5 -- string
+		PlayerHero_Skill1		= 17, // Skill1 -- string
+		PlayerHero_Skill2		= 18, // Skill2 -- string
+		PlayerHero_Skill3		= 19, // Skill3 -- string
+		PlayerHero_Skill4		= 20, // Skill4 -- string
+		PlayerHero_Skill5		= 21, // Skill5 -- string
+		PlayerHero_FightSkill		= 22, // FightSkill -- string
 
 	};
 
 	enum PlayerFightHero
 	{
 		PlayerFightHero_GUID		= 0, // GUID -- object
+		PlayerFightHero_FightPos		= 1, // FightPos -- int
 
 	};
 

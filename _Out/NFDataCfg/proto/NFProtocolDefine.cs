@@ -671,6 +671,8 @@ public class NPC
 	public static readonly String MP = "MP"; // int
 	public static readonly String Gold = "Gold"; // int
 	public static readonly String Money = "Money"; // int
+	public static readonly String TargetX = "TargetX"; // float
+	public static readonly String TargetY = "TargetY"; // float
 	public static readonly String Prefab = "Prefab"; // string
 	public static readonly String MoveType = "MoveType"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
@@ -689,9 +691,6 @@ public class NPC
 	public static readonly String Camp = "Camp"; // int
 	public static readonly String MasterID = "MasterID"; // object
 	public static readonly String NPCType = "NPCType"; // int
-	public static readonly String SkillList = "SkillList"; // string
-	public static readonly String SpecialSkill = "SpecialSkill"; // string
-	public static readonly String BuffSkill = "BuffSkill"; // string
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
@@ -739,6 +738,7 @@ public class Player
 	// Property
 	public static readonly String Name = "Name"; // string
 	public static readonly String Sex = "Sex"; // int
+	public static readonly String Job = "Job"; // int
 	public static readonly String Race = "Race"; // int
 	public static readonly String Camp = "Camp"; // int
 	public static readonly String HomeSceneID = "HomeSceneID"; // int
@@ -746,8 +746,7 @@ public class Player
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String PrefabPath = "PrefabPath"; // string
 	public static readonly String FirstTarget = "FirstTarget"; // object
-	public static readonly String CharType = "CharType"; // int
-	public static readonly String Job = "Job"; // int
+	public static readonly String FightHero = "FightHero"; // string
 	public static readonly String VIPLevel = "VIPLevel"; // int
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
@@ -776,7 +775,6 @@ public class Player
 	public static readonly String FightOppnent = "FightOppnent"; // object
 	public static readonly String GambleGold = "GambleGold"; // int
 	public static readonly String GambleDiamond = "GambleDiamond"; // int
-	public static readonly String FightHero = "FightHero"; // object
 	public static readonly String SUCKBLOOD = "SUCKBLOOD"; // int
 	public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE"; // int
 	public static readonly String CRITICAL = "CRITICAL"; // int
@@ -822,32 +820,34 @@ public class Player
 	{
 		GUID		= 0, // GUID -- object
 		ConfigID		= 1, // ConfigID -- string
-		Level		= 2, // Level -- int
-		Exp		= 3, // Exp -- int
-		Star		= 4, // Star -- int
-		Equip1		= 5, // Equip1 -- object
-		Equip2		= 6, // Equip2 -- object
-		Equip3		= 7, // Equip3 -- object
-		Equip4		= 8, // Equip4 -- object
-		Equip5		= 9, // Equip5 -- object
-		Equip6		= 10, // Equip6 -- object
-		Talent1		= 11, // Talent1 -- string
-		Talent2		= 12, // Talent2 -- string
-		Talent3		= 13, // Talent3 -- string
-		Talent4		= 14, // Talent4 -- string
-		Talent5		= 15, // Talent5 -- string
-		Skill1		= 16, // Skill1 -- string
-		Skill2		= 17, // Skill2 -- string
-		Skill3		= 18, // Skill3 -- string
-		Skill4		= 19, // Skill4 -- string
-		Skill5		= 20, // Skill5 -- string
-		FightSkill		= 21, // FightSkill -- string
+		Activated		= 2, // Activated -- int
+		Level		= 3, // Level -- int
+		Exp		= 4, // Exp -- int
+		Star		= 5, // Star -- int
+		Equip1		= 6, // Equip1 -- object
+		Equip2		= 7, // Equip2 -- object
+		Equip3		= 8, // Equip3 -- object
+		Equip4		= 9, // Equip4 -- object
+		Equip5		= 10, // Equip5 -- object
+		Equip6		= 11, // Equip6 -- object
+		Talent1		= 12, // Talent1 -- string
+		Talent2		= 13, // Talent2 -- string
+		Talent3		= 14, // Talent3 -- string
+		Talent4		= 15, // Talent4 -- string
+		Talent5		= 16, // Talent5 -- string
+		Skill1		= 17, // Skill1 -- string
+		Skill2		= 18, // Skill2 -- string
+		Skill3		= 19, // Skill3 -- string
+		Skill4		= 20, // Skill4 -- string
+		Skill5		= 21, // Skill5 -- string
+		FightSkill		= 22, // FightSkill -- string
 
 	};
 
 	public enum PlayerFightHero
 	{
 		GUID		= 0, // GUID -- object
+		FightPos		= 1, // FightPos -- int
 
 	};
 
