@@ -77,7 +77,7 @@ int NFCItemCardConsumeProcessModule::ConsumeProcess( const NFGUID& self, const s
 	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
 
-	NFGUID xHeroID = m_pHeroModule->AddHero(self, strItemID);
+	NFGUID xHeroID = m_pHeroModule->ActiviteHero(self, strItemID);
 	if (xHeroID.IsNull())
 	{
 		return 0;
