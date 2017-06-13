@@ -291,10 +291,10 @@ bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, cons
 	return true;
 }
 
-bool NFCHeroModule::SetFightHero(const NFGUID& self, const bool bSet, const NFGUID& xHeroID)
+bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
-	if (nullptr == pHeroRecord.get())
+	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
@@ -304,47 +304,37 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const bool bSet, const NFGU
 		return false;
 	}
 
-	NFDataList varHeroID;
-	int nHeroCount = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID, varHeroID);
-	if (nHeroCount != 1)
+	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroID);
+	if (nRow < 0)
+	{
+		return false;
+	}
+
+	int nActivite = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero_Activated);
+	if (nActivite <= 0)
 	{
 		return false;
 	}
 
 	/////////////Add this hero to Record_PlayerFightHero
-	
-
 	NF_SHARE_PTR<NFIRecord> pFightHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerFightHero());
-	for (int i = 0; i < pFightHeroRecord->GetRows(); ++i)
+	if (pFightHeroRecord == nullptr)
 	{
-		if (bSet)
-		{
-			nHeroCount = pFightHeroRecord->FindObject(NFrame::Player::PlayerFightHero::PlayerFightHero_GUID, xHeroID, varHeroID);
-			if (nHeroCount != 1)
-			{
-				return false;
-			}
-
-			if (!pFightHeroRecord->IsUsed(i))
-			{
-				pFightHeroRecord->AddRow(i, NFDataList() << xHeroID);
-				break;
-			}
-		}
-		else
-		{
-			if (pFightHeroRecord->IsUsed(i))
-			{
-				const NFGUID xOldHero = pFightHeroRecord->GetObject(i, NFrame::Player::PlayerFightHero::PlayerFightHero_GUID);
-				if (xOldHero == xHeroID)
-				{
-					pFightHeroRecord->Remove(i);
-					break;
-				}
-			}
-		}
-		
+		return false;
 	}
+
+	int nFightRow = pFightHeroRecord->FindObject(NFrame::Player::PlayerFightHero_GUID, xHeroID);
+	if (nFightRow >= 0)
+	{
+		pFightHeroRecord->Remove(nFightRow);
+	}
+
+	if (pFightHeroRecord->IsUsed(nPos))
+	{
+		pFightHeroRecord->Remove(nPos);
+	}
+
+	pFightHeroRecord->AddRow(nPos, NFDataList() << xHeroID << 0);
 
 	return false;
 }
@@ -547,6 +537,13 @@ int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 						}
 					}
 				}
+			}
+		}
+		else if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA)
+		{
+			if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount()) <= 0)
+			{
+				//get hero list and add hero, but only activite one or two hero
 			}
 		}
 	}

@@ -33,7 +33,7 @@ public:
 	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 
 	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xEquipID) = 0;
-	virtual bool SetFightHero(const NFGUID& self, const bool bSet, const NFGUID& xHeroID) = 0;
+	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos) = 0;
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID) = 0;
 
 	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID) = 0;

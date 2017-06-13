@@ -8,7 +8,8 @@ del /f /q /s *.pch
 del /f /q /s *.ilk
 del /f /q /s *.dll
 del /f /q /s *.exe
+del /f /q /s *.lib
 
 
-echo 清除垃圾文件完成！ 
+echo finished!
 echo. & pause 

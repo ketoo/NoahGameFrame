@@ -374,7 +374,7 @@ message AckElementlevelToEquip
 message ReqSetFightHero
 {	
 	required Ident		Heroid				= 1;//
-	required int32		Set	    			= 2;//
+	required int32		Set	    			= 2;//0,1,2
 }
 
 //EGEC_REQ_SWITCH_FIGHT_HERO						= 508;		 // 战斗武将
@@ -717,6 +717,14 @@ message ReqCreatePVPEctype
 {	
     required Ident						self_id = 1;//
 	required PVPRoomInfo				xRoomInfo = 2;
+}
+
+//EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人
+message AckCreatePVPEctype
+{	
+    required Ident	self_id 				= 1;//
+	required PVPRoomInfo	xRoomInfo 		= 2;
+	required int32	ApplyType 				= 3;	// 匹配方式，队伍申请还是个人申请
 }
 
 //EGMI_ACK_CREATEPVPECTYPE					= 1103; 	// 返回pvp副本的信息，并拉人

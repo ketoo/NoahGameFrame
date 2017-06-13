@@ -69,6 +69,7 @@ int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string
 
 	return 0;
 }
+
 int NFCUserGiftModule::OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
 	int nNewLevel = newVar.GetInt();
