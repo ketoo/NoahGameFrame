@@ -100,29 +100,39 @@ public:
 	virtual const NFVector2& GetVector2(const int nRow, const std::string& strColTag) const = 0;
 	virtual const NFVector3& GetVector3(const int nRow, const std::string& strColTag) const = 0;
 
-    virtual int FindRowByColValue(const int nCol, const NFDataList& var, NFDataList& varResult) = 0;
+    virtual int FindRowByColValue(const int nCol, const NFData& var, NFDataList& varResult) = 0;
     virtual int FindInt(const int nCol, const NFINT64 value, NFDataList& varResult) = 0;
     virtual int FindFloat(const int nCol, const double value, NFDataList& varResult) = 0;
 	virtual int FindString(const int nCol, const std::string& value, NFDataList& varResult) = 0;
     virtual int FindObject(const int nCol, const NFGUID& value, NFDataList& varResult) = 0;
 	virtual int FindVector2(const int nCol, const NFVector2& value, NFDataList& varResult) = 0;
 	virtual int FindVector3(const int nCol, const NFVector3& value, NFDataList& varResult) = 0;
-    virtual int SortByCol(const int nCol, const bool bOrder, NFDataList& varResult)
-    {
-        return 0;
-    };
+	
+	//return the row and only can used when the col is the primary key
+	virtual int FindRowByColValue(const int nCol, const NFData& var) = 0;
+	virtual int FindInt(const int nCol, const NFINT64 value) = 0;
+	virtual int FindFloat(const int nCol, const double value) = 0;
+	virtual int FindString(const int nCol, const std::string& valuet) = 0;
+	virtual int FindObject(const int nCol, const NFGUID& value) = 0;
+	virtual int FindVector2(const int nCol, const NFVector2& value) = 0;
+	virtual int FindVector3(const int nCol, const NFVector3& value) = 0;
 
-    virtual int FindRowByColValue(const std::string& strColTag, const NFDataList& var, NFDataList& varResult) = 0;
+    virtual int FindRowByColValue(const std::string& strColTag, const NFData& var, NFDataList& varResult) = 0;
     virtual int FindInt(const std::string& strColTag, const NFINT64 value, NFDataList& varResult) = 0;
     virtual int FindFloat(const std::string& strColTag, const double value, NFDataList& varResult) = 0;
 	virtual int FindString(const std::string& strColTag, const std::string& value, NFDataList& varResult) = 0;
     virtual int FindObject(const std::string& strColTag, const NFGUID& value, NFDataList& varResult) = 0;
 	virtual int FindVector2(const std::string& strColTag, const NFVector2& value, NFDataList& varResult) = 0;
 	virtual int FindVector3(const std::string& strColTag, const NFVector3& value, NFDataList& varResult) = 0;
-    virtual int SortByTag(const std::string& strColTag, const bool bOrder,  NFDataList& varResult)
-    {
-        return 0;
-    };
+ 
+	//return the row and only can used when the col is the primary key
+	virtual int FindRowByColValue(const std::string& strColTag, const NFData& var) = 0;
+	virtual int FindInt(const std::string& strColTag, const NFINT64 value) = 0;
+	virtual int FindFloat(const std::string& strColTag, const double value) = 0;
+	virtual int FindString(const std::string& strColTag, const std::string& value) = 0;
+	virtual int FindObject(const std::string& strColTag, const NFGUID& value) = 0;
+	virtual int FindVector2(const std::string& strColTag, const NFVector2& value) = 0;
+	virtual int FindVector3(const std::string& strColTag, const NFVector3& value) = 0;
 
     virtual bool Remove(const int nRow) = 0;
     virtual bool Remove(NFDataList& varRows) //need to optimize

@@ -59,12 +59,18 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 		return NFGUID();
 	}
 
+	int nRow = pHeroRecord->FindString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID);
+	if (nRow >= 0)
+	{
+		return NFGUID();
+	}
+
 	NF_SHARE_PTR<NFDataList> xRowData = pHeroRecord->GetInitData();
 
 	NFGUID xHeroID = m_pKernelModule->CreateGUID();
 	xRowData->SetObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
-	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID.c_str());
-
+	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID);
+	xRowData->SetInt(NFrame::Player::PlayerHero::PlayerHero_Activated, 0);
 
 	if (pHeroRecord->AddRow(-1, *xRowData) >= 0)
 	{
@@ -72,6 +78,36 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	}
 
 	return NFGUID();
+}
+
+NFGUID NFCHeroModule::ActiviteHero(const NFGUID & self, const string & strID)
+{
+	NFGUID id = AddHero(self, strID);
+	if (!id.IsNull())
+	{
+		ActiviteHero(self, id);
+	}
+
+	return id;
+}
+
+bool NFCHeroModule::ActiviteHero(const NFGUID & self, const NFGUID & hero)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::PlayerHero_GUID, hero);
+	if (nRow < 0)
+	{
+		return false;
+	}
+
+	pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::PlayerHero_Activated, 1);
+
+	return true;
 }
 
 bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp)
