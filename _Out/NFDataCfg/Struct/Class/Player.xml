@@ -3,15 +3,15 @@
 	<Propertys>
 		<Property Id="Name" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="角色名"/>
 		<Property Id="Sex" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="性别"/>
+		<Property Id="Job" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="职业"/>
 		<Property Id="Race" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="种族"/>
 		<Property Id="Camp" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="阵营"/>
 		<Property Id="HomeSceneID" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="玩家下线的时候需要保存上次在线的场景"/>
 		<Property Id="Level" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="等级"/>
 		<Property Id="ShowName" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="显示的名字"/>
-		<Property Id="PrefabPath" Type="string" Public="1" Private="0" Save="0" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
+		<Property Id="PrefabPath" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
 		<Property Id="FirstTarget" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="首要目标"/>
-		<Property Id="CharType" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="角色类型"/>
-		<Property Id="Job" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="职业"/>
+		<Property Id="FightHero" Type="string" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Hero"/>
 		<Property Id="VIPLevel" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
 		<Property Id="VIPEXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="VIP经验"/>
 		<Property Id="EXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
@@ -40,7 +40,6 @@
 		<Property Id="FightOppnent" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="pvp_oppnent"/>
 		<Property Id="GambleGold" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="GambleDiamond" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
-		<Property Id="FightHero" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc=""/>
 		<Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="吸血"/>
 		<Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="反伤"/>
 		<Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="暴击"/>
@@ -72,9 +71,10 @@
 		<Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="BUFF免疫开关"/>
 	</Propertys>
 	<Records>
-		<Record Id="PlayerHero" Row="64" Col="22" Public="0" Private="1" Save="0" Cache="1" Upload="0" Desc="">
+		<Record Id="PlayerHero" Row="64" Col="23" Public="0" Private="1" Save="0" Cache="1" Upload="0" Desc="">
 			<Col Type="object" Tag="GUID"/>
 			<Col Type="string" Tag="ConfigID"/>
+			<Col Type="int" Tag="Activated"/>
 			<Col Type="int" Tag="Level"/>
 			<Col Type="int" Tag="Exp"/>
 			<Col Type="int" Tag="Star"/>
@@ -96,8 +96,9 @@
 			<Col Type="string" Tag="Skill5"/>
 			<Col Type="string" Tag="FightSkill"/>
 		</Record>
-		<Record Id="PlayerFightHero" Row="3" Col="1" Public="0" Private="1" Save="0" Cache="1" Upload="1" Desc="">
+		<Record Id="PlayerFightHero" Row="5" Col="2" Public="0" Private="1" Save="0" Cache="1" Upload="1" Desc="">
 			<Col Type="object" Tag="GUID"/>
+			<Col Type="int" Tag="FightPos"/>
 		</Record>
 		<Record Id="HeroPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
 			<Col Type="int" Tag="SUCKBLOOD"/>
