@@ -488,7 +488,7 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
 	const int nSet = xMsg.set();
 
-	SetFightHero(nPlayerID, nSet, xHero);
+	SetFightHero(nPlayerID, xHero, nSet);
 }
 
 void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
