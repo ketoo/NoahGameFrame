@@ -774,14 +774,14 @@ const NFVector3& NFCRecord::GetVector3(const int nRow, const std::string& strCol
 	return GetVector3(nRow, nCol);
 }
 
-int NFCRecord::FindRowByColValue(const int nCol, const NFDataList& var, NFDataList& varResult)
+int NFCRecord::FindRowByColValue(const int nCol, const NFData& var, NFDataList& varResult)
 {
     if (!ValidCol(nCol))
     {
         return -1;
     }
 
-    NFDATA_TYPE eType = var.Type(0);
+    NFDATA_TYPE eType = var.GetType();
     if (eType != mVarRecordType->Type(nCol))
     {
         return -1;
@@ -790,27 +790,27 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFDataList& var, NFDataLi
     switch (eType)
     {
         case TDATA_INT:
-            return FindInt(nCol, var.Int(nCol), varResult);
+            return FindInt(nCol, var.GetInt(), varResult);
             break;
 
         case TDATA_FLOAT:
-            return FindFloat(nCol, var.Float(nCol), varResult);
+            return FindFloat(nCol, var.GetFloat(), varResult);
             break;
 
         case TDATA_STRING:
-            return FindString(nCol, var.String(nCol).c_str(), varResult);
+            return FindString(nCol, var.GetString(), varResult);
             break;
 
         case TDATA_OBJECT:
-            return FindObject(nCol, var.Object(nCol), varResult);
+            return FindObject(nCol, var.GetObject(), varResult);
             break;
 
 		case TDATA_VECTOR2:
-			return FindVector2(nCol, var.Vector2(nCol), varResult);
+			return FindVector2(nCol, var.GetVector2(), varResult);
 			break;
 
         case TDATA_VECTOR3:
-			return FindVector3(nCol, var.Vector3(nCol), varResult);
+			return FindVector3(nCol, var.GetVector3(), varResult);
 			break;
 
         default:
@@ -820,7 +820,7 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFDataList& var, NFDataLi
     return -1;
 }
 
-int NFCRecord::FindRowByColValue(const std::string& strColTag, const NFDataList& var, NFDataList& varResult)
+int NFCRecord::FindRowByColValue(const std::string& strColTag, const NFData& var, NFDataList& varResult)
 {
     int nCol = GetCol(strColTag);
     return FindRowByColValue(nCol, var, varResult);
@@ -1071,6 +1071,90 @@ int NFCRecord::FindVector3(const int nCol, const NFVector3& value, NFDataList& v
 	return -1;
 }
 
+int NFCRecord::FindRowByColValue(const int nCol, const NFData & var)
+{
+	NFDataList xDataList;
+	int nRowCount = FindRowByColValue(nCol, var, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindInt(const int nCol, const NFINT64 value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindInt(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindFloat(const int nCol, const double value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindFloat(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindString(const int nCol, const std::string & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindString(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindObject(const int nCol, const NFGUID & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindObject(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector2(const int nCol, const NFVector2 & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindVector2(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector3(const int nCol, const NFVector3 & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindVector3(nCol, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
 int NFCRecord::FindVector3(const std::string& strColTag, const NFVector3& value, NFDataList& varResult)
 {
 	if (strColTag.empty())
@@ -1080,6 +1164,90 @@ int NFCRecord::FindVector3(const std::string& strColTag, const NFVector3& value,
 
 	int nCol = GetCol(strColTag);
 	return FindVector3(nCol, value, varResult);
+}
+
+int NFCRecord::FindRowByColValue(const std::string & strColTag, const NFData & var)
+{
+	NFDataList xDataList;
+	int nRowCount = FindRowByColValue(strColTag, var, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindInt(const std::string & strColTag, const NFINT64 value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindInt(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindFloat(const std::string & strColTag, const double value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindFloat(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindString(const std::string & strColTag, const std::string & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindString(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindObject(const std::string & strColTag, const NFGUID & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindObject(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector2(const std::string & strColTag, const NFVector2 & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindVector2(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
+}
+
+int NFCRecord::FindVector3(const std::string & strColTag, const NFVector3 & value)
+{
+	NFDataList xDataList;
+	int nRowCount = FindVector3(strColTag, value, xDataList);
+	if (nRowCount > 0 && xDataList.GetCount() > 0)
+	{
+		return xDataList.Int(0);
+	}
+
+	return -1;
 }
 
 bool NFCRecord::Remove(const int nRow)
