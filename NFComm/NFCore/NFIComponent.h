@@ -52,6 +52,7 @@ public:
 
     virtual bool SetEnable(const bool bEnable)
     {
+        mbEnable = bEnable;
         return mbEnable;
     }
 
