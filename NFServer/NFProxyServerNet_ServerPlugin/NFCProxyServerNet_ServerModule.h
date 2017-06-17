@@ -9,7 +9,7 @@
 #ifndef NFC_PROXYSERVER_SERVER_MODULE_H
 #define NFC_PROXYSERVER_SERVER_MODULE_H
 
-#include "NFComm/NFCore/NFCConsistentHash.hpp"
+#include "NFComm/NFCore/NFConsistentHash.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIProxyServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIProxyServerToWorldModule.h"
