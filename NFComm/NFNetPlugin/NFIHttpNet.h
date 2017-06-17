@@ -31,8 +31,22 @@
 #include <unistd.h>
 #endif
 
-typedef std::function<void(struct evhttp_request *req, const std::string& strCommand, const std::string& strUrl)> HTTPNET_RECEIVE_FUNCTOR;
-typedef std::shared_ptr<HTTPNET_RECEIVE_FUNCTOR> HTTPNET_RECEIVE_FUNCTOR_PTR;
+enum NFWebStatus
+{
+	WEB_OK = 200,
+	WEB_ERROR = 404,
+	EB_TIMEOUT = 503,
+};
+
+class NFHttpRequest
+{
+public:
+	void* req;
+	std::string url;
+};
+
+typedef std::function<void(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)> HTTP_RECEIVE_FUNCTOR;
+typedef std::shared_ptr<HTTP_RECEIVE_FUNCTOR> HTTP_RECEIVE_FUNCTOR_PTR;
 
 class NFIHttpNet
 {
@@ -42,8 +56,9 @@ public:
 	virtual bool Final() = 0;
 
 public:
-	virtual bool SendMsg(struct evhttp_request *req, const char* strMsg) = 0;
-	virtual bool SendFile(struct evhttp_request * req, const int fd, struct stat st, const std::string& strType) = 0;
+	virtual bool SendMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
+
+	virtual bool SendFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
 };
 
 #endif

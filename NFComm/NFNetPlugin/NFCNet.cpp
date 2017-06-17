@@ -115,7 +115,6 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
 
 void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 {
-    
     NetObject* pObject = (NetObject*)user_data;
     if (!pObject)
     {

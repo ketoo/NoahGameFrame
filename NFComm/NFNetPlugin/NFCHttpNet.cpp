@@ -6,6 +6,9 @@
 #include <windows.h>
 #include <io.h>
 #include <fcntl.h>
+#ifndef S_ISDIR
+#define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
+#endif
 #else
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -31,6 +34,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
 #ifndef LIBEVENT_SRC
 #pragma comment( lib, "libevent.lib")
 #endif
@@ -88,7 +92,8 @@ int NFCHttpNet::InitServer(const unsigned short port)
 void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 {
 	NFCHttpNet* pNet = (NFCHttpNet*)arg;
-
+	NFHttpRequest request;
+	request.req = req;
 	//uri
 	const char *uri = evhttp_request_get_uri(req);
 	//std::cout << "Got a GET request:" << uri << std::endl;
@@ -127,14 +132,16 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 		strCommand = cmdList[0];
 	}
 
+	request.url = decodeUri;
+
 	// call cb
 	if (pNet->mRecvCB)
 	{
-		pNet->mRecvCB(req, strCommand, decodeUri);
+		pNet->mRecvCB(request, strCommand, decodeUri);
 	}
 	else
 	{
-		pNet->SendMsg(req, "mRecvCB empty");
+		pNet->SendMsg(request, "mRecvCB empty", NFWebStatus::WEB_ERROR);
 	}
 
 
@@ -149,28 +156,107 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	evbuffer_free(eventBuffer);
 	}*/
 }
-bool NFCHttpNet::SendMsg(struct evhttp_request *req, const char* strMsg)
+bool NFCHttpNet::SendMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
+	evhttp_request* pHttpReq = (evhttp_request*)req.req;
 	//create buffer
 	struct evbuffer *eventBuffer = evbuffer_new();
 	//send data
-	evbuffer_add_printf(eventBuffer, strMsg);
-	evhttp_add_header(evhttp_request_get_output_headers(req), "Content-Type", "text/html");
-	evhttp_send_reply(req, 200, "OK", eventBuffer);
+	evbuffer_add_printf(eventBuffer, strMsg.c_str());
+	evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", "text/html");
+	evhttp_send_reply(pHttpReq, code, strReason.c_str(), eventBuffer);
 
 	//free
 	evbuffer_free(eventBuffer);
 	return true;
 }
 
-bool NFCHttpNet::SendFile(evhttp_request * req, const int fd, struct stat st, const std::string& strType)
+bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
 {
+	//Add response type
+	std::map<std::string, std::string> typeMap;
+	typeMap["txt"] = "text/plain";
+	typeMap["txt"] = "text/plain";
+	typeMap["c"] = "text/plain";
+	typeMap["h"] = "text/plain";
+	typeMap["html"] = "text/html";
+	typeMap["htm"] = "text/htm";
+	typeMap["css"] = "text/css";
+	typeMap["gif"] = "image/gif";
+	typeMap["jpg"] = "image/jpeg";
+	typeMap["jpeg"] = "image/jpeg";
+	typeMap["png"] = "image/png";
+	typeMap["pdf"] = "application/pdf";
+	typeMap["ps"] = "application/postsript";
+
+	std::string strFilePath = strPath;
+	if (strFilePath.find_last_of("/") != strFilePath.size())
+	{
+		strFilePath += "/";
+	}
+
+	strFilePath = strFilePath + req.url;
+
+	int fd = -1;
+	struct stat st;
+	if (stat(strFilePath.c_str(), &st) < 0)
+	{
+		std::string errMsg = strFilePath + strFileName;
+		SendMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
+
+		return false;
+	}
+
+	if (S_ISDIR(st.st_mode))
+	{
+		strFilePath += "/" + strFileName;
+	}
+
+	if (stat(strFilePath.c_str(), &st) < 0)
+	{
+		std::string errMsg = strFilePath + strFilePath;
+		SendMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
+		return false;
+	}
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	if ((fd = open(strFilePath.c_str(), O_RDONLY | O_BINARY)) < 0) {
+#else
+	if ((fd = open(strFilePath.c_str(), O_RDONLY)) < 0) {
+#endif
+		SendMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
+		return false;
+	}
+
+	if (fstat(fd, &st) < 0) {
+		SendMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
+		return false;
+	}
+
+	const char* last_period = strrchr(strFilePath.c_str(), '.');
+	std::string strType = last_period + 1;
+	if (typeMap.find(strType) == typeMap.end())
+	{
+		strType = "application/misc";
+	}
+	else
+	{
+		strType = typeMap[strType];
+	}
+	SendFile(req, fd, st, strType);
+	return false;
+}
+
+bool NFCHttpNet::SendFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType)
+{
+	evhttp_request* pHttpReq = (evhttp_request*)req.req;
+
 	//create buffer
 	struct evbuffer *eventBuffer = evbuffer_new();
 	//send data
 	evbuffer_add_file(eventBuffer, fd, 0, st.st_size);
-	evhttp_add_header(evhttp_request_get_output_headers(req), "Content-Type", strType.c_str());
-	evhttp_send_reply(req, 200, "OK", eventBuffer);
+	evhttp_add_header(evhttp_request_get_output_headers(pHttpReq), "Content-Type", strType.c_str());
+	evhttp_send_reply(pHttpReq, 200, "OK", eventBuffer);
 
 	//free
 	evbuffer_free(eventBuffer);
