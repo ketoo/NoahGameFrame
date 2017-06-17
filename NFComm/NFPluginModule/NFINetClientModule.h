@@ -12,7 +12,7 @@
 #include <iostream>
 #include "NFIModule.h"
 #include "NFINetModule.h"
-#include "NFComm/NFCore/NFCConsistentHash.hpp"
+#include "NFComm/NFCore/NFConsistentHash.hpp"
 
 enum ConnectDataState
 {

@@ -48,7 +48,7 @@ protected:
 	NFIElementModule* m_pElementModule;
 	NFILogModule* m_pLogModule;
 
-	NFCConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
+	NFConsistentHashMapEx<std::string, NFINoSqlDriver> mxNoSqlDriver;
 
 };
 
