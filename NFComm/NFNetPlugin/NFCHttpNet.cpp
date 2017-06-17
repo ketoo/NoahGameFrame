@@ -141,7 +141,7 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	}
 	else
 	{
-		pNet->SendMsg(request, "mRecvCB empty", NFWebStatus::WEB_ERROR);
+		pNet->ResponseMsg(request, "mRecvCB empty", NFWebStatus::WEB_ERROR);
 	}
 
 
@@ -156,7 +156,7 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	evbuffer_free(eventBuffer);
 	}*/
 }
-bool NFCHttpNet::SendMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
+bool NFCHttpNet::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
 	evhttp_request* pHttpReq = (evhttp_request*)req.req;
 	//create buffer
@@ -171,7 +171,7 @@ bool NFCHttpNet::SendMsg(const NFHttpRequest& req, const std::string& strMsg, NF
 	return true;
 }
 
-bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
+bool NFCHttpNet::ResponseFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
 {
 	//Add response type
 	std::map<std::string, std::string> typeMap;
@@ -202,7 +202,7 @@ bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath
 	if (stat(strFilePath.c_str(), &st) < 0)
 	{
 		std::string errMsg = strFilePath + strFileName;
-		SendMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
+		ResponseMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
 
 		return false;
 	}
@@ -215,7 +215,7 @@ bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath
 	if (stat(strFilePath.c_str(), &st) < 0)
 	{
 		std::string errMsg = strFilePath + strFilePath;
-		SendMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
+		ResponseMsg(req, errMsg.c_str(), NFWebStatus::WEB_ERROR, errMsg.c_str());
 		return false;
 	}
 
@@ -224,12 +224,12 @@ bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath
 #else
 	if ((fd = open(strFilePath.c_str(), O_RDONLY)) < 0) {
 #endif
-		SendMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
+		ResponseMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
 		return false;
 	}
 
 	if (fstat(fd, &st) < 0) {
-		SendMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
+		ResponseMsg(req, "error", NFWebStatus::WEB_ERROR, "error");
 		return false;
 	}
 
@@ -243,11 +243,11 @@ bool NFCHttpNet::SendFile(const NFHttpRequest & req, const std::string & strPath
 	{
 		strType = typeMap[strType];
 	}
-	SendFile(req, fd, st, strType);
+	ResponseFile(req, fd, st, strType);
 	return false;
 }
 
-bool NFCHttpNet::SendFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType)
+bool NFCHttpNet::ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType)
 {
 	evhttp_request* pHttpReq = (evhttp_request*)req.req;
 
