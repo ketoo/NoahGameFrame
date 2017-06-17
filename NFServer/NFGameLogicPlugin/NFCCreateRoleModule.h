@@ -9,7 +9,7 @@
 #ifndef NFC_CREATEROLE_MODULE_H
 #define NFC_CREATEROLE_MODULE_H
 
-#include "NFComm/NFCore/NFCConsistentHash.hpp"
+#include "NFComm/NFCore/NFConsistentHash.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"

@@ -414,15 +414,15 @@ bool NFCHeroModule::DestroyHero(const NFGUID& self, const NFGUID& xHeroID)
 NFGUID NFCHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
-	if (nullptr == pHeroRecord.get())
+	if (nullptr == pHeroRecord)
 	{
 		return NFGUID();
 	}
 
-	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
+	int nRow = pHeroRecord->FindString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID);
 	if (nRow < 0)
 	{
-		return false;
+		return NFGUID();
 	}
 
 	return pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero_GUID);
