@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCHttpServerModule.cpp" />
+    <ClCompile Include="NFCHttpNetModule.cpp" />
     <ClCompile Include="NFCNet.cpp" />
     <ClCompile Include="NFCHttpNet.cpp" />
     <ClCompile Include="NFCNetClientModule.cpp" />
@@ -22,7 +22,7 @@
     <ClCompile Include="NFNetPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCHttpServerModule.h" />
+    <ClInclude Include="NFCHttpNetModule.h" />
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFCNetClientModule.h" />
     <ClInclude Include="NFCNetModule.h" />

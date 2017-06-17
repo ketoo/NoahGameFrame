@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCKernelModule.h"
-#include "NFComm/NFCore/NFCMemManager.hpp"
+#include "NFComm/NFCore/NFMemManager.hpp"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
@@ -1564,7 +1564,7 @@ void NFCKernelModule::ProcessMemFree()
 
     nLastTime = pPluginManager->GetNowTime();
 
-    NFCMemManager::GetSingletonPtr()->FreeMem();
+    NFMemManager::GetSingletonPtr()->FreeMem();
 }
 
 bool NFCKernelModule::DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFDataList& valueList)

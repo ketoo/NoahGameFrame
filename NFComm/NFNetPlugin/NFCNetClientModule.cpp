@@ -228,7 +228,7 @@ void NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int & nHa
 
 void NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int & nHashKey, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
 	{
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
@@ -247,7 +247,7 @@ void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::st
 
 void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & nHashKey, const uint16_t nMsgID, google::protobuf::Message & xData)
 {
-	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
 	{
 		NF_SHARE_PTR<ConnectData> pConnectData = xConnectDataMap->GetElementBySuit(nHashKey);
@@ -260,7 +260,7 @@ void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & n
 
 NF_SHARE_PTR<ConnectData> NFCNetClientModule::GetServerNetInfo(const NF_SERVER_TYPES eType)
 {
-	NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
+	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
 	{
 		return xConnectDataMap->GetElementBySuitRandom();
@@ -436,10 +436,10 @@ int NFCNetClientModule::OnConnected(const int fd, NFINet * pNet)
 		pServerInfo->eState = ConnectDataState::NORMAL;
 
 		//for type--suit
-		NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
+		NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
 		if (!xConnectDataMap)
 		{
-			xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+			xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(NF_NEW NFConsistentHashMapEx<int, ConnectData>());
 			mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
 		}
 
@@ -460,10 +460,10 @@ int NFCNetClientModule::OnDisConnected(const int fd, NFINet * pNet)
 		pServerInfo->mnLastActionTime = GetPluginManager()->GetNowTime();
 
 		//for type--suit
-		NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
+		NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(pServerInfo->eServerType);
 		if (!xConnectDataMap)
 		{
-			xConnectDataMap = NF_SHARE_PTR<NFCConsistentHashMapEx<int, ConnectData>>(NF_NEW NFCConsistentHashMapEx<int, ConnectData>());
+			xConnectDataMap = NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>>(NF_NEW NFConsistentHashMapEx<int, ConnectData>());
 			mxServerTypeMap.AddElement(pServerInfo->eServerType, xConnectDataMap);
 		}
 
