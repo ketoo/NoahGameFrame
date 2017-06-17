@@ -30,6 +30,7 @@ public:
 	virtual bool AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
 
+	virtual bool SendMsg(const NFHttpRequest & req, const int nCommand, const std::string& strMsg);
 	virtual bool SendMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK");
 	virtual bool SendFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
