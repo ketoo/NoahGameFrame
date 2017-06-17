@@ -14,7 +14,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <memory>
-#include "NFCConsistentHash.hpp"
+#include "NFConsistentHash.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
 template <typename T , typename TD>
@@ -276,7 +276,7 @@ protected:
 };
 
 template <typename T, typename TD>
-class NFCConsistentHashMapEx : public NFMapEx<T, TD>
+class NFConsistentHashMapEx : public NFMapEx<T, TD>
 {
 public:
 	virtual void InitHashNodeWeith(const int nWeigh = 500)
@@ -372,6 +372,6 @@ public:
 
 private:
 	int mnWeigh = 0;
-	NFCConsistentHash<T> mxConsistentHash;
+	NFConsistentHash<T> mxConsistentHash;
 };
 #endif
