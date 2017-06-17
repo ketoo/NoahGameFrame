@@ -741,12 +741,14 @@ public class Player
 	public static readonly String Job = "Job"; // int
 	public static readonly String Race = "Race"; // int
 	public static readonly String Camp = "Camp"; // int
-	public static readonly String HomeSceneID = "HomeSceneID"; // int
 	public static readonly String Level = "Level"; // int
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String PrefabPath = "PrefabPath"; // string
 	public static readonly String FirstTarget = "FirstTarget"; // object
 	public static readonly String FightHero = "FightHero"; // string
+	public static readonly String HeroPos1 = "HeroPos1"; // string
+	public static readonly String HeroPos2 = "HeroPos2"; // string
+	public static readonly String HeroPos3 = "HeroPos3"; // string
 	public static readonly String VIPLevel = "VIPLevel"; // int
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
@@ -771,6 +773,7 @@ public class Player
 	public static readonly String GateID = "GateID"; // int
 	public static readonly String GuildID = "GuildID"; // object
 	public static readonly String TeamID = "TeamID"; // object
+	public static readonly String HomeSceneID = "HomeSceneID"; // int
 	public static readonly String ViewOppnent = "ViewOppnent"; // object
 	public static readonly String FightOppnent = "FightOppnent"; // object
 	public static readonly String GambleGold = "GambleGold"; // int
@@ -805,16 +808,49 @@ public class Player
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
+	public static readonly String R_CommPropertyValue = "CommPropertyValue";
 	public static readonly String R_PlayerHero = "PlayerHero";
-	public static readonly String R_PlayerFightHero = "PlayerFightHero";
 	public static readonly String R_HeroPropertyValue = "HeroPropertyValue";
 	public static readonly String R_BagEquipList = "BagEquipList";
 	public static readonly String R_BagItemList = "BagItemList";
-	public static readonly String R_CommPropertyValue = "CommPropertyValue";
 	public static readonly String R_TaskMonsterList = "TaskMonsterList";
 	public static readonly String R_TaskList = "TaskList";
 	public static readonly String R_BuildingList = "BuildingList";
 	public static readonly String R_BuildingListProduce = "BuildingListProduce";
+
+	public enum CommPropertyValue
+	{
+		SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CRITICAL		= 2, // CRITICAL -- int
+		MAXHP		= 3, // MAXHP -- int
+		MAXMP		= 4, // MAXMP -- int
+		MAXSP		= 5, // MAXSP -- int
+		HPREGEN		= 6, // HPREGEN -- int
+		SPREGEN		= 7, // SPREGEN -- int
+		MPREGEN		= 8, // MPREGEN -- int
+		ATK_VALUE		= 9, // ATK_VALUE -- int
+		DEF_VALUE		= 10, // DEF_VALUE -- int
+		MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		ATK_SPEED		= 12, // ATK_SPEED -- int
+		ATK_FIRE		= 13, // ATK_FIRE -- int
+		ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		ATK_WIND		= 15, // ATK_WIND -- int
+		ATK_ICE		= 16, // ATK_ICE -- int
+		ATK_POISON		= 17, // ATK_POISON -- int
+		DEF_FIRE		= 18, // DEF_FIRE -- int
+		DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		DEF_WIND		= 20, // DEF_WIND -- int
+		DEF_ICE		= 21, // DEF_ICE -- int
+		DEF_POISON		= 22, // DEF_POISON -- int
+		DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		MOVE_GATE		= 24, // MOVE_GATE -- int
+		SKILL_GATE		= 25, // SKILL_GATE -- int
+		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		BUFF_GATE		= 28, // BUFF_GATE -- int
+
+	};
 
 	public enum PlayerHero
 	{
@@ -841,13 +877,6 @@ public class Player
 		Skill4		= 20, // Skill4 -- string
 		Skill5		= 21, // Skill5 -- string
 		FightSkill		= 22, // FightSkill -- string
-
-	};
-
-	public enum PlayerFightHero
-	{
-		GUID		= 0, // GUID -- object
-		FightPos		= 1, // FightPos -- int
 
 	};
 
@@ -920,40 +949,6 @@ public class Player
 		Bound		= 2, // Bound -- int
 		ExpiredType		= 3, // ExpiredType -- int
 		Date		= 4, // Date -- int
-
-	};
-
-	public enum CommPropertyValue
-	{
-		SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CRITICAL		= 2, // CRITICAL -- int
-		MAXHP		= 3, // MAXHP -- int
-		MAXMP		= 4, // MAXMP -- int
-		MAXSP		= 5, // MAXSP -- int
-		HPREGEN		= 6, // HPREGEN -- int
-		SPREGEN		= 7, // SPREGEN -- int
-		MPREGEN		= 8, // MPREGEN -- int
-		ATK_VALUE		= 9, // ATK_VALUE -- int
-		DEF_VALUE		= 10, // DEF_VALUE -- int
-		MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		ATK_SPEED		= 12, // ATK_SPEED -- int
-		ATK_FIRE		= 13, // ATK_FIRE -- int
-		ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		ATK_WIND		= 15, // ATK_WIND -- int
-		ATK_ICE		= 16, // ATK_ICE -- int
-		ATK_POISON		= 17, // ATK_POISON -- int
-		DEF_FIRE		= 18, // DEF_FIRE -- int
-		DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		DEF_WIND		= 20, // DEF_WIND -- int
-		DEF_ICE		= 21, // DEF_ICE -- int
-		DEF_POISON		= 22, // DEF_POISON -- int
-		DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		MOVE_GATE		= 24, // MOVE_GATE -- int
-		SKILL_GATE		= 25, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
