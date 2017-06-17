@@ -25,12 +25,12 @@ public:
 	virtual int InitServer(const unsigned short nPort);
 	virtual bool Final();
 
-	virtual bool SendMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
+	virtual bool ResponseMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 	
-	virtual bool SendFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
+	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
 private:
-	bool SendFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
+	bool ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
 
 	static void listener_cb(struct evhttp_request *req, void *arg);
 	static std::vector<std::string> Split(const std::string& str, std::string delim);
