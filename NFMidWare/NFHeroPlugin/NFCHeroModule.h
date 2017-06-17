@@ -58,7 +58,12 @@ protected:
 	void OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSwitchFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+protected:
+	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID);
+	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
+	int GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
+
+	int RefereshHeroPropertytoPlayer(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
     NFIClassModule* m_pLogicClassModule;
