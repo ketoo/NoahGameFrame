@@ -13,7 +13,7 @@
 #include <iosfwd>
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
-#include "NFComm/NFCore/NFCConsistentHash.hpp"
+#include "NFComm/NFCore/NFConsistentHash.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
@@ -93,9 +93,9 @@ private:
 private:
 	int mnBufferSize;
 	//server_id, server_data
-	NFCConsistentHashMapEx<int, ConnectData> mxServerMap;
+	NFConsistentHashMapEx<int, ConnectData> mxServerMap;
 	//server_type, server_id, server_data
-	NFMapEx<int, NFCConsistentHashMapEx<int, ConnectData>> mxServerTypeMap;
+	NFMapEx<int, NFConsistentHashMapEx<int, ConnectData>> mxServerTypeMap;
 
 	std::list<ConnectData> mxTempNetList;
 
