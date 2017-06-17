@@ -12,6 +12,7 @@
 #include "NFDataList.hpp"
 #include "NFList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 typedef std::function<int(const NFGUID&, const std::string&, const NFData&, const NFData&)> PROPERTY_EVENT_FUNCTOR;
 typedef NF_SHARE_PTR<PROPERTY_EVENT_FUNCTOR> PROPERTY_EVENT_FUNCTOR_PTR;
 
