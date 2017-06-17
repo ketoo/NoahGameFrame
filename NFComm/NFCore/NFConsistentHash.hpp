@@ -1,8 +1,8 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCConsistentHash.hpp
+//    @FileName         :    NFConsistentHash.hpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2012-03-01
-//    @Module           :    NFCConsistentHash.hpp
+//    @Module           :    NFConsistentHash.hpp
 //
 // -------------------------------------------------------------------------
 #ifndef NFC_CONSISTENT_HASH_H
@@ -115,15 +115,15 @@ public:
 };
 
 template <typename T>
-class NFCConsistentHash : public NFIConsistentHash<T>
+class NFConsistentHash : public NFIConsistentHash<T>
 {
 public:
-    NFCConsistentHash()
+    NFConsistentHash()
     {
         m_pHasher = new NFCHasher();
     }
 
-    virtual ~NFCConsistentHash()
+    virtual ~NFConsistentHash()
     {
         delete m_pHasher;
         m_pHasher = NULL;
