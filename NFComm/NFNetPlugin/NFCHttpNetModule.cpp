@@ -83,6 +83,11 @@ bool NFCHttpNetModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
 	return true;
 }
 
+bool NFCHttpNetModule::SendMsg(const NFHttpRequest & req, const int nCommand, const std::string & strMsg)
+{
+	return false;
+}
+
 bool NFCHttpNetModule::SendMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
 	return mpHttpNet->SendMsg(req, strMsg, code, strReason);
