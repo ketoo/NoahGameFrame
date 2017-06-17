@@ -21,7 +21,7 @@ public:
         ECONSTDEFINE_HERO_MAXLEVEL = 100,
         ECONSTDEFINE_HERO_MAXSTAR = 100,
 		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
-
+		ECONSTDEFINE_HERO_MAXFIGHT_POS = 3,
     };
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
