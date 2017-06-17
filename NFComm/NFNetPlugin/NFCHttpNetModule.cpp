@@ -83,17 +83,17 @@ bool NFCHttpNetModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
 	return true;
 }
 
-bool NFCHttpNetModule::SendMsg(const NFHttpRequest & req, const int nCommand, const std::string & strMsg)
+bool NFCHttpNetModule::ResponseMsg(const NFHttpRequest & req, const int nCommand, const std::string & strMsg)
 {
 	return false;
 }
 
-bool NFCHttpNetModule::SendMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
+bool NFCHttpNetModule::ResponseMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
-	return mpHttpNet->SendMsg(req, strMsg, code, strReason);
+	return mpHttpNet->ResponseMsg(req, strMsg, code, strReason);
 }
 
-bool NFCHttpNetModule::SendFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
+bool NFCHttpNetModule::ResponseFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
 {
-	return mpHttpNet->SendFile(req, strPath, strFileName);
+	return mpHttpNet->ResponseFile(req, strPath, strFileName);
 }

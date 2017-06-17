@@ -72,10 +72,10 @@ bool NFCMasterNet_HttpServerModule::Execute()
 void NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)
 {
 	std::string str = m_pMasterServerModule->GetServersStatus();
-	m_pHttpNetModule->SendMsg(req, str, NFWebStatus::WEB_OK);
+	m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
 }
 
 void NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)
 {
-	m_pHttpNetModule->SendFile(req, m_strWebRootPath, "index.html");
+	m_pHttpNetModule->ResponseFile(req, m_strWebRootPath, "index.html");
 }
