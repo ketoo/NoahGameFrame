@@ -762,12 +762,14 @@ public:
 	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
 	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
 	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
 	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
 	static const std::string& FirstTarget(){ static std::string xFirstTarget = "FirstTarget"; return xFirstTarget; } // object
 	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // string
+	static const std::string& HeroPos1(){ static std::string xHeroPos1 = "HeroPos1"; return xHeroPos1; } // string
+	static const std::string& HeroPos2(){ static std::string xHeroPos2 = "HeroPos2"; return xHeroPos2; } // string
+	static const std::string& HeroPos3(){ static std::string xHeroPos3 = "HeroPos3"; return xHeroPos3; } // string
 	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
 	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
@@ -792,6 +794,7 @@ public:
 	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
 	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
 	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
+	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
 	static const std::string& ViewOppnent(){ static std::string xViewOppnent = "ViewOppnent"; return xViewOppnent; } // object
 	static const std::string& FightOppnent(){ static std::string xFightOppnent = "FightOppnent"; return xFightOppnent; } // object
 	static const std::string& GambleGold(){ static std::string xGambleGold = "GambleGold"; return xGambleGold; } // int
@@ -826,16 +829,49 @@ public:
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
 	// Record
+	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
-	static const std::string& R_PlayerFightHero(){ static std::string xPlayerFightHero = "PlayerFightHero"; return xPlayerFightHero;}
 	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
 	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
-	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
 	static const std::string& R_TaskMonsterList(){ static std::string xTaskMonsterList = "TaskMonsterList"; return xTaskMonsterList;}
 	static const std::string& R_TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
+
+	enum CommPropertyValue
+	{
+		CommPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		CommPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CommPropertyValue_CRITICAL		= 2, // CRITICAL -- int
+		CommPropertyValue_MAXHP		= 3, // MAXHP -- int
+		CommPropertyValue_MAXMP		= 4, // MAXMP -- int
+		CommPropertyValue_MAXSP		= 5, // MAXSP -- int
+		CommPropertyValue_HPREGEN		= 6, // HPREGEN -- int
+		CommPropertyValue_SPREGEN		= 7, // SPREGEN -- int
+		CommPropertyValue_MPREGEN		= 8, // MPREGEN -- int
+		CommPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
+		CommPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
+		CommPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		CommPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
+		CommPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
+		CommPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		CommPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
+		CommPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
+		CommPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
+		CommPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
+		CommPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		CommPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
+		CommPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
+		CommPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
+		CommPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		CommPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
+		CommPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
+		CommPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		CommPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		CommPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
+
+	};
 
 	enum PlayerHero
 	{
@@ -862,13 +898,6 @@ public:
 		PlayerHero_Skill4		= 20, // Skill4 -- string
 		PlayerHero_Skill5		= 21, // Skill5 -- string
 		PlayerHero_FightSkill		= 22, // FightSkill -- string
-
-	};
-
-	enum PlayerFightHero
-	{
-		PlayerFightHero_GUID		= 0, // GUID -- object
-		PlayerFightHero_FightPos		= 1, // FightPos -- int
 
 	};
 
@@ -941,40 +970,6 @@ public:
 		BagItemList_Bound		= 2, // Bound -- int
 		BagItemList_ExpiredType		= 3, // ExpiredType -- int
 		BagItemList_Date		= 4, // Date -- int
-
-	};
-
-	enum CommPropertyValue
-	{
-		CommPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		CommPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CommPropertyValue_CRITICAL		= 2, // CRITICAL -- int
-		CommPropertyValue_MAXHP		= 3, // MAXHP -- int
-		CommPropertyValue_MAXMP		= 4, // MAXMP -- int
-		CommPropertyValue_MAXSP		= 5, // MAXSP -- int
-		CommPropertyValue_HPREGEN		= 6, // HPREGEN -- int
-		CommPropertyValue_SPREGEN		= 7, // SPREGEN -- int
-		CommPropertyValue_MPREGEN		= 8, // MPREGEN -- int
-		CommPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
-		CommPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
-		CommPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		CommPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
-		CommPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
-		CommPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		CommPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
-		CommPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
-		CommPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
-		CommPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
-		CommPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		CommPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
-		CommPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
-		CommPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
-		CommPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		CommPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
-		CommPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
-		CommPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		CommPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		CommPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 

@@ -37,9 +37,6 @@ bool NFCHeroModule::Execute()
 
 bool NFCHeroModule::AfterInit()
 {
-
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroModule::OnObjectClassEvent);
-
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SET_FIGHT_HERO, this, &NFCHeroModule::OnSetFightHeroMsg);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SWITCH_FIGHT_HERO, this, &NFCHeroModule::OnSwitchFightHeroMsg);
 
@@ -76,6 +73,8 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	{
 		return xHeroID;
 	}
+
+	AddToFightList(self, xHeroID);
 
 	return NFGUID();
 }
@@ -310,33 +309,24 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 		return false;
 	}
 
-	/////////////Add this hero to Record_int
-	NF_SHARE_PTR<NFIRecord> pFightHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerFightHero());
-	if (pFightHeroRecord == nullptr)
-	{
-		return false;
-	}
+	AddToFightList(self, xHeroID, nPos);
 
-	int nFightRow = pFightHeroRecord->FindObject(NFrame::Player::PlayerFightHero_GUID, xHeroID);
-	if (nFightRow >= 0)
-	{
-		pFightHeroRecord->Remove(nFightRow);
-	}
-
-	if (pFightHeroRecord->IsUsed(nPos))
-	{
-		pFightHeroRecord->Remove(nPos);
-	}
-
-	pFightHeroRecord->AddRow(nPos, NFDataList() << xHeroID << 0);
 
 	return false;
 }
 
 bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 {
+	int nPos = GetFightPos(self, xHeroID);
+	if (nPos <= 0 || nPos > ECONSTDEFINE_HERO_MAXFIGHT_POS)
+	{
+		return false;
+	}
+
 	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
-	
+
+	RefereshHeroPropertytoPlayer(self, xHeroID);
+
 	return true;
 }
 
@@ -390,7 +380,7 @@ bool NFCHeroModule::DestroyHero(const NFGUID& self, const NFGUID& xHeroID)
 	}
 
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
-	if (nullptr == pHeroRecord.get())
+	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
@@ -401,14 +391,8 @@ bool NFCHeroModule::DestroyHero(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	if (xHeroID == pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero_GUID))
-	{
-		m_pKernelModule->DestroyObject(xHeroID);
-		return true;
-	}
-
-
-	return false;
+	m_pKernelModule->DestroyObject(xHeroID);
+	return true;
 }
 
 NFGUID NFCHeroModule::GetHeroGUID(const NFGUID& self, const std::string& strID)
@@ -487,50 +471,70 @@ void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID,
 	
 }
 
-int NFCHeroModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 {
+	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1()) == NFGUID())
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
+		return 1;
+	}
+	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos2()) == NFGUID())
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
+		return 2;
+	}
+	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos3()) == NFGUID())
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
+		return 4;
+	}
 
-	NF_SHARE_PTR<NFIObject> pSelf = m_pKernelModule->GetObject(self);
-	if (nullptr == pSelf)
+	return -1;
+}
+
+int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, const int nPos)
+{
+	switch (nPos)
+	{
+	case 1:
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
+		break;
+
+	case 2:
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
+		break;
+
+	case 3:
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
+		break;
+
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+int NFCHeroModule::GetFightPos(const NFGUID & self, const NFGUID & xHeroID)
+{
+	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1()) == xHeroID)
 	{
 		return 1;
 	}
-
-	if (strClassName == NFrame::NPC::ThisName())
+	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos2()) == xHeroID)
 	{
-		if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
-		{
-			const std::string& strConfigIndex = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-			const std::string& strEffectPropertyID = m_pElementModule->GetPropertyString(strConfigIndex, NFrame::NPC::EffectData());
-			const int nNPCType = m_pElementModule->GetPropertyInt(strConfigIndex, NFrame::NPC::NPCType());
-			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
-
-			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
-			{
-				//hero
-				NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
-				NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(xMasterID, NFrame::Player::R_HeroPropertyValue());
-				if (pHeroPropertyRecord)
-				{
-					NFDataList xHeroPropertyList;
-					if (m_pHeroPropertyModule->CalHeroAllProperty(xMasterID, self, xHeroPropertyList))
-					{
-						for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
-						{
-							const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
-							const int nValue = xHeroPropertyList.Int(i);
-							pSelfPropertyManager->SetPropertyInt(strColTag, nValue);
-						}
-					}
-				}
-			}
-		}
-		else if (eClassEvent == CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA)
-		{
-			if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount()) <= 0)
-			{
-				//get hero list and add hero, but only activite one or two hero
-			}
-		}
+		return 2;
 	}
+	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos3()) == xHeroID)
+	{
+		return 3;
+	}
+
+	return -1;
+}
+
+int NFCHeroModule::RefereshHeroPropertytoPlayer(const NFGUID & self, const NFGUID & xHeroID)
+{
+
+	return 0;
 }
