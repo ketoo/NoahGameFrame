@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
+#include "NFComm/NFPluginModule/NFIItemModule.h"
 ////////////////////////////////////////////////////////////////////////////
 
 class NFCUserGiftModule
@@ -42,6 +43,7 @@ private:
 	int OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 	
 	bool DoLevelAward(const NFGUID& self, const int nLevel);
+	bool ActiveteHero(const NFGUID& self);
 
 private:
 	NFMapEx<int, std::vector<std::string>> mxGiftMap;
@@ -50,6 +52,7 @@ protected:
 
     //////////////////////////////////////////////////////////////////////////
 	NFIPackModule* m_pPackModule;
+	NFIItemModule* m_pItemModule;
 	NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pClassModule;
     NFILogModule* m_pLogModule;
