@@ -745,10 +745,10 @@ public class Player
 	public static readonly String ShowName = "ShowName"; // string
 	public static readonly String PrefabPath = "PrefabPath"; // string
 	public static readonly String FirstTarget = "FirstTarget"; // object
-	public static readonly String FightHero = "FightHero"; // string
-	public static readonly String HeroPos1 = "HeroPos1"; // string
-	public static readonly String HeroPos2 = "HeroPos2"; // string
-	public static readonly String HeroPos3 = "HeroPos3"; // string
+	public static readonly String FightHero = "FightHero"; // object
+	public static readonly String HeroPos1 = "HeroPos1"; // object
+	public static readonly String HeroPos2 = "HeroPos2"; // object
+	public static readonly String HeroPos3 = "HeroPos3"; // object
 	public static readonly String VIPLevel = "VIPLevel"; // int
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
