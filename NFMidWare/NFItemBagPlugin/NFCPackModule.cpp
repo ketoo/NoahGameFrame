@@ -153,7 +153,7 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	}
 
 	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagItemList_ConfigID, id, varFindResult);
+	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, varFindResult);
 	if (nFindRowCount > 0)
 	{
 		int nTotalCount = 0;

@@ -766,10 +766,10 @@ public:
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
 	static const std::string& FirstTarget(){ static std::string xFirstTarget = "FirstTarget"; return xFirstTarget; } // object
-	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // string
-	static const std::string& HeroPos1(){ static std::string xHeroPos1 = "HeroPos1"; return xHeroPos1; } // string
-	static const std::string& HeroPos2(){ static std::string xHeroPos2 = "HeroPos2"; return xHeroPos2; } // string
-	static const std::string& HeroPos3(){ static std::string xHeroPos3 = "HeroPos3"; return xHeroPos3; } // string
+	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
+	static const std::string& HeroPos1(){ static std::string xHeroPos1 = "HeroPos1"; return xHeroPos1; } // object
+	static const std::string& HeroPos2(){ static std::string xHeroPos2 = "HeroPos2"; return xHeroPos2; } // object
+	static const std::string& HeroPos3(){ static std::string xHeroPos3 = "HeroPos3"; return xHeroPos3; } // object
 	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
 	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
