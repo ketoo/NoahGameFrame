@@ -19,6 +19,7 @@ bool NFCUserGiftModule::Init()
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
+	m_pItemModule = pPluginManager->FindModule<NFIItemModule>();
 	
 	return true;
 }
@@ -64,6 +65,8 @@ int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string
 		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount()) <= 0)
 		{
 			DoLevelAward(self, 1);
+
+			ActiveteHero(self);
 		}
 	}
 
@@ -108,6 +111,16 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 	}
 
 	return false;
+}
+
+bool NFCUserGiftModule::ActiveteHero(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+
+	//configuration
+	m_pItemModule->UseItem(self, "Item_HeroCard_Abaddon", self);
+
+	return true;
 }
 
 bool NFCUserGiftModule::Shut()

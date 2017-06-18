@@ -50,6 +50,73 @@ bool NFCItemModule::AfterInit()
 	return true;
 }
 
+bool NFCItemModule::UseItem(const NFGUID & self, const std::string & strItemID, const NFGUID & xTargetID)
+{
+	int nCount = 1;
+	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
+	{
+		return false;
+	}
+
+	if (!ConsumeDataItemProperty(self, strItemID))
+	{
+		return false;
+	}
+
+	if (!m_pPackModule->DeleteItem(self, strItemID, nCount))
+	{
+		return false;
+	}
+
+	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+	NF_SHARE_PTR<NFIItemConsumeProcessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
+	if (!pConsumeProcessModule)
+	{
+		return false;
+	}
+
+	switch (eItemType)
+	{
+	case NFMsg::EItemType::EIT_CARD:
+	case NFMsg::EItemType::EIT_EQUIP:
+	case NFMsg::EItemType::EIT_GEM:
+	case NFMsg::EItemType::EIT_TOKEN:
+	{
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
+		{
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
+		}
+	}
+	break;
+	case NFMsg::EItemType::EIT_ITEM:
+	{
+		NFDataList xTarget;
+		xTarget.AddObject(xTargetID);
+		xTarget.AddString(strItemID);	//this is Item Config ID
+		xTarget.AddInt(nCount);	//this is Item Count to Consume
+
+		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) == 0)
+		{
+			pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
+		}
+	}
+	break;
+	break;
+	default:
+		break;
+	}
+
+	/*	AddItemEffectDataProperty(self, xTargetID, strItemID);
+
+	const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
+	if (!strAwardPackID.empty())
+	{
+	DoAwardPack( self, strAwardPackID);
+	}
+	*/
+	return false;
+}
+
 int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
@@ -293,72 +360,7 @@ void NFCItemModule::OnClientUseItem(const int nSockIndex, const int nMsgID, cons
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
+	const int nCount = xMsg.item().item_count();
 
-	if (!m_pElementModule->ExistElement(strItemID) || !m_pKernelModule->GetObject(xTargetID))
-	{
-		return;
-	}
-
-	NF_SHARE_PTR<NFIRecord> pRecordPack = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
-	if (nullptr == pRecordPack)
-	{
-		return;
-	}
-
-	if (!ConsumeDataItemProperty(self, strItemID))
-	{
-		return;
-	}
-
-	if (!m_pPackModule->DeleteItem(self, strItemID, 1))
-	{
-		return;
-	}
-
-	NFMsg::EItemType eItemType = (NFMsg::EItemType)m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	NF_SHARE_PTR<NFIItemConsumeProcessModule> pConsumeProcessModule = m_pItemConsumeManagerModule->GetConsumeModule(eItemType);
-	if (!pConsumeProcessModule)
-	{
-		return;
-	}
-
-	switch (eItemType)
-	{
-	case NFMsg::EItemType::EIT_CARD:
-	case NFMsg::EItemType::EIT_EQUIP:
-	case NFMsg::EItemType::EIT_GEM:
-	case NFMsg::EItemType::EIT_TOKEN:
-	{
-		if (pConsumeProcessModule->ConsumeLegal(self, strItemID, NFDataList()) == 0)
-		{
-			pConsumeProcessModule->ConsumeProcess(self, strItemID, NFDataList());
-		}
-	}
-	break;
-	case NFMsg::EItemType::EIT_ITEM:
-	{
-			NFDataList xTarget;
-			xTarget.AddObject(xTargetID);
-			xTarget.AddString(xMsg.item().item_id());	//this is Item Config ID
-			xTarget.AddInt(xMsg.item().item_count());	//this is Item Count to Consume
-
-			if (pConsumeProcessModule->ConsumeLegal(self, strItemID, xTarget) == 0)
-			{
-				pConsumeProcessModule->ConsumeProcess(self, strItemID, xTarget);
-			}
-	}
-	break;
-	break;
-	default:
-		break;
-	}
-
-	/*	AddItemEffectDataProperty(self, xTargetID, strItemID);
-
-		const std::string& strAwardPackID = m_pElementModule->GetPropertyString(strItemID, "AwardData");
-		if (!strAwardPackID.empty())
-		{
-			DoAwardPack( self, strAwardPackID);
-		}
-		  */
+	UseItem(nPlayerID, strItemID, xTargetID);
 }

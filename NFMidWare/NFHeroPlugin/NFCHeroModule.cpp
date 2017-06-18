@@ -69,14 +69,14 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID);
 	xRowData->SetInt(NFrame::Player::PlayerHero::PlayerHero_Activated, 0);
 
-	if (pHeroRecord->AddRow(-1, *xRowData) >= 0)
+	if (pHeroRecord->AddRow(-1, *xRowData) < 0)
 	{
-		return xHeroID;
+		return NFGUID();
 	}
 
 	AddToFightList(self, xHeroID);
 
-	return NFGUID();
+	return xHeroID;
 }
 
 NFGUID NFCHeroModule::ActiviteHero(const NFGUID & self, const string & strID)
@@ -473,6 +473,11 @@ void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID,
 
 int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 {
+	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+	}
+
 	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1()) == NFGUID())
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);

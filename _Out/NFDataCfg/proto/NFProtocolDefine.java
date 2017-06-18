@@ -717,10 +717,10 @@ public class Player {
 	public static final String ShowName = "ShowName"; // string
 	public static final String PrefabPath = "PrefabPath"; // string
 	public static final String FirstTarget = "FirstTarget"; // object
-	public static final String FightHero = "FightHero"; // string
-	public static final String HeroPos1 = "HeroPos1"; // string
-	public static final String HeroPos2 = "HeroPos2"; // string
-	public static final String HeroPos3 = "HeroPos3"; // string
+	public static final String FightHero = "FightHero"; // object
+	public static final String HeroPos1 = "HeroPos1"; // object
+	public static final String HeroPos2 = "HeroPos2"; // object
+	public static final String HeroPos3 = "HeroPos3"; // object
 	public static final String VIPLevel = "VIPLevel"; // int
 	public static final String VIPEXP = "VIPEXP"; // int
 	public static final String EXP = "EXP"; // int

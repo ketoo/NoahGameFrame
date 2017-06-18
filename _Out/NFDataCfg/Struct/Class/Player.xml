@@ -10,10 +10,10 @@
 		<Property Id="ShowName" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="显示的名字"/>
 		<Property Id="PrefabPath" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
 		<Property Id="FirstTarget" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="首要目标"/>
-		<Property Id="FightHero" Type="string" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Hero"/>
-		<Property Id="HeroPos1" Type="string" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Hero1"/>
-		<Property Id="HeroPos2" Type="string" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Hero2"/>
-		<Property Id="HeroPos3" Type="string" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="Hero3"/>
+		<Property Id="FightHero" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero"/>
+		<Property Id="HeroPos1" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero1"/>
+		<Property Id="HeroPos2" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero2"/>
+		<Property Id="HeroPos3" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero3"/>
 		<Property Id="VIPLevel" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
 		<Property Id="VIPEXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="VIP经验"/>
 		<Property Id="EXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
@@ -74,7 +74,7 @@
 		<Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="BUFF免疫开关"/>
 	</Propertys>
 	<Records>
-		<Record Id="CommPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性,4Hero">
+		<Record Id="CommPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero">
 			<Col Type="int" Tag="SUCKBLOOD"/>
 			<Col Type="int" Tag="REFLECTDAMAGE"/>
 			<Col Type="int" Tag="CRITICAL"/>
@@ -130,7 +130,7 @@
 			<Col Type="string" Tag="Skill5"/>
 			<Col Type="string" Tag="FightSkill"/>
 		</Record>
-		<Record Id="HeroPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="所有和战斗，药水有关的，都在这里NPC怪物只有基础和BUFF影响，因此针对玩家和怪物，分2个表.0职业等级叠加属性,1装备属性,2永久BUFF属性,3动态BUFF属性">
+		<Record Id="HeroPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="one her one row to sotre the properties">
 			<Col Type="int" Tag="SUCKBLOOD"/>
 			<Col Type="int" Tag="REFLECTDAMAGE"/>
 			<Col Type="int" Tag="CRITICAL"/>
