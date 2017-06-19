@@ -59,26 +59,19 @@ bool NFCScheduleModule::Execute()
 			NFINT64 nNow = NFGetTime();
 			if (nNow > pSchedule->mnNextTriggerTime)
 			{
-				std::map<NFGUID, std::string>::iterator itRet = mObjectRemoveList.find(pSchedule->self);
-				if (itRet != mObjectRemoveList.end())
+				if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)
 				{
-					if (itRet->second != pSchedule->mstrScheduleName)
-					{
-						if (pSchedule->mnRemainCount > 0 || pSchedule->mbForever == true)
-						{
-							pSchedule->mnRemainCount--;
-							pSchedule->DoHeartBeatEvent();
+					pSchedule->mnRemainCount--;
+					pSchedule->DoHeartBeatEvent();
 
-							if (pSchedule->mnRemainCount <= 0 && pSchedule->mbForever == false)
-							{
-								mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(pSchedule->self, pSchedule->mstrScheduleName));
-							}
-							else
-							{
-								NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount);
-								pSchedule->mnNextTriggerTime = pSchedule->mnStartTime + nNextCostTime;
-							}
-						}
+					if (pSchedule->mnRemainCount <= 0 && pSchedule->mbForever == false)
+					{
+						mObjectRemoveList.insert(std::map<NFGUID, std::string>::value_type(pSchedule->self, pSchedule->mstrScheduleName));
+					}
+					else
+					{
+						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount);
+						pSchedule->mnNextTriggerTime = pSchedule->mnStartTime + nNextCostTime;
 					}
 				}
 			}
