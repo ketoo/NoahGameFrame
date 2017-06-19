@@ -1459,6 +1459,7 @@ bool NFCRecord::PreAllocMemoryForRow(const int nRow)
 
 		pVar->variantData = mVarRecordType->GetStack(i)->variantData;
 	}
+	return true;
 }
 
 bool NFCRecord::ValidPos(int nRow, int nCol) const
