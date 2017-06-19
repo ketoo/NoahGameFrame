@@ -109,6 +109,7 @@ protected:
 
 	//broad the data of argvar to self
 	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+	int OnObjectDataFinished(const NFDataList& self, const NFDataList& argVar);
 	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
 
 	//broad the data of self to argvar 
