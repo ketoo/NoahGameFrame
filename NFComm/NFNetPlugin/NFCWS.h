@@ -17,9 +17,12 @@ class NFCWS : public NFIWS
 {
 public:
     template<typename BaseType>
-	NFCWS(BaseType* pBaseType, void (BaseType::*handleRecieve)(websocketpp::connection_hdl, const std::string&), void (BaseType::*handleEvent)(websocketpp::connection_hdl, NF_WS_EVENT))
+	NFCWS(BaseType* pBaseType, 
+		void (BaseType::*handleRecieve)(websocketpp::connection_hdl, const std::string&, NF_WS_MSG_DATA_TYPE),
+		void (BaseType::*handleEvent)(websocketpp::connection_hdl, NF_WS_EVENT)
+	)
     {
-        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2);
+        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
         mEventCB = std::bind(handleEvent, pBaseType, std::placeholders::_1, std::placeholders::_2);
         //mstrIP = "";
         mnPort = 0;
@@ -39,9 +42,9 @@ public:
 
     virtual bool Final();
 
-	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
-	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>&);
-	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl);
+	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& conn_list, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl conn, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
 
     virtual bool AddNetObject(websocketpp::connection_hdl conn,WSObjectPtr pObject);
     virtual WSObjectPtr GetNetObject(websocketpp::connection_hdl conn);
@@ -51,11 +54,11 @@ private:
 
 	bool CloseSocketAll();
 	
-    void CloseObject(websocketpp::connection_hdl hd, int nCloseCode=1000, const std::string& strCloseReason="");
+    void CloseObject(websocketpp::connection_hdl hd, NF_WS_CLOSE_CODE nCloseCode=CLOSE_CODE_NORMAL, const std::string& strCloseReason="");
 	
 	void OnMessageHandler(websocketpp::connection_hdl hd, NFWebSockConf::message_ptr msg);
 	void OnOpenHandler(websocketpp::connection_hdl hd);
-	bool RemoveConnection(websocketpp::connection_hdl hd, NF_WS_EVENT evt, int nCloseCode = 1000, const std::string& strCloseReason = "");
+	bool RemoveConnection(websocketpp::connection_hdl hd, NF_WS_EVENT evt, NF_WS_CLOSE_CODE nCloseCode = CLOSE_CODE_NORMAL, const std::string& strCloseReason = "");
 	void OnCloseHandler(websocketpp::connection_hdl hd);
 	void OnFailHandler(websocketpp::connection_hdl hd);
 	void OnInterruptHandler(websocketpp::connection_hdl hd);
