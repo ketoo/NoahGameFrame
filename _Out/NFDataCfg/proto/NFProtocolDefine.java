@@ -43,41 +43,6 @@ public class BB_Build {
 
 }
 
-public class Block {
-	//Class name
-	public static final String ThisName = "Block";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String Tag = "Tag"; // int
-	public static final String SpriteList = "SpriteList"; // string
-	public static final String SpritePath = "SpritePath"; // string
-	public static final String LeftSide = "LeftSide"; // string
-	public static final String RightSide = "RightSide"; // string
-	public static final String TopSide = "TopSide"; // string
-	public static final String DownSide = "DownSide"; // string
-	public static final String LeftTopSide = "LeftTopSide"; // string
-	public static final String LeftDownSide = "LeftDownSide"; // string
-	public static final String RightTopSide = "RightTopSide"; // string
-	public static final String RightDownSide = "RightDownSide"; // string
-	public static final String LeftTopOutSide = "LeftTopOutSide"; // string
-	public static final String LeftDownOutSide = "LeftDownOutSide"; // string
-	public static final String RightTopOutSide = "RightTopOutSide"; // string
-	public static final String RightDownOutSide = "RightDownOutSide"; // string
-	public static final String GrassList = "GrassList"; // string
-	public static final String JoinList = "JoinList"; // string
-	public static final String CrackList = "CrackList"; // string
-	public static final String TreasureList = "TreasureList"; // string
-	public static final String TreeRootList = "TreeRootList"; // string
-	// Record
-
-}
-
 public class Buff {
 	//Class name
 	public static final String ThisName = "Buff";
@@ -99,41 +64,6 @@ public class Buff {
 	public static final String EffectClearOnDead = "EffectClearOnDead"; // int
 	public static final String DownSaveType = "DownSaveType"; // int
 	// Record
-
-}
-
-public class ChatGroup {
-	//Class name
-	public static final String ThisName = "ChatGroup";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String Name = "Name"; // string
-	public static final String CreateObject = "CreateObject"; // object
-	// Record
-	public static final String R_GroupMemberList = "GroupMemberList";
-	public static final String R_ChatList = "ChatList";
-
-	public enum GroupMemberList
-	{
-		GUID		= 0, // GUID -- object
-		Online		= 1, // Online -- int
-		GameID		= 2, // GameID -- int
-
-	};
-
-	public enum ChatList
-	{
-		GUID		= 0, // GUID -- object
-		msg		= 1, // msg -- string
-		time		= 2, // time -- int
-
-	};
 
 }
 
@@ -460,22 +390,6 @@ public class GuildJob {
 	public static final String EditAD = "EditAD"; // object
 	public static final String Leave = "Leave"; // object
 	public static final String LevelUp = "LevelUp"; // object
-	// Record
-
-}
-
-public class GuildName {
-	//Class name
-	public static final String ThisName = "GuildName";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String GuildID = "GuildID"; // object
 	// Record
 
 }
@@ -1150,51 +1064,6 @@ public class SqlServer {
 	public static final String SqlUser = "SqlUser"; // string
 	public static final String SqlPwd = "SqlPwd"; // string
 	public static final String SqlName = "SqlName"; // string
-	// Record
-
-}
-
-public class StateFuncResources {
-	//Class name
-	public static final String ThisName = "StateFuncResources";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String Atlas_ResID = "Atlas_ResID"; // string
-	// Record
-
-}
-
-public class StateFunction {
-	//Class name
-	public static final String ThisName = "StateFunction";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String EFT_INFO = "EFT_INFO"; // int
-	public static final String EFT_BOOOST = "EFT_BOOOST"; // int
-	public static final String EFT_LVLUP = "EFT_LVLUP"; // int
-	public static final String EFT_CREATE_SOLDER = "EFT_CREATE_SOLDER"; // int
-	public static final String EFT_CREATE_SPEEL = "EFT_CREATE_SPEEL"; // int
-	public static final String EFT_RESEARCH = "EFT_RESEARCH"; // int
-	public static final String EFT_COLLECT_GOLD = "EFT_COLLECT_GOLD"; // int
-	public static final String EFT_COLLECT_STONE = "EFT_COLLECT_STONE"; // int
-	public static final String EFT_COLLECT_STEEL = "EFT_COLLECT_STEEL"; // int
-	public static final String EFT_COLLECT_DIAMOND = "EFT_COLLECT_DIAMOND"; // int
-	public static final String EFT_SELL = "EFT_SELL"; // int
-	public static final String EFT_REPAIR = "EFT_REPAIR"; // int
-	public static final String EFT_CANCEL = "EFT_CANCEL"; // int
-	public static final String EFT_FINISH = "EFT_FINISH"; // int
 	// Record
 
 }
