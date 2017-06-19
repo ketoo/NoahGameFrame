@@ -74,7 +74,21 @@ enum NF_WS_EVENT
 	NF_WS_EVENT_MSG = 0x10				//websocket message 
 };
 
-typedef std::function<void(websocketpp::connection_hdl,const std::string&) >			NF_WS_MSG_CALL_BACK;
+
+enum NF_WS_CLOSE_CODE
+{
+	CLOSE_CODE_NORMAL = 1000,
+	CLOSE_CODE_KICKOUT = 1001,
+};
+
+enum NF_WS_MSG_DATA_TYPE
+{
+	TEXT = 0x1,
+	BINARY = 0x2,
+};
+
+
+typedef std::function<void(websocketpp::connection_hdl,const std::string&,NF_WS_MSG_DATA_TYPE) >			NF_WS_MSG_CALL_BACK;
 typedef std::shared_ptr<NF_WS_MSG_CALL_BACK> NF_WS_MSG_CALL_BACK_PTR;
 
 typedef std::function<void(websocketpp::connection_hdl,NF_WS_EVENT) > 					NF_WS_EVENT_CALL_BACK;
@@ -88,9 +102,9 @@ struct WSObject
 	{
 		return bNeedRemove;
 	}
-	void SetNeedRemove(bool b)
+	void SetNeedRemove(bool bRemove)
 	{
-		bNeedRemove = b;
+		bNeedRemove = bRemove;
 	}
 };
 
@@ -108,14 +122,15 @@ public:
 
     virtual bool Final() = 0;
 
-    //send a message to all client
-	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
+	//send a message to all client
+	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT) = 0;
 
 	//send a message to client list
-	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen,const std::vector<websocketpp::connection_hdl>&) = 0;
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& conn_list, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT) =0;
 
-	//send a message to client list
-	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl) = 0;
+	//send a message to client
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl conn, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT) = 0;
+
 };
 
 #endif

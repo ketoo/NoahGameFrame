@@ -32,8 +32,13 @@ public:
 
 	virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) override;
 
+	virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& conn_list, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
+	virtual bool SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl conn, NF_WS_MSG_DATA_TYPE msg_data_type = TEXT);
+
+
 private:
-	void OnWebsocketMessage(websocketpp::connection_hdl, const std::string&);
+	void OnWebsocketMessage(websocketpp::connection_hdl, const std::string&,NF_WS_MSG_DATA_TYPE );
 	void OnWebsocketEvent(websocketpp::connection_hdl, NF_WS_EVENT);
 
 private:

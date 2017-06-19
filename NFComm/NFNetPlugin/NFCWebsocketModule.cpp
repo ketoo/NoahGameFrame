@@ -56,11 +56,26 @@ int NFCWebsocketModule::Initialization(const unsigned int nMaxClient, const unsi
 	return m_pWSServer->Initialization(nMaxClient,nPort,nCpuCount);
 }
 
-void NFCWebsocketModule::OnWebsocketMessage(websocketpp::connection_hdl hd, const std::string & strPayload)
+bool NFCWebsocketModule::SendMsgToAllClient(const char* msg, const uint32_t nLen, NF_WS_MSG_DATA_TYPE msg_data_type /*= TEXT*/)
+{
+	return m_pWSServer->SendMsgToAllClient(msg,nLen,msg_data_type);
+}
+
+bool NFCWebsocketModule::SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& conn_list, NF_WS_MSG_DATA_TYPE msg_data_type /*= TEXT*/)
+{
+	return m_pWSServer->SendMsgToClient(msg, nLen,conn_list,msg_data_type);
+}
+
+bool NFCWebsocketModule::SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl conn, NF_WS_MSG_DATA_TYPE msg_data_type /*= TEXT*/)
+{
+	return m_pWSServer->SendMsgToClient(msg, nLen, conn, msg_data_type);
+}
+
+void NFCWebsocketModule::OnWebsocketMessage(websocketpp::connection_hdl hd, const std::string & strPayload,NF_WS_MSG_DATA_TYPE msg_data_type)
 {
 	if (m_pRecvMsgCB.get())
 	{
-		m_pRecvMsgCB->operator()(hd, strPayload);
+		m_pRecvMsgCB->operator()(hd, strPayload,msg_data_type);
 	}
 }
 
