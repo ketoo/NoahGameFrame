@@ -52,43 +52,6 @@ public:
 
 };
 
-class Block
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xBlock = "Block"; return xBlock; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& Tag(){ static std::string xTag = "Tag"; return xTag; } // int
-	static const std::string& SpriteList(){ static std::string xSpriteList = "SpriteList"; return xSpriteList; } // string
-	static const std::string& SpritePath(){ static std::string xSpritePath = "SpritePath"; return xSpritePath; } // string
-	static const std::string& LeftSide(){ static std::string xLeftSide = "LeftSide"; return xLeftSide; } // string
-	static const std::string& RightSide(){ static std::string xRightSide = "RightSide"; return xRightSide; } // string
-	static const std::string& TopSide(){ static std::string xTopSide = "TopSide"; return xTopSide; } // string
-	static const std::string& DownSide(){ static std::string xDownSide = "DownSide"; return xDownSide; } // string
-	static const std::string& LeftTopSide(){ static std::string xLeftTopSide = "LeftTopSide"; return xLeftTopSide; } // string
-	static const std::string& LeftDownSide(){ static std::string xLeftDownSide = "LeftDownSide"; return xLeftDownSide; } // string
-	static const std::string& RightTopSide(){ static std::string xRightTopSide = "RightTopSide"; return xRightTopSide; } // string
-	static const std::string& RightDownSide(){ static std::string xRightDownSide = "RightDownSide"; return xRightDownSide; } // string
-	static const std::string& LeftTopOutSide(){ static std::string xLeftTopOutSide = "LeftTopOutSide"; return xLeftTopOutSide; } // string
-	static const std::string& LeftDownOutSide(){ static std::string xLeftDownOutSide = "LeftDownOutSide"; return xLeftDownOutSide; } // string
-	static const std::string& RightTopOutSide(){ static std::string xRightTopOutSide = "RightTopOutSide"; return xRightTopOutSide; } // string
-	static const std::string& RightDownOutSide(){ static std::string xRightDownOutSide = "RightDownOutSide"; return xRightDownOutSide; } // string
-	static const std::string& GrassList(){ static std::string xGrassList = "GrassList"; return xGrassList; } // string
-	static const std::string& JoinList(){ static std::string xJoinList = "JoinList"; return xJoinList; } // string
-	static const std::string& CrackList(){ static std::string xCrackList = "CrackList"; return xCrackList; } // string
-	static const std::string& TreasureList(){ static std::string xTreasureList = "TreasureList"; return xTreasureList; } // string
-	static const std::string& TreeRootList(){ static std::string xTreeRootList = "TreeRootList"; return xTreeRootList; } // string
-	// Record
-
-};
-
 class Buff
 {
 public:
@@ -112,43 +75,6 @@ public:
 	static const std::string& EffectClearOnDead(){ static std::string xEffectClearOnDead = "EffectClearOnDead"; return xEffectClearOnDead; } // int
 	static const std::string& DownSaveType(){ static std::string xDownSaveType = "DownSaveType"; return xDownSaveType; } // int
 	// Record
-
-};
-
-class ChatGroup
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xChatGroup = "ChatGroup"; return xChatGroup; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& Name(){ static std::string xName = "Name"; return xName; } // string
-	static const std::string& CreateObject(){ static std::string xCreateObject = "CreateObject"; return xCreateObject; } // object
-	// Record
-	static const std::string& R_GroupMemberList(){ static std::string xGroupMemberList = "GroupMemberList"; return xGroupMemberList;}
-	static const std::string& R_ChatList(){ static std::string xChatList = "ChatList"; return xChatList;}
-
-	enum GroupMemberList
-	{
-		GroupMemberList_GUID		= 0, // GUID -- object
-		GroupMemberList_Online		= 1, // Online -- int
-		GroupMemberList_GameID		= 2, // GameID -- int
-
-	};
-
-	enum ChatList
-	{
-		ChatList_GUID		= 0, // GUID -- object
-		ChatList_msg		= 1, // msg -- string
-		ChatList_time		= 2, // time -- int
-
-	};
 
 };
 
@@ -491,24 +417,6 @@ public:
 	static const std::string& EditAD(){ static std::string xEditAD = "EditAD"; return xEditAD; } // object
 	static const std::string& Leave(){ static std::string xLeave = "Leave"; return xLeave; } // object
 	static const std::string& LevelUp(){ static std::string xLevelUp = "LevelUp"; return xLevelUp; } // object
-	// Record
-
-};
-
-class GuildName
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xGuildName = "GuildName"; return xGuildName; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
 	// Record
 
 };
@@ -1213,55 +1121,6 @@ public:
 	static const std::string& SqlUser(){ static std::string xSqlUser = "SqlUser"; return xSqlUser; } // string
 	static const std::string& SqlPwd(){ static std::string xSqlPwd = "SqlPwd"; return xSqlPwd; } // string
 	static const std::string& SqlName(){ static std::string xSqlName = "SqlName"; return xSqlName; } // string
-	// Record
-
-};
-
-class StateFuncResources
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xStateFuncResources = "StateFuncResources"; return xStateFuncResources; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& Atlas_ResID(){ static std::string xAtlas_ResID = "Atlas_ResID"; return xAtlas_ResID; } // string
-	// Record
-
-};
-
-class StateFunction
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xStateFunction = "StateFunction"; return xStateFunction; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& EFT_INFO(){ static std::string xEFT_INFO = "EFT_INFO"; return xEFT_INFO; } // int
-	static const std::string& EFT_BOOOST(){ static std::string xEFT_BOOOST = "EFT_BOOOST"; return xEFT_BOOOST; } // int
-	static const std::string& EFT_LVLUP(){ static std::string xEFT_LVLUP = "EFT_LVLUP"; return xEFT_LVLUP; } // int
-	static const std::string& EFT_CREATE_SOLDER(){ static std::string xEFT_CREATE_SOLDER = "EFT_CREATE_SOLDER"; return xEFT_CREATE_SOLDER; } // int
-	static const std::string& EFT_CREATE_SPEEL(){ static std::string xEFT_CREATE_SPEEL = "EFT_CREATE_SPEEL"; return xEFT_CREATE_SPEEL; } // int
-	static const std::string& EFT_RESEARCH(){ static std::string xEFT_RESEARCH = "EFT_RESEARCH"; return xEFT_RESEARCH; } // int
-	static const std::string& EFT_COLLECT_GOLD(){ static std::string xEFT_COLLECT_GOLD = "EFT_COLLECT_GOLD"; return xEFT_COLLECT_GOLD; } // int
-	static const std::string& EFT_COLLECT_STONE(){ static std::string xEFT_COLLECT_STONE = "EFT_COLLECT_STONE"; return xEFT_COLLECT_STONE; } // int
-	static const std::string& EFT_COLLECT_STEEL(){ static std::string xEFT_COLLECT_STEEL = "EFT_COLLECT_STEEL"; return xEFT_COLLECT_STEEL; } // int
-	static const std::string& EFT_COLLECT_DIAMOND(){ static std::string xEFT_COLLECT_DIAMOND = "EFT_COLLECT_DIAMOND"; return xEFT_COLLECT_DIAMOND; } // int
-	static const std::string& EFT_SELL(){ static std::string xEFT_SELL = "EFT_SELL"; return xEFT_SELL; } // int
-	static const std::string& EFT_REPAIR(){ static std::string xEFT_REPAIR = "EFT_REPAIR"; return xEFT_REPAIR; } // int
-	static const std::string& EFT_CANCEL(){ static std::string xEFT_CANCEL = "EFT_CANCEL"; return xEFT_CANCEL; } // int
-	static const std::string& EFT_FINISH(){ static std::string xEFT_FINISH = "EFT_FINISH"; return xEFT_FINISH; } // int
 	// Record
 
 };

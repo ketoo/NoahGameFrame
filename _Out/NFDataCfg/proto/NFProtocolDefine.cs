@@ -51,42 +51,6 @@ public class BB_Build
 
 }
 
-public class Block
-{
-	//Class name
-	public static readonly string ThisName = "Block";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String Tag = "Tag"; // int
-	public static readonly String SpriteList = "SpriteList"; // string
-	public static readonly String SpritePath = "SpritePath"; // string
-	public static readonly String LeftSide = "LeftSide"; // string
-	public static readonly String RightSide = "RightSide"; // string
-	public static readonly String TopSide = "TopSide"; // string
-	public static readonly String DownSide = "DownSide"; // string
-	public static readonly String LeftTopSide = "LeftTopSide"; // string
-	public static readonly String LeftDownSide = "LeftDownSide"; // string
-	public static readonly String RightTopSide = "RightTopSide"; // string
-	public static readonly String RightDownSide = "RightDownSide"; // string
-	public static readonly String LeftTopOutSide = "LeftTopOutSide"; // string
-	public static readonly String LeftDownOutSide = "LeftDownOutSide"; // string
-	public static readonly String RightTopOutSide = "RightTopOutSide"; // string
-	public static readonly String RightDownOutSide = "RightDownOutSide"; // string
-	public static readonly String GrassList = "GrassList"; // string
-	public static readonly String JoinList = "JoinList"; // string
-	public static readonly String CrackList = "CrackList"; // string
-	public static readonly String TreasureList = "TreasureList"; // string
-	public static readonly String TreeRootList = "TreeRootList"; // string
-	// Record
-
-}
-
 public class Buff
 {
 	//Class name
@@ -109,42 +73,6 @@ public class Buff
 	public static readonly String EffectClearOnDead = "EffectClearOnDead"; // int
 	public static readonly String DownSaveType = "DownSaveType"; // int
 	// Record
-
-}
-
-public class ChatGroup
-{
-	//Class name
-	public static readonly string ThisName = "ChatGroup";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String Name = "Name"; // string
-	public static readonly String CreateObject = "CreateObject"; // object
-	// Record
-	public static readonly String R_GroupMemberList = "GroupMemberList";
-	public static readonly String R_ChatList = "ChatList";
-
-	public enum GroupMemberList
-	{
-		GUID		= 0, // GUID -- object
-		Online		= 1, // Online -- int
-		GameID		= 2, // GameID -- int
-
-	};
-
-	public enum ChatList
-	{
-		GUID		= 0, // GUID -- object
-		msg		= 1, // msg -- string
-		time		= 2, // time -- int
-
-	};
 
 }
 
@@ -479,23 +407,6 @@ public class GuildJob
 	public static readonly String EditAD = "EditAD"; // object
 	public static readonly String Leave = "Leave"; // object
 	public static readonly String LevelUp = "LevelUp"; // object
-	// Record
-
-}
-
-public class GuildName
-{
-	//Class name
-	public static readonly string ThisName = "GuildName";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String GuildID = "GuildID"; // object
 	// Record
 
 }
@@ -1185,53 +1096,6 @@ public class SqlServer
 	public static readonly String SqlUser = "SqlUser"; // string
 	public static readonly String SqlPwd = "SqlPwd"; // string
 	public static readonly String SqlName = "SqlName"; // string
-	// Record
-
-}
-
-public class StateFuncResources
-{
-	//Class name
-	public static readonly string ThisName = "StateFuncResources";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String Atlas_ResID = "Atlas_ResID"; // string
-	// Record
-
-}
-
-public class StateFunction
-{
-	//Class name
-	public static readonly string ThisName = "StateFunction";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String EFT_INFO = "EFT_INFO"; // int
-	public static readonly String EFT_BOOOST = "EFT_BOOOST"; // int
-	public static readonly String EFT_LVLUP = "EFT_LVLUP"; // int
-	public static readonly String EFT_CREATE_SOLDER = "EFT_CREATE_SOLDER"; // int
-	public static readonly String EFT_CREATE_SPEEL = "EFT_CREATE_SPEEL"; // int
-	public static readonly String EFT_RESEARCH = "EFT_RESEARCH"; // int
-	public static readonly String EFT_COLLECT_GOLD = "EFT_COLLECT_GOLD"; // int
-	public static readonly String EFT_COLLECT_STONE = "EFT_COLLECT_STONE"; // int
-	public static readonly String EFT_COLLECT_STEEL = "EFT_COLLECT_STEEL"; // int
-	public static readonly String EFT_COLLECT_DIAMOND = "EFT_COLLECT_DIAMOND"; // int
-	public static readonly String EFT_SELL = "EFT_SELL"; // int
-	public static readonly String EFT_REPAIR = "EFT_REPAIR"; // int
-	public static readonly String EFT_CANCEL = "EFT_CANCEL"; // int
-	public static readonly String EFT_FINISH = "EFT_FINISH"; // int
 	// Record
 
 }
