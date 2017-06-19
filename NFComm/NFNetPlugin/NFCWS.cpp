@@ -78,7 +78,7 @@ bool NFCWS::Final()
 	return true;
 }
 
-bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
+bool NFCWS::SendMsgToAllClient(const char* msg, const uint32_t nLen, NF_WS_MSG_DATA_TYPE msg_data_type /* = TEXT */)
 {
 	if (nLen <= 0)
 	{
@@ -93,7 +93,7 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 		{
 			try
 			{
-				m_EndPoint.send(it->first, msg, nLen, websocketpp::frame::opcode::TEXT);
+				m_EndPoint.send(it->first, msg, nLen, (websocketpp::frame::opcode::value)msg_data_type);
 			}
 			catch (websocketpp::exception& e)
 			{
@@ -107,16 +107,16 @@ bool NFCWS::SendMsgToAllClient(const char * msg, const uint32_t nLen)
 	return true;
 }
 
-bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& vList)
+bool NFCWS::SendMsgToClient(const char* msg, const uint32_t nLen, const std::vector<websocketpp::connection_hdl>& conn_list, NF_WS_MSG_DATA_TYPE msg_data_type /* = TEXT */)
 {
-	for (auto vIt:vList)
+	for (auto vIt: conn_list)
 	{
 		auto pWSObject = GetNetObject(vIt);
 		if (pWSObject && !pWSObject->NeedRemove())
 		{
 			try
 			{
-				m_EndPoint.send(vIt, msg, nLen, websocketpp::frame::opcode::TEXT);
+				m_EndPoint.send(vIt, msg, nLen, (websocketpp::frame::opcode::value)msg_data_type);
 				return true;
 			}
 			catch (websocketpp::exception& e)
@@ -129,14 +129,14 @@ bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, const std::ve
 	return false;
 }
 
-bool NFCWS::SendMsgToClient(const char * msg, const uint32_t nLen, websocketpp::connection_hdl hd)
+bool NFCWS::SendMsgToClient(const char* msg, const uint32_t nLen, websocketpp::connection_hdl hd, NF_WS_MSG_DATA_TYPE msg_data_type /* = TEXT */)
 {
 	auto pWSObject = GetNetObject(hd);
 	if (pWSObject && !pWSObject->NeedRemove())
 	{
 		try
 		{
-			m_EndPoint.send(hd, msg, nLen, websocketpp::frame::opcode::TEXT);
+			m_EndPoint.send(hd, msg, nLen, (websocketpp::frame::opcode::value)msg_data_type);
 			return true;
 		}
 		catch (websocketpp::exception& e)
@@ -194,7 +194,7 @@ bool NFCWS::CloseSocketAll()
 	return true;
 }
 
-void NFCWS::CloseObject(websocketpp::connection_hdl hd, int nCloseCode/* =1000 */, const std::string& strCloseReason/* ="" */)
+void NFCWS::CloseObject(websocketpp::connection_hdl hd, NF_WS_CLOSE_CODE nCloseCode/* =CLOSE_CODE_NORMAL */, const std::string& strCloseReason/* ="" */)
 {
 	m_EndPoint.close(hd, nCloseCode, strCloseReason);
 }
@@ -209,7 +209,7 @@ void NFCWS::OnMessageHandler(websocketpp::connection_hdl hd, NFWebSockConf::mess
 
 	if (mRecvCB)
 	{
-		mRecvCB(hd,msg->get_payload());
+		mRecvCB(hd,msg->get_payload(),(NF_WS_MSG_DATA_TYPE)(msg->get_opcode()));
 	}
 }
 
@@ -225,7 +225,7 @@ void NFCWS::OnOpenHandler(websocketpp::connection_hdl hd)
 	}
 }
 
-bool NFCWS::RemoveConnection(websocketpp::connection_hdl hd, NF_WS_EVENT evt, int nCloseCode /* = 1000 */, const std::string& strCloseReason /* = "" */)
+bool NFCWS::RemoveConnection(websocketpp::connection_hdl hd, NF_WS_EVENT evt, NF_WS_CLOSE_CODE nCloseCode /* = 1000 */, const std::string& strCloseReason /* = "" */)
 {
 	session_list::iterator it = mmObject.find(hd);
 	if (it != mmObject.end())
