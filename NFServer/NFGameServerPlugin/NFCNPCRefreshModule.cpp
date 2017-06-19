@@ -112,15 +112,15 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
 int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
-    std::string strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
-    std::string strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
-    std::string strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
+    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
+	const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
+	const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
     int nSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID());
     int nGroupID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::GroupID());
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
 
-    m_pKernelModule->DestroyObject( self );
+    m_pKernelModule->DestroySelf( self );
 
     NFDataList arg;
 	arg << NFrame::NPC::Position() << fSeedPos;

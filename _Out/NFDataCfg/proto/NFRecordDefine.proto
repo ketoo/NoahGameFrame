@@ -1,16 +1,4 @@
 package NFrame;
-enum GroupMemberList
-{
-	GUID		= 0; // GUID -- object
-	Online		= 1; // Online -- int
-	GameID		= 2; // GameID -- int
-}
-enum ChatList
-{
-	GUID		= 0; // GUID -- object
-	msg		= 1; // msg -- string
-	time		= 2; // time -- int
-}
 enum GuildBoss
 {
 	GUID		= 0; // GUID -- object
