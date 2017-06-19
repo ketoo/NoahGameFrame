@@ -375,6 +375,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_RECORD_SORT", Value=251)]
       EGMI_ACK_RECORD_SORT = 251,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_DATA_FINISHED", Value=260)]
+      EGMI_ACK_DATA_FINISHED = 260,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_START_OPPNENT", Value=1220)]
       EGMI_REQ_START_OPPNENT = 1220,
             

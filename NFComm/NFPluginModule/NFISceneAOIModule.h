@@ -238,7 +238,13 @@ public:
 		OBJECT_ENTER_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_ENTER_EVENT_FUNCTOR(functor));
 		return AddObjectEnterCallBack(functorPtr);
 	}
-
+	template<typename BaseType>
+	bool AddObjectDataFinishedCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
+	{
+		OBJECT_ENTER_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2);
+		OBJECT_ENTER_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_ENTER_EVENT_FUNCTOR(functor));
+		return AddObjectDataFinishedCallBack(functorPtr);
+	}
 	template<typename BaseType>
 	bool AddObjectLeaveCallBack(BaseType* pBase, int (BaseType::*handler)(const NFDataList&, const NFDataList&))
 	{
@@ -345,6 +351,7 @@ protected:
 	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddPropertyEventCallBack(const PROPERTY_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
 	virtual bool AddRecordEventCallBack(const RECORD_SINGLE_EVENT_FUNCTOR_PTR& cb) = 0;
+	virtual bool AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb) = 0;
 
 	virtual bool AddEnterSceneConditionCallBack(const SCENE_EVENT_FUNCTOR_PTR& cb) = 0;
 

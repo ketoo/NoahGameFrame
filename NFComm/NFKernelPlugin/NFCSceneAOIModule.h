@@ -51,6 +51,7 @@ public:
 
 protected:
 	virtual bool AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
+	virtual bool AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddPropertyEnterCallBack(const PROPERTY_ENTER_EVENT_FUNCTOR_PTR& cb);
 	virtual bool AddRecordEnterCallBack(const RECORD_ENTER_EVENT_FUNCTOR_PTR& cb);
@@ -91,6 +92,8 @@ protected:
 	////////////////interface for broadcast event//////////////////////////////////
 	//broad the data of argvar to self
 	int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
+	int OnObjectListEnterFinished(const NFDataList& self, const NFDataList& argVar);
+
 	int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
 
 	//broad the data of self to argvar 
@@ -104,6 +107,7 @@ protected:
 private:
 
 	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mtObjectEnterCallback;
+	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR> mtObjectDataFinishedCallBack;
 	std::vector<OBJECT_LEAVE_EVENT_FUNCTOR_PTR> mtObjectLeaveCallback;
 
 	std::vector<PROPERTY_ENTER_EVENT_FUNCTOR_PTR> mtPropertyEnterCallback;

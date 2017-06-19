@@ -157,6 +157,12 @@ bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_
 	return true;
 }
 
+bool NFCSceneAOIModule::AddObjectDataFinishedCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
+{
+	mtObjectDataFinishedCallBack.push_back(cb);
+	return true;
+}
+
 bool NFCSceneAOIModule::AddObjectLeaveCallBack(const OBJECT_LEAVE_EVENT_FUNCTOR_PTR & cb)
 {
 	mtObjectLeaveCallback.push_back(cb);
@@ -438,6 +444,8 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 			//tell youself<client>, u want to broad your properties and records to youself
 			OnPropertyEnter(NFDataList() << self, self);
 			OnRecordEnter(NFDataList() << self, self);
+
+			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << self);
 		}
 		else
 		{
@@ -455,11 +463,13 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 			//monster or others need to tell all player
 			OnObjectListEnter(valueAllPlayrObjectList, NFDataList() << self);
 			OnPropertyEnter(valueAllPlayrObjectList, self);
+
+			OnObjectListEnterFinished(valueAllPlayrObjectList, NFDataList() << self);
+
 		}
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-
 	}
 
 	return 0;
@@ -515,6 +525,8 @@ int NFCSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string
 
 			OnPropertyEnter(NFDataList() << self, identOld);
 			OnRecordEnter(NFDataList() << self, identOld);
+
+			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << identOld);
 		}
 
 		//bc others data to u
@@ -524,11 +536,15 @@ int NFCSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string
 
 			OnPropertyEnter(NFDataList() << self, identOld);
 			OnRecordEnter(NFDataList() << self, identOld);
+
+			OnObjectListEnterFinished(NFDataList() << self, NFDataList() << identOld);
 		}
 
 		//bc u data to others
 		OnPropertyEnter(valueAllNewPlayerListNoSelf, self);
 		OnRecordEnter(valueAllNewPlayerListNoSelf, self);
+
+		OnObjectListEnterFinished(valueAllNewPlayerListNoSelf, NFDataList() << self);
 	}
 	else
 	{
@@ -713,6 +729,11 @@ int NFCSceneAOIModule::OnObjectListEnter(const NFDataList & self, const NFDataLi
 		pFunc->operator()(self, argVar);
 	}
 
+	return 0;
+}
+
+int NFCSceneAOIModule::OnObjectListEnterFinished(const NFDataList & self, const NFDataList & argVar)
+{
 	return 0;
 }
 

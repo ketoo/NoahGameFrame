@@ -74,6 +74,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCGameServerNet_ServerModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFCGameServerNet_ServerModule::OnObjectListEnter);
+	m_pSceneAOIModule->AddObjectDataFinishedCallBack(this, &NFCGameServerNet_ServerModule::OnObjectDataFinished);
 	m_pSceneAOIModule->AddObjectLeaveCallBack(this, &NFCGameServerNet_ServerModule::OnObjectListLeave);
 	m_pSceneAOIModule->AddPropertyEnterCallBack(this, &NFCGameServerNet_ServerModule::OnPropertyEnter);
 	m_pSceneAOIModule->AddRecordEnterCallBack(this, &NFCGameServerNet_ServerModule::OnRecordEnter);
@@ -933,6 +934,58 @@ int NFCGameServerNet_ServerModule::OnObjectListEnter(const NFDataList& self, con
 
 		
 		SendMsgPBToGate(NFMsg::EGMI_ACK_OBJECT_ENTRY, xPlayerEntryInfoList, ident);
+	}
+
+	return 1;
+}
+
+int NFCGameServerNet_ServerModule::OnObjectDataFinished(const NFDataList & self, const NFDataList & argVar)
+{
+	if (self.GetCount() <= 0 || argVar.GetCount() <= 0)
+	{
+		return 0;
+	}
+
+	NFMsg::AckPlayerEntryList xPlayerEntryInfoList;
+	for (int i = 0; i < argVar.GetCount(); i++)
+	{
+		NFGUID identOld = argVar.Object(i);
+
+		if (identOld.IsNull())
+		{
+			continue;
+		}
+
+		NFMsg::PlayerEntryInfo* pEntryInfo = xPlayerEntryInfoList.add_object_list();
+		*(pEntryInfo->mutable_object_guid()) = NFINetModule::NFToPB(identOld);
+
+		NFVector3 vPos = m_pKernelModule->GetPropertyVector3(identOld, NFrame::IObject::Position());
+		pEntryInfo->set_x(vPos.X());
+		pEntryInfo->set_y(vPos.Y());
+		pEntryInfo->set_z(vPos.Z());
+		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
+		pEntryInfo->set_player_state(0);
+		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));
+		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID()));
+		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName()));
+
+	}
+
+	if (xPlayerEntryInfoList.object_list_size() <= 0)
+	{
+		return 0;
+	}
+
+	for (int i = 0; i < self.GetCount(); i++)
+	{
+		NFGUID ident = self.Object(i);
+		if (ident.IsNull())
+		{
+			continue;
+		}
+
+
+		SendMsgPBToGate(NFMsg::EGMI_ACK_DATA_FINISHED, xPlayerEntryInfoList, ident);
 	}
 
 	return 1;
