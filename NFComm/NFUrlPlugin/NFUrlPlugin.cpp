@@ -34,7 +34,7 @@ const int NFUrlPlugin::GetPluginVersion()
 
 const std::string NFUrlPlugin::GetPluginName()
 {
-    return GET_CLASS_NAME(NFUrlPlugin)
+	return GET_CLASS_NAME(NFUrlPlugin);
 }
 
 void NFUrlPlugin::Install()
