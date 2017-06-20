@@ -10,6 +10,13 @@
 #pragma comment( lib, "libcurld.lib" )
 #pragma comment( lib, "libprotobuf_d.lib" )
 #pragma comment( lib, "NFMessageDefine_d.lib" )
+#ifdef NF_DYNAMIC_PLUGIN
+#pragma comment( lib, "NFCore_d.lib" )
+
+#else
+#pragma comment( lib, "NFCore_Static_d.lib" )
+#endif
+
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 #pragma comment( lib, "libcurld.a" )
 #pragma comment( lib, "libprotobuf_d.a" )
