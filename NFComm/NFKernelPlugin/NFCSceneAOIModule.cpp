@@ -734,6 +734,14 @@ int NFCSceneAOIModule::OnObjectListEnter(const NFDataList & self, const NFDataLi
 
 int NFCSceneAOIModule::OnObjectListEnterFinished(const NFDataList & self, const NFDataList & argVar)
 {
+	std::vector<OBJECT_ENTER_EVENT_FUNCTOR_PTR>::iterator it = mtObjectDataFinishedCallBack.begin();
+	for (; it != mtObjectDataFinishedCallBack.end(); it++)
+	{
+		OBJECT_ENTER_EVENT_FUNCTOR_PTR& pFunPtr = *it;
+		OBJECT_ENTER_EVENT_FUNCTOR* pFunc = pFunPtr.get();
+		pFunc->operator()(self, argVar);
+	}
+
 	return 0;
 }
 
