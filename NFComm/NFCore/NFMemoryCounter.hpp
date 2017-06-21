@@ -26,7 +26,7 @@ public:
 		mxCounter[mstrClassName]++;
 	}
 
-	~NFMemoryCounter()
+	virtual ~NFMemoryCounter()
 	{
 		mxCounter[mstrClassName]--;
 	}
