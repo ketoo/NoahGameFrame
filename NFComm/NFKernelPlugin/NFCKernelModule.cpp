@@ -1094,78 +1094,7 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 
 bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList& list)
 {
-    NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-    if (pSceneInfo)
-    {
-
-        NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
-        if (pGroupInfo)
-        {
-            NFGUID ident = NFGUID();
-            NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-            while (!ident.IsNull())
-            {
-                list.Add(ident);
-
-                ident = NFGUID();
-                pRet = pGroupInfo->mxPlayerList.Next(ident);
-            }
-
-			ident = NFGUID();
-            pRet = pGroupInfo->mxOtherList.First(ident);
-            while (!ident.IsNull())
-            {
-                list.Add(ident);
-
-                ident = NFGUID();
-                pRet = pGroupInfo->mxOtherList.Next(ident);
-            }
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList & list, const bool bPlayer)
-{
-	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
-	if (pSceneInfo)
-	{
-		NF_SHARE_PTR<NFCSceneGroupInfo> pGroupInfo = pSceneInfo->GetElement(nGroupID);
-		if (pGroupInfo)
-		{
-			if (bPlayer)
-			{
-				NFGUID ident = NFGUID();
-				NF_SHARE_PTR<int> pRet = pGroupInfo->mxPlayerList.First(ident);
-				while (!ident.IsNull())
-				{
-					list.Add(ident);
-
-					ident = NFGUID();
-					pRet = pGroupInfo->mxPlayerList.Next(ident);
-				}
-			}
-			else
-			{
-				NFGUID ident = NFGUID();
-				NF_SHARE_PTR<int> pRet = pGroupInfo->mxOtherList.First(ident);
-				while (!ident.IsNull())
-				{
-					list.Add(ident);
-
-					ident = NFGUID();
-					pRet = pGroupInfo->mxOtherList.Next(ident);
-				}
-			}
-			
-			return true;
-		}
-	}
-
-	return false;
+	return GetGroupObjectList(nSceneID, nGroupID, list, NFGUID());
 }
 
 bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList & list, const bool bPlayer, const NFGUID & noSelf)
@@ -1213,32 +1142,12 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 	return false;
 }
 
-bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string & strClassName, NFDataList & list)
+bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, NFDataList & list, const bool bPlayer)
 {
-	NFDataList xDataList;
-	if (GetGroupObjectList(nSceneID, nGroupID, xDataList))
-	{
-		for (int i = 0; i < xDataList.GetCount(); i++)
-		{
-			NFGUID xID = xDataList.Object(i);
-			if (xID.IsNull())
-			{
-				continue;
-			}
-
-			if (this->GetPropertyString(xID, NFrame::IObject::ClassName()) == strClassName)
-			{
-				list.AddObject(xID);
-			}
-		}
-		
-		return true;
-	}
-
-	return false;
+	return GetGroupObjectList(nSceneID, nGroupID, list, bPlayer, NFGUID());
 }
 
-bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string & strClassName, const NFGUID & noSelf, NFDataList & list)
+bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string & strClassName, NFDataList& list, const NFGUID& noSelf)
 {
 	NFDataList xDataList;
 	if (GetGroupObjectList(nSceneID, nGroupID, xDataList))
@@ -1262,6 +1171,11 @@ bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID,
 	}
 
 	return false;
+}
+
+bool NFCKernelModule::GetGroupObjectList(const int nSceneID, const int nGroupID, const std::string & strClassName, NFDataList & list)
+{
+	return GetGroupObjectList(nSceneID, nGroupID, strClassName, list, NFGUID());
 }
 
 bool NFCKernelModule::LogStack()
