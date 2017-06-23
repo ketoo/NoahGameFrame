@@ -602,7 +602,7 @@ public:
 	static const std::string& TargetX(){ static std::string xTargetX = "TargetX"; return xTargetX; } // float
 	static const std::string& TargetY(){ static std::string xTargetY = "TargetY"; return xTargetY; } // float
 	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
-	static const std::string& MoveType(){ static std::string xMoveType = "MoveType"; return xMoveType; } // int
+	static const std::string& Climb(){ static std::string xClimb = "Climb"; return xClimb; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
 	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
