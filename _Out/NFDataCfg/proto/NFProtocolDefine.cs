@@ -585,7 +585,7 @@ public class NPC
 	public static readonly String TargetX = "TargetX"; // float
 	public static readonly String TargetY = "TargetY"; // float
 	public static readonly String Prefab = "Prefab"; // string
-	public static readonly String MoveType = "MoveType"; // int
+	public static readonly String Climb = "Climb"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
 	public static readonly String DropPackList = "DropPackList"; // string
 	public static readonly String SkillIDRef = "SkillIDRef"; // string
