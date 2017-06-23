@@ -561,7 +561,7 @@ public class NPC {
 	public static final String TargetX = "TargetX"; // float
 	public static final String TargetY = "TargetY"; // float
 	public static final String Prefab = "Prefab"; // string
-	public static final String MoveType = "MoveType"; // int
+	public static final String Climb = "Climb"; // int
 	public static final String AtkDis = "AtkDis"; // float
 	public static final String DropPackList = "DropPackList"; // string
 	public static final String SkillIDRef = "SkillIDRef"; // string

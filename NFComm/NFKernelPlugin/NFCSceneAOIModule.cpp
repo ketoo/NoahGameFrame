@@ -615,25 +615,34 @@ int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string
 
 	if (bTable)
 	{
-		if (pRecord->GetPublic())
+		//upload property can not board to itself
+		if (!pRecord->GetUpload())
 		{
-			m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
-		}
-		else if (pRecord->GetPrivate() && !pRecord->GetUpload())
-		{//upload property can not board to itself
-			valueObject.Add(self);
+			if (pRecord->GetPublic())
+			{
+				m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
+			}
+
+			if (pRecord->GetPrivate())
+			{
+				valueObject.Add(self);
+			}
 		}
 	}
 	else
 	{
-		if (pProperty->GetPublic())
+		//upload property can not board to itself
+		if (!pProperty->GetUpload())
 		{
-			m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
-		}
-		else if (pProperty->GetPrivate() && !pProperty->GetUpload())
-		{
-			//upload property can not board to itself
-			valueObject.Add(self);
+			if (pProperty->GetPublic())
+			{
+				m_pKernelModule->GetGroupObjectList(nObjectContainerID, nObjectGroupID, valueObject, true, self);
+			}
+
+			if (pProperty->GetPrivate())
+			{
+				valueObject.Add(self);
+			}
 		}
 	}
 

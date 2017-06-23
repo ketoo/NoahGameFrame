@@ -12,7 +12,7 @@
 		<Property Id="TargetX" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="TargetY" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="Prefab" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="客户端预设模型"/>
-		<Property Id="MoveType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="Move类型"/>
+		<Property Id="Climb" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="Move类型"/>
 		<Property Id="AtkDis" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="攻击距离"/>
 		<Property Id="DropPackList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="掉落列表"/>
 		<Property Id="SkillIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
