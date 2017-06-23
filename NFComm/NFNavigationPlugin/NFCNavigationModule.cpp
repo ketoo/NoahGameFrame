@@ -26,7 +26,7 @@ bool NFCNavigationModule::Init()
 
 			int sceneId = lexical_cast<int>(strIdList[i]);
 			std::string navigationResPath = m_pElementModule->GetPropertyManager(strId)->GetPropertyString(NFrame::Scene::NavigationResPath());
-			loadNavigation(sceneId, navigationResPath);
+			LoadNavigation(sceneId, navigationResPath);
 
 			//const std::string& strId = strIdList[i];
 			//NFINT64 sceneId = m_pElementModule->GetPropertyManager(strId)->GetPropertyInt(NFrame::Scene::SceneID());// lexical_cast<std::string, INT16>());
@@ -47,36 +47,34 @@ bool NFCNavigationModule::AfterInit()
     return true;
 }
 
-NF_SHARE_PTR<NFCNavigationHandle> NFCNavigationModule::loadNavigation(NFINT64 scendId, ::string resPath)
+NF_SHARE_PTR<NFCNavigationHandle> NFCNavigationModule::LoadNavigation(NFINT64 scendId, string resPath)
 {
 	if (resPath == "")
 		return NULL;
 
-	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = navhandles_.find(scendId);
-	if (iter != navhandles_.end())
+	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = m_Navhandles.find(scendId);
+	if (iter != m_Navhandles.end())
 	{
 		return iter->second;
 	}
 
-	NF_SHARE_PTR<NFCNavigationHandle> pNavigationHandle_ = NULL;
-
-	pNavigationHandle_ = NFCNavigationHandle::create(resPath);
-
-	navhandles_[scendId] = pNavigationHandle_;
-	return pNavigationHandle_;
+	NF_SHARE_PTR<NFCNavigationHandle> pNavigationHandle = NULL;
+	pNavigationHandle = NFCNavigationHandle::Create(resPath);
+	m_Navhandles[scendId] = pNavigationHandle;
+	return pNavigationHandle;
 }
 
-bool NFCNavigationModule::hasNavigation(NFINT64 scendId)
+bool NFCNavigationModule::ExistNavigation(NFINT64 scendId)
 {
-	return navhandles_.find(scendId) != navhandles_.end();
+	return m_Navhandles.find(scendId) != m_Navhandles.end();
 }
 
-bool NFCNavigationModule::removeNavigation(NFINT64 scendId)
+bool NFCNavigationModule::RemoveNavigation(NFINT64 scendId)
 {
-	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = navhandles_.find(scendId);
-	if (navhandles_.find(scendId) != navhandles_.end())
+	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = m_Navhandles.find(scendId);
+	if (m_Navhandles.find(scendId) != m_Navhandles.end())
 	{
-		navhandles_.erase(iter);
+		m_Navhandles.erase(iter);
 
 		std::ostringstream strLog;
 		strLog << "Navigation::removeNavigation: (" << scendId << ") is destroyed!\n";
@@ -87,39 +85,48 @@ bool NFCNavigationModule::removeNavigation(NFINT64 scendId)
 	return false;
 }
 
-NF_SHARE_PTR<NFCNavigationHandle> NFCNavigationModule::findNavigation(NFINT64 scendId)
+NF_SHARE_PTR<NFCNavigationHandle> NFCNavigationModule::FindNavigation(NFINT64 scendId)
 {
-	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = navhandles_.find(scendId);
-	if (navhandles_.find(scendId) != navhandles_.end())
+	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>>::iterator iter = m_Navhandles.find(scendId);
+	if (m_Navhandles.find(scendId) != m_Navhandles.end())
 	{
 		if (iter->second == NULL)
+		{
 			return NULL;
-
+		}
 		return iter->second;
 	}
-
 	return NULL;
 }
 
-int NFCNavigationModule::findStraightPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
+int NFCNavigationModule::FindPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
 {
-	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = findNavigation(scendId);
+	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = FindNavigation(scendId);
 	if (pNavMeshHandle)
-		return pNavMeshHandle->findStraightPath(start, end, paths);
+	{
+		return pNavMeshHandle->FindStraightPath(start, end, paths);
+	}
+	return 0;
 }
 
-int NFCNavigationModule::findRandomPointAroundCircle(NFINT64 scendId, const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius)
+int NFCNavigationModule::FindRandomPointAroundCircle(NFINT64 scendId, const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius)
 {
-	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = findNavigation(scendId);
+	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = FindNavigation(scendId);
 	if (pNavMeshHandle)
-		return pNavMeshHandle->findRandomPointAroundCircle(centerPos, points, max_points, maxRadius);
+	{
+		return pNavMeshHandle->FindRandomPointAroundCircle(centerPos, points, max_points, maxRadius);
+	}
+	return 0;
 }
 
-int NFCNavigationModule::raycast(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec)
+int NFCNavigationModule::Raycast(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec)
 {
-	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = findNavigation(scendId);
+	NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = FindNavigation(scendId);
 	if (pNavMeshHandle)
-		return pNavMeshHandle->raycast(start, end, hitPointVec);
+	{
+		return pNavMeshHandle->Raycast(start, end, hitPointVec);
+	}
+	return 0;
 }
 
 bool NFCNavigationModule::BeforeShut()
