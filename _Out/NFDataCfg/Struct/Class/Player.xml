@@ -8,7 +8,7 @@
 		<Property Id="HomeSceneID" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="玩家下线的时候需要保存上次在线的场景"/>
 		<Property Id="Level" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="等级"/>
 		<Property Id="ShowName" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="显示的名字"/>
-		<Property Id="PrefabPath" Type="string" Public="1" Private="0" Save="0" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
+		<Property Id="PrefabPath" Type="string" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="预设路径"/>
 		<Property Id="FirstTarget" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="首要目标"/>
 		<Property Id="CharType" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="角色类型"/>
 		<Property Id="Job" Type="int" Public="1" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="职业"/>
