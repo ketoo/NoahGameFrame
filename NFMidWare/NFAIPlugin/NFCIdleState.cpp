@@ -6,20 +6,17 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "../NFCAIModule.h"
-#include "../NFAIPlugin.h"
+#include "NFIStateMachine.h"
+#include "NFCIdleState.h"
 
 NFCIdleState::NFCIdleState(float fHeartBeatTime, NFIPluginManager* p)
-    : NFIState(IdleState, fHeartBeatTime, p)
+	: NFIState(IdleState, fHeartBeatTime, p)
 {
-    //任何对象出生后先进入Idle状态，这里初始化静态变量指针
-
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>("NFCKernelModule");
-    m_pAIModule = dynamic_cast<NFIAIModule*>(pPluginManager->FindModule("NFCAIModule"));
-    m_pMoveModule = dynamic_cast<NFIMoveModule*>(pPluginManager->FindModule("NFCMoveModule"));
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>("NFCElementInfoModule");
-
-    m_pHateModule = m_pAIModule->GetHateModule();
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
+    m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
 }
 
 NFCIdleState::~NFCIdleState()
@@ -27,37 +24,32 @@ NFCIdleState::~NFCIdleState()
 
 }
 
-bool NFCIdleState::Enter(const NFGUID& self)
+bool NFCIdleState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Enter(self))
+    if (!NFIState::Enter(self, pStateMachine))
     {
-        NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
-        if (pStateMachine)
-        {
+
 			//看是否有战斗能力
             switch (pStateMachine->LastState())
             {
                 case NFAI_STATE::FightState:
                     //找人继续打
-                    Execute(self);
+                    Execute(self, pStateMachine);
                     break;
 
                 default:
                     break;
             }
-        }
     }
 
     return true;
 }
 
-bool NFCIdleState::Execute(const NFGUID& self)
+bool NFCIdleState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Execute(self))
+    if (!NFIState::Execute(self, pStateMachine))
     {
-        NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
-        if (pStateMachine)
-        {
+
             //查找是否有可以攻击的对象
             NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
@@ -71,20 +63,19 @@ bool NFCIdleState::Execute(const NFGUID& self)
                     RandomIdle(self, pStateMachine);
                 }
             }
-        }
     }
 
     return true;
 }
 
-bool NFCIdleState::Exit(const NFGUID& self)
+bool NFCIdleState::Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 
 
     return true;
 }
 
-bool NFCIdleState::DoRule(const NFGUID& self)
+bool NFCIdleState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     return true;
 }

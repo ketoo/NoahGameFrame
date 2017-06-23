@@ -9,13 +9,12 @@
 #ifndef NFC_AI_MODULE_H
 #define NFC_AI_MODULE_H
 
-#include "NFIHateModule.h"
 #include "NFIStateMachine.h"
 #include "NFComm/NFPluginModule/NFIMoveModule.h"
 #include "NFComm/NFPluginModule/NFIAIModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
-#include "NFComm/NFPluginModule/NFIElementInfoModule.h"
-#include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFComm/NFPluginModule/NFIElementModule.h"
+#include "NFComm/NFPluginModule/NFIHateModule.h"
 
 class NFCAIModule
     : public NFIAIModule
@@ -35,43 +34,34 @@ public:
 
     virtual bool Execute();
 
-    virtual void OnReload(const char* pstrModuleName, NFIModule* pModule);
-
-    virtual NFIState* GetState(const int eState) ;
-
-    virtual NFIStateMachine* GetStateMachine(const NFGUID& self);
-
-    virtual NFIHateModule* GetHateModule();
-    virtual NFIKernelModule* GetKernelModule();
-    //找可视范围内的所有人
-
-
-    int CanUseAnySkill(const NFGUID& self, const NFGUID& other);
-
-    float UseAnySkill(const NFGUID& self, const NFGUID& other);
 protected:
+	int CanUseAnySkill(const NFGUID& self, const NFGUID& other);
 
-    virtual bool CreateAIObject(const NFGUID& self);
+	float UseAnySkill(const NFGUID& self, const NFGUID& other);
+    
+	bool CreateAIObject(const NFGUID& self);
 
-    virtual bool DelAIObject(const NFGUID& self);
+    bool DelAIObject(const NFGUID& self);
 
     //////////////////////////////////////////////////////////////////////////
-    virtual int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+    int OnAIObjectEvent(const NFGUID& self, const std::string& strClassNames, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
     //////////////////////////////////////////////////////////////////////////
 
-    virtual void OnBeKilled(const NFGUID& self, const NFGUID& other);
+    void OnBeKilled(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue);
+    void OnBeAttack(const NFGUID& self, const NFGUID& other, const int nDamageValue);
 
-    virtual void OnSpring(const NFGUID& self, const NFGUID& other);
+    void OnSpring(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnEndSpring(const NFGUID& self, const NFGUID& other);
+    void OnEndSpring(const NFGUID& self, const NFGUID& other);
 
-    virtual void OnMotion(const NFGUID& self, int nResults);
+    void OnMotion(const NFGUID& self, int nResults);
 
-    virtual void OnSelect(const NFGUID& self, const NFGUID& other);
+    void OnSelect(const NFGUID& self, const NFGUID& other);
 
+	NFIStateMachine* GetStateMachine(const NFGUID& self);
+	NFIState* GetState(const NFAI_STATE eState);
 
 private:
     //状态机
@@ -83,7 +73,6 @@ private:
 
     NFIHateModule* m_pHateModule;
     NFIKernelModule* m_pKernelModule;
-    NFIEventProcessModule* m_pEventProcessModule;
 };
 
 #endif

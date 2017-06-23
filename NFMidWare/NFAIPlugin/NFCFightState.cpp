@@ -6,22 +6,32 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "../NFCAIModule.h"
+#include "NFIStateMachine.h"
+#include "NFCFightState.h"
 
-bool NFCFightState::Enter(const NFGUID& self)
+NFCFightState::NFCFightState(float fHeartBeatTime, NFIPluginManager* p)
+	: NFIState(FightState, fHeartBeatTime, p)
 {
-    if (!NFIState::Enter(self))
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
+	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
+}
+
+bool NFCFightState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
+{
+    if (!NFIState::Enter(self, pStateMachine))
     {
-        Execute(self);
+        Execute(self, pStateMachine);
     }
 
     return true;
 }
 
-bool NFCFightState::Execute(const NFGUID& self)
+bool NFCFightState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
-
+	/*
 	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
     NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
     if (!ident.IsNull())
@@ -77,35 +87,35 @@ bool NFCFightState::Execute(const NFGUID& self)
 		//目标挂了什么的,或者没目标
 		pStateMachine->ChangeState(IdleState);
 	}
+	*/
 
     return true;
 }
 
-bool NFCFightState::Exit(const NFGUID& self)
+bool NFCFightState::Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 
     return true;
 }
 
-bool NFCFightState::DoRule(const NFGUID& self)
+bool NFCFightState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     return true;
 }
 
-bool NFCFightState::RunInFightArea(const NFGUID& self)
+bool NFCFightState::RunInFightArea(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     //需要回调知道已经走到了,moving事件
     return true;
 }
 
-bool NFCFightState::RunCloseTarget(const NFGUID& self, const NFGUID& target)
+bool NFCFightState::RunCloseTarget(const NFGUID& self, const NFGUID& target, NFIStateMachine* pStateMachine)
 {
     return true;
 }
 
 int NFCFightState::OnSkillConsumeTime( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
-	m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_IDLE);
 	
 	return 0;
 }

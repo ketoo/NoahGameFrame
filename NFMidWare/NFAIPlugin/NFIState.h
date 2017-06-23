@@ -10,14 +10,7 @@
 #define NFI_STATE_H
 
 #include "NFComm/NFCore/NFDataList.hpp"
-
-class NFIMoveModule;
-class NFIAIModule;
-class NFIHateModule;
-class NFIKernelModule;
-class NFIEventProcessModule;
-class NFIElementInfoModule;
-class NFIPluginManager;
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 //所有的状态
 enum NFAI_MOVE_TYPE
@@ -39,7 +32,10 @@ enum NFAI_STATE
     DeadState,                  // 死亡状态
 };
 
+class NFIStateMachine;
+
 class NFIState
+	: public NFIModule
 {
 public:
     NFIState(NFAI_STATE eState, const float fHeartBeatTime, NFIPluginManager* p)
@@ -53,23 +49,23 @@ public:
     {
     }
 
-    virtual bool DoRule(const NFGUID& self)
+    virtual bool DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
     {
         //返回true表示基类处理过，上面就别处理了
         return false;
     }
 
-    virtual bool Enter(const NFGUID& self)
+    virtual bool Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
     {
         return false;
     }
 
-    virtual bool Execute(const NFGUID& self)
+    virtual bool Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
     {
         return false;
     }
 
-    virtual bool Exit(const NFGUID& self)
+    virtual bool Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
     {
         return false;
     }
@@ -85,33 +81,8 @@ public:
     }
 
 protected:
-
-    virtual bool DoEnterScript(const NFGUID& self)
-    {
-        return true;
-    }
-
-    virtual bool DoExecuteScript(const NFGUID& self)
-    {
-        return true;
-    }
-
-    virtual bool DoExitScript(const NFGUID& self)
-    {
-        return true;
-    }
-
-protected:
     NFAI_STATE  meState;
     float               mfHeartBeatTime;
-    NFIPluginManager* pPluginManager;
-
-    NFIAIModule* m_pAIModule;
-    NFIHateModule* m_pHateModule;
-    NFIKernelModule* m_pKernelModule;
-    NFIMoveModule* m_pMoveModule;
-    NFIElementInfoModule* m_pElementInfoModule;
-
 };
 
 #endif

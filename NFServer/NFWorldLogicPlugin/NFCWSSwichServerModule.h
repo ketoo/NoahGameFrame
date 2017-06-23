@@ -44,7 +44,7 @@ private:
 	NFINetModule*				m_pNetModule;
     NFIKernelModule*			m_pKernelModule;
     NFILogModule*				m_pLogModule;
-	NFIElementModule*			m_pElementInfoModule;
+	NFIElementModule*			m_pElementModule;
 	NFIWorldNet_ServerModule*	m_pWorlNet_ServerModule;
 };
 
