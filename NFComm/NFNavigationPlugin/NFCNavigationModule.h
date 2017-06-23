@@ -86,7 +86,7 @@ public:
 		dtFreeNavMeshQuery(navmeshLayer.pNavmeshQuery);
 	};
 
-	int findStraightPath(const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
+	int FindStraightPath(const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths)
 	{
 		dtNavMeshQuery* navmeshQuery = navmeshLayer.pNavmeshQuery;
 
@@ -155,7 +155,7 @@ public:
 		return pos;
 	}
 
-	int findRandomPointAroundCircle(const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius)
+	int FindRandomPointAroundCircle(const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius)
 	{
 		dtNavMeshQuery* navmeshQuery = navmeshLayer.pNavmeshQuery;
 
@@ -240,7 +240,7 @@ public:
 		return (int)points.size();
 	}
 
-	int raycast(const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec)
+	int Raycast(const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec)
 	{
 		dtNavMeshQuery* navmeshQuery = navmeshLayer.pNavmeshQuery;
 
@@ -304,7 +304,7 @@ public:
 		return 1;
 	}
 
-	static NF_SHARE_PTR<NFCNavigationHandle> create(std::string resPath)
+	static NF_SHARE_PTR<NFCNavigationHandle> Create(std::string resPath)
 	{
 		FILE* fp = fopen(resPath.c_str(), "rb");
 		if (!fp)
@@ -479,7 +479,6 @@ public:
 	}
 
 	NavmeshLayer navmeshLayer;
-
 	std::string resPath;
 };
 
@@ -502,26 +501,26 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 
-	NF_SHARE_PTR<NFCNavigationHandle> loadNavigation(NFINT64 scendId, std::string resPath);
+	NF_SHARE_PTR<NFCNavigationHandle> LoadNavigation(NFINT64 scendId, std::string resPath);
 
-	NF_SHARE_PTR<NFCNavigationHandle> findNavigation(NFINT64 scendId);
+	NF_SHARE_PTR<NFCNavigationHandle> FindNavigation(NFINT64 scendId);
 
-	virtual bool hasNavigation(NFINT64 scendId);
+	virtual bool ExistNavigation(NFINT64 scendId);
 
-	virtual bool removeNavigation(NFINT64 scendId);
+	virtual bool RemoveNavigation(NFINT64 scendId);
 
-	virtual int findStraightPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths);
+	virtual int FindPath(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& paths);
 
-	virtual int findRandomPointAroundCircle(NFINT64 scendId, const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius);
+	virtual int FindRandomPointAroundCircle(NFINT64 scendId, const NFVector3& centerPos, std::vector<NFVector3>& points, NFINT32 max_points, float maxRadius);
 
-	virtual int raycast(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec);
+	virtual int Raycast(NFINT64 scendId, const NFVector3& start, const NFVector3& end, std::vector<NFVector3>& hitPointVec);
 
 private:
 	NFILogModule* m_pLogModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;
 
-	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>> navhandles_;
+	std::unordered_map<NFINT64, NF_SHARE_PTR<NFCNavigationHandle>> m_Navhandles;
 };
 
 #endif
