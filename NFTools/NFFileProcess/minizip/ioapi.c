@@ -118,7 +118,7 @@ static voidpf file_build_ioposix(FILE *file, const char *filename)
         return NULL;
     ioposix = (FILE_IOPOSIX*)malloc(sizeof(FILE_IOPOSIX));
     ioposix->file = file;
-    ioposix->filenameLength = strlen(filename) + 1;
+    ioposix->filenameLength = (int)strlen(filename) + 1;
     ioposix->filename = (char*)malloc(ioposix->filenameLength * sizeof(char));
     strncpy(ioposix->filename, filename, ioposix->filenameLength);
     return (voidpf)ioposix;
