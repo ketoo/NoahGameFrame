@@ -6,36 +6,33 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "../NFCAIModule.h"
+#include "NFIStateMachine.h"
+#include "NFCPatrolState.h"
 
 NFCPatrolState::NFCPatrolState(float fHeartBeatTime, NFIPluginManager* p)
-    : NFIState(PatrolState, fHeartBeatTime, p)
+	: NFIState(PatrolState, fHeartBeatTime, p)
 {
-    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>(NFCKernelModule);
-    m_pAIModule = pPluginManager->FindModule<NFIAIModule>"NFCAIModule);
-    m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>"NFCMoveModule);
-    m_pElementInfoModule = pPluginManager->FindModule<NFIElementInfoModule>(NFCElementInfoModule);
-
-    m_pHateModule = m_pAIModule->GetHateModule();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
+	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
 }
 
-bool NFCPatrolState::Enter(const NFGUID& self)
+bool NFCPatrolState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Enter(self))
+    if (!NFIState::Enter(self, pStateMachine))
     {
-        RandomPatrol(self);
+        RandomPatrol(self, pStateMachine);
     }
 
     return true;
 }
 
-bool NFCPatrolState::Execute(const NFGUID& self)
+bool NFCPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    if (!NFIState::Execute(self))
+    if (!NFIState::Execute(self, pStateMachine))
     {
-        NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
-        if (pStateMachine)
-        {
 			NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
 			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
@@ -66,32 +63,31 @@ bool NFCPatrolState::Execute(const NFGUID& self)
 					}
 					else
 					{
-						RandomPatrol(self);
+						RandomPatrol(self, pStateMachine);
 					}
 				}
 				break;
 			default:
 				break;
 			}
-        }
     }
 
     return true;
 }
 
-bool NFCPatrolState::Exit(const NFGUID& self)
+bool NFCPatrolState::Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 
     return true;
 }
 
-bool NFCPatrolState::DoRule(const NFGUID& self)
+bool NFCPatrolState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 
     return true;
 }
 
-bool NFCPatrolState::RandomPatrol(const NFGUID& self)
+bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     //首先，得看有没路径
 
@@ -100,7 +96,7 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self)
     const std::string& strNPCID = m_pKernelModule->GetPropertyString(self, "ConfigID");
     if (!strConfigID.empty())
     {
-		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementInfoModule->GetPropertyManager(strConfigID);
+		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pElementModule->GetPropertyManager(strConfigID);
 		if (xPropertyManager)
 		{
 			NF_SHARE_PTR<NFIProperty> xPropertyX =  xPropertyManager->GetElement("SeedX");
@@ -122,18 +118,18 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self)
 			//if (fCurX > 0.0f && fCurZ > 0.0f)
 			{
 				//看能否寻路，不能寻路则重来
-				NFObjectStateType eStateType = NFObjectStateType::NOST_RUN;
+				NFAI_STATE eStateType = NFAI_STATE::ChaseState;
 				float fRand = (float)(rand() / double(RAND_MAX));
 				if (fRand < 0.5f)
 				{
-					eStateType = NFObjectStateType::NOST_WALK;
+					eStateType = NFAI_STATE::ChaseState;
 				}
 
 				NFDataList valueList;
 				valueList.AddFloat(fCurX);
 				valueList.AddFloat(fCurY);
 				valueList.AddFloat(fCurZ);
-				m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_REQUIRE_MOVE, valueList);
+				//m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_REQUIRE_MOVE, valueList);
 
 				m_pKernelModule->SetPropertyFloat(self, "X", fCurX);
 				m_pKernelModule->SetPropertyFloat(self, "Y", fCurY);

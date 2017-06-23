@@ -12,7 +12,7 @@ bool NFCWSSwichServerModule::Init()
 {
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pElementInfoModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pWorlNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 

@@ -6,11 +6,22 @@
 //    @Desc             :
 // -------------------------------------------------------------------------
 
-#include "../NFCAIModule.h"
+#include "NFIStateMachine.h"
+#include "NFCChaseState.h"
 
-bool NFCChaseState::Enter(const NFGUID& self)
+NFCChaseState::NFCChaseState(float fHeartBeatTime, NFIPluginManager* p)
+	: NFIState(ChaseState, fHeartBeatTime, p)
 {
-    if (!NFIState::Enter(self))
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
+	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
+}
+
+bool NFCChaseState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
+{
+    if (!NFIState::Enter(self, pStateMachine))
     {
         // TODO
     }
@@ -18,8 +29,9 @@ bool NFCChaseState::Enter(const NFGUID& self)
     return true;
 }
 
-bool NFCChaseState::Execute(const NFGUID& self)
+bool NFCChaseState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
+	/*
     if (!NFIState::Execute(self))
     {
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
@@ -59,16 +71,16 @@ bool NFCChaseState::Execute(const NFGUID& self)
             }
         }
     }
-
+	*/
     return true;
 }
 
-bool NFCChaseState::Exit(const NFGUID& self)
+bool NFCChaseState::Exit(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     return true;
 }
 
-bool NFCChaseState::DoRule(const NFGUID& self)
+bool NFCChaseState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
     return true;
 }

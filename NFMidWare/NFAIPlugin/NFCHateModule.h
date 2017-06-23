@@ -12,9 +12,7 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include "NFIHateModule.h"
-
-class NFIPluginManager;
+#include "NFComm/NFPluginModule/NFIHateModule.h"
 
 class NFCHateModule
     : public NFIHateModule
