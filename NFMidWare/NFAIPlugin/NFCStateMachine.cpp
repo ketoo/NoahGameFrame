@@ -7,19 +7,22 @@
 // -------------------------------------------------------------------------
 
 #include "NFCStateMachine.h"
-#include "NFCAIModule.h"
 
-NFCStateMachine::NFCStateMachine(const NFGUID& self, NFIAIModule* pControl)
+NFCStateMachine::NFCStateMachine(const NFGUID& self, NFIPluginManager* p)
     : mOwnerID(self),
-      meCurrentState(PatrolState), // 默认一开始就巡逻
-      meLastState(IdleState),
-      m_pAIControlInterface(pControl)
+      meCurrentState(PatrolState),
+      meLastState(IdleState)
 {
-    NFIState* pState = m_pAIControlInterface->GetState(CurrentState());
+	pPluginManager = p;
+
+    NFIState* pState = GetState(CurrentState());
     mfHeartBeatTime = pState->GetHeartBeatTime();
 
-    m_pKernelModule = pControl->GetKernelModule();
-    assert(NULL != m_pKernelModule);
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pAIModule = pPluginManager->FindModule<NFIAIModule>();
+	m_pMoveModule = pPluginManager->FindModule<NFIMoveModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pHateModule = pPluginManager->FindModule<NFIHateModule>();
 }
 
 NFCStateMachine::~NFCStateMachine()
@@ -27,7 +30,7 @@ NFCStateMachine::~NFCStateMachine()
 
 }
 
-void NFCStateMachine::Execute()
+bool NFCStateMachine::Execute()
 {
     //same for the current state
     if (State_Error != meCurrentState)
@@ -38,8 +41,8 @@ void NFCStateMachine::Execute()
         }
         else
         {
-            NFIState* pState = m_pAIControlInterface->GetState(meCurrentState);
-            pState->Execute(mOwnerID);
+            NFIState* pState = GetState(meCurrentState);
+            pState->Execute(mOwnerID, this);
 
             //设置心跳时间
             NFDataList xDataList;
@@ -48,19 +51,26 @@ void NFCStateMachine::Execute()
             mfHeartBeatTime = pState->GetHeartBeatTime() + xDataList.Int(0);
         }
     }
+
+	return true;
+}
+
+NFIState * NFCStateMachine::GetState(const NFAI_STATE eState) const
+{
+	return nullptr;
 }
 
 void NFCStateMachine::ChangeState(const NFAI_STATE eNewState)
 {
     meLastState = meCurrentState;
 
-    NFIState* pState = m_pAIControlInterface->GetState(meCurrentState);
-    pState->Exit(mOwnerID);
+    NFIState* pState = GetState(meCurrentState);
+    pState->Exit(mOwnerID, this);
 
     meCurrentState = eNewState;
 
-    pState = m_pAIControlInterface->GetState(meCurrentState);
-    pState->Enter(mOwnerID);
+    pState = GetState(meCurrentState);
+    pState->Enter(mOwnerID, this);
 
     //心跳
     mfHeartBeatTime = pState->GetHeartBeatTime();

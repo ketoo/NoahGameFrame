@@ -1,61 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Include">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Src">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="NFAIPlugin.h" />
-    <ClInclude Include="Include\NFCDeadState.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NFCFightState.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NFCIdleState.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NFCPatrolState.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\NFIState.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="NFIStateMachine.h" />
-    <ClInclude Include="NFIHateModule.h" />
-    <ClInclude Include="NFCStateMachine.h" />
     <ClInclude Include="NFCHateModule.h" />
     <ClInclude Include="NFCAIModule.h" />
-    <ClInclude Include="Include\NFCChaseState.h">
-      <Filter>Include</Filter>
+    <ClInclude Include="NFIState.h" />
+    <ClInclude Include="NFCChaseState.h">
+      <Filter>StateMahine</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCDeadState.h">
+      <Filter>StateMahine</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCFightState.h">
+      <Filter>StateMahine</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCIdleState.h">
+      <Filter>StateMahine</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCPatrolState.h">
+      <Filter>StateMahine</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCStateMachine.h">
+      <Filter>StateMahine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFAIPlugin.cpp" />
-    <ClCompile Include="Src\NFCDeadState.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\NFCFightState.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\NFCIdleState.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\NFCPatrolState.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
     <ClCompile Include="NFCHateModule.cpp" />
-    <ClCompile Include="NFCStateMachine.cpp" />
     <ClCompile Include="NFCAIModule.cpp" />
-    <ClCompile Include="Src\NFCChaseState.cpp">
-      <Filter>Src</Filter>
+    <ClCompile Include="NFCChaseState.cpp">
+      <Filter>StateMahine</Filter>
     </ClCompile>
+    <ClCompile Include="NFCDeadState.cpp">
+      <Filter>StateMahine</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCFightState.cpp">
+      <Filter>StateMahine</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCIdleState.cpp">
+      <Filter>StateMahine</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCPatrolState.cpp">
+      <Filter>StateMahine</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCStateMachine.cpp">
+      <Filter>StateMahine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="StateMahine">
+      <UniqueIdentifier>{4b3d00b7-2338-419b-9745-5b92e857f7c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
