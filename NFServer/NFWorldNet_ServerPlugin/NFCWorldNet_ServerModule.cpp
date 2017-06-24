@@ -33,6 +33,10 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
 
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_REGISTERED, this, &NFCWorldNet_ServerModule::OnAIServerRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnAIServerUnRegisteredProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTranspondServerReport);
@@ -237,6 +241,83 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockIn
 
         SynGameToProxy(nSockIndex);
     }
+}
+
+void NFCWorldNet_ServerModule::OnAIServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mProxyMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI Registered");
+
+		SynGameToProxy(nSockIndex);
+	}
+}
+
+void NFCWorldNet_ServerModule::OnAIServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		mGameMap.RemoveElement(xData.server_id());
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI UnRegistered");
+	}
+}
+
+void NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	NFGUID nPlayerID;
+	NFMsg::ServerInfoReportList xMsg;
+	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	{
+		return;
+	}
+
+	for (int i = 0; i < xMsg.server_list_size(); ++i)
+	{
+		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
+
+		NF_SHARE_PTR<ServerData> pServerData = mProxyMap.GetElement(xData.server_id());
+		if (!pServerData)
+		{
+			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
+			mProxyMap.AddElement(xData.server_id(), pServerData);
+		}
+
+		pServerData->nFD = nSockIndex;
+		*(pServerData->pData) = xData;
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI Registered");
+
+		SynGameToProxy(nSockIndex);
+	}
 }
 
 int NFCWorldNet_ServerModule::OnLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

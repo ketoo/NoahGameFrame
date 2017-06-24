@@ -12,6 +12,8 @@ chmod -R 777  NFPluginLoader_d
 
 ./NFPluginLoader_d -d PluginX.xml Server=GameServer ID=6
 
+./NFPluginLoader_d -d PluginX.xml Server=AIerver ID=8
+
 ./NFPluginLoader_d -d PluginX.xml Server=ProxyServer ID=5
 
 ps -A|grep NF

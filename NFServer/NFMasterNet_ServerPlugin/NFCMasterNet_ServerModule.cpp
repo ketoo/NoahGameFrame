@@ -483,6 +483,15 @@ void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, c
 			mGameMap.AddElement(msg.server_id(), pServerData);
 		}
 	}
+	else if (msg.server_type() == NF_SERVER_TYPES::NF_ST_AI)
+	{
+		pServerData = mGameMap.GetElement(msg.server_id());
+		if (!pServerData)
+		{
+			pServerData = std::shared_ptr<ServerData>(new ServerData());
+			mGameMap.AddElement(msg.server_id(), pServerData);
+		}
+	}
 
 	//udate status
 	pServerData->nFD = nFd;
