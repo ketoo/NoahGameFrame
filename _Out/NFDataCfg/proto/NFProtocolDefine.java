@@ -910,6 +910,7 @@ public class Scene {
 	public static final String CamOffestPos = "CamOffestPos"; // string
 	public static final String CamOffestRot = "CamOffestRot"; // string
 	public static final String SyncObject = "SyncObject"; // int
+	public static final String NavigationResPath = "NavigationResPath"; // string
 	// Record
 
 }

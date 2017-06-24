@@ -17,6 +17,7 @@
 		<Property Id="CamOffestPos" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="CamOffestRot" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc=""/>
 		<Property Id="SyncObject" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="是否同步对象"/>
+		<Property Id="NavigationResPath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="导航数据路径"/>
 	</Propertys>
 	<Records/>
 	<Components/>

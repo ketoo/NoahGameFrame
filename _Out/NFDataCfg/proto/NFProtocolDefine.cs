@@ -936,6 +936,7 @@ public class Scene
 	public static readonly String CamOffestPos = "CamOffestPos"; // string
 	public static readonly String CamOffestRot = "CamOffestRot"; // string
 	public static readonly String SyncObject = "SyncObject"; // int
+	public static readonly String NavigationResPath = "NavigationResPath"; // string
 	// Record
 
 }
