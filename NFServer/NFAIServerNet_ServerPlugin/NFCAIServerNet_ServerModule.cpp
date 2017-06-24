@@ -69,7 +69,7 @@ bool NFCAIServerNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCAIServerNet_ServerModule::OnSocketPSEvent);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerNet_ServerModule::OnPlayerClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerNet_ServerModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFCAIServerNet_ServerModule::OnObjectListEnter);
 	m_pSceneAOIModule->AddObjectDataFinishedCallBack(this, &NFCAIServerNet_ServerModule::OnObjectDataFinished);
@@ -1024,24 +1024,11 @@ int NFCAIServerNet_ServerModule::OnObjectListLeave(const NFDataList& self, const
 	return 1;
 }
 
-int NFCAIServerNet_ServerModule::OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFCAIServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
-		//only just to tell client, now player can enter world(without data) and you can start to load scene or mesh
-		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
-		if (pDataBase)
-		{
-			const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-
-			NFMsg::AckEventResult xMsg;
-			xMsg.set_event_code((NFMsg::EGameEventCode)nSceneID);
-
-			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
-			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
-
-			SendMsgPBToGate(NFMsg::EGMI_ACK_ENTER_GAME, xMsg, self);
-		}
+		
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{

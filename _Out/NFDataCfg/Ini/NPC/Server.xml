@@ -5,6 +5,7 @@
 	<Object Id="ProxyServer_1" ServerID="5" Name="ProxyServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="15001" Type="5" Area="1"/>
 	<Object Id="MasterServer_1" ServerID="3" Name="MasterServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="13001" Type="3" Area="1"/>
 	<Object Id="LoginServer_1" ServerID="4" Name="LoginServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" Type="4" Area="1"/>
+	<Object Id="AIServer_1" ServerID="8" Name="AIServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="18001" Type="8" Area="1"/>
 	<Object Id="TutorialServer_1" ServerID="0" Name="TutorialServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="14001" Type="4" Area="1"/>
 </XML>
 
