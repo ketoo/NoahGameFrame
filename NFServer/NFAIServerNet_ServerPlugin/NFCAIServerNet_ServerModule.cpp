@@ -18,7 +18,6 @@ bool NFCAIServerNet_ServerModule::Init()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
 	m_pNetClientModule = pPluginManager->FindModule<NFINetClientModule>();
 
@@ -70,7 +69,7 @@ bool NFCAIServerNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCAIServerNet_ServerModule::OnSocketPSEvent);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerNet_ServerModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerNet_ServerModule::OnPlayerClassEvent);
 
 	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFCAIServerNet_ServerModule::OnObjectListEnter);
 	m_pSceneAOIModule->AddObjectDataFinishedCallBack(this, &NFCAIServerNet_ServerModule::OnObjectDataFinished);
@@ -1025,7 +1024,7 @@ int NFCAIServerNet_ServerModule::OnObjectListLeave(const NFDataList& self, const
 	return 1;
 }
 
-int NFCAIServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
+int NFCAIServerNet_ServerModule::OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
 	if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
