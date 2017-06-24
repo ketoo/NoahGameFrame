@@ -76,6 +76,10 @@ protected:
     void OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+	void OnAIServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAIServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRefreshAIServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
     int OnLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     //////////////////////////////////////////////////////////////////////////
 

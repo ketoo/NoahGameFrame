@@ -18,6 +18,11 @@ choice /t 2 /d y /n >nul
 echo Starting NFGameServer...
 start "NFGameServer" "NFPluginLoader.exe" "Server=GameServer" "ID=6" "PluginX.xml"
 
+choice /t 2 /d y /n >nul
+
+echo Starting NFAIServer...
+start "NFAIServer" "NFPluginLoader.exe" "Server=AIServer" "ID=8" "PluginX.xml"
+
 choice /t 4 /d y /n >nul
 
 echo Starting NFProxyServer...
