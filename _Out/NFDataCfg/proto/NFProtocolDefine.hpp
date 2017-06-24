@@ -955,6 +955,7 @@ public:
 	static const std::string& CamOffestPos(){ static std::string xCamOffestPos = "CamOffestPos"; return xCamOffestPos; } // string
 	static const std::string& CamOffestRot(){ static std::string xCamOffestRot = "CamOffestRot"; return xCamOffestRot; } // string
 	static const std::string& SyncObject(){ static std::string xSyncObject = "SyncObject"; return xSyncObject; } // int
+	static const std::string& NavigationResPath(){ static std::string xNavigationResPath = "NavigationResPath"; return xNavigationResPath; } // string
 	// Record
 
 };
