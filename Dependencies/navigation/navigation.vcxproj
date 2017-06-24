@@ -141,9 +141,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="DetourAlloc.cpp" />
     <ClCompile Include="DetourCommon.cpp" />
     <ClCompile Include="DetourCrowd.cpp" />
