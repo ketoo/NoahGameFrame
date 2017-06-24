@@ -54,6 +54,16 @@
     	<ConfigPath Name="../" />		
 	</WorldServer>
 	
+	<AIServer>
+		<Plugin Name="NFNetPlugin" />
+		<Plugin Name="NFKernelPlugin" />
+		<Plugin Name="NFConfigPlugin" />
+		<Plugin Name="NFAIServerNet_ServerPlugin" />
+		<Plugin Name="NFAIServerNet_ClientPlugin" />
+		<Plugin Name="NFLogPlugin" />
+    	<ConfigPath Name="../" />		
+	</AIServer>
+	
 	<TutorialServer>
 		<Plugin Name="NFKernelPlugin" />
 		<Plugin Name="NFConfigPlugin" />

@@ -219,6 +219,15 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_GTW_GAME_REFRESH", Value=42)]
       EGMI_GTW_GAME_REFRESH = 42,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_GTW_AI_REGISTERED", Value=60)]
+      EGMI_GTW_AI_REGISTERED = 60,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_GTW_AI_UNREGISTERED", Value=61)]
+      EGMI_GTW_AI_UNREGISTERED = 61,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_GTW_AI_REFRESH", Value=62)]
+      EGMI_GTW_AI_REFRESH = 62,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_STS_NET_INFO", Value=50)]
       EGMI_STS_NET_INFO = 50,
             
