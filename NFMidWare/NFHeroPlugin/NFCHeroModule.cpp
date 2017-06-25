@@ -499,17 +499,47 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 
 int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, const int nPos)
 {
+	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1());
+	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos2());
+	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos3());
+	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	if (xHero1 == xHeroID
+		|| xHero2 == xHeroID
+		|| xHero3 == xHeroID)
+	{
+		return 0;
+	}
+
 	switch (nPos)
 	{
 	case 1:
+	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
+		if (xFightHero == xHero1)
+		{
+			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+		}
+	}
 		break;
 
 	case 2:
+	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
+		if (xFightHero == xHero2)
+		{
+			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+		}
+	}
 		break;
 
 	case 3:
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
+		if (xFightHero == xHero3)
+		{
+			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+		}
+	}
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
 		break;
 
