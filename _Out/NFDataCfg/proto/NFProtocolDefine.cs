@@ -662,6 +662,9 @@ public class Player
 	public static readonly String HeroPos1 = "HeroPos1"; // object
 	public static readonly String HeroPos2 = "HeroPos2"; // object
 	public static readonly String HeroPos3 = "HeroPos3"; // object
+	public static readonly String Skill1 = "Skill1"; // string
+	public static readonly String Skill2 = "Skill2"; // string
+	public static readonly String Skill3 = "Skill3"; // string
 	public static readonly String VIPLevel = "VIPLevel"; // int
 	public static readonly String VIPEXP = "VIPEXP"; // int
 	public static readonly String EXP = "EXP"; // int
