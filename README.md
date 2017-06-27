@@ -225,7 +225,7 @@ bool HelloWorld1::Shut()
 * GitHub: https://github.com/ketoo
 
 ! WELCOME DONATE!
-https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/donation.png
+(https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/donation.png)
 
 -------------------
 
