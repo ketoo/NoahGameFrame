@@ -14,6 +14,9 @@
 		<Property Id="HeroPos1" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero1"/>
 		<Property Id="HeroPos2" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero2"/>
 		<Property Id="HeroPos3" Type="object" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero3"/>
+		<Property Id="Skill1" Type="string" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero1"/>
+		<Property Id="Skill2" Type="string" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero2"/>
+		<Property Id="Skill3" Type="string" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="Hero3"/>
 		<Property Id="VIPLevel" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
 		<Property Id="VIPEXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="VIP经验"/>
 		<Property Id="EXP" Type="int" Public="0" Private="1" Save="0" Cache="1" Ref="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>

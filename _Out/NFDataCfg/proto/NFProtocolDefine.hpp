@@ -680,6 +680,9 @@ public:
 	static const std::string& HeroPos1(){ static std::string xHeroPos1 = "HeroPos1"; return xHeroPos1; } // object
 	static const std::string& HeroPos2(){ static std::string xHeroPos2 = "HeroPos2"; return xHeroPos2; } // object
 	static const std::string& HeroPos3(){ static std::string xHeroPos3 = "HeroPos3"; return xHeroPos3; } // object
+	static const std::string& Skill1(){ static std::string xSkill1 = "Skill1"; return xSkill1; } // string
+	static const std::string& Skill2(){ static std::string xSkill2 = "Skill2"; return xSkill2; } // string
+	static const std::string& Skill3(){ static std::string xSkill3 = "Skill3"; return xSkill3; } // string
 	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
 	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
 	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
