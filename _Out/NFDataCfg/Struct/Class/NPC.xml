@@ -15,7 +15,9 @@
 		<Property Id="Climb" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="Move类型"/>
 		<Property Id="AtkDis" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="攻击距离"/>
 		<Property Id="DropPackList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="掉落列表"/>
-		<Property Id="SkillIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
+		<Property Id="SkillNormal" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
+		<Property Id="SkillAttack" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
+		<Property Id="SkillTHUMP" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="技能列表索引"/>
 		<Property Id="Height" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="模型高度"/>
 		<Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="绝对值属性包索引"/>
 		<Property Id="ConsumeData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="消费数据属性包索引"/>
