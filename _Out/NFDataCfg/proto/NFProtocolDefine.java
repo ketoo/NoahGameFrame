@@ -564,7 +564,9 @@ public class NPC {
 	public static final String Climb = "Climb"; // int
 	public static final String AtkDis = "AtkDis"; // float
 	public static final String DropPackList = "DropPackList"; // string
-	public static final String SkillIDRef = "SkillIDRef"; // string
+	public static final String SkillNormal = "SkillNormal"; // string
+	public static final String SkillAttack = "SkillAttack"; // string
+	public static final String SkillTHUMP = "SkillTHUMP"; // string
 	public static final String Height = "Height"; // float
 	public static final String EffectData = "EffectData"; // string
 	public static final String ConsumeData = "ConsumeData"; // string
@@ -1006,42 +1008,10 @@ public class Skill {
 	public static final String TargetType = "TargetType"; // int
 	public static final String NewObject = "NewObject"; // string
 	public static final String Icon = "Icon"; // string
-	public static final String Atlas = "Atlas"; // string
-	public static final String UpLevel = "UpLevel"; // int
-	public static final String AfterUpID = "AfterUpID"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
 	public static final String PlayerSkill = "PlayerSkill"; // int
 	public static final String AtkDis = "AtkDis"; // float
-	public static final String NeedTar = "NeedTar"; // int
 	public static final String DefaultHitTime = "DefaultHitTime"; // float
-	// Record
-
-}
-
-public class SkillRef {
-	//Class name
-	public static final String ThisName = "SkillRef";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String NORMALATTACK1 = "NORMALATTACK1"; // string
-	public static final String NORMALATTACK2 = "NORMALATTACK2"; // string
-	public static final String NORMALATTACK3 = "NORMALATTACK3"; // string
-	public static final String NORMALTHUMP = "NORMALTHUMP"; // string
-	public static final String SKILL1 = "SKILL1"; // string
-	public static final String SKILL2 = "SKILL2"; // string
-	public static final String SKILL3 = "SKILL3"; // string
-	public static final String SKILL4 = "SKILL4"; // string
-	public static final String SKILL5 = "SKILL5"; // string
-	public static final String SKILL6 = "SKILL6"; // string
-	public static final String SKILL7 = "SKILL7"; // string
-	public static final String SKILL8 = "SKILL8"; // string
-	public static final String SKILL9 = "SKILL9"; // string
-	public static final String SKILL10 = "SKILL10"; // string
 	// Record
 
 }

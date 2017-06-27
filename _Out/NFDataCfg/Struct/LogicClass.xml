@@ -24,7 +24,6 @@
 		<Class Id="Server" Type="TYPE_SERVER" Path="NFDataCfg/Struct/Class/Server.xml" InstancePath="NFDataCfg/Ini/NPC/Server.xml" Public="0" Desc="Server"/>
 		<Class Id="Shop" Type="TYPE_SHOP" Path="NFDataCfg/Struct/Class/Shop.xml" InstancePath="NFDataCfg/Ini/NPC/Shop.xml" Public="0" Desc="Shop"/>
 		<Class Id="Skill" Type="TYPE_SKILL" Path="NFDataCfg/Struct/Class/Skill.xml" InstancePath="NFDataCfg/Ini/NPC/Skill.xml" Public="0" Desc="Skill"/>
-		<Class Id="SkillRef" Type="TYPE_SKILLREF" Path="NFDataCfg/Struct/Class/SkillRef.xml" InstancePath="NFDataCfg/Ini/NPC/SkillRef.xml" Public="0" Desc="SkillRef"/>
 		<Class Id="SqlServer" Type="TYPE_SQLSERVER" Path="NFDataCfg/Struct/Class/SqlServer.xml" InstancePath="NFDataCfg/Ini/NPC/SqlServer.xml" Public="0" Desc="SqlServer"/>
 		<Class Id="Talent" Type="TYPE_TALENT" Path="NFDataCfg/Struct/Class/Talent.xml" InstancePath="NFDataCfg/Ini/NPC/Talent.xml" Public="0" Desc="Talent"/>
 		<Class Id="Task" Type="TYPE_TASK" Path="NFDataCfg/Struct/Class/Task.xml" InstancePath="NFDataCfg/Ini/NPC/Task.xml" Public="0" Desc="Task"/>
