@@ -226,7 +226,7 @@ bool HelloWorld1::Shut()
 
 
 ### WELCOME DONATE/欢迎捐赠:
-![](https://github.com/ketoo/NoahGameFrame/tree/develop//Introduce/donation.png =150x150)
+<img src="https://github.com/ketoo/NoahGameFrame/tree/develop/Introduce/donation.png" width = "150" height = "150" alt="donate" align=center />
 -------------------
 
 ### Amazing  open source projects:
