@@ -637,6 +637,9 @@ public class Player {
 	public static final String HeroPos1 = "HeroPos1"; // object
 	public static final String HeroPos2 = "HeroPos2"; // object
 	public static final String HeroPos3 = "HeroPos3"; // object
+	public static final String Skill1 = "Skill1"; // string
+	public static final String Skill2 = "Skill2"; // string
+	public static final String Skill3 = "Skill3"; // string
 	public static final String VIPLevel = "VIPLevel"; // int
 	public static final String VIPEXP = "VIPEXP"; // int
 	public static final String EXP = "EXP"; // int
