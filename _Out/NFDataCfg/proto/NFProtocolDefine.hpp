@@ -605,7 +605,9 @@ public:
 	static const std::string& Climb(){ static std::string xClimb = "Climb"; return xClimb; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
-	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
+	static const std::string& SkillNormal(){ static std::string xSkillNormal = "SkillNormal"; return xSkillNormal; } // string
+	static const std::string& SkillAttack(){ static std::string xSkillAttack = "SkillAttack"; return xSkillAttack; } // string
+	static const std::string& SkillTHUMP(){ static std::string xSkillTHUMP = "SkillTHUMP"; return xSkillTHUMP; } // string
 	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; } // float
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
@@ -1059,44 +1061,10 @@ public:
 	static const std::string& TargetType(){ static std::string xTargetType = "TargetType"; return xTargetType; } // int
 	static const std::string& NewObject(){ static std::string xNewObject = "NewObject"; return xNewObject; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas; } // string
-	static const std::string& UpLevel(){ static std::string xUpLevel = "UpLevel"; return xUpLevel; } // int
-	static const std::string& AfterUpID(){ static std::string xAfterUpID = "AfterUpID"; return xAfterUpID; } // string
+	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
 	static const std::string& PlayerSkill(){ static std::string xPlayerSkill = "PlayerSkill"; return xPlayerSkill; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
-	static const std::string& NeedTar(){ static std::string xNeedTar = "NeedTar"; return xNeedTar; } // int
 	static const std::string& DefaultHitTime(){ static std::string xDefaultHitTime = "DefaultHitTime"; return xDefaultHitTime; } // float
-	// Record
-
-};
-
-class SkillRef
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xSkillRef = "SkillRef"; return xSkillRef; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& NORMALATTACK1(){ static std::string xNORMALATTACK1 = "NORMALATTACK1"; return xNORMALATTACK1; } // string
-	static const std::string& NORMALATTACK2(){ static std::string xNORMALATTACK2 = "NORMALATTACK2"; return xNORMALATTACK2; } // string
-	static const std::string& NORMALATTACK3(){ static std::string xNORMALATTACK3 = "NORMALATTACK3"; return xNORMALATTACK3; } // string
-	static const std::string& NORMALTHUMP(){ static std::string xNORMALTHUMP = "NORMALTHUMP"; return xNORMALTHUMP; } // string
-	static const std::string& SKILL1(){ static std::string xSKILL1 = "SKILL1"; return xSKILL1; } // string
-	static const std::string& SKILL2(){ static std::string xSKILL2 = "SKILL2"; return xSKILL2; } // string
-	static const std::string& SKILL3(){ static std::string xSKILL3 = "SKILL3"; return xSKILL3; } // string
-	static const std::string& SKILL4(){ static std::string xSKILL4 = "SKILL4"; return xSKILL4; } // string
-	static const std::string& SKILL5(){ static std::string xSKILL5 = "SKILL5"; return xSKILL5; } // string
-	static const std::string& SKILL6(){ static std::string xSKILL6 = "SKILL6"; return xSKILL6; } // string
-	static const std::string& SKILL7(){ static std::string xSKILL7 = "SKILL7"; return xSKILL7; } // string
-	static const std::string& SKILL8(){ static std::string xSKILL8 = "SKILL8"; return xSKILL8; } // string
-	static const std::string& SKILL9(){ static std::string xSKILL9 = "SKILL9"; return xSKILL9; } // string
-	static const std::string& SKILL10(){ static std::string xSKILL10 = "SKILL10"; return xSKILL10; } // string
 	// Record
 
 };

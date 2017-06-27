@@ -588,7 +588,9 @@ public class NPC
 	public static readonly String Climb = "Climb"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
 	public static readonly String DropPackList = "DropPackList"; // string
-	public static readonly String SkillIDRef = "SkillIDRef"; // string
+	public static readonly String SkillNormal = "SkillNormal"; // string
+	public static readonly String SkillAttack = "SkillAttack"; // string
+	public static readonly String SkillTHUMP = "SkillTHUMP"; // string
 	public static readonly String Height = "Height"; // float
 	public static readonly String EffectData = "EffectData"; // string
 	public static readonly String ConsumeData = "ConsumeData"; // string
@@ -1036,43 +1038,10 @@ public class Skill
 	public static readonly String TargetType = "TargetType"; // int
 	public static readonly String NewObject = "NewObject"; // string
 	public static readonly String Icon = "Icon"; // string
-	public static readonly String Atlas = "Atlas"; // string
-	public static readonly String UpLevel = "UpLevel"; // int
-	public static readonly String AfterUpID = "AfterUpID"; // string
+	public static readonly String SpriteFile = "SpriteFile"; // string
 	public static readonly String PlayerSkill = "PlayerSkill"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
-	public static readonly String NeedTar = "NeedTar"; // int
 	public static readonly String DefaultHitTime = "DefaultHitTime"; // float
-	// Record
-
-}
-
-public class SkillRef
-{
-	//Class name
-	public static readonly string ThisName = "SkillRef";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String NORMALATTACK1 = "NORMALATTACK1"; // string
-	public static readonly String NORMALATTACK2 = "NORMALATTACK2"; // string
-	public static readonly String NORMALATTACK3 = "NORMALATTACK3"; // string
-	public static readonly String NORMALTHUMP = "NORMALTHUMP"; // string
-	public static readonly String SKILL1 = "SKILL1"; // string
-	public static readonly String SKILL2 = "SKILL2"; // string
-	public static readonly String SKILL3 = "SKILL3"; // string
-	public static readonly String SKILL4 = "SKILL4"; // string
-	public static readonly String SKILL5 = "SKILL5"; // string
-	public static readonly String SKILL6 = "SKILL6"; // string
-	public static readonly String SKILL7 = "SKILL7"; // string
-	public static readonly String SKILL8 = "SKILL8"; // string
-	public static readonly String SKILL9 = "SKILL9"; // string
-	public static readonly String SKILL10 = "SKILL10"; // string
 	// Record
 
 }
