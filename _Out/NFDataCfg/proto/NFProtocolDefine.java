@@ -994,7 +994,7 @@ public class Skill {
 	public static final String Position = "Position"; // vector3
 	// Property
 	public static final String SkillType = "SkillType"; // int
-	public static final String AnimaState = "AnimaState"; // int
+	public static final String AnimaState = "AnimaState"; // string
 	public static final String ShowName = "ShowName"; // string
 	public static final String Desc = "Desc"; // string
 	public static final String ConsumeProperty = "ConsumeProperty"; // string
@@ -1015,6 +1015,7 @@ public class Skill {
 	public static final String PlayerSkill = "PlayerSkill"; // int
 	public static final String AtkDis = "AtkDis"; // float
 	public static final String DefaultHitTime = "DefaultHitTime"; // float
+	public static final String NextID = "NextID"; // string
 	// Record
 
 }
@@ -1057,9 +1058,8 @@ public class Talent {
 	public static final String Desc = "Desc"; // string
 	public static final String EffectData = "EffectData"; // string
 	public static final String Icon = "Icon"; // string
-	public static final String Atlas = "Atlas"; // string
-	public static final String UpLevel = "UpLevel"; // int
-	public static final String AfterUpID = "AfterUpID"; // string
+	public static final String SpriteFile = "SpriteFile"; // string
+	public static final String NextID = "NextID"; // string
 	// Record
 
 }

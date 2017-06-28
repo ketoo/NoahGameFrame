@@ -222,22 +222,15 @@ bool NFCHeroModule::HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const
 		return false;
 	}
 
-	NFDataList varRowData;
-	if (!pHeroRecord->QueryRow(nRow, varRowData))
-	{
-		return false;
-	}
-	
 	const std::string& strSkillID = pHeroRecord->GetString(nRow, nIndex);
-	const std::string& strNextSkillID = m_pElementModule->GetPropertyString(strSkillID, NFrame::Skill::AfterUpID());
+	const std::string& strNextSkillID = m_pElementModule->GetPropertyString(strSkillID, NFrame::Skill::NextID());
 	if (strNextSkillID.empty())
 	{
-		//no next skill id, this skill is the best skill
+		//no next talent id, this skill is the best talent
 		return false;
 	}
 
 	pHeroRecord->SetString(nRow, nIndex, strNextSkillID);
-
 	return true;
 }
 
@@ -265,14 +258,8 @@ bool NFCHeroModule::HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, cons
 		return false;
 	}
 
-	NFDataList varRowData;
-	if (!pHeroRecord->QueryRow(nRow, varRowData))
-	{
-		return false;
-	}
-
 	const std::string& strTalentID = pHeroRecord->GetString(nRow, nIndex);
-	const std::string& strNextTalentID = m_pElementModule->GetPropertyString(strTalentID, NFrame::Talent::AfterUpID());
+	const std::string& strNextTalentID = m_pElementModule->GetPropertyString(strTalentID, NFrame::Talent::NextID());
 	if (strNextTalentID.empty())
 	{
 		//no next talent id, this skill is the best talent

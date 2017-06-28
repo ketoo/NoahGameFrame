@@ -1,96 +1,96 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="Langage_Comm_1" English="Langage_1" Chinese="确认" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Langage_Comm_2" English="Langage_2" Chinese="取消" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Langage_Comm_3" English="Langage_3" Chinese="登录" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Langage_Comm_4" English="Langage_4" Chinese="创建角色" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Langage_Comm_5" English="Langage_5" Chinese="进入游戏" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Langage_Comm_6" English="Langage_6" Chinese="中文_6" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HOLY_WATER" English="" Chinese="小瓶圣水，在一定时间内防御翻倍！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_MP" English="" Chinese="小瓶魔法药水，增加英雄魔法力！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HP" English="" Chinese="小瓶生命药水，增加英雄生命力！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_ATK_Water" English="" Chinese="攻击药水，在一定时间内攻击翻倍！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_Avoid_Def_Water" English="" Chinese="在一定时间内，无视对方防御！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_Damage_MP_Water" English="" Chinese="进入范围内的英雄，自动丢蓝！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_NoobPack" English="" Chinese="新手升级礼包！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_WarPack" English="" Chinese="战争奖励礼包！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_ATK" English="" Chinese="攻击宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_DEF" English="" Chinese="防御宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_FIRE" English="" Chinese="火属性宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_LIGHT" English="" Chinese="雷属性宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_WIND" English="" Chinese="风属性宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_ICE" English="" Chinese="冰属性宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_GEM_POISON" English="" Chinese="毒属性宝石！" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Abaddon" English="Abaddon" Chinese="亚巴顿" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Beastmaster" English="Beastmaster" Chinese="兽王" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_BountyHunter" English="BountyHunter" Chinese="赏金猎人" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Bristleback" English="Bristleback" Chinese="钢背熊" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Clinkz" English="Clinkz" Chinese="克林丽兹" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Ezalor" English="Ezalor" Chinese="光之守卫" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Lifestealer" English="Lifestealer" Chinese="食尸鬼" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_TeaantProtector" English="TeaantProtector" Chinese="树精卫士" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Abaddon" English="Abaddon" Chinese="亚巴顿是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Beastmaster" English="Beastmaster" Chinese="兽王是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_BountyHunter" English="BountyHunter" Chinese="赏金猎人是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Bristleback" English="Bristleback" Chinese="钢背熊是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Clinkz" English="Clinkz" Chinese="克林丽兹是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Ezalor" English="Ezalor" Chinese="光之守卫是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_Lifestealer" English="Lifestealer" Chinese="食尸鬼是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="Desc_HeroCard_TeaantProtector" English="TeaantProtector" Chinese="树精卫士是一个英雄" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HOLY_WATER" English="" Chinese="圣水" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_MP" English="" Chinese="蓝药" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HP" English="" Chinese="血药" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_ATK_Water" English="" Chinese="攻击药水" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Avoid_Def_Water" English="" Chinese="防御药水" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_Damage_MP_Water" English="" Chinese="消魔药水" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_NoobPack" English="" Chinese="新手礼包" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_WarPack" English="" Chinese="战争礼包" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_ATK" English="" Chinese="攻击宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_DEF" English="" Chinese="防御宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_FIRE" English="" Chinese="火属性宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_LIGHT" English="" Chinese="雷属性宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_WIND" English="" Chinese="风属性宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_ICE" English="" Chinese="冰属性宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_GEM_POISON" English="" Chinese="毒属性宝石" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_1" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_2" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_3" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_4" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_5" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="NameID_HeroCard_6" English="" Chinese="英雄*卡1" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_SUCKBLOOD" English="Langage_1" Chinese="吸血" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_REFLECTDAMAGE" English="Langage_2" Chinese="反伤" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_CRITICAL" English="Langage_3" Chinese="暴击" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MAXHP" English="Langage_4" Chinese="生命上限" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MAXMP" English="Langage_5" Chinese="法力上限" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MAXSP" English="Langage_6" Chinese="体力上限" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_HP" English="Langage_4" Chinese="生命" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MP" English="Langage_5" Chinese="法力" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_SP" English="Langage_6" Chinese="体力" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_HPREGEN" English="Langage_7" Chinese="生命回复" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_SPREGEN" English="Langage_8" Chinese="体力回复" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MPREGEN" English="Langage_9" Chinese="魔法回复" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_VALUE" English="Langage_10" Chinese="物理攻击" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_VALUE" English="Langage_11" Chinese="物理防御" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MOVE_SPEED" English="Langage_12" Chinese="移动速度" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_SPEED" English="Langage_13" Chinese="攻击速度" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_FIRE" English="Langage_14" Chinese="火攻" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_LIGHT" English="Langage_15" Chinese="雷攻" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_WIND" English="Langage_16" Chinese="土攻" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_ICE" English="Langage_17" Chinese="冰攻" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_ATK_POISON" English="Langage_18" Chinese="毒攻" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_FIRE" English="Langage_19" Chinese="火防" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_LIGHT" English="Langage_20" Chinese="雷防" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_WIND" English="Langage_21" Chinese="土防" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_ICE" English="Langage_22" Chinese="冰防" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DEF_POISON" English="Langage_23" Chinese="毒防" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_DIZZY_GATE" English="Langage_24" Chinese="眩晕开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MOVE_GATE" English="Langage_25" Chinese="移动开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_SKILL_GATE" English="Langage_26" Chinese="技能开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_PHYSICAL_GATE" English="Langage_27" Chinese="物理免疫开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_MAGIC_GATE" English="Langage_28" Chinese="魔法免疫开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
-	<Object Id="LPID_BUFF_GATE" English="Langage_29" Chinese="BUFF免疫开关" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" ="" =""/>
+	<Object Id="Langage_Comm_1" English="Langage_1" Chinese="确认"/>
+	<Object Id="Langage_Comm_2" English="Langage_2" Chinese="取消"/>
+	<Object Id="Langage_Comm_3" English="Langage_3" Chinese="登录"/>
+	<Object Id="Langage_Comm_4" English="Langage_4" Chinese="创建角色"/>
+	<Object Id="Langage_Comm_5" English="Langage_5" Chinese="进入游戏"/>
+	<Object Id="Langage_Comm_6" English="Langage_6" Chinese="中文_6"/>
+	<Object Id="Desc_HOLY_WATER" English="" Chinese="小瓶圣水，在一定时间内防御翻倍！"/>
+	<Object Id="Desc_MP" English="" Chinese="小瓶魔法药水，增加英雄魔法力！"/>
+	<Object Id="Desc_HP" English="" Chinese="小瓶生命药水，增加英雄生命力！"/>
+	<Object Id="Desc_ATK_Water" English="" Chinese="攻击药水，在一定时间内攻击翻倍！"/>
+	<Object Id="Desc_Avoid_Def_Water" English="" Chinese="在一定时间内，无视对方防御！"/>
+	<Object Id="Desc_Damage_MP_Water" English="" Chinese="进入范围内的英雄，自动丢蓝！"/>
+	<Object Id="Desc_NoobPack" English="" Chinese="新手升级礼包！"/>
+	<Object Id="Desc_WarPack" English="" Chinese="战争奖励礼包！"/>
+	<Object Id="Desc_GEM_ATK" English="" Chinese="攻击宝石！"/>
+	<Object Id="Desc_GEM_DEF" English="" Chinese="防御宝石！"/>
+	<Object Id="Desc_GEM_FIRE" English="" Chinese="火属性宝石！"/>
+	<Object Id="Desc_GEM_LIGHT" English="" Chinese="雷属性宝石！"/>
+	<Object Id="Desc_GEM_WIND" English="" Chinese="风属性宝石！"/>
+	<Object Id="Desc_GEM_ICE" English="" Chinese="冰属性宝石！"/>
+	<Object Id="Desc_GEM_POISON" English="" Chinese="毒属性宝石！"/>
+	<Object Id="NameID_Abaddon" English="Abaddon" Chinese="亚巴顿"/>
+	<Object Id="NameID_Beastmaster" English="Beastmaster" Chinese="兽王"/>
+	<Object Id="NameID_BountyHunter" English="BountyHunter" Chinese="赏金猎人"/>
+	<Object Id="NameID_Bristleback" English="Bristleback" Chinese="钢背熊"/>
+	<Object Id="NameID_Clinkz" English="Clinkz" Chinese="克林丽兹"/>
+	<Object Id="NameID_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女"/>
+	<Object Id="NameID_Ezalor" English="Ezalor" Chinese="光之守卫"/>
+	<Object Id="NameID_Lifestealer" English="Lifestealer" Chinese="食尸鬼"/>
+	<Object Id="NameID_TeaantProtector" English="TeaantProtector" Chinese="树精卫士"/>
+	<Object Id="Desc_HeroCard_Abaddon" English="Abaddon" Chinese="亚巴顿是一个英雄"/>
+	<Object Id="Desc_HeroCard_Beastmaster" English="Beastmaster" Chinese="兽王是一个英雄"/>
+	<Object Id="Desc_HeroCard_BountyHunter" English="BountyHunter" Chinese="赏金猎人是一个英雄"/>
+	<Object Id="Desc_HeroCard_Bristleback" English="Bristleback" Chinese="钢背熊是一个英雄"/>
+	<Object Id="Desc_HeroCard_Clinkz" English="Clinkz" Chinese="克林丽兹是一个英雄"/>
+	<Object Id="Desc_HeroCard_CrystalMaiden" English="CrystalMaiden" Chinese="水晶室女是一个英雄"/>
+	<Object Id="Desc_HeroCard_Ezalor" English="Ezalor" Chinese="光之守卫是一个英雄"/>
+	<Object Id="Desc_HeroCard_Lifestealer" English="Lifestealer" Chinese="食尸鬼是一个英雄"/>
+	<Object Id="Desc_HeroCard_TeaantProtector" English="TeaantProtector" Chinese="树精卫士是一个英雄"/>
+	<Object Id="NameID_HOLY_WATER" English="" Chinese="圣水"/>
+	<Object Id="NameID_MP" English="" Chinese="蓝药"/>
+	<Object Id="NameID_HP" English="" Chinese="血药"/>
+	<Object Id="NameID_ATK_Water" English="" Chinese="攻击药水"/>
+	<Object Id="NameID_Avoid_Def_Water" English="" Chinese="防御药水"/>
+	<Object Id="NameID_Damage_MP_Water" English="" Chinese="消魔药水"/>
+	<Object Id="NameID_NoobPack" English="" Chinese="新手礼包"/>
+	<Object Id="NameID_WarPack" English="" Chinese="战争礼包"/>
+	<Object Id="NameID_GEM_ATK" English="" Chinese="攻击宝石"/>
+	<Object Id="NameID_GEM_DEF" English="" Chinese="防御宝石"/>
+	<Object Id="NameID_GEM_FIRE" English="" Chinese="火属性宝石"/>
+	<Object Id="NameID_GEM_LIGHT" English="" Chinese="雷属性宝石"/>
+	<Object Id="NameID_GEM_WIND" English="" Chinese="风属性宝石"/>
+	<Object Id="NameID_GEM_ICE" English="" Chinese="冰属性宝石"/>
+	<Object Id="NameID_GEM_POISON" English="" Chinese="毒属性宝石"/>
+	<Object Id="NameID_HeroCard_1" English="" Chinese="英雄*卡1"/>
+	<Object Id="NameID_HeroCard_2" English="" Chinese="英雄*卡1"/>
+	<Object Id="NameID_HeroCard_3" English="" Chinese="英雄*卡1"/>
+	<Object Id="NameID_HeroCard_4" English="" Chinese="英雄*卡1"/>
+	<Object Id="NameID_HeroCard_5" English="" Chinese="英雄*卡1"/>
+	<Object Id="NameID_HeroCard_6" English="" Chinese="英雄*卡1"/>
+	<Object Id="LPID_SUCKBLOOD" English="Langage_1" Chinese="吸血"/>
+	<Object Id="LPID_REFLECTDAMAGE" English="Langage_2" Chinese="反伤"/>
+	<Object Id="LPID_CRITICAL" English="Langage_3" Chinese="暴击"/>
+	<Object Id="LPID_MAXHP" English="Langage_4" Chinese="生命上限"/>
+	<Object Id="LPID_MAXMP" English="Langage_5" Chinese="法力上限"/>
+	<Object Id="LPID_MAXSP" English="Langage_6" Chinese="体力上限"/>
+	<Object Id="LPID_HP" English="Langage_4" Chinese="生命"/>
+	<Object Id="LPID_MP" English="Langage_5" Chinese="法力"/>
+	<Object Id="LPID_SP" English="Langage_6" Chinese="体力"/>
+	<Object Id="LPID_HPREGEN" English="Langage_7" Chinese="生命回复"/>
+	<Object Id="LPID_SPREGEN" English="Langage_8" Chinese="体力回复"/>
+	<Object Id="LPID_MPREGEN" English="Langage_9" Chinese="魔法回复"/>
+	<Object Id="LPID_ATK_VALUE" English="Langage_10" Chinese="物理攻击"/>
+	<Object Id="LPID_DEF_VALUE" English="Langage_11" Chinese="物理防御"/>
+	<Object Id="LPID_MOVE_SPEED" English="Langage_12" Chinese="移动速度"/>
+	<Object Id="LPID_ATK_SPEED" English="Langage_13" Chinese="攻击速度"/>
+	<Object Id="LPID_ATK_FIRE" English="Langage_14" Chinese="火攻"/>
+	<Object Id="LPID_ATK_LIGHT" English="Langage_15" Chinese="雷攻"/>
+	<Object Id="LPID_ATK_WIND" English="Langage_16" Chinese="土攻"/>
+	<Object Id="LPID_ATK_ICE" English="Langage_17" Chinese="冰攻"/>
+	<Object Id="LPID_ATK_POISON" English="Langage_18" Chinese="毒攻"/>
+	<Object Id="LPID_DEF_FIRE" English="Langage_19" Chinese="火防"/>
+	<Object Id="LPID_DEF_LIGHT" English="Langage_20" Chinese="雷防"/>
+	<Object Id="LPID_DEF_WIND" English="Langage_21" Chinese="土防"/>
+	<Object Id="LPID_DEF_ICE" English="Langage_22" Chinese="冰防"/>
+	<Object Id="LPID_DEF_POISON" English="Langage_23" Chinese="毒防"/>
+	<Object Id="LPID_DIZZY_GATE" English="Langage_24" Chinese="眩晕开关"/>
+	<Object Id="LPID_MOVE_GATE" English="Langage_25" Chinese="移动开关"/>
+	<Object Id="LPID_SKILL_GATE" English="Langage_26" Chinese="技能开关"/>
+	<Object Id="LPID_PHYSICAL_GATE" English="Langage_27" Chinese="物理免疫开关"/>
+	<Object Id="LPID_MAGIC_GATE" English="Langage_28" Chinese="魔法免疫开关"/>
+	<Object Id="LPID_BUFF_GATE" English="Langage_29" Chinese="BUFF免疫开关"/>
 </XML>
 
