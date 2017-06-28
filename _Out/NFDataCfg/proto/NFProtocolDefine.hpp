@@ -1047,7 +1047,7 @@ public:
 	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
 	// Property
 	static const std::string& SkillType(){ static std::string xSkillType = "SkillType"; return xSkillType; } // int
-	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState; } // int
+	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
 	static const std::string& ConsumeProperty(){ static std::string xConsumeProperty = "ConsumeProperty"; return xConsumeProperty; } // string
@@ -1068,6 +1068,7 @@ public:
 	static const std::string& PlayerSkill(){ static std::string xPlayerSkill = "PlayerSkill"; return xPlayerSkill; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
 	static const std::string& DefaultHitTime(){ static std::string xDefaultHitTime = "DefaultHitTime"; return xDefaultHitTime; } // float
+	static const std::string& NextID(){ static std::string xNextID = "NextID"; return xNextID; } // string
 	// Record
 
 };
@@ -1114,9 +1115,8 @@ public:
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
 	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
 	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas; } // string
-	static const std::string& UpLevel(){ static std::string xUpLevel = "UpLevel"; return xUpLevel; } // int
-	static const std::string& AfterUpID(){ static std::string xAfterUpID = "AfterUpID"; return xAfterUpID; } // string
+	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
+	static const std::string& NextID(){ static std::string xNextID = "NextID"; return xNextID; } // string
 	// Record
 
 };
