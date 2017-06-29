@@ -223,7 +223,7 @@ void ProcessParameter(int argc, char* argv[])
 	strTitleName = "NF" + strTitleName;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 	SetConsoleTitle(strTitleName.c_str());
-#else
+#elif NF_PLATFORM == NF_PLATFORM_LINUX
 	prctl(PR_SET_NAME, strTitleName.c_str());
 	//setproctitle(strTitleName.c_str());
 #endif
