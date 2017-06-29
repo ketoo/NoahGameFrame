@@ -73,3 +73,6 @@
 /Dependencies/curl
 /.vs/
 /NoahFrame.VC.db
+
+#OSX .DS_Store
+.DS_Store
