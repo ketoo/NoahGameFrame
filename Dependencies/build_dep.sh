@@ -13,7 +13,7 @@ unzip -o mysqlpp_libs.zip -d ./
 
 # extract libevent libs
 echo Extract libevent libs
-tar -xzvf libevent-2.0.22-stable.tar.gz
+tar -xzvf libevent-2.1.8-stable.tar.gz
 if [ -d ./libevent ]; then
  rm -rf ./libevent
 fi
