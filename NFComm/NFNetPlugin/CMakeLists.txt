@@ -16,7 +16,25 @@ set_target_properties( NFNetPlugin PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
 	RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 	LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir})
-if(UNIX)
+
+if (APPLE)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFNetPlugin libevent.a)
+		target_link_libraries(NFNetPlugin libevent_core.a)
+		target_link_libraries(NFNetPlugin libprotobuf.a)
+		target_link_libraries(NFNetPlugin NFMessageDefine)
+	else()
+		target_link_libraries(NFNetPlugin libevent.a)
+		target_link_libraries(NFNetPlugin libevent_core.a)
+		target_link_libraries(NFNetPlugin libprotobuf.a)
+		target_link_libraries(NFNetPlugin NFMessageDefine)
+	endif()
+	add_definitions(
+		-D_USRDLL
+		-DTHERON_CPP11
+		-D_THREAD_SAFE
+	)
+elseif(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFNetPlugin libevent.a)
 		target_link_libraries(NFNetPlugin libevent_core.a)
@@ -26,10 +44,10 @@ if(UNIX)
 		target_link_libraries(NFNetPlugin libevent_core.a)
 		target_link_libraries(NFNetPlugin libprotobuf.so)
 	endif()
-		add_definitions(
-			-D_USRDLL
-			-DTHERON_CPP11
-		)
+	add_definitions(
+		-D_USRDLL
+		-DTHERON_CPP11
+	)
 else()
 	target_link_libraries(NFNetPlugin  libprotobuf libevent_core)
 	add_definitions("-D_LIB -DWIN32 -DWIN")

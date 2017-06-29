@@ -18,7 +18,7 @@ if [ -d ./libevent ]; then
  rm -rf ./libevent
 fi
 
-mv libevent-2.0.22-stable libevent
+mv libevent-2.1.8-stable libevent
 
 # compiling libevent
 cd libevent
@@ -38,10 +38,22 @@ chmod -R 755 *
 make
 make check
 
+cp -R -f ./src/.libs/*.a ../lib/Debug/
+cp -R -f ./src/.libs/*.a ../lib/
+cp -R -f ./src/.libs/*.a ../lib/Release/
+
 cp -r -f ./src/.libs/*.so ../../_Out/Debug/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Debug/
 cp -r -f ./src/.libs/*.so ../../_Out/Release/
 cp -r -f ./src/.libs/*.so.* ../../_Out/Release/
+
+cp -r -f ./src/.libs/*.dylib ../../_Out/Debug/
+cp -r -f ./src/.libs/*.dylib.* ../../_Out/Debug/
+cp -r -f ./src/.libs/*.dylib ../../_Out/Release/
+cp -r -f ./src/.libs/*.dylib.* ../../_Out/Release/
+
+cp -r -f ./src/.libs/*.a ../../_Out/Debug/
+cp -r -f ./src/.libs/*.a ../../_Out/Release/
 
 cd ../
 

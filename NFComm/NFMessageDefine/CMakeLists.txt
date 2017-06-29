@@ -8,7 +8,16 @@ add_library(NFMessageDefine SHARED
 	${NFMessageDefine_ROOT_CC}
 	${NFMessageDefine_ROOT_Hpp})
 
-if(UNIX)
+if (APPLE)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFMessageDefine libprotobuf.a)
+	else()
+		target_link_libraries(NFMessageDefine libprotobuf.a)
+	endif()
+	add_definitions(
+		-D_THREAD_SAFE
+	)
+elseif(UNIX)
 	if (CMAKE_BUILD_TYPE MATCHES "Release")
 		target_link_libraries(NFMessageDefine )
 	else()
