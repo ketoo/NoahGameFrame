@@ -17,6 +17,12 @@
     <ClInclude Include="NFCPluginManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NFCCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NFCCellManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFPluginLoader.cpp" />
@@ -24,6 +30,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCPluginManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCCellManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
