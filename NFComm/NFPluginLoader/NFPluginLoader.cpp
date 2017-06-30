@@ -16,6 +16,7 @@
 #include <future>
 #include <functional>
 #include <atomic>
+#include "NFCCellManager.h"
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
