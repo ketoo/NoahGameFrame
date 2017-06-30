@@ -576,7 +576,7 @@ bool NFCPluginManager::LoadPluginLibrary(const std::string& strPluginDLLName)
         }
         else
         {
-#if NF_PLATFORM == NF_PLATFORM_LINUX
+#if NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_APPLE
             char* error = dlerror();
             if (error)
             {
