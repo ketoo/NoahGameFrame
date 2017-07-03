@@ -79,12 +79,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FileProcess.cpp" />
     <ClCompile Include="MiniExcelReader\MiniExcelReader.cpp" />
     <ClCompile Include="minizip\ioapi.c" />
     <ClCompile Include="minizip\ioapi_mem.c" />
     <ClCompile Include="minizip\unzip.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NFFileProcess.cpp" />
     <ClCompile Include="zlib\adler32.c" />
     <ClCompile Include="zlib\compress.c" />
     <ClCompile Include="zlib\crc32.c" />
@@ -102,7 +102,7 @@
     <ClCompile Include="zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileProcess.h" />
+    <ClInclude Include="NFFileProcess.h" />
     <ClInclude Include="Utf8ToGbk.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

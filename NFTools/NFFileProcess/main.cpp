@@ -1,6 +1,8 @@
-#include "FileProcess.h"
+#include "NFFileProcess.h"
 #include <iostream>
 #include <chrono>
+
+#include "NFComm/NFPluginModule/NFPlatform.h"
 
 int main(int argc, const char *argv[])
 {
@@ -12,7 +14,7 @@ int main(int argc, const char *argv[])
 	for (int i = 0;i < 1;i++)
 	{
 		auto t1 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		FileProcess* fp = new FileProcess();
+		NFFileProcess* fp = new NFFileProcess();
 		fp->SetUTF8(false);//set it true to convert UTF8 to GBK for supporting chinese in NF to show. 
 		fp->OnCreateXMLFile();
 		fp->OnCreateMysqlFile();

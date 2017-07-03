@@ -32,13 +32,24 @@
 #include <sys/stat.h>
 #endif
 
-
-
-class FileProcess
+class NFClassStruct
 {
 public:
-	FileProcess();
-	~FileProcess();
+	NFClassStruct()
+	{
+		//xObject = NF_SHARE_PTR<NFIObject>(new NFCObject(NFGUID(), nullptr));
+	}
+
+	std::string strPath;
+	FILE* xWriter;
+	//NF_SHARE_PTR<NFIObject> xObject;
+};
+
+class NFFileProcess
+{
+public:
+	NFFileProcess();
+	~NFFileProcess();
 
 	void OnCreateXMLFile();
 	void OnCreateMysqlFile();
@@ -46,7 +57,7 @@ public:
 
 private:
 	void CreateProtoFile();
-	void CreateNameFile();
+	void CreateFileHead();
 	void CreateStructThreadFunc();
 	void CreateIniThreadFunc();
 	bool CreateStructXML(std::string strFile, std::string strFileName);
@@ -59,6 +70,8 @@ private:
 	char * NewChar(const std::string& str);
 
 private:
+
+	//NFMapEx<std::string, NFClassStruct> mxClassStruct;
 
 	bool bConvertIntoUTF8 = false;
 
@@ -84,6 +97,7 @@ private:
 	std::string strHPPFile = "../proto/NFProtocolDefine.hpp";
 	std::string strJavaFile = "../proto/NFProtocolDefine.java";
 	std::string strCSFile = "../proto/NFProtocolDefine.cs";
+
 
 	FILE* mysqlWriter = nullptr;
 	FILE* mysqlClassWriter = nullptr;
