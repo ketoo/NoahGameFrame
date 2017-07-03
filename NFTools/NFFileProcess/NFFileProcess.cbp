@@ -57,7 +57,7 @@
 			<Add option="-D_CRT_SECURE_NO_WARNINGS" />
 			<Add directory="NFFIleProcess/" />
 		</Compiler>
-<Unit filename="FileProcess.cpp" />
+<Unit filename="NFFileProcess.cpp" />
 <Unit filename="MiniExcelReader\MiniExcelReader.cpp" />
 <Unit filename="minizip\ioapi.c" />
 <Unit filename="minizip\ioapi_mem.c" />
@@ -78,7 +78,7 @@
 <Unit filename="zlib\trees.c" />
 <Unit filename="zlib\uncompr.c" />
 <Unit filename="zlib\zutil.c" />
-<Unit filename="FileProcess.h" />
+<Unit filename="NFFileProcess.h" />
 <Unit filename="Utf8ToGbk.h" />
 			<Option virtualFolder="MiniExcelReader/" />
 		</Unit>
