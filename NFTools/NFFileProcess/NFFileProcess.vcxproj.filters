@@ -74,22 +74,14 @@
     <ClCompile Include="zlib\zutil.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MiniExcelReader\MiniExcelReader.cpp">
       <Filter>MiniExcelReader</Filter>
     </ClCompile>
-    <ClCompile Include="FileProcess.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
+    <ClCompile Include="NFFileProcess.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileProcess.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Utf8ToGbk.h">
-      <Filter>Header</Filter>
-    </ClInclude>
+    <ClInclude Include="NFFileProcess.h" />
+    <ClInclude Include="Utf8ToGbk.h" />
   </ItemGroup>
 </Project>

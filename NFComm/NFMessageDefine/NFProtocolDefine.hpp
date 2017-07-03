@@ -1047,7 +1047,7 @@ public:
 	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
 	// Property
 	static const std::string& SkillType(){ static std::string xSkillType = "SkillType"; return xSkillType; } // int
-	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState; } // int
+	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState; } // string
 	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
 	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
 	static const std::string& ConsumeProperty(){ static std::string xConsumeProperty = "ConsumeProperty"; return xConsumeProperty; } // string
