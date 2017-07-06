@@ -17,6 +17,7 @@
 */
 
 #include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -27,11 +28,6 @@
 #include "zlib.h"
 #include "unzip.h"
 
-#ifdef STDC
-#  include <stddef.h>
-#  include <string.h>
-#  include <stdlib.h>
-#endif
 #ifdef NO_ERRNO_H
    extern int errno;
 #else
@@ -1348,18 +1344,17 @@ extern int ZEXPORT unzReadCurrentFile(unzFile file, voidp buf, unsigned len)
         if (s->pfile_in_zip_read->stream.avail_in == 0)
         {
             uLong bytes_to_read = UNZ_BUFSIZE;
-            uLong bytes_not_read = 0;
-            uLong bytes_read = 0;
-            uLong total_bytes_read = 0;
+			uLong bytes_not_read = 0;
+			uLong bytes_read = 0;
+			uLong total_bytes_read = 0;
 
             if (s->pfile_in_zip_read->stream.next_in != NULL)
-                bytes_not_read = s->pfile_in_zip_read->read_buffer + UNZ_BUFSIZE -
-                    s->pfile_in_zip_read->stream.next_in;
+                bytes_not_read = (uLong)(s->pfile_in_zip_read->read_buffer + UNZ_BUFSIZE - s->pfile_in_zip_read->stream.next_in);
             bytes_to_read -= bytes_not_read;
             if (bytes_not_read > 0)
                 memcpy(s->pfile_in_zip_read->read_buffer, s->pfile_in_zip_read->stream.next_in, bytes_not_read);
             if (s->pfile_in_zip_read->rest_read_compressed < bytes_to_read)
-                bytes_to_read = (uInt)s->pfile_in_zip_read->rest_read_compressed;
+                bytes_to_read = (uLong)s->pfile_in_zip_read->rest_read_compressed;
 
             while (total_bytes_read != bytes_to_read)
             {

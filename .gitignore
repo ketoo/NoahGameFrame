@@ -31,6 +31,7 @@
 *.user
 *.exp
 *.vc.db
+*.*.manifest
 
 # Codeblocks
 *.layout
