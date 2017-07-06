@@ -3,14 +3,14 @@
 echo Building dependencies...
 
 echo Compiling libevent
-"..\\Tool\\7z.exe" x libevent-2.0.22-stable.tar.gz -Y
-"..\\Tool\\7z.exe" x libevent-2.0.22-stable.tar -Y
-del libevent-2.0.22-stable.tar
+"..\\Tool\\7z.exe" x libevent-2.1.8-stable.tar.gz -Y
+"..\\Tool\\7z.exe" x libevent-2.1.8-stable.tar -Y
+del libevent-2.1.8-stable.tar
 
 
 if exist libevent rd /S /Q libevent
-rename libevent-2.0.22-stable libevent
-rd /S /Q libevent-2.0.22-stable
+rename libevent-2.1.8-stable libevent
+rd /S /Q libevent-2.1.8-stable
 
 echo extract libevent libs
 "..\\Tool\\7z.exe" x libevent_libs.zip -Y
