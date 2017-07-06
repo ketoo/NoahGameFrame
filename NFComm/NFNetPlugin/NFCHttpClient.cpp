@@ -46,6 +46,8 @@ bool NFCHttpClient::Initialization(const std::string& strUserAgent)
 #endif
 	m_strUserAgent = strUserAgent;
 
+#if NF_ENABLE_SSL
+
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
 	// Initialize OpenSSL
 	SSL_library_init();
@@ -59,6 +61,8 @@ bool NFCHttpClient::Initialization(const std::string& strUserAgent)
 		printf("SSL_CTX_new err.");
 		return false;
 	}
+
+#endif
 
 	m_pBase = event_base_new();
 	if (m_pBase == nullptr)
@@ -76,6 +80,8 @@ bool NFCHttpClient::Final()
 		event_base_free(m_pBase);
 		m_pBase = nullptr;
 	}
+
+#if NF_ENABLE_SSL
 	if (m_pSslCtx)
 	{
 		SSL_CTX_free(m_pSslCtx);
@@ -96,7 +102,7 @@ bool NFCHttpClient::Final()
 
 	sk_SSL_COMP_free(SSL_COMP_get_compression_methods());
 #endif /* (OPENSSL_VERSION_NUMBER < 0x10100000L) || defined(LIBRESSL_VERSION_NUMBER) */
-
+#endif
 	return true;
 }
 
@@ -168,19 +174,23 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 	struct bufferevent* bev = NULL;
 
 
+#if NF_ENABLE_SSL
 	SSL *pSSL = SSL_new(m_pSslCtx);
 	if (pSSL == NULL) {
 		printf("SSL_new err.");
 		return false;
 	}
+#endif
 
 	if (!isHttps) {
 		bev = bufferevent_socket_new(m_pBase, -1, BEV_OPT_CLOSE_ON_FREE);
 	}
 	else {
+#if NF_ENABLE_SSL
 		bev = bufferevent_openssl_socket_new(m_pBase, -1, pSSL,
 			BUFFEREVENT_SSL_CONNECTING,
 			BEV_OPT_CLOSE_ON_FREE | BEV_OPT_DEFER_CALLBACKS);
+#endif
 	}
 
 	if (bev == NULL) {
@@ -188,10 +198,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 		return false;
 	}
 
+#if NF_ENABLE_SSL
 	if (isHttps)
 	{
 		bufferevent_openssl_set_allow_dirty_shutdown(bev, 1);
 	}
+#endif
 
 	struct evhttp_connection* evcon = evhttp_connection_base_bufferevent_new(m_pBase, NULL, bev, host, port);
 	if (evcon == NULL) {
@@ -278,12 +290,14 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
 		char buffer[512] = { 0 };
 		int nread = 0;
 
+#if NF_ENABLE_SSL
 		while ((oslerr = bufferevent_get_openssl_error(bev))) {
 			ERR_error_string_n(oslerr, buffer, sizeof(buffer));
 			fprintf(stderr, "%s\n", buffer);
 			strErrMsg += std::string(buffer);
 			printed_err = 1;
 		}
+#endif
 		/* If the OpenSSL error queue was empty, maybe it was a
 		* socket error; let's try printing that. */
 		if (!printed_err) {
@@ -335,8 +349,10 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
 	{
 		if (pHttpObj->m_pBev)
 		{
+#if NF_ENABLE_SSL
 			SSL* pSSL = bufferevent_openssl_get_ssl(pHttpObj->m_pBev);
 			SSL_free(pSSL);
+#endif
 		}
 	}
 
