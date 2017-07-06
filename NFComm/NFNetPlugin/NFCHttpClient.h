@@ -65,7 +65,9 @@ private:
 private:
 	std::string			m_strUserAgent;
 	struct event_base*	m_pBase = nullptr;
+#if NF_ENABLE_SSL
 	SSL_CTX *			m_pSslCtx = nullptr;
+#endif
 	int					m_nRetry = 2;
 	int					m_nTimeOut = 2;
 };
