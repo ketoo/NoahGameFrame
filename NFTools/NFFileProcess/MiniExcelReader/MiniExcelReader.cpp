@@ -263,9 +263,9 @@ namespace MiniExcelReader {
 
 	void ExcelFile::parseRange(const std::string& value, Range& range)
 	{
-		int index = value.find_first_of(':');
+		size_t index = value.find_first_of(':');
 
-		if (index != -1)
+		if (index != std::string::npos)
 		{
 			parseCell(value.substr(0, index), range.firstRow, range.firstCol);
 			parseCell(value.substr(index + 1), range.lastRow, range.lastCol);
