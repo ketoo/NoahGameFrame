@@ -605,6 +605,7 @@ public:
 	static const std::string& Climb(){ static std::string xClimb = "Climb"; return xClimb; } // int
 	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
 	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
+	static const std::string& Idle(){ static std::string xIdle = "Idle"; return xIdle; } // string
 	static const std::string& SkillNormal(){ static std::string xSkillNormal = "SkillNormal"; return xSkillNormal; } // string
 	static const std::string& SkillAttack(){ static std::string xSkillAttack = "SkillAttack"; return xSkillAttack; } // string
 	static const std::string& SkillTHUMP(){ static std::string xSkillTHUMP = "SkillTHUMP"; return xSkillTHUMP; } // string
