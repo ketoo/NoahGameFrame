@@ -588,6 +588,7 @@ public class NPC
 	public static readonly String Climb = "Climb"; // int
 	public static readonly String AtkDis = "AtkDis"; // float
 	public static readonly String DropPackList = "DropPackList"; // string
+	public static readonly String Idle = "Idle"; // string
 	public static readonly String SkillNormal = "SkillNormal"; // string
 	public static readonly String SkillAttack = "SkillAttack"; // string
 	public static readonly String SkillTHUMP = "SkillTHUMP"; // string

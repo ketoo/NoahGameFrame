@@ -564,6 +564,7 @@ public class NPC {
 	public static final String Climb = "Climb"; // int
 	public static final String AtkDis = "AtkDis"; // float
 	public static final String DropPackList = "DropPackList"; // string
+	public static final String Idle = "Idle"; // string
 	public static final String SkillNormal = "SkillNormal"; // string
 	public static final String SkillAttack = "SkillAttack"; // string
 	public static final String SkillTHUMP = "SkillTHUMP"; // string
