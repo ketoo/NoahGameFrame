@@ -197,8 +197,8 @@ void NFFileProcess::CreateIniThreadFunc()
 		StringReplace(fileName, "\\", "/");
 		StringReplace(fileName, "//", "/");
 
-		int nLastPoint = fileName.find_last_of(".") + 1;
-		int nLastSlash = fileName.find_last_of("/") + 1;
+		size_t nLastPoint = fileName.find_last_of(".") + 1;
+		size_t nLastSlash = fileName.find_last_of("/") + 1;
 		std::string strFileName = fileName.substr(nLastSlash, nLastPoint - nLastSlash - 1);
 		std::string strFileExt = fileName.substr(nLastPoint, fileName.length() - nLastPoint);
 
@@ -639,8 +639,8 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 	////////////////////////////////////////////////////////////////////////////
 
 	std::string strFilePath(strFile);
-	int nLastPoint = strFilePath.find_last_of(".") + 1;
-	int nLastSlash = strFilePath.find_last_of("/") + 1;
+	size_t nLastPoint = strFilePath.find_last_of(".") + 1;
+	size_t nLastSlash = strFilePath.find_last_of("/") + 1;
 	std::string strFileExt = strFilePath.substr(nLastPoint, strFilePath.length() - nLastPoint);
 
 	std::string strXMLFile = strToolBasePath + strXMLStructPath + strFileName;
@@ -777,6 +777,7 @@ bool NFFileProcess::CreateIniXML(std::string strFile)
 						value = "";
 					}
 				}
+
 				//check the field is utf8, then convert it into gbk.
 				auto descLength = value.size();
 				if (bConvertIntoUTF8 && IsTextUTF8(value.c_str(), descLength))
@@ -828,8 +829,8 @@ bool NFFileProcess::CreateIniXML(std::string strFile)
 
 	////////////////////////////////////////////////////////////////////////////
 
-	int nLastPoint = strFile.find_last_of(".") + 1;
-	int nLastSlash = strFile.find_last_of("/") + 1;
+	size_t nLastPoint = strFile.find_last_of(".") + 1;
+	size_t nLastSlash = strFile.find_last_of("/") + 1;
 	std::string strFileName = strFile.substr(nLastSlash, nLastPoint - nLastSlash - 1);
 	std::string strFileExt = strFile.substr(nLastPoint, strFile.length() - nLastPoint);
 
@@ -868,7 +869,7 @@ bool NFFileProcess::LoadLogicClass(std::string strFile)
 	////////////////////////////////////////////////////
 	rapidxml::xml_document<> doc;
 	char* pData = NULL;
-	int nDataSize = 0;
+	size_t nDataSize = 0;
 
 	rapidxml::file<> fdoc(strFile.c_str());
 	nDataSize = fdoc.size();
@@ -916,7 +917,7 @@ bool NFFileProcess::LoadLogicClass(std::string strFile)
 	}
 	if (NULL != pData)
 	{
-		delete[]pData;
+		delete[] pData;
 	}
 
 	return true;
@@ -926,7 +927,7 @@ bool NFFileProcess::LoadClass(std::string strFile, std::string strTable)
 {
 	rapidxml::xml_document<> doc;
 	char* pData = NULL;
-	int nDataSize = 0;
+	size_t nDataSize = 0;
 
 	rapidxml::file<> fdoc(strFile.c_str());
 	nDataSize = fdoc.size();
