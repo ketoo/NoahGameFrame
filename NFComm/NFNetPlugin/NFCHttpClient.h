@@ -13,7 +13,7 @@
 
 
 #define DEFAULT_USER_AGENT "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
-
+#define EVENT__SIZEOF_SIZE_T
 class NFCHttpClient : public NFIHttpClient
 {
 public:

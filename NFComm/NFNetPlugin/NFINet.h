@@ -15,17 +15,6 @@
 #include <stdint.h>
 #include <iostream>
 #include <map>
-
-#include "NFComm/NFPluginModule/NFGUID.h"
-
-#ifndef _MSC_VER
-#include <netinet/in.h>
-#ifdef _XOPEN_SOURCE_EXTENDED
-#  include <arpa/inet.h>
-# endif
-#include <sys/socket.h>
-#endif
-
 #include <vector>
 #include <functional>
 #include <memory>
@@ -34,15 +23,19 @@
 #include <assert.h>
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
-#include <windows.h>
 #include <WinSock2.h>
-//#elseifdef _APPLE_
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#include <windows.h>
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX
 #include <libkern/OSByteOrder.h>
-#else
+#include <netinet/in.h>
+#ifdef _XOPEN_SOURCE_EXTENDED
+#  include <arpa/inet.h>
+# endif
+#include <sys/socket.h>
 #include <unistd.h>
 #endif
+
+#include "NFComm/NFPluginModule/NFGUID.h"
 
 #pragma pack(push, 1)
 

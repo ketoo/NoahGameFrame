@@ -9,15 +9,6 @@
 #include <stdint.h>
 #include <iostream>
 #include <map>
-
-#ifndef _MSC_VER
-#include <netinet/in.h>
-# ifdef _XOPEN_SOURCE_EXTENDED
-#  include <arpa/inet.h>
-# endif
-#include <sys/socket.h>
-#endif
-
 #include <vector>
 #include <functional>
 #include <memory>
@@ -25,10 +16,16 @@
 #include <vector>
 #include <assert.h>
 
-#ifdef _MSC_VER
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <WinSock2.h>
 #include <windows.h>
 #else
 #include <unistd.h>
+#include <netinet/in.h>
+# ifdef _XOPEN_SOURCE_EXTENDED
+#  include <arpa/inet.h>
+# endif
+#include <sys/socket.h>
 #endif
 
 enum NFWebStatus
