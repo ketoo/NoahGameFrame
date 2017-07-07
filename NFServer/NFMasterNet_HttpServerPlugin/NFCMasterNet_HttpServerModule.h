@@ -31,7 +31,7 @@ protected:
 
 private:
 	NFIKernelModule* m_pKernelModule;
-	NFIHttpNetModule* m_pHttpNetModule;
+	NFIHttpServerModule* m_pHttpNetModule;
 	NFIMasterNet_ServerModule* m_pMasterServerModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;

@@ -1,6 +1,6 @@
 
-#ifndef NFI_HTTP_NET_H
-#define NFI_HTTP_NET_H
+#ifndef NFI_HTTP_SERVER_H
+#define NFI_HTTP_SERVER_H
 
 #include <cstring>
 #include <errno.h>
@@ -57,19 +57,16 @@ class NFHttpBody
 typedef std::function<void(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)> HTTP_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<HTTP_RECEIVE_FUNCTOR> HTTP_RECEIVE_FUNCTOR_PTR;
 
-class NFIHttpNet
+class NFIHttpServer
 {
 public:
 	virtual bool Execute() = 0;
 	virtual int InitServer(const unsigned short nPort) = 0;
 	virtual bool Final() = 0;
 
-public:
-	//
-	//virtual bool PostMsg(const std::string& strUrl, const NFHttpHeader& xHeader, const NFHttpBody& xBody) = 0;
-
 	virtual bool ResponseMsg(const NFHttpRequest & req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
 	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
+
 };
 
 #endif

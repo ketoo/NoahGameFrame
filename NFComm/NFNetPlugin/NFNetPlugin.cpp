@@ -9,8 +9,9 @@
 #include "NFNetPlugin.h"
 #include "NFCNetModule.h"
 #include "NFCNetClientModule.h"
-#include "NFCHttpNetModule.h"
-//#include "NFCWebsocketModule.h"
+#include "NFCHttpClientModule.h"
+#include "NFCHttpServerModule.h"
+#include "NFCWebsocketModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
@@ -45,14 +46,16 @@ void NFNetPlugin::Install()
 {
     REGISTER_MODULE(pPluginManager, NFINetModule, NFCNetModule)
     REGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
-	REGISTER_MODULE(pPluginManager, NFIHttpNetModule, NFCHttpNetModule)
-	//REGISTER_MODULE(pPluginManager, NFIWebsocketModule, NFCWebsocketModule)
+	REGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFCHttpServerModule)
+	REGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFCHttpClientModule)
+	REGISTER_MODULE(pPluginManager, NFIWebsocketModule, NFCWebsocketModule)
 }
 
 void NFNetPlugin::Uninstall()
 {
-	//UNREGISTER_MODULE(pPluginManager, NFIWebsocketModule, NFCWebsocketModule)
+	UNREGISTER_MODULE(pPluginManager, NFIWebsocketModule, NFCWebsocketModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHttpClientModule, NFCHttpClientModule)
     UNREGISTER_MODULE(pPluginManager, NFINetClientModule, NFCNetClientModule)
     UNREGISTER_MODULE(pPluginManager, NFINetModule, NFCNetModule)
-	UNREGISTER_MODULE(pPluginManager, NFIHttpNetModule, NFCHttpNetModule)
+	UNREGISTER_MODULE(pPluginManager, NFIHttpServerModule, NFCHttpServerModule)
 }

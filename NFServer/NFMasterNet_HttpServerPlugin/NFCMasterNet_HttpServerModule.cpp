@@ -18,7 +18,7 @@
 
 bool NFCMasterNet_HttpServerModule::Init()
 {
-	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpNetModule>();
+	m_pHttpNetModule = pPluginManager->FindModule<NFIHttpServerModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pMasterServerModule = pPluginManager->FindModule<NFIMasterNet_ServerModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
