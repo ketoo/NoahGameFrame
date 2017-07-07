@@ -1,26 +1,26 @@
 // -------------------------------------------------------------------------
-//    @FileName      	:   NFCHttpNetModule.h
+//    @FileName      	:   NFCHttpServerModule.h
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2017-06-17
-//    @Module           :   NFCHttpNetModule
+//    @Module           :   NFCHttpServerModule
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFC_HTTPNET_MODULE_H
-#define NFC_HTTPNET_MODULE_H
+#ifndef NFC_HTTP_SERVER_MODULE_H
+#define NFC_HTTP_SERVER_MODULE_H
 
 #include <iostream>
-#include "NFComm/NFNetPlugin/NFCHttpNet.h"
+#include "NFComm/NFNetPlugin/NFCHttpServer.h"
 #include "NFComm/NFPluginModule/NFIHttpNetModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
-class NFCHttpNetModule
-	: public NFIHttpNetModule
+class NFCHttpServerModule
+	: public NFIHttpServerModule
 {
 
 public:
-	NFCHttpNetModule(NFIPluginManager* p);
-	virtual ~NFCHttpNetModule();
+	NFCHttpServerModule(NFIPluginManager* p);
+	virtual ~NFCHttpServerModule();
 	
 public:
 
@@ -39,7 +39,7 @@ private:
 
 private:
 	NFILogModule* mLogModule;
-	NFIHttpNet* mpHttpNet;
+	NFIHttpServer* m_pHttpServer;
 
 	std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
 	std::list<HTTP_RECEIVE_FUNCTOR_PTR> mComMsgCBList;

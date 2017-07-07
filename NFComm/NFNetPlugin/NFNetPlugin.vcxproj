@@ -13,9 +13,10 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCHttpClient.cpp" />
-    <ClCompile Include="NFCHttpNetModule.cpp" />
+    <ClCompile Include="NFCHttpClientModule.cpp" />
+    <ClCompile Include="NFCHttpServer.cpp" />
+    <ClCompile Include="NFCHttpServerModule.cpp" />
     <ClCompile Include="NFCNet.cpp" />
-    <ClCompile Include="NFCHttpNet.cpp" />
     <ClCompile Include="NFCNetClientModule.cpp" />
     <ClCompile Include="NFCNetModule.cpp" />
     <ClCompile Include="NFCWebsocketModule.cpp" />
@@ -24,7 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCHttpClient.h" />
-    <ClInclude Include="NFCHttpNetModule.h" />
+    <ClInclude Include="NFCHttpClientModule.h" />
+    <ClInclude Include="NFCHttpServer.h" />
+    <ClInclude Include="NFCHttpServerModule.h" />
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFCNetClientModule.h" />
     <ClInclude Include="NFCNetModule.h" />
@@ -33,7 +36,6 @@
     <ClInclude Include="NFIHttpClient.h" />
     <ClInclude Include="NFIHttpNet.h" />
     <ClInclude Include="NFINet.h" />
-    <ClInclude Include="NFCHttpNet.h" />
     <ClInclude Include="NFIWS.h" />
     <ClInclude Include="NFNetPlugin.h" />
   </ItemGroup>
