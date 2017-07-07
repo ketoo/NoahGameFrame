@@ -1,26 +1,25 @@
-#ifndef NFC_HTTP_NET_H
-#define NFC_HTTP_NET_H
+#ifndef NFC_HTTP_SERVER_H
+#define NFC_HTTP_SERVER_H
 
-#include "NFIHttpNet.h"
+#include "NFIHttpServer.h"
 
-class NFCHttpNet : public NFIHttpNet
+class NFCHttpServer : public NFIHttpServer
 {
 public:
-	NFCHttpNet()
+	NFCHttpServer()
 	{
 	}
 
 	template<typename BaseType>
-	NFCHttpNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl))
+	NFCHttpServer(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl))
 	{
 		base = NULL;
 		mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		mPort = 0;
 	}
 	
-	virtual ~NFCHttpNet() {};
+	virtual ~NFCHttpServer() {};
 
-public:
 	virtual bool Execute();
 	virtual int InitServer(const unsigned short nPort);
 	virtual bool Final();
@@ -30,6 +29,7 @@ public:
 	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
 private:
+
 	bool ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
 
 	static void listener_cb(struct evhttp_request *req, void *arg);

@@ -10,13 +10,13 @@
 #define NFI_HTTP_NET_MODULE_H
 
 #include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/NFNetPlugin/NFIHttpNet.h"
+#include "NFComm/NFNetPlugin/NFIHttpServer.h"
 
-class NFIHttpNetModule
+class NFIHttpServerModule
 	: public NFIModule
 {
 public:
-	virtual ~NFIHttpNetModule() {};	
+	virtual ~NFIHttpServerModule() {};	
 
 	// register msg callback
 	template<typename BaseType>
