@@ -2,22 +2,10 @@
 
 echo Building dependencies...
 
-echo Compiling libevent
-"..\\Tool\\7z.exe" x libevent-2.1.8-stable.tar.gz -Y
-"..\\Tool\\7z.exe" x libevent-2.1.8-stable.tar -Y
-del libevent-2.1.8-stable.tar
-
-
+REM extract libevent libs
 if exist libevent rd /S /Q libevent
-rename libevent-2.1.8-stable libevent
-rd /S /Q libevent-2.1.8-stable
-
-echo extract libevent libs
-"..\\Tool\\7z.exe" x libevent_libs.zip -Y
-copy lib\\Release\\libevent.a lib\\Debug\\ /Y
-copy lib\\Release\\libevent.lib lib\\Debug\\ /Y
-copy lib\\Release\\libevent_core.a lib\\Debug\\ /Y
-copy lib\\Release\\libevent_core.lib lib\\Debug\\ /Y
+echo Compiling libevent
+"..\\Tool\\7z.exe" x libevent.zip -Y
 
 echo Compiling mysql
 "..\\Tool\\7z.exe" x mysqlpp_libs.zip -Y
