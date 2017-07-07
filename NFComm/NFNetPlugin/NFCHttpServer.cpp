@@ -18,7 +18,6 @@
 #include <dirent.h>
 #endif
 
-#include "NFCHttpNet.h"
 #include <string.h>
 #include <event2/bufferevent.h>
 #include "event2/bufferevent_struct.h"
@@ -34,13 +33,14 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "NFCHttpServer.h"
 
 #ifndef LIBEVENT_SRC
 #pragma comment( lib, "libevent.lib")
 #endif
 
 
-bool NFCHttpNet::Execute()
+bool NFCHttpServer::Execute()
 {
 	if (base)
 	{
@@ -51,7 +51,7 @@ bool NFCHttpNet::Execute()
 }
 
 
-int NFCHttpNet::InitServer(const unsigned short port)
+int NFCHttpServer::InitServer(const unsigned short port)
 {
 	mPort = port;
 	//struct event_base *base;
@@ -89,9 +89,9 @@ int NFCHttpNet::InitServer(const unsigned short port)
 }
 
 
-void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
+void NFCHttpServer::listener_cb(struct evhttp_request *req, void *arg)
 {
-	NFCHttpNet* pNet = (NFCHttpNet*)arg;
+	NFCHttpServer* pNet = (NFCHttpServer*)arg;
 	NFHttpRequest request;
 	request.req = req;
 	//uri
@@ -156,7 +156,7 @@ void NFCHttpNet::listener_cb(struct evhttp_request *req, void *arg)
 	evbuffer_free(eventBuffer);
 	}*/
 }
-bool NFCHttpNet::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
+bool NFCHttpServer::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason)
 {
 	evhttp_request* pHttpReq = (evhttp_request*)req.req;
 	//create buffer
@@ -171,7 +171,7 @@ bool NFCHttpNet::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg
 	return true;
 }
 
-bool NFCHttpNet::ResponseFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
+bool NFCHttpServer::ResponseFile(const NFHttpRequest & req, const std::string & strPath, const std::string & strFileName)
 {
 	//Add response type
 	std::map<std::string, std::string> typeMap;
@@ -247,7 +247,7 @@ bool NFCHttpNet::ResponseFile(const NFHttpRequest & req, const std::string & str
 	return false;
 }
 
-bool NFCHttpNet::ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType)
+bool NFCHttpServer::ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType)
 {
 	evhttp_request* pHttpReq = (evhttp_request*)req.req;
 
@@ -264,7 +264,7 @@ bool NFCHttpNet::ResponseFile(const NFHttpRequest& req, const int fd, struct sta
 }
 
 
-bool NFCHttpNet::Final()
+bool NFCHttpServer::Final()
 {
 	if (base)
 	{
@@ -274,7 +274,7 @@ bool NFCHttpNet::Final()
 	return true;
 }
 
-std::vector<std::string> NFCHttpNet::Split(const std::string& str, std::string delim)
+std::vector<std::string> NFCHttpServer::Split(const std::string& str, std::string delim)
 {
 	std::vector<std::string> result;
 	if (str.empty() || delim.empty())
