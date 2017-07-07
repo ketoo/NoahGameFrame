@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFCHttpClient.cpp" />
-    <ClCompile Include="NFCHttpServerModule.cpp" />
+    <ClCompile Include="NFCHttpNetModule.cpp" />
     <ClCompile Include="NFCNet.cpp" />
     <ClCompile Include="NFCHttpNet.cpp" />
     <ClCompile Include="NFCNetClientModule.cpp" />
@@ -24,12 +24,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFCHttpClient.h" />
-    <ClInclude Include="NFCHttpServerModule.h" />
+    <ClInclude Include="NFCHttpNetModule.h" />
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFCNetClientModule.h" />
     <ClInclude Include="NFCNetModule.h" />
     <ClInclude Include="NFCWebsocketModule.h" />
     <ClInclude Include="NFCWS.h" />
+    <ClInclude Include="NFIHttpClient.h" />
     <ClInclude Include="NFIHttpNet.h" />
     <ClInclude Include="NFINet.h" />
     <ClInclude Include="NFCHttpNet.h" />
@@ -82,7 +83,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_X64;_DEBUG;_LIB;WIN32;WIN;NF_NONCLIENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\openssl\include;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>false</BrowseInformation>
     </ClCompile>
     <Link>
@@ -103,7 +104,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_X64;WIN;NF_NONCLIENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\protobuf\src\;$(SolutionDir);$(SolutionDir)\Dependencies\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\nmake;$(SolutionDir)\Dependencies\libevent\;$(SolutionDir)\Dependencies\libevent\WIN32-Code\;$(SolutionDir)\Dependencies\libevent\include\;$(SolutionDir)\Dependencies\libevent\compat\;$(SolutionDir)\Dependencies\websocketpp;$(SolutionDir)\Dependencies\asio;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
