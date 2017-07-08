@@ -34,7 +34,7 @@ bool NFCHttpClient::Execute()
 
 bool NFCHttpClient::Init()
 {
-#ifdef _MSC_VER	
+#if NF_PLATFORM == NF_PLATFORM_WIN
 	WORD wVersionRequested;
 	WSADATA wsaData;
 	wVersionRequested = MAKEWORD(2, 2);
@@ -328,9 +328,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
 	while ((nread = evbuffer_remove(evhttp_request_get_input_buffer(req),
 		buffer, sizeof(buffer)))
 		   > 0) {
-		/* These are just arbitrary chunks of 256 bytes.
-		* They are not lines, so we can't treat them as such. */
-		//fwrite(buffer, nread, 1, stdout);
+		//TODO it's not good idea,to append or memcpy 
 		strResp += std::string(buffer, nread);
 	}
 
