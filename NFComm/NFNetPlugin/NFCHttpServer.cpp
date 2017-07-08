@@ -1,4 +1,4 @@
-#include "NFComm/NFPluginModule/NFPlatform.h"
+#include "NFCHttpServer.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <winsock2.h>
@@ -33,7 +33,6 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "NFCHttpServer.h"
 
 #ifndef LIBEVENT_SRC
 #pragma comment( lib, "libevent.lib")
