@@ -17,14 +17,6 @@
 
 #include "NFComm/NFPluginModule/NFGUID.h"
 
-#ifndef _MSC_VER
-#include <netinet/in.h>
-#ifdef _XOPEN_SOURCE_EXTENDED
-#  include <arpa/inet.h>
-# endif
-#include <sys/socket.h>
-#endif
-
 #include <vector>
 #include <functional>
 #include <memory>
@@ -52,13 +44,8 @@
 #endif
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
 #include <windows.h>
 #include <WinSock2.h>
-//#elseifdef _APPLE_
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX
-#include <libkern/OSByteOrder.h>
-#include <unistd.h>
 #endif
 
 typedef std::function<void(const int state_code, const std::string& strRespData, const std::string& strUserData)> HTTP_RESP_FUNCTOR;
