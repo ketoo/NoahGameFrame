@@ -62,6 +62,7 @@ public:
 
 private:
 	static void OnHttpReqDone(struct evhttp_request *req, void *ctx);
+
 	bool MakeRequest(const std::string& strUri,
 		const std::string& strUserData,
 		const std::string& strPostData,
