@@ -56,9 +56,8 @@
 #include <windows.h>
 #include <WinSock2.h>
 //#elseifdef _APPLE_
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX
 #include <libkern/OSByteOrder.h>
-#else
 #include <unistd.h>
 #endif
 
