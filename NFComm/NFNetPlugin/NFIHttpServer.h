@@ -1,7 +1,6 @@
 
 #ifndef NFI_HTTP_SERVER_H
 #define NFI_HTTP_SERVER_H
-
 #include <cstring>
 #include <errno.h>
 #include <stdio.h>
@@ -16,6 +15,7 @@
 #include <vector>
 #include <assert.h>
 
+#include "NFComm/NFPluginModule/NFPlatform.h"
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WinSock2.h>
 #include <windows.h>
