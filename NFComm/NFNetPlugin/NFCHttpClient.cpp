@@ -32,9 +32,8 @@ bool NFCHttpClient::Execute()
 	return true;
 }
 
-bool NFCHttpClient::Initialization(const std::string& strUserAgent)
+bool NFCHttpClient::Init()
 {
-
 #ifdef _MSC_VER	
 	WORD wVersionRequested;
 	WSADATA wsaData;
@@ -44,7 +43,7 @@ bool NFCHttpClient::Initialization(const std::string& strUserAgent)
 		return false;
 	}
 #endif
-	m_strUserAgent = strUserAgent;
+	m_strUserAgent = "";// strUserAgent;
 
 #if NF_ENABLE_SSL
 
