@@ -52,7 +52,7 @@ public:
 public:
 	virtual bool Execute();
 
-	virtual bool Initialization(const std::string& strUserAgent = std::string(DEFAULT_USER_AGENT));
+	virtual bool Init();
 
 	virtual bool Final();
 
