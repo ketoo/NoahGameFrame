@@ -72,7 +72,7 @@ public:
 
     virtual bool Execute() = 0;
 
-	virtual bool Initialization(const std::string& strUserAgent) = 0;
+	virtual bool Init() = 0;
 
 	virtual bool Final() = 0;
 

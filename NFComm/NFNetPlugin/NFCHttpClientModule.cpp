@@ -23,7 +23,7 @@ NFCHttpClientModule::~NFCHttpClientModule()
 
 bool NFCHttpClientModule::Init()
 {
-	m_pHttpClient->Initialization();
+	m_pHttpClient->Init();
 
 	return true;
 }
