@@ -43,7 +43,7 @@ bool NFCHttpClient::Init()
 		return false;
 	}
 #endif
-	m_strUserAgent = "";// strUserAgent;
+	m_strUserAgent = DEFAULT_USER_AGENT;// strUserAgent;
 
 #if NF_ENABLE_SSL
 
