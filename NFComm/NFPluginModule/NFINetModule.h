@@ -14,7 +14,7 @@
 #include "NFGUID.h"
 #include "NFIModule.h"
 #include "NFIPluginManager.h"
-#include "NFComm/NFNetPlugin/NFCNet.h"
+#include "NFComm/NFNetPlugin/NFINet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
