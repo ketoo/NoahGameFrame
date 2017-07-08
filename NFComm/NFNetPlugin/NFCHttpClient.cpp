@@ -124,7 +124,7 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 
 	scheme = evhttp_uri_get_scheme(http_uri);
 	std::string lowwerScheme(scheme);
-	std::transform(lowwerScheme.begin(), lowwerScheme.end(), lowwerScheme.begin(), std::tolower);
+	std::transform(lowwerScheme.begin(), lowwerScheme.end(), lowwerScheme.begin(), (int(*)(int))std::tolower);
 	if (scheme == NULL || (lowwerScheme.compare("https") != 0 && lowwerScheme.compare("http") != 0)) {
 		return false;
 	}
