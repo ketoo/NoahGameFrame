@@ -26,7 +26,7 @@
 #include <WinSock2.h>
 #include <windows.h>
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX
-#include <libkern/OSByteOrder.h>
+//#include <libkern/OSByteOrder.h>
 #include <netinet/in.h>
 #ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
