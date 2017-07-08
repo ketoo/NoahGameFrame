@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <iosfwd>
-#include "NFINet.h"
+#include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"

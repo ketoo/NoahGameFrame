@@ -62,53 +62,24 @@
 #include <unistd.h>
 #endif
 
-#pragma pack(push, 1)
-
 typedef std::function<void(const int state_code, const std::string& strRespData, const std::string& strUserData)> HTTP_RESP_FUNCTOR;
 typedef std::shared_ptr<HTTP_RESP_FUNCTOR> HTTP_RESP_FUNCTOR_PTR;
-
-class NFIHttpClient;
-
-class HttpObject
-{
-public:
-	HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
-	{
-		m_pHttpClient = pNet;
-		m_pBev = pBev;
-		m_strUserData = strUserData;
-		m_pCB = pCB;
-	}
-
-	virtual ~HttpObject()
-	{
-	}
-
-	void SetUri(const std::string& strUri) {
-		m_strUri = strUri;
-	}
-
-	bufferevent*		m_pBev;
-	std::string			m_strUserData;
-	NFIHttpClient*		m_pHttpClient;
-	HTTP_RESP_FUNCTOR_PTR m_pCB;
-	std::string			m_strUri;
-};
 
 class NFIHttpClient
 {
 public:
 	virtual ~NFIHttpClient() {}
 
-    //need to call this function every frame to drive network library
     virtual bool Execute() = 0;
 
 	virtual bool Initialization(const std::string& strUserAgent) = 0;
 
 	virtual bool Final() = 0;
 
-};
+	virtual bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB) = 0;
 
-#pragma pack(pop)
+	virtual bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB) = 0;
+
+};
 
 #endif

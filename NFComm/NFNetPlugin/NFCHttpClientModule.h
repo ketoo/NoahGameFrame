@@ -21,46 +21,19 @@ public:
 	NFCHttpClientModule(NFIPluginManager* p);
 	virtual ~NFCHttpClientModule();
 	
-	virtual bool Init()
-	{
+	virtual bool Init();
 
-		return true;
-	}
+	virtual bool Execute();
+	
+	virtual bool Shut();
 
-	virtual bool AfterInit()
-	{
-		return true;
-	}
+	virtual bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB);
 
-	virtual bool CheckConfig()
-	{
-		return true;
-	}
+	virtual bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB);
 
-	virtual bool ReadyExecute()
-	{
-		return true;
-	}
 
-	virtual bool Execute()
-	{
-		return true;
-	}
-
-	virtual bool BeforeShut()
-	{
-		return true;
-	}
-
-	virtual bool Shut()
-	{
-		return true;
-	}
-
-	virtual bool Finalize()
-	{
-		return true;
-	}
+private:
+	NFIHttpClient* m_pHttpClient;
 };
 
 #endif
