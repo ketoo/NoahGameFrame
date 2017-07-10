@@ -9,10 +9,34 @@
 
 #include "NFIHttpClient.h"
 
-#pragma pack(push, 1)
-
-
 #define DEFAULT_USER_AGENT "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
+
+class HttpObject
+{
+public:
+	HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
+	{
+		m_pHttpClient = pNet;
+		m_pBev = pBev;
+		m_strUserData = strUserData;
+		m_pCB = pCB;
+	}
+
+	virtual ~HttpObject()
+	{
+	}
+
+	void SetUri(const std::string& strUri) {
+		m_strUri = strUri;
+	}
+
+	bufferevent*		m_pBev;
+	NFIHttpClient*		m_pHttpClient;
+	std::string			m_strUri;
+	std::string			m_strUserData;	
+	HTTP_RESP_FUNCTOR_PTR m_pCB;
+};
+
 
 class NFCHttpClient : public NFIHttpClient
 {
@@ -28,48 +52,33 @@ public:
 public:
 	virtual bool Execute();
 
-	virtual bool Initialization(const std::string& strUserAgent = std::string(DEFAULT_USER_AGENT));
+	virtual bool Init();
 
 	virtual bool Final();
 
-	template<typename BaseType>
-	bool PerformGet(const std::string& strUri, const std::string& strUserData,
-		BaseType* pBase,
-		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
-	{
-		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformGet(strUri, strUserData, pd);
-	}
+	virtual bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB);
 
-	template<typename BaseType>
-	bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData,
-		BaseType* pBase,
-		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
-	{
-		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformPost(strUri, strUserData, strPostData, pd);
-	}
+	virtual bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB);
 
 private:
 	static void OnHttpReqDone(struct evhttp_request *req, void *ctx);
+
 	bool MakeRequest(const std::string& strUri,
 		const std::string& strUserData,
 		const std::string& strPostData,
 		HTTP_RESP_FUNCTOR_PTR pCB,
 		bool bPost = false);
 
-	bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB);
-
-	bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB);
-
 private:
 	std::string			m_strUserAgent;
 	struct event_base*	m_pBase = nullptr;
-	SSL_CTX *			m_pSslCtx = nullptr;
+
 	int					m_nRetry = 2;
 	int					m_nTimeOut = 2;
-};
 
-#pragma pack(pop)
+#if NF_ENABLE_SSL
+	SSL_CTX *			m_pSslCtx = nullptr;
+#endif
+};
 
 #endif
