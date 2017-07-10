@@ -9,32 +9,25 @@
 
 #include "NFIHttpClient.h"
 
-#define DEFAULT_USER_AGENT "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
-
 class HttpObject
 {
 public:
 	HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
 	{
-		m_pHttpClient = pNet;
 		m_pBev = pBev;
-		m_strUserData = strUserData;
+		m_pHttpClient = pNet;
 		m_pCB = pCB;
+		m_strUserData = strUserData;
 	}
 
 	virtual ~HttpObject()
 	{
 	}
-
-	void SetUri(const std::string& strUri) {
-		m_strUri = strUri;
-	}
-
-	bufferevent*		m_pBev;
-	std::string			m_strUserData;
-	NFIHttpClient*		m_pHttpClient;
-	HTTP_RESP_FUNCTOR_PTR m_pCB;
-	std::string			m_strUri;
+	
+	bufferevent*			m_pBev;
+	NFIHttpClient*			m_pHttpClient;
+	HTTP_RESP_FUNCTOR_PTR	m_pCB;
+	std::string				m_strUserData;
 };
 
 
@@ -43,7 +36,7 @@ class NFCHttpClient : public NFIHttpClient
 public:
 	NFCHttpClient(int nRetry = 2, int nTimeoutSec = 2)
 		:m_nRetry(nRetry)
-		, m_nTimeOut(nTimeoutSec)
+		,m_nTimeOut(nTimeoutSec)
 	{
 	}
 
@@ -56,17 +49,22 @@ public:
 
 	virtual bool Final();
 
-	virtual bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB);
+	virtual bool PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB, 
+		const std::string& strUserData,
+		const std::map<std::string, std::string>& xHeaders);
 
-	virtual bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB);
+	virtual bool PerformPost(const std::string& strUri,const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+		const std::string& strUserData, 
+		const std::map<std::string, std::string>& xHeaders);
 
 private:
 	static void OnHttpReqDone(struct evhttp_request *req, void *ctx);
 
 	bool MakeRequest(const std::string& strUri,
+		HTTP_RESP_FUNCTOR_PTR pCB,
 		const std::string& strUserData,
 		const std::string& strPostData,
-		HTTP_RESP_FUNCTOR_PTR pCB,
+		const std::map<std::string, std::string>& xHeaders,
 		bool bPost = false);
 
 private:
