@@ -31,10 +31,10 @@ public:
 	}
 
 	bufferevent*		m_pBev;
-	std::string			m_strUserData;
 	NFIHttpClient*		m_pHttpClient;
-	HTTP_RESP_FUNCTOR_PTR m_pCB;
 	std::string			m_strUri;
+	std::string			m_strUserData;	
+	HTTP_RESP_FUNCTOR_PTR m_pCB;
 };
 
 
