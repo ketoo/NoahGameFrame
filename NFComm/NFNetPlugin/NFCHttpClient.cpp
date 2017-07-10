@@ -43,7 +43,6 @@ bool NFCHttpClient::Init()
 		return false;
 	}
 #endif
-	m_strUserAgent = DEFAULT_USER_AGENT;// strUserAgent;
 
 #if NF_ENABLE_SSL
 
@@ -106,9 +105,10 @@ bool NFCHttpClient::Final()
 }
 
 bool NFCHttpClient::MakeRequest(const std::string& strUri,
+	HTTP_RESP_FUNCTOR_PTR pCB,
 	const std::string& strUserData,
 	const std::string& strPostData,
-	HTTP_RESP_FUNCTOR_PTR pCB,
+	const std::map<std::string, std::string>& xHeaders,
 	bool bPost)
 {
 	struct evhttp_uri *http_uri = NULL;
@@ -218,7 +218,6 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 	}
 
 	HttpObject* pHttpObj = new HttpObject(this, bev, strUserData, pCB);
-	pHttpObj->SetUri(strUri);
 
 	// Fire off the request
 	struct evhttp_request* req = evhttp_request_new(OnHttpReqDone, pHttpObj);
@@ -230,9 +229,12 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 	struct evkeyvalq *output_headers = evhttp_request_get_output_headers(req);
 	evhttp_add_header(output_headers, "Host", host);
 	evhttp_add_header(output_headers, "Connection", "close");
-	evhttp_add_header(output_headers, "Content-Type", "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8");
-	evhttp_add_header(output_headers, "User-Agent", m_strUserAgent.c_str());
-	evhttp_add_header(output_headers, "Cache-Control", "no-cache");
+	std::map<std::string,std::string>::const_iterator it=xHeaders.cbegin();
+	while (it!=xHeaders.cend())
+	{
+		evhttp_add_header(output_headers, it->first.c_str(), it->second.c_str());
+		it++;
+	}
 
 	size_t nLen = strPostData.length();
 	if (nLen>0)
@@ -258,14 +260,18 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
 	return true;
 }
 
-bool NFCHttpClient::PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
+bool NFCHttpClient::PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
+	const std::string& strUserData,
+	const std::map<std::string, std::string>& xHeaders)
 {
-	return MakeRequest(strUri, strUserData, "", pCB, false);
+	return MakeRequest(strUri,pCB, strUserData, "",xHeaders, false);
 }
 
-bool NFCHttpClient::PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB)
+bool NFCHttpClient::PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+	const std::string& strUserData,
+	const std::map<std::string, std::string>& xHeaders)
 {
-	return MakeRequest(strUri, strUserData, strPostData, pCB, true);
+	return MakeRequest(strUri, pCB, strPostData, strUserData,xHeaders,true);
 }
 
 void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
