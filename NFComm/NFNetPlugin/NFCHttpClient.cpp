@@ -325,11 +325,8 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
 	}
 
 	int nRespCode = evhttp_request_get_response_code(req);
-	std::string strRespCodeLine = evhttp_request_get_response_code_line(req);
-
 	char buffer[512] = { 0 };
 	int nread = 0;
-
 	std::string strResp;
 	while ((nread = evbuffer_remove(evhttp_request_get_input_buffer(req),
 		buffer, sizeof(buffer)))
