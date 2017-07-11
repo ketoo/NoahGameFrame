@@ -62,9 +62,13 @@ public:
 
 	virtual bool Final() = 0;
 
-	virtual bool PerformGet(const std::string& strUri, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB) = 0;
+	virtual bool PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
+		const std::string& strUserData,
+		const std::map<std::string, std::string>& xHeaders) = 0;
 
-	virtual bool PerformPost(const std::string& strUri, const std::string& strUserData, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB) = 0;
+	virtual bool PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+		const std::string& strUserData,
+		const std::map<std::string, std::string>& xHeaders) = 0;
 
 };
 
