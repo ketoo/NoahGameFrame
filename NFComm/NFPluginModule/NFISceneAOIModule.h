@@ -104,11 +104,11 @@ public:
         {
             if (bPlayer)
             {
-                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>());
+                return pInfo->mxPlayerList.AddElement(ident, NF_SHARE_PTR<int>(new int(0)));
             }
             else
             {
-                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>());
+                return pInfo->mxOtherList.AddElement(ident, NF_SHARE_PTR<int>(new int(0)));
             }
         }
 
