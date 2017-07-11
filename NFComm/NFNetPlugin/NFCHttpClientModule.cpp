@@ -9,6 +9,16 @@
 #include "NFCHttpClientModule.h"
 #include "NFCHttpClient.h"
 
+#define DEFAULT_USER_AGENT "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
+
+std::map<std::string,std::string> NFCHttpClientModule::m_xDefaultHttpHeaders = {
+	{ "Connection", "close" },
+	{ "Content-Type", "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8" },
+	{ "User-Agent", DEFAULT_USER_AGENT },
+	{ "Cache-Control", "no-cache" }
+};
+
+
 NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager * p)
 {
 	pPluginManager = p;
@@ -41,12 +51,18 @@ bool NFCHttpClientModule::Shut()
 	return true;
 }
 
-bool NFCHttpClientModule::PerformGet(const std::string & strUri, const std::string & strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
+bool NFCHttpClientModule::PerformGet(const std::string& strUri, 
+	HTTP_RESP_FUNCTOR_PTR pCB, 
+	const std::string& strUserData/*=std::string()*/, 
+	const std::map<std::string, std::string>& xHeaders/*= m_xDefaultHttpHeaders*/)
 {
-	return m_pHttpClient->PerformGet(strUri, strUserData, pCB);
+	return m_pHttpClient->PerformGet(strUri,pCB,strUserData,xHeaders);
 }
 
-bool NFCHttpClientModule::PerformPost(const std::string & strUri, const std::string & strUserData, const std::string & strPostData, HTTP_RESP_FUNCTOR_PTR pCB)
+bool NFCHttpClientModule::PerformPost(const std::string& strUri, const std::string& strPostData, 
+	HTTP_RESP_FUNCTOR_PTR pCB, 
+	const std::string& strUserData /*= std::string()*/, 
+	const std::map<std::string, std::string>& xHeaders/*= m_xDefaultHttpHeaders*/)
 {
-	return m_pHttpClient->PerformPost(strUri, strUserData, strPostData, pCB);
+	return m_pHttpClient->PerformPost(strUri,strPostData,pCB,strUserData,xHeaders);
 }
