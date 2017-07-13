@@ -11,18 +11,16 @@
 
 #define DEFAULT_USER_AGENT "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36"
 
-std::map<std::string,std::string> NFCHttpClientModule::m_xDefaultHttpHeaders = {
-	{ "Connection", "close" },
-	{ "Content-Type", "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8" },
-	{ "User-Agent", DEFAULT_USER_AGENT },
-	{ "Cache-Control", "no-cache" }
-};
-
-
 NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager * p)
 {
 	pPluginManager = p;
 	m_pHttpClient = new NFCHttpClient();
+	m_xDefaultHttpHeaders = {
+		{ "Connection", "close" },
+		{ "Content-Type", "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8" },
+		{ "User-Agent", DEFAULT_USER_AGENT },
+		{ "Cache-Control", "no-cache" }
+	};
 }
 
 NFCHttpClientModule::~NFCHttpClientModule()
@@ -53,16 +51,16 @@ bool NFCHttpClientModule::Shut()
 
 bool NFCHttpClientModule::PerformGet(const std::string& strUri, 
 	HTTP_RESP_FUNCTOR_PTR pCB, 
-	const std::string& strUserData/*=std::string()*/, 
-	const std::map<std::string, std::string>& xHeaders/*= m_xDefaultHttpHeaders*/)
+	const std::string& strUserData, 
+	const std::map<std::string, std::string>& xHeaders)
 {
 	return m_pHttpClient->PerformGet(strUri,pCB,strUserData,xHeaders);
 }
 
 bool NFCHttpClientModule::PerformPost(const std::string& strUri, const std::string& strPostData, 
 	HTTP_RESP_FUNCTOR_PTR pCB, 
-	const std::string& strUserData /*= std::string()*/, 
-	const std::map<std::string, std::string>& xHeaders/*= m_xDefaultHttpHeaders*/)
+	const std::string& strUserData, 
+	const std::map<std::string, std::string>& xHeaders)
 {
 	return m_pHttpClient->PerformPost(strUri,strPostData,pCB,strUserData,xHeaders);
 }
