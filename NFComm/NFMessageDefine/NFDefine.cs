@@ -907,7 +907,10 @@ namespace NFMsg
       EGTST_TOKEN_BOUNTY = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_ACTIVITY", Value=3)]
-      EGTST_TOKEN_ACTIVITY = 3
+      EGTST_TOKEN_ACTIVITY = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGTST_TOKEN_BUILD", Value=4)]
+      EGTST_TOKEN_BUILD = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameItemExpiredType")]
