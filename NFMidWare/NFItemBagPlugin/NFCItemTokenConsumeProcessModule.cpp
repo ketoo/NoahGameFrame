@@ -41,10 +41,38 @@ bool NFCItemTokenConsumeProcessModule::Execute()
 
 int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	return 1;
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	if (nullptr == pHeroRecord)
+	{
+		return  1;
+	}
+
+	NFDataList varList;
+	if (pHeroRecord->FindString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strItemID, varList) <= 0)
+	{
+		return 0;
+	}
+
+	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+
+	return 100;
 }
 
 int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	return 1;
+	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::R_BuildingList());
+	if (nullptr == pBuild)
+	{
+		return  1;
+	}
+
+
+
+	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+	const std::string& strExtendHeroCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
+
+
+	return 100;
 }
