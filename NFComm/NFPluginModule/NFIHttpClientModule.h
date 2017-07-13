@@ -24,7 +24,7 @@ public:
 		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
 	{
 		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformGet(strUri,pd);
+		return PerformGet(strUri,pd,std::string(),m_xDefaultHttpHeaders);
 	}
 
 	template<typename BaseType>
@@ -33,7 +33,7 @@ public:
 		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
 	{
 		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformGet(strUri, pd,strUserData);
+		return PerformGet(strUri, pd,strUserData, m_xDefaultHttpHeaders);
 	}
 
 	template<typename BaseType>
@@ -51,7 +51,7 @@ public:
 		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
 	{
 		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformPost(strUri, strPostData, pd);
+		return PerformPost(strUri, strPostData, pd, std::string(), m_xDefaultHttpHeaders);
 	}
 
 
@@ -61,7 +61,7 @@ public:
 		void (BaseType::*handleRecieve)(const int state_code, const std::string& strRespData, const std::string& strUserData))
 	{
 		HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
-		return PerformPost(strUri,strPostData, pd,strUserData);
+		return PerformPost(strUri,strPostData, pd,strUserData, m_xDefaultHttpHeaders);
 	}
 
 
@@ -86,6 +86,7 @@ protected:
 		const std::string& strUserData,
 		const std::map<std::string, std::string>& xHeaders) = 0;
 
+	std::map<std::string, std::string> m_xDefaultHttpHeaders;
 };
 
 #endif
