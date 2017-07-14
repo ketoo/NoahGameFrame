@@ -304,6 +304,11 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 
 bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 {
+	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == xHeroID)
+	{
+		return false;
+	}
+
 	int nPos = GetFightPos(self, xHeroID);
 	if (nPos <= 0 || nPos > ECONSTDEFINE_HERO_MAXFIGHT_POS)
 	{
