@@ -95,6 +95,8 @@ void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMs
 			xAckData.set_scene_id(nSceneID);
 			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nPlayerID);
 
+			//create the building of the oppnent
+
 			return;
 		}
 		else
@@ -119,6 +121,9 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMs
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
+
+	//create the building of the oppnent
+
 	/*
 	//send tile's data to client
 	std::string strTileData;

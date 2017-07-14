@@ -401,11 +401,27 @@ message TileState
 	required int32		y				= 2;//
 	required int32		opr 			= 3;//0:rem;1:add
 }
-	
+
+message TileBuilding
+{
+	required int32		x				= 1;//
+	required int32		y				= 2;//
+	required string		configID 		= 3;
+}
+
+message TileNPC
+{
+	required int32		x				= 1;//
+	required int32		y				= 2;//
+	required string		configID 		= 3;//
+}
+
 //EGEC_ACK_MINING_TITLE
 message AckMiningTitle
 {	
 	repeated TileState		tile			= 1;//
+	repeated TileBuilding	building		= 2;//
+	repeated TileNPC		npc				= 3;//
 }
 
 //EGMI_REQ_SEARCH_OPPNENT
