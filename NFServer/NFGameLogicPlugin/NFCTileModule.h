@@ -63,6 +63,12 @@ protected:
 		int y;
 		std::string configID;
 	};
+	struct TileNPC
+	{
+		int x;
+		int y;
+		std::string configID;
+	};
 	struct TileData
 	{
 		//x,y,state
@@ -70,6 +76,9 @@ protected:
 
 		//x,y,building
 		NFMapEx<int, NFMapEx<int, TileBuilding>> mxTileBuilding;
+
+		//x,y,npc
+		NFMapEx<int, NFMapEx<int, TileNPC>> mxTileNPC;
 	};
 
 	NFMapEx<NFGUID, TileData> mxTileData;
