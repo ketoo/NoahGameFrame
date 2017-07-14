@@ -206,6 +206,46 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 		}
 	}
 
+	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xTileBuildingMap = xTileData->mxTileBuilding.First();
+	for (; xTileBuildingMap; xTileBuildingMap = xTileData->mxTileBuilding.Next())
+	{
+		NF_SHARE_PTR<TileBuilding> xStateData = xTileBuildingMap->First();
+		for (; xStateData; xStateData = xTileBuildingMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileBuilding* pTile = xData.add_building();
+			if (pTile)
+			{
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_configid(xStateData->configID);
+			}
+
+
+		}
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xTileNPCMap = xTileData->mxTileNPC.First();
+	for (; xTileNPCMap; xTileNPCMap = xTileData->mxTileNPC.Next())
+	{
+		NF_SHARE_PTR<TileNPC> xStateData = xTileNPCMap->First();
+		for (; xStateData; xStateData = xTileNPCMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileNPC* pTile = xData.add_npc();
+			if (pTile)
+			{
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_configid(xStateData->configID);
+			}
+
+
+		}
+	}
+
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
 	std::string strData;
 	if (xData.SerializeToString(&strData))
