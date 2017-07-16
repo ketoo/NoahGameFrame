@@ -288,14 +288,12 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
-
-		std::string strSheetName = sh.getName();
-
 		const MiniExcelReader::Range& dim = sh.getDimension();
 
-		std::string strUpperSheetName = strSheetName.substr(0, 8);
-		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
-		if (strUpperSheetName == "property")
+		std::string strSheetName = sh.getName();
+		transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+		if (strSheetName.find("property") != std::string::npos)
 		{
 			std::vector<std::string> colNames;
 			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
@@ -362,7 +360,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				}
 			}
 		}
-		else if (strUpperSheetName == "componen")
+		else if (strSheetName.find("componen") != std::string::npos)
 		{
 			std::vector<std::string> colNames;
 			for (int c = dim.firstCol; c <= dim.lastCol; c++)
@@ -416,7 +414,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				}
 			}
 		}
-		else
+		else if (strSheetName.find("record") != std::string::npos)
 		{
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
 			const int nRecordCount = nRowsCount / nRecordLineCount;
@@ -620,6 +618,10 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				strJavaEnumInfo += "\n\t};\n";
 				strCSEnumInfo += "\n\t};\n";
 			}
+		}
+		else
+		{
+			assert(0);
 		}
 	}
 	// cpp
