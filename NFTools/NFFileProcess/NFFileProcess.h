@@ -76,6 +76,9 @@ private:
 	bool bConvertIntoUTF8 = false;
 
 	int nCipher = 0;
+	const int nTitleLine = 9;
+	const int nRecordLineCount = 11;
+
 	std::vector<char *> tmpStrList;
 	std::string strCipherCfg = "conf";
 
@@ -83,10 +86,10 @@ private:
 	std::string strToolBasePath = "../";
 	std::string strRelativePath = "../../";
 	std::string strExcelStructPath = "Excel_Struct/";
-	std::string strXMLStructPath = "Struct/Class/";
+	std::string strXMLStructPath = "Struct/";
 
 	std::string strExcelIniPath = "Excel_Ini/";
-	std::string strXMLIniPath = "Ini/NPC/";
+	std::string strXMLIniPath = "Ini/";
 
 	std::string strLogicClassFile = "";
 	std::string strMySQLFile = "../mysql/NFrame.sql";

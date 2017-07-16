@@ -122,8 +122,8 @@ void NFFileProcess::CreateStructThreadFunc()
 	classElement->append_attribute(xmlDoc.allocate_attribute("Id", "IObject"));
 	classElement->append_attribute(xmlDoc.allocate_attribute("Type", "TYPE_IOBJECT"));
 
-	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + "Struct/Class/IObject.xml"))));
-	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + "Ini/NPC/IObject.xml"))));
+	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + "Struct/IObject.xml"))));
+	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + "Ini/IObject.xml"))));
 
 	classElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
 	classElement->append_attribute(xmlDoc.allocate_attribute("Desc", "IObject"));
@@ -289,7 +289,6 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 
-		int nTitleLine = 9;
 		std::string strSheetName = sh.getName();
 
 		const MiniExcelReader::Range& dim = sh.getDimension();
@@ -419,7 +418,6 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 		}
 		else
 		{
-			const int nRecordLineCount = 11;
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
 			const int nRecordCount = nRowsCount / nRecordLineCount;
 
