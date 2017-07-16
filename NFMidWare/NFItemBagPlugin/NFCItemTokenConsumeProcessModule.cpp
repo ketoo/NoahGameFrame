@@ -79,9 +79,9 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 
 
 	NF_SHARE_PTR<NFDataList> xDataList = pBuild->GetInitData();
-	xDataList->SetString(NFrame::Player::BuildingList::BuildingList_BuildingID(), strBuildingCnfID);
-	xDataList->SetObject(NFrame::Player::BuildingList::BuildingList_BuildingGUID(), xID);
-	xDataList->SetVector3(NFrame::Player::BuildingList::BuildingList_Pos(), vPos);
+	xDataList->SetString(NFrame::Player::BuildingList::BuildingList_BuildingID, strBuildingCnfID);
+	xDataList->SetObject(NFrame::Player::BuildingList::BuildingList_BuildingGUID, xID);
+	xDataList->SetVector3(NFrame::Player::BuildingList::BuildingList_Pos, vPos);
 
 	pBuild->AddRow(-1, *xDataList);
 
