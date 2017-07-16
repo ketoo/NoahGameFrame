@@ -85,7 +85,7 @@ enum Station
 	CurMemberCount		= 7; // CurMemberCount -- int
 	WinCount		= 8; // WinCount -- int
 }
-enum CommPropertyValue
+enum CommValue
 {
 	SUCKBLOOD		= 0; // SUCKBLOOD -- int
 	REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int

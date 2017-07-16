@@ -718,7 +718,7 @@ public:
 	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
 	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
 	// Record
-	static const std::string& R_CommPropertyValue(){ static std::string xCommPropertyValue = "CommPropertyValue"; return xCommPropertyValue;}
+	static const std::string& R_CommValue(){ static std::string xCommValue = "CommValue"; return xCommValue;}
 	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
 	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
 	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
@@ -728,37 +728,37 @@ public:
 	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
 	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
 
-	enum CommPropertyValue
+	enum CommValue
 	{
-		CommPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		CommPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CommPropertyValue_CRITICAL		= 2, // CRITICAL -- int
-		CommPropertyValue_MAXHP		= 3, // MAXHP -- int
-		CommPropertyValue_MAXMP		= 4, // MAXMP -- int
-		CommPropertyValue_MAXSP		= 5, // MAXSP -- int
-		CommPropertyValue_HPREGEN		= 6, // HPREGEN -- int
-		CommPropertyValue_SPREGEN		= 7, // SPREGEN -- int
-		CommPropertyValue_MPREGEN		= 8, // MPREGEN -- int
-		CommPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
-		CommPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
-		CommPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		CommPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
-		CommPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
-		CommPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		CommPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
-		CommPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
-		CommPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
-		CommPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
-		CommPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		CommPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
-		CommPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
-		CommPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
-		CommPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		CommPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
-		CommPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
-		CommPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		CommPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		CommPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
+		CommValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
+		CommValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
+		CommValue_CRITICAL		= 2, // CRITICAL -- int
+		CommValue_MAXHP		= 3, // MAXHP -- int
+		CommValue_MAXMP		= 4, // MAXMP -- int
+		CommValue_MAXSP		= 5, // MAXSP -- int
+		CommValue_HPREGEN		= 6, // HPREGEN -- int
+		CommValue_SPREGEN		= 7, // SPREGEN -- int
+		CommValue_MPREGEN		= 8, // MPREGEN -- int
+		CommValue_ATK_VALUE		= 9, // ATK_VALUE -- int
+		CommValue_DEF_VALUE		= 10, // DEF_VALUE -- int
+		CommValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
+		CommValue_ATK_SPEED		= 12, // ATK_SPEED -- int
+		CommValue_ATK_FIRE		= 13, // ATK_FIRE -- int
+		CommValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
+		CommValue_ATK_WIND		= 15, // ATK_WIND -- int
+		CommValue_ATK_ICE		= 16, // ATK_ICE -- int
+		CommValue_ATK_POISON		= 17, // ATK_POISON -- int
+		CommValue_DEF_FIRE		= 18, // DEF_FIRE -- int
+		CommValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
+		CommValue_DEF_WIND		= 20, // DEF_WIND -- int
+		CommValue_DEF_ICE		= 21, // DEF_ICE -- int
+		CommValue_DEF_POISON		= 22, // DEF_POISON -- int
+		CommValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
+		CommValue_MOVE_GATE		= 24, // MOVE_GATE -- int
+		CommValue_SKILL_GATE		= 25, // SKILL_GATE -- int
+		CommValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
+		CommValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
+		CommValue_BUFF_GATE		= 28, // BUFF_GATE -- int
 
 	};
 
