@@ -701,7 +701,7 @@ public class Player
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	public static readonly String R_CommPropertyValue = "CommPropertyValue";
+	public static readonly String R_CommValue = "CommValue";
 	public static readonly String R_PlayerHero = "PlayerHero";
 	public static readonly String R_HeroPropertyValue = "HeroPropertyValue";
 	public static readonly String R_BagEquipList = "BagEquipList";
@@ -711,7 +711,7 @@ public class Player
 	public static readonly String R_BuildingList = "BuildingList";
 	public static readonly String R_BuildingListProduce = "BuildingListProduce";
 
-	public enum CommPropertyValue
+	public enum CommValue
 	{
 		SUCKBLOOD		= 0, // SUCKBLOOD -- int
 		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
