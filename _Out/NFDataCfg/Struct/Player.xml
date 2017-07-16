@@ -207,24 +207,20 @@
 			<Col Type="int" Tag="TaskStatus"/>
 			<Col Type="int" Tag="Process"/>
 		</Record>
-		<Record Id="BuildingList" Row="128" Col="8" Public="0" Private="1" Save="0" Cache="1" Upload="0" Desc="">
+		<Record Id="BuildingList" Row="128" Col="6" Public="0" Private="1" Save="0" Cache="1" Upload="0" Desc="">
 			<Col Type="string" Tag="BuildingID"/>
 			<Col Type="object" Tag="BuildingGUID"/>
 			<Col Type="int" Tag="State"/>
-			<Col Type="int" Tag="PosX"/>
-			<Col Type="int" Tag="PosY"/>
-			<Col Type="int" Tag="PosZ"/>
-			<Col Type="int" Tag="StateStartTime"/>
+			<Col Type="float" Tag="PosX"/>
+			<Col Type="vector3" Tag="Pos"/>
 			<Col Type="int" Tag="StateEndTime"/>
 		</Record>
-		<Record Id="BuildingListProduce" Row="128" Col="8" Public="0" Private="1" Save="1" Cache="1" Upload="0" Desc="">
+		<Record Id="BuildingListProduce" Row="128" Col="6" Public="0" Private="1" Save="1" Cache="1" Upload="0" Desc="">
 			<Col Type="string" Tag="BuildingID"/>
 			<Col Type="object" Tag="BuildingGUID"/>
 			<Col Type="int" Tag="State"/>
-			<Col Type="int" Tag="PosX"/>
-			<Col Type="int" Tag="PosY"/>
-			<Col Type="int" Tag="PosZ"/>
-			<Col Type="int" Tag="StateStartTime"/>
+			<Col Type="float" Tag="PosX"/>
+			<Col Type="float" Tag="PosY"/>
 			<Col Type="int" Tag="StateEndTime"/>
 		</Record>
 	</Records>

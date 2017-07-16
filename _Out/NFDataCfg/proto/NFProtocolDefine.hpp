@@ -27,31 +27,6 @@ public:
 
 };
 
-class BB_Build
-{
-public:
-	//Class name
-	static const std::string& ThisName(){ static std::string xBB_Build = "BB_Build"; return xBB_Build; }
-	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
-	// Property
-	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
-	static const std::string& SubType(){ static std::string xSubType = "SubType"; return xSubType; } // int
-	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
-	static const std::string& NormalStateFunc(){ static std::string xNormalStateFunc = "NormalStateFunc"; return xNormalStateFunc; } // string
-	static const std::string& UpStateFunc(){ static std::string xUpStateFunc = "UpStateFunc"; return xUpStateFunc; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
-	// Record
-
-};
-
 class Buff
 {
 public:
@@ -909,11 +884,9 @@ public:
 		BuildingList_BuildingID		= 0, // BuildingID -- string
 		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
 		BuildingList_State		= 2, // State -- int
-		BuildingList_PosX		= 3, // PosX -- int
-		BuildingList_PosY		= 4, // PosY -- int
-		BuildingList_PosZ		= 5, // PosZ -- int
-		BuildingList_StateStartTime		= 6, // StateStartTime -- int
-		BuildingList_StateEndTime		= 7, // StateEndTime -- int
+		BuildingList_PosX		= 3, // PosX -- float
+		BuildingList_Pos		= 4, // Pos -- vector3
+		BuildingList_StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
@@ -922,11 +895,9 @@ public:
 		BuildingListProduce_BuildingID		= 0, // BuildingID -- string
 		BuildingListProduce_BuildingGUID		= 1, // BuildingGUID -- object
 		BuildingListProduce_State		= 2, // State -- int
-		BuildingListProduce_PosX		= 3, // PosX -- int
-		BuildingListProduce_PosY		= 4, // PosY -- int
-		BuildingListProduce_PosZ		= 5, // PosZ -- int
-		BuildingListProduce_StateStartTime		= 6, // StateStartTime -- int
-		BuildingListProduce_StateEndTime		= 7, // StateEndTime -- int
+		BuildingListProduce_PosX		= 3, // PosX -- float
+		BuildingListProduce_PosY		= 4, // PosY -- float
+		BuildingListProduce_StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
