@@ -677,7 +677,7 @@ public class Player {
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	public static final String R_CommPropertyValue = "CommPropertyValue";
+	public static final String R_CommValue = "CommValue";
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_BagEquipList = "BagEquipList";
@@ -687,7 +687,7 @@ public class Player {
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
 
-	public enum CommPropertyValue
+	public enum CommValue
 	{
 		SUCKBLOOD		= 0, // SUCKBLOOD -- int
 		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int

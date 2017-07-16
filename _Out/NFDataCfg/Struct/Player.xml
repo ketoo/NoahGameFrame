@@ -77,7 +77,7 @@
 		<Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Upload="0" Desc="BUFF免疫开关"/>
 	</Propertys>
 	<Records>
-		<Record Id="CommPropertyValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero">
+		<Record Id="CommValue" Row="15" Col="29" Public="1" Private="1" Save="0" Cache="0" Upload="0" Desc="0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero">
 			<Col Type="int" Tag="SUCKBLOOD"/>
 			<Col Type="int" Tag="REFLECTDAMAGE"/>
 			<Col Type="int" Tag="CRITICAL"/>
