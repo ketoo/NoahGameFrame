@@ -227,22 +227,18 @@ enum BuildingList
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
 	State		= 2; // State -- int
-	PosX		= 3; // PosX -- int
-	PosY		= 4; // PosY -- int
-	PosZ		= 5; // PosZ -- int
-	StateStartTime		= 6; // StateStartTime -- int
-	StateEndTime		= 7; // StateEndTime -- int
+	PosX		= 3; // PosX -- float
+	Pos		= 4; // Pos -- vector3
+	StateEndTime		= 5; // StateEndTime -- int
 }
 enum BuildingListProduce
 {
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
 	State		= 2; // State -- int
-	PosX		= 3; // PosX -- int
-	PosY		= 4; // PosY -- int
-	PosZ		= 5; // PosZ -- int
-	StateStartTime		= 6; // StateStartTime -- int
-	StateEndTime		= 7; // StateEndTime -- int
+	PosX		= 3; // PosX -- float
+	PosY		= 4; // PosY -- float
+	StateEndTime		= 5; // StateEndTime -- int
 }
 enum MemberList
 {
