@@ -409,6 +409,7 @@ enum EGameTokenSubType
 	EGTST_TOKEN_POSITION				= 1;	//
 	EGTST_TOKEN_BOUNTY   				= 2; 	//
 	EGTST_TOKEN_ACTIVITY				= 3;	//
+	EGTST_TOKEN_BUILD					= 4;	//
 };
 
 

@@ -1,1 +1,0 @@
-Please use ***"NFDataCfg/Tool/FileProcess.exe"*** to generate configuration files.
