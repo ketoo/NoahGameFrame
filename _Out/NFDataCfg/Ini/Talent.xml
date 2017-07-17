@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" ShowName="名字字符串索引" Desc="描述字符串索引" EffectData="绝对值属性索引" Icon="ICON" SpriteFile="图集" NextID=""/>
 	<Object Id="TALENT1" ShowName="T1" Desc="Talent1" EffectData="" Icon="" SpriteFile="" NextID="0"/>
 	<Object Id="TALENT2" ShowName="T2" Desc="Talent2" EffectData="" Icon="" SpriteFile="" NextID="0"/>
 	<Object Id="TALENT3" ShowName="T3" Desc="Talent3" EffectData="" Icon="" SpriteFile="" NextID="0"/>

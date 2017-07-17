@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" ServerID="服务器ID" Name="服务器名字" MaxOnline="作为服务器时：服务器最大连接" CpuCount="CPU个数（机器）" IP="IP地址" Port="作为服务器时：相对客户端的port" Type="服务器类型" Area="区服"/>
 	<Object Id="GameServer_1" ServerID="6" Name="GameServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="16001" Type="6" Area="1"/>
 	<Object Id="WorldServer_1" ServerID="7" Name="WorldServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="17001" Type="7" Area="1"/>
 	<Object Id="ProxyServer_1" ServerID="5" Name="ProxyServer" MaxOnline="5000" CpuCount="1" IP="127.0.0.1" Port="15001" Type="5" Area="1"/>

@@ -40,6 +40,36 @@ std::string strTitleName;
 
 #pragma comment( lib, "DbgHelp" )
 
+class Guild
+{
+public:
+	//Class name
+	static const std::string& ThisName() { static std::string xGuild = "Guild"; return xGuild; }
+	// IObject
+	static const std::string& ID() { static std::string xID = "ID"; return xID; } // string
+	static const std::string& ClassName() { static std::string xClassName = "ClassName"; return xClassName; } // string
+	static const std::string& SceneID() { static std::string xSceneID = "SceneID"; return xSceneID; } // int
+	static const std::string& GroupID() { static std::string xGroupID = "GroupID"; return xGroupID; } // int
+	static const std::string& ConfigID() { static std::string xConfigID = "ConfigID"; return xConfigID; } // string
+	static const std::string& Position() { static std::string xPosition = "Position"; return xPosition; } // vector3
+																										  // Property
+	static const std::string& Name() { static std::string xName = "Name"; return xName; } // string
+	static const std::string& PresidentID() { static std::string xPresidentID = "PresidentID"; return xPresidentID; } // object
+	static const std::string& PresidentName() { static std::string xPresidentName = "PresidentName"; return xPresidentName; } // string
+	static const std::string& Rank() { static std::string xRank = "Rank"; return xRank; } // int
+	static const std::string& GuildAD() { static std::string xGuildAD = "GuildAD"; return xGuildAD; } // string
+	static const std::string& R_GuildBoss() { static std::string xGuildBoss = "GuildBoss"; return xGuildBoss; }
+	static const std::string& R_GuildMemberList() { static std::string xGuildMemberList = "GuildMemberList"; return xGuildMemberList; }
+
+
+	class GuildBoss
+	{
+	public:
+		const int GUID = 0; // GUID -- object
+		const int Name = 1; // Name -- string
+		const std::string Rank = "Rank"; // Name -- string
+	};
+};
 void CreateDumpFile(const std::string& strDumpFilePathName, EXCEPTION_POINTERS* pException)
 {
     //Dump

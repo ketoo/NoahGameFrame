@@ -14,15 +14,15 @@ class IObject
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xIObject = "IObject"; return xIObject; }
+	const std::string ThisName = "IObject";
 	// IObject
 	// Property
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Record
 
 };
@@ -31,24 +31,24 @@ class Buff
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xBuff = "Buff"; return xBuff; }
+	const std::string ThisName = "Buff";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& EffectType(){ static std::string xEffectType = "EffectType"; return xEffectType; } // int
-	static const std::string& EffectValueType(){ static std::string xEffectValueType = "EffectValueType"; return xEffectValueType; } // int
-	static const std::string& EffectValueReferType(){ static std::string xEffectValueReferType = "EffectValueReferType"; return xEffectValueReferType; } // int
-	static const std::string& EffectTimeValue(){ static std::string xEffectTimeValue = "EffectTimeValue"; return xEffectTimeValue; } // int
-	static const std::string& EffectTimeInterval(){ static std::string xEffectTimeInterval = "EffectTimeInterval"; return xEffectTimeInterval; } // float
-	static const std::string& WashGroupID(){ static std::string xWashGroupID = "WashGroupID"; return xWashGroupID; } // int
-	static const std::string& ReverseReferType(){ static std::string xReverseReferType = "ReverseReferType"; return xReverseReferType; } // int
-	static const std::string& EffectClearOnDead(){ static std::string xEffectClearOnDead = "EffectClearOnDead"; return xEffectClearOnDead; } // int
-	static const std::string& DownSaveType(){ static std::string xDownSaveType = "DownSaveType"; return xDownSaveType; } // int
+	const std::string EffectType = "EffectType"; // int
+	const std::string EffectValueType = "EffectValueType"; // int
+	const std::string EffectValueReferType = "EffectValueReferType"; // int
+	const std::string EffectTimeValue = "EffectTimeValue"; // int
+	const std::string EffectTimeInterval = "EffectTimeInterval"; // float
+	const std::string WashGroupID = "WashGroupID"; // int
+	const std::string ReverseReferType = "ReverseReferType"; // int
+	const std::string EffectClearOnDead = "EffectClearOnDead"; // int
+	const std::string DownSaveType = "DownSaveType"; // int
 	// Record
 
 };
@@ -57,22 +57,22 @@ class ConsumeData
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; }
+	const std::string ThisName = "ConsumeData";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
-	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
-	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
-	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
-	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
-	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
-	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; } // int
+	const std::string VIPEXP = "VIPEXP"; // int
+	const std::string EXP = "EXP"; // int
+	const std::string HP = "HP"; // int
+	const std::string SP = "SP"; // int
+	const std::string MP = "MP"; // int
+	const std::string Gold = "Gold"; // int
+	const std::string Money = "Money"; // int
 	// Record
 
 };
@@ -81,19 +81,19 @@ class Cost
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xCost = "Cost"; return xCost; }
+	const std::string ThisName = "Cost";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& CostMoney(){ static std::string xCostMoney = "CostMoney"; return xCostMoney; } // int
-	static const std::string& CostDiamond(){ static std::string xCostDiamond = "CostDiamond"; return xCostDiamond; } // int
-	static const std::string& CostVP(){ static std::string xCostVP = "CostVP"; return xCostVP; } // int
-	static const std::string& CostHonour(){ static std::string xCostHonour = "CostHonour"; return xCostHonour; } // int
+	const std::string CostMoney = "CostMoney"; // int
+	const std::string CostDiamond = "CostDiamond"; // int
+	const std::string CostVP = "CostVP"; // int
+	const std::string CostHonour = "CostHonour"; // int
 	// Record
 
 };
@@ -102,22 +102,22 @@ class DescData
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xDescData = "DescData"; return xDescData; }
+	const std::string ThisName = "DescData";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& Atlas(){ static std::string xAtlas = "Atlas"; return xAtlas; } // string
-	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
-	static const std::string& PerformanceEffect(){ static std::string xPerformanceEffect = "PerformanceEffect"; return xPerformanceEffect; } // string
-	static const std::string& PerformanceSound(){ static std::string xPerformanceSound = "PerformanceSound"; return xPerformanceSound; } // string
-	static const std::string& DescText(){ static std::string xDescText = "DescText"; return xDescText; } // string
+	const std::string ShowName = "ShowName"; // string
+	const std::string Icon = "Icon"; // string
+	const std::string Atlas = "Atlas"; // string
+	const std::string PrefabPath = "PrefabPath"; // string
+	const std::string PerformanceEffect = "PerformanceEffect"; // string
+	const std::string PerformanceSound = "PerformanceSound"; // string
+	const std::string DescText = "DescText"; // string
 	// Record
 
 };
@@ -126,47 +126,47 @@ class EffectData
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xEffectData = "EffectData"; return xEffectData; }
+	const std::string ThisName = "EffectData";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
-	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
-	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
-	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
-	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
-	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
-	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
-	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
-	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
-	static const std::string& HPREGEN(){ static std::string xHPREGEN = "HPREGEN"; return xHPREGEN; } // int
-	static const std::string& SPREGEN(){ static std::string xSPREGEN = "SPREGEN"; return xSPREGEN; } // int
-	static const std::string& MPREGEN(){ static std::string xMPREGEN = "MPREGEN"; return xMPREGEN; } // int
-	static const std::string& ATK_VALUE(){ static std::string xATK_VALUE = "ATK_VALUE"; return xATK_VALUE; } // int
-	static const std::string& DEF_VALUE(){ static std::string xDEF_VALUE = "DEF_VALUE"; return xDEF_VALUE; } // int
-	static const std::string& MOVE_SPEED(){ static std::string xMOVE_SPEED = "MOVE_SPEED"; return xMOVE_SPEED; } // int
-	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
-	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
-	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
-	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
-	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
-	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
-	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
-	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
-	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
-	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
-	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
-	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
-	static const std::string& MOVE_GATE(){ static std::string xMOVE_GATE = "MOVE_GATE"; return xMOVE_GATE; } // int
-	static const std::string& SKILL_GATE(){ static std::string xSKILL_GATE = "SKILL_GATE"; return xSKILL_GATE; } // int
-	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
-	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
-	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
+	const std::string SUCKBLOOD = "SUCKBLOOD"; // int
+	const std::string REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	const std::string CRITICAL = "CRITICAL"; // int
+	const std::string MAXHP = "MAXHP"; // int
+	const std::string MAXMP = "MAXMP"; // int
+	const std::string MAXSP = "MAXSP"; // int
+	const std::string HP = "HP"; // int
+	const std::string MP = "MP"; // int
+	const std::string SP = "SP"; // int
+	const std::string HPREGEN = "HPREGEN"; // int
+	const std::string SPREGEN = "SPREGEN"; // int
+	const std::string MPREGEN = "MPREGEN"; // int
+	const std::string ATK_VALUE = "ATK_VALUE"; // int
+	const std::string DEF_VALUE = "DEF_VALUE"; // int
+	const std::string MOVE_SPEED = "MOVE_SPEED"; // int
+	const std::string ATK_SPEED = "ATK_SPEED"; // int
+	const std::string ATK_FIRE = "ATK_FIRE"; // int
+	const std::string ATK_LIGHT = "ATK_LIGHT"; // int
+	const std::string ATK_WIND = "ATK_WIND"; // int
+	const std::string ATK_ICE = "ATK_ICE"; // int
+	const std::string ATK_POISON = "ATK_POISON"; // int
+	const std::string DEF_FIRE = "DEF_FIRE"; // int
+	const std::string DEF_LIGHT = "DEF_LIGHT"; // int
+	const std::string DEF_WIND = "DEF_WIND"; // int
+	const std::string DEF_ICE = "DEF_ICE"; // int
+	const std::string DEF_POISON = "DEF_POISON"; // int
+	const std::string DIZZY_GATE = "DIZZY_GATE"; // int
+	const std::string MOVE_GATE = "MOVE_GATE"; // int
+	const std::string SKILL_GATE = "SKILL_GATE"; // int
+	const std::string PHYSICAL_GATE = "PHYSICAL_GATE"; // int
+	const std::string MAGIC_GATE = "MAGIC_GATE"; // int
+	const std::string BUFF_GATE = "BUFF_GATE"; // int
 	// Record
 
 };
@@ -175,33 +175,33 @@ class Equip
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xEquip = "Equip"; return xEquip; }
+	const std::string ThisName = "Equip";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
-	static const std::string& IntensiveBuffList(){ static std::string xIntensiveBuffList = "IntensiveBuffList"; return xIntensiveBuffList; } // string
-	static const std::string& EnchantmentBuffList(){ static std::string xEnchantmentBuffList = "EnchantmentBuffList"; return xEnchantmentBuffList; } // string
-	static const std::string& SuitID(){ static std::string xSuitID = "SuitID"; return xSuitID; } // int
-	static const std::string& SuitBuffID(){ static std::string xSuitBuffID = "SuitBuffID"; return xSuitBuffID; } // string
-	static const std::string& ItemType(){ static std::string xItemType = "ItemType"; return xItemType; } // int
-	static const std::string& ItemSubType(){ static std::string xItemSubType = "ItemSubType"; return xItemSubType; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
-	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
-	static const std::string& DropPrePath(){ static std::string xDropPrePath = "DropPrePath"; return xDropPrePath; } // string
-	static const std::string& BuyPrice(){ static std::string xBuyPrice = "BuyPrice"; return xBuyPrice; } // int
-	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
+	const std::string Sex = "Sex"; // int
+	const std::string IntensiveBuffList = "IntensiveBuffList"; // string
+	const std::string EnchantmentBuffList = "EnchantmentBuffList"; // string
+	const std::string SuitID = "SuitID"; // int
+	const std::string SuitBuffID = "SuitBuffID"; // string
+	const std::string ItemType = "ItemType"; // int
+	const std::string ItemSubType = "ItemSubType"; // int
+	const std::string Level = "Level"; // int
+	const std::string Job = "Job"; // string
+	const std::string Quality = "Quality"; // int
+	const std::string ShowName = "ShowName"; // string
+	const std::string Desc = "Desc"; // string
+	const std::string EffectData = "EffectData"; // string
+	const std::string PrefabPath = "PrefabPath"; // string
+	const std::string DropPrePath = "DropPrePath"; // string
+	const std::string BuyPrice = "BuyPrice"; // int
+	const std::string SalePrice = "SalePrice"; // int
+	const std::string Icon = "Icon"; // string
 	// Record
 
 };
@@ -210,132 +210,138 @@ class Guild
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xGuild = "Guild"; return xGuild; }
+	const std::string ThisName = "Guild";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Name(){ static std::string xName = "Name"; return xName; } // string
-	static const std::string& PresidentID(){ static std::string xPresidentID = "PresidentID"; return xPresidentID; } // object
-	static const std::string& PresidentName(){ static std::string xPresidentName = "PresidentName"; return xPresidentName; } // string
-	static const std::string& Rank(){ static std::string xRank = "Rank"; return xRank; } // int
-	static const std::string& GuildAD(){ static std::string xGuildAD = "GuildAD"; return xGuildAD; } // string
-	static const std::string& GuildDesc(){ static std::string xGuildDesc = "GuildDesc"; return xGuildDesc; } // string
-	static const std::string& GuildMoney(){ static std::string xGuildMoney = "GuildMoney"; return xGuildMoney; } // int
-	static const std::string& GuildLevel(){ static std::string xGuildLevel = "GuildLevel"; return xGuildLevel; } // int
-	static const std::string& GuildContinueDay(){ static std::string xGuildContinueDay = "GuildContinueDay"; return xGuildContinueDay; } // int
-	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
-	static const std::string& GuildIcon(){ static std::string xGuildIcon = "GuildIcon"; return xGuildIcon; } // int
-	static const std::string& GuildMemeberCount(){ static std::string xGuildMemeberCount = "GuildMemeberCount"; return xGuildMemeberCount; } // int
-	static const std::string& GuildMemeberMaxCount(){ static std::string xGuildMemeberMaxCount = "GuildMemeberMaxCount"; return xGuildMemeberMaxCount; } // int
-	static const std::string& GuildHonor(){ static std::string xGuildHonor = "GuildHonor"; return xGuildHonor; } // int
-	static const std::string& GuildCreateTime(){ static std::string xGuildCreateTime = "GuildCreateTime"; return xGuildCreateTime; } // int
-	static const std::string& GuildCreateter(){ static std::string xGuildCreateter = "GuildCreateter"; return xGuildCreateter; } // int
-	static const std::string& GuildExp(){ static std::string xGuildExp = "GuildExp"; return xGuildExp; } // int
-	static const std::string& GuildStatus(){ static std::string xGuildStatus = "GuildStatus"; return xGuildStatus; } // int
-	static const std::string& DismissTime(){ static std::string xDismissTime = "DismissTime"; return xDismissTime; } // int
-	static const std::string& RecruitAD(){ static std::string xRecruitAD = "RecruitAD"; return xRecruitAD; } // string
-	static const std::string& RecruitLevel(){ static std::string xRecruitLevel = "RecruitLevel"; return xRecruitLevel; } // int
-	static const std::string& KingWarResource(){ static std::string xKingWarResource = "KingWarResource"; return xKingWarResource; } // int
-	static const std::string& AutoRecruit(){ static std::string xAutoRecruit = "AutoRecruit"; return xAutoRecruit; } // string
-	static const std::string& EctypServer(){ static std::string xEctypServer = "EctypServer"; return xEctypServer; } // int
-	static const std::string& EctypID(){ static std::string xEctypID = "EctypID"; return xEctypID; } // int
-	static const std::string& EctypIDGroup(){ static std::string xEctypIDGroup = "EctypIDGroup"; return xEctypIDGroup; } // int
+	const std::string Name = "Name"; // string
+	const std::string PresidentID = "PresidentID"; // object
+	const std::string PresidentName = "PresidentName"; // string
+	const std::string Rank = "Rank"; // int
+	const std::string GuildAD = "GuildAD"; // string
+	const std::string GuildDesc = "GuildDesc"; // string
+	const std::string GuildMoney = "GuildMoney"; // int
+	const std::string GuildLevel = "GuildLevel"; // int
+	const std::string GuildContinueDay = "GuildContinueDay"; // int
+	const std::string GuildID = "GuildID"; // object
+	const std::string GuildIcon = "GuildIcon"; // int
+	const std::string GuildMemeberCount = "GuildMemeberCount"; // int
+	const std::string GuildMemeberMaxCount = "GuildMemeberMaxCount"; // int
+	const std::string GuildHonor = "GuildHonor"; // int
+	const std::string GuildCreateTime = "GuildCreateTime"; // int
+	const std::string GuildCreateter = "GuildCreateter"; // int
+	const std::string GuildExp = "GuildExp"; // int
+	const std::string GuildStatus = "GuildStatus"; // int
+	const std::string DismissTime = "DismissTime"; // int
+	const std::string RecruitAD = "RecruitAD"; // string
+	const std::string RecruitLevel = "RecruitLevel"; // int
+	const std::string KingWarResource = "KingWarResource"; // int
+	const std::string AutoRecruit = "AutoRecruit"; // string
+	const std::string EctypServer = "EctypServer"; // int
+	const std::string EctypID = "EctypID"; // int
+	const std::string EctypIDGroup = "EctypIDGroup"; // int
 	// Record
-	static const std::string& R_GuildBoss(){ static std::string xGuildBoss = "GuildBoss"; return xGuildBoss;}
-	static const std::string& R_GuildMemberList(){ static std::string xGuildMemberList = "GuildMemberList"; return xGuildMemberList;}
-	static const std::string& R_GuildAppyList(){ static std::string xGuildAppyList = "GuildAppyList"; return xGuildAppyList;}
-	static const std::string& R_GuildEvent(){ static std::string xGuildEvent = "GuildEvent"; return xGuildEvent;}
-	static const std::string& R_GuildHouse(){ static std::string xGuildHouse = "GuildHouse"; return xGuildHouse;}
-	static const std::string& R_GuildSkill(){ static std::string xGuildSkill = "GuildSkill"; return xGuildSkill;}
 
-	enum GuildBoss
+	class GuildBoss
 	{
-		GuildBoss_GUID		= 0, // GUID -- object
-		GuildBoss_Name		= 1, // Name -- string
-		GuildBoss_Level		= 2, // Level -- int
-		GuildBoss_Job		= 3, // Job -- int
-		GuildBoss_Donation		= 4, // Donation -- int
-		GuildBoss_VIP		= 5, // VIP -- int
-		GuildBoss_Offline		= 6, // Offline -- int
-		GuildBoss_Power		= 7, // Power -- int
+	public:
+		const std::string ThisName = "GuildBoss";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Offline		= 6; // Offline -- int
+		const int Power		= 7; // Power -- int
 
 	};
 
-	enum GuildMemberList
+	class GuildMemberList
 	{
-		GuildMemberList_GUID		= 0, // GUID -- object
-		GuildMemberList_Name		= 1, // Name -- string
-		GuildMemberList_Level		= 2, // Level -- int
-		GuildMemberList_Job		= 3, // Job -- int
-		GuildMemberList_Donation		= 4, // Donation -- int
-		GuildMemberList_Receive		= 5, // Receive -- int
-		GuildMemberList_VIP		= 6, // VIP -- int
-		GuildMemberList_Online		= 7, // Online -- int
-		GuildMemberList_Power		= 8, // Power -- int
-		GuildMemberList_Title		= 9, // Title -- int
-		GuildMemberList_GameID		= 10, // GameID -- int
-		GuildMemberList_JoinTime		= 11, // JoinTime -- int
-		GuildMemberList_Contribution		= 12, // Contribution -- int
-		GuildMemberList_AllContribution		= 13, // AllContribution -- int
+	public:
+		const std::string ThisName = "GuildMemberList";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int Receive		= 5; // Receive -- int
+		const int VIP		= 6; // VIP -- int
+		const int Online		= 7; // Online -- int
+		const int Power		= 8; // Power -- int
+		const int Title		= 9; // Title -- int
+		const int GameID		= 10; // GameID -- int
+		const int JoinTime		= 11; // JoinTime -- int
+		const int Contribution		= 12; // Contribution -- int
+		const int AllContribution		= 13; // AllContribution -- int
 
 	};
 
-	enum GuildAppyList
+	class GuildAppyList
 	{
-		GuildAppyList_GUID		= 0, // GUID -- object
-		GuildAppyList_Name		= 1, // Name -- string
-		GuildAppyList_Level		= 2, // Level -- int
-		GuildAppyList_Job		= 3, // Job -- int
-		GuildAppyList_Donation		= 4, // Donation -- int
-		GuildAppyList_VIP		= 5, // VIP -- int
-		GuildAppyList_Power		= 6, // Power -- int
+	public:
+		const std::string ThisName = "GuildAppyList";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Power		= 6; // Power -- int
 
 	};
 
-	enum GuildEvent
+	class GuildEvent
 	{
-		GuildEvent_GUID		= 0, // GUID -- object
-		GuildEvent_Name		= 1, // Name -- string
-		GuildEvent_Level		= 2, // Level -- int
-		GuildEvent_Job		= 3, // Job -- int
-		GuildEvent_Donation		= 4, // Donation -- int
-		GuildEvent_VIP		= 5, // VIP -- int
-		GuildEvent_Offline		= 6, // Offline -- int
-		GuildEvent_Power		= 7, // Power -- int
-		GuildEvent_EventID		= 8, // EventID -- int
-		GuildEvent_EventTime		= 9, // EventTime -- int
-		GuildEvent_Context		= 10, // Context -- string
+	public:
+		const std::string ThisName = "GuildEvent";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Offline		= 6; // Offline -- int
+		const int Power		= 7; // Power -- int
+		const int EventID		= 8; // EventID -- int
+		const int EventTime		= 9; // EventTime -- int
+		const int Context		= 10; // Context -- string
 
 	};
 
-	enum GuildHouse
+	class GuildHouse
 	{
-		GuildHouse_GUID		= 0, // GUID -- object
-		GuildHouse_Name		= 1, // Name -- string
-		GuildHouse_Level		= 2, // Level -- int
-		GuildHouse_Job		= 3, // Job -- int
-		GuildHouse_Donation		= 4, // Donation -- int
-		GuildHouse_VIP		= 5, // VIP -- int
-		GuildHouse_Offline		= 6, // Offline -- int
-		GuildHouse_Power		= 7, // Power -- int
+	public:
+		const std::string ThisName = "GuildHouse";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Offline		= 6; // Offline -- int
+		const int Power		= 7; // Power -- int
 
 	};
 
-	enum GuildSkill
+	class GuildSkill
 	{
-		GuildSkill_GUID		= 0, // GUID -- object
-		GuildSkill_Name		= 1, // Name -- string
-		GuildSkill_Level		= 2, // Level -- int
-		GuildSkill_Job		= 3, // Job -- int
-		GuildSkill_Donation		= 4, // Donation -- int
-		GuildSkill_VIP		= 5, // VIP -- int
-		GuildSkill_Offline		= 6, // Offline -- int
-		GuildSkill_Power		= 7, // Power -- int
+	public:
+		const std::string ThisName = "GuildSkill";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Offline		= 6; // Offline -- int
+		const int Power		= 7; // Power -- int
 
 	};
 
@@ -345,21 +351,21 @@ class GuildConfig
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xGuildConfig = "GuildConfig"; return xGuildConfig; }
+	const std::string ThisName = "GuildConfig";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ConditionPlayerLevel(){ static std::string xConditionPlayerLevel = "ConditionPlayerLevel"; return xConditionPlayerLevel; } // int
-	static const std::string& ConditionPlayerVIP(){ static std::string xConditionPlayerVIP = "ConditionPlayerVIP"; return xConditionPlayerVIP; } // int
-	static const std::string& CostMoney(){ static std::string xCostMoney = "CostMoney"; return xCostMoney; } // int
-	static const std::string& DismissTime(){ static std::string xDismissTime = "DismissTime"; return xDismissTime; } // int
-	static const std::string& GuildLevel(){ static std::string xGuildLevel = "GuildLevel"; return xGuildLevel; } // int
-	static const std::string& MaxMember(){ static std::string xMaxMember = "MaxMember"; return xMaxMember; } // int
+	const std::string ConditionPlayerLevel = "ConditionPlayerLevel"; // int
+	const std::string ConditionPlayerVIP = "ConditionPlayerVIP"; // int
+	const std::string CostMoney = "CostMoney"; // int
+	const std::string DismissTime = "DismissTime"; // int
+	const std::string GuildLevel = "GuildLevel"; // int
+	const std::string MaxMember = "MaxMember"; // int
 	// Record
 
 };
@@ -368,30 +374,30 @@ class GuildJob
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xGuildJob = "GuildJob"; return xGuildJob; }
+	const std::string ThisName = "GuildJob";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
-	static const std::string& JobCount(){ static std::string xJobCount = "JobCount"; return xJobCount; } // object
-	static const std::string& Appoint(){ static std::string xAppoint = "Appoint"; return xAppoint; } // object
-	static const std::string& Fire(){ static std::string xFire = "Fire"; return xFire; } // object
-	static const std::string& Demise(){ static std::string xDemise = "Demise"; return xDemise; } // object
-	static const std::string& ApplyDismiss(){ static std::string xApplyDismiss = "ApplyDismiss"; return xApplyDismiss; } // object
-	static const std::string& StopDismiss(){ static std::string xStopDismiss = "StopDismiss"; return xStopDismiss; } // object
-	static const std::string& AcceptApply(){ static std::string xAcceptApply = "AcceptApply"; return xAcceptApply; } // object
-	static const std::string& DenyApply(){ static std::string xDenyApply = "DenyApply"; return xDenyApply; } // object
-	static const std::string& Kickout(){ static std::string xKickout = "Kickout"; return xKickout; } // object
-	static const std::string& SetRecruit(){ static std::string xSetRecruit = "SetRecruit"; return xSetRecruit; } // object
-	static const std::string& PublishRecruit(){ static std::string xPublishRecruit = "PublishRecruit"; return xPublishRecruit; } // object
-	static const std::string& EditAD(){ static std::string xEditAD = "EditAD"; return xEditAD; } // object
-	static const std::string& Leave(){ static std::string xLeave = "Leave"; return xLeave; } // object
-	static const std::string& LevelUp(){ static std::string xLevelUp = "LevelUp"; return xLevelUp; } // object
+	const std::string Job = "Job"; // int
+	const std::string JobCount = "JobCount"; // object
+	const std::string Appoint = "Appoint"; // object
+	const std::string Fire = "Fire"; // object
+	const std::string Demise = "Demise"; // object
+	const std::string ApplyDismiss = "ApplyDismiss"; // object
+	const std::string StopDismiss = "StopDismiss"; // object
+	const std::string AcceptApply = "AcceptApply"; // object
+	const std::string DenyApply = "DenyApply"; // object
+	const std::string Kickout = "Kickout"; // object
+	const std::string SetRecruit = "SetRecruit"; // object
+	const std::string PublishRecruit = "PublishRecruit"; // object
+	const std::string EditAD = "EditAD"; // object
+	const std::string Leave = "Leave"; // object
+	const std::string LevelUp = "LevelUp"; // object
 	// Record
 
 };
@@ -400,18 +406,18 @@ class HttpServer
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xHttpServer = "HttpServer"; return xHttpServer; }
+	const std::string ThisName = "HttpServer";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& WebPort(){ static std::string xWebPort = "WebPort"; return xWebPort; } // int
-	static const std::string& WebRootPath(){ static std::string xWebRootPath = "WebRootPath"; return xWebRootPath; } // string
+	const std::string ServerID = "ServerID"; // int
+	const std::string WebPort = "WebPort"; // int
+	const std::string WebRootPath = "WebRootPath"; // string
 	// Record
 
 };
@@ -420,20 +426,20 @@ class InitProperty
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xInitProperty = "InitProperty"; return xInitProperty; }
+	const std::string ThisName = "InitProperty";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& SkillIDRef(){ static std::string xSkillIDRef = "SkillIDRef"; return xSkillIDRef; } // string
-	static const std::string& ModelPtah(){ static std::string xModelPtah = "ModelPtah"; return xModelPtah; } // string
+	const std::string Job = "Job"; // int
+	const std::string Level = "Level"; // int
+	const std::string EffectData = "EffectData"; // string
+	const std::string SkillIDRef = "SkillIDRef"; // string
+	const std::string ModelPtah = "ModelPtah"; // string
 	// Record
 
 };
@@ -442,36 +448,36 @@ class Item
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xItem = "Item"; return xItem; }
+	const std::string ThisName = "Item";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ItemType(){ static std::string xItemType = "ItemType"; return xItemType; } // int
-	static const std::string& ItemSubType(){ static std::string xItemSubType = "ItemSubType"; return xItemSubType; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // string
-	static const std::string& Quality(){ static std::string xQuality = "Quality"; return xQuality; } // int
-	static const std::string& DescID(){ static std::string xDescID = "DescID"; return xDescID; } // string
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
-	static const std::string& AwardData(){ static std::string xAwardData = "AwardData"; return xAwardData; } // string
-	static const std::string& AwardProperty(){ static std::string xAwardProperty = "AwardProperty"; return xAwardProperty; } // int
-	static const std::string& CoolDownTime(){ static std::string xCoolDownTime = "CoolDownTime"; return xCoolDownTime; } // float
-	static const std::string& OverlayCount(){ static std::string xOverlayCount = "OverlayCount"; return xOverlayCount; } // int
-	static const std::string& ExpiredType(){ static std::string xExpiredType = "ExpiredType"; return xExpiredType; } // int
-	static const std::string& BuyPrice(){ static std::string xBuyPrice = "BuyPrice"; return xBuyPrice; } // int
-	static const std::string& SalePrice(){ static std::string xSalePrice = "SalePrice"; return xSalePrice; } // int
-	static const std::string& Script(){ static std::string xScript = "Script"; return xScript; } // string
-	static const std::string& Extend(){ static std::string xExtend = "Extend"; return xExtend; } // string
-	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& HeroTye(){ static std::string xHeroTye = "HeroTye"; return xHeroTye; } // int
+	const std::string ItemType = "ItemType"; // int
+	const std::string ItemSubType = "ItemSubType"; // int
+	const std::string Level = "Level"; // int
+	const std::string Job = "Job"; // string
+	const std::string Quality = "Quality"; // int
+	const std::string DescID = "DescID"; // string
+	const std::string EffectData = "EffectData"; // string
+	const std::string ConsumeData = "ConsumeData"; // string
+	const std::string AwardData = "AwardData"; // string
+	const std::string AwardProperty = "AwardProperty"; // int
+	const std::string CoolDownTime = "CoolDownTime"; // float
+	const std::string OverlayCount = "OverlayCount"; // int
+	const std::string ExpiredType = "ExpiredType"; // int
+	const std::string BuyPrice = "BuyPrice"; // int
+	const std::string SalePrice = "SalePrice"; // int
+	const std::string Script = "Script"; // string
+	const std::string Extend = "Extend"; // string
+	const std::string SpriteFile = "SpriteFile"; // string
+	const std::string Icon = "Icon"; // string
+	const std::string ShowName = "ShowName"; // string
+	const std::string HeroTye = "HeroTye"; // int
 	// Record
 
 };
@@ -480,17 +486,17 @@ class Language
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xLanguage = "Language"; return xLanguage; }
+	const std::string ThisName = "Language";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& English(){ static std::string xEnglish = "English"; return xEnglish; } // string
-	static const std::string& Chinese(){ static std::string xChinese = "Chinese"; return xChinese; } // string
+	const std::string English = "English"; // string
+	const std::string Chinese = "Chinese"; // string
 	// Record
 
 };
@@ -499,34 +505,35 @@ class Map
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xMap = "Map"; return xMap; }
+	const std::string ThisName = "Map";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& MaxCount(){ static std::string xMaxCount = "MaxCount"; return xMaxCount; } // int
-	static const std::string& InComeGold(){ static std::string xInComeGold = "InComeGold"; return xInComeGold; } // int
-	static const std::string& InComeDiamond(){ static std::string xInComeDiamond = "InComeDiamond"; return xInComeDiamond; } // int
-	static const std::string& InComeOil(){ static std::string xInComeOil = "InComeOil"; return xInComeOil; } // int
-	static const std::string& MapLevel(){ static std::string xMapLevel = "MapLevel"; return xMapLevel; } // int
+	const std::string MaxCount = "MaxCount"; // int
+	const std::string InComeGold = "InComeGold"; // int
+	const std::string InComeDiamond = "InComeDiamond"; // int
+	const std::string InComeOil = "InComeOil"; // int
+	const std::string MapLevel = "MapLevel"; // int
 	// Record
-	static const std::string& R_Station(){ static std::string xStation = "Station"; return xStation;}
 
-	enum Station
+	class Station
 	{
-		Station_GUID		= 0, // GUID -- object
-		Station_GuildID		= 1, // GuildID -- object
-		Station_GuildName		= 2, // GuildName -- string
-		Station_Level		= 3, // Level -- int
-		Station_Title		= 4, // Title -- string
-		Station_Slogan		= 5, // Slogan -- string
-		Station_State		= 6, // State -- int
-		Station_CurMemberCount		= 7, // CurMemberCount -- int
-		Station_WinCount		= 8, // WinCount -- int
+	public:
+		const std::string ThisName = "Station";
+		const int GUID		= 0; // GUID -- object
+		const int GuildID		= 1; // GuildID -- object
+		const int GuildName		= 2; // GuildName -- string
+		const int Level		= 3; // Level -- int
+		const int Title		= 4; // Title -- string
+		const int Slogan		= 5; // Slogan -- string
+		const int State		= 6; // State -- int
+		const int CurMemberCount		= 7; // CurMemberCount -- int
+		const int WinCount		= 8; // WinCount -- int
 
 	};
 
@@ -536,19 +543,19 @@ class NoSqlServer
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xNoSqlServer = "NoSqlServer"; return xNoSqlServer; }
+	const std::string ThisName = "NoSqlServer";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
-	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
-	static const std::string& Auth(){ static std::string xAuth = "Auth"; return xAuth; } // string
+	const std::string ServerID = "ServerID"; // int
+	const std::string IP = "IP"; // string
+	const std::string Port = "Port"; // int
+	const std::string Auth = "Auth"; // string
 	// Record
 
 };
@@ -557,75 +564,75 @@ class NPC
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xNPC = "NPC"; return xNPC; }
+	const std::string ThisName = "NPC";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& SeedID(){ static std::string xSeedID = "SeedID"; return xSeedID; } // string
-	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
-	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
-	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
-	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
-	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
-	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
-	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; } // int
-	static const std::string& TargetX(){ static std::string xTargetX = "TargetX"; return xTargetX; } // float
-	static const std::string& TargetY(){ static std::string xTargetY = "TargetY"; return xTargetY; } // float
-	static const std::string& Prefab(){ static std::string xPrefab = "Prefab"; return xPrefab; } // string
-	static const std::string& Climb(){ static std::string xClimb = "Climb"; return xClimb; } // int
-	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
-	static const std::string& DropPackList(){ static std::string xDropPackList = "DropPackList"; return xDropPackList; } // string
-	static const std::string& Idle(){ static std::string xIdle = "Idle"; return xIdle; } // string
-	static const std::string& SkillNormal(){ static std::string xSkillNormal = "SkillNormal"; return xSkillNormal; } // string
-	static const std::string& SkillAttack(){ static std::string xSkillAttack = "SkillAttack"; return xSkillAttack; } // string
-	static const std::string& SkillTHUMP(){ static std::string xSkillTHUMP = "SkillTHUMP"; return xSkillTHUMP; } // string
-	static const std::string& Height(){ static std::string xHeight = "Height"; return xHeight; } // float
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& ConsumeData(){ static std::string xConsumeData = "ConsumeData"; return xConsumeData; } // string
-	static const std::string& LastAttacker(){ static std::string xLastAttacker = "LastAttacker"; return xLastAttacker; } // object
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& EquipIDRef(){ static std::string xEquipIDRef = "EquipIDRef"; return xEquipIDRef; } // string
-	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& ShowCard(){ static std::string xShowCard = "ShowCard"; return xShowCard; } // string
-	static const std::string& HeroType(){ static std::string xHeroType = "HeroType"; return xHeroType; } // int
-	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& MasterID(){ static std::string xMasterID = "MasterID"; return xMasterID; } // object
-	static const std::string& NPCType(){ static std::string xNPCType = "NPCType"; return xNPCType; } // int
-	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
-	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
-	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
-	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
-	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
-	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
-	static const std::string& HPREGEN(){ static std::string xHPREGEN = "HPREGEN"; return xHPREGEN; } // int
-	static const std::string& SPREGEN(){ static std::string xSPREGEN = "SPREGEN"; return xSPREGEN; } // int
-	static const std::string& MPREGEN(){ static std::string xMPREGEN = "MPREGEN"; return xMPREGEN; } // int
-	static const std::string& ATK_VALUE(){ static std::string xATK_VALUE = "ATK_VALUE"; return xATK_VALUE; } // int
-	static const std::string& DEF_VALUE(){ static std::string xDEF_VALUE = "DEF_VALUE"; return xDEF_VALUE; } // int
-	static const std::string& MOVE_SPEED(){ static std::string xMOVE_SPEED = "MOVE_SPEED"; return xMOVE_SPEED; } // int
-	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
-	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
-	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
-	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
-	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
-	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
-	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
-	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
-	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
-	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
-	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
-	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
-	static const std::string& MOVE_GATE(){ static std::string xMOVE_GATE = "MOVE_GATE"; return xMOVE_GATE; } // int
-	static const std::string& SKILL_GATE(){ static std::string xSKILL_GATE = "SKILL_GATE"; return xSKILL_GATE; } // int
-	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
-	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
-	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
+	const std::string SeedID = "SeedID"; // string
+	const std::string VIPEXP = "VIPEXP"; // int
+	const std::string EXP = "EXP"; // int
+	const std::string HP = "HP"; // int
+	const std::string SP = "SP"; // int
+	const std::string MP = "MP"; // int
+	const std::string Gold = "Gold"; // int
+	const std::string Money = "Money"; // int
+	const std::string TargetX = "TargetX"; // float
+	const std::string TargetY = "TargetY"; // float
+	const std::string Prefab = "Prefab"; // string
+	const std::string Climb = "Climb"; // int
+	const std::string AtkDis = "AtkDis"; // float
+	const std::string DropPackList = "DropPackList"; // string
+	const std::string Idle = "Idle"; // string
+	const std::string SkillNormal = "SkillNormal"; // string
+	const std::string SkillAttack = "SkillAttack"; // string
+	const std::string SkillTHUMP = "SkillTHUMP"; // string
+	const std::string Height = "Height"; // float
+	const std::string EffectData = "EffectData"; // string
+	const std::string ConsumeData = "ConsumeData"; // string
+	const std::string LastAttacker = "LastAttacker"; // object
+	const std::string ShowName = "ShowName"; // string
+	const std::string EquipIDRef = "EquipIDRef"; // string
+	const std::string SpriteFile = "SpriteFile"; // string
+	const std::string Icon = "Icon"; // string
+	const std::string ShowCard = "ShowCard"; // string
+	const std::string HeroType = "HeroType"; // int
+	const std::string Camp = "Camp"; // int
+	const std::string MasterID = "MasterID"; // object
+	const std::string NPCType = "NPCType"; // int
+	const std::string SUCKBLOOD = "SUCKBLOOD"; // int
+	const std::string REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	const std::string CRITICAL = "CRITICAL"; // int
+	const std::string MAXHP = "MAXHP"; // int
+	const std::string MAXMP = "MAXMP"; // int
+	const std::string MAXSP = "MAXSP"; // int
+	const std::string HPREGEN = "HPREGEN"; // int
+	const std::string SPREGEN = "SPREGEN"; // int
+	const std::string MPREGEN = "MPREGEN"; // int
+	const std::string ATK_VALUE = "ATK_VALUE"; // int
+	const std::string DEF_VALUE = "DEF_VALUE"; // int
+	const std::string MOVE_SPEED = "MOVE_SPEED"; // int
+	const std::string ATK_SPEED = "ATK_SPEED"; // int
+	const std::string ATK_FIRE = "ATK_FIRE"; // int
+	const std::string ATK_LIGHT = "ATK_LIGHT"; // int
+	const std::string ATK_WIND = "ATK_WIND"; // int
+	const std::string ATK_ICE = "ATK_ICE"; // int
+	const std::string ATK_POISON = "ATK_POISON"; // int
+	const std::string DEF_FIRE = "DEF_FIRE"; // int
+	const std::string DEF_LIGHT = "DEF_LIGHT"; // int
+	const std::string DEF_WIND = "DEF_WIND"; // int
+	const std::string DEF_ICE = "DEF_ICE"; // int
+	const std::string DEF_POISON = "DEF_POISON"; // int
+	const std::string DIZZY_GATE = "DIZZY_GATE"; // int
+	const std::string MOVE_GATE = "MOVE_GATE"; // int
+	const std::string SKILL_GATE = "SKILL_GATE"; // int
+	const std::string PHYSICAL_GATE = "PHYSICAL_GATE"; // int
+	const std::string MAGIC_GATE = "MAGIC_GATE"; // int
+	const std::string BUFF_GATE = "BUFF_GATE"; // int
 	// Record
 
 };
@@ -634,270 +641,279 @@ class Player
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xPlayer = "Player"; return xPlayer; }
+	const std::string ThisName = "Player";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Name(){ static std::string xName = "Name"; return xName; } // string
-	static const std::string& Sex(){ static std::string xSex = "Sex"; return xSex; } // int
-	static const std::string& Job(){ static std::string xJob = "Job"; return xJob; } // int
-	static const std::string& Race(){ static std::string xRace = "Race"; return xRace; } // int
-	static const std::string& Camp(){ static std::string xCamp = "Camp"; return xCamp; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& PrefabPath(){ static std::string xPrefabPath = "PrefabPath"; return xPrefabPath; } // string
-	static const std::string& FirstTarget(){ static std::string xFirstTarget = "FirstTarget"; return xFirstTarget; } // object
-	static const std::string& FightHero(){ static std::string xFightHero = "FightHero"; return xFightHero; } // object
-	static const std::string& HeroPos1(){ static std::string xHeroPos1 = "HeroPos1"; return xHeroPos1; } // object
-	static const std::string& HeroPos2(){ static std::string xHeroPos2 = "HeroPos2"; return xHeroPos2; } // object
-	static const std::string& HeroPos3(){ static std::string xHeroPos3 = "HeroPos3"; return xHeroPos3; } // object
-	static const std::string& Skill1(){ static std::string xSkill1 = "Skill1"; return xSkill1; } // string
-	static const std::string& Skill2(){ static std::string xSkill2 = "Skill2"; return xSkill2; } // string
-	static const std::string& Skill3(){ static std::string xSkill3 = "Skill3"; return xSkill3; } // string
-	static const std::string& VIPLevel(){ static std::string xVIPLevel = "VIPLevel"; return xVIPLevel; } // int
-	static const std::string& VIPEXP(){ static std::string xVIPEXP = "VIPEXP"; return xVIPEXP; } // int
-	static const std::string& EXP(){ static std::string xEXP = "EXP"; return xEXP; } // int
-	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
-	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
-	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
-	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
-	static const std::string& Money(){ static std::string xMoney = "Money"; return xMoney; } // int
-	static const std::string& Account(){ static std::string xAccount = "Account"; return xAccount; } // string
-	static const std::string& ConnectKey(){ static std::string xConnectKey = "ConnectKey"; return xConnectKey; } // string
-	static const std::string& MAXEXP(){ static std::string xMAXEXP = "MAXEXP"; return xMAXEXP; } // int
-	static const std::string& RELIVE_SOUL(){ static std::string xRELIVE_SOUL = "RELIVE_SOUL"; return xRELIVE_SOUL; } // int
-	static const std::string& ATK_PVP(){ static std::string xATK_PVP = "ATK_PVP"; return xATK_PVP; } // int
-	static const std::string& DEF_PVP(){ static std::string xDEF_PVP = "DEF_PVP"; return xDEF_PVP; } // int
-	static const std::string& OnlineCount(){ static std::string xOnlineCount = "OnlineCount"; return xOnlineCount; } // int
-	static const std::string& TotalTime(){ static std::string xTotalTime = "TotalTime"; return xTotalTime; } // int
-	static const std::string& LastOfflineTime(){ static std::string xLastOfflineTime = "LastOfflineTime"; return xLastOfflineTime; } // object
-	static const std::string& OnlineTime(){ static std::string xOnlineTime = "OnlineTime"; return xOnlineTime; } // object
-	static const std::string& TotalLineTime(){ static std::string xTotalLineTime = "TotalLineTime"; return xTotalLineTime; } // object
-	static const std::string& GMLevel(){ static std::string xGMLevel = "GMLevel"; return xGMLevel; } // int
-	static const std::string& GameID(){ static std::string xGameID = "GameID"; return xGameID; } // int
-	static const std::string& GateID(){ static std::string xGateID = "GateID"; return xGateID; } // int
-	static const std::string& GuildID(){ static std::string xGuildID = "GuildID"; return xGuildID; } // object
-	static const std::string& TeamID(){ static std::string xTeamID = "TeamID"; return xTeamID; } // object
-	static const std::string& HomeSceneID(){ static std::string xHomeSceneID = "HomeSceneID"; return xHomeSceneID; } // int
-	static const std::string& ViewOppnent(){ static std::string xViewOppnent = "ViewOppnent"; return xViewOppnent; } // object
-	static const std::string& FightOppnent(){ static std::string xFightOppnent = "FightOppnent"; return xFightOppnent; } // object
-	static const std::string& GambleGold(){ static std::string xGambleGold = "GambleGold"; return xGambleGold; } // int
-	static const std::string& GambleDiamond(){ static std::string xGambleDiamond = "GambleDiamond"; return xGambleDiamond; } // int
-	static const std::string& SUCKBLOOD(){ static std::string xSUCKBLOOD = "SUCKBLOOD"; return xSUCKBLOOD; } // int
-	static const std::string& REFLECTDAMAGE(){ static std::string xREFLECTDAMAGE = "REFLECTDAMAGE"; return xREFLECTDAMAGE; } // int
-	static const std::string& CRITICAL(){ static std::string xCRITICAL = "CRITICAL"; return xCRITICAL; } // int
-	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
-	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
-	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
-	static const std::string& HPREGEN(){ static std::string xHPREGEN = "HPREGEN"; return xHPREGEN; } // int
-	static const std::string& SPREGEN(){ static std::string xSPREGEN = "SPREGEN"; return xSPREGEN; } // int
-	static const std::string& MPREGEN(){ static std::string xMPREGEN = "MPREGEN"; return xMPREGEN; } // int
-	static const std::string& ATK_VALUE(){ static std::string xATK_VALUE = "ATK_VALUE"; return xATK_VALUE; } // int
-	static const std::string& DEF_VALUE(){ static std::string xDEF_VALUE = "DEF_VALUE"; return xDEF_VALUE; } // int
-	static const std::string& MOVE_SPEED(){ static std::string xMOVE_SPEED = "MOVE_SPEED"; return xMOVE_SPEED; } // int
-	static const std::string& ATK_SPEED(){ static std::string xATK_SPEED = "ATK_SPEED"; return xATK_SPEED; } // int
-	static const std::string& ATK_FIRE(){ static std::string xATK_FIRE = "ATK_FIRE"; return xATK_FIRE; } // int
-	static const std::string& ATK_LIGHT(){ static std::string xATK_LIGHT = "ATK_LIGHT"; return xATK_LIGHT; } // int
-	static const std::string& ATK_WIND(){ static std::string xATK_WIND = "ATK_WIND"; return xATK_WIND; } // int
-	static const std::string& ATK_ICE(){ static std::string xATK_ICE = "ATK_ICE"; return xATK_ICE; } // int
-	static const std::string& ATK_POISON(){ static std::string xATK_POISON = "ATK_POISON"; return xATK_POISON; } // int
-	static const std::string& DEF_FIRE(){ static std::string xDEF_FIRE = "DEF_FIRE"; return xDEF_FIRE; } // int
-	static const std::string& DEF_LIGHT(){ static std::string xDEF_LIGHT = "DEF_LIGHT"; return xDEF_LIGHT; } // int
-	static const std::string& DEF_WIND(){ static std::string xDEF_WIND = "DEF_WIND"; return xDEF_WIND; } // int
-	static const std::string& DEF_ICE(){ static std::string xDEF_ICE = "DEF_ICE"; return xDEF_ICE; } // int
-	static const std::string& DEF_POISON(){ static std::string xDEF_POISON = "DEF_POISON"; return xDEF_POISON; } // int
-	static const std::string& DIZZY_GATE(){ static std::string xDIZZY_GATE = "DIZZY_GATE"; return xDIZZY_GATE; } // int
-	static const std::string& MOVE_GATE(){ static std::string xMOVE_GATE = "MOVE_GATE"; return xMOVE_GATE; } // int
-	static const std::string& SKILL_GATE(){ static std::string xSKILL_GATE = "SKILL_GATE"; return xSKILL_GATE; } // int
-	static const std::string& PHYSICAL_GATE(){ static std::string xPHYSICAL_GATE = "PHYSICAL_GATE"; return xPHYSICAL_GATE; } // int
-	static const std::string& MAGIC_GATE(){ static std::string xMAGIC_GATE = "MAGIC_GATE"; return xMAGIC_GATE; } // int
-	static const std::string& BUFF_GATE(){ static std::string xBUFF_GATE = "BUFF_GATE"; return xBUFF_GATE; } // int
+	const std::string Name = "Name"; // string
+	const std::string Sex = "Sex"; // int
+	const std::string Job = "Job"; // int
+	const std::string Race = "Race"; // int
+	const std::string Camp = "Camp"; // int
+	const std::string Level = "Level"; // int
+	const std::string ShowName = "ShowName"; // string
+	const std::string PrefabPath = "PrefabPath"; // string
+	const std::string FirstTarget = "FirstTarget"; // object
+	const std::string FightHero = "FightHero"; // object
+	const std::string HeroPos1 = "HeroPos1"; // object
+	const std::string HeroPos2 = "HeroPos2"; // object
+	const std::string HeroPos3 = "HeroPos3"; // object
+	const std::string Skill1 = "Skill1"; // string
+	const std::string Skill2 = "Skill2"; // string
+	const std::string Skill3 = "Skill3"; // string
+	const std::string VIPLevel = "VIPLevel"; // int
+	const std::string VIPEXP = "VIPEXP"; // int
+	const std::string EXP = "EXP"; // int
+	const std::string HP = "HP"; // int
+	const std::string SP = "SP"; // int
+	const std::string MP = "MP"; // int
+	const std::string Gold = "Gold"; // int
+	const std::string Money = "Money"; // int
+	const std::string Account = "Account"; // string
+	const std::string ConnectKey = "ConnectKey"; // string
+	const std::string MAXEXP = "MAXEXP"; // int
+	const std::string RELIVE_SOUL = "RELIVE_SOUL"; // int
+	const std::string ATK_PVP = "ATK_PVP"; // int
+	const std::string DEF_PVP = "DEF_PVP"; // int
+	const std::string OnlineCount = "OnlineCount"; // int
+	const std::string TotalTime = "TotalTime"; // int
+	const std::string LastOfflineTime = "LastOfflineTime"; // object
+	const std::string OnlineTime = "OnlineTime"; // object
+	const std::string TotalLineTime = "TotalLineTime"; // object
+	const std::string GMLevel = "GMLevel"; // int
+	const std::string GameID = "GameID"; // int
+	const std::string GateID = "GateID"; // int
+	const std::string GuildID = "GuildID"; // object
+	const std::string TeamID = "TeamID"; // object
+	const std::string HomeSceneID = "HomeSceneID"; // int
+	const std::string ViewOppnent = "ViewOppnent"; // object
+	const std::string FightOppnent = "FightOppnent"; // object
+	const std::string GambleGold = "GambleGold"; // int
+	const std::string GambleDiamond = "GambleDiamond"; // int
+	const std::string SUCKBLOOD = "SUCKBLOOD"; // int
+	const std::string REFLECTDAMAGE = "REFLECTDAMAGE"; // int
+	const std::string CRITICAL = "CRITICAL"; // int
+	const std::string MAXHP = "MAXHP"; // int
+	const std::string MAXMP = "MAXMP"; // int
+	const std::string MAXSP = "MAXSP"; // int
+	const std::string HPREGEN = "HPREGEN"; // int
+	const std::string SPREGEN = "SPREGEN"; // int
+	const std::string MPREGEN = "MPREGEN"; // int
+	const std::string ATK_VALUE = "ATK_VALUE"; // int
+	const std::string DEF_VALUE = "DEF_VALUE"; // int
+	const std::string MOVE_SPEED = "MOVE_SPEED"; // int
+	const std::string ATK_SPEED = "ATK_SPEED"; // int
+	const std::string ATK_FIRE = "ATK_FIRE"; // int
+	const std::string ATK_LIGHT = "ATK_LIGHT"; // int
+	const std::string ATK_WIND = "ATK_WIND"; // int
+	const std::string ATK_ICE = "ATK_ICE"; // int
+	const std::string ATK_POISON = "ATK_POISON"; // int
+	const std::string DEF_FIRE = "DEF_FIRE"; // int
+	const std::string DEF_LIGHT = "DEF_LIGHT"; // int
+	const std::string DEF_WIND = "DEF_WIND"; // int
+	const std::string DEF_ICE = "DEF_ICE"; // int
+	const std::string DEF_POISON = "DEF_POISON"; // int
+	const std::string DIZZY_GATE = "DIZZY_GATE"; // int
+	const std::string MOVE_GATE = "MOVE_GATE"; // int
+	const std::string SKILL_GATE = "SKILL_GATE"; // int
+	const std::string PHYSICAL_GATE = "PHYSICAL_GATE"; // int
+	const std::string MAGIC_GATE = "MAGIC_GATE"; // int
+	const std::string BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	static const std::string& R_CommValue(){ static std::string xCommValue = "CommValue"; return xCommValue;}
-	static const std::string& R_PlayerHero(){ static std::string xPlayerHero = "PlayerHero"; return xPlayerHero;}
-	static const std::string& R_HeroPropertyValue(){ static std::string xHeroPropertyValue = "HeroPropertyValue"; return xHeroPropertyValue;}
-	static const std::string& R_BagEquipList(){ static std::string xBagEquipList = "BagEquipList"; return xBagEquipList;}
-	static const std::string& R_BagItemList(){ static std::string xBagItemList = "BagItemList"; return xBagItemList;}
-	static const std::string& R_TaskMonsterList(){ static std::string xTaskMonsterList = "TaskMonsterList"; return xTaskMonsterList;}
-	static const std::string& R_TaskList(){ static std::string xTaskList = "TaskList"; return xTaskList;}
-	static const std::string& R_BuildingList(){ static std::string xBuildingList = "BuildingList"; return xBuildingList;}
-	static const std::string& R_BuildingListProduce(){ static std::string xBuildingListProduce = "BuildingListProduce"; return xBuildingListProduce;}
 
-	enum CommValue
+	class CommValue
 	{
-		CommValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		CommValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CommValue_CRITICAL		= 2, // CRITICAL -- int
-		CommValue_MAXHP		= 3, // MAXHP -- int
-		CommValue_MAXMP		= 4, // MAXMP -- int
-		CommValue_MAXSP		= 5, // MAXSP -- int
-		CommValue_HPREGEN		= 6, // HPREGEN -- int
-		CommValue_SPREGEN		= 7, // SPREGEN -- int
-		CommValue_MPREGEN		= 8, // MPREGEN -- int
-		CommValue_ATK_VALUE		= 9, // ATK_VALUE -- int
-		CommValue_DEF_VALUE		= 10, // DEF_VALUE -- int
-		CommValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		CommValue_ATK_SPEED		= 12, // ATK_SPEED -- int
-		CommValue_ATK_FIRE		= 13, // ATK_FIRE -- int
-		CommValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		CommValue_ATK_WIND		= 15, // ATK_WIND -- int
-		CommValue_ATK_ICE		= 16, // ATK_ICE -- int
-		CommValue_ATK_POISON		= 17, // ATK_POISON -- int
-		CommValue_DEF_FIRE		= 18, // DEF_FIRE -- int
-		CommValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		CommValue_DEF_WIND		= 20, // DEF_WIND -- int
-		CommValue_DEF_ICE		= 21, // DEF_ICE -- int
-		CommValue_DEF_POISON		= 22, // DEF_POISON -- int
-		CommValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		CommValue_MOVE_GATE		= 24, // MOVE_GATE -- int
-		CommValue_SKILL_GATE		= 25, // SKILL_GATE -- int
-		CommValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		CommValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		CommValue_BUFF_GATE		= 28, // BUFF_GATE -- int
+	public:
+		const std::string ThisName = "CommValue";
+		const int SUCKBLOOD		= 0; // SUCKBLOOD -- int
+		const int REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+		const int CRITICAL		= 2; // CRITICAL -- int
+		const int MAXHP		= 3; // MAXHP -- int
+		const int MAXMP		= 4; // MAXMP -- int
+		const int MAXSP		= 5; // MAXSP -- int
+		const int HPREGEN		= 6; // HPREGEN -- int
+		const int SPREGEN		= 7; // SPREGEN -- int
+		const int MPREGEN		= 8; // MPREGEN -- int
+		const int ATK_VALUE		= 9; // ATK_VALUE -- int
+		const int DEF_VALUE		= 10; // DEF_VALUE -- int
+		const int MOVE_SPEED		= 11; // MOVE_SPEED -- int
+		const int ATK_SPEED		= 12; // ATK_SPEED -- int
+		const int ATK_FIRE		= 13; // ATK_FIRE -- int
+		const int ATK_LIGHT		= 14; // ATK_LIGHT -- int
+		const int ATK_WIND		= 15; // ATK_WIND -- int
+		const int ATK_ICE		= 16; // ATK_ICE -- int
+		const int ATK_POISON		= 17; // ATK_POISON -- int
+		const int DEF_FIRE		= 18; // DEF_FIRE -- int
+		const int DEF_LIGHT		= 19; // DEF_LIGHT -- int
+		const int DEF_WIND		= 20; // DEF_WIND -- int
+		const int DEF_ICE		= 21; // DEF_ICE -- int
+		const int DEF_POISON		= 22; // DEF_POISON -- int
+		const int DIZZY_GATE		= 23; // DIZZY_GATE -- int
+		const int MOVE_GATE		= 24; // MOVE_GATE -- int
+		const int SKILL_GATE		= 25; // SKILL_GATE -- int
+		const int PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+		const int MAGIC_GATE		= 27; // MAGIC_GATE -- int
+		const int BUFF_GATE		= 28; // BUFF_GATE -- int
 
 	};
 
-	enum PlayerHero
+	class PlayerHero
 	{
-		PlayerHero_GUID		= 0, // GUID -- object
-		PlayerHero_ConfigID		= 1, // ConfigID -- string
-		PlayerHero_Activated		= 2, // Activated -- int
-		PlayerHero_Level		= 3, // Level -- int
-		PlayerHero_Exp		= 4, // Exp -- int
-		PlayerHero_Star		= 5, // Star -- int
-		PlayerHero_Equip1		= 6, // Equip1 -- object
-		PlayerHero_Equip2		= 7, // Equip2 -- object
-		PlayerHero_Equip3		= 8, // Equip3 -- object
-		PlayerHero_Equip4		= 9, // Equip4 -- object
-		PlayerHero_Equip5		= 10, // Equip5 -- object
-		PlayerHero_Equip6		= 11, // Equip6 -- object
-		PlayerHero_Talent1		= 12, // Talent1 -- string
-		PlayerHero_Talent2		= 13, // Talent2 -- string
-		PlayerHero_Talent3		= 14, // Talent3 -- string
-		PlayerHero_Talent4		= 15, // Talent4 -- string
-		PlayerHero_Talent5		= 16, // Talent5 -- string
-		PlayerHero_Skill1		= 17, // Skill1 -- string
-		PlayerHero_Skill2		= 18, // Skill2 -- string
-		PlayerHero_Skill3		= 19, // Skill3 -- string
-		PlayerHero_Skill4		= 20, // Skill4 -- string
-		PlayerHero_Skill5		= 21, // Skill5 -- string
-		PlayerHero_FightSkill		= 22, // FightSkill -- string
+	public:
+		const std::string ThisName = "PlayerHero";
+		const int GUID		= 0; // GUID -- object
+		const int ConfigID		= 1; // ConfigID -- string
+		const int Activated		= 2; // Activated -- int
+		const int Level		= 3; // Level -- int
+		const int Exp		= 4; // Exp -- int
+		const int Star		= 5; // Star -- int
+		const int Equip1		= 6; // Equip1 -- object
+		const int Equip2		= 7; // Equip2 -- object
+		const int Equip3		= 8; // Equip3 -- object
+		const int Equip4		= 9; // Equip4 -- object
+		const int Equip5		= 10; // Equip5 -- object
+		const int Equip6		= 11; // Equip6 -- object
+		const int Talent1		= 12; // Talent1 -- string
+		const int Talent2		= 13; // Talent2 -- string
+		const int Talent3		= 14; // Talent3 -- string
+		const int Talent4		= 15; // Talent4 -- string
+		const int Talent5		= 16; // Talent5 -- string
+		const int Skill1		= 17; // Skill1 -- string
+		const int Skill2		= 18; // Skill2 -- string
+		const int Skill3		= 19; // Skill3 -- string
+		const int Skill4		= 20; // Skill4 -- string
+		const int Skill5		= 21; // Skill5 -- string
+		const int FightSkill		= 22; // FightSkill -- string
 
 	};
 
-	enum HeroPropertyValue
+	class HeroPropertyValue
 	{
-		HeroPropertyValue_SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		HeroPropertyValue_REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		HeroPropertyValue_CRITICAL		= 2, // CRITICAL -- int
-		HeroPropertyValue_MAXHP		= 3, // MAXHP -- int
-		HeroPropertyValue_MAXMP		= 4, // MAXMP -- int
-		HeroPropertyValue_MAXSP		= 5, // MAXSP -- int
-		HeroPropertyValue_HPREGEN		= 6, // HPREGEN -- int
-		HeroPropertyValue_SPREGEN		= 7, // SPREGEN -- int
-		HeroPropertyValue_MPREGEN		= 8, // MPREGEN -- int
-		HeroPropertyValue_ATK_VALUE		= 9, // ATK_VALUE -- int
-		HeroPropertyValue_DEF_VALUE		= 10, // DEF_VALUE -- int
-		HeroPropertyValue_MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		HeroPropertyValue_ATK_SPEED		= 12, // ATK_SPEED -- int
-		HeroPropertyValue_ATK_FIRE		= 13, // ATK_FIRE -- int
-		HeroPropertyValue_ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		HeroPropertyValue_ATK_WIND		= 15, // ATK_WIND -- int
-		HeroPropertyValue_ATK_ICE		= 16, // ATK_ICE -- int
-		HeroPropertyValue_ATK_POISON		= 17, // ATK_POISON -- int
-		HeroPropertyValue_DEF_FIRE		= 18, // DEF_FIRE -- int
-		HeroPropertyValue_DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		HeroPropertyValue_DEF_WIND		= 20, // DEF_WIND -- int
-		HeroPropertyValue_DEF_ICE		= 21, // DEF_ICE -- int
-		HeroPropertyValue_DEF_POISON		= 22, // DEF_POISON -- int
-		HeroPropertyValue_DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		HeroPropertyValue_MOVE_GATE		= 24, // MOVE_GATE -- int
-		HeroPropertyValue_SKILL_GATE		= 25, // SKILL_GATE -- int
-		HeroPropertyValue_PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		HeroPropertyValue_MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		HeroPropertyValue_BUFF_GATE		= 28, // BUFF_GATE -- int
+	public:
+		const std::string ThisName = "HeroPropertyValue";
+		const int SUCKBLOOD		= 0; // SUCKBLOOD -- int
+		const int REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+		const int CRITICAL		= 2; // CRITICAL -- int
+		const int MAXHP		= 3; // MAXHP -- int
+		const int MAXMP		= 4; // MAXMP -- int
+		const int MAXSP		= 5; // MAXSP -- int
+		const int HPREGEN		= 6; // HPREGEN -- int
+		const int SPREGEN		= 7; // SPREGEN -- int
+		const int MPREGEN		= 8; // MPREGEN -- int
+		const int ATK_VALUE		= 9; // ATK_VALUE -- int
+		const int DEF_VALUE		= 10; // DEF_VALUE -- int
+		const int MOVE_SPEED		= 11; // MOVE_SPEED -- int
+		const int ATK_SPEED		= 12; // ATK_SPEED -- int
+		const int ATK_FIRE		= 13; // ATK_FIRE -- int
+		const int ATK_LIGHT		= 14; // ATK_LIGHT -- int
+		const int ATK_WIND		= 15; // ATK_WIND -- int
+		const int ATK_ICE		= 16; // ATK_ICE -- int
+		const int ATK_POISON		= 17; // ATK_POISON -- int
+		const int DEF_FIRE		= 18; // DEF_FIRE -- int
+		const int DEF_LIGHT		= 19; // DEF_LIGHT -- int
+		const int DEF_WIND		= 20; // DEF_WIND -- int
+		const int DEF_ICE		= 21; // DEF_ICE -- int
+		const int DEF_POISON		= 22; // DEF_POISON -- int
+		const int DIZZY_GATE		= 23; // DIZZY_GATE -- int
+		const int MOVE_GATE		= 24; // MOVE_GATE -- int
+		const int SKILL_GATE		= 25; // SKILL_GATE -- int
+		const int PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+		const int MAGIC_GATE		= 27; // MAGIC_GATE -- int
+		const int BUFF_GATE		= 28; // BUFF_GATE -- int
 
 	};
 
-	enum BagEquipList
+	class BagEquipList
 	{
-		BagEquipList_GUID		= 0, // GUID -- object
-		BagEquipList_WearGUID		= 1, // WearGUID -- object
-		BagEquipList_ConfigID		= 2, // ConfigID -- string
-		BagEquipList_ExpiredType		= 3, // ExpiredType -- int
-		BagEquipList_Date		= 4, // Date -- int
-		BagEquipList_RandPropertyID		= 5, // RandPropertyID -- string
-		BagEquipList_SlotCount		= 6, // SlotCount -- int
-		BagEquipList_InlayStone1		= 7, // InlayStone1 -- string
-		BagEquipList_InlayStone2		= 8, // InlayStone2 -- string
-		BagEquipList_InlayStone3		= 9, // InlayStone3 -- string
-		BagEquipList_InlayStone4		= 10, // InlayStone4 -- string
-		BagEquipList_InlayStone5		= 11, // InlayStone5 -- string
-		BagEquipList_InlayStone6		= 12, // InlayStone6 -- string
-		BagEquipList_InlayStone7		= 13, // InlayStone7 -- string
-		BagEquipList_InlayStone8		= 14, // InlayStone8 -- string
-		BagEquipList_InlayStone9		= 15, // InlayStone9 -- string
-		BagEquipList_InlayStone10		= 16, // InlayStone10 -- string
-		BagEquipList_IntensifyLevel		= 17, // IntensifyLevel -- string
-		BagEquipList_ElementLevel1_FIRE		= 18, // ElementLevel1_FIRE -- int
-		BagEquipList_ElementLevel2_LIGHT		= 19, // ElementLevel2_LIGHT -- int
-		BagEquipList_ElementLevel3_Wind		= 20, // ElementLevel3_Wind -- int
-		BagEquipList_ElementLevel4_ICE		= 21, // ElementLevel4_ICE -- int
-		BagEquipList_ElementLevel5_POISON		= 22, // ElementLevel5_POISON -- int
+	public:
+		const std::string ThisName = "BagEquipList";
+		const int GUID		= 0; // GUID -- object
+		const int WearGUID		= 1; // WearGUID -- object
+		const int ConfigID		= 2; // ConfigID -- string
+		const int ExpiredType		= 3; // ExpiredType -- int
+		const int Date		= 4; // Date -- int
+		const int RandPropertyID		= 5; // RandPropertyID -- string
+		const int SlotCount		= 6; // SlotCount -- int
+		const int InlayStone1		= 7; // InlayStone1 -- string
+		const int InlayStone2		= 8; // InlayStone2 -- string
+		const int InlayStone3		= 9; // InlayStone3 -- string
+		const int InlayStone4		= 10; // InlayStone4 -- string
+		const int InlayStone5		= 11; // InlayStone5 -- string
+		const int InlayStone6		= 12; // InlayStone6 -- string
+		const int InlayStone7		= 13; // InlayStone7 -- string
+		const int InlayStone8		= 14; // InlayStone8 -- string
+		const int InlayStone9		= 15; // InlayStone9 -- string
+		const int InlayStone10		= 16; // InlayStone10 -- string
+		const int IntensifyLevel		= 17; // IntensifyLevel -- string
+		const int ElementLevel1_FIRE		= 18; // ElementLevel1_FIRE -- int
+		const int ElementLevel2_LIGHT		= 19; // ElementLevel2_LIGHT -- int
+		const int ElementLevel3_Wind		= 20; // ElementLevel3_Wind -- int
+		const int ElementLevel4_ICE		= 21; // ElementLevel4_ICE -- int
+		const int ElementLevel5_POISON		= 22; // ElementLevel5_POISON -- int
 
 	};
 
-	enum BagItemList
+	class BagItemList
 	{
-		BagItemList_ConfigID		= 0, // ConfigID -- string
-		BagItemList_ItemCount		= 1, // ItemCount -- int
-		BagItemList_Bound		= 2, // Bound -- int
-		BagItemList_ExpiredType		= 3, // ExpiredType -- int
-		BagItemList_Date		= 4, // Date -- int
+	public:
+		const std::string ThisName = "BagItemList";
+		const int ConfigID		= 0; // ConfigID -- string
+		const int ItemCount		= 1; // ItemCount -- int
+		const int Bound		= 2; // Bound -- int
+		const int ExpiredType		= 3; // ExpiredType -- int
+		const int Date		= 4; // Date -- int
 
 	};
 
-	enum TaskMonsterList
+	class TaskMonsterList
 	{
-		TaskMonsterList_MonsterID		= 0, // MonsterID -- string
-		TaskMonsterList_CurrentKillCount		= 1, // CurrentKillCount -- int
-		TaskMonsterList_RequireKillCount		= 2, // RequireKillCount -- int
-		TaskMonsterList_TaskID		= 3, // TaskID -- string
+	public:
+		const std::string ThisName = "TaskMonsterList";
+		const int MonsterID		= 0; // MonsterID -- string
+		const int CurrentKillCount		= 1; // CurrentKillCount -- int
+		const int RequireKillCount		= 2; // RequireKillCount -- int
+		const int TaskID		= 3; // TaskID -- string
 
 	};
 
-	enum TaskList
+	class TaskList
 	{
-		TaskList_TaskID		= 0, // TaskID -- string
-		TaskList_TaskStatus		= 1, // TaskStatus -- int
-		TaskList_Process		= 2, // Process -- int
+	public:
+		const std::string ThisName = "TaskList";
+		const int TaskID		= 0; // TaskID -- string
+		const int TaskStatus		= 1; // TaskStatus -- int
+		const int Process		= 2; // Process -- int
 
 	};
 
-	enum BuildingList
+	class BuildingList
 	{
-		BuildingList_BuildingID		= 0, // BuildingID -- string
-		BuildingList_BuildingGUID		= 1, // BuildingGUID -- object
-		BuildingList_State		= 2, // State -- int
-		BuildingList_PosX		= 3, // PosX -- float
-		BuildingList_Pos		= 4, // Pos -- vector3
-		BuildingList_StateEndTime		= 5, // StateEndTime -- int
+	public:
+		const std::string ThisName = "BuildingList";
+		const int BuildingID		= 0; // BuildingID -- string
+		const int BuildingGUID		= 1; // BuildingGUID -- object
+		const int State		= 2; // State -- int
+		const int PosX		= 3; // PosX -- float
+		const int Pos		= 4; // Pos -- vector3
+		const int StateEndTime		= 5; // StateEndTime -- int
 
 	};
 
-	enum BuildingListProduce
+	class BuildingListProduce
 	{
-		BuildingListProduce_BuildingID		= 0, // BuildingID -- string
-		BuildingListProduce_BuildingGUID		= 1, // BuildingGUID -- object
-		BuildingListProduce_State		= 2, // State -- int
-		BuildingListProduce_PosX		= 3, // PosX -- float
-		BuildingListProduce_PosY		= 4, // PosY -- float
-		BuildingListProduce_StateEndTime		= 5, // StateEndTime -- int
+	public:
+		const std::string ThisName = "BuildingListProduce";
+		const int BuildingID		= 0; // BuildingID -- string
+		const int BuildingGUID		= 1; // BuildingGUID -- object
+		const int State		= 2; // State -- int
+		const int PosX		= 3; // PosX -- float
+		const int PosY		= 4; // PosY -- float
+		const int StateEndTime		= 5; // StateEndTime -- int
 
 	};
 
@@ -907,32 +923,32 @@ class Scene
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xScene = "Scene"; return xScene; }
+	const std::string ThisName = "Scene";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& SceneName(){ static std::string xSceneName = "SceneName"; return xSceneName; } // string
-	static const std::string& SceneShowName(){ static std::string xSceneShowName = "SceneShowName"; return xSceneShowName; } // string
-	static const std::string& MaxGroup(){ static std::string xMaxGroup = "MaxGroup"; return xMaxGroup; } // int
-	static const std::string& MaxGroupPlayers(){ static std::string xMaxGroupPlayers = "MaxGroupPlayers"; return xMaxGroupPlayers; } // int
-	static const std::string& FilePath(){ static std::string xFilePath = "FilePath"; return xFilePath; } // string
-	static const std::string& RelivePos(){ static std::string xRelivePos = "RelivePos"; return xRelivePos; } // string
-	static const std::string& Width(){ static std::string xWidth = "Width"; return xWidth; } // int
-	static const std::string& SoundList(){ static std::string xSoundList = "SoundList"; return xSoundList; } // string
-	static const std::string& Tile(){ static std::string xTile = "Tile"; return xTile; } // int
-	static const std::string& Share(){ static std::string xShare = "Share"; return xShare; } // int
-	static const std::string& CanClone(){ static std::string xCanClone = "CanClone"; return xCanClone; } // int
-	static const std::string& ActorID(){ static std::string xActorID = "ActorID"; return xActorID; } // int
-	static const std::string& LoadingUI(){ static std::string xLoadingUI = "LoadingUI"; return xLoadingUI; } // string
-	static const std::string& CamOffestPos(){ static std::string xCamOffestPos = "CamOffestPos"; return xCamOffestPos; } // string
-	static const std::string& CamOffestRot(){ static std::string xCamOffestRot = "CamOffestRot"; return xCamOffestRot; } // string
-	static const std::string& SyncObject(){ static std::string xSyncObject = "SyncObject"; return xSyncObject; } // int
-	static const std::string& NavigationResPath(){ static std::string xNavigationResPath = "NavigationResPath"; return xNavigationResPath; } // string
+	const std::string SceneName = "SceneName"; // string
+	const std::string SceneShowName = "SceneShowName"; // string
+	const std::string MaxGroup = "MaxGroup"; // int
+	const std::string MaxGroupPlayers = "MaxGroupPlayers"; // int
+	const std::string FilePath = "FilePath"; // string
+	const std::string RelivePos = "RelivePos"; // string
+	const std::string Width = "Width"; // int
+	const std::string SoundList = "SoundList"; // string
+	const std::string Tile = "Tile"; // int
+	const std::string Share = "Share"; // int
+	const std::string CanClone = "CanClone"; // int
+	const std::string ActorID = "ActorID"; // int
+	const std::string LoadingUI = "LoadingUI"; // string
+	const std::string CamOffestPos = "CamOffestPos"; // string
+	const std::string CamOffestRot = "CamOffestRot"; // string
+	const std::string SyncObject = "SyncObject"; // int
+	const std::string NavigationResPath = "NavigationResPath"; // string
 	// Record
 
 };
@@ -941,16 +957,16 @@ class Security
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xSecurity = "Security"; return xSecurity; }
+	const std::string ThisName = "Security";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& SecurityData(){ static std::string xSecurityData = "SecurityData"; return xSecurityData; } // string
+	const std::string SecurityData = "SecurityData"; // string
 	// Record
 
 };
@@ -959,23 +975,23 @@ class Server
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xServer = "Server"; return xServer; }
+	const std::string ThisName = "Server";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& Name(){ static std::string xName = "Name"; return xName; } // string
-	static const std::string& MaxOnline(){ static std::string xMaxOnline = "MaxOnline"; return xMaxOnline; } // int
-	static const std::string& CpuCount(){ static std::string xCpuCount = "CpuCount"; return xCpuCount; } // int
-	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
-	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
-	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
-	static const std::string& Area(){ static std::string xArea = "Area"; return xArea; } // int
+	const std::string ServerID = "ServerID"; // int
+	const std::string Name = "Name"; // string
+	const std::string MaxOnline = "MaxOnline"; // int
+	const std::string CpuCount = "CpuCount"; // int
+	const std::string IP = "IP"; // string
+	const std::string Port = "Port"; // int
+	const std::string Type = "Type"; // int
+	const std::string Area = "Area"; // int
 	// Record
 
 };
@@ -984,23 +1000,23 @@ class Shop
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xShop = "Shop"; return xShop; }
+	const std::string ThisName = "Shop";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
-	static const std::string& ItemID(){ static std::string xItemID = "ItemID"; return xItemID; } // string
-	static const std::string& Gold(){ static std::string xGold = "Gold"; return xGold; } // int
-	static const std::string& Steel(){ static std::string xSteel = "Steel"; return xSteel; } // int
-	static const std::string& Stone(){ static std::string xStone = "Stone"; return xStone; } // int
-	static const std::string& Diamond(){ static std::string xDiamond = "Diamond"; return xDiamond; } // int
-	static const std::string& Level(){ static std::string xLevel = "Level"; return xLevel; } // int
-	static const std::string& Count(){ static std::string xCount = "Count"; return xCount; } // int
+	const std::string Type = "Type"; // int
+	const std::string ItemID = "ItemID"; // string
+	const std::string Gold = "Gold"; // int
+	const std::string Steel = "Steel"; // int
+	const std::string Stone = "Stone"; // int
+	const std::string Diamond = "Diamond"; // int
+	const std::string Level = "Level"; // int
+	const std::string Count = "Count"; // int
 	// Record
 
 };
@@ -1009,38 +1025,38 @@ class Skill
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xSkill = "Skill"; return xSkill; }
+	const std::string ThisName = "Skill";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& SkillType(){ static std::string xSkillType = "SkillType"; return xSkillType; } // int
-	static const std::string& AnimaState(){ static std::string xAnimaState = "AnimaState"; return xAnimaState; } // string
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
-	static const std::string& ConsumeProperty(){ static std::string xConsumeProperty = "ConsumeProperty"; return xConsumeProperty; } // string
-	static const std::string& ConsumeValue(){ static std::string xConsumeValue = "ConsumeValue"; return xConsumeValue; } // string
-	static const std::string& ConsumeType(){ static std::string xConsumeType = "ConsumeType"; return xConsumeType; } // int
-	static const std::string& DamageProperty(){ static std::string xDamageProperty = "DamageProperty"; return xDamageProperty; } // string
-	static const std::string& DamageValue(){ static std::string xDamageValue = "DamageValue"; return xDamageValue; } // string
-	static const std::string& DamageType(){ static std::string xDamageType = "DamageType"; return xDamageType; } // int
-	static const std::string& GetBuffList(){ static std::string xGetBuffList = "GetBuffList"; return xGetBuffList; } // string
-	static const std::string& SendBuffList(){ static std::string xSendBuffList = "SendBuffList"; return xSendBuffList; } // string
-	static const std::string& CoolDownTime(){ static std::string xCoolDownTime = "CoolDownTime"; return xCoolDownTime; } // float
-	static const std::string& RequireDistance(){ static std::string xRequireDistance = "RequireDistance"; return xRequireDistance; } // float
-	static const std::string& DamageDistance(){ static std::string xDamageDistance = "DamageDistance"; return xDamageDistance; } // float
-	static const std::string& TargetType(){ static std::string xTargetType = "TargetType"; return xTargetType; } // int
-	static const std::string& NewObject(){ static std::string xNewObject = "NewObject"; return xNewObject; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
-	static const std::string& PlayerSkill(){ static std::string xPlayerSkill = "PlayerSkill"; return xPlayerSkill; } // int
-	static const std::string& AtkDis(){ static std::string xAtkDis = "AtkDis"; return xAtkDis; } // float
-	static const std::string& DefaultHitTime(){ static std::string xDefaultHitTime = "DefaultHitTime"; return xDefaultHitTime; } // float
-	static const std::string& NextID(){ static std::string xNextID = "NextID"; return xNextID; } // string
+	const std::string SkillType = "SkillType"; // int
+	const std::string AnimaState = "AnimaState"; // string
+	const std::string ShowName = "ShowName"; // string
+	const std::string Desc = "Desc"; // string
+	const std::string ConsumeProperty = "ConsumeProperty"; // string
+	const std::string ConsumeValue = "ConsumeValue"; // string
+	const std::string ConsumeType = "ConsumeType"; // int
+	const std::string DamageProperty = "DamageProperty"; // string
+	const std::string DamageValue = "DamageValue"; // string
+	const std::string DamageType = "DamageType"; // int
+	const std::string GetBuffList = "GetBuffList"; // string
+	const std::string SendBuffList = "SendBuffList"; // string
+	const std::string CoolDownTime = "CoolDownTime"; // float
+	const std::string RequireDistance = "RequireDistance"; // float
+	const std::string DamageDistance = "DamageDistance"; // float
+	const std::string TargetType = "TargetType"; // int
+	const std::string NewObject = "NewObject"; // string
+	const std::string Icon = "Icon"; // string
+	const std::string SpriteFile = "SpriteFile"; // string
+	const std::string PlayerSkill = "PlayerSkill"; // int
+	const std::string AtkDis = "AtkDis"; // float
+	const std::string DefaultHitTime = "DefaultHitTime"; // float
+	const std::string NextID = "NextID"; // string
 	// Record
 
 };
@@ -1049,23 +1065,23 @@ class SqlServer
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xSqlServer = "SqlServer"; return xSqlServer; }
+	const std::string ThisName = "SqlServer";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ServerID(){ static std::string xServerID = "ServerID"; return xServerID; } // int
-	static const std::string& IP(){ static std::string xIP = "IP"; return xIP; } // string
-	static const std::string& Port(){ static std::string xPort = "Port"; return xPort; } // int
-	static const std::string& SqlIP(){ static std::string xSqlIP = "SqlIP"; return xSqlIP; } // string
-	static const std::string& SqlPort(){ static std::string xSqlPort = "SqlPort"; return xSqlPort; } // int
-	static const std::string& SqlUser(){ static std::string xSqlUser = "SqlUser"; return xSqlUser; } // string
-	static const std::string& SqlPwd(){ static std::string xSqlPwd = "SqlPwd"; return xSqlPwd; } // string
-	static const std::string& SqlName(){ static std::string xSqlName = "SqlName"; return xSqlName; } // string
+	const std::string ServerID = "ServerID"; // int
+	const std::string IP = "IP"; // string
+	const std::string Port = "Port"; // int
+	const std::string SqlIP = "SqlIP"; // string
+	const std::string SqlPort = "SqlPort"; // int
+	const std::string SqlUser = "SqlUser"; // string
+	const std::string SqlPwd = "SqlPwd"; // string
+	const std::string SqlName = "SqlName"; // string
 	// Record
 
 };
@@ -1074,21 +1090,21 @@ class Talent
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xTalent = "Talent"; return xTalent; }
+	const std::string ThisName = "Talent";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& ShowName(){ static std::string xShowName = "ShowName"; return xShowName; } // string
-	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
-	static const std::string& EffectData(){ static std::string xEffectData = "EffectData"; return xEffectData; } // string
-	static const std::string& Icon(){ static std::string xIcon = "Icon"; return xIcon; } // string
-	static const std::string& SpriteFile(){ static std::string xSpriteFile = "SpriteFile"; return xSpriteFile; } // string
-	static const std::string& NextID(){ static std::string xNextID = "NextID"; return xNextID; } // string
+	const std::string ShowName = "ShowName"; // string
+	const std::string Desc = "Desc"; // string
+	const std::string EffectData = "EffectData"; // string
+	const std::string Icon = "Icon"; // string
+	const std::string SpriteFile = "SpriteFile"; // string
+	const std::string NextID = "NextID"; // string
 	// Record
 
 };
@@ -1097,24 +1113,24 @@ class Task
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xTask = "Task"; return xTask; }
+	const std::string ThisName = "Task";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Type(){ static std::string xType = "Type"; return xType; } // int
-	static const std::string& NextTaskID(){ static std::string xNextTaskID = "NextTaskID"; return xNextTaskID; } // string
-	static const std::string& KillMonsterName(){ static std::string xKillMonsterName = "KillMonsterName"; return xKillMonsterName; } // string
-	static const std::string& KillCount(){ static std::string xKillCount = "KillCount"; return xKillCount; } // string
-	static const std::string& LevelReq(){ static std::string xLevelReq = "LevelReq"; return xLevelReq; } // string
-	static const std::string& AwardExp(){ static std::string xAwardExp = "AwardExp"; return xAwardExp; } // int
-	static const std::string& AwardGold(){ static std::string xAwardGold = "AwardGold"; return xAwardGold; } // int
-	static const std::string& AwardPack(){ static std::string xAwardPack = "AwardPack"; return xAwardPack; } // string
-	static const std::string& Desc(){ static std::string xDesc = "Desc"; return xDesc; } // string
+	const std::string Type = "Type"; // int
+	const std::string NextTaskID = "NextTaskID"; // string
+	const std::string KillMonsterName = "KillMonsterName"; // string
+	const std::string KillCount = "KillCount"; // string
+	const std::string LevelReq = "LevelReq"; // string
+	const std::string AwardExp = "AwardExp"; // int
+	const std::string AwardGold = "AwardGold"; // int
+	const std::string AwardPack = "AwardPack"; // string
+	const std::string Desc = "Desc"; // string
 	// Record
 
 };
@@ -1123,45 +1139,47 @@ class Team
 {
 public:
 	//Class name
-	static const std::string& ThisName(){ static std::string xTeam = "Team"; return xTeam; }
+	const std::string ThisName = "Team";
 	// IObject
-	static const std::string& ID(){ static std::string xID = "ID"; return xID; } // string
-	static const std::string& ClassName(){ static std::string xClassName = "ClassName"; return xClassName; } // string
-	static const std::string& SceneID(){ static std::string xSceneID = "SceneID"; return xSceneID; } // int
-	static const std::string& GroupID(){ static std::string xGroupID = "GroupID"; return xGroupID; } // int
-	static const std::string& ConfigID(){ static std::string xConfigID = "ConfigID"; return xConfigID; } // string
-	static const std::string& Position(){ static std::string xPosition = "Position"; return xPosition; } // vector3
+	const std::string ID = "ID"; // string
+	const std::string ClassName = "ClassName"; // string
+	const std::string SceneID = "SceneID"; // int
+	const std::string GroupID = "GroupID"; // int
+	const std::string ConfigID = "ConfigID"; // string
+	const std::string Position = "Position"; // vector3
 	// Property
-	static const std::string& Captain(){ static std::string xCaptain = "Captain"; return xCaptain; } // object
-	static const std::string& PresidentName(){ static std::string xPresidentName = "PresidentName"; return xPresidentName; } // string
+	const std::string Captain = "Captain"; // object
+	const std::string PresidentName = "PresidentName"; // string
 	// Record
-	static const std::string& R_MemberList(){ static std::string xMemberList = "MemberList"; return xMemberList;}
-	static const std::string& R_ApplyList(){ static std::string xApplyList = "ApplyList"; return xApplyList;}
 
-	enum MemberList
+	class MemberList
 	{
-		MemberList_GUID		= 0, // GUID -- object
-		MemberList_Name		= 1, // Name -- string
-		MemberList_Level		= 2, // Level -- int
-		MemberList_Job		= 3, // Job -- int
-		MemberList_Donation		= 4, // Donation -- int
-		MemberList_Receive		= 5, // Receive -- int
-		MemberList_VIP		= 6, // VIP -- int
-		MemberList_Online		= 7, // Online -- int
-		MemberList_Title		= 8, // Title -- int
-		MemberList_GameID		= 9, // GameID -- int
+	public:
+		const std::string ThisName = "MemberList";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int Receive		= 5; // Receive -- int
+		const int VIP		= 6; // VIP -- int
+		const int Online		= 7; // Online -- int
+		const int Title		= 8; // Title -- int
+		const int GameID		= 9; // GameID -- int
 
 	};
 
-	enum ApplyList
+	class ApplyList
 	{
-		ApplyList_GUID		= 0, // GUID -- object
-		ApplyList_Name		= 1, // Name -- string
-		ApplyList_Level		= 2, // Level -- int
-		ApplyList_Job		= 3, // Job -- int
-		ApplyList_Donation		= 4, // Donation -- int
-		ApplyList_VIP		= 5, // VIP -- int
-		ApplyList_Power		= 6, // Power -- int
+	public:
+		const std::string ThisName = "ApplyList";
+		const int GUID		= 0; // GUID -- object
+		const int Name		= 1; // Name -- string
+		const int Level		= 2; // Level -- int
+		const int Job		= 3; // Job -- int
+		const int Donation		= 4; // Donation -- int
+		const int VIP		= 5; // VIP -- int
+		const int Power		= 6; // Power -- int
 
 	};
 

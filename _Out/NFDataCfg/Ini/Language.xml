@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" English="" Chinese=""/>
 	<Object Id="Langage_Comm_1" English="Langage_1" Chinese="确认"/>
 	<Object Id="Langage_Comm_2" English="Langage_2" Chinese="取消"/>
 	<Object Id="Langage_Comm_3" English="Langage_3" Chinese="登录"/>
