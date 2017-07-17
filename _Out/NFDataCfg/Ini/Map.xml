@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" MaxCount="最大入驻公会" InComeGold="收益金币/小时" InComeDiamond="收益钻石/小时" InComeOil="收益石油/小时" MapLevel="Level决定收益，展示给玩家争夺"/>
 	<Object Id="Maptitle1" MaxCount="10" InComeGold="10000000" InComeDiamond="10000000" InComeOil="10000000" MapLevel="1"/>
 	<Object Id="Maptitle2" MaxCount="10" InComeGold="10000000" InComeDiamond="10000000" InComeOil="10000000" MapLevel="1"/>
 	<Object Id="Maptitle3" MaxCount="10" InComeGold="10000000" InComeDiamond="10000000" InComeOil="10000000" MapLevel="1"/>

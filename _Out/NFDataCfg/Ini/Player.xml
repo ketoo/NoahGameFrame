@@ -1,3 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<XML/>
+<XML>
+	<Object Id="Desc" Name="角色名" Sex="性别" Job="职业" Race="种族" Camp="阵营" Level="等级" ShowName="显示的名字" PrefabPath="预设路径" FirstTarget="首要目标" FightHero="Hero" HeroPos1="Hero1" HeroPos2="Hero2" HeroPos3="Hero3" Skill1="Hero1" Skill2="Hero2" Skill3="Hero3" VIPLevel="经验获得,如果是怪物，则是掉落经验" VIPEXP="VIP经验" EXP="经验获得,如果是怪物，则是掉落经验" HP="生命值" SP="体力" MP="法力值" Gold="玩家游戏金币" Money="钻石" Account="玩家的帐号" ConnectKey="玩家连接服务器的KEY" MAXEXP="升级需要的经验" RELIVE_SOUL="转生次数" ATK_PVP="PVP攻击力" DEF_PVP="PVP防御力" OnlineCount="上线次数" TotalTime="在线时间" LastOfflineTime="上次下线时间" OnlineTime="本次上线时间" TotalLineTime="今日在线时长{截至至本次上线时间}" GMLevel="GM等级" GameID="登陆的服ID" GateID="登陆的网关ID" GuildID="公会ID" TeamID="所在队伍ID" HomeSceneID="玩家下线的时候需要保存上次在线的场景" ViewOppnent="when searching" FightOppnent="pvp_oppnent" GambleGold="0" GambleDiamond="0" SUCKBLOOD="吸血" REFLECTDAMAGE="反伤" CRITICAL="暴击" MAXHP="生命值" MAXMP="法力值" MAXSP="体力" HPREGEN="生命值回复" SPREGEN="体力回复" MPREGEN="MP回复" ATK_VALUE="物理攻击力" DEF_VALUE="物理防御力" MOVE_SPEED="移动速度,默认单位是10000=1米" ATK_SPEED="攻击速度默认10000" ATK_FIRE="火" ATK_LIGHT="雷电" ATK_WIND="土" ATK_ICE="冰" ATK_POISON="毒" DEF_FIRE="火抗" DEF_LIGHT="雷电抗" DEF_WIND="土抗" DEF_ICE="冰抗" DEF_POISON="毒抗" DIZZY_GATE="眩晕开关" MOVE_GATE="移动开关" SKILL_GATE="技能开关" PHYSICAL_GATE="物理免疫开关" MAGIC_GATE="魔法免疫开关" BUFF_GATE="BUFF免疫开关"/>
+</XML>
 
