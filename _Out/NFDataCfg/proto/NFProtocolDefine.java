@@ -20,29 +20,6 @@ public class IObject {
 
 }
 
-public class BB_Build {
-	//Class name
-	public static final String ThisName = "BB_Build";
-	// IObject
-	public static final String ID = "ID"; // string
-	public static final String ClassName = "ClassName"; // string
-	public static final String SceneID = "SceneID"; // int
-	public static final String GroupID = "GroupID"; // int
-	public static final String ConfigID = "ConfigID"; // string
-	public static final String Position = "Position"; // vector3
-	// Property
-	public static final String Type = "Type"; // int
-	public static final String SubType = "SubType"; // int
-	public static final String Prefab = "Prefab"; // string
-	public static final String NormalStateFunc = "NormalStateFunc"; // string
-	public static final String UpStateFunc = "UpStateFunc"; // string
-	public static final String Icon = "Icon"; // string
-	public static final String ShowName = "ShowName"; // string
-	public static final String Desc = "Desc"; // string
-	// Record
-
-}
-
 public class Buff {
 	//Class name
 	public static final String ThisName = "Buff";
@@ -700,7 +677,7 @@ public class Player {
 	public static final String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static final String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	public static final String R_CommPropertyValue = "CommPropertyValue";
+	public static final String R_CommValue = "CommValue";
 	public static final String R_PlayerHero = "PlayerHero";
 	public static final String R_HeroPropertyValue = "HeroPropertyValue";
 	public static final String R_BagEquipList = "BagEquipList";
@@ -710,7 +687,7 @@ public class Player {
 	public static final String R_BuildingList = "BuildingList";
 	public static final String R_BuildingListProduce = "BuildingListProduce";
 
-	public enum CommPropertyValue
+	public enum CommValue
 	{
 		SUCKBLOOD		= 0, // SUCKBLOOD -- int
 		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
@@ -866,11 +843,9 @@ public class Player {
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
 		State		= 2, // State -- int
-		PosX		= 3, // PosX -- int
-		PosY		= 4, // PosY -- int
-		PosZ		= 5, // PosZ -- int
-		StateStartTime		= 6, // StateStartTime -- int
-		StateEndTime		= 7, // StateEndTime -- int
+		PosX		= 3, // PosX -- float
+		Pos		= 4, // Pos -- vector3
+		StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
@@ -879,11 +854,9 @@ public class Player {
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
 		State		= 2, // State -- int
-		PosX		= 3, // PosX -- int
-		PosY		= 4, // PosY -- int
-		PosZ		= 5, // PosZ -- int
-		StateStartTime		= 6, // StateStartTime -- int
-		StateEndTime		= 7, // StateEndTime -- int
+		PosX		= 3, // PosX -- float
+		PosY		= 4, // PosY -- float
+		StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
