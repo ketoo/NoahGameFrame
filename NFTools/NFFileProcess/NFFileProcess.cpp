@@ -240,7 +240,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 	std::string strHppEnumInfo = "";
 
 	strHPPPropertyInfo = strHPPPropertyInfo + "class " + strFileName + "\n{\npublic:\n";
-	strHPPPropertyInfo = strHPPPropertyInfo + "\t//Class name\n\tconst std::string ThisName = \"" + strFileName + "\";\n" + "\t// IObject\n" + strHppIObjectInfo + "\t// Property\n";
+	strHPPPropertyInfo = strHPPPropertyInfo + "\t//Class name\n\tstatic const std::string ThisName = \"" + strFileName + "\";\n" + "\t// IObject\n" + strHppIObjectInfo + "\t// Property\n";
 
 	// java
 	std::string strJavaPropertyInfo = "";
@@ -348,13 +348,13 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					propertyNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
 				}
 
-				strHPPPropertyInfo = strHPPPropertyInfo + "\tconst std::string " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
+				strHPPPropertyInfo = strHPPPropertyInfo + "\tstatic const std::string " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 				strJavaPropertyInfo = strJavaPropertyInfo + "\tpublic static final String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 				strCSPropertyInfo = strCSPropertyInfo + "\tpublic static readonly String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 
 				if (strFileName == "IObject")
 				{
-					strHppIObjectInfo += "\tconst std::string " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
+					strHppIObjectInfo += "\tstatic const std::string " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 					strJavaIObjectInfo += "\tpublic static final String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 					strCSIObjectInfo += "\tpublic static readonly String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
 				}
@@ -550,7 +550,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				recordNode->append_attribute(structDoc.allocate_attribute("Desc", NewChar(strDesc)));
 
 				//strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
-				strHppEnumInfo = strHppEnumInfo + "\n\tclass " + strRecordName + "\n\t{\n\tpublic:\n\t\tconst std::string ThisName = \"" + strRecordName  +"\";\n";
+				strHppEnumInfo = strHppEnumInfo + "\n\tclass " + strRecordName + "\n\t{\n\tpublic:\n\t\tstatic const std::string ThisName = \"" + strRecordName  +"\";\n";
 
 				//strJavaRecordInfo = strJavaRecordInfo + "\tpublic static final String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
 				strJavaEnumInfo = strJavaEnumInfo + "\n\tpublic class " + strRecordName + "\n\t{\n\t\tpublic static final String ThisName = \"" + strRecordName + "\";\n";
@@ -598,7 +598,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
 
 					//strHppEnumInfo += "\t\t" + strRecordName + "_" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
-					strHppEnumInfo += "\t\tconst int " + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
+					strHppEnumInfo += "\t\tstatic const int " + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
 					strJavaEnumInfo += "\t\tpublic static final int " + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
 					strCSEnumInfo += "\t\tpublic static readonly int " + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
 
