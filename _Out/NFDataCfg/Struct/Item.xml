@@ -2,7 +2,7 @@
 <XML>
 	<Propertys>
 		<Property Id="ItemType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品类别EItemType"/>
-		<Property Id="ItemSubType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品子类别EGameEquipSubType EGameGemSubType EGameItemSubType EGameCardSubType EGameTokenSubType"/>
+		<Property Id="ItemSubType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品子类别 EGameEquipSubType EGameGemSubType EGameItemSubType EGameCardSubType EGameTokenSubType"/>
 		<Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="等级限制"/>
 		<Property Id="Job" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="职业限制,用分号隔开"/>
 		<Property Id="Quality" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Upload="0" Desc="物品品质"/>

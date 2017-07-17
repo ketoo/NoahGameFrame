@@ -27,30 +27,6 @@ public class IObject
 
 }
 
-public class BB_Build
-{
-	//Class name
-	public static readonly string ThisName = "BB_Build";
-	// IObject
-	public static readonly String ID = "ID"; // string
-	public static readonly String ClassName = "ClassName"; // string
-	public static readonly String SceneID = "SceneID"; // int
-	public static readonly String GroupID = "GroupID"; // int
-	public static readonly String ConfigID = "ConfigID"; // string
-	public static readonly String Position = "Position"; // vector3
-	// Property
-	public static readonly String Type = "Type"; // int
-	public static readonly String SubType = "SubType"; // int
-	public static readonly String Prefab = "Prefab"; // string
-	public static readonly String NormalStateFunc = "NormalStateFunc"; // string
-	public static readonly String UpStateFunc = "UpStateFunc"; // string
-	public static readonly String Icon = "Icon"; // string
-	public static readonly String ShowName = "ShowName"; // string
-	public static readonly String Desc = "Desc"; // string
-	// Record
-
-}
-
 public class Buff
 {
 	//Class name
@@ -725,7 +701,7 @@ public class Player
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	public static readonly String R_CommPropertyValue = "CommPropertyValue";
+	public static readonly String R_CommValue = "CommValue";
 	public static readonly String R_PlayerHero = "PlayerHero";
 	public static readonly String R_HeroPropertyValue = "HeroPropertyValue";
 	public static readonly String R_BagEquipList = "BagEquipList";
@@ -735,7 +711,7 @@ public class Player
 	public static readonly String R_BuildingList = "BuildingList";
 	public static readonly String R_BuildingListProduce = "BuildingListProduce";
 
-	public enum CommPropertyValue
+	public enum CommValue
 	{
 		SUCKBLOOD		= 0, // SUCKBLOOD -- int
 		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
@@ -891,11 +867,9 @@ public class Player
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
 		State		= 2, // State -- int
-		PosX		= 3, // PosX -- int
-		PosY		= 4, // PosY -- int
-		PosZ		= 5, // PosZ -- int
-		StateStartTime		= 6, // StateStartTime -- int
-		StateEndTime		= 7, // StateEndTime -- int
+		PosX		= 3, // PosX -- float
+		Pos		= 4, // Pos -- vector3
+		StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
@@ -904,11 +878,9 @@ public class Player
 		BuildingID		= 0, // BuildingID -- string
 		BuildingGUID		= 1, // BuildingGUID -- object
 		State		= 2, // State -- int
-		PosX		= 3, // PosX -- int
-		PosY		= 4, // PosY -- int
-		PosZ		= 5, // PosZ -- int
-		StateStartTime		= 6, // StateStartTime -- int
-		StateEndTime		= 7, // StateEndTime -- int
+		PosX		= 3, // PosX -- float
+		PosY		= 4, // PosY -- float
+		StateEndTime		= 5, // StateEndTime -- int
 
 	};
 
