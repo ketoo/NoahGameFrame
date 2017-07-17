@@ -76,7 +76,7 @@ private:
 	bool bConvertIntoUTF8 = false;
 
 	int nCipher = 0;
-	const int nTitleLine = 9;
+	const int nTitleLine = 10;
 	const int nRecordLineCount = 11;
 
 	std::vector<char *> tmpStrList;

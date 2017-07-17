@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" Type="0" ItemID="" Gold="0" Steel="0" Stone="0" Diamond="0" Level="0" Count="0"/>
 	<Object Id="Shop1" Type="1" ItemID="Build_Altar_1" Gold="1" Steel="5" Stone="1" Diamond="100" Level="1" Count="1"/>
 	<Object Id="Shop2" Type="1" ItemID="Build_Arena_1" Gold="1" Steel="5" Stone="2" Diamond="200" Level="1" Count="1"/>
 	<Object Id="Shop3" Type="1" ItemID="Build_Camp_1" Gold="1" Steel="1" Stone="3" Diamond="300" Level="1" Count="1"/>
