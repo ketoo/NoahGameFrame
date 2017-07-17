@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" Type="任务类别" NextTaskID="下一个任务ID" KillMonsterName="要求杀的怪，逗号分开" KillCount="要求杀的怪数量，逗号分开" LevelReq="任务限制等级" AwardExp="奖励的经验" AwardGold="奖励的金币" AwardPack="奖励包" Desc="任务描述"/>
 	<Object Id="Task1" Type="1" NextTaskID="Task2" KillMonsterName="AttackNpc1" KillCount="1" LevelReq="1" AwardExp="100" AwardGold="110" AwardPack="DropBag_1" Desc="Task1"/>
 	<Object Id="Task2" Type="1" NextTaskID="Task3" KillMonsterName="AttackNpc1" KillCount="2" LevelReq="2" AwardExp="200" AwardGold="220" AwardPack="DropBag_1" Desc="Task2"/>
 	<Object Id="Task3" Type="1" NextTaskID="Task4" KillMonsterName="AttackNpc1" KillCount="3" LevelReq="3" AwardExp="300" AwardGold="330" AwardPack="DropBag_1" Desc="Task3"/>

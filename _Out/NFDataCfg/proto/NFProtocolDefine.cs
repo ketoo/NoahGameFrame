@@ -239,96 +239,96 @@ public class Guild
 	public static readonly String EctypID = "EctypID"; // int
 	public static readonly String EctypIDGroup = "EctypIDGroup"; // int
 	// Record
-	public static readonly String R_GuildBoss = "GuildBoss";
-	public static readonly String R_GuildMemberList = "GuildMemberList";
-	public static readonly String R_GuildAppyList = "GuildAppyList";
-	public static readonly String R_GuildEvent = "GuildEvent";
-	public static readonly String R_GuildHouse = "GuildHouse";
-	public static readonly String R_GuildSkill = "GuildSkill";
 
-	public enum GuildBoss
+	public class GuildBoss
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Offline		= 6, // Offline -- int
-		Power		= 7, // Power -- int
+		public static readonly String ThisName = "GuildBoss";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Offline		= 6; // Offline -- int
+		public static readonly int Power		= 7; // Power -- int
 
 	};
 
-	public enum GuildMemberList
+	public class GuildMemberList
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		Receive		= 5, // Receive -- int
-		VIP		= 6, // VIP -- int
-		Online		= 7, // Online -- int
-		Power		= 8, // Power -- int
-		Title		= 9, // Title -- int
-		GameID		= 10, // GameID -- int
-		JoinTime		= 11, // JoinTime -- int
-		Contribution		= 12, // Contribution -- int
-		AllContribution		= 13, // AllContribution -- int
+		public static readonly String ThisName = "GuildMemberList";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int Receive		= 5; // Receive -- int
+		public static readonly int VIP		= 6; // VIP -- int
+		public static readonly int Online		= 7; // Online -- int
+		public static readonly int Power		= 8; // Power -- int
+		public static readonly int Title		= 9; // Title -- int
+		public static readonly int GameID		= 10; // GameID -- int
+		public static readonly int JoinTime		= 11; // JoinTime -- int
+		public static readonly int Contribution		= 12; // Contribution -- int
+		public static readonly int AllContribution		= 13; // AllContribution -- int
 
 	};
 
-	public enum GuildAppyList
+	public class GuildAppyList
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Power		= 6, // Power -- int
+		public static readonly String ThisName = "GuildAppyList";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Power		= 6; // Power -- int
 
 	};
 
-	public enum GuildEvent
+	public class GuildEvent
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Offline		= 6, // Offline -- int
-		Power		= 7, // Power -- int
-		EventID		= 8, // EventID -- int
-		EventTime		= 9, // EventTime -- int
-		Context		= 10, // Context -- string
+		public static readonly String ThisName = "GuildEvent";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Offline		= 6; // Offline -- int
+		public static readonly int Power		= 7; // Power -- int
+		public static readonly int EventID		= 8; // EventID -- int
+		public static readonly int EventTime		= 9; // EventTime -- int
+		public static readonly int Context		= 10; // Context -- string
 
 	};
 
-	public enum GuildHouse
+	public class GuildHouse
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Offline		= 6, // Offline -- int
-		Power		= 7, // Power -- int
+		public static readonly String ThisName = "GuildHouse";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Offline		= 6; // Offline -- int
+		public static readonly int Power		= 7; // Power -- int
 
 	};
 
-	public enum GuildSkill
+	public class GuildSkill
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Offline		= 6, // Offline -- int
-		Power		= 7, // Power -- int
+		public static readonly String ThisName = "GuildSkill";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Offline		= 6; // Offline -- int
+		public static readonly int Power		= 7; // Power -- int
 
 	};
 
@@ -500,19 +500,19 @@ public class Map
 	public static readonly String InComeOil = "InComeOil"; // int
 	public static readonly String MapLevel = "MapLevel"; // int
 	// Record
-	public static readonly String R_Station = "Station";
 
-	public enum Station
+	public class Station
 	{
-		GUID		= 0, // GUID -- object
-		GuildID		= 1, // GuildID -- object
-		GuildName		= 2, // GuildName -- string
-		Level		= 3, // Level -- int
-		Title		= 4, // Title -- string
-		Slogan		= 5, // Slogan -- string
-		State		= 6, // State -- int
-		CurMemberCount		= 7, // CurMemberCount -- int
-		WinCount		= 8, // WinCount -- int
+		public static readonly String ThisName = "Station";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int GuildID		= 1; // GuildID -- object
+		public static readonly int GuildName		= 2; // GuildName -- string
+		public static readonly int Level		= 3; // Level -- int
+		public static readonly int Title		= 4; // Title -- string
+		public static readonly int Slogan		= 5; // Slogan -- string
+		public static readonly int State		= 6; // State -- int
+		public static readonly int CurMemberCount		= 7; // CurMemberCount -- int
+		public static readonly int WinCount		= 8; // WinCount -- int
 
 	};
 
@@ -701,186 +701,186 @@ public class Player
 	public static readonly String MAGIC_GATE = "MAGIC_GATE"; // int
 	public static readonly String BUFF_GATE = "BUFF_GATE"; // int
 	// Record
-	public static readonly String R_CommValue = "CommValue";
-	public static readonly String R_PlayerHero = "PlayerHero";
-	public static readonly String R_HeroPropertyValue = "HeroPropertyValue";
-	public static readonly String R_BagEquipList = "BagEquipList";
-	public static readonly String R_BagItemList = "BagItemList";
-	public static readonly String R_TaskMonsterList = "TaskMonsterList";
-	public static readonly String R_TaskList = "TaskList";
-	public static readonly String R_BuildingList = "BuildingList";
-	public static readonly String R_BuildingListProduce = "BuildingListProduce";
 
-	public enum CommValue
+	public class CommValue
 	{
-		SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CRITICAL		= 2, // CRITICAL -- int
-		MAXHP		= 3, // MAXHP -- int
-		MAXMP		= 4, // MAXMP -- int
-		MAXSP		= 5, // MAXSP -- int
-		HPREGEN		= 6, // HPREGEN -- int
-		SPREGEN		= 7, // SPREGEN -- int
-		MPREGEN		= 8, // MPREGEN -- int
-		ATK_VALUE		= 9, // ATK_VALUE -- int
-		DEF_VALUE		= 10, // DEF_VALUE -- int
-		MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		ATK_SPEED		= 12, // ATK_SPEED -- int
-		ATK_FIRE		= 13, // ATK_FIRE -- int
-		ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		ATK_WIND		= 15, // ATK_WIND -- int
-		ATK_ICE		= 16, // ATK_ICE -- int
-		ATK_POISON		= 17, // ATK_POISON -- int
-		DEF_FIRE		= 18, // DEF_FIRE -- int
-		DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		DEF_WIND		= 20, // DEF_WIND -- int
-		DEF_ICE		= 21, // DEF_ICE -- int
-		DEF_POISON		= 22, // DEF_POISON -- int
-		DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		MOVE_GATE		= 24, // MOVE_GATE -- int
-		SKILL_GATE		= 25, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		BUFF_GATE		= 28, // BUFF_GATE -- int
+		public static readonly String ThisName = "CommValue";
+		public static readonly int SUCKBLOOD		= 0; // SUCKBLOOD -- int
+		public static readonly int REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+		public static readonly int CRITICAL		= 2; // CRITICAL -- int
+		public static readonly int MAXHP		= 3; // MAXHP -- int
+		public static readonly int MAXMP		= 4; // MAXMP -- int
+		public static readonly int MAXSP		= 5; // MAXSP -- int
+		public static readonly int HPREGEN		= 6; // HPREGEN -- int
+		public static readonly int SPREGEN		= 7; // SPREGEN -- int
+		public static readonly int MPREGEN		= 8; // MPREGEN -- int
+		public static readonly int ATK_VALUE		= 9; // ATK_VALUE -- int
+		public static readonly int DEF_VALUE		= 10; // DEF_VALUE -- int
+		public static readonly int MOVE_SPEED		= 11; // MOVE_SPEED -- int
+		public static readonly int ATK_SPEED		= 12; // ATK_SPEED -- int
+		public static readonly int ATK_FIRE		= 13; // ATK_FIRE -- int
+		public static readonly int ATK_LIGHT		= 14; // ATK_LIGHT -- int
+		public static readonly int ATK_WIND		= 15; // ATK_WIND -- int
+		public static readonly int ATK_ICE		= 16; // ATK_ICE -- int
+		public static readonly int ATK_POISON		= 17; // ATK_POISON -- int
+		public static readonly int DEF_FIRE		= 18; // DEF_FIRE -- int
+		public static readonly int DEF_LIGHT		= 19; // DEF_LIGHT -- int
+		public static readonly int DEF_WIND		= 20; // DEF_WIND -- int
+		public static readonly int DEF_ICE		= 21; // DEF_ICE -- int
+		public static readonly int DEF_POISON		= 22; // DEF_POISON -- int
+		public static readonly int DIZZY_GATE		= 23; // DIZZY_GATE -- int
+		public static readonly int MOVE_GATE		= 24; // MOVE_GATE -- int
+		public static readonly int SKILL_GATE		= 25; // SKILL_GATE -- int
+		public static readonly int PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+		public static readonly int MAGIC_GATE		= 27; // MAGIC_GATE -- int
+		public static readonly int BUFF_GATE		= 28; // BUFF_GATE -- int
 
 	};
 
-	public enum PlayerHero
+	public class PlayerHero
 	{
-		GUID		= 0, // GUID -- object
-		ConfigID		= 1, // ConfigID -- string
-		Activated		= 2, // Activated -- int
-		Level		= 3, // Level -- int
-		Exp		= 4, // Exp -- int
-		Star		= 5, // Star -- int
-		Equip1		= 6, // Equip1 -- object
-		Equip2		= 7, // Equip2 -- object
-		Equip3		= 8, // Equip3 -- object
-		Equip4		= 9, // Equip4 -- object
-		Equip5		= 10, // Equip5 -- object
-		Equip6		= 11, // Equip6 -- object
-		Talent1		= 12, // Talent1 -- string
-		Talent2		= 13, // Talent2 -- string
-		Talent3		= 14, // Talent3 -- string
-		Talent4		= 15, // Talent4 -- string
-		Talent5		= 16, // Talent5 -- string
-		Skill1		= 17, // Skill1 -- string
-		Skill2		= 18, // Skill2 -- string
-		Skill3		= 19, // Skill3 -- string
-		Skill4		= 20, // Skill4 -- string
-		Skill5		= 21, // Skill5 -- string
-		FightSkill		= 22, // FightSkill -- string
+		public static readonly String ThisName = "PlayerHero";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int ConfigID		= 1; // ConfigID -- string
+		public static readonly int Activated		= 2; // Activated -- int
+		public static readonly int Level		= 3; // Level -- int
+		public static readonly int Exp		= 4; // Exp -- int
+		public static readonly int Star		= 5; // Star -- int
+		public static readonly int Equip1		= 6; // Equip1 -- object
+		public static readonly int Equip2		= 7; // Equip2 -- object
+		public static readonly int Equip3		= 8; // Equip3 -- object
+		public static readonly int Equip4		= 9; // Equip4 -- object
+		public static readonly int Equip5		= 10; // Equip5 -- object
+		public static readonly int Equip6		= 11; // Equip6 -- object
+		public static readonly int Talent1		= 12; // Talent1 -- string
+		public static readonly int Talent2		= 13; // Talent2 -- string
+		public static readonly int Talent3		= 14; // Talent3 -- string
+		public static readonly int Talent4		= 15; // Talent4 -- string
+		public static readonly int Talent5		= 16; // Talent5 -- string
+		public static readonly int Skill1		= 17; // Skill1 -- string
+		public static readonly int Skill2		= 18; // Skill2 -- string
+		public static readonly int Skill3		= 19; // Skill3 -- string
+		public static readonly int Skill4		= 20; // Skill4 -- string
+		public static readonly int Skill5		= 21; // Skill5 -- string
+		public static readonly int FightSkill		= 22; // FightSkill -- string
 
 	};
 
-	public enum HeroPropertyValue
+	public class HeroPropertyValue
 	{
-		SUCKBLOOD		= 0, // SUCKBLOOD -- int
-		REFLECTDAMAGE		= 1, // REFLECTDAMAGE -- int
-		CRITICAL		= 2, // CRITICAL -- int
-		MAXHP		= 3, // MAXHP -- int
-		MAXMP		= 4, // MAXMP -- int
-		MAXSP		= 5, // MAXSP -- int
-		HPREGEN		= 6, // HPREGEN -- int
-		SPREGEN		= 7, // SPREGEN -- int
-		MPREGEN		= 8, // MPREGEN -- int
-		ATK_VALUE		= 9, // ATK_VALUE -- int
-		DEF_VALUE		= 10, // DEF_VALUE -- int
-		MOVE_SPEED		= 11, // MOVE_SPEED -- int
-		ATK_SPEED		= 12, // ATK_SPEED -- int
-		ATK_FIRE		= 13, // ATK_FIRE -- int
-		ATK_LIGHT		= 14, // ATK_LIGHT -- int
-		ATK_WIND		= 15, // ATK_WIND -- int
-		ATK_ICE		= 16, // ATK_ICE -- int
-		ATK_POISON		= 17, // ATK_POISON -- int
-		DEF_FIRE		= 18, // DEF_FIRE -- int
-		DEF_LIGHT		= 19, // DEF_LIGHT -- int
-		DEF_WIND		= 20, // DEF_WIND -- int
-		DEF_ICE		= 21, // DEF_ICE -- int
-		DEF_POISON		= 22, // DEF_POISON -- int
-		DIZZY_GATE		= 23, // DIZZY_GATE -- int
-		MOVE_GATE		= 24, // MOVE_GATE -- int
-		SKILL_GATE		= 25, // SKILL_GATE -- int
-		PHYSICAL_GATE		= 26, // PHYSICAL_GATE -- int
-		MAGIC_GATE		= 27, // MAGIC_GATE -- int
-		BUFF_GATE		= 28, // BUFF_GATE -- int
+		public static readonly String ThisName = "HeroPropertyValue";
+		public static readonly int SUCKBLOOD		= 0; // SUCKBLOOD -- int
+		public static readonly int REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
+		public static readonly int CRITICAL		= 2; // CRITICAL -- int
+		public static readonly int MAXHP		= 3; // MAXHP -- int
+		public static readonly int MAXMP		= 4; // MAXMP -- int
+		public static readonly int MAXSP		= 5; // MAXSP -- int
+		public static readonly int HPREGEN		= 6; // HPREGEN -- int
+		public static readonly int SPREGEN		= 7; // SPREGEN -- int
+		public static readonly int MPREGEN		= 8; // MPREGEN -- int
+		public static readonly int ATK_VALUE		= 9; // ATK_VALUE -- int
+		public static readonly int DEF_VALUE		= 10; // DEF_VALUE -- int
+		public static readonly int MOVE_SPEED		= 11; // MOVE_SPEED -- int
+		public static readonly int ATK_SPEED		= 12; // ATK_SPEED -- int
+		public static readonly int ATK_FIRE		= 13; // ATK_FIRE -- int
+		public static readonly int ATK_LIGHT		= 14; // ATK_LIGHT -- int
+		public static readonly int ATK_WIND		= 15; // ATK_WIND -- int
+		public static readonly int ATK_ICE		= 16; // ATK_ICE -- int
+		public static readonly int ATK_POISON		= 17; // ATK_POISON -- int
+		public static readonly int DEF_FIRE		= 18; // DEF_FIRE -- int
+		public static readonly int DEF_LIGHT		= 19; // DEF_LIGHT -- int
+		public static readonly int DEF_WIND		= 20; // DEF_WIND -- int
+		public static readonly int DEF_ICE		= 21; // DEF_ICE -- int
+		public static readonly int DEF_POISON		= 22; // DEF_POISON -- int
+		public static readonly int DIZZY_GATE		= 23; // DIZZY_GATE -- int
+		public static readonly int MOVE_GATE		= 24; // MOVE_GATE -- int
+		public static readonly int SKILL_GATE		= 25; // SKILL_GATE -- int
+		public static readonly int PHYSICAL_GATE		= 26; // PHYSICAL_GATE -- int
+		public static readonly int MAGIC_GATE		= 27; // MAGIC_GATE -- int
+		public static readonly int BUFF_GATE		= 28; // BUFF_GATE -- int
 
 	};
 
-	public enum BagEquipList
+	public class BagEquipList
 	{
-		GUID		= 0, // GUID -- object
-		WearGUID		= 1, // WearGUID -- object
-		ConfigID		= 2, // ConfigID -- string
-		ExpiredType		= 3, // ExpiredType -- int
-		Date		= 4, // Date -- int
-		RandPropertyID		= 5, // RandPropertyID -- string
-		SlotCount		= 6, // SlotCount -- int
-		InlayStone1		= 7, // InlayStone1 -- string
-		InlayStone2		= 8, // InlayStone2 -- string
-		InlayStone3		= 9, // InlayStone3 -- string
-		InlayStone4		= 10, // InlayStone4 -- string
-		InlayStone5		= 11, // InlayStone5 -- string
-		InlayStone6		= 12, // InlayStone6 -- string
-		InlayStone7		= 13, // InlayStone7 -- string
-		InlayStone8		= 14, // InlayStone8 -- string
-		InlayStone9		= 15, // InlayStone9 -- string
-		InlayStone10		= 16, // InlayStone10 -- string
-		IntensifyLevel		= 17, // IntensifyLevel -- string
-		ElementLevel1_FIRE		= 18, // ElementLevel1_FIRE -- int
-		ElementLevel2_LIGHT		= 19, // ElementLevel2_LIGHT -- int
-		ElementLevel3_Wind		= 20, // ElementLevel3_Wind -- int
-		ElementLevel4_ICE		= 21, // ElementLevel4_ICE -- int
-		ElementLevel5_POISON		= 22, // ElementLevel5_POISON -- int
+		public static readonly String ThisName = "BagEquipList";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int WearGUID		= 1; // WearGUID -- object
+		public static readonly int ConfigID		= 2; // ConfigID -- string
+		public static readonly int ExpiredType		= 3; // ExpiredType -- int
+		public static readonly int Date		= 4; // Date -- int
+		public static readonly int RandPropertyID		= 5; // RandPropertyID -- string
+		public static readonly int SlotCount		= 6; // SlotCount -- int
+		public static readonly int InlayStone1		= 7; // InlayStone1 -- string
+		public static readonly int InlayStone2		= 8; // InlayStone2 -- string
+		public static readonly int InlayStone3		= 9; // InlayStone3 -- string
+		public static readonly int InlayStone4		= 10; // InlayStone4 -- string
+		public static readonly int InlayStone5		= 11; // InlayStone5 -- string
+		public static readonly int InlayStone6		= 12; // InlayStone6 -- string
+		public static readonly int InlayStone7		= 13; // InlayStone7 -- string
+		public static readonly int InlayStone8		= 14; // InlayStone8 -- string
+		public static readonly int InlayStone9		= 15; // InlayStone9 -- string
+		public static readonly int InlayStone10		= 16; // InlayStone10 -- string
+		public static readonly int IntensifyLevel		= 17; // IntensifyLevel -- string
+		public static readonly int ElementLevel1_FIRE		= 18; // ElementLevel1_FIRE -- int
+		public static readonly int ElementLevel2_LIGHT		= 19; // ElementLevel2_LIGHT -- int
+		public static readonly int ElementLevel3_Wind		= 20; // ElementLevel3_Wind -- int
+		public static readonly int ElementLevel4_ICE		= 21; // ElementLevel4_ICE -- int
+		public static readonly int ElementLevel5_POISON		= 22; // ElementLevel5_POISON -- int
 
 	};
 
-	public enum BagItemList
+	public class BagItemList
 	{
-		ConfigID		= 0, // ConfigID -- string
-		ItemCount		= 1, // ItemCount -- int
-		Bound		= 2, // Bound -- int
-		ExpiredType		= 3, // ExpiredType -- int
-		Date		= 4, // Date -- int
+		public static readonly String ThisName = "BagItemList";
+		public static readonly int ConfigID		= 0; // ConfigID -- string
+		public static readonly int ItemCount		= 1; // ItemCount -- int
+		public static readonly int Bound		= 2; // Bound -- int
+		public static readonly int ExpiredType		= 3; // ExpiredType -- int
+		public static readonly int Date		= 4; // Date -- int
 
 	};
 
-	public enum TaskMonsterList
+	public class TaskMonsterList
 	{
-		MonsterID		= 0, // MonsterID -- string
-		CurrentKillCount		= 1, // CurrentKillCount -- int
-		RequireKillCount		= 2, // RequireKillCount -- int
-		TaskID		= 3, // TaskID -- string
+		public static readonly String ThisName = "TaskMonsterList";
+		public static readonly int MonsterID		= 0; // MonsterID -- string
+		public static readonly int CurrentKillCount		= 1; // CurrentKillCount -- int
+		public static readonly int RequireKillCount		= 2; // RequireKillCount -- int
+		public static readonly int TaskID		= 3; // TaskID -- string
 
 	};
 
-	public enum TaskList
+	public class TaskList
 	{
-		TaskID		= 0, // TaskID -- string
-		TaskStatus		= 1, // TaskStatus -- int
-		Process		= 2, // Process -- int
+		public static readonly String ThisName = "TaskList";
+		public static readonly int TaskID		= 0; // TaskID -- string
+		public static readonly int TaskStatus		= 1; // TaskStatus -- int
+		public static readonly int Process		= 2; // Process -- int
 
 	};
 
-	public enum BuildingList
+	public class BuildingList
 	{
-		BuildingID		= 0, // BuildingID -- string
-		BuildingGUID		= 1, // BuildingGUID -- object
-		State		= 2, // State -- int
-		PosX		= 3, // PosX -- float
-		Pos		= 4, // Pos -- vector3
-		StateEndTime		= 5, // StateEndTime -- int
+		public static readonly String ThisName = "BuildingList";
+		public static readonly int BuildingID		= 0; // BuildingID -- string
+		public static readonly int BuildingGUID		= 1; // BuildingGUID -- object
+		public static readonly int State		= 2; // State -- int
+		public static readonly int PosX		= 3; // PosX -- float
+		public static readonly int Pos		= 4; // Pos -- vector3
+		public static readonly int StateEndTime		= 5; // StateEndTime -- int
 
 	};
 
-	public enum BuildingListProduce
+	public class BuildingListProduce
 	{
-		BuildingID		= 0, // BuildingID -- string
-		BuildingGUID		= 1, // BuildingGUID -- object
-		State		= 2, // State -- int
-		PosX		= 3, // PosX -- float
-		PosY		= 4, // PosY -- float
-		StateEndTime		= 5, // StateEndTime -- int
+		public static readonly String ThisName = "BuildingListProduce";
+		public static readonly int BuildingID		= 0; // BuildingID -- string
+		public static readonly int BuildingGUID		= 1; // BuildingGUID -- object
+		public static readonly int State		= 2; // State -- int
+		public static readonly int PosX		= 3; // PosX -- float
+		public static readonly int PosY		= 4; // PosY -- float
+		public static readonly int StateEndTime		= 5; // StateEndTime -- int
 
 	};
 
@@ -1109,33 +1109,33 @@ public class Team
 	public static readonly String Captain = "Captain"; // object
 	public static readonly String PresidentName = "PresidentName"; // string
 	// Record
-	public static readonly String R_MemberList = "MemberList";
-	public static readonly String R_ApplyList = "ApplyList";
 
-	public enum MemberList
+	public class MemberList
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		Receive		= 5, // Receive -- int
-		VIP		= 6, // VIP -- int
-		Online		= 7, // Online -- int
-		Title		= 8, // Title -- int
-		GameID		= 9, // GameID -- int
+		public static readonly String ThisName = "MemberList";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int Receive		= 5; // Receive -- int
+		public static readonly int VIP		= 6; // VIP -- int
+		public static readonly int Online		= 7; // Online -- int
+		public static readonly int Title		= 8; // Title -- int
+		public static readonly int GameID		= 9; // GameID -- int
 
 	};
 
-	public enum ApplyList
+	public class ApplyList
 	{
-		GUID		= 0, // GUID -- object
-		Name		= 1, // Name -- string
-		Level		= 2, // Level -- int
-		Job		= 3, // Job -- int
-		Donation		= 4, // Donation -- int
-		VIP		= 5, // VIP -- int
-		Power		= 6, // Power -- int
+		public static readonly String ThisName = "ApplyList";
+		public static readonly int GUID		= 0; // GUID -- object
+		public static readonly int Name		= 1; // Name -- string
+		public static readonly int Level		= 2; // Level -- int
+		public static readonly int Job		= 3; // Job -- int
+		public static readonly int Donation		= 4; // Donation -- int
+		public static readonly int VIP		= 5; // VIP -- int
+		public static readonly int Power		= 6; // Power -- int
 
 	};
 

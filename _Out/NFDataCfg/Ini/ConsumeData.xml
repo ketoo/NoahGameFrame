@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="Desc" VIPEXP="VIP经验" EXP="经验获得,如果是怪物，则是掉落经验" HP="生命值" SP="体力" MP="法力值" Gold="玩家游戏金币" Money="钻石"/>
 	<Object Id="ConsumeData_1" VIPEXP="0" EXP="0" HP="0" SP="0" MP="0" Gold="0" Money="0"/>
 	<Object Id="AwardProperty_VIPEXP_10001" VIPEXP="100" EXP="0" HP="0" SP="0" MP="0" Gold="0" Money="0"/>
 	<Object Id="AwardProperty_EXP_10001" VIPEXP="0" EXP="100" HP="0" SP="0" MP="0" Gold="0" Money="0"/>

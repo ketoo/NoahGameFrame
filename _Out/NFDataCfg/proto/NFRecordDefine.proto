@@ -1,5 +1,5 @@
 package NFrame;
-enum GuildBoss
+class GuildBoss
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -10,7 +10,7 @@ enum GuildBoss
 	Offline		= 6; // Offline -- int
 	Power		= 7; // Power -- int
 }
-enum GuildMemberList
+class GuildMemberList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -27,7 +27,7 @@ enum GuildMemberList
 	Contribution		= 12; // Contribution -- int
 	AllContribution		= 13; // AllContribution -- int
 }
-enum GuildAppyList
+class GuildAppyList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -37,7 +37,7 @@ enum GuildAppyList
 	VIP		= 5; // VIP -- int
 	Power		= 6; // Power -- int
 }
-enum GuildEvent
+class GuildEvent
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -51,7 +51,7 @@ enum GuildEvent
 	EventTime		= 9; // EventTime -- int
 	Context		= 10; // Context -- string
 }
-enum GuildHouse
+class GuildHouse
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -62,7 +62,7 @@ enum GuildHouse
 	Offline		= 6; // Offline -- int
 	Power		= 7; // Power -- int
 }
-enum GuildSkill
+class GuildSkill
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -73,7 +73,7 @@ enum GuildSkill
 	Offline		= 6; // Offline -- int
 	Power		= 7; // Power -- int
 }
-enum Station
+class Station
 {
 	GUID		= 0; // GUID -- object
 	GuildID		= 1; // GuildID -- object
@@ -85,7 +85,7 @@ enum Station
 	CurMemberCount		= 7; // CurMemberCount -- int
 	WinCount		= 8; // WinCount -- int
 }
-enum CommValue
+class CommValue
 {
 	SUCKBLOOD		= 0; // SUCKBLOOD -- int
 	REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
@@ -117,7 +117,7 @@ enum CommValue
 	MAGIC_GATE		= 27; // MAGIC_GATE -- int
 	BUFF_GATE		= 28; // BUFF_GATE -- int
 }
-enum PlayerHero
+class PlayerHero
 {
 	GUID		= 0; // GUID -- object
 	ConfigID		= 1; // ConfigID -- string
@@ -143,7 +143,7 @@ enum PlayerHero
 	Skill5		= 21; // Skill5 -- string
 	FightSkill		= 22; // FightSkill -- string
 }
-enum HeroPropertyValue
+class HeroPropertyValue
 {
 	SUCKBLOOD		= 0; // SUCKBLOOD -- int
 	REFLECTDAMAGE		= 1; // REFLECTDAMAGE -- int
@@ -175,7 +175,7 @@ enum HeroPropertyValue
 	MAGIC_GATE		= 27; // MAGIC_GATE -- int
 	BUFF_GATE		= 28; // BUFF_GATE -- int
 }
-enum BagEquipList
+class BagEquipList
 {
 	GUID		= 0; // GUID -- object
 	WearGUID		= 1; // WearGUID -- object
@@ -201,7 +201,7 @@ enum BagEquipList
 	ElementLevel4_ICE		= 21; // ElementLevel4_ICE -- int
 	ElementLevel5_POISON		= 22; // ElementLevel5_POISON -- int
 }
-enum BagItemList
+class BagItemList
 {
 	ConfigID		= 0; // ConfigID -- string
 	ItemCount		= 1; // ItemCount -- int
@@ -209,20 +209,20 @@ enum BagItemList
 	ExpiredType		= 3; // ExpiredType -- int
 	Date		= 4; // Date -- int
 }
-enum TaskMonsterList
+class TaskMonsterList
 {
 	MonsterID		= 0; // MonsterID -- string
 	CurrentKillCount		= 1; // CurrentKillCount -- int
 	RequireKillCount		= 2; // RequireKillCount -- int
 	TaskID		= 3; // TaskID -- string
 }
-enum TaskList
+class TaskList
 {
 	TaskID		= 0; // TaskID -- string
 	TaskStatus		= 1; // TaskStatus -- int
 	Process		= 2; // Process -- int
 }
-enum BuildingList
+class BuildingList
 {
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
@@ -231,7 +231,7 @@ enum BuildingList
 	Pos		= 4; // Pos -- vector3
 	StateEndTime		= 5; // StateEndTime -- int
 }
-enum BuildingListProduce
+class BuildingListProduce
 {
 	BuildingID		= 0; // BuildingID -- string
 	BuildingGUID		= 1; // BuildingGUID -- object
@@ -240,7 +240,7 @@ enum BuildingListProduce
 	PosY		= 4; // PosY -- float
 	StateEndTime		= 5; // StateEndTime -- int
 }
-enum MemberList
+class MemberList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
@@ -253,7 +253,7 @@ enum MemberList
 	Title		= 8; // Title -- int
 	GameID		= 9; // GameID -- int
 }
-enum ApplyList
+class ApplyList
 {
 	GUID		= 0; // GUID -- object
 	Name		= 1; // Name -- string
