@@ -5,6 +5,7 @@
 NFFileProcess::NFFileProcess()
 {
 	strLogicClassFile = "../Struct/LogicClass.xml";
+
 	mysqlWriter = fopen(strMySQLFile.c_str(), "w");
 	mysqlClassWriter = fopen(strMySQLClassFile.c_str(), "w");
 	protoWriter = fopen(strProtoFile.c_str(), "w");
@@ -26,6 +27,370 @@ NFFileProcess::~NFFileProcess()
 	fclose(hppWriter);
 	fclose(javaWriter);
 	fclose(csWriter);
+}
+
+bool NFFileProcess::LoadDataFromExcel()
+{
+	LoadDataFromExcel("../Excel_Ini/IObject.xlsx", "IObject");
+
+
+	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
+
+	for (auto fileName : fileList)
+	{
+		StringReplace(fileName, "\\", "/");
+		StringReplace(fileName, "//", "/");
+
+		if ((int)(fileName.find("$")) != -1)
+		{
+			continue;
+		}
+
+
+		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
+		if (strExt != "xlsx")
+		{
+			continue;
+		}
+
+
+		auto strFileName = fileName.substr(fileName.find_last_of('/') + 1, fileName.find_last_of('.') - fileName.find_last_of('/') - 1);
+		if (strFileName == "IObject")
+		{
+			continue;
+		}
+
+
+		if (!LoadDataFromExcel(fileName.c_str(), strFileName.c_str()))
+		{
+			std::cout << "Create " + fileName + " failed!" << std::endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::string & strFileName)
+{
+	if (mxClassData.find(strFileName) != mxClassData.end())
+	{
+		std::cout << strFile << " exist!!!" << std::endl;
+		return false;
+	}
+
+	std::cout << strFile << std::endl;
+
+	ClassData* pClassData = new ClassData();
+	mxClassData[strFileName] = pClassData;
+	pClassData->xStructData.strClassName = strFileName;
+
+	///////////////////////////////////////
+	//load
+
+	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
+	if (!xExcel->open(strFile.c_str()))
+	{
+		std::cout << "can't open" << strFile << std::endl;
+		return false;
+	}
+
+	std::vector<MiniExcelReader::Sheet>& sheets = xExcel->sheets();
+	for (MiniExcelReader::Sheet& sh : sheets)
+	{
+		LoadDataFromExcel(sh, pClassData);
+	}
+	return true;
+}
+
+bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	if (strSheetName.find("property") != std::string::npos)
+	{
+		LoadDataAndProcessProperty(sheet, pClassData);
+		LoadIniData(sheet, pClassData);
+	}
+	else if (strSheetName.find("componen") != std::string::npos)
+	{
+		LoadDataAndProcessComponent(sheet, pClassData);
+	}
+	else if (strSheetName.find("record") != std::string::npos)
+	{
+		LoadDataAndProcessRecord(sheet, pClassData);
+	}
+	else
+	{
+		std::cout << pClassData->xStructData.strClassName << " " << strSheetName << std::endl;
+		assert(0);
+	}
+
+	return false;
+}
+
+bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::map<std::string, int> PropertyIndex;//col index
+	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
+		{
+			PropertyIndex[cell->value] = c;
+		}
+	}
+	////////////
+	for (int r = dim.firstRow + nPropertyHeight; r <= dim.lastRow; r++)
+	{
+		MiniExcelReader::Cell* pIDCell = sheet.getCell(r, dim.firstCol);
+		if (pIDCell && !pIDCell->value.empty())
+		{
+			NFClassIni::IniData* pIniObject = new NFClassIni::IniData();
+			pClassData->xIni.iniList[pIDCell->value] = pIniObject;
+
+			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
+			{
+				std::string strPropertyName = itProperty->first;
+				int nCol = itProperty->second;
+
+				MiniExcelReader::Cell* cell = sheet.getCell(r, nCol);
+				if (cell)
+				{
+					pIniObject->propertyList[strPropertyName] = cell->value;
+				}
+				else
+				{
+					pIniObject->propertyList[strPropertyName] = "";
+				}
+			}
+		}
+	}
+	
+	return false;
+}
+
+bool NFFileProcess::LoadDataAndProcessProperty(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::map<std::string, int> descIndex;//row index
+	std::map<std::string, int> PropertyIndex;//col index
+	for (int r = dim.firstRow + 1; r <= dim.firstRow + nPropertyHeight - 1; r++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
+		if (cell)
+		{
+			descIndex[cell->value] = r;
+		}
+	}
+
+	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
+		{
+			PropertyIndex[cell->value] = c;
+		}
+	}
+	////////////
+	
+	for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
+	{
+		std::string strPropertyName = itProperty->first;
+		int nCol = itProperty->second;
+
+		////////////
+		NFClassProperty* pClassProperty = new NFClassProperty();
+		pClassData->xStructData.propertyList[strPropertyName] = pClassProperty;
+
+		////////////
+		for (std::map<std::string, int>::iterator itDesc = descIndex.begin(); itDesc != descIndex.end(); ++itDesc)
+		{
+			std::string descName = itDesc->first;
+			int nRow = itDesc->second;
+
+			
+			MiniExcelReader::Cell* pCell = sheet.getCell(nRow, nCol);
+			if (pCell)
+			{
+				std::string descValue = pCell->value;
+
+				pClassProperty->descList[descName] = descValue;
+			}
+		}
+
+	}
+
+	return false;
+}
+
+bool NFFileProcess::LoadDataAndProcessComponent(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::vector<std::string> colNames;
+	for (int c = dim.firstCol; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
+		{
+			colNames.push_back(cell->value);
+		}
+	}
+	for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+	{
+		std::string testValue = "";
+		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
+		if (cell)
+		{
+			testValue = cell->value;
+		}
+		if (testValue == "")
+		{
+			continue;
+		}
+		//auto componentNode = structDoc.allocate_node(rapidxml::node_element, "Component", NULL);
+		//componentNodes->append_node(componentNode);
+		std::string strType = "";
+		for (int c = dim.firstCol; c <= dim.lastCol; c++)
+		{
+			std::string name = colNames[c - 1];
+			std::string value = "";
+			MiniExcelReader::Cell* cell = sheet.getCell(r, c);
+			if (cell)
+			{
+				std::string valueCell = cell->value;
+				transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
+				if (valueCell == "TRUE" || valueCell == "FALSE")
+				{
+					value = valueCell == "TRUE" ? "1" : "0";
+				}
+				else
+				{
+					value = cell->value;
+				}
+
+				if (name == "Type")
+				{
+					strType = value;
+				}
+
+			}
+			//componentNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
+		}
+	}
+	return false;
+}
+
+bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	for (int nIndex = 0; nIndex < 100; nIndex++)
+	{
+		int nStartRow = nIndex * nRecordHeight + 1;
+		int nEndRow = (nIndex + 1) * nRecordHeight;
+
+		MiniExcelReader::Cell* pTestCell = sheet.getCell(nStartRow, dim.firstCol);
+		if (pTestCell)
+		{
+			MiniExcelReader::Cell* pNameCell = sheet.getCell(nStartRow, dim.firstCol + 1);
+			std::string strRecordName = pNameCell->value;
+			
+			////////////
+
+			NFClassRecord* pClassRecord = new NFClassRecord();
+			pClassData->xStructData.xObjectRecordList[strRecordName] = pClassRecord;
+			////////////
+
+			for (int r = nStartRow + 1; r <= nStartRow + nRecordDescHeight; r++)
+			{
+				MiniExcelReader::Cell* cellDesc = sheet.getCell(r, dim.firstCol);
+				MiniExcelReader::Cell* cellValue = sheet.getCell(r, dim.firstCol + 1);
+
+				pClassRecord->descList[cellDesc->value] = cellValue->value;
+			}
+
+			int nRecordCol = atoi(pClassRecord->descList["Col"].c_str());
+			for (int c = dim.firstCol; c <= nRecordCol; c++)
+			{
+				int r = nStartRow + nRecordDescHeight + 1;
+				MiniExcelReader::Cell* pCellColName = sheet.getCell(r, c);
+				MiniExcelReader::Cell* pCellColType = sheet.getCell(r + 1, c);
+				MiniExcelReader::Cell* pCellColDesc = sheet.getCell(r + 2, c);
+
+				NFClassRecord::RecordColDesc* pRecordColDesc = new NFClassRecord::RecordColDesc();
+				pRecordColDesc->index = c - 1;
+				pRecordColDesc->type = pCellColType->value;
+				if (pCellColDesc)
+				{
+					pRecordColDesc->desc = pCellColDesc->value;
+				}
+
+				pClassRecord->colList[pCellColName->value] = pRecordColDesc;
+			}
+		}
+	}
+
+	
+	return true;
+}
+
+bool NFFileProcess::Save()
+{
+	SaveForCPP();
+	SaveForCS();
+	SaveForJAVA();
+	SaveForPB();
+	SaveForSQL();
+
+	SaveForIni();
+
+	return false;
+}
+
+bool NFFileProcess::SaveForCPP()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForCS()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForJAVA()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForPB()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForSQL()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForIni()
+{
+	return false;
 }
 
 void NFFileProcess::CreateProtoFile()
@@ -296,7 +661,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 		if (strSheetName.find("property") != std::string::npos)
 		{
 			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
+			for (int r = dim.firstRow; r <= dim.firstRow + nPropertyHeight - 1; r++)
 			{
 				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
 				if (cell)
@@ -321,7 +686,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				auto propertyNode = structDoc.allocate_node(rapidxml::node_element, "Property", NULL);
 				propertyNodes->append_node(propertyNode);
 				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
+				for (int r = dim.firstRow; r <= dim.firstRow + nPropertyHeight - 1; r++)
 				{
 					std::string name = colNames[r - 1];
 					std::string value = "";
@@ -417,9 +782,9 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 		else if (strSheetName.find("record") != std::string::npos)
 		{
 			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
-			const int nRecordCount = nRowsCount / nRecordLineCount;
+			const int nRecordCount = nRowsCount / nRecordHeight;
 
-			if (nRowsCount != nRecordCount * nRecordLineCount)
+			if (nRowsCount != nRecordCount * nRecordHeight)
 			{
 				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
 				printf("Generate faild!\n");
@@ -441,25 +806,25 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				std::string strDesc = "";
 
 				int nRelativeRow = 1;
-				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRecordName = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					strRow = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					strCol = cell->value;
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -472,7 +837,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -485,7 +850,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -498,7 +863,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -511,7 +876,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 					}
 				}
 				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					if (cell->value == "TRUE" || cell->value == "FALSE")
@@ -526,7 +891,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				cell = nullptr;
 				int nTagRow = nRelativeRow++;
 				int nTypeRow = nRelativeRow++;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
+				cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nRelativeRow++, 2);
 				if (cell)
 				{
 					strDesc = cell->value;
@@ -566,7 +931,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 				{
 					std::string strType = "";
 					std::string strTag = "";
-					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTagRow, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nTagRow, nRecordCol);
 					if (cell)
 					{
 						strTag = cell->value;
@@ -576,7 +941,7 @@ bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName
 						break;
 					}
 					cell = nullptr;
-					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTypeRow, nRecordCol);
+					cell = sh.getCell((nCurrentRecord - 1) * nRecordHeight + nTypeRow, nRecordCol);
 					if (cell)
 					{
 						strType = cell->value;
