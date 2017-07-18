@@ -136,7 +136,7 @@ private:
 	void CreateFileHead();
 	void CreateStructThreadFunc();
 	void CreateIniThreadFunc();
-	bool CreateStructXML(std::string strFile, std::string strFileName);
+	bool CreateStructForApp(std::string strFile, std::string strFileName);
 	bool CreateIniXML(std::string strFile);
 	bool LoadLogicClass(std::string strFile);
 	bool LoadClass(std::string strFile, std::string strTable);
