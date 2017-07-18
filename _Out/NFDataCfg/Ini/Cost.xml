@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Object Id="Desc" CostMoney="消耗钱" CostDiamond="消耗钻石" CostVP="消耗体力" CostHonour="消耗荣誉值"/>
-	<Object Id="Cost_1" CostMoney="100" CostDiamond="0" CostVP="0" CostHonour="0"/>
-	<Object Id="Cost_2" CostMoney="0" CostDiamond="100" CostVP="0" CostHonour="0"/>
-</XML>
-
