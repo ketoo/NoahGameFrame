@@ -18,6 +18,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <list>
 
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -32,17 +33,69 @@
 #include <sys/stat.h>
 #endif
 
+class NFClassProperty
+{
+public:
+	NFClassProperty()
+	{
+	}
+
+	std::map<std::string, std::string> descList;//tag, value
+	std::string name;
+	std::string type;
+};
+
+class NFClassRecord
+{
+public:
+	NFClassRecord()
+	{
+	}
+
+	struct RecordColDesc
+	{
+		int index;
+		std::string type;
+		std::string desc;
+	};
+	
+	std::string strClassName;
+	std::map<std::string, std::string> descList;//tag, value
+	std::map<std::string, RecordColDesc*> colList;//tag, desc
+};
+
 class NFClassStruct
 {
 public:
 	NFClassStruct()
 	{
-		//xObject = NF_SHARE_PTR<NFIObject>(new NFCObject(NFGUID(), nullptr));
+	}
+	std::string strClassName;
+	std::map<std::string, NFClassProperty*> propertyList;//key, desc
+	std::map<std::string, NFClassRecord*> xObjectRecordList;//name, desc
+};
+
+class NFClassIni
+{
+public:
+	NFClassIni()
+	{
 	}
 
-	std::string strPath;
-	FILE* xWriter;
-	//NF_SHARE_PTR<NFIObject> xObject;
+	class IniData
+	{
+	public:
+		std::map<std::string, std::string> propertyList;
+	};
+
+	std::map<std::string, IniData*> iniList;//key, iniList
+};
+
+class ClassData
+{
+public:
+	NFClassStruct xStructData;
+	NFClassIni xIni;
 };
 
 class NFFileProcess
@@ -51,6 +104,29 @@ public:
 	NFFileProcess();
 	~NFFileProcess();
 
+	///////////////////////////////////////////////////////////////
+
+	bool LoadDataFromExcel();
+	bool LoadDataFromExcel(const std::string& strFile, const std::string& strFileName);
+	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+
+	bool LoadIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+
+	///////////////////////////////////////////////////////////////
+
+	bool Save();
+	bool SaveForCPP();
+	bool SaveForCS();
+	bool SaveForJAVA();
+	bool SaveForPB();
+	bool SaveForSQL();
+
+	bool SaveForIni();
+
+	///////////////////////////////////////////////////////////////
 	void OnCreateXMLFile();
 	void OnCreateMysqlFile();
 	void SetUTF8(const bool b);
@@ -76,8 +152,9 @@ private:
 	bool bConvertIntoUTF8 = false;
 
 	int nCipher = 0;
-	const int nTitleLine = 10;
-	const int nRecordLineCount = 11;
+	const int nPropertyHeight = 10;//property line
+	const int nRecordHeight = 11;//record line
+	const int nRecordDescHeight = 7;//record line
 
 	std::vector<char *> tmpStrList;
 	std::string strCipherCfg = "conf";
@@ -113,7 +190,5 @@ private:
 	std::string strJavaIObjectInfo;
 	std::string strCSIObjectInfo;
 
-	int nRecordStart = 11;
-
-
+	std::map<std::string, ClassData*> mxClassData;
 };
