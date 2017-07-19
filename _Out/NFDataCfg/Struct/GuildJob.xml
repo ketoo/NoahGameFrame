@@ -1,23 +1,22 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Job" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="公会职位"/>
-		<Property Id="JobCount" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="公会职位人数"/>
-		<Property Id="Appoint" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="任命"/>
-		<Property Id="Fire" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="撤职"/>
-		<Property Id="Demise" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="禅让"/>
-		<Property Id="ApplyDismiss" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="申请解散军团"/>
-		<Property Id="StopDismiss" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="中止解散军团"/>
-		<Property Id="AcceptApply" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="收人"/>
-		<Property Id="DenyApply" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="拒收"/>
-		<Property Id="Kickout" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="开除"/>
-		<Property Id="SetRecruit" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="设置招募"/>
-		<Property Id="PublishRecruit" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="发布招募"/>
-		<Property Id="EditAD" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="编辑公告"/>
-		<Property Id="Leave" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="退团"/>
-		<Property Id="LevelUp" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="军团升级"/>
+		<Property Id="AcceptApply" Cache="FALSE" Desc="收人" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="ApplyDismiss" Cache="FALSE" Desc="申请解散军团" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Appoint" Cache="FALSE" Desc="任命" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Demise" Cache="FALSE" Desc="禅让" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="DenyApply" Cache="FALSE" Desc="拒收" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="EditAD" Cache="FALSE" Desc="编辑公告" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Fire" Cache="FALSE" Desc="撤职" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Job" Cache="FALSE" Desc="公会职位" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="JobCount" Cache="FALSE" Desc="公会职位人数" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Kickout" Cache="FALSE" Desc="开除" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="Leave" Cache="FALSE" Desc="退团" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="LevelUp" Cache="FALSE" Desc="军团升级" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="PublishRecruit" Cache="FALSE" Desc="发布招募" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="SetRecruit" Cache="FALSE" Desc="设置招募" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="StopDismiss" Cache="FALSE" Desc="中止解散军团" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

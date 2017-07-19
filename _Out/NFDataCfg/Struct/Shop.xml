@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Type" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="ItemID" Type="string" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Gold" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Steel" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Stone" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Diamond" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Level" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Count" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="Count" Cache="FALSE" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Diamond" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Gold" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="ItemID" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="string" Upload="FALSE" />
+		<Property Id="Level" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Steel" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Stone" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Type" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

@@ -1,68 +1,67 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="SeedID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="种子ID"/>
-		<Property Id="VIPEXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="VIP经验"/>
-		<Property Id="EXP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="经验获得,如果是怪物，则是掉落经验"/>
-		<Property Id="HP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="生命值"/>
-		<Property Id="SP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="体力"/>
-		<Property Id="MP" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="法力值"/>
-		<Property Id="Gold" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="玩家游戏金币"/>
-		<Property Id="Money" Type="int" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="钻石"/>
-		<Property Id="TargetX" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="TargetY" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Prefab" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="客户端预设模型"/>
-		<Property Id="Climb" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="Move类型"/>
-		<Property Id="AtkDis" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="攻击距离"/>
-		<Property Id="DropPackList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="掉落列表"/>
-		<Property Id="Idle" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能列表索引"/>
-		<Property Id="SkillNormal" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能列表索引"/>
-		<Property Id="SkillAttack" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能列表索引"/>
-		<Property Id="SkillTHUMP" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能列表索引"/>
-		<Property Id="Height" Type="float" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="模型高度"/>
-		<Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="绝对值属性包索引"/>
-		<Property Id="ConsumeData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="消费数据属性包索引"/>
-		<Property Id="LastAttacker" Type="object" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="最后攻击者"/>
-		<Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="显示名字"/>
-		<Property Id="EquipIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="装备列表索引"/>
-		<Property Id="SpriteFile" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="SpriteFile"/>
-		<Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="图标"/>
-		<Property Id="ShowCard" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="卡牌背景"/>
-		<Property Id="HeroType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="英雄类型，力智敏"/>
-		<Property Id="Camp" Type="int" Public="0" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="阵营"/>
-		<Property Id="MasterID" Type="object" Public="0" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="召唤者，主人"/>
-		<Property Id="NPCType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="NPC类型"/>
-		<Property Id="SUCKBLOOD" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="吸血"/>
-		<Property Id="REFLECTDAMAGE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="反伤"/>
-		<Property Id="CRITICAL" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="暴击"/>
-		<Property Id="MAXHP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="生命值"/>
-		<Property Id="MAXMP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="法力值"/>
-		<Property Id="MAXSP" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="体力"/>
-		<Property Id="HPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="生命值回复"/>
-		<Property Id="SPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="体力回复"/>
-		<Property Id="MPREGEN" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="MP回复"/>
-		<Property Id="ATK_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物理攻击力"/>
-		<Property Id="DEF_VALUE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物理防御力"/>
-		<Property Id="MOVE_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="移动速度,默认单位是10000=1米"/>
-		<Property Id="ATK_SPEED" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="攻击速度默认10000"/>
-		<Property Id="ATK_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="火"/>
-		<Property Id="ATK_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="雷电"/>
-		<Property Id="ATK_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="土"/>
-		<Property Id="ATK_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="冰"/>
-		<Property Id="ATK_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="毒"/>
-		<Property Id="DEF_FIRE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="火抗"/>
-		<Property Id="DEF_LIGHT" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="雷电抗"/>
-		<Property Id="DEF_WIND" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="土抗"/>
-		<Property Id="DEF_ICE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="冰抗"/>
-		<Property Id="DEF_POISON" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="毒抗"/>
-		<Property Id="DIZZY_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="眩晕开关"/>
-		<Property Id="MOVE_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="移动开关"/>
-		<Property Id="SKILL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能开关"/>
-		<Property Id="PHYSICAL_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物理免疫开关"/>
-		<Property Id="MAGIC_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="魔法免疫开关"/>
-		<Property Id="BUFF_GATE" Type="int" Public="1" Private="1" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="BUFF免疫开关"/>
+		<Property Id="ATK_FIRE" Cache="FALSE" Desc="火" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_ICE" Cache="FALSE" Desc="冰" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_LIGHT" Cache="FALSE" Desc="雷电" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_POISON" Cache="FALSE" Desc="毒" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_SPEED" Cache="FALSE" Desc="攻击速度默认10000" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_VALUE" Cache="FALSE" Desc="物理攻击力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_WIND" Cache="FALSE" Desc="土" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="AtkDis" Cache="FALSE" Desc="攻击距离" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="float" Upload="FALSE" />
+		<Property Id="BUFF_GATE" Cache="FALSE" Desc="BUFF免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="CRITICAL" Cache="FALSE" Desc="暴击" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Camp" Cache="FALSE" Desc="阵营" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Climb" Cache="FALSE" Desc="Move类型" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ConsumeData" Cache="FALSE" Desc="消费数据属性包索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="DEF_FIRE" Cache="FALSE" Desc="火抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DEF_ICE" Cache="FALSE" Desc="冰抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DEF_LIGHT" Cache="FALSE" Desc="雷电抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DEF_POISON" Cache="FALSE" Desc="毒抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DEF_VALUE" Cache="FALSE" Desc="物理防御力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DEF_WIND" Cache="FALSE" Desc="土抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DIZZY_GATE" Cache="FALSE" Desc="眩晕开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="DropPackList" Cache="FALSE" Desc="掉落列表" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="EXP" Cache="FALSE" Desc="经验获得,如果是怪物，则是掉落经验" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="EffectData" Cache="FALSE" Desc="绝对值属性包索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="EquipIDRef" Cache="FALSE" Desc="装备列表索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Gold" Cache="FALSE" Desc="玩家游戏金币" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="HP" Cache="FALSE" Desc="生命值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="HPREGEN" Cache="FALSE" Desc="生命值回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Height" Cache="FALSE" Desc="模型高度" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="float" Upload="FALSE" />
+		<Property Id="HeroType" Cache="FALSE" Desc="英雄类型，力智敏" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Icon" Cache="FALSE" Desc="图标" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Idle" Cache="FALSE" Desc="技能列表索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="LastAttacker" Cache="FALSE" Desc="最后攻击者" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="MAGIC_GATE" Cache="FALSE" Desc="魔法免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MAXHP" Cache="FALSE" Desc="生命值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MAXMP" Cache="FALSE" Desc="法力值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MAXSP" Cache="FALSE" Desc="体力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MOVE_GATE" Cache="FALSE" Desc="移动开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MOVE_SPEED" Cache="FALSE" Desc="移动速度,默认单位是10000=1米" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MP" Cache="FALSE" Desc="法力值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="MPREGEN" Cache="FALSE" Desc="MP回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="MasterID" Cache="FALSE" Desc="召唤者，主人" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="object" Upload="FALSE" />
+		<Property Id="Money" Cache="FALSE" Desc="钻石" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="NPCType" Cache="FALSE" Desc="NPC类型" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="PHYSICAL_GATE" Cache="FALSE" Desc="物理免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Prefab" Cache="FALSE" Desc="客户端预设模型" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="REFLECTDAMAGE" Cache="FALSE" Desc="反伤" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SKILL_GATE" Cache="FALSE" Desc="技能开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SP" Cache="FALSE" Desc="体力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="SPREGEN" Cache="FALSE" Desc="体力回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SUCKBLOOD" Cache="FALSE" Desc="吸血" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SeedID" Cache="FALSE" Desc="种子ID" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="ShowCard" Cache="FALSE" Desc="卡牌背景" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="ShowName" Cache="FALSE" Desc="显示名字" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SkillAttack" Cache="FALSE" Desc="技能列表索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SkillNormal" Cache="FALSE" Desc="技能列表索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SkillTHUMP" Cache="FALSE" Desc="技能列表索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SpriteFile" Cache="FALSE" Desc="SpriteFile" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="TargetX" Cache="FALSE" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="float" Upload="FALSE" />
+		<Property Id="TargetY" Cache="FALSE" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="float" Upload="FALSE" />
+		<Property Id="VIPEXP" Cache="FALSE" Desc="VIP经验" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

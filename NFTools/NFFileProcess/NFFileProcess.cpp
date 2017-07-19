@@ -346,6 +346,8 @@ bool NFFileProcess::Save()
 	SaveForStruct();
 	SaveForIni();
 
+	SaveForLogicClass();
+
 	return false;
 }
 
@@ -370,6 +372,8 @@ bool NFFileProcess::SaveForCPP()
 	/////////////////////////////////////////////////////
 
 	ClassData* pBaseObject = mxClassData["IObject"];
+	std::string instanceField = "\n";
+
 	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
 	{
 		const std::string& strClassName = it->first;
@@ -379,7 +383,8 @@ bool NFFileProcess::SaveForCPP()
 		
 		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tstatic const std::string ThisName = \"" + strClassName + "\";\n";
+		strPropertyInfo += "\tstatic const std::string ThisName;\n";
+		instanceField += "\tconst std::string " + strClassName + "::ThisName = \"" + strClassName + "\";\n";
 
 		if (strClassName != "IObject")
 		{
@@ -395,8 +400,10 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& strPropertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tstatic const std::string " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "\t\tstatic const std::string " + strPropertyName + ";";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+
+			instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
 		}
 
 		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, hppWriter);
@@ -411,17 +418,28 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& strRecordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
+			std::cout << "save for cpp ---> " << strClassName  << "::" << strRecordName << std::endl;
+
 			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tstatic const std::string ThisName = \"" + strRecordName + "\";\n";
+			strRecordInfo += "\t\tstatic const std::string ThisName;\n";
+
+			instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
 
 			//col
-			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
-				itCol != pClassRecord->colList.end(); ++itCol)
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				const std::string& colTag = itCol->first;
-				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
-				strRecordInfo += "\t\t\tstatic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type  + "\n";
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tstatic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
 			}
 
 			strRecordInfo += "\n\t\t};\n";
@@ -439,8 +457,12 @@ bool NFFileProcess::SaveForCPP()
 
 	}
 
+	fwrite(instanceField.c_str(), instanceField.length(), 1, hppWriter);
+
 	std::string strFileEnd = "\n}";
 	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, hppWriter);
+	/////////////////////////////////////////////////////
+
 	/////////////////////////////////////////////////////
 
 	fclose(hppWriter);
@@ -513,18 +535,28 @@ bool NFFileProcess::SaveForCS()
 			const std::string& strRecordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
+			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+
 			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
 			strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + strRecordName + "\";\n";
 
 			//col
-			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
-				itCol != pClassRecord->colList.end(); ++itCol)
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				const std::string& colTag = itCol->first;
-				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
-				strRecordInfo += "\t\t\tpublic static readonly int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tpublic static readonly int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
 			}
+			
 
 			strRecordInfo += "\n\t\t}\n";
 
@@ -607,17 +639,26 @@ bool NFFileProcess::SaveForJAVA()
 			const std::string& strRecordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
+			std::cout << "save for java ---> " << strClassName << "::" << strRecordName << std::endl;
+
 			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
 			strRecordInfo += "\t\tpublic static final String ThisName = \"" + strRecordName + "\";\n";
 
 			//col
-			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
-				itCol != pClassRecord->colList.end(); ++itCol)
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
 			{
-				const std::string& colTag = itCol->first;
-				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
-				strRecordInfo += "\t\t\tpublic static final int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tpublic static final int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
 			}
 
 			strRecordInfo += "\n\t\t}\n";
@@ -659,6 +700,8 @@ bool NFFileProcess::SaveForStruct()
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
 
+		std::cout << "save for struct ---> " << strClassName << std::endl;
+
 		std::string strFileName = strXMLStructPath + strClassName + ".xml";
 		FILE* structWriter = fopen(strFileName.c_str(), "w");
 
@@ -697,12 +740,12 @@ bool NFFileProcess::SaveForStruct()
 			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
 		{
 			const std::string& strRecordName = itRecord->first;
-			NFClassRecord* xPropertyData = itRecord->second;
+			NFClassRecord* xRecordData = itRecord->second;
 
 			//for desc
 			std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
-			for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
-				itDesc != xPropertyData->descList.end(); ++itDesc)
+			for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
+				itDesc != xRecordData->descList.end(); ++itDesc)
 			{
 				const std::string& strKey = itDesc->first;
 				const std::string& strValue = itDesc->second;
@@ -711,23 +754,30 @@ bool NFFileProcess::SaveForStruct()
 			strElementData += ">\n";
 
 			//for col list
-			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xPropertyData->colList.begin();
-				itDesc != xPropertyData->colList.end(); ++itDesc)
+			for (int i = 0; i < xRecordData->colList.size(); ++i)
 			{
-				const std::string& strKey = itDesc->first;
-				const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
+					itDesc != xRecordData->colList.end(); ++itDesc)
+				{
+					const std::string& strKey = itDesc->first;
+					const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
 
-				strElementData += "\t\t\t<Col Type =\"" + pRecordColDesc->type + "\"\tTag=\"" + strKey + "\"/>";
-				if (!pRecordColDesc->desc.empty())
-				{
-					strElementData += "<!--- " + pRecordColDesc->desc + "-->\n";
+					if (pRecordColDesc->index == i)
+					{
+						strElementData += "\t\t\t<Col Type =\"" + pRecordColDesc->type + "\"\tTag=\"" + strKey + "\"/>";
+						if (!pRecordColDesc->desc.empty())
+						{
+							strElementData += "<!--- " + pRecordColDesc->desc + "-->\n";
+						}
+						else
+						{
+							strElementData += "\n";
+						}
+					}
 				}
-				else
-				{
-					strElementData += "\n";
-				}
+
 			}
-
+			
 			strElementData += "\t\t<Record/>\n";
 			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
 		}
@@ -751,6 +801,8 @@ bool NFFileProcess::SaveForIni()
 	{
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
+
+		std::cout << "save for ini ---> " << strClassName << std::endl;
 
 		std::string strFileName = strXMLIniPath + strClassName + ".xml";
 		FILE* iniWriter = fopen(strFileName.c_str(), "w");
@@ -782,6 +834,11 @@ bool NFFileProcess::SaveForIni()
 
 	}
 
+	return false;
+}
+
+bool NFFileProcess::SaveForLogicClass()
+{
 	return false;
 }
 
