@@ -365,9 +365,9 @@ bool NFFileProcess::Save()
 
 bool NFFileProcess::SaveForCPP()
 {
-	std::string strHPPHead;
+	std::string strFileHead;
 
-	strHPPHead = strHPPHead
+	strFileHead = strFileHead
 	+ "// -------------------------------------------------------------------------\n"
 	+ "//    @FileName         :    NFProtocolDefine.hpp\n"
 	+ "//    @Author           :    NFrame Studio\n"
@@ -378,7 +378,7 @@ bool NFFileProcess::SaveForCPP()
 	+ "#include <string>\n"
 	+ "namespace NFrame\n{\n";
 
-	fwrite(strHPPHead.c_str(), strHPPHead.length(), 1, hppWriter);
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, hppWriter);
 	/////////////////////////////////////////////////////
 
 	ClassData* pBaseObject = mxClassData["IObject"];
@@ -387,35 +387,35 @@ bool NFFileProcess::SaveForCPP()
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
 		// cpp
-		std::string strHPPPropertyInfo;
+		std::string strPropertyInfo;
 		
-		strHPPPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
-		strHPPPropertyInfo += "\t\t//Class name\n\t";
-		strHPPPropertyInfo += "\tstatic const std::string ThisName = \"" + strClassName + "\";\n";
+		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tstatic const std::string ThisName = \"" + strClassName + "\";\n";
 
 		if (strClassName != "IObject")
 		{
 			//add base class properties
-			strHPPPropertyInfo += "\t\t// IObject\n";
+			strPropertyInfo += "\t\t// IObject\n";
 
 		}
 
-		strHPPPropertyInfo += "\t\t// Property\n";
+		strPropertyInfo += "\t\t// Property\n";
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.propertyList.begin();
 			itProperty != pClassDta->xStructData.propertyList.end(); ++itProperty)
 		{
 			const std::string& strPropertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strHPPPropertyInfo += "\t\tstatic const std::string " + strPropertyName + " = \"" + strPropertyName + "\";";
-			strHPPPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+			strPropertyInfo += "\t\tstatic const std::string " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 		}
 
-		fwrite(strHPPPropertyInfo.c_str(), strHPPPropertyInfo.length(), 1, hppWriter);
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, hppWriter);
 
 		//record
-		std::string strHppRecordInfo = "";
-		strHppRecordInfo += "\t\t// Record\n";
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
 
 		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xObjectRecordList.begin();
 			itRecord != pClassDta->xStructData.xObjectRecordList.end(); ++itRecord)
@@ -423,9 +423,9 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& strRecordName = itRecord->first;
 			NFClassRecord* pClassRecord = itRecord->second;
 
-			strHppRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
-			strHppRecordInfo += "\t\t\t//Class name\n\t";
-			strHppRecordInfo += "\t\tstatic const std::string ThisName = \"" + strRecordName + "\";\n";
+			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tstatic const std::string ThisName = \"" + strRecordName + "\";\n";
 
 			//col
 			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
@@ -433,24 +433,26 @@ bool NFFileProcess::SaveForCPP()
 			{
 				const std::string& colTag = itCol->first;
 				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
-				strHppRecordInfo += "\t\t\tstatic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type  + "\n";
+				strRecordInfo += "\t\t\tstatic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type  + "\n";
 			}
 
-			strHppRecordInfo += "\n\t\t};\n";
+			strRecordInfo += "\n\t\t};\n";
 
-			fwrite(strHppRecordInfo.c_str(), strHppRecordInfo.length(), 1, hppWriter);
+			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, hppWriter);
 		}
 
 		std::string strHppEnumInfo = "";
 
 
-		std::string strHPPClassEnd;
-		strHPPClassEnd += "\n\t};\n";
+		std::string strClassEnd;
+		strClassEnd += "\n\t};\n";
 
-		fwrite(strHPPClassEnd.c_str(), strHPPClassEnd.length(), 1, hppWriter);
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, hppWriter);
 
 	}
 
+	std::string strFileEnd = "\n}";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, hppWriter);
 	/////////////////////////////////////////////////////
 
 	return false;
@@ -477,6 +479,78 @@ bool NFFileProcess::SaveForCS()
 	/////////////////////////////////////////////////////
 
 
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+
+		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static readonly String ThisName = \"" + strClassName + "\";\n";
+
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+		}
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.propertyList.begin();
+			itProperty != pClassDta->xStructData.propertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, csWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xObjectRecordList.begin();
+			itRecord != pClassDta->xStructData.xObjectRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* pClassRecord = itRecord->second;
+
+			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + strRecordName + "\";\n";
+
+			//col
+			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+				itCol != pClassRecord->colList.end(); ++itCol)
+			{
+				const std::string& colTag = itCol->first;
+				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+				strRecordInfo += "\t\t\tpublic static readonly int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+			}
+
+			strRecordInfo += "\n\t\t}\n";
+
+			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
+		}
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, csWriter);
+
+	}
+
+	std::string strFileEnd = "\n}";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, csWriter);
 
 	return false;
 }
@@ -495,6 +569,75 @@ bool NFFileProcess::SaveForJAVA()
 	fwrite(strJavaHead.c_str(), strJavaHead.length(), 1, javaWriter);
 	/////////////////////////////////////////////////////
 
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+
+		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static final String ThisName = \"" + strClassName + "\";\n";
+
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+		}
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.propertyList.begin();
+			itProperty != pClassDta->xStructData.propertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, javaWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xObjectRecordList.begin();
+			itRecord != pClassDta->xStructData.xObjectRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* pClassRecord = itRecord->second;
+
+			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tpublic static final String ThisName = \"" + strRecordName + "\";\n";
+
+			//col
+			for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+				itCol != pClassRecord->colList.end(); ++itCol)
+			{
+				const std::string& colTag = itCol->first;
+				NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+				strRecordInfo += "\t\t\tpublic static final int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+			}
+
+			strRecordInfo += "\n\t\t}\n";
+
+			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, javaWriter);
+		}
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, javaWriter);
+
+	}
 
 	return false;
 }
