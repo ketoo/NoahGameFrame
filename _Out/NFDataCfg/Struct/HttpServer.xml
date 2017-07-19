@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="WebPort" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="WebRootPath" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="ServerID" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="WebPort" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="WebRootPath" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

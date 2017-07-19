@@ -1,5 +1,3 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="Desc" ShowName="名字字符串索引" Icon="ICON" Atlas="图集" PrefabPath="主模型预设路径" PerformanceEffect="使用时的特效" PerformanceSound="物品使用时声音" DescText="对此事务的描述意思"/>
 </XML>
-
