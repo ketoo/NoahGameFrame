@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="IP" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Port" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlIP" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlPort" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlUser" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlPwd" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlName" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="IP" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Port" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ServerID" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SqlIP" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SqlName" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SqlPort" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SqlPwd" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SqlUser" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

@@ -122,6 +122,8 @@ private:
 	bool SaveForStruct();
 	bool SaveForIni();
 
+	bool SaveForLogicClass();
+
 
 	std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth);
 	void StringReplace(std::string &strBig, const std::string &strsrc, const std::string &strdst);
@@ -130,12 +132,9 @@ private:
 
 	bool bConvertIntoUTF8 = false;
 
-	int nCipher = 0;
 	const int nPropertyHeight = 10;//property line
 	const int nRecordHeight = 11;//record line
 	const int nRecordDescHeight = 7;//record line
-
-	std::string strCipherCfg = "conf";
 
 	std::string strExcelIniPath = "../Excel/";
 	std::string strXMLStructPath = "../Struct/";

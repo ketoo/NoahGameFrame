@@ -1,34 +1,30 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Captain" Type="object" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="队长ID"/>
-		<Property Id="PresidentName" Type="string" Public="1" Private="1" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc="会长名"/>
+		<Property Id="Captain" Cache="FALSE" Desc="队长ID" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="object" Upload="FALSE" />
+		<Property Id="PresidentName" Cache="FALSE" Desc="会长名" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="string" Upload="FALSE" />
 	</Propertys>
 	<Records>
-		<Record Id="MemberList" Row="50" Col="10" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="guild">
-			<Col Type="object" Tag="GUID"/>
-			<Col Type="string" Tag="Name"/>
-			<Col Type="int" Tag="Level"/>
-			<Col Type="int" Tag="Job"/>
-			<Col Type="int" Tag="Donation"/>
-			<Col Type="int" Tag="Receive"/>
-			<Col Type="int" Tag="VIP"/>
-			<Col Type="int" Tag="Online"/>
-			<Col Type="int" Tag="Title"/>
-			<Col Type="int" Tag="GameID"/>
-		</Record>
-		<Record Id="ApplyList" Row="50" Col="7" Public="1" Private="1" Save="1" Cache="0" Upload="0" Desc="TeamApply">
-			<Col Type="object" Tag="GUID"/>
-			<Col Type="string" Tag="Name"/>
-			<Col Type="int" Tag="Level"/>
-			<Col Type="int" Tag="Job"/>
-			<Col Type="int" Tag="Donation"/>
-			<Col Type="int" Tag="VIP"/>
-			<Col Type="int" Tag="Power"/>
-		</Record>
+		<Record Id="ApplyList" Cache="FALSE"	 Col="7"	 Private="TRUE"	 Public="TRUE"	 Row="50"	 Save="TRUE"	 Upload="FALSE"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- TeamApply-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="Job"/>
+			<Col Type ="int"	Tag="Donation"/>
+			<Col Type ="int"	Tag="VIP"/>
+			<Col Type ="int"	Tag="Power"/>
+		<Record/>
+		<Record Id="MemberList" Cache="FALSE"	 Col="10"	 Private="TRUE"	 Public="TRUE"	 Row="50"	 Save="TRUE"	 Upload="FALSE"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="Name"/><!--- guild-->
+			<Col Type ="int"	Tag="Level"/>
+			<Col Type ="int"	Tag="Job"/>
+			<Col Type ="int"	Tag="Donation"/>
+			<Col Type ="int"	Tag="Receive"/>
+			<Col Type ="int"	Tag="VIP"/>
+			<Col Type ="int"	Tag="Online"/>
+			<Col Type ="int"	Tag="Title"/>
+			<Col Type ="int"	Tag="GameID"/>
+		<Record/>
 	</Records>
-	<Components>
-		<Component Name="TestModule" Language="lua" Enable="1" Desc="测试组件"/>
-	</Components>
 </XML>
-

@@ -1,5 +1,3 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="Desc" Name="工会名" PresidentID="会长ID" PresidentName="会长名" Rank="公会排名" GuildAD="工会公告" GuildDesc="工会描述" GuildMoney="工会财富" GuildLevel="工会等级" GuildContinueDay="工会霸占排行榜天数" GuildID="工会ID" GuildIcon="公会头像" GuildMemeberCount="成员数量(增加个字段，不然遍历Record太麻烦)" GuildMemeberMaxCount="成员最大数量" GuildHonor="公会荣誉" GuildCreateTime="公会创建时间" GuildCreateter="公会创始人" GuildExp="公会经验" GuildStatus="公会状态，正常状态，申请解散状态" DismissTime="申请解散时间" RecruitAD="招募公告" RecruitLevel="招募等级限制" KingWarResource="获得的战役资源" AutoRecruit="自动招募" EctypServer="工会副本所在的服" EctypID="工会副本ID" EctypIDGroup="工会副本所在的曾"/>
 </XML>
-

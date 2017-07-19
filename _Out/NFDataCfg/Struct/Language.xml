@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="English" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Chinese" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="Chinese" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="English" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Object Id="Desc" ShowName="名字字符串索引" Desc="描述字符串索引" EffectData="绝对值属性索引" Icon="ICON" SpriteFile="图集" NextID=""/>
-	<Object Id="TALENT1" ShowName="T1" Desc="Talent1" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT2" ShowName="T2" Desc="Talent2" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT3" ShowName="T3" Desc="Talent3" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT4" ShowName="T4" Desc="Talent4" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT5" ShowName="T5" Desc="Talent5" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT6" ShowName="T6" Desc="Talent6" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT7" ShowName="T7" Desc="Talent7" EffectData="" Icon="" SpriteFile="" NextID="0"/>
-	<Object Id="TALENT8" ShowName="T8" Desc="Talent8" EffectData="" Icon="" SpriteFile="" NextID="0"/>
+	<Object Id="TALENT1" Desc="Talent1" EffectData="" Icon="" NextID="0" ShowName="T1" SpriteFile="" />
+	<Object Id="TALENT2" Desc="Talent2" EffectData="" Icon="" NextID="0" ShowName="T2" SpriteFile="" />
+	<Object Id="TALENT3" Desc="Talent3" EffectData="" Icon="" NextID="0" ShowName="T3" SpriteFile="" />
+	<Object Id="TALENT4" Desc="Talent4" EffectData="" Icon="" NextID="0" ShowName="T4" SpriteFile="" />
+	<Object Id="TALENT5" Desc="Talent5" EffectData="" Icon="" NextID="0" ShowName="T5" SpriteFile="" />
+	<Object Id="TALENT6" Desc="Talent6" EffectData="" Icon="" NextID="0" ShowName="T6" SpriteFile="" />
+	<Object Id="TALENT7" Desc="Talent7" EffectData="" Icon="" NextID="0" ShowName="T7" SpriteFile="" />
+	<Object Id="TALENT8" Desc="Talent8" EffectData="" Icon="" NextID="0" ShowName="T8" SpriteFile="" />
 </XML>
-

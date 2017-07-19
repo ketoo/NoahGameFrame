@@ -1,26 +1,25 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Sex" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="NFSexType"/>
-		<Property Id="IntensiveBuffList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="强化对应的BUFF列表，最大10次强化那么就9个逗号隔开，对应10个BUFF"/>
-		<Property Id="EnchantmentBuffList" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="附魔对应的BUFF列表，最大10次附魔那么就9个逗号隔开，对应10个BUFF"/>
-		<Property Id="SuitID" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="套装ID"/>
-		<Property Id="SuitBuffID" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="套装BUFFID"/>
-		<Property Id="ItemType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物品类别EGameItemType"/>
-		<Property Id="ItemSubType" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物品子类别EGameEquipType"/>
-		<Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="等级限制"/>
-		<Property Id="Job" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="职业限制,用分号隔开"/>
-		<Property Id="Quality" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="物品品质"/>
-		<Property Id="ShowName" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="显示名字"/>
-		<Property Id="Desc" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="装备描述字符串索引"/>
-		<Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="绝对值属性包索引"/>
-		<Property Id="PrefabPath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="预置物体的路径"/>
-		<Property Id="DropPrePath" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="掉落预置物体的路径"/>
-		<Property Id="BuyPrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="商店买价格"/>
-		<Property Id="SalePrice" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="卖商店价格"/>
-		<Property Id="Icon" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="显示图标"/>
+		<Property Id="BuyPrice" Cache="FALSE" Desc="商店买价格" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Desc" Cache="FALSE" Desc="装备描述字符串索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="DropPrePath" Cache="FALSE" Desc="掉落预置物体的路径" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="EffectData" Cache="FALSE" Desc="绝对值属性包索引" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="EnchantmentBuffList" Cache="FALSE" Desc="附魔对应的BUFF列表，最大10次附魔那么就9个逗号隔开，对应10个BUFF" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Icon" Cache="FALSE" Desc="显示图标" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="IntensiveBuffList" Cache="FALSE" Desc="强化对应的BUFF列表，最大10次强化那么就9个逗号隔开，对应10个BUFF" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="ItemSubType" Cache="FALSE" Desc="物品子类别EGameEquipType" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ItemType" Cache="FALSE" Desc="物品类别EGameItemType" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Job" Cache="FALSE" Desc="职业限制,用分号隔开" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Level" Cache="FALSE" Desc="等级限制" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="PrefabPath" Cache="FALSE" Desc="预置物体的路径" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="Quality" Cache="FALSE" Desc="物品品质" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="SalePrice" Cache="FALSE" Desc="卖商店价格" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="Sex" Cache="FALSE" Desc="NFSexType" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ShowName" Cache="FALSE" Desc="显示名字" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SuitBuffID" Cache="FALSE" Desc="套装BUFFID" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
+		<Property Id="SuitID" Cache="FALSE" Desc="套装ID" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-
