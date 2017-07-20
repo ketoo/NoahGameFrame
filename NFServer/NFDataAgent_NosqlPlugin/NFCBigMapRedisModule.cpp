@@ -183,6 +183,7 @@ bool NFCBigMapRedisModule::GetGridWarHistoryInfo(const std::string&strGridID, st
 
 bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std::vector<NFMsg::GridGuildBaseInfo>& xWarHistoryList)
 {
+	/*
 	if (!m_pElementModule->ExistElement(strGridID))
 	{
 		return false;
@@ -228,7 +229,7 @@ bool NFCBigMapRedisModule::GetGridStationInfo(const std::string& strGridID, std:
 			}
 		}
 	}
-
+	*/
 
 	return false;
 }
