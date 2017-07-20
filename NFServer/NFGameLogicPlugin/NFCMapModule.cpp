@@ -146,18 +146,19 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 	{
 		return;
 	}
-
+	/*
 	NFGUID xGuildID = NFINetModule::PBToNF(xMsg.guild_id());
 	NF_SHARE_PTR<NFIPropertyManager> xPropertyManager = m_pGuildRedisModule->GetGuildCachePropertyInfo(xGuildID);
 	if (!xPropertyManager)
 	{
 		return;
 	}
-
 	//remove form last grid
 
 	int nResourece = xPropertyManager->GetPropertyInt(NFrame::Guild::KingWarResource());
 	m_pBigMapRedisModule->AddGridStationInfo(xMsg.map_title_id(), xGuildID, nResourece);
+	*/
+
 }
 
 void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -264,6 +265,7 @@ void NFCMapModule::EndMapKingWar(const std::string& strTitleID)
 
 void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& xGuildID)
 {
+	/*
 	if (!m_pElementModule->ExistElement(strTitleID))
 	{
 		return;
@@ -290,6 +292,7 @@ void NFCMapModule::SetKingForGrid(const std::string& strTitleID, const NFGUID& x
 	xGridBaseInfo.mutable_guild_info()->set_resource(nResource);
 
 	m_pBigMapRedisModule->SetGridBaseInfo(strTitleID, xGridBaseInfo);
+	*/
 }
 
 void NFCMapModule::LeaveStation(const std::string& strTitleID, const NFGUID& xGuildID)
