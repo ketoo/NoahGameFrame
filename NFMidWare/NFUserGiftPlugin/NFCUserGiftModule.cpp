@@ -26,7 +26,7 @@ bool NFCUserGiftModule::Init()
 
 bool NFCUserGiftModule::AfterInit()
 {
-	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName(), NFrame::Item::ItemType(), NFMsg::EItemType::EIT_ITEM);
+	std::vector<std::string> xGiftItemList = m_pElementModule->GetListByProperty(NFrame::Item::ThisName, NFrame::Item::ItemType(), NFMsg::EItemType::EIT_ITEM);
 	for (int i = 0; i < xGiftItemList.size(); ++i)
 	{
 		const std::string& strItemID = xGiftItemList[i];
@@ -45,7 +45,7 @@ bool NFCUserGiftModule::AfterInit()
 		}
 	}
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCUserGiftModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCUserGiftModule::OnObjectClassEvent);
 
 
 	return true;
@@ -115,7 +115,7 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFCUserGiftModule::ActiveteHero(const NFGUID & self)
 {
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 
 	//configuration
 	m_pItemModule->UseItem(self, "Item_HeroCard_Abaddon", self);
