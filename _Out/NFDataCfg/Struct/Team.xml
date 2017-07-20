@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Captain" Cache="FALSE" Desc="队长ID" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="object" Upload="FALSE" />
-		<Property Id="PresidentName" Cache="FALSE" Desc="会长名" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="string" Upload="FALSE" />
+		<Property Id="Captain" Cache="0" Desc="队长ID" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="PresidentName" Cache="0" Desc="会长名" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="ApplyList" Cache="FALSE"	 Col="7"	 Private="TRUE"	 Public="TRUE"	 Row="50"	 Save="TRUE"	 Upload="FALSE"	 >
+		<Record Id="ApplyList" Cache="0"	 Col="7"	 Private="1"	 Public="1"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- TeamApply-->
 			<Col Type ="int"	Tag="Level"/>
@@ -14,7 +14,7 @@
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Power"/>
 		<Record/>
-		<Record Id="MemberList" Cache="FALSE"	 Col="10"	 Private="TRUE"	 Public="TRUE"	 Row="50"	 Save="TRUE"	 Upload="FALSE"	 >
+		<Record Id="MemberList" Cache="0"	 Col="10"	 Private="1"	 Public="1"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
 			<Col Type ="int"	Tag="Level"/>

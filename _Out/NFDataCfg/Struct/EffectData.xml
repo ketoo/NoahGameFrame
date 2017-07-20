@@ -1,38 +1,38 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ATK_FIRE" Cache="FALSE" Desc="LPID_ATK_FIRE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_ICE" Cache="FALSE" Desc="LPID_ATK_ICE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_LIGHT" Cache="FALSE" Desc="LPID_ATK_LIGHT" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_POISON" Cache="FALSE" Desc="LPID_ATK_POISON" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_SPEED" Cache="FALSE" Desc="LPID_ATK_SPEED" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_VALUE" Cache="FALSE" Desc="LPID_ATK_VALUE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_WIND" Cache="FALSE" Desc="LPID_ATK_WIND" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="BUFF_GATE" Cache="FALSE" Desc="LPID_BUFF_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="CRITICAL" Cache="FALSE" Desc="LPID_CRITICAL" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_FIRE" Cache="FALSE" Desc="LPID_DEF_FIRE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_ICE" Cache="FALSE" Desc="LPID_DEF_ICE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_LIGHT" Cache="FALSE" Desc="LPID_DEF_LIGHT" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_POISON" Cache="FALSE" Desc="LPID_DEF_POISON" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_VALUE" Cache="FALSE" Desc="LPID_DEF_VALUE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_WIND" Cache="FALSE" Desc="LPID_DEF_WIND" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DIZZY_GATE" Cache="FALSE" Desc="LPID_DIZZY_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="HP" Cache="FALSE" Desc="LPID_HP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="HPREGEN" Cache="FALSE" Desc="LPID_HPREGEN" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAGIC_GATE" Cache="FALSE" Desc="LPID_MAGIC_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXHP" Cache="FALSE" Desc="LPID_MAXHP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXMP" Cache="FALSE" Desc="LPID_MAXMP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXSP" Cache="FALSE" Desc="LPID_MAXSP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MOVE_GATE" Cache="FALSE" Desc="LPID_MOVE_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MOVE_SPEED" Cache="FALSE" Desc="LPID_MOVE_SPEED" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MP" Cache="FALSE" Desc="LPID_MP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MPREGEN" Cache="FALSE" Desc="LPID_MPREGEN" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="PHYSICAL_GATE" Cache="FALSE" Desc="LPID_PHYSICAL_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="REFLECTDAMAGE" Cache="FALSE" Desc="LPID_REFLECTDAMAGE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SKILL_GATE" Cache="FALSE" Desc="LPID_SKILL_GATE" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SP" Cache="FALSE" Desc="LPID_SP" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SPREGEN" Cache="FALSE" Desc="LPID_SPREGEN" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SUCKBLOOD" Cache="FALSE" Desc="LPID_SUCKBLOOD" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ATK_FIRE" Cache="0" Desc="LPID_ATK_FIRE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_ICE" Cache="0" Desc="LPID_ATK_ICE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_LIGHT" Cache="0" Desc="LPID_ATK_LIGHT" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_POISON" Cache="0" Desc="LPID_ATK_POISON" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_SPEED" Cache="0" Desc="LPID_ATK_SPEED" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_VALUE" Cache="0" Desc="LPID_ATK_VALUE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_WIND" Cache="0" Desc="LPID_ATK_WIND" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="BUFF_GATE" Cache="0" Desc="LPID_BUFF_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="CRITICAL" Cache="0" Desc="LPID_CRITICAL" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_FIRE" Cache="0" Desc="LPID_DEF_FIRE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_ICE" Cache="0" Desc="LPID_DEF_ICE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_LIGHT" Cache="0" Desc="LPID_DEF_LIGHT" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_POISON" Cache="0" Desc="LPID_DEF_POISON" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_VALUE" Cache="0" Desc="LPID_DEF_VALUE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_WIND" Cache="0" Desc="LPID_DEF_WIND" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DIZZY_GATE" Cache="0" Desc="LPID_DIZZY_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HP" Cache="0" Desc="LPID_HP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HPREGEN" Cache="0" Desc="LPID_HPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAGIC_GATE" Cache="0" Desc="LPID_MAGIC_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXHP" Cache="0" Desc="LPID_MAXHP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXMP" Cache="0" Desc="LPID_MAXMP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXSP" Cache="0" Desc="LPID_MAXSP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_GATE" Cache="0" Desc="LPID_MOVE_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_SPEED" Cache="0" Desc="LPID_MOVE_SPEED" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MP" Cache="0" Desc="LPID_MP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MPREGEN" Cache="0" Desc="LPID_MPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="PHYSICAL_GATE" Cache="0" Desc="LPID_PHYSICAL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="REFLECTDAMAGE" Cache="0" Desc="LPID_REFLECTDAMAGE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SKILL_GATE" Cache="0" Desc="LPID_SKILL_GATE" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SP" Cache="0" Desc="LPID_SP" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SPREGEN" Cache="0" Desc="LPID_SPREGEN" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SUCKBLOOD" Cache="0" Desc="LPID_SUCKBLOOD" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>

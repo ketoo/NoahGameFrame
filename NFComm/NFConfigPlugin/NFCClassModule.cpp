@@ -360,7 +360,6 @@ bool NFCClassModule::AddClass(const std::string& strClassName, const std::string
 bool NFCClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass> pParentClass)
 {
     const char* pstrLogicClassName = attrNode->first_attribute("Id")->value();
-    const char* pstrType = attrNode->first_attribute("Type")->value();
     const char* pstrPath = attrNode->first_attribute("Path")->value();
     const char* pstrInstancePath = attrNode->first_attribute("InstancePath")->value();
 
@@ -370,7 +369,6 @@ bool NFCClassModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClass>
     NF_SHARE_PTR<NFIClass> pClass(NF_NEW NFCClass(pstrLogicClassName));
     AddElement(pstrLogicClassName, pClass);
     pClass->SetParent(pParentClass);
-    pClass->SetTypeName(pstrType);
     pClass->SetInstancePath(pstrInstancePath);
 
     AddClass(pstrPath, pClass);

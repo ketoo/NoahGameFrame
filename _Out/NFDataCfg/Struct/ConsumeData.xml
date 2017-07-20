@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="EXP" Cache="FALSE" Desc="经验获得,如果是怪物，则是掉落经验" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Gold" Cache="FALSE" Desc="玩家游戏金币" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="HP" Cache="FALSE" Desc="生命值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="MP" Cache="FALSE" Desc="法力值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Money" Cache="FALSE" Desc="钻石" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="SP" Cache="FALSE" Desc="体力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="VIPEXP" Cache="FALSE" Desc="VIP经验" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="EXP" Cache="0" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Gold" Cache="0" Desc="玩家游戏金币" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="HP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Money" Cache="0" Desc="钻石" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="SP" Cache="0" Desc="体力" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="VIPEXP" Cache="0" Desc="VIP经验" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>
