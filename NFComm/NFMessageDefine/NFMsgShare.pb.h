@@ -83,6 +83,8 @@ class ReqSetFightHero;
 class ReqSwitchFightHero;
 class ReqMiningTitle;
 class TileState;
+class TileBuilding;
+class TileNPC;
 class AckMiningTitle;
 class ReqSearchOppnent;
 class AckSearchOppnent;
@@ -5299,6 +5301,220 @@ class LIBPROTOC_EXPORT TileState : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message {
+ public:
+  TileBuilding();
+  virtual ~TileBuilding();
+
+  TileBuilding(const TileBuilding& from);
+
+  inline TileBuilding& operator=(const TileBuilding& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TileBuilding& default_instance();
+
+  void Swap(TileBuilding* other);
+
+  // implements Message ----------------------------------------------
+
+  TileBuilding* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TileBuilding& from);
+  void MergeFrom(const TileBuilding& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // required string configID = 3;
+  inline bool has_configid() const;
+  inline void clear_configid();
+  static const int kConfigIDFieldNumber = 3;
+  inline const ::std::string& configid() const;
+  inline void set_configid(const ::std::string& value);
+  inline void set_configid(const char* value);
+  inline void set_configid(const char* value, size_t size);
+  inline ::std::string* mutable_configid();
+  inline ::std::string* release_configid();
+  inline void set_allocated_configid(::std::string* configid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.TileBuilding)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_configid();
+  inline void clear_has_configid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+  ::std::string* configid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static TileBuilding* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message {
+ public:
+  TileNPC();
+  virtual ~TileNPC();
+
+  TileNPC(const TileNPC& from);
+
+  inline TileNPC& operator=(const TileNPC& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TileNPC& default_instance();
+
+  void Swap(TileNPC* other);
+
+  // implements Message ----------------------------------------------
+
+  TileNPC* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TileNPC& from);
+  void MergeFrom(const TileNPC& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline ::google::protobuf::int32 x() const;
+  inline void set_x(::google::protobuf::int32 value);
+
+  // required int32 y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline ::google::protobuf::int32 y() const;
+  inline void set_y(::google::protobuf::int32 value);
+
+  // required string configID = 3;
+  inline bool has_configid() const;
+  inline void clear_configid();
+  static const int kConfigIDFieldNumber = 3;
+  inline const ::std::string& configid() const;
+  inline void set_configid(const ::std::string& value);
+  inline void set_configid(const char* value);
+  inline void set_configid(const char* value, size_t size);
+  inline ::std::string* mutable_configid();
+  inline ::std::string* release_configid();
+  inline void set_allocated_configid(::std::string* configid);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.TileNPC)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_configid();
+  inline void clear_has_configid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 x_;
+  ::google::protobuf::int32 y_;
+  ::std::string* configid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static TileNPC* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message {
  public:
   AckMiningTitle();
@@ -5365,15 +5581,41 @@ class LIBPROTOC_EXPORT AckMiningTitle : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
       mutable_tile();
 
+  // repeated .NFMsg.TileBuilding building = 2;
+  inline int building_size() const;
+  inline void clear_building();
+  static const int kBuildingFieldNumber = 2;
+  inline const ::NFMsg::TileBuilding& building(int index) const;
+  inline ::NFMsg::TileBuilding* mutable_building(int index);
+  inline ::NFMsg::TileBuilding* add_building();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >&
+      building() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >*
+      mutable_building();
+
+  // repeated .NFMsg.TileNPC npc = 3;
+  inline int npc_size() const;
+  inline void clear_npc();
+  static const int kNpcFieldNumber = 3;
+  inline const ::NFMsg::TileNPC& npc(int index) const;
+  inline ::NFMsg::TileNPC* mutable_npc(int index);
+  inline ::NFMsg::TileNPC* add_npc();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >&
+      npc() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >*
+      mutable_npc();
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckMiningTitle)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState > tile_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding > building_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC > npc_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -13813,6 +14055,242 @@ inline void TileState::set_opr(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
+// TileBuilding
+
+// required int32 x = 1;
+inline bool TileBuilding::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TileBuilding::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TileBuilding::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TileBuilding::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 TileBuilding::x() const {
+  return x_;
+}
+inline void TileBuilding::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 2;
+inline bool TileBuilding::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TileBuilding::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TileBuilding::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TileBuilding::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 TileBuilding::y() const {
+  return y_;
+}
+inline void TileBuilding::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+}
+
+// required string configID = 3;
+inline bool TileBuilding::has_configid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TileBuilding::set_has_configid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TileBuilding::clear_has_configid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TileBuilding::clear_configid() {
+  if (configid_ != &::google::protobuf::internal::kEmptyString) {
+    configid_->clear();
+  }
+  clear_has_configid();
+}
+inline const ::std::string& TileBuilding::configid() const {
+  return *configid_;
+}
+inline void TileBuilding::set_configid(const ::std::string& value) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(value);
+}
+inline void TileBuilding::set_configid(const char* value) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(value);
+}
+inline void TileBuilding::set_configid(const char* value, size_t size) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TileBuilding::mutable_configid() {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  return configid_;
+}
+inline ::std::string* TileBuilding::release_configid() {
+  clear_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = configid_;
+    configid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TileBuilding::set_allocated_configid(::std::string* configid) {
+  if (configid_ != &::google::protobuf::internal::kEmptyString) {
+    delete configid_;
+  }
+  if (configid) {
+    set_has_configid();
+    configid_ = configid;
+  } else {
+    clear_has_configid();
+    configid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// TileNPC
+
+// required int32 x = 1;
+inline bool TileNPC::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void TileNPC::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void TileNPC::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void TileNPC::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline ::google::protobuf::int32 TileNPC::x() const {
+  return x_;
+}
+inline void TileNPC::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+}
+
+// required int32 y = 2;
+inline bool TileNPC::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TileNPC::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TileNPC::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TileNPC::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline ::google::protobuf::int32 TileNPC::y() const {
+  return y_;
+}
+inline void TileNPC::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+}
+
+// required string configID = 3;
+inline bool TileNPC::has_configid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void TileNPC::set_has_configid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void TileNPC::clear_has_configid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void TileNPC::clear_configid() {
+  if (configid_ != &::google::protobuf::internal::kEmptyString) {
+    configid_->clear();
+  }
+  clear_has_configid();
+}
+inline const ::std::string& TileNPC::configid() const {
+  return *configid_;
+}
+inline void TileNPC::set_configid(const ::std::string& value) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(value);
+}
+inline void TileNPC::set_configid(const char* value) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(value);
+}
+inline void TileNPC::set_configid(const char* value, size_t size) {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  configid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* TileNPC::mutable_configid() {
+  set_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    configid_ = new ::std::string;
+  }
+  return configid_;
+}
+inline ::std::string* TileNPC::release_configid() {
+  clear_has_configid();
+  if (configid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = configid_;
+    configid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void TileNPC::set_allocated_configid(::std::string* configid) {
+  if (configid_ != &::google::protobuf::internal::kEmptyString) {
+    delete configid_;
+  }
+  if (configid) {
+    set_has_configid();
+    configid_ = configid;
+  } else {
+    clear_has_configid();
+    configid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
 // AckMiningTitle
 
 // repeated .NFMsg.TileState tile = 1;
@@ -13838,6 +14316,56 @@ AckMiningTitle::tile() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileState >*
 AckMiningTitle::mutable_tile() {
   return &tile_;
+}
+
+// repeated .NFMsg.TileBuilding building = 2;
+inline int AckMiningTitle::building_size() const {
+  return building_.size();
+}
+inline void AckMiningTitle::clear_building() {
+  building_.Clear();
+}
+inline const ::NFMsg::TileBuilding& AckMiningTitle::building(int index) const {
+  return building_.Get(index);
+}
+inline ::NFMsg::TileBuilding* AckMiningTitle::mutable_building(int index) {
+  return building_.Mutable(index);
+}
+inline ::NFMsg::TileBuilding* AckMiningTitle::add_building() {
+  return building_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >&
+AckMiningTitle::building() const {
+  return building_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileBuilding >*
+AckMiningTitle::mutable_building() {
+  return &building_;
+}
+
+// repeated .NFMsg.TileNPC npc = 3;
+inline int AckMiningTitle::npc_size() const {
+  return npc_.size();
+}
+inline void AckMiningTitle::clear_npc() {
+  npc_.Clear();
+}
+inline const ::NFMsg::TileNPC& AckMiningTitle::npc(int index) const {
+  return npc_.Get(index);
+}
+inline ::NFMsg::TileNPC* AckMiningTitle::mutable_npc(int index) {
+  return npc_.Mutable(index);
+}
+inline ::NFMsg::TileNPC* AckMiningTitle::add_npc() {
+  return npc_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >&
+AckMiningTitle::npc() const {
+  return npc_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::TileNPC >*
+AckMiningTitle::mutable_npc() {
+  return &npc_;
 }
 
 // -------------------------------------------------------------------

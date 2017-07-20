@@ -71,14 +71,14 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
         return NFGUID();
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return NFGUID();
     }
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return NFGUID();
@@ -126,14 +126,14 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
     {
         return false;
     }
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
     }
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() > 0)
     {
         return false;
@@ -171,14 +171,14 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
     {
         return false;
     }
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
     }
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() == 0)
     {
         return false;
@@ -202,7 +202,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
@@ -226,7 +226,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
 	}
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() == 0)
     {
         return false;
@@ -262,7 +262,7 @@ bool NFCTeamModule::GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
@@ -275,9 +275,9 @@ bool NFCTeamModule::GetMemberList(const NFGUID& self, const NFGUID& xTeam, std::
             continue;
         }
 
-        const NFINT64 nOnline = pMemberRecord->GetInt(i, NFrame::Team::MemberList_Online);
-        const NFINT64 nGameID = pMemberRecord->GetInt(i, NFrame::Team::MemberList_GameID);
-        const NFGUID& xID = pMemberRecord->GetObject(i, NFrame::Team::MemberList_GUID);
+        const NFINT64 nOnline = pMemberRecord->GetInt(i, NFrame::Team::MemberList::Online);
+        const NFINT64 nGameID = pMemberRecord->GetInt(i, NFrame::Team::MemberList::GameID);
+        const NFGUID& xID = pMemberRecord->GetObject(i, NFrame::Team::MemberList::GUID);
         if (!xID.IsNull())
         {
 
@@ -296,23 +296,23 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
     }
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() <=  0)
     {
         return false;
     }
 
     const int nRow = varList.Int(0);
-    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_GameID, nGameID);
+    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::GameID, nGameID);
     
-    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 1);
+    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 1);
 
     return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
 }
@@ -325,22 +325,22 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
     }
 
     NFDataList varList;
-    pMemberRecord->FindObject(NFrame::Team::MemberList_GUID, self, varList);
+    pMemberRecord->FindObject(NFrame::Team::MemberList::GUID, self, varList);
     if (varList.GetCount() <= 0)
     {
         return false;
     }
 
     const int nRow = varList.Int(0);
-    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_Online, 0);
-    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList_GameID, 0);
+    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 0);
+    pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::GameID, 0);
     return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
 }
 
@@ -532,7 +532,7 @@ bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::R_MemberList());
+    NF_SHARE_PTR<NFIRecord> pMemberRecord = pRecordManager->GetElement(NFrame::Team::MemberList::ThisName());
     if (!pMemberRecord.get())
     {
         return false;
@@ -561,10 +561,10 @@ bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::
         }
 
 
-        std::string strName = pMemberRecord->GetString(i, NFrame::Team::MemberList_Name);
-        const int nLevel = pMemberRecord->GetInt(i, NFrame::Team::MemberList_Level);
-        const int nJob = pMemberRecord->GetInt(i, NFrame::Team::MemberList_Job);
-        const NFGUID xPlayerID = pMemberRecord->GetObject(i, NFrame::Team::MemberList_GUID);
+        std::string strName = pMemberRecord->GetString(i, NFrame::Team::MemberList::Name);
+        const int nLevel = pMemberRecord->GetInt(i, NFrame::Team::MemberList::Level);
+        const int nJob = pMemberRecord->GetInt(i, NFrame::Team::MemberList::Job);
+        const NFGUID xPlayerID = pMemberRecord->GetObject(i, NFrame::Team::MemberList::GUID);
 
         pMemberinfo->set_name(strName);
         pMemberinfo->set_nlevel(nLevel);

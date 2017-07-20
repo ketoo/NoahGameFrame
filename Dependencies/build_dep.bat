@@ -1,11 +1,15 @@
 @echo off
-
 echo Building dependencies...
 
 REM extract libevent libs
 if exist libevent rd /S /Q libevent
 echo Compiling libevent
 "..\\Tool\\7z.exe" x libevent.zip -Y
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+cd libevent
+nmake /f Makefile.nmake
+cd ..
+
 
 echo Compiling mysql
 "..\\Tool\\7z.exe" x mysqlpp_libs.zip -Y

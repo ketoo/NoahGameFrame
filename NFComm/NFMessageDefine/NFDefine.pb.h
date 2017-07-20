@@ -454,11 +454,12 @@ enum EGameTokenSubType {
   EGTST_TOKEN_REBORN = 0,
   EGTST_TOKEN_POSITION = 1,
   EGTST_TOKEN_BOUNTY = 2,
-  EGTST_TOKEN_ACTIVITY = 3
+  EGTST_TOKEN_ACTIVITY = 3,
+  EGTST_TOKEN_BUILD = 4
 };
 LIBPROTOC_EXPORT bool EGameTokenSubType_IsValid(int value);
 const EGameTokenSubType EGameTokenSubType_MIN = EGTST_TOKEN_REBORN;
-const EGameTokenSubType EGameTokenSubType_MAX = EGTST_TOKEN_ACTIVITY;
+const EGameTokenSubType EGameTokenSubType_MAX = EGTST_TOKEN_BUILD;
 const int EGameTokenSubType_ARRAYSIZE = EGameTokenSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameTokenSubType_descriptor();

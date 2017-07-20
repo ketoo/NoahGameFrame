@@ -1417,6 +1417,68 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TileBuilding")]
+  public partial class TileBuilding : global::ProtoBuf.IExtensible
+  {
+    public TileBuilding() {}
+    
+    private int _x;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+    private int _y;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private string _configID;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"configID", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string configID
+    {
+      get { return _configID; }
+      set { _configID = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TileNPC")]
+  public partial class TileNPC : global::ProtoBuf.IExtensible
+  {
+    public TileNPC() {}
+    
+    private int _x;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+    private int _y;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private string _configID;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"configID", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string configID
+    {
+      get { return _configID; }
+      set { _configID = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckMiningTitle")]
   public partial class AckMiningTitle : global::ProtoBuf.IExtensible
   {
@@ -1427,6 +1489,20 @@ namespace NFMsg
     public global::System.Collections.Generic.List<NFMsg.TileState> tile
     {
       get { return _tile; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.TileBuilding> _building = new global::System.Collections.Generic.List<NFMsg.TileBuilding>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"building", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.TileBuilding> building
+    {
+      get { return _building; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.TileNPC> _npc = new global::System.Collections.Generic.List<NFMsg.TileNPC>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"npc", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.TileNPC> npc
+    {
+      get { return _npc; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
