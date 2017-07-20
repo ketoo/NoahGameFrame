@@ -29,7 +29,7 @@ bool NFCNavigationModule::Init()
 			LoadNavigation(sceneId, navigationResPath);
 
 			//const std::string& strId = strIdList[i];
-			//NFINT64 sceneId = m_pElementModule->GetPropertyManager(strId)->GetPropertyInt(NFrame::Scene::SceneID());// lexical_cast<std::string, INT16>());
+			//NFINT64 sceneId = m_pElementModule->GetPropertyManager(strId)->GetPropertyInt(NFrame::Scene::SceneID);// lexical_cast<std::string, INT16>());
 			//std::string navigationResPath = m_pElementModule->GetPropertyManager(strId)->GetPropertyString(NFrame::Scene::NavigationResPath());
 			//loadNavigation(sceneId, navigationResPath);
 			//std::ostringstream strLog;

@@ -4,135 +4,20 @@
 
 NFFileProcess::NFFileProcess()
 {
-	strLogicClassFile = "../Struct/LogicClass.xml";
-	mysqlWriter = fopen(strMySQLFile.c_str(), "w");
-	mysqlClassWriter = fopen(strMySQLClassFile.c_str(), "w");
-	protoWriter = fopen(strProtoFile.c_str(), "w");
-	hppWriter = fopen(strHPPFile.c_str(), "w");
-	javaWriter = fopen(strJavaFile.c_str(), "w");
-	csWriter = fopen(strCSFile.c_str(), "w");
+
 }
 
 NFFileProcess::~NFFileProcess()
 {
-	for (auto charArr : tmpStrList)
-	{
-		delete[] charArr;
-	}
-	tmpStrList.clear();
-	fclose(mysqlWriter);
-	fclose(mysqlClassWriter);
-	fclose(protoWriter);
-	fclose(hppWriter);
-	fclose(javaWriter);
-	fclose(csWriter);
+
 }
 
-void NFFileProcess::CreateProtoFile()
+bool NFFileProcess::LoadDataFromExcel()
 {
-	std::string toWrite = "package NFrame;\n";
-	if ((protoWriter) == NULL)
-		return;
-	fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
-}
-
-void NFFileProcess::CreateFileHead()
-{
-	time_t timeval;
-	timeval = time(NULL);
-	std::string strHPPHead
-		= "// -------------------------------------------------------------------------\n";
-	strHPPHead = strHPPHead
-		+ "//    @FileName         :    NFProtocolDefine.hpp\n"
-		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Module           :    NFProtocolDefine\n"
-		+ "// -------------------------------------------------------------------------\n\n"
-		+ "#ifndef NF_PR_NAME_HPP\n"
-		+ "#define NF_PR_NAME_HPP\n\n"
-		+ "#include <string>\n"
-		+ "namespace NFrame\n{\n";
-
-	/////////////////////////////////////////////////////
-	fwrite(strHPPHead.c_str(), strHPPHead.length(), 1, hppWriter);
-	/////////////////////////////////////////////////////
-
-	std::string strJavaHead
-		= "// -------------------------------------------------------------------------\n";
-	strJavaHead = strJavaHead
-		+ "//    @FileName         :    NFProtocolDefine.java\n"
-		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Module           :    NFProtocolDefine\n"
-		+ "// -------------------------------------------------------------------------\n\n"
-		+ "package nframe;\n";
-
-	fwrite(strJavaHead.c_str(), strJavaHead.length(), 1, javaWriter);
-	/////////////////////////////////////////////////////
-
-	std::string strCSHead = "// -------------------------------------------------------------------------\n";
-	strCSHead = strCSHead
-		+ "//    @FileName         :    NFProtocolDefine.cs\n"
-		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Module           :    NFProtocolDefine\n"
-		+ "// -------------------------------------------------------------------------\n\n"
-		+ "using System;\n"
-		//+ "using System.Collections.Concurrent;\n"
-		+ "using System.Collections.Generic;\n"
-		+ "using System.Linq;\n"
-		+ "using System.Text;\n"
-		+ "using System.Threading;\n"
-		//+ "using System.Threading.Tasks;\n\n"
-		+ "namespace NFrame\n{\n";
-
-	fwrite(strCSHead.c_str(), strCSHead.length(), 1, csWriter);
-	/////////////////////////////////////////////////////
-}
-
-void NFFileProcess::OnCreateXMLFile()
-{
-	//////////////////////////////////////////////////////////////////////
-	CreateStructThreadFunc();
-	CreateIniThreadFunc();
-}
-
-void NFFileProcess::CreateStructThreadFunc()
-{
-	CreateProtoFile();
+	LoadDataFromExcel("../Excel/IObject.xlsx", "IObject");
 
 
-	CreateFileHead();
-
-
-
-	rapidxml::xml_document<> xmlDoc;
-
-	rapidxml::xml_node<>* pDel = xmlDoc.allocate_node(rapidxml::node_pi, xmlDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
-	if (NULL == pDel)
-	{
-		return;
-	}
-
-	xmlDoc.append_node(pDel);
-
-	rapidxml::xml_node<>* root = xmlDoc.allocate_node(rapidxml::node_element, "XML", NULL);
-	xmlDoc.append_node(root);
-
-	rapidxml::xml_node<>* classElement = xmlDoc.allocate_node(rapidxml::node_element, "Class", NULL);
-	root->append_node(classElement);
-	////////////////////////////////////////////////////////////////////////
-	classElement->append_attribute(xmlDoc.allocate_attribute("Id", "IObject"));
-	classElement->append_attribute(xmlDoc.allocate_attribute("Type", "TYPE_IOBJECT"));
-
-	classElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + "Struct/Class/IObject.xml"))));
-	classElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + "Ini/NPC/IObject.xml"))));
-
-	classElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
-	classElement->append_attribute(xmlDoc.allocate_attribute("Desc", "IObject"));
-	////////////////////////////////////////////////////////////////////////
-
-	CreateStructXML("../Excel_Ini/IObject.xlsx", "IObject");
-
-
-	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
+	auto fileList = GetFileListInFolder(strExcelIniPath, 0);
 
 	for (auto fileName : fileList)
 	{
@@ -159,916 +44,876 @@ void NFFileProcess::CreateStructThreadFunc()
 		}
 
 
-		if (!CreateStructXML(fileName.c_str(), strFileName.c_str()))
+		if (!LoadDataFromExcel(fileName.c_str(), strFileName.c_str()))
 		{
 			std::cout << "Create " + fileName + " failed!" << std::endl;
-			return;
-		}
-
-		rapidxml::xml_node<>* subClassElement = xmlDoc.allocate_node(rapidxml::node_element, "Class", NULL);
-		classElement->append_node(subClassElement);
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Id", NewChar(strFileName)));
-		std::string strUpFileName = strFileName;
-		transform(strUpFileName.begin(), strUpFileName.end(), strUpFileName.begin(), ::toupper);
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Type", NewChar(std::string("TYPE_" + strUpFileName))));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Path", NewChar(std::string(strExecutePath + strXMLStructPath + strFileName + ".xml"))));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("InstancePath", NewChar(std::string(strExecutePath + strXMLIniPath + strFileName + ".xml"))));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Public", "0"));
-		subClassElement->append_attribute(xmlDoc.allocate_attribute("Desc", NewChar(strFileName)));
-	}
-
-
-
-	fwrite("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP", strlen("} // !@NFrame\n\n#endif // !NF_PR_NAME_HPP"), 1, hppWriter);
-	fwrite("}",	strlen("}"), 1, csWriter);
-
-	//auto a = xmlDoc->SaveFile(strLogicClassFile.c_str());
-	std::ofstream out(strLogicClassFile.c_str());
-	out << xmlDoc;
-	out.close();
-}
-
-void NFFileProcess::CreateIniThreadFunc()
-{
-
-	auto fileList = GetFileListInFolder(strToolBasePath + strExcelIniPath, 0);
-	for (auto fileName : fileList)
-	{
-		StringReplace(fileName, "\\", "/");
-		StringReplace(fileName, "//", "/");
-
-		size_t nLastPoint = fileName.find_last_of(".") + 1;
-		size_t nLastSlash = fileName.find_last_of("/") + 1;
-		std::string strFileName = fileName.substr(nLastSlash, nLastPoint - nLastSlash - 1);
-		std::string strFileExt = fileName.substr(nLastPoint, fileName.length() - nLastPoint);
-
-
-		if ((int)(fileName.find("$")) != -1)
-		{
-			continue;
-		}
-
-
-		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
-		if (strExt != "xlsx")
-		{
-			continue;
-		}
-
-		if (!CreateIniXML(fileName))
-		{
-			std::cout << "Create " + fileName + " failed!" << std::endl;
+			return false;
 		}
 	}
-}
 
-bool NFFileProcess::CreateStructXML(std::string strFile, std::string strFileName)
-{
-	std::cout << strFile << std::endl;
-
-	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
-	if (!x->open(strFile.c_str()))
-	{
-		printf("can't open %s\n", strFile.c_str());
-		return false;
-	}
-
-	// PropertyName
-	// cpp
-	std::string strHPPPropertyInfo = "";
-	std::string strHppRecordInfo = "";
-	std::string strHppEnumInfo = "";
-
-	strHPPPropertyInfo = strHPPPropertyInfo + "class " + strFileName + "\n{\npublic:\n";
-	strHPPPropertyInfo = strHPPPropertyInfo + "\t//Class name\n\tstatic const std::string& ThisName(){ static std::string x" + strFileName + " = \"" + strFileName + "\";" + " return x" + strFileName + "; }\n" + "\t// IObject\n" + strHppIObjectInfo + "\t// Property\n";
-
-	// java
-	std::string strJavaPropertyInfo = "";
-	std::string strJavaRecordInfo = "";
-	std::string strJavaEnumInfo = "";
-
-	strJavaPropertyInfo = strJavaPropertyInfo + "public class " + strFileName + " {\n";
-	strJavaPropertyInfo = strJavaPropertyInfo + "\t//Class name\n\tpublic static final String ThisName = \"" + strFileName + "\";\n\t// IObject\n" + strJavaIObjectInfo + "\t// Property\n";
-
-	// C#
-	std::string strCSPropertyInfo = "";
-	std::string strCSRecordInfo = "";
-	std::string strCSEnumInfo = "";
-
-	strCSPropertyInfo = strCSPropertyInfo + "public class " + strFileName + "\n{\n";
-	strCSPropertyInfo = strCSPropertyInfo + "\t//Class name\n\tpublic static readonly string ThisName = \"" + strFileName + "\";\n\t// IObject\n" + strCSIObjectInfo + "\t// Property\n";
-
-
-	rapidxml::xml_document<> structDoc;
-
-	rapidxml::xml_node<>* pDel = structDoc.allocate_node(rapidxml::node_pi, structDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
-	if (NULL == pDel)
-	{
-		return false;
-	}
-
-	structDoc.append_node(pDel);
-
-	rapidxml::xml_node<>* root = structDoc.allocate_node(rapidxml::node_element, "XML", NULL);
-	structDoc.append_node(root);
-
-
-	rapidxml::xml_node<>* propertyNodes = structDoc.allocate_node(rapidxml::node_element, "Propertys", NULL);
-	root->append_node(propertyNodes);
-
-
-	rapidxml::xml_node<>* recordNodes = structDoc.allocate_node(rapidxml::node_element, "Records", NULL);
-	root->append_node(recordNodes);
-
-
-	rapidxml::xml_node<>* componentNodes = structDoc.allocate_node(rapidxml::node_element, "Components", NULL);
-	root->append_node(componentNodes);
-
-
-	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
-	for (MiniExcelReader::Sheet& sh : sheets)
-	{
-
-		int nTitleLine = 9;
-		std::string strSheetName = sh.getName();
-
-		const MiniExcelReader::Range& dim = sh.getDimension();
-
-		std::string strUpperSheetName = strSheetName.substr(0, 8);
-		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
-		if (strUpperSheetName == "property")
-		{
-			std::vector<std::string> colNames;
-			for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
-			{
-				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
-				if (cell)
-				{
-					colNames.push_back(cell->value);
-				}
-			}
-
-			for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
-			{
-				std::string testValue = "";
-				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
-				if (cell)
-				{
-					testValue = cell->value;
-				}
-				if (testValue == "")
-				{
-					continue;
-				}
-
-				auto propertyNode = structDoc.allocate_node(rapidxml::node_element, "Property", NULL);
-				propertyNodes->append_node(propertyNode);
-				std::string strType = "";
-				for (int r = dim.firstRow; r <= dim.firstRow + nTitleLine - 1; r++)
-				{
-					std::string name = colNames[r - 1];
-					std::string value = "";
-					MiniExcelReader::Cell* cell = sh.getCell(r, c);
-					if (cell)
-					{
-						std::string valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-						if (valueCell == "TRUE" || valueCell == "FALSE")
-						{
-							value = valueCell == "TRUE" ? "1" : "0";
-						}
-						else
-						{
-							value = cell->value;
-						}
-
-						if (name == "Type")
-						{
-							strType = value;
-						}
-
-					}
-					propertyNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
-				}
-
-				strHPPPropertyInfo = strHPPPropertyInfo + "\tstatic const std::string& " + testValue + "(){ static std::string x" + testValue + " = \"" + testValue + "\";" + " return x" + testValue + "; } // " + strType + "\n";
-				strJavaPropertyInfo = strJavaPropertyInfo + "\tpublic static final String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
-				strCSPropertyInfo = strCSPropertyInfo + "\tpublic static readonly String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
-
-				if (strFileName == "IObject")
-				{
-					strHppIObjectInfo += "\tstatic const std::string& " + testValue + "(){ static std::string x" + testValue + " = \"" + testValue + "\";" + " return x" + testValue + "; } // " + strType + "\n";
-					strJavaIObjectInfo += "\tpublic static final String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
-					strCSIObjectInfo += "\tpublic static readonly String " + testValue + " = \"" + testValue + "\"; // " + strType + "\n";
-				}
-			}
-		}
-		else if (strUpperSheetName == "componen")
-		{
-			std::vector<std::string> colNames;
-			for (int c = dim.firstCol; c <= dim.lastCol; c++)
-			{
-				MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
-				if (cell)
-				{
-					colNames.push_back(cell->value);
-				}
-			}
-			for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
-			{
-				std::string testValue = "";
-				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
-				if (cell)
-				{
-					testValue = cell->value;
-				}
-				if (testValue == "")
-				{
-					continue;
-				}
-				auto componentNode = structDoc.allocate_node(rapidxml::node_element, "Component", NULL);
-				componentNodes->append_node(componentNode);
-				std::string strType = "";
-				for (int c = dim.firstCol; c <= dim.lastCol; c++)
-				{
-					std::string name = colNames[c - 1];
-					std::string value = "";
-					MiniExcelReader::Cell* cell = sh.getCell(r, c);
-					if (cell)
-					{
-						std::string valueCell = cell->value;
-						transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-						if (valueCell == "TRUE" || valueCell == "FALSE")
-						{
-							value = valueCell == "TRUE" ? "1" : "0";
-						}
-						else
-						{
-							value = cell->value;
-						}
-
-						if (name == "Type")
-						{
-							strType = value;
-						}
-
-					}
-					componentNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
-				}
-			}
-		}
-		else
-		{
-			const int nRecordLineCount = 11;
-			const int nRowsCount = dim.lastRow - dim.firstRow + 1;
-			const int nRecordCount = nRowsCount / nRecordLineCount;
-
-			if (nRowsCount != nRecordCount * nRecordLineCount)
-			{
-				printf("This Excel[%s]'s Record is something wrong, Sheet[%s] Total Rows is %d lines, Not 10*N\n", strFile.c_str(), strSheetName.c_str(), nRowsCount);
-				printf("Generate faild!\n");
-				printf("Press [Enter] key to exit!\n");
-				std::cin.ignore();
-				exit(1);
-			}
-
-			for (int nCurrentRecord = 1; nCurrentRecord <= nRecordCount; nCurrentRecord++)
-			{
-				std::string strRecordName = "";
-				std::string strRow = "";
-				std::string strCol = "";
-				std::string strPublic = "";
-				std::string strPrivate = "";
-				std::string strSave = "";
-				std::string strCache = "";
-				std::string strUpload = "";
-				std::string strDesc = "";
-
-				int nRelativeRow = 1;
-				MiniExcelReader::Cell* cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					strRecordName = cell->value;
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					strRow = cell->value;
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					strCol = cell->value;
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					if (cell->value == "TRUE" || cell->value == "FALSE")
-					{
-						strPublic = cell->value == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						strPublic = cell->value;
-					}
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					if (cell->value == "TRUE" || cell->value == "FALSE")
-					{
-						strPrivate = cell->value == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						strPrivate = cell->value;
-					}
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					if (cell->value == "TRUE" || cell->value == "FALSE")
-					{
-						strSave = cell->value == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						strSave = cell->value;
-					}
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					if (cell->value == "TRUE" || cell->value == "FALSE")
-					{
-						strCache = cell->value == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						strCache = cell->value;
-					}
-				}
-				cell = nullptr;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					if (cell->value == "TRUE" || cell->value == "FALSE")
-					{
-						strUpload = cell->value == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						strUpload = cell->value;
-					}
-				}
-				cell = nullptr;
-				int nTagRow = nRelativeRow++;
-				int nTypeRow = nRelativeRow++;
-				cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nRelativeRow++, 2);
-				if (cell)
-				{
-					strDesc = cell->value;
-				}
-				cell = nullptr;
-
-				const int nExcelCols = atoi(strCol.c_str());
-				int nRealCols = 0;
-
-				auto recordNode = structDoc.allocate_node(rapidxml::node_element, "Record", NULL);
-				recordNodes->append_node(recordNode);
-
-				recordNode->append_attribute(structDoc.allocate_attribute("Id", NewChar(strRecordName)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Row", NewChar(strRow)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Col", NewChar(strCol)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Public", NewChar(strPublic)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Private", NewChar(strPrivate)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Save", NewChar(strSave)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Cache", NewChar(strCache)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Upload", NewChar(strUpload)));
-				recordNode->append_attribute(structDoc.allocate_attribute("Desc", NewChar(strDesc)));
-
-				strHppRecordInfo = strHppRecordInfo + "\tstatic const std::string& R_" + strRecordName + "(){ static std::string x" + strRecordName + " = \"" + strRecordName + "\";" + " return x" + strRecordName + ";}\n";
-				strHppEnumInfo = strHppEnumInfo + "\n\tenum " + strRecordName + "\n\t{\n";
-
-				strJavaRecordInfo = strJavaRecordInfo + "\tpublic static final String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
-				strJavaEnumInfo = strJavaEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
-
-				strCSRecordInfo = strCSRecordInfo + "\tpublic static readonly String R_" + strRecordName + " = \"" + strRecordName + "\";\n";
-				strCSEnumInfo = strCSEnumInfo + "\n\tpublic enum " + strRecordName + "\n\t{\n";
-
-				std::string toWrite = "enum " + strRecordName + "\n{\n";
-				fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
-
-
-				for (int nRecordCol = dim.firstCol; nRecordCol <= dim.lastCol; nRecordCol++)
-				{
-					std::string strType = "";
-					std::string strTag = "";
-					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTagRow, nRecordCol);
-					if (cell)
-					{
-						strTag = cell->value;
-					}
-					else
-					{
-						break;
-					}
-					cell = nullptr;
-					cell = sh.getCell((nCurrentRecord - 1) * nRecordLineCount + nTypeRow, nRecordCol);
-					if (cell)
-					{
-						strType = cell->value;
-					}
-					else
-					{
-						break;
-					}
-
-					cell = nullptr;
-
-					auto colNode = structDoc.allocate_node(rapidxml::node_element, "Col", NULL);
-					recordNode->append_node(colNode);
-
-					colNode->append_attribute(structDoc.allocate_attribute("Type", NewChar(strType)));
-					colNode->append_attribute(structDoc.allocate_attribute("Tag", NewChar(strTag)));
-
-					toWrite = "\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + "; // " + strTag + " -- " + strType + "\n";
-					fwrite(toWrite.c_str(), toWrite.length(), 1, protoWriter);
-
-					strHppEnumInfo += "\t\t" + strRecordName + "_" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
-					strJavaEnumInfo += "\t\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
-					strCSEnumInfo += "\t\t" + strTag + "\t\t= " + std::to_string(nRecordCol - 1) + ", // " + strTag + " -- " + strType + "\n";
-
-					nRealCols++;
-				}
-
-				if (nExcelCols != nRealCols)
-				{
-					printf("This Excel[%s]'s format is something wrong, Record[%s] field \"col\"==%d not equal the real cols==%d!\n", strFile.c_str(), strRecordName.c_str(), nExcelCols, nRealCols);
-					printf("Press [Enter] key to exit!");
-					std::cin.ignore();
-					exit(1);
-				}
-
-				fwrite("}\n", 2, 1, protoWriter);
-
-				strHppEnumInfo += "\n\t};\n";
-				strJavaEnumInfo += "\n\t};\n";
-				strCSEnumInfo += "\n\t};\n";
-			}
-		}
-	}
-	// cpp
-	strHPPPropertyInfo += "\t// Record\n" + strHppRecordInfo + strHppEnumInfo + "\n};\n\n";
-	fwrite(strHPPPropertyInfo.c_str(), strHPPPropertyInfo.length(), 1, hppWriter);
-
-	// java
-	strJavaPropertyInfo += "\t// Record\n" + strJavaRecordInfo + strJavaEnumInfo + "\n}\n\n";
-	fwrite(strJavaPropertyInfo.c_str(), strJavaPropertyInfo.length(), 1, javaWriter);
-
-	// C#
-	strCSPropertyInfo += "\t// Record\n" + strCSRecordInfo + strCSEnumInfo + "\n}\n\n";
-	fwrite(strCSPropertyInfo.c_str(), strCSPropertyInfo.length(), 1, csWriter);
-
-	////////////////////////////////////////////////////////////////////////////
-
-	std::string strFilePath(strFile);
-	size_t nLastPoint = strFilePath.find_last_of(".") + 1;
-	size_t nLastSlash = strFilePath.find_last_of("/") + 1;
-	std::string strFileExt = strFilePath.substr(nLastPoint, strFilePath.length() - nLastPoint);
-
-	std::string strXMLFile = strToolBasePath + strXMLStructPath + strFileName;
-	if (nCipher > 0)
-	{
-		strXMLFile += ".NF";
-	}
-	else
-	{
-		strXMLFile += ".xml";
-	}
-
-	std::ofstream out(strXMLFile.c_str());
-	out << structDoc;
-	out.close();
-	delete x;
 	return true;
 }
 
-bool NFFileProcess::CreateIniXML(std::string strFile)
+bool NFFileProcess::LoadDataFromExcel(const std::string & strFile, const std::string & strFileName)
 {
+	if (mxClassData.find(strFileName) != mxClassData.end())
+	{
+		std::cout << strFile << " exist!!!" << std::endl;
+		return false;
+	}
+
 	std::cout << strFile << std::endl;
 
-	MiniExcelReader::ExcelFile* x = new MiniExcelReader::ExcelFile();
-	if (!x->open(strFile.c_str()))
+	ClassData* pClassData = new ClassData();
+	mxClassData[strFileName] = pClassData;
+	pClassData->xStructData.strClassName = strFileName;
+
+	///////////////////////////////////////
+	//load
+
+	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
+	if (!xExcel->open(strFile.c_str()))
 	{
-		printf("can't open %s\n", strFile.c_str());
+		std::cout << "can't open" << strFile << std::endl;
 		return false;
 	}
-	////////////////////////////////////////////////////////////////////////////
-	rapidxml::xml_document<> iniDoc;
 
-	rapidxml::xml_node<>* pDel = iniDoc.allocate_node(rapidxml::node_pi, iniDoc.allocate_string("xml version='1.0' encoding='utf-8'"));
-	if (NULL == pDel)
-	{
-		return false;
-	}
-
-	iniDoc.append_node(pDel);
-
-	rapidxml::xml_node<>* root = iniDoc.allocate_node(rapidxml::node_element, "XML", NULL);
-	iniDoc.append_node(root);
-
-	std::vector<MiniExcelReader::Sheet>& sheets = x->sheets();
-	std::vector<std::string> vColNames;
-	std::vector<std::string> vDataIDs;
-	std::map<std::string, std::string> mDataValues;
-	int nCurrentCol = 0;
-
+	std::vector<MiniExcelReader::Sheet>& sheets = xExcel->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
+		LoadDataFromExcel(sh, pClassData);
+	}
+	return true;
+}
 
-		int nDataLine = 10;
+bool NFFileProcess::LoadDataFromExcel(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
 
-		std::string strSheetName = sh.getName();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
 
-		std::string strUpperSheetName = strSheetName.substr(0, 8);
-		transform(strUpperSheetName.begin(), strUpperSheetName.end(), strUpperSheetName.begin(), ::tolower);
+	if (strSheetName.find("property") != std::string::npos)
+	{
+		LoadDataAndProcessProperty(sheet, pClassData);
+		LoadIniData(sheet, pClassData);
+	}
+	else if (strSheetName.find("componen") != std::string::npos)
+	{
+		LoadDataAndProcessComponent(sheet, pClassData);
+	}
+	else if (strSheetName.find("record") != std::string::npos)
+	{
+		LoadDataAndProcessRecord(sheet, pClassData);
+	}
+	else
+	{
+		std::cout << pClassData->xStructData.strClassName << " " << strSheetName << std::endl;
+		assert(0);
+	}
 
-		if (strUpperSheetName != "property")
+	return false;
+}
+
+bool NFFileProcess::LoadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::map<std::string, int> PropertyIndex;//col index
+	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
 		{
-			continue;
+			PropertyIndex[cell->value] = c;
 		}
-
-		const MiniExcelReader::Range& dim = sh.getDimension();
-
-		for (int c = dim.firstCol; c <= dim.lastCol; c++)
+	}
+	////////////
+	for (int r = dim.firstRow + nPropertyHeight; r <= dim.lastRow; r++)
+	{
+		MiniExcelReader::Cell* pIDCell = sheet.getCell(r, dim.firstCol);
+		if (pIDCell && !pIDCell->value.empty())
 		{
-			MiniExcelReader::Cell* cell = sh.getCell(dim.firstRow, c);
-			if (cell)
-			{
-				vColNames.push_back(cell->value);
-			}
-		}
+			NFClassElement::ElementData* pIniObject = new NFClassElement::ElementData();
+			pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
 
-		if (vDataIDs.size() <= 0)
-		{
-			for (int r = dim.firstRow + nDataLine - 1; r <= dim.lastRow; r++)
+			for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 			{
-				MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
+				std::string strPropertyName = itProperty->first;
+				int nCol = itProperty->second;
+
+				MiniExcelReader::Cell* cell = sheet.getCell(r, nCol);
 				if (cell)
 				{
-					if (cell->value.length() > 0)
-					{
-						vDataIDs.push_back(cell->value);
-					}
-				}
-			}
-		}
-
-		for (int r = dim.firstRow + nDataLine - 1; r <= vDataIDs.size() + nDataLine - 1; r++)
-		{
-			std::string testValue = "";
-			MiniExcelReader::Cell* cell = sh.getCell(r, dim.firstCol);
-
-			for (int c = dim.firstCol; c <= dim.lastCol; c++)
-			{
-				std::string name = vColNames[c - 1 + nCurrentCol];
-				std::string value = "";
-				MiniExcelReader::Cell* cell = sh.getCell(r, c);
-				std::string vType = sh.getCell(dim.firstRow + 1, c)->value;
-				if (cell)
-				{
-					std::string valueCell = cell->value;
-					transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-					if (valueCell == "TRUE" || valueCell == "FALSE")
-					{
-						value = valueCell == "TRUE" ? "1" : "0";
-					}
-					else
-					{
-						value = cell->value;
-						if (value.size() <= 0)
-						{
-							if (vType == "int" || vType == "float")
-							{
-								value = "0";
-							}
-							else
-							{
-								value = "";
-							}
-						}
-					}
+					pIniObject->xPropertyList[strPropertyName] = cell->value;
 				}
 				else
 				{
-					if (vType == "int" || vType == "float")
-					{
-						value = "0";
-					}
-					else
-					{
-						value = "";
-					}
+					pIniObject->xPropertyList[strPropertyName] = "";
 				}
-
-				//check the field is utf8, then convert it into gbk.
-				auto descLength = value.size();
-				if (bConvertIntoUTF8 && IsTextUTF8(value.c_str(), descLength))
-				{
-					if (descLength > 0)
-					{
-						char* chrArrDesc = new char[descLength];
-						Utf8ToGbk((char*)value.c_str(), chrArrDesc);
-						value = chrArrDesc;
-						delete[] chrArrDesc;
-					}
-				}
-				mDataValues.insert(std::pair<string, string>(vDataIDs[r - nDataLine] + name, value));
 			}
 		}
-		nCurrentCol += dim.lastCol;
 	}
+	
+	return false;
+}
 
-	int nDataCount = 0;
-	if (strFile.find("NPC") > 0 && strFile.find("NPC") < strFile.size())
+bool NFFileProcess::LoadDataAndProcessProperty(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::map<std::string, int> descIndex;//row index
+	std::map<std::string, int> PropertyIndex;//col index
+	for (int r = dim.firstRow + 1; r <= dim.firstRow + nPropertyHeight - 1; r++)
 	{
-		int a = 0;
-	}
-	for (auto strID : vDataIDs)
-	{
-		auto objectNode = iniDoc.allocate_node(rapidxml::node_element, "Object", NULL);
-		root->append_node(objectNode);
-		for (auto strColName : vColNames)
+		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
+		if (cell)
 		{
-			if (strColName == "Id")
-			{
-				char* chrID = NULL;
-				if (objectNode->first_attribute("Id"))
-				{
-					chrID = objectNode->first_attribute("Id")->value();
-				}
-				if (!chrID)
-				{
-					objectNode->append_attribute(iniDoc.allocate_attribute(NewChar(strColName), NewChar(mDataValues[strID + strColName])));
-				}
-			}
-			else
-			{
-				objectNode->append_attribute(iniDoc.allocate_attribute(NewChar(strColName), NewChar(mDataValues[strID + strColName])));
-			}
-			nDataCount++;
+			descIndex[cell->value] = r;
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-
-	size_t nLastPoint = strFile.find_last_of(".") + 1;
-	size_t nLastSlash = strFile.find_last_of("/") + 1;
-	std::string strFileName = strFile.substr(nLastSlash, nLastPoint - nLastSlash - 1);
-	std::string strFileExt = strFile.substr(nLastPoint, strFile.length() - nLastPoint);
-
-	std::string strXMLFile = strToolBasePath + strXMLIniPath + strFileName;
-	if (nCipher > 0)
+	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
 	{
-		strXMLFile += ".NF";
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
+		{
+			PropertyIndex[cell->value] = c;
+		}
 	}
-	else
+	////////////
+	
+	for (std::map<std::string, int>::iterator itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 	{
-		strXMLFile += ".xml";
+		std::string strPropertyName = itProperty->first;
+		int nCol = itProperty->second;
+
+		////////////
+		NFClassProperty* pClassProperty = new NFClassProperty();
+		pClassData->xStructData.xPropertyList[strPropertyName] = pClassProperty;
+
+		////////////
+		for (std::map<std::string, int>::iterator itDesc = descIndex.begin(); itDesc != descIndex.end(); ++itDesc)
+		{
+			std::string descName = itDesc->first;
+			int nRow = itDesc->second;
+
+			
+			MiniExcelReader::Cell* pCell = sheet.getCell(nRow, nCol);
+			if (pCell)
+			{
+				std::string descValue = pCell->value;
+
+				pClassProperty->descList[descName] = descValue;
+			}
+		}
+
 	}
 
-	std::ofstream out(strXMLFile.c_str());
-	out << iniDoc;
-	out.close();
-	delete x;
+	return false;
+}
+
+bool NFFileProcess::LoadDataAndProcessComponent(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	std::vector<std::string> colNames;
+	for (int c = dim.firstCol; c <= dim.lastCol; c++)
+	{
+		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
+		if (cell)
+		{
+			colNames.push_back(cell->value);
+		}
+	}
+	for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
+	{
+		std::string testValue = "";
+		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
+		if (cell)
+		{
+			testValue = cell->value;
+		}
+		if (testValue == "")
+		{
+			continue;
+		}
+		//auto componentNode = structDoc.allocate_node(rapidxml::node_element, "Component", NULL);
+		//componentNodes->append_node(componentNode);
+		std::string strType = "";
+		for (int c = dim.firstCol; c <= dim.lastCol; c++)
+		{
+			std::string name = colNames[c - 1];
+			std::string value = "";
+			MiniExcelReader::Cell* cell = sheet.getCell(r, c);
+			if (cell)
+			{
+				std::string valueCell = cell->value;
+				transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
+				if (valueCell == "TRUE" || valueCell == "FALSE")
+				{
+					value = valueCell == "TRUE" ? "1" : "0";
+				}
+				else
+				{
+					value = cell->value;
+				}
+
+				if (name == "Type")
+				{
+					strType = value;
+				}
+
+			}
+			//componentNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
+		}
+	}
+	return false;
+}
+
+bool NFFileProcess::LoadDataAndProcessRecord(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
+{
+	const MiniExcelReader::Range& dim = sheet.getDimension();
+	std::string strSheetName = sheet.getName();
+	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
+
+	for (int nIndex = 0; nIndex < 100; nIndex++)
+	{
+		int nStartRow = nIndex * nRecordHeight + 1;
+		int nEndRow = (nIndex + 1) * nRecordHeight;
+
+		MiniExcelReader::Cell* pTestCell = sheet.getCell(nStartRow, dim.firstCol);
+		if (pTestCell)
+		{
+			MiniExcelReader::Cell* pNameCell = sheet.getCell(nStartRow, dim.firstCol + 1);
+			std::string strRecordName = pNameCell->value;
+			
+			////////////
+
+			NFClassRecord* pClassRecord = new NFClassRecord();
+			pClassData->xStructData.xRecordList[strRecordName] = pClassRecord;
+			////////////
+
+			for (int r = nStartRow + 1; r <= nStartRow + nRecordDescHeight; r++)
+			{
+				MiniExcelReader::Cell* cellDesc = sheet.getCell(r, dim.firstCol);
+				MiniExcelReader::Cell* cellValue = sheet.getCell(r, dim.firstCol + 1);
+
+				pClassRecord->descList[cellDesc->value] = cellValue->value;
+			}
+
+			int nRecordCol = atoi(pClassRecord->descList["Col"].c_str());
+			for (int c = dim.firstCol; c <= nRecordCol; c++)
+			{
+				int r = nStartRow + nRecordDescHeight + 1;
+				MiniExcelReader::Cell* pCellColName = sheet.getCell(r, c);
+				MiniExcelReader::Cell* pCellColType = sheet.getCell(r + 1, c);
+				MiniExcelReader::Cell* pCellColDesc = sheet.getCell(r + 2, c);
+
+				NFClassRecord::RecordColDesc* pRecordColDesc = new NFClassRecord::RecordColDesc();
+				pRecordColDesc->index = c - 1;
+				pRecordColDesc->type = pCellColType->value;
+				if (pCellColDesc)
+				{
+					pRecordColDesc->desc = pCellColDesc->value;
+				}
+
+				pClassRecord->colList[pCellColName->value] = pRecordColDesc;
+			}
+		}
+	}
+
+	
 	return true;
 }
 
-void NFFileProcess::OnCreateMysqlFile()
+bool NFFileProcess::Save()
 {
-	if (!LoadLogicClass(strLogicClassFile))
-	{
-		std::cout << "Generate MySQL file failed, please check files!" << std::endl;
-	}
+	SaveForCPP();
+	SaveForCS();
+	SaveForJAVA();
+
+
+	SaveForPB();
+	SaveForSQL();
+
+	SaveForStruct();
+	SaveForIni();
+
+	SaveForLogicClass();
+
+	return false;
 }
+
+bool NFFileProcess::SaveForCPP()
+{
+	FILE* hppWriter = fopen(strHPPFile.c_str(), "w");
+
+	std::string strFileHead;
+
+	strFileHead = strFileHead
+	+ "// -------------------------------------------------------------------------\n"
+	+ "//    @FileName         :    NFProtocolDefine.hpp\n"
+	+ "//    @Author           :    NFrame Studio\n"
+	+ "//    @Module           :    NFProtocolDefine\n"
+	+ "// -------------------------------------------------------------------------\n\n"
+	+ "#ifndef NF_PR_NAME_HPP\n"
+	+ "#define NF_PR_NAME_HPP\n\n"
+	+ "#include <string>\n"
+	+ "namespace NFrame\n{\n";
+
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, hppWriter);
+	/////////////////////////////////////////////////////
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+	std::string instanceField = "\n";
+
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+		
+		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tstatic const std::string& ThisName(){ static std::string x = \"" + strClassName + "\"; return x; };";
+
+		instanceField += "\tconst std::string " + strClassName + "::ThisName = \"" + strClassName + "\";\n";
+
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+			
+			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+					itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFClassProperty* pClassProperty = itProperty->second;
+
+				strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+
+				instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+			}
+		}
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+
+			instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, hppWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* pClassRecord = itRecord->second;
+
+			std::cout << "save for cpp ---> " << strClassName  << "::" << strRecordName << std::endl;
+
+			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };";
+
+			instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
+
+			//col
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tstatic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
+			}
+
+			strRecordInfo += "\n\t\t};\n";
+
+		}
+
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, hppWriter);
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t};\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, hppWriter);
+
+	}
+
+	//fwrite(instanceField.c_str(), instanceField.length(), 1, hppWriter);
+
+	std::string strFileEnd = "\n}\n#endif";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, hppWriter);
+	/////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////
+
+	fclose(hppWriter);
+
+	///////////////////////////
+	FILE* cppWriter = fopen(strCPPFile.c_str(), "w");
+	
+	std::string strCppFileHead;
+	strCppFileHead = strCppFileHead
+		+ "// -------------------------------------------------------------------------\n"
+		+ "//    @FileName         :    NFProtocolDefine.cpp\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n"
+		+ "#include \"NFProtocolDefine.hpp\"\n"
+		+ "namespace NFrame\n{\n";
+
+	fwrite(strCppFileHead.c_str(), strCppFileHead.length(), 1, cppWriter);
+	fwrite(instanceField.c_str(), instanceField.length(), 1, cppWriter);
+
+	strFileEnd.clear();
+	strFileEnd += "\n};";
+
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, cppWriter);
+
+	fclose(cppWriter);
+	//////////////////////////////
+
+	return false;
+}
+
+bool NFFileProcess::SaveForCS()
+{
+	FILE* csWriter = fopen(strCSFile.c_str(), "w");
+
+	std::string strFileHead = "// -------------------------------------------------------------------------\n";
+	strFileHead = strFileHead
+		+ "//    @FileName         :    NFProtocolDefine.cs\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n"
+		+ "using System;\n"
+		//+ "using System.Collections.Concurrent;\n"
+		+ "using System.Collections.Generic;\n"
+		+ "using System.Linq;\n"
+		+ "using System.Text;\n"
+		+ "using System.Threading;\n"
+		//+ "using System.Threading.Tasks;\n\n"
+		+ "namespace NFrame\n{\n";
+
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, csWriter);
+	/////////////////////////////////////////////////////
+
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+
+		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static readonly String ThisName = \"" + strClassName + "\";\n";
+
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+		}
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, csWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* pClassRecord = itRecord->second;
+
+			std::cout << "save for cs ---> " << strClassName << "::" << strRecordName << std::endl;
+
+			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tpublic static readonly String ThisName = \"" + strRecordName + "\";\n";
+
+			//col
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tpublic static readonly int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
+			}
+			
+
+			strRecordInfo += "\n\t\t}\n";
+
+		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, csWriter);
+
+	}
+
+	std::string strFileEnd = "\n}";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, csWriter);
+
+	fclose(csWriter);
+
+	return false;
+}
+
+bool NFFileProcess::SaveForJAVA()
+{
+	FILE* javaWriter = fopen(strJavaFile.c_str(), "w");
+
+	std::string strFileHead
+		= "// -------------------------------------------------------------------------\n";
+	strFileHead = strFileHead
+		+ "//    @FileName         :    NFProtocolDefine.java\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n"
+		+ "package nframe;\n";
+
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, javaWriter);
+	/////////////////////////////////////////////////////
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+		// cpp
+		std::string strPropertyInfo;
+
+		strPropertyInfo += "\tpublic class " + strClassName + "\n\t{\n";
+		strPropertyInfo += "\t\t//Class name\n\t";
+		strPropertyInfo += "\tpublic static final String ThisName = \"" + strClassName + "\";\n";
+
+		if (strClassName != "IObject")
+		{
+			//add base class properties
+			strPropertyInfo += "\t\t// IObject\n";
+
+		}
+
+		strPropertyInfo += "\t\t// Property\n";
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* pClassProperty = itProperty->second;
+
+			strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
+			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+		}
+
+		fwrite(strPropertyInfo.c_str(), strPropertyInfo.length(), 1, javaWriter);
+
+		//record
+		std::string strRecordInfo = "";
+		strRecordInfo += "\t\t// Record\n";
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* pClassRecord = itRecord->second;
+
+			std::cout << "save for java ---> " << strClassName << "::" << strRecordName << std::endl;
+
+			strRecordInfo += "\t\tpublic class " + strRecordName + "\n\t\t{\n";
+			strRecordInfo += "\t\t\t//Class name\n\t";
+			strRecordInfo += "\t\tpublic static final String ThisName = \"" + strRecordName + "\";\n";
+
+			//col
+			for (int i = 0; i < pClassRecord->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itCol = pClassRecord->colList.begin();
+					itCol != pClassRecord->colList.end(); ++itCol)
+				{
+					const std::string& colTag = itCol->first;
+					NFClassRecord::RecordColDesc* pRecordColDesc = itCol->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strRecordInfo += "\t\t\tpublic static final int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+					}
+				}
+			}
+
+			strRecordInfo += "\n\t\t}\n";
+
+		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, javaWriter);
+
+		std::string strHppEnumInfo = "";
+
+
+		std::string strClassEnd;
+		strClassEnd += "\n\t}\n";
+
+		fwrite(strClassEnd.c_str(), strClassEnd.length(), 1, javaWriter);
+
+	}
+
+	fclose(javaWriter);
+
+	return false;
+}
+
+bool NFFileProcess::SaveForPB()
+{
+
+	return false;
+}
+
+bool NFFileProcess::SaveForSQL()
+{
+	return false;
+}
+
+bool NFFileProcess::SaveForStruct()
+{
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		std::cout << "save for struct ---> " << strClassName << std::endl;
+
+		std::string strFileName = strXMLStructPath + strClassName + ".xml";
+		FILE* structWriter = fopen(strFileName.c_str(), "w");
+
+		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+		fwrite(strFileHead.c_str(), strFileHead.length(), 1, structWriter);
+		/////////////////////////
+		std::string strFilePrpertyBegin = "\t<Propertys>\n";
+		fwrite(strFilePrpertyBegin.c_str(), strFilePrpertyBegin.length(), 1, structWriter);
+
+		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
+			itProperty != pClassDta->xStructData.xPropertyList.end(); ++itProperty)
+		{
+			const std::string& strPropertyName = itProperty->first;
+			NFClassProperty* xPropertyData = itProperty->second;
+
+			std::string strElementData = "\t\t<Property Id=\"" + strPropertyName + "\" ";
+			for (std::map<std::string, std::string>::iterator itDesc = xPropertyData->descList.begin();
+				itDesc != xPropertyData->descList.end(); ++itDesc)
+			{
+				const std::string& strKey = itDesc->first;
+				const std::string& strValue = itDesc->second;
+				strElementData += strKey + "=\"" + strValue + "\" ";
+			}
+			strElementData += "/>\n";
+			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
+		}
+
+		std::string strFilePropertyEnd = "\t</Propertys>\n";
+		fwrite(strFilePropertyEnd.c_str(), strFilePropertyEnd.length(), 1, structWriter);
+		//////////////////////////////
+
+		std::string strFileRecordBegin = "\t<Records>\n";
+		fwrite(strFileRecordBegin.c_str(), strFileRecordBegin.length(), 1, structWriter);
+
+		for (std::map<std::string, NFClassRecord*>::iterator itRecord = pClassDta->xStructData.xRecordList.begin();
+			itRecord != pClassDta->xStructData.xRecordList.end(); ++itRecord)
+		{
+			const std::string& strRecordName = itRecord->first;
+			NFClassRecord* xRecordData = itRecord->second;
+
+			//for desc
+			std::string strElementData = "\t\t<Record Id=\"" + strRecordName + "\" ";
+			for (std::map<std::string, std::string>::iterator itDesc = xRecordData->descList.begin();
+				itDesc != xRecordData->descList.end(); ++itDesc)
+			{
+				const std::string& strKey = itDesc->first;
+				const std::string& strValue = itDesc->second;
+				strElementData += strKey + "=\"" + strValue + "\"\t ";
+			}
+			strElementData += ">\n";
+
+			//for col list
+			for (int i = 0; i < xRecordData->colList.size(); ++i)
+			{
+				for (std::map<std::string, NFClassRecord::RecordColDesc*>::iterator itDesc = xRecordData->colList.begin();
+					itDesc != xRecordData->colList.end(); ++itDesc)
+				{
+					const std::string& strKey = itDesc->first;
+					const NFClassRecord::RecordColDesc* pRecordColDesc = itDesc->second;
+
+					if (pRecordColDesc->index == i)
+					{
+						strElementData += "\t\t\t<Col Type =\"" + pRecordColDesc->type + "\"\tTag=\"" + strKey + "\"/>";
+						if (!pRecordColDesc->desc.empty())
+						{
+							strElementData += "<!--- " + pRecordColDesc->desc + "-->\n";
+						}
+						else
+						{
+							strElementData += "\n";
+						}
+					}
+				}
+
+			}
+			
+			strElementData += "\t\t</Record>\n";
+			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
+		}
+
+		std::string strFilePrpertyEnd = "\t</Records>\n";
+		fwrite(strFilePrpertyEnd.c_str(), strFilePrpertyEnd.length(), 1, structWriter);
+
+		/////////////////////////////////
+		std::string strFileEnd = "</XML>";
+		fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, structWriter);
+
+	}
+
+	return false;
+}
+
+bool NFFileProcess::SaveForIni()
+{
+	ClassData* pBaseObject = mxClassData["IObject"];
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		std::cout << "save for ini ---> " << strClassName << std::endl;
+
+		std::string strFileName = strXMLIniPath + strClassName + ".xml";
+		FILE* iniWriter = fopen(strFileName.c_str(), "w");
+
+		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+		fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
+
+		for (std::map<std::string, NFClassElement::ElementData*>::iterator itElement = pClassDta->xIniData.xElementList.begin();
+			itElement != pClassDta->xIniData.xElementList.end(); ++itElement)
+		{
+
+			const std::string& strElementName = itElement->first;
+			NFClassElement::ElementData* pIniData = itElement->second;
+
+			std::string strElementData = "\t<Object Id=\"" + strElementName + "\" ";
+			for (std::map<std::string, std::string>::iterator itProperty = pIniData->xPropertyList.begin();
+				itProperty != pIniData->xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strKey = itProperty->first;
+				const std::string& strValue = itProperty->second;
+				strElementData += strKey + "=\"" + strValue + "\" ";
+			}
+			strElementData += "/>\n";
+			fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+		}
+
+		std::string strFileEnd = "</XML>";
+		fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
+
+	}
+
+	return false;
+}
+
+bool NFFileProcess::SaveForLogicClass()
+{
+	std::string strFileName = strXMLStructPath + "LogicClass.xml";
+
+	FILE* iniWriter = fopen(strFileName.c_str(), "w");
+
+	std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+
+	std::string strElementData;
+	strElementData += "\t<Class Id=\"" + pBaseObject->xStructData.strClassName + "\"\t";
+	strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.strClassName + ".xml\"\t";
+	strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.strClassName + ".xml\"\t>\n";
+
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.strClassName + "\"\t";
+		strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
+		strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.strClassName + ".xml\"\t/>\n";
+
+	}
+
+	strElementData += "\t</Class>\n";
+	fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+	std::string strFileEnd = "</XML>";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
+
+	return false;
+}
+
 
 void NFFileProcess::SetUTF8(const bool b)
 {
 	bConvertIntoUTF8 = b;
-}
-
-bool NFFileProcess::LoadLogicClass(std::string strFile)
-{
-	////////////////////////////////////////////////////
-	rapidxml::xml_document<> doc;
-	char* pData = NULL;
-	size_t nDataSize = 0;
-
-	rapidxml::file<> fdoc(strFile.c_str());
-	nDataSize = fdoc.size();
-	pData = new char[nDataSize + 1];
-	strncpy(pData, fdoc.data(), nDataSize);
-
-	pData[nDataSize] = 0;
-	doc.parse<0>(pData);
-
-	rapidxml::xml_node<>* root = doc.first_node();
-	auto classElement = root->first_node("Class");
-	std::string strIObjectPath = classElement->first_attribute("Path")->value();
-	auto nodeElement = classElement->first_node();
-	if (nodeElement)
-	{
-		while (true)
-		{
-			std::string strID = nodeElement->first_attribute("Id")->value();
-			std::string sqlToWrite = "CREATE TABLE `" + strID + "` (\n";
-			sqlToWrite += "\t`ID` varchar(128) NOT NULL,\n";
-			sqlToWrite += "\tPRIMARY KEY (`ID`)\n";
-			sqlToWrite += ") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n";
-			fwrite(sqlToWrite.c_str(), sqlToWrite.length(), 1, mysqlClassWriter);
-
-
-			if (!LoadClass(strRelativePath + strIObjectPath, strID))
-			{
-				return false;
-			}
-
-
-			std::string strPath = nodeElement->first_attribute("Path")->value();
-			if (!LoadClass(strRelativePath + strPath, strID))
-			{
-				return false;
-			}
-
-			fwrite("\n", 1, 1, mysqlClassWriter);
-			if (nodeElement == classElement->last_node())
-			{
-				break;
-			}
-			nodeElement = nodeElement->next_sibling();
-		}
-	}
-	if (NULL != pData)
-	{
-		delete[] pData;
-	}
-
-	return true;
-}
-
-bool NFFileProcess::LoadClass(std::string strFile, std::string strTable)
-{
-	rapidxml::xml_document<> doc;
-	char* pData = NULL;
-	size_t nDataSize = 0;
-
-	rapidxml::file<> fdoc(strFile.c_str());
-	nDataSize = fdoc.size();
-	pData = new char[nDataSize + 1];
-	strncpy(pData, fdoc.data(), nDataSize);
-
-	pData[nDataSize] = 0;
-	doc.parse<0>(pData);
-
-	rapidxml::xml_node<>* root = doc.first_node("XML");
-	auto classElement = root->first_node("Propertys");
-	if (classElement)
-	{
-		auto nodeElement = classElement->first_node("Property");
-		if (nodeElement)
-		{
-			while (true)
-			{
-				if (!nodeElement || (std::string)(nodeElement->first_attribute("Save")->value()) != "1")
-				{
-					if (!nodeElement)
-					{
-						break;
-					}
-					nodeElement = nodeElement->next_sibling();
-					continue;
-				}
-
-				std::string strID = nodeElement->first_attribute("Id")->value();
-
-				auto chrDesc = nodeElement->first_attribute("Desc")->value();
-				std::string strDesc = chrDesc;
-				auto descLength = strlen(chrDesc);
-				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
-				{
-					if (descLength > 0)
-					{
-						char* chrArrDesc = new char[descLength];
-						Utf8ToGbk((char*)chrDesc, chrArrDesc);
-						strDesc = chrArrDesc;
-						delete[] chrArrDesc;
-					}
-				}
-				//////////////////////////////////////////////////////////////////////////
-				std::string strType = nodeElement->first_attribute("Type")->value();
-
-				std::string toWrite = "";
-				if (strType == "string")
-				{
-					toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` varchar(128) DEFAULT '' COMMENT '" + strDesc + "';";
-				}
-				else if (strType == "int")
-				{
-					toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` bigint(11) DEFAULT '0' COMMENT '" + strDesc + "';";
-				}
-				else if (strType == "object")
-				{
-					toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` varchar(128) DEFAULT '' COMMENT '" + strDesc + "';";
-				}
-				else if (strType == "float")
-				{
-					toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` float(11,3) DEFAULT '0' COMMENT '" + strDesc + "';";
-				}
-				else
-				{
-					toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` varchar(128) DEFAULT '' COMMENT '" + strDesc + "';";
-				}
-				toWrite += "\n";
-				fwrite(toWrite.c_str(), toWrite.length(), 1, mysqlWriter);
-
-				if (!nodeElement)
-				{
-					break;
-				}
-				nodeElement = nodeElement->next_sibling();
-			}
-		}
-	}
-
-
-	auto xRecordsNode = root->first_node("Records");
-	if (xRecordsNode)
-	{
-		auto nodeElement = xRecordsNode->first_node("Record");
-		if (nodeElement)
-		{
-			while (true)
-			{
-				if (!nodeElement || (std::string)(nodeElement->first_attribute("Save")->value()) != "1")
-				{
-					if (!nodeElement)
-					{
-						break;
-					}
-					nodeElement = nodeElement->next_sibling();
-					continue;
-				}
-
-				std::string strID = nodeElement->first_attribute("Id")->value();
-
-				auto chrDesc = nodeElement->first_attribute("Desc")->value();
-				std::string strDesc = chrDesc;
-				auto descLength = strlen(chrDesc);
-				if (bConvertIntoUTF8 && IsTextUTF8(chrDesc, descLength))
-				{
-					if (descLength > 0)
-					{
-						char* chrArrDesc = new char[descLength];
-						Utf8ToGbk((char*)chrDesc, chrArrDesc);
-						strDesc = chrArrDesc;
-						delete[] chrArrDesc;
-					}
-				}
-
-				std::string toWrite = "ALTER TABLE `" + strTable + "` ADD `" + strID + "` BLOB COMMENT '" + strDesc + "';";
-				toWrite += "\n";
-				fwrite(toWrite.c_str(), toWrite.length(), 1, mysqlWriter);
-
-				if (nodeElement == classElement->last_node())
-				{
-					break;
-				}
-				nodeElement = nodeElement->next_sibling();
-			}
-		}
-
-	}
-	if (NULL != pData)
-	{
-		delete[]pData;
-	}
-	return true;
-}
-
-char * NFFileProcess::NewChar(const std::string& str)
-{
-	char * newChar = new char[str.size()+1];
-	strncpy(newChar, str.c_str(), str.size());
-	newChar[str.size()] = 0;
-	tmpStrList.push_back(newChar);
-	return newChar;
 }
 
 std::vector<std::string> NFFileProcess::GetFileListInFolder(std::string folderPath, int depth)

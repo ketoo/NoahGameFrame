@@ -1,11 +1,6 @@
 #pragma once
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include "Dependencies/RapidXML/rapidxml.hpp"
-#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
-#include "Dependencies/RapidXML/rapidxml_print.hpp"
-#include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "Dependencies/common/lexical_cast.hpp"
-//#include "tinyxml2.h"
 #include "MiniExcelReader.h"
 #include <algorithm>
 #include <fstream>
@@ -18,6 +13,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <list>
 
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
@@ -32,85 +28,124 @@
 #include <sys/stat.h>
 #endif
 
+class NFClassProperty
+{
+public:
+	NFClassProperty()
+	{
+	}
+
+	std::map<std::string, std::string> descList;//tag, value
+	std::string name;
+	std::string type;
+};
+
+class NFClassRecord
+{
+public:
+	NFClassRecord()
+	{
+	}
+
+	struct RecordColDesc
+	{
+		int index;
+		std::string type;
+		std::string desc;
+	};
+	
+	std::string strClassName;
+	std::map<std::string, std::string> descList;//tag, value
+	std::map<std::string, RecordColDesc*> colList;//tag, desc
+};
+
 class NFClassStruct
 {
 public:
 	NFClassStruct()
 	{
-		//xObject = NF_SHARE_PTR<NFIObject>(new NFCObject(NFGUID(), nullptr));
+	}
+	std::string strClassName;
+	std::map<std::string, NFClassProperty*> xPropertyList;//key, desc
+	std::map<std::string, NFClassRecord*> xRecordList;//name, desc
+};
+
+class NFClassElement
+{
+public:
+	NFClassElement()
+	{
 	}
 
-	std::string strPath;
-	FILE* xWriter;
-	//NF_SHARE_PTR<NFIObject> xObject;
+	class ElementData
+	{
+	public:
+		std::map<std::string, std::string> xPropertyList;
+	};
+
+	std::map<std::string, ElementData*> xElementList;//key, iniList
+};
+
+class ClassData
+{
+public:
+	NFClassStruct xStructData;
+	NFClassElement xIniData;
 };
 
 class NFFileProcess
 {
 public:
 	NFFileProcess();
-	~NFFileProcess();
+	virtual ~NFFileProcess();
 
-	void OnCreateXMLFile();
-	void OnCreateMysqlFile();
+	bool LoadDataFromExcel();
+	bool Save();
+
 	void SetUTF8(const bool b);
 
 private:
-	void CreateProtoFile();
-	void CreateFileHead();
-	void CreateStructThreadFunc();
-	void CreateIniThreadFunc();
-	bool CreateStructXML(std::string strFile, std::string strFileName);
-	bool CreateIniXML(std::string strFile);
-	bool LoadLogicClass(std::string strFile);
-	bool LoadClass(std::string strFile, std::string strTable);
+	bool LoadDataFromExcel(const std::string& strFile, const std::string& strFileName);
+	bool LoadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+
+	bool LoadIniData(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessComponent(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+	bool LoadDataAndProcessRecord(MiniExcelReader::Sheet& sheet, ClassData* pClassData);
+
+	bool SaveForCPP();
+	bool SaveForCS();
+	bool SaveForJAVA();
+	bool SaveForPB();
+	bool SaveForSQL();
+
+	bool SaveForStruct();
+	bool SaveForIni();
+
+	bool SaveForLogicClass();
+
 
 	std::vector<std::string> GetFileListInFolder(std::string folderPath, int depth);
 	void StringReplace(std::string &strBig, const std::string &strsrc, const std::string &strdst);
-	char * NewChar(const std::string& str);
 
 private:
 
-	//NFMapEx<std::string, NFClassStruct> mxClassStruct;
-
 	bool bConvertIntoUTF8 = false;
 
-	int nCipher = 0;
-	std::vector<char *> tmpStrList;
-	std::string strCipherCfg = "conf";
+	const int nPropertyHeight = 10;//property line
+	const int nRecordHeight = 11;//record line
+	const int nRecordDescHeight = 7;//record line
 
-	std::string strExecutePath = "NFDataCfg/";
-	std::string strToolBasePath = "../";
-	std::string strRelativePath = "../../";
-	std::string strExcelStructPath = "Excel_Struct/";
-	std::string strXMLStructPath = "Struct/Class/";
+	std::string strExcelIniPath = "../Excel/";
+	std::string strXMLStructPath = "../Struct/";
+	std::string strXMLIniPath = "../Ini/";
 
-	std::string strExcelIniPath = "Excel_Ini/";
-	std::string strXMLIniPath = "Ini/NPC/";
-
-	std::string strLogicClassFile = "";
 	std::string strMySQLFile = "../mysql/NFrame.sql";
-	std::string strMySQLClassFile = "../mysql/NFClass.sql";
-
 	std::string strProtoFile = "../proto/NFRecordDefine.proto";
-
 	std::string strHPPFile = "../proto/NFProtocolDefine.hpp";
+	std::string strCPPFile = "../proto/NFProtocolDefine.cpp";
 	std::string strJavaFile = "../proto/NFProtocolDefine.java";
 	std::string strCSFile = "../proto/NFProtocolDefine.cs";
 
-
-	FILE* mysqlWriter = nullptr;
-	FILE* mysqlClassWriter = nullptr;
-	FILE* protoWriter = nullptr;
-	FILE* hppWriter = nullptr;
-	FILE* javaWriter = nullptr;
-	FILE* csWriter = nullptr;
-
-	std::string strHppIObjectInfo;
-	std::string strJavaIObjectInfo;
-	std::string strCSIObjectInfo;
-
-	int nRecordStart = 11;
-
-
+	std::map<std::string, ClassData*> mxClassData;
 };

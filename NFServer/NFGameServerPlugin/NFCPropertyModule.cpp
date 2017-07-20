@@ -40,7 +40,7 @@ int NFCPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& s
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
-        return m_pKernelModule->GetRecordInt(self, NFrame::Player::R_CommPropertyValue(), eGroupType, strPropertyName);
+        return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
     }
 
     return m_pKernelModule->GetPropertyInt(self, strPropertyName);
@@ -53,7 +53,7 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject)
         {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -78,7 +78,7 @@ int NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& s
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject)
         {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -99,7 +99,7 @@ int NFCPropertyModule::SubPropertyValue(const NFGUID& self, const std::string& s
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject)
         {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
@@ -132,7 +132,7 @@ int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EV
     const int nCol = xEventData.nCol;
 
     int nAllValue = 0;
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     for (int i = 0; i < (int)(NFPropertyGroup::NPG_ALL); i++)
     {
         if (i < pRecord->GetRows())
@@ -153,7 +153,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
         {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
             if (pRecord)
             {
                 for (int i = 0; i < NFPropertyGroup::NPG_ALL; i++)
@@ -165,7 +165,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
             m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCPropertyModule::OnObjectLevelEvent);
 
             
-            m_pKernelModule->AddRecordCallBack(self, NFrame::Player::R_CommPropertyValue(), this, &NFCPropertyModule::OnRecordPropertyEvent);
+            m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFCPropertyModule::OnRecordPropertyEvent);
 
 
         }
@@ -191,7 +191,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
 
 int NFCPropertyModule::RefreshBaseProperty(const NFGUID& self)
 {
-    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+    NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
     if (!pRecord)
     {
         return 1;

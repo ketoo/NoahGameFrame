@@ -58,7 +58,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 		return NULL_OBJECT;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagEquipList() );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagEquipList::ThisName() );
 	if (!pRecord)
 	{
 		return NULL_OBJECT;
@@ -68,15 +68,15 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 
 	NF_SHARE_PTR<NFDataList> var = pRecord->GetInitData();
 
-	var->SetObject(NFrame::Player::BagEquipList_GUID, ident);
-	var->SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
-	var->SetInt(NFrame::Player::BagEquipList_Date, pPluginManager->GetNowTime());
+	var->SetObject(NFrame::Player::BagEquipList::GUID, ident);
+	var->SetString(NFrame::Player::BagEquipList::ConfigID, strConfigName.c_str());
+	var->SetInt(NFrame::Player::BagEquipList::Date, pPluginManager->GetNowTime());
 
 
 	int nAddRow = pRecord->AddRow(-1, *var);
 	if (nAddRow > 0)
 	{
-		return pRecord->GetObject(nAddRow, NFrame::Player::BagEquipList_GUID);
+		return pRecord->GetObject(nAddRow, NFrame::Player::BagEquipList::GUID);
 	}
 
 	return NULL_OBJECT;
@@ -102,30 +102,30 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		return 0;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
 	if (!pRecord)
 	{
 		return 0;
 	}
 
 	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strConfigName, varFindResult);
+	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList::ConfigID, strConfigName, varFindResult);
 	if (nFindRowCount <= 0)
 	{
 		NF_SHARE_PTR<NFDataList> xRowData = pRecord->GetInitData();
 
-		xRowData->SetString(NFrame::Player::BagItemList_ConfigID, strConfigName);
-		xRowData->SetInt(NFrame::Player::BagItemList_ItemCount, nCount);
-		xRowData->SetInt(NFrame::Player::BagItemList_Date, pPluginManager->GetNowTime());
+		xRowData->SetString(NFrame::Player::BagItemList::ConfigID, strConfigName);
+		xRowData->SetInt(NFrame::Player::BagItemList::ItemCount, nCount);
+		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
 
 		pRecord->AddRow(-1, *xRowData);
 	}
 	else
 	{
 		int nFindRow = varFindResult.Int(0);
-		int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList_ItemCount);
+		int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
 		int nNewCount = nOldCount + nCount;
-		pRecord->SetInt(nFindRow, NFrame::Player::BagItemList_ItemCount, nNewCount);
+		pRecord->SetInt(nFindRow, NFrame::Player::BagItemList::ItemCount, nNewCount);
 	}
 
 	return 0;
@@ -146,14 +146,14 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	}
 
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagEquipList() );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagEquipList::ThisName() );
 	if (nullptr == pRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagEquipList_GUID, id, varFindResult);
+	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagEquipList::GUID, id, varFindResult);
 	if (nFindRowCount > 0)
 	{
 		int nTotalCount = 0;
@@ -186,25 +186,25 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
+	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
 	if (!pRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varFindResult);
+	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList::ConfigID, strItemConfigID, varFindResult);
 	if (nFindRowCount > 0)
 	{
 		int nNeedDelCount = nCount;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
 			int nFindRow = varFindResult.Int(i);
-			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList_ItemCount);
+			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
 			if (nOldCount > nNeedDelCount)
 			{
 				int nNewCount = nOldCount - nNeedDelCount;
-				pRecord->SetInt(nFindRow, NFrame::Player::BagItemList_ItemCount, nNewCount);
+				pRecord->SetInt(nFindRow, NFrame::Player::BagItemList::ItemCount, nNewCount);
 				nNeedDelCount = 0;
 			}
 			else if (nOldCount == nNeedDelCount)
@@ -250,21 +250,21 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
         return false;
     }
 
-    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::R_BagItemList() );
+    NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
     if (!pRecord)
     {
         return false;
     }
 
 	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varFindResult);
+	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList::ConfigID, strItemConfigID, varFindResult);
 	if (nFindRowCount > 0)
 	{
 		int nTotalCount = 0;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
 			int nFindRow = varFindResult.Int(i);
-			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList_ItemCount);
+			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
 			nTotalCount += nOldCount;
 		}
 
