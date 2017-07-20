@@ -34,7 +34,7 @@ bool NFCSceneProcessModule::Execute()
 
 bool NFCSceneProcessModule::AfterInit()
 {
-    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCSceneProcessModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCSceneProcessModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCSceneProcessModule::EnterSceneConditionEvent);
 
@@ -44,7 +44,7 @@ bool NFCSceneProcessModule::AfterInit()
 	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCSceneProcessModule::AfterLeaveSceneGroupEvent);
     //////////////////////////////////////////////////////////////////////////
 
-    NF_SHARE_PTR<NFIClass> xLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName);
+    NF_SHARE_PTR<NFIClass> xLogicClass =  m_pClassModule->GetElement(NFrame::Scene::ThisName());
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -129,12 +129,12 @@ int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const 
 
 int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-    if (strClassName == NFrame::Player::ThisName)
+    if (strClassName == NFrame::Player::ThisName())
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
-			int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID);
-			int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID);
+			int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+			int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
             if (GetCloneSceneType(nSceneID) == SCENE_TYPE_SINGLE_CLONE_SCENE)
             {

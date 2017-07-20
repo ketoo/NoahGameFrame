@@ -661,10 +661,10 @@ package nframe;
 			public static final int BUFF_GATE = 28;//int
 
 		}
-		public class HeroPropertyValue
+		public class HeroValue
 		{
 			//Class name
-			public static final String ThisName = "HeroPropertyValue";
+			public static final String ThisName = "HeroValue";
 			public static final int SUCKBLOOD = 0;//int
 			public static final int REFLECTDAMAGE = 1;//int
 			public static final int CRITICAL = 2;//int

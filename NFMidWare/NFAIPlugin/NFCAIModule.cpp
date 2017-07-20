@@ -199,8 +199,8 @@ int NFCAIModule::OnAIObjectEvent(const NFGUID& self, const std::string& strClass
 
 bool NFCAIModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName, this, &NFCAIModule::OnAIObjectEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName, this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCAIModule::OnAIObjectEvent);
     return true;
 }
 

@@ -37,7 +37,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -113,7 +113,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -153,7 +153,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -193,7 +193,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -262,7 +262,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -314,9 +314,9 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 		nDefValue *= dwCoefficientDef;
 	}
 
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_MAXHP, nMAXHPValue);
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_VALUE, nAttackValue);
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_DEF_VALUE, nDefValue);
+	xDataList.SetInt(NFrame::Player::CommValue::MAXHP, nMAXHPValue);
+	xDataList.SetInt(NFrame::Player::CommValue::ATK_VALUE, nAttackValue);
+	xDataList.SetInt(NFrame::Player::CommValue::DEF_VALUE, nDefValue);
 
 	return true;
 }
@@ -329,7 +329,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
@@ -376,19 +376,19 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 
 	if (nItemSubType == NFMsg::EGameEquipSubType::EQUIPTYPE_WEAPON)
 	{
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nWindValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nFireValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nLightValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nIceValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nPoisonValue * dwCoefficientAtk);
 	}
 	else
 	{
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nWindValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nFireValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nLightValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nIceValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nPoisonValue * dwCoefficientDef);
 	}
 
 

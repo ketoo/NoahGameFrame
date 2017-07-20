@@ -37,7 +37,7 @@ bool NFCTaskModule::AfterInit()
 {
 
 	
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCTaskModule::OnClassObjectEvent );
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTaskModule::OnClassObjectEvent );
 	
 	CheckConfig();
 

@@ -41,7 +41,7 @@ bool NFCItemTokenConsumeProcessModule::Execute()
 
 int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::R_BuildingList());
+	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 	if (nullptr == pBuild)
 	{
 		return  1;
@@ -54,7 +54,7 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 	}
 
 	NFDataList varList;
-	if (pBuild->FindString(NFrame::Player::BuildingList::BuildingList_BuildingID, strBuildingCnfID, varList) <= 0)
+	if (pBuild->FindString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID, varList) <= 0)
 	{
 		return 0;
 	}
@@ -64,7 +64,7 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 
 int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::R_BuildingList());
+	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 	if (nullptr == pBuild)
 	{
 		return  1;
@@ -79,9 +79,9 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 
 
 	NF_SHARE_PTR<NFDataList> xDataList = pBuild->GetInitData();
-	xDataList->SetString(NFrame::Player::BuildingList::BuildingList_BuildingID, strBuildingCnfID);
-	xDataList->SetObject(NFrame::Player::BuildingList::BuildingList_BuildingGUID, xID);
-	xDataList->SetVector3(NFrame::Player::BuildingList::BuildingList_Pos, vPos);
+	xDataList->SetString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID);
+	xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
+	xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
 
 	pBuild->AddRow(-1, *xDataList);
 

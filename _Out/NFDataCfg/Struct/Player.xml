@@ -156,7 +156,7 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		<Record/>
-		<Record Id="HeroPropertyValue" Cache="FALSE"	 Col="29"	 Private="TRUE"	 Public="TRUE"	 Row="15"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="HeroValue" Cache="FALSE"	 Col="29"	 Private="TRUE"	 Public="TRUE"	 Row="15"	 Save="FALSE"	 Upload="FALSE"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>

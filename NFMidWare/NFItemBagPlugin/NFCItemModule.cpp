@@ -39,7 +39,7 @@ bool NFCItemModule::Execute()
 bool NFCItemModule::AfterInit()
 {
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCItemModule::OnClassObjectEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent);
 	CheckConfig();
 
 	//////////////////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@ int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDef
 
 bool NFCItemModule::CheckConfig()
 {
-	NF_SHARE_PTR<NFIClass> pLogicCLass = m_pLogicClassModule->GetElement(NFrame::Item::ThisName);
+	NF_SHARE_PTR<NFIClass> pLogicCLass = m_pLogicClassModule->GetElement(NFrame::Item::ThisName());
 	if (nullptr == pLogicCLass)
 	{
 		assert(0);
