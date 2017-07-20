@@ -14,6 +14,7 @@
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCGuildModule
@@ -34,9 +35,9 @@ public:
 	virtual const NFGUID& CreateGuild( const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
 	virtual bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
 	virtual bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool UpGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
-	virtual bool DownGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
-	virtual bool KickGuildMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
+	virtual bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+	virtual bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+	virtual bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
 
     virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList);
     virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
@@ -47,6 +48,11 @@ public:
 	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
 
 protected:
+	void OnGuildOnlineProcess(const NFGUID& xGuildID);
+	void OnGuildOfflineProcess(const NFGUID& xGuildID);
+
+protected:
+
 	void OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -57,10 +63,12 @@ protected:
     bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
 
 protected:
-    NFIKernelModule* m_pKernelModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
+	NFIKernelModule* m_pKernelModule;
+	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+
 };
 
 #endif
