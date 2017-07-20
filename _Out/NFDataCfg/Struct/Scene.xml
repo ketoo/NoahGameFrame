@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ActorID" Cache="FALSE" Desc="acctorid" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="CamOffestPos" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="CamOffestRot" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="CanClone" Cache="FALSE" Desc="是否副本" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="FilePath" Cache="FALSE" Desc="文件路径" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="LoadingUI" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="MaxGroup" Cache="FALSE" Desc="最大组" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MaxGroupPlayers" Cache="FALSE" Desc="每组最大人数" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="NavigationResPath" Cache="FALSE" Desc="导航数据路径" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="RelivePos" Cache="FALSE" Desc="复活坐标列表" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="SceneName" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="SceneShowName" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="Share" Cache="FALSE" Desc="多人实时副本" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SoundList" Cache="FALSE" Desc="场景背景音乐列表" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="SyncObject" Cache="FALSE" Desc="是否同步对象" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Tile" Cache="FALSE" Desc="Tile" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Width" Cache="FALSE" Desc="场景宽度" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ActorID" Cache="0" Desc="acctorid" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="CamOffestPos" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="CamOffestRot" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="CanClone" Cache="0" Desc="是否副本" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FilePath" Cache="0" Desc="文件路径" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="LoadingUI" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="MaxGroup" Cache="0" Desc="最大组" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MaxGroupPlayers" Cache="0" Desc="每组最大人数" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NavigationResPath" Cache="0" Desc="导航数据路径" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="RelivePos" Cache="0" Desc="复活坐标列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SceneName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SceneShowName" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Share" Cache="0" Desc="多人实时副本" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SoundList" Cache="0" Desc="场景背景音乐列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SyncObject" Cache="0" Desc="是否同步对象" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Tile" Cache="0" Desc="Tile" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Width" Cache="0" Desc="场景宽度" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>

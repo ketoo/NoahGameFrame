@@ -1,83 +1,83 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ATK_FIRE" Cache="FALSE" Desc="火" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_ICE" Cache="FALSE" Desc="冰" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_LIGHT" Cache="FALSE" Desc="雷电" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_POISON" Cache="FALSE" Desc="毒" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_PVP" Cache="TRUE" Desc="PVP攻击力" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_SPEED" Cache="FALSE" Desc="攻击速度默认10000" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_VALUE" Cache="FALSE" Desc="物理攻击力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ATK_WIND" Cache="FALSE" Desc="土" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Account" Cache="TRUE" Desc="玩家的帐号" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="BUFF_GATE" Cache="FALSE" Desc="BUFF免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="CRITICAL" Cache="FALSE" Desc="暴击" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Camp" Cache="TRUE" Desc="阵营" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ConnectKey" Cache="TRUE" Desc="玩家连接服务器的KEY" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="DEF_FIRE" Cache="FALSE" Desc="火抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_ICE" Cache="FALSE" Desc="冰抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_LIGHT" Cache="FALSE" Desc="雷电抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_POISON" Cache="FALSE" Desc="毒抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_PVP" Cache="TRUE" Desc="PVP防御力" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_VALUE" Cache="FALSE" Desc="物理防御力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DEF_WIND" Cache="FALSE" Desc="土抗" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DIZZY_GATE" Cache="FALSE" Desc="眩晕开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="EXP" Cache="TRUE" Desc="经验获得,如果是怪物，则是掉落经验" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="FightHero" Cache="TRUE" Desc="Hero" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="FightOppnent" Cache="FALSE" Desc="pvp_oppnent" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="FirstTarget" Cache="TRUE" Desc="首要目标" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="GMLevel" Cache="TRUE" Desc="GM等级" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GambleDiamond" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GambleGold" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GameID" Cache="TRUE" Desc="登陆的服ID" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GateID" Cache="TRUE" Desc="登陆的网关ID" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Gold" Cache="TRUE" Desc="玩家游戏金币" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GuildID" Cache="TRUE" Desc="公会ID" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="HP" Cache="TRUE" Desc="生命值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="HPREGEN" Cache="FALSE" Desc="生命值回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="HeroPos1" Cache="TRUE" Desc="Hero1" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="HeroPos2" Cache="TRUE" Desc="Hero2" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="HeroPos3" Cache="TRUE" Desc="Hero3" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="HomeSceneID" Cache="TRUE" Desc="玩家下线的时候需要保存上次在线的场景" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Job" Cache="TRUE" Desc="职业" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="LastOfflineTime" Cache="TRUE" Desc="上次下线时间" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="Level" Cache="TRUE" Desc="等级" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAGIC_GATE" Cache="FALSE" Desc="魔法免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXEXP" Cache="TRUE" Desc="升级需要的经验" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXHP" Cache="FALSE" Desc="生命值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXMP" Cache="FALSE" Desc="法力值" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MAXSP" Cache="FALSE" Desc="体力" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MOVE_GATE" Cache="FALSE" Desc="移动开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MOVE_SPEED" Cache="FALSE" Desc="移动速度,默认单位是10000=1米" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MP" Cache="TRUE" Desc="法力值" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MPREGEN" Cache="FALSE" Desc="MP回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Money" Cache="TRUE" Desc="钻石" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Name" Cache="TRUE" Desc="角色名" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="OnlineCount" Cache="TRUE" Desc="上线次数" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="OnlineTime" Cache="TRUE" Desc="本次上线时间" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="PHYSICAL_GATE" Cache="FALSE" Desc="物理免疫开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="PrefabPath" Cache="TRUE" Desc="预设路径" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="REFLECTDAMAGE" Cache="FALSE" Desc="反伤" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="RELIVE_SOUL" Cache="TRUE" Desc="转生次数" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Race" Cache="TRUE" Desc="种族" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SKILL_GATE" Cache="FALSE" Desc="技能开关" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SP" Cache="TRUE" Desc="体力" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SPREGEN" Cache="FALSE" Desc="体力回复" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="SUCKBLOOD" Cache="FALSE" Desc="吸血" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="Sex" Cache="TRUE" Desc="性别" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ShowName" Cache="TRUE" Desc="显示的名字" Force="FALSE" Private="TRUE" Public="TRUE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="Skill1" Cache="TRUE" Desc="Hero1" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="Skill2" Cache="TRUE" Desc="Hero2" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="Skill3" Cache="TRUE" Desc="Hero3" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="string" Upload="FALSE" />
-		<Property Id="TeamID" Cache="TRUE" Desc="所在队伍ID" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="TotalLineTime" Cache="TRUE" Desc="今日在线时长{截至至本次上线时间}" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
-		<Property Id="TotalTime" Cache="TRUE" Desc="在线时间" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="VIPEXP" Cache="TRUE" Desc="VIP经验" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="VIPLevel" Cache="TRUE" Desc="经验获得,如果是怪物，则是掉落经验" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ViewOppnent" Cache="FALSE" Desc="when searching" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="object" Upload="FALSE" />
+		<Property Id="ATK_FIRE" Cache="0" Desc="火" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_ICE" Cache="0" Desc="冰" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_LIGHT" Cache="0" Desc="雷电" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_POISON" Cache="0" Desc="毒" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_PVP" Cache="1" Desc="PVP攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_SPEED" Cache="0" Desc="攻击速度默认10000" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_VALUE" Cache="0" Desc="物理攻击力" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_WIND" Cache="0" Desc="土" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="BUFF_GATE" Cache="0" Desc="BUFF免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="CRITICAL" Cache="0" Desc="暴击" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="DEF_FIRE" Cache="0" Desc="火抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_ICE" Cache="0" Desc="冰抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_LIGHT" Cache="0" Desc="雷电抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_POISON" Cache="0" Desc="毒抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_PVP" Cache="1" Desc="PVP防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_WIND" Cache="0" Desc="土抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="FightHero" Cache="1" Desc="Hero" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FightOppnent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FirstTarget" Cache="1" Desc="首要目标" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GambleDiamond" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GambleGold" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GameID" Cache="1" Desc="登陆的服ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GateID" Cache="1" Desc="登陆的网关ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Gold" Cache="1" Desc="玩家游戏金币" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GuildID" Cache="1" Desc="公会ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="HP" Cache="1" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="HeroPos1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="HeroPos2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="HeroPos3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="HomeSceneID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAGIC_GATE" Cache="0" Desc="魔法免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXEXP" Cache="1" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXHP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXMP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXSP" Cache="0" Desc="体力" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_GATE" Cache="0" Desc="移动开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MOVE_SPEED" Cache="0" Desc="移动速度,默认单位是10000=1米" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MP" Cache="1" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Money" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Name" Cache="1" Desc="角色名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="PrefabPath" Cache="1" Desc="预设路径" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="RELIVE_SOUL" Cache="1" Desc="转生次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Race" Cache="1" Desc="种族" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SKILL_GATE" Cache="0" Desc="技能开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SP" Cache="1" Desc="体力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SPREGEN" Cache="0" Desc="体力回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SUCKBLOOD" Cache="0" Desc="吸血" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Sex" Cache="1" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ShowName" Cache="1" Desc="显示的名字" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="TeamID" Cache="1" Desc="所在队伍ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="TotalLineTime" Cache="1" Desc="今日在线时长{截至至本次上线时间}" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="VIPEXP" Cache="1" Desc="VIP经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="VIPLevel" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ViewOppnent" Cache="0" Desc="when searching" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="BagEquipList" Cache="TRUE"	 Col="23"	 Private="TRUE"	 Public="FALSE"	 Row="256"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="BagEquipList" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="256"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="object"	Tag="WearGUID"/><!--- 普通背包-->
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -102,14 +102,14 @@
 			<Col Type ="int"	Tag="ElementLevel4_ICE"/>
 			<Col Type ="int"	Tag="ElementLevel5_POISON"/>
 		<Record/>
-		<Record Id="BagItemList" Cache="TRUE"	 Col="5"	 Private="TRUE"	 Public="FALSE"	 Row="128"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="BagItemList" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
 			<Col Type ="int"	Tag="Bound"/>
 			<Col Type ="int"	Tag="ExpiredType"/>
 			<Col Type ="int"	Tag="Date"/>
 		<Record/>
-		<Record Id="BuildingList" Cache="TRUE"	 Col="6"	 Private="TRUE"	 Public="FALSE"	 Row="128"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="BuildingList" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
@@ -117,7 +117,7 @@
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		<Record/>
-		<Record Id="BuildingListProduce" Cache="TRUE"	 Col="6"	 Private="TRUE"	 Public="FALSE"	 Row="128"	 Save="TRUE"	 Upload="FALSE"	 >
+		<Record Id="BuildingListProduce" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="1"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
@@ -125,7 +125,7 @@
 			<Col Type ="float"	Tag="PosY"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		<Record/>
-		<Record Id="CommValue" Cache="FALSE"	 Col="29"	 Private="TRUE"	 Public="TRUE"	 Row="15"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="CommValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -156,7 +156,7 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		<Record/>
-		<Record Id="HeroValue" Cache="FALSE"	 Col="29"	 Private="TRUE"	 Public="TRUE"	 Row="15"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="HeroValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -187,7 +187,7 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		<Record/>
-		<Record Id="PlayerHero" Cache="TRUE"	 Col="23"	 Private="TRUE"	 Public="FALSE"	 Row="64"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="PlayerHero" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="Activated"/>
@@ -212,12 +212,12 @@
 			<Col Type ="string"	Tag="Skill5"/>
 			<Col Type ="string"	Tag="FightSkill"/>
 		<Record/>
-		<Record Id="TaskList" Cache="TRUE"	 Col="3"	 Private="TRUE"	 Public="FALSE"	 Row="512"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="TaskList" Cache="1"	 Col="3"	 Private="1"	 Public="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
 			<Col Type ="int"	Tag="TaskStatus"/><!--- 任务表-->
 			<Col Type ="int"	Tag="Process"/>
 		<Record/>
-		<Record Id="TaskMonsterList" Cache="TRUE"	 Col="4"	 Private="TRUE"	 Public="FALSE"	 Row="8"	 Save="FALSE"	 Upload="FALSE"	 >
+		<Record Id="TaskMonsterList" Cache="1"	 Col="4"	 Private="1"	 Public="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="MonsterID"/><!--- Desc-->
 			<Col Type ="int"	Tag="CurrentKillCount"/><!--- 任务杀怪表-->
 			<Col Type ="int"	Tag="RequireKillCount"/>

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ConditionPlayerLevel" Cache="FALSE" Desc="创建玩家等级" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="ConditionPlayerVIP" Cache="FALSE" Desc="玩家VIP" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="CostMoney" Cache="FALSE" Desc="花费金币" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="DismissTime" Cache="FALSE" Desc="解散等待时间" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="GuildLevel" Cache="FALSE" Desc="公会等级" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MaxMember" Cache="FALSE" Desc="最大人数" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
+		<Property Id="ConditionPlayerLevel" Cache="0" Desc="创建玩家等级" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ConditionPlayerVIP" Cache="0" Desc="玩家VIP" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="CostMoney" Cache="0" Desc="花费金币" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DismissTime" Cache="0" Desc="解散等待时间" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="GuildLevel" Cache="0" Desc="公会等级" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MaxMember" Cache="0" Desc="最大人数" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>
