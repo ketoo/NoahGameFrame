@@ -383,14 +383,26 @@ bool NFFileProcess::SaveForCPP()
 		
 		strPropertyInfo += "\tclass " + strClassName + "\n\t{\n\tpublic:\n";
 		strPropertyInfo += "\t\t//Class name\n\t";
-		strPropertyInfo += "\tstatic const std::string ThisName;\n";
+		strPropertyInfo += "\tstatic const std::string& ThisName(){ static std::string x = \"" + strClassName + "\"; return x; };";
+
 		instanceField += "\tconst std::string " + strClassName + "::ThisName = \"" + strClassName + "\";\n";
 
 		if (strClassName != "IObject")
 		{
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
+			
+			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+					itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFClassProperty* pClassProperty = itProperty->second;
 
+				strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+
+				instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
+			}
 		}
 
 		strPropertyInfo += "\t\t// Property\n";
@@ -400,7 +412,7 @@ bool NFFileProcess::SaveForCPP()
 			const std::string& strPropertyName = itProperty->first;
 			NFClassProperty* pClassProperty = itProperty->second;
 
-			strPropertyInfo += "\t\tstatic const std::string " + strPropertyName + ";";
+			strPropertyInfo += "\t\tstatic const std::string& " + strPropertyName + "(){ static std::string x = \"" + strPropertyName + "\"; return x; };";
 			strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
 
 			instanceField += "\tconst std::string " + strClassName + "::" + strPropertyName + " = \"" + strPropertyName + "\";\n";
@@ -422,7 +434,7 @@ bool NFFileProcess::SaveForCPP()
 
 			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tstatic const std::string ThisName;\n";
+			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };";
 
 			instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
 
@@ -444,8 +456,9 @@ bool NFFileProcess::SaveForCPP()
 
 			strRecordInfo += "\n\t\t};\n";
 
-			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, hppWriter);
 		}
+
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, hppWriter);
 
 		std::string strHppEnumInfo = "";
 
@@ -457,15 +470,39 @@ bool NFFileProcess::SaveForCPP()
 
 	}
 
-	fwrite(instanceField.c_str(), instanceField.length(), 1, hppWriter);
+	//fwrite(instanceField.c_str(), instanceField.length(), 1, hppWriter);
 
-	std::string strFileEnd = "\n}";
+	std::string strFileEnd = "\n}\n#endif";
 	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, hppWriter);
 	/////////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////////
 
 	fclose(hppWriter);
+
+	///////////////////////////
+	FILE* cppWriter = fopen(strCPPFile.c_str(), "w");
+	
+	std::string strCppFileHead;
+	strCppFileHead = strCppFileHead
+		+ "// -------------------------------------------------------------------------\n"
+		+ "//    @FileName         :    NFProtocolDefine.cpp\n"
+		+ "//    @Author           :    NFrame Studio\n"
+		+ "//    @Module           :    NFProtocolDefine\n"
+		+ "// -------------------------------------------------------------------------\n\n"
+		+ "#include \"NFProtocolDefine.hpp\"\n"
+		+ "namespace NFrame\n{\n";
+
+	fwrite(strCppFileHead.c_str(), strCppFileHead.length(), 1, cppWriter);
+	fwrite(instanceField.c_str(), instanceField.length(), 1, cppWriter);
+
+	strFileEnd.clear();
+	strFileEnd += "\n};";
+
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, cppWriter);
+
+	fclose(cppWriter);
+	//////////////////////////////
 
 	return false;
 }
@@ -560,8 +597,8 @@ bool NFFileProcess::SaveForCS()
 
 			strRecordInfo += "\n\t\t}\n";
 
-			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
 		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, csWriter);
 
 		std::string strHppEnumInfo = "";
 
@@ -663,8 +700,8 @@ bool NFFileProcess::SaveForJAVA()
 
 			strRecordInfo += "\n\t\t}\n";
 
-			fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, javaWriter);
 		}
+		fwrite(strRecordInfo.c_str(), strRecordInfo.length(), 1, javaWriter);
 
 		std::string strHppEnumInfo = "";
 

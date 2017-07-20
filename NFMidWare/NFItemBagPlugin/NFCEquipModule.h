@@ -59,8 +59,8 @@ protected:
 	bool AddEquipIntensifyLevel(const NFGUID& self, const NFGUID& id);
 	int GetEquipIntensifyLevel(const NFGUID& self, const NFGUID& id);
 	/////////////wind, fire, ice, light, poison/////////////////////////////////////////////////////////////
-	bool AddEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
-	int GetEquipElementLevel(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex);
+	bool AddEquipElementLevel(const NFGUID& self, const NFGUID& id, int eIndex);
+	int GetEquipElementLevel(const NFGUID& self, const NFGUID& id, int eIndex);
 
 protected:
     bool Ramdom(const int nNowLevel, const int nMaxLevel);

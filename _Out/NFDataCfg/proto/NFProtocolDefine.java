@@ -20,6 +20,7 @@ package nframe;
 		public static final String EffectValueType = "EffectValueType";// int
 		public static final String ReverseReferType = "ReverseReferType";// int
 		public static final String WashGroupID = "WashGroupID";// int
+		// Record
 
 	}
 	public class ConsumeData
@@ -35,6 +36,7 @@ package nframe;
 		public static final String Money = "Money";// int
 		public static final String SP = "SP";// int
 		public static final String VIPEXP = "VIPEXP";// int
+		// Record
 
 	}
 	public class DescData
@@ -50,6 +52,7 @@ package nframe;
 		public static final String PerformanceSound = "PerformanceSound";// string
 		public static final String PrefabPath = "PrefabPath";// string
 		public static final String ShowName = "ShowName";// string
+		// Record
 
 	}
 	public class EffectData
@@ -90,6 +93,7 @@ package nframe;
 		public static final String SP = "SP";// int
 		public static final String SPREGEN = "SPREGEN";// int
 		public static final String SUCKBLOOD = "SUCKBLOOD";// int
+		// Record
 
 	}
 	public class Equip
@@ -116,6 +120,7 @@ package nframe;
 		public static final String ShowName = "ShowName";// string
 		public static final String SuitBuffID = "SuitBuffID";// string
 		public static final String SuitID = "SuitID";// int
+		// Record
 
 	}
 	public class Guild
@@ -150,231 +155,6 @@ package nframe;
 		public static final String Rank = "Rank";// int
 		public static final String RecruitAD = "RecruitAD";// string
 		public static final String RecruitLevel = "RecruitLevel";// int
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static final String ThisName = "GuildAppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static final String ThisName = "GuildAppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static final String ThisName = "GuildBoss";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static final String ThisName = "GuildAppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static final String ThisName = "GuildBoss";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static final String ThisName = "GuildEvent";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-			public static final int EventID = 8;//int
-			public static final int EventTime = 9;//int
-			public static final int Context = 10;//string
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static final String ThisName = "GuildAppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static final String ThisName = "GuildBoss";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static final String ThisName = "GuildEvent";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-			public static final int EventID = 8;//int
-			public static final int EventTime = 9;//int
-			public static final int Context = 10;//string
-
-		}
-		public class GuildHouse
-		{
-			//Class name
-			public static final String ThisName = "GuildHouse";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static final String ThisName = "GuildAppyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static final String ThisName = "GuildBoss";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static final String ThisName = "GuildEvent";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-			public static final int EventID = 8;//int
-			public static final int EventTime = 9;//int
-			public static final int Context = 10;//string
-
-		}
-		public class GuildHouse
-		{
-			//Class name
-			public static final String ThisName = "GuildHouse";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		public class GuildMemberList
-		{
-			//Class name
-			public static final String ThisName = "GuildMemberList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int Receive = 5;//int
-			public static final int VIP = 6;//int
-			public static final int Online = 7;//int
-			public static final int Power = 8;//int
-			public static final int Title = 9;//int
-			public static final int GameID = 10;//int
-			public static final int JoinTime = 11;//int
-			public static final int Contribution = 12;//int
-			public static final int AllContribution = 13;//int
-
-		}
 		// Record
 		public class GuildAppyList
 		{
@@ -482,6 +262,7 @@ package nframe;
 		public static final String DismissTime = "DismissTime";// int
 		public static final String GuildLevel = "GuildLevel";// int
 		public static final String MaxMember = "MaxMember";// int
+		// Record
 
 	}
 	public class GuildJob
@@ -505,6 +286,7 @@ package nframe;
 		public static final String PublishRecruit = "PublishRecruit";// object
 		public static final String SetRecruit = "SetRecruit";// object
 		public static final String StopDismiss = "StopDismiss";// object
+		// Record
 
 	}
 	public class HttpServer
@@ -516,6 +298,7 @@ package nframe;
 		public static final String ServerID = "ServerID";// int
 		public static final String WebPort = "WebPort";// int
 		public static final String WebRootPath = "WebRootPath";// string
+		// Record
 
 	}
 	public class IObject
@@ -529,6 +312,7 @@ package nframe;
 		public static final String ID = "ID";// string
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
+		// Record
 
 	}
 	public class InitProperty
@@ -542,6 +326,7 @@ package nframe;
 		public static final String Level = "Level";// int
 		public static final String ModelPtah = "ModelPtah";// string
 		public static final String SkillIDRef = "SkillIDRef";// string
+		// Record
 
 	}
 	public class Item
@@ -571,6 +356,7 @@ package nframe;
 		public static final String Script = "Script";// string
 		public static final String ShowName = "ShowName";// string
 		public static final String SpriteFile = "SpriteFile";// string
+		// Record
 
 	}
 	public class Language
@@ -581,6 +367,7 @@ package nframe;
 		// Property
 		public static final String Chinese = "Chinese";// string
 		public static final String English = "English";// string
+		// Record
 
 	}
 	public class Map
@@ -678,6 +465,7 @@ package nframe;
 		public static final String TargetX = "TargetX";// float
 		public static final String TargetY = "TargetY";// float
 		public static final String VIPEXP = "VIPEXP";// int
+		// Record
 
 	}
 	public class NoSqlServer
@@ -690,6 +478,7 @@ package nframe;
 		public static final String IP = "IP";// string
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
+		// Record
 
 	}
 	public class Player
@@ -772,767 +561,6 @@ package nframe;
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String VIPLevel = "VIPLevel";// int
 		public static final String ViewOppnent = "ViewOppnent";// object
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static final String ThisName = "CommValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static final String ThisName = "CommValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static final String ThisName = "HeroPropertyValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static final String ThisName = "CommValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static final String ThisName = "HeroPropertyValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		public class PlayerHero
-		{
-			//Class name
-			public static final String ThisName = "PlayerHero";
-			public static final int GUID = 0;//object
-			public static final int ConfigID = 1;//string
-			public static final int Activated = 2;//int
-			public static final int Level = 3;//int
-			public static final int Exp = 4;//int
-			public static final int Star = 5;//int
-			public static final int Equip1 = 6;//object
-			public static final int Equip2 = 7;//object
-			public static final int Equip3 = 8;//object
-			public static final int Equip4 = 9;//object
-			public static final int Equip5 = 10;//object
-			public static final int Equip6 = 11;//object
-			public static final int Talent1 = 12;//string
-			public static final int Talent2 = 13;//string
-			public static final int Talent3 = 14;//string
-			public static final int Talent4 = 15;//string
-			public static final int Talent5 = 16;//string
-			public static final int Skill1 = 17;//string
-			public static final int Skill2 = 18;//string
-			public static final int Skill3 = 19;//string
-			public static final int Skill4 = 20;//string
-			public static final int Skill5 = 21;//string
-			public static final int FightSkill = 22;//string
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static final String ThisName = "BagEquipList";
-			public static final int GUID = 0;//object
-			public static final int WearGUID = 1;//object
-			public static final int ConfigID = 2;//string
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-			public static final int RandPropertyID = 5;//string
-			public static final int SlotCount = 6;//int
-			public static final int InlayStone1 = 7;//string
-			public static final int InlayStone2 = 8;//string
-			public static final int InlayStone3 = 9;//string
-			public static final int InlayStone4 = 10;//string
-			public static final int InlayStone5 = 11;//string
-			public static final int InlayStone6 = 12;//string
-			public static final int InlayStone7 = 13;//string
-			public static final int InlayStone8 = 14;//string
-			public static final int InlayStone9 = 15;//string
-			public static final int InlayStone10 = 16;//string
-			public static final int IntensifyLevel = 17;//string
-			public static final int ElementLevel1_FIRE = 18;//int
-			public static final int ElementLevel2_LIGHT = 19;//int
-			public static final int ElementLevel3_Wind = 20;//int
-			public static final int ElementLevel4_ICE = 21;//int
-			public static final int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static final String ThisName = "BagItemList";
-			public static final int ConfigID = 0;//string
-			public static final int ItemCount = 1;//int
-			public static final int Bound = 2;//int
-			public static final int ExpiredType = 3;//int
-			public static final int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
-			public static final int BuildingGUID = 1;//object
-			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static final String ThisName = "CommValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static final String ThisName = "HeroPropertyValue";
-			public static final int SUCKBLOOD = 0;//int
-			public static final int REFLECTDAMAGE = 1;//int
-			public static final int CRITICAL = 2;//int
-			public static final int MAXHP = 3;//int
-			public static final int MAXMP = 4;//int
-			public static final int MAXSP = 5;//int
-			public static final int HPREGEN = 6;//int
-			public static final int SPREGEN = 7;//int
-			public static final int MPREGEN = 8;//int
-			public static final int ATK_VALUE = 9;//int
-			public static final int DEF_VALUE = 10;//int
-			public static final int MOVE_SPEED = 11;//int
-			public static final int ATK_SPEED = 12;//int
-			public static final int ATK_FIRE = 13;//int
-			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
-
-		}
-		public class PlayerHero
-		{
-			//Class name
-			public static final String ThisName = "PlayerHero";
-			public static final int GUID = 0;//object
-			public static final int ConfigID = 1;//string
-			public static final int Activated = 2;//int
-			public static final int Level = 3;//int
-			public static final int Exp = 4;//int
-			public static final int Star = 5;//int
-			public static final int Equip1 = 6;//object
-			public static final int Equip2 = 7;//object
-			public static final int Equip3 = 8;//object
-			public static final int Equip4 = 9;//object
-			public static final int Equip5 = 10;//object
-			public static final int Equip6 = 11;//object
-			public static final int Talent1 = 12;//string
-			public static final int Talent2 = 13;//string
-			public static final int Talent3 = 14;//string
-			public static final int Talent4 = 15;//string
-			public static final int Talent5 = 16;//string
-			public static final int Skill1 = 17;//string
-			public static final int Skill2 = 18;//string
-			public static final int Skill3 = 19;//string
-			public static final int Skill4 = 20;//string
-			public static final int Skill5 = 21;//string
-			public static final int FightSkill = 22;//string
-
-		}
-		public class TaskList
-		{
-			//Class name
-			public static final String ThisName = "TaskList";
-			public static final int TaskID = 0;//string
-			public static final int TaskStatus = 1;//int
-			public static final int Process = 2;//int
-
-		}
 		// Record
 		public class BagEquipList
 		{
@@ -1741,6 +769,7 @@ package nframe;
 		public static final String SyncObject = "SyncObject";// int
 		public static final String Tile = "Tile";// int
 		public static final String Width = "Width";// int
+		// Record
 
 	}
 	public class Security
@@ -1750,6 +779,7 @@ package nframe;
 		// IObject
 		// Property
 		public static final String SecurityData = "SecurityData";// string
+		// Record
 
 	}
 	public class Server
@@ -1766,6 +796,7 @@ package nframe;
 		public static final String Port = "Port";// int
 		public static final String ServerID = "ServerID";// int
 		public static final String Type = "Type";// int
+		// Record
 
 	}
 	public class Shop
@@ -1782,6 +813,7 @@ package nframe;
 		public static final String Steel = "Steel";// int
 		public static final String Stone = "Stone";// int
 		public static final String Type = "Type";// int
+		// Record
 
 	}
 	public class Skill
@@ -1813,6 +845,7 @@ package nframe;
 		public static final String SkillType = "SkillType";// int
 		public static final String SpriteFile = "SpriteFile";// string
 		public static final String TargetType = "TargetType";// int
+		// Record
 
 	}
 	public class SqlServer
@@ -1829,6 +862,7 @@ package nframe;
 		public static final String SqlPort = "SqlPort";// int
 		public static final String SqlPwd = "SqlPwd";// string
 		public static final String SqlUser = "SqlUser";// string
+		// Record
 
 	}
 	public class Talent
@@ -1843,6 +877,7 @@ package nframe;
 		public static final String NextID = "NextID";// string
 		public static final String ShowName = "ShowName";// string
 		public static final String SpriteFile = "SpriteFile";// string
+		// Record
 
 	}
 	public class Task
@@ -1860,6 +895,7 @@ package nframe;
 		public static final String LevelReq = "LevelReq";// string
 		public static final String NextTaskID = "NextTaskID";// string
 		public static final String Type = "Type";// int
+		// Record
 
 	}
 	public class Team
@@ -1870,20 +906,6 @@ package nframe;
 		// Property
 		public static final String Captain = "Captain";// object
 		public static final String PresidentName = "PresidentName";// string
-		// Record
-		public class ApplyList
-		{
-			//Class name
-			public static final String ThisName = "ApplyList";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
 		// Record
 		public class ApplyList
 		{

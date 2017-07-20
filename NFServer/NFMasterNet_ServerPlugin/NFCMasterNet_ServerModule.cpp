@@ -248,7 +248,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	m_pNetModule->AddEventCallBack(this, &NFCMasterNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();

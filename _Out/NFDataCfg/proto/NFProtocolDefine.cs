@@ -26,6 +26,7 @@ namespace NFrame
 		public static readonly String EffectValueType = "EffectValueType";// int
 		public static readonly String ReverseReferType = "ReverseReferType";// int
 		public static readonly String WashGroupID = "WashGroupID";// int
+		// Record
 
 	}
 	public class ConsumeData
@@ -41,6 +42,7 @@ namespace NFrame
 		public static readonly String Money = "Money";// int
 		public static readonly String SP = "SP";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
+		// Record
 
 	}
 	public class DescData
@@ -56,6 +58,7 @@ namespace NFrame
 		public static readonly String PerformanceSound = "PerformanceSound";// string
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String ShowName = "ShowName";// string
+		// Record
 
 	}
 	public class EffectData
@@ -96,6 +99,7 @@ namespace NFrame
 		public static readonly String SP = "SP";// int
 		public static readonly String SPREGEN = "SPREGEN";// int
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
+		// Record
 
 	}
 	public class Equip
@@ -122,6 +126,7 @@ namespace NFrame
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SuitBuffID = "SuitBuffID";// string
 		public static readonly String SuitID = "SuitID";// int
+		// Record
 
 	}
 	public class Guild
@@ -156,231 +161,6 @@ namespace NFrame
 		public static readonly String Rank = "Rank";// int
 		public static readonly String RecruitAD = "RecruitAD";// string
 		public static readonly String RecruitLevel = "RecruitLevel";// int
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildAppyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildAppyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static readonly String ThisName = "GuildBoss";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildAppyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static readonly String ThisName = "GuildBoss";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static readonly String ThisName = "GuildEvent";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-			public static readonly int EventID = 8;//int
-			public static readonly int EventTime = 9;//int
-			public static readonly int Context = 10;//string
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildAppyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static readonly String ThisName = "GuildBoss";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static readonly String ThisName = "GuildEvent";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-			public static readonly int EventID = 8;//int
-			public static readonly int EventTime = 9;//int
-			public static readonly int Context = 10;//string
-
-		}
-		public class GuildHouse
-		{
-			//Class name
-			public static readonly String ThisName = "GuildHouse";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		// Record
-		public class GuildAppyList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildAppyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static readonly String ThisName = "GuildBoss";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static readonly String ThisName = "GuildEvent";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-			public static readonly int EventID = 8;//int
-			public static readonly int EventTime = 9;//int
-			public static readonly int Context = 10;//string
-
-		}
-		public class GuildHouse
-		{
-			//Class name
-			public static readonly String ThisName = "GuildHouse";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Offline = 6;//int
-			public static readonly int Power = 7;//int
-
-		}
-		public class GuildMemberList
-		{
-			//Class name
-			public static readonly String ThisName = "GuildMemberList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int Receive = 5;//int
-			public static readonly int VIP = 6;//int
-			public static readonly int Online = 7;//int
-			public static readonly int Power = 8;//int
-			public static readonly int Title = 9;//int
-			public static readonly int GameID = 10;//int
-			public static readonly int JoinTime = 11;//int
-			public static readonly int Contribution = 12;//int
-			public static readonly int AllContribution = 13;//int
-
-		}
 		// Record
 		public class GuildAppyList
 		{
@@ -488,6 +268,7 @@ namespace NFrame
 		public static readonly String DismissTime = "DismissTime";// int
 		public static readonly String GuildLevel = "GuildLevel";// int
 		public static readonly String MaxMember = "MaxMember";// int
+		// Record
 
 	}
 	public class GuildJob
@@ -511,6 +292,7 @@ namespace NFrame
 		public static readonly String PublishRecruit = "PublishRecruit";// object
 		public static readonly String SetRecruit = "SetRecruit";// object
 		public static readonly String StopDismiss = "StopDismiss";// object
+		// Record
 
 	}
 	public class HttpServer
@@ -522,6 +304,7 @@ namespace NFrame
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String WebPort = "WebPort";// int
 		public static readonly String WebRootPath = "WebRootPath";// string
+		// Record
 
 	}
 	public class IObject
@@ -535,6 +318,7 @@ namespace NFrame
 		public static readonly String ID = "ID";// string
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
+		// Record
 
 	}
 	public class InitProperty
@@ -548,6 +332,7 @@ namespace NFrame
 		public static readonly String Level = "Level";// int
 		public static readonly String ModelPtah = "ModelPtah";// string
 		public static readonly String SkillIDRef = "SkillIDRef";// string
+		// Record
 
 	}
 	public class Item
@@ -577,6 +362,7 @@ namespace NFrame
 		public static readonly String Script = "Script";// string
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SpriteFile = "SpriteFile";// string
+		// Record
 
 	}
 	public class Language
@@ -587,6 +373,7 @@ namespace NFrame
 		// Property
 		public static readonly String Chinese = "Chinese";// string
 		public static readonly String English = "English";// string
+		// Record
 
 	}
 	public class Map
@@ -684,6 +471,7 @@ namespace NFrame
 		public static readonly String TargetX = "TargetX";// float
 		public static readonly String TargetY = "TargetY";// float
 		public static readonly String VIPEXP = "VIPEXP";// int
+		// Record
 
 	}
 	public class NoSqlServer
@@ -696,6 +484,7 @@ namespace NFrame
 		public static readonly String IP = "IP";// string
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
+		// Record
 
 	}
 	public class Player
@@ -778,767 +567,6 @@ namespace NFrame
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
 		public static readonly String ViewOppnent = "ViewOppnent";// object
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingListProduce";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int PosY = 4;//float
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingListProduce";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int PosY = 4;//float
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static readonly String ThisName = "CommValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingListProduce";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int PosY = 4;//float
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static readonly String ThisName = "CommValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static readonly String ThisName = "HeroPropertyValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingListProduce";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int PosY = 4;//float
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static readonly String ThisName = "CommValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static readonly String ThisName = "HeroPropertyValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		public class PlayerHero
-		{
-			//Class name
-			public static readonly String ThisName = "PlayerHero";
-			public static readonly int GUID = 0;//object
-			public static readonly int ConfigID = 1;//string
-			public static readonly int Activated = 2;//int
-			public static readonly int Level = 3;//int
-			public static readonly int Exp = 4;//int
-			public static readonly int Star = 5;//int
-			public static readonly int Equip1 = 6;//object
-			public static readonly int Equip2 = 7;//object
-			public static readonly int Equip3 = 8;//object
-			public static readonly int Equip4 = 9;//object
-			public static readonly int Equip5 = 10;//object
-			public static readonly int Equip6 = 11;//object
-			public static readonly int Talent1 = 12;//string
-			public static readonly int Talent2 = 13;//string
-			public static readonly int Talent3 = 14;//string
-			public static readonly int Talent4 = 15;//string
-			public static readonly int Talent5 = 16;//string
-			public static readonly int Skill1 = 17;//string
-			public static readonly int Skill2 = 18;//string
-			public static readonly int Skill3 = 19;//string
-			public static readonly int Skill4 = 20;//string
-			public static readonly int Skill5 = 21;//string
-			public static readonly int FightSkill = 22;//string
-
-		}
-		// Record
-		public class BagEquipList
-		{
-			//Class name
-			public static readonly String ThisName = "BagEquipList";
-			public static readonly int GUID = 0;//object
-			public static readonly int WearGUID = 1;//object
-			public static readonly int ConfigID = 2;//string
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-			public static readonly int RandPropertyID = 5;//string
-			public static readonly int SlotCount = 6;//int
-			public static readonly int InlayStone1 = 7;//string
-			public static readonly int InlayStone2 = 8;//string
-			public static readonly int InlayStone3 = 9;//string
-			public static readonly int InlayStone4 = 10;//string
-			public static readonly int InlayStone5 = 11;//string
-			public static readonly int InlayStone6 = 12;//string
-			public static readonly int InlayStone7 = 13;//string
-			public static readonly int InlayStone8 = 14;//string
-			public static readonly int InlayStone9 = 15;//string
-			public static readonly int InlayStone10 = 16;//string
-			public static readonly int IntensifyLevel = 17;//string
-			public static readonly int ElementLevel1_FIRE = 18;//int
-			public static readonly int ElementLevel2_LIGHT = 19;//int
-			public static readonly int ElementLevel3_Wind = 20;//int
-			public static readonly int ElementLevel4_ICE = 21;//int
-			public static readonly int ElementLevel5_POISON = 22;//int
-
-		}
-		public class BagItemList
-		{
-			//Class name
-			public static readonly String ThisName = "BagItemList";
-			public static readonly int ConfigID = 0;//string
-			public static readonly int ItemCount = 1;//int
-			public static readonly int Bound = 2;//int
-			public static readonly int ExpiredType = 3;//int
-			public static readonly int Date = 4;//int
-
-		}
-		public class BuildingList
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingList";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int Pos = 4;//vector3
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class BuildingListProduce
-		{
-			//Class name
-			public static readonly String ThisName = "BuildingListProduce";
-			public static readonly int BuildingID = 0;//string
-			public static readonly int BuildingGUID = 1;//object
-			public static readonly int State = 2;//int
-			public static readonly int PosX = 3;//float
-			public static readonly int PosY = 4;//float
-			public static readonly int StateEndTime = 5;//int
-
-		}
-		public class CommValue
-		{
-			//Class name
-			public static readonly String ThisName = "CommValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		public class HeroPropertyValue
-		{
-			//Class name
-			public static readonly String ThisName = "HeroPropertyValue";
-			public static readonly int SUCKBLOOD = 0;//int
-			public static readonly int REFLECTDAMAGE = 1;//int
-			public static readonly int CRITICAL = 2;//int
-			public static readonly int MAXHP = 3;//int
-			public static readonly int MAXMP = 4;//int
-			public static readonly int MAXSP = 5;//int
-			public static readonly int HPREGEN = 6;//int
-			public static readonly int SPREGEN = 7;//int
-			public static readonly int MPREGEN = 8;//int
-			public static readonly int ATK_VALUE = 9;//int
-			public static readonly int DEF_VALUE = 10;//int
-			public static readonly int MOVE_SPEED = 11;//int
-			public static readonly int ATK_SPEED = 12;//int
-			public static readonly int ATK_FIRE = 13;//int
-			public static readonly int ATK_LIGHT = 14;//int
-			public static readonly int ATK_WIND = 15;//int
-			public static readonly int ATK_ICE = 16;//int
-			public static readonly int ATK_POISON = 17;//int
-			public static readonly int DEF_FIRE = 18;//int
-			public static readonly int DEF_LIGHT = 19;//int
-			public static readonly int DEF_WIND = 20;//int
-			public static readonly int DEF_ICE = 21;//int
-			public static readonly int DEF_POISON = 22;//int
-			public static readonly int DIZZY_GATE = 23;//int
-			public static readonly int MOVE_GATE = 24;//int
-			public static readonly int SKILL_GATE = 25;//int
-			public static readonly int PHYSICAL_GATE = 26;//int
-			public static readonly int MAGIC_GATE = 27;//int
-			public static readonly int BUFF_GATE = 28;//int
-
-		}
-		public class PlayerHero
-		{
-			//Class name
-			public static readonly String ThisName = "PlayerHero";
-			public static readonly int GUID = 0;//object
-			public static readonly int ConfigID = 1;//string
-			public static readonly int Activated = 2;//int
-			public static readonly int Level = 3;//int
-			public static readonly int Exp = 4;//int
-			public static readonly int Star = 5;//int
-			public static readonly int Equip1 = 6;//object
-			public static readonly int Equip2 = 7;//object
-			public static readonly int Equip3 = 8;//object
-			public static readonly int Equip4 = 9;//object
-			public static readonly int Equip5 = 10;//object
-			public static readonly int Equip6 = 11;//object
-			public static readonly int Talent1 = 12;//string
-			public static readonly int Talent2 = 13;//string
-			public static readonly int Talent3 = 14;//string
-			public static readonly int Talent4 = 15;//string
-			public static readonly int Talent5 = 16;//string
-			public static readonly int Skill1 = 17;//string
-			public static readonly int Skill2 = 18;//string
-			public static readonly int Skill3 = 19;//string
-			public static readonly int Skill4 = 20;//string
-			public static readonly int Skill5 = 21;//string
-			public static readonly int FightSkill = 22;//string
-
-		}
-		public class TaskList
-		{
-			//Class name
-			public static readonly String ThisName = "TaskList";
-			public static readonly int TaskID = 0;//string
-			public static readonly int TaskStatus = 1;//int
-			public static readonly int Process = 2;//int
-
-		}
 		// Record
 		public class BagEquipList
 		{
@@ -1747,6 +775,7 @@ namespace NFrame
 		public static readonly String SyncObject = "SyncObject";// int
 		public static readonly String Tile = "Tile";// int
 		public static readonly String Width = "Width";// int
+		// Record
 
 	}
 	public class Security
@@ -1756,6 +785,7 @@ namespace NFrame
 		// IObject
 		// Property
 		public static readonly String SecurityData = "SecurityData";// string
+		// Record
 
 	}
 	public class Server
@@ -1772,6 +802,7 @@ namespace NFrame
 		public static readonly String Port = "Port";// int
 		public static readonly String ServerID = "ServerID";// int
 		public static readonly String Type = "Type";// int
+		// Record
 
 	}
 	public class Shop
@@ -1788,6 +819,7 @@ namespace NFrame
 		public static readonly String Steel = "Steel";// int
 		public static readonly String Stone = "Stone";// int
 		public static readonly String Type = "Type";// int
+		// Record
 
 	}
 	public class Skill
@@ -1819,6 +851,7 @@ namespace NFrame
 		public static readonly String SkillType = "SkillType";// int
 		public static readonly String SpriteFile = "SpriteFile";// string
 		public static readonly String TargetType = "TargetType";// int
+		// Record
 
 	}
 	public class SqlServer
@@ -1835,6 +868,7 @@ namespace NFrame
 		public static readonly String SqlPort = "SqlPort";// int
 		public static readonly String SqlPwd = "SqlPwd";// string
 		public static readonly String SqlUser = "SqlUser";// string
+		// Record
 
 	}
 	public class Talent
@@ -1849,6 +883,7 @@ namespace NFrame
 		public static readonly String NextID = "NextID";// string
 		public static readonly String ShowName = "ShowName";// string
 		public static readonly String SpriteFile = "SpriteFile";// string
+		// Record
 
 	}
 	public class Task
@@ -1866,6 +901,7 @@ namespace NFrame
 		public static readonly String LevelReq = "LevelReq";// string
 		public static readonly String NextTaskID = "NextTaskID";// string
 		public static readonly String Type = "Type";// int
+		// Record
 
 	}
 	public class Team
@@ -1876,20 +912,6 @@ namespace NFrame
 		// Property
 		public static readonly String Captain = "Captain";// object
 		public static readonly String PresidentName = "PresidentName";// string
-		// Record
-		public class ApplyList
-		{
-			//Class name
-			public static readonly String ThisName = "ApplyList";
-			public static readonly int GUID = 0;//object
-			public static readonly int Name = 1;//string
-			public static readonly int Level = 2;//int
-			public static readonly int Job = 3;//int
-			public static readonly int Donation = 4;//int
-			public static readonly int VIP = 5;//int
-			public static readonly int Power = 6;//int
-
-		}
 		// Record
 		public class ApplyList
 		{

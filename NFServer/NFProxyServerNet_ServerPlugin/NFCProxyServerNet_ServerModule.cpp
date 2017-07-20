@@ -39,7 +39,7 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddEventCallBack(this, &NFCProxyServerNet_ServerModule::OnSocketClientEvent);
 	m_pNetModule->ExpandBufferSize(1024*1024*2);
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
