@@ -42,25 +42,27 @@ bool NFCGuildModule::AfterInit()
     return true;
 }
 
-const NFGUID& NFCGuildModule::CreateGuild( const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
+const NFGUID& NFCGuildModule::CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP)
 {
-    if (strName.empty())
-    {
-        return NULL_OBJECT;
-    }
+	if (strName.empty())
+	{
+		return NULL_OBJECT;
+	}
 
-    bool bExit = false;
-    //if (!m_pGuildDataModule->ExitGuild(self, strName, bExit))
-    {
-        return NULL_OBJECT;
-    }
+	//check name
+	if (m_pGuildRedisModule->ExistGuild(strName))
+	{
+		return NULL_OBJECT;
+	}
 
-    if (bExit)
-    {
-        return NULL_OBJECT;
-    }
+	//check player
+	NFGUID xGuildID = m_pKernelModule->CreateGUID();
+	if (m_pGuildRedisModule->CreateGuild(xGuildID, strName, self))
+	{
+		return xGuildID;
+	}
 
-	return NULL_OBJECT;//m_pGuildDataModule->CreateGuild(self, strName, strRoleName, nLevel, nJob, nDonation, nVIP);
+	return NULL_OBJECT;
 }
 
 bool NFCGuildModule::JoinGuild( const NFGUID& self, const NFGUID& xGuildID )
@@ -157,7 +159,7 @@ bool NFCGuildModule::LeaveGuild( const NFGUID& self, const NFGUID& xGuildID )
 	return false;
 }
 
-bool NFCGuildModule::UpGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCGuildModule::PromotionMember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember )
 {
 	/*
     NF_SHARE_PTR<NFIRecord> pMemberRecord = m_pKernelModule->FindRecord(xGuildID, NFrame::Guild::R_GuildMemberList());
@@ -189,7 +191,7 @@ bool NFCGuildModule::UpGuildMmember( const NFGUID& self, const NFGUID& xGuildID,
 	return true;
 }
 
-bool NFCGuildModule::DownGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCGuildModule::DemotionMember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember )
 {
 	/*
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
@@ -226,7 +228,7 @@ bool NFCGuildModule::DownGuildMmember( const NFGUID& self, const NFGUID& xGuildI
     return true;
 }
 
-bool NFCGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCGuildModule::KickMmember( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember )
 {
 	/*
     NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
@@ -241,7 +243,7 @@ bool NFCGuildModule::KickGuildMmember( const NFGUID& self, const NFGUID& xGuildI
         return false;
     }
 
-    if (self == xMmember)
+    if (self == xMember)
     {
         return false;
     }
@@ -272,10 +274,18 @@ bool NFCGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuil
 	return true;
 }
 
-bool NFCGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember )
+bool NFCGuildModule::GetGuildMemberInfo( const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember )
 {
 
 	return false;
+}
+
+void NFCGuildModule::OnGuildOnlineProcess(const NFGUID & xGuildID)
+{
+}
+
+void NFCGuildModule::OnGuildOfflineProcess(const NFGUID & xGuildID)
+{
 }
 
 bool NFCGuildModule::CheckPower( const NFGUID& self, const NFGUID& xGuildID, int nPowerType )
@@ -500,13 +510,13 @@ void NFCGuildModule::OnOprGuildMemberProcess(const int nSockIndex, const int nMs
 	switch (eOprType)
 	{
 	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP:
-		UpGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+		PromotionMember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
 		break;
 	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN:
-		DownGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+		DemotionMember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
 		break;
 	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK:
-		KickGuildMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+		KickMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
 		break;
 	default:
 		break;
@@ -516,9 +526,8 @@ void NFCGuildModule::OnOprGuildMemberProcess(const int nSockIndex, const int nMs
 
 void NFCGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	/*
 	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen,NFMsg::ReqSearchGuild);
-
+	/*
 	std::vector<NFIGuildDataModule::SearchGuildObject> xList;    
 	m_pGuildDataModule->SearchGuild(nPlayerID, xMsg.guild_name(), xList);
 
