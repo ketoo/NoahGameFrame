@@ -876,6 +876,37 @@ bool NFFileProcess::SaveForIni()
 
 bool NFFileProcess::SaveForLogicClass()
 {
+	std::string strFileName = strXMLStructPath + "LogicClass.xml";
+
+	FILE* iniWriter = fopen(strFileName.c_str(), "w");
+
+	std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+	fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
+
+	ClassData* pBaseObject = mxClassData["IObject"];
+
+	std::string strElementData;
+	strElementData += "\t<Class Id=\"" + pBaseObject->xStructData.strClassName + "\"\t";
+	strElementData += "Path=\"NFDataCfg/Struct/" + pBaseObject->xStructData.strClassName + ".xml\"\t";
+	strElementData += "InstancePath=\"NFDataCfg/Ini/" + pBaseObject->xStructData.strClassName + ".xml\"\t>\n";
+
+	for (std::map<std::string, ClassData*>::iterator it = mxClassData.begin(); it != mxClassData.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.strClassName + "\"\t";
+		strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
+		strElementData += "InstancePath=\"NFDataCfg/Ini/" + pClassDta->xStructData.strClassName + ".xml\"\t/>\n";
+
+	}
+
+	strElementData += "\t</Class>\n";
+	fwrite(strElementData.c_str(), strElementData.length(), 1, iniWriter);
+
+	std::string strFileEnd = "</XML>";
+	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, iniWriter);
+
 	return false;
 }
 

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="InComeDiamond" Cache="FALSE" Desc="收益钻石/小时" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="InComeGold" Cache="FALSE" Desc="收益金币/小时" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="InComeOil" Cache="FALSE" Desc="收益石油/小时" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MapLevel" Cache="FALSE" Desc="Level决定收益，展示给玩家争夺" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="FALSE" Type="int" Upload="FALSE" />
-		<Property Id="MaxCount" Cache="FALSE" Desc="最大入驻公会" Force="FALSE" Private="TRUE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="InComeDiamond" Cache="0" Desc="收益钻石/小时" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="InComeGold" Cache="0" Desc="收益金币/小时" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="InComeOil" Cache="0" Desc="收益石油/小时" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MapLevel" Cache="0" Desc="Level决定收益，展示给玩家争夺" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MaxCount" Cache="0" Desc="最大入驻公会" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 		<Record Id="Station" Cache="FALSE"	 Col="9"	 Private="TRUE"	 Public="FALSE"	 Row="100"	 Save="TRUE"	 Upload="FALSE"	 >
