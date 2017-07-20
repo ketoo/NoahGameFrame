@@ -42,14 +42,14 @@ bool NFCItemCardConsumeProcessModule::Execute()
 
 int NFCItemCardConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std::string& strItemID, const NFDataList& targetID )
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return  1;
 	}
 
 	NFDataList varList;
-	if (pHeroRecord->FindString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strItemID, varList) <= 0)
+	if (pHeroRecord->FindString(NFrame::Player::PlayerHero::ConfigID, strItemID, varList) <= 0)
 	{
 		return 0;
 	}
@@ -62,14 +62,14 @@ int NFCItemCardConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std
 
 int NFCItemCardConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemID, const NFDataList& targetID )
 {
-	NF_SHARE_PTR<NFIRecord> pHero = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHero = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHero)
 	{
 		return  1;
 	}
 
 	NFDataList varList;
-	if (pHero->FindString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strItemID, varList) > 0)
+	if (pHero->FindString(NFrame::Player::PlayerHero::ConfigID, strItemID, varList) > 0)
 	{
 		return 2;
 	}
