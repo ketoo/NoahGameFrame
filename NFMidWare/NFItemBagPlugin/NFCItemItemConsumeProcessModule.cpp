@@ -46,7 +46,7 @@ int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std:
 
 int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagItemList());
+	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
 	if (!pBagItemList)
 	{
 		return 1;
@@ -62,7 +62,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	}
 
 	NFDataList varItemID;
-	const int nBagItemCount = pBagItemList->FindString(NFrame::Player::BagItemList_ConfigID, strItemConfigID, varItemID);
+	const int nBagItemCount = pBagItemList->FindString(NFrame::Player::BagItemList::ConfigID, strItemConfigID, varItemID);
 
 	if (nBagItemCount != 1)
 	{
@@ -73,7 +73,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	NFDataList xRowData;
 	pBagItemList->QueryRow(nRowNum, xRowData);
 
-	const int nBagList_ItemCount = xRowData.Int(NFrame::Player::BagItemList_ItemCount);
+	const int nBagList_ItemCount = xRowData.Int(NFrame::Player::BagItemList::ItemCount);
 
 	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
 	{
@@ -163,7 +163,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		}
 		else
 		{
-			NF_SHARE_PTR<NFIRecord> pPlayerHero = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+			NF_SHARE_PTR<NFIRecord> pPlayerHero = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 			if (nullptr == pPlayerHero.get())
 			{
 				return 0;
@@ -193,7 +193,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		}
 
 		//deduct Bag ItemCount
-		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList_ItemCount, nBagList_ItemCount - nItemCount);
+		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nBagList_ItemCount - nItemCount);
 	}
 	break;
 	default:

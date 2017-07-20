@@ -1032,7 +1032,7 @@ int NFCAIServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const st
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
-		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCAIServerNet_ServerModule::OnSceneEvent);
+		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID, this, &NFCAIServerNet_ServerModule::OnSceneEvent);
 	}
 
 	return 0;
