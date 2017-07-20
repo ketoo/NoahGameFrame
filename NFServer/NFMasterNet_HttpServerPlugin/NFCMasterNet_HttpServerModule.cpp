@@ -39,7 +39,7 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 	int nJsonPort = 80;
 	int nWebServerAppID = 0;
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName);
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();

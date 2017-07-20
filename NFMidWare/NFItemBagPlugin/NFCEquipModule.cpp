@@ -228,7 +228,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
     if (Ramdom(nElementLevel, 100))
     {
         const int nAfterLevel = nElementLevel + 1;
-        return AddEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex);
+        return AddEquipElementLevel(self, xEquipID, nElementIndex);
     }
     else
     {
@@ -241,7 +241,7 @@ bool NFCEquipModule::ElementlevelToEquip( const NFGUID& self, const NFGUID& xEqu
                 nAfterLevel = 0;
             }
 
-            return AddEquipElementLevel(self, xEquipID, (NFrame::Player::BagEquipList)nElementIndex);
+            return AddEquipElementLevel(self, xEquipID, nElementIndex);
         }
 
         return false;
@@ -501,7 +501,7 @@ int NFCEquipModule::GetEquipHoleCount(const NFGUID & self, const NFGUID & id)
 	return pRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
 }
 
-bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, int eIndex, const std::string& strStoneID)
+bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, const int eIndex, const std::string& strStoneID)
 {
 	if (id.IsNull() || self.IsNull() || strStoneID.empty())
 	{

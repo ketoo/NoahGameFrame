@@ -31,8 +31,8 @@ bool NFCHeroPropertyModule::AfterInit()
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>();
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCHeroPropertyModule::OnPlayerClassEvent);
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName, this, &NFCHeroPropertyModule::OnNPCClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroPropertyModule::OnPlayerClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCHeroPropertyModule::OnNPCClassEvent);
 	return true;
 
 }
@@ -144,7 +144,7 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -178,7 +178,7 @@ bool NFCHeroPropertyModule::CalHeroAllProperty(const NFGUID& self, const NFGUID&
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -236,7 +236,7 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -276,7 +276,7 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -327,7 +327,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;

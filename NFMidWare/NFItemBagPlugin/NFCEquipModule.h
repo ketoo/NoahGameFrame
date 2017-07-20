@@ -51,7 +51,7 @@ protected:
 	/////////////random propertyid/////////////////////////////////////////////////////////////
 	bool SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id, const std::string& strPropertyID);
 	/////////////sotne/////////////////////////////////////////////////////////////
-	bool SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, NFrame::Player::BagEquipList eIndex, const std::string& strPropertyID);
+	bool SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, const int eIndex, const std::string& strPropertyID);
 	/////////////slot/hole/////////////////////////////////////////////////////////////
 	bool AddEquipHoleCount(const NFGUID& self, const NFGUID& id);
 	int GetEquipHoleCount(const NFGUID& self, const NFGUID& id);
