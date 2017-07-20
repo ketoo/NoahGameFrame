@@ -31,7 +31,7 @@ bool NFCPropertyModule::Execute()
 
 bool NFCPropertyModule::AfterInit()
 {
-    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPropertyModule::OnObjectClassEvent);
+    m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCPropertyModule::OnObjectClassEvent);
 
     return true;
 }
@@ -149,7 +149,7 @@ int NFCPropertyModule::OnRecordPropertyEvent(const NFGUID& self, const RECORD_EV
 
 int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-    if (strClassName == NFrame::Player::ThisName())
+    if (strClassName == NFrame::Player::ThisName)
     {
         if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
         {
@@ -172,7 +172,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
         else if (CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent)
         {
             int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
-            if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID()) > 0)
+            if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID) > 0)
             {
                 
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
