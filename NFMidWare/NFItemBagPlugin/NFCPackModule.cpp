@@ -96,7 +96,7 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 
 	
-	bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName, strConfigName );
+	bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strConfigName );
 	if ( !bExist )
 	{
 		return 0;
@@ -181,7 +181,7 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 	}
 
 	
-	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName, strItemConfigID))
+	if (!m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID))
 	{
 		return false;
 	}
@@ -244,7 +244,7 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
     }
 
     
-    bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName, strItemConfigID );
+    bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strItemConfigID );
     if ( !bExist )
     {
         return false;

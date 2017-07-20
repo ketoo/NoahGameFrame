@@ -762,11 +762,11 @@ namespace NFrame
 			static const int BUFF_GATE = 28;//int
 
 		};
-		class HeroPropertyValue
+		class HeroValue
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "HeroPropertyValue"; return x; };			static const int SUCKBLOOD = 0;//int
+			static const std::string& ThisName(){ static std::string x = "HeroValue"; return x; };			static const int SUCKBLOOD = 0;//int
 			static const int REFLECTDAMAGE = 1;//int
 			static const int CRITICAL = 2;//int
 			static const int MAXHP = 3;//int

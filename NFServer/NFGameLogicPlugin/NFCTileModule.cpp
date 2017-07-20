@@ -35,7 +35,7 @@ bool NFCTileModule::Execute()
 
 bool NFCTileModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCTileModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::ReqMineTile)) { return false; }
     return true;

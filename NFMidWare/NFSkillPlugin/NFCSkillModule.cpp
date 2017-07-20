@@ -43,8 +43,8 @@ bool NFCSkillModule::AfterInit()
 	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
 	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
-    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName, this, &NFCSkillModule::OnClassObjectEvent );
-    m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName, this, &NFCSkillModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
+    m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SKILL_OBJECTX, this, &NFCSkillModule::OnClienUseSkill)) { return false; }
 

@@ -103,7 +103,7 @@ void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF
 
 void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -155,7 +155,7 @@ void NFCProxyServerToWorldModule::ServerReport()
 		return;
 	}
 	mLastReportTime = pPluginManager->GetNowTime();
-	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -209,7 +209,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCProxyServerToWorldModule::OnSocketWSEvent);
 	m_pNetClientModule->ExpandBufferSize();
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
