@@ -13,7 +13,7 @@
 			<Col Type ="int"	Tag="Donation"/>
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Power"/>
-		<Record/>
+		</Record>
 		<Record Id="MemberList" Cache="0"	 Col="10"	 Private="1"	 Public="1"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -25,6 +25,6 @@
 			<Col Type ="int"	Tag="Online"/>
 			<Col Type ="int"	Tag="Title"/>
 			<Col Type ="int"	Tag="GameID"/>
-		<Record/>
+		</Record>
 	</Records>
 </XML>
