@@ -101,14 +101,14 @@
 			<Col Type ="int"	Tag="ElementLevel3_Wind"/>
 			<Col Type ="int"	Tag="ElementLevel4_ICE"/>
 			<Col Type ="int"	Tag="ElementLevel5_POISON"/>
-		<Record/>
+		</Record>
 		<Record Id="BagItemList" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
 			<Col Type ="int"	Tag="Bound"/>
 			<Col Type ="int"	Tag="ExpiredType"/>
 			<Col Type ="int"	Tag="Date"/>
-		<Record/>
+		</Record>
 		<Record Id="BuildingList" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
@@ -116,7 +116,7 @@
 			<Col Type ="float"	Tag="PosX"/>
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
-		<Record/>
+		</Record>
 		<Record Id="BuildingListProduce" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="1"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
@@ -124,7 +124,7 @@
 			<Col Type ="float"	Tag="PosX"/>
 			<Col Type ="float"	Tag="PosY"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
-		<Record/>
+		</Record>
 		<Record Id="CommValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
@@ -155,7 +155,7 @@
 			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
-		<Record/>
+		</Record>
 		<Record Id="HeroValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
@@ -186,7 +186,7 @@
 			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
-		<Record/>
+		</Record>
 		<Record Id="PlayerHero" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -211,17 +211,17 @@
 			<Col Type ="string"	Tag="Skill4"/>
 			<Col Type ="string"	Tag="Skill5"/>
 			<Col Type ="string"	Tag="FightSkill"/>
-		<Record/>
+		</Record>
 		<Record Id="TaskList" Cache="1"	 Col="3"	 Private="1"	 Public="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
 			<Col Type ="int"	Tag="TaskStatus"/><!--- 任务表-->
 			<Col Type ="int"	Tag="Process"/>
-		<Record/>
+		</Record>
 		<Record Id="TaskMonsterList" Cache="1"	 Col="4"	 Private="1"	 Public="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="MonsterID"/><!--- Desc-->
 			<Col Type ="int"	Tag="CurrentKillCount"/><!--- 任务杀怪表-->
 			<Col Type ="int"	Tag="RequireKillCount"/>
 			<Col Type ="string"	Tag="TaskID"/>
-		<Record/>
+		</Record>
 	</Records>
 </XML>
