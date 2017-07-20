@@ -69,7 +69,7 @@ bool NFCAIServerNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddEventCallBack(this, &NFCAIServerNet_ServerModule::OnSocketPSEvent);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerNet_ServerModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCAIServerNet_ServerModule::OnObjectClassEvent);
 
 	m_pSceneAOIModule->AddObjectEnterCallBack(this, &NFCAIServerNet_ServerModule::OnObjectListEnter);
 	m_pSceneAOIModule->AddObjectDataFinishedCallBack(this, &NFCAIServerNet_ServerModule::OnObjectDataFinished);
@@ -83,7 +83,7 @@ bool NFCAIServerNet_ServerModule::AfterInit()
 
 	/////////////////////////////////////////////////////////////////////////
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -233,7 +233,7 @@ void NFCAIServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, 
 	var.AddString(NFrame::Player::GameID());
 	var.AddInt(pPluginManager->GetAppID());
 
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName, "", var);
 	if (NULL == pObject)
 	{
 		//mRoleBaseData
@@ -553,7 +553,7 @@ int NFCAIServerNet_ServerModule::OnRecordEnter(const NFDataList& argVar, const N
 
 int NFCAIServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const std::string & strProperty, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar)
 {
-	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
+	if (NFrame::Player::ThisName == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName))
 	{
 		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
 		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
@@ -649,7 +649,7 @@ int NFCAIServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const std:
 
 int NFCAIServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std::string& strRecord, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar, const NFDataList & argVar)
 {
-	if (NFrame::Player::ThisName() == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName()))
+	if (NFrame::Player::ThisName == m_pKernelModule->GetPropertyString(self, NFrame::Player::ClassName))
 	{
 		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
 		if (xObject->GetState() != CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
@@ -912,8 +912,8 @@ int NFCAIServerNet_ServerModule::OnObjectListEnter(const NFDataList& self, const
 		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
 		pEntryInfo->set_player_state(0);
 		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));
-		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID()));
-		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName()));
+		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID));
+		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName));
 
 	}
 
@@ -964,8 +964,8 @@ int NFCAIServerNet_ServerModule::OnObjectDataFinished(const NFDataList & self, c
 		pEntryInfo->set_career_type(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::Job()));
 		pEntryInfo->set_player_state(0);
 		pEntryInfo->set_config_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ConfigID()));
-		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID()));
-		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName()));
+		pEntryInfo->set_scene_id(m_pKernelModule->GetPropertyInt(identOld, NFrame::Player::SceneID));
+		pEntryInfo->set_class_id(m_pKernelModule->GetPropertyString(identOld, NFrame::Player::ClassName));
 
 	}
 
@@ -1032,7 +1032,7 @@ int NFCAIServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const st
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent)
 	{
-		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID(), this, &NFCAIServerNet_ServerModule::OnSceneEvent);
+		//m_pKernelModule->AddPropertyCallBack(self, NFrame::Scene::SceneID, this, &NFCAIServerNet_ServerModule::OnSceneEvent);
 	}
 
 	return 0;
@@ -1111,7 +1111,7 @@ void NFCAIServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex, 
 void NFCAIServerNet_ServerModule::OnClienEnterGameFinishProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
-	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
+	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName, CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
 	
 	NFMsg::ReqAckEnterGameSuccess xReqAckEnterGameSuccess;
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xReqAckEnterGameSuccess, nSockIndex, nPlayerID);
@@ -1130,8 +1130,8 @@ void NFCAIServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, co
 
 	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID);
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID);
 
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
 }
@@ -1142,8 +1142,8 @@ void NFCAIServerNet_ServerModule::OnClienReqMoveImmuneProcess(const int nSockInd
 
 	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID);
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID);
 
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 }

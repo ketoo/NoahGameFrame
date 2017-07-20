@@ -38,7 +38,7 @@ bool NFCAIServerToWorldModule::Execute()
 
 void NFCAIServerToWorldModule::Register(NFINet* pNet)
 {
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -91,7 +91,7 @@ void NFCAIServerToWorldModule::ServerReport()
 	}
 	mLastReportTime = pPluginManager->GetNowTime();
 
-	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -161,11 +161,11 @@ bool NFCAIServerToWorldModule::AfterInit()
 	m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCAIServerToWorldModule::TransPBToProxy);
 	m_pNetClientModule->AddEventCallBack(NF_SERVER_TYPES::NF_ST_WORLD, this, &NFCAIServerToWorldModule::OnSocketWSEvent);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCAIServerToWorldModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCAIServerToWorldModule::OnObjectClassEvent);
 
 	m_pNetClientModule->ExpandBufferSize();
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -220,7 +220,7 @@ void NFCAIServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_NE
 
 int NFCAIServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
-	if (strClassName == NFrame::Player::ThisName())
+	if (strClassName == NFrame::Player::ThisName)
 	{
 		if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 		{

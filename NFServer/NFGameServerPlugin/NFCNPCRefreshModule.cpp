@@ -33,7 +33,7 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 
-	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName, this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
     return true;
 }
@@ -46,7 +46,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         return 1;
     }
 
-    if (strClassName == NFrame::NPC::ThisName())
+    if (strClassName == NFrame::NPC::ThisName)
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent )
         {
@@ -68,9 +68,9 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 						if (pSelfPropertyManager && pProperty->Changed()
 							&& strProperName != NFrame::IObject::ID()
 							&& strProperName != NFrame::IObject::ConfigID()
-							&& strProperName != NFrame::IObject::ClassName()
-							&& strProperName != NFrame::IObject::SceneID()
-							&& strProperName != NFrame::IObject::GroupID())
+							&& strProperName != NFrame::IObject::ClassName
+							&& strProperName != NFrame::IObject::SceneID
+							&& strProperName != NFrame::IObject::GroupID)
 						{
 							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
 						}
@@ -112,11 +112,11 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
 int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
     //and create new object
-    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
+    const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName);
 	const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
 	const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
-    int nSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID());
-    int nGroupID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::GroupID());
+    int nSceneID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::SceneID);
+    int nGroupID = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::GroupID);
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
 

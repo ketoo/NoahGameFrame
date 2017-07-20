@@ -143,6 +143,7 @@ private:
 	std::string strMySQLFile = "../mysql/NFrame.sql";
 	std::string strProtoFile = "../proto/NFRecordDefine.proto";
 	std::string strHPPFile = "../proto/NFProtocolDefine.hpp";
+	std::string strCPPFile = "../proto/NFProtocolDefine.cpp";
 	std::string strJavaFile = "../proto/NFProtocolDefine.java";
 	std::string strCSFile = "../proto/NFProtocolDefine.cs";
 

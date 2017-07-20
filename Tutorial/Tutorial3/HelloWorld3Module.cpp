@@ -79,10 +79,10 @@ bool NFCHelloWorld3Module::AfterInit()
 	
 	m_pKernelModule->CreateScene(1);
 
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHelloWorld3Module::OnClassCallBackEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName, this, &NFCHelloWorld3Module::OnClassCallBackEvent);
 
 	
-	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName(), "", NFDataList());
+	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(NFGUID(0, 10), 1, 0, NFrame::Player::ThisName, "", NFDataList());
 	if (!pObject)
 	{
 		return false;
