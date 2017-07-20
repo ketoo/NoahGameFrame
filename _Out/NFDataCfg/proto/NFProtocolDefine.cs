@@ -667,10 +667,10 @@ namespace NFrame
 			public static readonly int BUFF_GATE = 28;//int
 
 		}
-		public class HeroPropertyValue
+		public class HeroValue
 		{
 			//Class name
-			public static readonly String ThisName = "HeroPropertyValue";
+			public static readonly String ThisName = "HeroValue";
 			public static readonly int SUCKBLOOD = 0;//int
 			public static readonly int REFLECTDAMAGE = 1;//int
 			public static readonly int CRITICAL = 2;//int

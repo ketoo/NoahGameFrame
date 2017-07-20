@@ -119,7 +119,7 @@ bool NFCBigMapRedisModule::GetGridBaseInfo(const std::vector<std::string>& strGr
 
 bool NFCBigMapRedisModule::GetGridBaseInfo(std::vector<NFMsg::BigMapGridBaseInfo>& xBaseInfo)
 {
- 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Map::ThisName);
+ 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::Map::ThisName());
 	const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
 	std::vector<std::string> vFields; 
 	for (int i = 0; i < strIdList.size(); ++i)

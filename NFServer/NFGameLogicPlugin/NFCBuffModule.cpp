@@ -157,7 +157,7 @@ int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& sel
     NF_SHARE_PTR<NFIRecord> pBuffRecord = pObject->GetRecordManager()->GetElement( mstrRunTimeEffectTable );
     if ( pBuffRecord )
     {
-        NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::R_CommPropertyValue());
+        NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::CommValue::ThisName());
 
         std::string strPropertyList;
         std::string strPropertyName;

@@ -37,7 +37,7 @@ bool NFCLoginToMasterModule::AfterInit()
 
 	m_pNetClientModule->ExpandBufferSize();
 
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -87,7 +87,7 @@ bool NFCLoginToMasterModule::Execute()
 
 void NFCLoginToMasterModule::Register(NFINet* pNet)
 {
-    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+    NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
@@ -139,7 +139,7 @@ void NFCLoginToMasterModule::ServerReport()
 		return;
 	}
 	mLastReportTime = pPluginManager->GetNowTime();
-	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName);
+	std::shared_ptr<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();

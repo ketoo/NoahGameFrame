@@ -329,8 +329,8 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID);
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID);
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 	if (!m_pSceneProcessModule->GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_ERROR)
 	{
 		return false;
@@ -356,7 +356,7 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
     varList << NFrame::NPC::Camp() << nCamp;
     varList << NFrame::NPC::MasterID() << self;
 
-	NF_SHARE_PTR<NFIObject> pHero = m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName, strConfigID, NFDataList());
+	NF_SHARE_PTR<NFIObject> pHero = m_pKernelModule->CreateObject(xHeroID, nSceneID, nGroupID, NFrame::NPC::ThisName(), strConfigID, NFDataList());
     if (!pHero)
     {
         return false;

@@ -123,7 +123,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     var.AddString(NFrame::Player::GateID());
     var.AddInt(nGateID);
 
-    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, NFrame::Player::ThisName, "", var);
+    NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nPlayerID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
     if (NULL == pObject.get())
     {
         //mRoleBaseData
@@ -134,7 +134,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     pObject->SetPropertyInt(NFrame::Player::GateID(), nGateID);
     pObject->SetPropertyInt(NFrame::Player::GameID(), pPluginManager->GetAppID());
 
-    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName, CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
+    m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
 
 	m_pScenemodule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
 	//m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);

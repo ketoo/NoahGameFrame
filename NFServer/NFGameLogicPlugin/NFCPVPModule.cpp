@@ -191,7 +191,7 @@ void NFCPVPModule::FindAllTileScene()
 {
 	//Tile
 	//mxTileSceneIDList
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName);
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
