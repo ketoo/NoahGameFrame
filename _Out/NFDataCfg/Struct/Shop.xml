@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Count" Cache="FALSE" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Diamond" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Gold" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="ItemID" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="string" Upload="FALSE" />
-		<Property Id="Level" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Steel" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Stone" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
-		<Property Id="Type" Cache="FALSE" Desc="" Force="FALSE" Private="FALSE" Public="FALSE" Ref="FALSE" Save="TRUE" Type="int" Upload="FALSE" />
+		<Property Id="Count" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Diamond" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Gold" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="ItemID" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Level" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Steel" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Stone" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Type" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>
