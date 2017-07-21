@@ -1,3 +1,12 @@
+// -------------------------------------------------------------------------
+//    @FileName			:    NFCGuildComponent.h
+//    @Author           :    LvSheng.Huang
+//    @Date             :    2017-07-21
+//    @Module           :    NFCGuildComponent
+//
+// -------------------------------------------------------------------------
+
+
 #ifndef NFC_GUILD_COMPONENT_H
 #define NFC_GUILD_COMPONENT_H
 
@@ -31,7 +40,7 @@ public:
 protected:
 	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
 	{
-		return  NF_SHARE_PTR<NFIComponent>(NF_NEW  NFCHttpComponent(NFGUID(1, 2), ""));
+		return  NF_SHARE_PTR<NFIComponent>(NF_NEW  NFCGuildComponent(NFGUID(1, 2), ""));
 	}
 };
 
