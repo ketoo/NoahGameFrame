@@ -77,11 +77,6 @@ bool NFCProxyServerToGameModule::AfterInit()
     return true;
 }
 
-void NFCProxyServerToGameModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
-}
-
 void NFCProxyServerToGameModule::OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)

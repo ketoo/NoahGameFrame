@@ -75,11 +75,6 @@ bool NFCProxyServerToAIModule::AfterInit()
     return true;
 }
 
-void NFCProxyServerToAIModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
-}
-
 void NFCProxyServerToAIModule::OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
