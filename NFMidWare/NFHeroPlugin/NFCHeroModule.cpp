@@ -445,7 +445,7 @@ bool NFCHeroModule::HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, con
 
 void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
 
 	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
 	const int nSet = xMsg.set();
@@ -455,7 +455,7 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 
 void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchFightHero);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSwitchFightHero);
 
 	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
 

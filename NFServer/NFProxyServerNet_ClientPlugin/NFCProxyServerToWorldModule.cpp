@@ -42,7 +42,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
 {
     NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -249,7 +249,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }

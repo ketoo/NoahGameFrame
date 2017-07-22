@@ -16,20 +16,7 @@ class NFIGuildModule
 {
 public:
 
-	virtual const NFGUID& CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;
-	virtual bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID) = 0;
-	virtual bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID) = 0;
-	virtual bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember) = 0;
-	virtual bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember) = 0;
-	virtual bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember) = 0;
 
-	virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList) = 0;
-	virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID) = 0;
-	virtual bool MemberOffline(const NFGUID& self, const NFGUID& xGuild) = 0;
-
-	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID) = 0;
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID) = 0;
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember) = 0;
 private:
 };
 
