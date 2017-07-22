@@ -35,6 +35,11 @@ void NFCActor::AddComponent(NF_SHARE_PTR<NFIComponent> pComponent)
 	pComponent->ReadyExecute();
 }
 
+NF_SHARE_PTR<NFIComponent> NFCActor::FindComponent(const std::string & strComponentName)
+{
+	return mxComponent.GetElement(strComponentName);
+}
+
 bool NFCActor::AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor)
 {
 	if (mxProcessFuntor.GetElement(nSubMsgID))
@@ -91,7 +96,7 @@ void NFCActor::Handler(const NFIActorMessage& message, const Theron::Address fro
 	// must return message 
     NFIActorMessage xReturnMessage;
 
-	xReturnMessage.bComponentMsg = false;
+	xReturnMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_END_FUNC;
 	xReturnMessage.nMsgID = message.nMsgID;
     xReturnMessage.data = strData;
     xReturnMessage.self = message.self;

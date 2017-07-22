@@ -62,6 +62,9 @@ protected:
 	int OnLeaveGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
 	int OnOprGuildMemberProcess(const NFGUID& self, const int from, const int event, std::string& arg);
 	int OnSearchGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
+
+private:
+	NFMapEx<NFGUID, NFIObject> mxGuildObject;
 };
 
 #endif
