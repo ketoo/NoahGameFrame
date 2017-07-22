@@ -66,34 +66,6 @@ public:
         return AddRecordCallBack(strRecordName, functorPtr);
     }
 
-    template <typename T>
-    bool AddComponent()
-    {
-        return GetComponentManager()->AddComponent<T>();
-    }
-
-    template <typename T>
-    NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
-    {
-		NF_SHARE_PTR<NFIComponent> pComponent = GetComponentManager()->FindComponent<NFIComponent>(strComponentName);
-        if (pComponent)
-        {
-            NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
-            if (nullptr != pNewCOmponent && GetComponentManager()->AddComponent(strComponentName, pNewCOmponent))
-            {
-                return pNewCOmponent;
-            }
-        }
-
-        return NF_SHARE_PTR<T>();
-    }
-
-    template <typename T>
-    NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
-    {
-        return GetComponentManager()->FindComponent<T>(strComponentName);
-    }
-
     /////////////////////////////////////////////////////////////////
 	virtual CLASS_OBJECT_EVENT GetState() = 0;
 	virtual bool SetState(const CLASS_OBJECT_EVENT eState) = 0;
