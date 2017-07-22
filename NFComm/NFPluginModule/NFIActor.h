@@ -63,6 +63,25 @@ public:
 	virtual ~NFIActor() {}
 
 	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+
+	template<typename T>
+	NF_SHARE_PTR<T> FindComponent(const std::string& strName)
+	{
+		if (!TIsDerived<T, NFIComponent>::Result)
+		{
+			//BaseTypeComponent must inherit from NFIComponent;
+			return NF_SHARE_PTR<T>();
+		}
+
+		NF_SHARE_PTR<NFIComponent> pComponent = FindComponent(strName);
+		NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
+		if (nullptr != pT)
+		{
+			return pT;
+		}
+
+		return NF_SHARE_PTR<T>();
+	}
 	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 	
 	virtual bool AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
