@@ -9,7 +9,6 @@
 #include "NFCObject.h"
 #include "NFCRecordManager.h"
 #include "NFCPropertyManager.h"
-#include "NFCComponentManager.h"
 
 NFCObject::NFCObject(NFGUID self, NFIPluginManager* pLuginManager)
     : NFIObject(self)
@@ -21,7 +20,6 @@ NFCObject::NFCObject(NFGUID self, NFIPluginManager* pLuginManager)
 
     m_pRecordManager = NF_SHARE_PTR<NFCRecordManager>(NF_NEW NFCRecordManager(mSelf));
     m_pPropertyManager = NF_SHARE_PTR<NFCPropertyManager>(NF_NEW NFCPropertyManager(mSelf));
-    m_pComponentManager = NF_SHARE_PTR<NFCComponentManager>(NF_NEW NFCComponentManager(mSelf));
 }
 
 NFCObject::~NFCObject()
@@ -41,8 +39,6 @@ bool NFCObject::Shut()
 
 bool NFCObject::Execute()
 {
-    GetComponentManager()->Execute();
-
     return true;
 }
 
@@ -513,9 +509,4 @@ NF_SHARE_PTR<NFIPropertyManager> NFCObject::GetPropertyManager()
 NFGUID NFCObject::Self()
 {
     return mSelf;
-}
-
-NF_SHARE_PTR<NFIComponentManager> NFCObject::GetComponentManager()
-{
-    return m_pComponentManager;
 }

@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlDriverManager.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
+#include "NFComm/NFPluginModule/NFIComponent.h"
 
 struct SMysqlBaseParam
 {
@@ -114,11 +115,7 @@ public:
 class NFCMysqlComponent : public NFIComponent
 {
 public:
-    NFCMysqlComponent(NFGUID self, const std::string& strName): NFIComponent(self, strName)
-    {
-    }
-
-    NFCMysqlComponent(NFIPluginManager* pPluginManager): NFIComponent(NFGUID(), "")
+    NFCMysqlComponent(): NFIComponent(GET_CLASS_NAME(NFCMysqlComponent))
     {
     }
 
@@ -129,7 +126,7 @@ public:
 
     virtual bool Init();
     virtual bool AfterInit();
-    virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg);
+    virtual int OnASyncEvent(const NFGUID& self, const int from, const int nSubMessageID, std::string& arg);
 
     int OnASyUpdataMysqlEvent(const NFGUID& self, const int event, std::string& arg);
     int OnASyQueryMysqlEvent(const NFGUID& self, const int event, std::string& arg);
@@ -141,8 +138,6 @@ public:
     int OnASyKeepServerAliveEvent(const NFGUID& self, const int event, std::string& arg);
 
 protected:
-    virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance();
-
     NF_SHARE_PTR<NFIMysqlDriverManager> m_pMysqlDriverManager;
 };
 
