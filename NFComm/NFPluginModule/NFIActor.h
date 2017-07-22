@@ -26,39 +26,30 @@ typedef NF_SHARE_PTR<ACTOR_PROCESS_FUNCTOR> ACTOR_PROCESS_FUNCTOR_PTR;
 class NFIActorMessage
 {
 public:
+	enum MessageType
+	{
+		ACTOR_MSG_TYPE_COMPONENT,
+		ACTOR_MSG_TYPE_END_FUNC,
+		ACTOR_MSG_TYPE_NET_MSG,
+	};
+
 	NFIActorMessage()
 	{
 		nMsgID = 0;
 		nFormActor = 0;
-		bComponentMsg = true;
+		msgType = ACTOR_MSG_TYPE_COMPONENT;
 	}
 
 	int nMsgID;
 	int nFormActor;
 	std::string data;
-	bool bComponentMsg;
+	MessageType msgType;
 	////////////////////event/////////////////////////////////////////////////
 	NFGUID self;
 	//////////////////////////////////////////////////////////////////////////
 	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
 protected:
 private:
-};
-
-struct NFAsyncEventFunc
-{
-	NFAsyncEventFunc()
-	{
-		nActorID = -1;
-	}
-
-	ACTOR_PROCESS_FUNCTOR_PTR xEndFuncptr;
-	int nActorID;
-};
-
-class NFCObjectAsyncEventInfo
-	: public NFMapEx<int, NFAsyncEventFunc>
-{
 };
 
 class NFIActor : public Theron::Actor
@@ -72,6 +63,7 @@ public:
 	virtual ~NFIActor() {}
 
 	virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent) = 0;
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName) = 0;
 	
 	virtual bool AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor) = 0;
 	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor) = 0;
@@ -101,4 +93,4 @@ protected:
 
 };
 
-#endif // !NFI_ACTOR_H
+#endif
