@@ -38,10 +38,10 @@ enum NF_SERVER_TYPES
 ////////////////////////////////////////////////////////////////////////////
 
 //only use this macro when u has entered game server
-#define CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msgData, nLen, msg)                 \
+#define CLIENT_MSG_PROCESS(nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
         /*m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__);*/ \
         return;                                         \
@@ -54,13 +54,21 @@ enum NF_SERVER_TYPES
         return;                                         \
     }
 
-#define CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msgData, nLen, msg)                 \
+#define CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msgData, nLen, msg)                 \
     NFGUID nPlayerID;                                \
     msg xMsg;                                           \
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+    if (!NFINetModule::ReceivePB(nMsgID, msgData, nLen, xMsg, nPlayerID))             \
     {                                                   \
         m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NFGUID(), "", "Parse msg error", __FUNCTION__, __LINE__); \
         return;                                         \
+    }
+
+#define CLIENT_MSG_PROCESS_NO_LOG(nMsgID, msgData, nLen, msg)                 \
+    NFGUID nPlayerID;                                \
+    msg xMsg;                                           \
+    if (!NFINetModule::ReceivePB(nMsgID, msgData, nLen, xMsg, nPlayerID))             \
+    {                                                   \
+        return 0;                                         \
     }
 
 //////////////////////////////////////////////////////////////////////////
@@ -164,7 +172,7 @@ public:
 		return AddEventCallBack(functorPtr);
 	}
 
-	static bool ReceivePB(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen, std::string & strMsg, NFGUID & nPlayer)
+	static bool ReceivePB(const int nMsgID, const char * msg, const uint32_t nLen, std::string & strMsg, NFGUID & nPlayer)
 	{
 		NFMsg::MsgBase xMsg;
 		if (!xMsg.ParseFromArray(msg, nLen))
@@ -183,12 +191,12 @@ public:
 		return true;
 	}
 
-	static bool ReceivePB(const int nSockIndex, const int nMsgID, const std::string& strMsgData, google::protobuf::Message & xData, NFGUID & nPlayer)
+	static bool ReceivePB(const int nMsgID, const std::string& strMsgData, google::protobuf::Message & xData, NFGUID & nPlayer)
 	{
-		return ReceivePB(nSockIndex, nMsgID, strMsgData.c_str(), strMsgData.length(), xData, nPlayer);
+		return ReceivePB(nMsgID, strMsgData.c_str(), strMsgData.length(), xData, nPlayer);
 	}
 
-	static bool ReceivePB(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen, google::protobuf::Message & xData, NFGUID & nPlayer)
+	static bool ReceivePB(const int nMsgID, const char * msg, const uint32_t nLen, google::protobuf::Message & xData, NFGUID & nPlayer)
 	{
 		NFMsg::MsgBase xMsg;
 		if (!xMsg.ParseFromArray(msg, nLen))

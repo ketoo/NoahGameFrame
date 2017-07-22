@@ -72,7 +72,7 @@ bool NFCPVPModule::ReadyExecute()
 
 void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	//find a tile map and swap scene
 
 	int nSceneID = RandomTileScene();
@@ -114,7 +114,7 @@ void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMs
 
 void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
 
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), nPlayerID);
@@ -136,7 +136,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMs
 
 void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
 
 	NFGUID xViewOppnent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent());
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), xViewOppnent);
@@ -160,7 +160,7 @@ void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int n
 
 void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqEndBattle);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
 
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), NFGUID());
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());

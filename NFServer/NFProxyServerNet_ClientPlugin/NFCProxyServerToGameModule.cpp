@@ -151,7 +151,7 @@ void NFCProxyServerToGameModule::OnAckEnterGame(const int nSockIndex, const int 
 {
     NFGUID nPlayerID;
     NFMsg::AckEventResult xData;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }

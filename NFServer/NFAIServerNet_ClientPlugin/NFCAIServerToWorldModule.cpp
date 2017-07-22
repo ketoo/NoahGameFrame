@@ -261,7 +261,7 @@ void NFCAIServerToWorldModule::TransPBToProxy(const int nSockIndex, const int nM
 {
 	NFGUID nPlayerID;
 	std::string strData;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, strData, nPlayerID))
+	if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, strData, nPlayerID))
 	{
 		return;
 	}

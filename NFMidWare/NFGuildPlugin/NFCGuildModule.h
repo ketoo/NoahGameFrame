@@ -34,24 +34,9 @@ public:
 
     virtual bool AfterInit();
 
-	virtual const NFGUID& CreateGuild( const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
-	virtual bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-	virtual bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-	virtual bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-
-    virtual bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList);
-    virtual bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
-	virtual bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
-
-	virtual bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID);
-	virtual bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
-
 protected:
-	void OnGuildOnlineProcess(const NFGUID& xGuildID);
-	void OnGuildOfflineProcess(const NFGUID& xGuildID);
+	bool StartActorPool(const int nCount);
+	bool CloseActorPool();
 
 	int ComponentAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
 
@@ -64,7 +49,8 @@ protected:
 	void OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-    bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
+
+	NFConsistentHashMapEx<int, int> mActorList; //actorid <-->Used
 
 protected:
 	NFIActorModule* m_pActorModule;
