@@ -28,12 +28,7 @@ public:
 
 	virtual bool AfterInit();
 
-	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
-	{
-		std::cout << "Hello, welcome to actor thread: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
-
-		return 0;
-	}
+	virtual int OnASyncEvent(const NFGUID& self, const int from, const int event, std::string& arg);
 
 	const NFGUID& CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP);
 	bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);

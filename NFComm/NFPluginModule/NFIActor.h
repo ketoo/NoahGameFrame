@@ -78,7 +78,7 @@ protected:
 private:
     void DefaultHandler(const NFIActorMessage& message, const Theron::Address from)
     {
-        if (message.bComponentMsg > 0 )
+        if (message.msgType == NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT)
         {
 			Handler(message, from);
         }
