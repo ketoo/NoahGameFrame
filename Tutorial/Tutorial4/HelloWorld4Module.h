@@ -11,15 +11,12 @@
 
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
+#include "NFComm/NFPluginModule/NFIComponent.h"
 
 class NFCHttpComponent : public NFIComponent
 {
 public:
-	NFCHttpComponent(NFIPluginManager* pPluginManager) : NFIComponent(NFGUID(), "")
-	{
-	}
-
-	NFCHttpComponent(NFGUID self, const std::string& strName) : NFIComponent(self, strName)
+	NFCHttpComponent() : NFIComponent(GET_CLASS_NAME(NFCHttpComponent))
 	{
 	}
 
@@ -28,19 +25,27 @@ public:
 
 	}
 
-	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
+	virtual bool Init()
+	{
+		AddMsgObserver(2, this, &NFCHttpComponent::OnMsgEvent);
+
+		return true;
+	}
+
+
+	virtual int OnMsgEvent(const NFGUID& self, const int from, const int event, std::string& arg)
+	{
+		std::cout << "iddd: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
+
+		return 0;
+	}
+
+	virtual int OnASyncEvent(const NFGUID& self, const int from, const int event, std::string& arg)
 	{
 		std::cout << "Hello, welcome to actor thread: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
 
 		return 0;
 	}
-
-protected:
-	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
-	{
-		return  NF_SHARE_PTR<NFIComponent>(NF_NEW  NFCHttpComponent(NFGUID(1, 2), ""));
-	}
-
 };
 
 class NFIHelloWorld4Module

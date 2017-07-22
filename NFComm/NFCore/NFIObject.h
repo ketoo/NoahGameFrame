@@ -13,7 +13,6 @@
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
 #include "NFIPropertyManager.h"
-#include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -150,7 +149,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;

@@ -212,6 +212,7 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
 
 bool NFCClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NF_SHARE_PTR<NFIClass> pClass)
 {
+	/*
     for (rapidxml::xml_node<>* pComponentNode = pComponentRootNode->first_node(); pComponentNode; pComponentNode = pComponentNode->next_sibling())
     {
         if (pComponentNode)
@@ -233,7 +234,7 @@ bool NFCClassModule::AddComponents(rapidxml::xml_node<>* pComponentRootNode, NF_
             }
         }
     }
-
+	*/
     return true;
 }
 
@@ -423,17 +424,6 @@ NF_SHARE_PTR<NFIRecordManager> NFCClassModule::GetClassRecordManager(const std::
     if (pClass)
     {
         return pClass->GetRecordManager();
-    }
-
-    return NULL;
-}
-
-NF_SHARE_PTR<NFIComponentManager> NFCClassModule::GetClassComponentManager(const std::string& strClassName)
-{
-    NF_SHARE_PTR<NFIClass> pClass = GetElement(strClassName);
-    if (pClass)
-    {
-        return pClass->GetComponentManager();
     }
 
     return NULL;
