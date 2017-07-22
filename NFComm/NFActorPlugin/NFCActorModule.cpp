@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCActorModule.h"
-#include "NFComm/NFCore/NFIComponent.h"
 
 NFCActorModule::NFCActorModule(NFIPluginManager* p)
 {
@@ -62,7 +61,6 @@ bool NFCActorModule::Execute()
 
 int NFCActorModule::RequireActor()
 {
-    
     NF_SHARE_PTR<NFIActor> pActor(NF_NEW NFCActor(*m_pFramework, this));
 	mxActorMap.AddElement(pActor->GetAddress().AsInteger(), pActor);
 
@@ -91,9 +89,11 @@ bool NFCActorModule::ExecuteEvent()
 	bRet = mxQueue.Pop(xMsg);
 	while (bRet)
 	{
-		if (!xMsg.bComponentMsg)
+		if (!xMsg.bComponentMsg && xMsg.xEndFuncptr != nullptr)
 		{
-			xMsg.xEndFuncptr->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
+			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
+			pFun->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
+
 			//Actor can be reused in ActorPool mode, so we don't release it.
 			//m_pActorManager->ReleaseActor(xMsg.nFormActor);
 		}
@@ -141,14 +141,12 @@ bool NFCActorModule::ReleaseActor(const int nActorIndex)
 	return mxActorMap.RemoveElement(nActorIndex);
 }
 
-bool NFCActorModule::AddEndFunc(const int nActorIndex, EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end)
+bool NFCActorModule::AddEndFunc(const int nActorIndex, const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR functorPtr)
 {
     NF_SHARE_PTR<NFIActor> pActor = GetActor(nActorIndex);
     if (nullptr != pActor)
     {
-        pActor->AddEndFunc(functorPtr_end);
-
-        return true;
+		return pActor->AddEndFunc(nSubMsgID, functorPtr);
     }
 
     return false;

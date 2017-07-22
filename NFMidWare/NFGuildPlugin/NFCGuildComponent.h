@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-
 #ifndef NFC_GUILD_COMPONENT_H
 #define NFC_GUILD_COMPONENT_H
 
@@ -15,13 +14,8 @@
 
 class NFCGuildComponent : public NFIComponent
 {
-
 public:
-	NFCGuildComponent(NFIPluginManager* pPluginManager) : NFIComponent(NFGUID(), "")
-	{
-	}
-
-	NFCGuildComponent(NFGUID self, const std::string& strName) : NFIComponent(self, strName)
+	NFCGuildComponent() : NFIComponent(GET_CLASS_NAME(NFCGuildComponent))
 	{
 	}
 
@@ -37,11 +31,6 @@ public:
 		return 0;
 	}
 
-protected:
-	virtual NF_SHARE_PTR<NFIComponent> CreateNewInstance()
-	{
-		return  NF_SHARE_PTR<NFIComponent>(NF_NEW  NFCGuildComponent(NFGUID(1, 2), ""));
-	}
 };
 
 #endif

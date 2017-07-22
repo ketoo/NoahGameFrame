@@ -1,6 +1,5 @@
 #include "HelloWorld.h"
 #include "NFComm/NFCore/NFCObject.h"
-#include "NFComm/NFCore/NFIComponent.h"
 #include "NFComm/NFCore//NFDataList.hpp"
 #include "NFComm/NFNetPlugin/NFCWebsocketModule.h"
 
@@ -19,14 +18,8 @@ bool NFCHelloWorld::AfterInit()
 
 	std::cout << "websocket module init with port"<< 9004 << std::endl;
 
-	NF_WS_MSG_CALL_BACK msg_cb = std::bind(&NFCHelloWorld::OnWebsocketMessage, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-	NF_WS_EVENT_CALL_BACK evt_cb = std::bind(&NFCHelloWorld::OnWebsocketEvent, this, std::placeholders::_1, std::placeholders::_2);
-
-	NF_WS_MSG_CALL_BACK_PTR pMsgCB(new NF_WS_MSG_CALL_BACK(msg_cb));
-	NF_WS_EVENT_CALL_BACK_PTR pEvtCB(new NF_WS_EVENT_CALL_BACK(evt_cb));
-
-	m_pWSModule->SetEventCallBack(pEvtCB);
-	m_pWSModule->SetReceiveCallBack(pMsgCB);
+	m_pWSModule->SetEventCallBack(this, &NFCHelloWorld::OnWebsocketEvent);
+	m_pWSModule->SetReceiveCallBack(this, &NFCHelloWorld::OnWebsocketMessage);
 
     return true;
 }

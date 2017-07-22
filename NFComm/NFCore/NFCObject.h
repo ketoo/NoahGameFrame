@@ -91,7 +91,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager();
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
@@ -103,7 +102,6 @@ private:
 	CLASS_OBJECT_EVENT mObjectEventState;
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
-    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
 };
 
