@@ -13,7 +13,6 @@
 #include "NFGUID.h"
 #include "NFIActor.h"
 
-
 class NFIComponent
 {
 private:
@@ -83,26 +82,7 @@ public:
 	{
 		return true;
 	}
-	/*
-    template <typename T>
-    NF_SHARE_PTR<T> CreateNewInstance()
-    {
-        NF_SHARE_PTR<NFIComponent> pComponent = CreateNewInstance();
-        if (nullptr != pComponent)
-        {
-            if (TIsDerived<T, NFIComponent>::Result)
-            {
-                NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
-                if (nullptr != pT)
-                {
-                    return pT;
-                }
-            }
-        }
 
-        return NF_SHARE_PTR<T>();
-    }
-	*/
     virtual bool SetEnable(const bool bEnable)
     {
         mbEnable = bEnable;
@@ -141,7 +121,23 @@ public:
 
 		return mSelf->AddBeginunc(nSubMessage, functorPtr);
 	}
-	/*
+
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex)
+	{
+		return true;
+
+	}
+
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
+	{
+		return true;
+	}
+
+	virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const std::string& strData)
+	{
+		return true;
+	}
+
 	template <typename T>
 	NF_SHARE_PTR<T> FindComponent(const std::string& strName)
 	{
@@ -151,28 +147,8 @@ public:
 			return NF_SHARE_PTR<T>();
 		}
 
-		NF_SHARE_PTR<NFIComponent> pComponent = First();
-		while (nullptr != pComponent)
-		{
-			if (pComponent->GetComponentName() == strName)
-			{
-				NF_SHARE_PTR<T> pT = std::dynamic_pointer_cast<T>(pComponent);
-				if (nullptr != pT)
-				{
-					return pT;
-				}
-				else
-				{
-					return NF_SHARE_PTR<T>(nullptr);
-				}
-			}
-
-			pComponent = Next();
-		}
-
-		return NF_SHARE_PTR<T>(nullptr);
+		return mSelf->FindComponent(strName);
 	}
-	*/
 
 private:
     bool mbEnable;

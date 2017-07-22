@@ -80,11 +80,52 @@ int NFCGuildComponent::OnLeaveGuildProcess(const NFGUID & self, const int from, 
 
 int NFCGuildComponent::OnOprGuildMemberProcess(const NFGUID & self, const int from, const int event, std::string & arg)
 {
+	/*
+	NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType eOprType = xMsg.type();
+	switch (eOprType)
+	{
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_UP:
+	PromotionMember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+	break;
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_DOWN:
+	DemotionMember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+	break;
+	case NFMsg::ReqAckOprGuildMember::EGGuildMemberOprType::ReqAckOprGuildMember_EGGuildMemberOprType_EGAT_KICK:
+	KickMmember(nPlayerID, NFINetModule::PBToNF(xMsg.guild_id()), NFINetModule::PBToNF(xMsg.member_id()));
+	break;
+	default:
+	break;
+	}
+	*/
 	return 0;
 }
 
 int NFCGuildComponent::OnSearchGuildProcess(const NFGUID & self, const int from, const int event, std::string & arg)
 {
+	/*
+	std::vector<NFIGuildDataModule::SearchGuildObject> xList;
+	m_pGuildDataModule->SearchGuild(nPlayerID, xMsg.guild_name(), xList);
+
+	NFMsg::AckSearchGuild xAckMsg;
+	for (int i = 0; i < xList.size(); ++i)
+	{
+	NFMsg::AckSearchGuild::SearchGuildObject* pData = xAckMsg.add_guild_list();
+	if (pData)
+	{
+	const NFIGuildDataModule::SearchGuildObject& xGuild = xList[i];
+	*pData->mutable_guild_id() = NFINetModule::NFToPB(xGuild.mxGuildID);
+	pData->set_guild_name(xGuild.mstrGuildName);
+	pData->set_guild_icon(xGuild.mnGuildIcon);
+
+	pData->set_guild_member_count(xGuild.mnGuildMemberCount);
+	pData->set_guild_member_max_count(xGuild.mnGuildMemberMaxCount);
+	pData->set_guild_honor(xGuild.mnGuildHonor);
+	pData->set_guild_rank(xGuild.mnGuildRank);
+	}
+	}
+
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_SEARCH_GUILD, xAckMsg, nSockIndex, nPlayerID);
+	*/
 	return 0;
 }
 
@@ -110,7 +151,6 @@ const NFGUID & NFCGuildComponent::CreateGuild(const NFGUID & self, const std::st
 }
 
 bool NFCGuildComponent::JoinGuild(const NFGUID & self, const NFGUID & xGuildID)
-
 {
 	/*
 	NF_SHARE_PTR<NFIObject> pGuildObject = m_pGuildDataModule->GetGuild(xGuildID);
