@@ -116,8 +116,6 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
                 pData->set_server_max_online(nMaxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
                 NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
