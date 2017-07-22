@@ -50,7 +50,7 @@ bool NFCMapModule::AfterInit()
 
 void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqBigMapInfo);
 
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement("Map");
@@ -76,7 +76,7 @@ void NFCMapModule::ReqBigMapsInfo(const int nSockIndex, const int nMsgID, const 
 
 void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqBigMapGridInfo);
 	
 	NFMsg::AckBigMapGridInfo xAckBigMapGridInfo;
 
@@ -140,7 +140,7 @@ void NFCMapModule::ReqMapTitleInfo(const int nSockIndex, const int nMsgID, const
 
 void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqHoldMapGrid);
 
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
@@ -163,7 +163,7 @@ void NFCMapModule::ReqStation(const int nSockIndex, const int nMsgID, const char
 
 void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqGetMapAward);
 
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
@@ -175,7 +175,7 @@ void NFCMapModule::ReqGetMapAward(const int nSockIndex, const int nMsgID, const 
 
 void NFCMapModule::ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqLeaveMapMsg);
 
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
@@ -187,7 +187,7 @@ void NFCMapModule::ReqLeaveMsgToMap(const int nSockIndex, const int nMsgID, cons
 
 void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapHunting);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapHunting);
 
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{
@@ -210,7 +210,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 
 void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 
 	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
 	{

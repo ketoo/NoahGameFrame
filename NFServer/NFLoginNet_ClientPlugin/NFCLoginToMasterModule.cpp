@@ -188,7 +188,7 @@ void NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, c
 {
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -221,7 +221,7 @@ void NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int 
 {
     NFGUID nPlayerID ;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }

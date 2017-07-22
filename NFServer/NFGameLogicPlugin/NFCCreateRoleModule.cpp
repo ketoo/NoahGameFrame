@@ -36,7 +36,7 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -81,7 +81,7 @@ void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const in
 {
 	NFGUID nClientID;
 	NFMsg::ReqCreateRole xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -115,7 +115,7 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
@@ -128,7 +128,7 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 {
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nClientID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nClientID))
 	{
 		return;
 	}
