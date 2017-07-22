@@ -142,7 +142,13 @@ bool NFCGuildComponent::Init()
 
 bool NFCGuildComponent::AfterInit()
 {
+	//init 100 guilds
 	return false;
+}
+
+int NFCGuildComponent::OnASyncEvent(const NFGUID & self, const int from, const int event, std::string & arg)
+{
+	return 0;
 }
 
 const NFGUID & NFCGuildComponent::CreateGuild(const NFGUID & self, const std::string & strName, const std::string & strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP)
