@@ -692,7 +692,7 @@ int NFCEquipModule::GetEquipElementLevel(const NFGUID & self, const NFGUID & id,
 //msg process
 void NFCEquipModule::OnIntensifylevelToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
 
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
@@ -709,7 +709,7 @@ void NFCEquipModule::OnIntensifylevelToEquipMsg( const int nSockIndex, const int
 
 void NFCEquipModule::OnHoleToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
 
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
@@ -726,7 +726,7 @@ void NFCEquipModule::OnHoleToEquipMsg( const int nSockIndex, const int nMsgID, c
 
 void NFCEquipModule::OnInlaystoneToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
 
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
@@ -745,7 +745,7 @@ void NFCEquipModule::OnInlaystoneToEquipMsg( const int nSockIndex, const int nMs
 
 void NFCEquipModule::OnElementlevelToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
 
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
@@ -762,7 +762,7 @@ void NFCEquipModule::OnElementlevelToEquipMsg( const int nSockIndex, const int n
 
 void NFCEquipModule::OnReqWearEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqWearEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqWearEquip);
 
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
@@ -773,7 +773,7 @@ void NFCEquipModule::OnReqWearEquipMsg( const int nSockIndex, const int nMsgID, 
 
 void NFCEquipModule::OnTakeOffEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::TakeOffEquip);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::TakeOffEquip);
 	const NFGUID self = nPlayerID;
 	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
 	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));

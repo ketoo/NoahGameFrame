@@ -24,6 +24,10 @@ public:
 
 	}
 
+	virtual bool Init();
+
+	virtual bool AfterInit();
+
 	virtual int OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
 	{
 		std::cout << "Hello, welcome to actor thread: " << self.ToString() << " MsgID: " << event << " Data:" << arg << std::endl;
@@ -31,6 +35,33 @@ public:
 		return 0;
 	}
 
+	const NFGUID& CreateGuild(const NFGUID& self, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP);
+	bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
+	bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
+	bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+	bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+	bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+
+	bool GetOnlineMember(const NFGUID& self, const NFGUID& xGuild, NFDataList& varMemberList, NFDataList& varGameList);
+	bool MemberOnline(const NFGUID& self, const NFGUID& xGuild, const int& nGameID);
+	bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
+
+	bool GetGuildBaseInfo(const NFGUID& self, const NFGUID& xGuildID);
+	bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID);
+	bool GetGuildMemberInfo(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMmember);
+
+	void OnGuildOnlineProcess(const NFGUID& xGuildID);
+	void OnGuildOfflineProcess(const NFGUID& xGuildID);
+
+	bool CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType);
+
+protected:
+	
+	int OnCreateGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
+	int OnJoinGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
+	int OnLeaveGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
+	int OnOprGuildMemberProcess(const NFGUID& self, const int from, const int event, std::string& arg);
+	int OnSearchGuildProcess(const NFGUID& self, const int from, const int event, std::string& arg);
 };
 
 #endif
