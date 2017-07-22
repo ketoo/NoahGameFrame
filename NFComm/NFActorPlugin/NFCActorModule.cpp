@@ -74,7 +74,7 @@ NF_SHARE_PTR<NFIActor> NFCActorModule::GetActor(const int nActorIndex)
 
 bool NFCActorModule::HandlerEx(const NFIActorMessage & message, const int from)
 {
-	if (!message.bComponentMsg)
+	if (message.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT)
 	{
 		return mxQueue.Push(message);
 	}
@@ -89,7 +89,7 @@ bool NFCActorModule::ExecuteEvent()
 	bRet = mxQueue.Pop(xMsg);
 	while (bRet)
 	{
-		if (!xMsg.bComponentMsg && xMsg.xEndFuncptr != nullptr)
+		if (xMsg.msgType != NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT && xMsg.xEndFuncptr != nullptr)
 		{
 			ACTOR_PROCESS_FUNCTOR* pFun = xMsg.xEndFuncptr.get();
 			pFun->operator()(xMsg.self, xMsg.nFormActor, xMsg.nMsgID, xMsg.data);
@@ -111,7 +111,7 @@ bool NFCActorModule::SendMsgToActor(const int nActorIndex, const NFGUID& objectI
     {
         NFIActorMessage xMessage;
 
-		xMessage.bComponentMsg = true;
+		xMessage.msgType = NFIActorMessage::ACTOR_MSG_TYPE_COMPONENT;
         xMessage.data = strArg;
         xMessage.nMsgID = nEventID;
         xMessage.nFormActor = m_pMainActor->GetAddress().AsInteger();
