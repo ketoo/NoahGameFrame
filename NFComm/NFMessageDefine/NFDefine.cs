@@ -417,6 +417,12 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MOVE_IMMUNE", Value=1233)]
       EGMI_ACK_MOVE_IMMUNE = 1233,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_STATE_SYNC", Value=1234)]
+      EGMI_REQ_STATE_SYNC = 1234,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_STATE_SYNC", Value=1235)]
+      EGMI_ACK_STATE_SYNC = 1235,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_SKILL_OBJECTX", Value=1240)]
       EGMI_REQ_SKILL_OBJECTX = 1240,
             

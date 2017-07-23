@@ -268,18 +268,39 @@ namespace NFMsg
       get { return _moveType; }
       set { _moveType = value; }
     }
+    private float _speed;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float speed
+    {
+      get { return _speed; }
+      set { _speed = value; }
+    }
+    private int _time;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int time
+    {
+      get { return _time; }
+      set { _time = value; }
+    }
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _target_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> target_pos
     {
       get { return _target_pos; }
     }
   
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _source_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> source_pos
     {
       get { return _source_pos; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _move_direction = new global::System.Collections.Generic.List<NFMsg.Vector3>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"move_direction", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.Vector3> move_direction
+    {
+      get { return _move_direction; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
