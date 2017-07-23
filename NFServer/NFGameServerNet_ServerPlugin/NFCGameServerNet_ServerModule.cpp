@@ -68,6 +68,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE, this, &NFCGameServerNet_ServerModule::OnClienReqMoveProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_IMMUNE, this, &NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STATE_SYNC, this, &NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess);
 
 	m_pNetModule->AddEventCallBack(this, &NFCGameServerNet_ServerModule::OnSocketPSEvent);
 
@@ -1153,14 +1154,60 @@ void NFCGameServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, 
 
 void NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
-	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
+	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
+	if (self != nPlayerID)
+	{
+		return;
+	}
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
 
+	if (xMsg.target_pos_size() > 0)
+	{
+		NFMsg::Vector3 vPos = xMsg.target_pos(0);
+
+		NFVector3 v;
+		v.SetX(vPos.x());
+		v.SetY(vPos.y());
+		v.SetZ(vPos.z());
+
+		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+	}
+
+
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
+}
+
+void NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
+
+	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
+	if (self != nPlayerID)
+	{
+		return;
+	}
+
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+
+
+	if (xMsg.target_pos_size() > 0)
+	{
+		NFMsg::Vector3 vPos = xMsg.target_pos(0);
+
+		NFVector3 v;
+		v.SetX(vPos.x());
+		v.SetY(vPos.y());
+		v.SetZ(vPos.z());
+
+		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+	}
+
+	this->SendMsgPBToGate(NFMsg::EGMI_ACK_STATE_SYNC, xMsg, nSceneID, nGroupID);
 }
 
 void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
