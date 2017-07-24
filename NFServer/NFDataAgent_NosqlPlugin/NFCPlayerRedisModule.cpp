@@ -35,7 +35,8 @@ bool NFCPlayerRedisModule::Execute()
 
 bool NFCPlayerRedisModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectPlayerEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCPlayerRedisModule::OnObjectGuildEvent);
 
 	return true;
 }
@@ -353,7 +354,7 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 	return false;
 }
 
-int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCPlayerRedisModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -364,6 +365,24 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
 		OnOnline(self);
+		AttachData(self);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		mxObjectDataCache.RemoveElement(self);
+	}
+
+	return 0;
+}
+
+int NFCPlayerRedisModule::OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	{
+		SavePlayerData(self);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+	{
 		AttachData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)

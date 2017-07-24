@@ -1241,10 +1241,24 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 movetype() const;
   inline void set_movetype(::google::protobuf::int32 value);
 
-  // repeated .NFMsg.Vector3 target_pos = 3;
+  // required float speed = 3;
+  inline bool has_speed() const;
+  inline void clear_speed();
+  static const int kSpeedFieldNumber = 3;
+  inline float speed() const;
+  inline void set_speed(float value);
+
+  // required int32 time = 4;
+  inline bool has_time() const;
+  inline void clear_time();
+  static const int kTimeFieldNumber = 4;
+  inline ::google::protobuf::int32 time() const;
+  inline void set_time(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.Vector3 target_pos = 5;
   inline int target_pos_size() const;
   inline void clear_target_pos();
-  static const int kTargetPosFieldNumber = 3;
+  static const int kTargetPosFieldNumber = 5;
   inline const ::NFMsg::Vector3& target_pos(int index) const;
   inline ::NFMsg::Vector3* mutable_target_pos(int index);
   inline ::NFMsg::Vector3* add_target_pos();
@@ -1253,10 +1267,10 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_target_pos();
 
-  // repeated .NFMsg.Vector3 source_pos = 4;
+  // repeated .NFMsg.Vector3 source_pos = 6;
   inline int source_pos_size() const;
   inline void clear_source_pos();
-  static const int kSourcePosFieldNumber = 4;
+  static const int kSourcePosFieldNumber = 6;
   inline const ::NFMsg::Vector3& source_pos(int index) const;
   inline ::NFMsg::Vector3* mutable_source_pos(int index);
   inline ::NFMsg::Vector3* add_source_pos();
@@ -1265,22 +1279,41 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_source_pos();
 
+  // repeated .NFMsg.Vector3 move_direction = 7;
+  inline int move_direction_size() const;
+  inline void clear_move_direction();
+  static const int kMoveDirectionFieldNumber = 7;
+  inline const ::NFMsg::Vector3& move_direction(int index) const;
+  inline ::NFMsg::Vector3* mutable_move_direction(int index);
+  inline ::NFMsg::Vector3* add_move_direction();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
+      move_direction() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
+      mutable_move_direction();
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckPlayerMove)
  private:
   inline void set_has_mover();
   inline void clear_has_mover();
   inline void set_has_movetype();
   inline void clear_has_movetype();
+  inline void set_has_speed();
+  inline void clear_has_speed();
+  inline void set_has_time();
+  inline void clear_has_time();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* mover_;
+  ::google::protobuf::int32 movetype_;
+  float speed_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > target_pos_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > source_pos_;
-  ::google::protobuf::int32 movetype_;
+  ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > move_direction_;
+  ::google::protobuf::int32 time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -10481,7 +10514,51 @@ inline void ReqAckPlayerMove::set_movetype(::google::protobuf::int32 value) {
   movetype_ = value;
 }
 
-// repeated .NFMsg.Vector3 target_pos = 3;
+// required float speed = 3;
+inline bool ReqAckPlayerMove::has_speed() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ReqAckPlayerMove::set_has_speed() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ReqAckPlayerMove::clear_has_speed() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ReqAckPlayerMove::clear_speed() {
+  speed_ = 0;
+  clear_has_speed();
+}
+inline float ReqAckPlayerMove::speed() const {
+  return speed_;
+}
+inline void ReqAckPlayerMove::set_speed(float value) {
+  set_has_speed();
+  speed_ = value;
+}
+
+// required int32 time = 4;
+inline bool ReqAckPlayerMove::has_time() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void ReqAckPlayerMove::set_has_time() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void ReqAckPlayerMove::clear_has_time() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void ReqAckPlayerMove::clear_time() {
+  time_ = 0;
+  clear_has_time();
+}
+inline ::google::protobuf::int32 ReqAckPlayerMove::time() const {
+  return time_;
+}
+inline void ReqAckPlayerMove::set_time(::google::protobuf::int32 value) {
+  set_has_time();
+  time_ = value;
+}
+
+// repeated .NFMsg.Vector3 target_pos = 5;
 inline int ReqAckPlayerMove::target_pos_size() const {
   return target_pos_.size();
 }
@@ -10506,7 +10583,7 @@ ReqAckPlayerMove::mutable_target_pos() {
   return &target_pos_;
 }
 
-// repeated .NFMsg.Vector3 source_pos = 4;
+// repeated .NFMsg.Vector3 source_pos = 6;
 inline int ReqAckPlayerMove::source_pos_size() const {
   return source_pos_.size();
 }
@@ -10529,6 +10606,31 @@ ReqAckPlayerMove::source_pos() const {
 inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
 ReqAckPlayerMove::mutable_source_pos() {
   return &source_pos_;
+}
+
+// repeated .NFMsg.Vector3 move_direction = 7;
+inline int ReqAckPlayerMove::move_direction_size() const {
+  return move_direction_.size();
+}
+inline void ReqAckPlayerMove::clear_move_direction() {
+  move_direction_.Clear();
+}
+inline const ::NFMsg::Vector3& ReqAckPlayerMove::move_direction(int index) const {
+  return move_direction_.Get(index);
+}
+inline ::NFMsg::Vector3* ReqAckPlayerMove::mutable_move_direction(int index) {
+  return move_direction_.Mutable(index);
+}
+inline ::NFMsg::Vector3* ReqAckPlayerMove::add_move_direction() {
+  return move_direction_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >&
+ReqAckPlayerMove::move_direction() const {
+  return move_direction_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
+ReqAckPlayerMove::mutable_move_direction() {
+  return &move_direction_;
 }
 
 // -------------------------------------------------------------------

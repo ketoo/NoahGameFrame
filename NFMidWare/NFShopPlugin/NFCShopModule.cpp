@@ -34,7 +34,7 @@ bool NFCShopModule::AfterInit()
 
 void NFCShopModule::OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
 
 	const std::string& strShopItemID = xMsg.config_id();
 	NFVector3 v;
