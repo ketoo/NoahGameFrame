@@ -433,9 +433,9 @@ bool NFCPropertyModule::AddDiamond(const NFGUID& self, const NFINT64& nValue)
         return false;
     }
 
-    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money());
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Diamond());
     nCurValue += nValue;
-    m_pKernelModule->SetPropertyInt(self, NFrame::Player::Money(), nCurValue);
+    m_pKernelModule->SetPropertyInt(self, NFrame::Player::Diamond(), nCurValue);
 
     return false;
 }
@@ -447,11 +447,11 @@ bool NFCPropertyModule::ConsumeDiamond(const NFGUID& self, const NFINT64& nValue
         return false;
     }
 
-    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money());
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Diamond());
     nCurValue -= nValue;
     if (nCurValue >= 0)
     {
-        m_pKernelModule->SetPropertyInt(self, NFrame::Player::Money(), nCurValue);
+        m_pKernelModule->SetPropertyInt(self, NFrame::Player::Diamond(), nCurValue);
 
         return true;
     }
@@ -461,7 +461,7 @@ bool NFCPropertyModule::ConsumeDiamond(const NFGUID& self, const NFINT64& nValue
 
 bool NFCPropertyModule::EnoughDiamond(const NFGUID& self, const NFINT64& nValue)
 {
-    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Money());
+    NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Diamond());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
     {
         return true;

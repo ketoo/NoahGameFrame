@@ -46,7 +46,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual E_SCENE_TYPE GetCloneSceneType(const int nSceneID);
+	virtual bool RequestEnterScene(const NFGUID & self, const NFGUID& player);
 	virtual bool RequestEnterScene(const NFGUID & self, const int nSceneID, const int nType, const NFDataList & argList);
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 

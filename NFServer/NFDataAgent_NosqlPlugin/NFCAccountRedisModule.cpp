@@ -91,10 +91,10 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 	{
 		if (xNoSqlDriver->Exists(strAccountKey) && !xNoSqlDriver->Exists(strRoleName))
 		{
-			xNoSqlDriver->HSet(strAccountKey, "Name", strRoleName);
-			xNoSqlDriver->HSet(strAccountKey, "RoleID", id.ToString());
+			xNoSqlDriver->HSet(strAccountKey, NFrame::Player::Name(), strRoleName);
+			xNoSqlDriver->HSet(strAccountKey, NFrame::Player::ID(), id.ToString());
 
-			xNoSqlDriver->HSet(strRoleName, "RoleID", id.ToString());
+			xNoSqlDriver->HSet(strRoleName, NFrame::Player::ID(), id.ToString());
 
 			return true;
 		}
@@ -112,8 +112,8 @@ bool NFCAccountRedisModule::GetRoleInfo(const std::string & strAccount, std::str
 		if (xNoSqlDriver->Exists(strAccountKey))
 		{
 			std::string strID;
-			bool bRoleNameRet = xNoSqlDriver->HGet(strAccountKey, "Name", strRoleName);
-			bool bRoleIDRet = xNoSqlDriver->HGet(strAccountKey, "RoleID", strID);
+			bool bRoleNameRet = xNoSqlDriver->HGet(strAccountKey, NFrame::Player::Name(), strRoleName);
+			bool bRoleIDRet = xNoSqlDriver->HGet(strAccountKey, NFrame::Player::ID(), strID);
 			if (bRoleNameRet && bRoleIDRet
 				&& !strRoleName .empty() && !strID.empty())
 			{

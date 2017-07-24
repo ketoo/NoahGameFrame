@@ -610,6 +610,7 @@ namespace NFrame
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
+		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightOppnent = "FightOppnent";// object
@@ -639,7 +640,6 @@ namespace NFrame
 		public static readonly String MOVE_SPEED = "MOVE_SPEED";// int
 		public static readonly String MP = "MP";// int
 		public static readonly String MPREGEN = "MPREGEN";// int
-		public static readonly String Money = "Money";// int
 		public static readonly String Name = "Name";// string
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
@@ -863,7 +863,6 @@ namespace NFrame
 		public static readonly String ActorID = "ActorID";// int
 		public static readonly String CamOffestPos = "CamOffestPos";// string
 		public static readonly String CamOffestRot = "CamOffestRot";// string
-		public static readonly String CanClone = "CanClone";// int
 		public static readonly String FilePath = "FilePath";// string
 		public static readonly String LoadingUI = "LoadingUI";// string
 		public static readonly String MaxGroup = "MaxGroup";// int
@@ -872,10 +871,9 @@ namespace NFrame
 		public static readonly String RelivePos = "RelivePos";// string
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
-		public static readonly String Share = "Share";// int
 		public static readonly String SoundList = "SoundList";// string
-		public static readonly String SyncObject = "SyncObject";// int
 		public static readonly String Tile = "Tile";// int
+		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int
 		// Record
 
