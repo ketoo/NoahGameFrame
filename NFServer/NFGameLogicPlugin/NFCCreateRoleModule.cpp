@@ -173,10 +173,10 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 
 	if (m_pPlayerRedisModule->LoadPlayerData(nRoleID))
 	{
-		int nSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
-		if (nSceneID <= 0)
+		int nHomeSceneID = m_pPlayerRedisModule->GetPlayerHomeSceneID(nRoleID);
+		if (nHomeSceneID <= 0)
 		{
-			nSceneID = m_pPVPModule->RandomTileScene();
+			nHomeSceneID = m_pPVPModule->RandomTileScene();
 		}
 
 		NFDataList var;
@@ -190,12 +190,12 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 		var.AddInt(pPluginManager->GetAppID());
 
 		var.AddString(NFrame::Player::HomeSceneID());
-		var.AddInt(nSceneID);
+		var.AddInt(nHomeSceneID);
 
 		var.AddString(NFrame::Player::ViewOppnent());
 		var.AddObject(nRoleID);
 
-		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nSceneID, 0, NFrame::Player::ThisName(), "", var);
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nHomeSceneID, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)
 		{
 			//mRoleBaseData
@@ -204,7 +204,7 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const in
 		}
 
 		//get data first then create player
-		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nSceneID, -1, 0, NFDataList());
+		m_pSceneProcessModule->RequestEnterScene(pObject->Self(), nHomeSceneID, -1, 0, NFDataList());
 	}
 }
 

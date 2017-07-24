@@ -248,7 +248,6 @@ bool NFCTeamModule::GetPlayerGameID(const NFGUID& self, int& nGameID)
     std::vector<std::string> xVecValue;
 
     xVecFeild.push_back("GameID");
-	nGameID = m_pPlayerRedisModule->GetPlayerCacheGameID(self);
 
 	return true;
 }
@@ -358,11 +357,6 @@ bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, 
     for (int i = 0; i < xPlayerIDList.size(); i++)
     {
         xPlayerList.push_back(xPlayerIDList[i].ToString());
-    }
-
-    if (!m_pPlayerRedisModule->GetPlayerCacheGameID(xPlayerList, xGameIDList))
-    {
-        return false;
     }
 
     for (int i = 0; i < xGameIDList.size() && i < xPlayerList.size(); i++)
