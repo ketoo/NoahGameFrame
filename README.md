@@ -2,8 +2,10 @@
 #####  http://www.noahframe.com
 ##### Forum: http://bbs.noahframe.com/forum.php
 
-\[!\[Build Status-develop](https://travis-ci.org/ketoo/NoahGameFrame/.svg?branch=develop)]
-\[!\[Build Status-master](https://travis-ci.org/ketoo/NoahGameFrame/.svg?branch=master)]
+## develop
+[![Build Status](https://travis-ci.org/ketoo/NoahGameFrame/.svg?branch=develop)]
+## master
+[![Build Status](https://travis-ci.org/ketoo/NoahGameFrame/.svg?branch=master)]
 
 [![Join the chat at https://gitter.im/ketoo/NoahGameFrame](https://badges.gitter.im/ketoo/NoahGameFrame.svg)](https://gitter.im/ketoo/NoahGameFrame?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
