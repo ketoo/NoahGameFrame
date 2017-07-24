@@ -1,14 +1,22 @@
 # use c as catch-all language
 language:cpp
 
-# use containers
-sudo: false
-
+sudo: required
+dist: trusty
 os:linux
-compiler:
-- g++
-- clang
+compiler:g++
 
+addons:
 
-script:
-    install4cmake.sh
+  apt:
+
+    packages:
+
+      - cmake
+
+      - g++-4.8
+
+install:
+  - sudo chmod 777 *.sh
+  
+script: "bash -c ./"bash -c ./build.sh".sh"
