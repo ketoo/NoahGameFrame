@@ -37,7 +37,7 @@
 			<Col Type ="int"	Tag="Donation"/>
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Power"/>
-		<Record/>
+		</Record>
 		<Record Id="GuildBoss" Cache="0"	 Col="8"	 Private="1"	 Public="0"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -47,7 +47,7 @@
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Offline"/>
 			<Col Type ="int"	Tag="Power"/>
-		<Record/>
+		</Record>
 		<Record Id="GuildEvent" Cache="0"	 Col="11"	 Private="1"	 Public="0"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -60,7 +60,7 @@
 			<Col Type ="int"	Tag="EventID"/>
 			<Col Type ="int"	Tag="EventTime"/>
 			<Col Type ="string"	Tag="Context"/>
-		<Record/>
+		</Record>
 		<Record Id="GuildHouse" Cache="0"	 Col="8"	 Private="1"	 Public="0"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -70,7 +70,7 @@
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Offline"/>
 			<Col Type ="int"	Tag="Power"/>
-		<Record/>
+		</Record>
 		<Record Id="GuildMemberList" Cache="0"	 Col="14"	 Private="1"	 Public="1"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -86,7 +86,7 @@
 			<Col Type ="int"	Tag="JoinTime"/>
 			<Col Type ="int"	Tag="Contribution"/>
 			<Col Type ="int"	Tag="AllContribution"/>
-		<Record/>
+		</Record>
 		<Record Id="GuildSkill" Cache="0"	 Col="8"	 Private="1"	 Public="0"	 Row="50"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="Name"/><!--- guild-->
@@ -96,6 +96,6 @@
 			<Col Type ="int"	Tag="VIP"/>
 			<Col Type ="int"	Tag="Offline"/>
 			<Col Type ="int"	Tag="Power"/>
-		<Record/>
+		</Record>
 	</Records>
 </XML>

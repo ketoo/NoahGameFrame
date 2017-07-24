@@ -53,7 +53,7 @@ bool NFCGmModule::AfterInit()
 
 void NFCGmModule::OnGMPropertyIntProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -86,7 +86,7 @@ void NFCGmModule::OnGMPropertyIntProcess( const int nSockIndex, const int nMsgID
 
 void NFCGmModule::OnGMPropertyStrProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -119,7 +119,7 @@ void NFCGmModule::OnGMPropertyStrProcess(const int nSockIndex, const int nMsgID,
 
 void NFCGmModule::OnGMPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -152,7 +152,7 @@ void NFCGmModule::OnGMPropertyObjectProcess(const int nSockIndex, const int nMsg
 
 void NFCGmModule::OnGMPropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -185,7 +185,7 @@ void NFCGmModule::OnGMPropertyFloatProcess(const int nSockIndex, const int nMsgI
 
 void NFCGmModule::OnGMRecordIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -237,7 +237,7 @@ void NFCGmModule::OnGMRecordIntProcess(const int nSockIndex, const int nMsgID, c
 
 void NFCGmModule::OnGMRecordStrProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -287,7 +287,7 @@ void NFCGmModule::OnGMRecordStrProcess(const int nSockIndex, const int nMsgID, c
 
 void NFCGmModule::OnGMRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -337,7 +337,7 @@ void NFCGmModule::OnGMRecordObjectProcess(const int nSockIndex, const int nMsgID
 
 void NFCGmModule::OnGMRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -387,7 +387,7 @@ void NFCGmModule::OnGMRecordFloatProcess(const int nSockIndex, const int nMsgID,
 
 void NFCGmModule::OnGMNormalProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
 	{
 		return;
@@ -474,7 +474,7 @@ void NFCGmModule::CheckAndAddRow(const NFGUID& self, const std::string strRecord
 
 void NFCGmModule::OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCommand);
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCommand);
     if (nPlayerID != NFINetModule::PBToNF(xMsg.control_id()))
     {
         return;
