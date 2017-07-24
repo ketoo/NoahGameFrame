@@ -40,7 +40,7 @@ bool NFCPlayerRedisModule::AfterInit()
 
 	return true;
 }
-
+/*
 int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
@@ -160,7 +160,7 @@ bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>&
 
 	return false;
 }
-
+*/
 bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 {
 	mxObjectDataCache.RemoveElement(self);
@@ -182,6 +182,7 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 		
 		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, xPropertyValue, "PbPropertyCacheList", i);
 	}
+
 	for (int iRecord = 0; iRecord < xPlayerDataCache->xPbRecordCacheList.record_list_size(); ++iRecord)
 	{
 		const NFMsg::ObjectRecordBase& xRecordBase = xPlayerDataCache->xPbRecordCacheList.record_list(iRecord);

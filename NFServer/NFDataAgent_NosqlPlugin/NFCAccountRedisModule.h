@@ -10,6 +10,7 @@
 #define NFC_ACCOUNT_REDIS_MODULE_H
 
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"

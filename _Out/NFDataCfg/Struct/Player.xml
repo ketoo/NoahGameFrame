@@ -22,6 +22,7 @@
 		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_WIND" Cache="0" Desc="土抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="FightHero" Cache="1" Desc="Hero" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="FightOppnent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
@@ -51,7 +52,6 @@
 		<Property Id="MOVE_SPEED" Cache="0" Desc="移动速度,默认单位是10000=1米" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MP" Cache="1" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="Money" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Name" Cache="1" Desc="角色名" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="OnlineCount" Cache="1" Desc="上线次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OnlineTime" Cache="1" Desc="本次上线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
