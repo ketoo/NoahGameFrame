@@ -815,7 +815,7 @@ bool NFFileProcess::SaveForStruct()
 
 			}
 			
-			strElementData += "\t\t<Record/>\n";
+			strElementData += "\t\t</Record>\n";
 			fwrite(strElementData.c_str(), strElementData.length(), 1, structWriter);
 		}
 
