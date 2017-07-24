@@ -1,11 +1,14 @@
-language:
--cpp
-os:
--linux
+# use c as catch-all language
+language:cpp
+
+# use containers
+sudo: false
+
+os:linux
 compiler:
--g++
--clang
-install:
-    - make 
+- g++
+- clang
+
+
 script:
-    - ./install4cmake.sh
+    install4cmake.sh
