@@ -1,0 +1,11 @@
+language:
+-cpp
+os:
+-linux
+compiler:
+-g++
+-clang
+install:
+    - make 
+script:
+    - ./install4cmake.sh
