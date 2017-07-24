@@ -133,7 +133,7 @@ int NFCSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const
 
 int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-	E_SCENE_TYPE eSceneType = GetCloneSceneType(nSceneID);
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
@@ -162,14 +162,15 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
         {
 			int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 			int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+			E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
 
-            if (GetCloneSceneType(nSceneID) == SCENE_TYPE_SINGLE_CLONE_SCENE)
+            if (eSceneType == SCENE_TYPE_SINGLE_CLONE_SCENE)
             {
                 m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
 
                 m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, self, "DestroyCloneSceneGroup", nGroupID);
             }
-			else if (GetCloneSceneType(nSceneID) == SCENE_TYPE_MULTI_CLONE_SCENE)
+			else if (eSceneType == SCENE_TYPE_MULTI_CLONE_SCENE)
 			{
 				NFDataList varObjectList;
 				if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
