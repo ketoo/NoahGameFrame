@@ -331,7 +331,8 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-	if (!m_pSceneProcessModule->GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_ERROR)
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_ERROR)
 	{
 		return false;
 	}
