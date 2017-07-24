@@ -44,12 +44,6 @@
     <ClInclude Include="NFIProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="NFList.hpp">
       <Filter>Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCComponentManager.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFSpaceNode.hpp">
       <Filter>Math</Filter>
@@ -119,9 +110,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCProperty.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NFCObject.cpp">

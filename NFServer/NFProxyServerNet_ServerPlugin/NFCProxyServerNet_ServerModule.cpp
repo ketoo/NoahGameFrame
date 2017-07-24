@@ -142,7 +142,7 @@ void NFCProxyServerNet_ServerModule::OnConnectKeyProcess(const int nSockIndex, c
 {
     NFGUID nPlayerID;
     NFMsg::ReqAccountLogin xMsg;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -253,7 +253,7 @@ void NFCProxyServerNet_ServerModule::OnSelectServerProcess(const int nSockIndex,
 
     NFGUID nPlayerID;
     NFMsg::ReqSelectServer xMsg;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, strMsgData, xMsg, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, strMsgData, xMsg, nPlayerID))
     {
         return;
     }
@@ -298,7 +298,7 @@ void NFCProxyServerNet_ServerModule::OnReqServerListProcess(const int nSockIndex
     {
 		NFGUID nPlayerID;//no value
 		NFMsg::ReqServerList xMsg;
-		if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, strMsgData, xMsg, nPlayerID))
+		if (!m_pNetModule->ReceivePB( nMsgID, strMsgData, xMsg, nPlayerID))
 		{
 			return;
 		}
@@ -420,7 +420,7 @@ void NFCProxyServerNet_ServerModule::OnReqRoleListProcess(const int nSockIndex, 
 
     NFGUID nPlayerID;
     NFMsg::ReqRoleList xData;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }
@@ -469,7 +469,7 @@ void NFCProxyServerNet_ServerModule::OnReqCreateRoleProcess(const int nSockIndex
 
     NFGUID nPlayerID;//no value
     NFMsg::ReqCreateRole xData;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }
@@ -518,7 +518,7 @@ void NFCProxyServerNet_ServerModule::OnReqDelRoleProcess(const int nSockIndex, c
 
     NFGUID nPlayerID;// no value
     NFMsg::ReqDeleteRole xData;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }
@@ -567,7 +567,7 @@ void NFCProxyServerNet_ServerModule::OnReqEnterGameServer(const int nSockIndex, 
 
     NFGUID nPlayerID;//no value
     NFMsg::ReqEnterGameServer xData;
-    if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }
