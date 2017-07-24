@@ -417,7 +417,7 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 				{
 				case NFDATA_TYPE::TDATA_INT:
 				{
-					int nValue = pRecord->GetInt(i, j);
+					NFINT64 nValue = pRecord->GetInt(i, j);
 					//if ( 0 != nValue )
 					{
 						NFMsg::RecordInt* pAddData = pAddRowStruct->add_record_int_list();
