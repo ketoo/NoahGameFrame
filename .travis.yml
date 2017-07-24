@@ -16,7 +16,9 @@ addons:
 
       - g++-4.8
 
+  
+
 install:
   - sudo chmod 777 *.sh
   
-script: "bash -c ./"bash -c ./build.sh".sh"
+script:"bash -c ./install4cmake.sh"
