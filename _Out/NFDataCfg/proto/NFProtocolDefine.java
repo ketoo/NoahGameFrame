@@ -10,6 +10,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Buff";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String DownSaveType = "DownSaveType";// int
 		public static final String EffectClearOnDead = "EffectClearOnDead";// int
@@ -28,6 +34,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "ConsumeData";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String EXP = "EXP";// int
 		public static final String Gold = "Gold";// int
@@ -44,6 +56,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "DescData";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Atlas = "Atlas";// string
 		public static final String DescText = "DescText";// string
@@ -60,6 +78,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "EffectData";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
@@ -101,6 +125,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Equip";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String BuyPrice = "BuyPrice";// int
 		public static final String Desc = "Desc";// string
@@ -128,6 +158,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Guild";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AutoRecruit = "AutoRecruit";// string
 		public static final String DismissTime = "DismissTime";// int
@@ -255,6 +291,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "GuildConfig";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ConditionPlayerLevel = "ConditionPlayerLevel";// int
 		public static final String ConditionPlayerVIP = "ConditionPlayerVIP";// int
@@ -270,6 +312,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "GuildJob";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AcceptApply = "AcceptApply";// object
 		public static final String ApplyDismiss = "ApplyDismiss";// object
@@ -294,6 +342,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "HttpServer";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ServerID = "ServerID";// int
 		public static final String WebPort = "WebPort";// int
@@ -320,6 +374,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "InitProperty";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String EffectData = "EffectData";// string
 		public static final String Job = "Job";// int
@@ -334,6 +394,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Item";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AwardData = "AwardData";// string
 		public static final String AwardProperty = "AwardProperty";// int
@@ -364,6 +430,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Language";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Chinese = "Chinese";// string
 		public static final String English = "English";// string
@@ -375,6 +447,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Map";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String InComeDiamond = "InComeDiamond";// int
 		public static final String InComeGold = "InComeGold";// int
@@ -404,6 +482,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NPC";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
@@ -473,6 +557,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "NoSqlServer";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Auth = "Auth";// string
 		public static final String IP = "IP";// string
@@ -486,6 +576,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Player";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
@@ -508,6 +604,7 @@ package nframe;
 		public static final String DEF_VALUE = "DEF_VALUE";// int
 		public static final String DEF_WIND = "DEF_WIND";// int
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
+		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String FightHero = "FightHero";// object
 		public static final String FightOppnent = "FightOppnent";// object
@@ -537,7 +634,6 @@ package nframe;
 		public static final String MOVE_SPEED = "MOVE_SPEED";// int
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
-		public static final String Money = "Money";// int
 		public static final String Name = "Name";// string
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
@@ -751,11 +847,16 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Scene";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ActorID = "ActorID";// int
 		public static final String CamOffestPos = "CamOffestPos";// string
 		public static final String CamOffestRot = "CamOffestRot";// string
-		public static final String CanClone = "CanClone";// int
 		public static final String FilePath = "FilePath";// string
 		public static final String LoadingUI = "LoadingUI";// string
 		public static final String MaxGroup = "MaxGroup";// int
@@ -764,10 +865,9 @@ package nframe;
 		public static final String RelivePos = "RelivePos";// string
 		public static final String SceneName = "SceneName";// string
 		public static final String SceneShowName = "SceneShowName";// string
-		public static final String Share = "Share";// int
 		public static final String SoundList = "SoundList";// string
-		public static final String SyncObject = "SyncObject";// int
 		public static final String Tile = "Tile";// int
+		public static final String Type = "Type";// int
 		public static final String Width = "Width";// int
 		// Record
 
@@ -777,6 +877,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Security";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String SecurityData = "SecurityData";// string
 		// Record
@@ -787,6 +893,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Server";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Area = "Area";// int
 		public static final String CpuCount = "CpuCount";// int
@@ -804,6 +916,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Shop";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Count = "Count";// int
 		public static final String Diamond = "Diamond";// int
@@ -821,6 +939,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Skill";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AnimaState = "AnimaState";// string
 		public static final String AtkDis = "AtkDis";// float
@@ -853,6 +977,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "SqlServer";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String IP = "IP";// string
 		public static final String Port = "Port";// int
@@ -870,6 +1000,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Talent";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Desc = "Desc";// string
 		public static final String EffectData = "EffectData";// string
@@ -885,6 +1021,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Task";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AwardExp = "AwardExp";// int
 		public static final String AwardGold = "AwardGold";// int
@@ -903,6 +1045,12 @@ package nframe;
 		//Class name
 		public static final String ThisName = "Team";
 		// IObject
+		public static final String ClassName = "ClassName";// string
+		public static final String ConfigID = "ConfigID";// string
+		public static final String GroupID = "GroupID";// int
+		public static final String ID = "ID";// string
+		public static final String Position = "Position";// vector3
+		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String Captain = "Captain";// object
 		public static final String PresidentName = "PresidentName";// string
