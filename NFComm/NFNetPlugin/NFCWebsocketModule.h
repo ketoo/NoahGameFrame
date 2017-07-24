@@ -27,8 +27,6 @@ public:
 
 	virtual bool Execute() override;
 	
-	virtual void SetReceiveCallBack(NF_WS_MSG_CALL_BACK_PTR functorPtr) override;
-	virtual void SetEventCallBack(NF_WS_EVENT_CALL_BACK_PTR functorPtr) override;
 
 	virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) override;
 
@@ -38,6 +36,9 @@ public:
 
 
 private:
+	virtual void SetReceiveCallBack(NF_WS_MSG_CALL_BACK_PTR functorPtr) override;
+	virtual void SetEventCallBack(NF_WS_EVENT_CALL_BACK_PTR functorPtr) override;
+
 	void OnWebsocketMessage(websocketpp::connection_hdl, const std::string&,NF_WS_MSG_DATA_TYPE );
 	void OnWebsocketEvent(websocketpp::connection_hdl, NF_WS_EVENT);
 

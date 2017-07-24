@@ -485,14 +485,3 @@ bool NFCElementModule::Clear()
     mbLoaded = false;
     return true;
 }
-
-NF_SHARE_PTR<NFIComponentManager> NFCElementModule::GetComponentManager(const std::string& strConfigName)
-{
-    NF_SHARE_PTR<ElementConfigInfo> pElementInfo = GetElement(strConfigName);
-    if (pElementInfo)
-    {
-        return pElementInfo->GetComponentManager();
-    }
-
-    return NF_SHARE_PTR<NFIComponentManager>(NULL);
-}

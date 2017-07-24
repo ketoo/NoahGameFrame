@@ -70,12 +70,14 @@ message ReqAckSynData//message sysn
 message ReqAckPlayerMove
 {
 	required Ident 	mover = 1;
-	required int32  moveType = 2;
-	repeated Vector3 target_pos = 3;
-	repeated Vector3 source_pos = 4;
+	required int32  moveType = 2;//future_state
+	required float speed = 3;
+	required int32 time = 4;
+	repeated Vector3 target_pos = 5;
+	repeated Vector3 source_pos = 6;
+	repeated Vector3 move_direction = 7;
 }
-
-
+		
 message ReqAckPlayerChat
 {
 	enum EGameChatType

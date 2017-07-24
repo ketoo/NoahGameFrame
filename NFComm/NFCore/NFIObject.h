@@ -13,7 +13,6 @@
 #include "NFIRecord.h"
 #include "NFIRecordManager.h"
 #include "NFIPropertyManager.h"
-#include "NFIComponentManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
@@ -65,34 +64,6 @@ public:
         RECORD_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
         RECORD_EVENT_FUNCTOR_PTR functorPtr(NF_NEW RECORD_EVENT_FUNCTOR(functor));
         return AddRecordCallBack(strRecordName, functorPtr);
-    }
-
-    template <typename T>
-    bool AddComponent()
-    {
-        return GetComponentManager()->AddComponent<T>();
-    }
-
-    template <typename T>
-    NF_SHARE_PTR<T> AddComponent(const std::string& strComponentName)
-    {
-		NF_SHARE_PTR<NFIComponent> pComponent = GetComponentManager()->FindComponent<NFIComponent>(strComponentName);
-        if (pComponent)
-        {
-            NF_SHARE_PTR<T> pNewCOmponent = pComponent->CreateNewInstance<T>();
-            if (nullptr != pNewCOmponent && GetComponentManager()->AddComponent(strComponentName, pNewCOmponent))
-            {
-                return pNewCOmponent;
-            }
-        }
-
-        return NF_SHARE_PTR<T>();
-    }
-
-    template <typename T>
-    NF_SHARE_PTR<T> FindComponent(const std::string& strComponentName)
-    {
-        return GetComponentManager()->FindComponent<T>(strComponentName);
     }
 
     /////////////////////////////////////////////////////////////////
@@ -150,7 +121,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;

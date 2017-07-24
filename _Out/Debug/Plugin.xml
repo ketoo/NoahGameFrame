@@ -70,7 +70,7 @@
 		
 		<Plugin Name="NFLogPlugin" />
 		<Plugin Name="NFActorPlugin" />
-		<Plugin Name="Tutorial1" />
+		<Plugin Name="Tutorial4Plugin" />
     	<ConfigPath Name="../" />		
 	</TutorialServer>
 </XML>

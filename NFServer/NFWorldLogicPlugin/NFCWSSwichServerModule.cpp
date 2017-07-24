@@ -42,7 +42,7 @@ bool NFCWSSwichServerModule::AfterInit()
 
 void NFCWSSwichServerModule::OnReqSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
 
 	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
@@ -53,7 +53,7 @@ void NFCWSSwichServerModule::OnReqSwichServer( const int nSockIndex, const int n
 
 void NFCWSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::AckSwitchServer);
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
 	nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
 
 	m_pWorlNet_ServerModule->SendMsgToGame((int)xMsg.self_serverid(), NFMsg::EGMI_ACKSWICHSERVER, xMsg, nPlayerID);
