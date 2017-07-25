@@ -110,20 +110,18 @@
 			<Col Type ="int"	Tag="ExpiredType"/>
 			<Col Type ="int"	Tag="Date"/>
 		</Record>
-		<Record Id="BuildingList" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
-			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
+		<Record Id="BuildingList" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="BuildingCnfID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
-			<Col Type ="float"	Tag="PosX"/>
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		</Record>
-		<Record Id="BuildingListProduce" Cache="1"	 Col="6"	 Private="1"	 Public="0"	 Row="128"	 Save="1"	 Upload="0"	 >
-			<Col Type ="string"	Tag="BuildingID"/><!--- Desc-->
+		<Record Id="BuildingListProduce" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="1"	 Upload="0"	 >
+			<Col Type ="string"	Tag="BuildingCnfID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
-			<Col Type ="float"	Tag="PosX"/>
-			<Col Type ="float"	Tag="PosY"/>
+			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		</Record>
 		<Record Id="CommValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >

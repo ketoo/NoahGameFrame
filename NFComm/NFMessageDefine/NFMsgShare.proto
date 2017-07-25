@@ -409,6 +409,8 @@ message TileBuilding
 	required int32		x				= 1;//
 	required int32		y				= 2;//
 	required string		configID 		= 3;
+	required Ident		guid 			= 4;
+	
 }
 
 message TileNPC
@@ -416,6 +418,7 @@ message TileNPC
 	required int32		x				= 1;//
 	required int32		y				= 2;//
 	required string		configID 		= 3;//
+	required Ident		guid 			= 4;//
 }
 
 //EGEC_ACK_MINING_TITLE
