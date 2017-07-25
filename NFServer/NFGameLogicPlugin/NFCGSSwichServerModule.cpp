@@ -80,7 +80,7 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 
 void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
 	{
 		return;
@@ -97,7 +97,7 @@ void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const 
 
 void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS_NO_OBJECT(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
 	{
 		return;
@@ -151,7 +151,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 
 void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::AckSwitchServer);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::AckSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF((xMsg.selfid())))
 	{
 		return;

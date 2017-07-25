@@ -379,7 +379,7 @@ int NFCSkillModule::AddNewerSkill( const NFGUID& self )
 
 void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
 		//bc
 	const std::string& strSkillID =  xMsg.skill_id();

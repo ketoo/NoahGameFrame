@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="ServerID" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="IP" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Port" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlIP" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlPort" Type="int" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlUser" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlPwd" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SqlName" Type="string" Public="1" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="IP" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Port" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ServerID" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SqlIP" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SqlName" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SqlPort" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="SqlPwd" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SqlUser" Cache="0" Desc="" Force="0" Private="0" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

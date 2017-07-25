@@ -1,32 +1,30 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
-	<Class Id="IObject" Type="TYPE_IOBJECT" Path="NFDataCfg/Struct/IObject.xml" InstancePath="NFDataCfg/Ini/IObject.xml" Public="0" Desc="IObject">
-		<Class Id="Buff" Type="TYPE_BUFF" Path="NFDataCfg/Struct/Buff.xml" InstancePath="NFDataCfg/Ini/Buff.xml" Public="0" Desc="Buff"/>
-		<Class Id="ConsumeData" Type="TYPE_CONSUMEDATA" Path="NFDataCfg/Struct/ConsumeData.xml" InstancePath="NFDataCfg/Ini/ConsumeData.xml" Public="0" Desc="ConsumeData"/>
-		<Class Id="Cost" Type="TYPE_COST" Path="NFDataCfg/Struct/Cost.xml" InstancePath="NFDataCfg/Ini/Cost.xml" Public="0" Desc="Cost"/>
-		<Class Id="DescData" Type="TYPE_DESCDATA" Path="NFDataCfg/Struct/DescData.xml" InstancePath="NFDataCfg/Ini/DescData.xml" Public="0" Desc="DescData"/>
-		<Class Id="EffectData" Type="TYPE_EFFECTDATA" Path="NFDataCfg/Struct/EffectData.xml" InstancePath="NFDataCfg/Ini/EffectData.xml" Public="0" Desc="EffectData"/>
-		<Class Id="Equip" Type="TYPE_EQUIP" Path="NFDataCfg/Struct/Equip.xml" InstancePath="NFDataCfg/Ini/Equip.xml" Public="0" Desc="Equip"/>
-		<Class Id="Guild" Type="TYPE_GUILD" Path="NFDataCfg/Struct/Guild.xml" InstancePath="NFDataCfg/Ini/Guild.xml" Public="0" Desc="Guild"/>
-		<Class Id="GuildConfig" Type="TYPE_GUILDCONFIG" Path="NFDataCfg/Struct/GuildConfig.xml" InstancePath="NFDataCfg/Ini/GuildConfig.xml" Public="0" Desc="GuildConfig"/>
-		<Class Id="GuildJob" Type="TYPE_GUILDJOB" Path="NFDataCfg/Struct/GuildJob.xml" InstancePath="NFDataCfg/Ini/GuildJob.xml" Public="0" Desc="GuildJob"/>
-		<Class Id="HttpServer" Type="TYPE_HTTPSERVER" Path="NFDataCfg/Struct/HttpServer.xml" InstancePath="NFDataCfg/Ini/HttpServer.xml" Public="0" Desc="HttpServer"/>
-		<Class Id="InitProperty" Type="TYPE_INITPROPERTY" Path="NFDataCfg/Struct/InitProperty.xml" InstancePath="NFDataCfg/Ini/InitProperty.xml" Public="0" Desc="InitProperty"/>
-		<Class Id="Item" Type="TYPE_ITEM" Path="NFDataCfg/Struct/Item.xml" InstancePath="NFDataCfg/Ini/Item.xml" Public="0" Desc="Item"/>
-		<Class Id="Language" Type="TYPE_LANGUAGE" Path="NFDataCfg/Struct/Language.xml" InstancePath="NFDataCfg/Ini/Language.xml" Public="0" Desc="Language"/>
-		<Class Id="Map" Type="TYPE_MAP" Path="NFDataCfg/Struct/Map.xml" InstancePath="NFDataCfg/Ini/Map.xml" Public="0" Desc="Map"/>
-		<Class Id="NoSqlServer" Type="TYPE_NOSQLSERVER" Path="NFDataCfg/Struct/NoSqlServer.xml" InstancePath="NFDataCfg/Ini/NoSqlServer.xml" Public="0" Desc="NoSqlServer"/>
-		<Class Id="NPC" Type="TYPE_NPC" Path="NFDataCfg/Struct/NPC.xml" InstancePath="NFDataCfg/Ini/NPC.xml" Public="0" Desc="NPC"/>
-		<Class Id="Player" Type="TYPE_PLAYER" Path="NFDataCfg/Struct/Player.xml" InstancePath="NFDataCfg/Ini/Player.xml" Public="0" Desc="Player"/>
-		<Class Id="Scene" Type="TYPE_SCENE" Path="NFDataCfg/Struct/Scene.xml" InstancePath="NFDataCfg/Ini/Scene.xml" Public="0" Desc="Scene"/>
-		<Class Id="Security" Type="TYPE_SECURITY" Path="NFDataCfg/Struct/Security.xml" InstancePath="NFDataCfg/Ini/Security.xml" Public="0" Desc="Security"/>
-		<Class Id="Server" Type="TYPE_SERVER" Path="NFDataCfg/Struct/Server.xml" InstancePath="NFDataCfg/Ini/Server.xml" Public="0" Desc="Server"/>
-		<Class Id="Shop" Type="TYPE_SHOP" Path="NFDataCfg/Struct/Shop.xml" InstancePath="NFDataCfg/Ini/Shop.xml" Public="0" Desc="Shop"/>
-		<Class Id="Skill" Type="TYPE_SKILL" Path="NFDataCfg/Struct/Skill.xml" InstancePath="NFDataCfg/Ini/Skill.xml" Public="0" Desc="Skill"/>
-		<Class Id="SqlServer" Type="TYPE_SQLSERVER" Path="NFDataCfg/Struct/SqlServer.xml" InstancePath="NFDataCfg/Ini/SqlServer.xml" Public="0" Desc="SqlServer"/>
-		<Class Id="Talent" Type="TYPE_TALENT" Path="NFDataCfg/Struct/Talent.xml" InstancePath="NFDataCfg/Ini/Talent.xml" Public="0" Desc="Talent"/>
-		<Class Id="Task" Type="TYPE_TASK" Path="NFDataCfg/Struct/Task.xml" InstancePath="NFDataCfg/Ini/Task.xml" Public="0" Desc="Task"/>
-		<Class Id="Team" Type="TYPE_TEAM" Path="NFDataCfg/Struct/Team.xml" InstancePath="NFDataCfg/Ini/Team.xml" Public="0" Desc="Team"/>
+	<Class Id="IObject"	Path="NFDataCfg/Struct/IObject.xml"	InstancePath="NFDataCfg/Ini/IObject.xml"	>
+		<Class Id="Buff"	Path="NFDataCfg/Struct/Buff.xml"	InstancePath="NFDataCfg/Ini/Buff.xml"	/>
+		<Class Id="ConsumeData"	Path="NFDataCfg/Struct/ConsumeData.xml"	InstancePath="NFDataCfg/Ini/ConsumeData.xml"	/>
+		<Class Id="DescData"	Path="NFDataCfg/Struct/DescData.xml"	InstancePath="NFDataCfg/Ini/DescData.xml"	/>
+		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
+		<Class Id="Equip"	Path="NFDataCfg/Struct/Equip.xml"	InstancePath="NFDataCfg/Ini/Equip.xml"	/>
+		<Class Id="Guild"	Path="NFDataCfg/Struct/Guild.xml"	InstancePath="NFDataCfg/Ini/Guild.xml"	/>
+		<Class Id="GuildConfig"	Path="NFDataCfg/Struct/GuildConfig.xml"	InstancePath="NFDataCfg/Ini/GuildConfig.xml"	/>
+		<Class Id="GuildJob"	Path="NFDataCfg/Struct/GuildJob.xml"	InstancePath="NFDataCfg/Ini/GuildJob.xml"	/>
+		<Class Id="HttpServer"	Path="NFDataCfg/Struct/HttpServer.xml"	InstancePath="NFDataCfg/Ini/HttpServer.xml"	/>
+		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
+		<Class Id="Item"	Path="NFDataCfg/Struct/Item.xml"	InstancePath="NFDataCfg/Ini/Item.xml"	/>
+		<Class Id="Language"	Path="NFDataCfg/Struct/Language.xml"	InstancePath="NFDataCfg/Ini/Language.xml"	/>
+		<Class Id="Map"	Path="NFDataCfg/Struct/Map.xml"	InstancePath="NFDataCfg/Ini/Map.xml"	/>
+		<Class Id="NPC"	Path="NFDataCfg/Struct/NPC.xml"	InstancePath="NFDataCfg/Ini/NPC.xml"	/>
+		<Class Id="NoSqlServer"	Path="NFDataCfg/Struct/NoSqlServer.xml"	InstancePath="NFDataCfg/Ini/NoSqlServer.xml"	/>
+		<Class Id="Player"	Path="NFDataCfg/Struct/Player.xml"	InstancePath="NFDataCfg/Ini/Player.xml"	/>
+		<Class Id="Scene"	Path="NFDataCfg/Struct/Scene.xml"	InstancePath="NFDataCfg/Ini/Scene.xml"	/>
+		<Class Id="Security"	Path="NFDataCfg/Struct/Security.xml"	InstancePath="NFDataCfg/Ini/Security.xml"	/>
+		<Class Id="Server"	Path="NFDataCfg/Struct/Server.xml"	InstancePath="NFDataCfg/Ini/Server.xml"	/>
+		<Class Id="Shop"	Path="NFDataCfg/Struct/Shop.xml"	InstancePath="NFDataCfg/Ini/Shop.xml"	/>
+		<Class Id="Skill"	Path="NFDataCfg/Struct/Skill.xml"	InstancePath="NFDataCfg/Ini/Skill.xml"	/>
+		<Class Id="SqlServer"	Path="NFDataCfg/Struct/SqlServer.xml"	InstancePath="NFDataCfg/Ini/SqlServer.xml"	/>
+		<Class Id="Talent"	Path="NFDataCfg/Struct/Talent.xml"	InstancePath="NFDataCfg/Ini/Talent.xml"	/>
+		<Class Id="Task"	Path="NFDataCfg/Struct/Task.xml"	InstancePath="NFDataCfg/Ini/Task.xml"	/>
+		<Class Id="Team"	Path="NFDataCfg/Struct/Team.xml"	InstancePath="NFDataCfg/Ini/Team.xml"	/>
 	</Class>
 </XML>
-
