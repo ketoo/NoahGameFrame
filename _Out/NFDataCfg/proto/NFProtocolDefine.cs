@@ -613,6 +613,7 @@ namespace NFrame
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHero = "FightHero";// object
+		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
 		public static readonly String FightOppnent = "FightOppnent";// object
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
