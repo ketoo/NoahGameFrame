@@ -607,6 +607,7 @@ package nframe;
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String FightHero = "FightHero";// object
+		public static final String FightHeroCnfID = "FightHeroCnfID";// string
 		public static final String FightOppnent = "FightOppnent";// object
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
