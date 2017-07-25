@@ -42,7 +42,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
 {
     NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -132,8 +132,6 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
                 pData->set_server_max_online(nMaxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
                 NF_SHARE_PTR<ConnectData> pServerData = GetClusterModule()->GetServerNetInfo(pNet);
                 if (pServerData)
@@ -182,13 +180,6 @@ void NFCProxyServerToWorldModule::ServerReport()
 				reqMsg.set_server_max_online(nMaxConnect);
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				for (auto it = m_mServerInfoExt.begin(); it != m_mServerInfoExt.end(); it++)
-				{
-					*pb_ServerInfoExt.add_key() = it->first;
-					*pb_ServerInfoExt.add_value() = it->second;
-				}
-				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
 				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_WORLD);
 				if (pServerData)
@@ -249,7 +240,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -283,11 +274,6 @@ bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccoun
     }
 
     return false;
-}
-
-void NFCProxyServerToWorldModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
 }
 
 void NFCProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo)

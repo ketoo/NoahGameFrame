@@ -187,9 +187,9 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
     return pRecordManager;
 }
 
-bool NFCCommonRedisModule::LoadCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& propertyList)
+bool NFCCommonRedisModule::LoadCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& xPropertyList)
 {
-	propertyList.Clear();
+	xPropertyList.Clear();
 
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
@@ -204,7 +204,7 @@ bool NFCCommonRedisModule::LoadCachePropertyListPB(const NFGUID& self, NFMsg::Ob
 		return false;
 	}
 
-	return propertyList.ParseFromString(strValue);
+	return xPropertyList.ParseFromString(strValue);
 
 }
 
@@ -228,9 +228,9 @@ bool NFCCommonRedisModule::LoadCacheRecordListPB(const NFGUID& self, NFMsg::Obje
 	return recordList.ParseFromString(strValue);
 }
 
-bool NFCCommonRedisModule::LoadStoragePropertyListPB(const NFGUID & self, NFMsg::ObjectPropertyList & propertyList)
+bool NFCCommonRedisModule::LoadStoragePropertyListPB(const NFGUID & self, NFMsg::ObjectPropertyList & xPropertyList)
 {
-	propertyList.Clear();
+	xPropertyList.Clear();
 
 	NF_SHARE_PTR<NFINoSqlDriver> pDriver = m_pNoSqlModule->GetDriverBySuit(self.ToString());
 	if (!pDriver)
@@ -245,7 +245,7 @@ bool NFCCommonRedisModule::LoadStoragePropertyListPB(const NFGUID & self, NFMsg:
 		return false;
 	}
 
-	return propertyList.ParseFromString(strValue);
+	return xPropertyList.ParseFromString(strValue);
 }
 
 bool NFCCommonRedisModule::LoadStorageRecordListPB(const NFGUID & self, NFMsg::ObjectRecordList & recordList)

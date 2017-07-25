@@ -68,8 +68,6 @@ void NFCGameServerToWorldModule::Register(NFINet* pNet)
 				pData->set_server_max_online(nMaxConnect);
 				pData->set_server_state(NFMsg::EST_NARMAL);
 				pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
 				NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
 				if (pServerData)
@@ -119,13 +117,6 @@ void NFCGameServerToWorldModule::ServerReport()
 				reqMsg.set_server_max_online(nMaxConnect);
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				for (auto it = m_mServerInfoExt.begin(); it != m_mServerInfoExt.end(); it++)
-				{
-					*pb_ServerInfoExt.add_key() = it->first;
-					*pb_ServerInfoExt.add_value() = it->second;
-				}
-				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
 				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_WORLD);
 				if (pServerData)
@@ -262,7 +253,7 @@ void NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int 
 {
 	NFGUID nPlayerID;
 	std::string strData;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, strData, nPlayerID))
+	if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, strData, nPlayerID))
 	{
 		return;
 	}
@@ -272,7 +263,3 @@ void NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int 
 	return;
 }
 
-void NFCGameServerToWorldModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
-}

@@ -37,7 +37,7 @@ void NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, c
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -66,7 +66,7 @@ void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex,
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -87,7 +87,7 @@ void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, 
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -116,7 +116,7 @@ void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, c
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -144,7 +144,7 @@ void NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex,
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -164,7 +164,7 @@ void NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, 
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -191,7 +191,7 @@ void NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -216,7 +216,7 @@ void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -441,7 +441,7 @@ void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, c
 {
 	NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;
-	if (!m_pNetModule->ReceivePB(nFd, msgId, buffer, nLen, msg, xGUID))
+	if (!m_pNetModule->ReceivePB(msgId, buffer, nLen, msg, xGUID))
 	{
 		return;
 	}
@@ -522,7 +522,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
-
+		/*
 		rapidjson::Value server_info_ext(rapidjson::kArrayType);
 		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
 		{
@@ -531,7 +531,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 			server_info_ext.PushBack(extKeyValue, allocator);
 		}
 		server.AddMember("info_ext", server_info_ext, allocator);
-
+		*/
 		master.PushBack(server, allocator);
 		pServerData = mMasterMap.Next();
 	}
@@ -548,7 +548,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
-
+		/*
 		rapidjson::Value server_info_ext(rapidjson::kArrayType);
 		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
 		{
@@ -557,7 +557,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 			server_info_ext.PushBack(extKeyValue, allocator);
 		}
 		server.AddMember("info_ext", server_info_ext, allocator);
-
+		*/
 		logins.PushBack(server, allocator);
 		pServerData = mLoginMap.Next();
 	}
@@ -574,7 +574,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
-
+		/*
 		rapidjson::Value server_info_ext(rapidjson::kArrayType);
 		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
 		{
@@ -583,7 +583,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 			server_info_ext.PushBack(extKeyValue, allocator);
 		}
 		server.AddMember("info_ext", server_info_ext, allocator);
-
+		*/
 		worlds.PushBack(server, allocator);
 		pServerData = mWorldMap.Next();
 	}
@@ -601,6 +601,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
 
+		/*
 		rapidjson::Value server_info_ext(rapidjson::kArrayType);
 		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
 		{
@@ -609,7 +610,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 			server_info_ext.PushBack(extKeyValue, allocator);
 		}
 		server.AddMember("info_ext", server_info_ext, allocator);
-
+		*/
 		proxys.PushBack(server, allocator);
 		pServerData = mProxyMap.Next();
 	}
@@ -626,7 +627,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 		server.AddMember("port", pServerData->pData->server_port(), allocator);
 		server.AddMember("onlineCount", pServerData->pData->server_cur_count(), allocator);
 		server.AddMember("status", (int)pServerData->pData->server_state(), allocator);
-
+		/*
 		rapidjson::Value server_info_ext(rapidjson::kArrayType);
 		for (int i = 0; i < pServerData->pData->server_info_list_ext().key_size();i++)
 		{
@@ -635,7 +636,7 @@ std::string NFCMasterNet_ServerModule::GetServersStatus()
 			server_info_ext.PushBack(extKeyValue, allocator);
 		}
 		server.AddMember("info_ext", server_info_ext, allocator);
-
+		*/
 		games.PushBack(server, allocator);
 		pServerData = mGameMap.Next();
 	}

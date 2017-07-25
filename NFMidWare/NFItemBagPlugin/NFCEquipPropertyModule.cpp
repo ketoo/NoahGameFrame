@@ -31,20 +31,20 @@ bool NFCEquipPropertyModule::AfterInit()
 
 bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -107,20 +107,20 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 
 bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -130,7 +130,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 
 	/////////////PropertyBase/////////////////////////////////////////
 
-	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList_ConfigID);
+	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList::ConfigID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
@@ -147,20 +147,20 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 
 bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -170,7 +170,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 
 	/////////////RandomBase/////////////////////////////////////////
 
-	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList_RandPropertyID);
+	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList::RandPropertyID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
@@ -187,20 +187,20 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 
 bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -209,7 +209,7 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 	xDataList.Clear();
 
 	/////////////GemBase/////////////////////////////////////////
-	int nSlotCount = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_SlotCount);
+	int nSlotCount = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
 	if (nSlotCount <= 0)
 	{
 		return false;
@@ -220,9 +220,9 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		xDataList.AddInt(0);
 	}
 
-	for (int i = NFrame::Player::BagEquipList_InlayStone1; i <= NFrame::Player::BagEquipList_InlayStone10; ++i)
+	for (int i = NFrame::Player::BagEquipList::InlayStone1; i <= NFrame::Player::BagEquipList::InlayStone10; ++i)
 	{
-		int nIndex = i - NFrame::Player::BagEquipList_InlayStone1;
+		int nIndex = i - NFrame::Player::BagEquipList::InlayStone1;
 		if (nIndex > nSlotCount)
 		{
 			break;
@@ -256,20 +256,20 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 
 bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -278,13 +278,13 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 	xDataList.Clear();
 
 	/////////////GemBase/////////////////////////////////////////
-	const int nIntensify = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_IntensifyLevel);
+	const int nIntensify = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
 	if (nIntensify <= 0)
 	{
 		return false;
 	}
 
-	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
+	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
 	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
@@ -314,29 +314,29 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 		nDefValue *= dwCoefficientDef;
 	}
 
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_MAXHP, nMAXHPValue);
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_VALUE, nAttackValue);
-	xDataList.SetInt(NFrame::Player::CommPropertyValue_DEF_VALUE, nDefValue);
+	xDataList.SetInt(NFrame::Player::CommValue::MAXHP, nMAXHPValue);
+	xDataList.SetInt(NFrame::Player::CommValue::ATK_VALUE, nAttackValue);
+	xDataList.SetInt(NFrame::Player::CommValue::DEF_VALUE, nDefValue);
 
 	return true;
 }
 
 bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const NFGUID& xEquipGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_BagEquipList());
+	NF_SHARE_PTR<NFIRecord> pBagRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagEquipList::ThisName());
 	if (nullptr == pBagRecord)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_CommPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pCommPropertyValueRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
 	if (nullptr == pCommPropertyValueRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pBagRecord->FindObject(NFrame::Player::BagEquipList_GUID, xEquipGUID, varFind) != 1)
+	if (pBagRecord->FindObject(NFrame::Player::BagEquipList::GUID, xEquipGUID, varFind) != 1)
 	{
 		return false;
 	}
@@ -345,7 +345,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 	xDataList.Clear();
 
 	/////////////element/////////////////////////////////////////
-	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList_ConfigID);
+	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
 	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
@@ -362,11 +362,11 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 	//conditional the item type to define what property to give
 	double dwCoefficientAtk = 2.0;
 	double dwCoefficientDef = 1.0;
-	int nFireLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel1_FIRE);
-	int nLightLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel2_LIGHT);
-	int nWindLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel3_Wind);
-	int nIceLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel4_ICE);
-	int nPoisonLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList_ElementLevel5_POISON);
+	int nFireLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel1_FIRE);
+	int nLightLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel2_LIGHT);
+	int nWindLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel3_Wind);
+	int nIceLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel4_ICE);
+	int nPoisonLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel5_POISON);
 
 	int nWindValue = nWindLevel * nWindLevel;
 	int nFireValue = nFireLevel * nFireLevel;
@@ -376,19 +376,19 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 
 	if (nItemSubType == NFMsg::EGameEquipSubType::EQUIPTYPE_WEAPON)
 	{
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientAtk);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nWindValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nFireValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nLightValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nIceValue * dwCoefficientAtk);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nPoisonValue * dwCoefficientAtk);
 	}
 	else
 	{
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nWindValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nFireValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nLightValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nIceValue * dwCoefficientDef);
-		xDataList.SetInt(NFrame::Player::CommPropertyValue_ATK_FIRE, nPoisonValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nWindValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nFireValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nLightValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nIceValue * dwCoefficientDef);
+		xDataList.SetInt(NFrame::Player::CommValue::ATK_FIRE, nPoisonValue * dwCoefficientDef);
 	}
 
 
