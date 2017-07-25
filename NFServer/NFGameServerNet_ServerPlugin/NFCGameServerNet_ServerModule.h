@@ -76,6 +76,7 @@ protected:
 	void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClienReqMoveProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnClienReqMoveImmuneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienReqStateSyncProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen);
 	void OnClienEnterGameFinishProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////

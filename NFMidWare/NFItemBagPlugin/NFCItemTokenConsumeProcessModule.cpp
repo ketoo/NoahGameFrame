@@ -41,7 +41,7 @@ bool NFCItemTokenConsumeProcessModule::Execute()
 
 int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::R_BuildingList());
+	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
 	if (nullptr == pBuild)
 	{
 		return  1;
@@ -53,8 +53,16 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 		return 2;
 	}
 
+
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+	if (nSceneID != nHomeSceneID)
+	{
+		return 3;
+	}
+
 	NFDataList varList;
-	if (pBuild->FindString(NFrame::Player::BuildingList::BuildingList_BuildingID, strBuildingCnfID, varList) <= 0)
+	if (pBuild->FindString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID, varList) <= 0)
 	{
 		return 0;
 	}
@@ -64,8 +72,8 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 
 int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::R_BuildingList());
-	if (nullptr == pBuild)
+	NF_SHARE_PTR<NFIRecord> pBuildRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+	if (nullptr == pBuildRecord)
 	{
 		return  1;
 	}
@@ -75,15 +83,28 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 	const std::string& strBuildingCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
 
 	const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
+	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
+	const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	if (nSceneID != nHomeSceneID)
+	{
+		return 2;
+	}
+
 	const NFGUID xID = m_pKernelModule->CreateGUID();
 
 
-	NF_SHARE_PTR<NFDataList> xDataList = pBuild->GetInitData();
-	xDataList->SetString(NFrame::Player::BuildingList::BuildingList_BuildingID, strBuildingCnfID);
-	xDataList->SetObject(NFrame::Player::BuildingList::BuildingList_BuildingGUID, xID);
-	xDataList->SetVector3(NFrame::Player::BuildingList::BuildingList_Pos, vPos);
+	NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
+	xDataList->SetString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID);
+	xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
+	xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
+	pBuildRecord->AddRow(-1, *xDataList);
 
-	pBuild->AddRow(-1, *xDataList);
+	NFDataList xDataArg;
+	xDataArg.AddString(NFrame::NPC::Position());
+	xDataArg.AddVector3(vPos);
+
+	m_pKernelModule->CreateObject(xID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
 
 	return 100;
 }

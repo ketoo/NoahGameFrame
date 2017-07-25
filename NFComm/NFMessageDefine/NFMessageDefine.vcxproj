@@ -100,7 +100,6 @@
     <ClInclude Include="NFLimit.h" />
     <ClInclude Include="NFMsgBase.pb.h" />
     <ClInclude Include="NFMsgBaseEx.pb.h" />
-    <ClInclude Include="NFMsgDefine.h" />
     <ClInclude Include="NFMsgMysql.pb.h" />
     <ClInclude Include="NFMsgPreGame.pb.h" />
     <ClInclude Include="NFMsgShare.pb.h" />
@@ -113,7 +112,6 @@
     <ClCompile Include="NFFleetingDefine.pb.cc" />
     <ClCompile Include="NFMsgBase.pb.cc" />
     <ClCompile Include="NFMsgBaseEx.pb.cc" />
-    <ClCompile Include="NFMsgDefine.cpp" />
     <ClCompile Include="NFMsgMysql.pb.cc" />
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgShare.pb.cc" />

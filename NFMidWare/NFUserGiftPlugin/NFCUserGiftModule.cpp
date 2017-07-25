@@ -115,7 +115,7 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFCUserGiftModule::ActiveteHero(const NFGUID & self)
 {
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 
 	//configuration
 	m_pItemModule->UseItem(self, "Item_HeroCard_Abaddon", self);

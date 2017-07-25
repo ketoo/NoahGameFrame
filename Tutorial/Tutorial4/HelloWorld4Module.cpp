@@ -29,8 +29,9 @@ bool NFCHelloWorld4Module::AfterInit()
 
 	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
-	int nActorID = m_pActorModule->RequireActor<NFCHttpComponent>(this, &NFCHelloWorld4Module::HttpRequestAsyEnd);
-
+	int nActorID = m_pActorModule->RequireActor();
+	m_pActorModule->AddComponent<NFCHttpComponent>(nActorID);
+	m_pActorModule->AddDefaultEndFunc(nActorID, this, &NFCHelloWorld4Module::HttpRequestAsyEnd);
 	for (int i = 0; i < 10; ++i)
 	{
 		m_pActorModule->SendMsgToActor(nActorID, NFGUID(10, 20), i, "Hello actor!");

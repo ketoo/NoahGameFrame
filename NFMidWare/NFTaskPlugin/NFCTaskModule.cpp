@@ -64,15 +64,15 @@ int NFCTaskModule::OnClassObjectEvent( const NFGUID& self, const std::string& st
 
 void NFCTaskModule::OnClientAcceptTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAcceptTask)
 }
 
 void NFCTaskModule::OnClientPushTask(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
 }
 
 void NFCTaskModule::OnClientPushCustom(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    //CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::cu)
+    //CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::cu)
 }

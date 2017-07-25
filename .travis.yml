@@ -1,0 +1,24 @@
+# use c as catch-all language
+language:cpp
+
+sudo: required
+dist: trusty
+os:linux
+compiler:g++
+
+addons:
+
+  apt:
+
+    packages:
+
+      - cmake
+
+      - g++-4.8
+
+  
+
+install:
+  - sudo chmod 777 *.sh
+  
+script:"bash -c ./install4cmake.sh"
