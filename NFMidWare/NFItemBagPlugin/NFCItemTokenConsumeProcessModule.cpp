@@ -41,8 +41,8 @@ bool NFCItemTokenConsumeProcessModule::Execute()
 
 int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	NF_SHARE_PTR<NFIRecord> pBuild = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
-	if (nullptr == pBuild)
+	NF_SHARE_PTR<NFIRecord> pBuildRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+	if (nullptr == pBuildRecord)
 	{
 		return  1;
 	}
@@ -62,7 +62,7 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 	}
 
 	NFDataList varList;
-	if (pBuild->FindString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID, varList) <= 0)
+	if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID, varList) <= 0)
 	{
 		return 0;
 	}

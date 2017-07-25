@@ -5414,6 +5414,15 @@ class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message {
   inline ::std::string* release_configid();
   inline void set_allocated_configid(::std::string* configid);
 
+  // required .NFMsg.Ident guid = 4;
+  inline bool has_guid() const;
+  inline void clear_guid();
+  static const int kGuidFieldNumber = 4;
+  inline const ::NFMsg::Ident& guid() const;
+  inline ::NFMsg::Ident* mutable_guid();
+  inline ::NFMsg::Ident* release_guid();
+  inline void set_allocated_guid(::NFMsg::Ident* guid);
+
   // @@protoc_insertion_point(class_scope:NFMsg.TileBuilding)
  private:
   inline void set_has_x();
@@ -5422,15 +5431,18 @@ class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message {
   inline void clear_has_y();
   inline void set_has_configid();
   inline void clear_has_configid();
+  inline void set_has_guid();
+  inline void clear_has_guid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 x_;
   ::google::protobuf::int32 y_;
   ::std::string* configid_;
+  ::NFMsg::Ident* guid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -5521,6 +5533,15 @@ class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message {
   inline ::std::string* release_configid();
   inline void set_allocated_configid(::std::string* configid);
 
+  // required .NFMsg.Ident guid = 4;
+  inline bool has_guid() const;
+  inline void clear_guid();
+  static const int kGuidFieldNumber = 4;
+  inline const ::NFMsg::Ident& guid() const;
+  inline ::NFMsg::Ident* mutable_guid();
+  inline ::NFMsg::Ident* release_guid();
+  inline void set_allocated_guid(::NFMsg::Ident* guid);
+
   // @@protoc_insertion_point(class_scope:NFMsg.TileNPC)
  private:
   inline void set_has_x();
@@ -5529,15 +5550,18 @@ class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message {
   inline void clear_has_y();
   inline void set_has_configid();
   inline void clear_has_configid();
+  inline void set_has_guid();
+  inline void clear_has_guid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 x_;
   ::google::protobuf::int32 y_;
   ::std::string* configid_;
+  ::NFMsg::Ident* guid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -14273,6 +14297,44 @@ inline void TileBuilding::set_allocated_configid(::std::string* configid) {
   }
 }
 
+// required .NFMsg.Ident guid = 4;
+inline bool TileBuilding::has_guid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void TileBuilding::set_has_guid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void TileBuilding::clear_has_guid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void TileBuilding::clear_guid() {
+  if (guid_ != NULL) guid_->::NFMsg::Ident::Clear();
+  clear_has_guid();
+}
+inline const ::NFMsg::Ident& TileBuilding::guid() const {
+  return guid_ != NULL ? *guid_ : *default_instance_->guid_;
+}
+inline ::NFMsg::Ident* TileBuilding::mutable_guid() {
+  set_has_guid();
+  if (guid_ == NULL) guid_ = new ::NFMsg::Ident;
+  return guid_;
+}
+inline ::NFMsg::Ident* TileBuilding::release_guid() {
+  clear_has_guid();
+  ::NFMsg::Ident* temp = guid_;
+  guid_ = NULL;
+  return temp;
+}
+inline void TileBuilding::set_allocated_guid(::NFMsg::Ident* guid) {
+  delete guid_;
+  guid_ = guid;
+  if (guid) {
+    set_has_guid();
+  } else {
+    clear_has_guid();
+  }
+}
+
 // -------------------------------------------------------------------
 
 // TileNPC
@@ -14388,6 +14450,44 @@ inline void TileNPC::set_allocated_configid(::std::string* configid) {
   } else {
     clear_has_configid();
     configid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required .NFMsg.Ident guid = 4;
+inline bool TileNPC::has_guid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void TileNPC::set_has_guid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void TileNPC::clear_has_guid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void TileNPC::clear_guid() {
+  if (guid_ != NULL) guid_->::NFMsg::Ident::Clear();
+  clear_has_guid();
+}
+inline const ::NFMsg::Ident& TileNPC::guid() const {
+  return guid_ != NULL ? *guid_ : *default_instance_->guid_;
+}
+inline ::NFMsg::Ident* TileNPC::mutable_guid() {
+  set_has_guid();
+  if (guid_ == NULL) guid_ = new ::NFMsg::Ident;
+  return guid_;
+}
+inline ::NFMsg::Ident* TileNPC::release_guid() {
+  clear_has_guid();
+  ::NFMsg::Ident* temp = guid_;
+  guid_ = NULL;
+  return temp;
+}
+inline void TileNPC::set_allocated_guid(::NFMsg::Ident* guid) {
+  delete guid_;
+  guid_ = guid;
+  if (guid) {
+    set_has_guid();
+  } else {
+    clear_has_guid();
   }
 }
 
