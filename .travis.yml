@@ -1,24 +1,17 @@
-# use c as catch-all language
-language:cpp
-
-sudo: required
-dist: trusty
-os:linux
-compiler:g++
-
-addons:
-
-  apt:
-
-    packages:
-
-      - cmake
-
-      - g++-4.8
-
-  
-
-install:
-  - sudo chmod 777 *.sh
-  
-script:"bash -c ./install4cmake.sh"
+sudo: true
+ language: cpp
+ 
+ compiler:
+     - g++
+ os:
+     - linux
+     
+ install:
+   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then  sudo apt-get install -qq cmake; fi
+   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get install -qq g++-4.9; fi
+   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export CXX="g++-4.9"; fi
+   
+   
+ script:
+    - sudo chmod 777 *.sh
+    - bash -c ./install4cmake.sh
