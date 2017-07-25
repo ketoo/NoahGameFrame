@@ -515,6 +515,7 @@ namespace NFrame
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
+		public static readonly String Diamond = "Diamond";// int
 		public static readonly String DropPackList = "DropPackList";// string
 		public static readonly String EXP = "EXP";// int
 		public static readonly String EffectData = "EffectData";// string
@@ -536,7 +537,6 @@ namespace NFrame
 		public static readonly String MP = "MP";// int
 		public static readonly String MPREGEN = "MPREGEN";// int
 		public static readonly String MasterID = "MasterID";// object
-		public static readonly String Money = "Money";// int
 		public static readonly String NPCType = "NPCType";// int
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String Prefab = "Prefab";// string
@@ -555,6 +555,7 @@ namespace NFrame
 		public static readonly String TargetX = "TargetX";// float
 		public static readonly String TargetY = "TargetY";// float
 		public static readonly String VIPEXP = "VIPEXP";// int
+		public static readonly String Width = "Width";// float
 		// Record
 
 	}
@@ -709,24 +710,22 @@ namespace NFrame
 		{
 			//Class name
 			public static readonly String ThisName = "BuildingList";
-			public const int BuildingID = 0;//string
+			public const int BuildingCnfID = 0;//string
 			public const int BuildingGUID = 1;//object
 			public const int State = 2;//int
-			public const int PosX = 3;//float
-			public const int Pos = 4;//vector3
-			public const int StateEndTime = 5;//int
+			public const int Pos = 3;//vector3
+			public const int StateEndTime = 4;//int
 
 		}
 		public class BuildingListProduce
 		{
 			//Class name
 			public static readonly String ThisName = "BuildingListProduce";
-			public const int BuildingID = 0;//string
+			public const int BuildingCnfID = 0;//string
 			public const int BuildingGUID = 1;//object
 			public const int State = 2;//int
-			public const int PosX = 3;//float
-			public const int PosY = 4;//float
-			public const int StateEndTime = 5;//int
+			public const int Pos = 3;//vector3
+			public const int StateEndTime = 4;//int
 
 		}
 		public class CommValue
