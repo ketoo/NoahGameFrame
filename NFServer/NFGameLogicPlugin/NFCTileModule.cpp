@@ -68,6 +68,48 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 		}
 	}
 
+	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xTileBuildingMap = xTileData->mxTileBuilding.First();
+	for (; xTileBuildingMap; xTileBuildingMap = xTileData->mxTileBuilding.Next())
+	{
+		NF_SHARE_PTR<TileBuilding> xStateData = xTileBuildingMap->First();
+		for (; xStateData; xStateData = xTileBuildingMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileBuilding* pTile = xData.add_building();
+			if (pTile)
+			{
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_configid(xStateData->configID);
+				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
+			}
+
+
+		}
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xTileNPCMap = xTileData->mxTileNPC.First();
+	for (; xTileNPCMap; xTileNPCMap = xTileData->mxTileNPC.Next())
+	{
+		NF_SHARE_PTR<TileNPC> xStateData = xTileNPCMap->First();
+		for (; xStateData; xStateData = xTileNPCMap->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileNPC* pTile = xData.add_npc();
+			if (pTile)
+			{
+				pTile->set_x(xStateData->x);
+				pTile->set_y(xStateData->y);
+				pTile->set_configid(xStateData->configID);
+				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
+			}
+
+
+		}
+	}
+
 	if (xData.SerializeToString(&strData))
 	{
 		return true;
@@ -153,6 +195,70 @@ bool NFCTileModule::AddTile(const NFGUID & self, const int nX, const int nY, con
 	return true;
 }
 
+bool NFCTileModule::AddBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		xTileData = NF_SHARE_PTR<TileData>(NF_NEW TileData());
+		mxTileData.AddElement(self, xTileData);
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataMap = xTileData->mxTileBuilding.GetElement(nX);
+	if (!xStateDataMap)
+	{
+		xStateDataMap = NF_SHARE_PTR<NFMapEx<int, TileBuilding>>(NF_NEW NFMapEx<int, TileBuilding>());
+		xTileData->mxTileBuilding.AddElement(nX, xStateDataMap);
+	}
+
+	NF_SHARE_PTR<TileBuilding> xTileBuilding = xStateDataMap->GetElement(nY);
+	if (!xTileBuilding)
+	{
+		xTileBuilding = NF_SHARE_PTR<TileBuilding>(NF_NEW TileBuilding());
+		xStateDataMap->AddElement(nY, xTileBuilding);
+	}
+	
+	xTileBuilding->x = nX;
+	xTileBuilding->y = nY;
+	xTileBuilding->configID = strCnfID;
+	xTileBuilding->ID = id;
+	//save
+	//SaveTileData(self);
+
+	return true;
+}
+
+bool NFCTileModule::AddNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id, const std::string & strCnfID)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		xTileData = NF_SHARE_PTR<TileData>(NF_NEW TileData());
+		mxTileData.AddElement(self, xTileData);
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xStateDataMap = xTileData->mxTileNPC.GetElement(nX);
+	if (!xStateDataMap)
+	{
+		xStateDataMap = NF_SHARE_PTR<NFMapEx<int, TileNPC>>(NF_NEW NFMapEx<int, TileNPC>());
+		xTileData->mxTileNPC.AddElement(nX, xStateDataMap);
+	}
+
+	NF_SHARE_PTR<TileNPC> xTileNPC = xStateDataMap->GetElement(nY);
+	if (!xTileNPC)
+	{
+		xTileNPC = NF_SHARE_PTR<TileNPC>(NF_NEW TileNPC());
+		xStateDataMap->AddElement(nY, xTileNPC);
+	}
+
+	xTileNPC->x = nX;
+	xTileNPC->y = nY;
+	xTileNPC->configID = strCnfID;
+	xTileNPC->ID = id;
+
+	return true;
+}
+
 bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
 {
 	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
@@ -173,6 +279,52 @@ bool NFCTileModule::RemoveTile(const NFGUID & self, const int nX, const int nY)
 		//save
 		SaveTileData(self);
 
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCTileModule::RemoveBuilding(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataMap = xTileData->mxTileBuilding.GetElement(nX);
+	if (!xStateDataMap)
+	{
+		return false;
+	}
+
+	if (xStateDataMap->ExistElement(nY))
+	{
+		xStateDataMap->RemoveElement(nY);
+		return true;
+	}
+
+	return false;
+}
+
+bool NFCTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, const NFGUID & id)
+{
+	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
+	if (!xTileData)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xStateDataMap = xTileData->mxTileNPC.GetElement(nX);
+	if (!xStateDataMap)
+	{
+		return false;
+	}
+
+	if (xStateDataMap->ExistElement(nY))
+	{
+		xStateDataMap->RemoveElement(nY);
 		return true;
 	}
 
@@ -220,6 +372,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 				pTile->set_x(xStateData->x);
 				pTile->set_y(xStateData->y);
 				pTile->set_configid(xStateData->configID);
+				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
 			}
 
 
@@ -240,9 +393,8 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 				pTile->set_x(xStateData->x);
 				pTile->set_y(xStateData->y);
 				pTile->set_configid(xStateData->configID);
+				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
 			}
-
-
 		}
 	}
 
@@ -274,11 +426,22 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 		NFMsg::AckMiningTitle xData;
 		if (xData.ParseFromString(strData))
 		{
-			int nCount = xData.tile_size();
-			for (int i = 0; i < nCount; ++i)
+			for (int i = 0; i <  xData.tile_size(); ++i)
 			{
 				const NFMsg::TileState& xTile = xData.tile(i);
 				AddTile(self, xTile.x(), xTile.y(), xTile.opr());
+			}
+
+			for (int i = 0; i < xData.building_size(); ++i)
+			{
+				const NFMsg::TileBuilding& xTile = xData.building(i);
+				AddBuilding(self, xTile.x(), xTile.y(), NFINetModule::PBToNF(xTile.guid()), xTile.configid());
+			}
+
+			for (int i = 0; i < xData.npc_size(); ++i)
+			{
+				const NFMsg::TileNPC& xTile = xData.npc(i);
+				AddNPC(self, xTile.x(), xTile.y(), NFINetModule::PBToNF(xTile.guid()), xTile.configid());
 			}
 
 			return true;
@@ -315,6 +478,51 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 				pTile->set_opr(xStateData->state);
 			}
 		}
+
+
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataBuilding = xTileData->mxTileBuilding.First();
+	for (; xStateDataBuilding; xStateDataBuilding = xTileData->mxTileBuilding.Next())
+	{
+		NF_SHARE_PTR<TileBuilding> xStateData = xStateDataBuilding->First();
+		for (; xStateData; xStateData = xStateDataBuilding->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileBuilding* pBuilding = xData.add_building();
+			if (pBuilding)
+			{
+				bNeedSend = true;
+
+				pBuilding->set_x(xStateData->x);
+				pBuilding->set_y(xStateData->y);
+				pBuilding->set_configid(xStateData->configID);
+				*pBuilding->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
+			}
+		}
+	}
+
+	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xStateDataNPC = xTileData->mxTileNPC.First();
+	for (; xStateDataNPC; xStateDataNPC = xTileData->mxTileNPC.Next())
+	{
+		NF_SHARE_PTR<TileNPC> xStateData = xStateDataNPC->First();
+		for (; xStateData; xStateData = xStateDataNPC->Next())
+		{
+			//pb
+			//xStateData
+			NFMsg::TileNPC* pNpc = xData.add_npc();
+			if (pNpc)
+			{
+				bNeedSend = true;
+
+				pNpc->set_x(xStateData->x);
+				pNpc->set_y(xStateData->y);
+				pNpc->set_configid(xStateData->configID);
+				*pNpc->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
+			}
+		}
+
 	}
 
 	if (bNeedSend)
@@ -338,6 +546,38 @@ int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & s
 	{
 		//load
 		SendTileData(self);
+
+		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::BuildingList::ThisName(), this, &NFCTileModule::OnRecordEvent);
+	}
+
+	return 0;
+}
+
+
+int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar)
+{
+	switch (xEventData.nOpType)
+	{
+	case RECORD_EVENT_DATA::Add:
+	{
+		NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
+		const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
+		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
+	
+		AddBuilding(self, vPos.X(), vPos.Y(), xBuildingID, strCnfID);
+	}
+		break;
+	case RECORD_EVENT_DATA::Del:
+	{
+		NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
+		const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
+		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
+
+		RemoveBuilding(self, vPos.X(), vPos.Y(), xBuildingID);
+	}
+		break;
+	default:
+		break;
 	}
 
 	return 0;

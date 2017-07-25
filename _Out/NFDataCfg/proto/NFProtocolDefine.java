@@ -509,6 +509,7 @@ package nframe;
 		public static final String DEF_VALUE = "DEF_VALUE";// int
 		public static final String DEF_WIND = "DEF_WIND";// int
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
+		public static final String Diamond = "Diamond";// int
 		public static final String DropPackList = "DropPackList";// string
 		public static final String EXP = "EXP";// int
 		public static final String EffectData = "EffectData";// string
@@ -530,7 +531,6 @@ package nframe;
 		public static final String MP = "MP";// int
 		public static final String MPREGEN = "MPREGEN";// int
 		public static final String MasterID = "MasterID";// object
-		public static final String Money = "Money";// int
 		public static final String NPCType = "NPCType";// int
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String Prefab = "Prefab";// string
@@ -549,6 +549,7 @@ package nframe;
 		public static final String TargetX = "TargetX";// float
 		public static final String TargetY = "TargetY";// float
 		public static final String VIPEXP = "VIPEXP";// int
+		public static final String Width = "Width";// float
 		// Record
 
 	}
@@ -703,24 +704,22 @@ package nframe;
 		{
 			//Class name
 			public static final String ThisName = "BuildingList";
-			public static final int BuildingID = 0;//string
+			public static final int BuildingCnfID = 0;//string
 			public static final int BuildingGUID = 1;//object
 			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int Pos = 4;//vector3
-			public static final int StateEndTime = 5;//int
+			public static final int Pos = 3;//vector3
+			public static final int StateEndTime = 4;//int
 
 		}
 		public class BuildingListProduce
 		{
 			//Class name
 			public static final String ThisName = "BuildingListProduce";
-			public static final int BuildingID = 0;//string
+			public static final int BuildingCnfID = 0;//string
 			public static final int BuildingGUID = 1;//object
 			public static final int State = 2;//int
-			public static final int PosX = 3;//float
-			public static final int PosY = 4;//float
-			public static final int StateEndTime = 5;//int
+			public static final int Pos = 3;//vector3
+			public static final int StateEndTime = 4;//int
 
 		}
 		public class CommValue
