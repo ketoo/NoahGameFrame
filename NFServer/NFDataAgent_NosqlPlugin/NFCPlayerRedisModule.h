@@ -33,12 +33,6 @@ public:
 
 	virtual bool AfterInit();
 
-	virtual int64_t GetPlayerCacheGameID(const NFGUID& self);
-	virtual int64_t GetPlayerCacheProxyID(const NFGUID& self);
-
-	virtual bool GetPlayerCacheGameID(const std::vector<std::string>& xPlayerList, std::vector<int64_t>& xResultList);
-	virtual bool GetPlayerCacheProxyID(const std::vector<std::string>& xPlayerList, std::vector<int64_t>& xResultList);
-
 	virtual int GetPlayerHomeSceneID(const NFGUID& self);
 
 	virtual bool LoadPlayerData(const NFGUID& self);
@@ -54,9 +48,10 @@ protected:
 
 	const bool AttachData(const NFGUID& self);
 
-	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-
-	void OnOnline(const NFGUID& self);
+	int OnObjectPlayerEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
+	
+		void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
 
 

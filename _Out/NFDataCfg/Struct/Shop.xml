@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Type" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="ItemID" Type="string" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Gold" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Steel" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Stone" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Diamond" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Level" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Count" Type="int" Public="0" Private="0" Save="1" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
+		<Property Id="Count" Cache="0" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Diamond" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Gold" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="ItemID" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="string" Upload="0" />
+		<Property Id="Level" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Steel" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Stone" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
+		<Property Id="Type" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

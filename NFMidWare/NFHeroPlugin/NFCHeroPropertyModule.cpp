@@ -48,7 +48,7 @@ int NFCHeroPropertyModule::OnPlayerClassEvent(const NFGUID& self, const std::str
 	{
 	case CLASS_OBJECT_EVENT::COE_CREATE_FINISH:
 	{
-		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::R_PlayerHero(), this, &NFCHeroPropertyModule::OnObjectHeroRecordEvent);
+		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::PlayerHero::ThisName(), this, &NFCHeroPropertyModule::OnObjectHeroRecordEvent);
 	}
 	break;
 	default:
@@ -87,7 +87,7 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	{
 	case RECORD_EVENT_DATA::Add:
 	{
-		const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::PlayerHero_GUID);
+		const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
 		OnHeroPropertyUpdate(self, xHeroGUID);
 	}
 	break;
@@ -100,21 +100,21 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 	{
 		switch (xEventData.nCol)
 		{
-		case NFrame::Player::PlayerHero::PlayerHero_Level:
-		case NFrame::Player::PlayerHero::PlayerHero_Star:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip1:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip2:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip3:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip4:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip5:
-		case NFrame::Player::PlayerHero::PlayerHero_Equip6:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent1:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent2:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent3:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent4:
-		case NFrame::Player::PlayerHero::PlayerHero_Talent5:
+		case NFrame::Player::PlayerHero::Level:
+		case NFrame::Player::PlayerHero::Star:
+		case NFrame::Player::PlayerHero::Equip1:
+		case NFrame::Player::PlayerHero::Equip2:
+		case NFrame::Player::PlayerHero::Equip3:
+		case NFrame::Player::PlayerHero::Equip4:
+		case NFrame::Player::PlayerHero::Equip5:
+		case NFrame::Player::PlayerHero::Equip6:
+		case NFrame::Player::PlayerHero::Talent1:
+		case NFrame::Player::PlayerHero::Talent2:
+		case NFrame::Player::PlayerHero::Talent3:
+		case NFrame::Player::PlayerHero::Talent4:
+		case NFrame::Player::PlayerHero::Talent5:
 		{
-			const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::PlayerHero_GUID);
+			const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
 			OnHeroPropertyUpdate(self, xHeroGUID);
 		}
 		break;
@@ -132,19 +132,19 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 
 bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGUID & xHeroGUID)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -164,21 +164,21 @@ bool NFCHeroPropertyModule::OnHeroPropertyUpdate(const NFGUID & self, const NFGU
 
 bool NFCHeroPropertyModule::CalHeroAllProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -222,21 +222,21 @@ bool NFCHeroPropertyModule::CalHeroAllProperty(const NFGUID& self, const NFGUID&
 
 bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -245,7 +245,7 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 	/////////////PropertyBase/////////////////////////////////////////
 	xDataList.Clear();
 
-	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::PlayerHero_ConfigID);
+	const std::string& strConfigID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::NPC::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
@@ -262,21 +262,21 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 
 bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -290,7 +290,7 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 		xDataList.AddInt(0);
 	}
 
-	for (int i = NFrame::Player::PlayerHero_Talent1; i <= NFrame::Player::PlayerHero_Talent5; ++i)
+	for (int i = NFrame::Player::PlayerHero::Talent1; i <= NFrame::Player::PlayerHero::Talent5; ++i)
 	{
 		const std::string& strTalentID = pHeroRecord->GetString(nRow, i);
 		const std::string& strTalentEffectData = m_pElementModule->GetPropertyString(strTalentID, NFrame::Talent::EffectData());
@@ -313,21 +313,21 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 
 bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
 		return false;
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) != 1)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
 	{
 		return false;
 	}
 
 	const int nRow = varFind.Int(0);
 
-	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_HeroPropertyValue());
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
 	{
 		return false;
@@ -341,7 +341,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 		xDataList.AddInt(0);
 	}
 
-	for (int i = NFrame::Player::PlayerHero_Equip1; i <= NFrame::Player::PlayerHero_Equip6; ++i)
+	for (int i = NFrame::Player::PlayerHero::Equip1; i <= NFrame::Player::PlayerHero::Equip6; ++i)
 	{
 		NFDataList EquipDataList;
 		const NFGUID xEquipID = pHeroRecord->GetObject(nRow, i);
@@ -363,7 +363,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 
 bool NFCHeroPropertyModule::FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -375,7 +375,7 @@ bool NFCHeroPropertyModule::FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -397,7 +397,7 @@ bool NFCHeroPropertyModule::FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID
 
 bool NFCHeroPropertyModule::AddHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -409,7 +409,7 @@ bool NFCHeroPropertyModule::AddHP(const NFGUID& self, const NFGUID& xHeroGUID, c
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -438,7 +438,7 @@ bool NFCHeroPropertyModule::AddHP(const NFGUID& self, const NFGUID& xHeroGUID, c
 
 bool NFCHeroPropertyModule::EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -450,7 +450,7 @@ bool NFCHeroPropertyModule::EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -466,7 +466,7 @@ bool NFCHeroPropertyModule::EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID
 
 bool NFCHeroPropertyModule::ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -478,7 +478,7 @@ bool NFCHeroPropertyModule::ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUI
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -497,7 +497,7 @@ bool NFCHeroPropertyModule::ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUI
 
 bool NFCHeroPropertyModule::AddMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -509,7 +509,7 @@ bool NFCHeroPropertyModule::AddMP(const NFGUID& self, const NFGUID& xHeroGUID, c
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -535,7 +535,7 @@ bool NFCHeroPropertyModule::AddMP(const NFGUID& self, const NFGUID& xHeroGUID, c
 
 bool NFCHeroPropertyModule::ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -547,7 +547,7 @@ bool NFCHeroPropertyModule::ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUI
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}
@@ -566,7 +566,7 @@ bool NFCHeroPropertyModule::ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUI
 
 bool NFCHeroPropertyModule::EnoughMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue)
 {
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::R_PlayerHero());
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
 	{
 		return false;
@@ -578,7 +578,7 @@ bool NFCHeroPropertyModule::EnoughMP(const NFGUID& self, const NFGUID& xHeroGUID
 	}
 
 	NFDataList varFind;
-	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero_GUID, xHeroGUID, varFind) <= 0)
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) <= 0)
 	{
 		return false;
 	}

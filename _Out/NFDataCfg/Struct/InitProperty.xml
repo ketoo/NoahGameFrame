@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
-		<Property Id="Job" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="Level" Type="int" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="EffectData" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc=""/>
-		<Property Id="SkillIDRef" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="技能列表索引"/>
-		<Property Id="ModelPtah" Type="string" Public="0" Private="0" Save="0" Cache="0" Ref="0" Force="0" Upload="0" Desc="主角模型"/>
+		<Property Id="EffectData" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Job" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Level" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ModelPtah" Cache="0" Desc="主角模型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="SkillIDRef" Cache="0" Desc="技能列表索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 	</Propertys>
-	<Records/>
-	<Components/>
+	<Records>
+	</Records>
 </XML>
-

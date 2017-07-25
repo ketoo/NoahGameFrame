@@ -36,7 +36,6 @@ public:
 
         m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFGUID()));
         m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFGUID()));
-        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
     virtual ~NFCClass()
@@ -52,11 +51,6 @@ public:
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager()
     {
         return m_pRecordManager;
-    }
-
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager()
-    {
-        return m_pComponentManager;
     }
 
     virtual bool AddClassCallBack(const CLASS_EVENT_FUNCTOR_PTR& cb)
@@ -127,7 +121,6 @@ public:
 private:
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
-    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 
     NF_SHARE_PTR<NFIClass> m_pParentClass;
     std::string mstrType;
@@ -158,7 +151,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetClassPropertyManager(const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName);
-    virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName);
 
     virtual bool AddClass(const std::string& strClassName, const std::string& strParentName);
 
