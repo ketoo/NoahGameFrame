@@ -62,7 +62,7 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 	}
 
 	NFDataList varList;
-	if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID, varList) <= 0)
+	if (pBuildRecord->FindString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID, varList) <= 0)
 	{
 		return 0;
 	}
@@ -95,7 +95,7 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 
 
 	NF_SHARE_PTR<NFDataList> xDataList = pBuildRecord->GetInitData();
-	xDataList->SetString(NFrame::Player::BuildingList::BuildingID, strBuildingCnfID);
+	xDataList->SetString(NFrame::Player::BuildingList::BuildingCnfID, strBuildingCnfID);
 	xDataList->SetObject(NFrame::Player::BuildingList::BuildingGUID, xID);
 	xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
 	pBuildRecord->AddRow(-1, *xDataList);
