@@ -174,7 +174,7 @@ bool NFCGameServerToWorldModule::AfterInit()
 			std::ostringstream strLog;
 			strLog << "Cannot find current server, AppID = " << nCurAppID;
 			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
-			NFASSERT(0, "Cannot find current server", __FILE__, __FUNCTION__);
+			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
 			exit(0);
 		}
 
