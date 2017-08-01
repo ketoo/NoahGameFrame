@@ -37,29 +37,16 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int AddSkill( const NFGUID& self, const std::string& strSkillName );
     virtual int ExistSkill( const NFGUID& self, const std::string& strSkillName );
-    virtual int SetSkillLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel );
-    virtual int SetSkillGem( const NFGUID& self, const std::string& strSkillName, const std::string& strGemName );
-    virtual int SetSkillGemLevel( const NFGUID& self, const std::string& strSkillName, const int nLevel );
 
-    virtual int GetSkillLevel( const NFGUID& self, const std::string& strSkillName );
-    virtual std::string GetSkillGem( const NFGUID& self, const std::string& strSkillName );
-    virtual int GetSkillGemLevel( const NFGUID& self, const std::string& strSkillName );
-
-    virtual int AddNewerSkill( const NFGUID& self );
-    virtual int OnUseSkill(const NFGUID& self, const NFDataList& var);
 protected:
-
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
 
-	int OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
-	int OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var );
 
 protected:
 	void OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
-    char* mstrSkillTableName;
 
 	NFINetModule* m_pNetModule;
     NFIPropertyModule* m_pPropertyModule;
