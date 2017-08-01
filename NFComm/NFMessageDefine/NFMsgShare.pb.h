@@ -1825,35 +1825,17 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
   inline ::std::string* release_skill_id();
   inline void set_allocated_skill_id(::std::string* skill_id);
 
-  // required .NFMsg.Vector3 now_pos = 3;
-  inline bool has_now_pos() const;
-  inline void clear_now_pos();
-  static const int kNowPosFieldNumber = 3;
-  inline const ::NFMsg::Vector3& now_pos() const;
-  inline ::NFMsg::Vector3* mutable_now_pos();
-  inline ::NFMsg::Vector3* release_now_pos();
-  inline void set_allocated_now_pos(::NFMsg::Vector3* now_pos);
-
-  // required .NFMsg.Vector3 tar_pos = 4;
-  inline bool has_tar_pos() const;
-  inline void clear_tar_pos();
-  static const int kTarPosFieldNumber = 4;
-  inline const ::NFMsg::Vector3& tar_pos() const;
-  inline ::NFMsg::Vector3* mutable_tar_pos();
-  inline ::NFMsg::Vector3* release_tar_pos();
-  inline void set_allocated_tar_pos(::NFMsg::Vector3* tar_pos);
-
-  // required int32 use_index = 5;
+  // required int32 use_index = 3;
   inline bool has_use_index() const;
   inline void clear_use_index();
-  static const int kUseIndexFieldNumber = 5;
+  static const int kUseIndexFieldNumber = 3;
   inline ::google::protobuf::int32 use_index() const;
   inline void set_use_index(::google::protobuf::int32 value);
 
-  // repeated .NFMsg.EffectData effect_data = 6;
+  // repeated .NFMsg.EffectData effect_data = 4;
   inline int effect_data_size() const;
   inline void clear_effect_data();
-  static const int kEffectDataFieldNumber = 6;
+  static const int kEffectDataFieldNumber = 4;
   inline const ::NFMsg::EffectData& effect_data(int index) const;
   inline ::NFMsg::EffectData* mutable_effect_data(int index);
   inline ::NFMsg::EffectData* add_effect_data();
@@ -1868,10 +1850,6 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
   inline void clear_has_user();
   inline void set_has_skill_id();
   inline void clear_has_skill_id();
-  inline void set_has_now_pos();
-  inline void clear_has_now_pos();
-  inline void set_has_tar_pos();
-  inline void clear_has_tar_pos();
   inline void set_has_use_index();
   inline void clear_has_use_index();
 
@@ -1879,13 +1857,11 @@ class LIBPROTOC_EXPORT ReqAckUseSkill : public ::google::protobuf::Message {
 
   ::NFMsg::Ident* user_;
   ::std::string* skill_id_;
-  ::NFMsg::Vector3* now_pos_;
-  ::NFMsg::Vector3* tar_pos_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
   ::google::protobuf::int32 use_index_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -11220,91 +11196,15 @@ inline void ReqAckUseSkill::set_allocated_skill_id(::std::string* skill_id) {
   }
 }
 
-// required .NFMsg.Vector3 now_pos = 3;
-inline bool ReqAckUseSkill::has_now_pos() const {
+// required int32 use_index = 3;
+inline bool ReqAckUseSkill::has_use_index() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ReqAckUseSkill::set_has_now_pos() {
+inline void ReqAckUseSkill::set_has_use_index() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void ReqAckUseSkill::clear_has_now_pos() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ReqAckUseSkill::clear_now_pos() {
-  if (now_pos_ != NULL) now_pos_->::NFMsg::Vector3::Clear();
-  clear_has_now_pos();
-}
-inline const ::NFMsg::Vector3& ReqAckUseSkill::now_pos() const {
-  return now_pos_ != NULL ? *now_pos_ : *default_instance_->now_pos_;
-}
-inline ::NFMsg::Vector3* ReqAckUseSkill::mutable_now_pos() {
-  set_has_now_pos();
-  if (now_pos_ == NULL) now_pos_ = new ::NFMsg::Vector3;
-  return now_pos_;
-}
-inline ::NFMsg::Vector3* ReqAckUseSkill::release_now_pos() {
-  clear_has_now_pos();
-  ::NFMsg::Vector3* temp = now_pos_;
-  now_pos_ = NULL;
-  return temp;
-}
-inline void ReqAckUseSkill::set_allocated_now_pos(::NFMsg::Vector3* now_pos) {
-  delete now_pos_;
-  now_pos_ = now_pos;
-  if (now_pos) {
-    set_has_now_pos();
-  } else {
-    clear_has_now_pos();
-  }
-}
-
-// required .NFMsg.Vector3 tar_pos = 4;
-inline bool ReqAckUseSkill::has_tar_pos() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ReqAckUseSkill::set_has_tar_pos() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ReqAckUseSkill::clear_has_tar_pos() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ReqAckUseSkill::clear_tar_pos() {
-  if (tar_pos_ != NULL) tar_pos_->::NFMsg::Vector3::Clear();
-  clear_has_tar_pos();
-}
-inline const ::NFMsg::Vector3& ReqAckUseSkill::tar_pos() const {
-  return tar_pos_ != NULL ? *tar_pos_ : *default_instance_->tar_pos_;
-}
-inline ::NFMsg::Vector3* ReqAckUseSkill::mutable_tar_pos() {
-  set_has_tar_pos();
-  if (tar_pos_ == NULL) tar_pos_ = new ::NFMsg::Vector3;
-  return tar_pos_;
-}
-inline ::NFMsg::Vector3* ReqAckUseSkill::release_tar_pos() {
-  clear_has_tar_pos();
-  ::NFMsg::Vector3* temp = tar_pos_;
-  tar_pos_ = NULL;
-  return temp;
-}
-inline void ReqAckUseSkill::set_allocated_tar_pos(::NFMsg::Vector3* tar_pos) {
-  delete tar_pos_;
-  tar_pos_ = tar_pos;
-  if (tar_pos) {
-    set_has_tar_pos();
-  } else {
-    clear_has_tar_pos();
-  }
-}
-
-// required int32 use_index = 5;
-inline bool ReqAckUseSkill::has_use_index() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ReqAckUseSkill::set_has_use_index() {
-  _has_bits_[0] |= 0x00000010u;
-}
 inline void ReqAckUseSkill::clear_has_use_index() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void ReqAckUseSkill::clear_use_index() {
   use_index_ = 0;
@@ -11318,7 +11218,7 @@ inline void ReqAckUseSkill::set_use_index(::google::protobuf::int32 value) {
   use_index_ = value;
 }
 
-// repeated .NFMsg.EffectData effect_data = 6;
+// repeated .NFMsg.EffectData effect_data = 4;
 inline int ReqAckUseSkill::effect_data_size() const {
   return effect_data_.size();
 }

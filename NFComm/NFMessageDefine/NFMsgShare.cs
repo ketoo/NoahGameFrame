@@ -474,29 +474,15 @@ namespace NFMsg
       get { return _skill_id; }
       set { _skill_id = value; }
     }
-    private NFMsg.Vector3 _now_pos;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"now_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Vector3 now_pos
-    {
-      get { return _now_pos; }
-      set { _now_pos = value; }
-    }
-    private NFMsg.Vector3 _tar_pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"tar_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Vector3 tar_pos
-    {
-      get { return _tar_pos; }
-      set { _tar_pos = value; }
-    }
     private int _use_index;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"use_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"use_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int use_index
     {
       get { return _use_index; }
       set { _use_index = value; }
     }
     private readonly global::System.Collections.Generic.List<NFMsg.EffectData> _effect_data = new global::System.Collections.Generic.List<NFMsg.EffectData>();
-    [global::ProtoBuf.ProtoMember(6, Name=@"effect_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, Name=@"effect_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.EffectData> effect_data
     {
       get { return _effect_data; }
