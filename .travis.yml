@@ -1,0 +1,16 @@
+sudo: true
+language: cpp
+ 
+compiler:
+  - g++
+os:
+  - linux
+
+install:
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then  sudo apt-get install -qq cmake; fi
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export CXX="g++-4.8"; fi
+   
+script:
+  - sudo chmod 777 *.sh
+  - bash -c ./install4cmake.sh

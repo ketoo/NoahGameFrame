@@ -94,7 +94,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFBox.hpp" />
-    <ClInclude Include="NFCComponentManager.h" />
     <ClInclude Include="NFConsistentHash.hpp" />
     <ClInclude Include="NFCObject.h" />
     <ClInclude Include="NFCProperty.h" />
@@ -103,8 +102,6 @@
     <ClInclude Include="NFDataList.hpp" />
     <ClInclude Include="NFDateTime.hpp" />
     <ClInclude Include="NFException.hpp" />
-    <ClInclude Include="NFIComponent.h" />
-    <ClInclude Include="NFIComponentManager.h" />
     <ClInclude Include="NFLine.hpp" />
     <ClInclude Include="NFMapEx.hpp" />
     <ClInclude Include="NFMemManager.hpp" />
@@ -125,7 +122,6 @@
     <ClInclude Include="NFVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCComponentManager.cpp" />
     <ClCompile Include="NFCObject.cpp" />
     <ClCompile Include="NFCProperty.cpp" />
     <ClCompile Include="NFCPropertyManager.cpp" />

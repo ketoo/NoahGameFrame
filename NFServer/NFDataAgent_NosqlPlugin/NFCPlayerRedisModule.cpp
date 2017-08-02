@@ -35,11 +35,12 @@ bool NFCPlayerRedisModule::Execute()
 
 bool NFCPlayerRedisModule::AfterInit()
 {
-	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPlayerRedisModule::OnObjectPlayerEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCPlayerRedisModule::OnObjectGuildEvent);
 
 	return true;
 }
-
+/*
 int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
@@ -159,7 +160,7 @@ bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>&
 
 	return false;
 }
-
+*/
 bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 {
 	mxObjectDataCache.RemoveElement(self);
@@ -181,6 +182,7 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 		
 		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, xPropertyValue, "PbPropertyCacheList", i);
 	}
+
 	for (int iRecord = 0; iRecord < xPlayerDataCache->xPbRecordCacheList.record_list_size(); ++iRecord)
 	{
 		const NFMsg::ObjectRecordBase& xRecordBase = xPlayerDataCache->xPbRecordCacheList.record_list(iRecord);
@@ -353,7 +355,7 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 	return false;
 }
 
-int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+int NFCPlayerRedisModule::OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
@@ -364,6 +366,24 @@ int NFCPlayerRedisModule::OnObjectClassEvent(const NFGUID & self, const std::str
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
 	{
 		OnOnline(self);
+		AttachData(self);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		mxObjectDataCache.RemoveElement(self);
+	}
+
+	return 0;
+}
+
+int NFCPlayerRedisModule::OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	{
+		SavePlayerData(self);
+	}
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_LOADDATA == eClassEvent)
+	{
 		AttachData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)

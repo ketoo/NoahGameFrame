@@ -492,30 +492,6 @@ bool NFFileProcess::SaveForCPP()
 
 	fclose(hppWriter);
 
-	///////////////////////////
-	FILE* cppWriter = fopen(strCPPFile.c_str(), "w");
-	
-	std::string strCppFileHead;
-	strCppFileHead = strCppFileHead
-		+ "// -------------------------------------------------------------------------\n"
-		+ "//    @FileName         :    NFProtocolDefine.cpp\n"
-		+ "//    @Author           :    NFrame Studio\n"
-		+ "//    @Module           :    NFProtocolDefine\n"
-		+ "// -------------------------------------------------------------------------\n\n"
-		+ "#include \"NFProtocolDefine.hpp\"\n"
-		+ "namespace NFrame\n{\n";
-
-	fwrite(strCppFileHead.c_str(), strCppFileHead.length(), 1, cppWriter);
-	fwrite(instanceField.c_str(), instanceField.length(), 1, cppWriter);
-
-	strFileEnd.clear();
-	strFileEnd += "\n};";
-
-	fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, cppWriter);
-
-	fclose(cppWriter);
-	//////////////////////////////
-
 	return false;
 }
 
@@ -559,7 +535,17 @@ bool NFFileProcess::SaveForCS()
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
 
+			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFClassProperty* pClassProperty = itProperty->second;
+
+				strPropertyInfo += "\t\tpublic static readonly String " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+			}
 		}
+
 
 		strPropertyInfo += "\t\t// Property\n";
 		for (std::map<std::string, NFClassProperty*>::iterator itProperty = pClassDta->xStructData.xPropertyList.begin();
@@ -601,7 +587,7 @@ bool NFFileProcess::SaveForCS()
 
 					if (pRecordColDesc->index == i)
 					{
-						strRecordInfo += "\t\t\tpublic static readonly int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
+						strRecordInfo += "\t\t\tpublic const int " + colTag + " = " + std::to_string(pRecordColDesc->index) + ";//" + pRecordColDesc->type + "\n";
 					}
 				}
 			}
@@ -663,6 +649,15 @@ bool NFFileProcess::SaveForJAVA()
 			//add base class properties
 			strPropertyInfo += "\t\t// IObject\n";
 
+			for (std::map<std::string, NFClassProperty*>::iterator itProperty = pBaseObject->xStructData.xPropertyList.begin();
+				itProperty != pBaseObject->xStructData.xPropertyList.end(); ++itProperty)
+			{
+				const std::string& strPropertyName = itProperty->first;
+				NFClassProperty* pClassProperty = itProperty->second;
+
+				strPropertyInfo += "\t\tpublic static final String " + strPropertyName + " = \"" + strPropertyName + "\";";
+				strPropertyInfo += "// " + pClassProperty->descList["Type"] + "\n";
+			}
 		}
 
 		strPropertyInfo += "\t\t// Property\n";
@@ -906,6 +901,10 @@ bool NFFileProcess::SaveForLogicClass()
 	{
 		const std::string& strClassName = it->first;
 		ClassData* pClassDta = it->second;
+		if (strClassName == "IObject")
+		{
+			continue;
+		}
 
 		strElementData += "\t\t<Class Id=\"" + pClassDta->xStructData.strClassName + "\"\t";
 		strElementData += "Path=\"NFDataCfg/Struct/" + pClassDta->xStructData.strClassName + ".xml\"\t";
