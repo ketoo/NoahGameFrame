@@ -315,7 +315,21 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 		return false;
 	}
 
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+	if (nullptr == pHeroRecord)
+	{
+		return false;
+	}
+
+	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroID);
+	if (nRow < 0)
+	{
+		return false;
+	}
+
+	const std::string& strCnfID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
 	m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+	m_pKernelModule->SetPropertyString(self, NFrame::Player::FightHeroCnfID(), strCnfID);
 
 	RefereshHeroPropertytoPlayer(self, xHeroID);
 
@@ -331,7 +345,8 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
 	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-	if (!m_pSceneProcessModule->GetCloneSceneType(nSceneID) == E_SCENE_TYPE::SCENE_TYPE_ERROR)
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_ERROR)
 	{
 		return false;
 	}
@@ -445,7 +460,7 @@ bool NFCHeroModule::HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, con
 
 void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
 
 	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
 	const int nSet = xMsg.set();
@@ -455,7 +470,7 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 
 void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqSwitchFightHero);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSwitchFightHero);
 
 	const NFGUID xHero = NFINetModule::PBToNF(xMsg.heroid());
 
@@ -472,7 +487,6 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
 			SwitchFightHero(self, xHeroID);
 		}
 
@@ -484,7 +498,6 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
 			SwitchFightHero(self, xHeroID);
 		}
 
@@ -496,7 +509,6 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
 			SwitchFightHero(self, xHeroID);
 		}
 
@@ -526,7 +538,7 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, c
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
 		if (xFightHero == xHero1)
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+			SwitchFightHero(self, xHeroID);
 		}
 	}
 		break;
@@ -536,7 +548,7 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, c
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
 		if (xFightHero == xHero2)
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+			SwitchFightHero(self, xHeroID);
 		}
 	}
 		break;
@@ -546,7 +558,7 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, c
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
 		if (xFightHero == xHero3)
 		{
-			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightHero(), xHeroID);
+			SwitchFightHero(self, xHeroID);
 		}
 	}
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);

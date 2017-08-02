@@ -572,7 +572,9 @@ int NFCSceneAOIModule::OnPlayerSceneEvent(const NFGUID & self, const std::string
 	//so now only one player(that you) in this group of this scene
 	//BTW, most of time, we dont create monsters in the group 0
 	//so no one at this group but u
-
+	
+	//therefore u just need post the new scene id to you self
+	OnPropertyEvent(self, strPropertyName, oldVar, newVar, NFDataList() << self);
 	return 0;
 }
 

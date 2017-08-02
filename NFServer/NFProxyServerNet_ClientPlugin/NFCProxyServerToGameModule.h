@@ -36,7 +36,6 @@ public:
     virtual bool Execute();
 
     virtual bool AfterInit();
-	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
 
 protected:
 
@@ -58,7 +57,6 @@ private:
     NFIClassModule* m_pClassModule;
 	NFINetClientModule* m_pNetClientModule;
 
-	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif

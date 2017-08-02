@@ -41,7 +41,12 @@ protected:
 
 protected:
 	bool AddTile(const NFGUID& self, const int nX, const int nY, const int nOpr);
+	bool AddBuilding(const NFGUID& self, const int nX, const int nY, const NFGUID& id, const std::string& strCnfID);
+	bool AddNPC(const NFGUID& self, const int nX, const int nY, const NFGUID& id, const std::string& strCnfID);
+
 	bool RemoveTile(const NFGUID& self, const int nX, const int nY);
+	bool RemoveBuilding(const NFGUID& self, const int nX, const int nY, const NFGUID& id);
+	bool RemoveNPC(const NFGUID& self, const int nX, const int nY, const NFGUID& id);
 
 	bool SaveTileData(const NFGUID& self);
 	bool SendTileData(const NFGUID& self);
@@ -49,6 +54,7 @@ protected:
 	bool LoadTileData(const NFGUID& self, const int nSceneID);
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 
 protected:
 	struct TileState
@@ -62,12 +68,14 @@ protected:
 		int x;
 		int y;
 		std::string configID;
+		NFGUID ID;
 	};
 	struct TileNPC
 	{
 		int x;
 		int y;
 		std::string configID;
+		NFGUID ID;
 	};
 	struct TileData
 	{

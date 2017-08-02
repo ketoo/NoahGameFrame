@@ -248,7 +248,6 @@ bool NFCTeamModule::GetPlayerGameID(const NFGUID& self, int& nGameID)
     std::vector<std::string> xVecValue;
 
     xVecFeild.push_back("GameID");
-	nGameID = m_pPlayerRedisModule->GetPlayerCacheGameID(self);
 
 	return true;
 }
@@ -360,11 +359,6 @@ bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, 
         xPlayerList.push_back(xPlayerIDList[i].ToString());
     }
 
-    if (!m_pPlayerRedisModule->GetPlayerCacheGameID(xPlayerList, xGameIDList))
-    {
-        return false;
-    }
-
     for (int i = 0; i < xGameIDList.size() && i < xPlayerList.size(); i++)
     {
         int nGameID = xGameIDList[i];
@@ -378,7 +372,7 @@ bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, 
 
 void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckCreateTeam);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckCreateTeam);
 
 	std::string strRoleName ;
 	int nLevel = 0;
@@ -410,7 +404,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
 
 void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckJoinTeam);
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckJoinTeam);
 
     if (JoinTeam(nPlayerID, NFINetModule::PBToNF(xMsg.team_id())))
     {
@@ -439,7 +433,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
 
 void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckLeaveTeam);
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckLeaveTeam);
 
     if (LeaveTeam(nPlayerID, NFINetModule::PBToNF(xMsg.team_id())))
     {
@@ -470,7 +464,7 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
 
 void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckOprTeamMember);
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckOprTeamMember);
 
     NFMsg::ReqAckOprTeamMember::EGTeamMemberOprType eOprType = xMsg.type();
     switch (eOprType)
@@ -494,7 +488,7 @@ void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgI
 
 void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqTeamEnterEctype);
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqTeamEnterEctype);
 
     NFGUID xTeam = NFINetModule::PBToNF(xMsg.team_id());
     NFGUID xSelfID = NFINetModule::PBToNF(xMsg.self_id());

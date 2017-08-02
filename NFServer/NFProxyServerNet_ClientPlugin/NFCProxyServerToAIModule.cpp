@@ -75,11 +75,6 @@ bool NFCProxyServerToAIModule::AfterInit()
     return true;
 }
 
-void NFCProxyServerToAIModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
-}
-
 void NFCProxyServerToAIModule::OnSocketGSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
@@ -129,8 +124,6 @@ void NFCProxyServerToAIModule::Register(NFINet* pNet)
                 pData->set_server_max_online(nMaxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
                 NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
@@ -149,7 +142,7 @@ void NFCProxyServerToAIModule::OnAckEnterGame(const int nSockIndex, const int nM
 {
     NFGUID nPlayerID;
     NFMsg::AckEventResult xData;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xData, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xData, nPlayerID))
     {
         return;
     }
