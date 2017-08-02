@@ -2,31 +2,8 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "Dependencies/common/lexical_cast.hpp"
 #include "MiniExcelReader.h"
-#include <algorithm>
-#include <fstream>
-#include <sstream>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <wchar.h>
-#include <locale.h>
-#include <iostream>
-#include <vector>
 #include <map>
-#include <list>
 
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <io.h>
-#include <windows.h>
-#include <conio.h>
-#else
-#include <iconv.h>
-#include <unistd.h>
-#include <cstdio>
-#include <dirent.h>
-#include <sys/stat.h>
-#endif
 
 class NFClassProperty
 {

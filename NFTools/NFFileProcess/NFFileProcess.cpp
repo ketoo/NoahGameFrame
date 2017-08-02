@@ -1,6 +1,18 @@
 #include "NFFileProcess.h"
-#include <memory>
 #include "Utf8ToGbk.h"
+#include <iostream>
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <io.h>
+#include <windows.h>
+#include <conio.h>
+#else
+#include <iconv.h>
+#include <unistd.h>
+#include <cstdio>
+#include <dirent.h>
+#include <sys/stat.h>
+#endif
+
 
 NFFileProcess::NFFileProcess()
 {
