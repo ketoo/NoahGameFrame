@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#include <conio.h>
 
 int main(int argc, const char *argv[])
 {
