@@ -268,18 +268,39 @@ namespace NFMsg
       get { return _moveType; }
       set { _moveType = value; }
     }
+    private float _speed;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float speed
+    {
+      get { return _speed; }
+      set { _speed = value; }
+    }
+    private int _time;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int time
+    {
+      get { return _time; }
+      set { _time = value; }
+    }
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _target_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> target_pos
     {
       get { return _target_pos; }
     }
   
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _source_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> source_pos
     {
       get { return _source_pos; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _move_direction = new global::System.Collections.Generic.List<NFMsg.Vector3>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"move_direction", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFMsg.Vector3> move_direction
+    {
+      get { return _move_direction; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -453,29 +474,15 @@ namespace NFMsg
       get { return _skill_id; }
       set { _skill_id = value; }
     }
-    private NFMsg.Vector3 _now_pos;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"now_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Vector3 now_pos
-    {
-      get { return _now_pos; }
-      set { _now_pos = value; }
-    }
-    private NFMsg.Vector3 _tar_pos;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"tar_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFMsg.Vector3 tar_pos
-    {
-      get { return _tar_pos; }
-      set { _tar_pos = value; }
-    }
     private int _use_index;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"use_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"use_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public int use_index
     {
       get { return _use_index; }
       set { _use_index = value; }
     }
     private readonly global::System.Collections.Generic.List<NFMsg.EffectData> _effect_data = new global::System.Collections.Generic.List<NFMsg.EffectData>();
-    [global::ProtoBuf.ProtoMember(6, Name=@"effect_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(4, Name=@"effect_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.EffectData> effect_data
     {
       get { return _effect_data; }
@@ -1443,6 +1450,13 @@ namespace NFMsg
       get { return _configID; }
       set { _configID = value; }
     }
+    private NFMsg.Ident _guid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"guid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident guid
+    {
+      get { return _guid; }
+      set { _guid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1473,6 +1487,13 @@ namespace NFMsg
     {
       get { return _configID; }
       set { _configID = value; }
+    }
+    private NFMsg.Ident _guid;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"guid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident guid
+    {
+      get { return _guid; }
+      set { _guid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

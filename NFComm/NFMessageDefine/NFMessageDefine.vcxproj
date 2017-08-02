@@ -105,7 +105,6 @@
     <ClInclude Include="NFMsgShare.pb.h" />
     <ClInclude Include="NFMsgURl.pb.h" />
     <ClInclude Include="NFProtocolDefine.hpp" />
-    <ClInclude Include="NFSLGDefine.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NFDefine.pb.cc" />
@@ -116,7 +115,6 @@
     <ClCompile Include="NFMsgPreGame.pb.cc" />
     <ClCompile Include="NFMsgShare.pb.cc" />
     <ClCompile Include="NFMsgURl.pb.cc" />
-    <ClCompile Include="NFSLGDefine.pb.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

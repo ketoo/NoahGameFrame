@@ -8,6 +8,10 @@ echo Compiling libevent
 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
 cd libevent
 nmake /f Makefile.nmake
+copy libevent.lib ..\\lib\\Debug\\ /Y
+copy libevent.lib ..\\lib\\Release\\ /Y
+copy libevent_core.lib ..\\lib\\Debug\\ /Y
+copy libevent_core.lib ..\\lib\\Release\\ /Y
 cd ..
 
 

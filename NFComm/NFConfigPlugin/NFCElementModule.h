@@ -22,7 +22,6 @@
 #include "NFComm/NFCore/NFCRecord.h"
 #include "NFComm/NFCore/NFCPropertyManager.h"
 #include "NFComm/NFCore/NFCRecordManager.h"
-#include "NFComm/NFCore/NFCComponentManager.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 
@@ -35,7 +34,6 @@ public:
     {
         m_pPropertyManager = NF_SHARE_PTR<NFIPropertyManager>(NF_NEW NFCPropertyManager(NFGUID()));
         m_pRecordManager = NF_SHARE_PTR<NFIRecordManager>(NF_NEW NFCRecordManager(NFGUID()));
-        m_pComponentManager = NF_SHARE_PTR<NFIComponentManager>(NF_NEW NFCComponentManager(NFGUID()));
     }
 
     virtual ~ElementConfigInfo()
@@ -52,17 +50,12 @@ public:
         return m_pRecordManager;
     }
 
-    NF_SHARE_PTR<NFIComponentManager> GetComponentManager()
-    {
-        return m_pComponentManager;
-    }
 protected:
 
     //std::string mstrConfigID;
 
     NF_SHARE_PTR<NFIPropertyManager> m_pPropertyManager;
     NF_SHARE_PTR<NFIRecordManager> m_pRecordManager;
-    NF_SHARE_PTR<NFIComponentManager> m_pComponentManager;
 };
 
 class NFCElementModule
@@ -91,7 +84,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager(const std::string& strConfigName);
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager(const std::string& strConfigName);
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName);
     virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName);

@@ -42,7 +42,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
 {
     NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -132,8 +132,6 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
                 pData->set_server_max_online(nMaxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
                 NF_SHARE_PTR<ConnectData> pServerData = GetClusterModule()->GetServerNetInfo(pNet);
                 if (pServerData)
@@ -182,13 +180,6 @@ void NFCProxyServerToWorldModule::ServerReport()
 				reqMsg.set_server_max_online(nMaxConnect);
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				for (auto it = m_mServerInfoExt.begin(); it != m_mServerInfoExt.end(); it++)
-				{
-					*pb_ServerInfoExt.add_key() = it->first;
-					*pb_ServerInfoExt.add_value() = it->second;
-				}
-				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
 				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_WORLD);
 				if (pServerData)
@@ -212,14 +203,34 @@ bool NFCProxyServerToWorldModule::AfterInit()
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
     if (xLogicClass)
     {
-		const std::vector<std::string>& strIdList = xLogicClass->GetIDList();
+		const std::vector<std::string>& strIdList = xLogicClass->GetIDList(); 
+		
+		const int nCurAppID = pPluginManager->GetAppID();
+		std::vector<std::string>::const_iterator itr =
+			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
+		{
+			return nCurAppID == m_pElementModule->GetPropertyInt(strConfigId, NFrame::Server::ServerID());
+		});
+
+		if (strIdList.end() == itr)
+		{
+			std::ostringstream strLog;
+			strLog << "Cannot find current server, AppID = " << nCurAppID;
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, NULL_OBJECT, strLog, __FUNCTION__, __LINE__);
+			NFASSERT(-1, "Cannot find current server", __FILE__, __FUNCTION__);
+			exit(0);
+		}
+
+		const int nCurArea = m_pElementModule->GetPropertyInt(*itr, NFrame::Server::Area());
+
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
 
             const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
             const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
-            if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD)
+			const int nServerArea = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Area());
+			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && nCurArea == nServerArea)
             {
                 const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
@@ -249,7 +260,7 @@ void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockInd
     
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -283,11 +294,6 @@ bool NFCProxyServerToWorldModule::VerifyConnectData(const std::string& strAccoun
     }
 
     return false;
-}
-
-void NFCProxyServerToWorldModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
 }
 
 void NFCProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo)
