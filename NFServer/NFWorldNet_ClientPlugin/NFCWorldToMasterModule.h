@@ -35,11 +35,10 @@ public:
 	virtual bool Shut();
 	virtual bool Execute();
 	virtual bool AfterInit();
-	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
+
 protected:
 
 	void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-
 	
 	void OnClientDisconnect(const int nAddress);
 	
@@ -66,8 +65,6 @@ private:
 	NFINetClientModule* m_pNetClientModule;
 	NFINetModule* m_pNetModule;
 	NFISecurityModule* m_pSecurityModule;
-
-	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif
