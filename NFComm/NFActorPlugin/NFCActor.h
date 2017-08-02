@@ -14,40 +14,38 @@
 #include "NFComm/NFCore/NFSingleton.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIActor.h"
-#include "NFComm/NFCore/NFIComponent.h"
+#include "NFComm/NFPluginModule/NFIComponent.h"
 #include "NFComm/NFPluginModule/NFIActorModule.h"
 
 class NFCActor
     : public NFIActor
 {
 public:
-    NFCActor(Theron::Framework& framework, NFIActorModule* pManager) : NFIActor(framework, pManager)
-    {
+	NFCActor(Theron::Framework& framework, NFIActorModule* pModule);
+	virtual ~NFCActor();
 
-    }
-
-    ~NFCActor()
-    {
-		if (mxComponent)
-		{
-			mxComponent->BeforeShut();
-			mxComponent->Shut();
-		}
-    }
-
-	//handler in main thread, the purpose is to push message to main thread
-    virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
-
-	//hangler in component
-    virtual void HandlerSelf(const NFIActorMessage& message, const Theron::Address from);
-
+	
     virtual void AddComponent(NF_SHARE_PTR<NFIComponent> pComponent);
-    virtual bool AddEndFunc(EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR functorPtr_end);
+	virtual NF_SHARE_PTR<NFIComponent> FindComponent(const std::string& strComponentName);
+
+	virtual bool AddBeginunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xBeginFunctor);
+	virtual bool AddEndFunc(const int nSubMsgID, ACTOR_PROCESS_FUNCTOR_PTR xEndFunctor);
+
     virtual bool SendMsg(const Theron::Address address, const NFIActorMessage& message);
 
+protected:
+	//handler in component
+	virtual void Handler(const NFIActorMessage& message, const Theron::Address from);
+
+	//handler in main thread, the purpose is to push message to main thread
+	virtual void HandlerEx(const NFIActorMessage& message, const Theron::Address from);
 
 protected:
-    NF_SHARE_PTR<NFIComponent> mxComponent;
-    EVENT_ASYNC_PROCESS_END_FUNCTOR_PTR mxFunctorEndPtr;
+	NFMapEx<std::string, NFIComponent> mxComponent;
+
+	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxProcessFuntor;
+	NFMapEx<int, ACTOR_PROCESS_FUNCTOR> mxEndProcessFuntor;
+
+	ACTOR_PROCESS_FUNCTOR_PTR mxDefaultEndProcessFuntor;
 };
 #endif

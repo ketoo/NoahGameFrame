@@ -355,7 +355,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 
 void NFCItemModule::OnClientUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
 
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();

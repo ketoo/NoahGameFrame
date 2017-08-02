@@ -101,13 +101,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="NFCGuildComopnent.cpp" />
     <ClCompile Include="NFCGuildModule.cpp" />
-    <ClCompile Include="NFCGuildRedisModule.cpp" />
     <ClCompile Include="NFGuildPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NFCGuildComponent.h" />
     <ClInclude Include="NFCGuildModule.h" />
-    <ClInclude Include="NFCGuildRedisModule.h" />
     <ClInclude Include="NFGuildPlugin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

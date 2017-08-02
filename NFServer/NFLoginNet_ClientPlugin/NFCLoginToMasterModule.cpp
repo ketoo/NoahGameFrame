@@ -116,8 +116,6 @@ void NFCLoginToMasterModule::Register(NFINet* pNet)
                 pData->set_server_max_online(nMaxConnect);
                 pData->set_server_state(NFMsg::EST_NARMAL);
                 pData->set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				pData->mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
                 NF_SHARE_PTR<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(pNet);
                 if (pServerData)
@@ -166,13 +164,6 @@ void NFCLoginToMasterModule::ServerReport()
 				reqMsg.set_server_max_online(nMaxConnect);
 				reqMsg.set_server_state(NFMsg::EST_NARMAL);
 				reqMsg.set_server_type(nServerType);
-				NFMsg::ServerInfoExt pb_ServerInfoExt;
-				for (auto it = m_mServerInfoExt.begin(); it != m_mServerInfoExt.end(); it++)
-				{
-					*pb_ServerInfoExt.add_key() = it->first;
-					*pb_ServerInfoExt.add_value() = it->second;
-				}
-				reqMsg.mutable_server_info_list_ext()->CopyFrom(pb_ServerInfoExt);
 
 				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_MASTER);
 				if (pServerData)
@@ -188,7 +179,7 @@ void NFCLoginToMasterModule::OnSelectServerResultProcess(const int nSockIndex, c
 {
     NFGUID nPlayerID;
     NFMsg::AckConnectWorldResult xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -221,7 +212,7 @@ void NFCLoginToMasterModule::OnWorldInfoProcess(const int nSockIndex, const int 
 {
     NFGUID nPlayerID ;
     NFMsg::ServerInfoReportList xMsg;
-    if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+    if (!NFINetModule::ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
     {
         return;
     }
@@ -252,9 +243,4 @@ NFINetClientModule* NFCLoginToMasterModule::GetClusterModule()
 NFMapEx<int, NFMsg::ServerInfoReport>& NFCLoginToMasterModule::GetWorldMap()
 {
     return mWorldMap;
-}
-
-void NFCLoginToMasterModule::AddServerInfoExt(const std::string & key, const std::string & value)
-{
-	m_mServerInfoExt[key] = value;
 }

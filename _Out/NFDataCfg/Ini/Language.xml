@@ -36,9 +36,9 @@
 	<Object Id="Desc_bomb_1" Chinese="炸弹(一级)" English="" />
 	<Object Id="Desc_bomb_2" Chinese="炸弹(二级)" English="" />
 	<Object Id="Desc_bomb_3" Chinese="炸弹(三级)" English="" />
-	<Object Id="Desc_camp_1" Chinese="传送营地(一级)" English="" />
-	<Object Id="Desc_camp_2" Chinese="传送营地(二级)" English="" />
-	<Object Id="Desc_camp_3" Chinese="传送营地(三级)" English="" />
+	<Object Id="Desc_cannon_small_1" Chinese="传送营地(一级)" English="" />
+	<Object Id="Desc_cannon_small_2" Chinese="传送营地(二级)" English="" />
+	<Object Id="Desc_cannon_small_3" Chinese="传送营地(三级)" English="" />
 	<Object Id="Desc_dragon_cannon_1" Chinese="火龙炮(一级)" English="" />
 	<Object Id="Desc_dragon_cannon_2" Chinese="火龙炮(二级)" English="" />
 	<Object Id="Desc_dragon_cannon_3" Chinese="火龙炮(三级)" English="" />
@@ -140,9 +140,9 @@
 	<Object Id="NameID_bomb_1" Chinese="炸弹(一级)" English="" />
 	<Object Id="NameID_bomb_2" Chinese="炸弹(二级)" English="" />
 	<Object Id="NameID_bomb_3" Chinese="炸弹(三级)" English="" />
-	<Object Id="NameID_camp_1" Chinese="传送营地(一级)" English="" />
-	<Object Id="NameID_camp_2" Chinese="传送营地(二级)" English="" />
-	<Object Id="NameID_camp_3" Chinese="传送营地(三级)" English="" />
+	<Object Id="NameID_cannon_small_1" Chinese="传送营地(一级)" English="" />
+	<Object Id="NameID_cannon_small_2" Chinese="传送营地(二级)" English="" />
+	<Object Id="NameID_cannon_small_3" Chinese="传送营地(三级)" English="" />
 	<Object Id="NameID_dragon_cannon_1" Chinese="火龙炮(一级)" English="" />
 	<Object Id="NameID_dragon_cannon_2" Chinese="火龙炮(二级)" English="" />
 	<Object Id="NameID_dragon_cannon_3" Chinese="火龙炮(三级)" English="" />
