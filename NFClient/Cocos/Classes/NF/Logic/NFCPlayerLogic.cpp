@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "stdafx.h"
 #include "NFCPlayerLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -108,7 +109,7 @@ void NFCPlayerLogic::OnRoleList(const int nSockIndex, const int nMsgID, const ch
 {
 	NFGUID nPlayerID;
 	NFMsg::AckRoleLiteInfoList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -127,7 +128,7 @@ void NFCPlayerLogic::OnObjectEntry(const int nSockIndex, const int nMsgID, const
 {
 	NFGUID nPlayerID;
 	NFMsg::AckPlayerEntryList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -151,7 +152,7 @@ void NFCPlayerLogic::OnObjectLeave(const int nSockIndex, const int nMsgID, const
 {
 	NFGUID nPlayerID;
 	NFMsg::AckPlayerLeaveList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -167,7 +168,7 @@ void NFCPlayerLogic::OnObjectMove(const int nSockIndex, const int nMsgID, const 
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerMove xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -185,7 +186,7 @@ void NFCPlayerLogic::OnObjectJump(const int nSockIndex, const int nMsgID, const 
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerMove xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
