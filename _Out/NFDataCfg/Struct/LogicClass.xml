@@ -10,7 +10,6 @@
 		<Class Id="GuildConfig"	Path="NFDataCfg/Struct/GuildConfig.xml"	InstancePath="NFDataCfg/Ini/GuildConfig.xml"	/>
 		<Class Id="GuildJob"	Path="NFDataCfg/Struct/GuildJob.xml"	InstancePath="NFDataCfg/Ini/GuildJob.xml"	/>
 		<Class Id="HttpServer"	Path="NFDataCfg/Struct/HttpServer.xml"	InstancePath="NFDataCfg/Ini/HttpServer.xml"	/>
-		<Class Id="IObject"	Path="NFDataCfg/Struct/IObject.xml"	InstancePath="NFDataCfg/Ini/IObject.xml"	/>
 		<Class Id="InitProperty"	Path="NFDataCfg/Struct/InitProperty.xml"	InstancePath="NFDataCfg/Ini/InitProperty.xml"	/>
 		<Class Id="Item"	Path="NFDataCfg/Struct/Item.xml"	InstancePath="NFDataCfg/Ini/Item.xml"	/>
 		<Class Id="Language"	Path="NFDataCfg/Struct/Language.xml"	InstancePath="NFDataCfg/Ini/Language.xml"	/>

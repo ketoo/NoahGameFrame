@@ -514,6 +514,7 @@ namespace NFrame
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
 		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
+		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& DropPackList(){ static std::string x = "DropPackList"; return x; };// string
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
 		static const std::string& EffectData(){ static std::string x = "EffectData"; return x; };// string
@@ -535,7 +536,6 @@ namespace NFrame
 		static const std::string& MP(){ static std::string x = "MP"; return x; };// int
 		static const std::string& MPREGEN(){ static std::string x = "MPREGEN"; return x; };// int
 		static const std::string& MasterID(){ static std::string x = "MasterID"; return x; };// object
-		static const std::string& Money(){ static std::string x = "Money"; return x; };// int
 		static const std::string& NPCType(){ static std::string x = "NPCType"; return x; };// int
 		static const std::string& PHYSICAL_GATE(){ static std::string x = "PHYSICAL_GATE"; return x; };// int
 		static const std::string& Prefab(){ static std::string x = "Prefab"; return x; };// string
@@ -554,6 +554,7 @@ namespace NFrame
 		static const std::string& TargetX(){ static std::string x = "TargetX"; return x; };// float
 		static const std::string& TargetY(){ static std::string x = "TargetY"; return x; };// float
 		static const std::string& VIPEXP(){ static std::string x = "VIPEXP"; return x; };// int
+		static const std::string& Width(){ static std::string x = "Width"; return x; };// float
 		// Record
 
 	};
@@ -609,8 +610,10 @@ namespace NFrame
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
 		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
+		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
 		static const std::string& FightHero(){ static std::string x = "FightHero"; return x; };// object
+		static const std::string& FightHeroCnfID(){ static std::string x = "FightHeroCnfID"; return x; };// string
 		static const std::string& FightOppnent(){ static std::string x = "FightOppnent"; return x; };// object
 		static const std::string& FirstTarget(){ static std::string x = "FirstTarget"; return x; };// object
 		static const std::string& GMLevel(){ static std::string x = "GMLevel"; return x; };// int
@@ -638,7 +641,6 @@ namespace NFrame
 		static const std::string& MOVE_SPEED(){ static std::string x = "MOVE_SPEED"; return x; };// int
 		static const std::string& MP(){ static std::string x = "MP"; return x; };// int
 		static const std::string& MPREGEN(){ static std::string x = "MPREGEN"; return x; };// int
-		static const std::string& Money(){ static std::string x = "Money"; return x; };// int
 		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
 		static const std::string& OnlineCount(){ static std::string x = "OnlineCount"; return x; };// int
 		static const std::string& OnlineTime(){ static std::string x = "OnlineTime"; return x; };// object
@@ -707,24 +709,22 @@ namespace NFrame
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "BuildingList"; return x; };			static const int BuildingID = 0;//string
+			static const std::string& ThisName(){ static std::string x = "BuildingList"; return x; };			static const int BuildingCnfID = 0;//string
 			static const int BuildingGUID = 1;//object
 			static const int State = 2;//int
-			static const int PosX = 3;//float
-			static const int Pos = 4;//vector3
-			static const int StateEndTime = 5;//int
+			static const int Pos = 3;//vector3
+			static const int StateEndTime = 4;//int
 
 		};
 		class BuildingListProduce
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "BuildingListProduce"; return x; };			static const int BuildingID = 0;//string
+			static const std::string& ThisName(){ static std::string x = "BuildingListProduce"; return x; };			static const int BuildingCnfID = 0;//string
 			static const int BuildingGUID = 1;//object
 			static const int State = 2;//int
-			static const int PosX = 3;//float
-			static const int PosY = 4;//float
-			static const int StateEndTime = 5;//int
+			static const int Pos = 3;//vector3
+			static const int StateEndTime = 4;//int
 
 		};
 		class CommValue
@@ -862,7 +862,6 @@ namespace NFrame
 		static const std::string& ActorID(){ static std::string x = "ActorID"; return x; };// int
 		static const std::string& CamOffestPos(){ static std::string x = "CamOffestPos"; return x; };// string
 		static const std::string& CamOffestRot(){ static std::string x = "CamOffestRot"; return x; };// string
-		static const std::string& CanClone(){ static std::string x = "CanClone"; return x; };// int
 		static const std::string& FilePath(){ static std::string x = "FilePath"; return x; };// string
 		static const std::string& LoadingUI(){ static std::string x = "LoadingUI"; return x; };// string
 		static const std::string& MaxGroup(){ static std::string x = "MaxGroup"; return x; };// int
@@ -871,10 +870,9 @@ namespace NFrame
 		static const std::string& RelivePos(){ static std::string x = "RelivePos"; return x; };// string
 		static const std::string& SceneName(){ static std::string x = "SceneName"; return x; };// string
 		static const std::string& SceneShowName(){ static std::string x = "SceneShowName"; return x; };// string
-		static const std::string& Share(){ static std::string x = "Share"; return x; };// int
 		static const std::string& SoundList(){ static std::string x = "SoundList"; return x; };// string
-		static const std::string& SyncObject(){ static std::string x = "SyncObject"; return x; };// int
 		static const std::string& Tile(){ static std::string x = "Tile"; return x; };// int
+		static const std::string& Type(){ static std::string x = "Type"; return x; };// int
 		static const std::string& Width(){ static std::string x = "Width"; return x; };// int
 		// Record
 

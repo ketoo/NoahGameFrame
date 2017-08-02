@@ -70,12 +70,14 @@ message ReqAckSynData//message sysn
 message ReqAckPlayerMove
 {
 	required Ident 	mover = 1;
-	required int32  moveType = 2;
-	repeated Vector3 target_pos = 3;
-	repeated Vector3 source_pos = 4;
+	required int32  moveType = 2;//future_state
+	required float speed = 3;
+	required int32 time = 4;
+	repeated Vector3 target_pos = 5;
+	repeated Vector3 source_pos = 6;
+	repeated Vector3 move_direction = 7;
 }
-
-
+		
 message ReqAckPlayerChat
 {
 	enum EGameChatType
@@ -125,10 +127,8 @@ message ReqAckUseSkill
 {
 	required Ident 	user = 1;
 	required bytes skill_id = 2;
-	required Vector3 now_pos = 3;
-	required Vector3 tar_pos = 4;
-	required int32  use_index = 5;//因为客户端要先展示
-	repeated EffectData 	effect_data = 6;
+	required int32  use_index = 3;//因为客户端要先展示
+	repeated EffectData 	effect_data = 4;
 }
 
 message ReqAckUseItem
@@ -407,6 +407,8 @@ message TileBuilding
 	required int32		x				= 1;//
 	required int32		y				= 2;//
 	required string		configID 		= 3;
+	required Ident		guid 			= 4;
+	
 }
 
 message TileNPC
@@ -414,6 +416,7 @@ message TileNPC
 	required int32		x				= 1;//
 	required int32		y				= 2;//
 	required string		configID 		= 3;//
+	required Ident		guid 			= 4;//
 }
 
 //EGEC_ACK_MINING_TITLE

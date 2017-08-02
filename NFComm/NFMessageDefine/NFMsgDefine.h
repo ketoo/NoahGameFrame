@@ -21,7 +21,6 @@
 #include "NFMsgShare.pb.h"
 #include "NFMsgURl.pb.h"
 #include "NFMsgMysql.pb.h"
-#include "NFSLGDefine.pb.h"
 
 // -------------------------------------------------------------------------
 #pragma pack(push,1)

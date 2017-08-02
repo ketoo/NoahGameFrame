@@ -28,7 +28,7 @@ void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID,
 {
     NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
-	if (!m_pNetModule->ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
