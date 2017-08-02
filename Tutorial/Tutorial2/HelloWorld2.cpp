@@ -1,7 +1,7 @@
 #include "HelloWorld2.h"
 #include "NFComm/NFCore/NFCObject.h"
 #include "NFComm/NFCore/NFIComponent.h"
-#include "NFComm/NFCore//NFDataList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 bool NFCHelloWorld2::Init()
 {
