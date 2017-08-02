@@ -36,7 +36,7 @@ const int NFSkillPlugin::GetPluginVersion()
 
 const std::string NFSkillPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFSkillPlugin);
 }
 
 void NFSkillPlugin::Install()

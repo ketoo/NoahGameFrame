@@ -30,14 +30,6 @@ enum NFEventDefine
 	NFED_ON_CLIENT_REQUIRE_MOVE,
 	NFED_ON_CLIENT_MOVE_RESULT,
 
-	//arg[0]:player_id key_value skillID target(1-N)
-	NFED_ON_CLIENT_REQUIRE_USE_SKILL,
-	NFED_ON_CLIENT_USE_SKILL_RESULT,
-
-	//arg[0]:skillID, fx, fy, fz, TargetObjectList
-	NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS,
-	NFED_ON_CLIENT_USE_SKILL_POS_RESULT,
-
 	//arg[0]:itemID,TargetObject
 	NFED_ON_CLIENT_REQUIRE_USE_ITEM,
 

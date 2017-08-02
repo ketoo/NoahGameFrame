@@ -18,7 +18,7 @@ if [ -d ./libevent ]; then
 fi
 unzip -o libevent.zip -d ./
 
-mv libevent-2.1.8-stable libevent
+#mv libevent-2.1.8-stable libevent
 
 # compiling libevent
 cd libevent
