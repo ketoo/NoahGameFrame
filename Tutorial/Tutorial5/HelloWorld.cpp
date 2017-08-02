@@ -1,6 +1,6 @@
 #include "HelloWorld.h"
 #include "NFComm/NFCore/NFCObject.h"
-#include "NFComm/NFCore//NFDataList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFNetPlugin/NFCWebsocketModule.h"
 
 bool NFCHelloWorld::Init()
