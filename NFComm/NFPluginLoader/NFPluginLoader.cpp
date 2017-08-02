@@ -249,12 +249,14 @@ int main(int argc, char* argv[])
 	NFCPluginManager::GetSingletonPtr()->ReadyExecute();
 
 	
-
+	uint64_t nIndex = 0;
     while (!bExitApp)
     {
         while (true)
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			nIndex++;
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
             if (bExitApp)
             {

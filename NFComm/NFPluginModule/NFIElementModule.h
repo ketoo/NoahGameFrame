@@ -14,7 +14,6 @@
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFIRecordManager.h"
-#include "NFComm/NFCore/NFIComponentManager.h"
 
 class NFIElementModule
     : public NFIModule
@@ -32,7 +31,6 @@ public:
 
     virtual std::shared_ptr<NFIPropertyManager> GetPropertyManager(const std::string& strConfigName) = 0;
     virtual std::shared_ptr<NFIRecordManager> GetRecordManager(const std::string& strConfigName) = 0;
-    virtual std::shared_ptr<NFIComponentManager> GetComponentManager(const std::string& strConfigName) = 0;
 
     virtual NFINT64 GetPropertyInt(const std::string& strConfigName, const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName) = 0;

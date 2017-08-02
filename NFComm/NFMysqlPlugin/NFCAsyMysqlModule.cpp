@@ -87,49 +87,49 @@ bool NFCMysqlComponent::AfterInit()
     return true;
 }
 
-int NFCMysqlComponent::OnASyncEvent(const NFGUID& self, const int event, std::string& arg)
+int NFCMysqlComponent::OnASyncEvent(const NFGUID& self, const int from, const int nSubMessageID, std::string& arg)
 {
     int nRet = 0;
-    switch (event)
+    switch (nSubMessageID)
     {
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_UPDATA:
         {
-            nRet = OnASyUpdataMysqlEvent(self, event, arg);
+            nRet = OnASyUpdataMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_QUERY:
         {
-            nRet = OnASyQueryMysqlEvent(self, event, arg);
+            nRet = OnASyQueryMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_SELECT:
         {
-            nRet = OnASySelectMysqlEvent(self, event, arg);
+            nRet = OnASySelectMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_DELETE:
         {
-            nRet = OnASyDeleteMysqlEvent(self, event, arg);
+            nRet = OnASyDeleteMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_EXISTS:
         {
-            nRet = OnASyExistsMysqlEvent(self, event, arg);
+            nRet = OnASyExistsMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEYS:
         {
-            nRet = OnASyKeysMysqlEvent(self, event, arg);
+            nRet = OnASyKeysMysqlEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_INISERVER:
         {
-            nRet = OnASyAddMysqlServerEvent(self, event, arg);
+            nRet = OnASyAddMysqlServerEvent(self, nSubMessageID, arg);
         }
         break;
         case NFCAsyMysqlModule::ACOTERMYSQLEVENT_KEEPALIVESERVER:
         {
-            nRet = OnASyKeepServerAliveEvent(self, event, arg);
+            nRet = OnASyKeepServerAliveEvent(self, nSubMessageID, arg);
         }
         break;
         default:
@@ -365,11 +365,6 @@ int NFCMysqlComponent::OnASyKeepServerAliveEvent(const NFGUID& self, const int e
     m_pMysqlDriverManager->CheckMysql();
 
     return 0;
-}
-
-NF_SHARE_PTR<NFIComponent> NFCMysqlComponent::CreateNewInstance()
-{
-    return  NF_SHARE_PTR<NFIComponent> (NF_NEW  NFCMysqlComponent(NFGUID(1, 2), ""));
 }
 
 NFCAsyMysqlModule::NFCAsyMysqlModule(NFIPluginManager* p)

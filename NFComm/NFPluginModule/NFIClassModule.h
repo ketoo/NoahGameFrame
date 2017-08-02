@@ -26,8 +26,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
 
-    virtual NF_SHARE_PTR<NFIComponentManager> GetComponentManager() = 0;
-
     virtual void SetParent(NF_SHARE_PTR<NFIClass> pClass) = 0;
     virtual NF_SHARE_PTR<NFIClass> GetParent() = 0;
     virtual void SetTypeName(const char* strType) = 0;
@@ -68,7 +66,6 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetClassRecordManager(const std::string& strClassName) = 0;
 
-    virtual NF_SHARE_PTR<NFIComponentManager> GetClassComponentManager(const std::string& strClassName) = 0;
 };
 
 #endif

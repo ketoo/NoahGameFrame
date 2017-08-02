@@ -33,8 +33,6 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	virtual void AddServerInfoExt(const std::string& key, const std::string& value);
-
 protected:
 
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
@@ -61,7 +59,6 @@ private:
 	NFINetClientModule* m_pNetClientModule;
 	NFIAIServerNet_ServerModule* m_pAIServerNet_ServerModule;
 
-	std::map<std::string, std::string> m_mServerInfoExt;
 };
 
 #endif
