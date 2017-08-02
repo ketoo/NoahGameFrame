@@ -26,7 +26,7 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WinSock2.h>
 #include <windows.h>
-#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX
+#elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 //#include <libkern/OSByteOrder.h>
 #include <netinet/in.h>
 #ifdef _XOPEN_SOURCE_EXTENDED
@@ -85,6 +85,8 @@ struct  NFIMsgHead
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt64(nData);
+#elif NF_PLATFORM == NF_PLATFORM_ANDROID
+        return betoh64(nData);
 #else
         return be64toh(nData);
 #endif
@@ -111,6 +113,8 @@ struct  NFIMsgHead
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt32(nData);
+#elif NF_PLATFORM == NF_PLATFORM_ANDROID
+        return betoh32(nData);
 #else
         return be32toh(nData);
 #endif
@@ -137,6 +141,8 @@ struct  NFIMsgHead
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
 //#elseifdef __APPLE__
         return OSSwapBigToHostInt16(nData);
+#elif NF_PLATFORM == NF_PLATFORM_ANDROID
+        return betoh16 (nData);
 #else
         return be16toh(nData);
 #endif
