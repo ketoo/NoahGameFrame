@@ -36,7 +36,7 @@ const int NFMailPlugin::GetPluginVersion()
 
 const std::string NFMailPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFMailPlugin);
 }
 
 void NFMailPlugin::Install()

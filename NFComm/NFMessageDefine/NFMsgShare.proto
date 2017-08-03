@@ -116,7 +116,9 @@ message EffectData
 	{
 		EET_SUCCESS = 0;
 		EET_FAIL = 1;
-		EET_REFUSE = 2;		
+		EET_REFUSE = 2;
+		EET_MISS = 3;	
+		EET_CRIT = 4;	
 	}
 	required Ident 			effect_ident = 1;
 	required int32  		effect_value = 2;
