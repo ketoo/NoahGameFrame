@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "stdafx.h"
 #include "NFCNetLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -130,7 +131,7 @@ void NFCNetLogic::OnEventResult(const int nSockIndex, const int nMsgID, const ch
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}

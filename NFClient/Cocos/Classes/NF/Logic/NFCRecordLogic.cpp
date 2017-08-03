@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "stdafx.h"
 #include "NFCRecordLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -57,7 +58,7 @@ void NFCRecordLogic::OnRecordInt(const int nSockIndex, const int nMsgID, const c
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordInt xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -78,7 +79,7 @@ void NFCRecordLogic::OnRecordFloat(const int nSockIndex, const int nMsgID, const
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordFloat xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -99,7 +100,7 @@ void NFCRecordLogic::OnRecordString(const int nSockIndex, const int nMsgID, cons
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordString xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -120,7 +121,7 @@ void NFCRecordLogic::OnRecordObject(const int nSockIndex, const int nMsgID, cons
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordObject xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -141,7 +142,7 @@ void NFCRecordLogic::OnSwapRow(const int nSockIndex, const int nMsgID, const cha
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordSwap xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -157,7 +158,7 @@ void NFCRecordLogic::OnAddRow(const int nSockIndex, const int nMsgID, const char
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordAddRow xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -175,7 +176,7 @@ void NFCRecordLogic::OnRemoveRow(const int nSockIndex, const int nMsgID, const c
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordRemove xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -194,7 +195,7 @@ void NFCRecordLogic::OnObjectRecordEntry(const int nSockIndex, const int nMsgID,
 {
 	NFGUID nPlayerID;
 	NFMsg::MultiObjectRecordList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
