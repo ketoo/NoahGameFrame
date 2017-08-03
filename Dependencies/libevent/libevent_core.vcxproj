@@ -37,7 +37,6 @@
     <ProjectGuid>{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libevent</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>libevent_core</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -41,7 +41,6 @@
     <ProjectGuid>{FD20DB51-B151-44C8-A7AB-922CE5A237A1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libevent</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>libevent</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
