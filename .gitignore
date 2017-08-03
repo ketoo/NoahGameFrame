@@ -77,3 +77,8 @@
 
 #OSX .DS_Store
 .DS_Store
+/NFComm/NFMessageDefine/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/NFComm/NFMessageDefine/obj/Debug/CoreCompileInputs.cache
+*.cache
+*.bsc
+/_Out/NFDataCfg/proto
