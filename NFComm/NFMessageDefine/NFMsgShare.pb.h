@@ -188,11 +188,13 @@ inline bool ReqAckPlayerChat_EGameChatType_Parse(
 enum EffectData_EResultType {
   EffectData_EResultType_EET_SUCCESS = 0,
   EffectData_EResultType_EET_FAIL = 1,
-  EffectData_EResultType_EET_REFUSE = 2
+  EffectData_EResultType_EET_REFUSE = 2,
+  EffectData_EResultType_EET_MISS = 3,
+  EffectData_EResultType_EET_CRIT = 4
 };
 LIBPROTOC_EXPORT bool EffectData_EResultType_IsValid(int value);
 const EffectData_EResultType EffectData_EResultType_EResultType_MIN = EffectData_EResultType_EET_SUCCESS;
-const EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_REFUSE;
+const EffectData_EResultType EffectData_EResultType_EResultType_MAX = EffectData_EResultType_EET_CRIT;
 const int EffectData_EResultType_EResultType_ARRAYSIZE = EffectData_EResultType_EResultType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EffectData_EResultType_descriptor();
@@ -1677,6 +1679,8 @@ class LIBPROTOC_EXPORT EffectData : public ::google::protobuf::Message {
   static const EResultType EET_SUCCESS = EffectData_EResultType_EET_SUCCESS;
   static const EResultType EET_FAIL = EffectData_EResultType_EET_FAIL;
   static const EResultType EET_REFUSE = EffectData_EResultType_EET_REFUSE;
+  static const EResultType EET_MISS = EffectData_EResultType_EET_MISS;
+  static const EResultType EET_CRIT = EffectData_EResultType_EET_CRIT;
   static inline bool EResultType_IsValid(int value) {
     return EffectData_EResultType_IsValid(value);
   }

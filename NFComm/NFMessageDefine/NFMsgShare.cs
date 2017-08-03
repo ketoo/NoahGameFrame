@@ -447,7 +447,13 @@ namespace NFMsg
       EET_FAIL = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EET_REFUSE", Value=2)]
-      EET_REFUSE = 2
+      EET_REFUSE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EET_MISS", Value=3)]
+      EET_MISS = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EET_CRIT", Value=4)]
+      EET_CRIT = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
