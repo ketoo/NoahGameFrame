@@ -36,7 +36,7 @@ const int NFRankPlugin::GetPluginVersion()
 
 const std::string NFRankPlugin::GetPluginName()
 {
-	return GET_CLASS_NAME(NFCChatPlugin);
+	return GET_CLASS_NAME(NFRankPlugin);
 }
 
 void NFRankPlugin::Install()
