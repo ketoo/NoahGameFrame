@@ -32,7 +32,7 @@ bool NFCShopModule::AfterInit()
 	return true;
 }
 
-void NFCShopModule::OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCShopModule::OnClienBuyItem(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	/*
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);

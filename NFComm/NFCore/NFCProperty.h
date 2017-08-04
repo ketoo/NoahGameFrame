@@ -52,6 +52,7 @@ public:
 	virtual void SetUpload(bool bUpload);
 
     virtual NFINT64 GetInt() const;
+	virtual int GetInt32() const;
     virtual double GetFloat() const;
     virtual const std::string& GetString() const;
     virtual const NFGUID& GetObject() const;

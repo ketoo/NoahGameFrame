@@ -449,7 +449,7 @@ namespace termcolor
         #if defined(TERMCOLOR_OS_MACOS) || defined(TERMCOLOR_OS_LINUX)
             return ::isatty(fileno(std_stream));
         #elif defined(TERMCOLOR_OS_WINDOWS)
-            return ::_isatty(_fileno(std_stream));
+            return ::_isatty(_fileno(std_stream)) != 0;
         #endif
         }
 
