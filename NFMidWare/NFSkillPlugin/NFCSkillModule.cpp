@@ -83,14 +83,14 @@ int NFCSkillModule::ExistSkill( const NFGUID& self, const std::string& strSkillN
     return -1;
 }
 
-void NFCSkillModule::OnClienUseSkill(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
 		//bc
 	const std::string& strSkillID =  xMsg.skill_id();
-	int nContianerID = m_pKernelModule->GetPropertyInt(nPlayerID, "SceneID");
-	int nGroupID = m_pKernelModule->GetPropertyInt(nPlayerID, "GroupID");
+	int nContianerID = m_pKernelModule->GetPropertyInt32(nPlayerID, "SceneID");
+	int nGroupID = m_pKernelModule->GetPropertyInt32(nPlayerID, "GroupID");
 
 	NFMsg::ReqAckUseSkill xReqAckUseSkill;
 	xReqAckUseSkill.set_skill_id(strSkillID);

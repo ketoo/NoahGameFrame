@@ -50,11 +50,11 @@ public:
 
 	// 接收消息
 private:
-	void OnLoginProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnWorldList(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnConnectWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnConnectKey(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSelectServer(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnWorldList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnConnectWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnConnectKey(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 public:
 	std::vector<NFMsg::ServerInfo> GetWorldList() { return m_WorldServerList; }

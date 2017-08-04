@@ -45,13 +45,13 @@ public:
 
 	// 接收消息
 private:
-	void OnRoleList(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRoleList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	// 进入和离开
-	void OnObjectEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectLeave(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectLeave(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	// 移动
-	void OnObjectMove(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectJump(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectMove(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectJump(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	void AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std::string &strRecordName, const NFMsg::RecordAddRowStruct &data);

@@ -104,7 +104,7 @@ void NFCPlayerLogic::RequireMove(NFVector3 pos)
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_MOVE, xMsg);
 }
 //--------------------------------------------收消息-------------------------------------------------------------
-void NFCPlayerLogic::OnRoleList(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPlayerLogic::OnRoleList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckRoleLiteInfoList xMsg;
@@ -123,7 +123,7 @@ void NFCPlayerLogic::OnRoleList(const SockIndex nSockIndex, const int nMsgID, co
 	DoEvent(E_PlayerEvent_RoleList, NFDataList());
 }
 
-void NFCPlayerLogic::OnObjectEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPlayerLogic::OnObjectEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckPlayerEntryList xMsg;
@@ -147,7 +147,7 @@ void NFCPlayerLogic::OnObjectEntry(const SockIndex nSockIndex, const int nMsgID,
 	}
 }
 
-void NFCPlayerLogic::OnObjectLeave(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPlayerLogic::OnObjectLeave(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckPlayerLeaveList xMsg;
@@ -163,7 +163,7 @@ void NFCPlayerLogic::OnObjectLeave(const SockIndex nSockIndex, const int nMsgID,
 }
 
 // 移动
-void NFCPlayerLogic::OnObjectMove(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPlayerLogic::OnObjectMove(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerMove xMsg;
@@ -181,7 +181,7 @@ void NFCPlayerLogic::OnObjectMove(const SockIndex nSockIndex, const int nMsgID, 
 	DoEvent(E_PlayerEvent_PlayerMove, var);
 }
 
-void NFCPlayerLogic::OnObjectJump(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPlayerLogic::OnObjectJump(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerMove xMsg;

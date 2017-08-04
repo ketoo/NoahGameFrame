@@ -38,14 +38,14 @@ public:
 
 	// 接收消息
 private:
-	void OnRecordInt(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRecordFloat(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRecordString(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRecordObject(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSwapRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnAddRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRemoveRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);	
-	void OnObjectRecordEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRecordInt(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRecordFloat(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRecordString(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRecordObject(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSwapRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnAddRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRemoveRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);	
+	void OnObjectRecordEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	void AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std::string &strRecordName, const NFMsg::RecordAddRowStruct &data);

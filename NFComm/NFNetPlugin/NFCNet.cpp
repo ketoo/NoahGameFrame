@@ -349,7 +349,7 @@ bool NFCNet::Dismantle(NetObject* pObject)
     return bNeedDismantle;
 }
 
-bool NFCNet::AddNetObject(NFSOCK nSockIndex, NetObject* pObject)
+bool NFCNet::AddNetObject(const NFSOCK nSockIndex, NetObject* pObject)
 {
     //lock
     return mmObject.insert(std::map<NFSOCK, NetObject*>::value_type(nSockIndex, pObject)).second;

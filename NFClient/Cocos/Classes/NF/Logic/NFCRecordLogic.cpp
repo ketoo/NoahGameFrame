@@ -53,7 +53,7 @@ bool NFCRecordLogic::AfterInit()
 
 //--------------------------------------------发消息-------------------------------------------------------------
 //--------------------------------------------收消息-------------------------------------------------------------
-void NFCRecordLogic::OnRecordInt(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnRecordInt(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordInt xMsg;
@@ -74,7 +74,7 @@ void NFCRecordLogic::OnRecordInt(const SockIndex nSockIndex, const int nMsgID, c
 	}
 }
 
-void NFCRecordLogic::OnRecordFloat(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnRecordFloat(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordFloat xMsg;
@@ -95,7 +95,7 @@ void NFCRecordLogic::OnRecordFloat(const SockIndex nSockIndex, const int nMsgID,
 	}
 }
 
-void NFCRecordLogic::OnRecordString(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnRecordString(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordString xMsg;
@@ -116,7 +116,7 @@ void NFCRecordLogic::OnRecordString(const SockIndex nSockIndex, const int nMsgID
 	}
 }
 
-void NFCRecordLogic::OnRecordObject(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnRecordObject(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordObject xMsg;
@@ -137,7 +137,7 @@ void NFCRecordLogic::OnRecordObject(const SockIndex nSockIndex, const int nMsgID
 	}
 }
 
-void NFCRecordLogic::OnSwapRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnSwapRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordSwap xMsg;
@@ -153,7 +153,7 @@ void NFCRecordLogic::OnSwapRow(const SockIndex nSockIndex, const int nMsgID, con
 	record->SwapRowInfo(xMsg.row_origin(), xMsg.row_target());
 }
 
-void NFCRecordLogic::OnAddRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnAddRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordAddRow xMsg;
@@ -171,7 +171,7 @@ void NFCRecordLogic::OnAddRow(const SockIndex nSockIndex, const int nMsgID, cons
 	}
 }
 
-void NFCRecordLogic::OnRemoveRow(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnRemoveRow(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectRecordRemove xMsg;
@@ -190,7 +190,7 @@ void NFCRecordLogic::OnRemoveRow(const SockIndex nSockIndex, const int nMsgID, c
 	}
 }
 
-void NFCRecordLogic::OnObjectRecordEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCRecordLogic::OnObjectRecordEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::MultiObjectRecordList xMsg;

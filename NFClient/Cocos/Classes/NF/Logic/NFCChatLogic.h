@@ -46,7 +46,7 @@ public:
 
 	// 接收消息
 private:
-	void OnChatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 public:
 	std::vector<NFMsg::ServerInfo> GetWorldList() { return m_WorldServerList; }

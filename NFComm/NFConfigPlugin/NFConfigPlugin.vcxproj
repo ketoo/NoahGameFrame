@@ -25,7 +25,6 @@
     <ProjectGuid>{79DD0147-06CD-4F60-A8A5-19E2962B3D56}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFConfigPlugin</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

@@ -83,7 +83,7 @@ void NFCChatLogic::RequireChatTeam(std::string strContent)
 }
 
 //--------------------------------------------收消息-------------------------------------------------------------
-void NFCChatLogic::OnChatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCChatLogic::OnChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerChat xMsg;

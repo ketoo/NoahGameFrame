@@ -115,7 +115,7 @@ void NFCLoginLogic::RequireSelectServer(int nServerID)
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_SELECT_SERVER, xMsg);
 }
 //--------------------------------------------收消息-------------------------------------------------------------
-void NFCLoginLogic::OnLoginProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
@@ -135,7 +135,7 @@ void NFCLoginLogic::OnLoginProcess(const SockIndex nSockIndex, const int nMsgID,
 	}
 }
 
-void NFCLoginLogic::OnWorldList(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnWorldList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckServerList xMsg;
@@ -166,7 +166,7 @@ void NFCLoginLogic::OnWorldList(const SockIndex nSockIndex, const int nMsgID, co
 	}
 }
 
-void NFCLoginLogic::OnConnectWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnConnectWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
@@ -181,7 +181,7 @@ void NFCLoginLogic::OnConnectWorld(const SockIndex nSockIndex, const int nMsgID,
 	RequireVerifyWorldKey(m_strAccount, m_strKey);
 }
 
-void NFCLoginLogic::OnConnectKey(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnConnectKey(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
@@ -196,7 +196,7 @@ void NFCLoginLogic::OnConnectKey(const SockIndex nSockIndex, const int nMsgID, c
 	}
 }
 
-void NFCLoginLogic::OnSelectServer(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnSelectServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;

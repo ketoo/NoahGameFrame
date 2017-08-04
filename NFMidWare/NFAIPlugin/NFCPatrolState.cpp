@@ -103,12 +103,12 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMac
 			NF_SHARE_PTR<NFIProperty> xPropertyY =  xPropertyManager->GetElement("SeedY");
 			NF_SHARE_PTR<NFIProperty> xPropertyZ =  xPropertyManager->GetElement("SeedZ");
 
-			float fCurX = xPropertyX->GetFloat();
-			float fCurY = xPropertyY->GetFloat();
-			float fCurZ = xPropertyZ->GetFloat();
+			double fCurX = xPropertyX->GetFloat();
+			double fCurY = xPropertyY->GetFloat();
+			double fCurZ = xPropertyZ->GetFloat();
 
-			float fPosOffestX = (float)(rand() / double(RAND_MAX) - 0.5f);
-			float fPosOffestZ = (float)(rand() / double(RAND_MAX) - 0.5f);
+			double fPosOffestX = (double)(rand() / double(RAND_MAX) - 0.5);
+			double fPosOffestZ = (double)(rand() / double(RAND_MAX) - 0.5);
 			fPosOffestX *= 10;
 			fPosOffestZ *= 10;
 
@@ -119,7 +119,7 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMac
 			{
 				//看能否寻路，不能寻路则重来
 				NFAI_STATE eStateType = NFAI_STATE::ChaseState;
-				float fRand = (float)(rand() / double(RAND_MAX));
+				double fRand = (double)(rand() / double(RAND_MAX));
 				if (fRand < 0.5f)
 				{
 					eStateType = NFAI_STATE::ChaseState;

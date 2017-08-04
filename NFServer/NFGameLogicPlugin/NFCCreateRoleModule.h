@@ -38,10 +38,10 @@ public:
     virtual bool AfterInit();
 
 protected:
-	void OnReqiureRoleListProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnCreateRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnDeleteRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienEnterGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFIPVPModule* m_pPVPModule;

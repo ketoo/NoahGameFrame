@@ -38,11 +38,11 @@ public:
 	// 接收消息
 private:
 	// 属性
-	void OnPropertyInt(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyFloat(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyString(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyObject(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectPropertyEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyInt(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyFloat(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyString(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyObject(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectPropertyEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 };
 
 #define g_pPropertyLogic (NFCPropertyLogic::Instance())
