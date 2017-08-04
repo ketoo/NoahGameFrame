@@ -47,8 +47,8 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			nJsonPort = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::WebPort());
-			nWebServerAppID = m_pElementModule->GetPropertyInt(strId, NFrame::HttpServer::ServerID());
+			nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
+			nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
 			m_strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
 		}
 	}

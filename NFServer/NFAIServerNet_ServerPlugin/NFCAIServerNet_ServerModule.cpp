@@ -128,7 +128,7 @@ bool NFCAIServerNet_ServerModule::Execute()
 	return true;
 }
 
-void NFCAIServerNet_ServerModule::OnSocketPSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCAIServerNet_ServerModule::OnSocketPSEvent(const SockIndex nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
@@ -175,7 +175,7 @@ void NFCAIServerNet_ServerModule::OnClientConnected(const int nAddress)
 
 }
 
-void NFCAIServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienEnterGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;
@@ -244,7 +244,7 @@ void NFCAIServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex, 
 	m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, 1, 0, NFDataList());
 }
 
-void NFCAIServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienLeaveGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqLeaveGameServer xMsg;
@@ -1055,7 +1055,7 @@ int NFCAIServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const int nSc
 	return 0;
 }
 
-void NFCAIServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnReqiureRoleListProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
@@ -1068,7 +1068,7 @@ void NFCAIServerNet_ServerModule::OnReqiureRoleListProcess(const int nSockIndex,
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
-void NFCAIServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnCreateRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqCreateRole xMsg;
@@ -1095,7 +1095,7 @@ void NFCAIServerNet_ServerModule::OnCreateRoleGameProcess(const int nSockIndex, 
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nClientID);
 }
 
-void NFCAIServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnDeleteRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqDeleteRole xMsg;
@@ -1108,7 +1108,7 @@ void NFCAIServerNet_ServerModule::OnDeleteRoleGameProcess(const int nSockIndex, 
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nSockIndex, nPlayerID);
 }
 
-void NFCAIServerNet_ServerModule::OnClienEnterGameFinishProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienEnterGameFinishProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
@@ -1117,14 +1117,14 @@ void NFCAIServerNet_ServerModule::OnClienEnterGameFinishProcess(const int nSockI
 	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xReqAckEnterGameSuccess, nSockIndex, nPlayerID);
 }
 
-void NFCAIServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienSwapSceneProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckSwapScene)
 
 	//m_pSceneProcessModule->RequestEnterScene(pObject->Self(), xMsg.scene_id(), 0, NFDataList());
 }
 
-void NFCAIServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienReqMoveProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
@@ -1136,7 +1136,7 @@ void NFCAIServerNet_ServerModule::OnClienReqMoveProcess(const int nSockIndex, co
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
 }
 
-void NFCAIServerNet_ServerModule::OnClienReqMoveImmuneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClienReqMoveImmuneProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
@@ -1148,7 +1148,7 @@ void NFCAIServerNet_ServerModule::OnClienReqMoveImmuneProcess(const int nSockInd
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 }
 
-void NFCAIServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyIntProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyInt)
 
@@ -1176,7 +1176,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockInde
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientPropertyFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyFloatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyFloat)
 
@@ -1204,7 +1204,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyFloatProcess(const int nSockIn
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientPropertyStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyStringProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyString)
 
@@ -1232,7 +1232,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyStringProcess(const int nSockI
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyObjectProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyObject)
 
@@ -1261,7 +1261,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyObjectProcess(const int nSockI
 }
 
 
-void NFCAIServerNet_ServerModule::OnClientPropertyVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyVector2Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyVector2)
 
@@ -1289,7 +1289,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyVector2Process(const int nSock
 		}
 }
 
-void NFCAIServerNet_ServerModule::OnClientPropertyVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientPropertyVector3Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectPropertyVector3)
 
@@ -1318,7 +1318,7 @@ void NFCAIServerNet_ServerModule::OnClientPropertyVector3Process(const int nSock
 }
 
 
-void NFCAIServerNet_ServerModule::OnClientAddRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientAddRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordAddRow)
 
@@ -1394,7 +1394,7 @@ void NFCAIServerNet_ServerModule::OnClientAddRowProcess(const int nSockIndex, co
 
 }
 
-void NFCAIServerNet_ServerModule::OnClientRemoveRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRemoveRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordRemove)
 
@@ -1422,7 +1422,7 @@ void NFCAIServerNet_ServerModule::OnClientRemoveRowProcess(const int nSockIndex,
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientSwapRowProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientSwapRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordSwap)
 
@@ -1447,7 +1447,7 @@ void NFCAIServerNet_ServerModule::OnClientSwapRowProcess(const int nSockIndex, c
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientRecordIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordIntProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordInt)
 
@@ -1472,7 +1472,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordIntProcess(const int nSockIndex,
 }
 
 
-void NFCAIServerNet_ServerModule::OnClientRecordFloatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordFloatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordFloat)
 
@@ -1496,7 +1496,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordFloatProcess(const int nSockInde
 	
 }
 
-void NFCAIServerNet_ServerModule::OnClientRecordStringProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordStringProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordString)
 
@@ -1520,7 +1520,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordStringProcess(const int nSockInd
 	
 }
 
-void NFCAIServerNet_ServerModule::OnClientRecordObjectProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordObjectProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordObject)
 
@@ -1543,7 +1543,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordObjectProcess(const int nSockInd
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientRecordVector2Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordVector2Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordVector2)
 
@@ -1566,7 +1566,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordVector2Process(const int nSockIn
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnClientRecordVector3Process(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnClientRecordVector3Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordVector3)
 
@@ -1589,7 +1589,7 @@ void NFCAIServerNet_ServerModule::OnClientRecordVector3Process(const int nSockIn
 	}
 }
 
-void NFCAIServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnProxyServerRegisteredProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -1617,7 +1617,7 @@ void NFCAIServerNet_ServerModule::OnProxyServerRegisteredProcess(const int nSock
 	return;
 }
 
-void NFCAIServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -1638,7 +1638,7 @@ void NFCAIServerNet_ServerModule::OnProxyServerUnRegisteredProcess(const int nSo
 	return;
 }
 
-void NFCAIServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnRefreshProxyServerInfoProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -1791,7 +1791,7 @@ NF_SHARE_PTR<NFIAIServerNet_ServerModule::GateServerInfo> NFCAIServerNet_ServerM
     return mProxyMap.GetElement(nGateID);
 }
 
-NF_SHARE_PTR<NFIAIServerNet_ServerModule::GateServerInfo> NFCAIServerNet_ServerModule::GetGateServerInfoBySockIndex(const int nSockIndex)
+NF_SHARE_PTR<NFIAIServerNet_ServerModule::GateServerInfo> NFCAIServerNet_ServerModule::GetGateServerInfoBySockIndex(const SockIndex nSockIndex)
 {
     int nGateID = -1;
     NF_SHARE_PTR<GateServerInfo> pServerData = mProxyMap.First();
@@ -1814,7 +1814,7 @@ NF_SHARE_PTR<NFIAIServerNet_ServerModule::GateServerInfo> NFCAIServerNet_ServerM
     return pServerData;
 }
 
-void NFCAIServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerNet_ServerModule::OnTransWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	std::string strMsg;
 	NFGUID nPlayer;
@@ -1827,7 +1827,7 @@ void NFCAIServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int n
 	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
 }
 
-void NFCAIServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
+void NFCAIServerNet_ServerModule::OnTransWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
 {
 	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nWorldKey, nMsgID, msg, nLen);
 }

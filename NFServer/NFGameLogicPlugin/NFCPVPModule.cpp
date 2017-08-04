@@ -70,7 +70,7 @@ bool NFCPVPModule::ReadyExecute()
 
 
 
-void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqSearchOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	//find a tile map and swap scene
@@ -112,7 +112,7 @@ void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMs
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
 }
 
-void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqSwapHomeSceneProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
@@ -134,7 +134,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMs
 	*/
 }
 
-void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqStartPVPOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
 
@@ -158,7 +158,7 @@ void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int n
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_START_OPPNENT, xReqAckStartBattle, nPlayerID);
 }
 
-void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqEndPVPOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
 

@@ -12,24 +12,24 @@
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
-//ËùÓĞµÄ×´Ì¬
+//æ‰€æœ‰çš„çŠ¶æ€
 enum NFAI_MOVE_TYPE
 {
-	NO_MOVE_TYPE,              // ²»×ßµÄ£¬ËşµÈ
-	MOVE_BY_POINT_LIST,        // Â·¾¶Ñ²Âß
-	MOVE_BY_RANDOM,            // Ëæ»úÑ²Âß
+	NO_MOVE_TYPE,              // ä¸èµ°çš„ï¼Œå¡”ç­‰
+	MOVE_BY_POINT_LIST,        // è·¯å¾„å·¡é€»
+	MOVE_BY_RANDOM,            // éšæœºå·¡é€»
 	MOVE_BY_PLAYER_AI,         // Player's ai
 };
 
-//ËùÓĞµÄ×´Ì¬
+//æ‰€æœ‰çš„çŠ¶æ€
 enum NFAI_STATE
 {
     State_Error = 0,
-    IdleState,                  // ĞİÏĞ×´Ì¬
-    PatrolState,                // Ñ²Âß×´Ì¬
-    FightState,                 // Õ½¶·×´Ì¬
-    ChaseState,                 // ×·»÷×´Ì¬
-    DeadState,                  // ËÀÍö×´Ì¬
+    IdleState,                  // ä¼‘é—²çŠ¶æ€
+    PatrolState,                // å·¡é€»çŠ¶æ€
+    FightState,                 // æˆ˜æ–—çŠ¶æ€
+    ChaseState,                 // è¿½å‡»çŠ¶æ€
+    DeadState,                  // æ­»äº¡çŠ¶æ€
 };
 
 class NFIStateMachine;
@@ -51,7 +51,7 @@ public:
 
     virtual bool DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
     {
-        //·µ»Øtrue±íÊ¾»ùÀà´¦Àí¹ı£¬ÉÏÃæ¾Í±ğ´¦ÀíÁË
+        //è¿”å›trueè¡¨ç¤ºåŸºç±»å¤„ç†è¿‡ï¼Œä¸Šé¢å°±åˆ«å¤„ç†äº†
         return false;
     }
 

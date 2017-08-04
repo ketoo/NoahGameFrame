@@ -24,7 +24,7 @@ int NFCHelloWorld3Module::OnEvent(const NFGUID& self, const NFEventDefine event,
 int NFCHelloWorld3Module::OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount)
 {
 
-	unsigned long unNowTime = NFGetTime();
+	int64_t unNowTime = NFGetTime();
 
 	std::cout << "strHeartBeat: " << fTime << " Count: " << nCount << "  TimeDis: " << unNowTime - mLastTime << std::endl;
 

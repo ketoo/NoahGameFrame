@@ -370,7 +370,7 @@ bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, 
     return true;
 }
 
-void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnCreateTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckCreateTeam);
 
@@ -402,7 +402,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
     m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 }
 
-void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnJoinTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckJoinTeam);
 
@@ -431,7 +431,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
     }
 }
 
-void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnLeaveTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckLeaveTeam);
 
@@ -462,7 +462,7 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
     }
 }
 
-void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnOprTeamMemberProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckOprTeamMember);
 
@@ -486,7 +486,7 @@ void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgI
     BroadcastMsgToTeam(nPlayerID, xTeam, NFMsg::EGMI_ACK_OPRMEMBER_TEAM, xMsg);
 }
 
-void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnTeamEnterEctypeProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqTeamEnterEctype);
 
