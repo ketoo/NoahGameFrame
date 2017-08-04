@@ -43,9 +43,9 @@ bool NFCHelloWorld2::AfterInit()
 
 		//set the "world" property value as 1111
         pObject->SetPropertyInt("World", 1111);
-		int n1 = pObject->GetPropertyInt("World");
+		int n1 = pObject->GetPropertyInt32("World");
 		//get the "world" property value and printf it
-        const int nProperty1 = pObject->GetPropertyInt("World");
+        const int nProperty1 = pObject->GetPropertyInt32("World");
         std::cout << "Property World:" << nProperty1 << std::endl;
 
         //add a call back functin for "world" property
@@ -53,10 +53,10 @@ bool NFCHelloWorld2::AfterInit()
 
 		////set the "world" property value as 2222[than the function "HelloWorld2::OnPropertyCallBackEvent" will be called]
         pObject->SetPropertyInt("World", 2222);
-		int n2 = pObject->GetPropertyInt("World");
+		int n2 = pObject->GetPropertyInt32("World");
 
 		//get the "world" property value and printf it
-        const int nProperty2 = pObject->GetPropertyInt("World");
+        const int nProperty2 = pObject->GetPropertyInt32("World");
         std::cout << "Property World:" << nProperty2 << std::endl;
 
     }

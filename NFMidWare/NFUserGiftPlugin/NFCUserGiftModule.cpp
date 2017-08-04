@@ -30,10 +30,10 @@ bool NFCUserGiftModule::AfterInit()
 	for (int i = 0; i < xGiftItemList.size(); ++i)
 	{
 		const std::string& strItemID = xGiftItemList[i];
-		int nSubItem = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+		int nSubItem = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 		if (nSubItem == NFMsg::EGameItemSubType::EGIT_ITEM_PACK)
 		{
-			int nLevel = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::Level());
+			int nLevel = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::Level());
 			NF_SHARE_PTR<std::vector<std::string>> xItemList = mxGiftMap.GetElement(nLevel);
 			if (!xItemList)
 			{
@@ -75,7 +75,7 @@ int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string
 
 int NFCUserGiftModule::OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
-	int nNewLevel = newVar.GetInt();
+	int nNewLevel = newVar.GetInt32();
 
 	DoLevelAward(self, nNewLevel);
 

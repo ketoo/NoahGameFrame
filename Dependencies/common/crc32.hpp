@@ -57,7 +57,7 @@ namespace NFrame
 
     static uint32_t CRC32(const std::string& str)
     {
-        return CRC32((char*)str.data(), str.length());
+        return CRC32((char*)str.data(), (int)str.length());
     }
 
 } // !NFrame

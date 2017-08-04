@@ -41,9 +41,9 @@ public:
 
 protected:
 	NFINetClientModule *GetNetModule();
-	void OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-	void OnEventResult(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnMsgRecive(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnEventResult(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnMsgRecive(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:	
 	std::list<std::pair<uint16_t, std::string>> m_listDelayMsg;

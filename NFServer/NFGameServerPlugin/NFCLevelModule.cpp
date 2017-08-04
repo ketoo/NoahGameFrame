@@ -35,16 +35,16 @@ bool NFCLevelModule::AfterInit()
     return true;
 }
 
-int NFCLevelModule::AddExp(const NFGUID& self, const int nExp)
+int NFCLevelModule::AddExp(const NFGUID& self, const int64_t nExp)
 {
-    int eJobType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
-    int nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
-    int nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level());
-    int nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+    int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+    int64_t nCurExp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP());
+    int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
+    int64_t nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
 
     nCurExp += nExp;
 
-    int nRemainExp = nCurExp - nMaxExp;
+    int64_t nRemainExp = nCurExp - nMaxExp;
     while (nRemainExp >= 0)
     {
         
@@ -54,7 +54,7 @@ int NFCLevelModule::AddExp(const NFGUID& self, const int nExp)
 
         nCurExp = nRemainExp;
 
-        nMaxExp = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
+        nMaxExp = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, NFrame::Player::MAXEXP());
         if (nMaxExp <= 0)
         {
             break;

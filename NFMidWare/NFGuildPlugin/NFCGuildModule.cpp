@@ -71,38 +71,38 @@ int NFCGuildModule::ComponentAsyEnd(const NFGUID & self, const int nFormActor, c
 	return 0;
 }
 
-void NFCGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGuildModule::OnCreateGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
-void NFCGuildModule::OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGuildModule::OnJoinGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckJoinGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
-void NFCGuildModule::OnLeaveGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGuildModule::OnLeaveGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckLeaveGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
-void NFCGuildModule::OnOprGuildMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGuildModule::OnOprGuildMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckOprGuildMember);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int)xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
-void NFCGuildModule::OnSearchGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGuildModule::OnSearchGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen,NFMsg::ReqSearchGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(nSockIndex);
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) nSockIndex);
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 	
 } 

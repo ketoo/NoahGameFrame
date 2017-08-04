@@ -47,8 +47,8 @@ bool NFCNoSqlModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::ServerID());
-			const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::NoSqlServer::Port());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::ServerID());
+			const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::NoSqlServer::Port());
 			const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::IP());
 			const std::string& strAuth = m_pElementModule->GetPropertyString(strId, NFrame::NoSqlServer::Auth());
 

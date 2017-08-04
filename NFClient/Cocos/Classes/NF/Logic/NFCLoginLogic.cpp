@@ -43,7 +43,7 @@ bool NFCLoginLogic::AfterInit()
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_SELECT_SERVER, this, &NFCLoginLogic::OnSelectServer);
     return true;
 }
-//--------------------------------------------∑¢œ˚œ¢-------------------------------------------------------------
+//--------------------------------------------ÂèëÊ∂àÊÅØ-------------------------------------------------------------
 void NFCLoginLogic::LoginPB(const std::string &strAccount, const std::string &strPwd, const std::string &strKey)
 {
 	NFMsg::ReqAccountLogin xMsg;
@@ -114,8 +114,8 @@ void NFCLoginLogic::RequireSelectServer(int nServerID)
 	xMsg.set_world_id(nServerID);
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_SELECT_SERVER, xMsg);
 }
-//-------------------------------------------- ’œ˚œ¢-------------------------------------------------------------
-void NFCLoginLogic::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+//--------------------------------------------Êî∂Ê∂àÊÅØ-------------------------------------------------------------
+void NFCLoginLogic::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
@@ -135,7 +135,7 @@ void NFCLoginLogic::OnLoginProcess(const int nSockIndex, const int nMsgID, const
 	}
 }
 
-void NFCLoginLogic::OnWorldList(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnWorldList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckServerList xMsg;
@@ -166,7 +166,7 @@ void NFCLoginLogic::OnWorldList(const int nSockIndex, const int nMsgID, const ch
 	}
 }
 
-void NFCLoginLogic::OnConnectWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnConnectWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
@@ -181,7 +181,7 @@ void NFCLoginLogic::OnConnectWorld(const int nSockIndex, const int nMsgID, const
 	RequireVerifyWorldKey(m_strAccount, m_strKey);
 }
 
-void NFCLoginLogic::OnConnectKey(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnConnectKey(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
@@ -196,7 +196,7 @@ void NFCLoginLogic::OnConnectKey(const int nSockIndex, const int nMsgID, const c
 	}
 }
 
-void NFCLoginLogic::OnSelectServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogic::OnSelectServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;

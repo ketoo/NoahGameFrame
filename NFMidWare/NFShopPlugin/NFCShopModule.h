@@ -40,7 +40,7 @@ public:
 	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, const NFVector3& v);
 
 protected:
-	void OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienBuyItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 

@@ -18,7 +18,7 @@ class NFILevelModule
 {
 public:
 
-    virtual int AddExp(const NFGUID& self, const int nExp) = 0;
+    virtual int AddExp(const NFGUID& self, const int64_t nExp) = 0;
 
 };
 
