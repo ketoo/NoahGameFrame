@@ -14,7 +14,6 @@
     <ProjectGuid>{B65A0FB2-E49B-4FE9-93F7-EAE6B8E51944}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFPluginLoader</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

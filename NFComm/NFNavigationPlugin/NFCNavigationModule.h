@@ -167,7 +167,7 @@ public:
 		{
 			NFVector3 currpos;
 
-			for (uint32_t i = 0; i < max_points; i++)
+			for (int i = 0; i < max_points; i++)
 			{
 				float pt[3];
 				dtPolyRef ref;
@@ -209,9 +209,9 @@ public:
 
 		while (itry++ < 3 && points.size() == 0)
 		{
-			max_points -= points.size();
+			max_points -= (int)points.size();
 
-			for (uint32_t i = 0; i < max_points; i++)
+			for (int i = 0; i < max_points; i++)
 			{
 				float pt[3];
 				dtPolyRef ref;
@@ -326,7 +326,7 @@ public:
 		uint8_t* data = new uint8_t[flen];
 		if (data == NULL)
 		{
-			printf("NFCNavigationHandle::create: open({%s}), memory(size={%d}) error!\n", resPath.c_str(), flen);
+			printf("NFCNavigationHandle::create: open({%s}), memory(size={%d}) error!\n", resPath.c_str(), (int)flen);
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
@@ -336,7 +336,7 @@ public:
 		size_t readsize = fread(data, 1, flen, fp);
 		if (readsize != flen)
 		{
-			printf("NFCNavigationHandle::create: open({%s}), read(size={%d} != {%d}) error!\n", resPath.c_str(), readsize, flen);
+			printf("NFCNavigationHandle::create: open({%s}), read(size={%d} != {%d}) error!\n", resPath.c_str(), (int)readsize, (int)flen);
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
@@ -452,7 +452,7 @@ public:
 		uint32_t dataSize = 0;
 
 		const dtNavMesh* navmesh = mesh;
-		for (uint32_t i = 0; i < navmesh->getMaxTiles(); ++i)
+		for (int i = 0; i < navmesh->getMaxTiles(); ++i)
 		{
 			const dtMeshTile* tile = navmesh->getTile(i);
 			if (!tile || !tile->header)

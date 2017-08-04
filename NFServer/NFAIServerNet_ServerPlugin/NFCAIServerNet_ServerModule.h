@@ -51,52 +51,52 @@ public:
     virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID);
 
     virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID);
-    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const SockIndex nSockIndex);
+    virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK nSockIndex);
 
 
 
 protected:
-    void OnSocketPSEvent(const SockIndex nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
-    void OnClientDisconnect(const SockIndex nSockIndex);
-    void OnClientConnected(const SockIndex nSockIndex);
+    void OnSocketPSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnClientDisconnect(const NFSOCK nSockIndex);
+    void OnClientConnected(const NFSOCK nSockIndex);
 
 protected:
-    void OnProxyServerRegisteredProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnProxyServerUnRegisteredProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnRefreshProxyServerInfoProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnProxyServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
-    void OnReqiureRoleListProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnCreateRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnDeleteRoleGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienEnterGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienLeaveGameProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienSwapSceneProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienReqMoveProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienReqMoveImmuneProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienEnterGameFinishProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienReqMoveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienEnterGameFinishProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
-    void OnTransWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnTransWorld(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
+    void OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
 
 protected:
-	void OnClientPropertyIntProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyFloatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyStringProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyObjectProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyVector2Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientPropertyVector3Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyFloatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyStringProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyObjectProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector2Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPropertyVector3Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnClientAddRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRemoveRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientSwapRowProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordIntProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordFloatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordStringProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordObjectProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordVector2Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClientRecordVector3Process(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientAddRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRemoveRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientSwapRowProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordIntProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordFloatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordStringProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordObjectProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector2Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientRecordVector3Process(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
