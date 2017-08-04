@@ -138,7 +138,7 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefi
 		NFGUID identKiller = var.Object( 0 );
 		if ( m_pKernelModule->GetObject( identKiller ) )
 		{
-			const int nExp = m_pKernelModule->GetPropertyInt32( self, NFrame::Player::EXP() );
+			const int64_t nExp = m_pKernelModule->GetPropertyInt32( self, NFrame::Player::EXP() );
 
 			m_pLevelModule->AddExp( identKiller, nExp);
 

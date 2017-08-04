@@ -36,29 +36,29 @@ public:
 protected:
 
 	
-	void ReqMapTitleInfo(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	
-	void ReqBigMapsInfo(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqBigMapsInfo(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	///////////////////////////
 	
-	void ReqStation(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqStation(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 
 	
-	void ReqGetMapAward(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqGetMapAward(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	
-	void ReqLeaveMsgToMap(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqLeaveMsgToMap(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	///////////////////////////
 
 	
-	void ReqMapHunting(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqMapHunting(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 	
-	void ReqMapKingWar(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 	void EndMapHunting(const std::string& strTitleID);

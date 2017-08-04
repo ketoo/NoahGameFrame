@@ -32,7 +32,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int AddExp(const NFGUID& self, const int nExp);
+    virtual int AddExp(const NFGUID& self, const int64_t nExp);
 
 private:
     NFIPropertyConfigModule* m_pPropertyConfigModule;
