@@ -45,12 +45,12 @@ public:
     virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 protected:
-	void OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveTeamProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprTeamMemberProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTeamEnterEctypeProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     bool GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo);
 
 protected:

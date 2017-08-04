@@ -33,16 +33,16 @@ public:
 
     virtual bool AfterInit();
 
-	// ·¢ËÍÏûÏ¢
+	// å‘é€æ¶ˆæ¯
 public:
-	// ½ÓÊÕÏûÏ¢
+	// æ¥æ”¶æ¶ˆæ¯
 private:
-	// ÊôĞÔ
-	void OnPropertyInt(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyFloat(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyString(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnPropertyObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectPropertyEntry(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	// å±æ€§
+	void OnPropertyInt(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyFloat(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyString(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnPropertyObject(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectPropertyEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 };
 
 #define g_pPropertyLogic (NFCPropertyLogic::Instance())

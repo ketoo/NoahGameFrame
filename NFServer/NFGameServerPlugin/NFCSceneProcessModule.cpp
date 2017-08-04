@@ -72,7 +72,7 @@ bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSc
 
 bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		int nNewGroupID = m_pKernelModule->RequestGroupScene(nSceneID);
@@ -99,8 +99,8 @@ bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSc
 	}
 	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_NORMAL)
 	{
-		const int nMaxGroup = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
-		const int nMaxPlayer = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::MaxGroupPlayers());
+		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
+		const int nMaxPlayer = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroupPlayers());
 		for (int i = 1; i < nMaxGroup; ++i)
 		{
 			NFDataList xList;
@@ -115,7 +115,7 @@ bool NFCSceneProcessModule::RequestEnterScene(const NFGUID & self, const int nSc
 	}
 	else if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_GUILD)
 	{
-		const int nMaxGroup = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
+		const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
 		for (int i = 1; i < nMaxGroup; ++i)
 		{
 
@@ -133,7 +133,7 @@ int NFCSceneProcessModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const
 
 int NFCSceneProcessModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		m_pKernelModule->ReleaseGroupScene(nSceneID, nGroupID);
@@ -160,9 +160,9 @@ int NFCSceneProcessModule::OnObjectClassEvent(const NFGUID& self, const std::str
     {
         if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
         {
-			int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-			int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
-			E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+			int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+			int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+			E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 
             if (eSceneType == SCENE_TYPE_SINGLE_CLONE_SCENE)
             {
@@ -194,7 +194,7 @@ int NFCSceneProcessModule::EnterSceneConditionEvent(const NFGUID & self, const i
 int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	//you can use object pool to enhance performance
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
@@ -226,7 +226,7 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
     rapidxml::xml_document<>  xFileDoc;
     xFileDoc.parse<0>(xFileSource.data());
 
-	int nSceneID = lexical_cast<float>(strSceneIDName);
+	int nSceneID = lexical_cast<int>(strSceneIDName);
 
     rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
     for (rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling())
@@ -268,8 +268,8 @@ bool NFCSceneProcessModule::CreateSceneBaseGroup(const std::string & strSceneIDN
 	const int nSceneID = lexical_cast<int>(strSceneIDName);
 	m_pKernelModule->RequestGroupScene(nSceneID);
 
-	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
-	const int nMaxGroup = m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
+	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
+	const int nMaxGroup = m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::MaxGroup());
 	if (eSceneType == SCENE_TYPE_NORMAL)
 	{
 		//line 10

@@ -46,7 +46,7 @@ protected:
     int OnHeartBeat(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 protected:
-    unsigned long mLastTime;
+    int64_t mLastTime;
 protected:
     NFIKernelModule* m_pKernelModule;
     NFIElementModule* m_pElementModule;

@@ -65,13 +65,13 @@ protected:
 protected:
     bool Ramdom(const int nNowLevel, const int nMaxLevel);
 	//Equip
-	void OnReqWearEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnTakeOffEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqWearEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnTakeOffEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnIntensifylevelToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnHoleToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnInlaystoneToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnElementlevelToEquipMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnIntensifylevelToEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnHoleToEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnInlaystoneToEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnElementlevelToEquipMsg(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFINetModule* m_pNetModule;

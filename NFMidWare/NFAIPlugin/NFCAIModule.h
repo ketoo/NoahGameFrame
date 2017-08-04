@@ -64,10 +64,10 @@ protected:
 	NFIState* GetState(const NFAI_STATE eState);
 
 private:
-    //状态机
+    //鐘舵�佹満
     typedef std::map<NFAI_STATE, NFIState*> TMAPSTATE;
     TMAPSTATE mtStateMap;
-    //AI对象，状态机
+    //AI瀵硅薄锛岀姸鎬佹満
     typedef std::map<NFGUID, NFIStateMachine*> TOBJECTSTATEMACHINE;
     TOBJECTSTATEMACHINE mtObjectStateMachine;
 

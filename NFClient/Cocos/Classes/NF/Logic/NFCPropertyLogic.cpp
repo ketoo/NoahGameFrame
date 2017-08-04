@@ -48,10 +48,10 @@ bool NFCPropertyLogic::AfterInit()
 	return true;
 }
 
-//--------------------------------------------∑¢œ˚œ¢-------------------------------------------------------------
-//-------------------------------------------- ’œ˚œ¢-------------------------------------------------------------
-//  Ù–‘
-void NFCPropertyLogic::OnPropertyInt(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+//--------------------------------------------ÂèëÊ∂àÊÅØ-------------------------------------------------------------
+//--------------------------------------------Êî∂Ê∂àÊÅØ-------------------------------------------------------------
+// Â±ûÊÄß
+void NFCPropertyLogic::OnPropertyInt(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyInt xMsg;
@@ -74,7 +74,7 @@ void NFCPropertyLogic::OnPropertyInt(const int nSockIndex, const int nMsgID, con
 	}
 }
 
-void NFCPropertyLogic::OnPropertyFloat(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPropertyLogic::OnPropertyFloat(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyFloat xMsg;
@@ -97,7 +97,7 @@ void NFCPropertyLogic::OnPropertyFloat(const int nSockIndex, const int nMsgID, c
 	}
 }
 
-void NFCPropertyLogic::OnPropertyString(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPropertyLogic::OnPropertyString(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyString xMsg;
@@ -120,7 +120,7 @@ void NFCPropertyLogic::OnPropertyString(const int nSockIndex, const int nMsgID, 
 	}
 }
 
-void NFCPropertyLogic::OnPropertyObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPropertyLogic::OnPropertyObject(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyObject xMsg;
@@ -143,7 +143,7 @@ void NFCPropertyLogic::OnPropertyObject(const int nSockIndex, const int nMsgID, 
 	}
 }
 
-void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCPropertyLogic::OnObjectPropertyEntry(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::MultiObjectPropertyList xMsg;

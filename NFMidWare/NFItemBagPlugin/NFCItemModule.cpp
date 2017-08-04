@@ -353,7 +353,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 	return true;
 }
 
-void NFCItemModule::OnClientUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCItemModule::OnClientUseItem(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
 
