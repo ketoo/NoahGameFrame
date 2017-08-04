@@ -43,7 +43,6 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NFNet</RootNamespace>
     <ProjectName>NFNetPlugin</ProjectName>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

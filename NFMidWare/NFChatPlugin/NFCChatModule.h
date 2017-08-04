@@ -40,7 +40,7 @@ public:
     virtual bool AfterInit();
 
 private:
-	void OnClienChatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 

@@ -16,7 +16,7 @@ class NFITeamModule
     : public NFIModule
 {
 public:
-	virtual const NFGUID& CreateTeam(const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;
+	virtual NFGUID CreateTeam(const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;
 	virtual bool JoinTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool LeaveTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember) = 0;

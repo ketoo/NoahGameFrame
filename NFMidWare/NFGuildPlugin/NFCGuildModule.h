@@ -42,11 +42,11 @@ protected:
 
 protected:
 
-	void OnCreateGuildProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnJoinGuildProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLeaveGuildProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnOprGuildMemberProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSearchGuildProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprGuildMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSearchGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 
