@@ -43,7 +43,7 @@ void NFCKernelModule::InitRandom()
 
     for (int i = 0; i < nRandomMax; i++)
     {
-        mvRandom.push_back(dis(gen));
+        mvRandom.push_back((float) dis(gen));
     }
 }
 
@@ -288,8 +288,8 @@ bool NFCKernelModule::DestroyObject(const NFGUID& self)
     }
 
     
-    NFINT64 nGroupID = GetPropertyInt(self, NFrame::IObject::GroupID());
-    NFINT64 nSceneID = GetPropertyInt(self, NFrame::IObject::SceneID());
+    int nGroupID = GetPropertyInt32(self, NFrame::IObject::GroupID());
+    int nSceneID = GetPropertyInt32(self, NFrame::IObject::SceneID());
 
     NF_SHARE_PTR<NFCSceneInfo> pContainerInfo = m_pSceneModule->GetElement(nSceneID);
     if (pContainerInfo)
@@ -417,6 +417,19 @@ NFINT64 NFCKernelModule::GetPropertyInt(const NFGUID& self, const std::string& s
     m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
 
     return NULL_INT;
+}
+
+int NFCKernelModule::GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIObject> pObject = GetElement(self);
+	if (pObject)
+	{
+		return pObject->GetPropertyInt32(strPropertyName);
+	}
+
+	m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
+
+	return (int)NULL_INT;
 }
 
 double NFCKernelModule::GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName)
@@ -1199,8 +1212,8 @@ bool NFCKernelModule::LogInfo(const NFGUID ident)
     NF_SHARE_PTR<NFIObject> pObject = GetObject(ident);
     if (pObject)
     {
-		int nSceneID = GetPropertyInt(ident, NFrame::IObject::SceneID());
-		int nGroupID = GetPropertyInt(ident, NFrame::IObject::GroupID());
+		int nSceneID = GetPropertyInt32(ident, NFrame::IObject::SceneID());
+		int nGroupID = GetPropertyInt32(ident, NFrame::IObject::GroupID());
 
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nSceneID);
 
@@ -1262,7 +1275,7 @@ int NFCKernelModule::GetObjectByProperty(const int nSceneID, const int nGroupID,
             {
                 case TDATA_INT:
                 {
-                    int nValue = GetPropertyInt(ident, strPropertyName.c_str());
+                    int64_t nValue = GetPropertyInt(ident, strPropertyName.c_str());
                     if (valueArg.Int(0) == nValue)
                     {
                         list.Add(ident);
@@ -1441,7 +1454,7 @@ void NFCKernelModule::Random(int nStart, int nEnd, int nCount, NFDataList& value
     for (int i = mnRandomPos; i < mnRandomPos + nCount; i++)
     {
         float fRanValue = mvRandom.at(i);
-        int nValue = (nEnd - nStart) * fRanValue + nStart;
+        int nValue = int((nEnd - nStart) * fRanValue) + nStart;
         valueList.Add((NFINT64)nValue);
     }
 
@@ -1458,7 +1471,7 @@ int NFCKernelModule::Random(int nStart, int nEnd)
 	float fRanValue = mvRandom.at(mnRandomPos);
 	mnRandomPos++;
 
-	int nValue = (nEnd - nStart) * fRanValue + nStart;
+	int nValue = int((nEnd - nStart) * fRanValue) + nStart;
 	return nValue;
 }
 

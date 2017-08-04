@@ -24,7 +24,7 @@
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector3.hpp"
 
-/** ��ȫ���ͷ�һ��ָ���ڴ� */
+/** 安全的释放一个指针内存 */
 #define SAFE_RELEASE(i)										\
 	if (i)													\
 		{													\
@@ -32,7 +32,7 @@
 			i = NULL;										\
 		}
 
-/** ��ȫ���ͷ�һ��ָ�������ڴ� */
+/** 安全的释放一个指针数组内存 */
 #define SAFE_RELEASE_ARRAY(i)								\
 	if (i)													\
 		{													\

@@ -33,7 +33,7 @@ bool NFCMasterNet_ServerModule::Shut()
 	return true;
 }
 
-void NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -62,7 +62,7 @@ void NFCMasterNet_ServerModule::OnWorldRegisteredProcess(const int nSockIndex, c
 	SynWorldToLogin();
 }
 
-void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -83,7 +83,7 @@ void NFCMasterNet_ServerModule::OnWorldUnRegisteredProcess(const int nSockIndex,
 	SynWorldToLogin();
 }
 
-void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -112,7 +112,7 @@ void NFCMasterNet_ServerModule::OnRefreshWorldInfoProcess(const int nSockIndex, 
 	SynWorldToLogin();
 }
 
-void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -140,7 +140,7 @@ void NFCMasterNet_ServerModule::OnLoginRegisteredProcess(const int nSockIndex, c
 	SynWorldToLogin();
 }
 
-void NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -160,7 +160,7 @@ void NFCMasterNet_ServerModule::OnLoginUnRegisteredProcess(const int nSockIndex,
 	}
 }
 
-void NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ServerInfoReportList xMsg;
@@ -187,7 +187,7 @@ void NFCMasterNet_ServerModule::OnRefreshLoginInfoProcess(const int nSockIndex, 
 	}
 }
 
-void NFCMasterNet_ServerModule::OnSelectWorldProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnSelectWorldProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
@@ -212,7 +212,7 @@ bool NFCMasterNet_ServerModule::Execute()
 	return true;
 }
 
-void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnSelectServerResultProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
@@ -256,13 +256,13 @@ bool NFCMasterNet_ServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER && pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -296,7 +296,7 @@ bool NFCMasterNet_ServerModule::AfterInit()
 	return true;
 }
 
-void NFCMasterNet_ServerModule::OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCMasterNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	//std::cout << "OnSocketEvent::thread id=" << GetCurrentThreadId() << std::endl;
 
@@ -322,7 +322,7 @@ void NFCMasterNet_ServerModule::OnSocketEvent(const int nSockIndex, const NF_NET
 	}
 }
 
-void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
+void NFCMasterNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
 {
 	
 	NF_SHARE_PTR<ServerData> pServerData = mWorldMap.First();
@@ -359,7 +359,7 @@ void NFCMasterNet_ServerModule::OnClientDisconnect(const int nAddress)
 
 }
 
-void NFCMasterNet_ServerModule::OnClientConnected(const int nAddress)
+void NFCMasterNet_ServerModule::OnClientConnected(const NFSOCK nAddress)
 {
 }
 
@@ -428,16 +428,16 @@ void NFCMasterNet_ServerModule::LogGameServer()
 
 }
 
-void NFCMasterNet_ServerModule::OnHeartBeat(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnHeartBeat(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 }
 
-void NFCMasterNet_ServerModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCMasterNet_ServerModule::InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
 
-void NFCMasterNet_ServerModule::OnServerReport(const int nFd, const int msgId, const char* buffer, const uint32_t nLen)
+void NFCMasterNet_ServerModule::OnServerReport(const NFSOCK nFd, const int msgId, const char* buffer, const uint32_t nLen)
 {
 	NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;

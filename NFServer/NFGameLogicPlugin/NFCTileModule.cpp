@@ -118,7 +118,7 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 	return false;
 }
 
-void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCTileModule::ReqMineTile(const SockIndex nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 

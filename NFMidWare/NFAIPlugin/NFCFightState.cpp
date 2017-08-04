@@ -46,7 +46,7 @@ bool NFCFightState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
                     float fSkillConsumeTime = m_pAIModule->UseAnySkill(self, ident);
                     m_pKernelModule->SetPropertyInt(self, "StateType", (int)NFObjectStateType::NOST_SKILLUSE);
 
-                    //������������ԭ״̬StateType
+                    //添加心跳，还原状态StateType
                     m_pKernelModule->AddHeartBeat(self, "OnSkillConsumeTime", this, &NFCFightState::OnSkillConsumeTime, fSkillConsumeTime, 1);
                 }
                 else if (NFSkillTestSkillResult::NFSTSR_DISTANCE == eResult)
@@ -84,7 +84,7 @@ bool NFCFightState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
     }
 	else
 	{
-		//Ŀ�����ʲô��,����ûĿ��
+		//目标挂了什么的,或者没目标
 		pStateMachine->ChangeState(IdleState);
 	}
 	*/
@@ -105,7 +105,7 @@ bool NFCFightState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFCFightState::RunInFightArea(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    //��Ҫ�ص�֪���Ѿ��ߵ���,moving�¼�
+    //需要回调知道已经走到了,moving事件
     return true;
 }
 

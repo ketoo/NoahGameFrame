@@ -43,10 +43,10 @@ public:
 
 protected:
 
-	void OnReqSearchOppnentProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqStartPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSearchOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSwapHomeSceneProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqStartPVPOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqEndPVPOppnentProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 	void FindAllTileScene();

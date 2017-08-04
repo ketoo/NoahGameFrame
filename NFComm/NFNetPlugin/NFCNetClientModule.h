@@ -53,13 +53,13 @@ public:
 
 	////////////////////////////////////////////////////////////////////////////////
 
+	//SendBySuit & SendSuitByPB  suit by (int32)nHashKey32
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData);
-	//
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen);
 	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
@@ -81,11 +81,11 @@ private:
 
 	void KeepState(NF_SHARE_PTR<ConnectData> pServerData);
 
-	void OnSocketEvent(const int fd, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	int OnConnected(const int fd, NFINet* pNet);
+	int OnConnected(const NFSOCK fd, NFINet* pNet);
 
-	int OnDisConnected(const int fd, NFINet* pNet);
+	int OnDisConnected(const NFSOCK fd, NFINet* pNet);
 
 	void ProcessAddNetConnect();
 

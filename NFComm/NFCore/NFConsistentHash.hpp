@@ -193,7 +193,7 @@ public:
 
 	virtual bool GetSuitNodeRandom(NFCVirtualNode<T>& node)
 	{
-		int nID = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		int nID = (int) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		return GetSuitNode(nID, node);
 	}
 

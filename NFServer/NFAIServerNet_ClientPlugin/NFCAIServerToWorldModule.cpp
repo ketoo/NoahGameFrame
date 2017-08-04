@@ -210,7 +210,7 @@ bool NFCAIServerToWorldModule::AfterInit()
 	return true;
 }
 
-void NFCAIServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCAIServerToWorldModule::OnSocketWSEvent(const SockIndex nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
@@ -268,7 +268,7 @@ void NFCAIServerToWorldModule::SendOffline(const NFGUID& self)
 
 }
 
-void NFCAIServerToWorldModule::TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerToWorldModule::TransPBToProxy(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	std::string strData;

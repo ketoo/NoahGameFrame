@@ -130,6 +130,7 @@
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #endif
 
+#pragma warning(disable:4091) 
 #include <Windows.h>
 #define NF_EXPORT extern "C"  __declspec(dllexport)
 
@@ -261,7 +262,7 @@ typedef int16_t NFINT16;
 typedef int8_t NFINT8;
 typedef uint64_t NFUINT64;
 typedef int64_t NFINT64;
-
+typedef int64_t NFSOCK;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <crtdbg.h>

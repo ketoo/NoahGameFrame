@@ -108,6 +108,7 @@ public:
 	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& strPropertyName, const NFVector3& value) = 0;
 
     virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName) = 0;
+	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName) = 0;
     virtual double GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName) = 0;
     virtual const std::string& GetPropertyString(const NFGUID& self, const std::string& strPropertyName) = 0;
     virtual const NFGUID& GetPropertyObject(const NFGUID& self, const std::string& strPropertyName) = 0;
@@ -132,6 +133,7 @@ public:
 	virtual bool SetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const NFVector3& value) = 0;
 
     virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
+	inline int GetRecordInt32(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) { return (int)GetRecordInt(self, strRecordName, nRow, nCol); };
     virtual double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const std::string& GetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
     virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
@@ -139,7 +141,8 @@ public:
 	virtual const NFVector3& GetRecordVector3(const NFGUID& self, const std::string& strRecordName, const int nRow, const int nCol) = 0;
 
     virtual NFINT64 GetRecordInt(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
-    virtual double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
+	inline int GetRecordInt32(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) { return (int)GetRecordInt(self, strRecordName, nRow, strColTag); };
+	virtual double GetRecordFloat(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const std::string& GetRecordString(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
     virtual const NFGUID& GetRecordObject(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;
 	virtual const NFVector2& GetRecordVector2(const NFGUID& self, const std::string& strRecordName, const int nRow, const std::string& strColTag) = 0;

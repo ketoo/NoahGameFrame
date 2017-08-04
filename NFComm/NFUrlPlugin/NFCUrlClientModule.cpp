@@ -124,7 +124,7 @@ std::string NFCUrlClientModule::CompositeParam(const std::map<std::string, std::
     std::string line = ss.str();
     if (line.size() > 1)
     {
-        //È¥µôÄ©Î²µÄ&
+        //åŽ»æŽ‰æœ«å°¾çš„&
         line.erase(line.size() - 1);
     }
 
@@ -147,7 +147,7 @@ std::string NFCUrlClientModule::CompositeCookies(const std::map<std::string, std
     std::string line = ss.str();
     if (line.size() > 1)
     {
-        //È¥µôÄ©Î²µÄ;
+        //åŽ»æŽ‰æœ«å°¾çš„;
         line.erase(line.size() - 1);
     }
 
@@ -222,7 +222,7 @@ int NFCUrlClientModule::HttpReq(const std::string& strUrl, const std::string& st
         }
         else
         {
-            //Èç¹û·ÃÎÊÕý³£µ«http×´Ì¬Âë²»ÊÇ200£¬Ö±½Ó·µ»ØhttpµÄ×´Ì¬Âë
+            //å¦‚æžœè®¿é—®æ­£å¸¸ä½†httpçŠ¶æ€ç ä¸æ˜¯200ï¼Œç›´æŽ¥è¿”å›žhttpçš„çŠ¶æ€ç 
             long http_code = 0;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
             if (200 != http_code)
@@ -230,7 +230,7 @@ int NFCUrlClientModule::HttpReq(const std::string& strUrl, const std::string& st
                 return http_code;
             }
 
-            return 0;//×´Ì¬ÂëÎª200Ê±·µ»Ø0
+            return 0;//çŠ¶æ€ç ä¸º200æ—¶è¿”å›ž0
         }
     }
     catch (...)
@@ -279,7 +279,7 @@ int NFCUrlClientModule::HttpRequestAsyEnd(const NFGUID& self, const int nFormAct
         return -2;
     }
 
-    // std::function ÓÐÖØÔØoperator bool
+    // std::function æœ‰é‡è½½operator bool
     if (!pReqData->mFunRsp)
     {
         return -3;

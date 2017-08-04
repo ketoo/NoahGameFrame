@@ -40,10 +40,10 @@ int NFCPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& s
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
-        return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
+        return m_pKernelModule->GetRecordInt32(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
     }
 
-    return m_pKernelModule->GetPropertyInt(self, strPropertyName);
+    return m_pKernelModule->GetPropertyInt32(self, strPropertyName);
 }
 
 int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int nValue)
@@ -82,7 +82,7 @@ int NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& s
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
+                int nPropertyValue = pRecord->GetInt32(eGroupType, strPropertyName);
 
                 return pRecord->SetInt(eGroupType, strPropertyName, nPropertyValue + nValue);
             }
@@ -103,7 +103,7 @@ int NFCPropertyModule::SubPropertyValue(const NFGUID& self, const std::string& s
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
+                int nPropertyValue = pRecord->GetInt32(eGroupType, strPropertyName);
 
                 return pRecord->SetInt(eGroupType, strPropertyName, nPropertyValue - nValue);
             }
@@ -137,7 +137,7 @@ int NFCPropertyModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA
     {
         if (i < pRecord->GetRows())
         {
-            int nValue = pRecord->GetInt(i, nCol);
+            int nValue = pRecord->GetInt32(i, nCol);
             nAllValue += nValue;
         }
     }
@@ -171,8 +171,8 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent)
         {
-            int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
-            if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID()) > 0)
+            int nOnlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
+            if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID()) > 0)
             {
                 
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
@@ -180,7 +180,7 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
         {
-            int nOnlineCount = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount());
+            int nOnlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
             m_pKernelModule->SetPropertyInt(self, NFrame::Player::OnlineCount(), (nOnlineCount + 1));
 
         }
@@ -198,13 +198,13 @@ int NFCPropertyModule::RefreshBaseProperty(const NFGUID& self)
     }
 
     
-    int eJobType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Job());
-    int nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level());
+    int eJobType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Job());
+    int nLevel = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Level());
 
     for (int i = 0; i < pRecord->GetCols(); ++i)
     {
         const std::string& strColTag = pRecord->GetColTag(i);
-        int nValue = m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, strColTag);
+        int nValue = (int)m_pPropertyConfigModule->CalculateBaseValue(eJobType, nLevel, strColTag);
         SetPropertyValue(self, strColTag, NFPropertyGroup::NPG_JOBLEVEL, nValue);
     }
 

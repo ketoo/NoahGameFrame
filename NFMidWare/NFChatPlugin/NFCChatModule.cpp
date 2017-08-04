@@ -43,7 +43,7 @@ bool NFCChatModule::Execute()
 	return true;
 }
 
-void NFCChatModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCChatModule::OnClienChatProcess(const SockIndex nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat);
 
