@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "stdafx.h"
 #include "NFCPropertyLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -55,7 +56,7 @@ void NFCPropertyLogic::OnPropertyInt(const int nSockIndex, const int nMsgID, con
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyInt xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -78,7 +79,7 @@ void NFCPropertyLogic::OnPropertyFloat(const int nSockIndex, const int nMsgID, c
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyFloat xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -101,7 +102,7 @@ void NFCPropertyLogic::OnPropertyString(const int nSockIndex, const int nMsgID, 
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyString xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -124,7 +125,7 @@ void NFCPropertyLogic::OnPropertyObject(const int nSockIndex, const int nMsgID, 
 {
 	NFGUID nPlayerID;
 	NFMsg::ObjectPropertyObject xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -147,7 +148,7 @@ void NFCPropertyLogic::OnObjectPropertyEntry(const int nSockIndex, const int nMs
 {
 	NFGUID nPlayerID;
 	NFMsg::MultiObjectPropertyList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
