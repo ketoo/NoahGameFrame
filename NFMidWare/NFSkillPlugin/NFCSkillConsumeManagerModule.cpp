@@ -7,11 +7,14 @@
 // -------------------------------------------------------------------------
 
 #include "NFCSkillConsumeManagerModule.h"
-
-//
+#include "NFCBulletSkillConsumeProcessModule.h"
+#include "NFCBriefSkillConsumeProcessModule.h"
 
 bool NFCSkillConsumeManagerModule::Init()
 {
+	ResgisterConsumeModule(NFMsg::ESkillType::EST_BRIEF, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFCBriefSkillConsumeProcessModule(pPluginManager)));
+	ResgisterConsumeModule(NFMsg::ESkillType::EST_BULLET, NF_SHARE_PTR<NFISkillConsumeProcessModule>(NF_NEW NFCBulletSkillConsumeProcessModule(pPluginManager)));
+
     return true;
 }
 
@@ -30,12 +33,12 @@ bool NFCSkillConsumeManagerModule::AfterInit()
     return true;
 }
 
-bool NFCSkillConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, NFISkillConsumeProcessModule* pModule )
+bool NFCSkillConsumeManagerModule::ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFISkillConsumeProcessModule> pModule )
 {
     return AddElement( nModuleType, pModule );
 }
 
-NFISkillConsumeProcessModule* NFCSkillConsumeManagerModule::GetConsumeModule( const int nModuleType )
+NF_SHARE_PTR<NFISkillConsumeProcessModule> NFCSkillConsumeManagerModule::GetConsumeModule( const int nModuleType )
 {
     return GetElement( nModuleType );
 }

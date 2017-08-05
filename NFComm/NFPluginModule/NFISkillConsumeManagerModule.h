@@ -13,13 +13,19 @@
 #include "NFIModule.h"
 #include "NFISkillConsumeProcessModule.h"
 
+enum SKILL_CONSUME_TYPE
+{
+	SKILL_BRIEF,
+	SKILL_BULLET,
+};
+
 class NFISkillConsumeManagerModule
     : public NFIModule
 {
 public:
-    virtual bool ResgisterConsumeModule(const int nModuleType, NFISkillConsumeProcessModule* pModule) = 0;
+    virtual bool ResgisterConsumeModule(const int nModuleType, NF_SHARE_PTR<NFISkillConsumeProcessModule> pModule) = 0;
 
-    virtual NFISkillConsumeProcessModule* GetConsumeModule(const int nModuleType) = 0;
+    virtual NF_SHARE_PTR<NFISkillConsumeProcessModule> GetConsumeModule(const int nModuleType) = 0;
 
 };
 
