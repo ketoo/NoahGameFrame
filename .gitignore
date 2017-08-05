@@ -70,7 +70,6 @@
 #/_Out/Server/Release/
 
 #/_Out/Server/Debug/*
-/Dependencies/libevent
 /Dependencies/curl
 /.vs/
 /NoahFrame.VC.db
