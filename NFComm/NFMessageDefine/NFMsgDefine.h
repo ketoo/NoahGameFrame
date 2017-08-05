@@ -1,9 +1,8 @@
 // -------------------------------------------------------------------------
-
-
-
-
-//
+//    @FileName			:   NFMshDefine.cphp
+//    @Author           :   LvSheng.Huang
+//    @Date             :   2013-10-02
+//    @Module           :   NFMshDefine
 // -------------------------------------------------------------------------
 
 #ifndef NF_MSGDEFINE_H
@@ -21,7 +20,7 @@
 #include "NFMsgShare.pb.h"
 #include "NFMsgURl.pb.h"
 #include "NFMsgMysql.pb.h"
-
+#include "NFProtocolDefine.hpp"
 // -------------------------------------------------------------------------
 #pragma pack(push,1)
 
