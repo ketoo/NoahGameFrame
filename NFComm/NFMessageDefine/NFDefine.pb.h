@@ -338,6 +338,25 @@ inline bool EGameMsgID_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EGameMsgID>(
     EGameMsgID_descriptor(), name, value);
 }
+enum ESkillType {
+  EST_BRIEF = 1,
+  EST_BULLET = 2
+};
+LIBPROTOC_EXPORT bool ESkillType_IsValid(int value);
+const ESkillType ESkillType_MIN = EST_BRIEF;
+const ESkillType ESkillType_MAX = EST_BULLET;
+const int ESkillType_ARRAYSIZE = ESkillType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESkillType_descriptor();
+inline const ::std::string& ESkillType_Name(ESkillType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillType_descriptor(), value);
+}
+inline bool ESkillType_Parse(
+    const ::std::string& name, ESkillType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillType>(
+    ESkillType_descriptor(), name, value);
+}
 enum EItemType {
   EIT_EQUIP = 0,
   EIT_GEM = 1,
@@ -737,6 +756,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESynMsgID>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EGameMsgID>() {
   return ::NFMsg::EGameMsgID_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ESkillType>() {
+  return ::NFMsg::ESkillType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EItemType>() {
