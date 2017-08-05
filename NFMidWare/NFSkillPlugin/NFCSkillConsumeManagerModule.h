@@ -10,13 +10,13 @@
 #define NFC_SKILLCONSUME_MANAGER_MODULE_H
 
 #include <iostream>
-#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFISkillConsumeManagerModule.h"
 #include "NFComm/NFPluginModule/NFISkillConsumeProcessModule.h"
 
 class NFCSkillConsumeManagerModule
     : public NFISkillConsumeManagerModule,
-      NFMap<int, NFISkillConsumeProcessModule>
+      NFMapEx<int, NFISkillConsumeProcessModule>
 {
 public:
     NFCSkillConsumeManagerModule( NFIPluginManager* p )
@@ -28,9 +28,9 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual bool ResgisterConsumeModule( const int nModuleType, NFISkillConsumeProcessModule* pModule );
+    virtual bool ResgisterConsumeModule( const int nModuleType, NF_SHARE_PTR<NFISkillConsumeProcessModule> pModule );
 
-    virtual NFISkillConsumeProcessModule* GetConsumeModule( const int nModuleType );
+    virtual NF_SHARE_PTR<NFISkillConsumeProcessModule> GetConsumeModule( const int nModuleType );
 
 };
 
