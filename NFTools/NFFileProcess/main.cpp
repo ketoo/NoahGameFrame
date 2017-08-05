@@ -3,7 +3,6 @@
 #include <chrono>
 
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#include <conio.h>
 
 int main(int argc, const char *argv[])
 {
@@ -26,12 +25,6 @@ int main(int argc, const char *argv[])
 		std::cout << "Generate All Done for Good!!!" << std::endl;
 		std::cout << "Timespan: " << t2 - t1 << " us (" << (t2 - t1) / 1000000.0f << "s)" << std::endl;
 	}
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	if (arg != 1)
-	{
-		getch();
-	}
 
-#endif
 	return 0;
 }
