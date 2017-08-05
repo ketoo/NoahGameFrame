@@ -175,25 +175,14 @@ void NFCPluginManager::Registered(NFIPlugin* plugin)
 {
     std::string strPluginName = plugin->GetPluginName();
     if (!FindPlugin(strPluginName))
-    {
-		// dynamic add plugin no dlls
-        //bool bFind = false;
-        //PluginNameMap::iterator it = mPluginNameMap.begin();
-        //for (it; it != mPluginNameMap.end(); ++it)
-        //{
-        //    if (strPluginName == it->first)
-        //    {
-        //        bFind = true;
-        //        break;
-        //    }
-        //}
-
-        //if (bFind)
-        {
-            mPluginInstanceMap.insert(PluginInstanceMap::value_type(strPluginName, plugin));
-            plugin->Install();
-        }
+	{
+		mPluginInstanceMap.insert(PluginInstanceMap::value_type(strPluginName, plugin));
+        plugin->Install();
     }
+	else
+	{
+		assert(0);
+	}
 }
 
 void NFCPluginManager::UnRegistered(NFIPlugin* plugin)
