@@ -11,15 +11,6 @@ unzip -o mysql_libs.zip -d ./
 echo Extract mysql++ libs
 unzip -o mysqlpp_libs.zip -d ./
 
-# extract libevent libs
-echo Extract libevent libs
-if [ -d ./libevent ]; then
- rm -rf ./libevent
-fi
-unzip -o libevent.zip -d ./
-
-#mv libevent-2.1.8-stable libevent
-
 # compiling libevent
 cd libevent
 chmod -R 755 *
