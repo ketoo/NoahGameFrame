@@ -861,6 +861,7 @@ namespace NFrame
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String ActorID = "ActorID";// int
+		public static readonly String BossSoundList = "BossSoundList";// string
 		public static readonly String CamOffestPos = "CamOffestPos";// string
 		public static readonly String CamOffestRot = "CamOffestRot";// string
 		public static readonly String FilePath = "FilePath";// string
