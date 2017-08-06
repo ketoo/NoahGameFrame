@@ -787,6 +787,35 @@ namespace NFMsg
       EGMI_ACK_SHARE_TO_ATART = 30003
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"ESkillType")]
+    public enum ESkillType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BRIEF_SINGLE", Value=0)]
+      EST_BRIEF_SINGLE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BRIEF_GROUP", Value=1)]
+      EST_BRIEF_GROUP = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BULLET_SINGLE", Value=2)]
+      EST_BULLET_SINGLE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BULLET_REBOUND", Value=3)]
+      EST_BULLET_REBOUND = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_BULLET_BOMB", Value=4)]
+      EST_BULLET_BOMB = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_TARGET_SINGLE", Value=5)]
+      EST_TARGET_SINGLE = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_TARGET_GROUP", Value=6)]
+      EST_TARGET_GROUP = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EST_POSITION_GROUP", Value=7)]
+      EST_POSITION_GROUP = 7
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EItemType")]
     public enum EItemType
     {

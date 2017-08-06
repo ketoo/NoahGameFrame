@@ -2199,8 +2199,8 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "LD\020\003\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001 \002("
     "\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \002(\005\0221\n"
     "\neffect_rlt\030\003 \002(\0162\035.NFMsg.EffectData.ERe"
-    "sultType\"X\n\013EResultType\022\017\n\013EET_SUCCESS\020\000"
-    "\022\014\n\010EET_FAIL\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MI"
+    "sultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n"
+    "\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MI"
     "SS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022\032\n\004"
     "user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 \002"
     "(\014\022\021\n\tuse_index\030\003 \002(\005\022&\n\013effect_data\030\004 \003"
@@ -6016,8 +6016,8 @@ bool EffectData_EResultType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const EffectData_EResultType EffectData::EET_SUCCESS;
 const EffectData_EResultType EffectData::EET_FAIL;
+const EffectData_EResultType EffectData::EET_SUCCESS;
 const EffectData_EResultType EffectData::EET_REFUSE;
 const EffectData_EResultType EffectData::EET_MISS;
 const EffectData_EResultType EffectData::EET_CRIT;

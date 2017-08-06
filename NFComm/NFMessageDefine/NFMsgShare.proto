@@ -114,8 +114,8 @@ message EffectData
 {
 	enum EResultType
 	{
-		EET_SUCCESS = 0;
-		EET_FAIL = 1;
+		EET_FAIL = 0;
+		EET_SUCCESS = 1;
 		EET_REFUSE = 2;
 		EET_MISS = 3;	
 		EET_CRIT = 4;	
