@@ -339,12 +339,18 @@ inline bool EGameMsgID_Parse(
     EGameMsgID_descriptor(), name, value);
 }
 enum ESkillType {
-  EST_BRIEF = 1,
-  EST_BULLET = 2
+  EST_BRIEF_SINGLE = 0,
+  EST_BRIEF_GROUP = 1,
+  EST_BULLET_SINGLE = 2,
+  EST_BULLET_REBOUND = 3,
+  EST_BULLET_BOMB = 4,
+  EST_TARGET_SINGLE = 5,
+  EST_TARGET_GROUP = 6,
+  EST_POSITION_GROUP = 7
 };
 LIBPROTOC_EXPORT bool ESkillType_IsValid(int value);
-const ESkillType ESkillType_MIN = EST_BRIEF;
-const ESkillType ESkillType_MAX = EST_BULLET;
+const ESkillType ESkillType_MIN = EST_BRIEF_SINGLE;
+const ESkillType ESkillType_MAX = EST_POSITION_GROUP;
 const int ESkillType_ARRAYSIZE = ESkillType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ESkillType_descriptor();

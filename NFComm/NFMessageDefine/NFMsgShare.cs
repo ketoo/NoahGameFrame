@@ -440,11 +440,11 @@ namespace NFMsg
     public enum EResultType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EET_SUCCESS", Value=0)]
-      EET_SUCCESS = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"EET_FAIL", Value=0)]
+      EET_FAIL = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EET_FAIL", Value=1)]
-      EET_FAIL = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"EET_SUCCESS", Value=1)]
+      EET_SUCCESS = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EET_REFUSE", Value=2)]
       EET_REFUSE = 2,

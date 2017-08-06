@@ -49,29 +49,53 @@ int NFCBriefSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const s
 
 int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
 {
-    NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager( strSkillName );
-    if ( pPropertyManager == NULL )
+    if (!m_pElementModule->ExistElement(strSkillName))
     {
         return 1;
     }
 
+	const std::string& strConsumeProperty = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::ConsumeProperty());
+	const NFINT64 nConsumeValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::ConsumeValue());
+	const NFINT64 nConsumeTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::ConsumeType());
+
+	const std::string& strDamageProperty = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::DamageProperty());
+	const NFINT64 nDamageValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageValue());
+	const NFINT64 nDamageTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageType());
+
+	const std::string& strGetBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::GetBuffList());
+	const std::string& strSendBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::SendBuffList());
+
+	const double fRequireDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::RequireDistance());
+	const double fDamageDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::DamageDistance());
+	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::TargetType());
+
+	m_pPropertyModule->SubPropertyValue(self, strConsumeProperty, NFIPropertyModule::NPG_ALL, nConsumeValue);
+
+    for ( int j = 0; j < other.GetCount(); j++ )
     {
-        for ( int j = 0; j < other.GetCount(); j++ )
+        NFGUID identOther = other.Object( j );
+        if ( identOther.IsNull() )
         {
-            NFGUID identOther = other.Object( j );
-            if ( identOther.IsNull() )
-            {
-                continue;
-            }
-
-            NF_SHARE_PTR<NFIObject> pOtherObject = m_pKernelModule->GetObject( identOther );
-            if ( pOtherObject == NULL )
-            {
-                continue;
-            }
-
-			pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
+			damageListValue.AddInt(0);
+			damageResultList.AddInt(0);
+            continue;
         }
+
+        NF_SHARE_PTR<NFIObject> pOtherObject = m_pKernelModule->GetObject( identOther );
+        if ( pOtherObject == NULL )
+        {
+			damageListValue.AddInt(0);
+			damageResultList.AddInt(0);
+            continue;
+        }
+
+		m_pPropertyModule->SubPropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, nDamageValue);
+
+		//NFMsg::EffectData_EResultType
+		damageListValue.AddInt(nDamageValue);
+		damageResultList.AddInt(1);
+
+		pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
     }
 
     return 0;

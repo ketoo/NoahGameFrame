@@ -860,6 +860,7 @@ namespace NFrame
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
 		static const std::string& ActorID(){ static std::string x = "ActorID"; return x; };// int
+		static const std::string& BossSoundList(){ static std::string x = "BossSoundList"; return x; };// string
 		static const std::string& CamOffestPos(){ static std::string x = "CamOffestPos"; return x; };// string
 		static const std::string& CamOffestRot(){ static std::string x = "CamOffestRot"; return x; };// string
 		static const std::string& FilePath(){ static std::string x = "FilePath"; return x; };// string
