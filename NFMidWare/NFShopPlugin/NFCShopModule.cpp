@@ -32,7 +32,7 @@ bool NFCShopModule::AfterInit()
 	return true;
 }
 
-void NFCShopModule::OnClienBuyItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCShopModule::OnClienBuyItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	/*
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckBuyObjectFormShop);
@@ -59,7 +59,7 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 		return false;
 	}
 
-	const int nNeedLevel = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Level());
+	const int nNeedLevel = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Level());
 	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::Level()) < nNeedLevel)
 	{
 		return false;
@@ -71,10 +71,10 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 		return false;
 	}
 
-	const int nDiamond = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Diamond());
-	const int nGold = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Gold());
-	const int nStone = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Stone());
-	const int nSteel = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Steel());
+	const int nDiamond = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Diamond());
+	const int64_t nGold = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Gold());
+	const int nStone = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Stone());
+	const int nSteel = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Steel());
 	
 	if (!m_pPropertyModule->EnoughDiamond(self, nDiamond)
 		&& !m_pPropertyModule->EnoughGold(self, nGold))
@@ -88,8 +88,8 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 		return false;
 	}
 
-	const int nShopType = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Type());
-	const int nShopCount = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Count());
+	const int nShopType = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Type());
+	const int nShopCount = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Count());
 	switch (nShopType)
 	{
 		//EST_BUILDING 	= 1;//
@@ -110,7 +110,7 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 		break;
 		default:
 		{
-			const int nItemType = m_pElementModule->GetPropertyInt(strItem, NFrame::Server::Type());
+			const int nItemType = m_pElementModule->GetPropertyInt32(strItem, NFrame::Server::Type());
 			switch (nItemType)
 			{
 			case NFMsg::EItemType::EIT_EQUIP:

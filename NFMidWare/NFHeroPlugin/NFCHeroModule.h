@@ -41,7 +41,7 @@ public:
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
 	virtual NFGUID ActiviteHero(const NFGUID& self, const string& strID);
 	virtual bool ActiviteHero(const NFGUID& self, const NFGUID& hero);
-    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp);
+    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
     virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
     virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
@@ -55,8 +55,8 @@ public:
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
 
 protected:
-	void OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSwitchFightHeroMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 protected:
 	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID);

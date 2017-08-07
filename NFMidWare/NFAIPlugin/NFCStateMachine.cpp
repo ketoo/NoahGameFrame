@@ -44,7 +44,7 @@ bool NFCStateMachine::Execute()
             NFIState* pState = GetState(meCurrentState);
             pState->Execute(mOwnerID, this);
 
-            //ÉèÖÃÐÄÌøÊ±¼ä
+            //è®¾ç½®å¿ƒè·³æ—¶é—´
             NFDataList xDataList;
             m_pKernelModule->Random(0, 10, 1, xDataList);
 
@@ -72,7 +72,7 @@ void NFCStateMachine::ChangeState(const NFAI_STATE eNewState)
     pState = GetState(meCurrentState);
     pState->Enter(mOwnerID, this);
 
-    //ÐÄÌø
+    //å¿ƒè·³
     mfHeartBeatTime = pState->GetHeartBeatTime();
 }
 

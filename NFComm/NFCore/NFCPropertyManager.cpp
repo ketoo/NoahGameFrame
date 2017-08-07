@@ -147,23 +147,19 @@ bool NFCPropertyManager::SetPropertyVector3(const std::string& strPropertyName, 
 NFINT64 NFCPropertyManager::GetPropertyInt(const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-    if (pProperty)
-    {
-        return pProperty->GetInt();
-    }
+	return pProperty ? pProperty->GetInt() : 0;
+}
 
-    return 0;
+int NFCPropertyManager::GetPropertyInt32(const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
+	return pProperty ? pProperty->GetInt32() : 0;
 }
 
 double NFCPropertyManager::GetPropertyFloat(const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetElement(strPropertyName);
-    if (pProperty)
-    {
-        return pProperty->GetFloat();
-    }
-
-    return 0.0;
+	return pProperty ? pProperty->GetFloat() : 0.0;
 }
 
 const std::string& NFCPropertyManager::GetPropertyString(const std::string& strPropertyName)

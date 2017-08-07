@@ -54,8 +54,8 @@ int NFCItemTokenConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std
 	}
 
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	if (nSceneID != nHomeSceneID)
 	{
 		return 3;
@@ -78,14 +78,14 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 		return  1;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 	const std::string& strBuildingCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
 
 	const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nHomeSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	if (nSceneID != nHomeSceneID)
 	{
 		return 2;

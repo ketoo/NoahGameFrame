@@ -17,7 +17,13 @@
 #include "NFComm/NFNetPlugin/NFINet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 enum NF_SERVER_TYPES
 {
@@ -85,7 +91,7 @@ struct ServerData
         pData = NULL;
     }
 
-    int nFD;
+	NFSOCK nFD;
     NF_SHARE_PTR<NFMsg::ServerInfoReport> pData;
 };
 
@@ -146,7 +152,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
@@ -155,7 +161,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t))
 	{
 		NET_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		NET_RECEIVE_FUNCTOR_PTR functorPtr(new NET_RECEIVE_FUNCTOR(functor));
@@ -164,7 +170,7 @@ public:
 	}
 
 	template<typename BaseType>
-	bool AddEventCallBack(BaseType* pBase, void (BaseType::*handler)(const int, const NF_NET_EVENT, NFINet*))
+	bool AddEventCallBack(BaseType* pBase, void (BaseType::*handler)(const NFSOCK, const NF_NET_EVENT, NFINet*))
 	{
 		NET_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		NET_EVENT_FUNCTOR_PTR functorPtr(new NET_EVENT_FUNCTOR(functor));
@@ -193,7 +199,7 @@ public:
 
 	static bool ReceivePB(const int nMsgID, const std::string& strMsgData, google::protobuf::Message & xData, NFGUID & nPlayer)
 	{
-		return ReceivePB(nMsgID, strMsgData.c_str(), strMsgData.length(), xData, nPlayer);
+		return ReceivePB(nMsgID, strMsgData.c_str(), (uint32_t) strMsgData.length(), xData, nPlayer);
 	}
 
 	static bool ReceivePB(const int nMsgID, const char * msg, const uint32_t nLen, google::protobuf::Message & xData, NFGUID & nPlayer)
@@ -241,17 +247,17 @@ public:
 	virtual bool Execute() = 0;
 
 
-	virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const int nSockIndex) = 0;
+	virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const NFSOCK nSockIndex) = 0;
 
 	virtual bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg) = 0;
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex) = 0;
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex) = 0;
 
 	virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message& xData) = 0;
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL) = 0;
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL) = 0;
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL) = 0;
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL) = 0;
 
 	virtual NFINet* GetNet() = 0;
 };

@@ -54,9 +54,9 @@ protected:
     std::string GetProduceHeartName(const NFGUID& self, const NFGUID& xBuild, const std::string& strItemID);
 
 protected:
-	void OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienMoveObject(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienUpgradeBuilding(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSLGClienCreateItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFIKernelModule* m_pKernelModule;

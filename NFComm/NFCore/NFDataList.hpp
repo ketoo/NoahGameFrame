@@ -281,6 +281,17 @@ public:
 		return NULL_INT;
 	}
 
+	int GetInt32() const
+	{
+		if (TDATA_INT == nType)
+		{
+			//return boost::get<NFINT64>(variantData);
+			return (int)variantData.get<NFINT64>();
+		}
+
+		return (int)NULL_INT;
+	}
+
 	double GetFloat() const
 	{
 		if (TDATA_FLOAT == nType)
@@ -884,6 +895,11 @@ public:
 		}
 
 		return 0;
+	}
+
+	inline int Int32(const int index) const
+	{
+		return (int) Int(index);
 	}
 
 	virtual double Float(const int index) const

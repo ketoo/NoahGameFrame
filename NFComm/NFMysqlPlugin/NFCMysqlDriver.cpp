@@ -1,4 +1,4 @@
-﻿#include "NFCMysqlDriver.h"
+#include "NFCMysqlDriver.h"
 
 const std::string NFCMysqlDriver::strDefaultKey = "ID";
 const std::string NFCMysqlDriver::strDefaultTable = "RoleInfo";

@@ -6,7 +6,13 @@
 //
 // -------------------------------------------------------------------------
 #include "NFCGuildComponent.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
 bool NFCGuildComponent::CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType)
@@ -37,7 +43,7 @@ bool NFCGuildComponent::CheckPower(const NFGUID& self, const NFGUID& xGuildID, i
 
 int NFCGuildComponent::OnCreateGuildProcess(const NFGUID & self, const int from, const int event, std::string & arg)
 {
-	CLIENT_MSG_PROCESS_NO_LOG(event, arg.c_str(), arg.length(), NFMsg::ReqAckCreateGuild)
+	CLIENT_MSG_PROCESS_NO_LOG(event, arg.c_str(), (uint32_t)arg.length(), NFMsg::ReqAckCreateGuild)
 
 	std::string strRoleName;
 	int nLevel = 0;

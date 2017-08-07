@@ -15,7 +15,7 @@ public:
 		bConnected = false;
     }
 
-    void ReciveHandler(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+    void ReciveHandler(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
     {
         std::string str;
         str.assign(msg, nLen);
@@ -23,7 +23,7 @@ public:
         std::cout << " fd: " << nSockIndex << " msg_id: " << nMsgID /*<<  " data: " << str */ << " thread_id: " << std::this_thread::get_id() << std::endl;
     };
 
-    void EventHandler(const int nSockIndex, const NF_NET_EVENT e, NFINet* p)
+    void EventHandler(const NFSOCK nSockIndex, const NF_NET_EVENT e, NFINet* p)
     {
         std::cout << " fd: " << nSockIndex << " event_id: " << e << " thread_id: " << std::this_thread::get_id() << std::endl;
 		if(e == NF_NET_EVENT_CONNECTED)

@@ -305,15 +305,15 @@ bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const s
     return true;
 }
 
-bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const int nDesc, const char* func, int line)
+bool NFCLogModule::LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const int64_t nDesc, const char* func, int line)
 {
     if (line > 0)
     {
-        Log(nll, "Indent[%s] %s %d %s %d", ident.ToString().c_str(), strInfo.c_str(), nDesc, func, line);
+        Log(nll, "Indent[%s] %s %lld %s %d", ident.ToString().c_str(), strInfo.c_str(), nDesc, func, line);
     }
     else
     {
-        Log(nll, "Indent[%s] %s %d", ident.ToString().c_str(), strInfo.c_str(), nDesc);
+        Log(nll, "Indent[%s] %s %lld", ident.ToString().c_str(), strInfo.c_str(), nDesc);
     }
 
     return true;
