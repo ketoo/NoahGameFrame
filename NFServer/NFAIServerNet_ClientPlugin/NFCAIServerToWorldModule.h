@@ -35,13 +35,13 @@ public:
 
 protected:
 
-    void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+    void OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 protected:
     void Register(NFINet* pNet);
 	void ServerReport();
     void RefreshWorldInfo();
-    void TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 

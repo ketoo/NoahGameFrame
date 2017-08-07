@@ -24,28 +24,28 @@ public:
     }
 
     virtual bool ClearHate(const NFGUID& self);
-    //³ğºŞÁĞ±íÊÇ·ñÎª¿Õ
+    //ä»‡æ¨åˆ—è¡¨æ˜¯å¦ä¸ºç©º
     virtual bool Empty(const NFGUID& self);
 
-    //Ìí¼Ó³ğºŞ¶ÔÏó
+    //æ·»åŠ ä»‡æ¨å¯¹è±¡
     virtual bool AddHate(const NFGUID& self, const NFGUID& other, const int nValue);
 
-    //ÉèÖÃ³ğºŞÖµ
+    //è®¾ç½®ä»‡æ¨å€¼
     virtual bool SetHateValue(const NFGUID& self, const NFGUID& other, const int nValue);
 
-    //°ÑËûÈËµÄ³ğºŞcopyµ½×Ô¼ºÉíÉÏ,BOSS,Ğ¡µÜ
+    //æŠŠä»–äººçš„ä»‡æ¨copyåˆ°è‡ªå·±èº«ä¸Š,BOSS,å°å¼Ÿ
     virtual bool CopyHateList(const NFGUID& self, const NFGUID& other);
 
-    //¶Ô³ğºŞÅÅĞò£¬×î¸ßÔÚÇ°Ãæ
+    //å¯¹ä»‡æ¨æ’åºï¼Œæœ€é«˜åœ¨å‰é¢
     virtual void CompSortList(const NFGUID& self);
 
-    //µÃµ½×î¸ß³ğºŞµÄÒ»¸ö¶ÔÏó
+    //å¾—åˆ°æœ€é«˜ä»‡æ¨çš„ä¸€ä¸ªå¯¹è±¡
     virtual const NFGUID& QueryMaxHateObject(const NFGUID& self);
 
-    //µÃµ½×î¸ß³ğºŞµÄÊı¸ö¶ÔÏó
+    //å¾—åˆ°æœ€é«˜ä»‡æ¨çš„æ•°ä¸ªå¯¹è±¡
     virtual bool QueryMaxHateObject(const NFGUID& self, std::list<std::string>& HateList, const int nCount = 1);
 
-    //²éÑ¯³ğºŞÖµ
+    //æŸ¥è¯¢ä»‡æ¨å€¼
     virtual int QueryHateValue(const NFGUID& self, const NFGUID& other);
 
 protected:

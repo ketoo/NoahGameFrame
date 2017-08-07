@@ -16,7 +16,13 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 class NFCNetModule
 	: public NFINetModule
@@ -44,24 +50,24 @@ public:
 	virtual bool Execute();
 
 	
-	virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const int nSockIndex);
+	virtual bool SendMsgWithOutHead(const int nMsgID, const std::string& msg, const NFSOCK nSockIndex);
 
 	virtual bool SendMsgToAllClientWithOutHead(const int nMsgID, const std::string& msg);
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex);
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex);
 
 	virtual bool SendMsgPBToAllClient(const uint16_t nMsgID, const google::protobuf::Message& xData);
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL);
+	virtual bool SendMsgPB(const uint16_t nMsgID, const google::protobuf::Message& xData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL);
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL);
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL);
 
 	virtual NFINet* GetNet();
 
 protected:
-	void OnReceiveNetPack(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnSocketNetEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketNetEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
 	void KeepAlive();
 

@@ -922,7 +922,7 @@ int NFCRecord::FindString(const int nCol, const std::string& value, NFDataList& 
 
 
     {
-        for (int64_t i = 0; i < mnMaxRow; ++i)
+        for (int i = 0; i < mnMaxRow; ++i)
         {
             if (!IsUsed(i))
             {
@@ -932,7 +932,7 @@ int NFCRecord::FindString(const int nCol, const std::string& value, NFDataList& 
             const std::string& strData = GetString(i, nCol);
             if (0 == strcmp(strData.c_str(), value.c_str()))
             {
-                varResult << i;
+                varResult << (int64_t)i;
             }
         }
 
@@ -966,7 +966,7 @@ int NFCRecord::FindObject(const int nCol, const NFGUID& value, NFDataList& varRe
     }
 
     {
-        for (int64_t i = 0; i < mnMaxRow; ++i)
+        for (int i = 0; i < mnMaxRow; ++i)
         {
             if (!IsUsed(i))
             {
@@ -975,7 +975,7 @@ int NFCRecord::FindObject(const int nCol, const NFGUID& value, NFDataList& varRe
 
             if (GetObject(i, nCol) == value)
             {
-                varResult << i;
+                varResult << (int64_t)i;
             }
         }
 
@@ -1009,7 +1009,7 @@ int NFCRecord::FindVector2(const int nCol, const NFVector2& value, NFDataList& v
 	}
 
 	{
-		for (int64_t i = 0; i < mnMaxRow; ++i)
+		for (int i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
@@ -1018,7 +1018,7 @@ int NFCRecord::FindVector2(const int nCol, const NFVector2& value, NFDataList& v
 
 			if (GetVector2(i, nCol) == value)
 			{
-				varResult << i;
+				varResult << (int64_t)i;
 			}
 		}
 
@@ -1052,7 +1052,7 @@ int NFCRecord::FindVector3(const int nCol, const NFVector3& value, NFDataList& v
 	}
 
 	{
-		for (int64_t i = 0; i < mnMaxRow; ++i)
+		for (int i = 0; i < mnMaxRow; ++i)
 		{
 			if (!IsUsed(i))
 			{
@@ -1061,7 +1061,7 @@ int NFCRecord::FindVector3(const int nCol, const NFVector3& value, NFDataList& v
 
 			if (GetVector3(i, nCol) == value)
 			{
-				varResult << i;
+				varResult << (int64_t)i;
 			}
 		}
 
@@ -1077,7 +1077,7 @@ int NFCRecord::FindRowByColValue(const int nCol, const NFData & var)
 	int nRowCount = FindRowByColValue(nCol, var, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1089,7 +1089,7 @@ int NFCRecord::FindInt(const int nCol, const NFINT64 value)
 	int nRowCount = FindInt(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1101,7 +1101,7 @@ int NFCRecord::FindFloat(const int nCol, const double value)
 	int nRowCount = FindFloat(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1113,7 +1113,7 @@ int NFCRecord::FindString(const int nCol, const std::string & value)
 	int nRowCount = FindString(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1125,7 +1125,7 @@ int NFCRecord::FindObject(const int nCol, const NFGUID & value)
 	int nRowCount = FindObject(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1137,7 +1137,7 @@ int NFCRecord::FindVector2(const int nCol, const NFVector2 & value)
 	int nRowCount = FindVector2(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1149,7 +1149,7 @@ int NFCRecord::FindVector3(const int nCol, const NFVector3 & value)
 	int nRowCount = FindVector3(nCol, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1172,7 +1172,7 @@ int NFCRecord::FindRowByColValue(const std::string & strColTag, const NFData & v
 	int nRowCount = FindRowByColValue(strColTag, var, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1184,7 +1184,7 @@ int NFCRecord::FindInt(const std::string & strColTag, const NFINT64 value)
 	int nRowCount = FindInt(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1196,7 +1196,7 @@ int NFCRecord::FindFloat(const std::string & strColTag, const double value)
 	int nRowCount = FindFloat(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1208,7 +1208,7 @@ int NFCRecord::FindString(const std::string & strColTag, const std::string & val
 	int nRowCount = FindString(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1220,7 +1220,7 @@ int NFCRecord::FindObject(const std::string & strColTag, const NFGUID & value)
 	int nRowCount = FindObject(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1232,7 +1232,7 @@ int NFCRecord::FindVector2(const std::string & strColTag, const NFVector2 & valu
 	int nRowCount = FindVector2(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;
@@ -1244,7 +1244,7 @@ int NFCRecord::FindVector3(const std::string & strColTag, const NFVector3 & valu
 	int nRowCount = FindVector3(strColTag, value, xDataList);
 	if (nRowCount > 0 && xDataList.GetCount() > 0)
 	{
-		return xDataList.Int(0);
+		return (int) xDataList.Int(0);
 	}
 
 	return -1;

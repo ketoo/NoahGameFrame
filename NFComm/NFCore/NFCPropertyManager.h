@@ -42,6 +42,7 @@ public:
 	virtual bool SetPropertyVector3(const std::string& strPropertyName, const NFVector3& value);
 
     virtual NFINT64 GetPropertyInt(const std::string& strPropertyName);
+	virtual int GetPropertyInt32(const std::string& strPropertyName);
     virtual double GetPropertyFloat(const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const std::string& strPropertyName);
     virtual const NFGUID& GetPropertyObject(const std::string& strPropertyName);

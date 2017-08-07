@@ -54,8 +54,8 @@ int NFCItemCardConsumeProcessModule::ConsumeLegal( const NFGUID& self, const std
 		return 0;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 
     return 100;
 }
@@ -74,8 +74,8 @@ int NFCItemCardConsumeProcessModule::ConsumeProcess( const NFGUID& self, const s
 		return 2;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemSubType());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 	const std::string& strExtendHeroCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
 
 	NFGUID xHeroID = m_pHeroModule->ActiviteHero(self, strExtendHeroCnfID);

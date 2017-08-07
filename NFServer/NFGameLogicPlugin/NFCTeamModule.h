@@ -33,7 +33,7 @@ public:
 
     virtual bool AfterInit();
 
-	virtual const NFGUID& CreateTeam( const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
+	virtual NFGUID CreateTeam( const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP);
 	virtual bool JoinTeam(const NFGUID& self, const NFGUID& xTeamID);
 	virtual bool LeaveTeam(const NFGUID& self, const NFGUID& xTeamID);
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember);
@@ -45,12 +45,12 @@ public:
     virtual bool BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 protected:
-	void OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnCreateTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnJoinTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLeaveTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnOprTeamMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-    void OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnTeamEnterEctypeProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     bool GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::TeamInfo& xTeamInfo);
 
 protected:

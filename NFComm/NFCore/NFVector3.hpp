@@ -58,9 +58,9 @@ public:
 
 	NFVector3(double coordinate[3])
 	{
-		this->x = coordinate[0];
-		this->y = coordinate[1];
-		this->z = coordinate[2];
+		this->x = (float) coordinate[0];
+		this->y = (float) coordinate[1];
+		this->z = (float) coordinate[2];
 	}
 
 	NFVector3(const NFVector3& v)

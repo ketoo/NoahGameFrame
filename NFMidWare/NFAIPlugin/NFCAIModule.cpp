@@ -58,7 +58,7 @@ NFIState* NFCAIModule::GetState(const NFAI_STATE eState)
 
 bool NFCAIModule::CreateAIObject(const NFGUID& self)
 {
-    //ÕâÀïÖ»ÊÇÎªÁËÒÔºó·½±ãÎ¬»¤×´Ì¬»úÊ±¼ä£¬½ÚÔ¼CPU
+    //è¿™é‡Œåªæ˜¯ä¸ºäº†ä»¥åŽæ–¹ä¾¿ç»´æŠ¤çŠ¶æ€æœºæ—¶é—´ï¼ŒèŠ‚çº¦CPU
     TOBJECTSTATEMACHINE::iterator it = mtObjectStateMachine.find(self);
     if (it == mtObjectStateMachine.end())
     {
@@ -133,12 +133,12 @@ void NFCAIModule::OnBeAttack(const NFGUID& self, const NFGUID& other, const int 
 void NFCAIModule::OnSpring(const NFGUID& self, const NFGUID& other)
 {
 	/*
-    //¸ù¾ÝÖ°Òµ,µÈ¼¶,ÑªÁ¿,·ÀÓù
-    //Õ½¶·×´Ì¬Ö»´ò³ðºÞÁÐ±íÄÚµÄÈË£¬Ñ²Âß,ÐÝÏÐ×´Ì¬²ÅÖØÐÂÕÒ¶ÔÏó´ò
+    //æ ¹æ®èŒä¸š,ç­‰çº§,è¡€é‡,é˜²å¾¡
+    //æˆ˜æ–—çŠ¶æ€åªæ‰“ä»‡æ¨åˆ—è¡¨å†…çš„äººï¼Œå·¡é€»,ä¼‘é—²çŠ¶æ€æ‰é‡æ–°æ‰¾å¯¹è±¡æ‰“
     NF_AI_SUB_TYPE subType = (NF_AI_SUB_TYPE)m_pKernelModule->GetPropertyInt(self, "SubType");
     if (NF_AI_SUB_TYPE::NFAST_INITATIVE == subType)
     {
-        //Íæ¼Ò»òÕßPET½øÈë
+        //çŽ©å®¶æˆ–è€…PETè¿›å…¥
         const std::string& strClassName = m_pKernelModule->GetPropertyString(other, "ClassName");
         if ("Player" == strClassName
             || "Pet" == strClassName)

@@ -38,11 +38,11 @@ public:
 
 protected:
 
-	void OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketMSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 	
-	void OnClientDisconnect(const int nAddress);
+	void OnClientDisconnect(const NFSOCK nAddress);
 	
-	void OnClientConnected(const int nAddress);
+	void OnClientConnected(const NFSOCK nAddress);
 
 	virtual void LogServerInfo(const std::string& strServerInfo);
 
@@ -51,10 +51,10 @@ protected:
 	void ServerReport();
 	void RefreshWorldInfo();
 
-	void OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServerProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnKickClientProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void InvalidMessage(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 private:
 	NFINT64 mLastReportTime;
 

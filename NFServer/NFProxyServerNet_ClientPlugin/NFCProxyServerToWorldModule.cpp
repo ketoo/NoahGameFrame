@@ -38,7 +38,7 @@ bool NFCProxyServerToWorldModule::Execute()
 	return true;
 }
 
-void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCProxyServerToWorldModule::OnServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
     NFMsg::ServerInfoReportList xMsg;
@@ -80,7 +80,7 @@ void NFCProxyServerToWorldModule::OnServerInfoProcess(const int nSockIndex, cons
     }
 }
 
-void NFCProxyServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCProxyServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
@@ -111,13 +111,13 @@ void NFCProxyServerToWorldModule::Register(NFINet* pNet)
 		{
 			const std::string& strId = strIdList[i];
 
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
             if (nServerType == NF_SERVER_TYPES::NF_ST_PROXY && pPluginManager->GetAppID() == nServerID)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -161,12 +161,12 @@ void NFCProxyServerToWorldModule::ServerReport()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if ( pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -209,7 +209,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 		std::vector<std::string>::const_iterator itr =
 			std::find_if(strIdList.begin(), strIdList.end(), [&](const std::string& strConfigId)
 		{
-			return nCurAppID == m_pElementModule->GetPropertyInt(strConfigId, NFrame::Server::ServerID());
+			return nCurAppID == m_pElementModule->GetPropertyInt32(strConfigId, NFrame::Server::ServerID());
 		});
 
 		if (strIdList.end() == itr)
@@ -221,20 +221,20 @@ bool NFCProxyServerToWorldModule::AfterInit()
 			exit(0);
 		}
 
-		const int nCurArea = m_pElementModule->GetPropertyInt(*itr, NFrame::Server::Area());
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
 
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
 
-            const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-            const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
-			const int nServerArea = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Area());
+            const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+            const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			const int nServerArea = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Area());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && nCurArea == nServerArea)
             {
-                const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+                const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -255,7 +255,7 @@ bool NFCProxyServerToWorldModule::AfterInit()
 }
 
 
-void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCProxyServerToWorldModule::OnSelectServerResultProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     
     NFGUID nPlayerID;
@@ -301,7 +301,7 @@ void NFCProxyServerToWorldModule::LogServerInfo(const std::string& strServerInfo
     m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), strServerInfo, "");
 }
 
-void NFCProxyServerToWorldModule::OnOtherMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCProxyServerToWorldModule::OnOtherMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	m_pProxyServerNet_ServerModule->Transpond(nSockIndex, nMsgID, msg, nLen);
 }

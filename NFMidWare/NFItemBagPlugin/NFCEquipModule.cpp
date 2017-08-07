@@ -319,10 +319,10 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 		return false;
 	}
 
-	const int nEquipRow = xEquipDataList.Int(0);
-	const int nHeroRow = xHeroDataList.Int(0);
+	const int nEquipRow = xEquipDataList.Int32(0);
+	const int nHeroRow = xHeroDataList.Int32(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nEquipPos = m_pElementModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
+	const int nEquipPos = m_pElementModule->GetPropertyInt32(strEquipID, NFrame::Equip::ItemSubType());
 
     if (nEquipRow < 0
 		|| nHeroRow < 0
@@ -380,10 +380,10 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
 		return false;
 	}
 
-	const int nEquipRow = xEquipDataList.Int(0);
-	const int nHeroRow = xHeroDataList.Int(0);
+	const int nEquipRow = xEquipDataList.Int32(0);
+	const int nHeroRow = xHeroDataList.Int32(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nEquipPos = m_pElementModule->GetPropertyInt(strEquipID, NFrame::Equip::ItemSubType());
+	const int nEquipPos = m_pElementModule->GetPropertyInt32(strEquipID, NFrame::Equip::ItemSubType());
 
 	if (nEquipRow < 0
 		|| nHeroRow < 0
@@ -432,7 +432,7 @@ bool NFCEquipModule::SetEquipRandPropertyID(const NFGUID& self, const NFGUID& id
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
+	const int nRow = xDataList.Int32(0);
 	pRecord->SetString(nRow, NFrame::Player::BagEquipList::RandPropertyID, strPropertyID);
 
 	return true;
@@ -464,8 +464,8 @@ bool NFCEquipModule::AddEquipHoleCount(const NFGUID& self, const NFGUID& id)
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
-	const int nSoltCount = pRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
+	const int nRow = xDataList.Int32(0);
+	const int nSoltCount = pRecord->GetInt32(nRow, NFrame::Player::BagEquipList::SlotCount);
 	pRecord->SetInt(nRow, NFrame::Player::BagEquipList::SlotCount, nSoltCount + 1);
 
 	return true;
@@ -497,8 +497,8 @@ int NFCEquipModule::GetEquipHoleCount(const NFGUID & self, const NFGUID & id)
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
-	return pRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
+	const int nRow = xDataList.Int32(0);
+	return pRecord->GetInt32(nRow, NFrame::Player::BagEquipList::SlotCount);
 }
 
 bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, const int eIndex, const std::string& strStoneID)
@@ -538,8 +538,8 @@ bool NFCEquipModule::SetEquipInlayStoneID(const NFGUID& self, const NFGUID& id, 
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
-	const int nSoltCount = pRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
+	const int nRow = xDataList.Int32(0);
+	const int nSoltCount = pRecord->GetInt32(nRow, NFrame::Player::BagEquipList::SlotCount);
 	if ((eIndex - NFrame::Player::BagEquipList::InlayStone1) <= nSoltCount)
 	{
 		return false;
@@ -576,8 +576,8 @@ bool NFCEquipModule::AddEquipIntensifyLevel(const NFGUID& self, const NFGUID& id
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
-	const int nLevel = pRecord->GetInt(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
+	const int nRow = xDataList.Int32(0);
+	const int nLevel = pRecord->GetInt32(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
 	pRecord->SetInt(nRow, NFrame::Player::BagEquipList::IntensifyLevel, nLevel + 1);
 
 	return true;
@@ -609,8 +609,8 @@ int NFCEquipModule::GetEquipIntensifyLevel(const NFGUID & self, const NFGUID & i
 		return -1;
 	}
 
-	const int nRow = xDataList.Int(0);
-	return pRecord->GetInt(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
+	const int nRow = xDataList.Int32(0);
+	return pRecord->GetInt32(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
 }
 
 bool NFCEquipModule::AddEquipElementLevel(const NFGUID& self, const NFGUID& id, int eIndex)
@@ -645,7 +645,7 @@ bool NFCEquipModule::AddEquipElementLevel(const NFGUID& self, const NFGUID& id, 
 		return false;
 	}
 
-	const int nRow = xDataList.Int(0);
+	const int nRow = xDataList.Int32(0);
 	const int nLevel = GetEquipElementLevel(self, id, eIndex);
 	pRecord->SetInt(nRow, eIndex, nLevel + 1);
 
@@ -684,13 +684,13 @@ int NFCEquipModule::GetEquipElementLevel(const NFGUID & self, const NFGUID & id,
 		return -1;
 	}
 
-	const int nRow = xDataList.Int(0);
-	return pRecord->GetInt(nRow, eIndex);
+	const int nRow = xDataList.Int32(0);
+	return pRecord->GetInt32(nRow, eIndex);
 }
 
 //////////////////////////////////////////////////////////////////////////
 //msg process
-void NFCEquipModule::OnIntensifylevelToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnIntensifylevelToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
 
@@ -707,7 +707,7 @@ void NFCEquipModule::OnIntensifylevelToEquipMsg( const int nSockIndex, const int
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
 }
 
-void NFCEquipModule::OnHoleToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnHoleToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
 
@@ -724,7 +724,7 @@ void NFCEquipModule::OnHoleToEquipMsg( const int nSockIndex, const int nMsgID, c
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
 }
 
-void NFCEquipModule::OnInlaystoneToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnInlaystoneToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
 
@@ -743,7 +743,7 @@ void NFCEquipModule::OnInlaystoneToEquipMsg( const int nSockIndex, const int nMs
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
 }
 
-void NFCEquipModule::OnElementlevelToEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnElementlevelToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
 
@@ -760,7 +760,7 @@ void NFCEquipModule::OnElementlevelToEquipMsg( const int nSockIndex, const int n
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
 }
 
-void NFCEquipModule::OnReqWearEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnReqWearEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqWearEquip);
 
@@ -771,7 +771,7 @@ void NFCEquipModule::OnReqWearEquipMsg( const int nSockIndex, const int nMsgID, 
 	DressEquipForHero(self, xTarget, xEquipID);
 }
 
-void NFCEquipModule::OnTakeOffEquipMsg( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
+void NFCEquipModule::OnTakeOffEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::TakeOffEquip);
 	const NFGUID self = nPlayerID;

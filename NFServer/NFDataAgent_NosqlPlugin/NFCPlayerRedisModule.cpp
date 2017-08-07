@@ -214,10 +214,10 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 	{
 		const NFMsg::PropertyInt& xPropertyData = xPlayerDataCache->xPbPropertyCacheList.property_int_list(i);
 		const std::string& strPropertyName = xPropertyData.property_name();
-		const NFINT64 xPropertyValue = xPropertyData.data();
 		if (strPropertyName == NFrame::Player::HomeSceneID())
 		{
-			xPlayerDataCache->nHomeSceneID = xPropertyValue;
+			const NFINT64 xPropertyValue = xPropertyData.data();
+			xPlayerDataCache->nHomeSceneID = (int)xPropertyValue;
 			break;
 		}
 	}
@@ -270,7 +270,7 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandom(const int nSceneID, NFGUID& xPla
 		std::vector<std::string> vKeys;
 		if (xNoSqlDriver->HKeys(strTileKey, vKeys))
 		{
-			int nKeyIndex = m_pKernelModule->Random(0, vKeys.size());
+			int nKeyIndex = m_pKernelModule->Random(0, (int)vKeys.size());
 			std::string strKey = vKeys[nKeyIndex];
 			if (xPlayer.FromString(strKey) && xNoSqlDriver->HGet(strTileKey, strKey, strTileData))
 			{
@@ -396,8 +396,8 @@ int NFCPlayerRedisModule::OnObjectGuildEvent(const NFGUID & self, const std::str
 
 void NFCPlayerRedisModule::OnOnline(const NFGUID & self)
 {
-	const int nGateID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GateID());
-	const int nServerID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GameID());
+	const int nGateID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GateID());
+	const int nServerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GameID());
 }
 
 void NFCPlayerRedisModule::OnOffline(const NFGUID & self)
