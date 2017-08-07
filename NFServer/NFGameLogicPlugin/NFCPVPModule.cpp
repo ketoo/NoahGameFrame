@@ -1,4 +1,4 @@
-﻿// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 //    @FileName         :    NFCPVPModule.cpp
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2017-02-02
@@ -8,7 +8,13 @@
 
 #include "NFCPVPModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCPVPModule::Init()
@@ -70,7 +76,7 @@ bool NFCPVPModule::ReadyExecute()
 
 
 
-void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqSearchOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	//find a tile map and swap scene
@@ -112,10 +118,10 @@ void NFCPVPModule::OnReqSearchOppnentProcess(const int nSockIndex, const int nMs
 	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
 }
 
-void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
-	int nHomeSceneID = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HomeSceneID());
+	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
 
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), nPlayerID);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());
@@ -134,7 +140,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const int nSockIndex, const int nMs
 	*/
 }
 
-void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqStartPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
 
@@ -158,7 +164,7 @@ void NFCPVPModule::OnReqStartPVPOppnentProcess(const int nSockIndex, const int n
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_START_OPPNENT, xReqAckStartBattle, nPlayerID);
 }
 
-void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqEndPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
 
@@ -171,8 +177,8 @@ void NFCPVPModule::OnReqEndPVPOppnentProcess(const int nSockIndex, const int nMs
 
 	//tell client the end information
 	//set oppnent 0
-	int nGambleGold = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GambleGold());
-	int nGambleDiamond = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GambleDiamond());
+	int64_t nGambleGold = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GambleGold());
+	int nGambleDiamond = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::GambleDiamond());
 	
 	m_pPropertyModule->AddGold(nPlayerID, nGambleGold);
 	m_pPropertyModule->AddDiamond(nPlayerID, nGambleDiamond);
@@ -199,7 +205,7 @@ void NFCPVPModule::FindAllTileScene()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Scene::Tile());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Scene::Tile());
 			if (nServerType == 1)
 			{
 				mxTileSceneIDList.push_back(lexical_cast<int>(strId));
@@ -282,5 +288,5 @@ int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nScen
 
 int NFCPVPModule::RandomTileScene()
 {
-	return mxTileSceneIDList.at(m_pKernelModule->Random(0, mxTileSceneIDList.size()));
+	return mxTileSceneIDList.at(m_pKernelModule->Random(0, (int)mxTileSceneIDList.size()));
 }

@@ -34,7 +34,7 @@ bool NFCPropertyConfigModule::AfterInit()
     return true;
 }
 
-int NFCPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty)
+NFINT64 NFCPropertyConfigModule::CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty)
 {
 	NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);
 	if (xPropertyMap)
@@ -62,8 +62,8 @@ void NFCPropertyConfigModule::Load()
             NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pElementModule->GetPropertyManager(strId);
             if (pPropertyManager)
             {
-                int nJob = m_pElementModule->GetPropertyInt(strId, NFrame::InitProperty::Job());
-                int nLevel = m_pElementModule->GetPropertyInt(strId, NFrame::InitProperty::Level());
+                int nJob = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Job());
+                int nLevel = m_pElementModule->GetPropertyInt32(strId, NFrame::InitProperty::Level());
                 std::string strEffectData = m_pElementModule->GetPropertyString(strId, NFrame::InitProperty::EffectData());
 
 				NF_SHARE_PTR <NFMapEx<int, std::string> > xPropertyMap = mhtCoefficienData.GetElement(nJob);

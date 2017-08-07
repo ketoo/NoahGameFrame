@@ -166,6 +166,17 @@ NFINT64 NFCObject::GetPropertyInt(const std::string& strPropertyName)
     return 0;
 }
 
+int NFCObject::GetPropertyInt32(const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(strPropertyName);
+	if (pProperty)
+	{
+		return pProperty->GetInt32();
+	}
+
+	return 0;
+}
+
 double NFCObject::GetPropertyFloat(const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetPropertyManager()->GetElement(strPropertyName);

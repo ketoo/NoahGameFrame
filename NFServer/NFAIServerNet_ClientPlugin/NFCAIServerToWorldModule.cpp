@@ -46,13 +46,13 @@ void NFCAIServerToWorldModule::Register(NFINet* pNet)
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_AI && pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -97,12 +97,12 @@ void NFCAIServerToWorldModule::ServerReport()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -177,20 +177,20 @@ bool NFCAIServerToWorldModule::AfterInit()
 			exit(0);
 		}
 
-		const int nCurArea = m_pElementModule->GetPropertyInt(*itr, NFrame::Server::Area());
+		const int nCurArea = m_pElementModule->GetPropertyInt32(*itr, NFrame::Server::Area());
 
 		for (int i = 0; i < strIdList.size(); ++i)
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
-			const int nServerArea = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Area());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
+			const int nServerArea = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Area());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && nCurArea == nServerArea)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -210,7 +210,7 @@ bool NFCAIServerToWorldModule::AfterInit()
 	return true;
 }
 
-void NFCAIServerToWorldModule::OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCAIServerToWorldModule::OnSocketWSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
@@ -268,7 +268,7 @@ void NFCAIServerToWorldModule::SendOffline(const NFGUID& self)
 
 }
 
-void NFCAIServerToWorldModule::TransPBToProxy(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCAIServerToWorldModule::TransPBToProxy(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	std::string strData;

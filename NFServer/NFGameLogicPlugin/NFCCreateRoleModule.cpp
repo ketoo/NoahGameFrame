@@ -32,7 +32,7 @@ bool NFCCreateRoleModule::AfterInit()
 	return true;
 }
 
-void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCCreateRoleModule::OnReqiureRoleListProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
@@ -77,7 +77,7 @@ void NFCCreateRoleModule::OnReqiureRoleListProcess(const int nSockIndex, const i
 	//}
 }
 
-void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCCreateRoleModule::OnCreateRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqCreateRole xMsg;
@@ -111,7 +111,7 @@ void NFCCreateRoleModule::OnCreateRoleGameProcess(const int nSockIndex, const in
 	}
 }
 
-void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCCreateRoleModule::OnDeleteRoleGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqRoleList xMsg;
@@ -124,7 +124,7 @@ void NFCCreateRoleModule::OnDeleteRoleGameProcess(const int nSockIndex, const in
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_ROLE_LIST, xAckRoleLiteInfoList, nClientID);
 }
 
-void NFCCreateRoleModule::OnClienEnterGameProcess(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	NFGUID nClientID;
 	NFMsg::ReqEnterGameServer xMsg;

@@ -118,7 +118,7 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 	return false;
 }
 
-void NFCTileModule::ReqMineTile(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCTileModule::ReqMineTile(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
@@ -398,7 +398,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 		}
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	std::string strData;
 	if (xData.SerializeToString(&strData))
 	{
@@ -410,7 +410,7 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 
 bool NFCTileModule::LoadTileData(const NFGUID & self)
 {
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HomeSceneID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	LoadTileData(self, nSceneID);
 
 	return false;
@@ -529,6 +529,7 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 	{
 		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, self);
 	}
+	return true;
 }
 
 int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)

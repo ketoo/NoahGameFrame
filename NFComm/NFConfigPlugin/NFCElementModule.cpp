@@ -282,6 +282,17 @@ NFINT64 NFCElementModule::GetPropertyInt(const std::string& strConfigName, const
     return 0;
 }
 
+int NFCElementModule::GetPropertyInt32(const std::string& strConfigName, const std::string& strPropertyName)
+{
+	NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
+	if (pProperty)
+	{
+		return pProperty->GetInt32();
+	}
+
+	return 0;
+}
+
 double NFCElementModule::GetPropertyFloat(const std::string& strConfigName, const std::string& strPropertyName)
 {
     NF_SHARE_PTR<NFIProperty> pProperty = GetProperty(strConfigName, strPropertyName);
@@ -304,7 +315,7 @@ const std::string& NFCElementModule::GetPropertyString(const std::string& strCon
     return  NULL_STR;
 }
 
-const std::vector<std::string> NFCElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, const int nValue)
+const std::vector<std::string> NFCElementModule::GetListByProperty(const std::string & strClassName, const std::string & strPropertyName, NFINT64 nValue)
 {
 	std::vector<std::string> xList;
 
@@ -315,7 +326,7 @@ const std::vector<std::string> NFCElementModule::GetListByProperty(const std::st
 		for (int i = 0; i < xElementList.size(); ++i)
 		{
 			const std::string& strConfigID = xElementList[i];
-			int nElementValue = GetPropertyInt(strConfigID, strPropertyName);
+			NFINT64 nElementValue = GetPropertyInt(strConfigID, strPropertyName);
 			if (nValue == nElementValue)
 			{
 				xList.push_back(strConfigID);
