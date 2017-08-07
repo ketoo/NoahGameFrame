@@ -283,7 +283,7 @@ void NFCGameServerToWorldModule::TransPBToProxy(const int nSockIndex, const int 
 	return;
 }
 
-virtual void TransmitToWorld(const NFINT64 nHashKey, const int nMsgID, const google::protobuf::Message& xData)
+void NFCGameServerToWorldModule::TransmitToWorld(const int nHashKey, const int nMsgID, const google::protobuf::Message& xData)
 {
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFINT64, nMsgID, xData);
+	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, xData);
 }

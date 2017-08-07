@@ -1902,13 +1902,7 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const int nSockIndex, const int
 
 void NFCGameServerNet_ServerModule::OnGuildTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
-
-	case (nMsgID)
+	switch (nMsgID)
 	{
 		case NFMsg::EGMI_REQ_CREATE_GUILD:
 		case NFMsg::EGMI_REQ_JOIN_GUILD:

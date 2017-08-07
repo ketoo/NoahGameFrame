@@ -166,7 +166,7 @@ void NFCNetClientModule::SendToAllServer(const NF_SERVER_TYPES eType, const int 
 	}
 }
 
-void NFCNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message & xData)
+void NFCNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message & xData)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.GetElement(nServerID);
 	if (pServer)
@@ -179,7 +179,7 @@ void NFCNetClientModule::SendToServerByPB(const int nServerID, const uint16_t nM
 	}
 }
 
-void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message & xData)
+void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message & xData)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -194,7 +194,7 @@ void NFCNetClientModule::SendToAllServerByPB(const uint16_t nMsgID, google::prot
 	}
 }
 
-void NFCNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message & xData)
+void NFCNetClientModule::SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message & xData)
 {
 	NF_SHARE_PTR<ConnectData> pServer = mxServerMap.First();
 	while (pServer)
@@ -239,13 +239,13 @@ void NFCNetClientModule::SendBySuit(const NF_SERVER_TYPES eType, const int & nHa
 	}
 }
 
-void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t nMsgID, google::protobuf::Message & xData)
+void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const std::string & strHashKey, const uint16_t nMsgID, const google::protobuf::Message & xData)
 {
 	uint32_t nCRC32 = NFrame::CRC32(strHashKey);
 	SendSuitByPB(eType, nCRC32, nMsgID, xData);
 }
 
-void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & nHashKey, const uint16_t nMsgID, google::protobuf::Message & xData)
+void NFCNetClientModule::SendSuitByPB(const NF_SERVER_TYPES eType, const int & nHashKey, const uint16_t nMsgID, const google::protobuf::Message & xData)
 {
 	NF_SHARE_PTR<NFConsistentHashMapEx<int, ConnectData>> xConnectDataMap = mxServerTypeMap.GetElement(eType);
 	if (xConnectDataMap)
