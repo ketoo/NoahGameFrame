@@ -41,7 +41,7 @@ bool NFCChatLogic::AfterInit()
 	g_pNetLogic->AddReceiveCallBack(NFMsg::EGMI_ACK_CHAT, this, &NFCChatLogic::OnChatProcess);
     return true;
 }
-//--------------------------------------------∑¢œ˚œ¢-------------------------------------------------------------
+//--------------------------------------------ÂèëÊ∂àÊÅØ-------------------------------------------------------------
 void NFCChatLogic::RequireChatWorld(std::string strContent)
 {
 	NFMsg::ReqAckPlayerChat xMsg;
@@ -83,8 +83,8 @@ void NFCChatLogic::RequireChatTeam(std::string strContent)
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_CHAT, xMsg);
 }
 
-//-------------------------------------------- ’œ˚œ¢-------------------------------------------------------------
-void NFCChatLogic::OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+//--------------------------------------------Êî∂Ê∂àÊÅØ-------------------------------------------------------------
+void NFCChatLogic::OnChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerChat xMsg;

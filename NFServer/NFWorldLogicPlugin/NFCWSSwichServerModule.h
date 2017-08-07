@@ -37,8 +37,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-	void OnReqSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnAckSwichServer( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnReqSwichServer( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnAckSwichServer( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 private:
 	NFINetModule*				m_pNetModule;

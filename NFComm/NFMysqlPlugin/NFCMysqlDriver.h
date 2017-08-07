@@ -98,8 +98,8 @@ private:
     std::string mstrDBUser  ;
     std::string mstrDBPwd   ;
 
-    mysqlpp::Connection* m_pMysqlConnect; // mysql连接对象
-    float mfCheckReconnect;             //检查重连的时间
+    mysqlpp::Connection* m_pMysqlConnect; // mysql杩炴帴瀵硅薄
+    float mfCheckReconnect;             //妫�鏌ラ噸杩炵殑鏃堕棿
 
     int mnReconnectTime;
     int mnReconnectCount;

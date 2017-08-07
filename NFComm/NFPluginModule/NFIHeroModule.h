@@ -27,7 +27,7 @@ public:
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
 	virtual NFGUID ActiviteHero(const NFGUID& self, const string& strID) = 0;
 	virtual bool ActiviteHero(const NFGUID& self, const NFGUID& hero) = 0;
-    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp) = 0;
+    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp) = 0;
     virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID) = 0;
     virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;
 	virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex) = 0;

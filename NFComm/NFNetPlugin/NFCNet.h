@@ -19,7 +19,6 @@
 
 #pragma pack(push, 1)
 
-
 class NFCNet : public NFINet
 {
 public:
@@ -41,7 +40,7 @@ public:
     }
 
     template<typename BaseType>
-    NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const int, const NF_NET_EVENT, NFINet*))
+    NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const NFSOCK, const NF_NET_EVENT, NFINet*))
     {
         base = NULL;
         listener = NULL;
@@ -71,18 +70,18 @@ public:
     virtual bool Final();
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<int>& fdList);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
 
     
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen);
 
 
-    virtual bool CloseNetObject(const int nSockIndex);
-    virtual bool AddNetObject(const int nSockIndex, NetObject* pObject);
-    virtual NetObject* GetNetObject(const int nSockIndex);
+    virtual bool CloseNetObject(const NFSOCK nSockIndex);
+    virtual bool AddNetObject(const NFSOCK nSockIndex, NetObject* pObject);
+    virtual NetObject* GetNetObject(const NFSOCK nSockIndex);
 
     virtual bool IsServer();
     virtual bool Log(int severity, const char* msg);
@@ -92,10 +91,13 @@ private:
     bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
 
     
-    bool SendMsg(const char* msg, const uint32_t nLen, const std::list<int>& fdList);
+    bool SendMsg(const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
+    bool SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
 
-    
-    bool SendMsg(const char* msg, const uint32_t nLen, const int nSockIndex);
+	inline bool SendMsgToAllClient(const char* msg, const size_t nLen) { return SendMsgToAllClient(msg, (uint32_t)nLen); }
+	inline bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList) { return SendMsg(msg, (uint32_t)nLen, fdList); }
+	inline bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex) { return SendMsg(msg, (uint32_t)nLen, nSockIndex); }
+
 
 private:
     void ExecuteClose();
@@ -106,7 +108,7 @@ private:
 
     int InitClientNet();
     int InitServerNet();
-    void CloseObject(const int nSockIndex);
+    void CloseObject(const NFSOCK nSockIndex);
 
     static void listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data);
     static void conn_readcb(struct bufferevent* bev, void* user_data);
@@ -122,8 +124,8 @@ private:
     //<fd,object>
 
 
-    std::map<int, NetObject*> mmObject;
-    std::vector<int> mvRemoveObject;
+    std::map<NFSOCK, NetObject*> mmObject;
+    std::vector<NFSOCK> mvRemoveObject;
 
     int mnMaxConnect;
     std::string mstrIP;

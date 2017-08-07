@@ -122,13 +122,13 @@ public:
 		return mSelf->AddBeginunc(nSubMessage, functorPtr);
 	}
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex)
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex)
 	{
 		return true;
 
 	}
 
-	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const uint32_t nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
+	virtual bool SendMsgPB(const uint16_t nMsgID, const std::string& strData, const NFSOCK nSockIndex, const NFGUID nPlayer, const std::vector<NFGUID>* pClientIDList = NULL)
 	{
 		return true;
 	}

@@ -9,7 +9,14 @@
 #ifndef NFC_DATABASEDRIVER_H
 #define NFC_DATABASEDRIVER_H
 
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267 4101 4390)
+#endif
 #include "Dependencies/redis-cplusplus-client/redisclient.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267 4101 4390)
+#endif
+
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 
 class  NFCNoSqlDriver : public NFINoSqlDriver

@@ -37,19 +37,19 @@ bool NFCChaseState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
         NFIStateMachine* pStateMachine = m_pAIModule->GetStateMachine(self);
         if (pStateMachine)
         {
-            //查找是否有可以攻击的对象
+            //鏌ユ壘鏄惁鏈夊彲浠ユ敾鍑荤殑瀵硅薄
 			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
             NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
             {
-                // 增加技能是否可以用判断
+                // 澧炲姞鎶�鑳芥槸鍚﹀彲浠ョ敤鍒ゆ柇
                 if (NFSkillTestSkillResult::NFSTSR_OK == m_pAIModule->CanUseAnySkill(self, ident))
                 {
                     pStateMachine->ChangeState(FightState);
                 }
                 else
                 {
-                    // 走向目标
+                    // 璧板悜鐩爣
 					if (NFAI_MOVE_TYPE::NO_MOVE_TYPE == eMoveType)
 					{
 						m_pKernelModule->SetPropertyFloat(self, "X", m_pKernelModule->GetPropertyFloat(ident, "X"));

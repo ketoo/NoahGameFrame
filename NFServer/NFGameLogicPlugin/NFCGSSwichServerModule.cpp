@@ -78,7 +78,7 @@ bool NFCGSSwichServerModule::ChangeServer(const NFGUID& self, const int nServer,
 	return true;
 }
 
-void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGSSwichServerModule::OnClientReqSwichServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
@@ -88,14 +88,14 @@ void NFCGSSwichServerModule::OnClientReqSwichServer(const int nSockIndex, const 
 
 	if (xMsg.target_serverid() == pPluginManager->GetAppID())
 	{
-		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is this server", xMsg.target_serverid(), __FUNCTION__, __LINE__);
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "Target server is this server", (int)xMsg.target_serverid(), __FUNCTION__, __LINE__);
 		return;
 	}
 
 	ChangeServer(nPlayerID, xMsg.target_serverid(), xMsg.sceneid(), xMsg.groupid());
 }
 
-void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGSSwichServerModule::OnReqSwichServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
@@ -110,9 +110,9 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 	}
 
 	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
-	const int nGateID = xMsg.gate_serverid(); 
-    const int nSceneID = xMsg.sceneid();
-    const int nGroup = xMsg.groupid();
+	const int nGateID = (int)xMsg.gate_serverid(); 
+    const int nSceneID = (int)xMsg.sceneid();
+    const int nGroup = (int)xMsg.groupid();
 
 	//if (!AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
  //   {
@@ -149,7 +149,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
 	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
 }
 
-void NFCGSSwichServerModule::OnAckSwichServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCGSSwichServerModule::OnAckSwichServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::AckSwitchServer);
 	if (nPlayerID != NFINetModule::PBToNF((xMsg.selfid())))

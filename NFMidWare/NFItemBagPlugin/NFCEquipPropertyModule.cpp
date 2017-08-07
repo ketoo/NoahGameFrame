@@ -7,7 +7,14 @@
 // -------------------------------------------------------------------------
 
 #include "NFCEquipPropertyModule.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
+
 
 bool NFCEquipPropertyModule::Init()
 {
@@ -49,7 +56,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	NFDataList xEquipBaseValue;
@@ -69,11 +76,11 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 
 	for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
 	{
-		int nBaseValue = 0;
-		int nRandonValue = 0;
-		int nGemValue = 0;
-		int nIntensifyValue = 0;
-		int nElementValue = 0;
+		int64_t nBaseValue = 0;
+		int64_t nRandonValue = 0;
+		int64_t nGemValue = 0;
+		int64_t nIntensifyValue = 0;
+		int64_t nElementValue = 0;
 
 		if (xEquipBaseValue.GetCount() == pCommPropertyValueRecord->GetCols())
 		{
@@ -96,7 +103,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 			nElementValue = xEquipElementValue.Int(i);
 		}
 
-		int nAllValue = nBaseValue + nRandonValue + nGemValue + nIntensifyValue + nElementValue;
+		int64_t nAllValue = nBaseValue + nRandonValue + nGemValue + nIntensifyValue + nElementValue;
 
 		xDataList.AddInt(nAllValue);
 	}
@@ -125,7 +132,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	/////////////PropertyBase/////////////////////////////////////////
@@ -137,7 +144,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 		for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(i);
-			int nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			int64_t nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 			xDataList.AddInt(nValue);
 		}
 	}
@@ -165,7 +172,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	/////////////RandomBase/////////////////////////////////////////
@@ -177,7 +184,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 		for (int i = 0; i < pCommPropertyValueRecord->GetCols(); ++i)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(i);
-			int nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
+			int64_t nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 			xDataList.AddInt(nValue);
 		}
 	}
@@ -205,11 +212,11 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	/////////////GemBase/////////////////////////////////////////
-	int nSlotCount = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::SlotCount);
+	int nSlotCount = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::SlotCount);
 	if (nSlotCount <= 0)
 	{
 		return false;
@@ -244,8 +251,8 @@ bool NFCEquipPropertyModule::CalEquipGemProperty(const NFGUID& self, const NFGUI
 		for (int j = 0; j < pCommPropertyValueRecord->GetCols(); ++j)
 		{
 			const std::string& strColTag = pCommPropertyValueRecord->GetColTag(j);
-			int nValue = m_pElementModule->GetPropertyInt(strGemEffectData, strColTag);
-			int nOldValue = xDataList.Int(j);
+			int64_t nValue = m_pElementModule->GetPropertyInt(strGemEffectData, strColTag);
+			int64_t nOldValue = xDataList.Int(j);
 
 			xDataList.SetInt(j, nOldValue + nValue);
 		}
@@ -274,20 +281,20 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	/////////////GemBase/////////////////////////////////////////
-	const int nIntensify = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
+	const int nIntensify = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::IntensifyLevel);
 	if (nIntensify <= 0)
 	{
 		return false;
 	}
 
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
-	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
+	const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
 	{
 		return false;
@@ -341,14 +348,14 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 		return false;
 	}
 
-	const int nRow = varFind.Int(0);
+	const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	/////////////element/////////////////////////////////////////
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::HeroTye());
-	const int nItemType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt(strEquipConfig, NFrame::Item::ItemSubType());
+	const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemType());
+	const int nItemSubType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
 	{
 		return false;
@@ -362,11 +369,11 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 	//conditional the item type to define what property to give
 	double dwCoefficientAtk = 2.0;
 	double dwCoefficientDef = 1.0;
-	int nFireLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel1_FIRE);
-	int nLightLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel2_LIGHT);
-	int nWindLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel3_Wind);
-	int nIceLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel4_ICE);
-	int nPoisonLevel = pBagRecord->GetInt(nRow, NFrame::Player::BagEquipList::ElementLevel5_POISON);
+	int nFireLevel = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::ElementLevel1_FIRE);
+	int nLightLevel = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::ElementLevel2_LIGHT);
+	int nWindLevel = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::ElementLevel3_Wind);
+	int nIceLevel = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::ElementLevel4_ICE);
+	int nPoisonLevel = pBagRecord->GetInt32(nRow, NFrame::Player::BagEquipList::ElementLevel5_POISON);
 
 	int nWindValue = nWindLevel * nWindLevel;
 	int nFireValue = nFireLevel * nFireLevel;

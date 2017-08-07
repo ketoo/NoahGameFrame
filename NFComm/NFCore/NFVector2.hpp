@@ -50,8 +50,8 @@ public:
 
 	NFVector2(double coordinate[2])
 	{
-		this->x = coordinate[0];
-		this->y = coordinate[1];
+		this->x = (float) coordinate[0];
+		this->y = (float) coordinate[1];
 	}
 
 	NFVector2(const NFVector2& v)

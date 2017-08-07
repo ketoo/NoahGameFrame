@@ -34,10 +34,10 @@ public:
     virtual bool Shut();
     virtual bool ReadyExecute();
     virtual bool Execute();
-
+	
     virtual bool AfterInit();
 
-	// ∑¢ÀÕœ˚œ¢
+	// ÂèëÈÄÅÊ∂àÊÅØ
 public:
 	void LoginPB(const std::string &strAccount, const std::string &strPwd, const std::string &strKey);
 	void RequireWorldList();
@@ -48,13 +48,13 @@ public:
 
 	void RequireRoleList();
 
-	// Ω” ’œ˚œ¢
+	// Êé•Êî∂Ê∂àÊÅØ
 private:
-	void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnWorldList(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnConnectWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnConnectKey(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnSelectServer(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnWorldList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnConnectWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnConnectKey(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnSelectServer(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 public:
 	std::vector<NFMsg::ServerInfo> GetWorldList() { return m_WorldServerList; }

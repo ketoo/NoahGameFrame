@@ -51,7 +51,7 @@ protected:
 	bool DoAwardPack( const NFGUID& self, const std::string& strAwardPack);
 
 protected:
-	void OnClientUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
     NFIEventModule* m_pEventModule;
