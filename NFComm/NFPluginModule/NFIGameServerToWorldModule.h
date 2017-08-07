@@ -17,7 +17,7 @@ class NFIGameServerToWorldModule
 	: public NFIModule
 {
 public:
-	virtual void TransmitToWorld(const NFINT64 nHashKey, const int nMsgID, const google::protobuf::Message& xData) = 0;
+	virtual void TransmitToWorld(const int nHashKey, const int nMsgID, const google::protobuf::Message& xData) = 0;
 
 };
 

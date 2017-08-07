@@ -76,32 +76,6 @@ void NFCGuildModule::OnCreateGuildProcess(const int nSockIndex, const int nMsgID
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
 
-	m_pGuildDataModule->
-	/*
-	m_pGuildDataModule->GetPlayerInfo(nPlayerID, strRoleName, nLevel, nJob, nDonation, nVIP);
-	NFGUID xGuild = CreateGuild(nPlayerID, xMsg.guild_name(), strRoleName, nLevel, nJob, nDonation, nVIP);
-
-	if (!xGuild.IsNull())
-	{
-		NFMsg::ReqAckCreateGuild xAck;
-		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
-		xAck.set_guild_name(xMsg.guild_name());
-
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
-	}
-	else
-	{
-		NFMsg::ReqAckCreateGuild xAck;
-		*xAck.mutable_guild_id() = NFINetModule::NFToPB(xGuild);
-		xAck.set_guild_name("");
-
-		m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_GUILD, xAck, nSockIndex, nPlayerID);
-	}
-	*/
-
-	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
-	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
 void NFCGuildModule::OnJoinGuildProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -143,6 +117,6 @@ void NFCGuildModule::OnClienChatProcess(const int nSockIndex, const int nMsgID, 
 	if (xGuidObject)
 	{
 		//cache the message for the guild member that off line
-		m_pWorldNet_ServerModule->->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
+		//m_pWorldNet_ServerModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
 	}
 } 
