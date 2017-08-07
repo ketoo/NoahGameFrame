@@ -34,6 +34,8 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
+    virtual void TransmitToWorld(const NFINT64 nHashKey, const int nMsgID, const google::protobuf::Message& xData);
+
 protected:
 
     void OnSocketWSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
