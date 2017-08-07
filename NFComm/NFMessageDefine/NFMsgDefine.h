@@ -13,6 +13,10 @@
 #include "NFComm/NFCore/NFIPropertyManager.h"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFLimit.h"
+
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFDefine.pb.h"
 #include "NFMsgBase.pb.h"
 #include "NFMsgBaseEx.pb.h"
@@ -21,6 +25,9 @@
 #include "NFMsgURl.pb.h"
 #include "NFMsgMysql.pb.h"
 #include "NFProtocolDefine.hpp"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 // -------------------------------------------------------------------------
 #pragma pack(push,1)
 

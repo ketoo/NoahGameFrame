@@ -29,11 +29,11 @@ bool NFCIdleState::Enter(const NFGUID& self, NFIStateMachine* pStateMachine)
     if (!NFIState::Enter(self, pStateMachine))
     {
 
-			//¿´ÊÇ·ñÓÐÕ½¶·ÄÜÁ¦
+			//çœ‹æ˜¯å¦æœ‰æˆ˜æ–—èƒ½åŠ›
             switch (pStateMachine->LastState())
             {
                 case NFAI_STATE::FightState:
-                    //ÕÒÈË¼ÌÐø´ò
+                    //æ‰¾äººç»§ç»­æ‰“
                     Execute(self, pStateMachine);
                     break;
 
@@ -50,7 +50,7 @@ bool NFCIdleState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
     if (!NFIState::Execute(self, pStateMachine))
     {
 
-            //²éÕÒÊÇ·ñÓÐ¿ÉÒÔ¹¥»÷µÄ¶ÔÏó
+            //æŸ¥æ‰¾æ˜¯å¦æœ‰å¯ä»¥æ”»å‡»çš„å¯¹è±¡
             NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
             if (!ident.IsNull())
             {
@@ -82,7 +82,7 @@ bool NFCIdleState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFCIdleState::RandomIdle(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-	//Èç¹ûÊÇ¶¨µãµÄ£¬Ôò²»×ß£¬¼ÌÐøidle
+	//å¦‚æžœæ˜¯å®šç‚¹çš„ï¼Œåˆ™ä¸èµ°ï¼Œç»§ç»­idle
 	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
 	switch (eMoveType)

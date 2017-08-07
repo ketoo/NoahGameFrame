@@ -49,7 +49,7 @@ public:
 private:
     std::vector<NFCUIDialog*> m_vecDialog;
 	
-    // UIµÄ¸ù¹üc
+    // UIçš„æ ¹ç¯€é»
 	CC_SYNTHESIZE_READONLY(Node*, m_pRootNode, RootNode);
 	CC_SYNTHESIZE_READONLY(Node*, m_pPanelNode, PanelNode);
 	CC_SYNTHESIZE_READONLY(Node*, m_pDialogNode, DialogNode);
@@ -64,12 +64,12 @@ private:
 
 #define g_pNFCUIManager (NFCUIManager::Instance())
 
-// Óë¹ÜÀíÆ÷Âß¼­ÎŞ¹ØµÄ´¿UIÂß¼­Àà
+// ä¸ç®¡ç†å™¨é€»è¾‘æ— å…³çš„çº¯UIé€»è¾‘ç±»
 template<typename T>
 class IUniqueDialog: public NFCUIDialog
 {	
 public:
-	// ÏÔÊ¾´°¿Ú(´°¿ÚÃ»´´½¨Ê±´´½¨´°¿Ú²¢ÏÔÊ¾£¬ÒÑ¾­´´½¨ÔòÖ»ÏÔÊ¾)
+	// æ˜¾ç¤ºçª—å£(çª—å£æ²¡åˆ›å»ºæ—¶åˆ›å»ºçª—å£å¹¶æ˜¾ç¤ºï¼Œå·²ç»åˆ›å»ºåˆ™åªæ˜¾ç¤º)
 	static void showUI(bool bPushToHistory = true, const void *customData = nullptr) 
 	{ 
 		IUniqueDialog **p = _getDialog();
@@ -89,10 +89,10 @@ public:
 			g_pNFCUIManager->CloseDialog(*p);
 		}
 	}
-	IUniqueDialog() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯new
+	IUniqueDialog() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨new
 		*_getDialog() = this;
 	}
-	virtual ~IUniqueDialog() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯delete
+	virtual ~IUniqueDialog() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨delete
 		if(*_getDialog() == this)
 			*_getDialog() = nullptr;
 	}
@@ -108,7 +108,7 @@ template<typename T>
 class IUniquePanel : public NFCUIDialog
 {
 public:
-	// ÏÔÊ¾´°¿Ú(´°¿ÚÃ»´´½¨Ê±´´½¨´°¿Ú²¢ÏÔÊ¾£¬ÒÑ¾­´´½¨ÔòÖ»ÏÔÊ¾)
+	// æ˜¾ç¤ºçª—å£(çª—å£æ²¡åˆ›å»ºæ—¶åˆ›å»ºçª—å£å¹¶æ˜¾ç¤ºï¼Œå·²ç»åˆ›å»ºåˆ™åªæ˜¾ç¤º)
 	static void showPanel(const void *customData = nullptr)
 	{
 		IUniquePanel **p = _getPanel();
@@ -128,10 +128,10 @@ public:
 			g_pNFCUIManager->ClosePanel(*p);
 		}
 	}
-	IUniquePanel() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯new
+	IUniquePanel() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨new
 		*_getPanel() = this;
 	}
-	virtual ~IUniquePanel() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯delete
+	virtual ~IUniquePanel() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨delete
 		if (*_getPanel() == this)
 			*_getPanel() = nullptr;
 	}

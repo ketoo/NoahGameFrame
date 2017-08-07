@@ -97,7 +97,7 @@ NFINetClientModule *NFCNetLogic::GetNetModule()
 	return g_pNetClientModule;
 }
 
-void NFCNetLogic::OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCNetLogic::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
     {
@@ -127,7 +127,7 @@ void NFCNetLogic::OnSocketEvent(const int nSockIndex, const NF_NET_EVENT eEvent,
     }
 }
 
-void NFCNetLogic::OnEventResult(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCNetLogic::OnEventResult(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
@@ -137,7 +137,7 @@ void NFCNetLogic::OnEventResult(const int nSockIndex, const int nMsgID, const ch
 	}
 }
 
-void NFCNetLogic::OnMsgRecive(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCNetLogic::OnMsgRecive(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CCLOG("MsgRecv:%d not Register", nMsgID);
 }

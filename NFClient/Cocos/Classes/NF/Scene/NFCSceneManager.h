@@ -36,19 +36,19 @@ public:
 	void CloseScene(Node *pScene);
 
 private:
-    // ³¡¾°µÄ¸ù½Úµã
+    // åœºæ™¯çš„æ ¹èŠ‚ç‚¹
 	CC_SYNTHESIZE_READONLY(Node*, m_pRootNode, RootNode);
 	CC_SYNTHESIZE_READONLY(Node*, m_pCurrentScene, CurrentScene);
 };
 
 #define g_pNFCSceneManager (NFCSceneManager::Instance())
 
-// Óë¹ÜÀíÆ÷Âß¼­ÎŞ¹ØµÄ´¿UIÂß¼­Àà
+// ä¸ç®¡ç†å™¨é€»è¾‘æ— å…³çš„çº¯UIé€»è¾‘ç±»
 template<typename T>
 class IUniqueScene: public Layer
 {	
 public:
-	// ÏÔÊ¾´°¿Ú(´°¿ÚÃ»´´½¨Ê±´´½¨´°¿Ú²¢ÏÔÊ¾£¬ÒÑ¾­´´½¨ÔòÖ»ÏÔÊ¾)
+	// æ˜¾ç¤ºçª—å£(çª—å£æ²¡åˆ›å»ºæ—¶åˆ›å»ºçª—å£å¹¶æ˜¾ç¤ºï¼Œå·²ç»åˆ›å»ºåˆ™åªæ˜¾ç¤º)
 	static void showScene(const void *customData = nullptr) 
 	{ 
 		IUniqueScene **p = _getScene();
@@ -68,10 +68,10 @@ public:
 			g_pNFCSceneManager->CloseScene(*p);
 		}
 	}
-	IUniqueScene() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯new
+	IUniqueScene() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨new
 		*_getScene() = this;
 	}
-	virtual ~IUniqueScene() { // ²»ÔÊĞíÍâ²¿ÊÖ¶¯delete
+	virtual ~IUniqueScene() { // ä¸å…è®¸å¤–éƒ¨æ‰‹åŠ¨delete
 		if(*_getScene() == this)
 			*_getScene() = nullptr;
 	}

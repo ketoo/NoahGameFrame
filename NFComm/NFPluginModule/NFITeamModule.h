@@ -10,13 +10,19 @@
 #define NFI_TEAM_MODULE_H
 
 #include "NFIModule.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 class NFITeamModule
     : public NFIModule
 {
 public:
-	virtual const NFGUID& CreateTeam(const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;
+	virtual NFGUID CreateTeam(const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob, const int nDonation, const int nVIP) = 0;
 	virtual bool JoinTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool LeaveTeam(const NFGUID& self, const NFGUID& xTeamID) = 0;
 	virtual bool KickTeamMmember(const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember) = 0;

@@ -7,7 +7,7 @@
 #define htonll(x)       (x)
 #endif
 
-// ±ØÐë·ÅÕâ±ß Òýµ¼ cocosºÍlibeventÓÐÒ»ÑùµÄtimezone
+// å¿…é¡»æ”¾è¿™è¾¹ å¼•å¯¼ cocoså’Œlibeventæœ‰ä¸€æ ·çš„timezone
 //#include "NFComm/NFPluginModule/NFINetClientModule.h"
 
 USING_NS_CC;

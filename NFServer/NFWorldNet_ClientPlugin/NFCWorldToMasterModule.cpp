@@ -48,13 +48,13 @@ bool NFCWorldToMasterModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_MASTER)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -91,13 +91,13 @@ void NFCWorldToMasterModule::Register(NFINet* pNet)
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (nServerType == NF_SERVER_TYPES::NF_ST_WORLD && pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
-				const int nCpus = m_pElementModule->GetPropertyInt(strId, NFrame::Server::CpuCount());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -141,12 +141,12 @@ void NFCWorldToMasterModule::ServerReport()
 		{
 			const std::string& strId = strIdList[i];
 
-			const int nServerType = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Type());
-			const int nServerID = m_pElementModule->GetPropertyInt(strId, NFrame::Server::ServerID());
+			const int nServerType = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Type());
+			const int nServerID = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::ServerID());
 			if (pPluginManager->GetAppID() == nServerID)
 			{
-				const int nPort = m_pElementModule->GetPropertyInt(strId, NFrame::Server::Port());
-				const int nMaxConnect = m_pElementModule->GetPropertyInt(strId, NFrame::Server::MaxOnline());
+				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
+				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
 				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -176,7 +176,7 @@ void NFCWorldToMasterModule::RefreshWorldInfo()
 
 }
 
-void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::OnSelectServerProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqConnectWorld xMsg;
@@ -208,7 +208,7 @@ void NFCWorldToMasterModule::OnSelectServerProcess(const int nSockIndex, const i
 
 }
 
-void NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldToMasterModule::OnKickClientProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqKickFromWorld xMsg;
@@ -223,12 +223,12 @@ void NFCWorldToMasterModule::OnKickClientProcess(const int nSockIndex, const int
 	//     m_pEventProcessModule->DoEvent(NFGUID(), NFED_ON_KICK_FROM_SERVER, var);
 }
 
-void NFCWorldToMasterModule::InvalidMessage(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCWorldToMasterModule::InvalidMessage(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	printf("NFNet || unMsgID=%d\n", nMsgID);
 }
 
-void NFCWorldToMasterModule::OnSocketMSEvent(const int nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
+void NFCWorldToMasterModule::OnSocketMSEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
 	if (eEvent & NF_NET_EVENT_EOF)
 	{
@@ -249,12 +249,12 @@ void NFCWorldToMasterModule::OnSocketMSEvent(const int nSockIndex, const NF_NET_
 	}
 }
 
-void NFCWorldToMasterModule::OnClientDisconnect(const int nAddress)
+void NFCWorldToMasterModule::OnClientDisconnect(const NFSOCK nAddress)
 {
 
 }
 
-void NFCWorldToMasterModule::OnClientConnected(const int nAddress)
+void NFCWorldToMasterModule::OnClientConnected(const NFSOCK nAddress)
 {
 
 }

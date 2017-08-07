@@ -122,22 +122,23 @@ public:
 		return milliseconds + seconds * FACTOR_SEC_TO_MILLI + minutes * FACTOR_MIN_TO_MILLI + hours * FACTOR_HOUR_TO_MILLI + days * FACTOR_DAY_TO_MILLI;
 	}
 
-	double GetTotalSeconds() const
+	//updated : GetTotalXXXXs never return double
+	long long GetTotalSeconds() const
 	{
 		return GetTotalMilliseconds() / FACTOR_SEC_TO_MILLI;
 	}
 
-	double GetTotalMinutes() const
+	long long GetTotalMinutes() const
 	{
 		return GetTotalSeconds() / FACTOR_MIN_TO_SEC;
 	}
 
-	double GetTotalHours() const
+	long long GetTotalHours() const
 	{
 		return GetTotalMinutes() / FACTOR_HOUR_TO_MIN;
 	}
 
-	double GetTotalDays() const
+	long long GetTotalDays() const
 	{
 		return GetTotalHours() / FACTOR_DAY_TO_HOUR;
 	}
@@ -327,17 +328,17 @@ public:
 
 	void AddMinutes(int minutes)
 	{
-		AddHours(minutes / MAX_MINUTE);
+		AddHours(int(minutes / MAX_MINUTE));
 		minute += minutes % MAX_MINUTE;
 	}
 
-	void AddSeconds(int seconds)
+	void AddSeconds(long long seconds)
 	{
-		AddMinutes(seconds / MAX_SECOND);
-		second += seconds % MAX_SECOND;
+		AddMinutes(int(seconds / MAX_SECOND));
+		second += int(seconds % MAX_SECOND);
 	}
 
-	void AddMilliseconds(int milliseconds)
+	void AddMilliseconds(long long milliseconds)
 	{
 		AddSeconds(milliseconds / MAX_MILLISECOND);
 		millisecond += milliseconds % MAX_MILLISECOND;

@@ -16,7 +16,7 @@ class NFILoginLogicModule
     : public NFIModule
 {
 public:
-    virtual void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+    virtual void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 
 };
 

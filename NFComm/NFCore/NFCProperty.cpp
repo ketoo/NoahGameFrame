@@ -176,6 +176,17 @@ NFINT64 NFCProperty::GetInt() const
 	return mxData->GetInt();
 }
 
+int NFCProperty::GetInt32() const
+{
+	if (!mxData)
+	{
+		return 0;
+	}
+
+	return (int)mxData->GetInt();
+}
+
+
 double NFCProperty::GetFloat() const
 {
 	if (!mxData)

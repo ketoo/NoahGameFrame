@@ -54,7 +54,7 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 
 	const NFGUID xTargetID = targetID.Object(0);
 	const std::string strItemConfigID = targetID.String(1);
-	const int nItemCount = targetID.Int(2);
+	const int nItemCount = targetID.Int32(2);
 
 	if (xTargetID.IsNull())
 	{
@@ -69,19 +69,19 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		return 3;
 	}
 
-	const int nRowNum = varItemID.Int(0);
+	const int nRowNum = varItemID.Int32(0);
 	NFDataList xRowData;
 	pBagItemList->QueryRow(nRowNum, xRowData);
 
-	const int nBagList_ItemCount = xRowData.Int(NFrame::Player::BagItemList::ItemCount);
+	const int nBagList_ItemCount = xRowData.Int32(NFrame::Player::BagItemList::ItemCount);
 
 	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
 	{
 		return 4;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemType());
-	const int nSubItemType = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::ItemSubType());
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemConfigID, NFrame::Item::ItemType());
+	const int nSubItemType = m_pElementModule->GetPropertyInt32(strItemConfigID, NFrame::Item::ItemSubType());
 
 	if (nItemType != NFMsg::EItemType::EIT_ITEM)
 	{
@@ -107,19 +107,19 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		{
 			return 6;
 		}
-		const NFINT64 nVIPEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::VIPEXP());
-		const NFINT64 nEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::EXP());
-		const NFINT64 nHP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::HP());
-		const NFINT64 nSP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::SP());
-		const NFINT64 nMP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::MP());
-		const NFINT64 nGold = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Gold());
-		const NFINT64 nDiamond = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Money());
+		const int nVIPEXP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::VIPEXP());
+		const int64_t nEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::EXP());
+		const int nHP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::HP());
+		const int nSP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::SP());
+		const int nMP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::MP());
+		const int64_t nGold = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Gold());
+		const int nDiamond = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::Diamond());
 
 		if (self == xTargetID)
 		{
 			if (nVIPEXP != 0)
 			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::VIPEXP()) + nVIPEXP * nItemCount);
+				m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), m_pKernelModule->GetPropertyInt32(self, NFrame::Player::VIPEXP()) + nVIPEXP * nItemCount);
 			}
 			if (nEXP != 0)
 			{

@@ -36,27 +36,27 @@ bool NFCPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 			NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
 			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
-			//Èç¹ûÊÇ¶¨µãµÄ£¬Ôò²»×ß£¬¼ÌĞøidle
+			//å¦‚æœæ˜¯å®šç‚¹çš„ï¼Œåˆ™ä¸èµ°ï¼Œç»§ç»­idle
 			switch (eMoveType)
 			{
 			case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
 				{
-					//²éÕÒÊÇ·ñÓĞ¿ÉÒÔ¹¥»÷µÄ¶ÔÏó
+					//æŸ¥æ‰¾æ˜¯å¦æœ‰å¯ä»¥æ”»å‡»çš„å¯¹è±¡
 					if (!ident.IsNull())
 					{
 						pStateMachine->ChangeState(FightState);
 					}
 					else
 					{
-						//ÏÂÒ»¸ö½Úµã
-                        //object¼ÇÂ¼µ±Ç°µÄÂ·¾¶IDºÍindex£¬ÒÔ¼ÇÂ¼Ñ°Â·µÄÎ»ÖÃ
+						//ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+                        //objectè®°å½•å½“å‰çš„è·¯å¾„IDå’Œindexï¼Œä»¥è®°å½•å¯»è·¯çš„ä½ç½®
 					}
 				}
 				break;
 
 			case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
 				{
-					//²éÕÒÊÇ·ñÓĞ¿ÉÒÔ¹¥»÷µÄ¶ÔÏó
+					//æŸ¥æ‰¾æ˜¯å¦æœ‰å¯ä»¥æ”»å‡»çš„å¯¹è±¡
 					if (!ident.IsNull())
 					{
 						pStateMachine->ChangeState(FightState);
@@ -89,9 +89,9 @@ bool NFCPatrolState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 
 bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
-    //Ê×ÏÈ£¬µÃ¿´ÓĞÃ»Â·¾¶
+    //é¦–å…ˆï¼Œå¾—çœ‹æœ‰æ²¡è·¯å¾„
 
-    //Ã»ÓĞµÄ»°£¬Ëæ»úÕÒ¸öµØÖ·×ß°É(ÒÔ³öÉúµãÎªÖĞĞÄ¿ªÊ¼ÕÒ,ÖÖ×ÓµØÖ·)NPCConfigID
+    //æ²¡æœ‰çš„è¯ï¼Œéšæœºæ‰¾ä¸ªåœ°å€èµ°å§(ä»¥å‡ºç”Ÿç‚¹ä¸ºä¸­å¿ƒå¼€å§‹æ‰¾,ç§å­åœ°å€)NPCConfigID
     const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, "NPCConfigID");
     const std::string& strNPCID = m_pKernelModule->GetPropertyString(self, "ConfigID");
     if (!strConfigID.empty())
@@ -103,12 +103,12 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMac
 			NF_SHARE_PTR<NFIProperty> xPropertyY =  xPropertyManager->GetElement("SeedY");
 			NF_SHARE_PTR<NFIProperty> xPropertyZ =  xPropertyManager->GetElement("SeedZ");
 
-			float fCurX = xPropertyX->GetFloat();
-			float fCurY = xPropertyY->GetFloat();
-			float fCurZ = xPropertyZ->GetFloat();
+			double fCurX = xPropertyX->GetFloat();
+			double fCurY = xPropertyY->GetFloat();
+			double fCurZ = xPropertyZ->GetFloat();
 
-			float fPosOffestX = (float)(rand() / double(RAND_MAX) - 0.5f);
-			float fPosOffestZ = (float)(rand() / double(RAND_MAX) - 0.5f);
+			double fPosOffestX = (double)(rand() / double(RAND_MAX) - 0.5);
+			double fPosOffestZ = (double)(rand() / double(RAND_MAX) - 0.5);
 			fPosOffestX *= 10;
 			fPosOffestZ *= 10;
 
@@ -117,9 +117,9 @@ bool NFCPatrolState::RandomPatrol(const NFGUID& self, NFIStateMachine* pStateMac
 
 			//if (fCurX > 0.0f && fCurZ > 0.0f)
 			{
-				//¿´ÄÜ·ñÑ°Â·£¬²»ÄÜÑ°Â·ÔòÖØÀ´
+				//çœ‹èƒ½å¦å¯»è·¯ï¼Œä¸èƒ½å¯»è·¯åˆ™é‡æ¥
 				NFAI_STATE eStateType = NFAI_STATE::ChaseState;
-				float fRand = (float)(rand() / double(RAND_MAX));
+				double fRand = (double)(rand() / double(RAND_MAX));
 				if (fRand < 0.5f)
 				{
 					eStateType = NFAI_STATE::ChaseState;

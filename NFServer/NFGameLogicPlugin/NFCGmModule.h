@@ -38,16 +38,16 @@ public:
     virtual bool AfterInit();
 
 protected:
-	void OnGMPropertyIntProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMPropertyStrProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMPropertyObjectProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMPropertyFloatProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMRecordIntProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMRecordStrProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMRecordObjectProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-	void OnGMRecordFloatProcess( const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-    void OnGMNormalProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClienGMProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnGMPropertyIntProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMPropertyStrProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMPropertyObjectProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMPropertyFloatProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMRecordIntProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMRecordStrProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMRecordObjectProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+	void OnGMRecordFloatProcess( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
+    void OnGMNormalProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnClienGMProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
     void CheckAndAddRow(const NFGUID& self, std::string strRecordName, const int nRow);
 

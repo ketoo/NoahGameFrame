@@ -77,8 +77,8 @@ bool NFCSceneAOIModule::RequestEnterScene(const NFGUID & self, const int nSceneI
 		return false;
 	}
 
-	const int nNowSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nNowGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	const int nNowSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	const int nNowGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	
 	if (nNowSceneID == nSceneID
 		&& nNowGroupID == nGrupID)
@@ -297,8 +297,8 @@ bool NFCSceneAOIModule::SwitchScene(const NFGUID& self, const int nTargetSceneID
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 	if (pObject)
 	{
-		NFINT64 nOldSceneID = pObject->GetPropertyInt(NFrame::Scene::SceneID());
-		NFINT64 nOldGroupID = pObject->GetPropertyInt(NFrame::Scene::GroupID());
+		int nOldSceneID = pObject->GetPropertyInt32(NFrame::Scene::SceneID());
+		int nOldGroupID = pObject->GetPropertyInt32(NFrame::Scene::GroupID());
 
 		NF_SHARE_PTR<NFCSceneInfo> pOldSceneInfo = this->GetElement(nOldSceneID);
 		NF_SHARE_PTR<NFCSceneInfo> pNewSceneInfo = this->GetElement(nTargetSceneID);
@@ -391,8 +391,8 @@ int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVE
 	const int nRow = xEventData.nRow;
 	const int nCol = xEventData.nCol;
 
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
 	if (nObjectGroupID < 0)
 	{
@@ -411,8 +411,8 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 {
 	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
 	{
-		const int nObjectSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-		const int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+		const int nObjectSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+		const int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 
 		if (nObjectGroupID < 0 || nObjectSceneID <= 0)
 		{
@@ -449,8 +449,8 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 		}
 		else
 		{
-			const int nObjectSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-			const int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+			const int nObjectSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+			const int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 
 			if (nObjectGroupID < 0 || nObjectSceneID <= 0)
 			{
@@ -478,9 +478,9 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 int NFCSceneAOIModule::OnPlayerGroupEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
 {
 	//this event only happened in the same scene
-	int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-	int nOldGroupID = oldVar.GetInt();
-	int nNewGroupID = newVar.GetInt();
+	int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	int nOldGroupID = oldVar.GetInt32();
+	int nNewGroupID = newVar.GetInt32();
 
 	//maybe form 0, maybe not, only three stuation
 	//example1: 0 -> 1 ==> new_group > 0 && old_group <= 0
@@ -580,8 +580,8 @@ int NFCSceneAOIModule::OnPlayerSceneEvent(const NFGUID & self, const std::string
 
 int NFCSceneAOIModule::GetBroadCastObject(const NFGUID & self, const std::string & strPropertyName, const bool bTable, NFDataList & valueObject)
 {
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::SceneID());
-	int nObjectGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::IObject::GroupID());
+	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::SceneID());
+	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::IObject::GroupID());
 
 	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
 	NF_SHARE_PTR<NFIRecordManager> pClassRecordManager = m_pClassModule->GetClassRecordManager(strClassName);

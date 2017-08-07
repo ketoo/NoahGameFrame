@@ -37,16 +37,16 @@ public:
 
     virtual bool AfterInit();
 
-	// ·¢ËÍÏûÏ¢
+	// å‘é€æ¶ˆæ¯
 public:
 	void RequireChatWorld(std::string strContent);
 	void RequireChatGuild(std::string strContent);
 	void RequireChatPrivate(const NFGUID &target, std::string strContent);
 	void RequireChatTeam(std::string strContent);
 
-	// ½ÓÊÕÏûÏ¢
+	// æ¥æ”¶æ¶ˆæ¯
 private:
-	void OnChatProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 public:
 	std::vector<NFMsg::ServerInfo> GetWorldList() { return m_WorldServerList; }
