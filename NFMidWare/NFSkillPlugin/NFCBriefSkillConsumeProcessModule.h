@@ -34,14 +34,9 @@ public:
 
     virtual int ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other );
 
-    virtual int ConsumeSelf( const NFGUID& self, const std::string& skillID );
-
-        virtual int ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
-    virtual int ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
+    virtual int ConsumeProcess( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
 
 private:
-    char* mstrSkillTableName;
-
     NFIKernelModule* m_pKernelModule;
     NFISkillModule* m_pSkillModule;
     NFIPropertyModule* m_pPropertyModule;

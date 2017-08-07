@@ -9,7 +9,6 @@
 
 bool NFCBulletSkillConsumeProcessModule::Init()
 {
-
     return true;
 }
 
@@ -18,8 +17,6 @@ bool NFCBulletSkillConsumeProcessModule::AfterInit()
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
-        //m_pSkillConsumeManagerModule->ResgisterConsumeModule( EGameSkillType::EGST_JOBSKILL_BULLET, this );
 
     return true;
 }
@@ -40,19 +37,7 @@ int NFCBulletSkillConsumeProcessModule::ConsumeLegal( const NFGUID& self, const 
         return 1;
 }
 
-int NFCBulletSkillConsumeProcessModule::ConsumeSelf( const NFGUID& self, const std::string& skillID )
-{
-    
-    
-    return 0;
-}
-
 int NFCBulletSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFDataList& other, NFDataList& damageListValue , NFDataList& damageResultList )
-{
-    return 0;
-}
-
-int NFCBulletSkillConsumeProcessModule::ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList )
 {
     return 0;
 }
