@@ -36,14 +36,14 @@ bool NFCPropertyModule::AfterInit()
     return true;
 }
 
-int NFCPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType)
+int64_t NFCPropertyModule::GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType)
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
-        return m_pKernelModule->GetRecordInt32(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
+        return m_pKernelModule->GetRecordInt(self, NFrame::Player::CommValue::ThisName(), eGroupType, strPropertyName);
     }
 
-    return m_pKernelModule->GetPropertyInt32(self, strPropertyName);
+    return m_pKernelModule->GetPropertyInt(self, strPropertyName);
 }
 
 int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
@@ -71,7 +71,7 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
 }
 
 
-int NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
+bool NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
 {
     if (NFPropertyGroup::NPG_ALL != eGroupType)
     {
@@ -89,7 +89,7 @@ int NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& s
         }
     }
 
-    return 0;
+    return false;
 }
 
 int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
@@ -231,7 +231,7 @@ bool NFCPropertyModule::AddHP(const NFGUID& self, const int nValue)
     return true;
 }
 
-bool NFCPropertyModule::EnoughHP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::EnoughHP(const NFGUID& self, const int nValue)
 {
     NFINT64 nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HP());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -242,7 +242,7 @@ bool NFCPropertyModule::EnoughHP(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::ConsumeHP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::ConsumeHP(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HP());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -256,7 +256,7 @@ bool NFCPropertyModule::ConsumeHP(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::AddMP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::AddMP(const NFGUID& self, const int nValue)
 {
     if (nValue <= 0)
     {
@@ -277,7 +277,7 @@ bool NFCPropertyModule::AddMP(const NFGUID& self, int nValue)
     return true;
 }
 
-bool NFCPropertyModule::ConsumeMP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::ConsumeMP(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::MP());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -291,7 +291,7 @@ bool NFCPropertyModule::ConsumeMP(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::EnoughMP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::EnoughMP(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::MP());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -315,7 +315,7 @@ bool NFCPropertyModule::FullSP(const NFGUID& self)
     return false;
 }
 
-bool NFCPropertyModule::AddSP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::AddSP(const NFGUID& self, const int nValue)
 {
     if (nValue <= 0)
     {
@@ -336,7 +336,7 @@ bool NFCPropertyModule::AddSP(const NFGUID& self, int nValue)
     return true;
 }
 
-bool NFCPropertyModule::ConsumeSP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::ConsumeSP(const NFGUID& self, const int nValue)
 {
 	int nCSP = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SP());
     if ((nCSP > 0) && (nCSP - nValue >= 0))
@@ -350,7 +350,7 @@ bool NFCPropertyModule::ConsumeSP(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::EnoughSP(const NFGUID& self, int nValue)
+bool NFCPropertyModule::EnoughSP(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SP());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -361,7 +361,7 @@ bool NFCPropertyModule::EnoughSP(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::AddGold(const NFGUID& self, int64_t nValue)
+bool NFCPropertyModule::AddGold(const NFGUID& self, const int64_t nValue)
 {
     if (nValue <= 0)
     {
@@ -375,7 +375,7 @@ bool NFCPropertyModule::AddGold(const NFGUID& self, int64_t nValue)
     return false;
 }
 
-bool NFCPropertyModule::ConsumeGold(const NFGUID& self, int64_t nValue)
+bool NFCPropertyModule::ConsumeGold(const NFGUID& self, const int64_t nValue)
 {
     if (nValue <= 0)
     {
@@ -394,7 +394,7 @@ bool NFCPropertyModule::ConsumeGold(const NFGUID& self, int64_t nValue)
     return false;
 }
 
-bool NFCPropertyModule::EnoughGold(const NFGUID& self, int64_t nValue)
+bool NFCPropertyModule::EnoughGold(const NFGUID& self, const int64_t nValue)
 {
 	int64_t nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))
@@ -405,7 +405,7 @@ bool NFCPropertyModule::EnoughGold(const NFGUID& self, int64_t nValue)
     return false;
 }
 
-bool NFCPropertyModule::AddDiamond(const NFGUID& self, int nValue)
+bool NFCPropertyModule::AddDiamond(const NFGUID& self, const int nValue)
 {
     if (nValue <= 0)
     {
@@ -419,7 +419,7 @@ bool NFCPropertyModule::AddDiamond(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::ConsumeDiamond(const NFGUID& self, int nValue)
+bool NFCPropertyModule::ConsumeDiamond(const NFGUID& self, const int nValue)
 {
     if (nValue <= 0)
     {
@@ -438,7 +438,7 @@ bool NFCPropertyModule::ConsumeDiamond(const NFGUID& self, int nValue)
     return false;
 }
 
-bool NFCPropertyModule::EnoughDiamond(const NFGUID& self, int nValue)
+bool NFCPropertyModule::EnoughDiamond(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Diamond());
     if ((nCurValue > 0) && (nCurValue - nValue >= 0))

@@ -19,8 +19,16 @@
 #define ASIO_STANDALONE
 #define _WEBSOCKETPP_CPP11_STL_
 
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
+
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
+
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 struct NF_WS_CONFIG : public websocketpp::config::asio {
 	// pull default settings from our core config
