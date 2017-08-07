@@ -1,10 +1,9 @@
 @echo off
 echo Building dependencies...
 
-REM extract libevent libs
-if exist libevent rd /S /Q libevent
-echo Compiling libevent
-"..\\Tool\\7z.exe" x libevent.zip -Y
+if not exist lib\Debug mkdir lib\Debug
+if not exist lib\Release mkdir lib\Release
+
 call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
 cd libevent
 nmake /f Makefile.nmake

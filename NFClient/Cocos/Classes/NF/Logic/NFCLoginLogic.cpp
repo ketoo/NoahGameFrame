@@ -5,7 +5,7 @@
 //    @Module           :    NFCLoginLogic
 //
 // -------------------------------------------------------------------------
-
+#include "stdafx.h"
 #include "NFCLoginLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -119,7 +119,7 @@ void NFCLoginLogic::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, co
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -139,7 +139,7 @@ void NFCLoginLogic::OnWorldList(const NFSOCK nSockIndex, const int nMsgID, const
 {
 	NFGUID nPlayerID;
 	NFMsg::AckServerList xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -170,7 +170,7 @@ void NFCLoginLogic::OnConnectWorld(const NFSOCK nSockIndex, const int nMsgID, co
 {
 	NFGUID nPlayerID;
 	NFMsg::AckConnectWorldResult xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -185,7 +185,7 @@ void NFCLoginLogic::OnConnectKey(const NFSOCK nSockIndex, const int nMsgID, cons
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
@@ -200,7 +200,7 @@ void NFCLoginLogic::OnSelectServer(const NFSOCK nSockIndex, const int nMsgID, co
 {
 	NFGUID nPlayerID;
 	NFMsg::AckEventResult xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}

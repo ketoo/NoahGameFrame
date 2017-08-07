@@ -351,6 +351,13 @@ enum EGameMsgID
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+//PropertyType
+enum ESkillType
+{
+	EST_BRIEF 				= 1;//
+	EST_BULLET				= 2;//
+};
+
 enum EItemType
 {
     EIT_EQUIP   			= 0; //

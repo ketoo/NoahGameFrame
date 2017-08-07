@@ -6,6 +6,7 @@
 //
 // -------------------------------------------------------------------------
 
+#include "stdafx.h"
 #include "NFCChatLogic.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
@@ -87,7 +88,7 @@ void NFCChatLogic::OnChatProcess(const NFSOCK nSockIndex, const int nMsgID, cons
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckPlayerChat xMsg;
-	if (!NFINetModule::ReceivePB(nSockIndex, nMsgID, msg, nLen, xMsg, nPlayerID))
+	if (!NFINetModule::ReceivePB(nMsgID, msg, nLen, xMsg, nPlayerID))
 	{
 		return;
 	}
