@@ -60,7 +60,6 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
-	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 
