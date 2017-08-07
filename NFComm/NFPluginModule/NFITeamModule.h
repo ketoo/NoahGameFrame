@@ -10,7 +10,13 @@
 #define NFI_TEAM_MODULE_H
 
 #include "NFIModule.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 class NFITeamModule
     : public NFIModule

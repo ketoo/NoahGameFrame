@@ -16,7 +16,13 @@
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 class NFCNetModule
 	: public NFINetModule

@@ -6,7 +6,13 @@
 //
 // -------------------------------------------------------------------------
 #include "NFCGuildComponent.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
 bool NFCGuildComponent::CheckPower(const NFGUID& self, const NFGUID& xGuildID, int nPowerType)

@@ -110,9 +110,9 @@ void NFCGSSwichServerModule::OnReqSwichServer(const NFSOCK nSockIndex, const int
 	}
 
 	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
-	const int nGateID = xMsg.gate_serverid(); 
-    const int nSceneID = xMsg.sceneid();
-    const int nGroup = xMsg.groupid();
+	const int nGateID = (int)xMsg.gate_serverid(); 
+    const int nSceneID = (int)xMsg.sceneid();
+    const int nGroup = (int)xMsg.groupid();
 
 	//if (!AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
  //   {

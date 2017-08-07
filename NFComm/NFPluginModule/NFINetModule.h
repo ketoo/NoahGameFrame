@@ -17,7 +17,13 @@
 #include "NFComm/NFNetPlugin/NFINet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 
 enum NF_SERVER_TYPES
 {

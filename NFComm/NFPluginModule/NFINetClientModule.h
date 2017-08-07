@@ -113,10 +113,10 @@ public:
 	//SendBySuit & SendSuitByPB  suit by (int32)nHashKey32
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData) = 0;
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const std::string& strData) = 0;
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const std::string& strData) = 0;
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen) = 0;
 	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData) = 0;
 
 	////////////////////////////////////////////////////////////////////////////////
 

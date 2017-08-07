@@ -14,7 +14,13 @@
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFConsistentHash.hpp"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -56,10 +62,10 @@ public:
 	//SendBySuit & SendSuitByPB  suit by (int32)nHashKey32
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen);
 	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
