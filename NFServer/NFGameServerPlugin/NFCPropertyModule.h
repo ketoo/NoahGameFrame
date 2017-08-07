@@ -34,32 +34,32 @@ public:
 
     virtual int RefreshBaseProperty(const NFGUID& self);
 
-    virtual int GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType);
+    virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType);
     virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue);
 
-    virtual int AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue);
+    virtual bool AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue);
 
     virtual bool FullHPMP(const NFGUID& self);
-    virtual bool AddHP(const NFGUID& self, int nValue);
-    virtual bool ConsumeHP(const NFGUID& self, int nValue);
-    virtual bool EnoughHP(const NFGUID& self, int nValue);
+    virtual bool AddHP(const NFGUID& self, const int nValue);
+    virtual bool ConsumeHP(const NFGUID& self, const int nValue);
+    virtual bool EnoughHP(const NFGUID& self, const int nValue);
 
-    virtual bool AddMP(const NFGUID& self, int nValue);
-    virtual bool ConsumeMP(const NFGUID& self, int nValue);
-    virtual bool EnoughMP(const NFGUID& self, int nValue);
+    virtual bool AddMP(const NFGUID& self, const int nValue);
+    virtual bool ConsumeMP(const NFGUID& self, const int nValue);
+    virtual bool EnoughMP(const NFGUID& self, const int nValue);
 
     virtual bool FullSP(const NFGUID& self);
-    virtual bool AddSP(const NFGUID& self, int nValue);
-    virtual bool ConsumeSP(const NFGUID& self, int nValue);
-    virtual bool EnoughSP(const NFGUID& self, int nValue);
+    virtual bool AddSP(const NFGUID& self, const int nValue);
+    virtual bool ConsumeSP(const NFGUID& self, const int nValue);
+    virtual bool EnoughSP(const NFGUID& self, const int nValue);
 
-    virtual bool AddGold(const NFGUID& self, int64_t nValue);
-    virtual bool ConsumeGold(const NFGUID& self, int64_t nValue);
-    virtual bool EnoughGold(const NFGUID& self, int64_t nValue);
+    virtual bool AddGold(const NFGUID& self, const int64_t nValue);
+    virtual bool ConsumeGold(const NFGUID& self, const int64_t nValue);
+    virtual bool EnoughGold(const NFGUID& self, const int64_t nValue);
 
-    virtual bool AddDiamond(const NFGUID& self, int nValue);
-    virtual bool ConsumeDiamond(const NFGUID& self, int nValue);
-    virtual bool EnoughDiamond(const NFGUID& self, int nValue);
+    virtual bool AddDiamond(const NFGUID& self, const int nValue);
+    virtual bool ConsumeDiamond(const NFGUID& self, const int nValue);
+    virtual bool EnoughDiamond(const NFGUID& self, const int nValue);
 
 protected:
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);

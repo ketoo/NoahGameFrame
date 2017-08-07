@@ -46,7 +46,7 @@ void NFCWSSwichServerModule::OnReqSwichServer( const NFSOCK nSockIndex, const in
 	nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
 
 	const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
-	const int nGateID = xMsg.gate_serverid(); 
+	const int nGateID = (int)xMsg.gate_serverid(); 
 	const int nSceneID = (int)xMsg.sceneid();
 	m_pWorlNet_ServerModule->SendMsgToGame((int)xMsg.target_serverid(), NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
 }

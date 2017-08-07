@@ -119,7 +119,7 @@ void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, 
 
 					*pNewEffectData->mutable_effect_ident() = NFINetModule::NFToPB(xList.Object(i));
 
-					pNewEffectData->set_effect_value(xDamageList.Int(i));
+					pNewEffectData->set_effect_value(xDamageList.Int32(i));
 					pNewEffectData->set_effect_rlt((NFMsg::EffectData_EResultType)xResultList.Int(i));
 				}
 
