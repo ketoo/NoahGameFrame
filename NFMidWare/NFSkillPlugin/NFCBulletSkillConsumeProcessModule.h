@@ -32,13 +32,10 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-        virtual int ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other );
-
-        virtual int ConsumeSelf( const NFGUID& self, const std::string& skillID );
+    virtual int ConsumeLegal( const NFGUID& self, const std::string& skillID,  const NFDataList& other );
 
     virtual int ConsumeProcess( const NFGUID& self, const std::string& strItemName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
-    virtual int ConsumeProcessEx( const NFGUID& self, const std::string& strSkillName, const NFDataList& other, NFDataList& damageListValue, NFDataList& damageResultList );
-
+ 
 private:
     NFIKernelModule* m_pKernelModule;
     NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
