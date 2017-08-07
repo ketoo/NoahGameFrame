@@ -367,7 +367,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFAIServerNet_ServerPlugin"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFFileProcess", "NFTools\NFFileProcess\NFFileProcess.vcxproj", "{2A24AA66-5EBC-4ECC-8021-7D9237868B33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonHeaderFilesHolder", "NFComm\CommonHeaderFilesHolder\CommonHeaderFilesHolder.vcxproj", "{164E42F1-D331-4B83-8207-CB24EFFBC1C6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFHeaderFiles", "NFComm\NFHeaderFiles\NFHeaderFiles.vcxproj", "{164E42F1-D331-4B83-8207-CB24EFFBC1C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -703,14 +703,16 @@ Global
 		{2A24AA66-5EBC-4ECC-8021-7D9237868B33}.Release|x64.ActiveCfg = Release|x64
 		{2A24AA66-5EBC-4ECC-8021-7D9237868B33}.Release|x64.Build.0 = Release|x64
 		{2A24AA66-5EBC-4ECC-8021-7D9237868B33}.Release|x86.ActiveCfg = Release|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x64.ActiveCfg = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x64.Build.0 = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x86.ActiveCfg = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x86.Build.0 = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x64.ActiveCfg = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x64.Build.0 = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x86.ActiveCfg = empty|x64
-		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x86.Build.0 = empty|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x64.ActiveCfg = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x64.Build.0 = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x64.Deploy.0 = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Debug|x86.ActiveCfg = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x64.ActiveCfg = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x64.Build.0 = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x64.Deploy.0 = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x86.ActiveCfg = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x86.Build.0 = Debug|x64
+		{164E42F1-D331-4B83-8207-CB24EFFBC1C6}.Release|x86.Deploy.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
