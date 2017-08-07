@@ -46,10 +46,10 @@ public:
 	virtual void SendToAllServer(const int nMsgID, const std::string& strData);
 	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
 
-	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
-	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
@@ -58,8 +58,8 @@ public:
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData);
 	//
 	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
