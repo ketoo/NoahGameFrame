@@ -81,7 +81,7 @@ protected:
 
     ///////////WORLD_START///////////////////////////////////////////////////////////////
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnGuildTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+	void OnGuildTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnTransWorld(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey);
 
 protected:
