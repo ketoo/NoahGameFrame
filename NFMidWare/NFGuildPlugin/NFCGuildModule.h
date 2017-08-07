@@ -2,7 +2,7 @@
 //    @FileName			:    NFCGuildModle.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2017-07-21
-//    @Module           :    NFCGuildComponent
+//    @Module           :    NFCGuildModle
 //
 // -------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ protected:
 	NFIKernelModule* m_pKernelModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-
+	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 
 #endif
