@@ -87,14 +87,16 @@ public:
     virtual bool SwapRowInfo(const int nOriginRow, const int nTargetRow) = 0;
 
     virtual NFINT64 GetInt(const int nRow, const int nCol) const = 0;
-    virtual double GetFloat(const int nRow, const int nCol) const = 0;
+	inline int GetInt32(const int nRow, const int nCol) const { return (int)GetInt(nRow, nCol); };
+	virtual double GetFloat(const int nRow, const int nCol) const = 0;
     virtual const std::string& GetString(const int nRow, const int nCol) const = 0;
     virtual const NFGUID& GetObject(const int nRow, const int nCol) const = 0;
 	virtual const NFVector2& GetVector2(const int nRow, const int nCol) const = 0;
 	virtual const NFVector3& GetVector3(const int nRow, const int nCol) const = 0;
 
     virtual NFINT64 GetInt(const int nRow, const std::string& strColTag) const = 0;
-    virtual double GetFloat(const int nRow, const std::string& strColTag) const = 0;
+	inline int GetInt32(const int nRow, const std::string& strColTag) const { return (int)GetInt(nRow, strColTag); };
+	virtual double GetFloat(const int nRow, const std::string& strColTag) const = 0;
     virtual const std::string& GetString(const int nRow, const std::string& strColTag) const = 0;
     virtual const NFGUID& GetObject(const int nRow, const std::string& strColTag) const = 0;
 	virtual const NFVector2& GetVector2(const int nRow, const std::string& strColTag) const = 0;

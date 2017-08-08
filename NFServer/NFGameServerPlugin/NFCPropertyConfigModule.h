@@ -33,7 +33,7 @@ public:
     virtual bool Execute();
     virtual bool AfterInit();
 
-    virtual int CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
+    virtual NFINT64 CalculateBaseValue(const int nJob, const int nLevel, const std::string& strProperty);
     virtual bool LegalLevel(const int nJob, const int nLevel);
 
 protected:

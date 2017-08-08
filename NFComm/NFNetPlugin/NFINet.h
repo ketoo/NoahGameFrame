@@ -227,11 +227,10 @@ protected:
 };
 
 class NFINet;
-
-typedef std::function<void(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
+typedef std::function<void(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
 
-typedef std::function<void(const int nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
+typedef std::function<void(const NFSOCK nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
 typedef std::shared_ptr<NET_EVENT_FUNCTOR> NET_EVENT_FUNCTOR_PTR;
 
 typedef std::function<void(int severity, const char* msg)> NET_EVENT_LOG_FUNCTOR;
@@ -240,7 +239,7 @@ typedef std::shared_ptr<NET_EVENT_LOG_FUNCTOR> NET_EVENT_LOG_FUNCTOR_PTR;
 class NetObject
 {
 public:
-    NetObject(NFINet* pNet, int32_t fd, sockaddr_in& addr, struct bufferevent* pBev)
+    NetObject(NFINet* pNet, NFSOCK fd, sockaddr_in& addr, struct bufferevent* pBev)
     {
         mnLogicState = 0;
         mnGameID = 0;
@@ -260,10 +259,16 @@ public:
 
     int AddBuff(const char* str, uint32_t nLen)
     {
-        mstrBuff.append(str, nLen);
+        mstrBuff.append(str, (size_t)nLen);
 
         return (int)mstrBuff.length();
     }
+	int AddBuff(const char* str, size_t nLen)
+	{
+		mstrBuff.append(str, nLen);
+
+		return (int)mstrBuff.length();
+	}
 
     int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
     {
@@ -291,7 +296,7 @@ public:
 
         mstrBuff.erase(nStart, nLen);
 
-        return mstrBuff.length();
+        return (int) mstrBuff.length();
     }
 
     const char* GetBuff()
@@ -301,7 +306,7 @@ public:
 
     int GetBuffLen() const
     {
-        return mstrBuff.length();
+        return (int) mstrBuff.length();
     }
 
     bufferevent* GetBuffEvent()
@@ -388,7 +393,7 @@ public:
         mnHashIdentID = xHashIdentID;
     }
 
-    int GetRealFD()
+    NFSOCK GetRealFD()
     {
         return nFD;
     }
@@ -407,7 +412,7 @@ private:
     NFGUID mnHashIdentID;//hash ident, special for distributed
     NFINet* m_pNet;
     //
-    int nFD;
+    NFSOCK nFD;
     bool bNeedRemove;
 };
 
@@ -426,7 +431,7 @@ public:
     virtual bool Final() = 0;
 
     //send a message with out msg-head[auto add msg-head in this function]
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const int nSockIndex = 0) = 0;
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex = 0) = 0;
 
     //send a message to all client[need to add msg-head for this message by youself]
     virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
@@ -434,9 +439,9 @@ public:
     //send a message with out msg-head to all client[auto add msg-head in this function]
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen) = 0;
 
-    virtual bool CloseNetObject(const int nSockIndex) = 0;
-    virtual NetObject* GetNetObject(const int nSockIndex) = 0;
-    virtual bool AddNetObject(const int nSockIndex, NetObject* pObject) = 0;
+    virtual bool CloseNetObject(const NFSOCK nSockIndex) = 0;
+    virtual NetObject* GetNetObject(const NFSOCK nSockIndex) = 0;
+    virtual bool AddNetObject(const NFSOCK nSockIndex, NetObject* pObject) = 0;
 
     virtual bool IsServer() = 0;
 

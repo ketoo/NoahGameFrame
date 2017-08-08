@@ -24,7 +24,7 @@ bool NFCLoginLogicModule::Shut()
     return true;
 }
 
-void NFCLoginLogicModule::OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCLoginLogicModule::OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     NFGUID nPlayerID;
 	NFMsg::ReqAccountLogin xMsg;
