@@ -855,6 +855,7 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String ActorID = "ActorID";// int
+		public static final String BossSoundList = "BossSoundList";// string
 		public static final String CamOffestPos = "CamOffestPos";// string
 		public static final String CamOffestRot = "CamOffestRot";// string
 		public static final String FilePath = "FilePath";// string
