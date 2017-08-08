@@ -16,7 +16,6 @@
 		<Plugin Name="NFHeroPlugin" />
 		<Plugin Name="NFItemBagPlugin" />
 		<Plugin Name="NFShopPlugin" />
-		<Plugin Name="NFGuildPlugin" />
 		<Plugin Name="NFUserGiftPlugin" />
 		<Plugin Name="NFTaskPlugin" />
 		<Plugin Name="NFSkillPlugin" />
@@ -79,6 +78,7 @@
 		<Plugin Name="NFActorPlugin" />
 		<Plugin Name="NFNoSqlPlugin" />
 		<Plugin Name="NFSecurityPlugin" />	
+		<Plugin Name="NFGuildPlugin" />
     	<ConfigPath Name="../" />		
 	</WorldServer>
 	

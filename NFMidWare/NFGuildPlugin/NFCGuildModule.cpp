@@ -8,18 +8,12 @@
 
 #include "NFCGuildModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 
 bool NFCGuildModule::Init()
 {
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
@@ -47,7 +41,7 @@ bool NFCGuildModule::AfterInit()
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGuildModule::OnLeaveGuildProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGuildModule::OnOprGuildMemberProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)) { return false; }
-
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCGuildModule::OnClienChatProcess)) { return false; }
     return true;
 }
 
@@ -80,35 +74,48 @@ int NFCGuildModule::ComponentAsyEnd(const NFGUID & self, const int nFormActor, c
 void NFCGuildModule::OnCreateGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckCreateGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
-	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
+
 }
 
 void NFCGuildModule::OnJoinGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckJoinGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
 void NFCGuildModule::OnLeaveGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckLeaveGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
 void NFCGuildModule::OnOprGuildMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckOprGuildMember);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int)xMsg.guild_id().index());
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(xMsg.guild_id().index());
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 }
 
 void NFCGuildModule::OnSearchGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen,NFMsg::ReqSearchGuild);
-	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit((int) nSockIndex);
+	NF_SHARE_PTR<int> xActorID = mActorList.GetElementBySuit(nSockIndex);
 	m_pActorModule->SendMsgToActor(*xActorID, NFGUID(0, nSockIndex), nMsgID, std::string(msg, nLen));
 	
+}
+
+void NFCGuildModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckPlayerChat);
+
+	NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
+
+	NF_SHARE_PTR<NFIObject> xGuidObject = m_pKernelModule->GetObject(xTargetID);
+	if (xGuidObject)
+	{
+		//cache the message for the guild member that off line
+		//m_pWorldNet_ServerModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
+	}
 } 

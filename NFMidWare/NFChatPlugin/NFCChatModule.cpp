@@ -20,7 +20,7 @@ bool NFCChatModule::Init()
 	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pNetClientModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
+	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	return true;
 }
@@ -56,9 +56,12 @@ void NFCChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID
 	break;
 	case NFMsg::ReqAckPlayerChat_EGameChatType::ReqAckPlayerChat_EGameChatType_EGCT_GUILD:
 	{
+		NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
 		NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::GuildID());
-		if (!xGuildID.IsNull())
+		if (!xGuildID.IsNull() && xGuildID == xTargetID)
 		{
+			//send to world server
+			m_pGameServerToWorldModule->TransmitToWorld(xGuildID.nData64, nMsgID, xMsg);
 		}
 	}
 	break;
@@ -70,6 +73,15 @@ void NFCChatModule::OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID
 			NFGUID xTargetID = NFINetModule::PBToNF(xMsg.target_id());
 			if (!xTargetID.IsNull())
 			{
+				if (m_pKernelModule->GetObject(xTargetID))
+				{
+
+				}
+				else
+				{
+					//send to world server
+					m_pGameServerToWorldModule->TransmitToWorld(xTargetID.nData64, nMsgID, xMsg);
+				}
 			}
 		}
 	}

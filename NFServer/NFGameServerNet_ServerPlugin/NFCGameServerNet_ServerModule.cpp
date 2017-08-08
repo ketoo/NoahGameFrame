@@ -61,11 +61,17 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	//EGMI_ACK_RECORD_CLEAR = 228,
 	//EGMI_ACK_RECORD_SORT = 229,
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGameServerNet_ServerModule::OnTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CREATE_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_JOIN_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_LEAVE_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_OPR_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGameServerNet_ServerModule::OnGuildTransWorld);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_CREATE_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_JOIN_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_LEAVE_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_SUBSCRIPTION_CHATGROUP, this, &NFCGameServerNet_ServerModule::OnTransWorld);
+
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE, this, &NFCGameServerNet_ServerModule::OnClienReqMoveProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_MOVE_IMMUNE, this, &NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_STATE_SYNC, this, &NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess);
@@ -1892,4 +1898,51 @@ void NFCGameServerNet_ServerModule::OnTransWorld(const NFSOCK nSockIndex, const 
 void NFCGameServerNet_ServerModule::OnTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen, const int nWorldKey)
 {
 	m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nWorldKey, nMsgID, msg, nLen);
+}
+
+void NFCGameServerNet_ServerModule::OnGuildTransWorld(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+	switch (nMsgID)
+	{
+		case NFMsg::EGMI_REQ_CREATE_GUILD:
+		case NFMsg::EGMI_REQ_JOIN_GUILD:
+		{
+			std::string strMsg;
+			NFGUID nPlayer;
+			if (NFINetModule::ReceivePB( nMsgID, msg, nLen, strMsg, nPlayer) && !nPlayer.IsNull())
+			{
+				NFGUID xGuildID = m_pKernelModule->GetPropertyObject(nPlayer, NFrame::Player::GuildID());
+				if (xGuildID.IsNull())
+				{
+					int nHashKey = nPlayer.nHead64;
+					m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHashKey, nMsgID, msg, nLen);
+				}
+			}
+		}
+		break;
+		case NFMsg::EGMI_REQ_LEAVE_GUILD:
+		case NFMsg::EGMI_REQ_OPR_GUILD:
+		{
+			
+		}
+		break;
+		case NFMsg::EGMI_REQ_SEARCH_GUILD:
+		{
+			
+		}
+		break;
+		default:
+		break;
+	}
+
+	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ObjectRecordVector2)
+
+	std::string strMsg;
+	NFGUID nPlayer;
+	int nHasKey = 0;
+	if (NFINetModule::ReceivePB( nMsgID, msg, nLen, strMsg, nPlayer))
+	{
+		nHasKey = nPlayer.nData64;
+		m_pNetClientModule->SendBySuit(NF_SERVER_TYPES::NF_ST_WORLD, nHasKey, nMsgID, msg, nLen);
+	}
 }

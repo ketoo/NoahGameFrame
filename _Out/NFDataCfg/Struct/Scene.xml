@@ -2,6 +2,7 @@
 <XML>
 	<Propertys>
 		<Property Id="ActorID" Cache="0" Desc="acctorid" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="BossSoundList" Cache="0" Desc="场景背景音乐列表" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="CamOffestPos" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="CamOffestRot" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="FilePath" Cache="0" Desc="文件路径" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
