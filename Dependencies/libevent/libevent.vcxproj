@@ -38,7 +38,7 @@
     <ClCompile Include="win32select.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FD20DB51-B151-44C8-A7AB-922CE5A237A1}</ProjectGuid>
+    <ProjectGuid>{75EC2E9B-EBB8-46F2-9DBE-3C78E73F8D55}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libevent</RootNamespace>
     <ProjectName>libevent</ProjectName>

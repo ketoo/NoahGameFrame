@@ -40,32 +40,32 @@ public:
 	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
 
 	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
 	virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
 
-	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID);
+	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID);
 
 	////////////////////////////////////////////////////////////////////////////////
-	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData);
-	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
 
-	virtual void SendToAllServer(const int nMsgID, const std::string& strData);
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
+	virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
-	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
-	virtual void SendToAllServerByPB(const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendToAllServerByPB(const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual void SendToAllServerByPB(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
 	//SendBySuit & SendSuitByPB  suit by (int32)nHashKey32
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int64_t nHashKey32, const uint16_t nMsgID, google::protobuf::Message& xData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 

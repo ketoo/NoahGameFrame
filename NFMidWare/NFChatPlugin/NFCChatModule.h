@@ -53,6 +53,6 @@ protected:
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIGameServerToWorldModule* m_pNetClientModule;
+	NFIGameServerToWorldModule* m_pGameServerToWorldModule;
 };
 #endif
