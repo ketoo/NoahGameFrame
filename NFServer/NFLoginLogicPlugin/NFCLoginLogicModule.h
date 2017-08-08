@@ -34,7 +34,7 @@ public:
 
     virtual bool AfterInit();
 
-    virtual void OnLoginProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    virtual void OnLoginProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 protected:
 	NFINetModule* m_pNetModule;

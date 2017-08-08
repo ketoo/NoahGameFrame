@@ -36,22 +36,22 @@ public:
 
     virtual bool AfterInit();
 
-	// ·¢ËÍÏûÏ¢
+	// å‘é€æ¶ˆæ¯
 public:
 	void RequireRoleList();
 	void RequireCreateRole(string strRoleName, int byCareer, int bySex);
 	void RequireEnterGameServer(int nRoleIndex);
 	void RequireMove(NFVector3 pos);
 
-	// ½ÓÊÕÏûÏ¢
+	// æ¥æ”¶æ¶ˆæ¯
 private:
-	void OnRoleList(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	// ½øÈëºÍÀë¿ª
-	void OnObjectEntry(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectLeave(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	// ÒÆ¶¯
-	void OnObjectMove(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnObjectJump(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRoleList(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	// è¿›å…¥å’Œç¦»å¼€
+	void OnObjectEntry(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectLeave(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	// ç§»åŠ¨
+	void OnObjectMove(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnObjectJump(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	void AddRecord(const NF_SHARE_PTR<NFIObject>& object, const std::string &strRecordName, const NFMsg::RecordAddRowStruct &data);

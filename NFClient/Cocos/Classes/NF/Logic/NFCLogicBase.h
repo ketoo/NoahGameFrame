@@ -52,10 +52,10 @@ public:
 protected:
 	virtual bool AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR_PTR cb);
 
-	// ·¢ËÍÏûÏ¢
+	// å‘é€æ¶ˆæ¯
 public:
 
-	// ½ÓÊÕÏûÏ¢
+	// æ¥æ”¶æ¶ˆæ¯
 private:
 
 public:

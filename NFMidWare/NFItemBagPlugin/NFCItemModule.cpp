@@ -154,45 +154,45 @@ bool NFCItemModule::CheckConfig()
 		{
 			assert(0);
 		}
-		int nType = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::ItemType());
+		int nType = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::ItemType());
 
 		if (nType < 0)
 		{
 			assert(0);
 		}
-		int nSubType = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::ItemSubType());
+		int nSubType = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::ItemSubType());
 		if (nSubType < 0)
 		{
 			assert(0);
 		}
 
-		int nLevel = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::Level());
+		int nLevel = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::Level());
 		if (nLevel < 0)
 		{
 			assert(0);
 		}
 
-		int nQuality = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::Quality());
+		int nQuality = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::Quality());
 		if (nQuality < 0)
 		{
 			assert(0);
 		}
 
-		//int nCoolDown = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::CoolDownTime());
+		//int nCoolDown = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::CoolDownTime());
 		//if (nCoolDown <= 0)
 		//{
 		//	assert(0);
 		//}
 
-		int nOverlayCount = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::OverlayCount());
+		int nOverlayCount = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::OverlayCount());
 		if (nOverlayCount <= 0)
 		{
 			assert(0);
 		}
 
 
-		int nBuyPrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::BuyPrice());
-		int nSalePrice = m_pElementModule->GetPropertyInt(strConfigID, NFrame::Item::SalePrice());
+		int nBuyPrice = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::BuyPrice());
+		int nSalePrice = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::Item::SalePrice());
 
 		//if (nSalePrice <= 0 || nBuyPrice <= 0)
 		if (nSalePrice < 0 || nBuyPrice < 0)
@@ -259,15 +259,15 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	const int nVIPEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::VIPEXP());
-	const int nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
-	const int nHP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::HP());
-	const int nSP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::SP());
-	const int nMP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::MP());
-	const int nGold = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
-	const int nMoney = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Money());
+	const int nVIPEXP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::VIPEXP());
+	const int64_t nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+	const int nHP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::HP());
+	const int nSP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::SP());
+	const int nMP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::MP());
+	const int64_t nGold = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::Gold());
+	const int nDiamond = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::Diamond());
 
-	if (nGold > 0 && !m_pPropertyModule->EnoughDiamond(self, nGold))
+	if (nGold > 0 && !m_pPropertyModule->EnoughGold(self, nGold))
 	{
 		return false;
 	}
@@ -277,7 +277,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->EnoughGold(self, nMoney))
+	if (nDiamond > 0 && !m_pPropertyModule->EnoughDiamond(self, nDiamond))
 	{
 		return false;
 	}
@@ -294,12 +294,17 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 
 	//////
 
+	if (nGold > 0 && !m_pPropertyModule->ConsumeGold(self, nGold))
+	{
+		return false;
+	}
+
 	if (nHP > 0 && !m_pPropertyModule->ConsumeHP(self, nHP))
 	{
 		return false;
 	}
 
-	if (nMoney > 0 && !m_pPropertyModule->ConsumeGold(self, nMoney))
+	if (nDiamond > 0 && !m_pPropertyModule->ConsumeDiamond(self, nDiamond))
 	{
 		return false;
 	}
@@ -335,7 +340,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 				continue;
 			}
 
-			const int nItemType = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::ItemType());
+			const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
 			switch (nItemType)
 			{
 			case NFMsg::EIT_EQUIP:
@@ -353,7 +358,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 	return true;
 }
 
-void NFCItemModule::OnClientUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCItemModule::OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckUseItem);
 

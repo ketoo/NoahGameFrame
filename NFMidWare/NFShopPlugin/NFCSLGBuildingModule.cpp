@@ -559,7 +559,7 @@ std::string NFCSLGBuildingModule::GetProduceHeartName(const NFGUID& self, const 
 }
 
 
-void NFCSLGBuildingModule::OnSLGClienMoveObject(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCSLGBuildingModule::OnSLGClienMoveObject(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqAckMoveBuildObject);
 
@@ -571,7 +571,7 @@ void NFCSLGBuildingModule::OnSLGClienMoveObject(const int nSockIndex, const int 
 	Move(nPlayerID, xBuildID, fX, fY, fZ);
 }
 
-void NFCSLGBuildingModule::OnSLGClienUpgradeBuilding(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCSLGBuildingModule::OnSLGClienUpgradeBuilding(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqUpBuildLv);
 
@@ -579,7 +579,7 @@ void NFCSLGBuildingModule::OnSLGClienUpgradeBuilding(const int nSockIndex, const
 	Upgrade(nPlayerID, xBuilID);
 }
 
-void NFCSLGBuildingModule::OnSLGClienCreateItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCSLGBuildingModule::OnSLGClienCreateItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nSockIndex, nMsgID, msg, nLen, NFMsg::ReqCreateItem);
 
