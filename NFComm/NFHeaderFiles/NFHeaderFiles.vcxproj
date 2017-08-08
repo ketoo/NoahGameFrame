@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{164E42F1-D331-4B83-8207-CB24EFFBC1C6}</ProjectGuid>
+    <RootNamespace>NFHeaderFiles</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>NFHeaderFiles</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
+    <OutDir>$(SolutionDir)_Out\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Temp\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\NFMessageDefine\NFMsgDefine.h" />
+    <ClInclude Include="..\NFPluginModule\NFGUID.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAccountRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIActor.h" />
+    <ClInclude Include="..\NFPluginModule\NFIActorModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAIServerNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAIServerToWorldModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAOIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIAsyMysqlModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIBigMapRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIBuffConfigModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIBuffModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICell.h" />
+    <ClInclude Include="..\NFPluginModule\NFICellManager.h" />
+    <ClInclude Include="..\NFPluginModule\NFIChatModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIClassModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICommonConfigModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICommonRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIComponent.h" />
+    <ClInclude Include="..\NFPluginModule\NFICoroutineModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFICreateRoleModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIElementModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIEquipModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIEquipPropertyModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIEventModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIFriendModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerConfigModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ClientModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerScriptModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGameServerToWorldModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGmModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGSSwichServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGuildModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIGuildRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIHateModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIHeroModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIHeroPropertyModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIHttpClientModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIHttpNetModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIItemConsumeManagerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIItemConsumeProcessModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIItemModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIKernelModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILevelModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILoginLogicModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILoginNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILoginToMasterModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILogModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFILuaScriptModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMailModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMailRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMapModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMasterModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMasterNet_HttpServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMasterNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMoveModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMysqlConnectMgrModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMysqlDriver.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMysqlDriverManager.h" />
+    <ClInclude Include="..\NFPluginModule\NFIMysqlModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFINavigationModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFINetClientModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFINetModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFINoSqlDriver.h" />
+    <ClInclude Include="..\NFPluginModule\NFINoSqlModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFINPCRefreshModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPackModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPlayerMysqlModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPlayerRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPlugin.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPluginManager.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPropertyConfigModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPropertyModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPropertyTrailModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIProxyLogicModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIProxyServerNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIProxyServerToAIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIProxyServerToGameModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIProxyServerToWorldModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPVPModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIPVPRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIRankModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIRankRedisModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISceneAOIModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISceneProcessModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIScheduleModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIScriptModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISecurityModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIShopModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISkillConsumeManagerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISkillConsumeProcessModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFISkillModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITagModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITaskModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITeamBroadcastModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITeamDataModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITeamModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITeamPVPModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITileModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFITotalLineTimeModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIUrlClientModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIUrlCodeModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIUserGiftModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWebsocketModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldGuildBroadcastModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldGuildDataModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldGuildEctypeModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldGuildModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldLogicModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldNet_ServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWorldToMasterModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFIWSSwichServerModule.h" />
+    <ClInclude Include="..\NFPluginModule\NFPlatform.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -14,7 +14,13 @@
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFConsistentHash.hpp"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -34,17 +40,17 @@ public:
 	virtual int ExpandBufferSize(const unsigned int size = 1024 * 1024 * 20);
 
 	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, NET_RECEIVE_FUNCTOR_PTR functorPtr);
-	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
+	virtual int AddReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID, NET_RECEIVE_FUNCTOR_PTR functorPtr);
 	virtual int AddEventCallBack(const NF_SERVER_TYPES eType, NET_EVENT_FUNCTOR_PTR functorPtr);
 
-	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const int nMsgID);
+	virtual void RemoveReceiveCallBack(const NF_SERVER_TYPES eType, const uint16_t nMsgID);
 
 	////////////////////////////////////////////////////////////////////////////////
-	virtual void SendByServerID(const int nServerID, const int nMsgID, const std::string& strData);
-	virtual void SendByServerID(const int nServerID, const int nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendByServerID(const int nServerID, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
 
-	virtual void SendToAllServer(const int nMsgID, const std::string& strData);
-	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const int nMsgID, const std::string& strData);
+	virtual void SendToAllServer(const uint16_t nMsgID, const std::string& strData);
+	virtual void SendToAllServer(const NF_SERVER_TYPES eType, const uint16_t nMsgID, const std::string& strData);
 
 	virtual void SendToServerByPB(const int nServerID, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
@@ -53,13 +59,13 @@ public:
 
 	////////////////////////////////////////////////////////////////////////////////
 
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const std::string& strData);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const std::string& strData);
-	//
-	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int& nHashKey, const int nMsgID, const char* msg, const uint32_t nLen);
+	//SendBySuit & SendSuitByPB  suit by (int32)nHashKey32
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const std::string& strData);
+	virtual void SendBySuit(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const char* msg, const uint32_t nLen);
 	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const std::string& strHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData);
-	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int& nHashKey, const uint16_t nMsgID, const google::protobuf::Message& xData);
+	virtual void SendSuitByPB(const NF_SERVER_TYPES eType, const int nHashKey32, const uint16_t nMsgID, const google::protobuf::Message& xData);
 
 	////////////////////////////////////////////////////////////////////////////////
 
@@ -81,11 +87,11 @@ private:
 
 	void KeepState(NF_SHARE_PTR<ConnectData> pServerData);
 
-	void OnSocketEvent(const int fd, const NF_NET_EVENT eEvent, NFINet* pNet);
+	void OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-	int OnConnected(const int fd, NFINet* pNet);
+	int OnConnected(const NFSOCK fd, NFINet* pNet);
 
-	int OnDisConnected(const int fd, NFINet* pNet);
+	int OnDisConnected(const NFSOCK fd, NFINet* pNet);
 
 	void ProcessAddNetConnect();
 

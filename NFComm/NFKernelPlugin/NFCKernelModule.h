@@ -68,6 +68,7 @@ public:
 	virtual bool SetPropertyVector3(const NFGUID& self, const std::string& strPropertyName, const NFVector3& value);
 
     virtual NFINT64 GetPropertyInt(const NFGUID& self, const std::string& strPropertyName);
+	virtual int GetPropertyInt32(const NFGUID& self, const std::string& strPropertyName);	//equal to (int)GetPropertyInt(...), to remove C4244 warning
     virtual double GetPropertyFloat(const NFGUID& self, const std::string& strPropertyName);
     virtual const std::string& GetPropertyString(const NFGUID& self, const std::string& strPropertyName);
     virtual const NFGUID& GetPropertyObject(const NFGUID& self, const std::string& strPropertyName);
@@ -128,8 +129,8 @@ public:
 	
 	virtual int GetObjectByProperty(const int nSceneID, const int nGroupID, const std::string& strPropertyName, const NFDataList& valueArgArg, NFDataList& list);
 
-	virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList);
-	virtual int Random(int nStart, int nEnd);
+	virtual void Random(int nStart, int nEnd, int nCount, NFDataList& valueList);		//return [nStart, nEnd)
+	virtual int Random(int nStart, int nEnd);											//return [nStart, nEnd)
 
     //////////////////////////////////////////////////////////////////////////
     virtual bool LogStack();

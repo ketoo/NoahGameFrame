@@ -8,7 +8,13 @@
 
 #include "NFCTeamModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -45,7 +51,7 @@ bool NFCTeamModule::AfterInit()
     return true;
 }
 
-const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
+NFGUID NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefaultTeamID, const std::string& strName, const std::string& strRoleName, const int nLevel, const int nJob , const int nDonation , const int nVIP)
 {
     if (strName.empty())
     {
@@ -184,7 +190,7 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    const int nRow = varList.Int(0);
+    const int nRow = varList.Int32(0);
     
     if (!pMemberRecord->Remove(nRow))
     {
@@ -232,7 +238,7 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
         return false;
     }
 
-    const int nRow = varList.Int(0);
+    const int nRow = varList.Int32(0);
     if (!pMemberRecord->Remove(nRow))
     {
         return false;
@@ -308,7 +314,7 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
         return false;
     }
 
-    const int nRow = varList.Int(0);
+    const int nRow = varList.Int32(0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::GameID, nGameID);
     
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 1);
@@ -337,7 +343,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
         return false;
     }
 
-    const int nRow = varList.Int(0);
+    const int nRow = varList.Int32(0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::GameID, 0);
     return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
@@ -346,7 +352,7 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
 bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData)
 {
     std::vector<std::string> xPlayerList;
-    std::vector<int64_t> xGameIDList;
+    std::vector<int> xGameIDList;
 
     std::vector<NFGUID> xPlayerIDList;
     if (!GetMemberList(self, xTeam, xPlayerIDList))
@@ -370,7 +376,7 @@ bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, 
     return true;
 }
 
-void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnCreateTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckCreateTeam);
 
@@ -402,7 +408,7 @@ void NFCTeamModule::OnCreateTeamProcess(const int nSockIndex, const int nMsgID, 
     m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_CREATE_TEAM, xAck, nSockIndex, nPlayerID);
 }
 
-void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnJoinTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckJoinTeam);
 
@@ -431,7 +437,7 @@ void NFCTeamModule::OnJoinTeamProcess(const int nSockIndex, const int nMsgID, co
     }
 }
 
-void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnLeaveTeamProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckLeaveTeam);
 
@@ -462,7 +468,7 @@ void NFCTeamModule::OnLeaveTeamProcess(const int nSockIndex, const int nMsgID, c
     }
 }
 
-void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnOprTeamMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckOprTeamMember);
 
@@ -486,7 +492,7 @@ void NFCTeamModule::OnOprTeamMemberProcess(const int nSockIndex, const int nMsgI
     BroadcastMsgToTeam(nPlayerID, xTeam, NFMsg::EGMI_ACK_OPRMEMBER_TEAM, xMsg);
 }
 
-void NFCTeamModule::OnTeamEnterEctypeProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCTeamModule::OnTeamEnterEctypeProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqTeamEnterEctype);
 
@@ -556,8 +562,8 @@ bool NFCTeamModule::GetTeamInfo(const NFGUID& self, const NFGUID& xTeam, NFMsg::
 
 
         std::string strName = pMemberRecord->GetString(i, NFrame::Team::MemberList::Name);
-        const int nLevel = pMemberRecord->GetInt(i, NFrame::Team::MemberList::Level);
-        const int nJob = pMemberRecord->GetInt(i, NFrame::Team::MemberList::Job);
+        const int nLevel = pMemberRecord->GetInt32(i, NFrame::Team::MemberList::Level);
+        const int nJob = pMemberRecord->GetInt32(i, NFrame::Team::MemberList::Job);
         const NFGUID xPlayerID = pMemberRecord->GetObject(i, NFrame::Team::MemberList::GUID);
 
         pMemberinfo->set_name(strName);

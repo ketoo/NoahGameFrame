@@ -109,7 +109,7 @@ bool NFCHeroModule::ActiviteHero(const NFGUID & self, const NFGUID & hero)
 	return true;
 }
 
-bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int nExp)
+bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp)
 {
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord.get())
@@ -139,14 +139,14 @@ bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const 
 		return false;
 	}
 
-	const int nCurExp = varRowData.Int(NFrame::Player::PlayerHero::Exp);
-	const int nBeforeLevel = varRowData.Int(NFrame::Player::PlayerHero::Level);
+	const int64_t nCurExp = varRowData.Int(NFrame::Player::PlayerHero::Exp);
+	const int nBeforeLevel = varRowData.Int32(NFrame::Player::PlayerHero::Level);
 
-	int nLeftExp = nCurExp + nExp;
+	int64_t nLeftExp = nCurExp + nExp;
 	int nAfterLevel = nBeforeLevel;
 	for (int i = nBeforeLevel; i < ECONSTDEFINE_HERO_MAXLEVEL; i++)
 	{
-		const int nNeedExp = (i + 1) * ECONSTDEFINE_HERO_ONCELEVEEXP;
+		const int64_t nNeedExp = (i + 1) * ECONSTDEFINE_HERO_ONCELEVEEXP;
 
 		if (nLeftExp >= nNeedExp)
 		{
@@ -185,7 +185,7 @@ bool NFCHeroModule::HeroStarUp(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	const int nBeforeStar = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
+	const int nBeforeStar = pHeroRecord->GetInt32(nRow, NFrame::Player::PlayerHero::Star);
 
 	int nAfterStar = nBeforeStar + 1;
 	if (nAfterStar > ECONSTDEFINE_HERO_MAXSTAR)
@@ -290,7 +290,7 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 		return false;
 	}
 
-	int nActivite = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Activated);
+	int nActivite = pHeroRecord->GetInt32(nRow, NFrame::Player::PlayerHero::Activated);
 	if (nActivite <= 0)
 	{
 		return false;
@@ -343,8 +343,8 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 		return false;
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::GroupID());
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_ERROR)
 	{
@@ -367,7 +367,7 @@ bool NFCHeroModule::CreateHero(const NFGUID& self, const NFGUID& xHeroID)
 
     NFDataList varList;
 
-    int nCamp = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Camp());
+    int nCamp = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Camp());
     varList << NFrame::NPC::Camp() << nCamp;
     varList << NFrame::NPC::MasterID() << self;
 
@@ -458,7 +458,7 @@ bool NFCHeroModule::HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, con
 	return false;
 }
 
-void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCHeroModule::OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSetFightHero);
 
@@ -468,7 +468,7 @@ void NFCHeroModule::OnSetFightHeroMsg(const int nSockIndex, const int nMsgID, co
 	SetFightHero(nPlayerID, xHero, nSet);
 }
 
-void NFCHeroModule::OnSwitchFightHeroMsg(const int nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCHeroModule::OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSwitchFightHero);
 
