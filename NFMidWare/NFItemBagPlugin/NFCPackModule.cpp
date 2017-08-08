@@ -52,7 +52,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 		return NULL_OBJECT;
 	}
 
-	int nItemType = m_pElementModule->GetPropertyInt(strConfigName, NFrame::Item::ItemType());
+	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
 	if ( NFMsg::EItemType::EIT_EQUIP != nItemType )
 	{
 		return NULL_OBJECT;
@@ -122,8 +122,8 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 	else
 	{
-		int nFindRow = varFindResult.Int(0);
-		int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
+		int nFindRow = varFindResult.Int32(0);
+		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::BagItemList::ItemCount);
 		int nNewCount = nOldCount + nCount;
 		pRecord->SetInt(nFindRow, NFrame::Player::BagItemList::ItemCount, nNewCount);
 	}
@@ -159,7 +159,7 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 		int nTotalCount = 0;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
-			int nFindRow = varFindResult.Int(i);
+			int nFindRow = varFindResult.Int32(i);
 			pRecord->Remove(nFindRow);
 		}
 	}
@@ -199,8 +199,8 @@ bool NFCPackModule::DeleteItem( const NFGUID& self, const std::string& strItemCo
 		int nNeedDelCount = nCount;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
-			int nFindRow = varFindResult.Int(i);
-			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
+			int nFindRow = varFindResult.Int32(i);
+			int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::BagItemList::ItemCount);
 			if (nOldCount > nNeedDelCount)
 			{
 				int nNewCount = nOldCount - nNeedDelCount;
@@ -263,8 +263,8 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
 		int nTotalCount = 0;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
-			int nFindRow = varFindResult.Int(i);
-			int nOldCount = pRecord->GetInt(nFindRow, NFrame::Player::BagItemList::ItemCount);
+			int nFindRow = varFindResult.Int32(i);
+			int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::BagItemList::ItemCount);
 			nTotalCount += nOldCount;
 		}
 

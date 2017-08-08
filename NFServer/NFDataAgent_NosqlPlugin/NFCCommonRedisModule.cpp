@@ -678,7 +678,7 @@ bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIProp
         {
             NFMsg::PropertyFloat* pPropertyData = xMsg.add_property_float_list();
             const std::string& strPropertyName = pProperty->GetKey();
-            const float xPropertyValue = pProperty->GetFloat();
+            const double xPropertyValue = pProperty->GetFloat();
 
             if (pPropertyData)
             {
@@ -817,7 +817,7 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
                 case TDATA_FLOAT:
                 {
                     NFMsg::RecordFloat* pPropertyData = pRowData->add_record_float_list();
-                    const float xPropertyValue = pRecord->GetFloat(iRow, iCol);
+                    const double xPropertyValue = pRecord->GetFloat(iRow, iCol);
 
                     if (pPropertyData)
                     {

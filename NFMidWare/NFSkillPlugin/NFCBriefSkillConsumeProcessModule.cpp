@@ -69,7 +69,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 	const double fDamageDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::DamageDistance());
 	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::TargetType());
 
-	m_pPropertyModule->SubPropertyValue(self, strConsumeProperty, NFIPropertyModule::NPG_ALL, nConsumeValue);
+	m_pPropertyModule->AddPropertyValue(self, strConsumeProperty, NFIPropertyModule::NPG_ALL, -nConsumeValue);
 
     for ( int j = 0; j < other.GetCount(); j++ )
     {
@@ -89,7 +89,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
             continue;
         }
 
-		m_pPropertyModule->SubPropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, nDamageValue);
+		m_pPropertyModule->AddPropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, -nDamageValue);
 
 		//NFMsg::EffectData_EResultType
 		damageListValue.AddInt(nDamageValue);

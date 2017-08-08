@@ -42,7 +42,7 @@ public:
     {
         ServerData xServerData;
 
-        std::map<NFGUID, int> xRoleInfo;
+        std::map<NFGUID, NFSOCK> xRoleInfo;
     };
 
 public:
@@ -52,7 +52,7 @@ public:
     virtual bool RemovePlayerGateInfo(const NFGUID& nRoleID) = 0;
     virtual NF_SHARE_PTR<GateBaseInfo> GetPlayerGateInfo(const NFGUID& nRoleID) = 0;   
 	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfo(const int nGateID) = 0;
-	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const int nSockIndex) = 0;
+	virtual NF_SHARE_PTR<GateServerInfo> GetGateServerInfoBySockIndex(const NFSOCK nSockIndex) = 0;
 };
 
 #endif

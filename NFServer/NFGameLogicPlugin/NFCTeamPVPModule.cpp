@@ -8,7 +8,13 @@
 
 #include "NFCTeamPVPModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
+#ifdef _MSC_VER
+#pragma warning(disable: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
+#ifdef _MSC_VER
+#pragma warning(default: 4244 4267)
+#endif
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCTeamPVPModule::Init()

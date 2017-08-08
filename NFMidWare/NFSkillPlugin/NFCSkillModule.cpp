@@ -83,13 +83,13 @@ int NFCSkillModule::ExistSkill(const NFGUID& self, const std::string& strSkillNa
 	return -1;
 }
 
-void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckUseSkill)
 
 	//bc
 	const std::string& strSkillID = xMsg.skill_id();
-	const int nSkillType = m_pElementModule->GetPropertyInt(strSkillID, NFrame::Skill::SkillType());
+	const int nSkillType = m_pElementModule->GetPropertyInt32(strSkillID, NFrame::Skill::SkillType());
 	NF_SHARE_PTR<NFISkillConsumeProcessModule> xProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule((SKILL_CONSUME_TYPE)nSkillType);
 	if (xProcessModule)
 	{
@@ -119,7 +119,7 @@ void NFCSkillModule::OnClienUseSkill(const int nSockIndex, const int nMsgID, con
 
 					*pNewEffectData->mutable_effect_ident() = NFINetModule::NFToPB(xList.Object(i));
 
-					pNewEffectData->set_effect_value(xDamageList.Int(i));
+					pNewEffectData->set_effect_value(xDamageList.Int32(i));
 					pNewEffectData->set_effect_rlt((NFMsg::EffectData_EResultType)xResultList.Int(i));
 				}
 

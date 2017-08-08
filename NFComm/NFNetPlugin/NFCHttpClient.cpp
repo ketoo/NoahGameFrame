@@ -283,7 +283,7 @@ void NFCHttpClient::OnHttpReqDone(struct evhttp_request *req, void *ctx)
 		* sadly we are mostly left guessing what the error
 		* might have been.  We'll do our best... */
 		struct bufferevent *bev = (struct bufferevent *) ctx;
-		unsigned long oslerr;
+		unsigned long oslerr = 0;
 		int printed_err = 0;
 		int errcode = EVUTIL_SOCKET_ERROR();
 
