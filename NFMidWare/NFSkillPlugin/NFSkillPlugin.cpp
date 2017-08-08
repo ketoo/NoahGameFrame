@@ -6,10 +6,9 @@
 //
 // -------------------------------------------------------------------------
 
-
-#include "NFCSkillModule.h"
 #include "NFSkillPlugin.h"
-
+#include "NFCSkillModule.h"
+#include "NFCSkillConsumeManagerModule.h"
 //
 //
 #ifdef NF_DYNAMIC_PLUGIN
@@ -41,11 +40,13 @@ const std::string NFSkillPlugin::GetPluginName()
 
 void NFSkillPlugin::Install()
 {
-    REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	REGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
+	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 
 }
 
 void NFSkillPlugin::Uninstall()
 {
-    UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	UNREGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
 }
