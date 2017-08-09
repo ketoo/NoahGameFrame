@@ -47,11 +47,11 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String Gold = "Gold";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String MP = "MP";// int
-		public static readonly String Money = "Money";// int
 		public static readonly String SP = "SP";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		// Record
@@ -962,7 +962,7 @@ namespace NFrame
 		public static readonly String DamageDistance = "DamageDistance";// float
 		public static readonly String DamageProperty = "DamageProperty";// string
 		public static readonly String DamageType = "DamageType";// int
-		public static readonly String DamageValue = "DamageValue";// string
+		public static readonly String DamageValue = "DamageValue";// int
 		public static readonly String DefaultHitTime = "DefaultHitTime";// float
 		public static readonly String Desc = "Desc";// string
 		public static readonly String GetBuffList = "GetBuffList";// string

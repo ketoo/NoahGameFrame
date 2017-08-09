@@ -41,11 +41,11 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
+		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
 		public static final String MP = "MP";// int
-		public static final String Money = "Money";// int
 		public static final String SP = "SP";// int
 		public static final String VIPEXP = "VIPEXP";// int
 		// Record
@@ -956,7 +956,7 @@ package nframe;
 		public static final String DamageDistance = "DamageDistance";// float
 		public static final String DamageProperty = "DamageProperty";// string
 		public static final String DamageType = "DamageType";// int
-		public static final String DamageValue = "DamageValue";// string
+		public static final String DamageValue = "DamageValue";// int
 		public static final String DefaultHitTime = "DefaultHitTime";// float
 		public static final String Desc = "Desc";// string
 		public static final String GetBuffList = "GetBuffList";// string
