@@ -93,7 +93,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
 		//NFMsg::EffectData_EResultType
 		damageListValue.AddInt(nDamageValue);
-		damageResultList.AddInt(1);
+		damageResultList.AddInt(NFMsg::EffectData_EResultType::EffectData_EResultType_EET_SUCCESS);
 
 		pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
     }
