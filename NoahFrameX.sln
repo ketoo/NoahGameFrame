@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFSDK", "NFSDK", "{410C8A08-63DC-45B2-ADB9-08CD991861F0}"
 EndProject
@@ -373,6 +373,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent", "Dependencies\li
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent_core", "Dependencies\libevent\libevent_core.vcxproj", "{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6", "Tutorial\Tutorial6\Tutorial6.vcxproj", "{C21FBABD-FF91-4FF1-855B-BB7783AE6237}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -729,6 +731,12 @@ Global
 		{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}.Release|x64.ActiveCfg = Release|x64
 		{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}.Release|x64.Build.0 = Release|x64
 		{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD}.Release|x86.ActiveCfg = Release|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Debug|x64.ActiveCfg = Debug|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Debug|x64.Build.0 = Debug|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Debug|x86.ActiveCfg = Debug|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Release|x64.ActiveCfg = Release|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Release|x64.Build.0 = Release|x64
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -797,6 +805,7 @@ Global
 		{164E42F1-D331-4B83-8207-CB24EFFBC1C6} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 		{75EC2E9B-EBB8-46F2-9DBE-3C78E73F8D55} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{C21FBABD-FF91-4FF1-855B-BB7783AE6237} = {374F8F3D-D507-4C1A-AEAD-376B22AAEC5F}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
