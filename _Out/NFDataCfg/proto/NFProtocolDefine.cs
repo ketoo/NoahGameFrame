@@ -763,6 +763,15 @@ namespace NFrame
 			public const int BUFF_GATE = 28;//int
 
 		}
+		public class DropItemList
+		{
+			//Class name
+			public static readonly String ThisName = "DropItemList";
+			public const int GUID = 0;//GUID
+			public const int ConfigID = 1;//string
+			public const int ItemCount = 2;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name

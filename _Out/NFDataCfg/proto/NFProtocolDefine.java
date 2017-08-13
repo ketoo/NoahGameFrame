@@ -757,6 +757,15 @@ package nframe;
 			public static final int BUFF_GATE = 28;//int
 
 		}
+		public class DropItemList
+		{
+			//Class name
+			public static final String ThisName = "DropItemList";
+			public static final int GUID = 0;//GUID
+			public static final int ConfigID = 1;//string
+			public static final int ItemCount = 2;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name
