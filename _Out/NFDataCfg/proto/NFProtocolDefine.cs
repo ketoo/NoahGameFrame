@@ -767,7 +767,7 @@ namespace NFrame
 		{
 			//Class name
 			public static readonly String ThisName = "DropItemList";
-			public const int GUID = 0;//GUID
+			public const int GUID = 0;//object
 			public const int ConfigID = 1;//string
 			public const int ItemCount = 2;//int
 

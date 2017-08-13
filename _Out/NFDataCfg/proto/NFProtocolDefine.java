@@ -761,7 +761,7 @@ package nframe;
 		{
 			//Class name
 			public static final String ThisName = "DropItemList";
-			public static final int GUID = 0;//GUID
+			public static final int GUID = 0;//object
 			public static final int ConfigID = 1;//string
 			public static final int ItemCount = 2;//int
 
