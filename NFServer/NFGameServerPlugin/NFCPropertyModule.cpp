@@ -10,7 +10,7 @@
 
 bool NFCPropertyModule::Init()
 {
-	   m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pPropertyConfigModule = pPluginManager->FindModule<NFIPropertyConfigModule>();
@@ -60,10 +60,7 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
                 return pRecord->SetInt(eGroupType, strPropertyName, nValue);
             }
         }
-
-        //return m_pKernelModule->SetRecordInt( self, mstrCommPropertyName, eGroupType, *pTableCol, nValue );
     }
-
     
     m_pKernelModule->SetPropertyInt(self, strPropertyName, nValue);
 
@@ -71,9 +68,20 @@ int NFCPropertyModule::SetPropertyValue(const NFGUID& self, const std::string& s
 }
 
 
-bool NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue)
+bool NFCPropertyModule::CalculatePropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue, const bool bPositive)
 {
-    if (NFPropertyGroup::NPG_ALL != eGroupType)
+	if (NFPropertyGroup::NPG_ALL == eGroupType)
+	{
+		int64_t nPropertyValue = m_pKernelModule->GetPropertyInt(self, strPropertyName);
+		nPropertyValue = nPropertyValue + nValue;
+		if (bPositive)
+		{
+			nPropertyValue = (nPropertyValue >= 0) ? nPropertyValue : 0;
+		}
+
+		m_pKernelModule->SetPropertyInt(self, strPropertyName, nPropertyValue);
+	}
+	else
     {
         NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
         if (pObject)
@@ -82,9 +90,14 @@ bool NFCPropertyModule::AddPropertyValue(const NFGUID& self, const std::string& 
             if (pRecord)
             {
                 pRecord->SetUsed(eGroupType, true);
-                int nPropertyValue = pRecord->GetInt32(eGroupType, strPropertyName);
+				int64_t nPropertyValue = pRecord->GetInt(eGroupType, strPropertyName);
+				nPropertyValue = nPropertyValue + nValue;
+				if (bPositive)
+				{
+					nPropertyValue = (nPropertyValue >= 0) ? nPropertyValue : 0;
+				}
 
-                return pRecord->SetInt(eGroupType, strPropertyName, nPropertyValue + nValue);
+                return pRecord->SetInt(eGroupType, strPropertyName, nPropertyValue);
             }
         }
     }
@@ -242,6 +255,22 @@ bool NFCPropertyModule::EnoughHP(const NFGUID& self, const int nValue)
     return false;
 }
 
+bool NFCPropertyModule::DamageHP(const NFGUID & self, const int nValue)
+{
+	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HP());
+	if (nCurValue > 0)
+	{
+		nCurValue -= nValue;
+		nCurValue = (nCurValue >= 0) ? nCurValue : 0;
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), nCurValue);
+
+		return true;
+	}
+
+	return false;
+}
+
 bool NFCPropertyModule::ConsumeHP(const NFGUID& self, const int nValue)
 {
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HP());
@@ -300,6 +329,21 @@ bool NFCPropertyModule::EnoughMP(const NFGUID& self, const int nValue)
     }
 
     return false;
+}
+
+bool NFCPropertyModule::DamageMP(const NFGUID & self, const int nValue)
+{
+	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::MP());
+	if (nCurValue > 0)
+	{
+		nCurValue -= nValue;
+		nCurValue = (nCurValue >= 0) ? nCurValue : 0;
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::MP(), nCurValue);
+
+		return true;
+	}
+
 }
 
 bool NFCPropertyModule::FullSP(const NFGUID& self)
