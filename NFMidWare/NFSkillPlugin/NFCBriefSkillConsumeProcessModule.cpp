@@ -59,7 +59,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 	const NFINT64 nConsumeTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::ConsumeType());
 
 	const std::string& strDamageProperty = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::DamageProperty());
-	const NFINT64 nDamageValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageValue());
+	const NFINT64 nDamageCnfValue = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageValue());
 	const NFINT64 nDamageTYpe = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::DamageType());
 
 	const std::string& strGetBuffList = m_pElementModule->GetPropertyString(strSkillName, NFrame::Skill::GetBuffList());
@@ -69,7 +69,16 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 	const double fDamageDistance = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::DamageDistance());
 	const NFINT64 nTargetType = m_pElementModule->GetPropertyInt(strSkillName, NFrame::Skill::TargetType());
 
-	m_pPropertyModule->AddPropertyValue(self, strConsumeProperty, NFIPropertyModule::NPG_ALL, -nConsumeValue);
+	int64_t nOldConsumeVaue = m_pKernelModule->GetPropertyInt(self, strConsumeProperty);
+	nOldConsumeVaue -= nConsumeValue;
+	if (nOldConsumeVaue < 0)
+	{
+		return 2;
+	}
+
+	m_pKernelModule->SetPropertyInt(self, strConsumeProperty, nOldConsumeVaue);
+
+	NFINT64 nDamageValue = (1 + m_pKernelModule->Random() / 10.0f) * nDamageCnfValue;
 
     for ( int j = 0; j < other.GetCount(); j++ )
     {
@@ -89,13 +98,14 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
             continue;
         }
 
-		m_pPropertyModule->AddPropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, -nDamageValue);
+		pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
+
+		m_pPropertyModule->CalculatePropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, -nDamageValue, true);
 
 		//NFMsg::EffectData_EResultType
 		damageListValue.AddInt(nDamageValue);
 		damageResultList.AddInt(NFMsg::EffectData_EResultType::EffectData_EResultType_EET_SUCCESS);
 
-		pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
     }
 
     return 0;
