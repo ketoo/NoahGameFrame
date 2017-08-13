@@ -766,7 +766,7 @@ namespace NFrame
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "DropItemList"; return x; };			static const int GUID = 0;//GUID
+			static const std::string& ThisName(){ static std::string x = "DropItemList"; return x; };			static const int GUID = 0;//object
 			static const int ConfigID = 1;//string
 			static const int ItemCount = 2;//int
 
