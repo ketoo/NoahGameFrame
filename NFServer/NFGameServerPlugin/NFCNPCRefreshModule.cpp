@@ -32,7 +32,8 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
     return true;
@@ -80,9 +81,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
-            const std::string& strConfigID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
-            int nHPMax = m_pElementModule->GetPropertyInt32(strConfigID, NFrame::NPC::MAXHP());
-
+			int nHPMax = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::MAXHP());
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
 
             m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
