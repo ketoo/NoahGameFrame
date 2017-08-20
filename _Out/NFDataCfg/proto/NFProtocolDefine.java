@@ -962,11 +962,13 @@ package nframe;
 		public static final String ConsumeType = "ConsumeType";// int
 		public static final String ConsumeValue = "ConsumeValue";// string
 		public static final String CoolDownTime = "CoolDownTime";// float
+		public static final String DamageCount = "DamageCount";// int
 		public static final String DamageDistance = "DamageDistance";// float
+		public static final String DamageIntervalTime = "DamageIntervalTime";// float
 		public static final String DamageProperty = "DamageProperty";// string
 		public static final String DamageType = "DamageType";// int
 		public static final String DamageValue = "DamageValue";// int
-		public static final String DefaultHitTime = "DefaultHitTime";// float
+		public static final String DefaultHitTime = "DefaultHitTime";// string
 		public static final String Desc = "Desc";// string
 		public static final String GetBuffList = "GetBuffList";// string
 		public static final String Icon = "Icon";// string
