@@ -54,7 +54,7 @@ public:
 
 
 
-	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strData) = 0;
+	virtual const bool ZAdd(const std::string& strKey, const double nScore, const std::string& strMember) = 0;
 	virtual const bool ZIncrBy(const std::string& strKey, const std::string& strMember, const double dwIncrement) = 0;
 
 	virtual const bool ZRem(const std::string& strKey, const std::string& strMember) = 0;
