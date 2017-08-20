@@ -968,11 +968,13 @@ namespace NFrame
 		public static readonly String ConsumeType = "ConsumeType";// int
 		public static readonly String ConsumeValue = "ConsumeValue";// string
 		public static readonly String CoolDownTime = "CoolDownTime";// float
+		public static readonly String DamageCount = "DamageCount";// int
 		public static readonly String DamageDistance = "DamageDistance";// float
+		public static readonly String DamageIntervalTime = "DamageIntervalTime";// float
 		public static readonly String DamageProperty = "DamageProperty";// string
 		public static readonly String DamageType = "DamageType";// int
 		public static readonly String DamageValue = "DamageValue";// int
-		public static readonly String DefaultHitTime = "DefaultHitTime";// float
+		public static readonly String DefaultHitTime = "DefaultHitTime";// string
 		public static readonly String Desc = "Desc";// string
 		public static readonly String GetBuffList = "GetBuffList";// string
 		public static readonly String Icon = "Icon";// string
