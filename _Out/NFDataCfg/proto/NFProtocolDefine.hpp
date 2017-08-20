@@ -967,11 +967,13 @@ namespace NFrame
 		static const std::string& ConsumeType(){ static std::string x = "ConsumeType"; return x; };// int
 		static const std::string& ConsumeValue(){ static std::string x = "ConsumeValue"; return x; };// string
 		static const std::string& CoolDownTime(){ static std::string x = "CoolDownTime"; return x; };// float
+		static const std::string& DamageCount(){ static std::string x = "DamageCount"; return x; };// int
 		static const std::string& DamageDistance(){ static std::string x = "DamageDistance"; return x; };// float
+		static const std::string& DamageIntervalTime(){ static std::string x = "DamageIntervalTime"; return x; };// float
 		static const std::string& DamageProperty(){ static std::string x = "DamageProperty"; return x; };// string
 		static const std::string& DamageType(){ static std::string x = "DamageType"; return x; };// int
 		static const std::string& DamageValue(){ static std::string x = "DamageValue"; return x; };// int
-		static const std::string& DefaultHitTime(){ static std::string x = "DefaultHitTime"; return x; };// float
+		static const std::string& DefaultHitTime(){ static std::string x = "DefaultHitTime"; return x; };// string
 		static const std::string& Desc(){ static std::string x = "Desc"; return x; };// string
 		static const std::string& GetBuffList(){ static std::string x = "GetBuffList"; return x; };// string
 		static const std::string& Icon(){ static std::string x = "Icon"; return x; };// string
