@@ -1477,11 +1477,12 @@ int NFCKernelModule::Random(int nStart, int nEnd)
 
 float NFCKernelModule::Random()
 {
+	mnRandomPos++;
+
 	if (mnRandomPos + 1 >= mvRandom.size())
 	{
 		mnRandomPos = 0;
 	}
-
 	return mvRandom.at(mnRandomPos);;
 }
 

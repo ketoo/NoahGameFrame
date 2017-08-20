@@ -431,7 +431,7 @@ const bool NFCNoSqlDriver::HGetAll(const std::string & strKey, std::vector<std::
 	return false;
 }
 
-const bool NFCNoSqlDriver::ZAdd(const std::string & strKey, const double nScore, const std::string & strData)
+const bool NFCNoSqlDriver::ZAdd(const std::string & strKey, const double nScore, const std::string & strMember)
 {
 	if (!Enable())
 	{
@@ -440,7 +440,7 @@ const bool NFCNoSqlDriver::ZAdd(const std::string & strKey, const double nScore,
 
 	try
 	{
-		m_pNoSqlClient->zadd(strKey, nScore, strData);
+		m_pNoSqlClient->zadd(strKey, nScore, strMember);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
