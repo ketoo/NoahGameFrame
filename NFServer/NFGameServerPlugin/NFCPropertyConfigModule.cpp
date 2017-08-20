@@ -71,14 +71,15 @@ void NFCPropertyConfigModule::Load()
 				{
 					xPropertyMap = NF_SHARE_PTR<NFMapEx<int, std::string>>(NF_NEW NFMapEx<int, std::string>());
 					mhtCoefficienData.AddElement(nJob, xPropertyMap);
-
-					NF_SHARE_PTR<std::string> xRefPropertyIDName = xPropertyMap->GetElement(nLevel);
-					if (!xRefPropertyIDName)
-					{
-						xRefPropertyIDName = NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData));
-						xPropertyMap->AddElement(nLevel, xRefPropertyIDName);
-					}
 				}
+
+				NF_SHARE_PTR<std::string> xRefPropertyIDName = xPropertyMap->GetElement(nLevel);
+				if (!xRefPropertyIDName)
+				{
+					xRefPropertyIDName = NF_SHARE_PTR<std::string>(NF_NEW std::string(strEffectData));
+				}
+
+				xPropertyMap->AddElement(nLevel, xRefPropertyIDName);
             }
         }
     }
