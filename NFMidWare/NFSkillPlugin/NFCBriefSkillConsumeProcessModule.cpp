@@ -78,7 +78,7 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
 
 	m_pKernelModule->SetPropertyInt(self, strConsumeProperty, nOldConsumeVaue);
 
-	NFINT64 nDamageValue = (1 + m_pKernelModule->Random() / 10.0f) * nDamageCnfValue;
+	NFINT64 nDamageValue = m_pKernelModule->Random(nDamageCnfValue, nDamageCnfValue * 1.2f);
 
     for ( int j = 0; j < other.GetCount(); j++ )
     {
