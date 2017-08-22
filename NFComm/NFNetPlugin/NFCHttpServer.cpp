@@ -9,23 +9,18 @@
 #ifndef S_ISDIR
 #define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
 #endif
+#ifndef LIBEVENT_SRC
+#pragma comment( lib, "libevent.lib")
+#endif
+
 #else
+
+#include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <signal.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include <dirent.h>
-#endif
-
-#include <string.h>
-#include <event2/bufferevent.h>
-#include "event2/bufferevent_struct.h"
-#include "event2/event.h"
-#include <event2/http.h>
-#include <event2/buffer.h>
-#include <event2/util.h>
-#include <event2/keyvalq_struct.h>
 #include <atomic>
 #include <stdio.h>
 #include <iostream>
@@ -33,11 +28,15 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
-#ifndef LIBEVENT_SRC
-#pragma comment( lib, "libevent.lib")
 #endif
 
+#include <event2/bufferevent.h>
+#include "event2/bufferevent_struct.h"
+#include "event2/event.h"
+#include <event2/http.h>
+#include <event2/buffer.h>
+#include <event2/util.h>
+#include <event2/keyvalq_struct.h>
 
 bool NFCHttpServer::Execute()
 {
