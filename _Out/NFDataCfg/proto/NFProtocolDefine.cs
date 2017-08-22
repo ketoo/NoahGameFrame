@@ -528,6 +528,7 @@ namespace NFrame
 		public static readonly String Icon = "Icon";// string
 		public static readonly String Idle = "Idle";// string
 		public static readonly String LastAttacker = "LastAttacker";// object
+		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
 		public static readonly String MAXHP = "MAXHP";// int
 		public static readonly String MAXMP = "MAXMP";// int
