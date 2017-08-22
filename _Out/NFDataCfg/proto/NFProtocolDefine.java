@@ -522,6 +522,7 @@ package nframe;
 		public static final String Icon = "Icon";// string
 		public static final String Idle = "Idle";// string
 		public static final String LastAttacker = "LastAttacker";// object
+		public static final String Level = "Level";// int
 		public static final String MAGIC_GATE = "MAGIC_GATE";// int
 		public static final String MAXHP = "MAXHP";// int
 		public static final String MAXMP = "MAXMP";// int
