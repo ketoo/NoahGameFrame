@@ -6,21 +6,6 @@
 ////////////////////////////////////////////
 #include "NFCHttpClient.h"
 
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <WS2tcpip.h>
-#include <winsock2.h>
-#pragma  comment(lib,"Ws2_32.lib")
-#pragma  comment(lib,"libevent.lib")
-#pragma  comment(lib,"libevent_core.lib")
-
-#if NF_ENABLE_SSL
-#pragma  comment(lib,"libevent_openssl.lib")
-#pragma  comment(lib,"libeay32.lib")
-#pragma  comment(lib,"ssleay32.lib")
-#endif
-
-#endif
-
 
 bool NFCHttpClient::Execute()
 {
