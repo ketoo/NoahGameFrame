@@ -1,6 +1,7 @@
 #ifndef NFC_HTTP_SERVER_H
 #define NFC_HTTP_SERVER_H
 
+#include <string.h>
 #include "NFIHttpServer.h"
 
 class NFCHttpServer : public NFIHttpServer
