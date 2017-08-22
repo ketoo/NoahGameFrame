@@ -7,22 +7,21 @@
 #ifndef NFI_HTTP_CLIENT_H
 #define NFI_HTTP_CLIENT_H
 
+#include <vector>
+#include <functional>
+#include <memory>
+#include <list>
+#include <iostream>
+#include <map>
 #include <cstring>
 #include <errno.h>
 #include <stdio.h>
 #include <signal.h>
 #include <stdint.h>
-#include <iostream>
-#include <map>
+#include <assert.h>
 
 #include "NFComm/NFPluginModule/NFGUID.h"
 
-#include <vector>
-#include <functional>
-#include <memory>
-#include <list>
-#include <vector>
-#include <assert.h>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>
 #include <event2/listener.h>
