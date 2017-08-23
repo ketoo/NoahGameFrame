@@ -1,8 +1,37 @@
 #ifndef NFC_HTTP_SERVER_H
 #define NFC_HTTP_SERVER_H
 
-#include <string.h>
+#include "NFIHttpServer.h"
 
+#if NF_PLATFORM == NF_PLATFORM_WIN
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
+#ifndef S_ISDIR
+#define S_ISDIR(x) (((x) & S_IFMT) == S_IFDIR)
+#endif
+#ifndef LIBEVENT_SRC
+#pragma comment( lib, "libevent.lib")
+#endif
+
+#else
+
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <signal.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <atomic>
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#endif
 
 #include <event2/bufferevent.h>
 #include "event2/bufferevent_struct.h"
@@ -12,7 +41,7 @@
 #include <event2/util.h>
 #include <event2/keyvalq_struct.h>
 
-#include "NFIHttpServer.h"
+
 
 class NFCHttpServer : public NFIHttpServer
 {
