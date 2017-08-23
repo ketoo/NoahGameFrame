@@ -2,7 +2,7 @@
 #define NFC_HTTP_SERVER_H
 
 #include <string.h>
-#if NF_PLATFORM == NF_PLATFORM_WIN
+#if NF_PLATFORM = NF_PLATFORM_WIN
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
