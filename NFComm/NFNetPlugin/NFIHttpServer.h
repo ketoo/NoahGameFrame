@@ -16,8 +16,8 @@
 #include <vector>
 #include <assert.h>
 
+#include "NFINet.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-
 
 enum NFWebStatus
 {
