@@ -21,7 +21,6 @@ bool NFCSkillModule::Init()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-
 	return true;
 }
 
