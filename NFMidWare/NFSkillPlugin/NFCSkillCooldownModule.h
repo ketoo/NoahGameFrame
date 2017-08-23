@@ -28,7 +28,7 @@ public:
         pPluginManager = p;
     }
 
-    virtual ~NFCSkillModule() {};
+    virtual ~NFCSSkillCooldownModule() {};
 
     virtual bool Init();
     virtual bool Shut();
