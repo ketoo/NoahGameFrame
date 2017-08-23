@@ -13,7 +13,7 @@ unzip -o mysqlpp_libs.zip -d ./
 
 # compiling libevent
 cd libevent
-#chmod -R 755 *
+chmod -R 755 *
 ./configure CPPFLAGS=-fPIC --disable-shared --disable-openssl
 make
 
