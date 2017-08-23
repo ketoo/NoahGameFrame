@@ -9,6 +9,7 @@
 #include "NFSkillPlugin.h"
 #include "NFCSkillModule.h"
 #include "NFCSkillConsumeManagerModule.h"
+#include "NFCSkillCooldownModule.h"
 //
 //
 #ifdef NF_DYNAMIC_PLUGIN
@@ -42,11 +43,13 @@ void NFSkillPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
 	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
+	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSSkillCooldownModule)
 
 }
 
 void NFSkillPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSSkillCooldownModule)
 	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 	UNREGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
 }

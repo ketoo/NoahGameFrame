@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :   NFCSkillConsumeManagerModule.h
+//    @FileName         :   NFCSkillConsumeManagerModule.h
 //    @Author           :   LvSheng.Huang
 //    @Date             :   2013-10-02
 //    @Module           :   NFCBuSkillConsumeManagerModule
