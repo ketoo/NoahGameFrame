@@ -53,6 +53,7 @@ typedef void* BUFPTR;
 #include <ctime>
 #include <sstream>
 #include <iostream>
+#include <random>
 
 #include "./Dependencies/common/optional.hpp"
 #include "./Dependencies/common/lexical_cast.hpp"
