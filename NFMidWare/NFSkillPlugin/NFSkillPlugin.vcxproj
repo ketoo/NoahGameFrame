@@ -100,6 +100,7 @@
     <ClCompile Include="NFCBriefSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCBulletSkillConsumeProcessModule.cpp" />
     <ClCompile Include="NFCSkillConsumeManagerModule.cpp" />
+    <ClCompile Include="NFCSkillCooldownModule.cpp" />
     <ClCompile Include="NFCSkillModule.cpp" />
     <ClCompile Include="NFSkillPlugin.cpp" />
   </ItemGroup>
@@ -107,6 +108,7 @@
     <ClInclude Include="NFCBriefSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCBulletSkillConsumeProcessModule.h" />
     <ClInclude Include="NFCSkillConsumeManagerModule.h" />
+    <ClInclude Include="NFCSkillCooldownModule.h" />
     <ClInclude Include="NFCSkillModule.h" />
     <ClInclude Include="NFSkillPlugin.h" />
   </ItemGroup>
