@@ -310,7 +310,7 @@ public:
 		if (!fp)
 		{
 			printf("NFCNavigationHandle::create: open({%s}) is error!\n", resPath.c_str());
-			return false;
+			return NULL;
 		}
 
 		printf("NFCNavigationHandle::create: ({%s}), layer={%d}\n", resPath.c_str(), 0);
@@ -330,7 +330,7 @@ public:
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		size_t readsize = fread(data, 1, flen, fp);
@@ -340,7 +340,7 @@ public:
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		if (readsize < sizeof(NavMeshSetHeader))
@@ -349,7 +349,7 @@ public:
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		NavMeshSetHeader header;
@@ -363,7 +363,7 @@ public:
 
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		dtNavMesh* mesh = dtAllocNavMesh();
@@ -372,7 +372,7 @@ public:
 			printf("NavMeshHandle::create: dtAllocNavMesh is failed!\n");
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		dtStatus status = mesh->init(&header.params);
@@ -381,7 +381,7 @@ public:
 			printf("NFCNavigationHandle::create: mesh init is error({%d})!\n", status);
 			fclose(fp);
 			SAFE_RELEASE_ARRAY(data);
-			return false;
+			return NULL;
 		}
 
 		// Read tiles.
@@ -432,7 +432,7 @@ public:
 		{
 			printf("NavMeshHandle::create:  error({%d})!\n", status);
 			dtFreeNavMesh(mesh);
-			return false;
+			return NULL;
 		}
 
 		NF_SHARE_PTR<NFCNavigationHandle> pNavMeshHandle = NF_SHARE_PTR<NFCNavigationHandle>(NF_NEW NFCNavigationHandle());

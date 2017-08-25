@@ -8,7 +8,11 @@ file(GLOB navigation_ROOT_H
 add_library(navigation ${navigation_ROOT_Cpp} ${navigation_ROOT_H} ${navigation_ROOT_Hpp})
 add_definitions(-DNF_NONCLIENT_BUILD)
 set_target_properties( navigation PROPERTIES OUTPUT_NAME_DEBUG "navigation_d")
-set_target_properties( navigation PROPERTIES PREFIX "")
+
+if( WIN32 )
+    set_target_properties( navigation PROPERTIES PREFIX "")
+endif()
+
 set_target_properties( navigation PROPERTIES 
 	FOLDER "NFDeps"
 	ARCHIVE_OUTPUT_DIRECTORY ${NFOutPutDir}
