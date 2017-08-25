@@ -144,7 +144,41 @@ public:
 
 	void Reset()
 	{
-		nType = TDATA_UNKNOWN;
+		switch (GetType())
+		{
+			case TDATA_INT:
+			{
+				SetInt(0);
+			}
+				break;
+			case TDATA_FLOAT:
+			{
+				SetFloat(0);
+			}
+				break;
+			case TDATA_STRING:
+			{
+				SetString("");
+			}
+				break;
+			case TDATA_OBJECT:
+			{
+				SetObject(NFGUID());
+			}
+				break;
+			case TDATA_VECTOR2:
+			{
+				SetVector2(NFVector2());
+			}
+				break;
+			case TDATA_VECTOR3:
+			{
+				SetVector3(NFVector3());
+			}
+				break;
+			default:
+				break;
+		}
 	}
 
 	bool IsNullValue() const

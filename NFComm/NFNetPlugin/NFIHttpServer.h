@@ -1,6 +1,7 @@
 
 #ifndef NFI_HTTP_SERVER_H
 #define NFI_HTTP_SERVER_H
+
 #include <cstring>
 #include <errno.h>
 #include <stdio.h>
@@ -15,24 +16,14 @@
 #include <vector>
 #include <assert.h>
 
+#include "NFINet.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#if NF_PLATFORM == NF_PLATFORM_WIN
-#include <WinSock2.h>
-#include <windows.h>
-#else
-#include <unistd.h>
-#include <netinet/in.h>
-# ifdef _XOPEN_SOURCE_EXTENDED
-#  include <arpa/inet.h>
-# endif
-#include <sys/socket.h>
-#endif
 
 enum NFWebStatus
 {
 	WEB_OK = 200,
 	WEB_ERROR = 404,
-	EB_TIMEOUT = 503,
+	WEB_TIMEOUT = 503,
 };
 
 class NFHttpRequest

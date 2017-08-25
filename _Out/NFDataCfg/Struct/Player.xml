@@ -155,6 +155,11 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
+		<Record Id="DropItemList" Cache="1"	 Col="3"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
+			<Col Type ="string"	Tag="ConfigID"/>
+			<Col Type ="int"	Tag="ItemCount"/>
+		</Record>
 		<Record Id="HeroValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->

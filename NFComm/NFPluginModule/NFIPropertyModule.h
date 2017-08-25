@@ -32,16 +32,18 @@ public:
     virtual int RefreshBaseProperty(const NFGUID& self) = 0;
     virtual int64_t GetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType) = 0;
     virtual int SetPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue) = 0;
-    virtual bool AddPropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue) = 0;
+    virtual bool CalculatePropertyValue(const NFGUID& self, const std::string& strPropertyName, const NFPropertyGroup eGroupType, const int64_t nValue, const bool bPositive = false) = 0;
 
     virtual bool FullHPMP(const NFGUID& self) = 0;
     virtual bool AddHP(const NFGUID& self, const int nValue) = 0;
     virtual bool ConsumeHP(const NFGUID& self, const int nValue) = 0;
     virtual bool EnoughHP(const NFGUID& self, const int nValue) = 0;
+	virtual bool DamageHP(const NFGUID& self, const int nValue) = 0;
 
     virtual bool AddMP(const NFGUID& self, const int nValue) = 0;
     virtual bool ConsumeMP(const NFGUID& self, const int nValue) = 0;
     virtual bool EnoughMP(const NFGUID& self, const int nValue) = 0;
+	virtual bool DamageMP(const NFGUID& self, const int nValue) = 0;
 
     virtual bool FullSP(const NFGUID& self) = 0;
     virtual bool AddSP(const NFGUID& self, const int nValue) = 0;

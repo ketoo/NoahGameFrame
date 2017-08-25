@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
+	<Object Id="DescID_Dwarf_Warrior" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." />
+	<Object Id="DescID_Orc_Slinger" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
+Although they lack wisdom, but they very luckly which often double or even three times hurt." />
+	<Object Id="DescID_Samurai" Chinese="要离是人族最悲情的刺客--神魔大战中，自断一臂假意投靠鬼族，然而再次断臂换来重伤夜王." English="Yao Li was a famed assassin in the Spring and Autumn period." />
+	<Object Id="DescID_Wererat_Soldier" Chinese="狼人是一个力量型近战英雄，拥有巨大的物理能力和可观的移动速度， 擅长推进建筑和增加队伍的攻击力和生命值" English="The wererat is one of several different types of animalistic forms. They are classified as 'lycanthropes', despite the fact that the term reflects a lupine, or wolven" />
 	<Object Id="Desc_ATK_Water" Chinese="攻击药水，在一定时间内攻击翻倍！" English="" />
 	<Object Id="Desc_Avoid_Def_Water" Chinese="在一定时间内，无视对方防御！" English="" />
 	<Object Id="Desc_Damage_MP_Water" Chinese="进入范围内的英雄，自动丢蓝！" English="" />
@@ -12,15 +17,6 @@
 	<Object Id="Desc_GEM_WIND" Chinese="风属性宝石！" English="" />
 	<Object Id="Desc_HOLY_WATER" Chinese="小瓶圣水，在一定时间内防御翻倍！" English="" />
 	<Object Id="Desc_HP" Chinese="小瓶生命药水，增加英雄生命力！" English="" />
-	<Object Id="Desc_HeroCard_Abaddon" Chinese="亚巴顿是一个英雄" English="Abaddon" />
-	<Object Id="Desc_HeroCard_Beastmaster" Chinese="兽王是一个英雄" English="Beastmaster" />
-	<Object Id="Desc_HeroCard_BountyHunter" Chinese="赏金猎人是一个英雄" English="BountyHunter" />
-	<Object Id="Desc_HeroCard_Bristleback" Chinese="钢背熊是一个英雄" English="Bristleback" />
-	<Object Id="Desc_HeroCard_Clinkz" Chinese="克林丽兹是一个英雄" English="Clinkz" />
-	<Object Id="Desc_HeroCard_CrystalMaiden" Chinese="水晶室女是一个英雄" English="CrystalMaiden" />
-	<Object Id="Desc_HeroCard_Ezalor" Chinese="光之守卫是一个英雄" English="Ezalor" />
-	<Object Id="Desc_HeroCard_Lifestealer" Chinese="食尸鬼是一个英雄" English="Lifestealer" />
-	<Object Id="Desc_HeroCard_TeaantProtector" Chinese="树精卫士是一个英雄" English="TeaantProtector" />
 	<Object Id="Desc_MP" Chinese="小瓶魔法药水，增加英雄魔法力！" English="" />
 	<Object Id="Desc_NoobPack" Chinese="新手升级礼包！" English="" />
 	<Object Id="Desc_WarPack" Chinese="战争奖励礼包！" English="" />
@@ -99,15 +95,9 @@
 	<Object Id="Langage_Comm_5" Chinese="进入游戏" English="Langage_5" />
 	<Object Id="Langage_Comm_6" Chinese="中文_6" English="Langage_6" />
 	<Object Id="NameID_ATK_Water" Chinese="攻击药水" English="" />
-	<Object Id="NameID_Abaddon" Chinese="亚巴顿" English="Abaddon" />
 	<Object Id="NameID_Avoid_Def_Water" Chinese="防御药水" English="" />
-	<Object Id="NameID_Beastmaster" Chinese="兽王" English="Beastmaster" />
-	<Object Id="NameID_BountyHunter" Chinese="赏金猎人" English="BountyHunter" />
-	<Object Id="NameID_Bristleback" Chinese="钢背熊" English="Bristleback" />
-	<Object Id="NameID_Clinkz" Chinese="克林丽兹" English="Clinkz" />
-	<Object Id="NameID_CrystalMaiden" Chinese="水晶室女" English="CrystalMaiden" />
 	<Object Id="NameID_Damage_MP_Water" Chinese="消魔药水" English="" />
-	<Object Id="NameID_Ezalor" Chinese="光之守卫" English="Ezalor" />
+	<Object Id="NameID_Dwarf_Warrior" Chinese="矮人 · 掘金者" English="Dwarf · Gold Digger" />
 	<Object Id="NameID_GEM_ATK" Chinese="攻击宝石" English="" />
 	<Object Id="NameID_GEM_DEF" Chinese="防御宝石" English="" />
 	<Object Id="NameID_GEM_FIRE" Chinese="火属性宝石" English="" />
@@ -123,11 +113,12 @@
 	<Object Id="NameID_HeroCard_4" Chinese="英雄*卡1" English="" />
 	<Object Id="NameID_HeroCard_5" Chinese="英雄*卡1" English="" />
 	<Object Id="NameID_HeroCard_6" Chinese="英雄*卡1" English="" />
-	<Object Id="NameID_Lifestealer" Chinese="食尸鬼" English="Lifestealer" />
 	<Object Id="NameID_MP" Chinese="蓝药" English="" />
 	<Object Id="NameID_NoobPack" Chinese="新手礼包" English="" />
-	<Object Id="NameID_TeaantProtector" Chinese="树精卫士" English="TeaantProtector" />
+	<Object Id="NameID_Orc_Slinger" Chinese="兽族 · 食人魔" English="Orcs · Slinger" />
+	<Object Id="NameID_Samurai" Chinese="人族 · 要离" English="Human · Yao Li" />
 	<Object Id="NameID_WarPack" Chinese="战争礼包" English="" />
+	<Object Id="NameID_Wererat_Soldier" Chinese="兽族 · 狼人" English="Orcs · Wererat" />
 	<Object Id="NameID_anti_air_tower_1" Chinese="防空火箭(一级)" English="" />
 	<Object Id="NameID_anti_air_tower_2" Chinese="防空火箭(二级)" English="" />
 	<Object Id="NameID_anti_air_tower_3" Chinese="防空火箭(三级)" English="" />
