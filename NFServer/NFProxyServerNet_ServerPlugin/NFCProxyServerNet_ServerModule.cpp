@@ -380,11 +380,13 @@ int NFCProxyServerNet_ServerModule::Transpond(const NFSOCK nSockIndex, const int
 
 			m_pNetModule->GetNet()->SendMsgWithOutHead(nMsgID, msg, nLen, *pFD);
         }
-		else
-		{
-			//send this msessage to all clientss
-			m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
-		}
+		//pFD is empty means end of connection, no need to send message to this client any more. And,
+		//we should never send a message that specified to a player to all clients here.
+		//else
+		//{
+		//	//send this msessage to all clientss
+		//	m_pNetModule->GetNet()->SendMsgToAllClientWithOutHead(nMsgID, msg, nLen);
+		//}
     }
 
     return true;
