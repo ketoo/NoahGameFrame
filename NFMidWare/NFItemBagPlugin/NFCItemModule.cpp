@@ -243,7 +243,7 @@ int NFCItemModule::AddItemEffectDataProperty(const NFGUID& self, const NFGUID& x
 	{
 		if (pProperty->GetInt() != 0)
 		{
-			m_pPropertyModule->AddPropertyValue(xTarget, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt());
+			m_pPropertyModule->CalculatePropertyValue(xTarget, pProperty->GetKey(), NFIPropertyModule::NPG_EQUIP, pProperty->GetInt());
 		}
 
 		pProperty = pEffectDataPropertyManager->Next();

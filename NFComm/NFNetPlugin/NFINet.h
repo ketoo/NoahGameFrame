@@ -9,10 +9,10 @@
 #define NFI_NET_H
 
 #include <cstring>
-#include <errno.h>
-#include <stdio.h>
-#include <signal.h>
-#include <stdint.h>
+#include <cerrno>
+#include <cstdio>
+#include <csignal>
+#include <cstdint>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -20,20 +20,27 @@
 #include <memory>
 #include <list>
 #include <vector>
-#include <assert.h>
+#include <cassert>
 #include "NFComm/NFPluginModule/NFGUID.h"
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WinSock2.h>
 #include <windows.h>
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-//#include <libkern/OSByteOrder.h>
+
+#if NF_PLATFORM == NF_PLATFORM_APPLE
+#include <libkern/OSByteOrder.h>
+#endif
+
 #include <netinet/in.h>
+
 #ifdef _XOPEN_SOURCE_EXTENDED
 #  include <arpa/inet.h>
 # endif
+
 #include <sys/socket.h>
 #include <unistd.h>
+
 #endif
 
 
@@ -67,10 +74,8 @@ struct  NFIMsgHead
     int64_t NF_HTONLL(int64_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return htonll(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE_CC__
         return OSSwapHostToBigInt64(nData);
 #else
         return htobe64(nData);
@@ -80,10 +85,8 @@ struct  NFIMsgHead
     int64_t NF_NTOHLL(int64_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return ntohll(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE__
         return OSSwapBigToHostInt64(nData);
 #elif NF_PLATFORM == NF_PLATFORM_ANDROID
         return betoh64(nData);
@@ -95,10 +98,8 @@ struct  NFIMsgHead
     int32_t NF_HTONL(int32_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return htonl(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE__
         return OSSwapHostToBigInt32(nData);
 #else
         return htobe32(nData);
@@ -108,10 +109,8 @@ struct  NFIMsgHead
     int32_t NF_NTOHL(int32_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return ntohl(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE__
         return OSSwapBigToHostInt32(nData);
 #elif NF_PLATFORM == NF_PLATFORM_ANDROID
         return betoh32(nData);
@@ -123,10 +122,8 @@ struct  NFIMsgHead
     int16_t NF_HTONS(int16_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return htons(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE__
         return OSSwapHostToBigInt16(nData);
 #else
         return htobe16(nData);
@@ -136,10 +133,8 @@ struct  NFIMsgHead
     int16_t NF_NTOHS(int16_t nData)
     {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-//#ifdef _MSC_VER
         return ntohs(nData);
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-//#elseifdef __APPLE__
         return OSSwapBigToHostInt16(nData);
 #elif NF_PLATFORM == NF_PLATFORM_ANDROID
         return betoh16 (nData);

@@ -522,6 +522,7 @@ package nframe;
 		public static final String Icon = "Icon";// string
 		public static final String Idle = "Idle";// string
 		public static final String LastAttacker = "LastAttacker";// object
+		public static final String Level = "Level";// int
 		public static final String MAGIC_GATE = "MAGIC_GATE";// int
 		public static final String MAXHP = "MAXHP";// int
 		public static final String MAXMP = "MAXMP";// int
@@ -757,6 +758,15 @@ package nframe;
 			public static final int BUFF_GATE = 28;//int
 
 		}
+		public class DropItemList
+		{
+			//Class name
+			public static final String ThisName = "DropItemList";
+			public static final int GUID = 0;//object
+			public static final int ConfigID = 1;//string
+			public static final int ItemCount = 2;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name
@@ -953,11 +963,13 @@ package nframe;
 		public static final String ConsumeType = "ConsumeType";// int
 		public static final String ConsumeValue = "ConsumeValue";// string
 		public static final String CoolDownTime = "CoolDownTime";// float
+		public static final String DamageCount = "DamageCount";// int
 		public static final String DamageDistance = "DamageDistance";// float
+		public static final String DamageIntervalTime = "DamageIntervalTime";// float
 		public static final String DamageProperty = "DamageProperty";// string
 		public static final String DamageType = "DamageType";// int
 		public static final String DamageValue = "DamageValue";// int
-		public static final String DefaultHitTime = "DefaultHitTime";// float
+		public static final String DefaultHitTime = "DefaultHitTime";// string
 		public static final String Desc = "Desc";// string
 		public static final String GetBuffList = "GetBuffList";// string
 		public static final String Icon = "Icon";// string

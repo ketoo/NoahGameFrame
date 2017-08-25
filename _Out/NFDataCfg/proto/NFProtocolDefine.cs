@@ -528,6 +528,7 @@ namespace NFrame
 		public static readonly String Icon = "Icon";// string
 		public static readonly String Idle = "Idle";// string
 		public static readonly String LastAttacker = "LastAttacker";// object
+		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
 		public static readonly String MAXHP = "MAXHP";// int
 		public static readonly String MAXMP = "MAXMP";// int
@@ -763,6 +764,15 @@ namespace NFrame
 			public const int BUFF_GATE = 28;//int
 
 		}
+		public class DropItemList
+		{
+			//Class name
+			public static readonly String ThisName = "DropItemList";
+			public const int GUID = 0;//object
+			public const int ConfigID = 1;//string
+			public const int ItemCount = 2;//int
+
+		}
 		public class HeroValue
 		{
 			//Class name
@@ -959,11 +969,13 @@ namespace NFrame
 		public static readonly String ConsumeType = "ConsumeType";// int
 		public static readonly String ConsumeValue = "ConsumeValue";// string
 		public static readonly String CoolDownTime = "CoolDownTime";// float
+		public static readonly String DamageCount = "DamageCount";// int
 		public static readonly String DamageDistance = "DamageDistance";// float
+		public static readonly String DamageIntervalTime = "DamageIntervalTime";// float
 		public static readonly String DamageProperty = "DamageProperty";// string
 		public static readonly String DamageType = "DamageType";// int
 		public static readonly String DamageValue = "DamageValue";// int
-		public static readonly String DefaultHitTime = "DefaultHitTime";// float
+		public static readonly String DefaultHitTime = "DefaultHitTime";// string
 		public static readonly String Desc = "Desc";// string
 		public static readonly String GetBuffList = "GetBuffList";// string
 		public static readonly String Icon = "Icon";// string

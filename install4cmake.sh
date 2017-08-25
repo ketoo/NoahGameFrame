@@ -2,7 +2,7 @@
 cmake --version
 if [ $? -ne 0 ]; then
     echo "[ERROR] Please install cmake first."
-    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake."
+    echo "[ubuntu] apt-get install cmake or [centos] yum install cmake or [mac] brew install cmake"
     exit 1
 fi
 
