@@ -34,6 +34,7 @@
 		<Property Id="Icon" Cache="0" Desc="图标" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Idle" Cache="0" Desc="技能列表索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="LastAttacker" Cache="0" Desc="最后攻击者" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="Level" Cache="0" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="MAGIC_GATE" Cache="0" Desc="魔法免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXHP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXMP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
