@@ -19,21 +19,16 @@
 #include <NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h>
 #include <NFComm/NFPluginModule/NFISkillCooldownModule.h>
 
-class NFCSSkillCooldownModule
+class NFCSkillCooldownModule
         : public NFISkillCooldownModule
 {
 public:
-    NFCSSkillCooldownModule( NFIPluginManager* p )
+
+    NFCSkillCooldownModule( NFIPluginManager* p )
     {
         pPluginManager = p;
     }
 
-    virtual ~NFCSSkillCooldownModule() {};
-
-    virtual bool Init();
-    virtual bool Shut();
-    virtual bool Execute();
-    virtual bool AfterInit();
 
     virtual void AddSkillCD( const NFGUID& self, const std::string& strSkillName );
     virtual bool ExistSkillCD( const NFGUID& self, const std::string& strSkillName );

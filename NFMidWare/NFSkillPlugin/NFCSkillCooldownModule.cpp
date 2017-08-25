@@ -4,7 +4,7 @@
 #include "NFCSkillCooldownModule.h"
 #include <NFComm/NFPluginModule/NFGUID.h>
 
-void NFCSSkillCooldownModule::AddSkillCD(const NFGUID& self, const std::string& strSkillName )
+void NFCSkillCooldownModule::AddSkillCD(const NFGUID& self, const std::string& strSkillName )
 {
     /*
     //skillCnfID, usetTime
@@ -26,7 +26,7 @@ void NFCSSkillCooldownModule::AddSkillCD(const NFGUID& self, const std::string& 
      */
 }
 
-bool NFCSSkillCooldownModule::ExistSkillCD( const NFGUID& self, const std::string& strSkillName )
+bool NFCSkillCooldownModule::ExistSkillCD( const NFGUID& self, const std::string& strSkillName )
 {
     /*
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::SkillCoolDown.ThisName());
