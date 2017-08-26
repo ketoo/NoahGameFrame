@@ -35,159 +35,107 @@ void protobuf_AssignDesc_NFFleetingDefine_2eproto();
 void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
 class FSVector3;
-class SuwayyahEvents;
-class SuwayyahEvents_Suwayyah;
-class BulletEvents;
-class BulletEvents_TacheBomp;
-class BulletEvents_Bullet;
-class AnimatorMoves;
-class AnimatorMoves_Move;
-class CameraControlEvents;
-class CameraControlEvents_Camera;
-class ParticleEvents;
-class ParticleEvents_Particle;
+class FixTimeEvent;
+class FixTimeEvent_EventTrigger;
+class FixTimeEvent_HitTrigger;
+class BulletEvent;
+class BulletEvent_TacheBomp;
+class BulletEvent_Bullet;
+class AudioEvent;
+class AudioEvent_Audio;
+class MoveEvent;
+class MoveEvent_Move;
+class CameraEvent;
+class CameraEvent_Camera;
 class EnableEvents;
 class EnableEvents_Enable;
-class TrailEvents;
-class TrailEvents_Trail;
-class AudioEvents;
-class AudioEvents_Audio;
-class GlobalSpeeds;
-class GlobalSpeeds_Speed;
-class AnimatorFlys;
-class AnimatorFlys_Fly;
+class GlobalSpeed;
+class GlobalSpeed_Speed;
 
-enum SuwayyahEvents_ESEType {
-  SuwayyahEvents_ESEType_ESET_SINGLE = 0,
-  SuwayyahEvents_ESEType_ESET_SINGLE_AREA = 1,
-  SuwayyahEvents_ESEType_ESET_LEFT_AREA = 2,
-  SuwayyahEvents_ESEType_ESET_RIGHT_AREA = 3
+enum BulletEvent_EBEType {
+  BulletEvent_EBEType_ESET_TARGET = 0,
+  BulletEvent_EBEType_ESET_POSITION = 1
 };
-LIBPROTOC_EXPORT bool SuwayyahEvents_ESEType_IsValid(int value);
-const SuwayyahEvents_ESEType SuwayyahEvents_ESEType_ESEType_MIN = SuwayyahEvents_ESEType_ESET_SINGLE;
-const SuwayyahEvents_ESEType SuwayyahEvents_ESEType_ESEType_MAX = SuwayyahEvents_ESEType_ESET_RIGHT_AREA;
-const int SuwayyahEvents_ESEType_ESEType_ARRAYSIZE = SuwayyahEvents_ESEType_ESEType_MAX + 1;
+LIBPROTOC_EXPORT bool BulletEvent_EBEType_IsValid(int value);
+const BulletEvent_EBEType BulletEvent_EBEType_EBEType_MIN = BulletEvent_EBEType_ESET_TARGET;
+const BulletEvent_EBEType BulletEvent_EBEType_EBEType_MAX = BulletEvent_EBEType_ESET_POSITION;
+const int BulletEvent_EBEType_EBEType_ARRAYSIZE = BulletEvent_EBEType_EBEType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* SuwayyahEvents_ESEType_descriptor();
-inline const ::std::string& SuwayyahEvents_ESEType_Name(SuwayyahEvents_ESEType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvent_EBEType_descriptor();
+inline const ::std::string& BulletEvent_EBEType_Name(BulletEvent_EBEType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    SuwayyahEvents_ESEType_descriptor(), value);
+    BulletEvent_EBEType_descriptor(), value);
 }
-inline bool SuwayyahEvents_ESEType_Parse(
-    const ::std::string& name, SuwayyahEvents_ESEType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SuwayyahEvents_ESEType>(
-    SuwayyahEvents_ESEType_descriptor(), name, value);
+inline bool BulletEvent_EBEType_Parse(
+    const ::std::string& name, BulletEvent_EBEType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BulletEvent_EBEType>(
+    BulletEvent_EBEType_descriptor(), name, value);
 }
-enum BulletEvents_EBEType {
-  BulletEvents_EBEType_ESET_TARGET = 0,
-  BulletEvents_EBEType_ESET_POSITION = 1
+enum BulletEvent_EBE_BACKType {
+  BulletEvent_EBE_BACKType_EBEBT_BACK = 0,
+  BulletEvent_EBE_BACKType_EBEBT_SIDE = 1
 };
-LIBPROTOC_EXPORT bool BulletEvents_EBEType_IsValid(int value);
-const BulletEvents_EBEType BulletEvents_EBEType_EBEType_MIN = BulletEvents_EBEType_ESET_TARGET;
-const BulletEvents_EBEType BulletEvents_EBEType_EBEType_MAX = BulletEvents_EBEType_ESET_POSITION;
-const int BulletEvents_EBEType_EBEType_ARRAYSIZE = BulletEvents_EBEType_EBEType_MAX + 1;
+LIBPROTOC_EXPORT bool BulletEvent_EBE_BACKType_IsValid(int value);
+const BulletEvent_EBE_BACKType BulletEvent_EBE_BACKType_EBE_BACKType_MIN = BulletEvent_EBE_BACKType_EBEBT_BACK;
+const BulletEvent_EBE_BACKType BulletEvent_EBE_BACKType_EBE_BACKType_MAX = BulletEvent_EBE_BACKType_EBEBT_SIDE;
+const int BulletEvent_EBE_BACKType_EBE_BACKType_ARRAYSIZE = BulletEvent_EBE_BACKType_EBE_BACKType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvents_EBEType_descriptor();
-inline const ::std::string& BulletEvents_EBEType_Name(BulletEvents_EBEType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvent_EBE_BACKType_descriptor();
+inline const ::std::string& BulletEvent_EBE_BACKType_Name(BulletEvent_EBE_BACKType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    BulletEvents_EBEType_descriptor(), value);
+    BulletEvent_EBE_BACKType_descriptor(), value);
 }
-inline bool BulletEvents_EBEType_Parse(
-    const ::std::string& name, BulletEvents_EBEType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BulletEvents_EBEType>(
-    BulletEvents_EBEType_descriptor(), name, value);
+inline bool BulletEvent_EBE_BACKType_Parse(
+    const ::std::string& name, BulletEvent_EBE_BACKType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<BulletEvent_EBE_BACKType>(
+    BulletEvent_EBE_BACKType_descriptor(), name, value);
 }
-enum BulletEvents_EBE_BACKType {
-  BulletEvents_EBE_BACKType_EBEBT_BACK = 0,
-  BulletEvents_EBE_BACKType_EBEBT_SIDE = 1
+enum MoveEvent_METype {
+  MoveEvent_METype_ME_FORWARD = 0,
+  MoveEvent_METype_ME_BACK = 1,
+  MoveEvent_METype_ME_LEFT = 2,
+  MoveEvent_METype_ME_RIGHT = 3
 };
-LIBPROTOC_EXPORT bool BulletEvents_EBE_BACKType_IsValid(int value);
-const BulletEvents_EBE_BACKType BulletEvents_EBE_BACKType_EBE_BACKType_MIN = BulletEvents_EBE_BACKType_EBEBT_BACK;
-const BulletEvents_EBE_BACKType BulletEvents_EBE_BACKType_EBE_BACKType_MAX = BulletEvents_EBE_BACKType_EBEBT_SIDE;
-const int BulletEvents_EBE_BACKType_EBE_BACKType_ARRAYSIZE = BulletEvents_EBE_BACKType_EBE_BACKType_MAX + 1;
+LIBPROTOC_EXPORT bool MoveEvent_METype_IsValid(int value);
+const MoveEvent_METype MoveEvent_METype_METype_MIN = MoveEvent_METype_ME_FORWARD;
+const MoveEvent_METype MoveEvent_METype_METype_MAX = MoveEvent_METype_ME_RIGHT;
+const int MoveEvent_METype_METype_ARRAYSIZE = MoveEvent_METype_METype_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* BulletEvents_EBE_BACKType_descriptor();
-inline const ::std::string& BulletEvents_EBE_BACKType_Name(BulletEvents_EBE_BACKType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* MoveEvent_METype_descriptor();
+inline const ::std::string& MoveEvent_METype_Name(MoveEvent_METype value) {
   return ::google::protobuf::internal::NameOfEnum(
-    BulletEvents_EBE_BACKType_descriptor(), value);
+    MoveEvent_METype_descriptor(), value);
 }
-inline bool BulletEvents_EBE_BACKType_Parse(
-    const ::std::string& name, BulletEvents_EBE_BACKType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<BulletEvents_EBE_BACKType>(
-    BulletEvents_EBE_BACKType_descriptor(), name, value);
+inline bool MoveEvent_METype_Parse(
+    const ::std::string& name, MoveEvent_METype* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MoveEvent_METype>(
+    MoveEvent_METype_descriptor(), name, value);
 }
-enum AnimatorMoves_EAMType {
-  AnimatorMoves_EAMType_EAMT_FORWARD = 0,
-  AnimatorMoves_EAMType_EAMT_BACK = 1,
-  AnimatorMoves_EAMType_EAMT_LEFT = 2,
-  AnimatorMoves_EAMType_EAMT_RIGHT = 3
+enum CameraEvent_CEType {
+  CameraEvent_CEType_Earthquake = 0,
+  CameraEvent_CEType_Explosion = 1,
+  CameraEvent_CEType_No = 2,
+  CameraEvent_CEType_FireKick = 3,
+  CameraEvent_CEType_Stomp = 4,
+  CameraEvent_CEType_Yes = 5,
+  CameraEvent_CEType_SprintShake = 6,
+  CameraEvent_CEType_FreeMode = 7,
+  CameraEvent_CEType_MainRPGMode = 8
 };
-LIBPROTOC_EXPORT bool AnimatorMoves_EAMType_IsValid(int value);
-const AnimatorMoves_EAMType AnimatorMoves_EAMType_EAMType_MIN = AnimatorMoves_EAMType_EAMT_FORWARD;
-const AnimatorMoves_EAMType AnimatorMoves_EAMType_EAMType_MAX = AnimatorMoves_EAMType_EAMT_RIGHT;
-const int AnimatorMoves_EAMType_EAMType_ARRAYSIZE = AnimatorMoves_EAMType_EAMType_MAX + 1;
+LIBPROTOC_EXPORT bool CameraEvent_CEType_IsValid(int value);
+const CameraEvent_CEType CameraEvent_CEType_CEType_MIN = CameraEvent_CEType_Earthquake;
+const CameraEvent_CEType CameraEvent_CEType_CEType_MAX = CameraEvent_CEType_MainRPGMode;
+const int CameraEvent_CEType_CEType_ARRAYSIZE = CameraEvent_CEType_CEType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AnimatorMoves_EAMType_descriptor();
-inline const ::std::string& AnimatorMoves_EAMType_Name(AnimatorMoves_EAMType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* CameraEvent_CEType_descriptor();
+inline const ::std::string& CameraEvent_CEType_Name(CameraEvent_CEType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    AnimatorMoves_EAMType_descriptor(), value);
+    CameraEvent_CEType_descriptor(), value);
 }
-inline bool AnimatorMoves_EAMType_Parse(
-    const ::std::string& name, AnimatorMoves_EAMType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<AnimatorMoves_EAMType>(
-    AnimatorMoves_EAMType_descriptor(), name, value);
-}
-enum CameraControlEvents_ECEType {
-  CameraControlEvents_ECEType_Earthquake = 0,
-  CameraControlEvents_ECEType_Explosion = 1,
-  CameraControlEvents_ECEType_No = 2,
-  CameraControlEvents_ECEType_FireKick = 3,
-  CameraControlEvents_ECEType_Stomp = 4,
-  CameraControlEvents_ECEType_Yes = 5,
-  CameraControlEvents_ECEType_SprintShake = 6,
-  CameraControlEvents_ECEType_FreeMode = 7,
-  CameraControlEvents_ECEType_MainRPGMode = 8
-};
-LIBPROTOC_EXPORT bool CameraControlEvents_ECEType_IsValid(int value);
-const CameraControlEvents_ECEType CameraControlEvents_ECEType_ECEType_MIN = CameraControlEvents_ECEType_Earthquake;
-const CameraControlEvents_ECEType CameraControlEvents_ECEType_ECEType_MAX = CameraControlEvents_ECEType_MainRPGMode;
-const int CameraControlEvents_ECEType_ECEType_ARRAYSIZE = CameraControlEvents_ECEType_ECEType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* CameraControlEvents_ECEType_descriptor();
-inline const ::std::string& CameraControlEvents_ECEType_Name(CameraControlEvents_ECEType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    CameraControlEvents_ECEType_descriptor(), value);
-}
-inline bool CameraControlEvents_ECEType_Parse(
-    const ::std::string& name, CameraControlEvents_ECEType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CameraControlEvents_ECEType>(
-    CameraControlEvents_ECEType_descriptor(), name, value);
-}
-enum ParticleEvents_EPERTYPE {
-  ParticleEvents_EPERTYPE_NONE = 0,
-  ParticleEvents_EPERTYPE_MatchTarget = 1,
-  ParticleEvents_EPERTYPE_Random_X = 2,
-  ParticleEvents_EPERTYPE_Random_Y = 3,
-  ParticleEvents_EPERTYPE_Random_Z = 4,
-  ParticleEvents_EPERTYPE_Random_XY = 5,
-  ParticleEvents_EPERTYPE_Random_XZ = 6,
-  ParticleEvents_EPERTYPE_Random_YZ = 7,
-  ParticleEvents_EPERTYPE_Random_XYZ = 8
-};
-LIBPROTOC_EXPORT bool ParticleEvents_EPERTYPE_IsValid(int value);
-const ParticleEvents_EPERTYPE ParticleEvents_EPERTYPE_EPERTYPE_MIN = ParticleEvents_EPERTYPE_NONE;
-const ParticleEvents_EPERTYPE ParticleEvents_EPERTYPE_EPERTYPE_MAX = ParticleEvents_EPERTYPE_Random_XYZ;
-const int ParticleEvents_EPERTYPE_EPERTYPE_ARRAYSIZE = ParticleEvents_EPERTYPE_EPERTYPE_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ParticleEvents_EPERTYPE_descriptor();
-inline const ::std::string& ParticleEvents_EPERTYPE_Name(ParticleEvents_EPERTYPE value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    ParticleEvents_EPERTYPE_descriptor(), value);
-}
-inline bool ParticleEvents_EPERTYPE_Parse(
-    const ::std::string& name, ParticleEvents_EPERTYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ParticleEvents_EPERTYPE>(
-    ParticleEvents_EPERTYPE_descriptor(), name, value);
+inline bool CameraEvent_CEType_Parse(
+    const ::std::string& name, CameraEvent_CEType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CameraEvent_CEType>(
+    CameraEvent_CEType_descriptor(), name, value);
 }
 enum EnableEvents_EEETYPE {
   EnableEvents_EEETYPE_INIT = 0,
@@ -208,84 +156,24 @@ inline bool EnableEvents_EEETYPE_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EnableEvents_EEETYPE>(
     EnableEvents_EEETYPE_descriptor(), name, value);
 }
-enum TrailEvents_TEETYPE {
-  TrailEvents_TEETYPE_INIT = 0,
-  TrailEvents_TEETYPE_FINAL = 1
+enum GlobalSpeed_EGSTYPE {
+  GlobalSpeed_EGSTYPE_INIT = 0,
+  GlobalSpeed_EGSTYPE_FINAL = 1
 };
-LIBPROTOC_EXPORT bool TrailEvents_TEETYPE_IsValid(int value);
-const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MIN = TrailEvents_TEETYPE_INIT;
-const TrailEvents_TEETYPE TrailEvents_TEETYPE_TEETYPE_MAX = TrailEvents_TEETYPE_FINAL;
-const int TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE = TrailEvents_TEETYPE_TEETYPE_MAX + 1;
+LIBPROTOC_EXPORT bool GlobalSpeed_EGSTYPE_IsValid(int value);
+const GlobalSpeed_EGSTYPE GlobalSpeed_EGSTYPE_EGSTYPE_MIN = GlobalSpeed_EGSTYPE_INIT;
+const GlobalSpeed_EGSTYPE GlobalSpeed_EGSTYPE_EGSTYPE_MAX = GlobalSpeed_EGSTYPE_FINAL;
+const int GlobalSpeed_EGSTYPE_EGSTYPE_ARRAYSIZE = GlobalSpeed_EGSTYPE_EGSTYPE_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* TrailEvents_TEETYPE_descriptor();
-inline const ::std::string& TrailEvents_TEETYPE_Name(TrailEvents_TEETYPE value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* GlobalSpeed_EGSTYPE_descriptor();
+inline const ::std::string& GlobalSpeed_EGSTYPE_Name(GlobalSpeed_EGSTYPE value) {
   return ::google::protobuf::internal::NameOfEnum(
-    TrailEvents_TEETYPE_descriptor(), value);
+    GlobalSpeed_EGSTYPE_descriptor(), value);
 }
-inline bool TrailEvents_TEETYPE_Parse(
-    const ::std::string& name, TrailEvents_TEETYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<TrailEvents_TEETYPE>(
-    TrailEvents_TEETYPE_descriptor(), name, value);
-}
-enum AudioEvents_AEETYPE {
-  AudioEvents_AEETYPE_INIT = 0,
-  AudioEvents_AEETYPE_FINAL = 1
-};
-LIBPROTOC_EXPORT bool AudioEvents_AEETYPE_IsValid(int value);
-const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MIN = AudioEvents_AEETYPE_INIT;
-const AudioEvents_AEETYPE AudioEvents_AEETYPE_AEETYPE_MAX = AudioEvents_AEETYPE_FINAL;
-const int AudioEvents_AEETYPE_AEETYPE_ARRAYSIZE = AudioEvents_AEETYPE_AEETYPE_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AudioEvents_AEETYPE_descriptor();
-inline const ::std::string& AudioEvents_AEETYPE_Name(AudioEvents_AEETYPE value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    AudioEvents_AEETYPE_descriptor(), value);
-}
-inline bool AudioEvents_AEETYPE_Parse(
-    const ::std::string& name, AudioEvents_AEETYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<AudioEvents_AEETYPE>(
-    AudioEvents_AEETYPE_descriptor(), name, value);
-}
-enum GlobalSpeeds_EGSTYPE {
-  GlobalSpeeds_EGSTYPE_INIT = 0,
-  GlobalSpeeds_EGSTYPE_FINAL = 1
-};
-LIBPROTOC_EXPORT bool GlobalSpeeds_EGSTYPE_IsValid(int value);
-const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MIN = GlobalSpeeds_EGSTYPE_INIT;
-const GlobalSpeeds_EGSTYPE GlobalSpeeds_EGSTYPE_EGSTYPE_MAX = GlobalSpeeds_EGSTYPE_FINAL;
-const int GlobalSpeeds_EGSTYPE_EGSTYPE_ARRAYSIZE = GlobalSpeeds_EGSTYPE_EGSTYPE_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* GlobalSpeeds_EGSTYPE_descriptor();
-inline const ::std::string& GlobalSpeeds_EGSTYPE_Name(GlobalSpeeds_EGSTYPE value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    GlobalSpeeds_EGSTYPE_descriptor(), value);
-}
-inline bool GlobalSpeeds_EGSTYPE_Parse(
-    const ::std::string& name, GlobalSpeeds_EGSTYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<GlobalSpeeds_EGSTYPE>(
-    GlobalSpeeds_EGSTYPE_descriptor(), name, value);
-}
-enum AnimatorFlys_EAFType {
-  AnimatorFlys_EAFType_EAFT_FORWARD = 0,
-  AnimatorFlys_EAFType_EAFT_BACK = 1,
-  AnimatorFlys_EAFType_EAFT_LEFT = 2,
-  AnimatorFlys_EAFType_EAFT_RIGHT = 3,
-  AnimatorFlys_EAFType_EAFT_TOP = 4
-};
-LIBPROTOC_EXPORT bool AnimatorFlys_EAFType_IsValid(int value);
-const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MIN = AnimatorFlys_EAFType_EAFT_FORWARD;
-const AnimatorFlys_EAFType AnimatorFlys_EAFType_EAFType_MAX = AnimatorFlys_EAFType_EAFT_TOP;
-const int AnimatorFlys_EAFType_EAFType_ARRAYSIZE = AnimatorFlys_EAFType_EAFType_MAX + 1;
-
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* AnimatorFlys_EAFType_descriptor();
-inline const ::std::string& AnimatorFlys_EAFType_Name(AnimatorFlys_EAFType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    AnimatorFlys_EAFType_descriptor(), value);
-}
-inline bool AnimatorFlys_EAFType_Parse(
-    const ::std::string& name, AnimatorFlys_EAFType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<AnimatorFlys_EAFType>(
-    AnimatorFlys_EAFType_descriptor(), name, value);
+inline bool GlobalSpeed_EGSTYPE_Parse(
+    const ::std::string& name, GlobalSpeed_EGSTYPE* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<GlobalSpeed_EGSTYPE>(
+    GlobalSpeed_EGSTYPE_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -391,14 +279,14 @@ class LIBPROTOC_EXPORT FSVector3 : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT SuwayyahEvents_Suwayyah : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT FixTimeEvent_EventTrigger : public ::google::protobuf::Message {
  public:
-  SuwayyahEvents_Suwayyah();
-  virtual ~SuwayyahEvents_Suwayyah();
+  FixTimeEvent_EventTrigger();
+  virtual ~FixTimeEvent_EventTrigger();
 
-  SuwayyahEvents_Suwayyah(const SuwayyahEvents_Suwayyah& from);
+  FixTimeEvent_EventTrigger(const FixTimeEvent_EventTrigger& from);
 
-  inline SuwayyahEvents_Suwayyah& operator=(const SuwayyahEvents_Suwayyah& from) {
+  inline FixTimeEvent_EventTrigger& operator=(const FixTimeEvent_EventTrigger& from) {
     CopyFrom(from);
     return *this;
   }
@@ -412,17 +300,17 @@ class LIBPROTOC_EXPORT SuwayyahEvents_Suwayyah : public ::google::protobuf::Mess
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const SuwayyahEvents_Suwayyah& default_instance();
+  static const FixTimeEvent_EventTrigger& default_instance();
 
-  void Swap(SuwayyahEvents_Suwayyah* other);
+  void Swap(FixTimeEvent_EventTrigger* other);
 
   // implements Message ----------------------------------------------
 
-  SuwayyahEvents_Suwayyah* New() const;
+  FixTimeEvent_EventTrigger* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const SuwayyahEvents_Suwayyah& from);
-  void MergeFrom(const SuwayyahEvents_Suwayyah& from);
+  void CopyFrom(const FixTimeEvent_EventTrigger& from);
+  void MergeFrom(const FixTimeEvent_EventTrigger& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -445,167 +333,186 @@ class LIBPROTOC_EXPORT SuwayyahEvents_Suwayyah : public ::google::protobuf::Mess
 
   // accessors -------------------------------------------------------
 
-  // required .NFFS.SuwayyahEvents.ESEType EventType = 1;
-  inline bool has_eventtype() const;
-  inline void clear_eventtype();
-  static const int kEventTypeFieldNumber = 1;
-  inline ::NFFS::SuwayyahEvents_ESEType eventtype() const;
-  inline void set_eventtype(::NFFS::SuwayyahEvents_ESEType value);
-
-  // required float EventTime = 2;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
-  static const int kEventTimeFieldNumber = 2;
+  static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required float EndTime = 3;
-  inline bool has_endtime() const;
-  inline void clear_endtime();
-  static const int kEndTimeFieldNumber = 3;
-  inline float endtime() const;
-  inline void set_endtime(float value);
+  // required .NFFS.FSVector3 v = 2;
+  inline bool has_v() const;
+  inline void clear_v();
+  static const int kVFieldNumber = 2;
+  inline const ::NFFS::FSVector3& v() const;
+  inline ::NFFS::FSVector3* mutable_v();
+  inline ::NFFS::FSVector3* release_v();
+  inline void set_allocated_v(::NFFS::FSVector3* v);
 
-  // required float DamageRang = 4;
-  inline bool has_damagerang() const;
-  inline void clear_damagerang();
-  static const int kDamageRangFieldNumber = 4;
-  inline float damagerang() const;
-  inline void set_damagerang(float value);
+  // required string prefab = 3;
+  inline bool has_prefab() const;
+  inline void clear_prefab();
+  static const int kPrefabFieldNumber = 3;
+  inline const ::std::string& prefab() const;
+  inline void set_prefab(const ::std::string& value);
+  inline void set_prefab(const char* value);
+  inline void set_prefab(const char* value, size_t size);
+  inline ::std::string* mutable_prefab();
+  inline ::std::string* release_prefab();
+  inline void set_allocated_prefab(::std::string* prefab);
 
-  // required float BackHeroDis = 5;
+  // @@protoc_insertion_point(class_scope:NFFS.FixTimeEvent.EventTrigger)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_v();
+  inline void clear_has_v();
+  inline void set_has_prefab();
+  inline void clear_has_prefab();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::NFFS::FSVector3* v_;
+  ::std::string* prefab_;
+  float eventtime_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static FixTimeEvent_EventTrigger* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT FixTimeEvent_HitTrigger : public ::google::protobuf::Message {
+ public:
+  FixTimeEvent_HitTrigger();
+  virtual ~FixTimeEvent_HitTrigger();
+
+  FixTimeEvent_HitTrigger(const FixTimeEvent_HitTrigger& from);
+
+  inline FixTimeEvent_HitTrigger& operator=(const FixTimeEvent_HitTrigger& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FixTimeEvent_HitTrigger& default_instance();
+
+  void Swap(FixTimeEvent_HitTrigger* other);
+
+  // implements Message ----------------------------------------------
+
+  FixTimeEvent_HitTrigger* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const FixTimeEvent_HitTrigger& from);
+  void MergeFrom(const FixTimeEvent_HitTrigger& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float hitTime = 1;
+  inline bool has_hittime() const;
+  inline void clear_hittime();
+  static const int kHitTimeFieldNumber = 1;
+  inline float hittime() const;
+  inline void set_hittime(float value);
+
+  // required string prefab = 2;
+  inline bool has_prefab() const;
+  inline void clear_prefab();
+  static const int kPrefabFieldNumber = 2;
+  inline const ::std::string& prefab() const;
+  inline void set_prefab(const ::std::string& value);
+  inline void set_prefab(const char* value);
+  inline void set_prefab(const char* value, size_t size);
+  inline ::std::string* mutable_prefab();
+  inline ::std::string* release_prefab();
+  inline void set_allocated_prefab(::std::string* prefab);
+
+  // required float backHeroDis = 3;
   inline bool has_backherodis() const;
   inline void clear_backherodis();
-  static const int kBackHeroDisFieldNumber = 5;
+  static const int kBackHeroDisFieldNumber = 3;
   inline float backherodis() const;
   inline void set_backherodis(float value);
 
-  // required float BackNpcDis = 6;
+  // required float backNpcDis = 4;
   inline bool has_backnpcdis() const;
   inline void clear_backnpcdis();
-  static const int kBackNpcDisFieldNumber = 6;
+  static const int kBackNpcDisFieldNumber = 4;
   inline float backnpcdis() const;
   inline void set_backnpcdis(float value);
 
-  // required string BeAttackParticle = 7;
-  inline bool has_beattackparticle() const;
-  inline void clear_beattackparticle();
-  static const int kBeAttackParticleFieldNumber = 7;
-  inline const ::std::string& beattackparticle() const;
-  inline void set_beattackparticle(const ::std::string& value);
-  inline void set_beattackparticle(const char* value);
-  inline void set_beattackparticle(const char* value, size_t size);
-  inline ::std::string* mutable_beattackparticle();
-  inline ::std::string* release_beattackparticle();
-  inline void set_allocated_beattackparticle(::std::string* beattackparticle);
-
-  // required string MethodCall = 8;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 8;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 9;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 9;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // required string TargetMethodCall = 10;
-  inline bool has_targetmethodcall() const;
-  inline void clear_targetmethodcall();
-  static const int kTargetMethodCallFieldNumber = 10;
-  inline const ::std::string& targetmethodcall() const;
-  inline void set_targetmethodcall(const ::std::string& value);
-  inline void set_targetmethodcall(const char* value);
-  inline void set_targetmethodcall(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodcall();
-  inline ::std::string* release_targetmethodcall();
-  inline void set_allocated_targetmethodcall(::std::string* targetmethodcall);
-
-  // required string TargetMethodParam = 11;
-  inline bool has_targetmethodparam() const;
-  inline void clear_targetmethodparam();
-  static const int kTargetMethodParamFieldNumber = 11;
-  inline const ::std::string& targetmethodparam() const;
-  inline void set_targetmethodparam(const ::std::string& value);
-  inline void set_targetmethodparam(const char* value);
-  inline void set_targetmethodparam(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodparam();
-  inline ::std::string* release_targetmethodparam();
-  inline void set_allocated_targetmethodparam(::std::string* targetmethodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.SuwayyahEvents.Suwayyah)
+  // @@protoc_insertion_point(class_scope:NFFS.FixTimeEvent.HitTrigger)
  private:
-  inline void set_has_eventtype();
-  inline void clear_has_eventtype();
-  inline void set_has_eventtime();
-  inline void clear_has_eventtime();
-  inline void set_has_endtime();
-  inline void clear_has_endtime();
-  inline void set_has_damagerang();
-  inline void clear_has_damagerang();
+  inline void set_has_hittime();
+  inline void clear_has_hittime();
+  inline void set_has_prefab();
+  inline void clear_has_prefab();
   inline void set_has_backherodis();
   inline void clear_has_backherodis();
   inline void set_has_backnpcdis();
   inline void clear_has_backnpcdis();
-  inline void set_has_beattackparticle();
-  inline void clear_has_beattackparticle();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-  inline void set_has_targetmethodcall();
-  inline void clear_has_targetmethodcall();
-  inline void set_has_targetmethodparam();
-  inline void clear_has_targetmethodparam();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  int eventtype_;
-  float eventtime_;
-  float endtime_;
-  float damagerang_;
+  ::std::string* prefab_;
+  float hittime_;
   float backherodis_;
   float backnpcdis_;
-  ::std::string* beattackparticle_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-  ::std::string* targetmethodcall_;
-  ::std::string* targetmethodparam_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static SuwayyahEvents_Suwayyah* default_instance_;
+  static FixTimeEvent_HitTrigger* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT SuwayyahEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT FixTimeEvent : public ::google::protobuf::Message {
  public:
-  SuwayyahEvents();
-  virtual ~SuwayyahEvents();
+  FixTimeEvent();
+  virtual ~FixTimeEvent();
 
-  SuwayyahEvents(const SuwayyahEvents& from);
+  FixTimeEvent(const FixTimeEvent& from);
 
-  inline SuwayyahEvents& operator=(const SuwayyahEvents& from) {
+  inline FixTimeEvent& operator=(const FixTimeEvent& from) {
     CopyFrom(from);
     return *this;
   }
@@ -619,17 +526,17 @@ class LIBPROTOC_EXPORT SuwayyahEvents : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const SuwayyahEvents& default_instance();
+  static const FixTimeEvent& default_instance();
 
-  void Swap(SuwayyahEvents* other);
+  void Swap(FixTimeEvent* other);
 
   // implements Message ----------------------------------------------
 
-  SuwayyahEvents* New() const;
+  FixTimeEvent* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const SuwayyahEvents& from);
-  void MergeFrom(const SuwayyahEvents& from);
+  void CopyFrom(const FixTimeEvent& from);
+  void MergeFrom(const FixTimeEvent& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -650,75 +557,63 @@ class LIBPROTOC_EXPORT SuwayyahEvents : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef SuwayyahEvents_Suwayyah Suwayyah;
-
-  typedef SuwayyahEvents_ESEType ESEType;
-  static const ESEType ESET_SINGLE = SuwayyahEvents_ESEType_ESET_SINGLE;
-  static const ESEType ESET_SINGLE_AREA = SuwayyahEvents_ESEType_ESET_SINGLE_AREA;
-  static const ESEType ESET_LEFT_AREA = SuwayyahEvents_ESEType_ESET_LEFT_AREA;
-  static const ESEType ESET_RIGHT_AREA = SuwayyahEvents_ESEType_ESET_RIGHT_AREA;
-  static inline bool ESEType_IsValid(int value) {
-    return SuwayyahEvents_ESEType_IsValid(value);
-  }
-  static const ESEType ESEType_MIN =
-    SuwayyahEvents_ESEType_ESEType_MIN;
-  static const ESEType ESEType_MAX =
-    SuwayyahEvents_ESEType_ESEType_MAX;
-  static const int ESEType_ARRAYSIZE =
-    SuwayyahEvents_ESEType_ESEType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  ESEType_descriptor() {
-    return SuwayyahEvents_ESEType_descriptor();
-  }
-  static inline const ::std::string& ESEType_Name(ESEType value) {
-    return SuwayyahEvents_ESEType_Name(value);
-  }
-  static inline bool ESEType_Parse(const ::std::string& name,
-      ESEType* value) {
-    return SuwayyahEvents_ESEType_Parse(name, value);
-  }
+  typedef FixTimeEvent_EventTrigger EventTrigger;
+  typedef FixTimeEvent_HitTrigger HitTrigger;
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.SuwayyahEvents.Suwayyah xSuwayyahList = 1;
-  inline int xsuwayyahlist_size() const;
-  inline void clear_xsuwayyahlist();
-  static const int kXSuwayyahListFieldNumber = 1;
-  inline const ::NFFS::SuwayyahEvents_Suwayyah& xsuwayyahlist(int index) const;
-  inline ::NFFS::SuwayyahEvents_Suwayyah* mutable_xsuwayyahlist(int index);
-  inline ::NFFS::SuwayyahEvents_Suwayyah* add_xsuwayyahlist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::SuwayyahEvents_Suwayyah >&
-      xsuwayyahlist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::SuwayyahEvents_Suwayyah >*
-      mutable_xsuwayyahlist();
+  // repeated .NFFS.FixTimeEvent.HitTrigger hitTrigger = 1;
+  inline int hittrigger_size() const;
+  inline void clear_hittrigger();
+  static const int kHitTriggerFieldNumber = 1;
+  inline const ::NFFS::FixTimeEvent_HitTrigger& hittrigger(int index) const;
+  inline ::NFFS::FixTimeEvent_HitTrigger* mutable_hittrigger(int index);
+  inline ::NFFS::FixTimeEvent_HitTrigger* add_hittrigger();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_HitTrigger >&
+      hittrigger() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_HitTrigger >*
+      mutable_hittrigger();
 
-  // @@protoc_insertion_point(class_scope:NFFS.SuwayyahEvents)
+  // repeated .NFFS.FixTimeEvent.EventTrigger eventTrigger = 5;
+  inline int eventtrigger_size() const;
+  inline void clear_eventtrigger();
+  static const int kEventTriggerFieldNumber = 5;
+  inline const ::NFFS::FixTimeEvent_EventTrigger& eventtrigger(int index) const;
+  inline ::NFFS::FixTimeEvent_EventTrigger* mutable_eventtrigger(int index);
+  inline ::NFFS::FixTimeEvent_EventTrigger* add_eventtrigger();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_EventTrigger >&
+      eventtrigger() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_EventTrigger >*
+      mutable_eventtrigger();
+
+  // @@protoc_insertion_point(class_scope:NFFS.FixTimeEvent)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::SuwayyahEvents_Suwayyah > xsuwayyahlist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_HitTrigger > hittrigger_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_EventTrigger > eventtrigger_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static SuwayyahEvents* default_instance_;
+  static FixTimeEvent* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvent_TacheBomp : public ::google::protobuf::Message {
  public:
-  BulletEvents_TacheBomp();
-  virtual ~BulletEvents_TacheBomp();
+  BulletEvent_TacheBomp();
+  virtual ~BulletEvent_TacheBomp();
 
-  BulletEvents_TacheBomp(const BulletEvents_TacheBomp& from);
+  BulletEvent_TacheBomp(const BulletEvent_TacheBomp& from);
 
-  inline BulletEvents_TacheBomp& operator=(const BulletEvents_TacheBomp& from) {
+  inline BulletEvent_TacheBomp& operator=(const BulletEvent_TacheBomp& from) {
     CopyFrom(from);
     return *this;
   }
@@ -732,17 +627,17 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const BulletEvents_TacheBomp& default_instance();
+  static const BulletEvent_TacheBomp& default_instance();
 
-  void Swap(BulletEvents_TacheBomp* other);
+  void Swap(BulletEvent_TacheBomp* other);
 
   // implements Message ----------------------------------------------
 
-  BulletEvents_TacheBomp* New() const;
+  BulletEvent_TacheBomp* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const BulletEvents_TacheBomp& from);
-  void MergeFrom(const BulletEvents_TacheBomp& from);
+  void CopyFrom(const BulletEvent_TacheBomp& from);
+  void MergeFrom(const BulletEvent_TacheBomp& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -765,21 +660,21 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
 
   // accessors -------------------------------------------------------
 
-  // required float BompTime = 1;
+  // required float bompTime = 1;
   inline bool has_bomptime() const;
   inline void clear_bomptime();
   static const int kBompTimeFieldNumber = 1;
   inline float bomptime() const;
   inline void set_bomptime(float value);
 
-  // required float BompRang = 2;
+  // required float bompRang = 2;
   inline bool has_bomprang() const;
   inline void clear_bomprang();
   static const int kBompRangFieldNumber = 2;
   inline float bomprang() const;
   inline void set_bomprang(float value);
 
-  // required string BompPrefabPath = 3;
+  // required string bompPrefabPath = 3;
   inline bool has_bompprefabpath() const;
   inline void clear_bompprefabpath();
   static const int kBompPrefabPathFieldNumber = 3;
@@ -791,7 +686,7 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
   inline ::std::string* release_bompprefabpath();
   inline void set_allocated_bompprefabpath(::std::string* bompprefabpath);
 
-  // required string BeAttackParticle = 4;
+  // required string beAttackParticle = 4;
   inline bool has_beattackparticle() const;
   inline void clear_beattackparticle();
   static const int kBeAttackParticleFieldNumber = 4;
@@ -803,69 +698,21 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
   inline ::std::string* release_beattackparticle();
   inline void set_allocated_beattackparticle(::std::string* beattackparticle);
 
-  // required float BackNpcDis = 5;
+  // required float backNpcDis = 5;
   inline bool has_backnpcdis() const;
   inline void clear_backnpcdis();
   static const int kBackNpcDisFieldNumber = 5;
   inline float backnpcdis() const;
   inline void set_backnpcdis(float value);
 
-  // required float BackHeroDis = 6;
+  // required float backHeroDis = 6;
   inline bool has_backherodis() const;
   inline void clear_backherodis();
   static const int kBackHeroDisFieldNumber = 6;
   inline float backherodis() const;
   inline void set_backherodis(float value);
 
-  // required string MethodCall = 7;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 7;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 8;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 8;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // required string TargetMethodCall = 9;
-  inline bool has_targetmethodcall() const;
-  inline void clear_targetmethodcall();
-  static const int kTargetMethodCallFieldNumber = 9;
-  inline const ::std::string& targetmethodcall() const;
-  inline void set_targetmethodcall(const ::std::string& value);
-  inline void set_targetmethodcall(const char* value);
-  inline void set_targetmethodcall(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodcall();
-  inline ::std::string* release_targetmethodcall();
-  inline void set_allocated_targetmethodcall(::std::string* targetmethodcall);
-
-  // required string TargetMethodParam = 10;
-  inline bool has_targetmethodparam() const;
-  inline void clear_targetmethodparam();
-  static const int kTargetMethodParamFieldNumber = 10;
-  inline const ::std::string& targetmethodparam() const;
-  inline void set_targetmethodparam(const ::std::string& value);
-  inline void set_targetmethodparam(const char* value);
-  inline void set_targetmethodparam(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodparam();
-  inline ::std::string* release_targetmethodparam();
-  inline void set_allocated_targetmethodparam(::std::string* targetmethodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.BulletEvents.TacheBomp)
+  // @@protoc_insertion_point(class_scope:NFFS.BulletEvent.TacheBomp)
  private:
   inline void set_has_bomptime();
   inline void clear_has_bomptime();
@@ -879,14 +726,6 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
   inline void clear_has_backnpcdis();
   inline void set_has_backherodis();
   inline void clear_has_backherodis();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-  inline void set_has_targetmethodcall();
-  inline void clear_has_targetmethodcall();
-  inline void set_has_targetmethodparam();
-  inline void clear_has_targetmethodparam();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -896,31 +735,27 @@ class LIBPROTOC_EXPORT BulletEvents_TacheBomp : public ::google::protobuf::Messa
   ::std::string* beattackparticle_;
   float backnpcdis_;
   float backherodis_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-  ::std::string* targetmethodcall_;
-  ::std::string* targetmethodparam_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static BulletEvents_TacheBomp* default_instance_;
+  static BulletEvent_TacheBomp* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvent_Bullet : public ::google::protobuf::Message {
  public:
-  BulletEvents_Bullet();
-  virtual ~BulletEvents_Bullet();
+  BulletEvent_Bullet();
+  virtual ~BulletEvent_Bullet();
 
-  BulletEvents_Bullet(const BulletEvents_Bullet& from);
+  BulletEvent_Bullet(const BulletEvent_Bullet& from);
 
-  inline BulletEvents_Bullet& operator=(const BulletEvents_Bullet& from) {
+  inline BulletEvent_Bullet& operator=(const BulletEvent_Bullet& from) {
     CopyFrom(from);
     return *this;
   }
@@ -934,17 +769,17 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const BulletEvents_Bullet& default_instance();
+  static const BulletEvent_Bullet& default_instance();
 
-  void Swap(BulletEvents_Bullet* other);
+  void Swap(BulletEvent_Bullet* other);
 
   // implements Message ----------------------------------------------
 
-  BulletEvents_Bullet* New() const;
+  BulletEvent_Bullet* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const BulletEvents_Bullet& from);
-  void MergeFrom(const BulletEvents_Bullet& from);
+  void CopyFrom(const BulletEvent_Bullet& from);
+  void MergeFrom(const BulletEvent_Bullet& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -967,70 +802,70 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
 
   // accessors -------------------------------------------------------
 
-  // required float EventTime = 1;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
   static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required .NFFS.BulletEvents.EBEType EventType = 2;
+  // required .NFFS.BulletEvent.EBEType eventType = 2;
   inline bool has_eventtype() const;
   inline void clear_eventtype();
   static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::BulletEvents_EBEType eventtype() const;
-  inline void set_eventtype(::NFFS::BulletEvents_EBEType value);
+  inline ::NFFS::BulletEvent_EBEType eventtype() const;
+  inline void set_eventtype(::NFFS::BulletEvent_EBEType value);
 
-  // required float Speed = 3;
+  // required float speed = 3;
   inline bool has_speed() const;
   inline void clear_speed();
   static const int kSpeedFieldNumber = 3;
   inline float speed() const;
   inline void set_speed(float value);
 
-  // required float MaxDis = 4;
+  // required float maxDis = 4;
   inline bool has_maxdis() const;
   inline void clear_maxdis();
   static const int kMaxDisFieldNumber = 4;
   inline float maxdis() const;
   inline void set_maxdis(float value);
 
-  // required float BulletRang = 5;
+  // required float bulletRang = 5;
   inline bool has_bulletrang() const;
   inline void clear_bulletrang();
   static const int kBulletRangFieldNumber = 5;
   inline float bulletrang() const;
   inline void set_bulletrang(float value);
 
-  // required .NFFS.BulletEvents.EBE_BACKType BulletBackType = 6;
+  // required .NFFS.BulletEvent.EBE_BACKType bulletBackType = 6;
   inline bool has_bulletbacktype() const;
   inline void clear_bulletbacktype();
   static const int kBulletBackTypeFieldNumber = 6;
-  inline ::NFFS::BulletEvents_EBE_BACKType bulletbacktype() const;
-  inline void set_bulletbacktype(::NFFS::BulletEvents_EBE_BACKType value);
+  inline ::NFFS::BulletEvent_EBE_BACKType bulletbacktype() const;
+  inline void set_bulletbacktype(::NFFS::BulletEvent_EBE_BACKType value);
 
-  // required float BackHeroDis = 7;
+  // required float backHeroDis = 7;
   inline bool has_backherodis() const;
   inline void clear_backherodis();
   static const int kBackHeroDisFieldNumber = 7;
   inline float backherodis() const;
   inline void set_backherodis(float value);
 
-  // required float BackNpcDis = 8;
+  // required float backNpcDis = 8;
   inline bool has_backnpcdis() const;
   inline void clear_backnpcdis();
   static const int kBackNpcDisFieldNumber = 8;
   inline float backnpcdis() const;
   inline void set_backnpcdis(float value);
 
-  // required int32 TacheDetroy = 9;
+  // required int32 tacheDetroy = 9;
   inline bool has_tachedetroy() const;
   inline void clear_tachedetroy();
   static const int kTacheDetroyFieldNumber = 9;
   inline ::google::protobuf::int32 tachedetroy() const;
   inline void set_tachedetroy(::google::protobuf::int32 value);
 
-  // required string BeAttackParticle = 10;
+  // required string beAttackParticle = 10;
   inline bool has_beattackparticle() const;
   inline void clear_beattackparticle();
   static const int kBeAttackParticleFieldNumber = 10;
@@ -1042,31 +877,19 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
   inline ::std::string* release_beattackparticle();
   inline void set_allocated_beattackparticle(::std::string* beattackparticle);
 
-  // required string FireTacheName = 11;
-  inline bool has_firetachename() const;
-  inline void clear_firetachename();
-  static const int kFireTacheNameFieldNumber = 11;
-  inline const ::std::string& firetachename() const;
-  inline void set_firetachename(const ::std::string& value);
-  inline void set_firetachename(const char* value);
-  inline void set_firetachename(const char* value, size_t size);
-  inline ::std::string* mutable_firetachename();
-  inline ::std::string* release_firetachename();
-  inline void set_allocated_firetachename(::std::string* firetachename);
+  // required .NFFS.FSVector3 fireOffest = 11;
+  inline bool has_fireoffest() const;
+  inline void clear_fireoffest();
+  static const int kFireOffestFieldNumber = 11;
+  inline const ::NFFS::FSVector3& fireoffest() const;
+  inline ::NFFS::FSVector3* mutable_fireoffest();
+  inline ::NFFS::FSVector3* release_fireoffest();
+  inline void set_allocated_fireoffest(::NFFS::FSVector3* fireoffest);
 
-  // required .NFFS.FSVector3 FireTacheOffest = 12;
-  inline bool has_firetacheoffest() const;
-  inline void clear_firetacheoffest();
-  static const int kFireTacheOffestFieldNumber = 12;
-  inline const ::NFFS::FSVector3& firetacheoffest() const;
-  inline ::NFFS::FSVector3* mutable_firetacheoffest();
-  inline ::NFFS::FSVector3* release_firetacheoffest();
-  inline void set_allocated_firetacheoffest(::NFFS::FSVector3* firetacheoffest);
-
-  // required string BulletPrefabPath = 13;
+  // required string bulletPrefabPath = 12;
   inline bool has_bulletprefabpath() const;
   inline void clear_bulletprefabpath();
-  static const int kBulletPrefabPathFieldNumber = 13;
+  static const int kBulletPrefabPathFieldNumber = 12;
   inline const ::std::string& bulletprefabpath() const;
   inline void set_bulletprefabpath(const ::std::string& value);
   inline void set_bulletprefabpath(const char* value);
@@ -1075,67 +898,16 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
   inline ::std::string* release_bulletprefabpath();
   inline void set_allocated_bulletprefabpath(::std::string* bulletprefabpath);
 
-  // required string MethodCall = 14;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 14;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 15;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 15;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // required string TargetMethodCall = 16;
-  inline bool has_targetmethodcall() const;
-  inline void clear_targetmethodcall();
-  static const int kTargetMethodCallFieldNumber = 16;
-  inline const ::std::string& targetmethodcall() const;
-  inline void set_targetmethodcall(const ::std::string& value);
-  inline void set_targetmethodcall(const char* value);
-  inline void set_targetmethodcall(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodcall();
-  inline ::std::string* release_targetmethodcall();
-  inline void set_allocated_targetmethodcall(::std::string* targetmethodcall);
-
-  // required string TargetMethodParam = 17;
-  inline bool has_targetmethodparam() const;
-  inline void clear_targetmethodparam();
-  static const int kTargetMethodParamFieldNumber = 17;
-  inline const ::std::string& targetmethodparam() const;
-  inline void set_targetmethodparam(const ::std::string& value);
-  inline void set_targetmethodparam(const char* value);
-  inline void set_targetmethodparam(const char* value, size_t size);
-  inline ::std::string* mutable_targetmethodparam();
-  inline ::std::string* release_targetmethodparam();
-  inline void set_allocated_targetmethodparam(::std::string* targetmethodparam);
-
-  // repeated .NFFS.BulletEvents.TacheBomp Bomp = 18;
-  inline int bomp_size() const;
+  // required .NFFS.BulletEvent.TacheBomp bomp = 13;
+  inline bool has_bomp() const;
   inline void clear_bomp();
-  static const int kBompFieldNumber = 18;
-  inline const ::NFFS::BulletEvents_TacheBomp& bomp(int index) const;
-  inline ::NFFS::BulletEvents_TacheBomp* mutable_bomp(int index);
-  inline ::NFFS::BulletEvents_TacheBomp* add_bomp();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_TacheBomp >&
-      bomp() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_TacheBomp >*
-      mutable_bomp();
+  static const int kBompFieldNumber = 13;
+  inline const ::NFFS::BulletEvent_TacheBomp& bomp() const;
+  inline ::NFFS::BulletEvent_TacheBomp* mutable_bomp();
+  inline ::NFFS::BulletEvent_TacheBomp* release_bomp();
+  inline void set_allocated_bomp(::NFFS::BulletEvent_TacheBomp* bomp);
 
-  // @@protoc_insertion_point(class_scope:NFFS.BulletEvents.Bullet)
+  // @@protoc_insertion_point(class_scope:NFFS.BulletEvent.Bullet)
  private:
   inline void set_has_eventtime();
   inline void clear_has_eventtime();
@@ -1157,20 +929,12 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
   inline void clear_has_tachedetroy();
   inline void set_has_beattackparticle();
   inline void clear_has_beattackparticle();
-  inline void set_has_firetachename();
-  inline void clear_has_firetachename();
-  inline void set_has_firetacheoffest();
-  inline void clear_has_firetacheoffest();
+  inline void set_has_fireoffest();
+  inline void clear_has_fireoffest();
   inline void set_has_bulletprefabpath();
   inline void clear_has_bulletprefabpath();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-  inline void set_has_targetmethodcall();
-  inline void clear_has_targetmethodcall();
-  inline void set_has_targetmethodparam();
-  inline void clear_has_targetmethodparam();
+  inline void set_has_bomp();
+  inline void clear_has_bomp();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1183,36 +947,31 @@ class LIBPROTOC_EXPORT BulletEvents_Bullet : public ::google::protobuf::Message 
   float backherodis_;
   float backnpcdis_;
   ::std::string* beattackparticle_;
-  ::std::string* firetachename_;
-  ::NFFS::FSVector3* firetacheoffest_;
+  ::NFFS::FSVector3* fireoffest_;
   ::std::string* bulletprefabpath_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-  ::std::string* targetmethodcall_;
-  ::std::string* targetmethodparam_;
-  ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_TacheBomp > bomp_;
+  ::NFFS::BulletEvent_TacheBomp* bomp_;
   ::google::protobuf::int32 tachedetroy_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(18 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(13 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static BulletEvents_Bullet* default_instance_;
+  static BulletEvent_Bullet* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT BulletEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT BulletEvent : public ::google::protobuf::Message {
  public:
-  BulletEvents();
-  virtual ~BulletEvents();
+  BulletEvent();
+  virtual ~BulletEvent();
 
-  BulletEvents(const BulletEvents& from);
+  BulletEvent(const BulletEvent& from);
 
-  inline BulletEvents& operator=(const BulletEvents& from) {
+  inline BulletEvent& operator=(const BulletEvent& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1226,17 +985,17 @@ class LIBPROTOC_EXPORT BulletEvents : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const BulletEvents& default_instance();
+  static const BulletEvent& default_instance();
 
-  void Swap(BulletEvents* other);
+  void Swap(BulletEvent* other);
 
   // implements Message ----------------------------------------------
 
-  BulletEvents* New() const;
+  BulletEvent* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const BulletEvents& from);
-  void MergeFrom(const BulletEvents& from);
+  void CopyFrom(const BulletEvent& from);
+  void MergeFrom(const BulletEvent& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1257,77 +1016,77 @@ class LIBPROTOC_EXPORT BulletEvents : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef BulletEvents_TacheBomp TacheBomp;
-  typedef BulletEvents_Bullet Bullet;
+  typedef BulletEvent_TacheBomp TacheBomp;
+  typedef BulletEvent_Bullet Bullet;
 
-  typedef BulletEvents_EBEType EBEType;
-  static const EBEType ESET_TARGET = BulletEvents_EBEType_ESET_TARGET;
-  static const EBEType ESET_POSITION = BulletEvents_EBEType_ESET_POSITION;
+  typedef BulletEvent_EBEType EBEType;
+  static const EBEType ESET_TARGET = BulletEvent_EBEType_ESET_TARGET;
+  static const EBEType ESET_POSITION = BulletEvent_EBEType_ESET_POSITION;
   static inline bool EBEType_IsValid(int value) {
-    return BulletEvents_EBEType_IsValid(value);
+    return BulletEvent_EBEType_IsValid(value);
   }
   static const EBEType EBEType_MIN =
-    BulletEvents_EBEType_EBEType_MIN;
+    BulletEvent_EBEType_EBEType_MIN;
   static const EBEType EBEType_MAX =
-    BulletEvents_EBEType_EBEType_MAX;
+    BulletEvent_EBEType_EBEType_MAX;
   static const int EBEType_ARRAYSIZE =
-    BulletEvents_EBEType_EBEType_ARRAYSIZE;
+    BulletEvent_EBEType_EBEType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   EBEType_descriptor() {
-    return BulletEvents_EBEType_descriptor();
+    return BulletEvent_EBEType_descriptor();
   }
   static inline const ::std::string& EBEType_Name(EBEType value) {
-    return BulletEvents_EBEType_Name(value);
+    return BulletEvent_EBEType_Name(value);
   }
   static inline bool EBEType_Parse(const ::std::string& name,
       EBEType* value) {
-    return BulletEvents_EBEType_Parse(name, value);
+    return BulletEvent_EBEType_Parse(name, value);
   }
 
-  typedef BulletEvents_EBE_BACKType EBE_BACKType;
-  static const EBE_BACKType EBEBT_BACK = BulletEvents_EBE_BACKType_EBEBT_BACK;
-  static const EBE_BACKType EBEBT_SIDE = BulletEvents_EBE_BACKType_EBEBT_SIDE;
+  typedef BulletEvent_EBE_BACKType EBE_BACKType;
+  static const EBE_BACKType EBEBT_BACK = BulletEvent_EBE_BACKType_EBEBT_BACK;
+  static const EBE_BACKType EBEBT_SIDE = BulletEvent_EBE_BACKType_EBEBT_SIDE;
   static inline bool EBE_BACKType_IsValid(int value) {
-    return BulletEvents_EBE_BACKType_IsValid(value);
+    return BulletEvent_EBE_BACKType_IsValid(value);
   }
   static const EBE_BACKType EBE_BACKType_MIN =
-    BulletEvents_EBE_BACKType_EBE_BACKType_MIN;
+    BulletEvent_EBE_BACKType_EBE_BACKType_MIN;
   static const EBE_BACKType EBE_BACKType_MAX =
-    BulletEvents_EBE_BACKType_EBE_BACKType_MAX;
+    BulletEvent_EBE_BACKType_EBE_BACKType_MAX;
   static const int EBE_BACKType_ARRAYSIZE =
-    BulletEvents_EBE_BACKType_EBE_BACKType_ARRAYSIZE;
+    BulletEvent_EBE_BACKType_EBE_BACKType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   EBE_BACKType_descriptor() {
-    return BulletEvents_EBE_BACKType_descriptor();
+    return BulletEvent_EBE_BACKType_descriptor();
   }
   static inline const ::std::string& EBE_BACKType_Name(EBE_BACKType value) {
-    return BulletEvents_EBE_BACKType_Name(value);
+    return BulletEvent_EBE_BACKType_Name(value);
   }
   static inline bool EBE_BACKType_Parse(const ::std::string& name,
       EBE_BACKType* value) {
-    return BulletEvents_EBE_BACKType_Parse(name, value);
+    return BulletEvent_EBE_BACKType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.BulletEvents.Bullet xBulletList = 1;
-  inline int xbulletlist_size() const;
-  inline void clear_xbulletlist();
-  static const int kXBulletListFieldNumber = 1;
-  inline const ::NFFS::BulletEvents_Bullet& xbulletlist(int index) const;
-  inline ::NFFS::BulletEvents_Bullet* mutable_xbulletlist(int index);
-  inline ::NFFS::BulletEvents_Bullet* add_xbulletlist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_Bullet >&
-      xbulletlist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_Bullet >*
-      mutable_xbulletlist();
+  // repeated .NFFS.BulletEvent.Bullet bulletList = 1;
+  inline int bulletlist_size() const;
+  inline void clear_bulletlist();
+  static const int kBulletListFieldNumber = 1;
+  inline const ::NFFS::BulletEvent_Bullet& bulletlist(int index) const;
+  inline ::NFFS::BulletEvent_Bullet* mutable_bulletlist(int index);
+  inline ::NFFS::BulletEvent_Bullet* add_bulletlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvent_Bullet >&
+      bulletlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvent_Bullet >*
+      mutable_bulletlist();
 
-  // @@protoc_insertion_point(class_scope:NFFS.BulletEvents)
+  // @@protoc_insertion_point(class_scope:NFFS.BulletEvent)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_Bullet > xbulletlist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvent_Bullet > bulletlist_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1337,18 +1096,18 @@ class LIBPROTOC_EXPORT BulletEvents : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static BulletEvents* default_instance_;
+  static BulletEvent* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT AudioEvent_Audio : public ::google::protobuf::Message {
  public:
-  AnimatorMoves_Move();
-  virtual ~AnimatorMoves_Move();
+  AudioEvent_Audio();
+  virtual ~AudioEvent_Audio();
 
-  AnimatorMoves_Move(const AnimatorMoves_Move& from);
+  AudioEvent_Audio(const AudioEvent_Audio& from);
 
-  inline AnimatorMoves_Move& operator=(const AnimatorMoves_Move& from) {
+  inline AudioEvent_Audio& operator=(const AudioEvent_Audio& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1362,17 +1121,17 @@ class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AnimatorMoves_Move& default_instance();
+  static const AudioEvent_Audio& default_instance();
 
-  void Swap(AnimatorMoves_Move* other);
+  void Swap(AudioEvent_Audio* other);
 
   // implements Message ----------------------------------------------
 
-  AnimatorMoves_Move* New() const;
+  AudioEvent_Audio* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AnimatorMoves_Move& from);
-  void MergeFrom(const AnimatorMoves_Move& from);
+  void CopyFrom(const AudioEvent_Audio& from);
+  void MergeFrom(const AudioEvent_Audio& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1395,59 +1154,219 @@ class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required float EventTime = 1;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
   static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required .NFFS.AnimatorMoves.EAMType EventType = 2;
+  // required string audioPrefabName = 3;
+  inline bool has_audioprefabname() const;
+  inline void clear_audioprefabname();
+  static const int kAudioPrefabNameFieldNumber = 3;
+  inline const ::std::string& audioprefabname() const;
+  inline void set_audioprefabname(const ::std::string& value);
+  inline void set_audioprefabname(const char* value);
+  inline void set_audioprefabname(const char* value, size_t size);
+  inline ::std::string* mutable_audioprefabname();
+  inline ::std::string* release_audioprefabname();
+  inline void set_allocated_audioprefabname(::std::string* audioprefabname);
+
+  // @@protoc_insertion_point(class_scope:NFFS.AudioEvent.Audio)
+ private:
+  inline void set_has_eventtime();
+  inline void clear_has_eventtime();
+  inline void set_has_audioprefabname();
+  inline void clear_has_audioprefabname();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* audioprefabname_;
+  float eventtime_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AudioEvent_Audio* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT AudioEvent : public ::google::protobuf::Message {
+ public:
+  AudioEvent();
+  virtual ~AudioEvent();
+
+  AudioEvent(const AudioEvent& from);
+
+  inline AudioEvent& operator=(const AudioEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AudioEvent& default_instance();
+
+  void Swap(AudioEvent* other);
+
+  // implements Message ----------------------------------------------
+
+  AudioEvent* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AudioEvent& from);
+  void MergeFrom(const AudioEvent& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AudioEvent_Audio Audio;
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NFFS.AudioEvent.Audio audioList = 1;
+  inline int audiolist_size() const;
+  inline void clear_audiolist();
+  static const int kAudioListFieldNumber = 1;
+  inline const ::NFFS::AudioEvent_Audio& audiolist(int index) const;
+  inline ::NFFS::AudioEvent_Audio* mutable_audiolist(int index);
+  inline ::NFFS::AudioEvent_Audio* add_audiolist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvent_Audio >&
+      audiolist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvent_Audio >*
+      mutable_audiolist();
+
+  // @@protoc_insertion_point(class_scope:NFFS.AudioEvent)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvent_Audio > audiolist_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
+  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AudioEvent* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT MoveEvent_Move : public ::google::protobuf::Message {
+ public:
+  MoveEvent_Move();
+  virtual ~MoveEvent_Move();
+
+  MoveEvent_Move(const MoveEvent_Move& from);
+
+  inline MoveEvent_Move& operator=(const MoveEvent_Move& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MoveEvent_Move& default_instance();
+
+  void Swap(MoveEvent_Move* other);
+
+  // implements Message ----------------------------------------------
+
+  MoveEvent_Move* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MoveEvent_Move& from);
+  void MergeFrom(const MoveEvent_Move& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float eventTime = 1;
+  inline bool has_eventtime() const;
+  inline void clear_eventtime();
+  static const int kEventTimeFieldNumber = 1;
+  inline float eventtime() const;
+  inline void set_eventtime(float value);
+
+  // required .NFFS.MoveEvent.METype eventType = 2;
   inline bool has_eventtype() const;
   inline void clear_eventtype();
   static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::AnimatorMoves_EAMType eventtype() const;
-  inline void set_eventtype(::NFFS::AnimatorMoves_EAMType value);
+  inline ::NFFS::MoveEvent_METype eventtype() const;
+  inline void set_eventtype(::NFFS::MoveEvent_METype value);
 
-  // required float MoveDis = 3;
+  // required float moveDis = 3;
   inline bool has_movedis() const;
   inline void clear_movedis();
   static const int kMoveDisFieldNumber = 3;
   inline float movedis() const;
   inline void set_movedis(float value);
 
-  // required float MoveTime = 4;
+  // required float moveTime = 4;
   inline bool has_movetime() const;
   inline void clear_movetime();
   static const int kMoveTimeFieldNumber = 4;
   inline float movetime() const;
   inline void set_movetime(float value);
 
-  // required string MethodCall = 5;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 5;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 6;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 6;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.AnimatorMoves.Move)
+  // @@protoc_insertion_point(class_scope:NFFS.MoveEvent.Move)
  private:
   inline void set_has_eventtime();
   inline void clear_has_eventtime();
@@ -1457,10 +1376,6 @@ class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
   inline void clear_has_movedis();
   inline void set_has_movetime();
   inline void clear_has_movetime();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1468,29 +1383,27 @@ class LIBPROTOC_EXPORT AnimatorMoves_Move : public ::google::protobuf::Message {
   int eventtype_;
   float movedis_;
   float movetime_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static AnimatorMoves_Move* default_instance_;
+  static MoveEvent_Move* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT AnimatorMoves : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT MoveEvent : public ::google::protobuf::Message {
  public:
-  AnimatorMoves();
-  virtual ~AnimatorMoves();
+  MoveEvent();
+  virtual ~MoveEvent();
 
-  AnimatorMoves(const AnimatorMoves& from);
+  MoveEvent(const MoveEvent& from);
 
-  inline AnimatorMoves& operator=(const AnimatorMoves& from) {
+  inline MoveEvent& operator=(const MoveEvent& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1504,17 +1417,17 @@ class LIBPROTOC_EXPORT AnimatorMoves : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AnimatorMoves& default_instance();
+  static const MoveEvent& default_instance();
 
-  void Swap(AnimatorMoves* other);
+  void Swap(MoveEvent* other);
 
   // implements Message ----------------------------------------------
 
-  AnimatorMoves* New() const;
+  MoveEvent* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AnimatorMoves& from);
-  void MergeFrom(const AnimatorMoves& from);
+  void CopyFrom(const MoveEvent& from);
+  void MergeFrom(const MoveEvent& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1535,54 +1448,54 @@ class LIBPROTOC_EXPORT AnimatorMoves : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef AnimatorMoves_Move Move;
+  typedef MoveEvent_Move Move;
 
-  typedef AnimatorMoves_EAMType EAMType;
-  static const EAMType EAMT_FORWARD = AnimatorMoves_EAMType_EAMT_FORWARD;
-  static const EAMType EAMT_BACK = AnimatorMoves_EAMType_EAMT_BACK;
-  static const EAMType EAMT_LEFT = AnimatorMoves_EAMType_EAMT_LEFT;
-  static const EAMType EAMT_RIGHT = AnimatorMoves_EAMType_EAMT_RIGHT;
-  static inline bool EAMType_IsValid(int value) {
-    return AnimatorMoves_EAMType_IsValid(value);
+  typedef MoveEvent_METype METype;
+  static const METype ME_FORWARD = MoveEvent_METype_ME_FORWARD;
+  static const METype ME_BACK = MoveEvent_METype_ME_BACK;
+  static const METype ME_LEFT = MoveEvent_METype_ME_LEFT;
+  static const METype ME_RIGHT = MoveEvent_METype_ME_RIGHT;
+  static inline bool METype_IsValid(int value) {
+    return MoveEvent_METype_IsValid(value);
   }
-  static const EAMType EAMType_MIN =
-    AnimatorMoves_EAMType_EAMType_MIN;
-  static const EAMType EAMType_MAX =
-    AnimatorMoves_EAMType_EAMType_MAX;
-  static const int EAMType_ARRAYSIZE =
-    AnimatorMoves_EAMType_EAMType_ARRAYSIZE;
+  static const METype METype_MIN =
+    MoveEvent_METype_METype_MIN;
+  static const METype METype_MAX =
+    MoveEvent_METype_METype_MAX;
+  static const int METype_ARRAYSIZE =
+    MoveEvent_METype_METype_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
-  EAMType_descriptor() {
-    return AnimatorMoves_EAMType_descriptor();
+  METype_descriptor() {
+    return MoveEvent_METype_descriptor();
   }
-  static inline const ::std::string& EAMType_Name(EAMType value) {
-    return AnimatorMoves_EAMType_Name(value);
+  static inline const ::std::string& METype_Name(METype value) {
+    return MoveEvent_METype_Name(value);
   }
-  static inline bool EAMType_Parse(const ::std::string& name,
-      EAMType* value) {
-    return AnimatorMoves_EAMType_Parse(name, value);
+  static inline bool METype_Parse(const ::std::string& name,
+      METype* value) {
+    return MoveEvent_METype_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.AnimatorMoves.Move xMoveList = 1;
-  inline int xmovelist_size() const;
-  inline void clear_xmovelist();
-  static const int kXMoveListFieldNumber = 1;
-  inline const ::NFFS::AnimatorMoves_Move& xmovelist(int index) const;
-  inline ::NFFS::AnimatorMoves_Move* mutable_xmovelist(int index);
-  inline ::NFFS::AnimatorMoves_Move* add_xmovelist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorMoves_Move >&
-      xmovelist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorMoves_Move >*
-      mutable_xmovelist();
+  // repeated .NFFS.MoveEvent.Move moveEvent = 1;
+  inline int moveevent_size() const;
+  inline void clear_moveevent();
+  static const int kMoveEventFieldNumber = 1;
+  inline const ::NFFS::MoveEvent_Move& moveevent(int index) const;
+  inline ::NFFS::MoveEvent_Move* mutable_moveevent(int index);
+  inline ::NFFS::MoveEvent_Move* add_moveevent();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::MoveEvent_Move >&
+      moveevent() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::MoveEvent_Move >*
+      mutable_moveevent();
 
-  // @@protoc_insertion_point(class_scope:NFFS.AnimatorMoves)
+  // @@protoc_insertion_point(class_scope:NFFS.MoveEvent)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorMoves_Move > xmovelist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::MoveEvent_Move > moveevent_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1592,18 +1505,18 @@ class LIBPROTOC_EXPORT AnimatorMoves : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static AnimatorMoves* default_instance_;
+  static MoveEvent* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT CameraEvent_Camera : public ::google::protobuf::Message {
  public:
-  CameraControlEvents_Camera();
-  virtual ~CameraControlEvents_Camera();
+  CameraEvent_Camera();
+  virtual ~CameraEvent_Camera();
 
-  CameraControlEvents_Camera(const CameraControlEvents_Camera& from);
+  CameraEvent_Camera(const CameraEvent_Camera& from);
 
-  inline CameraControlEvents_Camera& operator=(const CameraControlEvents_Camera& from) {
+  inline CameraEvent_Camera& operator=(const CameraEvent_Camera& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1617,17 +1530,17 @@ class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::M
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const CameraControlEvents_Camera& default_instance();
+  static const CameraEvent_Camera& default_instance();
 
-  void Swap(CameraControlEvents_Camera* other);
+  void Swap(CameraEvent_Camera* other);
 
   // implements Message ----------------------------------------------
 
-  CameraControlEvents_Camera* New() const;
+  CameraEvent_Camera* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const CameraControlEvents_Camera& from);
-  void MergeFrom(const CameraControlEvents_Camera& from);
+  void CopyFrom(const CameraEvent_Camera& from);
+  void MergeFrom(const CameraEvent_Camera& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1650,21 +1563,21 @@ class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::M
 
   // accessors -------------------------------------------------------
 
-  // required float EventTime = 1;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
   static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required .NFFS.CameraControlEvents.ECEType EventType = 2;
+  // required .NFFS.CameraEvent.CEType eventType = 2;
   inline bool has_eventtype() const;
   inline void clear_eventtype();
   static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::CameraControlEvents_ECEType eventtype() const;
-  inline void set_eventtype(::NFFS::CameraControlEvents_ECEType value);
+  inline ::NFFS::CameraEvent_CEType eventtype() const;
+  inline void set_eventtype(::NFFS::CameraEvent_CEType value);
 
-  // required .NFFS.FSVector3 AmountParam = 3;
+  // required .NFFS.FSVector3 amountParam = 3;
   inline bool has_amountparam() const;
   inline void clear_amountparam();
   static const int kAmountParamFieldNumber = 3;
@@ -1673,38 +1586,14 @@ class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::M
   inline ::NFFS::FSVector3* release_amountparam();
   inline void set_allocated_amountparam(::NFFS::FSVector3* amountparam);
 
-  // required float ShakeTime = 4;
+  // required float shakeTime = 4;
   inline bool has_shaketime() const;
   inline void clear_shaketime();
   static const int kShakeTimeFieldNumber = 4;
   inline float shaketime() const;
   inline void set_shaketime(float value);
 
-  // required string MethodCall = 5;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 5;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 6;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 6;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.CameraControlEvents.Camera)
+  // @@protoc_insertion_point(class_scope:NFFS.CameraEvent.Camera)
  private:
   inline void set_has_eventtime();
   inline void clear_has_eventtime();
@@ -1714,40 +1603,34 @@ class LIBPROTOC_EXPORT CameraControlEvents_Camera : public ::google::protobuf::M
   inline void clear_has_amountparam();
   inline void set_has_shaketime();
   inline void clear_has_shaketime();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   float eventtime_;
   int eventtype_;
   ::NFFS::FSVector3* amountparam_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
   float shaketime_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static CameraControlEvents_Camera* default_instance_;
+  static CameraEvent_Camera* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT CameraControlEvents : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT CameraEvent : public ::google::protobuf::Message {
  public:
-  CameraControlEvents();
-  virtual ~CameraControlEvents();
+  CameraEvent();
+  virtual ~CameraEvent();
 
-  CameraControlEvents(const CameraControlEvents& from);
+  CameraEvent(const CameraEvent& from);
 
-  inline CameraControlEvents& operator=(const CameraControlEvents& from) {
+  inline CameraEvent& operator=(const CameraEvent& from) {
     CopyFrom(from);
     return *this;
   }
@@ -1761,17 +1644,17 @@ class LIBPROTOC_EXPORT CameraControlEvents : public ::google::protobuf::Message 
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const CameraControlEvents& default_instance();
+  static const CameraEvent& default_instance();
 
-  void Swap(CameraControlEvents* other);
+  void Swap(CameraEvent* other);
 
   // implements Message ----------------------------------------------
 
-  CameraControlEvents* New() const;
+  CameraEvent* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const CameraControlEvents& from);
-  void MergeFrom(const CameraControlEvents& from);
+  void CopyFrom(const CameraEvent& from);
+  void MergeFrom(const CameraEvent& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -1792,59 +1675,59 @@ class LIBPROTOC_EXPORT CameraControlEvents : public ::google::protobuf::Message 
 
   // nested types ----------------------------------------------------
 
-  typedef CameraControlEvents_Camera Camera;
+  typedef CameraEvent_Camera Camera;
 
-  typedef CameraControlEvents_ECEType ECEType;
-  static const ECEType Earthquake = CameraControlEvents_ECEType_Earthquake;
-  static const ECEType Explosion = CameraControlEvents_ECEType_Explosion;
-  static const ECEType No = CameraControlEvents_ECEType_No;
-  static const ECEType FireKick = CameraControlEvents_ECEType_FireKick;
-  static const ECEType Stomp = CameraControlEvents_ECEType_Stomp;
-  static const ECEType Yes = CameraControlEvents_ECEType_Yes;
-  static const ECEType SprintShake = CameraControlEvents_ECEType_SprintShake;
-  static const ECEType FreeMode = CameraControlEvents_ECEType_FreeMode;
-  static const ECEType MainRPGMode = CameraControlEvents_ECEType_MainRPGMode;
-  static inline bool ECEType_IsValid(int value) {
-    return CameraControlEvents_ECEType_IsValid(value);
+  typedef CameraEvent_CEType CEType;
+  static const CEType Earthquake = CameraEvent_CEType_Earthquake;
+  static const CEType Explosion = CameraEvent_CEType_Explosion;
+  static const CEType No = CameraEvent_CEType_No;
+  static const CEType FireKick = CameraEvent_CEType_FireKick;
+  static const CEType Stomp = CameraEvent_CEType_Stomp;
+  static const CEType Yes = CameraEvent_CEType_Yes;
+  static const CEType SprintShake = CameraEvent_CEType_SprintShake;
+  static const CEType FreeMode = CameraEvent_CEType_FreeMode;
+  static const CEType MainRPGMode = CameraEvent_CEType_MainRPGMode;
+  static inline bool CEType_IsValid(int value) {
+    return CameraEvent_CEType_IsValid(value);
   }
-  static const ECEType ECEType_MIN =
-    CameraControlEvents_ECEType_ECEType_MIN;
-  static const ECEType ECEType_MAX =
-    CameraControlEvents_ECEType_ECEType_MAX;
-  static const int ECEType_ARRAYSIZE =
-    CameraControlEvents_ECEType_ECEType_ARRAYSIZE;
+  static const CEType CEType_MIN =
+    CameraEvent_CEType_CEType_MIN;
+  static const CEType CEType_MAX =
+    CameraEvent_CEType_CEType_MAX;
+  static const int CEType_ARRAYSIZE =
+    CameraEvent_CEType_CEType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
-  ECEType_descriptor() {
-    return CameraControlEvents_ECEType_descriptor();
+  CEType_descriptor() {
+    return CameraEvent_CEType_descriptor();
   }
-  static inline const ::std::string& ECEType_Name(ECEType value) {
-    return CameraControlEvents_ECEType_Name(value);
+  static inline const ::std::string& CEType_Name(CEType value) {
+    return CameraEvent_CEType_Name(value);
   }
-  static inline bool ECEType_Parse(const ::std::string& name,
-      ECEType* value) {
-    return CameraControlEvents_ECEType_Parse(name, value);
+  static inline bool CEType_Parse(const ::std::string& name,
+      CEType* value) {
+    return CameraEvent_CEType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.CameraControlEvents.Camera xCameraList = 1;
-  inline int xcameralist_size() const;
-  inline void clear_xcameralist();
-  static const int kXCameraListFieldNumber = 1;
-  inline const ::NFFS::CameraControlEvents_Camera& xcameralist(int index) const;
-  inline ::NFFS::CameraControlEvents_Camera* mutable_xcameralist(int index);
-  inline ::NFFS::CameraControlEvents_Camera* add_xcameralist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::CameraControlEvents_Camera >&
-      xcameralist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::CameraControlEvents_Camera >*
-      mutable_xcameralist();
+  // repeated .NFFS.CameraEvent.Camera cameraEventList = 1;
+  inline int cameraeventlist_size() const;
+  inline void clear_cameraeventlist();
+  static const int kCameraEventListFieldNumber = 1;
+  inline const ::NFFS::CameraEvent_Camera& cameraeventlist(int index) const;
+  inline ::NFFS::CameraEvent_Camera* mutable_cameraeventlist(int index);
+  inline ::NFFS::CameraEvent_Camera* add_cameraeventlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::CameraEvent_Camera >&
+      cameraeventlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::CameraEvent_Camera >*
+      mutable_cameraeventlist();
 
-  // @@protoc_insertion_point(class_scope:NFFS.CameraControlEvents)
+  // @@protoc_insertion_point(class_scope:NFFS.CameraEvent)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::CameraControlEvents_Camera > xcameralist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::CameraEvent_Camera > cameraeventlist_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1854,319 +1737,7 @@ class LIBPROTOC_EXPORT CameraControlEvents : public ::google::protobuf::Message 
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static CameraControlEvents* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT ParticleEvents_Particle : public ::google::protobuf::Message {
- public:
-  ParticleEvents_Particle();
-  virtual ~ParticleEvents_Particle();
-
-  ParticleEvents_Particle(const ParticleEvents_Particle& from);
-
-  inline ParticleEvents_Particle& operator=(const ParticleEvents_Particle& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ParticleEvents_Particle& default_instance();
-
-  void Swap(ParticleEvents_Particle* other);
-
-  // implements Message ----------------------------------------------
-
-  ParticleEvents_Particle* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ParticleEvents_Particle& from);
-  void MergeFrom(const ParticleEvents_Particle& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required float EventTime = 1;
-  inline bool has_eventtime() const;
-  inline void clear_eventtime();
-  static const int kEventTimeFieldNumber = 1;
-  inline float eventtime() const;
-  inline void set_eventtime(float value);
-
-  // required .NFFS.ParticleEvents.EPERTYPE Rotation = 3;
-  inline bool has_rotation() const;
-  inline void clear_rotation();
-  static const int kRotationFieldNumber = 3;
-  inline ::NFFS::ParticleEvents_EPERTYPE rotation() const;
-  inline void set_rotation(::NFFS::ParticleEvents_EPERTYPE value);
-
-  // required string ParticlePath = 4;
-  inline bool has_particlepath() const;
-  inline void clear_particlepath();
-  static const int kParticlePathFieldNumber = 4;
-  inline const ::std::string& particlepath() const;
-  inline void set_particlepath(const ::std::string& value);
-  inline void set_particlepath(const char* value);
-  inline void set_particlepath(const char* value, size_t size);
-  inline ::std::string* mutable_particlepath();
-  inline ::std::string* release_particlepath();
-  inline void set_allocated_particlepath(::std::string* particlepath);
-
-  // required string TargetTacheName = 5;
-  inline bool has_targettachename() const;
-  inline void clear_targettachename();
-  static const int kTargetTacheNameFieldNumber = 5;
-  inline const ::std::string& targettachename() const;
-  inline void set_targettachename(const ::std::string& value);
-  inline void set_targettachename(const char* value);
-  inline void set_targettachename(const char* value, size_t size);
-  inline ::std::string* mutable_targettachename();
-  inline ::std::string* release_targettachename();
-  inline void set_allocated_targettachename(::std::string* targettachename);
-
-  // required .NFFS.FSVector3 TargetTacheOffest = 6;
-  inline bool has_targettacheoffest() const;
-  inline void clear_targettacheoffest();
-  static const int kTargetTacheOffestFieldNumber = 6;
-  inline const ::NFFS::FSVector3& targettacheoffest() const;
-  inline ::NFFS::FSVector3* mutable_targettacheoffest();
-  inline ::NFFS::FSVector3* release_targettacheoffest();
-  inline void set_allocated_targettacheoffest(::NFFS::FSVector3* targettacheoffest);
-
-  // required int32 CastToSurface = 7;
-  inline bool has_casttosurface() const;
-  inline void clear_casttosurface();
-  static const int kCastToSurfaceFieldNumber = 7;
-  inline ::google::protobuf::int32 casttosurface() const;
-  inline void set_casttosurface(::google::protobuf::int32 value);
-
-  // required int32 BindTarget = 8;
-  inline bool has_bindtarget() const;
-  inline void clear_bindtarget();
-  static const int kBindTargetFieldNumber = 8;
-  inline ::google::protobuf::int32 bindtarget() const;
-  inline void set_bindtarget(::google::protobuf::int32 value);
-
-  // required float DestroyTime = 9;
-  inline bool has_destroytime() const;
-  inline void clear_destroytime();
-  static const int kDestroyTimeFieldNumber = 9;
-  inline float destroytime() const;
-  inline void set_destroytime(float value);
-
-  // required string MethodCall = 10;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 10;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 11;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 11;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.ParticleEvents.Particle)
- private:
-  inline void set_has_eventtime();
-  inline void clear_has_eventtime();
-  inline void set_has_rotation();
-  inline void clear_has_rotation();
-  inline void set_has_particlepath();
-  inline void clear_has_particlepath();
-  inline void set_has_targettachename();
-  inline void clear_has_targettachename();
-  inline void set_has_targettacheoffest();
-  inline void clear_has_targettacheoffest();
-  inline void set_has_casttosurface();
-  inline void clear_has_casttosurface();
-  inline void set_has_bindtarget();
-  inline void clear_has_bindtarget();
-  inline void set_has_destroytime();
-  inline void clear_has_destroytime();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  float eventtime_;
-  int rotation_;
-  ::std::string* particlepath_;
-  ::std::string* targettachename_;
-  ::NFFS::FSVector3* targettacheoffest_;
-  ::google::protobuf::int32 casttosurface_;
-  ::google::protobuf::int32 bindtarget_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-  float destroytime_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static ParticleEvents_Particle* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT ParticleEvents : public ::google::protobuf::Message {
- public:
-  ParticleEvents();
-  virtual ~ParticleEvents();
-
-  ParticleEvents(const ParticleEvents& from);
-
-  inline ParticleEvents& operator=(const ParticleEvents& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ParticleEvents& default_instance();
-
-  void Swap(ParticleEvents* other);
-
-  // implements Message ----------------------------------------------
-
-  ParticleEvents* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ParticleEvents& from);
-  void MergeFrom(const ParticleEvents& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef ParticleEvents_Particle Particle;
-
-  typedef ParticleEvents_EPERTYPE EPERTYPE;
-  static const EPERTYPE NONE = ParticleEvents_EPERTYPE_NONE;
-  static const EPERTYPE MatchTarget = ParticleEvents_EPERTYPE_MatchTarget;
-  static const EPERTYPE Random_X = ParticleEvents_EPERTYPE_Random_X;
-  static const EPERTYPE Random_Y = ParticleEvents_EPERTYPE_Random_Y;
-  static const EPERTYPE Random_Z = ParticleEvents_EPERTYPE_Random_Z;
-  static const EPERTYPE Random_XY = ParticleEvents_EPERTYPE_Random_XY;
-  static const EPERTYPE Random_XZ = ParticleEvents_EPERTYPE_Random_XZ;
-  static const EPERTYPE Random_YZ = ParticleEvents_EPERTYPE_Random_YZ;
-  static const EPERTYPE Random_XYZ = ParticleEvents_EPERTYPE_Random_XYZ;
-  static inline bool EPERTYPE_IsValid(int value) {
-    return ParticleEvents_EPERTYPE_IsValid(value);
-  }
-  static const EPERTYPE EPERTYPE_MIN =
-    ParticleEvents_EPERTYPE_EPERTYPE_MIN;
-  static const EPERTYPE EPERTYPE_MAX =
-    ParticleEvents_EPERTYPE_EPERTYPE_MAX;
-  static const int EPERTYPE_ARRAYSIZE =
-    ParticleEvents_EPERTYPE_EPERTYPE_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  EPERTYPE_descriptor() {
-    return ParticleEvents_EPERTYPE_descriptor();
-  }
-  static inline const ::std::string& EPERTYPE_Name(EPERTYPE value) {
-    return ParticleEvents_EPERTYPE_Name(value);
-  }
-  static inline bool EPERTYPE_Parse(const ::std::string& name,
-      EPERTYPE* value) {
-    return ParticleEvents_EPERTYPE_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFFS.ParticleEvents.Particle xParticleList = 1;
-  inline int xparticlelist_size() const;
-  inline void clear_xparticlelist();
-  static const int kXParticleListFieldNumber = 1;
-  inline const ::NFFS::ParticleEvents_Particle& xparticlelist(int index) const;
-  inline ::NFFS::ParticleEvents_Particle* mutable_xparticlelist(int index);
-  inline ::NFFS::ParticleEvents_Particle* add_xparticlelist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::ParticleEvents_Particle >&
-      xparticlelist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::ParticleEvents_Particle >*
-      mutable_xparticlelist();
-
-  // @@protoc_insertion_point(class_scope:NFFS.ParticleEvents)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFFS::ParticleEvents_Particle > xparticlelist_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static ParticleEvents* default_instance_;
+  static CameraEvent* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -2224,21 +1795,21 @@ class LIBPROTOC_EXPORT EnableEvents_Enable : public ::google::protobuf::Message 
 
   // accessors -------------------------------------------------------
 
-  // required float EventTime = 1;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
   static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required .NFFS.EnableEvents.EEETYPE EventType = 2;
+  // required .NFFS.EnableEvents.EEETYPE eventType = 2;
   inline bool has_eventtype() const;
   inline void clear_eventtype();
   static const int kEventTypeFieldNumber = 2;
   inline ::NFFS::EnableEvents_EEETYPE eventtype() const;
   inline void set_eventtype(::NFFS::EnableEvents_EEETYPE value);
 
-  // required string TargetName = 3;
+  // required string targetName = 3;
   inline bool has_targetname() const;
   inline void clear_targetname();
   static const int kTargetNameFieldNumber = 3;
@@ -2250,30 +1821,6 @@ class LIBPROTOC_EXPORT EnableEvents_Enable : public ::google::protobuf::Message 
   inline ::std::string* release_targetname();
   inline void set_allocated_targetname(::std::string* targetname);
 
-  // required string MethodCall = 4;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 4;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 5;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 5;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
   // @@protoc_insertion_point(class_scope:NFFS.EnableEvents.Enable)
  private:
   inline void set_has_eventtime();
@@ -2282,21 +1829,15 @@ class LIBPROTOC_EXPORT EnableEvents_Enable : public ::google::protobuf::Message 
   inline void clear_has_eventtype();
   inline void set_has_targetname();
   inline void clear_has_targetname();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   float eventtime_;
   int eventtype_;
   ::std::string* targetname_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
   friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
@@ -2387,24 +1928,24 @@ class LIBPROTOC_EXPORT EnableEvents : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.EnableEvents.Enable xEnableList = 1;
-  inline int xenablelist_size() const;
-  inline void clear_xenablelist();
-  static const int kXEnableListFieldNumber = 1;
-  inline const ::NFFS::EnableEvents_Enable& xenablelist(int index) const;
-  inline ::NFFS::EnableEvents_Enable* mutable_xenablelist(int index);
-  inline ::NFFS::EnableEvents_Enable* add_xenablelist();
+  // repeated .NFFS.EnableEvents.Enable enableList = 1;
+  inline int enablelist_size() const;
+  inline void clear_enablelist();
+  static const int kEnableListFieldNumber = 1;
+  inline const ::NFFS::EnableEvents_Enable& enablelist(int index) const;
+  inline ::NFFS::EnableEvents_Enable* mutable_enablelist(int index);
+  inline ::NFFS::EnableEvents_Enable* add_enablelist();
   inline const ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable >&
-      xenablelist() const;
+      enablelist() const;
   inline ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable >*
-      mutable_xenablelist();
+      mutable_enablelist();
 
   // @@protoc_insertion_point(class_scope:NFFS.EnableEvents)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable > xenablelist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable > enablelist_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -2418,14 +1959,14 @@ class LIBPROTOC_EXPORT EnableEvents : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT TrailEvents_Trail : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT GlobalSpeed_Speed : public ::google::protobuf::Message {
  public:
-  TrailEvents_Trail();
-  virtual ~TrailEvents_Trail();
+  GlobalSpeed_Speed();
+  virtual ~GlobalSpeed_Speed();
 
-  TrailEvents_Trail(const TrailEvents_Trail& from);
+  GlobalSpeed_Speed(const GlobalSpeed_Speed& from);
 
-  inline TrailEvents_Trail& operator=(const TrailEvents_Trail& from) {
+  inline GlobalSpeed_Speed& operator=(const GlobalSpeed_Speed& from) {
     CopyFrom(from);
     return *this;
   }
@@ -2439,17 +1980,17 @@ class LIBPROTOC_EXPORT TrailEvents_Trail : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const TrailEvents_Trail& default_instance();
+  static const GlobalSpeed_Speed& default_instance();
 
-  void Swap(TrailEvents_Trail* other);
+  void Swap(GlobalSpeed_Speed* other);
 
   // implements Message ----------------------------------------------
 
-  TrailEvents_Trail* New() const;
+  GlobalSpeed_Speed* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const TrailEvents_Trail& from);
-  void MergeFrom(const TrailEvents_Trail& from);
+  void CopyFrom(const GlobalSpeed_Speed& from);
+  void MergeFrom(const GlobalSpeed_Speed& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -2472,524 +2013,28 @@ class LIBPROTOC_EXPORT TrailEvents_Trail : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required float EventTime = 1;
+  // required float eventTime = 1;
   inline bool has_eventtime() const;
   inline void clear_eventtime();
   static const int kEventTimeFieldNumber = 1;
   inline float eventtime() const;
   inline void set_eventtime(float value);
 
-  // required .NFFS.TrailEvents.TEETYPE EventType = 2;
+  // required .NFFS.GlobalSpeed.EGSTYPE eventType = 2;
   inline bool has_eventtype() const;
   inline void clear_eventtype();
   static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::TrailEvents_TEETYPE eventtype() const;
-  inline void set_eventtype(::NFFS::TrailEvents_TEETYPE value);
+  inline ::NFFS::GlobalSpeed_EGSTYPE eventtype() const;
+  inline void set_eventtype(::NFFS::GlobalSpeed_EGSTYPE value);
 
-  // required string TargetName = 3;
-  inline bool has_targetname() const;
-  inline void clear_targetname();
-  static const int kTargetNameFieldNumber = 3;
-  inline const ::std::string& targetname() const;
-  inline void set_targetname(const ::std::string& value);
-  inline void set_targetname(const char* value);
-  inline void set_targetname(const char* value, size_t size);
-  inline ::std::string* mutable_targetname();
-  inline ::std::string* release_targetname();
-  inline void set_allocated_targetname(::std::string* targetname);
-
-  // required string MethodCall = 4;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 4;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 5;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 5;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents.Trail)
- private:
-  inline void set_has_eventtime();
-  inline void clear_has_eventtime();
-  inline void set_has_eventtype();
-  inline void clear_has_eventtype();
-  inline void set_has_targetname();
-  inline void clear_has_targetname();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  float eventtime_;
-  int eventtype_;
-  ::std::string* targetname_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static TrailEvents_Trail* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT TrailEvents : public ::google::protobuf::Message {
- public:
-  TrailEvents();
-  virtual ~TrailEvents();
-
-  TrailEvents(const TrailEvents& from);
-
-  inline TrailEvents& operator=(const TrailEvents& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const TrailEvents& default_instance();
-
-  void Swap(TrailEvents* other);
-
-  // implements Message ----------------------------------------------
-
-  TrailEvents* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const TrailEvents& from);
-  void MergeFrom(const TrailEvents& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef TrailEvents_Trail Trail;
-
-  typedef TrailEvents_TEETYPE TEETYPE;
-  static const TEETYPE INIT = TrailEvents_TEETYPE_INIT;
-  static const TEETYPE FINAL = TrailEvents_TEETYPE_FINAL;
-  static inline bool TEETYPE_IsValid(int value) {
-    return TrailEvents_TEETYPE_IsValid(value);
-  }
-  static const TEETYPE TEETYPE_MIN =
-    TrailEvents_TEETYPE_TEETYPE_MIN;
-  static const TEETYPE TEETYPE_MAX =
-    TrailEvents_TEETYPE_TEETYPE_MAX;
-  static const int TEETYPE_ARRAYSIZE =
-    TrailEvents_TEETYPE_TEETYPE_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  TEETYPE_descriptor() {
-    return TrailEvents_TEETYPE_descriptor();
-  }
-  static inline const ::std::string& TEETYPE_Name(TEETYPE value) {
-    return TrailEvents_TEETYPE_Name(value);
-  }
-  static inline bool TEETYPE_Parse(const ::std::string& name,
-      TEETYPE* value) {
-    return TrailEvents_TEETYPE_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFFS.TrailEvents.Trail xTrailList = 1;
-  inline int xtraillist_size() const;
-  inline void clear_xtraillist();
-  static const int kXTrailListFieldNumber = 1;
-  inline const ::NFFS::TrailEvents_Trail& xtraillist(int index) const;
-  inline ::NFFS::TrailEvents_Trail* mutable_xtraillist(int index);
-  inline ::NFFS::TrailEvents_Trail* add_xtraillist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
-      xtraillist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
-      mutable_xtraillist();
-
-  // @@protoc_insertion_point(class_scope:NFFS.TrailEvents)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail > xtraillist_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static TrailEvents* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AudioEvents_Audio : public ::google::protobuf::Message {
- public:
-  AudioEvents_Audio();
-  virtual ~AudioEvents_Audio();
-
-  AudioEvents_Audio(const AudioEvents_Audio& from);
-
-  inline AudioEvents_Audio& operator=(const AudioEvents_Audio& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AudioEvents_Audio& default_instance();
-
-  void Swap(AudioEvents_Audio* other);
-
-  // implements Message ----------------------------------------------
-
-  AudioEvents_Audio* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AudioEvents_Audio& from);
-  void MergeFrom(const AudioEvents_Audio& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required float EventTime = 1;
-  inline bool has_eventtime() const;
-  inline void clear_eventtime();
-  static const int kEventTimeFieldNumber = 1;
-  inline float eventtime() const;
-  inline void set_eventtime(float value);
-
-  // required .NFFS.AudioEvents.AEETYPE EventType = 2;
-  inline bool has_eventtype() const;
-  inline void clear_eventtype();
-  static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::AudioEvents_AEETYPE eventtype() const;
-  inline void set_eventtype(::NFFS::AudioEvents_AEETYPE value);
-
-  // required string AudioName = 3;
-  inline bool has_audioname() const;
-  inline void clear_audioname();
-  static const int kAudioNameFieldNumber = 3;
-  inline const ::std::string& audioname() const;
-  inline void set_audioname(const ::std::string& value);
-  inline void set_audioname(const char* value);
-  inline void set_audioname(const char* value, size_t size);
-  inline ::std::string* mutable_audioname();
-  inline ::std::string* release_audioname();
-  inline void set_allocated_audioname(::std::string* audioname);
-
-  // required string MethodCall = 4;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 4;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 5;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 5;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.AudioEvents.Audio)
- private:
-  inline void set_has_eventtime();
-  inline void clear_has_eventtime();
-  inline void set_has_eventtype();
-  inline void clear_has_eventtype();
-  inline void set_has_audioname();
-  inline void clear_has_audioname();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  float eventtime_;
-  int eventtype_;
-  ::std::string* audioname_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static AudioEvents_Audio* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AudioEvents : public ::google::protobuf::Message {
- public:
-  AudioEvents();
-  virtual ~AudioEvents();
-
-  AudioEvents(const AudioEvents& from);
-
-  inline AudioEvents& operator=(const AudioEvents& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AudioEvents& default_instance();
-
-  void Swap(AudioEvents* other);
-
-  // implements Message ----------------------------------------------
-
-  AudioEvents* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AudioEvents& from);
-  void MergeFrom(const AudioEvents& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef AudioEvents_Audio Audio;
-
-  typedef AudioEvents_AEETYPE AEETYPE;
-  static const AEETYPE INIT = AudioEvents_AEETYPE_INIT;
-  static const AEETYPE FINAL = AudioEvents_AEETYPE_FINAL;
-  static inline bool AEETYPE_IsValid(int value) {
-    return AudioEvents_AEETYPE_IsValid(value);
-  }
-  static const AEETYPE AEETYPE_MIN =
-    AudioEvents_AEETYPE_AEETYPE_MIN;
-  static const AEETYPE AEETYPE_MAX =
-    AudioEvents_AEETYPE_AEETYPE_MAX;
-  static const int AEETYPE_ARRAYSIZE =
-    AudioEvents_AEETYPE_AEETYPE_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  AEETYPE_descriptor() {
-    return AudioEvents_AEETYPE_descriptor();
-  }
-  static inline const ::std::string& AEETYPE_Name(AEETYPE value) {
-    return AudioEvents_AEETYPE_Name(value);
-  }
-  static inline bool AEETYPE_Parse(const ::std::string& name,
-      AEETYPE* value) {
-    return AudioEvents_AEETYPE_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFFS.AudioEvents.Audio xAudioList = 1;
-  inline int xaudiolist_size() const;
-  inline void clear_xaudiolist();
-  static const int kXAudioListFieldNumber = 1;
-  inline const ::NFFS::AudioEvents_Audio& xaudiolist(int index) const;
-  inline ::NFFS::AudioEvents_Audio* mutable_xaudiolist(int index);
-  inline ::NFFS::AudioEvents_Audio* add_xaudiolist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >&
-      xaudiolist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >*
-      mutable_xaudiolist();
-
-  // @@protoc_insertion_point(class_scope:NFFS.AudioEvents)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio > xaudiolist_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static AudioEvents* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT GlobalSpeeds_Speed : public ::google::protobuf::Message {
- public:
-  GlobalSpeeds_Speed();
-  virtual ~GlobalSpeeds_Speed();
-
-  GlobalSpeeds_Speed(const GlobalSpeeds_Speed& from);
-
-  inline GlobalSpeeds_Speed& operator=(const GlobalSpeeds_Speed& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const GlobalSpeeds_Speed& default_instance();
-
-  void Swap(GlobalSpeeds_Speed* other);
-
-  // implements Message ----------------------------------------------
-
-  GlobalSpeeds_Speed* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const GlobalSpeeds_Speed& from);
-  void MergeFrom(const GlobalSpeeds_Speed& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required float EventTime = 1;
-  inline bool has_eventtime() const;
-  inline void clear_eventtime();
-  static const int kEventTimeFieldNumber = 1;
-  inline float eventtime() const;
-  inline void set_eventtime(float value);
-
-  // required .NFFS.GlobalSpeeds.EGSTYPE EventType = 2;
-  inline bool has_eventtype() const;
-  inline void clear_eventtype();
-  static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::GlobalSpeeds_EGSTYPE eventtype() const;
-  inline void set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value);
-
-  // required float SpeedValue = 3;
+  // required float speedValue = 3;
   inline bool has_speedvalue() const;
   inline void clear_speedvalue();
   static const int kSpeedValueFieldNumber = 3;
   inline float speedvalue() const;
   inline void set_speedvalue(float value);
 
-  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeeds.Speed)
+  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeed.Speed)
  private:
   inline void set_has_eventtime();
   inline void clear_has_eventtime();
@@ -3012,18 +2057,18 @@ class LIBPROTOC_EXPORT GlobalSpeeds_Speed : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static GlobalSpeeds_Speed* default_instance_;
+  static GlobalSpeed_Speed* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class LIBPROTOC_EXPORT GlobalSpeeds : public ::google::protobuf::Message {
+class LIBPROTOC_EXPORT GlobalSpeed : public ::google::protobuf::Message {
  public:
-  GlobalSpeeds();
-  virtual ~GlobalSpeeds();
+  GlobalSpeed();
+  virtual ~GlobalSpeed();
 
-  GlobalSpeeds(const GlobalSpeeds& from);
+  GlobalSpeed(const GlobalSpeed& from);
 
-  inline GlobalSpeeds& operator=(const GlobalSpeeds& from) {
+  inline GlobalSpeed& operator=(const GlobalSpeed& from) {
     CopyFrom(from);
     return *this;
   }
@@ -3037,17 +2082,17 @@ class LIBPROTOC_EXPORT GlobalSpeeds : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const GlobalSpeeds& default_instance();
+  static const GlobalSpeed& default_instance();
 
-  void Swap(GlobalSpeeds* other);
+  void Swap(GlobalSpeed* other);
 
   // implements Message ----------------------------------------------
 
-  GlobalSpeeds* New() const;
+  GlobalSpeed* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const GlobalSpeeds& from);
-  void MergeFrom(const GlobalSpeeds& from);
+  void CopyFrom(const GlobalSpeed& from);
+  void MergeFrom(const GlobalSpeed& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -3068,52 +2113,52 @@ class LIBPROTOC_EXPORT GlobalSpeeds : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef GlobalSpeeds_Speed Speed;
+  typedef GlobalSpeed_Speed Speed;
 
-  typedef GlobalSpeeds_EGSTYPE EGSTYPE;
-  static const EGSTYPE INIT = GlobalSpeeds_EGSTYPE_INIT;
-  static const EGSTYPE FINAL = GlobalSpeeds_EGSTYPE_FINAL;
+  typedef GlobalSpeed_EGSTYPE EGSTYPE;
+  static const EGSTYPE INIT = GlobalSpeed_EGSTYPE_INIT;
+  static const EGSTYPE FINAL = GlobalSpeed_EGSTYPE_FINAL;
   static inline bool EGSTYPE_IsValid(int value) {
-    return GlobalSpeeds_EGSTYPE_IsValid(value);
+    return GlobalSpeed_EGSTYPE_IsValid(value);
   }
   static const EGSTYPE EGSTYPE_MIN =
-    GlobalSpeeds_EGSTYPE_EGSTYPE_MIN;
+    GlobalSpeed_EGSTYPE_EGSTYPE_MIN;
   static const EGSTYPE EGSTYPE_MAX =
-    GlobalSpeeds_EGSTYPE_EGSTYPE_MAX;
+    GlobalSpeed_EGSTYPE_EGSTYPE_MAX;
   static const int EGSTYPE_ARRAYSIZE =
-    GlobalSpeeds_EGSTYPE_EGSTYPE_ARRAYSIZE;
+    GlobalSpeed_EGSTYPE_EGSTYPE_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   EGSTYPE_descriptor() {
-    return GlobalSpeeds_EGSTYPE_descriptor();
+    return GlobalSpeed_EGSTYPE_descriptor();
   }
   static inline const ::std::string& EGSTYPE_Name(EGSTYPE value) {
-    return GlobalSpeeds_EGSTYPE_Name(value);
+    return GlobalSpeed_EGSTYPE_Name(value);
   }
   static inline bool EGSTYPE_Parse(const ::std::string& name,
       EGSTYPE* value) {
-    return GlobalSpeeds_EGSTYPE_Parse(name, value);
+    return GlobalSpeed_EGSTYPE_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // repeated .NFFS.GlobalSpeeds.Speed xSpeedList = 1;
-  inline int xspeedlist_size() const;
-  inline void clear_xspeedlist();
-  static const int kXSpeedListFieldNumber = 1;
-  inline const ::NFFS::GlobalSpeeds_Speed& xspeedlist(int index) const;
-  inline ::NFFS::GlobalSpeeds_Speed* mutable_xspeedlist(int index);
-  inline ::NFFS::GlobalSpeeds_Speed* add_xspeedlist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >&
-      xspeedlist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >*
-      mutable_xspeedlist();
+  // repeated .NFFS.GlobalSpeed.Speed speedList = 1;
+  inline int speedlist_size() const;
+  inline void clear_speedlist();
+  static const int kSpeedListFieldNumber = 1;
+  inline const ::NFFS::GlobalSpeed_Speed& speedlist(int index) const;
+  inline ::NFFS::GlobalSpeed_Speed* mutable_speedlist(int index);
+  inline ::NFFS::GlobalSpeed_Speed* add_speedlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeed_Speed >&
+      speedlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeed_Speed >*
+      mutable_speedlist();
 
-  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeeds)
+  // @@protoc_insertion_point(class_scope:NFFS.GlobalSpeed)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed > xspeedlist_;
+  ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeed_Speed > speedlist_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -3123,273 +2168,7 @@ class LIBPROTOC_EXPORT GlobalSpeeds : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
 
   void InitAsDefaultInstance();
-  static GlobalSpeeds* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AnimatorFlys_Fly : public ::google::protobuf::Message {
- public:
-  AnimatorFlys_Fly();
-  virtual ~AnimatorFlys_Fly();
-
-  AnimatorFlys_Fly(const AnimatorFlys_Fly& from);
-
-  inline AnimatorFlys_Fly& operator=(const AnimatorFlys_Fly& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AnimatorFlys_Fly& default_instance();
-
-  void Swap(AnimatorFlys_Fly* other);
-
-  // implements Message ----------------------------------------------
-
-  AnimatorFlys_Fly* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AnimatorFlys_Fly& from);
-  void MergeFrom(const AnimatorFlys_Fly& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required float EventTime = 1;
-  inline bool has_eventtime() const;
-  inline void clear_eventtime();
-  static const int kEventTimeFieldNumber = 1;
-  inline float eventtime() const;
-  inline void set_eventtime(float value);
-
-  // required .NFFS.AnimatorFlys.EAFType EventType = 2;
-  inline bool has_eventtype() const;
-  inline void clear_eventtype();
-  static const int kEventTypeFieldNumber = 2;
-  inline ::NFFS::AnimatorFlys_EAFType eventtype() const;
-  inline void set_eventtype(::NFFS::AnimatorFlys_EAFType value);
-
-  // required float MoveDis = 3;
-  inline bool has_movedis() const;
-  inline void clear_movedis();
-  static const int kMoveDisFieldNumber = 3;
-  inline float movedis() const;
-  inline void set_movedis(float value);
-
-  // required float MoveTime = 4;
-  inline bool has_movetime() const;
-  inline void clear_movetime();
-  static const int kMoveTimeFieldNumber = 4;
-  inline float movetime() const;
-  inline void set_movetime(float value);
-
-  // required float MoveTopDis = 5;
-  inline bool has_movetopdis() const;
-  inline void clear_movetopdis();
-  static const int kMoveTopDisFieldNumber = 5;
-  inline float movetopdis() const;
-  inline void set_movetopdis(float value);
-
-  // required string MethodCall = 6;
-  inline bool has_methodcall() const;
-  inline void clear_methodcall();
-  static const int kMethodCallFieldNumber = 6;
-  inline const ::std::string& methodcall() const;
-  inline void set_methodcall(const ::std::string& value);
-  inline void set_methodcall(const char* value);
-  inline void set_methodcall(const char* value, size_t size);
-  inline ::std::string* mutable_methodcall();
-  inline ::std::string* release_methodcall();
-  inline void set_allocated_methodcall(::std::string* methodcall);
-
-  // required string MethodParam = 7;
-  inline bool has_methodparam() const;
-  inline void clear_methodparam();
-  static const int kMethodParamFieldNumber = 7;
-  inline const ::std::string& methodparam() const;
-  inline void set_methodparam(const ::std::string& value);
-  inline void set_methodparam(const char* value);
-  inline void set_methodparam(const char* value, size_t size);
-  inline ::std::string* mutable_methodparam();
-  inline ::std::string* release_methodparam();
-  inline void set_allocated_methodparam(::std::string* methodparam);
-
-  // @@protoc_insertion_point(class_scope:NFFS.AnimatorFlys.Fly)
- private:
-  inline void set_has_eventtime();
-  inline void clear_has_eventtime();
-  inline void set_has_eventtype();
-  inline void clear_has_eventtype();
-  inline void set_has_movedis();
-  inline void clear_has_movedis();
-  inline void set_has_movetime();
-  inline void clear_has_movetime();
-  inline void set_has_movetopdis();
-  inline void clear_has_movetopdis();
-  inline void set_has_methodcall();
-  inline void clear_has_methodcall();
-  inline void set_has_methodparam();
-  inline void clear_has_methodparam();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  float eventtime_;
-  int eventtype_;
-  float movedis_;
-  float movetime_;
-  ::std::string* methodcall_;
-  ::std::string* methodparam_;
-  float movetopdis_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static AnimatorFlys_Fly* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class LIBPROTOC_EXPORT AnimatorFlys : public ::google::protobuf::Message {
- public:
-  AnimatorFlys();
-  virtual ~AnimatorFlys();
-
-  AnimatorFlys(const AnimatorFlys& from);
-
-  inline AnimatorFlys& operator=(const AnimatorFlys& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AnimatorFlys& default_instance();
-
-  void Swap(AnimatorFlys* other);
-
-  // implements Message ----------------------------------------------
-
-  AnimatorFlys* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AnimatorFlys& from);
-  void MergeFrom(const AnimatorFlys& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef AnimatorFlys_Fly Fly;
-
-  typedef AnimatorFlys_EAFType EAFType;
-  static const EAFType EAFT_FORWARD = AnimatorFlys_EAFType_EAFT_FORWARD;
-  static const EAFType EAFT_BACK = AnimatorFlys_EAFType_EAFT_BACK;
-  static const EAFType EAFT_LEFT = AnimatorFlys_EAFType_EAFT_LEFT;
-  static const EAFType EAFT_RIGHT = AnimatorFlys_EAFType_EAFT_RIGHT;
-  static const EAFType EAFT_TOP = AnimatorFlys_EAFType_EAFT_TOP;
-  static inline bool EAFType_IsValid(int value) {
-    return AnimatorFlys_EAFType_IsValid(value);
-  }
-  static const EAFType EAFType_MIN =
-    AnimatorFlys_EAFType_EAFType_MIN;
-  static const EAFType EAFType_MAX =
-    AnimatorFlys_EAFType_EAFType_MAX;
-  static const int EAFType_ARRAYSIZE =
-    AnimatorFlys_EAFType_EAFType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  EAFType_descriptor() {
-    return AnimatorFlys_EAFType_descriptor();
-  }
-  static inline const ::std::string& EAFType_Name(EAFType value) {
-    return AnimatorFlys_EAFType_Name(value);
-  }
-  static inline bool EAFType_Parse(const ::std::string& name,
-      EAFType* value) {
-    return AnimatorFlys_EAFType_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NFFS.AnimatorFlys.Fly xFlyList = 1;
-  inline int xflylist_size() const;
-  inline void clear_xflylist();
-  static const int kXFlyListFieldNumber = 1;
-  inline const ::NFFS::AnimatorFlys_Fly& xflylist(int index) const;
-  inline ::NFFS::AnimatorFlys_Fly* mutable_xflylist(int index);
-  inline ::NFFS::AnimatorFlys_Fly* add_xflylist();
-  inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >&
-      xflylist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >*
-      mutable_xflylist();
-
-  // @@protoc_insertion_point(class_scope:NFFS.AnimatorFlys)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly > xflylist_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_AssignDesc_NFFleetingDefine_2eproto();
-  friend void protobuf_ShutdownFile_NFFleetingDefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static AnimatorFlys* default_instance_;
+  static GlobalSpeed* default_instance_;
 };
 // ===================================================================
 
@@ -3466,616 +2245,428 @@ inline void FSVector3::set_z(float value) {
 
 // -------------------------------------------------------------------
 
-// SuwayyahEvents_Suwayyah
+// FixTimeEvent_EventTrigger
 
-// required .NFFS.SuwayyahEvents.ESEType EventType = 1;
-inline bool SuwayyahEvents_Suwayyah::has_eventtype() const {
+// required float eventTime = 1;
+inline bool FixTimeEvent_EventTrigger::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SuwayyahEvents_Suwayyah::set_has_eventtype() {
+inline void FixTimeEvent_EventTrigger::set_has_eventtime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_eventtype() {
+inline void FixTimeEvent_EventTrigger::clear_has_eventtime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_eventtype() {
-  eventtype_ = 0;
-  clear_has_eventtype();
-}
-inline ::NFFS::SuwayyahEvents_ESEType SuwayyahEvents_Suwayyah::eventtype() const {
-  return static_cast< ::NFFS::SuwayyahEvents_ESEType >(eventtype_);
-}
-inline void SuwayyahEvents_Suwayyah::set_eventtype(::NFFS::SuwayyahEvents_ESEType value) {
-  assert(::NFFS::SuwayyahEvents_ESEType_IsValid(value));
-  set_has_eventtype();
-  eventtype_ = value;
-}
-
-// required float EventTime = 2;
-inline bool SuwayyahEvents_Suwayyah::has_eventtime() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void SuwayyahEvents_Suwayyah::set_has_eventtime() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_has_eventtime() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_eventtime() {
+inline void FixTimeEvent_EventTrigger::clear_eventtime() {
   eventtime_ = 0;
   clear_has_eventtime();
 }
-inline float SuwayyahEvents_Suwayyah::eventtime() const {
+inline float FixTimeEvent_EventTrigger::eventtime() const {
   return eventtime_;
 }
-inline void SuwayyahEvents_Suwayyah::set_eventtime(float value) {
+inline void FixTimeEvent_EventTrigger::set_eventtime(float value) {
   set_has_eventtime();
   eventtime_ = value;
 }
 
-// required float EndTime = 3;
-inline bool SuwayyahEvents_Suwayyah::has_endtime() const {
+// required .NFFS.FSVector3 v = 2;
+inline bool FixTimeEvent_EventTrigger::has_v() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void FixTimeEvent_EventTrigger::set_has_v() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void FixTimeEvent_EventTrigger::clear_has_v() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void FixTimeEvent_EventTrigger::clear_v() {
+  if (v_ != NULL) v_->::NFFS::FSVector3::Clear();
+  clear_has_v();
+}
+inline const ::NFFS::FSVector3& FixTimeEvent_EventTrigger::v() const {
+  return v_ != NULL ? *v_ : *default_instance_->v_;
+}
+inline ::NFFS::FSVector3* FixTimeEvent_EventTrigger::mutable_v() {
+  set_has_v();
+  if (v_ == NULL) v_ = new ::NFFS::FSVector3;
+  return v_;
+}
+inline ::NFFS::FSVector3* FixTimeEvent_EventTrigger::release_v() {
+  clear_has_v();
+  ::NFFS::FSVector3* temp = v_;
+  v_ = NULL;
+  return temp;
+}
+inline void FixTimeEvent_EventTrigger::set_allocated_v(::NFFS::FSVector3* v) {
+  delete v_;
+  v_ = v;
+  if (v) {
+    set_has_v();
+  } else {
+    clear_has_v();
+  }
+}
+
+// required string prefab = 3;
+inline bool FixTimeEvent_EventTrigger::has_prefab() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void SuwayyahEvents_Suwayyah::set_has_endtime() {
+inline void FixTimeEvent_EventTrigger::set_has_prefab() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_endtime() {
+inline void FixTimeEvent_EventTrigger::clear_has_prefab() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_endtime() {
-  endtime_ = 0;
-  clear_has_endtime();
+inline void FixTimeEvent_EventTrigger::clear_prefab() {
+  if (prefab_ != &::google::protobuf::internal::kEmptyString) {
+    prefab_->clear();
+  }
+  clear_has_prefab();
 }
-inline float SuwayyahEvents_Suwayyah::endtime() const {
-  return endtime_;
+inline const ::std::string& FixTimeEvent_EventTrigger::prefab() const {
+  return *prefab_;
 }
-inline void SuwayyahEvents_Suwayyah::set_endtime(float value) {
-  set_has_endtime();
-  endtime_ = value;
+inline void FixTimeEvent_EventTrigger::set_prefab(const ::std::string& value) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(value);
+}
+inline void FixTimeEvent_EventTrigger::set_prefab(const char* value) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(value);
+}
+inline void FixTimeEvent_EventTrigger::set_prefab(const char* value, size_t size) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* FixTimeEvent_EventTrigger::mutable_prefab() {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  return prefab_;
+}
+inline ::std::string* FixTimeEvent_EventTrigger::release_prefab() {
+  clear_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = prefab_;
+    prefab_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void FixTimeEvent_EventTrigger::set_allocated_prefab(::std::string* prefab) {
+  if (prefab_ != &::google::protobuf::internal::kEmptyString) {
+    delete prefab_;
+  }
+  if (prefab) {
+    set_has_prefab();
+    prefab_ = prefab;
+  } else {
+    clear_has_prefab();
+    prefab_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
-// required float DamageRang = 4;
-inline bool SuwayyahEvents_Suwayyah::has_damagerang() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+// -------------------------------------------------------------------
+
+// FixTimeEvent_HitTrigger
+
+// required float hitTime = 1;
+inline bool FixTimeEvent_HitTrigger::has_hittime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SuwayyahEvents_Suwayyah::set_has_damagerang() {
-  _has_bits_[0] |= 0x00000008u;
+inline void FixTimeEvent_HitTrigger::set_has_hittime() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_damagerang() {
-  _has_bits_[0] &= ~0x00000008u;
+inline void FixTimeEvent_HitTrigger::clear_has_hittime() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_damagerang() {
-  damagerang_ = 0;
-  clear_has_damagerang();
+inline void FixTimeEvent_HitTrigger::clear_hittime() {
+  hittime_ = 0;
+  clear_has_hittime();
 }
-inline float SuwayyahEvents_Suwayyah::damagerang() const {
-  return damagerang_;
+inline float FixTimeEvent_HitTrigger::hittime() const {
+  return hittime_;
 }
-inline void SuwayyahEvents_Suwayyah::set_damagerang(float value) {
-  set_has_damagerang();
-  damagerang_ = value;
+inline void FixTimeEvent_HitTrigger::set_hittime(float value) {
+  set_has_hittime();
+  hittime_ = value;
 }
 
-// required float BackHeroDis = 5;
-inline bool SuwayyahEvents_Suwayyah::has_backherodis() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+// required string prefab = 2;
+inline bool FixTimeEvent_HitTrigger::has_prefab() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SuwayyahEvents_Suwayyah::set_has_backherodis() {
-  _has_bits_[0] |= 0x00000010u;
+inline void FixTimeEvent_HitTrigger::set_has_prefab() {
+  _has_bits_[0] |= 0x00000002u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_backherodis() {
-  _has_bits_[0] &= ~0x00000010u;
+inline void FixTimeEvent_HitTrigger::clear_has_prefab() {
+  _has_bits_[0] &= ~0x00000002u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_backherodis() {
+inline void FixTimeEvent_HitTrigger::clear_prefab() {
+  if (prefab_ != &::google::protobuf::internal::kEmptyString) {
+    prefab_->clear();
+  }
+  clear_has_prefab();
+}
+inline const ::std::string& FixTimeEvent_HitTrigger::prefab() const {
+  return *prefab_;
+}
+inline void FixTimeEvent_HitTrigger::set_prefab(const ::std::string& value) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(value);
+}
+inline void FixTimeEvent_HitTrigger::set_prefab(const char* value) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(value);
+}
+inline void FixTimeEvent_HitTrigger::set_prefab(const char* value, size_t size) {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  prefab_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* FixTimeEvent_HitTrigger::mutable_prefab() {
+  set_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    prefab_ = new ::std::string;
+  }
+  return prefab_;
+}
+inline ::std::string* FixTimeEvent_HitTrigger::release_prefab() {
+  clear_has_prefab();
+  if (prefab_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = prefab_;
+    prefab_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void FixTimeEvent_HitTrigger::set_allocated_prefab(::std::string* prefab) {
+  if (prefab_ != &::google::protobuf::internal::kEmptyString) {
+    delete prefab_;
+  }
+  if (prefab) {
+    set_has_prefab();
+    prefab_ = prefab;
+  } else {
+    clear_has_prefab();
+    prefab_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required float backHeroDis = 3;
+inline bool FixTimeEvent_HitTrigger::has_backherodis() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void FixTimeEvent_HitTrigger::set_has_backherodis() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void FixTimeEvent_HitTrigger::clear_has_backherodis() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void FixTimeEvent_HitTrigger::clear_backherodis() {
   backherodis_ = 0;
   clear_has_backherodis();
 }
-inline float SuwayyahEvents_Suwayyah::backherodis() const {
+inline float FixTimeEvent_HitTrigger::backherodis() const {
   return backherodis_;
 }
-inline void SuwayyahEvents_Suwayyah::set_backherodis(float value) {
+inline void FixTimeEvent_HitTrigger::set_backherodis(float value) {
   set_has_backherodis();
   backherodis_ = value;
 }
 
-// required float BackNpcDis = 6;
-inline bool SuwayyahEvents_Suwayyah::has_backnpcdis() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+// required float backNpcDis = 4;
+inline bool FixTimeEvent_HitTrigger::has_backnpcdis() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void SuwayyahEvents_Suwayyah::set_has_backnpcdis() {
-  _has_bits_[0] |= 0x00000020u;
+inline void FixTimeEvent_HitTrigger::set_has_backnpcdis() {
+  _has_bits_[0] |= 0x00000008u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_backnpcdis() {
-  _has_bits_[0] &= ~0x00000020u;
+inline void FixTimeEvent_HitTrigger::clear_has_backnpcdis() {
+  _has_bits_[0] &= ~0x00000008u;
 }
-inline void SuwayyahEvents_Suwayyah::clear_backnpcdis() {
+inline void FixTimeEvent_HitTrigger::clear_backnpcdis() {
   backnpcdis_ = 0;
   clear_has_backnpcdis();
 }
-inline float SuwayyahEvents_Suwayyah::backnpcdis() const {
+inline float FixTimeEvent_HitTrigger::backnpcdis() const {
   return backnpcdis_;
 }
-inline void SuwayyahEvents_Suwayyah::set_backnpcdis(float value) {
+inline void FixTimeEvent_HitTrigger::set_backnpcdis(float value) {
   set_has_backnpcdis();
   backnpcdis_ = value;
 }
 
-// required string BeAttackParticle = 7;
-inline bool SuwayyahEvents_Suwayyah::has_beattackparticle() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+// -------------------------------------------------------------------
+
+// FixTimeEvent
+
+// repeated .NFFS.FixTimeEvent.HitTrigger hitTrigger = 1;
+inline int FixTimeEvent::hittrigger_size() const {
+  return hittrigger_.size();
 }
-inline void SuwayyahEvents_Suwayyah::set_has_beattackparticle() {
-  _has_bits_[0] |= 0x00000040u;
+inline void FixTimeEvent::clear_hittrigger() {
+  hittrigger_.Clear();
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_beattackparticle() {
-  _has_bits_[0] &= ~0x00000040u;
+inline const ::NFFS::FixTimeEvent_HitTrigger& FixTimeEvent::hittrigger(int index) const {
+  return hittrigger_.Get(index);
 }
-inline void SuwayyahEvents_Suwayyah::clear_beattackparticle() {
-  if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
-    beattackparticle_->clear();
-  }
-  clear_has_beattackparticle();
+inline ::NFFS::FixTimeEvent_HitTrigger* FixTimeEvent::mutable_hittrigger(int index) {
+  return hittrigger_.Mutable(index);
 }
-inline const ::std::string& SuwayyahEvents_Suwayyah::beattackparticle() const {
-  return *beattackparticle_;
+inline ::NFFS::FixTimeEvent_HitTrigger* FixTimeEvent::add_hittrigger() {
+  return hittrigger_.Add();
 }
-inline void SuwayyahEvents_Suwayyah::set_beattackparticle(const ::std::string& value) {
-  set_has_beattackparticle();
-  if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
-    beattackparticle_ = new ::std::string;
-  }
-  beattackparticle_->assign(value);
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_HitTrigger >&
+FixTimeEvent::hittrigger() const {
+  return hittrigger_;
 }
-inline void SuwayyahEvents_Suwayyah::set_beattackparticle(const char* value) {
-  set_has_beattackparticle();
-  if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
-    beattackparticle_ = new ::std::string;
-  }
-  beattackparticle_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_beattackparticle(const char* value, size_t size) {
-  set_has_beattackparticle();
-  if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
-    beattackparticle_ = new ::std::string;
-  }
-  beattackparticle_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::mutable_beattackparticle() {
-  set_has_beattackparticle();
-  if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
-    beattackparticle_ = new ::std::string;
-  }
-  return beattackparticle_;
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::release_beattackparticle() {
-  clear_has_beattackparticle();
-  if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = beattackparticle_;
-    beattackparticle_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void SuwayyahEvents_Suwayyah::set_allocated_beattackparticle(::std::string* beattackparticle) {
-  if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
-    delete beattackparticle_;
-  }
-  if (beattackparticle) {
-    set_has_beattackparticle();
-    beattackparticle_ = beattackparticle;
-  } else {
-    clear_has_beattackparticle();
-    beattackparticle_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_HitTrigger >*
+FixTimeEvent::mutable_hittrigger() {
+  return &hittrigger_;
 }
 
-// required string MethodCall = 8;
-inline bool SuwayyahEvents_Suwayyah::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+// repeated .NFFS.FixTimeEvent.EventTrigger eventTrigger = 5;
+inline int FixTimeEvent::eventtrigger_size() const {
+  return eventtrigger_.size();
 }
-inline void SuwayyahEvents_Suwayyah::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000080u;
+inline void FixTimeEvent::clear_eventtrigger() {
+  eventtrigger_.Clear();
 }
-inline void SuwayyahEvents_Suwayyah::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000080u;
+inline const ::NFFS::FixTimeEvent_EventTrigger& FixTimeEvent::eventtrigger(int index) const {
+  return eventtrigger_.Get(index);
 }
-inline void SuwayyahEvents_Suwayyah::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
+inline ::NFFS::FixTimeEvent_EventTrigger* FixTimeEvent::mutable_eventtrigger(int index) {
+  return eventtrigger_.Mutable(index);
 }
-inline const ::std::string& SuwayyahEvents_Suwayyah::methodcall() const {
-  return *methodcall_;
+inline ::NFFS::FixTimeEvent_EventTrigger* FixTimeEvent::add_eventtrigger() {
+  return eventtrigger_.Add();
 }
-inline void SuwayyahEvents_Suwayyah::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_EventTrigger >&
+FixTimeEvent::eventtrigger() const {
+  return eventtrigger_;
 }
-inline void SuwayyahEvents_Suwayyah::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void SuwayyahEvents_Suwayyah::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 9;
-inline bool SuwayyahEvents_Suwayyah::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void SuwayyahEvents_Suwayyah::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& SuwayyahEvents_Suwayyah::methodparam() const {
-  return *methodparam_;
-}
-inline void SuwayyahEvents_Suwayyah::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void SuwayyahEvents_Suwayyah::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodCall = 10;
-inline bool SuwayyahEvents_Suwayyah::has_targetmethodcall() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void SuwayyahEvents_Suwayyah::set_has_targetmethodcall() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_has_targetmethodcall() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_targetmethodcall() {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_->clear();
-  }
-  clear_has_targetmethodcall();
-}
-inline const ::std::string& SuwayyahEvents_Suwayyah::targetmethodcall() const {
-  return *targetmethodcall_;
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodcall(const ::std::string& value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodcall(const char* value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodcall(const char* value, size_t size) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::mutable_targetmethodcall() {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  return targetmethodcall_;
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::release_targetmethodcall() {
-  clear_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodcall_;
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void SuwayyahEvents_Suwayyah::set_allocated_targetmethodcall(::std::string* targetmethodcall) {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodcall_;
-  }
-  if (targetmethodcall) {
-    set_has_targetmethodcall();
-    targetmethodcall_ = targetmethodcall;
-  } else {
-    clear_has_targetmethodcall();
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodParam = 11;
-inline bool SuwayyahEvents_Suwayyah::has_targetmethodparam() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void SuwayyahEvents_Suwayyah::set_has_targetmethodparam() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_has_targetmethodparam() {
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline void SuwayyahEvents_Suwayyah::clear_targetmethodparam() {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_->clear();
-  }
-  clear_has_targetmethodparam();
-}
-inline const ::std::string& SuwayyahEvents_Suwayyah::targetmethodparam() const {
-  return *targetmethodparam_;
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodparam(const ::std::string& value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodparam(const char* value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void SuwayyahEvents_Suwayyah::set_targetmethodparam(const char* value, size_t size) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::mutable_targetmethodparam() {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  return targetmethodparam_;
-}
-inline ::std::string* SuwayyahEvents_Suwayyah::release_targetmethodparam() {
-  clear_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodparam_;
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void SuwayyahEvents_Suwayyah::set_allocated_targetmethodparam(::std::string* targetmethodparam) {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodparam_;
-  }
-  if (targetmethodparam) {
-    set_has_targetmethodparam();
-    targetmethodparam_ = targetmethodparam;
-  } else {
-    clear_has_targetmethodparam();
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::FixTimeEvent_EventTrigger >*
+FixTimeEvent::mutable_eventtrigger() {
+  return &eventtrigger_;
 }
 
 // -------------------------------------------------------------------
 
-// SuwayyahEvents
+// BulletEvent_TacheBomp
 
-// repeated .NFFS.SuwayyahEvents.Suwayyah xSuwayyahList = 1;
-inline int SuwayyahEvents::xsuwayyahlist_size() const {
-  return xsuwayyahlist_.size();
-}
-inline void SuwayyahEvents::clear_xsuwayyahlist() {
-  xsuwayyahlist_.Clear();
-}
-inline const ::NFFS::SuwayyahEvents_Suwayyah& SuwayyahEvents::xsuwayyahlist(int index) const {
-  return xsuwayyahlist_.Get(index);
-}
-inline ::NFFS::SuwayyahEvents_Suwayyah* SuwayyahEvents::mutable_xsuwayyahlist(int index) {
-  return xsuwayyahlist_.Mutable(index);
-}
-inline ::NFFS::SuwayyahEvents_Suwayyah* SuwayyahEvents::add_xsuwayyahlist() {
-  return xsuwayyahlist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::SuwayyahEvents_Suwayyah >&
-SuwayyahEvents::xsuwayyahlist() const {
-  return xsuwayyahlist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::SuwayyahEvents_Suwayyah >*
-SuwayyahEvents::mutable_xsuwayyahlist() {
-  return &xsuwayyahlist_;
-}
-
-// -------------------------------------------------------------------
-
-// BulletEvents_TacheBomp
-
-// required float BompTime = 1;
-inline bool BulletEvents_TacheBomp::has_bomptime() const {
+// required float bompTime = 1;
+inline bool BulletEvent_TacheBomp::has_bomptime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_bomptime() {
+inline void BulletEvent_TacheBomp::set_has_bomptime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void BulletEvents_TacheBomp::clear_has_bomptime() {
+inline void BulletEvent_TacheBomp::clear_has_bomptime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void BulletEvents_TacheBomp::clear_bomptime() {
+inline void BulletEvent_TacheBomp::clear_bomptime() {
   bomptime_ = 0;
   clear_has_bomptime();
 }
-inline float BulletEvents_TacheBomp::bomptime() const {
+inline float BulletEvent_TacheBomp::bomptime() const {
   return bomptime_;
 }
-inline void BulletEvents_TacheBomp::set_bomptime(float value) {
+inline void BulletEvent_TacheBomp::set_bomptime(float value) {
   set_has_bomptime();
   bomptime_ = value;
 }
 
-// required float BompRang = 2;
-inline bool BulletEvents_TacheBomp::has_bomprang() const {
+// required float bompRang = 2;
+inline bool BulletEvent_TacheBomp::has_bomprang() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_bomprang() {
+inline void BulletEvent_TacheBomp::set_has_bomprang() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void BulletEvents_TacheBomp::clear_has_bomprang() {
+inline void BulletEvent_TacheBomp::clear_has_bomprang() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void BulletEvents_TacheBomp::clear_bomprang() {
+inline void BulletEvent_TacheBomp::clear_bomprang() {
   bomprang_ = 0;
   clear_has_bomprang();
 }
-inline float BulletEvents_TacheBomp::bomprang() const {
+inline float BulletEvent_TacheBomp::bomprang() const {
   return bomprang_;
 }
-inline void BulletEvents_TacheBomp::set_bomprang(float value) {
+inline void BulletEvent_TacheBomp::set_bomprang(float value) {
   set_has_bomprang();
   bomprang_ = value;
 }
 
-// required string BompPrefabPath = 3;
-inline bool BulletEvents_TacheBomp::has_bompprefabpath() const {
+// required string bompPrefabPath = 3;
+inline bool BulletEvent_TacheBomp::has_bompprefabpath() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_bompprefabpath() {
+inline void BulletEvent_TacheBomp::set_has_bompprefabpath() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void BulletEvents_TacheBomp::clear_has_bompprefabpath() {
+inline void BulletEvent_TacheBomp::clear_has_bompprefabpath() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void BulletEvents_TacheBomp::clear_bompprefabpath() {
+inline void BulletEvent_TacheBomp::clear_bompprefabpath() {
   if (bompprefabpath_ != &::google::protobuf::internal::kEmptyString) {
     bompprefabpath_->clear();
   }
   clear_has_bompprefabpath();
 }
-inline const ::std::string& BulletEvents_TacheBomp::bompprefabpath() const {
+inline const ::std::string& BulletEvent_TacheBomp::bompprefabpath() const {
   return *bompprefabpath_;
 }
-inline void BulletEvents_TacheBomp::set_bompprefabpath(const ::std::string& value) {
+inline void BulletEvent_TacheBomp::set_bompprefabpath(const ::std::string& value) {
   set_has_bompprefabpath();
   if (bompprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bompprefabpath_ = new ::std::string;
   }
   bompprefabpath_->assign(value);
 }
-inline void BulletEvents_TacheBomp::set_bompprefabpath(const char* value) {
+inline void BulletEvent_TacheBomp::set_bompprefabpath(const char* value) {
   set_has_bompprefabpath();
   if (bompprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bompprefabpath_ = new ::std::string;
   }
   bompprefabpath_->assign(value);
 }
-inline void BulletEvents_TacheBomp::set_bompprefabpath(const char* value, size_t size) {
+inline void BulletEvent_TacheBomp::set_bompprefabpath(const char* value, size_t size) {
   set_has_bompprefabpath();
   if (bompprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bompprefabpath_ = new ::std::string;
   }
   bompprefabpath_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* BulletEvents_TacheBomp::mutable_bompprefabpath() {
+inline ::std::string* BulletEvent_TacheBomp::mutable_bompprefabpath() {
   set_has_bompprefabpath();
   if (bompprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bompprefabpath_ = new ::std::string;
   }
   return bompprefabpath_;
 }
-inline ::std::string* BulletEvents_TacheBomp::release_bompprefabpath() {
+inline ::std::string* BulletEvent_TacheBomp::release_bompprefabpath() {
   clear_has_bompprefabpath();
   if (bompprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -4085,7 +2676,7 @@ inline ::std::string* BulletEvents_TacheBomp::release_bompprefabpath() {
     return temp;
   }
 }
-inline void BulletEvents_TacheBomp::set_allocated_bompprefabpath(::std::string* bompprefabpath) {
+inline void BulletEvent_TacheBomp::set_allocated_bompprefabpath(::std::string* bompprefabpath) {
   if (bompprefabpath_ != &::google::protobuf::internal::kEmptyString) {
     delete bompprefabpath_;
   }
@@ -4098,54 +2689,54 @@ inline void BulletEvents_TacheBomp::set_allocated_bompprefabpath(::std::string* 
   }
 }
 
-// required string BeAttackParticle = 4;
-inline bool BulletEvents_TacheBomp::has_beattackparticle() const {
+// required string beAttackParticle = 4;
+inline bool BulletEvent_TacheBomp::has_beattackparticle() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_beattackparticle() {
+inline void BulletEvent_TacheBomp::set_has_beattackparticle() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void BulletEvents_TacheBomp::clear_has_beattackparticle() {
+inline void BulletEvent_TacheBomp::clear_has_beattackparticle() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void BulletEvents_TacheBomp::clear_beattackparticle() {
+inline void BulletEvent_TacheBomp::clear_beattackparticle() {
   if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
     beattackparticle_->clear();
   }
   clear_has_beattackparticle();
 }
-inline const ::std::string& BulletEvents_TacheBomp::beattackparticle() const {
+inline const ::std::string& BulletEvent_TacheBomp::beattackparticle() const {
   return *beattackparticle_;
 }
-inline void BulletEvents_TacheBomp::set_beattackparticle(const ::std::string& value) {
+inline void BulletEvent_TacheBomp::set_beattackparticle(const ::std::string& value) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(value);
 }
-inline void BulletEvents_TacheBomp::set_beattackparticle(const char* value) {
+inline void BulletEvent_TacheBomp::set_beattackparticle(const char* value) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(value);
 }
-inline void BulletEvents_TacheBomp::set_beattackparticle(const char* value, size_t size) {
+inline void BulletEvent_TacheBomp::set_beattackparticle(const char* value, size_t size) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* BulletEvents_TacheBomp::mutable_beattackparticle() {
+inline ::std::string* BulletEvent_TacheBomp::mutable_beattackparticle() {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   return beattackparticle_;
 }
-inline ::std::string* BulletEvents_TacheBomp::release_beattackparticle() {
+inline ::std::string* BulletEvent_TacheBomp::release_beattackparticle() {
   clear_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -4155,7 +2746,7 @@ inline ::std::string* BulletEvents_TacheBomp::release_beattackparticle() {
     return temp;
   }
 }
-inline void BulletEvents_TacheBomp::set_allocated_beattackparticle(::std::string* beattackparticle) {
+inline void BulletEvent_TacheBomp::set_allocated_beattackparticle(::std::string* beattackparticle) {
   if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
     delete beattackparticle_;
   }
@@ -4168,582 +2759,302 @@ inline void BulletEvents_TacheBomp::set_allocated_beattackparticle(::std::string
   }
 }
 
-// required float BackNpcDis = 5;
-inline bool BulletEvents_TacheBomp::has_backnpcdis() const {
+// required float backNpcDis = 5;
+inline bool BulletEvent_TacheBomp::has_backnpcdis() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_backnpcdis() {
+inline void BulletEvent_TacheBomp::set_has_backnpcdis() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void BulletEvents_TacheBomp::clear_has_backnpcdis() {
+inline void BulletEvent_TacheBomp::clear_has_backnpcdis() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void BulletEvents_TacheBomp::clear_backnpcdis() {
+inline void BulletEvent_TacheBomp::clear_backnpcdis() {
   backnpcdis_ = 0;
   clear_has_backnpcdis();
 }
-inline float BulletEvents_TacheBomp::backnpcdis() const {
+inline float BulletEvent_TacheBomp::backnpcdis() const {
   return backnpcdis_;
 }
-inline void BulletEvents_TacheBomp::set_backnpcdis(float value) {
+inline void BulletEvent_TacheBomp::set_backnpcdis(float value) {
   set_has_backnpcdis();
   backnpcdis_ = value;
 }
 
-// required float BackHeroDis = 6;
-inline bool BulletEvents_TacheBomp::has_backherodis() const {
+// required float backHeroDis = 6;
+inline bool BulletEvent_TacheBomp::has_backherodis() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void BulletEvents_TacheBomp::set_has_backherodis() {
+inline void BulletEvent_TacheBomp::set_has_backherodis() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void BulletEvents_TacheBomp::clear_has_backherodis() {
+inline void BulletEvent_TacheBomp::clear_has_backherodis() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void BulletEvents_TacheBomp::clear_backherodis() {
+inline void BulletEvent_TacheBomp::clear_backherodis() {
   backherodis_ = 0;
   clear_has_backherodis();
 }
-inline float BulletEvents_TacheBomp::backherodis() const {
+inline float BulletEvent_TacheBomp::backherodis() const {
   return backherodis_;
 }
-inline void BulletEvents_TacheBomp::set_backherodis(float value) {
+inline void BulletEvent_TacheBomp::set_backherodis(float value) {
   set_has_backherodis();
   backherodis_ = value;
-}
-
-// required string MethodCall = 7;
-inline bool BulletEvents_TacheBomp::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void BulletEvents_TacheBomp::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void BulletEvents_TacheBomp::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void BulletEvents_TacheBomp::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& BulletEvents_TacheBomp::methodcall() const {
-  return *methodcall_;
-}
-inline void BulletEvents_TacheBomp::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_TacheBomp::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* BulletEvents_TacheBomp::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_TacheBomp::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 8;
-inline bool BulletEvents_TacheBomp::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void BulletEvents_TacheBomp::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void BulletEvents_TacheBomp::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void BulletEvents_TacheBomp::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& BulletEvents_TacheBomp::methodparam() const {
-  return *methodparam_;
-}
-inline void BulletEvents_TacheBomp::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_TacheBomp::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* BulletEvents_TacheBomp::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_TacheBomp::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodCall = 9;
-inline bool BulletEvents_TacheBomp::has_targetmethodcall() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void BulletEvents_TacheBomp::set_has_targetmethodcall() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void BulletEvents_TacheBomp::clear_has_targetmethodcall() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void BulletEvents_TacheBomp::clear_targetmethodcall() {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_->clear();
-  }
-  clear_has_targetmethodcall();
-}
-inline const ::std::string& BulletEvents_TacheBomp::targetmethodcall() const {
-  return *targetmethodcall_;
-}
-inline void BulletEvents_TacheBomp::set_targetmethodcall(const ::std::string& value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_targetmethodcall(const char* value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_targetmethodcall(const char* value, size_t size) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_TacheBomp::mutable_targetmethodcall() {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  return targetmethodcall_;
-}
-inline ::std::string* BulletEvents_TacheBomp::release_targetmethodcall() {
-  clear_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodcall_;
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_TacheBomp::set_allocated_targetmethodcall(::std::string* targetmethodcall) {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodcall_;
-  }
-  if (targetmethodcall) {
-    set_has_targetmethodcall();
-    targetmethodcall_ = targetmethodcall;
-  } else {
-    clear_has_targetmethodcall();
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodParam = 10;
-inline bool BulletEvents_TacheBomp::has_targetmethodparam() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void BulletEvents_TacheBomp::set_has_targetmethodparam() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void BulletEvents_TacheBomp::clear_has_targetmethodparam() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void BulletEvents_TacheBomp::clear_targetmethodparam() {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_->clear();
-  }
-  clear_has_targetmethodparam();
-}
-inline const ::std::string& BulletEvents_TacheBomp::targetmethodparam() const {
-  return *targetmethodparam_;
-}
-inline void BulletEvents_TacheBomp::set_targetmethodparam(const ::std::string& value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_targetmethodparam(const char* value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void BulletEvents_TacheBomp::set_targetmethodparam(const char* value, size_t size) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_TacheBomp::mutable_targetmethodparam() {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  return targetmethodparam_;
-}
-inline ::std::string* BulletEvents_TacheBomp::release_targetmethodparam() {
-  clear_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodparam_;
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_TacheBomp::set_allocated_targetmethodparam(::std::string* targetmethodparam) {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodparam_;
-  }
-  if (targetmethodparam) {
-    set_has_targetmethodparam();
-    targetmethodparam_ = targetmethodparam;
-  } else {
-    clear_has_targetmethodparam();
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
 }
 
 // -------------------------------------------------------------------
 
-// BulletEvents_Bullet
+// BulletEvent_Bullet
 
-// required float EventTime = 1;
-inline bool BulletEvents_Bullet::has_eventtime() const {
+// required float eventTime = 1;
+inline bool BulletEvent_Bullet::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_eventtime() {
+inline void BulletEvent_Bullet::set_has_eventtime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void BulletEvents_Bullet::clear_has_eventtime() {
+inline void BulletEvent_Bullet::clear_has_eventtime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void BulletEvents_Bullet::clear_eventtime() {
+inline void BulletEvent_Bullet::clear_eventtime() {
   eventtime_ = 0;
   clear_has_eventtime();
 }
-inline float BulletEvents_Bullet::eventtime() const {
+inline float BulletEvent_Bullet::eventtime() const {
   return eventtime_;
 }
-inline void BulletEvents_Bullet::set_eventtime(float value) {
+inline void BulletEvent_Bullet::set_eventtime(float value) {
   set_has_eventtime();
   eventtime_ = value;
 }
 
-// required .NFFS.BulletEvents.EBEType EventType = 2;
-inline bool BulletEvents_Bullet::has_eventtype() const {
+// required .NFFS.BulletEvent.EBEType eventType = 2;
+inline bool BulletEvent_Bullet::has_eventtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_eventtype() {
+inline void BulletEvent_Bullet::set_has_eventtype() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void BulletEvents_Bullet::clear_has_eventtype() {
+inline void BulletEvent_Bullet::clear_has_eventtype() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void BulletEvents_Bullet::clear_eventtype() {
+inline void BulletEvent_Bullet::clear_eventtype() {
   eventtype_ = 0;
   clear_has_eventtype();
 }
-inline ::NFFS::BulletEvents_EBEType BulletEvents_Bullet::eventtype() const {
-  return static_cast< ::NFFS::BulletEvents_EBEType >(eventtype_);
+inline ::NFFS::BulletEvent_EBEType BulletEvent_Bullet::eventtype() const {
+  return static_cast< ::NFFS::BulletEvent_EBEType >(eventtype_);
 }
-inline void BulletEvents_Bullet::set_eventtype(::NFFS::BulletEvents_EBEType value) {
-  assert(::NFFS::BulletEvents_EBEType_IsValid(value));
+inline void BulletEvent_Bullet::set_eventtype(::NFFS::BulletEvent_EBEType value) {
+  assert(::NFFS::BulletEvent_EBEType_IsValid(value));
   set_has_eventtype();
   eventtype_ = value;
 }
 
-// required float Speed = 3;
-inline bool BulletEvents_Bullet::has_speed() const {
+// required float speed = 3;
+inline bool BulletEvent_Bullet::has_speed() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_speed() {
+inline void BulletEvent_Bullet::set_has_speed() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void BulletEvents_Bullet::clear_has_speed() {
+inline void BulletEvent_Bullet::clear_has_speed() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void BulletEvents_Bullet::clear_speed() {
+inline void BulletEvent_Bullet::clear_speed() {
   speed_ = 0;
   clear_has_speed();
 }
-inline float BulletEvents_Bullet::speed() const {
+inline float BulletEvent_Bullet::speed() const {
   return speed_;
 }
-inline void BulletEvents_Bullet::set_speed(float value) {
+inline void BulletEvent_Bullet::set_speed(float value) {
   set_has_speed();
   speed_ = value;
 }
 
-// required float MaxDis = 4;
-inline bool BulletEvents_Bullet::has_maxdis() const {
+// required float maxDis = 4;
+inline bool BulletEvent_Bullet::has_maxdis() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_maxdis() {
+inline void BulletEvent_Bullet::set_has_maxdis() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void BulletEvents_Bullet::clear_has_maxdis() {
+inline void BulletEvent_Bullet::clear_has_maxdis() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void BulletEvents_Bullet::clear_maxdis() {
+inline void BulletEvent_Bullet::clear_maxdis() {
   maxdis_ = 0;
   clear_has_maxdis();
 }
-inline float BulletEvents_Bullet::maxdis() const {
+inline float BulletEvent_Bullet::maxdis() const {
   return maxdis_;
 }
-inline void BulletEvents_Bullet::set_maxdis(float value) {
+inline void BulletEvent_Bullet::set_maxdis(float value) {
   set_has_maxdis();
   maxdis_ = value;
 }
 
-// required float BulletRang = 5;
-inline bool BulletEvents_Bullet::has_bulletrang() const {
+// required float bulletRang = 5;
+inline bool BulletEvent_Bullet::has_bulletrang() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_bulletrang() {
+inline void BulletEvent_Bullet::set_has_bulletrang() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void BulletEvents_Bullet::clear_has_bulletrang() {
+inline void BulletEvent_Bullet::clear_has_bulletrang() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void BulletEvents_Bullet::clear_bulletrang() {
+inline void BulletEvent_Bullet::clear_bulletrang() {
   bulletrang_ = 0;
   clear_has_bulletrang();
 }
-inline float BulletEvents_Bullet::bulletrang() const {
+inline float BulletEvent_Bullet::bulletrang() const {
   return bulletrang_;
 }
-inline void BulletEvents_Bullet::set_bulletrang(float value) {
+inline void BulletEvent_Bullet::set_bulletrang(float value) {
   set_has_bulletrang();
   bulletrang_ = value;
 }
 
-// required .NFFS.BulletEvents.EBE_BACKType BulletBackType = 6;
-inline bool BulletEvents_Bullet::has_bulletbacktype() const {
+// required .NFFS.BulletEvent.EBE_BACKType bulletBackType = 6;
+inline bool BulletEvent_Bullet::has_bulletbacktype() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_bulletbacktype() {
+inline void BulletEvent_Bullet::set_has_bulletbacktype() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void BulletEvents_Bullet::clear_has_bulletbacktype() {
+inline void BulletEvent_Bullet::clear_has_bulletbacktype() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void BulletEvents_Bullet::clear_bulletbacktype() {
+inline void BulletEvent_Bullet::clear_bulletbacktype() {
   bulletbacktype_ = 0;
   clear_has_bulletbacktype();
 }
-inline ::NFFS::BulletEvents_EBE_BACKType BulletEvents_Bullet::bulletbacktype() const {
-  return static_cast< ::NFFS::BulletEvents_EBE_BACKType >(bulletbacktype_);
+inline ::NFFS::BulletEvent_EBE_BACKType BulletEvent_Bullet::bulletbacktype() const {
+  return static_cast< ::NFFS::BulletEvent_EBE_BACKType >(bulletbacktype_);
 }
-inline void BulletEvents_Bullet::set_bulletbacktype(::NFFS::BulletEvents_EBE_BACKType value) {
-  assert(::NFFS::BulletEvents_EBE_BACKType_IsValid(value));
+inline void BulletEvent_Bullet::set_bulletbacktype(::NFFS::BulletEvent_EBE_BACKType value) {
+  assert(::NFFS::BulletEvent_EBE_BACKType_IsValid(value));
   set_has_bulletbacktype();
   bulletbacktype_ = value;
 }
 
-// required float BackHeroDis = 7;
-inline bool BulletEvents_Bullet::has_backherodis() const {
+// required float backHeroDis = 7;
+inline bool BulletEvent_Bullet::has_backherodis() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_backherodis() {
+inline void BulletEvent_Bullet::set_has_backherodis() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void BulletEvents_Bullet::clear_has_backherodis() {
+inline void BulletEvent_Bullet::clear_has_backherodis() {
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void BulletEvents_Bullet::clear_backherodis() {
+inline void BulletEvent_Bullet::clear_backherodis() {
   backherodis_ = 0;
   clear_has_backherodis();
 }
-inline float BulletEvents_Bullet::backherodis() const {
+inline float BulletEvent_Bullet::backherodis() const {
   return backherodis_;
 }
-inline void BulletEvents_Bullet::set_backherodis(float value) {
+inline void BulletEvent_Bullet::set_backherodis(float value) {
   set_has_backherodis();
   backherodis_ = value;
 }
 
-// required float BackNpcDis = 8;
-inline bool BulletEvents_Bullet::has_backnpcdis() const {
+// required float backNpcDis = 8;
+inline bool BulletEvent_Bullet::has_backnpcdis() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_backnpcdis() {
+inline void BulletEvent_Bullet::set_has_backnpcdis() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void BulletEvents_Bullet::clear_has_backnpcdis() {
+inline void BulletEvent_Bullet::clear_has_backnpcdis() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void BulletEvents_Bullet::clear_backnpcdis() {
+inline void BulletEvent_Bullet::clear_backnpcdis() {
   backnpcdis_ = 0;
   clear_has_backnpcdis();
 }
-inline float BulletEvents_Bullet::backnpcdis() const {
+inline float BulletEvent_Bullet::backnpcdis() const {
   return backnpcdis_;
 }
-inline void BulletEvents_Bullet::set_backnpcdis(float value) {
+inline void BulletEvent_Bullet::set_backnpcdis(float value) {
   set_has_backnpcdis();
   backnpcdis_ = value;
 }
 
-// required int32 TacheDetroy = 9;
-inline bool BulletEvents_Bullet::has_tachedetroy() const {
+// required int32 tacheDetroy = 9;
+inline bool BulletEvent_Bullet::has_tachedetroy() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_tachedetroy() {
+inline void BulletEvent_Bullet::set_has_tachedetroy() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void BulletEvents_Bullet::clear_has_tachedetroy() {
+inline void BulletEvent_Bullet::clear_has_tachedetroy() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void BulletEvents_Bullet::clear_tachedetroy() {
+inline void BulletEvent_Bullet::clear_tachedetroy() {
   tachedetroy_ = 0;
   clear_has_tachedetroy();
 }
-inline ::google::protobuf::int32 BulletEvents_Bullet::tachedetroy() const {
+inline ::google::protobuf::int32 BulletEvent_Bullet::tachedetroy() const {
   return tachedetroy_;
 }
-inline void BulletEvents_Bullet::set_tachedetroy(::google::protobuf::int32 value) {
+inline void BulletEvent_Bullet::set_tachedetroy(::google::protobuf::int32 value) {
   set_has_tachedetroy();
   tachedetroy_ = value;
 }
 
-// required string BeAttackParticle = 10;
-inline bool BulletEvents_Bullet::has_beattackparticle() const {
+// required string beAttackParticle = 10;
+inline bool BulletEvent_Bullet::has_beattackparticle() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_beattackparticle() {
+inline void BulletEvent_Bullet::set_has_beattackparticle() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void BulletEvents_Bullet::clear_has_beattackparticle() {
+inline void BulletEvent_Bullet::clear_has_beattackparticle() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void BulletEvents_Bullet::clear_beattackparticle() {
+inline void BulletEvent_Bullet::clear_beattackparticle() {
   if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
     beattackparticle_->clear();
   }
   clear_has_beattackparticle();
 }
-inline const ::std::string& BulletEvents_Bullet::beattackparticle() const {
+inline const ::std::string& BulletEvent_Bullet::beattackparticle() const {
   return *beattackparticle_;
 }
-inline void BulletEvents_Bullet::set_beattackparticle(const ::std::string& value) {
+inline void BulletEvent_Bullet::set_beattackparticle(const ::std::string& value) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(value);
 }
-inline void BulletEvents_Bullet::set_beattackparticle(const char* value) {
+inline void BulletEvent_Bullet::set_beattackparticle(const char* value) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(value);
 }
-inline void BulletEvents_Bullet::set_beattackparticle(const char* value, size_t size) {
+inline void BulletEvent_Bullet::set_beattackparticle(const char* value, size_t size) {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   beattackparticle_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* BulletEvents_Bullet::mutable_beattackparticle() {
+inline ::std::string* BulletEvent_Bullet::mutable_beattackparticle() {
   set_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     beattackparticle_ = new ::std::string;
   }
   return beattackparticle_;
 }
-inline ::std::string* BulletEvents_Bullet::release_beattackparticle() {
+inline ::std::string* BulletEvent_Bullet::release_beattackparticle() {
   clear_has_beattackparticle();
   if (beattackparticle_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -4753,7 +3064,7 @@ inline ::std::string* BulletEvents_Bullet::release_beattackparticle() {
     return temp;
   }
 }
-inline void BulletEvents_Bullet::set_allocated_beattackparticle(::std::string* beattackparticle) {
+inline void BulletEvent_Bullet::set_allocated_beattackparticle(::std::string* beattackparticle) {
   if (beattackparticle_ != &::google::protobuf::internal::kEmptyString) {
     delete beattackparticle_;
   }
@@ -4766,162 +3077,92 @@ inline void BulletEvents_Bullet::set_allocated_beattackparticle(::std::string* b
   }
 }
 
-// required string FireTacheName = 11;
-inline bool BulletEvents_Bullet::has_firetachename() const {
+// required .NFFS.FSVector3 fireOffest = 11;
+inline bool BulletEvent_Bullet::has_fireoffest() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_firetachename() {
+inline void BulletEvent_Bullet::set_has_fireoffest() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void BulletEvents_Bullet::clear_has_firetachename() {
+inline void BulletEvent_Bullet::clear_has_fireoffest() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void BulletEvents_Bullet::clear_firetachename() {
-  if (firetachename_ != &::google::protobuf::internal::kEmptyString) {
-    firetachename_->clear();
-  }
-  clear_has_firetachename();
+inline void BulletEvent_Bullet::clear_fireoffest() {
+  if (fireoffest_ != NULL) fireoffest_->::NFFS::FSVector3::Clear();
+  clear_has_fireoffest();
 }
-inline const ::std::string& BulletEvents_Bullet::firetachename() const {
-  return *firetachename_;
+inline const ::NFFS::FSVector3& BulletEvent_Bullet::fireoffest() const {
+  return fireoffest_ != NULL ? *fireoffest_ : *default_instance_->fireoffest_;
 }
-inline void BulletEvents_Bullet::set_firetachename(const ::std::string& value) {
-  set_has_firetachename();
-  if (firetachename_ == &::google::protobuf::internal::kEmptyString) {
-    firetachename_ = new ::std::string;
-  }
-  firetachename_->assign(value);
+inline ::NFFS::FSVector3* BulletEvent_Bullet::mutable_fireoffest() {
+  set_has_fireoffest();
+  if (fireoffest_ == NULL) fireoffest_ = new ::NFFS::FSVector3;
+  return fireoffest_;
 }
-inline void BulletEvents_Bullet::set_firetachename(const char* value) {
-  set_has_firetachename();
-  if (firetachename_ == &::google::protobuf::internal::kEmptyString) {
-    firetachename_ = new ::std::string;
-  }
-  firetachename_->assign(value);
-}
-inline void BulletEvents_Bullet::set_firetachename(const char* value, size_t size) {
-  set_has_firetachename();
-  if (firetachename_ == &::google::protobuf::internal::kEmptyString) {
-    firetachename_ = new ::std::string;
-  }
-  firetachename_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_Bullet::mutable_firetachename() {
-  set_has_firetachename();
-  if (firetachename_ == &::google::protobuf::internal::kEmptyString) {
-    firetachename_ = new ::std::string;
-  }
-  return firetachename_;
-}
-inline ::std::string* BulletEvents_Bullet::release_firetachename() {
-  clear_has_firetachename();
-  if (firetachename_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = firetachename_;
-    firetachename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_Bullet::set_allocated_firetachename(::std::string* firetachename) {
-  if (firetachename_ != &::google::protobuf::internal::kEmptyString) {
-    delete firetachename_;
-  }
-  if (firetachename) {
-    set_has_firetachename();
-    firetachename_ = firetachename;
-  } else {
-    clear_has_firetachename();
-    firetachename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required .NFFS.FSVector3 FireTacheOffest = 12;
-inline bool BulletEvents_Bullet::has_firetacheoffest() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
-}
-inline void BulletEvents_Bullet::set_has_firetacheoffest() {
-  _has_bits_[0] |= 0x00000800u;
-}
-inline void BulletEvents_Bullet::clear_has_firetacheoffest() {
-  _has_bits_[0] &= ~0x00000800u;
-}
-inline void BulletEvents_Bullet::clear_firetacheoffest() {
-  if (firetacheoffest_ != NULL) firetacheoffest_->::NFFS::FSVector3::Clear();
-  clear_has_firetacheoffest();
-}
-inline const ::NFFS::FSVector3& BulletEvents_Bullet::firetacheoffest() const {
-  return firetacheoffest_ != NULL ? *firetacheoffest_ : *default_instance_->firetacheoffest_;
-}
-inline ::NFFS::FSVector3* BulletEvents_Bullet::mutable_firetacheoffest() {
-  set_has_firetacheoffest();
-  if (firetacheoffest_ == NULL) firetacheoffest_ = new ::NFFS::FSVector3;
-  return firetacheoffest_;
-}
-inline ::NFFS::FSVector3* BulletEvents_Bullet::release_firetacheoffest() {
-  clear_has_firetacheoffest();
-  ::NFFS::FSVector3* temp = firetacheoffest_;
-  firetacheoffest_ = NULL;
+inline ::NFFS::FSVector3* BulletEvent_Bullet::release_fireoffest() {
+  clear_has_fireoffest();
+  ::NFFS::FSVector3* temp = fireoffest_;
+  fireoffest_ = NULL;
   return temp;
 }
-inline void BulletEvents_Bullet::set_allocated_firetacheoffest(::NFFS::FSVector3* firetacheoffest) {
-  delete firetacheoffest_;
-  firetacheoffest_ = firetacheoffest;
-  if (firetacheoffest) {
-    set_has_firetacheoffest();
+inline void BulletEvent_Bullet::set_allocated_fireoffest(::NFFS::FSVector3* fireoffest) {
+  delete fireoffest_;
+  fireoffest_ = fireoffest;
+  if (fireoffest) {
+    set_has_fireoffest();
   } else {
-    clear_has_firetacheoffest();
+    clear_has_fireoffest();
   }
 }
 
-// required string BulletPrefabPath = 13;
-inline bool BulletEvents_Bullet::has_bulletprefabpath() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+// required string bulletPrefabPath = 12;
+inline bool BulletEvent_Bullet::has_bulletprefabpath() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_bulletprefabpath() {
-  _has_bits_[0] |= 0x00001000u;
+inline void BulletEvent_Bullet::set_has_bulletprefabpath() {
+  _has_bits_[0] |= 0x00000800u;
 }
-inline void BulletEvents_Bullet::clear_has_bulletprefabpath() {
-  _has_bits_[0] &= ~0x00001000u;
+inline void BulletEvent_Bullet::clear_has_bulletprefabpath() {
+  _has_bits_[0] &= ~0x00000800u;
 }
-inline void BulletEvents_Bullet::clear_bulletprefabpath() {
+inline void BulletEvent_Bullet::clear_bulletprefabpath() {
   if (bulletprefabpath_ != &::google::protobuf::internal::kEmptyString) {
     bulletprefabpath_->clear();
   }
   clear_has_bulletprefabpath();
 }
-inline const ::std::string& BulletEvents_Bullet::bulletprefabpath() const {
+inline const ::std::string& BulletEvent_Bullet::bulletprefabpath() const {
   return *bulletprefabpath_;
 }
-inline void BulletEvents_Bullet::set_bulletprefabpath(const ::std::string& value) {
+inline void BulletEvent_Bullet::set_bulletprefabpath(const ::std::string& value) {
   set_has_bulletprefabpath();
   if (bulletprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bulletprefabpath_ = new ::std::string;
   }
   bulletprefabpath_->assign(value);
 }
-inline void BulletEvents_Bullet::set_bulletprefabpath(const char* value) {
+inline void BulletEvent_Bullet::set_bulletprefabpath(const char* value) {
   set_has_bulletprefabpath();
   if (bulletprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bulletprefabpath_ = new ::std::string;
   }
   bulletprefabpath_->assign(value);
 }
-inline void BulletEvents_Bullet::set_bulletprefabpath(const char* value, size_t size) {
+inline void BulletEvent_Bullet::set_bulletprefabpath(const char* value, size_t size) {
   set_has_bulletprefabpath();
   if (bulletprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bulletprefabpath_ = new ::std::string;
   }
   bulletprefabpath_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* BulletEvents_Bullet::mutable_bulletprefabpath() {
+inline ::std::string* BulletEvent_Bullet::mutable_bulletprefabpath() {
   set_has_bulletprefabpath();
   if (bulletprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     bulletprefabpath_ = new ::std::string;
   }
   return bulletprefabpath_;
 }
-inline ::std::string* BulletEvents_Bullet::release_bulletprefabpath() {
+inline ::std::string* BulletEvent_Bullet::release_bulletprefabpath() {
   clear_has_bulletprefabpath();
   if (bulletprefabpath_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -4931,7 +3172,7 @@ inline ::std::string* BulletEvents_Bullet::release_bulletprefabpath() {
     return temp;
   }
 }
-inline void BulletEvents_Bullet::set_allocated_bulletprefabpath(::std::string* bulletprefabpath) {
+inline void BulletEvent_Bullet::set_allocated_bulletprefabpath(::std::string* bulletprefabpath) {
   if (bulletprefabpath_ != &::google::protobuf::internal::kEmptyString) {
     delete bulletprefabpath_;
   }
@@ -4944,680 +3185,398 @@ inline void BulletEvents_Bullet::set_allocated_bulletprefabpath(::std::string* b
   }
 }
 
-// required string MethodCall = 14;
-inline bool BulletEvents_Bullet::has_methodcall() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+// required .NFFS.BulletEvent.TacheBomp bomp = 13;
+inline bool BulletEvent_Bullet::has_bomp() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void BulletEvents_Bullet::set_has_methodcall() {
-  _has_bits_[0] |= 0x00002000u;
+inline void BulletEvent_Bullet::set_has_bomp() {
+  _has_bits_[0] |= 0x00001000u;
 }
-inline void BulletEvents_Bullet::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00002000u;
+inline void BulletEvent_Bullet::clear_has_bomp() {
+  _has_bits_[0] &= ~0x00001000u;
 }
-inline void BulletEvents_Bullet::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
+inline void BulletEvent_Bullet::clear_bomp() {
+  if (bomp_ != NULL) bomp_->::NFFS::BulletEvent_TacheBomp::Clear();
+  clear_has_bomp();
 }
-inline const ::std::string& BulletEvents_Bullet::methodcall() const {
-  return *methodcall_;
+inline const ::NFFS::BulletEvent_TacheBomp& BulletEvent_Bullet::bomp() const {
+  return bomp_ != NULL ? *bomp_ : *default_instance_->bomp_;
 }
-inline void BulletEvents_Bullet::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void BulletEvents_Bullet::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void BulletEvents_Bullet::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_Bullet::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* BulletEvents_Bullet::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_Bullet::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 15;
-inline bool BulletEvents_Bullet::has_methodparam() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
-}
-inline void BulletEvents_Bullet::set_has_methodparam() {
-  _has_bits_[0] |= 0x00004000u;
-}
-inline void BulletEvents_Bullet::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00004000u;
-}
-inline void BulletEvents_Bullet::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& BulletEvents_Bullet::methodparam() const {
-  return *methodparam_;
-}
-inline void BulletEvents_Bullet::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void BulletEvents_Bullet::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void BulletEvents_Bullet::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_Bullet::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* BulletEvents_Bullet::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_Bullet::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodCall = 16;
-inline bool BulletEvents_Bullet::has_targetmethodcall() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
-}
-inline void BulletEvents_Bullet::set_has_targetmethodcall() {
-  _has_bits_[0] |= 0x00008000u;
-}
-inline void BulletEvents_Bullet::clear_has_targetmethodcall() {
-  _has_bits_[0] &= ~0x00008000u;
-}
-inline void BulletEvents_Bullet::clear_targetmethodcall() {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_->clear();
-  }
-  clear_has_targetmethodcall();
-}
-inline const ::std::string& BulletEvents_Bullet::targetmethodcall() const {
-  return *targetmethodcall_;
-}
-inline void BulletEvents_Bullet::set_targetmethodcall(const ::std::string& value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void BulletEvents_Bullet::set_targetmethodcall(const char* value) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(value);
-}
-inline void BulletEvents_Bullet::set_targetmethodcall(const char* value, size_t size) {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  targetmethodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_Bullet::mutable_targetmethodcall() {
-  set_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodcall_ = new ::std::string;
-  }
-  return targetmethodcall_;
-}
-inline ::std::string* BulletEvents_Bullet::release_targetmethodcall() {
-  clear_has_targetmethodcall();
-  if (targetmethodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodcall_;
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_Bullet::set_allocated_targetmethodcall(::std::string* targetmethodcall) {
-  if (targetmethodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodcall_;
-  }
-  if (targetmethodcall) {
-    set_has_targetmethodcall();
-    targetmethodcall_ = targetmethodcall;
-  } else {
-    clear_has_targetmethodcall();
-    targetmethodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetMethodParam = 17;
-inline bool BulletEvents_Bullet::has_targetmethodparam() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
-}
-inline void BulletEvents_Bullet::set_has_targetmethodparam() {
-  _has_bits_[0] |= 0x00010000u;
-}
-inline void BulletEvents_Bullet::clear_has_targetmethodparam() {
-  _has_bits_[0] &= ~0x00010000u;
-}
-inline void BulletEvents_Bullet::clear_targetmethodparam() {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_->clear();
-  }
-  clear_has_targetmethodparam();
-}
-inline const ::std::string& BulletEvents_Bullet::targetmethodparam() const {
-  return *targetmethodparam_;
-}
-inline void BulletEvents_Bullet::set_targetmethodparam(const ::std::string& value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void BulletEvents_Bullet::set_targetmethodparam(const char* value) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(value);
-}
-inline void BulletEvents_Bullet::set_targetmethodparam(const char* value, size_t size) {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  targetmethodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* BulletEvents_Bullet::mutable_targetmethodparam() {
-  set_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    targetmethodparam_ = new ::std::string;
-  }
-  return targetmethodparam_;
-}
-inline ::std::string* BulletEvents_Bullet::release_targetmethodparam() {
-  clear_has_targetmethodparam();
-  if (targetmethodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetmethodparam_;
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void BulletEvents_Bullet::set_allocated_targetmethodparam(::std::string* targetmethodparam) {
-  if (targetmethodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetmethodparam_;
-  }
-  if (targetmethodparam) {
-    set_has_targetmethodparam();
-    targetmethodparam_ = targetmethodparam;
-  } else {
-    clear_has_targetmethodparam();
-    targetmethodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// repeated .NFFS.BulletEvents.TacheBomp Bomp = 18;
-inline int BulletEvents_Bullet::bomp_size() const {
-  return bomp_.size();
-}
-inline void BulletEvents_Bullet::clear_bomp() {
-  bomp_.Clear();
-}
-inline const ::NFFS::BulletEvents_TacheBomp& BulletEvents_Bullet::bomp(int index) const {
-  return bomp_.Get(index);
-}
-inline ::NFFS::BulletEvents_TacheBomp* BulletEvents_Bullet::mutable_bomp(int index) {
-  return bomp_.Mutable(index);
-}
-inline ::NFFS::BulletEvents_TacheBomp* BulletEvents_Bullet::add_bomp() {
-  return bomp_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_TacheBomp >&
-BulletEvents_Bullet::bomp() const {
+inline ::NFFS::BulletEvent_TacheBomp* BulletEvent_Bullet::mutable_bomp() {
+  set_has_bomp();
+  if (bomp_ == NULL) bomp_ = new ::NFFS::BulletEvent_TacheBomp;
   return bomp_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_TacheBomp >*
-BulletEvents_Bullet::mutable_bomp() {
-  return &bomp_;
+inline ::NFFS::BulletEvent_TacheBomp* BulletEvent_Bullet::release_bomp() {
+  clear_has_bomp();
+  ::NFFS::BulletEvent_TacheBomp* temp = bomp_;
+  bomp_ = NULL;
+  return temp;
+}
+inline void BulletEvent_Bullet::set_allocated_bomp(::NFFS::BulletEvent_TacheBomp* bomp) {
+  delete bomp_;
+  bomp_ = bomp;
+  if (bomp) {
+    set_has_bomp();
+  } else {
+    clear_has_bomp();
+  }
 }
 
 // -------------------------------------------------------------------
 
-// BulletEvents
+// BulletEvent
 
-// repeated .NFFS.BulletEvents.Bullet xBulletList = 1;
-inline int BulletEvents::xbulletlist_size() const {
-  return xbulletlist_.size();
+// repeated .NFFS.BulletEvent.Bullet bulletList = 1;
+inline int BulletEvent::bulletlist_size() const {
+  return bulletlist_.size();
 }
-inline void BulletEvents::clear_xbulletlist() {
-  xbulletlist_.Clear();
+inline void BulletEvent::clear_bulletlist() {
+  bulletlist_.Clear();
 }
-inline const ::NFFS::BulletEvents_Bullet& BulletEvents::xbulletlist(int index) const {
-  return xbulletlist_.Get(index);
+inline const ::NFFS::BulletEvent_Bullet& BulletEvent::bulletlist(int index) const {
+  return bulletlist_.Get(index);
 }
-inline ::NFFS::BulletEvents_Bullet* BulletEvents::mutable_xbulletlist(int index) {
-  return xbulletlist_.Mutable(index);
+inline ::NFFS::BulletEvent_Bullet* BulletEvent::mutable_bulletlist(int index) {
+  return bulletlist_.Mutable(index);
 }
-inline ::NFFS::BulletEvents_Bullet* BulletEvents::add_xbulletlist() {
-  return xbulletlist_.Add();
+inline ::NFFS::BulletEvent_Bullet* BulletEvent::add_bulletlist() {
+  return bulletlist_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_Bullet >&
-BulletEvents::xbulletlist() const {
-  return xbulletlist_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvent_Bullet >&
+BulletEvent::bulletlist() const {
+  return bulletlist_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvents_Bullet >*
-BulletEvents::mutable_xbulletlist() {
-  return &xbulletlist_;
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::BulletEvent_Bullet >*
+BulletEvent::mutable_bulletlist() {
+  return &bulletlist_;
 }
 
 // -------------------------------------------------------------------
 
-// AnimatorMoves_Move
+// AudioEvent_Audio
 
-// required float EventTime = 1;
-inline bool AnimatorMoves_Move::has_eventtime() const {
+// required float eventTime = 1;
+inline bool AudioEvent_Audio::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AnimatorMoves_Move::set_has_eventtime() {
+inline void AudioEvent_Audio::set_has_eventtime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void AnimatorMoves_Move::clear_has_eventtime() {
+inline void AudioEvent_Audio::clear_has_eventtime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void AnimatorMoves_Move::clear_eventtime() {
+inline void AudioEvent_Audio::clear_eventtime() {
   eventtime_ = 0;
   clear_has_eventtime();
 }
-inline float AnimatorMoves_Move::eventtime() const {
+inline float AudioEvent_Audio::eventtime() const {
   return eventtime_;
 }
-inline void AnimatorMoves_Move::set_eventtime(float value) {
+inline void AudioEvent_Audio::set_eventtime(float value) {
   set_has_eventtime();
   eventtime_ = value;
 }
 
-// required .NFFS.AnimatorMoves.EAMType EventType = 2;
-inline bool AnimatorMoves_Move::has_eventtype() const {
+// required string audioPrefabName = 3;
+inline bool AudioEvent_Audio::has_audioprefabname() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AnimatorMoves_Move::set_has_eventtype() {
+inline void AudioEvent_Audio::set_has_audioprefabname() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AnimatorMoves_Move::clear_has_eventtype() {
+inline void AudioEvent_Audio::clear_has_audioprefabname() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AnimatorMoves_Move::clear_eventtype() {
+inline void AudioEvent_Audio::clear_audioprefabname() {
+  if (audioprefabname_ != &::google::protobuf::internal::kEmptyString) {
+    audioprefabname_->clear();
+  }
+  clear_has_audioprefabname();
+}
+inline const ::std::string& AudioEvent_Audio::audioprefabname() const {
+  return *audioprefabname_;
+}
+inline void AudioEvent_Audio::set_audioprefabname(const ::std::string& value) {
+  set_has_audioprefabname();
+  if (audioprefabname_ == &::google::protobuf::internal::kEmptyString) {
+    audioprefabname_ = new ::std::string;
+  }
+  audioprefabname_->assign(value);
+}
+inline void AudioEvent_Audio::set_audioprefabname(const char* value) {
+  set_has_audioprefabname();
+  if (audioprefabname_ == &::google::protobuf::internal::kEmptyString) {
+    audioprefabname_ = new ::std::string;
+  }
+  audioprefabname_->assign(value);
+}
+inline void AudioEvent_Audio::set_audioprefabname(const char* value, size_t size) {
+  set_has_audioprefabname();
+  if (audioprefabname_ == &::google::protobuf::internal::kEmptyString) {
+    audioprefabname_ = new ::std::string;
+  }
+  audioprefabname_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AudioEvent_Audio::mutable_audioprefabname() {
+  set_has_audioprefabname();
+  if (audioprefabname_ == &::google::protobuf::internal::kEmptyString) {
+    audioprefabname_ = new ::std::string;
+  }
+  return audioprefabname_;
+}
+inline ::std::string* AudioEvent_Audio::release_audioprefabname() {
+  clear_has_audioprefabname();
+  if (audioprefabname_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = audioprefabname_;
+    audioprefabname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AudioEvent_Audio::set_allocated_audioprefabname(::std::string* audioprefabname) {
+  if (audioprefabname_ != &::google::protobuf::internal::kEmptyString) {
+    delete audioprefabname_;
+  }
+  if (audioprefabname) {
+    set_has_audioprefabname();
+    audioprefabname_ = audioprefabname;
+  } else {
+    clear_has_audioprefabname();
+    audioprefabname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AudioEvent
+
+// repeated .NFFS.AudioEvent.Audio audioList = 1;
+inline int AudioEvent::audiolist_size() const {
+  return audiolist_.size();
+}
+inline void AudioEvent::clear_audiolist() {
+  audiolist_.Clear();
+}
+inline const ::NFFS::AudioEvent_Audio& AudioEvent::audiolist(int index) const {
+  return audiolist_.Get(index);
+}
+inline ::NFFS::AudioEvent_Audio* AudioEvent::mutable_audiolist(int index) {
+  return audiolist_.Mutable(index);
+}
+inline ::NFFS::AudioEvent_Audio* AudioEvent::add_audiolist() {
+  return audiolist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvent_Audio >&
+AudioEvent::audiolist() const {
+  return audiolist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvent_Audio >*
+AudioEvent::mutable_audiolist() {
+  return &audiolist_;
+}
+
+// -------------------------------------------------------------------
+
+// MoveEvent_Move
+
+// required float eventTime = 1;
+inline bool MoveEvent_Move::has_eventtime() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MoveEvent_Move::set_has_eventtime() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MoveEvent_Move::clear_has_eventtime() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MoveEvent_Move::clear_eventtime() {
+  eventtime_ = 0;
+  clear_has_eventtime();
+}
+inline float MoveEvent_Move::eventtime() const {
+  return eventtime_;
+}
+inline void MoveEvent_Move::set_eventtime(float value) {
+  set_has_eventtime();
+  eventtime_ = value;
+}
+
+// required .NFFS.MoveEvent.METype eventType = 2;
+inline bool MoveEvent_Move::has_eventtype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MoveEvent_Move::set_has_eventtype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MoveEvent_Move::clear_has_eventtype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MoveEvent_Move::clear_eventtype() {
   eventtype_ = 0;
   clear_has_eventtype();
 }
-inline ::NFFS::AnimatorMoves_EAMType AnimatorMoves_Move::eventtype() const {
-  return static_cast< ::NFFS::AnimatorMoves_EAMType >(eventtype_);
+inline ::NFFS::MoveEvent_METype MoveEvent_Move::eventtype() const {
+  return static_cast< ::NFFS::MoveEvent_METype >(eventtype_);
 }
-inline void AnimatorMoves_Move::set_eventtype(::NFFS::AnimatorMoves_EAMType value) {
-  assert(::NFFS::AnimatorMoves_EAMType_IsValid(value));
+inline void MoveEvent_Move::set_eventtype(::NFFS::MoveEvent_METype value) {
+  assert(::NFFS::MoveEvent_METype_IsValid(value));
   set_has_eventtype();
   eventtype_ = value;
 }
 
-// required float MoveDis = 3;
-inline bool AnimatorMoves_Move::has_movedis() const {
+// required float moveDis = 3;
+inline bool MoveEvent_Move::has_movedis() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AnimatorMoves_Move::set_has_movedis() {
+inline void MoveEvent_Move::set_has_movedis() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AnimatorMoves_Move::clear_has_movedis() {
+inline void MoveEvent_Move::clear_has_movedis() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AnimatorMoves_Move::clear_movedis() {
+inline void MoveEvent_Move::clear_movedis() {
   movedis_ = 0;
   clear_has_movedis();
 }
-inline float AnimatorMoves_Move::movedis() const {
+inline float MoveEvent_Move::movedis() const {
   return movedis_;
 }
-inline void AnimatorMoves_Move::set_movedis(float value) {
+inline void MoveEvent_Move::set_movedis(float value) {
   set_has_movedis();
   movedis_ = value;
 }
 
-// required float MoveTime = 4;
-inline bool AnimatorMoves_Move::has_movetime() const {
+// required float moveTime = 4;
+inline bool MoveEvent_Move::has_movetime() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void AnimatorMoves_Move::set_has_movetime() {
+inline void MoveEvent_Move::set_has_movetime() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void AnimatorMoves_Move::clear_has_movetime() {
+inline void MoveEvent_Move::clear_has_movetime() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void AnimatorMoves_Move::clear_movetime() {
+inline void MoveEvent_Move::clear_movetime() {
   movetime_ = 0;
   clear_has_movetime();
 }
-inline float AnimatorMoves_Move::movetime() const {
+inline float MoveEvent_Move::movetime() const {
   return movetime_;
 }
-inline void AnimatorMoves_Move::set_movetime(float value) {
+inline void MoveEvent_Move::set_movetime(float value) {
   set_has_movetime();
   movetime_ = value;
 }
 
-// required string MethodCall = 5;
-inline bool AnimatorMoves_Move::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void AnimatorMoves_Move::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void AnimatorMoves_Move::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void AnimatorMoves_Move::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& AnimatorMoves_Move::methodcall() const {
-  return *methodcall_;
-}
-inline void AnimatorMoves_Move::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AnimatorMoves_Move::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AnimatorMoves_Move::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AnimatorMoves_Move::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* AnimatorMoves_Move::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AnimatorMoves_Move::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
+// -------------------------------------------------------------------
 
-// required string MethodParam = 6;
-inline bool AnimatorMoves_Move::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+// MoveEvent
+
+// repeated .NFFS.MoveEvent.Move moveEvent = 1;
+inline int MoveEvent::moveevent_size() const {
+  return moveevent_.size();
 }
-inline void AnimatorMoves_Move::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000020u;
+inline void MoveEvent::clear_moveevent() {
+  moveevent_.Clear();
 }
-inline void AnimatorMoves_Move::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000020u;
+inline const ::NFFS::MoveEvent_Move& MoveEvent::moveevent(int index) const {
+  return moveevent_.Get(index);
 }
-inline void AnimatorMoves_Move::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
+inline ::NFFS::MoveEvent_Move* MoveEvent::mutable_moveevent(int index) {
+  return moveevent_.Mutable(index);
 }
-inline const ::std::string& AnimatorMoves_Move::methodparam() const {
-  return *methodparam_;
+inline ::NFFS::MoveEvent_Move* MoveEvent::add_moveevent() {
+  return moveevent_.Add();
 }
-inline void AnimatorMoves_Move::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::MoveEvent_Move >&
+MoveEvent::moveevent() const {
+  return moveevent_;
 }
-inline void AnimatorMoves_Move::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void AnimatorMoves_Move::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AnimatorMoves_Move::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* AnimatorMoves_Move::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AnimatorMoves_Move::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::MoveEvent_Move >*
+MoveEvent::mutable_moveevent() {
+  return &moveevent_;
 }
 
 // -------------------------------------------------------------------
 
-// AnimatorMoves
+// CameraEvent_Camera
 
-// repeated .NFFS.AnimatorMoves.Move xMoveList = 1;
-inline int AnimatorMoves::xmovelist_size() const {
-  return xmovelist_.size();
-}
-inline void AnimatorMoves::clear_xmovelist() {
-  xmovelist_.Clear();
-}
-inline const ::NFFS::AnimatorMoves_Move& AnimatorMoves::xmovelist(int index) const {
-  return xmovelist_.Get(index);
-}
-inline ::NFFS::AnimatorMoves_Move* AnimatorMoves::mutable_xmovelist(int index) {
-  return xmovelist_.Mutable(index);
-}
-inline ::NFFS::AnimatorMoves_Move* AnimatorMoves::add_xmovelist() {
-  return xmovelist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorMoves_Move >&
-AnimatorMoves::xmovelist() const {
-  return xmovelist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorMoves_Move >*
-AnimatorMoves::mutable_xmovelist() {
-  return &xmovelist_;
-}
-
-// -------------------------------------------------------------------
-
-// CameraControlEvents_Camera
-
-// required float EventTime = 1;
-inline bool CameraControlEvents_Camera::has_eventtime() const {
+// required float eventTime = 1;
+inline bool CameraEvent_Camera::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CameraControlEvents_Camera::set_has_eventtime() {
+inline void CameraEvent_Camera::set_has_eventtime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CameraControlEvents_Camera::clear_has_eventtime() {
+inline void CameraEvent_Camera::clear_has_eventtime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CameraControlEvents_Camera::clear_eventtime() {
+inline void CameraEvent_Camera::clear_eventtime() {
   eventtime_ = 0;
   clear_has_eventtime();
 }
-inline float CameraControlEvents_Camera::eventtime() const {
+inline float CameraEvent_Camera::eventtime() const {
   return eventtime_;
 }
-inline void CameraControlEvents_Camera::set_eventtime(float value) {
+inline void CameraEvent_Camera::set_eventtime(float value) {
   set_has_eventtime();
   eventtime_ = value;
 }
 
-// required .NFFS.CameraControlEvents.ECEType EventType = 2;
-inline bool CameraControlEvents_Camera::has_eventtype() const {
+// required .NFFS.CameraEvent.CEType eventType = 2;
+inline bool CameraEvent_Camera::has_eventtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void CameraControlEvents_Camera::set_has_eventtype() {
+inline void CameraEvent_Camera::set_has_eventtype() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void CameraControlEvents_Camera::clear_has_eventtype() {
+inline void CameraEvent_Camera::clear_has_eventtype() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void CameraControlEvents_Camera::clear_eventtype() {
+inline void CameraEvent_Camera::clear_eventtype() {
   eventtype_ = 0;
   clear_has_eventtype();
 }
-inline ::NFFS::CameraControlEvents_ECEType CameraControlEvents_Camera::eventtype() const {
-  return static_cast< ::NFFS::CameraControlEvents_ECEType >(eventtype_);
+inline ::NFFS::CameraEvent_CEType CameraEvent_Camera::eventtype() const {
+  return static_cast< ::NFFS::CameraEvent_CEType >(eventtype_);
 }
-inline void CameraControlEvents_Camera::set_eventtype(::NFFS::CameraControlEvents_ECEType value) {
-  assert(::NFFS::CameraControlEvents_ECEType_IsValid(value));
+inline void CameraEvent_Camera::set_eventtype(::NFFS::CameraEvent_CEType value) {
+  assert(::NFFS::CameraEvent_CEType_IsValid(value));
   set_has_eventtype();
   eventtype_ = value;
 }
 
-// required .NFFS.FSVector3 AmountParam = 3;
-inline bool CameraControlEvents_Camera::has_amountparam() const {
+// required .NFFS.FSVector3 amountParam = 3;
+inline bool CameraEvent_Camera::has_amountparam() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void CameraControlEvents_Camera::set_has_amountparam() {
+inline void CameraEvent_Camera::set_has_amountparam() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void CameraControlEvents_Camera::clear_has_amountparam() {
+inline void CameraEvent_Camera::clear_has_amountparam() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void CameraControlEvents_Camera::clear_amountparam() {
+inline void CameraEvent_Camera::clear_amountparam() {
   if (amountparam_ != NULL) amountparam_->::NFFS::FSVector3::Clear();
   clear_has_amountparam();
 }
-inline const ::NFFS::FSVector3& CameraControlEvents_Camera::amountparam() const {
+inline const ::NFFS::FSVector3& CameraEvent_Camera::amountparam() const {
   return amountparam_ != NULL ? *amountparam_ : *default_instance_->amountparam_;
 }
-inline ::NFFS::FSVector3* CameraControlEvents_Camera::mutable_amountparam() {
+inline ::NFFS::FSVector3* CameraEvent_Camera::mutable_amountparam() {
   set_has_amountparam();
   if (amountparam_ == NULL) amountparam_ = new ::NFFS::FSVector3;
   return amountparam_;
 }
-inline ::NFFS::FSVector3* CameraControlEvents_Camera::release_amountparam() {
+inline ::NFFS::FSVector3* CameraEvent_Camera::release_amountparam() {
   clear_has_amountparam();
   ::NFFS::FSVector3* temp = amountparam_;
   amountparam_ = NULL;
   return temp;
 }
-inline void CameraControlEvents_Camera::set_allocated_amountparam(::NFFS::FSVector3* amountparam) {
+inline void CameraEvent_Camera::set_allocated_amountparam(::NFFS::FSVector3* amountparam) {
   delete amountparam_;
   amountparam_ = amountparam;
   if (amountparam) {
@@ -5627,664 +3586,62 @@ inline void CameraControlEvents_Camera::set_allocated_amountparam(::NFFS::FSVect
   }
 }
 
-// required float ShakeTime = 4;
-inline bool CameraControlEvents_Camera::has_shaketime() const {
+// required float shakeTime = 4;
+inline bool CameraEvent_Camera::has_shaketime() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void CameraControlEvents_Camera::set_has_shaketime() {
+inline void CameraEvent_Camera::set_has_shaketime() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void CameraControlEvents_Camera::clear_has_shaketime() {
+inline void CameraEvent_Camera::clear_has_shaketime() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void CameraControlEvents_Camera::clear_shaketime() {
+inline void CameraEvent_Camera::clear_shaketime() {
   shaketime_ = 0;
   clear_has_shaketime();
 }
-inline float CameraControlEvents_Camera::shaketime() const {
+inline float CameraEvent_Camera::shaketime() const {
   return shaketime_;
 }
-inline void CameraControlEvents_Camera::set_shaketime(float value) {
+inline void CameraEvent_Camera::set_shaketime(float value) {
   set_has_shaketime();
   shaketime_ = value;
 }
 
-// required string MethodCall = 5;
-inline bool CameraControlEvents_Camera::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void CameraControlEvents_Camera::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void CameraControlEvents_Camera::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void CameraControlEvents_Camera::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& CameraControlEvents_Camera::methodcall() const {
-  return *methodcall_;
-}
-inline void CameraControlEvents_Camera::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void CameraControlEvents_Camera::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void CameraControlEvents_Camera::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* CameraControlEvents_Camera::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* CameraControlEvents_Camera::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void CameraControlEvents_Camera::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 6;
-inline bool CameraControlEvents_Camera::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void CameraControlEvents_Camera::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void CameraControlEvents_Camera::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void CameraControlEvents_Camera::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& CameraControlEvents_Camera::methodparam() const {
-  return *methodparam_;
-}
-inline void CameraControlEvents_Camera::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void CameraControlEvents_Camera::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void CameraControlEvents_Camera::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* CameraControlEvents_Camera::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* CameraControlEvents_Camera::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void CameraControlEvents_Camera::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
 
-// CameraControlEvents
+// CameraEvent
 
-// repeated .NFFS.CameraControlEvents.Camera xCameraList = 1;
-inline int CameraControlEvents::xcameralist_size() const {
-  return xcameralist_.size();
+// repeated .NFFS.CameraEvent.Camera cameraEventList = 1;
+inline int CameraEvent::cameraeventlist_size() const {
+  return cameraeventlist_.size();
 }
-inline void CameraControlEvents::clear_xcameralist() {
-  xcameralist_.Clear();
+inline void CameraEvent::clear_cameraeventlist() {
+  cameraeventlist_.Clear();
 }
-inline const ::NFFS::CameraControlEvents_Camera& CameraControlEvents::xcameralist(int index) const {
-  return xcameralist_.Get(index);
+inline const ::NFFS::CameraEvent_Camera& CameraEvent::cameraeventlist(int index) const {
+  return cameraeventlist_.Get(index);
 }
-inline ::NFFS::CameraControlEvents_Camera* CameraControlEvents::mutable_xcameralist(int index) {
-  return xcameralist_.Mutable(index);
+inline ::NFFS::CameraEvent_Camera* CameraEvent::mutable_cameraeventlist(int index) {
+  return cameraeventlist_.Mutable(index);
 }
-inline ::NFFS::CameraControlEvents_Camera* CameraControlEvents::add_xcameralist() {
-  return xcameralist_.Add();
+inline ::NFFS::CameraEvent_Camera* CameraEvent::add_cameraeventlist() {
+  return cameraeventlist_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::CameraControlEvents_Camera >&
-CameraControlEvents::xcameralist() const {
-  return xcameralist_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::CameraEvent_Camera >&
+CameraEvent::cameraeventlist() const {
+  return cameraeventlist_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::CameraControlEvents_Camera >*
-CameraControlEvents::mutable_xcameralist() {
-  return &xcameralist_;
-}
-
-// -------------------------------------------------------------------
-
-// ParticleEvents_Particle
-
-// required float EventTime = 1;
-inline bool ParticleEvents_Particle::has_eventtime() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_eventtime() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ParticleEvents_Particle::clear_has_eventtime() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void ParticleEvents_Particle::clear_eventtime() {
-  eventtime_ = 0;
-  clear_has_eventtime();
-}
-inline float ParticleEvents_Particle::eventtime() const {
-  return eventtime_;
-}
-inline void ParticleEvents_Particle::set_eventtime(float value) {
-  set_has_eventtime();
-  eventtime_ = value;
-}
-
-// required .NFFS.ParticleEvents.EPERTYPE Rotation = 3;
-inline bool ParticleEvents_Particle::has_rotation() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_rotation() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ParticleEvents_Particle::clear_has_rotation() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void ParticleEvents_Particle::clear_rotation() {
-  rotation_ = 0;
-  clear_has_rotation();
-}
-inline ::NFFS::ParticleEvents_EPERTYPE ParticleEvents_Particle::rotation() const {
-  return static_cast< ::NFFS::ParticleEvents_EPERTYPE >(rotation_);
-}
-inline void ParticleEvents_Particle::set_rotation(::NFFS::ParticleEvents_EPERTYPE value) {
-  assert(::NFFS::ParticleEvents_EPERTYPE_IsValid(value));
-  set_has_rotation();
-  rotation_ = value;
-}
-
-// required string ParticlePath = 4;
-inline bool ParticleEvents_Particle::has_particlepath() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_particlepath() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ParticleEvents_Particle::clear_has_particlepath() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void ParticleEvents_Particle::clear_particlepath() {
-  if (particlepath_ != &::google::protobuf::internal::kEmptyString) {
-    particlepath_->clear();
-  }
-  clear_has_particlepath();
-}
-inline const ::std::string& ParticleEvents_Particle::particlepath() const {
-  return *particlepath_;
-}
-inline void ParticleEvents_Particle::set_particlepath(const ::std::string& value) {
-  set_has_particlepath();
-  if (particlepath_ == &::google::protobuf::internal::kEmptyString) {
-    particlepath_ = new ::std::string;
-  }
-  particlepath_->assign(value);
-}
-inline void ParticleEvents_Particle::set_particlepath(const char* value) {
-  set_has_particlepath();
-  if (particlepath_ == &::google::protobuf::internal::kEmptyString) {
-    particlepath_ = new ::std::string;
-  }
-  particlepath_->assign(value);
-}
-inline void ParticleEvents_Particle::set_particlepath(const char* value, size_t size) {
-  set_has_particlepath();
-  if (particlepath_ == &::google::protobuf::internal::kEmptyString) {
-    particlepath_ = new ::std::string;
-  }
-  particlepath_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ParticleEvents_Particle::mutable_particlepath() {
-  set_has_particlepath();
-  if (particlepath_ == &::google::protobuf::internal::kEmptyString) {
-    particlepath_ = new ::std::string;
-  }
-  return particlepath_;
-}
-inline ::std::string* ParticleEvents_Particle::release_particlepath() {
-  clear_has_particlepath();
-  if (particlepath_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = particlepath_;
-    particlepath_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ParticleEvents_Particle::set_allocated_particlepath(::std::string* particlepath) {
-  if (particlepath_ != &::google::protobuf::internal::kEmptyString) {
-    delete particlepath_;
-  }
-  if (particlepath) {
-    set_has_particlepath();
-    particlepath_ = particlepath;
-  } else {
-    clear_has_particlepath();
-    particlepath_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string TargetTacheName = 5;
-inline bool ParticleEvents_Particle::has_targettachename() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_targettachename() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ParticleEvents_Particle::clear_has_targettachename() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void ParticleEvents_Particle::clear_targettachename() {
-  if (targettachename_ != &::google::protobuf::internal::kEmptyString) {
-    targettachename_->clear();
-  }
-  clear_has_targettachename();
-}
-inline const ::std::string& ParticleEvents_Particle::targettachename() const {
-  return *targettachename_;
-}
-inline void ParticleEvents_Particle::set_targettachename(const ::std::string& value) {
-  set_has_targettachename();
-  if (targettachename_ == &::google::protobuf::internal::kEmptyString) {
-    targettachename_ = new ::std::string;
-  }
-  targettachename_->assign(value);
-}
-inline void ParticleEvents_Particle::set_targettachename(const char* value) {
-  set_has_targettachename();
-  if (targettachename_ == &::google::protobuf::internal::kEmptyString) {
-    targettachename_ = new ::std::string;
-  }
-  targettachename_->assign(value);
-}
-inline void ParticleEvents_Particle::set_targettachename(const char* value, size_t size) {
-  set_has_targettachename();
-  if (targettachename_ == &::google::protobuf::internal::kEmptyString) {
-    targettachename_ = new ::std::string;
-  }
-  targettachename_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ParticleEvents_Particle::mutable_targettachename() {
-  set_has_targettachename();
-  if (targettachename_ == &::google::protobuf::internal::kEmptyString) {
-    targettachename_ = new ::std::string;
-  }
-  return targettachename_;
-}
-inline ::std::string* ParticleEvents_Particle::release_targettachename() {
-  clear_has_targettachename();
-  if (targettachename_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targettachename_;
-    targettachename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ParticleEvents_Particle::set_allocated_targettachename(::std::string* targettachename) {
-  if (targettachename_ != &::google::protobuf::internal::kEmptyString) {
-    delete targettachename_;
-  }
-  if (targettachename) {
-    set_has_targettachename();
-    targettachename_ = targettachename;
-  } else {
-    clear_has_targettachename();
-    targettachename_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required .NFFS.FSVector3 TargetTacheOffest = 6;
-inline bool ParticleEvents_Particle::has_targettacheoffest() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_targettacheoffest() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ParticleEvents_Particle::clear_has_targettacheoffest() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void ParticleEvents_Particle::clear_targettacheoffest() {
-  if (targettacheoffest_ != NULL) targettacheoffest_->::NFFS::FSVector3::Clear();
-  clear_has_targettacheoffest();
-}
-inline const ::NFFS::FSVector3& ParticleEvents_Particle::targettacheoffest() const {
-  return targettacheoffest_ != NULL ? *targettacheoffest_ : *default_instance_->targettacheoffest_;
-}
-inline ::NFFS::FSVector3* ParticleEvents_Particle::mutable_targettacheoffest() {
-  set_has_targettacheoffest();
-  if (targettacheoffest_ == NULL) targettacheoffest_ = new ::NFFS::FSVector3;
-  return targettacheoffest_;
-}
-inline ::NFFS::FSVector3* ParticleEvents_Particle::release_targettacheoffest() {
-  clear_has_targettacheoffest();
-  ::NFFS::FSVector3* temp = targettacheoffest_;
-  targettacheoffest_ = NULL;
-  return temp;
-}
-inline void ParticleEvents_Particle::set_allocated_targettacheoffest(::NFFS::FSVector3* targettacheoffest) {
-  delete targettacheoffest_;
-  targettacheoffest_ = targettacheoffest;
-  if (targettacheoffest) {
-    set_has_targettacheoffest();
-  } else {
-    clear_has_targettacheoffest();
-  }
-}
-
-// required int32 CastToSurface = 7;
-inline bool ParticleEvents_Particle::has_casttosurface() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_casttosurface() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ParticleEvents_Particle::clear_has_casttosurface() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void ParticleEvents_Particle::clear_casttosurface() {
-  casttosurface_ = 0;
-  clear_has_casttosurface();
-}
-inline ::google::protobuf::int32 ParticleEvents_Particle::casttosurface() const {
-  return casttosurface_;
-}
-inline void ParticleEvents_Particle::set_casttosurface(::google::protobuf::int32 value) {
-  set_has_casttosurface();
-  casttosurface_ = value;
-}
-
-// required int32 BindTarget = 8;
-inline bool ParticleEvents_Particle::has_bindtarget() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_bindtarget() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ParticleEvents_Particle::clear_has_bindtarget() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void ParticleEvents_Particle::clear_bindtarget() {
-  bindtarget_ = 0;
-  clear_has_bindtarget();
-}
-inline ::google::protobuf::int32 ParticleEvents_Particle::bindtarget() const {
-  return bindtarget_;
-}
-inline void ParticleEvents_Particle::set_bindtarget(::google::protobuf::int32 value) {
-  set_has_bindtarget();
-  bindtarget_ = value;
-}
-
-// required float DestroyTime = 9;
-inline bool ParticleEvents_Particle::has_destroytime() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_destroytime() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ParticleEvents_Particle::clear_has_destroytime() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void ParticleEvents_Particle::clear_destroytime() {
-  destroytime_ = 0;
-  clear_has_destroytime();
-}
-inline float ParticleEvents_Particle::destroytime() const {
-  return destroytime_;
-}
-inline void ParticleEvents_Particle::set_destroytime(float value) {
-  set_has_destroytime();
-  destroytime_ = value;
-}
-
-// required string MethodCall = 10;
-inline bool ParticleEvents_Particle::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void ParticleEvents_Particle::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void ParticleEvents_Particle::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& ParticleEvents_Particle::methodcall() const {
-  return *methodcall_;
-}
-inline void ParticleEvents_Particle::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void ParticleEvents_Particle::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void ParticleEvents_Particle::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ParticleEvents_Particle::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* ParticleEvents_Particle::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ParticleEvents_Particle::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 11;
-inline bool ParticleEvents_Particle::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void ParticleEvents_Particle::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void ParticleEvents_Particle::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void ParticleEvents_Particle::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& ParticleEvents_Particle::methodparam() const {
-  return *methodparam_;
-}
-inline void ParticleEvents_Particle::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void ParticleEvents_Particle::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void ParticleEvents_Particle::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* ParticleEvents_Particle::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* ParticleEvents_Particle::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void ParticleEvents_Particle::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// ParticleEvents
-
-// repeated .NFFS.ParticleEvents.Particle xParticleList = 1;
-inline int ParticleEvents::xparticlelist_size() const {
-  return xparticlelist_.size();
-}
-inline void ParticleEvents::clear_xparticlelist() {
-  xparticlelist_.Clear();
-}
-inline const ::NFFS::ParticleEvents_Particle& ParticleEvents::xparticlelist(int index) const {
-  return xparticlelist_.Get(index);
-}
-inline ::NFFS::ParticleEvents_Particle* ParticleEvents::mutable_xparticlelist(int index) {
-  return xparticlelist_.Mutable(index);
-}
-inline ::NFFS::ParticleEvents_Particle* ParticleEvents::add_xparticlelist() {
-  return xparticlelist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::ParticleEvents_Particle >&
-ParticleEvents::xparticlelist() const {
-  return xparticlelist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::ParticleEvents_Particle >*
-ParticleEvents::mutable_xparticlelist() {
-  return &xparticlelist_;
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::CameraEvent_Camera >*
+CameraEvent::mutable_cameraeventlist() {
+  return &cameraeventlist_;
 }
 
 // -------------------------------------------------------------------
 
 // EnableEvents_Enable
 
-// required float EventTime = 1;
+// required float eventTime = 1;
 inline bool EnableEvents_Enable::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6306,7 +3663,7 @@ inline void EnableEvents_Enable::set_eventtime(float value) {
   eventtime_ = value;
 }
 
-// required .NFFS.EnableEvents.EEETYPE EventType = 2;
+// required .NFFS.EnableEvents.EEETYPE eventType = 2;
 inline bool EnableEvents_Enable::has_eventtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6329,7 +3686,7 @@ inline void EnableEvents_Enable::set_eventtype(::NFFS::EnableEvents_EEETYPE valu
   eventtype_ = value;
 }
 
-// required string TargetName = 3;
+// required string targetName = 3;
 inline bool EnableEvents_Enable::has_targetname() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6399,1133 +3756,133 @@ inline void EnableEvents_Enable::set_allocated_targetname(::std::string* targetn
   }
 }
 
-// required string MethodCall = 4;
-inline bool EnableEvents_Enable::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void EnableEvents_Enable::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void EnableEvents_Enable::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void EnableEvents_Enable::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& EnableEvents_Enable::methodcall() const {
-  return *methodcall_;
-}
-inline void EnableEvents_Enable::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void EnableEvents_Enable::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void EnableEvents_Enable::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* EnableEvents_Enable::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* EnableEvents_Enable::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void EnableEvents_Enable::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 5;
-inline bool EnableEvents_Enable::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void EnableEvents_Enable::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void EnableEvents_Enable::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void EnableEvents_Enable::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& EnableEvents_Enable::methodparam() const {
-  return *methodparam_;
-}
-inline void EnableEvents_Enable::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void EnableEvents_Enable::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void EnableEvents_Enable::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* EnableEvents_Enable::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* EnableEvents_Enable::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void EnableEvents_Enable::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
 // -------------------------------------------------------------------
 
 // EnableEvents
 
-// repeated .NFFS.EnableEvents.Enable xEnableList = 1;
-inline int EnableEvents::xenablelist_size() const {
-  return xenablelist_.size();
+// repeated .NFFS.EnableEvents.Enable enableList = 1;
+inline int EnableEvents::enablelist_size() const {
+  return enablelist_.size();
 }
-inline void EnableEvents::clear_xenablelist() {
-  xenablelist_.Clear();
+inline void EnableEvents::clear_enablelist() {
+  enablelist_.Clear();
 }
-inline const ::NFFS::EnableEvents_Enable& EnableEvents::xenablelist(int index) const {
-  return xenablelist_.Get(index);
+inline const ::NFFS::EnableEvents_Enable& EnableEvents::enablelist(int index) const {
+  return enablelist_.Get(index);
 }
-inline ::NFFS::EnableEvents_Enable* EnableEvents::mutable_xenablelist(int index) {
-  return xenablelist_.Mutable(index);
+inline ::NFFS::EnableEvents_Enable* EnableEvents::mutable_enablelist(int index) {
+  return enablelist_.Mutable(index);
 }
-inline ::NFFS::EnableEvents_Enable* EnableEvents::add_xenablelist() {
-  return xenablelist_.Add();
+inline ::NFFS::EnableEvents_Enable* EnableEvents::add_enablelist() {
+  return enablelist_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable >&
-EnableEvents::xenablelist() const {
-  return xenablelist_;
+EnableEvents::enablelist() const {
+  return enablelist_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::NFFS::EnableEvents_Enable >*
-EnableEvents::mutable_xenablelist() {
-  return &xenablelist_;
+EnableEvents::mutable_enablelist() {
+  return &enablelist_;
 }
 
 // -------------------------------------------------------------------
 
-// TrailEvents_Trail
+// GlobalSpeed_Speed
 
-// required float EventTime = 1;
-inline bool TrailEvents_Trail::has_eventtime() const {
+// required float eventTime = 1;
+inline bool GlobalSpeed_Speed::has_eventtime() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void TrailEvents_Trail::set_has_eventtime() {
+inline void GlobalSpeed_Speed::set_has_eventtime() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void TrailEvents_Trail::clear_has_eventtime() {
+inline void GlobalSpeed_Speed::clear_has_eventtime() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void TrailEvents_Trail::clear_eventtime() {
+inline void GlobalSpeed_Speed::clear_eventtime() {
   eventtime_ = 0;
   clear_has_eventtime();
 }
-inline float TrailEvents_Trail::eventtime() const {
+inline float GlobalSpeed_Speed::eventtime() const {
   return eventtime_;
 }
-inline void TrailEvents_Trail::set_eventtime(float value) {
+inline void GlobalSpeed_Speed::set_eventtime(float value) {
   set_has_eventtime();
   eventtime_ = value;
 }
 
-// required .NFFS.TrailEvents.TEETYPE EventType = 2;
-inline bool TrailEvents_Trail::has_eventtype() const {
+// required .NFFS.GlobalSpeed.EGSTYPE eventType = 2;
+inline bool GlobalSpeed_Speed::has_eventtype() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void TrailEvents_Trail::set_has_eventtype() {
+inline void GlobalSpeed_Speed::set_has_eventtype() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void TrailEvents_Trail::clear_has_eventtype() {
+inline void GlobalSpeed_Speed::clear_has_eventtype() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void TrailEvents_Trail::clear_eventtype() {
+inline void GlobalSpeed_Speed::clear_eventtype() {
   eventtype_ = 0;
   clear_has_eventtype();
 }
-inline ::NFFS::TrailEvents_TEETYPE TrailEvents_Trail::eventtype() const {
-  return static_cast< ::NFFS::TrailEvents_TEETYPE >(eventtype_);
+inline ::NFFS::GlobalSpeed_EGSTYPE GlobalSpeed_Speed::eventtype() const {
+  return static_cast< ::NFFS::GlobalSpeed_EGSTYPE >(eventtype_);
 }
-inline void TrailEvents_Trail::set_eventtype(::NFFS::TrailEvents_TEETYPE value) {
-  assert(::NFFS::TrailEvents_TEETYPE_IsValid(value));
+inline void GlobalSpeed_Speed::set_eventtype(::NFFS::GlobalSpeed_EGSTYPE value) {
+  assert(::NFFS::GlobalSpeed_EGSTYPE_IsValid(value));
   set_has_eventtype();
   eventtype_ = value;
 }
 
-// required string TargetName = 3;
-inline bool TrailEvents_Trail::has_targetname() const {
+// required float speedValue = 3;
+inline bool GlobalSpeed_Speed::has_speedvalue() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void TrailEvents_Trail::set_has_targetname() {
+inline void GlobalSpeed_Speed::set_has_speedvalue() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void TrailEvents_Trail::clear_has_targetname() {
+inline void GlobalSpeed_Speed::clear_has_speedvalue() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void TrailEvents_Trail::clear_targetname() {
-  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-    targetname_->clear();
-  }
-  clear_has_targetname();
-}
-inline const ::std::string& TrailEvents_Trail::targetname() const {
-  return *targetname_;
-}
-inline void TrailEvents_Trail::set_targetname(const ::std::string& value) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
-  }
-  targetname_->assign(value);
-}
-inline void TrailEvents_Trail::set_targetname(const char* value) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
-  }
-  targetname_->assign(value);
-}
-inline void TrailEvents_Trail::set_targetname(const char* value, size_t size) {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
-  }
-  targetname_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* TrailEvents_Trail::mutable_targetname() {
-  set_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    targetname_ = new ::std::string;
-  }
-  return targetname_;
-}
-inline ::std::string* TrailEvents_Trail::release_targetname() {
-  clear_has_targetname();
-  if (targetname_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = targetname_;
-    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void TrailEvents_Trail::set_allocated_targetname(::std::string* targetname) {
-  if (targetname_ != &::google::protobuf::internal::kEmptyString) {
-    delete targetname_;
-  }
-  if (targetname) {
-    set_has_targetname();
-    targetname_ = targetname;
-  } else {
-    clear_has_targetname();
-    targetname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodCall = 4;
-inline bool TrailEvents_Trail::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void TrailEvents_Trail::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void TrailEvents_Trail::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void TrailEvents_Trail::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& TrailEvents_Trail::methodcall() const {
-  return *methodcall_;
-}
-inline void TrailEvents_Trail::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void TrailEvents_Trail::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void TrailEvents_Trail::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* TrailEvents_Trail::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* TrailEvents_Trail::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void TrailEvents_Trail::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 5;
-inline bool TrailEvents_Trail::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void TrailEvents_Trail::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void TrailEvents_Trail::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void TrailEvents_Trail::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& TrailEvents_Trail::methodparam() const {
-  return *methodparam_;
-}
-inline void TrailEvents_Trail::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void TrailEvents_Trail::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void TrailEvents_Trail::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* TrailEvents_Trail::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* TrailEvents_Trail::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void TrailEvents_Trail::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// TrailEvents
-
-// repeated .NFFS.TrailEvents.Trail xTrailList = 1;
-inline int TrailEvents::xtraillist_size() const {
-  return xtraillist_.size();
-}
-inline void TrailEvents::clear_xtraillist() {
-  xtraillist_.Clear();
-}
-inline const ::NFFS::TrailEvents_Trail& TrailEvents::xtraillist(int index) const {
-  return xtraillist_.Get(index);
-}
-inline ::NFFS::TrailEvents_Trail* TrailEvents::mutable_xtraillist(int index) {
-  return xtraillist_.Mutable(index);
-}
-inline ::NFFS::TrailEvents_Trail* TrailEvents::add_xtraillist() {
-  return xtraillist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >&
-TrailEvents::xtraillist() const {
-  return xtraillist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::TrailEvents_Trail >*
-TrailEvents::mutable_xtraillist() {
-  return &xtraillist_;
-}
-
-// -------------------------------------------------------------------
-
-// AudioEvents_Audio
-
-// required float EventTime = 1;
-inline bool AudioEvents_Audio::has_eventtime() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void AudioEvents_Audio::set_has_eventtime() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void AudioEvents_Audio::clear_has_eventtime() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void AudioEvents_Audio::clear_eventtime() {
-  eventtime_ = 0;
-  clear_has_eventtime();
-}
-inline float AudioEvents_Audio::eventtime() const {
-  return eventtime_;
-}
-inline void AudioEvents_Audio::set_eventtime(float value) {
-  set_has_eventtime();
-  eventtime_ = value;
-}
-
-// required .NFFS.AudioEvents.AEETYPE EventType = 2;
-inline bool AudioEvents_Audio::has_eventtype() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void AudioEvents_Audio::set_has_eventtype() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void AudioEvents_Audio::clear_has_eventtype() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void AudioEvents_Audio::clear_eventtype() {
-  eventtype_ = 0;
-  clear_has_eventtype();
-}
-inline ::NFFS::AudioEvents_AEETYPE AudioEvents_Audio::eventtype() const {
-  return static_cast< ::NFFS::AudioEvents_AEETYPE >(eventtype_);
-}
-inline void AudioEvents_Audio::set_eventtype(::NFFS::AudioEvents_AEETYPE value) {
-  assert(::NFFS::AudioEvents_AEETYPE_IsValid(value));
-  set_has_eventtype();
-  eventtype_ = value;
-}
-
-// required string AudioName = 3;
-inline bool AudioEvents_Audio::has_audioname() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void AudioEvents_Audio::set_has_audioname() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void AudioEvents_Audio::clear_has_audioname() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void AudioEvents_Audio::clear_audioname() {
-  if (audioname_ != &::google::protobuf::internal::kEmptyString) {
-    audioname_->clear();
-  }
-  clear_has_audioname();
-}
-inline const ::std::string& AudioEvents_Audio::audioname() const {
-  return *audioname_;
-}
-inline void AudioEvents_Audio::set_audioname(const ::std::string& value) {
-  set_has_audioname();
-  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
-    audioname_ = new ::std::string;
-  }
-  audioname_->assign(value);
-}
-inline void AudioEvents_Audio::set_audioname(const char* value) {
-  set_has_audioname();
-  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
-    audioname_ = new ::std::string;
-  }
-  audioname_->assign(value);
-}
-inline void AudioEvents_Audio::set_audioname(const char* value, size_t size) {
-  set_has_audioname();
-  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
-    audioname_ = new ::std::string;
-  }
-  audioname_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AudioEvents_Audio::mutable_audioname() {
-  set_has_audioname();
-  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
-    audioname_ = new ::std::string;
-  }
-  return audioname_;
-}
-inline ::std::string* AudioEvents_Audio::release_audioname() {
-  clear_has_audioname();
-  if (audioname_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = audioname_;
-    audioname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AudioEvents_Audio::set_allocated_audioname(::std::string* audioname) {
-  if (audioname_ != &::google::protobuf::internal::kEmptyString) {
-    delete audioname_;
-  }
-  if (audioname) {
-    set_has_audioname();
-    audioname_ = audioname;
-  } else {
-    clear_has_audioname();
-    audioname_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodCall = 4;
-inline bool AudioEvents_Audio::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void AudioEvents_Audio::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void AudioEvents_Audio::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void AudioEvents_Audio::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& AudioEvents_Audio::methodcall() const {
-  return *methodcall_;
-}
-inline void AudioEvents_Audio::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AudioEvents_Audio::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AudioEvents_Audio::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AudioEvents_Audio::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* AudioEvents_Audio::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AudioEvents_Audio::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 5;
-inline bool AudioEvents_Audio::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void AudioEvents_Audio::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void AudioEvents_Audio::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void AudioEvents_Audio::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& AudioEvents_Audio::methodparam() const {
-  return *methodparam_;
-}
-inline void AudioEvents_Audio::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void AudioEvents_Audio::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void AudioEvents_Audio::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AudioEvents_Audio::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* AudioEvents_Audio::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AudioEvents_Audio::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// AudioEvents
-
-// repeated .NFFS.AudioEvents.Audio xAudioList = 1;
-inline int AudioEvents::xaudiolist_size() const {
-  return xaudiolist_.size();
-}
-inline void AudioEvents::clear_xaudiolist() {
-  xaudiolist_.Clear();
-}
-inline const ::NFFS::AudioEvents_Audio& AudioEvents::xaudiolist(int index) const {
-  return xaudiolist_.Get(index);
-}
-inline ::NFFS::AudioEvents_Audio* AudioEvents::mutable_xaudiolist(int index) {
-  return xaudiolist_.Mutable(index);
-}
-inline ::NFFS::AudioEvents_Audio* AudioEvents::add_xaudiolist() {
-  return xaudiolist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >&
-AudioEvents::xaudiolist() const {
-  return xaudiolist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::AudioEvents_Audio >*
-AudioEvents::mutable_xaudiolist() {
-  return &xaudiolist_;
-}
-
-// -------------------------------------------------------------------
-
-// GlobalSpeeds_Speed
-
-// required float EventTime = 1;
-inline bool GlobalSpeeds_Speed::has_eventtime() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void GlobalSpeeds_Speed::set_has_eventtime() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void GlobalSpeeds_Speed::clear_has_eventtime() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void GlobalSpeeds_Speed::clear_eventtime() {
-  eventtime_ = 0;
-  clear_has_eventtime();
-}
-inline float GlobalSpeeds_Speed::eventtime() const {
-  return eventtime_;
-}
-inline void GlobalSpeeds_Speed::set_eventtime(float value) {
-  set_has_eventtime();
-  eventtime_ = value;
-}
-
-// required .NFFS.GlobalSpeeds.EGSTYPE EventType = 2;
-inline bool GlobalSpeeds_Speed::has_eventtype() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void GlobalSpeeds_Speed::set_has_eventtype() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void GlobalSpeeds_Speed::clear_has_eventtype() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void GlobalSpeeds_Speed::clear_eventtype() {
-  eventtype_ = 0;
-  clear_has_eventtype();
-}
-inline ::NFFS::GlobalSpeeds_EGSTYPE GlobalSpeeds_Speed::eventtype() const {
-  return static_cast< ::NFFS::GlobalSpeeds_EGSTYPE >(eventtype_);
-}
-inline void GlobalSpeeds_Speed::set_eventtype(::NFFS::GlobalSpeeds_EGSTYPE value) {
-  assert(::NFFS::GlobalSpeeds_EGSTYPE_IsValid(value));
-  set_has_eventtype();
-  eventtype_ = value;
-}
-
-// required float SpeedValue = 3;
-inline bool GlobalSpeeds_Speed::has_speedvalue() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void GlobalSpeeds_Speed::set_has_speedvalue() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void GlobalSpeeds_Speed::clear_has_speedvalue() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void GlobalSpeeds_Speed::clear_speedvalue() {
+inline void GlobalSpeed_Speed::clear_speedvalue() {
   speedvalue_ = 0;
   clear_has_speedvalue();
 }
-inline float GlobalSpeeds_Speed::speedvalue() const {
+inline float GlobalSpeed_Speed::speedvalue() const {
   return speedvalue_;
 }
-inline void GlobalSpeeds_Speed::set_speedvalue(float value) {
+inline void GlobalSpeed_Speed::set_speedvalue(float value) {
   set_has_speedvalue();
   speedvalue_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// GlobalSpeeds
+// GlobalSpeed
 
-// repeated .NFFS.GlobalSpeeds.Speed xSpeedList = 1;
-inline int GlobalSpeeds::xspeedlist_size() const {
-  return xspeedlist_.size();
+// repeated .NFFS.GlobalSpeed.Speed speedList = 1;
+inline int GlobalSpeed::speedlist_size() const {
+  return speedlist_.size();
 }
-inline void GlobalSpeeds::clear_xspeedlist() {
-  xspeedlist_.Clear();
+inline void GlobalSpeed::clear_speedlist() {
+  speedlist_.Clear();
 }
-inline const ::NFFS::GlobalSpeeds_Speed& GlobalSpeeds::xspeedlist(int index) const {
-  return xspeedlist_.Get(index);
+inline const ::NFFS::GlobalSpeed_Speed& GlobalSpeed::speedlist(int index) const {
+  return speedlist_.Get(index);
 }
-inline ::NFFS::GlobalSpeeds_Speed* GlobalSpeeds::mutable_xspeedlist(int index) {
-  return xspeedlist_.Mutable(index);
+inline ::NFFS::GlobalSpeed_Speed* GlobalSpeed::mutable_speedlist(int index) {
+  return speedlist_.Mutable(index);
 }
-inline ::NFFS::GlobalSpeeds_Speed* GlobalSpeeds::add_xspeedlist() {
-  return xspeedlist_.Add();
+inline ::NFFS::GlobalSpeed_Speed* GlobalSpeed::add_speedlist() {
+  return speedlist_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >&
-GlobalSpeeds::xspeedlist() const {
-  return xspeedlist_;
+inline const ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeed_Speed >&
+GlobalSpeed::speedlist() const {
+  return speedlist_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeeds_Speed >*
-GlobalSpeeds::mutable_xspeedlist() {
-  return &xspeedlist_;
-}
-
-// -------------------------------------------------------------------
-
-// AnimatorFlys_Fly
-
-// required float EventTime = 1;
-inline bool AnimatorFlys_Fly::has_eventtime() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_eventtime() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void AnimatorFlys_Fly::clear_has_eventtime() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void AnimatorFlys_Fly::clear_eventtime() {
-  eventtime_ = 0;
-  clear_has_eventtime();
-}
-inline float AnimatorFlys_Fly::eventtime() const {
-  return eventtime_;
-}
-inline void AnimatorFlys_Fly::set_eventtime(float value) {
-  set_has_eventtime();
-  eventtime_ = value;
-}
-
-// required .NFFS.AnimatorFlys.EAFType EventType = 2;
-inline bool AnimatorFlys_Fly::has_eventtype() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_eventtype() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void AnimatorFlys_Fly::clear_has_eventtype() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void AnimatorFlys_Fly::clear_eventtype() {
-  eventtype_ = 0;
-  clear_has_eventtype();
-}
-inline ::NFFS::AnimatorFlys_EAFType AnimatorFlys_Fly::eventtype() const {
-  return static_cast< ::NFFS::AnimatorFlys_EAFType >(eventtype_);
-}
-inline void AnimatorFlys_Fly::set_eventtype(::NFFS::AnimatorFlys_EAFType value) {
-  assert(::NFFS::AnimatorFlys_EAFType_IsValid(value));
-  set_has_eventtype();
-  eventtype_ = value;
-}
-
-// required float MoveDis = 3;
-inline bool AnimatorFlys_Fly::has_movedis() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_movedis() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void AnimatorFlys_Fly::clear_has_movedis() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void AnimatorFlys_Fly::clear_movedis() {
-  movedis_ = 0;
-  clear_has_movedis();
-}
-inline float AnimatorFlys_Fly::movedis() const {
-  return movedis_;
-}
-inline void AnimatorFlys_Fly::set_movedis(float value) {
-  set_has_movedis();
-  movedis_ = value;
-}
-
-// required float MoveTime = 4;
-inline bool AnimatorFlys_Fly::has_movetime() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_movetime() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void AnimatorFlys_Fly::clear_has_movetime() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void AnimatorFlys_Fly::clear_movetime() {
-  movetime_ = 0;
-  clear_has_movetime();
-}
-inline float AnimatorFlys_Fly::movetime() const {
-  return movetime_;
-}
-inline void AnimatorFlys_Fly::set_movetime(float value) {
-  set_has_movetime();
-  movetime_ = value;
-}
-
-// required float MoveTopDis = 5;
-inline bool AnimatorFlys_Fly::has_movetopdis() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_movetopdis() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void AnimatorFlys_Fly::clear_has_movetopdis() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void AnimatorFlys_Fly::clear_movetopdis() {
-  movetopdis_ = 0;
-  clear_has_movetopdis();
-}
-inline float AnimatorFlys_Fly::movetopdis() const {
-  return movetopdis_;
-}
-inline void AnimatorFlys_Fly::set_movetopdis(float value) {
-  set_has_movetopdis();
-  movetopdis_ = value;
-}
-
-// required string MethodCall = 6;
-inline bool AnimatorFlys_Fly::has_methodcall() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_methodcall() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void AnimatorFlys_Fly::clear_has_methodcall() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void AnimatorFlys_Fly::clear_methodcall() {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    methodcall_->clear();
-  }
-  clear_has_methodcall();
-}
-inline const ::std::string& AnimatorFlys_Fly::methodcall() const {
-  return *methodcall_;
-}
-inline void AnimatorFlys_Fly::set_methodcall(const ::std::string& value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AnimatorFlys_Fly::set_methodcall(const char* value) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(value);
-}
-inline void AnimatorFlys_Fly::set_methodcall(const char* value, size_t size) {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  methodcall_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AnimatorFlys_Fly::mutable_methodcall() {
-  set_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    methodcall_ = new ::std::string;
-  }
-  return methodcall_;
-}
-inline ::std::string* AnimatorFlys_Fly::release_methodcall() {
-  clear_has_methodcall();
-  if (methodcall_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodcall_;
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AnimatorFlys_Fly::set_allocated_methodcall(::std::string* methodcall) {
-  if (methodcall_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodcall_;
-  }
-  if (methodcall) {
-    set_has_methodcall();
-    methodcall_ = methodcall;
-  } else {
-    clear_has_methodcall();
-    methodcall_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string MethodParam = 7;
-inline bool AnimatorFlys_Fly::has_methodparam() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void AnimatorFlys_Fly::set_has_methodparam() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void AnimatorFlys_Fly::clear_has_methodparam() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void AnimatorFlys_Fly::clear_methodparam() {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    methodparam_->clear();
-  }
-  clear_has_methodparam();
-}
-inline const ::std::string& AnimatorFlys_Fly::methodparam() const {
-  return *methodparam_;
-}
-inline void AnimatorFlys_Fly::set_methodparam(const ::std::string& value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void AnimatorFlys_Fly::set_methodparam(const char* value) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(value);
-}
-inline void AnimatorFlys_Fly::set_methodparam(const char* value, size_t size) {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  methodparam_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* AnimatorFlys_Fly::mutable_methodparam() {
-  set_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    methodparam_ = new ::std::string;
-  }
-  return methodparam_;
-}
-inline ::std::string* AnimatorFlys_Fly::release_methodparam() {
-  clear_has_methodparam();
-  if (methodparam_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = methodparam_;
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void AnimatorFlys_Fly::set_allocated_methodparam(::std::string* methodparam) {
-  if (methodparam_ != &::google::protobuf::internal::kEmptyString) {
-    delete methodparam_;
-  }
-  if (methodparam) {
-    set_has_methodparam();
-    methodparam_ = methodparam;
-  } else {
-    clear_has_methodparam();
-    methodparam_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
-
-// AnimatorFlys
-
-// repeated .NFFS.AnimatorFlys.Fly xFlyList = 1;
-inline int AnimatorFlys::xflylist_size() const {
-  return xflylist_.size();
-}
-inline void AnimatorFlys::clear_xflylist() {
-  xflylist_.Clear();
-}
-inline const ::NFFS::AnimatorFlys_Fly& AnimatorFlys::xflylist(int index) const {
-  return xflylist_.Get(index);
-}
-inline ::NFFS::AnimatorFlys_Fly* AnimatorFlys::mutable_xflylist(int index) {
-  return xflylist_.Mutable(index);
-}
-inline ::NFFS::AnimatorFlys_Fly* AnimatorFlys::add_xflylist() {
-  return xflylist_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >&
-AnimatorFlys::xflylist() const {
-  return xflylist_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::NFFS::AnimatorFlys_Fly >*
-AnimatorFlys::mutable_xflylist() {
-  return &xflylist_;
+inline ::google::protobuf::RepeatedPtrField< ::NFFS::GlobalSpeed_Speed >*
+GlobalSpeed::mutable_speedlist() {
+  return &speedlist_;
 }
 
 
@@ -7538,48 +3895,28 @@ namespace google {
 namespace protobuf {
 
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::SuwayyahEvents_ESEType>() {
-  return ::NFFS::SuwayyahEvents_ESEType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::BulletEvent_EBEType>() {
+  return ::NFFS::BulletEvent_EBEType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::BulletEvents_EBEType>() {
-  return ::NFFS::BulletEvents_EBEType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::BulletEvent_EBE_BACKType>() {
+  return ::NFFS::BulletEvent_EBE_BACKType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::BulletEvents_EBE_BACKType>() {
-  return ::NFFS::BulletEvents_EBE_BACKType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::MoveEvent_METype>() {
+  return ::NFFS::MoveEvent_METype_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::AnimatorMoves_EAMType>() {
-  return ::NFFS::AnimatorMoves_EAMType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::CameraControlEvents_ECEType>() {
-  return ::NFFS::CameraControlEvents_ECEType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::ParticleEvents_EPERTYPE>() {
-  return ::NFFS::ParticleEvents_EPERTYPE_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::CameraEvent_CEType>() {
+  return ::NFFS::CameraEvent_CEType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::EnableEvents_EEETYPE>() {
   return ::NFFS::EnableEvents_EEETYPE_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::TrailEvents_TEETYPE>() {
-  return ::NFFS::TrailEvents_TEETYPE_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::AudioEvents_AEETYPE>() {
-  return ::NFFS::AudioEvents_AEETYPE_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::GlobalSpeeds_EGSTYPE>() {
-  return ::NFFS::GlobalSpeeds_EGSTYPE_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::AnimatorFlys_EAFType>() {
-  return ::NFFS::AnimatorFlys_EAFType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFFS::GlobalSpeed_EGSTYPE>() {
+  return ::NFFS::GlobalSpeed_EGSTYPE_descriptor();
 }
 
 }  // namespace google

@@ -324,6 +324,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqEnterGameServer));
   ReqAckEnterGameSuccess_descriptor_ = file->message_type(1);
   static const int ReqAckEnterGameSuccess_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckEnterGameSuccess, arg_),
   };
   ReqAckEnterGameSuccess_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -338,6 +339,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckEnterGameSuccess));
   ReqHeartBeat_descriptor_ = file->message_type(2);
   static const int ReqHeartBeat_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqHeartBeat, arg_),
   };
   ReqHeartBeat_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -352,6 +354,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqHeartBeat));
   ReqLeaveGameServer_descriptor_ = file->message_type(3);
   static const int ReqLeaveGameServer_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqLeaveGameServer, arg_),
   };
   ReqLeaveGameServer_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1659,7 +1662,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(AckMapHunting));
   ReqMapKingWar_descriptor_ = file->message_type(79);
   static const int ReqMapKingWar_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapKingWar, map_title_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMapKingWar, map_title_),
   };
   ReqMapKingWar_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1674,6 +1677,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqMapKingWar));
   AckMapKingWar_descriptor_ = file->message_type(80);
   static const int AckMapKingWar_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMapKingWar, map_title_),
   };
   AckMapKingWar_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -2164,224 +2168,225 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\n\020NFMsgShare.proto\022\005NFMsg\032\016NFDefine.prot"
     "o\032\017NFMsgBase.proto\"^\n\022ReqEnterGameServer"
     "\022\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022\017\n\007account\030\002 "
-    "\002(\014\022\017\n\007game_id\030\003 \002(\005\022\014\n\004name\030\004 \002(\014\"\030\n\026Re"
-    "qAckEnterGameSuccess\"\016\n\014ReqHeartBeat\"\024\n\022"
-    "ReqLeaveGameServer\"\267\001\n\017PlayerEntryInfo\022!"
-    "\n\013object_guid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002"
-    " \002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_typ"
-    "e\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfig_"
-    "id\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id\030\t"
-    " \002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_lis"
-    "t\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\"7\n\022AckPl"
-    "ayerLeaveList\022!\n\013object_list\030\001 \003(\0132\014.NFM"
-    "sg.Ident\"\367\001\n\rReqAckSynData\022\033\n\005syser\030\001 \002("
-    "\0132\014.NFMsg.Ident\022!\n\013object_list\030\002 \003(\0132\014.N"
-    "FMsg.Ident\022\014\n\004data\030\003 \002(\014\022.\n\010syn_type\030\004 \002"
-    "(\0162\034.NFMsg.ReqAckSynData.SynType\022 \n\006msg_"
-    "id\030\005 \002(\0162\020.NFMsg.ESynMsgID\"F\n\007SynType\022\r\n"
-    "\tEST_GROUP\020\001\022\r\n\tEST_SCENE\020\002\022\r\n\tEST_GUILD"
-    "\020\003\022\016\n\nEST_FRIEND\020\004\"\316\001\n\020ReqAckPlayerMove\022"
-    "\033\n\005mover\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010moveType"
-    "\030\002 \002(\005\022\r\n\005speed\030\003 \002(\002\022\014\n\004time\030\004 \002(\005\022\"\n\nt"
-    "arget_pos\030\005 \003(\0132\016.NFMsg.Vector3\022\"\n\nsourc"
-    "e_pos\030\006 \003(\0132\016.NFMsg.Vector3\022&\n\016move_dire"
-    "ction\030\007 \003(\0132\016.NFMsg.Vector3\"\236\003\n\020ReqAckPl"
-    "ayerChat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg.Ident\022"
-    "8\n\tchat_type\030\002 \002(\0162%.NFMsg.ReqAckPlayerC"
-    "hat.EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\t"
-    "chat_name\030\004 \002(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFM"
-    "sg.Ident\022=\n\016Container_data\030\006 \003(\0132%.NFMsg"
-    ".ReqAckPlayerChat.ChatContainer\032Y\n\rChatC"
-    "ontainer\022\025\n\rConTainerType\030\002 \002(\005\022\021\n\tdata_"
-    "info\030\003 \002(\014\"\036\n\rContainerType\022\r\n\tEGCT_ITEM"
-    "\020\001\"P\n\rEGameChatType\022\016\n\nEGCT_GUILD\020\000\022\020\n\014E"
-    "GCT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WOR"
-    "LD\020\003\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001 \002("
-    "\0132\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \002(\005\0221\n"
-    "\neffect_rlt\030\003 \002(\0162\035.NFMsg.EffectData.ERe"
-    "sultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n"
-    "\013EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MI"
-    "SS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022\032\n\004"
-    "user\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 \002"
-    "(\014\022\021\n\tuse_index\030\003 \002(\005\022&\n\013effect_data\030\004 \003"
-    "(\0132\021.NFMsg.EffectData\"\265\001\n\rReqAckUseItem\022"
-    "\032\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid"
-    "\030\002 \002(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003("
-    "\0132\021.NFMsg.EffectData\022\037\n\004item\030\004 \002(\0132\021.NFM"
-    "sg.ItemStruct\022\036\n\010targetid\030\005 \002(\0132\014.NFMsg."
-    "Ident\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_ty"
-    "pe\030\001 \002(\0162$.NFMsg.ReqAckSwapScene.EGameSw"
-    "apType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002("
-    "\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004da"
-    "ta\030\007 \001(\t\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL"
-    "\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EG"
-    "ST_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001"
-    " \001(\t\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022\022\n\ni"
-    "tem_count\030\002 \002(\005\"\?\n\016CurrencyStruct\022\025\n\rcur"
-    "rency_type\030\001 \002(\005\022\026\n\016currency_count\030\002 \002(\005"
-    "\"2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \002(\005\022\017\n\007d"
-    "iamond\030\002 \002(\005\"\016\n\014ReqEndBattle\"{\n\014AckEndBa"
-    "ttle\022\013\n\003win\030\001 \002(\005\022\014\n\004star\030\002 \002(\005\022\014\n\004gold\030"
-    "\003 \002(\005\022\013\n\003exp\030\004 \002(\005\022\017\n\007diamond\030\005 \002(\005\022$\n\ti"
-    "tem_list\030\006 \003(\0132\021.NFMsg.ItemStruct\"2\n\017Req"
-    "PickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg."
-    "Ident\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\""
-    "#\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"M\n\014"
-    "ReqWearEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Id"
-    "ent\022\036\n\010Targetid\030\002 \002(\0132\014.NFMsg.Ident\"M\n\014T"
-    "akeOffEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\036\n\010Targetid\030\002 \002(\0132\014.NFMsg.Ident\"\357\001\n\022R"
-    "eqAckJoinActivity\022B\n\ractivity_type\030\001 \002(\016"
-    "2+.NFMsg.ReqAckJoinActivity.EGameActivit"
-    "yType\022I\n\021sub_activity_type\030\002 \002(\0162..NFMsg"
-    ".ReqAckJoinActivity.EGameActivitySubType"
-    "\"!\n\021EGameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024E"
-    "GameActivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021"
-    "ReqAckCreateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NF"
-    "Msg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSear"
-    "chGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSearc"
-    "hGuild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSe"
-    "archGuild.SearchGuildObject\032\300\001\n\021SearchGu"
-    "ildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002("
-    "\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036\n\026guild_m"
-    "ember_max_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 \002"
-    "(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGuil"
-    "d\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngui"
-    "ld_name\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010gui"
-    "ld_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030"
-    "\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_"
-    "id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002("
-    "\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.Re"
-    "qAckOprGuildMember.EGGuildMemberOprType\""
-    "A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013"
-    "\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGu"
-    "ildEctype\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\"9\n\030ReqIntensifylevelToEquip\022\035\n\007equipid"
-    "\030\001 \002(\0132\014.NFMsg.Ident\"I\n\030AckIntensifyleve"
-    "lToEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022"
-    "\016\n\006result\030\002 \002(\005\"/\n\016ReqHoleToEquip\022\035\n\007equ"
-    "ipid\030\001 \002(\0132\014.NFMsg.Ident\"\?\n\016AckHoleToEqu"
-    "ip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006res"
-    "ult\030\002 \002(\005\"Z\n\024ReqInlaystoneToEquip\022\035\n\007equ"
-    "ipid\030\001 \002(\0132\014.NFMsg.Ident\022\017\n\007stoneid\030\002 \002("
-    "\014\022\022\n\nhole_index\030\003 \002(\005\"E\n\024AckInlaystoneTo"
-    "Equip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006"
-    "result\030\002 \002(\005\"f\n\026ReqElementlevelToEquip\022\035"
-    "\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022-\n\014eElemen"
-    "tType\030\002 \002(\0162\027.NFMsg.EGameElementType\"G\n\026"
-    "AckElementlevelToEquip\022\035\n\007equipid\030\001 \002(\0132"
-    "\014.NFMsg.Ident\022\016\n\006result\030\002 \002(\005\"<\n\017ReqSetF"
-    "ightHero\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\022\013"
-    "\n\003Set\030\002 \002(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Her"
-    "oid\030\001 \002(\0132\014.NFMsg.Ident\"3\n\016ReqMiningTitl"
-    "e\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n\t"
-    "TileState\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003"
-    " \002(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002"
-    "(\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFM"
-    "sg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002("
+    "\002(\014\022\017\n\007game_id\030\003 \002(\005\022\014\n\004name\030\004 \002(\014\"%\n\026Re"
+    "qAckEnterGameSuccess\022\013\n\003arg\030\001 \002(\005\"\033\n\014Req"
+    "HeartBeat\022\013\n\003arg\030\001 \002(\005\"!\n\022ReqLeaveGameSe"
+    "rver\022\013\n\003arg\030\001 \002(\005\"\267\001\n\017PlayerEntryInfo\022!\n"
+    "\013object_guid\030\001 \002(\0132\014.NFMsg.Ident\022\t\n\001x\030\002 "
+    "\002(\002\022\t\n\001y\030\003 \002(\002\022\t\n\001z\030\004 \002(\002\022\023\n\013career_type"
+    "\030\005 \002(\005\022\024\n\014player_state\030\006 \002(\005\022\021\n\tconfig_i"
+    "d\030\007 \002(\014\022\020\n\010scene_id\030\010 \002(\005\022\020\n\010class_id\030\t "
+    "\002(\014\"A\n\022AckPlayerEntryList\022+\n\013object_list"
+    "\030\001 \003(\0132\026.NFMsg.PlayerEntryInfo\"7\n\022AckPla"
+    "yerLeaveList\022!\n\013object_list\030\001 \003(\0132\014.NFMs"
+    "g.Ident\"\367\001\n\rReqAckSynData\022\033\n\005syser\030\001 \002(\013"
+    "2\014.NFMsg.Ident\022!\n\013object_list\030\002 \003(\0132\014.NF"
+    "Msg.Ident\022\014\n\004data\030\003 \002(\014\022.\n\010syn_type\030\004 \002("
+    "\0162\034.NFMsg.ReqAckSynData.SynType\022 \n\006msg_i"
+    "d\030\005 \002(\0162\020.NFMsg.ESynMsgID\"F\n\007SynType\022\r\n\t"
+    "EST_GROUP\020\001\022\r\n\tEST_SCENE\020\002\022\r\n\tEST_GUILD\020"
+    "\003\022\016\n\nEST_FRIEND\020\004\"\316\001\n\020ReqAckPlayerMove\022\033"
+    "\n\005mover\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010moveType\030"
+    "\002 \002(\005\022\r\n\005speed\030\003 \002(\002\022\014\n\004time\030\004 \002(\005\022\"\n\nta"
+    "rget_pos\030\005 \003(\0132\016.NFMsg.Vector3\022\"\n\nsource"
+    "_pos\030\006 \003(\0132\016.NFMsg.Vector3\022&\n\016move_direc"
+    "tion\030\007 \003(\0132\016.NFMsg.Vector3\"\236\003\n\020ReqAckPla"
+    "yerChat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg.Ident\0228"
+    "\n\tchat_type\030\002 \002(\0162%.NFMsg.ReqAckPlayerCh"
+    "at.EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\tc"
+    "hat_name\030\004 \002(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFMs"
+    "g.Ident\022=\n\016Container_data\030\006 \003(\0132%.NFMsg."
+    "ReqAckPlayerChat.ChatContainer\032Y\n\rChatCo"
+    "ntainer\022\025\n\rConTainerType\030\002 \002(\005\022\021\n\tdata_i"
+    "nfo\030\003 \002(\014\"\036\n\rContainerType\022\r\n\tEGCT_ITEM\020"
+    "\001\"P\n\rEGameChatType\022\016\n\nEGCT_GUILD\020\000\022\020\n\014EG"
+    "CT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WORL"
+    "D\020\003\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001 \002(\013"
+    "2\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \002(\005\0221\n\n"
+    "effect_rlt\030\003 \002(\0162\035.NFMsg.EffectData.ERes"
+    "ultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n\013"
+    "EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MIS"
+    "S\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022\032\n\004u"
+    "ser\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 \002("
+    "\014\022\021\n\tuse_index\030\003 \002(\005\022&\n\013effect_data\030\004 \003("
+    "\0132\021.NFMsg.EffectData\"\265\001\n\rReqAckUseItem\022\032"
+    "\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030"
+    "\002 \002(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003(\013"
+    "2\021.NFMsg.EffectData\022\037\n\004item\030\004 \002(\0132\021.NFMs"
+    "g.ItemStruct\022\036\n\010targetid\030\005 \002(\0132\014.NFMsg.I"
+    "dent\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_typ"
+    "e\030\001 \002(\0162$.NFMsg.ReqAckSwapScene.EGameSwa"
+    "pType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005"
+    "\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004dat"
+    "a\030\007 \001(\t\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020"
+    "\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGS"
+    "T_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 "
+    "\001(\t\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022\022\n\nit"
+    "em_count\030\002 \002(\005\"\?\n\016CurrencyStruct\022\025\n\rcurr"
+    "ency_type\030\001 \002(\005\022\026\n\016currency_count\030\002 \002(\005\""
+    "2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \002(\005\022\017\n\007di"
+    "amond\030\002 \002(\005\"\016\n\014ReqEndBattle\"{\n\014AckEndBat"
+    "tle\022\013\n\003win\030\001 \002(\005\022\014\n\004star\030\002 \002(\005\022\014\n\004gold\030\003"
+    " \002(\005\022\013\n\003exp\030\004 \002(\005\022\017\n\007diamond\030\005 \002(\005\022$\n\tit"
+    "em_list\030\006 \003(\0132\021.NFMsg.ItemStruct\"2\n\017ReqP"
+    "ickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.I"
+    "dent\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#"
+    "\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"M\n\014R"
+    "eqWearEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\036\n\010Targetid\030\002 \002(\0132\014.NFMsg.Ident\"M\n\014Ta"
+    "keOffEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Iden"
+    "t\022\036\n\010Targetid\030\002 \002(\0132\014.NFMsg.Ident\"\357\001\n\022Re"
+    "qAckJoinActivity\022B\n\ractivity_type\030\001 \002(\0162"
+    "+.NFMsg.ReqAckJoinActivity.EGameActivity"
+    "Type\022I\n\021sub_activity_type\030\002 \002(\0162..NFMsg."
+    "ReqAckJoinActivity.EGameActivitySubType\""
+    "!\n\021EGameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024EG"
+    "ameActivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n\021R"
+    "eqAckCreateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFM"
+    "sg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSearc"
+    "hGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSearch"
+    "Guild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckSea"
+    "rchGuild.SearchGuildObject\032\300\001\n\021SearchGui"
+    "ldObject\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ident"
+    "\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002(\t"
+    "\022\032\n\022guild_member_count\030\004 \002(\005\022\036\n\026guild_me"
+    "mber_max_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 \002("
+    "\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGuild"
+    "\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguil"
+    "d_name\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010guil"
+    "d_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002"
+    " \002(\t\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild_i"
+    "d\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\013"
+    "2\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.Req"
+    "AckOprGuildMember.EGGuildMemberOprType\"A"
+    "\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022\013\n"
+    "\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterGui"
+    "ldEctype\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident"
+    "\"9\n\030ReqIntensifylevelToEquip\022\035\n\007equipid\030"
+    "\001 \002(\0132\014.NFMsg.Ident\"I\n\030AckIntensifylevel"
+    "ToEquip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016"
+    "\n\006result\030\002 \002(\005\"/\n\016ReqHoleToEquip\022\035\n\007equi"
+    "pid\030\001 \002(\0132\014.NFMsg.Ident\"\?\n\016AckHoleToEqui"
+    "p\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006resu"
+    "lt\030\002 \002(\005\"Z\n\024ReqInlaystoneToEquip\022\035\n\007equi"
+    "pid\030\001 \002(\0132\014.NFMsg.Ident\022\017\n\007stoneid\030\002 \002(\014"
+    "\022\022\n\nhole_index\030\003 \002(\005\"E\n\024AckInlaystoneToE"
+    "quip\022\035\n\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022\016\n\006r"
+    "esult\030\002 \002(\005\"f\n\026ReqElementlevelToEquip\022\035\n"
+    "\007equipid\030\001 \002(\0132\014.NFMsg.Ident\022-\n\014eElement"
+    "Type\030\002 \002(\0162\027.NFMsg.EGameElementType\"G\n\026A"
+    "ckElementlevelToEquip\022\035\n\007equipid\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022\016\n\006result\030\002 \002(\005\"<\n\017ReqSetFi"
+    "ghtHero\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\022\013\n"
+    "\003Set\030\002 \002(\005\"2\n\022ReqSwitchFightHero\022\034\n\006Hero"
+    "id\030\001 \002(\0132\014.NFMsg.Ident\"3\n\016ReqMiningTitle"
+    "\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n\tT"
+    "ileState\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 "
+    "\002(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002("
     "\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFMs"
-    "g.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132"
-    "\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.NF"
-    "Msg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.Ti"
-    "leNPC\"\022\n\020ReqSearchOppnent\"$\n\020AckSearchOp"
-    "pnent\022\020\n\010scene_id\030\001 \002(\005\"\201\001\n\013ReqSendMail\022"
-    "\036\n\010reciever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem_"
-    "list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrenc"
-    "y_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017"
-    "ReqSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg."
-    "Ident\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_s"
-    "erverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007"
-    "SceneID\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMsg"
-    ".Ident\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchServ"
-    "er\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself"
-    "_serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003"
-    "\022\025\n\rgate_serverid\030\004 \002(\003\"z\n\010TeamInfo\022\035\n\007t"
-    "eam_id\030\001 \002(\0132\014.NFMsg.Ident\022 \n\ncaptain_id"
-    "\030\002 \002(\0132\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003"
-    " \003(\0132\025.NFMsg.TeammemberInfo\"n\n\016Teammembe"
-    "rInfo\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\014"
-    "\n\004name\030\002 \002(\t\022\016\n\006nLevel\030\003 \002(\005\022\013\n\003job\030\004 \002("
-    "\005\022\020\n\010HeadIcon\030\005 \002(\t\"U\n\020ReqAckCreateTeam\022"
-    "\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txTeamI"
-    "nfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoin"
-    "Team\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\tx"
-    "TeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAc"
-    "kLeaveTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Iden"
-    "t\022\"\n\txTeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002"
-    "\n\023ReqAckOprTeamMember\022\035\n\007team_id\030\001 \002(\0132\014"
-    ".NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg."
-    "Ident\022<\n\004type\030\003 \002(\0162..NFMsg.ReqAckOprTea"
-    "mMember.EGTeamMemberOprType\022\"\n\txTeamInfo"
-    "\030\004 \001(\0132\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMember"
-    "OprType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tE"
-    "GAT_KICK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIR"
-    "E\020\004\022\017\n\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY"
-    "\020\006\022\022\n\016EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010"
-    "\"x\n\020ReqAckInviteTeam\022\035\n\007team_id\030\001 \002(\0132\014."
-    "NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Ide"
-    "nt\022&\n\020invite_target_id\030\003 \002(\0132\014.NFMsg.Ide"
-    "nt\"\233\001\n\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \002"
-    "(\0132\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMs"
-    "g.Ident\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004"
-    " \001(\005\022\017\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005"
-    "\"\210\001\n\022AckTeamEnterEctype\022\035\n\007team_id\030\001 \002(\013"
-    "2\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg."
-    "Ident\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001"
-    "(\005\022\017\n\007nResult\030\005 \001(\005\"k\n\021GridGuildBaseInfo"
-    "\022\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \002("
-    "\005\022\r\n\005count\030\003 \002(\005\022\020\n\010resource\030\004 \002(\005\022\014\n\004ic"
-    "on\030\005 \002(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_tit"
-    "le_id\030\001 \003(\014\"\272\001\n\022BigMapGridBaseInfo\022\n\n\002id"
-    "\030\001 \002(\014\022,\n\nguild_info\030\002 \002(\0132\030.NFMsg.GridG"
-    "uildBaseInfo\022\024\n\014kingwar_time\030\n \002(\005\022 \n\nki"
-    "ngwarrer\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurting_"
-    "time\030\024 \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Ident"
-    "\"z\n\016BigMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.NFMs"
-    "g.Ident\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_data\030"
-    "\003 \002(\014\022\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_level\030\005"
-    " \002(\005\"\236\001\n\020BigMapWarHistory\022*\n\010red_info\030\001 "
-    "\002(\0132\030.NFMsg.GridGuildBaseInfo\022+\n\tblue_in"
-    "fo\030\002 \002(\0132\030.NFMsg.GridGuildBaseInfo\022\037\n\twi"
-    "nner_id\030\n \002(\0132\014.NFMsg.Ident\022\020\n\010war_time\030"
-    "\013 \002(\005\"\323\001\n\024BigMapGridDetailInfo\0221\n\016grid_b"
-    "ase_info\030\001 \002(\0132\031.NFMsg.BigMapGridBaseInf"
-    "o\0220\n\016stay_guid_list\030\002 \003(\0132\030.NFMsg.GridGu"
-    "ildBaseInfo\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.B"
-    "igMapLeaveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFM"
-    "sg.BigMapWarHistory\"B\n\021AckBigMapGridInfo"
-    "\022-\n\010map_data\030\001 \003(\0132\033.NFMsg.BigMapGridDet"
-    "ailInfo\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInf"
-    "o\0221\n\016grid_base_info\030\001 \003(\0132\031.NFMsg.BigMap"
-    "GridBaseInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_ti"
-    "tle_id\030\001 \002(\014\022\036\n\010guild_id\030\002 \002(\0132\014.NFMsg.I"
-    "dent\"\020\n\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg"
-    "\022\024\n\014map_title_id\030\001 \002(\014\022(\n\tleave_msg\030\002 \002("
-    "\0132\025.NFMsg.BigMapLeaveMsg\"\020\n\016AckLeaveMapM"
-    "sg\"&\n\016ReqGetMapAward\022\024\n\014map_title_id\030\001 \002"
-    "(\014\"\020\n\016AckGetMapAward\"%\n\rReqMapHunting\022\024\n"
-    "\014map_title_id\030\001 \002(\014\"\017\n\rAckMapHunting\"%\n\r"
-    "ReqMapKingWar\022\024\n\014map_title_id\030\001 \002(\014\"\017\n\rA"
-    "ckMapKingWar\"\361\001\n\013PVPRoomInfo\022\023\n\013nCellSta"
-    "tus\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\0132\014.NFMsg.Ident\022"
-    "\020\n\010nPVPMode\030\003 \002(\005\022\021\n\tnPVPGrade\030\004 \002(\005\022\021\n\t"
-    "MaxPalyer\030\005 \002(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NF"
-    "Msg.Ident\022!\n\013xBluePlayer\030\007 \003(\0132\014.NFMsg.I"
-    "dent\022\020\n\010serverid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022"
-    "\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n"
-    "\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode"
-    "\030\002 \002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyType\030\004 \002(\005"
-    "\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Ident\"8\n\nEAppl"
-    "yType\022\025\n\021EApplyType_Single\020\000\022\023\n\017EApplyTy"
-    "pe_Team\020\001\"|\n\020AckPVPApplyMatch\022\035\n\007self_id"
-    "\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132"
-    "\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005\022\017"
-    "\n\007nResult\030\004 \002(\005\"Z\n\022ReqCreatePVPEctype\022\035\n"
-    "\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInf"
-    "o\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\"m\n\022AckCreate"
-    "PVPEctype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\022"
-    "\021\n\tApplyType\030\003 \002(\005", 8818);
+    "g.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005"
+    "\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFMsg"
+    ".Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\0132\020"
+    ".NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.NFM"
+    "sg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.Til"
+    "eNPC\"\022\n\020ReqSearchOppnent\"$\n\020AckSearchOpp"
+    "nent\022\020\n\010scene_id\030\001 \002(\005\"\201\001\n\013ReqSendMail\022\036"
+    "\n\010reciever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem_l"
+    "ist\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurrency"
+    "_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n\017R"
+    "eqSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.I"
+    "dent\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_se"
+    "rverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007S"
+    "ceneID\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMsg."
+    "Ident\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchServe"
+    "r\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_"
+    "serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003\022"
+    "\025\n\rgate_serverid\030\004 \002(\003\"z\n\010TeamInfo\022\035\n\007te"
+    "am_id\030\001 \002(\0132\014.NFMsg.Ident\022 \n\ncaptain_id\030"
+    "\002 \002(\0132\014.NFMsg.Ident\022-\n\016teammemberInfo\030\003 "
+    "\003(\0132\025.NFMsg.TeammemberInfo\"n\n\016Teammember"
+    "Info\022\037\n\tplayer_id\030\001 \002(\0132\014.NFMsg.Ident\022\014\n"
+    "\004name\030\002 \002(\t\022\016\n\006nLevel\030\003 \002(\005\022\013\n\003job\030\004 \002(\005"
+    "\022\020\n\010HeadIcon\030\005 \002(\t\"U\n\020ReqAckCreateTeam\022\035"
+    "\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txTeamIn"
+    "fo\030\002 \001(\0132\017.NFMsg.TeamInfo\"S\n\016ReqAckJoinT"
+    "eam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident\022\"\n\txT"
+    "eamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"T\n\017ReqAck"
+    "LeaveTeam\022\035\n\007team_id\030\001 \002(\0132\014.NFMsg.Ident"
+    "\022\"\n\txTeamInfo\030\002 \001(\0132\017.NFMsg.TeamInfo\"\350\002\n"
+    "\023ReqAckOprTeamMember\022\035\n\007team_id\030\001 \002(\0132\014."
+    "NFMsg.Ident\022\037\n\tmember_id\030\002 \002(\0132\014.NFMsg.I"
+    "dent\022<\n\004type\030\003 \002(\0162..NFMsg.ReqAckOprTeam"
+    "Member.EGTeamMemberOprType\022\"\n\txTeamInfo\030"
+    "\004 \001(\0132\017.NFMsg.TeamInfo\"\256\001\n\023EGTeamMemberO"
+    "prType\022\r\n\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEG"
+    "AT_KICK\020\002\022\020\n\014EGAT_APPOINT\020\003\022\r\n\tEGAT_FIRE"
+    "\020\004\022\017\n\013EGAT_DEMISE\020\005\022\024\n\020EGAT_ACCEPTAPPLY\020"
+    "\006\022\022\n\016EGAT_DENYAPPLY\020\007\022\020\n\014EGAT_KICKOUT\020\010\""
+    "x\n\020ReqAckInviteTeam\022\035\n\007team_id\030\001 \002(\0132\014.N"
+    "FMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.Iden"
+    "t\022&\n\020invite_target_id\030\003 \002(\0132\014.NFMsg.Iden"
+    "t\"\233\001\n\022ReqTeamEnterEctype\022\035\n\007team_id\030\001 \002("
+    "\0132\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg"
+    ".Ident\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 "
+    "\001(\005\022\017\n\007nResult\030\005 \001(\005\022\021\n\tnServerID\030\006 \001(\005\""
+    "\210\001\n\022AckTeamEnterEctype\022\035\n\007team_id\030\001 \002(\0132"
+    "\014.NFMsg.Ident\022\035\n\007self_id\030\002 \002(\0132\014.NFMsg.I"
+    "dent\022\021\n\tnEctypeID\030\003 \001(\005\022\020\n\010nGroupID\030\004 \001("
+    "\005\022\017\n\007nResult\030\005 \001(\005\"k\n\021GridGuildBaseInfo\022"
+    "\030\n\002id\030\001 \002(\0132\014.NFMsg.Ident\022\r\n\005level\030\002 \002(\005"
+    "\022\r\n\005count\030\003 \002(\005\022\020\n\010resource\030\004 \002(\005\022\014\n\004ico"
+    "n\030\005 \002(\014\")\n\021ReqBigMapGridInfo\022\024\n\014map_titl"
+    "e_id\030\001 \003(\014\"\272\001\n\022BigMapGridBaseInfo\022\n\n\002id\030"
+    "\001 \002(\014\022,\n\nguild_info\030\002 \002(\0132\030.NFMsg.GridGu"
+    "ildBaseInfo\022\024\n\014kingwar_time\030\n \002(\005\022 \n\nkin"
+    "gwarrer\030\013 \002(\0132\014.NFMsg.Ident\022\024\n\014hurting_t"
+    "ime\030\024 \002(\005\022\034\n\006hurter\030\025 \002(\0132\014.NFMsg.Ident\""
+    "z\n\016BigMapLeaveMsg\022\033\n\005owner\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\022\n\nowner_name\030\002 \002(\014\022\020\n\010msg_data\030\003"
+    " \002(\014\022\020\n\010msg_time\030\004 \002(\005\022\023\n\013owner_level\030\005 "
+    "\002(\005\"\236\001\n\020BigMapWarHistory\022*\n\010red_info\030\001 \002"
+    "(\0132\030.NFMsg.GridGuildBaseInfo\022+\n\tblue_inf"
+    "o\030\002 \002(\0132\030.NFMsg.GridGuildBaseInfo\022\037\n\twin"
+    "ner_id\030\n \002(\0132\014.NFMsg.Ident\022\020\n\010war_time\030\013"
+    " \002(\005\"\323\001\n\024BigMapGridDetailInfo\0221\n\016grid_ba"
+    "se_info\030\001 \002(\0132\031.NFMsg.BigMapGridBaseInfo"
+    "\0220\n\016stay_guid_list\030\002 \003(\0132\030.NFMsg.GridGui"
+    "ldBaseInfo\022(\n\tleave_msg\030\003 \003(\0132\025.NFMsg.Bi"
+    "gMapLeaveMsg\022,\n\013war_history\030\004 \003(\0132\027.NFMs"
+    "g.BigMapWarHistory\"B\n\021AckBigMapGridInfo\022"
+    "-\n\010map_data\030\001 \003(\0132\033.NFMsg.BigMapGridDeta"
+    "ilInfo\"\017\n\rReqBigMapInfo\"B\n\rAckBigMapInfo"
+    "\0221\n\016grid_base_info\030\001 \003(\0132\031.NFMsg.BigMapG"
+    "ridBaseInfo\"F\n\016ReqHoldMapGrid\022\024\n\014map_tit"
+    "le_id\030\001 \002(\014\022\036\n\010guild_id\030\002 \002(\0132\014.NFMsg.Id"
+    "ent\"\020\n\016AckHoldMapGrid\"P\n\016ReqLeaveMapMsg\022"
+    "\024\n\014map_title_id\030\001 \002(\014\022(\n\tleave_msg\030\002 \002(\013"
+    "2\025.NFMsg.BigMapLeaveMsg\"\020\n\016AckLeaveMapMs"
+    "g\"&\n\016ReqGetMapAward\022\024\n\014map_title_id\030\001 \002("
+    "\014\"\020\n\016AckGetMapAward\"%\n\rReqMapHunting\022\024\n\014"
+    "map_title_id\030\001 \002(\014\"\017\n\rAckMapHunting\"\"\n\rR"
+    "eqMapKingWar\022\021\n\tmap_title\030\001 \002(\014\"\"\n\rAckMa"
+    "pKingWar\022\021\n\tmap_title\030\001 \002(\014\"\361\001\n\013PVPRoomI"
+    "nfo\022\023\n\013nCellStatus\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\013"
+    "2\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \002(\005\022\021\n\tnPVP"
+    "Grade\030\004 \002(\005\022\021\n\tMaxPalyer\030\005 \002(\005\022 \n\nxRedPl"
+    "ayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030"
+    "\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n"
+    "\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqP"
+    "VPApplyMatch\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Id"
+    "ent\022\020\n\010nPVPMode\030\002 \002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\t"
+    "ApplyType\030\004 \002(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg"
+    ".Ident\"8\n\nEApplyType\022\025\n\021EApplyType_Singl"
+    "e\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPApplyM"
+    "atch\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\tx"
+    "RoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tAp"
+    "plyType\030\003 \002(\005\022\017\n\007nResult\030\004 \002(\005\"Z\n\022ReqCre"
+    "atePVPEctype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Id"
+    "ent\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomIn"
+    "fo\"m\n\022AckCreatePVPEctype\022\035\n\007self_id\030\001 \002("
+    "\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \002(\0132\022.NFM"
+    "sg.PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005", 8873);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -2926,6 +2931,7 @@ void ReqEnterGameServer::Swap(ReqEnterGameServer* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqAckEnterGameSuccess::kArgFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckEnterGameSuccess::ReqAckEnterGameSuccess()
@@ -2944,6 +2950,7 @@ ReqAckEnterGameSuccess::ReqAckEnterGameSuccess(const ReqAckEnterGameSuccess& fro
 
 void ReqAckEnterGameSuccess::SharedCtor() {
   _cached_size_ = 0;
+  arg_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2978,6 +2985,9 @@ ReqAckEnterGameSuccess* ReqAckEnterGameSuccess::New() const {
 }
 
 void ReqAckEnterGameSuccess::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    arg_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2987,12 +2997,33 @@ bool ReqAckEnterGameSuccess::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 arg = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &arg_)));
+          set_has_arg();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -3000,6 +3031,11 @@ bool ReqAckEnterGameSuccess::MergePartialFromCodedStream(
 
 void ReqAckEnterGameSuccess::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->arg(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3008,6 +3044,11 @@ void ReqAckEnterGameSuccess::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckEnterGameSuccess::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->arg(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -3018,6 +3059,15 @@ void ReqAckEnterGameSuccess::SerializeWithCachedSizes(
 int ReqAckEnterGameSuccess::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 arg = 1;
+    if (has_arg()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->arg());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -3043,6 +3093,11 @@ void ReqAckEnterGameSuccess::MergeFrom(const ::google::protobuf::Message& from) 
 
 void ReqAckEnterGameSuccess::MergeFrom(const ReqAckEnterGameSuccess& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_arg()) {
+      set_arg(from.arg());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -3059,12 +3114,15 @@ void ReqAckEnterGameSuccess::CopyFrom(const ReqAckEnterGameSuccess& from) {
 }
 
 bool ReqAckEnterGameSuccess::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void ReqAckEnterGameSuccess::Swap(ReqAckEnterGameSuccess* other) {
   if (other != this) {
+    std::swap(arg_, other->arg_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -3082,6 +3140,7 @@ void ReqAckEnterGameSuccess::Swap(ReqAckEnterGameSuccess* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqHeartBeat::kArgFieldNumber;
 #endif  // !_MSC_VER
 
 ReqHeartBeat::ReqHeartBeat()
@@ -3100,6 +3159,7 @@ ReqHeartBeat::ReqHeartBeat(const ReqHeartBeat& from)
 
 void ReqHeartBeat::SharedCtor() {
   _cached_size_ = 0;
+  arg_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3134,6 +3194,9 @@ ReqHeartBeat* ReqHeartBeat::New() const {
 }
 
 void ReqHeartBeat::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    arg_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -3143,12 +3206,33 @@ bool ReqHeartBeat::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 arg = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &arg_)));
+          set_has_arg();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -3156,6 +3240,11 @@ bool ReqHeartBeat::MergePartialFromCodedStream(
 
 void ReqHeartBeat::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->arg(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3164,6 +3253,11 @@ void ReqHeartBeat::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqHeartBeat::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->arg(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -3174,6 +3268,15 @@ void ReqHeartBeat::SerializeWithCachedSizes(
 int ReqHeartBeat::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 arg = 1;
+    if (has_arg()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->arg());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -3199,6 +3302,11 @@ void ReqHeartBeat::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ReqHeartBeat::MergeFrom(const ReqHeartBeat& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_arg()) {
+      set_arg(from.arg());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -3215,12 +3323,15 @@ void ReqHeartBeat::CopyFrom(const ReqHeartBeat& from) {
 }
 
 bool ReqHeartBeat::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void ReqHeartBeat::Swap(ReqHeartBeat* other) {
   if (other != this) {
+    std::swap(arg_, other->arg_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -3238,6 +3349,7 @@ void ReqHeartBeat::Swap(ReqHeartBeat* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int ReqLeaveGameServer::kArgFieldNumber;
 #endif  // !_MSC_VER
 
 ReqLeaveGameServer::ReqLeaveGameServer()
@@ -3256,6 +3368,7 @@ ReqLeaveGameServer::ReqLeaveGameServer(const ReqLeaveGameServer& from)
 
 void ReqLeaveGameServer::SharedCtor() {
   _cached_size_ = 0;
+  arg_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3290,6 +3403,9 @@ ReqLeaveGameServer* ReqLeaveGameServer::New() const {
 }
 
 void ReqLeaveGameServer::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    arg_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -3299,12 +3415,33 @@ bool ReqLeaveGameServer::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 arg = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &arg_)));
+          set_has_arg();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -3312,6 +3449,11 @@ bool ReqLeaveGameServer::MergePartialFromCodedStream(
 
 void ReqLeaveGameServer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->arg(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3320,6 +3462,11 @@ void ReqLeaveGameServer::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqLeaveGameServer::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required int32 arg = 1;
+  if (has_arg()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->arg(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -3330,6 +3477,15 @@ void ReqLeaveGameServer::SerializeWithCachedSizes(
 int ReqLeaveGameServer::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 arg = 1;
+    if (has_arg()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->arg());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -3355,6 +3511,11 @@ void ReqLeaveGameServer::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ReqLeaveGameServer::MergeFrom(const ReqLeaveGameServer& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_arg()) {
+      set_arg(from.arg());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -3371,12 +3532,15 @@ void ReqLeaveGameServer::CopyFrom(const ReqLeaveGameServer& from) {
 }
 
 bool ReqLeaveGameServer::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void ReqLeaveGameServer::Swap(ReqLeaveGameServer* other) {
   if (other != this) {
+    std::swap(arg_, other->arg_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
@@ -25763,7 +25927,7 @@ void AckMapHunting::Swap(AckMapHunting* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ReqMapKingWar::kMapTitleIdFieldNumber;
+const int ReqMapKingWar::kMapTitleFieldNumber;
 #endif  // !_MSC_VER
 
 ReqMapKingWar::ReqMapKingWar()
@@ -25782,7 +25946,7 @@ ReqMapKingWar::ReqMapKingWar(const ReqMapKingWar& from)
 
 void ReqMapKingWar::SharedCtor() {
   _cached_size_ = 0;
-  map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -25791,8 +25955,8 @@ ReqMapKingWar::~ReqMapKingWar() {
 }
 
 void ReqMapKingWar::SharedDtor() {
-  if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete map_title_id_;
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    delete map_title_;
   }
   if (this != default_instance_) {
   }
@@ -25821,9 +25985,9 @@ ReqMapKingWar* ReqMapKingWar::New() const {
 
 void ReqMapKingWar::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_map_title_id()) {
-      if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-        map_title_id_->clear();
+    if (has_map_title()) {
+      if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+        map_title_->clear();
       }
     }
   }
@@ -25837,12 +26001,12 @@ bool ReqMapKingWar::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes map_title_id = 1;
+      // required bytes map_title = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_map_title_id()));
+                input, this->mutable_map_title()));
         } else {
           goto handle_uninterpreted;
         }
@@ -25868,10 +26032,10 @@ bool ReqMapKingWar::MergePartialFromCodedStream(
 
 void ReqMapKingWar::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes map_title_id = 1;
-  if (has_map_title_id()) {
+  // required bytes map_title = 1;
+  if (has_map_title()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      1, this->map_title_id(), output);
+      1, this->map_title(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -25882,11 +26046,11 @@ void ReqMapKingWar::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqMapKingWar::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required bytes map_title_id = 1;
-  if (has_map_title_id()) {
+  // required bytes map_title = 1;
+  if (has_map_title()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        1, this->map_title_id(), target);
+        1, this->map_title(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -25900,11 +26064,11 @@ int ReqMapKingWar::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes map_title_id = 1;
-    if (has_map_title_id()) {
+    // required bytes map_title = 1;
+    if (has_map_title()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->map_title_id());
+          this->map_title());
     }
 
   }
@@ -25934,8 +26098,8 @@ void ReqMapKingWar::MergeFrom(const ::google::protobuf::Message& from) {
 void ReqMapKingWar::MergeFrom(const ReqMapKingWar& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_map_title_id()) {
-      set_map_title_id(from.map_title_id());
+    if (from.has_map_title()) {
+      set_map_title(from.map_title());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -25961,7 +26125,7 @@ bool ReqMapKingWar::IsInitialized() const {
 
 void ReqMapKingWar::Swap(ReqMapKingWar* other) {
   if (other != this) {
-    std::swap(map_title_id_, other->map_title_id_);
+    std::swap(map_title_, other->map_title_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -25980,6 +26144,7 @@ void ReqMapKingWar::Swap(ReqMapKingWar* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int AckMapKingWar::kMapTitleFieldNumber;
 #endif  // !_MSC_VER
 
 AckMapKingWar::AckMapKingWar()
@@ -25998,6 +26163,7 @@ AckMapKingWar::AckMapKingWar(const AckMapKingWar& from)
 
 void AckMapKingWar::SharedCtor() {
   _cached_size_ = 0;
+  map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -26006,6 +26172,9 @@ AckMapKingWar::~AckMapKingWar() {
 }
 
 void AckMapKingWar::SharedDtor() {
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    delete map_title_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -26032,6 +26201,13 @@ AckMapKingWar* AckMapKingWar::New() const {
 }
 
 void AckMapKingWar::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_map_title()) {
+      if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+        map_title_->clear();
+      }
+    }
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -26041,12 +26217,31 @@ bool AckMapKingWar::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bytes map_title = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_map_title()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
   }
   return true;
 #undef DO_
@@ -26054,6 +26249,12 @@ bool AckMapKingWar::MergePartialFromCodedStream(
 
 void AckMapKingWar::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required bytes map_title = 1;
+  if (has_map_title()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      1, this->map_title(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -26062,6 +26263,13 @@ void AckMapKingWar::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* AckMapKingWar::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
+  // required bytes map_title = 1;
+  if (has_map_title()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->map_title(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -26072,6 +26280,15 @@ void AckMapKingWar::SerializeWithCachedSizes(
 int AckMapKingWar::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bytes map_title = 1;
+    if (has_map_title()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->map_title());
+    }
+
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -26097,6 +26314,11 @@ void AckMapKingWar::MergeFrom(const ::google::protobuf::Message& from) {
 
 void AckMapKingWar::MergeFrom(const AckMapKingWar& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_map_title()) {
+      set_map_title(from.map_title());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -26113,12 +26335,15 @@ void AckMapKingWar::CopyFrom(const AckMapKingWar& from) {
 }
 
 bool AckMapKingWar::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
 void AckMapKingWar::Swap(AckMapKingWar* other) {
   if (other != this) {
+    std::swap(map_title_, other->map_title_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
