@@ -212,13 +212,13 @@ void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, cons
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMapKingWar);
 
-	if (!m_pElementModule->ExistElement(xMsg.map_title_id()))
+	if (!m_pElementModule->ExistElement(xMsg.map_title()))
 	{
 		return;
 	}
 
 	NFMsg::BigMapGridBaseInfo xGridBaseInfo;
-	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo))
+	if (!m_pBigMapRedisModule->GetGridBaseInfo(xMsg.map_title(), xGridBaseInfo))
 	{
 		return;
 	}
@@ -226,7 +226,7 @@ void NFCMapModule::ReqMapKingWar(const NFSOCK nSockIndex, const int nMsgID, cons
 	xGridBaseInfo.set_kingwar_time(pPluginManager->GetNowTime());
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
-	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
+	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title(), xGridBaseInfo);
 
 	//show msgbox
 }

@@ -509,14 +509,24 @@ class LIBPROTOC_EXPORT ReqAckEnterGameSuccess : public ::google::protobuf::Messa
 
   // accessors -------------------------------------------------------
 
+  // required int32 arg = 1;
+  inline bool has_arg() const;
+  inline void clear_arg();
+  static const int kArgFieldNumber = 1;
+  inline ::google::protobuf::int32 arg() const;
+  inline void set_arg(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckEnterGameSuccess)
  private:
+  inline void set_has_arg();
+  inline void clear_has_arg();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 arg_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -581,14 +591,24 @@ class LIBPROTOC_EXPORT ReqHeartBeat : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // required int32 arg = 1;
+  inline bool has_arg() const;
+  inline void clear_arg();
+  static const int kArgFieldNumber = 1;
+  inline ::google::protobuf::int32 arg() const;
+  inline void set_arg(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqHeartBeat)
  private:
+  inline void set_has_arg();
+  inline void clear_has_arg();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 arg_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -653,14 +673,24 @@ class LIBPROTOC_EXPORT ReqLeaveGameServer : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // required int32 arg = 1;
+  inline bool has_arg() const;
+  inline void clear_arg();
+  static const int kArgFieldNumber = 1;
+  inline ::google::protobuf::int32 arg() const;
+  inline void set_arg(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqLeaveGameServer)
  private:
+  inline void set_has_arg();
+  inline void clear_has_arg();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::int32 arg_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -8929,26 +8959,26 @@ class LIBPROTOC_EXPORT ReqMapKingWar : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required bytes map_title_id = 1;
-  inline bool has_map_title_id() const;
-  inline void clear_map_title_id();
-  static const int kMapTitleIdFieldNumber = 1;
-  inline const ::std::string& map_title_id() const;
-  inline void set_map_title_id(const ::std::string& value);
-  inline void set_map_title_id(const char* value);
-  inline void set_map_title_id(const void* value, size_t size);
-  inline ::std::string* mutable_map_title_id();
-  inline ::std::string* release_map_title_id();
-  inline void set_allocated_map_title_id(::std::string* map_title_id);
+  // required bytes map_title = 1;
+  inline bool has_map_title() const;
+  inline void clear_map_title();
+  static const int kMapTitleFieldNumber = 1;
+  inline const ::std::string& map_title() const;
+  inline void set_map_title(const ::std::string& value);
+  inline void set_map_title(const char* value);
+  inline void set_map_title(const void* value, size_t size);
+  inline ::std::string* mutable_map_title();
+  inline ::std::string* release_map_title();
+  inline void set_allocated_map_title(::std::string* map_title);
 
   // @@protoc_insertion_point(class_scope:NFMsg.ReqMapKingWar)
  private:
-  inline void set_has_map_title_id();
-  inline void clear_has_map_title_id();
+  inline void set_has_map_title();
+  inline void clear_has_map_title();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::std::string* map_title_id_;
+  ::std::string* map_title_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -9016,14 +9046,29 @@ class LIBPROTOC_EXPORT AckMapKingWar : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
+  // required bytes map_title = 1;
+  inline bool has_map_title() const;
+  inline void clear_map_title();
+  static const int kMapTitleFieldNumber = 1;
+  inline const ::std::string& map_title() const;
+  inline void set_map_title(const ::std::string& value);
+  inline void set_map_title(const char* value);
+  inline void set_map_title(const void* value, size_t size);
+  inline ::std::string* mutable_map_title();
+  inline ::std::string* release_map_title();
+  inline void set_allocated_map_title(::std::string* map_title);
+
   // @@protoc_insertion_point(class_scope:NFMsg.AckMapKingWar)
  private:
+  inline void set_has_map_title();
+  inline void clear_has_map_title();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::std::string* map_title_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -9891,13 +9936,79 @@ inline void ReqEnterGameServer::set_allocated_name(::std::string* name) {
 
 // ReqAckEnterGameSuccess
 
+// required int32 arg = 1;
+inline bool ReqAckEnterGameSuccess::has_arg() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckEnterGameSuccess::set_has_arg() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckEnterGameSuccess::clear_has_arg() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckEnterGameSuccess::clear_arg() {
+  arg_ = 0;
+  clear_has_arg();
+}
+inline ::google::protobuf::int32 ReqAckEnterGameSuccess::arg() const {
+  return arg_;
+}
+inline void ReqAckEnterGameSuccess::set_arg(::google::protobuf::int32 value) {
+  set_has_arg();
+  arg_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // ReqHeartBeat
 
+// required int32 arg = 1;
+inline bool ReqHeartBeat::has_arg() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqHeartBeat::set_has_arg() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqHeartBeat::clear_has_arg() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqHeartBeat::clear_arg() {
+  arg_ = 0;
+  clear_has_arg();
+}
+inline ::google::protobuf::int32 ReqHeartBeat::arg() const {
+  return arg_;
+}
+inline void ReqHeartBeat::set_arg(::google::protobuf::int32 value) {
+  set_has_arg();
+  arg_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // ReqLeaveGameServer
+
+// required int32 arg = 1;
+inline bool ReqLeaveGameServer::has_arg() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqLeaveGameServer::set_has_arg() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqLeaveGameServer::clear_has_arg() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqLeaveGameServer::clear_arg() {
+  arg_ = 0;
+  clear_has_arg();
+}
+inline ::google::protobuf::int32 ReqLeaveGameServer::arg() const {
+  return arg_;
+}
+inline void ReqLeaveGameServer::set_arg(::google::protobuf::int32 value) {
+  set_has_arg();
+  arg_ = value;
+}
 
 // -------------------------------------------------------------------
 
@@ -17433,79 +17544,149 @@ inline void ReqMapHunting::set_allocated_map_title_id(::std::string* map_title_i
 
 // ReqMapKingWar
 
-// required bytes map_title_id = 1;
-inline bool ReqMapKingWar::has_map_title_id() const {
+// required bytes map_title = 1;
+inline bool ReqMapKingWar::has_map_title() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ReqMapKingWar::set_has_map_title_id() {
+inline void ReqMapKingWar::set_has_map_title() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ReqMapKingWar::clear_has_map_title_id() {
+inline void ReqMapKingWar::clear_has_map_title() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ReqMapKingWar::clear_map_title_id() {
-  if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-    map_title_id_->clear();
+inline void ReqMapKingWar::clear_map_title() {
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    map_title_->clear();
   }
-  clear_has_map_title_id();
+  clear_has_map_title();
 }
-inline const ::std::string& ReqMapKingWar::map_title_id() const {
-  return *map_title_id_;
+inline const ::std::string& ReqMapKingWar::map_title() const {
+  return *map_title_;
 }
-inline void ReqMapKingWar::set_map_title_id(const ::std::string& value) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
+inline void ReqMapKingWar::set_map_title(const ::std::string& value) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
   }
-  map_title_id_->assign(value);
+  map_title_->assign(value);
 }
-inline void ReqMapKingWar::set_map_title_id(const char* value) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
+inline void ReqMapKingWar::set_map_title(const char* value) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
   }
-  map_title_id_->assign(value);
+  map_title_->assign(value);
 }
-inline void ReqMapKingWar::set_map_title_id(const void* value, size_t size) {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
+inline void ReqMapKingWar::set_map_title(const void* value, size_t size) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
   }
-  map_title_id_->assign(reinterpret_cast<const char*>(value), size);
+  map_title_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* ReqMapKingWar::mutable_map_title_id() {
-  set_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
-    map_title_id_ = new ::std::string;
+inline ::std::string* ReqMapKingWar::mutable_map_title() {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
   }
-  return map_title_id_;
+  return map_title_;
 }
-inline ::std::string* ReqMapKingWar::release_map_title_id() {
-  clear_has_map_title_id();
-  if (map_title_id_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* ReqMapKingWar::release_map_title() {
+  clear_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = map_title_id_;
-    map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = map_title_;
+    map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void ReqMapKingWar::set_allocated_map_title_id(::std::string* map_title_id) {
-  if (map_title_id_ != &::google::protobuf::internal::kEmptyString) {
-    delete map_title_id_;
+inline void ReqMapKingWar::set_allocated_map_title(::std::string* map_title) {
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    delete map_title_;
   }
-  if (map_title_id) {
-    set_has_map_title_id();
-    map_title_id_ = map_title_id;
+  if (map_title) {
+    set_has_map_title();
+    map_title_ = map_title;
   } else {
-    clear_has_map_title_id();
-    map_title_id_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_map_title();
+    map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
 // -------------------------------------------------------------------
 
 // AckMapKingWar
+
+// required bytes map_title = 1;
+inline bool AckMapKingWar::has_map_title() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AckMapKingWar::set_has_map_title() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AckMapKingWar::clear_has_map_title() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AckMapKingWar::clear_map_title() {
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    map_title_->clear();
+  }
+  clear_has_map_title();
+}
+inline const ::std::string& AckMapKingWar::map_title() const {
+  return *map_title_;
+}
+inline void AckMapKingWar::set_map_title(const ::std::string& value) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
+  }
+  map_title_->assign(value);
+}
+inline void AckMapKingWar::set_map_title(const char* value) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
+  }
+  map_title_->assign(value);
+}
+inline void AckMapKingWar::set_map_title(const void* value, size_t size) {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
+  }
+  map_title_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AckMapKingWar::mutable_map_title() {
+  set_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    map_title_ = new ::std::string;
+  }
+  return map_title_;
+}
+inline ::std::string* AckMapKingWar::release_map_title() {
+  clear_has_map_title();
+  if (map_title_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = map_title_;
+    map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AckMapKingWar::set_allocated_map_title(::std::string* map_title) {
+  if (map_title_ != &::google::protobuf::internal::kEmptyString) {
+    delete map_title_;
+  }
+  if (map_title) {
+    set_has_map_title();
+    map_title_ = map_title;
+  } else {
+    clear_has_map_title();
+    map_title_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
 
 // -------------------------------------------------------------------
 

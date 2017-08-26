@@ -55,6 +55,13 @@ namespace NFMsg
   {
     public ReqAckEnterGameSuccess() {}
     
+    private int _arg;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"arg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int arg
+    {
+      get { return _arg; }
+      set { _arg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -65,6 +72,13 @@ namespace NFMsg
   {
     public ReqHeartBeat() {}
     
+    private int _arg;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"arg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int arg
+    {
+      get { return _arg; }
+      set { _arg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -75,6 +89,13 @@ namespace NFMsg
   {
     public ReqLeaveGameServer() {}
     
+    private int _arg;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"arg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int arg
+    {
+      get { return _arg; }
+      set { _arg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2455,12 +2476,12 @@ namespace NFMsg
   {
     public ReqMapKingWar() {}
     
-    private byte[] _map_title_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public byte[] map_title_id
+    private byte[] _map_title;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title
     {
-      get { return _map_title_id; }
-      set { _map_title_id = value; }
+      get { return _map_title; }
+      set { _map_title = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2472,6 +2493,13 @@ namespace NFMsg
   {
     public AckMapKingWar() {}
     
+    private byte[] _map_title;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"map_title", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] map_title
+    {
+      get { return _map_title; }
+      set { _map_title = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

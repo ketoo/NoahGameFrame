@@ -272,6 +272,8 @@ void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const NFSOCK nSockIn
 		m_pKernelModule->DestroyObject(nPlayerID);
 	}
 
+	//send to world server
+
 	RemovePlayerGateInfo(nPlayerID);
 }
 
@@ -1044,7 +1046,7 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 			const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 
 			NFMsg::AckEventResult xMsg;
-			xMsg.set_event_code((NFMsg::EGameEventCode)nSceneID);
+			xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SUCCESS);
 
 			*xMsg.mutable_event_client() = NFINetModule::NFToPB(pDataBase->xClientID);
 			*xMsg.mutable_event_object() = NFINetModule::NFToPB(self);
@@ -1135,8 +1137,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameFinishProcess(const NFSOCK n
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
 	
-	NFMsg::ReqAckEnterGameSuccess xReqAckEnterGameSuccess;
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xReqAckEnterGameSuccess, nSockIndex, nPlayerID);
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
 }
 
 void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
