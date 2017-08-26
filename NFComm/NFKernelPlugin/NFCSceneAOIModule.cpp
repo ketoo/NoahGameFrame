@@ -231,6 +231,11 @@ bool NFCSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTO
 
 bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
+	return CreateSceneNPC(nSceneID, nGroupID, NFDataList());
+}
+
+bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList)
+{
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (!pSceneInfo)
 	{
@@ -251,6 +256,7 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 			NFDataList arg;
 			arg << NFrame::IObject::Position() << pResource->vSeedPos;
 			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+			arg.Append(argList);
 
 			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
 		}
