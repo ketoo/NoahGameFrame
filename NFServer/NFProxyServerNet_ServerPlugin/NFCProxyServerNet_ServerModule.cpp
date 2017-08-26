@@ -211,6 +211,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
             if (!pNetObject->GetUserID().IsNull())
             {
                 NFMsg::ReqLeaveGameServer xData;
+				xData.set_arg(nGameID);
 
                 NFMsg::MsgBase xMsg;
 
