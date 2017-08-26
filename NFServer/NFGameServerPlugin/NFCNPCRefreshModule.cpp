@@ -141,6 +141,7 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefi
 
 			m_pLevelModule->AddExp( identKiller, nExp);
 
+			//add drop off item
 			
 			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);
 		}
