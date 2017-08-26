@@ -43,13 +43,13 @@ void NFSkillPlugin::Install()
 {
 	REGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
 	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
-	REGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillCooldownModule)
+	REGISTER_MODULE(pPluginManager, NFISkillCooldownModule, NFCSkillCooldownModule)
 
 }
 
 void NFSkillPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillCooldownModule)
+	UNREGISTER_MODULE(pPluginManager, NFISkillCooldownModule, NFCSkillCooldownModule)
 	UNREGISTER_MODULE(pPluginManager, NFISkillModule, NFCSkillModule)
 	UNREGISTER_MODULE(pPluginManager, NFISkillConsumeManagerModule, NFCSkillConsumeManagerModule)
 }
