@@ -893,7 +893,7 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
             }
         }
 #ifdef NF_DEBUG_MODE
-
+		/*
 		for (int iRow = 0; iRow < pRecordData->row_struct_size(); ++iRow)
 		{
 
@@ -912,6 +912,7 @@ bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecord
 				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, pRecordManager->Self(), strData, "Save Record", iRow);
 			}
 		}
+		*/
 #endif // NF_DEBUG_MODE
     }
 

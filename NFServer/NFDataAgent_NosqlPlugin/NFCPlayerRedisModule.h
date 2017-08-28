@@ -51,7 +51,7 @@ protected:
 	int OnObjectPlayerEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
 	
-		void OnOnline(const NFGUID& self);
+	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
 
 

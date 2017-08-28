@@ -367,6 +367,14 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static final String ThisName = "Cooldown";
+			public static final int SkillID = 0;//string
+			public static final int Time = 1;//int
+
+		}
 
 	}
 	public class InitProperty
@@ -511,9 +519,9 @@ package nframe;
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String DropPackList = "DropPackList";// string
+		public static final String DropProbability = "DropProbability";// int
 		public static final String EXP = "EXP";// int
 		public static final String EffectData = "EffectData";// string
-		public static final String EquipIDRef = "EquipIDRef";// string
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
