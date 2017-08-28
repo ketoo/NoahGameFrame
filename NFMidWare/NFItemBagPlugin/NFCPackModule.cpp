@@ -102,6 +102,14 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		return 0;
 	}
 
+	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
+	if ( NFMsg::EItemType::EIT_EQUIP == nItemType )
+	{
+		CreateEquip(self, strConfigName);
+
+		return 0;
+	}
+
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
 	if (!pRecord)
 	{

@@ -42,9 +42,12 @@ protected:
     int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var );
 
     int OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
-	int OnObjectBeKilled(const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var);
 
     int OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
+
+protected:
+	int OnObjectBeKilled( const NFGUID& self, const NFGUID& killer );
+
 private:
 	NFIEventModule* m_pEventModule;
 	NFIScheduleModule* m_pScheduleModule;
@@ -53,7 +56,9 @@ private:
     NFISceneProcessModule* m_pSceneProcessModule;
 	NFILogModule* m_pLogModule;
 	NFILevelModule* m_pLevelModule;
+	NFIPropertyModule* m_pPropertyModule;
 
+	int OnObjectBeKilled(const NFGUID &self, const NFGUID &killer);
 };
 
 
