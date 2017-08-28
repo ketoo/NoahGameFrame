@@ -8,11 +8,11 @@ void NFCSkillCooldownModule::AddSkillCD(const NFGUID& self, const std::string& s
 {
     //skillCnfID, usetTime
     NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::IObject::Cooldown::ThisName());
-    const int nRow = xRecord->FindString(NFrame::IObject::Cooldown::SkillID(), strSkillName);
+    const int nRow = xRecord->FindString(NFrame::IObject::Cooldown::SkillID, strSkillName);
     if (nRow >= 0)
     {
         //reset the time
-        xRecord->SetInt(nRow, NFrame::IObject::Cooldown::SkillID(), NFGetTime());
+        xRecord->SetInt(nRow, NFrame::IObject::Cooldown::SkillID, NFGetTime());
     }
     else
     {
@@ -31,8 +31,8 @@ bool NFCSkillCooldownModule::ExistSkillCD( const NFGUID& self, const std::string
     if (nRow >= 0)
     {
         //compare the time with the cooldown time
-        float fCDTime = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::IObject::Cooldown::SkillID());
-        int64_t nLastTime = xRecord->GetInt(nRow, NFrame::IObject::Cooldown::Time());
+        float fCDTime = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::IObject::Cooldown::SkillID);
+        int64_t nLastTime = xRecord->GetInt(nRow, NFrame::IObject::Cooldown::Time);
         if ((NFGetTime() - nLastTime) > fCDTime * 1000)
         {
             return true;

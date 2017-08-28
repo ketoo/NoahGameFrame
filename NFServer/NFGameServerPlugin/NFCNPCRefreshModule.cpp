@@ -144,9 +144,16 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kil
 		m_pPropertyModule->AddDiamond(killer, nDiamond);
 
 		//add drop off item
+		const int64_t nDropProbability = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::DropProbability());
+		const int64_t nRan = m_pKernelModule->Random(0, 100);
+		if (nRan > nDropProbability)
+		{
+			return 0;
+		}
+
 		NF_SHARE_PTR<NFIRecord> xDropItemList =  m_pKernelModule->FindRecord(killer, NFrame::Player::DropItemList::ThisName());
-		const std::string& strDropPackList = m_pKernelModule->GetPropertyString( self, NFrame::NPC::DropPackList() );
 		NF_SHARE_PTR<NFDataList> xRowData = xDropItemList->GetInitData();
+		const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropProbability());
 
 		NFDataList xItemList;
 		xItemList.Split(strDropPackList, ",");
@@ -161,12 +168,12 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kil
 
 			xDropItemList->AddRow(-1, *xRowData);
 
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, killer, "Add Exp for kill monster", nExp);
 		}
 	}
 	else
 	{
-		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, identKiller, "There is no object", __FUNCTION__, __LINE__);
+		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, killer, "There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return 0;

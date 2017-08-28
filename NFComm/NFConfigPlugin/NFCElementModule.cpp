@@ -98,7 +98,7 @@ bool NFCElementModule::CheckRef()
 						const std::string& strId = strIdList[i];
 
 						const std::string& strRefValue= this->GetPropertyString(strId, pProperty->GetKey());
-						if (!this->GetElement(strRefValue))
+						if (!strRefValue.empty() && !this->GetElement(strRefValue))
 						{
 							std::string msg;
 							msg.append("check ref failed id: ").append(strRefValue).append(" in ").append(pLogicClass->GetClassName());
