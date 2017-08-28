@@ -31,7 +31,7 @@ bool NFCSkillCooldownModule::ExistSkillCD( const NFGUID& self, const std::string
     if (nRow >= 0)
     {
         //compare the time with the cooldown time
-        float fCDTime = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::IObject::Cooldown::SkillID);
+        float fCDTime = m_pElementModule->GetPropertyFloat(strSkillName, NFrame::Skill::CoolDownTime());
         int64_t nLastTime = xRecord->GetInt(nRow, NFrame::IObject::Cooldown::Time);
         if ((NFGetTime() - nLastTime) > fCDTime * 1000)
         {
