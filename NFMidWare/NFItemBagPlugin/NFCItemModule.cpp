@@ -380,12 +380,14 @@ void NFCItemModule::OnClientPickItem(const NFSOCK nSockIndex, const int nMsgID, 
     if (xDropItemList)
     {
         const NFGUID& xItemID = NFINetModule::PBToNF(xMsg.item_guid());
-        const int nRow = xDropItemList->FindObject(NFrame::Player::DropItemList::GUID(), xItemID);
-        const std::string& strItemID = xDropItemList->GetString(nRow, NFrame::Player::DropItemList::ConfigID();
-        const int nCount = xDropItemList->GetInt(nRow, NFrame::Player::DropItemList::ItemCount());
+        const int nRow = xDropItemList->FindObject(NFrame::Player::DropItemList::GUID, xItemID);
+		if (nRow >= 0)
+		{
+			const std::string& strItemID = xDropItemList->GetString(nRow, NFrame::Player::DropItemList::ConfigID);
+			const int nCount = xDropItemList->GetInt(nRow, NFrame::Player::DropItemList::ItemCount);
 
-        m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
-
+			m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
+		}
     }
 }
 

@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFCNPCRefreshModule
     : public NFINPCRefreshModule
@@ -57,8 +58,6 @@ private:
 	NFILogModule* m_pLogModule;
 	NFILevelModule* m_pLevelModule;
 	NFIPropertyModule* m_pPropertyModule;
-
-	int OnObjectBeKilled(const NFGUID &self, const NFGUID &killer);
 };
 
 
