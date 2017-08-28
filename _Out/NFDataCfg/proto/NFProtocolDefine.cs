@@ -373,6 +373,14 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int SkillID = 0;//string
+			public const int Time = 1;//int
+
+		}
 
 	}
 	public class InitProperty
@@ -517,9 +525,9 @@ namespace NFrame
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String DropPackList = "DropPackList";// string
+		public static readonly String DropProbability = "DropProbability";// int
 		public static readonly String EXP = "EXP";// int
 		public static readonly String EffectData = "EffectData";// string
-		public static readonly String EquipIDRef = "EquipIDRef";// string
 		public static readonly String Gold = "Gold";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
