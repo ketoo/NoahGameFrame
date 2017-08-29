@@ -56,8 +56,8 @@ bool NFCProxyServerToGameModule::AfterInit()
             if (nServerType == NF_SERVER_TYPES::NF_ST_GAME)
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
-                const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+                //const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
+                //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
@@ -111,7 +111,7 @@ void NFCProxyServerToGameModule::Register(NFINet* pNet)
             {
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
-                const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
+                //const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
                 const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
                 const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 

@@ -56,7 +56,7 @@ bool NFCEquipPropertyModule::CalEquipProperty(const NFGUID& self, const NFGUID& 
 		return false;
 	}
 
-	const int nRow = varFind.Int32(0);
+	//const int nRow = varFind.Int32(0);
 	xDataList.Clear();
 
 	NFDataList xEquipBaseValue;
@@ -292,7 +292,7 @@ bool NFCEquipPropertyModule::CalEquipIntensifyProperty(const NFGUID& self, const
 	}
 
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
+	//const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
@@ -353,7 +353,7 @@ bool NFCEquipPropertyModule::CalEquipElementProperty(const NFGUID& self, const N
 
 	/////////////element/////////////////////////////////////////
 	const std::string& strEquipConfig = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
-	const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
+	//const int nHeroType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::HeroTye());
 	const int nItemType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemType());
 	const int nItemSubType = m_pElementModule->GetPropertyInt32(strEquipConfig, NFrame::Item::ItemSubType());
 	if (nItemType != NFMsg::EItemType::EIT_EQUIP)
