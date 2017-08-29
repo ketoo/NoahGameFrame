@@ -153,7 +153,8 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kil
 
 		NF_SHARE_PTR<NFIRecord> xDropItemList =  m_pKernelModule->FindRecord(killer, NFrame::Player::DropItemList::ThisName());
 		NF_SHARE_PTR<NFDataList> xRowData = xDropItemList->GetInitData();
-		const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropProbability());
+		const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropPackList());
+		const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
 
 		NFDataList xItemList;
 		xItemList.Split(strDropPackList, ",");
@@ -165,6 +166,7 @@ int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& kil
 			xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
 			xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
 			xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
+			xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
 
 			xDropItemList->AddRow(-1, *xRowData);
 
