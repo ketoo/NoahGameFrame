@@ -56,10 +56,6 @@ public:
     
     virtual bool HasBuff( const NFGUID& self, const std::string& strConfig );
 
-    
-    virtual bool Execute( const NFGUID& self, float fPassTime );
-
-    
     virtual int Attack( const NFGUID& self, const NFGUID& other );
 
     
@@ -127,8 +123,6 @@ private:
 
     NFIKernelModule* m_pKernelModule;
     NFIBuffConfigModule* m_pBuffConfigModule;
-
-    char* mstrRunTimeEffectTable;
 };
 
 

@@ -571,7 +571,7 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 	case RECORD_EVENT_DATA::Del:
 	{
 		NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
-		const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
+		//const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
 		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
 
 		RemoveBuilding(self, vPos.X(), vPos.Y(), xBuildingID);
