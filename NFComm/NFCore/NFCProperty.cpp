@@ -251,12 +251,12 @@ int NFCProperty::OnEventHandler(const NFData& oldVar, const NFData& newVar)
 
 	TPROPERTYCALLBACKEX::iterator it = mtPropertyCallback.begin();
 	TPROPERTYCALLBACKEX::iterator end = mtPropertyCallback.end();
-	for (it; it != end; ++it)
+	for (; it != end; ++it)
 	{
 		
 		PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 		PROPERTY_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-		int nTemRet = pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
+		pFunc->operator()(mSelf, msPropertyName, oldVar, newVar);
 	}
 
 	return 0;

@@ -411,12 +411,10 @@ int NFCPlayerRedisModule::OnObjectGuildEvent(const NFGUID & self, const std::str
 
 void NFCPlayerRedisModule::OnOnline(const NFGUID & self)
 {
-	const int nGateID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GateID());
-	const int nServerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GameID());
+	//const int nGateID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GateID());
+	//const int nServerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GameID());
 }
 
 void NFCPlayerRedisModule::OnOffline(const NFGUID & self)
 {
-	const int nGateID = 0;
-	const int nServerID = 0;
 }
