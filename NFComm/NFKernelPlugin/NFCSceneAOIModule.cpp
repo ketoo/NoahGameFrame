@@ -31,7 +31,7 @@ bool NFCSceneAOIModule::Init()
 		{
 			const std::string& strId = strIdList[i];
 
-			int nSceneID = lexical_cast<int>(strIdList[i]);
+			int nSceneID = lexical_cast<int>(strId);
 			m_pKernelModule->CreateScene(nSceneID);
 		}
 	}
@@ -393,11 +393,7 @@ int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::str
 int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
 	const std::string& strRecordName = xEventData.strRecordName;
-	const int nOpType = xEventData.nOpType;
-	const int nRow = xEventData.nRow;
-	const int nCol = xEventData.nCol;
 
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
 	if (nObjectGroupID < 0)

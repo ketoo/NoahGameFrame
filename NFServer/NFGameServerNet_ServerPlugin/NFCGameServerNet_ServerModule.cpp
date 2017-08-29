@@ -107,8 +107,8 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				//const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+				//const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -1043,7 +1043,7 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 		NF_SHARE_PTR<GateBaseInfo> pDataBase = mRoleBaseData.GetElement(self);
 		if (pDataBase)
 		{
-			const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+			//const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 
 			NFMsg::AckEventResult xMsg;
 			xMsg.set_event_code(NFMsg::EGameEventCode::EGEC_SUCCESS);

@@ -482,10 +482,10 @@ protected:
 		this->month = 0;
 		this->year = 0;
 
-		this->hour = hour;
-		this->minute = minute;
-		this->second = second;
-		this->millisecond = millisecond;
+		this->hour = 0;
+		this->minute = 0;
+		this->second = 0;
+		this->millisecond = 0;
 
 		InitMonths();
 		InitMonthNames();

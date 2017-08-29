@@ -559,7 +559,6 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(const NFMsg::ObjectPropert
 
 bool NFCCommonRedisModule::ConvertPBToRecordManager(const NFMsg::ObjectRecordList& xMsg, NF_SHARE_PTR<NFIRecordManager>& pRecordManager, const bool bCache)
 {
-    NFGUID xIdent = NFINetModule::PBToNF(xMsg.player_id());
     for (int iRecord = 0; iRecord < xMsg.record_list_size(); ++iRecord)
     {
         const NFMsg::ObjectRecordBase& xRecordBase = xMsg.record_list(iRecord);

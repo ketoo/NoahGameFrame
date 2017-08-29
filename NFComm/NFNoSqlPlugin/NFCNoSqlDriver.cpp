@@ -546,6 +546,22 @@ const bool NFCNoSqlDriver::ZCard(const std::string & strKey, int & nCount)
 	return false;
 }
 
+const bool NFCNoSqlDriver::ZRank(const std::string& strKey, const std::string& strMember, int& nRank)
+{
+	if (!Enable())
+	{
+		return false;
+	}
+
+	try
+	{
+		nRank = m_pNoSqlClient->zrank(strKey);
+		return true;
+	}
+	REDIS_CATCH(__FUNCTION__, __LINE__);
+	return false;
+}
+
 const bool NFCNoSqlDriver::ZCount(const std::string & strKey, const int nMin, const int nMax, int & nCount)
 {
 	if (!Enable())
@@ -576,6 +592,24 @@ const bool NFCNoSqlDriver::ZRevRange(const std::string & strKey, const int nStar
 		return true;
 
 	}
+	REDIS_CATCH(__FUNCTION__, __LINE__);
+
+	return false;
+}
+
+const bool NFCNoSqlDriver::ZRange(const std::string& strKey, const int nStartIndex, const int nEndIndex, std::vector<std::pair<std::string, double> >& memberScoreVec)
+{
+	if (!Enable())
+	{
+		return false;
+	}
+
+	try
+	{
+		m_pNoSqlClient->zrange(strKey, nStartIndex, nEndIndex, memberScoreVec);
+		return true;
+	}
+
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
