@@ -75,7 +75,7 @@ bool NFCKernelModule::Execute()
     if (mtDeleteSelfList.size() > 0)
     {
         std::list<NFGUID>::iterator it = mtDeleteSelfList.begin();
-        for (it; it != mtDeleteSelfList.end(); it++)
+        for (; it != mtDeleteSelfList.end(); it++)
         {
             DestroyObject(*it);
         }
@@ -1242,7 +1242,7 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string
 			|| xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 		{
 			std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mtCommonPropertyCallBackList.begin();
-			for (it; it != mtCommonPropertyCallBackList.end(); it++)
+			for (; it != mtCommonPropertyCallBackList.end(); it++)
 			{
 				PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 				PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
@@ -1352,7 +1352,7 @@ int NFCKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_
 			|| xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
 		{
 			std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mtCommonRecordCallBackList.begin();
-			for (it; it != mtCommonRecordCallBackList.end(); it++)
+			for (; it != mtCommonRecordCallBackList.end(); it++)
 			{
 				RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 				RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
@@ -1367,7 +1367,7 @@ int NFCKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_
 int NFCKernelModule::OnClassCommonEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var)
 {
     std::list<CLASS_EVENT_FUNCTOR_PTR>::iterator it = mtCommonClassCallBackList.begin();
-    for (it; it != mtCommonClassCallBackList.end(); it++)
+    for (; it != mtCommonClassCallBackList.end(); it++)
     {
         CLASS_EVENT_FUNCTOR_PTR& pFunPtr = *it;
         CLASS_EVENT_FUNCTOR* pFun = pFunPtr.get();

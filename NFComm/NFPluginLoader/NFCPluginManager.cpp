@@ -62,7 +62,7 @@ bool NFCPluginManager::Awake()
 	LoadPluginConfig();
 
 	PluginNameMap::iterator it = mPluginNameMap.begin();
-	for (it; it != mPluginNameMap.end(); ++it)
+	for (; it != mPluginNameMap.end(); ++it)
 	{
 #ifdef NF_DYNAMIC_PLUGIN
 		LoadPluginLibrary(it->first);
@@ -84,7 +84,7 @@ bool NFCPluginManager::Awake()
 inline bool NFCPluginManager::Init()
 {
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		itInstance->second->Init();
 	}
@@ -158,7 +158,7 @@ bool NFCPluginManager::LoadPluginConfig()
 bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 {
 	//     PluginNameList::iterator it = mPluginNameList.begin();
-	//     for (it; it != mPluginNameList.end(); it++)
+	//     for (; it != mPluginNameList.end(); it++)
 	//     {
 	//         const std::string& strPluginName = *it;
 	//         CREATE_PLUGIN( this, strPluginName );
@@ -278,7 +278,7 @@ bool NFCPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 
 	//4
 	PluginInstanceMap::iterator itReloadInstance = mPluginInstanceMap.begin();
-	for (itReloadInstance; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
+	for (; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
 	{
 		if (strPluginDLLName != itReloadInstance->first)
 		{
@@ -461,7 +461,7 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 bool NFCPluginManager::AfterInit()
 {
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
-    for (itAfterInstance; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
+    for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
     {
         itAfterInstance->second->AfterInit();
     }
@@ -472,7 +472,7 @@ bool NFCPluginManager::AfterInit()
 bool NFCPluginManager::CheckConfig()
 {
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
-    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
         itCheckInstance->second->CheckConfig();
     }
@@ -483,7 +483,7 @@ bool NFCPluginManager::CheckConfig()
 bool NFCPluginManager::ReadyExecute()
 {
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
-    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
         itCheckInstance->second->ReadyExecute();
     }
@@ -494,7 +494,7 @@ bool NFCPluginManager::ReadyExecute()
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
-    for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
+    for (; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
     {
         itBeforeInstance->second->BeforeShut();
     }
@@ -505,7 +505,7 @@ bool NFCPluginManager::BeforeShut()
 bool NFCPluginManager::Shut()
 {
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-    for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
+    for (; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
         itInstance->second->Shut();
     }
@@ -516,7 +516,7 @@ bool NFCPluginManager::Shut()
 bool NFCPluginManager::Finalize()
 {
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		itInstance->second->Finalize();
 	}
@@ -524,7 +524,7 @@ bool NFCPluginManager::Finalize()
 	////////////////////////////////////////////////
 
 	PluginNameMap::iterator it = mPluginNameMap.begin();
-	for (it; it != mPluginNameMap.end(); it++)
+	for (; it != mPluginNameMap.end(); it++)
 	{
 #ifdef NF_DYNAMIC_PLUGIN
 		UnLoadPluginLibrary(it->first);

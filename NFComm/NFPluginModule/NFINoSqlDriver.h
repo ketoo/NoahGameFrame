@@ -63,15 +63,14 @@ public:
 
 
 	virtual const bool ZScore(const std::string& strKey, const std::string& strMember, double& dwScore) = 0;
-
-
+	virtual const bool ZRank(const std::string& strKey, const std::string& strMember, int& nRank) = 0;
 	virtual const bool ZCard(const std::string& strKey, int& nCount) = 0;
-
 	virtual const bool ZCount(const std::string& strKey, const int nMin, const int nMax, int& nCount) = 0;
 
 
 	virtual const bool ZRevRange(const std::string& strKey, const int nStart, const int nStop, std::vector<std::pair<std::string, double> >& memberScoreVec) = 0;
 	virtual const bool ZRevRank(const std::string& strKey, const std::string& strMember, int& nRank) = 0;
+	virtual const bool ZRange(const std::string& strKey, const int nStartIndex, const int nEndIndex, std::vector<std::pair<std::string, double> >& memberScoreVec) = 0;
 	virtual const bool ZRangeByScore(const std::string& strKey, const int nMin, const int nMax, std::vector<std::pair<std::string, double> >& memberScoreVec) = 0;
 
 	///////////////////////////////////////////////////////////

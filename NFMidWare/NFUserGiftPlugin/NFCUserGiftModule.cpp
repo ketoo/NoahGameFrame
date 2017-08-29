@@ -98,7 +98,7 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 			{
 				std::string strItemID;
 				NF_SHARE_PTR<std::string> strItemCount = xEmbeddedMap->First(strItemID);
-				for (strItemCount; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
+				for (; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
 				{
 					int nCount = lexical_cast<int>(*strItemCount);
 

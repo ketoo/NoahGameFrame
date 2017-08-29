@@ -320,10 +320,9 @@ void NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess(const NFSOCK nSockIn
 	}
 }
 
-int NFCWorldNet_ServerModule::OnLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCWorldNet_ServerModule::OnLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 
-    return 0;
 }
 
 void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
