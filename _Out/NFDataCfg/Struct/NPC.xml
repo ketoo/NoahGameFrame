@@ -43,7 +43,7 @@
 		<Property Id="MOVE_SPEED" Cache="0" Desc="移动速度,默认单位是10000=1米" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MasterID" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="object" Upload="0" />
+		<Property Id="MasterID" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="NPCType" Cache="0" Desc="NPC类型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Prefab" Cache="0" Desc="客户端预设模型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
