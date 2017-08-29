@@ -555,7 +555,7 @@ const bool NFCNoSqlDriver::ZRank(const std::string& strKey, const std::string& s
 
 	try
 	{
-		nRank = m_pNoSqlClient->zrank(strKey);
+		nRank = m_pNoSqlClient->zrank(strKey, strMember);
 		return true;
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);

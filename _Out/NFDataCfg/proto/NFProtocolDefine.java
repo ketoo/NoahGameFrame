@@ -773,6 +773,7 @@ package nframe;
 			public static final int GUID = 0;//object
 			public static final int ConfigID = 1;//string
 			public static final int ItemCount = 2;//int
+			public static final int Postion = 3;//vector3
 
 		}
 		public class HeroValue
