@@ -779,6 +779,7 @@ namespace NFrame
 			public const int GUID = 0;//object
 			public const int ConfigID = 1;//string
 			public const int ItemCount = 2;//int
+			public const int Postion = 3;//vector3
 
 		}
 		public class HeroValue

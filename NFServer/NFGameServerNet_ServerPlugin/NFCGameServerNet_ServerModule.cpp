@@ -375,6 +375,40 @@ int NFCGameServerNet_ServerModule::OnPropertyEnter(const NFDataList& argVar, con
 				}
 				break;
 
+				case TDATA_VECTOR2:
+				{
+					if (pPropertyInfo->GetPublic())
+					{
+						NFMsg::PropertyVector2* pDataObject = pPublicData->add_property_vector2_list();
+						pDataObject->set_property_name(pPropertyInfo->GetKey());
+						*(pDataObject->mutable_data()) = NFINetModule::NFToPB(pPropertyInfo->GetVector2());
+					}
+
+					if (pPropertyInfo->GetPrivate())
+					{
+						NFMsg::PropertyVector2* pDataObject = pPrivateData->add_property_vector2_list();
+						pDataObject->set_property_name(pPropertyInfo->GetKey());
+						*(pDataObject->mutable_data()) = NFINetModule::NFToPB(pPropertyInfo->GetVector2());
+					}
+				}
+				break;
+				case TDATA_VECTOR3:
+				{
+					if (pPropertyInfo->GetPublic())
+					{
+						NFMsg::PropertyVector3* pDataObject = pPublicData->add_property_vector3_list();
+						pDataObject->set_property_name(pPropertyInfo->GetKey());
+						*(pDataObject->mutable_data()) = NFINetModule::NFToPB(pPropertyInfo->GetVector3());
+					}
+
+					if (pPropertyInfo->GetPrivate())
+					{
+						NFMsg::PropertyVector3* pDataObject = pPrivateData->add_property_vector3_list();
+						pDataObject->set_property_name(pPropertyInfo->GetKey());
+						*(pDataObject->mutable_data()) = NFINetModule::NFToPB(pPropertyInfo->GetVector3());
+					}
+				}
+				break;
 				default:
 					break;
 				}
@@ -471,6 +505,31 @@ bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase*
 					}
 				}
 				break;
+				case NFDATA_TYPE::TDATA_VECTOR2:
+				{
+					NFVector2 vPos = pRecord->GetVector2(i, j);
+					//if ( !ident.IsNull() )
+					{
+						NFMsg::RecordVector2* pAddData = pAddRowStruct->add_record_vector2_list();
+						pAddData->set_row(i);
+						pAddData->set_col(j);
+						*(pAddData->mutable_data()) = NFINetModule::NFToPB(vPos);
+					}
+				}
+				break;
+				case NFDATA_TYPE::TDATA_VECTOR3:
+				{
+					NFVector3 vPos = pRecord->GetVector3(i, j);
+					//if ( !ident.IsNull() )
+					{
+						NFMsg::RecordVector3* pAddData = pAddRowStruct->add_record_vector3_list();
+						pAddData->set_row(i);
+						pAddData->set_col(j);
+						*(pAddData->mutable_data()) = NFINetModule::NFToPB(vPos);
+					}
+				}
+				break;
+
 				default:
 					break;
 				}
@@ -650,7 +709,42 @@ int NFCGameServerNet_ServerModule::OnPropertyEvent(const NFGUID & self, const st
 		}
 	}
 	break;
+	case TDATA_VECTOR2:
+	{
+		NFMsg::ObjectPropertyVector2 xPropertyVector2;
+		NFMsg::Ident* pIdent = xPropertyVector2.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
 
+		NFMsg::PropertyVector2* pDataObject = xPropertyVector2.add_property_list();
+		pDataObject->set_property_name(strProperty);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_VECTOR2, xPropertyVector2, identOld);
+		}
+	}
+	break;
+	case TDATA_VECTOR3:
+	{
+		NFMsg::ObjectPropertyVector3 xPropertyVector3;
+		NFMsg::Ident* pIdent = xPropertyVector3.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyVector3* pDataObject = xPropertyVector3.add_property_list();
+		pDataObject->set_property_name(strProperty);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
+
+		for (int i = 0; i < argVar.GetCount(); i++)
+		{
+			NFGUID identOld = argVar.Object(i);
+
+			SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_VECTOR3, xPropertyVector3, identOld);
+		}
+	}
+	break;
 	default:
 		break;
 	}
@@ -733,6 +827,25 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 						*pAddData->mutable_data() = NFINetModule::NFToPB(identValue);
 					}
 					break;
+					case TDATA_VECTOR2:
+					{
+						NFVector2 vPos = xRowDataList.Vector2(i);
+						NFMsg::RecordVector2* pAddData = pAddRowData->add_record_vector2_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
+					}
+					break;
+					case TDATA_VECTOR3:
+					{
+						NFVector3 vPos = xRowDataList.Vector3(i);
+						NFMsg::RecordVector3* pAddData = pAddRowData->add_record_vector3_list();
+						pAddData->set_col(i);
+						pAddData->set_row(xEventData.nRow);
+						*pAddData->mutable_data() = NFINetModule::NFToPB(vPos);
+					}
+					break;
+
 					default:
 						break;
 					}
@@ -867,7 +980,44 @@ int NFCGameServerNet_ServerModule::OnRecordEvent(const NFGUID & self, const std:
 			}
 		}
 		break;
+		case TDATA_VECTOR2:
+		{
+			NFMsg::ObjectRecordVector2 xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
 
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordVector2* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR2, xRecordChanged, identOther);
+			}
+		}
+		break;
+		case TDATA_VECTOR3:
+		{
+			NFMsg::ObjectRecordVector3 xRecordChanged;
+			*xRecordChanged.mutable_player_id() = NFINetModule::NFToPB(self);
+
+			xRecordChanged.set_record_name(strRecord);
+			NFMsg::RecordVector3* recordProperty = xRecordChanged.add_property_list();
+			recordProperty->set_row(xEventData.nRow);
+			recordProperty->set_col(xEventData.nCol);
+			*recordProperty->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
+
+			for (int i = 0; i < argVar.GetCount(); i++)
+			{
+				NFGUID identOther = argVar.Object(i);
+
+				SendMsgPBToGate(NFMsg::EGMI_ACK_RECORD_VECTOR2, xRecordChanged, identOther);
+			}
+		}
+		break;
 		default:
 			return 0;
 			break;
