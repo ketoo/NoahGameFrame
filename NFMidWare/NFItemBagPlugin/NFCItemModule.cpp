@@ -260,8 +260,8 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	const int nVIPEXP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::VIPEXP());
-	const int64_t nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+	//const int nVIPEXP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::VIPEXP());
+	//const int64_t nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
 	const int nHP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::HP());
 	const int nSP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::SP());
 	const int nMP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::MP());
@@ -366,7 +366,7 @@ void NFCItemModule::OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, c
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
-	const int nCount = xMsg.item().item_count();
+	//const int nCount = xMsg.item().item_count();
 
 	UseItem(nPlayerID, strItemID, xTargetID);
 }
