@@ -1342,15 +1342,19 @@ void NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess(const NFSOCK nSoc
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
-	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
-	if (self != nPlayerID)
+	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
+	if (xMover != nPlayerID)
 	{
-		return;
+		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
+		if (xMasterID != nPlayerID)
+		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
+			return;
+		}
 	}
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-
+	const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::IObject::SceneID());
+	const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::IObject::GroupID());
 
 	if (xMsg.target_pos_size() > 0)
 	{
@@ -1361,7 +1365,7 @@ void NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess(const NFSOCK nSoc
 		v.SetY(vPos.y());
 		v.SetZ(vPos.z());
 
-		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+		m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
 	}
 
 	this->SendMsgPBToGate(NFMsg::EGMI_ACK_STATE_SYNC, xMsg, nSceneID, nGroupID);

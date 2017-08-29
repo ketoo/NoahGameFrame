@@ -155,7 +155,7 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
-		<Record Id="DropItemList" Cache="1"	 Col="4"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+		<Record Id="DropItemList" Cache="0"	 Col="4"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="ItemCount"/>
