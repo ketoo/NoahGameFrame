@@ -15,6 +15,11 @@
 class NFITaskModule : public NFIModule
 {
 public:
+    enum TaskType
+    {
+        TT_KILL_MONSTER,
+        TT_KILL_PLAYER,
+    };
 
 };
 
