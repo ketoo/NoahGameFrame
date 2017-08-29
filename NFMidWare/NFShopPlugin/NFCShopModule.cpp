@@ -73,8 +73,8 @@ bool NFCShopModule::ReqBuyItem(const NFGUID & self, const std::string & strShopI
 
 	const int nDiamond = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Diamond());
 	const int64_t nGold = m_pElementModule->GetPropertyInt(strShopItemID, NFrame::Shop::Gold());
-	const int nStone = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Stone());
-	const int nSteel = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Steel());
+	//const int nStone = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Stone());
+	//const int nSteel = m_pElementModule->GetPropertyInt32(strShopItemID, NFrame::Shop::Steel());
 	
 	if (!m_pPropertyModule->EnoughDiamond(self, nDiamond)
 		&& !m_pPropertyModule->EnoughGold(self, nGold))

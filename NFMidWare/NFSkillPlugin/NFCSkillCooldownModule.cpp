@@ -4,6 +4,15 @@
 #include "NFCSkillCooldownModule.h"
 #include <NFComm/NFPluginModule/NFGUID.h>
 
+
+bool NFCSkillCooldownModule::AfterInit()
+{
+    m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+
+    return false;
+}
+
 void NFCSkillCooldownModule::AddSkillCD(const NFGUID& self, const std::string& strSkillName )
 {
     //skillCnfID, usetTime

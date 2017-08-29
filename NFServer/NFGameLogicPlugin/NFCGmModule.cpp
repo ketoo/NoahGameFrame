@@ -484,7 +484,7 @@ void NFCGmModule::OnClienGMProcess(const NFSOCK nSockIndex, const int nMsgID, co
     {
     case NFMsg::ReqCommand_EGameCommandType_EGCT_MODIY_PROPERTY:
     {
-        const std::string& strPropertyName = xMsg.command_str_value();
+        //const std::string& strPropertyName = xMsg.command_str_value();
         //const int nValue = xMsg.command_value();
         //m_pKernelModule->SetPropertyInt(nPlayerID, strPropertyName, nValue);
     }

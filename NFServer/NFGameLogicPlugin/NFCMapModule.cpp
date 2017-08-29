@@ -115,7 +115,7 @@ void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, co
 		}
 
 		std::vector<NFMsg::BigMapLeaveMsg>::iterator itLeaveMsg = xLeaveMsgList.begin();
-		for (itLeaveMsg; itLeaveMsg != xLeaveMsgList.end(); ++itLeaveMsg)
+		for (; itLeaveMsg != xLeaveMsgList.end(); ++itLeaveMsg)
 		{
 			NFMsg::BigMapLeaveMsg* pBigMapLeaveMsg = pBigMapGridDetailInfo->add_leave_msg();
 			if (pBigMapLeaveMsg)
@@ -125,7 +125,7 @@ void NFCMapModule::ReqMapTitleInfo(const NFSOCK nSockIndex, const int nMsgID, co
 		}
 
 		std::vector<NFMsg::BigMapWarHistory>::iterator itWar = xWarHistoryList.begin();
-		for (itWar; itWar != xWarHistoryList.end(); ++itWar)
+		for (; itWar != xWarHistoryList.end(); ++itWar)
 		{
 			NFMsg::BigMapWarHistory* pBigMapWarHistory = pBigMapGridDetailInfo->add_war_history();
 			if (pBigMapWarHistory)

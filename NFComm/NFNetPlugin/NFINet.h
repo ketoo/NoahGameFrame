@@ -279,11 +279,6 @@ public:
 
     int RemoveBuff(uint32_t nStart, uint32_t nLen)
     {
-        if (nStart < 0)
-        {
-            return 0;
-        }
-
         if (nStart + nLen > mstrBuff.length())
         {
             return 0;
