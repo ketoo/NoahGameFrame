@@ -45,7 +45,7 @@ protected:
 protected:
     void OnClientAcceptTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnClientPushTask(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnClientPushCustom(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
 private:
 	NFINetModule*					m_pNetModule;
     NFIKernelModule* 				m_pKernelModule;
