@@ -39,9 +39,13 @@ bool NFCWorldNet_ServerModule::AfterInit()
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTranspondServerReport);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTransmitServerReport);
 
-	m_pNetModule->AddEventCallBack(this, &NFCWorldNet_ServerModule::OnSocketEvent);
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCWorldNet_ServerModule::OnReqSwitchServer)) { return false; }
+    if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACKSWICHSERVER, this, &NFCWorldNet_ServerModule::OnAckSwitchServer)) { return false; }
+
+
+    m_pNetModule->AddEventCallBack(this, &NFCWorldNet_ServerModule::OnSocketEvent);
 	m_pNetModule->ExpandBufferSize();
 
     NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Server::ThisName());
@@ -320,11 +324,6 @@ void NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess(const NFSOCK nSockIn
 	}
 }
 
-void NFCWorldNet_ServerModule::OnLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-
-}
-
 void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
     if (eEvent & NF_NET_EVENT_EOF)
@@ -347,6 +346,27 @@ void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_N
         m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, nSockIndex), "NF_NET_EVENT_CONNECTED", "connectioned success", __FUNCTION__, __LINE__);
         OnClientConnected(nSockIndex);
     }
+}
+
+void NFCWorldNet_ServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+                                                  const uint32_t nLen)
+{
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
+    nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
+
+    //const NFGUID nClientID = NFINetModule::PBToNF(xMsg.client_id());
+    //const int nGateID = (int)xMsg.gate_serverid();
+    //const int nSceneID = (int)xMsg.sceneid();
+    SendMsgToGame((int)xMsg.target_serverid(), NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
+}
+
+void NFCWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+                                                  const uint32_t nLen)
+{
+    CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
+    nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
+
+    m_pWorldNet_ServerModule->SendMsgToGame((int)xMsg.self_serverid(), NFMsg::EGMI_ACKSWICHSERVER, xMsg, nPlayerID);
 }
 
 void NFCWorldNet_ServerModule::SynGameToProxy()
@@ -471,7 +491,8 @@ void NFCWorldNet_ServerModule::OnOfflineProcess(const NFSOCK nSockIndex, const i
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::RoleOfflineNotify);
 }
 
-void NFCWorldNet_ServerModule::OnTranspondServerReport(const NFSOCK nFd, const int msgId, const char* buffer, const uint32_t nLen)
+void NFCWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer,
+                                                      const uint32_t nLen)
 {
     NFGUID xGUID;
 	NFMsg::ServerInfoReport msg;

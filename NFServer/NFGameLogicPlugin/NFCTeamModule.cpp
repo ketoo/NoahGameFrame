@@ -8,13 +8,7 @@
 
 #include "NFCTeamModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
