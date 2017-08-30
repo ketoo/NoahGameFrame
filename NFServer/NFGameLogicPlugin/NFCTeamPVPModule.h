@@ -18,7 +18,7 @@
 #include "NFComm/NFPluginModule/NFITeamModule.h"
 #include "NFComm/NFPluginModule/NFITeamPVPModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerToWorldModule.h"
-#include "NFComm/NFPluginModule/NFIGSSwichServerModule.h"
+#include "NFComm/NFPluginModule/NFISwitchGameServerModule.h"
 
 class NFCTeamPVPModule
     : public NFITeamPVPModule
@@ -44,7 +44,7 @@ private:
     NFILogModule* m_pLogModule;
 	NFINetClientModule* m_pNetClientModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-	NFIGSSwichServerModule* m_pGSSwitchServerModule;
+	NFISwitchGameServerModule* m_pSwitchGameServerModule;
 };
 
 #endif
