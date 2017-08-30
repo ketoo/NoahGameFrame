@@ -227,7 +227,7 @@ bool NFCCommonRedisModule::SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PT
 
 	std::vector<std::string> vKeyList;
 	std::vector<std::string> vValueList;
-    if (!ConvertPropertyManagerToPB(pPropertyManager, vKeyList, vValueList, true))
+    if (!ConvertPropertyManagerToPB(pPropertyManager, vKeyList, vValueList, bCache))
     {
         return false;
     }
@@ -275,7 +275,7 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
 
 	std::vector<std::string> vKeyList;
 	std::vector<std::string> vValueList;
-    if (!ConvertRecordToPB(pRecordManager, vKeyList, vValueList, true))
+    if (!ConvertRecordToPB(pRecordManager, vKeyList, vValueList, bCache))
     {
         return false;
     }
