@@ -50,7 +50,7 @@ private:
     NFIPropertyModule*              m_pPropertyModule;
     NFINetClientModule*             m_pNetClientModule;
     NFIPackModule*                  m_pPackModule;
-    NFISceneAOIModule*              m_pSceneModule;
+    NFISceneAOIModule*              m_pSceneAOIModule;
     NFIGameServerNet_ServerModule*  m_pGameServerNet_ServerModule;
 };
 
