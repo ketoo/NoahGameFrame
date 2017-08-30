@@ -33,14 +33,13 @@ public:
     virtual bool Init();
     virtual bool Shut();
     virtual bool Execute();
-
     virtual bool AfterInit();
 
-	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID);
-	virtual bool ReqBuyItem(const NFGUID& self, const std::string& strID, const NFVector3& v);
 
 protected:
-	void OnClienBuyItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	bool ReqBuyItem(const NFGUID& self, const std::string& strID, const int nCount);
+
+	void ClientBuyItem(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 
