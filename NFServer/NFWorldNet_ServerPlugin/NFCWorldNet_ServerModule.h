@@ -56,13 +56,19 @@ protected:
 
     void OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet);
 
-    
     void OnClientDisconnect(const NFSOCK nAddress);
-    
     void OnClientConnected(const NFSOCK nAddress);
 
 
+    void OnOnlineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+    void OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
+    void OnTransmitServerReport(const NFSOCK nFd, const int msgId, const char *buffer, const uint32_t nLen);
+    void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
+
+
+    void OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 protected:
 
     void OnGameServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -77,21 +83,11 @@ protected:
 	void OnAIServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnRefreshAIServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnLeaveGameProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    //////////////////////////////////////////////////////////////////////////
 
     void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);
 
-    //////////////////////////////////////////////////////////////////////////
     void LogGameServer();
-
-protected:
-
-    void OnOnlineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-    void OnOfflineProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnTranspondServerReport(const NFSOCK nFd, const int msgId, const char* buffer, const uint32_t nLen);
-	void ServerReport(int reportServerId, NFMsg::EServerState serverStatus);
 
 private:
 
