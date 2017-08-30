@@ -344,6 +344,7 @@ bool NFCPropertyModule::DamageMP(const NFGUID & self, const int nValue)
 		return true;
 	}
 
+	return false;
 }
 
 bool NFCPropertyModule::FullSP(const NFGUID& self)

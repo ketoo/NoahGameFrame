@@ -205,41 +205,7 @@ namespace NFrame
 			public const int GUID = 0;//object
 			public const int Name = 1;//string
 			public const int Level = 2;//int
-			public const int Job = 3;//int
-			public const int Donation = 4;//int
-			public const int VIP = 5;//int
-			public const int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static readonly String ThisName = "GuildBoss";
-			public const int GUID = 0;//object
-			public const int Name = 1;//string
-			public const int Level = 2;//int
-			public const int Job = 3;//int
-			public const int Donation = 4;//int
-			public const int VIP = 5;//int
-			public const int Offline = 6;//int
-			public const int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static readonly String ThisName = "GuildEvent";
-			public const int GUID = 0;//object
-			public const int Name = 1;//string
-			public const int Level = 2;//int
-			public const int Job = 3;//int
-			public const int Donation = 4;//int
-			public const int VIP = 5;//int
-			public const int Offline = 6;//int
-			public const int Power = 7;//int
-			public const int EventID = 8;//int
-			public const int EventTime = 9;//int
-			public const int Context = 10;//string
+			public const int VIP = 3;//int
 
 		}
 		public class GuildHouse
@@ -249,11 +215,6 @@ namespace NFrame
 			public const int GUID = 0;//object
 			public const int Name = 1;//string
 			public const int Level = 2;//int
-			public const int Job = 3;//int
-			public const int Donation = 4;//int
-			public const int VIP = 5;//int
-			public const int Offline = 6;//int
-			public const int Power = 7;//int
 
 		}
 		public class GuildMemberList
@@ -273,7 +234,8 @@ namespace NFrame
 			public const int GameID = 10;//int
 			public const int JoinTime = 11;//int
 			public const int Contribution = 12;//int
-			public const int AllContribution = 13;//int
+			public const int LastTime = 13;//string
+			public const int AllContribution = 14;//int
 
 		}
 		public class GuildSkill
@@ -281,13 +243,7 @@ namespace NFrame
 			//Class name
 			public static readonly String ThisName = "GuildSkill";
 			public const int GUID = 0;//object
-			public const int Name = 1;//string
-			public const int Level = 2;//int
-			public const int Job = 3;//int
-			public const int Donation = 4;//int
-			public const int VIP = 5;//int
-			public const int Offline = 6;//int
-			public const int Power = 7;//int
+			public const int Level = 1;//int
 
 		}
 
@@ -304,12 +260,13 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String ConditionPlayerLevel = "ConditionPlayerLevel";// int
-		public static readonly String ConditionPlayerVIP = "ConditionPlayerVIP";// int
-		public static readonly String CostMoney = "CostMoney";// int
 		public static readonly String DismissTime = "DismissTime";// int
 		public static readonly String GuildLevel = "GuildLevel";// int
+		public static readonly String Level = "Level";// int
 		public static readonly String MaxMember = "MaxMember";// int
+		public static readonly String Money = "Money";// int
+		public static readonly String SkillNum = "SkillNum";// int
+		public static readonly String VIP = "VIP";// int
 		// Record
 
 	}

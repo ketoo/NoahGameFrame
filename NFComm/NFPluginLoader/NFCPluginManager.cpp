@@ -48,8 +48,13 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 
    mGetFileContentFunctor = nullptr;
 
-   mstrConfigPath = "";
-   mstrConfigName = "Plugin.xml";
+   mstrConfigPath = "../";
+
+#ifdef NF_DEBUG_MODE
+   mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
+#else
+   mstrConfigName = "NFDataCfg/Release/Plugin.xml";
+#endif
 }
 
 NFCPluginManager::~NFCPluginManager()
@@ -95,7 +100,8 @@ inline bool NFCPluginManager::Init()
 bool NFCPluginManager::LoadPluginConfig()
 {
 	std::string strContent;
-	GetFileContent(mstrConfigName, strContent);
+	std::string strFilePath = GetConfigPath() + mstrConfigName;
+	GetFileContent(strFilePath, strContent);
 
 	rapidxml::xml_document<> xDoc;
 	xDoc.parse<0>((char*)strContent.c_str());
@@ -115,42 +121,6 @@ bool NFCPluginManager::LoadPluginConfig()
         mPluginNameMap.insert(PluginNameMap::value_type(strPluginName, true));
 
     }
-
-/*
-    rapidxml::xml_node<>* pPluginAppNode = pAppNameNode->first_node("APPID");
-    if (!pPluginAppNode)
-    {
-        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    const char* strAppID = pPluginAppNode->first_attribute("Name")->value();
-    if (!strAppID)
-    {
-        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    if (!NF_StrTo(strAppID, mnAppID))
-    {
-        NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
-        return false;
-    }
-*/
-    rapidxml::xml_node<>* pPluginConfigPathNode = pAppNameNode->first_node("ConfigPath");
-    if (!pPluginConfigPathNode)
-    {
-        NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    if (NULL == pPluginConfigPathNode->first_attribute("Name"))
-    {
-        NFASSERT(0, "There are no ConfigPath.Name", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    mstrConfigPath = pPluginConfigPathNode->first_attribute("Name")->value();
 
     return true;
 }
@@ -340,6 +310,11 @@ inline const std::string & NFCPluginManager::GetConfigPath() const
 	return mstrConfigPath;
 }
 
+inline void NFCPluginManager::SetConfigPath(const std::string & strPath)
+{
+	mstrConfigPath = strPath;
+}
+
 void NFCPluginManager::SetConfigName(const std::string & strFileName)
 {
 	if (strFileName.empty())
@@ -352,7 +327,16 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 		return;
 	}
 
-	mstrConfigName = strFileName;
+#ifdef NF_DEBUG_MODE
+	mstrConfigName = "NFDataCfg/Debug/" + strFileName;
+#else
+	mstrConfigName = "NFDataCfg/Release/" + strFileName;
+#endif
+}
+
+const std::string& NFCPluginManager::GetConfigName() const
+{
+	return mstrConfigName;
 }
 
 const std::string& NFCPluginManager::GetAppName() const
