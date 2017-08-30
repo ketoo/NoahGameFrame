@@ -124,7 +124,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	{
 
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
 		m_pEventModule->AddEventCallBack(self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent);
 	}

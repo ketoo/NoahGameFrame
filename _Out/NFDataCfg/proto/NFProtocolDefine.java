@@ -375,7 +375,7 @@ package nframe;
 		public static final String EffectData = "EffectData";// string
 		public static final String ExpiredType = "ExpiredType";// int
 		public static final String Extend = "Extend";// string
-		public static final String HeroTye = "HeroTye";// int
+		public static final String HeroType = "HeroType";// int
 		public static final String Icon = "Icon";// string
 		public static final String ItemSubType = "ItemSubType";// int
 		public static final String ItemType = "ItemType";// int
