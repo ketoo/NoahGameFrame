@@ -1301,12 +1301,28 @@ void NFCGameServerNet_ServerModule::OnClienReqMoveProcess(const NFSOCK nSockInde
 {
 	CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
-	const NFGUID  &self = NFINetModule::PBToNF(xMsg.mover());
+	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
+	if (xMover != nPlayerID)
+	{
+		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
+		if (xMasterID == nPlayerID)
+		{
 
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+			NFMsg::Vector3 vPos = xMsg.target_pos(0);
 
-	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
+			NFVector3 v;
+			v.SetX(vPos.x());
+			v.SetY(vPos.y());
+			v.SetZ(vPos.z());
+
+			m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
+
+			const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
+			const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());
+			this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE, xMsg, nSceneID, nGroupID);
+		}
+	}
+
 }
 
 void NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -1341,16 +1357,18 @@ void NFCGameServerNet_ServerModule::OnClienReqMoveImmuneProcess(const NFSOCK nSo
 void NFCGameServerNet_ServerModule::OnClienReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
-
+	//only the player can send the message to the back-end
+	//the monter use the require move message to sync the position between different view
 	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
 	if (xMover != nPlayerID)
 	{
-		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
-		if (xMasterID != nPlayerID)
-		{
-			m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
-			return;
-		}
+		//const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
+		//if (xMasterID != nPlayerID)
+		//{
+		//	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, xMover, "Message come from player ", nPlayerID.ToString());
+		//	return;
+		//}
+		return;
 	}
 
 	const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::IObject::SceneID());
