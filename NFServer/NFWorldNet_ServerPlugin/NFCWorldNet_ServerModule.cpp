@@ -366,7 +366,7 @@ void NFCWorldNet_ServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const 
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::AckSwitchServer);
     nPlayerID = NFINetModule::PBToNF(xMsg.selfid());
 
-    m_pWorldNet_ServerModule->SendMsgToGame((int)xMsg.self_serverid(), NFMsg::EGMI_ACKSWICHSERVER, xMsg, nPlayerID);
+    SendMsgToGame((int)xMsg.self_serverid(), NFMsg::EGMI_ACKSWICHSERVER, xMsg, nPlayerID);
 }
 
 void NFCWorldNet_ServerModule::SynGameToProxy()

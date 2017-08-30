@@ -8,7 +8,6 @@
 
 #include "NFCWorldLogicModule.h"
 #include "NFWorldLogicPlugin.h"
-#include "NFCSwitchGameServerModule.h"
 
 NF_EXPORT void DllStartPlugin(NFIPluginManager* pm)
 {

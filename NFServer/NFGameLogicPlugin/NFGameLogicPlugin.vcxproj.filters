@@ -20,9 +20,6 @@
     <Filter Include="NFTeamModule">
       <UniqueIdentifier>{bfd97019-f760-4999-9fb3-197a9ebb45ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFSwichServerModule">
-      <UniqueIdentifier>{dd64f829-9c74-471a-b6b8-37bd590bb077}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFCreateRoleModule">
       <UniqueIdentifier>{ca2648e6-36dd-4163-9791-b22482d4b8b6}</UniqueIdentifier>
     </Filter>
@@ -40,9 +37,6 @@
     </ClInclude>
     <ClInclude Include="NFCGmModule.h">
       <Filter>NFGMModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGSSwichServerModule.h">
-      <Filter>NFSwichServerModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCMapModule.h">
       <Filter>NFMapModule</Filter>
@@ -74,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="NFCGmModule.cpp">
       <Filter>NFGMModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGSSwichServerModule.cpp">
-      <Filter>NFSwichServerModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCMapModule.cpp">
       <Filter>NFMapModule</Filter>

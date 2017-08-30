@@ -81,6 +81,7 @@ class ReqElementlevelToEquip;
 class AckElementlevelToEquip;
 class ReqSetFightHero;
 class ReqSwitchFightHero;
+class ReqBuyItemFromShop;
 class ReqMiningTitle;
 class TileState;
 class TileBuilding;
@@ -5137,6 +5138,103 @@ class LIBPROTOC_EXPORT ReqSwitchFightHero : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqSwitchFightHero* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message {
+ public:
+  ReqBuyItemFromShop();
+  virtual ~ReqBuyItemFromShop();
+
+  ReqBuyItemFromShop(const ReqBuyItemFromShop& from);
+
+  inline ReqBuyItemFromShop& operator=(const ReqBuyItemFromShop& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqBuyItemFromShop& default_instance();
+
+  void Swap(ReqBuyItemFromShop* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqBuyItemFromShop* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqBuyItemFromShop& from);
+  void MergeFrom(const ReqBuyItemFromShop& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string itemID = 1;
+  inline bool has_itemid() const;
+  inline void clear_itemid();
+  static const int kItemIDFieldNumber = 1;
+  inline const ::std::string& itemid() const;
+  inline void set_itemid(const ::std::string& value);
+  inline void set_itemid(const char* value);
+  inline void set_itemid(const char* value, size_t size);
+  inline ::std::string* mutable_itemid();
+  inline ::std::string* release_itemid();
+  inline void set_allocated_itemid(::std::string* itemid);
+
+  // required int32 count = 2;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 2;
+  inline ::google::protobuf::int32 count() const;
+  inline void set_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqBuyItemFromShop)
+ private:
+  inline void set_has_itemid();
+  inline void clear_has_itemid();
+  inline void set_has_count();
+  inline void clear_has_count();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* itemid_;
+  ::google::protobuf::int32 count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqBuyItemFromShop* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -14052,6 +14150,102 @@ inline void ReqSwitchFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
   } else {
     clear_has_heroid();
   }
+}
+
+// -------------------------------------------------------------------
+
+// ReqBuyItemFromShop
+
+// required string itemID = 1;
+inline bool ReqBuyItemFromShop::has_itemid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqBuyItemFromShop::set_has_itemid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqBuyItemFromShop::clear_has_itemid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqBuyItemFromShop::clear_itemid() {
+  if (itemid_ != &::google::protobuf::internal::kEmptyString) {
+    itemid_->clear();
+  }
+  clear_has_itemid();
+}
+inline const ::std::string& ReqBuyItemFromShop::itemid() const {
+  return *itemid_;
+}
+inline void ReqBuyItemFromShop::set_itemid(const ::std::string& value) {
+  set_has_itemid();
+  if (itemid_ == &::google::protobuf::internal::kEmptyString) {
+    itemid_ = new ::std::string;
+  }
+  itemid_->assign(value);
+}
+inline void ReqBuyItemFromShop::set_itemid(const char* value) {
+  set_has_itemid();
+  if (itemid_ == &::google::protobuf::internal::kEmptyString) {
+    itemid_ = new ::std::string;
+  }
+  itemid_->assign(value);
+}
+inline void ReqBuyItemFromShop::set_itemid(const char* value, size_t size) {
+  set_has_itemid();
+  if (itemid_ == &::google::protobuf::internal::kEmptyString) {
+    itemid_ = new ::std::string;
+  }
+  itemid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqBuyItemFromShop::mutable_itemid() {
+  set_has_itemid();
+  if (itemid_ == &::google::protobuf::internal::kEmptyString) {
+    itemid_ = new ::std::string;
+  }
+  return itemid_;
+}
+inline ::std::string* ReqBuyItemFromShop::release_itemid() {
+  clear_has_itemid();
+  if (itemid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = itemid_;
+    itemid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqBuyItemFromShop::set_allocated_itemid(::std::string* itemid) {
+  if (itemid_ != &::google::protobuf::internal::kEmptyString) {
+    delete itemid_;
+  }
+  if (itemid) {
+    set_has_itemid();
+    itemid_ = itemid;
+  } else {
+    clear_has_itemid();
+    itemid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 count = 2;
+inline bool ReqBuyItemFromShop::has_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqBuyItemFromShop::set_has_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqBuyItemFromShop::clear_has_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqBuyItemFromShop::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+inline ::google::protobuf::int32 ReqBuyItemFromShop::count() const {
+  return count_;
+}
+inline void ReqBuyItemFromShop::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
 }
 
 // -------------------------------------------------------------------
