@@ -32,15 +32,14 @@ bool NFCSwitchGameServerModule::Execute()
 
 bool NFCSwitchGameServerModule::AfterInit()
 {
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQSWICHSERVER, this, &NFCSwitchGameServerModule::OnReqSwichServer)) { return false; }
-    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACKSWICHSERVER, this, &NFCSwitchGameServerModule::OnAckSwichServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_REQSWICHSERVER, this, &NFCSwitchGameServerModule::OnReqSwitchServer)) { return false; }
+    if (!m_pNetClientModule->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACKSWICHSERVER, this, &NFCSwitchGameServerModule::OnAckSwitchServer)) { return false; }
 
     return true;
 }
 
 void NFCSwitchGameServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
-    /*
     CLIENT_MSG_PROCESS_NO_OBJECT(nMsgID, msg, nLen, NFMsg::ReqSwitchServer);
     if (nPlayerID != NFINetModule::PBToNF(xMsg.selfid()))
     {
@@ -80,7 +79,7 @@ void NFCSwitchGameServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const
 
     m_pKernelModule->DoEvent(pObject->Self(), NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_FINISH, NFDataList());
 
-    m_pSceneModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
+    m_pSceneAOIModule->RequestEnterScene(pObject->Self(), nSceneID, nGroup, 0, NFDataList());
     //m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
@@ -91,7 +90,6 @@ void NFCSwitchGameServerModule::OnReqSwitchServer(const NFSOCK nSockIndex, const
 
     m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQSWICHSERVER, xMsg, nPlayerID);
     m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, nPlayerID.ToString(), NFMsg::EGMI_ACKSWICHSERVER, xMsg);
-    */
 }
 
 void NFCSwitchGameServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
@@ -106,9 +104,8 @@ void NFCSwitchGameServerModule::OnAckSwitchServer(const NFSOCK nSockIndex, const
     m_pKernelModule->DestroyObject(nPlayerID);
 }
 
-void NFCSwitchGameServerModule::SwitchServer(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+bool NFCSwitchGameServerModule::SwitchServer(const NFGUID &self, const int nServer, const int nSceneID, const int nGroup)
 {
-    /*
     NFMsg::ReqSwitchServer xMsg;
 
     xMsg.set_sceneid(nSceneID);
@@ -132,5 +129,6 @@ void NFCSwitchGameServerModule::SwitchServer(const NFSOCK nSockIndex, const int 
     xMsg.set_gate_serverid(nGate);
 
     m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, self.ToString(), NFMsg::EGMI_REQSWICHSERVER, xMsg);
-     */
+
+	return false;
 }

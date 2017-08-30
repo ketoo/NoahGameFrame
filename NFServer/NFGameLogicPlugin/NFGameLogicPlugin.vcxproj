@@ -101,7 +101,6 @@
     <ClInclude Include="NFCCreateRoleModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCGmModule.h" />
-    <ClInclude Include="NFCGSSwichServerModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCTeamModule.h" />
@@ -122,7 +121,6 @@
     <ClCompile Include="NFCCreateRoleModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCGmModule.cpp" />
-    <ClCompile Include="NFCGSSwichServerModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCTeamModule.cpp" />
