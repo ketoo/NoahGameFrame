@@ -19,7 +19,9 @@
 enum CLASS_OBJECT_EVENT
 {
 	COE_CREATE_NODATA,
+	COE_CREATE_BEFORE_ATTACHDATA,
 	COE_CREATE_LOADDATA,
+	COE_CREATE_AFTER_ATTACHDATA,
 	COE_CREATE_BEFORE_EFFECT,
 	COE_CREATE_EFFECTDATA,
 	COE_CREATE_AFTER_EFFECT,
@@ -122,6 +124,8 @@ public:
 
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager() = 0;
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager() = 0;
+	virtual void SetRecordManager(NF_SHARE_PTR<NFIRecordManager> xRecordManager) = 0;
+	virtual void SetPropertyManager(NF_SHARE_PTR<NFIPropertyManager> xPropertyManager) = 0;
 
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb) = 0;

@@ -385,7 +385,7 @@ namespace NFrame
 		static const std::string& EffectData(){ static std::string x = "EffectData"; return x; };// string
 		static const std::string& ExpiredType(){ static std::string x = "ExpiredType"; return x; };// int
 		static const std::string& Extend(){ static std::string x = "Extend"; return x; };// string
-		static const std::string& HeroTye(){ static std::string x = "HeroTye"; return x; };// int
+		static const std::string& HeroType(){ static std::string x = "HeroType"; return x; };// int
 		static const std::string& Icon(){ static std::string x = "Icon"; return x; };// string
 		static const std::string& ItemSubType(){ static std::string x = "ItemSubType"; return x; };// int
 		static const std::string& ItemType(){ static std::string x = "ItemType"; return x; };// int

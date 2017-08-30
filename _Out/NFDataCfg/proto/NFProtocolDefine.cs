@@ -381,7 +381,7 @@ namespace NFrame
 		public static readonly String EffectData = "EffectData";// string
 		public static readonly String ExpiredType = "ExpiredType";// int
 		public static readonly String Extend = "Extend";// string
-		public static readonly String HeroTye = "HeroTye";// int
+		public static readonly String HeroType = "HeroType";// int
 		public static readonly String Icon = "Icon";// string
 		public static readonly String ItemSubType = "ItemSubType";// int
 		public static readonly String ItemType = "ItemType";// int

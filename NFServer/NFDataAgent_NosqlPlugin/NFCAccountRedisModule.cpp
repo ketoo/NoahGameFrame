@@ -96,6 +96,14 @@ bool NFCAccountRedisModule::CreateRole(const std::string & strAccount, const std
 
 			xNoSqlDriver->HSet(strRoleName, NFrame::Player::ID(), id.ToString());
 
+			/*
+			std::vector<std::string> vKey;
+			std::vector<std::string> vValue;
+			xNoSqlDriver->HMSet(m_pCommonRedisModule->GetPropertyCacheKey(id), vKey, vValue);
+			xNoSqlDriver->HMSet(m_pCommonRedisModule->GetRecordCacheKey(id), vKey, vValue);
+			xNoSqlDriver->HMSet(m_pCommonRedisModule->GetPropertyStorageKey(id), vKey, vValue);
+			xNoSqlDriver->HMSet(m_pCommonRedisModule->GetRecordStorageKey(id), vKey, vValue);
+			*/
 			return true;
 		}
 	}
