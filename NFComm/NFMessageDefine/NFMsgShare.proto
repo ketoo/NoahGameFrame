@@ -384,10 +384,16 @@ message ReqSetFightHero
 
 //EGEC_REQ_SWITCH_FIGHT_HERO						= 508;		 // 战斗武将
 message ReqSwitchFightHero
-{	
+{
 	required Ident		Heroid				= 1;
 }
 
+//EGMI_REQ_BUY_FORM_SHOP
+message ReqBuyItemFromShop
+{
+	required string		itemID				= 1;
+	required int32		count				= 2;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
