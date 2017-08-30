@@ -66,10 +66,8 @@ private:
 		int nLoadTime;
 		int nHomeSceneID;
 
-		NFMsg::ObjectPropertyList xPbPropertyCacheList;
-		NFMsg::ObjectPropertyList xPbPropertyStorageList;
-		NFMsg::ObjectRecordList xPbRecordCacheList;
-		NFMsg::ObjectRecordList xPbRecordStorageList;
+		NF_SHARE_PTR<NFIRecordManager> xRecordManager;
+		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager;
 	};
 
 	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;

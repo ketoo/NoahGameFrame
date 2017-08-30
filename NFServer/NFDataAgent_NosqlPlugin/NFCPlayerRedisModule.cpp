@@ -170,62 +170,15 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache(NF_NEW PlayerDataCache());
 	mxObjectDataCache.AddElement(self, xPlayerDataCache);
 
-	m_pCommonRedisModule->LoadCachePropertyListPB(self, xPlayerDataCache->xPbPropertyCacheList);
-	m_pCommonRedisModule->LoadStoragePropertyListPB(self, xPlayerDataCache->xPbPropertyStorageList);
-	m_pCommonRedisModule->LoadCacheRecordListPB(self, xPlayerDataCache->xPbRecordCacheList);
-	m_pCommonRedisModule->LoadStorageRecordListPB(self, xPlayerDataCache->xPbRecordStorageList);
+	xPlayerDataCache->xPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
+	xPlayerDataCache->xRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
+
 
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTime());
 
-#ifdef NF_DEBUG_MODE
-	/*
-	for (int i = 0; i < xPlayerDataCache->xPbPropertyCacheList.property_int_list_size(); ++i)
+	if (xPlayerDataCache->xPropertyManager)
 	{
-		const NFMsg::PropertyInt& xPropertyData = xPlayerDataCache->xPbPropertyCacheList.property_int_list(i);
-		const std::string& strPropertyName = xPropertyData.property_name();
-		const NFINT64 xPropertyValue = xPropertyData.data();
-		
-		m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strPropertyName, xPropertyValue, "PbPropertyCacheList", i);
-	}
-
-	for (int iRecord = 0; iRecord < xPlayerDataCache->xPbRecordCacheList.record_list_size(); ++iRecord)
-	{
-		const NFMsg::ObjectRecordBase& xRecordBase = xPlayerDataCache->xPbRecordCacheList.record_list(iRecord);
-		const std::string& strRecordName = xRecordBase.record_name();
-
-		
-		for (int iRow = 0; iRow < xRecordBase.row_struct_size(); ++iRow)
-		{
-
-			const NFMsg::RecordAddRowStruct& xAddRowStruct = xRecordBase.row_struct(iRow);
-
-			for (int iStr = 0; iStr < xAddRowStruct.record_string_list_size(); iStr++)
-			{
-				const NFMsg::RecordString& xPropertyData = xAddRowStruct.record_string_list(iStr);
-				const int nRow = xPropertyData.row();
-				const int nCol = xPropertyData.col();
-				const std::string& xPropertyValue = xPropertyData.data();
-
-				std::ostringstream strData;
-				strData  << strRecordName << " Row:" << nRow << " Col:" << nCol << " " << xPropertyValue;
-
-				m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, strData, "xPbRecordCacheList", iRow);
-			}
-		}
-	}
-	*/
-#endif // NF_DEBUG_MODE
-
-	for (int i = 0; i < xPlayerDataCache->xPbPropertyCacheList.property_int_list_size(); ++i)
-	{
-		const NFMsg::PropertyInt& xPropertyData = xPlayerDataCache->xPbPropertyCacheList.property_int_list(i);
-		const std::string& strPropertyName = xPropertyData.property_name();
-		if (strPropertyName == NFrame::Player::HomeSceneID())
-		{
-			const NFINT64 xPropertyValue = xPropertyData.data();
-			xPlayerDataCache->nHomeSceneID = (int)xPropertyValue;
-			break;
-		}
+		xPlayerDataCache->nHomeSceneID = xPlayerDataCache->xPropertyManager->GetPropertyInt(NFrame::Player::HomeSceneID());
 	}
 
 	return true;
@@ -313,11 +266,11 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std
 
 bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self)
 {
-	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
-	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
-
-	m_pCommonRedisModule->SaveStroragePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
-	m_pCommonRedisModule->SaveStrorageRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
+	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager(), true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager(), true);
+	
+	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager(), false);
+	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager(), false);
 
 	return true;
 }
@@ -342,13 +295,15 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 		if (pObject)
 		{
-			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
-			NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+			if (xPlayerDataCache->xPropertyManager)
+			{
+				pObject->SetPropertyManager(xPlayerDataCache->xPropertyManager);
+			}
 
-			m_pCommonRedisModule->ConvertPBToPropertyManager(xPlayerDataCache->xPbPropertyCacheList, pPropertyManager, true);
-			m_pCommonRedisModule->ConvertPBToPropertyManager(xPlayerDataCache->xPbPropertyStorageList, pPropertyManager, false);
-			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->xPbRecordCacheList, pRecordManager, true);
-			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->xPbRecordStorageList, pRecordManager, false);
+			if (xPlayerDataCache->xRecordManager)
+			{
+				pObject->SetRecordManager(xPlayerDataCache->xRecordManager);
+			}
 
 			return true;
 		}
