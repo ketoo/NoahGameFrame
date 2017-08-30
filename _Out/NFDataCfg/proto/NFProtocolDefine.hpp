@@ -205,43 +205,7 @@ namespace NFrame
 			static const int GUID = 0;//object
 			static const int Name = 1;//string
 			static const int Level = 2;//int
-			static const int Job = 3;//int
-			static const int Donation = 4;//int
-			static const int VIP = 5;//int
-			static const int Power = 6;//int
-
-		};
-		class GuildBoss
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildBoss"; return x; };
-			static const int GUID = 0;//object
-			static const int Name = 1;//string
-			static const int Level = 2;//int
-			static const int Job = 3;//int
-			static const int Donation = 4;//int
-			static const int VIP = 5;//int
-			static const int Offline = 6;//int
-			static const int Power = 7;//int
-
-		};
-		class GuildEvent
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildEvent"; return x; };
-			static const int GUID = 0;//object
-			static const int Name = 1;//string
-			static const int Level = 2;//int
-			static const int Job = 3;//int
-			static const int Donation = 4;//int
-			static const int VIP = 5;//int
-			static const int Offline = 6;//int
-			static const int Power = 7;//int
-			static const int EventID = 8;//int
-			static const int EventTime = 9;//int
-			static const int Context = 10;//string
+			static const int VIP = 3;//int
 
 		};
 		class GuildHouse
@@ -252,11 +216,6 @@ namespace NFrame
 			static const int GUID = 0;//object
 			static const int Name = 1;//string
 			static const int Level = 2;//int
-			static const int Job = 3;//int
-			static const int Donation = 4;//int
-			static const int VIP = 5;//int
-			static const int Offline = 6;//int
-			static const int Power = 7;//int
 
 		};
 		class GuildMemberList
@@ -277,7 +236,8 @@ namespace NFrame
 			static const int GameID = 10;//int
 			static const int JoinTime = 11;//int
 			static const int Contribution = 12;//int
-			static const int AllContribution = 13;//int
+			static const int LastTime = 13;//string
+			static const int AllContribution = 14;//int
 
 		};
 		class GuildSkill
@@ -286,13 +246,7 @@ namespace NFrame
 			//Class name
 			static const std::string& ThisName(){ static std::string x = "GuildSkill"; return x; };
 			static const int GUID = 0;//object
-			static const int Name = 1;//string
-			static const int Level = 2;//int
-			static const int Job = 3;//int
-			static const int Donation = 4;//int
-			static const int VIP = 5;//int
-			static const int Offline = 6;//int
-			static const int Power = 7;//int
+			static const int Level = 1;//int
 
 		};
 
@@ -309,12 +263,13 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
-		static const std::string& ConditionPlayerLevel(){ static std::string x = "ConditionPlayerLevel"; return x; };// int
-		static const std::string& ConditionPlayerVIP(){ static std::string x = "ConditionPlayerVIP"; return x; };// int
-		static const std::string& CostMoney(){ static std::string x = "CostMoney"; return x; };// int
 		static const std::string& DismissTime(){ static std::string x = "DismissTime"; return x; };// int
 		static const std::string& GuildLevel(){ static std::string x = "GuildLevel"; return x; };// int
+		static const std::string& Level(){ static std::string x = "Level"; return x; };// int
 		static const std::string& MaxMember(){ static std::string x = "MaxMember"; return x; };// int
+		static const std::string& Money(){ static std::string x = "Money"; return x; };// int
+		static const std::string& SkillNum(){ static std::string x = "SkillNum"; return x; };// int
+		static const std::string& VIP(){ static std::string x = "VIP"; return x; };// int
 		// Record
 
 	};

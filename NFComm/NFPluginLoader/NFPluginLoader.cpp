@@ -32,6 +32,7 @@ bool bExitApp = false;
 std::thread gThread;
 std::string strArgvList;
 std::string strPluginName;
+std::string strDataPath;
 std::string strAppName;
 std::string strAppID;
 std::string strTitleName;
@@ -217,6 +218,21 @@ void ProcessParameter(int argc, char* argv[])
         {
             NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
         }
+	}
+
+	if (strArgvList.find("Path=") != string::npos)
+	{
+		for (int i = 0; i < argc; i++)
+		{
+			strDataPath = argv[i];
+			if (strDataPath.find("Path=") != string::npos)
+			{
+				strDataPath.erase(0, 5);
+				break;
+			}
+		}
+
+		NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
 	}
 
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();

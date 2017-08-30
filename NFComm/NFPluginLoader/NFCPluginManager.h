@@ -70,8 +70,10 @@ public:
 	virtual NFINT64 GetNowTime() const;
 
 	virtual const std::string& GetConfigPath() const;
+	virtual void SetConfigPath(const std::string & strPath);
 
 	virtual void SetConfigName(const std::string& strFileName);
+	virtual const std::string& GetConfigName() const;
 
 	virtual const std::string& GetAppName() const;
 
