@@ -61,12 +61,25 @@ bool NFCLogModule::Awake()
 
 	string strAppLogName = "";
 #if NF_PLATFORM == NF_PLATFORM_WIN
-	strAppLogName = "logconfig/" + strLogConfigName + "_win.conf";
-	el::Configurations conf(strAppLogName);
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + "_win.conf";
 #else
-	strAppLogName = "logconfig/" + strLogConfigName + ".conf";
-	el::Configurations conf(strAppLogName);
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + "_win.conf";
 #endif
+
+#else
+#ifdef NF_DEBUG_MODE
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Debug/logconfig/" + strLogConfigName + ".conf";
+#else
+	strAppLogName = pPluginManager->GetConfigPath() + "NFDataCfg/Release/logconfig/" + strLogConfigName + ".conf";
+#endif
+#endif
+
+	el::Configurations conf(strAppLogName);
+
+	el::Configuration* pConfiguration = conf.get(el::Level::Debug, el::ConfigurationType::Filename);
+	const std::string& strFileName = pConfiguration->value();
+	pConfiguration->setValue(pPluginManager->GetConfigPath() + strFileName);
 
 	std::cout << "LogConfig: " << strAppLogName << std::endl;
 
@@ -97,32 +110,7 @@ bool NFCLogModule::BeforeShut()
 
 bool NFCLogModule::AfterInit()
 {
-	/*
-	el::Logger* pLogger = el::Loggers::getLogger("default");
-	if (NULL == pLogger)
-	{
-		return false;
-	}
 
-	el::Configurations* pConfigurations = pLogger->configurations();
-	if (NULL == pConfigurations)
-	{
-		return false;
-	}
-
-	const int nAppID = pPluginManager->GetAppID();
-	const std::string& strAppName = pPluginManager->GetAppName();
-	std::string strLogPreName = strAppName + lexical_cast<std::string>(nAppID);
-
-	std::string strLogFileName = "log/" + strAppName + "%datetime{ %Y%M%d%H }.log";
-	el::Configuration errorConfiguration(el::Level::Info, el::ConfigurationType::Filename, strLogFileName);
-	el::Configuration errorConfiguration(el::Level::Debug, el::ConfigurationType::Filename, strLogFileName);
-	el::Configuration errorConfiguration(el::Level::Warning, el::ConfigurationType::Filename, strLogFileName);
-	el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Filename, strLogFileName);
-	el::Configuration errorConfiguration(el::Level::Fatal, el::ConfigurationType::Filename, strLogFileName);
-	//el::Configuration errorConfiguration(el::Level::Error, el::ConfigurationType::Filename, "log/game_server_info_%datetime{ %Y%M%d%H }.log");
-	pConfigurations->set(&errorConfiguration);
-	*/
     return true;
 }
 

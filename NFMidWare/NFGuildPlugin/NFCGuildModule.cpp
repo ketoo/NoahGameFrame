@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCGuildModule.h"
+#include "NFComm/NFCore/NFDateTime.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
@@ -87,6 +88,16 @@ bool NFCGuildModule::MemberOnline(const NFGUID& self, const NFGUID& xGuild)
 
 bool NFCGuildModule::MemberOffline(const NFGUID& self, const NFGUID& xGuild)
 {
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xGuild, NFrame::Guild::ThisName());
+	const int nRow = xRecord->FindObject(NFrame::Guild::GuildMemberList::GUID, self);
+	if (nRow >= 0)
+	{
+		xRecord->SetInt(nRow, NFrame::Guild::GuildMemberList::Online, 0);
+		xRecord->SetInt(nRow, NFrame::Guild::GuildMemberList::GameID, 0);
+
+		NFDateTime xTime = NFDateTime::Now();
+		xRecord->SetString(nRow, NFrame::Guild::GuildMemberList::LastTime, xTime.GetAsString());
+	}
 
     return false;
 }
