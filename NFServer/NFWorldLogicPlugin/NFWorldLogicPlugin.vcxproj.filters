@@ -3,12 +3,10 @@
   <ItemGroup>
     <ClInclude Include="NFWorldLogicPlugin.h" />
     <ClInclude Include="NFCWorldLogicModule.h" />
-    <ClInclude Include="NFCWSSwichServerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
     <ClCompile Include="NFCWorldLogicModule.cpp" />
-    <ClCompile Include="NFCWSSwichServerModule.cpp" />
   </ItemGroup>
 </Project>
