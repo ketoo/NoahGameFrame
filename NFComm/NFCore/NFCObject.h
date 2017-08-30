@@ -93,6 +93,9 @@ public:
     virtual NF_SHARE_PTR<NFIRecordManager> GetRecordManager();
     virtual NF_SHARE_PTR<NFIPropertyManager> GetPropertyManager();
 
+	virtual void SetRecordManager(NF_SHARE_PTR<NFIRecordManager> xRecordManager);
+	virtual void SetPropertyManager(NF_SHARE_PTR<NFIPropertyManager> xPropertyManager);
+
 protected:
     virtual bool AddRecordCallBack(const std::string& strRecordName, const RECORD_EVENT_FUNCTOR_PTR& cb);
 

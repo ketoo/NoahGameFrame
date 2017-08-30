@@ -91,7 +91,7 @@ int NFCPropertyTrailModule::LogObjectData(const NFGUID& self)
 
                     for (int j = 0; j < xDataList.GetCount(); ++j)
                     {
-                        stream << " [" << j << "] " << xDataList.StringValEx(j);
+                        stream << " [" << j << "] " << xDataList.ToString(j);
                     }
 
                     m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
@@ -141,7 +141,7 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
 
                 for (int j = 0; j < xDataList.GetCount(); ++j)
                 {
-                    stream << " [" << j << "] " << xDataList.StringValEx(j);
+                    stream << " [" << j << "] " << xDataList.ToString(j);
                 }
 
                 m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
@@ -165,8 +165,8 @@ int NFCPropertyTrailModule::OnObjectRecordEvent(const NFGUID& self, const RECORD
         case RECORD_EVENT_DATA::Update:
         {
             stream << " Trail UpData Row[" << xEventData.nRow << "] Col[" << xEventData.nCol << "]";
-            stream << " [Old] " << oldVar.StringValEx();
-            stream << " [New] " << newVar.StringValEx();
+            stream << " [Old] " << oldVar.ToString();
+            stream << " [New] " << newVar.ToString();
             m_pLogModule->LogRecord(NFILogModule::NF_LOG_LEVEL::NLL_INFO_NORMAL, self, xRecord->GetName(), stream.str(),  __FUNCTION__, __LINE__);
         }
         break;
