@@ -60,10 +60,8 @@ private:
 	{
 		PlayerDataCache()
 		{
-			nLoadTime = NFDateTime::Now().GetSecond();
 			nHomeSceneID = 0;
 		}
-		int nLoadTime;
 		int nHomeSceneID;
 
 		NF_SHARE_PTR<NFIRecordManager> xRecordManager;

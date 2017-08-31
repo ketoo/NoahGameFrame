@@ -311,9 +311,6 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(std::vector<std::string>& 
 			const std::string& strKey = vKeyList[i];
 			const std::string& strValue = vValueList[i];
 			NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strKey);
-			if (pProperty)
-			{
-			}
 
 			if (bCache)
 			{
@@ -406,7 +403,7 @@ bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIProp
 		}
 
 		const std::string& strPropertyName = pProperty->GetKey();
-		const std::string& strPropertyValue = pProperty->GetValue().ToString();
+		const std::string& strPropertyValue = pProperty->ToString();
 
 		vKeyList.push_back(strPropertyName);
 		vValueList.push_back(strPropertyValue);

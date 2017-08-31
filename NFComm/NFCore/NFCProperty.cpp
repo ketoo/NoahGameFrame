@@ -52,7 +52,8 @@ NFCProperty::~NFCProperty()
 
 void NFCProperty::SetValue(const NFData& xData)
 {
-	if (eType != xData.GetType())
+	if (eType != xData.GetType()
+		|| xData.GetType() == NFDATA_TYPE::TDATA_UNKNOWN)
 	{
 		return;
 	}
@@ -562,61 +563,12 @@ std::string NFCProperty::ToString()
 
 bool NFCProperty::FromString(const std::string& strData)
 {
-	const NFDATA_TYPE eType = GetType();
-	bool bRet = false;
-	switch (eType)
+	if (!mxData)
 	{
-	case TDATA_INT:
-	{
-		NFINT64  nValue = 0;
-		bRet = NF_StrTo(strData, nValue);
-		SetInt(nValue);
-	}
-	break;
-
-	case TDATA_FLOAT:
-	{
-		double  dValue = 0;
-		bRet = NF_StrTo(strData, dValue);
-		SetFloat(dValue);
-	}
-	break;
-
-	case TDATA_STRING:
-	{
-		SetString(strData);
-		bRet = true;
-	}
-	break;
-	case TDATA_OBJECT:
-	{
-		NFGUID xID;
-
-		bRet = xID.FromString(strData);
-		SetObject(xID);
-	}
-	break;
-	case TDATA_VECTOR2:
-	{
-		NFVector2 xVector2;
-
-		bRet = xVector2.FromString(strData);
-		SetVector2(xVector2);
-	}
-	break;
-	case TDATA_VECTOR3:
-	{
-		NFVector3 xVector3;
-
-		bRet = xVector3.FromString(strData);
-		SetVector3(xVector3);
-	}
-	break;
-	default:
-		break;
+		mxData = NF_SHARE_PTR<NFData>(NF_NEW NFData(GetType()));
 	}
 
-	return bRet;
+	return mxData->FromString(strData);
 }
 
 bool NFCProperty::DeSerialization()
