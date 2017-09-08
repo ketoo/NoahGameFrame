@@ -31,7 +31,7 @@ bool NFCSceneAOIModule::Init()
 		{
 			const std::string& strId = strIdList[i];
 
-			int nSceneID = lexical_cast<int>(strIdList[i]);
+			int nSceneID = lexical_cast<int>(strId);
 			m_pKernelModule->CreateScene(nSceneID);
 		}
 	}
@@ -231,6 +231,11 @@ bool NFCSceneAOIModule::AddAfterLeaveSceneGroupCallBack(const SCENE_EVENT_FUNCTO
 
 bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 {
+	return CreateSceneNPC(nSceneID, nGroupID, NFDataList());
+}
+
+bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList)
+{
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (!pSceneInfo)
 	{
@@ -251,6 +256,7 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID)
 			NFDataList arg;
 			arg << NFrame::IObject::Position() << pResource->vSeedPos;
 			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
+			arg.Append(argList);
 
 			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
 		}
@@ -387,11 +393,7 @@ int NFCSceneAOIModule::OnPropertyCommonEvent(const NFGUID & self, const std::str
 int NFCSceneAOIModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
 {
 	const std::string& strRecordName = xEventData.strRecordName;
-	const int nOpType = xEventData.nOpType;
-	const int nRow = xEventData.nRow;
-	const int nCol = xEventData.nCol;
 
-	int nObjectContainerID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
 	int nObjectGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
 
 	if (nObjectGroupID < 0)

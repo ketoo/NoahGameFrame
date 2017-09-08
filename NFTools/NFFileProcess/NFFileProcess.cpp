@@ -446,7 +446,7 @@ bool NFFileProcess::SaveForCPP()
 
 			strRecordInfo += "\t\tclass " + strRecordName + "\n\t\t{\n\t\tpublic:\n";
 			strRecordInfo += "\t\t\t//Class name\n\t";
-			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };";
+			strRecordInfo += "\t\tstatic const std::string& ThisName(){ static std::string x = \"" + strRecordName + "\"; return x; };\n";
 
 			instanceField += "\tconst std::string " + strClassName + "::" + strRecordName + "::ThisName = \"" + strRecordName + "\";\n";
 

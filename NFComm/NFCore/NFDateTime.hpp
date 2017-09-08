@@ -41,7 +41,7 @@
 #define MAX_MONTH                  12
 
 #define MIN_DAY                     1
-#define MAX_DAY                    30
+#define MAX_DAY                    31
 
 #define MIN_WEEKDAY                 0
 #define MAX_WEEKDAY                 7
@@ -56,7 +56,7 @@
 #define MAX_SECOND                 60
 
 #define MIN_MILLISECOND             0
-#define MAX_MILLISECOND          1000
+#define MAX_MILLISECOND           1000
 
 class NFTimeSpan
 {
@@ -194,29 +194,29 @@ public:
 
 	enum Day
 	{
-		Monday,
-		Thuesday,
-		Wednesday,
-		Thursday,
-		Friday,
-		Saturday,
-		Sunday
+		Monday = 1,
+		Thuesday = 2,
+		Wednesday = 3,
+		Thursday = 4,
+		Friday = 5,
+		Saturday = 6,
+		Sunday = 7
 	};
 
 	enum Month
 	{
-		January,
-		February,
-		March,
-		April,
-		May,
-		June,
-		July,
-		August,
-		September,
-		October,
-		November,
-		December
+		January = 1,
+		February = 2,
+		March = 3,
+		April = 4,
+		May = 5,
+		June = 6,
+		July = 7,
+		August = 8,
+		September = 9,
+		October = 10,
+		November = 11,
+		December = 12
 	};
 
 	NFDateTime(int day, int month, int year)
@@ -249,6 +249,17 @@ public:
 		dt.SetNow();
 		return dt;
 	}
+
+	/*
+	static int GetNowYear() const { return year; }
+	static int GetNowMonth() const { return month; }
+	static int GetNowDay() const { return day; }
+
+	static int GetNowHour() const { return hour; }
+	static int GetNowMinute() const { return minute; }
+	static int GetNowSecond() const { return second; }
+	static int GetNowMillisecond() const { return millisecond; }
+	*/
 
 	void SetNow()
 	{
@@ -482,10 +493,10 @@ protected:
 		this->month = 0;
 		this->year = 0;
 
-		this->hour = hour;
-		this->minute = minute;
-		this->second = second;
-		this->millisecond = millisecond;
+		this->hour = 0;
+		this->minute = 0;
+		this->second = 0;
+		this->millisecond = 0;
 
 		InitMonths();
 		InitMonthNames();
@@ -542,6 +553,7 @@ protected:
 	void InitMonths()
 	{
 		// Perhaps an algorithm would be more efficient
+		daysOfMonth[0] = 0;
 		daysOfMonth[Month::January] = 31;
 		daysOfMonth[Month::February] = IsLeapYear() ? 29 : 28; // In a leapyear 29 else 28
 		daysOfMonth[Month::March] = 31;
@@ -558,6 +570,7 @@ protected:
 
 	void InitMonthNames()
 	{
+		monthNames[0] = "None";
 		monthNames[Month::January] = "January";
 		monthNames[Month::February] = "February";
 		monthNames[Month::March] = "March";
@@ -574,6 +587,7 @@ protected:
 
 	void InitDayNames()
 	{
+		dayNames[0] = "None";
 		dayNames[Day::Monday] = "Monday";
 		dayNames[Day::Thuesday] = "Thuesday";
 		dayNames[Day::Wednesday] = "Wednesday";
@@ -612,28 +626,28 @@ protected:
 
 	bool IsValidHour(int hour)
 	{
-		return hour >= MIN_HOUR && hour <= MAX_HOUR;
+		return hour >= MIN_HOUR && hour < MAX_HOUR;
 	}
 
 	bool IsValidMinute(int minute)
 	{
-		return minute >= MIN_MINUTE && minute <= MAX_MINUTE;
+		return minute >= MIN_MINUTE && minute < MAX_MINUTE;
 	}
 
 	bool IsValidSecond(int second)
 	{
-		return second >= MIN_SECOND && second <= MAX_SECOND;
+		return second >= MIN_SECOND && second < MAX_SECOND;
 	}
 
 	bool IsValidMillisecond(int millisecond)
 	{
-		return millisecond >= MIN_MILLISECOND && millisecond <= MAX_MILLISECOND;
+		return millisecond >= MIN_MILLISECOND && millisecond < MAX_MILLISECOND;
 	}
 	
 protected:
-	int daysOfMonth[MAX_MONTH];
-	std::string monthNames[MAX_MONTH];
-	std::string dayNames[MAX_DAY];
+	int daysOfMonth[MAX_MONTH + 1];
+	std::string monthNames[MAX_MONTH + 1];
+	std::string dayNames[MAX_WEEKDAY + 1];
 
 	int year;
 	int month;

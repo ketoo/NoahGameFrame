@@ -342,6 +342,7 @@ public:
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
+	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID) = 0;
 
 protected:

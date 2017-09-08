@@ -6,6 +6,7 @@
 
 // -------------------------------------------------------------------------
 
+#include <NFComm/NFPluginModule/NFIPropertyModule.h>
 #include "NFCNPCRefreshModule.h"
 
 bool NFCNPCRefreshModule::Init()
@@ -33,7 +34,8 @@ bool NFCNPCRefreshModule::AfterInit()
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-	
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCNPCRefreshModule::OnObjectClassEvent);
 
     return true;
@@ -85,7 +87,6 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
 
             m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
-			m_pEventModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCNPCRefreshModule::OnObjectBeKilled );
         }
     }
 
@@ -96,10 +97,10 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
 {
     if ( newVar.GetInt() <= 0 )
     {
-        NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, NFrame::NPC::LastAttacker());
+        const NFGUID& identAttacker = m_pKernelModule->GetPropertyObject( self, NFrame::NPC::LastAttacker());
         if (!identAttacker.IsNull())
 		{
-			m_pEventModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFDataList() << identAttacker );
+			OnObjectBeKilled(self, identAttacker);
 
 			m_pScheduleModule->AddSchedule( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, 5.0f, 1 );
         }
@@ -114,8 +115,10 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     const std::string& strClassName = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ClassName());
 	const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
 	const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
+	const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+
     int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
-    int nGroupID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::GroupID());
+	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
 
 	NFVector3 fSeedPos = m_pKernelModule->GetPropertyVector3( self, NFrame::NPC::Position());
 
@@ -124,30 +127,58 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     NFDataList arg;
 	arg << NFrame::NPC::Position() << fSeedPos;
 	arg << NFrame::NPC::SeedID() << strSeedID;
+	arg << NFrame::NPC::MasterID() << xMasterID;
 
 	m_pKernelModule->CreateObject( NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg );
 
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefine nEventID, const NFDataList& var )
+int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFGUID& killer )
 {
-	if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
+	if ( m_pKernelModule->GetObject( killer ) )
 	{
-		NFGUID identKiller = var.Object( 0 );
-		if ( m_pKernelModule->GetObject( identKiller ) )
-		{
-			const int64_t nExp = m_pKernelModule->GetPropertyInt32( self, NFrame::Player::EXP() );
+		const int64_t nExp = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::EXP() );
+		const int64_t nGold = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Gold() );
+		const int64_t nDiamond = m_pKernelModule->GetPropertyInt( self, NFrame::NPC::Diamond() );
 
-			m_pLevelModule->AddExp( identKiller, nExp);
+		m_pLevelModule->AddExp(killer, nExp);
+		m_pPropertyModule->AddGold(killer, nGold);
+		m_pPropertyModule->AddDiamond(killer, nDiamond);
 
-			
-			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, identKiller, "Add Exp for kill monster", nExp);
-		}
-		else
+		//add drop off item
+		const int64_t nDropProbability = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::DropProbability());
+		const int64_t nRan = m_pKernelModule->Random(0, 100);
+		if (nRan > nDropProbability)
 		{
-			m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, identKiller, "There is no object", __FUNCTION__, __LINE__);
+			return 0;
 		}
+
+		NF_SHARE_PTR<NFIRecord> xDropItemList =  m_pKernelModule->FindRecord(killer, NFrame::Player::DropItemList::ThisName());
+		NF_SHARE_PTR<NFDataList> xRowData = xDropItemList->GetInitData();
+		const std::string& strDropPackList = m_pKernelModule->GetPropertyString(self, NFrame::NPC::DropPackList());
+		const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::NPC::Position());
+
+		NFDataList xItemList;
+		xItemList.Split(strDropPackList, ",");
+
+		for (int i = 0; i < xItemList.GetCount(); ++i)
+		{
+			const std::string& strItem = xItemList.String(i);
+
+			xRowData->SetObject(NFrame::Player::DropItemList::GUID, m_pKernelModule->CreateGUID());
+			xRowData->SetString(NFrame::Player::DropItemList::ConfigID, strItem);
+			xRowData->SetInt(NFrame::Player::DropItemList::ItemCount, 1);
+			xRowData->SetVector3(NFrame::Player::DropItemList::Postion, vPos);
+
+			xDropItemList->AddRow(-1, *xRowData);
+
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, killer, "Add Exp for kill monster", nExp);
+		}
+	}
+	else
+	{
+		m_pLogModule->LogObject(NFILogModule::NLL_ERROR_NORMAL, killer, "There is no object", __FUNCTION__, __LINE__);
 	}
 
 	return 0;

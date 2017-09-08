@@ -102,6 +102,14 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 		return 0;
 	}
 
+	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
+	if ( NFMsg::EItemType::EIT_EQUIP == nItemType )
+	{
+		CreateEquip(self, strConfigName);
+
+		return 0;
+	}
+
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
 	if (!pRecord)
 	{
@@ -156,7 +164,7 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	int nFindRowCount = pRecord->FindObject(NFrame::Player::BagEquipList::GUID, id, varFindResult);
 	if (nFindRowCount > 0)
 	{
-		int nTotalCount = 0;
+		//int nTotalCount = 0;
 		for (int i = 0; i < varFindResult.GetCount(); ++i)
 		{
 			int nFindRow = varFindResult.Int32(i);

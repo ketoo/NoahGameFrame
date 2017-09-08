@@ -33,10 +33,10 @@ const std::string NFWorldLogicPlugin::GetPluginName()
 
 void NFWorldLogicPlugin::Install()
 {
-	REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+    REGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
 }
 
 void NFWorldLogicPlugin::Uninstall()
 {
-	UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
+    UNREGISTER_MODULE(pPluginManager, NFIWorldLogicModule, NFCWorldLogicModule)
 }

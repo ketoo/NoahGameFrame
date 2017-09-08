@@ -176,7 +176,7 @@ bool NFCHeroPropertyModule::CalHeroAllProperty(const NFGUID& self, const NFGUID&
 		return false;
 	}
 
-	const int nRow = varFind.Int32(0);
+	//const int nRow = varFind.Int32(0);
 
 	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
 	if (nullptr == pHeroPropertyRecord)
