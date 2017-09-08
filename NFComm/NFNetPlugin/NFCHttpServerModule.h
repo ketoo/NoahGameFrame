@@ -15,34 +15,41 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCHttpServerModule
-	: public NFIHttpServerModule
+        : public NFIHttpServerModule
 {
 
 public:
-	NFCHttpServerModule(NFIPluginManager* p);
-	virtual ~NFCHttpServerModule();
-	
+    NFCHttpServerModule(NFIPluginManager* p);
+
+    virtual ~NFCHttpServerModule();
+
 public:
 
-	virtual int InitServer(const unsigned short nPort);
-	virtual bool Execute();
+    virtual int InitServer(const unsigned short nPort);
 
-	virtual bool AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
-	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+    virtual bool Execute();
 
-	virtual bool ResponseMsg(const NFHttpRequest & req, const int nCommand, const std::string& strMsg);
-	virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK");
-	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
+    virtual bool AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+
+    virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb);
+
+    virtual bool ResponseMsg(const NFHttpRequest& req, const int nCommand, const std::string& strMsg);
+
+    virtual bool
+    ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
+                const std::string& reason = "OK");
+
+    virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
 private:
-	void OnReceiveNetPack(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl);
+    void OnReceiveNetPack(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl);
 
 private:
-	NFILogModule* mLogModule;
-	NFIHttpServer* m_pHttpServer;
+    NFILogModule* mLogModule;
+    NFIHttpServer* m_pHttpServer;
 
-	std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
-	std::list<HTTP_RECEIVE_FUNCTOR_PTR> mComMsgCBList;
+    std::map<std::string, HTTP_RECEIVE_FUNCTOR_PTR> mMsgCBMap;
+    std::list<HTTP_RECEIVE_FUNCTOR_PTR> mComMsgCBList;
 };
 
 #endif
