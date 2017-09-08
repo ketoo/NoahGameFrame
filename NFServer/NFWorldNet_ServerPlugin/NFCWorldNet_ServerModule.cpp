@@ -942,7 +942,7 @@ int NFCWorldNet_ServerModule::OnPropertyEnter(const NFDataList& argVar, const NF
 
 NF_SHARE_PTR<ServerData> NFCWorldNet_ServerModule::GetSuitProxyForEnter()
 {
-    return mProxyMap.First();
+    return mProxyMap.GetElementBySuitConsistent();
 }
 
 int NFCWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)

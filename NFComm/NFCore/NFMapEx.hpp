@@ -259,16 +259,17 @@ public:
         }
     }
 
+    virtual bool ClearAll()
+    {
+        mObjectList.clear();
+        return true;
+    }
+
     int Count()
     {
         return (int)mObjectList.size();
     }
 
-    bool ClearAll()
-    {
-        mObjectList.clear();
-        return true;
-    }
 
 protected:
     NFMapOBJECT     mObjectList;
@@ -279,11 +280,6 @@ template <typename T, typename TD>
 class NFConsistentHashMapEx : public NFMapEx<T, TD>
 {
 public:
-	virtual void InitHashNodeWeith(const int nWeigh = 500)
-	{
-		mnWeigh = nWeigh;
-	}
-
 	virtual NF_SHARE_PTR<TD> GetElementBySuitRandom()
 	{
 		NFCVirtualNode<T> vNode;
@@ -329,7 +325,7 @@ public:
 		return NULL;
 	}
 
-	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data)
+	virtual bool AddElement(const T& name, const NF_SHARE_PTR<TD> data) override
 	{
 		if (data == nullptr)
 		{
@@ -349,7 +345,7 @@ public:
 		return false;
 	}
 
-	virtual bool RemoveElement(const T& name)
+	virtual bool RemoveElement(const T& name) override
 	{
 		typename NFMapEx<T, TD>::NFMapOBJECT::iterator itr = NFMapEx<T, TD>::mObjectList.find(name);
 		if (itr != NFMapEx<T, TD>::mObjectList.end())
@@ -363,7 +359,7 @@ public:
 		return false;
 	}
 
-	bool ClearAll()
+    virtual bool ClearAll() override
 	{
 		NFMapEx<T, TD>::mObjectList.clear();
 		mxConsistentHash.ClearAll();
@@ -371,7 +367,6 @@ public:
 	}
 
 private:
-	int mnWeigh = 0;
 	NFConsistentHash<T> mxConsistentHash;
 };
 #endif
