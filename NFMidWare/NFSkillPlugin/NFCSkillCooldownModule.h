@@ -29,21 +29,15 @@ public:
         pPluginManager = p;
     }
 
+    virtual bool AfterInit();
 
     virtual void AddSkillCD( const NFGUID& self, const std::string& strSkillName );
     virtual bool ExistSkillCD( const NFGUID& self, const std::string& strSkillName );
 
 private:
 
-    NFINetModule* m_pNetModule;
-    NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
-    NFILogModule* m_pLogModule;
-    NFIEventModule* m_pEventModule;
-    NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
     NFIElementModule* m_pElementModule;
-    NFISceneProcessModule* m_pSceneProcessModule;
-    NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 
 #endif //NOAHFRAME_NFCSKILLCOOLDOWNMODULE_H

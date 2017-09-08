@@ -39,23 +39,21 @@ public:
     virtual NF_SHARE_PTR<NFIPropertyManager> GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName);
     virtual NF_SHARE_PTR<NFIRecordManager> GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName);
 
-	virtual bool LoadCachePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& xPropertyList);
-	virtual bool LoadCacheRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList);
+	//support hmset
+    virtual bool SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, const bool bCache);
+    virtual bool SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager, const bool bCache);
 
-	virtual bool LoadStoragePropertyListPB(const NFGUID& self, NFMsg::ObjectPropertyList& xPropertyList);
-	virtual bool LoadStorageRecordListPB(const NFGUID& self, NFMsg::ObjectRecordList& recordList);
+	//support hmset
+    virtual bool ConvertPBToPropertyManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, const bool bCache);
+    virtual bool ConvertPBToRecordManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIRecordManager>& pRecordManager, const bool bCache);
 
-    virtual bool SaveCachePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
-    virtual bool SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
+	//support hmset
+	virtual bool ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, const bool bCache);
+	virtual bool ConvertRecordToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, const bool bCache);
 
-	virtual bool SaveStroragePropertyInfo(const NFGUID& self, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager);
-	virtual bool SaveStrorageRecordInfo(const NFGUID& self, NF_SHARE_PTR<NFIRecordManager> pRecordManager);
-
-    virtual bool ConvertPBToPropertyManager(const NFMsg::ObjectPropertyList& xMsg, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, const bool bCache);
-    virtual bool ConvertPBToRecordManager(const NFMsg::ObjectRecordList& xMsg, NF_SHARE_PTR<NFIRecordManager>& pRecordManager, const bool bCache);
-
-    virtual bool ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, NFMsg::ObjectPropertyList& xMsg, const bool bCache);
-    virtual bool ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, NFMsg::ObjectRecordList& xMsg, const bool bCache);
+protected:
+	virtual bool ConvertRecordToPB(const NF_SHARE_PTR<NFIRecord>& pRecord, NFMsg::ObjectRecordBase* pRecordData);
+	virtual bool ConvertPBToRecord(const NF_SHARE_PTR<NFIRecord>& pRecord, NFMsg::ObjectRecordBase* pRecordData);
 
 protected:
 	NFIKernelModule* m_pKernelModule;

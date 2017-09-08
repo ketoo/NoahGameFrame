@@ -52,6 +52,7 @@ protected:
 
 protected:
 	void OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientPickItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
     NFIEventModule* m_pEventModule;

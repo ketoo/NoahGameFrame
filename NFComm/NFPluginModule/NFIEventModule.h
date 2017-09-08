@@ -36,8 +36,6 @@ enum NFEventDefine
 	//arg[0]:itemID, fx, fy, fz, TargetObjectList
 	NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS,
 
-	NFED_ON_OBJECT_BE_KILLED,
-
 
 	NFED_ON_NOTICE_ECTYPE_AWARD,
 

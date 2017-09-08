@@ -78,8 +78,8 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 		return  1;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
-	const int nItemSubType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
+	//const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	//const int nItemSubType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 	const std::string& strBuildingCnfID = m_pElementModule->GetPropertyString(strItemID, NFrame::Item::Extend());
 
 	const NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());

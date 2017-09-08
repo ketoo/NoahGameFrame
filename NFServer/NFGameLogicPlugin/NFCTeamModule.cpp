@@ -8,13 +8,7 @@
 
 #include "NFCTeamModule.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -111,16 +105,11 @@ NFGUID NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefaultTeam
     {
         return NFGUID();
     }
+	m_pCommonRedisModule->SaveCachePropertyInfo(xTeam, pPropertyManager, true);
+	m_pCommonRedisModule->SaveCachePropertyInfo(xTeam, pPropertyManager, false);
 
-    if (!m_pCommonRedisModule->SaveCachePropertyInfo(xTeam, pPropertyManager))
-    {
-        return NFGUID();
-    }
-
-    if (!m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager))
-    {
-        return NFGUID();
-    }
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, false);
 
     return xTeam;
 }
@@ -167,7 +156,10 @@ bool NFCTeamModule::JoinTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, false);
+
+	return true;
 }
 
 bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
@@ -197,7 +189,10 @@ bool NFCTeamModule::LeaveTeam( const NFGUID& self, const NFGUID& xTeamID )
         return false;
     }
 
-    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, false);
+
+	return true;
 }
 
 bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, const NFGUID& xMmember )
@@ -243,8 +238,11 @@ bool NFCTeamModule::KickTeamMmember( const NFGUID& self, const NFGUID& xTeamID, 
     {
         return false;
     }
-    
-    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager);
+
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeamID, pRecordManager, false);
+
+	return true;
 }
 
 
@@ -319,7 +317,10 @@ bool NFCTeamModule::MemberOnline( const NFGUID& self, const NFGUID& xTeam , cons
     
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 1);
 
-    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, false);
+
+	return true;
 }
 
 bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
@@ -346,7 +347,11 @@ bool NFCTeamModule::MemberOffline( const NFGUID& self, const NFGUID& xTeam )
     const int nRow = varList.Int32(0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::Online, 0);
     pMemberRecord->SetInt(nRow, NFrame::Team::MemberList::GameID, 0);
-    return m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager);
+
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, true);
+	m_pCommonRedisModule->SaveCacheRecordInfo(xTeam, pRecordManager, false);
+
+	return true;
 }
 
 bool NFCTeamModule::BroadcastMsgToTeam(const NFGUID& self, const NFGUID& xTeam, const uint16_t nMsgID, google::protobuf::Message& xData)

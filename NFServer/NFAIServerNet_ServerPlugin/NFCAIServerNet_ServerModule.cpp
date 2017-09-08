@@ -98,8 +98,8 @@ bool NFCAIServerNet_ServerModule::AfterInit()
 				const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
 				const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
 				const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-				const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-				const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+				//const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+				//const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
 				int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
 				if (nRet < 0)
@@ -1113,8 +1113,7 @@ void NFCAIServerNet_ServerModule::OnClienEnterGameFinishProcess(const NFSOCK nSo
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckEnterGameSuccess);
 	m_pKernelModule->DoEvent(nPlayerID, NFrame::Player::ThisName(), CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH, NFDataList());
 	
-	NFMsg::ReqAckEnterGameSuccess xReqAckEnterGameSuccess;
-	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xReqAckEnterGameSuccess, nSockIndex, nPlayerID);
+	m_pNetModule->SendMsgPB(NFMsg::EGMI_ACK_ENTER_GAME_FINISH, xMsg, nSockIndex, nPlayerID);
 }
 
 void NFCAIServerNet_ServerModule::OnClienSwapSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

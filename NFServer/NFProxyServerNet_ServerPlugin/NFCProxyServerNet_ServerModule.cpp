@@ -54,8 +54,8 @@ bool NFCProxyServerNet_ServerModule::AfterInit()
                 const int nPort = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::Port());
                 const int nMaxConnect = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::MaxOnline());
                 const int nCpus = m_pElementModule->GetPropertyInt32(strId, NFrame::Server::CpuCount());
-                const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
-                const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
+                //const std::string& strName = m_pElementModule->GetPropertyString(strId, NFrame::Server::Name());
+                //const std::string& strIP = m_pElementModule->GetPropertyString(strId, NFrame::Server::IP());
 
                 int nRet = m_pNetModule->Initialization(nMaxConnect, nPort, nCpus);
                 if (nRet < 0)
@@ -211,6 +211,7 @@ void NFCProxyServerNet_ServerModule::OnClientDisconnect(const NFSOCK nAddress)
             if (!pNetObject->GetUserID().IsNull())
             {
                 NFMsg::ReqLeaveGameServer xData;
+				xData.set_arg(nGameID);
 
                 NFMsg::MsgBase xMsg;
 

@@ -45,6 +45,7 @@ bool NFCItemModule::AfterInit()
 	//////////////////////////////////////////////////////////////////////////
 	// add msg handler
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ITEM_OBJECT, this, &NFCItemModule::OnClientUseItem)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_PICK_ITEM, this, &NFCItemModule::OnClientPickItem)) { return false; }
 
 
 	return true;
@@ -123,7 +124,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	{
 
 	}
-	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
 		m_pEventModule->AddEventCallBack(self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent);
 	}
@@ -259,8 +260,8 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 		return false;
 	}
 
-	const int nVIPEXP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::VIPEXP());
-	const int64_t nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
+	//const int nVIPEXP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::VIPEXP());
+	//const int64_t nEXP = m_pElementModule->GetPropertyInt(strID, NFrame::ConsumeData::EXP());
 	const int nHP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::HP());
 	const int nSP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::SP());
 	const int nMP = m_pElementModule->GetPropertyInt32(strID, NFrame::ConsumeData::MP());
@@ -365,7 +366,28 @@ void NFCItemModule::OnClientUseItem(const NFSOCK nSockIndex, const int nMsgID, c
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.user());
 	const std::string& strItemID = xMsg.item().item_id();
 	const NFGUID xTargetID = NFINetModule::PBToNF(xMsg.targetid());
-	const int nCount = xMsg.item().item_count();
+	//const int nCount = xMsg.item().item_count();
 
 	UseItem(nPlayerID, strItemID, xTargetID);
 }
+
+
+void NFCItemModule::OnClientPickItem(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+{
+    CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqPickDropItem);
+
+    NF_SHARE_PTR<NFIRecord> xDropItemList = m_pKernelModule->FindRecord(nPlayerID, NFrame::Player::DropItemList::ThisName());
+    if (xDropItemList)
+    {
+        const NFGUID& xItemID = NFINetModule::PBToNF(xMsg.item_guid());
+        const int nRow = xDropItemList->FindObject(NFrame::Player::DropItemList::GUID, xItemID);
+		if (nRow >= 0)
+		{
+			const std::string& strItemID = xDropItemList->GetString(nRow, NFrame::Player::DropItemList::ConfigID);
+			const int nCount = xDropItemList->GetInt(nRow, NFrame::Player::DropItemList::ItemCount);
+
+			m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
+		}
+    }
+}
+

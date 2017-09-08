@@ -51,7 +51,7 @@ protected:
 	int OnObjectPlayerEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnObjectGuildEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
 	
-		void OnOnline(const NFGUID& self);
+	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
 
 
@@ -60,16 +60,12 @@ private:
 	{
 		PlayerDataCache()
 		{
-			nLoadTime = NFDateTime::Now().GetSecond();
 			nHomeSceneID = 0;
 		}
-		int nLoadTime;
 		int nHomeSceneID;
 
-		NFMsg::ObjectPropertyList xPbPropertyCacheList;
-		NFMsg::ObjectPropertyList xPbPropertyStorageList;
-		NFMsg::ObjectRecordList xPbRecordCacheList;
-		NFMsg::ObjectRecordList xPbRecordStorageList;
+		NF_SHARE_PTR<NFIRecordManager> xRecordManager;
+		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager;
 	};
 
 	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;

@@ -24,7 +24,7 @@ public:
                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, pd, std::string(), std::map<std::string, std::string>() );
+        return PerformGet ( strUri, std::map<std::string, std::string>(), pd, std::string() );
     }
 
     template<typename BaseType>
@@ -33,7 +33,7 @@ public:
                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, pd, strUserData, std::map<std::string, std::string>() );
+        return PerformGet ( strUri, std::map<std::string, std::string>(), pd, strUserData );
     }
 
     template<typename BaseType>
@@ -42,7 +42,7 @@ public:
                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformGet ( strUri, pd, strUserData, xHeaders );
+        return PerformGet ( strUri, xHeaders, pd, strUserData );
     }
 
     template<typename BaseType>
@@ -51,7 +51,7 @@ public:
                        void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, strPostData, pd, std::string(), std::map<std::string, std::string>() );
+        return PerformPost ( strUri, std::map<std::string, std::string>(), strPostData, pd, std::string() );
     }
 
 
@@ -61,7 +61,7 @@ public:
                        void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, strPostData, pd, strUserData, std::map<std::string, std::string>() );
+        return PerformPost ( strUri, std::map<std::string, std::string>(), strPostData, pd, strUserData );
     }
 
 
@@ -71,20 +71,20 @@ public:
                        void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData, const std::string& strUserData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 ) ) );
-        return PerformPost ( strUri, strPostData, pd, strUserData, xHeaders );
+        return PerformPost ( strUri, xHeaders, strPostData, pd, strUserData );
     }
 
 protected:
-    virtual bool PerformGet ( const std::string& strUri,
+    virtual bool PerformGet ( const std::string& strUrl,
+                              const std::map<std::string, std::string>& xHeaders,
                               HTTP_RESP_FUNCTOR_PTR pCB,
-                              const std::string& strUserData,
-                              const std::map<std::string, std::string>& xHeaders ) = 0 ;
+                              const std::string& strUserData) = 0 ;
 
-    virtual bool PerformPost ( const std::string& strUri,
+    virtual bool PerformPost ( const std::string& strUrl,
+                               const std::map<std::string, std::string>& xHeaders,
                                const std::string& strPostData,
                                HTTP_RESP_FUNCTOR_PTR pCB,
-                               const std::string& strUserData,
-                               const std::map<std::string, std::string>& xHeaders ) = 0;
+                               const std::string& strUserData) = 0;
 };
 
 #endif

@@ -517,6 +517,16 @@ NF_SHARE_PTR<NFIPropertyManager> NFCObject::GetPropertyManager()
     return m_pPropertyManager;
 }
 
+void NFCObject::SetRecordManager(NF_SHARE_PTR<NFIRecordManager> xRecordManager)
+{
+	m_pRecordManager = xRecordManager;
+}
+
+void NFCObject::SetPropertyManager(NF_SHARE_PTR<NFIPropertyManager> xPropertyManager)
+{
+	m_pPropertyManager = xPropertyManager;
+}
+
 NFGUID NFCObject::Self()
 {
     return mSelf;

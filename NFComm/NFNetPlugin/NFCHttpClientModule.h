@@ -14,11 +14,12 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCHttpClientModule
-    : public NFIHttpClientModule
+        : public NFIHttpClientModule
 {
 
 public:
-    NFCHttpClientModule ( NFIPluginManager* p );
+    NFCHttpClientModule(NFIPluginManager* p);
+
     virtual ~NFCHttpClientModule();
 
     virtual bool Init();
@@ -28,16 +29,16 @@ public:
     virtual bool Shut();
 
 protected:
-    virtual bool PerformGet ( const std::string& strUri,
-                              HTTP_RESP_FUNCTOR_PTR pCB,
-                              const std::string& strUserData,
-                              const std::map<std::string, std::string>& xHeaders );
+    virtual bool PerformGet(const std::string& strUri,
+                            const std::map<std::string, std::string>& xHeaders,
+                            HTTP_RESP_FUNCTOR_PTR pCB,
+                            const std::string& strUserData);
 
-    virtual bool PerformPost ( const std::string& strUri,
-                               const std::string& strPostData,
-                               HTTP_RESP_FUNCTOR_PTR pCB,
-                               const std::string& strUserData,
-                               const std::map<std::string, std::string>& xHeaders );
+    virtual bool PerformPost(const std::string& strUri,
+                             const std::map<std::string, std::string>& xHeaders,
+                             const std::string& strPostData,
+                             HTTP_RESP_FUNCTOR_PTR pCB,
+                             const std::string& strUserData);
 
 private:
     NFIHttpClient* m_pHttpClient;
