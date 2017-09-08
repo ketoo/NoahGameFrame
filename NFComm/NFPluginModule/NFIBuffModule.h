@@ -37,8 +37,6 @@ public:
     virtual bool HasBuff(const NFGUID& self, const std::string& strConfig) = 0;
 
 
-    virtual bool Execute(const NFGUID& self, float fPassTime) = 0;
-
 
     virtual int Attack(const NFGUID& self, const NFGUID& other) = 0;
 

@@ -9,7 +9,6 @@
 #ifndef NFC_GUILD_MODULE_H
 #define NFC_GUILD_MODULE_H
 
-#include "NFCGuildComponent.h"
 #include "NFComm/NFCore/NFMapEx.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
@@ -36,10 +35,22 @@ public:
     virtual bool AfterInit();
 
 protected:
-	bool StartActorPool(const int nCount);
-	bool CloseActorPool();
 
-	int ComponentAsyEnd(const NFGUID& self, const int nFormActor, const int nSubMsgID, const std::string& strData);
+    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strName, const std::string& strGuildName);
+    bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
+    bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
+    bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+    bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+    bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
+
+    bool MemberOnline(const NFGUID& self, const NFGUID& xGuild);
+    bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
+
+
+    void OnGuildOnlineProcess(const NFGUID& xGuildID);
+    void OnGuildOfflineProcess(const NFGUID& xGuildID);
+
+    NFIGuildModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xGuildID);
 
 protected:
 
@@ -48,7 +59,7 @@ protected:
 	void OnLeaveGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnOprGuildMemberProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSearchGuildProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnClienChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 

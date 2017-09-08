@@ -15,9 +15,14 @@ class NFIGuildModule
     : public NFIModule
 {
 public:
+    enum MEMBER_TYPE
+    {
+        MT_PRESIDENT,
+        MT_OLDER,
+        MT_ELITE,
+        MT_MEMBER,
+    };
 
-
-private:
 };
 
 #endif

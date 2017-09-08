@@ -9,5 +9,9 @@
 		<Property Id="SceneID" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
+		<Record Id="Cooldown" Cache="1"	 Col="2"	 Private="1"	 Public="0"	 Row="8"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="SkillID"/><!--- Desc-->
+			<Col Type ="int"	Tag="Time"/>
+		</Record>
 	</Records>
 </XML>

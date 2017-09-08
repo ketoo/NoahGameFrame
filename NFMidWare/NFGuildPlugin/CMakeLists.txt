@@ -5,9 +5,6 @@ file(GLOB NFGuildPlugin_ROOT_Cpp
 file(GLOB NFGuildPlugin_ROOT_Hpp 
 	*.h)
 
-remove_file(NFGuildPlugin_ROOT_Cpp "NFCGuildEctypeModule.cpp")
-remove_file(NFGuildPlugin_ROOT_Hpp "NFCGuildEctypeModule.h")
-
 add_library(NFGuildPlugin SHARED
 	${NFGuildPlugin_ROOT_Cpp}
 	${NFGuildPlugin_ROOT_Hpp})

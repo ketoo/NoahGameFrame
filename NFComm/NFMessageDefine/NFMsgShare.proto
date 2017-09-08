@@ -16,14 +16,17 @@ message ReqEnterGameServer
 
 message ReqAckEnterGameSuccess
 {
+    required int32 		arg = 1;
 }
 
 message ReqHeartBeat
 {
+    required int32 		arg = 1;
 }
 
 message ReqLeaveGameServer
 {
+    required int32 		arg = 1;
 }
 
 message PlayerEntryInfo//对象出现基本信息
@@ -381,10 +384,16 @@ message ReqSetFightHero
 
 //EGEC_REQ_SWITCH_FIGHT_HERO						= 508;		 // 战斗武将
 message ReqSwitchFightHero
-{	
+{
 	required Ident		Heroid				= 1;
 }
 
+//EGMI_REQ_BUY_FORM_SHOP
+message ReqBuyItemFromShop
+{
+	required string		itemID				= 1;
+	required int32		count				= 2;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -686,11 +695,12 @@ message AckMapHunting
 //	EGMI_REQ_MAP_GRID_KING_WAR
 message ReqMapKingWar
 {
-	required bytes						map_title_id = 1;
+	required bytes						map_title = 1;
 }
 //	EGMI_ACK_MAP_GRID_KING_WAR
 message AckMapKingWar
 {
+	required bytes						map_title = 1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

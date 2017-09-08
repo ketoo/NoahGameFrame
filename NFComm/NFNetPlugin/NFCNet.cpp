@@ -317,8 +317,6 @@ bool NFCNet::Dismantle(NetObject* pObject)
         int nMsgBodyLength = DeCode(pObject->GetBuff(), len, xHead);
         if (nMsgBodyLength > 0 && xHead.GetMsgID() > 0)
         {
-            int nRet = 0;
-
             if (mRecvCB)
             {
                 mRecvCB(pObject->GetRealFD(), xHead.GetMsgID(), pObject->GetBuff() + NFIMsgHead::NF_Head::NF_HEAD_LENGTH, nMsgBodyLength);
@@ -429,7 +427,6 @@ int NFCNet::InitClientNet()
 
 int NFCNet::InitServerNet()
 {
-    int nMaxClient = mnMaxConnect;
     int nCpuCount = mnCpuCount;
     int nPort = mnPort;
 
@@ -506,7 +503,7 @@ int NFCNet::InitServerNet()
 bool NFCNet::CloseSocketAll()
 {
     std::map<NFSOCK, NetObject*>::iterator it = mmObject.begin();
-    for (it; it != mmObject.end(); ++it)
+    for (; it != mmObject.end(); ++it)
     {
 		NFSOCK nFD = it->first;
         mvRemoveObject.push_back(nFD);
