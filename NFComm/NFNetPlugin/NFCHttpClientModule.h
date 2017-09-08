@@ -30,15 +30,15 @@ public:
 
 protected:
     virtual bool PerformGet(const std::string& strUri,
+                            const std::map<std::string, std::string>& xHeaders,
                             HTTP_RESP_FUNCTOR_PTR pCB,
-                            const std::string& strUserData,
-                            const std::map<std::string, std::string>& xHeaders);
+                            const std::string& strUserData);
 
     virtual bool PerformPost(const std::string& strUri,
+                             const std::map<std::string, std::string>& xHeaders,
                              const std::string& strPostData,
                              HTTP_RESP_FUNCTOR_PTR pCB,
-                             const std::string& strUserData,
-                             const std::map<std::string, std::string>& xHeaders);
+                             const std::string& strUserData);
 
 private:
     NFIHttpClient* m_pHttpClient;
