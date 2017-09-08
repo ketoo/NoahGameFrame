@@ -51,17 +51,18 @@ bool NFCHttpClientModule::Shut()
 }
 
 bool NFCHttpClientModule::PerformGet(const std::string& strUri,
+                                     const std::map<std::string, std::string>& xHeaders,
                                      HTTP_RESP_FUNCTOR_PTR pCB,
-                                     const std::string& strUserData,
-                                     const std::map<std::string, std::string>& xHeaders)
+                                     const std::string& strUserData)
 {
     return m_pHttpClient->PerformGet(strUri, pCB, strUserData, xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
 }
 
-bool NFCHttpClientModule::PerformPost(const std::string& strUri, const std::string& strPostData,
+bool NFCHttpClientModule::PerformPost(const std::string& strUri,
+                                      const std::map<std::string, std::string>& xHeaders,
+                                      const std::string& strPostData,
                                       HTTP_RESP_FUNCTOR_PTR pCB,
-                                      const std::string& strUserData,
-                                      const std::map<std::string, std::string>& xHeaders)
+                                      const std::string& strUserData)
 {
     return m_pHttpClient->PerformPost(strUri, strPostData, pCB, strUserData,
                                       xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
