@@ -94,8 +94,8 @@ private:
     NFINT64 mnLastCheckTime;
 
     //serverid,data
-    NFMapEx<int, ServerData> mGameMap;
-    NFMapEx<int, ServerData> mProxyMap;
+    NFConsistentHashMapEx<int, ServerData> mGameMap;
+    NFConsistentHashMapEx<int, ServerData> mProxyMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;
