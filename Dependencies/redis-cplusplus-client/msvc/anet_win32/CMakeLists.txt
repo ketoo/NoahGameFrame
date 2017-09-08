@@ -11,6 +11,6 @@ IF( WIN32 )
 		RUNTIME_OUTPUT_DIRECTORY ${NFOutPutDir}
 		LIBRARY_OUTPUT_DIRECTORY ${NFOutPutDir} )
 ELSE()
-	message("not win32")
+	message("win32_anet_win64 not win32")
 ENDIF()
 
