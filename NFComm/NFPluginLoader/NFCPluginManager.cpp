@@ -78,7 +78,7 @@ bool NFCPluginManager::Awake()
 
 
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
-	for (itAfterInstance; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
+	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
 	{
 		itAfterInstance->second->Awake();
 	}
