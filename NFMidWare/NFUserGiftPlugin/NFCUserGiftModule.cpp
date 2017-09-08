@@ -98,7 +98,7 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 			{
 				std::string strItemID;
 				NF_SHARE_PTR<std::string> strItemCount = xEmbeddedMap->First(strItemID);
-				for (strItemCount; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
+				for (; strItemCount; strItemCount = xEmbeddedMap->Next(strItemID))
 				{
 					int nCount = lexical_cast<int>(*strItemCount);
 
@@ -115,10 +115,18 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 
 bool NFCUserGiftModule::ActiveteHero(const NFGUID & self)
 {
-	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
 
 	//configuration
-	m_pItemModule->UseItem(self, "Item_HeroCard_Abaddon", self);
+	for (int i = 0; i < xRecord->GetRows(); ++i)
+	{
+		const std::string& strItemID = xRecord->GetString(i, NFrame::Player::BagItemList::ConfigID);
+		int nHeroType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::HeroType());
+		if (nHeroType > 0)
+		{
+			m_pItemModule->UseItem(self, strItemID, self);
+		}
+	}
 
 	return true;
 }

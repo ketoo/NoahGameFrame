@@ -29,7 +29,9 @@
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
 
 #if NF_PLATFORM == NF_PLATFORM_APPLE
+
 #include <libkern/OSByteOrder.h>
+
 #endif
 
 #include <netinet/in.h>
@@ -48,14 +50,14 @@
 
 enum NF_NET_EVENT
 {
-    NF_NET_EVENT_EOF = 0x10,        
-    NF_NET_EVENT_ERROR = 0x20,      
-    NF_NET_EVENT_TIMEOUT = 0x40,    
-    NF_NET_EVENT_CONNECTED = 0x80,  
+    NF_NET_EVENT_EOF = 0x10,
+    NF_NET_EVENT_ERROR = 0x20,
+    NF_NET_EVENT_TIMEOUT = 0x40,
+    NF_NET_EVENT_CONNECTED = 0x80,
 };
 
 
-struct  NFIMsgHead
+struct NFIMsgHead
 {
     enum NF_Head
     {
@@ -63,12 +65,15 @@ struct  NFIMsgHead
     };
 
     virtual int EnCode(char* strData) = 0;
+
     virtual int DeCode(const char* strData) = 0;
 
     virtual uint16_t GetMsgID() const = 0;
+
     virtual void SetMsgID(uint16_t nMsgID) = 0;
 
     virtual uint32_t GetBodyLength() const = 0;
+
     virtual void SetBodyLength(uint32_t nLength) = 0;
 
     int64_t NF_HTONLL(int64_t nData)
@@ -160,12 +165,12 @@ public:
         uint32_t nOffset = 0;
 
         uint16_t nMsgID = NF_HTONS(munMsgID);
-        memcpy(strData + nOffset, (void*)(&nMsgID), sizeof(munMsgID));
+        memcpy(strData + nOffset, (void*) (&nMsgID), sizeof(munMsgID));
         nOffset += sizeof(munMsgID);
 
         uint32_t nPackSize = munSize + NF_HEAD_LENGTH;
         uint32_t nSize = NF_HTONL(nPackSize);
-        memcpy(strData + nOffset, (void*)(&nSize), sizeof(munSize));
+        memcpy(strData + nOffset, (void*) (&nSize), sizeof(munSize));
         nOffset += sizeof(munSize);
 
         if (nOffset != NF_HEAD_LENGTH)
@@ -203,6 +208,7 @@ public:
     {
         return munMsgID;
     }
+
     virtual void SetMsgID(uint16_t nMsgID)
     {
         munMsgID = nMsgID;
@@ -212,17 +218,21 @@ public:
     {
         return munSize;
     }
+
     virtual void SetBodyLength(uint32_t nLength)
     {
         munSize = nLength;
     }
+
 protected:
     uint32_t munSize;
     uint16_t munMsgID;
 };
 
 class NFINet;
-typedef std::function<void(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
+
+typedef std::function<void(const NFSOCK nSockIndex, const int nMsgID, const char* msg,
+                           const uint32_t nLen)> NET_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<NET_RECEIVE_FUNCTOR> NET_RECEIVE_FUNCTOR_PTR;
 
 typedef std::function<void(const NFSOCK nSockIndex, const NF_NET_EVENT nEvent, NFINet* pNet)> NET_EVENT_FUNCTOR;
@@ -254,16 +264,17 @@ public:
 
     int AddBuff(const char* str, uint32_t nLen)
     {
-        mstrBuff.append(str, (size_t)nLen);
+        mstrBuff.append(str, (size_t) nLen);
 
-        return (int)mstrBuff.length();
+        return (int) mstrBuff.length();
     }
-	int AddBuff(const char* str, size_t nLen)
-	{
-		mstrBuff.append(str, nLen);
 
-		return (int)mstrBuff.length();
-	}
+    int AddBuff(const char* str, size_t nLen)
+    {
+        mstrBuff.append(str, nLen);
+
+        return (int) mstrBuff.length();
+    }
 
     int CopyBuffTo(char* str, uint32_t nStart, uint32_t nLen)
     {
@@ -279,11 +290,6 @@ public:
 
     int RemoveBuff(uint32_t nStart, uint32_t nLen)
     {
-        if (nStart < 0)
-        {
-            return 0;
-        }
-
         if (nStart + nLen > mstrBuff.length())
         {
             return 0;
@@ -313,18 +319,19 @@ public:
     {
         return m_pNet;
     }
-    //////////////////////////////////////////////////////////////////////////
-	const std::string& GetSecurityKey() const
-	{
-		return mstrSecurityKey;
-	}
 
-	void SetSecurityKey(const std::string& strKey)
-	{
-		mstrSecurityKey = strKey;
-	}
-	
-	int GetConnectKeyState() const
+    //////////////////////////////////////////////////////////////////////////
+    const std::string& GetSecurityKey() const
+    {
+        return mstrSecurityKey;
+    }
+
+    void SetSecurityKey(const std::string& strKey)
+    {
+        mstrSecurityKey = strKey;
+    }
+
+    int GetConnectKeyState() const
     {
         return mnLogicState;
     }
@@ -333,14 +340,17 @@ public:
     {
         mnLogicState = nState;
     }
+
     bool NeedRemove()
     {
         return bNeedRemove;
     }
+
     void SetNeedRemove(bool b)
     {
         bNeedRemove = b;
     }
+
     const std::string& GetAccount() const
     {
         return mstrUserData;
@@ -350,6 +360,7 @@ public:
     {
         mstrUserData = strData;
     }
+
     int GetGameID() const
     {
         return mnGameID;
@@ -359,6 +370,7 @@ public:
     {
         mnGameID = nData;
     }
+
     const NFGUID& GetUserID()
     {
         return mnUserID;
@@ -378,6 +390,7 @@ public:
     {
         mnClientID = xClientID;
     }
+
     const NFGUID& GetHashIdentID()
     {
         return mnHashIdentID;
@@ -397,8 +410,8 @@ private:
     sockaddr_in sin;
     bufferevent* bev;
     std::string mstrBuff;
-	std::string mstrUserData;
-	std::string mstrSecurityKey;
+    std::string mstrUserData;
+    std::string mstrSecurityKey;
 
     int32_t mnLogicState;
     int32_t mnGameID;
@@ -414,19 +427,23 @@ private:
 class NFINet
 {
 public:
-	virtual ~NFINet() {}
+    virtual ~NFINet()
+    {}
 
     //need to call this function every frame to drive network library
     virtual bool Execute() = 0;
 
     virtual void Initialization(const char* strIP, const unsigned short nPort) = 0;
+
     virtual int Initialization(const unsigned int nMaxClient, const unsigned short nPort, const int nCpuCount = 4) = 0;
-	virtual int ExpandBufferSize(const unsigned int size) = 0;
+
+    virtual int ExpandBufferSize(const unsigned int size) = 0;
 
     virtual bool Final() = 0;
 
     //send a message with out msg-head[auto add msg-head in this function]
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex = 0) = 0;
+    virtual bool
+    SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex = 0) = 0;
 
     //send a message to all client[need to add msg-head for this message by youself]
     virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
@@ -435,7 +452,9 @@ public:
     virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen) = 0;
 
     virtual bool CloseNetObject(const NFSOCK nSockIndex) = 0;
+
     virtual NetObject* GetNetObject(const NFSOCK nSockIndex) = 0;
+
     virtual bool AddNetObject(const NFSOCK nSockIndex, NetObject* pObject) = 0;
 
     virtual bool IsServer() = 0;

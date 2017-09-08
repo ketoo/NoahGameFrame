@@ -389,7 +389,7 @@ public:
 		return NULL_VECTOR3;
 	}
 
-	std::string StringValEx() const
+	std::string ToString() const
 	{
 		std::string strData;
 
@@ -426,6 +426,62 @@ public:
 		return strData;
 	}
 
+	bool FromString(const std::string& strData)
+	{
+		try
+		{
+			switch (nType)
+			{
+			case TDATA_INT:
+				SetInt(lexical_cast<int64_t> (strData));
+				break;
+
+			case TDATA_FLOAT:
+				SetFloat(lexical_cast<float> (strData));
+				break;
+
+			case TDATA_STRING:
+				SetString(strData);
+				break;
+
+			case TDATA_OBJECT:
+			{
+				NFGUID xID;
+				xID.FromString(strData);
+				SetObject(xID);
+			}
+			break;
+
+			case TDATA_VECTOR2:
+			{
+				NFVector2 v;
+				v.FromString(strData);
+				SetVector2(v);
+			}
+			break;
+
+			case TDATA_VECTOR3:
+			{
+				NFVector3 v;
+				v.FromString(strData);
+				SetVector3(v);
+			}
+			break;
+
+			default:
+				break;
+			}
+
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
+		
+		return false;
+	}
+
 private:
 
 	NFDATA_TYPE nType;
@@ -452,7 +508,7 @@ public:
 	{
 	}
 
-	virtual std::string StringValEx(const int index) const
+	virtual std::string ToString(const int index) const
 	{
 
 		if (ValidIndex(index))
@@ -499,7 +555,7 @@ public:
 	{
 		for (int i = 0; i < GetCount(); ++i)
 		{
-			std::string strVal = StringValEx(i);
+			std::string strVal = ToString(i);
 			str += strVal;
 			str += strSplit;
 		}

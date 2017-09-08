@@ -71,8 +71,3 @@ void NFCTaskModule::OnClientPushTask(const NFSOCK nSockIndex, const int nMsgID, 
 {
     CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqCompeleteTask)
 }
-
-void NFCTaskModule::OnClientPushCustom(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-    //CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::cu)
-}

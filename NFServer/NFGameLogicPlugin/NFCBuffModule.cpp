@@ -14,8 +14,6 @@ bool NFCBuffModule::Init()
     //m_pBuffConfigModule = pPluginManager->FindModule<NFIBuffConfigModule>();
 
 
-    mstrRunTimeEffectTable = "RuntimeBuffInfo";
-
     return true;
 }
 
@@ -26,11 +24,6 @@ bool NFCBuffModule::Shut()
 }
 
 bool NFCBuffModule::Execute()
-{
-    return true;
-}
-
-bool NFCBuffModule::Execute( const NFGUID& self, float fPassTime )
 {
     return true;
 }
@@ -151,10 +144,10 @@ int NFCBuffModule::ProcessBuffValueProperty( const NFGUID& self, NFIBuffConfigMo
 int NFCBuffModule::ProcessBuffValuePropertyReferAbsoluteValue( const NFGUID& self, NFIBuffConfigModule::NFCBuffConfig* pBuffConfig, const NFGUID& releaserIdent )
 {
     //buff group property
-    int nBuffGroup = 0;
+    //int nBuffGroup = 0;
     //RUNTIME_BUFF_INFO
     NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
-    NF_SHARE_PTR<NFIRecord> pBuffRecord = pObject->GetRecordManager()->GetElement( mstrRunTimeEffectTable );
+    NF_SHARE_PTR<NFIRecord> pBuffRecord = pObject->GetRecordManager()->GetElement("");
     if ( pBuffRecord )
     {
         NF_SHARE_PTR<NFIRecord> pPropertyGroupRecord = pObject->GetRecordManager()->GetElement(NFrame::Player::CommValue::ThisName());

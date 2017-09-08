@@ -199,41 +199,7 @@ package nframe;
 			public static final int GUID = 0;//object
 			public static final int Name = 1;//string
 			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Power = 6;//int
-
-		}
-		public class GuildBoss
-		{
-			//Class name
-			public static final String ThisName = "GuildBoss";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-
-		}
-		public class GuildEvent
-		{
-			//Class name
-			public static final String ThisName = "GuildEvent";
-			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
-			public static final int EventID = 8;//int
-			public static final int EventTime = 9;//int
-			public static final int Context = 10;//string
+			public static final int VIP = 3;//int
 
 		}
 		public class GuildHouse
@@ -243,11 +209,6 @@ package nframe;
 			public static final int GUID = 0;//object
 			public static final int Name = 1;//string
 			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
 
 		}
 		public class GuildMemberList
@@ -267,7 +228,8 @@ package nframe;
 			public static final int GameID = 10;//int
 			public static final int JoinTime = 11;//int
 			public static final int Contribution = 12;//int
-			public static final int AllContribution = 13;//int
+			public static final int LastTime = 13;//string
+			public static final int AllContribution = 14;//int
 
 		}
 		public class GuildSkill
@@ -275,13 +237,7 @@ package nframe;
 			//Class name
 			public static final String ThisName = "GuildSkill";
 			public static final int GUID = 0;//object
-			public static final int Name = 1;//string
-			public static final int Level = 2;//int
-			public static final int Job = 3;//int
-			public static final int Donation = 4;//int
-			public static final int VIP = 5;//int
-			public static final int Offline = 6;//int
-			public static final int Power = 7;//int
+			public static final int Level = 1;//int
 
 		}
 
@@ -298,12 +254,13 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
-		public static final String ConditionPlayerLevel = "ConditionPlayerLevel";// int
-		public static final String ConditionPlayerVIP = "ConditionPlayerVIP";// int
-		public static final String CostMoney = "CostMoney";// int
 		public static final String DismissTime = "DismissTime";// int
 		public static final String GuildLevel = "GuildLevel";// int
+		public static final String Level = "Level";// int
 		public static final String MaxMember = "MaxMember";// int
+		public static final String Money = "Money";// int
+		public static final String SkillNum = "SkillNum";// int
+		public static final String VIP = "VIP";// int
 		// Record
 
 	}
@@ -367,6 +324,14 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static final String ThisName = "Cooldown";
+			public static final int SkillID = 0;//string
+			public static final int Time = 1;//int
+
+		}
 
 	}
 	public class InitProperty
@@ -410,7 +375,7 @@ package nframe;
 		public static final String EffectData = "EffectData";// string
 		public static final String ExpiredType = "ExpiredType";// int
 		public static final String Extend = "Extend";// string
-		public static final String HeroTye = "HeroTye";// int
+		public static final String HeroType = "HeroType";// int
 		public static final String Icon = "Icon";// string
 		public static final String ItemSubType = "ItemSubType";// int
 		public static final String ItemType = "ItemType";// int
@@ -511,9 +476,9 @@ package nframe;
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String DropPackList = "DropPackList";// string
+		public static final String DropProbability = "DropProbability";// int
 		public static final String EXP = "EXP";// int
 		public static final String EffectData = "EffectData";// string
-		public static final String EquipIDRef = "EquipIDRef";// string
 		public static final String Gold = "Gold";// int
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
@@ -765,6 +730,7 @@ package nframe;
 			public static final int GUID = 0;//object
 			public static final int ConfigID = 1;//string
 			public static final int ItemCount = 2;//int
+			public static final int Postion = 3;//vector3
 
 		}
 		public class HeroValue

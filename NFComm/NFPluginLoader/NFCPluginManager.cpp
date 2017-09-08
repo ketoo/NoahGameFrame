@@ -48,8 +48,13 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 
    mGetFileContentFunctor = nullptr;
 
-   mstrConfigPath = "";
-   mstrConfigName = "Plugin.xml";
+   mstrConfigPath = "../";
+
+#ifdef NF_DEBUG_MODE
+   mstrConfigName = "NFDataCfg/Debug/Plugin.xml";
+#else
+   mstrConfigName = "NFDataCfg/Release/Plugin.xml";
+#endif
 }
 
 NFCPluginManager::~NFCPluginManager()
@@ -62,7 +67,7 @@ bool NFCPluginManager::Awake()
 	LoadPluginConfig();
 
 	PluginNameMap::iterator it = mPluginNameMap.begin();
-	for (it; it != mPluginNameMap.end(); ++it)
+	for (; it != mPluginNameMap.end(); ++it)
 	{
 #ifdef NF_DYNAMIC_PLUGIN
 		LoadPluginLibrary(it->first);
@@ -73,7 +78,7 @@ bool NFCPluginManager::Awake()
 
 
 	PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
-	for (itAfterInstance; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
+	for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
 	{
 		itAfterInstance->second->Awake();
 	}
@@ -84,7 +89,7 @@ bool NFCPluginManager::Awake()
 inline bool NFCPluginManager::Init()
 {
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		itInstance->second->Init();
 	}
@@ -95,7 +100,8 @@ inline bool NFCPluginManager::Init()
 bool NFCPluginManager::LoadPluginConfig()
 {
 	std::string strContent;
-	GetFileContent(mstrConfigName, strContent);
+	std::string strFilePath = GetConfigPath() + mstrConfigName;
+	GetFileContent(strFilePath, strContent);
 
 	rapidxml::xml_document<> xDoc;
 	xDoc.parse<0>((char*)strContent.c_str());
@@ -116,49 +122,13 @@ bool NFCPluginManager::LoadPluginConfig()
 
     }
 
-/*
-    rapidxml::xml_node<>* pPluginAppNode = pAppNameNode->first_node("APPID");
-    if (!pPluginAppNode)
-    {
-        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    const char* strAppID = pPluginAppNode->first_attribute("Name")->value();
-    if (!strAppID)
-    {
-        NFASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    if (!NF_StrTo(strAppID, mnAppID))
-    {
-        NFASSERT(0, "App ID Convert Error", __FILE__, __FUNCTION__);
-        return false;
-    }
-*/
-    rapidxml::xml_node<>* pPluginConfigPathNode = pAppNameNode->first_node("ConfigPath");
-    if (!pPluginConfigPathNode)
-    {
-        NFASSERT(0, "There are no ConfigPath", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    if (NULL == pPluginConfigPathNode->first_attribute("Name"))
-    {
-        NFASSERT(0, "There are no ConfigPath.Name", __FILE__, __FUNCTION__);
-        return false;
-    }
-
-    mstrConfigPath = pPluginConfigPathNode->first_attribute("Name")->value();
-
     return true;
 }
 
 bool NFCPluginManager::LoadStaticPlugin(const std::string& strPluginDLLName)
 {
 	//     PluginNameList::iterator it = mPluginNameList.begin();
-	//     for (it; it != mPluginNameList.end(); it++)
+	//     for (; it != mPluginNameList.end(); it++)
 	//     {
 	//         const std::string& strPluginName = *it;
 	//         CREATE_PLUGIN( this, strPluginName );
@@ -278,7 +248,7 @@ bool NFCPluginManager::ReLoadPlugin(const std::string & strPluginDLLName)
 
 	//4
 	PluginInstanceMap::iterator itReloadInstance = mPluginInstanceMap.begin();
-	for (itReloadInstance; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
+	for (; itReloadInstance != mPluginInstanceMap.end(); itReloadInstance++)
 	{
 		if (strPluginDLLName != itReloadInstance->first)
 		{
@@ -340,6 +310,11 @@ inline const std::string & NFCPluginManager::GetConfigPath() const
 	return mstrConfigPath;
 }
 
+inline void NFCPluginManager::SetConfigPath(const std::string & strPath)
+{
+	mstrConfigPath = strPath;
+}
+
 void NFCPluginManager::SetConfigName(const std::string & strFileName)
 {
 	if (strFileName.empty())
@@ -352,7 +327,16 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 		return;
 	}
 
-	mstrConfigName = strFileName;
+#ifdef NF_DEBUG_MODE
+	mstrConfigName = "NFDataCfg/Debug/" + strFileName;
+#else
+	mstrConfigName = "NFDataCfg/Release/" + strFileName;
+#endif
+}
+
+const std::string& NFCPluginManager::GetConfigName() const
+{
+	return mstrConfigName;
 }
 
 const std::string& NFCPluginManager::GetAppName() const
@@ -461,7 +445,7 @@ NFIModule* NFCPluginManager::FindModule(const std::string& strModuleName)
 bool NFCPluginManager::AfterInit()
 {
     PluginInstanceMap::iterator itAfterInstance = mPluginInstanceMap.begin();
-    for (itAfterInstance; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
+    for (; itAfterInstance != mPluginInstanceMap.end(); itAfterInstance++)
     {
         itAfterInstance->second->AfterInit();
     }
@@ -472,7 +456,7 @@ bool NFCPluginManager::AfterInit()
 bool NFCPluginManager::CheckConfig()
 {
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
-    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
         itCheckInstance->second->CheckConfig();
     }
@@ -483,7 +467,7 @@ bool NFCPluginManager::CheckConfig()
 bool NFCPluginManager::ReadyExecute()
 {
     PluginInstanceMap::iterator itCheckInstance = mPluginInstanceMap.begin();
-    for (itCheckInstance; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
+    for (; itCheckInstance != mPluginInstanceMap.end(); itCheckInstance++)
     {
         itCheckInstance->second->ReadyExecute();
     }
@@ -494,7 +478,7 @@ bool NFCPluginManager::ReadyExecute()
 bool NFCPluginManager::BeforeShut()
 {
     PluginInstanceMap::iterator itBeforeInstance = mPluginInstanceMap.begin();
-    for (itBeforeInstance; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
+    for (; itBeforeInstance != mPluginInstanceMap.end(); itBeforeInstance++)
     {
         itBeforeInstance->second->BeforeShut();
     }
@@ -505,7 +489,7 @@ bool NFCPluginManager::BeforeShut()
 bool NFCPluginManager::Shut()
 {
     PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-    for (itInstance; itInstance != mPluginInstanceMap.end(); ++itInstance)
+    for (; itInstance != mPluginInstanceMap.end(); ++itInstance)
     {
         itInstance->second->Shut();
     }
@@ -516,7 +500,7 @@ bool NFCPluginManager::Shut()
 bool NFCPluginManager::Finalize()
 {
 	PluginInstanceMap::iterator itInstance = mPluginInstanceMap.begin();
-	for (itInstance; itInstance != mPluginInstanceMap.end(); itInstance++)
+	for (; itInstance != mPluginInstanceMap.end(); itInstance++)
 	{
 		itInstance->second->Finalize();
 	}
@@ -524,7 +508,7 @@ bool NFCPluginManager::Finalize()
 	////////////////////////////////////////////////
 
 	PluginNameMap::iterator it = mPluginNameMap.begin();
-	for (it; it != mPluginNameMap.end(); it++)
+	for (; it != mPluginNameMap.end(); it++)
 	{
 #ifdef NF_DYNAMIC_PLUGIN
 		UnLoadPluginLibrary(it->first);

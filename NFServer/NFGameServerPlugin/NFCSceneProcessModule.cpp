@@ -197,14 +197,20 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 	E_SCENE_TYPE eSceneType = (E_SCENE_TYPE)m_pElementModule->GetPropertyInt32(std::to_string(nSceneID), NFrame::Scene::Type());
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
-		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+		NFDataList xDataList;
+		xDataList << NFrame::NPC::MasterID();
+		xDataList << self;
+		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 	}
 	else if (eSceneType  == E_SCENE_TYPE::SCENE_TYPE_MULTI_CLONE_SCENE)
 	{
 		NFDataList varObjectList;
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
-			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID);
+			NFDataList xDataList;
+			xDataList << NFrame::NPC::MasterID();
+			xDataList << self;
+			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 		}
 	}
 

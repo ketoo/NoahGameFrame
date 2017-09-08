@@ -90,7 +90,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NFCWorldLogicModule.h" />
-    <ClInclude Include="NFCWSSwichServerModule.h" />
     <ClInclude Include="NFWorldLogicPlugin.h" />
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +102,6 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="NFCWorldLogicModule.cpp" />
-    <ClCompile Include="NFCWSSwichServerModule.cpp" />
     <ClCompile Include="NFWorldLogicPlugin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

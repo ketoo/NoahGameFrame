@@ -14,6 +14,9 @@
 #include "NFCLevelModule.h"
 #include "NFCPropertyConfigModule.h"
 #include "NFCNPCRefreshModule.h"
+#include "NFCSwitchGameServerModule.h"
+
+class NFCSwitchGameServerModule;
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -45,7 +48,7 @@ void NFGameServerPlugin::Install()
 
     REGISTER_MODULE(pPluginManager, NFIGameServerModule, NFCGameServerModule)
     REGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFCSceneProcessModule)
-
+    REGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFCSwitchGameServerModule);
     REGISTER_MODULE(pPluginManager, NFIPropertyModule, NFCPropertyModule)
     REGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
     REGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
@@ -58,7 +61,7 @@ void NFGameServerPlugin::Uninstall()
 	UNREGISTER_MODULE(pPluginManager, NFIPropertyConfigModule, NFCPropertyConfigModule)
     UNREGISTER_MODULE(pPluginManager, NFILevelModule, NFCLevelModule)
     UNREGISTER_MODULE(pPluginManager, NFIPropertyModule, NFCPropertyModule)
-
+    UNREGISTER_MODULE(pPluginManager, NFISwitchGameServerModule, NFCSwitchGameServerModule);
     UNREGISTER_MODULE(pPluginManager, NFISceneProcessModule, NFCSceneProcessModule)
     UNREGISTER_MODULE(pPluginManager, NFIGameServerModule, NFCGameServerModule)
 }

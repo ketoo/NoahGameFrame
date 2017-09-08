@@ -45,6 +45,7 @@ public:
 	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex);
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID);
+	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList);
 	virtual bool DestroySceneNPC(const int nSceneID, const int nGroupID);
 
 	virtual bool RemoveSwapSceneEventCallBack();
