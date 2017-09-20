@@ -162,7 +162,6 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
             int nOnlineCount = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::OnlineCount());
             if (nOnlineCount <= 0 && m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID()) > 0)
             {
-                
                 m_pKernelModule->SetPropertyInt(self, NFrame::Player::Level(), 1);
             }
         }
