@@ -266,12 +266,9 @@ bool NFCPlayerRedisModule::LoadPlayerTileRandomCache(const NFGUID & xPlayer, std
 
 bool NFCPlayerRedisModule::SavePlayerData(const NFGUID & self)
 {
-	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager(), true);
-	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager(), true);
+	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager());
+	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager());
 	
-	m_pCommonRedisModule->SaveCachePropertyInfo(self, m_pKernelModule->GetObject(self)->GetPropertyManager(), false);
-	m_pCommonRedisModule->SaveCacheRecordInfo(self, m_pKernelModule->GetObject(self)->GetRecordManager(), false);
-
 	return true;
 }
 
