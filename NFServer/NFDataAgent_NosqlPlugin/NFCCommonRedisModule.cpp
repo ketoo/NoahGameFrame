@@ -107,8 +107,9 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::NewRecordManager(const std:
     return NF_SHARE_PTR<NFIRecordManager>(NULL);
 }
 
-NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName)
+NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
 {
+	//TODO optimize
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = NewPropertyManager(strClassName);
     if (!pPropertyManager)
     {
@@ -120,11 +121,6 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
     {
         return nullptr;
     }
-
-	//cache
-	std::string strCacheKey = GetPropertyCacheKey(self);
-	std::vector<std::string> vKeyCacheList;
-	std::vector<std::string> vValueCacheList;
 
 	//TODO
 	//just run this function one time
@@ -139,6 +135,8 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
 		xProperty = pPropertyManager->Next();
 	}
 
+	//cache
+	std::string strCacheKey = GetPropertyCacheKey(self);
     if (!pDriver->HMGet(strCacheKey, vKeyCacheList, vValueCacheList))
     {
         return nullptr;
@@ -152,7 +150,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::GetCachePropertyInfo(cons
     return pPropertyManager;
 }
 
-NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName)
+NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NFGUID& self, const std::string& strClassName, std::vector<std::string>& vKeyCacheList, std::vector<std::string>& vValueCacheList)
 {
     NF_SHARE_PTR<NFIRecordManager> pRecordManager = NewRecordManager(strClassName);
     if (!pRecordManager.get())
@@ -166,10 +164,6 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
         return nullptr;
     }
 
-	//cache
-	std::string strCacheKey = GetRecordCacheKey(self);
-	std::vector<std::string> vKeyCacheList;
-	std::vector<std::string> vValueCacheList;
 
 	//TODO
 	//just run this function one time
@@ -184,6 +178,8 @@ NF_SHARE_PTR<NFIRecordManager> NFCCommonRedisModule::GetCacheRecordInfo(const NF
 		xRecord = pRecordManager->Next();
 	}
 
+	//cache
+	std::string strCacheKey = GetRecordCacheKey(self);
 	if (!pDriver->HMGet(strCacheKey, vKeyCacheList, vValueCacheList))
 	{
 		return nullptr;
@@ -284,6 +280,11 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(std::vector<std::string>& 
 		{
 			const std::string& strKey = vKeyList[i];
 			const std::string& strValue = vValueList[i];
+			if (strValue.empty())
+			{
+				continue;
+			}
+
 			NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->GetElement(strKey);
 			if (!pProperty->GetCache() && !pProperty->GetSave())
 			{
@@ -309,6 +310,11 @@ bool NFCCommonRedisModule::ConvertPBToRecordManager(std::vector<std::string>& vK
 		{
 			const std::string& strKey = vKeyList[i];
 			const std::string& strValue = vValueList[i];
+			if (strValue.empty())
+			{
+				continue;
+			}
+
 			NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->GetElement(strKey);
 			if (!pRecord->GetCache() && !pRecord->GetSave())
 			{
