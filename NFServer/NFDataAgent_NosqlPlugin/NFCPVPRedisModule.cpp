@@ -363,7 +363,8 @@ bool NFCPVPRedisModule::DeleteStatusRoomID(const int nPVPMode, const int nGrade,
     return false;
 }
 
-bool NFCPVPRedisModule::DeletetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const std::vector<NFGUID>& xRoomIDList)
+bool NFCPVPRedisModule::DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus,
+                                           const std::vector<NFGUID>& xRoomIDList)
 {
 	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
     if (pNoSqlDriver)
