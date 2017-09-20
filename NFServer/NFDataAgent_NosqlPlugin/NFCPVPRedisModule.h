@@ -45,7 +45,8 @@ public:
     virtual bool DeleteRoomInfo(const NFGUID& xRoomID);
     virtual bool DeleteRoomInfoList(const std::vector<NFGUID>& xRoomIDList);
     virtual bool DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID);
-    virtual bool DeletetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const std::vector<NFGUID>& xRoomIDList);
+    virtual bool DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus,
+									const std::vector<NFGUID>& xRoomIDList);
 
     virtual bool PushSinglePlayer(const NFGUID& self, const int nPVPMode, const int nGrade );
     virtual bool PopSinglePlayer(NFGUID& self, const int nPVPMode, const int nGrade);
