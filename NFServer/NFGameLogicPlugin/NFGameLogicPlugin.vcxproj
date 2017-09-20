@@ -103,8 +103,6 @@
     <ClInclude Include="NFCGmModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
-    <ClInclude Include="NFCTeamModule.h" />
-    <ClInclude Include="NFCTeamPVPModule.h" />
     <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
   </ItemGroup>
@@ -123,8 +121,6 @@
     <ClCompile Include="NFCGmModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
-    <ClCompile Include="NFCTeamModule.cpp" />
-    <ClCompile Include="NFCTeamPVPModule.cpp" />
     <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
   </ItemGroup>
