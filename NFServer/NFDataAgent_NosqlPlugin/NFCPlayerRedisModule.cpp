@@ -40,127 +40,7 @@ bool NFCPlayerRedisModule::AfterInit()
 
 	return true;
 }
-/*
-int64_t NFCPlayerRedisModule::GetPlayerCacheGameID(const NFGUID & self)
-{
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-	if (!pNoSqlDriver)
-	{
-		return 0;
-	}
 
-	std::string strValue;
-	int64_t nGameID = 0;
-	std::string strKey = GetOnlineGameServerKey();
-
-	if (pNoSqlDriver->HGet(strKey, self.ToString(), strValue))
-	{
-		try
-		{
-			nGameID = lexical_cast<int64_t>(strValue);
-		}
-		catch (...)
-		{
-		}
-	}
-
-	return nGameID;
-}
-
-int64_t NFCPlayerRedisModule::GetPlayerCacheProxyID(const NFGUID & self)
-{
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-	if (!pNoSqlDriver)
-	{
-		return 0;
-	}
-
-	std::string strValue;
-	int64_t nProxyID = 0;
-	std::string strKey = GetOnlineProxyServerKey();
-
-	if (pNoSqlDriver->HGet(strKey, self.ToString(), strValue))
-	{
-		try
-		{
-			nProxyID = lexical_cast<int64_t>(strValue);
-		}
-		catch (...)
-		{
-		}
-	}
-
-	return nProxyID;
-}
-
-bool NFCPlayerRedisModule::GetPlayerCacheGameID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList)
-{
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-	if (!pNoSqlDriver)
-	{
-		return 0;
-	}
-
-	std::string strKey = GetOnlineGameServerKey();
-	std::vector<std::string> strValueList;
-
-	if (pNoSqlDriver->HMGet(strKey, xList, strValueList))
-	{
-		for (int i = 0; i < strValueList.size(); ++i)
-		{
-			int64_t nGameID = 0;
-
-			try
-			{
-				nGameID = lexical_cast<int64_t>(strValueList[i]);
-			}
-			catch (...)
-			{
-			}
-
-			xResultList.push_back(nGameID);
-		}
-
-		return true;
-	}
-
-	return false;
-}
-
-bool NFCPlayerRedisModule::GetPlayerCacheProxyID(const std::vector<std::string>& xList, std::vector<int64_t>& xResultList)
-{
-	NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver = m_pNoSqlModule->GetDriverBySuitConsistent();
-	if (!pNoSqlDriver)
-	{
-		return 0;
-	}
-
-	std::string strKey = GetOnlineProxyServerKey();
-	std::vector<std::string> strValueList;
-
-	if (pNoSqlDriver->HMGet(strKey, xList, strValueList))
-	{
-		for (int i = 0; i < strValueList.size(); ++i)
-		{
-			int64_t nProxyID = 0;
-
-			try
-			{
-				nProxyID = lexical_cast<int64_t>(strValueList[i]);
-			}
-			catch (...)
-			{
-			}
-
-			xResultList.push_back(nProxyID);
-		}
-
-		return true;
-	}
-
-	return false;
-}
-*/
 bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 {
 	mxObjectDataCache.RemoveElement(self);
@@ -170,16 +50,22 @@ bool NFCPlayerRedisModule::LoadPlayerData(const NFGUID & self)
 	NF_SHARE_PTR<PlayerDataCache> xPlayerDataCache(NF_NEW PlayerDataCache());
 	mxObjectDataCache.AddElement(self, xPlayerDataCache);
 
-	xPlayerDataCache->xPropertyManager = m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName());
-	xPlayerDataCache->xRecordManager = m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName());
+	m_pCommonRedisModule->GetCachePropertyInfo(self, NFrame::Player::ThisName(), xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList);
+	m_pCommonRedisModule->GetCacheRecordInfo(self, NFrame::Player::ThisName(), xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList);
 
+	//xPlayerDataCache->nHomeSceneID = xPlayerDataCache->xPropertyManager->GetPropertyInt(NFrame::Player::HomeSceneID());
+	for (int i = 0; i < xPlayerDataCache->mvPropertyKeyList.size(); ++i)
+	{
+		if (xPlayerDataCache->mvPropertyKeyList[i] == NFrame::Player::HomeSceneID())
+		{
+			const std::string& strValue = xPlayerDataCache->mvPropertyValueList[i];
+			xPlayerDataCache->nHomeSceneID = lexical_cast<int>(strValue);
+			break;
+		}
+	}
 
 	m_pLogModule->LogNormal(NFILogModule::NF_LOG_LEVEL::NLL_DEBUG_NORMAL, self, "loaded data ", NFGetTime());
 
-	if (xPlayerDataCache->xPropertyManager)
-	{
-		xPlayerDataCache->nHomeSceneID = xPlayerDataCache->xPropertyManager->GetPropertyInt(NFrame::Player::HomeSceneID());
-	}
 
 	return true;
 }
@@ -292,15 +178,8 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
 		if (pObject)
 		{
-			if (xPlayerDataCache->xPropertyManager)
-			{
-				pObject->SetPropertyManager(xPlayerDataCache->xPropertyManager);
-			}
-
-			if (xPlayerDataCache->xRecordManager)
-			{
-				pObject->SetRecordManager(xPlayerDataCache->xRecordManager);
-			}
+			m_pCommonRedisModule->ConvertPBToPropertyManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetPropertyManager());
+			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetRecordManager());
 
 			return true;
 		}

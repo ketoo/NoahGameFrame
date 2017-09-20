@@ -24,6 +24,14 @@
 #include "event2/event.h"
 #include <atomic>
 
+/*
+if any one upgurade the networking library(libevent), the evbuffer size must be changed
+*MODIFY--libevent/buffer.c
+#define EVBUFFER_MAX_READ	4096
+TO
+#define EVBUFFER_MAX_READ	65536
+*/
+
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
     

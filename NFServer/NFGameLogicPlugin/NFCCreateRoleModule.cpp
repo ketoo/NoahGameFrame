@@ -192,6 +192,9 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		var.AddString(NFrame::Player::HomeSceneID());
 		var.AddInt(nHomeSceneID);
 
+		var.AddString(NFrame::Player::SceneID());
+		var.AddInt(nHomeSceneID);
+
 		var.AddString(NFrame::Player::ViewOppnent());
 		var.AddObject(nRoleID);
 
