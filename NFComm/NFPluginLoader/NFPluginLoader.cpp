@@ -6,7 +6,6 @@
 //
 // -------------------------------------------------------------------------
 
-//#include <crtdbg.h>
 #include <time.h>
 #include <stdio.h>
 #include <iostream>
@@ -16,7 +15,6 @@
 #include <future>
 #include <functional>
 #include <atomic>
-#include "NFCCellManager.h"
 #include "NFCPluginManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 
@@ -283,7 +281,8 @@ int main(int argc, char* argv[])
             __try
             {
 #endif
-				NFCPluginManager::GetSingletonPtr()->Execute();
+			//NFCPluginManager::GetSingletonPtr()->Execute();
+			NFCPluginManager::Instance()->ExecuteCoScheduler();
 #if NF_PLATFORM == NF_PLATFORM_WIN
             }
             __except (ApplicationCrashHandler(GetExceptionInformation()))
