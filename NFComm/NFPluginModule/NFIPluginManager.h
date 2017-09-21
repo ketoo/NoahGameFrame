@@ -9,17 +9,21 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
-#include "NFIModule.h"
 #include "NFPlatform.h"
+#include "NFIModule.h"
+
+class NFIPlugin;
+
 
 typedef std::function<bool (const std::string &strFileName, std::string &strContent)> GET_FILECONTENT_FUNCTOR;
+
 
 #define FIND_MODULE(classBaseName, className)  \
 	assert((TIsDerived<classBaseName, NFIModule>::Result));
 
-class NFIPlugin;
 
-class NFIPluginManager : public NFIModule
+
+class NFIPluginManager : public  NFIModule
 {
 public:
     NFIPluginManager()
@@ -77,7 +81,6 @@ public:
 	virtual void SetConfigName(const std::string& strFileName) = 0;	
 	virtual const std::string& GetConfigName() const = 0;
 
-
 	virtual const std::string& GetAppName() const = 0;
 	virtual void SetAppName(const std::string& strAppName) = 0;
 
@@ -86,6 +89,11 @@ public:
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
+
+	virtual void ExecuteCoScheduler() = 0;
+	virtual void StartCoroutine() = 0;
+	virtual void StartCoroutine(CoroutineFunction func) = 0;
+	virtual void Yield() = 0;
 };
 
 #endif
