@@ -563,12 +563,58 @@ std::string NFCProperty::ToString()
 
 bool NFCProperty::FromString(const std::string& strData)
 {
-	if (!mxData)
+	try
 	{
-		mxData = NF_SHARE_PTR<NFData>(NF_NEW NFData(GetType()));
+		switch (GetType())
+		{
+		case TDATA_INT:
+			SetInt(lexical_cast<int64_t> (strData));
+			break;
+
+		case TDATA_FLOAT:
+			SetFloat(lexical_cast<float> (strData));
+			break;
+
+		case TDATA_STRING:
+			SetString(strData);
+			break;
+
+		case TDATA_OBJECT:
+		{
+			NFGUID xID;
+			xID.FromString(strData);
+			SetObject(xID);
+		}
+		break;
+
+		case TDATA_VECTOR2:
+		{
+			NFVector2 v;
+			v.FromString(strData);
+			SetVector2(v);
+		}
+		break;
+
+		case TDATA_VECTOR3:
+		{
+			NFVector3 v;
+			v.FromString(strData);
+			SetVector3(v);
+		}
+		break;
+
+		default:
+			break;
+		}
+
+		return true;
+	}
+	catch (...)
+	{
+		return false;
 	}
 
-	return mxData->FromString(strData);
+	return false;
 }
 
 bool NFCProperty::DeSerialization()
