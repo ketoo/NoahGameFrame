@@ -40,6 +40,11 @@
 
 #endif
 
+void CoroutineExecute(void* arg)
+{
+	NFCPluginManager::Instance()->Execute();
+}
+
 NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
    mnAppID = 0;
@@ -93,6 +98,8 @@ inline bool NFCPluginManager::Init()
 	{
 		itInstance->second->Init();
 	}
+
+	mxCoroutineManager.Init(CoroutineExecute);
 
 	return true;
 }
@@ -601,4 +608,24 @@ bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
 	//     DESTROY_PLUGIN(this, NFKernelPlugin)
 	return false;
+}
+
+void NFCPluginManager::ExecuteCoScheduler()
+{
+	mxCoroutineManager.ScheduleJob();
+}
+
+void NFCPluginManager::StartCoroutine()
+{
+	mxCoroutineManager.StartCoroutine();
+}
+
+void NFCPluginManager::StartCoroutine(CoroutineFunction func)
+{
+	mxCoroutineManager.StartCoroutine(func);
+}
+
+void NFCPluginManager::Yield()
+{
+	mxCoroutineManager.Yield();
 }
