@@ -13,7 +13,11 @@
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
-#include "NFComm/NFCore/NFIRecord.h"
+#include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+class NFIPluginManager;
+
+typedef void (* CoroutineFunction)(void* arg);
 
 template<typename DerivedType, typename BaseType>
 class TIsDerived
@@ -35,7 +39,6 @@ public:
     };
 };
 
-class NFIPluginManager;
 
 class NFIModule
 {
@@ -101,6 +104,24 @@ public:
     virtual NFIPluginManager* GetPluginManager() const
     {
         return pPluginManager;
+    }
+
+    virtual void StartCoroutine()
+    {
+        NFIModule* p = (NFIModule*)pPluginManager;
+        p->StartCoroutine();
+    }
+
+    virtual void StartCoroutine(CoroutineFunction func)
+    {
+        NFIModule* p = (NFIModule*)pPluginManager;
+        p->StartCoroutine(func);
+    }
+
+    virtual void Yield()
+    {
+        NFIModule* p = (NFIModule*)pPluginManager;
+        p->Yield();
     }
 
     std::string strName;

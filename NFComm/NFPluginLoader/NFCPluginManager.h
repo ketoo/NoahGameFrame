@@ -13,8 +13,12 @@
 #include <string>
 #include <time.h>
 #include "NFCDynLib.h"
+#include "NFCoroutineManager.h"
 #include "NFComm/NFCore/NFSingleton.hpp"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+
+void CoroutineExecute(void* arg);
 
 class NFCPluginManager
     : public NFIPluginManager,
@@ -87,6 +91,14 @@ public:
 
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent);
 
+	virtual void ExecuteCoScheduler();
+
+	virtual void StartCoroutine();
+
+	virtual void StartCoroutine(CoroutineFunction func);
+
+	virtual void Yield();
+
 protected:
 	bool LoadPluginConfig();
 
@@ -118,6 +130,8 @@ private:
     ModuleInstanceMap mModuleInstanceMap;
 
 	GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
+
+	NFCoroutineManager mxCoroutineManager;
 };
 
 #endif
