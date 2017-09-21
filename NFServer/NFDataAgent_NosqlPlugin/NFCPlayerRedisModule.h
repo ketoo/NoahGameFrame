@@ -64,8 +64,11 @@ private:
 		}
 		int nHomeSceneID;
 
-		NF_SHARE_PTR<NFIRecordManager> xRecordManager;
-		NF_SHARE_PTR<NFIPropertyManager> xPropertyManager;
+		std::vector<std::string> mvPropertyKeyList;
+		std::vector<std::string> mvPropertyValueList;
+
+		std::vector<std::string> mvRecordKeyList;
+		std::vector<std::string> mvRecordValueList;
 	};
 
 	NFMapEx<NFGUID, PlayerDataCache> mxObjectDataCache;
