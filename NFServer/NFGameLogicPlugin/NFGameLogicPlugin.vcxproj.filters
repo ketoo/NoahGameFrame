@@ -17,9 +17,6 @@
     <Filter Include="NFMapModule">
       <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFTeamModule">
-      <UniqueIdentifier>{bfd97019-f760-4999-9fb3-197a9ebb45ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFCreateRoleModule">
       <UniqueIdentifier>{ca2648e6-36dd-4163-9791-b22482d4b8b6}</UniqueIdentifier>
     </Filter>
@@ -47,12 +44,6 @@
     <ClInclude Include="NFCTileModule.h">
       <Filter>NFMapModule</Filter>
     </ClInclude>
-    <ClInclude Include="NFCTeamPVPModule.h">
-      <Filter>NFPVPModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCTeamModule.h">
-      <Filter>NFTeamModule</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -77,12 +68,6 @@
     </ClCompile>
     <ClCompile Include="NFCTileModule.cpp">
       <Filter>NFMapModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCTeamPVPModule.cpp">
-      <Filter>NFPVPModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCTeamModule.cpp">
-      <Filter>NFTeamModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
