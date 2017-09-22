@@ -8,38 +8,6 @@
 
 #include "NFCNoSqlDriver.h"
 
-#define  REDIS_CATCH(function, line)     catch(redis::connection_error er)\
-{\
-    mbEnable = false;\
-    std::cout<< "Redis Error:"<< er.what() << " Function:" << function << " Line:" << line << std::endl;\
-    return false;\
-}\
-catch(redis::timeout_error er)\
-{\
-    mbEnable = false;\
-    std::cout<< "Redis Error:"<< er.what() << " Function:" << function << " Line:" << line << std::endl;\
-    return false;\
-}\
-catch(redis::protocol_error er)\
-{\
-    std::cout<< "Redis Error:"<< er.what() << " Function:" << function << " Line:" << line << std::endl;\
-    return false;\
-}\
-catch(redis::key_error er)\
-{\
-    std::cout<< "Redis Error:"<< er.what() << " Function:" << function << " Line:" << line << std::endl;\
-    return false;\
-}\
-catch(redis::value_error er)\
-{\
-    std::cout<< "Redis Error:"<< er.what() << " Function:" << function << " Line:" << line << std::endl;\
-    return false;\
-}\
-catch (...)\
-{\
-return false; \
-}
-
 NFCNoSqlDriver::NFCNoSqlDriver()
 {
 	mstrNoExistKey = "nonexistent";
@@ -57,17 +25,35 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 	{
 		if (m_pNoSqlClient)
 		{
-			delete m_pNoSqlClient;
+			redisFree(m_pNoSqlClient);
 			m_pNoSqlClient = NULL;
 		}
 
-		m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
 
 		this->strIP = strDns;
 		this->nPort = nPort;
 		this->strAuthKey = strAuthKey;
-		
-		mbEnable = true;
+
+		m_pNoSqlClient = redisConnect(strDns.c_str(), nPort);
+		if (m_pNoSqlClient == NULL || m_pNoSqlClient->err > 0)
+		{
+			printf("connection error: %s\n", m_pNoSqlClient->errstr);
+			return 0;
+		}
+
+		redisReply* reply = (redisReply *)redisCommand(m_pNoSqlClient, "AUTH %s", this->strAuthKey);
+		if (reply->type == REDIS_REPLY_ERROR)
+		{
+			printf("Redis auth success ！\n");
+			mbEnable = false;
+		}
+		else
+		{
+			printf("Redis auth failed！\n");
+			mbEnable = true;
+		}
+
+		freeReplyObject(reply);
 	}
 	catch (...)
 	{
@@ -111,14 +97,10 @@ const bool NFCNoSqlDriver::Del(const std::string & strKey)
 		return false;
 	}
 
-	try
-	{
-		return m_pNoSqlClient->del(strKey);
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
-
-	return false;
+	redisReply *reply = redisCommand(m_pNoSqlClient, "", "");
+	reply->type ==
+		freeReplyObject(reply);
+		return true;
 }
 
 const bool NFCNoSqlDriver::Exists(const std::string & strKey)
