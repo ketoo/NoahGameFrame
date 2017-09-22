@@ -18,7 +18,6 @@ bool NFCGuildModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pActorModule = pPluginManager->FindModule<NFIActorModule>();
 
 	return true;
 }

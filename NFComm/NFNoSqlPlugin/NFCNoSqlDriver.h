@@ -12,7 +12,7 @@
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267 4101 4390)
 #endif
-#include "Dependencies/redis-cplusplus-client/redisclient.h"
+#include "Dependencies/hiredis/hiredis.h"
 #ifdef _MSC_VER
 #pragma warning(default: 4244 4267 4101 4390)
 #endif
@@ -106,7 +106,7 @@ protected:
 private:
 	std::string mstrNoExistKey;
 	bool mbEnable;
-    redis::client* m_pNoSqlClient;
+	redisContext* m_pNoSqlClient;
 
 	int nPort;
 	std::string strIP;
