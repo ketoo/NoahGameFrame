@@ -14,6 +14,7 @@
 #include "NFDataList.hpp"
 #include "NFIProperty.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 class _NFExport NFCProperty : public NFIProperty
 {
 private:
