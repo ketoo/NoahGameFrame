@@ -11,6 +11,7 @@
 
 #include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 struct RECORD_EVENT_DATA
 {
 	enum RecordOptype
