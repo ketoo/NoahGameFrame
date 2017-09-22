@@ -14,7 +14,6 @@
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -66,7 +65,6 @@ protected:
 	NFConsistentHashMapEx<int, int> mActorList; //actorid <-->Used
 
 protected:
-	NFIActorModule* m_pActorModule;
 	NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
 	NFIKernelModule* m_pKernelModule;
