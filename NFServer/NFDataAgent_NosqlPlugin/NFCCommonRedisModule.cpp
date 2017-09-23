@@ -272,7 +272,7 @@ bool NFCCommonRedisModule::SaveCacheRecordInfo(const NFGUID& self, NF_SHARE_PTR<
     return true;
 }
 
-bool NFCCommonRedisModule::ConvertPBToPropertyManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager)
+bool NFCCommonRedisModule::ConvertPBToPropertyManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIPropertyManager> pPropertyManager)
 {
 	if (vKeyList.size() == vValueList.size())
 	{
@@ -302,7 +302,7 @@ bool NFCCommonRedisModule::ConvertPBToPropertyManager(std::vector<std::string>& 
     return true;
 }
 
-bool NFCCommonRedisModule::ConvertPBToRecordManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIRecordManager>& pRecordManager)
+bool NFCCommonRedisModule::ConvertPBToRecordManager(std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList, NF_SHARE_PTR<NFIRecordManager> pRecordManager)
 {
 	if (vKeyList.size() == vValueList.size())
 	{
@@ -337,7 +337,7 @@ bool NFCCommonRedisModule::ConvertPBToRecordManager(std::vector<std::string>& vK
     return true;
 }
 
-bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIPropertyManager>& pPropertyManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList)
+bool NFCCommonRedisModule::ConvertPropertyManagerToPB(NF_SHARE_PTR<NFIPropertyManager> pPropertyManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList)
 {
 	for (NF_SHARE_PTR<NFIProperty> pProperty = pPropertyManager->First(); pProperty != NULL; pProperty = pPropertyManager->Next())
 	{
@@ -357,7 +357,7 @@ bool NFCCommonRedisModule::ConvertPropertyManagerToPB(const NF_SHARE_PTR<NFIProp
 	return true;
 }
 
-bool NFCCommonRedisModule::ConvertRecordManagerToPB(const NF_SHARE_PTR<NFIRecordManager>& pRecordManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList)
+bool NFCCommonRedisModule::ConvertRecordManagerToPB(NF_SHARE_PTR<NFIRecordManager> pRecordManager, std::vector<std::string>& vKeyList, std::vector<std::string>& vValueList)
 {
 	for (NF_SHARE_PTR<NFIRecord> pRecord = pRecordManager->First(); pRecord != NULL; pRecord = pRecordManager->Next())
 	{
