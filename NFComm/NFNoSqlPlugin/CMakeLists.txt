@@ -21,12 +21,24 @@ set_target_properties( NFNoSqlPlugin PROPERTIES
 link_NFSDK("NFNoSqlPlugin")
 
 if(UNIX)
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFNoSqlPlugin libhiredis.a)
+	else()
+		target_link_libraries(NFNoSqlPlugin libhiredis.a)
+	endif()
+
 	add_definitions(
 			-D_USRDLL
 			-DELPP_NO_DEFAULT_LOG_FILE
 	)
 
 else()
+	if (CMAKE_BUILD_TYPE MATCHES "Release")
+		target_link_libraries(NFNoSqlPlugin libhiredis.a)
+	else()
+		target_link_libraries(NFNoSqlPlugin libhiredis.a)
+	endif()
+
 	add_definitions(
 			-DWIN
 			-D_USRDLL
