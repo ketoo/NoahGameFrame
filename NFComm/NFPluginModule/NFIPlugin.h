@@ -12,8 +12,6 @@
 #include <iostream>
 #include <assert.h>
 #include "NFComm/NFCore/NFMap.hpp"
-#include "NFComm/NFPluginModule/NFIModule.h"
-#include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 #define REGISTER_MODULE(pManager, classBaseName, className)  \
