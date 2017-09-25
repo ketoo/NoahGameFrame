@@ -41,7 +41,7 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 			return 0;
 		}
 
-		redisReply* reply = (redisReply *)redisCommand(m_pNoSqlClient, "AUTH %s", this->strAuthKey);
+		redisReply* reply = (redisReply *)redisCommand(m_pNoSqlClient, "AUTH %s", this->strAuthKey.c_str());
 		if (reply->type == REDIS_REPLY_ERROR)
 		{
 			printf("Redis auth success ！\n");
@@ -96,10 +96,10 @@ const bool NFCNoSqlDriver::Del(const std::string & strKey)
 	{
 		return false;
 	}
-
-	redisReply *reply = redisCommand(m_pNoSqlClient, "", "");
-	reply->type ==
-		freeReplyObject(reply);
+//
+//	redisReply *reply = redisCommand(m_pNoSqlClient, "", "");
+//	reply->type ==
+//		freeReplyObject(reply);
 		return true;
 }
 
@@ -109,13 +109,13 @@ const bool NFCNoSqlDriver::Exists(const std::string & strKey)
 	{
 		return false;
 	}
-
-	try
-	{
-		return m_pNoSqlClient->exists(strKey);
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//		return m_pNoSqlClient->exists(strKey);
+//	}
+//
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -127,12 +127,12 @@ const bool NFCNoSqlDriver::Expire(const std::string & strKey, unsigned int nSecs
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->expire(strKey, nSecs);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->expire(strKey, nSecs);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -144,12 +144,12 @@ const bool NFCNoSqlDriver::Expireat(const std::string & strKey, unsigned int nUn
 		return false;
 	}
 
-	try
-	{
-		//m_pRedisClient->expire(strKey, nUnixTime);
-		//return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		//m_pRedisClient->expire(strKey, nUnixTime);
+//		//return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -161,13 +161,13 @@ const bool NFCNoSqlDriver::Set(const std::string & strKey, const std::string & s
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->set(strKey, strValue);
-		return true;
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->set(strKey, strValue);
+//		return true;
+//	}
+//
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -179,16 +179,16 @@ const bool NFCNoSqlDriver::Get(const std::string & strKey, std::string & strValu
 		return false;
 	}
 
-	try
-	{
-		strValue = m_pNoSqlClient->get(strKey);
-		if (std::string::npos == strValue.find(mstrNoExistKey))
-		{
-			return true;
-		}
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		strValue = m_pNoSqlClient->get(strKey);
+//		if (std::string::npos == strValue.find(mstrNoExistKey))
+//		{
+//			return true;
+//		}
+//	}
+//
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -200,11 +200,11 @@ const bool NFCNoSqlDriver::SetNX(const std::string & strKey, const std::string &
 		return false;
 	}
 
-	try
-	{
-		return m_pNoSqlClient->setnx(strKey, strValue);
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		return m_pNoSqlClient->setnx(strKey, strValue);
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -215,13 +215,13 @@ const bool NFCNoSqlDriver::SetEX(const std::string & strKey, const std::string &
 	{
 		return false;
 	}
-
-	try
-	{
-		m_pNoSqlClient->setex(strKey, strValue, nSeconds);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//		m_pNoSqlClient->setex(strKey, strValue, nSeconds);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -237,12 +237,12 @@ const bool NFCNoSqlDriver::HSet(const std::string & strKey, const std::string & 
 	{
 		return false;
 	}
-	try
-	{
-		m_pNoSqlClient->hset(strKey, strField, strValue);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->hset(strKey, strField, strValue);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -254,15 +254,15 @@ const bool NFCNoSqlDriver::HGet(const std::string & strKey, const std::string & 
 		return false;
 	}
 
-	try
-	{
-		strValue = m_pNoSqlClient->hget(strKey, strField);
-		if (std::string::npos == strValue.find(mstrNoExistKey))
-		{
-			return true;
-		}
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		strValue = m_pNoSqlClient->hget(strKey, strField);
+//		if (std::string::npos == strValue.find(mstrNoExistKey))
+//		{
+//			return true;
+//		}
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -278,12 +278,12 @@ const bool NFCNoSqlDriver::HMSet(const std::string & strKey, const std::vector<s
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->hmset(strKey, fieldVec, valueVec);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->hmset(strKey, fieldVec, valueVec);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -294,21 +294,21 @@ const bool NFCNoSqlDriver::HMGet(const std::string & strKey, const std::vector<s
 	{
 		return false;
 	}
-
-	try
-	{
-		m_pNoSqlClient->hmget(strKey, fieldVec, valueVec);
-		for (int i = 0; i < valueVec.size(); ++i)
-		{
-			if (std::string::npos != valueVec[i].find(mstrNoExistKey))
-			{
-				valueVec[i] = "";
-			}
-		}
-
-		return fieldVec.size() == valueVec.size();
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//		m_pNoSqlClient->hmget(strKey, fieldVec, valueVec);
+//		for (int i = 0; i < valueVec.size(); ++i)
+//		{
+//			if (std::string::npos != valueVec[i].find(mstrNoExistKey))
+//			{
+//				valueVec[i] = "";
+//			}
+//		}
+//
+//		return fieldVec.size() == valueVec.size();
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 
 	return false;
@@ -321,11 +321,11 @@ const bool NFCNoSqlDriver::HExists(const std::string & strKey, const std::string
 		return false;
 	}
 
-	try
-	{
-		return m_pNoSqlClient->hexists(strKey, strField);
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		return m_pNoSqlClient->hexists(strKey, strField);
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -337,12 +337,12 @@ const bool NFCNoSqlDriver::HDel(const std::string & strKey, const std::string & 
 		return false;
 	}
 
-	try
-	{
-		return m_pNoSqlClient->hdel(strKey, strField);
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		return m_pNoSqlClient->hdel(strKey, strField);
+//	}
+//
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -354,12 +354,12 @@ const bool NFCNoSqlDriver::HLength(const std::string & strKey, int & nLen)
 		return false;
 	}
 
-	try
-	{
-		nLen = m_pNoSqlClient->hlen(strKey);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nLen = m_pNoSqlClient->hlen(strKey);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -370,12 +370,12 @@ const bool NFCNoSqlDriver::HKeys(const std::string & strKey, std::vector<std::st
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->hkeys(strKey, fieldVec);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->hkeys(strKey, fieldVec);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -386,20 +386,20 @@ const bool NFCNoSqlDriver::HValues(const std::string & strKey, std::vector<std::
 	{
 		return false;
 	}
-
-	try
-	{
-		m_pNoSqlClient->hvals(strKey, valueVec);
-		for (int i = 0; i < valueVec.size(); ++i)
-		{
-			if (std::string::npos != valueVec[i].find(mstrNoExistKey))
-			{
-				valueVec[i] = "";
-			}
-		}
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//		m_pNoSqlClient->hvals(strKey, valueVec);
+//		for (int i = 0; i < valueVec.size(); ++i)
+//		{
+//			if (std::string::npos != valueVec[i].find(mstrNoExistKey))
+//			{
+//				valueVec[i] = "";
+//			}
+//		}
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -411,12 +411,12 @@ const bool NFCNoSqlDriver::HGetAll(const std::string & strKey, std::vector<std::
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->hgetall(strKey, valueVec);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->hgetall(strKey, valueVec);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -427,12 +427,12 @@ const bool NFCNoSqlDriver::ZAdd(const std::string & strKey, const double nScore,
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zadd(strKey, nScore, strMember);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zadd(strKey, nScore, strMember);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -444,12 +444,12 @@ const bool NFCNoSqlDriver::ZIncrBy(const std::string & strKey, const std::string
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zincrby(strKey, strMember, nIncrement);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zincrby(strKey, strMember, nIncrement);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -461,12 +461,12 @@ const bool NFCNoSqlDriver::ZRem(const std::string & strKey, const std::string & 
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zrem(strKey, strMember);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zrem(strKey, strMember);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -478,12 +478,12 @@ const bool NFCNoSqlDriver::ZRemRangeByRank(const std::string & strKey, const int
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zremrangebyrank(strKey, nStart, nStop);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zremrangebyrank(strKey, nStart, nStop);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -494,12 +494,12 @@ const bool NFCNoSqlDriver::ZRemRangeByScore(const std::string & strKey, const in
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zremrangebyscore(strKey, nMin, nMax);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zremrangebyscore(strKey, nMin, nMax);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -510,12 +510,12 @@ const bool NFCNoSqlDriver::ZScore(const std::string & strKey, const std::string 
 		return false;
 	}
 
-	try
-	{
-		nScore = m_pNoSqlClient->zscore(strKey, strMember);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nScore = m_pNoSqlClient->zscore(strKey, strMember);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -526,12 +526,12 @@ const bool NFCNoSqlDriver::ZCard(const std::string & strKey, int & nCount)
 		return false;
 	}
 
-	try
-	{
-		nCount = m_pNoSqlClient->zcard(strKey);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nCount = m_pNoSqlClient->zcard(strKey);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -542,12 +542,12 @@ const bool NFCNoSqlDriver::ZRank(const std::string& strKey, const std::string& s
 		return false;
 	}
 
-	try
-	{
-		nRank = m_pNoSqlClient->zrank(strKey, strMember);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nRank = m_pNoSqlClient->zrank(strKey, strMember);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -558,12 +558,12 @@ const bool NFCNoSqlDriver::ZCount(const std::string & strKey, const int nMin, co
 		return false;
 	}
 
-	try
-	{
-		nCount = m_pNoSqlClient->zcount(strKey, nMin, nMax);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nCount = m_pNoSqlClient->zcount(strKey, nMin, nMax);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -575,13 +575,13 @@ const bool NFCNoSqlDriver::ZRevRange(const std::string & strKey, const int nStar
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
-		return true;
-
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zrevrange(strKey, nStart, nStop, memberScoreVec);
+//		return true;
+//
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -593,13 +593,13 @@ const bool NFCNoSqlDriver::ZRange(const std::string& strKey, const int nStartInd
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zrange(strKey, nStartIndex, nEndIndex, memberScoreVec);
-		return true;
-	}
-
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zrange(strKey, nStartIndex, nEndIndex, memberScoreVec);
+//		return true;
+//	}
+//
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -611,12 +611,12 @@ const bool NFCNoSqlDriver::ZRangeByScore(const std::string & strKey, const int n
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->zrangebyscore(strKey, (double)nMin, (double)nMax, memberScoreVec);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -628,12 +628,12 @@ const bool NFCNoSqlDriver::ZRevRank(const std::string & strKey, const std::strin
 		return false;
 	}
 
-	try
-	{
-		nRank = m_pNoSqlClient->zrevrank(strKey, strMember);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nRank = m_pNoSqlClient->zrevrank(strKey, strMember);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -644,14 +644,14 @@ const bool NFCNoSqlDriver::ListPush(const std::string & strKey, const std::strin
 	{
 		return false;
 	}
-	try
-	{
-
-		m_pNoSqlClient->rpush(strKey, strValue);
-		return true;
-
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//
+//		m_pNoSqlClient->rpush(strKey, strValue);
+//		return true;
+//
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -663,14 +663,14 @@ const bool NFCNoSqlDriver::ListPop(const std::string & strKey, std::string & str
 		return false;
 	}
 
-	try
-	{
-
-		strValue = m_pNoSqlClient->rpop(strKey);
-		return true;
-
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//
+//		strValue = m_pNoSqlClient->rpop(strKey);
+//		return true;
+//
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -681,13 +681,13 @@ const bool NFCNoSqlDriver::ListRange(const std::string & strKey, const int nStar
 		return false;
 	}
 
-	try
-	{
-
-		m_pNoSqlClient->lrange(strKey, nStar, nEnd, xList);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//
+//		m_pNoSqlClient->lrange(strKey, nStar, nEnd, xList);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
 
@@ -698,12 +698,12 @@ const bool NFCNoSqlDriver::ListLen(const std::string & strKey, int & nLength)
 		return false;
 	}
 
-	try
-	{
-		nLength = m_pNoSqlClient->llen(strKey);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		nLength = m_pNoSqlClient->llen(strKey);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -714,13 +714,13 @@ const bool NFCNoSqlDriver::ListIndex(const std::string & strKey, const int nInde
 	{
 		return false;
 	}
-
-	try
-	{
-		strValue = m_pNoSqlClient->lindex(strKey, nIndex);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//		strValue = m_pNoSqlClient->lindex(strKey, nIndex);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 
 	return false;
@@ -733,13 +733,13 @@ const bool NFCNoSqlDriver::ListRem(const std::string & strKey, const int nCount,
 		return false;
 	}
 
-	try
-	{
-
-		m_pNoSqlClient->lrem(strKey, nCount, strValue);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//
+//		m_pNoSqlClient->lrem(strKey, nCount, strValue);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -750,15 +750,15 @@ const bool NFCNoSqlDriver::ListSet(const std::string & strKey, const int nCount,
 	{
 		return false;
 	}
-
-	try
-	{
-
-		m_pNoSqlClient->lset(strKey, nCount, strValue);
-		return true;
-
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//
+//	try
+//	{
+//
+//		m_pNoSqlClient->lset(strKey, nCount, strValue);
+//		return true;
+//
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return false;
 }
@@ -770,11 +770,11 @@ const bool NFCNoSqlDriver::ListTrim(const std::string & strKey, const int nStar,
 		return false;
 	}
 
-	try
-	{
-		m_pNoSqlClient->ltrim(strKey, nStar, nEnd);
-		return true;
-	}
-	REDIS_CATCH(__FUNCTION__, __LINE__);
+//	try
+//	{
+//		m_pNoSqlClient->ltrim(strKey, nStar, nEnd);
+//		return true;
+//	}
+//	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
