@@ -11,6 +11,7 @@ macro(remove_file arg_list file_remove)
 endmacro(remove_file)
 
 macro(link_NFSDK projName)
+
 if(UNIX)
 	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
 	target_link_libraries(${projName} NFCore protobuf NFMessageDefine NFNetPlugin event event_core)
@@ -21,14 +22,14 @@ endif()
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
-	
+
 endmacro()
 
 macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
-	
+
 endmacro()
 
-		
+
 
 project(NoahFrame)
 
@@ -47,6 +48,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Darwin")
 else()
 	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/)
 endif()
+
 message("NFOutPutDir:${NFOutPutDir}")
 
 
