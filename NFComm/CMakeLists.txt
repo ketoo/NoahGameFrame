@@ -1,3 +1,4 @@
+add_subdirectory(NFActorPlugin)
 add_subdirectory(NFConfigPlugin)
 add_subdirectory(NFCore)
 add_subdirectory(NFKernelPlugin)
