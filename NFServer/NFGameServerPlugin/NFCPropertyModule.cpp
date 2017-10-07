@@ -143,19 +143,24 @@ int NFCPropertyModule::OnObjectClassEvent(const NFGUID& self, const std::string&
 {
     if (strClassName == NFrame::Player::ThisName())
     {
-        if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
-        {
-            NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
-            if (pRecord)
-            {
-                for (int i = 0; i < NFPropertyGroup::NPG_ALL; i++)
-                {
-                    pRecord->AddRow(-1);
-                }
-            }
+		if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
+		{
+			NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::CommValue::ThisName());
+			if (pRecord)
+			{
+				for (int i = 0; i < NFPropertyGroup::NPG_ALL; i++)
+				{
+					pRecord->AddRow(-1);
+				}
+			}
 
-            m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCPropertyModule::OnObjectLevelEvent);
-            m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFCPropertyModule::OnRecordEvent);
+			m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCPropertyModule::OnObjectLevelEvent);
+			m_pKernelModule->AddRecordCallBack(self, NFrame::Player::CommValue::ThisName(), this, &NFCPropertyModule::OnRecordEvent);
+		}
+		else if (CLASS_OBJECT_EVENT::COE_CREATE_AFTER_ATTACHDATA == eClassEvent)
+        {
+           
+
         }
         else if (CLASS_OBJECT_EVENT::COE_CREATE_EFFECTDATA == eClassEvent)
         {
