@@ -179,7 +179,7 @@ const bool NFCPlayerRedisModule::AttachData(const NFGUID & self)
 		if (pObject)
 		{
 			m_pCommonRedisModule->ConvertPBToPropertyManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetPropertyManager());
-			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->mvPropertyKeyList, xPlayerDataCache->mvPropertyValueList, pObject->GetRecordManager());
+			m_pCommonRedisModule->ConvertPBToRecordManager(xPlayerDataCache->mvRecordKeyList, xPlayerDataCache->mvRecordValueList, pObject->GetRecordManager());
 
 			return true;
 		}
