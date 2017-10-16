@@ -171,6 +171,19 @@ public:
         return true;
     }
 
+    virtual bool Finalize()
+    {
+        NFIModule* pModule = First();
+        while (pModule)
+        {
+            pModule->Finalize();
+
+            pModule = Next();
+        }
+
+        return true;
+    }
+
 	virtual bool OnReloadPlugin()
 	{
 		NFIModule* pModule = First();
