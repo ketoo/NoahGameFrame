@@ -21,6 +21,7 @@ make
 
 cp -R -f ./*.a ../lib/Debug/
 cp -R -f ./*.a ../lib/Release/
+
 cp -r -f ./*.so ../../_Out/Debug/
 cp -r -f ./*.so.* ../../_Out/Debug/
 cp -r -f ./*.so ../../_Out/Release/
@@ -59,10 +60,10 @@ cd ../
 cd Theron
 #chmod -R 755 *
 make library mode=debug boost=off c++11=on posix=on shared=on
-cp -r -f ./Lib/libtherond.a ../lib/Debug/
+cp -r -f ./Lib/*.a ../lib/Debug/
 make clean
 make library mode=release boost=off c++11=on posix=on shared=on
-cp -r -f ./Lib/libtheron.a ../lib/Release/
+cp -r -f ./Lib/*.a ../lib/Release/
 make clean
 cd ../
 

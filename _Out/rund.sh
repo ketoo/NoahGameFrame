@@ -1,4 +1,5 @@
 export LC_ALL="C"
+export DYLD_LIBRARY_PATH=.:$DYLD_LIBRARY_PATH
 
 cd Debug
 

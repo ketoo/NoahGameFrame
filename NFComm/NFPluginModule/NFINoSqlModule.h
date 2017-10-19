@@ -14,7 +14,8 @@
 
 
 class NFINoSqlModule
-	: public NFIModule
+	: public NFIModule,
+public NoSqlInterface
 {
 public:
 

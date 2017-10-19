@@ -33,6 +33,8 @@ public:
 	virtual const int GetPort();
 	virtual const std::string&  GetAuthKey();
 
+	///////////////////////////////////////////////////////////
+
 	virtual const bool Del(const std::string& strKey);
 	virtual const bool Exists(const std::string& strKey);
 	virtual const bool Expire(const std::string& strKey, unsigned int nSecs);

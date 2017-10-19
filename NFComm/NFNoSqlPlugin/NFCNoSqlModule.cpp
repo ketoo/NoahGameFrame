@@ -203,3 +203,205 @@ bool NFCNoSqlModule::RemoveConnectSql(const std::string& strID)
 {
 	return mxNoSqlDriver.RemoveElement(strID);
 }
+
+const bool NFCNoSqlModule::Del(const std::string &strKey)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::Exists(const std::string &strKey)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::Expire(const std::string &strKey, unsigned int nSecs)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::Expireat(const std::string &strKey, unsigned int nUnixTime)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::Set(const std::string &strKey, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::Get(const std::string &strKey, std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::SetNX(const std::string &strKey, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::SetEX(const std::string &strKey, const std::string &strValue, const unsigned int nSeconds)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HSet(const std::string &strKey, const std::string &strField, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HGet(const std::string &strKey, const std::string &strField, std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HMSet(const std::string &strKey, const std::vector<std::string> &fieldVec,
+								 const std::vector<std::string> &valueVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HMGet(const std::string &strKey, const std::vector<std::string> &fieldVec,
+								 std::vector<std::string> &valueVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HExists(const std::string &strKey, const std::string &strField)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HDel(const std::string &strKey, const std::string &strField)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HLength(const std::string &strKey, int &nLen)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HKeys(const std::string &strKey, std::vector<std::string> &fieldVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::HValues(const std::string &strKey, std::vector<std::string> &valueVec)
+{
+	return 0;
+}
+
+const bool
+NFCNoSqlModule::HGetAll(const std::string &strKey, std::vector<std::pair<std::string, std::string> > &valueVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZAdd(const std::string &strKey, const double nScore, const std::string &strMember)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZIncrBy(const std::string &strKey, const std::string &strMember, const double nIncrement)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRem(const std::string &strKey, const std::string &strMember)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRemRangeByRank(const std::string &strKey, const int nStart, const int nStop)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRemRangeByScore(const std::string &strKey, const int nMin, const int nMax)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZScore(const std::string &strKey, const std::string &strMember, double &nScore)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZCard(const std::string &strKey, int &nCount)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRank(const std::string &strKey, const std::string &strMember, int &nRank)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZCount(const std::string &strKey, const int nMin, const int nMax, int &nCount)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRevRange(const std::string &strKey, const int nStart, const int nStop,
+									 std::vector<std::pair<std::string, double> > &memberScoreVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRevRank(const std::string &strKey, const std::string &strMember, int &nRank)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRange(const std::string &strKey, const int nStartIndex, const int nEndIndex,
+								  std::vector<std::pair<std::string, double> > &memberScoreVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ZRangeByScore(const std::string &strKey, const int nMin, const int nMax,
+										 std::vector<std::pair<std::string, double> > &memberScoreVec)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListPush(const std::string &strKey, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListPop(const std::string &strKey, std::string &strValue)
+{
+	return 0;
+}
+
+const bool
+NFCNoSqlModule::ListRange(const std::string &strKey, const int nStar, const int nEnd, std::vector<std::string> &xList)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListLen(const std::string &strKey, int &nLength)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListIndex(const std::string &strKey, const int nIndex, std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListRem(const std::string &strKey, const int nCount, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListSet(const std::string &strKey, const int nCount, const std::string &strValue)
+{
+	return 0;
+}
+
+const bool NFCNoSqlModule::ListTrim(const std::string &strKey, const int nStar, const int nEnd)
+{
+	return 0;
+}
