@@ -421,6 +421,8 @@ public class NFBinarySendLogic
         NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
         xData.mover = NFToPB(objectID);
         xData.moveType = 0;
+        xData.speed = 2f;
+        xData.time = 0;
 
         NFMsg.Position xTargetPos = new NFMsg.Position();
         xTargetPos.x = fX;
