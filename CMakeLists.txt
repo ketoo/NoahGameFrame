@@ -11,14 +11,8 @@ macro(remove_file arg_list file_remove)
 endmacro(remove_file)
 
 macro(link_NFSDK projName)
-
-if(UNIX)
 	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
 	target_link_libraries(${projName} NFCore protobuf NFMessageDefine NFNetPlugin event event_core)
-else()
-	add_dependencies(${projName} NFNetPlugin NFCore NFMessageDefine)
-	target_link_libraries(${projName} NFCore)
-endif()
 endmacro(link_NFSDK)
 
 macro(add_post_cmd_win strProjectName destDir ext dbgSuffix)
@@ -29,8 +23,6 @@ macro(add_post_cmd_linux strProjectName destDir ext dbgSuffix dllPrefix)
 
 endmacro()
 
-
-
 project(NoahFrame)
 
 #OSX上强制生成so后缀的动态库而不是dylib后缀动态库
@@ -39,15 +31,13 @@ if (APPLE)
 endif(APPLE)
 
 set(SolutionDir ${PROJECT_SOURCE_DIR})
-if (CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Darwin")
-	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Debug)
-	else()
-		set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Release)
-	endif()
+
+if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Debug)
 else()
-	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/)
+	set(NFOutPutDir ${PROJECT_SOURCE_DIR}/_Out/Release)
 endif()
+
 
 message("NFOutPutDir:${NFOutPutDir}")
 
@@ -79,6 +69,7 @@ if(UNIX)
 		set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -fPIC -std=c++11 -O3 -Wall")
 	endif()
+
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
 	#MAC不需要这一行
 	if (NOT APPLE)
@@ -88,14 +79,11 @@ else()
 	SET ( CMAKE_CXX_FLAGS "-D_X64 -D_WINDOWS /EHsc" )
 	include_directories(${SolutionDir}/Dependencies/libevent/WIN32-Code/)
 endif()
-if(UNIX)
-	if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
-        set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Debug/ ${SolutionDir}/Dependencies/lib/Debug)
-	else()
-        set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Release/ ${SolutionDir}/Dependencies/lib/Release)
-	endif()
+
+if( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+	set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Debug/ ${SolutionDir}/Dependencies/lib/Debug)
 else()
-	set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/)
+	set(DependenciesLibPath ${SolutionDir}/Dependencies/lib ${SolutionDir}/_Out/Release/ ${SolutionDir}/Dependencies/lib/Release)
 endif()
 
 
