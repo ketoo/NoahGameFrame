@@ -10,6 +10,8 @@
 
 void ExecuteBody(NFCoroutine* co)
 {
+
+
     //std::cout << "ExecuteBody " << co->nID << std::endl;
 
     co->func(co->arg);
@@ -22,6 +24,8 @@ void ExecuteBody(NFCoroutine* co)
 
 NFCoroutineManager::NFCoroutineManager()
 {
+    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+
     mnRunningCoroutineID = -1;
     mnMaxIndex = 0;
 
@@ -79,6 +83,8 @@ void NFCoroutineManager::Yield()
 
 void NFCoroutineManager::Init(CoroutineFunction func)
 {
+    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+
     mxMainFunc = func;
     mpMainArg = this;
 
@@ -98,6 +104,8 @@ void NFCoroutineManager::StartCoroutine(CoroutineFunction func)
 
 void NFCoroutineManager::ScheduleJob()
 {
+    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+
 #if NF_PLATFORM != NF_PLATFORM_WIN
     if (mxRunningList.size() > 0)
     {
@@ -160,8 +168,10 @@ NFCoroutine* NFCoroutineManager::GetRunningCoroutine()
 
 NFCoroutine* NFCoroutineManager::AllotCoroutine()
 {
+    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+
     int id = 0;
-    for (; id < this->mnMaxIndex; ++id)
+    for (; id < mnMaxIndex; ++id)
     {
         if (mxCoroutineList[id]->state == FREE)
         {
@@ -169,17 +179,18 @@ NFCoroutine* NFCoroutineManager::AllotCoroutine()
         }
     }
 
-    if (id == this->mnMaxIndex)
+    if (id == mnMaxIndex)
     {
-        this->mnMaxIndex++;
+        mnMaxIndex++;
     }
 
-    return this->mxCoroutineList[id];
+    return mxCoroutineList[id];
 }
 
 void NFCoroutineManager::NewMainCoroutine()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
+    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
     NFCoroutine* newCo = AllotCoroutine();
     if (newCo == NULL)
