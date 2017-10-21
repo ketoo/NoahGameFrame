@@ -51,6 +51,8 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
 
+   pPluginManager = this;
+
    mGetFileContentFunctor = nullptr;
 
    mstrConfigPath = "../";
@@ -626,7 +628,7 @@ void NFCPluginManager::StartCoroutine(CoroutineFunction func)
 	NFCoroutineManager::Instance()->StartCoroutine(func);
 }
 
-void NFCPluginManager::Yield()
+void NFCPluginManager::YieldCo()
 {
-	NFCoroutineManager::Instance()->Yield();
+	NFCoroutineManager::Instance()->YieldCo();
 }

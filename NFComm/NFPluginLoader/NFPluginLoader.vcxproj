@@ -92,15 +92,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="NFCCell.h" />
-    <ClInclude Include="NFCCellManager.h" />
     <ClInclude Include="NFCDynLib.h" />
+    <ClInclude Include="NFCoroutineManager.h" />
     <ClInclude Include="NFCPluginManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NFCCell.cpp" />
-    <ClCompile Include="NFCCellManager.cpp" />
     <ClCompile Include="NFCDynLib.cpp" />
+    <ClCompile Include="NFCoroutineManager.cpp" />
     <ClCompile Include="NFCPluginManager.cpp" />
     <ClCompile Include="NFPluginLoader.cpp" />
   </ItemGroup>

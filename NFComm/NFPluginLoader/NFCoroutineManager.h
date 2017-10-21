@@ -14,10 +14,12 @@
 #endif
 
 #include <thread>
-#include <ucontext.h>
+
 #include <vector>
 #include <list>
-
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <ucontext.h>
+#endif
 //#define NF_TEST
 
 #ifdef NF_TEST
@@ -85,7 +87,7 @@ public:
     void StartCoroutine(CoroutineFunction func);
     void RemoveRunningID(int id);
 
-    void Yield();
+    void YieldCo();
 
     void ScheduleJob();
 
