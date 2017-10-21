@@ -10,6 +10,9 @@
 #define NFI_MODULE_H
 
 #include <string>
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIPluginManager;
 
@@ -114,9 +117,10 @@ public:
         p->StartCoroutine(func);
     }
 
-	virtual void Yield(){
+	virtual void YieldCo()
+	{
         NFIModule* p = (NFIModule*)pPluginManager;
-        p->Yield();
+        p->YieldCo();
     }
 
     std::string strName;
