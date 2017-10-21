@@ -106,7 +106,7 @@ void CreateBackThread()
 
 void InitDaemon()
 {
-#if NF_PLATFORM == NF_PLATFORM_LINUX
+#if NF_PLATFORM != NF_PLATFORM_WIN
     daemon(1, 0);
 
     // ignore signals
@@ -159,7 +159,7 @@ void ProcessParameter(int argc, char* argv[])
 	{
 		CloseXButton();
 	}
-#elif NF_PLATFORM == NF_PLATFORM_LINUX
+#else
     //run it as a daemon process
 	if (strArgvList.find("-d") != string::npos)
 	{
@@ -254,7 +254,7 @@ int main(int argc, char* argv[])
     ProcessParameter(argc, argv);
 
 	PrintfLogo();
-	CreateBackThread();
+	//CreateBackThread();
 
 	NFCPluginManager::GetSingletonPtr()->Awake();
 	NFCPluginManager::GetSingletonPtr()->Init();
@@ -266,30 +266,27 @@ int main(int argc, char* argv[])
 	uint64_t nIndex = 0;
     while (!bExitApp)
     {
-        while (true)
+		nIndex++;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+        if (bExitApp)
         {
-			nIndex++;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-            if (bExitApp)
-            {
-                break;
-            }
-
-#if NF_PLATFORM == NF_PLATFORM_WIN
-            __try
-            {
-#endif
-			//NFCPluginManager::GetSingletonPtr()->Execute();
-			NFCPluginManager::Instance()->ExecuteCoScheduler();
-#if NF_PLATFORM == NF_PLATFORM_WIN
-            }
-            __except (ApplicationCrashHandler(GetExceptionInformation()))
-            {
-            }
-#endif
+            break;
         }
+
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        __try
+        {
+#endif
+		//NFCPluginManager::GetSingletonPtr()->Execute();
+		NFCPluginManager::Instance()->ExecuteCoScheduler();
+#if NF_PLATFORM == NF_PLATFORM_WIN
+        }
+        __except (ApplicationCrashHandler(GetExceptionInformation()))
+        {
+        }
+#endif
     }
 
 	NFCPluginManager::GetSingletonPtr()->BeforeShut();

@@ -424,7 +424,7 @@ int NFCNet::InitClientNet()
 	int nSizeRead = (int)bufferevent_get_max_to_read(bev);
 	int nSizeWrite = (int)bufferevent_get_max_to_write(bev);
 
-	std::cout << "SizeRead: " << nSizeRead << std::endl;
+	std::cout << "want to connect " << mstrIP << " SizeRead: " << nSizeRead << std::endl;
 	std::cout << "SizeWrite: " << nSizeWrite << std::endl;
 
 	//bufferevent_set_max_single_read(bev, 0);
