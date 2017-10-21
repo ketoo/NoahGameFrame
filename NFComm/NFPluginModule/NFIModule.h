@@ -6,13 +6,10 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_LOGIC_MODULE_H
-#define NFI_LOGIC_MODULE_H
+#ifndef NFI_MODULE_H
+#define NFI_MODULE_H
 
 #include <string>
-#include "NFComm/NFCore/NFMap.hpp"
-#include "NFComm/NFCore/NFList.hpp"
-#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIPluginManager;
 
@@ -117,8 +114,7 @@ public:
         p->StartCoroutine(func);
     }
 
-    virtual void Yield()
-    {
+	virtual void Yield(){
         NFIModule* p = (NFIModule*)pPluginManager;
         p->Yield();
     }
