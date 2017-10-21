@@ -81,7 +81,6 @@
     <ClInclude Include="..\NFPluginModule\NFIGameServerScriptModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGameServerToWorldModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGmModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIGSSwichServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIGuildRedisModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIHateModule.h" />
@@ -151,8 +150,6 @@
     <ClInclude Include="..\NFPluginModule\NFITeamPVPModule.h" />
     <ClInclude Include="..\NFPluginModule\NFITileModule.h" />
     <ClInclude Include="..\NFPluginModule\NFITotalLineTimeModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIUrlClientModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIUrlCodeModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIUserGiftModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIWebsocketModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIWorldGuildBroadcastModule.h" />
@@ -162,7 +159,6 @@
     <ClInclude Include="..\NFPluginModule\NFIWorldLogicModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIWorldNet_ServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFIWorldToMasterModule.h" />
-    <ClInclude Include="..\NFPluginModule\NFIWSSwichServerModule.h" />
     <ClInclude Include="..\NFPluginModule\NFPlatform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
