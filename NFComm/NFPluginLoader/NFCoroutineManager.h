@@ -13,10 +13,25 @@
 #define _XOPEN_SOURCE
 #endif
 
+#include <thread>
 #include <ucontext.h>
 #include <vector>
 #include <list>
+
+//#define NF_TEST
+
+#ifdef NF_TEST
+#define NF_PLATFORM_WIN 1
+#define NF_PLATFORM_LINUX 2
+#define NF_PLATFORM_APPLE 3
+
+#define  NF_PLATFORM NF_PLATFORM_APPLE
+
+typedef void (* CoroutineFunction)(void* arg);
+#else
 #include "NFComm/NFPluginModule/NFIModule.h"
+#include "NFComm/NFCore/NFSingleton.hpp"
+#endif
 
 #define MAX_COROUTINE_STACK_SIZE (1024 * 128)
 #define MAX_COROUTINE_CAPACITY   (1024 * 128)
@@ -32,8 +47,6 @@ class NFCoroutine;
 
 class NFCoroutineManager;
 
-
-static void ExecuteBody(NFCoroutine* ps);
 
 class NFCoroutine
 {
@@ -58,7 +71,7 @@ public:
     char stack[MAX_COROUTINE_STACK_SIZE];
 };
 
-class NFCoroutineManager
+class NFCoroutineManager : public  NFSingleton<NFCoroutineManager>
 {
 public:
 

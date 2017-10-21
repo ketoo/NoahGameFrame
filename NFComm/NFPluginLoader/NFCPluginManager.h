@@ -12,6 +12,7 @@
 #include <map>
 #include <string>
 #include <time.h>
+#include <thread>
 #include "NFCDynLib.h"
 #include "NFCoroutineManager.h"
 #include "NFComm/NFCore/NFSingleton.hpp"
@@ -130,8 +131,6 @@ private:
     ModuleInstanceMap mModuleInstanceMap;
 
 	GET_FILECONTENT_FUNCTOR mGetFileContentFunctor;
-
-	NFCoroutineManager mxCoroutineManager;
 };
 
 #endif
