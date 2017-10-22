@@ -10,6 +10,7 @@
 #define NFI_STATE_H
 
 #include "NFComm/NFCore/NFDataList.hpp"
+#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 
 //所有的状态

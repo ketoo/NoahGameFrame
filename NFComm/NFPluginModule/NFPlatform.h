@@ -317,7 +317,7 @@ typedef int64_t NFSOCK;
 #endif
 
 //use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 1
+#define NF_ACTOR_THREAD_COUNT 32
 
 #ifndef NF_USE_ACTOR
 #define NF_USE_ACTOR
