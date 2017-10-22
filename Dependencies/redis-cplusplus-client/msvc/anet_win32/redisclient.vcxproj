@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2BAF285D-1AAE-451F-A096-830A5D122CCD}</ProjectGuid>
     <RootNamespace>anet_win32</RootNamespace>
-    <ProjectName>anet_win64</ProjectName>
+    <ProjectName>redisclient</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
