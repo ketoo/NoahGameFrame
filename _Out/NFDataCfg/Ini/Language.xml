@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Object Id="DescID_Dwarf_Warrior" Chinese="矮人热衷于挖矿、铸造、手工艺和收集金银财货." English="A member of a mythical race of short, stocky human-like creatures who are generally skilled in mining and metalworking." />
-	<Object Id="DescID_Orc_Slinger" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
+	<Object Id="DescID_Orc_Slinger" Chinese="食人魔法师使用蝙蝠球火焰点燃他们的武器，然后追着他们在疯狂的杀戮。虽然他们缺少智慧，但是运气绝对好，经常打出双倍甚至三倍伤害。" English="Ogre mages use bat balls to fire their weapons and then chase them in frenzied killings. 
 Although they lack wisdom, but they very luckly which often double or even three times hurt." />
 	<Object Id="DescID_Samurai" Chinese="要离是人族最悲情的刺客--神魔大战中，自断一臂假意投靠鬼族，然而再次断臂换来重伤夜王." English="Yao Li was a famed assassin in the Spring and Autumn period." />
 	<Object Id="DescID_Wererat_Soldier" Chinese="狼人是一个力量型近战英雄，拥有巨大的物理能力和可观的移动速度， 擅长推进建筑和增加队伍的攻击力和生命值" English="The wererat is one of several different types of animalistic forms. They are classified as 'lycanthropes', despite the fact that the term reflects a lupine, or wolven" />
