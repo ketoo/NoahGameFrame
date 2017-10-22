@@ -122,6 +122,7 @@ protected:
     std::list<int> mxRunningList;
 
     int mnMaxIndex;
+    int mnMainCoID;
 
 };
 
