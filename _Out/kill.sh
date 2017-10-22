@@ -1,3 +1,3 @@
 pgrep NF | xargs kill -s 9
 
-ps -A|grep Svr
+ps -A|grep NF

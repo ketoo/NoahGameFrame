@@ -25,6 +25,7 @@ public:
 	virtual const bool Connect(const std::string& strDns, const int nPort = 6379, const std::string& strAuthKey = "");
 	virtual const bool ReConnect();
 	virtual const bool Enable();
+	virtual const bool Busy();
 
 	virtual const std::string& GetIP();
 	virtual const int GetPort();
