@@ -78,7 +78,6 @@
     <ClCompile Include="anet_win32.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\redisclient.h" />
     <ClInclude Include="anet_win32.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

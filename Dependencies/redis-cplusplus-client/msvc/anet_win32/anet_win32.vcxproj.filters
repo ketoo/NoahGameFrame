@@ -15,8 +15,5 @@
     <ClInclude Include="anet_win32.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\redisclient.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
