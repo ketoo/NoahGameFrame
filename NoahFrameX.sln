@@ -365,7 +365,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent_core", "Dependenci
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6", "Tutorial\Tutorial6\Tutorial6.vcxproj", "{C21FBABD-FF91-4FF1-855B-BB7783AE6237}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "anet_win64", "Dependencies\redis-cplusplus-client\msvc\anet_win32\anet_win32.vcxproj", "{2BAF285D-1AAE-451F-A096-830A5D122CCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "redisclient", "Dependencies\redis-cplusplus-client\msvc\anet_win32\redisclient.vcxproj", "{2BAF285D-1AAE-451F-A096-830A5D122CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
