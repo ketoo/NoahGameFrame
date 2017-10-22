@@ -9,18 +9,13 @@
 #ifndef NF_COROUTINE_MANAGER_H
 #define NF_COROUTINE_MANAGER_H
 
+#include <thread>
+#include <vector>
+#include <list>
+
 #ifdef __APPLE__
 #define _XOPEN_SOURCE
 #endif
-
-#include <thread>
-
-#include <vector>
-#include <list>
-#if NF_PLATFORM != NF_PLATFORM_WIN
-#include <ucontext.h>
-#endif
-//#define NF_TEST
 
 #ifdef NF_TEST
 #define NF_PLATFORM_WIN 1
@@ -34,6 +29,14 @@ typedef void (* CoroutineFunction)(void* arg);
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFCore/NFSingleton.hpp"
 #endif
+
+#if NF_PLATFORM != NF_PLATFORM_WIN
+#include <ucontext.h>
+#endif
+
+//#define NF_TEST
+
+
 
 #define MAX_COROUTINE_STACK_SIZE (1024 * 128)
 #define MAX_COROUTINE_CAPACITY   (1024 * 128)
