@@ -232,6 +232,10 @@ void ProcessParameter(int argc, char* argv[])
 
 		NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
 	}
+	else
+	{
+		NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
+	}
 
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
 	strTitleName.replace(strTitleName.find("Server"), 6, "");
