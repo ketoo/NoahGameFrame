@@ -10,26 +10,104 @@
 #define NFI_PLUGIN_MANAGER_H
 
 #include "NFPlatform.h"
-#include "NFIModule.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIPlugin;
+class NFIModule;
 
 
 typedef std::function<bool (const std::string &strFileName, std::string &strContent)> GET_FILECONTENT_FUNCTOR;
+typedef void (* CoroutineFunction)(void* arg);
 
+template<typename DerivedType, typename BaseType>
+class TIsDerived
+{
+public:
+    static int AnyFunction(BaseType* base)
+    {
+        return 1;
+    }
+
+    static  char AnyFunction(void* t2)
+    {
+        return 0;
+    }
+
+    enum
+    {
+        Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
+    };
+};
 
 #define FIND_MODULE(classBaseName, className)  \
 	assert((TIsDerived<classBaseName, NFIModule>::Result));
 
 
 
-class NFIPluginManager : public  NFIModule
+class NFIPluginManager
 {
 public:
     NFIPluginManager()
     {
 
     }
+
+	/////////////////////
+
+	virtual bool Awake()
+	{
+		return true;
+	}
+
+	virtual bool Init()
+	{
+
+		return true;
+	}
+
+	virtual bool AfterInit()
+	{
+		return true;
+	}
+
+	virtual bool CheckConfig()
+	{
+		return true;
+	}
+
+	virtual bool ReadyExecute()
+	{
+		return true;
+	}
+
+	virtual bool Execute()
+	{
+		return true;
+	}
+
+	virtual bool BeforeShut()
+	{
+		return true;
+	}
+
+	virtual bool Shut()
+	{
+		return true;
+	}
+
+	virtual bool Finalize()
+	{
+		return true;
+	}
+
+	virtual bool OnReloadPlugin()
+	{
+		return true;
+	}
+
+	/////////////////////
 
 	template <typename T>
 	T* FindModule()
@@ -91,7 +169,8 @@ public:
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
 
 	virtual void ExecuteCoScheduler() = 0;
-
+    virtual void StartCoroutine(CoroutineFunction func) = 0;
+    virtual void YieldCo() = 0;
 };
 
 #endif
