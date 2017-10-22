@@ -796,3 +796,8 @@ const bool NFCNoSqlDriver::ListTrim(const std::string & strKey, const int nStar,
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
 }
+
+const bool NFCNoSqlDriver::Busy()
+{
+	return false;
+}
