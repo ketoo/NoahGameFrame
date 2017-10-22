@@ -26,6 +26,7 @@ NFCoroutineManager::NFCoroutineManager()
 {
     std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
+    mnMainCoID = -1;
     mnRunningCoroutineID = -1;
     mnMaxIndex = 0;
 
@@ -202,6 +203,7 @@ void NFCoroutineManager::NewMainCoroutine()
 
     mxRunningList.push_back(newCo->nID);
     //std::cout << "create NewMainCoroutine " << newCo->nID << std::endl;
+    mnMainCoID = newCo->nID;
 
     newCo->state = CoroutineState::SUSPEND;
     newCo->func = mxMainFunc;
