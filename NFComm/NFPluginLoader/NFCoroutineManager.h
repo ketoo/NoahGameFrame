@@ -83,7 +83,6 @@ public:
 
     void Init(CoroutineFunction func);
 
-    void StartCoroutine();
     void StartCoroutine(CoroutineFunction func);
     void RemoveRunningID(int id);
 
@@ -92,6 +91,7 @@ public:
     void ScheduleJob();
 
 protected:
+	void StartCoroutine();
 
     void NewMainCoroutine();
 

@@ -105,12 +105,6 @@ public:
         return pPluginManager;
     }
 
-    virtual void StartCoroutine()
-    {
-        NFIModule* p = (NFIModule*)pPluginManager;
-        p->StartCoroutine();
-    }
-
     virtual void StartCoroutine(CoroutineFunction func)
     {
         NFIModule* p = (NFIModule*)pPluginManager;

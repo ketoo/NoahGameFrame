@@ -94,8 +94,6 @@ public:
 
 	virtual void ExecuteCoScheduler() override;
 
-	virtual void StartCoroutine() override;
-
 	virtual void StartCoroutine(CoroutineFunction func) override;
 
 	virtual void YieldCo() override;
