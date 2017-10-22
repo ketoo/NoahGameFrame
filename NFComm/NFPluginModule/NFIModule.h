@@ -10,34 +10,10 @@
 #define NFI_MODULE_H
 
 #include <string>
+#include "NFIPluginManager.h"
 #include "NFComm/NFCore/NFMap.hpp"
 #include "NFComm/NFCore/NFList.hpp"
 #include "NFComm/NFCore/NFDataList.hpp"
-
-class NFIPluginManager;
-
-typedef void (* CoroutineFunction)(void* arg);
-
-template<typename DerivedType, typename BaseType>
-class TIsDerived
-{
-public:
-    static int AnyFunction(BaseType* base)
-    {
-        return 1;
-    }
-
-    static  char AnyFunction(void* t2)
-    {
-        return 0;
-    }
-
-    enum
-    {
-        Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
-    };
-};
-
 
 class NFIModule
 {
@@ -107,14 +83,12 @@ public:
 
     virtual void StartCoroutine(CoroutineFunction func)
     {
-        NFIModule* p = (NFIModule*)pPluginManager;
-        p->StartCoroutine(func);
+        pPluginManager->StartCoroutine(func);
     }
 
 	virtual void YieldCo()
 	{
-        NFIModule* p = (NFIModule*)pPluginManager;
-        p->YieldCo();
+        pPluginManager->YieldCo();
     }
 
     std::string strName;

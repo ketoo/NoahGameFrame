@@ -51,8 +51,6 @@ NFCPluginManager::NFCPluginManager() : NFIPluginManager()
    mnInitTime = time(NULL);
    mnNowTime = mnInitTime;
 
-   pPluginManager = this;
-
    mGetFileContentFunctor = nullptr;
 
    mstrConfigPath = "../";
@@ -101,7 +99,7 @@ inline bool NFCPluginManager::Init()
 		itInstance->second->Init();
 	}
 
-	//NFCoroutineManager::Instance()->Init(CoroutineExecute);
+	NFCoroutineManager::Instance()->Init(CoroutineExecute);
 
 	return true;
 }
@@ -614,8 +612,8 @@ bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 
 void NFCPluginManager::ExecuteCoScheduler()
 {
-    NFCPluginManager::Instance()->Execute();
-    //NFCoroutineManager::Instance()->ScheduleJob();
+    //NFCPluginManager::Instance()->Execute();
+    NFCoroutineManager::Instance()->ScheduleJob();
 }
 
 void NFCPluginManager::StartCoroutine(CoroutineFunction func)
