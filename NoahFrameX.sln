@@ -368,6 +368,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial6", "Tutorial\Tutor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "redisclient", "Dependencies\redis-cplusplus-client\msvc\anet_win32\redisclient.vcxproj", "{2BAF285D-1AAE-451F-A096-830A5D122CCD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFScalePlugin", "NFComm\NFScalePlugin\NFScalePlugin.vcxproj", "{5B999220-7D01-48C4-8892-C601E3B91847}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -724,6 +726,12 @@ Global
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|x64.ActiveCfg = Release|x64
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|x64.Build.0 = Release|x64
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD}.Release|x86.ActiveCfg = Release|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Debug|x64.ActiveCfg = Debug|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Debug|x64.Build.0 = Debug|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Debug|x86.ActiveCfg = Debug|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Release|x64.ActiveCfg = Release|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Release|x64.Build.0 = Release|x64
+		{5B999220-7D01-48C4-8892-C601E3B91847}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -792,6 +800,7 @@ Global
 		{9FECEE4C-7F7C-4715-A5FE-20951ACE69DD} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
 		{C21FBABD-FF91-4FF1-855B-BB7783AE6237} = {374F8F3D-D507-4C1A-AEAD-376B22AAEC5F}
 		{2BAF285D-1AAE-451F-A096-830A5D122CCD} = {E78C3B11-6914-488A-B068-B3BF4F5150F5}
+		{5B999220-7D01-48C4-8892-C601E3B91847} = {410C8A08-63DC-45B2-ADB9-08CD991861F0}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
