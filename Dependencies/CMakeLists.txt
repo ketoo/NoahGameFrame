@@ -1,5 +1,5 @@
 #add_subdirectory(protobuf)
-#add_subdirectory(hiredis)
+#add_subdirectory(redis-cplusplus-client)
 add_subdirectory(navigation)
 #add_subdirectory(libevent)
 #add_subdirectory(Theron)

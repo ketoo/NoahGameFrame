@@ -67,6 +67,8 @@ void NFCoroutineManager::Resume(int id)
 void NFCoroutineManager::YieldCo()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
+	StartCoroutine();
+
     if (this->mnRunningCoroutineID != -1)
     {
         NFCoroutine* t = GetRunningCoroutine();
