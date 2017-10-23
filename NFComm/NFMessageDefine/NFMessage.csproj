@@ -60,11 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NFDefine.cs" />
     <Compile Include="NFMsgBase.cs" />
-    <Compile Include="NFMsgBaseEx.cs" />
     <Compile Include="NFMsgPreGame.cs" />
     <Compile Include="NFMsgShare.cs" />
-    <Compile Include="NFMsgURl.cs" />
-    <Compile Include="NFSLGDefine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

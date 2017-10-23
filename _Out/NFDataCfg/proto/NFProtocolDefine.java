@@ -575,7 +575,7 @@ package nframe;
 		public static final String EXP = "EXP";// int
 		public static final String FightHero = "FightHero";// object
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
-		public static final String FightOppnent = "FightOppnent";// object
+		public static final String FightOpponent = "FightOpponent";// object
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
 		public static final String GambleDiamond = "GambleDiamond";// int
@@ -616,15 +616,12 @@ package nframe;
 		public static final String SUCKBLOOD = "SUCKBLOOD";// int
 		public static final String Sex = "Sex";// int
 		public static final String ShowName = "ShowName";// string
-		public static final String Skill1 = "Skill1";// string
-		public static final String Skill2 = "Skill2";// string
-		public static final String Skill3 = "Skill3";// string
 		public static final String TeamID = "TeamID";// object
 		public static final String TotalLineTime = "TotalLineTime";// object
 		public static final String TotalTime = "TotalTime";// int
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String VIPLevel = "VIPLevel";// int
-		public static final String ViewOppnent = "ViewOppnent";// object
+		public static final String ViewOpponent = "ViewOpponent";// object
 		// Record
 		public class BagEquipList
 		{
