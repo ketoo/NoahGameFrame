@@ -39,7 +39,7 @@ typedef void (* CoroutineFunction)(void* arg);
 
 
 #define MAX_COROUTINE_STACK_SIZE (1024 * 128)
-#define MAX_COROUTINE_CAPACITY   (1024 * 4)
+#define MAX_COROUTINE_CAPACITY   (1024 * 8)
 
 enum CoroutineState
 {
@@ -86,7 +86,9 @@ public:
 
     void Init(CoroutineFunction func);
 
+	void StartCoroutine();
     void StartCoroutine(CoroutineFunction func);
+
     void RemoveRunningID(int id);
 
     void YieldCo();
@@ -94,7 +96,6 @@ public:
     void ScheduleJob();
 
 protected:
-	void StartCoroutine();
 
     void NewMainCoroutine();
 
