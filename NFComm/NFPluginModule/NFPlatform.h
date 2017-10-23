@@ -252,6 +252,7 @@
 
 #include <stdint.h>
 #include <chrono>
+#include <functional>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
