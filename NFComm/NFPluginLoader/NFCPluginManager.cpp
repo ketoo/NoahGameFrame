@@ -335,9 +335,9 @@ void NFCPluginManager::SetConfigName(const std::string & strFileName)
 	}
 
 #ifdef NF_DEBUG_MODE
-	mstrConfigName = "NFDataCfg/Debug/" + strFileName;
+	mstrConfigName = mstrConfigPath + "NFDataCfg/Debug/" + strFileName;
 #else
-	mstrConfigName = "NFDataCfg/Release/" + strFileName;
+	mstrConfigName = mstrConfigPath + "NFDataCfg/Release/" + strFileName;
 #endif
 }
 
