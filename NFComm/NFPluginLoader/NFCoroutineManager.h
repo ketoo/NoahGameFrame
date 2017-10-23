@@ -39,7 +39,7 @@ typedef void (* CoroutineFunction)(void* arg);
 
 
 #define MAX_COROUTINE_STACK_SIZE (1024 * 128)
-#define MAX_COROUTINE_CAPACITY   (1024 * 128)
+#define MAX_COROUTINE_CAPACITY   (1024 * 4)
 
 enum CoroutineState
 {
