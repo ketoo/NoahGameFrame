@@ -616,6 +616,11 @@ void NFCPluginManager::ExecuteCoScheduler()
     NFCoroutineManager::Instance()->ScheduleJob();
 }
 
+void NFCPluginManager::StartCoroutine()
+{
+	NFCoroutineManager::Instance()->StartCoroutine();
+}
+
 void NFCPluginManager::StartCoroutine(CoroutineFunction func)
 {
 	NFCoroutineManager::Instance()->StartCoroutine(func);
