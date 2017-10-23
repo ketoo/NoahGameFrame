@@ -11,6 +11,9 @@
 
 #include <string>
 #include "NFIPluginManager.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIModule
 {

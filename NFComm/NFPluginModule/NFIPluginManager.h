@@ -11,10 +11,12 @@
 
 #include <functional>
 #include "NFPlatform.h"
+#include "NFComm/NFCore/NFMap.hpp"
+#include "NFComm/NFCore/NFList.hpp"
+#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIPlugin;
 class NFIModule;
-
 
 typedef std::function<bool (const std::string &strFileName, std::string &strContent)> GET_FILECONTENT_FUNCTOR;
 typedef void (* CoroutineFunction)(void* arg);
