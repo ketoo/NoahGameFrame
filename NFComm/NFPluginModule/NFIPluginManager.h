@@ -9,10 +9,8 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
+#include <functional>
 #include "NFPlatform.h"
-#include "NFComm/NFCore/NFMap.hpp"
-#include "NFComm/NFCore/NFList.hpp"
-#include "NFComm/NFCore/NFDataList.hpp"
 
 class NFIPlugin;
 class NFIModule;
