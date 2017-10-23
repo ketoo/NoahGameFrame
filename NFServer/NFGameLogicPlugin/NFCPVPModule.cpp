@@ -58,7 +58,7 @@ bool NFCPVPModule::AfterInit()
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFCPVPModule::OnReqSwapHomeSceneProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_START_OPPNENT, this, &NFCPVPModule::OnReqStartPVPOpponentProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqEndPVPOpponentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqAddGambleProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ADJUST_GAMBLE, this, &NFCPVPModule::OnReqAddGambleProcess)) { return false; }
 
     return true;
 }
@@ -81,14 +81,14 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 
 	int nSceneID = RandomTileScene();
 	std::string strTileData;
-	NFGUID xViewOppnent;
-	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOppnent, strTileData))
+	NFGUID xViewOpponent;
+	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData))
 	{
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
 		{
-			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), xViewOppnent);
-			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());
+			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), xViewOpponent);
+			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOpponent(), NFGUID());
 
 			m_pSceneProcessModule->RequestEnterScene(nPlayerID, nSceneID, 0, NFDataList());
 
@@ -121,8 +121,8 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
 
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), nPlayerID);
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), nPlayerID);
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOpponent(), NFGUID());
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
 
@@ -143,8 +143,8 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
 
-	NFGUID xViewOppnent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent());
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), xViewOppnent);
+	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOpponent(), xViewOpponent);
 
 	int nGambleGold = xMsg.gold();
 	int nGambleDiamond = xMsg.diamond();
@@ -168,8 +168,8 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
 
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOppnent(), NFGUID());
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOppnent(), NFGUID());
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFGUID());
+	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOpponent(), NFGUID());
 	//get oppnent
 	//calculate how many monster has been killed
 	//calculate how many building has been destroyed

@@ -43,13 +43,6 @@ bool NFCEquipModule::AfterInit()
     strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
     m_pCommonConfigModule->LoadConfig(strEquipPath);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_INTENSIFYLEVEL_TO_EQUIP, this, &NFCEquipModule::OnIntensifylevelToEquipMsg)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_HOLE_TO_EQUIP, this, &NFCEquipModule::OnHoleToEquipMsg)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_INLAYSTONE_TO_EQUIP, this, &NFCEquipModule::OnInlaystoneToEquipMsg)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_REQ_ELEMENTLEVEL_TO_EQUIP, this, &NFCEquipModule::OnElementlevelToEquipMsg)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_WEAR_EQUIP, this, &NFCEquipModule::OnReqWearEquipMsg)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGEC_TAKEOFF_EQUIP, this, &NFCEquipModule::OnTakeOffEquipMsg)) { return false; }
-
     return true;
 }
 
@@ -686,97 +679,4 @@ int NFCEquipModule::GetEquipElementLevel(const NFGUID & self, const NFGUID & id,
 
 	const int nRow = xDataList.Int32(0);
 	return pRecord->GetInt32(nRow, eIndex);
-}
-
-//////////////////////////////////////////////////////////////////////////
-//msg process
-void NFCEquipModule::OnIntensifylevelToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqIntensifylevelToEquip);
-
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-
-	int nResult = IntensifylevelToEquip(self, xEquipID);
-
-	NFMsg::AckIntensifylevelToEquip xAck;
-
-	*xAck.mutable_equipid() = xMsg.equipid();
-	xAck.set_result(nResult);
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INTENSIFYLEVEL_TO_EQUIP, xAck, self);
-}
-
-void NFCEquipModule::OnHoleToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqHoleToEquip);
-
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-
-	int nResult = HoleToEquip(self, xEquipID);
-
-	NFMsg::AckHoleToEquip xAck;
-
-	*xAck.mutable_equipid() = xMsg.equipid();
-	xAck.set_result(nResult);
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_HOLE_TO_EQUIP, xAck, self);
-}
-
-void NFCEquipModule::OnInlaystoneToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqInlaystoneToEquip);
-
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-	const std::string& strStoneID = xMsg.stoneid();
-	const int nHoleIndex = xMsg.hole_index();
-
-	int nResult = InlaystoneToEquip(self, xEquipID, strStoneID, nHoleIndex);
-
-	NFMsg::AckInlaystoneToEquip xAck;
-
-	*xAck.mutable_equipid() = xMsg.equipid();
-	xAck.set_result(nResult);
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_INLAYSTONE_TO_EQUIP, xAck, self);
-}
-
-void NFCEquipModule::OnElementlevelToEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqElementlevelToEquip);
-
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-
-	int nResult = ElementlevelToEquip(self, xEquipID, xMsg.eelementtype());
-
-	NFMsg::AckElementlevelToEquip xAck;
-
-	*xAck.mutable_equipid() = xMsg.equipid();
-	xAck.set_result(nResult);
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_ELEMENTLEVEL_TO_EQUIP, xAck, self);
-}
-
-void NFCEquipModule::OnReqWearEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqWearEquip);
-
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
-
-	DressEquipForHero(self, xTarget, xEquipID);
-}
-
-void NFCEquipModule::OnTakeOffEquipMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen )
-{
-	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::TakeOffEquip);
-	const NFGUID self = nPlayerID;
-	const NFGUID xEquipID = NFINetModule::PBToNF((xMsg.equipid()));
-	const NFGUID xTarget = NFINetModule::PBToNF((xMsg.targetid()));
-
-	TakeOffEquipForm(self, xTarget, xEquipID);
 }

@@ -99,7 +99,7 @@ public:
             bool bRet = pModule->AfterInit();
             if (!bRet)
             {
-				std::cout << pModule ->strName << std::endl;
+				std::cout << pModule->strName << std::endl;
                 assert(0);
             }
 

@@ -405,6 +405,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_SEARCH_OPPNENT", Value=1225)]
       EGMI_ACK_SEARCH_OPPNENT = 1225,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ADJUST_GAMBLE", Value=1226)]
+      EGMI_REQ_ADJUST_GAMBLE = 1226,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_MOVE", Value=1230)]
       EGMI_REQ_MOVE = 1230,
             
