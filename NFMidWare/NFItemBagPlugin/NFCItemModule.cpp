@@ -337,7 +337,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 		{
 			if (nIsHero > 0)
 			{
-				m_pHeroModule->ActiviteHero(self, strItemID);
+				m_pHeroModule->ActivateHero(self, strItemID);
 				continue;
 			}
 
