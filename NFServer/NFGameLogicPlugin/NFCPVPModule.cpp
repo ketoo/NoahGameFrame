@@ -5,16 +5,12 @@
 //    @Module           :    NFCPVPModule
 //
 // -------------------------------------------------------------------------
-
-#include "NFCPVPModule.h"
-#include "NFComm/NFPluginModule/NFINetModule.h"
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267)
 #endif
+#include "NFCPVPModule.h"
+#include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFMessageDefine/NFMsgShare.pb.h"
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCPVPModule::Init()
@@ -58,10 +54,11 @@ bool NFCPVPModule::AfterInit()
 	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCPVPModule::BeforeLeaveSceneGroupEvent);
 	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCPVPModule::AfterLeaveSceneGroupEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnReqSearchOppnentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_OPPNENT, this, &NFCPVPModule::OnReqSearchOpponentProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SWAP_HOME_SCENE, this, &NFCPVPModule::OnReqSwapHomeSceneProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_START_OPPNENT, this, &NFCPVPModule::OnReqStartPVPOppnentProcess)) { return false; }
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqEndPVPOppnentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_START_OPPNENT, this, &NFCPVPModule::OnReqStartPVPOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqEndPVPOpponentProcess)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_END_OPPNENT, this, &NFCPVPModule::OnReqAddGambleProcess)) { return false; }
 
     return true;
 }
@@ -76,7 +73,8 @@ bool NFCPVPModule::ReadyExecute()
 
 
 
-void NFCPVPModule::OnReqSearchOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+                                              const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 	//find a tile map and swap scene
@@ -140,7 +138,8 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 	*/
 }
 
-void NFCPVPModule::OnReqStartPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+												const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
 
@@ -164,7 +163,8 @@ void NFCPVPModule::OnReqStartPVPOppnentProcess(const NFSOCK nSockIndex, const in
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_START_OPPNENT, xReqAckStartBattle, nPlayerID);
 }
 
-void NFCPVPModule::OnReqEndPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
+											  const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqEndBattle);
 
@@ -227,7 +227,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 {
 	std::string strTileData;
 	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
-	NFGUID xViewOppnent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOppnent());
+	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOpponent());
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(nSceneID);
@@ -237,9 +237,9 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
 
-	if (self == xViewOppnent)
+	if (self == xViewOpponent)
 	{
-		m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOppnent(), NFGUID());
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
 
 		if (m_pTileModule->GetOnlinePlayerTileData(self, strTileData))
 		{
@@ -248,7 +248,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	}
 	else
 	{
-		if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOppnent, strTileData))
+		if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
 		{
 			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
@@ -289,4 +289,9 @@ int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nScen
 int NFCPVPModule::RandomTileScene()
 {
 	return mxTileSceneIDList.at(m_pKernelModule->Random(0, (int)mxTileSceneIDList.size()));
+}
+
+void NFCPVPModule::OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
+{
+
 }

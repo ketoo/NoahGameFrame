@@ -581,7 +581,7 @@ namespace NFrame
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
-		public static readonly String FightOppnent = "FightOppnent";// object
+		public static readonly String FightOpponent = "FightOpponent";// object
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
 		public static readonly String GambleDiamond = "GambleDiamond";// int
@@ -622,15 +622,12 @@ namespace NFrame
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
 		public static readonly String Sex = "Sex";// int
 		public static readonly String ShowName = "ShowName";// string
-		public static readonly String Skill1 = "Skill1";// string
-		public static readonly String Skill2 = "Skill2";// string
-		public static readonly String Skill3 = "Skill3";// string
 		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalLineTime = "TotalLineTime";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
-		public static readonly String ViewOppnent = "ViewOppnent";// object
+		public static readonly String ViewOpponent = "ViewOpponent";// object
 		// Record
 		public class BagEquipList
 		{

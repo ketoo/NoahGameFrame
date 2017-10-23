@@ -39,14 +39,9 @@ public:
     virtual bool BeforeShut();
 
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
-	virtual NFGUID ActiviteHero(const NFGUID& self, const string& strID);
-	virtual bool ActiviteHero(const NFGUID& self, const NFGUID& hero);
+	virtual NFGUID ActivateHero(const NFGUID &self, const string &strID);
+	virtual bool ActivateHero(const NFGUID &self, const NFGUID &hero);
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
-    virtual bool HeroStarUp(const NFGUID& self, const NFGUID& xHeroID);
-    virtual bool HeroSkillUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
-    virtual bool HeroTalentUp(const NFGUID& self, const NFGUID& xHeroID, const int nIndex);
-
-	virtual bool HeroWearSkill(const NFGUID& self, const NFGUID& xHeroID, const std::string& xSkillID);
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
@@ -62,8 +57,6 @@ protected:
 	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID);
 	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
 	int GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
-
-	int RefereshHeroPropertytoPlayer(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
     NFIClassModule* m_pLogicClassModule;
