@@ -586,7 +586,7 @@ namespace NFrame
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
 		static const std::string& FightHero(){ static std::string x = "FightHero"; return x; };// object
 		static const std::string& FightHeroCnfID(){ static std::string x = "FightHeroCnfID"; return x; };// string
-		static const std::string& FightOppnent(){ static std::string x = "FightOppnent"; return x; };// object
+		static const std::string& FightOpponent(){ static std::string x = "FightOpponent"; return x; };// object
 		static const std::string& FirstTarget(){ static std::string x = "FirstTarget"; return x; };// object
 		static const std::string& GMLevel(){ static std::string x = "GMLevel"; return x; };// int
 		static const std::string& GambleDiamond(){ static std::string x = "GambleDiamond"; return x; };// int
@@ -627,15 +627,12 @@ namespace NFrame
 		static const std::string& SUCKBLOOD(){ static std::string x = "SUCKBLOOD"; return x; };// int
 		static const std::string& Sex(){ static std::string x = "Sex"; return x; };// int
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
-		static const std::string& Skill1(){ static std::string x = "Skill1"; return x; };// string
-		static const std::string& Skill2(){ static std::string x = "Skill2"; return x; };// string
-		static const std::string& Skill3(){ static std::string x = "Skill3"; return x; };// string
 		static const std::string& TeamID(){ static std::string x = "TeamID"; return x; };// object
 		static const std::string& TotalLineTime(){ static std::string x = "TotalLineTime"; return x; };// object
 		static const std::string& TotalTime(){ static std::string x = "TotalTime"; return x; };// int
 		static const std::string& VIPEXP(){ static std::string x = "VIPEXP"; return x; };// int
 		static const std::string& VIPLevel(){ static std::string x = "VIPLevel"; return x; };// int
-		static const std::string& ViewOppnent(){ static std::string x = "ViewOppnent"; return x; };// object
+		static const std::string& ViewOpponent(){ static std::string x = "ViewOpponent"; return x; };// object
 		// Record
 		class BagEquipList
 		{

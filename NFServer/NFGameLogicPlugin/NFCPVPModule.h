@@ -43,10 +43,12 @@ public:
 
 protected:
 
-	void OnReqSearchOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqStartPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnReqEndPVPOppnentProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+    void OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+
+    void OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
 	void FindAllTileScene();

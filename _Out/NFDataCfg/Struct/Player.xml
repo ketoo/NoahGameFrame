@@ -26,7 +26,7 @@
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="FightHero" Cache="1" Desc="Hero" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="FightHeroCnfID" Cache="1" Desc="Hero" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="FightOppnent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FightOpponent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="FirstTarget" Cache="1" Desc="首要目标" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GambleDiamond" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -67,15 +67,12 @@
 		<Property Id="SUCKBLOOD" Cache="0" Desc="吸血" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Sex" Cache="1" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ShowName" Cache="1" Desc="显示的名字" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Skill1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Skill2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Skill3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="TeamID" Cache="1" Desc="所在队伍ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalLineTime" Cache="1" Desc="今日在线时长{截至至本次上线时间}" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPEXP" Cache="1" Desc="VIP经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPLevel" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ViewOppnent" Cache="0" Desc="when searching" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="ViewOpponent" Cache="0" Desc="when searching" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 	</Propertys>
 	<Records>
 		<Record Id="BagEquipList" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="256"	 Save="0"	 Upload="0"	 >
