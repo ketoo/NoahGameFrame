@@ -57,7 +57,7 @@ void NFCoroutineManager::Resume(int id)
     NFCoroutine* t = GetCoroutine(id);
     if (t->state == SUSPEND)
     {
-        std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
+        //std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
 
         this->mnRunningCoroutineID = id;
 
@@ -191,7 +191,7 @@ NFCoroutine* NFCoroutineManager::AllotCoroutine()
 void NFCoroutineManager::NewMainCoroutine()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+    //std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
     NFCoroutine* newCo = AllotCoroutine();
     if (newCo == NULL)
