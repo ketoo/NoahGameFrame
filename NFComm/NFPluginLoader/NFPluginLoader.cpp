@@ -170,6 +170,25 @@ void ProcessParameter(int argc, char* argv[])
     signal(SIGCHLD, SIG_IGN);
 #endif
 
+    if (strArgvList.find("Path=") != string::npos)
+    {
+        for (int i = 0; i < argc; i++)
+        {
+            strDataPath = argv[i];
+            if (strDataPath.find("Path=") != string::npos)
+            {
+                strDataPath.erase(0, 5);
+                break;
+            }
+        }
+
+        NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
+    }
+    else
+    {
+        NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
+    }
+
 	if (strArgvList.find(".xml") != string::npos)
 	{
 		for (int i = 0; i < argc; i++)
@@ -216,25 +235,6 @@ void ProcessParameter(int argc, char* argv[])
         {
             NFCPluginManager::GetSingletonPtr()->SetAppID(nAppID);
         }
-	}
-
-	if (strArgvList.find("Path=") != string::npos)
-	{
-		for (int i = 0; i < argc; i++)
-		{
-			strDataPath = argv[i];
-			if (strDataPath.find("Path=") != string::npos)
-			{
-				strDataPath.erase(0, 5);
-				break;
-			}
-		}
-
-		NFCPluginManager::GetSingletonPtr()->SetConfigPath(strDataPath);
-	}
-	else
-	{
-		NFCPluginManager::GetSingletonPtr()->SetConfigPath("../");
 	}
 
 	strTitleName = strAppName + strAppID;// +" PID" + NFGetPID();
