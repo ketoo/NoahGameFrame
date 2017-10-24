@@ -17,6 +17,8 @@
 #define _XOPEN_SOURCE
 #endif
 
+//#define NF_TEST
+
 #ifdef NF_TEST
 #define NF_PLATFORM_WIN 1
 #define NF_PLATFORM_LINUX 2
@@ -34,12 +36,9 @@ typedef void (* CoroutineFunction)(void* arg);
 #include <ucontext.h>
 #endif
 
-//#define NF_TEST
-
-
 
 #define MAX_COROUTINE_STACK_SIZE (1024 * 128)
-#define MAX_COROUTINE_CAPACITY   (1024 * 8)
+#define MAX_COROUTINE_CAPACITY   (1024 * 1)
 
 enum CoroutineState
 {
@@ -76,7 +75,7 @@ public:
     char stack[MAX_COROUTINE_STACK_SIZE];
 };
 
-class NFCoroutineManager : public  NFSingleton<NFCoroutineManager>
+class NFCoroutineManager
 {
 public:
 
