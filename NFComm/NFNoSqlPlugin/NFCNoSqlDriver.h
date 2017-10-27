@@ -101,6 +101,8 @@ public:
 
 protected:
 
+	bool  CheckValue(const std::string & strValue);
+
 private:
 	std::string mstrNoExistKey;
 	bool mbEnable;
