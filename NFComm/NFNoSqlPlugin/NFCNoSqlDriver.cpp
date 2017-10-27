@@ -200,10 +200,8 @@ const bool NFCNoSqlDriver::Get(const std::string & strKey, std::string & strValu
 	try
 	{
 		strValue = m_pNoSqlClient->get(strKey);
-		if (std::string::npos == strValue.find(mstrNoExistKey))
-		{
-			return true;
-		}
+		return CheckValue(strValue);
+
 	}
 
 	REDIS_CATCH(__FUNCTION__, __LINE__);
@@ -275,10 +273,7 @@ const bool NFCNoSqlDriver::HGet(const std::string & strKey, const std::string & 
 	try
 	{
 		strValue = m_pNoSqlClient->hget(strKey, strField);
-		if (std::string::npos == strValue.find(mstrNoExistKey))
-		{
-			return true;
-		}
+		return CheckValue(strValue);
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 	return false;
@@ -685,7 +680,7 @@ const bool NFCNoSqlDriver::ListPop(const std::string & strKey, std::string & str
 	{
 
 		strValue = m_pNoSqlClient->rpop(strKey);
-		return true;
+		return CheckValue(strValue);
 
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
@@ -736,7 +731,7 @@ const bool NFCNoSqlDriver::ListIndex(const std::string & strKey, const int nInde
 	try
 	{
 		strValue = m_pNoSqlClient->lindex(strKey, nIndex);
-		return true;
+		return CheckValue(strValue);
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 
@@ -774,7 +769,6 @@ const bool NFCNoSqlDriver::ListSet(const std::string & strKey, const int nCount,
 
 		m_pNoSqlClient->lset(strKey, nCount, strValue);
 		return true;
-
 	}
 	REDIS_CATCH(__FUNCTION__, __LINE__);
 
@@ -799,5 +793,16 @@ const bool NFCNoSqlDriver::ListTrim(const std::string & strKey, const int nStar,
 
 const bool NFCNoSqlDriver::Busy()
 {
+	return false;
+}
+
+bool NFCNoSqlDriver::CheckValue(const std::string & strValue)
+{
+
+	if (std::string::npos == strValue.find(mstrNoExistKey))
+	{
+		return true;
+	}
+
 	return false;
 }
