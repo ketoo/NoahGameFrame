@@ -27,7 +27,10 @@ bool NFCPVPModule::Init()
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
 	
+
     return true;
 }
 
@@ -269,6 +272,50 @@ int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nScen
 	return 0;
 }
 
+bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& opponent)
+{
+	//tell client u shoud adjust tile
+	//m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nPlayerID);
+	//tell client u should load resources
+	//gold, diamong, awards, level, name, headicon, 3 heros and the star of that heros
+	std::vector<std::string> vKeyList;
+	std::vector<std::string> vValueList;
+
+	vKeyList.push_back(NFrame::Player::Gold());
+	vKeyList.push_back(NFrame::Player::Diamond());
+	vKeyList.push_back(NFrame::Player::Level());
+	vKeyList.push_back(NFrame::Player::Cup());
+	vKeyList.push_back(NFrame::Player::Name());
+	vKeyList.push_back(NFrame::Player::HeroPos1CnfID());
+	vKeyList.push_back(NFrame::Player::HeroPos1Star());
+	vKeyList.push_back(NFrame::Player::HeroPos2CnfID());
+	vKeyList.push_back(NFrame::Player::HeroPos2Star());
+	vKeyList.push_back(NFrame::Player::HeroPos3CnfID());
+	vKeyList.push_back(NFrame::Player::HeroPos3Star());
+
+	//try
+	const std::string& strPlayerKey = m_pCommonRedisModule->GetPropertyCacheKey(opponent);
+	if (m_pNoSqlModule->HMGet(strPlayerKey, vKeyList, vValueList))
+	{
+		int nGold = atoi(vValueList.at(0).c_str());
+		int nDiamond = atoi(vValueList.at(1).c_str());
+		int nLevel = atoi(vValueList.at(2).c_str());
+		int nCup = atoi(vValueList.at(3).c_str());
+		std::string strName = vValueList.at(4);
+		std::string strHero1CnfID = vValueList.at(5);
+		int nHero1Star = atoi(vValueList.at(6).c_str());
+		std::string strHero2CnfID = vValueList.at(7);
+		int nHero2Star = atoi(vValueList.at(7).c_str());
+		std::string strHero3CnfID = vValueList.at(9);
+		int nHero3Star = atoi(vValueList.at(10).c_str());
+
+
+		return true;
+	}
+
+	return false;
+}
+
 bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 {
 	int nSceneID = RandomTileScene();
@@ -284,10 +331,9 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 
 			m_pSceneProcessModule->RequestEnterScene(self, nSceneID, 0, NFDataList());
 
-			//tell client u shoud adjust tile
-			//m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nPlayerID);
-			//tell client u should load resources
-			//money, diamong, awards, level, name, headicon, 3 heros and the star of that heros
+			//process opponent data
+			ProcessOpponentData(self, xViewOpponent);
+
 			NFMsg::AckSearchOppnent xAckData;
 			xAckData.set_scene_id(nSceneID);
 			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, self);
