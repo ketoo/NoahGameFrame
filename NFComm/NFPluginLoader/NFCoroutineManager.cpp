@@ -146,6 +146,15 @@ void NFCoroutineManager::RemoveRunningID(int id)
     mxRunningList.remove(id);
 }
 
+void NFCoroutineManager::YieldCo(const uint32_t nMilliSecond)
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+	NFSLEEP(nMilliSecond);
+#else
+
+#endif
+}
+
 NFCoroutine* NFCoroutineManager::GetCoroutine(int id)
 {
     if (id >= 0 && id < mnMaxIndex)
