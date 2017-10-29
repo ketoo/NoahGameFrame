@@ -20,7 +20,9 @@
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFITileModule.h"
+#include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -65,6 +67,7 @@ protected:
 
 protected:
 
+	bool ProcessOpponentData(const NFGUID & self, const NFGUID& opponent);
 	bool SearchOpponent(const NFGUID & self);
 
 private:
@@ -79,6 +82,8 @@ private:
 	NFISceneProcessModule* m_pSceneProcessModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFINoSqlModule* m_pNoSqlModule;
+	NFICommonRedisModule* m_pCommonRedisModule;
 
 	std::vector<int> mxTileSceneIDList;
 };
