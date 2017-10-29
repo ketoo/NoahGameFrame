@@ -77,43 +77,26 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
                                               const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
-	//find a tile map and swap scene
 
-	int nSceneID = RandomTileScene();
-	std::string strTileData;
-	NFGUID xViewOpponent;
-	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData))
+	int nSearchCount = 0;
+	bool bRet = false;
+	while (!bRet && nSearchCount <= 5)
 	{
-		NFMsg::AckMiningTitle xTileData;
-		if (xTileData.ParseFromString(strTileData))
-		{
-			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), xViewOpponent);
-			m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightOpponent(), NFGUID());
+		YieldCo(1000 * 2);
 
-			m_pSceneProcessModule->RequestEnterScene(nPlayerID, nSceneID, 0, NFDataList());
-
-			//tell client u shoud adjust tile
-			//m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nPlayerID);
-			//tell client u should load resources
-			NFMsg::AckSearchOppnent xAckData;
-			xAckData.set_scene_id(nSceneID);
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nPlayerID);
-
-			//create the building of the oppnent
-
-			return;
-		}
-		else
-		{
-			//failed
-			NFMsg::AckSearchOppnent xAckData;
-			xAckData.set_scene_id(0);
-			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nPlayerID);
-
-		}
+		bRet = SearchOpponent(nPlayerID);
+		nSearchCount++;
 	}
 
-	m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "",  __FUNCTION__, __LINE__);
+	if (!bRet)
+	{
+		//failed
+		NFMsg::AckSearchOppnent xAckData;
+		xAckData.set_scene_id(0);
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, nPlayerID);
+
+		m_pLogModule->LogNormal(NFILogModule::NLL_ERROR_NORMAL, nPlayerID, "ERROR TO FIND A OPPNENT!", "", __FUNCTION__, __LINE__);
+	}
 }
 
 void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
@@ -284,6 +267,43 @@ int NFCPVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSce
 int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
+}
+
+bool NFCPVPModule::SearchOpponent(const NFGUID & self)
+{
+	int nSceneID = RandomTileScene();
+	std::string strTileData;
+	NFGUID xViewOpponent;
+	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData))
+	{
+		NFMsg::AckMiningTitle xTileData;
+		if (xTileData.ParseFromString(strTileData))
+		{
+			m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), xViewOpponent);
+			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightOpponent(), NFGUID());
+
+			m_pSceneProcessModule->RequestEnterScene(self, nSceneID, 0, NFDataList());
+
+			//tell client u shoud adjust tile
+			//m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xTileData, nPlayerID);
+			//tell client u should load resources
+			//money, diamong, awards, level, name, headicon, 3 heros and the star of that heros
+			NFMsg::AckSearchOppnent xAckData;
+			xAckData.set_scene_id(nSceneID);
+			m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_SEARCH_OPPNENT, xAckData, self);
+
+			//create the building of the oppnent
+
+			return true;
+		}
+		else
+		{
+
+			return false;
+		}
+	}
+
+	return false;
 }
 
 int NFCPVPModule::RandomTileScene()

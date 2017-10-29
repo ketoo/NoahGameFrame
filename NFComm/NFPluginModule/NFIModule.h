@@ -91,6 +91,11 @@ public:
         pPluginManager->StartCoroutine(func);
     }
 
+	virtual void YieldCo(const uint32_t nMilliSecond)
+	{
+		pPluginManager->YieldCo(nMilliSecond);
+	}
+
 	virtual void YieldCo()
 	{
         pPluginManager->YieldCo();
