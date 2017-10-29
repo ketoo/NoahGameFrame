@@ -304,12 +304,12 @@ typedef int64_t NFSOCK;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define NFSPRINTF sprintf_s
 #define NFSTRICMP stricmp
-#define NFSLEEP(s) Sleep(s)
+#define NFSLEEP(s) Sleep(s) //millisecond
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #else
 #define NFSPRINTF snprintf
 #define NFSTRICMP strcasecmp
-#define NFSLEEP(s) usleep(s)
+#define NFSLEEP(s) usleep(s*1000) //millisecond
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 

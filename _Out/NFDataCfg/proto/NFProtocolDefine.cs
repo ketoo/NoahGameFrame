@@ -569,6 +569,7 @@ namespace NFrame
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String Camp = "Camp";// int
 		public static readonly String ConnectKey = "ConnectKey";// string
+		public static readonly String Cup = "Cup";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
@@ -579,6 +580,9 @@ namespace NFrame
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
+		public static readonly String EnemyHeroPos1Star = "EnemyHeroPos1Star";// int
+		public static readonly String EnemyHeroPos2Star = "EnemyHeroPos2Star";// int
+		public static readonly String EnemyHeroPos3Star = "EnemyHeroPos3Star";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
 		public static readonly String FightOpponent = "FightOpponent";// object
@@ -593,8 +597,14 @@ namespace NFrame
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String HeroPos1 = "HeroPos1";// object
+		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
+		public static readonly String HeroPos1Star = "HeroPos1Star";// string
 		public static readonly String HeroPos2 = "HeroPos2";// object
+		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// object
+		public static readonly String HeroPos2Star = "HeroPos2Star";// int
 		public static readonly String HeroPos3 = "HeroPos3";// object
+		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
+		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
 		public static readonly String Job = "Job";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
@@ -611,6 +621,12 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
+		public static readonly String OpponentCup = "OpponentCup";// int
+		public static readonly String OpponentHead = "OpponentHead";// string
+		public static readonly String OpponentHeroPos1 = "OpponentHeroPos1";// string
+		public static readonly String OpponentHeroPos2 = "OpponentHeroPos2";// string
+		public static readonly String OpponentHeroPos3 = "OpponentHeroPos3";// string
+		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE";// int
