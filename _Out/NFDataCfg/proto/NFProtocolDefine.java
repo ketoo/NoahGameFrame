@@ -563,6 +563,7 @@ package nframe;
 		public static final String CRITICAL = "CRITICAL";// int
 		public static final String Camp = "Camp";// int
 		public static final String ConnectKey = "ConnectKey";// string
+		public static final String Cup = "Cup";// int
 		public static final String DEF_FIRE = "DEF_FIRE";// int
 		public static final String DEF_ICE = "DEF_ICE";// int
 		public static final String DEF_LIGHT = "DEF_LIGHT";// int
@@ -573,6 +574,9 @@ package nframe;
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
+		public static final String EnemyHeroPos1Star = "EnemyHeroPos1Star";// int
+		public static final String EnemyHeroPos2Star = "EnemyHeroPos2Star";// int
+		public static final String EnemyHeroPos3Star = "EnemyHeroPos3Star";// int
 		public static final String FightHero = "FightHero";// object
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
 		public static final String FightOpponent = "FightOpponent";// object
@@ -587,8 +591,14 @@ package nframe;
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String HeroPos1 = "HeroPos1";// object
+		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
+		public static final String HeroPos1Star = "HeroPos1Star";// string
 		public static final String HeroPos2 = "HeroPos2";// object
+		public static final String HeroPos2CnfID = "HeroPos2CnfID";// object
+		public static final String HeroPos2Star = "HeroPos2Star";// int
 		public static final String HeroPos3 = "HeroPos3";// object
+		public static final String HeroPos3CnfID = "HeroPos3CnfID";// string
+		public static final String HeroPos3Star = "HeroPos3Star";// int
 		public static final String HomeSceneID = "HomeSceneID";// int
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
@@ -605,6 +615,12 @@ package nframe;
 		public static final String Name = "Name";// string
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
+		public static final String OpponentCup = "OpponentCup";// int
+		public static final String OpponentHead = "OpponentHead";// string
+		public static final String OpponentHeroPos1 = "OpponentHeroPos1";// string
+		public static final String OpponentHeroPos2 = "OpponentHeroPos2";// string
+		public static final String OpponentHeroPos3 = "OpponentHeroPos3";// string
+		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String PrefabPath = "PrefabPath";// string
 		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int

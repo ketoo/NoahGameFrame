@@ -628,6 +628,11 @@ void NFCPluginManager::StartCoroutine(CoroutineFunction func)
     mxCoroutineManager.StartCoroutine(func);
 }
 
+void NFCPluginManager::YieldCo(const uint32_t nMilliSecond)
+{
+	mxCoroutineManager.YieldCo(nMilliSecond);
+}
+
 void NFCPluginManager::YieldCo()
 {
     mxCoroutineManager.YieldCo();

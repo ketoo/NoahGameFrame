@@ -63,6 +63,10 @@ protected:
 	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
+protected:
+
+	bool SearchOpponent(const NFGUID & self);
+
 private:
 	NFITileModule* m_pTileModule;
 	NFIPropertyModule* m_pPropertyModule;

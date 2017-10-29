@@ -89,8 +89,10 @@ public:
     void StartCoroutine(CoroutineFunction func);
 
     void RemoveRunningID(int id);
+	
+	void YieldCo(const uint32_t nMilliSecond);
 
-    void YieldCo();
+	void YieldCo();
 
     void ScheduleJob();
 
