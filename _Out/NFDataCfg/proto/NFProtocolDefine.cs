@@ -638,6 +638,11 @@ namespace NFrame
 		public static readonly String SUCKBLOOD = "SUCKBLOOD";// int
 		public static readonly String Sex = "Sex";// int
 		public static readonly String ShowName = "ShowName";// string
+		public static readonly String Skill1 = "Skill1";// string
+		public static readonly String Skill2 = "Skill2";// string
+		public static readonly String Skill3 = "Skill3";// string
+		public static readonly String Skill4 = "Skill4";// string
+		public static readonly String Skill5 = "Skill5";// string
 		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalLineTime = "TotalLineTime";// object
 		public static readonly String TotalTime = "TotalTime";// int

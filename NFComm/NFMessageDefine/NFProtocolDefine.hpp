@@ -643,6 +643,11 @@ namespace NFrame
 		static const std::string& SUCKBLOOD(){ static std::string x = "SUCKBLOOD"; return x; };// int
 		static const std::string& Sex(){ static std::string x = "Sex"; return x; };// int
 		static const std::string& ShowName(){ static std::string x = "ShowName"; return x; };// string
+		static const std::string& Skill1(){ static std::string x = "Skill1"; return x; };// string
+		static const std::string& Skill2(){ static std::string x = "Skill2"; return x; };// string
+		static const std::string& Skill3(){ static std::string x = "Skill3"; return x; };// string
+		static const std::string& Skill4(){ static std::string x = "Skill4"; return x; };// string
+		static const std::string& Skill5(){ static std::string x = "Skill5"; return x; };// string
 		static const std::string& TeamID(){ static std::string x = "TeamID"; return x; };// object
 		static const std::string& TotalLineTime(){ static std::string x = "TotalLineTime"; return x; };// object
 		static const std::string& TotalTime(){ static std::string x = "TotalTime"; return x; };// int

@@ -83,6 +83,11 @@
 		<Property Id="SUCKBLOOD" Cache="0" Desc="吸血" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Sex" Cache="1" Desc="性别" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ShowName" Cache="1" Desc="显示的名字" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill1" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill2" Cache="1" Desc="Skill2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill3" Cache="1" Desc="Skill3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill4" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Skill5" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="TeamID" Cache="1" Desc="所在队伍ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalLineTime" Cache="1" Desc="今日在线时长{截至至本次上线时间}" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
