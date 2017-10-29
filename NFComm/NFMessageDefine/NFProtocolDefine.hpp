@@ -585,9 +585,6 @@ namespace NFrame
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
-		static const std::string& EnemyHeroPos1Star(){ static std::string x = "EnemyHeroPos1Star"; return x; };// int
-		static const std::string& EnemyHeroPos2Star(){ static std::string x = "EnemyHeroPos2Star"; return x; };// int
-		static const std::string& EnemyHeroPos3Star(){ static std::string x = "EnemyHeroPos3Star"; return x; };// int
 		static const std::string& FightHero(){ static std::string x = "FightHero"; return x; };// object
 		static const std::string& FightHeroCnfID(){ static std::string x = "FightHeroCnfID"; return x; };// string
 		static const std::string& FightOpponent(){ static std::string x = "FightOpponent"; return x; };// object
@@ -629,8 +626,11 @@ namespace NFrame
 		static const std::string& OpponentCup(){ static std::string x = "OpponentCup"; return x; };// int
 		static const std::string& OpponentHead(){ static std::string x = "OpponentHead"; return x; };// string
 		static const std::string& OpponentHeroPos1(){ static std::string x = "OpponentHeroPos1"; return x; };// string
+		static const std::string& OpponentHeroPos1Star(){ static std::string x = "OpponentHeroPos1Star"; return x; };// int
 		static const std::string& OpponentHeroPos2(){ static std::string x = "OpponentHeroPos2"; return x; };// string
+		static const std::string& OpponentHeroPos2Star(){ static std::string x = "OpponentHeroPos2Star"; return x; };// int
 		static const std::string& OpponentHeroPos3(){ static std::string x = "OpponentHeroPos3"; return x; };// string
+		static const std::string& OpponentHeroPos3Star(){ static std::string x = "OpponentHeroPos3Star"; return x; };// int
 		static const std::string& OpponentName(){ static std::string x = "OpponentName"; return x; };// string
 		static const std::string& PHYSICAL_GATE(){ static std::string x = "PHYSICAL_GATE"; return x; };// int
 		static const std::string& PrefabPath(){ static std::string x = "PrefabPath"; return x; };// string

@@ -580,9 +580,6 @@ namespace NFrame
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
-		public static readonly String EnemyHeroPos1Star = "EnemyHeroPos1Star";// int
-		public static readonly String EnemyHeroPos2Star = "EnemyHeroPos2Star";// int
-		public static readonly String EnemyHeroPos3Star = "EnemyHeroPos3Star";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
 		public static readonly String FightOpponent = "FightOpponent";// object
@@ -624,8 +621,11 @@ namespace NFrame
 		public static readonly String OpponentCup = "OpponentCup";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
 		public static readonly String OpponentHeroPos1 = "OpponentHeroPos1";// string
+		public static readonly String OpponentHeroPos1Star = "OpponentHeroPos1Star";// int
 		public static readonly String OpponentHeroPos2 = "OpponentHeroPos2";// string
+		public static readonly String OpponentHeroPos2Star = "OpponentHeroPos2Star";// int
 		public static readonly String OpponentHeroPos3 = "OpponentHeroPos3";// string
+		public static readonly String OpponentHeroPos3Star = "OpponentHeroPos3Star";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
