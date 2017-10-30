@@ -10,14 +10,14 @@
 
 void ExecuteBody(NFCoroutine* co)
 {
-
-
     //std::cout << "ExecuteBody " << co->nID << std::endl;
 
     co->func(co->arg);
 
     co->state = FREE;
     co->pSchdule->RemoveRunningID(co->nID);
+
+
 
     //std::cout << "func finished -- swap " << co->nID << " to -1" << std::endl;
 }
@@ -35,7 +35,7 @@ NFCoroutineManager::NFCoroutineManager()
         mxCoroutineList.push_back(new NFCoroutine(this, i));
     }
 
-	std::cout << "created Coroutine number: " << MAX_COROUTINE_CAPACITY <<std::endl;
+    std::cout << "created Coroutine number: " << MAX_COROUTINE_CAPACITY <<std::endl;
 }
 
 NFCoroutineManager::~NFCoroutineManager()
@@ -57,7 +57,7 @@ void NFCoroutineManager::Resume(int id)
     NFCoroutine* t = GetCoroutine(id);
     if (t->state == SUSPEND)
     {
-        //std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
+        std::cout << this->mnRunningCoroutineID << " swap to " << id << std::endl;
 
         this->mnRunningCoroutineID = id;
 
@@ -75,7 +75,7 @@ void NFCoroutineManager::YieldCo()
         NFCoroutine* t = GetRunningCoroutine();
         t->state = SUSPEND;
 
-        //std::cout << "Yield " << this->mnRunningCoroutineID << " to -1" << std::endl;
+        std::cout << "Yield " << this->mnRunningCoroutineID << " to -1" << std::endl;
 
         this->mnRunningCoroutineID = -1;
 
@@ -105,8 +105,6 @@ void NFCoroutineManager::StartCoroutine(CoroutineFunction func)
 
 void NFCoroutineManager::ScheduleJob()
 {
-    //std::cout << "threadid " << std::this_thread::get_id() << std::endl;
-
 #if NF_PLATFORM != NF_PLATFORM_WIN
     if (mxRunningList.size() > 0)
     {
@@ -146,15 +144,6 @@ void NFCoroutineManager::RemoveRunningID(int id)
     mxRunningList.remove(id);
 }
 
-void NFCoroutineManager::YieldCo(const uint32_t nMilliSecond)
-{
-#if NF_PLATFORM == NF_PLATFORM_WIN
-	NFSLEEP(nMilliSecond);
-#else
-
-#endif
-}
-
 NFCoroutine* NFCoroutineManager::GetCoroutine(int id)
 {
     if (id >= 0 && id < mnMaxIndex)
@@ -178,7 +167,6 @@ NFCoroutine* NFCoroutineManager::GetRunningCoroutine()
 
 NFCoroutine* NFCoroutineManager::AllotCoroutine()
 {
-    //std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
     int id = 0;
     for (; id < mnMaxIndex; ++id)
@@ -200,7 +188,6 @@ NFCoroutine* NFCoroutineManager::AllotCoroutine()
 void NFCoroutineManager::NewMainCoroutine()
 {
 #if NF_PLATFORM != NF_PLATFORM_WIN
-    //std::cout << "threadid " << std::this_thread::get_id() << std::endl;
 
     NFCoroutine* newCo = AllotCoroutine();
     if (newCo == NULL)
@@ -225,5 +212,30 @@ void NFCoroutineManager::NewMainCoroutine()
 
     makecontext(&(newCo->ctx), (void (*)(void)) (ExecuteBody), 1, newCo);
 
+#endif
+}
+
+void NFCoroutineManager::YieldCo(const float fSecond)
+{
+#if NF_PLATFORM == NF_PLATFORM_WIN
+    NFSLEEP(nMilliSecond);
+#else
+    if (this->mnRunningCoroutineID != -1)
+    {
+        NFCoroutine* t = GetRunningCoroutine();
+        t->nYieldTime = fSecond * 1000 + NFGetTimeMS();
+
+        while (1)
+        {
+            if (NFGetTimeMS() >= t->nYieldTime)
+            {
+                break;
+            }
+            else
+            {
+                YieldCo();
+            }
+        }
+    }
 #endif
 }

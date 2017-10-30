@@ -928,7 +928,7 @@ const NFVector3& NFCKernelModule::GetRecordVector3(const NFGUID& self, const std
 NFGUID NFCKernelModule::CreateGUID()
 {
     int64_t value = 0;   
-    uint64_t time = NFGetTime();
+    uint64_t time = NFGetTimeMS();
 
     
     //value = time << 16;

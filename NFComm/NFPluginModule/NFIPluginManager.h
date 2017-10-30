@@ -171,7 +171,7 @@ public:
 	virtual void ExecuteCoScheduler() = 0;
 	virtual void StartCoroutine() = 0;
 	virtual void StartCoroutine(CoroutineFunction func) = 0;
-	virtual void YieldCo(const uint32_t nMilliSecond) = 0;
+	virtual void YieldCo(const float nSecond) = 0;
 	virtual void YieldCo() = 0;
 };
 

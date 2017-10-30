@@ -27,11 +27,17 @@ void YieldFunction()
 	xPluginManager->YieldCo();
 }
 
+void StartFunction()
+{
+    xPluginManager->StartCoroutine();
+}
+
 bool NFCNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
 
-	redis::YieldFunction = &YieldFunction;
+    redis::YieldFunction = &YieldFunction;
+    redis::StartFunction = &StartFunction;
 
 	return true;
 }
