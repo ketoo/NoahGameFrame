@@ -587,6 +587,7 @@ package nframe;
 		public static final String GuildID = "GuildID";// object
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
+		public static final String Head = "Head";// string
 		public static final String HeroPos1 = "HeroPos1";// object
 		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static final String HeroPos1Star = "HeroPos1Star";// string
@@ -613,6 +614,8 @@ package nframe;
 		public static final String OnlineCount = "OnlineCount";// int
 		public static final String OnlineTime = "OnlineTime";// object
 		public static final String OpponentCup = "OpponentCup";// int
+		public static final String OpponentDiamond = "OpponentDiamond";// int
+		public static final String OpponentGold = "OpponentGold";// int
 		public static final String OpponentHead = "OpponentHead";// string
 		public static final String OpponentHeroPos1 = "OpponentHeroPos1";// string
 		public static final String OpponentHeroPos1Star = "OpponentHeroPos1Star";// int
@@ -620,6 +623,7 @@ package nframe;
 		public static final String OpponentHeroPos2Star = "OpponentHeroPos2Star";// int
 		public static final String OpponentHeroPos3 = "OpponentHeroPos3";// string
 		public static final String OpponentHeroPos3Star = "OpponentHeroPos3Star";// int
+		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static final String PrefabPath = "PrefabPath";// string
