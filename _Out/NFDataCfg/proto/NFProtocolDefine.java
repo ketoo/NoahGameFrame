@@ -576,7 +576,7 @@ package nframe;
 		public static final String EXP = "EXP";// int
 		public static final String FightHero = "FightHero";// object
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
-		public static final String FightOpponent = "FightOpponent";// object
+		public static final String FightingOpponent = "FightingOpponent";// object
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
 		public static final String GambleDiamond = "GambleDiamond";// int
@@ -598,6 +598,12 @@ package nframe;
 		public static final String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static final String HeroPos3Star = "HeroPos3Star";// int
 		public static final String HomeSceneID = "HomeSceneID";// int
+		public static final String Item1 = "Item1";// string
+		public static final String Item1UsedCount = "Item1UsedCount";// int
+		public static final String Item2 = "Item2";// string
+		public static final String Item2UsedCount = "Item2UsedCount";// int
+		public static final String Item3 = "Item3";// string
+		public static final String Item3UsedCount = "Item3UsedCount";// int
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
 		public static final String Level = "Level";// int
@@ -639,15 +645,64 @@ package nframe;
 		public static final String Skill1 = "Skill1";// string
 		public static final String Skill2 = "Skill2";// string
 		public static final String Skill3 = "Skill3";// string
-		public static final String Skill4 = "Skill4";// string
-		public static final String Skill5 = "Skill5";// string
 		public static final String TeamID = "TeamID";// object
 		public static final String TotalLineTime = "TotalLineTime";// object
 		public static final String TotalTime = "TotalTime";// int
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String VIPLevel = "VIPLevel";// int
 		public static final String ViewOpponent = "ViewOpponent";// object
+		public static final String WarEventTime = "WarEventTime";// int
+		public static final String WarID = "WarID";// object
 		// Record
+		public class AttackList
+		{
+			//Class name
+			public static final String ThisName = "AttackList";
+			public static final int WarID = 0;//string
+			public static final int AttackerID = 1;//object
+			public static final int BeAttackerID = 2;//object
+			public static final int AttackerName = 3;//string
+			public static final int BeAttackerName = 4;//string
+			public static final int AttackerLevel = 5;//int
+			public static final int BeAttackerLevel = 6;//int
+			public static final int AttackerCup = 7;//int
+			public static final int BeAttackerCup = 8;//int
+			public static final int AttackerHero1 = 9;//string
+			public static final int AttackerHero2 = 10;//string
+			public static final int AttackerHero3 = 11;//string
+			public static final int AttackerHero1Star = 12;//int
+			public static final int AttackerHero2Star = 13;//int
+			public static final int AttackerHero3Star = 14;//int
+			public static final int BeAttackerHero1 = 15;//string
+			public static final int BeAttackerHero2 = 16;//string
+			public static final int BeAttackerHero3 = 17;//string
+			public static final int BeAttackerHero1Star = 18;//int
+			public static final int BeAttackerHero2Star = 19;//int
+			public static final int BeAttackerHero3Star = 20;//int
+			public static final int Gold = 21;//int
+			public static final int Diamond = 22;//int
+			public static final int Winner = 23;//object
+			public static final int WarStar = 24;//int
+			public static final int EventTime = 25;//int
+			public static final int CostTime = 26;//int
+			public static final int Item1 = 27;//string
+			public static final int Item1Count = 28;//int
+			public static final int Item2 = 29;//string
+			public static final int Item2Count = 30;//int
+			public static final int Item3 = 31;//string
+			public static final int Item3Count = 32;//int
+			public static final int BuildingCount = 33;//int
+			public static final int DestroiedBuilding = 34;//int
+			public static final int MasterCount = 35;//int
+			public static final int KilledMasterCount = 36;//int
+			public static final int KilledHero1 = 37;//int
+			public static final int KilledHero2 = 38;//int
+			public static final int KilledHero3 = 39;//int
+			public static final int DeadHero1 = 40;//int
+			public static final int DeadHero2 = 41;//int
+			public static final int DeadHero3 = 42;//int
+
+		}
 		public class BagEquipList
 		{
 			//Class name
@@ -686,6 +741,55 @@ package nframe;
 			public static final int Bound = 2;//int
 			public static final int ExpiredType = 3;//int
 			public static final int Date = 4;//int
+
+		}
+		public class BeAccackList
+		{
+			//Class name
+			public static final String ThisName = "BeAccackList";
+			public static final int WarID = 0;//string
+			public static final int AttackerID = 1;//object
+			public static final int BeAttackerID = 2;//object
+			public static final int AttackerName = 3;//string
+			public static final int BeAttackerName = 4;//string
+			public static final int AttackerLevel = 5;//int
+			public static final int BeAttackerLevel = 6;//int
+			public static final int AttackerCup = 7;//int
+			public static final int BeAttackerCup = 8;//int
+			public static final int AttackerHero1 = 9;//string
+			public static final int AttackerHero2 = 10;//string
+			public static final int AttackerHero3 = 11;//string
+			public static final int AttackerHero1Star = 12;//int
+			public static final int AttackerHero2Star = 13;//int
+			public static final int AttackerHero3Star = 14;//int
+			public static final int BeAttackerHero1 = 15;//string
+			public static final int BeAttackerHero2 = 16;//string
+			public static final int BeAttackerHero3 = 17;//string
+			public static final int BeAttackerHero1Star = 18;//int
+			public static final int BeAttackerHero2Star = 19;//int
+			public static final int BeAttackerHero3Star = 20;//int
+			public static final int Gold = 21;//int
+			public static final int Diamond = 22;//int
+			public static final int Winner = 23;//object
+			public static final int WarStar = 24;//int
+			public static final int EventTime = 25;//int
+			public static final int CostTime = 26;//int
+			public static final int Item1 = 27;//string
+			public static final int Item1Count = 28;//int
+			public static final int Item2 = 29;//string
+			public static final int Item2Count = 30;//int
+			public static final int Item3 = 31;//string
+			public static final int Item3Count = 32;//int
+			public static final int BuildingCount = 33;//int
+			public static final int DestroiedBuilding = 34;//int
+			public static final int MasterCount = 35;//int
+			public static final int KilledMasterCount = 36;//int
+			public static final int KilledHero1 = 37;//int
+			public static final int KilledHero2 = 38;//int
+			public static final int KilledHero3 = 39;//int
+			public static final int DeadHero1 = 40;//int
+			public static final int DeadHero2 = 41;//int
+			public static final int DeadHero3 = 42;//int
 
 		}
 		public class BuildingList

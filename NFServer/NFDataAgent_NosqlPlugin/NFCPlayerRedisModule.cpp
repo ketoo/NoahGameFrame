@@ -20,7 +20,64 @@ bool NFCPlayerRedisModule::Init()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	
+	m_pKernelModule->RegisterCommonPropertyEvent(this, &NFCPlayerRedisModule::OnPropertyCommonEvent);
+	m_pKernelModule->RegisterCommonRecordEvent(this, &NFCPlayerRedisModule::OnRecordCommonEvent);
+
 	return true;
+}
+
+int NFCPlayerRedisModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	if (strClassName == NFrame::Player::ThisName())
+	{
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = pObject->GetPropertyManager();
+			if (pPropertyManager)
+			{
+				NF_SHARE_PTR<NFIProperty> pPropertyInfo = pPropertyManager->GetElement(strPropertyName);
+				if (pPropertyInfo)
+				{
+					if (pPropertyInfo->GetForce())
+					{
+						//save data with real-time
+					}
+				}
+			}
+		}
+		
+	}
+
+	return 0;
+}
+
+int NFCPlayerRedisModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+{
+	const std::string& strClassName = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ClassName());
+	if (strClassName == NFrame::Player::ThisName())
+	{
+		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject(self);
+		if (pObject)
+		{
+			NF_SHARE_PTR<NFIRecordManager> pRecordManager = pObject->GetRecordManager();
+			if (pRecordManager)
+			{
+				NF_SHARE_PTR<NFIRecord> pRecordInfo = pRecordManager->GetElement(xEventData.strRecordName);
+				if (pRecordInfo)
+				{
+					if (pRecordInfo->GetForce())
+					{
+						//save data with real-time
+					}
+				}
+			}
+		}
+
+	}
+
+	return 0;
 }
 
 bool NFCPlayerRedisModule::Shut()
