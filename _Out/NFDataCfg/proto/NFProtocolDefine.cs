@@ -593,6 +593,7 @@ namespace NFrame
 		public static readonly String GuildID = "GuildID";// object
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
+		public static readonly String Head = "Head";// string
 		public static readonly String HeroPos1 = "HeroPos1";// object
 		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static readonly String HeroPos1Star = "HeroPos1Star";// string
@@ -619,6 +620,8 @@ namespace NFrame
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
 		public static readonly String OpponentCup = "OpponentCup";// int
+		public static readonly String OpponentDiamond = "OpponentDiamond";// int
+		public static readonly String OpponentGold = "OpponentGold";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
 		public static readonly String OpponentHeroPos1 = "OpponentHeroPos1";// string
 		public static readonly String OpponentHeroPos1Star = "OpponentHeroPos1Star";// int
@@ -626,6 +629,7 @@ namespace NFrame
 		public static readonly String OpponentHeroPos2Star = "OpponentHeroPos2Star";// int
 		public static readonly String OpponentHeroPos3 = "OpponentHeroPos3";// string
 		public static readonly String OpponentHeroPos3Star = "OpponentHeroPos3Star";// int
+		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
 		public static readonly String PrefabPath = "PrefabPath";// string

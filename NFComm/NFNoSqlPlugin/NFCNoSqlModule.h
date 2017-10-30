@@ -17,6 +17,8 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
+void YieldFunction();
+
 class NFCNoSqlModule
     : public NFINoSqlModule
 {

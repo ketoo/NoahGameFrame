@@ -59,6 +59,8 @@ typedef void* BUFPTR;
 #include "./Dependencies/common/lexical_cast.hpp"
 #include "./Dependencies/common/variant.hpp"
 
+typedef void(*CoroutineYieldFunction)();
+
 #ifdef _WIN32
 #include "anet_win32.h"
 #ifndef INFINITY
@@ -88,7 +90,7 @@ namespace redis
 {
   template<typename CONSISTENT_HASHER>
   class base_client;
-  
+
   enum reply_t
   {
     no_reply,
@@ -383,13 +385,23 @@ namespace redis
     std::string multiplexing_api;
     std::map<std::string, std::string> param_map;
   };
-  
+
+  static CoroutineYieldFunction YieldFunction = NULL;
+
   inline ssize_t recv_or_throw(int fd, void* buf, size_t n, int flags)
   {
     ssize_t bytes_received;
     
-    do
-      bytes_received = ::recv(fd, (BUFPTR)buf, n, flags);
+	do
+	{
+		//YieldCo();
+		if (YieldFunction)
+		{
+			YieldFunction();
+		}
+
+		bytes_received = ::recv(fd, (BUFPTR)buf, n, flags);
+	}
     while(bytes_received < static_cast<ssize_t>(0) && errno == EINTR);
     
     if( bytes_received == static_cast<ssize_t>(0) )

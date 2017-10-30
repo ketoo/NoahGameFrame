@@ -37,7 +37,7 @@ bool NFCTileModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
 
-	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::ReqMineTile)) { return false; }
+	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::OnReqMineTileProcess)) { return false; }
     return true;
 }
 
@@ -118,7 +118,7 @@ bool NFCTileModule::GetOnlinePlayerTileData(const NFGUID& self, std::string& str
 	return false;
 }
 
-void NFCTileModule::ReqMineTile(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
+void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
@@ -478,8 +478,6 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 				pTile->set_opr(xStateData->state);
 			}
 		}
-
-
 	}
 
 	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataBuilding = xTileData->mxTileBuilding.First();
