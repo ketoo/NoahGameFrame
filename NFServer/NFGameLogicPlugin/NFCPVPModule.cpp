@@ -133,7 +133,7 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), xViewOpponent);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::WarID(), xWarGUID);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFGUID());
-	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::WarEventTime(), NFGetTime());
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::WarEventTime(), NFGetTimeMS());
 
 	int nGambleGold = xMsg.gold();
 	int nGambleDiamond = xMsg.diamond();
@@ -492,7 +492,7 @@ void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int
 
 
 	int64_t nEventTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::WarEventTime());
-	int64_t nCostTime = NFGetTime() - nEventTime;
+	int64_t nCostTime = NFGetTimeMS() - nEventTime;
 
 	xDataList->SetInt(NFrame::Player::AttackList::EventTime, nEventTime);
 	xDataList->SetInt(NFrame::Player::AttackList::WarStar, nStar);
