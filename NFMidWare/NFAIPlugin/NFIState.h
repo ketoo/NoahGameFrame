@@ -12,14 +12,14 @@
 #include "NFComm/NFCore/NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 //所有的状态
-enum NFAI_MOVE_TYPE
+enum NFAI_NPC_TYPE
 {
-	NO_MOVE_TYPE,              // 不走的，塔等
-	MOVE_BY_POINT_LIST,        // 路径巡逻
-	MOVE_BY_RANDOM,            // 随机巡逻
-	MOVE_BY_PLAYER_AI,         // Player's ai
+	BUILDING_TYPE,
+	MASTER_TYPE,
+	HERO_TYPE,
 };
 
 //所有的状态

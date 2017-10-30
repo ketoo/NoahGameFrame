@@ -8,7 +8,7 @@
 		<Property Id="MaxCount" Cache="0" Desc="最大入驻公会" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="Station" Cache="0"	 Col="9"	 Private="1"	 Public="0"	 Row="100"	 Save="1"	 Upload="0"	 >
+		<Record Id="Station" Cache="0"	 Col="9"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="100"	 Save="1"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="object"	Tag="GuildID"/><!--- Station-->
 			<Col Type ="string"	Tag="GuildName"/>

@@ -167,6 +167,8 @@ bool NFCElementModule::Load(rapidxml::xml_node<>* attrNode, NF_SHARE_PTR<NFIClas
             xRecord->SetPrivate(pRecord->GetPrivate());
             xRecord->SetSave(pRecord->GetSave());
             xRecord->SetCache(pRecord->GetCache());
+			xRecord->SetRef(pRecord->GetRef());
+			xRecord->SetForce(pRecord->GetForce());
 			xRecord->SetUpload(pRecord->GetUpload());
 
             pRecord = pClassRecordManager->Next();

@@ -27,7 +27,7 @@
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="FightHero" Cache="1" Desc="Hero" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="FightHeroCnfID" Cache="1" Desc="Hero" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
-		<Property Id="FightOpponent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="FightingOpponent" Cache="0" Desc="pvp_oppnent" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="FirstTarget" Cache="1" Desc="首要目标" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="GMLevel" Cache="1" Desc="GM等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="GambleDiamond" Cache="0" Desc="" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -49,6 +49,12 @@
 		<Property Id="HeroPos3CnfID" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="HeroPos3Star" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HomeSceneID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item1" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item1UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item2" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item2UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="Item3" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item3UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -90,17 +96,62 @@
 		<Property Id="Skill1" Cache="1" Desc="Skill1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Skill2" Cache="1" Desc="Skill2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Skill3" Cache="1" Desc="Skill3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Skill4" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
-		<Property Id="Skill5" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="TeamID" Cache="1" Desc="所在队伍ID" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalLineTime" Cache="1" Desc="今日在线时长{截至至本次上线时间}" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="TotalTime" Cache="1" Desc="在线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPEXP" Cache="1" Desc="VIP经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="VIPLevel" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ViewOpponent" Cache="0" Desc="when searching" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="WarEventTime" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="WarID" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 	</Propertys>
 	<Records>
-		<Record Id="BagEquipList" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="256"	 Save="0"	 Upload="0"	 >
+		<Record Id="AttackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="WarID"/><!--- 0-->
+			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
+			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerName"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerCup"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerCup"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero1"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero2"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero1Star"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero2Star"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero3Star"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero1"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero2"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero1Star"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero2Star"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero3Star"/><!--- 0-->
+			<Col Type ="int"	Tag="Gold"/><!--- 0-->
+			<Col Type ="int"	Tag="Diamond"/><!--- 0-->
+			<Col Type ="object"	Tag="Winner"/><!--- 0-->
+			<Col Type ="int"	Tag="WarStar"/><!--- 0-->
+			<Col Type ="int"	Tag="EventTime"/><!--- 0-->
+			<Col Type ="int"	Tag="CostTime"/><!--- 0-->
+			<Col Type ="string"	Tag="Item1"/><!--- 0-->
+			<Col Type ="int"	Tag="Item1Count"/><!--- 0-->
+			<Col Type ="string"	Tag="Item2"/><!--- 0-->
+			<Col Type ="int"	Tag="Item2Count"/><!--- 0-->
+			<Col Type ="string"	Tag="Item3"/><!--- 0-->
+			<Col Type ="int"	Tag="Item3Count"/><!--- 0-->
+			<Col Type ="int"	Tag="BuildingCount"/><!--- 0-->
+			<Col Type ="int"	Tag="DestroiedBuilding"/><!--- 0-->
+			<Col Type ="int"	Tag="MasterCount"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledMasterCount"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero1"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero2"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero1"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero2"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero3"/><!--- 0-->
+		</Record>
+		<Record Id="BagEquipList" Cache="1"	 Col="23"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="object"	Tag="WearGUID"/><!--- 普通背包-->
 			<Col Type ="string"	Tag="ConfigID"/>
@@ -125,28 +176,73 @@
 			<Col Type ="int"	Tag="ElementLevel4_ICE"/>
 			<Col Type ="int"	Tag="ElementLevel5_POISON"/>
 		</Record>
-		<Record Id="BagItemList" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+		<Record Id="BagItemList" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
 			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
 			<Col Type ="int"	Tag="Bound"/>
 			<Col Type ="int"	Tag="ExpiredType"/>
 			<Col Type ="int"	Tag="Date"/>
 		</Record>
-		<Record Id="BuildingList" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+		<Record Id="BeAccackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="WarID"/><!--- 0-->
+			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
+			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerName"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerLevel"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerCup"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerCup"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero1"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero2"/><!--- 0-->
+			<Col Type ="string"	Tag="AttackerHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero1Star"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero2Star"/><!--- 0-->
+			<Col Type ="int"	Tag="AttackerHero3Star"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero1"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero2"/><!--- 0-->
+			<Col Type ="string"	Tag="BeAttackerHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero1Star"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero2Star"/><!--- 0-->
+			<Col Type ="int"	Tag="BeAttackerHero3Star"/><!--- 0-->
+			<Col Type ="int"	Tag="Gold"/><!--- 0-->
+			<Col Type ="int"	Tag="Diamond"/><!--- 0-->
+			<Col Type ="object"	Tag="Winner"/><!--- 0-->
+			<Col Type ="int"	Tag="WarStar"/><!--- 0-->
+			<Col Type ="int"	Tag="EventTime"/><!--- 0-->
+			<Col Type ="int"	Tag="CostTime"/><!--- 0-->
+			<Col Type ="string"	Tag="Item1"/><!--- 0-->
+			<Col Type ="int"	Tag="Item1Count"/><!--- 0-->
+			<Col Type ="string"	Tag="Item2"/><!--- 0-->
+			<Col Type ="int"	Tag="Item2Count"/><!--- 0-->
+			<Col Type ="string"	Tag="Item3"/><!--- 0-->
+			<Col Type ="int"	Tag="Item3Count"/><!--- 0-->
+			<Col Type ="int"	Tag="BuildingCount"/><!--- 0-->
+			<Col Type ="int"	Tag="DestroiedBuilding"/><!--- 0-->
+			<Col Type ="int"	Tag="MasterCount"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledMasterCount"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero1"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero2"/><!--- 0-->
+			<Col Type ="int"	Tag="KilledHero3"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero1"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero2"/><!--- 0-->
+			<Col Type ="int"	Tag="DeadHero3"/><!--- 0-->
+		</Record>
+		<Record Id="BuildingList" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingCnfID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		</Record>
-		<Record Id="BuildingListProduce" Cache="1"	 Col="5"	 Private="1"	 Public="0"	 Row="128"	 Save="1"	 Upload="0"	 >
+		<Record Id="BuildingListProduce" Cache="1"	 Col="5"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="1"	 Upload="0"	 >
 			<Col Type ="string"	Tag="BuildingCnfID"/><!--- Desc-->
 			<Col Type ="object"	Tag="BuildingGUID"/>
 			<Col Type ="int"	Tag="State"/>
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		</Record>
-		<Record Id="CommValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="CommValue" Cache="0"	 Col="29"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -177,13 +273,13 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
-		<Record Id="DropItemList" Cache="0"	 Col="4"	 Private="1"	 Public="0"	 Row="128"	 Save="0"	 Upload="0"	 >
+		<Record Id="DropItemList" Cache="0"	 Col="4"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="ItemCount"/>
 			<Col Type ="vector3"	Tag="Postion"/>
 		</Record>
-		<Record Id="HeroValue" Cache="0"	 Col="29"	 Private="1"	 Public="1"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroValue" Cache="0"	 Col="29"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -214,7 +310,7 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
-		<Record Id="PlayerHero" Cache="1"	 Col="23"	 Private="1"	 Public="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+		<Record Id="PlayerHero" Cache="1"	 Col="23"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="Activated"/>
@@ -239,12 +335,12 @@
 			<Col Type ="string"	Tag="Skill5"/>
 			<Col Type ="string"	Tag="FightSkill"/>
 		</Record>
-		<Record Id="TaskList" Cache="1"	 Col="3"	 Private="1"	 Public="0"	 Row="512"	 Save="0"	 Upload="0"	 >
+		<Record Id="TaskList" Cache="1"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
 			<Col Type ="int"	Tag="TaskStatus"/><!--- 任务表-->
 			<Col Type ="int"	Tag="Process"/>
 		</Record>
-		<Record Id="TaskMonsterList" Cache="1"	 Col="4"	 Private="1"	 Public="0"	 Row="8"	 Save="0"	 Upload="0"	 >
+		<Record Id="TaskMonsterList" Cache="1"	 Col="4"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="MonsterID"/><!--- Desc-->
 			<Col Type ="int"	Tag="CurrentKillCount"/><!--- 任务杀怪表-->
 			<Col Type ="int"	Tag="RequireKillCount"/>

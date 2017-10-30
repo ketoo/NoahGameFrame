@@ -42,6 +42,7 @@ public:
 	virtual bool LoadPlayerTile(const int nSceneID, const NFGUID& self, std::string& strTileData);
 	virtual bool LoadPlayerTileRandom(const int nSceneID, NFGUID& xPlayer, std::string& strTileData);
 	virtual bool LoadPlayerTileRandomCache(const NFGUID& xPlayer, std::string& strTileData);
+
 protected:
 	std::string GetOnlineGameServerKey();
 	std::string GetOnlineProxyServerKey();
@@ -54,6 +55,8 @@ protected:
 	void OnOnline(const NFGUID& self);
 	void OnOffline(const NFGUID& self);
 
+	int OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar);
+	int OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar);
 
 private:
 	struct PlayerDataCache

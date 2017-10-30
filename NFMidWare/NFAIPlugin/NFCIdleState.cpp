@@ -83,12 +83,12 @@ bool NFCIdleState::DoRule(const NFGUID& self, NFIStateMachine* pStateMachine)
 bool NFCIdleState::RandomIdle(const NFGUID& self, NFIStateMachine* pStateMachine)
 {
 	//如果是定点的，则不走，继续idle
-	NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
+	NFAI_NPC_TYPE eMoveType = (NFAI_NPC_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
 
 	switch (eMoveType)
 	{
-	case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
-	case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
+	case NFAI_NPC_TYPE::MASTER_TYPE:
+	case NFAI_NPC_TYPE::HERO_TYPE:
 		{
 			float fRand = (float)(rand() / double(RAND_MAX));
 			if (fRand < 0.4f)

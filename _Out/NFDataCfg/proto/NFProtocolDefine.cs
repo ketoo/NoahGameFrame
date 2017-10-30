@@ -582,7 +582,7 @@ namespace NFrame
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
-		public static readonly String FightOpponent = "FightOpponent";// object
+		public static readonly String FightingOpponent = "FightingOpponent";// object
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
 		public static readonly String GambleDiamond = "GambleDiamond";// int
@@ -604,6 +604,12 @@ namespace NFrame
 		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
+		public static readonly String Item1 = "Item1";// string
+		public static readonly String Item1UsedCount = "Item1UsedCount";// int
+		public static readonly String Item2 = "Item2";// string
+		public static readonly String Item2UsedCount = "Item2UsedCount";// int
+		public static readonly String Item3 = "Item3";// string
+		public static readonly String Item3UsedCount = "Item3UsedCount";// int
 		public static readonly String Job = "Job";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
 		public static readonly String Level = "Level";// int
@@ -645,15 +651,64 @@ namespace NFrame
 		public static readonly String Skill1 = "Skill1";// string
 		public static readonly String Skill2 = "Skill2";// string
 		public static readonly String Skill3 = "Skill3";// string
-		public static readonly String Skill4 = "Skill4";// string
-		public static readonly String Skill5 = "Skill5";// string
 		public static readonly String TeamID = "TeamID";// object
 		public static readonly String TotalLineTime = "TotalLineTime";// object
 		public static readonly String TotalTime = "TotalTime";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
 		public static readonly String ViewOpponent = "ViewOpponent";// object
+		public static readonly String WarEventTime = "WarEventTime";// int
+		public static readonly String WarID = "WarID";// object
 		// Record
+		public class AttackList
+		{
+			//Class name
+			public static readonly String ThisName = "AttackList";
+			public const int WarID = 0;//string
+			public const int AttackerID = 1;//object
+			public const int BeAttackerID = 2;//object
+			public const int AttackerName = 3;//string
+			public const int BeAttackerName = 4;//string
+			public const int AttackerLevel = 5;//int
+			public const int BeAttackerLevel = 6;//int
+			public const int AttackerCup = 7;//int
+			public const int BeAttackerCup = 8;//int
+			public const int AttackerHero1 = 9;//string
+			public const int AttackerHero2 = 10;//string
+			public const int AttackerHero3 = 11;//string
+			public const int AttackerHero1Star = 12;//int
+			public const int AttackerHero2Star = 13;//int
+			public const int AttackerHero3Star = 14;//int
+			public const int BeAttackerHero1 = 15;//string
+			public const int BeAttackerHero2 = 16;//string
+			public const int BeAttackerHero3 = 17;//string
+			public const int BeAttackerHero1Star = 18;//int
+			public const int BeAttackerHero2Star = 19;//int
+			public const int BeAttackerHero3Star = 20;//int
+			public const int Gold = 21;//int
+			public const int Diamond = 22;//int
+			public const int Winner = 23;//object
+			public const int WarStar = 24;//int
+			public const int EventTime = 25;//int
+			public const int CostTime = 26;//int
+			public const int Item1 = 27;//string
+			public const int Item1Count = 28;//int
+			public const int Item2 = 29;//string
+			public const int Item2Count = 30;//int
+			public const int Item3 = 31;//string
+			public const int Item3Count = 32;//int
+			public const int BuildingCount = 33;//int
+			public const int DestroiedBuilding = 34;//int
+			public const int MasterCount = 35;//int
+			public const int KilledMasterCount = 36;//int
+			public const int KilledHero1 = 37;//int
+			public const int KilledHero2 = 38;//int
+			public const int KilledHero3 = 39;//int
+			public const int DeadHero1 = 40;//int
+			public const int DeadHero2 = 41;//int
+			public const int DeadHero3 = 42;//int
+
+		}
 		public class BagEquipList
 		{
 			//Class name
@@ -692,6 +747,55 @@ namespace NFrame
 			public const int Bound = 2;//int
 			public const int ExpiredType = 3;//int
 			public const int Date = 4;//int
+
+		}
+		public class BeAccackList
+		{
+			//Class name
+			public static readonly String ThisName = "BeAccackList";
+			public const int WarID = 0;//string
+			public const int AttackerID = 1;//object
+			public const int BeAttackerID = 2;//object
+			public const int AttackerName = 3;//string
+			public const int BeAttackerName = 4;//string
+			public const int AttackerLevel = 5;//int
+			public const int BeAttackerLevel = 6;//int
+			public const int AttackerCup = 7;//int
+			public const int BeAttackerCup = 8;//int
+			public const int AttackerHero1 = 9;//string
+			public const int AttackerHero2 = 10;//string
+			public const int AttackerHero3 = 11;//string
+			public const int AttackerHero1Star = 12;//int
+			public const int AttackerHero2Star = 13;//int
+			public const int AttackerHero3Star = 14;//int
+			public const int BeAttackerHero1 = 15;//string
+			public const int BeAttackerHero2 = 16;//string
+			public const int BeAttackerHero3 = 17;//string
+			public const int BeAttackerHero1Star = 18;//int
+			public const int BeAttackerHero2Star = 19;//int
+			public const int BeAttackerHero3Star = 20;//int
+			public const int Gold = 21;//int
+			public const int Diamond = 22;//int
+			public const int Winner = 23;//object
+			public const int WarStar = 24;//int
+			public const int EventTime = 25;//int
+			public const int CostTime = 26;//int
+			public const int Item1 = 27;//string
+			public const int Item1Count = 28;//int
+			public const int Item2 = 29;//string
+			public const int Item2Count = 30;//int
+			public const int Item3 = 31;//string
+			public const int Item3Count = 32;//int
+			public const int BuildingCount = 33;//int
+			public const int DestroiedBuilding = 34;//int
+			public const int MasterCount = 35;//int
+			public const int KilledMasterCount = 36;//int
+			public const int KilledHero1 = 37;//int
+			public const int KilledHero2 = 38;//int
+			public const int KilledHero3 = 39;//int
+			public const int DeadHero1 = 40;//int
+			public const int DeadHero2 = 41;//int
+			public const int DeadHero3 = 42;//int
 
 		}
 		public class BuildingList
