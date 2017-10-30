@@ -133,6 +133,7 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), xViewOpponent);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::WarID(), xWarGUID);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFGUID());
+	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::WarEventTime(), NFGetTime());
 
 	int nGambleGold = xMsg.gold();
 	int nGambleDiamond = xMsg.diamond();
@@ -215,10 +216,6 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, nPlayerID);
 
-}
-
-void NFCPVPModule::OnReqPVPRecordProcess(const NFSOCK nSockIndex, const int nMsgID, const char * msg, const uint32_t nLen)
-{
 }
 
 void NFCPVPModule::FindAllTileScene()
@@ -494,13 +491,15 @@ void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int
 	xDataList->SetInt(NFrame::Player::AttackList::Item3Count, m_pKernelModule->GetPropertyInt(self, NFrame::Player::Item3UsedCount()));
 
 
-	xDataList->SetInt(NFrame::Player::AttackList::EventTime, m_pKernelModule->GetPropertyInt(self, NFrame::Player::WarEventTime()));
-	xDataList->SetInt(NFrame::Player::AttackList::WarStar, nStar);
-	//NFGetTime() / 1000f
-	//m_pKernelModule->SetPropertyInt(NFrame::Player::AttackList::CostTime(), m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::WarEventTime()));
+	int64_t nEventTime = m_pKernelModule->GetPropertyInt(self, NFrame::Player::WarEventTime());
+	int64_t nCostTime = NFGetTime() - nEventTime;
 
+	xDataList->SetInt(NFrame::Player::AttackList::EventTime, nEventTime);
+	xDataList->SetInt(NFrame::Player::AttackList::WarStar, nStar);
+	xDataList->SetInt(NFrame::Player::AttackList::CostTime, nCostTime);
 	xDataList->SetInt(NFrame::Player::AttackList::Gold, nGold);
 	xDataList->SetInt(NFrame::Player::AttackList::Diamond, nDiamond);
+
 	if (nStar >= 2)
 	{
 		xDataList->SetObject(NFrame::Player::AttackList::Winner, self);
@@ -513,6 +512,8 @@ void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int
 	xAttackWarRecord->AddRow(-1, *xDataList);
 
 	////////for beattacker////////////////////////////////////
+
+
 
 }
 
