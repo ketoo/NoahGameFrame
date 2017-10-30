@@ -34,12 +34,12 @@ bool NFCPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
     if (!NFIState::Execute(self, pStateMachine))
     {
 			NFGUID ident = m_pHateModule->QueryMaxHateObject(self);
-			NFAI_MOVE_TYPE eMoveType = (NFAI_MOVE_TYPE)(m_pKernelModule->GetPropertyInt(self, "MoveType"));
+			NFAI_NPC_TYPE eMoveType = (NFAI_NPC_TYPE)(m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType()));
 
 			//如果是定点的，则不走，继续idle
 			switch (eMoveType)
 			{
-			case NFAI_MOVE_TYPE::MOVE_BY_POINT_LIST:
+			case NFAI_NPC_TYPE::MASTER_TYPE:
 				{
 					//查找是否有可以攻击的对象
 					if (!ident.IsNull())
@@ -54,7 +54,7 @@ bool NFCPatrolState::Execute(const NFGUID& self, NFIStateMachine* pStateMachine)
 				}
 				break;
 
-			case NFAI_MOVE_TYPE::MOVE_BY_RANDOM:
+			case NFAI_NPC_TYPE::HERO_TYPE:
 				{
 					//查找是否有可以攻击的对象
 					if (!ident.IsNull())

@@ -156,6 +156,8 @@ public:
     virtual const bool GetPublic() = 0;
     virtual const bool GetPrivate() = 0;
     virtual const bool GetCache() = 0;
+	virtual const bool GetRef() = 0;
+	virtual const bool GetForce() = 0;
 	virtual const bool GetUpload() = 0;
     virtual const std::string& GetName() const = 0;
 
@@ -164,6 +166,8 @@ public:
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetCache(const bool bCache) = 0;
+	virtual void SetRef(const bool bRef) = 0;
+	virtual void SetForce(const bool bForce) = 0;
 	virtual void SetUpload(const bool bUpload) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;

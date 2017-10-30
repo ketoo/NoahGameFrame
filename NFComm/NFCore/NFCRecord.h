@@ -115,6 +115,10 @@ public:
 
     virtual const bool GetCache();
 
+	virtual const bool GetRef();
+
+	virtual const bool GetForce();
+
 	virtual const bool GetUpload();
 
     virtual const bool GetPublic();
@@ -125,7 +129,11 @@ public:
 
     virtual void SetSave(const bool bSave);
 
-    virtual void SetCache(const bool bCache);
+	virtual void SetCache(const bool bCache);
+
+	virtual void SetRef(const bool bRef);
+
+	virtual void SetForce(const bool bForce);
 
 	virtual void SetUpload(const bool bUpload);
 
@@ -167,7 +175,9 @@ protected:
     bool mbSave;
     bool mbPublic;
     bool mbPrivate;
-    bool mbCache;
+	bool mbCache;
+	bool mbRef;
+	bool mbForce;
 	bool mbUpload;
     std::string mstrRecordName;
 
