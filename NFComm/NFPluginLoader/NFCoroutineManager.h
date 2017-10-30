@@ -12,6 +12,7 @@
 #include <thread>
 #include <vector>
 #include <list>
+#include <iostream>
 
 #ifdef __APPLE__
 #define _XOPEN_SOURCE
@@ -25,6 +26,12 @@
 #define NF_PLATFORM_APPLE 3
 
 #define  NF_PLATFORM NF_PLATFORM_APPLE
+
+//millisecond
+inline int64_t NFGetTimeMS()
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
 
 typedef void (* CoroutineFunction)(void* arg);
 #else
@@ -60,9 +67,11 @@ public:
         pSchdule = p;
         state = CoroutineState::FREE;
         nID = id;
+        nYieldTime = 0;
     }
 
     CoroutineFunction func;
+    uint64_t nYieldTime;
     void* arg;
     enum CoroutineState state;
     int nID;
@@ -85,14 +94,14 @@ public:
 
     void Init(CoroutineFunction func);
 
-	void StartCoroutine();
+    void StartCoroutine();
     void StartCoroutine(CoroutineFunction func);
 
     void RemoveRunningID(int id);
-	
-	void YieldCo(const uint32_t nMilliSecond);
 
-	void YieldCo();
+    void YieldCo(const float fSecond);
+
+    void YieldCo();
 
     void ScheduleJob();
 

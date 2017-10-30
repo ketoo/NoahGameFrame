@@ -371,10 +371,18 @@ inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
     return std::abs(dValue) <= epsilon;
 }
 
-inline int64_t NFGetTime()
+//millisecond
+inline int64_t NFGetTimeMS()
 {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
+
+//second
+inline int64_t NFGetTimeS()
+{
+    return NFGetTimeMS() / 1000;
+}
+
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #ifndef PROTOBUF_SRC
