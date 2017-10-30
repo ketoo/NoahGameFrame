@@ -98,7 +98,7 @@ public:
 
 	virtual void StartCoroutine(CoroutineFunction func) override;
 
-	virtual void YieldCo(const uint32_t nMilliSecond) override;
+	virtual void YieldCo(const float nSecond) override;
 
 	virtual void YieldCo() override;
 

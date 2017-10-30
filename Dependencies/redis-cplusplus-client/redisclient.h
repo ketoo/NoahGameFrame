@@ -60,6 +60,7 @@ typedef void* BUFPTR;
 #include "./Dependencies/common/variant.hpp"
 
 typedef void(*CoroutineYieldFunction)();
+typedef void(*CoroutineStartFunction)();
 
 #ifdef _WIN32
 #include "anet_win32.h"
@@ -386,12 +387,17 @@ namespace redis
     std::map<std::string, std::string> param_map;
   };
 
-  static CoroutineYieldFunction YieldFunction = NULL;
+    static CoroutineYieldFunction YieldFunction = NULL;
+    static CoroutineStartFunction StartFunction = NULL;
 
   inline ssize_t recv_or_throw(int fd, void* buf, size_t n, int flags)
   {
     ssize_t bytes_received;
-    
+    if (StartFunction)
+    {
+      StartFunction();
+    }
+
 	do
 	{
 		//YieldCo();
