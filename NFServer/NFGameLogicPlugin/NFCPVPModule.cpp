@@ -286,6 +286,7 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 	vKeyList.push_back(NFrame::Player::Level());
 	vKeyList.push_back(NFrame::Player::Cup());
 	vKeyList.push_back(NFrame::Player::Name());
+	vKeyList.push_back(NFrame::Player::Head());
 	vKeyList.push_back(NFrame::Player::HeroPos1CnfID());
 	vKeyList.push_back(NFrame::Player::HeroPos1Star());
 	vKeyList.push_back(NFrame::Player::HeroPos2CnfID());
@@ -297,18 +298,33 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 	const std::string& strPlayerKey = m_pCommonRedisModule->GetPropertyCacheKey(opponent);
 	if (m_pNoSqlModule->HMGet(strPlayerKey, vKeyList, vValueList))
 	{
-		int nGold = atoi(vValueList.at(0).c_str());
-		int nDiamond = atoi(vValueList.at(1).c_str());
-		int nLevel = atoi(vValueList.at(2).c_str());
-		int nCup = atoi(vValueList.at(3).c_str());
+		int nGold = lexical_cast<int>(vValueList.at(0));
+		int nDiamond = lexical_cast<int>(vValueList.at(1));
+		int nLevel = lexical_cast<int>(vValueList.at(2));
+		int nCup = lexical_cast<int>(vValueList.at(3));
 		std::string strName = vValueList.at(4);
-		std::string strHero1CnfID = vValueList.at(5);
-		int nHero1Star = atoi(vValueList.at(6).c_str());
-		std::string strHero2CnfID = vValueList.at(7);
-		int nHero2Star = atoi(vValueList.at(7).c_str());
-		std::string strHero3CnfID = vValueList.at(9);
-		int nHero3Star = atoi(vValueList.at(10).c_str());
+		std::string strHead = vValueList.at(5);
 
+		std::string strHero1CnfID = vValueList.at(6);
+		int nHero1Star = lexical_cast<int>(vValueList.at(7));
+		std::string strHero2CnfID = vValueList.at(8);
+		int nHero2Star = lexical_cast<int>(vValueList.at(9));
+		std::string strHero3CnfID = vValueList.at(10);
+		int nHero3Star = lexical_cast<int>(vValueList.at(11));
+
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentGold(), nGold);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentDiamond(), nDiamond);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentLevel(), nLevel);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentCup(), nCup);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentName(), strName);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHead(), strHead);
+
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHeroPos1(), strHero1CnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroPos1Star(), nHero1Star);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHeroPos2(), strHero2CnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroPos2Star(), nHero2Star);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHeroPos3(), strHero3CnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHeroPos3Star(), nHero3Star);
 
 		return true;
 	}

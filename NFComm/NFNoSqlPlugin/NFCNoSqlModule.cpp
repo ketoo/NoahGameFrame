@@ -10,8 +10,10 @@
 #include "NFCNoSqlModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
+NFIPluginManager* xPluginManager;
 NFCNoSqlModule::NFCNoSqlModule(NFIPluginManager* p)
 {
+	xPluginManager = p;
 	pPluginManager = p;
 }
 
@@ -20,9 +22,16 @@ NFCNoSqlModule::~NFCNoSqlModule()
 
 }
 
+void YieldFunction()
+{
+	xPluginManager->YieldCo();
+}
+
 bool NFCNoSqlModule::Init()
 {
 	mLastCheckTime = 0;
+
+	redis::YieldFunction = &YieldFunction;
 
 	return true;
 }
