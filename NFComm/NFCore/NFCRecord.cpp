@@ -18,6 +18,8 @@ NFCRecord::NFCRecord()
     mbPublic = false;
     mbPrivate = false;
     mbCache = false;
+	mbRef = false;
+	mbForce = false;
 	mbUpload = false;
 
     mstrRecordName = "";
@@ -1298,6 +1300,16 @@ const bool NFCRecord::GetCache()
     return mbCache;
 }
 
+const bool NFCRecord::GetRef()
+{
+	return mbRef;
+}
+
+const bool NFCRecord::GetForce()
+{
+	return mbForce;
+}
+
 const bool NFCRecord::GetUpload()
 {
 	return mbUpload;
@@ -1331,6 +1343,16 @@ void NFCRecord::SetSave(const bool bSave)
 void NFCRecord::SetCache(const bool bCache)
 {
     mbCache = bCache;
+}
+
+void NFCRecord::SetRef(const bool bRef)
+{
+	mbRef = bRef;
+}
+
+void NFCRecord::SetForce(const bool bForce)
+{
+	mbForce = bForce;
 }
 
 void NFCRecord::SetUpload(const bool bUpload)

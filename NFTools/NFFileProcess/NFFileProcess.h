@@ -110,8 +110,8 @@ private:
 	bool bConvertIntoUTF8 = false;
 
 	const int nPropertyHeight = 10;//property line
-	const int nRecordHeight = 11;//record line
-	const int nRecordDescHeight = 7;//record line
+	const int nRecordHeight = 13;//record line
+	const int nRecordDescHeight = 9;//record line
 
 	std::string strExcelIniPath = "../Excel/";
 	std::string strXMLStructPath = "../Struct/";

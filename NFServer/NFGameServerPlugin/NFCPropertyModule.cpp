@@ -408,13 +408,13 @@ bool NFCPropertyModule::EnoughSP(const NFGUID& self, const int nValue)
 
 bool NFCPropertyModule::AddGold(const NFGUID& self, const int64_t nValue)
 {
-    if (nValue <= 0)
-    {
-        return false;
-    }
-
 	int64_t nCurValue = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Gold());
     nCurValue += nValue;
+	if (nCurValue < 0)
+	{
+		nCurValue = 0;
+	}
+
     m_pKernelModule->SetPropertyInt(self, NFrame::Player::Gold(), nCurValue);
 
     return false;
@@ -452,13 +452,13 @@ bool NFCPropertyModule::EnoughGold(const NFGUID& self, const int64_t nValue)
 
 bool NFCPropertyModule::AddDiamond(const NFGUID& self, const int nValue)
 {
-    if (nValue <= 0)
-    {
-        return false;
-    }
-
 	int nCurValue = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::Diamond());
     nCurValue += nValue;
+	if (nCurValue < 0)
+	{
+		nCurValue = 0;
+	}
+
     m_pKernelModule->SetPropertyInt(self, NFrame::Player::Diamond(), nCurValue);
 
     return false;

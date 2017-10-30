@@ -48,7 +48,9 @@ protected:
 	void OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-    void OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	void OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
+	
+	void OnReqPVPRecordProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
     void OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
@@ -69,6 +71,9 @@ protected:
 
 	bool ProcessOpponentData(const NFGUID & self, const NFGUID& opponent);
 	bool SearchOpponent(const NFGUID & self);
+
+	void ResetPVPData(const NFGUID & self);
+	void RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond);
 
 private:
 	NFITileModule* m_pTileModule;

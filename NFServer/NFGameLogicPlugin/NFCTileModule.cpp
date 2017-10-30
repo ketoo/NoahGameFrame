@@ -123,7 +123,7 @@ void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsg
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqMiningTitle);
 
 	NFGUID xViewOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
-	NFGUID xFightOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightOpponent());
+	NFGUID xFightOpponentID = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent());
 	if (!xViewOpponentID.IsNull() || !xFightOpponentID.IsNull())
 	{
 		return;

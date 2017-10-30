@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIPVPRedisModule.h"
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
+#include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 
 class NFCPVPRedisModule : public NFIPVPRedisModule
 {
@@ -28,40 +29,14 @@ public:
 	virtual bool Execute();
 	virtual bool AfterInit();
 
-    virtual bool GetPlayerRoomID(const NFGUID& self, NFGUID& xRoomID);
-    virtual bool GetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList);
-    virtual bool GetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo);
-    virtual bool GetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList);
-    virtual bool GetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, std::vector<NFGUID>& xRoomIDList);
-
-    virtual bool SetPlayerRoomID(const NFGUID& self, const NFGUID& xRoomID);
-    virtual bool SetPlayerRoomIDList(const std::vector<NFGUID>& xPlayerList, std::vector<NFGUID>& vecRoomIDList);
-    virtual bool SetRoomInfo(const NFGUID& xRoomID, NFMsg::PVPRoomInfo& xRoomInfo);
-    virtual bool SetRoomInfoList(const std::vector<NFGUID>& xRoomIDList, std::vector<NFMsg::PVPRoomInfo>& vecRoomInfoList);
-    virtual bool SetStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID);
-
-    virtual bool DeletePlayerRoomID(const NFGUID& self, const NFGUID& xRoomID);
-    virtual bool DeletePlayerRoomIDList(const std::vector<NFGUID>& xPlayerList);
-    virtual bool DeleteRoomInfo(const NFGUID& xRoomID);
-    virtual bool DeleteRoomInfoList(const std::vector<NFGUID>& xRoomIDList);
-    virtual bool DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus, const NFGUID& xRoomID);
-    virtual bool DeleteStatusRoomID(const int nPVPMode, const int nGrade, const int nStatus,
-									const std::vector<NFGUID>& xRoomIDList);
-
-    virtual bool PushSinglePlayer(const NFGUID& self, const int nPVPMode, const int nGrade );
-    virtual bool PopSinglePlayer(NFGUID& self, const int nPVPMode, const int nGrade);
-    virtual bool PopSinglePlayerList( const int nPVPMode, const int nGrade, const int nCount, std::vector<NFGUID>& xPlayerList);
-    virtual int GetSinglePlayerCount(NFGUID& self, const int nPVPMode, const int nGrade);
-
 protected:
-    std::string MakePlayerRoomKey();
-    std::string MakePvpRoomRedisKey();
-    std::string MakeSingleWaitRedisKey(const int nPvpMode, const int nGrade);
-    std::string MakeStatusRoomIDRedisKey(const int nPvpMode, const int nGrade, const int nStatus);
+	int OnObjectPlayerEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
+	bool SavePlayerData(const NFGUID& self);
 
 private:
 	NFINoSqlModule* m_pNoSqlModule;
-
+	NFIKernelModule* m_pKernelModule;
+	NFICommonRedisModule* m_pCommonRedisModule;
 };
 
 
