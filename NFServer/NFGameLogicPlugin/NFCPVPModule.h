@@ -50,8 +50,6 @@ protected:
 	void OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	void OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 	
-	void OnReqPVPRecordProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
-
     void OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
