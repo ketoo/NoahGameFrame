@@ -218,7 +218,7 @@ void NFCoroutineManager::NewMainCoroutine()
 void NFCoroutineManager::YieldCo(const float fSecond)
 {
 #if NF_PLATFORM == NF_PLATFORM_WIN
-    NFSLEEP(nMilliSecond);
+    NFSLEEP(fSecond);
 #else
     if (this->mnRunningCoroutineID != -1)
     {
