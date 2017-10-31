@@ -40,13 +40,15 @@ int NFCHttpServer::InitServer(const unsigned short port)
         return 1;
     }
 
-    evhttp_set_gencb(http, listener_cb, (void*) this);
     handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", mPort);
     if (!handle)
     {
         std::cout << "bind port :" << mPort << " fail" << std::endl;;
         return 1;
     }
+
+    evhttp_set_gencb(http, listener_cb, (void*) this);
+
     return 0;
 }
 
