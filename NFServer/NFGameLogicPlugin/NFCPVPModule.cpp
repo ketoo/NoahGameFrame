@@ -79,12 +79,12 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
 
+	ResetPVPData(nPlayerID);
+
 	int nSearchCount = 0;
 	bool bRet = false;
 	while (!bRet && nSearchCount <= 5)
 	{
-		YieldCo(1000 * 2);
-
 		bRet = SearchOpponent(nPlayerID);
 		nSearchCount++;
 	}
@@ -212,7 +212,6 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 	
 	RecordPVPData(nPlayerID, nStar, nWinGold, nWinDiamond);
 
-	ResetPVPData(nPlayerID);
 
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, nPlayerID);
 

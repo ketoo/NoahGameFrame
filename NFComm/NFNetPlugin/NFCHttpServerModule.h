@@ -35,8 +35,7 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const int nCommand, const std::string& strMsg);
 
-    virtual bool
-    ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
+    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK,
                 const std::string& reason = "OK");
 
     virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
