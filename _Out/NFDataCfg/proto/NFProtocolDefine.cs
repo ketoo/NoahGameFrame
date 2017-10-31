@@ -605,10 +605,13 @@ namespace NFrame
 		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
 		public static readonly String Item1 = "Item1";// string
+		public static readonly String Item1Count = "Item1Count";// int
 		public static readonly String Item1UsedCount = "Item1UsedCount";// int
 		public static readonly String Item2 = "Item2";// string
+		public static readonly String Item2Count = "Item2Count";// int
 		public static readonly String Item2UsedCount = "Item2UsedCount";// int
 		public static readonly String Item3 = "Item3";// string
+		public static readonly String Item3Count = "Item3Count";// int
 		public static readonly String Item3UsedCount = "Item3UsedCount";// int
 		public static readonly String Job = "Job";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object

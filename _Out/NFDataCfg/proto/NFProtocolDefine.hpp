@@ -610,10 +610,13 @@ namespace NFrame
 		static const std::string& HeroPos3Star(){ static std::string x = "HeroPos3Star"; return x; };// int
 		static const std::string& HomeSceneID(){ static std::string x = "HomeSceneID"; return x; };// int
 		static const std::string& Item1(){ static std::string x = "Item1"; return x; };// string
+		static const std::string& Item1Count(){ static std::string x = "Item1Count"; return x; };// int
 		static const std::string& Item1UsedCount(){ static std::string x = "Item1UsedCount"; return x; };// int
 		static const std::string& Item2(){ static std::string x = "Item2"; return x; };// string
+		static const std::string& Item2Count(){ static std::string x = "Item2Count"; return x; };// int
 		static const std::string& Item2UsedCount(){ static std::string x = "Item2UsedCount"; return x; };// int
 		static const std::string& Item3(){ static std::string x = "Item3"; return x; };// string
+		static const std::string& Item3Count(){ static std::string x = "Item3Count"; return x; };// int
 		static const std::string& Item3UsedCount(){ static std::string x = "Item3UsedCount"; return x; };// int
 		static const std::string& Job(){ static std::string x = "Job"; return x; };// int
 		static const std::string& LastOfflineTime(){ static std::string x = "LastOfflineTime"; return x; };// object
