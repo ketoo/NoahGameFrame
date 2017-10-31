@@ -50,10 +50,13 @@
 		<Property Id="HeroPos3Star" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HomeSceneID" Cache="1" Desc="玩家下线的时候需要保存上次在线的场景" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item1" Cache="1" Desc="Skill4" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item1Count" Cache="1" Desc="Item1Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item1UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item2" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item2Count" Cache="1" Desc="Item2Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item2UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item3" Cache="1" Desc="Skill5" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Item3Count" Cache="1" Desc="Item3Count" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Item3UsedCount" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Job" Cache="1" Desc="职业" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="LastOfflineTime" Cache="1" Desc="上次下线时间" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />

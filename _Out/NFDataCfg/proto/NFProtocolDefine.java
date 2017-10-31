@@ -599,10 +599,13 @@ package nframe;
 		public static final String HeroPos3Star = "HeroPos3Star";// int
 		public static final String HomeSceneID = "HomeSceneID";// int
 		public static final String Item1 = "Item1";// string
+		public static final String Item1Count = "Item1Count";// int
 		public static final String Item1UsedCount = "Item1UsedCount";// int
 		public static final String Item2 = "Item2";// string
+		public static final String Item2Count = "Item2Count";// int
 		public static final String Item2UsedCount = "Item2UsedCount";// int
 		public static final String Item3 = "Item3";// string
+		public static final String Item3Count = "Item3Count";// int
 		public static final String Item3UsedCount = "Item3UsedCount";// int
 		public static final String Job = "Job";// int
 		public static final String LastOfflineTime = "LastOfflineTime";// object
