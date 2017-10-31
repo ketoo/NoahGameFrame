@@ -33,11 +33,9 @@ bool NFCMasterNet_HttpServerModule::Shut()
 
 bool NFCMasterNet_HttpServerModule::AfterInit()
 {
+    //http://127.0.0.1/json
 	m_pHttpNetModule->AddReceiveCallBack("json", this, &NFCMasterNet_HttpServerModule::OnCommandQuery);
 	m_pHttpNetModule->AddNetCommonReceiveCallBack(this, &NFCMasterNet_HttpServerModule::OnCommonQuery);
-
-	int nJsonPort = 80;
-	int nWebServerAppID = 0;
 
 	NF_SHARE_PTR<NFIClass> xLogicClass = m_pLogicClassModule->GetElement(NFrame::HttpServer::ThisName());
 	if (xLogicClass)
@@ -47,25 +45,26 @@ bool NFCMasterNet_HttpServerModule::AfterInit()
 		{
 			const std::string& strId = strIdList[i];
 
-			nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
-			nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
+			int nJsonPort = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::WebPort());
+			int nWebServerAppID = m_pElementModule->GetPropertyInt32(strId, NFrame::HttpServer::ServerID());
 			m_strWebRootPath = m_pElementModule->GetPropertyString(strId, NFrame::HttpServer::WebRootPath());
+
+			//webserver only run one instance in each server
+			if (pPluginManager->GetAppID() == nWebServerAppID)
+			{
+				m_pHttpNetModule->InitServer(nJsonPort);
+
+				break;
+			}
 		}
 	}
-
-	//webserver only run one instance for NF
-	if (pPluginManager->GetAppID() != nWebServerAppID)
-	{
-		return true;
-	}
-
-	m_pHttpNetModule->InitServer(nJsonPort);
 
 	return true;
 }
 
 bool NFCMasterNet_HttpServerModule::Execute()
 {
+    m_pHttpNetModule->Execute();
 	return true;
 }
 

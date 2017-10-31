@@ -50,7 +50,8 @@ void NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req, const std::
         HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
         HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
         pFunc->operator()(req, strCommand, strUrl);
-    } else
+    }
+    else
     {
         if (mComMsgCBList.size() > 0)
         {
