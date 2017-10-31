@@ -34,20 +34,9 @@ public:
     std::string url;
 };
 
-class NFHttpHeader
-{
-
-};
-
-class NFHttpBody
-{
-
-};
-
 //it should be
 //typedef std::function<void(const NFHttpRequest& req, const int nCommand, const std::string& strData, const std::string& strUrl)> HTTP_RECEIVE_FUNCTOR;
-typedef std::function<void(const NFHttpRequest& req, const std::string& strCommand,
-                           const std::string& strUrl)> HTTP_RECEIVE_FUNCTOR;
+typedef std::function<void(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)> HTTP_RECEIVE_FUNCTOR;
 typedef std::shared_ptr<HTTP_RECEIVE_FUNCTOR> HTTP_RECEIVE_FUNCTOR_PTR;
 
 class NFIHttpServer
@@ -59,8 +48,7 @@ public:
 
     virtual bool Final() = 0;
 
-    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
-                             const std::string& strReason = "OK") = 0;
+    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
 
     virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
 

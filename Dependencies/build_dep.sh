@@ -13,12 +13,6 @@ cp -R -f ./.libs/*.a ../lib/Debug/
 cp -R -f ./.libs/*.a ../lib/Release/
 cd ../
 
-#  compiling hiredis
-cd hiredis
-chmod +x ./configure
-./configure CXXFLAGS=-fPIC --disable-shared
-make
-
 cp -R -f ./*.a ../lib/Debug/
 cp -R -f ./*.a ../lib/Release/
 
