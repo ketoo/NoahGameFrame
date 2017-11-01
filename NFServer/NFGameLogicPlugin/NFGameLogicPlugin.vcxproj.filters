@@ -11,9 +11,6 @@
     <Filter Include="NFCommonConfigModule">
       <UniqueIdentifier>{15121c6f-c078-4629-81c4-7bac017e056f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NFGMModule">
-      <UniqueIdentifier>{9c627c80-9536-4c28-8b31-2dc81cfd2d6e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NFMapModule">
       <UniqueIdentifier>{54157a03-de81-4609-966f-ec32582895de}</UniqueIdentifier>
     </Filter>
@@ -31,9 +28,6 @@
     </ClInclude>
     <ClInclude Include="NFCCommonConfigModule.h">
       <Filter>NFCommonConfigModule</Filter>
-    </ClInclude>
-    <ClInclude Include="NFCGmModule.h">
-      <Filter>NFGMModule</Filter>
     </ClInclude>
     <ClInclude Include="NFCMapModule.h">
       <Filter>NFMapModule</Filter>
@@ -56,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="NFCCommonConfigModule.cpp">
       <Filter>NFCommonConfigModule</Filter>
-    </ClCompile>
-    <ClCompile Include="NFCGmModule.cpp">
-      <Filter>NFGMModule</Filter>
     </ClCompile>
     <ClCompile Include="NFCMapModule.cpp">
       <Filter>NFMapModule</Filter>
