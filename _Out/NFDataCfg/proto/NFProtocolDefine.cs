@@ -159,6 +159,22 @@ namespace NFrame
 		// Record
 
 	}
+	public class GM
+	{
+		//Class name
+		public static readonly String ThisName = "GM";
+		// IObject
+		public static readonly String ClassName = "ClassName";// string
+		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String GroupID = "GroupID";// int
+		public static readonly String ID = "ID";// string
+		public static readonly String Position = "Position";// vector3
+		public static readonly String SceneID = "SceneID";// int
+		// Property
+		public static readonly String Level = "Level";// int
+		// Record
+
+	}
 	public class Guild
 	{
 		//Class name
