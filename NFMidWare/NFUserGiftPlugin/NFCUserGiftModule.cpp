@@ -20,6 +20,7 @@ bool NFCUserGiftModule::Init()
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pItemModule = pPluginManager->FindModule<NFIItemModule>();
+	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	
 	return true;
 }
@@ -47,6 +48,10 @@ bool NFCUserGiftModule::AfterInit()
 
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCUserGiftModule::OnObjectClassEvent);
 
+	std::string mstrInitPropertyConfig = pPluginManager->GetConfigPath();
+
+	mstrInitPropertyConfig += "NFDataCfg/Ini/Common/EqupConfig.xml";
+	m_pCommonConfigModule->LoadConfig(mstrInitPropertyConfig);
 
 	return true;
 }
@@ -64,9 +69,12 @@ int NFCUserGiftModule::OnObjectClassEvent(const NFGUID & self, const std::string
 		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Level(), this, &NFCUserGiftModule::OnLevelPropertyEvent);
 		if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::OnlineCount()) <= 0)
 		{
+
 			DoLevelAward(self, 1);
 
 			ActiveteHero(self);
+
+			DoInitProperty(self);
 		}
 	}
 
@@ -108,6 +116,36 @@ bool NFCUserGiftModule::DoLevelAward(const NFGUID & self, const int nLevel)
 		}
 
 		return true;
+	}
+
+	return false;
+}
+
+bool NFCUserGiftModule::DoInitProperty(const NFGUID & self)
+{
+	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(NFrame::Player::ThisName());
+	for (int i = 0; i < xList.size(); ++i)
+	{
+		const std::string& strPropertyName = xList.at(i);
+		NF_SHARE_PTR<NFIObject> xObject = m_pKernelModule->GetObject(self);
+		if (xObject)
+		{
+			NF_SHARE_PTR<NFIProperty> xProperty = xObject->GetPropertyManager()->GetElement(strPropertyName);
+			if (xProperty)
+			{
+				if (xProperty->GetType() == NFDATA_TYPE::TDATA_STRING)
+				{
+					const std::string& strPropertyValue = m_pCommonConfigModule->GetAttributeString(NFrame::Player::ThisName(), strPropertyName);
+					m_pKernelModule->SetPropertyString(self, strPropertyName, strPropertyValue);
+				}
+				else if (xProperty->GetType() == NFDATA_TYPE::TDATA_INT)
+				{
+					const int nPropertyValue = m_pCommonConfigModule->GetAttributeInt(NFrame::Player::ThisName(), strPropertyName);
+					m_pKernelModule->SetPropertyInt(self, strPropertyName, nPropertyValue);
+				}
+			}
+		}
+		//m_pKernelModule->SetPropertyFloat
 	}
 
 	return false;

@@ -176,8 +176,9 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 	return true;
 }
 
-const int NFCCommonConfigModule::GetStructItemList(const std::string&strStructName, std::vector<std::string>& xList)
+std::vector<std::string> NFCCommonConfigModule::GetStructItemList(const std::string&strStructName)
 {
+	std::vector<std::string> xList;
 	NF_SHARE_PTR<CStructInfo> pStructTypeData = mmData.GetElement(strStructName);
 	if (pStructTypeData)
 	{
@@ -188,5 +189,5 @@ const int NFCCommonConfigModule::GetStructItemList(const std::string&strStructNa
 		}
 	}
 
-	return 0;
+	return xList;
 }

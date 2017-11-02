@@ -40,7 +40,7 @@ bool NFCEquipModule::AfterInit()
 
     std::string strEquipPath = pPluginManager->GetConfigPath();
 
-    strEquipPath += "NFDataCfg/Ini/Common/EqupConfig.xml";
+    strEquipPath += "NFDataCfg/Ini/Common/InitProperty.xml";
     m_pCommonConfigModule->LoadConfig(strEquipPath);
 
     return true;

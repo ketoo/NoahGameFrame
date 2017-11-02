@@ -68,7 +68,7 @@ public:
 	virtual const std::string& GetAttributeString(const std::string& strStructName, const std::string& strStructItemName, const std::string& strAttribute);
 	virtual const std::string& GetAttributeString(const std::string& strStructName,const std::string& strSDKAttribute);
 	virtual bool LoadConfig(const std::string& strFile);
-	virtual const int GetStructItemList(const std::string&strStructName, std::vector<std::string>& xList);
+	virtual std::vector<std::string> GetStructItemList(const std::string&strStructName);
 
 private:
 	NFMapEx<std::string, CStructInfo> mmData; //strStructName<-->CStructInfo
