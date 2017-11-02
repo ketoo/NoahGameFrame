@@ -1421,7 +1421,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const NFSOCK nSoc
 			//GM
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client int set", xPropertyInt.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client int set " + xPropertyInt.property_name(), xPropertyInt.data(), __FUNCTION__, __LINE__);
 				pProperty->SetInt(xPropertyInt.data());
 			}
 			else
@@ -1452,7 +1452,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyFloatProcess(const NFSOCK nS
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client float set", xPropertyFloat.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client float set " + xPropertyFloat.property_name(), xPropertyFloat.data(), __FUNCTION__, __LINE__);
 				pProperty->SetFloat(xPropertyFloat.data());
 			}
 			else
@@ -1483,7 +1483,7 @@ void NFCGameServerNet_ServerModule::OnClientPropertyStringProcess(const NFSOCK n
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client string set", xPropertyString.property_name(), __FUNCTION__, __LINE__);
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client string set " + xPropertyString.property_name(), xPropertyString.data(), __FUNCTION__, __LINE__);
 				pProperty->SetString(xPropertyString.data());
 			}
 			else
@@ -1514,8 +1514,9 @@ void NFCGameServerNet_ServerModule::OnClientPropertyObjectProcess(const NFSOCK n
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xPropertyObject.property_name(), __FUNCTION__, __LINE__);
-				pProperty->SetObject(NFINetModule::PBToNF(xPropertyObject.data()));
+				NFGUID xID = NFINetModule::PBToNF(xPropertyObject.data());
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xPropertyObject.property_name(), xID.ToString(), __FUNCTION__, __LINE__);
+				pProperty->SetObject(xID);
 			}
 			else
 			{
@@ -1546,8 +1547,9 @@ void NFCGameServerNet_ServerModule::OnClientPropertyVector2Process(const NFSOCK 
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xProperty.property_name(), __FUNCTION__, __LINE__);
-				pProperty->SetVector2(NFINetModule::PBToNF(xProperty.data()));
+				NFVector2 vVec2 = NFINetModule::PBToNF(xProperty.data());
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xProperty.property_name(), vVec2.ToString(), __FUNCTION__, __LINE__);
+				pProperty->SetVector2(vVec2);
 			}
 			else
 			{
@@ -1577,8 +1579,9 @@ void NFCGameServerNet_ServerModule::OnClientPropertyVector3Process(const NFSOCK 
 			//judge upload then set value
 			if (pProperty->GetUpload() || nGMLevel > 0)
 			{
-				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set", xProperty.property_name(), __FUNCTION__, __LINE__);
-				pProperty->SetVector3(NFINetModule::PBToNF(xProperty.data()));
+				NFVector3 vVec3 = NFINetModule::PBToNF(xProperty.data());
+				m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, nPlayerID, "Upload From Client object set " + xProperty.property_name(), vVec3.ToString(), __FUNCTION__, __LINE__);
+				pProperty->SetVector3(vVec3);
 			}
 			else
 			{
