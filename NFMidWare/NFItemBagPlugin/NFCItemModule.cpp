@@ -325,8 +325,7 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 
 bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
 {
-	std::vector<std::string> xList;
-	m_pCommonConfigModule->GetStructItemList(strAwardPack, xList);
+	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(strAwardPack);
 
 	for (int i = 0; i < xList.size(); ++i)
 	{

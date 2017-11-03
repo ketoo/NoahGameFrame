@@ -107,13 +107,15 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 			return false;
 		}
 
-		for (rapidxml::xml_node<>* pAppSDKRootNode = pRoot->first_node(); pAppSDKRootNode; pAppSDKRootNode = pAppSDKRootNode->next_sibling())
+		for (rapidxml::xml_node<>* pRootNode = pRoot->first_node(); pRootNode; pRootNode = pRootNode->next_sibling())
 		{
-			if (pAppSDKRootNode)
+			if (pRootNode)
 			{
-				rapidxml::xml_attribute<>* pNameAttribute = pAppSDKRootNode->first_attribute("Name");
+				rapidxml::xml_attribute<>* pNameAttribute = pRootNode->first_attribute("Name");
 				if (NULL == pNameAttribute)
 				{
+					//foreach
+
 					continue;
 				}
 
@@ -126,7 +128,7 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 				}
 
 				
-				for (rapidxml::xml_attribute<>* pAttribute = pAppSDKRootNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
+				for (rapidxml::xml_attribute<>* pAttribute = pRootNode->first_attribute(); pAttribute; pAttribute = pAttribute->next_attribute())
 				{
 					if (pAttribute)
 					{
@@ -138,7 +140,7 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 				}
 
 				
-				for (rapidxml::xml_node<>* pSDKInterfaceNode = pAppSDKRootNode->first_node(); pSDKInterfaceNode; pSDKInterfaceNode = pSDKInterfaceNode->next_sibling())
+				for (rapidxml::xml_node<>* pSDKInterfaceNode = pRootNode->first_node(); pSDKInterfaceNode; pSDKInterfaceNode = pSDKInterfaceNode->next_sibling())
 				{
 					if (pSDKInterfaceNode)
 					{

@@ -39,7 +39,9 @@ public:
     
     virtual int AddRow(const int nRow);
 
-    virtual int AddRow(const int nRow, const NFDataList& var);
+	virtual int AddRow(const int nRow, const NFDataList& var);
+
+	virtual bool SetRow(const int nRow, const NFDataList& var);
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const int nCol, const double value);

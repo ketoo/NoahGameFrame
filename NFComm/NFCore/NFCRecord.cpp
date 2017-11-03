@@ -181,6 +181,50 @@ int NFCRecord::AddRow(const int nRow, const NFDataList& var)
     return nFindRow;
 }
 
+bool NFCRecord::SetRow(const int nRow, const NFDataList & var)
+{
+	if (var.GetCount() != GetCols())
+	{
+		return false;
+	}
+
+	if (!IsUsed(nRow))
+	{
+		return false;
+	}
+
+	for (int i = 0; i < GetCols(); ++i)
+	{
+		if (var.Type(i) != GetColType(i))
+		{
+			return false;
+		}
+	}
+
+	for (int i = 0; i < GetCols(); ++i)
+	{
+		NF_SHARE_PTR<NFData>& pVar = mtRecordVec.at(GetPos(nRow, i));
+		if (nullptr == pVar)
+		{
+			pVar = NF_SHARE_PTR<NFData>(NF_NEW NFData(var.Type(i)));
+		}
+
+		NFData oldValue = *pVar;
+
+		pVar->variantData = var.GetStack(i)->variantData;
+
+		RECORD_EVENT_DATA xEventData;
+		xEventData.nOpType = RECORD_EVENT_DATA::Update;
+		xEventData.nRow = nRow;
+		xEventData.nCol = i;
+		xEventData.strRecordName = mstrRecordName;
+
+		OnEventHandler(mSelf, xEventData, oldValue, *pVar);
+	}
+
+	return false;
+}
+
 bool NFCRecord::SetInt(const int nRow, const int nCol, const NFINT64 value)
 {
     if (!ValidPos(nRow, nCol))

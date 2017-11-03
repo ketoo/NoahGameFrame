@@ -37,6 +37,12 @@ public:
     virtual bool AfterInit();
     virtual bool BeforeShut();
 
+
+
+protected:
+	virtual int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+
+	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
 
 	virtual bool CalHeroAllProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
@@ -44,28 +50,13 @@ public:
 	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 	virtual bool CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 
-	virtual bool FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID);
-	virtual bool AddHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-	virtual bool ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-	virtual bool EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-
-	virtual bool AddMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-	virtual bool ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-	virtual bool EnoughMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue);
-
-protected:
-	virtual int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	virtual int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-
-	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
-	
+private:
 
     NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIEquipPropertyModule* m_pEquipPropertyModule;
-private:
 };
 
 #endif
