@@ -17,21 +17,6 @@ class NFIHeroPropertyModule
 {
 public:
 
-	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID) = 0;
-	
-	virtual bool CalHeroAllProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList) = 0;
-	virtual bool CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList) = 0;
-	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList) = 0;
-	virtual bool CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList) = 0;
-
-	virtual bool FullHPMP(const NFGUID& self, const NFGUID& xHeroGUID) = 0;
-	virtual bool AddHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
-	virtual bool ConsumeHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
-	virtual bool EnoughHP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
-
-	virtual bool AddMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
-	virtual bool ConsumeMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
-	virtual bool EnoughMP(const NFGUID& self, const NFGUID& xHeroGUID, const NFINT64& nValue) = 0;
 
 };
 

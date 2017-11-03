@@ -39,7 +39,7 @@ public:
     virtual bool BeforeShut();
 
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
-	virtual NFGUID ActivateHero(const NFGUID &self, const string &strID);
+	virtual NFGUID ActivateHero(const NFGUID &self, const std::string &strID);
 	virtual bool ActivateHero(const NFGUID &self, const NFGUID &hero);
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos);

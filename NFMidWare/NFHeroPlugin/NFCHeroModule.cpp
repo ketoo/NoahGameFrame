@@ -79,7 +79,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	return xHeroID;
 }
 
-NFGUID NFCHeroModule::ActivateHero(const NFGUID &self, const string &strID)
+NFGUID NFCHeroModule::ActivateHero(const NFGUID &self, const std::string &strID)
 {
 	NFGUID id = AddHero(self, strID);
 	if (!id.IsNull())
