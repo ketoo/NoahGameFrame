@@ -161,36 +161,6 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 				}
 			}
 		}
-		else
-		{
-			NF_SHARE_PTR<NFIRecord> pPlayerHero = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
-			if (nullptr == pPlayerHero.get())
-			{
-				return 0;
-			}
-
-			if (nEXP != 0)
-			{
-				if (!m_pHeroModule->AddHeroExp(self, xTargetID, nEXP * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nHP != 0)
-			{
-				if (!m_pHeroPropertyModule->AddHP(self, xTargetID, nHP * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nMP != 0)
-			{
-				if (!m_pHeroPropertyModule->AddMP(self, xTargetID, nMP * nItemCount))
-				{
-					return 0;
-				}
-			}
-		}
 
 		//deduct Bag ItemCount
 		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nBagList_ItemCount - nItemCount);
