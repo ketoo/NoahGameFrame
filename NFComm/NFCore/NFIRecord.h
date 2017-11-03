@@ -69,6 +69,8 @@ public:
     virtual int AddRow(const int nRow) = 0;
     virtual int AddRow(const int nRow, const NFDataList& var) = 0;
 
+	virtual bool SetRow(const int nRow, const NFDataList& var) = 0;
+
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value) = 0;
     virtual bool SetFloat(const int nRow, const int nCol, const double value) = 0;
     virtual bool SetString(const int nRow, const int nCol, const std::string& value) = 0;

@@ -25,7 +25,7 @@ public:
     };
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
-	virtual NFGUID ActivateHero(const NFGUID& self, const string& strID) = 0;
+	virtual NFGUID ActivateHero(const NFGUID& self, const std::string& strID) = 0;
 	virtual bool ActivateHero(const NFGUID& self, const NFGUID& hero) = 0;
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp) = 0;
 
