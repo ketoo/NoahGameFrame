@@ -490,6 +490,7 @@ package nframe;
 		public static final String DEF_VALUE = "DEF_VALUE";// int
 		public static final String DEF_WIND = "DEF_WIND";// int
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
+		public static final String DescID = "DescID";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String DropPackList = "DropPackList";// string
 		public static final String DropProbability = "DropProbability";// int
