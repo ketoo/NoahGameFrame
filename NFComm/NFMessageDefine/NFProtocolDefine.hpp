@@ -944,23 +944,6 @@ namespace NFrame
 			static const int Level = 3;//int
 			static const int Exp = 4;//int
 			static const int Star = 5;//int
-			static const int Equip1 = 6;//object
-			static const int Equip2 = 7;//object
-			static const int Equip3 = 8;//object
-			static const int Equip4 = 9;//object
-			static const int Equip5 = 10;//object
-			static const int Equip6 = 11;//object
-			static const int Talent1 = 12;//string
-			static const int Talent2 = 13;//string
-			static const int Talent3 = 14;//string
-			static const int Talent4 = 15;//string
-			static const int Talent5 = 16;//string
-			static const int Skill1 = 17;//string
-			static const int Skill2 = 18;//string
-			static const int Skill3 = 19;//string
-			static const int Skill4 = 20;//string
-			static const int Skill5 = 21;//string
-			static const int FightSkill = 22;//string
 
 		};
 		class TaskList
