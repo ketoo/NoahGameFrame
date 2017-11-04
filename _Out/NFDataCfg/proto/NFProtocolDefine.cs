@@ -929,23 +929,6 @@ namespace NFrame
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
 			public const int Star = 5;//int
-			public const int Equip1 = 6;//object
-			public const int Equip2 = 7;//object
-			public const int Equip3 = 8;//object
-			public const int Equip4 = 9;//object
-			public const int Equip5 = 10;//object
-			public const int Equip6 = 11;//object
-			public const int Talent1 = 12;//string
-			public const int Talent2 = 13;//string
-			public const int Talent3 = 14;//string
-			public const int Talent4 = 15;//string
-			public const int Talent5 = 16;//string
-			public const int Skill1 = 17;//string
-			public const int Skill2 = 18;//string
-			public const int Skill3 = 19;//string
-			public const int Skill4 = 20;//string
-			public const int Skill5 = 21;//string
-			public const int FightSkill = 22;//string
 
 		}
 		public class TaskList

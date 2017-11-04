@@ -85,17 +85,6 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 		{
 		case NFrame::Player::PlayerHero::Level:
 		case NFrame::Player::PlayerHero::Star:
-		case NFrame::Player::PlayerHero::Equip1:
-		case NFrame::Player::PlayerHero::Equip2:
-		case NFrame::Player::PlayerHero::Equip3:
-		case NFrame::Player::PlayerHero::Equip4:
-		case NFrame::Player::PlayerHero::Equip5:
-		case NFrame::Player::PlayerHero::Equip6:
-		case NFrame::Player::PlayerHero::Talent1:
-		case NFrame::Player::PlayerHero::Talent2:
-		case NFrame::Player::PlayerHero::Talent3:
-		case NFrame::Player::PlayerHero::Talent4:
-		case NFrame::Player::PlayerHero::Talent5:
 		{
 			const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::GUID);
 			OnHeroPropertyUpdate(self, xHeroGUID);
@@ -279,7 +268,7 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 	{
 		xDataList.AddInt(0);
 	}
-
+	/*
 	for (int i = NFrame::Player::PlayerHero::Talent1; i <= NFrame::Player::PlayerHero::Talent5; ++i)
 	{
 		const std::string& strTalentID = pHeroRecord->GetString(nRow, i);
@@ -297,7 +286,7 @@ bool NFCHeroPropertyModule::CalHeroTalentProperty(const NFGUID& self, const NFGU
 			}
 		}
 	}
-
+	*/
 	return true;
 }
 
@@ -330,7 +319,7 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 	{
 		xDataList.AddInt(0);
 	}
-
+	/*
 	for (int i = NFrame::Player::PlayerHero::Equip1; i <= NFrame::Player::PlayerHero::Equip6; ++i)
 	{
 		NFDataList EquipDataList;
@@ -347,6 +336,6 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 			}
 		}
 	}
-
+	*/
 	return true;
 }
