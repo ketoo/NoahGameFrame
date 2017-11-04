@@ -316,7 +316,7 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 	const int nHeroRow = xHeroDataList.Int32(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList::ConfigID);
 	const int nEquipPos = m_pElementModule->GetPropertyInt32(strEquipID, NFrame::Equip::ItemSubType());
-
+	/*
     if (nEquipRow < 0
 		|| nHeroRow < 0
 		|| strEquipID.empty()
@@ -330,7 +330,7 @@ bool NFCEquipModule::DressEquipForHero(const NFGUID& self, const NFGUID& hero, c
 	//hero, position
 	pHeroRecord->SetObject(nHeroRow, nEquipPos + NFrame::Player::PlayerHero::Equip1, id);
 	pBagRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList::WearGUID, hero);
-
+*/
     return false;
 }
 
@@ -377,7 +377,7 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
 	const int nHeroRow = xHeroDataList.Int32(0);
 	const std::string& strEquipID = pBagRecord->GetString(nEquipRow, NFrame::Player::BagEquipList::ConfigID);
 	const int nEquipPos = m_pElementModule->GetPropertyInt32(strEquipID, NFrame::Equip::ItemSubType());
-
+	/*
 	if (nEquipRow < 0
 		|| nHeroRow < 0
 		|| strEquipID.empty()
@@ -391,6 +391,8 @@ bool NFCEquipModule::TakeOffEquipForm(const NFGUID& self, const NFGUID& hero, co
 	//hero, position
 	pHeroRecord->SetObject(nHeroRow, nEquipPos + NFrame::Player::PlayerHero::Equip1, NFGUID());
 	pBagRecord->SetObject(nEquipRow, NFrame::Player::BagEquipList::WearGUID, NFGUID());
+
+	*/
 	return true;
 }
 

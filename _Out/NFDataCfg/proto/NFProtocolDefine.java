@@ -923,23 +923,6 @@ package nframe;
 			public static final int Level = 3;//int
 			public static final int Exp = 4;//int
 			public static final int Star = 5;//int
-			public static final int Equip1 = 6;//object
-			public static final int Equip2 = 7;//object
-			public static final int Equip3 = 8;//object
-			public static final int Equip4 = 9;//object
-			public static final int Equip5 = 10;//object
-			public static final int Equip6 = 11;//object
-			public static final int Talent1 = 12;//string
-			public static final int Talent2 = 13;//string
-			public static final int Talent3 = 14;//string
-			public static final int Talent4 = 15;//string
-			public static final int Talent5 = 16;//string
-			public static final int Skill1 = 17;//string
-			public static final int Skill2 = 18;//string
-			public static final int Skill3 = 19;//string
-			public static final int Skill4 = 20;//string
-			public static final int Skill5 = 21;//string
-			public static final int FightSkill = 22;//string
 
 		}
 		public class TaskList

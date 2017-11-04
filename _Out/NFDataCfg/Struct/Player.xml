@@ -282,7 +282,7 @@
 			<Col Type ="int"	Tag="ItemCount"/>
 			<Col Type ="vector3"	Tag="Postion"/>
 		</Record>
-		<Record Id="HeroValue" Cache="0"	 Col="29"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroValue" Cache="1"	 Col="29"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -313,30 +313,13 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
-		<Record Id="PlayerHero" Cache="1"	 Col="23"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+		<Record Id="PlayerHero" Cache="1"	 Col="6"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="Activated"/>
 			<Col Type ="int"	Tag="Level"/>
 			<Col Type ="int"	Tag="Exp"/>
 			<Col Type ="int"	Tag="Star"/>
-			<Col Type ="object"	Tag="Equip1"/>
-			<Col Type ="object"	Tag="Equip2"/>
-			<Col Type ="object"	Tag="Equip3"/>
-			<Col Type ="object"	Tag="Equip4"/>
-			<Col Type ="object"	Tag="Equip5"/>
-			<Col Type ="object"	Tag="Equip6"/>
-			<Col Type ="string"	Tag="Talent1"/>
-			<Col Type ="string"	Tag="Talent2"/>
-			<Col Type ="string"	Tag="Talent3"/>
-			<Col Type ="string"	Tag="Talent4"/>
-			<Col Type ="string"	Tag="Talent5"/>
-			<Col Type ="string"	Tag="Skill1"/>
-			<Col Type ="string"	Tag="Skill2"/>
-			<Col Type ="string"	Tag="Skill3"/>
-			<Col Type ="string"	Tag="Skill4"/>
-			<Col Type ="string"	Tag="Skill5"/>
-			<Col Type ="string"	Tag="FightSkill"/>
 		</Record>
 		<Record Id="TaskList" Cache="1"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
