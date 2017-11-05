@@ -21,7 +21,7 @@
 		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_WIND" Cache="0" Desc="土抗" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DescID" Cache="0" Desc="desc" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DescID" Cache="0" Desc="desc" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Diamond" Cache="0" Desc="钻石" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="DropPackList" Cache="0" Desc="掉落列表" Force="0" Private="0" Public="0" Ref="1" Save="0" Type="string" Upload="0" />
 		<Property Id="DropProbability" Cache="0" Desc="掉落概率%" Force="0" Private="0" Public="0" Ref="1" Save="0" Type="int" Upload="0" />
