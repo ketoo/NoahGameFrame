@@ -496,7 +496,7 @@ namespace NFrame
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
-		public static readonly String DescID = "DescID";// int
+		public static readonly String DescID = "DescID";// string
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String DropPackList = "DropPackList";// string
 		public static readonly String DropProbability = "DropProbability";// int
