@@ -501,7 +501,7 @@ namespace NFrame
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
 		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
-		static const std::string& DescID(){ static std::string x = "DescID"; return x; };// int
+		static const std::string& DescID(){ static std::string x = "DescID"; return x; };// string
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& DropPackList(){ static std::string x = "DropPackList"; return x; };// string
 		static const std::string& DropProbability(){ static std::string x = "DropProbability"; return x; };// int
