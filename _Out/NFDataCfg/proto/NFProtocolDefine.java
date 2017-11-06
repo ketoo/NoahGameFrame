@@ -607,7 +607,7 @@ package nframe;
 		public static final String Head = "Head";// string
 		public static final String HeroPos1 = "HeroPos1";// object
 		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
-		public static final String HeroPos1Star = "HeroPos1Star";// string
+		public static final String HeroPos1Star = "HeroPos1Star";// int
 		public static final String HeroPos2 = "HeroPos2";// object
 		public static final String HeroPos2CnfID = "HeroPos2CnfID";// object
 		public static final String HeroPos2Star = "HeroPos2Star";// int
