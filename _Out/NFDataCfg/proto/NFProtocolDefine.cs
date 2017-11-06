@@ -613,7 +613,7 @@ namespace NFrame
 		public static readonly String Head = "Head";// string
 		public static readonly String HeroPos1 = "HeroPos1";// object
 		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
-		public static readonly String HeroPos1Star = "HeroPos1Star";// string
+		public static readonly String HeroPos1Star = "HeroPos1Star";// int
 		public static readonly String HeroPos2 = "HeroPos2";// object
 		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// object
 		public static readonly String HeroPos2Star = "HeroPos2Star";// int
