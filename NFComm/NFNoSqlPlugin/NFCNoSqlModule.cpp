@@ -176,18 +176,11 @@ bool NFCNoSqlModule::AddConnectSql(const std::string& strID, const std::string& 
 	if (!mxNoSqlDriver.ExistElement(strID))
 	{
 		NF_SHARE_PTR<NFINoSqlDriver> pNoSqlDriver(new NFCNoSqlDriver());
-		if (pNoSqlDriver->Connect(strIP, nPort, strPass))
-		{
-			mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		pNoSqlDriver->Connect(strIP, nPort, strPass);
+		return mxNoSqlDriver.AddElement(strID, pNoSqlDriver);
 	}
 
-	return true;
+	return false;
 }
 
 NFList<std::string> NFCNoSqlModule::GetDriverIdList()
