@@ -75,7 +75,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 		return NFGUID();
 	}
 
-	AddToFightList(self, xHeroID);
+	AddToFightList(self, xHeroID, strID);
 
 	return xHeroID;
 }
@@ -192,8 +192,63 @@ bool NFCHeroModule::SetFightHero(const NFGUID& self, const NFGUID& xHeroID, cons
 		return false;
 	}
 
-	AddToFightList(self, xHeroID, nPos);
+	const std::string& strCnfID = pHeroRecord->GetString(nRow, NFrame::Player::PlayerHero::ConfigID);
+	const int nStar = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
 
+	//AddToFightList(self, xHeroID, nPos);
+	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1());
+	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos2());
+	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos3());
+	NFGUID xFightHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	if (xHero1 == xHeroID
+		|| xHero2 == xHeroID
+		|| xHero3 == xHeroID)
+	{
+		return 0;
+	}
+
+	switch (nPos)
+	{
+	case 1:
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos1CnfID(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos1Star(), nStar);
+
+		if (xFightHero == xHero1)
+		{
+			SwitchFightHero(self, xHeroID);
+		}
+	}
+	break;
+
+	case 2:
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos2CnfID(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos2Star(), nStar);
+		if (xFightHero == xHero2)
+		{
+			SwitchFightHero(self, xHeroID);
+		}
+	}
+	break;
+
+	case 3:
+	{
+		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos3CnfID(), strCnfID);
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HeroPos3Star(), nStar);
+		if (xFightHero == xHero3)
+		{
+			SwitchFightHero(self, xHeroID);
+		}
+	}
+	break;
+
+	default:
+		break;
+	}
 
 	return false;
 }
@@ -333,15 +388,17 @@ void NFCHeroModule::OnSwitchFightHeroMsg(const NFSOCK nSockIndex, const int nMsg
 	
 }
 
-int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
+int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID, const std::string & strCnfID)
 {
-
 	if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos1()) == NFGUID())
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos1(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos1CnfID(), strCnfID);
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
+			m_pKernelModule->SetPropertyString(self, NFrame::Player::ConfigID(), strCnfID);
+
 			SwitchFightHero(self, xHeroID);
 		}
 
@@ -350,6 +407,7 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos2()) == NFGUID())
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos2(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos2CnfID(), strCnfID);
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
@@ -361,6 +419,7 @@ int NFCHeroModule::AddToFightList(const NFGUID & self, const NFGUID & xHeroID)
 	else if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroPos3()) == NFGUID())
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::HeroPos3(), xHeroID);
+		m_pKernelModule->SetPropertyString(self, NFrame::Player::HeroPos3CnfID(), strCnfID);
 
 		if (m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero()) == NFGUID())
 		{
