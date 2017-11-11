@@ -99,6 +99,8 @@ bool NFCNoSqlModule::Execute()
 	{
 		if (!xNosqlDriver->Enable())
 		{
+			m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), xNosqlDriver->GetIP(), xNosqlDriver->GetAuthKey(), __FUNCTION__, __LINE__);
+
 			xNosqlDriver->ReConnect();
 		}
 

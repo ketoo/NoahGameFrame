@@ -91,9 +91,9 @@ public:
         pPluginManager->StartCoroutine(func);
     }
 
-	virtual void YieldCo(const uint32_t nMilliSecond)
+	virtual void YieldCo(const float fSecond)
 	{
-		pPluginManager->YieldCo(nMilliSecond);
+		pPluginManager->YieldCo(fSecond);
 	}
 
 	virtual void YieldCo()

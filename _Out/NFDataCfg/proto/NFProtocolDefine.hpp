@@ -186,59 +186,55 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
-		static const std::string& AutoRecruit(){ static std::string x = "AutoRecruit"; return x; };// string
-		static const std::string& DismissTime(){ static std::string x = "DismissTime"; return x; };// int
-		static const std::string& EctypID(){ static std::string x = "EctypID"; return x; };// int
-		static const std::string& EctypIDGroup(){ static std::string x = "EctypIDGroup"; return x; };// int
-		static const std::string& EctypServer(){ static std::string x = "EctypServer"; return x; };// int
-		static const std::string& GuildAD(){ static std::string x = "GuildAD"; return x; };// string
-		static const std::string& GuildContinueDay(){ static std::string x = "GuildContinueDay"; return x; };// int
-		static const std::string& GuildCreateTime(){ static std::string x = "GuildCreateTime"; return x; };// int
-		static const std::string& GuildCreateter(){ static std::string x = "GuildCreateter"; return x; };// int
-		static const std::string& GuildDesc(){ static std::string x = "GuildDesc"; return x; };// string
-		static const std::string& GuildExp(){ static std::string x = "GuildExp"; return x; };// int
-		static const std::string& GuildHonor(){ static std::string x = "GuildHonor"; return x; };// int
-		static const std::string& GuildID(){ static std::string x = "GuildID"; return x; };// object
-		static const std::string& GuildIcon(){ static std::string x = "GuildIcon"; return x; };// int
-		static const std::string& GuildLevel(){ static std::string x = "GuildLevel"; return x; };// int
-		static const std::string& GuildMemeberCount(){ static std::string x = "GuildMemeberCount"; return x; };// int
-		static const std::string& GuildMemeberMaxCount(){ static std::string x = "GuildMemeberMaxCount"; return x; };// int
-		static const std::string& GuildMoney(){ static std::string x = "GuildMoney"; return x; };// int
-		static const std::string& GuildStatus(){ static std::string x = "GuildStatus"; return x; };// int
-		static const std::string& KingWarResource(){ static std::string x = "KingWarResource"; return x; };// int
-		static const std::string& Name(){ static std::string x = "Name"; return x; };// string
-		static const std::string& PresidentID(){ static std::string x = "PresidentID"; return x; };// object
-		static const std::string& PresidentName(){ static std::string x = "PresidentName"; return x; };// string
-		static const std::string& Rank(){ static std::string x = "Rank"; return x; };// int
-		static const std::string& RecruitAD(){ static std::string x = "RecruitAD"; return x; };// string
-		static const std::string& RecruitLevel(){ static std::string x = "RecruitLevel"; return x; };// int
+		static const std::string& Guild_AD(){ static std::string x = "Guild_AD"; return x; };// string
+		static const std::string& Guild_ContinueDay(){ static std::string x = "Guild_ContinueDay"; return x; };// int
+		static const std::string& Guild_CreateTime(){ static std::string x = "Guild_CreateTime"; return x; };// int
+		static const std::string& Guild_Createter(){ static std::string x = "Guild_Createter"; return x; };// int
+		static const std::string& Guild_Desc(){ static std::string x = "Guild_Desc"; return x; };// string
+		static const std::string& Guild_EctypID(){ static std::string x = "Guild_EctypID"; return x; };// int
+		static const std::string& Guild_EctypIDGroup(){ static std::string x = "Guild_EctypIDGroup"; return x; };// int
+		static const std::string& Guild_EctypServer(){ static std::string x = "Guild_EctypServer"; return x; };// object
+		static const std::string& Guild_Exp(){ static std::string x = "Guild_Exp"; return x; };// int
+		static const std::string& Guild_Gold(){ static std::string x = "Guild_Gold"; return x; };// int
+		static const std::string& Guild_Honor(){ static std::string x = "Guild_Honor"; return x; };// int
+		static const std::string& Guild_ID(){ static std::string x = "Guild_ID"; return x; };// object
+		static const std::string& Guild_Icon(){ static std::string x = "Guild_Icon"; return x; };// string
+		static const std::string& Guild_KingWarResource(){ static std::string x = "Guild_KingWarResource"; return x; };// int
+		static const std::string& Guild_Level(){ static std::string x = "Guild_Level"; return x; };// int
+		static const std::string& Guild_MemeberCount(){ static std::string x = "Guild_MemeberCount"; return x; };// int
+		static const std::string& Guild_MemeberMaxCount(){ static std::string x = "Guild_MemeberMaxCount"; return x; };// int
+		static const std::string& Guild_Name(){ static std::string x = "Guild_Name"; return x; };// string
+		static const std::string& Guild_PresidentID(){ static std::string x = "Guild_PresidentID"; return x; };// object
+		static const std::string& Guild_PresidentName(){ static std::string x = "Guild_PresidentName"; return x; };// string
+		static const std::string& Guild_Rank(){ static std::string x = "Guild_Rank"; return x; };// int
+		static const std::string& Guild_Status(){ static std::string x = "Guild_Status"; return x; };// int
 		// Record
-		class GuildAppyList
+		class Guild_AppyList
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildAppyList"; return x; };
+			static const std::string& ThisName(){ static std::string x = "Guild_AppyList"; return x; };
 			static const int GUID = 0;//object
 			static const int Name = 1;//string
 			static const int Level = 2;//int
 			static const int VIP = 3;//int
 
 		};
-		class GuildHouse
+		class Guild_Building
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildHouse"; return x; };
+			static const std::string& ThisName(){ static std::string x = "Guild_Building"; return x; };
 			static const int GUID = 0;//object
 			static const int Name = 1;//string
 			static const int Level = 2;//int
 
 		};
-		class GuildMemberList
+		class Guild_MemberList
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildMemberList"; return x; };
+			static const std::string& ThisName(){ static std::string x = "Guild_MemberList"; return x; };
 			static const int GUID = 0;//object
 			static const int Name = 1;//string
 			static const int Level = 2;//int
@@ -256,11 +252,11 @@ namespace NFrame
 			static const int AllContribution = 14;//int
 
 		};
-		class GuildSkill
+		class Guild_WarList
 		{
 		public:
 			//Class name
-			static const std::string& ThisName(){ static std::string x = "GuildSkill"; return x; };
+			static const std::string& ThisName(){ static std::string x = "Guild_WarList"; return x; };
 			static const int GUID = 0;//object
 			static const int Level = 1;//int
 
@@ -613,6 +609,28 @@ namespace NFrame
 		static const std::string& GateID(){ static std::string x = "GateID"; return x; };// int
 		static const std::string& Gold(){ static std::string x = "Gold"; return x; };// int
 		static const std::string& GuildID(){ static std::string x = "GuildID"; return x; };// object
+		static const std::string& Guild_AD(){ static std::string x = "Guild_AD"; return x; };// string
+		static const std::string& Guild_ContinueDay(){ static std::string x = "Guild_ContinueDay"; return x; };// int
+		static const std::string& Guild_CreateTime(){ static std::string x = "Guild_CreateTime"; return x; };// int
+		static const std::string& Guild_Createter(){ static std::string x = "Guild_Createter"; return x; };// int
+		static const std::string& Guild_Desc(){ static std::string x = "Guild_Desc"; return x; };// string
+		static const std::string& Guild_EctypID(){ static std::string x = "Guild_EctypID"; return x; };// int
+		static const std::string& Guild_EctypIDGroup(){ static std::string x = "Guild_EctypIDGroup"; return x; };// int
+		static const std::string& Guild_EctypServer(){ static std::string x = "Guild_EctypServer"; return x; };// object
+		static const std::string& Guild_Exp(){ static std::string x = "Guild_Exp"; return x; };// int
+		static const std::string& Guild_Gold(){ static std::string x = "Guild_Gold"; return x; };// int
+		static const std::string& Guild_Honor(){ static std::string x = "Guild_Honor"; return x; };// int
+		static const std::string& Guild_ID(){ static std::string x = "Guild_ID"; return x; };// object
+		static const std::string& Guild_Icon(){ static std::string x = "Guild_Icon"; return x; };// string
+		static const std::string& Guild_KingWarResource(){ static std::string x = "Guild_KingWarResource"; return x; };// int
+		static const std::string& Guild_Level(){ static std::string x = "Guild_Level"; return x; };// int
+		static const std::string& Guild_MemeberCount(){ static std::string x = "Guild_MemeberCount"; return x; };// int
+		static const std::string& Guild_MemeberMaxCount(){ static std::string x = "Guild_MemeberMaxCount"; return x; };// int
+		static const std::string& Guild_Name(){ static std::string x = "Guild_Name"; return x; };// string
+		static const std::string& Guild_PresidentID(){ static std::string x = "Guild_PresidentID"; return x; };// object
+		static const std::string& Guild_PresidentName(){ static std::string x = "Guild_PresidentName"; return x; };// string
+		static const std::string& Guild_Rank(){ static std::string x = "Guild_Rank"; return x; };// int
+		static const std::string& Guild_Status(){ static std::string x = "Guild_Status"; return x; };// int
 		static const std::string& HP(){ static std::string x = "HP"; return x; };// int
 		static const std::string& HPREGEN(){ static std::string x = "HPREGEN"; return x; };// int
 		static const std::string& Head(){ static std::string x = "Head"; return x; };// string
@@ -620,7 +638,7 @@ namespace NFrame
 		static const std::string& HeroPos1CnfID(){ static std::string x = "HeroPos1CnfID"; return x; };// string
 		static const std::string& HeroPos1Star(){ static std::string x = "HeroPos1Star"; return x; };// int
 		static const std::string& HeroPos2(){ static std::string x = "HeroPos2"; return x; };// object
-		static const std::string& HeroPos2CnfID(){ static std::string x = "HeroPos2CnfID"; return x; };// object
+		static const std::string& HeroPos2CnfID(){ static std::string x = "HeroPos2CnfID"; return x; };// string
 		static const std::string& HeroPos2Star(){ static std::string x = "HeroPos2Star"; return x; };// int
 		static const std::string& HeroPos3(){ static std::string x = "HeroPos3"; return x; };// object
 		static const std::string& HeroPos3CnfID(){ static std::string x = "HeroPos3CnfID"; return x; };// string
@@ -896,6 +914,58 @@ namespace NFrame
 			static const int ConfigID = 1;//string
 			static const int ItemCount = 2;//int
 			static const int Postion = 3;//vector3
+
+		};
+		class Guild_AppyList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Guild_AppyList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Level = 2;//int
+			static const int VIP = 3;//int
+
+		};
+		class Guild_Building
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Guild_Building"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Level = 2;//int
+
+		};
+		class Guild_MemberList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Guild_MemberList"; return x; };
+			static const int GUID = 0;//object
+			static const int Name = 1;//string
+			static const int Level = 2;//int
+			static const int Job = 3;//int
+			static const int Donation = 4;//int
+			static const int Receive = 5;//int
+			static const int VIP = 6;//int
+			static const int Online = 7;//int
+			static const int Power = 8;//int
+			static const int Title = 9;//int
+			static const int GameID = 10;//int
+			static const int JoinTime = 11;//int
+			static const int Contribution = 12;//int
+			static const int LastTime = 13;//string
+			static const int AllContribution = 14;//int
+
+		};
+		class Guild_WarList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Guild_WarList"; return x; };
+			static const int GUID = 0;//object
+			static const int Level = 1;//int
 
 		};
 		class HeroValue
