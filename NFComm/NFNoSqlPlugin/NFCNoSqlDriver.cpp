@@ -61,18 +61,17 @@ const bool NFCNoSqlDriver::Connect(const std::string & strDns, const int nPort, 
 			m_pNoSqlClient = NULL;
 		}
 
-		m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
-
 		this->strIP = strDns;
 		this->nPort = nPort;
 		this->strAuthKey = strAuthKey;
+		m_pNoSqlClient = new redis::client(strDns, nPort, strAuthKey);
+
 
 		mbEnable = true;
 	}
-	catch (...)
-	{
-		mbEnable = false;
-	}
+
+
+	REDIS_CATCH(__FUNCTION__, __LINE__);
 
 	return mbEnable;
 }

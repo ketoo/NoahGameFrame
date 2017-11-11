@@ -54,7 +54,7 @@ protected:
 	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 protected:
-	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID);
+	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const std::string & strCnfID);
 	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
 	int GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
 
