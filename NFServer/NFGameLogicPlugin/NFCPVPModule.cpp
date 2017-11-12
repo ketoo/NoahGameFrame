@@ -524,4 +524,27 @@ int NFCPVPModule::RandomTileScene()
 void NFCPVPModule::OnReqAddGambleProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen)
 {
 	//attack record and beattack record
+	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAddGambleValue);
+
+	if (xMsg.number() <= 0)
+	{
+		return;
+	}
+
+	if (xMsg.property() == NFrame::Player::GambleGold())
+	{
+		if (m_pPropertyModule->ConsumeGold(nPlayerID, xMsg.number()))
+		{
+			int64_t nGambleGold = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GambleGold());
+			m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleGold(), nGambleGold + xMsg.number());
+		}
+	}
+	else if (xMsg.property() == NFrame::Player::GambleDiamond())
+	{
+		if (m_pPropertyModule->ConsumeDiamond(nPlayerID, xMsg.number()))
+		{
+			int64_t nGambleDiamond = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::GambleDiamond());
+			m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::GambleDiamond(), nGambleDiamond + xMsg.number());
+		}
+	}
 }

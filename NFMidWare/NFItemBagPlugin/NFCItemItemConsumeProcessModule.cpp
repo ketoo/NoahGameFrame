@@ -17,7 +17,7 @@ bool NFCItemItemConsumeProcessModule::Init()
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pHeroPropertyModule = pPluginManager->FindModule<NFIHeroPropertyModule>();
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 	m_pItemModule->ResgisterConsumeModule(NFMsg::EItemType::EIT_ITEM, this);
 
 	return true;
@@ -88,6 +88,15 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		return 5;
 	}
 
+	const int nAwardPropertyValue = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::AwardProperty());
+	if (nAwardPropertyValue <= 0)
+	{
+		return 6;
+	}
+
+	//reduce Bag ItemCount
+	pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nBagList_ItemCount - nItemCount);
+
 	switch (nSubItemType)
 	{
 	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:		
@@ -95,77 +104,25 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 		//don't know what to do, what is shengshui?
 	}
 	break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:	
-	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:	
-	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:		// EXP
-	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:			
-	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:			
-	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:			
-	{
-		const std::string strAwardProperty = m_pElementModule->GetPropertyString(strItemConfigID, NFrame::Item::AwardProperty());
-		if (strAwardProperty.length() <= 0)
-		{
-			return 6;
-		}
-		const int nVIPEXP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::VIPEXP());
-		const int64_t nEXP = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::EXP());
-		const int nHP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::HP());
-		const int nSP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::SP());
-		const int nMP = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::MP());
-		const int64_t nGold = m_pElementModule->GetPropertyInt(strAwardProperty, NFrame::ConsumeData::Gold());
-		const int nDiamond = m_pElementModule->GetPropertyInt32(strAwardProperty, NFrame::ConsumeData::Diamond());
+	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:
+		m_pPropertyModule->AddDiamond(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:
+		m_pPropertyModule->AddGold(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:
+		m_pLevelModule->AddExp(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:	
+		m_pPropertyModule->AddHP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:
+		m_pPropertyModule->AddMP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:
+		m_pPropertyModule->AddSP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
 
-		if (self == xTargetID)
-		{
-			if (nVIPEXP != 0)
-			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::VIPEXP(), m_pKernelModule->GetPropertyInt32(self, NFrame::Player::VIPEXP()) + nVIPEXP * nItemCount);
-			}
-			if (nEXP != 0)
-			{
-				m_pKernelModule->SetPropertyInt(self, NFrame::Player::EXP(), m_pKernelModule->GetPropertyInt(self, NFrame::Player::EXP()) + nEXP * nItemCount);
-			}
-			if (nHP != 0)
-			{
-				if (!m_pPropertyModule->AddHP(self, nHP * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nSP != 0)
-			{
-				if (!m_pPropertyModule->AddSP(self, nSP * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nMP != 0)
-			{
-				if (!m_pPropertyModule->AddMP(self, nMP * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nGold != 0)
-			{
-				if (!m_pPropertyModule->AddGold(self, nGold * nItemCount))
-				{
-					return 0;
-				}
-			}
-			if (nDiamond != 0)
-			{
-				if (!m_pPropertyModule->AddDiamond(self, nDiamond * nItemCount))
-				{
-					return 0;
-				}
-			}
-		}
-
-		//deduct Bag ItemCount
-		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nBagList_ItemCount - nItemCount);
-	}
-	break;
 	default:
 		break;
 	}

@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
 
 class NFCItemItemConsumeProcessModule
 	: public NFIItemConsumeProcessModule
@@ -50,6 +51,7 @@ private:
 	NFIHeroModule* m_pHeroModule;
 	NFIHeroPropertyModule* m_pHeroPropertyModule;
 	NFIPropertyModule* m_pPropertyModule;
+	NFILevelModule* m_pLevelModule;
 };
 
 #endif
