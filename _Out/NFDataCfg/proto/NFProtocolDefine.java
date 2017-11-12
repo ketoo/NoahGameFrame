@@ -696,7 +696,7 @@ package nframe;
 		{
 			//Class name
 			public static final String ThisName = "AttackList";
-			public static final int WarID = 0;//string
+			public static final int WarID = 0;//object
 			public static final int AttackerID = 1;//object
 			public static final int BeAttackerID = 2;//object
 			public static final int AttackerName = 3;//string
@@ -785,7 +785,7 @@ package nframe;
 		{
 			//Class name
 			public static final String ThisName = "BeAccackList";
-			public static final int WarID = 0;//string
+			public static final int WarID = 0;//object
 			public static final int AttackerID = 1;//object
 			public static final int BeAttackerID = 2;//object
 			public static final int AttackerName = 3;//string
