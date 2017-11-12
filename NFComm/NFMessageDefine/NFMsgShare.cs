@@ -1180,6 +1180,30 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAddGambleValue")]
+  public partial class ReqAddGambleValue : global::ProtoBuf.IExtensible
+  {
+    public ReqAddGambleValue() {}
+    
+    private string _property;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"property", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string property
+    {
+      get { return _property; }
+      set { _property = value; }
+    }
+    private int _number;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int number
+    {
+      get { return _number; }
+      set { _number = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqMiningTitle")]
   public partial class ReqMiningTitle : global::ProtoBuf.IExtensible
   {

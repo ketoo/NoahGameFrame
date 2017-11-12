@@ -136,6 +136,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ReqBuyItemFromShop_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqBuyItemFromShop_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ReqAddGambleValue_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ReqAddGambleValue_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ReqMiningTitle_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ReqMiningTitle_reflection_ = NULL;
@@ -803,7 +806,23 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqBuyItemFromShop));
-  ReqMiningTitle_descriptor_ = file->message_type(34);
+  ReqAddGambleValue_descriptor_ = file->message_type(34);
+  static const int ReqAddGambleValue_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAddGambleValue, property_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAddGambleValue, number_),
+  };
+  ReqAddGambleValue_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ReqAddGambleValue_descriptor_,
+      ReqAddGambleValue::default_instance_,
+      ReqAddGambleValue_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAddGambleValue, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAddGambleValue, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ReqAddGambleValue));
+  ReqMiningTitle_descriptor_ = file->message_type(35);
   static const int ReqMiningTitle_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqMiningTitle, y_),
@@ -820,7 +839,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqMiningTitle));
-  TileState_descriptor_ = file->message_type(35);
+  TileState_descriptor_ = file->message_type(36);
   static const int TileState_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileState, y_),
@@ -837,7 +856,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TileState));
-  TileBuilding_descriptor_ = file->message_type(36);
+  TileBuilding_descriptor_ = file->message_type(37);
   static const int TileBuilding_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileBuilding, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileBuilding, y_),
@@ -855,7 +874,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TileBuilding));
-  TileNPC_descriptor_ = file->message_type(37);
+  TileNPC_descriptor_ = file->message_type(38);
   static const int TileNPC_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileNPC, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TileNPC, y_),
@@ -873,7 +892,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TileNPC));
-  AckMiningTitle_descriptor_ = file->message_type(38);
+  AckMiningTitle_descriptor_ = file->message_type(39);
   static const int AckMiningTitle_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle, tile_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckMiningTitle, building_),
@@ -890,7 +909,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckMiningTitle));
-  ReqSearchOppnent_descriptor_ = file->message_type(39);
+  ReqSearchOppnent_descriptor_ = file->message_type(40);
   static const int ReqSearchOppnent_offsets_[1] = {
   };
   ReqSearchOppnent_reflection_ =
@@ -904,7 +923,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSearchOppnent));
-  AckSearchOppnent_descriptor_ = file->message_type(40);
+  AckSearchOppnent_descriptor_ = file->message_type(41);
   static const int AckSearchOppnent_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSearchOppnent, scene_id_),
   };
@@ -919,7 +938,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSearchOppnent));
-  ReqSendMail_descriptor_ = file->message_type(41);
+  ReqSendMail_descriptor_ = file->message_type(42);
   static const int ReqSendMail_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, reciever_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSendMail, item_list_),
@@ -936,7 +955,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSendMail));
-  ReqSwitchServer_descriptor_ = file->message_type(42);
+  ReqSwitchServer_descriptor_ = file->message_type(43);
   static const int ReqSwitchServer_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqSwitchServer, self_serverid_),
@@ -957,7 +976,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqSwitchServer));
-  AckSwitchServer_descriptor_ = file->message_type(43);
+  AckSwitchServer_descriptor_ = file->message_type(44);
   static const int AckSwitchServer_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, selfid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckSwitchServer, self_serverid_),
@@ -975,7 +994,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckSwitchServer));
-  PVPRoomInfo_descriptor_ = file->message_type(44);
+  PVPRoomInfo_descriptor_ = file->message_type(45);
   static const int PVPRoomInfo_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, ncellstatus_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PVPRoomInfo, roomid_),
@@ -999,7 +1018,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PVPRoomInfo));
-  ReqPVPApplyMatch_descriptor_ = file->message_type(45);
+  ReqPVPApplyMatch_descriptor_ = file->message_type(46);
   static const int ReqPVPApplyMatch_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqPVPApplyMatch, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqPVPApplyMatch, npvpmode_),
@@ -1019,7 +1038,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqPVPApplyMatch));
   ReqPVPApplyMatch_EApplyType_descriptor_ = ReqPVPApplyMatch_descriptor_->enum_type(0);
-  AckPVPApplyMatch_descriptor_ = file->message_type(46);
+  AckPVPApplyMatch_descriptor_ = file->message_type(47);
   static const int AckPVPApplyMatch_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPVPApplyMatch, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckPVPApplyMatch, xroominfo_),
@@ -1037,7 +1056,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AckPVPApplyMatch));
-  ReqCreatePVPEctype_descriptor_ = file->message_type(47);
+  ReqCreatePVPEctype_descriptor_ = file->message_type(48);
   static const int ReqCreatePVPEctype_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreatePVPEctype, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqCreatePVPEctype, xroominfo_),
@@ -1053,7 +1072,7 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqCreatePVPEctype));
-  AckCreatePVPEctype_descriptor_ = file->message_type(48);
+  AckCreatePVPEctype_descriptor_ = file->message_type(49);
   static const int AckCreatePVPEctype_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreatePVPEctype, self_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AckCreatePVPEctype, xroominfo_),
@@ -1154,6 +1173,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     ReqSwitchFightHero_descriptor_, &ReqSwitchFightHero::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqBuyItemFromShop_descriptor_, &ReqBuyItemFromShop::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReqAddGambleValue_descriptor_, &ReqAddGambleValue::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ReqMiningTitle_descriptor_, &ReqMiningTitle::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1261,6 +1282,8 @@ void protobuf_ShutdownFile_NFMsgShare_2eproto() {
   delete ReqSwitchFightHero_reflection_;
   delete ReqBuyItemFromShop::default_instance_;
   delete ReqBuyItemFromShop_reflection_;
+  delete ReqAddGambleValue::default_instance_;
+  delete ReqAddGambleValue_reflection_;
   delete ReqMiningTitle::default_instance_;
   delete ReqMiningTitle_reflection_;
   delete TileState::default_instance_;
@@ -1399,48 +1422,49 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "NFMsg.Ident\022\013\n\003Set\030\002 \002(\005\"2\n\022ReqSwitchFig"
     "htHero\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\"3\n\022"
     "ReqBuyItemFromShop\022\016\n\006itemID\030\001 \002(\t\022\r\n\005co"
-    "unt\030\002 \002(\005\"3\n\016ReqMiningTitle\022\t\n\001x\030\001 \002(\005\022\t"
-    "\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n\tTileState\022\t\n\001x"
-    "\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\"R\n\014TileBu"
-    "ilding\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\020\n\010configID"
-    "\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFMsg.Ident\"M\n\007Ti"
-    "leNPC\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\020\n\010configID\030"
-    "\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFMsg.Ident\"t\n\016Ack"
-    "MiningTitle\022\036\n\004tile\030\001 \003(\0132\020.NFMsg.TileSt"
-    "ate\022%\n\010building\030\002 \003(\0132\023.NFMsg.TileBuildi"
-    "ng\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.TileNPC\"\022\n\020ReqSe"
-    "archOppnent\"$\n\020AckSearchOppnent\022\020\n\010scene"
-    "_id\030\001 \002(\005\"\201\001\n\013ReqSendMail\022\036\n\010reciever\030\001 "
-    "\002(\0132\014.NFMsg.Ident\022$\n\titem_list\030\002 \003(\0132\021.N"
-    "FMsg.ItemStruct\022,\n\rcurrency_list\030\003 \003(\0132\025"
-    ".NFMsg.CurrencyStruct\"\271\001\n\017ReqSwitchServe"
-    "r\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_"
-    "serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002(\003\022"
-    "\025\n\rgate_serverid\030\004 \002(\003\022\017\n\007SceneID\030\005 \002(\003\022"
-    "\037\n\tclient_id\030\006 \002(\0132\014.NFMsg.Ident\022\017\n\007grou"
-    "pID\030\007 \002(\003\"v\n\017AckSwitchServer\022\034\n\006selfid\030\001"
-    " \002(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \002("
-    "\003\022\027\n\017target_serverid\030\003 \002(\003\022\025\n\rgate_serve"
-    "rid\030\004 \002(\003\"\361\001\n\013PVPRoomInfo\022\023\n\013nCellStatus"
-    "\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010"
-    "nPVPMode\030\003 \002(\005\022\021\n\tnPVPGrade\030\004 \002(\005\022\021\n\tMax"
-    "Palyer\030\005 \002(\005\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg"
-    ".Ident\022!\n\013xBluePlayer\030\007 \003(\0132\014.NFMsg.Iden"
-    "t\022\020\n\010serverid\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007"
-    "groupID\030\n \001(\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007se"
-    "lf_id\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 "
-    "\002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApplyType\030\004 \002(\005\022\035\n"
-    "\007team_id\030\005 \001(\0132\014.NFMsg.Ident\"8\n\nEApplyTy"
-    "pe\022\025\n\021EApplyType_Single\020\000\022\023\n\017EApplyType_"
-    "Team\020\001\"|\n\020AckPVPApplyMatch\022\035\n\007self_id\030\001 "
-    "\002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.N"
-    "FMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005\022\017\n\007n"
-    "Result\030\004 \002(\005\"Z\n\022ReqCreatePVPEctype\022\035\n\007se"
-    "lf_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002"
-    " \002(\0132\022.NFMsg.PVPRoomInfo\"m\n\022AckCreatePVP"
-    "Ectype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n"
-    "\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\022\021\n\t"
-    "ApplyType\030\003 \002(\005", 5535);
+    "unt\030\002 \002(\005\"5\n\021ReqAddGambleValue\022\020\n\010proper"
+    "ty\030\001 \002(\t\022\016\n\006number\030\002 \002(\005\"3\n\016ReqMiningTit"
+    "le\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n"
+    "\tTileState\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030"
+    "\003 \002(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 "
+    "\002(\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NF"
+    "Msg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002"
+    "(\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFM"
+    "sg.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\013"
+    "2\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.N"
+    "FMsg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.T"
+    "ileNPC\"\022\n\020ReqSearchOppnent\"$\n\020AckSearchO"
+    "ppnent\022\020\n\010scene_id\030\001 \002(\005\"\201\001\n\013ReqSendMail"
+    "\022\036\n\010reciever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem"
+    "_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurren"
+    "cy_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n"
+    "\017ReqSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg"
+    ".Ident\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_"
+    "serverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n"
+    "\007SceneID\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMs"
+    "g.Ident\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchSer"
+    "ver\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rsel"
+    "f_serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002("
+    "\003\022\025\n\rgate_serverid\030\004 \002(\003\"\361\001\n\013PVPRoomInfo"
+    "\022\023\n\013nCellStatus\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\0132\014."
+    "NFMsg.Ident\022\020\n\010nPVPMode\030\003 \002(\005\022\021\n\tnPVPGra"
+    "de\030\004 \002(\005\022\021\n\tMaxPalyer\030\005 \002(\005\022 \n\nxRedPlaye"
+    "r\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003"
+    "(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007Sc"
+    "eneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPA"
+    "pplyMatch\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident"
+    "\022\020\n\010nPVPMode\030\002 \002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApp"
+    "lyType\030\004 \002(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Id"
+    "ent\"8\n\nEApplyType\022\025\n\021EApplyType_Single\020\000"
+    "\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPApplyMatc"
+    "h\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoo"
+    "mInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApply"
+    "Type\030\003 \002(\005\022\017\n\007nResult\030\004 \002(\005\"Z\n\022ReqCreate"
+    "PVPEctype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident"
+    "\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\""
+    "m\n\022AckCreatePVPEctype\022\035\n\007self_id\030\001 \002(\0132\014"
+    ".NFMsg.Ident\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg."
+    "PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005", 5590);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -1479,6 +1503,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_ = new ReqSetFightHero();
   ReqSwitchFightHero::default_instance_ = new ReqSwitchFightHero();
   ReqBuyItemFromShop::default_instance_ = new ReqBuyItemFromShop();
+  ReqAddGambleValue::default_instance_ = new ReqAddGambleValue();
   ReqMiningTitle::default_instance_ = new ReqMiningTitle();
   TileState::default_instance_ = new TileState();
   TileBuilding::default_instance_ = new TileBuilding();
@@ -1530,6 +1555,7 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
   ReqSetFightHero::default_instance_->InitAsDefaultInstance();
   ReqSwitchFightHero::default_instance_->InitAsDefaultInstance();
   ReqBuyItemFromShop::default_instance_->InitAsDefaultInstance();
+  ReqAddGambleValue::default_instance_->InitAsDefaultInstance();
   ReqMiningTitle::default_instance_->InitAsDefaultInstance();
   TileState::default_instance_->InitAsDefaultInstance();
   TileBuilding::default_instance_->InitAsDefaultInstance();
@@ -12252,6 +12278,272 @@ void ReqBuyItemFromShop::Swap(ReqBuyItemFromShop* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ReqBuyItemFromShop_descriptor_;
   metadata.reflection = ReqBuyItemFromShop_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReqAddGambleValue::kPropertyFieldNumber;
+const int ReqAddGambleValue::kNumberFieldNumber;
+#endif  // !_MSC_VER
+
+ReqAddGambleValue::ReqAddGambleValue()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void ReqAddGambleValue::InitAsDefaultInstance() {
+}
+
+ReqAddGambleValue::ReqAddGambleValue(const ReqAddGambleValue& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ReqAddGambleValue::SharedCtor() {
+  _cached_size_ = 0;
+  property_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  number_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReqAddGambleValue::~ReqAddGambleValue() {
+  SharedDtor();
+}
+
+void ReqAddGambleValue::SharedDtor() {
+  if (property_ != &::google::protobuf::internal::kEmptyString) {
+    delete property_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void ReqAddGambleValue::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReqAddGambleValue::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReqAddGambleValue_descriptor_;
+}
+
+const ReqAddGambleValue& ReqAddGambleValue::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_NFMsgShare_2eproto();
+  return *default_instance_;
+}
+
+ReqAddGambleValue* ReqAddGambleValue::default_instance_ = NULL;
+
+ReqAddGambleValue* ReqAddGambleValue::New() const {
+  return new ReqAddGambleValue;
+}
+
+void ReqAddGambleValue::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_property()) {
+      if (property_ != &::google::protobuf::internal::kEmptyString) {
+        property_->clear();
+      }
+    }
+    number_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReqAddGambleValue::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string property = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_property()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->property().data(), this->property().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_number;
+        break;
+      }
+
+      // required int32 number = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_number:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &number_)));
+          set_has_number();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ReqAddGambleValue::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string property = 1;
+  if (has_property()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->property().data(), this->property().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->property(), output);
+  }
+
+  // required int32 number = 2;
+  if (has_number()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->number(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* ReqAddGambleValue::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required string property = 1;
+  if (has_property()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->property().data(), this->property().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->property(), target);
+  }
+
+  // required int32 number = 2;
+  if (has_number()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->number(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int ReqAddGambleValue::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string property = 1;
+    if (has_property()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->property());
+    }
+
+    // required int32 number = 2;
+    if (has_number()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->number());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReqAddGambleValue::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReqAddGambleValue* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReqAddGambleValue*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReqAddGambleValue::MergeFrom(const ReqAddGambleValue& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_property()) {
+      set_property(from.property());
+    }
+    if (from.has_number()) {
+      set_number(from.number());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReqAddGambleValue::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqAddGambleValue::CopyFrom(const ReqAddGambleValue& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqAddGambleValue::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void ReqAddGambleValue::Swap(ReqAddGambleValue* other) {
+  if (other != this) {
+    std::swap(property_, other->property_);
+    std::swap(number_, other->number_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReqAddGambleValue::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReqAddGambleValue_descriptor_;
+  metadata.reflection = ReqAddGambleValue_reflection_;
   return metadata;
 }
 

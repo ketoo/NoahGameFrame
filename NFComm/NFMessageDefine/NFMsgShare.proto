@@ -326,6 +326,12 @@ message ReqBuyItemFromShop
 	required int32		count				= 2;
 }
 
+//EGMI_REQ_ADD_GAMBLE_VALUE
+message ReqAddGambleValue
+{
+	required string		property				= 1;
+	required int32		number				= 2;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //EGEC_REQ_MINING_TITLE							= 1600;		 // 挖矿
