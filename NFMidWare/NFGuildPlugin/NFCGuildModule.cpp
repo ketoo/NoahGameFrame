@@ -88,14 +88,14 @@ bool NFCGuildModule::MemberOnline(const NFGUID& self, const NFGUID& xGuild)
 bool NFCGuildModule::MemberOffline(const NFGUID& self, const NFGUID& xGuild)
 {
 	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(xGuild, NFrame::Guild::ThisName());
-	const int nRow = xRecord->FindObject(NFrame::Guild::GuildMemberList::GUID, self);
+	const int nRow = xRecord->FindObject(NFrame::Guild::Guild_MemberList::GUID, self);
 	if (nRow >= 0)
 	{
-		xRecord->SetInt(nRow, NFrame::Guild::GuildMemberList::Online, 0);
-		xRecord->SetInt(nRow, NFrame::Guild::GuildMemberList::GameID, 0);
+		xRecord->SetInt(nRow, NFrame::Guild::Guild_MemberList::Online, 0);
+		xRecord->SetInt(nRow, NFrame::Guild::Guild_MemberList::GameID, 0);
 
 		NFDateTime xTime = NFDateTime::Now();
-		xRecord->SetString(nRow, NFrame::Guild::GuildMemberList::LastTime, xTime.GetAsString());
+		xRecord->SetString(nRow, NFrame::Guild::Guild_MemberList::LastTime, xTime.GetAsString());
 	}
 
     return false;

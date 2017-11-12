@@ -72,6 +72,7 @@ class ReqEnterGuildEctype;
 class ReqSetFightHero;
 class ReqSwitchFightHero;
 class ReqBuyItemFromShop;
+class ReqAddGambleValue;
 class ReqMiningTitle;
 class TileState;
 class TileBuilding;
@@ -4232,6 +4233,103 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqBuyItemFromShop* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAddGambleValue : public ::google::protobuf::Message {
+ public:
+  ReqAddGambleValue();
+  virtual ~ReqAddGambleValue();
+
+  ReqAddGambleValue(const ReqAddGambleValue& from);
+
+  inline ReqAddGambleValue& operator=(const ReqAddGambleValue& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAddGambleValue& default_instance();
+
+  void Swap(ReqAddGambleValue* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAddGambleValue* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAddGambleValue& from);
+  void MergeFrom(const ReqAddGambleValue& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string property = 1;
+  inline bool has_property() const;
+  inline void clear_property();
+  static const int kPropertyFieldNumber = 1;
+  inline const ::std::string& property() const;
+  inline void set_property(const ::std::string& value);
+  inline void set_property(const char* value);
+  inline void set_property(const char* value, size_t size);
+  inline ::std::string* mutable_property();
+  inline ::std::string* release_property();
+  inline void set_allocated_property(::std::string* property);
+
+  // required int32 number = 2;
+  inline bool has_number() const;
+  inline void clear_number();
+  static const int kNumberFieldNumber = 2;
+  inline ::google::protobuf::int32 number() const;
+  inline void set_number(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAddGambleValue)
+ private:
+  inline void set_has_property();
+  inline void clear_has_property();
+  inline void set_has_number();
+  inline void clear_has_number();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* property_;
+  ::google::protobuf::int32 number_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAddGambleValue* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -9682,6 +9780,102 @@ inline ::google::protobuf::int32 ReqBuyItemFromShop::count() const {
 inline void ReqBuyItemFromShop::set_count(::google::protobuf::int32 value) {
   set_has_count();
   count_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// ReqAddGambleValue
+
+// required string property = 1;
+inline bool ReqAddGambleValue::has_property() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAddGambleValue::set_has_property() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAddGambleValue::clear_has_property() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAddGambleValue::clear_property() {
+  if (property_ != &::google::protobuf::internal::kEmptyString) {
+    property_->clear();
+  }
+  clear_has_property();
+}
+inline const ::std::string& ReqAddGambleValue::property() const {
+  return *property_;
+}
+inline void ReqAddGambleValue::set_property(const ::std::string& value) {
+  set_has_property();
+  if (property_ == &::google::protobuf::internal::kEmptyString) {
+    property_ = new ::std::string;
+  }
+  property_->assign(value);
+}
+inline void ReqAddGambleValue::set_property(const char* value) {
+  set_has_property();
+  if (property_ == &::google::protobuf::internal::kEmptyString) {
+    property_ = new ::std::string;
+  }
+  property_->assign(value);
+}
+inline void ReqAddGambleValue::set_property(const char* value, size_t size) {
+  set_has_property();
+  if (property_ == &::google::protobuf::internal::kEmptyString) {
+    property_ = new ::std::string;
+  }
+  property_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ReqAddGambleValue::mutable_property() {
+  set_has_property();
+  if (property_ == &::google::protobuf::internal::kEmptyString) {
+    property_ = new ::std::string;
+  }
+  return property_;
+}
+inline ::std::string* ReqAddGambleValue::release_property() {
+  clear_has_property();
+  if (property_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = property_;
+    property_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ReqAddGambleValue::set_allocated_property(::std::string* property) {
+  if (property_ != &::google::protobuf::internal::kEmptyString) {
+    delete property_;
+  }
+  if (property) {
+    set_has_property();
+    property_ = property;
+  } else {
+    clear_has_property();
+    property_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 number = 2;
+inline bool ReqAddGambleValue::has_number() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ReqAddGambleValue::set_has_number() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ReqAddGambleValue::clear_has_number() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ReqAddGambleValue::clear_number() {
+  number_ = 0;
+  clear_has_number();
+}
+inline ::google::protobuf::int32 ReqAddGambleValue::number() const {
+  return number_;
+}
+inline void ReqAddGambleValue::set_number(::google::protobuf::int32 value) {
+  set_has_number();
+  number_ = value;
 }
 
 // -------------------------------------------------------------------
