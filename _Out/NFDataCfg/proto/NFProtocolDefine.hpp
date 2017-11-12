@@ -708,7 +708,7 @@ namespace NFrame
 		public:
 			//Class name
 			static const std::string& ThisName(){ static std::string x = "AttackList"; return x; };
-			static const int WarID = 0;//string
+			static const int WarID = 0;//object
 			static const int AttackerID = 1;//object
 			static const int BeAttackerID = 2;//object
 			static const int AttackerName = 3;//string
@@ -800,7 +800,7 @@ namespace NFrame
 		public:
 			//Class name
 			static const std::string& ThisName(){ static std::string x = "BeAccackList"; return x; };
-			static const int WarID = 0;//string
+			static const int WarID = 0;//object
 			static const int AttackerID = 1;//object
 			static const int BeAttackerID = 2;//object
 			static const int AttackerName = 3;//string

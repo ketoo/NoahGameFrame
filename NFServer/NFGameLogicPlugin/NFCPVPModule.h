@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFINoSqlModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -87,6 +88,7 @@ private:
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFINoSqlModule* m_pNoSqlModule;
 	NFICommonRedisModule* m_pCommonRedisModule;
+	NFILevelModule* m_pLevelModule;
 
 	std::vector<int> mxTileSceneIDList;
 };

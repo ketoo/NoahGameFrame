@@ -132,7 +132,7 @@
 	</Propertys>
 	<Records>
 		<Record Id="AttackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
-			<Col Type ="string"	Tag="WarID"/><!--- 0-->
+			<Col Type ="object"	Tag="WarID"/><!--- 0-->
 			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
 			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
 			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
@@ -209,7 +209,7 @@
 			<Col Type ="int"	Tag="Date"/>
 		</Record>
 		<Record Id="BeAccackList" Cache="1"	 Col="43"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="10"	 Save="0"	 Upload="0"	 >
-			<Col Type ="string"	Tag="WarID"/><!--- 0-->
+			<Col Type ="object"	Tag="WarID"/><!--- 0-->
 			<Col Type ="object"	Tag="AttackerID"/><!--- 0-->
 			<Col Type ="object"	Tag="BeAttackerID"/><!--- 0-->
 			<Col Type ="string"	Tag="AttackerName"/><!--- 0-->
