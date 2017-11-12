@@ -29,6 +29,7 @@ bool NFCPVPModule::Init()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
 	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
 	
 
     return true;
@@ -179,12 +180,13 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 	int nWinGold = nGambleGold * nStar / 3;
 	int nWinDiamond = nGambleDiamond * nStar / 3;
 
+	m_pPropertyModule->AddGold(nPlayerID, nWinGold);
+	m_pPropertyModule->AddDiamond(nPlayerID, nWinDiamond);
+	m_pLevelModule->AddExp(nPlayerID, nExp);
+
 	NFMsg::AckEndBattle xReqAckEndBattle;
 	if (bWin)
 	{
-		m_pPropertyModule->AddGold(nPlayerID, nWinGold);
-		m_pPropertyModule->AddDiamond(nPlayerID, nWinDiamond);
-
 		xReqAckEndBattle.set_win(1);
 		xReqAckEndBattle.set_star(nStar);
 		xReqAckEndBattle.set_exp(nExp);
@@ -196,8 +198,8 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 	}
 	else
 	{
-		m_pPropertyModule->AddGold(nPlayerID, -nWinGold);
-		m_pPropertyModule->AddDiamond(nPlayerID, -nWinDiamond);
+		//m_pPropertyModule->AddGold(nPlayerID, -nWinGold);
+		//m_pPropertyModule->AddDiamond(nPlayerID, -nWinDiamond);
 
 		xReqAckEndBattle.set_win(0);
 		xReqAckEndBattle.set_star(nStar);
@@ -441,7 +443,7 @@ void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int
 	NF_SHARE_PTR<NFIRecord> xAttackWarRecord = m_pKernelModule->FindRecord(self, NFrame::Player::AttackList::ThisName());
 
 	NF_SHARE_PTR<NFDataList> xDataList = xAttackWarRecord->GetInitData();
-	xDataList->SetObject(NFrame::Player::AttackList::WarID, NFGUID());
+	xDataList->SetObject(NFrame::Player::AttackList::WarID, xWarID);
 	//record the war information
 	/*
 	//the fields below need to be setted run-time

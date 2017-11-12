@@ -702,7 +702,7 @@ namespace NFrame
 		{
 			//Class name
 			public static readonly String ThisName = "AttackList";
-			public const int WarID = 0;//string
+			public const int WarID = 0;//object
 			public const int AttackerID = 1;//object
 			public const int BeAttackerID = 2;//object
 			public const int AttackerName = 3;//string
@@ -791,7 +791,7 @@ namespace NFrame
 		{
 			//Class name
 			public static readonly String ThisName = "BeAccackList";
-			public const int WarID = 0;//string
+			public const int WarID = 0;//object
 			public const int AttackerID = 1;//object
 			public const int BeAttackerID = 2;//object
 			public const int AttackerName = 3;//string
