@@ -144,7 +144,9 @@ public:
 
 	void Reset()
 	{
-		switch (GetType())
+		variantData = mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3>();
+		nType = TDATA_UNKNOWN;
+		/*switch (GetType())
 		{
 			case TDATA_INT:
 			{
@@ -178,7 +180,7 @@ public:
 				break;
 			default:
 				break;
-		}
+		}*/
 	}
 
 	bool IsNullValue() const
@@ -653,12 +655,11 @@ public:
 
 		if (mvList.size() > STACK_SIZE)
 		{
-			for (int i = 0; i < STACK_SIZE; ++i)
-			{
-				mvList[i]->Reset();
-			}
-
-			mvList.erase(mvList.begin() + 8, mvList.end());
+			mvList.erase(mvList.begin() + STACK_SIZE, mvList.end());
+		}
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList[i]->Reset();
 		}
 	}
     
