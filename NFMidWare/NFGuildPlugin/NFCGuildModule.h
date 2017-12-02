@@ -15,6 +15,7 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -35,12 +36,11 @@ public:
 
 protected:
 
-    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strName, const std::string& strGuildName);
+    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strGuildName);
     bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
     bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
     bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
     bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-    bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
 
     bool MemberOnline(const NFGUID& self, const NFGUID& xGuild);
     bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
@@ -48,6 +48,8 @@ protected:
 
     void OnGuildOnlineProcess(const NFGUID& xGuildID);
     void OnGuildOfflineProcess(const NFGUID& xGuildID);
+
+	bool AddMember(const NFGUID& xGuildID, const NFGUID& player, const MEMBER_TYPE type);
 
     NFIGuildModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xGuildID);
 
@@ -69,6 +71,7 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 
