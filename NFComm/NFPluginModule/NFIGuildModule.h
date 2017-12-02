@@ -17,10 +17,11 @@ class NFIGuildModule
 public:
     enum MEMBER_TYPE
     {
-        MT_PRESIDENT,
-        MT_OLDER,
-        MT_ELITE,
-        MT_MEMBER,
+		MT_NONE,
+		MT_MEMBER,
+		MT_ELITE,
+		MT_OLDER,
+		MT_PRESIDENT,
     };
 
 };
