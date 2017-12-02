@@ -68,10 +68,7 @@
 
 /* Finds the current platform */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if defined( __SYMBIAN32__ )
-#   define NF_PLATFORM NF_PLATFORM_SYMBIAN
-//////////////////////////////////////////////////////////////////////////
-#elif defined( __WIN32__ ) || defined( _WIN32 ) || defined(_WINDOWS) || defined(WIN) || defined(_WIN64) || defined( __WIN64__ )
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined(_WINDOWS) || defined(WIN) || defined(_WIN64) || defined( __WIN64__ )
 #   define NF_PLATFORM NF_PLATFORM_WIN
 //////////////////////////////////////////////////////////////////////////
 #elif defined( __APPLE_CC__) || defined(__APPLE__) || defined(__OSX__)
