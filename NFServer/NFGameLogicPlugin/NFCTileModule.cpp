@@ -532,7 +532,7 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 
 int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
-	if (CLASS_OBJECT_EVENT::COE_DESTROY == eClassEvent)
+	if (CLASS_OBJECT_EVENT::COE_BEFOREDESTROY == eClassEvent)
 	{
 		//cannot save tile here, because player maybe offline in other people scene
 	}
