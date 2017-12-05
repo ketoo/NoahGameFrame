@@ -57,7 +57,7 @@ int NFCNetModule::ExpandBufferSize(const unsigned int size)
 
 void NFCNetModule::RemoveReceiveCallBack(const int nMsgID)
 {
-    std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
     if (mxReceiveCallBack.end() != it)
     {
         mxReceiveCallBack.erase(it);
@@ -66,12 +66,16 @@ void NFCNetModule::RemoveReceiveCallBack(const int nMsgID)
 
 bool NFCNetModule::AddReceiveCallBack(const int nMsgID, const NET_RECEIVE_FUNCTOR_PTR& cb)
 {
-    if (mxReceiveCallBack.find(nMsgID) != mxReceiveCallBack.end())
+    if (mxReceiveCallBack.find(nMsgID) == mxReceiveCallBack.end())
     {
-        return false;
+		std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
+		xList.push_back(cb);
+		mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(nMsgID, xList));
+        return true;
     }
 
-    mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, cb));
+	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
+	it->second.push_back(cb);
 
     return true;
 }
@@ -275,17 +279,22 @@ NFINet* NFCNetModule::GetNet()
 
 void NFCNetModule::OnReceiveNetPack(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
-    std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxReceiveCallBack.find(nMsgID);
+    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = mxReceiveCallBack.find(nMsgID);
     if (mxReceiveCallBack.end() != it)
     {
-        NET_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
-        NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-        pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
-    } else
+		std::list<NET_RECEIVE_FUNCTOR_PTR>& xFunList = it->second;
+		for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = xFunList.begin(); itList != xFunList.end(); ++itList)
+		{
+			NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
+			NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
+			pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
+		}
+    } 
+	else
     {
-        for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator it = mxCallBackList.begin(); it != mxCallBackList.end(); ++it)
+        for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = mxCallBackList.begin(); itList != mxCallBackList.end(); ++itList)
         {
-            NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
+            NET_RECEIVE_FUNCTOR_PTR& pFunPtr = *itList;
             NET_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
             pFunc->operator()(nSockIndex, nMsgID, msg, nLen);
         }

@@ -43,6 +43,11 @@ bool NFCGuildModule::AfterInit()
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_SEARCH_GUILD, this, &NFCGuildModule::OnSearchGuildProcess)) { return false; }
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_CHAT, this, &NFCGuildModule::OnClientChatProcess)) { return false; }
 
+	m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildModule::OnObjectClassEvent);
+
+	m_pKernelModule->RegisterClassPropertyEvent(NFrame::Guild::ThisName(), this, &NFCGuildModule::OnPropertyCommonEvent);
+	m_pKernelModule->RegisterClassRecordEvent(NFrame::Guild::ThisName(), this, &NFCGuildModule::OnRecordCommonEvent);
+
     return true;
 }
 
@@ -300,4 +305,117 @@ void NFCGuildModule::OnClientChatProcess(const NFSOCK nSockIndex, const int nMsg
 		//cache the message for the guild member that off line
 		//m_pWorldNet_ServerModule->SendMsgPBToAllClient(NFMsg::EGMI_ACK_CHAT, xMsg);
 	}
-} 
+}
+
+int NFCGuildModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	return 0;
+}
+
+int NFCGuildModule::OnPropertyCommonEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	switch (oldVar.GetType())
+	{
+	case TDATA_INT:
+	{
+		NFMsg::ObjectPropertyInt xPropertyInt;
+		NFMsg::Ident* pIdent = xPropertyInt.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyInt* pDataInt = xPropertyInt.add_property_list();
+		pDataInt->set_property_name(strPropertyName);
+		pDataInt->set_data(newVar.GetInt());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_INT, xPropertyInt);
+	}
+	break;
+
+	case TDATA_FLOAT:
+	{
+		NFMsg::ObjectPropertyFloat xPropertyFloat;
+		NFMsg::Ident* pIdent = xPropertyFloat.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyFloat* pDataFloat = xPropertyFloat.add_property_list();
+		pDataFloat->set_property_name(strPropertyName);
+		pDataFloat->set_data(newVar.GetFloat());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat);
+	}
+	break;
+
+	case TDATA_STRING:
+	{
+		NFMsg::ObjectPropertyString xPropertyString;
+		NFMsg::Ident* pIdent = xPropertyString.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyString* pDataString = xPropertyString.add_property_list();
+		pDataString->set_property_name(strPropertyName);
+		pDataString->set_data(newVar.GetString());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_STRING, xPropertyString);
+	}
+	break;
+
+	case TDATA_OBJECT:
+	{
+		NFMsg::ObjectPropertyObject xPropertyObject;
+		NFMsg::Ident* pIdent = xPropertyObject.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyObject* pDataObject = xPropertyObject.add_property_list();
+		pDataObject->set_property_name(strPropertyName);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetObject());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_OBJECT, xPropertyObject);
+	}
+	break;
+	case TDATA_VECTOR2:
+	{
+		NFMsg::ObjectPropertyVector2 xPropertyVector2;
+		NFMsg::Ident* pIdent = xPropertyVector2.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyVector2* pDataObject = xPropertyVector2.add_property_list();
+		pDataObject->set_property_name(strPropertyName);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector2());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_VECTOR2, xPropertyVector2);
+	}
+	break;
+	case TDATA_VECTOR3:
+	{
+		NFMsg::ObjectPropertyVector3 xPropertyVector3;
+		NFMsg::Ident* pIdent = xPropertyVector3.mutable_player_id();
+		*pIdent = NFINetModule::NFToPB(self);
+
+		NFMsg::PropertyVector3* pDataObject = xPropertyVector3.add_property_list();
+		pDataObject->set_property_name(strPropertyName);
+		*pDataObject->mutable_data() = NFINetModule::NFToPB(newVar.GetVector3());
+
+		SendMessageToGameServer(self, NFMsg::EGMI_ACK_PROPERTY_VECTOR3, xPropertyVector3);
+	}
+	break;
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+int NFCGuildModule::OnRecordCommonEvent(const NFGUID & self, const RECORD_EVENT_DATA & xEventData, const NFData & oldVar, const NFData & newVar)
+{
+	return 0;
+}
+
+void NFCGuildModule::SendMessageToGameServer(const NFGUID& guild, const int nMessageID, google::protobuf::Message& msg)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(guild, NFrame::Guild::Guild_MemberList::ThisName());
+	for (int i = 0; i < xRecord->GetRows(); ++i)
+	{
+		//xRecord->GetInt(i, NFrame::Guild::Guild_MemberList::GameID)
+	}
+
+	//m_pWorldNet_ServerModule->SendMsgToGame
+}

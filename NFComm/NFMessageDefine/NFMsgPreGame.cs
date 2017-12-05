@@ -732,13 +732,33 @@ namespace NFMsg
   {
     public RoleOnlineNotify() {}
     
-    private NFMsg.Ident _guild = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    private NFMsg.Ident _self;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"self", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self
+    {
+      get { return _self; }
+      set { _self = value; }
+    }
+    private NFMsg.Ident _guild;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public NFMsg.Ident guild
     {
       get { return _guild; }
       set { _guild = value; }
+    }
+    private int _game;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"game", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int game
+    {
+      get { return _game; }
+      set { _game = value; }
+    }
+    private int _proxy;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"proxy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int proxy
+    {
+      get { return _proxy; }
+      set { _proxy = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -750,13 +770,33 @@ namespace NFMsg
   {
     public RoleOfflineNotify() {}
     
-    private NFMsg.Ident _guild = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    private NFMsg.Ident _self;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"self", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Ident self
+    {
+      get { return _self; }
+      set { _self = value; }
+    }
+    private NFMsg.Ident _guild;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public NFMsg.Ident guild
     {
       get { return _guild; }
       set { _guild = value; }
+    }
+    private int _game;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"game", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int game
+    {
+      get { return _game; }
+      set { _game = value; }
+    }
+    private int _proxy;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"proxy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int proxy
+    {
+      get { return _proxy; }
+      set { _proxy = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

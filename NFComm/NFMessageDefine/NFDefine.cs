@@ -726,9 +726,6 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_MAP_GRID_KING_WAR", Value=1919)]
       EGMI_ACK_MAP_GRID_KING_WAR = 1919,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ADD_GAMBLE_VALUE", Value=2000)]
-      EGMI_REQ_ADD_GAMBLE_VALUE = 2000,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_CMD_PROPERTY_INT", Value=10000)]
       EGMI_REQ_CMD_PROPERTY_INT = 10000,
             

@@ -173,10 +173,16 @@ message ServerHeartBeat
 
 message RoleOnlineNotify
 {
-	optional Ident guild = 1;
+	required Ident self = 1;
+	required Ident guild = 2;
+	required int32 game = 3;
+	required int32 proxy = 4;
 }
 
 message RoleOfflineNotify
 {
-	optional Ident guild = 1;
+	required Ident self = 1;
+	required Ident guild = 2;
+	required int32 game = 3;
+	required int32 proxy = 4;
 }
