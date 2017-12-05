@@ -2407,26 +2407,58 @@ class LIBPROTOC_EXPORT RoleOnlineNotify : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .NFMsg.Ident guild = 1;
+  // required .NFMsg.Ident self = 1;
+  inline bool has_self() const;
+  inline void clear_self();
+  static const int kSelfFieldNumber = 1;
+  inline const ::NFMsg::Ident& self() const;
+  inline ::NFMsg::Ident* mutable_self();
+  inline ::NFMsg::Ident* release_self();
+  inline void set_allocated_self(::NFMsg::Ident* self);
+
+  // required .NFMsg.Ident guild = 2;
   inline bool has_guild() const;
   inline void clear_guild();
-  static const int kGuildFieldNumber = 1;
+  static const int kGuildFieldNumber = 2;
   inline const ::NFMsg::Ident& guild() const;
   inline ::NFMsg::Ident* mutable_guild();
   inline ::NFMsg::Ident* release_guild();
   inline void set_allocated_guild(::NFMsg::Ident* guild);
 
+  // required int32 game = 3;
+  inline bool has_game() const;
+  inline void clear_game();
+  static const int kGameFieldNumber = 3;
+  inline ::google::protobuf::int32 game() const;
+  inline void set_game(::google::protobuf::int32 value);
+
+  // required int32 proxy = 4;
+  inline bool has_proxy() const;
+  inline void clear_proxy();
+  static const int kProxyFieldNumber = 4;
+  inline ::google::protobuf::int32 proxy() const;
+  inline void set_proxy(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.RoleOnlineNotify)
  private:
+  inline void set_has_self();
+  inline void clear_has_self();
   inline void set_has_guild();
   inline void clear_has_guild();
+  inline void set_has_game();
+  inline void clear_has_game();
+  inline void set_has_proxy();
+  inline void clear_has_proxy();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* self_;
   ::NFMsg::Ident* guild_;
+  ::google::protobuf::int32 game_;
+  ::google::protobuf::int32 proxy_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -2491,26 +2523,58 @@ class LIBPROTOC_EXPORT RoleOfflineNotify : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .NFMsg.Ident guild = 1;
+  // required .NFMsg.Ident self = 1;
+  inline bool has_self() const;
+  inline void clear_self();
+  static const int kSelfFieldNumber = 1;
+  inline const ::NFMsg::Ident& self() const;
+  inline ::NFMsg::Ident* mutable_self();
+  inline ::NFMsg::Ident* release_self();
+  inline void set_allocated_self(::NFMsg::Ident* self);
+
+  // required .NFMsg.Ident guild = 2;
   inline bool has_guild() const;
   inline void clear_guild();
-  static const int kGuildFieldNumber = 1;
+  static const int kGuildFieldNumber = 2;
   inline const ::NFMsg::Ident& guild() const;
   inline ::NFMsg::Ident* mutable_guild();
   inline ::NFMsg::Ident* release_guild();
   inline void set_allocated_guild(::NFMsg::Ident* guild);
 
+  // required int32 game = 3;
+  inline bool has_game() const;
+  inline void clear_game();
+  static const int kGameFieldNumber = 3;
+  inline ::google::protobuf::int32 game() const;
+  inline void set_game(::google::protobuf::int32 value);
+
+  // required int32 proxy = 4;
+  inline bool has_proxy() const;
+  inline void clear_proxy();
+  static const int kProxyFieldNumber = 4;
+  inline ::google::protobuf::int32 proxy() const;
+  inline void set_proxy(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:NFMsg.RoleOfflineNotify)
  private:
+  inline void set_has_self();
+  inline void clear_has_self();
   inline void set_has_guild();
   inline void clear_has_guild();
+  inline void set_has_game();
+  inline void clear_has_game();
+  inline void set_has_proxy();
+  inline void clear_has_proxy();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::NFMsg::Ident* self_;
   ::NFMsg::Ident* guild_;
+  ::google::protobuf::int32 game_;
+  ::google::protobuf::int32 proxy_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgPreGame_2eproto();
   friend void protobuf_AssignDesc_NFMsgPreGame_2eproto();
@@ -5524,15 +5588,53 @@ inline void ServerHeartBeat::set_count(::google::protobuf::int32 value) {
 
 // RoleOnlineNotify
 
-// optional .NFMsg.Ident guild = 1;
-inline bool RoleOnlineNotify::has_guild() const {
+// required .NFMsg.Ident self = 1;
+inline bool RoleOnlineNotify::has_self() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleOnlineNotify::set_has_guild() {
+inline void RoleOnlineNotify::set_has_self() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleOnlineNotify::clear_has_guild() {
+inline void RoleOnlineNotify::clear_has_self() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOnlineNotify::clear_self() {
+  if (self_ != NULL) self_->::NFMsg::Ident::Clear();
+  clear_has_self();
+}
+inline const ::NFMsg::Ident& RoleOnlineNotify::self() const {
+  return self_ != NULL ? *self_ : *default_instance_->self_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::mutable_self() {
+  set_has_self();
+  if (self_ == NULL) self_ = new ::NFMsg::Ident;
+  return self_;
+}
+inline ::NFMsg::Ident* RoleOnlineNotify::release_self() {
+  clear_has_self();
+  ::NFMsg::Ident* temp = self_;
+  self_ = NULL;
+  return temp;
+}
+inline void RoleOnlineNotify::set_allocated_self(::NFMsg::Ident* self) {
+  delete self_;
+  self_ = self;
+  if (self) {
+    set_has_self();
+  } else {
+    clear_has_self();
+  }
+}
+
+// required .NFMsg.Ident guild = 2;
+inline bool RoleOnlineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RoleOnlineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RoleOnlineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void RoleOnlineNotify::clear_guild() {
   if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
@@ -5562,19 +5664,101 @@ inline void RoleOnlineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
   }
 }
 
+// required int32 game = 3;
+inline bool RoleOnlineNotify::has_game() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void RoleOnlineNotify::set_has_game() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void RoleOnlineNotify::clear_has_game() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void RoleOnlineNotify::clear_game() {
+  game_ = 0;
+  clear_has_game();
+}
+inline ::google::protobuf::int32 RoleOnlineNotify::game() const {
+  return game_;
+}
+inline void RoleOnlineNotify::set_game(::google::protobuf::int32 value) {
+  set_has_game();
+  game_ = value;
+}
+
+// required int32 proxy = 4;
+inline bool RoleOnlineNotify::has_proxy() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void RoleOnlineNotify::set_has_proxy() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void RoleOnlineNotify::clear_has_proxy() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void RoleOnlineNotify::clear_proxy() {
+  proxy_ = 0;
+  clear_has_proxy();
+}
+inline ::google::protobuf::int32 RoleOnlineNotify::proxy() const {
+  return proxy_;
+}
+inline void RoleOnlineNotify::set_proxy(::google::protobuf::int32 value) {
+  set_has_proxy();
+  proxy_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // RoleOfflineNotify
 
-// optional .NFMsg.Ident guild = 1;
-inline bool RoleOfflineNotify::has_guild() const {
+// required .NFMsg.Ident self = 1;
+inline bool RoleOfflineNotify::has_self() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void RoleOfflineNotify::set_has_guild() {
+inline void RoleOfflineNotify::set_has_self() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void RoleOfflineNotify::clear_has_guild() {
+inline void RoleOfflineNotify::clear_has_self() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void RoleOfflineNotify::clear_self() {
+  if (self_ != NULL) self_->::NFMsg::Ident::Clear();
+  clear_has_self();
+}
+inline const ::NFMsg::Ident& RoleOfflineNotify::self() const {
+  return self_ != NULL ? *self_ : *default_instance_->self_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::mutable_self() {
+  set_has_self();
+  if (self_ == NULL) self_ = new ::NFMsg::Ident;
+  return self_;
+}
+inline ::NFMsg::Ident* RoleOfflineNotify::release_self() {
+  clear_has_self();
+  ::NFMsg::Ident* temp = self_;
+  self_ = NULL;
+  return temp;
+}
+inline void RoleOfflineNotify::set_allocated_self(::NFMsg::Ident* self) {
+  delete self_;
+  self_ = self;
+  if (self) {
+    set_has_self();
+  } else {
+    clear_has_self();
+  }
+}
+
+// required .NFMsg.Ident guild = 2;
+inline bool RoleOfflineNotify::has_guild() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RoleOfflineNotify::set_has_guild() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RoleOfflineNotify::clear_has_guild() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void RoleOfflineNotify::clear_guild() {
   if (guild_ != NULL) guild_->::NFMsg::Ident::Clear();
@@ -5602,6 +5786,50 @@ inline void RoleOfflineNotify::set_allocated_guild(::NFMsg::Ident* guild) {
   } else {
     clear_has_guild();
   }
+}
+
+// required int32 game = 3;
+inline bool RoleOfflineNotify::has_game() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void RoleOfflineNotify::set_has_game() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void RoleOfflineNotify::clear_has_game() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void RoleOfflineNotify::clear_game() {
+  game_ = 0;
+  clear_has_game();
+}
+inline ::google::protobuf::int32 RoleOfflineNotify::game() const {
+  return game_;
+}
+inline void RoleOfflineNotify::set_game(::google::protobuf::int32 value) {
+  set_has_game();
+  game_ = value;
+}
+
+// required int32 proxy = 4;
+inline bool RoleOfflineNotify::has_proxy() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void RoleOfflineNotify::set_has_proxy() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void RoleOfflineNotify::clear_has_proxy() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void RoleOfflineNotify::clear_proxy() {
+  proxy_ = 0;
+  clear_has_proxy();
+}
+inline ::google::protobuf::int32 RoleOfflineNotify::proxy() const {
+  return proxy_;
+}
+inline void RoleOfflineNotify::set_proxy(::google::protobuf::int32 value) {
+  set_has_proxy();
+  proxy_ = value;
 }
 
 
