@@ -14,17 +14,7 @@
 #include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFConsistentHash.hpp"
-
-#ifdef _MSC_VER
-#pragma warning(disable: 4244 4267)
-#endif
-
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"
-
-#ifdef _MSC_VER
-#pragma warning(default: 4244 4267)
-#endif
-
 #include "NFComm/NFPluginModule/NFINetClientModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
@@ -142,7 +132,8 @@ private:
     struct CallBack
     {
         //call back
-        std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
+		//std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
+		std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
         std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBack;
         std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
     };

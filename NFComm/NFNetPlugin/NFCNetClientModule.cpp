@@ -54,7 +54,7 @@ void NFCNetClientModule::RemoveReceiveCallBack(const NF_SERVER_TYPES eType, cons
     NF_SHARE_PTR<CallBack> xCallBack = mxCallBack.GetElement(eType);
     if (xCallBack)
     {
-        std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator it = xCallBack->mxReceiveCallBack.find(nMsgID);
+        std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator it = xCallBack->mxReceiveCallBack.find(nMsgID);
         if (xCallBack->mxReceiveCallBack.end() == it)
         {
             xCallBack->mxReceiveCallBack.erase(it);
@@ -86,7 +86,10 @@ int NFCNetClientModule::AddReceiveCallBack(const NF_SERVER_TYPES eType, const ui
         mxCallBack.AddElement(eType, xCallBack);
     }
 
-    xCallBack->mxReceiveCallBack.insert(std::map<int, NET_RECEIVE_FUNCTOR_PTR>::value_type(nMsgID, functorPtr));
+	std::list<NET_RECEIVE_FUNCTOR_PTR> xList;
+	xList.push_back(functorPtr);
+
+    xCallBack->mxReceiveCallBack.insert(std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::value_type(nMsgID, xList));
 
     return 0;
 }
@@ -315,10 +318,14 @@ void NFCNetClientModule::InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
     }
 
     //add msg callback
-    std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = xCallBack->mxReceiveCallBack.begin();
+    std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>>::iterator itReciveCB = xCallBack->mxReceiveCallBack.begin();
     for (; xCallBack->mxReceiveCallBack.end() != itReciveCB; ++itReciveCB)
     {
-        pServerData->mxNetModule->AddReceiveCallBack(itReciveCB->first, itReciveCB->second);
+		std::list<NET_RECEIVE_FUNCTOR_PTR>& xList = itReciveCB->second;
+		for (std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itList = xList.begin(); itList != xList.end(); ++itList)
+		{
+			pServerData->mxNetModule->AddReceiveCallBack(itReciveCB->first, *itList);
+		}
     }
 
     //add event callback

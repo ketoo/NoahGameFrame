@@ -42,12 +42,6 @@ public:
     virtual bool SendMsgToGame(const NFDataList& argObjectVar, const NFDataList& argGameID,  const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData);
     virtual bool SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer);
 
-    virtual int OnObjectListEnter(const NFDataList& self, const NFDataList& argVar);
-    virtual int OnObjectListLeave(const NFDataList& self, const NFDataList& argVar);
-    virtual int OnPropertyEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
-    virtual int OnRecordEnter(const NFDataList& argVar, const NFDataList& argGameID, const NFGUID& self);
-    virtual bool OnRecordEnterPack(NF_SHARE_PTR<NFIRecord> pRecord, NFMsg::ObjectRecordBase* pObjectRecordBase);
-
     virtual NF_SHARE_PTR<ServerData> GetSuitProxyForEnter();
 
     virtual int GetPlayerGameID(const NFGUID self);
@@ -95,7 +89,8 @@ private:
 
     //serverid,data
     NFConsistentHashMapEx<int, ServerData> mGameMap;
-    NFConsistentHashMapEx<int, ServerData> mProxyMap;
+	NFConsistentHashMapEx<int, ServerData> mProxyMap;
+	NFConsistentHashMapEx<int, ServerData> mAIMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;

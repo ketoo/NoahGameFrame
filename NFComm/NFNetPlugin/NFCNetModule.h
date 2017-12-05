@@ -83,7 +83,7 @@ private:
     int mnBufferSize;
     NFINet* m_pNet;
     NFINT64 nLastTime;
-    std::map<int, NET_RECEIVE_FUNCTOR_PTR> mxReceiveCallBack;
+	std::map<int, std::list<NET_RECEIVE_FUNCTOR_PTR>> mxReceiveCallBack;
     std::list<NET_EVENT_FUNCTOR_PTR> mxEventCallBackList;
     std::list<NET_RECEIVE_FUNCTOR_PTR> mxCallBackList;
 };

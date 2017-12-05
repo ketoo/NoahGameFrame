@@ -1244,8 +1244,7 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string
 	NF_SHARE_PTR<NFIObject> xObject = GetElement(self);
 	if (xObject)
 	{
-		if (xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_HASDATA
-			|| xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+		if (xObject->GetState() >= CLASS_OBJECT_EVENT::COE_CREATE_HASDATA)
 		{
 			std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator it = mtCommonPropertyCallBackList.begin();
 			for (; it != mtCommonPropertyCallBackList.end(); it++)
@@ -1253,6 +1252,19 @@ int NFCKernelModule::OnPropertyCommonEvent(const NFGUID& self, const std::string
 				PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *it;
 				PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
 				pFun->operator()(self, strPropertyName, oldVar, newVar);
+			}
+
+			const std::string& strClassName = xObject->GetPropertyString(NFrame::IObject::ClassName());
+			std::map<std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>>::iterator itClass = mtClassPropertyCallBackList.find(strClassName);
+			if (itClass != mtClassPropertyCallBackList.end())
+			{
+				std::list<PROPERTY_EVENT_FUNCTOR_PTR>::iterator itList = itClass->second.begin();
+				for (; itList != itClass->second.end(); itList++)
+				{
+					PROPERTY_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+					PROPERTY_EVENT_FUNCTOR* pFun = pFunPtr.get();
+					pFun->operator()(self, strPropertyName, oldVar, newVar);
+				}
 			}
 		}
 	}
@@ -1354,8 +1366,7 @@ int NFCKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_
 	NF_SHARE_PTR<NFIObject> xObject = GetElement(self);
 	if (xObject)
 	{
-		if (xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_HASDATA
-			|| xObject->GetState() == CLASS_OBJECT_EVENT::COE_CREATE_FINISH)
+		if (xObject->GetState() >= CLASS_OBJECT_EVENT::COE_CREATE_HASDATA)
 		{
 			std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator it = mtCommonRecordCallBackList.begin();
 			for (; it != mtCommonRecordCallBackList.end(); it++)
@@ -1365,6 +1376,20 @@ int NFCKernelModule::OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_
 				pFun->operator()(self, xEventData, oldVar, newVar);
 			}
 		}
+
+		const std::string& strClassName = xObject->GetPropertyString(NFrame::IObject::ClassName());
+		std::map<std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>>::iterator itClass = mtClassRecordCallBackList.find(strClassName);
+		if (itClass != mtClassRecordCallBackList.end())
+		{
+			std::list<RECORD_EVENT_FUNCTOR_PTR>::iterator itList = itClass->second.begin();
+			for (; itList != itClass->second.end(); itList++)
+			{
+				RECORD_EVENT_FUNCTOR_PTR& pFunPtr = *itList;
+				RECORD_EVENT_FUNCTOR* pFun = pFunPtr.get();
+				pFun->operator()(self, xEventData, oldVar, newVar);
+			}
+		}
+
 	}
 
     return 0;
@@ -1399,6 +1424,45 @@ bool NFCKernelModule::RegisterCommonRecordEvent(const RECORD_EVENT_FUNCTOR_PTR& 
 {
     mtCommonRecordCallBackList.push_back(cb);
     return true;
+}
+
+bool NFCKernelModule::RegisterClassPropertyEvent(const std::string & strClassName, const PROPERTY_EVENT_FUNCTOR_PTR & cb)
+{
+	if (mtClassPropertyCallBackList.find(strClassName) == mtClassPropertyCallBackList.end())
+	{
+		std::list<PROPERTY_EVENT_FUNCTOR_PTR> xList;
+		xList.push_back(cb);
+
+		mtClassPropertyCallBackList.insert(std::map< std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>>::value_type(strClassName, xList));
+
+		return true;
+	}
+
+
+	std::map< std::string, std::list<PROPERTY_EVENT_FUNCTOR_PTR>>::iterator it = mtClassPropertyCallBackList.find(strClassName);
+	it->second.push_back(cb);
+
+
+	return false;
+}
+
+bool NFCKernelModule::RegisterClassRecordEvent(const std::string & strClassName, const RECORD_EVENT_FUNCTOR_PTR & cb)
+{
+	if (mtClassRecordCallBackList.find(strClassName) == mtClassRecordCallBackList.end())
+	{
+		std::list<RECORD_EVENT_FUNCTOR_PTR> xList;
+		xList.push_back(cb);
+
+		mtClassRecordCallBackList.insert(std::map< std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>>::value_type(strClassName, xList));
+
+		return true;
+	}
+
+
+	std::map< std::string, std::list<RECORD_EVENT_FUNCTOR_PTR>>::iterator it = mtClassRecordCallBackList.find(strClassName);
+	it->second.push_back(cb);
+
+	return true;
 }
 
 bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
@@ -1446,6 +1510,9 @@ bool NFCKernelModule::BeforeShut()
 	mtCommonClassCallBackList.clear();
 	mtCommonPropertyCallBackList.clear();
 	mtCommonRecordCallBackList.clear();
+
+	mtClassPropertyCallBackList.clear();
+	mtClassRecordCallBackList.clear();
 
     return true;
 }
