@@ -11,20 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3F68CD92-8AA1-48C4-84EF-CD63690C8DCB}</ProjectGuid>
+    <ProjectGuid>{C627AAF0-CC57-4933-813E-916FEE450511}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFDataNoSqlPlugin</RootNamespace>
-    <ProjectName>NFNoSqlPlugin</ProjectName>
+    <RootNamespace>NFNoSqlTester</RootNamespace>
+    <ProjectName>NFNoSqlTester</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -97,17 +98,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="NFCNoSqlDriver.cpp" />
-    <ClCompile Include="NFCNoSqlModule.cpp" />
-    <ClCompile Include="NFNoSqlPlugin.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="NFRedisClient.cpp" />
     <ClCompile Include="NFRedisClientGEO.cpp" />
     <ClCompile Include="NFRedisClientHash.cpp" />
@@ -124,9 +115,6 @@
     <ClCompile Include="NFRedisTester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCNoSqlDriver.h" />
-    <ClInclude Include="NFCNoSqlModule.h" />
-    <ClInclude Include="NFNoSqlPlugin.h" />
     <ClInclude Include="NFRedisClient.h" />
     <ClInclude Include="NFRedisClientSocket.h" />
     <ClInclude Include="NFRedisCommand.h" />

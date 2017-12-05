@@ -63,8 +63,12 @@ protected:
 	void OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
-	NFConsistentHashMapEx<int, int> mActorList; //actorid <-->Used
+	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
+
+	void SendMessageToGameServer(const NFGUID& guild, const int nMessageID, google::protobuf::Message& msg);
 
 protected:
 	NFILogModule* m_pLogModule;

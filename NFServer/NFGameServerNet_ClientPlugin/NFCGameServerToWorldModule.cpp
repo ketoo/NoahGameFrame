@@ -250,12 +250,13 @@ int NFCGameServerToWorldModule::OnObjectClassEvent(const NFGUID& self, const std
 void NFCGameServerToWorldModule::SendOnline(const NFGUID& self)
 {
 	NFMsg::RoleOnlineNotify xMsg;
-
 	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
+
+	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
 	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
-
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xGuild.nData64, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
-
+	xMsg.set_game(pPluginManager->GetAppID());
+	xMsg.set_proxy(0);
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_ONLINE_NOTIFY, xMsg);
 }
 
 void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
@@ -263,9 +264,13 @@ void NFCGameServerToWorldModule::SendOffline(const NFGUID& self)
 	NFMsg::RoleOfflineNotify xMsg;
 
 	const NFGUID& xGuild = m_pKernelModule->GetPropertyObject(self, NFrame::Player::GuildID());
-	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
 
-	m_pNetClientModule->SendSuitByPB(NF_SERVER_TYPES::NF_ST_WORLD, xGuild.nData64, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
+	*xMsg.mutable_self() = NFINetModule::NFToPB(self);
+	*xMsg.mutable_guild() = NFINetModule::NFToPB(xGuild);
+	xMsg.set_game(pPluginManager->GetAppID());
+	xMsg.set_proxy(0);
+
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_WORLD, NFMsg::EGMI_ACK_OFFLINE_NOTIFY, xMsg);
 
 }
 
