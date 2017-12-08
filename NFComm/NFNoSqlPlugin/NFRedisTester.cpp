@@ -110,7 +110,7 @@ void NFRedisTester::TestHash()
 
 	std::vector<string_pair> get_pair_values;
 	pRedisResult = mxRedisClient.HGETALL(strKey, get_pair_values);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
 	assert(get_pair_values.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
@@ -120,18 +120,16 @@ void NFRedisTester::TestHash()
 
 	std::vector<std::string> get_keys;
 	pRedisResult = mxRedisClient.HKEYS(strKey, get_keys);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
 	assert(get_keys.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
 		assert(fields[i] == get_keys[i]);
 	}
 
-	NFRedisResult* HVALS(const std::string& key, string_vector& values);
-
 	std::vector<std::string> get_valuess;
 	pRedisResult = mxRedisClient.HVALS(strKey, get_valuess);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
 	assert(get_valuess.size() == values.size());
 	for (int i = 0; i < values.size(); ++i)
 	{
@@ -141,7 +139,7 @@ void NFRedisTester::TestHash()
 	for (int i = 0; i < fields.size(); ++i)
 	{
 		pRedisResult = mxRedisClient.HSTRLEN(strKey, fields[i]);
-		assert(pRedisResult->GetRespInt() == fields[i].length());
+		assert(pRedisResult->GetRespInt() == get_valuess[i].length());
 	}
 }
 
@@ -245,7 +243,6 @@ void NFRedisTester::TestString()
 
     std::vector<string_pair> vstring_pair;
     std::vector<std::string> vstringListKey;
-    std::vector<std::string> vstringListValue;
 
     for (int i = 0; i < 5; ++i)
     {
@@ -267,8 +264,15 @@ void NFRedisTester::TestString()
     mxRedisClient.MSET(vstring_pair);
 	std::cout << "test cmd:" << pRedisResult->GetCommand() << std::endl;
 
+	std::vector<std::string> vstringListValue;
     mxRedisClient.MGET(vstringListKey, vstringListValue);
-	std::cout << "test cmd:" << pRedisResult->GetCommand() << std::endl;
+	assert(vstringListKey.size() == vstringListValue.size());
+
+	for (int i = 0; i < vstringListKey.size(); ++i)
+	{
+		assert(mxRedisClient.GET(vstringListKey[i])->GetRespString() == vstringListValue[i]);
+	}
+
 }
 
 void NFRedisTester::Execute()

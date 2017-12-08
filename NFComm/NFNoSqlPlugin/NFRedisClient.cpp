@@ -48,7 +48,7 @@ bool NFRedisClient::GetStatusReply()
 {
     if (m_pRedisResult->ReadReply())
     {
-        if (m_pRedisResult->GetResultType() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
+        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
                 && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS
                 && m_pRedisResult->IsOKRespStatus())
         {
@@ -64,7 +64,7 @@ bool NFRedisClient::GetIntReply()
 {
     if (m_pRedisResult->ReadReply())
     {
-        if (m_pRedisResult->GetResultType() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
+        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
             && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_INT)
         {
             return true;
@@ -79,7 +79,7 @@ bool NFRedisClient::GetBulkReply()
 {
     if (m_pRedisResult->ReadReply())
     {
-        if (m_pRedisResult->GetResultType() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
+        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
             && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK)
         {
             return true;
@@ -94,7 +94,7 @@ bool NFRedisClient::GetArrayReply()
 {
 	if (m_pRedisResult->ReadReply())
 	{
-		if (m_pRedisResult->GetResultType() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
+		if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
 			&& m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY)
 		{
 			return true;
