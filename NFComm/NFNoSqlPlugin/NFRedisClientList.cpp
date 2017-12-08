@@ -114,7 +114,12 @@ NFRedisResult *NFRedisClient::LPUSHX(const std::string &key, const std::string &
 
 NFRedisResult *NFRedisClient::LRANGE(const std::string &key, const int start, const int end, string_vector &values) 
 {
+
 	m_pRedisResult->Reset();
+	if (end - start <= 0)
+	{
+		return m_pRedisResult;
+	}
 
 	NFRedisCommand cmd("LRANGE");
 	cmd << key;
@@ -130,7 +135,16 @@ NFRedisResult *NFRedisClient::LRANGE(const std::string &key, const int start, co
 		return m_pRedisResult;
 	}
 
-	GetStatusReply();
+	GetArrayReply();
+
+	const std::vector<NFRedisResult> xVector = m_pRedisResult->GetRespArray();
+	if ((end - start + 1) == xVector.size())
+	{
+		for (int i = 0; i < xVector.size(); ++i)
+		{
+			values.push_back(xVector[i].GetRespString());
+		}
+	}
 
 	return m_pRedisResult;
 }

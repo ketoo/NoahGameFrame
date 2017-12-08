@@ -179,7 +179,85 @@ void NFRedisTester::TestKey()
 
 void NFRedisTester::TestList()
 {
+	/*
+	NFRedisResult* RPUSHX(const std::string& key, const std::string& value);
 
+	NFRedisResult* LSET(const std::string& key, const int index, const std::string& value);
+
+	*/
+
+	std::string strKey = "TestList::";
+	std::vector<std::string> strList;
+	strList.push_back("123232111111134");
+	strList.push_back("1232321222222");
+	strList.push_back("123232113333");
+	strList.push_back("123444444");
+
+
+	NFRedisResult* pRedisResult;
+
+	pRedisResult = mxRedisClient.DEL(strKey);
+
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		pRedisResult = mxRedisClient.RPUSH(strKey, strList[i]);
+	}
+
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		pRedisResult = mxRedisClient.LINDEX(strKey, i);
+		assert(pRedisResult->GetRespString() == strList[i]);
+	}
+
+	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == strList.size());
+
+	for (int i = strList.size() - 1; i >= 0; --i)
+	{
+		pRedisResult = mxRedisClient.RPOP(strKey);
+		assert(pRedisResult->GetRespString() == strList[i]);
+	}
+
+	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 0);
+
+	//////
+	for (int i = strList.size() - 1; i >= 0; --i)
+	{
+		pRedisResult = mxRedisClient.LPUSH(strKey, strList[i]);
+	}
+
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		pRedisResult = mxRedisClient.LINDEX(strKey, i);
+		assert(pRedisResult->GetRespString() == strList[i]);
+	}
+
+	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == strList.size());
+
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		pRedisResult = mxRedisClient.LPOP(strKey);
+		assert(pRedisResult->GetRespString() == strList[i]);
+	}
+
+	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 0);
+
+	/////
+
+	pRedisResult = mxRedisClient.LPUSH(strKey, strKey);
+
+	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 1);
+
+	for (int i = 0; i < strList.size(); ++i)
+	{
+		pRedisResult = mxRedisClient.LPUSHX(strKey, strList[i]);
+		assert(pRedisResult->GetRespInt() == 2 + i);
+		assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 2+i);
+	}
+
+	string_vector values;
+	pRedisResult = mxRedisClient.LRANGE(strKey, 0, strList.size(), values);
+
+	assert(values.size() == strList.size() + 1);
 }
 
 void NFRedisTester::TestPubSub()
