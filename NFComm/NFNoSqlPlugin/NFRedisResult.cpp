@@ -91,17 +91,17 @@ void NFRedisResult::SetCommand(const std::string & str)
 	mstrCommand = str;
 }
 
-const std::string & NFRedisResult::GetCommand()
+const std::string & NFRedisResult::GetCommand() const
 {
 	return mstrCommand;
 }
 
-NFREDIS_RESP_TYPE NFRedisResult::GetRespType()
+NFREDIS_RESP_TYPE NFRedisResult::GetRespType() const
 {
     return mxRespType;
 }
 
-bool NFRedisResult::IsOKRespStatus()
+bool NFRedisResult::IsOKRespStatus() const
 {
     if (NFREDIS_STATUS_OK == mstrRespValue)
     {
@@ -111,22 +111,22 @@ bool NFRedisResult::IsOKRespStatus()
     return false;
 }
 
-std::int64_t NFRedisResult::GetRespInt()
+std::int64_t NFRedisResult::GetRespInt() const
 {
     return atoi(mstrRespValue.data());
 }
 
-std::string NFRedisResult::GetRespString()
+std::string NFRedisResult::GetRespString() const 
 {
     return mstrRespValue;
 }
 
-float NFRedisResult::GetRespFloat()
+float NFRedisResult::GetRespFloat() const
 {
     return 0;
 }
 
-double NFRedisResult::GetRespDouble()
+double NFRedisResult::GetRespDouble() const
 {
     return 0;
 }

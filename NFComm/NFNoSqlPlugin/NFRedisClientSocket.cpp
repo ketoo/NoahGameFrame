@@ -123,6 +123,14 @@ bool NFRedisClientSocket::ReadLine(std::string &line)
 		if (!bFindLine)
 		{
 			//yield
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
 		}
 	}
 
@@ -152,7 +160,15 @@ bool NFRedisClientSocket::ReadN(char *buf, int count)
 {
 	while (count > mstrBuff.length())
 	{
-		Execute();
+		//yeild
+		if (YieldFunction)
+		{
+			YieldFunction();
+		}
+		else
+		{
+			Execute();
+		}
 	}
 
 	if (mstrBuff.length() >= count)

@@ -22,19 +22,19 @@ public:
     bool ReadReply();
 
 	void SetCommand(const std::string& str);
-	const std::string& GetCommand();
+	const std::string& GetCommand() const;
 
     NFREDIS_RESULT_STATUS GetResultType();
-    NFREDIS_RESP_TYPE GetRespType();
+    NFREDIS_RESP_TYPE GetRespType() const;
 
     //if not ok ...
-    bool IsOKRespStatus();
+    bool IsOKRespStatus() const;
 
     //get response value
-    std::int64_t GetRespInt();
-    std::string GetRespString();
-    float GetRespFloat();
-    double GetRespDouble();
+    std::int64_t GetRespInt() const;
+    std::string GetRespString() const;
+    float GetRespFloat() const;
+    double GetRespDouble() const;
     const std::vector<NFRedisResult>& GetRespArray();
 
 private:
