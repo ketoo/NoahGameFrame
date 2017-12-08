@@ -200,7 +200,18 @@ NFRedisResult *NFRedisClient::HMGET(const std::string &key, const string_vector 
         return m_pRedisResult;
     }
 
-    GetStatusReply();
+    GetBulkReply();
+
+	const std::vector<NFRedisResult>& xRedisResultList = m_pRedisResult->GetRespArray();
+	if (fields.size() == xRedisResultList.size())
+	{
+		values.clear();
+
+		for (int i = 0; i < fields.size(); ++i)
+		{
+			values.push_back(xRedisResultList[i].GetRespString());
+		}
+	}
 
     return m_pRedisResult;
 }
