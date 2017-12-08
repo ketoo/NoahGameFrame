@@ -188,6 +188,15 @@ NFRedisResult *NFRedisClient::MGET(const string_vector &keys, string_vector &val
 
 	GetArrayReply();
 
+	const std::vector<NFRedisResult> xVector = m_pRedisResult->GetRespArray();
+	if (keys.size() == xVector.size())
+	{
+		for (int i = 0; i < xVector.size(); ++i)
+		{
+			values.push_back(xVector[i].GetRespString());
+		}
+	}
+
     return m_pRedisResult;
 }
 
