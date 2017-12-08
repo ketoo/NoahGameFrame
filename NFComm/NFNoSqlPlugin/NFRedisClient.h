@@ -27,6 +27,12 @@ typedef std::pair<string_type, double> string_score_pair;
 typedef std::vector<string_score_pair> string_score_vector;
 typedef std::set<string_type> string_set;
 
+typedef void(*CoroutineYieldFunction)();
+typedef void(*CoroutineStartFunction)();
+
+static CoroutineYieldFunction YieldFunction = NULL;
+static CoroutineStartFunction StartFunction = NULL;
+
 class NFRedisClient
 {
 public:
@@ -74,6 +80,8 @@ public:
     NFRedisResult* TTL(const std::string& key);
     NFRedisResult* TYPE(const std::string& key);
     //NFRedisResult* SCAN(const std::string& key);
+
+
     /////////client String//////////////
 
     NFRedisResult* APPEND(const std::string& key, const std::string& value);
@@ -215,8 +223,7 @@ private:
     bool GetIntReply();
     bool GetBulkReply();
     bool GetArrayReply();
-
-
+	
 private:
     NFRedisClientSocket* m_pRedisClientSocket;
     NFRedisResult* m_pRedisResult;
