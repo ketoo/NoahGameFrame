@@ -275,7 +275,7 @@ void NFRedisResult::Reset()
     mstrMsgValue.clear();
 }
 
-NFREDIS_RESULT_STATUS NFRedisResult::GetResultType()
+NFREDIS_RESULT_STATUS NFRedisResult::GetResultStatus()
 {
     return mxResultStatus;
 }

@@ -87,8 +87,16 @@ NFRedisResult *NFRedisClient::HGETALL(const std::string &key, std::vector<string
         return m_pRedisResult;
     }
 
-    GetStatusReply();
+	GetArrayReply();
 
+	const std::vector<NFRedisResult> xVector = m_pRedisResult->GetRespArray();
+	if (xVector.size() % 2 == 0)
+	{
+		for (int i = 0; i < xVector.size(); i+=2)
+		{
+			values.push_back(string_pair(xVector[i].GetRespString(), xVector[i+1].GetRespString()));
+		}
+	}
     return m_pRedisResult;
 }
 
@@ -154,7 +162,15 @@ NFRedisResult *NFRedisClient::HKEYS(const std::string &key, std::vector<std::str
         return m_pRedisResult;
     }
 
-    GetStatusReply();
+    GetArrayReply();
+
+	const std::vector<NFRedisResult>& xRedisResultList = m_pRedisResult->GetRespArray();
+	fields.clear();
+
+	for (int i = 0; i < xRedisResultList.size(); ++i)
+	{
+		fields.push_back(xRedisResultList[i].GetRespString());
+	}
 
     return m_pRedisResult;
 }
@@ -304,7 +320,15 @@ NFRedisResult *NFRedisClient::HVALS(const std::string &key, string_vector &value
         return m_pRedisResult;
     }
 
-    GetStatusReply();
+    GetArrayReply();
+
+	const std::vector<NFRedisResult>& xRedisResultList = m_pRedisResult->GetRespArray();
+	values.clear();
+
+	for (int i = 0; i < xRedisResultList.size(); ++i)
+	{
+		values.push_back(xRedisResultList[i].GetRespString());
+	}
 
     return m_pRedisResult;
 }

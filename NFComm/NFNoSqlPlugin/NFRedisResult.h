@@ -24,7 +24,7 @@ public:
 	void SetCommand(const std::string& str);
 	const std::string& GetCommand() const;
 
-    NFREDIS_RESULT_STATUS GetResultType();
+    NFREDIS_RESULT_STATUS GetResultStatus();
     NFREDIS_RESP_TYPE GetRespType() const;
 
     //if not ok ...
