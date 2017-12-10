@@ -184,7 +184,6 @@ package nframe;
 		public static final String Guild_AD = "Guild_AD";// string
 		public static final String Guild_ContinueDay = "Guild_ContinueDay";// int
 		public static final String Guild_CreateTime = "Guild_CreateTime";// int
-		public static final String Guild_Createter = "Guild_Createter";// int
 		public static final String Guild_Desc = "Guild_Desc";// string
 		public static final String Guild_EctypID = "Guild_EctypID";// int
 		public static final String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
@@ -601,7 +600,6 @@ package nframe;
 		public static final String Guild_AD = "Guild_AD";// string
 		public static final String Guild_ContinueDay = "Guild_ContinueDay";// int
 		public static final String Guild_CreateTime = "Guild_CreateTime";// int
-		public static final String Guild_Createter = "Guild_Createter";// int
 		public static final String Guild_Desc = "Guild_Desc";// string
 		public static final String Guild_EctypID = "Guild_EctypID";// int
 		public static final String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int

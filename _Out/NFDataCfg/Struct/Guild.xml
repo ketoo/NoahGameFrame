@@ -4,7 +4,6 @@
 		<Property Id="Guild_AD" Cache="0" Desc="工会公告" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
 		<Property Id="Guild_ContinueDay" Cache="0" Desc="工会霸占排行榜天数" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="Guild_CreateTime" Cache="0" Desc="公会创建时间" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
-		<Property Id="Guild_Createter" Cache="0" Desc="公会创始人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="Guild_Desc" Cache="0" Desc="工会描述" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="string" Upload="0" />
 		<Property Id="Guild_EctypID" Cache="0" Desc="工会副本ID" Force="0" Private="1" Public="0" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="Guild_EctypIDGroup" Cache="0" Desc="工会副本所在的曾" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />

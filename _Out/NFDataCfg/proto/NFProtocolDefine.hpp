@@ -189,7 +189,6 @@ namespace NFrame
 		static const std::string& Guild_AD(){ static std::string x = "Guild_AD"; return x; };// string
 		static const std::string& Guild_ContinueDay(){ static std::string x = "Guild_ContinueDay"; return x; };// int
 		static const std::string& Guild_CreateTime(){ static std::string x = "Guild_CreateTime"; return x; };// int
-		static const std::string& Guild_Createter(){ static std::string x = "Guild_Createter"; return x; };// int
 		static const std::string& Guild_Desc(){ static std::string x = "Guild_Desc"; return x; };// string
 		static const std::string& Guild_EctypID(){ static std::string x = "Guild_EctypID"; return x; };// int
 		static const std::string& Guild_EctypIDGroup(){ static std::string x = "Guild_EctypIDGroup"; return x; };// int
@@ -612,7 +611,6 @@ namespace NFrame
 		static const std::string& Guild_AD(){ static std::string x = "Guild_AD"; return x; };// string
 		static const std::string& Guild_ContinueDay(){ static std::string x = "Guild_ContinueDay"; return x; };// int
 		static const std::string& Guild_CreateTime(){ static std::string x = "Guild_CreateTime"; return x; };// int
-		static const std::string& Guild_Createter(){ static std::string x = "Guild_Createter"; return x; };// int
 		static const std::string& Guild_Desc(){ static std::string x = "Guild_Desc"; return x; };// string
 		static const std::string& Guild_EctypID(){ static std::string x = "Guild_EctypID"; return x; };// int
 		static const std::string& Guild_EctypIDGroup(){ static std::string x = "Guild_EctypIDGroup"; return x; };// int
