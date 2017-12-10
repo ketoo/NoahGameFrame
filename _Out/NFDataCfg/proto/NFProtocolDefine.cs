@@ -190,7 +190,6 @@ namespace NFrame
 		public static readonly String Guild_AD = "Guild_AD";// string
 		public static readonly String Guild_ContinueDay = "Guild_ContinueDay";// int
 		public static readonly String Guild_CreateTime = "Guild_CreateTime";// int
-		public static readonly String Guild_Createter = "Guild_Createter";// int
 		public static readonly String Guild_Desc = "Guild_Desc";// string
 		public static readonly String Guild_EctypID = "Guild_EctypID";// int
 		public static readonly String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
@@ -607,7 +606,6 @@ namespace NFrame
 		public static readonly String Guild_AD = "Guild_AD";// string
 		public static readonly String Guild_ContinueDay = "Guild_ContinueDay";// int
 		public static readonly String Guild_CreateTime = "Guild_CreateTime";// int
-		public static readonly String Guild_Createter = "Guild_Createter";// int
 		public static readonly String Guild_Desc = "Guild_Desc";// string
 		public static readonly String Guild_EctypID = "Guild_EctypID";// int
 		public static readonly String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
