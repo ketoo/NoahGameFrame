@@ -115,7 +115,7 @@ NFRedisResult * NFRedisClient::AUTH(const std::string & auth)
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("AUTH");
+	NFRedisCommand cmd(GET_NAME(AUTH));
 	cmd << auth;
 
 	std::string msg = cmd.Serialize();
@@ -132,4 +132,3 @@ NFRedisResult * NFRedisClient::AUTH(const std::string & auth)
 
 	return m_pRedisResult;
 }
-

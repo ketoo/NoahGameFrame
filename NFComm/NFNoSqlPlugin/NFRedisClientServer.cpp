@@ -8,7 +8,7 @@ NFRedisResult *NFRedisClient::FLUSHALL()
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("FLUSHALL");
+    NFRedisCommand cmd(GET_NAME(FLUSHALL));
 
     std::string msg = cmd.Serialize();
 	m_pRedisResult->SetCommand(msg);
@@ -29,7 +29,7 @@ NFRedisResult *NFRedisClient::FLUSHDB()
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("FLUSHDB");
+    NFRedisCommand cmd(GET_NAME(FLUSHDB));
 
     std::string msg = cmd.Serialize();
 	m_pRedisResult->SetCommand(msg);
