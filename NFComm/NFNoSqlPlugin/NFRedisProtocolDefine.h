@@ -41,5 +41,6 @@ static const char* NFREDIS_INT_REPLY = ":";	    //整数回复（integer reply�
 static const char* NFREDIS_BULK_REPLY = "$";	    //批量回复（bulk reply）的第一个字节是 "$"
 static const char* NFREDIS_ARRAY_REPLY = "*";	    //多条批量回复（multi bulk reply）的第一个字节是 "*"
 
+#define GET_NAME(functionName)   (#functionName)
 
 #endif //NFREDISPLUGIN_NFREDISPROTOCOLDEFINE_H

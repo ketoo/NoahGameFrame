@@ -7,7 +7,7 @@ NFRedisResult* NFRedisClient::DEL(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("DEL");
+    NFRedisCommand cmd(GET_NAME(DEL));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -29,7 +29,7 @@ NFRedisResult* NFRedisClient::EXISTS(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("EXISTS");
+    NFRedisCommand cmd(GET_NAME(EXISTS));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -51,7 +51,7 @@ NFRedisResult *NFRedisClient::EXPIRE(const std::string &key, const unsigned int 
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("EXPIRE");
+    NFRedisCommand cmd(GET_NAME(EXPIRE));
     cmd << key;
     cmd << secs;
 
@@ -74,7 +74,7 @@ NFRedisResult *NFRedisClient::EXPIREAT(const std::string &key, const int64_t uni
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("EXPIREAT");
+    NFRedisCommand cmd(GET_NAME(EXPIREAT));
     cmd << key;
     cmd << unixTime;
 
@@ -97,7 +97,7 @@ NFRedisResult *NFRedisClient::PERSIST(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("PERSIST");
+    NFRedisCommand cmd(GET_NAME(PERSIST));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -119,7 +119,7 @@ NFRedisResult *NFRedisClient::TTL(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("TTL");
+    NFRedisCommand cmd(GET_NAME(TTL));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -141,7 +141,7 @@ NFRedisResult *NFRedisClient::TYPE(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("TYPE");
+    NFRedisCommand cmd(GET_NAME(TYPE));
     cmd << key;
 
     std::string msg = cmd.Serialize();
