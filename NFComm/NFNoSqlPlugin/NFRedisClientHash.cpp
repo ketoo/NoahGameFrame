@@ -8,7 +8,7 @@ NFRedisResult *NFRedisClient::HDEL(const std::string &key, const std::string &fi
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HDEL");
+    NFRedisCommand cmd(GET_NAME(HDEL));
     cmd << key;
     cmd << field;
 
@@ -31,7 +31,7 @@ NFRedisResult *NFRedisClient::HEXISTS(const std::string &key, const std::string 
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HEXISTS");
+    NFRedisCommand cmd(GET_NAME(HEXISTS));
     cmd << key;
     cmd << field;
 
@@ -54,7 +54,7 @@ NFRedisResult *NFRedisClient::HGET(const std::string &key, const std::string &fi
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HGET");
+    NFRedisCommand cmd(GET_NAME(HGET));
     cmd << key;
     cmd << field;
 
@@ -75,7 +75,7 @@ NFRedisResult *NFRedisClient::HGETALL(const std::string &key, std::vector<string
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HGETALL");
+    NFRedisCommand cmd(GET_NAME(HGETALL));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -104,7 +104,7 @@ NFRedisResult *NFRedisClient::HINCRBY(const std::string &key, const std::string 
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HINCRBY");
+    NFRedisCommand cmd(GET_NAME(HINCRBY));
     cmd << key;
     cmd << field;
     cmd << by;
@@ -127,7 +127,7 @@ NFRedisResult *NFRedisClient::HINCRBYFLOAT(const std::string &key, const std::st
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HINCRBYFLOAT");
+    NFRedisCommand cmd(GET_NAME(HINCRBYFLOAT));
     cmd << key;
     cmd << field;
     cmd << by;
@@ -150,7 +150,7 @@ NFRedisResult *NFRedisClient::HKEYS(const std::string &key, std::vector<std::str
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HKEYS");
+    NFRedisCommand cmd(GET_NAME(HKEYS));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -179,7 +179,7 @@ NFRedisResult *NFRedisClient::HLEN(const std::string &key)
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HLEN");
+    NFRedisCommand cmd(GET_NAME(HLEN));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -200,7 +200,7 @@ NFRedisResult *NFRedisClient::HMGET(const std::string &key, const string_vector 
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HMGET");
+    NFRedisCommand cmd(GET_NAME(HMGET));
     cmd << key;
     for (int i = 0; i < fields.size(); ++i)
     {
@@ -236,7 +236,7 @@ NFRedisResult *NFRedisClient::HMSET(const std::string &key, const std::vector<st
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HMSET");
+    NFRedisCommand cmd(GET_NAME(HMSET));
     cmd << key;
     for (int i = 0; i < values.size(); ++i)
     {
@@ -262,7 +262,7 @@ NFRedisResult *NFRedisClient::HSET(const std::string &key, const std::string &fi
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HSET");
+    NFRedisCommand cmd(GET_NAME(HSET));
     cmd << key;
     cmd << field;
     cmd << value;
@@ -285,7 +285,7 @@ NFRedisResult *NFRedisClient::HSETNX(const std::string &key, const std::string &
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HSETNX");
+    NFRedisCommand cmd(GET_NAME(HSETNX));
     cmd << key;
     cmd << field;
     cmd << value;
@@ -308,7 +308,7 @@ NFRedisResult *NFRedisClient::HVALS(const std::string &key, string_vector &value
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HVALS");
+    NFRedisCommand cmd(GET_NAME(HVALS));
     cmd << key;
 
     std::string msg = cmd.Serialize();
@@ -337,7 +337,7 @@ NFRedisResult *NFRedisClient::HSTRLEN(const std::string &key, const std::string 
 {
     m_pRedisResult->Reset();
 
-    NFRedisCommand cmd("HSTRLEN");
+    NFRedisCommand cmd(GET_NAME(HSTRLEN));
     cmd << key;
     cmd << field;
 

@@ -169,28 +169,27 @@ public:
 */
 
     /////////client SortedSet//////////////
-    /*
+ 
     NFRedisResult* ZADD(const std::string& key, const std::string& member, const double score);
-    NFRedisResult* ZCARD(const std::string& key, const std::string& value);
+    NFRedisResult* ZCARD(const std::string& key);
     NFRedisResult* ZCOUNT(const std::string& key, const double start, const double end);
-    NFRedisResult* ZINCRBY(const std::string& key, const std::string& value);
-    NFRedisResult* ZRANGE(const std::string& key, const std::string& value);
-    NFRedisResult* ZRANGEBYSCORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZRANK(const std::string& key, const std::string& value);
-    NFRedisResult* ZREM(const std::string& key, const std::string& value);
-    NFRedisResult* ZREMRANGEBYRANK(const std::string& key, const std::string& value);
-    NFRedisResult* ZREMRANGEBYSCORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZREVRANGE(const std::string& key, const std::string& value);
-    NFRedisResult* ZREVRANGEBYSCORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZREVRANK(const std::string& key, const std::string& value);
-    NFRedisResult* ZSCORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZUNIONSTORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZINTERSTORE(const std::string& key, const std::string& value);
-    NFRedisResult* ZSCAN(const std::string& key, const std::string& value);
-    NFRedisResult* ZRANGEBYLEX(const std::string& key, const std::string& value);
-    NFRedisResult* ZLEXCOUNT(const std::string& key, const std::string& value);
-    NFRedisResult* ZREMRANGEBYLEX(const std::string& key, const std::string& value);
-*/
+    NFRedisResult* ZINCRBY(const std::string& key, const std::string & member, const double score);
+    NFRedisResult* ZRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    NFRedisResult* ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+    NFRedisResult* ZRANK(const std::string & key, const std::string & member);
+    NFRedisResult* ZREM(const std::string& key, const std::string& member);
+    NFRedisResult* ZREMRANGEBYRANK(const std::string& key, const int start, const int end);
+    NFRedisResult* ZREMRANGEBYSCORE(const std::string& key, const double start, const double end);
+    NFRedisResult* ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    NFRedisResult* ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+    NFRedisResult* ZREVRANK(const std::string& key, const std::string& member);
+    NFRedisResult* ZSCORE(const std::string& key, const std::string& member);
+    //NFRedisResult* ZUNIONSTORE(const std::string& key, const std::string& value);
+    //NFRedisResult* ZINTERSTORE(const std::string& key, const std::string& value);
+    //NFRedisResult* ZSCAN(const std::string& key, const std::string& value);
+    //NFRedisResult* ZRANGEBYLEX(const std::string& key, const std::string& value);
+    //NFRedisResult* ZLEXCOUNT(const std::string& key, const std::string& value);
+    //NFRedisResult* ZREMRANGEBYLEX(const std::string& key, const std::string& value);
 
     /////////client GEO//////////////
 
@@ -204,14 +203,13 @@ public:
 */
 
     /////////client PUB SUB//////////////
-/*
+
     NFRedisResult* PSUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* PUBLISH(const std::string& key, const std::string& value);
     NFRedisResult* PUBSUB(const std::string& key, const std::string& value);
     NFRedisResult* PUNSUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* SUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* UNSUBSCRIBE(const std::string& key, const std::string& value);
- */
     /////////client server//////////////
     NFRedisResult* FLUSHALL();
     NFRedisResult* FLUSHDB();

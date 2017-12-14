@@ -8,7 +8,7 @@ NFRedisResult *NFRedisClient::LINDEX(const std::string &key, const int index)
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LINDEX");
+	NFRedisCommand cmd(GET_NAME(LINDEX));
 	cmd << key;
 	cmd << index;
 
@@ -30,7 +30,7 @@ NFRedisResult *NFRedisClient::LLEN(const std::string &key)
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LLEN");
+	NFRedisCommand cmd(GET_NAME(LLEN));
 	cmd << key;
 
 	std::string msg = cmd.Serialize();
@@ -51,7 +51,7 @@ NFRedisResult *NFRedisClient::LPOP(const std::string &key)
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LPOP");
+	NFRedisCommand cmd(GET_NAME(LPOP));
 	cmd << key;
 
 	std::string msg = cmd.Serialize();
@@ -72,7 +72,7 @@ NFRedisResult *NFRedisClient::LPUSH(const std::string &key, const std::string &v
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LPUSH");
+	NFRedisCommand cmd(GET_NAME(LPUSH));
 	cmd << key;
 	cmd << value;
 
@@ -94,7 +94,7 @@ NFRedisResult *NFRedisClient::LPUSHX(const std::string &key, const std::string &
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LPUSHX");
+	NFRedisCommand cmd(GET_NAME(LPUSHX));
 	cmd << key;
 	cmd << value;
 
@@ -121,7 +121,7 @@ NFRedisResult *NFRedisClient::LRANGE(const std::string &key, const int start, co
 		return m_pRedisResult;
 	}
 
-	NFRedisCommand cmd("LRANGE");
+	NFRedisCommand cmd(GET_NAME(LRANGE));
 	cmd << key;
 	cmd << start;
 	cmd << end;
@@ -153,7 +153,7 @@ NFRedisResult *NFRedisClient::LSET(const std::string &key, const int index, cons
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("LSET");
+	NFRedisCommand cmd(GET_NAME(LSET));
 	cmd << key;
 	cmd << index;
 	cmd << value;
@@ -176,7 +176,7 @@ NFRedisResult *NFRedisClient::RPOP(const std::string &key)
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("RPOP");
+	NFRedisCommand cmd(GET_NAME(RPOP));
 	cmd << key;
 
 	std::string msg = cmd.Serialize();
@@ -197,7 +197,7 @@ NFRedisResult *NFRedisClient::RPUSH(const std::string &key, const std::string &v
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("RPUSH");
+	NFRedisCommand cmd(GET_NAME(RPUSH));
 	cmd << key;
 	cmd << value;
 
@@ -219,7 +219,7 @@ NFRedisResult *NFRedisClient::RPUSHX(const std::string &key, const std::string &
 {
 	m_pRedisResult->Reset();
 
-	NFRedisCommand cmd("RPUSHX");
+	NFRedisCommand cmd(GET_NAME(RPUSHX));
 	cmd << key;
 	cmd << value;
 
