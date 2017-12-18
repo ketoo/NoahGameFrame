@@ -49,7 +49,6 @@ public:
 private:
     std::vector<NFCUIDialog*> m_vecDialog;
 	
-    // UI的根節點
 	CC_SYNTHESIZE_READONLY(Node*, m_pRootNode, RootNode);
 	CC_SYNTHESIZE_READONLY(Node*, m_pPanelNode, PanelNode);
 	CC_SYNTHESIZE_READONLY(Node*, m_pDialogNode, DialogNode);

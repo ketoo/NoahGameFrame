@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -14,6 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -24,6 +25,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -32,6 +34,7 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v140_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -111,6 +114,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </CustomBuildStep>
     <ClCompile>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">-Zm164 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -229,6 +233,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       </ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\..\Dependencies\libevent\evutil_rand.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evutil_time.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ForcedIncludeFiles>
@@ -430,7 +439,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCComponentManager.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCObject.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCProperty.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCPropertyManager.cpp" />
@@ -444,18 +452,22 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFDefine.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.cc" />
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.cc" />
-    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNet.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNet.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.cpp" />
-    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.cpp" />
+    <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCoroutineManager.cpp" />
     <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\NF\Logic\NFCChatLogic.cpp" />
@@ -530,7 +542,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCClassModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFConfigPlugin\NFCElementModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFBox.hpp" />
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCComponentManager.h" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCConsistentHash.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCMemManager.hpp" />
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCObject.h" />
@@ -568,21 +579,16 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFFleetingDefine.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFLimit.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.h" />
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.h" />
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.h" />
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.h" />
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFProtocolDefine.hpp" />
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.h" />
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNet.h" />
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetClientModule.h" />
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.h" />
-    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFIHttpNet.h" />
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFINet.h" />
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCDynLib.h" />
+    <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCoroutineManager.h" />
     <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCPluginManager.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\NF\Logic\NFCChatLogic.h" />

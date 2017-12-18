@@ -7,7 +7,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(NFRoot);$(NFRoot)\Dependencies\;$(NFRoot)\Dependencies\libevent\;$(NFRoot)\Dependencies\libevent\WIN32-Code\;$(NFRoot)\Dependencies\libevent\include\;$(NFRoot)\Dependencies\libevent\compat\;$(NFRoot)\Dependencies\protobuf\src\;$(NFRoot)\Dependencies\Theron\Include\;$(NFRoot)\Dependencies\mysql\;$(NFRoot)\Dependencies\protobuf\src;$(NFRoot)\Dependencies\protobuf\vsprojects;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(NFRoot);$(NFRoot)\Dependencies\;$(NFRoot)\Dependencies\libevent\;$(NFRoot)\Dependencies\libevent\WIN32-Code\nmake;$(NFRoot)\Dependencies\libevent\include\;$(NFRoot)\Dependencies\libevent\compat\;$(NFRoot)\Dependencies\protobuf\src\;$(NFRoot)\Dependencies\Theron\Include\;$(NFRoot)\Dependencies\mysql\;$(NFRoot)\Dependencies\protobuf\src;$(NFRoot)\Dependencies\protobuf\vsprojects;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
