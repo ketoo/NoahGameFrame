@@ -70,13 +70,13 @@ public:
     virtual bool Final();
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
 
     
-    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen);
+    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen);
 
 
     virtual bool CloseNetObject(const NFSOCK nSockIndex);
@@ -86,17 +86,11 @@ public:
     virtual bool IsServer();
     virtual bool Log(int severity, const char* msg);
 
-private:
+private:    
+    bool SendMsgToAllClient(const char* msg, const size_t nLen);
     
-    bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
-
-    
-    bool SendMsg(const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
-    bool SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
-
-	inline bool SendMsgToAllClient(const char* msg, const size_t nLen) { return SendMsgToAllClient(msg, (uint32_t)nLen); }
-	inline bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList) { return SendMsg(msg, (uint32_t)nLen, fdList); }
-	inline bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex) { return SendMsg(msg, (uint32_t)nLen, nSockIndex); }
+    bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
+    bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
 
 private:

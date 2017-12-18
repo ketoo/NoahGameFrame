@@ -9,6 +9,7 @@
 
 #include "NFCNetModule.h"
 #include "NFCNetClientModule.h"
+#include "NFCNet.h"
 
 NFCNetClientModule::NFCNetClientModule(NFIPluginManager* p)
 {
@@ -437,7 +438,7 @@ void NFCNetClientModule::KeepState(NF_SHARE_PTR<ConnectData> pServerData)
 
 void NFCNetClientModule::OnSocketEvent(const NFSOCK fd, const NF_NET_EVENT eEvent, NFINet* pNet)
 {
-    if (eEvent & BEV_EVENT_CONNECTED)
+    if (eEvent & NF_NET_EVENT::NF_NET_EVENT_CONNECTED)
     {
         OnConnected(fd, pNet);
     } else
