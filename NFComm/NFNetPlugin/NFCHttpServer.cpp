@@ -1,5 +1,6 @@
 #include <thread>
 #include "NFCHttpServer.h"
+#include <sys/stat.h>
 
 const int mnHttpBuffLen = 1024 * 1024 * 2;
 
