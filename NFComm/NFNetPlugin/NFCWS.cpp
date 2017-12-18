@@ -256,9 +256,8 @@ void NFCWS::OnInterruptHandler(websocketpp::connection_hdl hd)
     RemoveConnection(hd, NF_WS_EVENT_INTERRUPT);
 }
 
-bool NFCWS::OnPongHandler(websocketpp::connection_hdl hd, std::string str)
+void NFCWS::OnPongHandler(websocketpp::connection_hdl hd, std::string str)
 {
-    return true;
 }
 
 void NFCWS::OnPongTimeOutHandler(websocketpp::connection_hdl hd, std::string str)

@@ -15,13 +15,10 @@ NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager* p)
 {
     pPluginManager = p;
     m_pHttpClient = new NFCHttpClient();
-    m_xDefaultHttpHeaders =
-            {
-                    {"Connection",    "close"},
-                    {"Content-Type",  "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8"},
-                    {"User-Agent", DEFAULT_USER_AGENT},
-                    {"Cache-Control", "no-cache"}
-            };
+    m_xDefaultHttpHeaders["Connection"] = "close";
+    m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
+    m_xDefaultHttpHeaders["User-Agent"] = DEFAULT_USER_AGENT;
+    m_xDefaultHttpHeaders["Cache-Control"] = "no-cache";
 }
 
 NFCHttpClientModule::~NFCHttpClientModule()
