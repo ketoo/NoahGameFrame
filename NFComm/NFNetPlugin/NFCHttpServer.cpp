@@ -1,10 +1,18 @@
+#include <thread>
 #include "NFCHttpServer.h"
+
+const int mnHttpBuffLen = 1024 * 1024 * 2;
+
+void NFCHttpServer::AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr)
+{
+	mFilter = ptr;
+}
 
 bool NFCHttpServer::Execute()
 {
-    if (base)
+    if (mxBase)
     {
-        event_base_loop(base, EVLOOP_ONCE | EVLOOP_NONBLOCK);
+        event_base_loop(mxBase, EVLOOP_ONCE | EVLOOP_NONBLOCK);
     }
 
     return true;
@@ -13,7 +21,9 @@ bool NFCHttpServer::Execute()
 
 int NFCHttpServer::InitServer(const unsigned short port)
 {
-    mPort = port;
+	mstrBuff = new char[mnHttpBuffLen];
+	memset(mstrBuff, 0, mnHttpBuffLen);
+
     //struct event_base *base;
     struct evhttp* http;
     struct evhttp_bound_socket* handle;
@@ -26,24 +36,24 @@ int NFCHttpServer::InitServer(const unsigned short port)
         return (1);
 #endif
 
-    base = event_base_new();
-    if (!base)
+    mxBase = event_base_new();
+    if (!mxBase)
     {
         std::cout << "create event_base fail" << std::endl;;
         return 1;
     }
 
-    http = evhttp_new(base);
+    http = evhttp_new(mxBase);
     if (!http)
     {
         std::cout << "create evhttp fail" << std::endl;;
         return 1;
     }
 
-    handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", mPort);
+    handle = evhttp_bind_socket_with_handle(http, "0.0.0.0", port);
     if (!handle)
     {
-        std::cout << "bind port :" << mPort << " fail" << std::endl;;
+        std::cout << "bind port :" << port << " fail" << std::endl;;
         return 1;
     }
 
@@ -55,13 +65,27 @@ int NFCHttpServer::InitServer(const unsigned short port)
 
 void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 {
+	std::cout << "threadid " << std::this_thread::get_id() << std::endl;
+
     NFCHttpServer* pNet = (NFCHttpServer*) arg;
     NFHttpRequest request;
     request.req = req;
+
+	//headers
+	struct evkeyvalq * header = evhttp_request_get_input_headers(req);
+	struct evkeyval* kv = header->tqh_first;
+	while (kv) 
+	{
+		request.headers.insert(std::map<std::string, std::string>::value_type(kv->key, kv->value));
+
+		kv = kv->next.tqe_next;
+	}
+
     //uri
     const char* uri = evhttp_request_get_uri(req);
-    //std::cout << "Got a GET request:" << uri << std::endl;
-
+	request.url = uri;
+	request.remoteHost = evhttp_request_get_host(req);
+	request.type = (NFHttpType)evhttp_request_get_command(req);
     //get decodeUri
     struct evhttp_uri* decoded = evhttp_uri_parse(uri);
     if (!decoded)
@@ -70,46 +94,71 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
         evhttp_send_error(req, HTTP_BADREQUEST, 0);
         return;
     }
-    const char* decode1 = evhttp_uri_get_path(decoded);
-    if (!decode1)
-        decode1 = "/";
+    
+	//path
+	request.path = evhttp_uri_get_path(decoded);
 
-    //The returned string must be freed by the caller.
-    const char* decodeUri = evhttp_uridecode(decode1, 0, NULL);
 
-    if (decodeUri == NULL)
-    {
-        printf("uri decode error\n");
-        evhttp_send_error(req, HTTP_BADREQUEST, "uri decode error");
-        return;
-    }
-    std::string strUri;
-    if (decodeUri[0] == '/')
-    {
-        strUri = decodeUri;
-        strUri.erase(0, 1);
-        decodeUri = strUri.c_str();
-    }
-    //get strCommand
-    auto cmdList = Split(strUri, "/");
-    std::string strCommand = "";
-    if (cmdList.size() > 0)
-    {
-        strCommand = cmdList[0];
-    }
+	//std::cout << "Got a GET request:" << uri << std::endl;
+	if (evhttp_request_get_command(req) == evhttp_cmd_type::EVHTTP_REQ_GET)
+	{
+		//OnGetProcess(request, );
+		std::cout << "EVHTTP_REQ_GET" << std::endl;
 
-    request.url = decodeUri;
+		struct evkeyvalq params;
+		evhttp_parse_query(uri, &params);
+		struct evkeyval* kv = params.tqh_first;
+		while (kv)
+		{
+			request.params.insert(std::map<std::string, std::string>::value_type(kv->key, kv->value));
+
+			kv = kv->next.tqe_next;
+		}
+	}
+	else if (evhttp_request_get_command(req) == evhttp_cmd_type::EVHTTP_REQ_POST)
+	{
+		std::cout << "EVHTTP_REQ_POST" << std::endl;
+		struct evbuffer *in_evb = evhttp_request_get_input_buffer(req);
+		size_t len = evbuffer_get_length(in_evb);
+		if (len > mnHttpBuffLen)
+		{
+			char *data = new char[len];
+			evbuffer_copyout(in_evb, data, len);
+			request.body = std::string(data, len);
+			delete[] data;
+		}
+		else
+		{
+			evbuffer_copyout(in_evb, pNet->mstrBuff, len);
+			request.body = std::string(pNet->mstrBuff, len);
+		}
+	}
+
+	if (pNet->mFilter)
+	{
+		if (!pNet->mFilter(request))
+		{
+			//return 401
+
+			pNet->ResponseMsg(request, "AUTH", NFWebStatus::WEB_AUTH);
+			return;
+		}
+	}
 
     // call cb
     if (pNet->mRecvCB)
     {
-        pNet->mRecvCB(request, strCommand, decodeUri);
-    } else
+        pNet->mRecvCB(request);
+    }
+	else
     {
-        pNet->ResponseMsg(request, "mRecvCB empty", NFWebStatus::WEB_ERROR);
+        pNet->ResponseMsg(request, "NO PROCESSER", NFWebStatus::WEB_ERROR);
     }
 
-
+	if (decoded)
+	{
+		evhttp_uri_free(decoded);
+	}
 
     //close
     /*{
@@ -234,43 +283,11 @@ bool NFCHttpServer::ResponseFile(const NFHttpRequest& req, const int fd, struct 
 
 bool NFCHttpServer::Final()
 {
-    if (base)
+    if (mxBase)
     {
-        event_base_free(base);
-        base = NULL;
+        event_base_free(mxBase);
+        mxBase = NULL;
     }
+
     return true;
-}
-
-std::vector<std::string> NFCHttpServer::Split(const std::string& str, std::string delim)
-{
-    std::vector<std::string> result;
-    if (str.empty() || delim.empty())
-    {
-        return result;
-    }
-
-    std::string tmp;
-    size_t pos_begin = str.find_first_not_of(delim);
-    size_t pos = 0;
-    while (pos_begin != std::string::npos)
-    {
-        pos = str.find(delim, pos_begin);
-        if (pos != std::string::npos)
-        {
-            tmp = str.substr(pos_begin, pos - pos_begin);
-            pos_begin = pos + delim.length();
-        } else
-        {
-            tmp = str.substr(pos_begin);
-            pos_begin = pos;
-        }
-
-        if (!tmp.empty())
-        {
-            result.push_back(tmp);
-            tmp.clear();
-        }
-    }
-    return result;
 }

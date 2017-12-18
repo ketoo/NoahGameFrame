@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "NFComm/NFNetPlugin/NFCHttpServer.h"
-#include "NFComm/NFPluginModule/NFIHttpNetModule.h"
+#include "NFComm/NFPluginModule/NFIHttpServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 
 class NFCHttpServerModule
@@ -41,7 +41,7 @@ public:
     virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
 private:
-    void OnReceiveNetPack(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl);
+    bool OnReceiveNetPack(const NFHttpRequest& req);
 
 private:
     NFILogModule* mLogModule;

@@ -41,15 +41,14 @@ int NFCHttpServerModule::InitServer(const unsigned short nPort)
     return m_pHttpServer->InitServer(nPort);
 }
 
-void NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req, const std::string& strCommand,
-                                           const std::string& strUrl)
+bool NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req)
 {
-    auto it = mMsgCBMap.find(strCommand);
+    auto it = mMsgCBMap.find(req.path);
     if (mMsgCBMap.end() != it)
     {
         HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = it->second;
         HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-        pFunc->operator()(req, strCommand, strUrl);
+        pFunc->operator()(req);
     }
     else
     {
@@ -60,13 +59,16 @@ void NFCHttpServerModule::OnReceiveNetPack(const NFHttpRequest& req, const std::
             {
                 HTTP_RECEIVE_FUNCTOR_PTR& pFunPtr = *it;
                 HTTP_RECEIVE_FUNCTOR* pFunc = pFunPtr.get();
-                pFunc->operator()(req, strCommand, strUrl);
+                pFunc->operator()(req);
             }
-        } else
+        }
+		else
         {
-            std::cout << "no http receiver:" << strCommand << std::endl;
+            std::cout << "no http receiver:" << req.path << std::endl;
         }
     }
+
+	return true;
 }
 
 bool NFCHttpServerModule::AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb)
