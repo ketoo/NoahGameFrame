@@ -51,18 +51,14 @@ public:
     }
 
     template<typename BaseType>
-    NFCHttpServer(BaseType* pBaseType,
-                  void (BaseType::*handleRecieve)(const NFHttpRequest& req, const std::string& strCommand,
-                                                  const std::string& strUrl))
+    NFCHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
     {
-        base = NULL;
-        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2,
-                            std::placeholders::_3);
-        mPort = 0;
+        mxBase = NULL;
+        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
     }
 
-    virtual ~NFCHttpServer()
-    {};
+    virtual ~NFCHttpServer(){};
+
 
     virtual bool Execute();
 
@@ -70,23 +66,23 @@ public:
 
     virtual bool Final();
 
-    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
-                             const std::string& strReason = "OK");
+    virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 
-    virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
+	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
 
 private:
+	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr);
 
-    bool ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
+	bool ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
 
+private:
     static void listener_cb(struct evhttp_request* req, void* arg);
 
-    static std::vector<std::string> Split(const std::string& str, std::string delim);
-
 private:
-    int mPort;
-    struct event_base* base;
-    HTTP_RECEIVE_FUNCTOR mRecvCB;
+	char* mstrBuff;
+    struct event_base* mxBase;
+	HTTP_RECEIVE_FUNCTOR mRecvCB;
+	HTTP_RECEIVE_FUNCTOR mFilter;
 };
 
 #endif

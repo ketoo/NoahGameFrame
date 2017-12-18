@@ -94,9 +94,9 @@ void NFCNet::listener_cb(struct evconnlistener* listener, evutil_socket_t fd, st
         return;
     }
 
-    struct event_base* base = pNet->base;
+    struct event_base* mxBase = pNet->mxBase;
     
-    struct bufferevent* bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
+    struct bufferevent* bev = bufferevent_socket_new(mxBase, fd, BEV_OPT_CLOSE_ON_FREE);
     if (!bev)
     {
         
@@ -175,9 +175,9 @@ bool NFCNet::Execute()
 {
     ExecuteClose();
 
-    if (base)
+    if (mxBase)
     {
-        event_base_loop(base, EVLOOP_ONCE | EVLOOP_NONBLOCK);
+        event_base_loop(mxBase, EVLOOP_ONCE | EVLOOP_NONBLOCK);
     }
 
     return true;
@@ -223,10 +223,10 @@ bool NFCNet::Final()
 
     if (!mbServer)
     {
-        if (base)
+        if (mxBase)
         {
-            event_base_free(base);
-            base = NULL;
+            event_base_free(mxBase);
+            mxBase = NULL;
         }
     }
 
@@ -384,14 +384,14 @@ int NFCNet::InitClientNet()
         return -1;
     }
 
-    base = event_base_new();
-    if (base == NULL)
+    mxBase = event_base_new();
+    if (mxBase == NULL)
     {
         printf("event_base_new ");
         return -1;
     }
 
-    bev = bufferevent_socket_new(base, -1, BEV_OPT_CLOSE_ON_FREE);
+    bev = bufferevent_socket_new(mxBase, -1, BEV_OPT_CLOSE_ON_FREE);
     if (bev == NULL)
     {
         printf("bufferevent_socket_new ");
@@ -451,7 +451,7 @@ int NFCNet::InitServerNet()
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
-    base = event_base_new_with_config(cfg);
+    mxBase = event_base_new_with_config(cfg);
 
 #else
 
@@ -474,7 +474,7 @@ int NFCNet::InitServerNet()
 
     //////////////////////////////////////////////////////////////////////////
 
-    if (!base)
+    if (!mxBase)
     {
         fprintf(stderr, "Could not initialize libevent!\n");
         Final();
@@ -488,7 +488,7 @@ int NFCNet::InitServerNet()
 
     printf("server started with %d\n", nPort);
 
-    listener = evconnlistener_new_bind(base, listener_cb, (void*)this,
+    listener = evconnlistener_new_bind(mxBase, listener_cb, (void*)this,
                                        LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE, -1,
                                        (struct sockaddr*)&sin,
                                        sizeof(sin));
