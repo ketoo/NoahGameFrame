@@ -230,7 +230,7 @@ bool NFCNet::Final()
     return true;
 }
 
-bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
+bool NFCNet::SendMsgToAllClient(const char* msg, const size_t nLen)
 {
     if (nLen <= 0)
     {
@@ -257,7 +257,7 @@ bool NFCNet::SendMsgToAllClient(const char* msg, const uint32_t nLen)
 }
 
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockIndex)
+bool NFCNet::SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex)
 {
     if (nLen <= 0)
     {
@@ -284,7 +284,7 @@ bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockInd
     return false;
 }
 
-bool NFCNet::SendMsg(const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList)
+bool NFCNet::SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
 {
     std::list<NFSOCK>::const_iterator it = fdList.begin();
     for (; it != fdList.end(); ++it)
@@ -577,7 +577,7 @@ bool NFCNet::Log(int severity, const char* msg)
     return true;
 }
 
-bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex /*= 0*/)
+bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex /*= 0*/)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
@@ -590,7 +590,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     return false;
 }
 
-bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList)
+bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
@@ -603,7 +603,7 @@ bool NFCNet::SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uin
     return false;
 }
 
-bool NFCNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen)
+bool NFCNet::SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen)
 {
     std::string strOutData;
     int nAllLen = EnCode(nMsgID, msg, nLen, strOutData);
