@@ -68,13 +68,17 @@ bool NFCMasterNet_HttpServerModule::Execute()
 	return true;
 }
 
-void NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)
+bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 {
 	std::string str = m_pMasterServerModule->GetServersStatus();
 	m_pHttpNetModule->ResponseMsg(req, str, NFWebStatus::WEB_OK);
+
+	return true;
 }
 
-void NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl)
+bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 {
 	m_pHttpNetModule->ResponseFile(req, m_strWebRootPath, "index.html");
+
+	return true;
 }

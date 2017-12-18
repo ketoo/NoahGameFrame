@@ -241,7 +241,6 @@ NFRedisResult * NFRedisClient::ZREVRANGE(const std::string& key, const int start
 	cmd << key;
 	cmd << start;
 	cmd << end;
-	cmd << values;
 
 	std::string msg = cmd.Serialize();
 	m_pRedisResult->SetCommand(msg);

@@ -20,16 +20,16 @@ public:
 
 	// register msg callback
 	template<typename BaseType>
-	bool AddReceiveCallBack(const std::string& strCommand, BaseType* pBase, void (BaseType::*handleRecieve)(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl))
+	bool AddReceiveCallBack(const std::string& strPath, BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
 	{
-		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
-		return AddMsgCB(strCommand, functorPtr);
+		return AddMsgCB(strPath, functorPtr);
 	}
 	template<typename BaseType>
-	bool AddNetCommonReceiveCallBack(BaseType* pBase, void (BaseType::*handleRecieve)(const NFHttpRequest& req, const std::string& strCommand, const std::string& strUrl))
+	bool AddNetCommonReceiveCallBack(BaseType* pBase, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
 	{
-		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+		HTTP_RECEIVE_FUNCTOR functor = std::bind(handleRecieve, pBase, std::placeholders::_1);
 		HTTP_RECEIVE_FUNCTOR_PTR functorPtr(new HTTP_RECEIVE_FUNCTOR(functor));
 
 		return AddComMsgCB(functorPtr);
@@ -41,7 +41,7 @@ public:
 	virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK") = 0;
 	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
 
-	virtual bool AddMsgCB(const std::string& strCommand, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
+	virtual bool AddMsgCB(const std::string& strPath, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
 	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
 };
 

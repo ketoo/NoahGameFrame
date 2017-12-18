@@ -24,7 +24,7 @@ class NFCNet : public NFINet
 public:
     NFCNet()
     {
-        base = NULL;
+        mxBase = NULL;
         listener = NULL;
 
         mstrIP = "";
@@ -42,7 +42,7 @@ public:
     template<typename BaseType>
     NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const NFSOCK, const NF_NET_EVENT, NFINet*))
     {
-        base = NULL;
+        mxBase = NULL;
         listener = NULL;
 
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -140,7 +140,7 @@ private:
     int64_t mnSendMsgTotal;
     int64_t mnReceiveMsgTotal;
 
-    struct event_base* base;
+    struct event_base* mxBase;
     struct evconnlistener* listener;
     //////////////////////////////////////////////////////////////////////////
 
