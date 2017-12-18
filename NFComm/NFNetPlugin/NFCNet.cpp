@@ -221,13 +221,10 @@ bool NFCNet::Final()
         listener = NULL;
     }
 
-    if (!mbServer)
+    if (mxBase)
     {
-        if (mxBase)
-        {
-            event_base_free(mxBase);
-            mxBase = NULL;
-        }
+        event_base_free(mxBase);
+        mxBase = NULL;
     }
 
     return true;
