@@ -6,6 +6,9 @@
 ////////////////////////////////////////////
 #include "NFCHttpClient.h"
 
+#if _MSC_VER
+#define snprintf _snprintf
+#endif
 
 bool NFCHttpClient::Execute()
 {

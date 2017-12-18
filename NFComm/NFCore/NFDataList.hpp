@@ -28,12 +28,16 @@
 #include <fstream>
 #include <memory>
 #include "NFMemoryCounter.hpp"
-#include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector2.hpp"
 #include "NFComm/NFCore/NFVector3.hpp"
 
+#if _MSC_VER <= 1800
+#include "common/variant.h"
+#else
+#include "common/variant.hpp"
+#endif
 
 enum NFDATA_TYPE
 {
