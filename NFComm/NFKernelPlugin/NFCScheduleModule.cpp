@@ -70,7 +70,7 @@ bool NFCScheduleModule::Execute()
 					}
 					else
 					{
-						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount);
+						NFINT64 nNextCostTime = NFINT64(pSchedule->mfIntervalTime * 1000) * (pSchedule->mnAllCount - pSchedule->mnRemainCount + 1);
 						pSchedule->mnNextTriggerTime = pSchedule->mnStartTime + nNextCostTime;
 					}
 				}
@@ -140,7 +140,7 @@ bool NFCScheduleModule::Execute()
 				}
 				else
 				{
-					NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000) * (xModuleSchedule->mnAllCount - xModuleSchedule->mnRemainCount);
+					NFINT64 nNextCostTime = NFINT64(xModuleSchedule->mfIntervalTime * 1000) * (xModuleSchedule->mnAllCount - xModuleSchedule->mnRemainCount + 1);
 					xModuleSchedule->mnNextTriggerTime = xModuleSchedule->mnStartTime + nNextCostTime;
 				}
 			}
