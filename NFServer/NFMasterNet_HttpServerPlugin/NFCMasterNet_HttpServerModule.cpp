@@ -78,7 +78,6 @@ bool NFCMasterNet_HttpServerModule::OnCommandQuery(const NFHttpRequest& req)
 
 bool NFCMasterNet_HttpServerModule::OnCommonQuery(const NFHttpRequest& req)
 {
-	m_pHttpNetModule->ResponseFile(req, m_strWebRootPath, "index.html");
 
 	return true;
 }

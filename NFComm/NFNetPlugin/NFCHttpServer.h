@@ -68,12 +68,8 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 
-	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName);
-
 private:
 	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr);
-
-	bool ResponseFile(const NFHttpRequest& req, const int fd, struct stat st, const std::string& strType);
 
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
