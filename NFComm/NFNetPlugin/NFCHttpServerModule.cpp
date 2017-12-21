@@ -87,19 +87,8 @@ bool NFCHttpServerModule::AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb)
     return true;
 }
 
-bool NFCHttpServerModule::ResponseMsg(const NFHttpRequest& req, const int nCommand, const std::string& strMsg)
-{
-    return false;
-}
-
 bool NFCHttpServerModule::ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code,
                                       const std::string& strReason)
 {
     return m_pHttpServer->ResponseMsg(req, strMsg, code, strReason);
-}
-
-bool
-NFCHttpServerModule::ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName)
-{
-    return m_pHttpServer->ResponseFile(req, strPath, strFileName);
 }
