@@ -76,8 +76,6 @@ public:
 
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK") = 0;
 
-    virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
-
 private:
 	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr) = 0;
 

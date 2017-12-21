@@ -39,7 +39,6 @@ public:
 	virtual int InitServer(const unsigned short nPort) = 0;
 
 	virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code = NFWebStatus::WEB_OK, const std::string& reason = "OK") = 0;
-	virtual bool ResponseFile(const NFHttpRequest& req, const std::string& strPath, const std::string& strFileName) = 0;
 
 	virtual bool AddMsgCB(const std::string& strPath, const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
 	virtual bool AddComMsgCB(const HTTP_RECEIVE_FUNCTOR_PTR& cb) = 0;	
