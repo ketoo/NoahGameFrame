@@ -61,8 +61,8 @@ private:
 public:
 
 private:
-	NFList<int> mModuleRemoveListEx;
-	NFMapEx<int, NFList<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
+	std::set<MODULE_EVENT_FUNCTOR_PTR> mModuleRemoveSet;
+	std::map<int, std::list<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
 	std::map<void*, void*> mModuleEventPrtMap;
 };
 

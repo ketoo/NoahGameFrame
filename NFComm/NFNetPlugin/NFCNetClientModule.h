@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <iosfwd>
-#include "NFCNet.h"
 #include "NFComm/NFCore/NFQueue.hpp"
 #include "NFComm/NFCore/NFConsistentHash.hpp"
 #include "NFComm/NFMessageDefine/NFDefine.pb.h"

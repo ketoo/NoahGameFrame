@@ -72,68 +72,40 @@ bool NFCLogicBase::AfterInit()
 
 bool NFCLogicBase::DoEvent(const int nEventID, const NFDataList & valueList)
 {
-	bool bRet = false;
-	auto moduleEventInfoMapEx = mModuleEventInfoMapEx;
-
-	NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>> xEventListPtr = moduleEventInfoMapEx.GetElement(nEventID);
-	if (xEventListPtr)
+	auto listElement = mModuleEventInfoMapEx[nEventID];
+	for (auto itr = listElement.begin(); itr != listElement.end(); ++itr)
 	{
-		MODULE_EVENT_FUNCTOR_PTR pFunPtr;
-		bool bRet = xEventListPtr->First(pFunPtr);
-		while (bRet)
+		if (mModuleRemoveSet.find(*itr) == mModuleRemoveSet.end())
 		{
-			MODULE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-			pFunc->operator()(nEventID, valueList);
-
-			bRet = xEventListPtr->Next(pFunPtr);
+			MODULE_EVENT_FUNCTOR* pFunc = (*itr).get();
+			(*pFunc)(nEventID, valueList);
 		}
-
-		bRet = true;
 	}
 
-	return bRet;
+	return true;
 }
 
 bool NFCLogicBase::RemoveEventCallBack(const int nEventID, void *pTarget)
 {
-	bool bRet = false;
-	NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>> xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
-	if (xEventListPtr)
+	auto &listElement = mModuleEventInfoMapEx[nEventID];
+	for (auto itr = listElement.begin(); itr != listElement.end(); )
 	{
-		MODULE_EVENT_FUNCTOR_PTR pFunPtr;
-		bool bRet = xEventListPtr->First(pFunPtr);
-		while (bRet)
+		auto pFunPtr = mModuleEventPrtMap[(*itr).get()];
+		if (pTarget == pFunPtr)
 		{
-			MODULE_EVENT_FUNCTOR* pFunc = pFunPtr.get();
-			
-			auto itTarFun = mModuleEventPrtMap.find(pFunc);
-			
-			if(itTarFun->second == pTarget)
-			{
-				xEventListPtr->Remove(pFunPtr);
-				mModuleEventPrtMap.erase(itTarFun);
-				break;
-			}
-
-			bRet = xEventListPtr->Next(pFunPtr);
+			mModuleRemoveSet.insert(*itr);
+			itr = listElement.erase(itr);
+			continue;
 		}
-
-		bRet = true;
+		++itr;
 	}
 
-	return bRet;
+	return true;
 }
 
 bool NFCLogicBase::AddEventCallBack(const int nEventID, const MODULE_EVENT_FUNCTOR_PTR cb)
 {
-	NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>> xEventListPtr = mModuleEventInfoMapEx.GetElement(nEventID);
-	if (!xEventListPtr)
-	{
-		xEventListPtr = NF_SHARE_PTR<NFList<MODULE_EVENT_FUNCTOR_PTR>>(NF_NEW NFList<MODULE_EVENT_FUNCTOR_PTR>());
-		mModuleEventInfoMapEx.AddElement(nEventID, xEventListPtr);
-	}
-
-	xEventListPtr->Add(cb);
-
+	auto &listElement = mModuleEventInfoMapEx[nEventID];
+	listElement.push_back(cb);
 	return false;
 }

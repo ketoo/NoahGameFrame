@@ -1,0 +1,4 @@
+1.你需要保证你的cpp和.h都是pc换行 因为里面有中文注释，但是提交上去的时候经常会被转换为unix换行
+2. 你需要下载cocos的源代码解压到cocos2d目录。见cocos2d目录下的ReadMe
+3. 你需要拷贝NFDataCfg到Resource目录下 NFClient\Cocos\Resources\NFDataCfg
+4. 打开工程的时候，记得使用VS2015或者以上
