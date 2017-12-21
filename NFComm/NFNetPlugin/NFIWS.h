@@ -19,6 +19,10 @@
 #define ASIO_STANDALONE
 #define _WEBSOCKETPP_CPP11_STL_
 
+#if _MSC_VER <= 1800
+#define noexcept
+#define constexpr
+#endif
 #ifdef _MSC_VER
 #pragma warning(disable: 4244 4267)
 #endif

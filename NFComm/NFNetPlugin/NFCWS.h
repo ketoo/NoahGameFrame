@@ -80,7 +80,7 @@ private:
 
     void OnInterruptHandler(websocketpp::connection_hdl hd);
 
-    bool OnPongHandler(websocketpp::connection_hdl hd, std::string str);
+    void OnPongHandler(websocketpp::connection_hdl hd, std::string str);
 
     void OnPongTimeOutHandler(websocketpp::connection_hdl hd, std::string str);
 
