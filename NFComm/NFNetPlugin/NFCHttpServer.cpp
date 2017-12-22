@@ -4,7 +4,7 @@
 
 const int mnHttpBuffLen = 1024 * 1024 * 2;
 
-void NFCHttpServer::AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr)
+void NFCHttpServer::AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr)
 {
 	mFilter = ptr;
 }
@@ -137,7 +137,9 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 
 	if (pNet->mFilter)
 	{
-		if (!pNet->mFilter(request))
+        HTTP_RECEIVE_FUNCTOR* pFunc = pNet->mFilter.get();
+
+		if (pFunc && !pFunc->operator()(request))
 		{
 			//return 401
 
@@ -147,9 +149,9 @@ void NFCHttpServer::listener_cb(struct evhttp_request* req, void* arg)
 	}
 
     // call cb
-    if (pNet->mRecvCB)
+    if (pNet->mReceiveCB)
     {
-        pNet->mRecvCB(request);
+        pNet->mReceiveCB(request);
     }
 	else
     {

@@ -250,6 +250,7 @@
 #include <stdint.h>
 #include <chrono>
 #include <functional>
+#include <assert.h>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
@@ -264,7 +265,6 @@ typedef int64_t NFSOCK;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <crtdbg.h>
-#include <assert.h>
 #define NFASSERT(exp_, msg_, file_, func_)  \
     std::string strInfo("Message:");        \
     strInfo += msg_ + std::string(" don't exist or some warning") + std::string("\n\nFile:") + std::string(file_) + std::string("\n Function:") + func_; \
