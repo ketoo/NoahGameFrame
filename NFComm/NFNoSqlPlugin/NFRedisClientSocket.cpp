@@ -2,6 +2,9 @@
 // Author: LUSHENG HUANG Created on 17/11/17.
 //
 
+#include "NFRedisClient.h"
+#include "NFRedisClientSocket.h"
+
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <WS2tcpip.h>
 #include <winsock2.h>
@@ -13,10 +16,6 @@
 #elif NF_PLATFORM == NF_PLATFORM_APPLE
 #include <arpa/inet.h>
 #endif
-
-
-#include "NFRedisClient.h"
-#include "NFRedisClientSocket.h"
 
 NFRedisClientSocket::NFRedisClientSocket()
 {
