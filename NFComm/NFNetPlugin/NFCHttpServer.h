@@ -54,7 +54,7 @@ public:
     NFCHttpServer(BaseType* pBaseType, bool (BaseType::*handleRecieve)(const NFHttpRequest& req))
     {
         mxBase = NULL;
-        mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
+        mReceiveCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1);
     }
 
     virtual ~NFCHttpServer(){};
@@ -69,7 +69,7 @@ public:
     virtual bool ResponseMsg(const NFHttpRequest& req, const std::string& strMsg, NFWebStatus code, const std::string& strReason = "OK");
 
 private:
-	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR& ptr);
+	virtual void AddFilter(const HTTP_RECEIVE_FUNCTOR_PTR& ptr);
 
 private:
     static void listener_cb(struct evhttp_request* req, void* arg);
@@ -77,8 +77,8 @@ private:
 private:
 	char* mstrBuff;
     struct event_base* mxBase;
-	HTTP_RECEIVE_FUNCTOR mRecvCB;
-	HTTP_RECEIVE_FUNCTOR mFilter;
+	HTTP_RECEIVE_FUNCTOR mReceiveCB;
+	HTTP_RECEIVE_FUNCTOR_PTR mFilter;
 };
 
 #endif
