@@ -464,7 +464,7 @@ int NFCNet::InitServerNet()
         return -1;
     }
 
-    base = event_base_new_with_config(cfg);//event_base_new()
+    mxBase = event_base_new_with_config(cfg);//event_base_new()
 
 #endif
     event_config_free(cfg);
