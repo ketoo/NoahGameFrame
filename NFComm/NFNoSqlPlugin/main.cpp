@@ -4,7 +4,8 @@
 #include "NFRedisTester.h"
 #include "NFRedisTester.h"
 
-void main()
+#ifdef TEST_NOSQL
+int main()
 {
 	NFRedisTester xRedisTester;
 	xRedisTester.RunTester();
@@ -15,5 +16,7 @@ void main()
 		xRedisTester.Execute();
 	}
 
-	return;
+	return 0;
 }
+
+#endif
