@@ -33,10 +33,8 @@
 #include "NFComm/NFCore/NFVector2.hpp"
 #include "NFComm/NFCore/NFVector3.hpp"
 
-#ifdef _MSC_VER
-#if _MSC_VER <= 1800
+#ifdef _MSC_VER && _MSC_VER <= 1800
 #include "common/variant.h"
-#endif
 #else
 #include "common/variant.hpp"
 #endif
