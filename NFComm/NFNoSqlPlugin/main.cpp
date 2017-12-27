@@ -4,7 +4,6 @@
 #include "NFRedisTester.h"
 #include "NFRedisTester.h"
 
-#ifdef TEST_NOSQL
 int main()
 {
 	NFRedisTester xRedisTester;
@@ -18,5 +17,3 @@ int main()
 
 	return 0;
 }
-
-#endif

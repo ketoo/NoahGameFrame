@@ -210,8 +210,8 @@ bool NFCClassModule::AddRecords(rapidxml::xml_node<>* pRecordRootNode, NF_SHARE_
             xRecord->SetPrivate(bPrivate);
             xRecord->SetSave(bSave);
             xRecord->SetCache(bCache);
-			xRecord->SetRef(pstrRef);
-			xRecord->SetForce(pstrForce);
+			xRecord->SetRef(bRef);
+			xRecord->SetForce(bForce);
 			xRecord->SetUpload(bUpload);
         }
     }
