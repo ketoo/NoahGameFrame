@@ -11,7 +11,6 @@
 
 #include "NFComm/NFPluginModule/NFIPlugin.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFPluginModule/NFIWebsocketModule.h"
 
 class NFIHelloWorld
 	: public NFIModule
@@ -37,10 +36,7 @@ public:
     virtual bool Shut();
 
 protected:
-	void OnWebsocketMessage(websocketpp::connection_hdl, const std::string& strMsg, NF_WS_MSG_DATA_TYPE msg_data_type);
-	void OnWebsocketEvent(websocketpp::connection_hdl, NF_WS_EVENT);
 
-	NFIWebsocketModule*	m_pWSModule;
 };
 
 #endif
