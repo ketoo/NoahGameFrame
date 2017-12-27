@@ -19,8 +19,6 @@
     <ClCompile Include="NFCNet.cpp" />
     <ClCompile Include="NFCNetClientModule.cpp" />
     <ClCompile Include="NFCNetModule.cpp" />
-    <ClCompile Include="NFCWebsocketModule.cpp" />
-    <ClCompile Include="NFCWS.cpp" />
     <ClCompile Include="NFNetPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,11 +29,8 @@
     <ClInclude Include="NFCNet.h" />
     <ClInclude Include="NFCNetClientModule.h" />
     <ClInclude Include="NFCNetModule.h" />
-    <ClInclude Include="NFCWebsocketModule.h" />
-    <ClInclude Include="NFCWS.h" />
     <ClInclude Include="NFIHttpClient.h" />
     <ClInclude Include="NFINet.h" />
-    <ClInclude Include="NFIWS.h" />
     <ClInclude Include="NFNetPlugin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
