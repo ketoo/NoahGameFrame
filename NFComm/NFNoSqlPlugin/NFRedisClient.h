@@ -203,13 +203,14 @@ public:
 */
 
     /////////client PUB SUB//////////////
-
+	/*
     NFRedisResult* PSUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* PUBLISH(const std::string& key, const std::string& value);
     NFRedisResult* PUBSUB(const std::string& key, const std::string& value);
     NFRedisResult* PUNSUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* SUBSCRIBE(const std::string& key, const std::string& value);
     NFRedisResult* UNSUBSCRIBE(const std::string& key, const std::string& value);
+	*/
     /////////client server//////////////
     NFRedisResult* FLUSHALL();
     NFRedisResult* FLUSHDB();
