@@ -19,6 +19,7 @@ bool NFCTileModule::Init()
 	m_pGuildRedisModule = pPluginManager->FindModule<NFIGuildRedisModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
 	
     return true;
 }
@@ -36,6 +37,11 @@ bool NFCTileModule::Execute()
 bool NFCTileModule::AfterInit()
 {
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCTileModule::OnObjectClassEvent);
+
+	m_pSceneAOIModule->AddBeforeEnterSceneGroupCallBack(this, &NFCTileModule::BeforeEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterEnterSceneGroupCallBack(this, &NFCTileModule::AfterEnterSceneGroupEvent);
+	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCTileModule::BeforeLeaveSceneGroupEvent);
+	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCTileModule::AfterLeaveSceneGroupEvent);
 
 	if (!m_pNetModule->AddReceiveCallBack(NFMsg::EGameMsgID::EGEC_REQ_MINING_TITLE, this, &NFCTileModule::OnReqMineTileProcess)) { return false; }
     return true;
@@ -152,7 +158,6 @@ void NFCTileModule::OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsg
 		pTile->set_opr(nOpr);
 	}
 
-	SaveTileData(nPlayerID);
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, nPlayerID);
 }
 
@@ -408,14 +413,6 @@ bool NFCTileModule::SaveTileData(const NFGUID & self)
 	return false;
 }
 
-bool NFCTileModule::LoadTileData(const NFGUID & self)
-{
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-	LoadTileData(self, nSceneID);
-
-	return false;
-}
-
 bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 {
 	mxTileData.RemoveElement(self);
@@ -530,16 +527,50 @@ bool NFCTileModule::SendTileData(const NFGUID & self)
 	return true;
 }
 
+bool NFCTileModule::CreateTileBuilding(const NFGUID & self)
+{
+	NF_SHARE_PTR<NFIRecord> xRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BuildingList::ThisName());
+	if (xRecord)
+	{
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
+		for (int i = 0; i < xRecord->GetRows(); ++i)
+		{
+			if (xRecord->IsUsed(i))
+			{
+				NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::BuildingGUID);
+				const std::string& strCnfID = m_pKernelModule->GetRecordString(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::BuildingCnfID);
+				const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, NFrame::Player::BuildingList::ThisName(), i, NFrame::Player::BuildingList::Pos);
+				
+				NFDataList xDataArg;
+				xDataArg.AddString(NFrame::NPC::Position());
+				xDataArg.AddVector3(vPos);
+				xDataArg.AddString(NFrame::NPC::MasterID());
+				xDataArg.AddObject(self);
+				xDataArg.AddString(NFrame::NPC::NPCType());
+				xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+				m_pKernelModule->CreateObject(xBuildingID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
+			}
+		}
+	}
+
+	return false;
+}
+
 int NFCTileModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
 {
 	if (CLASS_OBJECT_EVENT::COE_BEFOREDESTROY == eClassEvent)
 	{
-		//cannot save tile here, because player maybe offline in other people scene
+		SaveTileData(self);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT == eClassEvent)
 	{
 		//preload at first, then attach
-		LoadTileData(self);
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		LoadTileData(self, nSceneID);
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_CLIENT_FINISH == eClassEvent)
 	{
@@ -562,8 +593,21 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 		NFGUID xBuildingID = m_pKernelModule->GetRecordObject(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingGUID);
 		const std::string& strCnfID = m_pKernelModule->GetRecordString(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::BuildingCnfID);
 		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
-	
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
 		AddBuilding(self, vPos.X(), vPos.Y(), xBuildingID, strCnfID);
+
+		NFDataList xDataArg;
+		xDataArg.AddString(NFrame::NPC::Position());
+		xDataArg.AddVector3(vPos);
+		xDataArg.AddString(NFrame::NPC::MasterID());
+		xDataArg.AddObject(self);
+		xDataArg.AddString(NFrame::NPC::NPCType());
+		xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
+
+		m_pKernelModule->CreateObject(xBuildingID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strCnfID, xDataArg);
 	}
 		break;
 	case RECORD_EVENT_DATA::Del:
@@ -573,11 +617,51 @@ int NFCTileModule::OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xE
 		const NFVector3& vPos = m_pKernelModule->GetRecordVector3(self, xEventData.strRecordName, xEventData.nRow, NFrame::Player::BuildingList::Pos);
 
 		RemoveBuilding(self, vPos.X(), vPos.Y(), xBuildingID);
+
+		m_pKernelModule->DestroyObject(xBuildingID);
 	}
 		break;
 	default:
 		break;
 	}
 
+	return 0;
+}
+
+
+int NFCTileModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	//create building if the player back home
+	//create building if the player wants attack the others
+	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
+
+	NFGUID xViewOpp = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOpponent());
+	NFGUID XFightingOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightingOpponent());
+
+	if (nHomeSceneID == nSceneID
+		&& xViewOpp.IsNull()
+		&& XFightingOpponent.IsNull())
+	{
+		SendTileData(self);
+
+		//create building
+		CreateTileBuilding(self);
+	}
+
+	return 0;
+}
+
+int NFCTileModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
+	return 0;
+}
+
+int NFCTileModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
+{
 	return 0;
 }

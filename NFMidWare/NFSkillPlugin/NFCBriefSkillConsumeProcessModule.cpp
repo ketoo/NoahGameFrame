@@ -98,6 +98,17 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
             continue;
         }
 
+		// dont attack yourself's building
+		NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+		int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
+		if (xMasterID == self
+			&& nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+		{
+			damageListValue.AddInt(0);
+			damageResultList.AddInt(0);
+			continue;
+		}
+
 		pOtherObject->SetPropertyObject(NFrame::NPC::LastAttacker(), self);
 
 		m_pPropertyModule->CalculatePropertyValue(identOther, strDamageProperty, NFIPropertyModule::NPG_ALL, -nDamageValue, true);
