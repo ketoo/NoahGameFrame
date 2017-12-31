@@ -116,6 +116,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
 	const std::string& strSeedID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::SeedID());
 	const std::string& strConfigID = m_pKernelModule->GetPropertyString( self, NFrame::NPC::ConfigID());
 	const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::MasterID());
+	const NFGUID xAIOwnerID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::AIOwnerID());
 	int nNPCType = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::NPCType());
     int nSceneID = m_pKernelModule->GetPropertyInt32( self, NFrame::NPC::SceneID());
 	int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::NPC::GroupID());
@@ -131,6 +132,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
 		arg << NFrame::NPC::Position() << fSeedPos;
 		arg << NFrame::NPC::SeedID() << strSeedID;
 		arg << NFrame::NPC::MasterID() << xMasterID;
+		arg << NFrame::NPC::AIOwnerID() << xAIOwnerID;
 
 		m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, strConfigID, arg);
 	}

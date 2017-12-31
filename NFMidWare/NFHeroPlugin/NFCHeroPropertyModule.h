@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIPropertyModule.h"
 
 class NFCHeroPropertyModule
     : public NFIHeroPropertyModule
@@ -40,7 +41,8 @@ public:
 
 
 protected:
-	virtual int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnFightingHeroEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
@@ -57,6 +59,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 	NFIEquipPropertyModule* m_pEquipPropertyModule;
+	NFIPropertyModule* m_pPropertyModule;
 };
 
 #endif

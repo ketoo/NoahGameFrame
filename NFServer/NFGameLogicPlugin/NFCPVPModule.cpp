@@ -137,7 +137,6 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), xViewOpponent);
 	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::WarID(), xWarGUID);
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFGUID());
 	m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::WarEventTime(), NFGetTimeMS());
 
 	int nGambleGold = xMsg.gold();
@@ -267,7 +266,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
 
-	if (self == xViewOpponent)
+	if (xViewOpponent.IsNull() || self == xViewOpponent)
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
 
@@ -409,6 +408,8 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 		xHeroData1.AddString(NFrame::NPC::Position());
 		xHeroData1.AddVector3(xHeroPos1);
 		xHeroData1.AddString(NFrame::NPC::MasterID());
+		xHeroData1.AddObject(opponent);
+		xHeroData1.AddString(NFrame::NPC::AIOwnerID());
 		xHeroData1.AddObject(self);
 		xHeroData1.AddString(NFrame::NPC::NPCType());
 		xHeroData1.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
@@ -417,6 +418,8 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 		xHeroData2.AddString(NFrame::NPC::Position());
 		xHeroData2.AddVector3(xHeroPos2);
 		xHeroData2.AddString(NFrame::NPC::MasterID());
+		xHeroData2.AddObject(opponent);
+		xHeroData2.AddString(NFrame::NPC::AIOwnerID());
 		xHeroData2.AddObject(self);
 		xHeroData2.AddString(NFrame::NPC::NPCType());
 		xHeroData2.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
@@ -425,6 +428,8 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 		xHeroData3.AddString(NFrame::NPC::Position());
 		xHeroData3.AddVector3(xHeroPos3);
 		xHeroData3.AddString(NFrame::NPC::MasterID());
+		xHeroData3.AddObject(opponent);
+		xHeroData3.AddString(NFrame::NPC::AIOwnerID());
 		xHeroData3.AddObject(self);
 		xHeroData3.AddString(NFrame::NPC::NPCType());
 		xHeroData3.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);
@@ -444,7 +449,7 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 	int nSceneID = RandomTileScene();
 	std::string strTileData;
 	NFGUID xViewOpponent;
-	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData))
+	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData) && !xViewOpponent.IsNull())
 	{
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
@@ -479,6 +484,8 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 				xDataArg.AddString(NFrame::NPC::Position());
 				xDataArg.AddVector3(vPos);
 				xDataArg.AddString(NFrame::NPC::MasterID());
+				xDataArg.AddObject(xViewOpponent);
+				xDataArg.AddString(NFrame::NPC::AIOwnerID());
 				xDataArg.AddObject(self);
 				xDataArg.AddString(NFrame::NPC::NPCType());
 				xDataArg.AddInt(NFMsg::ENPCType::ENPCTYPE_TURRET);

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
+		<Property Id="AIOwnerID" Cache="0" Desc="AI" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
 		<Property Id="ATK_FIRE" Cache="0" Desc="火" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_ICE" Cache="0" Desc="冰" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_LIGHT" Cache="0" Desc="雷电" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
@@ -45,7 +46,7 @@
 		<Property Id="MP" Cache="0" Desc="法力值" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="int" Upload="0" />
 		<Property Id="MPREGEN" Cache="0" Desc="MP回复" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MasterID" Cache="0" Desc="召唤者，主人" Force="0" Private="1" Public="1" Ref="0" Save="1" Type="object" Upload="0" />
-		<Property Id="NPCType" Cache="0" Desc="desc" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="NPCType" Cache="0" Desc="desc" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Prefab" Cache="0" Desc="客户端预设模型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />

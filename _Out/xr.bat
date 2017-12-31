@@ -20,10 +20,6 @@ start "NFGameServer" "NFPluginLoader.exe" "Server=GameServer" "ID=6" "PluginX.xm
 
 choice /t 2 /d y /n >nul
 
-echo Starting NFAIServer...
-start "NFAIServer" "NFPluginLoader.exe" "Server=AIServer" "ID=8" "PluginX.xml"
-
-choice /t 4 /d y /n >nul
 
 echo Starting NFProxyServer...
 start "NFProxyServer" "NFPluginLoader.exe" "Server=ProxyServer" "ID=5" "PluginX.xml"
