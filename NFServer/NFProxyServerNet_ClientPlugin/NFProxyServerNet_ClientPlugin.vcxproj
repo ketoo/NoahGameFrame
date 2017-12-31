@@ -92,13 +92,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCProxyServerToAIModule.cpp" />
     <ClCompile Include="NFCProxyServerToGameModule.cpp" />
     <ClCompile Include="NFCProxyServerToWorldModule.cpp" />
     <ClCompile Include="NFProxyServerNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyServerToAIModule.h" />
     <ClInclude Include="NFCProxyServerToGameModule.h" />
     <ClInclude Include="NFCProxyServerToWorldModule.h" />
     <ClInclude Include="NFProxyServerNet_ClientPlugin.h" />

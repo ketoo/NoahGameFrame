@@ -303,22 +303,29 @@ namespace NFMsg
       get { return _time; }
       set { _time = value; }
     }
+    private int _lastState;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"lastState", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int lastState
+    {
+      get { return _lastState; }
+      set { _lastState = value; }
+    }
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _target_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, Name=@"target_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> target_pos
     {
       get { return _target_pos; }
     }
   
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _source_pos = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(6, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(7, Name=@"source_pos", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> source_pos
     {
       get { return _source_pos; }
     }
   
     private readonly global::System.Collections.Generic.List<NFMsg.Vector3> _move_direction = new global::System.Collections.Generic.List<NFMsg.Vector3>();
-    [global::ProtoBuf.ProtoMember(7, Name=@"move_direction", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(8, Name=@"move_direction", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<NFMsg.Vector3> move_direction
     {
       get { return _move_direction; }
@@ -560,6 +567,13 @@ namespace NFMsg
       get { return _targetid; }
       set { _targetid = value; }
     }
+    private NFMsg.Vector3 _position;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"position", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFMsg.Vector3 position
+    {
+      get { return _position; }
+      set { _position = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -615,10 +629,10 @@ namespace NFMsg
       get { return _z; }
       set { _z = value; }
     }
-    private string _data = "";
+    private byte[] _data = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string data
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] data
     {
       get { return _data; }
       set { _data = value; }
@@ -650,10 +664,10 @@ namespace NFMsg
   {
     public ReqAckHomeScene() {}
     
-    private string _data = "";
+    private byte[] _data = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string data
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] data
     {
       get { return _data; }
       set { _data = value; }
@@ -668,9 +682,9 @@ namespace NFMsg
   {
     public ItemStruct() {}
     
-    private string _item_id;
+    private byte[] _item_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string item_id
+    public byte[] item_id
     {
       get { return _item_id; }
       set { _item_id = value; }
@@ -900,9 +914,9 @@ namespace NFMsg
       get { return _guild_id; }
       set { _guild_id = value; }
     }
-    private string _guild_name;
+    private byte[] _guild_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_name
+    public byte[] guild_name
     {
       get { return _guild_name; }
       set { _guild_name = value; }
@@ -917,9 +931,9 @@ namespace NFMsg
   {
     public ReqSearchGuild() {}
     
-    private string _guild_name;
+    private byte[] _guild_name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"guild_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_name
+    public byte[] guild_name
     {
       get { return _guild_name; }
       set { _guild_name = value; }
@@ -953,16 +967,16 @@ namespace NFMsg
       get { return _guild_ID; }
       set { _guild_ID = value; }
     }
-    private string _guild_name;
+    private byte[] _guild_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_name
+    public byte[] guild_name
     {
       get { return _guild_name; }
       set { _guild_name = value; }
     }
-    private string _guild_icon;
+    private byte[] _guild_icon;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"guild_icon", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_icon
+    public byte[] guild_icon
     {
       get { return _guild_icon; }
       set { _guild_icon = value; }
@@ -1017,9 +1031,9 @@ namespace NFMsg
       get { return _guild_id; }
       set { _guild_id = value; }
     }
-    private string _guild_name;
+    private byte[] _guild_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_name
+    public byte[] guild_name
     {
       get { return _guild_name; }
       set { _guild_name = value; }
@@ -1041,9 +1055,9 @@ namespace NFMsg
       get { return _guild_id; }
       set { _guild_id = value; }
     }
-    private string _guild_name;
+    private byte[] _guild_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"guild_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string guild_name
+    public byte[] guild_name
     {
       get { return _guild_name; }
       set { _guild_name = value; }
@@ -1161,9 +1175,9 @@ namespace NFMsg
   {
     public ReqBuyItemFromShop() {}
     
-    private string _itemID;
+    private byte[] _itemID;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"itemID", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string itemID
+    public byte[] itemID
     {
       get { return _itemID; }
       set { _itemID = value; }
@@ -1185,9 +1199,9 @@ namespace NFMsg
   {
     public ReqAddGambleValue() {}
     
-    private string _property;
+    private byte[] _property;
     [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"property", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string property
+    public byte[] property
     {
       get { return _property; }
       set { _property = value; }
@@ -1285,9 +1299,9 @@ namespace NFMsg
       get { return _y; }
       set { _y = value; }
     }
-    private string _configID;
+    private byte[] _configID;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"configID", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string configID
+    public byte[] configID
     {
       get { return _configID; }
       set { _configID = value; }
@@ -1323,9 +1337,9 @@ namespace NFMsg
       get { return _y; }
       set { _y = value; }
     }
-    private string _configID;
+    private byte[] _configID;
     [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"configID", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string configID
+    public byte[] configID
     {
       get { return _configID; }
       set { _configID = value; }

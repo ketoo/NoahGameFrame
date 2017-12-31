@@ -332,11 +332,12 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       sizeof(ReqAckSynData));
   ReqAckSynData_SynType_descriptor_ = ReqAckSynData_descriptor_->enum_type(0);
   ReqAckPlayerMove_descriptor_ = file->message_type(8);
-  static const int ReqAckPlayerMove_offsets_[7] = {
+  static const int ReqAckPlayerMove_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, mover_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, movetype_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, speed_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, time_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, laststate_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, target_pos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, source_pos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckPlayerMove, move_direction_),
@@ -427,12 +428,13 @@ void protobuf_AssignDesc_NFMsgShare_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ReqAckUseSkill));
   ReqAckUseItem_descriptor_ = file->message_type(12);
-  static const int ReqAckUseItem_offsets_[5] = {
+  static const int ReqAckUseItem_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, user_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, item_guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, effect_data_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, item_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, targetid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ReqAckUseItem, position_),
   };
   ReqAckUseItem_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1345,126 +1347,128 @@ void protobuf_AddDesc_NFMsgShare_2eproto() {
     "\0162\034.NFMsg.ReqAckSynData.SynType\022 \n\006msg_i"
     "d\030\005 \002(\0162\020.NFMsg.ESynMsgID\"F\n\007SynType\022\r\n\t"
     "EST_GROUP\020\001\022\r\n\tEST_SCENE\020\002\022\r\n\tEST_GUILD\020"
-    "\003\022\016\n\nEST_FRIEND\020\004\"\316\001\n\020ReqAckPlayerMove\022\033"
+    "\003\022\016\n\nEST_FRIEND\020\004\"\341\001\n\020ReqAckPlayerMove\022\033"
     "\n\005mover\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010moveType\030"
-    "\002 \002(\005\022\r\n\005speed\030\003 \002(\002\022\014\n\004time\030\004 \002(\005\022\"\n\nta"
-    "rget_pos\030\005 \003(\0132\016.NFMsg.Vector3\022\"\n\nsource"
-    "_pos\030\006 \003(\0132\016.NFMsg.Vector3\022&\n\016move_direc"
-    "tion\030\007 \003(\0132\016.NFMsg.Vector3\"\236\003\n\020ReqAckPla"
-    "yerChat\022\035\n\007chat_id\030\001 \002(\0132\014.NFMsg.Ident\0228"
-    "\n\tchat_type\030\002 \002(\0162%.NFMsg.ReqAckPlayerCh"
-    "at.EGameChatType\022\021\n\tchat_info\030\003 \002(\014\022\021\n\tc"
-    "hat_name\030\004 \002(\014\022\037\n\ttarget_id\030\005 \001(\0132\014.NFMs"
-    "g.Ident\022=\n\016Container_data\030\006 \003(\0132%.NFMsg."
-    "ReqAckPlayerChat.ChatContainer\032Y\n\rChatCo"
-    "ntainer\022\025\n\rConTainerType\030\002 \002(\005\022\021\n\tdata_i"
-    "nfo\030\003 \002(\014\"\036\n\rContainerType\022\r\n\tEGCT_ITEM\020"
-    "\001\"P\n\rEGameChatType\022\016\n\nEGCT_GUILD\020\000\022\020\n\014EG"
-    "CT_PRIVATE\020\001\022\r\n\tEGCT_TEAM\020\002\022\016\n\nEGCT_WORL"
-    "D\020\003\"\323\001\n\nEffectData\022\"\n\014effect_ident\030\001 \002(\013"
-    "2\014.NFMsg.Ident\022\024\n\014effect_value\030\002 \002(\005\0221\n\n"
-    "effect_rlt\030\003 \002(\0162\035.NFMsg.EffectData.ERes"
-    "ultType\"X\n\013EResultType\022\014\n\010EET_FAIL\020\000\022\017\n\013"
-    "EET_SUCCESS\020\001\022\016\n\nEET_REFUSE\020\002\022\014\n\010EET_MIS"
-    "S\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016ReqAckUseSkill\022\032\n\004u"
-    "ser\030\001 \002(\0132\014.NFMsg.Ident\022\020\n\010skill_id\030\002 \002("
-    "\014\022\021\n\tuse_index\030\003 \002(\005\022&\n\013effect_data\030\004 \003("
-    "\0132\021.NFMsg.EffectData\"\265\001\n\rReqAckUseItem\022\032"
-    "\n\004user\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\titem_guid\030"
-    "\002 \002(\0132\014.NFMsg.Ident\022&\n\013effect_data\030\003 \003(\013"
-    "2\021.NFMsg.EffectData\022\037\n\004item\030\004 \002(\0132\021.NFMs"
-    "g.ItemStruct\022\036\n\010targetid\030\005 \002(\0132\014.NFMsg.I"
-    "dent\"\363\001\n\017ReqAckSwapScene\022;\n\rtransfer_typ"
-    "e\030\001 \002(\0162$.NFMsg.ReqAckSwapScene.EGameSwa"
-    "pType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007line_id\030\003 \002(\005"
-    "\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z\030\006 \001(\002\022\014\n\004dat"
-    "a\030\007 \001(\t\"Q\n\rEGameSwapType\022\017\n\013EGST_NARMAL\020"
-    "\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_ARENA\020\002\022\017\n\013EGS"
-    "T_MIRROR\020\003\"\037\n\017ReqAckHomeScene\022\014\n\004data\030\001 "
-    "\001(\t\"1\n\nItemStruct\022\017\n\007item_id\030\001 \002(\t\022\022\n\nit"
-    "em_count\030\002 \002(\005\"\?\n\016CurrencyStruct\022\025\n\rcurr"
-    "ency_type\030\001 \002(\005\022\026\n\016currency_count\030\002 \002(\005\""
-    "2\n\021ReqAckStartBattle\022\014\n\004gold\030\001 \002(\005\022\017\n\007di"
-    "amond\030\002 \002(\005\"\016\n\014ReqEndBattle\"{\n\014AckEndBat"
-    "tle\022\013\n\003win\030\001 \002(\005\022\014\n\004star\030\002 \002(\005\022\014\n\004gold\030\003"
-    " \002(\005\022\013\n\003exp\030\004 \002(\005\022\017\n\007diamond\030\005 \002(\005\022$\n\tit"
-    "em_list\030\006 \003(\0132\021.NFMsg.ItemStruct\"2\n\017ReqP"
-    "ickDropItem\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.I"
-    "dent\" \n\rReqAcceptTask\022\017\n\007task_id\030\001 \002(\014\"#"
-    "\n\020ReqCompeleteTask\022\017\n\007task_id\030\001 \002(\014\"\357\001\n\022"
-    "ReqAckJoinActivity\022B\n\ractivity_type\030\001 \002("
-    "\0162+.NFMsg.ReqAckJoinActivity.EGameActivi"
-    "tyType\022I\n\021sub_activity_type\030\002 \002(\0162..NFMs"
-    "g.ReqAckJoinActivity.EGameActivitySubTyp"
-    "e\"!\n\021EGameActivityType\022\014\n\010EGAT_PVP\020\000\"\'\n\024"
-    "EGameActivitySubType\022\017\n\013EGAT_NORMAL\020\000\"G\n"
-    "\021ReqAckCreateGuild\022\036\n\010guild_id\030\001 \002(\0132\014.N"
-    "FMsg.Ident\022\022\n\nguild_name\030\002 \002(\t\"$\n\016ReqSea"
-    "rchGuild\022\022\n\nguild_name\030\001 \002(\t\"\220\002\n\016AckSear"
-    "chGuild\022;\n\nguild_list\030\001 \003(\0132\'.NFMsg.AckS"
-    "earchGuild.SearchGuildObject\032\300\001\n\021SearchG"
-    "uildObject\022\036\n\010guild_ID\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\022\022\n\nguild_name\030\002 \002(\t\022\022\n\nguild_icon\030\003 \002"
-    "(\t\022\032\n\022guild_member_count\030\004 \002(\005\022\036\n\026guild_"
-    "member_max_count\030\005 \002(\005\022\023\n\013guild_honor\030\006 "
-    "\002(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017ReqAckJoinGui"
-    "ld\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\ngu"
-    "ild_name\030\002 \002(\t\"F\n\020ReqAckLeaveGuild\022\036\n\010gu"
-    "ild_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name"
-    "\030\002 \002(\t\"\332\001\n\024ReqAckOprGuildMember\022\036\n\010guild"
-    "_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\tmember_id\030\002 \002"
-    "(\0132\014.NFMsg.Ident\022>\n\004type\030\003 \002(\01620.NFMsg.R"
-    "eqAckOprGuildMember.EGGuildMemberOprType"
-    "\"A\n\024EGGuildMemberOprType\022\r\n\tEGAT_DOWN\020\000\022"
-    "\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002\"5\n\023ReqEnterG"
-    "uildEctype\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ide"
-    "nt\"<\n\017ReqSetFightHero\022\034\n\006Heroid\030\001 \002(\0132\014."
-    "NFMsg.Ident\022\013\n\003Set\030\002 \002(\005\"2\n\022ReqSwitchFig"
-    "htHero\022\034\n\006Heroid\030\001 \002(\0132\014.NFMsg.Ident\"3\n\022"
-    "ReqBuyItemFromShop\022\016\n\006itemID\030\001 \002(\t\022\r\n\005co"
-    "unt\030\002 \002(\005\"5\n\021ReqAddGambleValue\022\020\n\010proper"
-    "ty\030\001 \002(\t\022\016\n\006number\030\002 \002(\005\"3\n\016ReqMiningTit"
-    "le\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030\003 \002(\005\".\n"
-    "\tTileState\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003opr\030"
-    "\003 \002(\005\"R\n\014TileBuilding\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 "
-    "\002(\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NF"
-    "Msg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002"
-    "(\005\022\020\n\010configID\030\003 \002(\t\022\032\n\004guid\030\004 \002(\0132\014.NFM"
-    "sg.Ident\"t\n\016AckMiningTitle\022\036\n\004tile\030\001 \003(\013"
-    "2\020.NFMsg.TileState\022%\n\010building\030\002 \003(\0132\023.N"
-    "FMsg.TileBuilding\022\033\n\003npc\030\003 \003(\0132\016.NFMsg.T"
-    "ileNPC\"\022\n\020ReqSearchOppnent\"$\n\020AckSearchO"
-    "ppnent\022\020\n\010scene_id\030\001 \002(\005\"\201\001\n\013ReqSendMail"
-    "\022\036\n\010reciever\030\001 \002(\0132\014.NFMsg.Ident\022$\n\titem"
-    "_list\030\002 \003(\0132\021.NFMsg.ItemStruct\022,\n\rcurren"
-    "cy_list\030\003 \003(\0132\025.NFMsg.CurrencyStruct\"\271\001\n"
-    "\017ReqSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg"
+    "\002 \002(\005\022\r\n\005speed\030\003 \002(\002\022\014\n\004time\030\004 \002(\005\022\021\n\tla"
+    "stState\030\005 \002(\005\022\"\n\ntarget_pos\030\006 \003(\0132\016.NFMs"
+    "g.Vector3\022\"\n\nsource_pos\030\007 \003(\0132\016.NFMsg.Ve"
+    "ctor3\022&\n\016move_direction\030\010 \003(\0132\016.NFMsg.Ve"
+    "ctor3\"\236\003\n\020ReqAckPlayerChat\022\035\n\007chat_id\030\001 "
+    "\002(\0132\014.NFMsg.Ident\0228\n\tchat_type\030\002 \002(\0162%.N"
+    "FMsg.ReqAckPlayerChat.EGameChatType\022\021\n\tc"
+    "hat_info\030\003 \002(\014\022\021\n\tchat_name\030\004 \002(\014\022\037\n\ttar"
+    "get_id\030\005 \001(\0132\014.NFMsg.Ident\022=\n\016Container_"
+    "data\030\006 \003(\0132%.NFMsg.ReqAckPlayerChat.Chat"
+    "Container\032Y\n\rChatContainer\022\025\n\rConTainerT"
+    "ype\030\002 \002(\005\022\021\n\tdata_info\030\003 \002(\014\"\036\n\rContaine"
+    "rType\022\r\n\tEGCT_ITEM\020\001\"P\n\rEGameChatType\022\016\n"
+    "\nEGCT_GUILD\020\000\022\020\n\014EGCT_PRIVATE\020\001\022\r\n\tEGCT_"
+    "TEAM\020\002\022\016\n\nEGCT_WORLD\020\003\"\323\001\n\nEffectData\022\"\n"
+    "\014effect_ident\030\001 \002(\0132\014.NFMsg.Ident\022\024\n\014eff"
+    "ect_value\030\002 \002(\005\0221\n\neffect_rlt\030\003 \002(\0162\035.NF"
+    "Msg.EffectData.EResultType\"X\n\013EResultTyp"
+    "e\022\014\n\010EET_FAIL\020\000\022\017\n\013EET_SUCCESS\020\001\022\016\n\nEET_"
+    "REFUSE\020\002\022\014\n\010EET_MISS\020\003\022\014\n\010EET_CRIT\020\004\"y\n\016"
+    "ReqAckUseSkill\022\032\n\004user\030\001 \002(\0132\014.NFMsg.Ide"
+    "nt\022\020\n\010skill_id\030\002 \002(\014\022\021\n\tuse_index\030\003 \002(\005\022"
+    "&\n\013effect_data\030\004 \003(\0132\021.NFMsg.EffectData\""
+    "\327\001\n\rReqAckUseItem\022\032\n\004user\030\001 \002(\0132\014.NFMsg."
+    "Ident\022\037\n\titem_guid\030\002 \002(\0132\014.NFMsg.Ident\022&"
+    "\n\013effect_data\030\003 \003(\0132\021.NFMsg.EffectData\022\037"
+    "\n\004item\030\004 \002(\0132\021.NFMsg.ItemStruct\022\036\n\010targe"
+    "tid\030\005 \002(\0132\014.NFMsg.Ident\022 \n\010position\030\006 \002("
+    "\0132\016.NFMsg.Vector3\"\363\001\n\017ReqAckSwapScene\022;\n"
+    "\rtransfer_type\030\001 \002(\0162$.NFMsg.ReqAckSwapS"
+    "cene.EGameSwapType\022\020\n\010scene_id\030\002 \002(\005\022\017\n\007"
+    "line_id\030\003 \002(\005\022\t\n\001x\030\004 \001(\002\022\t\n\001y\030\005 \001(\002\022\t\n\001z"
+    "\030\006 \001(\002\022\014\n\004data\030\007 \001(\014\"Q\n\rEGameSwapType\022\017\n"
+    "\013EGST_NARMAL\020\000\022\016\n\nEGST_CLONE\020\001\022\016\n\nEGST_A"
+    "RENA\020\002\022\017\n\013EGST_MIRROR\020\003\"\037\n\017ReqAckHomeSce"
+    "ne\022\014\n\004data\030\001 \001(\014\"1\n\nItemStruct\022\017\n\007item_i"
+    "d\030\001 \002(\014\022\022\n\nitem_count\030\002 \002(\005\"\?\n\016CurrencyS"
+    "truct\022\025\n\rcurrency_type\030\001 \002(\005\022\026\n\016currency"
+    "_count\030\002 \002(\005\"2\n\021ReqAckStartBattle\022\014\n\004gol"
+    "d\030\001 \002(\005\022\017\n\007diamond\030\002 \002(\005\"\016\n\014ReqEndBattle"
+    "\"{\n\014AckEndBattle\022\013\n\003win\030\001 \002(\005\022\014\n\004star\030\002 "
+    "\002(\005\022\014\n\004gold\030\003 \002(\005\022\013\n\003exp\030\004 \002(\005\022\017\n\007diamon"
+    "d\030\005 \002(\005\022$\n\titem_list\030\006 \003(\0132\021.NFMsg.ItemS"
+    "truct\"2\n\017ReqPickDropItem\022\037\n\titem_guid\030\002 "
+    "\002(\0132\014.NFMsg.Ident\" \n\rReqAcceptTask\022\017\n\007ta"
+    "sk_id\030\001 \002(\014\"#\n\020ReqCompeleteTask\022\017\n\007task_"
+    "id\030\001 \002(\014\"\357\001\n\022ReqAckJoinActivity\022B\n\ractiv"
+    "ity_type\030\001 \002(\0162+.NFMsg.ReqAckJoinActivit"
+    "y.EGameActivityType\022I\n\021sub_activity_type"
+    "\030\002 \002(\0162..NFMsg.ReqAckJoinActivity.EGameA"
+    "ctivitySubType\"!\n\021EGameActivityType\022\014\n\010E"
+    "GAT_PVP\020\000\"\'\n\024EGameActivitySubType\022\017\n\013EGA"
+    "T_NORMAL\020\000\"G\n\021ReqAckCreateGuild\022\036\n\010guild"
+    "_id\030\001 \002(\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 "
+    "\002(\014\"$\n\016ReqSearchGuild\022\022\n\nguild_name\030\001 \002("
+    "\014\"\220\002\n\016AckSearchGuild\022;\n\nguild_list\030\001 \003(\013"
+    "2\'.NFMsg.AckSearchGuild.SearchGuildObjec"
+    "t\032\300\001\n\021SearchGuildObject\022\036\n\010guild_ID\030\001 \002("
+    "\0132\014.NFMsg.Ident\022\022\n\nguild_name\030\002 \002(\014\022\022\n\ng"
+    "uild_icon\030\003 \002(\014\022\032\n\022guild_member_count\030\004 "
+    "\002(\005\022\036\n\026guild_member_max_count\030\005 \002(\005\022\023\n\013g"
+    "uild_honor\030\006 \002(\005\022\022\n\nguild_rank\030\007 \002(\005\"E\n\017"
+    "ReqAckJoinGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMs"
+    "g.Ident\022\022\n\nguild_name\030\002 \002(\014\"F\n\020ReqAckLea"
+    "veGuild\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022"
+    "\022\n\nguild_name\030\002 \002(\014\"\332\001\n\024ReqAckOprGuildMe"
+    "mber\022\036\n\010guild_id\030\001 \002(\0132\014.NFMsg.Ident\022\037\n\t"
+    "member_id\030\002 \002(\0132\014.NFMsg.Ident\022>\n\004type\030\003 "
+    "\002(\01620.NFMsg.ReqAckOprGuildMember.EGGuild"
+    "MemberOprType\"A\n\024EGGuildMemberOprType\022\r\n"
+    "\tEGAT_DOWN\020\000\022\013\n\007EGAT_UP\020\001\022\r\n\tEGAT_KICK\020\002"
+    "\"5\n\023ReqEnterGuildEctype\022\036\n\010guild_id\030\001 \002("
+    "\0132\014.NFMsg.Ident\"<\n\017ReqSetFightHero\022\034\n\006He"
+    "roid\030\001 \002(\0132\014.NFMsg.Ident\022\013\n\003Set\030\002 \002(\005\"2\n"
+    "\022ReqSwitchFightHero\022\034\n\006Heroid\030\001 \002(\0132\014.NF"
+    "Msg.Ident\"3\n\022ReqBuyItemFromShop\022\016\n\006itemI"
+    "D\030\001 \002(\014\022\r\n\005count\030\002 \002(\005\"5\n\021ReqAddGambleVa"
+    "lue\022\020\n\010property\030\001 \002(\014\022\016\n\006number\030\002 \002(\005\"3\n"
+    "\016ReqMiningTitle\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n"
+    "\003opr\030\003 \002(\005\".\n\tTileState\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030"
+    "\002 \002(\005\022\013\n\003opr\030\003 \002(\005\"R\n\014TileBuilding\022\t\n\001x\030"
+    "\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\020\n\010configID\030\003 \002(\014\022\032\n\004gu"
+    "id\030\004 \002(\0132\014.NFMsg.Ident\"M\n\007TileNPC\022\t\n\001x\030\001"
+    " \002(\005\022\t\n\001y\030\002 \002(\005\022\020\n\010configID\030\003 \002(\014\022\032\n\004gui"
+    "d\030\004 \002(\0132\014.NFMsg.Ident\"t\n\016AckMiningTitle\022"
+    "\036\n\004tile\030\001 \003(\0132\020.NFMsg.TileState\022%\n\010build"
+    "ing\030\002 \003(\0132\023.NFMsg.TileBuilding\022\033\n\003npc\030\003 "
+    "\003(\0132\016.NFMsg.TileNPC\"\022\n\020ReqSearchOppnent\""
+    "$\n\020AckSearchOppnent\022\020\n\010scene_id\030\001 \002(\005\"\201\001"
+    "\n\013ReqSendMail\022\036\n\010reciever\030\001 \002(\0132\014.NFMsg."
+    "Ident\022$\n\titem_list\030\002 \003(\0132\021.NFMsg.ItemStr"
+    "uct\022,\n\rcurrency_list\030\003 \003(\0132\025.NFMsg.Curre"
+    "ncyStruct\"\271\001\n\017ReqSwitchServer\022\034\n\006selfid\030"
+    "\001 \002(\0132\014.NFMsg.Ident\022\025\n\rself_serverid\030\002 \002"
+    "(\003\022\027\n\017target_serverid\030\003 \002(\003\022\025\n\rgate_serv"
+    "erid\030\004 \002(\003\022\017\n\007SceneID\030\005 \002(\003\022\037\n\tclient_id"
+    "\030\006 \002(\0132\014.NFMsg.Ident\022\017\n\007groupID\030\007 \002(\003\"v\n"
+    "\017AckSwitchServer\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg"
     ".Ident\022\025\n\rself_serverid\030\002 \002(\003\022\027\n\017target_"
-    "serverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\022\017\n"
-    "\007SceneID\030\005 \002(\003\022\037\n\tclient_id\030\006 \002(\0132\014.NFMs"
-    "g.Ident\022\017\n\007groupID\030\007 \002(\003\"v\n\017AckSwitchSer"
-    "ver\022\034\n\006selfid\030\001 \002(\0132\014.NFMsg.Ident\022\025\n\rsel"
-    "f_serverid\030\002 \002(\003\022\027\n\017target_serverid\030\003 \002("
-    "\003\022\025\n\rgate_serverid\030\004 \002(\003\"\361\001\n\013PVPRoomInfo"
-    "\022\023\n\013nCellStatus\030\001 \002(\005\022\034\n\006RoomID\030\002 \002(\0132\014."
-    "NFMsg.Ident\022\020\n\010nPVPMode\030\003 \002(\005\022\021\n\tnPVPGra"
-    "de\030\004 \002(\005\022\021\n\tMaxPalyer\030\005 \002(\005\022 \n\nxRedPlaye"
-    "r\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xBluePlayer\030\007 \003"
-    "(\0132\014.NFMsg.Ident\022\020\n\010serverid\030\010 \001(\003\022\017\n\007Sc"
-    "eneID\030\t \001(\003\022\017\n\007groupID\030\n \001(\003\"\276\001\n\020ReqPVPA"
-    "pplyMatch\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022\020\n\010nPVPMode\030\002 \002(\005\022\r\n\005score\030\003 \001(\003\022\021\n\tApp"
-    "lyType\030\004 \002(\005\022\035\n\007team_id\030\005 \001(\0132\014.NFMsg.Id"
-    "ent\"8\n\nEApplyType\022\025\n\021EApplyType_Single\020\000"
-    "\022\023\n\017EApplyType_Team\020\001\"|\n\020AckPVPApplyMatc"
-    "h\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoo"
-    "mInfo\030\002 \001(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApply"
-    "Type\030\003 \002(\005\022\017\n\007nResult\030\004 \002(\005\"Z\n\022ReqCreate"
-    "PVPEctype\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg.Ident"
-    "\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg.PVPRoomInfo\""
-    "m\n\022AckCreatePVPEctype\022\035\n\007self_id\030\001 \002(\0132\014"
-    ".NFMsg.Ident\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg."
-    "PVPRoomInfo\022\021\n\tApplyType\030\003 \002(\005", 5590);
+    "serverid\030\003 \002(\003\022\025\n\rgate_serverid\030\004 \002(\003\"\361\001"
+    "\n\013PVPRoomInfo\022\023\n\013nCellStatus\030\001 \002(\005\022\034\n\006Ro"
+    "omID\030\002 \002(\0132\014.NFMsg.Ident\022\020\n\010nPVPMode\030\003 \002"
+    "(\005\022\021\n\tnPVPGrade\030\004 \002(\005\022\021\n\tMaxPalyer\030\005 \002(\005"
+    "\022 \n\nxRedPlayer\030\006 \003(\0132\014.NFMsg.Ident\022!\n\013xB"
+    "luePlayer\030\007 \003(\0132\014.NFMsg.Ident\022\020\n\010serveri"
+    "d\030\010 \001(\003\022\017\n\007SceneID\030\t \001(\003\022\017\n\007groupID\030\n \001("
+    "\003\"\276\001\n\020ReqPVPApplyMatch\022\035\n\007self_id\030\001 \002(\0132"
+    "\014.NFMsg.Ident\022\020\n\010nPVPMode\030\002 \002(\005\022\r\n\005score"
+    "\030\003 \001(\003\022\021\n\tApplyType\030\004 \002(\005\022\035\n\007team_id\030\005 \001"
+    "(\0132\014.NFMsg.Ident\"8\n\nEApplyType\022\025\n\021EApply"
+    "Type_Single\020\000\022\023\n\017EApplyType_Team\020\001\"|\n\020Ac"
+    "kPVPApplyMatch\022\035\n\007self_id\030\001 \002(\0132\014.NFMsg."
+    "Ident\022%\n\txRoomInfo\030\002 \001(\0132\022.NFMsg.PVPRoom"
+    "Info\022\021\n\tApplyType\030\003 \002(\005\022\017\n\007nResult\030\004 \002(\005"
+    "\"Z\n\022ReqCreatePVPEctype\022\035\n\007self_id\030\001 \002(\0132"
+    "\014.NFMsg.Ident\022%\n\txRoomInfo\030\002 \002(\0132\022.NFMsg"
+    ".PVPRoomInfo\"m\n\022AckCreatePVPEctype\022\035\n\007se"
+    "lf_id\030\001 \002(\0132\014.NFMsg.Ident\022%\n\txRoomInfo\030\002"
+    " \002(\0132\022.NFMsg.PVPRoomInfo\022\021\n\tApplyType\030\003 "
+    "\002(\005", 5643);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFMsgShare.proto", &protobuf_RegisterTypes);
   ReqEnterGameServer::default_instance_ = new ReqEnterGameServer();
@@ -3958,6 +3962,7 @@ const int ReqAckPlayerMove::kMoverFieldNumber;
 const int ReqAckPlayerMove::kMoveTypeFieldNumber;
 const int ReqAckPlayerMove::kSpeedFieldNumber;
 const int ReqAckPlayerMove::kTimeFieldNumber;
+const int ReqAckPlayerMove::kLastStateFieldNumber;
 const int ReqAckPlayerMove::kTargetPosFieldNumber;
 const int ReqAckPlayerMove::kSourcePosFieldNumber;
 const int ReqAckPlayerMove::kMoveDirectionFieldNumber;
@@ -3984,6 +3989,7 @@ void ReqAckPlayerMove::SharedCtor() {
   movetype_ = 0;
   speed_ = 0;
   time_ = 0;
+  laststate_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4026,6 +4032,7 @@ void ReqAckPlayerMove::Clear() {
     movetype_ = 0;
     speed_ = 0;
     time_ = 0;
+    laststate_ = 0;
   }
   target_pos_.Clear();
   source_pos_.Clear();
@@ -4097,12 +4104,28 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_target_pos;
+        if (input->ExpectTag(40)) goto parse_lastState;
         break;
       }
 
-      // repeated .NFMsg.Vector3 target_pos = 5;
+      // required int32 lastState = 5;
       case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_lastState:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &laststate_)));
+          set_has_laststate();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_target_pos;
+        break;
+      }
+
+      // repeated .NFMsg.Vector3 target_pos = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_target_pos:
@@ -4111,13 +4134,13 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_target_pos;
-        if (input->ExpectTag(50)) goto parse_source_pos;
+        if (input->ExpectTag(50)) goto parse_target_pos;
+        if (input->ExpectTag(58)) goto parse_source_pos;
         break;
       }
 
-      // repeated .NFMsg.Vector3 source_pos = 6;
-      case 6: {
+      // repeated .NFMsg.Vector3 source_pos = 7;
+      case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_source_pos:
@@ -4126,13 +4149,13 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(50)) goto parse_source_pos;
-        if (input->ExpectTag(58)) goto parse_move_direction;
+        if (input->ExpectTag(58)) goto parse_source_pos;
+        if (input->ExpectTag(66)) goto parse_move_direction;
         break;
       }
 
-      // repeated .NFMsg.Vector3 move_direction = 7;
-      case 7: {
+      // repeated .NFMsg.Vector3 move_direction = 8;
+      case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_move_direction:
@@ -4141,7 +4164,7 @@ bool ReqAckPlayerMove::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(58)) goto parse_move_direction;
+        if (input->ExpectTag(66)) goto parse_move_direction;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -4185,22 +4208,27 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->time(), output);
   }
 
-  // repeated .NFMsg.Vector3 target_pos = 5;
+  // required int32 lastState = 5;
+  if (has_laststate()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->laststate(), output);
+  }
+
+  // repeated .NFMsg.Vector3 target_pos = 6;
   for (int i = 0; i < this->target_pos_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->target_pos(i), output);
+      6, this->target_pos(i), output);
   }
 
-  // repeated .NFMsg.Vector3 source_pos = 6;
+  // repeated .NFMsg.Vector3 source_pos = 7;
   for (int i = 0; i < this->source_pos_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->source_pos(i), output);
+      7, this->source_pos(i), output);
   }
 
-  // repeated .NFMsg.Vector3 move_direction = 7;
+  // repeated .NFMsg.Vector3 move_direction = 8;
   for (int i = 0; i < this->move_direction_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, this->move_direction(i), output);
+      8, this->move_direction(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -4233,25 +4261,30 @@ void ReqAckPlayerMove::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->time(), target);
   }
 
-  // repeated .NFMsg.Vector3 target_pos = 5;
+  // required int32 lastState = 5;
+  if (has_laststate()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->laststate(), target);
+  }
+
+  // repeated .NFMsg.Vector3 target_pos = 6;
   for (int i = 0; i < this->target_pos_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        5, this->target_pos(i), target);
+        6, this->target_pos(i), target);
   }
 
-  // repeated .NFMsg.Vector3 source_pos = 6;
+  // repeated .NFMsg.Vector3 source_pos = 7;
   for (int i = 0; i < this->source_pos_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        6, this->source_pos(i), target);
+        7, this->source_pos(i), target);
   }
 
-  // repeated .NFMsg.Vector3 move_direction = 7;
+  // repeated .NFMsg.Vector3 move_direction = 8;
   for (int i = 0; i < this->move_direction_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        7, this->move_direction(i), target);
+        8, this->move_direction(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4291,8 +4324,15 @@ int ReqAckPlayerMove::ByteSize() const {
           this->time());
     }
 
+    // required int32 lastState = 5;
+    if (has_laststate()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->laststate());
+    }
+
   }
-  // repeated .NFMsg.Vector3 target_pos = 5;
+  // repeated .NFMsg.Vector3 target_pos = 6;
   total_size += 1 * this->target_pos_size();
   for (int i = 0; i < this->target_pos_size(); i++) {
     total_size +=
@@ -4300,7 +4340,7 @@ int ReqAckPlayerMove::ByteSize() const {
         this->target_pos(i));
   }
 
-  // repeated .NFMsg.Vector3 source_pos = 6;
+  // repeated .NFMsg.Vector3 source_pos = 7;
   total_size += 1 * this->source_pos_size();
   for (int i = 0; i < this->source_pos_size(); i++) {
     total_size +=
@@ -4308,7 +4348,7 @@ int ReqAckPlayerMove::ByteSize() const {
         this->source_pos(i));
   }
 
-  // repeated .NFMsg.Vector3 move_direction = 7;
+  // repeated .NFMsg.Vector3 move_direction = 8;
   total_size += 1 * this->move_direction_size();
   for (int i = 0; i < this->move_direction_size(); i++) {
     total_size +=
@@ -4357,6 +4397,9 @@ void ReqAckPlayerMove::MergeFrom(const ReqAckPlayerMove& from) {
     if (from.has_time()) {
       set_time(from.time());
     }
+    if (from.has_laststate()) {
+      set_laststate(from.laststate());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -4374,7 +4417,7 @@ void ReqAckPlayerMove::CopyFrom(const ReqAckPlayerMove& from) {
 }
 
 bool ReqAckPlayerMove::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   if (has_mover()) {
     if (!this->mover().IsInitialized()) return false;
@@ -4397,6 +4440,7 @@ void ReqAckPlayerMove::Swap(ReqAckPlayerMove* other) {
     std::swap(movetype_, other->movetype_);
     std::swap(speed_, other->speed_);
     std::swap(time_, other->time_);
+    std::swap(laststate_, other->laststate_);
     target_pos_.Swap(&other->target_pos_);
     source_pos_.Swap(&other->source_pos_);
     move_direction_.Swap(&other->move_direction_);
@@ -5852,6 +5896,7 @@ const int ReqAckUseItem::kItemGuidFieldNumber;
 const int ReqAckUseItem::kEffectDataFieldNumber;
 const int ReqAckUseItem::kItemFieldNumber;
 const int ReqAckUseItem::kTargetidFieldNumber;
+const int ReqAckUseItem::kPositionFieldNumber;
 #endif  // !_MSC_VER
 
 ReqAckUseItem::ReqAckUseItem()
@@ -5864,6 +5909,7 @@ void ReqAckUseItem::InitAsDefaultInstance() {
   item_guid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
   item_ = const_cast< ::NFMsg::ItemStruct*>(&::NFMsg::ItemStruct::default_instance());
   targetid_ = const_cast< ::NFMsg::Ident*>(&::NFMsg::Ident::default_instance());
+  position_ = const_cast< ::NFMsg::Vector3*>(&::NFMsg::Vector3::default_instance());
 }
 
 ReqAckUseItem::ReqAckUseItem(const ReqAckUseItem& from)
@@ -5878,6 +5924,7 @@ void ReqAckUseItem::SharedCtor() {
   item_guid_ = NULL;
   item_ = NULL;
   targetid_ = NULL;
+  position_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -5891,6 +5938,7 @@ void ReqAckUseItem::SharedDtor() {
     delete item_guid_;
     delete item_;
     delete targetid_;
+    delete position_;
   }
 }
 
@@ -5928,6 +5976,9 @@ void ReqAckUseItem::Clear() {
     }
     if (has_targetid()) {
       if (targetid_ != NULL) targetid_->::NFMsg::Ident::Clear();
+    }
+    if (has_position()) {
+      if (position_ != NULL) position_->::NFMsg::Vector3::Clear();
     }
   }
   effect_data_.Clear();
@@ -6007,6 +6058,20 @@ bool ReqAckUseItem::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(50)) goto parse_position;
+        break;
+      }
+
+      // required .NFMsg.Vector3 position = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_position:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_position()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -6059,6 +6124,12 @@ void ReqAckUseItem::SerializeWithCachedSizes(
       5, this->targetid(), output);
   }
 
+  // required .NFMsg.Vector3 position = 6;
+  if (has_position()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->position(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -6102,6 +6173,13 @@ void ReqAckUseItem::SerializeWithCachedSizes(
         5, this->targetid(), target);
   }
 
+  // required .NFMsg.Vector3 position = 6;
+  if (has_position()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->position(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -6139,6 +6217,13 @@ int ReqAckUseItem::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->targetid());
+    }
+
+    // required .NFMsg.Vector3 position = 6;
+    if (has_position()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->position());
     }
 
   }
@@ -6189,6 +6274,9 @@ void ReqAckUseItem::MergeFrom(const ReqAckUseItem& from) {
     if (from.has_targetid()) {
       mutable_targetid()->::NFMsg::Ident::MergeFrom(from.targetid());
     }
+    if (from.has_position()) {
+      mutable_position()->::NFMsg::Vector3::MergeFrom(from.position());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -6206,7 +6294,7 @@ void ReqAckUseItem::CopyFrom(const ReqAckUseItem& from) {
 }
 
 bool ReqAckUseItem::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001b) != 0x0000001b) return false;
+  if ((_has_bits_[0] & 0x0000003b) != 0x0000003b) return false;
 
   if (has_user()) {
     if (!this->user().IsInitialized()) return false;
@@ -6223,6 +6311,9 @@ bool ReqAckUseItem::IsInitialized() const {
   if (has_targetid()) {
     if (!this->targetid().IsInitialized()) return false;
   }
+  if (has_position()) {
+    if (!this->position().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -6233,6 +6324,7 @@ void ReqAckUseItem::Swap(ReqAckUseItem* other) {
     effect_data_.Swap(&other->effect_data_);
     std::swap(item_, other->item_);
     std::swap(targetid_, other->targetid_);
+    std::swap(position_, other->position_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6468,16 +6560,13 @@ bool ReqAckSwapScene::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string data = 7;
+      // optional bytes data = 7;
       case 7: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_data:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_data()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->data().data(), this->data().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -6534,12 +6623,9 @@ void ReqAckSwapScene::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->z(), output);
   }
 
-  // optional string data = 7;
+  // optional bytes data = 7;
   if (has_data()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->data().data(), this->data().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       7, this->data(), output);
   }
 
@@ -6582,13 +6668,10 @@ void ReqAckSwapScene::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->z(), target);
   }
 
-  // optional string data = 7;
+  // optional bytes data = 7;
   if (has_data()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->data().data(), this->data().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         7, this->data(), target);
   }
 
@@ -6638,10 +6721,10 @@ int ReqAckSwapScene::ByteSize() const {
       total_size += 1 + 4;
     }
 
-    // optional string data = 7;
+    // optional bytes data = 7;
     if (has_data()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->data());
     }
 
@@ -6816,15 +6899,12 @@ bool ReqAckHomeScene::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string data = 1;
+      // optional bytes data = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_data()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->data().data(), this->data().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -6850,12 +6930,9 @@ bool ReqAckHomeScene::MergePartialFromCodedStream(
 
 void ReqAckHomeScene::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string data = 1;
+  // optional bytes data = 1;
   if (has_data()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->data().data(), this->data().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->data(), output);
   }
 
@@ -6867,13 +6944,10 @@ void ReqAckHomeScene::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAckHomeScene::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string data = 1;
+  // optional bytes data = 1;
   if (has_data()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->data().data(), this->data().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->data(), target);
   }
 
@@ -6888,10 +6962,10 @@ int ReqAckHomeScene::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string data = 1;
+    // optional bytes data = 1;
     if (has_data()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->data());
     }
 
@@ -7044,15 +7118,12 @@ bool ItemStruct::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string item_id = 1;
+      // required bytes item_id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_item_id()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->item_id().data(), this->item_id().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -7094,12 +7165,9 @@ bool ItemStruct::MergePartialFromCodedStream(
 
 void ItemStruct::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string item_id = 1;
+  // required bytes item_id = 1;
   if (has_item_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->item_id().data(), this->item_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->item_id(), output);
   }
 
@@ -7116,13 +7184,10 @@ void ItemStruct::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ItemStruct::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string item_id = 1;
+  // required bytes item_id = 1;
   if (has_item_id()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->item_id().data(), this->item_id().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->item_id(), target);
   }
 
@@ -7142,10 +7207,10 @@ int ItemStruct::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string item_id = 1;
+    // required bytes item_id = 1;
     if (has_item_id()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->item_id());
     }
 
@@ -9343,16 +9408,13 @@ bool ReqAckCreateGuild::MergePartialFromCodedStream(
         break;
       }
 
-      // required string guild_name = 2;
+      // required bytes guild_name = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_name().data(), this->guild_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -9384,12 +9446,9 @@ void ReqAckCreateGuild::SerializeWithCachedSizes(
       1, this->guild_id(), output);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->guild_name(), output);
   }
 
@@ -9408,13 +9467,10 @@ void ReqAckCreateGuild::SerializeWithCachedSizes(
         1, this->guild_id(), target);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->guild_name(), target);
   }
 
@@ -9436,10 +9492,10 @@ int ReqAckCreateGuild::ByteSize() const {
           this->guild_id());
     }
 
-    // required string guild_name = 2;
+    // required bytes guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_name());
     }
 
@@ -9597,15 +9653,12 @@ bool ReqSearchGuild::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string guild_name = 1;
+      // required bytes guild_name = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_name().data(), this->guild_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -9631,12 +9684,9 @@ bool ReqSearchGuild::MergePartialFromCodedStream(
 
 void ReqSearchGuild::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string guild_name = 1;
+  // required bytes guild_name = 1;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->guild_name(), output);
   }
 
@@ -9648,13 +9698,10 @@ void ReqSearchGuild::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqSearchGuild::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string guild_name = 1;
+  // required bytes guild_name = 1;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->guild_name(), target);
   }
 
@@ -9669,10 +9716,10 @@ int ReqSearchGuild::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string guild_name = 1;
+    // required bytes guild_name = 1;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_name());
     }
 
@@ -9865,16 +9912,13 @@ bool AckSearchGuild_SearchGuildObject::MergePartialFromCodedStream(
         break;
       }
 
-      // required string guild_name = 2;
+      // required bytes guild_name = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_name().data(), this->guild_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -9882,16 +9926,13 @@ bool AckSearchGuild_SearchGuildObject::MergePartialFromCodedStream(
         break;
       }
 
-      // required string guild_icon = 3;
+      // required bytes guild_icon = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_icon:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_icon()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_icon().data(), this->guild_icon().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -9987,21 +10028,15 @@ void AckSearchGuild_SearchGuildObject::SerializeWithCachedSizes(
       1, this->guild_id(), output);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->guild_name(), output);
   }
 
-  // required string guild_icon = 3;
+  // required bytes guild_icon = 3;
   if (has_guild_icon()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_icon().data(), this->guild_icon().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       3, this->guild_icon(), output);
   }
 
@@ -10040,23 +10075,17 @@ void AckSearchGuild_SearchGuildObject::SerializeWithCachedSizes(
         1, this->guild_id(), target);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->guild_name(), target);
   }
 
-  // required string guild_icon = 3;
+  // required bytes guild_icon = 3;
   if (has_guild_icon()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_icon().data(), this->guild_icon().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         3, this->guild_icon(), target);
   }
 
@@ -10098,17 +10127,17 @@ int AckSearchGuild_SearchGuildObject::ByteSize() const {
           this->guild_id());
     }
 
-    // required string guild_name = 2;
+    // required bytes guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_name());
     }
 
-    // required string guild_icon = 3;
+    // required bytes guild_icon = 3;
     if (has_guild_icon()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_icon());
     }
 
@@ -10540,16 +10569,13 @@ bool ReqAckJoinGuild::MergePartialFromCodedStream(
         break;
       }
 
-      // required string guild_name = 2;
+      // required bytes guild_name = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_name().data(), this->guild_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -10581,12 +10607,9 @@ void ReqAckJoinGuild::SerializeWithCachedSizes(
       1, this->guild_id(), output);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->guild_name(), output);
   }
 
@@ -10605,13 +10628,10 @@ void ReqAckJoinGuild::SerializeWithCachedSizes(
         1, this->guild_id(), target);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->guild_name(), target);
   }
 
@@ -10633,10 +10653,10 @@ int ReqAckJoinGuild::ByteSize() const {
           this->guild_id());
     }
 
-    // required string guild_name = 2;
+    // required bytes guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_name());
     }
 
@@ -10814,16 +10834,13 @@ bool ReqAckLeaveGuild::MergePartialFromCodedStream(
         break;
       }
 
-      // required string guild_name = 2;
+      // required bytes guild_name = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_guild_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_guild_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->guild_name().data(), this->guild_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -10855,12 +10872,9 @@ void ReqAckLeaveGuild::SerializeWithCachedSizes(
       1, this->guild_id(), output);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       2, this->guild_name(), output);
   }
 
@@ -10879,13 +10893,10 @@ void ReqAckLeaveGuild::SerializeWithCachedSizes(
         1, this->guild_id(), target);
   }
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   if (has_guild_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->guild_name().data(), this->guild_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->guild_name(), target);
   }
 
@@ -10907,10 +10918,10 @@ int ReqAckLeaveGuild::ByteSize() const {
           this->guild_id());
     }
 
-    // required string guild_name = 2;
+    // required bytes guild_name = 2;
     if (has_guild_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->guild_name());
     }
 
@@ -12096,15 +12107,12 @@ bool ReqBuyItemFromShop::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string itemID = 1;
+      // required bytes itemID = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_itemid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->itemid().data(), this->itemid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -12146,12 +12154,9 @@ bool ReqBuyItemFromShop::MergePartialFromCodedStream(
 
 void ReqBuyItemFromShop::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string itemID = 1;
+  // required bytes itemID = 1;
   if (has_itemid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->itemid().data(), this->itemid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->itemid(), output);
   }
 
@@ -12168,13 +12173,10 @@ void ReqBuyItemFromShop::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqBuyItemFromShop::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string itemID = 1;
+  // required bytes itemID = 1;
   if (has_itemid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->itemid().data(), this->itemid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->itemid(), target);
   }
 
@@ -12194,10 +12196,10 @@ int ReqBuyItemFromShop::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string itemID = 1;
+    // required bytes itemID = 1;
     if (has_itemid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->itemid());
     }
 
@@ -12362,15 +12364,12 @@ bool ReqAddGambleValue::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string property = 1;
+      // required bytes property = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_property()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->property().data(), this->property().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -12412,12 +12411,9 @@ bool ReqAddGambleValue::MergePartialFromCodedStream(
 
 void ReqAddGambleValue::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string property = 1;
+  // required bytes property = 1;
   if (has_property()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->property().data(), this->property().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->property(), output);
   }
 
@@ -12434,13 +12430,10 @@ void ReqAddGambleValue::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ReqAddGambleValue::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string property = 1;
+  // required bytes property = 1;
   if (has_property()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->property().data(), this->property().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->property(), target);
   }
 
@@ -12460,10 +12453,10 @@ int ReqAddGambleValue::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string property = 1;
+    // required bytes property = 1;
     if (has_property()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->property());
     }
 
@@ -13247,16 +13240,13 @@ bool TileBuilding::MergePartialFromCodedStream(
         break;
       }
 
-      // required string configID = 3;
+      // required bytes configID = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_configID:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_configid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->configid().data(), this->configid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -13306,12 +13296,9 @@ void TileBuilding::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
   }
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   if (has_configid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->configid().data(), this->configid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       3, this->configid(), output);
   }
 
@@ -13339,13 +13326,10 @@ void TileBuilding::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
   }
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   if (has_configid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->configid().data(), this->configid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         3, this->configid(), target);
   }
 
@@ -13381,10 +13365,10 @@ int TileBuilding::ByteSize() const {
           this->y());
     }
 
-    // required string configID = 3;
+    // required bytes configID = 3;
     if (has_configid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->configid());
     }
 
@@ -13601,16 +13585,13 @@ bool TileNPC::MergePartialFromCodedStream(
         break;
       }
 
-      // required string configID = 3;
+      // required bytes configID = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_configID:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_configid()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->configid().data(), this->configid().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -13660,12 +13641,9 @@ void TileNPC::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->y(), output);
   }
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   if (has_configid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->configid().data(), this->configid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       3, this->configid(), output);
   }
 
@@ -13693,13 +13671,10 @@ void TileNPC::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->y(), target);
   }
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   if (has_configid()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->configid().data(), this->configid().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         3, this->configid(), target);
   }
 
@@ -13735,10 +13710,10 @@ int TileNPC::ByteSize() const {
           this->y());
     }
 
-    // required string configID = 3;
+    // required bytes configID = 3;
     if (has_configid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->configid());
     }
 

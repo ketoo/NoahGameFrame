@@ -476,6 +476,7 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
+		static const std::string& AIOwnerID(){ static std::string x = "AIOwnerID"; return x; };// object
 		static const std::string& ATK_FIRE(){ static std::string x = "ATK_FIRE"; return x; };// int
 		static const std::string& ATK_ICE(){ static std::string x = "ATK_ICE"; return x; };// int
 		static const std::string& ATK_LIGHT(){ static std::string x = "ATK_LIGHT"; return x; };// int
@@ -635,13 +636,13 @@ namespace NFrame
 		static const std::string& HeroID1(){ static std::string x = "HeroID1"; return x; };// object
 		static const std::string& HeroID2(){ static std::string x = "HeroID2"; return x; };// object
 		static const std::string& HeroID3(){ static std::string x = "HeroID3"; return x; };// object
-		static const std::string& HeroPos1(){ static std::string x = "HeroPos1"; return x; };// vector
+		static const std::string& HeroPos1(){ static std::string x = "HeroPos1"; return x; };// vector3
 		static const std::string& HeroPos1CnfID(){ static std::string x = "HeroPos1CnfID"; return x; };// string
 		static const std::string& HeroPos1Star(){ static std::string x = "HeroPos1Star"; return x; };// int
-		static const std::string& HeroPos2(){ static std::string x = "HeroPos2"; return x; };// vector
+		static const std::string& HeroPos2(){ static std::string x = "HeroPos2"; return x; };// vector3
 		static const std::string& HeroPos2CnfID(){ static std::string x = "HeroPos2CnfID"; return x; };// string
 		static const std::string& HeroPos2Star(){ static std::string x = "HeroPos2Star"; return x; };// int
-		static const std::string& HeroPos3(){ static std::string x = "HeroPos3"; return x; };// vector
+		static const std::string& HeroPos3(){ static std::string x = "HeroPos3"; return x; };// vector3
 		static const std::string& HeroPos3CnfID(){ static std::string x = "HeroPos3CnfID"; return x; };// string
 		static const std::string& HeroPos3Star(){ static std::string x = "HeroPos3Star"; return x; };// int
 		static const std::string& HomeSceneID(){ static std::string x = "HomeSceneID"; return x; };// int

@@ -246,8 +246,8 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
 							pObject->SetPropertyVector2(strPropertyName, arg.Vector2(i + 1));
 							break; 
 						case TDATA_VECTOR3:
-								pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
-								break;
+							pObject->SetPropertyVector3(strPropertyName, arg.Vector3(i + 1));
+							break;
                         default:
                             break;
                     }

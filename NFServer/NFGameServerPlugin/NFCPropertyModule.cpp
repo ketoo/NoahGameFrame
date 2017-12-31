@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCPropertyModule.cpp
+//    @FileName				:    NFCPropertyModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-07-05
 //    @Module               :    NFCPropertyModule

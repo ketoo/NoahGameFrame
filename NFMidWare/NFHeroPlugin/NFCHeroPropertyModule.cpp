@@ -30,8 +30,10 @@ bool NFCHeroPropertyModule::AfterInit()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>();
-
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCHeroPropertyModule::OnPlayerClassEvent);
+
 	return true;
 
 }
@@ -48,6 +50,11 @@ int NFCHeroPropertyModule::OnPlayerClassEvent(const NFGUID& self, const std::str
 	case CLASS_OBJECT_EVENT::COE_CREATE_BEFORE_EFFECT:
 	{
 		m_pKernelModule->AddRecordCallBack(self, NFrame::Player::PlayerHero::ThisName(), this, &NFCHeroPropertyModule::OnObjectHeroRecordEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::FightHero(), this, &NFCHeroPropertyModule::OnFightingHeroEvent);
+	}
+	break;
+	case CLASS_OBJECT_EVENT::COE_CREATE_FINISH:
+	{
 	}
 	break;
 	default:
@@ -338,4 +345,45 @@ bool NFCHeroPropertyModule::CalHeroEquipProperty(const NFGUID& self, const NFGUI
 	}
 	*/
 	return true;
+}
+
+int NFCHeroPropertyModule::OnFightingHeroEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
+	if (nullptr == pHeroRecord)
+	{
+		return 0;
+	}
+	NFGUID xHeroGUID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	if (xHeroGUID.IsNull())
+	{
+		return 0;
+	}
+
+	NFDataList varFind;
+	if (pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, xHeroGUID, varFind) != 1)
+	{
+		return 0;
+	}
+
+	NF_SHARE_PTR<NFIRecord> pHeroPropertyRecord = m_pKernelModule->FindRecord(self, NFrame::Player::HeroValue::ThisName());
+	if (nullptr == pHeroPropertyRecord)
+	{
+		return 0;
+	}
+
+	const int nRow = varFind.Int32(0);
+	const int nHeroStar = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
+
+	for (int i = 0; i < pHeroPropertyRecord->GetCols(); ++i)
+	{
+		const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
+		int64_t nValue = pHeroPropertyRecord->GetInt(nRow, i);
+
+		nValue = nValue * nHeroStar;
+
+		m_pPropertyModule->SetPropertyValue(self, strColTag, NFIPropertyModule::NPG_FIGHTING_HERO, nValue);
+	}
+
+	return 0;
 }

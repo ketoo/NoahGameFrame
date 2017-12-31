@@ -195,9 +195,6 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		var.AddString(NFrame::Player::SceneID());
 		var.AddInt(nHomeSceneID);
 
-		var.AddString(NFrame::Player::ViewOpponent());
-		var.AddObject(nRoleID);
-
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nHomeSceneID, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)
 		{

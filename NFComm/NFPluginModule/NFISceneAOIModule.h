@@ -181,6 +181,7 @@ public:
 	{
 		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
+
 	NFVector3 GetReliveInfo(const int nIndex)
 	{
 		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
