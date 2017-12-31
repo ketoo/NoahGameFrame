@@ -76,9 +76,10 @@ message ReqAckPlayerMove
 	required int32  moveType = 2;//future_state
 	required float speed = 3;
 	required int32 time = 4;
-	repeated Vector3 target_pos = 5;
-	repeated Vector3 source_pos = 6;
-	repeated Vector3 move_direction = 7;
+	required int32 lastState = 5;
+	repeated Vector3 target_pos = 6;
+	repeated Vector3 source_pos = 7;
+	repeated Vector3 move_direction = 8;
 }
 		
 message ReqAckPlayerChat
@@ -143,6 +144,7 @@ message ReqAckUseItem
 	repeated EffectData 	effect_data = 3;
 	required ItemStruct 	item = 4;
 	required Ident 			targetid = 5;
+	required Vector3 		position = 6;
 }
 
 /////////////////////////////////////////
@@ -163,17 +165,17 @@ message ReqAckSwapScene
 	optional float 		x = 4;
 	optional float 		y = 5;
 	optional float 		z = 6;
-	optional string 	data = 7;
+	optional bytes 	data = 7;
 }
 //EGMI_REQ_SWAP_HOME_SCENE
 message ReqAckHomeScene
 {
-	optional string 	data = 1;
+	optional bytes 	data = 1;
 }
 
 message ItemStruct
 {
-    required string item_id            = 1; // 配置ID
+    required bytes item_id            = 1; // 配置ID
     required int32 item_count          = 2; // 数量
 }
 
@@ -248,12 +250,12 @@ message ReqAckJoinActivity
 message ReqAckCreateGuild
 {
     required Ident		guild_id = 1;
-    required string		guild_name = 2;
+    required bytes 		guild_name = 2;
 }
 //EGMI_REQ_SEARCH_GUILD                       = 308; // 申请搜索公会
 message ReqSearchGuild
 {
-    required string		guild_name = 1;
+    required bytes 		guild_name = 1;
 }
 //EGMI_ACK_SEARCH_GUILD                       = 309; // 返回搜索公会
 message AckSearchGuild
@@ -261,8 +263,8 @@ message AckSearchGuild
 	message SearchGuildObject
 	{
 		required Ident		guild_ID 	= 1;
-		required string		guild_name 	= 2;
-		required string		guild_icon 	= 3;
+		required bytes		guild_name 	= 2;
+		required bytes		guild_icon 	= 3;
 		required int32		guild_member_count 	= 4;
 		required int32		guild_member_max_count 	= 5;
 		required int32		guild_honor 	= 6;
@@ -275,13 +277,13 @@ message AckSearchGuild
 message ReqAckJoinGuild
 {
     required Ident		guild_id = 1;
-    required string		guild_name = 2;
+    required bytes		guild_name = 2;
 }
 //EGMI_ACK_LEAVE_GUILD						= 305; // 离开公会结果 
 message ReqAckLeaveGuild
 {
     required Ident		guild_id = 1;
-    required string		guild_name = 2;
+    required bytes		guild_name = 2;
 }
 
 
@@ -322,14 +324,14 @@ message ReqSwitchFightHero
 //EGMI_REQ_BUY_FORM_SHOP
 message ReqBuyItemFromShop
 {
-	required string		itemID				= 1;
+	required bytes		itemID				= 1;
 	required int32		count				= 2;
 }
 
 //EGMI_REQ_ADD_GAMBLE_VALUE
 message ReqAddGambleValue
 {
-	required string		property				= 1;
+	required bytes		property				= 1;
 	required int32		number				= 2;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -353,7 +355,7 @@ message TileBuilding
 {
 	required int32		x				= 1;//
 	required int32		y				= 2;//
-	required string		configID 		= 3;
+	required bytes		configID 		= 3;
 	required Ident		guid 			= 4;
 	
 }
@@ -362,7 +364,7 @@ message TileNPC
 {
 	required int32		x				= 1;//
 	required int32		y				= 2;//
-	required string		configID 		= 3;//
+	required bytes		configID 		= 3;//
 	required Ident		guid 			= 4;//
 }
 

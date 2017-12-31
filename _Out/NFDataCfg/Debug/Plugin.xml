@@ -48,15 +48,7 @@
 		<Plugin Name="NFLogPlugin" />	
 		<Plugin Name="NFSecurityPlugin" />
 	</WorldServer>
-	
-	<AIServer>
-		<Plugin Name="NFNetPlugin" />
-		<Plugin Name="NFKernelPlugin" />
-		<Plugin Name="NFConfigPlugin" />
-		<Plugin Name="NFAIServerNet_ServerPlugin" />
-		<Plugin Name="NFAIServerNet_ClientPlugin" />
-		<Plugin Name="NFLogPlugin" />	
-	</AIServer>
+
 	
 	<TutorialServer>
 		<Plugin Name="NFKernelPlugin" />

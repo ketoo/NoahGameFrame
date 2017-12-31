@@ -465,6 +465,7 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
+		public static final String AIOwnerID = "AIOwnerID";// object
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
 		public static final String ATK_LIGHT = "ATK_LIGHT";// int
@@ -624,13 +625,13 @@ package nframe;
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
-		public static final String HeroPos1 = "HeroPos1";// vector
+		public static final String HeroPos1 = "HeroPos1";// vector3
 		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static final String HeroPos1Star = "HeroPos1Star";// int
-		public static final String HeroPos2 = "HeroPos2";// vector
+		public static final String HeroPos2 = "HeroPos2";// vector3
 		public static final String HeroPos2CnfID = "HeroPos2CnfID";// string
 		public static final String HeroPos2Star = "HeroPos2Star";// int
-		public static final String HeroPos3 = "HeroPos3";// vector
+		public static final String HeroPos3 = "HeroPos3";// vector3
 		public static final String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static final String HeroPos3Star = "HeroPos3Star";// int
 		public static final String HomeSceneID = "HomeSceneID";// int

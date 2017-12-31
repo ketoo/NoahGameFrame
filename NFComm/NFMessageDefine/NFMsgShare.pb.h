@@ -1225,10 +1225,17 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 time() const;
   inline void set_time(::google::protobuf::int32 value);
 
-  // repeated .NFMsg.Vector3 target_pos = 5;
+  // required int32 lastState = 5;
+  inline bool has_laststate() const;
+  inline void clear_laststate();
+  static const int kLastStateFieldNumber = 5;
+  inline ::google::protobuf::int32 laststate() const;
+  inline void set_laststate(::google::protobuf::int32 value);
+
+  // repeated .NFMsg.Vector3 target_pos = 6;
   inline int target_pos_size() const;
   inline void clear_target_pos();
-  static const int kTargetPosFieldNumber = 5;
+  static const int kTargetPosFieldNumber = 6;
   inline const ::NFMsg::Vector3& target_pos(int index) const;
   inline ::NFMsg::Vector3* mutable_target_pos(int index);
   inline ::NFMsg::Vector3* add_target_pos();
@@ -1237,10 +1244,10 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_target_pos();
 
-  // repeated .NFMsg.Vector3 source_pos = 6;
+  // repeated .NFMsg.Vector3 source_pos = 7;
   inline int source_pos_size() const;
   inline void clear_source_pos();
-  static const int kSourcePosFieldNumber = 6;
+  static const int kSourcePosFieldNumber = 7;
   inline const ::NFMsg::Vector3& source_pos(int index) const;
   inline ::NFMsg::Vector3* mutable_source_pos(int index);
   inline ::NFMsg::Vector3* add_source_pos();
@@ -1249,10 +1256,10 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 >*
       mutable_source_pos();
 
-  // repeated .NFMsg.Vector3 move_direction = 7;
+  // repeated .NFMsg.Vector3 move_direction = 8;
   inline int move_direction_size() const;
   inline void clear_move_direction();
-  static const int kMoveDirectionFieldNumber = 7;
+  static const int kMoveDirectionFieldNumber = 8;
   inline const ::NFMsg::Vector3& move_direction(int index) const;
   inline ::NFMsg::Vector3* mutable_move_direction(int index);
   inline ::NFMsg::Vector3* add_move_direction();
@@ -1271,19 +1278,22 @@ class LIBPROTOC_EXPORT ReqAckPlayerMove : public ::google::protobuf::Message {
   inline void clear_has_speed();
   inline void set_has_time();
   inline void clear_has_time();
+  inline void set_has_laststate();
+  inline void clear_has_laststate();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::NFMsg::Ident* mover_;
   ::google::protobuf::int32 movetype_;
   float speed_;
+  ::google::protobuf::int32 time_;
+  ::google::protobuf::int32 laststate_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > target_pos_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > source_pos_;
   ::google::protobuf::RepeatedPtrField< ::NFMsg::Vector3 > move_direction_;
-  ::google::protobuf::int32 time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -1946,6 +1956,15 @@ class LIBPROTOC_EXPORT ReqAckUseItem : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_targetid();
   inline void set_allocated_targetid(::NFMsg::Ident* targetid);
 
+  // required .NFMsg.Vector3 position = 6;
+  inline bool has_position() const;
+  inline void clear_position();
+  static const int kPositionFieldNumber = 6;
+  inline const ::NFMsg::Vector3& position() const;
+  inline ::NFMsg::Vector3* mutable_position();
+  inline ::NFMsg::Vector3* release_position();
+  inline void set_allocated_position(::NFMsg::Vector3* position);
+
   // @@protoc_insertion_point(class_scope:NFMsg.ReqAckUseItem)
  private:
   inline void set_has_user();
@@ -1956,6 +1975,8 @@ class LIBPROTOC_EXPORT ReqAckUseItem : public ::google::protobuf::Message {
   inline void clear_has_item();
   inline void set_has_targetid();
   inline void clear_has_targetid();
+  inline void set_has_position();
+  inline void clear_has_position();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -1964,9 +1985,10 @@ class LIBPROTOC_EXPORT ReqAckUseItem : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::NFMsg::EffectData > effect_data_;
   ::NFMsg::ItemStruct* item_;
   ::NFMsg::Ident* targetid_;
+  ::NFMsg::Vector3* position_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
   friend void protobuf_AssignDesc_NFMsgShare_2eproto();
@@ -2099,14 +2121,14 @@ class LIBPROTOC_EXPORT ReqAckSwapScene : public ::google::protobuf::Message {
   inline float z() const;
   inline void set_z(float value);
 
-  // optional string data = 7;
+  // optional bytes data = 7;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 7;
   inline const ::std::string& data() const;
   inline void set_data(const ::std::string& value);
   inline void set_data(const char* value);
-  inline void set_data(const char* value, size_t size);
+  inline void set_data(const void* value, size_t size);
   inline ::std::string* mutable_data();
   inline ::std::string* release_data();
   inline void set_allocated_data(::std::string* data);
@@ -2204,14 +2226,14 @@ class LIBPROTOC_EXPORT ReqAckHomeScene : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string data = 1;
+  // optional bytes data = 1;
   inline bool has_data() const;
   inline void clear_data();
   static const int kDataFieldNumber = 1;
   inline const ::std::string& data() const;
   inline void set_data(const ::std::string& value);
   inline void set_data(const char* value);
-  inline void set_data(const char* value, size_t size);
+  inline void set_data(const void* value, size_t size);
   inline ::std::string* mutable_data();
   inline ::std::string* release_data();
   inline void set_allocated_data(::std::string* data);
@@ -2291,14 +2313,14 @@ class LIBPROTOC_EXPORT ItemStruct : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string item_id = 1;
+  // required bytes item_id = 1;
   inline bool has_item_id() const;
   inline void clear_item_id();
   static const int kItemIdFieldNumber = 1;
   inline const ::std::string& item_id() const;
   inline void set_item_id(const ::std::string& value);
   inline void set_item_id(const char* value);
-  inline void set_item_id(const char* value, size_t size);
+  inline void set_item_id(const void* value, size_t size);
   inline ::std::string* mutable_item_id();
   inline ::std::string* release_item_id();
   inline void set_allocated_item_id(::std::string* item_id);
@@ -3184,14 +3206,14 @@ class LIBPROTOC_EXPORT ReqAckCreateGuild : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 2;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
-  inline void set_guild_name(const char* value, size_t size);
+  inline void set_guild_name(const void* value, size_t size);
   inline ::std::string* mutable_guild_name();
   inline ::std::string* release_guild_name();
   inline void set_allocated_guild_name(::std::string* guild_name);
@@ -3274,14 +3296,14 @@ class LIBPROTOC_EXPORT ReqSearchGuild : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string guild_name = 1;
+  // required bytes guild_name = 1;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 1;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
-  inline void set_guild_name(const char* value, size_t size);
+  inline void set_guild_name(const void* value, size_t size);
   inline ::std::string* mutable_guild_name();
   inline ::std::string* release_guild_name();
   inline void set_allocated_guild_name(::std::string* guild_name);
@@ -3370,26 +3392,26 @@ class LIBPROTOC_EXPORT AckSearchGuild_SearchGuildObject : public ::google::proto
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 2;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
-  inline void set_guild_name(const char* value, size_t size);
+  inline void set_guild_name(const void* value, size_t size);
   inline ::std::string* mutable_guild_name();
   inline ::std::string* release_guild_name();
   inline void set_allocated_guild_name(::std::string* guild_name);
 
-  // required string guild_icon = 3;
+  // required bytes guild_icon = 3;
   inline bool has_guild_icon() const;
   inline void clear_guild_icon();
   static const int kGuildIconFieldNumber = 3;
   inline const ::std::string& guild_icon() const;
   inline void set_guild_icon(const ::std::string& value);
   inline void set_guild_icon(const char* value);
-  inline void set_guild_icon(const char* value, size_t size);
+  inline void set_guild_icon(const void* value, size_t size);
   inline ::std::string* mutable_guild_icon();
   inline ::std::string* release_guild_icon();
   inline void set_allocated_guild_icon(::std::string* guild_icon);
@@ -3611,14 +3633,14 @@ class LIBPROTOC_EXPORT ReqAckJoinGuild : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 2;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
-  inline void set_guild_name(const char* value, size_t size);
+  inline void set_guild_name(const void* value, size_t size);
   inline ::std::string* mutable_guild_name();
   inline ::std::string* release_guild_name();
   inline void set_allocated_guild_name(::std::string* guild_name);
@@ -3710,14 +3732,14 @@ class LIBPROTOC_EXPORT ReqAckLeaveGuild : public ::google::protobuf::Message {
   inline ::NFMsg::Ident* release_guild_id();
   inline void set_allocated_guild_id(::NFMsg::Ident* guild_id);
 
-  // required string guild_name = 2;
+  // required bytes guild_name = 2;
   inline bool has_guild_name() const;
   inline void clear_guild_name();
   static const int kGuildNameFieldNumber = 2;
   inline const ::std::string& guild_name() const;
   inline void set_guild_name(const ::std::string& value);
   inline void set_guild_name(const char* value);
-  inline void set_guild_name(const char* value, size_t size);
+  inline void set_guild_name(const void* value, size_t size);
   inline ::std::string* mutable_guild_name();
   inline ::std::string* release_guild_name();
   inline void set_allocated_guild_name(::std::string* guild_name);
@@ -4193,14 +4215,14 @@ class LIBPROTOC_EXPORT ReqBuyItemFromShop : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string itemID = 1;
+  // required bytes itemID = 1;
   inline bool has_itemid() const;
   inline void clear_itemid();
   static const int kItemIDFieldNumber = 1;
   inline const ::std::string& itemid() const;
   inline void set_itemid(const ::std::string& value);
   inline void set_itemid(const char* value);
-  inline void set_itemid(const char* value, size_t size);
+  inline void set_itemid(const void* value, size_t size);
   inline ::std::string* mutable_itemid();
   inline ::std::string* release_itemid();
   inline void set_allocated_itemid(::std::string* itemid);
@@ -4290,14 +4312,14 @@ class LIBPROTOC_EXPORT ReqAddGambleValue : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string property = 1;
+  // required bytes property = 1;
   inline bool has_property() const;
   inline void clear_property();
   static const int kPropertyFieldNumber = 1;
   inline const ::std::string& property() const;
   inline void set_property(const ::std::string& value);
   inline void set_property(const char* value);
-  inline void set_property(const char* value, size_t size);
+  inline void set_property(const void* value, size_t size);
   inline ::std::string* mutable_property();
   inline ::std::string* release_property();
   inline void set_allocated_property(::std::string* property);
@@ -4605,14 +4627,14 @@ class LIBPROTOC_EXPORT TileBuilding : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 y() const;
   inline void set_y(::google::protobuf::int32 value);
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   inline bool has_configid() const;
   inline void clear_configid();
   static const int kConfigIDFieldNumber = 3;
   inline const ::std::string& configid() const;
   inline void set_configid(const ::std::string& value);
   inline void set_configid(const char* value);
-  inline void set_configid(const char* value, size_t size);
+  inline void set_configid(const void* value, size_t size);
   inline ::std::string* mutable_configid();
   inline ::std::string* release_configid();
   inline void set_allocated_configid(::std::string* configid);
@@ -4724,14 +4746,14 @@ class LIBPROTOC_EXPORT TileNPC : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 y() const;
   inline void set_y(::google::protobuf::int32 value);
 
-  // required string configID = 3;
+  // required bytes configID = 3;
   inline bool has_configid() const;
   inline void clear_configid();
   static const int kConfigIDFieldNumber = 3;
   inline const ::std::string& configid() const;
   inline void set_configid(const ::std::string& value);
   inline void set_configid(const char* value);
-  inline void set_configid(const char* value, size_t size);
+  inline void set_configid(const void* value, size_t size);
   inline ::std::string* mutable_configid();
   inline ::std::string* release_configid();
   inline void set_allocated_configid(::std::string* configid);
@@ -7004,7 +7026,29 @@ inline void ReqAckPlayerMove::set_time(::google::protobuf::int32 value) {
   time_ = value;
 }
 
-// repeated .NFMsg.Vector3 target_pos = 5;
+// required int32 lastState = 5;
+inline bool ReqAckPlayerMove::has_laststate() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ReqAckPlayerMove::set_has_laststate() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ReqAckPlayerMove::clear_has_laststate() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ReqAckPlayerMove::clear_laststate() {
+  laststate_ = 0;
+  clear_has_laststate();
+}
+inline ::google::protobuf::int32 ReqAckPlayerMove::laststate() const {
+  return laststate_;
+}
+inline void ReqAckPlayerMove::set_laststate(::google::protobuf::int32 value) {
+  set_has_laststate();
+  laststate_ = value;
+}
+
+// repeated .NFMsg.Vector3 target_pos = 6;
 inline int ReqAckPlayerMove::target_pos_size() const {
   return target_pos_.size();
 }
@@ -7029,7 +7073,7 @@ ReqAckPlayerMove::mutable_target_pos() {
   return &target_pos_;
 }
 
-// repeated .NFMsg.Vector3 source_pos = 6;
+// repeated .NFMsg.Vector3 source_pos = 7;
 inline int ReqAckPlayerMove::source_pos_size() const {
   return source_pos_.size();
 }
@@ -7054,7 +7098,7 @@ ReqAckPlayerMove::mutable_source_pos() {
   return &source_pos_;
 }
 
-// repeated .NFMsg.Vector3 move_direction = 7;
+// repeated .NFMsg.Vector3 move_direction = 8;
 inline int ReqAckPlayerMove::move_direction_size() const {
   return move_direction_.size();
 }
@@ -7870,6 +7914,44 @@ inline void ReqAckUseItem::set_allocated_targetid(::NFMsg::Ident* targetid) {
   }
 }
 
+// required .NFMsg.Vector3 position = 6;
+inline bool ReqAckUseItem::has_position() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ReqAckUseItem::set_has_position() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ReqAckUseItem::clear_has_position() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ReqAckUseItem::clear_position() {
+  if (position_ != NULL) position_->::NFMsg::Vector3::Clear();
+  clear_has_position();
+}
+inline const ::NFMsg::Vector3& ReqAckUseItem::position() const {
+  return position_ != NULL ? *position_ : *default_instance_->position_;
+}
+inline ::NFMsg::Vector3* ReqAckUseItem::mutable_position() {
+  set_has_position();
+  if (position_ == NULL) position_ = new ::NFMsg::Vector3;
+  return position_;
+}
+inline ::NFMsg::Vector3* ReqAckUseItem::release_position() {
+  clear_has_position();
+  ::NFMsg::Vector3* temp = position_;
+  position_ = NULL;
+  return temp;
+}
+inline void ReqAckUseItem::set_allocated_position(::NFMsg::Vector3* position) {
+  delete position_;
+  position_ = position;
+  if (position) {
+    set_has_position();
+  } else {
+    clear_has_position();
+  }
+}
+
 // -------------------------------------------------------------------
 
 // ReqAckSwapScene
@@ -8007,7 +8089,7 @@ inline void ReqAckSwapScene::set_z(float value) {
   z_ = value;
 }
 
-// optional string data = 7;
+// optional bytes data = 7;
 inline bool ReqAckSwapScene::has_data() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -8040,7 +8122,7 @@ inline void ReqAckSwapScene::set_data(const char* value) {
   }
   data_->assign(value);
 }
-inline void ReqAckSwapScene::set_data(const char* value, size_t size) {
+inline void ReqAckSwapScene::set_data(const void* value, size_t size) {
   set_has_data();
   if (data_ == &::google::protobuf::internal::kEmptyString) {
     data_ = new ::std::string;
@@ -8081,7 +8163,7 @@ inline void ReqAckSwapScene::set_allocated_data(::std::string* data) {
 
 // ReqAckHomeScene
 
-// optional string data = 1;
+// optional bytes data = 1;
 inline bool ReqAckHomeScene::has_data() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -8114,7 +8196,7 @@ inline void ReqAckHomeScene::set_data(const char* value) {
   }
   data_->assign(value);
 }
-inline void ReqAckHomeScene::set_data(const char* value, size_t size) {
+inline void ReqAckHomeScene::set_data(const void* value, size_t size) {
   set_has_data();
   if (data_ == &::google::protobuf::internal::kEmptyString) {
     data_ = new ::std::string;
@@ -8155,7 +8237,7 @@ inline void ReqAckHomeScene::set_allocated_data(::std::string* data) {
 
 // ItemStruct
 
-// required string item_id = 1;
+// required bytes item_id = 1;
 inline bool ItemStruct::has_item_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -8188,7 +8270,7 @@ inline void ItemStruct::set_item_id(const char* value) {
   }
   item_id_->assign(value);
 }
-inline void ItemStruct::set_item_id(const char* value, size_t size) {
+inline void ItemStruct::set_item_id(const void* value, size_t size) {
   set_has_item_id();
   if (item_id_ == &::google::protobuf::internal::kEmptyString) {
     item_id_ = new ::std::string;
@@ -8768,7 +8850,7 @@ inline void ReqAckCreateGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) 
   }
 }
 
-// required string guild_name = 2;
+// required bytes guild_name = 2;
 inline bool ReqAckCreateGuild::has_guild_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -8801,7 +8883,7 @@ inline void ReqAckCreateGuild::set_guild_name(const char* value) {
   }
   guild_name_->assign(value);
 }
-inline void ReqAckCreateGuild::set_guild_name(const char* value, size_t size) {
+inline void ReqAckCreateGuild::set_guild_name(const void* value, size_t size) {
   set_has_guild_name();
   if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
     guild_name_ = new ::std::string;
@@ -8842,7 +8924,7 @@ inline void ReqAckCreateGuild::set_allocated_guild_name(::std::string* guild_nam
 
 // ReqSearchGuild
 
-// required string guild_name = 1;
+// required bytes guild_name = 1;
 inline bool ReqSearchGuild::has_guild_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -8875,7 +8957,7 @@ inline void ReqSearchGuild::set_guild_name(const char* value) {
   }
   guild_name_->assign(value);
 }
-inline void ReqSearchGuild::set_guild_name(const char* value, size_t size) {
+inline void ReqSearchGuild::set_guild_name(const void* value, size_t size) {
   set_has_guild_name();
   if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
     guild_name_ = new ::std::string;
@@ -8954,7 +9036,7 @@ inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_id(::NFMsg::Id
   }
 }
 
-// required string guild_name = 2;
+// required bytes guild_name = 2;
 inline bool AckSearchGuild_SearchGuildObject::has_guild_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -8987,7 +9069,7 @@ inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value) 
   }
   guild_name_->assign(value);
 }
-inline void AckSearchGuild_SearchGuildObject::set_guild_name(const char* value, size_t size) {
+inline void AckSearchGuild_SearchGuildObject::set_guild_name(const void* value, size_t size) {
   set_has_guild_name();
   if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
     guild_name_ = new ::std::string;
@@ -9024,7 +9106,7 @@ inline void AckSearchGuild_SearchGuildObject::set_allocated_guild_name(::std::st
   }
 }
 
-// required string guild_icon = 3;
+// required bytes guild_icon = 3;
 inline bool AckSearchGuild_SearchGuildObject::has_guild_icon() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -9057,7 +9139,7 @@ inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value) 
   }
   guild_icon_->assign(value);
 }
-inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const char* value, size_t size) {
+inline void AckSearchGuild_SearchGuildObject::set_guild_icon(const void* value, size_t size) {
   set_has_guild_icon();
   if (guild_icon_ == &::google::protobuf::internal::kEmptyString) {
     guild_icon_ = new ::std::string;
@@ -9253,7 +9335,7 @@ inline void ReqAckJoinGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
   }
 }
 
-// required string guild_name = 2;
+// required bytes guild_name = 2;
 inline bool ReqAckJoinGuild::has_guild_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -9286,7 +9368,7 @@ inline void ReqAckJoinGuild::set_guild_name(const char* value) {
   }
   guild_name_->assign(value);
 }
-inline void ReqAckJoinGuild::set_guild_name(const char* value, size_t size) {
+inline void ReqAckJoinGuild::set_guild_name(const void* value, size_t size) {
   set_has_guild_name();
   if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
     guild_name_ = new ::std::string;
@@ -9365,7 +9447,7 @@ inline void ReqAckLeaveGuild::set_allocated_guild_id(::NFMsg::Ident* guild_id) {
   }
 }
 
-// required string guild_name = 2;
+// required bytes guild_name = 2;
 inline bool ReqAckLeaveGuild::has_guild_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -9398,7 +9480,7 @@ inline void ReqAckLeaveGuild::set_guild_name(const char* value) {
   }
   guild_name_->assign(value);
 }
-inline void ReqAckLeaveGuild::set_guild_name(const char* value, size_t size) {
+inline void ReqAckLeaveGuild::set_guild_name(const void* value, size_t size) {
   set_has_guild_name();
   if (guild_name_ == &::google::protobuf::internal::kEmptyString) {
     guild_name_ = new ::std::string;
@@ -9690,7 +9772,7 @@ inline void ReqSwitchFightHero::set_allocated_heroid(::NFMsg::Ident* heroid) {
 
 // ReqBuyItemFromShop
 
-// required string itemID = 1;
+// required bytes itemID = 1;
 inline bool ReqBuyItemFromShop::has_itemid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -9723,7 +9805,7 @@ inline void ReqBuyItemFromShop::set_itemid(const char* value) {
   }
   itemid_->assign(value);
 }
-inline void ReqBuyItemFromShop::set_itemid(const char* value, size_t size) {
+inline void ReqBuyItemFromShop::set_itemid(const void* value, size_t size) {
   set_has_itemid();
   if (itemid_ == &::google::protobuf::internal::kEmptyString) {
     itemid_ = new ::std::string;
@@ -9786,7 +9868,7 @@ inline void ReqBuyItemFromShop::set_count(::google::protobuf::int32 value) {
 
 // ReqAddGambleValue
 
-// required string property = 1;
+// required bytes property = 1;
 inline bool ReqAddGambleValue::has_property() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -9819,7 +9901,7 @@ inline void ReqAddGambleValue::set_property(const char* value) {
   }
   property_->assign(value);
 }
-inline void ReqAddGambleValue::set_property(const char* value, size_t size) {
+inline void ReqAddGambleValue::set_property(const void* value, size_t size) {
   set_has_property();
   if (property_ == &::google::protobuf::internal::kEmptyString) {
     property_ = new ::std::string;
@@ -10066,7 +10148,7 @@ inline void TileBuilding::set_y(::google::protobuf::int32 value) {
   y_ = value;
 }
 
-// required string configID = 3;
+// required bytes configID = 3;
 inline bool TileBuilding::has_configid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -10099,7 +10181,7 @@ inline void TileBuilding::set_configid(const char* value) {
   }
   configid_->assign(value);
 }
-inline void TileBuilding::set_configid(const char* value, size_t size) {
+inline void TileBuilding::set_configid(const void* value, size_t size) {
   set_has_configid();
   if (configid_ == &::google::protobuf::internal::kEmptyString) {
     configid_ = new ::std::string;
@@ -10222,7 +10304,7 @@ inline void TileNPC::set_y(::google::protobuf::int32 value) {
   y_ = value;
 }
 
-// required string configID = 3;
+// required bytes configID = 3;
 inline bool TileNPC::has_configid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -10255,7 +10337,7 @@ inline void TileNPC::set_configid(const char* value) {
   }
   configid_->assign(value);
 }
-inline void TileNPC::set_configid(const char* value, size_t size) {
+inline void TileNPC::set_configid(const void* value, size_t size) {
   set_has_configid();
   if (configid_ == &::google::protobuf::internal::kEmptyString) {
     configid_ = new ::std::string;

@@ -198,7 +198,7 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 	if (eSceneType == E_SCENE_TYPE::SCENE_TYPE_SINGLE_CLONE_SCENE)
 	{
 		NFDataList xDataList;
-		xDataList << NFrame::NPC::MasterID();
+		xDataList << NFrame::NPC::AIOwnerID();
 		xDataList << self;
 		m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 	}
@@ -208,7 +208,7 @@ int NFCSceneProcessModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const
 		if (m_pKernelModule->GetGroupObjectList(nSceneID, nGroupID, varObjectList, true) && varObjectList.GetCount() <= 0)
 		{
 			NFDataList xDataList;
-			xDataList << NFrame::NPC::MasterID();
+			xDataList << NFrame::NPC::AIOwnerID();
 			xDataList << self;
 			m_pSceneAOIModule->CreateSceneNPC(nSceneID, nGroupID, xDataList);
 		}
@@ -245,23 +245,24 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 		int nWeight = lexical_cast<int>(pSeedFileNode->first_attribute("Weight")->value());
 		m_pSceneAOIModule->AddSeedData(nSceneID, strSeedID, strConfigID, NFVector3(fSeedX, fSeedY, fSeedZ), nWeight);
 
-		const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
-		NFDataList xPositionList;
-		xPositionList.Split(strRelivePosition, ";");
-		for (int i = 0; i < xPositionList.GetCount(); ++i)
+	}
+
+	const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
+	NFDataList xPositionList;
+	xPositionList.Split(strRelivePosition, ";");
+	for (int i = 0; i < xPositionList.GetCount(); ++i)
+	{
+		const std::string& strPos = xPositionList.String(i);
+		if (!strPos.empty())
 		{
-			const std::string& strPos = xPositionList.String(i);
-			if (!strPos.empty())
+			NFDataList xPosition;
+			xPosition.Split(strPos, ",");
+			if (xPosition.GetCount() == 3)
 			{
-				NFDataList xPosition;
-				xPosition.Split(strPos, ",");
-				if (xPosition.GetCount() == 3)
-				{
-					float fPosX = lexical_cast<float>(xPosition.String(0));
-					float fPosY = lexical_cast<float>(xPosition.String(1));
-					float fPosZ = lexical_cast<float>(xPosition.String(2));
-					m_pSceneAOIModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
-				}
+				float fPosX = lexical_cast<float>(xPosition.String(0));
+				float fPosY = lexical_cast<float>(xPosition.String(1));
+				float fPosZ = lexical_cast<float>(xPosition.String(2));
+				m_pSceneAOIModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}
