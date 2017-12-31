@@ -1232,7 +1232,7 @@ int NFCGameServerNet_ServerModule::OnSceneEvent(const NFGUID & self, const int n
 	xAckSwapScene.set_x(vRelivePos.X());
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
-	
+	xAckSwapScene.set_data("");
 	SendMsgPBToGate(NFMsg::EGMI_ACK_SWAP_SCENE, xAckSwapScene, self);
 
 	return 0;
@@ -1317,8 +1317,8 @@ void NFCGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInd
 	const NFGUID& xMover = NFINetModule::PBToNF(xMsg.mover());
 	if (xMover != nPlayerID)
 	{
-		const NFGUID xMasterID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::MasterID());
-		if (xMasterID == nPlayerID)
+		const NFGUID xAIOwnerID = m_pKernelModule->GetPropertyObject(xMover, NFrame::NPC::AIOwnerID());
+		if (xAIOwnerID == nPlayerID)
 		{
 
 			NFMsg::Vector3 vPos = xMsg.target_pos(0);
@@ -1328,7 +1328,7 @@ void NFCGameServerNet_ServerModule::OnClientReqMoveProcess(const NFSOCK nSockInd
 			v.SetY(vPos.y());
 			v.SetZ(vPos.z());
 
-			m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
+			//m_pKernelModule->SetPropertyVector3(xMover, NFrame::IObject::Position(), v);
 
 			const int nSceneID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::SceneID());
 			const int nGroupID = m_pKernelModule->GetPropertyInt32(xMover, NFrame::Player::GroupID());

@@ -649,7 +649,7 @@ int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 	{
 		SendTileData(self);
 
-		//create building
+		//create your building for yourself
 		CreateTileBuilding(self);
 	}
 

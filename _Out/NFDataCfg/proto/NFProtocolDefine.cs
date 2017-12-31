@@ -471,6 +471,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String AIOwnerID = "AIOwnerID";// object
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -630,13 +631,13 @@ namespace NFrame
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
-		public static readonly String HeroPos1 = "HeroPos1";// vector
+		public static readonly String HeroPos1 = "HeroPos1";// vector3
 		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static readonly String HeroPos1Star = "HeroPos1Star";// int
-		public static readonly String HeroPos2 = "HeroPos2";// vector
+		public static readonly String HeroPos2 = "HeroPos2";// vector3
 		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// string
 		public static readonly String HeroPos2Star = "HeroPos2Star";// int
-		public static readonly String HeroPos3 = "HeroPos3";// vector
+		public static readonly String HeroPos3 = "HeroPos3";// vector3
 		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
