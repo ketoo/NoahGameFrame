@@ -29,11 +29,11 @@ public:
     virtual bool Shut();
 
 protected:
-    virtual bool PerformGet(const std::string& strUri,
+    virtual bool DoGet(const std::string& strUri,
                             const std::map<std::string, std::string>& xHeaders,
                             HTTP_RESP_FUNCTOR_PTR pCB);
 
-    virtual bool PerformPost(const std::string& strUri,
+    virtual bool DoPost(const std::string& strUri,
                              const std::map<std::string, std::string>& xHeaders,
                              const std::string& strPostData,
                              HTTP_RESP_FUNCTOR_PTR pCB);

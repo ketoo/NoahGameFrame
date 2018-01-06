@@ -19,47 +19,47 @@ public:
     virtual ~NFIHttpClientModule() {};
 
     template<typename BaseType>
-    bool PerformGet ( const std::string& strUri,BaseType* pBase,
+    bool DoGet ( const std::string& strUri,BaseType* pBase,
 						void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2 ) ) );
-        return PerformGet ( strUri, std::map<std::string, std::string>(), pd );
+        return DoGet ( strUri, std::map<std::string, std::string>(), pd );
     }
     template<typename BaseType>
-    bool PerformGet ( const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
+    bool DoGet ( const std::string& strUri, const std::map<std::string, std::string>& xHeaders,
                       BaseType* pBase,
                       void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2) ) );
-        return PerformGet ( strUri, xHeaders, pd );
+        return DoGet( strUri, xHeaders, pd );
     }
 
 
     template<typename BaseType>
-    bool PerformPost ( const std::string& strUri, const std::string& strPostData,
+    bool DoPost ( const std::string& strUri, const std::string& strPostData,
                        BaseType* pBase,
                        void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2) ) );
-        return PerformPost ( strUri, std::map<std::string, std::string>(), strPostData, pd );
+        return DoPost( strUri, std::map<std::string, std::string>(), strPostData, pd );
     }
 
 
     template<typename BaseType>
-    bool PerformPost ( const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
+    bool DoPost( const std::string& strUri, const std::string& strPostData, const std::map<std::string, std::string>& xHeaders,
                        BaseType* pBase,
                        void ( BaseType::*handleRecieve ) ( const int state_code, const std::string& strRespData ) )
     {
         HTTP_RESP_FUNCTOR_PTR pd ( new HTTP_RESP_FUNCTOR ( std::bind ( handleRecieve, pBase, std::placeholders::_1, std::placeholders::_2) ) );
-        return PerformPost ( strUri, xHeaders, strPostData, pd );
+        return DoPost( strUri, xHeaders, strPostData, pd );
     }
 
 protected:
-    virtual bool PerformGet ( const std::string& strUrl,
+    virtual bool DoGet( const std::string& strUrl,
                               const std::map<std::string, std::string>& xHeaders,
                               HTTP_RESP_FUNCTOR_PTR pCB) = 0 ;
 
-    virtual bool PerformPost ( const std::string& strUrl,
+    virtual bool DoPost( const std::string& strUrl,
                                const std::map<std::string, std::string>& xHeaders,
                                const std::string& strPostData,
                                HTTP_RESP_FUNCTOR_PTR pCB) = 0;
