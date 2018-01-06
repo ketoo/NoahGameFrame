@@ -16,7 +16,8 @@ NFCHttpClientModule::NFCHttpClientModule(NFIPluginManager* p)
     pPluginManager = p;
     m_pHttpClient = new NFCHttpClient();
     m_xDefaultHttpHeaders["Connection"] = "close";
-    m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
+	m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
+	//m_xDefaultHttpHeaders["Content-Type"] = "text/plain;text/html;application/x-www-form-urlencoded;charset=utf-8";
     m_xDefaultHttpHeaders["User-Agent"] = DEFAULT_USER_AGENT;
     m_xDefaultHttpHeaders["Cache-Control"] = "no-cache";
 }
@@ -49,18 +50,16 @@ bool NFCHttpClientModule::Shut()
 
 bool NFCHttpClientModule::PerformGet(const std::string& strUri,
                                      const std::map<std::string, std::string>& xHeaders,
-                                     HTTP_RESP_FUNCTOR_PTR pCB,
-                                     const std::string& strUserData)
+                                     HTTP_RESP_FUNCTOR_PTR pCB)
 {
-    return m_pHttpClient->PerformGet(strUri, pCB, strUserData, xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
+    return m_pHttpClient->PerformGet(strUri, pCB, xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
 }
 
 bool NFCHttpClientModule::PerformPost(const std::string& strUri,
                                       const std::map<std::string, std::string>& xHeaders,
                                       const std::string& strPostData,
-                                      HTTP_RESP_FUNCTOR_PTR pCB,
-                                      const std::string& strUserData)
+                                      HTTP_RESP_FUNCTOR_PTR pCB)
 {
-    return m_pHttpClient->PerformPost(strUri, strPostData, pCB, strUserData,
+    return m_pHttpClient->PerformPost(strUri, strPostData, pCB,
                                       xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
 }
