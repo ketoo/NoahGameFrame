@@ -48,18 +48,18 @@ bool NFCHttpClientModule::Shut()
     return true;
 }
 
-bool NFCHttpClientModule::PerformGet(const std::string& strUri,
+bool NFCHttpClientModule::DoGet(const std::string& strUri,
                                      const std::map<std::string, std::string>& xHeaders,
                                      HTTP_RESP_FUNCTOR_PTR pCB)
 {
-    return m_pHttpClient->PerformGet(strUri, pCB, xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
+    return m_pHttpClient->DoGet(strUri, pCB, xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
 }
 
-bool NFCHttpClientModule::PerformPost(const std::string& strUri,
+bool NFCHttpClientModule::DoPost(const std::string& strUri,
                                       const std::map<std::string, std::string>& xHeaders,
                                       const std::string& strPostData,
                                       HTTP_RESP_FUNCTOR_PTR pCB)
 {
-    return m_pHttpClient->PerformPost(strUri, strPostData, pCB,
+    return m_pHttpClient->DoPost(strUri, strPostData, pCB,
                                       xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
 }
