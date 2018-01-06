@@ -260,13 +260,13 @@ bool NFCHttpClient::MakeRequest(const std::string& strUri,
     return true;
 }
 
-bool NFCHttpClient::PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
+bool NFCHttpClient::DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
                                const std::map<std::string, std::string>& xHeaders)
 {
     return MakeRequest(strUri, pCB, "", xHeaders, false);
 }
 
-bool NFCHttpClient::PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
+bool NFCHttpClient::DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
                                 const std::map<std::string, std::string>& xHeaders)
 {
     return MakeRequest(strUri, pCB, strPostData, xHeaders, true);
