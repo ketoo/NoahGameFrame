@@ -12,12 +12,11 @@
 class HttpObject
 {
 public:
-    HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev, const std::string& strUserData, HTTP_RESP_FUNCTOR_PTR pCB)
+    HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev,  HTTP_RESP_FUNCTOR_PTR pCB)
     {
         m_pBev = pBev;
         m_pHttpClient = pNet;
         m_pCB = pCB;
-        m_strUserData = strUserData;
     }
 
     virtual ~HttpObject()
@@ -27,7 +26,6 @@ public:
     bufferevent* m_pBev;
     NFIHttpClient* m_pHttpClient;
     HTTP_RESP_FUNCTOR_PTR m_pCB;
-    std::string m_strUserData;
 };
 
 
@@ -50,11 +48,9 @@ public:
     virtual bool Final();
 
     virtual bool PerformGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
-                            const std::string& strUserData,
                             const std::map<std::string, std::string>& xHeaders);
 
     virtual bool PerformPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
-                             const std::string& strUserData,
                              const std::map<std::string, std::string>& xHeaders);
 
 private:
@@ -62,7 +58,6 @@ private:
 
     bool MakeRequest(const std::string& strUri,
                      HTTP_RESP_FUNCTOR_PTR pCB,
-                     const std::string& strUserData,
                      const std::string& strPostData,
                      const std::map<std::string, std::string>& xHeaders,
                      bool bPost = false);

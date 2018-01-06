@@ -31,14 +31,12 @@ public:
 protected:
     virtual bool PerformGet(const std::string& strUri,
                             const std::map<std::string, std::string>& xHeaders,
-                            HTTP_RESP_FUNCTOR_PTR pCB,
-                            const std::string& strUserData);
+                            HTTP_RESP_FUNCTOR_PTR pCB);
 
     virtual bool PerformPost(const std::string& strUri,
                              const std::map<std::string, std::string>& xHeaders,
                              const std::string& strPostData,
-                             HTTP_RESP_FUNCTOR_PTR pCB,
-                             const std::string& strUserData);
+                             HTTP_RESP_FUNCTOR_PTR pCB);
 
 private:
     NFIHttpClient* m_pHttpClient;
