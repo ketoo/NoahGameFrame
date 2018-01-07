@@ -248,11 +248,11 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 	}
 
 	const std::string& strRelivePosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::RelivePos());
-	NFDataList xPositionList;
-	xPositionList.Split(strRelivePosition, ";");
-	for (int i = 0; i < xPositionList.GetCount(); ++i)
+	NFDataList xRelivePositionList;
+	xRelivePositionList.Split(strRelivePosition, ";");
+	for (int i = 0; i < xRelivePositionList.GetCount(); ++i)
 	{
-		const std::string& strPos = xPositionList.String(i);
+		const std::string& strPos = xRelivePositionList.String(i);
 		if (!strPos.empty())
 		{
 			NFDataList xPosition;
@@ -263,6 +263,26 @@ bool NFCSceneProcessModule::LoadSceneResource(const std::string& strSceneIDName)
 				float fPosY = lexical_cast<float>(xPosition.String(1));
 				float fPosZ = lexical_cast<float>(xPosition.String(2));
 				m_pSceneAOIModule->AddRelivePosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
+			}
+		}
+	}
+
+	const std::string& strTagPosition = m_pElementModule->GetPropertyString(strSceneIDName, NFrame::Scene::TagPos());
+	NFDataList xTagPositionList;
+	xTagPositionList.Split(strTagPosition, ";");
+	for (int i = 0; i < xTagPositionList.GetCount(); ++i)
+	{
+		const std::string& strPos = xTagPositionList.String(i);
+		if (!strPos.empty())
+		{
+			NFDataList xPosition;
+			xPosition.Split(strPos, ",");
+			if (xPosition.GetCount() == 3)
+			{
+				float fPosX = lexical_cast<float>(xPosition.String(0));
+				float fPosY = lexical_cast<float>(xPosition.String(1));
+				float fPosZ = lexical_cast<float>(xPosition.String(2));
+				m_pSceneAOIModule->AddTagPosition(nSceneID, i, NFVector3(fPosX, fPosY, fPosZ));
 			}
 		}
 	}

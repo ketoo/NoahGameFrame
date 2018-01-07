@@ -90,6 +90,14 @@ int NFCBriefSkillConsumeProcessModule::ConsumeProcess( const NFGUID& self, const
             continue;
         }
 
+		int nCurHP = m_pKernelModule->GetPropertyInt(identOther, NFrame::NPC::HP());
+		if (nCurHP <= 0)
+		{
+			damageListValue.AddInt(0);
+			damageResultList.AddInt(0);
+			continue;
+		}
+
         NF_SHARE_PTR<NFIObject> pOtherObject = m_pKernelModule->GetObject( identOther );
         if ( pOtherObject == NULL )
         {

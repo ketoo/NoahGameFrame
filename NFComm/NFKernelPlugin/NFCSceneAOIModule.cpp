@@ -141,16 +141,40 @@ bool NFCSceneAOIModule::AddRelivePosition(const int nSceneID, const int nIndex, 
 
 	return false;
 }
-NFVector3 NFCSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex)
+
+NFVector3 NFCSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->GetReliveInfo(nIndex);
+		return pSceneInfo->GetReliveInfo(nIndex, bRoll);
 	}
 
 	return NFVector3();
 }
+
+bool NFCSceneAOIModule::AddTagPosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->AddTagInfo(nIndex, vPos);
+	}
+
+	return false;
+}
+
+NFVector3 NFCSceneAOIModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->GetTagInfo(nIndex, bRoll);
+	}
+
+	return NFVector3();
+}
+
 bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mtObjectEnterCallback.push_back(cb);

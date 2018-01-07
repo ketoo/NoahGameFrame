@@ -182,7 +182,7 @@ public:
 		return mtSceneRelivePos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
 	}
 
-	NFVector3 GetReliveInfo(const int nIndex)
+	NFVector3 GetReliveInfo(const int nIndex, const bool bRoll)
 	{
 		NF_SHARE_PTR<NFVector3> vPos = mtSceneRelivePos.GetElement(nIndex);
 		if (vPos)
@@ -190,14 +190,42 @@ public:
 			return *vPos;
 		}
 
+		if (bRoll)
+		{
+			return *(mtSceneRelivePos.GetElement(0));
+		}
+
 		return NFVector3();
 	}
+
+	bool AddTagInfo(const int nIndex, const NFVector3& vPos)
+	{
+		return mtTagPos.AddElement(nIndex, NF_SHARE_PTR<NFVector3>(NF_NEW NFVector3(vPos)));
+	}
+
+	NFVector3 GetTagInfo(const int nIndex, const bool bRoll)
+	{
+		NF_SHARE_PTR<NFVector3> vPos = mtTagPos.GetElement(nIndex);
+		if (vPos)
+		{
+			return *vPos;
+		}
+
+		if (bRoll)
+		{
+			return *(mtTagPos.GetElement(0));
+		}
+
+		return NFVector3();
+	}
+
     int mnGroupIndex;
     int mnSceneID;
     int mnWidth;
 	//seedID, seedInfo
 	NFMapEx<std::string, SceneSeedResource > mtSceneResourceConfig;
 	NFMapEx<int, NFVector3 > mtSceneRelivePos;
+	NFMapEx<int, NFVector3 > mtTagPos;
 };
 
 typedef std::function<int(const NFDataList&, const NFDataList&)> OBJECT_ENTER_EVENT_FUNCTOR;
@@ -340,7 +368,9 @@ public:
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList) = 0;
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nHeight) = 0;
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
-	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex) = 0;
+	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
+	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos) = 0;
+	virtual NFVector3 GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true) = 0;
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID) = 0;
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList) = 0;
