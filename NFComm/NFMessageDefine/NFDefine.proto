@@ -515,12 +515,21 @@ enum ERankType
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//NCPTypenpc
+//NPCTypenpc
 enum ENPCType
 {
     ENPCTYPE_NORMAL	= 0;			  //
     ENPCTYPE_HERO 	= 1;              //
     ENPCTYPE_TURRET = 2;              //
+    
+};
+
+
+enum ETARGETType
+{
+    ETARGETTYPE_ENEMY	= 0;			  //
+    ETARGETTYPE_SELF 	= 1;              //
+    ETARGETTYPE_FRIEND  = 2;              //
     
 };
 

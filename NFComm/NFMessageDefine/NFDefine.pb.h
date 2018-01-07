@@ -693,6 +693,26 @@ inline bool ENPCType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ENPCType>(
     ENPCType_descriptor(), name, value);
 }
+enum ETARGETType {
+  ETARGETTYPE_ENEMY = 0,
+  ETARGETTYPE_SELF = 1,
+  ETARGETTYPE_FRIEND = 2
+};
+LIBPROTOC_EXPORT bool ETARGETType_IsValid(int value);
+const ETARGETType ETARGETType_MIN = ETARGETTYPE_ENEMY;
+const ETARGETType ETARGETType_MAX = ETARGETTYPE_FRIEND;
+const int ETARGETType_ARRAYSIZE = ETARGETType_MAX + 1;
+
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* ETARGETType_descriptor();
+inline const ::std::string& ETARGETType_Name(ETARGETType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ETARGETType_descriptor(), value);
+}
+inline bool ETARGETType_Parse(
+    const ::std::string& name, ETARGETType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ETARGETType>(
+    ETARGETType_descriptor(), name, value);
+}
 enum EPropertyType {
   EPT_STRENGTH = 1,
   EPT_AGILITY = 2,
@@ -827,6 +847,10 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ERankType>() {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ENPCType>() {
   return ::NFMsg::ENPCType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETARGETType>() {
+  return ::NFMsg::ETARGETType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EPropertyType>() {

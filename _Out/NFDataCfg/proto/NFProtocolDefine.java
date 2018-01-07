@@ -496,7 +496,7 @@ package nframe;
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String Height = "Height";// float
-		public static final String HeroType = "HeroType";// int
+		public static final String HeroStar = "HeroStar";// int
 		public static final String Icon = "Icon";// string
 		public static final String Idle = "Idle";// string
 		public static final String LastAttacker = "LastAttacker";// object
@@ -590,6 +590,7 @@ package nframe;
 		public static final String FightHero = "FightHero";// object
 		public static final String FightHeroCnfID = "FightHeroCnfID";// string
 		public static final String FightingOpponent = "FightingOpponent";// object
+		public static final String FightingStar = "FightingStar";// int
 		public static final String FirstTarget = "FirstTarget";// object
 		public static final String GMLevel = "GMLevel";// int
 		public static final String GambleDiamond = "GambleDiamond";// int
@@ -625,13 +626,10 @@ package nframe;
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
-		public static final String HeroPos1 = "HeroPos1";// vector3
 		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static final String HeroPos1Star = "HeroPos1Star";// int
-		public static final String HeroPos2 = "HeroPos2";// vector3
 		public static final String HeroPos2CnfID = "HeroPos2CnfID";// string
 		public static final String HeroPos2Star = "HeroPos2Star";// int
-		public static final String HeroPos3 = "HeroPos3";// vector3
 		public static final String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static final String HeroPos3Star = "HeroPos3Star";// int
 		public static final String HomeSceneID = "HomeSceneID";// int
@@ -663,12 +661,12 @@ package nframe;
 		public static final String OpponentDiamond = "OpponentDiamond";// int
 		public static final String OpponentGold = "OpponentGold";// int
 		public static final String OpponentHead = "OpponentHead";// string
-		public static final String OpponentHeroPos1 = "OpponentHeroPos1";// string
-		public static final String OpponentHeroPos1Star = "OpponentHeroPos1Star";// int
-		public static final String OpponentHeroPos2 = "OpponentHeroPos2";// string
-		public static final String OpponentHeroPos2Star = "OpponentHeroPos2Star";// int
-		public static final String OpponentHeroPos3 = "OpponentHeroPos3";// string
-		public static final String OpponentHeroPos3Star = "OpponentHeroPos3Star";// int
+		public static final String OpponentHero1 = "OpponentHero1";// string
+		public static final String OpponentHero1Star = "OpponentHero1Star";// int
+		public static final String OpponentHero2 = "OpponentHero2";// string
+		public static final String OpponentHero2Star = "OpponentHero2Star";// int
+		public static final String OpponentHero3 = "OpponentHero3";// string
+		public static final String OpponentHero3Star = "OpponentHero3Star";// int
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -693,6 +691,9 @@ package nframe;
 		public static final String ViewOpponent = "ViewOpponent";// object
 		public static final String WarEventTime = "WarEventTime";// int
 		public static final String WarID = "WarID";// object
+		public static final String WonCup = "WonCup";// int
+		public static final String WonDiamond = "WonDiamond";// int
+		public static final String WonGold = "WonGold";// int
 		// Record
 		public class AttackList
 		{
@@ -1040,6 +1041,7 @@ package nframe;
 		public static final String SceneName = "SceneName";// string
 		public static final String SceneShowName = "SceneShowName";// string
 		public static final String SoundList = "SoundList";// string
+		public static final String TagPos = "TagPos";// string
 		public static final String Tile = "Tile";// int
 		public static final String Type = "Type";// int
 		public static final String Width = "Width";// int

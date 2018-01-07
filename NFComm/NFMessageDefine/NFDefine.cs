@@ -1116,6 +1116,20 @@ namespace NFMsg
       ENPCTYPE_TURRET = 2
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"ETARGETType")]
+    public enum ETARGETType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_ENEMY", Value=0)]
+      ETARGETTYPE_ENEMY = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_SELF", Value=1)]
+      ETARGETTYPE_SELF = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ETARGETTYPE_FRIEND", Value=2)]
+      ETARGETTYPE_FRIEND = 2
+    }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EPropertyType")]
     public enum EPropertyType
     {

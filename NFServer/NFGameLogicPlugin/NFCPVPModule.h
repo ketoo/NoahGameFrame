@@ -74,6 +74,9 @@ protected:
 	void ResetPVPData(const NFGUID & self);
 	void RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond);
 
+	int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnNPCHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
 private:
 	NFITileModule* m_pTileModule;
 	NFIPropertyModule* m_pPropertyModule;

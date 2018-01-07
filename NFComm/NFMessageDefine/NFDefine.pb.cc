@@ -39,6 +39,7 @@ const ::google::protobuf::EnumDescriptor* EBattleType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ERankType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ENPCType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* ETARGETType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EPropertyType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGameElementType_descriptor_ = NULL;
 
@@ -70,8 +71,9 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   EShopType_descriptor_ = file->enum_type(16);
   ERankType_descriptor_ = file->enum_type(17);
   ENPCType_descriptor_ = file->enum_type(18);
-  EPropertyType_descriptor_ = file->enum_type(19);
-  EGameElementType_descriptor_ = file->enum_type(20);
+  ETARGETType_descriptor_ = file->enum_type(19);
+  EPropertyType_descriptor_ = file->enum_type(20);
+  EGameElementType_descriptor_ = file->enum_type(21);
 }
 
 namespace {
@@ -334,12 +336,14 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "ERT_PLAYER_MONEY\020\003\022\023\n\017ERT_GUILD_LEVEL\020\004\022"
     "\030\n\024ERT_GUILD_KINGSOURCE\020\005*G\n\010ENPCType\022\023\n"
     "\017ENPCTYPE_NORMAL\020\000\022\021\n\rENPCTYPE_HERO\020\001\022\023\n"
-    "\017ENPCTYPE_TURRET\020\002*H\n\rEPropertyType\022\020\n\014E"
-    "PT_STRENGTH\020\001\022\017\n\013EPT_AGILITY\020\002\022\024\n\020EPT_IN"
-    "TELLIGENCE\020\003*\207\001\n\020EGameElementType\022\025\n\021EEL"
-    "EMENTTYPE_FIRE\020\000\022\026\n\022EELEMENTTYPE_LIGHT\020\001"
-    "\022\025\n\021EELEMENTTYPE_WIND\020\002\022\024\n\020EELEMENTTYPE_"
-    "ICE\020\003\022\027\n\023EELEMENTTYPE_POISON\020\004", 9670);
+    "\017ENPCTYPE_TURRET\020\002*R\n\013ETARGETType\022\025\n\021ETA"
+    "RGETTYPE_ENEMY\020\000\022\024\n\020ETARGETTYPE_SELF\020\001\022\026"
+    "\n\022ETARGETTYPE_FRIEND\020\002*H\n\rEPropertyType\022"
+    "\020\n\014EPT_STRENGTH\020\001\022\017\n\013EPT_AGILITY\020\002\022\024\n\020EP"
+    "T_INTELLIGENCE\020\003*\207\001\n\020EGameElementType\022\025\n"
+    "\021EELEMENTTYPE_FIRE\020\000\022\026\n\022EELEMENTTYPE_LIG"
+    "HT\020\001\022\025\n\021EELEMENTTYPE_WIND\020\002\022\024\n\020EELEMENTT"
+    "YPE_ICE\020\003\022\027\n\023EELEMENTTYPE_POISON\020\004", 9754);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -906,6 +910,21 @@ const ::google::protobuf::EnumDescriptor* ENPCType_descriptor() {
   return ENPCType_descriptor_;
 }
 bool ENPCType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ETARGETType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ETARGETType_descriptor_;
+}
+bool ETARGETType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:

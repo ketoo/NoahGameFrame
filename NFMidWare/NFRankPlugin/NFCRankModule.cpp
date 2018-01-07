@@ -102,7 +102,7 @@ int NFCRankModule::RangeByIndex(const NFINT64 startIndex, const NFINT64 endIndex
             {
                 RankValue xRankValue;
                 xRankValue.id.FromString(memberScoreVec[i].first);
-                xRankValue.score = memberScoreVec[i].second;
+                xRankValue.score = (int)memberScoreVec[i].second;
                 xRankValue.index = i + startIndex;
                 vector.push_back(xRankValue);
             }
