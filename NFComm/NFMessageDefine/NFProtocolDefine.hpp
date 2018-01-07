@@ -681,6 +681,7 @@ namespace NFrame
 		static const std::string& OpponentLevel(){ static std::string x = "OpponentLevel"; return x; };// int
 		static const std::string& OpponentName(){ static std::string x = "OpponentName"; return x; };// string
 		static const std::string& PHYSICAL_GATE(){ static std::string x = "PHYSICAL_GATE"; return x; };// int
+		static const std::string& PVPType(){ static std::string x = "PVPType"; return x; };// int
 		static const std::string& PrefabPath(){ static std::string x = "PrefabPath"; return x; };// string
 		static const std::string& REFLECTDAMAGE(){ static std::string x = "REFLECTDAMAGE"; return x; };// int
 		static const std::string& RELIVE_SOUL(){ static std::string x = "RELIVE_SOUL"; return x; };// int

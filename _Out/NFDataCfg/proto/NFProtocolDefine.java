@@ -670,6 +670,7 @@ package nframe;
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
 		public static final String PHYSICAL_GATE = "PHYSICAL_GATE";// int
+		public static final String PVPType = "PVPType";// int
 		public static final String PrefabPath = "PrefabPath";// string
 		public static final String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static final String RELIVE_SOUL = "RELIVE_SOUL";// int
