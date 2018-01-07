@@ -676,6 +676,7 @@ namespace NFrame
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
+		public static readonly String PVPType = "PVPType";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static readonly String RELIVE_SOUL = "RELIVE_SOUL";// int
