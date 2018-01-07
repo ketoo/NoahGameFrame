@@ -31,7 +31,7 @@
 		<Property Id="SendBuffList" Cache="0" Desc="使用后对方获得的BUFF" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="ShowName" Cache="0" Desc="名字字符串索引" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="SkillType" Cache="0" Desc=" EST_BRIEF_SINGLE   = 0;//普通0短刃类
- EST_BRIEF_GROUP   = 1;//
+ EST_BRIEF_GROUP   = 1;//qunti
  EST_BULLET_SINGLE  = 2;//普通子弹类(不穿透)
  EST_BULLET_REBOUND  = 3;//普通子弹类穿
  EST_BULLET_BOMB   = 4;//
@@ -42,7 +42,7 @@
 		<Property Id="TargetType" Cache="0" Desc="目标类别
 0敌人
 1自己
-2队友" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+2队友(include self)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 	</Propertys>
 	<Records>
 	</Records>

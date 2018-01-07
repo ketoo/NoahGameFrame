@@ -267,40 +267,6 @@ bool NFCHeroModule::SwitchFightHero(const NFGUID & self, const NFGUID & xHeroID)
 		return false;
 	}
 
-	//save the data for opponent
-	NFVector3 vPos = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Position());
-	if (!xLastFightingHero.IsNull())
-	{
-		int nLastHeroPos = GetFightPos(self, xLastFightingHero);
-		if (nLastHeroPos == 1)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos1(), vPos);
-		}
-		else if (nLastHeroPos == 2)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos2(), vPos);
-		}
-		else if (nLastHeroPos == 3)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos3(), vPos);
-		}
-	}
-	else
-	{
-		if (nPos == 1)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos1(), vPos);
-		}
-		else if (nPos == 2)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos2(), vPos);
-		}
-		else if (nPos == 3)
-		{
-			m_pKernelModule->SetPropertyVector3(self, NFrame::Player::HeroPos3(), vPos);
-		}
-	}
-
 	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
 	if (nullptr == pHeroRecord)
 	{
