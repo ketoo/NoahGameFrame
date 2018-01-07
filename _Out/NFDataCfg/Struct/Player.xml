@@ -108,6 +108,7 @@
 		<Property Id="OpponentLevel" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentName" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="PVPType" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PrefabPath" Cache="1" Desc="预设路径" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="RELIVE_SOUL" Cache="1" Desc="转生次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
