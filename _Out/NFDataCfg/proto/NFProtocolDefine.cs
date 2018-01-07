@@ -502,7 +502,7 @@ namespace NFrame
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Height = "Height";// float
-		public static readonly String HeroType = "HeroType";// int
+		public static readonly String HeroStar = "HeroStar";// int
 		public static readonly String Icon = "Icon";// string
 		public static readonly String Idle = "Idle";// string
 		public static readonly String LastAttacker = "LastAttacker";// object
@@ -596,6 +596,7 @@ namespace NFrame
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
 		public static readonly String FightingOpponent = "FightingOpponent";// object
+		public static readonly String FightingStar = "FightingStar";// int
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
 		public static readonly String GambleDiamond = "GambleDiamond";// int
@@ -631,13 +632,10 @@ namespace NFrame
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
-		public static readonly String HeroPos1 = "HeroPos1";// vector3
 		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static readonly String HeroPos1Star = "HeroPos1Star";// int
-		public static readonly String HeroPos2 = "HeroPos2";// vector3
 		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// string
 		public static readonly String HeroPos2Star = "HeroPos2Star";// int
-		public static readonly String HeroPos3 = "HeroPos3";// vector3
 		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
 		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
@@ -669,12 +667,12 @@ namespace NFrame
 		public static readonly String OpponentDiamond = "OpponentDiamond";// int
 		public static readonly String OpponentGold = "OpponentGold";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
-		public static readonly String OpponentHeroPos1 = "OpponentHeroPos1";// string
-		public static readonly String OpponentHeroPos1Star = "OpponentHeroPos1Star";// int
-		public static readonly String OpponentHeroPos2 = "OpponentHeroPos2";// string
-		public static readonly String OpponentHeroPos2Star = "OpponentHeroPos2Star";// int
-		public static readonly String OpponentHeroPos3 = "OpponentHeroPos3";// string
-		public static readonly String OpponentHeroPos3Star = "OpponentHeroPos3Star";// int
+		public static readonly String OpponentHero1 = "OpponentHero1";// string
+		public static readonly String OpponentHero1Star = "OpponentHero1Star";// int
+		public static readonly String OpponentHero2 = "OpponentHero2";// string
+		public static readonly String OpponentHero2Star = "OpponentHero2Star";// int
+		public static readonly String OpponentHero3 = "OpponentHero3";// string
+		public static readonly String OpponentHero3Star = "OpponentHero3Star";// int
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
@@ -699,6 +697,9 @@ namespace NFrame
 		public static readonly String ViewOpponent = "ViewOpponent";// object
 		public static readonly String WarEventTime = "WarEventTime";// int
 		public static readonly String WarID = "WarID";// object
+		public static readonly String WonCup = "WonCup";// int
+		public static readonly String WonDiamond = "WonDiamond";// int
+		public static readonly String WonGold = "WonGold";// int
 		// Record
 		public class AttackList
 		{
@@ -1046,6 +1047,7 @@ namespace NFrame
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string
+		public static readonly String TagPos = "TagPos";// string
 		public static readonly String Tile = "Tile";// int
 		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int

@@ -58,27 +58,29 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
 			const int nNPCType = m_pElementModule->GetPropertyInt32(strConfigIndex, NFrame::NPC::NPCType());
 			NF_SHARE_PTR<NFIPropertyManager> pSelfPropertyManager = pSelf->GetPropertyManager();
 
-			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_NORMAL
-				|| nNPCType == NFMsg::ENPCType::ENPCTYPE_TURRET)
+			//effect data
+			//normal npc
+			NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strEffectPropertyID);
+			if (pConfigPropertyManager)
 			{
-				//normal npc
-				NF_SHARE_PTR<NFIPropertyManager> pConfigPropertyManager = m_pElementModule->GetPropertyManager(strEffectPropertyID);
-				if (pConfigPropertyManager)
+				std::string strProperName;
+				for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
 				{
-					std::string strProperName;
-					for (NFIProperty* pProperty = pConfigPropertyManager->FirstNude(strProperName); pProperty != NULL; pProperty = pConfigPropertyManager->NextNude(strProperName))
+					if (pSelfPropertyManager && pProperty->Changed()
+						&& strProperName != NFrame::IObject::ID()
+						&& strProperName != NFrame::IObject::ConfigID()
+						&& strProperName != NFrame::IObject::ClassName()
+						&& strProperName != NFrame::IObject::SceneID()
+						&& strProperName != NFrame::IObject::GroupID())
 					{
-						if (pSelfPropertyManager && pProperty->Changed()
-							&& strProperName != NFrame::IObject::ID()
-							&& strProperName != NFrame::IObject::ConfigID()
-							&& strProperName != NFrame::IObject::ClassName()
-							&& strProperName != NFrame::IObject::SceneID()
-							&& strProperName != NFrame::IObject::GroupID())
-						{
-							pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
-						}
+						pSelfPropertyManager->SetProperty(pProperty->GetKey(), pProperty->GetValue());
 					}
 				}
+			}
+
+			if (nNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
+			{
+				//star & level
 			}
         }
         else if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
