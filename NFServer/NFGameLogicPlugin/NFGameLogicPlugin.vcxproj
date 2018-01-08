@@ -104,6 +104,7 @@
     <ClInclude Include="NFCPVPModule.h" />
     <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
+    <ClInclude Include="NFCSurvivalModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -121,6 +122,7 @@
     <ClCompile Include="NFCPVPModule.cpp" />
     <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
+    <ClInclude Include="NFCSurvivalModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,6 +13,7 @@
 #include "NFCMapModule.h"
 #include "NFCCreateRoleModule.h"
 #include "NFCTileModule.h"
+#include "NFCSurvivalModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -48,10 +49,12 @@ void NFGameLogicPlugin::Install()
     REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
 	REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	REGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
+	REGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
 	UNREGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
 	UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
     UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
