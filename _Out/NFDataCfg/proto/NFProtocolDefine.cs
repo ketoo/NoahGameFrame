@@ -632,6 +632,7 @@ namespace NFrame
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
+		public static readonly String HeroLevel = "HeroLevel";// int
 		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static readonly String HeroPos1Star = "HeroPos1Star";// int
 		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// string
@@ -1019,6 +1020,14 @@ namespace NFrame
 			public const int CurrentKillCount = 1;//int
 			public const int RequireKillCount = 2;//int
 			public const int TaskID = 3;//string
+
+		}
+		public class TempItemList
+		{
+			//Class name
+			public static readonly String ThisName = "TempItemList";
+			public const int ConfigID = 0;//string
+			public const int ItemCount = 1;//int
 
 		}
 

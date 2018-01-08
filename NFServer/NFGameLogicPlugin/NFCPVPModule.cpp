@@ -555,6 +555,8 @@ void NFCPVPModule::ResetPVPData(const NFGUID & self)
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::Item1UsedCount(), 0);
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::Item2UsedCount(), 0);
 	m_pKernelModule->SetPropertyInt(self, NFrame::Player::Item3UsedCount(), 0);
+
+	m_pKernelModule->ClearRecord(self, NFrame::Player::TempItemList::ThisName());
 }
 
 void NFCPVPModule::RecordPVPData(const NFGUID & self, const int nStar, const int nGold, const int nDiamond)
