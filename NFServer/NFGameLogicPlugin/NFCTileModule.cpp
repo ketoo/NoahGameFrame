@@ -638,14 +638,8 @@ int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 {
 	//create building if the player back home
 	//create building if the player wants attack the others
-	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
-
-	NFGUID xViewOpp = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOpponent());
-	NFGUID XFightingOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightingOpponent());
-
-	if (nHomeSceneID == nSceneID
-		&& xViewOpp.IsNull()
-		&& XFightingOpponent.IsNull())
+	int nPVPType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::PVPType());
+	if (nnPVPType == NFIPVPModule::PVP_HOME)
 	{
 		SendTileData(self);
 
