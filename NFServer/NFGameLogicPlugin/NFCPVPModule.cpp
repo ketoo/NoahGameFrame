@@ -655,6 +655,9 @@ int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPrope
 	if (newVar.GetInt() <= 0)
 	{
 		const NFGUID& identAttacker = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::LastAttacker());
+		const std::string& strCnfID = m_pKernelModule->GetPropertyString(self, NFrame::NPC::ConfigID());
+		int nExp = m_pKernelModule->GetPropertyInt(self, NFrame::NPC::EXP());
+
 		if (!identAttacker.IsNull())
 		{
 			if (m_pKernelModule->GetPropertyString(identAttacker, NFrame::IObject::ClassName()) == NFrame::Player::ThisName())
@@ -665,35 +668,33 @@ int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPrope
 				int nFightingStar = m_pKernelModule->GetPropertyInt32(identAttacker, NFrame::Player::FightingStar());
 				int nCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::Cup());
 				int nOpponentCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::OpponentCup());
+				NFIPVPModule::PVP_TYPE pvpType = (NFIPVPModule::PVP_TYPE)m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::PVPType());
 
 				NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::ViewOpponent());
 				NFGUID xFightingOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::FightingOpponent());
 			
-				if (nHomeSceneID == nSceneID
-					&& xViewOpponent.IsNull()
-					&& xFightingOpponent.IsNull())
+				if (pvpType == NFIPVPModule::PVP_TYPE::PVP_INDIVIDUAL)
 				{
-					return 0;
-				}
-
-				const std::string& strCnfID = m_pKernelModule->GetPropertyString(self, NFrame::IObject::ConfigID());
-				NFMsg::ENPCType eNPCType = (NFMsg::ENPCType)(m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::NPCType()));
-				if (eNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
-				{
-					nFightingStar++;
-					m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::FightingStar(), nFightingStar);
-
-					if (nFightingStar >= 2)
+					NFMsg::ENPCType eNPCType = (NFMsg::ENPCType)(m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::NPCType()));
+					if (eNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
 					{
-						if (nCup > nOpponentCup)
+						nFightingStar++;
+						m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::FightingStar(), nFightingStar);
+
+						if (nFightingStar >= 2)
 						{
-							m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::WonCup(), 5 * nFightingStar);
-						}
-						else
-						{
-							m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::WonCup(), 3 * nFightingStar);
+							if (nCup > nOpponentCup)
+							{
+								m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::WonCup(), 5 * nFightingStar);
+							}
+							else
+							{
+								m_pKernelModule->SetPropertyInt(identAttacker, NFrame::Player::WonCup(), 3 * nFightingStar);
+							}
 						}
 					}
+
+					//add exp for hero
 				}
 			}
 		}

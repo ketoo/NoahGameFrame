@@ -59,7 +59,33 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	int nRow = pHeroRecord->FindString(NFrame::Player::PlayerHero::ConfigID, strID);
 	if (nRow >= 0)
 	{
-		return NFGUID();
+		//up star
+		NFGUID id = pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero::GUID);
+		int nStart = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
+
+		if (nStart < ECONSTDEFINE_HERO_MAX_STAR)
+		{
+			//random
+			float fHit = (ECONSTDEFINE_HERO_MAX_STAR - nStart) / (float)ECONSTDEFINE_HERO_MAX_STAR;
+			float fRandom = m_pKernelModule->Random();
+
+			if (fRandom < fHit)
+			{
+				//hit
+
+				nStart++;
+				pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::Star, nStart);
+
+
+			}
+			else
+			{
+				//badly
+			}
+
+		}
+
+		return id;
 	}
 
 	NF_SHARE_PTR<NFDataList> xRowData = pHeroRecord->GetInitData();
@@ -67,7 +93,7 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	NFGUID xHeroID = m_pKernelModule->CreateGUID();
 	xRowData->SetObject(NFrame::Player::PlayerHero::GUID, xHeroID);
 	xRowData->SetString(NFrame::Player::PlayerHero::ConfigID, strID);
-	xRowData->SetInt(NFrame::Player::PlayerHero::Activated, 0);
+	xRowData->SetInt(NFrame::Player::PlayerHero::Activated, 1);
 	xRowData->SetInt(NFrame::Player::PlayerHero::Level, 1);
 
 	if (pHeroRecord->AddRow(-1, *xRowData) < 0)
@@ -80,34 +106,10 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	return xHeroID;
 }
 
-NFGUID NFCHeroModule::ActivateHero(const NFGUID &self, const std::string &strID)
+bool NFCHeroModule::AddHeroExp(const NFGUID & self, const int64_t nExp)
 {
-	NFGUID id = AddHero(self, strID);
-	if (!id.IsNull())
-	{
-        ActivateHero(self, id);
-	}
-
-	return id;
-}
-
-bool NFCHeroModule::ActivateHero(const NFGUID &self, const NFGUID &hero)
-{
-	NF_SHARE_PTR<NFIRecord> pHeroRecord = m_pKernelModule->FindRecord(self, NFrame::Player::PlayerHero::ThisName());
-	if (nullptr == pHeroRecord)
-	{
-		return false;
-	}
-
-	int nRow = pHeroRecord->FindObject(NFrame::Player::PlayerHero::GUID, hero);
-	if (nRow < 0)
-	{
-		return false;
-	}
-
-	pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::Activated, 1);
-
-	return true;
+	NFGUID xID = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	return AddHeroExp(self, xID, nExp);
 }
 
 bool NFCHeroModule::AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp)
