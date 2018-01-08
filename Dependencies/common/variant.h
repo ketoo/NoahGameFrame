@@ -66,15 +66,25 @@ namespace mapbox
                 }
                 return *(T*)(&m_data);
             }
-            template <class T,
-            class = typename std::enable_if<Contains<typename
-                std::remove_reference<T>::type, Types...>::value>::type>
-                variant(T&& value) : m_typeIndex(type_index(typeid(T)))
+
+            template <class T, class = typename std::enable_if<Contains<typename std::remove_reference<T>::type, Types...>::value>::type>
+            variant& operator = (T &&value)
             {
-                    Helper_t::Destroy(m_typeIndex, &m_data);
-                    typedef typename std::remove_reference<T>::type U;
-                    new(m_data)U(std::forward<T>(value));
-                }
+                Helper_t::Destroy(m_typeIndex, &m_data);
+                typedef typename std::remove_reference<T>::type U;
+                new(m_data)U(std::forward<T>(value));
+                m_typeIndex = type_index(typeid(T));
+                return *this;
+            }
+            //template <class T,
+            //class = typename std::enable_if<Contains<typename
+            //    std::remove_reference<T>::type, Types...>::value>::type>
+            //    variant(T&& value) : m_typeIndex(type_index(typeid(T)))
+            //{
+            //        //Helper_t::Destroy(m_typeIndex, &m_data);
+            //        typedef typename std::remove_reference<T>::type U;
+            //        new(m_data)U(std::forward<T>(value));
+            //    }
         private:
             char m_data[MaxType<Types...>::value];
             std::type_index m_typeIndex;
