@@ -391,3 +391,286 @@ bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
     LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(), "[Log] Change log level", strLevel, __FUNCTION__, __LINE__);
     return true;
 }
+
+bool NFCLogModule::Debug(const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "%s %s %d", strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "%s", strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Info(const std::string& strLog, const  char* func, int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "%s %s %d", strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "%s", strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Warning(const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "%s %s %d", strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "%s", strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Error(const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "%s %s %d", strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "%s", strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Fatal(const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "%s %s %d", strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "%s", strLog.c_str());
+     }
+
+     return true;
+}
+
+
+bool NFCLogModule::Debug(const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "%s %s %d", stream.str().c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "%s", stream.str().c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Info(const std::ostringstream& stream, const  char* func, int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "%s %s %d", stream.str().c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "%s", stream.str().c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Warning(const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "%s %s %d", stream.str().c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "%s", stream.str().c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Error(const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "%s %s %d", stream.str().c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "%s", stream.str().c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Fatal(const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "%s %s %d", stream.str().c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "%s", stream.str().c_str());
+     }
+
+     return true;
+}
+
+
+bool NFCLogModule::Debug(const NFGUID ident, const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Info(const NFGUID ident, const std::string& strLog, const  char* func, int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Warning(const NFGUID ident, const std::string& strLog, const char* func , int line)
+{
+    if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Error(const NFGUID ident, const std::string& strLog, const char* func , int line)
+{
+     if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), strLog.c_str());
+     }
+
+     return true;
+}
+
+bool NFCLogModule::Fatal(const NFGUID ident, const std::string& strLog, const char* func , int line)
+{
+     if (line > 0)
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), strLog.c_str(), func, line);
+     }
+     else
+     {
+         Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), strLog.c_str());
+     }
+
+     return true;
+}
+
+
+bool NFCLogModule::Debug(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+    {
+        Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
+    }
+    else
+    {
+        Log(NF_LOG_LEVEL::NLL_DEBUG_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
+    }
+
+    return true;
+}
+
+bool NFCLogModule::Info(const NFGUID ident, const std::ostringstream& stream, const  char* func, int line)
+{
+    if (line > 0)
+    {
+        Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
+    }
+    else
+    {
+        Log(NF_LOG_LEVEL::NLL_INFO_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
+    }
+
+    return true;
+}
+
+bool NFCLogModule::Warning(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+    {
+        Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
+    }
+    else
+    {
+        Log(NF_LOG_LEVEL::NLL_WARING_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
+    }
+
+    return true;
+}
+
+bool NFCLogModule::Error(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+    {
+        Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
+    }
+    else
+    {
+        Log(NF_LOG_LEVEL::NLL_ERROR_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
+    }
+
+    return true;
+}
+
+bool NFCLogModule::Fatal(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+{
+    if (line > 0)
+    {
+        Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "Indent[%s] %s %s %d", ident.ToString().c_str(), stream.str().c_str(), func, line);
+    }
+    else
+    {
+        Log(NF_LOG_LEVEL::NLL_FATAL_NORMAL, "Indent[%s] %s", ident.ToString().c_str(), stream.str().c_str());
+    }
+
+    return true;
+}
