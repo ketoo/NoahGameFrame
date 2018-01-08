@@ -33,9 +33,21 @@ namespace mapbox
                 else
                     variantHelper<Args...>::Destroy(id, data);
             }
+            inline static void Copy(type_index id, void *src, void *dst)
+            {
+                if (id == type_index(typeid(T)))
+                {
+                    typedef typename std::remove_reference<T>::type U;
+                    new(dst)U();
+                    *((T*)(dst)) = *((T*)(src));
+                }
+                else
+                    variantHelper<Args...>::Copy(id, src,dst);
+            }
         };
         template<> struct variantHelper<>  {
             inline static void Destroy(type_index id, void * data) { }
+            inline static void Copy(type_index id, void * src, void *dst) { }
         };
 
         template<typename... Types>
@@ -66,6 +78,12 @@ namespace mapbox
                 }
                 return *(T*)(&m_data);
             }
+            void copy_assign(const variant& rhs)
+            {
+                Helper_t::Destroy(m_typeIndex, &m_data);
+                Helper_t::Copy(rhs.m_typeIndex, (void*)&rhs.m_data, (void*)&m_data);
+                m_typeIndex = rhs.m_typeIndex;
+            }
 
             template <class T, class = typename std::enable_if<Contains<typename std::remove_reference<T>::type, Types...>::value>::type>
             variant& operator = (T &&value)
@@ -76,15 +94,18 @@ namespace mapbox
                 m_typeIndex = type_index(typeid(T));
                 return *this;
             }
-            //template <class T,
-            //class = typename std::enable_if<Contains<typename
-            //    std::remove_reference<T>::type, Types...>::value>::type>
-            //    variant(T&& value) : m_typeIndex(type_index(typeid(T)))
+            variant& operator = (const variant &other)
+            {
+                copy_assign(other);
+                return *this;
+            }
+            //template <class T, class = typename std::enable_if<Contains<typename std::remove_reference<T>::type, Types...>::value>::type>
+            //variant(T&& value) : m_typeIndex(type_index(typeid(T)))
             //{
-            //        //Helper_t::Destroy(m_typeIndex, &m_data);
-            //        typedef typename std::remove_reference<T>::type U;
-            //        new(m_data)U(std::forward<T>(value));
-            //    }
+            //    //Helper_t::Destroy(m_typeIndex, &m_data);
+            //    typedef typename std::remove_reference<T>::type U;
+            //    new(m_data)U(std::forward<T>(value));
+            //}
         private:
             char m_data[MaxType<Types...>::value];
             std::type_index m_typeIndex;
