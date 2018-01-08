@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName      :    NFCMoveModule.h
+//    @FileName			:    NFCMoveModule.h
 //    @Author           :    LvSheng.Huang
 //    @Date             :    2013-06-11
 //    @Module           :    NFCMoveModule
