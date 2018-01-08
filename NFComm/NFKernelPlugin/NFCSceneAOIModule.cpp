@@ -275,14 +275,12 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, c
 		int nWeight = m_pKernelModule->Random(0, 100);
 		if (nWeight <= pResource->nWeight)
 		{
-			const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
-
 			NFDataList arg;
 			arg << NFrame::IObject::Position() << pResource->vSeedPos;
 			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 			arg.Append(argList);
 
-			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
+			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, NFrame::NPC::ThisName(), pResource->strConfigID, arg);
 		}
 	}
 

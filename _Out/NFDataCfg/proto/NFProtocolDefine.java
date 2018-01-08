@@ -626,6 +626,7 @@ package nframe;
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
+		public static final String HeroLevel = "HeroLevel";// int
 		public static final String HeroPos1CnfID = "HeroPos1CnfID";// string
 		public static final String HeroPos1Star = "HeroPos1Star";// int
 		public static final String HeroPos2CnfID = "HeroPos2CnfID";// string
@@ -1013,6 +1014,14 @@ package nframe;
 			public static final int CurrentKillCount = 1;//int
 			public static final int RequireKillCount = 2;//int
 			public static final int TaskID = 3;//string
+
+		}
+		public class TempItemList
+		{
+			//Class name
+			public static final String ThisName = "TempItemList";
+			public static final int ConfigID = 0;//string
+			public static final int ItemCount = 1;//int
 
 		}
 

@@ -1352,28 +1352,28 @@ void NFCGameServerNet_ServerModule::OnClientReqMoveImmuneProcess(const NFSOCK nS
 	CLIENT_MSG_PROCESS(nMsgID, msg, nLen, NFMsg::ReqAckPlayerMove)
 
 	const NFGUID& self = NFINetModule::PBToNF(xMsg.mover());
-	if (self != nPlayerID)
+	const NFGUID& xOwnerID = m_pKernelModule->GetPropertyObject(self, NFrame::NPC::AIOwnerID());
+	if (self == nPlayerID
+		|| xOwnerID == nPlayerID)
 	{
-		return;
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
+		const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
+
+		if (xMsg.target_pos_size() > 0)
+		{
+			NFMsg::Vector3 vPos = xMsg.target_pos(0);
+
+			NFVector3 v;
+			v.SetX(vPos.x());
+			v.SetY(vPos.y());
+			v.SetZ(vPos.z());
+
+			m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
+		}
+
+
+		this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 	}
-
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::SceneID());
-	const int nGroupID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::GroupID());
-
-	if (xMsg.target_pos_size() > 0)
-	{
-		NFMsg::Vector3 vPos = xMsg.target_pos(0);
-
-		NFVector3 v;
-		v.SetX(vPos.x());
-		v.SetY(vPos.y());
-		v.SetZ(vPos.z());
-
-		m_pKernelModule->SetPropertyVector3(self, NFrame::IObject::Position(), v);
-	}
-
-
-	this->SendMsgPBToGate(NFMsg::EGMI_ACK_MOVE_IMMUNE, xMsg, nSceneID, nGroupID);
 }
 
 void NFCGameServerNet_ServerModule::OnClientReqStateSyncProcess(const NFSOCK nSockIndex, const int nMsgID,
