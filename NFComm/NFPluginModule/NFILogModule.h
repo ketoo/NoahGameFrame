@@ -36,6 +36,32 @@ public:
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::string& strInfo, const std::string& strDesc, const  char* func = "", int line = 0) = 0;
     virtual bool LogNormal(const NF_LOG_LEVEL nll, const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 
+    virtual bool Debug(const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Info(const std::string& strLog, const  char* func = "", int line = 0) = 0;
+    virtual bool Warning(const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Error(const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Fatal(const std::string& strLog, const char* func = "", int line = 0) = 0;
+
+    virtual bool Debug(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Info(const std::ostringstream& stream, const  char* func = "", int line = 0) = 0;
+    virtual bool Warning(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Error(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Fatal(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+
+    virtual bool Debug(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Info(const NFGUID ident, const std::string& strLog, const  char* func = "", int line = 0) = 0;
+    virtual bool Warning(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Error(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+    virtual bool Fatal(const NFGUID ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+
+    virtual bool Debug(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Info(const NFGUID ident, const std::ostringstream& stream, const  char* func = "", int line = 0) = 0;
+    virtual bool Warning(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Error(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+    virtual bool Fatal(const NFGUID ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+
+
+
 };
 
 #endif

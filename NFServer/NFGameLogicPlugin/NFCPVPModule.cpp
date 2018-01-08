@@ -119,14 +119,11 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 		return;
 	}
 
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent(), NFGUID());
-	m_pKernelModule->SetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent(), NFGUID());
+    ResetPVPData(nPlayerID);
+
+    m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFIPVPModule::PVP_HOME);
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
-
-
-	//create the building of the oppnent
-
 }
 
 void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
@@ -470,7 +467,9 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 			m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), xViewOpponent);
 			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightingOpponent(), NFGUID());
 			m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightingStar(), 0);
-			
+
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::PVPType(), NFIPVPModule::PVP_INDIVIDUAL);
+
 			m_pSceneProcessModule->RequestEnterScene(self, nSceneID, 0, NFDataList());
 			
 			int nNoWSceneID = m_pKernelModule->GetPropertyInt(self, NFrame::Player::SceneID());
