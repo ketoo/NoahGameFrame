@@ -64,6 +64,7 @@
 		<Property Id="HeroID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
+		<Property Id="HeroLevel" Cache="1" Desc="hero等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroPos1CnfID" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="HeroPos1Star" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroPos2CnfID" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
@@ -108,7 +109,7 @@
 		<Property Id="OpponentLevel" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentName" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="PHYSICAL_GATE" Cache="0" Desc="物理免疫开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="PVPType" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="PVPType" Cache="0" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="PrefabPath" Cache="1" Desc="预设路径" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="REFLECTDAMAGE" Cache="0" Desc="反伤" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="RELIVE_SOUL" Cache="1" Desc="转生次数" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -389,6 +390,10 @@
 			<Col Type ="int"	Tag="CurrentKillCount"/><!--- 任务杀怪表-->
 			<Col Type ="int"	Tag="RequireKillCount"/>
 			<Col Type ="string"	Tag="TaskID"/>
+		</Record>
+		<Record Id="TempItemList" Cache="0"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="ConfigID"/><!--- Desc-->
+			<Col Type ="int"	Tag="ItemCount"/><!--- 普通背包-->
 		</Record>
 	</Records>
 </XML>

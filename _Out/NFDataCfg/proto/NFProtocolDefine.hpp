@@ -637,6 +637,7 @@ namespace NFrame
 		static const std::string& HeroID1(){ static std::string x = "HeroID1"; return x; };// object
 		static const std::string& HeroID2(){ static std::string x = "HeroID2"; return x; };// object
 		static const std::string& HeroID3(){ static std::string x = "HeroID3"; return x; };// object
+		static const std::string& HeroLevel(){ static std::string x = "HeroLevel"; return x; };// int
 		static const std::string& HeroPos1CnfID(){ static std::string x = "HeroPos1CnfID"; return x; };// string
 		static const std::string& HeroPos1Star(){ static std::string x = "HeroPos1Star"; return x; };// int
 		static const std::string& HeroPos2CnfID(){ static std::string x = "HeroPos2CnfID"; return x; };// string
@@ -1040,6 +1041,15 @@ namespace NFrame
 			static const int CurrentKillCount = 1;//int
 			static const int RequireKillCount = 2;//int
 			static const int TaskID = 3;//string
+
+		};
+		class TempItemList
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "TempItemList"; return x; };
+			static const int ConfigID = 0;//string
+			static const int ItemCount = 1;//int
 
 		};
 

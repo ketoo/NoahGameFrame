@@ -385,6 +385,8 @@ void NFCItemModule::OnClientPickItem(const NFSOCK nSockIndex, const int nMsgID, 
 			const std::string& strItemID = xDropItemList->GetString(nRow, NFrame::Player::DropItemList::ConfigID);
 			const int nCount = xDropItemList->GetInt(nRow, NFrame::Player::DropItemList::ItemCount);
 
+			xDropItemList->Remove(nRow);
+
 			m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
 		}
     }

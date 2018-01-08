@@ -86,20 +86,20 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 {
 	if (nCount <= 0)
 	{
-		return 0;
+		return false;
 	}
 
 	NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->GetObject( self );
 	if ( NULL == pObject )
 	{
-		return 0;
+		return false;
 	}
 
 	
 	bool bExist = m_pElementModule->ExistElement(NFrame::Item::ThisName(), strConfigName );
 	if ( !bExist )
 	{
-		return 0;
+		return false;
 	}
 
 	int nItemType = m_pElementModule->GetPropertyInt32(strConfigName, NFrame::Item::ItemType());
@@ -107,36 +107,20 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	{
 		CreateEquip(self, strConfigName);
 
-		return 0;
+		return false;
 	}
 
-	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagItemList::ThisName() );
-	if (!pRecord)
+	NF_SHARE_PTR<NFIRecord> pRecord = nullptr;
+	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFIPVPModule::PVP_HOME)
 	{
-		return 0;
-	}
-
-	NFDataList varFindResult;
-	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList::ConfigID, strConfigName, varFindResult);
-	if (nFindRowCount <= 0)
-	{
-		NF_SHARE_PTR<NFDataList> xRowData = pRecord->GetInitData();
-
-		xRowData->SetString(NFrame::Player::BagItemList::ConfigID, strConfigName);
-		xRowData->SetInt(NFrame::Player::BagItemList::ItemCount, nCount);
-		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
-
-		pRecord->AddRow(-1, *xRowData);
+		return CreateItemInNormalBag(self, strConfigName, nCount);
 	}
 	else
 	{
-		int nFindRow = varFindResult.Int32(0);
-		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::BagItemList::ItemCount);
-		int nNewCount = nOldCount + nCount;
-		pRecord->SetInt(nFindRow, NFrame::Player::BagItemList::ItemCount, nNewCount);
+		return CreateItemInTempBag(self, strConfigName, nCount);
 	}
-
-	return 0;
+	
+	return false;
 }
 
 bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
@@ -152,7 +136,6 @@ bool NFCPackModule::DeleteEquip( const NFGUID& self, const NFGUID& id )
 	{
 		return false;
 	}
-
 
 	NF_SHARE_PTR<NFIRecord> pRecord = pObject->GetRecordManager()->GetElement( NFrame::Player::BagEquipList::ThisName() );
 	if (nullptr == pRecord)
@@ -283,4 +266,65 @@ bool NFCPackModule::EnoughItem( const NFGUID& self, const std::string& strItemCo
 	}
 
     return false;
+}
+
+bool NFCPackModule::CreateItemInNormalBag(const NFGUID & self, const std::string & strConfigName, const int nCount)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
+	if (nullptr == pRecord)
+	{
+		return false;
+	}
+
+	NFDataList varFindResult;
+	int nFindRowCount = pRecord->FindString(NFrame::Player::BagItemList::ConfigID, strConfigName, varFindResult);
+	if (nFindRowCount <= 0)
+	{
+		NF_SHARE_PTR<NFDataList> xRowData = pRecord->GetInitData();
+
+		xRowData->SetString(NFrame::Player::BagItemList::ConfigID, strConfigName);
+		xRowData->SetInt(NFrame::Player::BagItemList::ItemCount, nCount);
+		xRowData->SetInt(NFrame::Player::BagItemList::Date, pPluginManager->GetNowTime());
+
+		pRecord->AddRow(-1, *xRowData);
+	}
+	else
+	{
+		int nFindRow = varFindResult.Int32(0);
+		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::BagItemList::ItemCount);
+		int nNewCount = nOldCount + nCount;
+		pRecord->SetInt(nFindRow, NFrame::Player::BagItemList::ItemCount, nNewCount);
+	}
+
+	return true;
+}
+
+bool NFCPackModule::CreateItemInTempBag(const NFGUID & self, const std::string & strConfigName, const int nCount)
+{
+	NF_SHARE_PTR<NFIRecord> pRecord = m_pKernelModule->FindRecord(self, NFrame::Player::TempItemList::ThisName());
+	if (nullptr == pRecord)
+	{
+		return false;
+	}
+
+	NFDataList varFindResult;
+	int nFindRowCount = pRecord->FindString(NFrame::Player::TempItemList::ConfigID, strConfigName, varFindResult);
+	if (nFindRowCount <= 0)
+	{
+		NF_SHARE_PTR<NFDataList> xRowData = pRecord->GetInitData();
+
+		xRowData->SetString(NFrame::Player::TempItemList::ConfigID, strConfigName);
+		xRowData->SetInt(NFrame::Player::TempItemList::ItemCount, nCount);
+
+		pRecord->AddRow(-1, *xRowData);
+	}
+	else
+	{
+		int nFindRow = varFindResult.Int32(0);
+		int nOldCount = pRecord->GetInt32(nFindRow, NFrame::Player::TempItemList::ItemCount);
+		int nNewCount = nOldCount + nCount;
+		pRecord->SetInt(nFindRow, NFrame::Player::TempItemList::ItemCount, nNewCount);
+	}
+
+	return true;
 }

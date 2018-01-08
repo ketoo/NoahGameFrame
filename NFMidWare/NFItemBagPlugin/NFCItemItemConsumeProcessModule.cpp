@@ -46,6 +46,16 @@ int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std:
 
 int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
+	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFIPVPModule::PVP_HOME)
+	{
+		return ConsumeNormalProcess(self, strItemID, targetID);
+	}
+		
+	return ConsumeTempProcess(self, strItemID, targetID);
+}
+
+int NFCItemItemConsumeProcessModule::ConsumeNormalProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID)
+{
 	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::BagItemList::ThisName());
 	if (!pBagItemList)
 	{
@@ -53,8 +63,6 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	}
 
 	const NFGUID xTargetID = targetID.Object(0);
-	const std::string strItemConfigID = targetID.String(1);
-	const int nItemCount = targetID.Int32(2);
 
 	if (xTargetID.IsNull())
 	{
@@ -62,44 +70,52 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	}
 
 	NFDataList varItemID;
-	const int nBagItemCount = pBagItemList->FindString(NFrame::Player::BagItemList::ConfigID, strItemConfigID, varItemID);
-
-	if (nBagItemCount != 1)
+	pBagItemList->FindString(NFrame::Player::BagItemList::ConfigID, strItemID, varItemID);
+	if (varItemID.GetCount() <= 0)
 	{
 		return 3;
 	}
 
 	const int nRowNum = varItemID.Int32(0);
-	NFDataList xRowData;
-	pBagItemList->QueryRow(nRowNum, xRowData);
-
-	const int nBagList_ItemCount = xRowData.Int32(NFrame::Player::BagItemList::ItemCount);
-
-	if (nItemCount > nBagList_ItemCount || nItemCount < 1)
+	if (nRowNum < 0)
 	{
 		return 4;
 	}
 
-	const int nItemType = m_pElementModule->GetPropertyInt32(strItemConfigID, NFrame::Item::ItemType());
-	const int nSubItemType = m_pElementModule->GetPropertyInt32(strItemConfigID, NFrame::Item::ItemSubType());
+	const int nItemCount = pBagItemList->GetInt(nRowNum, NFrame::Player::BagItemList::ItemCount);
+	if (nItemCount <= 0)
+	{
+		pBagItemList->Remove(nRowNum);
+		return 5;
+	}
+
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	const int nSubItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
 
 	if (nItemType != NFMsg::EItemType::EIT_ITEM)
 	{
 		return 5;
 	}
 
-	const int nAwardPropertyValue = m_pElementModule->GetPropertyInt(strItemConfigID, NFrame::Item::AwardProperty());
+	const int nAwardPropertyValue = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::AwardProperty());
 	if (nAwardPropertyValue <= 0)
 	{
 		return 6;
 	}
 
 	//reduce Bag ItemCount
-	pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nBagList_ItemCount - nItemCount);
+	if (nItemCount > 1)
+	{
+		pBagItemList->SetInt(nRowNum, NFrame::Player::BagItemList::ItemCount, nItemCount - 1);
+	}
+	else
+	{
+		pBagItemList->Remove(nRowNum);
+	}
 
 	switch (nSubItemType)
 	{
-	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:		
+	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:
 	{
 		//don't know what to do, what is shengshui?
 	}
@@ -113,7 +129,99 @@ int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const st
 	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:
 		m_pLevelModule->AddExp(self, nAwardPropertyValue * nItemCount);
 		break;
-	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:	
+	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:
+		m_pPropertyModule->AddHP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:
+		m_pPropertyModule->AddMP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_SP:
+		m_pPropertyModule->AddSP(xTargetID, nAwardPropertyValue * nItemCount);
+		break;
+
+	default:
+		break;
+	}
+
+	return 100;
+}
+
+int NFCItemItemConsumeProcessModule::ConsumeTempProcess(const NFGUID & self, const std::string & strItemID, const NFDataList & targetID)
+{
+	NF_SHARE_PTR<NFIRecord> pBagItemList = m_pKernelModule->FindRecord(self, NFrame::Player::TempItemList::ThisName());
+	if (!pBagItemList)
+	{
+		return 1;
+	}
+
+	const NFGUID xTargetID = targetID.Object(0);
+
+	if (xTargetID.IsNull())
+	{
+		return 2;
+	}
+
+	NFDataList varItemID;
+	pBagItemList->FindString(NFrame::Player::TempItemList::ConfigID, strItemID, varItemID);
+	if (varItemID.GetCount() <= 0)
+	{
+		return 3;
+	}
+
+	const int nRowNum = varItemID.Int32(0);
+	if (nRowNum < 0)
+	{
+		return 4;
+	}
+
+	const int nItemCount = pBagItemList->GetInt(nRowNum, NFrame::Player::TempItemList::ItemCount);
+	if (nItemCount <= 0)
+	{
+		pBagItemList->Remove(nRowNum);
+		return 5;
+	}
+
+	const int nItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemType());
+	const int nSubItemType = m_pElementModule->GetPropertyInt32(strItemID, NFrame::Item::ItemSubType());
+
+	if (nItemType != NFMsg::EItemType::EIT_ITEM)
+	{
+		return 5;
+	}
+
+	const int nAwardPropertyValue = m_pElementModule->GetPropertyInt(strItemID, NFrame::Item::AwardProperty());
+	if (nAwardPropertyValue <= 0)
+	{
+		return 6;
+	}
+
+	//reduce Bag ItemCount
+	if (nItemCount > 1)
+	{
+		pBagItemList->SetInt(nRowNum, NFrame::Player::TempItemList::ItemCount, nItemCount - 1);
+	}
+	else
+	{
+		pBagItemList->Remove(nRowNum);
+	}
+
+	switch (nSubItemType)
+	{
+	case NFMsg::EGameItemSubType::EGIT_ITEM_WATER:
+	{
+		//don't know what to do, what is shengshui?
+	}
+	break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_DIAMOND:
+		m_pPropertyModule->AddDiamond(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_CURRENCY:
+		m_pPropertyModule->AddGold(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_EXP:
+		m_pLevelModule->AddExp(self, nAwardPropertyValue * nItemCount);
+		break;
+	case NFMsg::EGameItemSubType::EGIT_ITEM_HP:
 		m_pPropertyModule->AddHP(xTargetID, nAwardPropertyValue * nItemCount);
 		break;
 	case NFMsg::EGameItemSubType::EGIT_ITEM_MP:
