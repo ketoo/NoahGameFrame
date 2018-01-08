@@ -38,6 +38,9 @@
     <ClInclude Include="NFCTileModule.h">
       <Filter>NFMapModule</Filter>
     </ClInclude>
+    <ClInclude Include="NFCSurvivalModule.h">
+      <Filter>NFPVPModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="NFCTileModule.cpp">
       <Filter>NFMapModule</Filter>
+    </ClCompile>
+    <ClCompile Include="NFCSurvivalModule.cpp">
+      <Filter>NFPVPModule</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

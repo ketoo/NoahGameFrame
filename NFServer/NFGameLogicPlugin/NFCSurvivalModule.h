@@ -33,14 +33,14 @@ public:
     }
     virtual ~NFCSurvivalModule() {};
 
-    virtual bool Init();
-    virtual bool Shut();
-	virtual bool ReadyExecute();
-    virtual bool Execute();
-    virtual bool AfterInit();
+	virtual bool Init();
+	virtual bool Shut();
+	virtual bool Execute();
+	virtual bool AfterInit();
 
 protected:
-    int CheckSurvivalList(const std::string& strScheduleName, const float fIntervalTime, const int nCount);
+	int CheckSurvivalList(const std::string& strScheduleName, const float fIntervalTime, const int nCount);
+
 
 private:
     int mnMinPeopleForSurvivalMode;
