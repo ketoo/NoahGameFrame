@@ -22,11 +22,11 @@ public:
         ECONSTDEFINE_HERO_MAXSTAR = 100,
 		ECONSTDEFINE_HERO_ONCELEVEEXP = 100,
 		ECONSTDEFINE_HERO_MAXFIGHT_POS = 3,
+		ECONSTDEFINE_HERO_MAX_STAR = 5,
     };
 
     virtual NFGUID AddHero(const NFGUID& self, const std::string& strID) = 0;
-	virtual NFGUID ActivateHero(const NFGUID& self, const std::string& strID) = 0;
-	virtual bool ActivateHero(const NFGUID& self, const NFGUID& hero) = 0;
+	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp) = 0;
     virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp) = 0;
 
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos) = 0;
