@@ -54,10 +54,20 @@ typedef void* BUFPTR;
 #include <sstream>
 #include <iostream>
 #include <random>
+#include <cstdint>
+#include <assert.h>
 
 #include "./Dependencies/common/optional.hpp"
 #include "./Dependencies/common/lexical_cast.hpp"
+#ifdef _MSC_VER
+#if _MSC_VER <= 1800
+#include "./Dependencies/common/variant.h"
+#else
 #include "./Dependencies/common/variant.hpp"
+#endif
+#else
+#include "./Dependencies/common/variant.hpp"
+#endif
 
 typedef void(*CoroutineYieldFunction)();
 typedef void(*CoroutineStartFunction)();
