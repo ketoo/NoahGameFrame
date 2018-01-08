@@ -39,9 +39,8 @@ public:
     virtual bool BeforeShut();
 
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
-	virtual NFGUID ActivateHero(const NFGUID &self, const std::string &strID);
-	virtual bool ActivateHero(const NFGUID &self, const NFGUID &hero);
-    virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
+	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp);
+	virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
 	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
@@ -52,7 +51,6 @@ public:
 protected:
 	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
-
 
 protected:
 	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const std::string & strCnfID);
