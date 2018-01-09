@@ -338,75 +338,10 @@ bool NFCTileModule::RemoveNPC(const NFGUID & self, const int nX, const int nY, c
 
 bool NFCTileModule::SaveTileData(const NFGUID & self)
 {
-	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
-	if (!xTileData)
-	{
-		return false;
-	}
-
-	NFMsg::AckMiningTitle xData;
-	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
-	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
-	{
-		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
-		for (; xStateData; xStateData = xStateDataMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileState* pTile = xData.add_tile();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_opr(xStateData->state);
-			}
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xTileBuildingMap = xTileData->mxTileBuilding.First();
-	for (; xTileBuildingMap; xTileBuildingMap = xTileData->mxTileBuilding.Next())
-	{
-		NF_SHARE_PTR<TileBuilding> xStateData = xTileBuildingMap->First();
-		for (; xStateData; xStateData = xTileBuildingMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileBuilding* pTile = xData.add_building();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_configid(xStateData->configID);
-				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-
-
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xTileNPCMap = xTileData->mxTileNPC.First();
-	for (; xTileNPCMap; xTileNPCMap = xTileData->mxTileNPC.Next())
-	{
-		NF_SHARE_PTR<TileNPC> xStateData = xTileNPCMap->First();
-		for (; xStateData; xStateData = xTileNPCMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileNPC* pTile = xData.add_npc();
-			if (pTile)
-			{
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_configid(xStateData->configID);
-				*pTile->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-	}
-
-	const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 	std::string strData;
-	if (xData.SerializeToString(&strData))
+	if (GetOnlinePlayerTileData(self, strData))
 	{
+		const int nSceneID = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::HomeSceneID());
 		return m_pPlayerRedisModule->SavePlayerTile(nSceneID, self, strData);
 	}
 
@@ -449,81 +384,12 @@ bool NFCTileModule::LoadTileData(const NFGUID & self, const int nSceneID)
 
 bool NFCTileModule::SendTileData(const NFGUID & self)
 {
-	NF_SHARE_PTR<TileData> xTileData = mxTileData.GetElement(self);
-	if (!xTileData)
+	std::string strData;
+	if (GetOnlinePlayerTileData(self, strData))
 	{
-		return false;
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, strData, self);
 	}
 
-	bool bNeedSend = false;
-	NFMsg::AckMiningTitle xData;
-	NF_SHARE_PTR<NFMapEx<int, TileState>> xStateDataMap = xTileData->mxTileState.First();
-	for (; xStateDataMap; xStateDataMap = xTileData->mxTileState.Next())
-	{
-		NF_SHARE_PTR<TileState> xStateData = xStateDataMap->First();
-		for (; xStateData; xStateData = xStateDataMap->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileState* pTile = xData.add_tile();
-			if (pTile)
-			{
-				bNeedSend = true;
-
-				pTile->set_x(xStateData->x);
-				pTile->set_y(xStateData->y);
-				pTile->set_opr(xStateData->state);
-			}
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileBuilding>> xStateDataBuilding = xTileData->mxTileBuilding.First();
-	for (; xStateDataBuilding; xStateDataBuilding = xTileData->mxTileBuilding.Next())
-	{
-		NF_SHARE_PTR<TileBuilding> xStateData = xStateDataBuilding->First();
-		for (; xStateData; xStateData = xStateDataBuilding->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileBuilding* pBuilding = xData.add_building();
-			if (pBuilding)
-			{
-				bNeedSend = true;
-
-				pBuilding->set_x(xStateData->x);
-				pBuilding->set_y(xStateData->y);
-				pBuilding->set_configid(xStateData->configID);
-				*pBuilding->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-	}
-
-	NF_SHARE_PTR<NFMapEx<int, TileNPC>> xStateDataNPC = xTileData->mxTileNPC.First();
-	for (; xStateDataNPC; xStateDataNPC = xTileData->mxTileNPC.Next())
-	{
-		NF_SHARE_PTR<TileNPC> xStateData = xStateDataNPC->First();
-		for (; xStateData; xStateData = xStateDataNPC->Next())
-		{
-			//pb
-			//xStateData
-			NFMsg::TileNPC* pNpc = xData.add_npc();
-			if (pNpc)
-			{
-				bNeedSend = true;
-
-				pNpc->set_x(xStateData->x);
-				pNpc->set_y(xStateData->y);
-				pNpc->set_configid(xStateData->configID);
-				*pNpc->mutable_guid() = NFINetModule::NFToPB(xStateData->ID);
-			}
-		}
-
-	}
-
-	if (bNeedSend)
-	{
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGEC_ACK_MINING_TITLE, xData, self);
-	}
 	return true;
 }
 
@@ -639,7 +505,7 @@ int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 	//create building if the player back home
 	//create building if the player wants attack the others
 	int nPVPType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::PVPType());
-	if (nnPVPType == NFIPVPModule::PVP_HOME)
+	if (nPVPType == NFIPVPModule::PVP_HOME)
 	{
 		SendTileData(self);
 
