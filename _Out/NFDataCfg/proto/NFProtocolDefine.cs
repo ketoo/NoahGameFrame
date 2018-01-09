@@ -1054,6 +1054,7 @@ namespace NFrame
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
+		public static readonly String ResPath = "ResPath";// string
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string

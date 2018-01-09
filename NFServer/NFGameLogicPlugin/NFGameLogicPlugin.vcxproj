@@ -104,6 +104,7 @@
     <ClInclude Include="NFCCommonConfigModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
+    <ClInclude Include="NFCTileMapModule.h" />
     <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
     <ClInclude Include="NFCSurvivalModule.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="NFCCommonConfigModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
+    <ClCompile Include="NFCTileMapModule.cpp" />
     <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
     <ClCompile Include="NFCSurvivalModule.cpp" />

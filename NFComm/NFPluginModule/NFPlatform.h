@@ -251,6 +251,9 @@
 #include <chrono>
 #include <functional>
 #include <assert.h>
+#include <string>
+#include <map>
+#include <iostream>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
