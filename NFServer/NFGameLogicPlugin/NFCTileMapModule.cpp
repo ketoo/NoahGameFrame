@@ -7,6 +7,10 @@
 // -------------------------------------------------------------------------
 
 #include "NFCTileMapModule.h"
+#include "Dependencies/RapidXML/rapidxml.hpp"
+#include "Dependencies/RapidXML/rapidxml_iterators.hpp"
+#include "Dependencies/RapidXML/rapidxml_print.hpp"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCTileMapModule::Init()
@@ -20,6 +24,8 @@ bool NFCTileMapModule::Init()
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
 	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pTileModule = pPluginManager->FindModule<NFITileModule>();
 	
     return true;
 }
@@ -43,7 +49,7 @@ bool NFCTileMapModule::AfterInit()
 	m_pSceneAOIModule->AddBeforeLeaveSceneGroupCallBack(this, &NFCTileMapModule::BeforeLeaveSceneGroupEvent);
 	m_pSceneAOIModule->AddAfterLeaveSceneGroupCallBack(this, &NFCTileMapModule::AfterLeaveSceneGroupEvent);
 
-	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Map::ThisName());
+	NF_SHARE_PTR<NFIClass> xLogicClass = m_pClassModule->GetElement(NFrame::Scene::ThisName());
 	if (xLogicClass)
 	{
 		const std::vector <std::string> &strIdList = xLogicClass->GetIDList();
@@ -62,11 +68,38 @@ bool NFCTileMapModule::GenerateTileMap(const NFGUID self, const NFGUID other, co
 {
 	ReleaseTileMap(self);
 
+	NF_SHARE_PTR<NFMapEx<TileKey, TileData>> xStaticTileMap = mxStaticTileData.GetElement(nSceneID);
+	if (xStaticTileMap == nullptr)
+	{
+		return false;
+	}
+
+	NF_SHARE_PTR<NFMapEx<TileKey, TileData>> xPlayerTileMap = mxPlayerTileData.GetElement(self);
+	if (xPlayerTileMap == nullptr)
+	{
+		xPlayerTileMap = NF_SHARE_PTR<NFMapEx<TileKey, TileData>>(NF_NEW NFMapEx<TileKey, TileData>());
+		mxPlayerTileData.AddElement(self, xPlayerTileMap);
+	}
+
+	NF_SHARE_PTR<TileData> xStaticTileData = xStaticTileMap->First();
+	for (xStaticTileData != nullptr; xStaticTileData != nullptr; xStaticTileData = xStaticTileMap->Next())
+	{
+		xPlayerTileMap->AddElement(TileKey(xStaticTileData->x, xStaticTileData->y), xStaticTileData);
+	}
+
+	//remove tile which the player has removed
+	std::string strTileData;
+	if (m_pTileModule->GetOnlinePlayerTileData(other, strTileData))
+	{
+
+	}
+
+	return true;
 }
 
 bool NFCTileMapModule::ReleaseTileMap(const NFGUID self)
 {
-
+	return true;
 }
 
 int NFCTileMapModule::OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
@@ -86,7 +119,7 @@ int NFCTileMapModule::BeforeEnterSceneGroupEvent(const NFGUID & self, const int 
 
 int NFCTileMapModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
-	GenerateTileMap(self, nSceneID);
+	GenerateTileMap(self, self, nSceneID);
 
 	return 0;
 }
@@ -116,11 +149,27 @@ void NFCTileMapModule::LoadStaticTileData(const std::string& strSceneIDName)
 	rapidxml::xml_node<>* pSeedFileRoot = xFileDoc.first_node();
 	for (rapidxml::xml_node<>* pSeedFileNode = pSeedFileRoot->first_node(); pSeedFileNode; pSeedFileNode = pSeedFileNode->next_sibling())
 	{
-		std::string strSeedID = pSeedFileNode->first_attribute(NFrame::IObject::ID().c_str())->value();
-		std::string strConfigID = pSeedFileNode->first_attribute(NFrame::IObject::ConfigID().c_str())->value();
-		float fSeedX = lexical_cast<float>(pSeedFileNode->first_attribute("X")->value());
-		float fSeedY = lexical_cast<float>(pSeedFileNode->first_attribute("Y")->value());
+		std::string strTileName = pSeedFileNode->first_attribute("tileType")->value();
+		int x = lexical_cast<int>(pSeedFileNode->first_attribute("X")->value());
+		int y = lexical_cast<int>(pSeedFileNode->first_attribute("Y")->value());
+		int z = lexical_cast<int>(pSeedFileNode->first_attribute("Y")->value());
 
-		//mxStaticTileData
+		NF_SHARE_PTR<NFMapEx<TileKey, TileData>> xTileMap = mxStaticTileData.GetElement(nSceneID);
+		if (xTileMap != nullptr)
+		{
+			//NFASSERT(nSceneID, "There exist scene xml file", __FILE__, __FUNCTION__);
+		}
+
+		xTileMap = NF_SHARE_PTR<NFMapEx<TileKey, TileData>>(NF_NEW NFMapEx<TileKey, TileData>());
+		mxStaticTileData.AddElement(nSceneID, xTileMap);
+
+		NF_SHARE_PTR<TileData> xTileData = xTileMap->GetElement(TileKey(x, y));
+		if (xTileData != nullptr)
+		{
+			//NFASSERT(0, "There exist no App ID", __FILE__, __FUNCTION__);
+		}
+
+		xTileData = NF_SHARE_PTR<TileData>(NF_NEW TileData(x, y, strTileName));
+		xTileMap->AddElement(TileKey(x, y), xTileData);
 	}
 }
