@@ -6,8 +6,8 @@
 //
 // -------------------------------------------------------------------------
 
-#ifndef NFI_TILE_MODULE_H
-#define NFI_TILE_MODULE_H
+#ifndef NFI_TILE_MAP_MODULE_H
+#define NFI_TILE_MAP_MODULE_H
 
 #include <iostream>
 #include "NFIModule.h"

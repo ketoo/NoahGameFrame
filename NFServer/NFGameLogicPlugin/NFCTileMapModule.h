@@ -19,6 +19,8 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
+#include "NFComm/NFPluginModule/NFITileModule.h"
 
 class NFCTileMapModule
     : public NFITileMapModule
@@ -28,7 +30,7 @@ public:
 	{
 		pPluginManager = p;
 	}
-	virtual ~NFCTileModule() {};
+	virtual ~NFCTileMapModule() {};
 
     virtual bool Init();
     virtual bool Shut();
@@ -50,23 +52,36 @@ protected:
 	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
+	int OnObjectClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var);
+	
 	void LoadStaticTileData(const std::string& strSceneIDName);
 
-
 private:
 
-	struct TilePosition
+	class TileData
 	{
+	public:
+		TileData(int nx, int ny, std::string name)
+		{
+			x = nx;
+			y = ny;
+			tileName = name;
+		}
 		int x;
 		int y;
+		std::string tileName;
 	};
 
-	NFMapEx<NFGUID, std::map<TilePosition, bool> > mxPlayerTileData;
-	NFMapEx<int, std::map<TilePosition, bool> > mxStaticTileData;
+	typedef std::pair<int, int> TileKey;
+
+	NFMapEx<NFGUID, NFMapEx<TileKey, TileData> > mxPlayerTileData;
+	NFMapEx<int, NFMapEx<TileKey, TileData> > mxStaticTileData;
 
 
 private:
+	NFITileModule* m_pTileModule;
 	NFINetModule* m_pNetModule;
+	NFIClassModule* m_pClassModule;
 	NFIBigMapRedisModule* m_pBigMapRedisModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
