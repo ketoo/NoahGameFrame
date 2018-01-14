@@ -485,10 +485,14 @@ enum ETaskType
 }
 
 //
-enum EBattleType
+enum EPVPType
 {
-	BATTLE_SINGLE        = 0; //
-	BATTLE_PVE_TEAM      = 1; //
+    PVP_HOME = 0;
+    PVP_INDIVIDUAL = 1;
+    PVP_DOTA = 2;
+    PVP_SURVIVAL = 3;
+    PVP_GUILD_WAR = 4;
+    PVP_GUILD_DUNGEON = 5;
 }
 
 enum EShopType

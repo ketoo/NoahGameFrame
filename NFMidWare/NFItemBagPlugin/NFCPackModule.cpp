@@ -111,7 +111,7 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 	}
 
 	NF_SHARE_PTR<NFIRecord> pRecord = nullptr;
-	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFIPVPModule::PVP_HOME)
+	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFMsg::EPVPType::PVP_HOME)
 	{
 		return CreateItemInNormalBag(self, strConfigName, nCount);
 	}

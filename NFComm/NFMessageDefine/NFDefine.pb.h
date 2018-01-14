@@ -609,24 +609,28 @@ inline bool ETaskType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ETaskType>(
     ETaskType_descriptor(), name, value);
 }
-enum EBattleType {
-  BATTLE_SINGLE = 0,
-  BATTLE_PVE_TEAM = 1
+enum EPVPType {
+  PVP_HOME = 0,
+  PVP_INDIVIDUAL = 1,
+  PVP_DOTA = 2,
+  PVP_SURVIVAL = 3,
+  PVP_GUILD_WAR = 4,
+  PVP_GUILD_DUNGEON = 5
 };
-LIBPROTOC_EXPORT bool EBattleType_IsValid(int value);
-const EBattleType EBattleType_MIN = BATTLE_SINGLE;
-const EBattleType EBattleType_MAX = BATTLE_PVE_TEAM;
-const int EBattleType_ARRAYSIZE = EBattleType_MAX + 1;
+LIBPROTOC_EXPORT bool EPVPType_IsValid(int value);
+const EPVPType EPVPType_MIN = PVP_HOME;
+const EPVPType EPVPType_MAX = PVP_GUILD_DUNGEON;
+const int EPVPType_ARRAYSIZE = EPVPType_MAX + 1;
 
-LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EBattleType_descriptor();
-inline const ::std::string& EBattleType_Name(EBattleType value) {
+LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EPVPType_descriptor();
+inline const ::std::string& EPVPType_Name(EPVPType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EBattleType_descriptor(), value);
+    EPVPType_descriptor(), value);
 }
-inline bool EBattleType_Parse(
-    const ::std::string& name, EBattleType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EBattleType>(
-    EBattleType_descriptor(), name, value);
+inline bool EPVPType_Parse(
+    const ::std::string& name, EPVPType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EPVPType>(
+    EPVPType_descriptor(), name, value);
 }
 enum EShopType {
   EST_BUILDING = 1,
@@ -833,8 +837,8 @@ inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::ETaskType>() {
   return ::NFMsg::ETaskType_descriptor();
 }
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EBattleType>() {
-  return ::NFMsg::EBattleType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EPVPType>() {
+  return ::NFMsg::EPVPType_descriptor();
 }
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NFMsg::EShopType>() {

@@ -505,7 +505,7 @@ int NFCTileModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nSce
 	//create building if the player back home
 	//create building if the player wants attack the others
 	int nPVPType = m_pKernelModule->GetPropertyInt32(self, NFrame::Player::PVPType());
-	if (nPVPType == NFIPVPModule::PVP_HOME)
+	if (nPVPType == NFMsg::EPVPType::PVP_HOME)
 	{
 		SendTileData(self);
 
