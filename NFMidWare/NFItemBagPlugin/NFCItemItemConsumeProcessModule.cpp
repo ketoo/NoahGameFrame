@@ -46,7 +46,7 @@ int NFCItemItemConsumeProcessModule::ConsumeLegal(const NFGUID& self, const std:
 
 int NFCItemItemConsumeProcessModule::ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID)
 {
-	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFIPVPModule::PVP_HOME)
+	if (m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType()) == NFMsg::EPVPType::PVP_HOME)
 	{
 		return ConsumeNormalProcess(self, strItemID, targetID);
 	}
