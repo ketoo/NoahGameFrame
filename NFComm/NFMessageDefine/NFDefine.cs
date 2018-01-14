@@ -1048,15 +1048,27 @@ namespace NFMsg
       TASK_KILL_SOME_MONSTER_COUNT = 9
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EBattleType")]
-    public enum EBattleType
+    [global::ProtoBuf.ProtoContract(Name=@"EPVPType")]
+    public enum EPVPType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_SINGLE", Value=0)]
-      BATTLE_SINGLE = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_HOME", Value=0)]
+      PVP_HOME = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BATTLE_PVE_TEAM", Value=1)]
-      BATTLE_PVE_TEAM = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_INDIVIDUAL", Value=1)]
+      PVP_INDIVIDUAL = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_DOTA", Value=2)]
+      PVP_DOTA = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_SURVIVAL", Value=3)]
+      PVP_SURVIVAL = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_GUILD_WAR", Value=4)]
+      PVP_GUILD_WAR = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PVP_GUILD_DUNGEON", Value=5)]
+      PVP_GUILD_DUNGEON = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EShopType")]

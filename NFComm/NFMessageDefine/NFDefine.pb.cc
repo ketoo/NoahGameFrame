@@ -35,7 +35,7 @@ const ::google::protobuf::EnumDescriptor* EDrawDropItemState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EGuildPowerType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ETaskType_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* EBattleType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* EPVPType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EShopType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ERankType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ENPCType_descriptor_ = NULL;
@@ -67,7 +67,7 @@ void protobuf_AssignDesc_NFDefine_2eproto() {
   EGuildPowerType_descriptor_ = file->enum_type(12);
   ETaskState_descriptor_ = file->enum_type(13);
   ETaskType_descriptor_ = file->enum_type(14);
-  EBattleType_descriptor_ = file->enum_type(15);
+  EPVPType_descriptor_ = file->enum_type(15);
   EShopType_descriptor_ = file->enum_type(16);
   ERankType_descriptor_ = file->enum_type(17);
   ENPCType_descriptor_ = file->enum_type(18);
@@ -327,23 +327,25 @@ void protobuf_AddDesc_NFDefine_2eproto() {
     "L_COUNT\020\004\022\026\n\022TASK_CONSUME_MONEY\020\005\022\030\n\024TAS"
     "K_CONSUME_DIAMOND\020\006\022\024\n\020TASK_ARENA_COUNT\020"
     "\007\022\033\n\027TASK_KILL_MONSTER_COUNT\020\010\022 \n\034TASK_K"
-    "ILL_SOME_MONSTER_COUNT\020\t*5\n\013EBattleType\022"
-    "\021\n\rBATTLE_SINGLE\020\000\022\023\n\017BATTLE_PVE_TEAM\020\001*"
-    "c\n\tEShopType\022\020\n\014EST_BUILDING\020\001\022\014\n\010EST_GO"
-    "LD\020\002\022\014\n\010EST_ITEM\020\003\022\r\n\tEST_EQUIP\020\005\022\013\n\007EST"
-    "_GEM\020\006\022\014\n\010EST_CARD\020\007*{\n\tERankType\022\024\n\020ERT"
-    "_PLAYER_LEVEL\020\001\022\023\n\017ERT_FIGHT_VALUE\020\002\022\024\n\020"
-    "ERT_PLAYER_MONEY\020\003\022\023\n\017ERT_GUILD_LEVEL\020\004\022"
-    "\030\n\024ERT_GUILD_KINGSOURCE\020\005*G\n\010ENPCType\022\023\n"
-    "\017ENPCTYPE_NORMAL\020\000\022\021\n\rENPCTYPE_HERO\020\001\022\023\n"
-    "\017ENPCTYPE_TURRET\020\002*R\n\013ETARGETType\022\025\n\021ETA"
-    "RGETTYPE_ENEMY\020\000\022\024\n\020ETARGETTYPE_SELF\020\001\022\026"
-    "\n\022ETARGETTYPE_FRIEND\020\002*H\n\rEPropertyType\022"
-    "\020\n\014EPT_STRENGTH\020\001\022\017\n\013EPT_AGILITY\020\002\022\024\n\020EP"
-    "T_INTELLIGENCE\020\003*\207\001\n\020EGameElementType\022\025\n"
-    "\021EELEMENTTYPE_FIRE\020\000\022\026\n\022EELEMENTTYPE_LIG"
-    "HT\020\001\022\025\n\021EELEMENTTYPE_WIND\020\002\022\024\n\020EELEMENTT"
-    "YPE_ICE\020\003\022\027\n\023EELEMENTTYPE_POISON\020\004", 9754);
+    "ILL_SOME_MONSTER_COUNT\020\t*v\n\010EPVPType\022\014\n\010"
+    "PVP_HOME\020\000\022\022\n\016PVP_INDIVIDUAL\020\001\022\014\n\010PVP_DO"
+    "TA\020\002\022\020\n\014PVP_SURVIVAL\020\003\022\021\n\rPVP_GUILD_WAR\020"
+    "\004\022\025\n\021PVP_GUILD_DUNGEON\020\005*c\n\tEShopType\022\020\n"
+    "\014EST_BUILDING\020\001\022\014\n\010EST_GOLD\020\002\022\014\n\010EST_ITE"
+    "M\020\003\022\r\n\tEST_EQUIP\020\005\022\013\n\007EST_GEM\020\006\022\014\n\010EST_C"
+    "ARD\020\007*{\n\tERankType\022\024\n\020ERT_PLAYER_LEVEL\020\001"
+    "\022\023\n\017ERT_FIGHT_VALUE\020\002\022\024\n\020ERT_PLAYER_MONE"
+    "Y\020\003\022\023\n\017ERT_GUILD_LEVEL\020\004\022\030\n\024ERT_GUILD_KI"
+    "NGSOURCE\020\005*G\n\010ENPCType\022\023\n\017ENPCTYPE_NORMA"
+    "L\020\000\022\021\n\rENPCTYPE_HERO\020\001\022\023\n\017ENPCTYPE_TURRE"
+    "T\020\002*R\n\013ETARGETType\022\025\n\021ETARGETTYPE_ENEMY\020"
+    "\000\022\024\n\020ETARGETTYPE_SELF\020\001\022\026\n\022ETARGETTYPE_F"
+    "RIEND\020\002*H\n\rEPropertyType\022\020\n\014EPT_STRENGTH"
+    "\020\001\022\017\n\013EPT_AGILITY\020\002\022\024\n\020EPT_INTELLIGENCE\020"
+    "\003*\207\001\n\020EGameElementType\022\025\n\021EELEMENTTYPE_F"
+    "IRE\020\000\022\026\n\022EELEMENTTYPE_LIGHT\020\001\022\025\n\021EELEMEN"
+    "TTYPE_WIND\020\002\022\024\n\020EELEMENTTYPE_ICE\020\003\022\027\n\023EE"
+    "LEMENTTYPE_POISON\020\004", 9819);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "NFDefine.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_NFDefine_2eproto);
@@ -856,14 +858,18 @@ bool ETaskType_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* EBattleType_descriptor() {
+const ::google::protobuf::EnumDescriptor* EPVPType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return EBattleType_descriptor_;
+  return EPVPType_descriptor_;
 }
-bool EBattleType_IsValid(int value) {
+bool EPVPType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;

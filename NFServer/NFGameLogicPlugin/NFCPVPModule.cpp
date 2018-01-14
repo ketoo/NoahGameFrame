@@ -121,7 +121,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 
     ResetPVPData(nPlayerID);
 
-    m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFIPVPModule::PVP_HOME);
+    m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_HOME);
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
 }
@@ -461,6 +461,11 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 	NFGUID xViewOpponent;
 	if (m_pPlayerRedisModule->LoadPlayerTileRandom(nSceneID, xViewOpponent, strTileData) && !xViewOpponent.IsNull())
 	{
+		if (xViewOpponent == self)
+		{
+			return false;
+		}
+
 		NFMsg::AckMiningTitle xTileData;
 		if (xTileData.ParseFromString(strTileData))
 		{
@@ -468,7 +473,7 @@ bool NFCPVPModule::SearchOpponent(const NFGUID & self)
 			m_pKernelModule->SetPropertyObject(self, NFrame::Player::FightingOpponent(), NFGUID());
 			m_pKernelModule->SetPropertyInt(self, NFrame::Player::FightingStar(), 0);
 
-			m_pKernelModule->SetPropertyInt(self, NFrame::Player::PVPType(), NFIPVPModule::PVP_INDIVIDUAL);
+			m_pKernelModule->SetPropertyInt(self, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_INDIVIDUAL);
 
 			m_pSceneProcessModule->RequestEnterScene(self, nSceneID, 0, NFDataList());
 			
@@ -670,12 +675,12 @@ int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPrope
 				int nFightingStar = m_pKernelModule->GetPropertyInt32(identAttacker, NFrame::Player::FightingStar());
 				int nCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::Cup());
 				int nOpponentCup = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::OpponentCup());
-				NFIPVPModule::PVP_TYPE pvpType = (NFIPVPModule::PVP_TYPE)m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::PVPType());
+				int pvpType = m_pKernelModule->GetPropertyInt(identAttacker, NFrame::Player::PVPType());
 
 				NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::ViewOpponent());
 				NFGUID xFightingOpponent = m_pKernelModule->GetPropertyObject(identAttacker, NFrame::Player::FightingOpponent());
 			
-				if (pvpType == NFIPVPModule::PVP_TYPE::PVP_INDIVIDUAL)
+				if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
 				{
 					NFMsg::ENPCType eNPCType = (NFMsg::ENPCType)(m_pElementModule->GetPropertyInt(strCnfID, NFrame::NPC::NPCType()));
 					if (eNPCType == NFMsg::ENPCType::ENPCTYPE_HERO)
