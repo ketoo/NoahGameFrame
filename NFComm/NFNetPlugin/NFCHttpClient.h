@@ -12,17 +12,20 @@
 class HttpObject
 {
 public:
-    HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev,  HTTP_RESP_FUNCTOR_PTR pCB)
+    HttpObject(NFIHttpClient* pNet, struct bufferevent* pBev, HTTP_RESP_FUNCTOR_PTR pCB, NFGUID id)
     {
         m_pBev = pBev;
         m_pHttpClient = pNet;
         m_pCB = pCB;
+
+		mID = id;
     }
 
     virtual ~HttpObject()
     {
     }
 
+	NFGUID mID;
     bufferevent* m_pBev;
     NFIHttpClient* m_pHttpClient;
     HTTP_RESP_FUNCTOR_PTR m_pCB;
@@ -48,19 +51,20 @@ public:
     virtual bool Final();
 
     virtual bool DoGet(const std::string& strUri, HTTP_RESP_FUNCTOR_PTR pCB,
-                            const std::map<std::string, std::string>& xHeaders);
+                            const std::map<std::string, std::string>& xHeaders, const NFGUID id = NFGUID());
 
     virtual bool DoPost(const std::string& strUri, const std::string& strPostData, HTTP_RESP_FUNCTOR_PTR pCB,
-                             const std::map<std::string, std::string>& xHeaders);
+                             const std::map<std::string, std::string>& xHeaders, const NFGUID id = NFGUID());
 
 private:
     static void OnHttpReqDone(struct evhttp_request* req, void* ctx);
 
     bool MakeRequest(const std::string& strUri,
-                     HTTP_RESP_FUNCTOR_PTR pCB,
-                     const std::string& strPostData,
-                     const std::map<std::string, std::string>& xHeaders,
-                     bool bPost = false);
+					HTTP_RESP_FUNCTOR_PTR pCB,
+                    const std::string& strPostData,
+                    const std::map<std::string, std::string>& xHeaders,
+					const bool bPost = false,
+					const NFGUID id = NFGUID());
 
 private:
     std::string m_strUserAgent;
