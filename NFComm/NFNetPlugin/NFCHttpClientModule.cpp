@@ -35,6 +35,12 @@ bool NFCHttpClientModule::Init()
     return true;
 }
 
+bool NFCHttpClientModule::AfterInit()
+{
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	return true;
+}
+
 bool NFCHttpClientModule::Execute()
 {
     m_pHttpClient->Execute();
@@ -46,6 +52,56 @@ bool NFCHttpClientModule::Shut()
     m_pHttpClient->Final();
 
     return true;
+}
+
+int NFCHttpClientModule::Post(const std::string & strUri, const std::string & strData, std::string & strResData)
+{
+	return Post(strUri, m_xDefaultHttpHeaders, strData, strResData);
+}
+
+int NFCHttpClientModule::Post(const std::string & strUri, const std::map<std::string, std::string>& xHeaders, const std::string & strData, std::string & strResData)
+{
+	HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(&NFCHttpClientModule::CallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
+
+	NFGUID id = m_pKernelModule->CreateGUID();
+	m_pHttpClient->DoPost(strUri, strData, pd, xHeaders, id);
+
+	mxRespDataMap.AddElement(id, NF_SHARE_PTR<RespData>(NF_NEW RespData()));
+
+	NF_SHARE_PTR<RespData> xRespData = mxRespDataMap.GetElement(id);
+	while (!xRespData->resp)
+	{
+		pPluginManager->YieldCo();
+	}
+
+	strResData = xRespData->strRespData;
+
+	return xRespData->state_code;
+}
+
+int NFCHttpClientModule::Get(const std::string & strUri, std::string & strResData)
+{
+	return Get(strUri, m_xDefaultHttpHeaders, strResData);
+}
+
+int NFCHttpClientModule::Get(const std::string & strUri, const std::map<std::string, std::string>& xHeaders, std::string & strResData)
+{
+	HTTP_RESP_FUNCTOR_PTR pd(new HTTP_RESP_FUNCTOR(std::bind(&NFCHttpClientModule::CallBack, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
+
+	NFGUID id = m_pKernelModule->CreateGUID();
+	m_pHttpClient->DoGet(strUri, pd, m_xDefaultHttpHeaders, id);
+
+	mxRespDataMap.AddElement(id, NF_SHARE_PTR<RespData>(NF_NEW RespData()));
+
+	NF_SHARE_PTR<RespData> xRespData = mxRespDataMap.GetElement(id);
+	while (!xRespData->resp)
+	{
+		pPluginManager->YieldCo();
+	}
+
+	strResData = xRespData->strRespData;
+
+	return xRespData->state_code;
 }
 
 bool NFCHttpClientModule::DoGet(const std::string& strUri,
@@ -62,4 +118,15 @@ bool NFCHttpClientModule::DoPost(const std::string& strUri,
 {
     return m_pHttpClient->DoPost(strUri, strPostData, pCB,
                                       xHeaders.size() == 0 ? m_xDefaultHttpHeaders : xHeaders);
+}
+
+void NFCHttpClientModule::CallBack(const NFGUID id, const int state_code, const std::string & strRespData)
+{
+	NF_SHARE_PTR<RespData> xRespData = mxRespDataMap.GetElement(id);
+	if (xRespData)
+	{
+		xRespData->resp = true;
+		xRespData->state_code = state_code;
+		xRespData->strRespData = strRespData;
+	}
 }
