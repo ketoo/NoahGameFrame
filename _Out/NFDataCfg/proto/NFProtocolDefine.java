@@ -623,6 +623,9 @@ package nframe;
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String Head = "Head";// string
+		public static final String Hero1BornPos = "Hero1BornPos";// vector3
+		public static final String Hero2BornPos = "Hero2BornPos";// vector3
+		public static final String Hero3BornPos = "Hero3BornPos";// vector3
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
@@ -663,10 +666,13 @@ package nframe;
 		public static final String OpponentGold = "OpponentGold";// int
 		public static final String OpponentHead = "OpponentHead";// string
 		public static final String OpponentHero1 = "OpponentHero1";// string
+		public static final String OpponentHero1BornPos = "OpponentHero1BornPos";// vector3
 		public static final String OpponentHero1Star = "OpponentHero1Star";// int
 		public static final String OpponentHero2 = "OpponentHero2";// string
+		public static final String OpponentHero2BornPos = "OpponentHero2BornPos";// vector3
 		public static final String OpponentHero2Star = "OpponentHero2Star";// int
 		public static final String OpponentHero3 = "OpponentHero3";// string
+		public static final String OpponentHero3BornPos = "OpponentHero3BornPos";// vector3
 		public static final String OpponentHero3Star = "OpponentHero3Star";// int
 		public static final String OpponentLevel = "OpponentLevel";// int
 		public static final String OpponentName = "OpponentName";// string
