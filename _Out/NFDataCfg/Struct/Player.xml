@@ -61,6 +61,9 @@
 		<Property Id="HP" Cache="1" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="Hero1BornPos" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="Hero2BornPos" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="Hero3BornPos" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="HeroID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
@@ -101,10 +104,13 @@
 		<Property Id="OpponentGold" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentHead" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="OpponentHero1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHero1BornPos" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="OpponentHero1Star" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentHero2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHero2BornPos" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="OpponentHero2Star" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentHero3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="OpponentHero3BornPos" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
 		<Property Id="OpponentHero3Star" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentLevel" Cache="1" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="OpponentName" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />

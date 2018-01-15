@@ -629,6 +629,9 @@ namespace NFrame
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Head = "Head";// string
+		public static readonly String Hero1BornPos = "Hero1BornPos";// vector3
+		public static readonly String Hero2BornPos = "Hero2BornPos";// vector3
+		public static readonly String Hero3BornPos = "Hero3BornPos";// vector3
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
@@ -669,10 +672,13 @@ namespace NFrame
 		public static readonly String OpponentGold = "OpponentGold";// int
 		public static readonly String OpponentHead = "OpponentHead";// string
 		public static readonly String OpponentHero1 = "OpponentHero1";// string
+		public static readonly String OpponentHero1BornPos = "OpponentHero1BornPos";// vector3
 		public static readonly String OpponentHero1Star = "OpponentHero1Star";// int
 		public static readonly String OpponentHero2 = "OpponentHero2";// string
+		public static readonly String OpponentHero2BornPos = "OpponentHero2BornPos";// vector3
 		public static readonly String OpponentHero2Star = "OpponentHero2Star";// int
 		public static readonly String OpponentHero3 = "OpponentHero3";// string
+		public static readonly String OpponentHero3BornPos = "OpponentHero3BornPos";// vector3
 		public static readonly String OpponentHero3Star = "OpponentHero3Star";// int
 		public static readonly String OpponentLevel = "OpponentLevel";// int
 		public static readonly String OpponentName = "OpponentName";// string

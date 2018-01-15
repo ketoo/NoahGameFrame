@@ -413,6 +413,7 @@ enum EGameItemSubType
 	EGIT_ITEM_MP				= 5;	//
 	EGIT_ITEM_SP				= 6;	//
 	EGIT_ITEM_PACK				= 7;	//
+	EGIT_ITEM_MEMORY_POS		= 8;	//
 };
 
 enum EGameCardSubType
