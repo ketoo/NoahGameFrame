@@ -400,6 +400,21 @@ bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& oppone
 		m_pKernelModule->SetPropertyString(self, NFrame::Player::OpponentHero3(), strHero3CnfID);
 		m_pKernelModule->SetPropertyInt(self, NFrame::Player::OpponentHero3Star(), nHero3Star);
 
+		NFVector3 xHeroBornPos1 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+		NFVector3 xHeroBornPos2 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+		NFVector3 xHeroBornPos3 = m_pKernelModule->GetPropertyVector3(self, NFrame::Player::Hero1BornPos());
+		if (!xHeroBornPos1.IsZero())
+		{
+			xHeroPos1 = xHeroBornPos1;
+		}
+		if (!xHeroBornPos2.IsZero())
+		{
+			xHeroPos2 = xHeroBornPos2;
+		}
+		if (!xHeroBornPos3.IsZero())
+		{
+			xHeroPos3 = xHeroBornPos3;
+		}
 		//create building and hero
 		NFDataList xHeroData1;
 		xHeroData1.AddString(NFrame::NPC::Position());
