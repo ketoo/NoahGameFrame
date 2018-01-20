@@ -61,20 +61,20 @@ NFGUID NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 	{
 		//up star
 		NFGUID id = pHeroRecord->GetObject(nRow, NFrame::Player::PlayerHero::GUID);
-		int nStart = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
+		int nNowStar = pHeroRecord->GetInt(nRow, NFrame::Player::PlayerHero::Star);
 
-		if (nStart < ECONSTDEFINE_HERO_MAX_STAR)
+		if (nNowStar < ECONSTDEFINE_HERO_MAX_STAR)
 		{
 			//random
-			float fHit = (ECONSTDEFINE_HERO_MAX_STAR - nStart) / (float)ECONSTDEFINE_HERO_MAX_STAR;
+			float fHit = (ECONSTDEFINE_HERO_MAX_STAR - nNowStar) / (float)ECONSTDEFINE_HERO_MAX_STAR;
 			float fRandom = m_pKernelModule->Random();
 
 			if (fRandom < fHit)
 			{
 				//hit
 
-				nStart++;
-				pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::Star, nStart);
+				nNowStar++;
+				pHeroRecord->SetInt(nRow, NFrame::Player::PlayerHero::Star, nNowStar);
 
 
 			}
