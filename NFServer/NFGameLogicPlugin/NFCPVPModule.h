@@ -24,6 +24,8 @@
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFICommonRedisModule.h"
 #include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCPVPModule
     : public NFIPVPModule
@@ -67,6 +69,7 @@ protected:
 	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
 
 protected:
+	int OnDeadSwapHeroHeart(const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 
 	bool ProcessOpponentData(const NFGUID & self, const NFGUID& opponent);
 	bool SearchOpponent(const NFGUID & self);
@@ -77,8 +80,15 @@ protected:
 	int OnNPCClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnNPCHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
+	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPlayerHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
+	void EndTheBattle(const NFGUID& self);
 private:
+	
+	NFIScheduleModule* m_pScheduleModule;
 	NFITileModule* m_pTileModule;
+	NFIHeroModule* m_pHeroModule;
 	NFIPropertyModule* m_pPropertyModule;
 	NFIClassModule* m_pClassModule;
 	NFIElementModule* m_pElementModule;

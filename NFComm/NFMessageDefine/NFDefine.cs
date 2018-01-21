@@ -321,6 +321,9 @@ namespace NFMsg
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_ENTER_GAME_FINISH", Value=160)]
       EGMI_ACK_ENTER_GAME_FINISH = 160,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"EGMI_REQ_ACK_RELIVE", Value=180)]
+      EGMI_REQ_ACK_RELIVE = 180,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"EGMI_ACK_OBJECT_ENTRY", Value=200)]
       EGMI_ACK_OBJECT_ENTRY = 200,
             
@@ -914,7 +917,10 @@ namespace NFMsg
       EGIT_ITEM_SP = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_PACK", Value=7)]
-      EGIT_ITEM_PACK = 7
+      EGIT_ITEM_PACK = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EGIT_ITEM_MEMORY_POS", Value=8)]
+      EGIT_ITEM_MEMORY_POS = 8
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGameCardSubType")]

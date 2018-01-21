@@ -198,6 +198,12 @@ message ReqEndBattle
 {
 }
 
+//EGMI_REQ_ACK_RELIVE							= 180;			//
+message ReqAckRelive
+{
+	required int32	diamond 				= 1;
+}
+
 //EGMI_ACK_END_OPPNENT
 message AckEndBattle
 {

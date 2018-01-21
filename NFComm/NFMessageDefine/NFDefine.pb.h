@@ -167,6 +167,7 @@ enum EGameMsgID {
   EGMI_ACK_SWAP_HOME_SCENE = 158,
   EGMI_REQ_ENTER_GAME_FINISH = 159,
   EGMI_ACK_ENTER_GAME_FINISH = 160,
+  EGMI_REQ_ACK_RELIVE = 180,
   EGMI_ACK_OBJECT_ENTRY = 200,
   EGMI_ACK_OBJECT_LEAVE = 201,
   EGMI_ACK_OBJECT_PROPERTY_ENTRY = 202,
@@ -441,11 +442,12 @@ enum EGameItemSubType {
   EGIT_ITEM_HP = 4,
   EGIT_ITEM_MP = 5,
   EGIT_ITEM_SP = 6,
-  EGIT_ITEM_PACK = 7
+  EGIT_ITEM_PACK = 7,
+  EGIT_ITEM_MEMORY_POS = 8
 };
 LIBPROTOC_EXPORT bool EGameItemSubType_IsValid(int value);
 const EGameItemSubType EGameItemSubType_MIN = EGIT_ITEM_WATER;
-const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_PACK;
+const EGameItemSubType EGameItemSubType_MAX = EGIT_ITEM_MEMORY_POS;
 const int EGameItemSubType_ARRAYSIZE = EGameItemSubType_MAX + 1;
 
 LIBPROTOC_EXPORT const ::google::protobuf::EnumDescriptor* EGameItemSubType_descriptor();

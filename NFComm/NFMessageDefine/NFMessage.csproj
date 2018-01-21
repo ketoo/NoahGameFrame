@@ -51,7 +51,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\..\GoogleMap\Server\NFComm\NFMessageDefine\CoreOnly\ios\protobuf-net.dll</HintPath>
+      <HintPath>CoreOnly\ios\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
