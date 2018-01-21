@@ -16,22 +16,6 @@
 bool NFCPVPModule::Init()
 {
 	
-	m_pTileModule = pPluginManager->FindModule<NFITileModule>();
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
-	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
-	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
-	
-
     return true;
 }
 
@@ -49,9 +33,28 @@ bool NFCPVPModule::Execute()
 
 bool NFCPVPModule::AfterInit()
 {
+	m_pTileModule = pPluginManager->FindModule<NFITileModule>();
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
+	m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
+	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+
+
 	FindAllTileScene();
 
 	m_pKernelModule->AddClassCallBack(NFrame::NPC::ThisName(), this, &NFCPVPModule::OnNPCClassEvent);
+	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCPVPModule::OnPlayerClassEvent);
 
 	m_pSceneAOIModule->AddEnterSceneConditionCallBack(this, &NFCPVPModule::EnterSceneConditionEvent);
 
@@ -81,6 +84,11 @@ void NFCPVPModule::OnReqSearchOpponentProcess(const NFSOCK nSockIndex, const int
                                               const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqSearchOppnent);
+	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
+	if (pvpType != NFMsg::EPVPType::PVP_HOME)
+	{
+		//return;
+	}
 
 	ResetPVPData(nPlayerID);
 
@@ -108,7 +116,12 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckHomeScene);
 	int nHomeSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::HomeSceneID());
 	int nSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::SceneID());
-
+	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
+	
+	//if (pvpType != NFMsg::EPVPType::PVP_HOME)
+	{
+		//return;
+	}
 	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
 	NFGUID xFightingOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent());
 
@@ -130,6 +143,11 @@ void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const i
 												const uint32_t nLen)
 {
 	CLIENT_MSG_PROCESS( nMsgID, msg, nLen, NFMsg::ReqAckStartBattle);
+	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
+	if (pvpType == NFMsg::EPVPType::PVP_HOME)
+	{
+		return;
+	}
 
 	NFGUID xWarGUID = m_pKernelModule->CreateGUID();
 	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
@@ -167,64 +185,11 @@ void NFCPVPModule::OnReqEndPVPOpponentProcess(const NFSOCK nSockIndex, const int
 
 	//tell client the end information
 	//set oppnent 0
-	int64_t nGambleGold = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::OpponentGold());
-	int64_t nGambleDiamond = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::OpponentDiamond());
-	int64_t nLevel = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::OpponentLevel());
-	int64_t nFightingStar = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::FightingStar());
-	int64_t nWonGold = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::WonGold());
-	int64_t nWonDiamond = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::WonDiamond());
-	int64_t nWonCup = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::WonCup());
-	int64_t nCup = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::Cup());
-	
-
-	bool bWon = false;
-	if (nFightingStar >= 2)
+	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
+	if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
 	{
-		bWon = true;
+		EndTheBattle(nPlayerID);
 	}
-	
-	if(bWon)
-	{
-		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::Cup(), nWonCup + nCup);
-	}
-
-	int nExp = nLevel * 100;
-	m_pPropertyModule->AddGold(nPlayerID, nWonGold);
-	m_pPropertyModule->AddDiamond(nPlayerID, nWonDiamond);
-	m_pLevelModule->AddExp(nPlayerID, nExp);
-
-	NFMsg::AckEndBattle xReqAckEndBattle;
-	if (bWon)
-	{
-		xReqAckEndBattle.set_win(1);
-		xReqAckEndBattle.set_star(nFightingStar);
-		xReqAckEndBattle.set_exp(nExp);
-
-		xReqAckEndBattle.set_gold(nWonGold);
-		xReqAckEndBattle.set_diamond(nWonDiamond);
-
-		//how to reduce the money for that people who lose the game? maybe that guy onlien maybe not.
-	}
-	else
-	{
-		//m_pPropertyModule->AddGold(nPlayerID, -nWinGold);
-		//m_pPropertyModule->AddDiamond(nPlayerID, -nWinDiamond);
-
-		xReqAckEndBattle.set_win(0);
-		xReqAckEndBattle.set_star(nFightingStar);
-		xReqAckEndBattle.set_exp(nExp);
-
-		xReqAckEndBattle.set_gold(-nWonGold);
-		xReqAckEndBattle.set_diamond(-nWonDiamond);
-
-		//how to increase the money for that people who won the game? maybe that guy onlien maybe not.
-	}
-
-	
-	RecordPVPData(nPlayerID, nFightingStar, nWonGold, nWonDiamond);
-
-
-	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, nPlayerID);
 
 }
 
@@ -311,6 +276,7 @@ int NFCPVPModule::AfterEnterSceneGroupEvent(const NFGUID & self, const int nScen
 	//create building if the player back home
 	//create building if the player wants attack the others
 
+	ResetPVPData(self);
 
 	return 0;
 }
@@ -323,6 +289,40 @@ int NFCPVPModule::BeforeLeaveSceneGroupEvent(const NFGUID & self, const int nSce
 int NFCPVPModule::AfterLeaveSceneGroupEvent(const NFGUID & self, const int nSceneID, const int nGroupID, const int nType, const NFDataList & argList)
 {
 	return 0;
+}
+
+int NFCPVPModule::OnDeadSwapHeroHeart(const NFGUID & self, const std::string & strHeartBeat, const float fTime, const int nCount)
+{
+	NFGUID xFightingHero = m_pKernelModule->GetPropertyObject(self, NFrame::Player::FightHero());
+	NFGUID xHero1 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID1());
+	NFGUID xHero2 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID2());
+	NFGUID xHero3 = m_pKernelModule->GetPropertyObject(self, NFrame::Player::HeroID3());
+
+	int nHeroHP1 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero1HP());
+	int nHeroHP2 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero2HP());
+	int nHeroHP3 = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Hero3HP());
+
+	if (nHeroHP1 <= 0 && nHeroHP2 <= 0 && nHeroHP3 <= 0)
+	{
+		//all dead, end the battle
+		EndTheBattle(self);
+
+		return 0;
+	}
+
+	if (nHeroHP1 > 0)
+	{
+		m_pHeroModule->SwitchFightHero(self, xHero1);
+	}
+	else if (nHeroHP2 > 0)
+	{
+		m_pHeroModule->SwitchFightHero(self, xHero2);
+	}
+	else if (nHeroHP3 > 0)
+	{
+		m_pHeroModule->SwitchFightHero(self, xHero3);
+	}
+	//swap hero
 }
 
 bool NFCPVPModule::ProcessOpponentData(const NFGUID & self, const NFGUID& opponent)
@@ -723,6 +723,98 @@ int NFCPVPModule::OnNPCHPEvent(const NFGUID & self, const std::string & strPrope
 	}
 
 	return 0;
+}
+
+int NFCPVPModule::OnPlayerClassEvent(const NFGUID & self, const std::string & strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList & var)
+{
+	if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
+	{
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Hero1HP(), this, &NFCPVPModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Hero2HP(), this, &NFCPVPModule::OnPlayerHPEvent);
+		m_pKernelModule->AddPropertyCallBack(self, NFrame::Player::Hero3HP(), this, &NFCPVPModule::OnPlayerHPEvent);
+	}
+
+	return 0;
+}
+
+int NFCPVPModule::OnPlayerHPEvent(const NFGUID & self, const std::string & strPropertyName, const NFData & oldVar, const NFData & newVar)
+{
+	//is pvp
+	int pvpType = m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
+	if (pvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
+	{
+		if (newVar.GetInt() <= 0)
+		{
+			m_pScheduleModule->AddSchedule(self, "NFCPVPModule::OnDeadSwapHeroHeart", this, &NFCPVPModule::OnDeadSwapHeroHeart, 5.0f, 1);
+		}
+	}
+
+	return 0;
+}
+
+void NFCPVPModule::EndTheBattle(const NFGUID & self)
+{
+	int64_t nGambleGold = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentGold());
+	int64_t nGambleDiamond = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentDiamond());
+	int64_t nLevel = m_pKernelModule->GetPropertyInt(self, NFrame::Player::OpponentLevel());
+	int64_t nFightingStar = m_pKernelModule->GetPropertyInt(self, NFrame::Player::FightingStar());
+	int64_t nWonGold = m_pKernelModule->GetPropertyInt(self, NFrame::Player::WonGold());
+	int64_t nWonDiamond = m_pKernelModule->GetPropertyInt(self, NFrame::Player::WonDiamond());
+	int64_t nWonCup = m_pKernelModule->GetPropertyInt(self, NFrame::Player::WonCup());
+	int64_t nCup = m_pKernelModule->GetPropertyInt(self, NFrame::Player::Cup());
+
+
+	bool bWon = false;
+	if (nFightingStar >= 2)
+	{
+		bWon = true;
+	}
+
+	if (bWon)
+	{
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::Cup(), nWonCup + nCup);
+	}
+
+	int nExp = nLevel * 100;
+	m_pPropertyModule->AddGold(self, nWonGold);
+	m_pPropertyModule->AddDiamond(self, nWonDiamond);
+	m_pLevelModule->AddExp(self, nExp);
+
+	NFMsg::AckEndBattle xReqAckEndBattle;
+	if (bWon)
+	{
+		xReqAckEndBattle.set_win(1);
+		xReqAckEndBattle.set_star(nFightingStar);
+		xReqAckEndBattle.set_exp(nExp);
+
+		xReqAckEndBattle.set_gold(nWonGold);
+		xReqAckEndBattle.set_diamond(nWonDiamond);
+
+		//how to reduce the money for that people who lose the game? maybe that guy onlien maybe not.
+	}
+	else
+	{
+		//m_pPropertyModule->AddGold(nPlayerID, -nWinGold);
+		//m_pPropertyModule->AddDiamond(nPlayerID, -nWinDiamond);
+
+		xReqAckEndBattle.set_win(0);
+		xReqAckEndBattle.set_star(nFightingStar);
+		xReqAckEndBattle.set_exp(nExp);
+
+		xReqAckEndBattle.set_gold(-nWonGold);
+		xReqAckEndBattle.set_diamond(-nWonDiamond);
+
+		//how to increase the money for that people who won the game? maybe that guy onlien maybe not.
+	}
+
+
+	RecordPVPData(self, nFightingStar, nWonGold, nWonDiamond);
+
+
+	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, self);
+
+	//ResetPVPData(self);
+	m_pKernelModule->SetPropertyInt(self, NFrame::Player::PVPType(), 0);
 }
 
 int NFCPVPModule::RandomTileScene()

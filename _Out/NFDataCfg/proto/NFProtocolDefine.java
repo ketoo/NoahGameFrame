@@ -85,6 +85,7 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
+		public static final String ATK_DARK = "ATK_DARK";// int
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
 		public static final String ATK_LIGHT = "ATK_LIGHT";// int
@@ -94,13 +95,12 @@ package nframe;
 		public static final String ATK_WIND = "ATK_WIND";// int
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
-		public static final String DEF_FIRE = "DEF_FIRE";// int
+		public static final String DEF_DARK = "DEF_DARK";// int
 		public static final String DEF_ICE = "DEF_ICE";// int
 		public static final String DEF_LIGHT = "DEF_LIGHT";// int
 		public static final String DEF_POISON = "DEF_POISON";// int
 		public static final String DEF_VALUE = "DEF_VALUE";// int
 		public static final String DEF_WIND = "DEF_WIND";// int
-		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String HP = "HP";// int
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String MAGIC_GATE = "MAGIC_GATE";// int
@@ -562,6 +562,7 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Property
+		public static final String ATK_DARK = "ATK_DARK";// int
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
 		public static final String ATK_LIGHT = "ATK_LIGHT";// int
@@ -569,20 +570,19 @@ package nframe;
 		public static final String ATK_PVP = "ATK_PVP";// int
 		public static final String ATK_SPEED = "ATK_SPEED";// int
 		public static final String ATK_VALUE = "ATK_VALUE";// int
-		public static final String ATK_WIND = "ATK_WIND";// int
 		public static final String Account = "Account";// string
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
 		public static final String Camp = "Camp";// int
 		public static final String ConnectKey = "ConnectKey";// string
 		public static final String Cup = "Cup";// int
+		public static final String DEF_DARK = "DEF_DARK";// int
 		public static final String DEF_FIRE = "DEF_FIRE";// int
 		public static final String DEF_ICE = "DEF_ICE";// int
 		public static final String DEF_LIGHT = "DEF_LIGHT";// int
 		public static final String DEF_POISON = "DEF_POISON";// int
 		public static final String DEF_PVP = "DEF_PVP";// int
 		public static final String DEF_VALUE = "DEF_VALUE";// int
-		public static final String DEF_WIND = "DEF_WIND";// int
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
@@ -623,8 +623,11 @@ package nframe;
 		public static final String HPREGEN = "HPREGEN";// int
 		public static final String Head = "Head";// string
 		public static final String Hero1BornPos = "Hero1BornPos";// vector3
+		public static final String Hero1HP = "Hero1HP";// int
 		public static final String Hero2BornPos = "Hero2BornPos";// vector3
+		public static final String Hero2HP = "Hero2HP";// int
 		public static final String Hero3BornPos = "Hero3BornPos";// vector3
+		public static final String Hero3HP = "Hero3HP";// int
 		public static final String HeroID1 = "HeroID1";// object
 		public static final String HeroID2 = "HeroID2";// object
 		public static final String HeroID3 = "HeroID3";// object
@@ -881,20 +884,22 @@ package nframe;
 			public static final int ATK_SPEED = 12;//int
 			public static final int ATK_FIRE = 13;//int
 			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
+			public static final int ATK_DARK = 15;//int
+			public static final int ATK_WIND = 16;//int
+			public static final int ATK_ICE = 17;//int
+			public static final int ATK_POISON = 18;//int
+			public static final int DEF_FIRE = 19;//int
+			public static final int DEF_LIGHT = 20;//int
+			public static final int DEF_DARK = 21;//int
+			public static final int DEF_WIND = 22;//int
+			public static final int DEF_ICE = 23;//int
+			public static final int DEF_POISON = 24;//int
+			public static final int DIZZY_GATE = 25;//int
+			public static final int MOVE_GATE = 26;//int
+			public static final int SKILL_GATE = 27;//int
+			public static final int PHYSICAL_GATE = 28;//int
+			public static final int MAGIC_GATE = 29;//int
+			public static final int BUFF_GATE = 30;//int
 
 		}
 		public class DropItemList
@@ -974,20 +979,22 @@ package nframe;
 			public static final int ATK_SPEED = 12;//int
 			public static final int ATK_FIRE = 13;//int
 			public static final int ATK_LIGHT = 14;//int
-			public static final int ATK_WIND = 15;//int
-			public static final int ATK_ICE = 16;//int
-			public static final int ATK_POISON = 17;//int
-			public static final int DEF_FIRE = 18;//int
-			public static final int DEF_LIGHT = 19;//int
-			public static final int DEF_WIND = 20;//int
-			public static final int DEF_ICE = 21;//int
-			public static final int DEF_POISON = 22;//int
-			public static final int DIZZY_GATE = 23;//int
-			public static final int MOVE_GATE = 24;//int
-			public static final int SKILL_GATE = 25;//int
-			public static final int PHYSICAL_GATE = 26;//int
-			public static final int MAGIC_GATE = 27;//int
-			public static final int BUFF_GATE = 28;//int
+			public static final int ATK_DARK = 15;//int
+			public static final int ATK_WIND = 16;//int
+			public static final int ATK_ICE = 17;//int
+			public static final int ATK_POISON = 18;//int
+			public static final int DEF_FIRE = 19;//int
+			public static final int DEF_LIGHT = 20;//int
+			public static final int DEF_DARK = 21;//int
+			public static final int DEF_WIND = 22;//int
+			public static final int DEF_ICE = 23;//int
+			public static final int DEF_POISON = 24;//int
+			public static final int DIZZY_GATE = 25;//int
+			public static final int MOVE_GATE = 26;//int
+			public static final int SKILL_GATE = 27;//int
+			public static final int PHYSICAL_GATE = 28;//int
+			public static final int MAGIC_GATE = 29;//int
+			public static final int BUFF_GATE = 30;//int
 
 		}
 		public class PlayerHero
@@ -999,7 +1006,12 @@ package nframe;
 			public static final int Activated = 2;//int
 			public static final int Level = 3;//int
 			public static final int Exp = 4;//int
-			public static final int Star = 5;//int
+			public static final int Star = 6;//int
+			public static final int Fire_Talent = 7;//int
+			public static final int Light_Talent = 8;//int
+			public static final int Wind_Talent = 9;//int
+			public static final int Poison_Talent = 10;//int
+			public static final int Dark_Talent = 11;//int
 
 		}
 		public class TaskList

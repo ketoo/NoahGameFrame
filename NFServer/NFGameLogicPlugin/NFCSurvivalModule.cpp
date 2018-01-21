@@ -10,18 +10,6 @@
 
 bool NFCSurvivalModule::Init()
 {
-	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
-	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
-	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
-	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
-	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
-	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
-	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
-	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pRankModule = pPluginManager->FindModule<NFIRankModule>();
 
 	mnMinPeopleForSurvivalMode = 50;
 
@@ -40,7 +28,22 @@ bool NFCSurvivalModule::Execute()
 
 bool NFCSurvivalModule::AfterInit()
 {
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
+	m_pPlayerRedisModule = pPluginManager->FindModule<NFIPlayerRedisModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	m_pNetModule = pPluginManager->FindModule<NFINetModule>();
+	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
+	m_pNoSqlModule = pPluginManager->FindModule<NFINoSqlModule>();
+	m_pSceneAOIModule = pPluginManager->FindModule<NFISceneAOIModule>();
+	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
+	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pRankModule = pPluginManager->FindModule<NFIRankModule>();
+
+
 	m_pScheduleModule->AddSchedule("CheckSurvivalList", this, &NFCSurvivalModule::CheckSurvivalList, 10, -1);
+	
 	return true;
 }
 

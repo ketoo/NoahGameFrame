@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Propertys>
+		<Property Id="ATK_DARK" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_FIRE" Cache="0" Desc="火" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_ICE" Cache="0" Desc="冰" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_LIGHT" Cache="0" Desc="雷电" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -8,20 +9,19 @@
 		<Property Id="ATK_PVP" Cache="1" Desc="PVP攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_SPEED" Cache="0" Desc="攻击速度默认10000" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_VALUE" Cache="0" Desc="物理攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="ATK_WIND" Cache="0" Desc="土" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="BUFF_GATE" Cache="0" Desc="BUFF免疫开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="CRITICAL" Cache="0" Desc="暴击" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Camp" Cache="1" Desc="阵营" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ConnectKey" Cache="1" Desc="玩家连接服务器的KEY" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Cup" Cache="1" Desc="Cup" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_DARK" Cache="0" Desc="抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_FIRE" Cache="0" Desc="火抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_ICE" Cache="0" Desc="冰抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_LIGHT" Cache="0" Desc="雷电抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_POISON" Cache="0" Desc="毒抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_PVP" Cache="1" Desc="PVP防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="DEF_WIND" Cache="0" Desc="土抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -62,8 +62,11 @@
 		<Property Id="HPREGEN" Cache="0" Desc="生命值回复" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Head" Cache="1" Desc="headicon--guild" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="Hero1BornPos" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="Hero1HP" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Hero2BornPos" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="Hero2HP" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Hero3BornPos" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="vector3" Upload="0" />
+		<Property Id="Hero3HP" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="HeroID1" Cache="1" Desc="Hero1" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID2" Cache="1" Desc="Hero2" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
 		<Property Id="HeroID3" Cache="1" Desc="Hero3" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="object" Upload="0" />
@@ -278,7 +281,7 @@
 			<Col Type ="vector3"	Tag="Pos"/>
 			<Col Type ="int"	Tag="StateEndTime"/>
 		</Record>
-		<Record Id="CommValue" Cache="0"	 Col="29"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="CommValue" Cache="0"	 Col="31"	 Force="0"	 Private="1"	 Public="1"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- 0job_level,1equipment,2static_BUFF,3runtime_BUFF,4Hero-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -294,11 +297,13 @@
 			<Col Type ="int"	Tag="ATK_SPEED"/>
 			<Col Type ="int"	Tag="ATK_FIRE"/>
 			<Col Type ="int"	Tag="ATK_LIGHT"/>
+			<Col Type ="int"	Tag="ATK_DARK"/>
 			<Col Type ="int"	Tag="ATK_WIND"/>
 			<Col Type ="int"	Tag="ATK_ICE"/>
 			<Col Type ="int"	Tag="ATK_POISON"/>
 			<Col Type ="int"	Tag="DEF_FIRE"/>
 			<Col Type ="int"	Tag="DEF_LIGHT"/>
+			<Col Type ="int"	Tag="DEF_DARK"/>
 			<Col Type ="int"	Tag="DEF_WIND"/>
 			<Col Type ="int"	Tag="DEF_ICE"/>
 			<Col Type ="int"	Tag="DEF_POISON"/>
@@ -347,7 +352,7 @@
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="int"	Tag="Level"/>
 		</Record>
-		<Record Id="HeroValue" Cache="1"	 Col="29"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
+		<Record Id="HeroValue" Cache="1"	 Col="31"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="15"	 Save="0"	 Upload="0"	 >
 			<Col Type ="int"	Tag="SUCKBLOOD"/><!--- Desc-->
 			<Col Type ="int"	Tag="REFLECTDAMAGE"/><!--- one her one row to sotre the properties-->
 			<Col Type ="int"	Tag="CRITICAL"/>
@@ -363,11 +368,13 @@
 			<Col Type ="int"	Tag="ATK_SPEED"/>
 			<Col Type ="int"	Tag="ATK_FIRE"/>
 			<Col Type ="int"	Tag="ATK_LIGHT"/>
+			<Col Type ="int"	Tag="ATK_DARK"/>
 			<Col Type ="int"	Tag="ATK_WIND"/>
 			<Col Type ="int"	Tag="ATK_ICE"/>
 			<Col Type ="int"	Tag="ATK_POISON"/>
 			<Col Type ="int"	Tag="DEF_FIRE"/>
 			<Col Type ="int"	Tag="DEF_LIGHT"/>
+			<Col Type ="int"	Tag="DEF_DARK"/>
 			<Col Type ="int"	Tag="DEF_WIND"/>
 			<Col Type ="int"	Tag="DEF_ICE"/>
 			<Col Type ="int"	Tag="DEF_POISON"/>
@@ -378,13 +385,18 @@
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
 		</Record>
-		<Record Id="PlayerHero" Cache="1"	 Col="6"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
+		<Record Id="PlayerHero" Cache="1"	 Col="13"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="64"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->
 			<Col Type ="string"	Tag="ConfigID"/>
 			<Col Type ="int"	Tag="Activated"/>
 			<Col Type ="int"	Tag="Level"/>
 			<Col Type ="int"	Tag="Exp"/>
 			<Col Type ="int"	Tag="Star"/>
+			<Col Type ="int"	Tag="Fire_Talent"/>
+			<Col Type ="int"	Tag="Light_Talent"/>
+			<Col Type ="int"	Tag="Wind_Talent"/>
+			<Col Type ="int"	Tag="Poison_Talent"/>
+			<Col Type ="int"	Tag="Dark_Talent"/>
 		</Record>
 		<Record Id="TaskList" Cache="1"	 Col="3"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="512"	 Save="0"	 Upload="0"	 >
 			<Col Type ="string"	Tag="TaskID"/><!--- Desc-->
