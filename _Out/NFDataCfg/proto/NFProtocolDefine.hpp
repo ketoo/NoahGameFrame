@@ -90,6 +90,7 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
+		static const std::string& ATK_DARK(){ static std::string x = "ATK_DARK"; return x; };// int
 		static const std::string& ATK_FIRE(){ static std::string x = "ATK_FIRE"; return x; };// int
 		static const std::string& ATK_ICE(){ static std::string x = "ATK_ICE"; return x; };// int
 		static const std::string& ATK_LIGHT(){ static std::string x = "ATK_LIGHT"; return x; };// int
@@ -99,13 +100,12 @@ namespace NFrame
 		static const std::string& ATK_WIND(){ static std::string x = "ATK_WIND"; return x; };// int
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
-		static const std::string& DEF_FIRE(){ static std::string x = "DEF_FIRE"; return x; };// int
+		static const std::string& DEF_DARK(){ static std::string x = "DEF_DARK"; return x; };// int
 		static const std::string& DEF_ICE(){ static std::string x = "DEF_ICE"; return x; };// int
 		static const std::string& DEF_LIGHT(){ static std::string x = "DEF_LIGHT"; return x; };// int
 		static const std::string& DEF_POISON(){ static std::string x = "DEF_POISON"; return x; };// int
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
 		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
-		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
 		static const std::string& HP(){ static std::string x = "HP"; return x; };// int
 		static const std::string& HPREGEN(){ static std::string x = "HPREGEN"; return x; };// int
 		static const std::string& MAGIC_GATE(){ static std::string x = "MAGIC_GATE"; return x; };// int
@@ -573,6 +573,7 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
+		static const std::string& ATK_DARK(){ static std::string x = "ATK_DARK"; return x; };// int
 		static const std::string& ATK_FIRE(){ static std::string x = "ATK_FIRE"; return x; };// int
 		static const std::string& ATK_ICE(){ static std::string x = "ATK_ICE"; return x; };// int
 		static const std::string& ATK_LIGHT(){ static std::string x = "ATK_LIGHT"; return x; };// int
@@ -580,20 +581,19 @@ namespace NFrame
 		static const std::string& ATK_PVP(){ static std::string x = "ATK_PVP"; return x; };// int
 		static const std::string& ATK_SPEED(){ static std::string x = "ATK_SPEED"; return x; };// int
 		static const std::string& ATK_VALUE(){ static std::string x = "ATK_VALUE"; return x; };// int
-		static const std::string& ATK_WIND(){ static std::string x = "ATK_WIND"; return x; };// int
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
 		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// int
 		static const std::string& ConnectKey(){ static std::string x = "ConnectKey"; return x; };// string
 		static const std::string& Cup(){ static std::string x = "Cup"; return x; };// int
+		static const std::string& DEF_DARK(){ static std::string x = "DEF_DARK"; return x; };// int
 		static const std::string& DEF_FIRE(){ static std::string x = "DEF_FIRE"; return x; };// int
 		static const std::string& DEF_ICE(){ static std::string x = "DEF_ICE"; return x; };// int
 		static const std::string& DEF_LIGHT(){ static std::string x = "DEF_LIGHT"; return x; };// int
 		static const std::string& DEF_POISON(){ static std::string x = "DEF_POISON"; return x; };// int
 		static const std::string& DEF_PVP(){ static std::string x = "DEF_PVP"; return x; };// int
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
-		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
@@ -634,8 +634,11 @@ namespace NFrame
 		static const std::string& HPREGEN(){ static std::string x = "HPREGEN"; return x; };// int
 		static const std::string& Head(){ static std::string x = "Head"; return x; };// string
 		static const std::string& Hero1BornPos(){ static std::string x = "Hero1BornPos"; return x; };// vector3
+		static const std::string& Hero1HP(){ static std::string x = "Hero1HP"; return x; };// int
 		static const std::string& Hero2BornPos(){ static std::string x = "Hero2BornPos"; return x; };// vector3
+		static const std::string& Hero2HP(){ static std::string x = "Hero2HP"; return x; };// int
 		static const std::string& Hero3BornPos(){ static std::string x = "Hero3BornPos"; return x; };// vector3
+		static const std::string& Hero3HP(){ static std::string x = "Hero3HP"; return x; };// int
 		static const std::string& HeroID1(){ static std::string x = "HeroID1"; return x; };// object
 		static const std::string& HeroID2(){ static std::string x = "HeroID2"; return x; };// object
 		static const std::string& HeroID3(){ static std::string x = "HeroID3"; return x; };// object
@@ -899,20 +902,22 @@ namespace NFrame
 			static const int ATK_SPEED = 12;//int
 			static const int ATK_FIRE = 13;//int
 			static const int ATK_LIGHT = 14;//int
-			static const int ATK_WIND = 15;//int
-			static const int ATK_ICE = 16;//int
-			static const int ATK_POISON = 17;//int
-			static const int DEF_FIRE = 18;//int
-			static const int DEF_LIGHT = 19;//int
-			static const int DEF_WIND = 20;//int
-			static const int DEF_ICE = 21;//int
-			static const int DEF_POISON = 22;//int
-			static const int DIZZY_GATE = 23;//int
-			static const int MOVE_GATE = 24;//int
-			static const int SKILL_GATE = 25;//int
-			static const int PHYSICAL_GATE = 26;//int
-			static const int MAGIC_GATE = 27;//int
-			static const int BUFF_GATE = 28;//int
+			static const int ATK_DARK = 15;//int
+			static const int ATK_WIND = 16;//int
+			static const int ATK_ICE = 17;//int
+			static const int ATK_POISON = 18;//int
+			static const int DEF_FIRE = 19;//int
+			static const int DEF_LIGHT = 20;//int
+			static const int DEF_DARK = 21;//int
+			static const int DEF_WIND = 22;//int
+			static const int DEF_ICE = 23;//int
+			static const int DEF_POISON = 24;//int
+			static const int DIZZY_GATE = 25;//int
+			static const int MOVE_GATE = 26;//int
+			static const int SKILL_GATE = 27;//int
+			static const int PHYSICAL_GATE = 28;//int
+			static const int MAGIC_GATE = 29;//int
+			static const int BUFF_GATE = 30;//int
 
 		};
 		class DropItemList
@@ -998,20 +1003,22 @@ namespace NFrame
 			static const int ATK_SPEED = 12;//int
 			static const int ATK_FIRE = 13;//int
 			static const int ATK_LIGHT = 14;//int
-			static const int ATK_WIND = 15;//int
-			static const int ATK_ICE = 16;//int
-			static const int ATK_POISON = 17;//int
-			static const int DEF_FIRE = 18;//int
-			static const int DEF_LIGHT = 19;//int
-			static const int DEF_WIND = 20;//int
-			static const int DEF_ICE = 21;//int
-			static const int DEF_POISON = 22;//int
-			static const int DIZZY_GATE = 23;//int
-			static const int MOVE_GATE = 24;//int
-			static const int SKILL_GATE = 25;//int
-			static const int PHYSICAL_GATE = 26;//int
-			static const int MAGIC_GATE = 27;//int
-			static const int BUFF_GATE = 28;//int
+			static const int ATK_DARK = 15;//int
+			static const int ATK_WIND = 16;//int
+			static const int ATK_ICE = 17;//int
+			static const int ATK_POISON = 18;//int
+			static const int DEF_FIRE = 19;//int
+			static const int DEF_LIGHT = 20;//int
+			static const int DEF_DARK = 21;//int
+			static const int DEF_WIND = 22;//int
+			static const int DEF_ICE = 23;//int
+			static const int DEF_POISON = 24;//int
+			static const int DIZZY_GATE = 25;//int
+			static const int MOVE_GATE = 26;//int
+			static const int SKILL_GATE = 27;//int
+			static const int PHYSICAL_GATE = 28;//int
+			static const int MAGIC_GATE = 29;//int
+			static const int BUFF_GATE = 30;//int
 
 		};
 		class PlayerHero
@@ -1024,7 +1031,12 @@ namespace NFrame
 			static const int Activated = 2;//int
 			static const int Level = 3;//int
 			static const int Exp = 4;//int
-			static const int Star = 5;//int
+			static const int Star = 6;//int
+			static const int Fire_Talent = 7;//int
+			static const int Light_Talent = 8;//int
+			static const int Wind_Talent = 9;//int
+			static const int Poison_Talent = 10;//int
+			static const int Dark_Talent = 11;//int
 
 		};
 		class TaskList

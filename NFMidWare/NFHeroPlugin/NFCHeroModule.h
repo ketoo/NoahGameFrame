@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 
 class NFCHeroModule
     : public NFIHeroModule
@@ -41,23 +42,29 @@ public:
 	virtual NFGUID AddHero(const NFGUID& self, const std::string& strID);
 	virtual bool AddHeroExp(const NFGUID& self, const int64_t nExp);
 	virtual bool AddHeroExp(const NFGUID& self, const NFGUID& xHeroID, const int64_t nExp);
-	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
+	virtual bool SetFightHero(const NFGUID& self, const NFGUID& xHeroID, const EConsHero_Pos nPos);
 	virtual bool SwitchFightHero(const NFGUID& self, const NFGUID& xHeroID);
 
-	virtual bool CreateHero(const NFGUID& self, const NFGUID& xHeroID);
-	virtual bool DestroyHero(const NFGUID& self, const NFGUID& xHeroID);
 	virtual NFGUID GetHeroGUID(const NFGUID& self, const std::string& strID);
+	EConsHero_Pos GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
 
 protected:
 	void OnSetFightHeroMsg(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 	void OnSwitchFightHeroMsg( const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen );
 
 protected:
-	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const std::string & strCnfID);
-	int AddToFightList(const NFGUID& self, const NFGUID& xHeroID, const int nPos);
-	int GetFightPos(const NFGUID& self, const NFGUID& xHeroID);
+
+	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
+	int OnPlayerHPEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+
+	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 
 protected:
+	NFISceneAOIModule* m_pSceneAOIModule;
     NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
