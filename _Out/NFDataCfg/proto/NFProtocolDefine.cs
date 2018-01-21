@@ -91,6 +91,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -100,13 +101,12 @@ namespace NFrame
 		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String DEF_FIRE = "DEF_FIRE";// int
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
-		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -568,6 +568,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -575,20 +576,19 @@ namespace NFrame
 		public static readonly String ATK_PVP = "ATK_PVP";// int
 		public static readonly String ATK_SPEED = "ATK_SPEED";// int
 		public static readonly String ATK_VALUE = "ATK_VALUE";// int
-		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String Account = "Account";// string
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String Camp = "Camp";// int
 		public static readonly String ConnectKey = "ConnectKey";// string
 		public static readonly String Cup = "Cup";// int
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_PVP = "DEF_PVP";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
-		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
@@ -629,8 +629,11 @@ namespace NFrame
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Head = "Head";// string
 		public static readonly String Hero1BornPos = "Hero1BornPos";// vector3
+		public static readonly String Hero1HP = "Hero1HP";// int
 		public static readonly String Hero2BornPos = "Hero2BornPos";// vector3
+		public static readonly String Hero2HP = "Hero2HP";// int
 		public static readonly String Hero3BornPos = "Hero3BornPos";// vector3
+		public static readonly String Hero3HP = "Hero3HP";// int
 		public static readonly String HeroID1 = "HeroID1";// object
 		public static readonly String HeroID2 = "HeroID2";// object
 		public static readonly String HeroID3 = "HeroID3";// object
@@ -887,20 +890,22 @@ namespace NFrame
 			public const int ATK_SPEED = 12;//int
 			public const int ATK_FIRE = 13;//int
 			public const int ATK_LIGHT = 14;//int
-			public const int ATK_WIND = 15;//int
-			public const int ATK_ICE = 16;//int
-			public const int ATK_POISON = 17;//int
-			public const int DEF_FIRE = 18;//int
-			public const int DEF_LIGHT = 19;//int
-			public const int DEF_WIND = 20;//int
-			public const int DEF_ICE = 21;//int
-			public const int DEF_POISON = 22;//int
-			public const int DIZZY_GATE = 23;//int
-			public const int MOVE_GATE = 24;//int
-			public const int SKILL_GATE = 25;//int
-			public const int PHYSICAL_GATE = 26;//int
-			public const int MAGIC_GATE = 27;//int
-			public const int BUFF_GATE = 28;//int
+			public const int ATK_DARK = 15;//int
+			public const int ATK_WIND = 16;//int
+			public const int ATK_ICE = 17;//int
+			public const int ATK_POISON = 18;//int
+			public const int DEF_FIRE = 19;//int
+			public const int DEF_LIGHT = 20;//int
+			public const int DEF_DARK = 21;//int
+			public const int DEF_WIND = 22;//int
+			public const int DEF_ICE = 23;//int
+			public const int DEF_POISON = 24;//int
+			public const int DIZZY_GATE = 25;//int
+			public const int MOVE_GATE = 26;//int
+			public const int SKILL_GATE = 27;//int
+			public const int PHYSICAL_GATE = 28;//int
+			public const int MAGIC_GATE = 29;//int
+			public const int BUFF_GATE = 30;//int
 
 		}
 		public class DropItemList
@@ -980,20 +985,22 @@ namespace NFrame
 			public const int ATK_SPEED = 12;//int
 			public const int ATK_FIRE = 13;//int
 			public const int ATK_LIGHT = 14;//int
-			public const int ATK_WIND = 15;//int
-			public const int ATK_ICE = 16;//int
-			public const int ATK_POISON = 17;//int
-			public const int DEF_FIRE = 18;//int
-			public const int DEF_LIGHT = 19;//int
-			public const int DEF_WIND = 20;//int
-			public const int DEF_ICE = 21;//int
-			public const int DEF_POISON = 22;//int
-			public const int DIZZY_GATE = 23;//int
-			public const int MOVE_GATE = 24;//int
-			public const int SKILL_GATE = 25;//int
-			public const int PHYSICAL_GATE = 26;//int
-			public const int MAGIC_GATE = 27;//int
-			public const int BUFF_GATE = 28;//int
+			public const int ATK_DARK = 15;//int
+			public const int ATK_WIND = 16;//int
+			public const int ATK_ICE = 17;//int
+			public const int ATK_POISON = 18;//int
+			public const int DEF_FIRE = 19;//int
+			public const int DEF_LIGHT = 20;//int
+			public const int DEF_DARK = 21;//int
+			public const int DEF_WIND = 22;//int
+			public const int DEF_ICE = 23;//int
+			public const int DEF_POISON = 24;//int
+			public const int DIZZY_GATE = 25;//int
+			public const int MOVE_GATE = 26;//int
+			public const int SKILL_GATE = 27;//int
+			public const int PHYSICAL_GATE = 28;//int
+			public const int MAGIC_GATE = 29;//int
+			public const int BUFF_GATE = 30;//int
 
 		}
 		public class PlayerHero
@@ -1005,7 +1012,12 @@ namespace NFrame
 			public const int Activated = 2;//int
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
-			public const int Star = 5;//int
+			public const int Star = 6;//int
+			public const int Fire_Talent = 7;//int
+			public const int Light_Talent = 8;//int
+			public const int Wind_Talent = 9;//int
+			public const int Poison_Talent = 10;//int
+			public const int Dark_Talent = 11;//int
 
 		}
 		public class TaskList

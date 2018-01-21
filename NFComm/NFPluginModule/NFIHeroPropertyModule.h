@@ -16,7 +16,7 @@ class NFIHeroPropertyModule
 	: public NFIModule
 {
 public:
-
+	virtual bool CalFightintHeroProperty(const NFGUID& self) = 0;
 
 };
 

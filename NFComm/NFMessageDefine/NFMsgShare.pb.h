@@ -56,6 +56,7 @@ class ItemStruct;
 class CurrencyStruct;
 class ReqAckStartBattle;
 class ReqEndBattle;
+class ReqAckRelive;
 class AckEndBattle;
 class ReqPickDropItem;
 class ReqAcceptTask;
@@ -2609,6 +2610,88 @@ class LIBPROTOC_EXPORT ReqEndBattle : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ReqEndBattle* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LIBPROTOC_EXPORT ReqAckRelive : public ::google::protobuf::Message {
+ public:
+  ReqAckRelive();
+  virtual ~ReqAckRelive();
+
+  ReqAckRelive(const ReqAckRelive& from);
+
+  inline ReqAckRelive& operator=(const ReqAckRelive& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ReqAckRelive& default_instance();
+
+  void Swap(ReqAckRelive* other);
+
+  // implements Message ----------------------------------------------
+
+  ReqAckRelive* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ReqAckRelive& from);
+  void MergeFrom(const ReqAckRelive& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 diamond = 1;
+  inline bool has_diamond() const;
+  inline void clear_diamond();
+  static const int kDiamondFieldNumber = 1;
+  inline ::google::protobuf::int32 diamond() const;
+  inline void set_diamond(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NFMsg.ReqAckRelive)
+ private:
+  inline void set_has_diamond();
+  inline void clear_has_diamond();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 diamond_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void LIBPROTOC_EXPORT protobuf_AddDesc_NFMsgShare_2eproto();
+  friend void protobuf_AssignDesc_NFMsgShare_2eproto();
+  friend void protobuf_ShutdownFile_NFMsgShare_2eproto();
+
+  void InitAsDefaultInstance();
+  static ReqAckRelive* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -8428,6 +8511,32 @@ inline void ReqAckStartBattle::set_diamond(::google::protobuf::int32 value) {
 // -------------------------------------------------------------------
 
 // ReqEndBattle
+
+// -------------------------------------------------------------------
+
+// ReqAckRelive
+
+// required int32 diamond = 1;
+inline bool ReqAckRelive::has_diamond() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ReqAckRelive::set_has_diamond() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ReqAckRelive::clear_has_diamond() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ReqAckRelive::clear_diamond() {
+  diamond_ = 0;
+  clear_has_diamond();
+}
+inline ::google::protobuf::int32 ReqAckRelive::diamond() const {
+  return diamond_;
+}
+inline void ReqAckRelive::set_diamond(::google::protobuf::int32 value) {
+  set_has_diamond();
+  diamond_ = value;
+}
 
 // -------------------------------------------------------------------
 

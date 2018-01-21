@@ -107,7 +107,8 @@ bool NFCPropertyModule::CalculatePropertyValue(const NFGUID& self, const std::st
 
 int NFCPropertyModule::OnObjectLevelEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar)
 {
-    RefreshBaseProperty(self);
+	//if you dont play hero mode, please active the code below
+    //RefreshBaseProperty(self);
 
     FullHPMP(self);
     FullSP(self);

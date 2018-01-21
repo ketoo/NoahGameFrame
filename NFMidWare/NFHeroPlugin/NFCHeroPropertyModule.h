@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIEquipPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIHeroModule.h"
 
 class NFCHeroPropertyModule
     : public NFIHeroPropertyModule
@@ -39,22 +40,27 @@ public:
     virtual bool BeforeShut();
 
 
+	virtual bool CalFightintHeroProperty(const NFGUID& self);
 
 protected:
 	int OnPlayerClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
-	int OnFightingHeroEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 
 	virtual int OnObjectHeroRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
 	virtual bool OnHeroPropertyUpdate(const NFGUID& self, const NFGUID& xHeroGUID);
+
+	virtual bool AddHeroProperty(const NFGUID& self, const NFGUID& xHeroGUID);
 
 	virtual bool CalHeroAllProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 	virtual bool CalHeroBaseProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 	virtual bool CalHeroTalentProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 	virtual bool CalHeroEquipProperty(const NFGUID& self, const NFGUID& xHeroGUID, NFDataList& xDataList);
 
+
+	int CalHeroDiamond(const int nStar, int& leftStar);
 private:
 
-    NFIClassModule* m_pLogicClassModule;
+	NFIHeroModule* m_pHeroModule;
+	NFIClassModule* m_pLogicClassModule;
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

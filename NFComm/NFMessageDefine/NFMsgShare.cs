@@ -759,6 +759,23 @@ namespace NFMsg
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReqAckRelive")]
+  public partial class ReqAckRelive : global::ProtoBuf.IExtensible
+  {
+    public ReqAckRelive() {}
+    
+    private int _diamond;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"diamond", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int diamond
+    {
+      get { return _diamond; }
+      set { _diamond = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AckEndBattle")]
   public partial class AckEndBattle : global::ProtoBuf.IExtensible
   {

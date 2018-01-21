@@ -122,9 +122,10 @@ enum EGameMsgID
 	EGMI_ACK_SWAP_SCENE							= 156;			//
 	EGMI_REQ_SWAP_HOME_SCENE					= 157;			//
 	EGMI_ACK_SWAP_HOME_SCENE					= 158;			//
-
 	EGMI_REQ_ENTER_GAME_FINISH					= 159;			//
 	EGMI_ACK_ENTER_GAME_FINISH					= 160;			//
+	
+	EGMI_REQ_ACK_RELIVE							= 180;			//
 	
 	EGMI_ACK_OBJECT_ENTRY						= 200;			//
 	EGMI_ACK_OBJECT_LEAVE						= 201;			//
