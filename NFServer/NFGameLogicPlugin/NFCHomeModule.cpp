@@ -44,6 +44,24 @@ bool NFCHomeModule::AfterInit()
 	return true;
 }
 
+void NFCHomeModule::Relive(const NFGUID & self)
+{
+	NFMsg::ReqAckRelive xMsg;
+
+	int nHP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::HP());
+	int nMAXHP = m_pKernelModule->GetPropertyInt(self, NFrame::Player::MAXHP());
+	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
+	if (ePvpType == NFMsg::EPVPType::PVP_HOME
+		&& nHP <= 0
+		&& nMAXHP > 0)
+	{
+		m_pKernelModule->SetPropertyInt(self, NFrame::Player::HP(), nMAXHP);
+
+		xMsg.set_diamond(1);
+		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQ_ACK_RELIVE, xMsg, self);
+	}
+}
+
 void NFCHomeModule::OnRquireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
@@ -53,16 +71,5 @@ void NFCHomeModule::OnRquireReliveProcess(const NFSOCK nSockIndex, const int nMs
 		return;
 	}
 
-	int nHP = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::HP());
-	int nMAXHP = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::MAXHP());
-	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
-	if (ePvpType == NFMsg::EPVPType::PVP_HOME
-		&& nHP <= 0
-		&& nMAXHP > 0)
-	{
-		m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::HP(), nMAXHP);
-
-		xMsg.set_diamond(1);
-		m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_REQ_ACK_RELIVE, xMsg, nPlayerID);
-	}
+	Relive(nPlayerID);
 }

@@ -341,7 +341,21 @@ bool NFCHeroPropertyModule::CalHeroBaseProperty(const NFGUID& self, const NFGUID
 			const std::string& strColTag = pHeroPropertyRecord->GetColTag(i);
 			int64_t nValue = m_pElementModule->GetPropertyInt(strPropertyEffectData, strColTag);
 
-			nValue = nValue * fPropsTime;
+			switch (i)
+			{
+			case NFrame::Player::CommValue::MAXHP:
+			case NFrame::Player::CommValue::MAXMP:
+			case NFrame::Player::CommValue::MAXSP:
+			case NFrame::Player::CommValue::ATK_VALUE:
+			case NFrame::Player::CommValue::DEF_VALUE:
+			case NFrame::Player::CommValue::HPREGEN:
+			case NFrame::Player::CommValue::MPREGEN:
+			{
+				nValue = nValue * fPropsTime;
+			}
+			default:
+				break;
+			}
 
 			xDataList.AddInt(nValue);
 		}
