@@ -2,5 +2,5 @@
 <XML>   
 	<Object ID="NEW_Attack1" ConfigID="NPC_PlantMonster-Red" X="66.5" Y="95" Z="0"  Weight="100" />
 	<Object ID="NEW_Attack2" ConfigID="NPC_HERO_Wererat_Soldier" X="77.5" Y="95" Z="0" Weight="100" />
-	<Object ID="NEW_Attack3" ConfigID="NPC_Magma Demon-Orange" X="55.5" Y="95" Z="0" Weight="100" />
+	<Object ID="NEW_Attack3" ConfigID="NPC_Magma_Demon-Orange" X="55.5" Y="95" Z="0" Weight="100" />
 </XML>

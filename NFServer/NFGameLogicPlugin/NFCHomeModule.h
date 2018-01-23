@@ -38,6 +38,9 @@ public:
 	virtual bool Execute();
 	virtual bool AfterInit();
 
+
+	virtual void Relive(const NFGUID& self);
+
 protected:
 
 	void NFCHomeModule::OnRquireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);

@@ -16,7 +16,7 @@ class NFIHomeModule
     : public NFIModule
 {
 public:
-
+	virtual void Relive(const NFGUID& self) = 0;
 };
 
 #endif
