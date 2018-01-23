@@ -118,16 +118,7 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
 	int nSceneID = m_pKernelModule->GetPropertyInt32(nPlayerID, NFrame::Player::SceneID());
 	int pvpType = m_pKernelModule->GetPropertyInt(nPlayerID, NFrame::Player::PVPType());
 	
-	//if (pvpType != NFMsg::EPVPType::PVP_HOME)
-	{
-		//return;
-	}
-	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::ViewOpponent());
-	NFGUID xFightingOpponent = m_pKernelModule->GetPropertyObject(nPlayerID, NFrame::Player::FightingOpponent());
-
-	if (nHomeSceneID == nSceneID
-		&& xViewOpponent.IsNull()
-		&& xFightingOpponent.IsNull())
+	if (pvpType == NFMsg::EPVPType::PVP_HOME)
 	{
 		return;
 	}
@@ -137,6 +128,8 @@ void NFCPVPModule::OnReqSwapHomeSceneProcess(const NFSOCK nSockIndex, const int 
     m_pKernelModule->SetPropertyInt(nPlayerID, NFrame::Player::PVPType(), NFMsg::EPVPType::PVP_HOME);
 
 	m_pSceneProcessModule->RequestEnterScene(nPlayerID, nHomeSceneID, 0, NFDataList());
+
+	
 }
 
 void NFCPVPModule::OnReqStartPVPOpponentProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg,
@@ -228,6 +221,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	std::string strTileData;
 	NFVector3 vRelivePos = m_pSceneAOIModule->GetRelivePosition(nSceneID, 0);
 	NFGUID xViewOpponent = m_pKernelModule->GetPropertyObject(self, NFrame::Player::ViewOpponent());
+	NFMsg::EPVPType ePvpType = (NFMsg::EPVPType)m_pKernelModule->GetPropertyInt(self, NFrame::Player::PVPType());
 
 	NFMsg::ReqAckSwapScene xAckSwapScene;
 	xAckSwapScene.set_scene_id(nSceneID);
@@ -237,7 +231,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 	xAckSwapScene.set_y(vRelivePos.Y());
 	xAckSwapScene.set_z(vRelivePos.Z());
 
-	if (xViewOpponent.IsNull() || self == xViewOpponent)
+	if (ePvpType == NFMsg::EPVPType::PVP_HOME)
 	{
 		m_pKernelModule->SetPropertyObject(self, NFrame::Player::ViewOpponent(), NFGUID());
 
@@ -246,7 +240,7 @@ int NFCPVPModule::OnSceneEvent(const NFGUID & self, const int nSceneID, const in
 			xAckSwapScene.set_data(strTileData.c_str(), strTileData.length());
 		}
 	}
-	else
+	else if(ePvpType == NFMsg::EPVPType::PVP_INDIVIDUAL)
 	{
 		if (m_pPlayerRedisModule->LoadPlayerTileRandomCache(xViewOpponent, strTileData))
 		{
@@ -810,11 +804,8 @@ void NFCPVPModule::EndTheBattle(const NFGUID & self)
 
 	RecordPVPData(self, nFightingStar, nWonGold, nWonDiamond);
 
-
+	//just show the result ui
 	m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_END_OPPNENT, xReqAckEndBattle, self);
-
-	//ResetPVPData(self);
-	m_pKernelModule->SetPropertyInt(self, NFrame::Player::PVPType(), 0);
 }
 
 int NFCPVPModule::RandomTileScene()
