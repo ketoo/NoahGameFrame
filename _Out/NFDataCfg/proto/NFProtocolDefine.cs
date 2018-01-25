@@ -341,14 +341,6 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Record
-		public class Cooldown
-		{
-			//Class name
-			public static readonly String ThisName = "Cooldown";
-			public const int SkillID = 0;//string
-			public const int Time = 1;//int
-
-		}
 
 	}
 	public class InitProperty
@@ -472,6 +464,7 @@ namespace NFrame
 		public static readonly String SceneID = "SceneID";// int
 		// Property
 		public static readonly String AIOwnerID = "AIOwnerID";// object
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -485,6 +478,7 @@ namespace NFrame
 		public static readonly String Camp = "Camp";// int
 		public static readonly String Climb = "Climb";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
@@ -535,6 +529,14 @@ namespace NFrame
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String Width = "Width";// float
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int SkillID = 0;//string
+			public const int Time = 1;//int
+
+		}
 
 	}
 	public class NoSqlServer
@@ -576,6 +578,7 @@ namespace NFrame
 		public static readonly String ATK_PVP = "ATK_PVP";// int
 		public static readonly String ATK_SPEED = "ATK_SPEED";// int
 		public static readonly String ATK_VALUE = "ATK_VALUE";// int
+		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String Account = "Account";// string
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
@@ -589,6 +592,7 @@ namespace NFrame
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_PVP = "DEF_PVP";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
+		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String EXP = "EXP";// int
@@ -906,6 +910,14 @@ namespace NFrame
 			public const int PHYSICAL_GATE = 28;//int
 			public const int MAGIC_GATE = 29;//int
 			public const int BUFF_GATE = 30;//int
+
+		}
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int SkillID = 0;//string
+			public const int Time = 1;//int
 
 		}
 		public class DropItemList
