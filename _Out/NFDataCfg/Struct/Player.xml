@@ -9,6 +9,7 @@
 		<Property Id="ATK_PVP" Cache="1" Desc="PVP攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_SPEED" Cache="0" Desc="攻击速度默认10000" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="ATK_VALUE" Cache="0" Desc="物理攻击力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="ATK_WIND" Cache="0" Desc="" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Account" Cache="1" Desc="玩家的帐号" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
 		<Property Id="BUFF_GATE" Cache="0" Desc="BUFF免疫开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="CRITICAL" Cache="0" Desc="暴击" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -22,6 +23,7 @@
 		<Property Id="DEF_POISON" Cache="0" Desc="毒抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_PVP" Cache="1" Desc="PVP防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DEF_VALUE" Cache="0" Desc="物理防御力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="DEF_WIND" Cache="0" Desc="抗" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="DIZZY_GATE" Cache="0" Desc="眩晕开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="Diamond" Cache="1" Desc="钻石" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="EXP" Cache="1" Desc="经验获得,如果是怪物，则是掉落经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
@@ -313,6 +315,10 @@
 			<Col Type ="int"	Tag="PHYSICAL_GATE"/>
 			<Col Type ="int"	Tag="MAGIC_GATE"/>
 			<Col Type ="int"	Tag="BUFF_GATE"/>
+		</Record>
+		<Record Id="Cooldown" Cache="1"	 Col="2"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="8"	 Save="0"	 Upload="0"	 >
+			<Col Type ="string"	Tag="SkillID"/><!--- Desc-->
+			<Col Type ="int"	Tag="Time"/><!--- Desc-->
 		</Record>
 		<Record Id="DropItemList" Cache="0"	 Col="4"	 Force="0"	 Private="1"	 Public="0"	 Ref="0"	 Row="128"	 Save="0"	 Upload="0"	 >
 			<Col Type ="object"	Tag="GUID"/><!--- Desc-->

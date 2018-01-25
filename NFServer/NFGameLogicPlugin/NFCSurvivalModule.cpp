@@ -49,7 +49,7 @@ bool NFCSurvivalModule::AfterInit()
 
 int NFCSurvivalModule::CheckSurvivalList(const std::string & strScheduleName, const float fIntervalTime, const int nCount)
 {
-	m_pLogModule->Debug(strScheduleName);
+	m_pLogModule->LogDebug(strScheduleName);
 
 	if (m_pRankModule->GetRankListCount(NFIRankModule::RANK_TYPE::RT_SURVIVAL_MODE) >= mnMinPeopleForSurvivalMode)
 	{

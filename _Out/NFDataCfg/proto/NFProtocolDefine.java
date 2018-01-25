@@ -335,14 +335,6 @@ package nframe;
 		public static final String Position = "Position";// vector3
 		public static final String SceneID = "SceneID";// int
 		// Record
-		public class Cooldown
-		{
-			//Class name
-			public static final String ThisName = "Cooldown";
-			public static final int SkillID = 0;//string
-			public static final int Time = 1;//int
-
-		}
 
 	}
 	public class InitProperty
@@ -466,6 +458,7 @@ package nframe;
 		public static final String SceneID = "SceneID";// int
 		// Property
 		public static final String AIOwnerID = "AIOwnerID";// object
+		public static final String ATK_DARK = "ATK_DARK";// int
 		public static final String ATK_FIRE = "ATK_FIRE";// int
 		public static final String ATK_ICE = "ATK_ICE";// int
 		public static final String ATK_LIGHT = "ATK_LIGHT";// int
@@ -479,6 +472,7 @@ package nframe;
 		public static final String Camp = "Camp";// int
 		public static final String Climb = "Climb";// int
 		public static final String ConsumeData = "ConsumeData";// string
+		public static final String DEF_DARK = "DEF_DARK";// int
 		public static final String DEF_FIRE = "DEF_FIRE";// int
 		public static final String DEF_ICE = "DEF_ICE";// int
 		public static final String DEF_LIGHT = "DEF_LIGHT";// int
@@ -529,6 +523,14 @@ package nframe;
 		public static final String VIPEXP = "VIPEXP";// int
 		public static final String Width = "Width";// float
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static final String ThisName = "Cooldown";
+			public static final int SkillID = 0;//string
+			public static final int Time = 1;//int
+
+		}
 
 	}
 	public class NoSqlServer
@@ -570,6 +572,7 @@ package nframe;
 		public static final String ATK_PVP = "ATK_PVP";// int
 		public static final String ATK_SPEED = "ATK_SPEED";// int
 		public static final String ATK_VALUE = "ATK_VALUE";// int
+		public static final String ATK_WIND = "ATK_WIND";// int
 		public static final String Account = "Account";// string
 		public static final String BUFF_GATE = "BUFF_GATE";// int
 		public static final String CRITICAL = "CRITICAL";// int
@@ -583,6 +586,7 @@ package nframe;
 		public static final String DEF_POISON = "DEF_POISON";// int
 		public static final String DEF_PVP = "DEF_PVP";// int
 		public static final String DEF_VALUE = "DEF_VALUE";// int
+		public static final String DEF_WIND = "DEF_WIND";// int
 		public static final String DIZZY_GATE = "DIZZY_GATE";// int
 		public static final String Diamond = "Diamond";// int
 		public static final String EXP = "EXP";// int
@@ -900,6 +904,14 @@ package nframe;
 			public static final int PHYSICAL_GATE = 28;//int
 			public static final int MAGIC_GATE = 29;//int
 			public static final int BUFF_GATE = 30;//int
+
+		}
+		public class Cooldown
+		{
+			//Class name
+			public static final String ThisName = "Cooldown";
+			public static final int SkillID = 0;//string
+			public static final int Time = 1;//int
 
 		}
 		public class DropItemList
