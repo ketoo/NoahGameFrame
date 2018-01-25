@@ -43,7 +43,7 @@ public:
 
 protected:
 
-	void NFCHomeModule::OnRquireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+	void OnRequireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
 	NFIScheduleModule* m_pScheduleModule;
