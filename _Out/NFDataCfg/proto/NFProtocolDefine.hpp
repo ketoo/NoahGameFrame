@@ -344,15 +344,6 @@ namespace NFrame
 		static const std::string& Position(){ static std::string x = "Position"; return x; };// vector3
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Record
-		class Cooldown
-		{
-		public:
-			//Class name
-			static const std::string& ThisName(){ static std::string x = "Cooldown"; return x; };
-			static const int SkillID = 0;//string
-			static const int Time = 1;//int
-
-		};
 
 	};
 	class InitProperty
@@ -477,6 +468,7 @@ namespace NFrame
 		static const std::string& SceneID(){ static std::string x = "SceneID"; return x; };// int
 		// Property
 		static const std::string& AIOwnerID(){ static std::string x = "AIOwnerID"; return x; };// object
+		static const std::string& ATK_DARK(){ static std::string x = "ATK_DARK"; return x; };// int
 		static const std::string& ATK_FIRE(){ static std::string x = "ATK_FIRE"; return x; };// int
 		static const std::string& ATK_ICE(){ static std::string x = "ATK_ICE"; return x; };// int
 		static const std::string& ATK_LIGHT(){ static std::string x = "ATK_LIGHT"; return x; };// int
@@ -490,6 +482,7 @@ namespace NFrame
 		static const std::string& Camp(){ static std::string x = "Camp"; return x; };// int
 		static const std::string& Climb(){ static std::string x = "Climb"; return x; };// int
 		static const std::string& ConsumeData(){ static std::string x = "ConsumeData"; return x; };// string
+		static const std::string& DEF_DARK(){ static std::string x = "DEF_DARK"; return x; };// int
 		static const std::string& DEF_FIRE(){ static std::string x = "DEF_FIRE"; return x; };// int
 		static const std::string& DEF_ICE(){ static std::string x = "DEF_ICE"; return x; };// int
 		static const std::string& DEF_LIGHT(){ static std::string x = "DEF_LIGHT"; return x; };// int
@@ -540,6 +533,15 @@ namespace NFrame
 		static const std::string& VIPEXP(){ static std::string x = "VIPEXP"; return x; };// int
 		static const std::string& Width(){ static std::string x = "Width"; return x; };// float
 		// Record
+		class Cooldown
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Cooldown"; return x; };
+			static const int SkillID = 0;//string
+			static const int Time = 1;//int
+
+		};
 
 	};
 	class NoSqlServer
@@ -581,6 +583,7 @@ namespace NFrame
 		static const std::string& ATK_PVP(){ static std::string x = "ATK_PVP"; return x; };// int
 		static const std::string& ATK_SPEED(){ static std::string x = "ATK_SPEED"; return x; };// int
 		static const std::string& ATK_VALUE(){ static std::string x = "ATK_VALUE"; return x; };// int
+		static const std::string& ATK_WIND(){ static std::string x = "ATK_WIND"; return x; };// int
 		static const std::string& Account(){ static std::string x = "Account"; return x; };// string
 		static const std::string& BUFF_GATE(){ static std::string x = "BUFF_GATE"; return x; };// int
 		static const std::string& CRITICAL(){ static std::string x = "CRITICAL"; return x; };// int
@@ -594,6 +597,7 @@ namespace NFrame
 		static const std::string& DEF_POISON(){ static std::string x = "DEF_POISON"; return x; };// int
 		static const std::string& DEF_PVP(){ static std::string x = "DEF_PVP"; return x; };// int
 		static const std::string& DEF_VALUE(){ static std::string x = "DEF_VALUE"; return x; };// int
+		static const std::string& DEF_WIND(){ static std::string x = "DEF_WIND"; return x; };// int
 		static const std::string& DIZZY_GATE(){ static std::string x = "DIZZY_GATE"; return x; };// int
 		static const std::string& Diamond(){ static std::string x = "Diamond"; return x; };// int
 		static const std::string& EXP(){ static std::string x = "EXP"; return x; };// int
@@ -918,6 +922,15 @@ namespace NFrame
 			static const int PHYSICAL_GATE = 28;//int
 			static const int MAGIC_GATE = 29;//int
 			static const int BUFF_GATE = 30;//int
+
+		};
+		class Cooldown
+		{
+		public:
+			//Class name
+			static const std::string& ThisName(){ static std::string x = "Cooldown"; return x; };
+			static const int SkillID = 0;//string
+			static const int Time = 1;//int
 
 		};
 		class DropItemList

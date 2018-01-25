@@ -35,6 +35,8 @@ public:
     virtual bool ExistSkillCD( const NFGUID& self, const std::string& strSkillName );
 
 private:
+	std::string mstrCommonSkillID = "CommonSkillID";
+private:
 
     NFIKernelModule* m_pKernelModule;
     NFIElementModule* m_pElementModule;
