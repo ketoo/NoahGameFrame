@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName         :    NFCSkillModule.cpp
+//    @FileName				:    NFCSkillModule.cpp
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-06-11
 //    @Module               :    NFCSkillModule
@@ -20,6 +20,7 @@ bool NFCSkillModule::Init()
 	m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pSkillCooldownModule = pPluginManager->FindModule<NFISkillCooldownModule>();
 
 	return true;
 }
@@ -88,6 +89,13 @@ void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, 
 
 	//bc
 	const std::string& strSkillID = xMsg.skill_id();
+
+	if (m_pSkillCooldownModule->ExistSkillCD(nPlayerID, strSkillID))
+	{
+		m_pLogModule->LogError(nPlayerID, "ExistSkillCD " + strSkillID);
+		return;
+	}
+
 	const int nSkillType = m_pElementModule->GetPropertyInt32(strSkillID, NFrame::Skill::SkillType());
 	NF_SHARE_PTR<NFISkillConsumeProcessModule> xProcessModule = m_pSkillConsumeManagerModule->GetConsumeModule((SKILL_CONSUME_TYPE)nSkillType);
 	if (xProcessModule)
@@ -103,6 +111,9 @@ void NFCSkillModule::OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, 
 
 		if (xProcessModule->ConsumeLegal(nPlayerID, strSkillID, xList) == 0)
 		{
+			//once the skill consume than add CD time
+			m_pSkillCooldownModule->AddSkillCD(nPlayerID, strSkillID);
+
 			NFDataList xDamageList;
 			NFDataList xResultList;
 			if (xProcessModule->ConsumeProcess(nPlayerID, strSkillID, xList, xDamageList, xResultList) == 0)

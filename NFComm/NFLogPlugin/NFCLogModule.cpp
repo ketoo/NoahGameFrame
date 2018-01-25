@@ -392,7 +392,7 @@ bool NFCLogModule::ChangeLogLevel(const std::string& strLevel)
     return true;
 }
 
-bool NFCLogModule::Debug(const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogDebug(const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -406,7 +406,7 @@ bool NFCLogModule::Debug(const std::string& strLog, const char* func , int line)
      return true;
 }
 
-bool NFCLogModule::Info(const std::string& strLog, const  char* func, int line)
+bool NFCLogModule::LogInfo(const std::string& strLog, const  char* func, int line)
 {
     if (line > 0)
      {
@@ -420,7 +420,7 @@ bool NFCLogModule::Info(const std::string& strLog, const  char* func, int line)
      return true;
 }
 
-bool NFCLogModule::Warning(const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogWarning(const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -434,7 +434,7 @@ bool NFCLogModule::Warning(const std::string& strLog, const char* func , int lin
      return true;
 }
 
-bool NFCLogModule::Error(const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogError(const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -448,7 +448,7 @@ bool NFCLogModule::Error(const std::string& strLog, const char* func , int line)
      return true;
 }
 
-bool NFCLogModule::Fatal(const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogFatal(const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -463,7 +463,7 @@ bool NFCLogModule::Fatal(const std::string& strLog, const char* func , int line)
 }
 
 
-bool NFCLogModule::Debug(const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogDebug(const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
      {
@@ -477,7 +477,7 @@ bool NFCLogModule::Debug(const std::ostringstream& stream, const char* func , in
      return true;
 }
 
-bool NFCLogModule::Info(const std::ostringstream& stream, const  char* func, int line)
+bool NFCLogModule::LogInfo(const std::ostringstream& stream, const  char* func, int line)
 {
     if (line > 0)
      {
@@ -491,7 +491,7 @@ bool NFCLogModule::Info(const std::ostringstream& stream, const  char* func, int
      return true;
 }
 
-bool NFCLogModule::Warning(const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogWarning(const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
      {
@@ -505,7 +505,7 @@ bool NFCLogModule::Warning(const std::ostringstream& stream, const char* func , 
      return true;
 }
 
-bool NFCLogModule::Error(const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogError(const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
      {
@@ -519,7 +519,7 @@ bool NFCLogModule::Error(const std::ostringstream& stream, const char* func , in
      return true;
 }
 
-bool NFCLogModule::Fatal(const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogFatal(const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
      {
@@ -534,7 +534,7 @@ bool NFCLogModule::Fatal(const std::ostringstream& stream, const char* func , in
 }
 
 
-bool NFCLogModule::Debug(const NFGUID ident, const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogDebug(const NFGUID ident, const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -548,7 +548,7 @@ bool NFCLogModule::Debug(const NFGUID ident, const std::string& strLog, const ch
      return true;
 }
 
-bool NFCLogModule::Info(const NFGUID ident, const std::string& strLog, const  char* func, int line)
+bool NFCLogModule::LogInfo(const NFGUID ident, const std::string& strLog, const  char* func, int line)
 {
     if (line > 0)
      {
@@ -562,7 +562,7 @@ bool NFCLogModule::Info(const NFGUID ident, const std::string& strLog, const  ch
      return true;
 }
 
-bool NFCLogModule::Warning(const NFGUID ident, const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogWarning(const NFGUID ident, const std::string& strLog, const char* func , int line)
 {
     if (line > 0)
      {
@@ -576,7 +576,7 @@ bool NFCLogModule::Warning(const NFGUID ident, const std::string& strLog, const 
      return true;
 }
 
-bool NFCLogModule::Error(const NFGUID ident, const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogError(const NFGUID ident, const std::string& strLog, const char* func , int line)
 {
      if (line > 0)
      {
@@ -590,7 +590,7 @@ bool NFCLogModule::Error(const NFGUID ident, const std::string& strLog, const ch
      return true;
 }
 
-bool NFCLogModule::Fatal(const NFGUID ident, const std::string& strLog, const char* func , int line)
+bool NFCLogModule::LogFatal(const NFGUID ident, const std::string& strLog, const char* func , int line)
 {
      if (line > 0)
      {
@@ -605,7 +605,7 @@ bool NFCLogModule::Fatal(const NFGUID ident, const std::string& strLog, const ch
 }
 
 
-bool NFCLogModule::Debug(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogDebug(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
     {
@@ -619,7 +619,7 @@ bool NFCLogModule::Debug(const NFGUID ident, const std::ostringstream& stream, c
     return true;
 }
 
-bool NFCLogModule::Info(const NFGUID ident, const std::ostringstream& stream, const  char* func, int line)
+bool NFCLogModule::LogInfo(const NFGUID ident, const std::ostringstream& stream, const  char* func, int line)
 {
     if (line > 0)
     {
@@ -633,7 +633,7 @@ bool NFCLogModule::Info(const NFGUID ident, const std::ostringstream& stream, co
     return true;
 }
 
-bool NFCLogModule::Warning(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogWarning(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
     {
@@ -647,7 +647,7 @@ bool NFCLogModule::Warning(const NFGUID ident, const std::ostringstream& stream,
     return true;
 }
 
-bool NFCLogModule::Error(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogError(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
     {
@@ -661,7 +661,7 @@ bool NFCLogModule::Error(const NFGUID ident, const std::ostringstream& stream, c
     return true;
 }
 
-bool NFCLogModule::Fatal(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
+bool NFCLogModule::LogFatal(const NFGUID ident, const std::ostringstream& stream, const char* func , int line)
 {
     if (line > 0)
     {

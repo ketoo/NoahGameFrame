@@ -359,11 +359,11 @@ enum EGameMsgID
 //PropertyType
 enum ESkillType
 {
-	EST_BRIEF_SINGLE 		= 0;//??0???
-	EST_BRIEF_GROUP 		= 1;//
-	EST_BULLET_SINGLE		= 2;//?????(???)
-	EST_BULLET_REBOUND		= 3;//??????
-	EST_BULLET_BOMB			= 4;//
+	EST_BRIEF_SINGLE 		= 0;//this kind of skill just can damage one object
+	EST_BRIEF_GROUP 		= 1;//this kind of skill can damage multiple objects
+	EST_BULLET_SINGLE		= 2;//this kind of bullet just can damage one object
+	EST_BULLET_REBOUND		= 3;//this kind of bullet can damage multiple objects via rebound
+	EST_BULLET_BOMB			= 4;//this kind of bullet can damage multiple objects when touch the target object(position)
 	EST_TARGET_SINGLE		= 5;//???????
 	EST_TARGET_GROUP		= 6;//????????
 	EST_POSITION_GROUP		= 7;//??????(????????position)
@@ -371,14 +371,14 @@ enum ESkillType
 
 enum EItemType
 {
-    EIT_EQUIP   			= 0; //
-	EIT_GEM   				= 1; //
-	EIT_ITEM   				= 2; //
-	EIT_CARD   				= 3; //
-	EIT_TOKEN	   			= 4; //
+    EIT_EQUIP   			= 0; //the equipment which can add props
+	EIT_GEM   				= 1; //the gem ca be embed to the equipment
+	EIT_ITEM   				= 2; //expendable items for player, such as a medicine that cures
+	EIT_CARD   				= 3; //special items that can call a hero or others
+	EIT_TOKEN	   			= 4; //special items can do what you want to do
 }
 
-//
+//the sub items type of EIT_EQUIP
 enum EGameEquipSubType
 {
 	EQUIPTYPE_WEAPON            = 0;    //
@@ -389,7 +389,7 @@ enum EGameEquipSubType
 	EQUIPTYPE_BOOT              = 5;   	//
 };
 
-//
+//the sub items type of EIT_GEM
 enum EGameGemSubType
 {
 	EGGSTYPE_GEM_ATK           	= 0;    //
@@ -403,7 +403,7 @@ enum EGameGemSubType
 	
 };
 
-
+//the sub items type of EIT_ITEM
 enum EGameItemSubType
 {
 	EGIT_ITEM_WATER				= 0; 	//
@@ -417,6 +417,7 @@ enum EGameItemSubType
 	EGIT_ITEM_MEMORY_POS		= 8;	//
 };
 
+//the sub items type of EIT_CARD
 enum EGameCardSubType
 {
 	EGCST_STRENGTH 				= 1;//	
@@ -424,13 +425,14 @@ enum EGameCardSubType
 	EGCST_INTELLIGENCE			= 3;//
 };
 
+//the sub items type of EIT_TOKEN
 enum EGameTokenSubType
 {
 	EGTST_TOKEN_REBORN					= 0; 	//
 	EGTST_TOKEN_POSITION				= 1;	//
 	EGTST_TOKEN_BOUNTY   				= 2; 	//
-	EGTST_TOKEN_ACTIVITY				= 3;	//
-	EGTST_TOKEN_BUILD					= 4;	//
+	EGTST_TOKEN_ACTIVITY				= 3;	//a token that can join a activity
+	EGTST_TOKEN_BUILD					= 4;	//a token that can call a building or power
 };
 
 
@@ -555,6 +557,7 @@ enum EGameElementType
 	EELEMENTTYPE_WIND              	= 2;    //
 	EELEMENTTYPE_ICE          		= 3;    //
 	EELEMENTTYPE_POISON          	= 4;    //
+	EELEMENTTYPE_DARK          		= 5;    //
 };
 
 
