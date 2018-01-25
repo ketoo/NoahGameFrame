@@ -39,7 +39,7 @@ bool NFCHomeModule::AfterInit()
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
 	m_pRankModule = pPluginManager->FindModule<NFIRankModule>();
 
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_RELIVE, this, &NFCHomeModule::OnRquireReliveProcess);
+	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_REQ_ACK_RELIVE, this, &NFCHomeModule::OnRequireReliveProcess);
 
 	return true;
 }
@@ -62,7 +62,7 @@ void NFCHomeModule::Relive(const NFGUID & self)
 	}
 }
 
-void NFCHomeModule::OnRquireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
+void NFCHomeModule::OnRequireReliveProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
 {
 	NFGUID nPlayerID;
 	NFMsg::ReqAckRelive xMsg;
