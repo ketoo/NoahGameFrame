@@ -224,6 +224,10 @@ private:
     bool GetArrayReply();
 	
 private:
+	int64_t mnCmdIndex = 0;
+	std::list<int64_t> mlCmdList;
+
+private:
     NFRedisClientSocket* m_pRedisClientSocket;
     NFRedisResult* m_pRedisResult;
 };

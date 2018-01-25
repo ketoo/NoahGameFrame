@@ -8,6 +8,9 @@ NFRedisResult *NFRedisClient::HDEL(const std::string &key, const std::string &fi
 {
     m_pRedisResult->Reset();
 
+	int64_t nIndex = mnCmdIndex++;
+	mlCmdList.push_back(nIndex);
+
     NFRedisCommand cmd(GET_NAME(HDEL));
     cmd << key;
     cmd << field;
