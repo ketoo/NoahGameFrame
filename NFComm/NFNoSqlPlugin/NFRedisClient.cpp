@@ -17,9 +17,7 @@ bool NFRedisClient::ConnectTo(const std::string &ip, const int port, const std::
 	{
 		if (!auth.empty())
 		{
-			NF_SHARE_PTR<NFRedisResult> pResult1 = AUTH("test");
-			NF_SHARE_PTR<NFRedisResult> pResult2 = AUTH(auth);
-			return pResult2->IsOKRespStatus();
+			return AUTH(auth);
 		}
 
 		return true;
@@ -109,7 +107,7 @@ void NFRedisClient::WaitingResult(NF_SHARE_PTR<NFRedisResult> pRedisResult)
 	}
 }
 
-NF_SHARE_PTR<NFRedisResult> NFRedisClient::AUTH(const std::string & auth)
+bool NFRedisClient::AUTH(const std::string & auth)
 {
 	NFRedisCommand cmd(GET_NAME(AUTH));
 	cmd << auth;
@@ -118,6 +116,5 @@ NF_SHARE_PTR<NFRedisResult> NFRedisClient::AUTH(const std::string & auth)
 	
 	WaitingResult(pRedisResult);
 
-
-	return pRedisResult;
+	return pRedisResult->IsOKRespStatus();
 }
