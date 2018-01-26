@@ -38,6 +38,9 @@ public:
     const std::vector<NFRedisResult>& GetRespArray();
 
 private:
+	bool ReadRespType();
+
+private:
     NFREDIS_RESP_TYPE GetRespType(const char strRes);
 
     bool ReadForStatus();

@@ -3,7 +3,7 @@
 //
 #include "NFRedisClient.h"
 
-NFRedisResult* NFRedisClient::DEL(const std::string &key)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::DEL(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(DEL));
     cmd << key;
@@ -13,10 +13,10 @@ NFRedisResult* NFRedisClient::DEL(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult* NFRedisClient::EXISTS(const std::string &key)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::EXISTS(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(EXISTS));
     cmd << key;
@@ -27,10 +27,10 @@ NFRedisResult* NFRedisClient::EXISTS(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
 {
     NFRedisCommand cmd(GET_NAME(EXPIRE));
     cmd << key;
@@ -42,10 +42,10 @@ NFRedisResult *NFRedisClient::EXPIRE(const std::string &key, const unsigned int 
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::EXPIREAT(const std::string &key, const int64_t unixTime)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::EXPIREAT(const std::string &key, const int64_t unixTime)
 {
     NFRedisCommand cmd(GET_NAME(EXPIREAT));
     cmd << key;
@@ -56,10 +56,10 @@ NFRedisResult *NFRedisClient::EXPIREAT(const std::string &key, const int64_t uni
 
 	WaitingResult(pRedisResult);
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::PERSIST(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::PERSIST(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(PERSIST));
     cmd << key;
@@ -69,10 +69,10 @@ NFRedisResult *NFRedisClient::PERSIST(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::TTL(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::TTL(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(TTL));
     cmd << key;
@@ -82,10 +82,10 @@ NFRedisResult *NFRedisClient::TTL(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::TYPE(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::TYPE(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(TYPE));
     cmd << key;
@@ -96,5 +96,5 @@ NFRedisResult *NFRedisClient::TYPE(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }

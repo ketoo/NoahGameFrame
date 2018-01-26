@@ -4,7 +4,7 @@
 
 #include "NFRedisClient.h"
 
-NFRedisResult * NFRedisClient::ZADD(const std::string & key, const std::string & member, const double score)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZADD(const std::string & key, const std::string & member, const double score)
 {
 	NFRedisCommand cmd(GET_NAME(ZADD));
 	cmd << key;
@@ -17,10 +17,10 @@ NFRedisResult * NFRedisClient::ZADD(const std::string & key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZCARD(const std::string & key)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZCARD(const std::string & key)
 {
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
@@ -30,10 +30,10 @@ NFRedisResult * NFRedisClient::ZCARD(const std::string & key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end)
 {
 	NFRedisCommand cmd(GET_NAME(ZCOUNT));
 	cmd << key;
@@ -46,10 +46,10 @@ NFRedisResult * NFRedisClient::ZCOUNT(const std::string & key, const double star
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZINCRBY(const std::string & key, const std::string & member, const double score)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZINCRBY(const std::string & key, const std::string & member, const double score)
 {
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
@@ -62,10 +62,10 @@ NFRedisResult * NFRedisClient::ZINCRBY(const std::string & key, const std::strin
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
@@ -79,10 +79,10 @@ NFRedisResult * NFRedisClient::ZRANGE(const std::string & key, const int start, 
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZRANGEBYSCORE));
 	cmd << key;
@@ -96,10 +96,10 @@ NFRedisResult * NFRedisClient::ZRANGEBYSCORE(const std::string & key, const doub
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZRANK(const std::string & key, const std::string & member)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZRANK(const std::string & key, const std::string & member)
 {
 	NFRedisCommand cmd(GET_NAME(ZRANK));
 	cmd << key;
@@ -110,10 +110,10 @@ NFRedisResult * NFRedisClient::ZRANK(const std::string & key, const std::string 
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREM(const std::string & key, const std::string & member)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREM(const std::string & key, const std::string & member)
 {
 	NFRedisCommand cmd(GET_NAME(ZREM));
 	cmd << key;
@@ -124,10 +124,10 @@ NFRedisResult * NFRedisClient::ZREM(const std::string & key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
 {
 	NFRedisCommand cmd(GET_NAME(ZREMRANGEBYRANK));
 	cmd << key;
@@ -139,10 +139,10 @@ NFRedisResult * NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const in
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
 {
 	NFRedisCommand cmd(GET_NAME(ZREMRANGEBYSCORE));
 	cmd << key;
@@ -154,10 +154,10 @@ NFRedisResult * NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const d
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANGE));
 	cmd << key;
@@ -169,10 +169,10 @@ NFRedisResult * NFRedisClient::ZREVRANGE(const std::string& key, const int start
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANGEBYSCORE));
 	cmd << key;
@@ -187,10 +187,10 @@ NFRedisResult * NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const d
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANK(const std::string & key, const std::string & member)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZREVRANK(const std::string & key, const std::string & member)
 {
 	NFRedisCommand cmd(GET_NAME(ZREVRANK));
 	cmd << key;
@@ -201,10 +201,10 @@ NFRedisResult * NFRedisClient::ZREVRANK(const std::string & key, const std::stri
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult * NFRedisClient::ZSCORE(const std::string & key, const std::string & member)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::ZSCORE(const std::string & key, const std::string & member)
 {
 	NFRedisCommand cmd(GET_NAME(ZSCORE));
 	cmd << key;
@@ -216,5 +216,5 @@ NFRedisResult * NFRedisClient::ZSCORE(const std::string & key, const std::string
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }

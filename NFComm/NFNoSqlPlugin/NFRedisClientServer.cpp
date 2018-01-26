@@ -4,7 +4,7 @@
 
 #include "NFRedisClient.h"
 
-NFRedisResult *NFRedisClient::FLUSHALL()
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::FLUSHALL()
 {
     NFRedisCommand cmd(GET_NAME(FLUSHALL));
 
@@ -14,10 +14,10 @@ NFRedisResult *NFRedisClient::FLUSHALL()
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::FLUSHDB()
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::FLUSHDB()
 {
     NFRedisCommand cmd(GET_NAME(FLUSHDB));
 
@@ -27,5 +27,5 @@ NFRedisResult *NFRedisClient::FLUSHDB()
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
