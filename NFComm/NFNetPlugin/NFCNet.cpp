@@ -32,6 +32,9 @@ TO
 #define EVBUFFER_MAX_READ	65536
 */
 
+//1048576 = 1024 * 1024
+#define NF_BUFFER_MAX_READ	1048576
+
 void NFCNet::conn_writecb(struct bufferevent* bev, void* user_data)
 {
     
@@ -150,15 +153,22 @@ void NFCNet::conn_readcb(struct bufferevent* bev, void* user_data)
 
     //////////////////////////////////////////////////////////////////////////
 
-    
-    char* strMsg = new char[len];
+	static char* mstrTempBuffData = nullptr;
+	if (mstrTempBuffData == nullptr)
+	{
+		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
+	}
 
-    if (evbuffer_remove(input, strMsg, len) > 0)
+	int nDataLen = len;
+	if (len > NF_BUFFER_MAX_READ)
+	{
+		nDataLen = NF_BUFFER_MAX_READ;
+	}
+
+    if (evbuffer_remove(input, mstrTempBuffData, nDataLen) > 0)
     {
-        pObject->AddBuff(strMsg, len);
+        pObject->AddBuff(mstrTempBuffData, nDataLen);
     }
-
-    delete[] strMsg;
 
     while (1)
     {
