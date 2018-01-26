@@ -9,23 +9,32 @@ NFRedisResult::NFRedisResult(NFRedisClientSocket *pClientSocket)
     m_pClientSocket = pClientSocket;
 }
 
+bool NFRedisResult::ReadRespType()
+{
+	if (NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_UNKNOW == mxResultStatus)
+	{
+		char chType[1] = { 0 };
+		if (m_pClientSocket->ReadN(chType, 1))
+		{
+			mstrMsgValue.append(chType, 1);
+			mxRespType = GetRespType(chType[0]);
+
+			mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_IMCOMPLETE;
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool NFRedisResult::ReadReply()
 {
-    Reset();
     //1 get resptype---readN
     //2 get arg count
     //3 get data(for or wait---read line)
 
-    mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_UNKNOW;
-
-	char chType[1] = {0};
-    m_pClientSocket->ReadN(chType, 1);
-    mstrMsgValue.append(chType, 1);
-    mxRespType = GetRespType(chType[0]);
-
-
-
-    mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_IMCOMPLETE;
+	ReadRespType();
 
     bool bRet = false;
     switch (mxRespType)

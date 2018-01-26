@@ -124,15 +124,7 @@ bool NFRedisClientSocket::ReadLine(std::string &line)
 
 		if (!bFindLine)
 		{
-			//yield
-			if (YieldFunction)
-			{
-				YieldFunction();
-			}
-			else
-			{
-				Execute();
-			}
+			return false;
 		}
 	}
 
@@ -160,28 +152,15 @@ int NFRedisClientSocket::Write(const char *buf, int count)
 
 bool NFRedisClientSocket::ReadN(char *buf, int count)
 {
-	while (count > mstrBuff.length())
+	if (count > mstrBuff.length() || count <= 0)
 	{
-		//yeild
-		if (YieldFunction)
-		{
-			YieldFunction();
-		}
-		else
-		{
-			Execute();
-		}
+		return false;
 	}
 
-	if (mstrBuff.length() >= count)
-	{
-		memcpy(buf, mstrBuff.data(), count);
-		mstrBuff.erase(0, count);
+	memcpy(buf, mstrBuff.data(), count);
+	mstrBuff.erase(0, count);
 
-		return true;
-	}
-
-	return false;
+	return true;
 }
 
 int NFRedisClientSocket::ClearBuff()

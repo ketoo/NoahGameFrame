@@ -33,11 +33,11 @@ void NFRedisTester::TestGEO()
 void NFRedisTester::TestHash()
 {
 	/*
-	NFRedisResult* HINCRBY(const std::string& key, const std::string& field, const int by);
-	NFRedisResult* HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
+	NF_SHARE_PTR<NFRedisResult> HINCRBY(const std::string& key, const std::string& field, const int by);
+	NF_SHARE_PTR<NFRedisResult> HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
 
-	NFRedisResult* HSETNX(const std::string& key, const std::string& field, const std::string& value);
-	//NFRedisResult* HSCAN(const std::string& key, const std::string& field);
+	NF_SHARE_PTR<NFRedisResult> HSETNX(const std::string& key, const std::string& field, const std::string& value);
+	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
 	*/
 
 	std::string strKey = "TestHash::TestHash";
@@ -74,7 +74,7 @@ void NFRedisTester::TestHash()
 	pair_values.push_back(string_pair(fields[4], values[4]));
 
 
-	NFRedisResult* pRedisResult;
+	NF_SHARE_PTR<NFRedisResult> pRedisResult;
 
 	pRedisResult = mxRedisClient.DEL(strKey);
 
@@ -148,7 +148,7 @@ void NFRedisTester::TestKey()
 	std::string strKey = "NFRedisTester::TestKey";
 	std::string strValue = "1232321123r34234";
 
-	NFRedisResult* pRedisResult;
+	NF_SHARE_PTR<NFRedisResult> pRedisResult;
 
 	pRedisResult = mxRedisClient.SET(strKey, strValue);
 	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
@@ -180,9 +180,9 @@ void NFRedisTester::TestKey()
 void NFRedisTester::TestList()
 {
 	/*
-	NFRedisResult* RPUSHX(const std::string& key, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> RPUSHX(const std::string& key, const std::string& value);
 
-	NFRedisResult* LSET(const std::string& key, const int index, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> LSET(const std::string& key, const int index, const std::string& value);
 
 	*/
 
@@ -194,7 +194,7 @@ void NFRedisTester::TestList()
 	strList.push_back("123444444");
 
 
-	NFRedisResult* pRedisResult;
+	NF_SHARE_PTR<NFRedisResult> pRedisResult;
 
 	pRedisResult = mxRedisClient.DEL(strKey);
 
@@ -289,21 +289,21 @@ void NFRedisTester::TestString()
 {
 
 	/*
-	NFRedisResult* DECR(const std::string& key);
-	NFRedisResult* DECRBY(const std::string& key, const int64_t v);
-	NFRedisResult* GETSET(const std::string& key, const std::string& value);
-	NFRedisResult* INCR(const std::string& key);
-	NFRedisResult* INCRBY(const std::string& key, const int64_t v);
-	NFRedisResult* INCRBYFLOAT(const std::string& key, const float fv);
+	NF_SHARE_PTR<NFRedisResult> DECR(const std::string& key);
+	NF_SHARE_PTR<NFRedisResult> DECRBY(const std::string& key, const int64_t v);
+	NF_SHARE_PTR<NFRedisResult> GETSET(const std::string& key, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> INCR(const std::string& key);
+	NF_SHARE_PTR<NFRedisResult> INCRBY(const std::string& key, const int64_t v);
+	NF_SHARE_PTR<NFRedisResult> INCRBYFLOAT(const std::string& key, const float fv);
 
-	NFRedisResult* SETEX(const std::string& key, const std::string& value, int time);
-	NFRedisResult* SETNX(const std::string& key, const std::string& value);
-	NFRedisResult* STRLEN(const std::string& key);
+	NF_SHARE_PTR<NFRedisResult> SETEX(const std::string& key, const std::string& value, int time);
+	NF_SHARE_PTR<NFRedisResult> SETNX(const std::string& key, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> STRLEN(const std::string& key);
 	*/
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
 
-    NFRedisResult* pRedisResult;
+    NF_SHARE_PTR<NFRedisResult> pRedisResult;
 
     pRedisResult = mxRedisClient.SET(strKey, strValue);
 	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
