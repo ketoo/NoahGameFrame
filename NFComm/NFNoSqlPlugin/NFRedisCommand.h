@@ -33,11 +33,11 @@ public:
         return *this;
     }
 
-    std::string Serialize()
+    std::string Serialize() const
     {
         std::stringstream xDataString;
         xDataString << '*' << mxParam.size() << NFREDIS_CRLF;
-        std::vector<std::string>::iterator it = mxParam.begin();
+        std::vector<std::string>::const_iterator it = mxParam.begin();
         for ( ; it != mxParam.end(); ++it )
         {
             xDataString << '$' << it->size() << NFREDIS_CRLF;

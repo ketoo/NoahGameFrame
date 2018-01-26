@@ -190,7 +190,7 @@ public:
 			return *vPos;
 		}
 
-		if (bRoll && mtSceneRelivePos.Count())
+		if (bRoll && mtSceneRelivePos.Count() > 0)
 		{
 			return *(mtSceneRelivePos.GetElement(0));
 		}

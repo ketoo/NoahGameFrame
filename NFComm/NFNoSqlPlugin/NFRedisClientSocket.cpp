@@ -17,6 +17,9 @@
 #include <arpa/inet.h>
 #endif
 
+//1048576 = 1024 * 1024
+#define NF_BUFFER_MAX_READ	1048576
+
 NFRedisClientSocket::NFRedisClientSocket()
 {
 	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
@@ -212,15 +215,22 @@ void NFRedisClientSocket::conn_readcb(bufferevent * bev, void * user_data)
 
 	//////////////////////////////////////////////////////////////////////////
 
-
-	char* strMsg = new char[len];
-
-	if (evbuffer_remove(input, strMsg, len) > 0)
+	static char* mstrTempBuffData = nullptr;
+	if (mstrTempBuffData == nullptr)
 	{
-		pClientSocket->mstrBuff.append(strMsg, len);
+		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
 	}
 
-	delete[] strMsg;
+	int nDataLen = len;
+	if (len > NF_BUFFER_MAX_READ)
+	{
+		nDataLen = NF_BUFFER_MAX_READ;
+	}
+
+	if (evbuffer_remove(input, mstrTempBuffData, len) > 0)
+	{
+		pClientSocket->mstrBuff.append(mstrTempBuffData, len);
+	}
 }
 
 void NFRedisClientSocket::conn_writecb(bufferevent * bev, void * user_data)
