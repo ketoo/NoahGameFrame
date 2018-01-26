@@ -6,7 +6,7 @@
 
 
 
-NFRedisResult *NFRedisClient::APPEND(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::APPEND(const std::string &key, const std::string &value)
 {
 	NFRedisCommand cmd(GET_NAME(APPEND));
     cmd << key;
@@ -17,10 +17,10 @@ NFRedisResult *NFRedisClient::APPEND(const std::string &key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::DECR(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::DECR(const std::string &key)
 {
 	NFRedisCommand cmd(GET_NAME(DECR));
     cmd << key;
@@ -31,10 +31,10 @@ NFRedisResult *NFRedisClient::DECR(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::DECRBY(const std::string &key, const int64_t v)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::DECRBY(const std::string &key, const int64_t v)
 {
     NFRedisCommand cmd(GET_NAME(DECRBY));
     cmd << key;
@@ -46,10 +46,10 @@ NFRedisResult *NFRedisClient::DECRBY(const std::string &key, const int64_t v)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::GETSET(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::GETSET(const std::string &key, const std::string &value)
 {
 
     NFRedisCommand cmd(GET_NAME(GETSET));
@@ -61,10 +61,10 @@ NFRedisResult *NFRedisClient::GETSET(const std::string &key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::INCR(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCR(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(INCR));
     cmd << key;
@@ -75,10 +75,10 @@ NFRedisResult *NFRedisClient::INCR(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::INCRBY(const std::string &key, const int64_t v)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCRBY(const std::string &key, const int64_t v)
 {
     NFRedisCommand cmd(GET_NAME(INCRBY));
     cmd << key;
@@ -89,10 +89,10 @@ NFRedisResult *NFRedisClient::INCRBY(const std::string &key, const int64_t v)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::INCRBYFLOAT(const std::string &key, const float fv)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCRBYFLOAT(const std::string &key, const float fv)
 {
     NFRedisCommand cmd(GET_NAME(INCRBYFLOAT));
     cmd << key;
@@ -103,10 +103,10 @@ NFRedisResult *NFRedisClient::INCRBYFLOAT(const std::string &key, const float fv
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::MGET(const string_vector &keys, string_vector &values)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 {
 	NFRedisCommand cmd(GET_NAME(MGET));
 
@@ -131,10 +131,10 @@ NFRedisResult *NFRedisClient::MGET(const string_vector &keys, string_vector &val
 		}
 	}
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::MSET(const string_pair_vector &values)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::MSET(const string_pair_vector &values)
 {
     NFRedisCommand cmd(GET_NAME(MSET));
 
@@ -148,10 +148,10 @@ NFRedisResult *NFRedisClient::MSET(const string_pair_vector &values)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
 {
     NFRedisCommand cmd(GET_NAME(SETEX));
     cmd << key;
@@ -163,10 +163,10 @@ NFRedisResult *NFRedisClient::SETEX(const std::string &key, const std::string &v
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::SETNX(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETNX(const std::string &key, const std::string &value)
 {
     NFRedisCommand cmd(GET_NAME(SETNX));
     cmd << key;
@@ -177,10 +177,10 @@ NFRedisResult *NFRedisClient::SETNX(const std::string &key, const std::string &v
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::STRLEN(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::STRLEN(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(STRLEN));
     cmd << key;
@@ -190,11 +190,11 @@ NFRedisResult *NFRedisClient::STRLEN(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
 
-NFRedisResult* NFRedisClient::SET(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::SET(const std::string &key, const std::string &value)
 {
     NFRedisCommand cmd(GET_NAME(SET));
     cmd << key;
@@ -205,10 +205,10 @@ NFRedisResult* NFRedisClient::SET(const std::string &key, const std::string &val
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult* NFRedisClient::GET(const std::string &key)
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::GET(const std::string &key)
 {
     NFRedisCommand cmd(GET_NAME(GET));
     cmd << key;
@@ -218,5 +218,5 @@ NFRedisResult* NFRedisClient::GET(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
