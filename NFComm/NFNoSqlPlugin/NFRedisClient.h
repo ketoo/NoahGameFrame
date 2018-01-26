@@ -1,4 +1,4 @@
-//
+﻿//
 // Author: LUSHENG HUANG Created on 17/11/17.
 //
 
@@ -45,8 +45,18 @@ public:
 
     bool Execute();
 
-	NFRedisResult* AUTH(const std::string& auth);
+	/**
+	* @brie if you have setted a password for Redis, you much use AUTH cmd to connect to the server than you can use other cmds
+	* @param password
+	* @return success: true; fail: false
+	*/
+	NF_SHARE_PTR<NFRedisResult> AUTH(const std::string& auth);
 
+	/**
+	* @brie select DB
+	* @param DB index
+	* @return success: true; fail: false
+	*/
 	bool SelectDB(int dbnum);
 
 /*
@@ -55,163 +65,195 @@ public:
     QUIT
     */
     /////////client key//////////////
+	/**
+	* @brie del a key
+	* @param key's name
+	* @return success: true; fail: false
+	*/
+    NF_SHARE_PTR<NFRedisResult> DEL(const std::string& key);
 
-    NFRedisResult* DEL(const std::string& key);
-    //NFRedisResult* DUMP(const std::string& key, std::string& out);
+    //NF_SHARE_PTR<NFRedisResult> DUMP(const std::string& key, std::string& out);
 
-    NFRedisResult* EXISTS(const std::string& key);
-    NFRedisResult* EXPIRE(const std::string& key, const unsigned int secs);
-    NFRedisResult* EXPIREAT(const std::string& key, const int64_t unixTime);
-    //NFRedisResult* KEYS(const std::string& key);
-    //NFRedisResult* MIGRATE(const std::string& key);
-    //NFRedisResult* MOVE(const std::string& key);
-    //NFRedisResult* OBJECT(const std::string& key);
-    NFRedisResult* PERSIST(const std::string& key);
-    //NFRedisResult* PEXPIRE(const std::string& key);
-    //NFRedisResult* PEXPIREAT(const std::string& key);
-    //NFRedisResult* PTTL(const std::string& key);
-    //NFRedisResult* RANDOMKEY(const std::string& key);
-    //NFRedisResult* RENAME(const std::string& key);
-    //NFRedisResult* RENAMENX(const std::string& key);
-    //NFRedisResult* RESTORE(const std::string& key);
-    //NFRedisResult* SORT(const std::string& key);
-    NFRedisResult* TTL(const std::string& key);
-    NFRedisResult* TYPE(const std::string& key);
-    //NFRedisResult* SCAN(const std::string& key);
+	/**
+	* @brie Returns if key exists.
+	* @param key's name
+	* @return true if the key exists, false if the key does not exist.
+	*/
+    NF_SHARE_PTR<NFRedisResult> EXISTS(const std::string& key);
+
+	/**
+	* @brief Set a timeout on key. After the timeout has expired, the key will automatically be deleted
+	* @param keys [in] name of key
+	* @param seconds [in] the key will be destroy after this second
+	* @return The true for set or reset success, false for failed(if key does not exist)
+	*/
+    NF_SHARE_PTR<NFRedisResult> EXPIRE(const std::string& key, const unsigned int secs);
+
+	/**
+	* @brief this function like EXPIRE, which is to set the lfie time for one key
+	* the difference is the times of the cmd EXPIREAT is unix timestamp
+	* @param keys [in] name of key
+	* @param timestamp [in] the key will be destroy after this timestamp
+	* @return true if the timeout was set, false if key does not exist.
+	*/
+    NF_SHARE_PTR<NFRedisResult> EXPIREAT(const std::string& key, const int64_t unixTime);
+    //NF_SHARE_PTR<NFRedisResult> KEYS(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> MIGRATE(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> MOVE(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> OBJECT(const std::string& key);
+	/**
+	* @brief Remove the existing timeout on key, turning the key from volatile (a key with an expire set) to persistent(a key that will never expire as no timeout is associated).
+	* the difference is the times of the cmd EXPIREAT is unix timestamp
+	* @param keys [in] name of key
+	* @param timestamp [in] the key will be destroy after this timestamp
+	* @return true if the timeout was set, false if key does not exist.
+	*/
+	NF_SHARE_PTR<NFRedisResult> PERSIST(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> PEXPIRE(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> PEXPIREAT(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> PTTL(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> RANDOMKEY(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> RENAME(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> RENAMENX(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> RESTORE(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> SORT(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> TTL(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> TYPE(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> SCAN(const std::string& key);
 
 
     /////////client String//////////////
 
-    NFRedisResult* APPEND(const std::string& key, const std::string& value);
-    //NFRedisResult* BITCOUNT
-    //NFRedisResult* BITOP
-    //NFRedisResult* BITFIELD(const std::string& key);
-    NFRedisResult* DECR(const std::string& key);
-    NFRedisResult* DECRBY(const std::string& key, const int64_t v);
-    NFRedisResult* GET(const std::string& key);
-    //NFRedisResult* GETBIT(const std::string& key);
-    //NFRedisResult* GETRANGE(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> APPEND(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> BITCOUNT
+    //NF_SHARE_PTR<NFRedisResult> BITOP
+    //NF_SHARE_PTR<NFRedisResult> BITFIELD(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> DECR(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> DECRBY(const std::string& key, const int64_t v);
+    NF_SHARE_PTR<NFRedisResult> GET(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> GETBIT(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> GETRANGE(const std::string& key);
 
-    NFRedisResult* GETSET(const std::string& key, const std::string& value);
-    NFRedisResult* INCR(const std::string& key);
-    NFRedisResult* INCRBY(const std::string& key, const int64_t v);
-    NFRedisResult* INCRBYFLOAT(const std::string& key, const float fv);
+    NF_SHARE_PTR<NFRedisResult> GETSET(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> INCR(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> INCRBY(const std::string& key, const int64_t v);
+    NF_SHARE_PTR<NFRedisResult> INCRBYFLOAT(const std::string& key, const float fv);
 
-    NFRedisResult* MGET(const string_vector& keys, string_vector& values);
-    NFRedisResult* MSET(const string_pair_vector& values);
+    NF_SHARE_PTR<NFRedisResult> MGET(const string_vector& keys, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> MSET(const string_pair_vector& values);
 
-    //NFRedisResult* MSETNX(const std::string& key);
-    //NFRedisResult* PSETEX(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> MSETNX(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> PSETEX(const std::string& key);
 
-    NFRedisResult* SET(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SET(const std::string& key, const std::string& value);
 
-    //NFRedisResult* SETBIT(const std::string& key);
-    NFRedisResult* SETEX(const std::string& key, const std::string& value, int time);
-    NFRedisResult* SETNX(const std::string& key, const std::string& value);
-    //NFRedisResult* SETRANGE(const std::string& key);
-    NFRedisResult* STRLEN(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> SETBIT(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> SETEX(const std::string& key, const std::string& value, int time);
+    NF_SHARE_PTR<NFRedisResult> SETNX(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> SETRANGE(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> STRLEN(const std::string& key);
 
     /////////client hash//////////////
-    NFRedisResult* HDEL(const std::string& key, const std::string& field);
-    NFRedisResult* HEXISTS(const std::string& key, const std::string& field);
-    NFRedisResult* HGET(const std::string& key, const std::string& field);
-    NFRedisResult* HGETALL(const std::string& key, std::vector<string_pair>& values);
-    NFRedisResult* HINCRBY(const std::string& key, const std::string& field, const int by);
-    NFRedisResult* HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
-    NFRedisResult* HKEYS(const std::string& key, std::vector<std::string>& fields);
-    NFRedisResult* HLEN(const std::string& key);
-    NFRedisResult* HMGET(const std::string& key, const string_vector& fields, string_vector& values);
-    NFRedisResult* HMSET(const std::string& key, const std::vector<string_pair>& values);
-    NFRedisResult* HSET(const std::string& key, const std::string& field, const std::string& value);
-    NFRedisResult* HSETNX(const std::string& key, const std::string& field, const std::string& value);
-    NFRedisResult* HVALS(const std::string& key, string_vector& values);
-    //NFRedisResult* HSCAN(const std::string& key, const std::string& field);
-    NFRedisResult* HSTRLEN(const std::string& key, const std::string& field);
+    NF_SHARE_PTR<NFRedisResult> HDEL(const std::string& key, const std::string& field);
+    NF_SHARE_PTR<NFRedisResult> HEXISTS(const std::string& key, const std::string& field);
+    NF_SHARE_PTR<NFRedisResult> HGET(const std::string& key, const std::string& field);
+    NF_SHARE_PTR<NFRedisResult> HGETALL(const std::string& key, std::vector<string_pair>& values);
+    NF_SHARE_PTR<NFRedisResult> HINCRBY(const std::string& key, const std::string& field, const int by);
+    NF_SHARE_PTR<NFRedisResult> HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
+    NF_SHARE_PTR<NFRedisResult> HKEYS(const std::string& key, std::vector<std::string>& fields);
+    NF_SHARE_PTR<NFRedisResult> HLEN(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> HMGET(const std::string& key, const string_vector& fields, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> HMSET(const std::string& key, const std::vector<string_pair>& values);
+    NF_SHARE_PTR<NFRedisResult> HSET(const std::string& key, const std::string& field, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> HSETNX(const std::string& key, const std::string& field, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> HVALS(const std::string& key, string_vector& values);
+    //NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
+    NF_SHARE_PTR<NFRedisResult> HSTRLEN(const std::string& key, const std::string& field);
 
     /////////client list//////////////
-    //NFRedisResult* BLPOP(const std::string& key, string_vector& values);
-    //NFRedisResult* BRPOP(const std::string& key, string_vector& values);
-    //NFRedisResult* BRPOPLPUSH(const std::string& key, string_vector& values);
-    NFRedisResult* LINDEX(const std::string& key, const int index);
-    //NFRedisResult* LINSERT(const std::string& key, const std::string& value1, const std::string& value2);
-    NFRedisResult* LLEN(const std::string& key);
-    NFRedisResult* LPOP(const std::string& key);
-    NFRedisResult* LPUSH(const std::string& key, const std::string& value);
-    NFRedisResult* LPUSHX(const std::string& key, const std::string& value);
-    NFRedisResult* LRANGE(const std::string& key, const int start, const int end, string_vector& values);
-    //NFRedisResult* LREM(const std::string& key, string_vector& values);
-    NFRedisResult* LSET(const std::string& key, const int index, const std::string& value);
-    //NFRedisResult* LTRIM(const std::string& key, string_vector& values);
-    NFRedisResult* RPOP(const std::string& key);
-    //NFRedisResult* RPOPLPUSH(const std::string& key, string_vector& values);
-    NFRedisResult* RPUSH(const std::string& key, const std::string& value);
-    NFRedisResult* RPUSHX(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> BLPOP(const std::string& key, string_vector& values);
+    //NF_SHARE_PTR<NFRedisResult> BRPOP(const std::string& key, string_vector& values);
+    //NF_SHARE_PTR<NFRedisResult> BRPOPLPUSH(const std::string& key, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> LINDEX(const std::string& key, const int index);
+    //NF_SHARE_PTR<NFRedisResult> LINSERT(const std::string& key, const std::string& value1, const std::string& value2);
+    NF_SHARE_PTR<NFRedisResult> LLEN(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> LPOP(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> LPUSH(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> LPUSHX(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> LRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    //NF_SHARE_PTR<NFRedisResult> LREM(const std::string& key, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> LSET(const std::string& key, const int index, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> LTRIM(const std::string& key, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> RPOP(const std::string& key);
+    //NF_SHARE_PTR<NFRedisResult> RPOPLPUSH(const std::string& key, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> RPUSH(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> RPUSHX(const std::string& key, const std::string& value);
 
     /////////client set//////////////
     /*
-    NFRedisResult* SADD(const std::string& key, const std::string& value);
-    NFRedisResult* SCARD(const std::string& key, const std::string& value);
-    NFRedisResult* SDIFF(const std::string& key, const std::string& value);
-    NFRedisResult* SDIFFSTORE(const std::string& key, const std::string& value);
-    NFRedisResult* SINTER(const std::string& key, const std::string& value);
-    NFRedisResult* SINTERSTORE(const std::string& key, const std::string& value);
-    NFRedisResult* SISMEMBER(const std::string& key, const std::string& value);
-    NFRedisResult* SMEMBERS(const std::string& key, const std::string& value);
-    NFRedisResult* SMOVE(const std::string& key, const std::string& value);
-    NFRedisResult* SPOP(const std::string& key, const std::string& value);
-    NFRedisResult* SRANDMEMBER(const std::string& key, const std::string& value);
-    NFRedisResult* SREM(const std::string& key, const std::string& value);
-    NFRedisResult* SUNION(const std::string& key, const std::string& value);
-    NFRedisResult* SUNIONSTORE(const std::string& key, const std::string& value);
-    NFRedisResult* SSCAN(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SADD(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SCARD(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SDIFF(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SDIFFSTORE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SINTER(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SINTERSTORE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SISMEMBER(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SMEMBERS(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SMOVE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SPOP(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SRANDMEMBER(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SREM(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SUNION(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SUNIONSTORE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SSCAN(const std::string& key, const std::string& value);
 */
 
     /////////client SortedSet//////////////
  
-    NFRedisResult* ZADD(const std::string& key, const std::string& member, const double score);
-    NFRedisResult* ZCARD(const std::string& key);
-    NFRedisResult* ZCOUNT(const std::string& key, const double start, const double end);
-    NFRedisResult* ZINCRBY(const std::string& key, const std::string & member, const double score);
-    NFRedisResult* ZRANGE(const std::string& key, const int start, const int end, string_vector& values);
-    NFRedisResult* ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
-    NFRedisResult* ZRANK(const std::string & key, const std::string & member);
-    NFRedisResult* ZREM(const std::string& key, const std::string& member);
-    NFRedisResult* ZREMRANGEBYRANK(const std::string& key, const int start, const int end);
-    NFRedisResult* ZREMRANGEBYSCORE(const std::string& key, const double start, const double end);
-    NFRedisResult* ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values);
-    NFRedisResult* ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
-    NFRedisResult* ZREVRANK(const std::string& key, const std::string& member);
-    NFRedisResult* ZSCORE(const std::string& key, const std::string& member);
-    //NFRedisResult* ZUNIONSTORE(const std::string& key, const std::string& value);
-    //NFRedisResult* ZINTERSTORE(const std::string& key, const std::string& value);
-    //NFRedisResult* ZSCAN(const std::string& key, const std::string& value);
-    //NFRedisResult* ZRANGEBYLEX(const std::string& key, const std::string& value);
-    //NFRedisResult* ZLEXCOUNT(const std::string& key, const std::string& value);
-    //NFRedisResult* ZREMRANGEBYLEX(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> ZADD(const std::string& key, const std::string& member, const double score);
+    NF_SHARE_PTR<NFRedisResult> ZCARD(const std::string& key);
+    NF_SHARE_PTR<NFRedisResult> ZCOUNT(const std::string& key, const double start, const double end);
+    NF_SHARE_PTR<NFRedisResult> ZINCRBY(const std::string& key, const std::string & member, const double score);
+    NF_SHARE_PTR<NFRedisResult> ZRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> ZRANK(const std::string & key, const std::string & member);
+    NF_SHARE_PTR<NFRedisResult> ZREM(const std::string& key, const std::string& member);
+    NF_SHARE_PTR<NFRedisResult> ZREMRANGEBYRANK(const std::string& key, const int start, const int end);
+    NF_SHARE_PTR<NFRedisResult> ZREMRANGEBYSCORE(const std::string& key, const double start, const double end);
+    NF_SHARE_PTR<NFRedisResult> ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values);
+    NF_SHARE_PTR<NFRedisResult> ZREVRANK(const std::string& key, const std::string& member);
+    NF_SHARE_PTR<NFRedisResult> ZSCORE(const std::string& key, const std::string& member);
+    //NF_SHARE_PTR<NFRedisResult> ZUNIONSTORE(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> ZINTERSTORE(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> ZSCAN(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> ZRANGEBYLEX(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> ZLEXCOUNT(const std::string& key, const std::string& value);
+    //NF_SHARE_PTR<NFRedisResult> ZREMRANGEBYLEX(const std::string& key, const std::string& value);
 
     /////////client GEO//////////////
 
     /*
-    NFRedisResult* GEOADD(const std::string& key, const std::string& value);
-    NFRedisResult* GEOPOS(const std::string& key, const std::string& value);
-    NFRedisResult* GEODIST(const std::string& key, const std::string& value);
-    NFRedisResult* GEORADIUS(const std::string& key, const std::string& value);
-    NFRedisResult* GEORADIUSBYMEMBER(const std::string& key, const std::string& value);
-    NFRedisResult* GEOHASH(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEOADD(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEOPOS(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEODIST(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEORADIUS(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEORADIUSBYMEMBER(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> GEOHASH(const std::string& key, const std::string& value);
 */
 
     /////////client PUB SUB//////////////
 	/*
-    NFRedisResult* PSUBSCRIBE(const std::string& key, const std::string& value);
-    NFRedisResult* PUBLISH(const std::string& key, const std::string& value);
-    NFRedisResult* PUBSUB(const std::string& key, const std::string& value);
-    NFRedisResult* PUNSUBSCRIBE(const std::string& key, const std::string& value);
-    NFRedisResult* SUBSCRIBE(const std::string& key, const std::string& value);
-    NFRedisResult* UNSUBSCRIBE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> PSUBSCRIBE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> PUBLISH(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> PUBSUB(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> PUNSUBSCRIBE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> SUBSCRIBE(const std::string& key, const std::string& value);
+    NF_SHARE_PTR<NFRedisResult> UNSUBSCRIBE(const std::string& key, const std::string& value);
 	*/
     /////////client server//////////////
-    NFRedisResult* FLUSHALL();
-    NFRedisResult* FLUSHDB();
+    NF_SHARE_PTR<NFRedisResult> FLUSHALL();
+    NF_SHARE_PTR<NFRedisResult> FLUSHDB();
 
 private:
 

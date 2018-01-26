@@ -4,7 +4,7 @@
 
 #include "NFRedisClient.h"
 
-NFRedisResult *NFRedisClient::LINDEX(const std::string &key, const int index) 
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LINDEX(const std::string &key, const int index) 
 {
 	NFRedisCommand cmd(GET_NAME(LINDEX));
 	cmd << key;
@@ -15,10 +15,10 @@ NFRedisResult *NFRedisClient::LINDEX(const std::string &key, const int index)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LLEN(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LLEN(const std::string &key)
 {
 	NFRedisCommand cmd(GET_NAME(LLEN));
 	cmd << key;
@@ -28,10 +28,10 @@ NFRedisResult *NFRedisClient::LLEN(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LPOP(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LPOP(const std::string &key)
 {
 	NFRedisCommand cmd(GET_NAME(LPOP));
 	cmd << key;
@@ -41,10 +41,10 @@ NFRedisResult *NFRedisClient::LPOP(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LPUSH(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LPUSH(const std::string &key, const std::string &value)
 {
 	NFRedisCommand cmd(GET_NAME(LPUSH));
 	cmd << key;
@@ -55,10 +55,10 @@ NFRedisResult *NFRedisClient::LPUSH(const std::string &key, const std::string &v
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LPUSHX(const std::string &key, const std::string &value) 
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LPUSHX(const std::string &key, const std::string &value) 
 {
 	NFRedisCommand cmd(GET_NAME(LPUSHX));
 	cmd << key;
@@ -69,10 +69,10 @@ NFRedisResult *NFRedisClient::LPUSHX(const std::string &key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LRANGE(const std::string &key, const int start, const int end, string_vector &values) 
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LRANGE(const std::string &key, const int start, const int end, string_vector &values) 
 {
 	if (end - start <= 0)
 	{
@@ -97,10 +97,10 @@ NFRedisResult *NFRedisClient::LRANGE(const std::string &key, const int start, co
 		}
 	}
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::LSET(const std::string &key, const int index, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::LSET(const std::string &key, const int index, const std::string &value)
 {
 	NFRedisCommand cmd(GET_NAME(LSET));
 	cmd << key;
@@ -112,10 +112,10 @@ NFRedisResult *NFRedisClient::LSET(const std::string &key, const int index, cons
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::RPOP(const std::string &key)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::RPOP(const std::string &key)
 {
 
 	NFRedisCommand cmd(GET_NAME(RPOP));
@@ -126,10 +126,10 @@ NFRedisResult *NFRedisClient::RPOP(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::RPUSH(const std::string &key, const std::string &value) 
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::RPUSH(const std::string &key, const std::string &value) 
 {
 	NFRedisCommand cmd(GET_NAME(RPUSH));
 	cmd << key;
@@ -140,10 +140,10 @@ NFRedisResult *NFRedisClient::RPUSH(const std::string &key, const std::string &v
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
+NF_SHARE_PTR<NFRedisResult>NFRedisClient::RPUSHX(const std::string &key, const std::string &value)
 {
 
 	NFRedisCommand cmd(GET_NAME(RPUSHX));
@@ -155,5 +155,5 @@ NFRedisResult *NFRedisClient::RPUSHX(const std::string &key, const std::string &
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult.get();
+	return pRedisResult;
 }
