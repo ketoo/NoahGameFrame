@@ -19,7 +19,7 @@ public:
 
     void Reset();
 
-    bool ReadReply();
+	bool ReadReply();
 
 	void SetCommand(const std::string& str);
 	const std::string& GetCommand() const;

@@ -40,21 +40,19 @@ public:
 
     bool ConnectTo(const std::string& ip, const int port, const std::string& auth);
 
-    bool SelectDB(int dbnum);
 
     bool KeepLive();
 
     bool Execute();
 
-    NFRedisResult* GetRedisResult();
-
-
 	NFRedisResult* AUTH(const std::string& auth);
+
+	bool SelectDB(int dbnum);
+
 /*
     ECHO
     PING
     QUIT
-    SELECT
     */
     /////////client key//////////////
 
@@ -217,19 +215,16 @@ public:
 
 private:
 
+	NF_SHARE_PTR<NFRedisResult> GetUnuseResult();
+	NF_SHARE_PTR<NFRedisResult> BuildSendCmd(const NFRedisCommand& cmd);
+	void WaitingResult(NF_SHARE_PTR<NFRedisResult> xRedisResult);
 
-    bool GetStatusReply();
-    bool GetIntReply();
-    bool GetBulkReply();
-    bool GetArrayReply();
-	
 private:
-	int64_t mnCmdIndex = 0;
-	std::list<int64_t> mlCmdList;
+	std::list<NF_SHARE_PTR<NFRedisResult>> mlCmdResultList;
+	std::list<NF_SHARE_PTR<NFRedisResult>> mlUnusedResultList;
 
 private:
     NFRedisClientSocket* m_pRedisClientSocket;
-    NFRedisResult* m_pRedisResult;
 };
 
 
