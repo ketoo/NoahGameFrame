@@ -11,15 +11,14 @@ NFRedisTester::NFRedisTester()
 
 void NFRedisTester::RunTester()
 {
-    //mxRedisClient.Flush();
-
+    mxRedisClient.FLUSHDB();
+	TestKey();
+	TestString();
+	TestList();
+	TestServer();
     TestHash();
-    TestKey();
-    TestList();
-    TestServer();
     TestSet();
     TestSort();
-    TestString();
 }
 
 void NFRedisTester::TestHash()
@@ -134,7 +133,7 @@ void NFRedisTester::TestKey()
 	assert(mxRedisClient.TYPE(strKey) == "string");
 
 	assert(mxRedisClient.DEL(strKey) == true);
-	assert(mxRedisClient.EXISTS(strKey) == true);
+	assert(mxRedisClient.EXISTS(strKey) == false);
 
 	assert(mxRedisClient.SET(strKey, strValue) == true);
 	assert(mxRedisClient.EXISTS(strKey) == true);
@@ -143,13 +142,13 @@ void NFRedisTester::TestKey()
 
 	NFSLEEP(6000);
 	std::string strGET;
-	assert(mxRedisClient.GET(strKey, strGET) == true);
+	assert(mxRedisClient.GET(strKey, strGET) == false);
 	assert(strGET == "");
 
 	//pRedisResult = mxRedisClient.EXPIREAT(strKey, const int64_t unixTime);
-	assert(mxRedisClient.PERSIST(strKey) == true);
-	assert(mxRedisClient.TTL(strKey) == 0);
-	assert(mxRedisClient.TYPE(strKey) == "string");
+	assert(mxRedisClient.PERSIST(strKey) == false);
+	assert(mxRedisClient.TTL(strKey) == -2);
+	assert(mxRedisClient.TYPE(strKey) == "");
 
 }
 
@@ -274,8 +273,6 @@ void NFRedisTester::TestString()
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
 
-    NF_SHARE_PTR<NFRedisResult> pRedisResult;
-
 	assert(mxRedisClient.SET(strKey, strValue) == true);
 
 	std::string strGET;
@@ -289,6 +286,8 @@ void NFRedisTester::TestString()
 	int nSTRLEN;
 	assert(mxRedisClient.STRLEN(strKey, nSTRLEN) == true);
 	assert(nSTRLEN == strValue.length() * 2);
+
+	assert(mxRedisClient.STRLEN("321321", nSTRLEN) == false);
 
     std::cout << "test cmd:" << std::endl;
 
@@ -313,7 +312,6 @@ void NFRedisTester::TestString()
     }
 
     mxRedisClient.MSET(vstring_pair);
-	std::cout << "test cmd:" << pRedisResult->GetCommand() << std::endl;
 
 	std::vector<std::string> vstringListValue;
     mxRedisClient.MGET(vstringListKey, vstringListValue);

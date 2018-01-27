@@ -152,16 +152,59 @@ int NFRedisClientSocket::GetLineNum()
 	return mLineList.size();
 }
 
-bool NFRedisClientSocket::ReadLine(std::string & line)
+bool NFRedisClientSocket::TryPredictType(char& eType)
 {
-	if (mLineList.size() <= 0)
+	bool bFindType = false;
+	while (!bFindType)
 	{
-		return false;
+		if (mLineList.size() <= 0)
+		{
+			//yeild
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
+		}
+		else
+		{
+			std::string& line = mLineList.front();
+			eType = line.data()[0];
+			bFindType = true;
+		}
 	}
 
-	line = mLineList.front();
-	mLineList.pop_front();
+	return true;
+}
 
+bool NFRedisClientSocket::ReadLine(std::string & line)
+{
+	bool bFindLine = false;
+	while (!bFindLine)
+	{
+		if (mLineList.size() <= 0)
+		{
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
+		}
+		else
+		{
+			bFindLine = true;
+
+			line = mLineList.front();
+			mLineList.pop_front();
+		}
+	}
+	
 	return true;
 }
 

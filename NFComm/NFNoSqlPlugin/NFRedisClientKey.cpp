@@ -23,6 +23,7 @@ bool NFRedisClient::DEL(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		return pRedisResult->GetRespInt();
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -32,7 +33,7 @@ bool NFRedisClient::DEL(const std::string &key)
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::EXISTS(const std::string &key)
@@ -56,6 +57,7 @@ bool NFRedisClient::EXISTS(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		return (pRedisResult->GetRespInt() > 0);
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -65,7 +67,7 @@ bool NFRedisClient::EXISTS(const std::string &key)
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
@@ -90,6 +92,7 @@ bool NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		return (pRedisResult->GetRespInt() > 0);
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -99,7 +102,7 @@ bool NFRedisClient::EXPIRE(const std::string &key, const unsigned int secs)
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::EXPIREAT(const std::string &key, const int64_t unixTime)
@@ -127,12 +130,13 @@ bool NFRedisClient::EXPIREAT(const std::string &key, const int64_t unixTime)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		return pRedisResult->IsOKRespStatus();
 		break;
 	default:
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::PERSIST(const std::string &key)
@@ -155,6 +159,7 @@ bool NFRedisClient::PERSIST(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		return (pRedisResult->GetRespInt() > 0);
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -164,7 +169,7 @@ bool NFRedisClient::PERSIST(const std::string &key)
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 int NFRedisClient::TTL(const std::string &key)
@@ -186,6 +191,7 @@ int NFRedisClient::TTL(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		return pRedisResult->GetRespInt();
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -195,7 +201,7 @@ int NFRedisClient::TTL(const std::string &key)
 		break;
 	}
 
-	return pRedisResult->GetRespInt();
+	return false;
 }
 
 std::string NFRedisClient::TYPE(const std::string &key)
@@ -223,10 +229,18 @@ std::string NFRedisClient::TYPE(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+	{
+		if (pRedisResult->GetRespString() == "none")
+		{
+			return "";
+		}
+
+		return pRedisResult->GetRespString();
+	}
 		break;
 	default:
 		break;
 	}
 
-	return pRedisResult->GetRespString();
+	return false;
 }
