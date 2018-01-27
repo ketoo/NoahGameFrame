@@ -37,27 +37,65 @@ public:
     double GetRespDouble() const;
     const std::vector<NFRedisResult>& GetRespArray();
 
+	static NFREDIS_RESP_TYPE GetRespType(const char strRes);
+
 private:
 	bool ReadRespType();
+	bool ReadBuff();
+	bool DeSerializeBuff();
 
 private:
-    NFREDIS_RESP_TYPE GetRespType(const char strRes);
 
-    bool ReadForStatus();
-    bool ReadForError();
-    bool ReadForInt();
     bool ReadForBulk();
     bool ReadForArray();
 
+    static bool DeSerializeForStatus(const std::string& strRes, std::string& status);
+	static bool DeSerializeForError(const std::string& strRes, std::string& error);
+	static bool DeSerializeForInt(const std::string& strRes, int64_t& n);
+	static bool DeSerializeForBulk(const std::string& strRes, std::string& bulk);
 
-    int DeSerializeForStatus(const std::string& strRes);
-    int DeSerializeForError(const std::string& strRes);
-    int DeSerializeForInt(const std::string& strRes);
-    int DeSerializeForBulk(const std::string& strRes);
+private:
+	enum ReadBuffState
+	{
+		UNSTART,
+		WORKING,
+		FINISHED,
+	};
 
+	struct BulkStatus
+	{
+		BulkStatus()
+		{
+			mnDataLen = 0;
+			mState = UNSTART;
+		}
+
+		int64_t mnDataLen;
+		ReadBuffState mState;
+
+	};
+
+	struct ArrayStatus
+	{
+		ArrayStatus()
+		{
+			mnTotalElementNum = 0;
+			mnNowElementNum = 0;
+			mState = UNSTART;
+		}
+
+		int64_t mnTotalElementNum;
+		int64_t mnNowElementNum;
+		ReadBuffState mState;
+
+	};
+
+	BulkStatus mxBulkStatus;
+	ArrayStatus mxArrayStatus;
 private:
     NFREDIS_RESULT_STATUS mxResultStatus;
     NFREDIS_RESP_TYPE mxRespType;
+
     std::string mstrRespValue;
 	std::string mstrMsgValue;
 	std::string mstrCommand;
