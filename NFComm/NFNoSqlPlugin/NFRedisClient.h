@@ -120,6 +120,8 @@ public:
 	* @brief Returns the remaining time to live of a key that has a timeout
 	* @param keys [in] name of key
 	* @return TTL in seconds, or a negative value in order to signal an error
+	* The command returns -2 if the key does not exist.
+	* The command returns -1 if the key exists but has no associated expire.
 	*/
     int TTL(const std::string& key);
 

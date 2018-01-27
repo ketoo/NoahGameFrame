@@ -74,6 +74,7 @@ public:
     int Write(const char *buf, int count);
 
 	int GetLineNum();
+	bool TryPredictType(char& eType);
 	bool ReadLine(std::string& line);
 
     int ClearBuff();

@@ -40,16 +40,6 @@ bool NFRedisClient::Execute()
 {
     m_pRedisClientSocket->Execute();
 
-	if (!mlCmdResultList.empty())
-	{
-		NF_SHARE_PTR<NFRedisResult> pRedisResult = mlCmdResultList.front();
-		bool bRet = pRedisResult->ReadReply();
-		if (bRet && pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK)
-		{
-			mlCmdResultList.pop_front();
-		}
-	}
-
     return false;
 }
 
@@ -94,15 +84,31 @@ NF_SHARE_PTR<NFRedisResult> NFRedisClient::BuildSendCmd(const NFRedisCommand& cm
 
 void NFRedisClient::WaitingResult(NF_SHARE_PTR<NFRedisResult> pRedisResult)
 {
-	while (!pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK)
+	if (!mlCmdResultList.empty())
 	{
-		if (YieldFunction)
+		bool bFinished = false;
+		while (!bFinished)
 		{
-			YieldFunction();
-		}
-		else
-		{
-			Execute();
+			NF_SHARE_PTR<NFRedisResult> pFrontRedisResult = mlCmdResultList.front();
+			if (pRedisResult == pFrontRedisResult)
+			{
+				pRedisResult->ReadReply();
+				mlCmdResultList.pop_front();
+
+				bFinished = true;
+				break;
+			}
+			else
+			{
+				if (YieldFunction)
+				{
+					YieldFunction();
+				}
+				else
+				{
+					Execute();
+				}
+			}
 		}
 	}
 }
