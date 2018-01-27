@@ -179,7 +179,7 @@ public:
     * @param keys [in] name of key
     * @return the old value stored at key, or "" when key did not exist.
     */
-    bool GETSET(const std::string& key, const std::string& value, const std::string& oldValue);
+    bool GETSET(const std::string& key, const std::string& value, std::string& oldValue);
 
     /**
 	* @brief Increments the number stored at key by one.
@@ -210,12 +210,13 @@ public:
 
     /**
     * @brief Returns the values of all specified keys.
-    * @param keys [in] name of key
+	* @param keys [in] name of keys
+	* @param values [in] values of keys
     * @return list of values at the specified keys.
     * For every key that does not hold a string value or does not exist,
     * the special value "" is returned. Because of this, the operation never fails / if the key is not a string key than that field return ""
     */
-    string_vector MGET(const string_vector& keys);
+    bool MGET(const string_vector& keys, string_vector& values);
 
     /**
     * @brief Sets the given keys to their respective values, MSET is atomic, so all given keys are set at once
@@ -256,10 +257,11 @@ public:
 
     /**
     * @brief Returns the length of the string value stored at key
-    * @param key [in] name of key
-    * @return the length of the string at key, or 0 when key does not exist.
+	* @param key [in] name of key
+	* @param length [out] the length of the string at key
+    * @return false when key does not exist or wrong type
     */
-    int STRLEN(const std::string& key);
+    bool STRLEN(const std::string& key, int& length);
 
     /////////client hash//////////////
     /**
@@ -279,10 +281,11 @@ public:
 
     /**
     * @brief Returns the value associated with field in the hash stored at key.
-    * @param field [in] the field you want to get
-    * @return the value associated with field, or "" when field is not present in the hash or key does not exist.
+	* @param field [in] the field you want to get
+	* @param value [out] the value you want to get
+    * @return true if the hash contains field. false if the hash does not contain field, or key does not exist.
     */
-    std::string HGET(const std::string& key, const std::string& field);
+    bool HGET(const std::string& key, const std::string& field, std::string& value);
 
     /**
     * @brief Returns all field names in the hash stored at key.
@@ -325,10 +328,11 @@ public:
 
     /**
     * @brief Returns the number of fields contained in the hash stored at key.
-    * @param key [in] the name of the key
-    * @return number of fields in the hash, or 0 when key does not exist.
+	* @param key [in] the name of the key
+	* @param number [out] number of fields in the hash
+    * @return true when key exist, false when key does not exist.
     */
-    int HLEN(const std::string& key);
+    bool HLEN(const std::string& key, int& number);
 
     /**
     * @brief Returns the values associated with the specified fields in the hash stored at key.
@@ -385,6 +389,7 @@ public:
     bool HSTRLEN(const std::string& key, const std::string& field, int& length);
 
     /////////client list//////////////
+
     //NF_SHARE_PTR<NFRedisResult> BLPOP(const std::string& key, string_vector& values);
     //NF_SHARE_PTR<NFRedisResult> BRPOP(const std::string& key, string_vector& values);
     //NF_SHARE_PTR<NFRedisResult> BRPOPLPUSH(const std::string& key, string_vector& values);
