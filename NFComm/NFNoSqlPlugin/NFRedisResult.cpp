@@ -11,64 +11,43 @@ NFRedisResult::NFRedisResult(NFRedisClientSocket *pClientSocket)
 
 bool NFRedisResult::ReadRespType()
 {
-	if (NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_UNKNOW == mxResultStatus)
-	{
-		std::string line;
-		if (m_pClientSocket->ReadLine(line))
-		{
-			if (line.length() > 0)
-			{
-				mxRespType = GetRespType(line.data()[0]);
-				mstrMsgValue.append(line);
+	char c = 0;
+	m_pClientSocket->TryPredictType(c);
 
-				mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_READY_RESPTYPE;
-
-				return true;
-			}
-		}
-	}
+	mxRespType = GetRespType(c);
 
 	return false;
 }
 
 bool NFRedisResult::ReadBuff()
 {
-	if (NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_READY_RESPTYPE == mxResultStatus)
+	bool bRet = false;
+	switch (mxRespType)
 	{
-		bool bRet = false;
-
-		switch (mxRespType)
-		{
-		case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
-			bRet = true;
-			break;
-		case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
-			bRet = true;
-			break;
-		case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-			bRet = true;
-			break;
-		case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
-			bRet = ReadForBulk();
-			break;
-		case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
-			bRet = ReadForArray();
-			break;
-		default:
-			break;
-		}
-
-		mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_READY_BUFF;
-
-		return true;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		bRet = ReadForStatus();
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+		bRet = ReadForError();
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		bRet = ReadForInt();
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		bRet = ReadForBulk();
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		bRet = ReadForArray();
+		break;
+	default:
+		break;
 	}
 
-	return false;
+	return true;
 }
 
 bool NFRedisResult::DeSerializeBuff()
 {
-	if (NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_READY_BUFF == mxResultStatus)
 	{
 		bool bRet = false;
 		/*
@@ -94,7 +73,6 @@ bool NFRedisResult::DeSerializeBuff()
 			break;
 		}
 		*/
-		mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_COMPLETED;
 
 		return true;
 	}
@@ -111,12 +89,7 @@ bool NFRedisResult::ReadReply()
 	ReadBuff();
 	DeSerializeBuff();
 
-	if (NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_COMPLETED == mxResultStatus)
-	{
-		mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK;
 
-		return true;
-	}
 
 	return false;
 }
@@ -148,7 +121,12 @@ bool NFRedisResult::IsOKRespStatus() const
 
 std::int64_t NFRedisResult::GetRespInt() const
 {
-    return atoi(mstrRespValue.data());
+	return mnRespValue;
+}
+
+int NFRedisResult::GetRespBulkLen() const
+{
+	return mnRespBulkLen;
 }
 
 std::string NFRedisResult::GetRespString() const 
@@ -200,7 +178,7 @@ NFREDIS_RESP_TYPE NFRedisResult::GetRespType(const char strRes)
 bool NFRedisResult::DeSerializeForStatus(const std::string &strRes, std::string& status)
 {
 	char type = strRes[0];
-	if (*NFREDIS_INT_REPLY == type)
+	if (*NFREDIS_STATUS_REPLY == type)
 	{
 		int len = 0;
 		const char* p = strRes.c_str();
@@ -256,6 +234,35 @@ bool NFRedisResult::DeSerializeForInt(const std::string &strRes, int64_t& n)
 	 }
 
 	return false;
+}
+
+bool NFRedisResult::DeSerializeForBulkHead(const std::string & strRes, int & n)
+{
+	char type = strRes[0];
+	if (*NFREDIS_BULK_REPLY == type)
+	{
+		int len = 0;
+		const char* p = strRes.c_str();
+		while (*p != '\r')
+		{
+			len++;
+			p++;
+		}
+
+		if (len <= 1)
+		{
+			return false;
+		}
+
+		std::string strRespValue = strRes.substr(1, len - 1);
+		n = atoi(strRespValue.data());
+
+		int nTotalLength = len + NFREDIS_SIZEOF_CRLF;
+		if (nTotalLength == strRes.length())
+		{
+			return true;
+		}
+	}
 }
 
 bool NFRedisResult::DeSerializeForError(const std::string &strRes, std::string& error)
@@ -333,8 +340,39 @@ bool NFRedisResult::DeSerializeForBulk(const std::string &strRes, std::string& b
 	return false;
 }
 
+bool NFRedisResult::DeSerializeForArrayHead(const std::string& strRes, int& n)
+{
+	char type = strRes[0];
+	if (*NFREDIS_ARRAY_REPLY == type)
+	{
+		int len = 0;
+		const char* p = strRes.c_str();
+		while (*p != '\r')
+		{
+			len++;
+			p++;
+		}
+
+		if (len <= 1)
+		{
+			return false;
+		}
+
+		std::string strRespValue = strRes.substr(1, len - 1);
+		n = atoi(strRespValue.data());
+
+		int nTotalLength = len + NFREDIS_SIZEOF_CRLF;
+		if (nTotalLength == strRes.length())
+		{
+			return true;
+		}
+	}
+}
+
 void NFRedisResult::Reset()
 {
+	mnRespValue = 0;
+	mnRespBulkLen = 0;
     mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_UNKNOW;
     mxRespType = NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW;
     mstrRespValue.clear();
@@ -349,62 +387,41 @@ NFREDIS_RESULT_STATUS NFRedisResult::GetResultStatus()
 
 bool NFRedisResult::ReadForBulk()
 {
-	switch (mxBulkStatus.mState)
+	std::string line1;
+	if (m_pClientSocket->ReadLine(line1))
 	{
-		case ReadBuffState::UNSTART:
-		{
-			//read the data length
-			std::string line1;
-			if (m_pClientSocket->ReadLine(line1))
-			{
-				mstrMsgValue.append(line1);
-				mxBulkStatus.mState = ReadBuffState::WORKING;
+		mstrMsgValue.append(line1);
 
-				int64_t nlen = 0;
-				if (DeSerializeForInt(mstrMsgValue, nlen))
-				{
-					mxBulkStatus.mnDataLen = nlen;
-				}
-
-				return false;
-			}
-		}
-		break;
-		case ReadBuffState::WORKING:
+		mnRespBulkLen = 0;
+		if (DeSerializeForBulkHead(line1, mnRespBulkLen))
 		{
-			if (mxBulkStatus.mnDataLen > 0)
+			
+			if (mnRespBulkLen > 0)
 			{
 				//$6\r\nfoobar\r\n"
 				std::string line2;
 				if (m_pClientSocket->ReadLine(line2))
 				{
 					mstrMsgValue.append(line2);
-					mxBulkStatus.mState = ReadBuffState::FINISHED;
-					return true;
+					if (DeSerializeForBulk(mstrMsgValue, mstrRespValue))
+					{
+						return true;
+					}
 				}
 			}
-			else if (mxBulkStatus.mnDataLen == 0)
+			else if (mnRespBulkLen == 0)
 			{
 				std::string line2;
-				if (m_pClientSocket->ReadLine(line2))
-				{
-					//"$0\r\n\r\n"
-					mxBulkStatus.mState = ReadBuffState::FINISHED;
-					return true;
-				}
+				m_pClientSocket->ReadLine(line2);
+
+				return true;
 			}
-			else if (mxBulkStatus.mnDataLen < 0)
+			else if (mnRespBulkLen < 0)
 			{
 				//"$-1\r\n"
-				mxBulkStatus.mState = ReadBuffState::FINISHED;
 				return true;
 			}
 		}
-		break;
-		case ReadBuffState::FINISHED:
-			break;
-	default:
-		break;
 	}
 
     return false;
@@ -412,6 +429,30 @@ bool NFRedisResult::ReadForBulk()
 
 bool NFRedisResult::ReadForArray()
 {
+	//read the data length
+	int nNowElementNum = 0;
+	int nTotalElementNum = 0;
+
+	std::string line1;
+	if (m_pClientSocket->ReadLine(line1))
+	{
+		mstrMsgValue.append(line1);
+
+		int nlen = 0;
+		if (DeSerializeForArrayHead(mstrMsgValue, nlen))
+		{
+			nNowElementNum = nlen;
+			nTotalElementNum = nlen;
+			for (int i = 0; i < nlen; ++i)
+			{
+
+			}
+		}
+
+		return false;
+	}
+
+	/*
 	switch (mxBulkStatus.mState)
 	{
 		case ReadBuffState::UNSTART:
@@ -517,7 +558,55 @@ bool NFRedisResult::ReadForArray()
             }
         }
     }
-
+	*/
     return false;
 }
 
+
+bool NFRedisResult::ReadForStatus()
+{
+	std::string line;
+	if (m_pClientSocket->ReadLine(line))
+	{
+		mstrMsgValue.append(line);
+
+		if (DeSerializeForStatus(mstrMsgValue, mstrRespValue))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool NFRedisResult::ReadForError()
+{
+	std::string line;
+	if (m_pClientSocket->ReadLine(line))
+	{
+		mstrMsgValue.append(line);
+
+		if (DeSerializeForError(mstrMsgValue, mstrRespValue))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool NFRedisResult::ReadForInt()
+{
+	std::string line;
+	if (m_pClientSocket->ReadLine(line))
+	{
+		mstrMsgValue.append(line);
+
+		if (DeSerializeForInt(mstrMsgValue, mnRespValue))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
