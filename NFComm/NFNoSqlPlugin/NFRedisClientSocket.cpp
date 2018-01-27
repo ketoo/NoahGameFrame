@@ -92,16 +92,12 @@ int NFRedisClientSocket::Execute()
 	return 0;
 }
 
-void NFRedisClientSocket::AddBuff(const std::string & buff)
-{
-}
-
 int NFRedisClientSocket::Close()
 {
     return 0;
 }
 
-bool NFRedisClientSocket::ReadLine(std::string &line)
+bool NFRedisClientSocket::ReadLineFromBuff(std::string &line)
 {
 	line.clear();
 
@@ -135,6 +131,7 @@ bool NFRedisClientSocket::ReadLine(std::string &line)
 	return true;
 }
 
+
 int NFRedisClientSocket::Write(const char *buf, int count)
 {
 	if (buf == NULL || count <= 0)
@@ -150,15 +147,20 @@ int NFRedisClientSocket::Write(const char *buf, int count)
     return 0;
 }
 
-bool NFRedisClientSocket::ReadN(char *buf, int count)
+int NFRedisClientSocket::GetLineNum()
 {
-	if (count > mstrBuff.length() || count <= 0)
+	return mLineList.size();
+}
+
+bool NFRedisClientSocket::ReadLine(std::string & line)
+{
+	if (mLineList.size() <= 0)
 	{
 		return false;
 	}
 
-	memcpy(buf, mstrBuff.data(), count);
-	mstrBuff.erase(0, count);
+	line = mLineList.front();
+	mLineList.pop_front();
 
 	return true;
 }
@@ -210,6 +212,22 @@ void NFRedisClientSocket::conn_readcb(bufferevent * bev, void * user_data)
 	{
 		pClientSocket->mstrBuff.append(mstrTempBuffData, len);
 	}
+
+	//push back as a new line
+	bool b = true;
+	while (b)
+	{
+		std::string line;
+		if (pClientSocket->ReadLineFromBuff(line))
+		{
+			pClientSocket->mLineList.push_back(line);
+		}
+		else
+		{
+			b = false;
+		}
+	}
+	
 }
 
 void NFRedisClientSocket::conn_writecb(bufferevent * bev, void * user_data)

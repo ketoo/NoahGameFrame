@@ -4,9 +4,7 @@
 
 #include "NFRedisClient.h"
 
-
-
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::APPEND(const std::string &key, const std::string &value)
+bool NFRedisClient::APPEND(const std::string &key, const std::string &value, int& length)
 {
 	NFRedisCommand cmd(GET_NAME(APPEND));
     cmd << key;
@@ -16,11 +14,29 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::APPEND(const std::string &key, const s
 
 	WaitingResult(pRedisResult);
 
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
 
-	return pRedisResult;
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::DECR(const std::string &key)
+bool NFRedisClient::DECR(const std::string& key, int64_t& value)
 {
 	NFRedisCommand cmd(GET_NAME(DECR));
     cmd << key;
@@ -31,27 +47,44 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::DECR(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::DECRBY(const std::string &key, const int64_t v)
+bool NFRedisClient::DECRBY(const std::string &key, const int64_t decrement, int64_t& value)
 {
     NFRedisCommand cmd(GET_NAME(DECRBY));
     cmd << key;
-    cmd << v;
-
+    cmd << decrement;
 
 	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
 	WaitingResult(pRedisResult);
 
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
 
-	return pRedisResult;
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::GETSET(const std::string &key, const std::string &value)
+bool NFRedisClient::GETSET(const std::string &key, const std::string &value, std::string &oldValue)
 {
-
     NFRedisCommand cmd(GET_NAME(GETSET));
     cmd << key;
     cmd << value;
@@ -61,10 +94,29 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::GETSET(const std::string &key, const s
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCR(const std::string &key)
+bool NFRedisClient::INCR(const std::string &key, int64_t& value)
 {
     NFRedisCommand cmd(GET_NAME(INCR));
     cmd << key;
@@ -75,38 +127,95 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCR(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCRBY(const std::string &key, const int64_t v)
+bool NFRedisClient::INCRBY(const std::string &key, const int64_t increment, int64_t& value)
 {
     NFRedisCommand cmd(GET_NAME(INCRBY));
     cmd << key;
-    cmd << v;
+    cmd << increment;
 
 	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::INCRBYFLOAT(const std::string &key, const float fv)
+bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, float& value)
 {
     NFRedisCommand cmd(GET_NAME(INCRBYFLOAT));
     cmd << key;
-    cmd << fv;
+    cmd << increment;
 
 	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
 	WaitingResult(pRedisResult);
 
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
 
-	return pRedisResult;
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::MGET(const string_vector &keys, string_vector &values)
+bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 {
 	NFRedisCommand cmd(GET_NAME(MGET));
 
@@ -121,6 +230,25 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::MGET(const string_vector &keys, string
 	WaitingResult(pRedisResult);
 
 
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
 
 	const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
 	if (keys.size() == xVector.size())
@@ -131,10 +259,10 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::MGET(const string_vector &keys, string
 		}
 	}
 
-	return pRedisResult;
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::MSET(const string_pair_vector &values)
+void NFRedisClient::MSET(const string_pair_vector &values)
 {
     NFRedisCommand cmd(GET_NAME(MSET));
 
@@ -146,12 +274,9 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::MSET(const string_pair_vector &values)
 	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
 	WaitingResult(pRedisResult);
-
-
-	return pRedisResult;
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
+bool NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
 {
     NFRedisCommand cmd(GET_NAME(SETEX));
     cmd << key;
@@ -163,10 +288,29 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETEX(const std::string &key, const st
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETNX(const std::string &key, const std::string &value)
+bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 {
     NFRedisCommand cmd(GET_NAME(SETNX));
     cmd << key;
@@ -177,10 +321,29 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::SETNX(const std::string &key, const st
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult>NFRedisClient::STRLEN(const std::string &key)
+bool NFRedisClient::STRLEN(const std::string &key, int& length)
 {
     NFRedisCommand cmd(GET_NAME(STRLEN));
     cmd << key;
@@ -190,11 +353,30 @@ NF_SHARE_PTR<NFRedisResult>NFRedisClient::STRLEN(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
 
-NF_SHARE_PTR<NFRedisResult> NFRedisClient::SET(const std::string &key, const std::string &value)
+bool NFRedisClient::SET(const std::string &key, const std::string &value)
 {
     NFRedisCommand cmd(GET_NAME(SET));
     cmd << key;
@@ -205,10 +387,29 @@ NF_SHARE_PTR<NFRedisResult> NFRedisClient::SET(const std::string &key, const std
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
 
-NF_SHARE_PTR<NFRedisResult> NFRedisClient::GET(const std::string &key)
+bool NFRedisClient::GET(const std::string& key, std::string & value)
 {
     NFRedisCommand cmd(GET_NAME(GET));
     cmd << key;
@@ -218,5 +419,24 @@ NF_SHARE_PTR<NFRedisResult> NFRedisClient::GET(const std::string &key)
 	WaitingResult(pRedisResult);
 
 
-	return pRedisResult;
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
+
+	return pRedisResult->IsOKRespStatus();
 }
