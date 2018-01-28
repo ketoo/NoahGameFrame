@@ -23,13 +23,15 @@ void NFRedisTester::RunTester()
 
 void NFRedisTester::TestHash()
 {
-	/*
-	NF_SHARE_PTR<NFRedisResult> HINCRBY(const std::string& key, const std::string& field, const int by);
-	NF_SHARE_PTR<NFRedisResult> HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
+	int64_t nnn;
+	assert(mxRedisClient.HINCRBY("12123ddddd", "121212", 13, nnn) == true);
+	assert(nnn == 13);
 
-	NF_SHARE_PTR<NFRedisResult> HSETNX(const std::string& key, const std::string& field, const std::string& value);
+	float fval;
+	assert(mxRedisClient.HINCRBYFLOAT("12123dd323123ddd", "12444441212", 3.0f, fval) == true);
+
+	//NF_SHARE_PTR<NFRedisResult> HSETNX(const std::string& key, const std::string& field, const std::string& value);
 	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
-	*/
 
 	std::string strKey = "TestHash::TestHash";
 	std::string strField1 = "TestField1";
