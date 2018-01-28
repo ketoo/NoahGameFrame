@@ -21,7 +21,6 @@ private:
     void TestHash();
     void TestKey();
     void TestList();
-    void TestServer();
     void TestSet();
     void TestSort();
     void TestString();
