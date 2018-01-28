@@ -15,7 +15,6 @@ void NFRedisTester::RunTester()
 	TestKey();
 	TestString();
 	TestList();
-	TestServer();
     TestHash();
     TestSet();
     TestSort();
@@ -260,17 +259,10 @@ void NFRedisTester::TestList()
 	assert(values.size() == strList.size() + 1);
 }
 
-
-void NFRedisTester::TestServer()
-{
-
-}
-
 void NFRedisTester::TestSet()
 {
 
 }
-
 
 void NFRedisTester::TestSort()
 {
@@ -279,19 +271,26 @@ void NFRedisTester::TestSort()
 
 void NFRedisTester::TestString()
 {
+	std::string strKey11 = "TestString1112121";
+	std::string strValu11e = "111";
 
-	/*
-	NF_SHARE_PTR<NFRedisResult> DECR(const std::string& key);
-	NF_SHARE_PTR<NFRedisResult> DECRBY(const std::string& key, const int64_t v);
-	NF_SHARE_PTR<NFRedisResult> GETSET(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> INCR(const std::string& key);
-	NF_SHARE_PTR<NFRedisResult> INCRBY(const std::string& key, const int64_t v);
-	NF_SHARE_PTR<NFRedisResult> INCRBYFLOAT(const std::string& key, const float fv);
+	int64_t nValueDECR;
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == false);
+	assert(mxRedisClient.SET(strKey11, strValu11e) == true);
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
+	assert(nValueDECR == 110);
+	assert(mxRedisClient.DECRBY(strKey11, 10, nValueDECR) == true);
+	assert(nValueDECR == 100);
+	std::string oldGETSET;
+	assert(mxRedisClient.GETSET(strKey11, "200", oldGETSET) == true);
+	assert(oldGETSET == "100");
 
-	NF_SHARE_PTR<NFRedisResult> SETEX(const std::string& key, const std::string& value, int time);
-	NF_SHARE_PTR<NFRedisResult> SETNX(const std::string& key, const std::string& value);
-	NF_SHARE_PTR<NFRedisResult> STRLEN(const std::string& key);
-	*/
+	assert(mxRedisClient.INCR(strKey11, nValueDECR) == true);
+	assert(nValueDECR == 101);
+
+	assert(mxRedisClient.INCRBY(strKey11, 100, nValueDECR) == true);
+	assert(nValueDECR == 201);
+
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
 

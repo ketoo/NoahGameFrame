@@ -242,5 +242,5 @@ std::string NFRedisClient::TYPE(const std::string &key)
 		break;
 	}
 
-	return false;
+	return "";
 }
