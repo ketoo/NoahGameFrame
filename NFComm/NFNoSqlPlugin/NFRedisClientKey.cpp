@@ -23,7 +23,7 @@ bool NFRedisClient::DEL(const std::string &key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
-		return pRedisResult->GetRespInt();
+		return (pRedisResult->GetRespInt() > 0);
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;

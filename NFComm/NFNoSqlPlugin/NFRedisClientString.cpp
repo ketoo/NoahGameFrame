@@ -274,6 +274,19 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if (keys.size() == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
@@ -287,17 +300,7 @@ bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
 		break;
 	}
 
-
-	const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
-	if (keys.size() == xVector.size())
-	{
-		for (int i = 0; i < xVector.size(); ++i)
-		{
-			values.push_back(xVector[i].GetRespString());
-		}
-	}
-
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 void NFRedisClient::MSET(const string_pair_vector &values)
