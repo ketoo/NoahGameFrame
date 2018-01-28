@@ -65,7 +65,7 @@ void NFRedisTester::TestHash()
 	pair_values.push_back(string_pair(fields[4], values[4]));
 
 
-	assert(mxRedisClient.DEL(strKey) == true);
+	assert(mxRedisClient.DEL(strKey) == false);
 
 	assert(mxRedisClient.HSET(strKey, strField1, strValue1) == true);
 
@@ -75,7 +75,7 @@ void NFRedisTester::TestHash()
 	
 	assert(mxRedisClient.HEXISTS(strKey, strField1) == true);
 	assert(mxRedisClient.HDEL(strKey, strField1) == true);
-	assert(mxRedisClient.HEXISTS(strKey, strField1) == true);
+	assert(mxRedisClient.HEXISTS(strKey, strField1) == false);
 	assert(mxRedisClient.HMSET(strKey, pair_values) == true);
 	
 	int nHLEN;
@@ -169,11 +169,11 @@ void NFRedisTester::TestList()
 	strList.push_back("123444444");
 
 
-	assert(mxRedisClient.DEL(strKey) == true);
+	assert(mxRedisClient.DEL(strKey) == false);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		assert(mxRedisClient.RPUSH(strKey, strList[i]) == 1);
+		assert(mxRedisClient.RPUSH(strKey, strList[i]) == (i + 1));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
@@ -195,11 +195,11 @@ void NFRedisTester::TestList()
 	}
 
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
-	assert(nLLEN == strList.size());
+	assert(nLLEN == 0);
 	//////
 	for (int i = strList.size() - 1; i >= 0; --i)
 	{
-		assert(mxRedisClient.LPUSH(strKey, strList[i]) == 1);
+		assert(mxRedisClient.LPUSH(strKey, strList[i]) == (strList.size()-i));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
@@ -220,17 +220,17 @@ void NFRedisTester::TestList()
 	}
 
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
-	assert(nLLEN == strList.size());
+	assert(nLLEN == 0);
 	/////
 
 	assert(mxRedisClient.LPUSH(strKey, strKey) == 1);
 
 	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
-	assert(nLLEN == strList.size());
+	assert(nLLEN == 1);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		assert(mxRedisClient.LPUSHX(strKey, strList[i]) == 1);
+		assert(mxRedisClient.LPUSHX(strKey, strList[i]) == (i+2));
 	}
 
 	string_vector values;
