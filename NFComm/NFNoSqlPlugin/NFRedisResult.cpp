@@ -6,6 +6,8 @@
 
 NFRedisResult::NFRedisResult(NFRedisClientSocket *pClientSocket)
 {
+	Reset();
+
     m_pClientSocket = pClientSocket;
 }
 
@@ -445,7 +447,38 @@ bool NFRedisResult::ReadForArray()
 			nTotalElementNum = nlen;
 			for (int i = 0; i < nlen; ++i)
 			{
+				char c;
+				if (m_pClientSocket->TryPredictType(c))
+				{
+					NFREDIS_RESP_TYPE eType = GetRespType(c);
+					NFRedisResult xResult(m_pClientSocket);
+					xResult.mxRespType = eType;
+					switch (eType)
+					{
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+						xResult.ReadForBulk();
+						break; 
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+						xResult.ReadForError();
+						break;
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+						xResult.ReadForInt();
+						break;
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+						xResult.ReadForError();
+						break;
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+						xResult.ReadForStatus();
+						break;
+					case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+						xResult.ReadForArray();
+						break;
+					default:
+						break;
+					}
 
+					mxRespList.push_back(xResult);
+				}
 			}
 		}
 
