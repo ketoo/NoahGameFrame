@@ -238,6 +238,10 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		value = pRedisResult->GetRespFloat();
+		return true;
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
 		break;
@@ -250,7 +254,7 @@ bool NFRedisClient::INCRBYFLOAT(const std::string &key, const float increment, f
 	}
 
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::MGET(const string_vector &keys, string_vector &values)
@@ -392,6 +396,9 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -401,7 +408,7 @@ bool NFRedisClient::SETNX(const std::string &key, const std::string &value)
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::STRLEN(const std::string &key, int& length)
