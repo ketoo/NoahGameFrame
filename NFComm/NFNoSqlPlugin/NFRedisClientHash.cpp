@@ -27,7 +27,6 @@ int NFRedisClient::HDEL(const std::string &key, const std::string &field)
 		return pRedisResult->GetRespInt();
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
-		return 0;
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
 		break;
@@ -169,8 +168,8 @@ bool NFRedisClient::HGETALL(const std::string &key, std::vector<string_pair> &va
 			{
 				values.push_back(string_pair(xVector[i].GetRespString(), xVector[i + 1].GetRespString()));
 			}
+			return true;
 		}
-		return true;
 	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
@@ -246,6 +245,10 @@ bool NFRedisClient::HINCRBYFLOAT(const std::string &key, const std::string &fiel
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		value = pRedisResult->GetRespFloat();
+		return true;
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
 		break;
@@ -257,7 +260,7 @@ bool NFRedisClient::HINCRBYFLOAT(const std::string &key, const std::string &fiel
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::HKEYS(const std::string &key, std::vector<std::string> &fields)
