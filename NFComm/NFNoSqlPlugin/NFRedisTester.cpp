@@ -24,13 +24,16 @@ void NFRedisTester::RunTester()
 void NFRedisTester::TestHash()
 {
 	int64_t nnn;
-	assert(mxRedisClient.HINCRBY("12123ddddd", "121212", 13, nnn) == true);
+	assert(mxRedisClient.HINCRBY("12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
 	assert(nnn == 13);
 
 	float fval;
-	assert(mxRedisClient.HINCRBYFLOAT("12123dd323123ddd", "12444441212", 3.0f, fval) == true);
+	assert(mxRedisClient.HINCRBYFLOAT("12123dd323ssss123ddd", "12444441212", 3.0f, fval) == true);
 
-	//NF_SHARE_PTR<NFRedisResult> HSETNX(const std::string& key, const std::string& field, const std::string& value);
+	assert(mxRedisClient.HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == true);
+	assert(mxRedisClient.HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == false);
+
+
 	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
 
 	std::string strKey = "TestHash::TestHash";
@@ -127,6 +130,17 @@ void NFRedisTester::TestHash()
 
 void NFRedisTester::TestKey()
 {
+	int64_t nnn;
+	assert(mxRedisClient.INCRBY("12123ddddd", 13, nnn) == true);
+	assert(nnn == 13);
+
+	float fval;
+	assert(mxRedisClient.INCRBYFLOAT("12123dd323123ddd", 3.0f, fval) == true);
+
+	assert(mxRedisClient.SETNX("12123dd323123ddd", "121212") == false);
+	assert(mxRedisClient.SETNX("124422dd1212", "121212") == true);
+
+
 	std::string strKey = "NFRedisTester::TestKey";
 	std::string strValue = "1232321123r34234";
 
@@ -170,6 +184,12 @@ void NFRedisTester::TestList()
 	strList.push_back("123232113333");
 	strList.push_back("123444444");
 
+
+	assert(mxRedisClient.LSET("12122121", 1, "12212") == false);
+	assert(mxRedisClient.LPUSH("12122121", "12212") == true);
+	std::string lpop;
+	assert(mxRedisClient.LPOP("12122121", lpop) == true);
+	assert("12212" == lpop);
 
 	assert(mxRedisClient.DEL(strKey) == false);
 

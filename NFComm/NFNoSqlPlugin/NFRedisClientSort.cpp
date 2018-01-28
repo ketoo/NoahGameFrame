@@ -27,6 +27,9 @@ int NFRedisClient::ZADD(const std::string & key, const std::string & member, con
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -59,6 +62,9 @@ int NFRedisClient::ZCARD(const std::string & key)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -93,6 +99,9 @@ int NFRedisClient::ZCOUNT(const std::string & key, const double start, const dou
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -103,7 +112,7 @@ int NFRedisClient::ZCOUNT(const std::string & key, const double start, const dou
 	}
 
 
-	return pRedisResult->GetRespInt();
+	return 0;
 }
 
 bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member, const double score, double& newScore)
@@ -118,8 +127,30 @@ bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member,
 
 	WaitingResult(pRedisResult);
 
+	switch (pRedisResult->GetRespType())
+	{
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		newScore = pRedisResult->GetRespFloat();
+		return true;
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
+	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
@@ -141,6 +172,18 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
@@ -155,7 +198,7 @@ bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int e
 	}
 
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
@@ -177,6 +220,18 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
@@ -191,7 +246,7 @@ bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, c
 	}
 
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, int& rank)
@@ -215,6 +270,10 @@ bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, i
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		rank = pRedisResult->GetRespInt();
+		return true;
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -224,7 +283,7 @@ bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, i
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
@@ -247,6 +306,9 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -257,7 +319,7 @@ bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 	}
 
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
@@ -271,7 +333,6 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 
 	WaitingResult(pRedisResult);
 
-
 	switch (pRedisResult->GetRespType())
 	{
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
@@ -282,6 +343,9 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -291,7 +355,7 @@ bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, co
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
@@ -316,6 +380,9 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -325,7 +392,7 @@ bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
@@ -339,13 +406,24 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 
 	WaitingResult(pRedisResult);
 
-
 	switch (pRedisResult->GetRespType())
 	{
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
@@ -359,7 +437,7 @@ bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
@@ -383,6 +461,18 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
@@ -396,7 +486,7 @@ bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member, int& rank)
@@ -420,6 +510,10 @@ bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		rank= pRedisResult->GetRespInt();
+		return true;
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
@@ -429,7 +523,7 @@ bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, double& score)
@@ -452,6 +546,10 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		score = pRedisResult->GetRespFloat();
+		return true;
+	}
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
 		break;
@@ -463,5 +561,5 @@ bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, 
 		break;
 	}
 
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }

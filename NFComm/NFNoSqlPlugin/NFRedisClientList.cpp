@@ -244,6 +244,7 @@ bool NFRedisClient::LSET(const std::string &key, const int index, const std::str
 	cmd << value;
 
 	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+	WaitingResult(pRedisResult);
 
 	switch (pRedisResult->GetRespType())
 	{
@@ -259,15 +260,13 @@ bool NFRedisClient::LSET(const std::string &key, const int index, const std::str
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
 		break;
 	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		return pRedisResult->IsOKRespStatus();
 		break;
 	default:
 		break;
 	}
 
-	WaitingResult(pRedisResult);
-
-
-	return pRedisResult->IsOKRespStatus();
+	return false;
 }
 
 bool NFRedisClient::RPOP(const std::string &key, std::string& value)
