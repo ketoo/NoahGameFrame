@@ -94,7 +94,7 @@
 		<Property Id="Level" Cache="1" Desc="等级" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAGIC_GATE" Cache="0" Desc="魔法免疫开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXEXP" Cache="1" Desc="升级需要的经验" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
-		<Property Id="MAXHP" Cache="0" Desc="生命值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="MAXHP" Cache="0" Desc="生命值" Force="0" Private="1" Public="1" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXMP" Cache="0" Desc="法力值" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MAXSP" Cache="0" Desc="体力" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
 		<Property Id="MOVE_GATE" Cache="0" Desc="移动开关" Force="0" Private="1" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
