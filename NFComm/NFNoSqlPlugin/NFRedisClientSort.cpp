@@ -4,124 +4,205 @@
 
 #include "NFRedisClient.h"
 
-NFRedisResult * NFRedisClient::ZADD(const std::string & key, const std::string & member, const double score)
+int NFRedisClient::ZADD(const std::string & key, const std::string & member, const double score)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZADD));
 	cmd << key;
 	cmd << member;
 	cmd << score;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return 0;
 }
 
-NFRedisResult * NFRedisClient::ZCARD(const std::string & key)
+int NFRedisClient::ZCARD(const std::string & key)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZCARD));
 	cmd << key;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return 0;
 }
 
-NFRedisResult * NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end)
+int NFRedisClient::ZCOUNT(const std::string & key, const double start, const double end)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZCOUNT));
 	cmd << key;
 	cmd << start;
 	cmd << end;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return pRedisResult->GetRespInt();
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
 
-	return m_pRedisResult;
+	return 0;
 }
 
-NFRedisResult * NFRedisClient::ZINCRBY(const std::string & key, const std::string & member, const double score)
+bool NFRedisClient::ZINCRBY(const std::string & key, const std::string & member, const double score, double& newScore)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
 	cmd << member;
 	cmd << score;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		newScore = pRedisResult->GetRespFloat();
+		return true;
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
+bool NFRedisClient::ZRANGE(const std::string & key, const int start, const int end, string_vector& values)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZINCRBY));
 	cmd << key;
 	cmd << start;
 	cmd << end;
 	cmd << "WITHSCORES";
 	
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
 
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
+bool NFRedisClient::ZRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZRANGEBYSCORE));
 	cmd << key;
 	cmd << key;
@@ -129,137 +210,238 @@ NFRedisResult * NFRedisClient::ZRANGEBYSCORE(const std::string & key, const doub
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
 
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZRANK(const std::string & key, const std::string & member)
+bool NFRedisClient::ZRANK(const std::string & key, const std::string & member, int& rank)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZRANK));
 	cmd << key;
 	cmd << member;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		rank = pRedisResult->GetRespInt();
+		return true;
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREM(const std::string & key, const std::string & member)
+bool NFRedisClient::ZREM(const std::string & key, const std::string & member)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREM));
 	cmd << key;
 	cmd << member;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
 
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
+bool NFRedisClient::ZREMRANGEBYRANK(const std::string & key, const int start, const int end)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREMRANGEBYRANK));
 	cmd << key;
 	cmd << start;
 	cmd << end;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
+bool NFRedisClient::ZREMRANGEBYSCORE(const std::string & key, const double start, const double end)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREMRANGEBYSCORE));
 	cmd << key;
 	cmd << start;
 	cmd << end;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		return (pRedisResult->GetRespInt() > 0);
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
+bool NFRedisClient::ZREVRANGE(const std::string& key, const int start, const int end, string_vector& values)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREVRANGE));
 	cmd << key;
 	cmd << start;
 	cmd << end;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
+bool NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const double start, const double end, string_vector& values)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREVRANGEBYSCORE));
 	cmd << key;
 	cmd << key;
@@ -267,60 +449,117 @@ NFRedisResult * NFRedisClient::ZREVRANGEBYSCORE(const std::string & key, const d
 	cmd << end;
 	cmd << "WITHSCORES";
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+	{
+		const std::vector<NFRedisResult> xVector = pRedisResult->GetRespArray();
+		if ((end - start + 1) == xVector.size())
+		{
+			for (int i = 0; i < xVector.size(); ++i)
+			{
+				values.push_back(xVector[i].GetRespString());
+			}
+
+			return true;
+		}
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZREVRANK(const std::string & key, const std::string & member)
+bool NFRedisClient::ZREVRANK(const std::string & key, const std::string & member, int& rank)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZREVRANK));
 	cmd << key;
 	cmd << member;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+	{
+		rank= pRedisResult->GetRespInt();
+		return true;
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
 
-NFRedisResult * NFRedisClient::ZSCORE(const std::string & key, const std::string & member)
+bool NFRedisClient::ZSCORE(const std::string & key, const std::string & member, double& score)
 {
-	m_pRedisResult->Reset();
-
 	NFRedisCommand cmd(GET_NAME(ZSCORE));
 	cmd << key;
 	cmd << member;
 
-	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-	if (nRet != 0)
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+
+	WaitingResult(pRedisResult);
+
+
+	switch (pRedisResult->GetRespType())
 	{
-		return m_pRedisResult;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ERROR:
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_UNKNOW:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK:
+	{
+		score = pRedisResult->GetRespFloat();
+		return true;
+	}
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_INT:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_NIL:
+		break;
+	case NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS:
+		break;
+	default:
+		break;
 	}
 
-	GetStatusReply();
-
-	return m_pRedisResult;
+	return false;
 }
