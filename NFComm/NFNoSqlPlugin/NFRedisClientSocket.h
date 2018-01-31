@@ -73,15 +73,16 @@ public:
     int Close();
     int Write(const char *buf, int count);
 
-    bool ReadN(char *buf, int count);
-    bool ReadLine(std::string& line);
+	int GetLineNum();
+	bool TryPredictType(char& eType);
+	bool ReadLine(std::string& line);
 
     int ClearBuff();
     int BuffLength();
     int Execute();
 
-    /////test
-    void AddBuff(const std::string& buff);
+private:
+	bool ReadLineFromBuff(std::string& line);
 
 protected:
 	static void listener_cb(struct evconnlistener* listener, evutil_socket_t fd, struct sockaddr* sa, int socklen, void* user_data);
@@ -97,6 +98,7 @@ private:
 	NF_NET_EVENT mNetStatus;
     int64_t fd;
     std::string mstrBuff;
+	std::list<std::string> mLineList;
 };
 
 

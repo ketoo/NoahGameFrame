@@ -18,14 +18,10 @@ public:
     void Execute();
 private:
 
-    void TestGEO();
     void TestHash();
     void TestKey();
     void TestList();
-    void TestPubSub();
-    void TestServer();
     void TestSet();
-    void TestSocket();
     void TestSort();
     void TestString();
 

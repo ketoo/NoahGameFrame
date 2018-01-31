@@ -7,7 +7,6 @@
 NFRedisClient::NFRedisClient()
 {
     m_pRedisClientSocket = new NFRedisClientSocket();
-    m_pRedisResult = new NFRedisResult(m_pRedisClientSocket);
 }
 
 
@@ -18,8 +17,7 @@ bool NFRedisClient::ConnectTo(const std::string &ip, const int port, const std::
 	{
 		if (!auth.empty())
 		{
-			NFRedisResult* pResult = AUTH(auth);
-			return pResult->IsOKRespStatus();
+			return AUTH(auth);
 		}
 
 		return true;
@@ -41,94 +39,88 @@ bool NFRedisClient::KeepLive()
 bool NFRedisClient::Execute()
 {
     m_pRedisClientSocket->Execute();
-    return false;
-}
-
-bool NFRedisClient::GetStatusReply()
-{
-    if (m_pRedisResult->ReadReply())
-    {
-        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
-                && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_STATUS
-                && m_pRedisResult->IsOKRespStatus())
-        {
-            return true;
-        }
-    }
-
 
     return false;
 }
 
-bool NFRedisClient::GetIntReply()
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::GetUnuseResult()
 {
-    if (m_pRedisResult->ReadReply())
-    {
-        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
-            && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_INT)
-        {
-            return true;
-        }
-    }
-
-
-    return false;
-}
-
-bool NFRedisClient::GetBulkReply()
-{
-    if (m_pRedisResult->ReadReply())
-    {
-        if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
-            && m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_BULK)
-        {
-            return true;
-        }
-    }
-
-
-    return false;
-}
-
-bool NFRedisClient::GetArrayReply()
-{
-	if (m_pRedisResult->ReadReply())
+	NF_SHARE_PTR<NFRedisResult> p = nullptr;
+	if (!mlUnusedResultList.empty())
 	{
-		if (m_pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK
-			&& m_pRedisResult->GetRespType() == NFREDIS_RESP_TYPE::NFREDIS_RESP_ARRAY)
-		{
-			return true;
-		}
+		p = mlUnusedResultList.front();
+		mlUnusedResultList.pop_front();
+	}
+	else
+	{
+		p = NF_SHARE_PTR<NFRedisResult>(new NFRedisResult(m_pRedisClientSocket));
 	}
 
-
-	return false;
-
+	return p;
+	
 }
 
-NFRedisResult *NFRedisClient::GetRedisResult()
+NF_SHARE_PTR<NFRedisResult> NFRedisClient::BuildSendCmd(const NFRedisCommand& cmd)
 {
-    return m_pRedisResult;
-}
-
-NFRedisResult * NFRedisClient::AUTH(const std::string & auth)
-{
-	m_pRedisResult->Reset();
-
-	NFRedisCommand cmd(GET_NAME(AUTH));
-	cmd << auth;
-
 	std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
+
+	//m_pRedisResult->Reset();
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = GetUnuseResult();
+	pRedisResult->Reset();
+	pRedisResult->SetCommand(msg);
 
 	int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
 	if (nRet != 0)
 	{
-		return m_pRedisResult;
+		//lost net
+		//do some thing
+		return pRedisResult;
 	}
 
-	GetStatusReply();
+	mlCmdResultList.push_back(pRedisResult);
 
+	return pRedisResult;
+}
 
-	return m_pRedisResult;
+void NFRedisClient::WaitingResult(NF_SHARE_PTR<NFRedisResult> pRedisResult)
+{
+	if (!mlCmdResultList.empty())
+	{
+		bool bFinished = false;
+		while (!bFinished)
+		{
+			NF_SHARE_PTR<NFRedisResult> pFrontRedisResult = mlCmdResultList.front();
+			if (pRedisResult == pFrontRedisResult)
+			{
+				pRedisResult->ReadReply();
+				mlCmdResultList.pop_front();
+
+				bFinished = true;
+				break;
+			}
+			else
+			{
+				if (YieldFunction)
+				{
+					YieldFunction();
+				}
+				else
+				{
+					Execute();
+				}
+			}
+		}
+	}
+}
+
+bool NFRedisClient::AUTH(const std::string & auth)
+{
+	NFRedisCommand cmd(GET_NAME(AUTH));
+	cmd << auth;
+
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
+	
+	WaitingResult(pRedisResult);
+
+	return pRedisResult->IsOKRespStatus();
 }
