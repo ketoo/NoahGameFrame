@@ -98,7 +98,7 @@ namespace NFSDK
             xData.moveType = 0;
             xData.speed = 2f;
             xData.time = 0;
-            NFMsg.Position xTargetPos = new NFMsg.Position();
+            NFMsg.Vector3 xTargetPos = new NFMsg.Vector3();
             xTargetPos.x = pos.x;
             xTargetPos.y = pos.z;
             xTargetPos.z = pos.y;

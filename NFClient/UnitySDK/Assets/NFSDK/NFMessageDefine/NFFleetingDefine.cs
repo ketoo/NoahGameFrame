@@ -41,137 +41,109 @@ namespace NFFS
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SuwayyahEvents")]
-  public partial class SuwayyahEvents : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FixTimeEvent")]
+  public partial class FixTimeEvent : global::ProtoBuf.IExtensible
   {
-    public SuwayyahEvents() {}
+    public FixTimeEvent() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.SuwayyahEvents.Suwayyah> _xSuwayyahList = new global::System.Collections.Generic.List<NFFS.SuwayyahEvents.Suwayyah>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xSuwayyahList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.SuwayyahEvents.Suwayyah> xSuwayyahList
+    private readonly global::System.Collections.Generic.List<NFFS.FixTimeEvent.HitTrigger> _hitTrigger = new global::System.Collections.Generic.List<NFFS.FixTimeEvent.HitTrigger>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"hitTrigger", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.FixTimeEvent.HitTrigger> hitTrigger
     {
-      get { return _xSuwayyahList; }
+      get { return _hitTrigger; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Suwayyah")]
-  public partial class Suwayyah : global::ProtoBuf.IExtensible
+    private readonly global::System.Collections.Generic.List<NFFS.FixTimeEvent.EventTrigger> _eventTrigger = new global::System.Collections.Generic.List<NFFS.FixTimeEvent.EventTrigger>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"eventTrigger", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.FixTimeEvent.EventTrigger> eventTrigger
+    {
+      get { return _eventTrigger; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EventTrigger")]
+  public partial class EventTrigger : global::ProtoBuf.IExtensible
   {
-    public Suwayyah() {}
+    public EventTrigger() {}
     
-    private NFFS.SuwayyahEvents.ESEType _EventType;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.SuwayyahEvents.ESEType EventType
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private NFFS.FSVector3 _v;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"v", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFFS.FSVector3 v
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _v; }
+      set { _v = value; }
     }
-    private float _EndTime;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"EndTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EndTime
+    private string _prefab;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"prefab", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string prefab
     {
-      get { return _EndTime; }
-      set { _EndTime = value; }
-    }
-    private float _DamageRang;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"DamageRang", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float DamageRang
-    {
-      get { return _DamageRang; }
-      set { _DamageRang = value; }
-    }
-    private float _BackHeroDis;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"BackHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackHeroDis
-    {
-      get { return _BackHeroDis; }
-      set { _BackHeroDis = value; }
-    }
-    private float _BackNpcDis;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"BackNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackNpcDis
-    {
-      get { return _BackNpcDis; }
-      set { _BackNpcDis = value; }
-    }
-    private string _BeAttackParticle;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"BeAttackParticle", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string BeAttackParticle
-    {
-      get { return _BeAttackParticle; }
-      set { _BeAttackParticle = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private string _TargetMethodCall;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"TargetMethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodCall
-    {
-      get { return _TargetMethodCall; }
-      set { _TargetMethodCall = value; }
-    }
-    private string _TargetMethodParam;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"TargetMethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodParam
-    {
-      get { return _TargetMethodParam; }
-      set { _TargetMethodParam = value; }
+      get { return _prefab; }
+      set { _prefab = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ESEType")]
-    public enum ESEType
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HitTrigger")]
+  public partial class HitTrigger : global::ProtoBuf.IExtensible
+  {
+    public HitTrigger() {}
+    
+    private float _hitTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"hitTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float hitTime
     {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ESET_SINGLE", Value=0)]
-      ESET_SINGLE = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ESET_SINGLE_AREA", Value=1)]
-      ESET_SINGLE_AREA = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ESET_LEFT_AREA", Value=2)]
-      ESET_LEFT_AREA = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"ESET_RIGHT_AREA", Value=3)]
-      ESET_RIGHT_AREA = 3
+      get { return _hitTime; }
+      set { _hitTime = value; }
     }
+    private string _prefab;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"prefab", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string prefab
+    {
+      get { return _prefab; }
+      set { _prefab = value; }
+    }
+    private float _backHeroDis;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"backHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backHeroDis
+    {
+      get { return _backHeroDis; }
+      set { _backHeroDis = value; }
+    }
+    private float _backNpcDis;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"backNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backNpcDis
+    {
+      get { return _backNpcDis; }
+      set { _backNpcDis = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BulletEvents")]
-  public partial class BulletEvents : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BulletEvent")]
+  public partial class BulletEvent : global::ProtoBuf.IExtensible
   {
-    public BulletEvents() {}
+    public BulletEvent() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.BulletEvents.Bullet> _xBulletList = new global::System.Collections.Generic.List<NFFS.BulletEvents.Bullet>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xBulletList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.BulletEvents.Bullet> xBulletList
+    private readonly global::System.Collections.Generic.List<NFFS.BulletEvent.Bullet> _bulletList = new global::System.Collections.Generic.List<NFFS.BulletEvent.Bullet>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"bulletList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.BulletEvent.Bullet> bulletList
     {
-      get { return _xBulletList; }
+      get { return _bulletList; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TacheBomp")]
@@ -179,75 +151,47 @@ namespace NFFS
   {
     public TacheBomp() {}
     
-    private float _BompTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"BompTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BompTime
+    private float _bompTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"bompTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float bompTime
     {
-      get { return _BompTime; }
-      set { _BompTime = value; }
+      get { return _bompTime; }
+      set { _bompTime = value; }
     }
-    private float _BompRang;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"BompRang", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BompRang
+    private float _bompRang;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"bompRang", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float bompRang
     {
-      get { return _BompRang; }
-      set { _BompRang = value; }
+      get { return _bompRang; }
+      set { _bompRang = value; }
     }
-    private string _BompPrefabPath;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"BompPrefabPath", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string BompPrefabPath
+    private string _bompPrefabPath;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"bompPrefabPath", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string bompPrefabPath
     {
-      get { return _BompPrefabPath; }
-      set { _BompPrefabPath = value; }
+      get { return _bompPrefabPath; }
+      set { _bompPrefabPath = value; }
     }
-    private string _BeAttackParticle;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"BeAttackParticle", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string BeAttackParticle
+    private string _beAttackParticle;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"beAttackParticle", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string beAttackParticle
     {
-      get { return _BeAttackParticle; }
-      set { _BeAttackParticle = value; }
+      get { return _beAttackParticle; }
+      set { _beAttackParticle = value; }
     }
-    private float _BackNpcDis;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"BackNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackNpcDis
+    private float _backNpcDis;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"backNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backNpcDis
     {
-      get { return _BackNpcDis; }
-      set { _BackNpcDis = value; }
+      get { return _backNpcDis; }
+      set { _backNpcDis = value; }
     }
-    private float _BackHeroDis;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"BackHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackHeroDis
+    private float _backHeroDis;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"backHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backHeroDis
     {
-      get { return _BackHeroDis; }
-      set { _BackHeroDis = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private string _TargetMethodCall;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"TargetMethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodCall
-    {
-      get { return _TargetMethodCall; }
-      set { _TargetMethodCall = value; }
-    }
-    private string _TargetMethodParam;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"TargetMethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodParam
-    {
-      get { return _TargetMethodParam; }
-      set { _TargetMethodParam = value; }
+      get { return _backHeroDis; }
+      set { _backHeroDis = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -259,132 +203,97 @@ namespace NFFS
   {
     public Bullet() {}
     
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private NFFS.BulletEvents.EBEType _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.BulletEvents.EBEType EventType
+    private NFFS.BulletEvent.EBEType _eventType;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"eventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.BulletEvent.EBEType eventType
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventType; }
+      set { _eventType = value; }
     }
-    private float _Speed;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"Speed", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float Speed
+    private float _speed;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"speed", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float speed
     {
-      get { return _Speed; }
-      set { _Speed = value; }
+      get { return _speed; }
+      set { _speed = value; }
     }
-    private float _MaxDis;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MaxDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MaxDis
+    private float _maxDis;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"maxDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float maxDis
     {
-      get { return _MaxDis; }
-      set { _MaxDis = value; }
+      get { return _maxDis; }
+      set { _maxDis = value; }
     }
-    private float _BulletRang;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"BulletRang", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BulletRang
+    private float _bulletRang;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"bulletRang", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float bulletRang
     {
-      get { return _BulletRang; }
-      set { _BulletRang = value; }
+      get { return _bulletRang; }
+      set { _bulletRang = value; }
     }
-    private NFFS.BulletEvents.EBE_BACKType _BulletBackType;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"BulletBackType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.BulletEvents.EBE_BACKType BulletBackType
+    private NFFS.BulletEvent.EBE_BACKType _bulletBackType;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"bulletBackType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.BulletEvent.EBE_BACKType bulletBackType
     {
-      get { return _BulletBackType; }
-      set { _BulletBackType = value; }
+      get { return _bulletBackType; }
+      set { _bulletBackType = value; }
     }
-    private float _BackHeroDis;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"BackHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackHeroDis
+    private float _backHeroDis;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"backHeroDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backHeroDis
     {
-      get { return _BackHeroDis; }
-      set { _BackHeroDis = value; }
+      get { return _backHeroDis; }
+      set { _backHeroDis = value; }
     }
-    private float _BackNpcDis;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"BackNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float BackNpcDis
+    private float _backNpcDis;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"backNpcDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float backNpcDis
     {
-      get { return _BackNpcDis; }
-      set { _BackNpcDis = value; }
+      get { return _backNpcDis; }
+      set { _backNpcDis = value; }
     }
-    private int _TacheDetroy;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"TacheDetroy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int TacheDetroy
+    private int _tacheDetroy;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"tacheDetroy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int tacheDetroy
     {
-      get { return _TacheDetroy; }
-      set { _TacheDetroy = value; }
+      get { return _tacheDetroy; }
+      set { _tacheDetroy = value; }
     }
-    private string _BeAttackParticle;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"BeAttackParticle", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string BeAttackParticle
+    private string _beAttackParticle;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"beAttackParticle", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string beAttackParticle
     {
-      get { return _BeAttackParticle; }
-      set { _BeAttackParticle = value; }
+      get { return _beAttackParticle; }
+      set { _beAttackParticle = value; }
     }
-    private string _FireTacheName;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"FireTacheName", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string FireTacheName
+    private NFFS.FSVector3 _fireOffest;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"fireOffest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFFS.FSVector3 fireOffest
     {
-      get { return _FireTacheName; }
-      set { _FireTacheName = value; }
+      get { return _fireOffest; }
+      set { _fireOffest = value; }
     }
-    private NFFS.FSVector3 _FireTacheOffest;
-    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"FireTacheOffest", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFFS.FSVector3 FireTacheOffest
+    private string _bulletPrefabPath;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = true, Name=@"bulletPrefabPath", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string bulletPrefabPath
     {
-      get { return _FireTacheOffest; }
-      set { _FireTacheOffest = value; }
+      get { return _bulletPrefabPath; }
+      set { _bulletPrefabPath = value; }
     }
-    private string _BulletPrefabPath;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"BulletPrefabPath", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string BulletPrefabPath
+    private NFFS.BulletEvent.TacheBomp _bomp;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = true, Name=@"bomp", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFFS.BulletEvent.TacheBomp bomp
     {
-      get { return _BulletPrefabPath; }
-      set { _BulletPrefabPath = value; }
+      get { return _bomp; }
+      set { _bomp = value; }
     }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(15, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private string _TargetMethodCall;
-    [global::ProtoBuf.ProtoMember(16, IsRequired = true, Name=@"TargetMethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodCall
-    {
-      get { return _TargetMethodCall; }
-      set { _TargetMethodCall = value; }
-    }
-    private string _TargetMethodParam;
-    [global::ProtoBuf.ProtoMember(17, IsRequired = true, Name=@"TargetMethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetMethodParam
-    {
-      get { return _TargetMethodParam; }
-      set { _TargetMethodParam = value; }
-    }
-    private readonly global::System.Collections.Generic.List<NFFS.BulletEvents.TacheBomp> _Bomp = new global::System.Collections.Generic.List<NFFS.BulletEvents.TacheBomp>();
-    [global::ProtoBuf.ProtoMember(18, Name=@"Bomp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.BulletEvents.TacheBomp> Bomp
-    {
-      get { return _Bomp; }
-    }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -417,16 +326,57 @@ namespace NFFS
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AnimatorMoves")]
-  public partial class AnimatorMoves : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AudioEvent")]
+  public partial class AudioEvent : global::ProtoBuf.IExtensible
   {
-    public AnimatorMoves() {}
+    public AudioEvent() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.AnimatorMoves.Move> _xMoveList = new global::System.Collections.Generic.List<NFFS.AnimatorMoves.Move>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xMoveList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.AnimatorMoves.Move> xMoveList
+    private readonly global::System.Collections.Generic.List<NFFS.AudioEvent.Audio> _audioList = new global::System.Collections.Generic.List<NFFS.AudioEvent.Audio>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"audioList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.AudioEvent.Audio> audioList
     {
-      get { return _xMoveList; }
+      get { return _audioList; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Audio")]
+  public partial class Audio : global::ProtoBuf.IExtensible
+  {
+    public Audio() {}
+    
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
+    {
+      get { return _eventTime; }
+      set { _eventTime = value; }
+    }
+    private string _audioPrefabName;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"audioPrefabName", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string audioPrefabName
+    {
+      get { return _audioPrefabName; }
+      set { _audioPrefabName = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MoveEvent")]
+  public partial class MoveEvent : global::ProtoBuf.IExtensible
+  {
+    public MoveEvent() {}
+    
+    private readonly global::System.Collections.Generic.List<NFFS.MoveEvent.Move> _moveEvent = new global::System.Collections.Generic.List<NFFS.MoveEvent.Move>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"moveEvent", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.MoveEvent.Move> moveEvent
+    {
+      get { return _moveEvent; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Move")]
@@ -434,68 +384,54 @@ namespace NFFS
   {
     public Move() {}
     
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private NFFS.AnimatorMoves.EAMType _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.AnimatorMoves.EAMType EventType
+    private NFFS.MoveEvent.METype _eventType;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"eventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.MoveEvent.METype eventType
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventType; }
+      set { _eventType = value; }
     }
-    private float _MoveDis;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"MoveDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MoveDis
+    private float _moveDis;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"moveDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float moveDis
     {
-      get { return _MoveDis; }
-      set { _MoveDis = value; }
+      get { return _moveDis; }
+      set { _moveDis = value; }
     }
-    private float _MoveTime;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MoveTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MoveTime
+    private float _moveTime;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"moveTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float moveTime
     {
-      get { return _MoveTime; }
-      set { _MoveTime = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
+      get { return _moveTime; }
+      set { _moveTime = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EAMType")]
-    public enum EAMType
+    [global::ProtoBuf.ProtoContract(Name=@"METype")]
+    public enum METype
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EAMT_FORWARD", Value=0)]
-      EAMT_FORWARD = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"ME_FORWARD", Value=0)]
+      ME_FORWARD = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EAMT_BACK", Value=1)]
-      EAMT_BACK = 1,
+      [global::ProtoBuf.ProtoEnum(Name=@"ME_BACK", Value=1)]
+      ME_BACK = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EAMT_LEFT", Value=2)]
-      EAMT_LEFT = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"ME_LEFT", Value=2)]
+      ME_LEFT = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EAMT_RIGHT", Value=3)]
-      EAMT_RIGHT = 3
+      [global::ProtoBuf.ProtoEnum(Name=@"ME_RIGHT", Value=3)]
+      ME_RIGHT = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -503,16 +439,16 @@ namespace NFFS
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CameraControlEvents")]
-  public partial class CameraControlEvents : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CameraEvent")]
+  public partial class CameraEvent : global::ProtoBuf.IExtensible
   {
-    public CameraControlEvents() {}
+    public CameraEvent() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.CameraControlEvents.Camera> _xCameraList = new global::System.Collections.Generic.List<NFFS.CameraControlEvents.Camera>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xCameraList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.CameraControlEvents.Camera> xCameraList
+    private readonly global::System.Collections.Generic.List<NFFS.CameraEvent.Camera> _cameraEventList = new global::System.Collections.Generic.List<NFFS.CameraEvent.Camera>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"cameraEventList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.CameraEvent.Camera> cameraEventList
     {
-      get { return _xCameraList; }
+      get { return _cameraEventList; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Camera")]
@@ -520,55 +456,41 @@ namespace NFFS
   {
     public Camera() {}
     
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private NFFS.CameraControlEvents.ECEType _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.CameraControlEvents.ECEType EventType
+    private NFFS.CameraEvent.CEType _eventType;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"eventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.CameraEvent.CEType eventType
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventType; }
+      set { _eventType = value; }
     }
-    private NFFS.FSVector3 _AmountParam;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"AmountParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFFS.FSVector3 AmountParam
+    private NFFS.FSVector3 _amountParam;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"amountParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public NFFS.FSVector3 amountParam
     {
-      get { return _AmountParam; }
-      set { _AmountParam = value; }
+      get { return _amountParam; }
+      set { _amountParam = value; }
     }
-    private float _ShakeTime;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"ShakeTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float ShakeTime
+    private float _shakeTime;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"shakeTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float shakeTime
     {
-      get { return _ShakeTime; }
-      set { _ShakeTime = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
+      get { return _shakeTime; }
+      set { _shakeTime = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ECEType")]
-    public enum ECEType
+    [global::ProtoBuf.ProtoContract(Name=@"CEType")]
+    public enum CEType
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"Earthquake", Value=0)]
@@ -604,145 +526,16 @@ namespace NFFS
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ParticleEvents")]
-  public partial class ParticleEvents : global::ProtoBuf.IExtensible
-  {
-    public ParticleEvents() {}
-    
-    private readonly global::System.Collections.Generic.List<NFFS.ParticleEvents.Particle> _xParticleList = new global::System.Collections.Generic.List<NFFS.ParticleEvents.Particle>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xParticleList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.ParticleEvents.Particle> xParticleList
-    {
-      get { return _xParticleList; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Particle")]
-  public partial class Particle : global::ProtoBuf.IExtensible
-  {
-    public Particle() {}
-    
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
-    {
-      get { return _EventTime; }
-      set { _EventTime = value; }
-    }
-    private NFFS.ParticleEvents.EPERTYPE _Rotation;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"Rotation", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.ParticleEvents.EPERTYPE Rotation
-    {
-      get { return _Rotation; }
-      set { _Rotation = value; }
-    }
-    private string _ParticlePath;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"ParticlePath", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string ParticlePath
-    {
-      get { return _ParticlePath; }
-      set { _ParticlePath = value; }
-    }
-    private string _TargetTacheName;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"TargetTacheName", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetTacheName
-    {
-      get { return _TargetTacheName; }
-      set { _TargetTacheName = value; }
-    }
-    private NFFS.FSVector3 _TargetTacheOffest;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"TargetTacheOffest", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public NFFS.FSVector3 TargetTacheOffest
-    {
-      get { return _TargetTacheOffest; }
-      set { _TargetTacheOffest = value; }
-    }
-    private int _CastToSurface;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"CastToSurface", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int CastToSurface
-    {
-      get { return _CastToSurface; }
-      set { _CastToSurface = value; }
-    }
-    private int _BindTarget;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = true, Name=@"BindTarget", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int BindTarget
-    {
-      get { return _BindTarget; }
-      set { _BindTarget = value; }
-    }
-    private float _DestroyTime;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = true, Name=@"DestroyTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float DestroyTime
-    {
-      get { return _DestroyTime; }
-      set { _DestroyTime = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EPERTYPE")]
-    public enum EPERTYPE
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"NONE", Value=0)]
-      NONE = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"MatchTarget", Value=1)]
-      MatchTarget = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_X", Value=2)]
-      Random_X = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_Y", Value=3)]
-      Random_Y = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_Z", Value=4)]
-      Random_Z = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_XY", Value=5)]
-      Random_XY = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_XZ", Value=6)]
-      Random_XZ = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_YZ", Value=7)]
-      Random_YZ = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"Random_XYZ", Value=8)]
-      Random_XYZ = 8
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EnableEvents")]
   public partial class EnableEvents : global::ProtoBuf.IExtensible
   {
     public EnableEvents() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.EnableEvents.Enable> _xEnableList = new global::System.Collections.Generic.List<NFFS.EnableEvents.Enable>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xEnableList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.EnableEvents.Enable> xEnableList
+    private readonly global::System.Collections.Generic.List<NFFS.EnableEvents.Enable> _enableList = new global::System.Collections.Generic.List<NFFS.EnableEvents.Enable>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"enableList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.EnableEvents.Enable> enableList
     {
-      get { return _xEnableList; }
+      get { return _enableList; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Enable")]
@@ -750,40 +543,26 @@ namespace NFFS
   {
     public Enable() {}
     
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private NFFS.EnableEvents.EEETYPE _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.EnableEvents.EEETYPE EventType
+    private NFFS.EnableEvents.EEETYPE _eventType;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"eventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.EnableEvents.EEETYPE eventType
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventType; }
+      set { _eventType = value; }
     }
-    private string _TargetName;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"TargetName", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetName
+    private string _targetName;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"targetName", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string targetName
     {
-      get { return _TargetName; }
-      set { _TargetName = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
+      get { return _targetName; }
+      set { _targetName = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -806,162 +585,16 @@ namespace NFFS
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TrailEvents")]
-  public partial class TrailEvents : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GlobalSpeed")]
+  public partial class GlobalSpeed : global::ProtoBuf.IExtensible
   {
-    public TrailEvents() {}
+    public GlobalSpeed() {}
     
-    private readonly global::System.Collections.Generic.List<NFFS.TrailEvents.Trail> _xTrailList = new global::System.Collections.Generic.List<NFFS.TrailEvents.Trail>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xTrailList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.TrailEvents.Trail> xTrailList
+    private readonly global::System.Collections.Generic.List<NFFS.GlobalSpeed.Speed> _speedList = new global::System.Collections.Generic.List<NFFS.GlobalSpeed.Speed>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"speedList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NFFS.GlobalSpeed.Speed> speedList
     {
-      get { return _xTrailList; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Trail")]
-  public partial class Trail : global::ProtoBuf.IExtensible
-  {
-    public Trail() {}
-    
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
-    {
-      get { return _EventTime; }
-      set { _EventTime = value; }
-    }
-    private NFFS.TrailEvents.TEETYPE _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.TrailEvents.TEETYPE EventType
-    {
-      get { return _EventType; }
-      set { _EventType = value; }
-    }
-    private string _TargetName;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"TargetName", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string TargetName
-    {
-      get { return _TargetName; }
-      set { _TargetName = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"TEETYPE")]
-    public enum TEETYPE
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"INIT", Value=0)]
-      INIT = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"FINAL", Value=1)]
-      FINAL = 1
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AudioEvents")]
-  public partial class AudioEvents : global::ProtoBuf.IExtensible
-  {
-    public AudioEvents() {}
-    
-    private readonly global::System.Collections.Generic.List<NFFS.AudioEvents.Audio> _xAudioList = new global::System.Collections.Generic.List<NFFS.AudioEvents.Audio>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xAudioList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.AudioEvents.Audio> xAudioList
-    {
-      get { return _xAudioList; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Audio")]
-  public partial class Audio : global::ProtoBuf.IExtensible
-  {
-    public Audio() {}
-    
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
-    {
-      get { return _EventTime; }
-      set { _EventTime = value; }
-    }
-    private NFFS.AudioEvents.AEETYPE _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.AudioEvents.AEETYPE EventType
-    {
-      get { return _EventType; }
-      set { _EventType = value; }
-    }
-    private string _AudioName;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"AudioName", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string AudioName
-    {
-      get { return _AudioName; }
-      set { _AudioName = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"AEETYPE")]
-    public enum AEETYPE
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"INIT", Value=0)]
-      INIT = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"FINAL", Value=1)]
-      FINAL = 1
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GlobalSpeeds")]
-  public partial class GlobalSpeeds : global::ProtoBuf.IExtensible
-  {
-    public GlobalSpeeds() {}
-    
-    private readonly global::System.Collections.Generic.List<NFFS.GlobalSpeeds.Speed> _xSpeedList = new global::System.Collections.Generic.List<NFFS.GlobalSpeeds.Speed>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xSpeedList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.GlobalSpeeds.Speed> xSpeedList
-    {
-      get { return _xSpeedList; }
+      get { return _speedList; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Speed")]
@@ -969,26 +602,26 @@ namespace NFFS
   {
     public Speed() {}
     
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
+    private float _eventTime;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"eventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float eventTime
     {
-      get { return _EventTime; }
-      set { _EventTime = value; }
+      get { return _eventTime; }
+      set { _eventTime = value; }
     }
-    private NFFS.GlobalSpeeds.EGSTYPE _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.GlobalSpeeds.EGSTYPE EventType
+    private NFFS.GlobalSpeed.EGSTYPE _eventType;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"eventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public NFFS.GlobalSpeed.EGSTYPE eventType
     {
-      get { return _EventType; }
-      set { _EventType = value; }
+      get { return _eventType; }
+      set { _eventType = value; }
     }
-    private float _SpeedValue;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"SpeedValue", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float SpeedValue
+    private float _speedValue;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"speedValue", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public float speedValue
     {
-      get { return _SpeedValue; }
-      set { _SpeedValue = value; }
+      get { return _speedValue; }
+      set { _speedValue = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1004,102 +637,6 @@ namespace NFFS
             
       [global::ProtoBuf.ProtoEnum(Name=@"FINAL", Value=1)]
       FINAL = 1
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AnimatorFlys")]
-  public partial class AnimatorFlys : global::ProtoBuf.IExtensible
-  {
-    public AnimatorFlys() {}
-    
-    private readonly global::System.Collections.Generic.List<NFFS.AnimatorFlys.Fly> _xFlyList = new global::System.Collections.Generic.List<NFFS.AnimatorFlys.Fly>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"xFlyList", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<NFFS.AnimatorFlys.Fly> xFlyList
-    {
-      get { return _xFlyList; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Fly")]
-  public partial class Fly : global::ProtoBuf.IExtensible
-  {
-    public Fly() {}
-    
-    private float _EventTime;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"EventTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float EventTime
-    {
-      get { return _EventTime; }
-      set { _EventTime = value; }
-    }
-    private NFFS.AnimatorFlys.EAFType _EventType;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"EventType", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public NFFS.AnimatorFlys.EAFType EventType
-    {
-      get { return _EventType; }
-      set { _EventType = value; }
-    }
-    private float _MoveDis;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"MoveDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MoveDis
-    {
-      get { return _MoveDis; }
-      set { _MoveDis = value; }
-    }
-    private float _MoveTime;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = true, Name=@"MoveTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MoveTime
-    {
-      get { return _MoveTime; }
-      set { _MoveTime = value; }
-    }
-    private float _MoveTopDis;
-    [global::ProtoBuf.ProtoMember(5, IsRequired = true, Name=@"MoveTopDis", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public float MoveTopDis
-    {
-      get { return _MoveTopDis; }
-      set { _MoveTopDis = value; }
-    }
-    private string _MethodCall;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = true, Name=@"MethodCall", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodCall
-    {
-      get { return _MethodCall; }
-      set { _MethodCall = value; }
-    }
-    private string _MethodParam;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = true, Name=@"MethodParam", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string MethodParam
-    {
-      get { return _MethodParam; }
-      set { _MethodParam = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EAFType")]
-    public enum EAFType
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EAFT_FORWARD", Value=0)]
-      EAFT_FORWARD = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EAFT_BACK", Value=1)]
-      EAFT_BACK = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EAFT_LEFT", Value=2)]
-      EAFT_LEFT = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EAFT_RIGHT", Value=3)]
-      EAFT_RIGHT = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"EAFT_TOP", Value=4)]
-      EAFT_TOP = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;
