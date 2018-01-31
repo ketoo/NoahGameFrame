@@ -17,6 +17,9 @@
 #include <arpa/inet.h>
 #endif
 
+//1048576 = 1024 * 1024
+#define NF_BUFFER_MAX_READ	1048576
+
 NFRedisClientSocket::NFRedisClientSocket()
 {
 	mNetStatus = NF_NET_EVENT::NF_NET_EVENT_CONNECTED;
@@ -89,16 +92,12 @@ int NFRedisClientSocket::Execute()
 	return 0;
 }
 
-void NFRedisClientSocket::AddBuff(const std::string & buff)
-{
-}
-
 int NFRedisClientSocket::Close()
 {
     return 0;
 }
 
-bool NFRedisClientSocket::ReadLine(std::string &line)
+bool NFRedisClientSocket::ReadLineFromBuff(std::string &line)
 {
 	line.clear();
 
@@ -121,15 +120,7 @@ bool NFRedisClientSocket::ReadLine(std::string &line)
 
 		if (!bFindLine)
 		{
-			//yield
-			if (YieldFunction)
-			{
-				YieldFunction();
-			}
-			else
-			{
-				Execute();
-			}
+			return false;
 		}
 	}
 
@@ -139,6 +130,7 @@ bool NFRedisClientSocket::ReadLine(std::string &line)
 
 	return true;
 }
+
 
 int NFRedisClientSocket::Write(const char *buf, int count)
 {
@@ -155,30 +147,65 @@ int NFRedisClientSocket::Write(const char *buf, int count)
     return 0;
 }
 
-bool NFRedisClientSocket::ReadN(char *buf, int count)
+int NFRedisClientSocket::GetLineNum()
 {
-	while (count > mstrBuff.length())
+	return mLineList.size();
+}
+
+bool NFRedisClientSocket::TryPredictType(char& eType)
+{
+	bool bFindType = false;
+	while (!bFindType)
 	{
-		//yeild
-		if (YieldFunction)
+		if (mLineList.size() <= 0)
 		{
-			YieldFunction();
+			//yeild
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
 		}
 		else
 		{
-			Execute();
+			std::string& line = mLineList.front();
+			eType = line.data()[0];
+			bFindType = true;
 		}
 	}
 
-	if (mstrBuff.length() >= count)
+	return true;
+}
+
+bool NFRedisClientSocket::ReadLine(std::string & line)
+{
+	bool bFindLine = false;
+	while (!bFindLine)
 	{
-		memcpy(buf, mstrBuff.data(), count);
-		mstrBuff.erase(0, count);
+		if (mLineList.size() <= 0)
+		{
+			if (YieldFunction)
+			{
+				YieldFunction();
+			}
+			else
+			{
+				Execute();
+			}
+		}
+		else
+		{
+			bFindLine = true;
 
-		return true;
+			line = mLineList.front();
+			mLineList.pop_front();
+		}
 	}
-
-	return false;
+	
+	return true;
 }
 
 int NFRedisClientSocket::ClearBuff()
@@ -212,15 +239,38 @@ void NFRedisClientSocket::conn_readcb(bufferevent * bev, void * user_data)
 
 	//////////////////////////////////////////////////////////////////////////
 
-
-	char* strMsg = new char[len];
-
-	if (evbuffer_remove(input, strMsg, len) > 0)
+	static char* mstrTempBuffData = nullptr;
+	if (mstrTempBuffData == nullptr)
 	{
-		pClientSocket->mstrBuff.append(strMsg, len);
+		mstrTempBuffData = new char[NF_BUFFER_MAX_READ];
 	}
 
-	delete[] strMsg;
+	int nDataLen = len;
+	if (len > NF_BUFFER_MAX_READ)
+	{
+		nDataLen = NF_BUFFER_MAX_READ;
+	}
+
+	if (evbuffer_remove(input, mstrTempBuffData, len) > 0)
+	{
+		pClientSocket->mstrBuff.append(mstrTempBuffData, len);
+	}
+
+	//push back as a new line
+	bool b = true;
+	while (b)
+	{
+		std::string line;
+		if (pClientSocket->ReadLineFromBuff(line))
+		{
+			pClientSocket->mLineList.push_back(line);
+		}
+		else
+		{
+			b = false;
+		}
+	}
+	
 }
 
 void NFRedisClientSocket::conn_writecb(bufferevent * bev, void * user_data)

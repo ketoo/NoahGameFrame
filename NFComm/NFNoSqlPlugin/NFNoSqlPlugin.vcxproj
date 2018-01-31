@@ -111,11 +111,9 @@
     <ClCompile Include="NFCNoSqlModule.cpp" />
     <ClCompile Include="NFNoSqlPlugin.cpp" />
     <ClCompile Include="NFRedisClient.cpp" />
-    <ClCompile Include="NFRedisClientGEO.cpp" />
     <ClCompile Include="NFRedisClientHash.cpp" />
     <ClCompile Include="NFRedisClientKey.cpp" />
     <ClCompile Include="NFRedisClientList.cpp" />
-    <ClCompile Include="NFRedisClientPubSub.cpp" />
     <ClCompile Include="NFRedisClientServer.cpp" />
     <ClCompile Include="NFRedisClientSet.cpp" />
     <ClCompile Include="NFRedisClientSocket.cpp" />
