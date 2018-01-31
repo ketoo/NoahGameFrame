@@ -4,44 +4,24 @@
 
 #include "NFRedisClient.h"
 
-NFRedisResult *NFRedisClient::FLUSHALL()
+void NFRedisClient::FLUSHALL()
 {
-    m_pRedisResult->Reset();
-
     NFRedisCommand cmd(GET_NAME(FLUSHALL));
 
-    std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-    if (nRet != 0)
-    {
-        return m_pRedisResult;
-    }
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-    GetStatusReply();
+	WaitingResult(pRedisResult);
 
-
-    return m_pRedisResult;
 }
 
-NFRedisResult *NFRedisClient::FLUSHDB()
+void NFRedisClient::FLUSHDB()
 {
-    m_pRedisResult->Reset();
-
     NFRedisCommand cmd(GET_NAME(FLUSHDB));
 
-    std::string msg = cmd.Serialize();
-	m_pRedisResult->SetCommand(msg);
 
-    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
-    if (nRet != 0)
-    {
-        return m_pRedisResult;
-    }
+	NF_SHARE_PTR<NFRedisResult> pRedisResult = BuildSendCmd(cmd);
 
-    GetStatusReply();
+	WaitingResult(pRedisResult);
 
-
-    return m_pRedisResult;
 }

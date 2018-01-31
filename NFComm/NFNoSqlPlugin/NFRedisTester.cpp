@@ -11,34 +11,29 @@ NFRedisTester::NFRedisTester()
 
 void NFRedisTester::RunTester()
 {
-    //mxRedisClient.Flush();
-
-    TestGEO();
+    mxRedisClient.FLUSHDB();
+	TestKey();
+	TestString();
+	TestList();
     TestHash();
-    TestKey();
-    TestList();
-    TestPubSub();
-    TestServer();
     TestSet();
-    TestSocket();
     TestSort();
-    TestString();
-}
-
-void NFRedisTester::TestGEO()
-{
-
 }
 
 void NFRedisTester::TestHash()
 {
-	/*
-	NFRedisResult* HINCRBY(const std::string& key, const std::string& field, const int by);
-	NFRedisResult* HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
+	int64_t nnn;
+	assert(mxRedisClient.HINCRBY("12123ddd121wssdsdsdd", "121212", 13, nnn) == true);
+	assert(nnn == 13);
 
-	NFRedisResult* HSETNX(const std::string& key, const std::string& field, const std::string& value);
-	//NFRedisResult* HSCAN(const std::string& key, const std::string& field);
-	*/
+	float fval;
+	assert(mxRedisClient.HINCRBYFLOAT("12123dd323ssss123ddd", "12444441212", 3.0f, fval) == true);
+
+	assert(mxRedisClient.HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == true);
+	assert(mxRedisClient.HSETNX("12123ddd121wssdsdsdd", "12444441212", "121212") == false);
+
+
+	//NF_SHARE_PTR<NFRedisResult> HSCAN(const std::string& key, const std::string& field);
 
 	std::string strKey = "TestHash::TestHash";
 	std::string strField1 = "TestField1";
@@ -74,34 +69,25 @@ void NFRedisTester::TestHash()
 	pair_values.push_back(string_pair(fields[4], values[4]));
 
 
-	NFRedisResult* pRedisResult;
+	assert(mxRedisClient.DEL(strKey) == false);
 
-	pRedisResult = mxRedisClient.DEL(strKey);
+	assert(mxRedisClient.HSET(strKey, strField1, strValue1) == true);
 
-	pRedisResult = mxRedisClient.HSET(strKey, strField1, strValue1);
-	assert(pRedisResult->GetRespInt() == 1);
-
-	pRedisResult = mxRedisClient.HGET(strKey, strField1);
-	assert(pRedisResult->GetRespString() == strValue1);
-
-	pRedisResult = mxRedisClient.HEXISTS(strKey, strField1);
-	assert(pRedisResult->GetRespInt() == 1);
-
-	pRedisResult = mxRedisClient.HDEL(strKey, strField1);
-	assert(pRedisResult->GetRespInt() == 1);
-
-	pRedisResult = mxRedisClient.HEXISTS(strKey, strField1);
-	assert(pRedisResult->GetRespInt() == 0);
-
-	pRedisResult = mxRedisClient.HMSET(strKey, pair_values);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	std::string strHGET;
+	assert(mxRedisClient.HGET(strKey, strField1, strHGET) == true);
+	assert(strHGET == strValue1);
 	
-	pRedisResult = mxRedisClient.HLEN(strKey);
-	assert(pRedisResult->GetRespInt() == pair_values.size());
+	assert(mxRedisClient.HEXISTS(strKey, strField1) == true);
+	assert(mxRedisClient.HDEL(strKey, strField1) == true);
+	assert(mxRedisClient.HEXISTS(strKey, strField1) == false);
+	assert(mxRedisClient.HMSET(strKey, pair_values) == true);
+	
+	int nHLEN;
+	assert(mxRedisClient.HLEN(strKey, nHLEN) == true);
+	assert(nHLEN == pair_values.size());
 
 	string_vector getValue;
-	pRedisResult = mxRedisClient.HMGET(strKey, fields, getValue);
-	//assert(pRedisResult->GetRespInt() == getValue.size());
+	assert(mxRedisClient.HMGET(strKey, fields, getValue) == true);
 	assert(fields.size() == getValue.size());
 	for (int i = 0; i < values.size(); ++i)
 	{
@@ -109,8 +95,7 @@ void NFRedisTester::TestHash()
 	}
 
 	std::vector<string_pair> get_pair_values;
-	pRedisResult = mxRedisClient.HGETALL(strKey, get_pair_values);
-	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
+	assert(mxRedisClient.HGETALL(strKey, get_pair_values) == true);
 	assert(get_pair_values.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
@@ -119,8 +104,7 @@ void NFRedisTester::TestHash()
 	}
 
 	std::vector<std::string> get_keys;
-	pRedisResult = mxRedisClient.HKEYS(strKey, get_keys);
-	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
+	assert(mxRedisClient.HKEYS(strKey, get_keys) == true);
 	assert(get_keys.size() == fields.size());
 	for (int i = 0; i < fields.size(); ++i)
 	{
@@ -128,8 +112,7 @@ void NFRedisTester::TestHash()
 	}
 
 	std::vector<std::string> get_valuess;
-	pRedisResult = mxRedisClient.HVALS(strKey, get_valuess);
-	assert(pRedisResult->GetResultStatus() == NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK);
+	assert(mxRedisClient.HVALS(strKey, get_valuess) == true);
 	assert(get_valuess.size() == values.size());
 	for (int i = 0; i < values.size(); ++i)
 	{
@@ -138,51 +121,58 @@ void NFRedisTester::TestHash()
 
 	for (int i = 0; i < fields.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.HSTRLEN(strKey, fields[i]);
-		assert(pRedisResult->GetRespInt() == get_valuess[i].length());
+		int nHSTRLEN;
+		assert(mxRedisClient.HSTRLEN(strKey, fields[i], nHSTRLEN) == true);
+		assert(nHSTRLEN == get_valuess[i].length());
 	}
 }
 
 void NFRedisTester::TestKey()
 {
+	int64_t nnn;
+	assert(mxRedisClient.INCRBY("12123ddddd", 13, nnn) == true);
+	assert(nnn == 13);
+
+	float fval;
+	assert(mxRedisClient.INCRBYFLOAT("12123dd323123ddd", 3.0f, fval) == true);
+
+	assert(mxRedisClient.SETNX("12123dd323123ddd", "121212") == false);
+	assert(mxRedisClient.SETNX("124422dd1212", "121212") == true);
+
+
 	std::string strKey = "NFRedisTester::TestKey";
 	std::string strValue = "1232321123r34234";
 
-	NFRedisResult* pRedisResult;
+	assert(mxRedisClient.SET(strKey, strValue) == true);
 
-	pRedisResult = mxRedisClient.SET(strKey, strValue);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	assert(mxRedisClient.TYPE(strKey) == "string");
 
-	pRedisResult = mxRedisClient.TYPE(strKey);
-	assert(pRedisResult->GetRespString() == "string");
+	assert(mxRedisClient.DEL(strKey) == true);
+	assert(mxRedisClient.EXISTS(strKey) == false);
 
-	pRedisResult = mxRedisClient.DEL(strKey);
-	pRedisResult = mxRedisClient.EXISTS(strKey);
-	assert(pRedisResult->GetRespInt() == 0);
+	assert(mxRedisClient.SET(strKey, strValue) == true);
+	assert(mxRedisClient.EXISTS(strKey) == true);
 
-	pRedisResult = mxRedisClient.SET(strKey, strValue);
-	pRedisResult = mxRedisClient.EXISTS(strKey);
-	assert(pRedisResult->GetRespInt() == 1);
-
-	pRedisResult = mxRedisClient.EXPIRE(strKey, 5);
+	assert(mxRedisClient.EXPIRE(strKey, 5) == true);
 
 	NFSLEEP(6000);
-	pRedisResult = mxRedisClient.GET(strKey);
-	assert(pRedisResult->GetRespString() == "");
+	std::string strGET;
+	assert(mxRedisClient.GET(strKey, strGET) == false);
+	assert(strGET == "");
 
 	//pRedisResult = mxRedisClient.EXPIREAT(strKey, const int64_t unixTime);
-	pRedisResult = mxRedisClient.PERSIST(strKey);
-	pRedisResult = mxRedisClient.TTL(strKey);
-	pRedisResult = mxRedisClient.TYPE(strKey);
+	assert(mxRedisClient.PERSIST(strKey) == false);
+	assert(mxRedisClient.TTL(strKey) == -2);
+	assert(mxRedisClient.TYPE(strKey) == "");
 
 }
 
 void NFRedisTester::TestList()
 {
 	/*
-	NFRedisResult* RPUSHX(const std::string& key, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> RPUSHX(const std::string& key, const std::string& value);
 
-	NFRedisResult* LSET(const std::string& key, const int index, const std::string& value);
+	NF_SHARE_PTR<NFRedisResult> LSET(const std::string& key, const int index, const std::string& value);
 
 	*/
 
@@ -194,88 +184,82 @@ void NFRedisTester::TestList()
 	strList.push_back("123444444");
 
 
-	NFRedisResult* pRedisResult;
+	assert(mxRedisClient.LSET("12122121", 1, "12212") == false);
+	assert(mxRedisClient.LPUSH("12122121", "12212") == true);
+	std::string lpop;
+	assert(mxRedisClient.LPOP("12122121", lpop) == true);
+	assert("12212" == lpop);
 
-	pRedisResult = mxRedisClient.DEL(strKey);
+	assert(mxRedisClient.DEL(strKey) == false);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.RPUSH(strKey, strList[i]);
+		assert(mxRedisClient.RPUSH(strKey, strList[i]) == (i + 1));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.LINDEX(strKey, i);
-		assert(pRedisResult->GetRespString() == strList[i]);
+		std::string strLINDEX;
+		assert(mxRedisClient.LINDEX(strKey, i, strLINDEX) == true);
+		assert(strLINDEX == strList[i]);
 	}
 
-	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == strList.size());
+	int nLLEN;
+	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
+	assert(nLLEN == strList.size());
 
 	for (int i = strList.size() - 1; i >= 0; --i)
 	{
-		pRedisResult = mxRedisClient.RPOP(strKey);
-		assert(pRedisResult->GetRespString() == strList[i]);
+		std::string strRPOP;
+		assert(mxRedisClient.RPOP(strKey, strRPOP) == true);
+		assert(strRPOP == strList[i]);
 	}
 
-	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 0);
-
+	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
+	assert(nLLEN == 0);
 	//////
 	for (int i = strList.size() - 1; i >= 0; --i)
 	{
-		pRedisResult = mxRedisClient.LPUSH(strKey, strList[i]);
+		assert(mxRedisClient.LPUSH(strKey, strList[i]) == (strList.size()-i));
 	}
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.LINDEX(strKey, i);
-		assert(pRedisResult->GetRespString() == strList[i]);
+		std::string strLINDEX;
+		assert(mxRedisClient.LINDEX(strKey, i, strLINDEX) == true);
+		assert(strLINDEX == strList[i]);
 	}
 
-	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == strList.size());
+	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
+	assert(nLLEN == strList.size());
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.LPOP(strKey);
-		assert(pRedisResult->GetRespString() == strList[i]);
+		std::string strLPOP;
+		assert(mxRedisClient.LPOP(strKey, strLPOP) == true);
+		assert(strLPOP == strList[i]);
 	}
 
-	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 0);
-
+	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
+	assert(nLLEN == 0);
 	/////
 
-	pRedisResult = mxRedisClient.LPUSH(strKey, strKey);
+	assert(mxRedisClient.LPUSH(strKey, strKey) == 1);
 
-	assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 1);
+	assert(mxRedisClient.LLEN(strKey, nLLEN) == true);
+	assert(nLLEN == 1);
 
 	for (int i = 0; i < strList.size(); ++i)
 	{
-		pRedisResult = mxRedisClient.LPUSHX(strKey, strList[i]);
-		assert(pRedisResult->GetRespInt() == 2 + i);
-		assert(mxRedisClient.LLEN(strKey)->GetRespInt() == 2+i);
+		assert(mxRedisClient.LPUSHX(strKey, strList[i]) == (i+2));
 	}
 
 	string_vector values;
-	pRedisResult = mxRedisClient.LRANGE(strKey, 0, strList.size(), values);
-
+	assert(mxRedisClient.LRANGE(strKey, 0, strList.size(), values) == true);
 	assert(values.size() == strList.size() + 1);
 }
 
-void NFRedisTester::TestPubSub()
-{
-
-}
-
-void NFRedisTester::TestServer()
-{
-
-}
-
 void NFRedisTester::TestSet()
-{
-
-}
-
-void NFRedisTester::TestSocket()
 {
 
 }
@@ -287,35 +271,44 @@ void NFRedisTester::TestSort()
 
 void NFRedisTester::TestString()
 {
+	std::string strKey11 = "TestString1112121";
+	std::string strValu11e = "111";
 
-	/*
-	NFRedisResult* DECR(const std::string& key);
-	NFRedisResult* DECRBY(const std::string& key, const int64_t v);
-	NFRedisResult* GETSET(const std::string& key, const std::string& value);
-	NFRedisResult* INCR(const std::string& key);
-	NFRedisResult* INCRBY(const std::string& key, const int64_t v);
-	NFRedisResult* INCRBYFLOAT(const std::string& key, const float fv);
+	int64_t nValueDECR;
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == false);
+	assert(mxRedisClient.SET(strKey11, strValu11e) == true);
+	assert(mxRedisClient.DECR(strKey11, nValueDECR) == true);
+	assert(nValueDECR == 110);
+	assert(mxRedisClient.DECRBY(strKey11, 10, nValueDECR) == true);
+	assert(nValueDECR == 100);
+	std::string oldGETSET;
+	assert(mxRedisClient.GETSET(strKey11, "200", oldGETSET) == true);
+	assert(oldGETSET == "100");
 
-	NFRedisResult* SETEX(const std::string& key, const std::string& value, int time);
-	NFRedisResult* SETNX(const std::string& key, const std::string& value);
-	NFRedisResult* STRLEN(const std::string& key);
-	*/
+	assert(mxRedisClient.INCR(strKey11, nValueDECR) == true);
+	assert(nValueDECR == 101);
+
+	assert(mxRedisClient.INCRBY(strKey11, 100, nValueDECR) == true);
+	assert(nValueDECR == 201);
+
 	std::string strKey = "TestString";
 	std::string strValue = "1232TestString234";
 
-    NFRedisResult* pRedisResult;
+	assert(mxRedisClient.SET(strKey, strValue) == true);
 
-    pRedisResult = mxRedisClient.SET(strKey, strValue);
-	assert(pRedisResult->GetRespString() == NFREDIS_STATUS_OK);
+	std::string strGET;
+	assert(mxRedisClient.GET(strKey, strGET) == true);
+	assert(strGET == strValue);
 
-	pRedisResult = mxRedisClient.GET(strKey);
-	assert(pRedisResult->GetRespString() == strValue);
+	int nAPPEND;
+	assert(mxRedisClient.APPEND(strKey, strValue, nAPPEND) == true);
+	assert(nAPPEND == strValue.length() * 2);
 
-    pRedisResult = mxRedisClient.APPEND(strKey, strValue);
-	assert(pRedisResult->GetRespInt() == strValue.length() * 2);
+	int nSTRLEN;
+	assert(mxRedisClient.STRLEN(strKey, nSTRLEN) == true);
+	assert(nSTRLEN == strValue.length() * 2);
 
-	pRedisResult = mxRedisClient.STRLEN(strKey);
-	assert(pRedisResult->GetRespInt() == strValue.length() * 2);
+	assert(mxRedisClient.STRLEN("321321", nSTRLEN) == false);
 
     std::cout << "test cmd:" << std::endl;
 
@@ -340,7 +333,6 @@ void NFRedisTester::TestString()
     }
 
     mxRedisClient.MSET(vstring_pair);
-	std::cout << "test cmd:" << pRedisResult->GetCommand() << std::endl;
 
 	std::vector<std::string> vstringListValue;
     mxRedisClient.MGET(vstringListKey, vstringListValue);
@@ -348,7 +340,9 @@ void NFRedisTester::TestString()
 
 	for (int i = 0; i < vstringListKey.size(); ++i)
 	{
-		assert(mxRedisClient.GET(vstringListKey[i])->GetRespString() == vstringListValue[i]);
+		std::string strGET;
+		assert(mxRedisClient.GET(vstringListKey[i], strGET) == true);
+		assert(strGET == vstringListValue[i]);
 	}
 
 }
