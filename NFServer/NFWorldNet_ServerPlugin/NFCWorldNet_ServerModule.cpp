@@ -501,11 +501,9 @@ void NFCWorldNet_ServerModule::OnTransmitServerReport(const NFSOCK nFd, const in
 		return;
 	}
 
-	std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_MASTER);
-	if (pServerData)
-	{
-		m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, msg);
-	}
+
+	m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, msg);
+
 }
 
 bool NFCWorldNet_ServerModule::SendMsgToGame(const int nGameID, const NFMsg::EGameMsgID eMsgID, google::protobuf::Message& xData, const NFGUID nPlayer)
@@ -981,11 +979,8 @@ void NFCWorldNet_ServerModule::ServerReport(int reportServerId, NFMsg::EServerSt
 				reqMsg.set_server_state(serverStatus);
 				reqMsg.set_server_type(nServerType);
 
-				std::shared_ptr<ConnectData> pServerData = m_pNetClientModule->GetServerNetInfo(NF_SERVER_TYPES::NF_ST_MASTER);
-				if (pServerData)
-				{
-					m_pNetClientModule->SendToServerByPB(pServerData->nGameID, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
-				}
+
+				m_pNetClientModule->SendToAllServerByPB(NF_SERVER_TYPES::NF_ST_MASTER, NFMsg::EGMI_STS_SERVER_REPORT, reqMsg);
 			}
 		}
 	}
