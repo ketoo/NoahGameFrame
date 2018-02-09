@@ -24,8 +24,18 @@ NF is a lightweight, fast, scalable, distributed plugin framework.Greatly inspir
 - Based on the standard c + + development, cross-platform support
 - With existing c++, c# game client for rapid development
 - Cross-platform
+The features:
 
-## Toturial 
+
+## Tutorial--English
+
+https://github.com/ketoo/NoahGameFrame/wiki/Tutorial
+
+## Docs--English
+
+https://github.com/ketoo/NoahGameFrame/wiki/Documentation
+
+## Toturial--中文
 
 [Toturial](http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39) : http://bbs.noahframe.com/forum.php?mod=forumdisplay&fid=39
 

@@ -487,6 +487,7 @@ int NFCSceneAOIModule::OnClassCommonEvent(const NFGUID & self, const std::string
 			//monster or others need to tell all player
 			OnObjectListEnter(valueAllPlayrObjectList, NFDataList() << self);
 			OnPropertyEnter(valueAllPlayrObjectList, self);
+			OnRecordEnter(valueAllPlayrObjectList, self);
 
 			OnObjectListEnterFinished(valueAllPlayrObjectList, NFDataList() << self);
 
