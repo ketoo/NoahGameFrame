@@ -73,11 +73,6 @@ protected:
     void OnProxyServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
     void OnRefreshProxyServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
-	void OnAIServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnAIServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-	void OnRefreshAIServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
-
     void SynGameToProxy();
     void SynGameToProxy(const NFSOCK nFD);
 
@@ -90,7 +85,6 @@ private:
     //serverid,data
     NFConsistentHashMapEx<int, ServerData> mGameMap;
 	NFConsistentHashMapEx<int, ServerData> mProxyMap;
-	NFConsistentHashMapEx<int, ServerData> mAIMap;
 
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pClassModule;

@@ -32,11 +32,6 @@ bool NFCWorldNet_ServerModule::AfterInit()
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnGameServerUnRegisteredProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_GAME_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshGameServerInfoProcess);
-
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_REGISTERED, this, &NFCWorldNet_ServerModule::OnAIServerRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_UNREGISTERED, this, &NFCWorldNet_ServerModule::OnAIServerUnRegisteredProcess);
-	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_GTW_AI_REFRESH, this, &NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess);
-
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_ONLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOnlineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_ACK_OFFLINE_NOTIFY, this, &NFCWorldNet_ServerModule::OnOfflineProcess);
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_STS_SERVER_REPORT, this, &NFCWorldNet_ServerModule::OnTransmitServerReport);
@@ -245,83 +240,6 @@ void NFCWorldNet_ServerModule::OnRefreshProxyServerInfoProcess(const NFSOCK nSoc
 
         SynGameToProxy(nSockIndex);
     }
-}
-
-void NFCWorldNet_ServerModule::OnAIServerRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-	{
-		return;
-	}
-
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-
-		NF_SHARE_PTR<ServerData> pServerData = mAIMap.GetElement(xData.server_id());
-		if (!pServerData)
-		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-			mAIMap.AddElement(xData.server_id(), pServerData);
-		}
-
-		pServerData->nFD = nSockIndex;
-		*(pServerData->pData) = xData;
-
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI Registered");
-
-		SynGameToProxy(nSockIndex);
-	}
-}
-
-void NFCWorldNet_ServerModule::OnAIServerUnRegisteredProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-	{
-		return;
-	}
-
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-
-		mAIMap.RemoveElement(xData.server_id());
-
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI UnRegistered");
-	}
-}
-
-void NFCWorldNet_ServerModule::OnRefreshAIServerInfoProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
-{
-	NFGUID nPlayerID;
-	NFMsg::ServerInfoReportList xMsg;
-	if (!m_pNetModule->ReceivePB( nMsgID, msg, nLen, xMsg, nPlayerID))
-	{
-		return;
-	}
-
-	for (int i = 0; i < xMsg.server_list_size(); ++i)
-	{
-		const NFMsg::ServerInfoReport& xData = xMsg.server_list(i);
-
-		NF_SHARE_PTR<ServerData> pServerData = mAIMap.GetElement(xData.server_id());
-		if (!pServerData)
-		{
-			pServerData = NF_SHARE_PTR<ServerData>(NF_NEW ServerData());
-			mAIMap.AddElement(xData.server_id(), pServerData);
-		}
-
-		pServerData->nFD = nSockIndex;
-		*(pServerData->pData) = xData;
-
-		m_pLogModule->LogNormal(NFILogModule::NLL_INFO_NORMAL, NFGUID(0, xData.server_id()), xData.server_name(), "AI Registered");
-
-		SynGameToProxy(nSockIndex);
-	}
 }
 
 void NFCWorldNet_ServerModule::OnSocketEvent(const NFSOCK nSockIndex, const NF_NET_EVENT eEvent, NFINet* pNet)
@@ -551,7 +469,22 @@ bool NFCWorldNet_ServerModule::SendMsgToPlayer(const NFMsg::EGameMsgID eMsgID, g
 
 NF_SHARE_PTR<ServerData> NFCWorldNet_ServerModule::GetSuitProxyForEnter()
 {
-    return mProxyMap.GetElementBySuitConsistent();
+	int nConnectNum = 99999;
+	NF_SHARE_PTR<ServerData> pReturnServerData;
+
+	NF_SHARE_PTR<ServerData> pServerData = mProxyMap.First();
+	while (pServerData)
+	{
+		if (pServerData->pData->server_cur_count() < nConnectNum)
+		{
+			nConnectNum = pServerData->pData->server_cur_count();
+			pReturnServerData = pServerData;
+		}
+
+		pServerData = mProxyMap.Next();
+	}
+
+	return pReturnServerData;
 }
 
 int NFCWorldNet_ServerModule::GetPlayerGameID(const NFGUID self)
