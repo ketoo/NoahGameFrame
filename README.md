@@ -239,11 +239,6 @@ bool HelloWorld1::Shut()
 * Mail: 342006@qq.com
 * BBS: http://bbs.noahframe.com
 
-
-### WELCOME DONATE/欢迎捐赠(支付宝):
-
-![donation](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/donation.png)
-
 -------------------
 
 ### Amazing  open source projects:
