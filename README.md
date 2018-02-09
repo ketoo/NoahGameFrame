@@ -29,9 +29,9 @@ The features:
 
 ## Tutorial--English
 
-https://github.com/ketoo/NoahGameFrame/wiki/Tutorial
+https://github.com/ketoo/NoahGameFrame/wiki/Tutorial-&-Concept
 
-## Docs--English
+## Documents--English
 
 https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 
@@ -50,8 +50,11 @@ https://github.com/ketoo/NoahGameFrame/wiki/Documentation
 ### App Architecture:
 ![App Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_app_arch.png)
 
+
 ### Server Architecture
 ![Server Architecture](https://github.com/ketoo/NoahGameFrame/blob/develop/Introduce/img/NF_server_arch.png)
+
+
 
 ## Get the Sources:
 
@@ -111,12 +114,6 @@ WebSite:  https://github.com/NFGameTeam/NFrame-java
 ### C# Project
 WebSite:  https://github.com/ketoo/NFrame
 
-
-
-## Documents & Tutorial
-[English](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_EN_US.md)
-
-[Mandarin](https://github.com/ketoo/NoahGameFrame/blob/develop/doc_ZH_CN.md)
 
 ## License
 The NFrame project is currently available under the [Apache License](https://github.com/ketoo/NoahGameFrame/blob/develop/LICENSE).
