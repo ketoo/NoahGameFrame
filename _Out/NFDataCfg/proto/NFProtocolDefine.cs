@@ -1024,7 +1024,8 @@ namespace NFrame
 			public const int Activated = 2;//int
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
-			public const int Star = 6;//int
+			public const int Star = 5;//int
+			public const int Ice_Talent = 6;//int
 			public const int Fire_Talent = 7;//int
 			public const int Light_Talent = 8;//int
 			public const int Wind_Talent = 9;//int
