@@ -1044,7 +1044,8 @@ namespace NFrame
 			static const int Activated = 2;//int
 			static const int Level = 3;//int
 			static const int Exp = 4;//int
-			static const int Star = 6;//int
+			static const int Star = 5;//int
+			static const int Ice_Talent = 6;//int
 			static const int Fire_Talent = 7;//int
 			static const int Light_Talent = 8;//int
 			static const int Wind_Talent = 9;//int
