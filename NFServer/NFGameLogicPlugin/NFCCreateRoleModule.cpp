@@ -178,6 +178,8 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		{
 			nHomeSceneID = m_pPVPModule->RandomTileScene();
 		}
+		// test scene one
+		nHomeSceneID = 1;
 
 		NFDataList var;
 		var.AddString(NFrame::Player::Name());
