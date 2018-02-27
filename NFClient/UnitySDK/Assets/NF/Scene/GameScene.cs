@@ -17,7 +17,6 @@ public class GameScene : MonoBehaviour {
     {
         NFGUID tar = valueList.ObjectVal(0);
 
-
         if (tar == NFCPlayerLogic.Instance().mRoleID)
             return true;
 
@@ -27,6 +26,7 @@ public class GameScene : MonoBehaviour {
         NFVector3 pos = valueList.Vector3Val(2);
 
         player.MoveTo(new Vector3(pos.X(), pos.Y(), pos.Z()));
+        Debug.Log("Player Move:" + new Vector3(pos.X(), pos.Y(), pos.Z()).ToString());
 
         return true;
     }
@@ -42,7 +42,12 @@ public class GameScene : MonoBehaviour {
             vec.y = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Y");
             vec.z = (float)NFCKernelModule.Instance().QueryPropertyFloat(self, "Z");
 
-            string strPrefabPath = "Player/MainPlayer";
+            //　MainPlayer
+            string strPrefabPath = "Player/AIThirdPersonController";
+            if (self == NFCPlayerLogic.Instance().mRoleID)
+            {
+                strPrefabPath = "Player/ThirdPersonController";
+            }
             //if (strConfigID.Length <= 0)
             //{
             //    strPrefabPath = NFCElementModule.Instance().QueryPropertyString("Player", "Prefab");
@@ -67,7 +72,8 @@ public class GameScene : MonoBehaviour {
             }
             else
             {
-                player.AddComponent<OtherPlayer>();
+                var other = player.AddComponent<OtherPlayer>();
+                other.MoveTo(vec);
             }
         }
         else if (eType == NFIObject.CLASS_EVENT_TYPE.OBJECT_DESTROY)
