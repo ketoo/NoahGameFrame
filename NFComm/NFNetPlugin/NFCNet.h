@@ -24,7 +24,7 @@ class NFCNet : public NFINet
 public:
     NFCNet()
     {
-        base = NULL;
+        mxBase = NULL;
         listener = NULL;
 
         mstrIP = "";
@@ -42,7 +42,7 @@ public:
     template<typename BaseType>
     NFCNet(BaseType* pBaseType, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t), void (BaseType::*handleEvent)(const NFSOCK, const NF_NET_EVENT, NFINet*))
     {
-        base = NULL;
+        mxBase = NULL;
         listener = NULL;
 
         mRecvCB = std::bind(handleRecieve, pBaseType, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -70,13 +70,13 @@ public:
     virtual bool Final();
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
     
-    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
+    virtual bool SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
 
     
-    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen);
+    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen);
 
 
     virtual bool CloseNetObject(const NFSOCK nSockIndex);
@@ -86,17 +86,11 @@ public:
     virtual bool IsServer();
     virtual bool Log(int severity, const char* msg);
 
-private:
+private:    
+    bool SendMsgToAllClient(const char* msg, const size_t nLen);
     
-    bool SendMsgToAllClient(const char* msg, const uint32_t nLen);
-
-    
-    bool SendMsg(const char* msg, const uint32_t nLen, const std::list<NFSOCK>& fdList);
-    bool SendMsg(const char* msg, const uint32_t nLen, const NFSOCK nSockIndex);
-
-	inline bool SendMsgToAllClient(const char* msg, const size_t nLen) { return SendMsgToAllClient(msg, (uint32_t)nLen); }
-	inline bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList) { return SendMsg(msg, (uint32_t)nLen, fdList); }
-	inline bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex) { return SendMsg(msg, (uint32_t)nLen, nSockIndex); }
+    bool SendMsg(const char* msg, const size_t nLen, const std::list<NFSOCK>& fdList);
+    bool SendMsg(const char* msg, const size_t nLen, const NFSOCK nSockIndex);
 
 
 private:
@@ -140,7 +134,7 @@ private:
     int64_t mnSendMsgTotal;
     int64_t mnReceiveMsgTotal;
 
-    struct event_base* base;
+    struct event_base* mxBase;
     struct evconnlistener* listener;
     //////////////////////////////////////////////////////////////////////////
 

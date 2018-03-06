@@ -10,10 +10,12 @@
 #include "NFCBuffModule.h"
 #include "NFCPVPModule.h"
 #include "NFCCommonConfigModule.h"
-#include "NFCGmModule.h"
 #include "NFCMapModule.h"
 #include "NFCCreateRoleModule.h"
 #include "NFCTileModule.h"
+#include "NFCSurvivalModule.h"
+#include "NFCTileMapModule.h"
+#include "NFCHomeModule.h"
 
 #ifdef NF_DYNAMIC_PLUGIN
 
@@ -47,16 +49,20 @@ void NFGameLogicPlugin::Install()
 	REGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)
 	REGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
     REGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
-    REGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
 	REGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
 	REGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
+	REGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
+	REGISTER_MODULE(pPluginManager, NFITileMapModule, NFCTileMapModule);
+	REGISTER_MODULE(pPluginManager, NFIHomeModule, NFCHomeModule);
 }
 
 void NFGameLogicPlugin::Uninstall()
 {
+	UNREGISTER_MODULE(pPluginManager, NFIHomeModule, NFCHomeModule);
+	UNREGISTER_MODULE(pPluginManager, NFITileMapModule, NFCTileMapModule);
+	UNREGISTER_MODULE(pPluginManager, NFISurvivalModule, NFCSurvivalModule);
 	UNREGISTER_MODULE(pPluginManager, NFITileModule, NFCTileModule);
 	UNREGISTER_MODULE(pPluginManager, NFIMapModule, NFCMapModule);
-    UNREGISTER_MODULE(pPluginManager, NFIGmModule, NFCGmModule);
     UNREGISTER_MODULE(pPluginManager, NFICommonConfigModule, NFCCommonConfigModule);
 	UNREGISTER_MODULE(pPluginManager, NFIPVPModule, NFCPVPModule)
     UNREGISTER_MODULE(pPluginManager, NFICreateRoleModule, NFCCreateRoleModule)

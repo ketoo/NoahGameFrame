@@ -42,7 +42,10 @@ public:
 	virtual bool RequestEnterScene(const NFGUID& self, const int nSceneID, const int nGrupID, const int nType, const NFDataList& argList);
 	virtual bool AddSeedData(const int nSceneID, const std::string& strSeedID, const std::string& strConfigID, const NFVector3& vPos, const int nWeight);
 	virtual bool AddRelivePosition(const int nSceneID, const int nIndex, const NFVector3& vPos);
-	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex);
+	virtual NFVector3 GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll = true);
+
+	virtual bool AddTagPosition(const int nSceneID, const int nIndex, const NFVector3& vPos);
+	virtual NFVector3 GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll = true);
 
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID);
 	virtual bool CreateSceneNPC(const int nSceneID, const int nGroupID, const NFDataList& argList);

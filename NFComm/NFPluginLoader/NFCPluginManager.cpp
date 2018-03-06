@@ -23,9 +23,9 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "libtherond.a" )
+//#pragma comment( lib, "libtherond.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "libtherond.a" )
+//#pragma comment( lib, "libtherond.a" )
 #endif
 
 #else
@@ -33,12 +33,19 @@
 #if NF_PLATFORM == NF_PLATFORM_WIN
 
 #elif NF_PLATFORM == NF_PLATFORM_LINUX || NF_PLATFORM == NF_PLATFORM_ANDROID
-#pragma comment( lib, "libtheron.a" )
+//#pragma comment( lib, "libtheron.a" )
 #elif NF_PLATFORM == NF_PLATFORM_APPLE || NF_PLATFORM == NF_PLATFORM_APPLE_IOS
-#pragma comment( lib, "libtheron.a" )
+//#pragma comment( lib, "libtheron.a" )
 #endif
 
 #endif
+
+NFCoroutineManager mxCoroutineManager;
+
+void CoroutineExecute(void* arg)
+{
+	NFCPluginManager::Instance()->Execute();
+}
 
 NFCPluginManager::NFCPluginManager() : NFIPluginManager()
 {
@@ -93,6 +100,8 @@ inline bool NFCPluginManager::Init()
 	{
 		itInstance->second->Init();
 	}
+
+    mxCoroutineManager.Init(CoroutineExecute);
 
 	return true;
 }
@@ -601,4 +610,30 @@ bool NFCPluginManager::UnLoadStaticPlugin(const std::string & strPluginDLLName)
 	//     DESTROY_PLUGIN(this, NFEventProcessPlugin)
 	//     DESTROY_PLUGIN(this, NFKernelPlugin)
 	return false;
+}
+
+void NFCPluginManager::ExecuteCoScheduler()
+{
+    //NFCPluginManager::Instance()->Execute();
+    mxCoroutineManager.ScheduleJob();
+}
+
+void NFCPluginManager::StartCoroutine()
+{
+    mxCoroutineManager.StartCoroutine();
+}
+
+void NFCPluginManager::StartCoroutine(CoroutineFunction func)
+{
+    mxCoroutineManager.StartCoroutine(func);
+}
+
+void NFCPluginManager::YieldCo(const float nSecond)
+{
+	mxCoroutineManager.YieldCo(nSecond);
+}
+
+void NFCPluginManager::YieldCo()
+{
+    mxCoroutineManager.YieldCo();
 }

@@ -39,7 +39,9 @@ public:
     
     virtual int AddRow(const int nRow);
 
-    virtual int AddRow(const int nRow, const NFDataList& var);
+	virtual int AddRow(const int nRow, const NFDataList& var);
+
+	virtual bool SetRow(const int nRow, const NFDataList& var);
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value);
     virtual bool SetFloat(const int nRow, const int nCol, const double value);
@@ -115,6 +117,10 @@ public:
 
     virtual const bool GetCache();
 
+	virtual const bool GetRef();
+
+	virtual const bool GetForce();
+
 	virtual const bool GetUpload();
 
     virtual const bool GetPublic();
@@ -125,7 +131,11 @@ public:
 
     virtual void SetSave(const bool bSave);
 
-    virtual void SetCache(const bool bCache);
+	virtual void SetCache(const bool bCache);
+
+	virtual void SetRef(const bool bRef);
+
+	virtual void SetForce(const bool bForce);
 
 	virtual void SetUpload(const bool bUpload);
 
@@ -167,7 +177,9 @@ protected:
     bool mbSave;
     bool mbPublic;
     bool mbPrivate;
-    bool mbCache;
+	bool mbCache;
+	bool mbRef;
+	bool mbForce;
 	bool mbUpload;
     std::string mstrRecordName;
 

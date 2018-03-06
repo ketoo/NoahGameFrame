@@ -90,9 +90,6 @@
     <ClCompile Include="..\Classes\NF\NFCClientPlugin.cpp">
       <Filter>src\NF</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFCore\NFCComponentManager.cpp">
-      <Filter>src\NFCommon\NFCore\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFCore\NFCObject.cpp">
       <Filter>src\NFCommon\NFCore\Source Files</Filter>
     </ClCompile>
@@ -135,25 +132,13 @@
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.cc">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.cc">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.cpp">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.cc">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.cc">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.cc">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.cc">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.cc">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.cpp">
@@ -387,9 +372,6 @@
     <ClCompile Include="..\Classes\NF\UI\NFCUIChatPanel.cpp">
       <Filter>src\NF\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.cpp">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNet.cpp">
       <Filter>src\NFCommon\NFNet</Filter>
     </ClCompile>
@@ -398,6 +380,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.cpp">
       <Filter>src\NFCommon\NFNet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Dependencies\libevent\evutil_time.c">
+      <Filter>src\NFCommon\NFNet\libevent\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\NFComm\NFPluginLoader\NFCoroutineManager.cpp">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -415,9 +403,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\NF\NFCClientPlugin.h">
       <Filter>src\NF</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFCore\NFCComponentManager.h">
-      <Filter>src\NFCommon\NFCore\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFCore\NFCObject.h">
       <Filter>src\NFCommon\NFCore\Header Files</Filter>
@@ -509,13 +494,7 @@
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBase.pb.h">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgBaseEx.pb.h">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgDefine.h">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgMysql.pb.h">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgPreGame.pb.h">
@@ -524,13 +503,7 @@
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgShare.pb.h">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFMsgURl.pb.h">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFProtocolDefine.hpp">
-      <Filter>src\NFCommon\NFMessageDefine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFMessageDefine\NFSLGDefine.pb.h">
       <Filter>src\NFCommon\NFMessageDefine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFLogPlugin\NFCLogModule.h">
@@ -725,9 +698,6 @@
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFINet.h">
       <Filter>src\NFCommon\NFNet</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCHttpNet.h">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNet.h">
       <Filter>src\NFCommon\NFNet</Filter>
     </ClInclude>
@@ -735,9 +705,6 @@
       <Filter>src\NFCommon\NFNet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFCNetModule.h">
-      <Filter>src\NFCommon\NFNet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\NFComm\NFNetPlugin\NFIHttpNet.h">
       <Filter>src\NFCommon\NFNet</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFCore\NFSingleton.hpp">
@@ -766,6 +733,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\NFComm\NFCore\NFMemoryCounter.hpp">
       <Filter>src\NFCommon\NFCore\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\NFComm\NFPluginLoader\NFCoroutineManager.h">
+      <Filter>src\NFCommon\NFPluginLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

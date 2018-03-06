@@ -28,12 +28,20 @@
 #include <fstream>
 #include <memory>
 #include "NFMemoryCounter.hpp"
-#include "common/variant.hpp"
 #include "NFComm/NFPluginModule/NFGUID.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
 #include "NFComm/NFCore/NFVector2.hpp"
 #include "NFComm/NFCore/NFVector3.hpp"
 
+#ifdef _MSC_VER
+#if _MSC_VER <= 1800
+#include "common/variant.h"
+#else
+#include "common/variant.hpp"
+#endif
+#else
+#include "common/variant.hpp"
+#endif
 
 enum NFDATA_TYPE
 {
@@ -144,7 +152,9 @@ public:
 
 	void Reset()
 	{
-		switch (GetType())
+		variantData = mapbox::util::variant<NFINT64, double, std::string, NFGUID, NFVector2, NFVector3>();
+		nType = TDATA_UNKNOWN;
+		/*switch (GetType())
 		{
 			case TDATA_INT:
 			{
@@ -178,7 +188,7 @@ public:
 				break;
 			default:
 				break;
-		}
+		}*/
 	}
 
 	bool IsNullValue() const
@@ -653,12 +663,11 @@ public:
 
 		if (mvList.size() > STACK_SIZE)
 		{
-			for (int i = 0; i < STACK_SIZE; ++i)
-			{
-				mvList[i]->Reset();
-			}
-
-			mvList.erase(mvList.begin() + 8, mvList.end());
+			mvList.erase(mvList.begin() + STACK_SIZE, mvList.end());
+		}
+		for (int i = 0; i < STACK_SIZE; ++i)
+		{
+			mvList[i]->Reset();
 		}
 	}
     

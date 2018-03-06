@@ -93,7 +93,7 @@ namespace NFSDK
 
             return vector;
         }
-        static public NFVector3 PBToNF(NFMsg.Position xVector)
+        static public NFVector3 PBToNF(NFMsg.Vector3 xVector)
         {
             NFVector3 xData = new NFVector3(xVector.x, xVector.y, xVector.z);
 

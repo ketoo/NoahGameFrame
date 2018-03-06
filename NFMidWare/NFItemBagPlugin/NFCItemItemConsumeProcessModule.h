@@ -20,6 +20,8 @@
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIItemConsumeProcessModule.h"
+#include "NFComm/NFPluginModule/NFILevelModule.h"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 class NFCItemItemConsumeProcessModule
 	: public NFIItemConsumeProcessModule
@@ -41,6 +43,10 @@ public:
 	
 	virtual int ConsumeProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
 
+protected:
+	virtual int ConsumeNormalProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+	virtual int ConsumeTempProcess(const NFGUID& self, const std::string& strItemID, const NFDataList& targetID);
+
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
@@ -50,6 +56,7 @@ private:
 	NFIHeroModule* m_pHeroModule;
 	NFIHeroPropertyModule* m_pHeroPropertyModule;
 	NFIPropertyModule* m_pPropertyModule;
+	NFILevelModule* m_pLevelModule;
 };
 
 #endif

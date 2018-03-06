@@ -40,7 +40,7 @@ namespace NFSDK
             return true;
         }
         
-        // ÇëÇóÏûÏ¢
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         public void RequireRoleList()
         {
             NFMsg.ReqRoleList xData = new NFMsg.ReqRoleList();
@@ -96,7 +96,9 @@ namespace NFSDK
             NFMsg.ReqAckPlayerMove xData = new NFMsg.ReqAckPlayerMove();
             xData.mover = NFToPB(mRoleID);
             xData.moveType = 0;
-            NFMsg.Position xTargetPos = new NFMsg.Position();
+            xData.speed = 2f;
+            xData.time = 0;
+            NFMsg.Vector3 xTargetPos = new NFMsg.Vector3();
             xTargetPos.x = pos.x;
             xTargetPos.y = pos.z;
             xTargetPos.z = pos.y;
@@ -107,7 +109,7 @@ namespace NFSDK
 
             NFCNetLogic.Instance().SendToServerByPB(NFMsg.EGameMsgID.EGMI_REQ_MOVE, stream);
         }
-        // ½ÓÊÕÏûÏ¢
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	    private void OnRoleList(UInt16 id, MemoryStream stream)
         {
             NFMsg.MsgBase xMsg = new NFMsg.MsgBase();
@@ -150,7 +152,7 @@ namespace NFSDK
                 NFIObject xGO = NFCKernelModule.Instance().CreateObject(PBToNF(xInfo.object_guid), xInfo.scene_id, 0, System.Text.Encoding.Default.GetString(xInfo.class_id), System.Text.Encoding.Default.GetString(xInfo.config_id), var);
                 if (null == xGO)
                 {
-                    Debug.LogError("ID³åÍ»: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
+                    Debug.LogError("IDï¿½ï¿½Í»: " + xInfo.object_guid + "  ConfigID:" + System.Text.Encoding.Default.GetString(xInfo.config_id));
                     continue;
                 }
             }

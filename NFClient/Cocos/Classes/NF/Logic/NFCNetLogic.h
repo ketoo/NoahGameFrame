@@ -31,7 +31,7 @@ public:
 
 public:	
 	template<typename BaseType>
-	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const int, const int, const char*, const uint32_t))
+	bool AddReceiveCallBack(const int nMsgID, BaseType* pBase, void (BaseType::*handleRecieve)(const NFSOCK, const int, const char*, const uint32_t))
 	{
 		return GetNetModule()->AddReceiveCallBack(NF_SERVER_TYPES::NF_ST_NONE, nMsgID, pBase, handleRecieve);
 	}

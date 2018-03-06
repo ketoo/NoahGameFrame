@@ -54,10 +54,23 @@ typedef void* BUFPTR;
 #include <sstream>
 #include <iostream>
 #include <random>
+#include <cstdint>
+#include <assert.h>
 
 #include "./Dependencies/common/optional.hpp"
 #include "./Dependencies/common/lexical_cast.hpp"
+#ifdef _MSC_VER
+#if _MSC_VER <= 1800
+#include "./Dependencies/common/variant.h"
+#else
 #include "./Dependencies/common/variant.hpp"
+#endif
+#else
+#include "./Dependencies/common/variant.hpp"
+#endif
+
+typedef void(*CoroutineYieldFunction)();
+typedef void(*CoroutineStartFunction)();
 
 #ifdef _WIN32
 #include "anet_win32.h"
@@ -88,7 +101,7 @@ namespace redis
 {
   template<typename CONSISTENT_HASHER>
   class base_client;
-  
+
   enum reply_t
   {
     no_reply,
@@ -383,13 +396,28 @@ namespace redis
     std::string multiplexing_api;
     std::map<std::string, std::string> param_map;
   };
-  
+
+    static CoroutineYieldFunction YieldFunction = NULL;
+    static CoroutineStartFunction StartFunction = NULL;
+
   inline ssize_t recv_or_throw(int fd, void* buf, size_t n, int flags)
   {
     ssize_t bytes_received;
-    
-    do
-      bytes_received = ::recv(fd, (BUFPTR)buf, n, flags);
+    if (StartFunction)
+    {
+      StartFunction();
+    }
+
+	do
+	{
+		//YieldCo();
+		if (YieldFunction)
+		{
+			YieldFunction();
+		}
+
+		bytes_received = ::recv(fd, (BUFPTR)buf, n, flags);
+	}
     while(bytes_received < static_cast<ssize_t>(0) && errno == EINTR);
     
     if( bytes_received == static_cast<ssize_t>(0) )
@@ -804,57 +832,7 @@ namespace redis
       send_(socket, makecmd("SETNX") << key << value);
       return recv_int_reply_(socket) == 1;
     }
-    
-    bool msetnx( const string_vector & keys, const string_vector & values )
-    {
-      assert( keys.size() == values.size() );
-      
-      std::map< int, optional<makecmd> > socket_commands;
-      
-      for(size_t i=0; i < keys.size(); i++)
-      {
-        int socket = get_socket(keys);
-        optional<makecmd> & cmd = socket_commands[socket];
-        if(!cmd)
-          cmd = makecmd("MSETNX");
-        *cmd << keys[i] << values[i];
-      }
 
-      if( socket_commands.size() > 1 )
-        throw std::runtime_error("feature is not available in cluster mode");
-      
-      typedef std::pair< int, optional<makecmd> > sock_pair;
-      for(const auto& sp: socket_commands)
-      {
-        send_(sp.first, *sp.second);
-        recv_ok_reply_(sp.first);
-      }
-    }
-    
-    bool msetnx( const string_pair_vector & key_value_pairs )
-    {
-      std::map< int, optional<makecmd> > socket_commands;
-      
-      for(size_t i=0; i < key_value_pairs.size(); i++)
-      {
-        int socket = get_socket(keys);
-        optional<makecmd> & cmd = socket_commands[socket];
-        if(!cmd)
-          cmd = makecmd("MSETNX");
-        *cmd << key_value_pairs[i].first << key_value_pairs[i].second;
-      }
-      
-      if( socket_commands.size() > 1 )
-        throw std::runtime_error("feature is not available in cluster mode");
-      
-      typedef std::pair< int, optional<makecmd> > sock_pair;
-      for(const auto& sp: socket_commands)
-      {
-        send_(sp.first, *sp.second);
-        recv_ok_reply_(sp.first);
-      }
-    }
-    
     void setex(const string_type & key, const string_type & value, unsigned int secs)
     {
       int socket = get_socket(key);
@@ -1287,35 +1265,7 @@ namespace redis
       else
         return missing_value();
     }
-    
-    /**
-     * @warning Not cluster save (all keys must be on the same redis server)
-     */
-    string_pair brpop(const string_vector & keys, int_type timeout_seconds)
-    {
-      int socket = get_socket(keys);
-      makecmd m("BRPOP");
-      for(size_t i=0; i < keys.size(); i++)
-        m << keys[i];
-      m << timeout_seconds;
-      send_(socket, m);
-      string_vector sv;
-      try
-      {
-        recv_multi_bulk_reply_(socket, sv);
-      }
-      catch(key_error & e)
-      {
-        assert(timeout_seconds > 0);
-        return missing_value(); // should we throw a timeout_error?
-                                // we set a timeout so we expect that this can happen
-      }
-      if(sv.size() == 2)
-        return make_pair( sv[0], sv[1] );
-      else
-        return make_pair( "", missing_value );
-    }
-    
+
     string_type brpop(const string_type & key, int_type timeout_seconds)
     {
       int socket = get_socket(key);
@@ -2881,13 +2831,13 @@ namespace redis
   };
   
   typedef distributed_base_int<short>           distributed_short;
-  typedef distributed_base_int<ushort>          distributed_ushort;
+  typedef distributed_base_int<unsigned short>  distributed_ushort;
   
   typedef distributed_base_int<int>             distributed_int;
-  typedef distributed_base_int<uint>            distributed_uint;
+  typedef distributed_base_int<unsigned int>    distributed_uint;
   
   typedef distributed_base_int<long>            distributed_long;
-  typedef distributed_base_int<ulong>           distributed_ulong;
+  typedef distributed_base_int<unsigned long>   distributed_ulong;
 
   // TODO: lexical_cast treats int8_t/uint8_t as char/uchar
   //typedef distributed_base_int<std::int8_t>   distributed_int8;
@@ -2906,189 +2856,6 @@ namespace redis
   typedef distributed_base_int<std::int64_t>  distributed_int64;
   typedef distributed_base_int<std::uint64_t> distributed_uint64;
 #endif // NF_NO_INT64_T
-  
-#if 0
-// not yet working correctly!
-  /**
-   * This class provides a subset of the functionality that is provided by distributed_int.
-   * As it provides only atomic features and is limited to the things that are required to work without
-   * a sequence in redis it is harder to missuse the distributed sequence than it is to missuse shared_int.
-   */
-  template<typename INT_TYPE>
-  class distributed_base_sequence
-  {
-  public:
-    distributed_base_sequence(const client::string_type & name, client & con)
-    : shr_int_(name, con)
-    {
-    }
-    
-    distributed_base_sequence(const client::string_type & name, INT_TYPE initial_value, client & con)
-    : shr_int_(name, initial_value, con)
-    {
-    }
-
-    /**
-     * Gets the next free value from the sequence. If no initial_value is given, this starts with 0.
-     */
-    INT_TYPE get_next_value()
-    {
-      return cur_val_ = shr_int_++;
-    }
-    
-    INT_TYPE get_global_max_value() const
-    {
-      return shr_int_-1; // -1 because we work with post increment
-    }
-    
-    inline INT_TYPE get_current_local_value() const
-    {
-      assert(cur_val_); // You can not call get_current_local_value if you have not called get_next_value
-      return *cur_val_;
-    }
-
-    /**
-     * Lets the sequence skip the given count of values.
-     */
-    void seek(INT_TYPE by)
-    {
-      INT_TYPE res = (shr_int_ += by);
-      return res-1; // -1 because we work with post increment
-    }
-
-  private:
-    distributed_base_int<INT_TYPE> shr_int_;
-    boost::optional<INT_TYPE> cur_val_;
-  };
-
-  typedef distributed_base_sequence<std::intmax_t> distributed_sequence;
-
-#ifndef TIMEOUT_SEC
-#define TIMEOUT_SEC 60
-#endif
-  
-  /**
-   * Supports the Lockable and TimedLockable concepts from Boost.Thread/C++0x.
-   */
-  class distributed_mutex
-  {
-  private:
-    std::int32_t tstamp_val( std::int32_t nOverSec = 0)
-    {
-        struct timeval start;
-        gettimeofday(&start, NULL);
-        int64_t nSec = start.tv_sec;
-        int64_t nUSec = start.tv_usec;
-
-        return nSec + nOverSec;
-    }
-
-    std::int32_t GetSystemTime()
-    {
-        struct timeval start;
-        gettimeofday(&start, NULL);
-        int64_t nSec = start.tv_sec;
-        int64_t nUSec = start.tv_usec;
-
-        return nSec;
-    }
-    
-  public:
-    distributed_mutex(const client::string_type & name, client & con)
-    : con_(&con), name_(name)
-    {
-      std::string timeout_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC ) );
-      
-      if( con_->setnx(name_, timeout_str) )
-        con_->rpush(name_ + ":list", timeout_str);
-    }
-
-    ~distributed_mutex()
-    {
-    }
-
-    void lock()
-    {
-      std::string timeout_tstamp_str;
-      while(true)
-      {
-        timeout_tstamp_str = con_->get(name_);
-        std::int32_t timeout_tstamp = lexical_cast<std::int32_t>(timeout_tstamp_str);
-        std::int32_t diff = tstamp_val( TIMEOUT_SEC ) - timeout_tstamp;
-        if( diff < 1 )
-          diff = 1;
-        std::string token = con_->blpop(name_ + ":list", diff);
-        if( token == client::missing_value() )
-        {
-          if( timeout_tstamp_str == con_->get(name_) )
-          {
-            timeout_tstamp_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC ) );
-            con_->set(name_, timeout_tstamp_str);
-            con_->rpush(name_ + ":list", timeout_tstamp_str);
-          }
-          continue;
-        }
-        
-        timeout_tstamp_str = con_->get(name_);
-        if( token == timeout_tstamp_str )
-          break;
-      }
-
-      std::string new_timeout_tstamp_str = lexical_cast<std::string>( tstamp_val( TIMEOUT_SEC) );
-      std::string val = con_->getset(name_, timeout_tstamp_str);
-      if( timeout_tstamp_str != val )
-        lock();
-      
-      token_ = new_timeout_tstamp_str;
-    }
-    
-    void unlock()
-    {
-      con_->rpush(name_ + ":list", token_);
-      token_.clear();
-    }
-    
-    bool try_lock()
-    {
-      if( con_->lpop(name_ + ":list") != client::missing_value() )
-        return true;
-
-      return false;
-    }
-
-    bool timed_lock(std::int32_t const& abs_time)
-    {
-       std::int32_t dur = abs_time - GetSystemTime();
-      client::int_type timeout = std::max(dur, 1 );
-      std::string res = con_->blpop(name_ + ":list", timeout);
-      if( res == client::missing_value() )
-        return false;
-      
-      return false;
-    }
-
-    template<typename DurationType>
-    bool timed_lock(DurationType const& rel_time)
-    {
-      int32_t dur( rel_time );
-      client::int_type timeout = std::max( dur, 1 );
-      std::string res = con_->blpop(name_ + ":list", timeout);
-      if( res == client::missing_value() )
-        return false;
-      
-      return false;
-    }
-
-    typedef boost::unique_lock<distributed_mutex> scoped_timed_lock;
-    typedef boost::detail::try_lock_wrapper<distributed_mutex> scoped_try_lock;
-    typedef scoped_timed_lock scoped_lock;
-    
-  private:
-    client* con_;
-    client::string_type name_;
-    std::string token_;
-  };
-#endif // 0  
 
   class distributed_list : public distributed_value
   {

@@ -64,7 +64,8 @@ bool NFCRoot::init()
 	});
 
 	pPluginManager->SetAppName("GameClient");
-
+	pPluginManager->SetConfigPath("");
+	
 	CREATE_PLUGIN(pPluginManager, NFCClientPlugin);
 
 	CREATE_PLUGIN(pPluginManager, NFCLogicPlugin);

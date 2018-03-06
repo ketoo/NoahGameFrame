@@ -102,6 +102,11 @@ void NFCPlayerLogic::RequireMove(NFVector3 pos)
 	tPos->set_x((float)pos.X());
 	tPos->set_y((float)pos.Y());
 	tPos->set_z((float)pos.Z());
+	xMsg.set_speed(1.0f);
+	xMsg.set_time(1.0f);
+	xMsg.set_laststate(0);
+	xMsg.set_laststate(0);
+
 	g_pNetLogic->SendToServerByPB(NFMsg::EGameMsgID::EGMI_REQ_MOVE, xMsg);
 }
 //--------------------------------------------收消息-------------------------------------------------------------

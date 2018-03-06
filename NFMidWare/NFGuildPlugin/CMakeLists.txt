@@ -1,4 +1,5 @@
 set(ProjectName "NFGuildPlugin")
+
 file(GLOB NFGuildPlugin_ROOT_Cpp
 	*.cpp)
 	

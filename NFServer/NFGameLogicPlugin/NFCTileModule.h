@@ -18,6 +18,8 @@
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
+#include "NFComm/NFPluginModule/NFISceneAOIModule.h"
+#include "NFComm/NFPluginModule/NFIPVPModule.h"
 
 class NFCTileModule
     : public NFITileModule
@@ -35,11 +37,13 @@ public:
     virtual bool AfterInit();
 
 	virtual bool GetOnlinePlayerTileData(const NFGUID& self, std::string& strData);
-protected:
-	void ReqMineTile(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
-
 
 protected:
+
+	void OnReqMineTileProcess(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
+
+protected:
+
 	bool AddTile(const NFGUID& self, const int nX, const int nY, const int nOpr);
 	bool AddBuilding(const NFGUID& self, const int nX, const int nY, const NFGUID& id, const std::string& strCnfID);
 	bool AddNPC(const NFGUID& self, const int nX, const int nY, const NFGUID& id, const std::string& strCnfID);
@@ -49,12 +53,19 @@ protected:
 	bool RemoveNPC(const NFGUID& self, const int nX, const int nY, const NFGUID& id);
 
 	bool SaveTileData(const NFGUID& self);
-	bool SendTileData(const NFGUID& self);
-	bool LoadTileData(const NFGUID& self);
 	bool LoadTileData(const NFGUID& self, const int nSceneID);
+
+	bool SendTileData(const NFGUID& self);
+	bool CreateTileBuilding(const NFGUID& self);
 
 	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 	int OnRecordEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
+
+	int BeforeEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterEnterSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int BeforeLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+	int AfterLeaveSceneGroupEvent(const NFGUID& self, const int nSceneID, const int nGroupID, const int nType, const NFDataList& argList);
+
 
 protected:
 	struct TileState
@@ -97,6 +108,7 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFIElementModule* m_pElementModule;
+	NFISceneAOIModule* m_pSceneAOIModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
 	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;

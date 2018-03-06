@@ -14,8 +14,8 @@
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFINetModule.h"
-#include "NFComm/NFPluginModule/NFIActorModule.h"
 #include "NFComm/NFPluginModule/NFIGuildRedisModule.h"
+#include "NFComm/NFPluginModule/NFIPlayerRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -36,12 +36,11 @@ public:
 
 protected:
 
-    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strName, const std::string& strGuildName);
+    bool CreateGuild(const NFGUID& self, const NFGUID& xGuildID, const std::string& strGuildName);
     bool JoinGuild(const NFGUID& self, const NFGUID& xGuildID);
     bool LeaveGuild(const NFGUID& self, const NFGUID& xGuildID);
     bool PromotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
     bool DemotionMember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
-    bool KickMmember(const NFGUID& self, const NFGUID& xGuildID, const NFGUID& xMember);
 
     bool MemberOnline(const NFGUID& self, const NFGUID& xGuild);
     bool MemberOffline(const NFGUID& self, const NFGUID& xGuild);
@@ -49,6 +48,8 @@ protected:
 
     void OnGuildOnlineProcess(const NFGUID& xGuildID);
     void OnGuildOfflineProcess(const NFGUID& xGuildID);
+
+	bool AddMember(const NFGUID& xGuildID, const NFGUID& player, const MEMBER_TYPE type);
 
     NFIGuildModule::MEMBER_TYPE CheckPower(const NFGUID& self, const NFGUID& xGuildID);
 
@@ -62,15 +63,19 @@ protected:
 	void OnClientChatProcess(const NFSOCK nSockIndex, const int nMsgID, const char *msg, const uint32_t nLen);
 
 protected:
+	int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFDataList& var);
 
-	NFConsistentHashMapEx<int, int> mActorList; //actorid <-->Used
+	int OnPropertyCommonEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
+	int OnRecordCommonEvent(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFData& oldVar, const NFData& newVar);
+
+	void SendMessageToGameServer(const NFGUID& guild, const int nMessageID, google::protobuf::Message& msg);
 
 protected:
-	NFIActorModule* m_pActorModule;
 	NFILogModule* m_pLogModule;
 	NFINetModule* m_pNetModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGuildRedisModule* m_pGuildRedisModule;
+	NFIPlayerRedisModule* m_pPlayerRedisModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 };
 

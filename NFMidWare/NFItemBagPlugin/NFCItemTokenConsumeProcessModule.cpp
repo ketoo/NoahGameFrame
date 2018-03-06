@@ -100,11 +100,6 @@ int NFCItemTokenConsumeProcessModule::ConsumeProcess(const NFGUID& self, const s
 	xDataList->SetVector3(NFrame::Player::BuildingList::Pos, vPos);
 	pBuildRecord->AddRow(-1, *xDataList);
 
-	NFDataList xDataArg;
-	xDataArg.AddString(NFrame::NPC::Position());
-	xDataArg.AddVector3(vPos);
-
-	m_pKernelModule->CreateObject(xID, nHomeSceneID, nGroupID, NFrame::NPC::ThisName(), strBuildingCnfID, xDataArg);
 
 	return 100;
 }
