@@ -9,23 +9,102 @@
 #ifndef NFI_PLUGIN_MANAGER_H
 #define NFI_PLUGIN_MANAGER_H
 
-#include "NFIModule.h"
+#include <functional>
 #include "NFPlatform.h"
 
+class NFIPlugin;
+class NFIModule;
+
 typedef std::function<bool (const std::string &strFileName, std::string &strContent)> GET_FILECONTENT_FUNCTOR;
+typedef void (* CoroutineFunction)(void* arg);
+
+template<typename DerivedType, typename BaseType>
+class TIsDerived
+{
+public:
+    static int AnyFunction(BaseType* base)
+    {
+        return 1;
+    }
+
+    static  char AnyFunction(void* t2)
+    {
+        return 0;
+    }
+
+    enum
+    {
+        Result = (sizeof(int) == sizeof(AnyFunction((DerivedType*)NULL))),
+    };
+};
 
 #define FIND_MODULE(classBaseName, className)  \
 	assert((TIsDerived<classBaseName, NFIModule>::Result));
 
-class NFIPlugin;
 
-class NFIPluginManager : public NFIModule
+
+class NFIPluginManager
 {
 public:
     NFIPluginManager()
     {
 
     }
+
+	/////////////////////
+
+	virtual bool Awake()
+	{
+		return true;
+	}
+
+	virtual bool Init()
+	{
+
+		return true;
+	}
+
+	virtual bool AfterInit()
+	{
+		return true;
+	}
+
+	virtual bool CheckConfig()
+	{
+		return true;
+	}
+
+	virtual bool ReadyExecute()
+	{
+		return true;
+	}
+
+	virtual bool Execute()
+	{
+		return true;
+	}
+
+	virtual bool BeforeShut()
+	{
+		return true;
+	}
+
+	virtual bool Shut()
+	{
+		return true;
+	}
+
+	virtual bool Finalize()
+	{
+		return true;
+	}
+
+	virtual bool OnReloadPlugin()
+	{
+		return true;
+	}
+
+	/////////////////////
 
 	template <typename T>
 	T* FindModule()
@@ -77,7 +156,6 @@ public:
 	virtual void SetConfigName(const std::string& strFileName) = 0;	
 	virtual const std::string& GetConfigName() const = 0;
 
-
 	virtual const std::string& GetAppName() const = 0;
 	virtual void SetAppName(const std::string& strAppName) = 0;
 
@@ -86,6 +164,12 @@ public:
 
 	virtual void SetGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) = 0;
 	virtual bool GetFileContent(const std::string &strFileName, std::string &strContent) = 0;
+
+	virtual void ExecuteCoScheduler() = 0;
+	virtual void StartCoroutine() = 0;
+	virtual void StartCoroutine(CoroutineFunction func) = 0;
+	virtual void YieldCo(const float nSecond) = 0;
+	virtual void YieldCo() = 0;
 };
 
 #endif

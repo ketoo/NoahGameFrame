@@ -16,6 +16,7 @@
 #include "NFCRecord.h"
 #include "NFIRecordManager.h"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 class _NFExport NFCRecordManager : public NFIRecordManager
 {
 public:

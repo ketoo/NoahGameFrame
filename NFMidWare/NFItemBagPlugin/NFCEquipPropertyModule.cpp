@@ -137,7 +137,7 @@ bool NFCEquipPropertyModule::CalEquipBaseProperty(const NFGUID& self, const NFGU
 
 	/////////////PropertyBase/////////////////////////////////////////
 
-	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList::ConfigID);
+	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::ConfigID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{
@@ -177,7 +177,7 @@ bool NFCEquipPropertyModule::CalEquipRandomProperty(const NFGUID& self, const NF
 
 	/////////////RandomBase/////////////////////////////////////////
 
-	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::BagEquipList::RandPropertyID);
+	const std::string& strConfigID = pBagRecord->GetString(nRow, NFrame::Player::BagEquipList::RandPropertyID);
 	const std::string& strPropertyEffectData = m_pElementModule->GetPropertyString(strConfigID, NFrame::Equip::EffectData());
 	if (!strPropertyEffectData.empty())
 	{

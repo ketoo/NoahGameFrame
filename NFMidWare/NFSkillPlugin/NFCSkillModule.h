@@ -20,6 +20,7 @@
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFISkillCooldownModule.h"
 
 class NFCSkillModule
     : public NFISkillModule
@@ -47,7 +48,7 @@ protected:
 	void OnClienUseSkill(const NFSOCK nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-
+	NFISkillCooldownModule* m_pSkillCooldownModule;
 	NFINetModule* m_pNetModule;
     NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;

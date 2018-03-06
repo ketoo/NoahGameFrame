@@ -11,6 +11,7 @@
 
 #include "NFDataList.hpp"
 #include "NFComm/NFPluginModule/NFPlatform.h"
+
 struct RECORD_EVENT_DATA
 {
 	enum RecordOptype
@@ -67,6 +68,8 @@ public:
     
     virtual int AddRow(const int nRow) = 0;
     virtual int AddRow(const int nRow, const NFDataList& var) = 0;
+
+	virtual bool SetRow(const int nRow, const NFDataList& var) = 0;
 
     virtual bool SetInt(const int nRow, const int nCol, const NFINT64 value) = 0;
     virtual bool SetFloat(const int nRow, const int nCol, const double value) = 0;
@@ -155,6 +158,8 @@ public:
     virtual const bool GetPublic() = 0;
     virtual const bool GetPrivate() = 0;
     virtual const bool GetCache() = 0;
+	virtual const bool GetRef() = 0;
+	virtual const bool GetForce() = 0;
 	virtual const bool GetUpload() = 0;
     virtual const std::string& GetName() const = 0;
 
@@ -163,6 +168,8 @@ public:
 
     virtual void SetSave(const bool bSave) = 0;
     virtual void SetCache(const bool bCache) = 0;
+	virtual void SetRef(const bool bRef) = 0;
+	virtual void SetForce(const bool bForce) = 0;
 	virtual void SetUpload(const bool bUpload) = 0;
     virtual void SetPublic(const bool bPublic) = 0;
     virtual void SetPrivate(const bool bPrivate) = 0;

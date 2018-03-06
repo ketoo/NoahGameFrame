@@ -22,6 +22,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -29,6 +30,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -92,13 +94,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="NFCProxyServerToAIModule.cpp" />
     <ClCompile Include="NFCProxyServerToGameModule.cpp" />
     <ClCompile Include="NFCProxyServerToWorldModule.cpp" />
     <ClCompile Include="NFProxyServerNet_ClientPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFCProxyServerToAIModule.h" />
     <ClInclude Include="NFCProxyServerToGameModule.h" />
     <ClInclude Include="NFCProxyServerToWorldModule.h" />
     <ClInclude Include="NFProxyServerNet_ClientPlugin.h" />

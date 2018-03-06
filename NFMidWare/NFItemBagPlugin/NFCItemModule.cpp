@@ -325,19 +325,18 @@ bool NFCItemModule::ConsumeDataItemProperty(const NFGUID& self, const std::strin
 
 bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardPack)
 {
-	std::vector<std::string> xList;
-	m_pCommonConfigModule->GetStructItemList(strAwardPack, xList);
+	std::vector<std::string> xList = m_pCommonConfigModule->GetStructItemList(strAwardPack);
 
 	for (int i = 0; i < xList.size(); ++i)
 	{
 		const std::string& strItemID = xList[i];
-		const int nCout = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
+		const int nCount = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "Count");
 		const int nIsHero = m_pCommonConfigModule->GetAttributeInt(strAwardPack, strItemID, "IsHero");
 		if (m_pElementModule->ExistElement(strItemID))
 		{
 			if (nIsHero > 0)
 			{
-				m_pHeroModule->ActiviteHero(self, strItemID);
+				m_pHeroModule->AddHero(self, strItemID);
 				continue;
 			}
 
@@ -350,7 +349,7 @@ bool NFCItemModule::DoAwardPack(const NFGUID& self, const std::string& strAwardP
 			}
 			break;
 			default:
-				m_pPackModule->CreateItem(self, strItemID, nCout);
+				m_pPackModule->CreateItem(self, strItemID, nCount);
 				break;
 			}
 		}
@@ -385,6 +384,8 @@ void NFCItemModule::OnClientPickItem(const NFSOCK nSockIndex, const int nMsgID, 
 		{
 			const std::string& strItemID = xDropItemList->GetString(nRow, NFrame::Player::DropItemList::ConfigID);
 			const int nCount = xDropItemList->GetInt(nRow, NFrame::Player::DropItemList::ItemCount);
+
+			xDropItemList->Remove(nRow);
 
 			m_pPackModule->CreateItem(nPlayerID, strItemID, nCount);
 		}

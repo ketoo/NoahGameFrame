@@ -20,13 +20,7 @@ public:
     NFSingleton()
     {
         //assert( !m_instance );
-
-#if defined( _MSC_VER ) && _MSC_VER < 1200
-        int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
-        m_pInstance = (T*)((int)this + offset);
-#else
         m_pInstance = static_cast< T* >(this);
-#endif
     }
 
     ~NFSingleton()

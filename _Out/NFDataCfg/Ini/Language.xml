@@ -8,6 +8,7 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_ATK_Water" Chinese="攻击药水，在一定时间内攻击翻倍！" English="" />
 	<Object Id="Desc_Avoid_Def_Water" Chinese="在一定时间内，无视对方防御！" English="" />
 	<Object Id="Desc_Damage_MP_Water" Chinese="进入范围内的英雄，自动丢蓝！" English="" />
+	<Object Id="Desc_Diamond_Item1" Chinese="一包钻石，使用后获得钻石。" English="" />
 	<Object Id="Desc_GEM_ATK" Chinese="攻击宝石！" English="" />
 	<Object Id="Desc_GEM_DEF" Chinese="防御宝石！" English="" />
 	<Object Id="Desc_GEM_FIRE" Chinese="火属性宝石！" English="" />
@@ -15,6 +16,7 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="Desc_GEM_LIGHT" Chinese="雷属性宝石！" English="" />
 	<Object Id="Desc_GEM_POISON" Chinese="毒属性宝石！" English="" />
 	<Object Id="Desc_GEM_WIND" Chinese="风属性宝石！" English="" />
+	<Object Id="Desc_Gold_Item1" Chinese="一包金币，使用后获得金币。" English="" />
 	<Object Id="Desc_HOLY_WATER" Chinese="小瓶圣水，在一定时间内防御翻倍！" English="" />
 	<Object Id="Desc_HP" Chinese="小瓶生命药水，增加英雄生命力！" English="" />
 	<Object Id="Desc_MP" Chinese="小瓶魔法药水，增加英雄魔法力！" English="" />
@@ -97,6 +99,7 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_ATK_Water" Chinese="攻击药水" English="" />
 	<Object Id="NameID_Avoid_Def_Water" Chinese="防御药水" English="" />
 	<Object Id="NameID_Damage_MP_Water" Chinese="消魔药水" English="" />
+	<Object Id="NameID_Diamond_Item1" Chinese="钻石" English="" />
 	<Object Id="NameID_Dwarf_Warrior" Chinese="矮人 · 掘金者" English="Dwarf · Gold Digger" />
 	<Object Id="NameID_GEM_ATK" Chinese="攻击宝石" English="" />
 	<Object Id="NameID_GEM_DEF" Chinese="防御宝石" English="" />
@@ -105,6 +108,7 @@ Although they lack wisdom, but they very luckly which often double or even three
 	<Object Id="NameID_GEM_LIGHT" Chinese="雷属性宝石" English="" />
 	<Object Id="NameID_GEM_POISON" Chinese="毒属性宝石" English="" />
 	<Object Id="NameID_GEM_WIND" Chinese="风属性宝石" English="" />
+	<Object Id="NameID_Gold_Item1" Chinese="金币" English="" />
 	<Object Id="NameID_HOLY_WATER" Chinese="圣水" English="" />
 	<Object Id="NameID_HP" Chinese="血药" English="" />
 	<Object Id="NameID_HeroCard_1" Chinese="英雄*卡1" English="" />

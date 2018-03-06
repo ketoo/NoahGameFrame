@@ -261,14 +261,7 @@ public:
     virtual ~NetObject()
     {
     }
-
-    int AddBuff(const char* str, uint32_t nLen)
-    {
-        mstrBuff.append(str, (size_t) nLen);
-
-        return (int) mstrBuff.length();
-    }
-
+	
     int AddBuff(const char* str, size_t nLen)
     {
         mstrBuff.append(str, nLen);
@@ -443,13 +436,13 @@ public:
 
     //send a message with out msg-head[auto add msg-head in this function]
     virtual bool
-    SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen, const NFSOCK nSockIndex = 0) = 0;
+    SendMsgWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen, const NFSOCK nSockIndex = 0) = 0;
 
     //send a message to all client[need to add msg-head for this message by youself]
-    virtual bool SendMsgToAllClient(const char* msg, const uint32_t nLen) = 0;
+    virtual bool SendMsgToAllClient(const char* msg, const size_t nLen) = 0;
 
     //send a message with out msg-head to all client[auto add msg-head in this function]
-    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const uint32_t nLen) = 0;
+    virtual bool SendMsgToAllClientWithOutHead(const int16_t nMsgID, const char* msg, const size_t nLen) = 0;
 
     virtual bool CloseNetObject(const NFSOCK nSockIndex) = 0;
 

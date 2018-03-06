@@ -141,16 +141,40 @@ bool NFCSceneAOIModule::AddRelivePosition(const int nSceneID, const int nIndex, 
 
 	return false;
 }
-NFVector3 NFCSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex)
+
+NFVector3 NFCSceneAOIModule::GetRelivePosition(const int nSceneID, const int nIndex, const bool bRoll)
 {
 	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
 	if (pSceneInfo)
 	{
-		return pSceneInfo->GetReliveInfo(nIndex);
+		return pSceneInfo->GetReliveInfo(nIndex, bRoll);
 	}
 
 	return NFVector3();
 }
+
+bool NFCSceneAOIModule::AddTagPosition(const int nSceneID, const int nIndex, const NFVector3 & vPos)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->AddTagInfo(nIndex, vPos);
+	}
+
+	return false;
+}
+
+NFVector3 NFCSceneAOIModule::GetTagPosition(const int nSceneID, const int nIndex, const bool bRoll)
+{
+	NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = GetElement(nSceneID);
+	if (pSceneInfo)
+	{
+		return pSceneInfo->GetTagInfo(nIndex, bRoll);
+	}
+
+	return NFVector3();
+}
+
 bool NFCSceneAOIModule::AddObjectEnterCallBack(const OBJECT_ENTER_EVENT_FUNCTOR_PTR & cb)
 {
 	mtObjectEnterCallback.push_back(cb);
@@ -251,14 +275,12 @@ bool NFCSceneAOIModule::CreateSceneNPC(const int nSceneID, const int nGroupID, c
 		int nWeight = m_pKernelModule->Random(0, 100);
 		if (nWeight <= pResource->nWeight)
 		{
-			const std::string& strClassName = m_pElementModule->GetPropertyString(pResource->strConfigID, NFrame::IObject::ClassName());
-
 			NFDataList arg;
 			arg << NFrame::IObject::Position() << pResource->vSeedPos;
 			arg << NFrame::NPC::SeedID() << pResource->strSeedID;
 			arg.Append(argList);
 
-			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, strClassName, pResource->strConfigID, arg);
+			m_pKernelModule->CreateObject(NFGUID(), nSceneID, nGroupID, NFrame::NPC::ThisName(), pResource->strConfigID, arg);
 		}
 	}
 

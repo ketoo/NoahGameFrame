@@ -21,6 +21,8 @@
 #include "NFComm/NFPluginModule/NFISceneAOIModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIItemModule.h"
+#include "NFComm/NFPluginModule/NFICommonConfigModule.h"
+
 ////////////////////////////////////////////////////////////////////////////
 
 class NFCUserGiftModule
@@ -43,13 +45,13 @@ private:
 	int OnLevelPropertyEvent(const NFGUID& self, const std::string& strPropertyName, const NFData& oldVar, const NFData& newVar);
 	
 	bool DoLevelAward(const NFGUID& self, const int nLevel);
+	bool DoInitProperty(const NFGUID& self);
 	bool ActiveteHero(const NFGUID& self);
 
 private:
 	NFMapEx<int, std::vector<std::string>> mxGiftMap;
 
 protected:
-
     //////////////////////////////////////////////////////////////////////////
 	NFIPackModule* m_pPackModule;
 	NFIItemModule* m_pItemModule;
@@ -60,6 +62,7 @@ protected:
 	NFINetModule* m_pNetModule;
 	NFIEventModule* m_pEventModule;
 	NFISceneAOIModule* m_pSceneAOIModule;
+	NFICommonConfigModule* m_pCommonConfigModule;
     //////////////////////////////////////////////////////////////////////////
 };
 #endif

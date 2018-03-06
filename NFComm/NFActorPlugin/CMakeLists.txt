@@ -23,7 +23,7 @@ if(UNIX)
 		)
 else()
 	add_dependencies(NFActorPlugin libprotobuf NFMessageDefine)
-	target_link_libraries(NFActorPlugin anet_win64 libprotobuf Theron NFMessageDefine)
+	target_link_libraries(NFActorPlugin libprotobuf Theron NFMessageDefine)
 	add_definitions(
 		-D_USRDLL
 		-D_LIB

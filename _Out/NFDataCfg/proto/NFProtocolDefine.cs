@@ -91,6 +91,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -100,13 +101,12 @@ namespace NFrame
 		public static readonly String ATK_WIND = "ATK_WIND";// int
 		public static readonly String BUFF_GATE = "BUFF_GATE";// int
 		public static readonly String CRITICAL = "CRITICAL";// int
-		public static readonly String DEF_FIRE = "DEF_FIRE";// int
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
 		public static readonly String DEF_POISON = "DEF_POISON";// int
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
-		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -159,6 +159,22 @@ namespace NFrame
 		// Record
 
 	}
+	public class GM
+	{
+		//Class name
+		public static readonly String ThisName = "GM";
+		// IObject
+		public static readonly String ClassName = "ClassName";// string
+		public static readonly String ConfigID = "ConfigID";// string
+		public static readonly String GroupID = "GroupID";// int
+		public static readonly String ID = "ID";// string
+		public static readonly String Position = "Position";// vector3
+		public static readonly String SceneID = "SceneID";// int
+		// Property
+		public static readonly String Level = "Level";// int
+		// Record
+
+	}
 	public class Guild
 	{
 		//Class name
@@ -171,56 +187,51 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
-		public static readonly String AutoRecruit = "AutoRecruit";// string
-		public static readonly String DismissTime = "DismissTime";// int
-		public static readonly String EctypID = "EctypID";// int
-		public static readonly String EctypIDGroup = "EctypIDGroup";// int
-		public static readonly String EctypServer = "EctypServer";// int
-		public static readonly String GuildAD = "GuildAD";// string
-		public static readonly String GuildContinueDay = "GuildContinueDay";// int
-		public static readonly String GuildCreateTime = "GuildCreateTime";// int
-		public static readonly String GuildCreateter = "GuildCreateter";// int
-		public static readonly String GuildDesc = "GuildDesc";// string
-		public static readonly String GuildExp = "GuildExp";// int
-		public static readonly String GuildHonor = "GuildHonor";// int
-		public static readonly String GuildID = "GuildID";// object
-		public static readonly String GuildIcon = "GuildIcon";// int
-		public static readonly String GuildLevel = "GuildLevel";// int
-		public static readonly String GuildMemeberCount = "GuildMemeberCount";// int
-		public static readonly String GuildMemeberMaxCount = "GuildMemeberMaxCount";// int
-		public static readonly String GuildMoney = "GuildMoney";// int
-		public static readonly String GuildStatus = "GuildStatus";// int
-		public static readonly String KingWarResource = "KingWarResource";// int
-		public static readonly String Name = "Name";// string
-		public static readonly String PresidentID = "PresidentID";// object
-		public static readonly String PresidentName = "PresidentName";// string
-		public static readonly String Rank = "Rank";// int
-		public static readonly String RecruitAD = "RecruitAD";// string
-		public static readonly String RecruitLevel = "RecruitLevel";// int
+		public static readonly String Guild_AD = "Guild_AD";// string
+		public static readonly String Guild_ContinueDay = "Guild_ContinueDay";// int
+		public static readonly String Guild_CreateTime = "Guild_CreateTime";// int
+		public static readonly String Guild_Desc = "Guild_Desc";// string
+		public static readonly String Guild_EctypID = "Guild_EctypID";// int
+		public static readonly String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
+		public static readonly String Guild_EctypServer = "Guild_EctypServer";// object
+		public static readonly String Guild_Exp = "Guild_Exp";// int
+		public static readonly String Guild_Gold = "Guild_Gold";// int
+		public static readonly String Guild_Honor = "Guild_Honor";// int
+		public static readonly String Guild_ID = "Guild_ID";// object
+		public static readonly String Guild_Icon = "Guild_Icon";// string
+		public static readonly String Guild_KingWarResource = "Guild_KingWarResource";// int
+		public static readonly String Guild_Level = "Guild_Level";// int
+		public static readonly String Guild_MemeberCount = "Guild_MemeberCount";// int
+		public static readonly String Guild_MemeberMaxCount = "Guild_MemeberMaxCount";// int
+		public static readonly String Guild_Name = "Guild_Name";// string
+		public static readonly String Guild_PresidentID = "Guild_PresidentID";// object
+		public static readonly String Guild_PresidentName = "Guild_PresidentName";// string
+		public static readonly String Guild_Rank = "Guild_Rank";// int
+		public static readonly String Guild_Status = "Guild_Status";// int
 		// Record
-		public class GuildAppyList
+		public class Guild_AppyList
 		{
 			//Class name
-			public static readonly String ThisName = "GuildAppyList";
+			public static readonly String ThisName = "Guild_AppyList";
 			public const int GUID = 0;//object
 			public const int Name = 1;//string
 			public const int Level = 2;//int
 			public const int VIP = 3;//int
 
 		}
-		public class GuildHouse
+		public class Guild_Building
 		{
 			//Class name
-			public static readonly String ThisName = "GuildHouse";
+			public static readonly String ThisName = "Guild_Building";
 			public const int GUID = 0;//object
 			public const int Name = 1;//string
 			public const int Level = 2;//int
 
 		}
-		public class GuildMemberList
+		public class Guild_MemberList
 		{
 			//Class name
-			public static readonly String ThisName = "GuildMemberList";
+			public static readonly String ThisName = "Guild_MemberList";
 			public const int GUID = 0;//object
 			public const int Name = 1;//string
 			public const int Level = 2;//int
@@ -238,10 +249,10 @@ namespace NFrame
 			public const int AllContribution = 14;//int
 
 		}
-		public class GuildSkill
+		public class Guild_WarList
 		{
 			//Class name
-			public static readonly String ThisName = "GuildSkill";
+			public static readonly String ThisName = "Guild_WarList";
 			public const int GUID = 0;//object
 			public const int Level = 1;//int
 
@@ -330,14 +341,6 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Record
-		public class Cooldown
-		{
-			//Class name
-			public static readonly String ThisName = "Cooldown";
-			public const int SkillID = 0;//string
-			public const int Time = 1;//int
-
-		}
 
 	}
 	public class InitProperty
@@ -460,6 +463,8 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String AIOwnerID = "AIOwnerID";// object
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -473,6 +478,7 @@ namespace NFrame
 		public static readonly String Camp = "Camp";// int
 		public static readonly String Climb = "Climb";// int
 		public static readonly String ConsumeData = "ConsumeData";// string
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
@@ -480,6 +486,7 @@ namespace NFrame
 		public static readonly String DEF_VALUE = "DEF_VALUE";// int
 		public static readonly String DEF_WIND = "DEF_WIND";// int
 		public static readonly String DIZZY_GATE = "DIZZY_GATE";// int
+		public static readonly String DescID = "DescID";// string
 		public static readonly String Diamond = "Diamond";// int
 		public static readonly String DropPackList = "DropPackList";// string
 		public static readonly String DropProbability = "DropProbability";// int
@@ -489,9 +496,8 @@ namespace NFrame
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
 		public static readonly String Height = "Height";// float
-		public static readonly String HeroType = "HeroType";// int
+		public static readonly String HeroStar = "HeroStar";// int
 		public static readonly String Icon = "Icon";// string
-		public static readonly String Idle = "Idle";// string
 		public static readonly String LastAttacker = "LastAttacker";// object
 		public static readonly String Level = "Level";// int
 		public static readonly String MAGIC_GATE = "MAGIC_GATE";// int
@@ -523,6 +529,14 @@ namespace NFrame
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String Width = "Width";// float
 		// Record
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int SkillID = 0;//string
+			public const int Time = 1;//int
+
+		}
 
 	}
 	public class NoSqlServer
@@ -556,6 +570,7 @@ namespace NFrame
 		public static readonly String Position = "Position";// vector3
 		public static readonly String SceneID = "SceneID";// int
 		// Property
+		public static readonly String ATK_DARK = "ATK_DARK";// int
 		public static readonly String ATK_FIRE = "ATK_FIRE";// int
 		public static readonly String ATK_ICE = "ATK_ICE";// int
 		public static readonly String ATK_LIGHT = "ATK_LIGHT";// int
@@ -569,6 +584,8 @@ namespace NFrame
 		public static readonly String CRITICAL = "CRITICAL";// int
 		public static readonly String Camp = "Camp";// int
 		public static readonly String ConnectKey = "ConnectKey";// string
+		public static readonly String Cup = "Cup";// int
+		public static readonly String DEF_DARK = "DEF_DARK";// int
 		public static readonly String DEF_FIRE = "DEF_FIRE";// int
 		public static readonly String DEF_ICE = "DEF_ICE";// int
 		public static readonly String DEF_LIGHT = "DEF_LIGHT";// int
@@ -581,7 +598,8 @@ namespace NFrame
 		public static readonly String EXP = "EXP";// int
 		public static readonly String FightHero = "FightHero";// object
 		public static readonly String FightHeroCnfID = "FightHeroCnfID";// string
-		public static readonly String FightOppnent = "FightOppnent";// object
+		public static readonly String FightingOpponent = "FightingOpponent";// object
+		public static readonly String FightingStar = "FightingStar";// int
 		public static readonly String FirstTarget = "FirstTarget";// object
 		public static readonly String GMLevel = "GMLevel";// int
 		public static readonly String GambleDiamond = "GambleDiamond";// int
@@ -590,12 +608,56 @@ namespace NFrame
 		public static readonly String GateID = "GateID";// int
 		public static readonly String Gold = "Gold";// int
 		public static readonly String GuildID = "GuildID";// object
+		public static readonly String Guild_AD = "Guild_AD";// string
+		public static readonly String Guild_ContinueDay = "Guild_ContinueDay";// int
+		public static readonly String Guild_CreateTime = "Guild_CreateTime";// int
+		public static readonly String Guild_Desc = "Guild_Desc";// string
+		public static readonly String Guild_EctypID = "Guild_EctypID";// int
+		public static readonly String Guild_EctypIDGroup = "Guild_EctypIDGroup";// int
+		public static readonly String Guild_EctypServer = "Guild_EctypServer";// object
+		public static readonly String Guild_Exp = "Guild_Exp";// int
+		public static readonly String Guild_Gold = "Guild_Gold";// int
+		public static readonly String Guild_Honor = "Guild_Honor";// int
+		public static readonly String Guild_ID = "Guild_ID";// object
+		public static readonly String Guild_Icon = "Guild_Icon";// string
+		public static readonly String Guild_KingWarResource = "Guild_KingWarResource";// int
+		public static readonly String Guild_Level = "Guild_Level";// int
+		public static readonly String Guild_MemeberCount = "Guild_MemeberCount";// int
+		public static readonly String Guild_MemeberMaxCount = "Guild_MemeberMaxCount";// int
+		public static readonly String Guild_Name = "Guild_Name";// string
+		public static readonly String Guild_PresidentID = "Guild_PresidentID";// object
+		public static readonly String Guild_PresidentName = "Guild_PresidentName";// string
+		public static readonly String Guild_Rank = "Guild_Rank";// int
+		public static readonly String Guild_Status = "Guild_Status";// int
 		public static readonly String HP = "HP";// int
 		public static readonly String HPREGEN = "HPREGEN";// int
-		public static readonly String HeroPos1 = "HeroPos1";// object
-		public static readonly String HeroPos2 = "HeroPos2";// object
-		public static readonly String HeroPos3 = "HeroPos3";// object
+		public static readonly String Head = "Head";// string
+		public static readonly String Hero1BornPos = "Hero1BornPos";// vector3
+		public static readonly String Hero1HP = "Hero1HP";// int
+		public static readonly String Hero2BornPos = "Hero2BornPos";// vector3
+		public static readonly String Hero2HP = "Hero2HP";// int
+		public static readonly String Hero3BornPos = "Hero3BornPos";// vector3
+		public static readonly String Hero3HP = "Hero3HP";// int
+		public static readonly String HeroID1 = "HeroID1";// object
+		public static readonly String HeroID2 = "HeroID2";// object
+		public static readonly String HeroID3 = "HeroID3";// object
+		public static readonly String HeroLevel = "HeroLevel";// int
+		public static readonly String HeroPos1CnfID = "HeroPos1CnfID";// string
+		public static readonly String HeroPos1Star = "HeroPos1Star";// int
+		public static readonly String HeroPos2CnfID = "HeroPos2CnfID";// string
+		public static readonly String HeroPos2Star = "HeroPos2Star";// int
+		public static readonly String HeroPos3CnfID = "HeroPos3CnfID";// string
+		public static readonly String HeroPos3Star = "HeroPos3Star";// int
 		public static readonly String HomeSceneID = "HomeSceneID";// int
+		public static readonly String Item1 = "Item1";// string
+		public static readonly String Item1Count = "Item1Count";// int
+		public static readonly String Item1UsedCount = "Item1UsedCount";// int
+		public static readonly String Item2 = "Item2";// string
+		public static readonly String Item2Count = "Item2Count";// int
+		public static readonly String Item2UsedCount = "Item2UsedCount";// int
+		public static readonly String Item3 = "Item3";// string
+		public static readonly String Item3Count = "Item3Count";// int
+		public static readonly String Item3UsedCount = "Item3UsedCount";// int
 		public static readonly String Job = "Job";// int
 		public static readonly String LastOfflineTime = "LastOfflineTime";// object
 		public static readonly String Level = "Level";// int
@@ -611,7 +673,23 @@ namespace NFrame
 		public static readonly String Name = "Name";// string
 		public static readonly String OnlineCount = "OnlineCount";// int
 		public static readonly String OnlineTime = "OnlineTime";// object
+		public static readonly String OpponentCup = "OpponentCup";// int
+		public static readonly String OpponentDiamond = "OpponentDiamond";// int
+		public static readonly String OpponentGold = "OpponentGold";// int
+		public static readonly String OpponentHead = "OpponentHead";// string
+		public static readonly String OpponentHero1 = "OpponentHero1";// string
+		public static readonly String OpponentHero1BornPos = "OpponentHero1BornPos";// vector3
+		public static readonly String OpponentHero1Star = "OpponentHero1Star";// int
+		public static readonly String OpponentHero2 = "OpponentHero2";// string
+		public static readonly String OpponentHero2BornPos = "OpponentHero2BornPos";// vector3
+		public static readonly String OpponentHero2Star = "OpponentHero2Star";// int
+		public static readonly String OpponentHero3 = "OpponentHero3";// string
+		public static readonly String OpponentHero3BornPos = "OpponentHero3BornPos";// vector3
+		public static readonly String OpponentHero3Star = "OpponentHero3Star";// int
+		public static readonly String OpponentLevel = "OpponentLevel";// int
+		public static readonly String OpponentName = "OpponentName";// string
 		public static readonly String PHYSICAL_GATE = "PHYSICAL_GATE";// int
+		public static readonly String PVPType = "PVPType";// int
 		public static readonly String PrefabPath = "PrefabPath";// string
 		public static readonly String REFLECTDAMAGE = "REFLECTDAMAGE";// int
 		public static readonly String RELIVE_SOUL = "RELIVE_SOUL";// int
@@ -630,8 +708,62 @@ namespace NFrame
 		public static readonly String TotalTime = "TotalTime";// int
 		public static readonly String VIPEXP = "VIPEXP";// int
 		public static readonly String VIPLevel = "VIPLevel";// int
-		public static readonly String ViewOppnent = "ViewOppnent";// object
+		public static readonly String ViewOpponent = "ViewOpponent";// object
+		public static readonly String WarEventTime = "WarEventTime";// int
+		public static readonly String WarID = "WarID";// object
+		public static readonly String WonCup = "WonCup";// int
+		public static readonly String WonDiamond = "WonDiamond";// int
+		public static readonly String WonGold = "WonGold";// int
 		// Record
+		public class AttackList
+		{
+			//Class name
+			public static readonly String ThisName = "AttackList";
+			public const int WarID = 0;//object
+			public const int AttackerID = 1;//object
+			public const int BeAttackerID = 2;//object
+			public const int AttackerName = 3;//string
+			public const int BeAttackerName = 4;//string
+			public const int AttackerLevel = 5;//int
+			public const int BeAttackerLevel = 6;//int
+			public const int AttackerCup = 7;//int
+			public const int BeAttackerCup = 8;//int
+			public const int AttackerHero1 = 9;//string
+			public const int AttackerHero2 = 10;//string
+			public const int AttackerHero3 = 11;//string
+			public const int AttackerHero1Star = 12;//int
+			public const int AttackerHero2Star = 13;//int
+			public const int AttackerHero3Star = 14;//int
+			public const int BeAttackerHero1 = 15;//string
+			public const int BeAttackerHero2 = 16;//string
+			public const int BeAttackerHero3 = 17;//string
+			public const int BeAttackerHero1Star = 18;//int
+			public const int BeAttackerHero2Star = 19;//int
+			public const int BeAttackerHero3Star = 20;//int
+			public const int Gold = 21;//int
+			public const int Diamond = 22;//int
+			public const int Winner = 23;//object
+			public const int WarStar = 24;//int
+			public const int EventTime = 25;//int
+			public const int CostTime = 26;//int
+			public const int Item1 = 27;//string
+			public const int Item1Count = 28;//int
+			public const int Item2 = 29;//string
+			public const int Item2Count = 30;//int
+			public const int Item3 = 31;//string
+			public const int Item3Count = 32;//int
+			public const int BuildingCount = 33;//int
+			public const int DestroiedBuilding = 34;//int
+			public const int MasterCount = 35;//int
+			public const int KilledMasterCount = 36;//int
+			public const int KilledHero1 = 37;//int
+			public const int KilledHero2 = 38;//int
+			public const int KilledHero3 = 39;//int
+			public const int DeadHero1 = 40;//int
+			public const int DeadHero2 = 41;//int
+			public const int DeadHero3 = 42;//int
+
+		}
 		public class BagEquipList
 		{
 			//Class name
@@ -670,6 +802,55 @@ namespace NFrame
 			public const int Bound = 2;//int
 			public const int ExpiredType = 3;//int
 			public const int Date = 4;//int
+
+		}
+		public class BeAccackList
+		{
+			//Class name
+			public static readonly String ThisName = "BeAccackList";
+			public const int WarID = 0;//object
+			public const int AttackerID = 1;//object
+			public const int BeAttackerID = 2;//object
+			public const int AttackerName = 3;//string
+			public const int BeAttackerName = 4;//string
+			public const int AttackerLevel = 5;//int
+			public const int BeAttackerLevel = 6;//int
+			public const int AttackerCup = 7;//int
+			public const int BeAttackerCup = 8;//int
+			public const int AttackerHero1 = 9;//string
+			public const int AttackerHero2 = 10;//string
+			public const int AttackerHero3 = 11;//string
+			public const int AttackerHero1Star = 12;//int
+			public const int AttackerHero2Star = 13;//int
+			public const int AttackerHero3Star = 14;//int
+			public const int BeAttackerHero1 = 15;//string
+			public const int BeAttackerHero2 = 16;//string
+			public const int BeAttackerHero3 = 17;//string
+			public const int BeAttackerHero1Star = 18;//int
+			public const int BeAttackerHero2Star = 19;//int
+			public const int BeAttackerHero3Star = 20;//int
+			public const int Gold = 21;//int
+			public const int Diamond = 22;//int
+			public const int Winner = 23;//object
+			public const int WarStar = 24;//int
+			public const int EventTime = 25;//int
+			public const int CostTime = 26;//int
+			public const int Item1 = 27;//string
+			public const int Item1Count = 28;//int
+			public const int Item2 = 29;//string
+			public const int Item2Count = 30;//int
+			public const int Item3 = 31;//string
+			public const int Item3Count = 32;//int
+			public const int BuildingCount = 33;//int
+			public const int DestroiedBuilding = 34;//int
+			public const int MasterCount = 35;//int
+			public const int KilledMasterCount = 36;//int
+			public const int KilledHero1 = 37;//int
+			public const int KilledHero2 = 38;//int
+			public const int KilledHero3 = 39;//int
+			public const int DeadHero1 = 40;//int
+			public const int DeadHero2 = 41;//int
+			public const int DeadHero3 = 42;//int
 
 		}
 		public class BuildingList
@@ -713,20 +894,30 @@ namespace NFrame
 			public const int ATK_SPEED = 12;//int
 			public const int ATK_FIRE = 13;//int
 			public const int ATK_LIGHT = 14;//int
-			public const int ATK_WIND = 15;//int
-			public const int ATK_ICE = 16;//int
-			public const int ATK_POISON = 17;//int
-			public const int DEF_FIRE = 18;//int
-			public const int DEF_LIGHT = 19;//int
-			public const int DEF_WIND = 20;//int
-			public const int DEF_ICE = 21;//int
-			public const int DEF_POISON = 22;//int
-			public const int DIZZY_GATE = 23;//int
-			public const int MOVE_GATE = 24;//int
-			public const int SKILL_GATE = 25;//int
-			public const int PHYSICAL_GATE = 26;//int
-			public const int MAGIC_GATE = 27;//int
-			public const int BUFF_GATE = 28;//int
+			public const int ATK_DARK = 15;//int
+			public const int ATK_WIND = 16;//int
+			public const int ATK_ICE = 17;//int
+			public const int ATK_POISON = 18;//int
+			public const int DEF_FIRE = 19;//int
+			public const int DEF_LIGHT = 20;//int
+			public const int DEF_DARK = 21;//int
+			public const int DEF_WIND = 22;//int
+			public const int DEF_ICE = 23;//int
+			public const int DEF_POISON = 24;//int
+			public const int DIZZY_GATE = 25;//int
+			public const int MOVE_GATE = 26;//int
+			public const int SKILL_GATE = 27;//int
+			public const int PHYSICAL_GATE = 28;//int
+			public const int MAGIC_GATE = 29;//int
+			public const int BUFF_GATE = 30;//int
+
+		}
+		public class Cooldown
+		{
+			//Class name
+			public static readonly String ThisName = "Cooldown";
+			public const int SkillID = 0;//string
+			public const int Time = 1;//int
 
 		}
 		public class DropItemList
@@ -737,6 +928,54 @@ namespace NFrame
 			public const int ConfigID = 1;//string
 			public const int ItemCount = 2;//int
 			public const int Postion = 3;//vector3
+
+		}
+		public class Guild_AppyList
+		{
+			//Class name
+			public static readonly String ThisName = "Guild_AppyList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Level = 2;//int
+			public const int VIP = 3;//int
+
+		}
+		public class Guild_Building
+		{
+			//Class name
+			public static readonly String ThisName = "Guild_Building";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Level = 2;//int
+
+		}
+		public class Guild_MemberList
+		{
+			//Class name
+			public static readonly String ThisName = "Guild_MemberList";
+			public const int GUID = 0;//object
+			public const int Name = 1;//string
+			public const int Level = 2;//int
+			public const int Job = 3;//int
+			public const int Donation = 4;//int
+			public const int Receive = 5;//int
+			public const int VIP = 6;//int
+			public const int Online = 7;//int
+			public const int Power = 8;//int
+			public const int Title = 9;//int
+			public const int GameID = 10;//int
+			public const int JoinTime = 11;//int
+			public const int Contribution = 12;//int
+			public const int LastTime = 13;//string
+			public const int AllContribution = 14;//int
+
+		}
+		public class Guild_WarList
+		{
+			//Class name
+			public static readonly String ThisName = "Guild_WarList";
+			public const int GUID = 0;//object
+			public const int Level = 1;//int
 
 		}
 		public class HeroValue
@@ -758,20 +997,22 @@ namespace NFrame
 			public const int ATK_SPEED = 12;//int
 			public const int ATK_FIRE = 13;//int
 			public const int ATK_LIGHT = 14;//int
-			public const int ATK_WIND = 15;//int
-			public const int ATK_ICE = 16;//int
-			public const int ATK_POISON = 17;//int
-			public const int DEF_FIRE = 18;//int
-			public const int DEF_LIGHT = 19;//int
-			public const int DEF_WIND = 20;//int
-			public const int DEF_ICE = 21;//int
-			public const int DEF_POISON = 22;//int
-			public const int DIZZY_GATE = 23;//int
-			public const int MOVE_GATE = 24;//int
-			public const int SKILL_GATE = 25;//int
-			public const int PHYSICAL_GATE = 26;//int
-			public const int MAGIC_GATE = 27;//int
-			public const int BUFF_GATE = 28;//int
+			public const int ATK_DARK = 15;//int
+			public const int ATK_WIND = 16;//int
+			public const int ATK_ICE = 17;//int
+			public const int ATK_POISON = 18;//int
+			public const int DEF_FIRE = 19;//int
+			public const int DEF_LIGHT = 20;//int
+			public const int DEF_DARK = 21;//int
+			public const int DEF_WIND = 22;//int
+			public const int DEF_ICE = 23;//int
+			public const int DEF_POISON = 24;//int
+			public const int DIZZY_GATE = 25;//int
+			public const int MOVE_GATE = 26;//int
+			public const int SKILL_GATE = 27;//int
+			public const int PHYSICAL_GATE = 28;//int
+			public const int MAGIC_GATE = 29;//int
+			public const int BUFF_GATE = 30;//int
 
 		}
 		public class PlayerHero
@@ -784,23 +1025,12 @@ namespace NFrame
 			public const int Level = 3;//int
 			public const int Exp = 4;//int
 			public const int Star = 5;//int
-			public const int Equip1 = 6;//object
-			public const int Equip2 = 7;//object
-			public const int Equip3 = 8;//object
-			public const int Equip4 = 9;//object
-			public const int Equip5 = 10;//object
-			public const int Equip6 = 11;//object
-			public const int Talent1 = 12;//string
-			public const int Talent2 = 13;//string
-			public const int Talent3 = 14;//string
-			public const int Talent4 = 15;//string
-			public const int Talent5 = 16;//string
-			public const int Skill1 = 17;//string
-			public const int Skill2 = 18;//string
-			public const int Skill3 = 19;//string
-			public const int Skill4 = 20;//string
-			public const int Skill5 = 21;//string
-			public const int FightSkill = 22;//string
+			public const int Ice_Talent = 6;//int
+			public const int Fire_Talent = 7;//int
+			public const int Light_Talent = 8;//int
+			public const int Wind_Talent = 9;//int
+			public const int Poison_Talent = 10;//int
+			public const int Dark_Talent = 11;//int
 
 		}
 		public class TaskList
@@ -820,6 +1050,14 @@ namespace NFrame
 			public const int CurrentKillCount = 1;//int
 			public const int RequireKillCount = 2;//int
 			public const int TaskID = 3;//string
+
+		}
+		public class TempItemList
+		{
+			//Class name
+			public static readonly String ThisName = "TempItemList";
+			public const int ConfigID = 0;//string
+			public const int ItemCount = 1;//int
 
 		}
 
@@ -846,9 +1084,11 @@ namespace NFrame
 		public static readonly String MaxGroupPlayers = "MaxGroupPlayers";// int
 		public static readonly String NavigationResPath = "NavigationResPath";// string
 		public static readonly String RelivePos = "RelivePos";// string
+		public static readonly String ResPath = "ResPath";// string
 		public static readonly String SceneName = "SceneName";// string
 		public static readonly String SceneShowName = "SceneShowName";// string
 		public static readonly String SoundList = "SoundList";// string
+		public static readonly String TagPos = "TagPos";// string
 		public static readonly String Tile = "Tile";// int
 		public static readonly String Type = "Type";// int
 		public static readonly String Width = "Width";// int

@@ -22,6 +22,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -29,6 +30,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -100,11 +102,13 @@
     <ClInclude Include="NFCBuffModule.h" />
     <ClInclude Include="NFCCreateRoleModule.h" />
     <ClInclude Include="NFCCommonConfigModule.h" />
-    <ClInclude Include="NFCGmModule.h" />
+    <ClInclude Include="NFCHomeModule.h" />
     <ClInclude Include="NFCMapModule.h" />
     <ClInclude Include="NFCPVPModule.h" />
+    <ClInclude Include="NFCTileMapModule.h" />
     <ClInclude Include="NFCTileModule.h" />
     <ClInclude Include="NFGameLogicPlugin.h" />
+    <ClInclude Include="NFCSurvivalModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -118,11 +122,13 @@
     <ClCompile Include="NFCBuffModule.cpp" />
     <ClCompile Include="NFCCreateRoleModule.cpp" />
     <ClCompile Include="NFCCommonConfigModule.cpp" />
-    <ClCompile Include="NFCGmModule.cpp" />
+    <ClCompile Include="NFCHomeModule.cpp" />
     <ClCompile Include="NFCMapModule.cpp" />
     <ClCompile Include="NFCPVPModule.cpp" />
+    <ClCompile Include="NFCTileMapModule.cpp" />
     <ClCompile Include="NFCTileModule.cpp" />
     <ClCompile Include="NFGameLogicPlugin.cpp" />
+    <ClCompile Include="NFCSurvivalModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

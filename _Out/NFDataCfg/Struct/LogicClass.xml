@@ -6,6 +6,7 @@
 		<Class Id="DescData"	Path="NFDataCfg/Struct/DescData.xml"	InstancePath="NFDataCfg/Ini/DescData.xml"	/>
 		<Class Id="EffectData"	Path="NFDataCfg/Struct/EffectData.xml"	InstancePath="NFDataCfg/Ini/EffectData.xml"	/>
 		<Class Id="Equip"	Path="NFDataCfg/Struct/Equip.xml"	InstancePath="NFDataCfg/Ini/Equip.xml"	/>
+		<Class Id="GM"	Path="NFDataCfg/Struct/GM.xml"	InstancePath="NFDataCfg/Ini/GM.xml"	/>
 		<Class Id="Guild"	Path="NFDataCfg/Struct/Guild.xml"	InstancePath="NFDataCfg/Ini/Guild.xml"	/>
 		<Class Id="GuildConfig"	Path="NFDataCfg/Struct/GuildConfig.xml"	InstancePath="NFDataCfg/Ini/GuildConfig.xml"	/>
 		<Class Id="GuildJob"	Path="NFDataCfg/Struct/GuildJob.xml"	InstancePath="NFDataCfg/Ini/GuildJob.xml"	/>

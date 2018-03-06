@@ -178,6 +178,8 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 		{
 			nHomeSceneID = m_pPVPModule->RandomTileScene();
 		}
+		// test scene one
+		nHomeSceneID = 1;
 
 		NFDataList var;
 		var.AddString(NFrame::Player::Name());
@@ -194,9 +196,6 @@ void NFCCreateRoleModule::OnClienEnterGameProcess(const NFSOCK nSockIndex, const
 
 		var.AddString(NFrame::Player::SceneID());
 		var.AddInt(nHomeSceneID);
-
-		var.AddString(NFrame::Player::ViewOppnent());
-		var.AddObject(nRoleID);
 
 		NF_SHARE_PTR<NFIObject> pObject = m_pKernelModule->CreateObject(nRoleID, nHomeSceneID, 0, NFrame::Player::ThisName(), "", var);
 		if (nullptr == pObject)

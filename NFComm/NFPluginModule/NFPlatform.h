@@ -68,10 +68,7 @@
 
 /* Finds the current platform */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if defined( __SYMBIAN32__ )
-#   define NF_PLATFORM NF_PLATFORM_SYMBIAN
-//////////////////////////////////////////////////////////////////////////
-#elif defined( __WIN32__ ) || defined( _WIN32 ) || defined(_WINDOWS) || defined(WIN) || defined(_WIN64) || defined( __WIN64__ )
+#if defined( __WIN32__ ) || defined( _WIN32 ) || defined(_WINDOWS) || defined(WIN) || defined(_WIN64) || defined( __WIN64__ )
 #   define NF_PLATFORM NF_PLATFORM_WIN
 //////////////////////////////////////////////////////////////////////////
 #elif defined( __APPLE_CC__) || defined(__APPLE__) || defined(__OSX__)
@@ -252,6 +249,11 @@
 
 #include <stdint.h>
 #include <chrono>
+#include <functional>
+#include <assert.h>
+#include <string>
+#include <map>
+#include <iostream>
 
 // Integer formats of fixed bit width
 typedef uint32_t NFUINT32;
@@ -266,7 +268,6 @@ typedef int64_t NFSOCK;
 
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #include <crtdbg.h>
-#include <assert.h>
 #define NFASSERT(exp_, msg_, file_, func_)  \
     std::string strInfo("Message:");        \
     strInfo += msg_ + std::string(" don't exist or some warning") + std::string("\n\nFile:") + std::string(file_) + std::string("\n Function:") + func_; \
@@ -303,12 +304,12 @@ typedef int64_t NFSOCK;
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #define NFSPRINTF sprintf_s
 #define NFSTRICMP stricmp
-#define NFSLEEP(s) Sleep(s)
+#define NFSLEEP(s) Sleep(s) //millisecond
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #else
 #define NFSPRINTF snprintf
 #define NFSTRICMP strcasecmp
-#define NFSLEEP(s) usleep(s)
+#define NFSLEEP(s) usleep(s*1000) //millisecond
 #define NFGetPID() lexical_cast<std::string>(getpid())
 #endif
 
@@ -317,7 +318,7 @@ typedef int64_t NFSOCK;
 #endif
 
 //use actor mode--begin
-#define NF_ACTOR_THREAD_COUNT 1
+#define NF_ACTOR_THREAD_COUNT 2
 
 #ifndef NF_USE_ACTOR
 #define NF_USE_ACTOR
@@ -370,10 +371,18 @@ inline bool IsZeroDouble(const double dValue, double epsilon = 1e-15)
     return std::abs(dValue) <= epsilon;
 }
 
-inline int64_t NFGetTime()
+//millisecond
+inline int64_t NFGetTimeMS()
 {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
+
+//second
+inline int64_t NFGetTimeS()
+{
+    return NFGetTimeMS() / 1000;
+}
+
 //Protobuf Using Dlls
 #if NF_PLATFORM == NF_PLATFORM_WIN
 #ifndef PROTOBUF_SRC
